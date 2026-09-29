@@ -52,6 +52,7 @@ class MainActivity : ComponentActivity() {
                 }
             },
         ) { pad -> Box(Modifier.padding(pad).fillMaxSize()) { if (tab == 0) App() else TvHub() } }
+        MoveHandler()
     }
 
     private fun startServer() {

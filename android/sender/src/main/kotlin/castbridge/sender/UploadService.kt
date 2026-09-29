@@ -32,7 +32,12 @@ import kotlin.concurrent.thread
  */
 class UploadService : Service() {
     data class Job(val fileName: String, val tvName: String, val manualHost: String?, val pin: String? = null,
-                   val progressive: Boolean = false, val autoPlay: Boolean = true, val target: String? = null)
+                   val progressive: Boolean = false, val autoPlay: Boolean = true, val target: String? = null,
+                   /** Move instead of copy: once the TV holds the complete file, offer to delete it from the phone. */
+                   val move: Boolean = false)
+
+    /** A moved file that the TV now holds completely: the screen deletes it from the phone (with Android's confirmation). */
+    data class MoveRequest(val uri: Uri, val name: String, val size: Long)
 
     sealed class State {
         object Idle : State()
@@ -43,6 +48,7 @@ class UploadService : Service() {
     }
 
     @Volatile private var cancelled = false
+    @Volatile private var moveUri: Uri? = null
     @Volatile private var progressiveNow = false     // play as soon as enough has arrived (see switchToFullPreload)
     @Volatile private var started = false            // playback already launched during the upload
     private val meter = castbridge.core.tv.RateMeter()
@@ -63,7 +69,9 @@ class UploadService : Service() {
         if (uri == null || tvName == null || worker?.isAlive == true) return START_NOT_STICKY
         val name = intent.getStringExtra(EXTRA_NAME) ?: uri.lastPathSegment ?: "video"
         val job = Job(name, tvName, intent.getStringExtra(EXTRA_HOST), intent.getStringExtra(EXTRA_PIN),
-            intent.getBooleanExtra(EXTRA_PROGRESSIVE, false), intent.getBooleanExtra(EXTRA_AUTOPLAY, true), intent.getStringExtra(EXTRA_TARGET))
+            intent.getBooleanExtra(EXTRA_PROGRESSIVE, false), intent.getBooleanExtra(EXTRA_AUTOPLAY, true), intent.getStringExtra(EXTRA_TARGET),
+            intent.getBooleanExtra(EXTRA_MOVE, false))
+        moveUri = if (job.move) uri else null
         try {
             val n = notification("Envoi de $name…", 0)
             if (Build.VERSION.SDK_INT >= 29) startForeground(NOTIF, n, ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC)
@@ -132,6 +140,7 @@ class UploadService : Service() {
             }
             notifyProgress(s)
         }
+        if (result == ResumableUpload.State.Done) moveUri?.let { u -> checkMoved(job, u, resolve()) }
         if (result == ResumableUpload.State.Done) {
             if (started || !job.autoPlay) { finish(State.Done(job)); return }      // already playing (or the caller starts it)
             val base = resolve()
@@ -140,6 +149,28 @@ class UploadService : Service() {
                 ?.let { TvClient.str(it.substringAfter(": "), "message") }
             finish(if (r.isSuccess) State.Done(job) else State.Failed(job, why?.let { "Fichier envoyé. $it" } ?: "Fichier envoyé, mais lancement impossible : réessayez « Lire »"))
         } else finish(_state.value.takeIf { it is State.Failed } ?: State.Failed(job, "annulé"))
+    }
+
+    /**
+     * Move: never delete on faith. Ask the TV for its file list and require the complete file with exactly the local size;
+     * only then hand the deletion to the screen (Android shows its own "delete?" confirmation).
+     */
+    private fun checkMoved(job: Job, uri: Uri, base: String?) {
+        val local = runCatching { contentResolver.openFileDescriptor(uri, "r")!!.use { it.statSize } }.getOrDefault(-1L)
+        val tvFile = base?.let { b ->
+            runCatching { castbridge.core.tv.TvInfo.parse(TvClient(b, job.pin).info()) }.getOrNull()
+                ?.files?.firstOrNull { it.name.equals(job.fileName, ignoreCase = true) }
+        }
+        if (local > 0 && tvFile != null && tvFile.complete && tvFile.size == local) {
+            _moveReady.value = MoveRequest(uri, job.fileName, local)
+            runCatching {
+                val open = android.app.PendingIntent.getActivity(this, 2, Intent(this, MainActivity::class.java)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP), android.app.PendingIntent.FLAG_IMMUTABLE)
+                getSystemService(NotificationManager::class.java).notify(NOTIF_MOVE, Notification.Builder(this, CHANNEL)
+                    .setSmallIcon(android.R.drawable.stat_sys_upload_done).setContentTitle("« ${job.fileName} » est sur la TV")
+                    .setContentText("Touchez pour le retirer du téléphone").setAutoCancel(true).setContentIntent(open).build())
+            }
+        } else _moveNote.value = "« ${job.fileName} » est envoyé mais la TV n'a pas confirmé une copie complète : il reste sur le téléphone."
     }
 
     private fun openAt(uri: Uri, offset: Long): InputStream {
@@ -247,15 +278,23 @@ class UploadService : Service() {
 
         /** The user gave up on playing while uploading: keep uploading at full speed, play when complete. */
         fun switchToFullPreload() { instance?.let { it.progressiveNow = false; it.started = false } }
+        private val _moveReady = MutableStateFlow<MoveRequest?>(null)
+        /** Set when a moved file is safely on the TV; the screen deletes it and calls [moveHandled]. */
+        val moveReady: StateFlow<MoveRequest?> = _moveReady
+        private val _moveNote = MutableStateFlow<String?>(null)
+        val moveNote: StateFlow<String?> = _moveNote
+        fun moveHandled() { _moveReady.value = null; _moveNote.value = null }
+        private const val NOTIF_MOVE = 7
+        const val EXTRA_MOVE = "move"
         private val _state = MutableStateFlow<State>(State.Idle)
         val state: StateFlow<State> = _state
 
         fun start(ctx: Context, uri: Uri, fileName: String, tvName: String, manualHost: String?, pin: String? = null,
-                  progressive: Boolean = false, autoPlay: Boolean = true, target: String? = null) {
+                  progressive: Boolean = false, autoPlay: Boolean = true, target: String? = null, move: Boolean = false) {
             val i = Intent(ctx, UploadService::class.java).setData(uri)
                 .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 .putExtra(EXTRA_TV, tvName).putExtra(EXTRA_NAME, fileName).putExtra(EXTRA_HOST, manualHost).putExtra(EXTRA_PIN, pin?.takeIf { it.isNotEmpty() })
-                .putExtra(EXTRA_PROGRESSIVE, progressive).putExtra(EXTRA_AUTOPLAY, autoPlay).putExtra(EXTRA_TARGET, target)
+                .putExtra(EXTRA_PROGRESSIVE, progressive).putExtra(EXTRA_AUTOPLAY, autoPlay).putExtra(EXTRA_TARGET, target).putExtra(EXTRA_MOVE, move)
             _state.value = State.Idle; _check.value = null; _average.value = 0
             ctx.startForegroundService(i)
         }

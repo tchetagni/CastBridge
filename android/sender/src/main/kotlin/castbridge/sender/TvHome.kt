@@ -116,15 +116,19 @@ fun TvHome(onAdvanced: () -> Unit) {
             delay(2000)
         }
     }
+    var moveNext by remember { mutableStateOf(false) }       // the next picked file is moved (deleted from the phone once on the TV)
     val pick = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
         if (uri == null || tvName == null) return@rememberLauncherForActivityResult
-        runCatching { ctx.contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION) }
+        // Keep write access when the provider gives it: a move deletes the original once the TV holds it.
+        runCatching { ctx.contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION) }
+            .onFailure { runCatching { ctx.contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION) } }
         var name = uri.lastPathSegment ?: "video"; var size = 0L
         runCatching { ctx.contentResolver.query(uri, null, null, null, null)?.use { c -> if (c.moveToFirst()) {
             name = c.getString(c.getColumnIndexOrThrow(OpenableColumns.DISPLAY_NAME)) ?: name; size = c.getLong(c.getColumnIndexOrThrow(OpenableColumns.SIZE)) } } }
         // Little room on the TV: play while the file arrives instead of storing it all first.
         val progressive = info?.let { size > 0 && it.free < size * 2 } ?: false
-        runCatching { UploadService.start(ctx, uri, name, tvName!!, null, pin, progressive) }.onFailure { msg = "Impossible de démarrer l'envoi : ${it.message}" }
+        val move = moveNext; moveNext = false
+        runCatching { UploadService.start(ctx, uri, name, tvName!!, null, pin, progressive, move = move) }.onFailure { msg = "Impossible de démarrer l'envoi : ${it.message}" }
     }
     fun cmd(f: TvClient.() -> Unit) = scope.launch {
         val c = client ?: return@launch
@@ -190,7 +194,10 @@ fun TvHome(onAdvanced: () -> Unit) {
 
         // Tasks
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            Task(Icons.Filled.CloudUpload, "Envoyer une vidéo", "Elle est copiée sur la TV", Modifier.weight(1f)) { pick.launch(arrayOf("video/*", "audio/*")) }
+            Task(Icons.Filled.CloudUpload, "Envoyer une vidéo", "Copiée : elle reste aussi sur le téléphone", Modifier.weight(1f)) { moveNext = false; pick.launch(arrayOf("video/*", "audio/*")) }
+            Task(Icons.Filled.DriveFileMove, "Déplacer vers la TV", "Libère la place du téléphone", Modifier.weight(1f)) { moveNext = true; pick.launch(arrayOf("video/*", "audio/*")) }
+        }
+        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             Task(Icons.Filled.PlayCircle, "Regarder sur la TV", if (now != null) "Télécommande" else "Choisir une vidéo", Modifier.weight(1f)) {
                 if (now != null) showPlayer = true else showLibrary = true
             }
