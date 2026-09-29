@@ -118,7 +118,9 @@ fun TvScreen(fixedBase: String? = null, extra: @Composable (TvClient) -> Unit = 
             withContext(Dispatchers.IO) { runCatching { c.block() } }
                 .onFailure {
                     val e = it as? TvClient.HttpError
-                    message = if (e?.code == 409 && "buffering" in e.message.orEmpty())
+                    message = if (e?.code == 409 && "needsForeground" in e.message.orEmpty())
+                        TvClient.str(e.message.orEmpty().substringAfter(": "), "message") ?: "Ouvrez CastBridge TV sur la TV."
+                    else if (e?.code == 409 && "buffering" in e.message.orEmpty())
                         "Pas encore assez de données reçues pour démarrer la lecture : patientez quelques secondes."
                     else "$label : ${it.message}"
                 }.onSuccess { message = "" }

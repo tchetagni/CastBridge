@@ -69,6 +69,10 @@ class ReceiverServer(
     private val streamToken: String = ByteArray(16).also { java.security.SecureRandom().nextBytes(it) }.joinToString("") { "%02x".format(it) }
     private val meters = java.util.concurrent.ConcurrentHashMap<String, RateMeter>()
     @Volatile private var moveJob: MoveJob? = null
+    private val uploading = java.util.concurrent.atomic.AtomicInteger()
+
+    /** Uploads being received right now (the TV app keeps a partial wake lock only while this is above zero). */
+    fun activeTransfers(): Int = uploading.get() + (if (moveJob?.state == "running") 1 else 0)
     @Volatile private var playingVolume: String? = null
     /** "Play one after the other" (library section, selection); null = single file. */
     @Volatile private var playlist: Playlist? = null
@@ -199,6 +203,9 @@ class ReceiverServer(
 
     override fun serve(s: IHTTPSession): Response = try {
         route(s)
+    } catch (e: NeedsForeground) {
+        // The TV app runs in the background and could not bring its screen up by itself: someone must open it.
+        json(Response.Status.CONFLICT, """{"error":"needs foreground","needsForeground":true,"message":${q(e.message ?: "")}}""")
     } catch (e: Exception) {
         json(Response.Status.INTERNAL_ERROR, """{"error":${q(e.message ?: e.javaClass.simpleName)}}""")
     }
@@ -377,6 +384,11 @@ class ReceiverServer(
     }
 
     private fun upload(s: IHTTPSession, rawName: String, p: Map<String, String>): Response {
+        uploading.incrementAndGet()
+        try { return uploadCounted(s, rawName, p) } finally { uploading.decrementAndGet() }
+    }
+
+    private fun uploadCounted(s: IHTTPSession, rawName: String, p: Map<String, String>): Response {
         val name = safeName(rawName) ?: return bad("bad name")
         val offset = p["offset"]?.toLongOrNull() ?: return bad("offset required")
         val total = p["total"]?.toLongOrNull()?.takeIf { it > 0 } ?: return bad("total required")

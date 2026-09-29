@@ -16,6 +16,9 @@ des fichiers dans son stockage privé (`getExternalFilesDir("videos")`), sans au
 | Clé USB / OTG | MENU > USB (scan des volumes ou sélecteur de dossier système) | copie en arrière-plan avec progression |
 | Clé USB comme **stockage** | branchée : les envois vont dans son dossier d'app (cible `auto`), lecture pendant l'envoi, retrait à chaud géré | voir **`docs/STORAGE.md`** (comportement de GaiaOS non validé) |
 
+**Service d'arrière-plan (0.5)** : CastBridge TV démarre avec la TV (option « Démarrer avec la TV ») et continue de recevoir fichiers, commandes et SSH écran
+fermé ; l'écran (accueil, bibliothèque, lecteur) n'est plus qu'une vue du service. Voir `docs/ADMIN.md`, « Démarrage avec la TV ».
+
 Sécurité : un **PIN à 6 chiffres** est généré au premier lancement de la TV et affiché sur son écran d'attente. Toutes les
 routes sauf `GET /` et `GET /api/hello` l'exigent (`X-CB-Pin`), comparaison en temps constant, verrouillage 60 s par IP après
 5 échecs, PIN jamais journalisé. Le téléphone mémorise le PIN par TV.

@@ -30,6 +30,8 @@ class BtServer(
 ) {
     @Volatile private var server: BluetoothServerSocket? = null
     @Volatile private var running = false
+    /** A transfer is in progress (the service keeps a wake lock meanwhile). */
+    @Volatile var busy = false; private set
 
     fun hasPermission(): Boolean =
         Build.VERSION.SDK_INT < 31 || ctx.checkSelfPermission(Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED
@@ -74,6 +76,7 @@ class BtServer(
             catch (_: InterruptedException) {}
         }.apply { isDaemon = true; start() }
         var lastPct = -1
+        busy = true
         try {
             val r = BtProtocol.serve(dir, sock.inputStream, sock.outputStream, guard, peer) { name, done, total ->
                 last.set(System.currentTimeMillis())
@@ -85,6 +88,7 @@ class BtServer(
             Log.w(TAG, "transfer interrupted: ${e.javaClass.simpleName}")   // never log request contents
             status("Bluetooth : transfert interrompu, reprise possible")
         } finally {
+            busy = false
             watchdog.interrupt()
             runCatching { sock.close() }
         }

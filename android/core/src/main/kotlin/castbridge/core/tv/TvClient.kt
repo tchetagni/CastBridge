@@ -124,7 +124,13 @@ class TvClient(val base: String, val pin: String? = null) {
     class Conflict(val serverLength: Long) : IOException("offset conflict, TV has $serverLength")
     class HttpError(val code: Int, body: String) : IOException("HTTP $code: ${body.take(200)}")
 
-    private fun call(method: String, path: String): String {
+    private fun call(method: String, path: String): String = try { callOnce(method, path) } catch (e: java.net.SocketException) {
+        // A pooled keep-alive connection the TV had already closed: a GET is safe to send again, once, on a fresh connection.
+        if (method != "GET") throw e
+        callOnce(method, path)
+    }
+
+    private fun callOnce(method: String, path: String): String {
         val c = open(method, path)
         if (method == "POST") { c.doOutput = true; c.setFixedLengthStreamingMode(0); c.outputStream.close() }
         return read(c)

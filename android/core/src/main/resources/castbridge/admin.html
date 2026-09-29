@@ -116,6 +116,14 @@ h3{font-size:13px;color:var(--acc);margin:10px 0 0}
 </section>
 
 <section>
+  <h2>Démarrage et lecture à distance</h2>
+  <div class="row"><label><input type="checkbox" id="autostart"> Démarrer CastBridge TV avec la TV (service en arrière-plan)</label></div>
+  <div id="bgInfo" class="mut"></div>
+  <div class="row" style="margin-top:8px"><button id="bOverlay">Autoriser « Afficher par-dessus les autres apps » (s'ouvre sur la TV)</button></div>
+  <p class="mut">Sans cette autorisation, Android empêche l'app de s'afficher seule : une lecture demandée à distance affiche une notification sur la TV, à ouvrir avec la télécommande.</p>
+</section>
+
+<section>
   <h2>Informations système</h2>
   <dl id="sys"></dl>
   <div class="row" style="margin-top:10px">
@@ -157,7 +165,7 @@ async function api(method, path, body) {
   const r = await fetch(path, { method, body, headers: { "X-CB-Pin": PIN } });
   const t = await r.text();
   if (!r.ok) {
-    let m = t; try { const j = JSON.parse(t); m = j.error === "locked" ? "Trop d'essais : verrouillé " + j.retryAfter + " s" : j.error === "bad pin" ? "PIN incorrect" : j.error === "buffering" ? "Pas encore assez de données reçues pour démarrer : patientez quelques secondes." : j.error; } catch (e) {}
+    let m = t; try { const j = JSON.parse(t); m = j.needsForeground ? j.message : j.error === "locked" ? "Trop d'essais : verrouillé " + j.retryAfter + " s" : j.error === "bad pin" ? "PIN incorrect" : j.error === "buffering" ? "Pas encore assez de données reçues pour démarrer : patientez quelques secondes." : j.error; } catch (e) {}
     throw new ApiError(r.status, m || ("HTTP " + r.status));
   }
   return t ? JSON.parse(t) : {};
@@ -190,7 +198,7 @@ async function refresh() {
   }
 }
 let libTick = 0;
-function start() { stop(); refresh(); loadStorage(); loadLibrary(); timer = setInterval(() => { refresh(); loadStorage(); if (++libTick % 3 === 0) loadLibrary(); }, 2000); }
+function start() { stop(); refresh(); loadStorage(); loadLibrary(); loadBackground(); timer = setInterval(() => { refresh(); loadStorage(); if (++libTick % 3 === 0) { loadLibrary(); loadBackground(); } }, 2000); }
 
 // ---- Library (same sections as the TV and the phone: see LibrarySections) ----
 const thumbs = new Map();                 // key -> object URL (bounded: the page may stay open for hours)
@@ -357,6 +365,16 @@ function renderStorage(s) {
     (mv.state === "running" ? " " + Math.floor(mv.done * 100 / Math.max(1, mv.total)) + " %" : "") + (mv.error ? " (" + mv.error + ")" : "") : "";
 }
 $("bRescan").onclick = () => act(post("/api/storage/rescan?measure=1"));
+async function loadBackground() {
+  try {
+    const b = await api("GET", "/api/background");
+    $("autostart").checked = b.autostart;
+    $("bgInfo").textContent = "Affichage par-dessus les autres apps : " + (b.overlay ? "autorisé (la lecture à distance s'ouvre seule)" : "non autorisé") +
+      " — écran CastBridge : " + (b.screenVisible ? "affiché" : "fermé (l'app tourne en arrière-plan)");
+  } catch (e) {}
+}
+$("autostart").onchange = () => act(post("/api/autostart?enabled=" + ($("autostart").checked ? 1 : 0)).then(loadBackground));
+$("bOverlay").onclick = async () => { try { const j = await post("/api/overlay-permission"); msg(j.opened ? "Réglage ouvert sur l'écran de la TV." : j.message); } catch (e) { msg(e.message); } };
 $("bPick").onclick = async () => { try { const j = await post("/api/storage/saf/pick"); msg(j.message || ""); } catch (e) { msg(e.message); } };
 $("bSettings").onclick = async () => { try { const j = await post("/api/storage/open-settings"); msg(j.opened ? "Réglages ouverts sur l'écran de la TV." : (j.message || "")); } catch (e) { msg(e.message); } };
 $("vol").oninput = () => { volTouched = Date.now(); $("volv").textContent = $("vol").value + " %"; };

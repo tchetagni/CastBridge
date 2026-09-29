@@ -65,6 +65,9 @@ Les noms de fichiers sont sans `/`, `\`, ni `.part` final, 200 caractères max. 
 | `POST /api/player/audio?id=` · `/subtitle?id=` (`-1` = désactivés) ou `?file=<nom>` · `/subdelay?ms=\|delta=` · `/audiodelay?ms=\|delta=` (pas de 50 ms, ±30 s max) · `/subsize?value=25..400` (%) · `/rate?value=0.5..2` · `/aspect?value=auto\|16:9\|4:3\|fill\|crop` · `/chapter?index=\|delta=±1` · `/title?index=` · `/hw?value=auto\|on\|off` · `/eq?preset=-1..N` | réglages du lecteur (mémorisés par fichier) | comme `tracks` ; `409` rien en lecture ou impossible, `400` valeur invalide |
 | `POST /api/player/subfile?name=` | active un fichier de sous-titres **stocké sur la TV** (envoyé comme un fichier ordinaire) | comme `tracks` |
 | `POST /api/playlist?names=a.mp4/b.mkv&start=0&repeat=off\|all\|one` · `/api/player/next` · `/api/player/prev` · `/api/player/repeat?value=` | lecture à la suite (noms séparés par `/`), fichier suivant/précédent, répétition | comme `info` (`playlist` : `{"items","index","repeat"}`) |
+| `GET /api/background` | service d'arrière-plan : démarrage avec la TV, autorisations utiles à la lecture à distance | `{"autostart","overlay","fullScreenIntent","notifications","screenVisible","sdk"}` |
+| `POST /api/autostart?enabled=1\|0` | « Démarrer avec la TV » | comme `background` |
+| `POST /api/overlay-permission` | ouvre sur la TV le réglage « Afficher par-dessus les autres apps » (seulement si l'écran CastBridge est affiché) | `{"opened","message"}` |
 | `GET /api/usb` | état de l'import USB et volumes détectés | `{"running","message","volumes":[chemins]}` |
 | `POST /api/usb/import` | copie les vidéos des clés détectées (dossier de l'app sur la clé) | comme `usb` |
 
@@ -78,6 +81,35 @@ Les noms de fichiers sont sans `/`, `\`, ni `.part` final, 200 caractères max. 
 - libVLC n'est créé qu'au premier `play` et libéré à l'arrêt, à la fin, ou sur `onTrimMemory` ; tampons d'E/S de 64 Ko ; 8 connexions HTTP au plus ;
   `/api/info` relit le dossier au plus une fois par seconde. `GET /api/sysinfo` donne `pssMb` (mémoire de l'app) et `memAvailMb`.
 - Constantes regroupées dans `TvProfile` (module `:core`).
+
+### Démarrage avec la TV, service d'arrière-plan
+
+- **Architecture** : tout ce qui n'est pas l'affichage tourne dans `TvService`, un service de premier plan (notification discrète « CastBridge TV actif ») : serveur
+  HTTP et page web, envois/téléchargements, API bibliothèque, volumes et clé USB (événements de montage), Bluetooth (fichiers + tunnel SSH), Wi-Fi Direct, SSH,
+  installation d'APK, mDNS. `PlayerActivity` n'est plus que l'écran (attente, bibliothèque, lecture libVLC) : elle se lie au service, s'enregistre comme lecteur, et
+  peut être fermée sans couper le serveur. Un seul serveur (celui du service) : pas de conflit sur le port 8765 si l'écran et le service démarrent ensemble (nouvel
+  essai toutes les 3 s si le port est occupé). Le service redémarre s'il est tué (`START_STICKY`) ; l'écran libère libVLC dès qu'il n'est plus visible (`onStop`) et
+  sur `onTrimMemory`. Verrou de veille **partiel** (et verrou Wi-Fi) **seulement pendant un transfert** (envoi HTTP, Bluetooth, import USB, déplacement).
+- **Type de service** : `connectedDevice` (le service dialogue avec le téléphone par le réseau et le Bluetooth ; prérequis Android 14 satisfait par
+  `CHANGE_WIFI_MULTICAST_STATE`, permission normale). Pas `dataSync` : Android 15 interdit de le démarrer depuis `BOOT_COMPLETED` et le limite à 6 h par jour.
+- **Démarrage automatique** : `BootReceiver` (`BOOT_COMPLETED`, `QUICKBOOT_POWERON` de certains firmwares TV, et `MY_PACKAGE_REPLACED` pour repartir après une mise
+  à jour par Wi-Fi) démarre `TvService` si l'option **« Démarrer avec la TV »** est active (par défaut ; MENU de la TV, page web, `POST /api/autostart`).
+  Android 14 autorise le démarrage d'un service de premier plan depuis `BOOT_COMPLETED` (exemption documentée) pour ce type. `LOCKED_BOOT_COMPLETED` n'est pas utilisé :
+  les réglages de l'app (PIN...) sont dans le stockage chiffré, lisible seulement après le premier déverrouillage (sur une TV sans code, c'est immédiat).
+- **Lecture demandée à distance, écran fermé** : Android 10+ interdit à une app en arrière-plan d'ouvrir son écran. Ordre essayé (`LaunchPolicy`) : écran déjà affiché ->
+  lecture directe ; autorisation « **Afficher par-dessus les autres apps** » accordée -> l'écran s'ouvre seul et lit (la réponse attend jusqu'à 6 s) ; sinon notification
+  (plein écran si `USE_FULL_SCREEN_INTENT` est utilisable) « le téléphone demande de lire une vidéo » ; la demande est gardée 2 min et jouée à l'ouverture de l'écran ;
+  l'API répond `409 {"needsForeground":true,"message":"…"}` et le téléphone affiche le message (« ouvrez CastBridge TV sur la TV »). MENU > « Lecture à distance :
+  autoriser l'affichage par-dessus les autres apps » ou `POST /api/overlay-permission` ouvre le réglage (avec replis, sans planter s'il n'existe pas sur GaiaOS).
+- **Écrans de réglages** (stockage, options développeur, sélecteur de dossier, sources inconnues) : ouverts **depuis l'écran au premier plan** ; si l'écran n'est pas
+  affiché, l'API répond un message clair (« ouvrez l'app CastBridge TV avec la télécommande, puis réessayez ») au lieu d'un lancement silencieusement bloqué.
+  La confirmation d'installation d'un APK passe par le même mécanisme (écran affiché, sinon notification).
+- **Fonctionne écran fermé** : envois/téléchargements, SSH et tunnel Bluetooth, API bibliothèque et miniatures, déplacements, installation d'APK (la confirmation
+  demande l'écran), page web. **Ne fonctionne pas** écran fermé : la lecture elle-même (il faut l'écran), les dialogues.
+- **Réglages GaiaOS éventuellement nécessaires** (inconnus sans la TV) : un gestionnaire de « démarrage automatique » ou d'« applications autorisées au démarrage »,
+  l'optimisation de batterie / économie d'énergie (exclure CastBridge TV), « Afficher par-dessus les autres apps ». **Important** : Android ne délivre pas
+  `BOOT_COMPLETED` à une app installée qui n'a **jamais été ouverte** (état « arrêté ») : ouvrez CastBridge TV une fois après l'installation ; certains firmwares le
+  bloquent aussi après un « arrêt forcé ». Si la TV passe en veille profonde, aucun service ne tourne (la TV n'est plus joignable) : c'est matériel.
 
 ### Échange de fichiers à débit maximal (téléphone <-> TV)
 
