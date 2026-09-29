@@ -60,5 +60,12 @@
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
             </intent-filter>
         </receiver>
+        <!-- Quiz culture générale (docs/QUIZ.md): opened from the MENU or from the phone -->
+        <activity
+            android:name=".QuizActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|screenSize|screenLayout|keyboard|keyboardHidden|navigation" />
     </application>
 </manifest>

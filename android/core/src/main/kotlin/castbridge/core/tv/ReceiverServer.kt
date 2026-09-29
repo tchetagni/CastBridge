@@ -53,6 +53,8 @@ class ReceiverServer(
     private val settingsOpener: (() -> String?)? = null,
     /** Thumbnails, durations and saved positions for the library screens; null = plain file list. */
     private val library: LibraryMeta? = null,
+    /** Routes served without the PIN (the quiz at /quiz, with its own room code); asked before the PIN check. */
+    private val publicRoutes: PublicRoutes? = null,
 ) : NanoHTTPD(port) {
 
     /** Single internal folder (tests, simple setups). */
@@ -129,7 +131,7 @@ class ReceiverServer(
                 onNotice("${ev.volume.label} branchée" + (if (free >= 0) " : ${StorageLine.size(free)} libres" else ""))
             }
         }
-        setAsyncRunner(BoundedRunner(cfg.maxHttpThreads))
+        setAsyncRunner(BoundedRunner(cfg.maxHttpThreads + (publicRoutes?.extraThreads ?: 0)))
     }
 
     /** Abandoned partial uploads must not eat scarce space; a drive that was away keeps them 7 times longer. */
@@ -217,6 +219,7 @@ class ReceiverServer(
         if (s.method == Method.GET && path == "/") return page()
         if (s.method == Method.GET && path == "/api/hello")
             return ok("""{"app":"castbridge-tv","v":${q(VERSION)},"pinRequired":${guard != null}}""")
+        publicRoutes?.serve(s)?.let { return it }
         val isStream = (s.method == Method.GET || s.method == Method.HEAD) && path.startsWith("/stream/")
         val loopbackStream = isStream && p["t"] == streamToken && s.remoteIpAddress.let { it == "127.0.0.1" || it == "::1" || it == "0:0:0:0:0:0:0:1" }
         if (!loopbackStream) denied(s, p)?.let { return it }
@@ -973,7 +976,7 @@ class ReceiverServer(
 
     companion object {
         const val PORT = 8765
-        const val VERSION = "0.5"
+        const val VERSION = "0.6"
         private val ADMIN_HTML: String by lazy {
             ReceiverServer::class.java.getResourceAsStream("/castbridge/admin.html")?.use { String(it.readBytes(), Charsets.UTF_8) }
                 ?: "<!doctype html><meta charset=utf-8><title>CastBridge TV</title><h1>CastBridge TV</h1><p>Page d'administration indisponible.</p>"

@@ -179,7 +179,8 @@ class TvService : Service(), Device {
         val s = ReceiverServer(registry, playerBridge, pin = pin, guard = guard, device = this, extension = ApiExtension(::extraApi),
             profile = prefs.profile(), onSettings = { prefs.saveProfile(it); updateStorageStatus() },
             onNotice = { n -> notice(n); setStatus("5-notice", n) },
-            safPicker = ::launchSafPicker, settingsOpener = ::openStorageSettings, library = library)
+            safPicker = ::launchSafPicker, settingsOpener = ::openStorageSettings, library = library,
+            publicRoutes = QuizHub.http)
         try {
             s.start(15_000, false); server = s
         } catch (e: Exception) {
@@ -431,6 +432,8 @@ class TvService : Service(), Device {
 
     private fun extraApi(path: String, method: String, params: Map<String, String>): ApiReply? = when {
         path.startsWith("/api/ssh") -> ssh?.api(path, method, params)
+        // The quiz screen opens from the visible TV screen only (Android 14 blocks background activity starts).
+        path.startsWith("/api/quiz") -> QuizHub.api(screen?.takeIf { it.shown }?.activity, path, method)
         path == "/api/update" && method == "GET" -> updater?.let { ApiReply(200, it.infoJson()) }
         path == "/api/update/install" && method == "POST" -> updater?.install(listOf(params["name"].orEmpty()), params["force"] == "1")
         path == "/api/devsettings" && method == "POST" -> {

@@ -3,6 +3,8 @@
 Diffusion vidéo téléphone / PC vers TV. Modules Android : `:core` (Kotlin JVM, testable), `:receiver` (app TV, libVLC),
 `:sender` (app téléphone, Compose). Conception du préchargement : `docs/NEXT-preload.md`.
 
+**Quiz culture générale sur la TV** (solo à la télécommande ou multijoueur avec les téléphones, QR code, sans app à installer) : voir **`docs/QUIZ.md`**.
+
 ## Nouveautés 0.5 (branche `feat/tv-library-player`)
 
 Détails, API et limites : **`docs/ADMIN.md`**.

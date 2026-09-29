@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#0b1640">
+<title>Quiz CastBridge</title>
+<style>
+:root{--bg:#0b1640;--bg2:#050a24;--panel:#13235e;--line:#3b5bd6;--text:#f4f6ff;--muted:#aab4e8;--gold:#ffc53d;--ok:#2ecc71;--bad:#ff5b5b;--sel:#ff9f1a;
+--a:#d7263d;--b:#1b6fe0;--c:#e0a100;--d:#1f9d55}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%}
+body{background:radial-gradient(ellipse at top,#1b2d7a 0%,var(--bg) 45%,var(--bg2) 100%) fixed;color:var(--text);
+font:16px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;display:flex;flex-direction:column;min-height:100%}
+header{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid #ffffff1a}
+header b{color:var(--gold);letter-spacing:.5px}
+#who{color:var(--muted);font-size:14px;text-align:right}
+main{flex:1;padding:16px;display:flex;flex-direction:column;gap:14px;max-width:560px;width:100%;margin:0 auto}
+h1{font-size:22px;margin:4px 0}
+h2{font-size:18px;margin:0;color:var(--gold)}
+p{margin:0}
+.muted{color:var(--muted)}
+.card{background:#0e1b4dcc;border:1px solid var(--line);border-radius:14px;padding:14px}
+.q{font-size:19px;font-weight:600}
+label{display:block;font-size:14px;color:var(--muted);margin-bottom:6px}
+input{width:100%;font-size:22px;padding:12px 14px;border-radius:12px;border:2px solid var(--line);background:#081030;color:var(--text);outline:none}
+input:focus{border-color:var(--gold)}
+#code{letter-spacing:10px;text-align:center;font-weight:700}
+button{font:inherit;border:0;border-radius:14px;padding:14px 16px;font-size:18px;font-weight:700;color:#fff;cursor:pointer}
+button:disabled{opacity:.45}
+.primary{background:var(--gold);color:#1a1300}
+.ghost{background:transparent;border:2px solid var(--line);color:var(--text)}
+.row{display:flex;gap:10px}.row>*{flex:1}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ans{min-height:92px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;text-align:left;gap:4px;border:3px solid transparent;position:relative}
+.ans .l{font-size:26px;line-height:1}
+.ans .t{font-size:16px;font-weight:600}
+.A{background:var(--a)}.B{background:var(--b)}.C{background:var(--c);color:#1a1300}.D{background:var(--d)}
+.ans.sel{border-color:#fff;box-shadow:0 0 0 3px var(--sel)}
+.ans.gone{visibility:hidden}
+.ans.dim{opacity:.35}
+.ans .mark{position:absolute;top:8px;right:10px;font-size:24px}
+.bar{height:10px;border-radius:6px;background:#ffffff22;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--gold);width:100%;transition:width .2s linear}
+.big{font-size:40px;font-weight:800;text-align:center}
+.ok{color:var(--ok)}.bad{color:var(--bad)}
+ul.pl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+ul.pl li{display:flex;justify-content:space-between;padding:8px 12px;border-radius:10px;background:#ffffff10}
+ul.pl li.me{outline:2px solid var(--gold)}
+.pill{display:inline-block;padding:2px 10px;border-radius:99px;background:#ffffff1a;font-size:13px;color:var(--muted)}
+.jok{display:flex;gap:8px}.jok button{flex:1;font-size:15px;padding:12px 6px;background:var(--panel);border:2px solid var(--line)}
+.err{color:var(--bad);font-weight:600;min-height:1.4em}
+.center{text-align:center}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<header><b>◆ QUIZ CASTBRIDGE</b><span id="who"></span></header>
+<main id="app"><p class="muted">Chargement…</p></main>
+<script>
+"use strict";
+const $ = (t, a = {}, ...kids) => { const e = document.createElement(t);
+  for (const [k, v] of Object.entries(a)) { if (k === "class") e.className = v; else if (k.startsWith("on")) e.addEventListener(k.slice(2), v); else if (v !== null && v !== undefined && v !== false) e.setAttribute(k, v === true ? "" : v); }
+  for (const k of kids.flat()) if (k !== null && k !== undefined && k !== false) e.append(k.nodeType ? k : document.createTextNode(String(k)));
+  return e; };
+const app = document.getElementById("app"), show = (...kids) => app.replaceChildren(...kids.flat().filter(k => k !== null && k !== undefined && k !== false)), who = document.getElementById("who");
+const L = ["A", "B", "C", "D"], SHAPES = ["▲", "◆", "●", "■"];
+const params = new URLSearchParams(location.search);
+const store = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { v === null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) {} } };
+let dev = store.get("quizDev");
+if (!dev) { dev = Array.from(crypto.getRandomValues ? crypto.getRandomValues(new Uint8Array(8)) : [Date.now() % 256, 7, 7, 7, 7, 7, 7, 7], b => b.toString(16).padStart(2, "0")).join(""); store.set("quizDev", dev); }
+let token = store.get("quizToken"), state = null, es = null, esFails = 0, polling = false, deadline = 0, timerTotal = 0, err = "", busy = false, ticker = null;
+
+function fr(s) { return String(s || "").replace(/« /g, "«\u00a0").replace(/ »/g, "\u00a0»").replace(/ ([?!:])/g, "\u00a0$1"); }
+function fcfa(v) { return v.toLocaleString("fr-FR").replace(/ |\s/g, " ") + " FCFA"; }
+
+async function api(method, path, q = {}) {
+  const u = path + "?" + new URLSearchParams(q).toString();
+  const r = await fetch(u, { method, cache: "no-store" });
+  let body = null; try { body = await r.json(); } catch (e) {}
+  return { status: r.status, body: body || {} };
+}
+
+// ---------- connection: Server-Sent Events, long-poll if they do not work ----------
+function connect() {
+  if (!token) return renderJoin();
+  if (es) es.close();
+  if (!window.EventSource || esFails >= 3) return poll();
+  es = new EventSource("/quiz/api/events?token=" + encodeURIComponent(token));
+  es.addEventListener("state", ev => { esFails = 0; onState(JSON.parse(ev.data)); });
+  es.onerror = async () => {
+    esFails++;
+    const r = await api("GET", "/quiz/api/state", { token }).catch(() => null);
+    if (r && (r.status === 401 || r.status === 410)) { es.close(); es = null; lost(r.status); }
+    else if (esFails >= 3) { es.close(); es = null; poll(); }
+  };
+}
+async function poll() {
+  if (polling) return; polling = true;
+  while (token) {
+    try {
+      const r = await api("GET", "/quiz/api/state", { token, since: state ? state.v : 0, wait: 25 });
+      if (r.status === 401 || r.status === 410) { lost(r.status); break; }
+      if (r.status === 200) onState(r.body); else await sleep(2000);
+    } catch (e) { await sleep(2000); }
+  }
+  polling = false;
+}
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+function lost(status) {
+  token = null; store.set("quizToken", null); state = null;
+  err = status === 410 ? "La partie est terminée ou la salle est fermée." : "Votre place n'existe plus : rejoignez à nouveau.";
+  renderJoin();
+  if (autoJoin()) err = "";
+}
+function onState(s) {
+  if (s.stage === "CLOSED") { if (es) es.close(); es = null; token = null; store.set("quizToken", null); state = s; return render(); }
+  const prevKey = key(state), k = key(s);
+  state = s;
+  const rem = s.duel ? s.duel.remainingMs : s.vote ? s.vote.remainingMs : s.call ? s.call.remainingMs : s.game ? s.game.remainingMs : 0;
+  deadline = rem > 0 ? performance.now() + rem : 0;
+  if (k !== prevKey) { timerTotal = rem; if (navigator.vibrate && /REVEAL|FINISHED/.test(k)) navigator.vibrate(60); }
+  render();
+}
+function key(s) { if (!s) return ""; const g = s.game, d = s.duel;
+  return [s.stage, g && g.index, g && g.phase, d && d.index, d && d.phase, s.vote && "v", s.call && "c"].join("/"); }
+
+async function act(action, choice, arg) {
+  if (busy || !state) return; busy = true;
+  const q = state.duel ? state.duel.question.id : state.game ? state.game.question.id : "";
+  const p = { token, action, q }; if (choice !== undefined && choice !== null) p.choice = choice; if (arg !== undefined) p.arg = arg;
+  for (let i = 0; i < 2; i++) {       // idempotent: one retry after a network error
+    try { const r = await api("POST", "/quiz/api/act", p); if (r.status === 401 || r.status === 410) { lost(r.status); break; }
+      if (r.body.state) onState(r.body.state); break; } catch (e) { await sleep(600); }
+  }
+  busy = false;
+}
+
+// ---------- screens ----------
+function renderJoin() {
+  who.textContent = "";
+  const code = $("input", { id: "code", inputmode: "numeric", maxlength: 4, autocomplete: "off", placeholder: "····", value: params.get("code") || "" });
+  const name = $("input", { id: "name", maxlength: 16, autocomplete: "nickname", placeholder: "Votre pseudo", value: store.get("quizName") || params.get("name") || "" });
+  const msg = $("p", { class: "err" }, err);
+  const go = $("button", { class: "primary", onclick: join }, "Rejoindre la partie");
+  async function join() {
+    const c = code.value.replace(/\D/g, ""), n = name.value.trim();
+    if (c.length !== 4) { msg.textContent = "Le code de salle a 4 chiffres (affiché sur la TV)."; return; }
+    if (!n) { msg.textContent = "Choisissez un pseudo."; return; }
+    go.disabled = true; msg.textContent = "";
+    try {
+      const r = await api("POST", "/quiz/api/join", { code: c, name: n, token: store.get("quizToken") || "", dev });
+      if (r.status === 200) { token = r.body.token; store.set("quizToken", token); store.set("quizName", n); err = ""; esFails = 0; connect(); }
+      else msg.textContent = r.body.message || "Impossible de rejoindre (" + r.status + ").";
+    } catch (e) { msg.textContent = "TV injoignable : êtes-vous sur le même Wi-Fi ?"; }
+    go.disabled = false;
+  }
+  show(
+    $("h1", {}, "Rejoindre le quiz"),
+    $("p", { class: "muted" }, "Entrez le code à 4 chiffres affiché sur la TV et votre pseudo."),
+    $("div", {}, $("label", { for: "code" }, "Code de la salle"), code),
+    $("div", {}, $("label", { for: "name" }, "Pseudo"), name),
+    msg, go);
+  (code.value ? name : code).focus();
+}
+
+function timerBar() { return $("div", { class: "bar" }, $("i", { id: "tbar" })); }
+function tick() {
+  const b = document.getElementById("tbar"), t = document.getElementById("tsec");
+  const left = deadline ? Math.max(0, deadline - performance.now()) : 0;
+  if (b) b.style.width = (timerTotal > 0 ? Math.min(100, left / timerTotal * 100) : 0) + "%";
+  if (t) t.textContent = deadline ? Math.ceil(left / 1000) + " s" : "";
+}
+
+function answers(q, opts) {
+  // opts: {onPick, selected, removed, answer, dim, disabled}
+  return $("div", { class: "grid" }, q.choices.map((c, i) => {
+    const cls = ["ans", L[i]];
+    if (opts.removed && opts.removed.includes(i)) cls.push("gone");
+    if (opts.selected === i) cls.push("sel");
+    const known = opts.answer !== null && opts.answer !== undefined;
+    if (known && i !== opts.answer && opts.selected !== i) cls.push("dim");
+    const mark = known ? (i === opts.answer ? "✓" : (opts.selected === i ? "✗" : "")) : "";
+    return $("button", { class: cls.join(" "), disabled: opts.disabled || (opts.removed && opts.removed.includes(i)), "aria-label": L[i] + " : " + c,
+      onclick: () => opts.onPick && opts.onPick(i) },
+      $("span", { class: "l" }, SHAPES[i] + " " + L[i]), $("span", { class: "t" }, fr(c)), mark ? $("span", { class: "mark" }, mark) : null);
+  }));
+}
+
+function playersList(s, withScore) {
+  const me = s.me && s.me.id;
+  return $("ul", { class: "pl" }, s.players.map(p => $("li", { class: p.id === me ? "me" : "" },
+    $("span", {}, (p.connected ? "● " : "○ ") + p.name + (s.candidate && s.candidate.id === p.id ? "  🎯" : "")),
+    $("span", { class: "muted" }, withScore ? p.score + " pts" : (p.connected ? "" : "hors ligne")))));
+}
+
+function render() {
+  const s = state;
+  if (!s) return renderJoin();
+  if (s.stage === "CLOSED") { who.textContent = ""; show($("div", { class: "card center" }, $("h1", {}, "Partie terminée"),
+    $("p", { class: "muted" }, "La salle est fermée. Merci d'avoir joué !")), $("button", { class: "ghost", onclick: () => { err = ""; renderJoin(); } }, "Rejoindre une autre partie")); return; }
+  const st = s.settings || {};
+  who.textContent = s.me ? s.me.name + (s.mode === "DUEL" ? " · " + s.me.score + " pts" : "") + (st.play === "STAKE" && s.me.balance != null ? " · " + s.me.balance + " jetons" : "") : "";
+  const demo = st.play === "STAKE" ? $("p", { class: "pill center" }, "🪙 " + st.tokens + " — aucune valeur, rien à payer") : null;
+  if (s.stage === "LOBBY") return show(
+    $("div", { class: "card center" }, $("h2", {}, "Vous êtes dans la salle ✓"), $("p", {}, (st.playLabel || "") + (st.label ? " · " + st.label : "")),
+      st.play === "STAKE" ? $("p", {}, "Mise : " + st.stake + " jetons par joueur — la cagnotte est partagée selon le classement.") : null,
+      st.play === "PRACTICE" ? $("p", {}, "Entraînement : pas d'enjeu, prenez le temps de lire les explications.") : null,
+      $("p", { class: "muted" },
+      s.mode === "DUEL" ? "Mode Duel : tout le monde répond en même temps. Soyez juste ET rapide !" :
+        "Mode Millionnaire : " + (s.candidate ? s.candidate.name + " est le candidat. " : "") + "Les autres forment le public et peuvent être appelés comme ami.")),
+    $("h2", {}, "Joueurs (" + s.players.length + "/" + s.maxPlayers + ")"), playersList(s, false),
+    $("p", { class: "muted center" }, "En attente du lancement sur la TV…"),
+    demo, $("button", { class: "ghost", onclick: leave }, "Quitter la salle"));
+  if (s.duel) return renderDuel(s);
+  if (s.game) return renderGame(s);
+  show($("p", { class: "muted" }, "Regardez la TV…"));
+}
+
+async function leave() { if (!confirm("Quitter la salle ?")) return; await api("POST", "/quiz/api/leave", { token }).catch(() => {}); if (es) es.close(); es = null; token = null; store.set("quizToken", null); state = null; renderJoin(); }
+
+function renderDuel(s) {
+  const d = s.duel, q = d.question, head = $("div", { class: "row" }, $("span", { class: "pill" }, "Question " + (d.index + 1) + "/" + d.count), $("span", { class: "pill center" }, q.category), $("span", { class: "pill", id: "tsec", style: "text-align:right" }));
+  if (d.phase === "QUESTION") {
+    const mine = d.myAnswer;
+    return show(head, timerBar(), $("div", { class: "card q" }, fr(q.text)),
+      answers(q, { selected: mine, disabled: mine !== null && mine !== undefined, onPick: i => act("answer", i) }),
+      $("p", { class: "muted center" }, mine !== null && mine !== undefined ? "Réponse " + L[mine] + " envoyée ✓ — attendez les autres (" + d.answeredCount + "/" + s.players.length + ")" : "Touchez votre réponse : plus vous êtes rapide, plus vous gagnez de points."));
+  }
+  const me = s.me ? d.ranking.find(r => r.id === s.me.id) : null, o = d.outcome;
+  if (d.phase === "REVEAL") return show(head,
+    $("div", { class: "card center" }, o ? $("div", { class: "big " + (o.correct ? "ok" : "bad") }, o.correct ? "✓ +" + o.points : (d.myAnswer === null || d.myAnswer === undefined ? "⏱ Trop tard" : "✗ Raté")) : null,
+      $("p", {}, "Bonne réponse : " + L[q.answer] + " — " + q.choices[q.answer]), $("p", { class: "muted" }, q.explanation || "")),
+    answers(q, { selected: d.myAnswer, answer: q.answer, disabled: true }));
+  const list = $("ul", { class: "pl" }, d.ranking.map(r => $("li", { class: s.me && r.id === s.me.id ? "me" : "" },
+    $("span", {}, r.rank + ". " + r.name), $("span", {}, r.score + " pts" + (r.gained ? "  (+" + r.gained + ")" : "")))));
+  if (d.phase === "BOARD") return show(head, $("h2", {}, "Classement"), me ? $("p", { class: "big" }, me.rank + (me.rank === 1 ? "er" : "e")) : null, list, $("p", { class: "muted center" }, "Question suivante dans un instant…"));
+  const pay = s.pot && s.pot.payouts && s.me ? s.pot.payouts[s.me.id] : null;
+  return show($("div", { class: "card center" }, $("h1", {}, "🏆 Fin du duel"), me ? $("p", { class: "big" }, me.rank === 1 ? "Victoire !" : me.rank + "e place") : null,
+    me ? $("p", {}, me.score + " points") : null, pay != null ? $("p", {}, "Cagnotte : +" + pay + " jetons") : null), list, demo,
+    $("p", { class: "muted center" }, "La TV peut relancer une partie : restez connecté."));
+}
+
+function renderGame(s) {
+  const g = s.game, q = g.question, role = s.me ? s.me.role : "audience";
+  const head = $("div", { class: "row" }, $("span", { class: "pill" }, "Question " + (g.index + 1) + "/" + g.levels), $("span", { class: "pill" }, g.practice ? g.correct + " bonne(s) réponse(s)" : fcfa(g.ladder[g.index])), $("span", { class: "pill", id: "tsec", style: "text-align:right" }));
+  const qcard = $("div", { class: "card q" }, fr(q.text));
+  if (g.phase === "FINISHED") {
+    const cand = s.candidate ? s.candidate.name : "Le candidat";
+    const why = { WON: "a remporté le gros lot !", WRONG: "s'est trompé.", WALKED: "s'est arrêté.", TIMEOUT: "a manqué de temps." }[g.end] || "";
+    if (g.practice) return show($("div", { class: "card center" }, $("h1", {}, "Entraînement terminé"),
+      $("p", { class: "big" }, g.correct + " / " + g.levels), $("p", { class: "muted" }, "bonnes réponses")), $("p", { class: "muted center" }, "La TV peut relancer une partie : restez connecté."));
+    return show($("div", { class: "card center" }, $("h1", {}, role === "candidate" ? "Fin de votre partie" : cand + " " + why),
+      $("p", { class: "big" }, fcfa(g.winnings)), $("p", { class: "muted" }, "Gains fictifs, pour le jeu."), q.answer !== null ? $("p", { class: "muted" }, "Dernière question — bonne réponse : " + L[q.answer] + " — " + q.choices[q.answer]) : null),
+      $("p", { class: "muted center" }, "La TV peut relancer une partie : restez connecté."));
+  }
+  if (role === "candidate") return renderCandidate(s, head, qcard);
+  // friend on the phone
+  if (s.call && s.me && s.call.friendId === s.me.id) return show($("div", { class: "card center" }, $("h2", {}, "📞 " + (s.candidate ? s.candidate.name : "Le candidat") + " vous appelle !"),
+    $("p", { class: "muted" }, "Vous avez 30 secondes pour lui suggérer une réponse.")), timerBar(), $("span", { id: "tsec", class: "pill" }), qcard,
+    answers(q, { removed: g.removed, onPick: i => act("suggest", i) }));
+  // audience vote
+  if (s.vote) {
+    const mine = s.vote.mine;
+    return show($("div", { class: "card center" }, $("h2", {}, "👥 Le public vote !"), $("p", { class: "muted" }, mine === null || mine === undefined ? "Aidez le candidat : quelle est la bonne réponse selon vous ?" : "Vote " + L[mine] + " enregistré ✓ (" + s.vote.count + "/" + s.vote.expected + ")")),
+      timerBar(), qcard, answers(q, { removed: g.removed, selected: mine, disabled: mine !== null && mine !== undefined, onPick: i => act("vote", i) }));
+  }
+  const status = { QUESTION: "Le candidat réfléchit…", CONFIRM: "« C'est votre dernier mot ? »", JOKER: s.call ? "📞 Appel à " + s.call.friend + "…" : "Joker en cours…", LOCKED: "Réponse verrouillée… suspense !", REVEALED: g.lastCorrect ? "✓ Bonne réponse !" : "✗ Mauvaise réponse" }[g.phase];
+  return show(head, qcard, answers(q, { removed: g.removed, selected: g.selected, answer: q.answer, disabled: true }),
+    $("p", { class: "center " + (g.phase === "REVEALED" ? (g.lastCorrect ? "ok" : "bad") : "muted") }, status || ""),
+    g.phase === "REVEALED" && q.explanation ? $("p", { class: "muted center" }, q.explanation) : null,
+    $("p", { class: "muted center" }, "Vous êtes dans le public : vous voterez si le candidat demande l'avis du public, et il peut vous appeler."));
+}
+
+function renderCandidate(s, head, qcard) {
+  const g = s.game, q = g.question, used = g.jokersUsed || [];
+  const out = [head, timerBar(), qcard];
+  if (g.phase === "QUESTION") {
+    out.push(answers(q, { removed: g.removed, onPick: i => act("select", i) }));
+    const friends = s.players.filter(p => p.connected && s.me && p.id !== s.me.id);
+    out.push($("div", { class: "jok" },
+      $("button", { disabled: used.includes("FIFTY"), onclick: () => act("fifty") }, "50:50"),
+      $("button", { disabled: used.includes("AUDIENCE"), onclick: () => act("audience") }, "👥 Public"),
+      $("button", { disabled: used.includes("PHONE"), onclick: () => {
+        if (!friends.length) return act("phone", null, "");
+        const names = friends.map((f, i) => (i + 1) + ". " + f.name).join("\n");
+        const k = prompt("Appeler quel ami ?\n" + names + "\n(0 = ami virtuel)", "1");
+        if (k === null) return; const f = friends[parseInt(k, 10) - 1]; act("phone", null, f ? f.id : ""); } }, "📞 Ami")));
+    out.push($("button", { class: "ghost", onclick: () => { if (confirm("Vous arrêter et garder " + fcfa(g.ladder[g.index - 1] || 0) + " ?")) act("walk"); } }, "S'arrêter et garder mes gains"));
+  } else if (g.phase === "CONFIRM") {
+    out.push(answers(q, { removed: g.removed, selected: g.selected, disabled: true }));
+    out.push($("div", { class: "card center" }, $("h2", {}, "C'est votre dernier mot ?"), $("p", {}, L[g.selected] + " — " + q.choices[g.selected])));
+    out.push($("div", { class: "row" }, $("button", { class: "ghost", onclick: () => act("cancel") }, "Non"), $("button", { class: "primary", onclick: () => act("confirm") }, "Oui, dernier mot")));
+  } else if (g.phase === "JOKER") {
+    out.push($("div", { class: "card center" }, $("p", {}, s.vote ? "👥 Le public vote… (" + s.vote.count + "/" + s.vote.expected + ")" : s.call ? "📞 " + s.call.friend + " réfléchit…" : "Joker en cours…")));
+  } else {
+    out.push(answers(q, { removed: g.removed, selected: g.selected, answer: q.answer, disabled: true }));
+    if (g.phase === "LOCKED") out.push($("p", { class: "center muted" }, "Réponse verrouillée… suspense !"));
+    if (g.phase === "REVEALED") {
+      out.push($("div", { class: "card center" }, $("div", { class: "big " + (g.lastCorrect ? "ok" : "bad") }, g.lastCorrect ? "✓ " + (g.practice ? "Bonne réponse" : fcfa(g.ladder[g.index])) : (g.practice ? "✗ Raté" : "✗ Perdu")), $("p", { class: "muted" }, q.explanation || "")));
+      out.push($("button", { class: "primary", onclick: () => act("next") }, (g.lastCorrect || g.practice) && g.index + 1 < g.levels ? "Question suivante" : "Voir le résultat"));
+    }
+  }
+  if (g.audience) out.push($("div", { class: "card" }, $("p", {}, "👥 Avis du public" + (g.audienceReal ? "" : " (simulé)") + " : " + g.audience.map((v, i) => L[i] + " " + v + " %").join(" · "))));
+  if (g.phone) out.push($("div", { class: "card" }, $("p", {}, "📞 " + (g.phone.friend || "L'ami virtuel") + " : « Je dirais " + L[g.phone.choice] + (g.phone.confidence ? ", sûr à " + g.phone.confidence + " %" : "") + ". »")));
+  show(...out);
+}
+
+ticker = setInterval(tick, 200);
+// Opened by the CastBridge app (or a link) with ?code=…&name=…&auto=1: join straight away.
+let autoTried = false;
+function autoJoin() {
+  if (autoTried || params.get("auto") !== "1" || !params.get("code") || !params.get("name")) return false;
+  autoTried = true; store.set("quizName", params.get("name"));
+  const b = document.querySelector("button.primary"); if (b) b.click();
+  return true;
+}
+if (token) connect(); else { renderJoin(); autoJoin(); }
+</script>
+</body>
+</html>
