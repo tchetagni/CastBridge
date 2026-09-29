@@ -769,7 +769,7 @@ class ReceiverServer(
 
     companion object {
         const val PORT = 8765
-        const val VERSION = "0.4"
+        const val VERSION = "0.5-quiz"
         private val ADMIN_HTML: String by lazy {
             ReceiverServer::class.java.getResourceAsStream("/castbridge/admin.html")?.use { String(it.readBytes(), Charsets.UTF_8) }
                 ?: "<!doctype html><meta charset=utf-8><title>CastBridge TV</title><h1>CastBridge TV</h1><p>Page d'administration indisponible.</p>"

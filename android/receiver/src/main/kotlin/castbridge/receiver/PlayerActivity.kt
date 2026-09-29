@@ -104,7 +104,8 @@ class PlayerActivity : Activity(), Player, Device {
         server = ReceiverServer(registry, this, pin = pin, guard = guard, device = this, extension = ApiExtension(::extraApi),
             profile = profile, onSettings = { prefs.saveProfile(it); updateStorageStatus() },
             onNotice = { n -> main.post { flash(n) }; setStatus("5-notice", n) },
-            safPicker = ::launchSafPicker, settingsOpener = ::openStorageSettings).also {
+            safPicker = ::launchSafPicker, settingsOpener = ::openStorageSettings,
+            publicRoutes = QuizHub.http).also {
             try { it.start(15_000, false) } catch (e: Exception) { Log.e(TAG, "server", e) }
         }
         register()
@@ -345,6 +346,7 @@ class PlayerActivity : Activity(), Player, Device {
 
     private fun showMenu() {
         val items = mutableListOf<Pair<String, () -> Unit>>()
+        items += "Quiz culture générale (jouer avec les téléphones)" to { startActivity(Intent(this, QuizActivity::class.java)) }
         items += "Bluetooth : rendre la TV visible (2 min)" to { makeDiscoverable() }
         items += (if (prefs.getBool("wd_enabled", false)) "Wi-Fi Direct : désactiver" else "Wi-Fi Direct : activer (crée un réseau TV<->téléphone)") to { toggleWifiDirect() }
         items += "USB : importer les vidéos des clés détectées" to { usbMessage(usb?.importFromVolumes()) }
@@ -407,6 +409,7 @@ class PlayerActivity : Activity(), Player, Device {
     /** Extra authenticated API routes (USB import status/trigger). */
     private fun extraApi(path: String, method: String, params: Map<String, String>): ApiReply? = when {
         path.startsWith("/api/ssh") -> ssh?.api(path, method, params)
+        path.startsWith("/api/quiz") -> QuizHub.api(this, path, method)
         path == "/api/update" && method == "GET" -> updater?.let { ApiReply(200, it.infoJson()) }
         path == "/api/update/install" && method == "POST" ->
             updater?.install(listOf(params["name"].orEmpty()), params["force"] == "1")

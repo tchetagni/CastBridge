@@ -63,7 +63,7 @@ const $ = (t, a = {}, ...kids) => { const e = document.createElement(t);
   for (const [k, v] of Object.entries(a)) { if (k === "class") e.className = v; else if (k.startsWith("on")) e.addEventListener(k.slice(2), v); else if (v !== null && v !== undefined && v !== false) e.setAttribute(k, v === true ? "" : v); }
   for (const k of kids.flat()) if (k !== null && k !== undefined && k !== false) e.append(k.nodeType ? k : document.createTextNode(String(k)));
   return e; };
-const app = document.getElementById("app"), who = document.getElementById("who");
+const app = document.getElementById("app"), show = (...kids) => app.replaceChildren(...kids.flat().filter(k => k !== null && k !== undefined && k !== false)), who = document.getElementById("who");
 const L = ["A", "B", "C", "D"], SHAPES = ["▲", "◆", "●", "■"];
 const params = new URLSearchParams(location.search);
 const store = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { v === null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) {} } };
@@ -71,6 +71,7 @@ let dev = store.get("quizDev");
 if (!dev) { dev = Array.from(crypto.getRandomValues ? crypto.getRandomValues(new Uint8Array(8)) : [Date.now() % 256, 7, 7, 7, 7, 7, 7, 7], b => b.toString(16).padStart(2, "0")).join(""); store.set("quizDev", dev); }
 let token = store.get("quizToken"), state = null, es = null, esFails = 0, polling = false, deadline = 0, timerTotal = 0, err = "", busy = false, ticker = null;
 
+function fr(s) { return String(s || "").replace(/« /g, "«\u00a0").replace(/ »/g, "\u00a0»").replace(/ ([?!:])/g, "\u00a0$1"); }
 function fcfa(v) { return v.toLocaleString("fr-FR").replace(/ |\s/g, " ") + " FCFA"; }
 
 async function api(method, path, q = {}) {
@@ -110,6 +111,7 @@ function lost(status) {
   token = null; store.set("quizToken", null); state = null;
   err = status === 410 ? "La partie est terminée ou la salle est fermée." : "Votre place n'existe plus : rejoignez à nouveau.";
   renderJoin();
+  if (autoJoin()) err = "";
 }
 function onState(s) {
   if (s.stage === "CLOSED") { if (es) es.close(); es = null; token = null; store.set("quizToken", null); state = s; return render(); }
@@ -138,7 +140,7 @@ async function act(action, choice, arg) {
 function renderJoin() {
   who.textContent = "";
   const code = $("input", { id: "code", inputmode: "numeric", maxlength: 4, autocomplete: "off", placeholder: "····", value: params.get("code") || "" });
-  const name = $("input", { id: "name", maxlength: 16, autocomplete: "nickname", placeholder: "Votre pseudo", value: store.get("quizName") || "" });
+  const name = $("input", { id: "name", maxlength: 16, autocomplete: "nickname", placeholder: "Votre pseudo", value: store.get("quizName") || params.get("name") || "" });
   const msg = $("p", { class: "err" }, err);
   const go = $("button", { class: "primary", onclick: join }, "Rejoindre la partie");
   async function join() {
@@ -153,7 +155,7 @@ function renderJoin() {
     } catch (e) { msg.textContent = "TV injoignable : êtes-vous sur le même Wi-Fi ?"; }
     go.disabled = false;
   }
-  app.replaceChildren(
+  show(
     $("h1", {}, "Rejoindre le quiz"),
     $("p", { class: "muted" }, "Entrez le code à 4 chiffres affiché sur la TV et votre pseudo."),
     $("div", {}, $("label", { for: "code" }, "Code de la salle"), code),
@@ -181,7 +183,7 @@ function answers(q, opts) {
     const mark = known ? (i === opts.answer ? "✓" : (opts.selected === i ? "✗" : "")) : "";
     return $("button", { class: cls.join(" "), disabled: opts.disabled || (opts.removed && opts.removed.includes(i)), "aria-label": L[i] + " : " + c,
       onclick: () => opts.onPick && opts.onPick(i) },
-      $("span", { class: "l" }, SHAPES[i] + " " + L[i]), $("span", { class: "t" }, c), mark ? $("span", { class: "mark" }, mark) : null);
+      $("span", { class: "l" }, SHAPES[i] + " " + L[i]), $("span", { class: "t" }, fr(c)), mark ? $("span", { class: "mark" }, mark) : null);
   }));
 }
 
@@ -195,12 +197,12 @@ function playersList(s, withScore) {
 function render() {
   const s = state;
   if (!s) return renderJoin();
-  if (s.stage === "CLOSED") { who.textContent = ""; app.replaceChildren($("div", { class: "card center" }, $("h1", {}, "Partie terminée"),
+  if (s.stage === "CLOSED") { who.textContent = ""; show($("div", { class: "card center" }, $("h1", {}, "Partie terminée"),
     $("p", { class: "muted" }, "La salle est fermée. Merci d'avoir joué !")), $("button", { class: "ghost", onclick: () => { err = ""; renderJoin(); } }, "Rejoindre une autre partie")); return; }
   const st = s.settings || {};
   who.textContent = s.me ? s.me.name + (s.mode === "DUEL" ? " · " + s.me.score + " pts" : "") + (st.play === "STAKE" && s.me.balance != null ? " · " + s.me.balance + " jetons" : "") : "";
   const demo = st.play === "STAKE" ? $("p", { class: "pill center" }, "🪙 " + st.tokens + " — aucune valeur, rien à payer") : null;
-  if (s.stage === "LOBBY") return app.replaceChildren(
+  if (s.stage === "LOBBY") return show(
     $("div", { class: "card center" }, $("h2", {}, "Vous êtes dans la salle ✓"), $("p", {}, (st.playLabel || "") + (st.label ? " · " + st.label : "")),
       st.play === "STAKE" ? $("p", {}, "Mise : " + st.stake + " jetons par joueur — la cagnotte est partagée selon le classement.") : null,
       st.play === "PRACTICE" ? $("p", {}, "Entraînement : pas d'enjeu, prenez le temps de lire les explications.") : null,
@@ -212,7 +214,7 @@ function render() {
     demo, $("button", { class: "ghost", onclick: leave }, "Quitter la salle"));
   if (s.duel) return renderDuel(s);
   if (s.game) return renderGame(s);
-  app.replaceChildren($("p", { class: "muted" }, "Regardez la TV…"));
+  show($("p", { class: "muted" }, "Regardez la TV…"));
 }
 
 async function leave() { if (!confirm("Quitter la salle ?")) return; await api("POST", "/quiz/api/leave", { token }).catch(() => {}); if (es) es.close(); es = null; token = null; store.set("quizToken", null); state = null; renderJoin(); }
@@ -221,20 +223,20 @@ function renderDuel(s) {
   const d = s.duel, q = d.question, head = $("div", { class: "row" }, $("span", { class: "pill" }, "Question " + (d.index + 1) + "/" + d.count), $("span", { class: "pill center" }, q.category), $("span", { class: "pill", id: "tsec", style: "text-align:right" }));
   if (d.phase === "QUESTION") {
     const mine = d.myAnswer;
-    return app.replaceChildren(head, timerBar(), $("div", { class: "card q" }, q.text),
+    return show(head, timerBar(), $("div", { class: "card q" }, fr(q.text)),
       answers(q, { selected: mine, disabled: mine !== null && mine !== undefined, onPick: i => act("answer", i) }),
       $("p", { class: "muted center" }, mine !== null && mine !== undefined ? "Réponse " + L[mine] + " envoyée ✓ — attendez les autres (" + d.answeredCount + "/" + s.players.length + ")" : "Touchez votre réponse : plus vous êtes rapide, plus vous gagnez de points."));
   }
   const me = s.me ? d.ranking.find(r => r.id === s.me.id) : null, o = d.outcome;
-  if (d.phase === "REVEAL") return app.replaceChildren(head,
+  if (d.phase === "REVEAL") return show(head,
     $("div", { class: "card center" }, o ? $("div", { class: "big " + (o.correct ? "ok" : "bad") }, o.correct ? "✓ +" + o.points : (d.myAnswer === null || d.myAnswer === undefined ? "⏱ Trop tard" : "✗ Raté")) : null,
       $("p", {}, "Bonne réponse : " + L[q.answer] + " — " + q.choices[q.answer]), $("p", { class: "muted" }, q.explanation || "")),
     answers(q, { selected: d.myAnswer, answer: q.answer, disabled: true }));
   const list = $("ul", { class: "pl" }, d.ranking.map(r => $("li", { class: s.me && r.id === s.me.id ? "me" : "" },
     $("span", {}, r.rank + ". " + r.name), $("span", {}, r.score + " pts" + (r.gained ? "  (+" + r.gained + ")" : "")))));
-  if (d.phase === "BOARD") return app.replaceChildren(head, $("h2", {}, "Classement"), me ? $("p", { class: "big" }, me.rank + (me.rank === 1 ? "er" : "e")) : null, list, $("p", { class: "muted center" }, "Question suivante dans un instant…"));
+  if (d.phase === "BOARD") return show(head, $("h2", {}, "Classement"), me ? $("p", { class: "big" }, me.rank + (me.rank === 1 ? "er" : "e")) : null, list, $("p", { class: "muted center" }, "Question suivante dans un instant…"));
   const pay = s.pot && s.pot.payouts && s.me ? s.pot.payouts[s.me.id] : null;
-  return app.replaceChildren($("div", { class: "card center" }, $("h1", {}, "🏆 Fin du duel"), me ? $("p", { class: "big" }, me.rank === 1 ? "Victoire !" : me.rank + "e place") : null,
+  return show($("div", { class: "card center" }, $("h1", {}, "🏆 Fin du duel"), me ? $("p", { class: "big" }, me.rank === 1 ? "Victoire !" : me.rank + "e place") : null,
     me ? $("p", {}, me.score + " points") : null, pay != null ? $("p", {}, "Cagnotte : +" + pay + " jetons") : null), list, demo,
     $("p", { class: "muted center" }, "La TV peut relancer une partie : restez connecté."));
 }
@@ -242,29 +244,29 @@ function renderDuel(s) {
 function renderGame(s) {
   const g = s.game, q = g.question, role = s.me ? s.me.role : "audience";
   const head = $("div", { class: "row" }, $("span", { class: "pill" }, "Question " + (g.index + 1) + "/" + g.levels), $("span", { class: "pill" }, g.practice ? g.correct + " bonne(s) réponse(s)" : fcfa(g.ladder[g.index])), $("span", { class: "pill", id: "tsec", style: "text-align:right" }));
-  const qcard = $("div", { class: "card q" }, q.text);
+  const qcard = $("div", { class: "card q" }, fr(q.text));
   if (g.phase === "FINISHED") {
     const cand = s.candidate ? s.candidate.name : "Le candidat";
     const why = { WON: "a remporté le gros lot !", WRONG: "s'est trompé.", WALKED: "s'est arrêté.", TIMEOUT: "a manqué de temps." }[g.end] || "";
-    if (g.practice) return app.replaceChildren($("div", { class: "card center" }, $("h1", {}, "Entraînement terminé"),
+    if (g.practice) return show($("div", { class: "card center" }, $("h1", {}, "Entraînement terminé"),
       $("p", { class: "big" }, g.correct + " / " + g.levels), $("p", { class: "muted" }, "bonnes réponses")), $("p", { class: "muted center" }, "La TV peut relancer une partie : restez connecté."));
-    return app.replaceChildren($("div", { class: "card center" }, $("h1", {}, role === "candidate" ? "Fin de votre partie" : cand + " " + why),
+    return show($("div", { class: "card center" }, $("h1", {}, role === "candidate" ? "Fin de votre partie" : cand + " " + why),
       $("p", { class: "big" }, fcfa(g.winnings)), $("p", { class: "muted" }, "Gains fictifs, pour le jeu."), q.answer !== null ? $("p", { class: "muted" }, "Dernière question — bonne réponse : " + L[q.answer] + " — " + q.choices[q.answer]) : null),
       $("p", { class: "muted center" }, "La TV peut relancer une partie : restez connecté."));
   }
   if (role === "candidate") return renderCandidate(s, head, qcard);
   // friend on the phone
-  if (s.call && s.me && s.call.friendId === s.me.id) return app.replaceChildren($("div", { class: "card center" }, $("h2", {}, "📞 " + (s.candidate ? s.candidate.name : "Le candidat") + " vous appelle !"),
+  if (s.call && s.me && s.call.friendId === s.me.id) return show($("div", { class: "card center" }, $("h2", {}, "📞 " + (s.candidate ? s.candidate.name : "Le candidat") + " vous appelle !"),
     $("p", { class: "muted" }, "Vous avez 30 secondes pour lui suggérer une réponse.")), timerBar(), $("span", { id: "tsec", class: "pill" }), qcard,
     answers(q, { removed: g.removed, onPick: i => act("suggest", i) }));
   // audience vote
   if (s.vote) {
     const mine = s.vote.mine;
-    return app.replaceChildren($("div", { class: "card center" }, $("h2", {}, "👥 Le public vote !"), $("p", { class: "muted" }, mine === null || mine === undefined ? "Aidez le candidat : quelle est la bonne réponse selon vous ?" : "Vote " + L[mine] + " enregistré ✓ (" + s.vote.count + "/" + s.vote.expected + ")")),
+    return show($("div", { class: "card center" }, $("h2", {}, "👥 Le public vote !"), $("p", { class: "muted" }, mine === null || mine === undefined ? "Aidez le candidat : quelle est la bonne réponse selon vous ?" : "Vote " + L[mine] + " enregistré ✓ (" + s.vote.count + "/" + s.vote.expected + ")")),
       timerBar(), qcard, answers(q, { removed: g.removed, selected: mine, disabled: mine !== null && mine !== undefined, onPick: i => act("vote", i) }));
   }
   const status = { QUESTION: "Le candidat réfléchit…", CONFIRM: "« C'est votre dernier mot ? »", JOKER: s.call ? "📞 Appel à " + s.call.friend + "…" : "Joker en cours…", LOCKED: "Réponse verrouillée… suspense !", REVEALED: g.lastCorrect ? "✓ Bonne réponse !" : "✗ Mauvaise réponse" }[g.phase];
-  return app.replaceChildren(head, qcard, answers(q, { removed: g.removed, selected: g.selected, answer: q.answer, disabled: true }),
+  return show(head, qcard, answers(q, { removed: g.removed, selected: g.selected, answer: q.answer, disabled: true }),
     $("p", { class: "center " + (g.phase === "REVEALED" ? (g.lastCorrect ? "ok" : "bad") : "muted") }, status || ""),
     g.phase === "REVEALED" && q.explanation ? $("p", { class: "muted center" }, q.explanation) : null,
     $("p", { class: "muted center" }, "Vous êtes dans le public : vous voterez si le candidat demande l'avis du public, et il peut vous appeler."));
@@ -301,11 +303,19 @@ function renderCandidate(s, head, qcard) {
   }
   if (g.audience) out.push($("div", { class: "card" }, $("p", {}, "👥 Avis du public" + (g.audienceReal ? "" : " (simulé)") + " : " + g.audience.map((v, i) => L[i] + " " + v + " %").join(" · "))));
   if (g.phone) out.push($("div", { class: "card" }, $("p", {}, "📞 " + (g.phone.friend || "L'ami virtuel") + " : « Je dirais " + L[g.phone.choice] + (g.phone.confidence ? ", sûr à " + g.phone.confidence + " %" : "") + ". »")));
-  app.replaceChildren(...out);
+  show(...out);
 }
 
 ticker = setInterval(tick, 200);
-if (token) connect(); else renderJoin();
+// Opened by the CastBridge app (or a link) with ?code=…&name=…&auto=1: join straight away.
+let autoTried = false;
+function autoJoin() {
+  if (autoTried || params.get("auto") !== "1" || !params.get("code") || !params.get("name")) return false;
+  autoTried = true; store.set("quizName", params.get("name"));
+  const b = document.querySelector("button.primary"); if (b) b.click();
+  return true;
+}
+if (token) connect(); else { renderJoin(); autoJoin(); }
 </script>
 </body>
 </html>
