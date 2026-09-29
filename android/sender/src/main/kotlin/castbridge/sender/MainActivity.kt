@@ -15,6 +15,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import castbridge.core.upnp.Didl
@@ -24,7 +25,19 @@ import kotlinx.coroutines.launch
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent { MaterialTheme { Surface(Modifier.fillMaxSize()) { App() } } }
+        setContent { MaterialTheme { Surface(Modifier.fillMaxSize()) { Root() } } }
+    }
+
+    @Composable
+    fun Root() {
+        var tab by rememberSaveable { mutableStateOf(0) }
+        Column(Modifier.fillMaxSize().systemBarsPadding()) {
+            TabRow(selectedTabIndex = tab) {
+                Tab(tab == 0, onClick = { tab = 0 }, text = { Text("TV DLNA") })
+                Tab(tab == 1, onClick = { tab = 1 }, text = { Text("CastBridge TV") })
+            }
+            if (tab == 0) App() else TvScreen()
+        }
     }
 
     private fun startServer() {
