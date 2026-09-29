@@ -213,7 +213,7 @@ class OptionsWhitelistTest {
     @Test fun commandLineKeepsTheSecretOutAndRpcLocal() {
         val args = Aria2Config.args(File("/w/aria2.conf"), File("/w/session"), File("/d"), 6800, 1234, DlSettings(), File("/w/ca.pem"), emptyList(), File("/w/dht.dat"))
         assertTrue("--rpc-listen-all=false" in args); assertTrue("--stop-with-process=1234" in args)
-        assertTrue("--file-allocation=none" in args); assertTrue("--seed-time=0" in args); assertTrue("--async-dns=false" in args)
+        assertTrue("--file-allocation=none" in args); assertTrue("--seed-time=0" in args); assertTrue(args.none { it.startsWith("--async-dns") })
         assertTrue(args.none { it.contains("secret") })
         assertTrue(args.none { it.startsWith("--on-") })
         assertEquals("rpc-secret=zz\n", Aria2Config.conf("zz"))

@@ -101,7 +101,9 @@ object Aria2Config {
             // Built with c-ares: Android has no /etc/resolv.conf, so tell it which servers the TV uses.
             add("--async-dns=true")
             add("--async-dns-server=${dnsServers.joinToString(",")}")
-        } else add("--async-dns=false")
+        }
+        // Otherwise nothing: an Android build of aria2 already defaults to --async-dns=false (Android's own resolver), and a
+        // build without c-ares does not even know the option.
     }
 
     /** aria2.conf content: the secret only. */

@@ -110,7 +110,7 @@ class Aria2Supervisor(
         if (!up) {
             reap(p)
             reader.join(1000)
-            if (!stopping) message = "Le moteur n'a pas démarré. " + (log().lastOrNull() ?: "")
+            if (!stopping) message = "Le moteur n'a pas démarré. " + log().takeLast(4).joinToString(" ")
             return false
         }
         rpc = client
