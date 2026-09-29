@@ -19,6 +19,8 @@ import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.widget.TextView
+import castbridge.core.tv.ApiExtension
+import castbridge.core.tv.ApiReply
 import castbridge.core.tv.Device
 import castbridge.core.tv.PinGuard
 import castbridge.core.tv.Player
@@ -50,6 +52,7 @@ class PlayerActivity : Activity(), Player, Device {
     private lateinit var guard: PinGuard
     private var bt: BtServer? = null
     private var wd: WifiDirectGroup? = null
+    private var usb: UsbImporter? = null
     private lateinit var prefs: TvPrefs
     private lateinit var videosDir: File
     private val statuses = java.util.concurrent.ConcurrentHashMap<String, String>()
@@ -84,12 +87,13 @@ class PlayerActivity : Activity(), Player, Device {
         prefs = TvPrefs(this)
         pin = prefs.pin()
         guard = PinGuard(pin)
-        server = ReceiverServer(dir, this, pin = pin, guard = guard, device = this).also {
+        server = ReceiverServer(dir, this, pin = pin, guard = guard, device = this, extension = ApiExtension(::extraApi)).also {
             try { it.start(15_000, false) } catch (e: Exception) { Log.e(TAG, "server", e) }
         }
         register()
         bt = BtServer(this, dir, guard) { setStatus("1-bt", it) }
         wd = WifiDirectGroup(this, prefs) { setStatus("2-wd", it) }
+        usb = UsbImporter(this, dir) { setStatus("3-usb", it) }
         requestRuntimePermissions()
         showIdle()
     }
@@ -152,9 +156,35 @@ class PlayerActivity : Activity(), Player, Device {
         val items = mutableListOf<Pair<String, () -> Unit>>()
         items += "Bluetooth : rendre la TV visible (2 min)" to { makeDiscoverable() }
         items += (if (prefs.getBool("wd_enabled", false)) "Wi-Fi Direct : désactiver" else "Wi-Fi Direct : activer (crée un réseau TV<->téléphone)") to { toggleWifiDirect() }
+        items += "USB : importer les vidéos des clés détectées" to { usbMessage(usb?.importFromVolumes()) }
+        items += "USB : choisir un dossier de la clé…" to { usbMessage(usb?.launchPicker(REQ_TREE)) }
+        if (usb?.isRunning() == true) items += "USB : annuler l'import en cours" to { usb?.cancel() }
         AlertDialog.Builder(this).setTitle("CastBridge TV")
             .setItems(items.map { it.first }.toTypedArray()) { _, i -> items[i].second() }
             .setNegativeButton("Fermer", null).show()
+    }
+
+    private fun usbMessage(m: String?) { if (m != null) { flash(m); setStatus("3-usb", "USB : $m") } }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQ_TREE && resultCode == RESULT_OK) data?.data?.let { usbMessage(usb?.importTree(it)) }
+    }
+
+    /** Extra authenticated API routes (USB import status/trigger). */
+    private fun extraApi(path: String, method: String, params: Map<String, String>): ApiReply? = when {
+        path == "/api/usb" && method == "GET" -> ApiReply(200, usbJson())
+        path == "/api/usb/import" && method == "POST" -> {
+            val m = usb?.importFromVolumes() ?: "indisponible"
+            ApiReply(200, usbJson(m))
+        }
+        else -> null
+    }
+
+    private fun usbJson(msg: String? = null): String {
+        val u = usb
+        return "{\"running\":${u?.isRunning() == true},\"message\":${ReceiverServer.q(msg ?: u?.message ?: "")}," +
+            "\"volumes\":[${u?.volumeRoots().orEmpty().joinToString(",") { ReceiverServer.q(it.absolutePath) }}]}"
     }
 
     private fun makeDiscoverable() {
@@ -302,6 +332,7 @@ class PlayerActivity : Activity(), Player, Device {
         private const val TAG = "CastBridgeTV"
         private const val REQ_PERMS = 10
         private const val REQ_WD = 11
+        private const val REQ_TREE = 12
         private val OSD = Any()
         fun fmt(ms: Long): String { val s = ms / 1000; return "%d:%02d:%02d".format(s / 3600, s / 60 % 60, s % 60) }
         fun localIp(): String? = runCatching {
