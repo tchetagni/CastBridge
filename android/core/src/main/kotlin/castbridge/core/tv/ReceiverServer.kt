@@ -28,6 +28,9 @@ class ReceiverServer(
     /** 6-digit PIN required (header X-CB-Pin or ?pin=) on every route but GET / and GET /api/hello. null = open (tests). */
     pin: String? = null,
     private val guard: PinGuard? = pin?.let { PinGuard(it) },
+    private val device: Device? = null,
+    /** Extra authenticated routes (SSH, USB import, ...). Return null if the route is not handled. */
+    private val extension: ApiExtension? = null,
 ) : NanoHTTPD(port) {
 
     init { dir.mkdirs() }
@@ -45,6 +48,7 @@ class ReceiverServer(
         if (s.method == Method.GET && path == "/api/hello")
             return ok("""{"app":"castbridge-tv","v":${q(VERSION)},"pinRequired":${guard != null}}""")
         denied(s, p)?.let { return it }
+        val ext = if (path.startsWith("/api/")) extension?.handle(path, s.method.name, p) else null
         return when {
             // NanoHTTPD already percent-decoded the URI. A rejected upload leaves its body unread on the
             // socket, which would corrupt the next keep-alive request: close the connection instead.
@@ -53,7 +57,30 @@ class ReceiverServer(
             }
             path == "/api/info" -> ok(info())
             path == "/api/part" -> named(p) { ok(part(it)) }
+            path == "/api/sysinfo" -> sysinfo()
+            ext != null -> json(status(ext.status), ext.json)
             s.method != Method.POST -> json(Response.Status.METHOD_NOT_ALLOWED, """{"error":"use POST"}""")
+            path == "/api/volume" -> withDevice { d ->
+                val pct = p["pct"]?.toIntOrNull()?.coerceIn(0, 100) ?: return@withDevice bad("pct required")
+                d.setVolume(pct); sysinfo()
+            }
+            path == "/api/restart" -> withDevice { d ->
+                Thread { Thread.sleep(400); runCatching { d.restartApp() } }.apply { isDaemon = true }.start()
+                ok("""{"restarting":true}""")
+            }
+            path == "/api/rename" -> named(p) { from ->
+                val to = safeName(p["to"].orEmpty()) ?: return@named bad("bad target name")
+                val src = File(dir, from)
+                when {
+                    !src.isFile -> json(Response.Status.NOT_FOUND, """{"error":"not found"}""")
+                    File(dir, to).exists() || partFile(to).exists() -> json(Response.Status.CONFLICT, """{"error":"target exists"}""")
+                    else -> {
+                        if (player.state().name == from) player.stop()
+                        if (!src.renameTo(File(dir, to))) throw IOException("rename failed")
+                        ok(info())
+                    }
+                }
+            }
             path == "/api/reset" -> named(p) { partFile(it).delete(); ok(part(it)) }
             path == "/api/delete" -> named(p) {
                 if (player.state().name == it) player.stop()
@@ -135,6 +162,16 @@ class ReceiverServer(
             """"pos":${ps.posMs},"dur":${ps.durMs}}}"""
     }
 
+    private fun sysinfo(): Response = withDevice { d -> ok(d.sysinfo().toJson(d.volume())) }
+
+    private inline fun withDevice(f: (Device) -> Response): Response =
+        device?.let(f) ?: json(NOT_IMPLEMENTED, """{"error":"not supported on this device"}""")
+
+    private fun status(code: Int): Response.IStatus = Response.Status.lookup(code) ?: object : Response.IStatus {
+        override fun getDescription() = "$code"
+        override fun getRequestStatus() = code
+    }
+
     private inline fun named(p: Map<String, String>, f: (String) -> Response): Response =
         safeName(p["name"].orEmpty())?.let(f) ?: bad("bad name")
 
@@ -151,6 +188,7 @@ class ReceiverServer(
         const val VERSION = "0.3"
         const val SERVICE_TYPE = "_castbridge._tcp."
         private const val PART = ".part"
+        private val NOT_IMPLEMENTED = Response.Status.NOT_IMPLEMENTED
         private val INSUFFICIENT_STORAGE = object : Response.IStatus {
             override fun getDescription() = "507 Insufficient Storage"
             override fun getRequestStatus() = 507

@@ -19,6 +19,12 @@ class TvClient(val base: String, private val pin: String? = null) {
     fun stop() = call("POST", "/api/stop")
     fun seek(posMs: Long) = call("POST", "/api/seek?pos=$posMs")
     fun delete(name: String) = call("POST", "/api/delete?name=${enc(name)}")
+    fun sysinfo(): String = call("GET", "/api/sysinfo")
+    fun setVolume(pct: Int) = call("POST", "/api/volume?pct=$pct")
+    fun restart() = call("POST", "/api/restart")
+    fun rename(name: String, to: String) = call("POST", "/api/rename?name=${enc(name)}&to=${enc(to)}")
+    /** Generic call for extension routes. */
+    fun raw(method: String, path: String): String = call(method, path)
 
     /** Sends bytes [offset, total) read from [src]. Throws [Conflict] if the TV holds a different offset. */
     fun upload(name: String, offset: Long, total: Long, src: InputStream, onBytes: (Long) -> Unit): Part {
@@ -38,7 +44,7 @@ class TvClient(val base: String, private val pin: String? = null) {
                 onBytes(r.toLong())
             }
         }
-        val body = read(c)
+        val body = read(c, allow409 = true)
         if (c.responseCode == 409) throw Conflict(parsePart(body).length)
         return parsePart(body)
     }
@@ -57,10 +63,10 @@ class TvClient(val base: String, private val pin: String? = null) {
         pin?.let { setRequestProperty("X-CB-Pin", it) }
     }
 
-    private fun read(c: HttpURLConnection): String {
+    private fun read(c: HttpURLConnection, allow409: Boolean = false): String {
         val code = c.responseCode
         val text = (if (code < 400) c.inputStream else c.errorStream)?.bufferedReader()?.use { it.readText() }.orEmpty()
-        if (code >= 400 && code != 409) throw HttpError(code, text)
+        if (code >= 400 && !(allow409 && code == 409)) throw HttpError(code, text)
         return text
     }
 

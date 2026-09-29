@@ -5,6 +5,7 @@ import android.content.Context
 import android.net.nsd.NsdManager
 import android.net.nsd.NsdServiceInfo
 import android.net.wifi.WifiManager
+import android.media.AudioManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -12,7 +13,9 @@ import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.widget.TextView
+import castbridge.core.tv.Device
 import castbridge.core.tv.Player
+import castbridge.core.tv.SysInfo
 import castbridge.core.tv.PlayerState
 import castbridge.core.tv.ReceiverServer
 import org.videolan.libvlc.LibVLC
@@ -29,7 +32,7 @@ import java.util.concurrent.TimeUnit
  * CastBridge TV: receives whole videos from the phone (see docs/NEXT-preload.md) and plays them
  * from local storage with libVLC, so playback survives the phone leaving the network.
  */
-class PlayerActivity : Activity(), Player {
+class PlayerActivity : Activity(), Player, Device {
     private val main = Handler(Looper.getMainLooper())
     private lateinit var libVlc: LibVLC
     private lateinit var mp: MediaPlayer
@@ -65,7 +68,7 @@ class PlayerActivity : Activity(), Player {
         }
         val dir = getExternalFilesDir("videos") ?: File(filesDir, "videos")
         pin = TvPrefs(this).pin()
-        server = ReceiverServer(dir, this, pin = pin).also {
+        server = ReceiverServer(dir, this, pin = pin, device = this).also {
             try { it.start(15_000, false) } catch (e: Exception) { Log.e(TAG, "server", e) }
         }
         register()
@@ -120,6 +123,45 @@ class PlayerActivity : Activity(), Player {
         mp.stop(); current = null; snapshot = PlayerState(); showIdle()
     }
     override fun state(): PlayerState = snapshot
+
+    // ---- Device (called from HTTP threads; only public, permission-free APIs) ----
+
+    override fun sysinfo(): SysInfo {
+        val b = registerReceiver(null, android.content.IntentFilter(android.content.Intent.ACTION_BATTERY_CHANGED))  // sticky
+        val present = b?.getBooleanExtra(android.os.BatteryManager.EXTRA_PRESENT, false) == true
+        val level = b?.getIntExtra(android.os.BatteryManager.EXTRA_LEVEL, -1) ?: -1
+        val scale = b?.getIntExtra(android.os.BatteryManager.EXTRA_SCALE, -1) ?: -1
+        val status = b?.getIntExtra(android.os.BatteryManager.EXTRA_STATUS, -1) ?: -1
+        val ver = runCatching { packageManager.getPackageInfo(packageName, 0).versionName }.getOrNull() ?: "?"
+        return SysInfo(
+            model = "${android.os.Build.MANUFACTURER} ${android.os.Build.MODEL}".trim(),
+            androidVersion = "${android.os.Build.VERSION.RELEASE} (API ${android.os.Build.VERSION.SDK_INT})",
+            ip = localIp(),
+            batteryPct = if (present && level >= 0 && scale > 0) level * 100 / scale else null,
+            charging = if (present) status == android.os.BatteryManager.BATTERY_STATUS_CHARGING || status == android.os.BatteryManager.BATTERY_STATUS_FULL else null,
+            uptimeMs = android.os.SystemClock.elapsedRealtime(),
+            appVersion = ver,
+        )
+    }
+
+    private val audio by lazy { getSystemService(AudioManager::class.java) }
+
+    override fun volume(): Int? = runCatching {
+        val max = audio.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+        if (max > 0) audio.getStreamVolume(AudioManager.STREAM_MUSIC) * 100 / max else null
+    }.getOrNull()
+
+    override fun setVolume(pct: Int) {
+        // Fixed-volume TVs (HDMI-CEC / external amp) may ignore or refuse this: nothing more an app can do.
+        runCatching {
+            val max = audio.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+            audio.setStreamVolume(AudioManager.STREAM_MUSIC, Math.round(pct * max / 100f), 0)
+        }
+        main.post { flash("Volume ${volume() ?: pct} %") }
+    }
+
+    /** Restarts the app UI, server and player inside the same process (an app cannot reboot the TV). */
+    override fun restartApp() { main.post { recreate() } }
 
     // ---- Remote control ----
 
