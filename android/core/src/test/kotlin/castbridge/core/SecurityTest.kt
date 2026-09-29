@@ -48,7 +48,7 @@ class SecurityTest {
     @Test fun serverRequiresPinExceptRootAndHello() {
         val dir = kotlin.io.path.createTempDirectory("tvp").toFile()
         val port = ServerSocket(0).use { it.localPort }
-        val s = ReceiverServer(dir, FakePlayer(), port, minFreeBytes = 0, pin = "246810").apply { start(5000, false) }
+        val s = ReceiverServer(dir, FakePlayer(), port, profile = TvProfile(minFreeBytes = 0), pin = "246810").apply { start(5000, false) }
         val b = "http://127.0.0.1:$port"
         try {
             assertEquals(200, http("$b/"))

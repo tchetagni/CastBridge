@@ -11,7 +11,9 @@ import kotlin.test.*
 
 class FakePlayer : Player {
     var st = PlayerState()
+    var lastUrl: String? = null
     override fun play(file: File, posMs: Long) { st = PlayerState("playing", file.name, posMs, 1000) }
+    override fun playStream(url: String, name: String, posMs: Long) { lastUrl = url; st = PlayerState("playing", name, posMs, 1000) }
     override fun pause() { st = st.copy(state = "paused") }
     override fun resume() { st = st.copy(state = "playing") }
     override fun seek(posMs: Long) { st = st.copy(posMs = posMs) }
@@ -23,7 +25,7 @@ class ReceiverTest {
     private val dir = kotlin.io.path.createTempDirectory("tv").toFile()
     private val player = FakePlayer()
     private val port = ServerSocket(0).use { it.localPort }
-    private val server = ReceiverServer(dir, player, port, minFreeBytes = 0).apply { start(5000, false) }
+    private val server = ReceiverServer(dir, player, port, profile = TvProfile(minFreeBytes = 0)).apply { start(5000, false) }
     private val base = "http://127.0.0.1:$port"
     private val tv = TvClient(base)
     private val data = Random(1).nextBytes(3_000_000)
@@ -78,7 +80,7 @@ class ReceiverTest {
 
     @Test fun insufficientStorageIsFatal() {
         server.stop()
-        val small = ReceiverServer(dir, player, port, minFreeBytes = Long.MAX_VALUE / 2).apply { start(5000, false) }
+        val small = ReceiverServer(dir, player, port, profile = TvProfile(minFreeBytes = Long.MAX_VALUE / 2)).apply { start(5000, false) }
         try {
             val r = ResumableUpload("big.mp4", 10, { base }, { ByteArrayInputStream(ByteArray(10)) }, sleep = {}).run {}
             assertTrue(r is ResumableUpload.State.Failed, "$r")

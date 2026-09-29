@@ -2,6 +2,7 @@ package castbridge.receiver
 
 import android.content.Context
 import castbridge.core.tv.Pin
+import castbridge.core.tv.TvProfile
 
 /** TV-side persistent settings (private SharedPreferences). */
 class TvPrefs(ctx: Context) {
@@ -11,6 +12,17 @@ class TvPrefs(ctx: Context) {
     @Synchronized fun pin(): String {
         sp.getString("pin", null)?.takeIf { Pin.isValidFormat(it) }?.let { return it }
         return Pin.generate().also { sp.edit().putString("pin", it).apply() }
+    }
+
+    /** Storage/memory profile: defaults for a modest TV, overridable through /api/storage. */
+    fun profile(): TvProfile = TvProfile(
+        quotaBytes = getLong("quota_bytes", 0),
+        deleteAfterPlay = getBool("delete_after_play", false),
+        evictPlayed = getBool("evict_played", false),
+    )
+
+    fun saveProfile(p: TvProfile) {
+        putLong("quota_bytes", p.quotaBytes); putBool("delete_after_play", p.deleteAfterPlay); putBool("evict_played", p.evictPlayed)
     }
 
     fun getString(key: String, def: String? = null): String? = sp.getString(key, def)

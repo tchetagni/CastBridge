@@ -6,6 +6,7 @@ import android.app.AlertDialog
 import android.bluetooth.BluetoothAdapter
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.content.Context
 import android.net.nsd.NsdManager
@@ -23,6 +24,8 @@ import castbridge.core.tv.ApiExtension
 import castbridge.core.tv.ApiReply
 import castbridge.core.tv.Device
 import castbridge.core.tv.PinGuard
+import castbridge.core.tv.Progressive
+import castbridge.core.tv.Storage
 import castbridge.core.tv.Player
 import castbridge.core.tv.SysInfo
 import castbridge.core.tv.PlayerState
@@ -43,10 +46,15 @@ import java.util.concurrent.TimeUnit
  */
 class PlayerActivity : Activity(), Player, Device {
     private val main = Handler(Looper.getMainLooper())
-    private lateinit var libVlc: LibVLC
-    private lateinit var mp: MediaPlayer
+    // libVLC is created on the first play() and fully released on stop / end of media / low memory:
+    // the HTTP server and the waiting screen do not need it (see docs/ADMIN.md, "Mémoire").
+    private var libVlc: LibVLC? = null
+    private var mp: MediaPlayer? = null
     private lateinit var idle: TextView
     private lateinit var osd: TextView
+    private lateinit var lead: TextView
+    @Volatile private var streamingName: String? = null    // set while playing a file that may still be arriving
+    private var lastLeadUpdate = 0L
     private var server: ReceiverServer? = null
     private var pin = ""
     private lateinit var guard: PinGuard
@@ -70,24 +78,15 @@ class PlayerActivity : Activity(), Player, Device {
         setContentView(R.layout.activity_player)
         idle = findViewById(R.id.idle)
         osd = findViewById(R.id.osd)
-        libVlc = LibVLC(this, arrayListOf("--no-drop-late-frames", "--no-skip-frames", "--file-caching=1500"))
-        mp = MediaPlayer(libVlc)
-        mp.attachViews(findViewById<VLCVideoLayout>(R.id.video), null, false, false)
-        mp.setEventListener { ev ->
-            when (ev.type) {
-                MediaPlayer.Event.Playing -> update("playing")
-                MediaPlayer.Event.Paused -> update("paused")
-                MediaPlayer.Event.TimeChanged -> snapshot = snapshot.copy(posMs = ev.timeChanged)
-                MediaPlayer.Event.LengthChanged -> snapshot = snapshot.copy(durMs = ev.lengthChanged)
-                MediaPlayer.Event.EndReached -> { update("ended"); showIdle() }
-                MediaPlayer.Event.EncounteredError -> { update("error"); showIdle("Lecture impossible : ${current?.name}") }
-            }
-        }
+        lead = findViewById(R.id.lead)
         val dir = (getExternalFilesDir("videos") ?: File(filesDir, "videos")).also { videosDir = it }
         prefs = TvPrefs(this)
         pin = prefs.pin()
         guard = PinGuard(pin)
-        server = ReceiverServer(dir, this, pin = pin, guard = guard, device = this, extension = ApiExtension(::extraApi)).also {
+        val profile = prefs.profile()
+        logResources(dir, profile)
+        server = ReceiverServer(dir, this, pin = pin, guard = guard, device = this, extension = ApiExtension(::extraApi),
+            profile = profile, onSettings = { prefs.saveProfile(it) }).also {
             try { it.start(15_000, false) } catch (e: Exception) { Log.e(TAG, "server", e) }
         }
         register()
@@ -98,8 +97,88 @@ class PlayerActivity : Activity(), Player, Device {
         showIdle()
     }
 
+    /** One line of sizes in logcat (no secrets), to follow RAM/flash use on a small TV. */
+    private fun logResources(dir: File, p: castbridge.core.tv.TvProfile) {
+        val am = getSystemService(android.app.ActivityManager::class.java)
+        Log.i(TAG, "profile: videos used=${Storage.used(dir) shr 20}MB free=${dir.usableSpace shr 20}MB quota=${Storage.quota(dir, p) shr 20}MB " +
+            "heap=${Runtime.getRuntime().maxMemory() shr 20}MB memClass=${am.memoryClass}MB lowRam=${am.isLowRamDevice} " +
+            "pss=${android.os.Debug.getPss() / 1024}MB")
+    }
+
     private fun update(state: String) {
-        snapshot = snapshot.copy(state = state, name = current?.name)
+        snapshot = snapshot.copy(state = state, name = current?.name ?: snapshot.name)
+    }
+
+    private fun ensurePlayer(): MediaPlayer {
+        mp?.let { return it }
+        val lv = LibVLC(this, arrayListOf(
+            "--no-drop-late-frames", "--no-skip-frames",
+            "--file-caching=400",            // local file: 1500 ms of read-ahead only cost RAM
+            "--no-audio-time-stretch",       // no resampling buffers for A/V drift
+            "--no-spu", "--no-sub-autodetect-file", "--no-osd", "--no-stats",   // subtitles/OSD/stats unused by this app
+        ))
+        val p = MediaPlayer(lv)
+        p.attachViews(findViewById<VLCVideoLayout>(R.id.video), null, false, false)
+        p.setEventListener { ev ->
+            when (ev.type) {
+                MediaPlayer.Event.Playing -> update("playing")
+                MediaPlayer.Event.Paused -> update("paused")
+                MediaPlayer.Event.TimeChanged -> { snapshot = snapshot.copy(posMs = ev.timeChanged); main.post { updateLead() } }
+                MediaPlayer.Event.Buffering -> {
+                    // libVLC pauses by itself when the data runs out (playback caught up with the upload) and resumes alone.
+                    val st = snapshot.state
+                    if (ev.buffering < 100f && st == "playing") { update("buffering"); main.post { flash("Mise en mémoire tampon… (en attente de l'envoi)") } }
+                    else if (ev.buffering >= 100f && st == "buffering") update("playing")
+                }
+                MediaPlayer.Event.LengthChanged -> snapshot = snapshot.copy(durMs = ev.lengthChanged)
+                // Never release from inside libVLC's own event thread: hop to the main thread.
+                MediaPlayer.Event.EndReached -> {
+                    update("ended"); val n = current?.name
+                    main.post { current = null; streamingName = null; releasePlayer(); n?.let { server?.onPlaybackEnded(it) }; showIdle() }
+                }
+                MediaPlayer.Event.EncounteredError -> {
+                    update("error"); val n = current?.name
+                    main.post { current = null; streamingName = null; releasePlayer(); showIdle("Lecture impossible : $n") }
+                }
+            }
+        }
+        libVlc = lv; mp = p
+        return p
+    }
+
+    /** "Encore X min de lecture sans réseau" while the file is still arriving. */
+    private fun updateLead() {
+        val n = streamingName
+        val now = android.os.SystemClock.uptimeMillis()
+        if (now - lastLeadUpdate < 2000) return
+        lastLeadUpdate = now
+        val (rec, tot) = n?.let { server?.progress(it) } ?: run { lead.visibility = View.GONE; return }
+        if (rec >= tot) { lead.visibility = View.GONE; return }
+        val s = snapshot
+        val ahead = (Progressive.reachableMs(s.durMs, rec, tot, 0) - s.posMs).coerceAtLeast(0)
+        lead.text = "Envoi ${rec * 100 / tot} %  -  encore ${leadText(ahead)} de lecture sans réseau"
+        lead.visibility = View.VISIBLE
+    }
+
+    private fun leadText(ms: Long) = if (ms >= 90_000) "${ms / 60_000} min" else "${ms / 1000} s"
+
+    private fun releasePlayer() {
+        val p = mp; val lv = libVlc
+        mp = null; libVlc = null; streamingName = null
+        if (::lead.isInitialized) lead.visibility = View.GONE
+        runCatching { p?.setEventListener(null) }
+        runCatching { p?.stop() }
+        runCatching { p?.detachViews() }
+        runCatching { p?.release() }
+        runCatching { lv?.release() }
+    }
+
+    override fun onTrimMemory(level: Int) {
+        super.onTrimMemory(level)
+        // Not playing (paused/ended/idle) and the system wants memory back: give the whole player back.
+        if (level >= TRIM_MEMORY_UI_HIDDEN && snapshot.state != "playing" && mp != null) {
+            current = null; snapshot = PlayerState(); releasePlayer()
+        }
     }
 
     private fun showIdle(msg: String? = idleMsg) {
@@ -214,23 +293,53 @@ class PlayerActivity : Activity(), Player, Device {
 
     override fun play(file: File, posMs: Long) = onMain {
         current = file
-        val m = Media(libVlc, file.absolutePath)
+        streamingName = null
+        val p = ensurePlayer()
+        val m = Media(libVlc!!, file.absolutePath)
+        m.setHWDecoderEnabled(true, false)   // MediaCodec first: software decoding of HD video is what eats RAM/CPU on ARMv7
         if (posMs > 0) m.addOption(":start-time=${posMs / 1000.0}")
-        mp.media = m
+        p.media = m
         m.release()
-        mp.play()
+        p.play()
         idle.visibility = View.GONE
         snapshot = PlayerState("playing", file.name, posMs, 0)
         flash("▶ ${file.name}")
     }
 
-    override fun pause() = onMain { if (mp.isPlaying) { mp.pause(); flash("❚❚ Pause") } }
-    override fun resume() = onMain { if (!mp.isPlaying && current != null) { mp.play(); flash("▶ Lecture") } }
+    override fun playStream(url: String, name: String, posMs: Long) = onMain {
+        current = File(videosDir, name)
+        streamingName = name
+        val p = ensurePlayer()
+        val m = Media(libVlc!!, Uri.parse(url))
+        m.setHWDecoderEnabled(true, false)
+        m.addOption(":network-caching=1200")   // enough to ride out upload hiccups, still modest in RAM
+        m.addOption(":http-reconnect")         // the server cuts the link after 30 s without data: reconnect and wait again
+        if (posMs > 0) m.addOption(":start-time=${posMs / 1000.0}")
+        p.media = m
+        m.release()
+        p.play()
+        idle.visibility = View.GONE
+        snapshot = PlayerState("playing", name, posMs, 0)
+        flash("▶ $name (lecture pendant l'envoi)")
+    }
+
+    override fun pause() = onMain { mp?.let { if (it.isPlaying) { it.pause(); flash("❚❚ Pause") } }; Unit }
+    override fun resume() = onMain { mp?.let { if (!it.isPlaying && current != null) { it.play(); flash("▶ Lecture") } }; Unit }
     override fun seek(posMs: Long) = onMain {
-        if (current != null) { mp.setTime(posMs); snapshot = snapshot.copy(posMs = posMs); flash("⇥ ${fmt(posMs)}") }
+        val p = mp
+        if (p != null && current != null) {
+            var t = posMs
+            // Progressive playback: nothing exists beyond what has been received. Clamp instead of freezing.
+            val prog = streamingName?.let { server?.progress(it) }
+            if (prog != null && prog.first < prog.second) {
+                val max = Progressive.reachableMs(snapshot.durMs, prog.first, prog.second)
+                if (t > max) { t = maxOf(max, 0); flash("En attente de l'envoi… (atteignable : ${fmt(t)})") }
+            }
+            p.setTime(t); snapshot = snapshot.copy(posMs = t); flash("⇥ ${fmt(t)}")
+        }
     }
     override fun stop() = onMain {
-        mp.stop(); current = null; snapshot = PlayerState(); showIdle()
+        current = null; snapshot = PlayerState(); releasePlayer(); showIdle()
     }
     override fun state(): PlayerState = snapshot
 
@@ -242,6 +351,9 @@ class PlayerActivity : Activity(), Player, Device {
         val level = b?.getIntExtra(android.os.BatteryManager.EXTRA_LEVEL, -1) ?: -1
         val scale = b?.getIntExtra(android.os.BatteryManager.EXTRA_SCALE, -1) ?: -1
         val status = b?.getIntExtra(android.os.BatteryManager.EXTRA_STATUS, -1) ?: -1
+        val mem = runCatching {
+            android.app.ActivityManager.MemoryInfo().also { getSystemService(android.app.ActivityManager::class.java).getMemoryInfo(it) }
+        }.getOrNull()
         val ver = runCatching { packageManager.getPackageInfo(packageName, 0).versionName }.getOrNull() ?: "?"
         return SysInfo(
             model = "${android.os.Build.MANUFACTURER} ${android.os.Build.MODEL}".trim(),
@@ -251,6 +363,10 @@ class PlayerActivity : Activity(), Player, Device {
             charging = if (present) status == android.os.BatteryManager.BATTERY_STATUS_CHARGING || status == android.os.BatteryManager.BATTERY_STATUS_FULL else null,
             uptimeMs = android.os.SystemClock.elapsedRealtime(),
             appVersion = ver,
+            pssMb = (android.os.Debug.getPss() / 1024).toInt(),
+            memAvailMb = mem?.let { (it.availMem shr 20).toInt() },
+            memTotalMb = mem?.let { (it.totalMem shr 20).toInt() },
+            lowMemory = mem?.lowMemory,
         )
     }
 
@@ -280,13 +396,13 @@ class PlayerActivity : Activity(), Player, Device {
         if (current == null) return super.onKeyDown(keyCode, event)
         when (keyCode) {
             KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE ->
-                if (mp.isPlaying) pause() else resume()
+                if (mp?.isPlaying == true) pause() else resume()
             KeyEvent.KEYCODE_MEDIA_PLAY -> resume()
             KeyEvent.KEYCODE_MEDIA_PAUSE -> pause()
-            KeyEvent.KEYCODE_DPAD_RIGHT, KeyEvent.KEYCODE_MEDIA_FAST_FORWARD -> seek(mp.time + 10_000)
-            KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_MEDIA_REWIND -> seek(maxOf(0, mp.time - 10_000))
-            KeyEvent.KEYCODE_DPAD_UP -> seek(mp.time + 60_000)
-            KeyEvent.KEYCODE_DPAD_DOWN -> seek(maxOf(0, mp.time - 60_000))
+            KeyEvent.KEYCODE_DPAD_RIGHT, KeyEvent.KEYCODE_MEDIA_FAST_FORWARD -> seek((mp?.time ?: 0) + 10_000)
+            KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_MEDIA_REWIND -> seek(maxOf(0, (mp?.time ?: 0) - 10_000))
+            KeyEvent.KEYCODE_DPAD_UP -> seek((mp?.time ?: 0) + 60_000)
+            KeyEvent.KEYCODE_DPAD_DOWN -> seek(maxOf(0, (mp?.time ?: 0) - 60_000))
             KeyEvent.KEYCODE_MEDIA_STOP -> stop()
             KeyEvent.KEYCODE_BACK -> { stop(); return true }
             else -> return super.onKeyDown(keyCode, event)
@@ -324,7 +440,8 @@ class PlayerActivity : Activity(), Player, Device {
         bt?.stop()
         wd?.stop()
         server?.stop()
-        mp.stop(); mp.detachViews(); mp.release(); libVlc.release()
+        main.removeCallbacksAndMessages(null)     // no Handler callback may outlive the activity
+        releasePlayer()
         super.onDestroy()
     }
 
