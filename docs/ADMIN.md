@@ -245,6 +245,36 @@ tv $TV/api/sysinfo
   (`<clé>/Android/data/castbridge.receiver/files/`), qu'un PC peut remplir ; un dossier quelconque de la clé n'est lisible que
   via le sélecteur système.
 
+### Bluetooth : le lien le plus rapide possible
+
+Mesure réelle (Mac -> TV, CBT1 sur RFCOMM, écriture synchrone) : **110 ko/s**, intégrité SHA-256 correcte. Le Bluetooth classique plafonne vers 100 à 250 ko/s en
+pratique : un film de 1,5 Go y prend 2 à 4 heures. D'où deux leviers :
+
+1. **Le Bluetooth sert de canal de contrôle, les données passent en Wi-Fi quand c'est possible** (comme Quick Share). L'app du téléphone ouvre le service Bluetooth
+   habituel et envoie `CBTN` + PIN (même vérification et même verrouillage que CBT1) ; la TV répond ses adresses IP et, si son groupe Wi-Fi Direct existe ou peut être
+   créé, son nom de réseau et son mot de passe. Puis, dans l'ordre (`LinkPlanner`) :
+   - **(i) réseau commun** : une adresse de la TV répond (`GET /api/hello`, 1,5 s) -> envoi HTTP habituel, reprenable, **plusieurs Mo/s** (sur cette TV, limité par
+     l'écriture de la clé USB, ~2,2 Mo/s) ;
+   - **(ii) Wi-Fi Direct de la TV** : le téléphone rejoint le groupe `DIRECT-CB-…` (Android affiche une demande de validation **sur le téléphone**), puis même envoi HTTP
+     vers `192.168.49.1:8765`, plusieurs Mo/s. La TV ne crée ce groupe à la demande d'un téléphone que si le propriétaire a activé Wi-Fi Direct, ou si la TV n'a **aucun**
+     réseau (un groupe peut perturber son propre Wi-Fi) ;
+   - **(iii) point d'accès local du téléphone (LocalOnlyHotspot) : non livré** : la TV devrait rejoindre ce réseau, et une app Android ne peut le faire que par
+     `WifiNetworkSpecifier`, qui exige une **validation à l'écran de la TV** (et `WifiNetworkSuggestion` n'est ni immédiat ni garanti sans Internet). Ce ne serait pas
+     automatique : documenté plutôt que livré ;
+   - sinon **Bluetooth (CBT1)**, comme avant. Une TV plus ancienne répond `ERR_MAGIC` à `CBTN` : le téléphone passe directement en CBT1. Un envoi HTTP qui échoue
+     6 fois de suite sans progresser rebascule en Bluetooth (le fichier reprend là où il en était : même `.part`).
+   Tout reste authentifié (PIN), aucune adresse n'est acceptée autrement qu'en IPv4 littérale (jamais un nom à résoudre). L'écran d'envoi Bluetooth du téléphone
+   affiche le lien utilisé (« Lien : Wi-Fi Direct »...).
+2. **Bluetooth pur optimisé** : côté TV, les petits paquets RFCOMM sont regroupés dans un tampon de **256 Ko** avant chaque écriture disque (au lieu d'une écriture par
+   paquet), progression signalée tous les 256 Ko ; en cas de coupure, le tampon est vidé sur le disque (le `.part` garde tout ce qui est arrivé, test
+   `BtLinkTest.bufferedReceiveKeeps…`). Côté téléphone, écritures de 64 Ko, aucun `flush` par bloc. Pas d'acquittements fenêtrés : RFCOMM est déjà fiable et ordonné.
+
+**Étudié, non livré (à décider sur mesures réelles)** : plusieurs sockets RFCOMM en parallèle sur le même fichier : elles partagent le même lien radio ACL entre les
+deux appareils, le débit total ne dépasse pas celui d'une seule (au mieux on masque une latence de traitement), pour une reprise et un réassemblage nettement plus
+complexes ; **L2CAP CoC sur BLE 2M PHY** (API 29+) : ~150 à 400 ko/s en théorie, dépend du contrôleur Bluetooth de la TV (inconnu), et n'apporterait qu'un facteur
+1,5 à 2 là où le Wi-Fi apporte un facteur 10 à 30. Débits attendus : RFCOMM ~100-250 ko/s, L2CAP/2M ~150-400 ko/s, Wi-Fi Direct ou réseau commun plusieurs Mo/s.
+**Compatibilité** : CBT1 est inchangé (l'outil Mac `tools/cbt-rfcomm/main.swift` d'Esaie continue de fonctionner) ; `CBTN` est une requête en plus, sur le même service.
+
 ## 6. Wi-Fi Direct
 
 Sur la TV : MENU > « Wi-Fi Direct : activer » (désactivé par défaut : créer un groupe peut perturber le Wi-Fi de la TV).

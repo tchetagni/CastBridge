@@ -197,6 +197,8 @@ class ResumableUpload(
     private val target: String? = null,
     /** The TV's pre-flight answer (destination volume, free space left after the transfer). */
     private val onCheck: (TvClient.StorageCheck) -> Unit = {},
+    /** Consecutive failures without progress before giving up (to try another link); default: never. */
+    private val giveUpAfter: Int = Int.MAX_VALUE,
 ) {
     sealed class State {
         data class Uploading(val sent: Long, val total: Long) : State()
@@ -210,7 +212,10 @@ class ResumableUpload(
         var sent = 0L
         var backoff = 500L
         var checked = false
+        var failures = 0
+        var lastSent = -1L
         while (!cancelled()) {
+            if (sent != lastSent) { lastSent = sent; failures = 0 } else if (++failures > giveUpAfter) return State.Failed("liaison perdue").also(onState)
             val base = resolve()
             if (base == null) {
                 onState(State.Waiting(sent, total, "TV introuvable"))

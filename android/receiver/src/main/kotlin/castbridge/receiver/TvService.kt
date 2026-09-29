@@ -161,7 +161,7 @@ class TvService : Service(), Device {
             onThumb = { n -> screen?.thumbReady(n) })
         startServer()
         register()
-        bt = BtServer(this, videosDir, guard) { setStatus("1-bt", it) }
+        bt = BtServer(this, videosDir, guard, negotiate = ::linkInfo) { setStatus("1-bt", it) }
         wd = WifiDirectGroup(this, prefs) { setStatus("2-wd", it) }
         usb = UsbImporter(this, videosDir) { setStatus("3-usb", it) }
         ssh = SshControl(this, { setStatus("4-ssh", it) }, { setStatus("4-ssh-bt", it) })
@@ -188,6 +188,27 @@ class TvService : Service(), Device {
             return
         }
         setStatus("9-server", null)
+    }
+
+    /**
+     * What a phone gets over Bluetooth when it asks for a faster link (CBTN): the TV's addresses and, if the group exists or
+     * may be created now (LinkPlanner.mayStartWifiDirect), its Wi-Fi Direct network. Waits up to 8 s for a new group.
+     */
+    fun linkInfo(wantWifiDirect: Boolean): castbridge.core.tv.LinkInfo {
+        val ips = runCatching {
+            NetworkInterface.getNetworkInterfaces().toList().filter { it.isUp && !it.isLoopback }
+                .flatMap { it.inetAddresses.toList() }.filterIsInstance<Inet4Address>().filter { it.isSiteLocalAddress }.mapNotNull { it.hostAddress }
+        }.getOrDefault(emptyList())
+        val g = wd
+        val hasLan = ips.any { !it.startsWith("192.168.49.") }
+        if (g != null && g.active == null && g.hasPermission() &&
+            castbridge.core.tv.LinkPlanner.mayStartWifiDirect(wantWifiDirect, prefs.getBool("wd_enabled", false), hasLan)) {
+            main.post { g.start() }
+            val until = System.currentTimeMillis() + 8000
+            while (g.active == null && System.currentTimeMillis() < until) Thread.sleep(200)
+        }
+        val a = g?.active
+        return castbridge.core.tv.LinkInfo(ReceiverServer.PORT, ips, a?.first, a?.second, a?.let { castbridge.core.tv.WifiDirect.GROUP_OWNER_IP })
     }
 
     fun onPermissionsReady() {

@@ -16,6 +16,7 @@ import android.os.ParcelFileDescriptor
 import android.util.Log
 import castbridge.core.tv.BtProtocol
 import castbridge.core.tv.Link
+import castbridge.core.tv.LinkPlanner
 import castbridge.core.tv.ResumableBtUpload
 import castbridge.core.tv.ResumableUpload
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -61,17 +62,38 @@ class BtUploadService : Service() {
         val adapter = getSystemService(BluetoothManager::class.java)?.adapter
         if (adapter == null || !adapter.isEnabled) { finish(ResumableUpload.State.Failed("Bluetooth désactivé")); return }
         var lastNotif = 0L
-        val up = ResumableBtUpload(name, total, pin,
-            connect = {
-                adapter.cancelDiscovery()
-                val sock = adapter.getRemoteDevice(address).createRfcommSocketToServiceRecord(UUID.fromString(BtProtocol.SERVICE_UUID))
-                try { sock.connect() } catch (e: IOException) { runCatching { sock.close() }; throw e }
-                object : Link {
-                    override val input = sock.inputStream
-                    override val output = sock.outputStream
-                    override fun close() { runCatching { sock.close() } }
+        fun connect(): Link {
+            adapter.cancelDiscovery()
+            val sock = adapter.getRemoteDevice(address).createRfcommSocketToServiceRecord(UUID.fromString(BtProtocol.SERVICE_UUID))
+            try { sock.connect() } catch (e: IOException) { runCatching { sock.close() }; throw e }
+            return object : Link {
+                override val input = sock.inputStream
+                override val output = sock.outputStream
+                override fun close() { runCatching { sock.close() } }
+            }
+        }
+        // Bluetooth first as the control link: ask the TV for a faster way (same Wi-Fi, or its Wi-Fi Direct group).
+        _route.value = "Recherche du lien le plus rapide…"
+        val info = runCatching { connect().use { l -> BtProtocol.negotiate(l.input, l.output, pin, wantWifiDirect = Build.VERSION.SDK_INT >= 29) } }
+            .onFailure { Log.i(TAG, "negotiate: ${it.javaClass.simpleName} ${it.message}") }.getOrNull()   // older TV (ERR_MAGIC) or no answer: Bluetooth
+        val routes = LinkPlanner.plan(info, ::reachable, canJoinWifiDirect = Build.VERSION.SDK_INT >= 29)
+        for (r in routes) {
+            if (cancelled) break
+            val res = when (r) {
+                is LinkPlanner.Route.Lan -> { _route.value = r.label; httpUpload(uri, name, total, r.base, pin, name) }
+                is LinkPlanner.Route.Direct -> {
+                    _route.value = "${r.label} : connexion au réseau de la TV (validez sur le téléphone)…"
+                    val joined = joinWifiDirect(r.ssid, r.pass)
+                    if (joined == null) null else try { _route.value = r.label; httpUpload(uri, name, total, r.base, pin, name) } finally { leaveWifiDirect(joined) }
                 }
-            },
+                LinkPlanner.Route.Bluetooth -> null                // below
+            }
+            if (res == ResumableUpload.State.Done || (res is ResumableUpload.State.Failed && res.reason != "liaison perdue")) { finish(res); return }
+            if (r == LinkPlanner.Route.Bluetooth) break
+        }
+        _route.value = "Bluetooth"
+        val up = ResumableBtUpload(name, total, pin,
+            connect = { connect() },
             openAt = { off -> openAt(uri, off) },
             cancelled = { cancelled })
         val result = up.run { s ->
@@ -88,6 +110,52 @@ class BtUploadService : Service() {
             }
         }
         finish(result)
+    }
+
+    /** A TV address answers (same network as the phone)? */
+    private fun reachable(base: String): Boolean = runCatching {
+        val c = java.net.URL("$base/api/hello").openConnection() as java.net.HttpURLConnection
+        c.connectTimeout = 1500; c.readTimeout = 1500
+        c.responseCode == 200 && c.inputStream.use { it.readBytes() }.decodeToString().contains("castbridge-tv")
+    }.getOrDefault(false)
+
+    /** The same resumable HTTP upload as over Wi-Fi, full speed; gives up after a few failures in a row to fall back to Bluetooth. */
+    private fun httpUpload(uri: Uri, name: String, total: Long, base: String, pin: String, label: String): ResumableUpload.State {
+        var lastNotif = 0L
+        return ResumableUpload(name, total, { base }, { off -> openAt(uri, off) }, { cancelled }, pin = pin, giveUpAfter = 6).run { s ->
+            _state.value = s
+            val now = System.currentTimeMillis()
+            if (now - lastNotif > 1000 && s is ResumableUpload.State.Uploading) {
+                lastNotif = now
+                runCatching { getSystemService(NotificationManager::class.java).notify(NOTIF, notification("Envoi de $label (Wi-Fi)", (s.sent * 100 / s.total).toInt())) }
+            }
+        }
+    }
+
+    /** Joins the TV's Wi-Fi Direct group (Android shows its approval dialog) and routes this app through it; null if refused. */
+    private fun joinWifiDirect(ssid: String, pass: String): android.net.ConnectivityManager.NetworkCallback? {
+        if (Build.VERSION.SDK_INT < 29) return null
+        val cm = getSystemService(android.net.ConnectivityManager::class.java)
+        val spec = runCatching { android.net.wifi.WifiNetworkSpecifier.Builder().setSsid(ssid).setWpa2Passphrase(pass).build() }.getOrNull() ?: return null
+        val req = android.net.NetworkRequest.Builder().addTransportType(android.net.NetworkCapabilities.TRANSPORT_WIFI)
+            .removeCapability(android.net.NetworkCapabilities.NET_CAPABILITY_INTERNET).setNetworkSpecifier(spec).build()
+        val got = java.util.concurrent.CountDownLatch(1)
+        var ok = false
+        val cb = object : android.net.ConnectivityManager.NetworkCallback() {
+            override fun onAvailable(network: android.net.Network) { ok = cm.bindProcessToNetwork(network); got.countDown() }
+            override fun onUnavailable() { got.countDown() }
+        }
+        return try {
+            cm.requestNetwork(req, cb, 45_000)
+            got.await(50, java.util.concurrent.TimeUnit.SECONDS)
+            if (ok) cb else { leaveWifiDirect(cb); null }
+        } catch (e: Exception) { Log.i(TAG, "wifi direct: ${e.javaClass.simpleName}"); null }
+    }
+
+    private fun leaveWifiDirect(cb: android.net.ConnectivityManager.NetworkCallback) {
+        val cm = getSystemService(android.net.ConnectivityManager::class.java)
+        runCatching { cm.bindProcessToNetwork(null) }
+        runCatching { cm.unregisterNetworkCallback(cb) }
     }
 
     private fun openAt(uri: Uri, offset: Long): InputStream {
@@ -124,6 +192,9 @@ class BtUploadService : Service() {
         private const val EXTRA_NAME = "name"
         private val _state = MutableStateFlow<ResumableUpload.State?>(null)
         val state: StateFlow<ResumableUpload.State?> = _state
+        private val _route = MutableStateFlow<String?>(null)
+        /** Which link carries the file: "Wi-Fi (réseau commun)", "Wi-Fi Direct" or "Bluetooth". */
+        val route: StateFlow<String?> = _route
 
         fun start(ctx: Context, uri: Uri, fileName: String, address: String, pin: String) {
             _state.value = null

@@ -30,6 +30,16 @@ object FileLocks {
  */
 object BtProtocol {
     const val MAGIC = "CBT1"
+    /**
+     * "Which faster link can we use?": the phone asks over Bluetooth (PIN checked like CBT1), the TV answers its addresses and,
+     * if asked and possible, its Wi-Fi Direct group; the data then goes over Wi-Fi (HTTP, resumable) and Bluetooth is only the
+     * fallback. An older TV answers ERR_MAGIC and the phone simply sends with CBT1.
+     *
+     * Client -> TV : "CBTN" | PIN (6 ASCII) | u8 flags (bit 0 = start Wi-Fi Direct if it is off)
+     * TV -> client : status byte; if OK: u16 length | UTF-8 lines "key=value" ([LinkInfo])
+     */
+    const val NEGOTIATE = "CBTN"
+    const val WANT_WIFI_DIRECT = 1
     /** RFCOMM service UUID shared by the TV and the phone app. */
     const val SERVICE_UUID = "7c5e3b9a-4d2f-4c61-9b0e-cb0000000001"
     /** Second RFCOMM service: a plain byte tunnel to the TV's SSH server (see castbridge.core.ssh.SshTunnel). */
@@ -70,6 +80,8 @@ object BtProtocol {
         dir: File, input: InputStream, output: OutputStream,
         guard: PinGuard?, peer: String, minFreeBytes: Long = 100L shl 20,
         onProgress: (name: String, done: Long, total: Long) -> Unit = { _, _, _ -> },
+        /** Answers a CBTN request (null = this TV does not offer a faster link: ERR_MAGIC, as an old TV would). */
+        negotiate: ((wantWifiDirect: Boolean) -> LinkInfo)? = null,
     ): Int {
         dir.mkdirs()
         val din = DataInputStream(input)
@@ -77,7 +89,20 @@ object BtProtocol {
         fun fail(code: Int): Int { dout.writeByte(code); dout.flush(); return code }
 
         val magic = ByteArray(4).also { din.readFully(it) }
-        if (String(magic, Charsets.US_ASCII) != MAGIC) return fail(ERR_MAGIC)
+        val m = String(magic, Charsets.US_ASCII)
+        if (m == NEGOTIATE && negotiate != null) {
+            val pin = String(ByteArray(Pin.LENGTH).also { din.readFully(it) }, Charsets.US_ASCII)
+            val flags = din.readUnsignedByte()
+            if (guard != null) when (guard.check(peer, pin)) {
+                PinGuard.Result.OK -> {}
+                PinGuard.Result.BAD -> return fail(ERR_PIN)
+                PinGuard.Result.LOCKED -> return fail(ERR_LOCKED)
+            }
+            val text = negotiate(flags and WANT_WIFI_DIRECT != 0).encode().toByteArray(Charsets.UTF_8)
+            dout.writeByte(OK); dout.writeShort(text.size); dout.write(text); dout.flush()
+            return OK
+        }
+        if (m != MAGIC) return fail(ERR_MAGIC)
         val pin = String(ByteArray(Pin.LENGTH).also { din.readFully(it) }, Charsets.US_ASCII)
         val nameLen = din.readUnsignedShort()
         if (nameLen == 0 || nameLen > MAX_NAME) return fail(ERR_NAME)
@@ -105,14 +130,17 @@ object BtProtocol {
 
             var done = cur
             onProgress(name, done, total)
-            FileOutputStream(pf, true).use { out ->
+            // RFCOMM hands over small pieces (about one baseband packet each): gather them in a 256 kB buffer so the disk sees
+            // few large writes, and report progress every 256 kB only. Closing (also on a broken link) flushes what arrived.
+            java.io.BufferedOutputStream(FileOutputStream(pf, true), 256 * 1024).use { out ->
                 val buf = ByteArray(64 * 1024)
+                var reported = done
                 while (done < total) {
                     val r = input.read(buf, 0, minOf(buf.size.toLong(), total - done).toInt())
                     if (r < 0) throw IOException("link closed at $done/$total")
                     out.write(buf, 0, r)
                     done += r
-                    onProgress(name, done, total)
+                    if (done - reported >= PROGRESS_STEP || done == total) { reported = done; onProgress(name, done, total) }
                 }
             }
             if (final.exists()) final.delete()
@@ -122,7 +150,27 @@ object BtProtocol {
         }
     }
 
+    private const val PROGRESS_STEP = 256L * 1024
+
     // ---------------------------------------------------------------- sender (phone)
+
+    /**
+     * Asks the TV for a faster link over an open Bluetooth connection. Throws [Refused] (ERR_MAGIC from a TV that does not
+     * know CBTN, ERR_PIN...) or [IOException].
+     */
+    fun negotiate(input: InputStream, output: OutputStream, pin: String, wantWifiDirect: Boolean): LinkInfo {
+        require(Pin.isValidFormat(pin)) { "PIN must be ${Pin.LENGTH} digits" }
+        val din = DataInputStream(input)
+        val dout = DataOutputStream(output)
+        dout.write(NEGOTIATE.toByteArray(Charsets.US_ASCII))
+        dout.write(pin.toByteArray(Charsets.US_ASCII))
+        dout.writeByte(if (wantWifiDirect) WANT_WIFI_DIRECT else 0)
+        dout.flush()
+        val st = din.readUnsignedByte()
+        if (st != OK) throw Refused(st)
+        val len = din.readUnsignedShort()
+        return LinkInfo.decode(String(ByteArray(len).also { din.readFully(it) }, Charsets.UTF_8))
+    }
 
     /**
      * One attempt on an open link. Returns normally when the TV confirmed the whole file; throws
@@ -213,5 +261,58 @@ class ResumableBtUpload(
             sleep(backoff); backoff = minOf(backoff * 2, 5000)
         }
         return ResumableUpload.State.Failed("annulé").also(onState)
+    }
+}
+
+/** What the TV tells the phone over Bluetooth about faster links: its HTTP port and addresses, and its Wi-Fi Direct group if on. */
+data class LinkInfo(val port: Int, val ips: List<String>, val wdSsid: String? = null, val wdPass: String? = null, val wdIp: String? = null) {
+    fun encode(): String = buildString {
+        append("port=").append(port).append('\n')
+        ips.forEach { append("ip=").append(it).append('\n') }
+        if (wdSsid != null && wdPass != null) {
+            append("wd.ssid=").append(wdSsid.replace('\n', ' ')).append('\n')
+            append("wd.pass=").append(wdPass.replace('\n', ' ')).append('\n')
+            append("wd.ip=").append(wdIp ?: WifiDirect.GROUP_OWNER_IP).append('\n')
+        }
+    }
+
+    companion object {
+        private val IPV4 = Regex("^(\\d{1,3})(\\.\\d{1,3}){3}$")
+        fun decode(s: String): LinkInfo {
+            val kv = s.lineSequence().mapNotNull { l -> l.indexOf('=').takeIf { it > 0 }?.let { l.substring(0, it) to l.substring(it + 1) } }.toList()
+            fun one(k: String) = kv.firstOrNull { it.first == k }?.second
+            return LinkInfo(one("port")?.toIntOrNull()?.takeIf { it in 1..65535 } ?: ReceiverServer.PORT,
+                kv.filter { it.first == "ip" && IPV4.matches(it.second) }.map { it.second },   // literal IPv4 only: never a host name to resolve
+                one("wd.ssid"), one("wd.pass"), one("wd.ip")?.takeIf { IPV4.matches(it) })
+        }
+    }
+}
+
+/**
+ * Which way to send a file, fastest first, once the TV answered over Bluetooth: its address on a network the phone shares
+ * (HTTP, several MB/s), else its Wi-Fi Direct group (HTTP, several MB/s, the phone joins it), else Bluetooth itself
+ * (RFCOMM, ~100-250 kB/s). Pure: [reachable] tests an address (GET /api/hello with a short timeout).
+ */
+object LinkPlanner {
+    sealed class Route {
+        abstract val label: String
+        data class Lan(val base: String) : Route() { override val label get() = "Wi-Fi (réseau commun)" }
+        data class Direct(val ssid: String, val pass: String, val base: String) : Route() { override val label get() = "Wi-Fi Direct" }
+        object Bluetooth : Route() { override val label get() = "Bluetooth" }
+    }
+
+    /**
+     * May the TV create its Wi-Fi Direct group because a phone asked over Bluetooth? A group can disturb the TV's own Wi-Fi, so
+     * only if the owner switched Wi-Fi Direct on, or if the TV has no network at all (nothing to disturb).
+     */
+    fun mayStartWifiDirect(requested: Boolean, enabledByOwner: Boolean, tvHasNetwork: Boolean) = requested && (enabledByOwner || !tvHasNetwork)
+
+    fun plan(info: LinkInfo?, reachable: (String) -> Boolean, canJoinWifiDirect: Boolean): List<Route> = buildList {
+        if (info != null) {
+            info.ips.map { "http://$it:${info.port}" }.firstOrNull(reachable)?.let { add(Route.Lan(it)) }
+            if (canJoinWifiDirect && info.wdSsid != null && info.wdPass != null)
+                add(Route.Direct(info.wdSsid, info.wdPass, "http://${info.wdIp ?: WifiDirect.GROUP_OWNER_IP}:${info.port}"))
+        }
+        add(Route.Bluetooth)
     }
 }

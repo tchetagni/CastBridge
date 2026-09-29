@@ -136,10 +136,11 @@ fun BtScreen() {
                 LinearProgressIndicator({ u.sent.toFloat() / u.total }, Modifier.fillMaxWidth())
                 Text("Liaison perdue, reprise automatique à ${formatSize(u.sent)} (${u.reason})")
             }
-            ResumableUpload.State.Done -> Text("Fichier reçu par la TV (dans son dossier de l'app).")
+            ResumableUpload.State.Done -> Text("Fichier reçu par la TV.")
             is ResumableUpload.State.Failed -> Text("Échec : ${u.reason}", color = MaterialTheme.colorScheme.error)
             null -> {}
         }
+        BtUploadService.route.collectAsState().value?.let { if (busy) Text("Lien : $it", style = MaterialTheme.typography.bodySmall) }
         BtSshGatewayPanel()
     }
 }
