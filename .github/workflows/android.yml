@@ -2,16 +2,21 @@ name: Build APK
 on: [push, workflow_dispatch]
 jobs:
   apk:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04   # ships the Android SDK (ANDROID_HOME)
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
         with: { distribution: temurin, java-version: 17 }
-      - uses: android-actions/setup-android@v3
       - uses: gradle/actions/setup-gradle@v4
         with: { gradle-version: 8.14.3 }
-      - run: cd android && gradle :core:test :sender:assembleDebug
+      - run: cd android && gradle --stacktrace :core:test assembleDebug
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
-          name: castbridge-sender-debug
-          path: android/sender/build/outputs/apk/debug/*.apk
+          name: castbridge-apks
+          path: android/*/build/outputs/apk/debug/*.apk
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: test-reports
+          path: android/core/build/reports/tests/
