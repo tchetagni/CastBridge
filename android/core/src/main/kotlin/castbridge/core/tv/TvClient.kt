@@ -18,8 +18,16 @@ class TvClient(val base: String, val pin: String? = null) {
     fun resume() = call("POST", "/api/resume")
     fun stop() = call("POST", "/api/stop")
     fun seek(posMs: Long) = call("POST", "/api/seek?pos=$posMs")
-    fun delete(name: String) = call("POST", "/api/delete?name=${enc(name)}")
+    fun delete(name: String, volume: String? = null) = call("POST", "/api/delete?name=${enc(name)}" + (volume?.let { "&volume=${enc(it)}" } ?: ""))
     fun sysinfo(): String = call("GET", "/api/sysinfo")
+    /** Stored videos with thumbnail availability, duration, resume position and volume. */
+    fun library(): String = call("GET", "/api/library")
+    /** JPEG thumbnail, or null while the TV is still making it (retry in a moment) or if it cannot make one. */
+    fun thumb(name: String, volume: String? = null): ByteArray? {
+        val c = open("GET", "/api/thumb?name=${enc(name)}" + (volume?.let { "&volume=${enc(it)}" } ?: ""))
+        return if (c.responseCode == 200) c.inputStream.use { it.readBytes() } else { runCatching { c.errorStream?.close() }; null }
+    }
+
     /** State of the app self-update on the TV (versions, whether installing is allowed, last install result). */
     fun updateInfo(): String = call("GET", "/api/update")
     /** APK files present on the TV with their package, label and version. */

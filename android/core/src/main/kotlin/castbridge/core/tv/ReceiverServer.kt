@@ -45,6 +45,8 @@ class ReceiverServer(
     private val safPicker: (() -> String)? = null,
     /** Opens the TV's own storage settings; null = opened, else why not. */
     private val settingsOpener: (() -> String?)? = null,
+    /** Thumbnails, durations and saved positions for the library screens; null = plain file list. */
+    private val library: LibraryMeta? = null,
 ) : NanoHTTPD(port) {
 
     /** Single internal folder (tests, simple setups). */
@@ -171,6 +173,8 @@ class ReceiverServer(
                 ok(partJson(name))
             }
             path == "/api/sysinfo" -> sysinfo()
+            path == "/api/library" && s.method == Method.GET -> ok(libraryJson())
+            path == "/api/thumb" && s.method == Method.GET -> named(p) { thumb(it, p["volume"]) }
             ext != null -> json(status(ext.status), ext.json)
             s.method != Method.POST -> json(Response.Status.METHOD_NOT_ALLOWED, """{"error":"use POST"}""")
             path == "/api/storage/target" -> setTarget(p["value"].orEmpty())
@@ -430,6 +434,35 @@ class ReceiverServer(
     private fun quotaOf(v: StorageVolume, used: Long): Long {
         val st = volumes.store(v) as? FileStore ?: return -1
         return Storage.quota(st.dir, cfg, used, volumes.free(v), v.kind)
+    }
+
+    /** Finished files with what the library screens need: cards with thumbnail, duration, resume position, volume. */
+    fun libraryJson(): String {
+        val l = listing()
+        val lib = library
+        val files = l.entries.filter { it.complete }.map { e ->
+            val m = lib?.meta(e.name, e.size) ?: FileMeta()
+            val mtime = (volumes.store(e.v) as? FileStore)?.let { File(it.dir, it.diskName(e.name)).lastModified() } ?: 0L
+            Triple(e, m, mtime)
+        }
+        val sorted = LibraryLogic.sortNewestFirst(files, { it.third }, { it.first.name })
+        val ps = player.state()
+        return sorted.joinToString(",", "{\"files\":[", "]") { (e, m, mtime) ->
+            "{\"name\":${q(e.name)},\"title\":${q(LibraryLogic.title(e.name))},\"size\":${e.size},\"mtime\":$mtime," +
+                "\"volume\":${q(e.v.id)},\"volumeLabel\":${q(e.v.label)},\"kind\":${q(e.v.kind.name.lowercase())}," +
+                "\"durationMs\":${m.durationMs},\"resumeMs\":${m.resumeMs},\"watched\":${m.watched},\"playedAt\":${m.playedAtMs}," +
+                "\"hasThumb\":${m.hasThumb},\"duplicate\":${e.dup},\"playing\":${ps.state != "idle" && ps.name == e.name}}"
+        } + "],\"count\":${sorted.size}}"
+    }
+
+    private fun thumb(name: String, volume: String?): Response {
+        val lib = library ?: return json(Response.Status.NOT_FOUND, """{"error":"no library"}""")
+        val hit = finals(name).let { hs -> hs.firstOrNull { it.v.id == volume } ?: hs.firstOrNull() }
+            ?: return json(Response.Status.NOT_FOUND, """{"error":"not found"}""")
+        val bytes = lib.thumb(hit.name, hit.size, hit.file)
+            ?: return json(NO_CONTENT_YET, """{"error":"thumbnail not ready"}""")
+        return newFixedLengthResponse(Response.Status.OK, "image/jpeg", java.io.ByteArrayInputStream(bytes), bytes.size.toLong())
+            .also { it.addHeader("Cache-Control", "private, max-age=86400") }
     }
 
     private fun info(): String {
@@ -748,6 +781,11 @@ class ReceiverServer(
         private val PAYLOAD_TOO_LARGE = object : Response.IStatus {
             override fun getDescription() = "413 Payload Too Large"
             override fun getRequestStatus() = 413
+        }
+        /** 202: the thumbnail is being made, ask again in a moment. */
+        private val NO_CONTENT_YET = object : Response.IStatus {
+            override fun getDescription() = "202 Accepted"
+            override fun getRequestStatus() = 202
         }
         private val INSUFFICIENT_STORAGE = object : Response.IStatus {
             override fun getDescription() = "507 Insufficient Storage"
