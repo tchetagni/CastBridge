@@ -29,7 +29,7 @@ import kotlin.concurrent.thread
  * Runs as a foreground service so it survives the screen turning off.
  */
 class UploadService : Service() {
-    data class Job(val fileName: String, val tvName: String, val manualHost: String?)
+    data class Job(val fileName: String, val tvName: String, val manualHost: String?, val pin: String? = null)
 
     sealed class State {
         object Idle : State()
@@ -55,7 +55,7 @@ class UploadService : Service() {
         val tvName = intent?.getStringExtra(EXTRA_TV)
         if (uri == null || tvName == null || worker?.isAlive == true) return START_NOT_STICKY
         val name = intent.getStringExtra(EXTRA_NAME) ?: uri.lastPathSegment ?: "video"
-        val job = Job(name, tvName, intent.getStringExtra(EXTRA_HOST))
+        val job = Job(name, tvName, intent.getStringExtra(EXTRA_HOST), intent.getStringExtra(EXTRA_PIN))
         try {
             val n = notification("Envoi de $name…", 0)
             if (Build.VERSION.SDK_INT >= 29) startForeground(NOTIF, n, ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC)
@@ -79,7 +79,7 @@ class UploadService : Service() {
         val resolve: () -> String? = {
             job.manualHost?.let { h -> if (':' in h) "http://$h" else "http://$h:8765" } ?: disc?.find(job.tvName)?.base
         }
-        val up = ResumableUpload(job.fileName, total, resolve, { off -> openAt(uri, off) }, { cancelled })
+        val up = ResumableUpload(job.fileName, total, resolve, { off -> openAt(uri, off) }, { cancelled }, pin = job.pin)
         val result = up.run { s ->
             _state.value = when (s) {
                 is ResumableUpload.State.Uploading -> State.Uploading(job, s.sent, s.total)
@@ -91,7 +91,7 @@ class UploadService : Service() {
         }
         if (result == ResumableUpload.State.Done) {
             val base = resolve()
-            val played = base != null && runCatching { TvClient(base).play(job.fileName) }.isSuccess
+            val played = base != null && runCatching { TvClient(base, job.pin).play(job.fileName) }.isSuccess
             finish(if (played) State.Done(job) else State.Failed(job, "Fichier envoyé, mais lancement impossible : réessayez « Lire »"))
         } else finish(_state.value.takeIf { it is State.Failed } ?: State.Failed(job, "annulé"))
     }
@@ -173,13 +173,14 @@ class UploadService : Service() {
         const val EXTRA_TV = "tv"
         const val EXTRA_NAME = "name"
         const val EXTRA_HOST = "host"
+        const val EXTRA_PIN = "pin"
         private val _state = MutableStateFlow<State>(State.Idle)
         val state: StateFlow<State> = _state
 
-        fun start(ctx: Context, uri: Uri, fileName: String, tvName: String, manualHost: String?) {
+        fun start(ctx: Context, uri: Uri, fileName: String, tvName: String, manualHost: String?, pin: String? = null) {
             val i = Intent(ctx, UploadService::class.java).setData(uri)
                 .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                .putExtra(EXTRA_TV, tvName).putExtra(EXTRA_NAME, fileName).putExtra(EXTRA_HOST, manualHost)
+                .putExtra(EXTRA_TV, tvName).putExtra(EXTRA_NAME, fileName).putExtra(EXTRA_HOST, manualHost).putExtra(EXTRA_PIN, pin?.takeIf { it.isNotEmpty() })
             _state.value = State.Idle
             ctx.startForegroundService(i)
         }

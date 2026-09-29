@@ -6,8 +6,8 @@ import android.provider.OpenableColumns
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -43,7 +43,7 @@ private fun time(ms: Long): String { val s = ms / 1000; return "%d:%02d:%02d".fo
 
 /** "CastBridge TV" tab: send the whole video to the TV app, which then plays it from its own storage. */
 @Composable
-fun TvScreen() {
+fun TvScreen(fixedBase: String? = null, extra: @Composable (TvClient) -> Unit = {}) {
     val ctx = LocalContext.current
     val scope = rememberCoroutineScope()
     val discovery = remember { TvDiscovery(ctx) }
@@ -59,14 +59,18 @@ fun TvScreen() {
     var info by remember { mutableStateOf<TvInfo?>(null) }
     var reachable by remember { mutableStateOf(true) }
     var message by remember { mutableStateOf("") }
+    var badPin by remember { mutableStateOf<String?>(null) }
     var seeking by remember { mutableStateOf<Float?>(null) }
 
     LaunchedEffect(tvs) { if (selectedName == null && tvs.size == 1) selectedName = tvs[0].name }
 
-    val base: String? = if (useManual) manualIp.trim().takeIf { it.isNotEmpty() }
+    val base: String? = fixedBase ?: if (useManual) manualIp.trim().takeIf { it.isNotEmpty() }
         ?.let { if (':' in it) "http://$it" else "http://$it:8765" }
     else tvs.firstOrNull { it.name == selectedName }?.base
-    val client = base?.let { TvClient(it) }
+    val pinKey = fixedBase ?: if (useManual) manualIp.trim().takeIf { it.isNotEmpty() } else selectedName
+    val pins = remember { PinStore(ctx) }
+    var pin by remember(pinKey) { mutableStateOf(pins.get(pinKey)) }
+    val client = base?.let { TvClient(it, pin.takeIf { p -> p.isNotEmpty() }) }
 
     val picker = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
         if (uri != null) {
@@ -81,11 +85,16 @@ fun TvScreen() {
     }
 
     // Poll TV state; tolerate outages (the TV keeps playing on its own).
-    LaunchedEffect(base) {
+    LaunchedEffect(base, pin) {
         info = null
-        while (client != null) {
+        badPin = null
+        // Never poll with an incomplete PIN or after a refusal: failures count toward the TV's 60 s lockout.
+        while (client != null && castbridge.core.tv.Pin.isValidFormat(pin) && badPin == null) {
             val r = withContext(Dispatchers.IO) { runCatching { parseInfo(client.info()) } }
-            r.onSuccess { info = it; reachable = true }.onFailure { reachable = false }
+            r.onSuccess { info = it; reachable = true; badPin = null }.onFailure {
+                badPin = (it as? TvClient.HttpError)?.takeIf { e -> e.code == 401 }?.let { e -> if ("locked" in e.message.orEmpty()) "Trop d'essais : TV verrouillée 60 s" else "PIN incorrect" }
+                reachable = badPin != null
+            }
             delay(1000)
         }
     }
@@ -98,12 +107,12 @@ fun TvScreen() {
         }
     }
 
-    Column(Modifier.padding(16.dp).fillMaxSize(), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+    Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Text("Lancez « CastBridge TV » sur la TV. La vidéo est copiée entièrement sur la TV : " +
             "la lecture continue même si le téléphone quitte le Wi-Fi.", style = MaterialTheme.typography.bodySmall)
 
         // --- Target ---
-        if (!useManual) {
+        if (!useManual && fixedBase == null) {
             if (tvs.isEmpty()) Text("Recherche des TV CastBridge…")
             tvs.forEach { tv ->
                 Row(Modifier.fillMaxWidth()) {
@@ -112,12 +121,14 @@ fun TvScreen() {
                 }
             }
         }
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        if (fixedBase == null) Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             Checkbox(useManual, onCheckedChange = { useManual = it })
             OutlinedTextField(manualIp, { manualIp = it }, Modifier.weight(1f), enabled = useManual, singleLine = true,
                 label = { Text("IP de la TV (manuelle)") },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Uri))
         }
+        PinField(pins, pinKey, pin, { pin = it }, Modifier.fillMaxWidth())
+        badPin?.let { Text(it, color = MaterialTheme.colorScheme.error) }
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             OutlinedButton(onClick = { discovery.restart() }) { Text("Rechercher") }
             OutlinedButton(onClick = { picker.launch(arrayOf("video/*", "audio/*")) }) { Text("Choisir un fichier") }
@@ -128,9 +139,9 @@ fun TvScreen() {
         val busy = upload is UploadService.State.Uploading || upload is UploadService.State.Waiting
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             Button(enabled = !busy && base != null && fileUri != null && fileName != null, onClick = {
-                val target = if (useManual) manualIp.trim() else selectedName!!
+                val target = if (useManual) manualIp.trim() else selectedName ?: fixedBase!!
                 runCatching {
-                    UploadService.start(ctx, fileUri!!, fileName!!, target, if (useManual) manualIp.trim() else null)
+                    UploadService.start(ctx, fileUri!!, fileName!!, target, fixedBase?.removePrefix("http://") ?: if (useManual) manualIp.trim() else null, pin)
                 }.onFailure { message = "Impossible de démarrer l'envoi : ${it.message}" }
             }) { Text("Envoyer et lire") }
             if (busy) OutlinedButton(onClick = { UploadService.cancel(ctx) }) { Text("Annuler") }
@@ -169,8 +180,8 @@ fun TvScreen() {
                 }
             }
             Text("Sur la TV (${size(i.free)} libres) :", style = MaterialTheme.typography.titleSmall)
-            LazyColumn(Modifier.weight(1f)) {
-                items(i.files) { (name, sz) ->
+            Column {
+                i.files.forEach { (name, sz) ->
                     ListItem(headlineContent = { Text(name) }, supportingContent = { Text(size(sz)) },
                         trailingContent = {
                             Row {
@@ -181,6 +192,7 @@ fun TvScreen() {
                 }
             }
         }
+        client?.let { extra(it) }
         if (message.isNotEmpty()) Text(message, color = MaterialTheme.colorScheme.error)
     }
 }

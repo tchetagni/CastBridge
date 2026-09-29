@@ -7,7 +7,7 @@ import java.net.URL
 import java.net.URLEncoder
 
 /** Minimal client for [ReceiverServer]. [base] is like "http://192.168.0.117:8765". Blocking calls. */
-class TvClient(val base: String) {
+class TvClient(val base: String, private val pin: String? = null) {
     data class Part(val length: Long, val done: Boolean)
 
     fun part(name: String): Part = parsePart(call("GET", "/api/part?name=${enc(name)}"))
@@ -54,6 +54,7 @@ class TvClient(val base: String) {
 
     private fun open(method: String, path: String) = (URL(base + path).openConnection() as HttpURLConnection).apply {
         requestMethod = method; connectTimeout = 4000; readTimeout = 8000
+        pin?.let { setRequestProperty("X-CB-Pin", it) }
     }
 
     private fun read(c: HttpURLConnection): String {
@@ -85,6 +86,7 @@ class ResumableUpload(
     private val openAt: (Long) -> InputStream,   // source stream positioned at the given offset
     private val cancelled: () -> Boolean = { false },
     private val sleep: (Long) -> Unit = Thread::sleep,
+    private val pin: String? = null,
 ) {
     sealed class State {
         data class Uploading(val sent: Long, val total: Long) : State()
@@ -103,7 +105,7 @@ class ResumableUpload(
                 onState(State.Waiting(sent, total, "TV introuvable"))
                 sleep(backoff); backoff = minOf(backoff * 2, 5000); continue
             }
-            val tv = TvClient(base)
+            val tv = TvClient(base, pin)
             try {
                 val p = tv.part(name)
                 sent = p.length
@@ -119,7 +121,7 @@ class ResumableUpload(
                     if (r.done) return State.Done.also(onState)
                 }
             } catch (e: TvClient.HttpError) {
-                if (e.code == 507 || e.code == 400) return State.Failed(e.message ?: "erreur").also(onState)
+                if (e.code == 507 || e.code == 400 || e.code == 401) return State.Failed(e.message ?: "erreur").also(onState)
                 onState(State.Waiting(sent, total, e.message ?: "erreur"))
                 sleep(backoff); backoff = minOf(backoff * 2, 5000)
             } catch (e: IOException) {

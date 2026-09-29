@@ -36,6 +36,7 @@ class PlayerActivity : Activity(), Player {
     private lateinit var idle: TextView
     private lateinit var osd: TextView
     private var server: ReceiverServer? = null
+    private var pin = ""
     private var nsd: NsdManager? = null
     private var nsdListener: NsdManager.RegistrationListener? = null
     private var multicastLock: WifiManager.MulticastLock? = null
@@ -63,7 +64,8 @@ class PlayerActivity : Activity(), Player {
             }
         }
         val dir = getExternalFilesDir("videos") ?: File(filesDir, "videos")
-        server = ReceiverServer(dir, this).also {
+        pin = TvPrefs(this).pin()
+        server = ReceiverServer(dir, this, pin = pin).also {
             try { it.start(15_000, false) } catch (e: Exception) { Log.e(TAG, "server", e) }
         }
         register()
@@ -76,7 +78,7 @@ class PlayerActivity : Activity(), Player {
 
     private fun showIdle(msg: String? = null) {
         idle.visibility = View.VISIBLE
-        idle.text = (msg?.let { "$it\n\n" } ?: "") + "CastBridge TV\nEn attente du téléphone…\n\n${localIp() ?: "pas de réseau"}:${ReceiverServer.PORT}"
+        idle.text = (msg?.let { "$it\n\n" } ?: "") + "CastBridge TV\nEn attente du téléphone…\n\n${localIp() ?: "pas de réseau"}:${ReceiverServer.PORT}\nCode PIN : $pin"
     }
 
     private fun flash(text: String) {

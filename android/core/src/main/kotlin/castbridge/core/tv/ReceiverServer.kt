@@ -25,6 +25,9 @@ class ReceiverServer(
     private val player: Player,
     port: Int = PORT,
     private val minFreeBytes: Long = 100L shl 20,
+    /** 6-digit PIN required (header X-CB-Pin or ?pin=) on every route but GET / and GET /api/hello. null = open (tests). */
+    pin: String? = null,
+    private val guard: PinGuard? = pin?.let { PinGuard(it) },
 ) : NanoHTTPD(port) {
 
     init { dir.mkdirs() }
@@ -38,6 +41,10 @@ class ReceiverServer(
     private fun route(s: IHTTPSession): Response {
         val p = s.parameters.mapValues { it.value.firstOrNull().orEmpty() }
         val path = s.uri
+        if (s.method == Method.GET && path == "/") return page()
+        if (s.method == Method.GET && path == "/api/hello")
+            return ok("""{"app":"castbridge-tv","v":${q(VERSION)},"pinRequired":${guard != null}}""")
+        denied(s, p)?.let { return it }
         return when {
             // NanoHTTPD already percent-decoded the URI. A rejected upload leaves its body unread on the
             // socket, which would corrupt the next keep-alive request: close the connection instead.
@@ -64,6 +71,22 @@ class ReceiverServer(
             else -> json(Response.Status.NOT_FOUND, """{"error":"not found"}""")
         }
     }
+
+    /** Null when the request may proceed, else 401 (with Connection: close: an unread PUT body would corrupt keep-alive). */
+    private fun denied(s: IHTTPSession, p: Map<String, String>): Response? {
+        val g = guard ?: return null
+        val ip = s.remoteIpAddress ?: "?"
+        val given = s.headers["x-cb-pin"] ?: p["pin"]
+        return when (g.check(ip, given)) {
+            PinGuard.Result.OK -> null
+            PinGuard.Result.BAD -> json(Response.Status.UNAUTHORIZED, """{"error":"bad pin"}""")
+            PinGuard.Result.LOCKED -> json(Response.Status.UNAUTHORIZED,
+                """{"error":"locked","retryAfter":${g.retryAfterSeconds(ip)}}""")
+        }?.also { it.addHeader("Connection", "close") }
+    }
+
+    private fun page(): Response = newFixedLengthResponse(Response.Status.OK, "text/html; charset=utf-8",
+        "<!doctype html><meta charset=utf-8><title>CastBridge TV</title><h1>CastBridge TV</h1>")
 
     private fun upload(s: IHTTPSession, rawName: String, p: Map<String, String>): Response {
         val name = safeName(rawName) ?: return bad("bad name")
@@ -125,6 +148,7 @@ class ReceiverServer(
 
     companion object {
         const val PORT = 8765
+        const val VERSION = "0.3"
         const val SERVICE_TYPE = "_castbridge._tcp."
         private const val PART = ".part"
         private val INSUFFICIENT_STORAGE = object : Response.IStatus {
