@@ -127,4 +127,21 @@ class TvSshServerTest {
             assertTrue(out.toString("UTF-8").contains("interactive-ok"), out.toString("UTF-8"))
         }
     }
+
+    @Test fun terminalClientGetsEchoAndCarriageReturnEnter() {
+        val kp = edKey(); authorize(kp); server.start()
+        session(kp).use { s ->
+            s.auth().verify(5, TimeUnit.SECONDS)
+            val out = ByteArrayOutputStream()
+            val ch = s.createShellChannel(); ch.setPtyType("xterm"); ch.setOut(out); ch.setErr(out)
+            val pipe = java.io.PipedOutputStream(); ch.setIn(java.io.PipedInputStream(pipe))
+            ch.open().verify(5, TimeUnit.SECONDS)
+            pipe.write("echo pty-ok\r".toByteArray()); pipe.flush(); Thread.sleep(500)
+            pipe.write("exit\r".toByteArray()); pipe.flush()
+            ch.waitFor(EnumSet.of(ClientChannelEvent.CLOSED), 10_000)
+            val text = out.toString("UTF-8")
+            assertTrue(text.contains("echo pty-ok"), "typed text is echoed: $text")
+            assertTrue(Regex("pty-ok\r\n").containsMatchIn(text), "output uses CRLF: $text")
+        }
+    }
 }

@@ -61,6 +61,7 @@ class PlayerActivity : Activity(), Player, Device {
     private var bt: BtServer? = null
     private var wd: WifiDirectGroup? = null
     private var usb: UsbImporter? = null
+    private var ssh: SshControl? = null
     private lateinit var prefs: TvPrefs
     private lateinit var videosDir: File
     private val statuses = java.util.concurrent.ConcurrentHashMap<String, String>()
@@ -93,6 +94,7 @@ class PlayerActivity : Activity(), Player, Device {
         bt = BtServer(this, dir, guard) { setStatus("1-bt", it) }
         wd = WifiDirectGroup(this, prefs) { setStatus("2-wd", it) }
         usb = UsbImporter(this, dir) { setStatus("3-usb", it) }
+        ssh = SshControl(this) { setStatus("4-ssh", it) }
         requestRuntimePermissions()
         showIdle()
     }
@@ -238,6 +240,11 @@ class PlayerActivity : Activity(), Player, Device {
         items += "USB : importer les vidéos des clés détectées" to { usbMessage(usb?.importFromVolumes()) }
         items += "USB : choisir un dossier de la clé…" to { usbMessage(usb?.launchPicker(REQ_TREE)) }
         if (usb?.isRunning() == true) items += "USB : annuler l'import en cours" to { usb?.cancel() }
+        items += (if (ssh?.running == true) "SSH : désactiver" else "SSH : activer (administration à distance, clés autorisées seulement)") to {
+            val c = ssh
+            if (c?.running == true) { c.disable(); flash("SSH désactivé") }
+            else Thread { runCatching { c?.enable() }.onFailure { e -> main.post { flash("SSH impossible : ${e.message}") } } }.start()
+        }
         AlertDialog.Builder(this).setTitle("CastBridge TV")
             .setItems(items.map { it.first }.toTypedArray()) { _, i -> items[i].second() }
             .setNegativeButton("Fermer", null).show()
@@ -252,6 +259,7 @@ class PlayerActivity : Activity(), Player, Device {
 
     /** Extra authenticated API routes (USB import status/trigger). */
     private fun extraApi(path: String, method: String, params: Map<String, String>): ApiReply? = when {
+        path.startsWith("/api/ssh") -> ssh?.api(path, method, params)
         path == "/api/usb" && method == "GET" -> ApiReply(200, usbJson())
         path == "/api/usb/import" && method == "POST" -> {
             val m = usb?.importFromVolumes() ?: "indisponible"
@@ -439,6 +447,7 @@ class PlayerActivity : Activity(), Player, Device {
         runCatching { multicastLock?.release() }
         bt?.stop()
         wd?.stop()
+        ssh?.stop()
         server?.stop()
         main.removeCallbacksAndMessages(null)     // no Handler callback may outlive the activity
         releasePlayer()

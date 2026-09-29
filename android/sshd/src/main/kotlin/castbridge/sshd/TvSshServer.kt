@@ -5,7 +5,11 @@ import castbridge.core.ssh.FailureTracker
 import castbridge.core.ssh.Lan
 import castbridge.core.ssh.SshKey
 import castbridge.core.ssh.SshPolicy
+import org.apache.sshd.common.NamedFactory
 import org.apache.sshd.common.config.keys.KeyUtils
+import org.apache.sshd.common.kex.BuiltinDHFactories
+import org.apache.sshd.server.ServerBuilder
+import org.apache.sshd.server.shell.ShellFactory
 import org.apache.sshd.common.config.keys.PublicKeyEntry
 import org.apache.sshd.common.keyprovider.KeyPairProvider
 import org.apache.sshd.common.session.Session
@@ -52,7 +56,11 @@ class TvSshServer(
     private val keysFile get() = File(dataDir, "authorized_keys")
     private val hostKeyFile get() = File(dataDir, "ssh_host_key")
 
-    init { dataDir.mkdirs() }
+    init {
+        dataDir.mkdirs()
+        // MINA resolves "~" from this property, which Android leaves unset.
+        if (System.getProperty("user.home").isNullOrBlank()) System.setProperty("user.home", dataDir.absolutePath)
+    }
 
     val running: Boolean @Synchronized get() = sshd?.isStarted == true
 
@@ -89,7 +97,11 @@ class TvSshServer(
     @Synchronized fun start(idleMinutes: Int? = null) {
         if (running) { policy.enable(idleMinutes); return }
         policy.enable(idleMinutes)
-        val s = SshServer.setUpDefaultServer()
+        // Only key exchanges every Android JCE offers: curve25519 is missing there and MINA's own probing of it
+        // touches JMX classes that Android does not have (so the default builder cannot even be created).
+        val s = ServerBuilder.builder().keyExchangeFactories(NamedFactory.setUpTransformedFactories(true,
+            listOf(BuiltinDHFactories.ecdhp256, BuiltinDHFactories.ecdhp384, BuiltinDHFactories.ecdhp521,
+                BuiltinDHFactories.dhgex256, BuiltinDHFactories.dhg14_256), ServerBuilder.DH2KEX)).build()
         s.port = port
         s.keyPairProvider = hostKeyProvider() as KeyPairProvider
         s.userAuthFactories = listOf<UserAuthFactory>(UserAuthPublicKeyFactory.INSTANCE)   // no passwords, ever
@@ -101,7 +113,8 @@ class TvSshServer(
             ok
         }
         s.forwardingFilter = RejectAllForwardingFilter.INSTANCE
-        s.shellFactory = ProcessShellFactory(shell, shell, "-i")
+        // No pty on Android: PtyShell emulates echo/line editing when the client asks for a terminal.
+        s.shellFactory = ShellFactory { PtyShell(listOf(shell, "-i"), sftpRoot) }
         s.commandFactory = ScpCommandFactory.Builder().withDelegate(CommandFactory { ch, cmd ->
             ProcessShellFactory(cmd, shell, "-c", cmd).createShell(ch)
         }).build()
