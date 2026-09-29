@@ -65,9 +65,10 @@ class BtGatewayService : Service() {
                 _state.value = "La TV utilise l'Internet du téléphone"
                 notify("La TV utilise l'Internet du téléphone")
                 Exit(Mux(s.inputStream, s.outputStream), pin, connect = ::openOutbound, log = { Log.i(TAG, it) }, diag = ::runDiag).run()
-            } catch (e: IOException) {
+            } catch (e: Exception) {
+                Log.w(TAG, "gateway link ended", e)
                 if (e.message?.contains("PIN") == true) { _state.value = "Code PIN refusé par la TV"; stopping = true; break }
-                if (!stopping) _state.value = "TV injoignable en Bluetooth, nouvel essai…"
+                if (!stopping) _state.value = "Liaison perdue (${e.javaClass.simpleName}: ${e.message}), nouvel essai…"
             } finally { runCatching { sock?.close() } }
             if (!stopping) { Thread.sleep(backoff); backoff = minOf(backoff * 2, 15_000) }
         }

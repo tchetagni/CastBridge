@@ -329,7 +329,7 @@ class PlayerActivity : Activity(), Player, Device {
 
     private fun onPermissionsReady() {
         bt?.start()
-        gateway = gateway ?: BtGatewayHost(this, guard) { setStatus("6-gw", it) }
+        gateway = gateway ?: BtGatewayHost(this, guard) { st -> setStatus("6-gw", st); main.post { showNetBadge(st) } }
         gateway?.start()
         // Wi-Fi Direct is opt-in (MENU): creating a group can disturb the TV's own Wi-Fi connection.
         if (prefs.getBool("wd_enabled", false) && wd?.hasPermission() == true) wd?.start()
@@ -392,6 +392,15 @@ class PlayerActivity : Activity(), Player, Device {
         }
         for ((intent, msg) in tries) if (runCatching { startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) }.isSuccess) return msg
         return "Réglages inaccessibles sur cette TV : ouvrez-les avec la télécommande de la TV."
+    }
+
+    /** Always-visible badge (also over a playing video) while the TV's Internet goes through the phone. */
+    private fun showNetBadge(text: String?) {
+        val b = findViewById<TextView>(R.id.netBadge) ?: return
+        if (text == null) { b.animate().alpha(0f).setDuration(300).withEndAction { b.visibility = View.GONE }; return }
+        b.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_net_bt, 0, 0, 0)
+        b.text = text.replace("Internet via le téléphone", "Internet via")
+        if (b.visibility != View.VISIBLE) { b.alpha = 0f; b.visibility = View.VISIBLE; b.animate().alpha(1f).setDuration(300) }
     }
 
     // ---- Internet diagnostics panel (ping / traceroute), readable from the sofa ----
