@@ -1,4 +1,3 @@
-plugins { kotlin("jvm") version "2.1.0" }  // pure-logic module; Android-dependent code lives in :sender/:receiver
-repositories { mavenCentral() }
-
+plugins { kotlin("jvm") }  // pure-logic module shared by the Android apps
+kotlin { jvmToolchain(17) }
 dependencies { testImplementation(kotlin("test")) }
