@@ -289,6 +289,11 @@ class DownloadsClientTest {
         } finally { server.stop() }
     }
 
+    @Test fun adminPageHasTheDownloadsSection() {
+        val html = ReceiverServer::class.java.getResourceAsStream("/castbridge/admin.html")!!.readBytes().toString(Charsets.UTF_8)
+        assertTrue(html.contains("id=\"dl\"") && html.contains("/api/downloads/add") && html.contains("/api/downloads/upload"))
+    }
+
     @Test fun findsTheLinkInSharedText() {
         assertEquals("https://example.org/a.mkv", DownloadsClient.findLink("Regarde ça : https://example.org/a.mkv."))
         assertEquals("magnet:?xt=urn:btih:abc&dn=x", DownloadsClient.findLink("magnet:?xt=urn:btih:abc&dn=x"))

@@ -108,6 +108,21 @@ dt{color:var(--mut)}dd{margin:0;word-break:break-all}
   </div>
 </section>
 
+<section id="dl">
+  <h2>Téléchargements (la TV télécharge elle-même)</h2>
+  <div id="dlEngine" class="mut"></div>
+  <div id="dlWarn" style="display:none"><p id="dlWarnText"></p><button class="pri" id="dlAccept">J'ai compris</button></div>
+  <div class="row"><input id="dlUrl" class="grow" type="text" placeholder="https://…, ftp://…, sftp://… ou magnet:?…" autocomplete="off"><button class="pri" id="dlAdd">Télécharger</button></div>
+  <div class="row" style="margin-top:6px"><span class="mut">Fichier .torrent / .metalink :</span><input id="dlFile" type="file" accept=".torrent,.metalink,.meta4"></div>
+  <div id="dlList"></div>
+  <div id="dlDone"></div>
+  <details style="margin-top:10px"><summary class="mut">Réglages et licence</summary>
+    <div class="row" style="margin-top:8px"><span class="mut">Vitesse max (ko/s, 0 = sans limite)</span><input id="dlDown" type="text" inputmode="numeric" style="width:100px">
+      <label><input type="checkbox" id="dlSeed"> Partager un torrent terminé (ratio 1, 2 h max)</label><button id="dlSave">Enregistrer</button></div>
+    <p id="dlAbout" class="mut"></p>
+  </details>
+</section>
+
 <section id="extra"></section>
 <p id="msg" class="err"></p>
 </div>
@@ -331,6 +346,83 @@ $("pick").onchange = async () => {
 };
 
 if (PIN) { $("pin").value = PIN; login(); }
+</script>
+<script>
+"use strict";
+// Downloads (aria2 on the TV, relayed by /api/downloads/* behind the PIN). Self-contained: uses $, q, fmtSize, post and PIN above.
+(function () {
+  let dlBusy = false;
+  async function dl(method, path, body) {
+    const r = await fetch(path, { method, body, headers: { "X-CB-Pin": PIN } });
+    const t = await r.text(); let j = {}; try { j = t ? JSON.parse(t) : {}; } catch (e) {}
+    if (!r.ok) throw new Error(j.message || j.error || ("HTTP " + r.status));
+    return j;
+  }
+  const say = t => { $("dlEngine").textContent = t || ""; };
+  const speed = b => b >= 1048576 ? (b / 1048576).toFixed(1) + " Mo/s" : Math.round(b / 1024) + " ko/s";
+  const eta = s => s < 0 ? "" : s >= 3600 ? Math.floor(s / 3600) + " h " + Math.floor(s % 3600 / 60) + " min" : s >= 60 ? Math.floor(s / 60) + " min" : s + " s";
+  const mkBtn = (t, f, cls) => { const b = document.createElement("button"); b.textContent = t; if (cls) b.className = cls; b.onclick = f; return b; };
+  function row(t) {
+    const d = document.createElement("div"); d.className = "file";
+    const n = document.createElement("div"); n.className = "n"; n.textContent = t.name;
+    const parts = [t.label];
+    if (t.total > 0) parts.push(fmtSize(t.done) + " / " + fmtSize(t.total) + " (" + Math.floor(t.done * 100 / t.total) + " %)");
+    if (t.down > 0) parts.push(speed(t.down));
+    if (t.eta >= 0) parts.push("reste " + eta(t.eta));
+    if (t.connections > 0) parts.push(t.connections + (t.kind === "magnet" || t.kind === "torrent" ? " sources" : " connexions"));
+    parts.push(t.volumeLabel);
+    const s = document.createElement("div"); s.className = (t.state === "error" || t.state.startsWith("waiting_")) ? "err" : "s";
+    s.textContent = parts.join(" · ") + (t.error ? " — " + t.error : "");
+    const bar = document.createElement("progress"); bar.max = Math.max(t.total, 1); bar.value = t.done;
+    n.append(s, bar); d.append(n);
+    const act = p => async () => { try { await dl("POST", p, ""); load(); } catch (e) { say(e.message); } };
+    if (t.canPause) d.append(mkBtn("Pause", act("/api/downloads/pause?id=" + q(t.id))));
+    if (t.canResume) d.append(mkBtn(t.state === "error" ? "Réessayer" : "Reprendre", act("/api/downloads/resume?id=" + q(t.id))));
+    if (t.state === "queued" || t.state === "paused") d.append(mkBtn("En premier", act("/api/downloads/priority?move=top&id=" + q(t.id))));
+    d.append(mkBtn("Retirer", act("/api/downloads/remove?files=0&id=" + q(t.id))));
+    d.append(mkBtn("Supprimer + fichiers", () => { if (confirm("Supprimer « " + t.name + " » et ses fichiers ?")) act("/api/downloads/remove?files=1&id=" + q(t.id))(); }, "del"));
+    return d;
+  }
+  function doneRow(f) {
+    const d = document.createElement("div"); d.className = "file";
+    const n = document.createElement("div"); n.className = "n"; n.textContent = "✓ " + f.name;
+    const s = document.createElement("div"); s.className = "s"; s.textContent = fmtSize(f.size) + " · " + f.volumeLabel + (f.files.length ? "" : " · aucune vidéo");
+    n.append(s); d.append(n);
+    if (f.files.length) d.append(mkBtn("Regarder", async () => { try { await post("/api/play?name=" + q(f.files[0])); } catch (e) { say(e.message); } }, "pri"));
+    d.append(mkBtn("Retirer", async () => { await dl("POST", "/api/downloads/remove?files=0&id=" + q(f.id), ""); load(); }));
+    return d;
+  }
+  async function load() {
+    if (!PIN || $("app").style.display !== "block" || dlBusy) return;
+    dlBusy = true;
+    try {
+      const j = await dl("GET", "/api/downloads");
+      say(!j.engine.available ? "Moteur de téléchargement non inclus dans cette version de l'app TV." : (j.engine.message || (j.global.down > 0 ? "↓ " + speed(j.global.down) : "")));
+      $("dlWarn").style.display = j.warningAccepted ? "none" : "block"; $("dlWarnText").textContent = j.warning;
+      $("dlList").replaceChildren(...j.tasks.map(row));
+      const head = j.done.length ? [Object.assign(document.createElement("h2"), { textContent: "Terminés" })] : [];
+      $("dlDone").replaceChildren(...head, ...j.done.map(doneRow));
+      if (document.activeElement !== $("dlDown")) $("dlDown").value = Math.round(j.global.downLimit / 1024);
+      $("dlSeed").checked = j.global.seeding;
+    } catch (e) { if (!/pin/i.test(e.message)) say(e.message); }
+    dlBusy = false;
+  }
+  $("dlAccept").onclick = async () => { await dl("POST", "/api/downloads/accept", ""); load(); };
+  $("dlAdd").onclick = async () => {
+    const u = $("dlUrl").value.trim(); if (!u) return;
+    try { const r = await dl("POST", "/api/downloads/add?url=" + q(u), ""); $("dlUrl").value = ""; say(r.note || "Ajouté."); load(); } catch (e) { say(e.message); }
+  };
+  $("dlUrl").onkeydown = e => { if (e.key === "Enter") $("dlAdd").onclick(); };
+  $("dlFile").onchange = async () => {
+    const f = $("dlFile").files[0]; $("dlFile").value = ""; if (!f) return;
+    try { const r = await dl("POST", "/api/downloads/upload?name=" + q(f.name), f); say(r.note || "Ajouté."); load(); } catch (e) { say(e.message); }
+  };
+  $("dlSave").onclick = async () => {
+    try { await dl("POST", "/api/downloads/settings?downLimit=" + (parseInt($("dlDown").value, 10) || 0) * 1024 + "&seeding=" + ($("dlSeed").checked ? 1 : 0), ""); load(); } catch (e) { say(e.message); }
+  };
+  document.querySelector("#dl details").ontoggle = async () => { try { $("dlAbout").textContent = (await dl("GET", "/api/downloads/about")).text; } catch (e) {} };
+  setInterval(load, 3000); setTimeout(load, 500);
+})();
 </script>
 </body>
 </html>

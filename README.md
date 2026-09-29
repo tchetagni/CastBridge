@@ -39,6 +39,17 @@ refusée par le système de permissions de l'agent (surface d'exécution distant
 propriétaire. Aucun code SSH n'est présent. Idem pour un binaire busybox : aucun binaire natif n'est embarqué.
 L'administration à distance passe par l'API HTTP authentifiée par PIN.
 
+## Téléchargements sur la TV (aria2)
+
+La TV télécharge elle-même liens web (HTTP/HTTPS/FTP/SFTP multi-connexions), torrents (`magnet:`, `.torrent`) et Metalink,
+pilotée depuis le téléphone (« Téléchargements sur la TV », ou Partager > Télécharger sur la TV), la télécommande (MENU >
+Téléchargements) ou la page web ; les fichiers terminés vont dans la bibliothèque. Garde toujours 1 Go libre, met en pause
+si la clé USB est retirée et reprend à son retour. Voir **`docs/DOWNLOADS.md`**.
+
+Le moteur est le vrai **aria2 1.37.0** (GPL-2.0-or-later), compilé depuis ses sources officielles par
+`tools/build-aria2-android.sh` (versions et SHA-256 épinglés ; détail de la compilation livrée : `tools/aria2-android-build.txt`).
+Ce script et les archives qu'il désigne sont la source correspondante exigée par la GPL : ils accompagnent tout APK distribué.
+
 ## Compilation
 
 Gradle 8.13 / 8.14 installé localement (pas de wrapper dans le dépôt), SDK 35 :
