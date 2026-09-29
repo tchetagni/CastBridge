@@ -8,7 +8,9 @@ jobs:
       - uses: actions/setup-java@v4
         with: { distribution: temurin, java-version: 17 }
       - uses: android-actions/setup-android@v3
-      - run: cd android && ./gradlew :core:test :sender:assembleDebug
+      - uses: gradle/actions/setup-gradle@v4
+        with: { gradle-version: 8.14.3 }
+      - run: cd android && gradle :core:test :sender:assembleDebug
       - uses: actions/upload-artifact@v4
         with:
           name: castbridge-sender-debug
