@@ -32,12 +32,11 @@ Une TV DLNA pure lit la vidéo **en direct depuis le téléphone** : si le tél�
 Seul le mode CastBridge TV (données stockées sur la TV) y échappe. L'écran DLNA propose donc « Continuer sur la TV sans réseau » : copie du même fichier
 vers une TV CastBridge découverte, reprise à la position DLNA courante dès que la TV a assez d'avance, puis arrêt du flux DLNA.
 
-### Non livré : accès SSH / shell distant
+### Accès SSH / shell distant
 
-Le serveur SSH embarqué (MINA SSHD, shell, SFTP) n'a **pas** été implémenté dans cette branche : sa construction a été
-refusée par le système de permissions de l'agent (surface d'exécution distante) et doit être décidée explicitement par le
-propriétaire. Aucun code SSH n'est présent. Idem pour un binaire busybox : aucun binaire natif n'est embarqué.
-L'administration à distance passe par l'API HTTP authentifiée par PIN.
+Serveur SSH embarqué (module `:sshd`, MINA SSHD : shell, SFTP), désactivé par défaut, clés publiques uniquement : voir `docs/ADMIN.md` §9.
+**Sans réseau commun**, SSH passe aussi par un tunnel Bluetooth (TV <-> passerelle du téléphone, ou `tools/bt-ssh-bridge.py` sous Linux) : `docs/ADMIN.md` §10.
+Aucun binaire natif (busybox...) n'est embarqué.
 
 ## Compilation
 

@@ -30,6 +30,8 @@
             android:foregroundServiceType="dataSync" />
         <service android:name=".BtUploadService" android:exported="false"
             android:foregroundServiceType="connectedDevice" />
+        <service android:name=".BtSshGatewayService" android:exported="false"
+            android:foregroundServiceType="connectedDevice" />
         <service android:name=".ServerService" android:exported="false"
             android:foregroundServiceType="dataSync" />
     </application>

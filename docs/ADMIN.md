@@ -160,7 +160,7 @@ réseau, puis utiliser `http://192.168.49.1:8765`.
 - Le volume peut être ignoré par une TV à volume fixe (HDMI-CEC / ampli externe).
 - La batterie est `null` sur une TV (pas de batterie).
 - Sans PIN valide, aucun accès aux fichiers. Le PIN n'est jamais journalisé. Ne pas exposer le port 8765 sur Internet.
-- **Accès SSH / shell** : demandé mais **non livré** dans cette version (voir README, section « Non livré »).
+- **Accès SSH / shell** : voir §9 (désactivé par défaut, clés publiques seulement, réseau local ou tunnel Bluetooth).
 
 ## 8. Pour un agent (checklist)
 
@@ -169,3 +169,52 @@ réseau, puis utiliser `http://192.168.49.1:8765`.
 3. Envoyer `X-CB-Pin` sur chaque appel ; sur `401` ne pas insister (verrouillage 60 s).
 4. Avant un gros envoi : `GET /api/info` (`free`), puis `PUT /upload` avec reprise sur `length`.
 5. Toujours confirmer avec l'humain avant `delete`, `rename` ou `restart`.
+
+## 9. SSH (administration par shell)
+
+Serveur SSH embarqué (Apache MINA SSHD, module `:sshd`), **désactivé par défaut** : MENU de la TV > « SSH : activer », ou `POST /api/ssh/enable[?minutes=N]`
+(derrière le PIN). Port **2222**, authentification **par clé publique uniquement** (`POST /api/ssh/key?key=<ligne authorized_keys>`, `POST /api/ssh/key/remove?fp=`,
+`GET /api/ssh`), clients du réseau local seulement, verrouillage 60 s après 5 échecs, pas de redirection de ports, arrêt automatique après 30 min sans session
+(`idleMinutes`). Le shell tourne avec l'uid de l'app (pas de root) ; SFTP/SCP confinés au dossier de l'app. L'empreinte de la clé d'hôte s'affiche sur l'écran
+d'attente de la TV : vérifiez-la à la première connexion.
+
+```sh
+curl -sS -H "X-CB-Pin: $PIN" -X POST "$TV/api/ssh/key" --data-urlencode "key=$(cat ~/.ssh/id_ed25519.pub)" -G
+curl -sS -H "X-CB-Pin: $PIN" -X POST "$TV/api/ssh/enable?minutes=60"
+ssh -p 2222 tv@192.168.0.117          # le nom d'utilisateur est libre
+```
+
+## 10. SSH sans réseau (Bluetooth)
+
+Pour garder l'accès SSH quand le téléphone/l'ordinateur et la TV **ne partagent aucun réseau**. Principe : un **tunnel d'octets** par Bluetooth ; SSH passe
+dedans **inchangé de bout en bout** (chiffrement, clé d'hôte, authentification par clé : rien n'est déchiffré ni contourné en chemin).
+
+```
+Termux / ordinateur --TCP--> téléphone 127.0.0.1:2222 --RFCOMM « CastBridge SSH »--> TV --TCP--> 127.0.0.1:2222 (serveur SSH)
+ordinateur Linux (ProxyCommand) --------------RFCOMM « CastBridge SSH »--> TV --TCP--> 127.0.0.1:2222
+```
+
+- **TV** : quand SSH est activé, un **second service RFCOMM** « CastBridge SSH » (UUID `7c5e3b9a-4d2f-4c61-9b0e-cb0000000002`, distinct du service fichiers `…0001`)
+  accepte les appareils **appairés** ; chaque connexion ouvre une connexion TCP vers `127.0.0.1:2222` et relaie dans les deux sens (tampons de 32 Ko, deux fils,
+  fermeture des deux côtés dès que l'un se termine), **2 connexions simultanées au plus**. Le service s'arrête avec SSH (désactivation ou délai d'inactivité).
+  Bandeau sur l'écran d'attente : « SSH par Bluetooth : prêt » / « connecté (nom de l'appareil) » ; `GET /api/ssh` -> `bluetooth: {listening, active:[noms]}`.
+- **Verrouillage par appareil** : toutes les connexions tunnelisées arrivent de `127.0.0.1` ; sans précaution, 5 échecs d'un appareil verrouilleraient tous les
+  autres. Le tunnel choisit son port source local, l'inscrit dans un registre « port local -> `bt:<adresse>` » **avant** de se connecter, et le serveur SSH compte
+  les échecs par cette identité (`PeerRegistry`, tests `BtTunnelSshTest.lockoutIsPerBluetoothDevice`).
+- **Téléphone** : app CastBridge > CastBridge TV > Bluetooth > « Passerelle SSH Bluetooth » : choisir la TV appairée, Démarrer (service de premier plan). Le
+  téléphone écoute sur `127.0.0.1:2222` ; option **désactivée par défaut** « Exposer aussi sur le réseau local / point d'accès du téléphone » (avertissement :
+  tout appareil de ces réseaux atteint alors le SSH de la TV, qui exige toujours une clé). Puis :
+  - depuis Termux sur le téléphone : `ssh -p 2222 tv@127.0.0.1` ;
+  - depuis un ordinateur connecté au point d'accès du téléphone (option cochée) : `ssh -p 2222 tv@<adresse du téléphone affichée>`.
+- **Ordinateur Linux** (pile BlueZ, appairé avec la TV) : `tools/bt-ssh-bridge.py` (bibliothèque standard Python : `socket.AF_BLUETOOTH`/`BTPROTO_RFCOMM`) comme
+  `ProxyCommand` :
+  ```sh
+  ssh -o ProxyCommand="python3 tools/bt-ssh-bridge.py AA:BB:CC:DD:EE:FF" tv@castbridge
+  ```
+  Le canal RFCOMM est trouvé par `--channel N`, sinon `sdptool`, sinon en sondant les canaux 1 à 30 (le serveur SSH parle le premier : « SSH-… ») ; il est mis en cache
+  dans `~/.cache/castbridge-bt-ssh.json`. **macOS / Windows** : Python n'y a pas de socket RFCOMM dans sa bibliothèque standard : passer par la passerelle du téléphone
+  (point d'accès du téléphone + option d'exposition).
+- **Débit attendu** : celui du Bluetooth classique, environ **100 à 300 ko/s** (moins à travers les murs) : confortable pour un shell ou des commandes, **lent pour
+  SFTP/scp** (un fichier de 100 Mo prend 6 à 15 min) : pour les gros fichiers, utiliser le Wi-Fi ou l'envoi Bluetooth de l'app.
+- **Non validé sans la TV** : ouverture du second service RFCOMM par GaiaOS (deux services simultanés), débit réel, comportement si le téléphone et la TV sont
+  aussi connectés en audio Bluetooth.

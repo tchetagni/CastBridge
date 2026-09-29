@@ -140,6 +140,7 @@ fun BtScreen() {
             is ResumableUpload.State.Failed -> Text("Échec : ${u.reason}", color = MaterialTheme.colorScheme.error)
             null -> {}
         }
+        BtSshGatewayPanel()
     }
 }
 

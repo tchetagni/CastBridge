@@ -120,7 +120,7 @@ class PlayerActivity : Activity(), Player, Device {
         bt = BtServer(this, dir, guard) { setStatus("1-bt", it) }
         wd = WifiDirectGroup(this, prefs) { setStatus("2-wd", it) }
         usb = UsbImporter(this, dir) { setStatus("3-usb", it) }
-        ssh = SshControl(this) { setStatus("4-ssh", it) }
+        ssh = SshControl(this, { setStatus("4-ssh", it) }, { setStatus("4-ssh-bt", it) })
         updater = UpdateInstaller(this, { registry.volumes().filter { it.kind != VolumeKind.SAF }.map { it.dir } }) { m -> setStatus("5-update", m); main.post { flash(m) } }
         requestRuntimePermissions()
         registerStorageEvents()

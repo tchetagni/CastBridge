@@ -32,6 +32,8 @@ object BtProtocol {
     const val MAGIC = "CBT1"
     /** RFCOMM service UUID shared by the TV and the phone app. */
     const val SERVICE_UUID = "7c5e3b9a-4d2f-4c61-9b0e-cb0000000001"
+    /** Second RFCOMM service: a plain byte tunnel to the TV's SSH server (see castbridge.core.ssh.SshTunnel). */
+    const val SSH_SERVICE_UUID = "7c5e3b9a-4d2f-4c61-9b0e-cb0000000002"
     const val OK = 0
     const val ERR_MAGIC = 1
     const val ERR_PIN = 2
