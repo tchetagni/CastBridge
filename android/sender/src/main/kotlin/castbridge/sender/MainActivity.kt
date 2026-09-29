@@ -29,7 +29,7 @@ class MainActivity : ComponentActivity() {
 
     private fun startServer() {
         val i = Intent(this, ServerService::class.java)
-        if (Build.VERSION.SDK_INT >= 26) startForegroundService(i) else startService(i)
+        runCatching { startForegroundService(i) }
     }
 
     @Composable
@@ -49,7 +49,7 @@ class MainActivity : ComponentActivity() {
         val notifPerm = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) {}
         val picker = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
             if (uri != null) {
-                contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                runCatching { contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION) }
                 fileUri = uri
                 fileName = contentResolver.query(uri, null, null, null, null)?.use { c ->
                     if (c.moveToFirst()) c.getString(c.getColumnIndexOrThrow(OpenableColumns.DISPLAY_NAME)) else null
@@ -124,7 +124,11 @@ class MainActivity : ComponentActivity() {
                 Button(enabled = playing, onClick = { scope.launch { runCatching { Upnp.pause(selected!!) } } }) { Text("Pause") }
                 Button(enabled = playing, onClick = { scope.launch { runCatching { Upnp.resume(selected!!) } } }) { Text("Lecture") }
                 Button(enabled = playing, onClick = {
-                    scope.launch { runCatching { Upnp.stop(selected!!) }; playing = false; pos = 0; status = "Arrêté" }
+                    scope.launch {
+                        runCatching { Upnp.stop(selected!!) }
+                        playing = false; pos = 0; status = "Arrêté"
+                        stopService(Intent(this@MainActivity, ServerService::class.java))
+                    }
                 }) { Text("Stop") }
             }
         }
