@@ -327,6 +327,24 @@ class PlayerActivity : Activity(), TvService.Screen {
         }
     }
 
+    /**
+     * PNG of this app's window (what the viewer sees, minus the video surface which PixelCopy of the window does include
+     * on most devices). Called from an HTTP thread; waits for the main-thread copy. null if it fails.
+     */
+    fun capture(): ByteArray? {
+        val v = window?.decorView ?: return null
+        if (v.width == 0 || v.height == 0) return null
+        val bmp = android.graphics.Bitmap.createBitmap(v.width, v.height, android.graphics.Bitmap.Config.ARGB_8888)
+        val done = CountDownLatch(1); var ok = false
+        main.post {
+            runCatching {
+                android.view.PixelCopy.request(window, bmp, { r -> ok = r == android.view.PixelCopy.SUCCESS; done.countDown() }, main)
+            }.onFailure { runCatching { v.draw(android.graphics.Canvas(bmp)); ok = true }; done.countDown() }
+        }
+        if (!done.await(5, TimeUnit.SECONDS) || !ok) { bmp.recycle(); return null }
+        return java.io.ByteArrayOutputStream().use { o -> bmp.compress(android.graphics.Bitmap.CompressFormat.PNG, 100, o); bmp.recycle(); o.toByteArray() }
+    }
+
     /** Pick one of several actions with the remote (sub-menu of a home icon). */
     private fun choose(title: String, items: List<Pair<String, () -> Unit>>) {
         if (items.isEmpty()) return

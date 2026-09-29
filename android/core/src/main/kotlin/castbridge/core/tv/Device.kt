@@ -46,7 +46,9 @@ interface Device {
     fun restartApp()
 }
 
-data class ApiReply(val status: Int, val json: String)
+data class ApiReply(val status: Int, val json: String, val bytes: ByteArray? = null, val mime: String = "application/json") {
+    companion object { fun binary(bytes: ByteArray, mime: String) = ApiReply(200, "", bytes, mime) }
+}
 
 /** Plug-in routes under /api/, called after PIN authentication. [method] is "GET", "POST"... */
 fun interface ApiExtension {

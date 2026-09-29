@@ -242,6 +242,8 @@ class ReceiverServer(
             path == "/api/library" && s.method == Method.GET -> ok(libraryJson())
             path == "/api/player/tracks" && s.method == Method.GET -> ok(tracksJson())
             path == "/api/thumb" && s.method == Method.GET -> named(p) { thumb(it, p["volume"]) }
+            ext != null && ext.bytes != null -> newFixedLengthResponse(status(ext.status), ext.mime, java.io.ByteArrayInputStream(ext.bytes), ext.bytes.size.toLong())
+                .also { it.addHeader("Cache-Control", "no-store") }
             ext != null -> json(status(ext.status), ext.json)
             s.method != Method.POST -> json(Response.Status.METHOD_NOT_ALLOWED, """{"error":"use POST"}""")
             path == "/api/library/watched" -> named(p) { setWatched(it, p["watched"] != "0" && p["watched"] != "false") }
