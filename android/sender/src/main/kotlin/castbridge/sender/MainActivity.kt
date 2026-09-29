@@ -51,7 +51,7 @@ class MainActivity : ComponentActivity() {
                     }
                 }
             },
-        ) { pad -> Box(Modifier.padding(pad).fillMaxSize()) { if (tab == 0) App() else TvScreen() } }
+        ) { pad -> Box(Modifier.padding(pad).fillMaxSize()) { if (tab == 0) App() else TvHub() } }
     }
 
     private fun startServer() {
@@ -159,6 +159,13 @@ class MainActivity : ComponentActivity() {
                 Button(enabled = selected != null && fileUri != null, onClick = ::cast,
                     modifier = Modifier.fillMaxWidth().padding(16.dp)) {
                     Icon(Icons.Filled.Cast, null); Spacer(Modifier.width(8.dp)); Text("Diffuser")
+                }
+            }
+            if (playing) HandoffButton(fileUri, fileName, pos, dur) {
+                scope.launch {
+                    runCatching { Upnp.stop(selected!!) }
+                    playing = false; paused = false; showPlayer = false; pos = 0; status = "Lecture poursuivie sur la TV CastBridge"
+                    stopService(Intent(this@MainActivity, ServerService::class.java))
                 }
             }
         }
