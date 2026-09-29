@@ -87,6 +87,16 @@ class ProgressiveMathTest {
         assertEquals(600_000, Progressive.reachableMs(600_000, 1000, 1000))
         assertEquals(0, Progressive.reachableMs(0, 5, 10))
     }
+    @Test fun handoff() {
+        assertEquals(500, Progressive.bytesForPosition(1000, 60_000, 30_000))
+        assertEquals(1000, Progressive.bytesForPosition(1000, 60_000, 99_000))
+        assertEquals(1000, Progressive.bytesForPosition(1000, 0, 5))
+        val total = 600L shl 20
+        // at 10 min of 60, +30 s lead: 10.5/60 of the file + the 2 MiB bootstrap
+        assertTrue(Math.abs((total * 10.5 / 60).toLong() + (2L shl 20) - Progressive.handoffBytes(total, 3_600_000, 600_000, 30_000, false, 0)) <= 1)
+        assertEquals(total, Progressive.handoffBytes(total, 3_600_000, 600_000, 30_000, true, 0), "MP4 without faststart: whole file")
+        assertEquals(total, Progressive.handoffBytes(total, 3_600_000, 3_590_000, 30_000, false, 0), "never more than the file")
+    }
     @Test fun stall() {
         assertTrue(Progressive.willStall(600L shl 20, 3_600_000, 100_000))     // 167 kB/s video vs 100 kB/s upload
         assertFalse(Progressive.willStall(600L shl 20, 3_600_000, 500_000))
@@ -200,5 +210,17 @@ class StreamServerTest {
 
     @Test fun sidecarNamesAreRejected() {
         assertNull(ReceiverServer.safeName("x.meta")); assertNull(ReceiverServer.safeName(".played"))
+    }
+}
+
+class TvInfoParseTest {
+    @Test fun parsesFilesWithEscapesAndPartials() {
+        val j = """{"files":[{"name":"a \"q\" \\ é.mp4","size":10,"received":10,"complete":true},{"name":"b.mkv","size":1000,"received":250,"complete":false}],""" +
+            """"free":5000,"used":300,"quota":9000,"player":{"state":"buffering","name":"b.mkv","pos":1200,"dur":60000}}"""
+        val i = TvInfo.parse(j)
+        assertEquals(listOf(TvFile("a \"q\" \\ é.mp4", 10, 10, true), TvFile("b.mkv", 1000, 250, false)), i.files)
+        assertEquals(5000, i.free); assertEquals(300, i.used); assertEquals(9000, i.quota)
+        assertEquals("buffering", i.state); assertEquals("b.mkv", i.playing); assertEquals(1200, i.pos); assertEquals(60000, i.dur)
+        assertEquals(250, i.file("b.mkv")?.received)
     }
 }

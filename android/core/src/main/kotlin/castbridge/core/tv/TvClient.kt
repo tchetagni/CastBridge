@@ -27,7 +27,8 @@ class TvClient(val base: String, private val pin: String? = null) {
     fun raw(method: String, path: String): String = call(method, path)
 
     /** Sends bytes [offset, total) read from [src]. Throws [Conflict] if the TV holds a different offset. */
-    fun upload(name: String, offset: Long, total: Long, src: InputStream, onBytes: (Long) -> Unit): Part {
+    fun upload(name: String, offset: Long, total: Long, src: InputStream, maxBytesPerSec: Long = 0, onBytes: (Long) -> Unit): Part {
+        val throttle = if (maxBytesPerSec > 0) Throttle(maxBytesPerSec) else null
         val c = open("PUT", "/upload/${enc(name)}?offset=$offset&total=$total")
         c.doOutput = true
         c.readTimeout = 60_000
@@ -41,6 +42,7 @@ class TvClient(val base: String, private val pin: String? = null) {
                 if (r < 0) throw IOException("source ended early")
                 out.write(buf, 0, r)
                 left -= r
+                throttle?.onBytes(r.toLong())
                 onBytes(r.toLong())
             }
         }
@@ -93,6 +95,8 @@ class ResumableUpload(
     private val cancelled: () -> Boolean = { false },
     private val sleep: (Long) -> Unit = Thread::sleep,
     private val pin: String? = null,
+    /** 0 = full speed (the default: the bigger the lead over playback, the better). Set to spare a weak TV. */
+    private val maxBytesPerSec: Long = 0,
 ) {
     sealed class State {
         data class Uploading(val sent: Long, val total: Long) : State()
@@ -119,7 +123,7 @@ class ResumableUpload(
                 if (sent > total) { tv.reset(name); sent = 0 }
                 onState(State.Uploading(sent, total))
                 openAt(sent).use { src ->
-                    val r = tv.upload(name, sent, total, src) { n ->
+                    val r = tv.upload(name, sent, total, src, maxBytesPerSec) { n ->
                         sent += n; backoff = 500
                         onState(State.Uploading(sent, total))
                         if (cancelled()) throw java.io.InterruptedIOException("cancelled")
@@ -137,5 +141,22 @@ class ResumableUpload(
             }
         }
         return State.Failed("annulé").also(onState)
+    }
+}
+
+/** Optional upload rate cap (off by default). Sleeps just enough to keep the average at [maxBytesPerSec]. */
+class Throttle(
+    private val maxBytesPerSec: Long,
+    private val now: () -> Long = System::nanoTime,
+    private val sleep: (Long) -> Unit = Thread::sleep,
+) {
+    private var start = 0L
+    private var bytes = 0L
+    fun onBytes(n: Long) {
+        if (start == 0L) start = now()
+        bytes += n
+        val expectedNs = bytes * 1_000_000_000L / maxBytesPerSec
+        val aheadMs = (expectedNs - (now() - start)) / 1_000_000
+        if (aheadMs > 0) sleep(aheadMs)
     }
 }

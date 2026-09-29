@@ -175,7 +175,8 @@ fun AdminPanel(client: TvClient) {
     val battery = TvClient.num(j, "battery")
     val up = (TvClient.num(j, "uptime") ?: 0) / 60000
     Text("Modèle : ${TvClient.str(j, "model")}\nAndroid : ${TvClient.str(j, "android")}\nIP : ${TvClient.str(j, "ip") ?: "?"}\n" +
-        "Batterie : ${battery?.let { "$it %" } ?: "aucune"}\nAllumée depuis : ${up / 60} h ${up % 60} min\nApp TV : ${TvClient.str(j, "app")}")
+        "Batterie : ${battery?.let { "$it %" } ?: "aucune"}\nAllumée depuis : ${up / 60} h ${up % 60} min\nApp TV : ${TvClient.str(j, "app")}\n" +
+        "Mémoire de l'app : ${TvClient.num(j, "pssMb") ?: "?"} Mo, RAM libre : ${TvClient.num(j, "memAvailMb") ?: "?"} / ${TvClient.num(j, "memTotalMb") ?: "?"} Mo")
     OutlinedButton(onClick = { confirm = true }) { Text("Redémarrer l'app TV") }
     Text("Redémarre l'application CastBridge TV uniquement : une app ne peut pas redémarrer la TV ni changer ses réglages système.",
         style = MaterialTheme.typography.bodySmall)

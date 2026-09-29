@@ -106,3 +106,12 @@ class StorageTest {
         try { repeat(20) { assertTrue(tv.info().contains("files")) } } finally { s.stop() }
     }
 }
+
+class ThrottleTest {
+    @Test fun capsTheAverageRateAndIsExactlyOffWhenNotUsed() {
+        var t = 1L; var slept = 0L
+        val th = Throttle(1_000_000, now = { t }, sleep = { ms -> slept += ms; t += ms * 1_000_000 })
+        repeat(10) { th.onBytes(500_000) }                // 5 MB at 1 MB/s must take ~5 s
+        assertTrue(slept in 4900..5100, "slept $slept ms")
+    }
+}

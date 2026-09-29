@@ -38,20 +38,42 @@ Les noms de fichiers sont sans `/`, `\`, ni `.part` final, 200 caractères max. 
 |---|---|---|
 | `GET /` | page web d'administration (sans PIN, ne contient aucune donnée) | HTML |
 | `GET /api/hello` | identification (sans PIN) | `{"app","v","pinRequired"}` |
-| `GET /api/info` | fichiers, espace libre, lecteur | `{"files":[{"name","size"}],"free":octets,"player":{"state":"idle\|playing\|paused\|ended\|error","name","pos":ms,"dur":ms}}` |
-| `GET /api/sysinfo` | infos appareil | `{"model","android","ip","battery":%\|null,"charging":bool\|null,"uptime":ms,"app","volume":0-100\|null}` |
+| `GET /api/info` | fichiers (y compris ceux en cours d'envoi), espace, lecteur | `{"files":[{"name","size","received","complete"}],"free","used","quota":octets,"player":{"state":"idle\|playing\|buffering\|paused\|ended\|error","name","pos":ms,"dur":ms}}` (`size` = taille finale ; `received < size` tant que l'envoi n'est pas fini) |
+| `GET /api/sysinfo` | infos appareil | `{"model","android","ip","battery":%\|null,"charging":bool\|null,"uptime":ms,"app","volume":0-100\|null,"pssMb","memAvailMb","memTotalMb","lowMemory"}` |
 | `POST /api/volume?pct=0..100` | volume média de la TV | comme `sysinfo` |
 | `POST /api/restart` | redémarre **l'app** (pas la TV) | `{"restarting":true}` |
 | `GET /api/part?name=` | octets déjà reçus d'un envoi | `{"name","length","done":bool}` |
 | `PUT /upload/<nom>?offset=N&total=T` | ajoute les octets `[N,T)` (corps = octets restants, `Content-Length` obligatoire) | `{"name","length","done"}` |
 | `POST /api/reset?name=` | efface le `.part` | idem `part` |
-| `POST /api/play?name=&pos=ms` | lit un fichier présent | comme `info` |
+| `POST /api/play?name=&pos=ms` | lit un fichier ; s'il est encore en cours d'envoi, démarre en flux dès que assez de données sont arrivées (sinon `409 {"error":"buffering","received","needed","size"}`) | comme `info` |
+| `GET\|HEAD /stream/<nom>` | le fichier (ou le `.part` en cours) avec `Range` 206/416, `Content-Length` = taille **finale** ; lit bloquant jusqu'à l'arrivée des octets manquants (coupure propre après 30 s) | octets |
+| `GET /api/storage` / `POST /api/storage?deleteAfterPlay=&evictPlayed=&quotaMb=` | quota et politique de stockage | `{"used","free","quota","quotaMb","deleteAfterPlay","evictPlayed","minFreeMb"}` |
 | `POST /api/pause` `POST /api/resume` `POST /api/stop` | contrôle | comme `info` |
 | `POST /api/seek?pos=ms` | saut | comme `info` |
 | `POST /api/delete?name=` | supprime fichier et `.part` | comme `info` |
 | `POST /api/rename?name=&to=` | renomme (409 si la cible existe) | comme `info` |
 | `GET /api/usb` | état de l'import USB et volumes détectés | `{"running","message","volumes":[chemins]}` |
 | `POST /api/usb/import` | copie les vidéos des clés détectées (dossier de l'app sur la clé) | comme `usb` |
+
+### Stockage et mémoire (TV modeste)
+
+- **Quota** du dossier vidéos : par défaut min(50 % de « utilisé + libre », 8 Go) ; réglable (`quotaMb`). Un envoi qui ne tient pas (quota, ou moins de
+  100 Mo libres sur l'appareil) est refusé **avant** toute écriture : `507 {"error":"quota exceeded"|"not enough space"}`.
+- **Éviction** (option, désactivée par défaut) : si le quota est plein, suppression des plus anciens fichiers **déjà lus**, jamais celui en cours de lecture.
+  **Supprimer après lecture** (option, désactivée) : un fichier lu jusqu'au bout est effacé.
+- Les `.part` (et leurs `.meta`) abandonnés depuis plus de 24 h sont supprimés au démarrage.
+- libVLC n'est créé qu'au premier `play` et libéré à l'arrêt, à la fin, ou sur `onTrimMemory` ; tampons d'E/S de 64 Ko ; 8 connexions HTTP au plus ;
+  `/api/info` relit le dossier au plus une fois par seconde. `GET /api/sysinfo` donne `pssMb` (mémoire de l'app) et `memAvailMb`.
+- Constantes regroupées dans `TvProfile` (module `:core`).
+
+### Lire pendant l'envoi
+
+Quand le fichier ne tient pas entièrement sur la TV, ou pour démarrer plus vite : la TV joue le `.part` en croissance via `http://127.0.0.1:8765/stream/<nom>`
+(jeton aléatoire propre à l'exécution, valable seulement en local). Le premier `PUT` écrit `<nom>.meta` (taille totale) pour annoncer le bon `Content-Length`.
+Si la lecture rattrape l'envoi, libVLC se met en pause tampon (`state:"buffering"`) et reprend seul ; si le téléphone quitte le réseau, la lecture continue
+sur les octets déjà reçus puis attend, et l'envoi reprend au retour du téléphone. L'avance (« encore X min sans réseau ») est affichée sur la TV et le téléphone.
+Limites : un MP4 dont l'index `moov` est en fin de fichier ne peut pas démarrer avant la fin (le téléphone le détecte et bascule en préchargement complet) ;
+la position atteignable en avance rapide est bornée à ce qui a été reçu.
 
 Codes : `400` paramètre invalide, `401` PIN faux ou IP verrouillée, `404`, `405` (utiliser POST), `409` mauvais
 offset (le corps donne `length`), `501` non supporté sur cet appareil, `507` espace insuffisant (moins de 100 Mo libres

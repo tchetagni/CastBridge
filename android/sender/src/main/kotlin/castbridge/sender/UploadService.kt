@@ -15,6 +15,8 @@ import android.os.Build
 import android.os.IBinder
 import android.os.PowerManager
 import android.util.Log
+import castbridge.core.tv.Mp4Atoms
+import castbridge.core.tv.Progressive
 import castbridge.core.tv.ResumableUpload
 import castbridge.core.tv.TvClient
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -29,7 +31,8 @@ import kotlin.concurrent.thread
  * Runs as a foreground service so it survives the screen turning off.
  */
 class UploadService : Service() {
-    data class Job(val fileName: String, val tvName: String, val manualHost: String?, val pin: String? = null)
+    data class Job(val fileName: String, val tvName: String, val manualHost: String?, val pin: String? = null,
+                   val progressive: Boolean = false, val autoPlay: Boolean = true)
 
     sealed class State {
         object Idle : State()
@@ -40,6 +43,9 @@ class UploadService : Service() {
     }
 
     @Volatile private var cancelled = false
+    @Volatile private var progressiveNow = false     // play as soon as enough has arrived (see switchToFullPreload)
+    @Volatile private var started = false            // playback already launched during the upload
+    private val meter = castbridge.core.tv.RateMeter()
     private var worker: Thread? = null
     private var discovery: TvDiscovery? = null
     private var netCallback: ConnectivityManager.NetworkCallback? = null
@@ -55,7 +61,8 @@ class UploadService : Service() {
         val tvName = intent?.getStringExtra(EXTRA_TV)
         if (uri == null || tvName == null || worker?.isAlive == true) return START_NOT_STICKY
         val name = intent.getStringExtra(EXTRA_NAME) ?: uri.lastPathSegment ?: "video"
-        val job = Job(name, tvName, intent.getStringExtra(EXTRA_HOST), intent.getStringExtra(EXTRA_PIN))
+        val job = Job(name, tvName, intent.getStringExtra(EXTRA_HOST), intent.getStringExtra(EXTRA_PIN),
+            intent.getBooleanExtra(EXTRA_PROGRESSIVE, false), intent.getBooleanExtra(EXTRA_AUTOPLAY, true))
         try {
             val n = notification("Envoi de $name…", 0)
             if (Build.VERSION.SDK_INT >= 29) startForeground(NOTIF, n, ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC)
@@ -69,6 +76,8 @@ class UploadService : Service() {
         val disc = if (job.manualHost == null) TvDiscovery(this).also { it.start(); discovery = it } else null
         watchNetwork(disc)
         cancelled = false
+        instance = this
+        _notice.value = null; _speed.value = 0
         worker = thread(name = "upload") { runJob(uri, job, disc) }
         return START_NOT_STICKY
     }
@@ -79,8 +88,36 @@ class UploadService : Service() {
         val resolve: () -> String? = {
             job.manualHost?.let { h -> if (':' in h) "http://$h" else "http://$h:8765" } ?: disc?.find(job.tvName)?.base
         }
+        progressiveNow = job.progressive
+        started = false
+        if (progressiveNow && Mp4Atoms.isIsoName(job.fileName)) {
+            // An MP4 whose index (moov) is at the end cannot start before the last byte arrives.
+            val layout = mp4LayoutOf(this, uri, total)
+            if (layout == Mp4Atoms.Layout.MOOV_AT_END) {
+                progressiveNow = false
+                _notice.value = "Ce fichier ne peut pas être lu pendant l'envoi (index MP4 en fin de fichier) : " +
+                    "préchargement complet, la lecture démarrera à la fin de l'envoi."
+            }
+        }
+        var lastAttempt = 0L
+        var prevSent = -1L
         val up = ResumableUpload(job.fileName, total, resolve, { off -> openAt(uri, off) }, { cancelled }, pin = job.pin)
         val result = up.run { s ->
+            if (s is ResumableUpload.State.Uploading) {
+                // Full speed by default: the bigger the lead over playback, the longer the video survives a lost network.
+                if (prevSent >= 0 && s.sent - prevSent in 1..(4L shl 20)) meter.add(s.sent - prevSent)
+                prevSent = s.sent
+                _speed.value = meter.bytesPerSec()
+                if (progressiveNow && !started && System.currentTimeMillis() - lastAttempt > 1000 &&
+                    s.sent >= Progressive.bootstrapBytes(s.total, _speed.value)) {
+                    lastAttempt = System.currentTimeMillis()
+                    val base = resolve()
+                    if (base != null) thread(name = "progressive-start") {
+                        // 409 "buffering" just means: not enough yet, the next attempt in a second will do.
+                        if (runCatching { TvClient(base, job.pin).play(job.fileName) }.isSuccess) started = true
+                    }
+                }
+            }
             _state.value = when (s) {
                 is ResumableUpload.State.Uploading -> State.Uploading(job, s.sent, s.total)
                 is ResumableUpload.State.Waiting -> State.Waiting(job, s.sent, s.total, s.reason)
@@ -90,6 +127,7 @@ class UploadService : Service() {
             notifyProgress(s)
         }
         if (result == ResumableUpload.State.Done) {
+            if (started || !job.autoPlay) { finish(State.Done(job)); return }      // already playing (or the caller starts it)
             val base = resolve()
             val played = base != null && runCatching { TvClient(base, job.pin).play(job.fileName) }.isSuccess
             finish(if (played) State.Done(job) else State.Failed(job, "Fichier envoyé, mais lancement impossible : réessayez « Lire »"))
@@ -158,6 +196,7 @@ class UploadService : Service() {
 
     override fun onDestroy() {
         cancelled = true
+        if (instance === this) instance = null
         discovery?.stop()
         netCallback?.let { cb -> runCatching { getSystemService(ConnectivityManager::class.java).unregisterNetworkCallback(cb) } }
         runCatching { wakeLock?.let { if (it.isHeld) it.release() } }
@@ -174,13 +213,27 @@ class UploadService : Service() {
         const val EXTRA_NAME = "name"
         const val EXTRA_HOST = "host"
         const val EXTRA_PIN = "pin"
+        const val EXTRA_PROGRESSIVE = "progressive"
+        const val EXTRA_AUTOPLAY = "autoplay"
+        @Volatile private var instance: UploadService? = null
+        private val _notice = MutableStateFlow<String?>(null)
+        /** Explains automatic fallbacks (e.g. MP4 index at the end of the file). */
+        val notice: StateFlow<String?> = _notice
+        private val _speed = MutableStateFlow(0L)
+        /** Current upload speed in bytes per second. */
+        val speed: StateFlow<Long> = _speed
+
+        /** The user gave up on playing while uploading: keep uploading at full speed, play when complete. */
+        fun switchToFullPreload() { instance?.let { it.progressiveNow = false; it.started = false } }
         private val _state = MutableStateFlow<State>(State.Idle)
         val state: StateFlow<State> = _state
 
-        fun start(ctx: Context, uri: Uri, fileName: String, tvName: String, manualHost: String?, pin: String? = null) {
+        fun start(ctx: Context, uri: Uri, fileName: String, tvName: String, manualHost: String?, pin: String? = null,
+                  progressive: Boolean = false, autoPlay: Boolean = true) {
             val i = Intent(ctx, UploadService::class.java).setData(uri)
                 .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 .putExtra(EXTRA_TV, tvName).putExtra(EXTRA_NAME, fileName).putExtra(EXTRA_HOST, manualHost).putExtra(EXTRA_PIN, pin?.takeIf { it.isNotEmpty() })
+                .putExtra(EXTRA_PROGRESSIVE, progressive).putExtra(EXTRA_AUTOPLAY, autoPlay)
             _state.value = State.Idle
             ctx.startForegroundService(i)
         }

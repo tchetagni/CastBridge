@@ -23,14 +23,12 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 private data class TvInfo(val files: List<Pair<String, Long>>, val free: Long, val state: String,
-                          val name: String?, val pos: Long, val dur: Long)
+                          val name: String?, val pos: Long, val dur: Long, val received: Map<String, Long> = emptyMap())
 
 private fun parseInfo(j: String): TvInfo {
-    val files = Regex("\\{\"name\":\"((?:[^\"\\\\]|\\\\.)*)\",\"size\":(\\d+)\\}").findAll(j)
-        .map { it.groupValues[1].replace("\\\"", "\"").replace("\\\\", "\\") to it.groupValues[2].toLong() }.toList()
-    val player = j.substringAfter("\"player\":", "{}")
-    return TvInfo(files, TvClient.num(j, "free") ?: 0, TvClient.str(player, "state") ?: "idle",
-        TvClient.str(player, "name"), TvClient.num(player, "pos") ?: 0, TvClient.num(player, "dur") ?: 0)
+    val i = castbridge.core.tv.TvInfo.parse(j)
+    return TvInfo(i.files.map { it.name to it.size }, i.free, i.state, i.playing, i.pos, i.dur,
+        i.files.filter { !it.complete }.associate { it.name to it.received })
 }
 
 private fun size(b: Long) = when {
@@ -61,6 +59,10 @@ fun TvScreen(fixedBase: String? = null, extra: @Composable (TvClient) -> Unit = 
     var message by remember { mutableStateOf("") }
     var badPin by remember { mutableStateOf<String?>(null) }
     var seeking by remember { mutableStateOf<Float?>(null) }
+    var fileSize by remember { mutableStateOf(0L) }
+    var progressive by rememberSaveable { mutableStateOf(false) }
+    val notice by UploadService.notice.collectAsState()
+    val speed by UploadService.speed.collectAsState()
 
     LaunchedEffect(tvs) { if (selectedName == null && tvs.size == 1) selectedName = tvs[0].name }
 
@@ -76,6 +78,13 @@ fun TvScreen(fixedBase: String? = null, extra: @Composable (TvClient) -> Unit = 
         if (uri != null) {
             runCatching { ctx.contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION) }
             fileUri = uri
+            fileSize = runCatching {
+                ctx.contentResolver.query(uri, null, null, null, null)?.use { c ->
+                    if (c.moveToFirst()) c.getLong(c.getColumnIndexOrThrow(OpenableColumns.SIZE)) else 0L
+                }
+            }.getOrNull() ?: 0L
+            // Little room on the TV: default to playing while the file arrives instead of storing it all first.
+            progressive = info?.let { fileSize > 0 && it.free < fileSize * 2 } ?: false
             fileName = runCatching {
                 ctx.contentResolver.query(uri, null, null, null, null)?.use { c ->
                     if (c.moveToFirst()) c.getString(c.getColumnIndexOrThrow(OpenableColumns.DISPLAY_NAME)) else null
@@ -103,7 +112,12 @@ fun TvScreen(fixedBase: String? = null, extra: @Composable (TvClient) -> Unit = 
         val c = client ?: return
         scope.launch {
             withContext(Dispatchers.IO) { runCatching { c.block() } }
-                .onFailure { message = "$label : ${it.message}" }.onSuccess { message = "" }
+                .onFailure {
+                    val e = it as? TvClient.HttpError
+                    message = if (e?.code == 409 && "buffering" in e.message.orEmpty())
+                        "Pas encore assez de données reçues pour démarrer la lecture : patientez quelques secondes."
+                    else "$label : ${it.message}"
+                }.onSuccess { message = "" }
         }
     }
 
@@ -138,10 +152,15 @@ fun TvScreen(fixedBase: String? = null, extra: @Composable (TvClient) -> Unit = 
         // --- Upload ---
         val busy = upload is UploadService.State.Uploading || upload is UploadService.State.Waiting
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            Checkbox(progressive, onCheckedChange = { progressive = it }, enabled = !busy)
+            Text("Lire pendant l'envoi (le fichier n'a pas besoin de tenir en entier sur la TV avant de démarrer)", Modifier.padding(top = 12.dp),
+                style = MaterialTheme.typography.bodySmall)
+        }
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             Button(enabled = !busy && base != null && fileUri != null && fileName != null, onClick = {
                 val target = if (useManual) manualIp.trim() else selectedName ?: fixedBase!!
                 runCatching {
-                    UploadService.start(ctx, fileUri!!, fileName!!, target, fixedBase?.removePrefix("http://") ?: if (useManual) manualIp.trim() else null, pin)
+                    UploadService.start(ctx, fileUri!!, fileName!!, target, fixedBase?.removePrefix("http://") ?: if (useManual) manualIp.trim() else null, pin, progressive)
                 }.onFailure { message = "Impossible de démarrer l'envoi : ${it.message}" }
             }) { Text("Envoyer et lire") }
             if (busy) OutlinedButton(onClick = { UploadService.cancel(ctx) }) { Text("Annuler") }
@@ -160,20 +179,43 @@ fun TvScreen(fixedBase: String? = null, extra: @Composable (TvClient) -> Unit = 
             UploadService.State.Idle -> {}
         }
 
+        notice?.let { Text(it, color = MaterialTheme.colorScheme.tertiary) }
+
         // --- TV state & controls ---
         if (base != null && !reachable) Text("TV injoignable — si une vidéo est en cours, elle continue sur la TV.")
         info?.let { i ->
             if (i.name != null && i.state != "idle") {
-                Text("${if (i.state == "playing") "▶" else "❚❚"} ${i.name}", style = MaterialTheme.typography.titleMedium)
+                val running = i.state == "playing" || i.state == "buffering"
+                val partial = i.received[i.name]                       // bytes received if the file is still arriving
+                val total = i.files.firstOrNull { it.first == i.name }?.second ?: 0L
+                Text("${if (running) "▶" else "❚❚"} ${i.name}" + if (i.state == "buffering") "  (mise en mémoire tampon)" else "",
+                    style = MaterialTheme.typography.titleMedium)
+                if (partial != null && total > 0) {
+                    val ahead = (castbridge.core.tv.Progressive.reachableMs(i.dur, partial, total, 0) - i.pos).coerceAtLeast(0)
+                    Text("Envoi ${partial * 100 / total} % : encore ${if (ahead >= 90_000) "${ahead / 60_000} min" else "${ahead / 1000} s"} de lecture sans réseau")
+                    val videoRate = if (i.dur > 0) total * 1000 / i.dur else 0L
+                    if (speed > 0) Text("Envoi ${size(speed)}/s, vidéo ${size(videoRate)}/s" +
+                        if (castbridge.core.tv.Progressive.willStall(total, i.dur, speed)) " : trop lent, la lecture va s'interrompre" else "")
+                    if (castbridge.core.tv.Progressive.willStall(total, i.dur, speed))
+                        OutlinedButton(onClick = { UploadService.switchToFullPreload(); cmd("Stop") { stop() } }) { Text("Basculer en préchargement complet") }
+                }
                 if (i.dur > 0) {
                     Slider(seeking ?: i.pos.toFloat(), { seeking = it }, valueRange = 0f..i.dur.toFloat(),
-                        onValueChangeFinished = { val t = seeking?.toLong() ?: 0; seeking = null; cmd("Seek") { seek(t) } })
+                        onValueChangeFinished = {
+                            var t = seeking?.toLong() ?: 0; seeking = null
+                            // Nothing exists on the TV beyond what was received: clamp (backward seeks stay free).
+                            if (partial != null && total > 0) {
+                                val max = castbridge.core.tv.Progressive.reachableMs(i.dur, partial, total)
+                                if (t > max) { t = max; message = "En attente de l'envoi : position limitée à ${time(max)}" }
+                            }
+                            cmd("Seek") { seek(t) }
+                        })
                     Text("${time(i.pos)} / ${time(i.dur)}")
                 }
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     Button(onClick = { cmd("Recul") { seek(maxOf(0, i.pos - 10_000)) } }) { Text("-10 s") }
-                    Button(onClick = { cmd("Pause") { if (i.state == "playing") pause() else resume() } }) {
-                        Text(if (i.state == "playing") "Pause" else "Lecture")
+                    Button(onClick = { cmd("Pause") { if (running) pause() else resume() } }) {
+                        Text(if (running) "Pause" else "Lecture")
                     }
                     Button(onClick = { cmd("Avance") { seek(i.pos + 10_000) } }) { Text("+10 s") }
                     OutlinedButton(onClick = { cmd("Stop") { stop() } }) { Text("Stop") }
@@ -182,7 +224,8 @@ fun TvScreen(fixedBase: String? = null, extra: @Composable (TvClient) -> Unit = 
             Text("Sur la TV (${size(i.free)} libres) :", style = MaterialTheme.typography.titleSmall)
             Column {
                 i.files.forEach { (name, sz) ->
-                    ListItem(headlineContent = { Text(name) }, supportingContent = { Text(size(sz)) },
+                    ListItem(headlineContent = { Text(name) },
+                        supportingContent = { Text(i.received[name]?.let { r -> "${size(r)} / ${size(sz)} reçus (${r * 100 / sz.coerceAtLeast(1)} %)" } ?: size(sz)) },
                         trailingContent = {
                             Row {
                                 TextButton(onClick = { cmd("Lire") { play(name) } }) { Text("Lire") }

@@ -144,6 +144,13 @@ class MainActivity : ComponentActivity() {
                     }
                 }) { Text("Stop") }
             }
+            if (playing) HandoffButton(fileUri, fileName, pos, dur) {
+                scope.launch {
+                    runCatching { Upnp.stop(selected!!) }
+                    playing = false; pos = 0; status = "Lecture poursuivie sur la TV CastBridge"
+                    stopService(Intent(this@MainActivity, ServerService::class.java))
+                }
+            }
         }
     }
 }

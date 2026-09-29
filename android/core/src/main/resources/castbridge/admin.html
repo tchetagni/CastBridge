@@ -71,11 +71,17 @@ dt{color:var(--mut)}dd{margin:0;word-break:break-all}
   <h2>Fichiers sur la TV</h2>
   <div id="free" class="mut"></div>
   <div id="files"></div>
+  <details style="margin-top:10px"><summary class="mut">Stockage : réglages</summary>
+    <div class="row" style="margin-top:8px"><label><input type="checkbox" id="stDel"> Supprimer un fichier après sa lecture complète</label></div>
+    <div class="row"><label><input type="checkbox" id="stEvict"> Si le quota est plein, supprimer les plus anciens fichiers déjà lus</label></div>
+    <div class="row"><span class="mut">Quota (Mo, 0 = automatique)</span><input id="stQuota" type="text" inputmode="numeric" style="width:120px"><button id="stSave">Enregistrer</button></div>
+  </details>
 </section>
 
 <section>
   <h2>Envoyer des fichiers</h2>
   <p class="mut">Envoi par morceaux de 4 Mo, repris automatiquement après une coupure.</p>
+  <label><input type="checkbox" id="early"> Lire pendant l'envoi (dès qu'assez de données sont arrivées)</label><br>
   <input id="pick" type="file" multiple>
   <div id="ups"></div>
 </section>
@@ -122,7 +128,7 @@ async function api(method, path, body) {
   const r = await fetch(path, { method, body, headers: { "X-CB-Pin": PIN } });
   const t = await r.text();
   if (!r.ok) {
-    let m = t; try { const j = JSON.parse(t); m = j.error === "locked" ? "Trop d'essais : verrouillé " + j.retryAfter + " s" : j.error === "bad pin" ? "PIN incorrect" : j.error; } catch (e) {}
+    let m = t; try { const j = JSON.parse(t); m = j.error === "locked" ? "Trop d'essais : verrouillé " + j.retryAfter + " s" : j.error === "bad pin" ? "PIN incorrect" : j.error === "buffering" ? "Pas encore assez de données reçues pour démarrer : patientez quelques secondes." : j.error; } catch (e) {}
     throw new ApiError(r.status, m || ("HTTP " + r.status));
   }
   return t ? JSON.parse(t) : {};
@@ -154,27 +160,37 @@ async function refresh() {
     msg("TV injoignable : " + e.message);
   }
 }
-function start() { stop(); refresh(); timer = setInterval(refresh, 2000); }
+function start() { stop(); refresh(); loadStorage(); timer = setInterval(refresh, 2000); }
 function stop() { if (timer) clearInterval(timer); timer = null; }
 
 function render(i) {
   const p = i.player || {};
-  $("free").textContent = "Espace libre : " + fmtSize(i.free);
-  $("now").textContent = p.name && p.state !== "idle" ? (p.state === "playing" ? "▶ " : "❚❚ ") + p.name : "Aucune lecture.";
-  $("bPause").textContent = p.state === "playing" ? "Pause" : "Lecture";
+  $("free").textContent = "Espace libre : " + fmtSize(i.free) + " — utilisé par CastBridge : " + fmtSize(i.used) + " / quota " + fmtSize(i.quota);
+  const run = p.state === "playing" || p.state === "buffering";
+  const pf = (i.files || []).find(f => f.name === p.name);
+  let lead = "";
+  if (pf && !pf.complete && p.dur > 0) {
+    const ahead = Math.max(0, Math.floor(p.dur * pf.received / pf.size) - p.pos);
+    lead = " — envoi " + Math.floor(pf.received * 100 / pf.size) + " %, encore " + (ahead >= 90000 ? Math.floor(ahead / 60000) + " min" : Math.floor(ahead / 1000) + " s") + " de lecture sans réseau";
+  }
+  $("now").textContent = p.name && p.state !== "idle" ? (run ? "▶ " : "❚❚ ") + p.name + (p.state === "buffering" ? " (mise en mémoire tampon)" : "") + lead : "Aucune lecture.";
+  $("bPause").textContent = run ? "Pause" : "Lecture";
   const sk = $("seek");
   sk.max = p.dur || 1; if (!seeking) sk.value = p.pos || 0;
+  window.reachable = pf && !pf.complete && p.dur > 0 ? Math.max(0, Math.floor(p.dur * pf.received / pf.size) - 3000) : Infinity;
   $("pos").textContent = p.dur ? fmtTime(p.pos) + " / " + fmtTime(p.dur) : "";
   const box = $("files"); box.textContent = "";
   (i.files || []).forEach(f => {
     const row = document.createElement("div"); row.className = "file";
     const n = document.createElement("div"); n.className = "n"; n.textContent = f.name;
-    const s = document.createElement("div"); s.className = "s"; s.textContent = fmtSize(f.size);
-    row.append(n, s, btn("Lire", () => act(post("/api/play?name=" + q(f.name)))),
-      btn("Renommer", async () => {
+    const s = document.createElement("div"); s.className = "s";
+    s.textContent = f.complete ? fmtSize(f.size) : fmtSize(f.received) + " / " + fmtSize(f.size) + " reçus (" + Math.floor(f.received * 100 / Math.max(1, f.size)) + " %)";
+    row.append(n, s, btn("Lire", () => act(post("/api/play?name=" + q(f.name)))));
+    if (f.complete) row.append(btn("Renommer", async () => {
         const to = prompt("Nouveau nom :", f.name);
         if (to && to !== f.name) act(post("/api/rename?name=" + q(f.name) + "&to=" + q(to)));
-      }),
+      }));
+    row.append(
       btn("Supprimer", () => { if (confirm("Supprimer « " + f.name + " » ?")) act(post("/api/delete?name=" + q(f.name))); }, "del"));
     box.append(row);
   });
@@ -186,19 +202,28 @@ async function act(p) { try { await p; msg(""); refresh(); } catch (e) { msg(e.m
 function renderSys(s) {
   const rows = [["Modèle", s.model], ["Android", s.android], ["Adresse IP", s.ip || "?"],
     ["Batterie", s.battery == null ? "aucune" : s.battery + " %" + (s.charging ? " (en charge)" : "")],
-    ["Allumée depuis", fmtUp(s.uptime)], ["Version de l'app", s.app]];
+    ["Allumée depuis", fmtUp(s.uptime)], ["Version de l'app", s.app],
+    ["Mémoire de l'app", s.pssMb == null ? "?" : s.pssMb + " Mo"],
+    ["RAM libre / totale", s.memAvailMb == null ? "?" : s.memAvailMb + " / " + s.memTotalMb + " Mo" + (s.lowMemory ? " (faible !)" : "")]];
   const dl = $("sys"); dl.textContent = "";
   rows.forEach(([k, v]) => { const a = document.createElement("dt"), b = document.createElement("dd"); a.textContent = k; b.textContent = v; dl.append(a, b); });
   if (s.volume != null && Date.now() - volTouched > 3000) { $("vol").value = s.volume; }
   $("volv").textContent = s.volume == null ? "--" : s.volume + " %";
 }
 
-$("bPause").onclick = () => act(post(info && info.player && info.player.state === "playing" ? "/api/pause" : "/api/resume"));
+$("bPause").onclick = () => act(post(info && info.player && (info.player.state === "playing" || info.player.state === "buffering") ? "/api/pause" : "/api/resume"));
 $("bStop").onclick = () => act(post("/api/stop"));
 $("bBack").onclick = () => act(post("/api/seek?pos=" + Math.max(0, (info.player.pos || 0) - 10000)));
 $("bFwd").onclick = () => act(post("/api/seek?pos=" + ((info.player.pos || 0) + 10000)));
 $("seek").oninput = () => { seeking = true; };
-$("seek").onchange = () => { seeking = false; act(post("/api/seek?pos=" + $("seek").value)); };
+$("seek").onchange = () => {
+  seeking = false;
+  let t = Number($("seek").value);
+  if (t > window.reachable) { t = window.reachable; msg("En attente de l'envoi : position limitée."); }
+  act(post("/api/seek?pos=" + t));
+};
+$("stSave").onclick = () => act(post("/api/storage?deleteAfterPlay=" + $("stDel").checked + "&evictPlayed=" + $("stEvict").checked + "&quotaMb=" + encodeURIComponent($("stQuota").value || "0")));
+async function loadStorage() { try { const s = await api("GET", "/api/storage"); $("stDel").checked = s.deleteAfterPlay; $("stEvict").checked = s.evictPlayed; $("stQuota").value = s.quotaMb; } catch (e) {} }
 $("vol").oninput = () => { volTouched = Date.now(); $("volv").textContent = $("vol").value + " %"; };
 $("vol").onchange = () => act(post("/api/volume?pct=" + $("vol").value));
 $("bRestart").onclick = () => { if (confirm("Redémarrer l'application CastBridge TV ?")) act(post("/api/restart")); };
@@ -223,10 +248,14 @@ async function uploadFile(file, bar, label) {
         if (r.status === 409) { off = JSON.parse(await r.text()).length; continue; }
         if (r.status === 401 || r.status === 400 || r.status === 507) {
           let m = ""; try { m = JSON.parse(await r.text()).error; } catch (e) {}
-          throw new ApiError(r.status, m === "not enough space" ? "espace insuffisant sur la TV" : (m || "HTTP " + r.status));
+          throw new ApiError(r.status, m === "not enough space" ? "espace insuffisant sur la TV" : m === "quota exceeded" ? "quota de stockage atteint" : (m || "HTTP " + r.status));
         }
         if (!r.ok) throw new Error("HTTP " + r.status);
         off = end; bar.value = off; backoff = 500;
+        if ($("early").checked && !file.started && Date.now() - (file.tried || 0) > 1000) {
+          file.tried = Date.now();
+          post("/api/play?name=" + q(file.name)).then(() => { file.started = true; }).catch(() => {});   // 409 = not enough yet
+        }
         label.textContent = file.name + " : " + fmtSize(off) + " / " + fmtSize(total);
       }
       return;

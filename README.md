@@ -25,6 +25,12 @@ Une app Android normale **ne peut pas** : redémarrer la TV, changer ses réglag
 accéder au stockage d'autres apps, ni obtenir root. « Redémarrer » ne relance que l'app CastBridge TV. Le volume peut être
 ignoré par les TV à volume fixe. Bluetooth, Wi-Fi Direct et USB dépendent du matériel et du firmware de la TV.
 
+### DLNA : limite structurelle
+
+Une TV DLNA pure lit la vidéo **en direct depuis le téléphone** : si le téléphone quitte le réseau, seul le tampon interne du lecteur continue à jouer.
+Seul le mode CastBridge TV (données stockées sur la TV) y échappe. L'écran DLNA propose donc « Continuer sur la TV sans réseau » : copie du même fichier
+vers une TV CastBridge découverte, reprise à la position DLNA courante dès que la TV a assez d'avance, puis arrêt du flux DLNA.
+
 ### Non livré : accès SSH / shell distant
 
 Le serveur SSH embarqué (MINA SSHD, shell, SFTP) n'a **pas** été implémenté dans cette branche : sa construction a été

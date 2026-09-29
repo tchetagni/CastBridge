@@ -2,6 +2,7 @@ package castbridge.sender
 
 import android.content.ContentResolver
 import android.net.Uri
+import castbridge.core.tv.HttpRange
 import fi.iki.elonen.NanoHTTPD
 import java.io.FileInputStream
 import java.io.InputStream
@@ -25,22 +26,32 @@ class MediaServer(private val cr: ContentResolver, port: Int = 8089) : NanoHTTPD
         val pfd = try { cr.openFileDescriptor(item.uri, "r") } catch (e: Exception) { null }
             ?: return newFixedLengthResponse(Response.Status.INTERNAL_ERROR, MIME_PLAINTEXT, "cannot open")
         val total = pfd.statSize
-        val range = session.headers["range"]?.let { Regex("bytes=(\\d*)-(\\d*)").find(it) }
-        var start = 0L
-        var end = total - 1
-        if (range != null) {
-            val s = range.groupValues[1]
-            val e = range.groupValues[2]
-            if (s.isEmpty() && e.isNotEmpty()) start = maxOf(0, total - e.toLong())        // suffix range
-            else { start = s.toLongOrNull() ?: 0; end = e.toLongOrNull()?.coerceAtMost(total - 1) ?: end }
-            if (start > end || start >= total) {
-                pfd.close()
-                return newFixedLengthResponse(Response.Status.RANGE_NOT_SATISFIABLE, MIME_PLAINTEXT, "").apply {
-                    addHeader("Content-Range", "bytes */$total")
-                }
+        if (total < 0) { pfd.close(); return newFixedLengthResponse(Response.Status.INTERNAL_ERROR, MIME_PLAINTEXT, "unknown size") }
+        val r = HttpRange.parse(session.headers["range"], total)
+        if (r == HttpRange.R.Unsatisfiable) {
+            pfd.close()
+            return newFixedLengthResponse(Response.Status.RANGE_NOT_SATISFIABLE, MIME_PLAINTEXT, "").apply {
+                addHeader("Content-Range", "bytes */$total"); addHeader("Accept-Ranges", "bytes")
             }
         }
+        val start = (r as? HttpRange.R.Part)?.start ?: 0L
+        val end = (r as? HttpRange.R.Part)?.end ?: (total - 1)
+        val range = r as? HttpRange.R.Part
         val len = end - start + 1
+        val dlnaHeaders = { resp: Response ->
+            resp.addHeader("Accept-Ranges", "bytes")
+            if (range != null) resp.addHeader("Content-Range", "bytes $start-$end/$total")
+            resp.addHeader("transferMode.dlna.org", "Streaming")
+            resp.addHeader("contentFeatures.dlna.org", FEATURES)
+        }
+        val status = if (range != null) Response.Status.PARTIAL_CONTENT else Response.Status.OK
+        if (session.method == Method.HEAD) {
+            // NanoHTTPD 2.3.1 sends the body even for HEAD: answer with the real length and an empty body.
+            pfd.close()
+            return newFixedLengthResponse(status, item.mime, java.io.ByteArrayInputStream(ByteArray(0)), 0).apply {
+                addHeader("Content-Length", len.toString()); dlnaHeaders(this)
+            }
+        }
         val fis = FileInputStream(pfd.fileDescriptor).also { it.channel.position(start) }
         val body: InputStream = object : InputStream() {
             var left = len
@@ -53,13 +64,7 @@ class MediaServer(private val cr: ContentResolver, port: Int = 8089) : NanoHTTPD
             }
             override fun close() { fis.close(); pfd.close() }
         }
-        val status = if (range != null) Response.Status.PARTIAL_CONTENT else Response.Status.OK
-        return newFixedLengthResponse(status, item.mime, body, len).apply {
-            addHeader("Accept-Ranges", "bytes")
-            if (range != null) addHeader("Content-Range", "bytes $start-$end/$total")
-            addHeader("transferMode.dlna.org", "Streaming")
-            addHeader("contentFeatures.dlna.org", FEATURES)
-        }
+        return newFixedLengthResponse(status, item.mime, body, len).apply { dlnaHeaders(this) }
     }
 
     companion object {

@@ -102,6 +102,18 @@ object Progressive {
         return (durMs * received / total - marginMs).coerceAtLeast(0)
     }
 
+    /** Rough byte offset of playback position [posMs] (constant-bitrate estimate; the real one needs the container index). */
+    fun bytesForPosition(total: Long, durMs: Long, posMs: Long): Long =
+        if (durMs <= 0) total else (total.toDouble() * posMs.coerceIn(0, durMs) / durMs).toLong().coerceIn(0, total)
+
+    /**
+     * Hand-off from DLNA to the TV: playback may start on the TV at [posMs] once it holds the data up to
+     * [leadMs] beyond that position, plus the bootstrap amount. [moovAtEnd] files need the whole file.
+     */
+    fun handoffBytes(total: Long, durMs: Long, posMs: Long, leadMs: Long, moovAtEnd: Boolean, uploadBytesPerSec: Long): Long =
+        if (moovAtEnd) total
+        else minOf(total, bytesForPosition(total, durMs, posMs + leadMs) + bootstrapBytes(total, uploadBytesPerSec))
+
     /** True if the average video bitrate exceeds the upload rate: the player will end up waiting for data. */
     fun willStall(fileBytes: Long, durMs: Long, uploadBytesPerSec: Long): Boolean =
         durMs > 0 && uploadBytesPerSec > 0 && fileBytes.toDouble() / (durMs / 1000.0) > uploadBytesPerSec
