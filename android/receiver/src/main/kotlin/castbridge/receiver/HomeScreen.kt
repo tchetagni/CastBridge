@@ -50,6 +50,8 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
         fun openLibrary()
         fun openSettings()
         fun openHelp()
+        /** Every feature as an icon, with its live status (the order is the order on screen). */
+        fun tools(): List<HomeTool> = emptyList()
     }
 
     private val main = Handler(Looper.getMainLooper())
@@ -94,7 +96,7 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
         TvStyle.focusZoom(chip, 1.05f)
     }
 
-    private val tick = object : Runnable { override fun run() { if (visible) { reload(); main.postDelayed(this, 4000) } } }
+    private val tick = object : Runnable { override fun run() { if (visible) { reload(); refreshTools(); main.postDelayed(this, 4000) } } }
 
     fun show() {
         container.fadeTo(true)
@@ -160,26 +162,50 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
         }
         if (focusFirst) main.postDelayed({
             val firstRow = (rowsBox.getChildAt(1) as? RecyclerView)
-            val v = firstRow?.getChildAt(0) ?: toolsRow?.let { (it as? ViewGroup)?.getChildAt(0) }
+            val v = firstRow?.getChildAt(0) ?: ((toolsRow?.tag as? ViewGroup)?.getChildAt(0))
             v?.requestFocus()
         }, 80)
     }
 
+    private var toolsSig = ""
+
     private fun tools(): View {
-        val w = dp(220)
-        val box = LinearLayout(act).apply { orientation = LinearLayout.HORIZONTAL; setPadding(dp(4), dp(22), 0, 0); clipChildren = false }
-        fun tile(g: String, l: String, f: () -> Unit) = ToolTile(act, g, l, w).also { t ->
-            t.setOnClickListener { f() }
-            t.setOnFocusChangeListener { v, has ->
-                v.animate().scaleX(if (has) 1.1f else 1f).scaleY(if (has) 1.1f else 1f).setDuration(160).start()
-                if (has) { heroTitle.text = l; heroSub.text = when (g) { "▦" -> "Toutes vos vidéos et vos fichiers, en grille."; "⚙" -> "Code de connexion, adresse, Bluetooth, stockage, démarrage avec la TV…"; else -> "Comment envoyer une vidéo depuis le téléphone." } }
-            }
-            box.addView(t)
+        val w = dp(170)
+        val box = LinearLayout(act).apply { orientation = LinearLayout.HORIZONTAL; setPadding(dp(4), dp(8), 0, 0); clipChildren = false }
+        val title = TextView(act).apply { text = "Fonctions"; setTextColor(0xFFDDE3EA.toInt()); textSize = 20f; typeface = Typeface.DEFAULT_BOLD; setPadding(dp(14), dp(22), 0, 0) }
+        fillTools(box)
+        return LinearLayout(act).apply {
+            orientation = LinearLayout.VERTICAL; clipChildren = false
+            addView(title)
+            addView(HorizontalScrollView(act).apply { isHorizontalScrollBarEnabled = false; clipChildren = false; addView(box) })
+            tag = box
         }
-        tile("▦", "Toute la bibliothèque") { api.openLibrary() }
-        tile("⚙", "Connexion & réglages") { api.openSettings() }
-        tile("?", "Aide") { api.openHelp() }
-        return HorizontalScrollView(act).apply { isHorizontalScrollBarEnabled = false; clipChildren = false; addView(box) }
+    }
+
+    private fun fillTools(box: LinearLayout) {
+        val w = dp(170)
+        val list = api.tools().ifEmpty {
+            listOf(HomeTool(R.drawable.ic_t_library, "Bibliothèque", "Toutes vos vidéos et vos fichiers, en grille.", null, false) { api.openLibrary() },
+                HomeTool(R.drawable.ic_t_settings, "Connexion & réglages", "Code, adresse, Bluetooth, stockage…", null, false) { api.openSettings() },
+                HomeTool(R.drawable.ic_t_help, "Aide", "Comment envoyer une vidéo depuis le téléphone.", null, false) { api.openHelp() })
+        }
+        toolsSig = list.joinToString("|") { "${it.label}:${it.status}:${it.on}" }
+        val focusedIndex = (0 until box.childCount).firstOrNull { box.getChildAt(it).hasFocus() }
+        box.removeAllViews()
+        list.forEach { t ->
+            box.addView(IconTile(act, t, w).also { v ->
+                v.setOnClickListener { t.action() }
+                v.setOnFocusChangeListener { _, has -> if (has) { heroTitle.text = t.label; heroSub.text = t.description + (t.status?.let { "  —  $it" } ?: "") } }
+            })
+        }
+        focusedIndex?.let { i -> box.getChildAt(minOf(i, box.childCount - 1))?.requestFocus() }
+    }
+
+    /** Statuses change (Bluetooth ready, Internet via the phone, SSH on…): refresh the tiles in place. */
+    private fun refreshTools() {
+        val box = (toolsRow?.tag as? LinearLayout) ?: return
+        val sig = api.tools().joinToString("|") { "${it.label}:${it.status}:${it.on}" }
+        if (sig != toolsSig) fillTools(box)
     }
 
     /** The hero text and the background follow the focused card. */

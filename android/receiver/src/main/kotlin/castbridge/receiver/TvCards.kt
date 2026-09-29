@@ -182,6 +182,36 @@ class ToolTile(ctx: Context, glyph: String, label: String, widthPx: Int) : Linea
     }
 }
 
+/** One feature of the home "Fonctions" row: vector icon, name, live status (e.g. "Prêt", "Actif"), and what OK does. */
+data class HomeTool(val icon: Int, val label: String, val description: String, val status: String?, val on: Boolean, val action: () -> Unit)
+
+/** Icon tile for [HomeTool]: the icon lights up (accent) when the feature is active, and a small status line sits under the name. */
+class IconTile(ctx: Context, tool: HomeTool, widthPx: Int) : LinearLayout(ctx) {
+    init {
+        orientation = VERTICAL; gravity = Gravity.CENTER
+        isFocusable = true; isFocusableInTouchMode = true; isClickable = true
+        val m = TvStyle.dp(ctx, 10)
+        layoutParams = ViewGroup.MarginLayoutParams(widthPx, widthPx * 3 / 4 + TvStyle.dp(ctx, 40)).apply { setMargins(m, m, m, m) }
+        background = StateListDrawable().apply {
+            addState(intArrayOf(android.R.attr.state_focused), TvStyle.rounded(ctx, TvStyle.CARD_FOCUS, 16, TvStyle.ACCENT, 3))
+            addState(intArrayOf(), TvStyle.rounded(ctx, 0xCC1B1F27.toInt(), 16))
+        }
+        val size = TvStyle.dp(ctx, 46)
+        addView(android.widget.ImageView(ctx).apply {
+            setImageResource(tool.icon)
+            imageTintList = android.content.res.ColorStateList.valueOf(if (tool.on) TvStyle.ACCENT else 0xFFB8C2CC.toInt())
+        }, LayoutParams(size, size))
+        addView(TextView(ctx).apply { text = tool.label; textSize = 16f; setTextColor(Color.WHITE); gravity = Gravity.CENTER; maxLines = 2; setPadding(m, m / 2, m, 0) })
+        tool.status?.let { st ->
+            addView(TextView(ctx).apply {
+                text = (if (tool.on) "● " else "") + st; textSize = 12f; gravity = Gravity.CENTER; maxLines = 1
+                setTextColor(if (tool.on) 0xFF4ADE80.toInt() else 0xFF9AA4AE.toInt())
+            })
+        }
+        TvStyle.focusZoom(this)
+    }
+}
+
 /** Plain-language banner that slides in at the top ("Vidéo reçue ✓", "Clé USB branchée : 57 Go libres"), then fades away. */
 class Banner(private val parent: FrameLayout) {
     private val main = Handler(Looper.getMainLooper())

@@ -315,6 +315,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         override fun actions(i: castbridge.core.tv.LibraryItem, row: List<castbridge.core.tv.LibraryItem>, index: Int) { libScreen?.actions(i, row, index) }
         override fun openLibrary() = showLibrary()
         override fun openSettings() = showSettings()
+        override fun tools(): List<HomeTool> = homeTools()
         override fun openHelp() {
             AlertDialog.Builder(this@PlayerActivity).setTitle("Envoyer une vidéo sur la TV")
                 .setMessage("1. Sur le téléphone, ouvrez l'app CastBridge, onglet « CastBridge TV ».\n" +
@@ -324,6 +325,67 @@ class PlayerActivity : Activity(), TvService.Screen {
                     "Depuis un ordinateur : ouvrez http://${TvService.localIp() ?: "adresse-de-la-TV"}:${ReceiverServer.PORT} dans un navigateur.")
                 .setPositiveButton("Compris", null).show()
         }
+    }
+
+    /** Pick one of several actions with the remote (sub-menu of a home icon). */
+    private fun choose(title: String, items: List<Pair<String, () -> Unit>>) {
+        if (items.isEmpty()) return
+        AlertDialog.Builder(this).setTitle(title).setItems(items.map { it.first }.toTypedArray()) { _, i -> items[i].second() }
+            .setNegativeButton("Fermer", null).show()
+    }
+
+    /** Every feature of the app as a home icon, with its live state. */
+    private fun homeTools(): List<HomeTool> {
+        val s = svc
+        val st = statuses
+        val usb = s?.usb; val ssh = s?.ssh
+        val drives = s?.registry?.let { r -> runCatching { r.volumes().filter { it.kind == castbridge.core.tv.VolumeKind.REMOVABLE } }.getOrNull() }.orEmpty()
+        val btOk = st["1-bt"]?.contains("prêt") == true || st["1-bt"]?.contains("réception") == true
+        val net = st["6-gw"]
+        val wdOn = prefs.getBool("wd_enabled", false)
+        val sshOn = ssh?.running == true
+        return listOf(
+            HomeTool(R.drawable.ic_t_library, "Bibliothèque", "Toutes vos vidéos et vos fichiers, en grille.", "${server?.libraryItems()?.size ?: 0} fichier(s)", false) { showLibrary() },
+            HomeTool(R.drawable.ic_t_cast, "Recevoir du téléphone", "Envoyer une vidéo depuis l'app CastBridge du téléphone.", "Code $pin", true) { homeApi().openHelp() },
+            HomeTool(R.drawable.ic_t_usb, "Clé USB", "Importer des vidéos d'une clé, ou y ranger les nouvelles.",
+                if (drives.isEmpty()) "Aucune clé" else drives.joinToString { "${it.label} · ${it.free / (1L shl 30)} Go libres" }, drives.isNotEmpty()) {
+                choose("Clé USB", listOf<Pair<String, () -> Unit>>(
+                    "Importer les vidéos des clés détectées" to { usbMessage(usb?.importFromVolumes()) },
+                    "Choisir un dossier de la clé…" to { usbMessage(usb?.launchPicker(this, REQ_TREE)) },
+                    "Où ranger les nouveaux fichiers (${server?.target ?: "auto"})…" to { chooseTarget() },
+                    "Re-détecter la clé (test de vitesse)" to { s?.rescanAsync(remeasure = true); flash("Détection de la clé en cours…") },
+                    "Réglages de stockage de la TV" to { s?.openStorageSettings()?.let { flash(it) } },
+                ) + (if (usb?.isRunning() == true) listOf<Pair<String, () -> Unit>>("Annuler l'import en cours" to { usb.cancel() }) else emptyList()))
+            },
+            HomeTool(R.drawable.ic_t_bluetooth, "Bluetooth", "Recevoir des fichiers et partager l'Internet du téléphone sans réseau commun.",
+                st["1-bt"]?.substringAfter(": ")?.take(28) ?: "Désactivé", btOk) {
+                choose("Bluetooth", listOf<Pair<String, () -> Unit>>("Rendre la TV visible (2 min) pour l'appairer" to { makeDiscoverable() }))
+            },
+            HomeTool(R.drawable.ic_t_internet, "Internet", "Internet de la TV ou du téléphone (passerelle Bluetooth) ; tester avec ping et traceroute.",
+                net?.replace("Internet via le téléphone", "Via")?.take(28) ?: "Réseau de la TV", net != null) {
+                val host = "8.8.8.8"
+                showDiag(host)
+                Thread { s?.gateway?.diagnose(host) { l -> main.post { appendDiag(l) } } ?: main.post { appendDiag("Passerelle indisponible") } }.start()
+            },
+            HomeTool(R.drawable.ic_t_wifidirect, "Wi-Fi Direct", "Un réseau direct TV ↔ téléphone, sans box.", if (wdOn) "Activé" else "Désactivé", wdOn) { toggleWifiDirect() },
+            HomeTool(R.drawable.ic_t_terminal, "Administration", "Page web et SSH pour gérer la TV à distance.",
+                if (sshOn) "SSH actif" else "SSH arrêté", sshOn) {
+                choose("Administration à distance", listOf<Pair<String, () -> Unit>>(
+                    (if (sshOn) "Désactiver SSH" else "Activer SSH (clés autorisées seulement)") to {
+                        if (sshOn) { ssh?.disable(); flash("SSH désactivé") }
+                        else Thread { runCatching { ssh?.enable() }.onFailure { e -> main.post { flash("SSH impossible : ${e.message}") } } }.start()
+                    },
+                    "Adresse de la page web" to { flash("Ouvrez http://${TvService.localIp() ?: "?"}:${ReceiverServer.PORT} — code $pin") },
+                ))
+            },
+            HomeTool(R.drawable.ic_t_update, "Mises à jour", "Installer une nouvelle version envoyée par le téléphone.",
+                "Version ${runCatching { packageManager.getPackageInfo(packageName, 0).versionName }.getOrNull() ?: "?"}", false) {
+                flash("Depuis le téléphone : CastBridge TV › Avancé › Installer des APK. Ou par la clé USB.")
+            },
+            HomeTool(R.drawable.ic_t_settings, "Connexion & réglages", "Code, adresse, démarrage avec la TV, lecture à distance…", null, false) { showSettings() },
+            HomeTool(R.drawable.ic_t_dev, "Options développeur", "Débogage USB / Wi-Fi de la TV.", null, false) { flash(openDevSettings()) },
+            HomeTool(R.drawable.ic_t_help, "Aide", "Comment envoyer une vidéo depuis le téléphone.", null, false) { homeApi().openHelp() },
+        )
     }
 
     /** "Connexion & réglages": connection facts in plain words, and every option (the former MENU list). */
