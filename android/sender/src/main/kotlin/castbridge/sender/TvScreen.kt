@@ -5,14 +5,19 @@ import android.net.Uri
 import android.provider.OpenableColumns
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -39,8 +44,6 @@ private fun size(b: Long) = when {
     else -> "${b / 1024} ko"
 }
 
-private fun time(ms: Long): String { val s = ms / 1000; return "%d:%02d:%02d".format(s / 3600, s / 60 % 60, s % 60) }
-
 /** "CastBridge TV" tab: send the whole video to the TV app, which then plays it from its own storage. */
 @Composable
 fun TvScreen() {
@@ -59,7 +62,7 @@ fun TvScreen() {
     var info by remember { mutableStateOf<TvInfo?>(null) }
     var reachable by remember { mutableStateOf(true) }
     var message by remember { mutableStateOf("") }
-    var seeking by remember { mutableStateOf<Float?>(null) }
+    var showPlayer by remember { mutableStateOf(false) }
 
     LaunchedEffect(tvs) { if (selectedName == null && tvs.size == 1) selectedName = tvs[0].name }
 
@@ -98,89 +101,112 @@ fun TvScreen() {
         }
     }
 
-    Column(Modifier.padding(16.dp).fillMaxSize(), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Text("Lancez « CastBridge TV » sur la TV. La vidéo est copiée entièrement sur la TV : " +
-            "la lecture continue même si le téléphone quitte le Wi-Fi.", style = MaterialTheme.typography.bodySmall)
+    val busy = upload is UploadService.State.Uploading || upload is UploadService.State.Waiting
+    val cs = MaterialTheme.colorScheme
+    val current = info?.takeIf { it.name != null && it.state != "idle" }
 
-        // --- Target ---
-        if (!useManual) {
-            if (tvs.isEmpty()) Text("Recherche des TV CastBridge…")
-            tvs.forEach { tv ->
-                Row(Modifier.fillMaxWidth()) {
-                    RadioButton(selectedName == tv.name, onClick = { selectedName = tv.name })
-                    Text("${tv.name}  (${tv.host})", Modifier.padding(top = 12.dp))
+    Column(Modifier.fillMaxSize()) {
+        LazyColumn(Modifier.weight(1f)) {
+            item {
+                Text("Lancez « CastBridge TV » sur la TV. La vidéo est copiée entièrement sur la TV : " +
+                    "la lecture continue même si le téléphone quitte le Wi-Fi.",
+                    Modifier.padding(16.dp), style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
+            }
+
+            // --- Target ---
+            item {
+                SectionHeader("Lecteurs") {
+                    IconButton({ discovery.restart() }) { Icon(Icons.Filled.Refresh, "Rechercher") }
                 }
             }
-        }
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            Checkbox(useManual, onCheckedChange = { useManual = it })
-            OutlinedTextField(manualIp, { manualIp = it }, Modifier.weight(1f), enabled = useManual, singleLine = true,
-                label = { Text("IP de la TV (manuelle)") },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Uri))
-        }
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            OutlinedButton(onClick = { discovery.restart() }) { Text("Rechercher") }
-            OutlinedButton(onClick = { picker.launch(arrayOf("video/*", "audio/*")) }) { Text("Choisir un fichier") }
-        }
-        Text("Fichier : ${fileName ?: "aucun"}")
-
-        // --- Upload ---
-        val busy = upload is UploadService.State.Uploading || upload is UploadService.State.Waiting
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            Button(enabled = !busy && base != null && fileUri != null && fileName != null, onClick = {
-                val target = if (useManual) manualIp.trim() else selectedName!!
-                runCatching {
-                    UploadService.start(ctx, fileUri!!, fileName!!, target, if (useManual) manualIp.trim() else null)
-                }.onFailure { message = "Impossible de démarrer l'envoi : ${it.message}" }
-            }) { Text("Envoyer et lire") }
-            if (busy) OutlinedButton(onClick = { UploadService.cancel(ctx) }) { Text("Annuler") }
-        }
-        when (val u = upload) {
-            is UploadService.State.Uploading -> {
-                LinearProgressIndicator({ u.sent.toFloat() / u.total }, Modifier.fillMaxWidth())
-                Text("Envoi : ${size(u.sent)} / ${size(u.total)}")
-            }
-            is UploadService.State.Waiting -> {
-                LinearProgressIndicator({ u.sent.toFloat() / u.total }, Modifier.fillMaxWidth())
-                Text("En attente du réseau, reprise automatique à ${size(u.sent)} (${u.reason})")
-            }
-            is UploadService.State.Done -> Text("« ${u.job.fileName} » est sur la TV, lecture lancée.")
-            is UploadService.State.Failed -> Text("Échec : ${u.reason}", color = MaterialTheme.colorScheme.error)
-            UploadService.State.Idle -> {}
-        }
-
-        // --- TV state & controls ---
-        if (base != null && !reachable) Text("TV injoignable — si une vidéo est en cours, elle continue sur la TV.")
-        info?.let { i ->
-            if (i.name != null && i.state != "idle") {
-                Text("${if (i.state == "playing") "▶" else "❚❚"} ${i.name}", style = MaterialTheme.typography.titleMedium)
-                if (i.dur > 0) {
-                    Slider(seeking ?: i.pos.toFloat(), { seeking = it }, valueRange = 0f..i.dur.toFloat(),
-                        onValueChangeFinished = { val t = seeking?.toLong() ?: 0; seeking = null; cmd("Seek") { seek(t) } })
-                    Text("${time(i.pos)} / ${time(i.dur)}")
+            if (!useManual) {
+                if (tvs.isEmpty()) item {
+                    Text("Recherche des TV CastBridge…", Modifier.padding(horizontal = 16.dp, vertical = 8.dp), color = cs.onSurfaceVariant)
                 }
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Button(onClick = { cmd("Recul") { seek(maxOf(0, i.pos - 10_000)) } }) { Text("-10 s") }
-                    Button(onClick = { cmd("Pause") { if (i.state == "playing") pause() else resume() } }) {
-                        Text(if (i.state == "playing") "Pause" else "Lecture")
+                items(tvs) { tv -> DeviceRow(tv.name, tv.host, selectedName == tv.name) { selectedName = tv.name } }
+            }
+            item {
+                Row(Modifier.padding(horizontal = 16.dp), horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalAlignment = Alignment.CenterVertically) {
+                    Checkbox(useManual, onCheckedChange = { useManual = it })
+                    OutlinedTextField(manualIp, { manualIp = it }, Modifier.weight(1f), enabled = useManual, singleLine = true,
+                        label = { Text("IP de la TV (manuelle)") },
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Uri))
+                }
+            }
+
+            // --- Library / upload ---
+            item { SectionHeader("Bibliothèque") }
+            item {
+                ListItem(
+                    modifier = Modifier.clickable { picker.launch(arrayOf("video/*", "audio/*")) },
+                    colors = ListItemDefaults.colors(containerColor = Color.Transparent),
+                    leadingContent = { Icon(Icons.Filled.VideoLibrary, null, tint = cs.primary) },
+                    headlineContent = { Text(fileName ?: "Aucun fichier", maxLines = 1) },
+                    supportingContent = { Text("Toucher pour choisir un fichier") },
+                )
+            }
+            item {
+                Row(Modifier.padding(horizontal = 16.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Button(enabled = !busy && base != null && fileUri != null && fileName != null, onClick = {
+                        val target = if (useManual) manualIp.trim() else selectedName!!
+                        runCatching {
+                            UploadService.start(ctx, fileUri!!, fileName!!, target, if (useManual) manualIp.trim() else null)
+                        }.onFailure { message = "Impossible de démarrer l'envoi : ${it.message}" }
+                    }) { Icon(Icons.Filled.CloudUpload, null); Spacer(Modifier.width(8.dp)); Text("Envoyer et lire") }
+                    if (busy) OutlinedButton(onClick = { UploadService.cancel(ctx) }) { Text("Annuler") }
+                }
+            }
+            item {
+                Column(Modifier.padding(horizontal = 16.dp, vertical = 8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                    when (val u = upload) {
+                        is UploadService.State.Uploading -> {
+                            LinearProgressIndicator({ u.sent.toFloat() / u.total }, Modifier.fillMaxWidth())
+                            Text("Envoi : ${size(u.sent)} / ${size(u.total)}", style = MaterialTheme.typography.bodySmall)
+                        }
+                        is UploadService.State.Waiting -> {
+                            LinearProgressIndicator({ u.sent.toFloat() / u.total }, Modifier.fillMaxWidth())
+                            Text("En attente du réseau, reprise automatique à ${size(u.sent)} (${u.reason})",
+                                style = MaterialTheme.typography.bodySmall)
+                        }
+                        is UploadService.State.Done -> Text("« ${u.job.fileName} » est sur la TV, lecture lancée.",
+                            style = MaterialTheme.typography.bodySmall)
+                        is UploadService.State.Failed -> Text("Échec : ${u.reason}", color = cs.error)
+                        UploadService.State.Idle -> {}
                     }
-                    Button(onClick = { cmd("Avance") { seek(i.pos + 10_000) } }) { Text("+10 s") }
-                    OutlinedButton(onClick = { cmd("Stop") { stop() } }) { Text("Stop") }
+                    if (base != null && !reachable) Text("TV injoignable — si une vidéo est en cours, elle continue sur la TV.",
+                        style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
+                    if (message.isNotEmpty()) Text(message, color = cs.error)
                 }
             }
-            Text("Sur la TV (${size(i.free)} libres) :", style = MaterialTheme.typography.titleSmall)
-            LazyColumn(Modifier.weight(1f)) {
+
+            // --- Files stored on the TV ---
+            info?.let { i ->
+                item { SectionHeader("Sur la TV · ${size(i.free)} libres") }
                 items(i.files) { (name, sz) ->
-                    ListItem(headlineContent = { Text(name) }, supportingContent = { Text(size(sz)) },
+                    ListItem(
+                        modifier = Modifier.clickable { cmd("Lire") { play(name) } },
+                        colors = ListItemDefaults.colors(containerColor = Color.Transparent),
+                        leadingContent = { Artwork(40.dp) },
+                        headlineContent = { Text(name, maxLines = 1) },
+                        supportingContent = { Text(size(sz)) },
                         trailingContent = {
-                            Row {
-                                TextButton(onClick = { cmd("Lire") { play(name) } }) { Text("Lire") }
-                                TextButton(onClick = { cmd("Supprimer") { delete(name) } }) { Text("Supprimer") }
-                            }
+                            IconButton({ cmd("Supprimer") { delete(name) } }) { Icon(Icons.Filled.Delete, "Supprimer") }
                         })
                 }
             }
         }
-        if (message.isNotEmpty()) Text(message, color = MaterialTheme.colorScheme.error)
+        current?.let { i ->
+            MiniPlayer(i.name!!, "CastBridge TV", i.state == "playing", if (i.dur > 0) i.pos.toFloat() / i.dur else 0f,
+                onToggle = { cmd("Pause") { if (i.state == "playing") pause() else resume() } },
+                onStop = { cmd("Stop") { stop() } }, onOpen = { showPlayer = true })
+        }
+    }
+    if (showPlayer && current != null) {
+        NowPlayingSheet(current.name!!, "CastBridge TV", current.state == "playing", current.pos, current.dur,
+            onSeek = { ms -> cmd("Seek") { seek(ms) } },
+            onToggle = { cmd("Pause") { if (current.state == "playing") pause() else resume() } },
+            onSkip = { d -> cmd("Seek") { seek((current.pos + d * 1000L).coerceAtLeast(0)) } },
+            onStop = { cmd("Stop") { stop() }; showPlayer = false }, onDismiss = { showPlayer = false })
     }
 }

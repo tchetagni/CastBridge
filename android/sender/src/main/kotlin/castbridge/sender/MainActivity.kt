@@ -12,11 +12,15 @@ import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import castbridge.core.upnp.Didl
 import kotlinx.coroutines.delay
@@ -25,19 +29,29 @@ import kotlinx.coroutines.launch
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent { MaterialTheme { Surface(Modifier.fillMaxSize()) { Root() } } }
+        setContent { CastTheme { Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) { Root() } } }
     }
 
+    @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun Root() {
         var tab by rememberSaveable { mutableStateOf(0) }
-        Column(Modifier.fillMaxSize().systemBarsPadding()) {
-            TabRow(selectedTabIndex = tab) {
-                Tab(tab == 0, onClick = { tab = 0 }, text = { Text("TV DLNA") })
-                Tab(tab == 1, onClick = { tab = 1 }, text = { Text("CastBridge TV") })
-            }
-            if (tab == 0) App() else TvScreen()
-        }
+        Scaffold(
+            containerColor = MaterialTheme.colorScheme.background,
+            topBar = {
+                Column {
+                    TopAppBar(
+                        title = { Text("CastBridge") },
+                        navigationIcon = { Icon(Icons.Filled.Cast, null, Modifier.padding(start = 16.dp, end = 8.dp), tint = MaterialTheme.colorScheme.primary) },
+                        colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.surface),
+                    )
+                    TabRow(selectedTabIndex = tab, containerColor = MaterialTheme.colorScheme.surface) {
+                        Tab(tab == 0, onClick = { tab = 0 }, text = { Text("TV DLNA") })
+                        Tab(tab == 1, onClick = { tab = 1 }, text = { Text("CastBridge TV") })
+                    }
+                }
+            },
+        ) { pad -> Box(Modifier.padding(pad).fillMaxSize()) { if (tab == 0) App() else TvScreen() } }
     }
 
     private fun startServer() {
@@ -55,9 +69,10 @@ class MainActivity : ComponentActivity() {
         var status by remember { mutableStateOf("") }
         var searching by remember { mutableStateOf(false) }
         var playing by remember { mutableStateOf(false) }
+        var paused by remember { mutableStateOf(false) }
         var pos by remember { mutableStateOf(0L) }
         var dur by remember { mutableStateOf(0L) }
-        var seeking by remember { mutableStateOf<Float?>(null) }
+        var showPlayer by remember { mutableStateOf(false) }
 
         val notifPerm = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) {}
         val picker = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
@@ -76,6 +91,30 @@ class MainActivity : ComponentActivity() {
             searching = false
             status = if (renderers.isEmpty()) "Aucune TV trouvée (même Wi-Fi ? isolation des clients ?)" else ""
         }
+        fun stopPlayback() = scope.launch {
+            runCatching { Upnp.stop(selected!!) }
+            playing = false; paused = false; pos = 0; showPlayer = false; status = "Arrêté"
+            stopService(Intent(this@MainActivity, ServerService::class.java))
+        }
+        fun toggle() { scope.launch { runCatching { if (paused) Upnp.resume(selected!!) else Upnp.pause(selected!!) }.onSuccess { paused = !paused } } }
+        fun cast() {
+            val r = selected ?: return; val uri = fileUri ?: return
+            scope.launch {
+                val ip = Upnp.localIp() ?: run { status = "Pas d'adresse Wi-Fi"; return@launch }
+                startServer()
+                var srv = ServerService.server
+                repeat(20) { if (srv == null) { delay(100); srv = ServerService.server } }
+                val s = srv ?: run { status = "Serveur non démarré"; return@launch }
+                val mime = contentResolver.getType(uri) ?: "video/mp4"
+                val ext = fileName.substringAfterLast('.', "mp4")
+                val url = "http://$ip:8089/media/${s.register(uri, mime)}.$ext"
+                val didl = Didl.item(url, fileName, mime, Didl.protocolInfo(mime, MediaServer.FEATURES))
+                status = "Envoi vers ${r.name}…"
+                runCatching { Upnp.play(r, url, didl) }
+                    .onSuccess { playing = true; paused = false; status = "" }
+                    .onFailure { status = "Échec : ${it.message}" }
+            }
+        }
         LaunchedEffect(Unit) {
             if (Build.VERSION.SDK_INT >= 33) notifPerm.launch(Manifest.permission.POST_NOTIFICATIONS)
             search()
@@ -88,62 +127,47 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-        Column(Modifier.padding(16.dp).fillMaxSize(), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            Text("CastBridge", style = MaterialTheme.typography.headlineMedium)
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                Button(onClick = { search() }, enabled = !searching) { Text("Rechercher") }
-                Button(onClick = { picker.launch(arrayOf("video/*", "audio/*", "image/*")) }) { Text("Choisir un fichier") }
-            }
-            Text("Fichier : $fileName")
+        Column(Modifier.fillMaxSize()) {
             LazyColumn(Modifier.weight(1f)) {
-                items(renderers) { r ->
+                item {
+                    SectionHeader("Lecteurs") {
+                        IconButton({ search() }, enabled = !searching) { Icon(Icons.Filled.Refresh, "Rechercher") }
+                    }
+                }
+                if (searching) item { LinearProgressIndicator(Modifier.fillMaxWidth()) }
+                items(renderers) { r -> DeviceRow(r.name, "DLNA / UPnP", selected == r) { selected = r } }
+                item { SectionHeader("Bibliothèque") }
+                item {
                     ListItem(
-                        headlineContent = { Text(r.name) },
-                        trailingContent = { RadioButton(selected == r, onClick = { selected = r }) },
+                        modifier = Modifier.clickable { picker.launch(arrayOf("video/*", "audio/*", "image/*")) },
+                        colors = ListItemDefaults.colors(containerColor = Color.Transparent),
+                        leadingContent = { Icon(Icons.Filled.VideoLibrary, null, tint = MaterialTheme.colorScheme.primary) },
+                        headlineContent = { Text(fileName, maxLines = 1) },
+                        supportingContent = { Text("Toucher pour choisir un fichier") },
                     )
                 }
+                if (status.isNotEmpty()) item {
+                    Text(status, Modifier.padding(16.dp), style = MaterialTheme.typography.bodyMedium,
+                        color = if (status.startsWith("Échec") || status.startsWith("Seek")) MaterialTheme.colorScheme.error
+                        else MaterialTheme.colorScheme.onSurfaceVariant)
+                }
             }
-            if (status.isNotEmpty()) Text(status)
-            if (playing && dur > 0) {
-                Slider(
-                    value = seeking ?: pos.toFloat(), valueRange = 0f..dur.toFloat(),
-                    onValueChange = { seeking = it },
-                    onValueChangeFinished = {
-                        val t = seeking?.toLong() ?: return@Slider
-                        seeking = null
-                        scope.launch { runCatching { Upnp.seek(selected!!, t) }.onFailure { status = "Seek : ${it.message}" } }
-                    })
-                Text("${pos / 60}:%02d / ${dur / 60}:%02d".format(pos % 60, dur % 60))
+            if (playing) {
+                MiniPlayer(fileName, selected?.name.orEmpty(), !paused, if (dur > 0) pos.toFloat() / dur else 0f,
+                    ::toggle, { stopPlayback() }) { showPlayer = true }
+            } else {
+                Button(enabled = selected != null && fileUri != null, onClick = ::cast,
+                    modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+                    Icon(Icons.Filled.Cast, null); Spacer(Modifier.width(8.dp)); Text("Diffuser")
+                }
             }
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                Button(enabled = selected != null && fileUri != null, onClick = {
-                    val r = selected!!; val uri = fileUri!!
-                    scope.launch {
-                        val ip = Upnp.localIp() ?: run { status = "Pas d'adresse Wi-Fi"; return@launch }
-                        startServer()
-                        var srv = ServerService.server
-                        repeat(20) { if (srv == null) { delay(100); srv = ServerService.server } }
-                        val s = srv ?: run { status = "Serveur non démarré"; return@launch }
-                        val mime = contentResolver.getType(uri) ?: "video/mp4"
-                        val ext = fileName.substringAfterLast('.', "mp4")
-                        val url = "http://$ip:8089/media/${s.register(uri, mime)}.$ext"
-                        val didl = Didl.item(url, fileName, mime, Didl.protocolInfo(mime, MediaServer.FEATURES))
-                        status = "Envoi vers ${r.name}…"
-                        runCatching { Upnp.play(r, url, didl) }
-                            .onSuccess { playing = true; status = "Lecture sur ${r.name}" }
-                            .onFailure { status = "Échec : ${it.message}" }
-                    }
-                }) { Text("Diffuser") }
-                Button(enabled = playing, onClick = { scope.launch { runCatching { Upnp.pause(selected!!) } } }) { Text("Pause") }
-                Button(enabled = playing, onClick = { scope.launch { runCatching { Upnp.resume(selected!!) } } }) { Text("Lecture") }
-                Button(enabled = playing, onClick = {
-                    scope.launch {
-                        runCatching { Upnp.stop(selected!!) }
-                        playing = false; pos = 0; status = "Arrêté"
-                        stopService(Intent(this@MainActivity, ServerService::class.java))
-                    }
-                }) { Text("Stop") }
-            }
+        }
+        if (showPlayer && playing) {
+            NowPlayingSheet(fileName, selected?.name.orEmpty(), !paused, pos * 1000, dur * 1000,
+                onSeek = { ms -> scope.launch { runCatching { Upnp.seek(selected!!, ms / 1000) }.onFailure { status = "Seek : ${it.message}" } } },
+                onToggle = ::toggle,
+                onSkip = { d -> scope.launch { runCatching { Upnp.seek(selected!!, (pos + d).coerceIn(0, maxOf(dur, 0))) } } },
+                onStop = { stopPlayback() }, onDismiss = { showPlayer = false })
         }
     }
 }
