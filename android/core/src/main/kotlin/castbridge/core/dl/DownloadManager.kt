@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit
  * subtitles and APKs are moved to the top of the same volume, which is instant (same file system).
  */
 class DownloadManager(
-    private val volumes: VolumeRegistry,
+    registry: VolumeRegistry,
     private val workDir: File,
     /** The live RPC client, null while aria2 is not running. */
     private val rpc: () -> Aria2Rpc?,
@@ -63,6 +63,16 @@ class DownloadManager(
         }
     }
 
+    @Volatile private var volumes: VolumeRegistry = registry
+    private val onVolume: (castbridge.core.tv.VolumeEvent) -> Unit = { ev -> if (!ev.present) worker(Runnable { runCatching { tick() } }) }
+
+    /** The host was recreated with a new volume registry (e.g. activity recreated): follow it. */
+    fun rebind(registry: VolumeRegistry) {
+        if (registry === volumes) return
+        volumes = registry
+        registry.addListener(onVolume)
+    }
+
     private val lock = Any()
     private val tasks = ArrayList<Task>()
     private val done = ArrayList<Finished>()
@@ -82,7 +92,7 @@ class DownloadManager(
     init {
         workDir.mkdirs()
         load()
-        volumes.addListener { ev -> if (!ev.present) worker(Runnable { runCatching { tick() } }) }
+        volumes.addListener(onVolume)
     }
 
     // ---------------------------------------------------------------------------------------------------------------

@@ -35,6 +35,7 @@ import castbridge.core.tv.PlayerState
 import castbridge.core.tv.ReceiverServer
 import castbridge.core.tv.VolumeKind
 import castbridge.core.tv.VolumeRegistry
+import castbridge.core.tv.then
 import org.videolan.libvlc.LibVLC
 import org.videolan.libvlc.Media
 import org.videolan.libvlc.MediaPlayer
@@ -101,7 +102,8 @@ class PlayerActivity : Activity(), Player, Device {
         guard = PinGuard(pin)
         val profile = prefs.profile()
         logResources(dir, profile)
-        server = ReceiverServer(registry, this, pin = pin, guard = guard, device = this, extension = ApiExtension(::extraApi),
+        val downloads = TvDownloads.start(this, registry) { server?.target ?: "auto" }      // downloads (aria2), see docs/DOWNLOADS.md
+        server = ReceiverServer(registry, this, pin = pin, guard = guard, device = this, extension = ApiExtension(::extraApi).then(downloads.manager.apiExtension),
             profile = profile, onSettings = { prefs.saveProfile(it); updateStorageStatus() },
             onNotice = { n -> main.post { flash(n) }; setStatus("5-notice", n) },
             safPicker = ::launchSafPicker, settingsOpener = ::openStorageSettings).also {
@@ -345,6 +347,7 @@ class PlayerActivity : Activity(), Player, Device {
 
     private fun showMenu() {
         val items = mutableListOf<Pair<String, () -> Unit>>()
+        items += "Téléchargements" to { startActivity(Intent(this, DownloadsActivity::class.java)) }
         items += "Bluetooth : rendre la TV visible (2 min)" to { makeDiscoverable() }
         items += (if (prefs.getBool("wd_enabled", false)) "Wi-Fi Direct : désactiver" else "Wi-Fi Direct : activer (crée un réseau TV<->téléphone)") to { toggleWifiDirect() }
         items += "USB : importer les vidéos des clés détectées" to { usbMessage(usb?.importFromVolumes()) }

@@ -259,6 +259,43 @@ class DownloadManagerTest {
     }
 }
 
+class DownloadsClientTest {
+    @Test fun phoneClientDrivesTheTv() {
+        val r = DlRig()
+        val port = ServerSocket(0).use { it.localPort }
+        val server = ReceiverServer(r.registry, FakePlayer(), port, pin = "654321", guard = PinGuard("654321", maxFailures = 1000),
+            extension = r.dm.apiExtension).apply { start(5000, false) }
+        try {
+            val c = DownloadsClient("http://127.0.0.1:$port", "654321")
+            assertFalse(c.state().warningAccepted)
+            val w = assertFailsWith<DownloadsClient.Refused> { c.add("https://example.org/a.mkv") }
+            assertEquals("warning", w.code)
+            c.accept()
+            c.add("https://example.org/a.mkv")
+            c.upload("film.torrent", Benc.torrent("Film.mkv", length = 999))
+            val s = c.state()
+            assertEquals(2, s.tasks.size); assertTrue(s.engineRunning)
+            val t = s.tasks.first { it.name == "Film.mkv" }
+            assertEquals(999, t.total); assertEquals("Clé USB", t.volumeLabel)
+            assertEquals(1, c.files(t.id).size)
+            c.pause(t.id); assertTrue(c.state().tasks.first { it.id == t.id }.canResume)
+            c.resume(t.id)
+            c.settings(downLimit = 1_000_000, seeding = false)
+            assertEquals(1_000_000, c.state().downLimit)
+            r.fake.complete(r.fake.dls.values.first { it.btName == "Film.mkv" }.gid); r.dm.tick()
+            assertEquals(listOf("Film.mkv"), c.state().done.single().files)
+            assertTrue(c.about().contains("GPL"))
+            assertEquals(401, assertFailsWith<DownloadsClient.Refused> { DownloadsClient("http://127.0.0.1:$port", "111111").state() }.http)
+        } finally { server.stop() }
+    }
+
+    @Test fun findsTheLinkInSharedText() {
+        assertEquals("https://example.org/a.mkv", DownloadsClient.findLink("Regarde ça : https://example.org/a.mkv."))
+        assertEquals("magnet:?xt=urn:btih:abc&dn=x", DownloadsClient.findLink("magnet:?xt=urn:btih:abc&dn=x"))
+        assertNull(DownloadsClient.findLink("pas de lien ici"))
+    }
+}
+
 class SupervisorTest {
     /** A process that "runs" until destroyed or [crash]ed; serves a fake aria2 RPC on the port given on its command line. */
     class FakeProc(cmd: List<String>, val fake: FakeAria2) : Process() {
