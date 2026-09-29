@@ -68,6 +68,7 @@ class PlayerActivity : Activity(), Player, Device {
     private var usb: UsbImporter? = null
     private var ssh: SshControl? = null
     private var updater: UpdateInstaller? = null
+    private var gateway: BtGatewayHost? = null
     private lateinit var prefs: TvPrefs
     private lateinit var videosDir: File                    // the internal videos folder (Bluetooth and USB import write here)
     private lateinit var registry: VolumeRegistry
@@ -328,6 +329,8 @@ class PlayerActivity : Activity(), Player, Device {
 
     private fun onPermissionsReady() {
         bt?.start()
+        gateway = gateway ?: BtGatewayHost(this, guard) { setStatus("6-gw", it) }
+        gateway?.start()
         // Wi-Fi Direct is opt-in (MENU): creating a group can disturb the TV's own Wi-Fi connection.
         if (prefs.getBool("wd_enabled", false) && wd?.hasPermission() == true) wd?.start()
     }
@@ -410,6 +413,10 @@ class PlayerActivity : Activity(), Player, Device {
         path == "/api/update" && method == "GET" -> updater?.let { ApiReply(200, it.infoJson()) }
         path == "/api/update/install" && method == "POST" ->
             updater?.install(listOf(params["name"].orEmpty()), params["force"] == "1")
+        path == "/api/gateway" && method == "GET" -> ApiReply(200, gateway?.json() ?: """{"listening":false,"connected":false}""")
+        path == "/api/gateway/test" && method == "GET" -> gateway?.test() ?: ApiReply(409, """{"error":"passerelle non démarrée"}""")
+        path == "/api/gateway/speed" && method == "GET" -> gateway?.speed(params["bytes"]?.toLongOrNull() ?: 2_000_000)
+            ?: ApiReply(409, """{"error":"passerelle non démarrée"}""")
         path == "/api/bluetooth" && method == "GET" -> bt?.let { ApiReply(200, it.stateJson(statuses["1-bt"])) }
         // Asks Android to make the TV visible for 2 min (the TV shows its own confirmation), and starts the receiver if needed.
         path == "/api/bluetooth/discoverable" && method == "POST" -> {
@@ -643,6 +650,7 @@ class PlayerActivity : Activity(), Player, Device {
         bt?.stop()
         wd?.stop()
         ssh?.stop()
+        gateway?.stop()
         updater?.stop()
         server?.stop()
         main.removeCallbacksAndMessages(null)     // no Handler callback may outlive the activity

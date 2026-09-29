@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import castbridge.core.tv.Pin
+import androidx.compose.ui.Alignment
 import castbridge.core.tv.ResumableUpload
 import castbridge.core.tv.TvClient
 import kotlinx.coroutines.Dispatchers
@@ -127,6 +128,7 @@ fun BtScreen() {
                 onClick = { BtUploadService.start(ctx, fileUri!!, fileName!!, selected!!, pin) }) { Text("Envoyer") }
             if (busy) OutlinedButton(onClick = { BtUploadService.cancel(ctx) }) { Text("Annuler") }
         }
+        GatewaySwitch(selected, pin, granted)
         when (val u = state) {
             is ResumableUpload.State.Uploading -> {
                 LinearProgressIndicator({ u.sent.toFloat() / u.total }, Modifier.fillMaxWidth())
@@ -277,4 +279,23 @@ fun UpdatePanel(client: TvClient) {
     if (msg.isNotEmpty()) Text(msg, style = MaterialTheme.typography.bodyMedium)
     Text("Plusieurs fichiers d'une même application (APK fractionnés) sont installés ensemble. Une mise à jour d'une app déjà installée doit avoir la même signature. La TV demande une confirmation à l'écran pour chaque application.",
         style = MaterialTheme.typography.bodySmall)
+}
+
+
+/** "Share the phone's Internet with the TV" over Bluetooth (TV app downloads, quiz questions, updates). */
+@Composable
+fun GatewaySwitch(tvAddress: String?, pin: String, granted: Boolean) {
+    val ctx = LocalContext.current
+    val st by BtGatewayService.state.collectAsState()
+    val on = st != "Partage inactif" && st != "Partage arrêté" && !st.startsWith("Code PIN")
+    HorizontalDivider()
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Column(Modifier.weight(1f)) {
+            Text("Partager l'Internet du téléphone avec la TV", style = MaterialTheme.typography.titleSmall)
+            Text(st, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+        Switch(checked = on, enabled = granted && tvAddress != null && Pin.isValidFormat(pin), onCheckedChange = {
+            if (it) BtGatewayService.start(ctx, tvAddress!!, pin) else BtGatewayService.stop(ctx)
+        })
+    }
 }

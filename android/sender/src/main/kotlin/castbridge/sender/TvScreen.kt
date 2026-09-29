@@ -252,9 +252,13 @@ fun TvScreen(fixedBase: String? = null, extra: @Composable (TvClient) -> Unit = 
                         })
                 }
             }
+            // Advanced panels at the end of the scrolling list (never squeezing the send steps), and only once the PIN
+            // has been accepted (a successful poll), never with a missing or refused one.
+            if (info != null && badPin == null) client?.let { c ->
+                item { SectionHeader("Avancé") }
+                item { Column(Modifier.padding(horizontal = 16.dp)) { extra(c) } }
+            }
         }
-        // Admin panels only once the PIN has been accepted (a successful poll), never with a missing or refused one.
-        if (info != null && badPin == null) client?.let { c -> Column(Modifier.padding(horizontal = 16.dp)) { extra(c) } }
         current?.let { i ->
             MiniPlayer(i.name!!, "CastBridge TV", i.state == "playing" || i.state == "buffering", if (i.dur > 0) i.pos.toFloat() / i.dur else 0f,
                 onToggle = { cmd("Pause") { if (i.state == "playing" || i.state == "buffering") pause() else resume() } },
