@@ -269,19 +269,20 @@ class PlayerPanel(private val act: Activity, private val api: Api) {
 /** Bottom bar with title, position and a progress line, shown a few seconds after a seek, a pause or INFO. */
 class ProgressOverlay(private val act: Activity, parent: FrameLayout) {
     private val main = Handler(Looper.getMainLooper())
-    private val title = TextView(act).apply { setTextColor(Color.WHITE); textSize = 20f; typeface = Typeface.DEFAULT_BOLD; maxLines = 1 }
-    private val time = TextView(act).apply { setTextColor(0xFFDDDDDD.toInt()); textSize = 16f }
+    private val title = TextView(act).apply { setTextColor(Color.WHITE); textSize = 24f; typeface = Typeface.DEFAULT_BOLD; maxLines = 1 }
+    private val time = TextView(act).apply { setTextColor(0xFFDDE3EA.toInt()); textSize = 17f }
     private val bar = ProgressBar(act, null, android.R.attr.progressBarStyleHorizontal).apply {
         max = 1000; progressTintList = android.content.res.ColorStateList.valueOf(0xFF33B5E5.toInt())
         secondaryProgressTintList = android.content.res.ColorStateList.valueOf(0x88FFFFFF.toInt())
     }
     private val box = LinearLayout(act).apply {
         orientation = LinearLayout.VERTICAL; visibility = View.GONE
-        setBackgroundColor(0xCC000000.toInt())
-        val pad = dp(24); setPadding(pad * 2, pad / 2, pad * 2, pad)
-        addView(title); addView(bar, LinearLayout.LayoutParams(-1, dp(8)).apply { topMargin = dp(8); bottomMargin = dp(6) }); addView(time)
+        // A soft shadow rising from the bottom, a thin line of progress: modern and out of the way.
+        background = android.graphics.drawable.GradientDrawable(android.graphics.drawable.GradientDrawable.Orientation.BOTTOM_TOP, intArrayOf(0xE6000000.toInt(), 0x99000000.toInt(), 0x00000000))
+        val pad = dp(24); setPadding(pad * 2, pad * 3, pad * 2, pad + dp(8))
+        addView(title); addView(bar, LinearLayout.LayoutParams(-1, dp(4)).apply { topMargin = dp(10); bottomMargin = dp(8) }); addView(time)
     }
-    private val hide = Runnable { box.visibility = View.GONE }
+    private val hide = Runnable { box.fadeTo(false, 400) }
 
     init { parent.addView(box, FrameLayout.LayoutParams(-1, -2, Gravity.BOTTOM)) }
 
@@ -292,11 +293,11 @@ class ProgressOverlay(private val act: Activity, parent: FrameLayout) {
         bar.secondaryProgress = if (durMs > 0 && reachableMs >= 0) (reachableMs * 1000 / durMs).toInt() else 1000
         time.text = LibraryLogic.clock(posMs) + (if (durMs > 0) "  /  ${LibraryLogic.clock(durMs)}   (-${LibraryLogic.clock(durMs - posMs)})" else "") +
             (if (extra.isNotEmpty()) "   ·   $extra" else "")
-        box.visibility = View.VISIBLE
+        box.fadeTo(true)
         main.removeCallbacks(hide); main.postDelayed(hide, 4000)
     }
 
-    fun hideNow() { main.removeCallbacks(hide); box.visibility = View.GONE }
+    fun hideNow() { main.removeCallbacks(hide); box.animate().cancel(); box.visibility = View.GONE }
 
     private fun dp(v: Int) = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, v.toFloat(), act.resources.displayMetrics).toInt()
 }

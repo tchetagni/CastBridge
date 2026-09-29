@@ -122,10 +122,11 @@ class ReceiverServer(
                 if (playingVolume == ev.volume.id && player.state().state != "idle") {
                     runCatching { player.stop() }
                     onNotice("${ev.volume.label} retiré : lecture arrêtée")
-                } else onNotice("${ev.volume.label} retiré : les envois en cours reprendront à son retour")
+                } else onNotice("${ev.volume.label} retirée : les envois en cours reprendront à son retour")
             } else {
                 cleanOrphans(ev.volume)
-                onNotice("${ev.volume.label} détecté : les envois interrompus peuvent reprendre")
+                val free = runCatching { volumes.free(ev.volume) }.getOrDefault(-1)
+                onNotice("${ev.volume.label} branchée" + (if (free >= 0) " : ${StorageLine.size(free)} libres" else ""))
             }
         }
         setAsyncRunner(BoundedRunner(cfg.maxHttpThreads))
@@ -471,6 +472,7 @@ class ReceiverServer(
                         try { st.commit(o.name) } catch (e: IOException) { throw DiskError(e) }
                         fileStore?.let { Storage.forget(it.dir, o.name); Meta.delete(it.dir, o.name) }
                         meters.remove(name); volumes.forgetPart(v, o.name)
+                        onNotice(when (MediaType.of(name)) { MediaType.VIDEO -> "Vidéo reçue"; MediaType.AUDIO -> "Musique reçue"; MediaType.OTHER -> "Fichier reçu" } + " ✓  ${LibraryLogic.title(name)}")
                         // The upload replaced any older file of that name: no silent duplicate on another volume.
                         finals(name).filter { it.v.id != v.id && !isPlaying(name) }.forEach {
                             it.st.deleteFinal(it.name); (it.st as? FileStore)?.let { f -> Storage.forget(f.dir, it.name) }
@@ -553,6 +555,9 @@ class ReceiverServer(
         val st = volumes.store(v) as? FileStore ?: return -1
         return Storage.quota(st.dir, cfg, used, volumes.free(v), v.kind)
     }
+
+    /** Files being received right now: (name, received bytes, final size). */
+    fun receiving(): List<Triple<String, Long, Long>> = listing().entries.filter { !it.complete }.map { Triple(it.name, it.received, it.size) }
 
     /** Finished files (newest first) with what the library screens need: thumbnail, duration, resume position, volume. */
     fun libraryItems(): List<LibraryItem> {

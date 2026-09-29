@@ -45,9 +45,11 @@ class PlayerActivity : Activity(), TvService.Screen {
     // the service and the waiting screen do not need it (see docs/ADMIN.md, "Mémoire").
     private var libVlc: LibVLC? = null
     private var mp: MediaPlayer? = null
-    private lateinit var idle: TextView
-    private lateinit var idleBox: View
-    private var libScreen: LibraryScreen? = null
+    private var home: HomeScreen? = null                    // the launcher-like home (docs/ADMIN.md, "Écran d'accueil")
+    private var libScreen: LibraryScreen? = null            // the whole library as a grid
+    private var settingsPanel: SettingsPanel? = null        // "Connexion & réglages" (MENU)
+    private var thumbs: TvThumbs? = null
+    private lateinit var banner: Banner
     @Volatile private var currentSize = 0L                  // size of the file playing: with its name, the key of its saved position
     private lateinit var extras: PlayerExtras               // per-file player settings, tracks, decoder (docs/ADMIN.md, "Lecteur")
     private lateinit var panel: PlayerPanel
@@ -55,7 +57,6 @@ class PlayerActivity : Activity(), TvService.Screen {
     private var playerSpu = false                           // libVLC was created with its subtitle engine
     private var reopen: ((Long) -> Unit)? = null             // re-opens the current file at a position (subtitle engine, decoder change)
     private var swRetry = false                             // the software-decoding retry was already made for this file
-    private lateinit var osd: TextView
     private lateinit var lead: TextView
     @Volatile private var streamingName: String? = null    // set while playing a file that may still be arriving
     private var lastLeadUpdate = 0L
@@ -88,24 +89,23 @@ class PlayerActivity : Activity(), TvService.Screen {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_player)
-        idle = findViewById(R.id.idle)
-        idleBox = findViewById(R.id.idleBox)
-        findViewById<View>(R.id.openLibrary).setOnClickListener { showLibrary() }
-        osd = findViewById(R.id.osd)
         lead = findViewById(R.id.lead)
-        idle.text = "CastBridge TV\nDémarrage…"
+        banner = Banner(findViewById(android.R.id.content))
         TvService.start(this)                                // runs on its own afterwards (and starts with the TV)
         bindService(Intent(this, TvService::class.java), conn, BIND_AUTO_CREATE)
     }
 
     private fun onBound(s: TvService) {
         extras = PlayerExtras({ library?.db }, s.prefs) { r -> runCatching { s.bg.execute(r) } }
-        if (libScreen == null) libScreen = LibraryScreen(this, findViewById(R.id.library), libraryApi())
+        val t = thumbs ?: TvThumbs { n, v -> server?.thumbnail(n, v) }.also { thumbs = it }
+        if (libScreen == null) libScreen = LibraryScreen(this, findViewById(R.id.library), t, libraryApi())
+        if (home == null) home = HomeScreen(this, findViewById(R.id.home), t, homeApi())
+        if (settingsPanel == null) settingsPanel = SettingsPanel(this, findViewById(R.id.settings))
         panel = PlayerPanel(this, panelApi())
         if (!::bar.isInitialized) bar = ProgressOverlay(this, findViewById(android.R.id.content))
         s.attach(this)                                       // may run a play request that arrived while the screen was closed
         requestRuntimePermissions()
-        if (current == null && libScreen?.visible != true) showIdle()
+        if (current == null && libScreen?.visible != true) showHome()
     }
 
     override fun onResume() {
@@ -125,7 +125,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         if (mp != null && !isChangingConfigurations) {
             current = null; snapshot = PlayerState(); releasePlayer(); reopen = null
             if (::extras.isInitialized) extras.forget()
-            main.post { if (libScreen != null) showLibrary() }
+            main.post { if (home != null) showHome() }
         }
     }
 
@@ -134,8 +134,8 @@ class PlayerActivity : Activity(), TvService.Screen {
     override val shown: Boolean get() = resumed && !isFinishing
     override val activity: Activity get() = this
     override fun notice(msg: String) { flash(msg) }
-    override fun statusesChanged() { if (::idleBox.isInitialized && idleBox.visibility == View.VISIBLE) showIdle() }
-    override fun thumbReady(name: String) { libScreen?.onThumbReady(name) }
+    override fun statusesChanged() { if (settingsPanel?.visible == true) showSettings() }
+    override fun thumbReady(name: String) { thumbs?.ready(name); libScreen?.onThumbReady(name); home?.onThumbReady(name) }
     override fun runPending(r: TvService.Pending) {
         runCatching {
             when (r) {
@@ -281,31 +281,66 @@ class PlayerActivity : Activity(), TvService.Screen {
         }
     }
 
-    private fun showIdle(msg: String? = idleMsg) {
-        idleMsg = msg
-        libScreen?.hide()
-        idleBox.visibility = View.VISIBLE
-        idle.text = (msg?.let { "$it\n\n" } ?: "") +
-            "CastBridge TV\nEn attente du téléphone…\n\n${TvService.localIp() ?: "pas de réseau"}:${ReceiverServer.PORT}\nCode PIN : $pin\n\n" +
-            statuses.toSortedMap().values.joinToString("\n") + "\n\nMENU : options (USB, Bluetooth, SSH…)   ·   Touche bleue / GUIDE : bibliothèque"
-        if (currentFocus == null) findViewById<View>(R.id.openLibrary).requestFocus()
+    /** The home (launcher): rows of videos, clock, "ready" band. Technical details are in "Connexion & réglages". */
+    private fun showHome() {
+        libScreen?.hide(); settingsPanel?.hide()
+        home?.show()
     }
 
-    /** Hides the waiting screen and the library (a video starts). */
+    /** Hides every screen (a video starts). */
     private fun hideScreens() {
-        idleBox.visibility = View.GONE
-        libScreen?.hide()
+        home?.hide(); libScreen?.hide(); settingsPanel?.hide()
     }
 
     private fun showLibrary() {
-        idleBox.visibility = View.GONE
+        home?.hide(); settingsPanel?.hide()
         libScreen?.show()
     }
 
-    /** Back from a video (BACK, end of file, error): the library, not an empty screen. */
+    /** Back from a video (BACK, end of file, error): the home with its "Reprendre" row, not an empty screen. */
     private fun afterPlayback(msg: String? = null) {
         if (msg != null) flash(msg)
-        showLibrary()
+        showHome()
+    }
+
+    private fun homeApi() = object : HomeScreen.Api {
+        override fun items() = server?.libraryItems().orEmpty()
+        override fun status(): Triple<String, String, String?> {
+            val s = server
+            val rec = s?.receiving()?.firstOrNull()?.let { (n, got, total) -> "Réception de ${castbridge.core.tv.LibraryLogic.title(n)} : ${got * 100 / total.coerceAtLeast(1)} %" }
+                ?: statuses["1-bt"]?.takeIf { "réception" in it }?.substringAfter(": ")?.let { "Réception par Bluetooth : $it" }
+            return Triple(if (s == null) "Démarrage…" else "Prêt à recevoir", pin, rec)
+        }
+        override fun open(i: castbridge.core.tv.LibraryItem, row: List<castbridge.core.tv.LibraryItem>, index: Int) { libScreen?.open(i, row, index) }
+        override fun actions(i: castbridge.core.tv.LibraryItem, row: List<castbridge.core.tv.LibraryItem>, index: Int) { libScreen?.actions(i, row, index) }
+        override fun openLibrary() = showLibrary()
+        override fun openSettings() = showSettings()
+        override fun openHelp() {
+            AlertDialog.Builder(this@PlayerActivity).setTitle("Envoyer une vidéo sur la TV")
+                .setMessage("1. Sur le téléphone, ouvrez l'app CastBridge, onglet « CastBridge TV ».\n" +
+                    "2. Touchez « Envoyer une vidéo » et choisissez-la.\n" +
+                    "3. La première fois, saisissez le code de la TV : $pin.\n\n" +
+                    "La vidéo est copiée sur la TV (ou sur sa clé USB) : elle continue même si le téléphone s'en va. " +
+                    "Depuis un ordinateur : ouvrez http://${TvService.localIp() ?: "adresse-de-la-TV"}:${ReceiverServer.PORT} dans un navigateur.")
+                .setPositiveButton("Compris", null).show()
+        }
+    }
+
+    /** "Connexion & réglages": connection facts in plain words, and every option (the former MENU list). */
+    private fun showSettings() {
+        val s = svc ?: return
+        val ip = TvService.localIp()
+        val labels = mapOf("0-storage" to "Stockage", "1-bt" to "Bluetooth", "2-wd" to "Wi-Fi Direct (sans box)", "3-usb" to "Import depuis une clé",
+            "4-ssh" to "Administration à distance (SSH)", "4-ssh-bt" to "SSH par Bluetooth", "5-update" to "Installation d'applications",
+            "5-notice" to "Dernier événement", "9-server" to "Serveur")
+        val info = buildList {
+            add("Code de connexion (à saisir une fois sur le téléphone)" to pin)
+            add("Adresse de la TV" to (ip?.let { "$it:${ReceiverServer.PORT}   ·   page web : http://$it:${ReceiverServer.PORT}" } ?: "pas de réseau (Bluetooth ou Wi-Fi Direct possibles)"))
+            add("Démarrage avec la TV" to if (prefs.getBool("autostart", true)) "oui" else "non")
+            add("Lecture lancée depuis le téléphone" to if (s.overlayAllowed()) "s'ouvre toute seule" else "demande d'ouvrir l'app (autorisation « afficher par-dessus » non accordée)")
+            statuses.toSortedMap().forEach { (k, v) -> add((labels[k] ?: k) to v.substringAfter(" : ", v)) }
+        }
+        settingsPanel?.show(info, menuItems())
     }
 
     /** Remembers where the current video stopped (normalised: see LibraryLogic.resumeFrom). */
@@ -324,10 +359,8 @@ class PlayerActivity : Activity(), TvService.Screen {
     /** The library's view of the app: listing, thumbnails, and the app's own API on loopback for actions. */
     private fun libraryApi() = object : LibraryScreen.Api {
         override fun items() = server?.libraryItems().orEmpty()
-        override fun thumbnail(name: String, volume: String) = server?.thumbnail(name, volume)
         override fun volumes() = svc?.registry?.volumes().orEmpty().filter { it.writable }.map { it.id to it.label }
-        override fun header() = "${TvService.localIp() ?: "pas de réseau"}:${ReceiverServer.PORT}  ·  PIN $pin  ·  " +
-            (statuses["0-storage"] ?: "") + "\nOK : lire   ·   MENU (ou OK long) : actions   ·   RETOUR : écran d'accueil"
+        override fun header() = "OK : lire   ·   MENU (ou OK maintenu) : actions   ·   RETOUR : accueil"
         override fun call(block: (castbridge.core.tv.TvClient) -> Unit): String? = try {
             block(castbridge.core.tv.TvClient("http://127.0.0.1:${ReceiverServer.PORT}", pin)); null
         } catch (e: castbridge.core.tv.TvClient.HttpError) {
@@ -370,10 +403,17 @@ class PlayerActivity : Activity(), TvService.Screen {
     // ---- MENU key: extra options that need a dialog ----
 
     private fun showMenu() {
-        val s = svc ?: return
+        if (current == null) { showSettings(); return }
+        AlertDialog.Builder(this).setTitle("CastBridge TV")
+            .setItems(menuItems().map { it.first }.toTypedArray()) { _, i -> menuItems()[i].second() }
+            .setNegativeButton("Fermer", null).show()
+    }
+
+    private fun menuItems(): List<Pair<String, () -> Unit>> {
+        val s = svc ?: return emptyList()
         val usb = s.usb; val ssh = s.ssh
         val items = mutableListOf<Pair<String, () -> Unit>>()
-        if (current == null) items += "Bibliothèque" to { showLibrary() }
+        if (current == null) items += "Toute la bibliothèque" to { showLibrary() }
         items += "Bluetooth : rendre la TV visible (2 min)" to { makeDiscoverable() }
         items += (if (prefs.getBool("wd_enabled", false)) "Wi-Fi Direct : désactiver" else "Wi-Fi Direct : activer (crée un réseau TV<->téléphone)") to { toggleWifiDirect() }
         items += "USB : importer les vidéos des clés détectées" to { usbMessage(usb?.importFromVolumes()) }
@@ -396,9 +436,7 @@ class PlayerActivity : Activity(), TvService.Screen {
             if (ssh?.running == true) { ssh.disable(); flash("SSH désactivé") }
             else Thread { runCatching { ssh?.enable() }.onFailure { e -> main.post { flash("SSH impossible : ${e.message}") } } }.start()
         }
-        AlertDialog.Builder(this).setTitle("CastBridge TV")
-            .setItems(items.map { it.first }.toTypedArray()) { _, i -> items[i].second() }
-            .setNegativeButton("Fermer", null).show()
+        return items
     }
 
     /**
@@ -446,13 +484,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         }.onFailure { flash("Réglage Bluetooth introuvable sur cette TV : associez le téléphone depuis les réglages de la TV") }
     }
 
-    private fun flash(text: String) {
-        if (!::osd.isInitialized) return
-        osd.text = text
-        osd.visibility = View.VISIBLE
-        main.removeCallbacksAndMessages(OSD)
-        main.postAtTime({ osd.visibility = View.GONE }, OSD, android.os.SystemClock.uptimeMillis() + 2500)
-    }
+    private fun flash(text: String) { if (::banner.isInitialized) banner.show(text) }
 
     // ---- Player (called from HTTP threads through the service: hop to the main thread and wait) ----
 
@@ -563,7 +595,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         current = null; snapshot = PlayerState(); releasePlayer(); reopen = null
         if (::extras.isInitialized) extras.forget()
         if (::bar.isInitialized) bar.hideNow()
-        if (wasPlaying || libScreen?.visible == true) afterPlayback() else showIdle()
+        if (wasPlaying || libScreen?.visible == true) afterPlayback() else showHome()
     }
     override fun state(): PlayerState = snapshot
 
@@ -664,7 +696,14 @@ class PlayerActivity : Activity(), TvService.Screen {
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         if (current == null) {
-            if (libScreen?.visible == true && keyCode == KeyEvent.KEYCODE_BACK) { showIdle(); return true }
+            if (keyCode == KeyEvent.KEYCODE_BACK) {
+                when {
+                    settingsPanel?.visible == true -> { settingsPanel?.hide(); if (libScreen?.visible != true) showHome() }
+                    libScreen?.visible == true -> showHome()
+                    else -> moveTaskToBack(true)              // leave the home: the service keeps running
+                }
+                return true
+            }
             if (libScreen?.visible != true && keyCode in LIBRARY_KEYS) { showLibrary(); return true }
         }
         if (keyCode == KeyEvent.KEYCODE_MENU) { if (current != null && mp != null) panel.show() else showMenu(); return true }
@@ -691,7 +730,7 @@ class PlayerActivity : Activity(), TvService.Screen {
     }
 
     override fun onDestroy() {
-        libScreen?.release()
+        libScreen?.release(); home?.release(); thumbs?.release()
         svc?.detach(this)
         runCatching { unbindService(conn) }                  // the service keeps running (started, foreground)
         main.removeCallbacksAndMessages(null)                 // no Handler callback may outlive the activity
@@ -704,7 +743,6 @@ class PlayerActivity : Activity(), TvService.Screen {
         private const val REQ_WD = 11
         private const val REQ_TREE = 12
         private const val REQ_STORAGE_TREE = 13
-        private val OSD = Any()
         /** Keys that open the library from the waiting screen (remotes differ: any of these). */
         private val LIBRARY_KEYS = setOf(KeyEvent.KEYCODE_GUIDE, KeyEvent.KEYCODE_BOOKMARK, KeyEvent.KEYCODE_PROG_BLUE,
             KeyEvent.KEYCODE_MEDIA_TOP_MENU, KeyEvent.KEYCODE_TV_CONTENTS_MENU, KeyEvent.KEYCODE_ALL_APPS)

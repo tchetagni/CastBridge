@@ -251,7 +251,7 @@ class MultiVolumeServerTest {
         assertTrue(r.notices.any { it.contains("retiré") })
         r.usbPresent = true
         assertTrue(r.call("POST", "/api/storage/rescan").second.contains("\"present\":true"))
-        assertTrue(r.notices.any { it.contains("détecté") })
+        assertTrue(r.notices.any { it.startsWith("Clé USB branchée") }, r.notices.toString())    // plain words, with the free space
     }
 
     @Test fun orphansAreCleanedPerVolumeWithALongerGraceOnDrives() {

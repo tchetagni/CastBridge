@@ -156,10 +156,27 @@ Les noms de fichiers sont sans `/`, `\`, ni `.part` final, 200 caractères max. 
 - **Non livré** : miniature d'aperçu pendant l'avance rapide (il faudrait un second décodeur en parallèle : exclu sur cette TV) ; contrôle des réglages de lecture depuis
   la page web (l'API est prête).
 
+### Écran d'accueil (TV) et accueil du téléphone
+
+- **TV, accueil façon « lanceur média »** : fond flouté (GPU, `RenderEffect`, Android 12+) tiré de la miniature de la vidéo sélectionnée, qui dérive lentement ;
+  horloge ; petit bandeau « ● Prêt à recevoir · code 83•••• » (OK dessus : code complet pendant 10 s ; pendant un envoi : « Réception de Film : 45 % ») ; rangées
+  « Reprendre », « Récemment ajoutés », « Sur la clé USB », « Toutes les vidéos », « Autres fichiers », puis tuiles « Toute la bibliothèque », « Connexion &
+  réglages », « Aide ». La carte qui a le focus grossit avec un halo bleu et le texte au-dessus des rangées la décrit (reprendre à…, durée, clé ou TV). Fondus entre
+  l'accueil, la bibliothèque et la lecture. RETOUR sur l'accueil quitte l'écran (le service continue).
+- **Plus de jargon sur l'écran principal** : adresse IP, port, PIN complet, SSH, Bluetooth, Wi-Fi Direct, stockage sont dans **MENU > Connexion & réglages** (infos
+  en langage courant à gauche, toutes les options à droite). Messages en bandeau animé : « Vidéo reçue ✓ », « Clé USB branchée : 57 Go libres », « Clé USB retirée… ».
+- **Lecteur** : barre fine de progression, titre, temps écoulé / total / restant, sur un dégradé, qui se masque seule après 4 s.
+- **Mémoire** : pas de vidéo en fond ; le fond est la miniature de 320 px déjà en cache (flou calculé par le GPU, rien de plus en RAM) ; une rangée = une
+  `RecyclerView` ; bitmaps RGB_565, 4 Mo au plus.
+- **Téléphone, onglet CastBridge TV** : accueil par tâches : « Envoyer une vidéo », « Regarder sur la TV » (télécommande si une vidéo joue, sinon la bibliothèque),
+  « Bibliothèque de la TV », « Échanger des fichiers » ; carte « Sur la TV » (lecture en cours) ; rangée « Reprendre sur la TV » ; progression d'envoi en grand avec
+  temps restant et débit ; **assistant de première connexion** (trouver la TV sur le Wi-Fi, saisir son code une seule fois, vérifié aussitôt). Tout le reste
+  (adresse manuelle, Bluetooth, Wi-Fi Direct, passerelle SSH, stockage, APK) est sous **« Avancé »** (l'écran d'avant, inchangé).
+
 ### Bibliothèque (TV, téléphone, page web)
 
-- **Sur la TV** : bouton « Bibliothèque (OK) » de l'écran d'attente, ou touche bleue / GUIDE / signet / « menu du contenu » de la télécommande, ou MENU > Bibliothèque.
-  En quittant une vidéo (RETOUR, fin du fichier, arrêt depuis le téléphone), la TV revient à la bibliothèque. Grille de cartes au D-pad (cadre bleu épais et
+- **Sur la TV** : les rangées de l'accueil, et la grille complète par la tuile « Toute la bibliothèque » (ou touche bleue / GUIDE / signet / « menu du contenu »).
+  En quittant une vidéo (RETOUR, fin du fichier, arrêt depuis le téléphone), la TV revient à l'accueil (rangée « Reprendre »). Grille de cartes au D-pad (cadre bleu épais et
   agrandissement de la carte qui a le focus) : miniature, titre sur deux lignes, durée, barre de reprise, badge « VU », badge « Clé »/« Interne ». Sections
   « Reprendre » (commencé, pas fini, dernier lu d'abord), « Récemment ajoutés » (12 plus récents, si la bibliothèque en a plus de 6), « Toutes » (par titre), « Autres
   fichiers » (documents, APK...). OK = lire (« Reprendre à 12:34 » ou « Depuis le début » si une position est mémorisée) ; MENU ou OK maintenu = actions (lire depuis le

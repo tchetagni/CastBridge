@@ -31,9 +31,9 @@ import kotlinx.coroutines.withContext
 /** Transport used to reach CastBridge TV. */
 enum class Channel(val label: String) { WIFI("Wi-Fi"), BLUETOOTH("Bluetooth"), WIFI_DIRECT("Wi-Fi Direct") }
 
-/** "CastBridge TV" tab: pick the channel, then use the matching screen. */
+/** "Avancé" part of the "CastBridge TV" tab: pick the channel (Wi-Fi, Bluetooth, Wi-Fi Direct), then use the matching screen. */
 @Composable
-fun TvHub() {
+fun TvHubAdvanced() {
     var channel by rememberSaveable { mutableStateOf(Channel.WIFI) }
     Column(Modifier.fillMaxSize()) {
         SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp)) {
