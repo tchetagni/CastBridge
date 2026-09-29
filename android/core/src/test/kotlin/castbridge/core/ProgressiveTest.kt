@@ -127,7 +127,7 @@ class StreamServerTest {
     private val dir = kotlin.io.path.createTempDirectory("ss").toFile()
     private val player = FakePlayer()
     private val port = ServerSocket(0).use { it.localPort }
-    private val server = ReceiverServer(dir, player, port, profile = TvProfile(minFreeBytes = 0), pin = "112233").apply { start(5000, false) }
+    private val server = ReceiverServer(dir, player, port, profile = TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0), pin = "112233").apply { start(5000, false) }
     private val base = "http://127.0.0.1:$port"
     private val tv = TvClient(base, "112233")
     private val data = Random(5).nextBytes(3_000_000)

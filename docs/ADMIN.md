@@ -43,13 +43,13 @@ Les noms de fichiers sont sans `/`, `\`, ni `.part` final, 200 caractères max. 
 | `POST /api/volume?pct=0..100` | volume média de la TV | comme `sysinfo` |
 | `POST /api/restart` | redémarre **l'app** (pas la TV) | `{"restarting":true}` |
 | `GET /api/part?name=` | octets déjà reçus d'un envoi | `{"name","length","done":bool}` |
-| `PUT /upload/<nom>?offset=N&total=T` | ajoute les octets `[N,T)` (corps = octets restants, `Content-Length` obligatoire) | `{"name","length","done"}` |
+| `PUT /upload/<nom>?offset=N&total=T[&target=auto\|internal\|<idVolume>]` | ajoute les octets `[N,T)` (corps = octets restants, `Content-Length` obligatoire) ; `target` choisit le volume de **ce** transfert (au premier octet ; sinon le réglage de la TV) | `{"name","length","done"}` |
 | `POST /api/reset?name=` | efface le `.part` | idem `part` |
 | `POST /api/play?name=&pos=ms` | lit un fichier ; s'il est encore en cours d'envoi, démarre en flux dès que assez de données sont arrivées (sinon `409 {"error":"buffering","received","needed","size"}`) | comme `info` |
 | `GET\|HEAD /stream/<nom>` | le fichier (ou le `.part` en cours) avec `Range` 206/416, `Content-Length` = taille **finale** ; lit bloquant jusqu'à l'arrivée des octets manquants (coupure propre après 30 s) | octets |
-| `GET /api/storage` / `POST /api/storage?deleteAfterPlay=&evictPlayed=&quotaMb=` | quota et politique de stockage, volumes (mémoire interne, clé USB, dossier SAF) | `{"used","free","quota","quotaMb","deleteAfterPlay","evictPlayed","minFreeMb","target","primary","volumes":[{"id","label","kind","fs","removable","writable","present","free","total","used","quota","writeBps","warnings","formatAdvice"}],"move","warnings"}` |
+| `GET /api/storage` / `POST /api/storage?deleteAfterPlay=&evictPlayed=&quotaMb=&minFreeAfterMb=` | quota et politique de stockage (`minFreeAfterMb` : espace à garder libre après un transfert, 1024 par défaut), volumes (mémoire interne, clé USB, dossier SAF) | `{"used","free","quota","quotaMb","deleteAfterPlay","evictPlayed","minFreeMb","minFreeAfterMb","target","primary","volumes":[{"id","label","kind","fs","removable","writable","present","free","total","used","quota","writeBps","warnings","formatAdvice"}],"move","warnings"}` |
 | `POST /api/storage/target?value=auto\|internal\|<idVolume>` | où vont les nouveaux fichiers (jamais un chemin) | comme `GET /api/storage` |
-| `GET /api/storage/check?name=&size=&dur=ms` | pré-vérification avant envoi : volume prévu, avertissements, ou refus précis (FAT32 > 4 Go...) | `{"ok":true,"volume","fs","as","warnings"}` ou `{"ok":false,"status":413\|507\|503,"error","message"}` |
+| `GET /api/storage/check?name=&size=&dur=ms[&volume=auto\|internal\|<id>]` | pré-vérification avant envoi : volume prévu, espace restant **après** le transfert, avertissements, ou refus précis (FAT32 > 4 Go, « il resterait 640 Mo, il en faut 1 Go »...) | `{"ok":true,"volume","label","fs","as","warnings","free","remaining","freeAfter","minFreeAfter","options":[{"id","label","kind","free","freeAfter","ok"}]}` ou `{"ok":false,"status":413\|507\|503,"error","message","options"}` |
 | `POST /api/storage/move?name=&to=<idVolume\|saf>` `POST /api/storage/move/cancel` | déplace un fichier fini entre volumes (copie vérifiée puis suppression de la source ; refusé si en lecture) | `{"moving":true,"move":{...}}`, état dans `GET /api/storage` |
 | `POST /api/storage/rescan[?measure=1]` | re-détecte les volumes (et re-mesure le débit d'écriture) | comme `GET /api/storage` |
 | `POST /api/storage/saf/pick` | ouvre le sélecteur de dossier **sur l'écran de la TV** (quelqu'un doit valider) | `{"message"}` |
@@ -67,13 +67,36 @@ Les noms de fichiers sont sans `/`, `\`, ni `.part` final, 200 caractères max. 
 ### Stockage et mémoire (TV modeste)
 
 - **Quota** du dossier vidéos : par défaut min(50 % de « utilisé + libre », 8 Go) ; réglable (`quotaMb`). Un envoi qui ne tient pas (quota, ou moins de
-  100 Mo libres sur l'appareil) est refusé **avant** toute écriture : `507 {"error":"quota exceeded"|"not enough space"}`.
+  1 Go libre sur le volume à la fin du transfert) est refusé **avant** toute écriture : `507 {"error":"quota exceeded"|"not enough space","message":"…"}`.
 - **Éviction** (option, désactivée par défaut) : si le quota est plein, suppression des plus anciens fichiers **déjà lus**, jamais celui en cours de lecture.
   **Supprimer après lecture** (option, désactivée) : un fichier lu jusqu'au bout est effacé.
 - Les `.part` (et leurs `.meta`) abandonnés depuis plus de 24 h sont supprimés au démarrage.
 - libVLC n'est créé qu'au premier `play` et libéré à l'arrêt, à la fin, ou sur `onTrimMemory` ; tampons d'E/S de 64 Ko ; 8 connexions HTTP au plus ;
   `/api/info` relit le dossier au plus une fois par seconde. `GET /api/sysinfo` donne `pssMb` (mémoire de l'app) et `memAvailMb`.
 - Constantes regroupées dans `TvProfile` (module `:core`).
+
+### Échange de fichiers à débit maximal (téléphone <-> TV)
+
+- **Règle des 1 Go** (`TvProfile.minFreeAfterTransfer`, 1 Gio par défaut, 0 = désactivée) : un transfert téléphone -> TV n'est accepté que si, **à la fin**, le volume de
+  destination garde au moins 1 Go libre : `libre - reste_à_recevoir >= 1 Go`. Évaluée sur le volume choisi par la politique de stockage existante ; en cible `auto`,
+  un volume qui ne la respecte pas est écarté et le suivant est essayé ; sinon **refus avant tout octet** (`/api/storage/check` puis `PUT`, `507`) avec un message précis :
+  « Espace insuffisant : il resterait 640 Mo sur Mémoire interne après le transfert, il en faut 1 Go : libérez 384 Mo ou branchez la clé USB. » Une reprise est jugée
+  sur ce qui reste à recevoir. Cette règle remplace la réserve de 100 Mo **pour ces transferts** ; déplacements, Bluetooth et import USB gardent la réserve de 100 Mo.
+  Sur la TV d'Esaie (≈ 300 Mo libres en interne), cela veut dire : **les envois vont sur la clé USB** (58 Go) ; sans clé, ils sont refusés avec ce message.
+- **Téléphone -> TV** : app > CastBridge TV > Wi-Fi > « Échange de fichiers » : tout type de fichier (les non-vidéos apparaissent sous « Autres fichiers » de la
+  bibliothèque), choix du volume de destination pour ce transfert (`target=`), espace restant prévu après le transfert pour chaque volume, débit instantané et moyen,
+  temps restant, reprise automatique. Débit : un seul flux HTTP continu (`setFixedLengthStreamingMode`, pas de limitation), lectures de 512 Ko côté téléphone,
+  verrou Wi-Fi `LOW_LATENCY` (API 29+) + `HIGH_PERF`, wakelock partiel. Côté TV : la socket remplit un bloc de **256 Ko** avant chaque écriture disque (moins d'appels
+  sur FUSE/clé), **aucun fsync par bloc** ; sur une clé amovible, `fsync` tous les 64 Mo et à la fin (données sur le support si on la retire). RAM : 256 Ko par envoi
+  actif (8 connexions HTTP au plus = 2 Mo au pire).
+- **Connexions parallèles par plages : non livrées, volontairement.** La conception étudiée (fichier pré-alloué, 2 à 4 segments `PUT` par offset, carte des segments
+  persistée pour la reprise) casse l'invariant « le `.part` est un préfixe contigu » dont dépendent la lecture pendant l'envoi, la reprise par `length`, le Bluetooth et
+  le déplacement ; et elle n'apporterait rien ici : la destination réelle est la clé USB, mesurée à **~2,2 Mo/s en écriture**, qu'un seul flux Wi-Fi sature déjà (et des
+  écritures entrelacées en plusieurs endroits d'un fichier exFAT sur une clé sont plus lentes, pas plus rapides). Le débit mesuré est affiché avec, le cas échéant,
+  « débit limité par l'écriture de la clé ». À reconsidérer seulement si des mesures sur la TV montrent un flux unique nettement sous le débit d'écriture du volume.
+- **TV -> téléphone** : « Télécharger sur le téléphone » (bibliothèque) ou liste « De la TV vers le téléphone » : `GET /stream/<nom>` avec `Range: bytes=<déjà reçu>-`,
+  reprise automatique après coupure (et au prochain lancement du même fichier), service de premier plan, enregistrement dans **Téléchargements/CastBridge**
+  (MediaStore, masqué aux autres apps tant qu'il n'est pas complet ; dossier de l'app sur Android 8-9) ou dans un **dossier choisi** (SAF). Débit instantané/moyen.
 
 ### Bibliothèque (TV, téléphone, page web)
 
@@ -109,8 +132,8 @@ la position atteignable en avance rapide est bornée à ce qui a été reçu.
 `target`. `503 {"error":"volume removed"}` pendant un envoi = la clé est retirée : réessayer, la reprise se fait à son retour. `413` = fichier trop gros pour la cible (FAT32) : ne pas réessayer.
 
 Codes : `400` paramètre invalide, `401` PIN faux ou IP verrouillée, `404`, `405` (utiliser POST), `409` mauvais
-offset (le corps donne `length`), `413` fichier trop gros pour le volume, `503` volume retiré/indisponible, `501` non supporté sur cet appareil, `507` espace insuffisant (moins de 100 Mo libres
-après l'envoi).
+offset (le corps donne `length`), `413` fichier trop gros pour le volume, `503` volume retiré/indisponible, `501` non supporté sur cet appareil, `507` espace insuffisant (moins de **1 Go** libre
+après l'envoi, voir « Échange de fichiers » ; le corps donne `message`).
 
 ## 4. Envoyer un fichier, reprise incluse
 

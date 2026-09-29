@@ -57,6 +57,8 @@ class ReceiverServer(
     ) : this(VolumeRegistry.single(dir), player, port, profile, onSettings, pin, guard, device, extension)
 
     @Volatile private var cfg = profile
+    /** Profile for phone <-> TV transfers: the "free space after the transfer" rule instead of the plain reserve. */
+    private val xferCfg: TvProfile get() = cfg.let { it.copy(minFreeBytes = TransferRule.minFree(it)) }
     /** Random per run: lets the TV's own player read /stream/ on loopback without the PIN (never leaves the process). */
     private val streamToken: String = ByteArray(16).also { java.security.SecureRandom().nextBytes(it) }.joinToString("") { "%02x".format(it) }
     private val meters = java.util.concurrent.ConcurrentHashMap<String, RateMeter>()
@@ -298,6 +300,8 @@ class ReceiverServer(
         val offset = p["offset"]?.toLongOrNull() ?: return bad("offset required")
         val total = p["total"]?.toLongOrNull()?.takeIf { it > 0 } ?: return bad("total required")
         val len = s.headers["content-length"]?.toLongOrNull() ?: return bad("content-length required")
+        val target = p["target"]?.takeIf { it.isNotEmpty() } ?: cfg.target
+        if (!StoragePolicy.isValidTarget(target, volumes.volumes() + volumes.missingVolumes())) return bad("bad target")
         findFinal(name)?.let { if (it.size == total) return ok(partJson(name)) }
         synchronized(FileLocks.of(LOCK_ROOT, name)) {
             if (moving(name)) return json(Response.Status.CONFLICT, """{"error":"moving"}""")
@@ -307,17 +311,17 @@ class ReceiverServer(
             if (offset != cur || offset + len > total) return json(Response.Status.CONFLICT, partJson(name))
             if (owner == null) {
                 // A new upload: pick the volume (policy), then check quota/space there (evicting old played files if allowed).
-                val plan = StoragePolicy.plan(volumes.snapshot(), cfg.target, total, cfg.minFreeBytes, reclaimable = ::reclaimable)
-                plan.refusal?.let { return refusal(it) }
+                val plan = StoragePolicy.plan(volumes.snapshot(), target, total, TransferRule.minFree(cfg), reclaimable = ::reclaimable)
+                plan.refusal?.let { r -> return if (r.http == 507) spaceRefusal(r.message, target, total) else refusal(r) }
                 var why: String? = null
                 for (c in plan.candidates) {
-                    val w = ensureRoom(c.volume, total)
+                    val w = ensureRoom(c.volume, total, xferCfg)
                     if (w != null) { why = w; continue }
                     val st = volumes.store(c.volume)
                     owner = Hit(c.volume, st, c.volume.storedName(name), 0)
                     break
                 }
-                val o = owner ?: return json(INSUFFICIENT_STORAGE, """{"error":${q(why ?: "no storage available")}}""")
+                val o = owner ?: return spaceRefusal(why ?: "no storage available", target, total)
                 // No stale empty partial copy elsewhere (a failed earlier attempt).
                 volumes.volumes().filter { it.id != o.v.id }.forEach { v ->
                     val st = volumes.store(v); val n = v.storedName(name)
@@ -325,7 +329,7 @@ class ReceiverServer(
                 }
                 (o.st as? FileStore)?.let { Meta.delete(it.dir, o.name) }      // a fresh upload: forget any stale size
             } else {
-                ensureRoom(owner.v, total - cur)?.let { why -> return json(INSUFFICIENT_STORAGE, spaceJson(why, owner.v)) }
+                ensureRoom(owner.v, total - cur, xferCfg)?.let { why -> return json(INSUFFICIENT_STORAGE, spaceJson(why, owner.v, total - cur)) }
             }
             val o = owner!!
             val v = o.v; val st = o.st
@@ -341,16 +345,34 @@ class ReceiverServer(
                     val input = s.inputStream
                     val out = try { st.openPart(o.name) } catch (e: IOException) { throw DiskError(e) }
                     out.use {
-                        val buf = ByteArray(cfg.ioBufferBytes)
+                        // Full speed: fill a large block from the socket, then one disk write (no fsync per block; a removable
+                        // drive is flushed every removableSyncBytes and at the end, see commit()).
+                        val buf = ByteArray(cfg.uploadBufferBytes)
+                        var fill = 0
                         var left = len
-                        while (left > 0) {
-                            if (!volumes.alive(v)) throw DiskError(IOException("volume removed"))
-                            val r = input.read(buf, 0, minOf(buf.size.toLong(), left).toInt())
-                            if (r < 0) break
-                            try { out.write(buf, 0, r) } catch (e: IOException) { throw DiskError(e) }
-                            meter.add(r.toLong())
-                            left -= r
+                        var sinceSync = 0L
+                        fun flush() {
+                            if (fill == 0) return
+                            try { out.write(buf, 0, fill) } catch (e: IOException) { throw DiskError(e) }
+                            sinceSync += fill; fill = 0
+                            if (v.kind == VolumeKind.REMOVABLE && sinceSync >= cfg.removableSyncBytes) {
+                                runCatching { (out as? java.io.FileOutputStream)?.fd?.sync() }; sinceSync = 0
+                            }
                         }
+                        try {
+                            while (left > 0) {
+                                if (!volumes.alive(v)) throw DiskError(IOException("volume removed"))
+                                val r = input.read(buf, fill, minOf((buf.size - fill).toLong(), left).toInt())
+                                if (r < 0) break
+                                fill += r; left -= r
+                                meter.add(r.toLong())
+                                if (fill == buf.size) flush()
+                            }
+                        } catch (e: DiskError) { throw e } catch (e: IOException) {
+                            flush()                                  // the network dropped: keep what arrived, the phone resumes from there
+                            throw e
+                        }
+                        flush()
                     }
                     if (st.partSize(o.name) == total) {
                         try { st.commit(o.name) } catch (e: IOException) { throw DiskError(e) }
@@ -558,35 +580,58 @@ class ReceiverServer(
     }
 
     /** Null if [incoming] bytes can be stored on [v], else the reason. May delete old *played* files when eviction is on. */
-    private fun ensureRoom(v: StorageVolume, incoming: Long): String? {
+    private fun ensureRoom(v: StorageVolume, incoming: Long, p: TvProfile = cfg): String? {
         val st = volumes.store(v)
         val free = volumes.free(v)
-        if (st !is FileStore) return if (free in 0 until incoming) "not enough space" else null
-        val why = Storage.refusal(st.dir, cfg, incoming, free, v.kind) ?: return null
-        if (!cfg.evictPlayed) return why
+        if (st !is FileStore) return if (free >= 0 && free - incoming < (if (p === cfg) 0 else p.minFreeBytes)) "not enough space" else null
+        val why = Storage.refusal(st.dir, p, incoming, free, v.kind) ?: return null
+        if (!p.evictPlayed) return why
         val used = Storage.used(st.dir)
-        val needed = maxOf(used + incoming - Storage.quota(st.dir, cfg, used, free, v.kind), incoming + cfg.minFreeBytes - free, 1L)
+        val needed = maxOf(used + incoming - Storage.quota(st.dir, p, used, free, v.kind), incoming + p.minFreeBytes - free, 1L)
         val plan = Storage.evictionPlan(st.dir, needed, player.state().name) ?: return why
         plan.forEach { it.delete(); Storage.forget(st.dir, it.name) }
         invalidate()
-        return Storage.refusal(st.dir, cfg, incoming, volumes.free(v), v.kind)
+        return Storage.refusal(st.dir, p, incoming, volumes.free(v), v.kind)
     }
 
     /** Like [ensureRoom] but deletes nothing (pre-flight check, move). */
-    private fun roomWithoutDeleting(v: StorageVolume, incoming: Long, allowEviction: Boolean): String? {
+    private fun roomWithoutDeleting(v: StorageVolume, incoming: Long, allowEviction: Boolean, p: TvProfile = cfg): String? {
         val st = volumes.store(v)
         val free = volumes.free(v)
-        if (st !is FileStore) return if (free in 0 until incoming) "not enough space" else null
-        val why = Storage.refusal(st.dir, cfg, incoming, free, v.kind) ?: return null
-        if (!allowEviction || !cfg.evictPlayed) return why
+        if (st !is FileStore) return if (free >= 0 && free - incoming < (if (p === cfg) 0 else p.minFreeBytes)) "not enough space" else null
+        val why = Storage.refusal(st.dir, p, incoming, free, v.kind) ?: return null
+        if (!allowEviction || !p.evictPlayed) return why
         val used = Storage.used(st.dir)
-        val needed = maxOf(used + incoming - Storage.quota(st.dir, cfg, used, free, v.kind), incoming + cfg.minFreeBytes - free, 1L)
+        val needed = maxOf(used + incoming - Storage.quota(st.dir, p, used, free, v.kind), incoming + p.minFreeBytes - free, 1L)
         return if (Storage.evictionPlan(st.dir, needed, player.state().name) != null) null else why
     }
 
-    private fun spaceJson(why: String, v: StorageVolume): String {
+    private fun spaceJson(why: String, v: StorageVolume, remaining: Long = 0): String {
         val st = volumes.store(v) as? FileStore
-        return """{"error":${q(why)},"free":${volumes.free(v)},"quota":${st?.let { Storage.quota(it.dir, cfg, Storage.used(it.dir), volumes.free(v), v.kind) } ?: -1},"volume":${q(v.id)}}"""
+        val free = volumes.free(v)
+        val msg = if (why == "not enough space" && remaining > 0) TransferRule.message(v.label, free, remaining, TransferRule.minFree(cfg), !drivepresent()) else humanRefusal(why)
+        return """{"error":${q(why)},"message":${q(msg)},"free":$free,"quota":${st?.let { Storage.quota(it.dir, cfg, Storage.used(it.dir), free, v.kind) } ?: -1},"volume":${q(v.id)}}"""
+    }
+
+    private fun drivepresent() = volumes.volumes().any { it.kind == VolumeKind.REMOVABLE }
+
+    /**
+     * 507 with the precise reason of the "free space after the transfer" rule, about the volume that was the best chance
+     * (the explicit target, or in auto the writable volume with the most free space).
+     */
+    private fun spaceRefusal(why: String, target: String, size: Long): Response {
+        val (v, msg) = spaceMessage(why, target, size)
+        return json(INSUFFICIENT_STORAGE, """{"error":${q(why)},"message":${q(msg)}${v?.let { ""","volume":${q(it.id)},"free":${it.free}""" } ?: ""}}""")
+    }
+
+    private fun spaceMessage(why: String, target: String, size: Long): Pair<StorageVolume?, String> {
+        val snap = volumes.snapshot().filter { it.writable }
+        val v = snap.firstOrNull { it.id == target } ?: (if (target == StoragePolicy.INTERNAL) snap.firstOrNull { it.kind == VolumeKind.INTERNAL } else null)
+            ?: snap.maxByOrNull { it.free }
+        val minFree = TransferRule.minFree(cfg)
+        val msg = if (v != null && v.free >= 0 && (why == "not enough space" || !TransferRule.ok(v.free, size, minFree)))
+            TransferRule.message(v.label, v.free, size, minFree, !drivepresent()) else humanRefusal(why)
+        return v to msg
     }
 
     // ---- storage API ----
@@ -597,7 +642,7 @@ class ReceiverServer(
         val used = pv?.let { l.used[it.id] } ?: 0
         val warnings = volumes.snapshot().flatMap { v -> warningsOf(v, 0).filter { v.kind != VolumeKind.INTERNAL }.map { "${v.label} : $it" } }
         return """{"used":$used,"free":${pv?.let { volumes.free(it) } ?: 0},"quota":${pv?.let { quotaOf(it, used) } ?: 0},"quotaMb":${cfg.quotaBytes shr 20},""" +
-            """"deleteAfterPlay":${cfg.deleteAfterPlay},"evictPlayed":${cfg.evictPlayed},"minFreeMb":${cfg.minFreeBytes shr 20},""" +
+            """"deleteAfterPlay":${cfg.deleteAfterPlay},"evictPlayed":${cfg.evictPlayed},"minFreeMb":${cfg.minFreeBytes shr 20},"minFreeAfterMb":${cfg.minFreeAfterTransfer shr 20},""" +
             """"target":${q(cfg.target)},"primary":${pv?.let { q(it.id) } ?: "null"},"volumes":${volumesJson(l)},""" +
             """"move":${moveJob?.json() ?: "null"},"warnings":${strs(warnings)}}"""
     }
@@ -608,6 +653,7 @@ class ReceiverServer(
             p["deleteAfterPlay"]?.let { c = c.copy(deleteAfterPlay = it == "true" || it == "1") }
             p["evictPlayed"]?.let { c = c.copy(evictPlayed = it == "true" || it == "1") }
             p["quotaMb"]?.let { v -> c = c.copy(quotaBytes = (v.toLongOrNull() ?: return bad("quotaMb must be a number")).coerceAtLeast(0) shl 20) }
+            p["minFreeAfterMb"]?.let { v -> c = c.copy(minFreeAfterTransfer = (v.toLongOrNull() ?: return bad("minFreeAfterMb must be a number")).coerceIn(0, 1L shl 20) shl 20) }
             cfg = c; onSettings(c); invalidate()
         } else if (method != Method.GET) return json(Response.Status.METHOD_NOT_ALLOWED, """{"error":"use GET or POST"}""")
         return ok(storageJson())
@@ -634,25 +680,54 @@ class ReceiverServer(
         val name = safeName(p["name"].orEmpty()) ?: return bad("bad name")
         val size = p["size"]?.toLongOrNull()?.takeIf { it > 0 } ?: return bad("size required")
         val dur = p["dur"]?.toLongOrNull() ?: 0
-        findFinal(name)?.let { if (it.size == size) return ok(checkOk(it.v, it.name, emptyList(), emptyList(), "already stored")) }
-        findPart(name)?.let { return ok(checkOk(it.v, it.name, emptyList(), emptyList(), "resumes on the volume holding the partial copy")) }
+        val target = p["volume"]?.takeIf { it.isNotEmpty() } ?: cfg.target
+        if (!StoragePolicy.isValidTarget(target, volumes.volumes() + volumes.missingVolumes())) return bad("volume must be auto, internal or a volume id")
+        val minFree = TransferRule.minFree(cfg)
+        val options = optionsJson(size, minFree)
+        findFinal(name)?.let { if (it.size == size) return ok(checkOk(it.v, it.name, emptyList(), emptyList(), "already stored", 0, options)) }
+        findPart(name)?.let { part ->
+            // A resume goes back to the volume holding the partial copy: the rule applies to what is still to come.
+            val remaining = size - part.size
+            val why = roomWithoutDeleting(part.v, remaining, true, xferCfg)
+            return if (why == null) ok(checkOk(part.v, part.name, emptyList(), emptyList(), "resumes on the volume holding the partial copy", remaining, options))
+                else ok("""{"ok":false,"status":507,"error":${q(why)},"message":${q(TransferRule.message(part.v.label, volumes.free(part.v), remaining, minFree, !drivepresent()))},""" +
+                    """"volume":${q(part.v.id)},"remaining":$remaining,"minFreeAfter":$minFree,"options":$options}""")
+        }
         volumes.missingOwner(name)?.let {
             return ok("""{"ok":false,"status":503,"error":"volume removed","message":${q("La clé « ${it.label} » qui contient cet envoi est retirée : remettez-la pour reprendre.")}}""")
         }
-        val plan = StoragePolicy.plan(volumes.snapshot(), cfg.target, size, cfg.minFreeBytes, dur, ::reclaimable)
+        val plan = StoragePolicy.plan(volumes.snapshot(), target, size, minFree, dur, ::reclaimable)
         val skipped = plan.skipped.joinToString(",", "[", "]") { """{"volume":${q(it.volumeId)},"reason":${q(it.reason)}}""" }
-        plan.refusal?.let { r ->
-            return ok("""{"ok":false,"status":${r.http},"error":${q(r.message)},"message":${q(humanRefusal(r.message))},"skipped":$skipped}""")
+        fun refuse(status: Int, error: String): Response {
+            val msg = if (status == 507) spaceMessage(error, target, size).second else humanRefusal(error)
+            return ok("""{"ok":false,"status":$status,"error":${q(error)},"message":${q(msg)},"remaining":$size,"minFreeAfter":$minFree,"skipped":$skipped,"options":$options}""")
         }
-        val pick = plan.candidates.firstOrNull { roomWithoutDeleting(it.volume, size, true) == null }
-            ?: return ok("""{"ok":false,"status":507,"error":"not enough space","message":${q(humanRefusal("not enough space"))},"skipped":$skipped}""")
-        val notes = plan.skipped.map { s -> "${volumes[s.volumeId]?.label ?: s.volumeId} ignoré : ${humanRefusal(s.reason)}" }
-        return ok(checkOk(pick.volume, pick.volume.storedName(name), pick.warnings, notes, null))
+        plan.refusal?.let { r -> return refuse(r.http, r.message) }
+        val pick = plan.candidates.firstOrNull { roomWithoutDeleting(it.volume, size, true, xferCfg) == null }
+            ?: return refuse(507, "not enough space")
+        val notes = plan.skipped.map { s -> "${volumes[s.volumeId]?.label ?: s.volumeId} ignoré : " +
+            if (s.reason == "not enough space") volumes[s.volumeId]?.let { v -> volumes.free(v).takeIf { it >= 0 }?.let { f ->
+                val after = TransferRule.freeAfter(f, size)
+                if (after >= 0) "il resterait ${TransferRule.size(after)} après le transfert (il en faut ${TransferRule.size(minFree)})"
+                else "le fichier ne tient pas (il manque ${TransferRule.size(-after)})" } } ?: humanRefusal(s.reason)
+            else humanRefusal(s.reason) }
+        return ok(checkOk(pick.volume, pick.volume.storedName(name), pick.warnings, notes, null, size, options))
     }
 
-    private fun checkOk(v: StorageVolume, stored: String, warnings: List<String>, notes: List<String>, why: String?) =
-        """{"ok":true,"volume":${q(v.id)},"label":${q(v.label)},"kind":${q(v.kind.name.lowercase())},"fs":${q(v.fs.label)},"as":${q(stored)},""" +
-            """"warnings":${strs(warnings.map(::humanWarning) + notes)},"reason":${why?.let(::q) ?: "null"}}"""
+    /** Every present volume with the free space it would have after receiving [size] bytes, and whether the rule allows it. */
+    private fun optionsJson(size: Long, minFree: Long): String = volumes.snapshot().joinToString(",", "[", "]") { v ->
+        val after = if (v.free >= 0) TransferRule.freeAfter(v.free, size) else -1
+        val ok = v.writable && size <= v.maxFileBytes && TransferRule.ok(v.free, size, minFree)
+        """{"id":${q(v.id)},"label":${q(v.label)},"kind":${q(v.kind.name.lowercase())},"free":${v.free},"freeAfter":$after,"ok":$ok}"""
+    }
+
+    private fun checkOk(v: StorageVolume, stored: String, warnings: List<String>, notes: List<String>, why: String?, remaining: Long = 0, options: String = "[]"): String {
+        val free = volumes.free(v)
+        return """{"ok":true,"volume":${q(v.id)},"label":${q(v.label)},"kind":${q(v.kind.name.lowercase())},"fs":${q(v.fs.label)},"as":${q(stored)},""" +
+            """"warnings":${strs(warnings.map(::humanWarning) + notes)},"reason":${why?.let(::q) ?: "null"},""" +
+            """"free":$free,"remaining":$remaining,"freeAfter":${if (free >= 0) TransferRule.freeAfter(free, remaining) else -1},""" +
+            """"minFreeAfter":${TransferRule.minFree(cfg)},"options":$options}"""
+    }
 
     private fun startMove(name: String, toId: String): Response {
         val to = volumes[toId] ?: return if (volumes.missingVolumes().any { it.id == toId }) json(SERVICE_UNAVAILABLE, """{"error":"volume unavailable"}""")

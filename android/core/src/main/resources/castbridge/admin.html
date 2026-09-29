@@ -370,6 +370,12 @@ async function partLen(name) { const j = await api("GET", "/api/part?name=" + q(
 async function uploadFile(file, bar, label) {
   const total = file.size; let backoff = 500;
   if (total <= 0) throw new Error("fichier vide");
+  // Pre-flight before any byte: volume chosen, 1 GB must stay free after the transfer (precise refusal otherwise).
+  try {
+    const c = await api("GET", "/api/storage/check?name=" + q(file.name) + "&size=" + total);
+    if (!c.ok && c.status !== 503) throw new ApiError(c.status, c.message || c.error);
+    if (c.ok) label.textContent = file.name + " -> " + (c.label || c.volume) + (c.freeAfter >= 0 ? ", il restera " + fmtSize(c.freeAfter) + " libres" : "");
+  } catch (e) { if (e instanceof ApiError && e.code !== 404) throw e; }
   for (;;) {
     try {
       const p = await partLen(file.name);

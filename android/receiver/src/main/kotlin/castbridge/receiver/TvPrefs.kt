@@ -20,11 +20,12 @@ class TvPrefs(ctx: Context) {
         deleteAfterPlay = getBool("delete_after_play", false),
         evictPlayed = getBool("evict_played", false),
         target = getString("storage_target", "auto") ?: "auto",
+        minFreeAfterTransfer = getLong("min_free_after", 1L shl 30),
     )
 
     fun saveProfile(p: TvProfile) {
         putLong("quota_bytes", p.quotaBytes); putBool("delete_after_play", p.deleteAfterPlay); putBool("evict_played", p.evictPlayed)
-        putString("storage_target", p.target)
+        putString("storage_target", p.target); putLong("min_free_after", p.minFreeAfterTransfer)
     }
 
     fun getString(key: String, def: String? = null): String? = sp.getString(key, def)
