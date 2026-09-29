@@ -3,6 +3,8 @@
 Diffusion vidéo téléphone / PC vers TV. Modules Android : `:core` (Kotlin JVM, testable), `:receiver` (app TV, libVLC),
 `:sender` (app téléphone, Compose). Conception du préchargement : `docs/NEXT-preload.md`.
 
+**Quiz culture générale sur la TV** (solo à la télécommande ou multijoueur avec les téléphones, QR code, sans app à installer) : voir **`docs/QUIZ.md`**.
+
 ## Administrer la TV (branche `feat/tv-admin`)
 
 Voir **`docs/ADMIN.md`** (API HTTP, exemples `curl`, guide pour agent). En résumé, l'app CastBridge TV reçoit et gère
