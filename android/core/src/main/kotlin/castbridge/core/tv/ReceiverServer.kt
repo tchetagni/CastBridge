@@ -158,7 +158,10 @@ class ReceiverServer(
         val loopbackStream = isStream && p["t"] == streamToken && s.remoteIpAddress.let { it == "127.0.0.1" || it == "::1" || it == "0:0:0:0:0:0:0:1" }
         if (!loopbackStream) denied(s, p)?.let { return it }
         if (isStream) return stream(s, path.removePrefix("/stream/"))
-        val ext = if (path.startsWith("/api/")) extension?.handle(path, s.method.name, p) else null
+        val ext = if (!path.startsWith("/api/")) null
+            else if (s.method == Method.POST && extension?.wantsBody(path) == true) extBody(s)?.let { extension.handleBody(path, s.method.name, p, it) }
+                ?: ApiReply(413, """{"error":"body missing or too large"}""")
+            else extension?.handle(path, s.method.name, p)
         return when {
             // NanoHTTPD already percent-decoded the URI. A rejected upload leaves its body unread on the
             // socket, which would corrupt the next keep-alive request: close the connection instead.
@@ -175,7 +178,7 @@ class ReceiverServer(
             path == "/api/sysinfo" -> sysinfo()
             path == "/api/library" && s.method == Method.GET -> ok(libraryJson())
             path == "/api/thumb" && s.method == Method.GET -> named(p) { thumb(it, p["volume"]) }
-            ext != null -> json(status(ext.status), ext.json)
+            ext != null -> json(status(ext.status), ext.json).also { if (ext.status == 413) it.addHeader("Connection", "close") }
             s.method != Method.POST -> json(Response.Status.METHOD_NOT_ALLOWED, """{"error":"use POST"}""")
             path == "/api/storage/target" -> setTarget(p["value"].orEmpty())
             path == "/api/storage/move" -> named(p) { startMove(it, p["to"].orEmpty()) }
@@ -254,6 +257,15 @@ class ReceiverServer(
             path == "/api/seek" -> { player.seek(p["pos"]?.toLongOrNull() ?: 0); ok(info()) }
             else -> json(Response.Status.NOT_FOUND, """{"error":"not found"}""")
         }
+    }
+
+    /** Body of a POST for an extension route (a .torrent...), null if absent or larger than [MAX_EXT_BODY]. */
+    private fun extBody(s: IHTTPSession): ByteArray? {
+        val len = s.headers["content-length"]?.toLongOrNull() ?: return null
+        if (len <= 0 || len > MAX_EXT_BODY) return null
+        val b = ByteArray(len.toInt()); var off = 0
+        while (off < b.size) { val r = s.inputStream.read(b, off, b.size - off); if (r < 0) return null; off += r }
+        return b
     }
 
     private fun exists(name: String): Boolean = volumes.volumes().any { v ->
@@ -767,6 +779,7 @@ class ReceiverServer(
     companion object {
         const val PORT = 8765
         const val VERSION = "0.4"
+        const val MAX_EXT_BODY = 4 shl 20
         private val ADMIN_HTML: String by lazy {
             ReceiverServer::class.java.getResourceAsStream("/castbridge/admin.html")?.use { String(it.readBytes(), Charsets.UTF_8) }
                 ?: "<!doctype html><meta charset=utf-8><title>CastBridge TV</title><h1>CastBridge TV</h1><p>Page d'administration indisponible.</p>"
