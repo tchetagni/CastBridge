@@ -109,6 +109,7 @@ fun DownloadsScreen(dc: DownloadsClient, onClose: () -> Unit, initialLink: Strin
     var tick by remember { mutableIntStateOf(0) }
     var showAbout by remember { mutableStateOf<String?>(null) }
     var filesOf by remember { mutableStateOf<DownloadsClient.Task?>(null) }
+    var limitOf by remember { mutableStateOf<DownloadsClient.Task?>(null) }
     var removeOf by remember { mutableStateOf<Pair<String, String>?>(null) }
     var showSettings by remember { mutableStateOf(false) }
 
@@ -215,7 +216,8 @@ fun DownloadsScreen(dc: DownloadsClient, onClose: () -> Unit, initialLink: Strin
                 items(s.tasks, key = { it.id }) { t ->
                     TaskCard(t,
                         onPause = { io { dc.pause(t.id) } }, onResume = { io { dc.resume(t.id) } },
-                        onRemove = { removeOf = t.id to t.name }, onFiles = { filesOf = t }, onTop = { io { dc.priority(t.id, "top") } })
+                        onRemove = { removeOf = t.id to t.name }, onFiles = { filesOf = t }, onTop = { io { dc.priority(t.id, "top") } },
+                        onLimit = { limitOf = t })
                 }
                 if (s.done.isNotEmpty()) item { SectionHeader("Terminés") }
                 items(s.done, key = { "done-" + it.id }) { d ->
@@ -251,12 +253,23 @@ fun DownloadsScreen(dc: DownloadsClient, onClose: () -> Unit, initialLink: Strin
             confirmButton = { TextButton(onClick = { showAbout = null }) { Text("Fermer") } })
     }
     filesOf?.let { t -> FilesDialog(dc, t, onDone = { filesOf = null; tick++ }) }
+    limitOf?.let { t ->
+        val choices = listOf(0L to "Sans limite", (512L shl 10) to "512 ko/s", (1L shl 20) to "1 Mo/s", (3L shl 20) to "3 Mo/s")
+        AlertDialog(onDismissRequest = { limitOf = null }, title = { Text("Vitesse de « ${t.name} »") },
+            text = {
+                Column { choices.forEach { (v, label) ->
+                    TextButton(onClick = { limitOf = null; io { dc.limit(t.id, v) } }, Modifier.fillMaxWidth()) { Text(label) }
+                } }
+            },
+            confirmButton = { TextButton(onClick = { limitOf = null }) { Text("Fermer") } })
+    }
     if (showSettings) state?.let { s -> SettingsDialog(s, onDismiss = { showSettings = false }) { down, seeding ->
         showSettings = false; io { dc.settings(downLimit = down, seeding = seeding) } } }
 }
 
 @Composable
-private fun TaskCard(t: DownloadsClient.Task, onPause: () -> Unit, onResume: () -> Unit, onRemove: () -> Unit, onFiles: () -> Unit, onTop: () -> Unit) {
+private fun TaskCard(t: DownloadsClient.Task, onPause: () -> Unit, onResume: () -> Unit, onRemove: () -> Unit, onFiles: () -> Unit, onTop: () -> Unit,
+                     onLimit: () -> Unit) {
     val cs = MaterialTheme.colorScheme
     val bad = t.state in setOf("error", "waiting_space", "waiting_drive")
     Card(colors = CardDefaults.cardColors(containerColor = cs.surface)) {
@@ -282,6 +295,7 @@ private fun TaskCard(t: DownloadsClient.Task, onPause: () -> Unit, onResume: () 
                 if (t.canResume) IconButton(onClick = onResume) { Icon(if (t.state == "error") Icons.Filled.Refresh else Icons.Filled.PlayArrow, "Reprendre") }
                 if (t.state == "queued" || t.state == "paused") IconButton(onClick = onTop) { Icon(Icons.Filled.VerticalAlignTop, "Passer en premier") }
                 if (t.files > 1) TextButton(onClick = onFiles) { Text("Fichiers (${t.files})") }
+                if (t.canPause) TextButton(onClick = onLimit) { Text("Vitesse") }
                 Spacer(Modifier.weight(1f))
                 IconButton(onClick = onRemove) { Icon(Icons.Filled.Delete, "Supprimer") }
             }
