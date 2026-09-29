@@ -242,6 +242,7 @@ class PlayerActivity : Activity(), Player, Device {
         items += "USB : importer les vidéos des clés détectées" to { usbMessage(usb?.importFromVolumes()) }
         items += "USB : choisir un dossier de la clé…" to { usbMessage(usb?.launchPicker(REQ_TREE)) }
         if (usb?.isRunning() == true) items += "USB : annuler l'import en cours" to { usb?.cancel() }
+        items += "Options développeur (débogage USB / Wi-Fi)" to { flash(openDevSettings()) }
         items += (if (ssh?.running == true) "SSH : désactiver" else "SSH : activer (administration à distance, clés autorisées seulement)") to {
             val c = ssh
             if (c?.running == true) { c.disable(); flash("SSH désactivé") }
@@ -250,6 +251,26 @@ class PlayerActivity : Activity(), Player, Device {
         AlertDialog.Builder(this).setTitle("CastBridge TV")
             .setItems(items.map { it.first }.toTypedArray()) { _, i -> items[i].second() }
             .setNegativeButton("Fermer", null).show()
+    }
+
+    /**
+     * Opens the TV's developer options, or the screen where they are unlocked (tap "Build number" 7 times).
+     * An app cannot switch developer mode on itself (that needs a system-level permission): it can only take
+     * you to the right screen. Returns what to do next, for the on-screen message.
+     */
+    private fun openDevSettings(): String {
+        val enabled = runCatching { android.provider.Settings.Global.getInt(contentResolver, android.provider.Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0) == 1 }.getOrDefault(false)
+        val adb = runCatching { android.provider.Settings.Global.getInt(contentResolver, android.provider.Settings.Global.ADB_ENABLED, 0) == 1 }.getOrDefault(false)
+        val tries = buildList {
+            if (enabled) add(Intent(android.provider.Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS) to
+                "Options développeur ouvertes. Débogage USB : ${if (adb) "activé" else "désactivé"}. Activez « Débogage USB » et, si présent, « Débogage sans fil ».")
+            add(Intent(android.provider.Settings.ACTION_DEVICE_INFO_SETTINGS) to
+                "Mode développeur inactif : appuyez 7 fois sur « Numéro de build » (ou « Version »), puis rouvrez ce menu.")
+            add(Intent(android.provider.Settings.ACTION_SETTINGS) to
+                "Réglages : cherchez « À propos » puis « Numéro de build » (7 appuis) pour débloquer les options développeur.")
+        }
+        for ((intent, msg) in tries) if (runCatching { startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) }.isSuccess) return msg
+        return "Réglages inaccessibles sur cette TV : ouvrez-les avec la télécommande de la TV."
     }
 
     private fun usbMessage(m: String?) { if (m != null) { flash(m); setStatus("3-usb", "USB : $m") } }
@@ -265,6 +286,13 @@ class PlayerActivity : Activity(), Player, Device {
         path == "/api/update" && method == "GET" -> updater?.let { ApiReply(200, it.infoJson()) }
         path == "/api/update/install" && method == "POST" ->
             updater?.install(listOf(params["name"].orEmpty()), params["force"] == "1")
+        path == "/api/devsettings" && method == "POST" -> {
+            var msg = ""
+            val done = CountDownLatch(1)
+            main.post { msg = openDevSettings(); done.countDown() }
+            done.await(5, TimeUnit.SECONDS)
+            ApiReply(200, """{"message":${ReceiverServer.q(msg)}}""")
+        }
         path == "/api/apk" && method == "GET" -> updater?.let { ApiReply(200, it.listJson()) }
         // names = file names separated by "/" (a character file names cannot contain): several APKs of one app, or several apps
         path == "/api/apk/install" && method == "POST" ->
