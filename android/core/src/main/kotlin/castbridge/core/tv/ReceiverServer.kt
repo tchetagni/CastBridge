@@ -47,6 +47,8 @@ class ReceiverServer(
     private val settingsOpener: (() -> String?)? = null,
     /** Thumbnails, durations and saved positions for the library screens; null = plain file list. */
     private val library: LibraryMeta? = null,
+    /** Routes served without the PIN (the quiz at /quiz, with its own room code); asked before the PIN check. */
+    private val publicRoutes: PublicRoutes? = null,
 ) : NanoHTTPD(port) {
 
     /** Single internal folder (tests, simple setups). */
@@ -114,7 +116,7 @@ class ReceiverServer(
                 onNotice("${ev.volume.label} détecté : les envois interrompus peuvent reprendre")
             }
         }
-        setAsyncRunner(BoundedRunner(cfg.maxHttpThreads))
+        setAsyncRunner(BoundedRunner(cfg.maxHttpThreads + (publicRoutes?.extraThreads ?: 0)))
     }
 
     /** Abandoned partial uploads must not eat scarce space; a drive that was away keeps them 7 times longer. */
@@ -154,6 +156,7 @@ class ReceiverServer(
         if (s.method == Method.GET && path == "/") return page()
         if (s.method == Method.GET && path == "/api/hello")
             return ok("""{"app":"castbridge-tv","v":${q(VERSION)},"pinRequired":${guard != null}}""")
+        publicRoutes?.serve(s)?.let { return it }
         val isStream = (s.method == Method.GET || s.method == Method.HEAD) && path.startsWith("/stream/")
         val loopbackStream = isStream && p["t"] == streamToken && s.remoteIpAddress.let { it == "127.0.0.1" || it == "::1" || it == "0:0:0:0:0:0:0:1" }
         if (!loopbackStream) denied(s, p)?.let { return it }
