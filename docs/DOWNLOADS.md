@@ -82,7 +82,7 @@ et sont effacés avec « Supprimer le fichier ». Un torrent partagé après la 
 | `--pause-metadata=true` | contrôle de la place avant le vrai téléchargement |
 | `--max-overall-upload-limit=512K` (réglable) | ne pas saturer la voie montante du foyer |
 | `--max-tries=10 --retry-wait=15 --connect-timeout=30` | le Wi-Fi d'une TV va et vient |
-| `--async-dns=false` | résolution par le résolveur d'Android (netd : suit les changements de réseau et le DNS privé) ; c-ares reste compilé (`--async-dns-server=` possible) |
+| (pas de `--async-dns`) | une version Android d'aria2 résout par défaut avec le résolveur d'Android (netd : suit les changements de réseau et le DNS privé) ; c-ares reste compilé (`--async-dns=true --async-dns-server=` possible) |
 | `--stop-with-process=<pid de l'app>` | aria2 s'arrête seul si l'app meurt : jamais d'orphelin |
 | `--console-log-level=warn --show-console-readout=false --summary-interval=0` | seulement les avertissements dans logcat |
 | `--allow-overwrite=false --auto-file-renaming=true --no-netrc` | pas d'écrasement, pas de fichier de mots de passe implicite |
@@ -140,6 +140,14 @@ Tout le code est dans des fichiers nouveaux ; les seules modifications de fichie
    `POST_NOTIFICATIONS`. `receiver/build.gradle.kts` : `packaging.jniLibs.useLegacyPackaging = true`, tâche `buildAria2`.
 5. `sender/.../TvHub.kt` : `extra = { DownloadsEntry(it); AdminPanel(it) }`. `sender/AndroidManifest.xml` : `ShareToTvActivity`.
 6. `core/.../resources/castbridge/admin.html` : une `<section id="dl">` et un `<script>` autonome à la fin.
+
+## Tests
+
+`gradle :core:test` : client JSON-RPC (vrai HTTP contre un faux aria2), états, règle d'espace, liste blanche, liens,
+bencode/Metalink, gestionnaire complet (faux aria2), relais API derrière le PIN, supervision (redémarrage, arrêt propre).
+Contre un **vrai** aria2 (même source, compilé pour l'ordinateur) :
+`ARIA2C=/chemin/aria2c gradle :core:test --rerun --tests '*Aria2IntegrationTest*'` (téléchargement HTTP réel rangé dans la
+bibliothèque, pause, options, suppression, arrêt propre ; vérifie aussi que toutes les options de la ligne de commande existent).
 
 ## Compiler le moteur
 
