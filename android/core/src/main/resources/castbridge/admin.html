@@ -79,6 +79,19 @@ dt{color:var(--mut)}dd{margin:0;word-break:break-all}
 </section>
 
 <section>
+  <h2>Stockage (mémoire interne, clé USB)</h2>
+  <div id="target" class="row"></div>
+  <div id="vols"></div>
+  <div id="move" class="mut"></div>
+  <div class="row" style="margin-top:8px">
+    <button id="bRescan">Re-détecter la clé</button>
+    <button id="bPick">Choisir un dossier sur la TV (sélecteur)</button>
+    <button id="bSettings">Ouvrir les réglages de stockage de la TV</button>
+  </div>
+  <p class="mut">Une app ne peut pas formater une clé : voir « Formater la clé » dans docs/STORAGE.md. Le sélecteur et les réglages s'ouvrent sur l'écran de la TV, si elle en a.</p>
+</section>
+
+<section>
   <h2>Envoyer des fichiers</h2>
   <p class="mut">Envoi par morceaux de 4 Mo, repris automatiquement après une coupure.</p>
   <label><input type="checkbox" id="early"> Lire pendant l'envoi (dès qu'assez de données sont arrivées)</label><br>
@@ -160,12 +173,12 @@ async function refresh() {
     msg("TV injoignable : " + e.message);
   }
 }
-function start() { stop(); refresh(); loadStorage(); timer = setInterval(refresh, 2000); }
+function start() { stop(); refresh(); loadStorage(); timer = setInterval(() => { refresh(); loadStorage(); }, 2000); }
 function stop() { if (timer) clearInterval(timer); timer = null; }
 
 function render(i) {
   const p = i.player || {};
-  $("free").textContent = "Espace libre : " + fmtSize(i.free) + " — utilisé par CastBridge : " + fmtSize(i.used) + " / quota " + fmtSize(i.quota);
+  $("free").textContent = "Prochain envoi : espace libre " + fmtSize(i.free) + " — utilisé par CastBridge : " + fmtSize(i.used) + (i.quota >= 0 ? " / quota " + fmtSize(i.quota) : "");
   const run = p.state === "playing" || p.state === "buffering";
   const pf = (i.files || []).find(f => f.name === p.name);
   let lead = "";
@@ -185,7 +198,12 @@ function render(i) {
     const n = document.createElement("div"); n.className = "n"; n.textContent = f.name;
     const s = document.createElement("div"); s.className = "s";
     s.textContent = f.complete ? fmtSize(f.size) : fmtSize(f.received) + " / " + fmtSize(f.size) + " reçus (" + Math.floor(f.received * 100 / Math.max(1, f.size)) + " %)";
-    row.append(n, s, btn("Lire", () => act(post("/api/play?name=" + q(f.name)))));
+    const vol = (i.volumes || []).find(v => v.id === f.volume);
+    const vb = document.createElement("div"); vb.className = "s";
+    vb.textContent = (vol ? vol.label : f.volume) + (f.duplicate ? " (en double)" : "");
+    row.append(n, s, vb, btn("Lire", () => act(post("/api/play?name=" + q(f.name)))));
+    if (f.complete) (i.volumes || []).filter(v => v.present !== false && v.id !== f.volume && v.writable !== false).forEach(v =>
+      row.append(btn("Déplacer vers " + v.label, () => act(post("/api/storage/move?name=" + q(f.name) + "&to=" + q(v.id))))));
     if (f.complete) row.append(btn("Renommer", async () => {
         const to = prompt("Nouveau nom :", f.name);
         if (to && to !== f.name) act(post("/api/rename?name=" + q(f.name) + "&to=" + q(to)));
@@ -222,8 +240,41 @@ $("seek").onchange = () => {
   if (t > window.reachable) { t = window.reachable; msg("En attente de l'envoi : position limitée."); }
   act(post("/api/seek?pos=" + t));
 };
-$("stSave").onclick = () => act(post("/api/storage?deleteAfterPlay=" + $("stDel").checked + "&evictPlayed=" + $("stEvict").checked + "&quotaMb=" + encodeURIComponent($("stQuota").value || "0")));
-async function loadStorage() { try { const s = await api("GET", "/api/storage"); $("stDel").checked = s.deleteAfterPlay; $("stEvict").checked = s.evictPlayed; $("stQuota").value = s.quotaMb; } catch (e) {} }
+$("stSave").onclick = () => { stEdited = false; act(post("/api/storage?deleteAfterPlay=" + $("stDel").checked + "&evictPlayed=" + $("stEvict").checked + "&quotaMb=" + encodeURIComponent($("stQuota").value || "0"))); };
+let stEdited = false;
+["stDel", "stEvict", "stQuota"].forEach(id => { $(id).oninput = () => { stEdited = true; }; });
+async function loadStorage() {
+  try {
+    const s = await api("GET", "/api/storage");
+    if (!stEdited) { $("stDel").checked = s.deleteAfterPlay; $("stEvict").checked = s.evictPlayed; $("stQuota").value = s.quotaMb; }
+    renderStorage(s);
+  } catch (e) {}
+}
+function renderStorage(s) {
+  const t = $("target"); t.textContent = "";
+  const lab = document.createElement("span"); lab.className = "mut"; lab.textContent = "Nouveaux fichiers :"; t.append(lab);
+  const opts = [["auto", "Auto (clé si utilisable)"], ["internal", "Mémoire interne"]]
+    .concat((s.volumes || []).filter(v => v.kind !== "internal" && v.present).map(v => [v.id, v.label]));
+  opts.forEach(([id, name]) => { const b = btn(name, () => act(post("/api/storage/target?value=" + q(id)))); if (s.target === id) b.className = "pri"; t.append(b); });
+  const box = $("vols"); box.textContent = "";
+  (s.volumes || []).forEach(v => {
+    const d = document.createElement("div"); d.className = "file";
+    const n = document.createElement("div"); n.className = "n";
+    n.textContent = v.label + (v.fs && v.fs !== "?" ? " (" + v.fs + ")" : "");
+    const m = document.createElement("div"); m.className = "s";
+    m.textContent = !v.present ? "retirée" : !v.writable ? "lecture seule" :
+      (v.free >= 0 ? fmtSize(v.free) + " libres" : "espace inconnu") + (v.writeBps > 0 ? ", écriture ~" + (v.writeBps / 1e6).toFixed(1) + " Mo/s" : "");
+    d.append(n, m); box.append(d);
+    (v.warnings || []).forEach(w => { const e = document.createElement("div"); e.className = "mut err"; e.textContent = "• " + w; box.append(e); });
+    if (v.formatAdvice) { const e = document.createElement("div"); e.className = "mut"; e.textContent = v.formatAdvice; box.append(e); }
+  });
+  const mv = s.move;
+  $("move").textContent = mv ? "Déplacement de " + mv.name + " → " + mv.to + " : " + mv.state +
+    (mv.state === "running" ? " " + Math.floor(mv.done * 100 / Math.max(1, mv.total)) + " %" : "") + (mv.error ? " (" + mv.error + ")" : "") : "";
+}
+$("bRescan").onclick = () => act(post("/api/storage/rescan?measure=1"));
+$("bPick").onclick = async () => { try { const j = await post("/api/storage/saf/pick"); msg(j.message || ""); } catch (e) { msg(e.message); } };
+$("bSettings").onclick = async () => { try { const j = await post("/api/storage/open-settings"); msg(j.opened ? "Réglages ouverts sur l'écran de la TV." : (j.message || "")); } catch (e) { msg(e.message); } };
 $("vol").oninput = () => { volTouched = Date.now(); $("volv").textContent = $("vol").value + " %"; };
 $("vol").onchange = () => act(post("/api/volume?pct=" + $("vol").value));
 $("bRestart").onclick = () => { if (confirm("Redémarrer l'application CastBridge TV ?")) act(post("/api/restart")); };
@@ -246,9 +297,10 @@ async function uploadFile(file, bar, label) {
         const r = await fetch("/upload/" + q(file.name) + "?offset=" + off + "&total=" + total,
           { method: "PUT", headers: { "X-CB-Pin": PIN }, body: file.slice(off, end) });
         if (r.status === 409) { off = JSON.parse(await r.text()).length; continue; }
-        if (r.status === 401 || r.status === 400 || r.status === 507) {
-          let m = ""; try { m = JSON.parse(await r.text()).error; } catch (e) {}
-          throw new ApiError(r.status, m === "not enough space" ? "espace insuffisant sur la TV" : m === "quota exceeded" ? "quota de stockage atteint" : (m || "HTTP " + r.status));
+        if (r.status === 503) { label.textContent = file.name + " : clé USB retirée ou indisponible, reprise au retour…"; throw new Error("volume removed"); }
+        if (r.status === 401 || r.status === 400 || r.status === 507 || r.status === 413) {
+          let m = "", h = ""; try { const j = JSON.parse(await r.text()); m = j.error; h = j.message; } catch (e) {}
+          throw new ApiError(r.status, h || (m === "not enough space" ? "espace insuffisant sur la TV" : m === "quota exceeded" ? "quota de stockage atteint" : (m || "HTTP " + r.status)));
         }
         if (!r.ok) throw new Error("HTTP " + r.status);
         off = end; bar.value = off; backoff = 500;
@@ -260,7 +312,7 @@ async function uploadFile(file, bar, label) {
       }
       return;
     } catch (e) {
-      if (e instanceof ApiError) throw e;
+      if (e instanceof ApiError && e.code !== 503) throw e;   // 503 = drive removed: retry like a network cut
       label.textContent = file.name + " : réseau coupé, reprise dans " + Math.round(backoff / 1000 + 0.5) + " s…";
       await sleep(backoff); backoff = Math.min(backoff * 2, 5000);
     }

@@ -19,10 +19,12 @@ class TvPrefs(ctx: Context) {
         quotaBytes = getLong("quota_bytes", 0),
         deleteAfterPlay = getBool("delete_after_play", false),
         evictPlayed = getBool("evict_played", false),
+        target = getString("storage_target", "auto") ?: "auto",
     )
 
     fun saveProfile(p: TvProfile) {
         putLong("quota_bytes", p.quotaBytes); putBool("delete_after_play", p.deleteAfterPlay); putBool("evict_played", p.evictPlayed)
+        putString("storage_target", p.target)
     }
 
     fun getString(key: String, def: String? = null): String? = sp.getString(key, def)

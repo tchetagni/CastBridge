@@ -47,7 +47,13 @@ Les noms de fichiers sont sans `/`, `\`, ni `.part` final, 200 caractères max. 
 | `POST /api/reset?name=` | efface le `.part` | idem `part` |
 | `POST /api/play?name=&pos=ms` | lit un fichier ; s'il est encore en cours d'envoi, démarre en flux dès que assez de données sont arrivées (sinon `409 {"error":"buffering","received","needed","size"}`) | comme `info` |
 | `GET\|HEAD /stream/<nom>` | le fichier (ou le `.part` en cours) avec `Range` 206/416, `Content-Length` = taille **finale** ; lit bloquant jusqu'à l'arrivée des octets manquants (coupure propre après 30 s) | octets |
-| `GET /api/storage` / `POST /api/storage?deleteAfterPlay=&evictPlayed=&quotaMb=` | quota et politique de stockage | `{"used","free","quota","quotaMb","deleteAfterPlay","evictPlayed","minFreeMb"}` |
+| `GET /api/storage` / `POST /api/storage?deleteAfterPlay=&evictPlayed=&quotaMb=` | quota et politique de stockage, volumes (mémoire interne, clé USB, dossier SAF) | `{"used","free","quota","quotaMb","deleteAfterPlay","evictPlayed","minFreeMb","target","primary","volumes":[{"id","label","kind","fs","removable","writable","present","free","total","used","quota","writeBps","warnings","formatAdvice"}],"move","warnings"}` |
+| `POST /api/storage/target?value=auto\|internal\|<idVolume>` | où vont les nouveaux fichiers (jamais un chemin) | comme `GET /api/storage` |
+| `GET /api/storage/check?name=&size=&dur=ms` | pré-vérification avant envoi : volume prévu, avertissements, ou refus précis (FAT32 > 4 Go...) | `{"ok":true,"volume","fs","as","warnings"}` ou `{"ok":false,"status":413\|507\|503,"error","message"}` |
+| `POST /api/storage/move?name=&to=<idVolume\|saf>` `POST /api/storage/move/cancel` | déplace un fichier fini entre volumes (copie vérifiée puis suppression de la source ; refusé si en lecture) | `{"moving":true,"move":{...}}`, état dans `GET /api/storage` |
+| `POST /api/storage/rescan[?measure=1]` | re-détecte les volumes (et re-mesure le débit d'écriture) | comme `GET /api/storage` |
+| `POST /api/storage/saf/pick` | ouvre le sélecteur de dossier **sur l'écran de la TV** (quelqu'un doit valider) | `{"message"}` |
+| `POST /api/storage/open-settings` | ouvre les réglages de stockage de la TV, si elle en a ; ne formate jamais | `{"opened":bool,"message"}` |
 | `POST /api/pause` `POST /api/resume` `POST /api/stop` | contrôle | comme `info` |
 | `POST /api/seek?pos=ms` | saut | comme `info` |
 | `POST /api/delete?name=` | supprime fichier et `.part` | comme `info` |
@@ -75,8 +81,11 @@ sur les octets déjà reçus puis attend, et l'envoi reprend au retour du télé
 Limites : un MP4 dont l'index `moov` est en fin de fichier ne peut pas démarrer avant la fin (le téléphone le détecte et bascule en préchargement complet) ;
 la position atteignable en avance rapide est bornée à ce qui a été reçu.
 
+**Stockage sur clé USB** : voir `docs/STORAGE.md` (stratégie, matrice de cas, FAT32, retrait à chaud, formatage). `/api/info` porte maintenant `volume` et `duplicate` par fichier, `volumes[]` et
+`target`. `503 {"error":"volume removed"}` pendant un envoi = la clé est retirée : réessayer, la reprise se fait à son retour. `413` = fichier trop gros pour la cible (FAT32) : ne pas réessayer.
+
 Codes : `400` paramètre invalide, `401` PIN faux ou IP verrouillée, `404`, `405` (utiliser POST), `409` mauvais
-offset (le corps donne `length`), `501` non supporté sur cet appareil, `507` espace insuffisant (moins de 100 Mo libres
+offset (le corps donne `length`), `413` fichier trop gros pour le volume, `503` volume retiré/indisponible, `501` non supporté sur cet appareil, `507` espace insuffisant (moins de 100 Mo libres
 après l'envoi).
 
 ## 4. Envoyer un fichier, reprise incluse

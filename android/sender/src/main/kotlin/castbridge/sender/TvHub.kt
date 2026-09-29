@@ -162,6 +162,7 @@ fun AdminPanel(client: TvClient) {
         }
     }
     val j = sys ?: return
+    StoragePanel(client)
     HorizontalDivider()
     Text("Volume de la TV", style = MaterialTheme.typography.titleSmall)
     vol?.let { v ->

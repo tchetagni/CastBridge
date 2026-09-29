@@ -14,6 +14,7 @@ des fichiers dans son stockage privé (`getExternalFilesDir("videos")`), sans au
 | Bluetooth (RFCOMM) | app téléphone, appareil appairé | reprise, plus lent ; permissions `BLUETOOTH_CONNECT/ADVERTISE` demandées à l'exécution (Android 12+) |
 | Wi-Fi Direct | MENU de la TV > activer ; le téléphone rejoint `DIRECT-CB-…` | sans routeur, `192.168.49.1:8765` |
 | Clé USB / OTG | MENU > USB (scan des volumes ou sélecteur de dossier système) | copie en arrière-plan avec progression |
+| Clé USB comme **stockage** | branchée : les envois vont dans son dossier d'app (cible `auto`), lecture pendant l'envoi, retrait à chaud géré | voir **`docs/STORAGE.md`** (comportement de GaiaOS non validé) |
 
 Sécurité : un **PIN à 6 chiffres** est généré au premier lancement de la TV et affiché sur son écran d'attente. Toutes les
 routes sauf `GET /` et `GET /api/hello` l'exigent (`X-CB-Pin`), comparaison en temps constant, verrouillage 60 s par IP après
