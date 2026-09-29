@@ -177,6 +177,12 @@ class DownloadManagerTest {
         assertEquals("active", real.status)
         assertEquals("Film", r.task(id).name); assertEquals(5 * G, r.task(id).total)
         assertFalse(r.fake.dls.containsKey(meta.gid))
+        // aria2 restarts: its session brings the torrent back as the magnet, under the metadata GID. No duplicate is added.
+        r.fake.dls.clear()
+        r.fake.dls[meta.gid] = FakeAria2.Dl(meta.gid, "active", 0, 0, real.dir, listOf(Triple("[METADATA]$hash", 0L, true)), metadata = true)
+        r.dm.tick()
+        assertEquals(1, r.fake.dls.size)
+        assertEquals(DlState.METADATA, r.task(id).state)
     }
 
     @Test fun magnetTooBigForEveryVolumeWaitsForRoom() {

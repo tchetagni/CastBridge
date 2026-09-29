@@ -51,15 +51,20 @@ class DownloadManager(
         val id: String, var gid: String?, val kind: String, val uris: List<String>, var name: String, var volumeId: String,
         val addedAt: Long, var pausedBy: PausedBy?, var size: Long?, val options: Map<String, String>, var note: String?,
         var restarts: Int, val infoHash: String?,
+        /**
+         * GID of the metadata download (magnet, link to a .torrent) this one followed. aria2's session file saves such a
+         * download as its magnet/URL under THAT GID: after an aria2 restart it is the one that comes back.
+         */
+        var metaGid: String? = null,
     ) {
         fun toMap(): Map<String, Any?> = mapOf("id" to id, "gid" to gid, "kind" to kind, "uris" to uris, "name" to name, "volume" to volumeId,
             "addedAt" to addedAt, "pausedBy" to pausedBy?.name, "size" to size, "options" to options, "note" to note,
-            "restarts" to restarts, "infoHash" to infoHash)
+            "restarts" to restarts, "infoHash" to infoHash, "metaGid" to metaGid)
         companion object {
             fun from(m: Map<String, Any?>) = Task(m.s("id")!!, m.s("gid"), m.s("kind") ?: "url", m["uris"].list().map { it.toString() },
                 m.s("name") ?: "?", m.s("volume") ?: "internal", m.n("addedAt"),
                 m.s("pausedBy")?.let { runCatching { PausedBy.valueOf(it) }.getOrNull() }, m["size"]?.let { m.n("size") },
-                m["options"].obj().mapValues { it.value.toString() }, m.s("note"), m.n("restarts").toInt(), m.s("infoHash"))
+                m["options"].obj().mapValues { it.value.toString() }, m.s("note"), m.n("restarts").toInt(), m.s("infoHash"), m.s("metaGid"))
         }
     }
 
@@ -168,6 +173,8 @@ class DownloadManager(
             for (t in tasks.toList()) {
                 if (t.id in moving) continue
                 val vol = volumes[t.volumeId]
+                // After an aria2 restart a torrent started from a magnet comes back as its metadata download (session file).
+                if (t.gid?.let { byGid[it] } == null && t.metaGid?.let { byGid[it] } != null) { t.gid = t.metaGid; dirty = true }
                 val st = t.gid?.let { byGid[it] }
                 val status = st?.s("status")
                 if (vol == null) {                                          // the drive holding it is gone
@@ -194,6 +201,7 @@ class DownloadManager(
                         val next = st["followedBy"].list().map { it.toString() }
                         if (next.isNotEmpty()) {                            // magnet metadata / .torrent / .metalink fetched
                             val old = t.gid!!
+                            if (t.metaGid == null) t.metaGid = old
                             t.gid = next[0]; t.pausedBy = PausedBy.CHECK; dirty = true
                             runCatching { r.removeDownloadResult(old) }
                             byGid[next[0]]?.takeIf { it.s("status") == "paused" }?.let { checkSpaceAfterMetadata(r, t, it, byGid) }
