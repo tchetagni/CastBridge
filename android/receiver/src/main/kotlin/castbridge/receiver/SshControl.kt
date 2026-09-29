@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import castbridge.core.ssh.AuthorizedKeys
 import castbridge.core.ssh.SshPolicy
+import castbridge.core.ssh.SshTunnel
 import castbridge.core.tv.ApiReply
 import castbridge.core.tv.ReceiverServer
 import castbridge.sshd.TvSshServer
@@ -13,16 +14,19 @@ import java.io.File
  * SSH administration of the TV, off until someone switches it on (MENU on the remote, or the
  * PIN-protected API). Keys and the host key live in the app's private storage.
  */
-class SshControl(ctx: Context, private val onChange: (String?) -> Unit) {
-    private val server = TvSshServer(
+class SshControl(ctx: Context, private val onChange: (String?) -> Unit, onBtStatus: (String?) -> Unit = {}) {
+    private val server: TvSshServer = TvSshServer(
         dataDir = File(ctx.filesDir, "ssh"),
         sftpRoot = ctx.getExternalFilesDir(null) ?: ctx.filesDir,
         policy = SshPolicy(),
         log = { m ->
             Log.i(TAG, m)                                       // never contains keys or the PIN
-            if ("stopping" in m) onChange(null)
+            if ("stopping" in m) { onChange(null); bridge.stop() }
         },
     )
+    /** SSH over Bluetooth: an RFCOMM byte tunnel to this server, on only while SSH is on (docs/ADMIN.md). */
+    private val tunnel: SshTunnel = SshTunnel(server.peers, server.port, maxConnections = 2)
+    private val bridge: BtSshBridge = BtSshBridge(ctx, tunnel, onBtStatus)
 
     val running get() = server.running
 
@@ -33,12 +37,13 @@ class SshControl(ctx: Context, private val onChange: (String?) -> Unit) {
 
     fun enable(minutes: Int? = null): String? {
         server.start(minutes)
+        bridge.start()
         return statusLine().also(onChange)
     }
 
-    fun disable() { server.stop(); onChange(null) }
+    fun disable() { bridge.stop(); server.stop(); onChange(null) }
 
-    fun stop() = server.stop()
+    fun stop() { bridge.stop(); server.stop() }
 
     /** Routes /api/ssh*, or null if [path] is not one of them. */
     fun api(path: String, method: String, p: Map<String, String>): ApiReply? = try { route(path, method, p) } catch (t: Throwable) {
@@ -69,7 +74,8 @@ class SshControl(ctx: Context, private val onChange: (String?) -> Unit) {
         }
         return """{"enabled":${server.running},"port":${server.port},"idleMinutes":${server.policy.idleMinutes},""" +
             """"secondsLeft":${server.policy.secondsLeft()},"fingerprint":${server.hostKeyFingerprint()?.let(ReceiverServer::q) ?: "null"},""" +
-            """"keys":[$keys]}"""
+            """"keys":[$keys],"bluetooth":{"listening":${bridge.running},"maxConnections":2,"active":[""" +
+            tunnel.active().joinToString(",") { ReceiverServer.q(it.name) } + "]}}"
     }
 
     private companion object { const val TAG = "CastBridgeSSH" }

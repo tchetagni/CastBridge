@@ -25,7 +25,7 @@ class ReceiverTest {
     private val dir = kotlin.io.path.createTempDirectory("tv").toFile()
     private val player = FakePlayer()
     private val port = ServerSocket(0).use { it.localPort }
-    private val server = ReceiverServer(dir, player, port, profile = TvProfile(minFreeBytes = 0)).apply { start(5000, false) }
+    private val server = ReceiverServer(dir, player, port, profile = TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0)).apply { start(5000, false) }
     private val base = "http://127.0.0.1:$port"
     private val tv = TvClient(base)
     private val data = Random(1).nextBytes(3_000_000)

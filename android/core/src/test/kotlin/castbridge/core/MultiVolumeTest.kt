@@ -13,7 +13,7 @@ import kotlin.random.Random
 import kotlin.test.*
 
 /** Two temporary folders standing for the internal storage and a USB drive, plus a switchable "hot plug". */
-class Rig(pin: String? = null, profile: TvProfile = TvProfile(minFreeBytes = 0), fs: Fs = Fs.EXFAT, settingsOpener: (() -> String?)? = null) {
+class Rig(pin: String? = null, profile: TvProfile = TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0), fs: Fs = Fs.EXFAT, settingsOpener: (() -> String?)? = null) {
     val root = kotlin.io.path.createTempDirectory("vol").toFile()
     val internalDir = File(root, "internal").apply { mkdirs() }
     val usbDir = File(root, "usb").apply { mkdirs() }
@@ -117,7 +117,7 @@ class MultiVolumeServerTest {
     @Test fun targetIsPersistedThroughTheSettingsCallback() {
         var saved: TvProfile? = null
         val port = ServerSocket(0).use { it.localPort }
-        val s = ReceiverServer(r.registry, FakePlayer(), port, profile = TvProfile(minFreeBytes = 0), onSettings = { saved = it }).apply { start(5000, false) }
+        val s = ReceiverServer(r.registry, FakePlayer(), port, profile = TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0), onSettings = { saved = it }).apply { start(5000, false) }
         try {
             TvClient("http://127.0.0.1:$port").setTarget("internal")
             assertEquals("internal", saved?.target)
@@ -251,7 +251,7 @@ class MultiVolumeServerTest {
         assertTrue(r.notices.any { it.contains("retiré") })
         r.usbPresent = true
         assertTrue(r.call("POST", "/api/storage/rescan").second.contains("\"present\":true"))
-        assertTrue(r.notices.any { it.contains("détecté") })
+        assertTrue(r.notices.any { it.startsWith("Clé USB branchée") }, r.notices.toString())    // plain words, with the free space
     }
 
     @Test fun orphansAreCleanedPerVolumeWithALongerGraceOnDrives() {
@@ -260,7 +260,7 @@ class MultiVolumeServerTest {
         w(r.internalDir, "old.mp4.part", 2 * day); w(r.usbDir, "away3d.mp4.part", 3 * day); w(r.usbDir, "away9d.mp4.part", 9 * day)
         w(r.usbDir, "away9d.mp4.meta", 9 * day)
         val p2 = ServerSocket(0).use { it.localPort }
-        val s2 = ReceiverServer(r.registry, FakePlayer(), p2, profile = TvProfile(minFreeBytes = 0)).apply { start(5000, false) }
+        val s2 = ReceiverServer(r.registry, FakePlayer(), p2, profile = TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0)).apply { start(5000, false) }
         try {
             assertFalse(File(r.internalDir, "old.mp4.part").exists())
             assertTrue(File(r.usbDir, "away3d.mp4.part").exists(), "a drive that was away keeps partial uploads for a week")
@@ -369,7 +369,7 @@ class HotRemovalTest {
         }
         val reg = VolumeRegistry(failing).also { it.refresh() }
         val port = ServerSocket(0).use { it.localPort }
-        val s = ReceiverServer(reg, FakePlayer(), port, profile = TvProfile(minFreeBytes = 0)).apply { start(5000, false) }
+        val s = ReceiverServer(reg, FakePlayer(), port, profile = TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0)).apply { start(5000, false) }
         try {
             val c = URL("http://127.0.0.1:$port/upload/x.mp4?offset=0&total=100").openConnection() as HttpURLConnection
             c.requestMethod = "PUT"; c.doOutput = true; c.setFixedLengthStreamingMode(100); c.outputStream.use { it.write(ByteArray(100)) }
@@ -380,7 +380,7 @@ class HotRemovalTest {
 }
 
 class EvictionPerVolumeTest {
-    private val r = Rig(profile = TvProfile(minFreeBytes = 0, evictPlayed = true, quotaBytes = 100))
+    private val r = Rig(profile = TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0, evictPlayed = true, quotaBytes = 100))
     @AfterTest fun tearDown() = r.close()
 
     @Test fun evictsOnlyOnTheTargetVolumeOldestPlayedFirstNeverTheOneInUse() {
@@ -409,7 +409,7 @@ class EvictionPerVolumeTest {
     }
 
     @Test fun autoFallsBackToInternalWhenTheDriveCannotTakeTheFile() {
-        val r2 = Rig(profile = TvProfile(minFreeBytes = 0, evictPlayed = true))
+        val r2 = Rig(profile = TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0, evictPlayed = true))
         try {
             r2.capacity["usb-1234"] = 300; r2.capacity["internal"] = 10_000
             r2.up("first.mp4", ByteArray(250))

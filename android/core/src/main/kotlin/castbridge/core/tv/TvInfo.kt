@@ -10,7 +10,7 @@ data class TvInfo(
     fun file(name: String?) = files.firstOrNull { it.name == name }
 
     companion object {
-        private val ENTRY = Regex("\\{\"name\":\"((?:[^\"\\\\]|\\\\.)*)\",\"size\":(\\d+),\"received\":(\\d+),\"complete\":(true|false)\\}")
+        private val ENTRY = Regex("\\{\"name\":\"((?:[^\"\\\\]|\\\\.)*)\",\"size\":(\\d+),\"received\":(\\d+),\"complete\":(true|false)[,}]")
 
         fun parse(j: String): TvInfo {
             val files = ENTRY.findAll(j).map { m ->

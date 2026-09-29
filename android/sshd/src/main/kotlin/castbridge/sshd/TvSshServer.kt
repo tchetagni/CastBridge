@@ -3,6 +3,7 @@ package castbridge.sshd
 import castbridge.core.ssh.AuthorizedKeys
 import castbridge.core.ssh.FailureTracker
 import castbridge.core.ssh.Lan
+import castbridge.core.ssh.PeerRegistry
 import castbridge.core.ssh.SshKey
 import castbridge.core.ssh.SshPolicy
 import org.apache.sshd.common.NamedFactory
@@ -48,6 +49,8 @@ class TvSshServer(
     private val failures: FailureTracker = FailureTracker(),
     private val log: (String) -> Unit = {},
     private val requireLan: Boolean = true,
+    /** Identity of tunnelled (Bluetooth) clients, which all arrive from 127.0.0.1: failures are counted per device. */
+    val peers: PeerRegistry = PeerRegistry(),
 ) {
     private var sshd: SshServer? = null
     private val stopping = AtomicBoolean(false)
@@ -106,10 +109,10 @@ class TvSshServer(
         s.keyPairProvider = hostKeyProvider() as KeyPairProvider
         s.userAuthFactories = listOf<UserAuthFactory>(UserAuthPublicKeyFactory.INSTANCE)   // no passwords, ever
         s.publickeyAuthenticator = org.apache.sshd.server.auth.pubkey.PublickeyAuthenticator { user, key, session ->
-            val ip = (session.remoteAddress as? InetSocketAddress)?.address?.hostAddress.orEmpty()
+            val who = peers.clientKey(session.remoteAddress as? InetSocketAddress)
             val presented = PublicKeyEntry.toString(key).substringAfter(' ').trim()
-            val ok = !failures.isLocked(ip) && keys().any { it.base64 == presented }
-            if (ok) { failures.recordSuccess(ip); log("ssh: login ${user}@$ip") } else { failures.recordFailure(ip); log("ssh: refused $ip") }
+            val ok = !failures.isLocked(who) && keys().any { it.base64 == presented }
+            if (ok) { failures.recordSuccess(who); log("ssh: login ${user}@$who") } else { failures.recordFailure(who); log("ssh: refused $who") }
             ok
         }
         s.forwardingFilter = RejectAllForwardingFilter.INSTANCE
@@ -126,8 +129,9 @@ class TvSshServer(
         s.addSessionListener(object : SessionListener {
             override fun sessionCreated(session: Session) {
                 val ip = (session.remoteAddress as? InetSocketAddress)?.address?.hostAddress.orEmpty()
-                if ((requireLan && !Lan.isLocal(ip)) || failures.isLocked(ip)) {
-                    log("ssh: connection from $ip dropped"); session.close(true)
+                val who = peers.clientKey(session.remoteAddress as? InetSocketAddress)
+                if ((requireLan && !Lan.isLocal(ip)) || failures.isLocked(who)) {
+                    log("ssh: connection from $who dropped"); session.close(true)
                 }
             }
             override fun sessionEvent(session: Session, event: SessionListener.Event) {

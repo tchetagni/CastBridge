@@ -24,7 +24,7 @@ class DeviceTest {
     private val ext = ApiExtension { path, method, _ ->
         if (path == "/api/x-test" && method == "GET") ApiReply(200, """{"x":1}""") else null
     }
-    private val server = ReceiverServer(dir, player, port, profile = TvProfile(minFreeBytes = 0), pin = "135790", device = dev, extension = ext)
+    private val server = ReceiverServer(dir, player, port, profile = TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0), pin = "135790", device = dev, extension = ext)
         .apply { start(5000, false) }
     private val tv = TvClient("http://127.0.0.1:$port", "135790")
 
@@ -58,7 +58,7 @@ class DeviceTest {
 
     @Test fun withoutDeviceReports501() {
         val p2 = ServerSocket(0).use { it.localPort }
-        val s2 = ReceiverServer(dir, player, p2, profile = TvProfile(minFreeBytes = 0)).apply { start(5000, false) }
+        val s2 = ReceiverServer(dir, player, p2, profile = TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0)).apply { start(5000, false) }
         try { assertEquals(501, assertFailsWith<TvClient.HttpError> { TvClient("http://127.0.0.1:$p2").sysinfo() }.code) }
         finally { s2.stop() }
     }

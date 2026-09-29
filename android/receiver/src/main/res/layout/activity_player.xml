@@ -2,20 +2,28 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
+    android:background="#0E1116"
     android:keepScreenOn="true">
     <org.videolan.libvlc.util.VLCVideoLayout
         android:id="@+id/video"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-    <TextView
-        android:id="@+id/idle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:textColor="#FFFFFF"
-        android:textSize="22sp" />
+    <!-- Home (media launcher), whole library (grid), connection & settings: built in code (HomeScreen, LibraryScreen, SettingsPanel) -->
+    <FrameLayout
+        android:id="@+id/home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+    <FrameLayout
+        android:id="@+id/library"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+    <FrameLayout
+        android:id="@+id/settings"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
     <TextView
         android:id="@+id/netBadge"
         android:layout_width="wrap_content"
@@ -42,16 +50,5 @@
         android:padding="8dp"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
-        android:visibility="gone" />
-    <TextView
-        android:id="@+id/osd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="32dp"
-        android:background="#99000000"
-        android:padding="12dp"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
         android:visibility="gone" />
 </FrameLayout>

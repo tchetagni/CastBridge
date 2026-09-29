@@ -17,6 +17,12 @@ interface Player {
     fun seek(posMs: Long)
     fun stop()
     fun state(): PlayerState
+    /** Tracks, delays, chapters... of what is playing; null when nothing plays or the player cannot tell. */
+    fun tracks(): PlayerTracks? = null
+    /** Applies a setting (audio track, subtitles, delays, speed...); false = not possible now (nothing playing, no such track). */
+    fun command(c: PlayerCommand): Boolean = false
+    /** Plays an external subtitle file (a real file next to the video) with the current video. */
+    fun subtitleFile(file: File): Boolean = false
 }
 
 data class PlayerState(val state: String = "idle", val name: String? = null, val posMs: Long = 0, val durMs: Long = 0)
@@ -57,11 +63,19 @@ class ReceiverServer(
     ) : this(VolumeRegistry.single(dir), player, port, profile, onSettings, pin, guard, device, extension)
 
     @Volatile private var cfg = profile
+    /** Profile for phone <-> TV transfers: the "free space after the transfer" rule instead of the plain reserve. */
+    private val xferCfg: TvProfile get() = cfg.let { it.copy(minFreeBytes = TransferRule.minFree(it)) }
     /** Random per run: lets the TV's own player read /stream/ on loopback without the PIN (never leaves the process). */
     private val streamToken: String = ByteArray(16).also { java.security.SecureRandom().nextBytes(it) }.joinToString("") { "%02x".format(it) }
     private val meters = java.util.concurrent.ConcurrentHashMap<String, RateMeter>()
     @Volatile private var moveJob: MoveJob? = null
+    private val uploading = java.util.concurrent.atomic.AtomicInteger()
+
+    /** Uploads being received right now (the TV app keeps a partial wake lock only while this is above zero). */
+    fun activeTransfers(): Int = uploading.get() + (if (moveJob?.state == "running") 1 else 0)
     @Volatile private var playingVolume: String? = null
+    /** "Play one after the other" (library section, selection); null = single file. */
+    @Volatile private var playlist: Playlist? = null
 
     fun streamUrl(name: String) = "http://127.0.0.1:$listeningPort/stream/${java.net.URLEncoder.encode(name, "UTF-8").replace("+", "%20")}?t=$streamToken"
 
@@ -108,10 +122,11 @@ class ReceiverServer(
                 if (playingVolume == ev.volume.id && player.state().state != "idle") {
                     runCatching { player.stop() }
                     onNotice("${ev.volume.label} retiré : lecture arrêtée")
-                } else onNotice("${ev.volume.label} retiré : les envois en cours reprendront à son retour")
+                } else onNotice("${ev.volume.label} retirée : les envois en cours reprendront à son retour")
             } else {
                 cleanOrphans(ev.volume)
-                onNotice("${ev.volume.label} détecté : les envois interrompus peuvent reprendre")
+                val free = runCatching { volumes.free(ev.volume) }.getOrDefault(-1)
+                onNotice("${ev.volume.label} branchée" + (if (free >= 0) " : ${StorageLine.size(free)} libres" else ""))
             }
         }
         setAsyncRunner(BoundedRunner(cfg.maxHttpThreads))
@@ -124,8 +139,53 @@ class ReceiverServer(
         runCatching { Storage.cleanOrphans(st.dir, age) }
     }
 
-    /** Called by the app when a file played to the end: honours the "delete after play" setting. */
-    fun onPlaybackEnded(name: String) {
+    /**
+     * Called by the app when a file played to the end: honours the "delete after play" setting, then starts the next item of
+     * the playlist if there is one. Returns true when something new started playing (the app then keeps the video screen).
+     */
+    fun onPlaybackEnded(name: String): Boolean {
+        deleteAfterPlay(name)
+        val pl = playlist ?: return false
+        if (pl.current != name && !pl.contains(name)) { playlist = null; return false }
+        val next = pl.next(auto = true) ?: run { playlist = null; return false }
+        return runCatching { startPlaying(next, 0) }.getOrDefault(false)
+    }
+
+    /** Plays [name] (finished file, or one still arriving) from [pos]; false if it does not exist. */
+    private fun startPlaying(name: String, pos: Long): Boolean {
+        val hit = findFinal(name) ?: return false
+        playingVolume = hit.v.id
+        val f = hit.file
+        if (f != null) { Storage.markPlayed(f.parentFile, f.name); player.play(f, pos) } else player.playSaf(hit.name, hit.size, pos)
+        return true
+    }
+
+    /** Next / previous item of the playlist (remote keys, phone); false if there is none. */
+    fun playlistStep(delta: Int): Boolean {
+        val pl = playlist ?: return false
+        val n = (if (delta >= 0) pl.next(auto = false) else pl.previous()) ?: return false
+        return startPlaying(n, 0)
+    }
+
+    /** Starts "one after the other" over [names] (stored files) from [start]. The TV's library uses it for a section. */
+    fun playAll(names: List<String>, start: Int = 0, repeat: Playlist.Repeat = Playlist.Repeat.OFF): Boolean {
+        val ok = names.mapNotNull { safeName(it) }.filter { findFinal(it) != null }.distinct()
+        if (ok.isEmpty()) return false
+        val first = names.getOrNull(start)?.let { ok.indexOf(it) }?.takeIf { it >= 0 } ?: 0
+        val pl = Playlist(ok, first, repeat)
+        playlist = pl
+        return startPlaying(pl.current!!, 0)
+    }
+
+    /** Repeat mode of the running playlist; false when there is none. */
+    fun setRepeat(r: Playlist.Repeat): Boolean { val pl = playlist ?: return false; pl.repeat = r; return true }
+
+    private fun playlistJson(): String {
+        val pl = playlist ?: return "null"
+        return """{"items":${strs(pl.items)},"index":${pl.index},"repeat":${q(pl.repeat.label)}}"""
+    }
+
+    private fun deleteAfterPlay(name: String) {
         if (!cfg.deleteAfterPlay) return
         val n = safeName(name) ?: return
         val hits = finals(n)
@@ -144,6 +204,9 @@ class ReceiverServer(
 
     override fun serve(s: IHTTPSession): Response = try {
         route(s)
+    } catch (e: NeedsForeground) {
+        // The TV app runs in the background and could not bring its screen up by itself: someone must open it.
+        json(Response.Status.CONFLICT, """{"error":"needs foreground","needsForeground":true,"message":${q(e.message ?: "")}}""")
     } catch (e: Exception) {
         json(Response.Status.INTERNAL_ERROR, """{"error":${q(e.message ?: e.javaClass.simpleName)}}""")
     }
@@ -174,9 +237,37 @@ class ReceiverServer(
             }
             path == "/api/sysinfo" -> sysinfo()
             path == "/api/library" && s.method == Method.GET -> ok(libraryJson())
+            path == "/api/player/tracks" && s.method == Method.GET -> ok(tracksJson())
             path == "/api/thumb" && s.method == Method.GET -> named(p) { thumb(it, p["volume"]) }
             ext != null -> json(status(ext.status), ext.json)
             s.method != Method.POST -> json(Response.Status.METHOD_NOT_ALLOWED, """{"error":"use POST"}""")
+            path == "/api/library/watched" -> named(p) { setWatched(it, p["watched"] != "0" && p["watched"] != "false") }
+            path == "/api/playlist" -> {
+                // names separated by "/" (a character file names cannot contain), like /api/apk/install
+                val names = p["names"].orEmpty().split('/').filter { it.isNotEmpty() }
+                val rep = Playlist.Repeat.of(p["repeat"] ?: "off") ?: return bad("repeat must be off, all or one")
+                if (names.isEmpty() || names.any { safeName(it) == null }) return bad("names required")
+                if (!playAll(names, p["start"]?.toIntOrNull() ?: 0, rep)) return json(Response.Status.NOT_FOUND, """{"error":"not found"}""")
+                ok(info())
+            }
+            path == "/api/player/next" || path == "/api/player/prev" ->
+                if (playlistStep(if (path.endsWith("next")) 1 else -1)) ok(info()) else json(Response.Status.CONFLICT, """{"error":"no playlist"}""")
+            path == "/api/player/repeat" -> {
+                val rep = Playlist.Repeat.of(p["value"]) ?: return bad("value must be off, all or one")
+                if (!setRepeat(rep)) return json(Response.Status.CONFLICT, """{"error":"no playlist"}""")
+                ok(info())
+            }
+            path == "/api/player/subfile" -> named(p) { sub ->
+                if (!SubtitleFinder.isSubtitle(sub)) return@named bad("not a subtitle file")
+                val f = findFinal(sub)?.file ?: return@named json(Response.Status.NOT_FOUND, """{"error":"not found"}""")
+                if (player.subtitleFile(f)) ok(tracksJson()) else json(Response.Status.CONFLICT, """{"error":"not playing"}""")
+            }
+            path.startsWith("/api/player/") -> {
+                val cur = player.tracks() ?: return json(Response.Status.CONFLICT, """{"error":"not playing"}""")
+                val cmd = PlayerParams.command(path.removePrefix("/api/player/"), p, cur)
+                    ?: return if (path.removePrefix("/api/player/") in PLAYER_ROUTES) bad("bad value") else json(Response.Status.NOT_FOUND, """{"error":"not found"}""")
+                if (player.command(cmd)) ok(tracksJson()) else json(Response.Status.CONFLICT, """{"error":"not possible now"}""")
+            }
             path == "/api/storage/target" -> setTarget(p["value"].orEmpty())
             path == "/api/storage/move" -> named(p) { startMove(it, p["to"].orEmpty()) }
             path == "/api/storage/move/cancel" -> { moveJob?.let { if (it.state == "running") it.cancelled = true }; ok(storageJson()) }
@@ -205,6 +296,7 @@ class ReceiverServer(
                         if (isPlaying(from)) player.stop()
                         val toStored = src.v.storedName(to)
                         if (!src.st.rename(src.name, toStored)) throw IOException("rename failed")
+                        library?.renamed(src.name, toStored, src.size)
                         (src.st as? FileStore)?.let { fs ->
                             if (src.name in Storage.playedNames(fs.dir)) { Storage.forget(fs.dir, src.name); Storage.markPlayed(fs.dir, toStored) }
                         }
@@ -227,6 +319,7 @@ class ReceiverServer(
                 synchronized(FileLocks.of(LOCK_ROOT, name)) {
                     volumes.volumes().filter { only == null || it.id == only }.forEach { v ->
                         val st = volumes.store(v); val n = v.storedName(name)
+                        st.finalSize(n)?.let { sz -> library?.deleted(n, sz) }
                         st.deleteFinal(n); st.deletePart(n)
                         (st as? FileStore)?.let { Meta.delete(it.dir, n); Storage.forget(it.dir, n) }
                         volumes.forgetPart(v, n)
@@ -238,6 +331,7 @@ class ReceiverServer(
             }
             path == "/api/play" -> named(p) { name ->
                 if (moving(name)) return@named json(Response.Status.CONFLICT, """{"error":"moving"}""")
+                playlist = null
                 val pos = p["pos"]?.toLongOrNull() ?: 0
                 val hit = findFinal(name)
                 if (hit != null) {
@@ -250,7 +344,7 @@ class ReceiverServer(
             }
             path == "/api/pause" -> { player.pause(); ok(info()) }
             path == "/api/resume" -> { player.resume(); ok(info()) }
-            path == "/api/stop" -> { player.stop(); ok(info()) }
+            path == "/api/stop" -> { playlist = null; player.stop(); ok(info()) }
             path == "/api/seek" -> { player.seek(p["pos"]?.toLongOrNull() ?: 0); ok(info()) }
             else -> json(Response.Status.NOT_FOUND, """{"error":"not found"}""")
         }
@@ -291,10 +385,17 @@ class ReceiverServer(
     }
 
     private fun upload(s: IHTTPSession, rawName: String, p: Map<String, String>): Response {
+        uploading.incrementAndGet()
+        try { return uploadCounted(s, rawName, p) } finally { uploading.decrementAndGet() }
+    }
+
+    private fun uploadCounted(s: IHTTPSession, rawName: String, p: Map<String, String>): Response {
         val name = safeName(rawName) ?: return bad("bad name")
         val offset = p["offset"]?.toLongOrNull() ?: return bad("offset required")
         val total = p["total"]?.toLongOrNull()?.takeIf { it > 0 } ?: return bad("total required")
         val len = s.headers["content-length"]?.toLongOrNull() ?: return bad("content-length required")
+        val target = p["target"]?.takeIf { it.isNotEmpty() } ?: cfg.target
+        if (!StoragePolicy.isValidTarget(target, volumes.volumes() + volumes.missingVolumes())) return bad("bad target")
         findFinal(name)?.let { if (it.size == total) return ok(partJson(name)) }
         synchronized(FileLocks.of(LOCK_ROOT, name)) {
             if (moving(name)) return json(Response.Status.CONFLICT, """{"error":"moving"}""")
@@ -304,17 +405,17 @@ class ReceiverServer(
             if (offset != cur || offset + len > total) return json(Response.Status.CONFLICT, partJson(name))
             if (owner == null) {
                 // A new upload: pick the volume (policy), then check quota/space there (evicting old played files if allowed).
-                val plan = StoragePolicy.plan(volumes.snapshot(), cfg.target, total, cfg.minFreeBytes, reclaimable = ::reclaimable)
-                plan.refusal?.let { return refusal(it) }
+                val plan = StoragePolicy.plan(volumes.snapshot(), target, total, TransferRule.minFree(cfg), reclaimable = ::reclaimable)
+                plan.refusal?.let { r -> return if (r.http == 507) spaceRefusal(r.message, target, total) else refusal(r) }
                 var why: String? = null
                 for (c in plan.candidates) {
-                    val w = ensureRoom(c.volume, total)
+                    val w = ensureRoom(c.volume, total, xferCfg)
                     if (w != null) { why = w; continue }
                     val st = volumes.store(c.volume)
                     owner = Hit(c.volume, st, c.volume.storedName(name), 0)
                     break
                 }
-                val o = owner ?: return json(INSUFFICIENT_STORAGE, """{"error":${q(why ?: "no storage available")}}""")
+                val o = owner ?: return spaceRefusal(why ?: "no storage available", target, total)
                 // No stale empty partial copy elsewhere (a failed earlier attempt).
                 volumes.volumes().filter { it.id != o.v.id }.forEach { v ->
                     val st = volumes.store(v); val n = v.storedName(name)
@@ -322,7 +423,7 @@ class ReceiverServer(
                 }
                 (o.st as? FileStore)?.let { Meta.delete(it.dir, o.name) }      // a fresh upload: forget any stale size
             } else {
-                ensureRoom(owner.v, total - cur)?.let { why -> return json(INSUFFICIENT_STORAGE, spaceJson(why, owner.v)) }
+                ensureRoom(owner.v, total - cur, xferCfg)?.let { why -> return json(INSUFFICIENT_STORAGE, spaceJson(why, owner.v, total - cur)) }
             }
             val o = owner!!
             val v = o.v; val st = o.st
@@ -338,21 +439,40 @@ class ReceiverServer(
                     val input = s.inputStream
                     val out = try { st.openPart(o.name) } catch (e: IOException) { throw DiskError(e) }
                     out.use {
-                        val buf = ByteArray(cfg.ioBufferBytes)
+                        // Full speed: fill a large block from the socket, then one disk write (no fsync per block; a removable
+                        // drive is flushed every removableSyncBytes and at the end, see commit()).
+                        val buf = ByteArray(cfg.uploadBufferBytes)
+                        var fill = 0
                         var left = len
-                        while (left > 0) {
-                            if (!volumes.alive(v)) throw DiskError(IOException("volume removed"))
-                            val r = input.read(buf, 0, minOf(buf.size.toLong(), left).toInt())
-                            if (r < 0) break
-                            try { out.write(buf, 0, r) } catch (e: IOException) { throw DiskError(e) }
-                            meter.add(r.toLong())
-                            left -= r
+                        var sinceSync = 0L
+                        fun flush() {
+                            if (fill == 0) return
+                            try { out.write(buf, 0, fill) } catch (e: IOException) { throw DiskError(e) }
+                            sinceSync += fill; fill = 0
+                            if (v.kind == VolumeKind.REMOVABLE && sinceSync >= cfg.removableSyncBytes) {
+                                runCatching { (out as? java.io.FileOutputStream)?.fd?.sync() }; sinceSync = 0
+                            }
                         }
+                        try {
+                            while (left > 0) {
+                                if (!volumes.alive(v)) throw DiskError(IOException("volume removed"))
+                                val r = input.read(buf, fill, minOf((buf.size - fill).toLong(), left).toInt())
+                                if (r < 0) break
+                                fill += r; left -= r
+                                meter.add(r.toLong())
+                                if (fill == buf.size) flush()
+                            }
+                        } catch (e: DiskError) { throw e } catch (e: IOException) {
+                            flush()                                  // the network dropped: keep what arrived, the phone resumes from there
+                            throw e
+                        }
+                        flush()
                     }
                     if (st.partSize(o.name) == total) {
                         try { st.commit(o.name) } catch (e: IOException) { throw DiskError(e) }
                         fileStore?.let { Storage.forget(it.dir, o.name); Meta.delete(it.dir, o.name) }
                         meters.remove(name); volumes.forgetPart(v, o.name)
+                        onNotice(when (MediaType.of(name)) { MediaType.VIDEO -> "Vidéo reçue"; MediaType.AUDIO -> "Musique reçue"; MediaType.OTHER -> "Fichier reçu" } + " ✓  ${LibraryLogic.title(name)}")
                         // The upload replaced any older file of that name: no silent duplicate on another volume.
                         finals(name).filter { it.v.id != v.id && !isPlaying(name) }.forEach {
                             it.st.deleteFinal(it.name); (it.st as? FileStore)?.let { f -> Storage.forget(f.dir, it.name) }
@@ -436,23 +556,48 @@ class ReceiverServer(
         return Storage.quota(st.dir, cfg, used, volumes.free(v), v.kind)
     }
 
-    /** Finished files with what the library screens need: cards with thumbnail, duration, resume position, volume. */
-    fun libraryJson(): String {
+    /** Files being received right now: (name, received bytes, final size). */
+    fun receiving(): List<Triple<String, Long, Long>> = listing().entries.filter { !it.complete }.map { Triple(it.name, it.received, it.size) }
+
+    /** Finished files (newest first) with what the library screens need: thumbnail, duration, resume position, volume. */
+    fun libraryItems(): List<LibraryItem> {
         val l = listing()
         val lib = library
-        val files = l.entries.filter { it.complete }.map { e ->
-            val m = lib?.meta(e.name, e.size) ?: FileMeta()
-            val mtime = (volumes.store(e.v) as? FileStore)?.let { File(it.dir, it.diskName(e.name)).lastModified() } ?: 0L
-            Triple(e, m, mtime)
-        }
-        val sorted = LibraryLogic.sortNewestFirst(files, { it.third }, { it.first.name })
         val ps = player.state()
-        return sorted.joinToString(",", "{\"files\":[", "]") { (e, m, mtime) ->
-            "{\"name\":${q(e.name)},\"title\":${q(LibraryLogic.title(e.name))},\"size\":${e.size},\"mtime\":$mtime," +
-                "\"volume\":${q(e.v.id)},\"volumeLabel\":${q(e.v.label)},\"kind\":${q(e.v.kind.name.lowercase())}," +
+        val files = l.entries.filter { it.complete }.map { e ->
+            val f = (volumes.store(e.v) as? FileStore)?.let { File(it.dir, it.diskName(e.name)) }
+            val m = lib?.meta(e.name, e.size, f) ?: FileMeta()
+            LibraryItem(e.name, e.size, f?.lastModified() ?: 0L, e.v.id, e.v.label, e.v.kind, m, e.dup,
+                ps.state != "idle" && ps.name == e.name)
+        }
+        return LibraryLogic.sortNewestFirst(files, { it.mtime }, { it.name })
+    }
+
+    fun libraryJson(): String {
+        val sorted = libraryItems()
+        return sorted.joinToString(",", "{\"files\":[", "]") { i ->
+            val m = i.meta
+            "{\"name\":${q(i.name)},\"title\":${q(i.title)},\"size\":${i.size},\"mtime\":${i.mtime}," +
+                "\"volume\":${q(i.volumeId)},\"volumeLabel\":${q(i.volumeLabel)},\"kind\":${q(i.volumeKind.name.lowercase())}," +
+                "\"type\":${q(i.type.name.lowercase())}," +
                 "\"durationMs\":${m.durationMs},\"resumeMs\":${m.resumeMs},\"watched\":${m.watched},\"playedAt\":${m.playedAtMs}," +
-                "\"hasThumb\":${m.hasThumb},\"duplicate\":${e.dup},\"playing\":${ps.state != "idle" && ps.name == e.name}}"
+                "\"hasThumb\":${m.hasThumb},\"duplicate\":${i.duplicate},\"playing\":${i.playing}}"
         } + "],\"count\":${sorted.size}}"
+    }
+
+    /** JPEG thumbnail of a stored file for the TV's own screen (null = not ready or impossible; generation is queued). */
+    fun thumbnail(name: String, volume: String? = null): ByteArray? {
+        val lib = library ?: return null
+        val hit = finals(name).let { hs -> hs.firstOrNull { it.v.id == volume } ?: hs.firstOrNull() } ?: return null
+        return lib.thumb(hit.name, hit.size, hit.file)
+    }
+
+    private fun setWatched(name: String, watched: Boolean): Response {
+        val lib = library ?: return json(NOT_IMPLEMENTED, """{"error":"no library"}""")
+        val hits = finals(name)
+        if (hits.isEmpty()) return json(Response.Status.NOT_FOUND, """{"error":"not found"}""")
+        hits.forEach { lib.setWatched(it.name, it.size, watched) }
+        return ok(libraryJson())
     }
 
     private fun thumb(name: String, volume: String?): Response {
@@ -460,7 +605,8 @@ class ReceiverServer(
         val hit = finals(name).let { hs -> hs.firstOrNull { it.v.id == volume } ?: hs.firstOrNull() }
             ?: return json(Response.Status.NOT_FOUND, """{"error":"not found"}""")
         val bytes = lib.thumb(hit.name, hit.size, hit.file)
-            ?: return json(NO_CONTENT_YET, """{"error":"thumbnail not ready"}""")
+            ?: return if (lib.thumbFailed(hit.name, hit.size, hit.file)) json(Response.Status.NOT_FOUND, """{"error":"no thumbnail"}""")
+                else json(NO_CONTENT_YET, """{"error":"thumbnail not ready"}""")
         return newFixedLengthResponse(Response.Status.OK, "image/jpeg", java.io.ByteArrayInputStream(bytes), bytes.size.toLong())
             .also { it.addHeader("Cache-Control", "private, max-age=86400") }
     }
@@ -473,7 +619,7 @@ class ReceiverServer(
         val used = pv?.let { l.used[it.id] } ?: 0
         val quota = pv?.let { quotaOf(it, used) } ?: 0
         return """{"files":${l.filesJson},"free":$free,"used":$used,"quota":$quota,"target":${q(cfg.target)},"volumes":${volumesJson(l)},""" +
-            """"player":{"state":${q(ps.state)},"name":${ps.name?.let(::q) ?: "null"},"pos":${ps.posMs},"dur":${ps.durMs}}}"""
+            """"player":{"state":${q(ps.state)},"name":${ps.name?.let(::q) ?: "null"},"pos":${ps.posMs},"dur":${ps.durMs}},"playlist":${playlistJson()}}"""
     }
 
     private fun volumesJson(l: Listing = listing()): String {
@@ -532,35 +678,58 @@ class ReceiverServer(
     }
 
     /** Null if [incoming] bytes can be stored on [v], else the reason. May delete old *played* files when eviction is on. */
-    private fun ensureRoom(v: StorageVolume, incoming: Long): String? {
+    private fun ensureRoom(v: StorageVolume, incoming: Long, p: TvProfile = cfg): String? {
         val st = volumes.store(v)
         val free = volumes.free(v)
-        if (st !is FileStore) return if (free in 0 until incoming) "not enough space" else null
-        val why = Storage.refusal(st.dir, cfg, incoming, free, v.kind) ?: return null
-        if (!cfg.evictPlayed) return why
+        if (st !is FileStore) return if (free >= 0 && free - incoming < (if (p === cfg) 0 else p.minFreeBytes)) "not enough space" else null
+        val why = Storage.refusal(st.dir, p, incoming, free, v.kind) ?: return null
+        if (!p.evictPlayed) return why
         val used = Storage.used(st.dir)
-        val needed = maxOf(used + incoming - Storage.quota(st.dir, cfg, used, free, v.kind), incoming + cfg.minFreeBytes - free, 1L)
+        val needed = maxOf(used + incoming - Storage.quota(st.dir, p, used, free, v.kind), incoming + p.minFreeBytes - free, 1L)
         val plan = Storage.evictionPlan(st.dir, needed, player.state().name) ?: return why
         plan.forEach { it.delete(); Storage.forget(st.dir, it.name) }
         invalidate()
-        return Storage.refusal(st.dir, cfg, incoming, volumes.free(v), v.kind)
+        return Storage.refusal(st.dir, p, incoming, volumes.free(v), v.kind)
     }
 
     /** Like [ensureRoom] but deletes nothing (pre-flight check, move). */
-    private fun roomWithoutDeleting(v: StorageVolume, incoming: Long, allowEviction: Boolean): String? {
+    private fun roomWithoutDeleting(v: StorageVolume, incoming: Long, allowEviction: Boolean, p: TvProfile = cfg): String? {
         val st = volumes.store(v)
         val free = volumes.free(v)
-        if (st !is FileStore) return if (free in 0 until incoming) "not enough space" else null
-        val why = Storage.refusal(st.dir, cfg, incoming, free, v.kind) ?: return null
-        if (!allowEviction || !cfg.evictPlayed) return why
+        if (st !is FileStore) return if (free >= 0 && free - incoming < (if (p === cfg) 0 else p.minFreeBytes)) "not enough space" else null
+        val why = Storage.refusal(st.dir, p, incoming, free, v.kind) ?: return null
+        if (!allowEviction || !p.evictPlayed) return why
         val used = Storage.used(st.dir)
-        val needed = maxOf(used + incoming - Storage.quota(st.dir, cfg, used, free, v.kind), incoming + cfg.minFreeBytes - free, 1L)
+        val needed = maxOf(used + incoming - Storage.quota(st.dir, p, used, free, v.kind), incoming + p.minFreeBytes - free, 1L)
         return if (Storage.evictionPlan(st.dir, needed, player.state().name) != null) null else why
     }
 
-    private fun spaceJson(why: String, v: StorageVolume): String {
+    private fun spaceJson(why: String, v: StorageVolume, remaining: Long = 0): String {
         val st = volumes.store(v) as? FileStore
-        return """{"error":${q(why)},"free":${volumes.free(v)},"quota":${st?.let { Storage.quota(it.dir, cfg, Storage.used(it.dir), volumes.free(v), v.kind) } ?: -1},"volume":${q(v.id)}}"""
+        val free = volumes.free(v)
+        val msg = if (why == "not enough space" && remaining > 0) TransferRule.message(v.label, free, remaining, TransferRule.minFree(cfg), !drivepresent()) else humanRefusal(why)
+        return """{"error":${q(why)},"message":${q(msg)},"free":$free,"quota":${st?.let { Storage.quota(it.dir, cfg, Storage.used(it.dir), free, v.kind) } ?: -1},"volume":${q(v.id)}}"""
+    }
+
+    private fun drivepresent() = volumes.volumes().any { it.kind == VolumeKind.REMOVABLE }
+
+    /**
+     * 507 with the precise reason of the "free space after the transfer" rule, about the volume that was the best chance
+     * (the explicit target, or in auto the writable volume with the most free space).
+     */
+    private fun spaceRefusal(why: String, target: String, size: Long): Response {
+        val (v, msg) = spaceMessage(why, target, size)
+        return json(INSUFFICIENT_STORAGE, """{"error":${q(why)},"message":${q(msg)}${v?.let { ""","volume":${q(it.id)},"free":${it.free}""" } ?: ""}}""")
+    }
+
+    private fun spaceMessage(why: String, target: String, size: Long): Pair<StorageVolume?, String> {
+        val snap = volumes.snapshot().filter { it.writable }
+        val v = snap.firstOrNull { it.id == target } ?: (if (target == StoragePolicy.INTERNAL) snap.firstOrNull { it.kind == VolumeKind.INTERNAL } else null)
+            ?: snap.maxByOrNull { it.free }
+        val minFree = TransferRule.minFree(cfg)
+        val msg = if (v != null && v.free >= 0 && (why == "not enough space" || !TransferRule.ok(v.free, size, minFree)))
+            TransferRule.message(v.label, v.free, size, minFree, !drivepresent()) else humanRefusal(why)
+        return v to msg
     }
 
     // ---- storage API ----
@@ -571,7 +740,7 @@ class ReceiverServer(
         val used = pv?.let { l.used[it.id] } ?: 0
         val warnings = volumes.snapshot().flatMap { v -> warningsOf(v, 0).filter { v.kind != VolumeKind.INTERNAL }.map { "${v.label} : $it" } }
         return """{"used":$used,"free":${pv?.let { volumes.free(it) } ?: 0},"quota":${pv?.let { quotaOf(it, used) } ?: 0},"quotaMb":${cfg.quotaBytes shr 20},""" +
-            """"deleteAfterPlay":${cfg.deleteAfterPlay},"evictPlayed":${cfg.evictPlayed},"minFreeMb":${cfg.minFreeBytes shr 20},""" +
+            """"deleteAfterPlay":${cfg.deleteAfterPlay},"evictPlayed":${cfg.evictPlayed},"minFreeMb":${cfg.minFreeBytes shr 20},"minFreeAfterMb":${cfg.minFreeAfterTransfer shr 20},""" +
             """"target":${q(cfg.target)},"primary":${pv?.let { q(it.id) } ?: "null"},"volumes":${volumesJson(l)},""" +
             """"move":${moveJob?.json() ?: "null"},"warnings":${strs(warnings)}}"""
     }
@@ -582,6 +751,7 @@ class ReceiverServer(
             p["deleteAfterPlay"]?.let { c = c.copy(deleteAfterPlay = it == "true" || it == "1") }
             p["evictPlayed"]?.let { c = c.copy(evictPlayed = it == "true" || it == "1") }
             p["quotaMb"]?.let { v -> c = c.copy(quotaBytes = (v.toLongOrNull() ?: return bad("quotaMb must be a number")).coerceAtLeast(0) shl 20) }
+            p["minFreeAfterMb"]?.let { v -> c = c.copy(minFreeAfterTransfer = (v.toLongOrNull() ?: return bad("minFreeAfterMb must be a number")).coerceIn(0, 1L shl 20) shl 20) }
             cfg = c; onSettings(c); invalidate()
         } else if (method != Method.GET) return json(Response.Status.METHOD_NOT_ALLOWED, """{"error":"use GET or POST"}""")
         return ok(storageJson())
@@ -608,25 +778,54 @@ class ReceiverServer(
         val name = safeName(p["name"].orEmpty()) ?: return bad("bad name")
         val size = p["size"]?.toLongOrNull()?.takeIf { it > 0 } ?: return bad("size required")
         val dur = p["dur"]?.toLongOrNull() ?: 0
-        findFinal(name)?.let { if (it.size == size) return ok(checkOk(it.v, it.name, emptyList(), emptyList(), "already stored")) }
-        findPart(name)?.let { return ok(checkOk(it.v, it.name, emptyList(), emptyList(), "resumes on the volume holding the partial copy")) }
+        val target = p["volume"]?.takeIf { it.isNotEmpty() } ?: cfg.target
+        if (!StoragePolicy.isValidTarget(target, volumes.volumes() + volumes.missingVolumes())) return bad("volume must be auto, internal or a volume id")
+        val minFree = TransferRule.minFree(cfg)
+        val options = optionsJson(size, minFree)
+        findFinal(name)?.let { if (it.size == size) return ok(checkOk(it.v, it.name, emptyList(), emptyList(), "already stored", 0, options)) }
+        findPart(name)?.let { part ->
+            // A resume goes back to the volume holding the partial copy: the rule applies to what is still to come.
+            val remaining = size - part.size
+            val why = roomWithoutDeleting(part.v, remaining, true, xferCfg)
+            return if (why == null) ok(checkOk(part.v, part.name, emptyList(), emptyList(), "resumes on the volume holding the partial copy", remaining, options))
+                else ok("""{"ok":false,"status":507,"error":${q(why)},"message":${q(TransferRule.message(part.v.label, volumes.free(part.v), remaining, minFree, !drivepresent()))},""" +
+                    """"volume":${q(part.v.id)},"remaining":$remaining,"minFreeAfter":$minFree,"options":$options}""")
+        }
         volumes.missingOwner(name)?.let {
             return ok("""{"ok":false,"status":503,"error":"volume removed","message":${q("La clé « ${it.label} » qui contient cet envoi est retirée : remettez-la pour reprendre.")}}""")
         }
-        val plan = StoragePolicy.plan(volumes.snapshot(), cfg.target, size, cfg.minFreeBytes, dur, ::reclaimable)
+        val plan = StoragePolicy.plan(volumes.snapshot(), target, size, minFree, dur, ::reclaimable)
         val skipped = plan.skipped.joinToString(",", "[", "]") { """{"volume":${q(it.volumeId)},"reason":${q(it.reason)}}""" }
-        plan.refusal?.let { r ->
-            return ok("""{"ok":false,"status":${r.http},"error":${q(r.message)},"message":${q(humanRefusal(r.message))},"skipped":$skipped}""")
+        fun refuse(status: Int, error: String): Response {
+            val msg = if (status == 507) spaceMessage(error, target, size).second else humanRefusal(error)
+            return ok("""{"ok":false,"status":$status,"error":${q(error)},"message":${q(msg)},"remaining":$size,"minFreeAfter":$minFree,"skipped":$skipped,"options":$options}""")
         }
-        val pick = plan.candidates.firstOrNull { roomWithoutDeleting(it.volume, size, true) == null }
-            ?: return ok("""{"ok":false,"status":507,"error":"not enough space","message":${q(humanRefusal("not enough space"))},"skipped":$skipped}""")
-        val notes = plan.skipped.map { s -> "${volumes[s.volumeId]?.label ?: s.volumeId} ignoré : ${humanRefusal(s.reason)}" }
-        return ok(checkOk(pick.volume, pick.volume.storedName(name), pick.warnings, notes, null))
+        plan.refusal?.let { r -> return refuse(r.http, r.message) }
+        val pick = plan.candidates.firstOrNull { roomWithoutDeleting(it.volume, size, true, xferCfg) == null }
+            ?: return refuse(507, "not enough space")
+        val notes = plan.skipped.map { s -> "${volumes[s.volumeId]?.label ?: s.volumeId} ignoré : " +
+            if (s.reason == "not enough space") volumes[s.volumeId]?.let { v -> volumes.free(v).takeIf { it >= 0 }?.let { f ->
+                val after = TransferRule.freeAfter(f, size)
+                if (after >= 0) "il resterait ${TransferRule.size(after)} après le transfert (il en faut ${TransferRule.size(minFree)})"
+                else "le fichier ne tient pas (il manque ${TransferRule.size(-after)})" } } ?: humanRefusal(s.reason)
+            else humanRefusal(s.reason) }
+        return ok(checkOk(pick.volume, pick.volume.storedName(name), pick.warnings, notes, null, size, options))
     }
 
-    private fun checkOk(v: StorageVolume, stored: String, warnings: List<String>, notes: List<String>, why: String?) =
-        """{"ok":true,"volume":${q(v.id)},"label":${q(v.label)},"kind":${q(v.kind.name.lowercase())},"fs":${q(v.fs.label)},"as":${q(stored)},""" +
-            """"warnings":${strs(warnings.map(::humanWarning) + notes)},"reason":${why?.let(::q) ?: "null"}}"""
+    /** Every present volume with the free space it would have after receiving [size] bytes, and whether the rule allows it. */
+    private fun optionsJson(size: Long, minFree: Long): String = volumes.snapshot().joinToString(",", "[", "]") { v ->
+        val after = if (v.free >= 0) TransferRule.freeAfter(v.free, size) else -1
+        val ok = v.writable && size <= v.maxFileBytes && TransferRule.ok(v.free, size, minFree)
+        """{"id":${q(v.id)},"label":${q(v.label)},"kind":${q(v.kind.name.lowercase())},"free":${v.free},"freeAfter":$after,"ok":$ok}"""
+    }
+
+    private fun checkOk(v: StorageVolume, stored: String, warnings: List<String>, notes: List<String>, why: String?, remaining: Long = 0, options: String = "[]"): String {
+        val free = volumes.free(v)
+        return """{"ok":true,"volume":${q(v.id)},"label":${q(v.label)},"kind":${q(v.kind.name.lowercase())},"fs":${q(v.fs.label)},"as":${q(stored)},""" +
+            """"warnings":${strs(warnings.map(::humanWarning) + notes)},"reason":${why?.let(::q) ?: "null"},""" +
+            """"free":$free,"remaining":$remaining,"freeAfter":${if (free >= 0) TransferRule.freeAfter(free, remaining) else -1},""" +
+            """"minFreeAfter":${TransferRule.minFree(cfg)},"options":$options}"""
+    }
 
     private fun startMove(name: String, toId: String): Response {
         val to = volumes[toId] ?: return if (volumes.missingVolumes().any { it.id == toId }) json(SERVICE_UNAVAILABLE, """{"error":"volume unavailable"}""")
@@ -749,6 +948,14 @@ class ReceiverServer(
 
     private fun sysinfo(): Response = withDevice { d -> ok(d.sysinfo().toJson(d.volume())) }
 
+    /** GET /api/player/tracks: the player's own state plus the playlist the server keeps. */
+    private fun tracksJson(): String {
+        val t = player.tracks() ?: return """{"playing":false}"""
+        val pl = playlist
+        return t.copy(repeat = pl?.repeat?.label ?: "off", queue = pl?.items.orEmpty(), queueIndex = pl?.index ?: -1).toJson()
+            .replaceFirst("{", "{\"playing\":true,")
+    }
+
     private inline fun withDevice(f: (Device) -> Response): Response =
         device?.let(f) ?: json(NOT_IMPLEMENTED, """{"error":"device actions not supported on this device"}""")
 
@@ -766,12 +973,13 @@ class ReceiverServer(
 
     companion object {
         const val PORT = 8765
-        const val VERSION = "0.4"
+        const val VERSION = "0.5"
         private val ADMIN_HTML: String by lazy {
             ReceiverServer::class.java.getResourceAsStream("/castbridge/admin.html")?.use { String(it.readBytes(), Charsets.UTF_8) }
                 ?: "<!doctype html><meta charset=utf-8><title>CastBridge TV</title><h1>CastBridge TV</h1><p>Page d'administration indisponible.</p>"
         }
         const val SERVICE_TYPE = "_castbridge._tcp."
+        private val PLAYER_ROUTES = setOf("audio", "subtitle", "subdelay", "audiodelay", "subsize", "rate", "aspect", "chapter", "title", "hw", "eq")
         private val LOCK_ROOT = File("/castbridge-locks")      // never touched on disk: only a namespace for per-name locks
         private val NOT_IMPLEMENTED = Response.Status.NOT_IMPLEMENTED
         private val SERVICE_UNAVAILABLE = object : Response.IStatus {

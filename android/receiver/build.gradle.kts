@@ -9,8 +9,8 @@ android {
         applicationId = "castbridge.receiver"
         minSdk = 26
         targetSdk = 35
-        versionCode = 6
-        versionName = "0.4.3"
+        versionCode = 7
+        versionName = "0.5"
     }
     splits {
         abi {
@@ -36,4 +36,6 @@ dependencies {
     implementation(project(":core"))
     implementation(project(":sshd"))
     implementation("org.videolan.android:libvlc-all:3.6.5")
+    // Library grid on the TV: only the visible cards exist (plain Views, no Compose: see docs/ADMIN.md, "Bibliothèque")
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
 }

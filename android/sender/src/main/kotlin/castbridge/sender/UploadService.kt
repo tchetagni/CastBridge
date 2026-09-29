@@ -32,7 +32,7 @@ import kotlin.concurrent.thread
  */
 class UploadService : Service() {
     data class Job(val fileName: String, val tvName: String, val manualHost: String?, val pin: String? = null,
-                   val progressive: Boolean = false, val autoPlay: Boolean = true)
+                   val progressive: Boolean = false, val autoPlay: Boolean = true, val target: String? = null)
 
     sealed class State {
         object Idle : State()
@@ -51,6 +51,7 @@ class UploadService : Service() {
     private var netCallback: ConnectivityManager.NetworkCallback? = null
     private var wakeLock: PowerManager.WakeLock? = null
     private var wifiLock: WifiManager.WifiLock? = null
+    private var wifiLock2: WifiManager.WifiLock? = null
     private var lastNotified = 0L
 
     override fun onBind(intent: Intent?): IBinder? = null
@@ -62,7 +63,7 @@ class UploadService : Service() {
         if (uri == null || tvName == null || worker?.isAlive == true) return START_NOT_STICKY
         val name = intent.getStringExtra(EXTRA_NAME) ?: uri.lastPathSegment ?: "video"
         val job = Job(name, tvName, intent.getStringExtra(EXTRA_HOST), intent.getStringExtra(EXTRA_PIN),
-            intent.getBooleanExtra(EXTRA_PROGRESSIVE, false), intent.getBooleanExtra(EXTRA_AUTOPLAY, true))
+            intent.getBooleanExtra(EXTRA_PROGRESSIVE, false), intent.getBooleanExtra(EXTRA_AUTOPLAY, true), intent.getStringExtra(EXTRA_TARGET))
         try {
             val n = notification("Envoi de $name…", 0)
             if (Build.VERSION.SDK_INT >= 29) startForeground(NOTIF, n, ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC)
@@ -101,9 +102,14 @@ class UploadService : Service() {
         }
         var lastAttempt = 0L
         var prevSent = -1L
-        val up = ResumableUpload(job.fileName, total, resolve, { off -> openAt(uri, off) }, { cancelled }, pin = job.pin)
+        val up = ResumableUpload(job.fileName, total, resolve, { off -> openAt(uri, off) }, { cancelled }, pin = job.pin,
+            target = job.target, onCheck = { _check.value = it })
+        val t0 = System.nanoTime(); var first = -1L
         val result = up.run { s ->
             if (s is ResumableUpload.State.Uploading) {
+                if (first < 0) first = s.sent
+                val dt = (System.nanoTime() - t0) / 1_000_000
+                if (dt > 500) _average.value = (s.sent - first) * 1000 / dt
                 // Full speed by default: the bigger the lead over playback, the longer the video survives a lost network.
                 if (prevSent >= 0 && s.sent - prevSent in 1..(4L shl 20)) meter.add(s.sent - prevSent)
                 prevSent = s.sent
@@ -129,8 +135,10 @@ class UploadService : Service() {
         if (result == ResumableUpload.State.Done) {
             if (started || !job.autoPlay) { finish(State.Done(job)); return }      // already playing (or the caller starts it)
             val base = resolve()
-            val played = base != null && runCatching { TvClient(base, job.pin).play(job.fileName) }.isSuccess
-            finish(if (played) State.Done(job) else State.Failed(job, "Fichier envoyé, mais lancement impossible : réessayez « Lire »"))
+            val r = if (base != null) runCatching { TvClient(base, job.pin).play(job.fileName) } else Result.failure(IllegalStateException())
+            val why = (r.exceptionOrNull() as? TvClient.HttpError)?.message?.takeIf { "needsForeground" in it }
+                ?.let { TvClient.str(it.substringAfter(": "), "message") }
+            finish(if (r.isSuccess) State.Done(job) else State.Failed(job, why?.let { "Fichier envoyé. $it" } ?: "Fichier envoyé, mais lancement impossible : réessayez « Lire »"))
         } else finish(_state.value.takeIf { it is State.Failed } ?: State.Failed(job, "annulé"))
     }
 
@@ -183,9 +191,15 @@ class UploadService : Service() {
             getSystemService(PowerManager::class.java).newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "castbridge:upload")
                 .also { it.acquire(6 * 3600_000L) }
         }.getOrNull()
+        // Full speed: no Wi-Fi power save while sending (LOW_LATENCY on API 29+, effective while the app is in front; HIGH_PERF otherwise).
         wifiLock = runCatching {
-            (applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager)
-                .createWifiLock(WifiManager.WIFI_MODE_FULL_HIGH_PERF, "castbridge-upload").also { it.acquire() }
+            @Suppress("DEPRECATION")
+            val mode = if (Build.VERSION.SDK_INT >= 29) WifiManager.WIFI_MODE_FULL_LOW_LATENCY else WifiManager.WIFI_MODE_FULL_HIGH_PERF
+            (applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager).createWifiLock(mode, "castbridge-upload").also { it.acquire() }
+        }.getOrNull()
+        if (Build.VERSION.SDK_INT >= 29) wifiLock2 = runCatching {
+            @Suppress("DEPRECATION")
+            (applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager).createWifiLock(WifiManager.WIFI_MODE_FULL_HIGH_PERF, "castbridge-upload-hp").also { it.acquire() }
         }.getOrNull()
     }
 
@@ -201,6 +215,7 @@ class UploadService : Service() {
         netCallback?.let { cb -> runCatching { getSystemService(ConnectivityManager::class.java).unregisterNetworkCallback(cb) } }
         runCatching { wakeLock?.let { if (it.isHeld) it.release() } }
         runCatching { wifiLock?.let { if (it.isHeld) it.release() } }
+        runCatching { wifiLock2?.let { if (it.isHeld) it.release() } }
         super.onDestroy()
     }
 
@@ -215,6 +230,13 @@ class UploadService : Service() {
         const val EXTRA_PIN = "pin"
         const val EXTRA_PROGRESSIVE = "progressive"
         const val EXTRA_AUTOPLAY = "autoplay"
+        const val EXTRA_TARGET = "target"
+        private val _check = MutableStateFlow<castbridge.core.tv.TvClient.StorageCheck?>(null)
+        /** The TV's pre-flight answer for the current upload (destination, free space left after it). */
+        val check: StateFlow<castbridge.core.tv.TvClient.StorageCheck?> = _check
+        private val _average = MutableStateFlow(0L)
+        /** Average speed of the current upload since it (re)started, bytes per second. */
+        val average: StateFlow<Long> = _average
         @Volatile private var instance: UploadService? = null
         private val _notice = MutableStateFlow<String?>(null)
         /** Explains automatic fallbacks (e.g. MP4 index at the end of the file). */
@@ -229,12 +251,12 @@ class UploadService : Service() {
         val state: StateFlow<State> = _state
 
         fun start(ctx: Context, uri: Uri, fileName: String, tvName: String, manualHost: String?, pin: String? = null,
-                  progressive: Boolean = false, autoPlay: Boolean = true) {
+                  progressive: Boolean = false, autoPlay: Boolean = true, target: String? = null) {
             val i = Intent(ctx, UploadService::class.java).setData(uri)
                 .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 .putExtra(EXTRA_TV, tvName).putExtra(EXTRA_NAME, fileName).putExtra(EXTRA_HOST, manualHost).putExtra(EXTRA_PIN, pin?.takeIf { it.isNotEmpty() })
-                .putExtra(EXTRA_PROGRESSIVE, progressive).putExtra(EXTRA_AUTOPLAY, autoPlay)
-            _state.value = State.Idle
+                .putExtra(EXTRA_PROGRESSIVE, progressive).putExtra(EXTRA_AUTOPLAY, autoPlay).putExtra(EXTRA_TARGET, target)
+            _state.value = State.Idle; _check.value = null; _average.value = 0
             ctx.startForegroundService(i)
         }
 

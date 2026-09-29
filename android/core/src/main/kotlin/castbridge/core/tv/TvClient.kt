@@ -22,6 +22,8 @@ class TvClient(val base: String, val pin: String? = null) {
     fun sysinfo(): String = call("GET", "/api/sysinfo")
     /** Stored videos with thumbnail availability, duration, resume position and volume. */
     fun library(): String = call("GET", "/api/library")
+    /** Marks a stored file as watched (resume position cleared) or not watched. */
+    fun setWatched(name: String, watched: Boolean): String = call("POST", "/api/library/watched?name=${enc(name)}&watched=${if (watched) 1 else 0}")
     /** JPEG thumbnail, or null while the TV is still making it (retry in a moment) or if it cannot make one. */
     fun thumb(name: String, volume: String? = null): ByteArray? {
         val c = open("GET", "/api/thumb?name=${enc(name)}" + (volume?.let { "&volume=${enc(it)}" } ?: ""))
@@ -53,32 +55,57 @@ class TvClient(val base: String, val pin: String? = null) {
     /** Asks the TV to open its own storage settings, if it has any. */
     fun openTvStorageSettings(): String = call("POST", "/api/storage/open-settings")
 
-    data class StorageCheck(val ok: Boolean, val status: Int, val message: String, val warnings: List<String>, val volume: String?, val label: String?, val fs: String?)
+    /** A destination volume as seen by the pre-flight check: free space now and after the transfer, allowed by the 1 GB rule or not. */
+    data class VolumeOption(val id: String, val label: String, val kind: String, val free: Long, val freeAfter: Long, val ok: Boolean)
+
+    data class StorageCheck(val ok: Boolean, val status: Int, val message: String, val warnings: List<String>, val volume: String?, val label: String?, val fs: String?,
+                            val freeAfter: Long = -1, val minFreeAfter: Long = 0, val remaining: Long = 0, val options: List<VolumeOption> = emptyList())
 
     /**
-     * Pre-flight: can the TV store this file, where, and with which caveats (FAT32 4 GB limit, slow drive...).
+     * Pre-flight: can the TV store this file, where, and with which caveats (FAT32 4 GB limit, slow drive, "1 GB must stay
+     * free after the transfer"...). [volume] = "auto", "internal" or a volume id (default: the TV's own target setting).
      * Throws [HttpError] on a TV that predates the route (404): callers ignore that and just upload.
      */
-    fun checkStorage(name: String, size: Long, durMs: Long = 0): StorageCheck {
-        val j = call("GET", "/api/storage/check?name=${enc(name)}&size=$size" + if (durMs > 0) "&dur=$durMs" else "")
-        val ok = j.contains("\"ok\":true")
-        return StorageCheck(ok, num(j, "status")?.toInt() ?: 200, str(j, "message") ?: str(j, "error") ?: "", strList(j, "warnings"),
-            str(j, "volume"), str(j, "label"), str(j, "fs"))
+    fun checkStorage(name: String, size: Long, durMs: Long = 0, volume: String? = null): StorageCheck {
+        val j = call("GET", "/api/storage/check?name=${enc(name)}&size=$size" + (if (durMs > 0) "&dur=$durMs" else "") + (volume?.let { "&volume=${enc(it)}" } ?: ""))
+        return parseCheck(j)
     }
+
+    /** Opens /stream/<name> from byte [from] (Range). The caller closes [Ranged.input]. */
+    fun openRange(name: String, from: Long): Ranged {
+        val c = open("GET", "/stream/${enc(name)}")
+        c.readTimeout = 30_000
+        if (from > 0) c.setRequestProperty("Range", "bytes=$from-")
+        val code = c.responseCode
+        if (code == 416) {
+            val total = c.getHeaderField("Content-Range")?.substringAfter('/')?.toLongOrNull() ?: -1
+            runCatching { c.errorStream?.close() }
+            return Ranged(416, java.io.ByteArrayInputStream(ByteArray(0)), from, total)
+        }
+        if (code >= 400) { val t = c.errorStream?.bufferedReader()?.use { it.readText() }.orEmpty(); throw HttpError(code, t) }
+        val cr = c.getHeaderField("Content-Range")                     // "bytes 100-999/1000"
+        val start = if (code == 206) cr?.substringAfter("bytes ")?.substringBefore('-')?.toLongOrNull() ?: from else 0L
+        val total = if (code == 206) cr?.substringAfter('/')?.toLongOrNull() ?: -1 else c.contentLengthLong
+        return Ranged(code, c.inputStream, start, total)
+    }
+
+    /** An open byte range of a file on the TV: [start] is where [input] begins, [total] the file size (-1 unknown). */
+    class Ranged(val code: Int, val input: InputStream, val start: Long, val total: Long)
 
     /** Generic call for extension routes. */
     fun raw(method: String, path: String): String = call(method, path)
 
     /** Sends bytes [offset, total) read from [src]. Throws [Conflict] if the TV holds a different offset. */
-    fun upload(name: String, offset: Long, total: Long, src: InputStream, maxBytesPerSec: Long = 0, onBytes: (Long) -> Unit): Part {
+    fun upload(name: String, offset: Long, total: Long, src: InputStream, maxBytesPerSec: Long = 0, target: String? = null,
+               bufferBytes: Int = UPLOAD_BUFFER, onBytes: (Long) -> Unit): Part {
         val throttle = if (maxBytesPerSec > 0) Throttle(maxBytesPerSec) else null
-        val c = open("PUT", "/upload/${enc(name)}?offset=$offset&total=$total")
+        val c = open("PUT", "/upload/${enc(name)}?offset=$offset&total=$total" + (target?.let { "&target=${enc(it)}" } ?: ""))
         c.doOutput = true
         c.readTimeout = 60_000
-        c.setFixedLengthStreamingMode(total - offset)
+        c.setFixedLengthStreamingMode(total - offset)          // one continuous stream, nothing buffered in RAM by HttpURLConnection
         c.setRequestProperty("Content-Type", "application/octet-stream")
         c.outputStream.use { out ->
-            val buf = ByteArray(256 * 1024)
+            val buf = ByteArray(bufferBytes)
             var left = total - offset
             while (left > 0) {
                 val r = src.read(buf, 0, minOf(buf.size.toLong(), left).toInt())
@@ -97,7 +124,13 @@ class TvClient(val base: String, val pin: String? = null) {
     class Conflict(val serverLength: Long) : IOException("offset conflict, TV has $serverLength")
     class HttpError(val code: Int, body: String) : IOException("HTTP $code: ${body.take(200)}")
 
-    private fun call(method: String, path: String): String {
+    private fun call(method: String, path: String): String = try { callOnce(method, path) } catch (e: java.net.SocketException) {
+        // A pooled keep-alive connection the TV had already closed: a GET is safe to send again, once, on a fresh connection.
+        if (method != "GET") throw e
+        callOnce(method, path)
+    }
+
+    private fun callOnce(method: String, path: String): String {
         val c = open(method, path)
         if (method == "POST") { c.doOutput = true; c.setFixedLengthStreamingMode(0); c.outputStream.close() }
         return read(c)
@@ -116,7 +149,18 @@ class TvClient(val base: String, val pin: String? = null) {
     }
 
     companion object {
+        /** Phone side of an upload: large reads from the file, one continuous HTTP body (the TV writes 256 kB blocks). */
+        const val UPLOAD_BUFFER = 512 * 1024
         fun enc(s: String): String = URLEncoder.encode(s, "UTF-8").replace("+", "%20")
+        fun parseCheck(j: String): StorageCheck {
+            val opts = Regex("\\{\"id\":\"((?:[^\"\\\\]|\\\\.)*)\",\"label\":\"((?:[^\"\\\\]|\\\\.)*)\",\"kind\":\"(\\w+)\",\"free\":(-?\\d+),\"freeAfter\":(-?\\d+),\"ok\":(true|false)\\}")
+                .findAll(j).map { m -> VolumeOption(m.groupValues[1], m.groupValues[2].replace("\\\"", "\""), m.groupValues[3], m.groupValues[4].toLong(), m.groupValues[5].toLong(), m.groupValues[6] == "true") }.toList()
+            // Top-level fields are read with the options array removed (its objects also have "free", "freeAfter"...).
+            val top = j.replace(Regex("\"options\":\\[[^\\]]*\\]"), "")
+            val ok = top.contains("\"ok\":true")
+            return StorageCheck(ok, num(top, "status")?.toInt() ?: 200, str(top, "message") ?: str(top, "error") ?: "", strList(j, "warnings"),
+                str(top, "volume"), str(top, "label"), str(top, "fs"), num(top, "freeAfter") ?: -1, num(top, "minFreeAfter") ?: 0, num(top, "remaining") ?: 0, opts)
+        }
         fun parsePart(json: String) = Part(
             Regex("\"length\":(\\d+)").find(json)?.groupValues?.get(1)?.toLong() ?: 0,
             json.contains("\"done\":true"))
@@ -149,6 +193,12 @@ class ResumableUpload(
     private val durMs: Long = 0,
     /** Caveats reported by the TV before the first byte is sent (FAT32 target, slow drive...). */
     private val onWarnings: (List<String>) -> Unit = {},
+    /** Destination on the TV for this transfer: "auto", "internal" or a volume id; null = the TV's own setting. */
+    private val target: String? = null,
+    /** The TV's pre-flight answer (destination volume, free space left after the transfer). */
+    private val onCheck: (TvClient.StorageCheck) -> Unit = {},
+    /** Consecutive failures without progress before giving up (to try another link); default: never. */
+    private val giveUpAfter: Int = Int.MAX_VALUE,
 ) {
     sealed class State {
         data class Uploading(val sent: Long, val total: Long) : State()
@@ -162,7 +212,10 @@ class ResumableUpload(
         var sent = 0L
         var backoff = 500L
         var checked = false
+        var failures = 0
+        var lastSent = -1L
         while (!cancelled()) {
+            if (sent != lastSent) { lastSent = sent; failures = 0 } else if (++failures > giveUpAfter) return State.Failed("liaison perdue").also(onState)
             val base = resolve()
             if (base == null) {
                 onState(State.Waiting(sent, total, "TV introuvable"))
@@ -172,7 +225,8 @@ class ResumableUpload(
             if (!checked) {
                 // Pre-flight, before any byte moves: a file that cannot be stored (FAT32 4 GB, no room) is announced now.
                 try {
-                    val c = tv.checkStorage(name, total, durMs)
+                    val c = tv.checkStorage(name, total, durMs, target)
+                    onCheck(c)
                     if (!c.ok && c.status == 503) { onState(State.Waiting(sent, total, c.message)); sleep(backoff); backoff = minOf(backoff * 2, 5000); continue }
                     if (!c.ok) return State.Failed(c.message.ifEmpty { "refusé par la TV" }).also(onState)
                     if (c.warnings.isNotEmpty()) onWarnings(c.warnings)
@@ -193,7 +247,7 @@ class ResumableUpload(
                 if (sent > total) { tv.reset(name); sent = 0 }
                 onState(State.Uploading(sent, total))
                 openAt(sent).use { src ->
-                    val r = tv.upload(name, sent, total, src, maxBytesPerSec) { n ->
+                    val r = tv.upload(name, sent, total, src, maxBytesPerSec, target) { n ->
                         sent += n; backoff = 500
                         onState(State.Uploading(sent, total))
                         if (cancelled()) throw java.io.InterruptedIOException("cancelled")
@@ -201,7 +255,8 @@ class ResumableUpload(
                     if (r.done) return State.Done.also(onState)
                 }
             } catch (e: TvClient.HttpError) {
-                if (e.code == 507 || e.code == 413 || e.code == 400 || e.code == 401) return State.Failed(e.message ?: "erreur").also(onState)
+                if (e.code == 507 || e.code == 413 || e.code == 400 || e.code == 401)
+                    return State.Failed(TvClient.str(e.message.orEmpty().substringAfter(": "), "message") ?: e.message ?: "erreur").also(onState)
                 // 503 "volume removed": the drive was pulled; wait like after a network cut, the upload resumes when it is back.
                 onState(State.Waiting(sent, total,
                     if (e.code == 503 && e.message.orEmpty().contains("volume")) "Clé USB retirée ou indisponible : remettez-la, l'envoi reprendra" else e.message ?: "erreur"))
@@ -230,5 +285,78 @@ class Throttle(
         val expectedNs = bytes * 1_000_000_000L / maxBytesPerSec
         val aheadMs = (expectedNs - (now() - start)) / 1_000_000
         if (aheadMs > 0) sleep(aheadMs)
+    }
+}
+
+/**
+ * TV -> phone download of a stored file, resumable: asks /stream/<name> from the size already saved (HTTP Range), appends,
+ * and after any failure waits (backoff up to 5 s), re-resolves the TV and continues. Never keeps the file in RAM.
+ */
+class ResumableDownload(
+    private val name: String,
+    private val resolve: () -> String?,
+    private val pin: String?,
+    /** Bytes already saved on the phone (the resume point). */
+    private val saved: () -> Long,
+    /** Output positioned at [saved] (appending). */
+    private val openOut: (Long) -> java.io.OutputStream,
+    private val cancelled: () -> Boolean = { false },
+    private val sleep: (Long) -> Unit = Thread::sleep,
+    private val bufferBytes: Int = 256 * 1024,
+    private val maxFailures: Int = 60,
+) {
+    sealed class State {
+        data class Downloading(val got: Long, val total: Long) : State()
+        data class Waiting(val got: Long, val total: Long, val reason: String) : State()
+        data class Done(val total: Long) : State()
+        data class Failed(val reason: String) : State()
+    }
+
+    fun run(onState: (State) -> Unit): State {
+        var backoff = 500L
+        var failures = 0
+        var total = -1L
+        while (!cancelled()) {
+            val have = saved()
+            val base = resolve()
+            if (base == null) {
+                onState(State.Waiting(have, total, "TV introuvable")); failures++
+            } else try {
+                val r = TvClient(base, pin).openRange(name, have)
+                if (r.total >= 0) total = r.total
+                if (r.code == 416 || (total >= 0 && have >= total)) {
+                    r.input.close()
+                    return if (total >= 0 && have == total) State.Done(total).also(onState)
+                    else State.Failed("Le fichier du téléphone est plus grand que celui de la TV ($have > $total) : supprimez-le et recommencez").also(onState)
+                }
+                if (r.start != have) { r.input.close(); throw java.io.IOException("the TV answered from ${r.start}, expected $have") }
+                var got = have
+                r.input.use { input ->
+                    openOut(have).use { out ->
+                        val buf = ByteArray(bufferBytes)
+                        while (true) {
+                            if (cancelled()) throw java.io.InterruptedIOException("cancelled")
+                            val n = input.read(buf)
+                            if (n < 0) break
+                            out.write(buf, 0, n)
+                            got += n; backoff = 500; failures = 0
+                            onState(State.Downloading(got, total))
+                        }
+                    }
+                }
+                if (total < 0 || got >= total) return State.Done(got).also(onState)
+                throw java.io.IOException("connection closed at $got/$total")
+            } catch (e: TvClient.HttpError) {
+                if (e.code == 401 || e.code == 404 || e.code == 400) return State.Failed(
+                    when (e.code) { 404 -> "Fichier introuvable sur la TV"; 401 -> "PIN refusé"; else -> e.message ?: "erreur" }).also(onState)
+                failures++; onState(State.Waiting(saved(), total, e.message ?: "erreur"))
+            } catch (e: java.io.IOException) {
+                if (cancelled()) break
+                failures++; onState(State.Waiting(saved(), total, e.message ?: e.javaClass.simpleName))
+            }
+            if (failures >= maxFailures) return State.Failed("TV injoignable").also(onState)
+            sleep(backoff); backoff = minOf(backoff * 2, 5000)
+        }
+        return State.Failed("annulé").also(onState)
     }
 }

@@ -32,9 +32,9 @@ import kotlinx.coroutines.withContext
 /** Transport used to reach CastBridge TV. */
 enum class Channel(val label: String) { WIFI("Wi-Fi"), BLUETOOTH("Bluetooth"), WIFI_DIRECT("Wi-Fi Direct") }
 
-/** "CastBridge TV" tab: pick the channel, then use the matching screen. */
+/** "Avancé" part of the "CastBridge TV" tab: pick the channel (Wi-Fi, Bluetooth, Wi-Fi Direct), then use the matching screen. */
 @Composable
-fun TvHub() {
+fun TvHubAdvanced() {
     var channel by rememberSaveable { mutableStateOf(Channel.WIFI) }
     Column(Modifier.fillMaxSize()) {
         SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp)) {
@@ -45,7 +45,7 @@ fun TvHub() {
             }
         }
         when (channel) {
-            Channel.WIFI -> TvScreen(extra = { AdminPanel(it) })
+            Channel.WIFI -> TvScreen(extra = { TvTools(it); AdminPanel(it) })
             Channel.BLUETOOTH -> BtScreen()
             Channel.WIFI_DIRECT -> WifiDirectScreen()
         }
@@ -138,10 +138,12 @@ fun BtScreen() {
                 LinearProgressIndicator({ u.sent.toFloat() / u.total }, Modifier.fillMaxWidth())
                 Text("Liaison perdue, reprise automatique à ${formatSize(u.sent)} (${u.reason})")
             }
-            ResumableUpload.State.Done -> Text("Fichier reçu par la TV (dans son dossier de l'app).")
+            ResumableUpload.State.Done -> Text("Fichier reçu par la TV.")
             is ResumableUpload.State.Failed -> Text("Échec : ${u.reason}", color = MaterialTheme.colorScheme.error)
             null -> {}
         }
+        BtUploadService.route.collectAsState().value?.let { if (busy) Text("Lien : $it", style = MaterialTheme.typography.bodySmall) }
+        BtSshGatewayPanel()
     }
 }
 

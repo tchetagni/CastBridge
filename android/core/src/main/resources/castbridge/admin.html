@@ -32,6 +32,17 @@ progress{width:100%;height:10px}
 dl{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;margin:0}
 dt{color:var(--mut)}dd{margin:0;word-break:break-all}
 #app{display:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:6px 0 12px}
+.card{background:#10131a;border:1px solid var(--line);border-radius:8px;overflow:hidden;cursor:pointer;display:flex;flex-direction:column}
+.card:hover,.card:focus{border-color:var(--acc);outline:none}
+.pic{position:relative;aspect-ratio:16/9;background:#232838;display:flex;align-items:center;justify-content:center;color:var(--mut);font-size:26px}
+.pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.bdg{position:absolute;font-size:11px;font-weight:600;padding:1px 6px;border-radius:4px;background:#12384acc;color:#fff}
+.bar{position:absolute;left:0;bottom:0;height:4px;background:var(--acc)}
+.card .t{padding:4px 8px 0;font-size:14px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.card .a{display:flex;gap:4px;flex-wrap:wrap;padding:4px 8px 8px}
+.card .a button{padding:2px 6px;font-size:12px}
+h3{font-size:13px;color:var(--acc);margin:10px 0 0}
 </style>
 </head>
 <body>
@@ -68,6 +79,11 @@ dt{color:var(--mut)}dd{margin:0;word-break:break-all}
 </section>
 
 <section>
+  <h2>Bibliothèque</h2>
+  <div id="lib" class="mut">Chargement…</div>
+</section>
+
+<section>
   <h2>Fichiers sur la TV</h2>
   <div id="free" class="mut"></div>
   <div id="files"></div>
@@ -97,6 +113,14 @@ dt{color:var(--mut)}dd{margin:0;word-break:break-all}
   <label><input type="checkbox" id="early"> Lire pendant l'envoi (dès qu'assez de données sont arrivées)</label><br>
   <input id="pick" type="file" multiple>
   <div id="ups"></div>
+</section>
+
+<section>
+  <h2>Démarrage et lecture à distance</h2>
+  <div class="row"><label><input type="checkbox" id="autostart"> Démarrer CastBridge TV avec la TV (service en arrière-plan)</label></div>
+  <div id="bgInfo" class="mut"></div>
+  <div class="row" style="margin-top:8px"><button id="bOverlay">Autoriser « Afficher par-dessus les autres apps » (s'ouvre sur la TV)</button></div>
+  <p class="mut">Sans cette autorisation, Android empêche l'app de s'afficher seule : une lecture demandée à distance affiche une notification sur la TV, à ouvrir avec la télécommande.</p>
 </section>
 
 <section>
@@ -141,7 +165,7 @@ async function api(method, path, body) {
   const r = await fetch(path, { method, body, headers: { "X-CB-Pin": PIN } });
   const t = await r.text();
   if (!r.ok) {
-    let m = t; try { const j = JSON.parse(t); m = j.error === "locked" ? "Trop d'essais : verrouillé " + j.retryAfter + " s" : j.error === "bad pin" ? "PIN incorrect" : j.error === "buffering" ? "Pas encore assez de données reçues pour démarrer : patientez quelques secondes." : j.error; } catch (e) {}
+    let m = t; try { const j = JSON.parse(t); m = j.needsForeground ? j.message : j.error === "locked" ? "Trop d'essais : verrouillé " + j.retryAfter + " s" : j.error === "bad pin" ? "PIN incorrect" : j.error === "buffering" ? "Pas encore assez de données reçues pour démarrer : patientez quelques secondes." : j.error; } catch (e) {}
     throw new ApiError(r.status, m || ("HTTP " + r.status));
   }
   return t ? JSON.parse(t) : {};
@@ -173,7 +197,75 @@ async function refresh() {
     msg("TV injoignable : " + e.message);
   }
 }
-function start() { stop(); refresh(); loadStorage(); timer = setInterval(() => { refresh(); loadStorage(); }, 2000); }
+let libTick = 0;
+function start() { stop(); refresh(); loadStorage(); loadLibrary(); loadBackground(); timer = setInterval(() => { refresh(); loadStorage(); if (++libTick % 3 === 0) { loadLibrary(); loadBackground(); } }, 2000); }
+
+// ---- Library (same sections as the TV and the phone: see LibrarySections) ----
+const thumbs = new Map();                 // key -> object URL (bounded: the page may stay open for hours)
+function mediaType(n) {
+  const e = n.split(".").pop().toLowerCase();
+  if (["mp4","m4v","mkv","webm","avi","mov","ts","m2ts","mts","mpg","mpeg","wmv","flv","3gp","ogv","vob","divx","rmvb"].includes(e)) return "video";
+  if (["mp3","m4a","aac","flac","ogg","opus","wav","wma","ac3","mka"].includes(e)) return "audio";
+  return "other";
+}
+function sections(files) {
+  const media = files.filter(f => mediaType(f.name) !== "other"), by = (a, b) => a < b ? -1 : a > b ? 1 : 0;
+  const resume = media.filter(f => f.resumeMs > 0 && !f.watched).sort((a, b) => b.playedAt - a.playedAt);
+  const recent = media.slice().sort((a, b) => b.mtime - a.mtime || by(a.name.toLowerCase(), b.name.toLowerCase())).slice(0, 12);
+  const all = media.slice().sort((a, b) => by(a.title.toLowerCase(), b.title.toLowerCase()) || by(a.name, b.name));
+  const other = files.filter(f => mediaType(f.name) === "other").sort((a, b) => by(a.name.toLowerCase(), b.name.toLowerCase()));
+  return [["Reprendre", resume], ["Récemment ajoutés", media.length > 6 ? recent : []], ["Toutes", all], ["Autres fichiers", other]].filter(s => s[1].length);
+}
+async function thumbUrl(f) {
+  const k = f.volume + "|" + f.name + "|" + f.size + "|" + f.mtime;
+  if (thumbs.has(k)) return thumbs.get(k);
+  if (!f.hasThumb && thumbs.has("asked:" + k)) return null;
+  thumbs.set("asked:" + k, null);
+  const r = await fetch("/api/thumb?name=" + q(f.name) + "&volume=" + q(f.volume), { headers: { "X-CB-Pin": PIN } });
+  if (r.status !== 200) return null;
+  const u = URL.createObjectURL(await r.blob());
+  thumbs.set(k, u);
+  const urls = [...thumbs.keys()].filter(x => !x.startsWith("asked:"));
+  if (urls.length > 80) { const old = urls[0]; URL.revokeObjectURL(thumbs.get(old)); thumbs.delete(old); }
+  return u;
+}
+function clock(ms) { const s = Math.floor(ms / 1000), p = n => String(n).padStart(2, "0"); return s >= 3600 ? Math.floor(s / 3600) + ":" + p(Math.floor(s / 60) % 60) + ":" + p(s % 60) : Math.floor(s / 60) + ":" + p(s % 60); }
+async function loadLibrary() {
+  let j; try { j = await api("GET", "/api/library"); } catch (e) { return; }
+  const box = $("lib"); box.textContent = ""; box.className = "";
+  const secs = sections(j.files || []);
+  if (!secs.length) { box.className = "mut"; box.textContent = "Aucun fichier."; return; }
+  secs.forEach(([title, list]) => {
+    const h = document.createElement("h3"); h.textContent = title + " · " + list.length; box.append(h);
+    const g = document.createElement("div"); g.className = "grid"; box.append(g);
+    list.forEach(f => g.append(card(f)));
+  });
+}
+function card(f) {
+  const c = document.createElement("div"); c.className = "card"; c.tabIndex = 0;
+  const pic = document.createElement("div"); pic.className = "pic";
+  pic.textContent = mediaType(f.name) === "video" ? "▶" : mediaType(f.name) === "audio" ? "♪" : f.name.split(".").pop().toUpperCase().slice(0, 4);
+  const badge = (t, css) => { const b = document.createElement("span"); b.className = "bdg"; b.textContent = t; b.style.cssText = css; pic.append(b); };
+  badge(f.kind === "internal" ? "Interne" : f.kind === "saf" ? "Dossier" : "Clé", "top:4px;left:4px");
+  if (f.watched) badge("VU", "top:4px;right:4px;background:#1b5e20");
+  if (f.durationMs > 0) badge(clock(f.durationMs), "bottom:8px;right:4px;background:#000b");
+  if (f.resumeMs > 0 && !f.watched && f.durationMs > 0) { const b = document.createElement("div"); b.className = "bar"; b.style.width = Math.min(100, f.resumeMs * 100 / f.durationMs) + "%"; pic.append(b); }
+  if (mediaType(f.name) !== "other") thumbUrl(f).then(u => { if (u) { const i = document.createElement("img"); i.src = u; i.alt = ""; pic.prepend(i); } }).catch(() => {});
+  const t = document.createElement("div"); t.className = "t"; t.textContent = f.title;
+  const a = document.createElement("div"); a.className = "a";
+  const play = pos => act(post("/api/play?name=" + q(f.name) + "&pos=" + pos));
+  c.onclick = () => {
+    if (mediaType(f.name) === "other") return;
+    if (f.resumeMs > 0 && !f.watched) play(confirm("Reprendre à " + clock(f.resumeMs) + " ?\n(Annuler = depuis le début)") ? f.resumeMs : 0); else play(0);
+  };
+  c.onkeydown = e => { if (e.key === "Enter") c.onclick(); };
+  const stop = fn => ev => { ev.stopPropagation(); fn(); };
+  if (mediaType(f.name) !== "other") a.append(btn(f.watched ? "Non vu" : "Vu", stop(() => act(post("/api/library/watched?name=" + q(f.name) + "&watched=" + (f.watched ? 0 : 1)).then(loadLibrary)))));
+  a.append(btn("Renommer", stop(() => { const to = prompt("Nouveau nom :", f.name); if (to && to !== f.name) act(post("/api/rename?name=" + q(f.name) + "&to=" + q(to)).then(loadLibrary)); })));
+  a.append(btn("Supprimer", stop(() => { if (confirm("Supprimer « " + f.name + " » ?")) act(post("/api/delete?name=" + q(f.name) + "&volume=" + q(f.volume)).then(loadLibrary)); }), "del"));
+  c.append(pic, t, a);
+  return c;
+}
 function stop() { if (timer) clearInterval(timer); timer = null; }
 
 function render(i) {
@@ -273,6 +365,16 @@ function renderStorage(s) {
     (mv.state === "running" ? " " + Math.floor(mv.done * 100 / Math.max(1, mv.total)) + " %" : "") + (mv.error ? " (" + mv.error + ")" : "") : "";
 }
 $("bRescan").onclick = () => act(post("/api/storage/rescan?measure=1"));
+async function loadBackground() {
+  try {
+    const b = await api("GET", "/api/background");
+    $("autostart").checked = b.autostart;
+    $("bgInfo").textContent = "Affichage par-dessus les autres apps : " + (b.overlay ? "autorisé (la lecture à distance s'ouvre seule)" : "non autorisé") +
+      " — écran CastBridge : " + (b.screenVisible ? "affiché" : "fermé (l'app tourne en arrière-plan)");
+  } catch (e) {}
+}
+$("autostart").onchange = () => act(post("/api/autostart?enabled=" + ($("autostart").checked ? 1 : 0)).then(loadBackground));
+$("bOverlay").onclick = async () => { try { const j = await post("/api/overlay-permission"); msg(j.opened ? "Réglage ouvert sur l'écran de la TV." : j.message); } catch (e) { msg(e.message); } };
 $("bPick").onclick = async () => { try { const j = await post("/api/storage/saf/pick"); msg(j.message || ""); } catch (e) { msg(e.message); } };
 $("bSettings").onclick = async () => { try { const j = await post("/api/storage/open-settings"); msg(j.opened ? "Réglages ouverts sur l'écran de la TV." : (j.message || "")); } catch (e) { msg(e.message); } };
 $("vol").oninput = () => { volTouched = Date.now(); $("volv").textContent = $("vol").value + " %"; };
@@ -286,6 +388,12 @@ async function partLen(name) { const j = await api("GET", "/api/part?name=" + q(
 async function uploadFile(file, bar, label) {
   const total = file.size; let backoff = 500;
   if (total <= 0) throw new Error("fichier vide");
+  // Pre-flight before any byte: volume chosen, 1 GB must stay free after the transfer (precise refusal otherwise).
+  try {
+    const c = await api("GET", "/api/storage/check?name=" + q(file.name) + "&size=" + total);
+    if (!c.ok && c.status !== 503) throw new ApiError(c.status, c.message || c.error);
+    if (c.ok) label.textContent = file.name + " -> " + (c.label || c.volume) + (c.freeAfter >= 0 ? ", il restera " + fmtSize(c.freeAfter) + " libres" : "");
+  } catch (e) { if (e instanceof ApiError && e.code !== 404) throw e; }
   for (;;) {
     try {
       const p = await partLen(file.name);

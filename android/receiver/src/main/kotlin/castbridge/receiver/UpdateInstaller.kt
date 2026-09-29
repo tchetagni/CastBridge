@@ -26,7 +26,13 @@ import java.security.MessageDigest
  * the launcher. Several APK files of one app (split APKs) go into one install session.
  */
 /** [dirs] = every folder an upload may land in (internal storage and the USB stick), looked up on each call. */
-class UpdateInstaller(private val ctx: Context, private val dirs: () -> List<File>, private val notify: (String) -> Unit) {
+class UpdateInstaller(
+    private val ctx: Context,
+    private val dirs: () -> List<File>,
+    /** Shows a system screen (install confirmation, settings) from the background as Android allows; null = shown, else why not. */
+    private val launch: (Intent, String) -> String? = { i, _ -> runCatching { ctx.startActivity(i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) }.exceptionOrNull()?.message },
+    private val notify: (String) -> Unit,
+) {
     @Volatile private var status = "idle"
     @Volatile private var message = ""
     private val pending = java.util.concurrent.atomic.AtomicInteger(0)
@@ -40,8 +46,8 @@ class UpdateInstaller(private val ctx: Context, private val dirs: () -> List<Fil
                     set("confirm", "Validez l'installation à l'écran de la TV avec la télécommande")
                     @Suppress("DEPRECATION")
                     val confirm = i.getParcelableExtra<Intent>(Intent.EXTRA_INTENT)
-                    runCatching { c.startActivity(confirm?.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) }
-                        .onFailure { set("failed", "Confirmation impossible à afficher : $msg") }
+                    val why = confirm?.let { launch(it, "Installation d'une application : validez à l'écran") } ?: "pas d'écran de confirmation"
+                    if (why != null) set("confirm", "Validez l'installation sur la TV : $why")
                 }
                 PackageInstaller.STATUS_SUCCESS ->
                     if (pending.decrementAndGet() <= 0) set("done", "Installée") else set("installing", "Application installée, suivante…")
@@ -122,10 +128,8 @@ class UpdateInstaller(private val ctx: Context, private val dirs: () -> List<Fil
             if (!sameSigner(a.info)) return err(400, "Signature différente : l'APK doit être signé avec la même clé que l'app installée")
         }
         if (!canInstall()) {
-            runCatching {
-                ctx.startActivity(Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, Uri.parse("package:${ctx.packageName}")).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
-            }
-            set("permission", "Autorisez « Installer des apps inconnues » pour CastBridge TV dans les réglages de la TV, puis réessayez")
+            val why = launch(Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, Uri.parse("package:${ctx.packageName}")), "Autorisez l'installation d'applications")
+            set("permission", "Autorisez « Installer des apps inconnues » pour CastBridge TV dans les réglages de la TV, puis réessayez" + (why?.let { " ($it)" } ?: ""))
             return ApiReply(403, """{"error":${ReceiverServer.q(message)},"needsPermission":true}""")
         }
         return try {

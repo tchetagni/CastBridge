@@ -22,7 +22,7 @@ class StorageTest {
     private fun up(tv: TvClient, name: String, size: Int) = tv.upload(name, 0, size.toLong(), ByteArrayInputStream(ByteArray(size))) {}
 
     @Test fun quotaRefusesBeforeWritingAnything() {
-        val (s, tv) = server(TvProfile(minFreeBytes = 0, quotaBytes = 1000))
+        val (s, tv) = server(TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0, quotaBytes = 1000))
         try {
             up(tv, "a.mp4", 600)
             val e = assertFailsWith<TvClient.HttpError> { up(tv, "b.mp4", 600) }
@@ -33,9 +33,9 @@ class StorageTest {
     }
 
     @Test fun autoQuotaIsAFractionCappedAndInfoReportsIt() {
-        val p = TvProfile(minFreeBytes = 0, quotaFraction = 0.5, quotaCapBytes = 10_000)
+        val p = TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0, quotaFraction = 0.5, quotaCapBytes = 10_000)
         assertEquals(10_000, Storage.quota(dir, p))
-        val big = TvProfile(minFreeBytes = 0, quotaFraction = 0.5, quotaCapBytes = Long.MAX_VALUE)
+        val big = TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0, quotaFraction = 0.5, quotaCapBytes = Long.MAX_VALUE)
         assertTrue(Storage.quota(dir, big) in 1..dir.usableSpace, "half of the free space")
         val (s, tv) = server(p)
         try {
@@ -46,7 +46,7 @@ class StorageTest {
     }
 
     @Test fun evictsOnlyPlayedFilesOldestFirstAndNeverTheOneInUse() {
-        val (s, tv) = server(TvProfile(minFreeBytes = 0, quotaBytes = 1000, evictPlayed = true))
+        val (s, tv) = server(TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0, quotaBytes = 1000, evictPlayed = true))
         try {
             up(tv, "old.mp4", 400); up(tv, "mid.mp4", 400)
             File(dir, "old.mp4").setLastModified(1_000_000); File(dir, "mid.mp4").setLastModified(2_000_000)
@@ -62,7 +62,7 @@ class StorageTest {
 
     @Test fun deleteAfterPlayAndSettingsApi() {
         var saved: TvProfile? = null
-        val (s, tv) = server(TvProfile(minFreeBytes = 0)) { saved = it }
+        val (s, tv) = server(TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0)) { saved = it }
         try {
             up(tv, "a.mp4", 100)
             s.onPlaybackEnded("a.mp4"); assertTrue(File(dir, "a.mp4").exists(), "off by default")
@@ -82,7 +82,7 @@ class StorageTest {
         w("fresh.mp4.meta", "10")
         w("keep.mp4", "v", old)
         w("keep.mp4.meta", "1", old)   // meta next to a finished file is stale but harmless: kept until the file goes
-        val (s, _) = server(TvProfile(minFreeBytes = 0))
+        val (s, _) = server(TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0))
         try {
             assertFalse(File(dir, "dead.mp4.part").exists()); assertFalse(File(dir, "dead.mp4.meta").exists())
             assertTrue(File(dir, "fresh.mp4.part").exists()); assertTrue(File(dir, "keep.mp4").exists())
@@ -90,7 +90,7 @@ class StorageTest {
     }
 
     @Test fun infoIsCachedBriefly() {
-        val (s, tv) = server(TvProfile(minFreeBytes = 0, infoCacheMs = 60_000))
+        val (s, tv) = server(TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0, infoCacheMs = 60_000))
         try {
             File(dir, "a.mp4").writeText("aa")
             assertTrue(tv.info().contains("a.mp4"))
@@ -102,7 +102,7 @@ class StorageTest {
     }
 
     @Test fun boundedRunnerServesMoreConnectionsThanThreads() {
-        val (s, tv) = server(TvProfile(minFreeBytes = 0, maxHttpThreads = 2))
+        val (s, tv) = server(TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0, maxHttpThreads = 2))
         try { repeat(20) { assertTrue(tv.info().contains("files")) } } finally { s.stop() }
     }
 }

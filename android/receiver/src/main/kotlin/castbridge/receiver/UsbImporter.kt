@@ -20,7 +20,7 @@ import kotlin.concurrent.thread
  *  (a) the app's own folder on each secondary volume (getExternalFilesDirs), which a PC can fill, and
  *  (b) any folder the user picks with the system document picker (ACTION_OPEN_DOCUMENT_TREE), if the TV has one.
  */
-class UsbImporter(private val act: Activity, private val dir: File, private val status: (String?) -> Unit) {
+class UsbImporter(private val ctx: android.content.Context, private val dir: File, private val status: (String?) -> Unit) {
     private val running = AtomicBoolean(false)
     @Volatile private var cancel = false
     @Volatile var message: String = "inactif"; private set
@@ -30,7 +30,7 @@ class UsbImporter(private val act: Activity, private val dir: File, private val 
 
     /** App folders on removable volumes (index 0 is the internal/primary one). */
     fun volumeRoots(): List<File> = runCatching {
-        act.getExternalFilesDirs(null).drop(1).filterNotNull()
+        ctx.getExternalFilesDirs(null).drop(1).filterNotNull()
             .filter { Environment.getExternalStorageState(it) == Environment.MEDIA_MOUNTED }
     }.getOrDefault(emptyList())
 
@@ -45,7 +45,7 @@ class UsbImporter(private val act: Activity, private val dir: File, private val 
     }
 
     /** (b) Open the system folder picker. */
-    fun launchPicker(requestCode: Int): String? = try {
+    fun launchPicker(act: Activity, requestCode: Int): String? = try {
         act.startActivityForResult(Intent(Intent.ACTION_OPEN_DOCUMENT_TREE), requestCode); null
     } catch (e: ActivityNotFoundException) {
         "Cette TV n'a pas de sélecteur de fichiers Android : utilisez le scan des volumes (dossier de l'app sur la clé) " +
@@ -60,7 +60,7 @@ class UsbImporter(private val act: Activity, private val dir: File, private val 
 
     private fun listTree(tree: Uri): List<ImportEntry> {
         val out = ArrayList<ImportEntry>()
-        val cr = act.contentResolver
+        val cr = ctx.contentResolver
         fun walk(docId: String, depth: Int) {
             if (depth > 8) return
             val children = DocumentsContract.buildChildDocumentsUriUsingTree(tree, docId)

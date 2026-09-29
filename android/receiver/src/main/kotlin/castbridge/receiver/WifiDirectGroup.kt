@@ -21,6 +21,8 @@ import castbridge.core.tv.WifiDirect
 class WifiDirectGroup(private val ctx: Context, private val prefs: TvPrefs, private val status: (String?) -> Unit) {
     private val mgr = ctx.getSystemService(Context.WIFI_P2P_SERVICE) as? WifiP2pManager
     private var channel: WifiP2pManager.Channel? = null
+    /** (network name, password) while the group exists: given to a phone over Bluetooth (CBTN) so it can join by itself. */
+    @Volatile var active: Pair<String, String>? = null; private set
 
     fun permission(): String = if (Build.VERSION.SDK_INT >= 33) Manifest.permission.NEARBY_WIFI_DEVICES else Manifest.permission.ACCESS_FINE_LOCATION
     fun hasPermission() = ctx.checkSelfPermission(permission()) == PackageManager.PERMISSION_GRANTED
@@ -54,6 +56,7 @@ class WifiDirectGroup(private val ctx: Context, private val prefs: TvPrefs, priv
     private fun create(m: WifiP2pManager, ch: WifiP2pManager.Channel, cfg: WifiP2pConfig, name: String, pass: String) {
         m.createGroup(ch, cfg, object : WifiP2pManager.ActionListener {
             override fun onSuccess() {
+                active = name to pass
                 status("Wi-Fi Direct : réseau « $name »  mot de passe : $pass  (${WifiDirect.GROUP_OWNER_IP}:8765)")
             }
             override fun onFailure(reason: Int) {
@@ -70,6 +73,7 @@ class WifiDirectGroup(private val ctx: Context, private val prefs: TvPrefs, priv
     fun stop() {
         val m = mgr ?: return
         val ch = channel ?: return
+        active = null
         runCatching { m.removeGroup(ch, null) }
         runCatching { if (Build.VERSION.SDK_INT >= 27) ch.close() }
         channel = null

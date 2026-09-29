@@ -36,7 +36,48 @@ data class TvProfile(
     val target: String = "auto",
     /** Quota of a removable volume: this fraction of (used + free), no cap (the drive is there to hold a lot). */
     val removableQuotaFraction: Double = 0.95,
+    /**
+     * Phone <-> TV transfers run at full speed only if, once the file is complete, the destination volume keeps at least this
+     * much free space; otherwise another volume is tried (target auto) or the transfer is refused before the first byte.
+     * Replaces [minFreeBytes] for these transfers (moves, Bluetooth and USB import keep [minFreeBytes]). 0 = off.
+     */
+    val minFreeAfterTransfer: Long = 1L shl 30,
+    /** Write buffer of an HTTP upload (the TV writes the disk in blocks this big: fewer, larger writes on a FUSE/USB volume). */
+    val uploadBufferBytes: Int = 256 * 1024,
+    /** On a removable drive, flush an upload to the medium every this many bytes (and at the end), never after every block. */
+    val removableSyncBytes: Long = 64L shl 20,
 )
+
+/** The "keep 1 GB free after the transfer" rule and its human explanation. Pure. */
+object TransferRule {
+    /** Free space to keep on the destination after a phone <-> TV transfer. */
+    fun minFree(p: TvProfile): Long = maxOf(p.minFreeBytes, p.minFreeAfterTransfer)
+
+    /** Free bytes left on a volume with [free] bytes once [remaining] more bytes are written. */
+    fun freeAfter(free: Long, remaining: Long): Long = free - remaining
+
+    fun ok(free: Long, remaining: Long, minFree: Long): Boolean = free < 0 || freeAfter(free, remaining) >= minFree
+
+    /** "1 Go", "640 Mo", "1.5 Go" (rounded down; [up] rounds up: for what must be freed). */
+    fun size(b: Long, up: Boolean = false): String = when {
+        b >= 1L shl 30 && b % (1L shl 30) == 0L -> "${b shr 30} Go"
+        b >= 1L shl 30 -> String.format(java.util.Locale.ROOT, "%.1f Go", (if (up) Math.ceil(b * 10.0 / (1L shl 30)) else Math.floor(b * 10.0 / (1L shl 30))) / 10)
+        b >= 0 -> "${(if (up) b + (1L shl 20) - 1 else b) shr 20} Mo"
+        else -> "-" + size(-b, !up)
+    }
+
+    /**
+     * Why a transfer cannot go to [label]: "il resterait 640 Mo sur Mémoire interne, il en faut 1 Go : libérez 384 Mo ou branchez la clé USB".
+     * [driveAbsent] adds the advice to plug the drive.
+     */
+    fun message(label: String, free: Long, remaining: Long, minFree: Long, driveAbsent: Boolean): String {
+        val after = freeAfter(free, remaining)
+        val missing = minFree - after
+        val head = if (after >= 0) "Espace insuffisant : il resterait ${size(after)} sur $label après le transfert, il en faut ${size(minFree)}"
+                   else "Espace insuffisant : le fichier ne tient pas sur $label (il manque ${size(-after, up = true)}) et il faut garder ${size(minFree)} libres"
+        return "$head : libérez ${size(missing, up = true)}" + if (driveAbsent) " ou branchez la clé USB." else " ou choisissez un autre volume."
+    }
+}
 
 /** Storage accounting for the videos folder. Pure file logic. */
 object Storage {
