@@ -123,7 +123,7 @@ class ReceiverServer(
         val len = s.headers["content-length"]?.toLongOrNull() ?: return bad("content-length required")
         val final = File(dir, name)
         if (final.isFile && final.length() == total) return ok(part(name))
-        synchronized(lockFor(name)) {
+        synchronized(FileLocks.of(dir, name)) {
             val pf = partFile(name)
             val cur = pf.length()
             if (offset != cur || offset + len > total) return json(Response.Status.CONFLICT, part(name))
@@ -177,8 +177,6 @@ class ReceiverServer(
         safeName(p["name"].orEmpty())?.let(f) ?: bad("bad name")
 
     private fun partFile(name: String) = File(dir, name + PART)
-    private val locks = java.util.concurrent.ConcurrentHashMap<String, Any>()
-    private fun lockFor(name: String) = locks.getOrPut(name) { Any() }
 
     private fun ok(body: String) = json(Response.Status.OK, body)
     private fun bad(msg: String) = json(Response.Status.BAD_REQUEST, """{"error":${q(msg)}}""")

@@ -36,7 +36,7 @@ class MainActivity : ComponentActivity() {
                 Tab(tab == 0, onClick = { tab = 0 }, text = { Text("TV DLNA") })
                 Tab(tab == 1, onClick = { tab = 1 }, text = { Text("CastBridge TV") })
             }
-            if (tab == 0) App() else TvScreen()
+            if (tab == 0) App() else TvHub()
         }
     }
 

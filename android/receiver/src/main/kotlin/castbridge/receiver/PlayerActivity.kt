@@ -1,6 +1,12 @@
 package castbridge.receiver
 
+import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
+import android.bluetooth.BluetoothAdapter
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.content.Context
 import android.net.nsd.NsdManager
 import android.net.nsd.NsdServiceInfo
@@ -14,6 +20,7 @@ import android.view.KeyEvent
 import android.view.View
 import android.widget.TextView
 import castbridge.core.tv.Device
+import castbridge.core.tv.PinGuard
 import castbridge.core.tv.Player
 import castbridge.core.tv.SysInfo
 import castbridge.core.tv.PlayerState
@@ -40,6 +47,11 @@ class PlayerActivity : Activity(), Player, Device {
     private lateinit var osd: TextView
     private var server: ReceiverServer? = null
     private var pin = ""
+    private lateinit var guard: PinGuard
+    private var bt: BtServer? = null
+    private lateinit var videosDir: File
+    private val statuses = java.util.concurrent.ConcurrentHashMap<String, String>()
+    private var idleMsg: String? = null
     private var nsd: NsdManager? = null
     private var nsdListener: NsdManager.RegistrationListener? = null
     private var multicastLock: WifiManager.MulticastLock? = null
@@ -66,12 +78,15 @@ class PlayerActivity : Activity(), Player, Device {
                 MediaPlayer.Event.EncounteredError -> { update("error"); showIdle("Lecture impossible : ${current?.name}") }
             }
         }
-        val dir = getExternalFilesDir("videos") ?: File(filesDir, "videos")
+        val dir = (getExternalFilesDir("videos") ?: File(filesDir, "videos")).also { videosDir = it }
         pin = TvPrefs(this).pin()
-        server = ReceiverServer(dir, this, pin = pin, device = this).also {
+        guard = PinGuard(pin)
+        server = ReceiverServer(dir, this, pin = pin, guard = guard, device = this).also {
             try { it.start(15_000, false) } catch (e: Exception) { Log.e(TAG, "server", e) }
         }
         register()
+        bt = BtServer(this, dir, guard) { setStatus("1-bt", it) }
+        requestRuntimePermissions()
         showIdle()
     }
 
@@ -79,9 +94,52 @@ class PlayerActivity : Activity(), Player, Device {
         snapshot = snapshot.copy(state = state, name = current?.name)
     }
 
-    private fun showIdle(msg: String? = null) {
+    private fun showIdle(msg: String? = idleMsg) {
+        idleMsg = msg
         idle.visibility = View.VISIBLE
-        idle.text = (msg?.let { "$it\n\n" } ?: "") + "CastBridge TV\nEn attente du téléphone…\n\n${localIp() ?: "pas de réseau"}:${ReceiverServer.PORT}\nCode PIN : $pin"
+        idle.text = (msg?.let { "$it\n\n" } ?: "") +
+            "CastBridge TV\nEn attente du téléphone…\n\n${localIp() ?: "pas de réseau"}:${ReceiverServer.PORT}\nCode PIN : $pin\n\n" +
+            statuses.toSortedMap().values.joinToString("\n") + "\n\nMENU : options (USB, Bluetooth…)"
+    }
+
+    /** Status line of a channel (Bluetooth, Wi-Fi Direct, USB, SSH), shown on the waiting screen. Thread-safe. */
+    fun setStatus(key: String, text: String?) {
+        if (text == null) statuses.remove(key) else statuses[key] = text
+        main.post { if (::idle.isInitialized && idle.visibility == View.VISIBLE) showIdle() }
+    }
+
+    // ---- Runtime permissions: every feature degrades cleanly when its permission is refused ----
+
+    private fun requestRuntimePermissions() {
+        val wanted = buildList {
+            if (Build.VERSION.SDK_INT >= 31) { add(Manifest.permission.BLUETOOTH_CONNECT); add(Manifest.permission.BLUETOOTH_ADVERTISE) }
+        }.filter { checkSelfPermission(it) != PackageManager.PERMISSION_GRANTED }
+        if (wanted.isEmpty()) onPermissionsReady()
+        else runCatching { requestPermissions(wanted.toTypedArray(), REQ_PERMS) }.onFailure { onPermissionsReady() }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQ_PERMS) onPermissionsReady()
+    }
+
+    private fun onPermissionsReady() { bt?.start() }
+
+    // ---- MENU key: extra options that need a dialog ----
+
+    private fun showMenu() {
+        val items = mutableListOf<Pair<String, () -> Unit>>()
+        items += "Bluetooth : rendre la TV visible (2 min)" to { makeDiscoverable() }
+        AlertDialog.Builder(this).setTitle("CastBridge TV")
+            .setItems(items.map { it.first }.toTypedArray()) { _, i -> items[i].second() }
+            .setNegativeButton("Fermer", null).show()
+    }
+
+    private fun makeDiscoverable() {
+        runCatching {
+            startActivity(Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE)
+                .putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 120))
+        }.onFailure { flash("Réglage Bluetooth introuvable sur cette TV : associez le téléphone depuis les réglages de la TV") }
     }
 
     private fun flash(text: String) {
@@ -166,6 +224,7 @@ class PlayerActivity : Activity(), Player, Device {
     // ---- Remote control ----
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_MENU) { showMenu(); return true }
         if (current == null) return super.onKeyDown(keyCode, event)
         when (keyCode) {
             KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE ->
@@ -210,6 +269,7 @@ class PlayerActivity : Activity(), Player, Device {
     override fun onDestroy() {
         runCatching { nsdListener?.let { nsd?.unregisterService(it) } }
         runCatching { multicastLock?.release() }
+        bt?.stop()
         server?.stop()
         mp.stop(); mp.detachViews(); mp.release(); libVlc.release()
         super.onDestroy()
@@ -217,6 +277,7 @@ class PlayerActivity : Activity(), Player, Device {
 
     companion object {
         private const val TAG = "CastBridgeTV"
+        private const val REQ_PERMS = 10
         private val OSD = Any()
         fun fmt(ms: Long): String { val s = ms / 1000; return "%d:%02d:%02d".format(s / 3600, s / 60 % 60, s % 60) }
         fun localIp(): String? = runCatching {
