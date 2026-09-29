@@ -49,6 +49,8 @@ class PlayerActivity : Activity(), Player, Device {
     private var pin = ""
     private lateinit var guard: PinGuard
     private var bt: BtServer? = null
+    private var wd: WifiDirectGroup? = null
+    private lateinit var prefs: TvPrefs
     private lateinit var videosDir: File
     private val statuses = java.util.concurrent.ConcurrentHashMap<String, String>()
     private var idleMsg: String? = null
@@ -79,13 +81,15 @@ class PlayerActivity : Activity(), Player, Device {
             }
         }
         val dir = (getExternalFilesDir("videos") ?: File(filesDir, "videos")).also { videosDir = it }
-        pin = TvPrefs(this).pin()
+        prefs = TvPrefs(this)
+        pin = prefs.pin()
         guard = PinGuard(pin)
         server = ReceiverServer(dir, this, pin = pin, guard = guard, device = this).also {
             try { it.start(15_000, false) } catch (e: Exception) { Log.e(TAG, "server", e) }
         }
         register()
         bt = BtServer(this, dir, guard) { setStatus("1-bt", it) }
+        wd = WifiDirectGroup(this, prefs) { setStatus("2-wd", it) }
         requestRuntimePermissions()
         showIdle()
     }
@@ -121,15 +125,33 @@ class PlayerActivity : Activity(), Player, Device {
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQ_PERMS) onPermissionsReady()
+        if (requestCode == REQ_WD) {
+            if (grantResults.firstOrNull() == PackageManager.PERMISSION_GRANTED) { prefs.putBool("wd_enabled", true); wd?.start() }
+            else setStatus("2-wd", "Wi-Fi Direct : permission refusée (désactivé)")
+        }
     }
 
-    private fun onPermissionsReady() { bt?.start() }
+    private fun onPermissionsReady() {
+        bt?.start()
+        // Wi-Fi Direct is opt-in (MENU): creating a group can disturb the TV's own Wi-Fi connection.
+        if (prefs.getBool("wd_enabled", false) && wd?.hasPermission() == true) wd?.start()
+    }
+
+    private fun toggleWifiDirect() {
+        val g = wd ?: return
+        if (prefs.getBool("wd_enabled", false)) {
+            prefs.putBool("wd_enabled", false); g.stop(); flash("Wi-Fi Direct désactivé")
+        } else if (g.hasPermission()) {
+            prefs.putBool("wd_enabled", true); g.start()
+        } else runCatching { requestPermissions(arrayOf(g.permission()), REQ_WD) }
+    }
 
     // ---- MENU key: extra options that need a dialog ----
 
     private fun showMenu() {
         val items = mutableListOf<Pair<String, () -> Unit>>()
         items += "Bluetooth : rendre la TV visible (2 min)" to { makeDiscoverable() }
+        items += (if (prefs.getBool("wd_enabled", false)) "Wi-Fi Direct : désactiver" else "Wi-Fi Direct : activer (crée un réseau TV<->téléphone)") to { toggleWifiDirect() }
         AlertDialog.Builder(this).setTitle("CastBridge TV")
             .setItems(items.map { it.first }.toTypedArray()) { _, i -> items[i].second() }
             .setNegativeButton("Fermer", null).show()
@@ -270,6 +292,7 @@ class PlayerActivity : Activity(), Player, Device {
         runCatching { nsdListener?.let { nsd?.unregisterService(it) } }
         runCatching { multicastLock?.release() }
         bt?.stop()
+        wd?.stop()
         server?.stop()
         mp.stop(); mp.detachViews(); mp.release(); libVlc.release()
         super.onDestroy()
@@ -278,6 +301,7 @@ class PlayerActivity : Activity(), Player, Device {
     companion object {
         private const val TAG = "CastBridgeTV"
         private const val REQ_PERMS = 10
+        private const val REQ_WD = 11
         private val OSD = Any()
         fun fmt(ms: Long): String { val s = ms / 1000; return "%d:%02d:%02d".format(s / 3600, s / 60 % 60, s % 60) }
         fun localIp(): String? = runCatching {

@@ -46,7 +46,7 @@ fun TvHub() {
         when (channel) {
             Channel.WIFI -> TvScreen(extra = { AdminPanel(it) })
             Channel.BLUETOOTH -> BtScreen()
-            Channel.WIFI_DIRECT -> Text("Wi-Fi Direct : bientôt", Modifier.padding(16.dp))
+            Channel.WIFI_DIRECT -> WifiDirectScreen()
         }
     }
 }
