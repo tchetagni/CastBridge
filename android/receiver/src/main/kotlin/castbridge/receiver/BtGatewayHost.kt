@@ -85,6 +85,25 @@ class BtGatewayHost(private val ctx: Context, private val guard: PinGuard, priva
         return ApiReply(200, """{"results":$out,"gateway":${json()}}""")
     }
 
+    /**
+     * Internet diagnostics: TCP connect time through the phone, then ping and traceroute run by the phone (ICMP
+     * cannot cross the TCP tunnel), and the TV's own network ping for comparison. Lines go to [out] as they arrive.
+     */
+    fun diagnose(host: String, out: (String) -> Unit) {
+        if (!castbridge.core.gateway.Gw.validHost(host)) { out("Adresse invalide"); return }
+        out("— Réseau de la TV —")
+        runCatching {
+            val p = ProcessBuilder("/system/bin/ping", "-c", "3", "-W", "2", host).redirectErrorStream(true).start()
+            p.inputStream.bufferedReader().forEachLine { if (it.isNotBlank()) out(it) }; p.waitFor()
+        }.onFailure { out("ping indisponible sur la TV : ${it.message}") }
+        if (!entry.connected) { out("— Aucun téléphone ne partage sa connexion en Bluetooth —"); return }
+        out("— Via le téléphone ${entry.peerName ?: ""} (Bluetooth) —")
+        repeat(3) { i -> out("connexion TCP ${i + 1} vers $host:443 : " + (entry.tcpPing(host)?.let { "$it ms" } ?: "échec")) }
+        entry.diag("ping", host) { out(it) }
+        entry.diag("trace", host, timeoutS = 120) { out(it) }
+        out("— Terminé —")
+    }
+
     /** Download speed test through the phone: [bytes] from a public speed-test endpoint. */
     fun speed(bytes: Long): ApiReply {
         val p = proxy() ?: return ApiReply(409, """{"error":"aucun téléphone ne partage sa connexion"}""")

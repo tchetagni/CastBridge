@@ -97,6 +97,19 @@ class GatewayTest {
         }
     }
 
+    @Test fun diagnosticsRunOnThePhoneAndStreamBack() {
+        val (tv, phone) = link()
+        thread(isDaemon = true) { entry.attach(tv, "phone") }
+        thread(isDaemon = true) { runCatching { Exit(phone, "123456", diag = { k, h, l -> l("$k 1 $h"); l("$k 2 $h") }).run() } }
+        waitConnected()
+        val lines = mutableListOf<String>()
+        assertTrue(entry.diag("trace", "exemple.cm") { lines += it })
+        assertEquals(listOf("trace 1 exemple.cm", "trace 2 exemple.cm"), lines)
+        assertFails { entry.diag("ping", "a; rm -rf /") { } }
+        assertFalse(Gw.validHost("x..y")); assertTrue(Gw.validHost("8.8.8.8")); assertTrue(Gw.validHost("2001:4860::8888"))
+        assertNotNull(entry.tcpPing("127.0.0.1", internet.localPort))
+    }
+
     @Test fun targetEncoding() {
         val t = GwTarget("exemple.cm", 443)
         assertEquals(t, GwTarget.decode(t.encode()))

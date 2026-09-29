@@ -358,6 +358,11 @@ class PlayerActivity : Activity(), Player, Device {
         items += "Stockage : choisir un dossier (sélecteur système)…" to { flash(launchSafPicker()) }
         if (prefs.getString("saf_tree") != null) items += "Stockage : oublier le dossier choisi" to { forgetSafFolder() }
         items += "Stockage : ouvrir les réglages de stockage de la TV" to { openStorageSettings()?.let { flash(it) } }
+        items += "Tester Internet (ping et traceroute)" to {
+            val host = "8.8.8.8"
+            showDiag(host)
+            Thread { gateway?.diagnose(host) { l -> main.post { appendDiag(l) } } }.start()
+        }
         items += "Options développeur (débogage USB / Wi-Fi)" to { flash(openDevSettings()) }
         items += (if (ssh?.running == true) "SSH : désactiver" else "SSH : activer (administration à distance, clés autorisées seulement)") to {
             val c = ssh
@@ -389,6 +394,28 @@ class PlayerActivity : Activity(), Player, Device {
         return "Réglages inaccessibles sur cette TV : ouvrez-les avec la télécommande de la TV."
     }
 
+    // ---- Internet diagnostics panel (ping / traceroute), readable from the sofa ----
+    private var diagView: TextView? = null
+    private var diagDialog: AlertDialog? = null
+
+    private fun showDiag(host: String) {
+        diagDialog?.dismiss()
+        val tv = TextView(this).apply {
+            typeface = android.graphics.Typeface.MONOSPACE; textSize = 15f; setTextColor(0xFFE0F7FA.toInt())
+            setPadding(32, 24, 32, 24); text = ""
+        }
+        val sv = android.widget.ScrollView(this).apply { addView(tv); setBackgroundColor(0xFF0B1A2A.toInt()) }
+        diagView = tv
+        diagDialog = AlertDialog.Builder(this).setTitle("Test Internet : $host").setView(sv)
+            .setPositiveButton("Fermer", null).show()
+    }
+
+    private fun appendDiag(line: String) {
+        val tv = diagView ?: return
+        tv.append(line + "\n")
+        (tv.parent as? android.widget.ScrollView)?.post { (tv.parent as android.widget.ScrollView).fullScroll(View.FOCUS_DOWN) }
+    }
+
     private fun usbMessage(m: String?) { if (m != null) { flash(m); setStatus("3-usb", "USB : $m") } }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -414,6 +441,13 @@ class PlayerActivity : Activity(), Player, Device {
         path == "/api/update/install" && method == "POST" ->
             updater?.install(listOf(params["name"].orEmpty()), params["force"] == "1")
         path == "/api/gateway" && method == "GET" -> ApiReply(200, gateway?.json() ?: """{"listening":false,"connected":false}""")
+        path == "/api/gateway/diag" && method == "GET" -> gateway?.let { g ->
+            val host = params["host"]?.takeIf { it.isNotBlank() } ?: "8.8.8.8"
+            val lines = java.util.Collections.synchronizedList(mutableListOf<String>())
+            main.post { showDiag(host) }                      // also visible on the TV screen
+            g.diagnose(host) { l -> lines += l; main.post { appendDiag(l) } }
+            ApiReply(200, "{\"host\":${ReceiverServer.q(host)},\"lines\":[" + lines.joinToString(",") { ReceiverServer.q(it) } + "]}")
+        }
         path == "/api/gateway/test" && method == "GET" -> gateway?.test() ?: ApiReply(409, """{"error":"passerelle non démarrée"}""")
         path == "/api/gateway/speed" && method == "GET" -> gateway?.speed(params["bytes"]?.toLongOrNull() ?: 2_000_000)
             ?: ApiReply(409, """{"error":"passerelle non démarrée"}""")

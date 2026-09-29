@@ -56,7 +56,7 @@ class BtGatewayService : Service() {
         while (!stopping) {
             if (adapter == null || !adapter.isEnabled) { _state.value = "Bluetooth désactivé"; Thread.sleep(3000); continue }
             try {
-                adapter.cancelDiscovery()
+                runCatching { adapter.cancelDiscovery() }   // needs BLUETOOTH_SCAN on Android 12+: optional, never fatal
                 _state.value = "Connexion à la TV…"
                 val s = adapter.getRemoteDevice(address).createRfcommSocketToServiceRecord(UUID.fromString(Gw.SERVICE_UUID))
                 sock = s
@@ -64,7 +64,7 @@ class BtGatewayService : Service() {
                 backoff = 1000
                 _state.value = "La TV utilise l'Internet du téléphone"
                 notify("La TV utilise l'Internet du téléphone")
-                Exit(Mux(s.inputStream, s.outputStream), pin, connect = ::openOutbound) { Log.i(TAG, it) }.run()
+                Exit(Mux(s.inputStream, s.outputStream), pin, connect = ::openOutbound, log = { Log.i(TAG, it) }, diag = ::runDiag).run()
             } catch (e: IOException) {
                 if (e.message?.contains("PIN") == true) { _state.value = "Code PIN refusé par la TV"; stopping = true; break }
                 if (!stopping) _state.value = "TV injoignable en Bluetooth, nouvel essai…"
@@ -72,6 +72,34 @@ class BtGatewayService : Service() {
             if (!stopping) { Thread.sleep(backoff); backoff = minOf(backoff * 2, 15_000) }
         }
         stopForeground(STOP_FOREGROUND_REMOVE); stopSelf()
+    }
+
+    /** ping / traceroute from the phone (the TV's way out to the Internet); host already validated by the gateway. */
+    private fun runDiag(kind: String, host: String, line: (String) -> Unit) {
+        val ip = runCatching { InetAddress.getByName(host).hostAddress }.getOrElse { line("Nom introuvable : $host"); return }
+        if (kind == "ping") {
+            line("PING $host ($ip) depuis le téléphone")
+            val p = ProcessBuilder("/system/bin/ping", "-c", "4", "-W", "2", ip).redirectErrorStream(true).start()
+            p.inputStream.bufferedReader().forEachLine { if (it.isNotBlank()) line(it) }
+            p.waitFor()
+            return
+        }
+        // traceroute with ping's TTL: each hop answers "Time to live exceeded" from its own address.
+        line("TRACEROUTE $host ($ip) depuis le téléphone, 20 sauts max")
+        for (ttl in 1..20) {
+            val t0 = System.nanoTime()
+            val p = ProcessBuilder("/system/bin/ping", "-c", "1", "-W", "2", "-t", ttl.toString(), ip).redirectErrorStream(true).start()
+            val out = p.inputStream.bufferedReader().readText(); p.waitFor()
+            val ms = (System.nanoTime() - t0) / 1_000_000
+            val from = Regex("[Ff]rom ([0-9a-fA-F.:]+)").find(out)?.groupValues?.get(1)?.trimEnd(':')
+            val time = Regex("time=([0-9.]+) ?ms").find(out)?.groupValues?.get(1)
+            when {
+                time != null -> { line("%2d  %-39s %s ms".format(ttl, ip, time)); line("Arrivé en $ttl sauts."); return }
+                from != null -> line("%2d  %-39s ~%d ms".format(ttl, from, ms))
+                else -> line("%2d  *".format(ttl))
+            }
+        }
+        line("Destination non atteinte en 20 sauts.")
     }
 
     /** Outbound connection for the TV, on the phone's own network; the phone's loopback is off limits. */

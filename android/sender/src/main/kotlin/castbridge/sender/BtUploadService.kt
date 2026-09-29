@@ -63,7 +63,7 @@ class BtUploadService : Service() {
         var lastNotif = 0L
         val up = ResumableBtUpload(name, total, pin,
             connect = {
-                adapter.cancelDiscovery()
+                runCatching { adapter.cancelDiscovery() }   // needs BLUETOOTH_SCAN on Android 12+: optional, never fatal
                 val sock = adapter.getRemoteDevice(address).createRfcommSocketToServiceRecord(UUID.fromString(BtProtocol.SERVICE_UUID))
                 try { sock.connect() } catch (e: IOException) { runCatching { sock.close() }; throw e }
                 object : Link {

@@ -32,6 +32,13 @@ object Gw {
     const val DATA = 7; const val CLOSE = 8; const val ACK = 9; const val PING = 10
     /** One direction finished (TCP half-close): the other one keeps flowing until it ends too. CLOSE = abort. */
     const val EOF = 11
+    /** Network diagnostics run by the phone (ICMP cannot cross a TCP tunnel): DIAG "ping host"/"trace host" ->
+     *  DIAG_OUT lines -> DIAG_END. */
+    const val DIAG = 12; const val DIAG_OUT = 13; const val DIAG_END = 14
+
+    private val HOST = Regex("^[A-Za-z0-9](?:[A-Za-z0-9.:-]{0,252})$")
+    /** Only a host name or an IP literal: the phone runs a fixed command, never text from the TV. */
+    fun validHost(h: String) = HOST.matches(h) && !h.contains("..")
     const val WINDOW = 256 * 1024L          // bytes in flight per stream
     const val CHUNK = 16 * 1024             // DATA payload size (RFCOMM likes big writes, the window keeps RAM bounded)
     const val MAX_STREAMS = 32
@@ -162,6 +169,8 @@ class Exit(
     private val pin: String,
     private val connect: (GwTarget) -> Socket = { t -> Socket().apply { connect(InetSocketAddress(t.host, t.port), 15_000); tcpNoDelay = true } },
     private val log: (String) -> Unit = {},
+    /** Runs "ping"/"trace" towards a validated host, calling the line callback as output arrives. */
+    private val diag: (kind: String, host: String, line: (String) -> Unit) -> Unit = { _, _, l -> l("diagnostic indisponible") },
 ) {
     private val relays = ConcurrentHashMap<Int, Relay>()
     val openStreams get() = relays.size
@@ -182,10 +191,20 @@ class Exit(
                     Gw.CLOSE -> relays.remove(f.stream)?.onRemoteClose()
                     Gw.EOF -> relays[f.stream]?.onRemoteEof()
                     Gw.PING -> mux.write(Frame(Gw.PING, 0))
+                    Gw.DIAG -> runDiag(f.stream, String(f.payload, Charsets.UTF_8))
                 }
             }
         } finally { relays.values.toList().forEach { it.finish(sendClose = false) } }
     }
+
+    private fun runDiag(id: Int, cmd: String) = Thread({
+        val kind = cmd.substringBefore(' '); val host = cmd.substringAfter(' ', "")
+        try {
+            if (kind !in setOf("ping", "trace") || !Gw.validHost(host)) mux.write(Frame(Gw.DIAG_OUT, id, "requête refusée".toByteArray()))
+            else diag(kind, host) { line -> mux.write(Frame(Gw.DIAG_OUT, id, line.toByteArray(Charsets.UTF_8))) }
+        } catch (e: Exception) { runCatching { mux.write(Frame(Gw.DIAG_OUT, id, "erreur : ${e.message}".toByteArray())) } }
+        runCatching { mux.write(Frame(Gw.DIAG_END, id)) }
+    }, "gw-diag").apply { isDaemon = true; start() }
 
     private fun open(id: Int, t: GwTarget) {
         Thread({
@@ -213,6 +232,7 @@ class Entry(private val checkPin: (String) -> Boolean, val port: Int = 1080, pri
     @Volatile private var mux: Mux? = null
     private val relays = ConcurrentHashMap<Int, Relay>()
     private val pending = ConcurrentHashMap<Int, java.util.concurrent.CompletableFuture<Int>>()
+    private val diags = ConcurrentHashMap<Int, Pair<(String) -> Unit, java.util.concurrent.CountDownLatch>>()
     private val nextId = AtomicInteger(1)
     private var server: ServerSocket? = null
     @Volatile var peerName: String? = null; private set
@@ -256,6 +276,8 @@ class Entry(private val checkPin: (String) -> Boolean, val port: Int = 1080, pri
                     Gw.ACK -> relays[f.stream]?.onAck(f.payload)
                     Gw.CLOSE -> relays.remove(f.stream)?.onRemoteClose()
                     Gw.EOF -> relays[f.stream]?.onRemoteEof()
+                    Gw.DIAG_OUT -> diags[f.stream]?.first?.invoke(String(f.payload, Charsets.UTF_8))
+                    Gw.DIAG_END -> diags.remove(f.stream)?.second?.countDown()
                 }
             }
         } catch (_: IOException) {
@@ -263,8 +285,33 @@ class Entry(private val checkPin: (String) -> Boolean, val port: Int = 1080, pri
             if (mux === link) { mux = null; peerName = null }
             relays.values.toList().forEach { it.finish(sendClose = false) }
             pending.values.forEach { it.complete(Gw.SOCKS_NET) }; pending.clear()
+            diags.values.forEach { (l, d) -> l("lien Bluetooth coupé"); d.countDown() }; diags.clear()
             log("passerelle déconnectée")
         }
+    }
+
+    /** Asks the phone to run ping/traceroute; [onLine] gets each output line. Blocks until done (max [timeoutS]). */
+    fun diag(kind: String, host: String, timeoutS: Long = 90, onLine: (String) -> Unit): Boolean {
+        val m = mux ?: return false
+        require((kind == "ping" || kind == "trace") && Gw.validHost(host))
+        val id = nextId.getAndUpdate { if (it >= 65000) 1 else it + 1 }
+        val done = java.util.concurrent.CountDownLatch(1)
+        diags[id] = onLine to done
+        m.write(Frame(Gw.DIAG, id, "$kind $host".toByteArray(Charsets.UTF_8)))
+        val ok = done.await(timeoutS, java.util.concurrent.TimeUnit.SECONDS)
+        diags.remove(id)
+        return ok
+    }
+
+    /** "TCP ping": time to open a connection to host:port through the phone (what the TV app really experiences). */
+    fun tcpPing(host: String, port: Int = 443): Long? {
+        val t0 = System.nanoTime()
+        return runCatching {
+            Socket(java.net.Proxy(java.net.Proxy.Type.SOCKS, InetSocketAddress("127.0.0.1", server!!.localPort))).use {
+                it.connect(InetSocketAddress.createUnresolved(host, port), 15_000)
+            }
+            (System.nanoTime() - t0) / 1_000_000
+        }.getOrNull()
     }
 
     private fun socks(c: Socket) {
