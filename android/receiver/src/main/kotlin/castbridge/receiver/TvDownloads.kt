@@ -64,7 +64,9 @@ class TvDownloads private constructor(private val app: Context, @Volatile privat
         registry = registry, workDir = work, rpc = { supervisor.rpc },
         engine = { DownloadManager.EngineStatus(supervisor.available, supervisor.rpc != null, supervisor.state.name, supervisor.message, supervisor.version) },
         target = { target() },
+        ensureEngine = { supervisor.start() },
     )
+    @Volatile private var idleSince = 0L
 
     init {
         manager.addFinishedListener { f ->
@@ -72,9 +74,21 @@ class TvDownloads private constructor(private val app: Context, @Volatile privat
             main.post { runCatching { Toast.makeText(app, "Téléchargement terminé : $what", Toast.LENGTH_LONG).show() } }
             notifyDone(f.name, f.volumeLabel)
         }
-        supervisor.start()
+        if (manager.hasWork()) supervisor.start()             // otherwise aria2 starts with the first download
         manager.start()
-        timer.scheduleWithFixedDelay({ runCatching { keepAwake() } }, 3, 10, TimeUnit.SECONDS)
+        timer.scheduleWithFixedDelay({ runCatching { engineOnDemand(); keepAwake() } }, 3, 10, TimeUnit.SECONDS)
+    }
+
+    /** aria2 runs only while there are downloads (plus 3 idle minutes): its DHT and buffers cost RAM on a 1 GB TV. */
+    private fun engineOnDemand() {
+        val now = android.os.SystemClock.elapsedRealtime()
+        if (manager.hasWork()) {
+            idleSince = 0
+            if (supervisor.state == Aria2Supervisor.State.STOPPED) supervisor.start()
+        } else if (supervisor.state == Aria2Supervisor.State.RUNNING) {
+            if (idleSince == 0L) idleSince = now
+            else if (now - idleSince > 3 * 60_000) { supervisor.stop(); idleSince = 0 }
+        }
     }
 
     /** Wake/Wi-Fi locks and the foreground service only while there is something to download. */

@@ -35,6 +35,9 @@ class DownloadManager(
     private val minFree: Long = DownloadSpace.MIN_FREE,
     /** Runs file moves (tests: synchronous). */
     private val worker: (Runnable) -> Unit = defaultWorker(),
+    /** Starts aria2 if it is stopped (it is only kept running while there is something to do: RAM is scarce on the TV). */
+    private val ensureEngine: () -> Unit = {},
+    private val engineWaitMs: Long = 10_000,
 ) {
     data class EngineStatus(val available: Boolean, val running: Boolean, val state: String, val message: String, val version: String? = null)
 
@@ -377,7 +380,12 @@ class DownloadManager(
         if (!settings.warningAccepted) return Result.Refused(409, "warning", WARNING)
         val e = engine()
         if (!e.available) return Result.Refused(503, "engine", Aria2Supervisor.NOT_SHIPPED)
-        if (rpc() == null) return Result.Refused(503, "engine", e.message.ifEmpty { "Le moteur de téléchargement démarre, réessayez dans un instant." })
+        if (rpc() == null) {
+            ensureEngine()
+            val until = System.nanoTime() + engineWaitMs * 1_000_000
+            while (rpc() == null && System.nanoTime() < until && engine().state != "FAILED") Thread.sleep(100)
+        }
+        if (rpc() == null) return Result.Refused(503, "engine", engine().message.ifEmpty { "Le moteur de téléchargement démarre, réessayez dans un instant." })
         return null
     }
 
@@ -616,6 +624,9 @@ class DownloadManager(
     }
 
     fun finished(): List<Finished> = synchronized(lock) { done.toList() }
+
+    /** True while some download is not finished (the engine must run). */
+    fun hasWork(): Boolean = synchronized(lock) { tasks.isNotEmpty() }
 
     fun listJson(): String {
         val e = engine()

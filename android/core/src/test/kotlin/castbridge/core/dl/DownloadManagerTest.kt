@@ -31,7 +31,9 @@ class DlRig {
     val work = File(root, "work")
     val dm = DownloadManager(registry, work, { if (engineUp) rpc else null },
         { DownloadManager.EngineStatus(true, engineUp, if (engineUp) "RUNNING" else "STOPPED", "") },
-        sizeProbe = { sizes[it] }, worker = { it.run() }).also { it.addFinishedListener { f -> finished += f } }
+        sizeProbe = { sizes[it] }, worker = { it.run() }, ensureEngine = { if (autoStart) engineUp = true }, engineWaitMs = 300)
+        .also { it.addFinishedListener { f -> finished += f } }
+    var autoStart = false
 
     fun ok(r: DownloadManager.Result) = (r as? DownloadManager.Result.Ok ?: fail("refused: $r")).id
     fun task(id: String) = dm.views().first { it.id == id }
@@ -72,6 +74,10 @@ class DownloadManagerTest {
         val r = DlRig(); r.dm.acceptWarning(); r.engineUp = false
         val no = r.dm.addLink("https://example.org/a.mkv") as DownloadManager.Result.Refused
         assertEquals(503, no.http)
+        // aria2 only runs when needed: the first download starts it.
+        r.autoStart = true
+        r.ok(r.dm.addLink("https://example.org/a.mkv"))
+        assertTrue(r.dm.hasWork())
         val missing = DownloadManager(r.registry, File(r.root, "w2"), { null }, { DownloadManager.EngineStatus(false, false, "UNAVAILABLE", Aria2Supervisor.NOT_SHIPPED) })
         missing.acceptWarning()
         assertTrue((missing.addLink("https://example.org/a.mkv") as DownloadManager.Result.Refused).message.contains("non inclus"))
