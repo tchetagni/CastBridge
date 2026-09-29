@@ -58,6 +58,8 @@ class LibraryScreen(
         /** Runs an HTTP call on the TV's own API (loopback) off the main thread; returns an error message or null. */
         fun call(block: (castbridge.core.tv.TvClient) -> Unit): String?
         fun flash(msg: String)
+        /** Plays [names] one after the other from [start] (a section of the library). */
+        fun playAll(names: List<String>, start: Int)
     }
 
     private val main = Handler(Looper.getMainLooper())
@@ -187,6 +189,7 @@ class LibraryScreen(
         if (i.type != MediaType.OTHER) {
             if (i.meta.resumeMs > 0) items += "Reprendre à ${LibraryLogic.clock(i.meta.resumeMs)}" to { play(i, i.meta.resumeMs) }
             items += "Lire depuis le début" to { play(i, 0) }
+            if (r.sectionNames.size > 1) items += "Lire la section à la suite (${r.sectionNames.size - r.index} fichiers)" to { api.playAll(r.sectionNames, r.index) }
             items += (if (i.meta.watched) "Marquer comme non vu" else "Marquer comme vu") to { run("Marquage") { it.setWatched(i.name, !i.meta.watched) } }
         } else if (i.name.endsWith(".apk", true)) {
             items += "Installer cette application" to { run("Installation") { it.installApks(listOf(i.name)) }; api.flash("Installation demandée : validez à l'écran") }

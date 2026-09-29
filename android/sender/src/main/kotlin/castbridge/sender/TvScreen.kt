@@ -61,6 +61,7 @@ fun TvScreen(fixedBase: String? = null, extra: @Composable (TvClient) -> Unit = 
     var reachable by remember { mutableStateOf(true) }
     var message by remember { mutableStateOf("") }
     var showPlayer by remember { mutableStateOf(false) }
+    var showSettings by remember { mutableStateOf(false) }
     var badPin by remember { mutableStateOf<String?>(null) }
     var fileSize by remember { mutableStateOf(0L) }
     var progressive by rememberSaveable { mutableStateOf(false) }
@@ -273,6 +274,8 @@ fun TvScreen(fixedBase: String? = null, extra: @Composable (TvClient) -> Unit = 
             },
             onToggle = { cmd("Pause") { if (current.state == "playing" || current.state == "buffering") pause() else resume() } },
             onSkip = { d -> cmd("Seek") { seek((current.pos + d * 1000L).coerceAtLeast(0)) } },
-            onStop = { cmd("Stop") { stop() }; showPlayer = false }, onDismiss = { showPlayer = false })
+            onStop = { cmd("Stop") { stop() }; showPlayer = false }, onDismiss = { showPlayer = false },
+            onSettings = { showSettings = true })
     }
+    if (showSettings && client != null) TvPlayerSettingsSheet(client) { showSettings = false }
 }

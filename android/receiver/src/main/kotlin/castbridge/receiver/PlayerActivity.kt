@@ -32,6 +32,9 @@ import castbridge.core.tv.Storage
 import castbridge.core.tv.Player
 import castbridge.core.tv.SysInfo
 import castbridge.core.tv.PlayerState
+import castbridge.core.tv.PlayerCommand
+import castbridge.core.tv.PlayerParams
+import castbridge.core.tv.PlayerTracks
 import castbridge.core.tv.ReceiverServer
 import castbridge.core.tv.VolumeKind
 import castbridge.core.tv.VolumeRegistry
@@ -60,6 +63,12 @@ class PlayerActivity : Activity(), Player, Device {
     private var library: castbridge.core.tv.LibraryProvider? = null
     private var libScreen: LibraryScreen? = null
     @Volatile private var currentSize = 0L                  // size of the file playing: with its name, the key of its saved position
+    private lateinit var extras: PlayerExtras               // per-file player settings, tracks, decoder (docs/ADMIN.md, "Lecteur")
+    private lateinit var panel: PlayerPanel
+    private lateinit var bar: ProgressOverlay
+    private var playerSpu = false                           // libVLC was created with its subtitle engine
+    private var reopen: ((Long) -> Unit)? = null             // re-opens the current file at a position (subtitle engine, decoder change)
+    private var swRetry = false                             // the software-decoding retry was already made for this file
     private lateinit var osd: TextView
     private lateinit var lead: TextView
     @Volatile private var streamingName: String? = null    // set while playing a file that may still be arriving
@@ -116,6 +125,9 @@ class PlayerActivity : Activity(), Player, Device {
             try { it.start(15_000, false) } catch (e: Exception) { Log.e(TAG, "server", e) }
         }
         libScreen = LibraryScreen(this, findViewById(R.id.library), libraryApi())
+        extras = PlayerExtras({ library?.db }, prefs) { r -> runCatching { bg.execute(r) } }
+        panel = PlayerPanel(this, panelApi())
+        bar = ProgressOverlay(this, findViewById(android.R.id.content))
         register()
         bt = BtServer(this, dir, guard) { setStatus("1-bt", it) }
         wd = WifiDirectGroup(this, prefs) { setStatus("2-wd", it) }
@@ -227,19 +239,25 @@ class PlayerActivity : Activity(), Player, Device {
         snapshot = snapshot.copy(state = state, name = current?.name ?: snapshot.name)
     }
 
-    private fun ensurePlayer(): MediaPlayer {
-        mp?.let { return it }
-        val lv = LibVLC(this, arrayListOf(
+    /** The player, created on demand; re-created when the subtitle engine must be switched on or off ([spu]). */
+    private fun ensurePlayer(spu: Boolean = false): MediaPlayer {
+        mp?.let { if (playerSpu == spu) return it; releasePlayer() }
+        val opts = arrayListOf(
             "--no-drop-late-frames", "--no-skip-frames",
             "--file-caching=400",            // local file: 1500 ms of read-ahead only cost RAM
             "--no-audio-time-stretch",       // no resampling buffers for A/V drift
-            "--no-spu", "--no-sub-autodetect-file", "--no-osd", "--no-stats",   // subtitles/OSD/stats unused by this app
-        ))
+            "--no-sub-autodetect-file",      // subtitle files next to the video are found by the app (SubtitleFinder), not by scanning
+            "--no-osd", "--no-stats",
+        )
+        // The subtitle engine (freetype, fonts, blending) costs memory on this TV: only for files that need it.
+        if (spu) opts += "--sub-text-scale=${extras.p.subScale}" else opts += "--no-spu"
+        val lv = LibVLC(this, opts)
+        playerSpu = spu
         val p = MediaPlayer(lv)
         p.attachViews(findViewById<VLCVideoLayout>(R.id.video), null, false, false)
         p.setEventListener { ev ->
             when (ev.type) {
-                MediaPlayer.Event.Playing -> update("playing")
+                MediaPlayer.Event.Playing -> { update("playing"); main.post { mp?.let { extras.onPlaying(it, playerSpu) } } }
                 MediaPlayer.Event.Paused -> update("paused")
                 MediaPlayer.Event.TimeChanged -> { snapshot = snapshot.copy(posMs = ev.timeChanged); main.post { updateLead() } }
                 MediaPlayer.Event.Buffering -> {
@@ -254,13 +272,22 @@ class PlayerActivity : Activity(), Player, Device {
                     update("ended"); val n = current?.name; val size = currentSize; val dur = snapshot.durMs
                     main.post {
                         current = null; streamingName = null; releasePlayer()
-                        n?.let { name -> bg.execute { library?.db?.onEnded(name, size, dur) }; server?.onPlaybackEnded(name) }
-                        afterPlayback()
+                        n?.let { name -> bg.execute { library?.db?.onEnded(name, size, dur) } }
+                        val next = n?.let { name -> runCatching { server?.onPlaybackEnded(name) == true }.getOrDefault(false) } == true
+                        if (!next) afterPlayback()                  // a playlist goes on with its next file
                     }
                 }
                 MediaPlayer.Event.EncounteredError -> {
-                    update("error"); val n = current?.name
-                    main.post { current = null; streamingName = null; releasePlayer(); afterPlayback("Lecture impossible : $n") }
+                    update("error"); val n = current?.name; val pos = snapshot.posMs
+                    main.post {
+                        val r = reopen
+                        if (!swRetry && r != null && extras.hwMode() != "off") {
+                            // Hardware decoding refused this file: one retry in software at the same position.
+                            swRetry = true; extras.hwOverride = "off"; releasePlayer()
+                            flash("Décodage matériel impossible : nouvel essai en décodage logiciel")
+                            runCatching { r(pos) }.onFailure { current = null; afterPlayback("Lecture impossible : $n") }
+                        } else { current = null; streamingName = null; releasePlayer(); afterPlayback("Lecture impossible : $n") }
+                    }
                 }
             }
         }
@@ -360,6 +387,7 @@ class PlayerActivity : Activity(), Player, Device {
                 ?: castbridge.core.tv.TvClient.str(e.message.orEmpty().substringAfter(": "), "error") ?: e.message
         } catch (e: Exception) { e.message ?: e.javaClass.simpleName }
         override fun flash(msg: String) { main.post { this@PlayerActivity.flash(msg) } }
+        override fun playAll(names: List<String>, start: Int) { runCatching { bg.execute { runCatching { server?.playAll(names, start) } } } }
     }
 
     /** Status line of a channel (Bluetooth, Wi-Fi Direct, USB, SSH), shown on the waiting screen. Thread-safe. */
@@ -522,15 +550,28 @@ class PlayerActivity : Activity(), Player, Device {
         return result!!.getOrThrow()
     }
 
-    override fun play(file: File, posMs: Long) = onMain {
+    /** Decoder (MediaCodec first: software decoding of HD video is what eats RAM/CPU on ARMv7) and start position. */
+    private fun configure(m: Media, posMs: Long) {
+        val (hw, force) = extras.hwFlags()
+        m.setHWDecoderEnabled(hw, force)
+        if (posMs > 0) m.addOption(":start-time=${posMs / 1000.0}")
+    }
+
+    private fun newFile(name: String, size: Long) {
+        if (current?.name != name || currentSize != size) swRetry = false
+    }
+
+    override fun play(file: File, posMs: Long): Unit = onMain {
         savePosition()
+        newFile(file.name, file.length())
         current = file
         startedPlaying(file.name, file.length())
+        extras.load(file.name, file.length(), file.parentFile)
+        reopen = { pos -> play(file, pos) }
+        val p = ensurePlayer(extras.wantsSpu())
         streamingName = null
-        val p = ensurePlayer()
         val m = Media(libVlc!!, file.absolutePath)
-        m.setHWDecoderEnabled(true, false)   // MediaCodec first: software decoding of HD video is what eats RAM/CPU on ARMv7
-        if (posMs > 0) m.addOption(":start-time=${posMs / 1000.0}")
+        configure(m, posMs)
         p.media = m
         m.release()
         p.play()
@@ -540,18 +581,20 @@ class PlayerActivity : Activity(), Player, Device {
         flash("▶ ${file.name}")
     }
 
-    override fun playSaf(name: String, size: Long, posMs: Long) = onMain {
+    override fun playSaf(name: String, size: Long, posMs: Long): Unit = onMain {
         val store = volProvider.saf ?: throw IllegalStateException("no folder chosen")
         val fd = store.openFd(name)                        // the file lives behind a ContentResolver: libVLC reads the descriptor
         savePosition()
+        newFile(name, size)
         current = File(videosDir, name)                    // only the name is used
         startedPlaying(name, size)
+        extras.load(name, size, null)
+        reopen = { pos -> playSaf(name, size, pos) }
+        val p = ensurePlayer(extras.wantsSpu())
         streamingName = null
-        val p = ensurePlayer()
         val old = safPfd; safPfd = fd
         val m = Media(libVlc!!, fd.fileDescriptor)
-        m.setHWDecoderEnabled(true, false)
-        if (posMs > 0) m.addOption(":start-time=${posMs / 1000.0}")
+        configure(m, posMs)
         p.media = m
         m.release()
         p.play()
@@ -561,17 +604,20 @@ class PlayerActivity : Activity(), Player, Device {
         flash("▶ $name")
     }
 
-    override fun playStream(url: String, name: String, posMs: Long) = onMain {
+    override fun playStream(url: String, name: String, posMs: Long): Unit = onMain {
         savePosition()
+        val total = server?.progress(name)?.second ?: 0L
+        newFile(name, total)
         current = File(videosDir, name)
-        startedPlaying(name, server?.progress(name)?.second ?: 0L)
+        startedPlaying(name, total)
+        extras.load(name, total, null)
+        reopen = { pos -> playStream(url, name, pos) }
+        val p = ensurePlayer(extras.wantsSpu())
         streamingName = name
-        val p = ensurePlayer()
         val m = Media(libVlc!!, Uri.parse(url))
-        m.setHWDecoderEnabled(true, false)
         m.addOption(":network-caching=1200")   // enough to ride out upload hiccups, still modest in RAM
         m.addOption(":http-reconnect")         // the server cuts the link after 30 s without data: reconnect and wait again
-        if (posMs > 0) m.addOption(":start-time=${posMs / 1000.0}")
+        configure(m, posMs)
         p.media = m
         m.release()
         p.play()
@@ -581,8 +627,8 @@ class PlayerActivity : Activity(), Player, Device {
         flash("▶ $name (lecture pendant l'envoi)")
     }
 
-    override fun pause() = onMain { mp?.let { if (it.isPlaying) { it.pause(); flash("❚❚ Pause"); savePosition() } }; Unit }
-    override fun resume() = onMain { mp?.let { if (!it.isPlaying && current != null) { it.play(); flash("▶ Lecture") } }; Unit }
+    override fun pause() = onMain { mp?.let { if (it.isPlaying) { it.pause(); showBar("Pause"); savePosition() } }; Unit }
+    override fun resume() = onMain { mp?.let { if (!it.isPlaying && current != null) { it.play(); showBar() } }; Unit }
     override fun seek(posMs: Long) = onMain {
         val p = mp
         if (p != null && current != null) {
@@ -593,16 +639,109 @@ class PlayerActivity : Activity(), Player, Device {
                 val max = Progressive.reachableMs(snapshot.durMs, prog.first, prog.second)
                 if (t > max) { t = maxOf(max, 0); flash("En attente de l'envoi… (atteignable : ${fmt(t)})") }
             }
-            p.setTime(t); snapshot = snapshot.copy(posMs = t); flash("⇥ ${fmt(t)}")
+            p.setTime(t); snapshot = snapshot.copy(posMs = t); showBar()
         }
     }
     override fun stop() = onMain {
         val wasPlaying = current != null
         savePosition()
-        current = null; snapshot = PlayerState(); releasePlayer()
+        current = null; snapshot = PlayerState(); releasePlayer(); reopen = null; extras.forget(); bar.hideNow()
         if (wasPlaying || libScreen?.visible == true) afterPlayback() else showIdle()
     }
     override fun state(): PlayerState = snapshot
+
+    override fun tracks(): PlayerTracks? = runCatching {
+        onMain { val p = mp; if (p == null || current == null) null else extras.read(p, playerSpu, currentSize, snapshot.durMs) }
+    }.getOrNull()
+
+    override fun command(c: PlayerCommand): Boolean = onMain {
+        val p = mp
+        if (p == null || current == null) false else outcome(extras.apply(p, playerSpu, c) { d -> server?.playlistStep(d) == true }, c)
+    }
+
+    override fun subtitleFile(file: File): Boolean = onMain {
+        val p = mp
+        if (p == null || current == null) false else outcome(extras.subtitleFile(p, playerSpu, file), PlayerCommand.SubFile(file.name))
+    }
+
+    /** Applies what a setting change needs: nothing more, or re-opening the file at the same position (subtitles, decoder). */
+    private fun outcome(r: PlayerExtras.Result, c: PlayerCommand): Boolean = when (r) {
+        PlayerExtras.Result.Failed -> false
+        PlayerExtras.Result.Done -> { flash(describe(c)); true }
+        PlayerExtras.Result.Reopen -> {
+            val pos = mp?.time ?: snapshot.posMs
+            val again = reopen
+            if (again == null) false else { releasePlayer(); again(pos); flash(describe(c)); true }
+        }
+    }
+
+    private fun describe(c: PlayerCommand): String = when (c) {
+        is PlayerCommand.Audio -> "Piste audio changée"
+        is PlayerCommand.Subtitle -> if (c.id < 0) "Sous-titres désactivés" else "Sous-titres activés"
+        is PlayerCommand.SubFile -> "Sous-titres : ${c.name}"
+        is PlayerCommand.SubDelay -> "Décalage des sous-titres : ${PlayerParams.delayLabel(c.ms)}"
+        is PlayerCommand.AudioDelay -> "Décalage audio : ${PlayerParams.delayLabel(c.ms)}"
+        is PlayerCommand.SubScale -> "Taille des sous-titres : ${c.percent} %"
+        is PlayerCommand.Rate -> "Vitesse : ${PlayerParams.rateLabel(c.rate)}"
+        is PlayerCommand.Aspect -> "Format d'image : ${PlayerParams.aspectLabel(c.mode)}"
+        is PlayerCommand.Chapter, is PlayerCommand.ChapterStep -> "Chapitre ${(mp?.chapter ?: 0) + 1}"
+        is PlayerCommand.Title -> "Titre ${c.index + 1}"
+        is PlayerCommand.Hw -> "Décodage : ${PlayerParams.hwLabel(c.mode)}"
+        is PlayerCommand.Eq -> if (c.preset < 0) "Égaliseur désactivé" else "Égaliseur : ${runCatching { MediaPlayer.Equalizer.getPresetName(c.preset) }.getOrDefault("")}"
+    }
+
+    private fun showBar(extra: String = "") {
+        val n = current?.name ?: return
+        val s = snapshot
+        val prog = streamingName?.let { server?.progress(it) }
+        val reach = if (prog != null && prog.first < prog.second) Progressive.reachableMs(s.durMs, prog.first, prog.second) else -1
+        bar.show(n, mp?.time ?: s.posMs, s.durMs, extra, reach)
+    }
+
+    private fun infoText(): String {
+        val t = tracks() ?: return "Rien en lecture."
+        val v = t.video
+        return buildString {
+            append("Fichier : ${current?.name}\n")
+            v?.let {
+                append("Vidéo : ${it.codec}, ${it.width}x${it.height}")
+                if (it.fps > 0) append(String.format(java.util.Locale.ROOT, ", %.2f i/s", it.fps))
+                if (it.bitrateBps > 0) append(", ${it.bitrateBps / 1000} kbit/s")
+                append("\nDécodage : ${it.decoder}\n")
+            }
+            t.audioCodec?.let { append("Audio : $it\n") }
+            append("Pistes audio : ${t.audio.size}, sous-titres : ${t.subtitles.count { it.id >= 0 } + t.subtitleFiles.size}\n")
+            if (t.chapters.isNotEmpty()) append("Chapitres : ${t.chapters.size}\n")
+            append("Vitesse : ${PlayerParams.rateLabel(t.rate)}   Format : ${PlayerParams.aspectLabel(t.aspect)}\n")
+            append("Mémoire de l'app : ${android.os.Debug.getPss() / 1024} Mo")
+        }
+    }
+
+    private fun panelApi() = object : PlayerPanel.Api {
+        override fun tracks() = this@PlayerActivity.tracks()
+        override fun command(c: PlayerCommand) = this@PlayerActivity.command(c)
+        override fun general() = showMenu()
+        override fun repeat(mode: String) = castbridge.core.tv.Playlist.Repeat.of(mode)?.let { server?.setRepeat(it) } == true
+        override fun info() = infoText()
+        override fun flash(msg: String) = this@PlayerActivity.flash(msg)
+    }
+
+    /** Cycles through the tracks of one kind (remote keys AUDIO / SUBTITLE). */
+    private fun cycle(audio: Boolean) {
+        val t = tracks() ?: return
+        if (audio) {
+            if (t.audio.size < 2) { flash("Une seule piste audio"); return }
+            val i = (t.audio.indexOfFirst { it.id == t.audioId } + 1) % t.audio.size
+            command(PlayerCommand.Audio(t.audio[i].id)); flash("Audio : ${t.audio[i].name}")
+        } else {
+            val all: List<Pair<String, PlayerCommand>> = t.subtitles.map { it.name to PlayerCommand.Subtitle(it.id) } +
+                t.subtitleFiles.map { "Fichier : $it" to PlayerCommand.SubFile(it) }
+            if (all.size < 2) { flash("Aucun sous-titre"); return }
+            val cur = t.subtitles.indexOfFirst { it.id == t.subtitleId }.coerceAtLeast(0)
+            val (label, cmd) = all[(cur + 1) % all.size]
+            command(cmd); flash("Sous-titres : $label")
+        }
+    }
 
     // ---- Device (called from HTTP threads; only public, permission-free APIs) ----
 
@@ -657,9 +796,14 @@ class PlayerActivity : Activity(), Player, Device {
             if (libScreen?.visible == true && keyCode == KeyEvent.KEYCODE_BACK) { showIdle(); return true }
             if (libScreen?.visible != true && keyCode in LIBRARY_KEYS) { showLibrary(); return true }
         }
-        if (keyCode == KeyEvent.KEYCODE_MENU) { showMenu(); return true }
+        if (keyCode == KeyEvent.KEYCODE_MENU) { if (current != null && mp != null) panel.show() else showMenu(); return true }
         if (current == null) return super.onKeyDown(keyCode, event)
         when (keyCode) {
+            KeyEvent.KEYCODE_INFO -> { showBar(); AlertDialog.Builder(this).setTitle("Informations").setMessage(infoText()).setPositiveButton("Fermer", null).show() }
+            KeyEvent.KEYCODE_CAPTIONS -> cycle(audio = false)
+            KeyEvent.KEYCODE_MEDIA_AUDIO_TRACK -> cycle(audio = true)
+            KeyEvent.KEYCODE_MEDIA_NEXT, KeyEvent.KEYCODE_CHANNEL_UP -> if (!command(PlayerCommand.ChapterStep(1))) flash("Pas de chapitre ni de fichier suivant")
+            KeyEvent.KEYCODE_MEDIA_PREVIOUS, KeyEvent.KEYCODE_CHANNEL_DOWN -> if (!command(PlayerCommand.ChapterStep(-1))) flash("Pas de chapitre ni de fichier précédent")
             KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE ->
                 if (mp?.isPlaying == true) pause() else resume()
             KeyEvent.KEYCODE_MEDIA_PLAY -> resume()

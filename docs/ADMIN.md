@@ -61,6 +61,10 @@ Les noms de fichiers sont sans `/`, `\`, ni `.part` final, 200 caractères max. 
 | `GET /api/library` | bibliothèque : fichiers finis, plus récents d'abord, avec métadonnées | `{"files":[{"name","title","size","mtime","volume","volumeLabel","kind","type":"video\|audio\|other","durationMs","resumeMs","watched","playedAt","hasThumb","duplicate","playing"}],"count"}` |
 | `GET /api/thumb?name=[&volume=]` | miniature JPEG (~320 px) ; la première demande lance sa fabrication | `200` image, `202` pas encore prête (redemander plus tard), `404` impossible (pas une vidéo, fichier illisible) |
 | `POST /api/library/watched?name=&watched=1\|0` | marque vu / non vu (efface la position de reprise) | comme `library` |
+| `GET /api/player/tracks` | pistes et réglages de la lecture en cours | `{"playing":true,"audio":[{"id","name"}],"audioId","subtitles":[...],"subtitleId","subtitleFiles":[noms],"subDelayMs","audioDelayMs","subScale","rate","aspect","aspects","chapters":[{"name","timeMs"}],"chapter","titles","title","hw","video":{"codec","width","height","fps","bitrate","decoder"},"audioCodec","eqPreset","eqPresets","repeat","queue","queueIndex"}` ou `{"playing":false}` |
+| `POST /api/player/audio?id=` · `/subtitle?id=` (`-1` = désactivés) ou `?file=<nom>` · `/subdelay?ms=\|delta=` · `/audiodelay?ms=\|delta=` (pas de 50 ms, ±30 s max) · `/subsize?value=25..400` (%) · `/rate?value=0.5..2` · `/aspect?value=auto\|16:9\|4:3\|fill\|crop` · `/chapter?index=\|delta=±1` · `/title?index=` · `/hw?value=auto\|on\|off` · `/eq?preset=-1..N` | réglages du lecteur (mémorisés par fichier) | comme `tracks` ; `409` rien en lecture ou impossible, `400` valeur invalide |
+| `POST /api/player/subfile?name=` | active un fichier de sous-titres **stocké sur la TV** (envoyé comme un fichier ordinaire) | comme `tracks` |
+| `POST /api/playlist?names=a.mp4/b.mkv&start=0&repeat=off\|all\|one` · `/api/player/next` · `/api/player/prev` · `/api/player/repeat?value=` | lecture à la suite (noms séparés par `/`), fichier suivant/précédent, répétition | comme `info` (`playlist` : `{"items","index","repeat"}`) |
 | `GET /api/usb` | état de l'import USB et volumes détectés | `{"running","message","volumes":[chemins]}` |
 | `POST /api/usb/import` | copie les vidéos des clés détectées (dossier de l'app sur la clé) | comme `usb` |
 
@@ -97,6 +101,28 @@ Les noms de fichiers sont sans `/`, `\`, ni `.part` final, 200 caractères max. 
 - **TV -> téléphone** : « Télécharger sur le téléphone » (bibliothèque) ou liste « De la TV vers le téléphone » : `GET /stream/<nom>` avec `Range: bytes=<déjà reçu>-`,
   reprise automatique après coupure (et au prochain lancement du même fichier), service de premier plan, enregistrement dans **Téléchargements/CastBridge**
   (MediaStore, masqué aux autres apps tant qu'il n'est pas complet ; dossier de l'app sur Android 8-9) ou dans un **dossier choisi** (SAF). Débit instantané/moyen.
+
+### Lecteur (libVLC) : pistes, sous-titres, décalages, vitesse, format, chapitres
+
+- **Sur la TV**, pendant la lecture : **MENU** ouvre « Réglages de lecture » (listes au D-pad) : piste audio, sous-titres (pistes du fichier, fichiers `.srt/.ass/.ssa/.vtt/.sub`
+  du même nom à côté de la vidéo, ex. `Film.srt`, `Film.fr.srt`), décalage des sous-titres et de l'audio (±50 ms / ±500 ms, remise à 0), taille des sous-titres, vitesse
+  0,5x à 2x, format d'image (auto, 16:9, 4:3, remplir, rogner), chapitres et titres, liste de lecture et répétition, égaliseur (préréglages libVLC), décodage
+  (automatique = MediaCodec avec repli logiciel de libVLC, matériel forcé, logiciel), informations techniques (codec, définition, images/s, débit, décodage, audio),
+  puis « Options générales ». Touches : OK/lecture-pause, gauche/droite ±10 s, haut/bas ±60 s (inchangés), **INFO** = infos, **SOUS-TITRES** et **AUDIO** = piste
+  suivante, **SUIVANT/PRÉCÉDENT** ou **CHAÎNE +/-** = chapitre (ou fichier de la liste). Barre de progression en bas (titre, position, durée, temps restant, part déjà
+  reçue pendant un envoi) après chaque saut ou pause, masquée après 4 s.
+- **Téléphone** : écran « en lecture » > « Réglages » (mêmes réglages, + « Ajouter depuis le téléphone » pour envoyer un fichier de sous-titres et l'activer).
+- **Mémorisation par fichier** (`PlayerPrefs`, dans `library.db`) : piste audio, sous-titres (piste ou fichier), décalages, taille, vitesse, format ; réappliqués à
+  l'ouverture suivante du même fichier (nom + taille).
+- **Mémoire (TV 32 bits)** : le moteur de sous-titres de libVLC reste désactivé (`--no-spu`) sauf pour un fichier qui en a besoin (choix mémorisé, fichier de
+  sous-titres à côté, ou sous-titre choisi) : le lecteur est alors recréé avec lui **à la même position**. Le lecteur reste paresseux (créé au `play`, libéré à l'arrêt,
+  à la fin, sur `onTrimMemory`). Changer la taille des sous-titres ou le décodage recrée aussi le lecteur (libVLC 3 ne les change pas à chaud).
+- **Décodage** : « automatique » demande MediaCodec et laisse libVLC basculer seul en logiciel s'il refuse le format ; si la lecture échoue quand même (matériel forcé,
+  ou erreur), **un** nouvel essai est fait en logiciel à la même position. L'API Java de libVLC 3 ne dit pas quel décodeur a réellement été retenu : les infos
+  techniques indiquent le mode demandé.
+- **Listes de lecture** : bibliothèque TV > MENU sur une carte > « Lire la section à la suite », ou `POST /api/playlist`. Répétition : non / toute la liste / ce fichier.
+- **Non livré** : miniature d'aperçu pendant l'avance rapide (il faudrait un second décodeur en parallèle : exclu sur cette TV) ; contrôle des réglages de lecture depuis
+  la page web (l'API est prête).
 
 ### Bibliothèque (TV, téléphone, page web)
 

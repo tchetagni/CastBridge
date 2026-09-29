@@ -17,6 +17,12 @@ interface Player {
     fun seek(posMs: Long)
     fun stop()
     fun state(): PlayerState
+    /** Tracks, delays, chapters... of what is playing; null when nothing plays or the player cannot tell. */
+    fun tracks(): PlayerTracks? = null
+    /** Applies a setting (audio track, subtitles, delays, speed...); false = not possible now (nothing playing, no such track). */
+    fun command(c: PlayerCommand): Boolean = false
+    /** Plays an external subtitle file (a real file next to the video) with the current video. */
+    fun subtitleFile(file: File): Boolean = false
 }
 
 data class PlayerState(val state: String = "idle", val name: String? = null, val posMs: Long = 0, val durMs: Long = 0)
@@ -64,6 +70,8 @@ class ReceiverServer(
     private val meters = java.util.concurrent.ConcurrentHashMap<String, RateMeter>()
     @Volatile private var moveJob: MoveJob? = null
     @Volatile private var playingVolume: String? = null
+    /** "Play one after the other" (library section, selection); null = single file. */
+    @Volatile private var playlist: Playlist? = null
 
     fun streamUrl(name: String) = "http://127.0.0.1:$listeningPort/stream/${java.net.URLEncoder.encode(name, "UTF-8").replace("+", "%20")}?t=$streamToken"
 
@@ -126,8 +134,53 @@ class ReceiverServer(
         runCatching { Storage.cleanOrphans(st.dir, age) }
     }
 
-    /** Called by the app when a file played to the end: honours the "delete after play" setting. */
-    fun onPlaybackEnded(name: String) {
+    /**
+     * Called by the app when a file played to the end: honours the "delete after play" setting, then starts the next item of
+     * the playlist if there is one. Returns true when something new started playing (the app then keeps the video screen).
+     */
+    fun onPlaybackEnded(name: String): Boolean {
+        deleteAfterPlay(name)
+        val pl = playlist ?: return false
+        if (pl.current != name && !pl.contains(name)) { playlist = null; return false }
+        val next = pl.next(auto = true) ?: run { playlist = null; return false }
+        return runCatching { startPlaying(next, 0) }.getOrDefault(false)
+    }
+
+    /** Plays [name] (finished file, or one still arriving) from [pos]; false if it does not exist. */
+    private fun startPlaying(name: String, pos: Long): Boolean {
+        val hit = findFinal(name) ?: return false
+        playingVolume = hit.v.id
+        val f = hit.file
+        if (f != null) { Storage.markPlayed(f.parentFile, f.name); player.play(f, pos) } else player.playSaf(hit.name, hit.size, pos)
+        return true
+    }
+
+    /** Next / previous item of the playlist (remote keys, phone); false if there is none. */
+    fun playlistStep(delta: Int): Boolean {
+        val pl = playlist ?: return false
+        val n = (if (delta >= 0) pl.next(auto = false) else pl.previous()) ?: return false
+        return startPlaying(n, 0)
+    }
+
+    /** Starts "one after the other" over [names] (stored files) from [start]. The TV's library uses it for a section. */
+    fun playAll(names: List<String>, start: Int = 0, repeat: Playlist.Repeat = Playlist.Repeat.OFF): Boolean {
+        val ok = names.mapNotNull { safeName(it) }.filter { findFinal(it) != null }.distinct()
+        if (ok.isEmpty()) return false
+        val first = names.getOrNull(start)?.let { ok.indexOf(it) }?.takeIf { it >= 0 } ?: 0
+        val pl = Playlist(ok, first, repeat)
+        playlist = pl
+        return startPlaying(pl.current!!, 0)
+    }
+
+    /** Repeat mode of the running playlist; false when there is none. */
+    fun setRepeat(r: Playlist.Repeat): Boolean { val pl = playlist ?: return false; pl.repeat = r; return true }
+
+    private fun playlistJson(): String {
+        val pl = playlist ?: return "null"
+        return """{"items":${strs(pl.items)},"index":${pl.index},"repeat":${q(pl.repeat.label)}}"""
+    }
+
+    private fun deleteAfterPlay(name: String) {
         if (!cfg.deleteAfterPlay) return
         val n = safeName(name) ?: return
         val hits = finals(n)
@@ -176,10 +229,37 @@ class ReceiverServer(
             }
             path == "/api/sysinfo" -> sysinfo()
             path == "/api/library" && s.method == Method.GET -> ok(libraryJson())
+            path == "/api/player/tracks" && s.method == Method.GET -> ok(tracksJson())
             path == "/api/thumb" && s.method == Method.GET -> named(p) { thumb(it, p["volume"]) }
             ext != null -> json(status(ext.status), ext.json)
             s.method != Method.POST -> json(Response.Status.METHOD_NOT_ALLOWED, """{"error":"use POST"}""")
             path == "/api/library/watched" -> named(p) { setWatched(it, p["watched"] != "0" && p["watched"] != "false") }
+            path == "/api/playlist" -> {
+                // names separated by "/" (a character file names cannot contain), like /api/apk/install
+                val names = p["names"].orEmpty().split('/').filter { it.isNotEmpty() }
+                val rep = Playlist.Repeat.of(p["repeat"] ?: "off") ?: return bad("repeat must be off, all or one")
+                if (names.isEmpty() || names.any { safeName(it) == null }) return bad("names required")
+                if (!playAll(names, p["start"]?.toIntOrNull() ?: 0, rep)) return json(Response.Status.NOT_FOUND, """{"error":"not found"}""")
+                ok(info())
+            }
+            path == "/api/player/next" || path == "/api/player/prev" ->
+                if (playlistStep(if (path.endsWith("next")) 1 else -1)) ok(info()) else json(Response.Status.CONFLICT, """{"error":"no playlist"}""")
+            path == "/api/player/repeat" -> {
+                val rep = Playlist.Repeat.of(p["value"]) ?: return bad("value must be off, all or one")
+                if (!setRepeat(rep)) return json(Response.Status.CONFLICT, """{"error":"no playlist"}""")
+                ok(info())
+            }
+            path == "/api/player/subfile" -> named(p) { sub ->
+                if (!SubtitleFinder.isSubtitle(sub)) return@named bad("not a subtitle file")
+                val f = findFinal(sub)?.file ?: return@named json(Response.Status.NOT_FOUND, """{"error":"not found"}""")
+                if (player.subtitleFile(f)) ok(tracksJson()) else json(Response.Status.CONFLICT, """{"error":"not playing"}""")
+            }
+            path.startsWith("/api/player/") -> {
+                val cur = player.tracks() ?: return json(Response.Status.CONFLICT, """{"error":"not playing"}""")
+                val cmd = PlayerParams.command(path.removePrefix("/api/player/"), p, cur)
+                    ?: return if (path.removePrefix("/api/player/") in PLAYER_ROUTES) bad("bad value") else json(Response.Status.NOT_FOUND, """{"error":"not found"}""")
+                if (player.command(cmd)) ok(tracksJson()) else json(Response.Status.CONFLICT, """{"error":"not possible now"}""")
+            }
             path == "/api/storage/target" -> setTarget(p["value"].orEmpty())
             path == "/api/storage/move" -> named(p) { startMove(it, p["to"].orEmpty()) }
             path == "/api/storage/move/cancel" -> { moveJob?.let { if (it.state == "running") it.cancelled = true }; ok(storageJson()) }
@@ -243,6 +323,7 @@ class ReceiverServer(
             }
             path == "/api/play" -> named(p) { name ->
                 if (moving(name)) return@named json(Response.Status.CONFLICT, """{"error":"moving"}""")
+                playlist = null
                 val pos = p["pos"]?.toLongOrNull() ?: 0
                 val hit = findFinal(name)
                 if (hit != null) {
@@ -255,7 +336,7 @@ class ReceiverServer(
             }
             path == "/api/pause" -> { player.pause(); ok(info()) }
             path == "/api/resume" -> { player.resume(); ok(info()) }
-            path == "/api/stop" -> { player.stop(); ok(info()) }
+            path == "/api/stop" -> { playlist = null; player.stop(); ok(info()) }
             path == "/api/seek" -> { player.seek(p["pos"]?.toLongOrNull() ?: 0); ok(info()) }
             else -> json(Response.Status.NOT_FOUND, """{"error":"not found"}""")
         }
@@ -521,7 +602,7 @@ class ReceiverServer(
         val used = pv?.let { l.used[it.id] } ?: 0
         val quota = pv?.let { quotaOf(it, used) } ?: 0
         return """{"files":${l.filesJson},"free":$free,"used":$used,"quota":$quota,"target":${q(cfg.target)},"volumes":${volumesJson(l)},""" +
-            """"player":{"state":${q(ps.state)},"name":${ps.name?.let(::q) ?: "null"},"pos":${ps.posMs},"dur":${ps.durMs}}}"""
+            """"player":{"state":${q(ps.state)},"name":${ps.name?.let(::q) ?: "null"},"pos":${ps.posMs},"dur":${ps.durMs}},"playlist":${playlistJson()}}"""
     }
 
     private fun volumesJson(l: Listing = listing()): String {
@@ -850,6 +931,14 @@ class ReceiverServer(
 
     private fun sysinfo(): Response = withDevice { d -> ok(d.sysinfo().toJson(d.volume())) }
 
+    /** GET /api/player/tracks: the player's own state plus the playlist the server keeps. */
+    private fun tracksJson(): String {
+        val t = player.tracks() ?: return """{"playing":false}"""
+        val pl = playlist
+        return t.copy(repeat = pl?.repeat?.label ?: "off", queue = pl?.items.orEmpty(), queueIndex = pl?.index ?: -1).toJson()
+            .replaceFirst("{", "{\"playing\":true,")
+    }
+
     private inline fun withDevice(f: (Device) -> Response): Response =
         device?.let(f) ?: json(NOT_IMPLEMENTED, """{"error":"device actions not supported on this device"}""")
 
@@ -873,6 +962,7 @@ class ReceiverServer(
                 ?: "<!doctype html><meta charset=utf-8><title>CastBridge TV</title><h1>CastBridge TV</h1><p>Page d'administration indisponible.</p>"
         }
         const val SERVICE_TYPE = "_castbridge._tcp."
+        private val PLAYER_ROUTES = setOf("audio", "subtitle", "subdelay", "audiodelay", "subsize", "rate", "aspect", "chapter", "title", "hw", "eq")
         private val LOCK_ROOT = File("/castbridge-locks")      // never touched on disk: only a namespace for per-name locks
         private val NOT_IMPLEMENTED = Response.Status.NOT_IMPLEMENTED
         private val SERVICE_UNAVAILABLE = object : Response.IStatus {
