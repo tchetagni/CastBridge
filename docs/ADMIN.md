@@ -158,7 +158,7 @@ Les noms de fichiers sont sans `/`, `\`, ni `.part` final, 200 caractères max. 
 
 ### Écran d'accueil (TV) et accueil du téléphone
 
-- **TV, accueil façon « lanceur média »** : fond flouté (GPU, `RenderEffect`, Android 12+) tiré de la miniature de la vidéo sélectionnée, qui dérive lentement ;
+- **TV, accueil façon « lanceur média »** : fond flouté tiré de la miniature de la vidéo sélectionnée (réduite une fois à 48x27 px puis étirée : flou sans calcul par image), qui dérive lentement ;
   horloge ; petit bandeau « ● Prêt à recevoir · code 83•••• » (OK dessus : code complet pendant 10 s ; pendant un envoi : « Réception de Film : 45 % ») ; rangées
   « Reprendre », « Récemment ajoutés », « Sur la clé USB », « Toutes les vidéos », « Autres fichiers », puis tuiles « Toute la bibliothèque », « Connexion &
   réglages », « Aide ». La carte qui a le focus grossit avec un halo bleu et le texte au-dessus des rangées la décrit (reprendre à…, durée, clé ou TV). Fondus entre
@@ -166,7 +166,7 @@ Les noms de fichiers sont sans `/`, `\`, ni `.part` final, 200 caractères max. 
 - **Plus de jargon sur l'écran principal** : adresse IP, port, PIN complet, SSH, Bluetooth, Wi-Fi Direct, stockage sont dans **MENU > Connexion & réglages** (infos
   en langage courant à gauche, toutes les options à droite). Messages en bandeau animé : « Vidéo reçue ✓ », « Clé USB branchée : 57 Go libres », « Clé USB retirée… ».
 - **Lecteur** : barre fine de progression, titre, temps écoulé / total / restant, sur un dégradé, qui se masque seule après 4 s.
-- **Mémoire** : pas de vidéo en fond ; le fond est la miniature de 320 px déjà en cache (flou calculé par le GPU, rien de plus en RAM) ; une rangée = une
+- **Mémoire** : pas de vidéo en fond ; le fond est la miniature déjà en cache, réduite une fois (quelques ko) ; une rangée = une
   `RecyclerView` ; bitmaps RGB_565, 4 Mo au plus.
 - **Téléphone, onglet CastBridge TV** : accueil par tâches : « Envoyer une vidéo », « Regarder sur la TV » (télécommande si une vidéo joue, sinon la bibliothèque),
   « Bibliothèque de la TV », « Échanger des fichiers » ; carte « Sur la TV » (lecture en cours) ; rangée « Reprendre sur la TV » ; progression d'envoi en grand avec
@@ -192,7 +192,7 @@ Les noms de fichiers sont sans `/`, `\`, ni `.part` final, 200 caractères max. 
 - **Téléphone** : onglet CastBridge TV > Wi-Fi > « Bibliothèque de la TV » : mêmes sections et actions (toucher = lire, appui long = actions), miniatures chargées à la
   demande, cache mémoire borné à 8 Mo. **Page web** : section « Bibliothèque » en grille.
 - Choix techniques : l'écran TV est en vues Android classiques + une `RecyclerView` (seules les cartes visibles existent). Compose aurait ajouté plusieurs Mo à l'APK et
-  une consommation de RAM plus élevée au repos pour une TV à ~330 Mo de RAM disponible ; `androidx.recyclerview` ajoute environ 0,4 Mo (voir le rapport de la branche).
+  une consommation de RAM plus élevée au repos pour une TV à ~330 Mo de RAM disponible ; mesuré : APK armeabi-v7a release (R8) 40,76 -> 40,91 Mo pour toute la version 0.5 (+0,16 Mo, `androidx.recyclerview` compris), debug 42,77 -> 43,64 Mo.
 
 ### Lire pendant l'envoi
 

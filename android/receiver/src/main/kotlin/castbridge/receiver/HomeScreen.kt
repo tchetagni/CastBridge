@@ -3,8 +3,6 @@ package castbridge.receiver
 import android.app.Activity
 import android.graphics.Bitmap
 import android.graphics.Color
-import android.graphics.RenderEffect
-import android.graphics.Shader
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
@@ -38,8 +36,9 @@ import java.util.concurrent.Executors
  * card zooms with a blue halo, the hero text above the rows describes it. No technical wording here: IP, PIN, SSH,
  * Bluetooth and storage details live in "Connexion & réglages" (MENU).
  *
- * Memory: the background is the card's own 320 px thumbnail, blurred by the GPU (RenderEffect, API 31+) or simply
- * stretched (soft) before; one row of cards = one RecyclerView (only visible cards exist).
+ * Memory and GPU: the background is the card's own 320 px thumbnail shrunk once to 48x27 pixels on the CPU (a few kB) and
+ * stretched by the view with bilinear filtering, which blurs it for free; no per-frame blur effect (the slow zoom only
+ * transforms a static image). One row of cards = one RecyclerView (only visible cards exist).
  */
 class HomeScreen(private val act: Activity, private val container: FrameLayout, private val thumbs: TvThumbs, private val api: Api) {
     interface Api {
@@ -76,7 +75,6 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
     init {
         val root = FrameLayout(act).apply { setBackgroundColor(TvStyle.BG) }
         root.addView(bg, FrameLayout.LayoutParams(-1, -1))
-        if (Build.VERSION.SDK_INT >= 31) bg.setRenderEffect(RenderEffect.createBlurEffect(40f, 40f, Shader.TileMode.CLAMP))
         // Legibility: dark from the left and from the bottom, over the picture.
         root.addView(View(act).apply { background = GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, intArrayOf(0xF00E1116.toInt(), 0x800E1116.toInt(), 0x300E1116)) }, FrameLayout.LayoutParams(-1, -1))
         root.addView(View(act).apply { background = GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, intArrayOf(0x000E1116, 0xC00E1116.toInt(), 0xFF0E1116.toInt())) }, FrameLayout.LayoutParams(-1, -1))
@@ -199,9 +197,16 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
     }
 
     private fun crossfade(b: Bitmap) {
+        val soft = blurred(b)
         bg.animate().cancel()
-        bg.animate().alpha(0.15f).setDuration(150).withEndAction { bg.setImageBitmap(b); bg.animate().alpha(0.5f).setDuration(350).start() }.start()
+        bg.animate().alpha(0.15f).setDuration(150).withEndAction { bg.setImageBitmap(soft); bg.animate().alpha(0.5f).setDuration(350).start() }.start()
     }
+
+    /** Blur computed once: shrink twice with filtering; the full-screen view stretches the tiny result smoothly. */
+    private fun blurred(b: Bitmap): Bitmap = runCatching {
+        val a = Bitmap.createScaledBitmap(b, 96, 54, true)
+        Bitmap.createScaledBitmap(a, 48, 27, true).also { if (it !== a) a.recycle() }
+    }.getOrDefault(b)
 
     private inner class RowAdapter(val title: String) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private var list: List<LibraryItem> = emptyList()
