@@ -36,6 +36,23 @@ class BtServer(
 
     fun adapter(): BluetoothAdapter? = ctx.getSystemService(BluetoothManager::class.java)?.adapter
 
+    val isRunning get() = running
+
+    /** State for GET /api/bluetooth: lets a phone or an agent see why a transfer cannot happen. */
+    fun stateJson(serverStatus: String?): String {
+        val q = castbridge.core.tv.ReceiverServer::q
+        val ad = adapter()
+        val perm = hasPermission()
+        val enabled = runCatching { ad?.isEnabled == true }.getOrDefault(false)
+        val name = if (perm) runCatching { ad?.name }.getOrNull() else null
+        val scan = if (perm) runCatching { ad?.scanMode }.getOrNull() else null
+        val bonded = if (perm && enabled) runCatching { ad?.bondedDevices.orEmpty().map { (it.name ?: "?") to it.address } }.getOrDefault(emptyList()) else emptyList()
+        return "{\"available\":${ad != null},\"permission\":$perm,\"enabled\":$enabled,\"name\":${name?.let(q) ?: "null"}," +
+            "\"discoverable\":${scan == BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE},\"listening\":$running," +
+            "\"status\":${serverStatus?.let(q) ?: "null"},\"bonded\":[" +
+            bonded.joinToString(",") { (n, a) -> "{\"name\":${q(n)},\"address\":${q(a)}}" } + "]}"
+    }
+
     @Synchronized fun start() {
         if (running) return
         val ad = adapter()

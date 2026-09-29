@@ -410,6 +410,14 @@ class PlayerActivity : Activity(), Player, Device {
         path == "/api/update" && method == "GET" -> updater?.let { ApiReply(200, it.infoJson()) }
         path == "/api/update/install" && method == "POST" ->
             updater?.install(listOf(params["name"].orEmpty()), params["force"] == "1")
+        path == "/api/bluetooth" && method == "GET" -> bt?.let { ApiReply(200, it.stateJson(statuses["1-bt"])) }
+        // Asks Android to make the TV visible for 2 min (the TV shows its own confirmation), and starts the receiver if needed.
+        path == "/api/bluetooth/discoverable" && method == "POST" -> {
+            main.post {
+                if (bt?.hasPermission() != true) requestRuntimePermissions() else { bt?.start(); makeDiscoverable() }
+            }
+            ApiReply(202, """{"message":"Demande envoyée : acceptez-la sur l'écran de la TV"}""")
+        }
         path == "/api/devsettings" && method == "POST" -> {
             var msg = ""
             val done = CountDownLatch(1)
