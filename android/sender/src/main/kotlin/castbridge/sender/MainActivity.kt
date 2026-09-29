@@ -48,10 +48,11 @@ class MainActivity : ComponentActivity() {
                     TabRow(selectedTabIndex = tab, containerColor = MaterialTheme.colorScheme.surface) {
                         Tab(tab == 0, onClick = { tab = 0 }, text = { Text("TV DLNA") })
                         Tab(tab == 1, onClick = { tab = 1 }, text = { Text("CastBridge TV") })
+                        Tab(tab == 2, onClick = { tab = 2 }, text = { Text("Quiz") })
                     }
                 }
             },
-        ) { pad -> Box(Modifier.padding(pad).fillMaxSize()) { if (tab == 0) App() else TvHub() } }
+        ) { pad -> Box(Modifier.padding(pad).fillMaxSize()) { when (tab) { 0 -> App(); 1 -> TvHub(); else -> QuizScreen() } } }
     }
 
     private fun startServer() {
