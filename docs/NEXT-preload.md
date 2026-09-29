@@ -34,3 +34,21 @@ réceptrice **CastBridge TV** (module `android/receiver`), cible = Android TV / 
   « DLNA-Player-MediaCenter » (Amlogic, `192.168.0.117`).
 - Compilation locale : Gradle 8.14.3 déjà installé dans `~/.gradle` (pas de wrapper dans le dépôt, ne pas en ajouter),
   SDK dans `~/Library/Android/sdk`. Ne jamais laisser de dossiers `build/` dans le dossier OneDrive.
+
+## Implémenté (session cloud, 29 sept.)
+- `core/tv/ReceiverServer.kt` : API ci-dessus (NanoHTTPD, JSON UTF-8). Un upload refusé (409, 400, 507) ferme la
+  connexion : sinon le corps non lu corrompt la requête suivante en keep-alive (bug trouvé par les tests).
+- `core/tv/TvClient.kt` : client + `ResumableUpload` (backoff ≤ 5 s, re-résolution, reprise à `/api/part`).
+  Testé de bout en bout sur JVM (`ReceiverTest`) : coupure simulée à 1 Mo, reprise, fichier identique, lecture.
+- `receiver/` : `PlayerActivity` (libVLC 3.6.5, télécommande OK/←/→ ±10 s, ↑/↓ ±60 s, Retour = stop),
+  annonce mDNS `role=receiver`, écran d'attente avec l'IP. Splits ABI armeabi-v7a + arm64-v8a.
+- `sender/` : onglet « CastBridge TV » (`TvScreen.kt`), `TvDiscovery.kt` (NSD sérialisé), `UploadService.kt`
+  (foreground dataSync, relance la découverte à chaque changement de réseau, lecture auto à la fin).
+- Tests core sans le plugin Android : un settings Gradle qui n'inclut que `:core` (Google Maven inaccessible
+  depuis le cloud). La CI GitHub compile tout (`assembleDebug`) et publie les APK en artefact.
+
+## À vérifier sur appareil
+1. La box voit l'écran d'attente avec son IP ; le téléphone la liste dans l'onglet (sinon : IP manuelle).
+2. Envoi d'un film de 1–2 Go ; couper le Wi-Fi du téléphone 30 s en plein envoi → reprise automatique.
+3. Fin d'envoi → lecture auto ; puis sortir le téléphone du réseau : la lecture continue.
+4. Télécommande et contrôles du téléphone (pause, ±10 s, curseur, stop, supprimer).
