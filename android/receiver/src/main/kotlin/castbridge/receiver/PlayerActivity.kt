@@ -4,7 +4,10 @@ import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
 import android.bluetooth.BluetoothAdapter
+import android.content.ActivityNotFoundException
+import android.content.BroadcastReceiver
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
@@ -30,6 +33,8 @@ import castbridge.core.tv.Player
 import castbridge.core.tv.SysInfo
 import castbridge.core.tv.PlayerState
 import castbridge.core.tv.ReceiverServer
+import castbridge.core.tv.VolumeKind
+import castbridge.core.tv.VolumeRegistry
 import org.videolan.libvlc.LibVLC
 import org.videolan.libvlc.Media
 import org.videolan.libvlc.MediaPlayer
@@ -64,7 +69,14 @@ class PlayerActivity : Activity(), Player, Device {
     private var ssh: SshControl? = null
     private var updater: UpdateInstaller? = null
     private lateinit var prefs: TvPrefs
-    private lateinit var videosDir: File
+    private lateinit var videosDir: File                    // the internal videos folder (Bluetooth and USB import write here)
+    private lateinit var registry: VolumeRegistry
+    private lateinit var volProvider: AndroidVolumeProvider
+    private var safPfd: android.os.ParcelFileDescriptor? = null   // descriptor of the SAF file being played (libVLC reads it)
+    private var storageReceiver: BroadcastReceiver? = null
+    private var volumeCallback: Any? = null
+    // One background thread for everything that touches a USB drive (scan, write test): never block the UI on a slow drive.
+    private val bg = java.util.concurrent.Executors.newSingleThreadExecutor { r -> Thread(r, "cb-storage").apply { isDaemon = true } }
     private val statuses = java.util.concurrent.ConcurrentHashMap<String, String>()
     private var idleMsg: String? = null
     private var nsd: NsdManager? = null
@@ -81,14 +93,18 @@ class PlayerActivity : Activity(), Player, Device {
         idle = findViewById(R.id.idle)
         osd = findViewById(R.id.osd)
         lead = findViewById(R.id.lead)
-        val dir = (getExternalFilesDir("videos") ?: File(filesDir, "videos")).also { videosDir = it }
         prefs = TvPrefs(this)
+        volProvider = AndroidVolumeProvider(this, prefs)
+        registry = VolumeRegistry(volProvider).also { it.refresh() }      // main thread: fast scan, no speed test
+        val dir = registry.volumes().first().dir.also { videosDir = it }   // internal storage is always first
         pin = prefs.pin()
         guard = PinGuard(pin)
         val profile = prefs.profile()
         logResources(dir, profile)
-        server = ReceiverServer(dir, this, pin = pin, guard = guard, device = this, extension = ApiExtension(::extraApi),
-            profile = profile, onSettings = { prefs.saveProfile(it) }).also {
+        server = ReceiverServer(registry, this, pin = pin, guard = guard, device = this, extension = ApiExtension(::extraApi),
+            profile = profile, onSettings = { prefs.saveProfile(it); updateStorageStatus() },
+            onNotice = { n -> main.post { flash(n) }; setStatus("5-notice", n) },
+            safPicker = ::launchSafPicker, settingsOpener = ::openStorageSettings).also {
             try { it.start(15_000, false) } catch (e: Exception) { Log.e(TAG, "server", e) }
         }
         register()
@@ -96,9 +112,98 @@ class PlayerActivity : Activity(), Player, Device {
         wd = WifiDirectGroup(this, prefs) { setStatus("2-wd", it) }
         usb = UsbImporter(this, dir) { setStatus("3-usb", it) }
         ssh = SshControl(this) { setStatus("4-ssh", it) }
-        updater = UpdateInstaller(this, dir) { m -> setStatus("5-update", m); main.post { flash(m) } }
+        updater = UpdateInstaller(this, { registry.volumes().filter { it.kind != VolumeKind.SAF }.map { it.dir } }) { m -> setStatus("5-update", m); main.post { flash(m) } }
         requestRuntimePermissions()
+        registerStorageEvents()
+        rescanAsync(remeasure = true)                       // speed test of the drive, off the main thread
         showIdle()
+    }
+
+    // ---- Storage volumes: hot plug, SAF folder, settings (docs/STORAGE.md) ----
+
+    /** Re-scans the volumes on the storage thread (mount/unmount broadcast, MENU, periodic safety net) and refreshes the screen line. */
+    private fun rescanAsync(remeasure: Boolean = false) {
+        runCatching { bg.execute { runCatching { server?.storageChanged(remeasure) }; updateStorageStatus() } }
+    }
+
+    private fun updateStorageStatus() {
+        runCatching { bg.execute { val line = runCatching { server?.storageLine() }.getOrNull(); if (line != null) setStatus("0-storage", line) } }
+    }
+
+    private val storageTick = object : Runnable {
+        override fun run() { rescanAsync(); main.postDelayed(this, 15_000) }    // safety net if a broadcast is never delivered (unknown firmware)
+    }
+
+    private fun registerStorageEvents() {
+        val f = IntentFilter().apply {
+            listOf(Intent.ACTION_MEDIA_MOUNTED, Intent.ACTION_MEDIA_UNMOUNTED, Intent.ACTION_MEDIA_EJECT,
+                Intent.ACTION_MEDIA_REMOVED, Intent.ACTION_MEDIA_BAD_REMOVAL).forEach { addAction(it) }
+            addDataScheme("file")
+        }
+        val r = object : BroadcastReceiver() {
+            override fun onReceive(c: Context, i: Intent) {
+                val path = i.data?.path
+                if (i.action != Intent.ACTION_MEDIA_MOUNTED && path != null)
+                    // Gone (or going): stop using it at once, do not wait for the next scan.
+                    registry.volumes().filter { it.kind == VolumeKind.REMOVABLE && it.dir.absolutePath.startsWith(path) }.forEach { registry.markRemoved(it.id) }
+                rescanAsync(remeasure = i.action == Intent.ACTION_MEDIA_MOUNTED)
+            }
+        }
+        runCatching {
+            if (Build.VERSION.SDK_INT >= 33) registerReceiver(r, f, Context.RECEIVER_EXPORTED) else registerReceiver(r, f)
+            storageReceiver = r
+        }.onFailure { Log.w(TAG, "storage receiver: ${it.javaClass.simpleName}") }
+        if (Build.VERSION.SDK_INT >= 30) runCatching {
+            val cb = object : android.os.storage.StorageManager.StorageVolumeCallback() {
+                override fun onStateChanged(volume: android.os.storage.StorageVolume) { rescanAsync() }
+            }
+            getSystemService(android.os.storage.StorageManager::class.java).registerStorageVolumeCallback(mainExecutor, cb)
+            volumeCallback = cb
+        }
+        main.postDelayed(storageTick, 15_000)
+    }
+
+    /** Opens the system folder picker (HTTP threads call it through the server too). Returns what to tell the user. */
+    private fun launchSafPicker(): String = onMain {
+        val i = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE).addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION or
+            Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION or Intent.FLAG_GRANT_PREFIX_URI_PERMISSION)
+        try {
+            startActivityForResult(i, REQ_STORAGE_TREE)
+            "Sélecteur de dossier ouvert sur l'écran de la TV : choisissez le dossier (par exemple sur la clé USB) avec la télécommande, puis validez."
+        } catch (e: ActivityNotFoundException) {
+            "Cette TV n'a pas de sélecteur de fichiers Android : impossible de choisir un dossier. Utilisez le dossier de l'app sur la clé " +
+                "(getExternalFilesDirs, rempli depuis un ordinateur) ou la mémoire interne."
+        } catch (e: Exception) { "Sélecteur indisponible : ${e.message}" }
+    }
+
+    /** Tries the system screens that manage storage, most specific first; null = one opened, else why none did. */
+    private fun openStorageSettings(): String? = onMain {
+        for (action in listOf(android.provider.Settings.ACTION_INTERNAL_STORAGE_SETTINGS, "android.settings.MEMORY_CARD_SETTINGS",
+            android.provider.Settings.ACTION_SETTINGS)) {
+            try { startActivity(Intent(action).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)); return@onMain null } catch (e: Exception) { /* next one */ }
+        }
+        "Aucun écran de réglages de stockage n'a pu être ouvert sur cette TV : ouvrez les réglages à la main, ou branchez la clé sur un ordinateur (docs/STORAGE.md). " +
+            "CastBridge ne peut pas formater une clé lui-même."
+    }
+
+    private fun chooseTarget() {
+        val vols = registry.volumes()
+        val ids = mutableListOf("auto", "internal") + vols.filter { it.kind != VolumeKind.INTERNAL }.map { it.id }
+        val names = mutableListOf("Automatique (clé USB si utilisable, sinon interne)", "Mémoire interne") +
+            vols.filter { it.kind != VolumeKind.INTERNAL }.map { it.label + if (it.kind == VolumeKind.SAF) " (dossier choisi, sans lecture pendant l'envoi)" else "" }
+        AlertDialog.Builder(this).setTitle("Où ranger les nouveaux fichiers ?")
+            .setItems(names.toTypedArray()) { _, i ->
+                val ok = server?.setTargetValue(ids[i]) == true
+                flash(if (ok) "Cible : ${names[i]}" else "Cible refusée"); updateStorageStatus()
+            }.setNegativeButton("Fermer", null).show()
+    }
+
+    private fun forgetSafFolder() {
+        prefs.getString("saf_tree")?.let { u -> runCatching {
+            contentResolver.releasePersistableUriPermission(Uri.parse(u), Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION) } }
+        prefs.putString("saf_tree", null)
+        if (server?.target == "saf") server?.setTargetValue("auto")
+        rescanAsync(); flash("Dossier choisi oublié (les fichiers qu'il contient ne sont pas effacés)")
     }
 
     /** One line of sizes in logcat (no secrets), to follow RAM/flash use on a small TV. */
@@ -166,6 +271,8 @@ class PlayerActivity : Activity(), Player, Device {
 
     private fun leadText(ms: Long) = if (ms >= 90_000) "${ms / 60_000} min" else "${ms / 1000} s"
 
+    private fun closeSafFd() { runCatching { safPfd?.close() }; safPfd = null }
+
     private fun releasePlayer() {
         val p = mp; val lv = libVlc
         mp = null; libVlc = null; streamingName = null
@@ -175,6 +282,7 @@ class PlayerActivity : Activity(), Player, Device {
         runCatching { p?.detachViews() }
         runCatching { p?.release() }
         runCatching { lv?.release() }
+        closeSafFd()
     }
 
     override fun onTrimMemory(level: Int) {
@@ -242,6 +350,11 @@ class PlayerActivity : Activity(), Player, Device {
         items += "USB : importer les vidéos des clés détectées" to { usbMessage(usb?.importFromVolumes()) }
         items += "USB : choisir un dossier de la clé…" to { usbMessage(usb?.launchPicker(REQ_TREE)) }
         if (usb?.isRunning() == true) items += "USB : annuler l'import en cours" to { usb?.cancel() }
+        items += "Stockage : où ranger les nouveaux fichiers (${server?.target ?: "auto"})…" to { chooseTarget() }
+        items += "Stockage : re-détecter la clé (test de vitesse)" to { rescanAsync(remeasure = true); flash("Détection de la clé en cours…") }
+        items += "Stockage : choisir un dossier (sélecteur système)…" to { flash(launchSafPicker()) }
+        if (prefs.getString("saf_tree") != null) items += "Stockage : oublier le dossier choisi" to { forgetSafFolder() }
+        items += "Stockage : ouvrir les réglages de stockage de la TV" to { openStorageSettings()?.let { flash(it) } }
         items += "Options développeur (débogage USB / Wi-Fi)" to { flash(openDevSettings()) }
         items += (if (ssh?.running == true) "SSH : désactiver" else "SSH : activer (administration à distance, clés autorisées seulement)") to {
             val c = ssh
@@ -278,6 +391,17 @@ class PlayerActivity : Activity(), Player, Device {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQ_TREE && resultCode == RESULT_OK) data?.data?.let { usbMessage(usb?.importTree(it)) }
+        if (requestCode == REQ_STORAGE_TREE) {
+            val uri = data?.data
+            if (resultCode != RESULT_OK || uri == null) { flash("Aucun dossier choisi"); return }
+            val ok = runCatching {
+                contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+            }.isSuccess
+            if (!ok) { flash("Ce dossier n'accorde pas d'autorisation durable : choisissez-en un autre"); return }
+            prefs.putString("saf_tree", uri.toString())
+            rescanAsync()
+            flash("Dossier enregistré. Choisissez-le comme cible dans MENU > Stockage (envoi complet avant lecture).")
+        }
     }
 
     /** Extra authenticated API routes (USB import status/trigger). */
@@ -346,9 +470,29 @@ class PlayerActivity : Activity(), Player, Device {
         p.media = m
         m.release()
         p.play()
+        closeSafFd()
         idle.visibility = View.GONE
         snapshot = PlayerState("playing", file.name, posMs, 0)
         flash("▶ ${file.name}")
+    }
+
+    override fun playSaf(name: String, size: Long, posMs: Long) = onMain {
+        val store = volProvider.saf ?: throw IllegalStateException("no folder chosen")
+        val fd = store.openFd(name)                        // the file lives behind a ContentResolver: libVLC reads the descriptor
+        current = File(videosDir, name)                    // only the name is used
+        streamingName = null
+        val p = ensurePlayer()
+        val old = safPfd; safPfd = fd
+        val m = Media(libVlc!!, fd.fileDescriptor)
+        m.setHWDecoderEnabled(true, false)
+        if (posMs > 0) m.addOption(":start-time=${posMs / 1000.0}")
+        p.media = m
+        m.release()
+        p.play()
+        runCatching { old?.close() }
+        idle.visibility = View.GONE
+        snapshot = PlayerState("playing", name, posMs, 0)
+        flash("▶ $name")
     }
 
     override fun playStream(url: String, name: String, posMs: Long) = onMain {
@@ -363,6 +507,7 @@ class PlayerActivity : Activity(), Player, Device {
         p.media = m
         m.release()
         p.play()
+        closeSafFd()
         idle.visibility = View.GONE
         snapshot = PlayerState("playing", name, posMs, 0)
         flash("▶ $name (lecture pendant l'envoi)")
@@ -482,6 +627,11 @@ class PlayerActivity : Activity(), Player, Device {
     override fun onDestroy() {
         runCatching { nsdListener?.let { nsd?.unregisterService(it) } }
         runCatching { multicastLock?.release() }
+        runCatching { storageReceiver?.let { unregisterReceiver(it) } }
+        if (Build.VERSION.SDK_INT >= 30) runCatching {
+            (volumeCallback as? android.os.storage.StorageManager.StorageVolumeCallback)?.let { getSystemService(android.os.storage.StorageManager::class.java).unregisterStorageVolumeCallback(it) }
+        }
+        bg.shutdownNow()
         bt?.stop()
         wd?.stop()
         ssh?.stop()
@@ -497,6 +647,7 @@ class PlayerActivity : Activity(), Player, Device {
         private const val REQ_PERMS = 10
         private const val REQ_WD = 11
         private const val REQ_TREE = 12
+        private const val REQ_STORAGE_TREE = 13
         private val OSD = Any()
         fun fmt(ms: Long): String { val s = ms / 1000; return "%d:%02d:%02d".format(s / 3600, s / 60 % 60, s % 60) }
         fun localIp(): String? = runCatching {

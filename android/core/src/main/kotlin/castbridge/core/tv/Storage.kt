@@ -32,6 +32,10 @@ data class TvProfile(
     val deleteAfterPlay: Boolean = false,
     /** When the quota is full, delete the oldest already-played files (never the one playing) to make room. */
     val evictPlayed: Boolean = false,
+    /** Where new uploads go: "auto" (removable drive when usable, else internal), "internal", or a volume id. */
+    val target: String = "auto",
+    /** Quota of a removable volume: this fraction of (used + free), no cap (the drive is there to hold a lot). */
+    val removableQuotaFraction: Double = 0.95,
 )
 
 /** Storage accounting for the videos folder. Pure file logic. */
@@ -45,17 +49,21 @@ object Storage {
     /** Bytes used by finished files and partial uploads. */
     fun used(dir: File): Long = dir.listFiles().orEmpty().filter { it.isFile && !it.name.startsWith(".") }.sumOf { it.length() }
 
-    /** Effective quota: explicit, else min(fraction of what we and the free space add up to, cap). */
-    fun quota(dir: File, p: TvProfile, used: Long = used(dir)): Long =
-        if (p.quotaBytes > 0) p.quotaBytes
-        else minOf(((used + dir.usableSpace) * p.quotaFraction).toLong(), p.quotaCapBytes)
+    /**
+     * Effective quota of one volume. Internal: explicit, else min(fraction of what we and the free space add up to, cap).
+     * Removable drive: [TvProfile.removableQuotaFraction] of (used + free), uncapped; the explicit quota is meant for the
+     * scarce internal flash and does not apply to a drive.
+     */
+    fun quota(dir: File, p: TvProfile, used: Long = used(dir), free: Long = dir.usableSpace, kind: VolumeKind = VolumeKind.INTERNAL): Long =
+        if (kind == VolumeKind.REMOVABLE) ((used + free) * p.removableQuotaFraction).toLong()
+        else if (p.quotaBytes > 0) p.quotaBytes
+        else minOf(((used + free) * p.quotaFraction).toLong(), p.quotaCapBytes)
 
     /** Null if [incoming] more bytes fit, else why not. */
-    fun refusal(dir: File, p: TvProfile, incoming: Long): String? {
-        val free = dir.usableSpace
+    fun refusal(dir: File, p: TvProfile, incoming: Long, free: Long = dir.usableSpace, kind: VolumeKind = VolumeKind.INTERNAL): String? {
         if (free - incoming < p.minFreeBytes) return "not enough space"
         val used = used(dir)
-        if (used + incoming > quota(dir, p, used)) return "quota exceeded"
+        if (used + incoming > quota(dir, p, used, free, kind)) return "quota exceeded"
         return null
     }
 

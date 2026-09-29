@@ -203,8 +203,8 @@ class StreamServerTest {
         putRange(0, 1_000_000)
         File(dir, "full.mkv").writeBytes(ByteArray(50))
         val j = tv.info()
-        assertTrue(j.contains("""{"name":"full.mkv","size":50,"received":50,"complete":true}"""), j)
-        assertTrue(j.contains("""{"name":"m.mp4","size":${data.size},"received":1000000,"complete":false}"""), j)
+        assertTrue(j.contains("""{"name":"full.mkv","size":50,"received":50,"complete":true,"""), j)
+        assertTrue(j.contains("""{"name":"m.mp4","size":${data.size},"received":1000000,"complete":false,"""), j)
         assertTrue(j.contains("\"used\":") && j.contains("\"quota\":"))
     }
 

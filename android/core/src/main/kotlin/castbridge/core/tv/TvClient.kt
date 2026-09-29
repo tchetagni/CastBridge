@@ -33,6 +33,31 @@ class TvClient(val base: String, val pin: String? = null) {
     fun setVolume(pct: Int) = call("POST", "/api/volume?pct=$pct")
     fun restart() = call("POST", "/api/restart")
     fun rename(name: String, to: String) = call("POST", "/api/rename?name=${enc(name)}&to=${enc(to)}")
+    // ---- storage (see docs/STORAGE.md) ----
+    fun storage(): String = call("GET", "/api/storage")
+    /** [value] = "auto", "internal" or a volume id from [storage]. */
+    fun setTarget(value: String): String = call("POST", "/api/storage/target?value=${enc(value)}")
+    fun moveFile(name: String, toVolume: String): String = call("POST", "/api/storage/move?name=${enc(name)}&to=${enc(toVolume)}")
+    fun cancelMove(): String = call("POST", "/api/storage/move/cancel")
+    fun rescanStorage(measure: Boolean = false): String = call("POST", "/api/storage/rescan" + if (measure) "?measure=1" else "")
+    /** Asks the TV to open its system folder picker (someone must then choose on the TV screen). */
+    fun pickSafFolder(): String = call("POST", "/api/storage/saf/pick")
+    /** Asks the TV to open its own storage settings, if it has any. */
+    fun openTvStorageSettings(): String = call("POST", "/api/storage/open-settings")
+
+    data class StorageCheck(val ok: Boolean, val status: Int, val message: String, val warnings: List<String>, val volume: String?, val label: String?, val fs: String?)
+
+    /**
+     * Pre-flight: can the TV store this file, where, and with which caveats (FAT32 4 GB limit, slow drive...).
+     * Throws [HttpError] on a TV that predates the route (404): callers ignore that and just upload.
+     */
+    fun checkStorage(name: String, size: Long, durMs: Long = 0): StorageCheck {
+        val j = call("GET", "/api/storage/check?name=${enc(name)}&size=$size" + if (durMs > 0) "&dur=$durMs" else "")
+        val ok = j.contains("\"ok\":true")
+        return StorageCheck(ok, num(j, "status")?.toInt() ?: 200, str(j, "message") ?: str(j, "error") ?: "", strList(j, "warnings"),
+            str(j, "volume"), str(j, "label"), str(j, "fs"))
+    }
+
     /** Generic call for extension routes. */
     fun raw(method: String, path: String): String = call(method, path)
 
@@ -87,6 +112,11 @@ class TvClient(val base: String, val pin: String? = null) {
         fun parsePart(json: String) = Part(
             Regex("\"length\":(\\d+)").find(json)?.groupValues?.get(1)?.toLong() ?: 0,
             json.contains("\"done\":true"))
+        /** Strings of a JSON array of strings under [key] (flat, as produced by the TV). */
+        fun strList(json: String, key: String): List<String> {
+            val arr = Regex("\"$key\":\\[((?:[^\\]\"]|\"(?:[^\"\\\\]|\\\\.)*\")*)\\]").find(json)?.groupValues?.get(1) ?: return emptyList()
+            return Regex("\"((?:[^\"\\\\]|\\\\.)*)\"").findAll(arr).map { it.groupValues[1].replace("\\\"", "\"").replace("\\\\", "\\") }.toList()
+        }
         fun num(json: String, key: String): Long? = Regex("\"$key\":(-?\\d+)").find(json)?.groupValues?.get(1)?.toLong()
         fun str(json: String, key: String): String? = Regex("\"$key\":\"((?:[^\"\\\\]|\\\\.)*)\"").find(json)
             ?.groupValues?.get(1)?.replace("\\\"", "\"")?.replace("\\\\", "\\")
@@ -107,6 +137,10 @@ class ResumableUpload(
     private val pin: String? = null,
     /** 0 = full speed (the default: the bigger the lead over playback, the better). Set to spare a weak TV. */
     private val maxBytesPerSec: Long = 0,
+    /** Video duration if known: lets the TV judge whether a slow drive can keep up with playback during the upload. */
+    private val durMs: Long = 0,
+    /** Caveats reported by the TV before the first byte is sent (FAT32 target, slow drive...). */
+    private val onWarnings: (List<String>) -> Unit = {},
 ) {
     sealed class State {
         data class Uploading(val sent: Long, val total: Long) : State()
@@ -119,6 +153,7 @@ class ResumableUpload(
     fun run(onState: (State) -> Unit): State {
         var sent = 0L
         var backoff = 500L
+        var checked = false
         while (!cancelled()) {
             val base = resolve()
             if (base == null) {
@@ -126,6 +161,23 @@ class ResumableUpload(
                 sleep(backoff); backoff = minOf(backoff * 2, 5000); continue
             }
             val tv = TvClient(base, pin)
+            if (!checked) {
+                // Pre-flight, before any byte moves: a file that cannot be stored (FAT32 4 GB, no room) is announced now.
+                try {
+                    val c = tv.checkStorage(name, total, durMs)
+                    if (!c.ok && c.status == 503) { onState(State.Waiting(sent, total, c.message)); sleep(backoff); backoff = minOf(backoff * 2, 5000); continue }
+                    if (!c.ok) return State.Failed(c.message.ifEmpty { "refusé par la TV" }).also(onState)
+                    if (c.warnings.isNotEmpty()) onWarnings(c.warnings)
+                    checked = true
+                } catch (e: TvClient.HttpError) {
+                    if (e.code == 401) return State.Failed(e.message ?: "erreur").also(onState)
+                    checked = true                       // a TV without this route (404): the upload itself will say
+                } catch (e: IOException) {
+                    if (cancelled()) break
+                    onState(State.Waiting(sent, total, e.message ?: e.javaClass.simpleName))
+                    sleep(backoff); backoff = minOf(backoff * 2, 5000); continue
+                }
+            }
             try {
                 val p = tv.part(name)
                 sent = p.length
@@ -141,8 +193,10 @@ class ResumableUpload(
                     if (r.done) return State.Done.also(onState)
                 }
             } catch (e: TvClient.HttpError) {
-                if (e.code == 507 || e.code == 400 || e.code == 401) return State.Failed(e.message ?: "erreur").also(onState)
-                onState(State.Waiting(sent, total, e.message ?: "erreur"))
+                if (e.code == 507 || e.code == 413 || e.code == 400 || e.code == 401) return State.Failed(e.message ?: "erreur").also(onState)
+                // 503 "volume removed": the drive was pulled; wait like after a network cut, the upload resumes when it is back.
+                onState(State.Waiting(sent, total,
+                    if (e.code == 503 && e.message.orEmpty().contains("volume")) "Clé USB retirée ou indisponible : remettez-la, l'envoi reprendra" else e.message ?: "erreur"))
                 sleep(backoff); backoff = minOf(backoff * 2, 5000)
             } catch (e: IOException) {
                 if (cancelled()) break

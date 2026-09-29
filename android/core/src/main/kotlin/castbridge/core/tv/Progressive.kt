@@ -40,6 +40,8 @@ class GrowingStream(
     private val pollMs: Long = 50,
     private val sleep: (Long) -> Unit = Thread::sleep,
     private val clock: () -> Long = System::currentTimeMillis,
+    /** False once the volume holding the file is gone (drive pulled): the read then fails at once instead of waiting. */
+    private val alive: () -> Boolean = { true },
 ) : InputStream() {
     private var pos = start
     private var closed = false
@@ -58,6 +60,7 @@ class GrowingStream(
         var missingSince = -1L
         while (true) {
             if (closed) throw IOException("closed")
+            if (!alive()) throw IOException("volume removed")
             val fin = File(dir, name)
             val src = if (fin.isFile) fin else File(dir, "$name.part").takeIf { it.isFile }
             if (src == null) {

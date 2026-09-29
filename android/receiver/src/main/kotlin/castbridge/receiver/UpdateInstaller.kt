@@ -25,7 +25,8 @@ import java.security.MessageDigest
  * version may not go down. After installing an update of this very app Android stops it: reopen it from
  * the launcher. Several APK files of one app (split APKs) go into one install session.
  */
-class UpdateInstaller(private val ctx: Context, private val dir: File, private val notify: (String) -> Unit) {
+/** [dirs] = every folder an upload may land in (internal storage and the USB stick), looked up on each call. */
+class UpdateInstaller(private val ctx: Context, private val dirs: () -> List<File>, private val notify: (String) -> Unit) {
     @Volatile private var status = "idle"
     @Volatile private var message = ""
     private val pending = java.util.concurrent.atomic.AtomicInteger(0)
@@ -54,7 +55,8 @@ class UpdateInstaller(private val ctx: Context, private val dir: File, private v
         if (Build.VERSION.SDK_INT >= 33) ctx.registerReceiver(receiver, f, Context.RECEIVER_NOT_EXPORTED)
         else @Suppress("UnspecifiedRegisterReceiverFlag") ctx.registerReceiver(receiver, f)
         // Received APKs are single-use: drop old ones so they do not eat the TV's little storage.
-        dir.listFiles().orEmpty().filter { it.isFile && it.name.endsWith(".apk") && System.currentTimeMillis() - it.lastModified() > 3_600_000 }
+        dirs().flatMap { it.listFiles().orEmpty().toList() }
+            .filter { it.isFile && it.name.endsWith(".apk") && System.currentTimeMillis() - it.lastModified() > 3_600_000 }
             .forEach { it.delete() }
     }
 
@@ -91,7 +93,9 @@ class UpdateInstaller(private val ctx: Context, private val dir: File, private v
         return Apk(f, info.packageName, label, info.versionName.orEmpty(), code, info)
     }
 
-    private fun apkFiles() = dir.listFiles().orEmpty().filter { it.isFile && it.name.endsWith(".apk", ignoreCase = true) }.sortedBy { it.name }
+    private fun find(name: String): File? = dirs().map { File(it, name) }.firstOrNull { it.isFile }
+
+    private fun apkFiles() = dirs().flatMap { it.listFiles().orEmpty().toList() }.filter { it.isFile && it.name.endsWith(".apk", ignoreCase = true) }.sortedBy { it.name }
 
     /** Received APK files with what is inside them, so the phone can show "App X 1.2 (package)" before installing. */
     fun listJson(): String = "[" + apkFiles().joinToString(",") { f ->
@@ -106,7 +110,7 @@ class UpdateInstaller(private val ctx: Context, private val dir: File, private v
         if (names.isEmpty()) return err(400, "aucun fichier")
         val files = names.map { n ->
             val safe = ReceiverServer.safeName(n)
-            val f = safe?.let { File(dir, it) }
+            val f = safe?.let { find(it) }
             if (safe == null || !safe.endsWith(".apk", ignoreCase = true) || f == null || !f.isFile) return err(404, "APK introuvable : envoyez-le d'abord ($n)")
             f
         }
