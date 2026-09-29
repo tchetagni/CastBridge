@@ -62,6 +62,7 @@ class PlayerActivity : Activity(), Player, Device {
     private var wd: WifiDirectGroup? = null
     private var usb: UsbImporter? = null
     private var ssh: SshControl? = null
+    private var updater: UpdateInstaller? = null
     private lateinit var prefs: TvPrefs
     private lateinit var videosDir: File
     private val statuses = java.util.concurrent.ConcurrentHashMap<String, String>()
@@ -95,6 +96,7 @@ class PlayerActivity : Activity(), Player, Device {
         wd = WifiDirectGroup(this, prefs) { setStatus("2-wd", it) }
         usb = UsbImporter(this, dir) { setStatus("3-usb", it) }
         ssh = SshControl(this) { setStatus("4-ssh", it) }
+        updater = UpdateInstaller(this, dir) { m -> setStatus("5-update", m); main.post { flash(m) } }
         requestRuntimePermissions()
         showIdle()
     }
@@ -260,6 +262,13 @@ class PlayerActivity : Activity(), Player, Device {
     /** Extra authenticated API routes (USB import status/trigger). */
     private fun extraApi(path: String, method: String, params: Map<String, String>): ApiReply? = when {
         path.startsWith("/api/ssh") -> ssh?.api(path, method, params)
+        path == "/api/update" && method == "GET" -> updater?.let { ApiReply(200, it.infoJson()) }
+        path == "/api/update/install" && method == "POST" ->
+            updater?.install(listOf(params["name"].orEmpty()), params["force"] == "1")
+        path == "/api/apk" && method == "GET" -> updater?.let { ApiReply(200, it.listJson()) }
+        // names = file names separated by "/" (a character file names cannot contain): several APKs of one app, or several apps
+        path == "/api/apk/install" && method == "POST" ->
+            updater?.install(params["names"].orEmpty().split('/').filter { it.isNotEmpty() }, params["force"] == "1")
         path == "/api/usb" && method == "GET" -> ApiReply(200, usbJson())
         path == "/api/usb/import" && method == "POST" -> {
             val m = usb?.importFromVolumes() ?: "indisponible"
@@ -448,6 +457,7 @@ class PlayerActivity : Activity(), Player, Device {
         bt?.stop()
         wd?.stop()
         ssh?.stop()
+        updater?.stop()
         server?.stop()
         main.removeCallbacksAndMessages(null)     // no Handler callback may outlive the activity
         releasePlayer()

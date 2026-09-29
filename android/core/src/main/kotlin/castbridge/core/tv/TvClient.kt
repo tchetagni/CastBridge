@@ -7,7 +7,7 @@ import java.net.URL
 import java.net.URLEncoder
 
 /** Minimal client for [ReceiverServer]. [base] is like "http://192.168.0.117:8765". Blocking calls. */
-class TvClient(val base: String, private val pin: String? = null) {
+class TvClient(val base: String, val pin: String? = null) {
     data class Part(val length: Long, val done: Boolean)
 
     fun part(name: String): Part = parsePart(call("GET", "/api/part?name=${enc(name)}"))
@@ -20,6 +20,16 @@ class TvClient(val base: String, private val pin: String? = null) {
     fun seek(posMs: Long) = call("POST", "/api/seek?pos=$posMs")
     fun delete(name: String) = call("POST", "/api/delete?name=${enc(name)}")
     fun sysinfo(): String = call("GET", "/api/sysinfo")
+    /** State of the app self-update on the TV (versions, whether installing is allowed, last install result). */
+    fun updateInfo(): String = call("GET", "/api/update")
+    /** APK files present on the TV with their package, label and version. */
+    fun apkList(): String = call("GET", "/api/apk")
+    /** Installs APK files already uploaded to the TV (several files = one app in split APKs, or several apps). */
+    fun installApks(names: List<String>, force: Boolean = false): String =
+        call("POST", "/api/apk/install?names=${enc(names.joinToString("/"))}" + if (force) "&force=1" else "")
+    /** Asks the TV to install the APK previously uploaded under [name]. Throws [HttpError] with the reason. */
+    fun installUpdate(name: String, force: Boolean = false): String =
+        call("POST", "/api/update/install?name=${enc(name)}" + if (force) "&force=1" else "")
     fun setVolume(pct: Int) = call("POST", "/api/volume?pct=$pct")
     fun restart() = call("POST", "/api/restart")
     fun rename(name: String, to: String) = call("POST", "/api/rename?name=${enc(name)}&to=${enc(to)}")
