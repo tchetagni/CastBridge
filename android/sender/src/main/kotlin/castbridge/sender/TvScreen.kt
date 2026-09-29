@@ -75,7 +75,9 @@ fun TvScreen(fixedBase: String? = null, extra: @Composable (TvClient) -> Unit = 
     val pinKey = fixedBase ?: if (useManual) manualIp.trim().takeIf { it.isNotEmpty() } else selectedName
     val pins = remember { PinStore(ctx) }
     var pin by remember(pinKey) { mutableStateOf(pins.get(pinKey)) }
-    val client = base?.let { TvClient(it, pin.takeIf { p -> p.isNotEmpty() }) }
+    // Same object across recompositions: panels key their polling on it, and every request without the right PIN
+    // counts toward the TV's lockout.
+    val client = remember(base, pin) { base?.let { TvClient(it, pin.takeIf { p -> p.isNotEmpty() }) } }
 
     val picker = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
         if (uri != null) {
@@ -251,7 +253,8 @@ fun TvScreen(fixedBase: String? = null, extra: @Composable (TvClient) -> Unit = 
                 }
             }
         }
-        client?.let { c -> Column(Modifier.padding(horizontal = 16.dp)) { extra(c) } }
+        // Admin panels only once the PIN has been accepted (a successful poll), never with a missing or refused one.
+        if (info != null && badPin == null) client?.let { c -> Column(Modifier.padding(horizontal = 16.dp)) { extra(c) } }
         current?.let { i ->
             MiniPlayer(i.name!!, "CastBridge TV", i.state == "playing" || i.state == "buffering", if (i.dur > 0) i.pos.toFloat() / i.dur else 0f,
                 onToggle = { cmd("Pause") { if (i.state == "playing" || i.state == "buffering") pause() else resume() } },
