@@ -112,8 +112,9 @@ class ReceiverServer(
         }?.also { it.addHeader("Connection", "close") }
     }
 
-    private fun page(): Response = newFixedLengthResponse(Response.Status.OK, "text/html; charset=utf-8",
-        "<!doctype html><meta charset=utf-8><title>CastBridge TV</title><h1>CastBridge TV</h1>")
+    /** The admin web page: static, contains no data; every API call it makes carries the PIN. */
+    private fun page(): Response = newFixedLengthResponse(Response.Status.OK, "text/html; charset=utf-8", ADMIN_HTML)
+        .also { it.addHeader("Cache-Control", "no-store") }
 
     private fun upload(s: IHTTPSession, rawName: String, p: Map<String, String>): Response {
         val name = safeName(rawName) ?: return bad("bad name")
@@ -186,6 +187,10 @@ class ReceiverServer(
     companion object {
         const val PORT = 8765
         const val VERSION = "0.3"
+        private val ADMIN_HTML: String by lazy {
+            ReceiverServer::class.java.getResourceAsStream("/castbridge/admin.html")?.use { String(it.readBytes(), Charsets.UTF_8) }
+                ?: "<!doctype html><meta charset=utf-8><title>CastBridge TV</title><h1>CastBridge TV</h1><p>Page d'administration indisponible.</p>"
+        }
         const val SERVICE_TYPE = "_castbridge._tcp."
         private const val PART = ".part"
         private val NOT_IMPLEMENTED = Response.Status.NOT_IMPLEMENTED

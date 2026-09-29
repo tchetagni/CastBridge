@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CastBridge TV</title>
+<style>
+:root{--bg:#0f1115;--card:#181b22;--line:#2a2f3a;--fg:#e8eaf0;--mut:#8b93a5;--acc:#4f9dff;--bad:#ff6b6b;--ok:#4ade80}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.45 system-ui,sans-serif}
+main{max-width:760px;margin:0 auto;padding:12px}
+h1{font-size:20px;margin:8px 0 12px}
+h2{font-size:14px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);margin:0 0 8px}
+section{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:12px}
+button,input{font:inherit;color:inherit}
+button{background:#232838;border:1px solid var(--line);border-radius:8px;padding:8px 12px;cursor:pointer}
+button:hover{border-color:var(--acc)}
+button.pri{background:var(--acc);color:#04101f;border-color:var(--acc);font-weight:600}
+button.del{color:var(--bad)}
+button:disabled{opacity:.4;cursor:default}
+input[type=password],input[type=text]{background:#0c0e13;border:1px solid var(--line);border-radius:8px;padding:8px 10px;width:100%}
+input[type=range]{width:100%}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.row>.grow{flex:1;min-width:0}
+.file{display:flex;gap:8px;align-items:center;padding:8px 0;border-top:1px solid var(--line);flex-wrap:wrap}
+.file:first-child{border-top:0}
+.file .n{flex:1;min-width:140px;word-break:break-all}
+.file .s{color:var(--mut);font-size:13px}
+.mut{color:var(--mut);font-size:13px}
+.err{color:var(--bad)}.ok{color:var(--ok)}
+progress{width:100%;height:10px}
+dl{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;margin:0}
+dt{color:var(--mut)}dd{margin:0;word-break:break-all}
+#app{display:none}
+</style>
+</head>
+<body>
+<main>
+<h1>CastBridge TV</h1>
+
+<section id="login">
+  <h2>Code PIN</h2>
+  <p class="mut">Saisissez le code à 6 chiffres affiché sur l'écran de la TV.</p>
+  <div class="row">
+    <input id="pin" class="grow" type="password" inputmode="numeric" maxlength="6" autocomplete="off" placeholder="000000">
+    <button class="pri" id="go">Entrer</button>
+  </div>
+  <p id="loginErr" class="err"></p>
+</section>
+
+<div id="app">
+<section>
+  <h2>Lecteur</h2>
+  <div id="now" class="mut">Aucune lecture.</div>
+  <input id="seek" type="range" min="0" max="1" value="0" step="1000">
+  <div class="row">
+    <span id="pos" class="mut grow"></span>
+    <button id="bBack">-10 s</button>
+    <button id="bPause">Pause</button>
+    <button id="bFwd">+10 s</button>
+    <button id="bStop">Stop</button>
+  </div>
+  <div class="row" style="margin-top:8px">
+    <span class="mut">Volume</span>
+    <input id="vol" class="grow" type="range" min="0" max="100" value="50">
+    <span id="volv" class="mut">--</span>
+  </div>
+</section>
+
+<section>
+  <h2>Fichiers sur la TV</h2>
+  <div id="free" class="mut"></div>
+  <div id="files"></div>
+</section>
+
+<section>
+  <h2>Envoyer des fichiers</h2>
+  <p class="mut">Envoi par morceaux de 4 Mo, repris automatiquement après une coupure.</p>
+  <input id="pick" type="file" multiple>
+  <div id="ups"></div>
+</section>
+
+<section>
+  <h2>Informations système</h2>
+  <dl id="sys"></dl>
+  <div class="row" style="margin-top:10px">
+    <button id="bRestart" class="del">Redémarrer l'application</button>
+    <span class="mut">(l'application uniquement, pas la TV)</span>
+  </div>
+</section>
+
+<section id="extra"></section>
+<p id="msg" class="err"></p>
+</div>
+</main>
+<script>
+"use strict";
+const $ = id => document.getElementById(id);
+const CHUNK = 4 * 1024 * 1024;
+let PIN = "";
+try { PIN = sessionStorage.getItem("cbpin") || ""; } catch (e) {}
+let info = null, seeking = false, volTouched = 0, timer = null;
+
+function fmtSize(b) {
+  if (b >= 2 ** 30) return (b / 2 ** 30).toFixed(1) + " Go";
+  if (b >= 2 ** 20) return Math.round(b / 2 ** 20) + " Mo";
+  return Math.round(b / 1024) + " ko";
+}
+function fmtTime(ms) {
+  const s = Math.floor(ms / 1000), p = n => String(n).padStart(2, "0");
+  return Math.floor(s / 3600) + ":" + p(Math.floor(s / 60) % 60) + ":" + p(s % 60);
+}
+function fmtUp(ms) {
+  const m = Math.floor(ms / 60000), d = Math.floor(m / 1440), h = Math.floor(m / 60) % 24;
+  return (d ? d + " j " : "") + h + " h " + (m % 60) + " min";
+}
+function msg(t) { $("msg").textContent = t || ""; }
+
+class ApiError extends Error { constructor(code, text) { super(text); this.code = code; } }
+
+async function api(method, path, body) {
+  const r = await fetch(path, { method, body, headers: { "X-CB-Pin": PIN } });
+  const t = await r.text();
+  if (!r.ok) {
+    let m = t; try { const j = JSON.parse(t); m = j.error === "locked" ? "Trop d'essais : verrouillé " + j.retryAfter + " s" : j.error === "bad pin" ? "PIN incorrect" : j.error; } catch (e) {}
+    throw new ApiError(r.status, m || ("HTTP " + r.status));
+  }
+  return t ? JSON.parse(t) : {};
+}
+const post = (p) => api("POST", p, "");
+const q = s => encodeURIComponent(s);
+
+async function login() {
+  PIN = $("pin").value.trim();
+  $("loginErr").textContent = "";
+  try {
+    await api("GET", "/api/info");
+    try { sessionStorage.setItem("cbpin", PIN); } catch (e) {}
+    $("login").style.display = "none"; $("app").style.display = "block";
+    start();
+  } catch (e) { $("loginErr").textContent = e.message; }
+}
+$("go").onclick = login;
+$("pin").onkeydown = e => { if (e.key === "Enter") login(); };
+
+async function refresh() {
+  try {
+    const i = await api("GET", "/api/info");
+    info = i; render(i); msg("");
+    let s = null; try { s = await api("GET", "/api/sysinfo"); } catch (e) { if (e.code === 401) throw e; }
+    if (s) renderSys(s);
+  } catch (e) {
+    if (e.code === 401) { stop(); $("login").style.display = "block"; $("app").style.display = "none"; $("loginErr").textContent = e.message; return; }
+    msg("TV injoignable : " + e.message);
+  }
+}
+function start() { stop(); refresh(); timer = setInterval(refresh, 2000); }
+function stop() { if (timer) clearInterval(timer); timer = null; }
+
+function render(i) {
+  const p = i.player || {};
+  $("free").textContent = "Espace libre : " + fmtSize(i.free);
+  $("now").textContent = p.name && p.state !== "idle" ? (p.state === "playing" ? "▶ " : "❚❚ ") + p.name : "Aucune lecture.";
+  $("bPause").textContent = p.state === "playing" ? "Pause" : "Lecture";
+  const sk = $("seek");
+  sk.max = p.dur || 1; if (!seeking) sk.value = p.pos || 0;
+  $("pos").textContent = p.dur ? fmtTime(p.pos) + " / " + fmtTime(p.dur) : "";
+  const box = $("files"); box.textContent = "";
+  (i.files || []).forEach(f => {
+    const row = document.createElement("div"); row.className = "file";
+    const n = document.createElement("div"); n.className = "n"; n.textContent = f.name;
+    const s = document.createElement("div"); s.className = "s"; s.textContent = fmtSize(f.size);
+    row.append(n, s, btn("Lire", () => act(post("/api/play?name=" + q(f.name)))),
+      btn("Renommer", async () => {
+        const to = prompt("Nouveau nom :", f.name);
+        if (to && to !== f.name) act(post("/api/rename?name=" + q(f.name) + "&to=" + q(to)));
+      }),
+      btn("Supprimer", () => { if (confirm("Supprimer « " + f.name + " » ?")) act(post("/api/delete?name=" + q(f.name))); }, "del"));
+    box.append(row);
+  });
+  if (!(i.files || []).length) box.textContent = "Aucun fichier.";
+}
+function btn(t, f, cls) { const b = document.createElement("button"); b.textContent = t; if (cls) b.className = cls; b.onclick = f; return b; }
+async function act(p) { try { await p; msg(""); refresh(); } catch (e) { msg(e.message); } }
+
+function renderSys(s) {
+  const rows = [["Modèle", s.model], ["Android", s.android], ["Adresse IP", s.ip || "?"],
+    ["Batterie", s.battery == null ? "aucune" : s.battery + " %" + (s.charging ? " (en charge)" : "")],
+    ["Allumée depuis", fmtUp(s.uptime)], ["Version de l'app", s.app]];
+  const dl = $("sys"); dl.textContent = "";
+  rows.forEach(([k, v]) => { const a = document.createElement("dt"), b = document.createElement("dd"); a.textContent = k; b.textContent = v; dl.append(a, b); });
+  if (s.volume != null && Date.now() - volTouched > 3000) { $("vol").value = s.volume; }
+  $("volv").textContent = s.volume == null ? "--" : s.volume + " %";
+}
+
+$("bPause").onclick = () => act(post(info && info.player && info.player.state === "playing" ? "/api/pause" : "/api/resume"));
+$("bStop").onclick = () => act(post("/api/stop"));
+$("bBack").onclick = () => act(post("/api/seek?pos=" + Math.max(0, (info.player.pos || 0) - 10000)));
+$("bFwd").onclick = () => act(post("/api/seek?pos=" + ((info.player.pos || 0) + 10000)));
+$("seek").oninput = () => { seeking = true; };
+$("seek").onchange = () => { seeking = false; act(post("/api/seek?pos=" + $("seek").value)); };
+$("vol").oninput = () => { volTouched = Date.now(); $("volv").textContent = $("vol").value + " %"; };
+$("vol").onchange = () => act(post("/api/volume?pct=" + $("vol").value));
+$("bRestart").onclick = () => { if (confirm("Redémarrer l'application CastBridge TV ?")) act(post("/api/restart")); };
+
+// ---- Chunked, resumable upload ----
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+async function partLen(name) { const j = await api("GET", "/api/part?name=" + q(name)); return j; }
+
+async function uploadFile(file, bar, label) {
+  const total = file.size; let backoff = 500;
+  if (total <= 0) throw new Error("fichier vide");
+  for (;;) {
+    try {
+      const p = await partLen(file.name);
+      if (p.done && p.length === total) { bar.value = total; return; }
+      let off = p.length > total ? 0 : p.length;
+      if (p.length > total) await post("/api/reset?name=" + q(file.name));
+      while (off < total) {
+        const end = Math.min(off + CHUNK, total);
+        const r = await fetch("/upload/" + q(file.name) + "?offset=" + off + "&total=" + total,
+          { method: "PUT", headers: { "X-CB-Pin": PIN }, body: file.slice(off, end) });
+        if (r.status === 409) { off = JSON.parse(await r.text()).length; continue; }
+        if (r.status === 401 || r.status === 400 || r.status === 507) {
+          let m = ""; try { m = JSON.parse(await r.text()).error; } catch (e) {}
+          throw new ApiError(r.status, m === "not enough space" ? "espace insuffisant sur la TV" : (m || "HTTP " + r.status));
+        }
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        off = end; bar.value = off; backoff = 500;
+        label.textContent = file.name + " : " + fmtSize(off) + " / " + fmtSize(total);
+      }
+      return;
+    } catch (e) {
+      if (e instanceof ApiError) throw e;
+      label.textContent = file.name + " : réseau coupé, reprise dans " + Math.round(backoff / 1000 + 0.5) + " s…";
+      await sleep(backoff); backoff = Math.min(backoff * 2, 5000);
+    }
+  }
+}
+$("pick").onchange = async () => {
+  const files = Array.from($("pick").files); $("pick").value = "";
+  for (const f of files) {
+    const wrap = document.createElement("div"), lab = document.createElement("div"), bar = document.createElement("progress");
+    bar.max = f.size; bar.value = 0; lab.className = "mut"; lab.textContent = f.name;
+    wrap.append(lab, bar); $("ups").append(wrap);
+    try { await uploadFile(f, bar, lab); lab.textContent = f.name + " : terminé"; lab.className = "ok"; }
+    catch (e) { lab.textContent = f.name + " : échec (" + e.message + ")"; lab.className = "err"; }
+    refresh();
+  }
+};
+
+if (PIN) { $("pin").value = PIN; login(); }
+</script>
+</body>
+</html>
