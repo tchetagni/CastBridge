@@ -22,6 +22,8 @@ class TvClient(val base: String, val pin: String? = null) {
     fun sysinfo(): String = call("GET", "/api/sysinfo")
     /** Stored videos with thumbnail availability, duration, resume position and volume. */
     fun library(): String = call("GET", "/api/library")
+    /** Marks a stored file as watched (resume position cleared) or not watched. */
+    fun setWatched(name: String, watched: Boolean): String = call("POST", "/api/library/watched?name=${enc(name)}&watched=${if (watched) 1 else 0}")
     /** JPEG thumbnail, or null while the TV is still making it (retry in a moment) or if it cannot make one. */
     fun thumb(name: String, volume: String? = null): ByteArray? {
         val c = open("GET", "/api/thumb?name=${enc(name)}" + (volume?.let { "&volume=${enc(it)}" } ?: ""))

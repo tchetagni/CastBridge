@@ -177,6 +177,7 @@ class ReceiverServer(
             path == "/api/thumb" && s.method == Method.GET -> named(p) { thumb(it, p["volume"]) }
             ext != null -> json(status(ext.status), ext.json)
             s.method != Method.POST -> json(Response.Status.METHOD_NOT_ALLOWED, """{"error":"use POST"}""")
+            path == "/api/library/watched" -> named(p) { setWatched(it, p["watched"] != "0" && p["watched"] != "false") }
             path == "/api/storage/target" -> setTarget(p["value"].orEmpty())
             path == "/api/storage/move" -> named(p) { startMove(it, p["to"].orEmpty()) }
             path == "/api/storage/move/cancel" -> { moveJob?.let { if (it.state == "running") it.cancelled = true }; ok(storageJson()) }
@@ -205,6 +206,7 @@ class ReceiverServer(
                         if (isPlaying(from)) player.stop()
                         val toStored = src.v.storedName(to)
                         if (!src.st.rename(src.name, toStored)) throw IOException("rename failed")
+                        library?.renamed(src.name, toStored, src.size)
                         (src.st as? FileStore)?.let { fs ->
                             if (src.name in Storage.playedNames(fs.dir)) { Storage.forget(fs.dir, src.name); Storage.markPlayed(fs.dir, toStored) }
                         }
@@ -227,6 +229,7 @@ class ReceiverServer(
                 synchronized(FileLocks.of(LOCK_ROOT, name)) {
                     volumes.volumes().filter { only == null || it.id == only }.forEach { v ->
                         val st = volumes.store(v); val n = v.storedName(name)
+                        st.finalSize(n)?.let { sz -> library?.deleted(n, sz) }
                         st.deleteFinal(n); st.deletePart(n)
                         (st as? FileStore)?.let { Meta.delete(it.dir, n); Storage.forget(it.dir, n) }
                         volumes.forgetPart(v, n)
@@ -436,23 +439,45 @@ class ReceiverServer(
         return Storage.quota(st.dir, cfg, used, volumes.free(v), v.kind)
     }
 
-    /** Finished files with what the library screens need: cards with thumbnail, duration, resume position, volume. */
-    fun libraryJson(): String {
+    /** Finished files (newest first) with what the library screens need: thumbnail, duration, resume position, volume. */
+    fun libraryItems(): List<LibraryItem> {
         val l = listing()
         val lib = library
-        val files = l.entries.filter { it.complete }.map { e ->
-            val m = lib?.meta(e.name, e.size) ?: FileMeta()
-            val mtime = (volumes.store(e.v) as? FileStore)?.let { File(it.dir, it.diskName(e.name)).lastModified() } ?: 0L
-            Triple(e, m, mtime)
-        }
-        val sorted = LibraryLogic.sortNewestFirst(files, { it.third }, { it.first.name })
         val ps = player.state()
-        return sorted.joinToString(",", "{\"files\":[", "]") { (e, m, mtime) ->
-            "{\"name\":${q(e.name)},\"title\":${q(LibraryLogic.title(e.name))},\"size\":${e.size},\"mtime\":$mtime," +
-                "\"volume\":${q(e.v.id)},\"volumeLabel\":${q(e.v.label)},\"kind\":${q(e.v.kind.name.lowercase())}," +
+        val files = l.entries.filter { it.complete }.map { e ->
+            val f = (volumes.store(e.v) as? FileStore)?.let { File(it.dir, it.diskName(e.name)) }
+            val m = lib?.meta(e.name, e.size, f) ?: FileMeta()
+            LibraryItem(e.name, e.size, f?.lastModified() ?: 0L, e.v.id, e.v.label, e.v.kind, m, e.dup,
+                ps.state != "idle" && ps.name == e.name)
+        }
+        return LibraryLogic.sortNewestFirst(files, { it.mtime }, { it.name })
+    }
+
+    fun libraryJson(): String {
+        val sorted = libraryItems()
+        return sorted.joinToString(",", "{\"files\":[", "]") { i ->
+            val m = i.meta
+            "{\"name\":${q(i.name)},\"title\":${q(i.title)},\"size\":${i.size},\"mtime\":${i.mtime}," +
+                "\"volume\":${q(i.volumeId)},\"volumeLabel\":${q(i.volumeLabel)},\"kind\":${q(i.volumeKind.name.lowercase())}," +
+                "\"type\":${q(i.type.name.lowercase())}," +
                 "\"durationMs\":${m.durationMs},\"resumeMs\":${m.resumeMs},\"watched\":${m.watched},\"playedAt\":${m.playedAtMs}," +
-                "\"hasThumb\":${m.hasThumb},\"duplicate\":${e.dup},\"playing\":${ps.state != "idle" && ps.name == e.name}}"
+                "\"hasThumb\":${m.hasThumb},\"duplicate\":${i.duplicate},\"playing\":${i.playing}}"
         } + "],\"count\":${sorted.size}}"
+    }
+
+    /** JPEG thumbnail of a stored file for the TV's own screen (null = not ready or impossible; generation is queued). */
+    fun thumbnail(name: String, volume: String? = null): ByteArray? {
+        val lib = library ?: return null
+        val hit = finals(name).let { hs -> hs.firstOrNull { it.v.id == volume } ?: hs.firstOrNull() } ?: return null
+        return lib.thumb(hit.name, hit.size, hit.file)
+    }
+
+    private fun setWatched(name: String, watched: Boolean): Response {
+        val lib = library ?: return json(NOT_IMPLEMENTED, """{"error":"no library"}""")
+        val hits = finals(name)
+        if (hits.isEmpty()) return json(Response.Status.NOT_FOUND, """{"error":"not found"}""")
+        hits.forEach { lib.setWatched(it.name, it.size, watched) }
+        return ok(libraryJson())
     }
 
     private fun thumb(name: String, volume: String?): Response {
@@ -460,7 +485,8 @@ class ReceiverServer(
         val hit = finals(name).let { hs -> hs.firstOrNull { it.v.id == volume } ?: hs.firstOrNull() }
             ?: return json(Response.Status.NOT_FOUND, """{"error":"not found"}""")
         val bytes = lib.thumb(hit.name, hit.size, hit.file)
-            ?: return json(NO_CONTENT_YET, """{"error":"thumbnail not ready"}""")
+            ?: return if (lib.thumbFailed(hit.name, hit.size, hit.file)) json(Response.Status.NOT_FOUND, """{"error":"no thumbnail"}""")
+                else json(NO_CONTENT_YET, """{"error":"thumbnail not ready"}""")
         return newFixedLengthResponse(Response.Status.OK, "image/jpeg", java.io.ByteArrayInputStream(bytes), bytes.size.toLong())
             .also { it.addHeader("Cache-Control", "private, max-age=86400") }
     }
@@ -766,7 +792,7 @@ class ReceiverServer(
 
     companion object {
         const val PORT = 8765
-        const val VERSION = "0.4"
+        const val VERSION = "0.5"
         private val ADMIN_HTML: String by lazy {
             ReceiverServer::class.java.getResourceAsStream("/castbridge/admin.html")?.use { String(it.readBytes(), Charsets.UTF_8) }
                 ?: "<!doctype html><meta charset=utf-8><title>CastBridge TV</title><h1>CastBridge TV</h1><p>Page d'administration indisponible.</p>"

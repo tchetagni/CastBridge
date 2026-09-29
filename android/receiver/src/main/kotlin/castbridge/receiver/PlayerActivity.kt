@@ -56,6 +56,10 @@ class PlayerActivity : Activity(), Player, Device {
     private var libVlc: LibVLC? = null
     private var mp: MediaPlayer? = null
     private lateinit var idle: TextView
+    private lateinit var idleBox: View
+    private var library: castbridge.core.tv.LibraryProvider? = null
+    private var libScreen: LibraryScreen? = null
+    @Volatile private var currentSize = 0L                  // size of the file playing: with its name, the key of its saved position
     private lateinit var osd: TextView
     private lateinit var lead: TextView
     @Volatile private var streamingName: String? = null    // set while playing a file that may still be arriving
@@ -91,6 +95,8 @@ class PlayerActivity : Activity(), Player, Device {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_player)
         idle = findViewById(R.id.idle)
+        idleBox = findViewById(R.id.idleBox)
+        findViewById<View>(R.id.openLibrary).setOnClickListener { showLibrary() }
         osd = findViewById(R.id.osd)
         lead = findViewById(R.id.lead)
         prefs = TvPrefs(this)
@@ -101,12 +107,15 @@ class PlayerActivity : Activity(), Player, Device {
         guard = PinGuard(pin)
         val profile = prefs.profile()
         logResources(dir, profile)
+        // Thumbnails are made only while nothing plays (one decode at a time on this TV).
+        library = Thumbnailer.provider(this, canRun = { snapshot.state in IDLE_STATES }, onThumb = { n -> libScreen?.onThumbReady(n) })
         server = ReceiverServer(registry, this, pin = pin, guard = guard, device = this, extension = ApiExtension(::extraApi),
             profile = profile, onSettings = { prefs.saveProfile(it); updateStorageStatus() },
             onNotice = { n -> main.post { flash(n) }; setStatus("5-notice", n) },
-            safPicker = ::launchSafPicker, settingsOpener = ::openStorageSettings).also {
+            safPicker = ::launchSafPicker, settingsOpener = ::openStorageSettings, library = library).also {
             try { it.start(15_000, false) } catch (e: Exception) { Log.e(TAG, "server", e) }
         }
+        libScreen = LibraryScreen(this, findViewById(R.id.library), libraryApi())
         register()
         bt = BtServer(this, dir, guard) { setStatus("1-bt", it) }
         wd = WifiDirectGroup(this, prefs) { setStatus("2-wd", it) }
@@ -242,12 +251,16 @@ class PlayerActivity : Activity(), Player, Device {
                 MediaPlayer.Event.LengthChanged -> snapshot = snapshot.copy(durMs = ev.lengthChanged)
                 // Never release from inside libVLC's own event thread: hop to the main thread.
                 MediaPlayer.Event.EndReached -> {
-                    update("ended"); val n = current?.name
-                    main.post { current = null; streamingName = null; releasePlayer(); n?.let { server?.onPlaybackEnded(it) }; showIdle() }
+                    update("ended"); val n = current?.name; val size = currentSize; val dur = snapshot.durMs
+                    main.post {
+                        current = null; streamingName = null; releasePlayer()
+                        n?.let { name -> bg.execute { library?.db?.onEnded(name, size, dur) }; server?.onPlaybackEnded(name) }
+                        afterPlayback()
+                    }
                 }
                 MediaPlayer.Event.EncounteredError -> {
                     update("error"); val n = current?.name
-                    main.post { current = null; streamingName = null; releasePlayer(); showIdle("Lecture impossible : $n") }
+                    main.post { current = null; streamingName = null; releasePlayer(); afterPlayback("Lecture impossible : $n") }
                 }
             }
         }
@@ -295,16 +308,64 @@ class PlayerActivity : Activity(), Player, Device {
 
     private fun showIdle(msg: String? = idleMsg) {
         idleMsg = msg
-        idle.visibility = View.VISIBLE
+        libScreen?.hide()
+        idleBox.visibility = View.VISIBLE
         idle.text = (msg?.let { "$it\n\n" } ?: "") +
             "CastBridge TV\nEn attente du téléphone…\n\n${localIp() ?: "pas de réseau"}:${ReceiverServer.PORT}\nCode PIN : $pin\n\n" +
-            statuses.toSortedMap().values.joinToString("\n") + "\n\nMENU : options (USB, Bluetooth…)"
+            statuses.toSortedMap().values.joinToString("\n") + "\n\nMENU : options (USB, Bluetooth, SSH…)   ·   Touche bleue / GUIDE : bibliothèque"
+        if (currentFocus == null) findViewById<View>(R.id.openLibrary).requestFocus()
+    }
+
+    /** Hides the waiting screen and the library (a video starts). */
+    private fun hideScreens() {
+        idleBox.visibility = View.GONE
+        libScreen?.hide()
+    }
+
+    private fun showLibrary() {
+        idleBox.visibility = View.GONE
+        libScreen?.show()
+    }
+
+    /** Back from a video (BACK, end of file, error): the library, not an empty screen. */
+    private fun afterPlayback(msg: String? = null) {
+        if (msg != null) flash(msg)
+        showLibrary()
+    }
+
+    /** Remembers where the current video stopped (normalised: see LibraryLogic.resumeFrom). */
+    private fun savePosition() {
+        val name = current?.name ?: return
+        val s = snapshot; val size = currentSize
+        if (s.posMs <= 0 && s.durMs <= 0) return
+        runCatching { bg.execute { library?.db?.onStopped(name, size, s.posMs, s.durMs) } }
+    }
+
+    private fun startedPlaying(name: String, size: Long) {
+        currentSize = size
+        runCatching { bg.execute { library?.db?.onPlayStarted(name, size) } }
+    }
+
+    /** The library's view of the app: listing, thumbnails, and the app's own API on loopback for actions. */
+    private fun libraryApi() = object : LibraryScreen.Api {
+        override fun items() = server?.libraryItems().orEmpty()
+        override fun thumbnail(name: String, volume: String) = server?.thumbnail(name, volume)
+        override fun volumes() = registry.volumes().filter { it.writable }.map { it.id to it.label }
+        override fun header() = "${localIp() ?: "pas de réseau"}:${ReceiverServer.PORT}  ·  PIN $pin  ·  " +
+            (statuses["0-storage"] ?: "") + "\nOK : lire   ·   MENU (ou OK long) : actions   ·   RETOUR : écran d'accueil"
+        override fun call(block: (castbridge.core.tv.TvClient) -> Unit): String? = try {
+            block(castbridge.core.tv.TvClient("http://127.0.0.1:${ReceiverServer.PORT}", pin)); null
+        } catch (e: castbridge.core.tv.TvClient.HttpError) {
+            castbridge.core.tv.TvClient.str(e.message.orEmpty().substringAfter(": "), "message")
+                ?: castbridge.core.tv.TvClient.str(e.message.orEmpty().substringAfter(": "), "error") ?: e.message
+        } catch (e: Exception) { e.message ?: e.javaClass.simpleName }
+        override fun flash(msg: String) { main.post { this@PlayerActivity.flash(msg) } }
     }
 
     /** Status line of a channel (Bluetooth, Wi-Fi Direct, USB, SSH), shown on the waiting screen. Thread-safe. */
     fun setStatus(key: String, text: String?) {
         if (text == null) statuses.remove(key) else statuses[key] = text
-        main.post { if (::idle.isInitialized && idle.visibility == View.VISIBLE) showIdle() }
+        main.post { if (::idleBox.isInitialized && idleBox.visibility == View.VISIBLE) showIdle() }
     }
 
     // ---- Runtime permissions: every feature degrades cleanly when its permission is refused ----
@@ -345,6 +406,7 @@ class PlayerActivity : Activity(), Player, Device {
 
     private fun showMenu() {
         val items = mutableListOf<Pair<String, () -> Unit>>()
+        if (current == null) items += "Bibliothèque" to { showLibrary() }
         items += "Bluetooth : rendre la TV visible (2 min)" to { makeDiscoverable() }
         items += (if (prefs.getBool("wd_enabled", false)) "Wi-Fi Direct : désactiver" else "Wi-Fi Direct : activer (crée un réseau TV<->téléphone)") to { toggleWifiDirect() }
         items += "USB : importer les vidéos des clés détectées" to { usbMessage(usb?.importFromVolumes()) }
@@ -461,7 +523,9 @@ class PlayerActivity : Activity(), Player, Device {
     }
 
     override fun play(file: File, posMs: Long) = onMain {
+        savePosition()
         current = file
+        startedPlaying(file.name, file.length())
         streamingName = null
         val p = ensurePlayer()
         val m = Media(libVlc!!, file.absolutePath)
@@ -471,7 +535,7 @@ class PlayerActivity : Activity(), Player, Device {
         m.release()
         p.play()
         closeSafFd()
-        idle.visibility = View.GONE
+        hideScreens()
         snapshot = PlayerState("playing", file.name, posMs, 0)
         flash("▶ ${file.name}")
     }
@@ -479,7 +543,9 @@ class PlayerActivity : Activity(), Player, Device {
     override fun playSaf(name: String, size: Long, posMs: Long) = onMain {
         val store = volProvider.saf ?: throw IllegalStateException("no folder chosen")
         val fd = store.openFd(name)                        // the file lives behind a ContentResolver: libVLC reads the descriptor
+        savePosition()
         current = File(videosDir, name)                    // only the name is used
+        startedPlaying(name, size)
         streamingName = null
         val p = ensurePlayer()
         val old = safPfd; safPfd = fd
@@ -490,13 +556,15 @@ class PlayerActivity : Activity(), Player, Device {
         m.release()
         p.play()
         runCatching { old?.close() }
-        idle.visibility = View.GONE
+        hideScreens()
         snapshot = PlayerState("playing", name, posMs, 0)
         flash("▶ $name")
     }
 
     override fun playStream(url: String, name: String, posMs: Long) = onMain {
+        savePosition()
         current = File(videosDir, name)
+        startedPlaying(name, server?.progress(name)?.second ?: 0L)
         streamingName = name
         val p = ensurePlayer()
         val m = Media(libVlc!!, Uri.parse(url))
@@ -508,12 +576,12 @@ class PlayerActivity : Activity(), Player, Device {
         m.release()
         p.play()
         closeSafFd()
-        idle.visibility = View.GONE
+        hideScreens()
         snapshot = PlayerState("playing", name, posMs, 0)
         flash("▶ $name (lecture pendant l'envoi)")
     }
 
-    override fun pause() = onMain { mp?.let { if (it.isPlaying) { it.pause(); flash("❚❚ Pause") } }; Unit }
+    override fun pause() = onMain { mp?.let { if (it.isPlaying) { it.pause(); flash("❚❚ Pause"); savePosition() } }; Unit }
     override fun resume() = onMain { mp?.let { if (!it.isPlaying && current != null) { it.play(); flash("▶ Lecture") } }; Unit }
     override fun seek(posMs: Long) = onMain {
         val p = mp
@@ -529,7 +597,10 @@ class PlayerActivity : Activity(), Player, Device {
         }
     }
     override fun stop() = onMain {
-        current = null; snapshot = PlayerState(); releasePlayer(); showIdle()
+        val wasPlaying = current != null
+        savePosition()
+        current = null; snapshot = PlayerState(); releasePlayer()
+        if (wasPlaying || libScreen?.visible == true) afterPlayback() else showIdle()
     }
     override fun state(): PlayerState = snapshot
 
@@ -582,6 +653,10 @@ class PlayerActivity : Activity(), Player, Device {
     // ---- Remote control ----
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+        if (current == null) {
+            if (libScreen?.visible == true && keyCode == KeyEvent.KEYCODE_BACK) { showIdle(); return true }
+            if (libScreen?.visible != true && keyCode in LIBRARY_KEYS) { showLibrary(); return true }
+        }
         if (keyCode == KeyEvent.KEYCODE_MENU) { showMenu(); return true }
         if (current == null) return super.onKeyDown(keyCode, event)
         when (keyCode) {
@@ -624,7 +699,14 @@ class PlayerActivity : Activity(), Player, Device {
         runCatching { nsd?.registerService(info, NsdManager.PROTOCOL_DNS_SD, l); nsdListener = l }
     }
 
+    override fun onPause() {
+        super.onPause()
+        savePosition()                                      // HOME, another app on top: keep the resume point
+    }
+
     override fun onDestroy() {
+        libScreen?.release()
+        library?.worker?.stopped = true
         runCatching { nsdListener?.let { nsd?.unregisterService(it) } }
         runCatching { multicastLock?.release() }
         runCatching { storageReceiver?.let { unregisterReceiver(it) } }
@@ -649,6 +731,10 @@ class PlayerActivity : Activity(), Player, Device {
         private const val REQ_TREE = 12
         private const val REQ_STORAGE_TREE = 13
         private val OSD = Any()
+        private val IDLE_STATES = setOf("idle", "ended", "error")
+        /** Keys that open the library from the waiting screen (remotes differ: any of these). */
+        private val LIBRARY_KEYS = setOf(KeyEvent.KEYCODE_GUIDE, KeyEvent.KEYCODE_BOOKMARK, KeyEvent.KEYCODE_PROG_BLUE,
+            KeyEvent.KEYCODE_MEDIA_TOP_MENU, KeyEvent.KEYCODE_TV_CONTENTS_MENU, KeyEvent.KEYCODE_ALL_APPS)
         fun fmt(ms: Long): String { val s = ms / 1000; return "%d:%02d:%02d".format(s / 3600, s / 60 % 60, s % 60) }
         fun localIp(): String? = runCatching {
             NetworkInterface.getNetworkInterfaces().toList().filter { it.isUp && !it.isLoopback }

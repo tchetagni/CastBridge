@@ -16,8 +16,61 @@ data class FileMeta(
 /** Supplied by the TV app (Android: thumbnails, saved positions); the server only asks. Called on HTTP threads. */
 interface LibraryMeta {
     fun meta(name: String, size: Long): FileMeta
+    /** Same, with the file when it lives in a real folder (its modification time keys the thumbnail cache). */
+    fun meta(name: String, size: Long, file: File?): FileMeta = meta(name, size)
     /** Cached JPEG thumbnail, or null (not ready: the provider may start making it; clients ask again later). [file] is set for real folders. */
     fun thumb(name: String, size: Long, file: File?): ByteArray?
+    /** True when no thumbnail can be made for this file (not a video, undecodable): the server answers 404 instead of 202. */
+    fun thumbFailed(name: String, size: Long, file: File?): Boolean = false
+    /** "Mark as watched / not watched" from a library screen. */
+    fun setWatched(name: String, size: Long, watched: Boolean) {}
+    /** The file was renamed or deleted through the API: saved positions follow it (or are forgotten). */
+    fun renamed(from: String, to: String, size: Long) {}
+    fun deleted(name: String, size: Long) {}
+}
+
+/** Broad kind of a stored file, from its extension: the library shows videos and audio as cards, the rest under "Autres fichiers". */
+enum class MediaType {
+    VIDEO, AUDIO, OTHER;
+
+    companion object {
+        private val VIDEO_EXT = setOf("mp4", "m4v", "mkv", "webm", "avi", "mov", "ts", "m2ts", "mts", "mpg", "mpeg", "wmv", "flv", "3gp", "ogv", "vob", "divx", "rmvb")
+        private val AUDIO_EXT = setOf("mp3", "m4a", "aac", "flac", "ogg", "opus", "wav", "wma", "ac3", "mka")
+        fun of(name: String): MediaType {
+            val e = name.substringAfterLast('.', "").lowercase()
+            return when (e) { in VIDEO_EXT -> VIDEO; in AUDIO_EXT -> AUDIO; else -> OTHER }
+        }
+    }
+}
+
+/** What library screens need to sort a file into sections (implemented by the server's items and by the phone's parsed JSON). */
+interface LibraryEntry {
+    val name: String
+    val title: String
+    val mtime: Long
+    val resumeMs: Long
+    val watched: Boolean
+    val playedAtMs: Long
+    val type: MediaType
+}
+
+/** One finished file with everything the library screens show. */
+data class LibraryItem(
+    override val name: String,
+    val size: Long,
+    override val mtime: Long,
+    val volumeId: String,
+    val volumeLabel: String,
+    val volumeKind: VolumeKind,
+    val meta: FileMeta,
+    val duplicate: Boolean = false,
+    val playing: Boolean = false,
+) : LibraryEntry {
+    override val title: String get() = LibraryLogic.title(name)
+    override val resumeMs: Long get() = meta.resumeMs
+    override val watched: Boolean get() = meta.watched
+    override val playedAtMs: Long get() = meta.playedAtMs
+    override val type: MediaType get() = MediaType.of(name)
 }
 
 /** Pure rules for "resume where I stopped" and "already watched", shared by the TV screen, phone and web page. */
@@ -55,4 +108,37 @@ object LibraryLogic {
     /** Recently added first; the caller passes each file's modification time. */
     fun <T> sortNewestFirst(items: List<T>, mtime: (T) -> Long, name: (T) -> String): List<T> =
         items.sortedWith(compareByDescending<T> { mtime(it) }.thenBy { name(it).lowercase() })
+
+    /** Where to grab the thumbnail frame: 10 % in (past the intro), at most 5 min, at least 1 s; 5 s when the duration is unknown. */
+    fun thumbTimeMs(durMs: Long): Long = if (durMs <= 0) 5_000 else (durMs / 10).coerceIn(minOf(1_000, durMs / 2), 300_000)
+}
+
+/** The sections of the library screens, from the same rules everywhere (TV, phone; the web page mirrors them). */
+object LibrarySections {
+    const val RESUME = "resume"
+    const val RECENT = "recent"
+    const val ALL = "all"
+    const val OTHER = "other"
+
+    data class Section<T : LibraryEntry>(val id: String, val title: String, val items: List<T>)
+
+    /**
+     * "Reprendre" (started, not finished, last played first), "Récemment ajoutés" (the [recentCount] newest media),
+     * "Toutes" (every video/audio file, by title), "Autres fichiers" (documents, APKs...). Empty sections are left out;
+     * a file may appear in several sections (like on any TV home screen).
+     */
+    fun <T : LibraryEntry> build(items: List<T>, recentCount: Int = 12): List<Section<T>> {
+        val media = items.filter { it.type != MediaType.OTHER }
+        val resume = media.filter { it.resumeMs > 0 && !it.watched }.sortedWith(compareByDescending<T> { it.playedAtMs }.thenBy { it.title.lowercase() })
+        val recent = LibraryLogic.sortNewestFirst(media, { it.mtime }, { it.name }).take(recentCount)
+        val all = media.sortedWith(compareBy<T> { it.title.lowercase() }.thenBy { it.name })
+        val other = items.filter { it.type == MediaType.OTHER }.sortedBy { it.name.lowercase() }
+        return listOf(
+            Section(RESUME, "Reprendre", resume),
+            // Only worth its own row when the library is bigger than the row itself.
+            Section(RECENT, "Récemment ajoutés", if (media.size > recentCount / 2) recent else emptyList()),
+            Section(ALL, "Toutes", all),
+            Section(OTHER, "Autres fichiers", other),
+        ).filter { it.items.isNotEmpty() }
+    }
 }

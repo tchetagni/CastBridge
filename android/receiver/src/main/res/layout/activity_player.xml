@@ -8,14 +8,36 @@
         android:id="@+id/video"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-    <TextView
-        android:id="@+id/idle"
+    <LinearLayout
+        android:id="@+id/idleBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:textColor="#FFFFFF"
-        android:textSize="22sp" />
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/idle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp" />
+        <Button
+            android:id="@+id/openLibrary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:paddingStart="32dp"
+            android:paddingEnd="32dp"
+            android:text="Bibliothèque (OK)"
+            android:textSize="22sp"
+            android:focusedByDefault="true" />
+    </LinearLayout>
+    <FrameLayout
+        android:id="@+id/library"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
     <TextView
         android:id="@+id/lead"
         android:layout_width="wrap_content"

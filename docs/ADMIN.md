@@ -58,6 +58,9 @@ Les noms de fichiers sont sans `/`, `\`, ni `.part` final, 200 caractères max. 
 | `POST /api/seek?pos=ms` | saut | comme `info` |
 | `POST /api/delete?name=` | supprime fichier et `.part` | comme `info` |
 | `POST /api/rename?name=&to=` | renomme (409 si la cible existe) | comme `info` |
+| `GET /api/library` | bibliothèque : fichiers finis, plus récents d'abord, avec métadonnées | `{"files":[{"name","title","size","mtime","volume","volumeLabel","kind","type":"video\|audio\|other","durationMs","resumeMs","watched","playedAt","hasThumb","duplicate","playing"}],"count"}` |
+| `GET /api/thumb?name=[&volume=]` | miniature JPEG (~320 px) ; la première demande lance sa fabrication | `200` image, `202` pas encore prête (redemander plus tard), `404` impossible (pas une vidéo, fichier illisible) |
+| `POST /api/library/watched?name=&watched=1\|0` | marque vu / non vu (efface la position de reprise) | comme `library` |
 | `GET /api/usb` | état de l'import USB et volumes détectés | `{"running","message","volumes":[chemins]}` |
 | `POST /api/usb/import` | copie les vidéos des clés détectées (dossier de l'app sur la clé) | comme `usb` |
 
@@ -71,6 +74,27 @@ Les noms de fichiers sont sans `/`, `\`, ni `.part` final, 200 caractères max. 
 - libVLC n'est créé qu'au premier `play` et libéré à l'arrêt, à la fin, ou sur `onTrimMemory` ; tampons d'E/S de 64 Ko ; 8 connexions HTTP au plus ;
   `/api/info` relit le dossier au plus une fois par seconde. `GET /api/sysinfo` donne `pssMb` (mémoire de l'app) et `memAvailMb`.
 - Constantes regroupées dans `TvProfile` (module `:core`).
+
+### Bibliothèque (TV, téléphone, page web)
+
+- **Sur la TV** : bouton « Bibliothèque (OK) » de l'écran d'attente, ou touche bleue / GUIDE / signet / « menu du contenu » de la télécommande, ou MENU > Bibliothèque.
+  En quittant une vidéo (RETOUR, fin du fichier, arrêt depuis le téléphone), la TV revient à la bibliothèque. Grille de cartes au D-pad (cadre bleu épais et
+  agrandissement de la carte qui a le focus) : miniature, titre sur deux lignes, durée, barre de reprise, badge « VU », badge « Clé »/« Interne ». Sections
+  « Reprendre » (commencé, pas fini, dernier lu d'abord), « Récemment ajoutés » (12 plus récents, si la bibliothèque en a plus de 6), « Toutes » (par titre), « Autres
+  fichiers » (documents, APK...). OK = lire (« Reprendre à 12:34 » ou « Depuis le début » si une position est mémorisée) ; MENU ou OK maintenu = actions (lire depuis le
+  début, marquer vu/non vu, déplacer vers la clé/l'interne, renommer, supprimer avec confirmation ; « Installer » pour un APK). RETOUR = écran d'accueil (PIN, adresse).
+  Les actions passent par l'API HTTP de la TV elle-même (boucle locale) : mêmes règles que le téléphone.
+- **Reprise** : la position est enregistrée à la pause, à l'arrêt, en quittant l'app et en changeant de fichier, normalisée (`LibraryLogic.resumeFrom` : rien si moins de 10 s
+  ou dans les 30 dernières secondes / 95 %, et alors le fichier est « vu ») ; la fin du fichier le marque vu. Clé = nom stocké + taille (un renommage suit, une suppression
+  oublie). Fichier `library.db` dans le stockage privé de l'app, 2000 entrées au plus.
+- **Miniatures** : JPEG ~320 px, fabriquées en arrière-plan **une à la fois** et seulement quand rien ne joue (un seul décodage à la fois sur cette TV) : `MediaMetadataRetriever`
+  (image réduite directement, API 27+ ; pochette pour l'audio) puis, en cas d'échec, libVLC (instance jetable, filtre `scene`, décodage logiciel, 8 s au plus). Cache disque dans
+  le dossier cache de l'app, **20 Mo au plus** (LRU, clé = nom + taille + date de modification), rien en RAM côté serveur ; l'écran TV garde au plus 3 Mo de bitmaps RGB_565.
+  Un fichier impossible à miniaturiser est marqué et n'est pas réessayé (`404`).
+- **Téléphone** : onglet CastBridge TV > Wi-Fi > « Bibliothèque de la TV » : mêmes sections et actions (toucher = lire, appui long = actions), miniatures chargées à la
+  demande, cache mémoire borné à 8 Mo. **Page web** : section « Bibliothèque » en grille.
+- Choix techniques : l'écran TV est en vues Android classiques + une `RecyclerView` (seules les cartes visibles existent). Compose aurait ajouté plusieurs Mo à l'APK et
+  une consommation de RAM plus élevée au repos pour une TV à ~330 Mo de RAM disponible ; `androidx.recyclerview` ajoute environ 0,4 Mo (voir le rapport de la branche).
 
 ### Lire pendant l'envoi
 
