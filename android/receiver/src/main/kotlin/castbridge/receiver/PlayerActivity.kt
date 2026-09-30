@@ -345,6 +345,32 @@ class PlayerActivity : Activity(), TvService.Screen {
         return java.io.ByteArrayOutputStream().use { o -> bmp.compress(android.graphics.Bitmap.CompressFormat.PNG, 100, o); bmp.recycle(); o.toByteArray() }
     }
 
+    /** Internet: gateway state and connectivity tests, each path on its own. */
+    private fun internetMenu() {
+        val s = svc
+        val g = s?.gateway
+        fun test(title: String, block: ((String) -> Unit) -> Unit) {
+            showDiag(title)
+            Thread { block { l -> main.post { appendDiag(l) } }; s?.checkNetNow() }.start()
+        }
+        choose("Internet  —  ${s?.netSummary() ?: ""}", listOf<Pair<String, () -> Unit>>(
+            "État de la passerelle Bluetooth" to {
+                showDiag("Passerelle Bluetooth")
+                (g?.statusLines() ?: listOf("Passerelle non démarrée (Bluetooth non autorisé sur la TV)")).forEach { appendDiag(it) }
+                appendDiag(""); appendDiag("Internet de la TV : ${s?.netSummary() ?: "?"}")
+            },
+            "Tester le réseau de la TV (${TvNetDiag.localLink(this)})" to { test("Réseau de la TV") { out -> TvNetDiag.run("8.8.8.8", null, out) } },
+            "Tester via la passerelle du téléphone" to {
+                test("Via la passerelle du téléphone") { out ->
+                    val p = g?.proxy()
+                    if (p == null) (g?.statusLines() ?: listOf("Passerelle non démarrée")).forEach(out)
+                    else { out("Téléphone : ${g.phoneName}"); TvNetDiag.run("8.8.8.8", p, out); out("Ping et traceroute exécutés par le téléphone :"); g.diagnosePhoneSide("8.8.8.8", out) }
+                }
+            },
+            "Tout tester" to { test("Test Internet complet") { out -> g?.diagnose("8.8.8.8", out) ?: TvNetDiag.run("8.8.8.8", null, out) } },
+        ))
+    }
+
     /** Pick one of several actions with the remote (sub-menu of a home icon). */
     private fun choose(title: String, items: List<Pair<String, () -> Unit>>) {
         if (items.isEmpty()) return
@@ -382,12 +408,9 @@ class PlayerActivity : Activity(), TvService.Screen {
                 st["1-bt"]?.substringAfter(": ")?.take(28) ?: "Désactivé", btOk) {
                 choose("Bluetooth", listOf<Pair<String, () -> Unit>>("Rendre la TV visible (2 min) pour l'appairer" to { makeDiscoverable() }))
             },
-            HomeTool(R.drawable.ic_t_internet, "Test Internet", "Tester la connexion : DNS, HTTP, HTTPS, adresse publique, ping, traceroute (réseau de la TV et passerelle du téléphone).",
-                net?.replace("Internet via le téléphone", "Via")?.take(28) ?: "Réseau de la TV", net != null) {
-                val host = "8.8.8.8"
-                showDiag(host)
-                Thread { s?.gateway?.diagnose(host) { l -> main.post { appendDiag(l) } } ?: TvNetDiag.run(host, null) { l -> main.post { appendDiag(l) } } }.start()
-            },
+            HomeTool(R.drawable.ic_t_internet, "Internet", "Connectivité de la TV (Wi-Fi/Ethernet) et de la passerelle Bluetooth du téléphone : état et tests.",
+                s?.takeIf { it.netCheckedAt > 0 }?.netSummary()?.take(34) ?: "Vérification…",
+                s?.netDirectMs != null || s?.netGatewayMs != null) { internetMenu() },
             HomeTool(R.drawable.ic_t_wifidirect, "Wi-Fi Direct", "Un réseau direct TV ↔ téléphone, sans box.", if (wdOn) "Activé" else "Désactivé", wdOn) { toggleWifiDirect() },
             HomeTool(R.drawable.ic_t_terminal, "Administration", "Page web et SSH pour gérer la TV à distance.",
                 if (sshOn) "SSH actif" else "SSH arrêté", sshOn) {

@@ -51,9 +51,27 @@ class BtGatewayHost(private val ctx: Context, private val guard: PinGuard, priva
         } catch (e: Exception) { Log.w(TAG, "gateway start", e); entry.stop() }
     }
 
+    val connected get() = entry.connected
+    val phoneName get() = entry.peerName
+    @Volatile var connectedSince = 0L; private set
+
+    /** Plain-language state of the gateway for the TV screen. */
+    fun statusLines(): List<String> {
+        if (!running) return listOf("Passerelle Bluetooth : arrêtée (Bluetooth indisponible ou non autorisé sur la TV)")
+        if (!entry.connected) return listOf("Passerelle Bluetooth : prête, aucun téléphone connecté.",
+            "Sur le téléphone : CastBridge › CastBridge TV › Bluetooth › choisir la TV › « Partager l'Internet du téléphone ».")
+        val (rx, tx) = entry.stats()
+        val mins = if (connectedSince > 0) (System.currentTimeMillis() - connectedSince) / 60000 else 0
+        return listOf("Passerelle Bluetooth : ACTIVE via ${entry.peerName}", "Connectée depuis $mins min · ${entry.openStreams} connexion(s) en cours",
+            "Reçu du téléphone : ${rx / 1024} ko · envoyé : ${tx / 1024} ko")
+    }
+
     fun stop() { running = false; runCatching { server?.close() }; entry.stop() }
 
-    private fun refresh(): Unit = status(if (entry.connected) "Internet via le téléphone (${entry.peerName})" else null)
+    private fun refresh(): Unit = run {
+        if (entry.connected && connectedSince == 0L) connectedSince = System.currentTimeMillis()
+        if (!entry.connected) connectedSince = 0L
+    }.let { status(if (entry.connected) "Internet via le téléphone (${entry.peerName})" else null) }
 
     /** Proxy for the app's own connections when a phone shares its Internet, else null (use the TV's own network). */
     fun proxy(): Proxy? = if (entry.connected) Proxy(Proxy.Type.SOCKS, InetSocketAddress("127.0.0.1", PORT)) else null
@@ -100,6 +118,13 @@ class BtGatewayHost(private val ctx: Context, private val guard: PinGuard, priva
         entry.diag("ping", host) { out(it) }
         entry.diag("trace", host, timeoutS = 120) { out(it) }
         out("— Terminé —")
+    }
+
+    /** Ping and traceroute run by the phone (the gateway's way out). */
+    fun diagnosePhoneSide(host: String, out: (String) -> Unit) {
+        if (!entry.connected) { out("aucun téléphone connecté"); return }
+        entry.diag("ping", host) { out(it) }
+        entry.diag("trace", host, timeoutS = 120) { out(it) }
     }
 
     /** Download speed test through the phone: [bytes] from a public speed-test endpoint. */

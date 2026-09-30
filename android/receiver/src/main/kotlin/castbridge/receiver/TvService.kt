@@ -173,6 +173,7 @@ class TvService : Service(), Device {
         registerStorageEvents()
         rescanAsync(remeasure = true)
         main.postDelayed(transferTick, 5000)
+        main.postDelayed(netTick, 3000)
     }
 
     /** Starts the HTTP server once (only this service does: no second server fighting for port 8765); retries if the port is taken. */
@@ -227,6 +228,30 @@ class TvService : Service(), Device {
     }
 
     /** Wake lock (partial) and Wi-Fi lock only while something is being transferred. */
+    /** Latest connectivity per path, for the home tile: ms of a 204 check, or null. */
+    @Volatile var netDirectMs: Long? = null; private set
+    @Volatile var netGatewayMs: Long? = null; private set
+    @Volatile var netCheckedAt = 0L; private set
+    private val netTick = object : Runnable {
+        override fun run() {
+            bg.execute {
+                netDirectMs = TvNetDiag.probe(null)
+                netGatewayMs = gateway?.proxy()?.let { TvNetDiag.probe(it) }
+                netCheckedAt = System.currentTimeMillis()
+                setStatus("7-net", netSummary())
+            }
+            main.postDelayed(this, 60_000)
+        }
+    }
+    fun checkNetNow() { main.removeCallbacks(netTick); main.post(netTick) }
+
+    /** « ✓ Wi-Fi 40 ms · ✓ Passerelle S21+ » */
+    fun netSummary(): String {
+        val d = netDirectMs?.let { "✓ ${TvNetDiag.localLink(this)} $it ms" } ?: "✗ ${TvNetDiag.localLink(this)} sans Internet"
+        val g = if (gateway?.connected == true) (netGatewayMs?.let { " · ✓ passerelle $it ms" } ?: " · ✗ passerelle sans Internet") else ""
+        return d + g
+    }
+
     private val transferTick = object : Runnable {
         override fun run() {
             val busy = (server?.activeTransfers() ?: 0) > 0 || bt?.busy == true || usb?.isRunning() == true

@@ -15,6 +15,27 @@ import java.net.URL
 object TvNetDiag {
     private fun ms(t0: Long) = (System.nanoTime() - t0) / 1_000_000
 
+    /** One quick HTTP check (204 expected) on a path; returns the time in ms, or null if Internet does not answer. */
+    fun probe(proxy: Proxy?): Long? = runCatching {
+        val t0 = System.nanoTime()
+        (URL("http://connectivitycheck.gstatic.com/generate_204").openConnection(proxy ?: Proxy.NO_PROXY) as HttpURLConnection).run {
+            connectTimeout = 6000; readTimeout = 6000; instanceFollowRedirects = false
+            val c = responseCode; disconnect()
+            if (c == 204) ms(t0) else null
+        }
+    }.getOrNull()
+
+    /** How the TV itself is connected, in plain words (Wi-Fi name if readable, Ethernet, or none). */
+    fun localLink(ctx: android.content.Context): String = runCatching {
+        val cm = ctx.getSystemService(android.net.ConnectivityManager::class.java)
+        val caps = cm.getNetworkCapabilities(cm.activeNetwork) ?: return "aucun réseau"
+        when {
+            caps.hasTransport(android.net.NetworkCapabilities.TRANSPORT_ETHERNET) -> "câble Ethernet"
+            caps.hasTransport(android.net.NetworkCapabilities.TRANSPORT_WIFI) -> "Wi-Fi"
+            else -> "réseau"
+        }
+    }.getOrDefault("réseau")
+
     fun run(host: String, proxy: Proxy?, out: (String) -> Unit) {
         val via = proxy != null
         // DNS (through the gateway the phone resolves names itself: nothing to test here)
