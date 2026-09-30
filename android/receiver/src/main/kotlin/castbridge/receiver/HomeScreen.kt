@@ -65,8 +65,11 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
         setTextColor(Color.WHITE); textSize = 15f; isFocusable = true; isClickable = true
         setPadding(dp(14), dp(6), dp(14), dp(6)); background = TvStyle.rounded(act, 0x99000000.toInt(), 20)
     }
-    private val rowsBox = LinearLayout(act).apply { orientation = LinearLayout.VERTICAL; setPadding(0, 0, 0, dp(60)); clipChildren = false; clipToPadding = false }
-    private val scroll = ScrollView(act).apply { isFillViewport = true; isVerticalScrollBarEnabled = false; clipChildren = false; addView(rowsBox) }
+    // Room inside the scroll area for the focus zoom (+10 %) of the first/last cards, so nothing is cut off.
+    private val rowsBox = LinearLayout(act).apply { orientation = LinearLayout.VERTICAL; setPadding(dp(8), dp(18), dp(8), dp(60)); clipChildren = false; clipToPadding = false }
+    // The scroll area clips what scrolls out of it: cards must never slide over the title and description above it
+    // (they did on a 1280x720 TV, with texts piled on top of each other).
+    private val scroll = ScrollView(act).apply { isFillViewport = true; isVerticalScrollBarEnabled = false; clipChildren = true; clipToPadding = true; addView(rowsBox) }
     private val rows = LinkedHashMap<String, Pair<TextView, RowAdapter>>()
     private var toolsRow: View? = null
     private var signature = 0
@@ -88,7 +91,9 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
         top.addView(TextClock(act).apply { format24Hour = "HH:mm"; format12Hour = "HH:mm"; textSize = 30f; setTextColor(Color.WHITE) })
         content.addView(top)
         content.addView(heroTitle, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(26) })
-        content.addView(heroSub, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(4); bottomMargin = dp(10) })
+        // Fixed height: a one- or two-line description never pushes the rows around.
+        heroSub.minLines = 2
+        content.addView(heroSub, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(4); bottomMargin = dp(6) })
         content.addView(scroll, LinearLayout.LayoutParams(-1, 0, 1f))
         root.addView(content, FrameLayout.LayoutParams(-1, -1))
         container.addView(root, FrameLayout.LayoutParams(-1, -1))
