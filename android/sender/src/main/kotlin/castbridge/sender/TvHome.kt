@@ -186,6 +186,7 @@ fun TvHome(onAdvanced: () -> Unit) {
                             Text(LibraryLogic.title(n.playing!!), maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.titleMedium)
                             if (n.dur > 0) LinearProgressIndicator({ n.pos.toFloat() / n.dur }, Modifier.fillMaxWidth().padding(top = 6.dp))
                         }
+                        IconButton({ RemoteActivity.open(ctx) }) { Icon(Icons.Filled.SettingsRemote, "Télécommande") }
                         IconButton({ cmd { if (n.state == "playing") pause() else resume() } }) { Icon(if (n.state == "playing") Icons.Filled.Pause else Icons.Filled.PlayArrow, "Lecture / pause") }
                     }
                 }
@@ -198,9 +199,10 @@ fun TvHome(onAdvanced: () -> Unit) {
             Task(Icons.Filled.DriveFileMove, "Déplacer vers la TV", "Libère la place du téléphone", Modifier.weight(1f)) { moveNext = true; pick.launch(arrayOf("video/*", "audio/*")) }
         }
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            Task(Icons.Filled.PlayCircle, "Regarder sur la TV", if (now != null) "Télécommande" else "Choisir une vidéo", Modifier.weight(1f)) {
+            Task(Icons.Filled.PlayCircle, "Regarder sur la TV", if (now != null) "Lecture en cours" else "Choisir une vidéo", Modifier.weight(1f)) {
                 if (now != null) showPlayer = true else showLibrary = true
             }
+            Task(Icons.Filled.SettingsRemote, "Télécommande", "Flèches, OK, volume, clavier", Modifier.weight(1f)) { RemoteActivity.open(ctx) }
         }
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             Task(Icons.Filled.VideoLibrary, "Bibliothèque de la TV", "${items.size} fichier(s)", Modifier.weight(1f)) { showLibrary = true }
@@ -237,7 +239,8 @@ fun TvHome(onAdvanced: () -> Unit) {
         NowPlayingSheet(LibraryLogic.title(playing), "Sur la TV", n.state == "playing" || n.state == "buffering", n.pos, n.dur,
             onSeek = { ms -> cmd { seek(ms) } }, onToggle = { cmd { if (n.state == "playing") pause() else resume() } },
             onSkip = { d -> cmd { seek((n.pos + d * 1000L).coerceAtLeast(0)) } },
-            onStop = { cmd { stop() }; showPlayer = false }, onDismiss = { showPlayer = false }, onSettings = { showSettings = true })
+            onStop = { cmd { stop() }; showPlayer = false }, onDismiss = { showPlayer = false }, onSettings = { showSettings = true },
+            onRemote = { RemoteActivity.open(ctx) })
     }
     if (showSettings && client != null) TvPlayerSettingsSheet(client) { showSettings = false }
 }

@@ -81,7 +81,7 @@ fun MiniPlayer(title: String, subtitle: String, playing: Boolean, progress: Floa
 @Composable
 fun NowPlayingSheet(title: String, subtitle: String, playing: Boolean, posMs: Long, durMs: Long,
                     onSeek: (Long) -> Unit, onToggle: () -> Unit, onSkip: (Int) -> Unit,
-                    onStop: () -> Unit, onDismiss: () -> Unit, onSettings: (() -> Unit)? = null) {
+                    onStop: () -> Unit, onDismiss: () -> Unit, onSettings: (() -> Unit)? = null, onRemote: (() -> Unit)? = null) {
     var seeking by remember { mutableStateOf<Float?>(null) }
     ModalBottomSheet(onDismissRequest = onDismiss, containerColor = MaterialTheme.colorScheme.background) {
         Column(Modifier.fillMaxWidth().padding(horizontal = 24.dp).padding(bottom = 32.dp),
@@ -108,6 +108,7 @@ fun NowPlayingSheet(title: String, subtitle: String, playing: Boolean, posMs: Lo
             Row {
                 TextButton(onStop) { Icon(Icons.Filled.Stop, null); Spacer(Modifier.width(8.dp)); Text("Arrêter") }
                 onSettings?.let { TextButton(it) { Icon(Icons.Filled.Tune, null); Spacer(Modifier.width(8.dp)); Text("Réglages") } }
+                onRemote?.let { TextButton(it) { Icon(Icons.Filled.SettingsRemote, null); Spacer(Modifier.width(8.dp)); Text("Télécommande") } }
             }
         }
     }
