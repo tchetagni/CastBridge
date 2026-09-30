@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/layout :: head('Connexion')}"></head>
+<body class="login">
+<main class="login-box">
+    <h1>CastBridge <span>admin</span></h1>
+    <p class="flash err" th:if="${param.erreur}">Identifiant ou mot de passe incorrect. Après 5 échecs, le compte est verrouillé 15 minutes.</p>
+    <p class="flash ok" th:if="${param.deconnexion}">Vous êtes déconnecté.</p>
+    <form th:action="@{/admin/login}" method="post">
+        <label>Identifiant <input type="text" name="username" autocomplete="username" required autofocus></label>
+        <label>Mot de passe <input type="password" name="password" autocomplete="current-password" required></label>
+        <button type="submit">Se connecter</button>
+    </form>
+</main>
+</body>
+</html>

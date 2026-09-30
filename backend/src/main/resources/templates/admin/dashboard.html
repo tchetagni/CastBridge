@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/layout :: head('Tableau de bord')}"></head>
+<body>
+<header th:replace="~{admin/layout :: nav}"></header>
+<main>
+    <div th:replace="~{admin/layout :: flash}"></div>
+    <h1>Tableau de bord</h1>
+    <section class="tiles">
+        <a class="tile" th:href="@{/admin/devices}"><b th:text="${d.total}">0</b><span>appareils connus</span></a>
+        <a class="tile good" th:href="@{/admin/devices(state='online')}"><b th:text="${d.online}">0</b><span>en ligne (15 min)</span></a>
+        <div class="tile"><b th:text="${d.seen24h}">0</b><span>vus en 24 h</span></div>
+        <div class="tile"><b th:text="${d.seen30d}">0</b><span>vus en 30 jours</span></div>
+        <a class="tile warn" th:href="@{/admin/devices(state='blocked')}"><b th:text="${d.blocked}">0</b><span>bloqués</span></a>
+    </section>
+
+    <div class="cols">
+        <section class="card">
+            <h2>Versions installées <small>(appareils vus en 30 jours)</small></h2>
+            <p th:if="${d.versions.isEmpty()}" class="muted">Aucun appareil n'a encore pris contact.</p>
+            <svg th:unless="${d.versions.isEmpty()}" class="bars" role="img" aria-label="Versions installées"
+                 th:attr="viewBox=|0 0 460 ${d.versions.size() * 26}|,height=${d.versions.size() * 26}" width="100%">
+                <g th:each="v, it : ${d.versions}" th:attr="transform=|translate(0,${it.index * 26})|">
+                    <text x="0" y="16" class="lbl" th:text="|${v.app == 'tv' ? 'TV' : 'Tél.'} ${v.versionName ?: '?'} (${v.versionCode ?: '?'})|">TV</text>
+                    <rect x="150" y="4" height="16" rx="3" th:attr="width=${v.count * 260 / versionMax + 2}"/>
+                    <text y="16" class="val" th:attr="x=${v.count * 260 / versionMax + 158}" th:text="${v.count}">0</text>
+                </g>
+            </svg>
+        </section>
+        <section class="card">
+            <h2>Plateformes</h2>
+            <table class="compact">
+                <tr th:each="p : ${d.platforms}"><td th:text="${@fmt.platform(p.key)}"></td><td class="num" th:text="${p.value}"></td></tr>
+                <tr th:if="${d.platforms.isEmpty()}"><td class="muted">—</td></tr>
+            </table>
+            <h2>Pays <small>(approximatif)</small></h2>
+            <table class="compact">
+                <tr th:each="c : ${d.countries}">
+                    <td><a th:href="@{/admin/devices(country=${c.country})}" th:text="${c.country}">CM</a></td>
+                    <td class="num" th:text="${c.count}"></td>
+                </tr>
+                <tr th:if="${d.countries.isEmpty()}"><td class="muted">—</td></tr>
+            </table>
+            <h2>Applications</h2>
+            <table class="compact">
+                <tr th:each="a : ${d.perApp}"><td th:text="${a.key == 'tv' ? 'App TV' : 'App téléphone'}"></td><td class="num" th:text="${a.value}"></td></tr>
+            </table>
+        </section>
+    </div>
+
+    <section class="card">
+        <h2>Derniers plantages signalés</h2>
+        <p th:if="${d.recentCrashes.isEmpty()}" class="muted">Aucun plantage signalé.</p>
+        <table th:unless="${d.recentCrashes.isEmpty()}">
+            <thead><tr><th>Date</th><th>Appareil</th><th>Version</th><th>Message</th></tr></thead>
+            <tbody>
+            <tr th:each="c : ${d.recentCrashes}" th:with="dv=${crashDevices[c.deviceId]}">
+                <td th:text="${@fmt.date(c.crashedAt)}"></td>
+                <td><a th:if="${dv != null}" th:href="@{/admin/devices/{id}(id=${dv.publicId})}" th:text="${dv.displayName()}"></a></td>
+                <td th:text="${c.versionCode}"></td>
+                <td class="wrap" th:text="${c.message}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+</body>
+</html>

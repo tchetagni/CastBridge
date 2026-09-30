@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/layout :: head('Quiz')}"></head>
+<body>
+<header th:replace="~{admin/layout :: nav}"></header>
+<main th:with="back=|?status=${status}&track=${track ?: ''}&level=${level ?: ''}&field=${field ?: ''}&region=${region ?: ''}&q=${q ?: ''}&page=${page.number}|">
+    <div th:replace="~{admin/layout :: flash}"></div>
+    <h1>Banque de questions <small th:text="|${stats.total} questions|"></small></h1>
+
+    <p>
+        <a class="chip" th:each="s : ${ {'draft','reviewed','rejected','all'} }" th:href="@{/admin/quiz(status=${s})}"
+           th:classappend="${status == s} ? 'on'"
+           th:text="${s == 'draft'} ? |Brouillons (${stats.parStatut['draft'] ?: 0})| : (${s == 'reviewed'} ? |Validées (${stats.parStatut['reviewed'] ?: 0})| : (${s == 'rejected'} ? |Rejetées (${stats.parStatut['rejected'] ?: 0})| : 'Toutes'))"></a>
+    </p>
+
+    <form class="filters" method="get" th:action="@{/admin/quiz}">
+        <input type="hidden" name="status" th:value="${status}">
+        <input type="search" name="q" th:value="${q}" placeholder="Texte ou catégorie…">
+        <select name="track">
+            <option value="">Tous parcours</option>
+            <option th:each="t : ${tracks}" th:value="${t}" th:text="${t}" th:selected="${track == t}"></option>
+        </select>
+        <select name="level">
+            <option value="">Tous niveaux</option>
+            <option th:each="l : ${levels}" th:value="${l}" th:text="${l}" th:selected="${level == l}"></option>
+        </select>
+        <select name="field">
+            <option value="">Toutes filières</option>
+            <option th:each="x : ${fields}" th:value="${x}" th:text="${x}" th:selected="${field == x}"></option>
+        </select>
+        <select name="region">
+            <option value="">Toutes régions</option>
+            <option th:each="r : ${ {'CM','AF','WORLD'} }" th:value="${r}" th:text="${r}" th:selected="${region == r}"></option>
+        </select>
+        <button type="submit">Filtrer</button>
+    </form>
+
+    <article class="question" th:each="qq : ${page.content}">
+        <header>
+            <span class="badge" th:text="${qq.reviewStatus}" th:classappend="${qq.reviewStatus == 'reviewed'} ? 'good' : (${qq.reviewStatus == 'rejected'} ? 'bad' : 'warn')"></span>
+            <span class="muted small" th:text="|${qq.uuid} · ${qq.track}${qq.level != null ? ' · ' + qq.level : ''}${qq.field != null ? ' · ' + qq.field : ''} · ${qq.region} · ${qq.category} · difficulté ${qq.difficulty}|"></span>
+        </header>
+        <p class="q" th:text="${qq.text}"></p>
+        <ol class="choices">
+            <li th:each="c, it : ${qq.choices}" th:text="${c}" th:classappend="${it.index == qq.answer} ? 'right'"></li>
+        </ol>
+        <p class="small"><b>Explication :</b> <span th:text="${qq.explanation}"></span></p>
+        <p class="small muted"><b>Source :</b> <span th:text="${qq.source}"></span></p>
+        <div class="actions">
+            <form th:unless="${qq.reviewStatus == 'reviewed'}" th:action="@{/admin/quiz/{u}/status(u=${qq.uuid})}" method="post" class="inline">
+                <input type="hidden" name="value" value="reviewed"><input type="hidden" name="back" th:value="${back}">
+                <button type="submit" class="small">Valider</button>
+            </form>
+            <form th:unless="${qq.reviewStatus == 'draft'}" th:action="@{/admin/quiz/{u}/status(u=${qq.uuid})}" method="post" class="inline">
+                <input type="hidden" name="value" value="draft"><input type="hidden" name="back" th:value="${back}">
+                <button type="submit" class="small ghost">Brouillon</button>
+            </form>
+            <form th:unless="${qq.reviewStatus == 'rejected'}" th:action="@{/admin/quiz/{u}/status(u=${qq.uuid})}" method="post" class="inline">
+                <input type="hidden" name="value" value="rejected"><input type="hidden" name="back" th:value="${back}">
+                <button type="submit" class="small danger ghost">Rejeter</button>
+            </form>
+            <form th:action="@{/admin/quiz/{u}/delete(u=${qq.uuid})}" method="post" class="inline">
+                <input type="hidden" name="back" th:value="${back}">
+                <button type="submit" class="small danger ghost" data-confirm="Supprimer définitivement cette question ?">Supprimer</button>
+            </form>
+        </div>
+    </article>
+    <p th:if="${page.content.isEmpty()}" class="muted">Aucune question.</p>
+
+    <nav class="pager" th:if="${page.totalPages > 1}">
+        <a th:if="${page.hasPrevious()}" th:href="@{/admin/quiz(status=${status},track=${track},level=${level},field=${field},region=${region},q=${q},page=${page.number - 1})}">← Précédentes</a>
+        <span th:text="|Page ${page.number + 1} / ${page.totalPages}|"></span>
+        <a th:if="${page.hasNext()}" th:href="@{/admin/quiz(status=${status},track=${track},level=${level},field=${field},region=${region},q=${q},page=${page.number + 1})}">Suivantes →</a>
+    </nav>
+
+    <div class="cols">
+        <section class="card">
+            <h2>Importer (JSON ou CSV)</h2>
+            <form th:action="@{/admin/quiz/import}" method="post" enctype="multipart/form-data" class="stack">
+                <label>Fichier <input type="file" name="file" accept=".json,.csv" required></label>
+                <label>Statut des questions sans statut
+                    <select name="defaultStatus"><option value="draft">brouillon</option><option value="reviewed">validée</option></select></label>
+                <label class="check"><input type="checkbox" name="dryRun" value="true" checked> Vérifier seulement (ne rien enregistrer)</label>
+                <button type="submit">Envoyer</button>
+                <p class="muted small">Tout ou rien : une seule erreur et rien n'est enregistré ; les erreurs sont listées. Voir docs/API-SERVER.md pour les formats.</p>
+            </form>
+        </section>
+        <section class="card">
+            <h2>Exporter</h2>
+            <p><a class="button ghost" th:href="@{/admin/quiz/export(format='json',status='all')}">Tout en JSON</a>
+               <a class="button ghost" th:href="@{/admin/quiz/export(format='csv',status='all')}">Tout en CSV</a>
+               <a class="button ghost" th:href="@{/admin/quiz/export(format='json',status='reviewed')}">Validées (JSON)</a></p>
+            <h2>Questions validées</h2>
+            <table class="compact">
+                <tr th:each="t : ${stats.publieesParParcours}"><td th:text="${t.key}"></td><td class="num" th:text="${t.value}"></td></tr>
+            </table>
+        </section>
+    </div>
+</main>
+</body>
+</html>

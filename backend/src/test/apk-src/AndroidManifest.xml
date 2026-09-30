@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Source of src/test/resources/apk/receiver-42.apk (a tiny unsigned APK used by the upload tests), rebuilt with:
+     aapt2 link (manifest option) AndroidManifest.xml -I $ANDROID_HOME/platforms/android-35/android.jar -o receiver-42.apk
+     (see backend/README.md, "Tests") -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="castbridge.receiver" android:versionCode="42" android:versionName="0.6-test">
+    <uses-sdk android:minSdkVersion="26" android:targetSdkVersion="35"/>
+    <application android:label="Test"/>
+</manifest>

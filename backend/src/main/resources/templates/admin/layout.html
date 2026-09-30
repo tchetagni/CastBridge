@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <title th:text="${title} + ' · CastBridge admin'">CastBridge admin</title>
+    <link rel="stylesheet" th:href="@{/admin/assets/admin.css}">
+    <script th:src="@{/admin/assets/admin.js}" defer></script>
+</head>
+<body>
+<header th:fragment="nav" class="top">
+    <a class="brand" th:href="@{/admin}">CastBridge <span>admin</span></a>
+    <nav>
+        <a th:href="@{/admin}" th:classappend="${active == 'dashboard'} ? 'on'">Tableau de bord</a>
+        <a th:href="@{/admin/devices}" th:classappend="${active == 'devices'} ? 'on'">Appareils</a>
+        <a th:href="@{/admin/releases}" th:classappend="${active == 'releases'} ? 'on'">Versions</a>
+        <a th:href="@{/admin/quiz}" th:classappend="${active == 'quiz'} ? 'on'">Quiz</a>
+    </nav>
+    <form th:action="@{/admin/logout}" method="post" class="logout">
+        <button type="submit" class="link">Déconnexion</button>
+    </form>
+</header>
+<div th:fragment="flash">
+    <p class="flash ok" th:if="${ok}" th:text="${ok}"></p>
+    <div class="flash err" th:if="${error}">
+        <p th:text="${error}"></p>
+        <ul th:if="${details != null and !details.isEmpty()}">
+            <li th:each="d : ${details}" th:text="${d}"></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

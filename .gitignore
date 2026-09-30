@@ -5,3 +5,9 @@ build/
 local.properties
 *.iml
 .kotlin/
+# backend/ (server): build output and secrets never committed
+backend/target/
+backend/.env
+backend/secrets/
+backend/geoip/
+backend/backups/
