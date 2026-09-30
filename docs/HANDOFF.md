@@ -10,12 +10,12 @@
 - **Cœur** `:core` (Kotlin JVM, testé) : protocoles, moteurs (quiz, échecs, apprentissage), clients serveur.
 - **SSH** `:sshd` (Apache MINA SSHD) : administration à distance de la TV.
 - **Serveur** `backend/` (Java 21, Spring Boot 3, MySQL 8.4, Docker) : mises à jour signées, questions du quiz, suivi des appareils, télémétrie, interface `/admin`.
-- **Charte graphique** `branding/` (non encore appliquée aux apps).
+- **Charte graphique** `branding/` (101 fichiers sur `feat/ssh`) ; application aux apps en cours sur `feat/charte`.
 
 ## 2. État des versions
 | Élément | Version | Où |
 |---|---|---|
-| App TV | 0.9.1 (versionCode 19) | clé USB de la TV : `Download/CastBridge-TV-0.9.1.apk` (armeabi-v7a, sha256 `9b936bde…f2945`) ; la TV tourne encore en 0.7 tant que l'APK n'est pas installé |
+| App TV | 0.11.1 (versionCode 21) | clé USB de la TV : `Download/CastBridge-TV-0.11.1.apk` (armeabi-v7a, sha256 `50d6c815…37e95`) ; la TV tournait en 0.11 (corrige la bibliothèque illisible : crochet `]` en trop dans `/api/library`) |
 | App téléphone | 1.0-beta (versionCode 8) | installée sur le Samsung S21+ d'Esaie (sans `feat/connect`) |
 | Serveur | commit `992db18` | https://bridge.sti-cm.com (en ligne, sain) |
 
@@ -27,6 +27,10 @@ Branche d'intégration : **`feat/ssh`** (poussée sur `origin` et sur le dépôt
 
 **ATTENTION — `wip/external-ai-changes`** (non fusionnée, NON revue) : instantané de 220 fichiers trouvés non commités dans le dossier de travail, écrits par d'autres sessions d'IA (activation/licence, contrôle parental, sudoku, deux mises à jour automatiques concurrentes `AutoUpdater`/`PhoneAutoUpdater`, suivi de l'adresse Bluetooth, assets de la charte, icônes, thème). À auditer (sécurité, doublons avec `feat/connect`) avant toute intégration ; rien de cela n'a été demandé dans les sessions de référence.
 `main` (GitHub) est resté à l'état initial : les fusions vers `main` sont à décider.
+
+**Travaux en cours (agents cloud, branches non fusionnées, 2026-10-01)** : `feat/charte` (logo, icônes, thèmes, polices, contrastes WCAG, guide PDF) · `feat/bt-plug-and-play` (appairage Bluetooth, téléphones de confiance, jeton propre à chaque téléphone, sans PIN) · `feat/games-hub` (catégorie Jeux : Quiz, Échecs, Sudoku repris du wip) · `feat/parental` (contrôle parental réécrit : PIN haché, sans défaut, verrouillage progressif, BACK/HOME jamais bloqués).
+
+**Audit de `wip/external-ai-changes`** (branche `audit/external-ai`, `docs/AUDIT-EXTERNAL-CHANGES.md`) : NE PAS FUSIONNER en l'état. À rejeter : clé SSH en dur injectée par `BtUploadService`, auto-clic d'accessibilité sur les dialogues système, services du téléphone `exported=true`, blocage de toutes les touches pendant une mise à jour, activation/licence (HMAC symétrique, inerte), `AutoUpdater`/`PhoneAutoUpdater`/`DeviceHub` (doublons de `feat/connect`, sans consentement), binaire `cbt-rfcomm` non vérifié. Sûr : charte, icônes, thème, Sudoku, téléchargement Bluetooth. À confirmer avec Esaie : la clé SSH (commentaire `letcheta@…`) est-elle la sienne ?
 
 ## 4. Où tourne quoi
 - **TV de référence** : « SMART_TV » (Amlogic, GaiaOS = Android 14, **32 bits armeabi-v7a**, ~1 Go de RAM, écran logique 1280×720 à 160 dpi, mémoire interne ~2,2 Go presque pleine). Clé USB exFAT de 58 Go (écriture ~2-15 Mo/s). Les TV cibles sont de **tout type** (Android TV, Fire TV, box), pas seulement GaiaOS.
@@ -64,11 +68,11 @@ ssh ubuntu@bridge.sti-cm.com 'cd ~/castbridge/services/castbridge/backend && git
 - Stockage : règle « **au moins 1 Go libre à la fin** » pour les transferts ; clé USB prioritaire ; contenu d'Apprendre : moins de 50 Mo dans l'app (packs en ligne ou sur stockage).
 - Téléchargements (aria2) : fusionnés tels quels (≈ +29 Mo installés sur la TV).
 - Télémétrie : deux niveaux de consentement (essentiel / statistiques d'usage), conformité à la loi camerounaise 2024/017 (**texte à faire relire par un juriste**).
-- Mot de passe admin : 12 caractères minimum imposés ; Esaie a demandé `Centos` (trop faible) : **décision en attente**.
+- Mot de passe admin : 12 caractères minimum imposés ; Esaie a choisi un mot de passe conforme (voir « Où sont les secrets »).
 
 ## 8. À faire / en attente
-1. Fusionner `feat/connect` puis publier les APK via `/admin` et vérifier le premier enregistrement réel d'une TV.
-2. **Appliquer la charte graphique** (`branding/`) aux apps : couleurs, typographies, icônes des tuiles, icône d'app et bannière TV, anneau de focus. Avant : corriger les paires de couleurs qui échouent en WCAG AA pour le texte courant (or clair sur blanc 3,6 ; accent clair 3,3 ; blanc sur vert 3,4 ; gris `#6E7A93` sur fond sombre 4,4), refaire la mise en page du guide PDF (logos déformés aux p. 4-7 et 11), ajouter les icônes manquantes (Apprendre, Télécommande, Sur le téléphone, Internet/passerelle), envisager de distinguer le symbole d'un casque audio.
+1. Publier les APK via `/admin` et vérifier le premier enregistrement réel d'une TV (`feat/connect` est fusionnée).
+2. **Appliquer la charte graphique** (en cours : `feat/charte`) (`branding/`) aux apps : couleurs, typographies, icônes des tuiles, icône d'app et bannière TV, anneau de focus. Avant : corriger les paires de couleurs qui échouent en WCAG AA pour le texte courant (or clair sur blanc 3,6 ; accent clair 3,3 ; blanc sur vert 3,4 ; gris `#6E7A93` sur fond sombre 4,4), refaire la mise en page du guide PDF (logos déformés aux p. 4-7 et 11), ajouter les icônes manquantes (Apprendre, Télécommande, Sur le téléphone, Internet/passerelle), envisager de distinguer le symbole d'un casque audio.
 3. Clé de signature de release + secrets GitHub (`release.yml`) : à décider.
 4. Contenu d'Apprendre : **124 points « à vérifier »**, tout est en brouillon, relecture par des enseignants (deux sous-systèmes) et par un agent de santé ; matières non couvertes : HG-ECM, SVT, anglais BEPC, philosophie, GCE A Level, licence ; vidéos (droits).
 5. Quiz : 3 questions à relire (docs/QUIZ.md) ; serveur en ligne pour la banque.
