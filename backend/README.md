@@ -8,7 +8,10 @@ Serveur Java Spring Boot + MySQL, en Docker, pour les besoins actuels du projet 
 2. **Banque de questions du quiz** : même format d'échange que la TV (branche `feat/tv-quiz`), validation stricte,
    import/export JSON/CSV, synchronisation incrémentale (ETag, `since`, suppressions), tirages côté serveur ;
 3. **Suivi des appareils** : chaque TV/téléphone s'enregistre (jeton d'appareil), envoie un heartbeat toutes les
-   15 min, signale ses plantages ; **interface d'administration web** (`/admin`) pour tout suivre et piloter.
+   15 min, signale ses plantages ; **interface d'administration web** (`/admin`) pour tout suivre et piloter ;
+4. **Télémétrie d'usage et KPI** (avec consentement) : lots d'événements, agrégats, page d'accueil « Fonctionnalités
+   les plus utilisées », indicateurs de parc, d'usage, d'envois, de lecture, de quiz… (voir
+   [`docs/TELEMETRY.md`](../docs/TELEMETRY.md), qui contient aussi une proposition de texte d'information).
 
 Projet Maven indépendant du build Gradle Android. Les routes et les formats sont décrits dans
 [`docs/API-SERVER.md`](../docs/API-SERVER.md).
@@ -40,7 +43,8 @@ Code (`src/main/java/castbridge/server/`) :
 | `updates` | releases (entité, dépôt, lecture du manifeste binaire de l'APK), politique de version minimale, signature Ed25519 des manifestes, téléchargements `/dl` |
 | `quiz` | questions, validation, import/export JSON/CSV, synchro avec tombstones, tirages, seed initial |
 | `devices` | enregistrement, heartbeats, plantages, historique (installations, versions, jours), rétention, géolocalisation approximative |
-| `admin` | interface web Thymeleaf (`/admin`), comptes BCrypt avec verrouillage |
+| `telemetry` | ingestion des événements d'usage (catalogue fermé, liste blanche, consentement, dédoublonnage), agrégats KPI, calculs des indicateurs, rétention |
+| `admin` | interface web Thymeleaf (`/admin`, `/admin/kpi`), comptes BCrypt avec verrouillage |
 | `config`, `web` | sécurité (deux chaînes : API par jeton, web par session + CSRF), limitation de débit, journaux d'accès, erreurs en français |
 
 Schéma : Flyway (`src/main/resources/db/migration`), dates stockées en UTC, affichées en `Africa/Douala`.
@@ -197,9 +201,17 @@ de 30 minutes (cookie `CBSESSION` HttpOnly, Secure, SameSite=Strict), CSRF sur t
 
 Écrans :
 
-- **Tableau de bord** : tuiles (appareils connus, en ligne dans les 15 dernières minutes, vus en 24 h / 30 jours,
+- **Tableau de bord** : **en premier, « Fonctionnalités les plus utilisées »** (TV et téléphone ensemble ou
+  séparés) : utilisations, appareils distincts et % du parc actif, temps total et moyen, tendance par rapport à la
+  période précédente (flèche verte/rouge), barres triées et courbe par semaine, filtres période / version /
+  plateforme / pays / modèle / groupe, export CSV ; puis tuiles (appareils connus, en ligne dans les 15 dernières minutes, vus en 24 h / 30 jours,
   bloqués), graphique en barres des versions installées (TV et téléphone), plateformes (Android TV, Google TV,
   Fire OS, box Android, téléphone…), pays approximatifs, derniers plantages avec lien vers l'appareil.
+- **Indicateurs** (`/admin/kpi`) : onglets Parc (DAU/WAU/MAU, nouveaux, perdus, rétention J1/J7/J30 par cohorte,
+  répartitions), Usage (sessions, durée, écrans, entonnoir), Envois, Lecture, Quiz (dont les questions trop
+  faciles / difficiles), Échecs, Téléchargements, Mises à jour (adoption), Qualité, Connectivité ; mêmes filtres,
+  export CSV par onglet. Graphiques : Chart.js 4.4.1 (licence MIT) servi localement
+  (`static/admin/assets/chart.umd.min.js`), aucun appel externe, données passées par attributs `data-chart`.
 - **Appareils** : liste filtrable (texte, état en ligne/hors ligne/bloqué, app, plateforme, fabricant, ABI, groupe,
   versionCode, pays) et triable (nom, modèle, version, dernier contact, pays), pastille verte/grise/rouge.
 - **Fiche appareil** : toutes les informations remontées (version, canal, plateforme, fabricant/modèle, système,
@@ -208,7 +220,8 @@ de 30 minutes (cookie `CBSESSION` HttpOnly, Secure, SameSite=Strict), CSRF sur t
   (« Salon Esaie ») ; actions : forcer une vérification de mise à jour au prochain heartbeat, canal forcé
   stable/beta, bloquer/débloquer, oublier l'appareil ; histogramme des contacts par jour sur 30 jours, versions
   successives, installations successives (une nouvelle ligne = réinstallation), plantages dépliables avec le détail,
-  100 derniers heartbeats détaillés.
+  chronologie des 200 derniers événements d'usage, 100 derniers heartbeats détaillés, consentement et date ;
+  « Effacer l'appareil et ses données » (droit à l'effacement, en cascade).
 - **Versions** : formulaire de publication d'APK (app, ABI, canal, versionCode, versionName, déploiement %, notes,
   obligatoire) avec vérification du manifeste de l'APK, version minimale supportée par app/canal, liste des versions
   avec réglage du pourcentage de déploiement, lien de téléchargement, retrait, suppression.
@@ -249,6 +262,9 @@ Copiez aussi `/var/backups/castbridge` hors du VPS (et la clé privée Ed25519, 
 - Appareils : jeton aléatoire de 256 bits par appareil (seul son SHA-256 est stocké), ANDROID_ID jamais transmis en
   clair (SHA-256 salé par l'app, re-haché côté serveur), IP brute effacée après 30 jours, heartbeats détaillés
   30 jours puis agrégats journaliers.
+- Télémétrie : consentement à deux niveaux (essentiel / statistiques d'usage, désactivées par défaut), catalogue
+  fermé, clés interdites refusées, messages nettoyés des chemins/URL/noms de fichiers, événements bruts 13 mois,
+  droits d'accès (`GET /api/v1/devices/me`) et d'effacement (`DELETE /api/v1/devices/me`, ou par l'admin).
 - Limite de débit par IP (seau à jetons en mémoire) sur `/api`, `/dl` et la connexion web ; CORS fermé ; en-têtes
   `X-Content-Type-Options`, `X-Frame-Options: DENY`, CSP, `Referrer-Policy`, HSTS derrière HTTPS.
 - Conteneurs : MySQL sans port publié sur un réseau interne sans Internet ; API non-root, système de fichiers en
@@ -264,9 +280,12 @@ cd backend && ./mvnw -q verify        # Java 21 ; ou mvn -q verify
 - `SigningAndApkTest` : vecteurs RFC 8032, formats de clé, texte signé canonique (repris à l'identique par le test
   Kotlin de `:core`), lecture du manifeste binaire d'un vrai APK (`src/test/resources/apk/receiver-42.apk`, construit
   avec `aapt2 link` depuis `src/test/apk-src/AndroidManifest.xml`), répartition du déploiement progressif.
-- `UpdatesApiTest`, `QuizApiTest`, `DevicesApiTest`, `AdminWebTest`, `RateLimitTest` : application complète via
+- `UpdatesApiTest`, `QuizApiTest`, `DevicesApiTest`, `AdminWebTest`, `RateLimitTest`, `TelemetryApiTest` (lot gzip,
+  dédoublonnage, liste blanche, clés interdites, consentement, KPI sur un jeu synthétique, purge, effacement) :
+  application complète via
   MockMvc sur **H2 en mode MySQL** (mêmes migrations Flyway, base neuve par classe).
-- `MySqlContainerTest` : les mêmes parcours sur un vrai **MySQL 8.4** (Testcontainers) ; ignoré automatiquement si
+- `MySqlContainerTest` : les mêmes parcours (dont la télémétrie et tous les KPI) sur un vrai **MySQL 8.4**
+  (Testcontainers, données en tmpfs) ; ignoré automatiquement si
   Docker n'est pas disponible (les tests H2 tournent quand même). La CI (`.github/workflows/backend.yml`) a Docker.
 - `smoke-test.sh` : vérification d'un serveur qui tourne (après déploiement).
 
@@ -279,8 +298,11 @@ Logique pure, testée (`gradle :core:test`), sans modifier `:receiver`/`:sender`
   `UpdateManifest`, `Ed25519` (vérification en Kotlin pur, Android 8+), `UpdateSchedule` (au démarrage, toutes les
   12 h avec décalage aléatoire par appareil, backoff exponentiel, au plus une vérification par heure),
   `UpdateKeys.PUBLIC_KEY` (**à remplir au déploiement**).
-- `castbridge.core.device` : `DeviceFacts` (ce que l'app lit d'Android), `Platform` (détection générique),
-  `DeviceReport`, `DeviceClient` (enregistrement, heartbeat avec réenregistrement transparent, plantages).
+- `castbridge.core.device` : `DeviceFacts` (ce que l'app lit d'Android, dont le consentement), `Platform`
+  (détection générique), `DeviceReport`, `DeviceClient` (enregistrement, heartbeat avec réenregistrement
+  transparent, plantages, `myData()` / `eraseMe()`).
+- `castbridge.core.telemetry` : `Telemetry` (filtrage par consentement et catalogue, sessions, fonctionnalités,
+  écrans), `EventQueue` (file persistante bornée à 2 Mo), `TelemetryUploader` (lots gzip de 500, rejouables).
 
 L'intégration (service Android, stockage des préférences, installation du fichier vérifié) reste à faire dans les
 apps.
@@ -289,5 +311,7 @@ apps.
 
 - Exposition HTTPS via le nginx partagé : sous-domaine ou chemin (décision d'Esaie), puis `CASTBRIDGE_PUBLIC_BASE_URL`.
 - Clé Ed25519 de production à générer et sa clé publique à coller dans `UpdateKeys.PUBLIC_KEY`.
-- Intégration Android (heartbeat, vérification et installation des mises à jour) ; secrets GitHub pour `release.yml`.
+- Intégration Android (heartbeat, vérification et installation des mises à jour, écran d'information et réglage du
+  consentement, émission des événements `feature_used` / `screen_time`…) ; secrets GitHub pour `release.yml`.
+- Validation juridique du texte d'information et des durées (`docs/TELEMETRY.md` §7).
 - Base GeoLite2 optionnelle (licence MaxMind gratuite) pour la ville ; sinon pays seulement via un en-tête du proxy.

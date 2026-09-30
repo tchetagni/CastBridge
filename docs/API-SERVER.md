@@ -278,7 +278,30 @@ cba -X POST "$CB/api/v1/admin/devices/<deviceId>/channel?channel=beta"     # vid
 cba -X DELETE $CB/api/v1/admin/devices/<deviceId>
 ```
 
-## 4. Divers
+## 4. Télémétrie d'usage et KPI
+
+Détails, catalogue des événements, consentement et conservation : [`docs/TELEMETRY.md`](TELEMETRY.md).
+
+```sh
+# lot d'événements (appareil), gzip recommandé
+printf '%s' '{"app":"tv","versionCode":8,"events":[{"id":"'$(uuidgen)'","ts":'$(date +%s000)',"name":"feature_used","props":{"feature":"quiz","source":"tile"}}]}' \
+  | gzip | curl -s -H "Authorization: Bearer $DEVICE_TOKEN" -H 'Content-Type: application/json' -H 'Content-Encoding: gzip' \
+      --data-binary @- $CB/api/v1/events/batch
+# {"accepted":1,"duplicates":0,"rejected":0,"errors":[],"serverTime":"…"}
+
+curl -s -H "Authorization: Bearer $DEVICE_TOKEN" $CB/api/v1/devices/me            # droit d'accès
+curl -s -X DELETE -H "Authorization: Bearer $DEVICE_TOKEN" $CB/api/v1/devices/me  # droit à l'effacement (204)
+
+# KPI (admin), filtres : from, to (AAAA-MM-JJ), app, version, platform, country, group, model
+cba "$CB/api/v1/admin/kpi/features?app=tv&from=2026-09-01&to=2026-09-30"   # fonctionnalités les plus utilisées
+cba "$CB/api/v1/admin/kpi/parc?platform=android-tv"                         # parc | usage | cast | lecture | quiz | echecs
+cba $CB/api/v1/admin/kpi                                                     #   | telechargements | mises-a-jour | qualite | connectivite
+```
+
+Le rapport d'appareil (register / heartbeat) porte le consentement : `"consent":"usage"` ou `"essential"` et
+`"consentVersion"`. Sans `usage`, seuls `error`, `crash` et `update_install` sont acceptés.
+
+## 5. Divers
 
 - `GET /admin` : interface d'administration web (connexion par identifiant/mot de passe, voir `backend/README.md`).
 - `GET /v3/api-docs` : description OpenAPI, avec le jeton admin seulement.
