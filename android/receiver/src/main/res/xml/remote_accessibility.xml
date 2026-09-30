@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- « CastBridge Télécommande » (docs/REMOTE.md): acts only on orders of a phone that knows the TV's PIN.
+     No event is read or kept (onAccessibilityEvent is empty); window content is read only to find the focused item
+     when the phone presses an arrow, OK or types text. -->
+<accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
+    android:description="@string/remote_a11y_description"
+    android:accessibilityEventTypes="typeWindowStateChanged"
+    android:accessibilityFeedbackType="feedbackGeneric"
+    android:accessibilityFlags="flagDefault"
+    android:canRetrieveWindowContent="true"
+    android:notificationTimeout="1000"
+    android:isAccessibilityTool="false" />

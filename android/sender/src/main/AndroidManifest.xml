@@ -64,6 +64,14 @@
                 <data android:mimeType="application/x-bittorrent" />
             </intent-filter>
         </activity>
+        <!-- Remote control of CastBridge TV (docs/REMOTE.md): its own screen (phone volume buttons drive the TV there) and an
+             optional Quick Settings tile -->
+        <activity android:name=".RemoteActivity" android:exported="false" android:label="Télécommande TV"
+            android:theme="@android:style/Theme.Material.NoActionBar" android:windowSoftInputMode="adjustResize" />
+        <service android:name=".RemoteTileService" android:exported="true" android:label="Télécommande TV"
+            android:icon="@drawable/ic_remote" android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter><action android:name="android.service.quicksettings.action.QS_TILE" /></intent-filter>
+        </service>
         <service android:name=".UploadService" android:exported="false"
             android:foregroundServiceType="dataSync" />
         <service android:name=".BtUploadService" android:exported="false"

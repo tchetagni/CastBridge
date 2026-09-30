@@ -82,6 +82,8 @@ object BtProtocol {
         onProgress: (name: String, done: Long, total: Long) -> Unit = { _, _, _ -> },
         /** Answers a CBTN request (null = this TV does not offer a faster link: ERR_MAGIC, as an old TV would). */
         negotiate: ((wantWifiDirect: Boolean) -> LinkInfo)? = null,
+        /** Phone remote over Bluetooth (CBTR, castbridge.core.remote.RemoteBt): runs until the phone closes the link. */
+        remote: ((InputStream, OutputStream) -> Unit)? = null,
     ): Int {
         dir.mkdirs()
         val din = DataInputStream(input)
@@ -100,6 +102,17 @@ object BtProtocol {
             }
             val text = negotiate(flags and WANT_WIFI_DIRECT != 0).encode().toByteArray(Charsets.UTF_8)
             dout.writeByte(OK); dout.writeShort(text.size); dout.write(text); dout.flush()
+            return OK
+        }
+        if (m == castbridge.core.remote.RemoteBt.MAGIC && remote != null) {
+            val pin = String(ByteArray(Pin.LENGTH).also { din.readFully(it) }, Charsets.US_ASCII)
+            if (guard != null) when (guard.check(peer, pin)) {
+                PinGuard.Result.OK -> {}
+                PinGuard.Result.BAD -> return fail(ERR_PIN)
+                PinGuard.Result.LOCKED -> return fail(ERR_LOCKED)
+            }
+            dout.writeByte(OK); dout.flush()
+            remote(din, dout)
             return OK
         }
         if (m != MAGIC) return fail(ERR_MAGIC)

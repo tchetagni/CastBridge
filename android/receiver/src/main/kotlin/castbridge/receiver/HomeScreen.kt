@@ -143,7 +143,8 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
             "Autres fichiers" to sections[LibrarySections.OTHER]?.items.orEmpty(),
         ).filter { it.second.isNotEmpty() }
         // Keep the row views (and the focus) when only their content changed.
-        if (wanted.map { it.first } != rows.keys.toList()) {
+        // (also the very first time: an empty TV still needs its tools row, or the home has nothing to focus)
+        if (toolsRow == null || wanted.map { it.first } != rows.keys.toList()) {
             rowsBox.removeAllViews(); rows.clear()
             // Tools first: every feature (Internet test, USB, Bluetooth, quiz…) is visible without scrolling.
             toolsRow = tools().also { rowsBox.addView(it) }
