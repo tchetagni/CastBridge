@@ -67,5 +67,12 @@
             android:launchMode="singleTop"
             android:screenOrientation="landscape"
             android:configChanges="orientation|screenSize|screenLayout|keyboard|keyboardHidden|navigation" />
+        <!-- Échecs (docs/CHESS.md): opened from the home tile or from the phone -->
+        <activity
+            android:name=".ChessActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|screenSize|screenLayout|keyboard|keyboardHidden|navigation" />
     </application>
 </manifest>

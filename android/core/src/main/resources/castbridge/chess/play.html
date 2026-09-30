@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#121212">
+<title>Échecs — CastBridge TV</title>
+<style>
+  :root { --bg:#121212; --panel:#1f1f1f; --line:#343434; --text:#ededed; --muted:#a8a8a8; --accent:#33b5e5; --warn:#ffb74d; --bad:#ff6b6b; --good:#5fd38d; }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin:0; background:var(--bg); color:var(--text); font:16px/1.35 system-ui, -apple-system, Roboto, sans-serif; }
+  body { min-height:100vh; }
+  main { max-width:560px; margin:0 auto; padding:10px 8px 24px; }
+  h1 { font-size:24px; margin:8px 0 4px; }
+  p.sub { color:var(--muted); margin:0 0 14px; }
+  label { display:block; color:var(--muted); font-size:14px; margin:12px 0 4px; }
+  input { width:100%; padding:12px; font-size:20px; border-radius:10px; border:1px solid var(--line); background:var(--panel); color:var(--text); }
+  input#code { letter-spacing:6px; font-weight:700; text-align:center; }
+  button { font:inherit; font-weight:600; border:0; border-radius:10px; padding:12px 14px; background:var(--panel); color:var(--text); border:1px solid var(--line); cursor:pointer; }
+  button.primary { background:var(--accent); color:#00212d; border-color:var(--accent); width:100%; margin-top:16px; font-size:18px; }
+  button:disabled { opacity:.45; }
+  .err { color:var(--bad); min-height:22px; margin-top:8px; }
+  .hidden { display:none !important; }
+  .card { display:flex; align-items:center; gap:10px; background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:8px 10px; margin:6px 0; }
+  .card.turn { border-color:var(--accent); box-shadow:0 0 0 1px var(--accent) inset; }
+  .dot { width:18px; height:18px; border-radius:50%; flex:none; border:2px solid #777; }
+  .dot.w { background:#f8f3e6; } .dot.b { background:#222; border-color:#bbb; }
+  .who { flex:1; min-width:0; }
+  .who b { display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .who small { color:var(--muted); display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .clock { flex:none; width:92px; text-align:right; }
+  .clock .secs { font-size:26px; font-weight:800; font-variant-numeric:tabular-nums; }
+  .clock .bar { height:5px; background:#333; border-radius:3px; overflow:hidden; margin-top:2px; }
+  .clock .bar i { display:block; height:100%; background:var(--accent); width:100%; }
+  .clock.low .secs { color:var(--bad); animation:blink 1s steps(2) infinite; }
+  .clock.low .bar i { background:var(--bad); }
+  .clock.idle .secs { color:var(--muted); }
+  @keyframes blink { 50% { opacity:.35; } }
+  #boardWrap { position:relative; margin:6px auto; }
+  canvas#board { display:block; width:100%; height:auto; border-radius:6px; touch-action:manipulation; }
+  #status { text-align:center; min-height:24px; margin:6px 0; font-weight:600; }
+  #notice { text-align:center; color:var(--warn); min-height:20px; font-size:14px; }
+  .row { display:flex; gap:8px; margin-top:8px; }
+  .row button { flex:1; }
+  #moves { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:8px 10px; margin-top:10px; max-height:140px; overflow:auto;
+           font-variant-numeric:tabular-nums; font-size:15px; display:grid; grid-template-columns:36px 1fr 1fr; gap:2px 6px; }
+  #moves .n { color:var(--muted); }
+  #moves .last { color:var(--accent); font-weight:700; }
+  #moves .auto { color:var(--warn); }
+  .overlay { position:fixed; inset:0; background:rgba(0,0,0,.72); display:flex; align-items:center; justify-content:center; padding:16px; z-index:5; }
+  .dialog { background:#1c1c1c; border:1px solid var(--line); border-radius:14px; padding:18px; width:100%; max-width:420px; text-align:center; }
+  .dialog h2 { margin:0 0 8px; font-size:22px; }
+  .promo { display:flex; gap:8px; justify-content:center; margin-top:10px; }
+  .promo canvas { width:64px; height:64px; background:#eed8b4; border-radius:10px; border:2px solid var(--line); cursor:pointer; }
+  #seats { margin-top:10px; }
+  .muted { color:var(--muted); font-size:14px; }
+  textarea { width:100%; height:120px; margin-top:10px; background:#111; color:var(--text); border:1px solid var(--line); border-radius:8px; font:13px monospace; }
+</style>
+</head>
+<body>
+<main>
+  <section id="joinView">
+    <h1>♞ Échecs sur la TV</h1>
+    <p class="sub">Entrez le code affiché sur la TV et votre pseudo pour jouer ou regarder la partie.</p>
+    <label for="name">Votre pseudo</label>
+    <input id="name" maxlength="16" autocomplete="nickname">
+    <label for="code">Code de la salle</label>
+    <input id="code" inputmode="numeric" maxlength="4" autocomplete="off">
+    <button class="primary" id="joinBtn">Rejoindre la partie</button>
+    <div class="err" id="joinErr"></div>
+  </section>
+
+  <section id="gameView" class="hidden">
+    <div class="card" id="topCard"><span class="dot"></span><div class="who"><b></b><small></small></div><div class="clock"><div class="secs"></div><div class="bar"><i></i></div></div></div>
+    <div id="boardWrap"><canvas id="board" width="480" height="480" aria-label="Échiquier"></canvas></div>
+    <div class="card" id="bottomCard"><span class="dot"></span><div class="who"><b></b><small></small></div><div class="clock"><div class="secs"></div><div class="bar"><i></i></div></div></div>
+    <div id="status"></div>
+    <div id="notice"></div>
+    <div id="seats" class="row hidden">
+      <button id="sitW">Jouer les Blancs</button><button id="sitB">Jouer les Noirs</button><button id="stand">Regarder</button>
+    </div>
+    <div id="drawAsk" class="row hidden"><button id="drawYes">Accepter la nulle</button><button id="drawNo">Refuser</button></div>
+    <div id="actions" class="row hidden"><button id="drawBtn">Proposer nulle</button><button id="resignBtn">Abandonner</button></div>
+    <div id="moves"></div>
+    <div class="row"><button id="soundBtn">Son : non</button><button id="leaveBtn">Quitter</button></div>
+  </section>
+</main>
+
+<div class="overlay hidden" id="promoDlg"><div class="dialog"><h2>Promotion</h2><p class="muted">Choisissez la pièce</p><div class="promo" id="promoChoices"></div>
+  <div class="row"><button id="promoCancel">Annuler</button></div></div></div>
+<div class="overlay hidden" id="confirmDlg"><div class="dialog"><h2 id="confirmTitle"></h2><p id="confirmText" class="muted"></p>
+  <div class="row"><button id="confirmNo">Non</button><button id="confirmYes" style="background:var(--bad);color:#200">Oui</button></div></div></div>
+<div class="overlay hidden" id="endDlg"><div class="dialog"><h2 id="endTitle"></h2><p id="endText"></p>
+  <textarea id="pgn" readonly></textarea><div class="row"><button id="copyPgn">Copier la partie (PGN)</button><button id="endClose">Fermer</button></div></div></div>
+
+<script>
+"use strict";
+const PIECES=/*PIECES*/null;
+const COLORS={ light:"#eed8b4", dark:"#b0835a", last:"rgba(232,216,74,.5)", sel:"rgba(95,176,255,.63)", check:"rgba(224,48,42,.82)", hint:"rgba(27,59,27,.48)",
+  wFill:"#f8f3e6", wLine:"#1b1b1b", bFill:"#222222", bLine:"#f0ebdd" };
+const $=id=>document.getElementById(id);
+const qs=new URLSearchParams(location.search);
+const store={ get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }, set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} } };
+let token=null, code=null, st=null, stAt=0, es=null, polling=false, selected=null, flipped=false, pendingPromo=null, sound=false, lastBeep=-1, shownEnd=null;
+const paths={}; if(PIECES) for(const t in PIECES) paths[t]=PIECES[t].map(l=>[new Path2D(l[0]),l[1]]);
+
+// ---------------------------------------------------------------- join
+$("name").value=qs.get("name")||store.get("chess-name")||"";
+$("code").value=qs.get("code")||"";
+$("joinBtn").onclick=()=>join();
+if(qs.get("auto")==="1" && $("name").value && $("code").value) join();
+else if($("code").value && store.get("chess-token-"+$("code").value)) join();
+
+async function post(path){ const r=await fetch(path,{method:"POST",cache:"no-store"}); let j=null; try{ j=await r.json(); }catch(e){} return {status:r.status, j}; }
+
+async function join(){
+  const name=$("name").value.trim(), c=$("code").value.trim();
+  if(!name){ $("joinErr").textContent="Choisissez un pseudo."; return; }
+  if(!/^\d{4}$/.test(c)){ $("joinErr").textContent="Le code a 4 chiffres (il est affiché sur la TV)."; return; }
+  $("joinBtn").disabled=true; $("joinErr").textContent="";
+  try{
+    const old=store.get("chess-token-"+c)||"";
+    const r=await post(`/chess/api/join?code=${encodeURIComponent(c)}&name=${encodeURIComponent(name)}&token=${encodeURIComponent(old)}`);
+    if(r.status!==200){ $("joinErr").textContent=(r.j&&r.j.message)||"Impossible de rejoindre."; return; }
+    token=r.j.token; code=c;
+    store.set("chess-token-"+c, token); store.set("chess-name", name);
+    $("joinView").classList.add("hidden"); $("gameView").classList.remove("hidden");
+    connect();
+  }catch(e){ $("joinErr").textContent="La TV ne répond pas. Êtes-vous sur le même Wi-Fi ?"; }
+  finally{ $("joinBtn").disabled=false; }
+}
+
+// ---------------------------------------------------------------- state stream (SSE, long-poll fallback)
+function connect(){
+  if(window.EventSource){
+    es=new EventSource(`/chess/api/events?token=${encodeURIComponent(token)}`);
+    let got=false;
+    es.addEventListener("state",e=>{ got=true; apply(JSON.parse(e.data)); });
+    es.onerror=()=>{ if(!got){ es.close(); es=null; poll(); } };
+  } else poll();
+}
+async function poll(){
+  if(polling) return; polling=true;
+  let since=0;
+  while(token){
+    try{
+      const r=await fetch(`/chess/api/state?token=${encodeURIComponent(token)}&since=${since}&wait=20`,{cache:"no-store"});
+      if(r.status===401||r.status===410){ ended("La partie est fermée sur la TV."); return; }
+      const j=await r.json(); since=j.v; apply(j);
+    }catch(e){ await new Promise(ok=>setTimeout(ok,2000)); }
+  }
+}
+function ended(msg){ $("status").textContent=msg; if(es) es.close(); token=null; }
+
+function apply(s){
+  if(!s) return;
+  if(s.stage==="CLOSED"){ ended("La TV a fermé la partie."); return; }
+  st=s; stAt=performance.now();
+  const mine=s.me&&s.me.color;
+  flipped = mine==="b";
+  if(!s.legal.length) selected=null;
+  render();
+}
+
+// ---------------------------------------------------------------- board
+const cv=$("board"), ctx=cv.getContext("2d");
+function sizeBoard(){
+  const w=Math.min(document.documentElement.clientWidth-16, 544, Math.max(260, window.innerHeight-250));
+  $("boardWrap").style.width=w+"px";
+  const px=Math.round(w*(window.devicePixelRatio||1));
+  if(cv.width!==px){ cv.width=px; cv.height=px; }
+  draw();
+}
+window.addEventListener("resize",sizeBoard);
+
+function parseFen(fen){
+  const b={}; const rows=fen.split(" ")[0].split("/");
+  rows.forEach((row,i)=>{ let f=0; for(const ch of row){ if(/\d/.test(ch)) f+=+ch; else { b["abcdefgh"[f]+(8-i)]=ch; f++; } } });
+  return b;
+}
+function sqXY(sq){ const f="abcdefgh".indexOf(sq[0]), r=+sq[1]-1; return flipped?[7-f,r]:[f,7-r]; }
+function xySq(x,y){ const f=flipped?7-x:x, r=flipped?y:7-y; return "abcdefgh"[f]+(r+1); }
+
+function drawPiece(c,ch,x,y,s){
+  const t=" pnbrqk".indexOf(ch.toLowerCase()); const white=ch===ch.toUpperCase();
+  const layers=paths[t]; if(!layers) return;
+  c.save(); c.translate(x,y); c.scale(s/100,s/100);
+  c.lineJoin="round"; c.lineCap="round"; c.lineWidth=3.2;
+  for(const [p,body] of layers){
+    if(body){ c.fillStyle=white?COLORS.wFill:COLORS.bFill; c.fill(p); c.strokeStyle=white?COLORS.wLine:COLORS.bLine; c.stroke(p); }
+    else { c.strokeStyle=white?COLORS.wLine:COLORS.bLine; c.stroke(p); }
+  }
+  c.restore();
+}
+
+function draw(){
+  const N=cv.width, q=N/8;
+  const s=st; const board=parseFen(s?s.fen:"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
+  for(let y=0;y<8;y++) for(let x=0;x<8;x++){ ctx.fillStyle=(x+y)%2===0?COLORS.light:COLORS.dark; ctx.fillRect(x*q,y*q,q,q); }
+  if(s&&s.lastMove){ for(const sq of [s.lastMove.slice(0,2),s.lastMove.slice(2,4)]){ const [x,y]=sqXY(sq); ctx.fillStyle=COLORS.last; ctx.fillRect(x*q,y*q,q,q); } }
+  if(s&&s.check){ const k=s.turn==="w"?"K":"k"; for(const sq in board) if(board[sq]===k){ const [x,y]=sqXY(sq); const g=ctx.createRadialGradient((x+.5)*q,(y+.5)*q,q*.1,(x+.5)*q,(y+.5)*q,q*.7); g.addColorStop(0,COLORS.check); g.addColorStop(1,"rgba(224,48,42,0)"); ctx.fillStyle=g; ctx.fillRect(x*q,y*q,q,q); } }
+  if(selected){ const [x,y]=sqXY(selected); ctx.fillStyle=COLORS.sel; ctx.fillRect(x*q,y*q,q,q); }
+  // coordinates
+  ctx.font=`600 ${Math.round(q*.2)}px system-ui,sans-serif`;
+  for(let i=0;i<8;i++){
+    ctx.fillStyle=i%2===0?COLORS.dark:COLORS.light; ctx.textBaseline="top"; ctx.textAlign="left";
+    ctx.fillText(flipped?String(i+1):String(8-i), 2*(q/40), i*q+q*.04);
+    ctx.fillStyle=(i+7)%2===0?COLORS.light:COLORS.dark; ctx.textBaseline="bottom"; ctx.textAlign="right";
+    ctx.fillText(flipped?"hgfedcba"[i]:"abcdefgh"[i], (i+1)*q-q*.05, N-q*.03);
+  }
+  for(const sq in board){ const [x,y]=sqXY(sq); drawPiece(ctx,board[sq],x*q+q*.04,y*q+q*.04,q*.92); }
+  if(selected&&s){
+    for(const m of s.legal) if(m.startsWith(selected)){
+      const to=m.slice(2,4); const [x,y]=sqXY(to);
+      ctx.fillStyle=COLORS.hint; ctx.strokeStyle=COLORS.hint; ctx.beginPath();
+      if(board[to]){ ctx.lineWidth=q*.08; ctx.arc((x+.5)*q,(y+.5)*q,q*.44,0,Math.PI*2); ctx.stroke(); }
+      else { ctx.arc((x+.5)*q,(y+.5)*q,q*.15,0,Math.PI*2); ctx.fill(); }
+    }
+  }
+}
+
+cv.addEventListener("click",ev=>{
+  if(!st||!st.legal.length) return;
+  const r=cv.getBoundingClientRect();
+  const x=Math.floor((ev.clientX-r.left)/r.width*8), y=Math.floor((ev.clientY-r.top)/r.height*8);
+  if(x<0||x>7||y<0||y>7) return;
+  const sq=xySq(x,y);
+  if(selected){
+    const cands=st.legal.filter(m=>m.startsWith(selected)&&m.slice(2,4)===sq);
+    if(cands.length===1){ send(cands[0]); return; }
+    if(cands.length>1){ askPromo(cands); return; }
+  }
+  selected = st.legal.some(m=>m.startsWith(sq)) ? (selected===sq?null:sq) : null;
+  draw();
+});
+
+function askPromo(cands){
+  pendingPromo=cands; const box=$("promoChoices"); box.innerHTML="";
+  const white=st.turn==="w";
+  for(const p of ["q","r","b","n"]){
+    const m=cands.find(c=>c.endsWith(p)); if(!m) continue;
+    const c=document.createElement("canvas"); c.width=128; c.height=128;
+    drawPiece(c.getContext("2d"), white?p.toUpperCase():p, 8, 8, 112);
+    c.title={q:"Dame",r:"Tour",b:"Fou",n:"Cavalier"}[p];
+    c.onclick=()=>{ $("promoDlg").classList.add("hidden"); send(m); };
+    box.appendChild(c);
+  }
+  $("promoDlg").classList.remove("hidden");
+}
+$("promoCancel").onclick=()=>{ $("promoDlg").classList.add("hidden"); pendingPromo=null; };
+
+async function act(action,arg,ply){
+  if(!token) return;
+  let u=`/chess/api/act?token=${encodeURIComponent(token)}&action=${action}`;
+  if(arg!=null) u+=`&arg=${encodeURIComponent(arg)}`; if(ply!=null) u+=`&ply=${ply}`;
+  try{
+    const r=await post(u);
+    if(r.j&&r.j.state) apply(r.j.state);
+    if(r.j&&r.j.result==="ILLEGAL") flash("Coup illégal.");
+    else if(r.j&&r.j.result==="NOT_YOUR_TURN") flash("Ce n'est pas votre tour.");
+  }catch(e){ flash("Connexion perdue avec la TV…"); }
+}
+function send(m){ selected=null; act("move",m,st.ply); draw(); }
+function flash(t){ $("notice").textContent=t; setTimeout(()=>{ if($("notice").textContent===t) $("notice").textContent=(st&&st.notice)||""; },2500); }
+
+// ---------------------------------------------------------------- panels
+function sideInfo(c){ return st?(c==="w"?st.white:st.black):null; }
+function fillCard(card,c){
+  const info=sideInfo(c)||{name:"",kind:""};
+  card.querySelector(".dot").className="dot "+c;
+  card.querySelector("b").textContent=info.name||"";
+  const mine=st&&st.me&&st.me.color===c;
+  card.querySelector("small").textContent=(c==="w"?"Blancs":"Noirs")+(mine?" · vous":"")+(info.kind==="PHONE"&&!info.connected?" · déconnecté":"");
+  card.classList.toggle("turn", !!(st&&st.stage==="PLAYING"&&st.turn===c));
+}
+function render(){
+  const s=st; if(!s) return;
+  const me=s.me&&s.me.color;
+  const bottom=flipped?"b":"w", top=flipped?"w":"b";
+  fillCard($("topCard"),top); fillCard($("bottomCard"),bottom);
+  const toMove=s.turn==="w"?"aux Blancs":"aux Noirs";
+  let status="";
+  if(s.stage==="LOBBY") status="En attente du lancement sur la TV…";
+  else if(s.stage==="PLAYING") status=(me&&s.turn===me)?"À vous de jouer"+(s.check?" — échec !":""):("Trait "+toMove+(s.check?" — échec !":"")+(s.thinking?" · l'ordinateur réfléchit…":""));
+  else if(s.result) status=s.result.text;
+  $("status").textContent=status;
+  $("notice").textContent=s.notice||"";
+  $("seats").classList.toggle("hidden", s.stage==="PLAYING");
+  $("sitW").disabled=s.white.kind!=="PHONE"||me==="w"; $("sitB").disabled=s.black.kind!=="PHONE"||me==="b"; $("stand").disabled=!me;
+  const playing=s.stage==="PLAYING"&&!!me;
+  $("actions").classList.toggle("hidden", !playing);
+  const offeredToMe=playing&&s.drawOffer&&s.drawOffer!==me;
+  $("drawAsk").classList.toggle("hidden", !offeredToMe);
+  $("drawBtn").disabled=!!s.drawOffer;
+  $("drawBtn").textContent=s.drawOffer===me?"Nulle proposée…":"Proposer nulle";
+  // moves in SAN, two per line
+  const mv=$("moves"); mv.innerHTML="";
+  const auto=new Set(s.auto||[]);
+  const blackFirst=(s.startFen||"").split(" ")[1]==="b";
+  const list=(blackFirst?[null]:[]).concat(s.san);
+  for(let i=0;i<list.length;i+=2){
+    const n=document.createElement("span"); n.className="n"; n.textContent=(i/2+1)+"."; mv.appendChild(n);
+    for(const k of [i,i+1]){
+      const e=document.createElement("span"); const idx=k-(blackFirst?1:0);
+      e.textContent=list[k]==null?(k<list.length?"…":""):list[k];
+      if(idx===s.san.length-1) e.className="last"; else if(auto.has(idx)) e.className="auto";
+      mv.appendChild(e);
+    }
+  }
+  mv.scrollTop=mv.scrollHeight;
+  if(s.result&&s.stage==="FINISHED"&&shownEnd!==s.v&&shownEnd!=="done"){
+    shownEnd="done";
+    const w=s.result.winner;
+    $("endTitle").textContent=!w?"Partie nulle":(me? (w===me?"Vous avez gagné !":"Vous avez perdu") : (w==="w"?"Les Blancs gagnent":"Les Noirs gagnent"));
+    $("endText").textContent=s.result.text; $("pgn").value=s.pgn||"";
+    $("endDlg").classList.remove("hidden");
+  }
+  if(s.stage!=="FINISHED") shownEnd=null;
+  sizeBoard();
+  tickClocks();
+}
+
+function tickClocks(){
+  if(!st) return;
+  const c=st.clock||{}; const per=c.perMoveMs||30000;
+  let left=c.remainingMs==null?null:Math.max(0,c.remainingMs-(c.paused?0:performance.now()-stAt));
+  for(const [card,col] of [[$("topCard"),flipped?"w":"b"],[$("bottomCard"),flipped?"b":"w"]]){
+    const el=card.querySelector(".clock"); const active=(c.running||c.paused)&&st.turn===col&&left!=null;
+    const secs=active?Math.ceil(left/1000):Math.round(per/1000);
+    el.querySelector(".secs").textContent=secs+" s";
+    el.querySelector(".bar i").style.width=(active?Math.max(0,left/per*100):100)+"%";
+    el.classList.toggle("low", active&&left<10000);
+    el.classList.toggle("idle", !active);
+    if(active&&sound&&left<10000&&st.me&&st.me.color===col&&secs!==lastBeep){ lastBeep=secs; beep(); }
+  }
+}
+setInterval(tickClocks,200);
+
+let audio=null;
+function beep(){ try{ audio=audio||new (window.AudioContext||window.webkitAudioContext)(); const o=audio.createOscillator(), g=audio.createGain(); o.frequency.value=880; g.gain.value=.04; o.connect(g); g.connect(audio.destination); o.start(); o.stop(audio.currentTime+.06); }catch(e){} }
+
+// ---------------------------------------------------------------- buttons
+$("sitW").onclick=()=>act("sit","w"); $("sitB").onclick=()=>act("sit","b"); $("stand").onclick=()=>act("stand");
+$("drawBtn").onclick=()=>act("draw","offer");
+$("drawYes").onclick=()=>act("draw","accept"); $("drawNo").onclick=()=>act("draw","decline");
+$("resignBtn").onclick=()=>confirmBox("Abandonner ?","La partie sera perdue.",()=>act("resign"));
+$("soundBtn").onclick=()=>{ sound=!sound; $("soundBtn").textContent="Son : "+(sound?"oui":"non"); if(sound) beep(); };
+$("leaveBtn").onclick=()=>confirmBox("Quitter ?","Vous pourrez revenir avec le même code tant que la salle est ouverte.",async()=>{ const t=token; token=null; if(es) es.close(); try{ await post(`/chess/api/leave?token=${encodeURIComponent(t)}`); }catch(e){} location.href="/chess"; });
+$("endClose").onclick=()=>$("endDlg").classList.add("hidden");
+$("copyPgn").onclick=()=>{ const t=$("pgn"); t.select(); try{ navigator.clipboard.writeText(t.value); }catch(e){ document.execCommand("copy"); } $("copyPgn").textContent="Copié !"; };
+function confirmBox(title,text,yes){
+  $("confirmTitle").textContent=title; $("confirmText").textContent=text; $("confirmDlg").classList.remove("hidden");
+  $("confirmYes").onclick=()=>{ $("confirmDlg").classList.add("hidden"); yes(); };
+  $("confirmNo").onclick=()=>$("confirmDlg").classList.add("hidden");
+}
+sizeBoard();
+</script>
+</body>
+</html>
