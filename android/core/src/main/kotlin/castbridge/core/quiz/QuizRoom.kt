@@ -131,8 +131,14 @@ class QuizRoom(
     fun setMode(m: Mode): Boolean = configure(m, if (m == Mode.MILLIONAIRE && play == Play.STAKE) Play.FRIENDS else play, filter, stake)
 
     /** Game settings, chosen on the TV before the lobby. A stake is only played in Duel (the pot is shared by ranking). */
-    fun configure(m: Mode, p: Play, f: QuestionFilter, stakeTokens: Long = stake): Boolean = synchronized(lock) {
+    /** Duel format and answer window (seconds, 5-20) chosen on the TV. */
+    var duelFormat: QuizDuel.Format = QuizDuel.Format.CLASSIC; private set
+    var duelSeconds: Int = QuizGame.MAX_SECONDS; private set
+
+    fun configure(m: Mode, p: Play, f: QuestionFilter, stakeTokens: Long = stake,
+                  format: QuizDuel.Format = duelFormat, seconds: Int = duelSeconds): Boolean = synchronized(lock) {
         if (stage != Stage.LOBBY && stage != Stage.FINISHED) return false
+        duelFormat = format; duelSeconds = seconds.coerceIn(3, QuizGame.MAX_SECONDS)
         mode = if (p == Play.STAKE) Mode.DUEL else m
         play = p; filter = f; stake = stakeTokens.coerceIn(1, 10_000)
         host(); true
@@ -168,8 +174,8 @@ class QuizRoom(
         } else {
             val qs = bank.draw(duelCount, seed, asked, filter)
             asked += qs.map { it.id }
-            val window = duelQuestionMs.coerceAtMost(QuizGame.MAX_SECONDS * 1000L)   // 20 s max, practice included
-            duel = QuizDuel(qs, questionMs = window, revealMs = if (play == Play.PRACTICE) 10_000 else 6_000)
+            val window = minOf(duelQuestionMs, duelSeconds * 1000L, QuizGame.MAX_SECONDS * 1000L)   // 20 s max, practice included
+            duel = QuizDuel(qs, questionMs = window, revealMs = if (play == Play.PRACTICE) 10_000 else 6_000, format = duelFormat)
                 .also { d -> present.forEach { d.addPlayer(it.id) }; d.start(t) }
             game = null
         }
@@ -417,6 +423,7 @@ class QuizRoom(
             "index" to d.index,
             "count" to d.questions.size,
             "questionMs" to d.questionMs,
+            "format" to d.format.name, "formatLabel" to d.format.label, "formatText" to d.format.description,
             "remainingMs" to d.remainingMs(t),
             "question" to linkedMapOf(
                 "id" to q.id, "text" to q.question, "choices" to q.choices, "category" to q.category, "region" to q.region.name,

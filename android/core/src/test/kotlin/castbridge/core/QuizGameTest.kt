@@ -137,6 +137,39 @@ class QuizGameTest {
     }
 }
 
+class QuizDuelFormatsTest {
+    private val qs = (1..3).map { QuizBankTest.q("f$it", answer = 1) }
+
+    private fun duel(f: QuizDuel.Format) = QuizDuel(qs, questionMs = 20_000, format = f).also { d -> listOf("a", "b", "c").forEach(d::addPlayer); d.start(0) }
+    private fun wrong(d: QuizDuel) = (d.question.answer + 1) % 4
+
+    @Test fun fastestEndsAtFirstRightAnswerAndOnlyFirstScores() {
+        val d = duel(QuizDuel.Format.FASTEST)
+        d.answer("a", d.question.id, wrong(d), 1_000)
+        assertFalse(d.tick(1_500, setOf("a", "b", "c")), "a wrong answer does not end the question")
+        assertEquals(QuizDuel.Result.ALREADY_ANSWERED, d.answer("a", d.question.id, d.question.answer, 1_600), "a wrong answer locks you out")
+        d.answer("b", d.question.id, d.question.answer, 3_000)
+        assertTrue(d.tick(3_001, setOf("a", "b", "c")), "closed at the first right answer")
+        assertEquals(1000, d.outcomes["b"]!!.points); assertEquals(0, d.outcomes["a"]!!.points); assertEquals(0, d.outcomes["c"]!!.points)
+    }
+
+    @Test fun raceScoresByArrivalRank() {
+        val d = duel(QuizDuel.Format.RACE)
+        d.answer("c", d.question.id, d.question.answer, 2_000)
+        d.answer("a", d.question.id, d.question.answer, 5_000)
+        d.answer("b", d.question.id, d.question.answer, 9_000)
+        d.tick(9_001, setOf("a", "b", "c"))
+        assertEquals(listOf(1000, 700, 500), listOf("c", "a", "b").map { d.outcomes[it]!!.points })
+    }
+
+    @Test fun neverMoreThan20sWhateverTheSetting() {
+        assertEquals(20_000, QuizDuel(qs, questionMs = 45_000, format = QuizDuel.Format.RACE).questionMs)
+        assertTrue(QuizDuel.WINDOWS.all { it <= QuizGame.MAX_SECONDS })
+        val d = duel(QuizDuel.Format.CLASSIC)
+        assertTrue(d.tick(20_000, setOf("a")), "closes at 20 s even if nobody answered")
+    }
+}
+
 class QuizDuelTest {
     private val qs = (1..3).map { QuizBankTest.q("d$it", answer = 1) }
 

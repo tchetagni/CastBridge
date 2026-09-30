@@ -187,8 +187,10 @@ class QuizActivity : Activity() {
     private fun goHome() { room?.backToLobby(); steps.clear(); steps += "home"; stage.calm = false; render() }
     private fun count(f: QuestionFilter) = room?.bank?.count(f) ?: 0
     private fun afterFilter() = push(if (play == QuizRoom.Play.STAKE) "stake" else "format")
+    private var duelFormat = castbridge.core.quiz.QuizDuel.Format.CLASSIC
+    private var stakeChosen = 100L
     private fun launch(mode: QuizRoom.Mode, stake: Long = 100) {
-        room?.configure(mode, play, QuestionFilter(track, level, field), stake)
+        room?.configure(mode, play, QuestionFilter(track, level, field), stake, duelFormat)
         steps.clear(); render()
     }
 
@@ -267,12 +269,21 @@ class QuizActivity : Activity() {
                 Choice(f.label, if (n > 0) "$n questions" else "bientôt", n > 0) { field = f.key; afterFilter() }
             })
             "stake" -> Triple("Quelle mise par joueur ?", "${QuizRoom.TOKENS_LABEL} : sans aucune valeur, rien à payer. La cagnotte est partagée selon le classement.",
-                listOf(50L, 100L, 200L).map { m -> Choice("$m jetons", if (m == 100L) "conseillé" else null) { launch(QuizRoom.Mode.DUEL, m) } })
+                listOf(50L, 100L, 200L).map { m -> Choice("$m jetons", if (m == 100L) "conseillé" else null) { stakeChosen = m; push("duel-format") } })
+            "duel-format" -> Triple("Quel format de duel ?", "Réponse en 20 secondes au plus", castbridge.core.quiz.QuizDuel.Format.values().map { f ->
+                Choice(f.label, f.description) { duelFormat = f; push("duel-time") }
+            })
+            "duel-time" -> Triple("Temps pour répondre", duelFormat.label, castbridge.core.quiz.QuizDuel.WINDOWS.map { sec ->
+                Choice("$sec secondes", when (sec) { 5 -> "Réflexes"; 10 -> "Rapide"; 20 -> "Standard (maximum)"; else -> null }) {
+                    room?.configure(QuizRoom.Mode.DUEL, play, QuestionFilter(track, level, field), stakeChosen, duelFormat, sec)
+                    steps.clear(); render()
+                }
+            })
             else -> Triple("Comment jouer ?", QuestionFilter(track, level, field).label, listOf(
                 Choice("Seul, à la télécommande", if (play == QuizRoom.Play.PRACTICE) "Question après question, avec les explications"
                     else "15 questions, jokers simulés : battez votre record") { launchSolo() },
                 Choice("Millionnaire avec le public", "Un candidat ; les autres aident depuis leur téléphone") { launch(QuizRoom.Mode.MILLIONAIRE) },
-                Choice("Duel", "Tout le monde répond sur son téléphone : juste ET rapide") { launch(QuizRoom.Mode.DUEL) }))
+                Choice("Duel", "Tout le monde répond sur son téléphone : au plus rapide, 20 s maximum") { push("duel-format") }))
         }
 
         private fun pickTrack(t: Track) {
