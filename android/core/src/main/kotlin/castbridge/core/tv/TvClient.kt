@@ -14,6 +14,8 @@ class TvClient(val base: String, val pin: String? = null) {
     fun reset(name: String) = call("POST", "/api/reset?name=${enc(name)}")
     fun info(): String = call("GET", "/api/info")
     fun play(name: String, posMs: Long = 0) = call("POST", "/api/play?name=${enc(name)}&pos=$posMs")
+    /** Plays an http(s) link on the TV (nothing stored). 404 on a TV older than this route. */
+    fun playUrl(url: String, title: String, posMs: Long = 0) = call("POST", "/api/playurl?url=${enc(url)}&title=${enc(title)}&pos=$posMs")
     fun pause() = call("POST", "/api/pause")
     fun resume() = call("POST", "/api/resume")
     fun stop() = call("POST", "/api/stop")

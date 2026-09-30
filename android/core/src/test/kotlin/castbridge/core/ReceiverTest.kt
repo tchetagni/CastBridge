@@ -87,6 +87,17 @@ class ReceiverTest {
         } finally { small.stop() }
     }
 
+    @Test fun playsALinkFromThePhoneWithoutStoringIt() {
+        tv.playUrl("http://192.168.1.20:8089/media/ab12.mkv", "Mon film.mkv", 298_000)
+        assertEquals("http://192.168.1.20:8089/media/ab12.mkv", player.lastUrl)
+        assertEquals(PlayerState("playing", "Mon film.mkv", 298_000, 1000), player.st)
+        tv.playUrl("https://cdn.example/x/master.m3u8?t=a&b=c", "../../etc")   // an unsafe title is replaced, never a path
+        assertEquals("https://cdn.example/x/master.m3u8?t=a&b=c", player.lastUrl); assertEquals("Depuis le téléphone", player.st.name)
+        for (bad in listOf("file:///sdcard/x.mp4", "content://media/1", "javascript:alert(1)", "http://a b"))
+            assertEquals(400, assertFailsWith<TvClient.HttpError> { tv.playUrl(bad, "x") }.code, bad)
+        assertTrue(dir.listFiles().orEmpty().none { it.name.startsWith("Mon film") }, "nothing stored")
+    }
+
     @Test fun waitsWhileTvUnreachable() {
         var calls = 0
         val r = ResumableUpload("x.mp4", data.size.toLong(), { if (++calls < 3) null else base },

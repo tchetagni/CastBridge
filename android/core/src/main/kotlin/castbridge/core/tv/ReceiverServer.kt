@@ -347,6 +347,17 @@ class ReceiverServer(
                     ok(info())
                 } else playIncomplete(name, pos)
             }
+            // "Lire en direct" from the phone's player: the TV opens a link (the phone's own little server, or a web video)
+            // without storing anything. PIN-guarded like every other route; only http(s) links.
+            path == "/api/playurl" -> {
+                val url = p["url"].orEmpty()
+                val scheme = url.substringBefore("://", "").lowercase()
+                if ((scheme != "http" && scheme != "https") || url.length > 4096 || url.any { it.isWhitespace() }) return bad("http(s) url required")
+                val title = safeName(p["title"].orEmpty()) ?: "Depuis le téléphone"
+                playlist = null
+                player.playStream(url, title, (p["pos"]?.toLongOrNull() ?: 0).coerceAtLeast(0))
+                ok(info())
+            }
             path == "/api/pause" -> { player.pause(); ok(info()) }
             path == "/api/resume" -> { player.resume(); ok(info()) }
             path == "/api/stop" -> { playlist = null; player.stop(); ok(info()) }

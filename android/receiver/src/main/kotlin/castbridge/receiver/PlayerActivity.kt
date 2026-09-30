@@ -691,7 +691,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         closeSafFd()
         hideScreens()
         snapshot = PlayerState("playing", name, posMs, 0)
-        flash("▶ $name (lecture pendant l'envoi)")
+        flash(if (total > 0) "▶ $name (lecture pendant l'envoi)" else "▶ $name")   // total 0: a link played from the phone
     }
 
     override fun pause() = onMain { mp?.let { if (it.isPlaying) { it.pause(); showBar("Pause"); savePosition() } }; Unit }
