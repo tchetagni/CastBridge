@@ -11,6 +11,7 @@ import android.widget.TextView
 import castbridge.core.learn.Answer
 import castbridge.core.learn.Block
 import castbridge.core.learn.Exercise
+import castbridge.core.learn.LearnCatalog
 import castbridge.core.learn.Lesson
 import castbridge.core.learn.LessonDeck
 import castbridge.core.learn.Mark
@@ -272,6 +273,8 @@ class SeriesScreen(a: LearnActivity, val pack: Pack?, private val items: List<Ex
         val x = items[i]
         val v = ExerciseView(a.st, x, false, lang, onAnswer = { ans, m -> result(x, m) }, onContinue = { i++; a.rebuild() })
         ex = v
+        // nursery / primary: the question is read aloud (children who do not read yet)
+        packOf(x)?.let { p -> if (a.autoRead && LearnCatalog.readAloudByDefault(p.level)) a.speak(Markdown.spoken(x.prompt, lang), lang) }
         val tier = x.tier.label.let { if (lang == "en") mapOf("Application" to "Practice", "Approfondissement" to "Going deeper", "Type examen" to "Exam style", "Auto-évaluation" to "Self-check")[it] ?: it else it }
         return a.frame(title, "$tier  ·  ${Scene.fmt(x.totalPoints)} pt", v.view, t("Flèches et OK pour répondre   ·   RETOUR : quitter", "Arrows and OK to answer   ·   BACK: leave"),
             (i + 1f) / items.size, "${i + 1} / ${items.size}")
