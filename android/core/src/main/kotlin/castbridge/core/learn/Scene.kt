@@ -137,27 +137,36 @@ class Scene(val w: Double, val h: Double, val ops: List<Op>) {
             val ay = if (0.0 in f.xmin..f.xmax) X(0.0) else ml           // y axis
             ops += Op.Line(ml, ax, ml + pw, ax, AXIS, 1.6); ops += arrowHead(ml, ax, ml + pw + 6, ax, AXIS, 1.2)
             ops += Op.Line(ay, mt + ph, ay, mt, AXIS, 1.6); ops += arrowHead(ay, mt + ph, ay, mt - 6, AXIS, 1.2)
-            // tick labels: under the x axis, left of the y axis, never on the origin twice
+            // Every label of the graph goes through place(): it is moved (or dropped, for tick labels) when it would
+            // cover another label, so no text is ever drawn over another one (tested on every figure of the content).
+            val boxes = ArrayList<DoubleArray>()
+            fun boxOf(t: Op.Text): DoubleArray { val tw = textWidth(t.text, t.size); val x0 = when (t.anchor) { "start" -> t.x; "end" -> t.x - tw; else -> t.x - tw / 2 }
+                return doubleArrayOf(x0, t.y - t.size * 0.8, x0 + tw, t.y + t.size * 0.2) }
+            fun free(t: Op.Text) = boxOf(t).let { b -> boxes.none { overlap(it, b, 1.0) } }
+            fun place(t: Op.Text): Boolean { if (!free(t)) return false; boxes += boxOf(t); ops += t; return true }
+            val originShown = 0.0 in f.xmin..f.xmax && 0.0 in f.ymin..f.ymax
+            // axis names first (they matter most), at the arrow ends
+            f.xlabel?.let { place(Op.Text(ml + pw, ax - 7, it, 13.0, AXIS, "end", true)) || place(Op.Text(ml + pw, ax + 28, it, 13.0, AXIS, "end", true)) }
+            f.ylabel?.let { place(Op.Text(ay + 7, mt + 10, it, 13.0, AXIS, "start", true)) || place(Op.Text(ay - 7, mt + 10, it, 13.0, AXIS, "end", true)) }
+            if (originShown) place(Op.Text(ay - 5, ax + 14, "0", 11.0, AXIS, "end"))
+            // tick labels: under the x axis, left of the y axis; 0 only once (the origin)
             gx = ceil(f.xmin / sx) * sx
             while (gx <= f.xmax + 1e-9) {
-                if (abs(gx) > 1e-9 || ay == ml) ops += Op.Text(X(gx), min(ax + 15, f.h - 3), fmt(gx), 11.0, AXIS)
+                if (abs(gx) > 1e-9 || !originShown) place(Op.Text(X(gx), min(ax + 15, f.h - 3), fmt(gx), 11.0, AXIS))
                 gx += sx
             }
             gy = ceil(f.ymin / sy) * sy
             while (gy <= f.ymax + 1e-9) {
-                if (abs(gy) > 1e-9) ops += Op.Text(max(ay - 5, 30.0), Y(gy) + 4, fmt(gy), 11.0, AXIS, "end")
+                if (abs(gy) > 1e-9 || !originShown) place(Op.Text(max(ay - 5, 30.0), Y(gy) + 4, fmt(gy), 11.0, AXIS, "end"))
                 gy += sy
             }
-            if (0.0 in f.xmin..f.xmax && 0.0 in f.ymin..f.ymax) ops += Op.Text(ay - 5, ax + 14, "0", 11.0, AXIS, "end")
-            f.xlabel?.let { ops += Op.Text(ml + pw, ax - 6, it, 13.0, AXIS, "end", true) }
-            f.ylabel?.let { ops += Op.Text(ay + 6, mt + 10, it, 13.0, AXIS, "start", true) }
             ops += Op.Clip(ml, mt, pw, ph)
             for (s in f.segments) ops += Op.Line(X(s.x1), Y(s.y1), X(s.x2), Y(s.y2), c(s.color) ?: AXIS, 1.6, s.dash)
             for (cv in f.curves) {
                 val e = Expr.parse(cv.expr)
                 val a = max(f.xmin, cv.from ?: f.xmin); val b = min(f.xmax, cv.to ?: f.xmax)
                 val n = 240; val span = f.ymax - f.ymin
-                var cmds = ArrayList<PathCmd>(); var pen = false
+                val cmds = ArrayList<PathCmd>(); var pen = false
                 val col = c(cv.color) ?: INK
                 for (k in 0..n) {
                     val x = a + (b - a) * k / n
@@ -168,19 +177,32 @@ class Scene(val w: Double, val h: Double, val ops: List<Op>) {
                 if (cmds.isNotEmpty()) ops += Op.Path(cmds, null, col, 2.6)
             }
             ops += Op.Unclip
-            // curve labels: at the right end of the visible part, inside the plot
-            for (cv in f.curves) {
-                val l = cv.label ?: continue
-                val e = Expr.parse(cv.expr)
-                val b = min(f.xmax, cv.to ?: f.xmax); val a = max(f.xmin, cv.from ?: f.xmin)
-                var x = b; var y = e.eval(x); var k = 0
-                while ((!y.isFinite() || y !in f.ymin..f.ymax) && k < 100) { x -= (b - a) / 100; y = e.eval(x); k++ }
-                if (y.isFinite() && y in f.ymin..f.ymax) ops += Op.Text(min(X(x) - 4, ml + pw - 4), max(Y(y) - 6, mt + 12), l, 14.0, c(cv.color) ?: INK, "end", true)
-            }
             for (p in f.points) {
                 val col = c(p.color) ?: INK
                 ops += Op.Circle(X(p.x), Y(p.y), 4.0, col, null, 0.0)
-                p.label?.let { ops += Op.Text(X(p.x) + 7, Y(p.y) - 7, it, 13.0, col, "start", true) }
+                boxes += doubleArrayOf(X(p.x) - 4, Y(p.y) - 4, X(p.x) + 4, Y(p.y) + 4)
+            }
+            for (p in f.points) {
+                val l = p.label ?: continue
+                val col = c(p.color) ?: INK; val px = X(p.x); val py = Y(p.y)
+                // north-east, then north-west, south-east, south-west of the point
+                listOf(Op.Text(px + 7, py - 7, l, 13.0, col, "start", true), Op.Text(px - 7, py - 7, l, 13.0, col, "end", true),
+                    Op.Text(px + 7, py + 17, l, 13.0, col, "start", true), Op.Text(px - 7, py + 17, l, 13.0, col, "end", true))
+                    .firstOrNull { free(it) && boxOf(it).let { b -> b[0] >= 0 && b[2] <= f.w && b[1] >= 0 && b[3] <= f.h } }?.let { place(it) }
+            }
+            // curve labels: along the visible part of the curve, from its right end, at the first free place
+            for (cv in f.curves) {
+                val l = cv.label ?: continue
+                val e = Expr.parse(cv.expr); val col = c(cv.color) ?: INK
+                val b = min(f.xmax, cv.to ?: f.xmax); val a = max(f.xmin, cv.from ?: f.xmin)
+                for (k in 0..60) {
+                    val x = b - (b - a) * k / 60; val y = e.eval(x)
+                    if (!y.isFinite() || y !in f.ymin..f.ymax) continue
+                    val cand = listOf(Op.Text(min(X(x) - 4, ml + pw - 4), max(Y(y) - 8, mt + 12), l, 14.0, col, "end", true),
+                        Op.Text(min(X(x) - 4, ml + pw - 4), min(Y(y) + 20, mt + ph - 2), l, 14.0, col, "end", true))
+                    val ok = cand.firstOrNull { t -> free(t) && boxOf(t).let { bx -> bx[0] >= ml && bx[2] <= ml + pw && bx[1] >= mt && bx[3] <= mt + ph } }
+                    if (ok != null) { place(ok); break }
+                }
             }
             return Scene(f.w, f.h, ops)
         }

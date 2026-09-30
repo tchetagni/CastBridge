@@ -73,6 +73,32 @@ class LearnContentTest {
         }
     }
 
+    /** « Aucun texte superposé »: in every figure of the content, no label covers another one (estimated glyph widths). */
+    @Test fun figureTextsDoNotOverlap() {
+        val bad = ArrayList<String>()
+        fun check(where: String, f: Figure) {
+            val sc = Scene.build(f)
+            val texts = sc.ops.filterIsInstance<Op.Text>()
+            val boxes = sc.textBoxes(0.5)
+            for (i in boxes.indices) for (j in i + 1 until boxes.size) {
+                val a = boxes[i]; val b = boxes[j]
+                val w = minOf(a[2], b[2]) - maxOf(a[0], b[0]); val h = minOf(a[3], b[3]) - maxOf(a[1], b[1])
+                if (w <= 0 || h <= 0) continue
+                val smaller = minOf((a[2] - a[0]) * (a[3] - a[1]), (b[2] - b[0]) * (b[3] - b[1]))
+                if (w * h > 0.2 * smaller) bad += "$where: « ${texts[i].text} » / « ${texts[j].text} »"
+            }
+        }
+        for (p in packs) {
+            for (l in p.lessons) l.blocks.forEachIndexed { k, b -> when (b) {
+                is Block.Illustration -> check("${l.id} bloc $k", b.figure)
+                is Block.Example -> b.figure?.let { check("${l.id} bloc $k", it) }
+                else -> {}
+            } }
+            for (x in p.exercises) (listOf(x) + x.parts).forEach { q -> q.figure?.let { check(q.id, it) } }
+        }
+        assertEquals(emptyList(), bad, "overlapping labels")
+    }
+
     @Test fun prerequisitesExistAndHaveNoCycle() {
         val all = packs.flatMap { it.lessons }.associateBy { it.id }
         for (l in all.values) for (pr in l.prerequisites) assertNotNull(all[pr], "${l.id} → $pr")

@@ -209,6 +209,10 @@ class FigureView(ctx: Context, private val scene: Scene) : View(ctx) {
                 }
                 is Op.Text -> { txt.color = op.color; txt.textSize = f(op.size); txt.typeface = if (op.bold) Typeface.DEFAULT_BOLD else Typeface.DEFAULT
                     txt.textAlign = when (op.anchor) { "start" -> Paint.Align.LEFT; "end" -> Paint.Align.RIGHT; else -> Paint.Align.CENTER }
+                    // a thin paper-coloured halo first: a label stays readable where a curve or a line crosses it
+                    txt.style = Paint.Style.STROKE; txt.strokeWidth = f(op.size) * 0.22f; val col = txt.color; txt.color = LearnStyle.PAPER
+                    c.drawText(op.text, f(op.x), f(op.y), txt)
+                    txt.style = Paint.Style.FILL; txt.color = col
                     c.drawText(op.text, f(op.x), f(op.y), txt) }
                 is Op.Clip -> { c.save(); c.clipRect(f(op.x), f(op.y), f(op.x + op.w), f(op.y + op.h)) }
                 Op.Unclip -> c.restore()

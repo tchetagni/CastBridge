@@ -186,7 +186,8 @@ class LearnActivity : Activity() {
         "lesson" -> {
             val pack = p["pack"]?.let { LearnHub.library().pack(it) } ?: return "pack introuvable"
             val l = p["lesson"]?.let { pack.lesson(it) } ?: pack.lessons.firstOrNull() ?: return "fiche introuvable"
-            push(ReaderScreen(this, pack, l, p["page"]?.toIntOrNull() ?: 0)); null
+            val r = ReaderScreen(this, pack, l, p["page"]?.toIntOrNull() ?: 0)
+            if (top() is ReaderScreen) replace(r) else push(r); null   // the teacher jumps from fiche to fiche: BACK still leads to the menu
         }
         else -> top().let { if (it == null) "aucun écran" else it.remote(action, p) }
     }
@@ -325,7 +326,8 @@ class LearnHomeScreen(a: LearnActivity) : LearnActivity.Screen(a) {
         val tiles = ArrayList<View>()
         val exam = p.exam?.let { LearnCatalog.exam(it) } ?: LearnCatalog.examsFor(p.level).firstOrNull()
         val days = pr.daysToExam(p, now)
-        tiles += a.st.tile("Préparer mon examen", exam?.let { e -> e.label + (days?.let { d -> if (d >= 0) " · J-$d" else " · date passée" } ?: "") } ?: "CEP, FSLC, BEPC, GCE, Probatoire, Bac",
+        val nursery = LearnCatalog.cursusOfLevel(p.level)?.stage == LearnCatalog.Stage.NURSERY
+        if (!nursery) tiles += a.st.tile("Préparer mon examen", exam?.let { e -> e.label + (days?.let { d -> if (d >= 0) " · J-$d" else " · date passée" } ?: "") } ?: "CEP, FSLC, BEPC, GCE, Probatoire, Bac",
             LearnStyle.GOLD, days?.takeIf { it >= 0 }?.let { "J-$it" } ?: "◎") { a.push(if (exam != null) ExamScreen(a, exam.key) else ExamPickScreen(a)) }
         sp.resume?.let { r ->
             val pack = runCatching { LearnHub.library().pack(r.pack) }.getOrNull(); val l = pack?.lesson(r.lesson)
@@ -475,15 +477,20 @@ class PackScreen(a: LearnActivity, private val pack: Pack) : LearnActivity.Scree
             a.push(SeriesScreen(a, pack, selfs.shuffled().take(10), (if (en) "Quick quiz — " else "Quiz express — ") + pack.title))
         }
         if (actions.isNotEmpty()) col.addView(a.st.grid(actions, 4, 18, 200))
-        for (c in pack.chapters) {
+        fun ficheTile(l: castbridge.core.learn.Lesson): View {
+            val s = sp?.lessons?.get(l.id)
+            val stars = s?.stars ?: 0
+            return a.st.tile(l.title, "★".repeat(stars) + "☆".repeat(3 - stars) + "  ·  ${l.minutes} min" + (if (s?.completed == true) (if (en) " · done" else " · terminée") else if (s?.seen == true) (if (en) " · started" else " · commencée") else ""),
+                a.subjectColor(pack.subject)) { a.push(ReaderScreen(a, pack, l)) }
+        }
+        if (pack.chapters.all { pack.lessonsOf(it.id).size <= 1 }) {
+            // one fiche per chapter: a single grid (no chapter title repeating the fiche title)
+            col.addView(a.st.text(if (en) "Lessons" else "Fiches", 24f, Color.WHITE, true), col.lp(top = a.st.px(12)))
+            col.addView(a.st.grid(pack.chapters.flatMap { pack.lessonsOf(it.id) }.map { ficheTile(it) }, 3, 18, 170))
+        } else for (c in pack.chapters) {
             val ls = pack.lessonsOf(c.id); if (ls.isEmpty()) continue
             col.addView(a.st.text(c.title, 24f, Color.WHITE, true), col.lp(top = a.st.px(12)))
-            col.addView(a.st.grid(ls.map { l ->
-                val s = sp?.lessons?.get(l.id)
-                val stars = s?.stars ?: 0
-                a.st.tile(l.title, "★".repeat(stars) + "☆".repeat(3 - stars) + "  ·  ${l.minutes} min" + (if (s?.completed == true) (if (en) " · done" else " · terminée") else if (s?.seen == true) (if (en) " · started" else " · commencée") else ""),
-                    a.subjectColor(pack.subject)) { a.push(ReaderScreen(a, pack, l)) }
-            }, 3, 18, 170))
+            col.addView(a.st.grid(ls.map { ficheTile(it) }, 3, 18, 170))
         }
         val status = if (pack.status == ReviewStatus.VALIDATED) "Contenu certifié" else "Brouillon à relire par un enseignant"
         return a.frame(pack.title, "${pack.level} · ${status} · ${a.starsOf(pack)} ★", ScrollView(a).apply { clipChildren = true; addView(col) }, if (en) "OK: open" else "OK : ouvrir")

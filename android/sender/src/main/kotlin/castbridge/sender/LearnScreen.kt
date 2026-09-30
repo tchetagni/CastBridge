@@ -226,7 +226,9 @@ private object SceneDraw {
                     is PathCmd.C -> p.cubicTo(f(cmd.x1), f(cmd.y1), f(cmd.x2), f(cmd.y2), f(cmd.x), f(cmd.y)); is PathCmd.Q -> p.quadTo(f(cmd.x1), f(cmd.y1), f(cmd.x), f(cmd.y)); PathCmd.Z -> p.close() }
                 op.fill?.let { fill.color = it; c.drawPath(p, fill) }; op.stroke?.let { stroke.color = it; stroke.strokeWidth = f(op.width).coerceAtLeast(1f); c.drawPath(p, stroke) } }
             is Op.Text -> { txt.color = op.color; txt.textSize = f(op.size); txt.typeface = if (op.bold) Typeface.DEFAULT_BOLD else Typeface.DEFAULT
-                txt.textAlign = when (op.anchor) { "start" -> Paint.Align.LEFT; "end" -> Paint.Align.RIGHT; else -> Paint.Align.CENTER }; c.drawText(op.text, f(op.x), f(op.y), txt) }
+                txt.textAlign = when (op.anchor) { "start" -> Paint.Align.LEFT; "end" -> Paint.Align.RIGHT; else -> Paint.Align.CENTER }
+                txt.style = Paint.Style.STROKE; txt.strokeWidth = f(op.size) * 0.22f; txt.color = 0xFFFDFCF7.toInt(); c.drawText(op.text, f(op.x), f(op.y), txt)
+                txt.style = Paint.Style.FILL; txt.color = op.color; c.drawText(op.text, f(op.x), f(op.y), txt) }
             is Op.Clip -> { c.save(); c.clipRect(f(op.x), f(op.y), f(op.x + op.w), f(op.y + op.h)) }
             Op.Unclip -> c.restore()
         }

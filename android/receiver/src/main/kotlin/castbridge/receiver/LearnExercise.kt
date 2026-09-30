@@ -114,7 +114,7 @@ class ExerciseView(
         }
         numberField = field; refreshNumber(c)
         box.addView(field, box.lp(-2, -2, bottom = st.px(10)))
-        val keys = listOf("7", "8", "9", "4", "5", "6", "1", "2", "3", if (en) "." else ",", "0", "−", "/", "⌫", "OK")
+        val keys = listOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "0", if (en) "." else ",", "−", "/", "⌫", "OK")
         val btns = keys.map { k ->
             st.button(k, size = 28f) {
                 when (k) {
@@ -128,7 +128,7 @@ class ExerciseView(
         }
         val grid = st.grid(btns, 5, 10)
         box.addView(grid, box.lp(-1, -2))
-        firstFocus = btns[10]
+        firstFocus = btns[0]
         box.addView(st.text(t("Touches chiffres de la télécommande acceptées · OK pour valider", "Remote number keys work too · OK to submit"), 18f, LearnStyle.MUTED), box.lp(top = st.px(4)))
     }
 
