@@ -146,6 +146,12 @@ class ParentalEngine(
         return Decision.ALLOW
     }
 
+    /** Hours and daily time only (for a video the parent unlocked with the PIN). */
+    @Synchronized fun checkTime(kind: UseKind): Decision {
+        val p = activeProfile() ?: return Decision.ALLOW
+        return ParentalRules.timeVerdict(p, kind, nowMin(), usedMs(p))
+    }
+
     /** May this video be played now: rating first, then hours and daily time. */
     @Synchronized fun checkPlayback(name: String, volumeLabel: String? = null): Decision {
         val p = activeProfile() ?: return Decision.ALLOW

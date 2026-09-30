@@ -387,12 +387,12 @@ class PlayerActivity : Activity(), TvService.Screen {
     }
 
     private fun homeApi() = object : HomeScreen.Api {
-        override fun items() = server?.libraryItems().orEmpty()
+        override fun items() = ParentalHub.filterItems(server?.libraryItems().orEmpty())
         override fun status(): Triple<String, String, String?> {
             val s = server
             val rec = s?.receiving()?.firstOrNull()?.let { (n, got, total) -> "Réception de ${castbridge.core.tv.LibraryLogic.title(n)} : ${got * 100 / total.coerceAtLeast(1)} %" }
                 ?: statuses["1-bt"]?.takeIf { "réception" in it }?.substringAfter(": ")?.let { "Réception par Bluetooth : $it" }
-            return Triple(if (s == null) "Démarrage…" else "Prêt à recevoir", pin, rec)
+            return Triple(if (s == null) "Démarrage…" else "Prêt à recevoir", ParentalHub.shownPin(pin), rec)
         }
         override fun open(i: castbridge.core.tv.LibraryItem, row: List<castbridge.core.tv.LibraryItem>, index: Int) { libScreen?.open(i, row, index) }
         override fun actions(i: castbridge.core.tv.LibraryItem, row: List<castbridge.core.tv.LibraryItem>, index: Int) { libScreen?.actions(i, row, index) }
@@ -403,7 +403,7 @@ class PlayerActivity : Activity(), TvService.Screen {
             AlertDialog.Builder(this@PlayerActivity).setTitle("Envoyer une vidéo sur la TV")
                 .setMessage("1. Sur le téléphone, ouvrez l'app CastBridge, onglet « CastBridge TV ».\n" +
                     "2. Touchez « Envoyer une vidéo » et choisissez-la.\n" +
-                    "3. La première fois, saisissez le code de la TV : $pin.\n\n" +
+                    "3. La première fois, saisissez le code de la TV : ${ParentalHub.shownPin(pin)}.\n\n" +
                     "La vidéo est copiée sur la TV (ou sur sa clé USB) : elle continue même si le téléphone s'en va. " +
                     "Depuis un ordinateur : ouvrez http://${TvService.localIp() ?: "adresse-de-la-TV"}:${ReceiverServer.PORT} dans un navigateur.")
                 .setPositiveButton("Compris", null).show()
@@ -457,6 +457,7 @@ class PlayerActivity : Activity(), TvService.Screen {
     /** Pick one of several actions with the remote (sub-menu of a home icon). */
     private fun choose(title: String, items: List<Pair<String, () -> Unit>>) {
         if (items.isEmpty()) return
+        val items = ParentalHub.wrapMenu(this, items)
         AlertDialog.Builder(this).setTitle(title).setItems(items.map { it.first }.toTypedArray()) { _, i -> items[i].second() }
             .setNegativeButton("Fermer", null).show()
     }
@@ -464,7 +465,7 @@ class PlayerActivity : Activity(), TvService.Screen {
     /** Every feature of the app as a home icon, with its live state. */
     /** A home tile that also counts its use (feature_used, docs/TELEMETRY.md: closed list of ids). */
     private fun tile(feature: String, icon: Int, label: String, description: String, status: String?, on: Boolean, action: () -> Unit) =
-        HomeTool(icon, label, description, status, on) { TvConnect.feature(feature, "tile"); action() }
+        HomeTool(icon, label, description, status, on) { TvConnect.feature(feature, "tile"); ParentalHub.guardTile(this, feature, action) }
 
     /** Status line of the "Mises à jour" tile: what the server link knows right now. */
     private fun updateStatus(): String {
@@ -490,7 +491,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         val net = st["6-gw"]
         val wdOn = prefs.getBool("wd_enabled", false)
         val sshOn = ssh?.running == true
-        return listOf(
+        return ParentalHub.filterHome(listOf(
             tile("library", R.drawable.ic_t_library, "Bibliothèque", "Toutes vos vidéos et vos fichiers, en grille.", "${server?.libraryItems()?.size ?: 0} fichier(s)", false) { showLibrary() },
             tile("learn", R.drawable.ic_t_learn, "Apprendre", "Leçons de la maternelle à la licence, exercices corrigés, préparer le CEP, le BEPC, le GCE, le Bac.", "Élèves", true) {
                 startActivity(Intent(this, LearnActivity::class.java))
@@ -508,7 +509,7 @@ class PlayerActivity : Activity(), TvService.Screen {
                 if (RemoteAccessibilityService.instance != null) "Toute la TV" else "CastBridge", RemoteAccessibilityService.instance != null) {
                 startActivity(Intent(this, RemoteSetupActivity::class.java))
             },
-            tile("receive", R.drawable.ic_t_cast, "Recevoir du téléphone", "Envoyer une vidéo depuis l'app CastBridge du téléphone.", "Code $pin", true) { homeApi().openHelp() },
+            tile("receive", R.drawable.ic_t_cast, "Recevoir du téléphone", "Envoyer une vidéo depuis l'app CastBridge du téléphone.", "Code ${ParentalHub.shownPin(pin)}", true) { homeApi().openHelp() },
             tile("usb", R.drawable.ic_t_usb, "Clé USB", "Importer des vidéos d'une clé, ou y ranger les nouvelles.",
                 if (drives.isEmpty()) "Aucune clé" else drives.joinToString { "${it.label} · ${it.free / (1L shl 30)} Go libres" }, drives.isNotEmpty()) {
                 choose("Clé USB", listOf<Pair<String, () -> Unit>>(
@@ -541,19 +542,23 @@ class PlayerActivity : Activity(), TvService.Screen {
                 updateStatus(), TvConnect.link?.update?.manifest != null) { ServerActivity.open(this, ServerActivity.MODE_UPDATES) },
             tile("settings", R.drawable.ic_t_settings, "Connexion & réglages", "Code, adresse, démarrage avec la TV, lecture à distance…", null, false) { showSettings() },
             tile("dev_options", R.drawable.ic_t_dev, "Options développeur", "Débogage USB / Wi-Fi de la TV.", null, false) { flash(openDevSettings()) },
+            // Parental control (docs/PARENTAL.md): always reachable, even in kid mode; no usage event is sent for it
+            HomeTool(R.drawable.ic_t_parental, "Contrôle parental", "Code parental, profils des enfants, horaires, vidéos adaptées à l'âge.",
+                ParentalHub.tileStatus(), ParentalHub.engine.config().enabled) { startActivity(Intent(this, ParentalActivity::class.java)) },
             tile("help", R.drawable.ic_t_help, "Aide", "Comment envoyer une vidéo depuis le téléphone.", null, false) { homeApi().openHelp() },
-        )
+        ))
     }
 
     /** "Connexion & réglages": connection facts in plain words, and every option (the former MENU list). */
     private fun showSettings() {
+        if (!ParentalHub.allow(this, castbridge.core.parental.Category.SETTINGS)) return
         val s = svc ?: return
         val ip = TvService.localIp()
         val labels = mapOf("0-storage" to "Stockage", "1-bt" to "Bluetooth", "2-wd" to "Wi-Fi Direct (sans box)", "3-usb" to "Import depuis une clé",
             "4-ssh" to "Administration à distance (SSH)", "4-ssh-bt" to "SSH par Bluetooth", "5-update" to "Installation d'applications",
             "5-notice" to "Dernier événement", "9-server" to "Serveur")
         val info = buildList {
-            add("Code de connexion (à saisir une fois sur le téléphone)" to pin)
+            add("Code de connexion (à saisir une fois sur le téléphone)" to ParentalHub.shownPin(pin))
             add("Adresse de la TV" to (ip?.let { "$it:${ReceiverServer.PORT}   ·   page web : http://$it:${ReceiverServer.PORT}" } ?: "pas de réseau (Bluetooth ou Wi-Fi Direct possibles)"))
             add("Démarrage avec la TV" to if (prefs.getBool("autostart", true)) "oui" else "non")
             add("Lecture lancée depuis le téléphone" to if (s.overlayAllowed()) "s'ouvre toute seule" else "demande d'ouvrir l'app (autorisation « afficher par-dessus » non accordée)")
@@ -583,7 +588,7 @@ class PlayerActivity : Activity(), TvService.Screen {
 
     /** The library's view of the app: listing, thumbnails, and the app's own API on loopback for actions. */
     private fun libraryApi() = object : LibraryScreen.Api {
-        override fun items() = server?.libraryItems().orEmpty()
+        override fun items() = ParentalHub.filterItems(server?.libraryItems().orEmpty())
         override fun volumes() = svc?.registry?.volumes().orEmpty().filter { it.writable }.map { it.id to it.label }
         override fun header() = "OK : lire   ·   MENU (ou OK maintenu) : actions   ·   RETOUR : accueil"
         override fun call(block: (castbridge.core.tv.TvClient) -> Unit): String? = try {
@@ -629,6 +634,7 @@ class PlayerActivity : Activity(), TvService.Screen {
 
     private fun showMenu() {
         if (current == null) { showSettings(); return }
+        if (!ParentalHub.allow(this, castbridge.core.parental.Category.SETTINGS)) return
         AlertDialog.Builder(this).setTitle("CastBridge TV")
             .setItems(menuItems().map { it.first }.toTypedArray()) { _, i -> menuItems()[i].second() }
             .setNegativeButton("Fermer", null).show()
@@ -671,7 +677,7 @@ class PlayerActivity : Activity(), TvService.Screen {
             if (ssh?.running == true) { ssh.disable(); flash("SSH désactivé") }
             else Thread { runCatching { ssh?.enable() }.onFailure { e -> main.post { flash("SSH impossible : ${e.message}") } } }.start()
         }
-        return items
+        return ParentalHub.wrapMenu(this, items)
     }
 
     /**

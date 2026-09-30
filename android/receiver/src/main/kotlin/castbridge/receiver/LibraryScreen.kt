@@ -158,7 +158,11 @@ class LibraryScreen(
         } else play(i, 0)
     }
 
-    private fun play(i: LibraryItem, pos: Long) = run("Lecture") { it.play(i.name, pos) }
+    private fun play(i: LibraryItem, pos: Long) {
+        // Parental control: a video above the profile's age, in "lock" mode, asks the parental PIN first (docs/PARENTAL.md)
+        if (ParentalHub.needsPin(i)) ParentalHub.authorize(act, "Vidéo verrouillée : « ${i.title} »") { ParentalHub.grantPlay(i.name); run("Lecture") { it.play(i.name, pos) } }
+        else run("Lecture") { it.play(i.name, pos) }
+    }
 
     fun actions(i: LibraryItem, section: List<LibraryItem>, index: Int) {
         val items = ArrayList<Pair<String, () -> Unit>>()
@@ -175,6 +179,7 @@ class LibraryScreen(
         api.volumes().filter { it.first != i.volumeId }.forEach { (id, label) ->
             items += "Déplacer vers $label" to { run("Déplacement") { it.moveFile(i.name, id) }; api.flash("Déplacement vers $label en cours…") }
         }
+        if (i.type != MediaType.OTHER) items += "Classer (contrôle parental)…" to { ParentalHub.rateDialog(act, i.name, i.title) }
         items += "Renommer…" to { rename(i) }
         items += "Supprimer…" to { confirmDelete(i) }
         AlertDialog.Builder(act).setTitle(i.title)
