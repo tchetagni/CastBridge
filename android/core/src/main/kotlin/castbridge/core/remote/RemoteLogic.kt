@@ -26,7 +26,7 @@ class SeqFilter(private val maxSessions: Int = 16) {
  * Keys held down from the phone. If the link drops while a key is held, its "up" never comes: after [timeoutMs] without a
  * repeat the TV releases it itself, so an arrow never keeps scrolling forever.
  */
-class HoldTracker(private val timeoutMs: Long = 700) {
+class HoldTracker(private val timeoutMs: Long = 1200) {
     private val held = LinkedHashMap<RemoteKey, Long>()
 
     @Synchronized fun down(k: RemoteKey, now: Long) { held[k] = now }

@@ -110,6 +110,13 @@ class PlayerActivity : Activity(), TvService.Screen {
         if (current == null && libScreen?.visible != true) showHome()
     }
 
+    /** « Accueil » of the phone remote (RemoteHub): leave the video / library / other screen for the home. */
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        if (intent.getBooleanExtra(RemoteHub.EXTRA_HOME, false)) { if (current != null) stop() else showHome() }
+    }
+
     override fun onResume() {
         super.onResume(); resumed = true
         if (::extras.isInitialized) svc?.takePending()?.let { runPending(it) }
@@ -400,6 +407,10 @@ class PlayerActivity : Activity(), TvService.Screen {
             },
             HomeTool(R.drawable.ic_t_update, "Téléchargements", "Télécharger sur la TV (liens, magnet, torrent) : les fichiers rejoignent la bibliothèque.", "aria2", false) {
                 startActivity(Intent(this, DownloadsActivity::class.java))
+            },
+            HomeTool(R.drawable.ic_t_remote, "Télécommande", "Piloter la TV avec le téléphone ; option « toute la TV » (accessibilité).",
+                if (RemoteAccessibilityService.instance != null) "Toute la TV" else "CastBridge", RemoteAccessibilityService.instance != null) {
+                startActivity(Intent(this, RemoteSetupActivity::class.java))
             },
             HomeTool(R.drawable.ic_t_cast, "Recevoir du téléphone", "Envoyer une vidéo depuis l'app CastBridge du téléphone.", "Code $pin", true) { homeApi().openHelp() },
             HomeTool(R.drawable.ic_t_usb, "Clé USB", "Importer des vidéos d'une clé, ou y ranger les nouvelles.",
