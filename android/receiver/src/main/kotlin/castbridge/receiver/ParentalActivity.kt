@@ -11,7 +11,6 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
-import android.widget.Toast
 import castbridge.core.parental.AgeBand
 import castbridge.core.parental.Category
 import castbridge.core.parental.ChildProfile
@@ -40,6 +39,7 @@ class ParentalActivity : Activity() {
     private lateinit var subtitleView: TextView
     private lateinit var content: LinearLayout
     private lateinit var scroll: ScrollView
+    private lateinit var statusView: TextView
     private var authed = false
     private val e get() = ParentalHub.engine
 
@@ -57,7 +57,8 @@ class ParentalActivity : Activity() {
             isFillViewport = false; addView(content, ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT))
             layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f)
         }
-        root.addView(titleView); root.addView(subtitleView); root.addView(scroll)
+        statusView = ParentalUi.text(this, "", ParentalUi.SMALL_SP, 0xFF8BC34A.toInt(), true).apply { visibility = android.view.View.GONE }
+        root.addView(titleView); root.addView(subtitleView); root.addView(scroll); root.addView(statusView)
         root.addView(ParentalUi.text(this, "OK : choisir   ·   HAUT / BAS : naviguer   ·   RETOUR : revenir", 16f, TvStyle.MUTED).apply { setPadding(0, TvStyle.dp(this@ParentalActivity, 8), 0, 0) })
         setContentView(root)
         push(entryPage())
@@ -88,7 +89,12 @@ class ParentalActivity : Activity() {
     private fun LinearLayout.row(title: String, value: String? = null, onClick: () -> Unit) { addView(ParentalUi.row(this@ParentalActivity, title, value, onClick)) }
     private fun LinearLayout.note(s: String) { addView(ParentalUi.text(this@ParentalActivity, s, ParentalUi.SMALL_SP, TvStyle.MUTED).apply { setPadding(TvStyle.dp(this@ParentalActivity, 6), TvStyle.dp(this@ParentalActivity, 8), 0, TvStyle.dp(this@ParentalActivity, 8)) }) }
     private fun LinearLayout.section(s: String) { addView(ParentalUi.text(this@ParentalActivity, s, 20f, TvStyle.ACCENT, true).apply { setPadding(0, TvStyle.dp(this@ParentalActivity, 14), 0, TvStyle.dp(this@ParentalActivity, 2)) }) }
-    private fun toast(s: String) = Toast.makeText(this, s, Toast.LENGTH_LONG).show()
+    /** A message line under the list (never over it, so nothing overlaps). */
+    private fun toast(s: String) {
+        statusView.text = s; statusView.visibility = android.view.View.VISIBLE
+        statusView.removeCallbacks(hideStatus); statusView.postDelayed(hideStatus, 7000)
+    }
+    private val hideStatus = Runnable { statusView.visibility = android.view.View.GONE }
 
     // ------------------------------------------------------------------ entry: create the PIN, or ask it
 

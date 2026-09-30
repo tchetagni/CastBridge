@@ -252,7 +252,9 @@ class ParentalEngine(
                         "downloads" to ((k["downloads"] as? Number)?.toLong() ?: 0L) / 60_000)
                 })
             },
-            "blocked" to blockedList().takeLast(50).reversed(),
+            // what was refused; the parent's own setting changes are kept apart (they are not "blocked content")
+            "blocked" to blockedList().filter { it["why"] != "réglage" }.takeLast(50).reversed(),
+            "changes" to blockedList().filter { it["why"] == "réglage" }.takeLast(20).reversed(),
         )
     }
 

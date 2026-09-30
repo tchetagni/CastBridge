@@ -492,7 +492,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         val wdOn = prefs.getBool("wd_enabled", false)
         val sshOn = ssh?.running == true
         return ParentalHub.filterHome(listOf(
-            tile("library", R.drawable.ic_t_library, "Bibliothèque", "Toutes vos vidéos et vos fichiers, en grille.", "${server?.libraryItems()?.size ?: 0} fichier(s)", false) { showLibrary() },
+            tile("library", R.drawable.ic_t_library, "Bibliothèque", "Toutes vos vidéos et vos fichiers, en grille.", "${ParentalHub.filterItems(server?.libraryItems().orEmpty()).size} fichier(s)", false) { showLibrary() },
             tile("learn", R.drawable.ic_t_learn, "Apprendre", "Leçons de la maternelle à la licence, exercices corrigés, préparer le CEP, le BEPC, le GCE, le Bac.", "Élèves", true) {
                 startActivity(Intent(this, LearnActivity::class.java))
             },
