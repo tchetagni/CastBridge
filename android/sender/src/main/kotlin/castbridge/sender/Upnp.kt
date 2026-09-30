@@ -85,6 +85,10 @@ object Upnp {
     suspend fun seek(r: Renderer, sec: Long) = withContext(Dispatchers.IO) {
         avt(r, "Seek", "Unit" to "REL_TIME", "Target" to Soap.hms(sec))
     }
+    /** PLAYING, PAUSED_PLAYBACK, STOPPED, TRANSITIONING, NO_MEDIA_PRESENT... */
+    suspend fun transportState(r: Renderer): String? = withContext(Dispatchers.IO) {
+        Xml.tag(avt(r, "GetTransportInfo"), "CurrentTransportState")
+    }
     /** Returns (position, duration) in seconds. */
     suspend fun position(r: Renderer): Pair<Long, Long> = withContext(Dispatchers.IO) {
         val x = avt(r, "GetPositionInfo")

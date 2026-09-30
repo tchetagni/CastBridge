@@ -10,8 +10,8 @@ android {
         applicationId = "castbridge.sender"
         minSdk = 26
         targetSdk = 35
-        versionCode = 5
-        versionName = "0.7"
+        versionCode = 6
+        versionName = "0.8"
     }
     compileOptions { sourceCompatibility = JavaVersion.VERSION_17; targetCompatibility = JavaVersion.VERSION_17 }
     kotlinOptions { jvmTarget = "17" }
@@ -26,4 +26,11 @@ dependencies {
     implementation("androidx.compose.ui:ui")
     implementation("org.nanohttpd:nanohttpd:2.3.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.1")
+    // Phone player ("Ouvrir avec"): Media3/ExoPlayer, see docs/PHONE-PLAYER.md for the choice and the formats covered.
+    val media3 = "1.5.1"
+    implementation("androidx.media3:media3-exoplayer:$media3")
+    implementation("androidx.media3:media3-exoplayer-hls:$media3")
+    implementation("androidx.media3:media3-exoplayer-dash:$media3")
+    implementation("androidx.media3:media3-ui:$media3")
+    implementation("androidx.media3:media3-session:$media3")
 }

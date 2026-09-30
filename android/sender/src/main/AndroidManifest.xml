@@ -18,6 +18,14 @@
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" android:usesPermissionFlags="neverForLocation" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE" />
     <uses-feature android:name="android.hardware.bluetooth" android:required="false" />
+    <!-- Phone player: background playback with its media notification -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+    <!-- "Sur le téléphone" library (Android 13+: per media type; 14+: partial access to selected photos/videos) -->
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
     <application
         android:label="CastBridge"
         android:usesCleartextTraffic="true"
@@ -68,5 +76,79 @@
             android:foregroundServiceType="connectedDevice" />
         <service android:name=".ServerService" android:exported="false"
             android:foregroundServiceType="dataSync" />
+        <!-- The phone's own media player: "Ouvrir avec" / "Partager" from the Gallery, Files, WhatsApp, Telegram, the browser. -->
+        <activity android:name=".player.PlayerActivity" android:exported="true"
+            android:label="CastBridge Lecteur"
+            android:launchMode="singleTask" android:taskAffinity="castbridge.sender.player"
+            android:supportsPictureInPicture="true" android:resizeableActivity="true"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboardHidden|uiMode|density"
+            android:theme="@android:style/Theme.Material.NoActionBar.Fullscreen">
+            <!-- local files (content:// and file://), by MIME type -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="content" />
+                <data android:scheme="file" />
+                <data android:mimeType="video/*" />
+                <data android:mimeType="audio/*" />
+                <data android:mimeType="image/*" />
+                <data android:mimeType="application/ogg" />
+                <data android:mimeType="application/x-mpegURL" />
+                <data android:mimeType="application/vnd.apple.mpegurl" />
+                <data android:mimeType="application/dash+xml" />
+            </intent-filter>
+            <!-- web media announced with their type (browser downloads, "open with") -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:mimeType="video/*" />
+                <data android:mimeType="audio/*" />
+                <data android:mimeType="application/x-mpegURL" />
+                <data android:mimeType="application/vnd.apple.mpegurl" />
+                <data android:mimeType="application/dash+xml" />
+            </intent-filter>
+            <!-- direct links to media files and HLS/DASH playlists, by extension (pattern repeated for paths with dots) -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:host="*" />
+                <data android:pathPattern=".*\\.m3u8" />
+                <data android:pathPattern=".*\\..*\\.m3u8" />
+                <data android:pathPattern=".*\\.mpd" />
+                <data android:pathPattern=".*\\..*\\.mpd" />
+                <data android:pathPattern=".*\\.mp4" />
+                <data android:pathPattern=".*\\..*\\.mp4" />
+                <data android:pathPattern=".*\\.mkv" />
+                <data android:pathPattern=".*\\..*\\.mkv" />
+                <data android:pathPattern=".*\\.webm" />
+                <data android:pathPattern=".*\\.mp3" />
+                <data android:pathPattern=".*\\..*\\.mp3" />
+            </intent-filter>
+            <!-- "Partager" -->
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <action android:name="android.intent.action.SEND_MULTIPLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="video/*" />
+                <data android:mimeType="audio/*" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
+        </activity>
+        <service android:name=".player.PlaybackService" android:exported="true"
+            android:foregroundServiceType="mediaPlayback">
+            <intent-filter>
+                <action android:name="androidx.media3.session.MediaLibraryService" />
+                <action android:name="androidx.media3.session.MediaSessionService" />
+                <action android:name="android.media.browse.MediaBrowserService" />
+            </intent-filter>
+        </service>
+        <meta-data android:name="com.google.android.gms.car.application" android:resource="@xml/automotive_app_desc" />
     </application>
 </manifest>
