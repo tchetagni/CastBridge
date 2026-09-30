@@ -193,7 +193,7 @@ class TvService : Service(), Device {
     private fun startServer(attempt: Int = 0) {
         val s = ReceiverServer(registry, playerBridge, pin = pin, guard = guard, device = this,
             // downloads (aria2, docs/DOWNLOADS.md): its own manager, independent of any screen
-            extension = ApiExtension(::extraApi).then(RemoteHub.api.also { RemoteHub.install(this) }).then(TvDownloads.start(this, registry) { server?.target ?: "auto" }.manager.apiExtension)
+            extension = ApiExtension(::extraApi).then(RemoteHub.api.also { RemoteHub.install(this) }).then(TvDownloads.start(this, registry) { server?.target ?: "auto" }.manager.apiExtension).then(ParentalHub.api)
                 .then(LearnHub.also { it.attach(this) }.api(this)),   // « Apprendre » (docs/LEARN.md)
             profile = prefs.profile(), onSettings = { prefs.saveProfile(it); updateStorageStatus() },
             onNotice = { n -> notice(n); setStatus("5-notice", n) },
@@ -434,9 +434,10 @@ class TvService : Service(), Device {
             if (why == null) return                              // started, still opening: it will play when up
             throw NeedsForeground(why)
         }
-        override fun play(file: File, posMs: Long) = request(Pending.Local(file, posMs)) { it.play(file, posMs) }
-        override fun playStream(url: String, name: String, posMs: Long) = request(Pending.Stream(url, name, posMs)) { it.playStream(url, name, posMs) }
-        override fun playSaf(name: String, size: Long, posMs: Long) = request(Pending.Saf(name, size, posMs)) { it.playSaf(name, size, posMs) }
+        // Parental control: a refused video throws NeedsForeground with the reason (TV library and phone both show it)
+        override fun play(file: File, posMs: Long) { ParentalHub.gatePlay(file.name); request(Pending.Local(file, posMs)) { it.play(file, posMs) } }
+        override fun playStream(url: String, name: String, posMs: Long) { ParentalHub.gatePlay(name); request(Pending.Stream(url, name, posMs)) { it.playStream(url, name, posMs) } }
+        override fun playSaf(name: String, size: Long, posMs: Long) { ParentalHub.gatePlay(name); request(Pending.Saf(name, size, posMs)) { it.playSaf(name, size, posMs) } }
         override fun pause() { s()?.pause() }
         override fun resume() { s()?.resume() }
         override fun seek(posMs: Long) { s()?.seek(posMs) }

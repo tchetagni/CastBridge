@@ -112,6 +112,11 @@
             android:theme="@android:style/Theme.DeviceDefault.NoActionBar" />
         <activity android:name=".DownloadsActivity" android:exported="false" android:screenOrientation="landscape"
             android:theme="@android:style/Theme.DeviceDefault.NoActionBar" />
+        <!-- Contrôle parental (docs/PARENTAL.md): settings screen and lock screen, both internal (not exported) -->
+        <activity android:name=".ParentalActivity" android:exported="false" android:screenOrientation="landscape"
+            android:windowSoftInputMode="adjustPan" android:theme="@android:style/Theme.DeviceDefault.NoActionBar" />
+        <activity android:name=".ParentalLockActivity" android:exported="false" android:screenOrientation="landscape"
+            android:launchMode="singleTop" android:theme="@android:style/Theme.DeviceDefault.NoActionBar" />
         <service android:name=".DownloadService" android:exported="false" android:foregroundServiceType="dataSync" />
         <!-- Phone remote (docs/REMOTE.md): help screen, and the OPTIONAL accessibility service the user may enable to pilot the
              whole TV. It acts only on orders of a phone that knows the TV's PIN; it reads and keeps nothing on its own. -->

@@ -12,5 +12,7 @@ class TvApp : Application() {
         TvConnect.installCrashHandler(this)
         runCatching { TvConnect.init(this) }.onFailure { TvConnect.logw("init: ${it.javaClass.simpleName}") }
         registerActivityLifecycleCallbacks(TvConnect.lifecycle)
+        ParentalHub.init(this)                                          // parental control: local only (docs/PARENTAL.md)
+        registerActivityLifecycleCallbacks(ParentalHub.lifecycle)
     }
 }
