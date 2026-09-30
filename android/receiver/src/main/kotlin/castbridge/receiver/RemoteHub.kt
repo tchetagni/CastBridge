@@ -69,8 +69,29 @@ object RemoteHub {
         return r
     }
 
+    /**
+     * Runs a key on the main thread AHEAD of queued work (the TV's own input events also jump the queue: they are handled
+     * before animation and drawing). Waits at most [waitMs] for the result so the phone's next key is never held up by a busy
+     * screen; the key still runs, in order. Returns (finished, result).
+     */
+    private fun <T> onMainFirst(waitMs: Long, block: () -> T): Pair<Boolean, T?> {
+        if (Looper.myLooper() == Looper.getMainLooper()) return true to runCatching(block).getOrNull()
+        var r: T? = null
+        val l = CountDownLatch(1)
+        // Keys keep their order: they wait in this FIFO, and whichever "drain" runs first empties it (posting at the front of
+        // the looper alone would put a later key before an earlier one that is still waiting).
+        keyQueue.add(Runnable { try { r = block() } catch (_: Throwable) {} finally { l.countDown() } })
+        main.postAtFrontOfQueue(drain)
+        val done = l.await(waitMs, TimeUnit.MILLISECONDS)
+        return done to r
+    }
+    private val keyQueue = java.util.concurrent.ConcurrentLinkedQueue<Runnable>()
+    private val drain = Runnable { while (true) (keyQueue.poll() ?: break).run() }
+
     /** The CastBridge screen in front, if any. */
     private fun front(): Activity? = ScreenCapture.resumed?.takeIf { !it.isFinishing }
+        // The first screen may have resumed before the lifecycle hook was installed (it starts the service): ask the service.
+        ?: svc?.screen?.takeIf { it.shown }?.activity
 
     /**
      * The window that has the focus among this app's windows (a dialog, a popup, else the activity). WindowManagerGlobal is not
@@ -154,8 +175,10 @@ object RemoteHub {
         return list.split(':').any { it.equals(me, true) || it.equals(ComponentName(ctx, RemoteAccessibilityService::class.java).flattenToShortString(), true) }
     }
 
-    private const val NO_SCREEN = "CastBridge TV n'est pas à l'écran. Touche « Accueil » pour l'ouvrir, " +
-        "ou activez le mode « toute la TV » (accessibilité) pour piloter les autres écrans de la TV."
+    private val NO_SCREEN: String get() = if (RemoteAccessibilityService.instance != null)
+        "CastBridge TV n'est pas à l'écran. Touche « Accueil » pour l'ouvrir, ou activez « Piloter toute la TV » sur le téléphone."
+        else "CastBridge TV n'est pas à l'écran. Touche « Accueil » pour l'ouvrir, " +
+            "ou activez le mode « toute la TV » (accessibilité) pour piloter les autres écrans de la TV."
 
     // ------------------------------------------------------------------ the sink
 
@@ -170,8 +193,11 @@ object RemoteHub {
         }
 
         private fun appKey(a: Activity, k: RemoteKey, action: KeyAction, repeat: Int): Outcome {
-            val ok = onMain(if (action == KeyAction.LONG) 2500 else 1500) {
+            val (done, ok) = onMainFirst(if (action == KeyAction.LONG) 300 else 150) {
                 val root = focusedRoot(a)
+                // Nothing has the focus yet (screen just opened): like the TV's own remote, the first OK shows the focus
+                // instead of clicking something the viewer cannot see.
+                if (k == RemoteKey.DPAD_CENTER && action != KeyAction.UP && root.findFocus() == null && root.requestFocus()) return@onMainFirst true
                 when (action) {
                     KeyAction.PRESS -> { val d = dispatch(root, k.code, KeyEvent.ACTION_DOWN, 0); dispatch(root, k.code, KeyEvent.ACTION_UP, 0) || d }
                     KeyAction.DOWN -> dispatch(root, k.code, KeyEvent.ACTION_DOWN, repeat)
@@ -187,8 +213,9 @@ object RemoteHub {
                         true
                     }
                 }
-            } ?: return Outcome.refused("L'écran de la TV ne répond pas", 503)
-            return Outcome(true, "app", if (ok) null else "sans effet sur cet écran")
+            }
+            // Not finished within the wait (busy screen): it is queued ahead of everything else and will run, in order.
+            return Outcome(true, "app", if (!done || ok == true) null else "sans effet sur cet écran")
         }
 
         private fun systemKey(k: RemoteKey, action: KeyAction): Outcome {

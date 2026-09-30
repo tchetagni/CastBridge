@@ -29,7 +29,7 @@ class RemoteAccessibilityService : AccessibilityService() {
 
     /** Arrow / OK in whatever app is in front. Android 13+: the system's own D-pad actions; before: focus search on nodes. */
     fun dpad(k: RemoteKey, long: Boolean): Boolean {
-        if (Build.VERSION.SDK_INT >= 33 && !(long && k == RemoteKey.DPAD_CENTER)) {
+        if (Build.VERSION.SDK_INT >= 33 && !(long && k == RemoteKey.DPAD_CENTER) && !forceNodes()) {
             val a = when (k) {
                 RemoteKey.DPAD_UP -> GLOBAL_ACTION_DPAD_UP; RemoteKey.DPAD_DOWN -> GLOBAL_ACTION_DPAD_DOWN
                 RemoteKey.DPAD_LEFT -> GLOBAL_ACTION_DPAD_LEFT; RemoteKey.DPAD_RIGHT -> GLOBAL_ACTION_DPAD_RIGHT
@@ -54,6 +54,10 @@ class RemoteAccessibilityService : AccessibilityService() {
         while (p != null && !p.isScrollable) p = p.parent
         return p?.performAction(if (dir == View.FOCUS_UP || dir == View.FOCUS_LEFT) AccessibilityNodeInfo.ACTION_SCROLL_BACKWARD else AccessibilityNodeInfo.ACTION_SCROLL_FORWARD) ?: false
     }
+
+    /** Debug builds only: `adb shell settings put global castbridge_a11y_nodes 1` tests the Android 8–12 path on a newer TV. */
+    private fun forceNodes(): Boolean = (applicationInfo.flags and android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE) != 0 &&
+        runCatching { android.provider.Settings.Global.getString(contentResolver, "castbridge_a11y_nodes") == "1" }.getOrDefault(false)
 
     private fun firstFocusable(n: AccessibilityNodeInfo, depth: Int = 0): AccessibilityNodeInfo? {
         if (depth > 30) return null
