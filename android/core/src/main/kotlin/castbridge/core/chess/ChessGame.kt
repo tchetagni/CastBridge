@@ -58,7 +58,17 @@ class ChessGame(
     /** Half-moves played since the start of the game (the number a client sends with its move). */
     val ply get() = uci.size
 
-    fun remainingMs(now: Long): Long = if (over) 0 else (perMoveMs - (now - turnStartedAt)).coerceIn(0, perMoveMs)
+    /** Set while the clock is stopped (pause menu of a game played only at the TV). */
+    var pausedAt: Long? = null; private set
+    val paused get() = pausedAt != null
+
+    fun remainingMs(now: Long): Long = if (over) 0 else (perMoveMs - ((pausedAt ?: now) - turnStartedAt)).coerceIn(0, perMoveMs)
+
+    /** Stops the countdown (the host decides when it is allowed: never with a remote opponent waiting). */
+    fun pause(now: Long): Boolean { if (over || paused) return false; pausedAt = now; return true }
+
+    /** Restarts the countdown where it stopped. */
+    fun resume(now: Long): Boolean { val p = pausedAt ?: return false; turnStartedAt += now - p; pausedAt = null; return true }
 
     /**
      * Plays [move] (UCI) for [color]. [expectedPly] (optional) protects against a late retry of an old move: it must
@@ -68,6 +78,7 @@ class ChessGame(
         if (over) return Play.OVER
         if (expectedPly != null && expectedPly != ply) return Play.STALE
         if (color != position.side) return Play.NOT_YOUR_TURN
+        resume(now)
         if (remainingMs(now) <= 0) { tick(now); return if (over) Play.OVER else Play.STALE }
         val m = position.parseUci(move)
         if (m == 0) return Play.ILLEGAL
@@ -87,7 +98,7 @@ class ChessGame(
 
     /** Clock check (the host calls it often). Returns true if something changed. */
     fun tick(now: Long): Boolean {
-        if (over || now - turnStartedAt < perMoveMs) return false
+        if (over || paused || now - turnStartedAt < perMoveMs) return false
         when (mode) {
             ClockMode.COMPETITION -> { result = Rules.timeout(position, position.side); turnStartedAt = now }
             ClockMode.PRACTICE -> {
@@ -124,7 +135,7 @@ class ChessGame(
     fun undo(plies: Int, now: Long): Boolean {
         if (plies <= 0 || plies > uci.size) return false
         repeat(plies) { position.unmake(); san.removeAt(san.size - 1); autoPlayed.remove(uci.size - 1); uci.removeAt(uci.size - 1) }
-        result = null; drawOffer = null; turnStartedAt = now
+        result = null; drawOffer = null; turnStartedAt = now; pausedAt = null
         return true
     }
 

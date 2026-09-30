@@ -179,6 +179,7 @@ class ChessRoom(
             stage = Stage.CLOSED; changed()
         }
         ticker?.shutdownNow()
+        (aiExecutor as? java.util.concurrent.ExecutorService)?.shutdownNow()
     }
 
     /** A move from the remote: only for a colour played at the TV. */
@@ -241,6 +242,17 @@ class ChessRoom(
         if (!g.undo(plies, now())) return false
         stage = Stage.PLAYING; notice = "Coup annulé"
         changed(); maybeStartAi(); true
+    }
+
+    /** The clock may stop only when nobody plays from a phone (a remote opponent is never kept waiting). */
+    val canPause: Boolean get() = seats.none { it == Seat.PHONE }
+
+    /** Pause menu of the TV: stops (true) or restarts (false) the countdown of a game played only at the TV. */
+    fun hostPause(pause: Boolean): Boolean = synchronized(lock) {
+        val g = game ?: return false
+        if (stage != Stage.PLAYING || !canPause) return false
+        val t = now()
+        (if (pause) g.pause(t) else g.resume(t)).also { if (it) changed() }
     }
 
     private fun remoteColor(g: ChessGame): Int? = when {
@@ -386,7 +398,11 @@ class ChessRoom(
 
     private fun seatName(c: Int): String = when (seats[c]) {
         Seat.AI -> "Ordinateur · niveau $level"
-        Seat.REMOTE -> if (seats[c xor 1] == Seat.REMOTE) "Joueur ${colorName(c, false)}" else "Télécommande"
+        Seat.REMOTE -> when (seats[c xor 1]) {
+            Seat.REMOTE -> "Joueur des ${colorName(c, false)}"
+            Seat.AI -> "Vous"
+            Seat.PHONE -> "Joueur de la TV"
+        }
         Seat.PHONE -> seated[c]?.let { players[it]?.name } ?: "Téléphone (libre)"
     }
 
@@ -427,7 +443,8 @@ class ChessRoom(
             "legal" to (if (mine) g!!.position.legalMoves().map(Move::uci) else emptyList<String>()),
             "clock" to linkedMapOf("perMoveMs" to (g?.perMoveMs ?: perMoveSeconds * 1000L),
                 "remainingMs" to (if (g != null && stage == Stage.PLAYING) g.remainingMs(t) else null),
-                "running" to (g != null && stage == Stage.PLAYING && !g.over), "turn" to colorKey(g?.turn ?: 0)),
+                "running" to (g != null && stage == Stage.PLAYING && !g.over && !g.paused), "paused" to (g?.paused == true),
+                "turn" to colorKey(g?.turn ?: 0)),
             "drawOffer" to g?.drawOffer?.let(::colorKey),
             "thinking" to (aiStop != null),
             "notice" to notice,

@@ -104,6 +104,8 @@ class LanChessClient(private val base: String) : ChessTransport {
         HttpJson.act(HttpJson.call("POST", u("/chess/api/act", mapOf("token" to s.token, "action" to action, "arg" to arg, "ply" to ply))))
 
     override fun move(s: ChessSession, uci: String, ply: Int) = act(s, "move", uci, ply)
+    /** Before the game: take the white (w) or black (b) phone seat, or null to watch. */
+    fun seat(s: ChessSession, color: String?) = if (color == null) act(s, "stand") else act(s, "sit", color)
     override fun resign(s: ChessSession) = act(s, "resign")
     override fun draw(s: ChessSession, action: String) = act(s, "draw", action)
     override fun leave(s: ChessSession) { runCatching { HttpJson.call("POST", u("/chess/api/leave", mapOf("token" to s.token))) } }

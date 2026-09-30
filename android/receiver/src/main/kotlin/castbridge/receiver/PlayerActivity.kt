@@ -367,6 +367,9 @@ class PlayerActivity : Activity(), TvService.Screen {
             HomeTool(R.drawable.ic_t_quiz, "Quiz", "Culture générale (70 % Cameroun) et niveaux scolaires, en solo ou avec les téléphones.", "Jouer", true) {
                 startActivity(Intent(this, QuizActivity::class.java))
             },
+            HomeTool(R.drawable.ic_t_chess, "Échecs", "Contre l'ordinateur, à deux sur la TV ou avec les téléphones, avec compte à rebours.", "Jouer", true) {
+                startActivity(Intent(this, ChessActivity::class.java))
+            },
             HomeTool(R.drawable.ic_t_cast, "Recevoir du téléphone", "Envoyer une vidéo depuis l'app CastBridge du téléphone.", "Code $pin", true) { homeApi().openHelp() },
             HomeTool(R.drawable.ic_t_usb, "Clé USB", "Importer des vidéos d'une clé, ou y ranger les nouvelles.",
                 if (drives.isEmpty()) "Aucune clé" else drives.joinToString { "${it.label} · ${it.free / (1L shl 30)} Go libres" }, drives.isNotEmpty()) {

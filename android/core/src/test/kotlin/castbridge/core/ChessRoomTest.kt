@@ -50,6 +50,17 @@ class ChessClockTest {
         assertEquals(EndReason.TIMEOUT_DRAW, g.result?.reason)
     }
 
+    @Test fun pauseStopsTheCountdownButNeverAddsTime() {
+        val g = ChessGame(perMoveSeconds = 10, now = 0)
+        assertTrue(g.pause(4_000))
+        assertFalse(g.tick(60_000), "no timeout while paused")
+        assertEquals(6_000, g.remainingMs(60_000))
+        assertTrue(g.resume(60_000))
+        assertEquals(6_000, g.remainingMs(60_000), "restarts where it stopped")
+        assertTrue(g.tick(66_000))
+        assertEquals(EndReason.TIMEOUT, g.result?.reason)
+    }
+
     @Test fun practiceTimeoutPlaysALegalMoveAndGoesOn() {
         val g = ChessGame(perMoveSeconds = 10, mode = ClockMode.PRACTICE, now = 0, random = java.util.Random(3))
         assertTrue(g.tick(10_000))
@@ -212,6 +223,20 @@ class ChessRoomTest {
         assertFalse(r.hostUndo(), "no take-back between two humans")
         assertTrue(r.hostOfferDraw())
         assertEquals("AGREEMENT", r.view(null).m("result")["reason"])
+    }
+
+    @Test fun pauseOnlyWhenNobodyPlaysFromAPhone() {
+        val solo = room(white = ChessRoom.Seat.REMOTE, black = ChessRoom.Seat.AI, secs = 10)
+        assertNull(solo.start())
+        assertTrue(solo.hostPause(true))
+        assertEquals(false, solo.view(null).m("clock")["running"])
+        now += 30_000; solo.tick()
+        assertEquals(ChessRoom.Stage.PLAYING, solo.stage, "no loss on time during the pause")
+        assertTrue(solo.hostPause(false))
+        assertEquals(ChessRoom.Act.OK, solo.hostMove("e2e4"), "the move is played after the pause")
+        val r = room(white = ChessRoom.Seat.REMOTE, black = ChessRoom.Seat.PHONE)
+        r.join(r.code, "Tel"); assertNull(r.start())
+        assertFalse(r.hostPause(true), "a phone opponent is never kept waiting")
     }
 
     @Test fun remoteAgainstPhoneWithDrawOfferAnsweredByThePhone() {

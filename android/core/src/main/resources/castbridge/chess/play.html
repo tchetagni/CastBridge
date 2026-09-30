@@ -323,9 +323,9 @@ function render(){
 function tickClocks(){
   if(!st) return;
   const c=st.clock||{}; const per=c.perMoveMs||30000;
-  let left=c.remainingMs==null?null:Math.max(0,c.remainingMs-(performance.now()-stAt));
+  let left=c.remainingMs==null?null:Math.max(0,c.remainingMs-(c.paused?0:performance.now()-stAt));
   for(const [card,col] of [[$("topCard"),flipped?"w":"b"],[$("bottomCard"),flipped?"b":"w"]]){
-    const el=card.querySelector(".clock"); const active=c.running&&st.turn===col&&left!=null;
+    const el=card.querySelector(".clock"); const active=(c.running||c.paused)&&st.turn===col&&left!=null;
     const secs=active?Math.ceil(left/1000):Math.round(per/1000);
     el.querySelector(".secs").textContent=secs+" s";
     el.querySelector(".bar i").style.width=(active?Math.max(0,left/per*100):100)+"%";
