@@ -1,0 +1,33 @@
+{
+  "format": 1,
+  "id": "cep-francais",
+  "version": 1,
+  "title": "Français — CEP",
+  "description": "Accords, homophones, conjugaison, grammaire de la phrase et rédaction : fiches « l'essentiel », exemples résolus, exercices type CEP corrigés et épreuve blanche.",
+  "lang": "fr",
+  "cursus": "primaire",
+  "level": "CM2",
+  "subject": "francais",
+  "exam": "CEP",
+  "programRef": "Programme officiel de français du niveau III (CM1-CM2) de l'enseignement primaire (MINEDUB) — à vérifier sur le texte officiel",
+  "authors": ["CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"],
+  "status": "draft",
+  "updatedAt": "2026-09-30",
+  "chapters": [
+    {"id": "cep-francais-accords", "title": "Les accords", "order": 1, "programRef": "CM2 — Orthographe grammaticale : accords dans le groupe nominal, sujet-verbe, participe passé (à vérifier sur le texte officiel)"},
+    {"id": "cep-francais-homophones", "title": "Les homophones grammaticaux", "order": 2, "programRef": "CM2 — Orthographe grammaticale : homophones (à vérifier sur le texte officiel)"},
+    {"id": "cep-francais-conjugaison", "title": "La conjugaison", "order": 3, "programRef": "CM2 — Conjugaison : présent, imparfait, futur simple, passé composé (à vérifier sur le texte officiel)"},
+    {"id": "cep-francais-phrase", "title": "La grammaire de la phrase", "order": 4, "programRef": "CM2 — Grammaire : types et formes de phrases, nature et fonction (à vérifier sur le texte officiel)"},
+    {"id": "cep-francais-redaction", "title": "La rédaction", "order": 5, "programRef": "CM2 — Expression écrite : récit, description, lettre (à vérifier sur le texte officiel)"}
+  ],
+  "mockExams": [
+    {"id": "cep-francais-blanc-1", "title": "Épreuve blanche de français — CEP", "minutes": 90, "outOf": 20,
+     "instructions": "Épreuve d'entraînement originale, notée sur 20. Le format réel de l'épreuve de français du CEP (parties, durée, barème) est à vérifier sur les textes officiels. Lis bien chaque consigne, réponds au brouillon puis relis-toi : accords, homophones et ponctuation.",
+     "sections": [
+       {"title": "Grammaire (5 points)", "exercises": ["cep-francais-be-grammaire"]},
+       {"title": "Conjugaison (5 points)", "exercises": ["cep-francais-be-conjugaison"]},
+       {"title": "Orthographe (5 points)", "exercises": ["cep-francais-be-orthographe"]},
+       {"title": "Rédaction (5 points)", "exercises": ["cep-francais-be-redaction"]}
+     ]}
+  ]
+}

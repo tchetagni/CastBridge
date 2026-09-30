@@ -1,0 +1,33 @@
+{
+  "format": 1,
+  "id": "bac-maths",
+  "version": 1,
+  "title": "Mathématiques — Bac C et D",
+  "description": "Fiches « l'essentiel » de Terminale C et D : étude de fonction, logarithme et exponentielle, calcul intégral, suites, nombres complexes. Exemples résolus, exercices type Bac corrigés et épreuve blanche.",
+  "lang": "fr",
+  "cursus": "secondaire",
+  "level": "Tle",
+  "subject": "maths",
+  "exam": "BAC",
+  "series": ["C", "D"],
+  "programRef": "Programmes officiels de mathématiques des classes de Terminale C et D (MINESEC) — à vérifier sur le texte officiel",
+  "authors": ["CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"],
+  "status": "draft",
+  "updatedAt": "2026-09-30",
+  "chapters": [
+    {"id": "bac-maths-ch-fonctions", "title": "Limites, continuité, dérivabilité et étude de fonction", "order": 1, "programRef": "Tle C/D — Analyse : limites, continuité, dérivabilité, étude de fonctions (à vérifier sur le texte officiel)"},
+    {"id": "bac-maths-ch-lnexp", "title": "Fonctions logarithme népérien et exponentielle", "order": 2, "programRef": "Tle C/D — Analyse : fonctions logarithme népérien et exponentielle (à vérifier sur le texte officiel)"},
+    {"id": "bac-maths-ch-integrales", "title": "Primitives et calcul intégral", "order": 3, "programRef": "Tle C/D — Analyse : primitives, intégrales, calcul d'aires (à vérifier sur le texte officiel)"},
+    {"id": "bac-maths-ch-suites", "title": "Suites numériques", "order": 4, "programRef": "Tle C/D — Analyse : suites numériques, raisonnement par récurrence (à vérifier sur le texte officiel)"},
+    {"id": "bac-maths-ch-complexes", "title": "Nombres complexes", "order": 5, "programRef": "Tle C/D — Nombres complexes (à vérifier sur le texte officiel)"}
+  ],
+  "mockExams": [
+    {"id": "bac-maths-blanc-1", "title": "Épreuve blanche de mathématiques — Bac C/D", "minutes": 240, "outOf": 20,
+     "instructions": "Durée : 4 heures. Deux exercices et un problème, tous obligatoires. Calculatrice non programmable autorisée. La qualité de la rédaction et la justification des calculs comptent dans la note. Durée, barème et format sont indicatifs : à vérifier sur les textes officiels de l'Office du Baccalauréat du Cameroun.",
+     "sections": [
+       {"title": "Exercice 1 — Nombres complexes (5 points)", "exercises": ["bac-maths-blanc-ex1"]},
+       {"title": "Exercice 2 — Suites numériques (5 points)", "exercises": ["bac-maths-blanc-ex2"]},
+       {"title": "Problème — Étude de fonction et calcul d'aire (10 points)", "exercises": ["bac-maths-blanc-pb"]}
+     ]}
+  ]
+}

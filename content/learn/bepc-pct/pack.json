@@ -1,0 +1,31 @@
+{
+  "format": 1,
+  "id": "bepc-pct",
+  "version": 1,
+  "title": "Physique-Chimie-Technologie — BEPC",
+  "description": "Fiches « l'essentiel » (électricité, forces, optique, chimie), exemples résolus, exercices type BEPC corrigés et épreuve blanche.",
+  "lang": "fr",
+  "cursus": "secondaire",
+  "level": "3e",
+  "subject": "pct",
+  "exam": "BEPC",
+  "programRef": "Programme officiel de Physique-Chimie-Technologie de la classe de 3e (MINESEC) — à vérifier sur le texte officiel",
+  "authors": ["CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"],
+  "status": "draft",
+  "updatedAt": "2026-09-30",
+  "chapters": [
+    {"id": "bepc-pct-elec", "title": "Électricité : circuits, loi d'Ohm, puissance et énergie", "order": 1, "programRef": "3e — Électricité : circuits, loi d'Ohm, puissance et énergie électriques (à vérifier sur le texte officiel)"},
+    {"id": "bepc-pct-meca", "title": "Poids, masse et forces", "order": 2, "programRef": "3e — Mécanique : forces, poids et masse (à vérifier sur le texte officiel)"},
+    {"id": "bepc-pct-optique", "title": "Optique : réflexion et lentilles convergentes", "order": 3, "programRef": "3e — Optique : réflexion de la lumière, lentilles (à vérifier sur le texte officiel)"},
+    {"id": "bepc-pct-chimie", "title": "Atomes, ions, solutions et pH", "order": 4, "programRef": "3e — Chimie : atomes et ions, solutions aqueuses, pH, réactions acide-base (à vérifier sur le texte officiel)"}
+  ],
+  "mockExams": [
+    {"id": "bepc-pct-epreuve-1", "title": "Épreuve blanche de PCT — BEPC", "minutes": 120,
+     "instructions": "Épreuve notée sur 20 points. Durée indicative : 2 heures (durée officielle à vérifier sur les textes officiels). Calculatrice non programmable autorisée si le règlement le permet. Donne chaque résultat avec son unité. On prendra g = 10 N/kg sur la Terre.",
+     "outOf": 20,
+     "sections": [
+       {"title": "Partie A — Chimie (7 points)", "exercises": ["bepc-pct-mock-chimie"]},
+       {"title": "Partie B — Physique (13 points)", "exercises": ["bepc-pct-mock-elec", "bepc-pct-mock-meca", "bepc-pct-mock-optique"]}
+     ]}
+  ]
+}

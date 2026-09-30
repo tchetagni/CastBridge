@@ -1,0 +1,37 @@
+{
+  "format": 1,
+  "id": "fslc-science",
+  "version": 1,
+  "title": "Science — FSLC",
+  "description": "Key-point sheets, worked examples, FSLC-style exercises with answers and a mock paper: the human body, health and hygiene, plants and the environment, matter and energy.",
+  "lang": "en",
+  "cursus": "primary",
+  "level": "Class 6",
+  "subject": "sciences",
+  "exam": "FSLC",
+  "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level III — Science and Technology; to be checked against the official texts",
+  "authors": ["CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"],
+  "status": "draft",
+  "updatedAt": "2026-09-30",
+  "chapters": [
+    {"id": "fslc-science-body", "title": "The human body", "order": 1, "programRef": "Level III — The human body: digestion, breathing, blood circulation (to be checked against the official texts)"},
+    {"id": "fslc-science-health", "title": "Health and hygiene", "order": 2, "programRef": "Level III — Health education: malaria, safe water, hygiene, vaccination (to be checked against the official texts)"},
+    {"id": "fslc-science-environment", "title": "Plants, animals and the environment", "order": 3, "programRef": "Level III — Living things and the environment: plants, germination, food chains, pollution (to be checked against the official texts)"},
+    {"id": "fslc-science-matter", "title": "Matter and energy", "order": 4, "programRef": "Level III — Matter and energy: states of water, the water cycle, simple electric circuits, safety (to be checked against the official texts)"}
+  ],
+  "mockExams": [
+    {
+      "id": "fslc-science-mock-1",
+      "title": "FSLC mock paper — Science",
+      "minutes": 60,
+      "outOf": 20,
+      "review": true,
+      "reviewNote": "Paper format, length and marking scheme to be checked against the official FSLC texts.",
+      "instructions": "Answer all the questions. Each question is marked out of 5; the paper is marked out of 20. Read each question carefully before you answer. This is an original practice paper: its format is to be checked against the official texts.",
+      "sections": [
+        {"title": "Part A — The human body and health", "exercises": ["fslc-science-mock-body", "fslc-science-mock-health"]},
+        {"title": "Part B — Living things, matter and energy", "exercises": ["fslc-science-mock-env", "fslc-science-mock-matter"]}
+      ]
+    }
+  ]
+}

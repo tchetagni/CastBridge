@@ -1,0 +1,37 @@
+{
+  "format": 1,
+  "id": "gceol-biology",
+  "version": 1,
+  "title": "Biology — GCE O Level",
+  "description": "Key-point summaries, step-by-step worked data questions, GCE O Level-style exercises with answers and a mock exam: cells, nutrition, genetics and ecology.",
+  "lang": "en",
+  "cursus": "secondary",
+  "level": "Form 5",
+  "subject": "biology",
+  "exam": "GCE-OL",
+  "programRef": "Cameroon GCE Board — Ordinary Level Biology syllabus (Forms 4–5) — to be checked against the official texts",
+  "authors": ["CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"],
+  "status": "draft",
+  "updatedAt": "2026-09-30",
+  "chapters": [
+    {"id": "gceol-biology-ch-cells", "title": "Cell structure and organisation", "order": 1, "programRef": "GCE O Level Biology — Cell structure and organisation (to be checked against the official syllabus)"},
+    {"id": "gceol-biology-ch-nutrition", "title": "Nutrition: photosynthesis and human digestion", "order": 2, "programRef": "GCE O Level Biology — Nutrition in plants and in humans; enzymes (to be checked against the official syllabus)"},
+    {"id": "gceol-biology-ch-genetics", "title": "Genetics and inheritance", "order": 3, "programRef": "GCE O Level Biology — Inheritance: monohybrid crosses (to be checked against the official syllabus)"},
+    {"id": "gceol-biology-ch-ecology", "title": "Ecology and conservation", "order": 4, "programRef": "GCE O Level Biology — Organisms and their environment (to be checked against the official syllabus)"}
+  ],
+  "mockExams": [
+    {
+      "id": "gceol-biology-mock",
+      "title": "GCE O Level mock — Biology",
+      "minutes": 60,
+      "instructions": "Answer all four questions. Marks are shown for each part; the paper is marked out of 20. Show your working for calculations. This is an original practice paper: its format is to be checked against the official texts of the Cameroon GCE Board.",
+      "outOf": 20,
+      "sections": [
+        {"title": "Question 1 — Cells", "exercises": ["gceol-biology-mock-cells"]},
+        {"title": "Question 2 — Nutrition", "exercises": ["gceol-biology-mock-nutrition"]},
+        {"title": "Question 3 — Genetics", "exercises": ["gceol-biology-mock-genetics"]},
+        {"title": "Question 4 — Ecology", "exercises": ["gceol-biology-mock-ecology"]}
+      ]
+    }
+  ]
+}

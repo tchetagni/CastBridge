@@ -1,0 +1,31 @@
+{
+  "format": 1,
+  "id": "cep-sciences",
+  "version": 1,
+  "title": "Sciences — CEP",
+  "description": "Fiches « l'essentiel » pour le CM2 : le corps humain, l'hygiène et la santé, les plantes et l'environnement, la matière et l'énergie. Exemples résolus, exercices type CEP corrigés et épreuve blanche.",
+  "lang": "fr",
+  "cursus": "primaire",
+  "level": "CM2",
+  "subject": "sciences",
+  "exam": "CEP",
+  "programRef": "Programmes officiels de l'enseignement primaire (MINEDUB), niveau III (CM1-CM2) : sciences et technologie, éducation à la santé et à l'environnement — à vérifier sur le texte officiel",
+  "authors": ["CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"],
+  "status": "draft",
+  "updatedAt": "2026-09-30",
+  "chapters": [
+    {"id": "cep-sciences-corps", "title": "Le corps humain", "order": 1, "programRef": "CM2 — Le corps humain : digestion, respiration, circulation du sang (à vérifier sur le texte officiel)"},
+    {"id": "cep-sciences-sante", "title": "Hygiène et santé", "order": 2, "programRef": "CM2 — Éducation à la santé : paludisme, eau potable, vaccination (à vérifier sur le texte officiel)"},
+    {"id": "cep-sciences-plantes", "title": "Les plantes et l'environnement", "order": 3, "programRef": "CM2 — Le monde vivant et l'environnement : besoins des plantes, germination, déchets (à vérifier sur le texte officiel)"},
+    {"id": "cep-sciences-matiere", "title": "La matière et l'énergie", "order": 4, "programRef": "CM2 — Matière et énergie : états de l'eau, circuit électrique simple, sécurité (à vérifier sur le texte officiel)"}
+  ],
+  "mockExams": [
+    {"id": "cep-sciences-blanc-1", "title": "Épreuve blanche de sciences — CEP", "minutes": 45, "outOf": 20,
+     "instructions": "Réponds à toutes les questions. Lis bien chaque consigne avant de répondre. Les points de chaque exercice sont indiqués. Format de l'épreuve (durée, barème, types de questions) : à vérifier sur les textes officiels du CEP.",
+     "sections": [
+       {"title": "Exercice 1 — Le corps humain", "exercises": ["cep-sciences-blanc-corps"]},
+       {"title": "Exercice 2 — Hygiène et santé", "exercises": ["cep-sciences-blanc-sante"]},
+       {"title": "Exercice 3 — Plantes, matière et énergie", "exercises": ["cep-sciences-blanc-matiere"]}
+     ]}
+  ]
+}

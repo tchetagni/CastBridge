@@ -1,0 +1,37 @@
+{
+  "format": 1,
+  "id": "fslc-english",
+  "version": 1,
+  "title": "English Language — FSLC",
+  "description": "Key-point lessons, step-by-step worked examples, FSLC-style exercises with answers and a mock paper: reading comprehension, tenses, grammar and composition.",
+  "lang": "en",
+  "cursus": "primary",
+  "level": "Class 6",
+  "subject": "english",
+  "exam": "FSLC",
+  "programRef": "MINEDUB — Anglophone primary curriculum, Level III (Classes 5 and 6), English Language — to be checked against the official text",
+  "authors": ["CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"],
+  "status": "draft",
+  "updatedAt": "2026-09-30",
+  "chapters": [
+    {"id": "fslc-english-reading", "title": "Reading comprehension", "order": 1, "programRef": "Class 6 English — Reading: comprehension of short texts, vocabulary in context, main idea (to be checked against the official text)"},
+    {"id": "fslc-english-tenses", "title": "Tenses", "order": 2, "programRef": "Class 6 English — Grammar: present, past, present perfect and future tenses (to be checked against the official text)"},
+    {"id": "fslc-english-grammar", "title": "Grammar: concord, plurals, pronouns, prepositions", "order": 3, "programRef": "Class 6 English — Grammar: subject-verb agreement, nouns (plurals), pronouns, prepositions (to be checked against the official text)"},
+    {"id": "fslc-english-composition", "title": "Composition: friendly letter and short story", "order": 4, "programRef": "Class 6 English — Writing: informal letter, narrative composition (to be checked against the official text)"}
+  ],
+  "mockExams": [
+    {
+      "id": "fslc-english-mock-1",
+      "title": "FSLC mock paper — English Language",
+      "minutes": 90,
+      "instructions": "Time: 1 hour 30 minutes. Marked out of 20. Answer ALL the questions in Sections A, B and C. In Section D, choose ONE topic only. Read each question carefully and check your spelling. This paper is a practice paper written for CastBridge: the format (time, marks, sections) is to be checked against the official texts.",
+      "outOf": 20,
+      "sections": [
+        {"title": "Section A — Reading comprehension (6 marks)", "exercises": ["fslc-english-mock-reading"]},
+        {"title": "Section B — Grammar (5 marks)", "exercises": ["fslc-english-mock-grammar"]},
+        {"title": "Section C — Tenses (4 marks)", "exercises": ["fslc-english-mock-tenses"]},
+        {"title": "Section D — Composition (5 marks)", "exercises": ["fslc-english-mock-composition"]}
+      ]
+    }
+  ]
+}
