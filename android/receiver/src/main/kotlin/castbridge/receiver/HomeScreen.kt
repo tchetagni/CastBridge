@@ -83,7 +83,9 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
         // Legibility: dark from the left and from the bottom, over the picture.
         root.addView(View(act).apply { background = GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, intArrayOf(0xF00E1116.toInt(), 0x800E1116.toInt(), 0x300E1116)) }, FrameLayout.LayoutParams(-1, -1))
         root.addView(View(act).apply { background = GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, intArrayOf(0x000E1116, 0xC00E1116.toInt(), 0xFF0E1116.toInt())) }, FrameLayout.LayoutParams(-1, -1))
-        val content = LinearLayout(act).apply { orientation = LinearLayout.VERTICAL; setPadding(dp(56), dp(28), dp(40), 0); clipChildren = false }
+        // clipChildren = true: Android clips each child to ITS OWN bounds only when the PARENT asks for it. Without it the
+        // scroll area drew its scrolled-out rows over the title (texts piled up while scrolling on 720p TVs).
+        val content = LinearLayout(act).apply { orientation = LinearLayout.VERTICAL; setPadding(dp(56), dp(28), dp(40), 0); clipChildren = true }
         val top = LinearLayout(act).apply { orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER_VERTICAL }
         top.addView(TextView(act).apply { text = "CastBridge"; textSize = 26f; typeface = Typeface.DEFAULT_BOLD; setTextColor(TvStyle.ACCENT) })
         top.addView(View(act), LinearLayout.LayoutParams(0, 1, 1f))
