@@ -123,7 +123,7 @@ fun BtScreen() {
         Text("Fichier : ${fileName ?: "aucun"}")
         val busy = state is ResumableUpload.State.Uploading || state is ResumableUpload.State.Waiting
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            Button(enabled = !busy && granted && selected != null && Pin.isValidFormat(pin) && fileUri != null && fileName != null,
+            Button(enabled = !busy && granted && selected != null && castbridge.core.trust.TvAuth.isUsable(pin) && fileUri != null && fileName != null,
                 onClick = { BtUploadService.start(ctx, fileUri!!, fileName!!, selected!!, pin) }) { Text("Envoyer") }
             if (busy) OutlinedButton(onClick = { BtUploadService.cancel(ctx) }) { Text("Annuler") }
         }
@@ -295,7 +295,7 @@ fun GatewaySwitch(tvAddress: String?, pin: String, granted: Boolean) {
             Text("Partager l'Internet du téléphone avec la TV", style = MaterialTheme.typography.titleSmall)
             Text(st, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
-        Switch(checked = on, enabled = granted && tvAddress != null && Pin.isValidFormat(pin), onCheckedChange = {
+        Switch(checked = on, enabled = granted && tvAddress != null && castbridge.core.trust.TvAuth.isUsable(pin), onCheckedChange = {
             if (it) BtGatewayService.start(ctx, tvAddress!!, pin) else BtGatewayService.stop(ctx)
         })
     }

@@ -268,7 +268,7 @@ class TvService : Service(), Device {
     fun onPermissionsReady() {
         hookCapture()
         bt?.start()
-        gateway = gateway ?: BtGatewayHost(this, guard) { st -> setStatus("6-gw", st) }
+        gateway = gateway ?: BtGatewayHost(this, guard, ::btTrusted) { st -> setStatus("6-gw", st) }
         gateway?.start()
         // Wi-Fi Direct is opt-in (MENU): creating a group can disturb the TV's own Wi-Fi connection.
         if (prefs.getBool("wd_enabled", false) && wd?.hasPermission() == true) wd?.start()

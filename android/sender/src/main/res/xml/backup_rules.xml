@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android 11 and older: the TV tokens of the plug-and-play link (castbridge_trust) never go to a cloud backup or another phone:
+     a token only makes sense on the phone that was approved on the TV. -->
+<full-backup-content>
+    <exclude domain="sharedpref" path="castbridge_trust.xml" />
+</full-backup-content>
