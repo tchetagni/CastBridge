@@ -170,8 +170,7 @@ class BtSshGatewayService : Service() {
 @Composable
 fun BtSshGatewayPanel() {
     val ctx = LocalContext.current
-    var granted by remember { mutableStateOf(hasBtPermission(ctx)) }
-    val ask = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { granted = it }
+    val (granted, askUi) = rememberBtPermission()
     val adapter = remember { ctx.getSystemService(BluetoothManager::class.java)?.adapter }
     val devices = remember(granted) {
         if (granted) runCatching { adapter?.bondedDevices.orEmpty().map { (it.name ?: it.address) to it.address } }.getOrDefault(emptyList()) else emptyList()
@@ -185,7 +184,7 @@ fun BtSshGatewayPanel() {
     Text("Garder l'accès SSH à la TV sans réseau commun : le téléphone écoute sur 127.0.0.1:${BtSshGatewayService.PORT} et relaie vers la TV " +
         "par Bluetooth. SSH reste chiffré de bout en bout, avec votre clé. Sur la TV : activer SSH (MENU > SSH) ; débit ~100-300 ko/s : " +
         "bien pour un shell, lent pour SFTP.", style = MaterialTheme.typography.bodySmall)
-    if (!granted) { Button(onClick = { ask.launch(Manifest.permission.BLUETOOTH_CONNECT) }) { Text("Autoriser le Bluetooth") }; return }
+    if (!granted) { askUi(); return }
     if (st.running) {
         Text("Active vers ${st.tv}\nÉcoute : ${st.listen}\nConnexions : ${st.active}   ·   envoyés ${formatSize(st.up)}, reçus ${formatSize(st.down)}",
             style = MaterialTheme.typography.bodyMedium)

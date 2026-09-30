@@ -77,7 +77,7 @@ fun formatSize(b: Long) = when {
 }
 
 fun hasBtPermission(ctx: Context) =
-    Build.VERSION.SDK_INT < 31 || ctx.checkSelfPermission(Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED
+    Build.VERSION.SDK_INT < 31 || ctx.checkSelfPermission(Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED   // SCAN is optional
 
 /** Bluetooth channel: send a file to a paired TV. Slower than Wi-Fi (a few hundred ko/s to ~1 Mo/s), but needs no network. */
 @SuppressLint("MissingPermission")
@@ -85,8 +85,7 @@ fun hasBtPermission(ctx: Context) =
 fun BtScreen() {
     val ctx = LocalContext.current
     val pins = remember { PinStore(ctx) }
-    var granted by remember { mutableStateOf(hasBtPermission(ctx)) }
-    val ask = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { granted = it }
+    val (granted, askUi) = rememberBtPermission()
     val adapter = remember { ctx.getSystemService(BluetoothManager::class.java)?.adapter }
     var refresh by remember { mutableIntStateOf(0) }
     val devices = remember(granted, refresh) {
@@ -106,7 +105,7 @@ fun BtScreen() {
             style = MaterialTheme.typography.bodySmall)
         when {
             adapter == null -> Text("Ce téléphone n'a pas de Bluetooth.", color = MaterialTheme.colorScheme.error)
-            !granted -> Button(onClick = { ask.launch(Manifest.permission.BLUETOOTH_CONNECT) }) { Text("Autoriser le Bluetooth") }
+            !granted -> askUi()
             !adapter.isEnabled -> Text("Activez le Bluetooth du téléphone.", color = MaterialTheme.colorScheme.error)
             else -> {
                 if (devices.isEmpty()) Text("Aucun appareil appairé.")
