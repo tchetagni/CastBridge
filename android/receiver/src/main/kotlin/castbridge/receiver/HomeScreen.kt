@@ -163,7 +163,7 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
         for ((title, list) in wanted) rows[title]?.let { (h, a) -> h.text = "$title  ·  ${list.size}"; a.set(list) }
         if (items.isEmpty()) {
             heroTitle.text = "Bienvenue sur CastBridge"
-            heroSub.text = "Envoyez une vidéo depuis l'app CastBridge de votre téléphone : elle apparaîtra ici, prête à regarder, même sans réseau."
+            heroSub.text = "Pour relier votre téléphone sans code : « Ajouter un téléphone », ci-dessous. Ensuite, envoyez une vidéo depuis l'app CastBridge : elle apparaîtra ici, prête à regarder, même sans réseau."
             bg.setImageBitmap(null)
         } else if (lastFocused == null) {
             val first = wanted.firstOrNull()?.second?.firstOrNull()

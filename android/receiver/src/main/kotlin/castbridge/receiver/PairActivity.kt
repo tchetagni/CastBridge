@@ -81,15 +81,15 @@ class PairActivity : Activity() {
     }
 
     private fun card(): LinearLayout = LinearLayout(this).apply {
-        orientation = LinearLayout.VERTICAL; setPadding(dp(28), dp(24), dp(28), dp(24))
+        orientation = LinearLayout.VERTICAL; setPadding(dp(22), dp(16), dp(22), dp(16))
         background = GradientDrawable().apply { cornerRadius = dp(16).toFloat(); setColor(C.SURFACE); setStroke(dp(1), C.OUTLINE) }
     }
 
     /** A D-pad button: clearly different when focused (focus ring colour of the charter), 48 dp high at least. */
     private fun button(text: String, primary: Boolean = false, danger: Boolean = false, onClick: () -> Unit) = TextView(this).apply {
-        this.text = text; textSize = 20f; typeface = Typeface.DEFAULT_BOLD; gravity = Gravity.CENTER
+        this.text = text; textSize = 18f; typeface = Typeface.DEFAULT_BOLD; gravity = Gravity.CENTER
         setTextColor(if (primary) C.ON_PRIMARY else if (danger) C.ERROR else C.TEXT)
-        minimumHeight = dp(52); setPadding(dp(22), dp(10), dp(22), dp(10)); isFocusable = true; isClickable = true
+        minimumHeight = dp(48); setPadding(dp(14), dp(8), dp(14), dp(8)); isFocusable = true; isClickable = true; maxLines = 2
         fun shape(fill: Int, stroke: Int, w: Int) = GradientDrawable().apply { cornerRadius = dp(12).toFloat(); setColor(fill); setStroke(dp(w), stroke) }
         background = StateListDrawable().apply {
             addState(intArrayOf(android.R.attr.state_focused), shape(if (primary) C.PRIMARY else C.SURFACE_HIGH, C.FOCUS, 3))
@@ -99,42 +99,46 @@ class PairActivity : Activity() {
     }
 
     private fun build(): View {
-        val root = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(dp(48), dp(28), dp(48), dp(24)) }
-        root.addView(label("Ajouter un téléphone", 34f, C.TEXT, true))
+        val root = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(dp(40), dp(20), dp(40), dp(18)) }
+        root.addView(label("Ajouter un téléphone", 30f, C.TEXT, true))
 
         val cols = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL; weightSum = 2f }
-        root.addView(cols, LinearLayout.LayoutParams(-1, 0, 1f).apply { topMargin = dp(18) })
+        root.addView(cols, LinearLayout.LayoutParams(-1, 0, 1f).apply { topMargin = dp(12) })
 
-        // left: what to do, the TV's name, the countdown
+        // left: the TV's name, what to do, the countdown (scrolls on a very small screen, never overlaps)
         val left = card()
-        left.addView(label("Nom de cette TV", 16f, C.TEXT_MID))
-        tvName = label("…", 40f, C.PRIMARY, true).apply { maxLines = 2; ellipsize = TextUtils.TruncateAt.END }
-        left.addView(tvName, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(2) })
-        left.addView(label("Sur votre téléphone, ouvrez CastBridge et touchez « Ajouter ma TV ».", 22f, C.TEXT).apply { setLineSpacing(0f, 1.1f) },
-            LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(18) })
-        countdown = label("", 28f, C.SUCCESS, true)
-        left.addView(countdown, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(18) })
-        status = label("", 18f, C.TEXT_MID)
-        left.addView(status, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(6) })
-        left.addView(View(this), LinearLayout.LayoutParams(-1, 0, 1f))
-        visibleBtn = button("Rendre visible 2 minutes", primary = true) { openWindow() }
-        btSettingsBtn = button("Ouvrir les réglages Bluetooth") { runCatching { startActivity(Intent(Settings.ACTION_BLUETOOTH_SETTINGS)) } }
-        left.addView(visibleBtn, LinearLayout.LayoutParams(-1, -2))
-        left.addView(btSettingsBtn, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(10) })
-        left.addView(button("Fermer") { finish() }, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(10) })
-        cols.addView(left, LinearLayout.LayoutParams(0, -1, 1f).apply { rightMargin = dp(14) })
+        val leftBody = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
+        leftBody.addView(label("Nom de cette TV", 16f, C.TEXT_MID))
+        tvName = label("…", 34f, C.PRIMARY, true).apply { maxLines = 2; ellipsize = TextUtils.TruncateAt.END }
+        leftBody.addView(tvName, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(2) })
+        leftBody.addView(label("Sur votre téléphone, ouvrez CastBridge et touchez « Ajouter ma TV ».", 20f, C.TEXT).apply { setLineSpacing(0f, 1.1f) },
+            LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(14) })
+        countdown = label("", 26f, C.SUCCESS, true)
+        leftBody.addView(countdown, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(14) })
+        status = label("", 17f, C.TEXT_MID)
+        leftBody.addView(status, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(4) })
+        left.addView(ScrollView(this).apply { isFillViewport = false; isFocusable = false; addView(leftBody, ViewGroup.LayoutParams(-1, -2)) }, LinearLayout.LayoutParams(-1, 0, 1f))
+        cols.addView(left, LinearLayout.LayoutParams(0, -1, 1f).apply { rightMargin = dp(10) })
 
         // right: trusted phones
         val right = card()
-        listTitle = label("Téléphones de confiance", 26f, C.TEXT, true)
+        listTitle = label("Téléphones de confiance", 24f, C.TEXT, true)
         right.addView(listTitle)
-        right.addView(label("Ils pilotent la TV sans code. Retirez-en un pour lui retirer l'accès tout de suite.", 16f, C.TEXT_MID),
-            LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(4); bottomMargin = dp(10) })
+        right.addView(label("Ils pilotent la TV sans code. « Retirer » leur enlève l'accès tout de suite.", 15f, C.TEXT_MID),
+            LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(2); bottomMargin = dp(6) })
         list = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
-        right.addView(ScrollView(this).apply { isFillViewport = false; addView(list, ViewGroup.LayoutParams(-1, -2)) }, LinearLayout.LayoutParams(-1, 0, 1f))
+        right.addView(ScrollView(this).apply { isFillViewport = false; isFocusable = false; addView(list, ViewGroup.LayoutParams(-1, -2)) }, LinearLayout.LayoutParams(-1, 0, 1f))
+        cols.addView(right, LinearLayout.LayoutParams(0, -1, 1f).apply { leftMargin = dp(10) })
+
+        // bottom bar: the actions, side by side (each at least 48 dp high, focus ring visible)
+        val bar = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL }
+        visibleBtn = button("Rendre visible 2 minutes", primary = true) { openWindow() }
+        btSettingsBtn = button("Réglages Bluetooth") { runCatching { startActivity(Intent(Settings.ACTION_BLUETOOTH_SETTINGS)) } }
         forgetAll = button("Oublier tous les téléphones", danger = true) { confirmForgetAll() }
-        right.addView(forgetAll, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(12) })
-        cols.addView(right, LinearLayout.LayoutParams(0, -1, 1f).apply { leftMargin = dp(14) })
+        val lp = { LinearLayout.LayoutParams(0, -2, 1f).apply { rightMargin = dp(10) } }
+        bar.addView(visibleBtn, lp()); bar.addView(btSettingsBtn, lp()); bar.addView(forgetAll, lp())
+        bar.addView(button("Fermer") { finish() }, LinearLayout.LayoutParams(0, -2, 1f))
+        root.addView(bar, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(12) })
         return root
     }
 
@@ -233,7 +237,7 @@ class PairActivity : Activity() {
         val svc = bound ?: TvService.running.also { bound = it; it?.let { s -> s.pairing.addListener(onPairing); s.trust.addListener(onTrust) } }
         if (svc == null) { status.text = "Démarrage de CastBridge TV…"; return }
         if (!opened) { opened = true; if (!svc.pairing.isOpen && hasBt()) { openWindow(); return } }
-        tvName.text = svc.tvName()
+        tvName.text = svc.tvName().also { tvName.textSize = if (it.length > 18) 26f else 34f }
         val ad = adapter()
         val state = svc.pairing.state()
         val btOn = hasBt() && ad?.isEnabled == true
@@ -274,12 +278,12 @@ class PairActivity : Activity() {
         val hadFocus = list.hasFocus()
         list.removeAllViews()
         if (phones.isEmpty()) list.addView(label("Aucun téléphone pour l'instant.", 20f, C.TEXT_MID))
-        val df = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT)
+        val df = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT)
         phones.forEach { p ->
             val row = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER_VERTICAL; setPadding(0, dp(6), 0, dp(6)) }
             val col = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
             col.addView(label(p.name, 22f, C.TEXT, true).apply { maxLines = 1; ellipsize = TextUtils.TruncateAt.END })
-            col.addView(label("Ajouté le ${DateFormat.getDateInstance(DateFormat.MEDIUM).format(Date(p.addedAt))} · vu ${df.format(Date(p.lastSeen))}", 15f, C.TEXT_MID).apply { maxLines = 1; ellipsize = TextUtils.TruncateAt.END })
+            col.addView(label("Ajouté le ${DateFormat.getDateInstance(DateFormat.SHORT).format(Date(p.addedAt))} · vu ${df.format(Date(p.lastSeen))}", 15f, C.TEXT_MID).apply { maxLines = 2; ellipsize = TextUtils.TruncateAt.END })
             row.addView(col, LinearLayout.LayoutParams(0, -2, 1f))
             row.addView(button("Retirer", danger = true) { confirmRemove(p) }, LinearLayout.LayoutParams(-2, -2).apply { leftMargin = dp(12) })
             list.addView(row, LinearLayout.LayoutParams(-1, -2))
