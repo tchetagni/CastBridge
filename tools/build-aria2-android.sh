@@ -98,9 +98,11 @@ build_abi() {
   echo "== [$abi] zlib $ZLIB_VER"
   ( cd "$B/zlib-$ZLIB_VER" && env "${common[@]}" CHOST="$target" ./configure --static --prefix="$P" >/dev/null && make -j"$JOBS" >/dev/null && make install >/dev/null )
 
+  # The "legacy" provider must stay: aria2 1.37 loads it at start-up (OSSL_PROVIDER_load 'legacy'); with no-module it is
+  # built into libcrypto.
   echo "== [$abi] OpenSSL $OPENSSL_VER"
   ( cd "$B/openssl-$OPENSSL_VER" && env -u CC -u CXX ANDROID_NDK_ROOT="$NDK" ./Configure "$ossl" -D__ANDROID_API__=$API \
-      no-shared no-tests no-docs no-apps no-engine no-module no-legacy no-dso no-comp --prefix="$P" --libdir=lib -Os >/dev/null \
+      no-shared no-tests no-docs no-apps no-engine no-module no-dso no-comp --prefix="$P" --libdir=lib -Os >/dev/null \
     && make -j"$JOBS" build_libs >/dev/null && make install_dev >/dev/null )
 
   echo "== [$abi] expat $EXPAT_VER"
@@ -126,7 +128,7 @@ build_abi() {
       --with-libcares --with-libz --with-libssh2 --without-libuv --without-appletls --without-wintls --without-libgcrypt \
       --without-libnettle --without-libgmp --without-jemalloc --without-tcmalloc ARIA2_STATIC=no > "$B/aria2-configure.log" \
     && tail -25 "$B/aria2-configure.log" \
-    && make -j"$JOBS" >/dev/null )
+    && { make -j"$JOBS" > "$B/aria2-make.log" 2>&1 || { tail -40 "$B/aria2-make.log"; exit 1; }; } )
 
   mkdir -p "$OUT/$abi"
   "$STRIP" --strip-unneeded -o "$OUT/$abi/libaria2c.so" "$B/aria2-$ARIA2_VER/src/aria2c"
