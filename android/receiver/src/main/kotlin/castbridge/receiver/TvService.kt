@@ -114,6 +114,7 @@ class TvService : Service(), Device {
 
     override fun onCreate() {
         super.onCreate()
+        hookCapture()                      // before any screen resumes, so /api/screenshot always knows the front screen
         running = this
         startInForeground()
         startCore()
@@ -213,7 +214,11 @@ class TvService : Service(), Device {
         return castbridge.core.tv.LinkInfo(ReceiverServer.PORT, ips, a?.first, a?.second, a?.let { castbridge.core.tv.WifiDirect.GROUP_OWNER_IP })
     }
 
+    private var captureHooked = false
+    private fun hookCapture() { if (!captureHooked) { captureHooked = true; ScreenCapture.install(application) } }
+
     fun onPermissionsReady() {
+        hookCapture()
         bt?.start()
         gateway = gateway ?: BtGatewayHost(this, guard) { st -> setStatus("6-gw", st) }
         gateway?.start()
@@ -433,9 +438,9 @@ class TvService : Service(), Device {
     private fun extraApi(path: String, method: String, params: Map<String, String>): ApiReply? = when {
         path.startsWith("/api/ssh") -> ssh?.api(path, method, params)
         // What the TV screen shows right now (the app's own window only), to check the layout remotely.
-        path == "/api/screenshot" && method == "GET" -> (screen?.takeIf { it.shown }?.activity as? PlayerActivity)?.let { a ->
-            a.capture()?.let { ApiReply.binary(it, "image/png") } ?: ApiReply(500, """{"error":"capture impossible"}""")
-        } ?: ApiReply(409, """{"error":"L'écran de CastBridge TV n'est pas affiché"}""")
+        path == "/api/screenshot" && method == "GET" -> ScreenCapture.resumed?.let { a ->
+            ScreenCapture.capture(a)?.let { ApiReply.binary(it, "image/png") } ?: ApiReply(500, """{"error":"capture impossible"}""")
+        } ?: ApiReply(409, """{"error":"Aucun écran de CastBridge TV n'est affiché"}""")
         // The quiz screen opens from the visible TV screen only (Android 14 blocks background activity starts).
         path.startsWith("/api/quiz") -> QuizHub.api(screen?.takeIf { it.shown }?.activity, path, method)
         path == "/api/update" && method == "GET" -> updater?.let { ApiReply(200, it.infoJson()) }
