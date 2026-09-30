@@ -1,202 +1,897 @@
 {
-  "chapter": "bepc-maths-thales",
-  "lessons": [
+ "chapter": "bepc-maths-thales",
+ "lessons": [
+  {
+   "id": "bepc-maths-thales",
+   "title": "Le théorème de Thalès et sa réciproque",
+   "minutes": 25,
+   "programRef": "3e — Activités géométriques : théorème de Thalès et sa réciproque (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale conforme au programme de 3e ; à relire par un enseignant",
+   "objectives": [
+    "Calculer une longueur grâce au théorème de Thalès.",
+    "Démontrer que deux droites sont parallèles, ou qu'elles ne le sont pas, avec la réciproque."
+   ],
+   "prerequisites": [
+    "bepc-maths-pythagore"
+   ],
+   "exercises": [
+    "bepc-maths-th-01",
+    "bepc-maths-th-02",
+    "bepc-maths-th-03",
+    "bepc-maths-th-04",
+    "bepc-maths-th-05",
+    "bepc-maths-th-06"
+   ],
+   "selfCheck": [
+    "bepc-maths-th-q1",
+    "bepc-maths-th-q2",
+    "bepc-maths-th-q3",
+    "bepc-maths-th-q4",
+    "bepc-maths-th-q5"
+   ],
+   "blocks": [
     {
-      "id": "bepc-maths-thales",
-      "title": "Le théorème de Thalès et sa réciproque",
-      "minutes": 25,
-      "programRef": "3e — Activités géométriques : théorème de Thalès et sa réciproque (à vérifier sur le texte officiel)",
-      "status": "draft",
-      "author": "CastBridge (brouillon IA)",
-      "source": "Rédaction originale conforme au programme de 3e ; à relire par un enseignant",
-      "objectives": [
-        "Calculer une longueur grâce au théorème de Thalès.",
-        "Démontrer que deux droites sont parallèles, ou qu'elles ne le sont pas, avec la réciproque."
-      ],
-      "prerequisites": ["bepc-maths-pythagore"],
-      "exercises": ["bepc-maths-th-01", "bepc-maths-th-02", "bepc-maths-th-03", "bepc-maths-th-04", "bepc-maths-th-05", "bepc-maths-th-06"],
-      "selfCheck": ["bepc-maths-th-q1", "bepc-maths-th-q2", "bepc-maths-th-q3", "bepc-maths-th-q4", "bepc-maths-th-q5"],
-      "blocks": [
-        {"type": "key", "style": "propriete", "title": "Théorème de Thalès",
-         "md": "Les droites (BM) et (CN) sont sécantes en A. Si les droites (MN) et (BC) sont **parallèles**, alors les longueurs des deux triangles AMN et ABC sont proportionnelles :",
-         "tex": "\\frac{AM}{AB} = \\frac{AN}{AC} = \\frac{MN}{BC}"},
-        {"type": "illustration", "caption": "Configuration « triangle » : M sur [AB], N sur [AC] et (MN) parallèle à (BC).",
-         "alt": "Un triangle ABC, sommet A en haut. Un segment MN, parallèle à la base BC, relie un point M de [AB] à un point N de [AC].",
-         "figure": {"kind": "shapes", "w": 400, "h": 260, "items": [
-           {"t": "poly", "pts": [200, 30, 60, 230, 340, 230], "fill": "lightyellow", "stroke": "ink", "width": 2},
-           {"t": "poly", "pts": [200, 30, 144, 110, 256, 110], "fill": "lightblue", "stroke": "ink", "width": 2},
-           {"t": "line", "x1": 144, "y1": 110, "x2": 256, "y2": 110, "color": "blue", "width": 4},
-           {"t": "line", "x1": 60, "y1": 230, "x2": 340, "y2": 230, "color": "blue", "width": 4},
-           {"t": "text", "x": 200, "y": 22, "text": "A", "size": 18, "bold": true, "anchor": "middle"},
-           {"t": "text", "x": 132, "y": 112, "text": "M", "size": 18, "bold": true, "anchor": "end"},
-           {"t": "text", "x": 268, "y": 112, "text": "N", "size": 18, "bold": true, "anchor": "start"},
-           {"t": "text", "x": 48, "y": 250, "text": "B", "size": 18, "bold": true, "anchor": "end"},
-           {"t": "text", "x": 352, "y": 250, "text": "C", "size": 18, "bold": true, "anchor": "start"},
-           {"t": "text", "x": 200, "y": 176, "text": "(MN) // (BC)", "size": 16, "color": "blue", "anchor": "middle", "bold": true}
-         ]}},
-        {"type": "text", "md": "Le théorème s'applique aussi dans la configuration « papillon » : M et N sont de l'autre côté de A par rapport à B et C. Les rapports s'écrivent de la même façon, avec les longueurs mesurées à partir de A."},
-        {"type": "key", "style": "propriete", "title": "Réciproque du théorème de Thalès",
-         "md": "Les droites (BM) et (CN) sont sécantes en A. Si les points A, M, B d'une part et A, N, C d'autre part sont **alignés dans le même ordre**, et si $\\frac{AM}{AB} = \\frac{AN}{AC}$, alors les droites (MN) et (BC) sont **parallèles**."},
-        {"type": "key", "style": "methode", "title": "Méthode",
-         "md": "1. Citer les droites sécantes et les points alignés.\n2. Justifier le parallélisme (donné, ou deux droites perpendiculaires à une même troisième).\n3. Écrire les trois rapports égaux, **petit triangle en haut**, grand triangle en bas.\n4. Garder l'égalité de deux rapports contenant une seule inconnue et faire un produit en croix."},
-        {"type": "example", "title": "Exemple 1 : calculer des longueurs",
-         "statement": "Dans la figure ci-dessus, AM = 4 cm, AB = 10 cm, AC = 7,5 cm, BC = 8 cm et (MN) // (BC). Calcule AN et MN.",
-         "steps": [
-           {"md": "M ∈ [AB], N ∈ [AC] et (MN) // (BC). D'après le théorème de Thalès :", "tex": "\\frac{AM}{AB} = \\frac{AN}{AC} = \\frac{MN}{BC}"},
-           {"md": "On remplace par les longueurs connues :", "tex": "\\frac{4}{10} = \\frac{AN}{7{,}5} = \\frac{MN}{8}"},
-           {"md": "Produit en croix :", "tex": "AN = \\frac{4 \\times 7{,}5}{10} = 3 \\quad MN = \\frac{4 \\times 8}{10} = 3{,}2"}
-         ],
-         "answer": "**AN = 3 cm et MN = 3,2 cm.**"},
-        {"type": "example", "title": "Exemple 2 : les droites sont-elles parallèles ?",
-         "statement": "Les points A, M, B sont alignés dans cet ordre, ainsi que A, N, C. On a AM = 2,4 cm, AB = 6 cm, AN = 3 cm et AC = 7,5 cm. Les droites (MN) et (BC) sont-elles parallèles ?",
-         "steps": [
-           {"md": "On calcule séparément les deux rapports :", "tex": "\\frac{AM}{AB} = \\frac{2{,}4}{6} = 0{,}4 \\quad \\frac{AN}{AC} = \\frac{3}{7{,}5} = 0{,}4"},
-           {"md": "Les rapports sont égaux et les points sont alignés dans le même ordre. D'après la **réciproque** du théorème de Thalès, (MN) et (BC) sont parallèles."}
-         ],
-         "answer": "**Oui, (MN) // (BC).**"},
-        {"type": "key", "style": "pieges", "title": "Erreurs fréquentes",
-         "md": "- Utiliser le théorème sans avoir justifié que les droites sont parallèles.\n- Mélanger les triangles : écrire $\\frac{AM}{AB} = \\frac{AC}{AN}$.\n- Écrire $\\frac{AM}{MB}$ avec $\\frac{MN}{BC}$ : MB n'est pas un côté du grand triangle.\n- Pour la réciproque, oublier de vérifier que les points sont dans le **même ordre**.\n- Conclure « parallèles » avec des rapports arrondis seulement « presque » égaux."},
-        {"type": "exercise", "ref": "bepc-maths-th-01"},
-        {"type": "more", "items": [
-          "Selon la tradition, Thalès de Milet (VIᵉ siècle av. J.-C.) aurait mesuré la hauteur d'une pyramide d'Égypte en comparant son ombre à celle d'un bâton.",
-          "Le théorème de Thalès sert aussi à agrandir ou réduire une figure : c'est le principe des plans et des cartes à l'échelle."
-        ]}
-      ],
-      "reviewNotes": ["Vérifier que la configuration « papillon » est bien au programme de 3e au Cameroun (elle l'est dans la plupart des programmes francophones)."]
+     "type": "key",
+     "style": "propriete",
+     "title": "Théorème de Thalès",
+     "md": "Les droites (BM) et (CN) sont sécantes en A. Si les droites (MN) et (BC) sont **parallèles**, alors les longueurs des deux triangles AMN et ABC sont proportionnelles :",
+     "tex": "\\frac{AM}{AB} = \\frac{AN}{AC} = \\frac{MN}{BC}"
+    },
+    {
+     "type": "illustration",
+     "caption": "Configuration « triangle » : M sur [AB], N sur [AC] et (MN) parallèle à (BC).",
+     "alt": "Un triangle ABC, sommet A en haut. Un segment MN, parallèle à la base BC, relie un point M de [AB] à un point N de [AC].",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 260,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         200,
+         30,
+         60,
+         230,
+         340,
+         230
+        ],
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "poly",
+        "pts": [
+         200,
+         30,
+         144,
+         110,
+         256,
+         110
+        ],
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 144,
+        "y1": 110,
+        "x2": 256,
+        "y2": 110,
+        "color": "blue",
+        "width": 4
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 230,
+        "x2": 340,
+        "y2": 230,
+        "color": "blue",
+        "width": 4
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 22,
+        "text": "A",
+        "size": 18,
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 132,
+        "y": 112,
+        "text": "M",
+        "size": 18,
+        "bold": true,
+        "anchor": "end"
+       },
+       {
+        "t": "text",
+        "x": 268,
+        "y": 112,
+        "text": "N",
+        "size": 18,
+        "bold": true,
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 48,
+        "y": 250,
+        "text": "B",
+        "size": 18,
+        "bold": true,
+        "anchor": "end"
+       },
+       {
+        "t": "text",
+        "x": 352,
+        "y": 250,
+        "text": "C",
+        "size": 18,
+        "bold": true,
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 176,
+        "text": "(MN) // (BC)",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "text",
+     "md": "Le théorème s'applique aussi dans la configuration « papillon » : M et N sont de l'autre côté de A par rapport à B et C. Les rapports s'écrivent de la même façon, avec les longueurs mesurées à partir de A."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Réciproque du théorème de Thalès",
+     "md": "Les droites (BM) et (CN) sont sécantes en A. Si les points A, M, B d'une part et A, N, C d'autre part sont **alignés dans le même ordre**, et si $\\frac{AM}{AB} = \\frac{AN}{AC}$, alors les droites (MN) et (BC) sont **parallèles**."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode",
+     "md": "1. Citer les droites sécantes et les points alignés.\n2. Justifier le parallélisme (donné, ou deux droites perpendiculaires à une même troisième).\n3. Écrire les trois rapports égaux, **petit triangle en haut**, grand triangle en bas.\n4. Garder l'égalité de deux rapports contenant une seule inconnue et faire un produit en croix."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : calculer des longueurs",
+     "statement": "Dans la figure ci-dessus, AM = 4 cm, AB = 10 cm, AC = 7,5 cm, BC = 8 cm et (MN) // (BC). Calcule AN et MN.",
+     "steps": [
+      {
+       "md": "M ∈ [AB], N ∈ [AC] et (MN) // (BC). D'après le théorème de Thalès :",
+       "tex": "\\frac{AM}{AB} = \\frac{AN}{AC} = \\frac{MN}{BC}"
+      },
+      {
+       "md": "On remplace par les longueurs connues :",
+       "tex": "\\frac{4}{10} = \\frac{AN}{7{,}5} = \\frac{MN}{8}"
+      },
+      {
+       "md": "Produit en croix :",
+       "tex": "AN = \\frac{4 \\times 7{,}5}{10} = 3 \\quad MN = \\frac{4 \\times 8}{10} = 3{,}2"
+      }
+     ],
+     "answer": "**AN = 3 cm et MN = 3,2 cm.**",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 260,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         200,
+         30,
+         60,
+         230,
+         340,
+         230
+        ],
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "poly",
+        "pts": [
+         200,
+         30,
+         144,
+         110,
+         256,
+         110
+        ],
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 144,
+        "y1": 110,
+        "x2": 256,
+        "y2": 110,
+        "color": "blue",
+        "width": 4
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 230,
+        "x2": 340,
+        "y2": 230,
+        "color": "blue",
+        "width": 4
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 22,
+        "text": "A",
+        "size": 18,
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 132,
+        "y": 112,
+        "text": "M",
+        "size": 18,
+        "bold": true,
+        "anchor": "end"
+       },
+       {
+        "t": "text",
+        "x": 268,
+        "y": 112,
+        "text": "N",
+        "size": 18,
+        "bold": true,
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 48,
+        "y": 250,
+        "text": "B",
+        "size": 18,
+        "bold": true,
+        "anchor": "end"
+       },
+       {
+        "t": "text",
+        "x": 352,
+        "y": 250,
+        "text": "C",
+        "size": 18,
+        "bold": true,
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 176,
+        "text": "(MN) // (BC)",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : les droites sont-elles parallèles ?",
+     "statement": "Les points A, M, B sont alignés dans cet ordre, ainsi que A, N, C. On a AM = 2,4 cm, AB = 6 cm, AN = 3 cm et AC = 7,5 cm. Les droites (MN) et (BC) sont-elles parallèles ?",
+     "steps": [
+      {
+       "md": "On calcule séparément les deux rapports :",
+       "tex": "\\frac{AM}{AB} = \\frac{2{,}4}{6} = 0{,}4 \\quad \\frac{AN}{AC} = \\frac{3}{7{,}5} = 0{,}4"
+      },
+      {
+       "md": "Les rapports sont égaux et les points sont alignés dans le même ordre. D'après la **réciproque** du théorème de Thalès, (MN) et (BC) sont parallèles."
+      }
+     ],
+     "answer": "**Oui, (MN) // (BC).**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Utiliser le théorème sans avoir justifié que les droites sont parallèles.\n- Mélanger les triangles : écrire $\\frac{AM}{AB} = \\frac{AC}{AN}$.\n- Écrire $\\frac{AM}{MB}$ avec $\\frac{MN}{BC}$ : MB n'est pas un côté du grand triangle.\n- Pour la réciproque, oublier de vérifier que les points sont dans le **même ordre**.\n- Conclure « parallèles » avec des rapports arrondis seulement « presque » égaux."
+    },
+    {
+     "type": "exercise",
+     "ref": "bepc-maths-th-01"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Selon la tradition, Thalès de Milet (VIᵉ siècle av. J.-C.) aurait mesuré la hauteur d'une pyramide d'Égypte en comparant son ombre à celle d'un bâton.",
+      "Le théorème de Thalès sert aussi à agrandir ou réduire une figure : c'est le principe des plans et des cartes à l'échelle."
+     ]
     }
-  ],
-  "exercises": [
-    {"id": "bepc-maths-th-01", "kind": "numeric", "tier": "application", "difficulty": 1, "points": 2, "lesson": "bepc-maths-thales",
-     "prompt": "ABC est un triangle, M ∈ [AB] et N ∈ [AC], avec (MN) // (BC). On donne AM = 3 cm, AB = 9 cm et AC = 12 cm. Calcule AN (en cm).",
-     "answer": 4, "tolerance": 0, "unit": "cm",
-     "explanation": "D'après le théorème de Thalès, $\\frac{AM}{AB} = \\frac{AN}{AC}$, soit $\\frac{3}{9} = \\frac{AN}{12}$, donc $AN = \\frac{3 \\times 12}{9} = 4$ cm.",
-     "method": "Écrire les rapports, garder les deux utiles, faire un produit en croix.",
-     "mistakes": ["Calculer $\\frac{9 \\times 12}{3} = 36$ : on a inversé un des rapports."],
-     "source": "Exercice original, style BEPC"},
-    {"id": "bepc-maths-th-02", "kind": "numeric", "tier": "application", "difficulty": 1, "points": 2, "lesson": "bepc-maths-thales",
-     "prompt": "ABC est un triangle, M ∈ [AB] et N ∈ [AC], avec (MN) // (BC). On donne AM = 5 cm, AB = 8 cm et BC = 12 cm. Calcule MN (en cm).",
-     "answer": 7.5, "tolerance": 0, "unit": "cm",
-     "explanation": "$\\frac{AM}{AB} = \\frac{MN}{BC}$, soit $\\frac{5}{8} = \\frac{MN}{12}$, donc $MN = \\frac{5 \\times 12}{8} = 7{,}5$ cm.",
-     "method": "MN est dans le petit triangle, BC dans le grand : même position dans les rapports que AM et AB.",
-     "mistakes": ["Utiliser MB = 3 cm au lieu de AB = 8 cm."],
-     "source": "Exercice original, style BEPC"},
-    {"id": "bepc-maths-th-03", "kind": "mcq", "tier": "application", "difficulty": 1, "points": 1, "lesson": "bepc-maths-thales",
-     "prompt": "Dans un triangle ABC, M ∈ [AB], N ∈ [AC] et (MN) // (BC). Quelle égalité est donnée par le théorème de Thalès ?",
-     "choices": ["$\\frac{AM}{AB} = \\frac{AN}{AC} = \\frac{MN}{BC}$", "$\\frac{AM}{AB} = \\frac{AC}{AN}$", "$\\frac{AM}{AB} = \\frac{BC}{MN}$", "$\\frac{AB}{AM} = \\frac{MN}{BC}$"], "answer": 0,
-     "explanation": "Chaque rapport compare une longueur du petit triangle AMN à la longueur correspondante du grand triangle ABC, toujours dans le même sens.",
-     "source": "Exercice original"},
-    {"id": "bepc-maths-th-04", "kind": "truefalse", "tier": "approfondissement", "difficulty": 2, "points": 2, "lesson": "bepc-maths-thales",
-     "prompt": "Les points A, M, B sont alignés dans cet ordre, ainsi que A, N, C. On a AM = 3 cm, AB = 7 cm, AN = 4 cm et AC = 9 cm. Vrai ou faux : les droites (MN) et (BC) sont parallèles.",
-     "answer": false,
-     "explanation": "On compare les rapports avec des produits en croix : $3 \\times 9 = 27$ et $7 \\times 4 = 28$. Comme $27 \\neq 28$, $\\frac{3}{7} \\neq \\frac{4}{9}$. Si les droites étaient parallèles, le théorème de Thalès donnerait l'égalité : elles ne sont donc **pas** parallèles.",
-     "method": "Comparer les deux rapports exactement (produit en croix ou fractions), pas avec des valeurs arrondies.",
-     "mistakes": ["Arrondir $\\frac{3}{7} \\approx 0{,}43$ et $\\frac{4}{9} \\approx 0{,}44$ et conclure « presque égaux donc parallèles »."],
-     "source": "Exercice original, style BEPC"},
-    {"id": "bepc-maths-th-05", "kind": "numeric", "tier": "approfondissement", "difficulty": 2, "points": 2, "lesson": "bepc-maths-thales",
-     "prompt": "Les droites (BM) et (CN) se coupent en A, comme sur la figure, et (BC) // (MN). On donne AB = 6 cm, AM = 4 cm et BC = 9 cm. Calcule MN (en cm).",
-     "figure": {"kind": "shapes", "w": 400, "h": 240, "items": [
-       {"t": "line", "x1": 80, "y1": 40, "x2": 280, "y2": 173, "color": "ink", "width": 2},
-       {"t": "line", "x1": 80, "y1": 200, "x2": 280, "y2": 67, "color": "ink", "width": 2},
-       {"t": "line", "x1": 80, "y1": 40, "x2": 80, "y2": 200, "color": "blue", "width": 4},
-       {"t": "line", "x1": 280, "y1": 67, "x2": 280, "y2": 173, "color": "blue", "width": 4},
-       {"t": "text", "x": 68, "y": 44, "text": "B", "size": 18, "bold": true, "anchor": "end"},
-       {"t": "text", "x": 68, "y": 206, "text": "C", "size": 18, "bold": true, "anchor": "end"},
-       {"t": "text", "x": 292, "y": 70, "text": "N", "size": 18, "bold": true, "anchor": "start"},
-       {"t": "text", "x": 292, "y": 182, "text": "M", "size": 18, "bold": true, "anchor": "start"},
-       {"t": "text", "x": 200, "y": 104, "text": "A", "size": 18, "bold": true, "anchor": "middle"}
-     ]},
-     "answer": 6, "tolerance": 0, "unit": "cm",
-     "explanation": "Configuration papillon : $\\frac{AM}{AB} = \\frac{AN}{AC} = \\frac{MN}{BC}$, soit $\\frac{4}{6} = \\frac{MN}{9}$, donc $MN = \\frac{4 \\times 9}{6} = 6$ cm.",
-     "method": "Même théorème que dans le triangle : les longueurs se mesurent à partir du point A.",
-     "mistakes": ["Écrire $\\frac{AB}{AM} = \\frac{MN}{BC}$, ce qui donne 13,5 cm : les deux rapports doivent être dans le même sens."],
-     "source": "Exercice original, style BEPC"},
-    {"id": "bepc-maths-th-06", "kind": "problem", "tier": "examen", "difficulty": 2, "lesson": "bepc-maths-thales",
-     "prompt": "Pour mesurer la hauteur d'un manguier, Ibrahim plante un bâton vertical [PS] de 1,5 m. Le sol est horizontal. Les points A, P, B sont alignés sur le sol ; A, S, T sont alignés (T est le sommet de l'arbre, [BT] est vertical). On mesure AP = 2 m et AB = 10 m.",
-     "figure": {"kind": "shapes", "w": 360, "h": 300, "items": [
-       {"t": "line", "x1": 10, "y1": 270, "x2": 350, "y2": 270, "color": "brown", "width": 3},
-       {"t": "line", "x1": 30, "y1": 270, "x2": 270, "y2": 90, "color": "grey", "width": 2, "dash": true},
-       {"t": "line", "x1": 78, "y1": 270, "x2": 78, "y2": 234, "color": "orange", "width": 4},
-       {"t": "line", "x1": 270, "y1": 270, "x2": 270, "y2": 90, "color": "green", "width": 5},
-       {"t": "angle", "x": 78, "y": 270, "from": 90, "to": 180, "r": 12, "right": true, "color": "ink"},
-       {"t": "angle", "x": 270, "y": 270, "from": 90, "to": 180, "r": 16, "right": true, "color": "ink"},
-       {"t": "text", "x": 30, "y": 292, "text": "A", "size": 16, "bold": true, "anchor": "middle"},
-       {"t": "text", "x": 78, "y": 292, "text": "P", "size": 16, "bold": true, "anchor": "middle"},
-       {"t": "text", "x": 270, "y": 292, "text": "B", "size": 16, "bold": true, "anchor": "middle"},
-       {"t": "text", "x": 72, "y": 228, "text": "S", "size": 16, "bold": true, "anchor": "end"},
-       {"t": "text", "x": 282, "y": 94, "text": "T", "size": 16, "bold": true, "anchor": "start"}
-     ]},
-     "method": "Justifier le parallélisme (deux droites perpendiculaires au sol), puis appliquer le théorème de Thalès dans les triangles APS et ABT.",
-     "mistakes": ["Oublier de justifier que (PS) // (BT).", "Utiliser PB = 8 m au lieu de AB = 10 m."],
-     "source": "Exercice original, style BEPC",
-     "parts": [
-       {"id": "bepc-maths-th-06-a", "kind": "mcq", "points": 1,
-        "prompt": "Pourquoi les droites (PS) et (BT) sont-elles parallèles ?",
-        "choices": ["Elles sont toutes les deux perpendiculaires au sol", "Elles ont la même longueur", "Elles passent toutes les deux par A", "Parce que AP est plus petit que AB"], "answer": 0,
-        "explanation": "Le bâton et l'arbre sont verticaux, donc perpendiculaires à la droite (AB) du sol. Deux droites perpendiculaires à une même droite sont parallèles."},
-       {"id": "bepc-maths-th-06-b", "kind": "numeric", "points": 2, "unit": "m",
-        "prompt": "Calcule la hauteur BT du manguier (en m).",
-        "answer": 7.5, "tolerance": 0.01,
-        "explanation": "P ∈ [AB], S ∈ [AT] et (PS) // (BT). D'après Thalès : $\\frac{AP}{AB} = \\frac{PS}{BT}$, soit $\\frac{2}{10} = \\frac{1{,}5}{BT}$, donc $BT = \\frac{10 \\times 1{,}5}{2} = 7{,}5$ m."},
-       {"id": "bepc-maths-th-06-c", "kind": "numeric", "points": 1, "unit": "m",
-        "prompt": "Le triangle APS est rectangle en P. Calcule la longueur AS (en m).",
-        "answer": 2.5, "tolerance": 0.01,
-        "explanation": "D'après le théorème de Pythagore : $AS^2 = AP^2 + PS^2 = 4 + 2{,}25 = 6{,}25$, donc $AS = 2{,}5$ m."}
-     ]},
-    {"id": "bepc-maths-be-03", "kind": "problem", "tier": "examen", "difficulty": 2, "lesson": "bepc-maths-thales",
-     "prompt": "ABC est un triangle tel que AB = 6 cm, AC = 8 cm et BC = 10 cm. M est le point de [AB] tel que AM = 4,5 cm ; la parallèle à (BC) passant par M coupe [AC] en N.",
-     "figure": {"kind": "shapes", "w": 360, "h": 260, "items": [
-       {"t": "poly", "pts": [60, 220, 60, 40, 300, 220], "fill": "lightyellow", "stroke": "ink", "width": 2},
-       {"t": "line", "x1": 60, "y1": 85, "x2": 240, "y2": 220, "color": "blue", "width": 3},
-       {"t": "text", "x": 48, "y": 238, "text": "A", "size": 16, "bold": true, "anchor": "end"},
-       {"t": "text", "x": 48, "y": 44, "text": "B", "size": 16, "bold": true, "anchor": "end"},
-       {"t": "text", "x": 312, "y": 238, "text": "C", "size": 16, "bold": true, "anchor": "start"},
-       {"t": "text", "x": 48, "y": 90, "text": "M", "size": 16, "bold": true, "anchor": "end"},
-       {"t": "text", "x": 240, "y": 244, "text": "N", "size": 16, "bold": true, "anchor": "middle"}
-     ]},
-     "method": "Réciproque de Pythagore pour l'angle droit, théorème de Thalès pour les longueurs, réciproque de Thalès pour le parallélisme.",
-     "mistakes": ["Dire que ABC est rectangle « parce que ça se voit sur la figure » : il faut un calcul.", "Pour l'aire de AMN, oublier de diviser par 2."],
-     "source": "Exercice original, style BEPC",
-     "parts": [
-       {"id": "bepc-maths-be-03-a", "kind": "mcq", "points": 1,
-        "prompt": "Que peut-on dire du triangle ABC ?",
-        "choices": ["Il est rectangle en A", "Il est rectangle en B", "Il est rectangle en C", "Il n'est pas rectangle"], "answer": 0,
-        "explanation": "$BC^2 = 100$ et $AB^2 + AC^2 = 36 + 64 = 100$. D'après la réciproque du théorème de Pythagore, ABC est rectangle en A, sommet opposé au plus long côté [BC]."},
-       {"id": "bepc-maths-be-03-b", "kind": "numeric", "points": 2, "unit": "cm",
-        "prompt": "Calcule AN (en cm).",
-        "answer": 6, "tolerance": 0,
-        "explanation": "M ∈ [AB], N ∈ [AC] et (MN) // (BC). D'après Thalès : $\\frac{AM}{AB} = \\frac{AN}{AC}$, soit $\\frac{4{,}5}{6} = \\frac{AN}{8}$, donc $AN = \\frac{4{,}5 \\times 8}{6} = 6$ cm."},
-       {"id": "bepc-maths-be-03-c", "kind": "numeric", "points": 1, "unit": "cm",
-        "prompt": "Calcule MN (en cm).",
-        "answer": 7.5, "tolerance": 0,
-        "explanation": "$\\frac{AM}{AB} = \\frac{MN}{BC}$, soit $\\frac{4{,}5}{6} = \\frac{MN}{10}$, donc $MN = \\frac{4{,}5 \\times 10}{6} = 7{,}5$ cm."},
-       {"id": "bepc-maths-be-03-d", "kind": "numeric", "points": 1, "unit": "cm²",
-        "prompt": "Le triangle AMN est rectangle en A. Calcule son aire (en cm²).",
-        "answer": 13.5, "tolerance": 0,
-        "explanation": "Aire = $\\frac{AM \\times AN}{2} = \\frac{4{,}5 \\times 6}{2} = 13{,}5$ cm²."},
-       {"id": "bepc-maths-be-03-e", "kind": "truefalse", "points": 1,
-        "prompt": "E est le point de [AB] tel que AE = 2,4 cm et F le point de [AC] tel que AF = 3,2 cm. Vrai ou faux : les droites (EF) et (BC) sont parallèles.",
-        "answer": true,
-        "explanation": "$\\frac{AE}{AB} = \\frac{2{,}4}{6} = 0{,}4$ et $\\frac{AF}{AC} = \\frac{3{,}2}{8} = 0{,}4$. Les rapports sont égaux et A, E, B et A, F, C sont alignés dans le même ordre : d'après la réciproque du théorème de Thalès, (EF) // (BC)."}
-     ]},
-    {"id": "bepc-maths-th-q1", "kind": "mcq", "tier": "autoeval", "points": 1, "lesson": "bepc-maths-thales",
-     "prompt": "À quoi sert principalement le théorème de Thalès ?",
-     "choices": ["À calculer des longueurs quand deux droites sont parallèles", "À démontrer qu'un triangle est rectangle", "À calculer une aire", "À démontrer que deux droites sont perpendiculaires"], "answer": 0,
-     "explanation": "Quand (MN) // (BC), le théorème de Thalès donne des rapports égaux qui permettent de calculer des longueurs."},
-    {"id": "bepc-maths-th-q2", "kind": "mcq", "tier": "autoeval", "points": 1, "lesson": "bepc-maths-thales",
-     "prompt": "À quoi sert la réciproque du théorème de Thalès ?",
-     "choices": ["À démontrer que deux droites sont parallèles", "À calculer l'hypoténuse", "À démontrer qu'un triangle est isocèle", "À calculer un angle"], "answer": 0,
-     "explanation": "Si les rapports sont égaux et les points alignés dans le même ordre, la réciproque permet de conclure au parallélisme."},
-    {"id": "bepc-maths-th-q3", "kind": "mcq", "tier": "autoeval", "points": 1, "lesson": "bepc-maths-thales",
-     "prompt": "M ∈ [AB], N ∈ [AC], (MN) // (BC) et $\\frac{AM}{AB} = \\frac{1}{2}$. Si BC = 10 cm, combien mesure MN ?",
-     "choices": ["5 cm", "20 cm", "10 cm", "2 cm"], "answer": 0,
-     "explanation": "$\\frac{MN}{BC} = \\frac{1}{2}$, donc $MN = \\frac{10}{2} = 5$ cm."},
-    {"id": "bepc-maths-th-q4", "kind": "mcq", "tier": "autoeval", "points": 1, "lesson": "bepc-maths-thales",
-     "prompt": "Pour appliquer la réciproque du théorème de Thalès, il faut que les points soient :",
-     "choices": ["Alignés dans le même ordre", "Tous sur un cercle", "Les sommets d'un triangle rectangle", "À égale distance de A"], "answer": 0,
-     "explanation": "A, M, B d'une part et A, N, C d'autre part doivent être alignés dans le même ordre, en plus de l'égalité des rapports."},
-    {"id": "bepc-maths-th-q5", "kind": "mcq", "tier": "autoeval", "points": 1, "lesson": "bepc-maths-thales",
-     "prompt": "M ∈ [AB], N ∈ [AC], (MN) // (BC), $\\frac{AN}{AC} = \\frac{3}{4}$ et AB = 8 cm. Combien mesure AM ?",
-     "choices": ["6 cm", "2 cm", "10,7 cm", "5 cm"], "answer": 0,
-     "explanation": "$\\frac{AM}{AB} = \\frac{AN}{AC} = \\frac{3}{4}$, donc $AM = \\frac{3 \\times 8}{4} = 6$ cm."}
-  ]
+   ],
+   "reviewNotes": [
+    "Vérifier que la configuration « papillon » est bien au programme de 3e au Cameroun (elle l'est dans la plupart des programmes francophones)."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "bepc-maths-th-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "lesson": "bepc-maths-thales",
+   "prompt": "ABC est un triangle, M ∈ [AB] et N ∈ [AC], avec (MN) // (BC). On donne AM = 3 cm, AB = 9 cm et AC = 12 cm. Calcule AN (en cm).",
+   "answer": 4,
+   "tolerance": 0,
+   "unit": "cm",
+   "explanation": "D'après le théorème de Thalès, $\\frac{AM}{AB} = \\frac{AN}{AC}$, soit $\\frac{3}{9} = \\frac{AN}{12}$, donc $AN = \\frac{3 \\times 12}{9} = 4$ cm.",
+   "method": "Écrire les rapports, garder les deux utiles, faire un produit en croix.",
+   "mistakes": [
+    "Calculer $\\frac{9 \\times 12}{3} = 36$ : on a inversé un des rapports."
+   ],
+   "source": "Exercice original, style BEPC"
+  },
+  {
+   "id": "bepc-maths-th-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "lesson": "bepc-maths-thales",
+   "prompt": "ABC est un triangle, M ∈ [AB] et N ∈ [AC], avec (MN) // (BC). On donne AM = 5 cm, AB = 8 cm et BC = 12 cm. Calcule MN (en cm).",
+   "answer": 7.5,
+   "tolerance": 0,
+   "unit": "cm",
+   "explanation": "$\\frac{AM}{AB} = \\frac{MN}{BC}$, soit $\\frac{5}{8} = \\frac{MN}{12}$, donc $MN = \\frac{5 \\times 12}{8} = 7{,}5$ cm.",
+   "method": "MN est dans le petit triangle, BC dans le grand : même position dans les rapports que AM et AB.",
+   "mistakes": [
+    "Utiliser MB = 3 cm au lieu de AB = 8 cm."
+   ],
+   "source": "Exercice original, style BEPC"
+  },
+  {
+   "id": "bepc-maths-th-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bepc-maths-thales",
+   "prompt": "Dans un triangle ABC, M ∈ [AB], N ∈ [AC] et (MN) // (BC). Quelle égalité est donnée par le théorème de Thalès ?",
+   "choices": [
+    "$\\frac{AM}{AB} = \\frac{AN}{AC} = \\frac{MN}{BC}$",
+    "$\\frac{AM}{AB} = \\frac{AC}{AN}$",
+    "$\\frac{AM}{AB} = \\frac{BC}{MN}$",
+    "$\\frac{AB}{AM} = \\frac{MN}{BC}$"
+   ],
+   "answer": 0,
+   "explanation": "Chaque rapport compare une longueur du petit triangle AMN à la longueur correspondante du grand triangle ABC, toujours dans le même sens.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "bepc-maths-th-04",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "bepc-maths-thales",
+   "prompt": "Les points A, M, B sont alignés dans cet ordre, ainsi que A, N, C. On a AM = 3 cm, AB = 7 cm, AN = 4 cm et AC = 9 cm. Vrai ou faux : les droites (MN) et (BC) sont parallèles.",
+   "answer": false,
+   "explanation": "On compare les rapports avec des produits en croix : $3 \\times 9 = 27$ et $7 \\times 4 = 28$. Comme $27 \\neq 28$, $\\frac{3}{7} \\neq \\frac{4}{9}$. Si les droites étaient parallèles, le théorème de Thalès donnerait l'égalité : elles ne sont donc **pas** parallèles.",
+   "method": "Comparer les deux rapports exactement (produit en croix ou fractions), pas avec des valeurs arrondies.",
+   "mistakes": [
+    "Arrondir $\\frac{3}{7} \\approx 0{,}43$ et $\\frac{4}{9} \\approx 0{,}44$ et conclure « presque égaux donc parallèles »."
+   ],
+   "source": "Exercice original, style BEPC"
+  },
+  {
+   "id": "bepc-maths-th-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "bepc-maths-thales",
+   "prompt": "Les droites (BM) et (CN) se coupent en A, comme sur la figure, et (BC) // (MN). On donne AB = 6 cm, AM = 4 cm et BC = 9 cm. Calcule MN (en cm).",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 240,
+    "items": [
+     {
+      "t": "line",
+      "x1": 80,
+      "y1": 40,
+      "x2": 280,
+      "y2": 173,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 80,
+      "y1": 200,
+      "x2": 280,
+      "y2": 67,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 80,
+      "y1": 40,
+      "x2": 80,
+      "y2": 200,
+      "color": "blue",
+      "width": 4
+     },
+     {
+      "t": "line",
+      "x1": 280,
+      "y1": 67,
+      "x2": 280,
+      "y2": 173,
+      "color": "blue",
+      "width": 4
+     },
+     {
+      "t": "text",
+      "x": 68,
+      "y": 44,
+      "text": "B",
+      "size": 18,
+      "bold": true,
+      "anchor": "end"
+     },
+     {
+      "t": "text",
+      "x": 68,
+      "y": 206,
+      "text": "C",
+      "size": 18,
+      "bold": true,
+      "anchor": "end"
+     },
+     {
+      "t": "text",
+      "x": 292,
+      "y": 70,
+      "text": "N",
+      "size": 18,
+      "bold": true,
+      "anchor": "start"
+     },
+     {
+      "t": "text",
+      "x": 292,
+      "y": 182,
+      "text": "M",
+      "size": 18,
+      "bold": true,
+      "anchor": "start"
+     },
+     {
+      "t": "text",
+      "x": 200,
+      "y": 104,
+      "text": "A",
+      "size": 18,
+      "bold": true,
+      "anchor": "middle"
+     }
+    ]
+   },
+   "answer": 6,
+   "tolerance": 0,
+   "unit": "cm",
+   "explanation": "Configuration papillon : $\\frac{AM}{AB} = \\frac{AN}{AC} = \\frac{MN}{BC}$, soit $\\frac{4}{6} = \\frac{MN}{9}$, donc $MN = \\frac{4 \\times 9}{6} = 6$ cm.",
+   "method": "Même théorème que dans le triangle : les longueurs se mesurent à partir du point A.",
+   "mistakes": [
+    "Écrire $\\frac{AB}{AM} = \\frac{MN}{BC}$, ce qui donne 13,5 cm : les deux rapports doivent être dans le même sens."
+   ],
+   "source": "Exercice original, style BEPC"
+  },
+  {
+   "id": "bepc-maths-th-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "bepc-maths-thales",
+   "prompt": "Pour mesurer la hauteur d'un manguier, Ibrahim plante un bâton vertical [PS] de 1,5 m. Le sol est horizontal. Les points A, P, B sont alignés sur le sol ; A, S, T sont alignés (T est le sommet de l'arbre, [BT] est vertical). On mesure AP = 2 m et AB = 10 m.",
+   "figure": {
+    "kind": "shapes",
+    "w": 360,
+    "h": 300,
+    "items": [
+     {
+      "t": "line",
+      "x1": 10,
+      "y1": 270,
+      "x2": 350,
+      "y2": 270,
+      "color": "brown",
+      "width": 3
+     },
+     {
+      "t": "line",
+      "x1": 30,
+      "y1": 270,
+      "x2": 270,
+      "y2": 90,
+      "color": "grey",
+      "width": 2,
+      "dash": true
+     },
+     {
+      "t": "line",
+      "x1": 78,
+      "y1": 270,
+      "x2": 78,
+      "y2": 234,
+      "color": "orange",
+      "width": 4
+     },
+     {
+      "t": "line",
+      "x1": 270,
+      "y1": 270,
+      "x2": 270,
+      "y2": 90,
+      "color": "green",
+      "width": 5
+     },
+     {
+      "t": "angle",
+      "x": 78,
+      "y": 270,
+      "from": 90,
+      "to": 180,
+      "r": 12,
+      "right": true,
+      "color": "ink"
+     },
+     {
+      "t": "angle",
+      "x": 270,
+      "y": 270,
+      "from": 90,
+      "to": 180,
+      "r": 16,
+      "right": true,
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 30,
+      "y": 292,
+      "text": "A",
+      "size": 16,
+      "bold": true,
+      "anchor": "middle"
+     },
+     {
+      "t": "text",
+      "x": 78,
+      "y": 292,
+      "text": "P",
+      "size": 16,
+      "bold": true,
+      "anchor": "middle"
+     },
+     {
+      "t": "text",
+      "x": 270,
+      "y": 292,
+      "text": "B",
+      "size": 16,
+      "bold": true,
+      "anchor": "middle"
+     },
+     {
+      "t": "text",
+      "x": 72,
+      "y": 228,
+      "text": "S",
+      "size": 16,
+      "bold": true,
+      "anchor": "end"
+     },
+     {
+      "t": "text",
+      "x": 282,
+      "y": 94,
+      "text": "T",
+      "size": 16,
+      "bold": true,
+      "anchor": "start"
+     }
+    ]
+   },
+   "method": "Justifier le parallélisme (deux droites perpendiculaires au sol), puis appliquer le théorème de Thalès dans les triangles APS et ABT.",
+   "mistakes": [
+    "Oublier de justifier que (PS) // (BT).",
+    "Utiliser PB = 8 m au lieu de AB = 10 m."
+   ],
+   "source": "Exercice original, style BEPC",
+   "parts": [
+    {
+     "id": "bepc-maths-th-06-a",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Pourquoi les droites (PS) et (BT) sont-elles parallèles ?",
+     "choices": [
+      "Elles sont toutes les deux perpendiculaires au sol",
+      "Elles ont la même longueur",
+      "Elles passent toutes les deux par A",
+      "Parce que AP est plus petit que AB"
+     ],
+     "answer": 0,
+     "explanation": "Le bâton et l'arbre sont verticaux, donc perpendiculaires à la droite (AB) du sol. Deux droites perpendiculaires à une même droite sont parallèles."
+    },
+    {
+     "id": "bepc-maths-th-06-b",
+     "kind": "numeric",
+     "points": 2,
+     "unit": "m",
+     "prompt": "Calcule la hauteur BT du manguier (en m).",
+     "answer": 7.5,
+     "tolerance": 0.01,
+     "explanation": "P ∈ [AB], S ∈ [AT] et (PS) // (BT). D'après Thalès : $\\frac{AP}{AB} = \\frac{PS}{BT}$, soit $\\frac{2}{10} = \\frac{1{,}5}{BT}$, donc $BT = \\frac{10 \\times 1{,}5}{2} = 7{,}5$ m."
+    },
+    {
+     "id": "bepc-maths-th-06-c",
+     "kind": "numeric",
+     "points": 1,
+     "unit": "m",
+     "prompt": "Le triangle APS est rectangle en P. Calcule la longueur AS (en m).",
+     "answer": 2.5,
+     "tolerance": 0.01,
+     "explanation": "D'après le théorème de Pythagore : $AS^2 = AP^2 + PS^2 = 4 + 2{,}25 = 6{,}25$, donc $AS = 2{,}5$ m."
+    }
+   ]
+  },
+  {
+   "id": "bepc-maths-be-03",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "bepc-maths-thales",
+   "prompt": "ABC est un triangle tel que AB = 6 cm, AC = 8 cm et BC = 10 cm. M est le point de [AB] tel que AM = 4,5 cm ; la parallèle à (BC) passant par M coupe [AC] en N.",
+   "figure": {
+    "kind": "shapes",
+    "w": 360,
+    "h": 260,
+    "items": [
+     {
+      "t": "poly",
+      "pts": [
+       60,
+       220,
+       60,
+       40,
+       300,
+       220
+      ],
+      "fill": "lightyellow",
+      "stroke": "ink",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 60,
+      "y1": 85,
+      "x2": 240,
+      "y2": 220,
+      "color": "blue",
+      "width": 3
+     },
+     {
+      "t": "text",
+      "x": 48,
+      "y": 238,
+      "text": "A",
+      "size": 16,
+      "bold": true,
+      "anchor": "end"
+     },
+     {
+      "t": "text",
+      "x": 48,
+      "y": 44,
+      "text": "B",
+      "size": 16,
+      "bold": true,
+      "anchor": "end"
+     },
+     {
+      "t": "text",
+      "x": 312,
+      "y": 238,
+      "text": "C",
+      "size": 16,
+      "bold": true,
+      "anchor": "start"
+     },
+     {
+      "t": "text",
+      "x": 48,
+      "y": 90,
+      "text": "M",
+      "size": 16,
+      "bold": true,
+      "anchor": "end"
+     },
+     {
+      "t": "text",
+      "x": 240,
+      "y": 244,
+      "text": "N",
+      "size": 16,
+      "bold": true,
+      "anchor": "middle"
+     }
+    ]
+   },
+   "method": "Réciproque de Pythagore pour l'angle droit, théorème de Thalès pour les longueurs, réciproque de Thalès pour le parallélisme.",
+   "mistakes": [
+    "Dire que ABC est rectangle « parce que ça se voit sur la figure » : il faut un calcul.",
+    "Pour l'aire de AMN, oublier de diviser par 2."
+   ],
+   "source": "Exercice original, style BEPC",
+   "parts": [
+    {
+     "id": "bepc-maths-be-03-a",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Que peut-on dire du triangle ABC ?",
+     "choices": [
+      "Il est rectangle en A",
+      "Il est rectangle en B",
+      "Il est rectangle en C",
+      "Il n'est pas rectangle"
+     ],
+     "answer": 0,
+     "explanation": "$BC^2 = 100$ et $AB^2 + AC^2 = 36 + 64 = 100$. D'après la réciproque du théorème de Pythagore, ABC est rectangle en A, sommet opposé au plus long côté [BC]."
+    },
+    {
+     "id": "bepc-maths-be-03-b",
+     "kind": "numeric",
+     "points": 2,
+     "unit": "cm",
+     "prompt": "Calcule AN (en cm).",
+     "answer": 6,
+     "tolerance": 0,
+     "explanation": "M ∈ [AB], N ∈ [AC] et (MN) // (BC). D'après Thalès : $\\frac{AM}{AB} = \\frac{AN}{AC}$, soit $\\frac{4{,}5}{6} = \\frac{AN}{8}$, donc $AN = \\frac{4{,}5 \\times 8}{6} = 6$ cm."
+    },
+    {
+     "id": "bepc-maths-be-03-c",
+     "kind": "numeric",
+     "points": 1,
+     "unit": "cm",
+     "prompt": "Calcule MN (en cm).",
+     "answer": 7.5,
+     "tolerance": 0,
+     "explanation": "$\\frac{AM}{AB} = \\frac{MN}{BC}$, soit $\\frac{4{,}5}{6} = \\frac{MN}{10}$, donc $MN = \\frac{4{,}5 \\times 10}{6} = 7{,}5$ cm."
+    },
+    {
+     "id": "bepc-maths-be-03-d",
+     "kind": "numeric",
+     "points": 1,
+     "unit": "cm²",
+     "prompt": "Le triangle AMN est rectangle en A. Calcule son aire (en cm²).",
+     "answer": 13.5,
+     "tolerance": 0,
+     "explanation": "Aire = $\\frac{AM \\times AN}{2} = \\frac{4{,}5 \\times 6}{2} = 13{,}5$ cm²."
+    },
+    {
+     "id": "bepc-maths-be-03-e",
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "E est le point de [AB] tel que AE = 2,4 cm et F le point de [AC] tel que AF = 3,2 cm. Vrai ou faux : les droites (EF) et (BC) sont parallèles.",
+     "answer": true,
+     "explanation": "$\\frac{AE}{AB} = \\frac{2{,}4}{6} = 0{,}4$ et $\\frac{AF}{AC} = \\frac{3{,}2}{8} = 0{,}4$. Les rapports sont égaux et A, E, B et A, F, C sont alignés dans le même ordre : d'après la réciproque du théorème de Thalès, (EF) // (BC)."
+    }
+   ]
+  },
+  {
+   "id": "bepc-maths-th-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "bepc-maths-thales",
+   "prompt": "À quoi sert principalement le théorème de Thalès ?",
+   "choices": [
+    "À calculer des longueurs quand deux droites sont parallèles",
+    "À démontrer qu'un triangle est rectangle",
+    "À calculer une aire",
+    "À démontrer que deux droites sont perpendiculaires"
+   ],
+   "answer": 0,
+   "explanation": "Quand (MN) // (BC), le théorème de Thalès donne des rapports égaux qui permettent de calculer des longueurs."
+  },
+  {
+   "id": "bepc-maths-th-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "bepc-maths-thales",
+   "prompt": "À quoi sert la réciproque du théorème de Thalès ?",
+   "choices": [
+    "À démontrer que deux droites sont parallèles",
+    "À calculer l'hypoténuse",
+    "À démontrer qu'un triangle est isocèle",
+    "À calculer un angle"
+   ],
+   "answer": 0,
+   "explanation": "Si les rapports sont égaux et les points alignés dans le même ordre, la réciproque permet de conclure au parallélisme."
+  },
+  {
+   "id": "bepc-maths-th-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "bepc-maths-thales",
+   "prompt": "M ∈ [AB], N ∈ [AC], (MN) // (BC) et $\\frac{AM}{AB} = \\frac{1}{2}$. Si BC = 10 cm, combien mesure MN ?",
+   "choices": [
+    "5 cm",
+    "20 cm",
+    "10 cm",
+    "2 cm"
+   ],
+   "answer": 0,
+   "explanation": "$\\frac{MN}{BC} = \\frac{1}{2}$, donc $MN = \\frac{10}{2} = 5$ cm."
+  },
+  {
+   "id": "bepc-maths-th-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "bepc-maths-thales",
+   "prompt": "Pour appliquer la réciproque du théorème de Thalès, il faut que les points soient :",
+   "choices": [
+    "Alignés dans le même ordre",
+    "Tous sur un cercle",
+    "Les sommets d'un triangle rectangle",
+    "À égale distance de A"
+   ],
+   "answer": 0,
+   "explanation": "A, M, B d'une part et A, N, C d'autre part doivent être alignés dans le même ordre, en plus de l'égalité des rapports."
+  },
+  {
+   "id": "bepc-maths-th-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "bepc-maths-thales",
+   "prompt": "M ∈ [AB], N ∈ [AC], (MN) // (BC), $\\frac{AN}{AC} = \\frac{3}{4}$ et AB = 8 cm. Combien mesure AM ?",
+   "choices": [
+    "6 cm",
+    "2 cm",
+    "10,7 cm",
+    "5 cm"
+   ],
+   "answer": 0,
+   "explanation": "$\\frac{AM}{AB} = \\frac{AN}{AC} = \\frac{3}{4}$, donc $AM = \\frac{3 \\times 8}{4} = 6$ cm."
+  }
+ ]
 }
