@@ -79,6 +79,19 @@
             android:launchMode="singleTop"
             android:screenOrientation="landscape"
             android:configChanges="orientation|screenSize|screenLayout|keyboard|keyboardHidden|navigation" />
+        <!-- Jeux (docs/GAMES.md): the games hub (home tile « Jeux ») and the Sudoku; no permission, no network -->
+        <activity
+            android:name=".GamesActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|screenSize|screenLayout|keyboard|keyboardHidden|navigation" />
+        <activity
+            android:name=".SudokuActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|screenSize|screenLayout|keyboard|keyboardHidden|navigation" />
         <!-- Apprendre (docs/LEARN.md): opened from the home tile or from the phone -->
         <activity
             android:name=".LearnActivity"

@@ -76,6 +76,7 @@ passerelle Bluetooth du téléphone est disponible (proxy SOCKS local possible).
 | `quiz_game` | `mode`, `duel` (format), `track`, `level`, `field`, `players`, `score`, `ms`, `jokers` | usage |
 | `quiz_answer` | `question` (id), `correct`, `ms` (temps de réponse) | usage |
 | `chess_game` | `mode`, `ai_level`, `time_control`, `result` = `win` \| `loss` \| `draw` \| `abandon`, `moves`, `ms` | usage |
+| `sudoku_game` | `level` = `EASY` \| `MEDIUM` \| `HARD` \| `EXPERT`, `ms` (temps de jeu), `result` = `win` \| `abandon`, `hints` (0-3) | usage |
 | `download` | `type` = `http` \| `magnet` \| `torrent`, `bytes`, `ms`, `ok`, `error` | usage |
 | `gateway_session` | `ms`, `bytes` (passerelle Internet Bluetooth) | usage |
 | `connectivity_check` | `via` = `wifi` \| `bluetooth` \| `ethernet` \| `wifidirect` \| `none`, `ok`, `latency_ms` | usage |

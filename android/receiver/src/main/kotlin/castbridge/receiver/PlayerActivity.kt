@@ -495,11 +495,9 @@ class PlayerActivity : Activity(), TvService.Screen {
             tile("learn", R.drawable.ic_t_learn, "Apprendre", "Leçons de la maternelle à la licence, exercices corrigés, préparer le CEP, le BEPC, le GCE, le Bac.", "Élèves", true) {
                 startActivity(Intent(this, LearnActivity::class.java))
             },
-            tile("quiz", R.drawable.ic_t_quiz, "Quiz", "Culture générale (70 % Cameroun) et niveaux scolaires, en solo ou avec les téléphones.", "Jouer", true) {
-                startActivity(Intent(this, QuizActivity::class.java))
-            },
-            tile("chess", R.drawable.ic_t_chess, "Échecs", "Contre l'ordinateur, à deux sur la TV ou avec les téléphones, avec compte à rebours.", "Jouer", true) {
-                startActivity(Intent(this, ChessActivity::class.java))
+            // Quiz, Échecs and Sudoku live in the « Jeux » hub (docs/GAMES.md); their public URLs (/quiz, /chess) are unchanged.
+            tile("games", R.drawable.ic_t_games, "Jeux", "Quiz des Millions, Échecs et Sudoku, en solo ou avec les téléphones.", "${Games.all.size} jeux", true) {
+                startActivity(Intent(this, GamesActivity::class.java))
             },
             tile("downloads", R.drawable.ic_t_update, "Téléchargements", "Télécharger sur la TV (liens, magnet, torrent) : les fichiers rejoignent la bibliothèque.", "aria2", false) {
                 startActivity(Intent(this, DownloadsActivity::class.java))
