@@ -35,6 +35,10 @@ class QuizRoom(
     private val asked: MutableSet<String> = LinkedHashSet(),
     /** Stakes of the « avec mise » competition: virtual demo tokens in the POC (see [WalletProvider]). */
     val wallet: WalletProvider = VirtualWallet(),
+    /** Anti-repetition histories (docs/QUIZ.md, Règle des 300 parties): the host's and those of the phones. In memory by default. */
+    val histories: QuizHistoryBook = QuizHistoryBook(null),
+    /** A question is not asked again to the same players before this many games of the same course, while the bank allows it. */
+    val minGapGames: Int = histories.gap,
 ) {
     enum class Mode(val label: String) { MILLIONAIRE("Millionnaire"), DUEL("Duel") }
     /** How the game is played: free competition, competition with a (virtual) stake, or practice without anything at stake. */
@@ -147,6 +151,38 @@ class QuizRoom(
     /** Playable questions for the current settings. */
     fun available(): Int = synchronized(lock) { bank.count(filter) }
 
+    /** Profiles whose histories apply to a game with the current settings: identified phones, or empty = the TV's host. */
+    private fun historyKeys(t: Long): List<String> {
+        fun stable(p: Player) = p.walletKey.startsWith("dev:")
+        return if (mode == Mode.MILLIONAIRE) listOfNotNull(candidate?.let { players[it] }?.takeIf { stable(it) }?.walletKey)
+        else players.values.filter { !it.left && isConnected(it, t) && stable(it) }.map { it.walletKey }
+    }
+
+    /** How fresh the bank is for [f] for whoever would play now (the phones connected in a Duel, else the TV): shown in the game choice. */
+    fun freshness(f: QuestionFilter = filter): QuizBank.Freshness = synchronized(lock) {
+        bank.remainingFresh(f, histories.viewFor(historyKeys(now())), minGapGames, if (mode == Mode.DUEL) duelCount else 15)
+    }
+
+    /** What the last draw had to do for a small bank (null before the first game or when it was perfect). */
+    @Volatile var lastDrawReport: QuizBank.DrawReport? = null; private set
+    private var gameKeys: List<String> = emptyList()
+    private var gameIds: List<String> = emptyList()
+    private var shownCount = 0
+
+    /** Notes the questions that were actually shown (a game lost at question 3 does not use up the other twelve). */
+    private fun noteShown() {
+        if (gameIds.isEmpty()) return
+        val upto = when {
+            game != null -> game!!.index + 1
+            duel != null -> duel!!.index + 1
+            else -> return
+        }.coerceAtMost(gameIds.size)
+        if (upto <= shownCount) return
+        val ids = gameIds.subList(shownCount, upto)
+        shownCount = upto
+        for (k in gameKeys) { histories.profile(k).record(filter.courseKey, ids); histories.save(k) }
+    }
+
     fun setCandidate(playerId: String?): Boolean = synchronized(lock) {
         if (stage == Stage.PLAYING || (playerId != null && players[playerId]?.left != false)) return false
         candidate = playerId; host(); true
@@ -165,15 +201,13 @@ class QuizRoom(
         val present = players.values.filter { !it.left }
         if (mode == Mode.DUEL && present.none { isConnected(it, t) }) return "Aucun joueur connecté : il faut au moins un téléphone pour le duel."
         if (mode == Mode.MILLIONAIRE) {
-            val qs = bank.draw(15, seed, asked, filter)
-            asked += qs.map { it.id }
+            val qs = draw(15, seed)
             val practice = play == Play.PRACTICE
             game = QuizGame(qs, timers = if (practice) QuizGame.NO_TIMERS else gameTimers, seed = seed, practice = practice).also { it.start(t) }
             duel = null
             if (candidate != null && players[candidate]?.left != false) candidate = null
         } else {
-            val qs = bank.draw(duelCount, seed, asked, filter)
-            asked += qs.map { it.id }
+            val qs = draw(duelCount, seed)
             val window = minOf(duelQuestionMs, duelSeconds * 1000L, QuizGame.MAX_SECONDS * 1000L)   // 20 s max, practice included
             duel = QuizDuel(qs, questionMs = window, revealMs = if (play == Play.PRACTICE) 10_000 else 6_000, format = duelFormat)
                 .also { d -> present.forEach { d.addPlayer(it.id) }; d.start(t) }
@@ -187,6 +221,18 @@ class QuizRoom(
             potGame = id
         } else { stakers = emptySet(); pot = 0; potGame = null }
         stage = Stage.PLAYING; host(); null
+    }
+
+    /** Draws with the players' history (union of the connected phones, else the host's) and opens a game in each of their histories. */
+    private fun draw(count: Int, seed: Long): List<Question> {
+        val t = now()
+        val keys = historyKeys(t).ifEmpty { listOf(QuizHistoryBook.HOST) }
+        val view = histories.viewFor(keys.filter { it != QuizHistoryBook.HOST })
+        val d = bank.drawDetailed(count, seed, asked, filter, history = view, minGapGames = minGapGames)
+        lastDrawReport = d.report.takeUnless { it.clean }
+        gameKeys = keys; gameIds = d.questions.map { it.id }; shownCount = 0
+        for (k in keys) histories.profile(k).beginGame(filter.courseKey)
+        return d.questions
     }
 
     /** Pays the pot out at the end of a staked Duel, or gives the stakes back if the game did not finish. */
@@ -349,6 +395,7 @@ class QuizRoom(
     // ---------------------------------------------------------------- change notification
 
     private fun changed() {
+        runCatching { noteShown() }
         version++
         lock.notifyAll()
         runCatching { onChange?.invoke() }
@@ -389,6 +436,7 @@ class QuizRoom(
             "maxPlayers" to maxPlayers,
             "settings" to linkedMapOf("mode" to mode.name, "play" to play.name, "playLabel" to play.label, "track" to filter.track.key,
                 "level" to filter.level, "field" to filter.field, "label" to filter.label, "stake" to (if (play == Play.STAKE) stake else 0),
+                "repeats" to lastDrawReport?.let { linkedMapOf("count" to it.repeats, "shortestGap" to it.shortestGap, "quotaBroken" to it.quotaBroken) },
                 "virtualTokens" to wallet.virtual, "tokens" to (if (wallet.virtual) TOKENS_LABEL else wallet.unit)),
             "pot" to (if (play == Play.STAKE) linkedMapOf("stake" to stake, "total" to pot, "stakers" to stakers.toList(), "payouts" to payouts) else null),
             "me" to me?.let { linkedMapOf("id" to it.id, "name" to it.name, "role" to role, "score" to (d?.score(it.id) ?: 0),

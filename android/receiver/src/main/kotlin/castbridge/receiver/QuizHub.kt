@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.Context
 import castbridge.core.quiz.CachedQuestionSource
 import castbridge.core.quiz.QuestionSource
+import castbridge.core.quiz.QuizHistoryBook
 import castbridge.core.quiz.VirtualWallet
 import castbridge.core.quiz.QuizHttp
 import castbridge.core.quiz.QuizRoom
@@ -24,6 +25,11 @@ object QuizHub {
     /** Demo tokens only (no real money): see docs/QUIZ.md, « Mise payante ». */
     private val wallet = VirtualWallet()
     @Volatile private var source: CachedQuestionSource? = null
+    /** Anti-repetition histories (the TV's own + one per phone), in files/quiz/history: see docs/QUIZ.md, Règle des 300 parties. */
+    @Volatile private var histories: QuizHistoryBook? = null
+    fun historyBook(ctx: Context): QuizHistoryBook = histories ?: synchronized(this) {
+        histories ?: QuizHistoryBook(File(ctx.applicationContext.filesDir, "quiz/history")).also { histories = it }
+    }
 
     /**
      * Bundled questions, plus those received from the CastBridge server (QuizSync, daily or « Mettre à jour les questions »)
@@ -39,7 +45,7 @@ object QuizHub {
     /** Opens a fresh room (new code), closing the previous one. */
     @Synchronized fun open(ctx: Context): QuizRoom {
         room?.close()
-        return QuizRoom(source(ctx).bank(), asked = asked, wallet = wallet).also { room = it }
+        return QuizRoom(source(ctx).bank(), asked = asked, wallet = wallet, histories = historyBook(ctx)).also { room = it }
     }
 
     @Synchronized fun close(r: QuizRoom?) {
