@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Charte CastBridge : fond #0A0F1E (design-tokens.json, color.dark.background). -->
+    <color name="cb_background">#0A0F1E</color>
+    <!-- Thème de l'app TV (plein écran, noir derrière la vidéo). -->
+    <style name="Theme.CastBridge.Tv" parent="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
+    <!-- Thème de lancement uniquement : l'activité repasse sur Theme.CastBridge.Tv dès onCreate (setTheme). Avant Android 12 :
+         fond de la charte + symbole ; Android 12+ : écran de lancement système (voir values-v31). -->
+    <style name="Theme.CastBridge.Tv.Splash" parent="Theme.CastBridge.Tv">
+        <item name="android:windowBackground">@drawable/splash_window</item>
+    </style>
+</resources>

@@ -177,7 +177,7 @@ class UploadService : Service() {
                 val open = android.app.PendingIntent.getActivity(this, 2, Intent(this, MainActivity::class.java)
                     .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP), android.app.PendingIntent.FLAG_IMMUTABLE)
                 getSystemService(NotificationManager::class.java).notify(NOTIF_MOVE, Notification.Builder(this, CHANNEL)
-                    .setSmallIcon(android.R.drawable.stat_sys_upload_done).setContentTitle("« ${job.fileName} » est sur la TV")
+                    .setSmallIcon(R.drawable.ic_stat_castbridge).setContentTitle("« ${job.fileName} » est sur la TV")
                     .setContentText("Touchez pour le retirer du téléphone").setAutoCancel(true).setContentIntent(open).build())
             }
         } else _moveNote.value = "« ${job.fileName} » est envoyé mais la TV n'a pas confirmé une copie complète : il reste sur le téléphone."
@@ -222,7 +222,7 @@ class UploadService : Service() {
         val cancel = android.app.PendingIntent.getService(this, 1,
             Intent(this, UploadService::class.java).setAction(ACTION_CANCEL), android.app.PendingIntent.FLAG_IMMUTABLE)
         return Notification.Builder(this, CHANNEL).setContentTitle("CastBridge").setContentText(text)
-            .setSmallIcon(android.R.drawable.stat_sys_upload).setOngoing(true).setOnlyAlertOnce(true)
+            .setSmallIcon(R.drawable.ic_stat_castbridge).setOngoing(true).setOnlyAlertOnce(true)
             .setProgress(100, pct, false)
             .addAction(Notification.Action.Builder(null, "Annuler", cancel).build()).build()
     }

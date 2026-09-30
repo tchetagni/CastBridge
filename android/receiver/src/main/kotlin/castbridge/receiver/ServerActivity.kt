@@ -112,7 +112,11 @@ class ServerActivity : Activity() {
         target?.requestFocus()
     }
 
-    private fun title(s: String) = leftCol.addView(TextView(this).apply { text = s; textSize = 28f; typeface = Typeface.DEFAULT_BOLD; setTextColor(Color.WHITE) })
+    private fun title(s: String) {
+        if (leftCol.childCount == 0) leftCol.addView(TvStyle.logo(this, R.drawable.logo_castbridge_tv_horizontal, 44).apply {
+            contentDescription = "CastBridge TV"; (layoutParams as LinearLayout.LayoutParams).bottomMargin = dp(8) })
+        leftCol.addView(TextView(this).apply { text = s; textSize = 28f; typeface = Typeface.DEFAULT_BOLD; setTextColor(Color.WHITE) })
+    }
     private fun para(s: String, head: String? = null) {
         if (head != null) leftCol.addView(TextView(this).apply { text = head; textSize = 18f; typeface = Typeface.DEFAULT_BOLD; setTextColor(TvStyle.ACCENT); setPadding(0, dp(14), 0, 0) })
         leftCol.addView(TextView(this).apply { text = s; textSize = 16f; setTextColor(0xFFDDE3EA.toInt()); setPadding(0, dp(if (head == null) 12 else 4), 0, 0); setLineSpacing(0f, 1.1f) })

@@ -263,10 +263,11 @@ class QuizActivity : Activity() {
             val compact = choices.size > 5
             view = column().apply {
                 setPadding(dpi(40), dpi(20), dpi(40), dpi(16))
-                addView(quizText(context, title, if (step == "home") 46f else 36f, QuizColors.GOLD, true).apply {
-                    gravity = Gravity.CENTER
-                    if (step == "home") setShadowLayer(dp(6f), 0f, 0f, 0x99FFC53D.toInt())
-                }, lp())
+                if (step == "home") {
+                    // the wordmark of the sub-brand (branding/logo/quiz-des-millions-horizontal) replaces the text title
+                    addView(TvStyle.logo(context, R.drawable.logo_quiz_des_millions_horizontal, 84).apply { contentDescription = title; scaleType = android.widget.ImageView.ScaleType.FIT_CENTER },
+                        lp(h = dpi(84)))
+                } else addView(quizText(context, title, 36f, QuizColors.GOLD, true).apply { gravity = Gravity.CENTER }, lp())
                 if (sub != null) addView(quizText(context, sub, 21f, QuizColors.TEXT).apply { gravity = Gravity.CENTER }, lp(t = 6, b = 18))
                 val perRow = if (compact) 6 else if (step == "home" || choices.size == 4) 2 else 1
                 var line: LinearLayout? = null

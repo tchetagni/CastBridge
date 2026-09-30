@@ -1,5 +1,7 @@
 package castbridge.sender
 
+import androidx.annotation.DrawableRes
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -13,9 +15,36 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.luminance
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+
+/** A logo of the charte (VectorDrawable generated from branding/logo), [height] high, width from its own aspect ratio. */
+@Composable
+fun CbLogo(@DrawableRes res: Int, height: Dp, modifier: Modifier = Modifier, description: String? = null) =
+    Image(painterResource(res), description, modifier.height(height), contentScale = ContentScale.Fit)
+
+/** « CastBridge » wordmark + symbol, in the variant that reads on the current theme (dark or light background). */
+@Composable
+fun CastBridgeLogo(height: Dp, modifier: Modifier = Modifier) =
+    CbLogo(if (MaterialTheme.colorScheme.background.luminance() < 0.5f) R.drawable.logo_castbridge_logo_horizontal else R.drawable.logo_castbridge_logo_horizontal_light,
+        height, modifier, "CastBridge")
+
+/** An icon of the charte (branding/icons, 24 grid, 1.8 stroke), tinted like any [Icon]. */
+@Composable
+fun CbIcon(@DrawableRes res: Int, description: String? = null, modifier: Modifier = Modifier, tint: Color = LocalContentColor.current) =
+    Icon(painterResource(res), description, modifier, tint)
+
+/** Thin band with the sub-brand's own logo (its palette is part of the logo, the rest of the screen stays in the app theme). */
+@Composable
+fun SubBrandHeader(@DrawableRes logo: Int, name: String) {
+    Box(Modifier.fillMaxWidth().background(MaterialTheme.colorScheme.surface).padding(horizontal = 16.dp, vertical = 6.dp)) {
+        CbLogo(logo, 40.dp, description = name)
+    }
+}
 
 fun fmtTime(ms: Long): String {
     val s = ms / 1000

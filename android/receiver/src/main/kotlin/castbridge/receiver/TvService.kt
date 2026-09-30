@@ -143,7 +143,7 @@ class TvService : Service(), Device {
         nm.createNotificationChannel(NotificationChannel(CH_SERVICE, "CastBridge TV actif", NotificationManager.IMPORTANCE_MIN))
         val open = PendingIntent.getActivity(this, 0, Intent(this, PlayerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), PendingIntent.FLAG_IMMUTABLE)
         return Notification.Builder(this, CH_SERVICE).setContentTitle("CastBridge TV actif").setContentText(text)
-            .setSmallIcon(android.R.drawable.stat_sys_download_done).setOngoing(true).setContentIntent(open).build()
+            .setSmallIcon(R.drawable.ic_stat_castbridge).setOngoing(true).setContentIntent(open).build()
     }
 
     // ------------------------------------------------------------------ core
@@ -370,7 +370,7 @@ class TvService : Service(), Device {
         nm.createNotificationChannel(NotificationChannel(CH_LAUNCH, "Demandes du téléphone", NotificationManager.IMPORTANCE_HIGH))
         val pi = PendingIntent.getActivity(this, 1, Intent(intent).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
         val b = Notification.Builder(this, CH_LAUNCH).setContentTitle("CastBridge TV").setContentText(what)
-            .setSmallIcon(android.R.drawable.ic_media_play).setContentIntent(pi).setAutoCancel(true).setCategory(Notification.CATEGORY_CALL)
+            .setSmallIcon(R.drawable.ic_stat_castbridge).setContentIntent(pi).setAutoCancel(true).setCategory(Notification.CATEGORY_CALL)
         if (fullScreen) b.setFullScreenIntent(pi, true)
         nm.notify(NOTIF_LAUNCH, b.build())
         true

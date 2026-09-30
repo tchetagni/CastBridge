@@ -130,7 +130,7 @@ class BtSshGatewayService : Service() {
         nm.createNotificationChannel(NotificationChannel(CHANNEL, "Passerelle SSH Bluetooth", NotificationManager.IMPORTANCE_LOW))
         val stop = PendingIntent.getService(this, 4, Intent(this, BtSshGatewayService::class.java).setAction(ACTION_STOP), PendingIntent.FLAG_IMMUTABLE)
         return Notification.Builder(this, CHANNEL).setContentTitle("CastBridge").setContentText(text)
-            .setSmallIcon(android.R.drawable.stat_sys_data_bluetooth).setOngoing(true)
+            .setSmallIcon(R.drawable.ic_stat_castbridge).setOngoing(true)
             .addAction(Notification.Action.Builder(null, "Arrêter", stop).build()).build()
     }
 

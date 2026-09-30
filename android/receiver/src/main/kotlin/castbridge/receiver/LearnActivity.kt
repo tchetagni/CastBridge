@@ -127,6 +127,7 @@ class LearnActivity : Activity() {
         val root = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(st.px(48), st.px(24), st.px(48), st.px(16)); clipChildren = true }
         val head = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER_VERTICAL }
         val titles = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
+        head.addView(TvStyle.logo(this, R.drawable.logo_apprendre, 52).apply { contentDescription = "Apprendre"; (layoutParams as LinearLayout.LayoutParams).rightMargin = st.px(16) })
         titles.addView(st.text(title, 30f, Color.WHITE, true, 1))
         sub?.let { titles.addView(st.text(it, 19f, LearnStyle.MUTED, false, 1)) }
         head.addView(titles, LinearLayout.LayoutParams(0, -2, 1f))

@@ -89,6 +89,7 @@ class PlayerActivity : Activity(), TvService.Screen {
     private var current: File? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Theme_CastBridge_Tv) // leaves the launch theme (splash) for the normal one
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_player)
         lead = findViewById(R.id.lead)
@@ -491,25 +492,25 @@ class PlayerActivity : Activity(), TvService.Screen {
         val wdOn = prefs.getBool("wd_enabled", false)
         val sshOn = ssh?.running == true
         return listOf(
-            tile("library", R.drawable.ic_t_library, "Bibliothèque", "Toutes vos vidéos et vos fichiers, en grille.", "${server?.libraryItems()?.size ?: 0} fichier(s)", false) { showLibrary() },
-            tile("learn", R.drawable.ic_t_learn, "Apprendre", "Leçons de la maternelle à la licence, exercices corrigés, préparer le CEP, le BEPC, le GCE, le Bac.", "Élèves", true) {
+            tile("library", R.drawable.ic_cb_bibliotheque, "Bibliothèque", "Toutes vos vidéos et vos fichiers, en grille.", "${server?.libraryItems()?.size ?: 0} fichier(s)", false) { showLibrary() },
+            tile("learn", R.drawable.ic_cb_apprendre, "Apprendre", "Leçons de la maternelle à la licence, exercices corrigés, préparer le CEP, le BEPC, le GCE, le Bac.", "Élèves", true) {
                 startActivity(Intent(this, LearnActivity::class.java))
             },
-            tile("quiz", R.drawable.ic_t_quiz, "Quiz", "Culture générale (70 % Cameroun) et niveaux scolaires, en solo ou avec les téléphones.", "Jouer", true) {
+            tile("quiz", R.drawable.ic_cb_quiz, "Quiz", "Culture générale (70 % Cameroun) et niveaux scolaires, en solo ou avec les téléphones.", "Jouer", true) {
                 startActivity(Intent(this, QuizActivity::class.java))
             },
-            tile("chess", R.drawable.ic_t_chess, "Échecs", "Contre l'ordinateur, à deux sur la TV ou avec les téléphones, avec compte à rebours.", "Jouer", true) {
+            tile("chess", R.drawable.ic_cb_echecs, "Échecs", "Contre l'ordinateur, à deux sur la TV ou avec les téléphones, avec compte à rebours.", "Jouer", true) {
                 startActivity(Intent(this, ChessActivity::class.java))
             },
-            tile("downloads", R.drawable.ic_t_update, "Téléchargements", "Télécharger sur la TV (liens, magnet, torrent) : les fichiers rejoignent la bibliothèque.", "aria2", false) {
+            tile("downloads", R.drawable.ic_cb_telechargements, "Téléchargements", "Télécharger sur la TV (liens, magnet, torrent) : les fichiers rejoignent la bibliothèque.", "aria2", false) {
                 startActivity(Intent(this, DownloadsActivity::class.java))
             },
-            tile("remote", R.drawable.ic_t_remote, "Télécommande", "Piloter la TV avec le téléphone ; option « toute la TV » (accessibilité).",
+            tile("remote", R.drawable.ic_cb_telecommande, "Télécommande", "Piloter la TV avec le téléphone ; option « toute la TV » (accessibilité).",
                 if (RemoteAccessibilityService.instance != null) "Toute la TV" else "CastBridge", RemoteAccessibilityService.instance != null) {
                 startActivity(Intent(this, RemoteSetupActivity::class.java))
             },
-            tile("receive", R.drawable.ic_t_cast, "Recevoir du téléphone", "Envoyer une vidéo depuis l'app CastBridge du téléphone.", "Code $pin", true) { homeApi().openHelp() },
-            tile("usb", R.drawable.ic_t_usb, "Clé USB", "Importer des vidéos d'une clé, ou y ranger les nouvelles.",
+            tile("receive", R.drawable.ic_cb_recevoir_du_telephone, "Recevoir du téléphone", "Envoyer une vidéo depuis l'app CastBridge du téléphone.", "Code $pin", true) { homeApi().openHelp() },
+            tile("usb", R.drawable.ic_cb_cle_usb, "Clé USB", "Importer des vidéos d'une clé, ou y ranger les nouvelles.",
                 if (drives.isEmpty()) "Aucune clé" else drives.joinToString { "${it.label} · ${it.free / (1L shl 30)} Go libres" }, drives.isNotEmpty()) {
                 choose("Clé USB", listOf<Pair<String, () -> Unit>>(
                     "Importer les vidéos des clés détectées" to { usbMessage(usb?.importFromVolumes()) },
@@ -519,15 +520,15 @@ class PlayerActivity : Activity(), TvService.Screen {
                     "Réglages de stockage de la TV" to { s?.openStorageSettings()?.let { flash(it) } },
                 ) + (if (usb?.isRunning() == true) listOf<Pair<String, () -> Unit>>("Annuler l'import en cours" to { usb.cancel() }) else emptyList()))
             },
-            tile("bluetooth", R.drawable.ic_t_bluetooth, "Bluetooth", "Recevoir des fichiers et partager l'Internet du téléphone sans réseau commun.",
+            tile("bluetooth", R.drawable.ic_cb_bluetooth, "Bluetooth", "Recevoir des fichiers et partager l'Internet du téléphone sans réseau commun.",
                 st["1-bt"]?.substringAfter(": ")?.take(28) ?: "Désactivé", btOk) {
                 choose("Bluetooth", listOf<Pair<String, () -> Unit>>("Rendre la TV visible (2 min) pour l'appairer" to { makeDiscoverable() }))
             },
-            tile("internet", R.drawable.ic_t_internet, "Internet", "Connectivité de la TV (Wi-Fi/Ethernet) et de la passerelle Bluetooth du téléphone : état et tests.",
+            tile("internet", R.drawable.ic_cb_test_internet, "Internet", "Connectivité de la TV (Wi-Fi/Ethernet) et de la passerelle Bluetooth du téléphone : état et tests.",
                 s?.takeIf { it.netCheckedAt > 0 }?.netSummary()?.take(34) ?: "Vérification…",
                 s?.netDirectMs != null || s?.netGatewayMs != null) { internetMenu() },
-            tile("wifi_direct", R.drawable.ic_t_wifidirect, "Wi-Fi Direct", "Un réseau direct TV ↔ téléphone, sans box.", if (wdOn) "Activé" else "Désactivé", wdOn) { toggleWifiDirect() },
-            tile("admin", R.drawable.ic_t_terminal, "Administration", "Page web et SSH pour gérer la TV à distance.",
+            tile("wifi_direct", R.drawable.ic_cb_wifi_direct, "Wi-Fi Direct", "Un réseau direct TV ↔ téléphone, sans box.", if (wdOn) "Activé" else "Désactivé", wdOn) { toggleWifiDirect() },
+            tile("admin", R.drawable.ic_cb_administration, "Administration", "Page web et SSH pour gérer la TV à distance.",
                 if (sshOn) "SSH actif" else "SSH arrêté", sshOn) {
                 choose("Administration à distance", listOf<Pair<String, () -> Unit>>(
                     (if (sshOn) "Désactiver SSH" else "Activer SSH (clés autorisées seulement)") to {
@@ -537,11 +538,11 @@ class PlayerActivity : Activity(), TvService.Screen {
                     "Adresse de la page web" to { flash("Ouvrez http://${TvService.localIp() ?: "?"}:${ReceiverServer.PORT} — code $pin") },
                 ))
             },
-            tile("updates", R.drawable.ic_t_update, "Mises à jour", "Mises à jour automatiques depuis le serveur CastBridge : dernière vérification, version disponible, installer.",
+            tile("updates", R.drawable.ic_cb_mises_a_jour, "Mises à jour", "Mises à jour automatiques depuis le serveur CastBridge : dernière vérification, version disponible, installer.",
                 updateStatus(), TvConnect.link?.update?.manifest != null) { ServerActivity.open(this, ServerActivity.MODE_UPDATES) },
-            tile("settings", R.drawable.ic_t_settings, "Connexion & réglages", "Code, adresse, démarrage avec la TV, lecture à distance…", null, false) { showSettings() },
-            tile("dev_options", R.drawable.ic_t_dev, "Options développeur", "Débogage USB / Wi-Fi de la TV.", null, false) { flash(openDevSettings()) },
-            tile("help", R.drawable.ic_t_help, "Aide", "Comment envoyer une vidéo depuis le téléphone.", null, false) { homeApi().openHelp() },
+            tile("settings", R.drawable.ic_cb_reglages, "Connexion & réglages", "Code, adresse, démarrage avec la TV, lecture à distance…", null, false) { showSettings() },
+            tile("dev_options", R.drawable.ic_cb_options_developpeur, "Options développeur", "Débogage USB / Wi-Fi de la TV.", null, false) { flash(openDevSettings()) },
+            tile("help", R.drawable.ic_cb_aide, "Aide", "Comment envoyer une vidéo depuis le téléphone.", null, false) { homeApi().openHelp() },
         )
     }
 
@@ -698,7 +699,7 @@ class PlayerActivity : Activity(), TvService.Screen {
     private fun showNetBadge(text: String?) {
         val b = findViewById<TextView>(R.id.netBadge) ?: return
         if (text == null) { b.animate().alpha(0f).setDuration(300).withEndAction { b.visibility = View.GONE }; return }
-        b.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_net_bt, 0, 0, 0)
+        b.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_cb_passerelle_bluetooth, 0, 0, 0)
         b.text = text.replace("Internet via le téléphone", "Internet via")
         if (b.visibility != View.VISIBLE) { b.alpha = 0f; b.visibility = View.VISIBLE; b.animate().alpha(1f).setDuration(300) }
     }

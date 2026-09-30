@@ -147,7 +147,7 @@ class TvDownloads private constructor(private val app: Context, @Volatile privat
     private fun notifyDone(name: String, where: String) = runCatching {
         val nm = app.getSystemService(NotificationManager::class.java)
         ensureChannel(app)
-        val n = Notification.Builder(app, CHANNEL).setSmallIcon(android.R.drawable.stat_sys_download_done)
+        val n = Notification.Builder(app, CHANNEL).setSmallIcon(R.drawable.ic_stat_castbridge)
             .setContentTitle("Téléchargement terminé").setContentText("$name ($where)").setAutoCancel(true).build()
         nm.notify(name.hashCode(), n)
     }
@@ -191,7 +191,7 @@ class DownloadService : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         TvDownloads.ensureChannel(this)
-        val n = Notification.Builder(this, TvDownloads.CHANNEL).setSmallIcon(android.R.drawable.stat_sys_download)
+        val n = Notification.Builder(this, TvDownloads.CHANNEL).setSmallIcon(R.drawable.ic_stat_castbridge)
             .setContentTitle("CastBridge TV").setContentText("Téléchargements en cours").setOngoing(true).build()
         runCatching {
             if (Build.VERSION.SDK_INT >= 29) startForeground(NOTIF_ID, n, ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC)

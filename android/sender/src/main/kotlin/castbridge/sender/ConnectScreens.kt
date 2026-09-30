@@ -116,6 +116,8 @@ fun SettingsScreen(onClose: () -> Unit) {
                 TopAppBar(title = { Text("Réglages") }, navigationIcon = { IconButton(onClose) { Icon(Icons.Filled.ArrowBack, "Retour") } },
                     colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.surface))
                 Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                    AboutSection()
+                    HorizontalDivider()
                     PrivacySection(v)
                     HorizontalDivider()
                     UpdatesSection(v)
@@ -126,6 +128,16 @@ fun SettingsScreen(onClose: () -> Unit) {
                 }
             }
         }
+    }
+}
+
+/** « À propos »: the logo, the version and the tagline of the charte. */
+@Composable
+private fun AboutSection() {
+    Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+        CastBridgeLogo(48.dp)
+        Text("Le pont simple entre vos écrans", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Text("Version ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
     }
 }
 

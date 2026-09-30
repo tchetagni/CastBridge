@@ -28,6 +28,7 @@ import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Theme_CastBridge) // leaves the launch theme (splash) for the normal one
         super.onCreate(savedInstanceState)
         setContent { CastTheme { Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) { Gate() } } }
         installFrom(intent)
@@ -84,24 +85,34 @@ class MainActivity : ComponentActivity() {
             topBar = {
                 Column {
                     TopAppBar(
-                        title = { Text("CastBridge") },
-                        navigationIcon = { Icon(Icons.Filled.Cast, null, Modifier.padding(start = 16.dp, end = 8.dp), tint = MaterialTheme.colorScheme.primary) },
-                        actions = { IconButton({ settings = true }) { Icon(Icons.Filled.Settings, "Réglages") } },
+                        title = { CastBridgeLogo(32.dp) },
+                        actions = { IconButton({ settings = true }) { CbIcon(R.drawable.ic_cb_reglages, "Réglages") } },
                         colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.surface),
                     )
                     // scrollable: four tabs never squeeze or wrap their labels on a narrow phone
                     ScrollableTabRow(selectedTabIndex = tab, containerColor = MaterialTheme.colorScheme.surface, edgePadding = 0.dp) {
-                        Tab(tab == 0, onClick = { select(0) }, text = { Text("TV DLNA", maxLines = 1) })
-                        Tab(tab == 1, onClick = { select(1) }, text = { Text("CastBridge TV", maxLines = 1) })
-                        Tab(tab == 2, onClick = { select(2) }, text = { Text("Quiz", maxLines = 1) })
-                        Tab(tab == 3, onClick = { select(3) }, text = { Text("Échecs", maxLines = 1) })
-                        Tab(tab == 4, onClick = { select(4) }, text = { Text("Sur le téléphone", maxLines = 1) })
-                        Tab(tab == 5, onClick = { select(5) }, text = { Text("Apprendre", maxLines = 1) })
+                        val ic = Modifier.size(20.dp)
+                        LeadingIconTab(tab == 0, onClick = { select(0) }, text = { Text("TV DLNA", maxLines = 1) }, icon = { CbIcon(R.drawable.ic_cb_caster, null, ic) })
+                        LeadingIconTab(tab == 1, onClick = { select(1) }, text = { Text("CastBridge TV", maxLines = 1) }, icon = { CbIcon(R.drawable.ic_cb_recevoir_du_telephone, null, ic) })
+                        LeadingIconTab(tab == 2, onClick = { select(2) }, text = { Text("Quiz", maxLines = 1) }, icon = { CbIcon(R.drawable.ic_cb_quiz, null, ic) })
+                        LeadingIconTab(tab == 3, onClick = { select(3) }, text = { Text("Échecs", maxLines = 1) }, icon = { CbIcon(R.drawable.ic_cb_echecs, null, ic) })
+                        LeadingIconTab(tab == 4, onClick = { select(4) }, text = { Text("Sur le téléphone", maxLines = 1) }, icon = { CbIcon(R.drawable.ic_cb_sur_le_telephone, null, ic) })
+                        LeadingIconTab(tab == 5, onClick = { select(5) }, text = { Text("Apprendre", maxLines = 1) }, icon = { CbIcon(R.drawable.ic_cb_apprendre, null, ic) })
                     }
                 }
             },
             bottomBar = { castbridge.sender.player.CastMiniBar(Modifier.navigationBarsPadding()) },
-        ) { pad -> Box(Modifier.padding(pad).fillMaxSize()) { when (tab) { 0 -> App(); 1 -> TvHub(); 2 -> QuizScreen(); 3 -> ChessScreen(); 4 -> castbridge.sender.player.PhoneLibraryScreen(); else -> LearnScreen() } } }
+        ) { pad ->
+            Column(Modifier.padding(pad).fillMaxSize()) {
+                // sub-brand wordmark (branding/logo) above the screens of the Quiz, Échecs and Apprendre tabs
+                when (tab) {
+                    2 -> SubBrandHeader(R.drawable.logo_quiz_des_millions_horizontal, "Quiz des Millions")
+                    3 -> SubBrandHeader(R.drawable.logo_echecs_horizontal, "Échecs")
+                    5 -> SubBrandHeader(R.drawable.logo_apprendre_horizontal, "Apprendre")
+                }
+                Box(Modifier.weight(1f).fillMaxWidth()) { when (tab) { 0 -> App(); 1 -> TvHub(); 2 -> QuizScreen(); 3 -> ChessScreen(); 4 -> castbridge.sender.player.PhoneLibraryScreen(); else -> LearnScreen() } }
+            }
+        }
         MoveHandler()
         if (settings) SettingsScreen { settings = false }
     }

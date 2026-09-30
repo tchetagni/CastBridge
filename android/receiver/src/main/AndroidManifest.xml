@@ -36,11 +36,13 @@
         android:name=".TvApp"
         android:label="CastBridge TV"
         android:banner="@drawable/banner"
-        android:icon="@drawable/banner"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true"
-        android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
+        android:theme="@style/Theme.CastBridge.Tv">
         <activity
             android:name=".PlayerActivity"
+            android:theme="@style/Theme.CastBridge.Tv.Splash"
             android:exported="true"
             android:launchMode="singleTask"
             android:screenOrientation="landscape"

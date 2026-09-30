@@ -51,7 +51,7 @@ def vector(width, height, viewport, children):
     return (
         '<?xml version="1.0" encoding="utf-8"?>\n'
         f'<vector xmlns:android="http://schemas.android.com/apk/res/android"\n'
-        f'    android:width="{width}" android:height="{height}"\n'
+        f'    android:width="{width}dp" android:height="{height}dp"\n'
         f'    android:viewportWidth="{viewport}" android:viewportHeight="{viewport}">\n'
         f"{children}\n</vector>\n"
     )

@@ -87,7 +87,7 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
         // scroll area drew its scrolled-out rows over the title (texts piled up while scrolling on 720p TVs).
         val content = LinearLayout(act).apply { orientation = LinearLayout.VERTICAL; setPadding(dp(56), dp(28), dp(40), 0); clipChildren = true }
         val top = LinearLayout(act).apply { orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER_VERTICAL }
-        top.addView(TextView(act).apply { text = "CastBridge"; textSize = 26f; typeface = Typeface.DEFAULT_BOLD; setTextColor(TvStyle.ACCENT) })
+        top.addView(TvStyle.logo(act, R.drawable.logo_castbridge_tv_horizontal, 52).apply { contentDescription = "CastBridge TV" })
         top.addView(View(act), LinearLayout.LayoutParams(0, 1, 1f))
         top.addView(chip, LinearLayout.LayoutParams(-2, -2).apply { rightMargin = dp(20) })
         top.addView(TextClock(act).apply { format24Hour = "HH:mm"; format12Hour = "HH:mm"; textSize = 30f; setTextColor(Color.WHITE) })
@@ -194,9 +194,9 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
     private fun fillTools(box: LinearLayout) {
         val w = dp(170)
         val list = api.tools().ifEmpty {
-            listOf(HomeTool(R.drawable.ic_t_library, "Bibliothèque", "Toutes vos vidéos et vos fichiers, en grille.", null, false) { api.openLibrary() },
-                HomeTool(R.drawable.ic_t_settings, "Connexion & réglages", "Code, adresse, Bluetooth, stockage…", null, false) { api.openSettings() },
-                HomeTool(R.drawable.ic_t_help, "Aide", "Comment envoyer une vidéo depuis le téléphone.", null, false) { api.openHelp() })
+            listOf(HomeTool(R.drawable.ic_cb_bibliotheque, "Bibliothèque", "Toutes vos vidéos et vos fichiers, en grille.", null, false) { api.openLibrary() },
+                HomeTool(R.drawable.ic_cb_reglages, "Connexion & réglages", "Code, adresse, Bluetooth, stockage…", null, false) { api.openSettings() },
+                HomeTool(R.drawable.ic_cb_aide, "Aide", "Comment envoyer une vidéo depuis le téléphone.", null, false) { api.openHelp() })
         }
         toolsSig = list.joinToString("|") { "${it.label}:${it.status}:${it.on}" }
         val focusedIndex = (0 until box.childCount).firstOrNull { box.getChildAt(it).hasFocus() }
@@ -282,6 +282,9 @@ class SettingsPanel(private val act: Activity, private val container: FrameLayou
             orientation = LinearLayout.HORIZONTAL; setBackgroundColor(0xF20E1116.toInt()); setPadding(dp(56), dp(40), dp(56), dp(30))
         }
         val left = LinearLayout(act).apply { orientation = LinearLayout.VERTICAL }
+        left.addView(TvStyle.logo(act, R.drawable.logo_castbridge_tv_horizontal, 48).apply { contentDescription = "CastBridge TV"
+            (layoutParams as LinearLayout.LayoutParams).bottomMargin = dp(4) })
+        left.addView(TextView(act).apply { text = "À propos · version ${BuildConfig.VERSION_NAME} · code ${BuildConfig.VERSION_CODE}"; textSize = 14f; setTextColor(TvStyle.MUTED); setPadding(0, 0, 0, dp(8)) })
         left.addView(TextView(act).apply { text = "Connexion & réglages"; textSize = 30f; typeface = Typeface.DEFAULT_BOLD; setTextColor(Color.WHITE) })
         for ((k, v) in info) {
             left.addView(TextView(act).apply { text = k; textSize = 14f; setTextColor(TvStyle.MUTED); setPadding(0, dp(14), 0, 0) })

@@ -37,6 +37,12 @@ object TvStyle {
     const val MUTED = 0xFFA8AEB8.toInt()
     const val GOOD = 0xFF2E7D32.toInt()
 
+    /** A logo of the charte (VectorDrawable of branding/logo), [heightDp] high, width from its own aspect ratio. */
+    fun logo(ctx: Context, res: Int, heightDp: Int) = ImageView(ctx).apply {
+        setImageResource(res); adjustViewBounds = true; scaleType = ImageView.ScaleType.FIT_START
+        layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, dp(ctx, heightDp))
+    }
+
     fun dp(ctx: Context, v: Int) = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, v.toFloat(), ctx.resources.displayMetrics).toInt()
 
     fun rounded(ctx: Context, fill: Int, radiusDp: Int = 10, stroke: Int = 0, strokeDp: Int = 0) = GradientDrawable().apply {
