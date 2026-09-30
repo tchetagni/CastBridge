@@ -1,7 +1,7 @@
 # CastBridge : passation (handoff)
 
 > À tenir à jour à chaque étape. **Aucun secret ici** (mots de passe, PIN, jetons, clés) : voir « Où sont les secrets ».
-> Dernière mise à jour : 2026-09-30, branche `feat/ssh` (commit `992db18`).
+> Dernière mise à jour : 2026-10-01, branche `feat/ssh`.
 
 ## 1. Ce qu'est le projet
 Écosystème pour relier le téléphone à la télévision, pour le Cameroun et l'Afrique francophone (propriétaire : Esaie Tchetagni Ngassa) :
@@ -15,15 +15,17 @@
 ## 2. État des versions
 | Élément | Version | Où |
 |---|---|---|
-| App TV | 0.9 (versionCode 18) | clé USB de la TV : `Download/CastBridge-TV-0.9.apk` (armeabi-v7a) |
-| App téléphone | 1.0-beta (versionCode 8) | installée sur le Samsung S21+ d'Esaie |
+| App TV | 0.9.1 (versionCode 19) | clé USB de la TV : `Download/CastBridge-TV-0.9.1.apk` (armeabi-v7a, sha256 `9b936bde…f2945`) ; la TV tourne encore en 0.7 tant que l'APK n'est pas installé |
+| App téléphone | 1.0-beta (versionCode 8) | installée sur le Samsung S21+ d'Esaie (sans `feat/connect`) |
 | Serveur | commit `992db18` | https://bridge.sti-cm.com (en ligne, sain) |
 
 Branche d'intégration : **`feat/ssh`** (poussée sur `origin` et sur le dépôt du serveur, branche `main`). Toutes les fonctionnalités y sont fusionnées.
 
 ## 3. Branches (une par fonctionnalité, fusionnées dans `feat/ssh`)
 `feat/tv-admin` (PIN, page web, USB, lecture pendant l'envoi) · `feat/tv-usb-storage` (volumes multiples) · `feat/tv-library-player` (bibliothèque, lecteur, service, UX) · `feat/tv-quiz` · `feat/tv-chess` · `feat/tv-downloads` (aria2) · `feat/phone-player` · `feat/phone-remote` · `feat/backend` · `feat/learn` (Apprendre).
-**En cours (non fusionnée)** : `feat/connect` (agent cloud) : brancher les deux apps sur le serveur (consentement, identification, heartbeat, mises à jour automatiques, télémétrie, questions du quiz en ligne).
+`feat/connect` (apps branchées sur le serveur : consentement, identification, heartbeat, mises à jour signées, télémétrie, questions du quiz en ligne) est **fusionnée** dans `feat/ssh` (2026-10-01) ; jamais testée contre le serveur de production : premier enregistrement réel à vérifier.
+
+**ATTENTION — `wip/external-ai-changes`** (non fusionnée, NON revue) : instantané de 220 fichiers trouvés non commités dans le dossier de travail, écrits par d'autres sessions d'IA (activation/licence, contrôle parental, sudoku, deux mises à jour automatiques concurrentes `AutoUpdater`/`PhoneAutoUpdater`, suivi de l'adresse Bluetooth, assets de la charte, icônes, thème). À auditer (sécurité, doublons avec `feat/connect`) avant toute intégration ; rien de cela n'a été demandé dans les sessions de référence.
 `main` (GitHub) est resté à l'état initial : les fusions vers `main` sont à décider.
 
 ## 4. Où tourne quoi
