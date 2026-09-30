@@ -84,6 +84,30 @@ class DeviceClient(
         if (r.code != 204 && r.code != 200) throw ServerError(r.code, HttpLite.errorMessage(r))
     }
 
+    /** Right of access: the JSON the server holds about this device (record + usage events). */
+    @Throws(IOException::class)
+    fun myData(): String {
+        val token = store.deviceToken ?: return "{}"
+        val r = http.request("GET", "$base/api/v1/devices/me", headers = mapOf("Authorization" to "Bearer $token"))
+        if (r.code != 200) throw ServerError(r.code, HttpLite.errorMessage(r))
+        return r.body
+    }
+
+    /**
+     * Right to erasure asked from the app: the server deletes the device and all its data; the local identifiers are
+     * forgotten too (the app should also clear its telemetry queue and draw a new install id).
+     */
+    @Throws(IOException::class)
+    fun eraseMe() {
+        val token = store.deviceToken
+        if (token != null) {
+            val r = http.request("DELETE", "$base/api/v1/devices/me", headers = mapOf("Authorization" to "Bearer $token"))
+            if (r.code != 204 && r.code != 401) throw ServerError(r.code, HttpLite.errorMessage(r))
+        }
+        store.deviceToken = null
+        store.deviceId = null
+    }
+
     private fun post(path: String, json: String) =
         http.request("POST", base + path, json, mapOf("Authorization" to "Bearer ${store.deviceToken}"))
 }

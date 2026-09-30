@@ -42,6 +42,10 @@ interface DeviceFacts {
     val wifiDirectActive: Boolean? get() = null
     val videoCount: Int? get() = null
     val lastError: String? get() = null
+    /** Choice of the user on the information screen (null = not asked yet: treated as essential only). */
+    val consent: castbridge.core.telemetry.Consent? get() = null
+    /** Version of the information text shown (e.g. "2026-10"). */
+    val consentVersion: String? get() = null
 }
 
 /** Stable identifiers of an installation. */
@@ -121,6 +125,8 @@ data class DeviceReport(
     val wifiDirect: Boolean?,
     val videoCount: Int?,
     val lastError: String?,
+    val consent: String,
+    val consentVersion: String?,
 ) {
     fun toJson(): String = JsonLite.write(linkedMapOf(
         "installId" to installId, "androidIdHash" to androidIdHash, "app" to app, "versionCode" to versionCode,
@@ -129,7 +135,8 @@ data class DeviceReport(
         "osBuild" to osBuild, "fingerprint" to fingerprint, "screen" to screen, "densityDpi" to densityDpi,
         "ramTotalMb" to ramTotalMb, "storageFreeMb" to storageFreeMb, "storageTotalMb" to storageTotalMb,
         "usbPresent" to usbPresent, "usbFreeMb" to usbFreeMb, "btGateway" to btGateway, "sshEnabled" to sshEnabled,
-        "wifiDirect" to wifiDirect, "videoCount" to videoCount, "lastError" to lastError,
+        "wifiDirect" to wifiDirect, "videoCount" to videoCount, "lastError" to lastError, "consent" to consent,
+        "consentVersion" to consentVersion,
     ))
 
     companion object {
@@ -167,6 +174,8 @@ data class DeviceReport(
                 wifiDirect = f.wifiDirectActive,
                 videoCount = f.videoCount,
                 lastError = f.lastError?.take(500),
+                consent = if (f.consent == castbridge.core.telemetry.Consent.USAGE) "usage" else "essential",
+                consentVersion = f.consentVersion?.take(16),
             )
         }
 
