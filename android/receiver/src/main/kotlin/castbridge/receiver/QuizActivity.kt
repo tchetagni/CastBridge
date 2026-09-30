@@ -356,7 +356,7 @@ class QuizActivity : Activity() {
         private val startBtn = quizButton(this@QuizActivity, "Lancer la partie", 22f) { startGame() }
         private val note = quizText(this@QuizActivity, "", 17f, QuizColors.MUTED)
         private val settings = quizText(this@QuizActivity, "", 19f, QuizColors.TEXT, true)
-        private val badge = quizText(this@QuizActivity, "", 17f, 0xFF1A1300.toInt(), true).apply {
+        private val badge = quizText(this@QuizActivity, "", 17f, QuizColors.BG_BOTTOM, true).apply {
             background = panelBackground(this@QuizActivity, QuizColors.GOLD, QuizColors.GOLD); setPadding(dpi(14), dpi(4), dpi(14), dpi(4)); visibility = View.GONE
         }
         private val shown = HashSet<String>()
@@ -582,8 +582,8 @@ class QuizActivity : Activity() {
                 val lvl = i + 1
                 r.amount.text = if (practice) "question" else Ladder.fcfa(ladder.getOrElse(i) { 0 }).removeSuffix("\u00A0FCFA")
                 val current = lvl == index + 1
-                val color = when { current -> 0xFF1A1300.toInt(); lvl in safe && !practice -> QuizColors.TEXT; lvl <= reached -> QuizColors.MUTED; else -> QuizColors.GOLD }
-                val face = if ((lvl in safe && !practice) || current) android.graphics.Typeface.DEFAULT_BOLD else android.graphics.Typeface.DEFAULT
+                val color = when { current -> QuizColors.BG_BOTTOM; lvl in safe && !practice -> QuizColors.TEXT; lvl <= reached -> QuizColors.MUTED; else -> QuizColors.GOLD }
+                val face = if ((lvl in safe && !practice) || current) TvFonts.quizBold else TvFonts.quiz
                 for (t in listOf(r.num, r.amount)) { t.setTextColor(color); t.typeface = face }
                 r.box.background = if (current) panelBackground(this@QuizActivity, if (revealed && g.b("lastCorrect")) QuizColors.RIGHT else QuizColors.SELECTED, QuizColors.GOLD) else null
             }
@@ -777,7 +777,7 @@ class QuizActivity : Activity() {
                 val t = SpannableStringBuilder("${QuizColors.SHAPES[i]} ${QuizColors.LETTERS[i]}   ${fr(choices.getOrElse(i) { "" })}")
                 if (reveal) { if (i == answer) t.append("   ✓"); t.append("   (${dist.getOrElse(i) { 0 }})") }
                 plates[i].text = t
-                plates[i].setTextColor(if (i == 2 && !(reveal && i == answer)) 0xFF1A1300.toInt() else QuizColors.TEXT)
+                plates[i].setTextColor(if (i == 2 && !(reveal && i == answer)) QuizColors.BG_BOTTOM else QuizColors.TEXT)
                 plates[i].hex.look = when {
                     reveal && i == answer -> HexDrawable.Look.RIGHT
                     reveal -> HexDrawable.Look.DIM

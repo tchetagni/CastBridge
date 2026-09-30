@@ -101,7 +101,7 @@ class ChessTvView(ctx: Context, val st: ChessTvState) : View(ctx) {
     // ------------------------------------------------------------------ helpers
 
     private fun textSize(px: Float, bold: Boolean = false, color: Int = TEXT) {
-        text.textSize = px; text.color = color; text.typeface = if (bold) Typeface.DEFAULT_BOLD else Typeface.DEFAULT; text.textAlign = Paint.Align.LEFT
+        text.textSize = px; text.color = color; text.typeface = if (bold) TvFonts.chessBold else TvFonts.chess; text.textAlign = Paint.Align.LEFT
     }
 
     /** Draws [s] on one line ellipsized to [maxW]; [y] is the top of the line. Returns the drawn width. */
@@ -314,7 +314,7 @@ class ChessTvView(ctx: Context, val st: ChessTvState) : View(ctx) {
 
     private fun drawMoves(c: Canvas, l: ChessTvLayout, san: List<String>, auto: Set<Int>, blackFirst: Boolean) {
         val b = l.moves
-        panel(c, b, l.u * 1.2f, 0x661A2230, BORDER)
+        panel(c, b, l.u * 1.2f, 0x66112A1D, BORDER)
         val list: List<String?> = (if (blackFirst) listOf<String?>(null) else emptyList()) + san
         val rows = (list.size + 1) / 2
         val visible = l.moveRows - 0
@@ -409,7 +409,7 @@ class ChessTvView(ctx: Context, val st: ChessTvState) : View(ctx) {
         val rows = if (lobbyInline) List(m.items.size) { i -> Box(box.l + 3 * l.u, box.t + l.u + i * l.menuRow, box.r, box.t + l.u + (i + 1) * l.menuRow - 0.8f * l.u) }
             else l.menuRows(box, m.items.size, m.subtitle != null)
         if (!lobbyInline) {
-            panel(c, box, l.u * 2.2f, 0xF0141B26.toInt(), BORDER, l.u * 0.3f)
+            panel(c, box, l.u * 2.2f, 0xF00C1B14.toInt(), BORDER, l.u * 0.3f)
             textSize(l.titleText, true, GOLD)
             line(c, m.title, (box.l + box.r) / 2, box.t + 2 * l.u, box.w - 6 * l.u, Paint.Align.CENTER)
             m.subtitle?.let { textSize(l.subText, false, MUTED); line(c, it, (box.l + box.r) / 2, box.t + 2 * l.u + l.titleText * 1.5f, box.w - 6 * l.u, Paint.Align.CENTER) }
@@ -418,7 +418,7 @@ class ChessTvView(ctx: Context, val st: ChessTvState) : View(ctx) {
             val r = rows[i]
             val focused = i == m.focus
             if (focused) { rect.set(r.l - l.u, r.t, r.r + l.u, r.b); fill.color = ACCENT; c.drawRoundRect(rect, l.u * 1.2f, l.u * 1.2f, fill) }
-            val color = when { !it.enabled -> DISABLED; focused -> 0xFF06131C.toInt(); else -> TEXT }
+            val color = when { !it.enabled -> DISABLED; focused -> BG_BOTTOM; else -> TEXT }
             val ty = r.t + (r.h - l.menuText * 1.2f) / 2
             val v = it.value?.invoke()
             textSize(l.menuText, focused, color)
@@ -439,7 +439,7 @@ class ChessTvView(ctx: Context, val st: ChessTvState) : View(ctx) {
         val w = cell * moves.size + l.u * 3 * (moves.size + 1)
         val h = cell + l.titleText * 1.6f + l.u * 6
         val box = Box((width - w) / 2, (height - h) / 2, (width + w) / 2, (height + h) / 2)
-        panel(c, box, l.u * 2, 0xF0141B26.toInt())
+        panel(c, box, l.u * 2, 0xF00C1B14.toInt())
         textSize(l.titleText * 0.8f, true, GOLD)
         line(c, "Promotion : quelle pièce ?", (box.l + box.r) / 2, box.t + 2 * l.u, box.w - 4 * l.u, Paint.Align.CENTER)
         val white = st.s["turn"] == "w"
@@ -459,23 +459,24 @@ class ChessTvView(ctx: Context, val st: ChessTvState) : View(ctx) {
         val w = (lines.maxOfOrNull { text.measureText(it) } ?: 0f) + 6 * l.u
         val h = lines.size * l.statusText * 1.3f + 3 * l.u
         val box = Box((width - w) / 2, height - l.margin - h - l.u * 8, (width + w) / 2, height - l.margin - l.u * 8)
-        panel(c, box, l.u * 1.5f, 0xF0202A38.toInt(), WARN)
+        panel(c, box, l.u * 1.5f, 0xF0112A1D.toInt(), WARN)
         lines.forEachIndexed { i, t -> line(c, t, width / 2f, box.t + 1.5f * l.u + i * l.statusText * 1.3f, maxW, Paint.Align.CENTER) }
     }
 
     companion object {
-        const val BG_TOP = 0xFF16202C.toInt()
-        const val BG_BOTTOM = 0xFF07090D.toInt()
-        const val PANEL = 0xE01A2230.toInt()
-        const val PANEL_ACTIVE = 0xF0123049.toInt()
-        const val BORDER = 0xFF33415A.toInt()
-        const val ACCENT = 0xFF33B5E5.toInt()
-        const val GOLD = 0xFFFFC53D.toInt()
-        const val CURSOR = 0xFFFFB300.toInt()
-        const val TEXT = 0xFFF2F4F8.toInt()
-        const val MUTED = 0xFFA9B4C6.toInt()
-        const val DISABLED = 0xFF5B6576.toInt()
-        const val WARN = 0xFFFFB74D.toInt()
-        const val RED = 0xFFFF5A4F.toInt()
+        private val E = castbridge.core.brand.BrandTokens.Echecs
+        const val BG_TOP = 0xFF143122.toInt()        // forest background lightened toward the green
+        const val BG_BOTTOM = castbridge.core.brand.BrandTokens.Echecs.BACKGROUND
+        const val PANEL = 0xE0112A1D.toInt()
+        const val PANEL_ACTIVE = 0xF01B4A32.toInt()
+        const val BORDER = 0xFF2C5A40.toInt()
+        const val ACCENT = castbridge.core.brand.BrandTokens.Echecs.PRIMARY
+        const val GOLD = castbridge.core.brand.BrandTokens.Echecs.SECONDARY
+        const val CURSOR = castbridge.core.brand.BrandTokens.Echecs.SECONDARY
+        const val TEXT = castbridge.core.brand.BrandTokens.Dark.TEXT_HIGH
+        const val MUTED = castbridge.core.brand.BrandTokens.Dark.TEXT_MEDIUM
+        const val DISABLED = castbridge.core.brand.BrandTokens.Dark.TEXT_LOW
+        const val WARN = castbridge.core.brand.BrandTokens.Echecs.ACCENT
+        const val RED = castbridge.core.brand.BrandTokens.Semantic.ERROR_DARK
     }
 }

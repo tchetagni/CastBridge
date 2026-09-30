@@ -1,5 +1,7 @@
 package castbridge.sender.player
 
+import castbridge.sender.cbv
+
 import android.content.Intent
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -226,7 +228,7 @@ fun VideoPlayerScreen(act: PlayerActivity, p: ExoPlayer) {
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
                         if (fatal) TextButton({ p.prepare(); p.play() }) { Text("Réessayer") }
                         TextButton({ formatDismissed = true }) { Text("Fermer") }
-                        Button({ castOpen = true }) { Icon(Icons.Filled.Cast, null); Spacer(Modifier.width(6.dp)); Text("Caster vers la TV") }
+                        Button({ castOpen = true }) { Icon(cbv(castbridge.sender.R.drawable.ic_cb_caster), null); Spacer(Modifier.width(6.dp)); Text("Caster vers la TV") }
                     }
                 }
             }
@@ -248,21 +250,21 @@ fun VideoPlayerScreen(act: PlayerActivity, p: ExoPlayer) {
                     IconButton({ act.finish() }) { Icon(Icons.AutoMirrored.Filled.ArrowBack, "Retour", tint = Color.White) }
                     Column(Modifier.weight(1f)) {
                         Text(current?.name ?: "", color = Color.White, maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.titleMedium)
-                        if (obs.count > 1) Text("${obs.index + 1} / ${obs.count}", color = Color(0xFFBBBBBB), style = MaterialTheme.typography.labelSmall)
+                        if (obs.count > 1) Text("${obs.index + 1} / ${obs.count}", color = Color(castbridge.core.brand.BrandTokens.Dark.TEXT_MEDIUM), style = MaterialTheme.typography.labelSmall)
                     }
-                    IconButton({ castOpen = true; touch() }) { Icon(Icons.Filled.Cast, "Caster", tint = Color.White) }
-                    IconButton({ menu = "tracks"; touch() }) { Icon(Icons.Filled.ClosedCaption, "Pistes audio et sous-titres", tint = Color.White) }
+                    IconButton({ castOpen = true; touch() }) { Icon(cbv(castbridge.sender.R.drawable.ic_cb_caster), "Caster", tint = Color.White) }
+                    IconButton({ menu = "tracks"; touch() }) { Icon(cbv(castbridge.sender.R.drawable.ic_cb_sous_titres), "Pistes audio et sous-titres", tint = Color.White) }
                     Box {
                         IconButton({ menu = "more"; touch() }) { Icon(Icons.Filled.MoreVert, "Plus", tint = Color.White) }
                         DropdownMenu(menu == "more", { menu = null }) {
                             DropdownMenuItem({ Text("Vitesse : ${Speeds.label(obs.speed)}") }, { menu = "speed" }, leadingIcon = { Icon(Icons.Filled.Speed, null) })
                             if (!isAudio) DropdownMenuItem({ Text("Format d'image : ${aspect.label}") }, { menu = "aspect" }, leadingIcon = { Icon(Icons.Filled.AspectRatio, null) })
                             if (!isAudio) DropdownMenuItem({ Text("Rotation : ${act.rotation.value.label}") }, { menu = "rotation" }, leadingIcon = { Icon(Icons.Filled.ScreenRotation, null) })
-                            DropdownMenuItem({ Text("Pistes audio et sous-titres") }, { menu = "tracks" }, leadingIcon = { Icon(Icons.Filled.Subtitles, null) })
+                            DropdownMenuItem({ Text("Pistes audio et sous-titres") }, { menu = "tracks" }, leadingIcon = { Icon(cbv(castbridge.sender.R.drawable.ic_cb_sous_titres), null) })
                             if (!isAudio) DropdownMenuItem({ Text("Charger des sous-titres…") }, { menu = null; subsPicker.launch(arrayOf("*/*")) }, leadingIcon = { Icon(Icons.Filled.FileOpen, null) })
                             var bg by remember { mutableStateOf(act.background) }
                             if (!isAudio) DropdownMenuItem({ Text("Lecture en arrière-plan") }, { bg = !bg; act.background = bg },
-                                leadingIcon = { Icon(Icons.Filled.Headphones, null) }, trailingIcon = { Checkbox(bg, { bg = it; act.background = it }) })
+                                leadingIcon = { Icon(cbv(castbridge.sender.R.drawable.ic_cb_pistes_audio), null) }, trailingIcon = { Checkbox(bg, { bg = it; act.background = it }) })
                             if (!isAudio) DropdownMenuItem({ Text("Image dans l'image") }, { menu = null; act.enterPip() }, leadingIcon = { Icon(Icons.Filled.PictureInPicture, null) })
                         }
                         DropdownMenu(menu == "speed", { menu = null }) {
@@ -282,12 +284,12 @@ fun VideoPlayerScreen(act: PlayerActivity, p: ExoPlayer) {
                 // centre: previous, -10, play/pause, +10, next
                 Row(Modifier.align(Alignment.Center), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                     RoundIcon(Icons.Filled.SkipPrevious, "Précédent", enabled = obs.count > 1 && obs.index > 0) { p.seekToPreviousMediaItem(); touch() }
-                    RoundIcon(Icons.Filled.Replay10, "−10 s") { p.seekTo((p.currentPosition - 10_000).coerceAtLeast(0)); touch() }
+                    RoundIcon(cbv(castbridge.sender.R.drawable.ic_cb_recul_10s), "−10 s") { p.seekTo((p.currentPosition - 10_000).coerceAtLeast(0)); touch() }
                     FilledIconButton({ if (p.isPlaying) p.pause() else { if (p.playbackState == Player.STATE_ENDED) p.seekTo(0); p.play() }; touch() }, Modifier.size(72.dp)) {
                         if (obs.state == Player.STATE_BUFFERING && obs.playing) CircularProgressIndicator(Modifier.size(36.dp), strokeWidth = 3.dp)
-                        else Icon(if (obs.playing) Icons.Filled.Pause else Icons.Filled.PlayArrow, "Lecture / pause", Modifier.size(42.dp))
+                        else Icon(if (obs.playing) cbv(castbridge.sender.R.drawable.ic_cb_pause) else cbv(castbridge.sender.R.drawable.ic_cb_lecture), "Lecture / pause", Modifier.size(42.dp))
                     }
-                    RoundIcon(Icons.Filled.Forward10, "+10 s") { p.seekTo(p.currentPosition + 10_000); touch() }
+                    RoundIcon(cbv(castbridge.sender.R.drawable.ic_cb_avance_10s), "+10 s") { p.seekTo(p.currentPosition + 10_000); touch() }
                     RoundIcon(Icons.Filled.SkipNext, "Suivant", enabled = obs.index < obs.count - 1) { p.seekToNextMediaItem(); touch() }
                 }
 

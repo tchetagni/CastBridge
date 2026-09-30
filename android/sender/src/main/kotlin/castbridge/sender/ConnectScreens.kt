@@ -63,7 +63,7 @@ fun ConsentScreen(onDone: () -> Unit) {
     }
     Column(Modifier.fillMaxSize().padding(20.dp)) {
         Column(Modifier.weight(1f).verticalScroll(rememberScrollState())) {
-            Icon(Icons.Filled.PrivacyTip, null, Modifier.size(40.dp), tint = MaterialTheme.colorScheme.primary)
+            Icon(cbv(R.drawable.ic_cb_administration), null, Modifier.size(40.dp), tint = MaterialTheme.colorScheme.primary)
             Text(ConsentText.TITLE, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.SemiBold, modifier = Modifier.padding(top = 8.dp))
             ConsentParagraphs()
         }
@@ -77,7 +77,7 @@ fun ConsentScreen(onDone: () -> Unit) {
 fun MandatoryUpdateScreen(u: ServerLink.UpdateStatus) {
     val m = u.manifest
     Column(Modifier.fillMaxSize().padding(24.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Icon(Icons.Filled.SystemUpdate, null, Modifier.size(48.dp), tint = MaterialTheme.colorScheme.primary)
+        Icon(cbv(R.drawable.ic_cb_mises_a_jour), null, Modifier.size(48.dp), tint = MaterialTheme.colorScheme.primary)
         Text("Mise à jour obligatoire", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.SemiBold)
         Text("Cette version de CastBridge n'est plus prise en charge. Installez la version ${m?.versionName ?: ""} pour continuer.",
             style = MaterialTheme.typography.bodyMedium)
@@ -138,6 +138,13 @@ private fun AboutSection() {
         CastBridgeLogo(48.dp)
         Text("Le pont simple entre vos écrans", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
         Text("Version ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        val ctx = androidx.compose.ui.platform.LocalContext.current
+        Text("Apparence", style = MaterialTheme.typography.titleSmall, modifier = Modifier.padding(top = 8.dp))
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            listOf(ThemeMode.DARK to "Sombre", ThemeMode.LIGHT to "Clair", ThemeMode.SYSTEM to "Système").forEach { (m, label) ->
+                FilterChip(ThemePrefs.mode == m, onClick = { ThemePrefs.set(ctx, m) }, label = { Text(label) })
+            }
+        }
     }
 }
 

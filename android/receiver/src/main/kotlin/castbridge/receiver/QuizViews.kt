@@ -21,23 +21,30 @@ import castbridge.core.quiz.QrCode
 
 /** Colours of the quiz screens: strong contrasts, readable from the sofa. */
 object QuizColors {
-    const val BG_TOP = 0xFF12267A.toInt()
-    const val BG_BOTTOM = 0xFF020618.toInt()
-    const val PANEL = 0xFF0B1850.toInt()
-    const val STROKE = 0xFF6F8CFF.toInt()
-    const val GOLD = 0xFFFFC53D.toInt()
-    const val TEXT = 0xFFF4F6FF.toInt()
-    const val MUTED = 0xFFAAB4E8.toInt()
-    const val SELECTED = 0xFFFF9F1A.toInt()
-    const val RIGHT = 0xFF1FA85A.toInt()
-    const val WRONG = 0xFFD93636.toInt()
-    const val FOCUS = 0xFFFFFFFF.toInt()
-    /** Duel answer colours, the same as the buttons of the phones (with shapes ▲ ◆ ● ■, never colour alone). */
-    val DUEL = intArrayOf(0xFFD7263D.toInt(), 0xFF1B6FE0.toInt(), 0xFFE0A100.toInt(), 0xFF1F9D55.toInt())
+    private val Q = castbridge.core.brand.BrandTokens.QuizDesMillions
+    private fun mix(a: Int, b: Int, t: Float) = android.graphics.Color.rgb(
+        (android.graphics.Color.red(a) + (android.graphics.Color.red(b) - android.graphics.Color.red(a)) * t).toInt(),
+        (android.graphics.Color.green(a) + (android.graphics.Color.green(b) - android.graphics.Color.green(a)) * t).toInt(),
+        (android.graphics.Color.blue(a) + (android.graphics.Color.blue(b) - android.graphics.Color.blue(a)) * t).toInt())
+    val BG_TOP = mix(Q.BACKGROUND, Q.ACCENT, 0.22f)
+    val BG_MID = mix(Q.BACKGROUND, Q.ACCENT, 0.08f)
+    val BG_BOTTOM = mix(Q.BACKGROUND, 0xFF000000.toInt(), 0.45f)
+    val PANEL = mix(Q.BACKGROUND, Q.ACCENT, 0.14f)
+    const val STROKE = castbridge.core.brand.BrandTokens.QuizDesMillions.ACCENT
+    const val GOLD = castbridge.core.brand.BrandTokens.QuizDesMillions.SECONDARY
+    const val TEXT = castbridge.core.brand.BrandTokens.Dark.TEXT_HIGH
+    const val MUTED = castbridge.core.brand.BrandTokens.Dark.TEXT_MEDIUM
+    /** Selected answer: the coral of the sub-brand, darkened so that the white text keeps AA. */
+    val SELECTED = mix(Q.PRIMARY, 0xFF000000.toInt(), 0.27f)
+    const val RIGHT = castbridge.core.brand.BrandTokens.Semantic.SUCCESS_LIGHT
+    const val WRONG = castbridge.core.brand.BrandTokens.Semantic.ERROR_LIGHT
+    const val FOCUS = castbridge.core.brand.BrandTokens.Dark.FOCUS_RING
+    /** Duel answer colours (AA with white text), with shapes ▲ ◆ ● ■, never colour alone. */
+    val DUEL = intArrayOf(castbridge.core.brand.BrandTokens.Semantic.ERROR_LIGHT, castbridge.core.brand.BrandTokens.Semantic.INFO_LIGHT, castbridge.core.brand.BrandTokens.Semantic.WARNING_LIGHT, castbridge.core.brand.BrandTokens.Semantic.SUCCESS_LIGHT)
     val SHAPES = arrayOf("▲", "◆", "●", "■")
     val LETTERS = arrayOf("A", "B", "C", "D")
 
-    fun background(): Drawable = GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, intArrayOf(BG_TOP, 0xFF08124A.toInt(), BG_BOTTOM))
+    fun background(): Drawable = GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, intArrayOf(BG_TOP, BG_MID, BG_BOTTOM))
 }
 
 fun Context.dp(v: Float): Float = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, v, resources.displayMetrics)
@@ -110,7 +117,7 @@ class Plate(ctx: Context, sizeSp: Float, focusable: Boolean) : TextView(ctx) {
         background = hex
         setTextColor(QuizColors.TEXT)
         setTextSize(TypedValue.COMPLEX_UNIT_SP, sizeSp)
-        typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
+        typeface = TvFonts.quizBold
         gravity = Gravity.CENTER_VERTICAL
         val h = ctx.dpi(44); val v = ctx.dpi(10)
         setPadding(h, v, h, v)
@@ -126,7 +133,7 @@ class RingView(ctx: Context) : View(ctx) {
     var label = ""; set(v) { if (field != v) { field = v; invalidate() } }
     private val bg = Paint(Paint.ANTI_ALIAS_FLAG).apply { style = Paint.Style.STROKE; color = 0x33FFFFFF; strokeWidth = ctx.dp(7f) }
     private val fg = Paint(Paint.ANTI_ALIAS_FLAG).apply { style = Paint.Style.STROKE; strokeWidth = ctx.dp(7f); strokeCap = Paint.Cap.ROUND }
-    private val txt = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = QuizColors.TEXT; textAlign = Paint.Align.CENTER; typeface = Typeface.DEFAULT_BOLD }
+    private val txt = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = QuizColors.TEXT; textAlign = Paint.Align.CENTER; typeface = TvFonts.quizBold }
     private val oval = RectF()
     override fun onDraw(c: Canvas) {
         val s = minOf(width, height).toFloat(); val pad = bg.strokeWidth
@@ -165,7 +172,7 @@ class BarsView(ctx: Context) : View(ctx) {
     var values: IntArray? = null; set(v) { field = v; invalidate() }
     var progress = 1f; set(v) { field = v; invalidate() }
     private val bar = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = QuizColors.GOLD }
-    private val txt = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = QuizColors.TEXT; textAlign = Paint.Align.CENTER; typeface = Typeface.DEFAULT_BOLD; textSize = ctx.dp(18f) }
+    private val txt = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = QuizColors.TEXT; textAlign = Paint.Align.CENTER; typeface = TvFonts.quizBold; textSize = ctx.dp(18f) }
     override fun onDraw(c: Canvas) {
         val v = values ?: return
         val w = width / 4f; val top = txt.textSize * 1.4f; val bottom = height - txt.textSize * 1.4f
@@ -188,11 +195,11 @@ class StageBackground(ctx: Context) : View(ctx) {
     var calm = false
     var flash = 0; set(v) { field = v; flashUntil = android.os.SystemClock.uptimeMillis() + 900 }
     private var flashUntil = 0L
-    private val base = GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, intArrayOf(QuizColors.BG_TOP, 0xFF08124A.toInt(), QuizColors.BG_BOTTOM))
+    private val base = GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, intArrayOf(QuizColors.BG_TOP, QuizColors.BG_MID, QuizColors.BG_BOTTOM))
     private val spot = Paint(Paint.ANTI_ALIAS_FLAG)
     private val floor = Paint(Paint.ANTI_ALIAS_FLAG)
     private val start = android.os.SystemClock.uptimeMillis()
-    private val colors = intArrayOf(0x553D6BFF, 0x40FFC53D, 0x357A3DFF)
+    private val colors = intArrayOf(0x5527C7B0, 0x40FFB020, 0x35FF5C39)
 
     override fun onDraw(c: Canvas) {
         base.setBounds(0, 0, width, height); base.draw(c)
@@ -207,7 +214,7 @@ class StageBackground(ctx: Context) : View(ctx) {
             c.drawCircle(x, y, r, spot)
         }
         // a glowing « floor » at the bottom, as on a TV set
-        floor.shader = LinearGradient(0f, h * 0.78f, 0f, h, 0x00000000, 0x3360A0FF, Shader.TileMode.CLAMP)
+        floor.shader = LinearGradient(0f, h * 0.78f, 0f, h, 0x00000000, 0x3327C7B0, Shader.TileMode.CLAMP)
         c.drawRect(0f, h * 0.78f, w, h, floor)
         val now = android.os.SystemClock.uptimeMillis()
         if (now < flashUntil) {
@@ -223,7 +230,7 @@ fun quizButton(ctx: Context, text: String, sizeSp: Float = 22f, onClick: () -> U
     this.text = text
     setTextColor(QuizColors.TEXT)
     setTextSize(TypedValue.COMPLEX_UNIT_SP, sizeSp)
-    typeface = Typeface.DEFAULT_BOLD
+    typeface = TvFonts.quizBold
     gravity = Gravity.CENTER
     val h = ctx.dpi(28); val v = ctx.dpi(12)
     setPadding(h, v, h, v)
@@ -235,7 +242,7 @@ fun quizButton(ctx: Context, text: String, sizeSp: Float = 22f, onClick: () -> U
         addState(intArrayOf(), GradientDrawable().apply { cornerRadius = r; setColor(QuizColors.PANEL); setStroke(ctx.dpi(2), QuizColors.STROKE) })
     }
     setOnFocusChangeListener { v, f ->
-        (v as TextView).setTextColor(if (f) 0xFF1A1300.toInt() else QuizColors.TEXT)
+        (v as TextView).setTextColor(if (f) QuizColors.BG_BOTTOM else QuizColors.TEXT)
         v.animate().scaleX(if (f) 1.06f else 1f).scaleY(if (f) 1.06f else 1f).setDuration(120).start()
     }
     setOnClickListener { onClick() }
@@ -263,7 +270,7 @@ fun quizText(ctx: Context, text: CharSequence, sizeSp: Float, color: Int = QuizC
     this.text = text
     setTextColor(color)
     setTextSize(TypedValue.COMPLEX_UNIT_SP, sizeSp)
-    if (bold) typeface = Typeface.DEFAULT_BOLD
+    if (bold) typeface = TvFonts.quizBold
 }
 
 fun panelBackground(ctx: Context, color: Int = QuizColors.PANEL, stroke: Int = QuizColors.STROKE): Drawable =

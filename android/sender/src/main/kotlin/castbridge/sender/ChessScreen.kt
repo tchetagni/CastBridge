@@ -157,7 +157,7 @@ fun ChessScreen() {
             keyboardOptions = if (online) KeyboardOptions(capitalization = KeyboardCapitalization.Characters) else KeyboardOptions(keyboardType = KeyboardType.NumberPassword))
         val ready = name.isNotBlank() && !busy && (if (online) onlineAvailable && code.length == 6 else tv != null && code.length == 4)
         Button(enabled = ready, onClick = ::join, modifier = Modifier.fillMaxWidth().height(56.dp)) {
-            Icon(Icons.Filled.PlayArrow, null); Spacer(Modifier.width(8.dp)); Text("Rejoindre la partie", fontSize = 18.sp)
+            Icon(cbv(R.drawable.ic_cb_lecture), null); Spacer(Modifier.width(8.dp)); Text("Rejoindre la partie", fontSize = 18.sp)
         }
         if (message.isNotEmpty()) Text(message, color = MaterialTheme.colorScheme.error)
     }
@@ -411,7 +411,7 @@ private fun PlayerCard(s: Map<String, Any?>, color: String, stateAt: Long, now: 
             Text(if (blinkOff) "" else "${(left + 999) / 1000} s", fontSize = 24.sp, fontWeight = FontWeight.ExtraBold,
                 color = if (low) MaterialTheme.colorScheme.error else if (active) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurfaceVariant)
             LinearProgressIndicator(progress = { left.toFloat() / per }, Modifier.fillMaxWidth().height(5.dp),
-                color = if (low) MaterialTheme.colorScheme.error else accent, trackColor = Color(0xFF333333))
+                color = if (low) MaterialTheme.colorScheme.error else accent, trackColor = MaterialTheme.colorScheme.outlineVariant)
         }
     }
 }

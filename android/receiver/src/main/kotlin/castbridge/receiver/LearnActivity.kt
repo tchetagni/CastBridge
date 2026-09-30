@@ -214,7 +214,7 @@ class AvatarView(a: Activity, private val p: Profile) : View(a) {
         c.drawText(p.name.take(1).uppercase(), width / 2f, height / 2f + r * 0.38f, paint)
     }
     companion object {
-        val COLORS = intArrayOf(0xFFE53935.toInt(), 0xFF1E88E5.toInt(), 0xFF43A047.toInt(), 0xFFFB8C00.toInt(), 0xFF8E24AA.toInt(), 0xFF00ACC1.toInt(),
+        val COLORS = intArrayOf(0xFFE53935.toInt(), 0xFF1E88E5.toInt(), 0xFF43A047.toInt(), 0xFFFB8C00.toInt(), LearnStyle.ACCENT, 0xFF00ACC1.toInt(),
             0xFFD81B60.toInt(), 0xFF6D4C41.toInt(), 0xFF3949AB.toInt(), 0xFF7CB342.toInt(), 0xFFF4511E.toInt(), 0xFF546E7A.toInt())
     }
 }
@@ -269,9 +269,9 @@ class NewProfileScreen(a: LearnActivity, private val editing: Profile? = null) :
         val col = LinearLayout(a).apply { orientation = LinearLayout.VERTICAL }
         col.addView(a.st.text("Prénom (ou surnom)", 22f, LearnStyle.MUTED))
         val edit = EditText(a).apply {
-            setText(nameText); setTextColor(Color.WHITE); a.st.size(this, 28f); isSingleLine = true; hint = "ex. Awa"; setHintTextColor(0xFF6B7380.toInt())
+            setText(nameText); setTextColor(Color.WHITE); a.st.size(this, 28f); isSingleLine = true; hint = "ex. Awa"; setHintTextColor(TvStyle.TEXT3)
             inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_WORDS; isEnabled = editing == null
-            background = a.st.rounded(0xFF0B0F14.toInt(), 10f, LearnStyle.ACCENT, 2f); setPadding(a.st.px(16), a.st.px(8), a.st.px(16), a.st.px(8))
+            background = a.st.rounded(LearnStyle.BG, 10f, LearnStyle.ACCENT, 2f); setPadding(a.st.px(16), a.st.px(8), a.st.px(16), a.st.px(8))
             addTextChangedListener(object : android.text.TextWatcher {
                 override fun afterTextChanged(s: android.text.Editable?) { nameText = s?.toString() ?: "" }
                 override fun beforeTextChanged(s: CharSequence?, st0: Int, c: Int, af: Int) {}
@@ -282,7 +282,7 @@ class NewProfileScreen(a: LearnActivity, private val editing: Profile? = null) :
         col.addView(a.st.text("Couleur de l'avatar", 22f, LearnStyle.MUTED))
         // selections are shown in place (a green frame): no rebuild, so the focus and the scroll stay where they are
         val avs = ArrayList<LinearLayout>()
-        fun markAvatars() = avs.forEachIndexed { i, v -> a.st.focusable(v, if (i == avatar) 0xFF1F5A2E.toInt() else LearnStyle.CARD) }
+        fun markAvatars() = avs.forEachIndexed { i, v -> a.st.focusable(v, if (i == avatar) LearnStyle.GOOD else LearnStyle.CARD) }
         AvatarView.COLORS.indices.forEach { i ->
             avs += LinearLayout(a).apply {
                 gravity = Gravity.CENTER; setPadding(a.st.px(6), a.st.px(6), a.st.px(6), a.st.px(6))
@@ -297,7 +297,7 @@ class NewProfileScreen(a: LearnActivity, private val editing: Profile? = null) :
         val lvButtons = ArrayList<Pair<String, LinearLayout>>()
         fun markLevels() {
             classLabel.text = "Classe" + (level?.let { " : " + (LearnCatalog.level(it)?.label ?: it) } ?: " (choisis-la ci-dessous)")
-            lvButtons.forEach { (k, b) -> a.st.focusable(b, if (k == level) 0xFF1F5A2E.toInt() else LearnStyle.CARD) }
+            lvButtons.forEach { (k, b) -> a.st.focusable(b, if (k == level) LearnStyle.GOOD else LearnStyle.CARD) }
         }
         for (c in LearnCatalog.cursus) {
             col.addView(a.st.text(c.label, 20f, Color.WHITE, true), col.lp(top = a.st.px(8)))
@@ -305,7 +305,7 @@ class NewProfileScreen(a: LearnActivity, private val editing: Profile? = null) :
             col.addView(a.st.grid(lv, 7, 8))
         }
         markLevels()
-        col.addView(a.st.button(if (editing == null) "Créer le profil" else "Enregistrer", fill = 0xFF1F5A2E.toInt()) { save() }, col.lp(-2, -2, top = a.st.px(16)))
+        col.addView(a.st.button(if (editing == null) "Créer le profil" else "Enregistrer", fill = LearnStyle.GOOD) { save() }, col.lp(-2, -2, top = a.st.px(16)))
         return a.frame(if (editing == null) "Nouvel élève" else "Modifier ${editing.name}", "6 profils au maximum sur la TV", ScrollView(a).apply { clipChildren = true; addView(col) }, "OK sur le champ : clavier de la TV   ·   RETOUR : annuler")
     }
 
@@ -335,7 +335,7 @@ class LearnHomeScreen(a: LearnActivity) : LearnActivity.Screen(a) {
             if (pack != null && l != null) tiles += a.st.tile("Reprendre", l.title, LearnStyle.ACCENT, "▶") { a.push(ReaderScreen(a, pack, l, r.page)) }
         }
         val due = pr.reviewCount(p.id, now)
-        tiles += a.st.tile("Révisions", if (due > 0) "$due exercice(s) à revoir" else "rien à revoir aujourd'hui", 0xFF8E24AA.toInt(), "$due") { reviews() }
+        tiles += a.st.tile("Révisions", if (due > 0) "$due exercice(s) à revoir" else "rien à revoir aujourd'hui", LearnStyle.ACCENT, "$due") { reviews() }
         tiles += a.st.tile("Mes récompenses", "${sp.lessons.values.sumOf { it.stars }} ★ · ${sp.badges.size} badge(s) · série ${sp.streak} j", LearnStyle.GOLD, "★") { a.push(RewardsScreen(a)) }
         val lvl = p.level?.let { LearnCatalog.level(it) }
         val mine = a.packs().filter { it.manifest.level == p.level }
@@ -372,7 +372,7 @@ class ExamPickScreen(a: LearnActivity) : LearnActivity.Screen(a) {
         val packs = a.packs()
         val tiles = LearnCatalog.exams.map { e ->
             val n = packs.count { it.manifest.exam == e.key }
-            a.st.tile(e.label, "${e.description}\n" + if (n > 0) "$n matière(s) disponible(s)" else "contenu à installer", if (n > 0) LearnStyle.GOLD else 0xFF4A5563.toInt()) {
+            a.st.tile(e.label, "${e.description}\n" + if (n > 0) "$n matière(s) disponible(s)" else "contenu à installer", if (n > 0) LearnStyle.GOLD else TvStyle.OUTLINE) {
                 a.profile?.let { p -> LearnHub.progress().updateProfile(p.copy(exam = e.key)); a.profile = LearnHub.progress().profile(p.id); LearnHub.save() }
                 a.replace(ExamScreen(a, e.key))
             }
@@ -396,10 +396,10 @@ class ExamScreen(a: LearnActivity, private val exam: String) : LearnActivity.Scr
             "${r.manifest.lessons} fiches · ${r.manifest.exercises} exercices" + (if (r.manifest.mockExams > 0) " · épreuve blanche" else "") + (if (r.manifest.exam != exam) " · ${LearnCatalog.exam(r.manifest.exam)?.label}" else ""),
             a.subjectColor(r.manifest.subject)) { a.openPack(r)?.let { a.push(PackScreen(a, it)) } }
         val missing = EXAM_SUBJECTS[exam].orEmpty().filter { s -> packs.none { it.manifest.subject == s } }
-        for (s in missing) tiles += a.st.tile(LearnCatalog.subject(s)?.label(e.lang) ?: s, "Télécharger ce contenu", 0xFF4A5563.toInt(), "⇩") {
+        for (s in missing) tiles += a.st.tile(LearnCatalog.subject(s)?.label(e.lang) ?: s, "Télécharger ce contenu", TvStyle.OUTLINE, "⇩") {
             a.push(ContentsScreen(a, "Le pack « ${LearnCatalog.subject(s)?.fr ?: s} — ${e.label} » n'est pas installé."))
         }
-        tiles += a.st.tile("Changer d'examen", null, 0xFF4A5563.toInt()) { a.replace(ExamPickScreen(a)) }
+        tiles += a.st.tile("Changer d'examen", null, TvStyle.OUTLINE) { a.replace(ExamPickScreen(a)) }
         return a.frame("${e.label}" + (days?.takeIf { it >= 0 }?.let { " · J-$it" } ?: ""), "${e.description} · ${e.organizer}", ScrollView(a).apply { clipChildren = true; addView(a.st.grid(tiles, 4, 18, 210)) },
             "Fiches « l'essentiel », exercices type examen corrigés, épreuve blanche chronométrée")
     }
@@ -506,17 +506,17 @@ class BrowseScreen(a: LearnActivity, private val cursus: String? = null, private
         val tiles: List<View> = when {
             cursus == null -> LearnCatalog.cursus.map { c ->
                 val n = packs.count { LearnCatalog.level(it.manifest.level)?.cursus == c.key }
-                a.st.tile(c.label, if (n > 0) "$n pack(s)" else "à venir", if (n > 0) LearnStyle.ACCENT else 0xFF4A5563.toInt()) { a.push(BrowseScreen(a, c.key)) }
+                a.st.tile(c.label, if (n > 0) "$n pack(s)" else "à venir", if (n > 0) LearnStyle.ACCENT else TvStyle.OUTLINE) { a.push(BrowseScreen(a, c.key)) }
             }
             level == null -> LearnCatalog.levelsOf(cursus).map { l ->
                 val n = packs.count { it.manifest.level == l.key }
-                a.st.tile(l.label, if (n > 0) "$n matière(s)" else "à venir", if (n > 0) LearnStyle.ACCENT else 0xFF4A5563.toInt()) { a.push(BrowseScreen(a, cursus, l.key)) }
+                a.st.tile(l.label, if (n > 0) "$n matière(s)" else "à venir", if (n > 0) LearnStyle.ACCENT else TvStyle.OUTLINE) { a.push(BrowseScreen(a, cursus, l.key)) }
             }
             else -> packs.filter { it.manifest.level == level }.map { r ->
                 a.st.tile(LearnCatalog.subject(r.manifest.subject)?.label(r.manifest.lang) ?: r.manifest.title, "${r.manifest.lessons} fiches · ${r.manifest.exercises} exercices", a.subjectColor(r.manifest.subject)) {
                     a.openPack(r)?.let { a.push(PackScreen(a, it)) }
                 }
-            }.ifEmpty { listOf(a.st.tile("Rien d'installé ici", "Voir « Contenus »", 0xFF4A5563.toInt()) { a.push(ContentsScreen(a)) }) }
+            }.ifEmpty { listOf(a.st.tile("Rien d'installé ici", "Voir « Contenus »", TvStyle.OUTLINE) { a.push(ContentsScreen(a)) }) }
         }
         val title = when { cursus == null -> "Tout le programme"; level == null -> LearnCatalog.cursus(cursus)?.label ?: ""; else -> LearnCatalog.level(level)?.label ?: level }
         return a.frame(title, if (a.teacher) "Mode classe : la leçon s'affiche en grand, le téléphone peut la piloter" else "Apprendre", ScrollView(a).apply { clipChildren = true; addView(a.st.grid(tiles, 4, 18, 180)) }, "OK : ouvrir   ·   RETOUR : revenir")
@@ -533,7 +533,7 @@ class RewardsScreen(a: LearnActivity) : LearnActivity.Screen(a) {
         col.addView(a.st.text("Badges", 26f, Color.WHITE, true), col.lp(top = a.st.px(14)))
         col.addView(a.st.grid(LearnProgress.BADGES.map { (k, label) ->
             val on = k in sp.badges
-            a.st.tile(label, if (on) "gagné !" else "à gagner", if (on) LearnStyle.GOLD else 0xFF3A424E.toInt(), if (on) "✪" else "·") {}
+            a.st.tile(label, if (on) "gagné !" else "à gagner", if (on) LearnStyle.GOLD else TvStyle.OUTLINE, if (on) "✪" else "·") {}
         }, 3, 16, 150))
         if (sp.mocks.isNotEmpty()) {
             col.addView(a.st.text("Épreuves blanches", 26f, Color.WHITE, true), col.lp(top = a.st.px(14)))

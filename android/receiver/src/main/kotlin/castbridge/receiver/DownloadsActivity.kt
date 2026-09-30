@@ -53,19 +53,19 @@ class DownloadsActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val root = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setBackgroundColor(Color.rgb(18, 18, 18)); setPadding(dp(48), dp(24), dp(48), dp(24)) }
-        header = text(26f, Color.WHITE).apply { text = "Téléchargements" }
-        banner = text(15f, Color.rgb(255, 167, 38)).apply { visibility = View.GONE }
+        val root = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setBackgroundColor(TvStyle.BG); setPadding(dp(48), dp(24), dp(48), dp(24)) }
+        header = text(26f, TvStyle.TEXT).apply { text = "Téléchargements" }
+        banner = text(16f, castbridge.core.brand.BrandTokens.Semantic.WARNING_DARK).apply { visibility = View.GONE }
         val buttons = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL; setPadding(0, dp(12), 0, dp(12)) }
         buttons.addView(button("Ajouter un lien") { askLink() })
         buttons.addView(button("Tout mettre en pause") { act { it.pauseAll() } })
         buttons.addView(button("Tout reprendre") { act { it.resumeAll() } })
         buttons.addView(button("À propos") { about() })
         list = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
-        empty = text(17f, Color.rgb(168, 168, 168)).apply {
+        empty = text(19f, TvStyle.TEXT2).apply {
             text = "Rien en cours. Ajoutez un lien ici, ou depuis le téléphone : CastBridge > CastBridge TV > Téléchargements (vous pouvez aussi « Partager » un lien vers CastBridge)."
         }
-        doneTitle = text(20f, Color.WHITE).apply { text = "Terminés"; setPadding(0, dp(20), 0, dp(8)) }
+        doneTitle = text(20f, TvStyle.TEXT).apply { text = "Terminés"; setPadding(0, dp(20), 0, dp(8)) }
         doneList = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
         val content = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
@@ -122,14 +122,14 @@ class DownloadsActivity : Activity() {
             r.bar.isIndeterminate = v.total <= 0 && v.state in setOf(DlState.CONNECTING, DlState.METADATA, DlState.DOWNLOADING)
             r.bar.progress = pct
             r.detail.text = detail(v)
-            r.detail.setTextColor(if (v.state == DlState.ERROR || v.state == DlState.WAITING_SPACE || v.state == DlState.WAITING_DRIVE) Color.rgb(255, 107, 107) else Color.rgb(168, 168, 168))
+            r.detail.setTextColor(if (v.state == DlState.ERROR || v.state == DlState.WAITING_SPACE || v.state == DlState.WAITING_DRIVE) TvStyle.ERROR else TvStyle.TEXT2)
         }
         empty.visibility = if (views.isEmpty()) View.VISIBLE else View.GONE
         val dids = done.map { it.id }.toSet()
         doneRows.keys.filter { it !in dids }.forEach { id -> doneList.removeView(doneRows.remove(id)) }
         done.forEachIndexed { i, f ->
             val t = doneRows.getOrPut(f.id) {
-                text(18f, Color.WHITE).apply { focusableBox(this); setOnClickListener { doneActions(f.id) } }.also { doneList.addView(it, i) }
+                text(19f, TvStyle.TEXT).apply { focusableBox(this); setOnClickListener { doneActions(f.id) } }.also { doneList.addView(it, i) }
             }
             t.text = "✓ ${f.name}\n   ${DownloadSpace.human(f.size)} · ${f.volumeLabel}" + if (f.files.isEmpty()) " · aucun fichier vidéo" else ""
         }
@@ -235,9 +235,9 @@ class DownloadsActivity : Activity() {
     private fun newRow(): Row {
         val box = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(dp(16), dp(10), dp(16), dp(10)) }
         focusableBox(box)
-        val title = text(19f, Color.WHITE).apply { maxLines = 1; ellipsize = android.text.TextUtils.TruncateAt.MIDDLE }
+        val title = text(19f, TvStyle.TEXT).apply { maxLines = 1; ellipsize = android.text.TextUtils.TruncateAt.MIDDLE }
         val bar = ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal).apply { max = 1000 }
-        val detail = text(15f, Color.rgb(168, 168, 168))
+        val detail = text(16f, TvStyle.TEXT2)
         box.addView(title); box.addView(bar, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(10))); box.addView(detail)
         (box.layoutParams as? ViewGroup.MarginLayoutParams)?.bottomMargin = dp(6)
         return Row(box, title, bar, detail)
@@ -246,8 +246,8 @@ class DownloadsActivity : Activity() {
     private fun focusableBox(v: View) {
         v.isFocusable = true; v.isClickable = true
         v.background = StateListDrawable().apply {
-            addState(intArrayOf(android.R.attr.state_focused), GradientDrawable().apply { setColor(Color.rgb(18, 56, 74)); setStroke(dp(2), Color.rgb(51, 181, 229)); cornerRadius = dp(8).toFloat() })
-            addState(intArrayOf(), GradientDrawable().apply { setColor(Color.rgb(28, 28, 28)); cornerRadius = dp(8).toFloat() })
+            addState(intArrayOf(android.R.attr.state_focused), GradientDrawable().apply { setColor(TvStyle.CARD_FOCUS); setStroke(dp(3), TvStyle.RING); cornerRadius = dp(TvStyle.R_MD).toFloat() })
+            addState(intArrayOf(), GradientDrawable().apply { setColor(TvStyle.CARD); cornerRadius = dp(TvStyle.R_MD).toFloat() })
         }
         if (v is TextView) v.setPadding(dp(16), dp(10), dp(16), dp(10))
     }
@@ -257,7 +257,7 @@ class DownloadsActivity : Activity() {
         layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply { marginEnd = dp(12) }
     }
 
-    private fun text(sp: Float, color: Int) = TextView(this).apply { setTextSize(TypedValue.COMPLEX_UNIT_SP, sp); setTextColor(color); gravity = Gravity.START }
+    private fun text(sp: Float, color: Int) = TextView(this).apply { setTextSize(TypedValue.COMPLEX_UNIT_SP, sp); typeface = if (sp >= 24f) TvFonts.display else TvFonts.body; setTextColor(color); gravity = Gravity.START }
     private fun dp(v: Int) = (v * resources.displayMetrics.density).toInt()
 
     companion object {

@@ -711,10 +711,10 @@ class PlayerActivity : Activity(), TvService.Screen {
     fun showDiag(host: String) {
         diagDialog?.dismiss()
         val tv = TextView(this).apply {
-            typeface = android.graphics.Typeface.MONOSPACE; textSize = 15f; setTextColor(0xFFE0F7FA.toInt())
+            typeface = android.graphics.Typeface.MONOSPACE; textSize = TvStyle.Type.CAPTION; setTextColor(TvStyle.TEXT)
             setPadding(32, 24, 32, 24); text = ""
         }
-        val sv = android.widget.ScrollView(this).apply { addView(tv); setBackgroundColor(0xFF0B1A2A.toInt()) }
+        val sv = android.widget.ScrollView(this).apply { addView(tv); setBackgroundColor(TvStyle.BG_ELEVATED) }
         diagView = tv
         diagDialog = AlertDialog.Builder(this).setTitle("Test Internet : $host").setView(sv)
             .setPositiveButton("Fermer", null).show()

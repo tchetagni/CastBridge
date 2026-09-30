@@ -102,6 +102,17 @@ def main():
     banner = open(os.path.join(BR, "logo", "tv-banner-320x180.svg"), encoding="utf-8").read()
     for dn in ("mdpi", "hdpi", "xhdpi"):
         rsvg(banner, os.path.join(rcv, f"drawable-{dn}", "banner.png"), int(320 * DENS[dn]), int(180 * DENS[dn]))
+    # ---- polices (sous-ensembles latin de branding/fonts/subset, voir subset_fonts.py) : res/font ----
+    fams = {"inter": ("Inter", (400, 500, 600, 700)), "bricolage_grotesque": ("BricolageGrotesque", (500, 700, 800)),
+            "sora": ("Sora", (400, 600, 700, 800)), "manrope": ("Manrope", (400, 600, 700, 800))}
+    for app, res in RES.items():
+        for fam, (file, weights) in fams.items():
+            cp(os.path.join(BR, "fonts", "subset", file + ".ttf"), os.path.join(res, "font", fam + ".ttf"))
+            items = "\n".join(f'    <font android:font="@font/{fam}" android:fontStyle="normal" android:fontWeight="{wt}" '
+                              f'android:fontVariationSettings="\'wght\' {wt}"/>' for wt in weights)
+            w(os.path.join(res, "font", f"cb_{fam}.xml"), '<?xml version="1.0" encoding="utf-8"?>\n'
+              '<!-- Famille de la charte (police variable, un axe wght par entrée) : généré par branding/tools/gen_app_assets.py -->\n'
+              f'<font-family xmlns:android="http://schemas.android.com/apk/res/android">\n{items}\n</font-family>\n')
     print("ok")
 
 

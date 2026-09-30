@@ -140,7 +140,7 @@ fun TvHome(onAdvanced: () -> Unit) {
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp).animateContentSize(), verticalArrangement = Arrangement.spacedBy(14.dp)) {
         // The TV
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Box(Modifier.size(12.dp).clip(RoundedCornerShape(6.dp)).background(if (reachable) Color(0xFF4ADE80) else cs.outline))
+            Box(Modifier.size(12.dp).clip(RoundedCornerShape(6.dp)).background(if (reachable) Cb.success else cs.outline))
             Spacer(Modifier.width(10.dp))
             Column(Modifier.weight(1f)) {
                 Text(tvName?.removePrefix("CastBridge TV ")?.ifBlank { "Ma TV" } ?: "Ma TV", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold)
@@ -171,7 +171,7 @@ fun TvHome(onAdvanced: () -> Unit) {
                 }
             }
         }
-        (u as? UploadService.State.Done)?.let { Text("« ${LibraryLogic.title(it.job.fileName)} » est sur la TV ✓", style = MaterialTheme.typography.bodyMedium, color = Color(0xFF4ADE80)) }
+        (u as? UploadService.State.Done)?.let { Text("« ${LibraryLogic.title(it.job.fileName)} » est sur la TV ✓", style = MaterialTheme.typography.bodyMedium, color = Cb.success) }
         (u as? UploadService.State.Failed)?.let { Text(it.reason, style = MaterialTheme.typography.bodyMedium, color = cs.error) }
 
         // Now playing
@@ -186,8 +186,8 @@ fun TvHome(onAdvanced: () -> Unit) {
                             Text(LibraryLogic.title(n.playing!!), maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.titleMedium)
                             if (n.dur > 0) LinearProgressIndicator({ n.pos.toFloat() / n.dur }, Modifier.fillMaxWidth().padding(top = 6.dp))
                         }
-                        IconButton({ RemoteActivity.open(ctx) }) { Icon(Icons.Filled.SettingsRemote, "Télécommande") }
-                        IconButton({ cmd { if (n.state == "playing") pause() else resume() } }) { Icon(if (n.state == "playing") Icons.Filled.Pause else Icons.Filled.PlayArrow, "Lecture / pause") }
+                        IconButton({ RemoteActivity.open(ctx) }) { Icon(cbv(R.drawable.ic_cb_telecommande), "Télécommande") }
+                        IconButton({ cmd { if (n.state == "playing") pause() else resume() } }) { Icon(if (n.state == "playing") cbv(R.drawable.ic_cb_pause) else cbv(R.drawable.ic_cb_lecture), "Lecture / pause") }
                     }
                 }
             }
@@ -195,18 +195,18 @@ fun TvHome(onAdvanced: () -> Unit) {
 
         // Tasks
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            Task(Icons.Filled.CloudUpload, "Envoyer une vidéo", "Copiée : elle reste aussi sur le téléphone", Modifier.weight(1f)) { PhoneConnect.feature("send"); moveNext = false; pick.launch(arrayOf("video/*", "audio/*")) }
-            Task(Icons.Filled.DriveFileMove, "Déplacer vers la TV", "Libère la place du téléphone", Modifier.weight(1f)) { PhoneConnect.feature("move"); moveNext = true; pick.launch(arrayOf("video/*", "audio/*")) }
+            Task(cbv(R.drawable.ic_cb_envoyer), "Envoyer une vidéo", "Copiée : elle reste aussi sur le téléphone", Modifier.weight(1f)) { PhoneConnect.feature("send"); moveNext = false; pick.launch(arrayOf("video/*", "audio/*")) }
+            Task(cbv(R.drawable.ic_cb_deplacer_vers_tv), "Déplacer vers la TV", "Libère la place du téléphone", Modifier.weight(1f)) { PhoneConnect.feature("move"); moveNext = true; pick.launch(arrayOf("video/*", "audio/*")) }
         }
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             Task(Icons.Filled.PlayCircle, "Regarder sur la TV", if (now != null) "Lecture en cours" else "Choisir une vidéo", Modifier.weight(1f)) {
                 PhoneConnect.feature("watch_on_tv")
                 if (now != null) showPlayer = true else showLibrary = true
             }
-            Task(Icons.Filled.SettingsRemote, "Télécommande", "Flèches, OK, volume, clavier", Modifier.weight(1f)) { PhoneConnect.feature("remote"); RemoteActivity.open(ctx) }
+            Task(cbv(R.drawable.ic_cb_telecommande), "Télécommande", "Flèches, OK, volume, clavier", Modifier.weight(1f)) { PhoneConnect.feature("remote"); RemoteActivity.open(ctx) }
         }
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            Task(Icons.Filled.VideoLibrary, "Bibliothèque de la TV", "${items.size} fichier(s)", Modifier.weight(1f)) { PhoneConnect.feature("tv_library"); showLibrary = true }
+            Task(cbv(R.drawable.ic_cb_bibliotheque), "Bibliothèque de la TV", "${items.size} fichier(s)", Modifier.weight(1f)) { PhoneConnect.feature("tv_library"); showLibrary = true }
             Task(Icons.Filled.SwapVert, "Échanger des fichiers", "Dans les deux sens", Modifier.weight(1f)) { PhoneConnect.feature("file_exchange"); showExchange = true }
         }
 
@@ -224,7 +224,7 @@ fun TvHome(onAdvanced: () -> Unit) {
         // Advanced
         HorizontalDivider()
         ListItem(modifier = Modifier.clickable(onClick = onAdvanced),
-            leadingContent = { Icon(Icons.Filled.Settings, null) },
+            leadingContent = { Icon(cbv(R.drawable.ic_cb_reglages), null) },
             headlineContent = { Text("Avancé") },
             supportingContent = { Text("Adresse manuelle, Bluetooth, Wi-Fi Direct, passerelle SSH, stockage de la TV, installation d'applications") },
             trailingContent = { Icon(Icons.Filled.ChevronRight, null) },
@@ -251,7 +251,7 @@ private fun Task(icon: ImageVector, title: String, sub: String, modifier: Modifi
     val cs = MaterialTheme.colorScheme
     ElevatedCard(modifier.clickable(onClick = onClick), shape = RoundedCornerShape(20.dp)) {
         Column(Modifier.padding(18.dp).fillMaxWidth()) {
-            Box(Modifier.size(52.dp).clip(RoundedCornerShape(16.dp)).background(Brush.linearGradient(listOf(Color(0xFF1F6F8B), Color(0xFF12384A)))),
+            Box(Modifier.size(52.dp).clip(RoundedCornerShape(16.dp)).background(Brush.linearGradient(listOf(MaterialTheme.colorScheme.surfaceVariant, MaterialTheme.colorScheme.surface))),
                 contentAlignment = Alignment.Center) { Icon(icon, null, tint = Color.White, modifier = Modifier.size(30.dp)) }
             Spacer(Modifier.height(14.dp))
             Text(title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)

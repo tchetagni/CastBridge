@@ -30,7 +30,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_CastBridge) // leaves the launch theme (splash) for the normal one
         super.onCreate(savedInstanceState)
-        setContent { CastTheme { Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) { Gate() } } }
+        setContent { CastTheme { SyncSystemBars(); Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) { Gate() } } }
         installFrom(intent)
     }
 
@@ -206,7 +206,7 @@ class MainActivity : ComponentActivity() {
                     ListItem(
                         modifier = Modifier.clickable { picker.launch(arrayOf("video/*", "audio/*", "image/*")) },
                         colors = ListItemDefaults.colors(containerColor = Color.Transparent),
-                        leadingContent = { Icon(Icons.Filled.VideoLibrary, null, tint = MaterialTheme.colorScheme.primary) },
+                        leadingContent = { Icon(cbv(R.drawable.ic_cb_bibliotheque), null, tint = MaterialTheme.colorScheme.primary) },
                         headlineContent = { Text(fileName, maxLines = 1) },
                         supportingContent = { Text("Toucher pour choisir un fichier") },
                     )
@@ -223,7 +223,7 @@ class MainActivity : ComponentActivity() {
             } else {
                 Button(enabled = selected != null && fileUri != null, onClick = ::cast,
                     modifier = Modifier.fillMaxWidth().padding(16.dp)) {
-                    Icon(Icons.Filled.Cast, null); Spacer(Modifier.width(8.dp)); Text("Diffuser")
+                    Icon(cbv(R.drawable.ic_cb_caster), null); Spacer(Modifier.width(8.dp)); Text("Diffuser")
                 }
             }
             if (playing) HandoffButton(fileUri, fileName, pos, dur) {

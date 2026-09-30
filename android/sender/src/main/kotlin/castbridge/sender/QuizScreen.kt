@@ -128,7 +128,7 @@ fun QuizScreen() {
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword))
         Button(enabled = tv != null && code.length == 4 && name.isNotBlank(), onClick = ::join,
             modifier = Modifier.fillMaxWidth().height(56.dp)) {
-            Icon(Icons.Filled.PlayArrow, null); Spacer(Modifier.width(8.dp)); Text("Rejoindre la partie", fontSize = 18.sp)
+            Icon(cbv(R.drawable.ic_cb_lecture), null); Spacer(Modifier.width(8.dp)); Text("Rejoindre la partie", fontSize = 18.sp)
         }
         if (message.isNotEmpty()) Text(message, color = MaterialTheme.colorScheme.error)
     }
@@ -144,7 +144,7 @@ private fun GamePage(url: String) {
             settings.javaScriptEnabled = true
             settings.domStorageEnabled = true
             webViewClient = WebViewClient()                     // stay inside the app
-            setBackgroundColor(0xFF0B1640.toInt())
+            setBackgroundColor(castbridge.core.brand.BrandTokens.QuizDesMillions.BACKGROUND)
             loadUrl(url)
         }
     }, onRelease = { it.destroy() }, modifier = Modifier.fillMaxSize())

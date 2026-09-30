@@ -296,7 +296,7 @@ private fun PhoneExercise(x: Exercise, lang: String, onNext: (() -> Unit)? = nul
         }
         ExerciseKind.PROBLEM -> {}
     } else {
-        Text(if (m.correct) "✓ Bonne réponse" else "✗ Réponse : " + Markdown.plain(Marking.rightAnswer(q, lang)), color = if (m.correct) Color(0xFF2E7D32) else Color(0xFFC62828), fontWeight = FontWeight.Bold)
+        Text(if (m.correct) "✓ Bonne réponse" else "✗ Réponse : " + Markdown.plain(Marking.rightAnswer(q, lang)), color = if (m.correct) Cb.success else Cb.error, fontWeight = FontWeight.Bold)
         if (q.explanation.isNotBlank()) Text(md(q.explanation))
         (if (x.kind == ExerciseKind.PROBLEM) x else q).method?.let { Text(md("**Méthode :** $it"), style = MaterialTheme.typography.bodySmall) }
         val last = x.kind != ExerciseKind.PROBLEM || part >= x.parts.size - 1

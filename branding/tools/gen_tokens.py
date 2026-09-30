@@ -113,4 +113,16 @@ css.append(f"  --cb-focus-ring-width: {d['focus']['tv']['ringWidth']['value'].re
 css.append("}")
 cp = os.path.join(REPO, "backend", "src", "main", "resources", "static", "admin", "assets", "cb-tokens.css")
 open(cp, "w", encoding="utf-8").write("\n".join(css) + "\n")
+# ---------------- Android colors.xml (thèmes XML, splash, dialogues) ----------------
+xml = ['<?xml version="1.0" encoding="utf-8"?>', "<!-- GÉNÉRÉ par branding/tools/gen_tokens.py depuis branding/design-tokens.json : ne pas modifier à la main. -->", "<resources>"]
+for k, v in col["dark"].items():
+    xml.append(f'    <color name="cb_{snake(k).lower()}">{v["value"]}</color>')
+for b in ("quizDesMillions", "echecs", "apprendre"):
+    for k, v in col["brand"][b].items():
+        xml.append(f'    <color name="cb_{snake(b).lower()}_{snake(k).lower()}">{v["value"]}</color>')
+xml.append("</resources>")
+for app in ("receiver", "sender"):
+    xp = os.path.join(REPO, "android", app, "src", "main", "res", "values", "cb_colors.xml")
+    os.makedirs(os.path.dirname(xp), exist_ok=True)
+    open(xp, "w", encoding="utf-8").write("\n".join(xml) + "\n")
 print("ok")
