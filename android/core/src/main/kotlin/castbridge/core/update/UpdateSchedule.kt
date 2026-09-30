@@ -33,8 +33,10 @@ class UpdateSchedule(
         STARTUP,
         /** Periodic timer. */
         TIMER,
-        /** The server asked for a check in a heartbeat answer (admin action), or the user pressed "check now". */
+        /** The server asked for a check in a heartbeat answer (admin action). */
         FORCED,
+        /** The user pressed "Vérifier maintenant": always allowed (a person is waiting), except twice within [USER_MIN_MS]. */
+        USER,
     }
 
     /** Earliest time of the next regular check. */
@@ -50,9 +52,10 @@ class UpdateSchedule(
     }
 
     fun isDue(s: State, now: Long, trigger: Trigger): Boolean {
+        if (trigger == Trigger.USER) return s.lastCheckAt == 0L || now < s.lastCheckAt || now - s.lastCheckAt >= USER_MIN_MS
         if (s.lastCheckAt != 0L && now - s.lastCheckAt < minIntervalMs && now >= s.lastCheckAt) return false
         return when (trigger) {
-            Trigger.STARTUP, Trigger.FORCED -> true
+            Trigger.STARTUP, Trigger.FORCED, Trigger.USER -> true
             Trigger.TIMER -> now >= nextCheckAt(s)
         }
     }
@@ -70,5 +73,6 @@ class UpdateSchedule(
 
     companion object {
         const val HOUR = 3_600_000L
+        const val USER_MIN_MS = 10_000L
     }
 }

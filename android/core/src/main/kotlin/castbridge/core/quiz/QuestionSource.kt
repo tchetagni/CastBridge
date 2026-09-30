@@ -4,9 +4,9 @@ import java.io.File
 import java.io.IOException
 
 /**
- * Where the questions come from. Today: the bank bundled in the app ([EmbeddedQuestionSource]). Tomorrow: a question
- * server, whose answers are kept in a small bounded cache on the TV ([CachedQuestionSource]) with the bundled bank as
- * the offline fallback. The game only ever sees a [QuizBank] snapshot. Exchange format: docs/QUIZ.md.
+ * Where the questions come from: the bank bundled in the app ([EmbeddedQuestionSource]) and the CastBridge server, whose
+ * answers are kept in a small bounded cache on the TV ([CachedQuestionSource], filled by [QuizSync]) with the bundled bank
+ * as the offline fallback. The game only ever sees a [QuizBank] snapshot. Exchange format: docs/QUIZ.md.
  */
 interface QuestionSource {
     /** Short description for logs / the about screen ("embarquée", "cache serveur du 2026-09-30"…). */
@@ -30,10 +30,7 @@ class EmbeddedQuestionSource(private val resources: List<String> = DEFAULT_RESOU
     }
 }
 
-/**
- * Future remote question server (not implemented in the POC). A client would page through the questions changed since
- * a date, or ask the server to draw a game (`GET /v1/questions?since=…&track=…&level=…&page=…`, see docs/QUIZ.md).
- */
+/** A remote question source; the CastBridge server is reached through [QuizSync] (GET /api/v1/quiz/questions). */
 interface RemoteQuestionApi {
     /** Exchange-format JSON of the questions updated after [sinceIso] (null = everything), page by page; null = unreachable. */
     fun fetch(sinceIso: String?, page: Int): String?
@@ -59,13 +56,26 @@ class CachedQuestionSource(
 
     private fun load(): QuizBank {
         val base = fallback.bank()
+        var deleted: Set<String> = emptySet()
         val cached = runCatching {
             if (!cacheFile.isFile || cacheFile.length() > maxBytes) null
-            else QuizBank.parse(cacheFile.readText(Charsets.UTF_8)).takeIf { it.validate().isEmpty() }
+            else {
+                val text = cacheFile.readText(Charsets.UTF_8)
+                QuizBank.parse(text).takeIf { it.validate().isEmpty() }?.also {
+                    // questions the server withdrew (deleted, rejected, back to draft) are also taken out of the bundled bank
+                    deleted = (Json.obj(text)["deleted"] as? List<*>).orEmpty().filterIsInstance<String>().toSet()
+                }
+            }
         }.getOrNull()
-        origin = if (cached != null) "${fallback.origin} + cache serveur (${cached.all.size} questions)" else fallback.origin
-        return if (cached != null) base.merge(cached) else base
+        origin = if (cached != null) "${fallback.origin} + serveur (${cached.all.size} questions)" else fallback.origin
+        serverQuestions = cached?.all?.size ?: 0
+        if (cached == null) return base
+        return QuizBank(base.all.filter { it.id !in deleted }).merge(cached)
     }
+
+    /** Number of questions received from the server (0 = bundled bank only). */
+    fun serverCount(): Int { bank(); return serverQuestions }
+    @Volatile private var serverQuestions = 0
 
     /**
      * Stores a server answer as the new cache, after checking it (size, format, every question valid). Written to a
