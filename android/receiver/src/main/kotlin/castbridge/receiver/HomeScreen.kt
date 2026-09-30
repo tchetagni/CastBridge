@@ -145,6 +145,8 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
         // Keep the row views (and the focus) when only their content changed.
         if (wanted.map { it.first } != rows.keys.toList()) {
             rowsBox.removeAllViews(); rows.clear()
+            // Tools first: every feature (Internet test, USB, Bluetooth, quiz…) is visible without scrolling.
+            toolsRow = tools().also { rowsBox.addView(it) }
             for ((title, _) in wanted) {
                 val h = TextView(act).apply { setTextColor(Color.WHITE); textSize = 21f; typeface = Typeface.DEFAULT_BOLD; setPadding(dp(10), dp(14), 0, 0) }
                 val a = RowAdapter(title)
@@ -156,7 +158,6 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
                 rowsBox.addView(h); rowsBox.addView(rv, LinearLayout.LayoutParams(-1, -2))
                 rows[title] = h to a
             }
-            toolsRow = tools().also { rowsBox.addView(it) }
         }
         for ((title, list) in wanted) rows[title]?.let { (h, a) -> h.text = "$title  ·  ${list.size}"; a.set(list) }
         if (items.isEmpty()) {
@@ -168,7 +169,7 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
             if (first != null) describe(first)
         }
         if (focusFirst) main.postDelayed({
-            val firstRow = (rowsBox.getChildAt(1) as? RecyclerView)
+            val firstRow = (0 until rowsBox.childCount).map { rowsBox.getChildAt(it) }.firstOrNull { it is RecyclerView } as? RecyclerView
             val v = firstRow?.getChildAt(0) ?: ((toolsRow?.tag as? ViewGroup)?.getChildAt(0))
             v?.requestFocus()
         }, 80)
@@ -179,7 +180,7 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
     private fun tools(): View {
         val w = dp(170)
         val box = LinearLayout(act).apply { orientation = LinearLayout.HORIZONTAL; setPadding(dp(4), dp(8), 0, 0); clipChildren = false }
-        val title = TextView(act).apply { text = "Fonctions"; setTextColor(0xFFDDE3EA.toInt()); textSize = 20f; typeface = Typeface.DEFAULT_BOLD; setPadding(dp(14), dp(22), 0, 0) }
+        val title = TextView(act).apply { text = "Outils et fonctions"; setTextColor(0xFFDDE3EA.toInt()); textSize = 20f; typeface = Typeface.DEFAULT_BOLD; setPadding(dp(14), dp(4), 0, 0) }
         fillTools(box)
         return LinearLayout(act).apply {
             orientation = LinearLayout.VERTICAL; clipChildren = false

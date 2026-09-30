@@ -382,11 +382,11 @@ class PlayerActivity : Activity(), TvService.Screen {
                 st["1-bt"]?.substringAfter(": ")?.take(28) ?: "Désactivé", btOk) {
                 choose("Bluetooth", listOf<Pair<String, () -> Unit>>("Rendre la TV visible (2 min) pour l'appairer" to { makeDiscoverable() }))
             },
-            HomeTool(R.drawable.ic_t_internet, "Internet", "Internet de la TV ou du téléphone (passerelle Bluetooth) ; tester avec ping et traceroute.",
+            HomeTool(R.drawable.ic_t_internet, "Test Internet", "Tester la connexion : DNS, HTTP, HTTPS, adresse publique, ping, traceroute (réseau de la TV et passerelle du téléphone).",
                 net?.replace("Internet via le téléphone", "Via")?.take(28) ?: "Réseau de la TV", net != null) {
                 val host = "8.8.8.8"
                 showDiag(host)
-                Thread { s?.gateway?.diagnose(host) { l -> main.post { appendDiag(l) } } ?: main.post { appendDiag("Passerelle indisponible") } }.start()
+                Thread { s?.gateway?.diagnose(host) { l -> main.post { appendDiag(l) } } ?: TvNetDiag.run(host, null) { l -> main.post { appendDiag(l) } } }.start()
             },
             HomeTool(R.drawable.ic_t_wifidirect, "Wi-Fi Direct", "Un réseau direct TV ↔ téléphone, sans box.", if (wdOn) "Activé" else "Désactivé", wdOn) { toggleWifiDirect() },
             HomeTool(R.drawable.ic_t_terminal, "Administration", "Page web et SSH pour gérer la TV à distance.",
@@ -518,7 +518,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         items += "Tester Internet (ping et traceroute)" to {
             val host = "8.8.8.8"
             showDiag(host)
-            Thread { svc?.gateway?.diagnose(host) { l -> main.post { appendDiag(l) } } ?: main.post { appendDiag("Passerelle indisponible") } }.start()
+            Thread { svc?.gateway?.diagnose(host) { l -> main.post { appendDiag(l) } } ?: TvNetDiag.run(host, null) { l -> main.post { appendDiag(l) } } }.start()
         }
         items += "Options développeur (débogage USB / Wi-Fi)" to { flash(openDevSettings()) }
         items += (if (ssh?.running == true) "SSH : désactiver" else "SSH : activer (administration à distance, clés autorisées seulement)") to {

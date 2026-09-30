@@ -91,13 +91,11 @@ class BtGatewayHost(private val ctx: Context, private val guard: PinGuard, priva
      */
     fun diagnose(host: String, out: (String) -> Unit) {
         if (!castbridge.core.gateway.Gw.validHost(host)) { out("Adresse invalide"); return }
-        out("— Réseau de la TV —")
-        runCatching {
-            val p = ProcessBuilder("/system/bin/ping", "-c", "3", "-W", "2", host).redirectErrorStream(true).start()
-            p.inputStream.bufferedReader().forEachLine { if (it.isNotBlank()) out(it) }; p.waitFor()
-        }.onFailure { out("ping indisponible sur la TV : ${it.message}") }
-        if (!entry.connected) { out("— Aucun téléphone ne partage sa connexion en Bluetooth —"); return }
-        out("— Via le téléphone ${entry.peerName ?: ""} (Bluetooth) —")
+        out("══ Réseau de la TV ══")
+        TvNetDiag.run(host, null, out)
+        if (!entry.connected) { out("══ Passerelle du téléphone : aucun téléphone ne partage sa connexion en Bluetooth ══"); out("— Terminé —"); return }
+        out("══ Via le téléphone ${entry.peerName ?: ""} (Bluetooth) ══")
+        TvNetDiag.run(host, proxy(), out)
         repeat(3) { i -> out("connexion TCP ${i + 1} vers $host:443 : " + (entry.tcpPing(host)?.let { "$it ms" } ?: "échec")) }
         entry.diag("ping", host) { out(it) }
         entry.diag("trace", host, timeoutS = 120) { out(it) }
