@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/layout :: head('Indicateurs')}"></head>
+<body>
+<header th:replace="~{admin/layout :: nav}"></header>
+<main>
+    <h1>Indicateurs <small th:text="|du ${@fmt.day(f.from)} au ${@fmt.day(f.to)}|"></small></h1>
+    <p>
+        <a class="chip" th:each="s : ${sections}" th:text="${s[1]}" th:classappend="${key == s[0]} ? 'on'"
+           th:href="@{/admin/kpi(section=${s[0]},from=${f.from},to=${f.to},app=${f.app},platform=${f.platform},group=${f.group},version=${f.version},country=${f.country},model=${f.model})}"></a>
+    </p>
+    <form th:replace="~{admin/kpifrag :: filters('/admin/kpi', ${key})}"></form>
+    <p class="right">
+        <a class="button ghost small" th:href="@{/admin/kpi/export(section=${key},from=${f.from},to=${f.to},app=${f.app},platform=${f.platform},group=${f.group},version=${f.version},country=${f.country},model=${f.model})}">Exporter en CSV</a>
+    </p>
+    <h2 th:text="${section.title}" class="section-title">Section</h2>
+    <div th:replace="~{admin/kpifrag :: section(${section})}"></div>
+    <p class="muted small">Les statistiques d'usage ne viennent que des appareils dont l'utilisateur les a acceptées ; parc, versions et
+        erreurs couvrent tous les appareils. Voir docs/TELEMETRY.md.</p>
+</main>
+</body>
+</html>

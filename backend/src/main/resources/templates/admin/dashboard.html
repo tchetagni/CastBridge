@@ -6,6 +6,47 @@
 <main>
     <div th:replace="~{admin/layout :: flash}"></div>
     <h1>Tableau de bord</h1>
+
+    <section class="card features">
+        <h2>Fonctionnalités les plus utilisées
+            <small th:text="|du ${@fmt.day(features.filter.from)} au ${@fmt.day(features.filter.to)} · ${features.activeDevices} appareils actifs|"></small></h2>
+        <p>
+            <a class="chip" th:classappend="${f.app == null} ? 'on'" th:href="@{/admin(from=${f.from},to=${f.to},platform=${f.platform},group=${f.group},version=${f.version},country=${f.country},model=${f.model})}">TV et téléphone</a>
+            <a class="chip" th:classappend="${f.app == 'tv'} ? 'on'" th:href="@{/admin(app='tv',from=${f.from},to=${f.to},platform=${f.platform},group=${f.group},version=${f.version},country=${f.country},model=${f.model})}">TV</a>
+            <a class="chip" th:classappend="${f.app == 'phone'} ? 'on'" th:href="@{/admin(app='phone',from=${f.from},to=${f.to},platform=${f.platform},group=${f.group},version=${f.version},country=${f.country},model=${f.model})}">Téléphone</a>
+        </p>
+        <form th:replace="~{admin/kpifrag :: filters('/admin', null)}"></form>
+        <div class="scroll">
+            <table class="list">
+                <thead><tr><th>Fonctionnalité</th><th>App</th><th class="num">Utilisations</th><th class="num">Appareils</th><th class="num">% du parc actif</th>
+                    <th class="num">Temps total</th><th class="num">Temps moyen / appareil</th><th class="num">Tendance</th></tr></thead>
+                <tbody>
+                <tr th:each="r : ${features.rows}" th:classappend="${r.uses == 0 and r.timeMs == 0} ? 'dim'">
+                    <td th:text="${r.label}"></td>
+                    <td th:text="${r.app == 'tv'} ? 'TV' : 'Tél.'"></td>
+                    <td class="num" th:text="${r.uses}"></td>
+                    <td class="num" th:text="${r.devices}"></td>
+                    <td class="num" th:text="${r.share}"></td>
+                    <td class="num" th:text="${r.time}"></td>
+                    <td class="num" th:text="${r.avgTime}"></td>
+                    <td class="num trend" th:classappend="${@fmt.trendClass(r.trend)}" th:text="${r.trend}"
+                        th:title="|période précédente : ${r.previousUses}|"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="cols">
+            <figure th:replace="~{admin/kpifrag :: chart(${features.ranking})}"></figure>
+            <figure th:replace="~{admin/kpifrag :: chart(${features.weekly})}"></figure>
+        </div>
+        <p class="small">
+            <a th:href="@{/admin/kpi/export(section='fonctionnalites',from=${f.from},to=${f.to},app=${f.app},platform=${f.platform},group=${f.group},version=${f.version},country=${f.country},model=${f.model})}">Exporter en CSV</a>
+            · <a th:href="@{/admin/kpi}">Tous les indicateurs</a>
+            <span class="muted"> · Tendance : utilisations comparées à la période précédente de même durée. Seuls les appareils ayant accepté les statistiques d'usage sont comptés.</span>
+        </p>
+    </section>
+
+    <h2>Parc</h2>
     <section class="tiles">
         <a class="tile" th:href="@{/admin/devices}"><b th:text="${d.total}">0</b><span>appareils connus</span></a>
         <a class="tile good" th:href="@{/admin/devices(state='online')}"><b th:text="${d.online}">0</b><span>en ligne (15 min)</span></a>

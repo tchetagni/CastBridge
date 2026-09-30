@@ -113,6 +113,21 @@ body.login { display: flex; min-height: 100vh; align-items: center; justify-cont
 .login-box form { display: flex; flex-direction: column; gap: 12px; }
 .login-box label { display: flex; flex-direction: column; gap: 4px; color: var(--muted); font-size: .85rem; }
 
+/* KPI */
+.kpi-filters label { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: .85rem; }
+.kpi-filters .quick { display: inline-flex; gap: 10px; align-items: center; font-size: .85rem; }
+.right { text-align: right; margin: 0 0 8px; }
+.section-title { margin-top: 4px; }
+.card.features { border-color: var(--accent); }
+figure.chart { margin: 12px 0 0; min-width: 0; }
+figure.chart figcaption { color: var(--muted); font-size: .85rem; margin-bottom: 6px; }
+.chart-box { position: relative; height: 260px; }
+.chart-box.tall { height: 380px; }
+td.trend.up { color: var(--good); }
+td.trend.down { color: var(--bad); }
+.tile small { font-size: .75rem; margin-top: 2px; }
+.cols.tables { margin-top: 16px; }
+
 @media (max-width: 640px) {
   main { padding: 12px; }
   .cols { grid-template-columns: 1fr; }

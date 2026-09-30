@@ -62,6 +62,10 @@ public class Device {
     public String city;
     public String ip;
     @Column(name = "ip_seen_at") public Instant ipSeenAt;
+    /** The user accepted the usage statistics (else only the essential events are kept). */
+    @Column(name = "usage_consent", nullable = false) public boolean usageConsent;
+    @Column(name = "consent_at") public Instant consentAt;
+    @Column(name = "consent_version") public String consentVersion;
     @Column(name = "first_seen", nullable = false) public Instant firstSeen;
     @Column(name = "last_seen", nullable = false) public Instant lastSeen;
 

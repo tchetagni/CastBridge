@@ -38,10 +38,14 @@ public record DeviceReport(
         Boolean sshEnabled,
         Boolean wifiDirect,
         Integer videoCount,
-        String lastError) {
+        String lastError,
+        /** "essential" (identification, versions, errors: needed for the updates) or "usage" (also usage statistics) */
+        String consent,
+        /** version of the information text the user saw (e.g. "2026-10") */
+        String consentVersion) {
 
     static DeviceReport empty() {
         return new DeviceReport(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-                null, null, null, null, null, null, null, null, null, null, null);
+                null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 }

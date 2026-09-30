@@ -3,6 +3,7 @@ package castbridge.server.admin;
 import castbridge.server.devices.Device;
 import castbridge.server.devices.DeviceRecords;
 import castbridge.server.devices.DeviceService;
+import castbridge.server.telemetry.KpiService;
 import castbridge.server.web.ApiException;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -22,8 +23,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class AdminWebController {
     private final DeviceService devices;
+    private final KpiService kpi;
+    private final AdminKpiPages kpiPages;
 
-    public AdminWebController(DeviceService devices) { this.devices = devices; }
+    public AdminWebController(DeviceService devices, KpiService kpi, AdminKpiPages kpiPages) {
+        this.devices = devices;
+        this.kpi = kpi;
+        this.kpiPages = kpiPages;
+    }
 
     @GetMapping("/")
     public String root() { return "redirect:/admin"; }
@@ -32,7 +39,20 @@ public class AdminWebController {
     public String login() { return "admin/login"; }
 
     @GetMapping("/admin")
-    public String dashboard(Model model) {
+    public String dashboard(@RequestParam(required = false) String from, @RequestParam(required = false) String to,
+                            @RequestParam(required = false) String app, @RequestParam(required = false) Integer version,
+                            @RequestParam(required = false) String platform, @RequestParam(required = false) String country,
+                            @RequestParam(required = false) String group, @RequestParam(required = false) String model,
+                            Model m) {
+        // first: the most used features (what Esaie wants to see first)
+        var f = AdminKpiPages.filter(from, to, app, version, platform, country, group, model);
+        m.addAttribute("features", kpi.features(f));
+        kpiPages.formModel(m, f);
+        dashboardModel(m);
+        return "admin/dashboard";
+    }
+
+    private void dashboardModel(Model model) {
         Map<String, Object> d = devices.dashboard();
         model.addAttribute("d", d);
         @SuppressWarnings("unchecked")
@@ -43,7 +63,6 @@ public class AdminWebController {
         List<DeviceRecords.Crash> crashes = (List<DeviceRecords.Crash>) d.get("recentCrashes");
         model.addAttribute("crashDevices", devices.byIds(crashes.stream().map(c -> c.deviceId).distinct().toList()));
         model.addAttribute("active", "dashboard");
-        return "admin/dashboard";
     }
 
     @GetMapping("/admin/devices")
@@ -90,6 +109,7 @@ public class AdminWebController {
             bars.add(b);
         }
         model.addAttribute("bars", bars);
+        model.addAttribute("timeline", kpi.timeline(detail.device().id, 200));
         model.addAttribute("active", "devices");
         return "admin/device";
     }
@@ -120,7 +140,7 @@ public class AdminWebController {
     public String delete(@PathVariable String id, RedirectAttributes ra) {
         try {
             devices.delete(id);
-            ra.addFlashAttribute("ok", "Appareil oublié (il sera recréé s'il reprend contact)");
+            ra.addFlashAttribute("ok", "Appareil et données effacés (il sera recréé s'il reprend contact)");
         } catch (ApiException e) {
             ra.addFlashAttribute("error", e.getMessage());
         }

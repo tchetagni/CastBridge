@@ -63,6 +63,19 @@ public class Fmt {
         return o == null || o.toString().isBlank() ? "—" : o.toString();
     }
 
+    public String duration(Number ms) {
+        if (ms == null) return "";
+        long s = ms.longValue() / 1000;
+        if (s < 60) return s + " s";
+        if (s < 3600) return s / 60 + " min " + s % 60 + " s";
+        return s / 3600 + " h " + (s % 3600) / 60 + " min";
+    }
+
+    /** CSS class of a trend text ("▲ +12 %", "▼ -5 %"). */
+    public String trendClass(String t) {
+        return t == null ? "" : t.startsWith("▲") ? "up" : t.startsWith("▼") ? "down" : "";
+    }
+
     /** Used-space percentage for a meter (0..100), null if unknown. */
     public Integer usedPct(Integer free, Integer total) {
         if (free == null || total == null || total <= 0) return null;

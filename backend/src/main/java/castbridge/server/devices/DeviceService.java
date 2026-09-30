@@ -59,9 +59,12 @@ public class DeviceService {
     private final CrashRepository crashes;
     private final GeoLocator geo;
     private final CastbridgeProperties props;
+    private final org.springframework.jdbc.core.JdbcTemplate jdbc;
 
     public DeviceService(DeviceRepository devices, InstallRepository installs, VersionRepository versions, HeartbeatRepository heartbeats,
-                         DailyRepository daily, CrashRepository crashes, GeoLocator geo, CastbridgeProperties props) {
+                         DailyRepository daily, CrashRepository crashes, GeoLocator geo, CastbridgeProperties props,
+                         org.springframework.jdbc.core.JdbcTemplate jdbc) {
+        this.jdbc = jdbc;
         this.devices = devices;
         this.installs = installs;
         this.versions = versions;
@@ -207,6 +210,12 @@ public class DeviceService {
             d.lastError = cut(r.lastError(), 500);
             d.lastErrorAt = now;
         }
+        if (r.consent() != null && (r.consent().equals("usage") || r.consent().equals("essential"))) {
+            boolean usage = r.consent().equals("usage");
+            if (usage != d.usageConsent || d.consentAt == null) d.consentAt = now;
+            d.usageConsent = usage;
+            d.consentVersion = cut(r.consentVersion(), 16);
+        }
         GeoLocator.Place place = geo.locate(req);
         if (place.country() != null) {
             d.country = place.country();
@@ -266,6 +275,11 @@ public class DeviceService {
         if (d.storageFreeMb != null) agg.minStorageFreeMb = agg.minStorageFreeMb == null ? d.storageFreeMb : Math.min(agg.minStorageFreeMb, d.storageFreeMb);
         if (d.videoCount != null) agg.maxVideoCount = agg.maxVideoCount == null ? d.videoCount : Math.max(agg.maxVideoCount, d.videoCount);
         daily.save(agg);
+        // activity of the day for the fleet KPIs (DAU/MAU, retention): every device counts, even without usage statistics
+        devices.flush();
+        jdbc.update("""
+                insert into kpi_device_day (stat_day, device_id, app, version_code) values (?,?,?,?)
+                on duplicate key update version_code = coalesce(values(version_code), version_code)""", day, d.id, d.app, d.versionCode);
     }
 
     // ================================================================ admin

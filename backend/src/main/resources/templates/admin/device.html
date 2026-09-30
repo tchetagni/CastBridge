@@ -42,6 +42,7 @@
                 <dt>Premier contact</dt><dd th:text="${@fmt.date(dev.firstSeen)}"></dd>
                 <dt>Dernier contact</dt><dd th:text="${@fmt.date(dev.lastSeen)}"></dd>
                 <dt>Dernière erreur</dt><dd class="wrap" th:text="${dev.lastError != null} ? ${dev.lastError} + ' (' + ${@fmt.date(dev.lastErrorAt)} + ')' : '—'"></dd>
+                <dt>Consentement</dt><dd th:text="${dev.usageConsent} ? 'statistiques d’usage acceptées (' + ${@fmt.date(dev.consentAt)} + ')' : 'essentiel seulement'"></dd>
                 <dt>Identifiant</dt><dd class="small" th:text="${dev.publicId}"></dd>
             </dl>
         </section>
@@ -76,7 +77,7 @@
                             th:text="${dev.blocked} ? 'Débloquer' : 'Bloquer l\'appareil'"></button>
                 </form>
                 <form th:action="@{/admin/devices/{id}/delete(id=${dev.publicId})}" method="post">
-                    <button type="submit" class="danger ghost" data-confirm="Oublier cet appareil et tout son historique ?">Oublier l'appareil</button>
+                    <button type="submit" class="danger ghost" data-confirm="Effacer cet appareil, son historique et toutes ses données d'usage ? (droit à l'effacement, irréversible)">Effacer l'appareil et ses données</button>
                 </form>
             </div>
         </section>
@@ -114,6 +115,26 @@
             </details>
         </section>
     </div>
+
+    <section class="card">
+        <h2>Chronologie de l'usage <small th:text="${dev.usageConsent} ? '(200 derniers événements)' : '(statistiques d’usage non acceptées : erreurs et mises à jour seulement)'"></small></h2>
+        <p th:if="${timeline.isEmpty()}" class="muted">Aucun événement.</p>
+        <div class="scroll" th:unless="${timeline.isEmpty()}">
+            <table class="compact">
+                <thead><tr><th>Date (appareil)</th><th>Événement</th><th>Détail</th><th>Durée</th><th>Résultat</th><th>Version</th></tr></thead>
+                <tbody>
+                <tr th:each="e : ${timeline}">
+                    <td class="nowrap" th:text="${@fmt.date(e.device_ts.toInstant())}"></td>
+                    <td th:text="${e.name}"></td>
+                    <td class="wrap small" th:text="${e.props}"></td>
+                    <td th:text="${e.num_ms != null} ? ${@fmt.duration(e.num_ms)} : ''"></td>
+                    <td th:text="${e.ok == null} ? '' : (${e.ok} ? 'ok' : 'échec')"></td>
+                    <td th:text="${e.version_code}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
 
     <section class="card">
         <h2>Derniers contacts détaillés <small>(gardés 30 jours)</small></h2>
