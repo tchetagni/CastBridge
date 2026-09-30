@@ -115,7 +115,7 @@ class GamesActivity : Activity() {
             clipChildren = false
         }
         val col = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL; clipChildren = false
+            orientation = LinearLayout.VERTICAL; clipChildren = false; clipToPadding = false
             setPadding(dx.px(96), dx.px(64), dx.px(96), dx.px(48))
         }
         col.addView(dx.text(TextView(this).apply { text = "Jeux"; maxLines = 1 }, 72, GamesColors.TEXT_HIGH, true))
@@ -126,9 +126,9 @@ class GamesActivity : Activity() {
         val avail = dx.width - 2 * dx.px(96)
         val n = Games.all.size
         val cardW = if (n <= 3) (avail - gap * (n - 1)) / n else (avail - gap * 2) / 3
-        val row = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL; clipChildren = false; setPadding(dx.px(16), dx.px(24), dx.px(16), dx.px(24)) }
+        val row = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL; clipChildren = false; clipToPadding = false; setPadding(dx.px(16), dx.px(24), dx.px(16), dx.px(24)) }
         Games.all.forEachIndexed { i, g ->
-            row.addView(card(g, cardW), LinearLayout.LayoutParams(cardW, dx.px(640)).apply { if (i > 0) leftMargin = gap })
+            row.addView(card(g, cardW), LinearLayout.LayoutParams(cardW, dx.px(600)).apply { if (i > 0) leftMargin = gap })
         }
         col.addView(HorizontalScrollView(this).apply {
             isHorizontalScrollBarEnabled = false; clipChildren = false; clipToPadding = false; addView(row)

@@ -165,7 +165,8 @@ class SudokuActivity : Activity() {
         build(body)
         overlay.addView(panel, FrameLayout.LayoutParams(dx.px(820), -2, Gravity.CENTER))
         overlay.visibility = View.VISIBLE
-        (0 until body.childCount).map { body.getChildAt(it) }.filter { it.isFocusable }.getOrNull(focus)?.requestFocus()
+        fun focusables(v: View): List<View> = if (v is android.view.ViewGroup) (0 until v.childCount).flatMap { focusables(v.getChildAt(it)) } else if (v.isFocusable) listOf(v) else emptyList()
+        focusables(body).getOrNull(focus)?.requestFocus()
     }
 
     private fun button(parent: LinearLayout, text: String, enabled: Boolean = true, onClick: () -> Unit): TextView {
