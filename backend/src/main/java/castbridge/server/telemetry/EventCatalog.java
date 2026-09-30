@@ -44,12 +44,12 @@ public final class EventCatalog {
             "library", "Bibliothèque", "quiz", "Quiz", "chess", "Échecs", "receive", "Recevoir du téléphone", "usb", "Clé USB",
             "bluetooth", "Bluetooth", "internet", "Internet / test", "wifi_direct", "Wi-Fi Direct", "admin", "Administration",
             "downloads", "Téléchargements", "updates", "Mises à jour", "settings", "Réglages", "learn", "Apprendre",
-            "remote", "Télécommande", "help", "Aide", "dev_options", "Options développeur");
+            "remote", "Télécommande", "help", "Aide", "dev_options", "Options développeur", "games", "Jeux", "sudoku", "Sudoku");
     public static final Map<String, String> PHONE_FEATURES = ordered(
             "send", "Envoyer", "move", "Déplacer", "watch_on_tv", "Regarder sur la TV", "tv_library", "Bibliothèque TV",
             "file_exchange", "Échange de fichiers", "remote", "Télécommande", "player", "Lecteur / Ouvrir avec", "cast", "Caster",
             "quiz", "Quiz", "chess", "Échecs", "bt_gateway", "Passerelle Bluetooth", "downloads", "Téléchargements",
-            "updates", "Mises à jour", "settings", "Réglages", "learn", "Apprendre");
+            "updates", "Mises à jour", "settings", "Réglages", "learn", "Apprendre", "games", "Jeux");
     /** Screens that are not features. */
     public static final Map<String, String> OTHER_SCREENS = ordered("home", "Accueil", "onboarding", "Premier lancement",
             "player", "Lecteur", "privacy", "Confidentialité");
@@ -90,6 +90,8 @@ public final class EventCatalog {
         def("chess_game", false, Map.of("mode", Prop.text(24), "ai_level", Prop.integer(100), "time_control", Prop.text(16),
                 "result", Prop.oneOf("win", "loss", "draw", "abandon"), "moves", Prop.integer(10_000), "ms", ms),
                 "mode", "result", "ms", null, "moves", null, true);
+        def("sudoku_game", false, Map.of("level", Prop.oneOf("EASY", "MEDIUM", "HARD", "EXPERT"), "ms", ms, "hints", Prop.integer(10),
+                "result", Prop.oneOf("win", "abandon")), "level", "result", "ms", null, "hints", null, true);
         def("download", false, Map.of("type", Prop.oneOf("http", "magnet", "torrent"), "bytes", bytes, "ms", ms, "ok", ok, "error", error),
                 "type", null, "ms", "bytes", null, "ok", true);
         def("gateway_session", false, Map.of("ms", ms, "bytes", bytes), null, null, "ms", "bytes", null, null, true);
