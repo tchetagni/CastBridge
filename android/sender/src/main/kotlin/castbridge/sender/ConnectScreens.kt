@@ -122,6 +122,8 @@ fun SettingsScreen(onClose: () -> Unit) {
                     HorizontalDivider()
                     ConnectionSection(v)
                     HorizontalDivider()
+                    ParentalSection()
+                    HorizontalDivider()
                     AdvancedSection()
                 }
             }

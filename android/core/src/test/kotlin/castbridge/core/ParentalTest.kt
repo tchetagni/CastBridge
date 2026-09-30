@@ -479,3 +479,64 @@ class ParentalApiTest {
         }
     }
 }
+
+/** The real server (TV PIN) + the parental routes + the phone's client, over loopback. */
+class ParentalHttpTest {
+    private val dir = kotlin.io.path.createTempDirectory("parental-http").toFile()
+    private val port = java.net.ServerSocket(0).use { it.localPort }
+    private val eng = engine()
+    private val server = castbridge.core.tv.ReceiverServer(dir, FakePlayer(), port, pin = "123456", extension = ParentalApi(eng)).apply { start(5000, false) }
+    private val base = "http://127.0.0.1:$port"
+
+    @AfterTest fun tearDown() { server.stop(); dir.deleteRecursively() }
+
+    private fun raw(method: String, path: String, body: String? = null, tvPin: String? = "123456"): Pair<Int, String> {
+        val c = java.net.URL(base + path).openConnection() as java.net.HttpURLConnection
+        c.requestMethod = method
+        tvPin?.let { c.setRequestProperty("X-CB-Pin", it) }
+        if (body != null) { c.doOutput = true; c.outputStream.use { it.write(body.toByteArray()) } }
+        val code = c.responseCode
+        return code to (if (code < 400) c.inputStream else c.errorStream).bufferedReader().use { it.readText() }
+    }
+
+    @Test fun everyParentalRouteIsBehindTheTvPin() {
+        assertEquals(401, raw("GET", "/api/parental", tvPin = null).first)
+        assertEquals(401, raw("POST", "/api/parental/disable", "{}", tvPin = null).first)
+        assertEquals(401, raw("POST", "/api/parental/reset", "{\"confirm\":\"RESET\"}", tvPin = "000000").first)
+        assertEquals(200, raw("GET", "/api/parental").first)
+    }
+
+    @Test fun pinInTheUrlIsRefusedEvenWithTheRightTvPin() {
+        assertEquals(400, raw("POST", "/api/parental/pin/create?ppin=4821", "{\"pin\":\"4821\"}").first)
+        assertEquals(400, raw("POST", "/api/parental/pin/create?new=4821", "{\"pin\":\"4821\"}").first)
+        assertFalse(eng.hasPin())
+    }
+
+    @Test fun phoneClientFullRoundTrip() {
+        val c = ParentalClient(base, "123456")
+        assertEquals(false, c.status()["pinSet"])
+        val refused = assertFailsWith<ParentalError> { c.createPin("4444") }
+        assertEquals(400, refused.code)
+        assertFailsWith<ParentalError> { c.createPin("") }
+        c.createPin("4821")
+        assertEquals(true, c.status()["pinSet"])
+        val wrong = assertFailsWith<ParentalError> { c.load("0001") }
+        assertEquals(403, wrong.code)
+        val loaded = c.load("4821")
+        val cfg = loaded.config.copy(enabled = true, activeProfile = "c1", profiles = listOf(ChildProfile("c1", "Léa", window = TimeWindow(480, 1200), dailyLimitMin = 60)),
+            rules = listOf(RatingRule(RuleKind.KEYWORD, "horreur", Rating.U16)))
+        val saved = c.save("4821", cfg)
+        assertEquals(1, saved.rev); assertTrue(saved.enabled)
+        assertFailsWith<ParentalError> { c.save("4821", cfg) }.also { assertEquals(409, it.code) }
+        assertEquals(cfg.profiles, c.load("4821").config.profiles)
+        assertTrue(c.report("4821").containsKey("days"))
+        // five wrong PINs: the TV answers 429 with the delay, and keeps refusing the right PIN
+        repeat(4) { assertFailsWith<ParentalError> { c.report("9999") } }
+        val locked = assertFailsWith<ParentalError> { c.report("9999") }
+        assertEquals(429, locked.code); assertEquals(60L, locked.retryAfter)
+        assertEquals(429, assertFailsWith<ParentalError> { c.report("4821") }.code)
+        // the administrator (TV PIN) can still switch the control off, then erase the PIN
+        c.disable(); assertEquals(false, c.status()["enabled"])
+        c.reset(); assertEquals(false, c.status()["pinSet"])
+    }
+}
