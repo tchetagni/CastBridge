@@ -136,7 +136,8 @@ class HttpRemoteTransport(
         connect()
         try {
             val path = "/api/remote/$route" + if (query.isNotEmpty()) "?$query" else ""
-            val req = "$method $path HTTP/1.1\r\nHost: $host:$port\r\nX-CB-Pin: $pin\r\nContent-Length: 0\r\nConnection: keep-alive\r\n\r\n"
+            val auth = castbridge.core.trust.TvAuth.header(pin).let { (k, v) -> "$k: $v" }
+            val req = "$method $path HTTP/1.1\r\nHost: $host:$port\r\n$auth\r\nContent-Length: 0\r\nConnection: keep-alive\r\n\r\n"
             output!!.write(req.toByteArray(Charsets.UTF_8)); output!!.flush()
             val r = Http1.readResponse(input!!)
             if (r.close) close()
@@ -239,7 +240,7 @@ object RemoteBt {
 
     /** Phone side: the handshake; throws [castbridge.core.tv.BtProtocol.Refused] on a bad PIN. */
     fun handshake(input: InputStream, output: OutputStream, pin: String) {
-        output.write((MAGIC + pin).toByteArray(Charsets.US_ASCII)); output.flush()
+        output.write((MAGIC + castbridge.core.trust.TvAuth.btPin(pin)).toByteArray(Charsets.US_ASCII)); output.flush()   // a token = trusted phone: no PIN on the wire
         val st = input.read()
         if (st < 0) throw IOException("connection closed")
         if (st != castbridge.core.tv.BtProtocol.OK) throw castbridge.core.tv.BtProtocol.Refused(st)

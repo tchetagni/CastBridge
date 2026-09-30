@@ -40,6 +40,19 @@ object BtProtocol {
      */
     const val NEGOTIATE = "CBTN"
     const val WANT_WIFI_DIRECT = 1
+    /**
+     * "Who is this phone to you?": the control message of the plug-and-play link. Only over Android's paired (authenticated and
+     * encrypted) RFCOMM link, the peer being identified by the Bluetooth address of the socket, never by anything it writes.
+     *
+     * Client -> TV : "CBTH" | u8 flags (bit 0 = "I am new: ask the owner to trust me", honoured only while the TV shows « Ajouter un téléphone »)
+     * TV -> client : status byte (OK or ERR_UNTRUSTED/ERR_DENIED/ERR_TIMEOUT/ERR_NOT_OPEN/ERR_BUSY); if OK: u16 length | UTF-8 lines [HelloInfo]
+     *
+     * A peer that is not trusted never receives an address, a name, a version or a token. A trusted phone receives the TV's name,
+     * its current Wi-Fi addresses and a fresh per-phone token (never the PIN). The TV ignores the PIN field of the other messages
+     * for a trusted peer (the phone then sends [castbridge.core.trust.TvAuth.NO_PIN]).
+     */
+    const val HELLO = "CBTH"
+    const val HELLO_REQUEST_TRUST = 1
     /** RFCOMM service UUID shared by the TV and the phone app. */
     const val SERVICE_UUID = "7c5e3b9a-4d2f-4c61-9b0e-cb0000000001"
     /** Second RFCOMM service: a plain byte tunnel to the TV's SSH server (see castbridge.core.ssh.SshTunnel). */
@@ -52,10 +65,20 @@ object BtProtocol {
     const val ERR_LOCKED = 5
     const val ERR_IO = 6
     const val ERR_SIZE = 7
+    /** HELLO: this phone is not trusted (and did not ask, or the link is not an authenticated pairing). */
+    const val ERR_UNTRUSTED = 8
+    /** HELLO: the owner pressed "Refuser" on the TV. */
+    const val ERR_DENIED = 9
+    /** HELLO: nobody answered on the TV in time. */
+    const val ERR_TIMEOUT = 10
+    /** HELLO: the TV is not in "Ajouter un téléphone" mode. */
+    const val ERR_NOT_OPEN = 11
+    /** HELLO: another phone is waiting for the owner's answer, or too many refusals. */
+    const val ERR_BUSY = 12
     private const val MAX_NAME = 400
 
     /** Errors that retrying cannot fix. */
-    fun isFatal(code: Int) = code in setOf(ERR_MAGIC, ERR_PIN, ERR_NAME, ERR_SPACE, ERR_LOCKED, ERR_SIZE)
+    fun isFatal(code: Int) = code in setOf(ERR_MAGIC, ERR_PIN, ERR_NAME, ERR_SPACE, ERR_LOCKED, ERR_SIZE, ERR_UNTRUSTED, ERR_DENIED, ERR_NOT_OPEN)
 
     fun describe(code: Int) = when (code) {
         OK -> "ok"
@@ -65,6 +88,11 @@ object BtProtocol {
         ERR_SPACE -> "espace insuffisant sur la TV"
         ERR_LOCKED -> "trop d'essais, TV verrouillée"
         ERR_SIZE -> "taille invalide"
+        ERR_UNTRUSTED -> "téléphone non autorisé par la TV"
+        ERR_DENIED -> "refusé sur la TV"
+        ERR_TIMEOUT -> "pas de réponse sur la TV"
+        ERR_NOT_OPEN -> "la TV n'attend pas de nouveau téléphone"
+        ERR_BUSY -> "la TV traite déjà une demande"
         else -> "erreur TV ($code)"
     }
 
@@ -84,33 +112,45 @@ object BtProtocol {
         negotiate: ((wantWifiDirect: Boolean) -> LinkInfo)? = null,
         /** Phone remote over Bluetooth (CBTR, castbridge.core.remote.RemoteBt): runs until the phone closes the link. */
         remote: ((InputStream, OutputStream) -> Unit)? = null,
+        /** Plug-and-play HELLO (CBTH); null = this TV does not offer it (ERR_MAGIC). Gets (peer address, phone asks to be trusted). */
+        hello: ((peer: String, requestTrust: Boolean) -> HelloReply)? = null,
+        /** Is this peer (address proven by the paired link) a trusted phone? Then the PIN field is not checked. */
+        trusted: ((String) -> Boolean)? = null,
     ): Int {
         dir.mkdirs()
         val din = DataInputStream(input)
         val dout = DataOutputStream(output)
         fun fail(code: Int): Int { dout.writeByte(code); dout.flush(); return code }
+        /** null = allowed. A trusted phone needs no PIN; everybody else is checked (and counted) like before. */
+        fun pinProblem(pin: String): Int? {
+            if (trusted?.invoke(peer) == true) return null
+            if (guard == null) return null
+            return when (guard.check(peer, pin)) { PinGuard.Result.OK -> null; PinGuard.Result.BAD -> ERR_PIN; PinGuard.Result.LOCKED -> ERR_LOCKED }
+        }
 
         val magic = ByteArray(4).also { din.readFully(it) }
         val m = String(magic, Charsets.US_ASCII)
+        if (m == HELLO && hello != null) {
+            val flags = din.readUnsignedByte()
+            return when (val r = hello(peer, flags and HELLO_REQUEST_TRUST != 0)) {
+                is HelloReply.Err -> fail(r.code)
+                is HelloReply.Ok -> {
+                    val text = r.info.encode().toByteArray(Charsets.UTF_8)
+                    dout.writeByte(OK); dout.writeShort(text.size); dout.write(text); dout.flush(); OK
+                }
+            }
+        }
         if (m == NEGOTIATE && negotiate != null) {
             val pin = String(ByteArray(Pin.LENGTH).also { din.readFully(it) }, Charsets.US_ASCII)
             val flags = din.readUnsignedByte()
-            if (guard != null) when (guard.check(peer, pin)) {
-                PinGuard.Result.OK -> {}
-                PinGuard.Result.BAD -> return fail(ERR_PIN)
-                PinGuard.Result.LOCKED -> return fail(ERR_LOCKED)
-            }
+            pinProblem(pin)?.let { return fail(it) }
             val text = negotiate(flags and WANT_WIFI_DIRECT != 0).encode().toByteArray(Charsets.UTF_8)
             dout.writeByte(OK); dout.writeShort(text.size); dout.write(text); dout.flush()
             return OK
         }
         if (m == castbridge.core.remote.RemoteBt.MAGIC && remote != null) {
             val pin = String(ByteArray(Pin.LENGTH).also { din.readFully(it) }, Charsets.US_ASCII)
-            if (guard != null) when (guard.check(peer, pin)) {
-                PinGuard.Result.OK -> {}
-                PinGuard.Result.BAD -> return fail(ERR_PIN)
-                PinGuard.Result.LOCKED -> return fail(ERR_LOCKED)
-            }
+            pinProblem(pin)?.let { return fail(it) }
             dout.writeByte(OK); dout.flush()
             remote(din, dout)
             return OK
@@ -122,11 +162,7 @@ object BtProtocol {
         val rawName = String(ByteArray(nameLen).also { din.readFully(it) }, Charsets.UTF_8)
         val total = din.readLong()
 
-        if (guard != null) when (guard.check(peer, pin)) {
-            PinGuard.Result.OK -> {}
-            PinGuard.Result.BAD -> return fail(ERR_PIN)
-            PinGuard.Result.LOCKED -> return fail(ERR_LOCKED)
-        }
+        pinProblem(pin)?.let { return fail(it) }
         val name = ReceiverServer.safeName(rawName) ?: return fail(ERR_NAME)
         if (total <= 0) return fail(ERR_SIZE)
 
@@ -172,7 +208,7 @@ object BtProtocol {
      * know CBTN, ERR_PIN...) or [IOException].
      */
     fun negotiate(input: InputStream, output: OutputStream, pin: String, wantWifiDirect: Boolean): LinkInfo {
-        require(Pin.isValidFormat(pin)) { "PIN must be ${Pin.LENGTH} digits" }
+        require(Pin.isValidFormat(pin) || pin == castbridge.core.trust.TvAuth.NO_PIN) { "PIN must be ${Pin.LENGTH} digits" }
         val din = DataInputStream(input)
         val dout = DataOutputStream(output)
         dout.write(NEGOTIATE.toByteArray(Charsets.US_ASCII))
@@ -186,6 +222,24 @@ object BtProtocol {
     }
 
     /**
+     * Plug-and-play HELLO over an open (paired) link. Throws [Refused] (ERR_UNTRUSTED, ERR_DENIED, ERR_TIMEOUT, ERR_NOT_OPEN,
+     * ERR_BUSY, or ERR_MAGIC from a TV that predates it) or [IOException]. With [requestTrust] the TV asks its owner; the call then
+     * waits for the answer (up to a minute).
+     */
+    fun hello(input: InputStream, output: OutputStream, requestTrust: Boolean): HelloInfo {
+        val din = DataInputStream(input)
+        val dout = DataOutputStream(output)
+        dout.write(HELLO.toByteArray(Charsets.US_ASCII))
+        dout.writeByte(if (requestTrust) HELLO_REQUEST_TRUST else 0)
+        dout.flush()
+        val st = din.readUnsignedByte()
+        if (st != OK) throw Refused(st)
+        val len = din.readUnsignedShort()
+        return HelloInfo.decode(String(ByteArray(len).also { din.readFully(it) }, Charsets.UTF_8))
+            ?: throw IOException("answer of the TV not understood")
+    }
+
+    /**
      * One attempt on an open link. Returns normally when the TV confirmed the whole file; throws
      * [Refused] for an ERR_* answer and [IOException] for a broken link.
      */
@@ -193,7 +247,7 @@ object BtProtocol {
         input: InputStream, output: OutputStream, name: String, total: Long, pin: String,
         openAt: (Long) -> InputStream, onOffset: (Long) -> Unit = {}, onBytes: (Long) -> Unit = {},
     ) {
-        require(Pin.isValidFormat(pin)) { "PIN must be ${Pin.LENGTH} digits" }
+        require(Pin.isValidFormat(pin) || pin == castbridge.core.trust.TvAuth.NO_PIN) { "PIN must be ${Pin.LENGTH} digits" }
         val din = DataInputStream(input)
         val dout = DataOutputStream(output)
         val nameBytes = name.toByteArray(Charsets.UTF_8)
@@ -328,4 +382,35 @@ object LinkPlanner {
         }
         add(Route.Bluetooth)
     }
+}
+
+/** What a TV's answer to a trusted phone's HELLO holds. [token] is that phone's credential for the Wi-Fi API ([ttlSec] seconds). */
+data class HelloInfo(val tvName: String, val version: String, val mdns: String?, val token: String, val ttlSec: Long, val link: LinkInfo) {
+    fun encode(): String = buildString {
+        append("tv=").append(line(tvName)).append('\n')
+        append("v=").append(line(version)).append('\n')
+        if (mdns != null) append("mdns=").append(line(mdns)).append('\n')
+        append("ttl=").append(ttlSec).append('\n')
+        append("token=").append(token).append('\n')
+        append(link.encode())
+    }
+
+    companion object {
+        private fun line(s: String) = s.replace(Regex("[\\r\\n\\t]"), " ").take(120)
+        private val TOKEN = Regex("^cbk_[0-9a-f]{64}$")
+
+        /** null when the token is missing or malformed (nothing is usable without it). */
+        fun decode(s: String): HelloInfo? {
+            val kv = s.lineSequence().mapNotNull { l -> l.indexOf('=').takeIf { it > 0 }?.let { l.substring(0, it) to l.substring(it + 1) } }.toMap()
+            val token = kv["token"]?.takeIf { TOKEN.matches(it) } ?: return null
+            val name = if (kv["tv"].isNullOrBlank()) "TV" else castbridge.core.trust.PhoneName.sanitize(kv["tv"], 60)
+            return HelloInfo(name, kv["v"].orEmpty().take(40), kv["mdns"]?.take(120), token,
+                kv["ttl"]?.toLongOrNull()?.coerceIn(60, 7 * 24 * 3600L) ?: 3600, LinkInfo.decode(s))
+        }
+    }
+}
+
+sealed class HelloReply {
+    class Ok(val info: HelloInfo) : HelloReply()
+    class Err(val code: Int) : HelloReply()
 }

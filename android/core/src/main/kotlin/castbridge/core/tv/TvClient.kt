@@ -140,7 +140,7 @@ class TvClient(val base: String, val pin: String? = null) {
 
     private fun open(method: String, path: String) = (URL(base + path).openConnection() as HttpURLConnection).apply {
         requestMethod = method; connectTimeout = 4000; readTimeout = 8000
-        pin?.let { setRequestProperty("X-CB-Pin", it) }
+        pin?.let { castbridge.core.trust.TvAuth.header(it).let { (k, v) -> setRequestProperty(k, v) } }     // PIN or trusted-phone token
     }
 
     private fun read(c: HttpURLConnection, allow409: Boolean = false): String {
