@@ -26,6 +26,8 @@ import castbridge.core.tv.PlayerTracks
 import castbridge.core.tv.Progressive
 import castbridge.core.tv.ReceiverServer
 import castbridge.core.tv.VolumeKind
+import castbridge.core.tv.VolumeRegistry
+import castbridge.core.tv.then
 import org.videolan.libvlc.LibVLC
 import org.videolan.libvlc.Media
 import org.videolan.libvlc.MediaPlayer
@@ -396,6 +398,9 @@ class PlayerActivity : Activity(), TvService.Screen {
             HomeTool(R.drawable.ic_t_chess, "Échecs", "Contre l'ordinateur, à deux sur la TV ou avec les téléphones, avec compte à rebours.", "Jouer", true) {
                 startActivity(Intent(this, ChessActivity::class.java))
             },
+            HomeTool(R.drawable.ic_t_update, "Téléchargements", "Télécharger sur la TV (liens, magnet, torrent) : les fichiers rejoignent la bibliothèque.", "aria2", false) {
+                startActivity(Intent(this, DownloadsActivity::class.java))
+            },
             HomeTool(R.drawable.ic_t_cast, "Recevoir du téléphone", "Envoyer une vidéo depuis l'app CastBridge du téléphone.", "Code $pin", true) { homeApi().openHelp() },
             HomeTool(R.drawable.ic_t_usb, "Clé USB", "Importer des vidéos d'une clé, ou y ranger les nouvelles.",
                 if (drives.isEmpty()) "Aucune clé" else drives.joinToString { "${it.label} · ${it.free / (1L shl 30)} Go libres" }, drives.isNotEmpty()) {
@@ -524,6 +529,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         val items = mutableListOf<Pair<String, () -> Unit>>()
         if (current == null) items += "Toute la bibliothèque" to { showLibrary() }
         items += "Quiz culture générale (jouer avec les téléphones)" to { startActivity(Intent(this, QuizActivity::class.java)) }
+        items += "Téléchargements" to { startActivity(Intent(this, DownloadsActivity::class.java)) }
         items += "Bluetooth : rendre la TV visible (2 min)" to { makeDiscoverable() }
         items += (if (prefs.getBool("wd_enabled", false)) "Wi-Fi Direct : désactiver" else "Wi-Fi Direct : activer (crée un réseau TV<->téléphone)") to { toggleWifiDirect() }
         items += "USB : importer les vidéos des clés détectées" to { usbMessage(usb?.importFromVolumes()) }

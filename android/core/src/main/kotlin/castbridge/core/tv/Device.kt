@@ -53,4 +53,18 @@ data class ApiReply(val status: Int, val json: String, val bytes: ByteArray? = n
 /** Plug-in routes under /api/, called after PIN authentication. [method] is "GET", "POST"... */
 fun interface ApiExtension {
     fun handle(path: String, method: String, params: Map<String, String>): ApiReply?
+    /** True for POST routes that take the raw request body (small file uploads, at most [ReceiverServer.MAX_EXT_BODY]). */
+    fun wantsBody(path: String): Boolean = false
+    fun handleBody(path: String, method: String, params: Map<String, String>, body: ByteArray): ApiReply? = null
+}
+
+/** Chains two extensions: the first one that handles a route answers it. */
+fun ApiExtension.then(next: ApiExtension): ApiExtension {
+    val first = this
+    return object : ApiExtension {
+        override fun handle(path: String, method: String, params: Map<String, String>) = first.handle(path, method, params) ?: next.handle(path, method, params)
+        override fun wantsBody(path: String) = first.wantsBody(path) || next.wantsBody(path)
+        override fun handleBody(path: String, method: String, params: Map<String, String>, body: ByteArray) =
+            (if (first.wantsBody(path)) first.handleBody(path, method, params, body) else null) ?: next.handleBody(path, method, params, body)
+    }
 }

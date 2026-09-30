@@ -45,7 +45,7 @@ fun TvHubAdvanced() {
             }
         }
         when (channel) {
-            Channel.WIFI -> TvScreen(extra = { TvTools(it); AdminPanel(it) })
+            Channel.WIFI -> TvScreen(extra = { TvTools(it); DownloadsEntry(it); AdminPanel(it) })
             Channel.BLUETOOTH -> BtScreen()
             Channel.WIFI_DIRECT -> WifiDirectScreen()
         }

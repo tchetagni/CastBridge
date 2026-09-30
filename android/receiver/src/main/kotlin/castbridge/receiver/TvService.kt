@@ -27,6 +27,7 @@ import android.os.PowerManager
 import android.provider.Settings
 import android.util.Log
 import castbridge.core.tv.ApiExtension
+import castbridge.core.tv.then
 import castbridge.core.tv.ApiReply
 import castbridge.core.tv.Device
 import castbridge.core.tv.LaunchPolicy
@@ -178,7 +179,9 @@ class TvService : Service(), Device {
 
     /** Starts the HTTP server once (only this service does: no second server fighting for port 8765); retries if the port is taken. */
     private fun startServer(attempt: Int = 0) {
-        val s = ReceiverServer(registry, playerBridge, pin = pin, guard = guard, device = this, extension = ApiExtension(::extraApi),
+        val s = ReceiverServer(registry, playerBridge, pin = pin, guard = guard, device = this,
+            // downloads (aria2, docs/DOWNLOADS.md): its own manager, independent of any screen
+            extension = ApiExtension(::extraApi).then(TvDownloads.start(this, registry) { server?.target ?: "auto" }.manager.apiExtension),
             profile = prefs.profile(), onSettings = { prefs.saveProfile(it); updateStorageStatus() },
             onNotice = { n -> notice(n); setStatus("5-notice", n) },
             safPicker = ::launchSafPicker, settingsOpener = ::openStorageSettings, library = library,
