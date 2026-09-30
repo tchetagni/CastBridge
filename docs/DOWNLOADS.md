@@ -186,8 +186,8 @@ Vérifié sur un téléphone Android 14 (32 bits activé) avec le binaire armeab
 BitTorrent, GZip, HTTPS, Metalink, SFTP ; OpenSSL, c-ares, libssh2, expat, zlib), téléchargement HTTPS réel à 8
 connexions avec vérification du certificat (SHA-256 du fichier reçu correct), refus sans magasin de certificats,
 récupération des métadonnées d'un magnet (Big Buck Bunny, licence libre) par DHT/trackers ; puis l'app de test installée :
-aria2 démarré depuis `nativeLibraryDir` et téléchargement ajouté par l'API (le téléphone a été débranché avant la fin du
-test ; il reste peut-être l'app de test `castbridge.receiver.dltest` à désinstaller : `adb uninstall castbridge.receiver.dltest`).
+aria2 démarré depuis `nativeLibraryDir`, téléchargement HTTPS ajouté par l'API, terminé et rangé dans la bibliothèque
+(section « Terminés »). L'app de test a ensuite été désinstallée.
 
 ## Licence (obligations GPL)
 
