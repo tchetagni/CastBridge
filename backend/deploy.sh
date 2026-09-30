@@ -10,8 +10,16 @@
 # and revision are put back. Running it twice on the same revision just rebuilds (cached) and re-checks.
 set -Eeuo pipefail
 
-cd "$(dirname "$(readlink -f "$0")")"
-BACKEND_DIR="$(pwd)"
+# git checkout below may rewrite this very file while bash is reading it: run from a private copy.
+if [ -z "${CASTBRIDGE_DEPLOY_COPY:-}" ]; then
+    BACKEND_DIR="$(cd "$(dirname "$(readlink -f "$0")")" && pwd)"
+    export BACKEND_DIR
+    copy="$(mktemp "${TMPDIR:-/tmp}/castbridge-deploy.XXXXXX")"
+    cp "$0" "$copy"
+    CASTBRIDGE_DEPLOY_COPY="$copy" exec bash "$copy" "$@"
+fi
+trap 'rm -f "$CASTBRIDGE_DEPLOY_COPY"' EXIT
+cd "$BACKEND_DIR"
 log()  { printf '[deploy %s] %s\n' "$(date '+%F %T')" "$*"; }
 die()  { log "ERREUR : $*"; exit 1; }
 
