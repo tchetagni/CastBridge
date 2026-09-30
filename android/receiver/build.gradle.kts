@@ -11,7 +11,11 @@ android {
         targetSdk = 35
         versionCode = 18
         versionName = "0.9"
+        // Extra Ed25519 key accepted for update manifests, for a LOCAL test server only (-Pcastbridge.extraUpdateKey=…):
+        // empty by default, so the apps built for Esaie trust the production key alone (UpdateKeys).
+        buildConfigField("String", "EXTRA_UPDATE_KEY", "\"${(project.findProperty("castbridge.extraUpdateKey") as String?) ?: ""}\"")
     }
+    buildFeatures { buildConfig = true }
     splits {
         abi {
             isEnable = true

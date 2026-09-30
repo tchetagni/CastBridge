@@ -171,6 +171,9 @@ class TvService : Service(), Device {
         updater = UpdateInstaller(this, { registry.volumes().filter { it.kind != VolumeKind.SAF }.map { it.dir } },
             launch = { i, what -> launchScreen(i, what) }) { m -> setStatus("5-update", m); notice(m) }
         onPermissionsReady()                                    // Bluetooth starts if its permission was granted earlier
+        // server link (docs/API-SERVER.md): registration, heartbeat every 15 min, updates, usage events, quiz questions
+        TvConnect.start(this)
+        bg.execute { cleanUpdateFiles() }
         registerStorageEvents()
         rescanAsync(remeasure = true)
         main.postDelayed(transferTick, 5000)
@@ -239,13 +242,48 @@ class TvService : Service(), Device {
     private val netTick = object : Runnable {
         override fun run() {
             bg.execute {
+                val wasDirect = netDirectMs != null; val wasGateway = netGatewayMs != null; val first = netCheckedAt == 0L
                 netDirectMs = TvNetDiag.probe(null)
                 netGatewayMs = gateway?.proxy()?.let { TvNetDiag.probe(it) }
                 netCheckedAt = System.currentTimeMillis()
                 setStatus("7-net", netSummary())
+                // connectivity_check: at start and when the state changes (not every minute)
+                if (first || wasDirect != (netDirectMs != null)) connectivityEvent(null, netDirectMs)
+                if (gateway?.connected == true && (first || wasGateway != (netGatewayMs != null))) connectivityEvent("bluetooth", netGatewayMs)
+                if (netDirectMs != null && !wasDirect && !first) TvConnect.post { flush() }      // network back: send what waits
+                libraryStatsDaily()
             }
             main.postDelayed(this, 60_000)
         }
+    }
+
+    /** « connectivity_check » event: [via] null = the TV's own link (Wi-Fi / Ethernet). */
+    fun connectivityEvent(via: String?, latencyMs: Long?) {
+        val link = TvNetDiag.localLink(this)
+        val v = via ?: when {
+            "Ethernet" in link -> "ethernet"
+            link == "Wi-Fi" -> "wifi"
+            else -> if (latencyMs == null) "none" else "wifi"
+        }
+        TvConnect.track("connectivity_check", mapOf("via" to v, "ok" to (latencyMs != null), "latency_ms" to latencyMs))
+    }
+
+    /** « library_stats » once a day (number of files and bytes, never their names). */
+    private fun libraryStatsDaily() {
+        val now = System.currentTimeMillis()
+        if (now - prefs.getLong("library_stats_at", 0) < 24 * 3_600_000L) return
+        val items = runCatching { server?.libraryItems() }.getOrNull() ?: return
+        prefs.putLong("library_stats_at", now)
+        TvConnect.track("library_stats", mapOf("files" to items.size, "bytes" to items.sumOf { it.size }))
+    }
+
+    /** Downloaded update APKs of versions already installed (or older) take room: removed at start. */
+    private fun cleanUpdateFiles() = runCatching {
+        val installed = TvConnect.link?.installed?.versionCode ?: return@runCatching
+        registry.volumes().filter { it.kind != VolumeKind.SAF }.map { File(it.dir, ".castbridge-update") }.plus(File(filesDir, "updates"))
+            .flatMap { it.listFiles().orEmpty().toList() }
+            .filter { f -> Regex("castbridge-tv-(\\d+)\\.apk").find(f.name)?.groupValues?.get(1)?.toIntOrNull()?.let { it <= installed } == true }
+            .forEach { it.delete() }
     }
     fun checkNetNow() { main.removeCallbacks(netTick); main.post(netTick) }
 
@@ -500,6 +538,7 @@ class TvService : Service(), Device {
         path == "/api/apk" && method == "GET" -> updater?.let { ApiReply(200, it.listJson()) }
         path == "/api/apk/install" && method == "POST" ->
             updater?.install(params["names"].orEmpty().split('/').filter { it.isNotEmpty() }, params["force"] == "1")
+        path.startsWith("/api/server") -> serverApi(path, method, params)
         path == "/api/usb" && method == "GET" -> ApiReply(200, usbJson())
         path == "/api/usb/import" && method == "POST" -> ApiReply(200, usbJson(usb?.importFromVolumes() ?: "indisponible"))
         path == "/api/background" && method == "GET" -> ApiReply(200, backgroundJson())
@@ -512,6 +551,38 @@ class TvService : Service(), Device {
             ApiReply(200, """{"opened":${why == null},"message":${why?.let(ReceiverServer::q) ?: "null"}}""")
         }
         else -> null
+    }
+
+    /**
+     * Server link, for the phone's advanced screen (PIN-protected like the other API routes): GET /api/server (state),
+     * POST /api/server/url?url= (empty = official server), /check-update, /install, /quiz-sync, GET /api/server/me,
+     * POST /api/server/erase. The consent is only given on the TV screen (information screen), never through the API.
+     */
+    private fun serverApi(path: String, method: String, params: Map<String, String>): ApiReply? {
+        val link = TvConnect.link ?: return ApiReply(503, """{"error":"lien serveur indisponible"}""")
+        fun accepted(msg: String) = ApiReply(202, """{"message":${ReceiverServer.q(msg)},"state":${TvConnect.stateJson()}}""")
+        return when {
+            path == "/api/server" && method == "GET" -> ApiReply(200, TvConnect.stateJson())
+            path == "/api/server/url" && method == "POST" -> {
+                val raw = params["url"].orEmpty().trim()
+                val url = if (raw.isEmpty() || raw == "default") castbridge.core.connect.ServerUrl.DEFAULT else raw
+                val problem = castbridge.core.connect.ServerUrl.problem(url)
+                if (problem != null) ApiReply(400, """{"error":${ReceiverServer.q(problem)}}""")
+                else { TvConnect.post { state.baseUrl = url; tick() }; accepted("Serveur : ${castbridge.core.connect.ServerUrl.normalize(url)}") }
+            }
+            path == "/api/server/check-update" && method == "POST" -> {
+                TvConnect.feature("updates", "phone")
+                TvConnect.post { checkUpdate(castbridge.core.update.UpdateSchedule.Trigger.USER) }; accepted("Recherche d'une mise à jour…")
+            }
+            path == "/api/server/install" && method == "POST" -> { TvConnect.post { offerInstall(userAsked = true) }; accepted("Installation demandée : validez sur la TV si elle le demande") }
+            path == "/api/server/quiz-sync" && method == "POST" -> { TvConnect.post { syncQuiz() }; accepted("Mise à jour des questions…") }
+            path == "/api/server/me" && method == "GET" ->
+                TvConnect.call(30_000) { myData() }?.let { ApiReply(200, it) } ?: ApiReply(502, """{"error":"serveur injoignable ou occupé"}""")
+            path == "/api/server/erase" && method == "POST" ->
+                if (TvConnect.call(30_000) { eraseMyData(); true } == true) accepted("Données effacées ; l'écran d'information sera affiché sur la TV")
+                else ApiReply(502, """{"error":"effacement impossible (serveur injoignable ?)"}""")
+            else -> null
+        }
     }
 
     private fun usbJson(msg: String? = null): String {

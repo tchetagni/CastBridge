@@ -119,8 +119,30 @@ class PlayerActivity : Activity(), TvService.Screen {
 
     override fun onResume() {
         super.onResume(); resumed = true
+        TvConnect.screens.enter(screenId)
         if (::extras.isInitialized) svc?.takePending()?.let { runPending(it) }
+        serverScreens()
     }
+
+    override fun onStart() { super.onStart(); TvConnect.addListener(serverListener) }
+
+    private val serverListener: () -> Unit = { if (resumed) serverScreens() }
+
+    /**
+     * The server link asks for a screen: the information screen at the first launch (nothing is sent before it is
+     * answered), or the blocking screen of a mandatory update.
+     */
+    private fun serverScreens() {
+        val link = TvConnect.link ?: return
+        if (link.state.needsConsent) { if (!consentShown) { consentShown = true; ServerActivity.open(this, ServerActivity.MODE_CONSENT) }; return }
+        val u = link.update
+        if (u.mandatory && u.manifest != null && u.phase != castbridge.core.connect.ServerLink.Phase.UP_TO_DATE && current == null && !mandatoryShown) {
+            mandatoryShown = true
+            ServerActivity.open(this, ServerActivity.MODE_MANDATORY)
+        }
+    }
+    private var consentShown = false
+    private var mandatoryShown = false
 
     override fun onPause() {
         super.onPause()
@@ -130,6 +152,8 @@ class PlayerActivity : Activity(), TvService.Screen {
 
     override fun onStop() {
         super.onStop()
+        TvConnect.removeListener(serverListener)
+        consentShown = false; mandatoryShown = false
         // The screen is gone: give libVLC back (the service keeps serving). Back in front = the library.
         if (mp != null && !isChangingConfigurations) {
             current = null; snapshot = PlayerState(); releasePlayer(); reopen = null
@@ -290,10 +314,15 @@ class PlayerActivity : Activity(), TvService.Screen {
         }
     }
 
+    /** Sub-screen shown by this activity, for the screen-time statistics (docs/TELEMETRY.md): home, library, player, settings. */
+    @Volatile var screenId: String = "home"; private set
+    private fun enterScreen(id: String) { screenId = id; if (resumed || hasWindowFocus()) TvConnect.screens.enter(id) }
+
     /** The home (launcher): rows of videos, clock, "ready" band. Technical details are in "Connexion & réglages". */
     private fun showHome() {
         libScreen?.hide(); settingsPanel?.hide()
         home?.show()
+        enterScreen("home")
     }
 
     /** Hides every screen (a video starts). */
@@ -304,6 +333,7 @@ class PlayerActivity : Activity(), TvService.Screen {
     private fun showLibrary() {
         home?.hide(); settingsPanel?.hide()
         libScreen?.show()
+        enterScreen("library")
     }
 
     /** Back from a video (BACK, end of file, error): the home with its "Reprendre" row, not an empty screen. */
@@ -388,6 +418,25 @@ class PlayerActivity : Activity(), TvService.Screen {
     }
 
     /** Every feature of the app as a home icon, with its live state. */
+    /** A home tile that also counts its use (feature_used, docs/TELEMETRY.md: closed list of ids). */
+    private fun tile(feature: String, icon: Int, label: String, description: String, status: String?, on: Boolean, action: () -> Unit) =
+        HomeTool(icon, label, description, status, on) { TvConnect.feature(feature, "tile"); action() }
+
+    /** Status line of the "Mises à jour" tile: what the server link knows right now. */
+    private fun updateStatus(): String {
+        val link = TvConnect.link ?: return "Version ?"
+        val u = link.update
+        val mine = "Version ${link.installed.versionName ?: link.installed.versionCode}"
+        return when (u.phase) {
+            castbridge.core.connect.ServerLink.Phase.DOWNLOADING -> "Téléchargement ${if (u.total > 0) u.done * 100 / u.total else 0} %"
+            castbridge.core.connect.ServerLink.Phase.READY -> "Nouvelle version ${u.manifest?.versionName} prête"
+            castbridge.core.connect.ServerLink.Phase.INSTALLING -> "Installation ${u.manifest?.versionName}…"
+            castbridge.core.connect.ServerLink.Phase.UP_TO_DATE -> "$mine · à jour"
+            castbridge.core.connect.ServerLink.Phase.BLOCKED -> "$mine · bloquée"
+            else -> mine
+        }
+    }
+
     private fun homeTools(): List<HomeTool> {
         val s = svc
         val st = statuses
@@ -398,25 +447,25 @@ class PlayerActivity : Activity(), TvService.Screen {
         val wdOn = prefs.getBool("wd_enabled", false)
         val sshOn = ssh?.running == true
         return listOf(
-            HomeTool(R.drawable.ic_t_library, "Bibliothèque", "Toutes vos vidéos et vos fichiers, en grille.", "${server?.libraryItems()?.size ?: 0} fichier(s)", false) { showLibrary() },
-            HomeTool(R.drawable.ic_t_learn, "Apprendre", "Leçons de la maternelle à la licence, exercices corrigés, préparer le CEP, le BEPC, le GCE, le Bac.", "Élèves", true) {
+            tile("library", R.drawable.ic_t_library, "Bibliothèque", "Toutes vos vidéos et vos fichiers, en grille.", "${server?.libraryItems()?.size ?: 0} fichier(s)", false) { showLibrary() },
+            tile("learn", R.drawable.ic_t_learn, "Apprendre", "Leçons de la maternelle à la licence, exercices corrigés, préparer le CEP, le BEPC, le GCE, le Bac.", "Élèves", true) {
                 startActivity(Intent(this, LearnActivity::class.java))
             },
-            HomeTool(R.drawable.ic_t_quiz, "Quiz", "Culture générale (70 % Cameroun) et niveaux scolaires, en solo ou avec les téléphones.", "Jouer", true) {
+            tile("quiz", R.drawable.ic_t_quiz, "Quiz", "Culture générale (70 % Cameroun) et niveaux scolaires, en solo ou avec les téléphones.", "Jouer", true) {
                 startActivity(Intent(this, QuizActivity::class.java))
             },
-            HomeTool(R.drawable.ic_t_chess, "Échecs", "Contre l'ordinateur, à deux sur la TV ou avec les téléphones, avec compte à rebours.", "Jouer", true) {
+            tile("chess", R.drawable.ic_t_chess, "Échecs", "Contre l'ordinateur, à deux sur la TV ou avec les téléphones, avec compte à rebours.", "Jouer", true) {
                 startActivity(Intent(this, ChessActivity::class.java))
             },
-            HomeTool(R.drawable.ic_t_update, "Téléchargements", "Télécharger sur la TV (liens, magnet, torrent) : les fichiers rejoignent la bibliothèque.", "aria2", false) {
+            tile("downloads", R.drawable.ic_t_update, "Téléchargements", "Télécharger sur la TV (liens, magnet, torrent) : les fichiers rejoignent la bibliothèque.", "aria2", false) {
                 startActivity(Intent(this, DownloadsActivity::class.java))
             },
-            HomeTool(R.drawable.ic_t_remote, "Télécommande", "Piloter la TV avec le téléphone ; option « toute la TV » (accessibilité).",
+            tile("remote", R.drawable.ic_t_remote, "Télécommande", "Piloter la TV avec le téléphone ; option « toute la TV » (accessibilité).",
                 if (RemoteAccessibilityService.instance != null) "Toute la TV" else "CastBridge", RemoteAccessibilityService.instance != null) {
                 startActivity(Intent(this, RemoteSetupActivity::class.java))
             },
-            HomeTool(R.drawable.ic_t_cast, "Recevoir du téléphone", "Envoyer une vidéo depuis l'app CastBridge du téléphone.", "Code $pin", true) { homeApi().openHelp() },
-            HomeTool(R.drawable.ic_t_usb, "Clé USB", "Importer des vidéos d'une clé, ou y ranger les nouvelles.",
+            tile("receive", R.drawable.ic_t_cast, "Recevoir du téléphone", "Envoyer une vidéo depuis l'app CastBridge du téléphone.", "Code $pin", true) { homeApi().openHelp() },
+            tile("usb", R.drawable.ic_t_usb, "Clé USB", "Importer des vidéos d'une clé, ou y ranger les nouvelles.",
                 if (drives.isEmpty()) "Aucune clé" else drives.joinToString { "${it.label} · ${it.free / (1L shl 30)} Go libres" }, drives.isNotEmpty()) {
                 choose("Clé USB", listOf<Pair<String, () -> Unit>>(
                     "Importer les vidéos des clés détectées" to { usbMessage(usb?.importFromVolumes()) },
@@ -426,15 +475,15 @@ class PlayerActivity : Activity(), TvService.Screen {
                     "Réglages de stockage de la TV" to { s?.openStorageSettings()?.let { flash(it) } },
                 ) + (if (usb?.isRunning() == true) listOf<Pair<String, () -> Unit>>("Annuler l'import en cours" to { usb.cancel() }) else emptyList()))
             },
-            HomeTool(R.drawable.ic_t_bluetooth, "Bluetooth", "Recevoir des fichiers et partager l'Internet du téléphone sans réseau commun.",
+            tile("bluetooth", R.drawable.ic_t_bluetooth, "Bluetooth", "Recevoir des fichiers et partager l'Internet du téléphone sans réseau commun.",
                 st["1-bt"]?.substringAfter(": ")?.take(28) ?: "Désactivé", btOk) {
                 choose("Bluetooth", listOf<Pair<String, () -> Unit>>("Rendre la TV visible (2 min) pour l'appairer" to { makeDiscoverable() }))
             },
-            HomeTool(R.drawable.ic_t_internet, "Internet", "Connectivité de la TV (Wi-Fi/Ethernet) et de la passerelle Bluetooth du téléphone : état et tests.",
+            tile("internet", R.drawable.ic_t_internet, "Internet", "Connectivité de la TV (Wi-Fi/Ethernet) et de la passerelle Bluetooth du téléphone : état et tests.",
                 s?.takeIf { it.netCheckedAt > 0 }?.netSummary()?.take(34) ?: "Vérification…",
                 s?.netDirectMs != null || s?.netGatewayMs != null) { internetMenu() },
-            HomeTool(R.drawable.ic_t_wifidirect, "Wi-Fi Direct", "Un réseau direct TV ↔ téléphone, sans box.", if (wdOn) "Activé" else "Désactivé", wdOn) { toggleWifiDirect() },
-            HomeTool(R.drawable.ic_t_terminal, "Administration", "Page web et SSH pour gérer la TV à distance.",
+            tile("wifi_direct", R.drawable.ic_t_wifidirect, "Wi-Fi Direct", "Un réseau direct TV ↔ téléphone, sans box.", if (wdOn) "Activé" else "Désactivé", wdOn) { toggleWifiDirect() },
+            tile("admin", R.drawable.ic_t_terminal, "Administration", "Page web et SSH pour gérer la TV à distance.",
                 if (sshOn) "SSH actif" else "SSH arrêté", sshOn) {
                 choose("Administration à distance", listOf<Pair<String, () -> Unit>>(
                     (if (sshOn) "Désactiver SSH" else "Activer SSH (clés autorisées seulement)") to {
@@ -444,13 +493,11 @@ class PlayerActivity : Activity(), TvService.Screen {
                     "Adresse de la page web" to { flash("Ouvrez http://${TvService.localIp() ?: "?"}:${ReceiverServer.PORT} — code $pin") },
                 ))
             },
-            HomeTool(R.drawable.ic_t_update, "Mises à jour", "Installer une nouvelle version envoyée par le téléphone.",
-                "Version ${runCatching { packageManager.getPackageInfo(packageName, 0).versionName }.getOrNull() ?: "?"}", false) {
-                flash("Depuis le téléphone : CastBridge TV › Avancé › Installer des APK. Ou par la clé USB.")
-            },
-            HomeTool(R.drawable.ic_t_settings, "Connexion & réglages", "Code, adresse, démarrage avec la TV, lecture à distance…", null, false) { showSettings() },
-            HomeTool(R.drawable.ic_t_dev, "Options développeur", "Débogage USB / Wi-Fi de la TV.", null, false) { flash(openDevSettings()) },
-            HomeTool(R.drawable.ic_t_help, "Aide", "Comment envoyer une vidéo depuis le téléphone.", null, false) { homeApi().openHelp() },
+            tile("updates", R.drawable.ic_t_update, "Mises à jour", "Mises à jour automatiques depuis le serveur CastBridge : dernière vérification, version disponible, installer.",
+                updateStatus(), TvConnect.link?.update?.manifest != null) { ServerActivity.open(this, ServerActivity.MODE_UPDATES) },
+            tile("settings", R.drawable.ic_t_settings, "Connexion & réglages", "Code, adresse, démarrage avec la TV, lecture à distance…", null, false) { showSettings() },
+            tile("dev_options", R.drawable.ic_t_dev, "Options développeur", "Débogage USB / Wi-Fi de la TV.", null, false) { flash(openDevSettings()) },
+            tile("help", R.drawable.ic_t_help, "Aide", "Comment envoyer une vidéo depuis le téléphone.", null, false) { homeApi().openHelp() },
         )
     }
 
@@ -467,8 +514,14 @@ class PlayerActivity : Activity(), TvService.Screen {
             add("Démarrage avec la TV" to if (prefs.getBool("autostart", true)) "oui" else "non")
             add("Lecture lancée depuis le téléphone" to if (s.overlayAllowed()) "s'ouvre toute seule" else "demande d'ouvrir l'app (autorisation « afficher par-dessus » non accordée)")
             statuses.toSortedMap().forEach { (k, v) -> add((labels[k] ?: k) to v.substringAfter(" : ", v)) }
+            TvConnect.link?.state?.let { st ->
+                add("Identifiant de la TV (serveur CastBridge)" to (st.shortId ?: "pas encore enregistrée"))
+                add("Serveur CastBridge" to (if (st.lastContactOk) "connecté" else st.lastContactMessage ?: "pas encore contacté") +
+                    (if (st.lastContactAt > 0) " · dernier contact ${ServerActivity.date(st.lastContactAt)}" else ""))
+            }
         }
         settingsPanel?.show(info, menuItems())
+        enterScreen("settings")
     }
 
     /** Remembers where the current video stopped (normalised: see LibraryLogic.resumeFrom). */
@@ -566,6 +619,9 @@ class PlayerActivity : Activity(), TvService.Screen {
             showDiag(host)
             Thread { svc?.gateway?.diagnose(host) { l -> main.post { appendDiag(l) } } ?: TvNetDiag.run(host, null) { l -> main.post { appendDiag(l) } } }.start()
         }
+        items += "Mises à jour (serveur CastBridge)…" to { TvConnect.feature("updates", "menu"); ServerActivity.open(this, ServerActivity.MODE_UPDATES) }
+        items += "Confidentialité : mes données, statistiques d'usage…" to { ServerActivity.open(this, ServerActivity.MODE_PRIVACY) }
+        items += "Connexion au serveur (identifiant de la TV)…" to { ServerActivity.open(this, ServerActivity.MODE_CONNECTION) }
         items += "Options développeur (débogage USB / Wi-Fi)" to { flash(openDevSettings()) }
         items += (if (ssh?.running == true) "SSH : désactiver" else "SSH : activer (administration à distance, clés autorisées seulement)") to {
             if (ssh?.running == true) { ssh.disable(); flash("SSH désactivé") }

@@ -23,12 +23,16 @@ object QuizHub {
     private val asked = LinkedHashSet<String>()
     /** Demo tokens only (no real money): see docs/QUIZ.md, « Mise payante ». */
     private val wallet = VirtualWallet()
-    @Volatile private var source: QuestionSource? = null
+    @Volatile private var source: CachedQuestionSource? = null
 
-    /** Bundled questions, plus those a future question server leaves in the app's small cache file (offline fallback). */
-    private fun source(ctx: Context): QuestionSource = source ?: synchronized(this) {
-        source ?: CachedQuestionSource(File(ctx.filesDir, "quiz/questions-cache.json")).also { source = it }
+    /**
+     * Bundled questions, plus those received from the CastBridge server (QuizSync, daily or « Mettre à jour les questions »)
+     * in the app's small cache file; the bundled bank alone when offline or if the cache is unusable.
+     */
+    fun cachedSource(ctx: Context): CachedQuestionSource = source ?: synchronized(this) {
+        source ?: CachedQuestionSource(File(ctx.applicationContext.filesDir, "quiz/questions-cache.json")).also { source = it }
     }
+    private fun source(ctx: Context): QuestionSource = cachedSource(ctx)
     /** Public routes (no PIN) for the TV's HTTP server. */
     val http = QuizHttp({ room })
 
