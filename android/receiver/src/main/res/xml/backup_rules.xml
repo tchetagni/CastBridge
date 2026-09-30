@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android 11 and older: the trusted phones (names, Bluetooth addresses, token hashes) are never copied to a cloud backup or another TV. -->
+<full-backup-content>
+    <exclude domain="file" path="trusted_phones.txt" />
+    <exclude domain="file" path="trusted_phones.txt.tmp" />
+</full-backup-content>

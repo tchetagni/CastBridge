@@ -68,7 +68,7 @@ class BtGatewayService : Service() {
                 val t0 = System.currentTimeMillis()
                 active = true
                 try {
-                    Exit(mux, pin, connect = ::openOutbound, log = { Log.i(TAG, it) }, diag = ::runDiag).run()
+                    Exit(mux, castbridge.core.trust.TvAuth.btPin(pin), connect = ::openOutbound, log = { Log.i(TAG, it) }, diag = ::runDiag).run()
                 } finally {
                     active = false
                     PhoneConnect.track("gateway_session", mapOf("ms" to System.currentTimeMillis() - t0,

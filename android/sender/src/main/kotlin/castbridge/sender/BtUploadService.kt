@@ -76,7 +76,7 @@ class BtUploadService : Service() {
         }
         // Bluetooth first as the control link: ask the TV for a faster way (same Wi-Fi, or its Wi-Fi Direct group).
         _route.value = "Recherche du lien le plus rapide…"
-        val info = runCatching { connect().use { l -> BtProtocol.negotiate(l.input, l.output, pin, wantWifiDirect = Build.VERSION.SDK_INT >= 29) } }
+        val info = runCatching { connect().use { l -> BtProtocol.negotiate(l.input, l.output, castbridge.core.trust.TvAuth.btPin(pin), wantWifiDirect = Build.VERSION.SDK_INT >= 29) } }
             .onFailure { Log.i(TAG, "negotiate: ${it.javaClass.simpleName} ${it.message}") }.getOrNull()   // older TV (ERR_MAGIC) or no answer: Bluetooth
         val routes = LinkPlanner.plan(info, ::reachable, canJoinWifiDirect = Build.VERSION.SDK_INT >= 29)
         for (r in routes) {
@@ -95,7 +95,7 @@ class BtUploadService : Service() {
         }
         _route.value = "Bluetooth"
         castChannel = "bluetooth"
-        val up = ResumableBtUpload(name, total, pin,
+        val up = ResumableBtUpload(name, total, castbridge.core.trust.TvAuth.btPin(pin),
             connect = { connect() },
             openAt = { off -> openAt(uri, off) },
             cancelled = { cancelled })

@@ -57,6 +57,7 @@ import castbridge.core.remote.TextDiff
 import castbridge.core.remote.TextMode
 import castbridge.core.remote.TouchpadMapper
 import castbridge.core.tv.Pin
+import castbridge.core.trust.TvAuth
 import castbridge.core.tv.ReceiverServer
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -241,7 +242,14 @@ fun RemoteScreen(onClose: () -> Unit) {
     var tvName by rememberSaveable { mutableStateOf(prefs.tvName) }
     var manualHost by rememberSaveable { mutableStateOf(prefs.manualHost) }
     var bt by rememberSaveable { mutableStateOf(prefs.btFallback) }
+    val link by TvLinkManager.state.collectAsState()
+    val trustedTv = remember(link) { TvLinkManager.saved.default() }
     val tv: RemoteTv? = when {
+        // a TV this phone is trusted by: found over Bluetooth, no PIN, Wi-Fi address from HELLO, Bluetooth as the fallback
+        trustedTv != null && (tvName == null || tvName == trustedTv.mdns || tvName == trustedTv.name) ->
+            (link as? LinkUi.Connected)?.session?.base?.let { b -> java.net.URI(b) }.let { u ->
+                RemoteTv(trustedTv.mdns ?: trustedTv.name, u?.host ?: trustedTv.lastIps.firstOrNull(), u?.port ?: trustedTv.port, trustedTv.address)
+            }
         tvName?.startsWith("manual:") == true && manualHost != null -> RemoteTv("manual:$manualHost", manualHost, prefs.manualPort, bt)
         tvName == "bt" && bt != null -> RemoteTv("bt", null, btAddress = bt)
         else -> tvs.firstOrNull { it.name == tvName }?.let { RemoteTv(it.name, it.host, it.port, bt) }
@@ -260,8 +268,10 @@ fun RemoteScreen(onClose: () -> Unit) {
     val notice by RemoteController.notice.collectAsState()
     val rtt by RemoteController.lastRtt.collectAsState()
 
+    LaunchedEffect(link, tv?.pinKey) { tv?.let { pins.get(it.pinKey) }.orEmpty().let { p -> if (TvAuth.isToken(p) && p != pin) pin = p } }
+    LaunchedEffect(status.link) { if (status.link == RemoteSession.Link.BAD_PIN && TvAuth.isToken(pin)) TvLinkManager.poke() }
     LaunchedEffect(tv, pin) {
-        if (tv != null && Pin.isValidFormat(pin)) RemoteController.connect(ctx, tv, pin, bt) else RemoteController.disconnect()
+        if (tv != null && TvAuth.isUsable(pin)) RemoteController.connect(ctx, tv, pin, bt) else RemoteController.disconnect()
     }
     LaunchedEffect(tvName, tvs) { if (tvName == null && tvs.size == 1) { tvName = tvs[0].name; prefs.tvName = tvName } }
     LaunchedEffect(Unit) { if (tvName == null && tvs.isEmpty()) { delay(4000); if (tvName == null) chooser = true } }
@@ -296,12 +306,12 @@ fun RemoteScreen(onClose: () -> Unit) {
     ) { padding ->
         Column(Modifier.padding(padding).fillMaxSize().verticalScroll(rememberScrollState()).padding(horizontal = 16.dp, vertical = 8.dp),
             horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            if (tv != null && !Pin.isValidFormat(pin) || status.link == RemoteSession.Link.BAD_PIN) {
+            if (tv != null && !TvAuth.isUsable(pin) || status.link == RemoteSession.Link.BAD_PIN && !TvAuth.isToken(pin)) {
                 Text(if (status.link == RemoteSession.Link.BAD_PIN) (status.message ?: "Code refusé") else "Saisissez le code affiché sur la TV",
                     color = if (status.link == RemoteSession.Link.BAD_PIN) cs.error else cs.onSurface)
                 PinField(pins, tv?.pinKey, pin, { pin = it }, Modifier.fillMaxWidth())
             }
-            if (status.link == RemoteSession.Link.OFFLINE && tv != null && Pin.isValidFormat(pin))
+            if (status.link == RemoteSession.Link.OFFLINE && tv != null && TvAuth.isUsable(pin))
                 Text(status.message ?: "TV injoignable", color = cs.error, style = MaterialTheme.typography.bodySmall, textAlign = TextAlign.Center)
             // A refusal from the TV (e.g. "no CastBridge screen in front"), shown for 6 s.
             notice?.let { (at, m) ->

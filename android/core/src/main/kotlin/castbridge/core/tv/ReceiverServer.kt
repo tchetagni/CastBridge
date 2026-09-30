@@ -55,6 +55,11 @@ class ReceiverServer(
     private val library: LibraryMeta? = null,
     /** Routes served without the PIN (the quiz at /quiz, with its own room code); asked before the PIN check. */
     private val publicRoutes: PublicRoutes? = null,
+    /**
+     * Per-phone tokens of the trusted phones (castbridge.core.trust): header X-CB-Token (or ?token=) accepted instead of the PIN,
+     * except on the routes [castbridge.core.trust.TvAuth.tokenMayCall] keeps for the PIN. Returns the phone's address, or null.
+     */
+    private val tokenAuth: ((String?) -> String?)? = null,
 ) : NanoHTTPD(port) {
 
     /** Single internal folder (tests, simple setups). */
@@ -387,6 +392,15 @@ class ReceiverServer(
     private fun denied(s: IHTTPSession, p: Map<String, String>): Response? {
         val g = guard ?: return null
         val ip = s.remoteIpAddress ?: "?"
+        val tok = s.headers["x-cb-token"] ?: p["token"]
+        if (tok != null && tokenAuth != null) {
+            if (tokenAuth.invoke(tok) != null) {
+                if (castbridge.core.trust.TvAuth.tokenMayCall(s.uri)) return null
+                return json(Response.Status.FORBIDDEN, """{"error":"pin required","message":"Cette action demande le code de la TV."}""").also { it.addHeader("Connection", "close") }
+            }
+            // expired or revoked: the phone asks the TV again over Bluetooth (no PIN is tried, so no lockout is counted)
+            return json(Response.Status.UNAUTHORIZED, """{"error":"bad token"}""").also { it.addHeader("Connection", "close") }
+        }
         val given = s.headers["x-cb-pin"] ?: p["pin"]
         return when (g.check(ip, given)) {
             PinGuard.Result.OK -> null

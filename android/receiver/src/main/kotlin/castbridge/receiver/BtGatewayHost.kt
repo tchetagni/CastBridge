@@ -24,8 +24,14 @@ import java.util.UUID
  * proxy [PORT] while a phone is attached. It does not change the TV's system-wide connection.
  */
 @SuppressLint("MissingPermission")
-class BtGatewayHost(private val ctx: Context, private val guard: PinGuard, private val status: (String?) -> Unit) {
-    private val entry: Entry = Entry({ pin -> guard.check("bt-gateway", pin) == PinGuard.Result.OK }, PORT) { m -> Log.i(TAG, m); refresh() }
+class BtGatewayHost(private val ctx: Context, private val guard: PinGuard, private val trusted: (String) -> Boolean = { false }, private val status: (String?) -> Unit) {
+    /** Address of the phone whose link is being attached on this thread (the paired device of the socket: what "trusted" is checked on). */
+    private val peerAddress = ThreadLocal<String?>()
+    private val entry: Entry = Entry({ pin ->
+        // a trusted phone sends "no PIN"; anybody else (or a PIN sent on purpose) goes through the usual PIN check and lockout
+        if (pin == castbridge.core.trust.TvAuth.NO_PIN) peerAddress.get()?.let(trusted) == true
+        else guard.check("bt-gateway", pin) == PinGuard.Result.OK
+    }, PORT) { m -> Log.i(TAG, m); refresh() }
     @Volatile private var server: BluetoothServerSocket? = null
     @Volatile private var running = false
 
@@ -40,10 +46,11 @@ class BtGatewayHost(private val ctx: Context, private val guard: PinGuard, priva
                 while (running) {
                     val sock = try { ss.accept() } catch (e: IOException) { break }
                     val peer = runCatching { sock.remoteDevice.name ?: sock.remoteDevice.address }.getOrDefault("téléphone")
+                    val peerAddr = runCatching { sock.remoteDevice.address }.getOrNull()
                     Thread({
                         val startedAt = System.currentTimeMillis()
                         var mux: Mux? = null
-                        try { mux = Mux(sock.inputStream, sock.outputStream); entry.attach(mux, peer) }
+                        try { mux = Mux(sock.inputStream, sock.outputStream); peerAddress.set(peerAddr); entry.attach(mux, peer) }
                         catch (e: Exception) { Log.w(TAG, "gateway link: ${e.javaClass.simpleName}") }
                         finally { runCatching { sock.close() }; refresh(); mux?.let { m -> runCatching { sessionEnded(startedAt, m) } } }
                     }, "gw-link").apply { isDaemon = true; start() }

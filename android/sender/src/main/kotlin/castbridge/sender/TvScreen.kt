@@ -76,6 +76,9 @@ fun TvScreen(fixedBase: String? = null, extra: @Composable (TvClient) -> Unit = 
     val pinKey = fixedBase ?: if (useManual) manualIp.trim().takeIf { it.isNotEmpty() } else selectedName
     val pins = remember { PinStore(ctx) }
     var pin by remember(pinKey) { mutableStateOf(pins.get(pinKey)) }
+    // a trusted phone's token is renewed in the background: follow it
+    val linkNow by TvLinkManager.state.collectAsState()
+    LaunchedEffect(linkNow, pinKey) { pins.get(pinKey).let { p -> if (castbridge.core.trust.TvAuth.isToken(p) && p != pin) pin = p } }
     // Same object across recompositions: panels key their polling on it, and every request without the right PIN
     // counts toward the TV's lockout.
     val client = remember(base, pin) { base?.let { TvClient(it, pin.takeIf { p -> p.isNotEmpty() }) } }
@@ -104,10 +107,10 @@ fun TvScreen(fixedBase: String? = null, extra: @Composable (TvClient) -> Unit = 
         info = null
         badPin = null
         // Never poll with an incomplete PIN or after a refusal: failures count toward the TV's 60 s lockout.
-        while (client != null && castbridge.core.tv.Pin.isValidFormat(pin) && badPin == null) {
+        while (client != null && castbridge.core.trust.TvAuth.isUsable(pin) && badPin == null) {
             val r = withContext(Dispatchers.IO) { runCatching { parseInfo(client.info()) } }
             r.onSuccess { info = it; reachable = true; badPin = null }.onFailure {
-                badPin = (it as? TvClient.HttpError)?.takeIf { e -> e.code == 401 }?.let { e -> if ("locked" in e.message.orEmpty()) "Trop d'essais : TV verrouillée 60 s" else "PIN incorrect" }
+                badPin = (it as? TvClient.HttpError)?.takeIf { e -> e.code == 401 }?.let { e -> if ("locked" in e.message.orEmpty()) "Trop d'essais : TV verrouillée 60 s" else if (castbridge.core.trust.TvAuth.isToken(pin)) { TvLinkManager.poke(); "Autorisation de ce téléphone expirée : reconnexion…" } else "PIN incorrect" }
                 reachable = badPin != null
             }
             delay(1000)

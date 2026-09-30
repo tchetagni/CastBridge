@@ -37,6 +37,7 @@ class CastBridgeApp : Application() {
     override fun onCreate() {
         super.onCreate()
         PhoneConnect.init(this)
+        TvLinkManager.init(this)
         // Light crash handler: one small file written at once, sent at the next start (POST /api/v1/devices/crash).
         val previous = Thread.getDefaultUncaughtExceptionHandler()
         Thread.setDefaultUncaughtExceptionHandler { t, e ->
@@ -44,8 +45,10 @@ class CastBridgeApp : Application() {
             previous?.uncaughtException(t, e)
         }
         registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
-            override fun onActivityStarted(a: Activity) { main.removeCallbacks(sessionCheck); runCatching { PhoneConnect.sessions.shown() } }
+            private var started = 0
+            override fun onActivityStarted(a: Activity) { main.removeCallbacks(sessionCheck); runCatching { PhoneConnect.sessions.shown() }; if (started++ == 0) TvLinkManager.setForeground(true) }
             override fun onActivityStopped(a: Activity) {
+                if (--started <= 0) { started = 0; TvLinkManager.setForeground(false) }
                 runCatching { PhoneConnect.sessions.hidden() }
                 main.removeCallbacks(sessionCheck); main.postDelayed(sessionCheck, 35_000)
             }

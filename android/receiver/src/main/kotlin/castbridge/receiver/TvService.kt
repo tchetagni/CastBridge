@@ -6,7 +6,10 @@ import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.annotation.SuppressLint
 import android.app.Service
+import android.bluetooth.BluetoothDevice
+import android.bluetooth.BluetoothManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -94,6 +97,10 @@ class TvService : Service(), Device {
     var server: ReceiverServer? = null; private set
     var library: LibraryProvider? = null; private set
     var bt: BtServer? = null; private set
+    /** « Téléphones de confiance » (docs/BT-PLUG-AND-PLAY.md): who may use the TV without the PIN, and the pairing window. */
+    lateinit var trust: castbridge.core.trust.TrustRegistry; private set
+    lateinit var pairing: castbridge.core.trust.PairingSession; private set
+    private val lastBanner = ConcurrentHashMap<String, Long>()
     var wd: WifiDirectGroup? = null; private set
     var usb: UsbImporter? = null; private set
     var ssh: SshControl? = null; private set
@@ -157,6 +164,8 @@ class TvService : Service(), Device {
         videosDir = registry.volumes().first().dir                         // internal storage is always first
         pin = prefs.pin()
         guard = PinGuard(pin)
+        trust = castbridge.core.trust.TrustRegistry(TrustFile(File(filesDir, "trusted_phones.txt")))
+        pairing = castbridge.core.trust.PairingSession(trust)
         val profile = prefs.profile()
         logResources(videosDir, profile)
         // Thumbnails only while nothing plays (one decode at a time on this TV).
@@ -164,7 +173,7 @@ class TvService : Service(), Device {
             onThumb = { n -> screen?.thumbReady(n) })
         startServer()
         register()
-        bt = BtServer(this, videosDir, guard, negotiate = ::linkInfo) { setStatus("1-bt", it) }
+        bt = BtServer(this, videosDir, guard, negotiate = ::linkInfo, hello = ::btHello, trusted = ::btTrusted) { setStatus("1-bt", it) }
         wd = WifiDirectGroup(this, prefs) { setStatus("2-wd", it) }
         usb = UsbImporter(this, videosDir) { setStatus("3-usb", it) }
         ssh = SshControl(this, { setStatus("4-ssh", it) }, { setStatus("4-ssh-bt", it) })
@@ -189,7 +198,8 @@ class TvService : Service(), Device {
             profile = prefs.profile(), onSettings = { prefs.saveProfile(it); updateStorageStatus() },
             onNotice = { n -> notice(n); setStatus("5-notice", n) },
             safPicker = ::launchSafPicker, settingsOpener = ::openStorageSettings, library = library,
-            publicRoutes = castbridge.core.tv.CombinedRoutes(QuizHub.http, ChessHub.http))
+            publicRoutes = castbridge.core.tv.CombinedRoutes(QuizHub.http, ChessHub.http),
+            tokenAuth = trust::verifyToken)
         try {
             s.start(15_000, false); server = s
         } catch (e: Exception) {
@@ -222,13 +232,43 @@ class TvService : Service(), Device {
         return castbridge.core.tv.LinkInfo(ReceiverServer.PORT, ips, a?.first, a?.second, a?.let { castbridge.core.tv.WifiDirect.GROUP_OWNER_IP })
     }
 
+    // ---- plug and play: a trusted phone asks "who am I?" over Bluetooth (CBTH) and gets the TV's Wi-Fi address and its own token ----
+
+    /** The TV's name as shown to its owner and to the phone: the Bluetooth name (what Android shows in the pairing dialogs), else the model. */
+    @SuppressLint("MissingPermission")
+    fun tvName(): String = (if (hasBtPermission(this)) runCatching { getSystemService(BluetoothManager::class.java)?.adapter?.name }.getOrNull() else null)
+        ?.takeIf { it.isNotBlank() } ?: "CastBridge TV"
+
+    private val helloHandler by lazy {
+        castbridge.core.trust.HelloHandler(trust, pairing, ::btBonded, ::tvName, runCatching { packageManager.getPackageInfo(packageName, 0).versionName }.getOrNull() ?: "?",
+            { "CastBridge TV " + (Build.MODEL ?: "") }, { linkInfo(false) }) { p -> phoneConnected(p) }
+    }
+
+    fun btHello(peer: String, peerName: String?, requestTrust: Boolean) = helloHandler.handle(peer, peerName, requestTrust)
+
+    /** A trusted phone: in the registry AND still paired at the Bluetooth level (the owner can also remove it in Android's settings). */
+    fun btTrusted(peer: String) = trust.isTrusted(peer) && btBonded(peer)
+
+    @SuppressLint("MissingPermission")
+    private fun btBonded(address: String): Boolean = hasBtPermission(this) && runCatching {
+        getSystemService(BluetoothManager::class.java)?.adapter?.getRemoteDevice(address)?.bondState == BluetoothDevice.BOND_BONDED
+    }.getOrDefault(false)
+
+    /** Banner « <téléphone> connecté », at most once per 10 minutes per phone (the phone renews its token in the background). */
+    private fun phoneConnected(p: castbridge.core.trust.TrustedPhone) {
+        val t = System.currentTimeMillis()
+        val last = lastBanner[p.address] ?: 0
+        lastBanner[p.address] = t
+        if (t - last > 10 * 60_000L) { notice("${p.name} connecté"); setStatus("1-phone", "Téléphone connecté : ${p.name}") }
+    }
+
     private var captureHooked = false
     private fun hookCapture() { if (!captureHooked) { captureHooked = true; ScreenCapture.install(application) } }
 
     fun onPermissionsReady() {
         hookCapture()
         bt?.start()
-        gateway = gateway ?: BtGatewayHost(this, guard) { st -> setStatus("6-gw", st) }
+        gateway = gateway ?: BtGatewayHost(this, guard, ::btTrusted) { st -> setStatus("6-gw", st) }
         gateway?.start()
         // Wi-Fi Direct is opt-in (MENU): creating a group can disturb the TV's own Wi-Fi connection.
         if (prefs.getBool("wd_enabled", false) && wd?.hasPermission() == true) wd?.start()

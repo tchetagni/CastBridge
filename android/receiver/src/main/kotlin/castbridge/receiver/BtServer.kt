@@ -28,12 +28,19 @@ class BtServer(
     private val guard: PinGuard,
     /** Answers "is there a faster link?" (CBTN): addresses of the TV and its Wi-Fi Direct group. */
     private val negotiate: ((Boolean) -> castbridge.core.tv.LinkInfo)? = null,
+    /** Plug and play (CBTH): (peer address, peer name, asks to be trusted) -> answer. The peer is the socket's paired device, never a claim. */
+    private val hello: ((String, String?, Boolean) -> castbridge.core.tv.HelloReply)? = null,
+    /** Trusted phone (registered AND still paired): its PIN field is not checked. */
+    private val trusted: ((String) -> Boolean)? = null,
     private val status: (String?) -> Unit,
 ) {
     @Volatile private var server: BluetoothServerSocket? = null
     @Volatile private var running = false
+    /** Connections being served. A HELLO waiting for the owner must not block a file transfer, so each link has its own thread. */
+    private val active = java.util.concurrent.atomic.AtomicInteger()
+    private val slots = java.util.concurrent.Semaphore(4)
     /** A transfer is in progress (the service keeps a wake lock meanwhile). */
-    @Volatile var busy = false; private set
+    val busy get() = active.get() > 0
 
     fun hasPermission(): Boolean =
         Build.VERSION.SDK_INT < 31 || ctx.checkSelfPermission(Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED
@@ -81,7 +88,9 @@ class BtServer(
     private fun acceptLoop(ss: BluetoothServerSocket) {
         while (running) {
             val sock = try { ss.accept() } catch (e: IOException) { break }
-            handle(sock)   // one transfer at a time: the phone reconnects to resume
+            // a few links at once (HELLO, remote, a transfer); more than that are refused, the phone retries
+            if (!slots.tryAcquire()) { runCatching { sock.close() }; continue }
+            Thread({ try { handle(sock) } finally { slots.release() } }, "bt-link").apply { isDaemon = true; start() }
         }
         if (running) { running = false; status("Bluetooth : arrêté") }
     }
@@ -89,25 +98,31 @@ class BtServer(
     private fun handle(sock: BluetoothSocket) {
         val last = java.util.concurrent.atomic.AtomicLong(System.currentTimeMillis())
         val peer = runCatching { sock.remoteDevice.address }.getOrDefault("?")
-        // No socket timeout exists for RFCOMM: a watchdog closes a link that stalls for 30 s.
+        // No socket timeout exists for RFCOMM: a watchdog closes a link that stalls for 30 s (90 s while the owner decides on the TV).
+        val idleLimit = java.util.concurrent.atomic.AtomicLong(30_000)
         val watchdog = Thread {
-            try { while (true) { Thread.sleep(5000); if (System.currentTimeMillis() - last.get() > 30_000) { sock.close(); break } } }
+            try { while (true) { Thread.sleep(5000); if (System.currentTimeMillis() - last.get() > idleLimit.get()) { sock.close(); break } } }
             catch (_: InterruptedException) {}
         }.apply { isDaemon = true; start() }
         var lastPct = -1
-        busy = true
+        var wasHello = false
+        active.incrementAndGet()
         try {
             val r = BtProtocol.serve(dir, sock.inputStream, sock.outputStream, guard, peer, onProgress = { name, done, total ->
                 last.set(System.currentTimeMillis())
                 val pct = (done * 100 / total).toInt()
                 if (pct != lastPct) { lastPct = pct; status("Bluetooth : réception de $name $pct %") }
-            }, negotiate = negotiate, remote = { i, o -> status("Bluetooth : télécommande du téléphone connectée"); RemoteHub.serveBt(i, o) { last.set(System.currentTimeMillis()) } })
-            status("Bluetooth : prêt" + if (r != BtProtocol.OK) " (refusé : ${BtProtocol.describe(r)})" else " (fichier reçu)")
+            }, negotiate = negotiate, remote = { i, o -> status("Bluetooth : télécommande du téléphone connectée"); RemoteHub.serveBt(i, o) { last.set(System.currentTimeMillis()) } },
+                hello = hello?.let { h -> { p, req -> wasHello = true; idleLimit.set(90_000); last.set(System.currentTimeMillis())
+                    val name = runCatching { sock.remoteDevice.name }.getOrNull()
+                    h(p, name, req).also { last.set(System.currentTimeMillis()) } } },
+                trusted = trusted)
+            if (!wasHello) status("Bluetooth : prêt" + if (r != BtProtocol.OK) " (refusé : ${BtProtocol.describe(r)})" else " (fichier reçu)")
         } catch (e: Exception) {
             Log.w(TAG, "transfer interrupted: ${e.javaClass.simpleName}")   // never log request contents
             status("Bluetooth : transfert interrompu, reprise possible")
         } finally {
-            busy = false
+            active.decrementAndGet()
             watchdog.interrupt()
             runCatching { sock.close() }
         }

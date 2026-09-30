@@ -44,6 +44,7 @@ import androidx.compose.ui.unit.sp
 import castbridge.core.tv.LibraryLogic
 import castbridge.core.tv.LibrarySections
 import castbridge.core.tv.Pin
+import castbridge.core.trust.TvAuth
 import castbridge.core.tv.TvClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -84,16 +85,31 @@ fun TvHome(onAdvanced: () -> Unit) {
     val tvs by discovery.tvs.collectAsState()
     var tvName by remember { mutableStateOf(home.name) }
     var pin by remember(tvName) { mutableStateOf(pins.get(tvName)) }
-    var wizard by rememberSaveable { mutableStateOf(tvName == null || !Pin.isValidFormat(pins.get(tvName))) }
+    // Plug and play: the TV this phone is trusted by connects by itself (Bluetooth HELLO, then Wi-Fi with this phone's token).
+    val link by TvLinkManager.state.collectAsState()
+    val session = (link as? LinkUi.Connected)?.session
+    var adding by rememberSaveable { mutableStateOf(false) }
+    var managing by remember { mutableStateOf(false) }
+    LaunchedEffect(Unit) { TvLinkManager.start(ctx) }
+    var wizard by rememberSaveable { mutableStateOf(TvLinkManager.saved.list().isEmpty() && (tvName == null || !TvAuth.isUsable(pins.get(tvName)))) }
     val tv = tvs.firstOrNull { it.name == tvName }
-    val client = tv?.let { TvClient(it.base, pin) }
+    val client = session?.base?.let { TvClient(it, session.credential) }
+        ?: tv?.takeIf { TvAuth.isUsable(pin) || TvLinkManager.saved.list().isEmpty() }?.let { TvClient(it.base, pin) }
 
+    if (adding) {
+        AddTvFlow(onClose = { adding = false }, onAdded = { t ->
+            val n = t.mdns ?: t.name
+            home.name = n; tvName = n; RemotePrefs(ctx).tvName = n; adding = false; wizard = false
+        })
+        return
+    }
     if (wizard) {
-        FirstConnection(tvs, onRetry = { discovery.restart() }, onAdvanced = onAdvanced) { name, code ->
+        FirstConnection(tvs, onRetry = { discovery.restart() }, onAdvanced = onAdvanced, onAddTv = { adding = true }) { name, code ->
             home.name = name; pins.put(name, code); tvName = name; pin = code; wizard = false
         }
         return
     }
+    if (managing) ManageTvsDialog(onDismiss = { managing = false }, onAdd = { adding = true })
 
     val upload by UploadService.state.collectAsState()
     val avg by UploadService.average.collectAsState()
@@ -106,19 +122,22 @@ fun TvHome(onAdvanced: () -> Unit) {
     var showPlayer by remember { mutableStateOf(false) }
     var showSettings by remember { mutableStateOf(false) }
 
-    LaunchedEffect(client?.base, pin) {
+    LaunchedEffect(client?.base, client?.pin) {
         var n = 0
         while (client != null) {
             val r = withContext(Dispatchers.IO) { runCatching { castbridge.core.tv.TvInfo.parse(client.info()) } }
             reachable = r.isSuccess; info = r.getOrNull() ?: info
-            if ((r.exceptionOrNull() as? TvClient.HttpError)?.code == 401) { msg = "Le code de la TV a changé : saisissez-le à nouveau."; wizard = true; break }
+            if ((r.exceptionOrNull() as? TvClient.HttpError)?.code == 401) {
+                if (TvAuth.isToken(client.pin)) { TvLinkManager.poke(); msg = "Reconnexion à la TV…"; delay(3000); continue }   // token expired or revoked: HELLO again
+                msg = "Le code de la TV a changé : saisissez-le à nouveau."; wizard = true; break
+            }
             if (n++ % 5 == 0) withContext(Dispatchers.IO) { runCatching { items = TvLibraryParser.parse(client.library()) } }
             delay(2000)
         }
     }
     var moveNext by remember { mutableStateOf(false) }       // the next picked file is moved (deleted from the phone once on the TV)
     val pick = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
-        if (uri == null || tvName == null) return@rememberLauncherForActivityResult
+        if (uri == null || (tvName == null && session == null)) return@rememberLauncherForActivityResult
         // Keep write access when the provider gives it: a move deletes the original once the TV holds it.
         runCatching { ctx.contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION) }
             .onFailure { runCatching { ctx.contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION) } }
@@ -128,7 +147,14 @@ fun TvHome(onAdvanced: () -> Unit) {
         // Little room on the TV: play while the file arrives instead of storing it all first.
         val progressive = info?.let { size > 0 && it.free < size * 2 } ?: false
         val move = moveNext; moveNext = false
-        runCatching { UploadService.start(ctx, uri, name, tvName!!, null, pin, progressive, move = move) }.onFailure { msg = "Impossible de démarrer l'envoi : ${it.message}" }
+        if (session != null && session.base == null) {
+            // no Wi-Fi in common: Bluetooth (slower), still without any code
+            runCatching { BtUploadService.start(ctx, uri, name, session.tv.address, session.credential); msg = "Envoi par Bluetooth (plus lent que le Wi-Fi)" }
+                .onFailure { msg = "Impossible de démarrer l'envoi : ${it.message}" }
+            return@rememberLauncherForActivityResult
+        }
+        runCatching { UploadService.start(ctx, uri, name, session?.tv?.mdns ?: tvName!!, session?.base?.removePrefix("http://"), session?.credential ?: pin, progressive, move = move) }
+            .onFailure { msg = "Impossible de démarrer l'envoi : ${it.message}" }
     }
     fun cmd(f: TvClient.() -> Unit) = scope.launch {
         val c = client ?: return@launch
@@ -139,7 +165,10 @@ fun TvHome(onAdvanced: () -> Unit) {
     val cs = MaterialTheme.colorScheme
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp).animateContentSize(), verticalArrangement = Arrangement.spacedBy(14.dp)) {
         // The TV
-        Row(verticalAlignment = Alignment.CenterVertically) {
+        if (TvLinkManager.saved.list().isNotEmpty()) {
+            TvLinkStatus(link, onAdd = { adding = true }, onManage = { managing = true })
+            if (reachable) info?.let { Text("${formatSize(it.free)} libres sur la TV", style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant) }
+        } else Row(verticalAlignment = Alignment.CenterVertically) {
             Box(Modifier.size(12.dp).clip(RoundedCornerShape(6.dp)).background(if (reachable) Color(0xFF4ADE80) else cs.outline))
             Spacer(Modifier.width(10.dp))
             Column(Modifier.weight(1f)) {
@@ -278,7 +307,7 @@ private fun Poster(client: TvClient, i: TvLibItem, onClick: () -> Unit) {
 
 /** First connection: find the TV (same Wi-Fi), then type its code once. */
 @Composable
-private fun FirstConnection(tvs: List<Tv>, onRetry: () -> Unit, onAdvanced: () -> Unit, onDone: (String, String) -> Unit) {
+private fun FirstConnection(tvs: List<Tv>, onRetry: () -> Unit, onAdvanced: () -> Unit, onAddTv: () -> Unit, onDone: (String, String) -> Unit) {
     val scope = rememberCoroutineScope()
     var chosen by remember { mutableStateOf<Tv?>(null) }
     var code by remember { mutableStateOf("") }
@@ -291,6 +320,8 @@ private fun FirstConnection(tvs: List<Tv>, onRetry: () -> Unit, onAdvanced: () -
         val c = chosen
         if (c == null) {
             Text("Trouvons votre TV", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.SemiBold)
+            Button(onClick = onAddTv, modifier = Modifier.fillMaxWidth(0.9f)) { Icon(Icons.Filled.Bluetooth, null); Spacer(Modifier.width(8.dp)); Text("Ajouter ma TV (Bluetooth, sans code)") }
+            Text("La façon la plus simple : pas d'adresse, pas de code à saisir. Sinon, avec le code de la TV :", textAlign = TextAlign.Center, color = cs.onSurfaceVariant)
             Text("Ouvrez l'app CastBridge TV sur la TV. Le téléphone et la TV doivent être sur le même Wi-Fi.", textAlign = TextAlign.Center, color = cs.onSurfaceVariant)
             if (tvs.isEmpty()) { CircularProgressIndicator(); Text("Recherche…", color = cs.onSurfaceVariant) }
             tvs.forEach { t ->

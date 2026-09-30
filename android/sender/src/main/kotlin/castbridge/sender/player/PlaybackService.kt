@@ -48,7 +48,7 @@ class PlaybackService : MediaLibraryService() {
         // The TV's /stream/ route wants its PIN: added only for the TV hosts registered in TvStreamAuth.
         val upstream = ResolvingDataSource.Factory(DefaultDataSource.Factory(this, http)) { spec: DataSpec ->
             val pin = spec.uri.host?.let { TvStreamAuth.pins[it] }
-            if (pin != null) spec.withAdditionalHeaders(mapOf("X-CB-Pin" to pin)) else spec
+            if (pin != null) spec.withAdditionalHeaders(mapOf(castbridge.core.trust.TvAuth.header(pin))) else spec
         }
         val p = ExoPlayer.Builder(this)
             .setRenderersFactory(DefaultRenderersFactory(this).setEnableDecoderFallback(true))
