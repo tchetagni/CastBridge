@@ -1,0 +1,33 @@
+{
+  "format": 1,
+  "id": "cep-maths",
+  "version": 1,
+  "title": "Mathématiques — CEP",
+  "description": "Pour les élèves de CM2 : fiches simples, exemples résolus pas à pas, exercices corrigés type CEP et une épreuve blanche de calcul.",
+  "lang": "fr",
+  "cursus": "primaire",
+  "level": "CM2",
+  "subject": "maths",
+  "exam": "CEP",
+  "programRef": "Programme officiel de mathématiques du CM2 (MINEDUB, enseignement primaire francophone) — à vérifier sur le texte officiel",
+  "authors": ["CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"],
+  "status": "draft",
+  "updatedAt": "2026-09-30",
+  "chapters": [
+    {"id": "cep-maths-num", "title": "Les nombres et les 4 opérations", "order": 1, "programRef": "CM2 — Numération (grands nombres, décimaux) et opérations — à vérifier sur le texte officiel"},
+    {"id": "cep-maths-frac", "title": "Les fractions", "order": 2, "programRef": "CM2 — Fractions simples — à vérifier sur le texte officiel"},
+    {"id": "cep-maths-prop", "title": "Proportionnalité et pourcentages", "order": 3, "programRef": "CM2 — Proportionnalité, pourcentages — à vérifier sur le texte officiel"},
+    {"id": "cep-maths-geo", "title": "Mesures et géométrie", "order": 4, "programRef": "CM2 — Mesures (longueurs, masses, capacités, monnaie, durées), périmètres, aires et volumes — à vérifier sur le texte officiel"},
+    {"id": "cep-maths-pb", "title": "Résoudre des problèmes", "order": 5, "programRef": "CM2 — Problèmes de la vie courante : partages, prix, vitesse moyenne, intérêts simples — à vérifier sur le texte officiel"}
+  ],
+  "mockExams": [
+    {"id": "cep-maths-eb-1", "title": "Épreuve blanche de calcul — CEP", "minutes": 90, "outOf": 20,
+     "instructions": "Épreuve d'entraînement (sujet original, ce n'est pas un sujet officiel). Durée indicative : 1 h 30 ; la durée et le barème réels sont à vérifier sur les textes officiels. Lis bien chaque question, pose tes opérations au brouillon et écris l'unité de chaque résultat.",
+     "sections": [
+       {"title": "Partie 1 — Calcul et numération (5 points)", "exercises": ["cep-maths-eb-01"]},
+       {"title": "Partie 2 — Mesures et géométrie (5 points)", "exercises": ["cep-maths-eb-02"]},
+       {"title": "Partie 3 — Proportionnalité et pourcentages (4 points)", "exercises": ["cep-maths-eb-03"]},
+       {"title": "Partie 4 — Problème (6 points)", "exercises": ["cep-maths-eb-04"]}
+     ]}
+  ]
+}

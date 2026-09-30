@@ -1,0 +1,24 @@
+#!/bin/sh
+# Builds the « Apprendre » content packs (docs/LEARN.md § Packs) from the JSON sources in content/learn/.
+#
+#   tools/build-learn-packs [out dir]      validate every pack, then write <id>-v<version>.learn.zip + catalog.json
+#   tools/build-learn-packs --check        validate only and print the coverage table (exam × subject × fiches/exercises)
+#
+# The zips are what a USB drive (CastBridge/Packs/), the phone (file exchange) or the future server
+# (bridge.sti-cm.com, GET /api/v1/learn/packs/{id}/{version}) hand to the TV. Needs Gradle 8.14+ and a JDK 17+
+# (no wrapper in the repository); ANDROID_HOME is not needed (the :core module is plain JVM).
+set -e
+ROOT=$(cd "$(dirname "$0")/.." && pwd)
+GRADLE=${GRADLE:-gradle}
+if [ "$1" = "--check" ]; then
+  exec "$GRADLE" -q -p "$ROOT/android" :core:checkLearnContent
+fi
+"$GRADLE" -q -p "$ROOT/android" :core:buildLearnPacks
+OUT_BUILT="$ROOT/android/core/build/learn-packs"
+if [ -n "$1" ]; then
+  mkdir -p "$1"
+  cp "$OUT_BUILT"/*.learn.zip "$OUT_BUILT"/catalog.json "$1"/
+  echo "Packs copiés dans $1"
+else
+  echo "Packs dans $OUT_BUILT"
+fi

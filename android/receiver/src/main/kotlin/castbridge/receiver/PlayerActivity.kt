@@ -399,6 +399,9 @@ class PlayerActivity : Activity(), TvService.Screen {
         val sshOn = ssh?.running == true
         return listOf(
             HomeTool(R.drawable.ic_t_library, "Bibliothèque", "Toutes vos vidéos et vos fichiers, en grille.", "${server?.libraryItems()?.size ?: 0} fichier(s)", false) { showLibrary() },
+            HomeTool(R.drawable.ic_t_learn, "Apprendre", "Leçons de la maternelle à la licence, exercices corrigés, préparer le CEP, le BEPC, le GCE, le Bac.", "Élèves", true) {
+                startActivity(Intent(this, LearnActivity::class.java))
+            },
             HomeTool(R.drawable.ic_t_quiz, "Quiz", "Culture générale (70 % Cameroun) et niveaux scolaires, en solo ou avec les téléphones.", "Jouer", true) {
                 startActivity(Intent(this, QuizActivity::class.java))
             },

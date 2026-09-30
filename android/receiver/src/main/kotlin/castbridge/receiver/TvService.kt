@@ -181,7 +181,8 @@ class TvService : Service(), Device {
     private fun startServer(attempt: Int = 0) {
         val s = ReceiverServer(registry, playerBridge, pin = pin, guard = guard, device = this,
             // downloads (aria2, docs/DOWNLOADS.md): its own manager, independent of any screen
-            extension = ApiExtension(::extraApi).then(RemoteHub.api.also { RemoteHub.install(this) }).then(TvDownloads.start(this, registry) { server?.target ?: "auto" }.manager.apiExtension),
+            extension = ApiExtension(::extraApi).then(RemoteHub.api.also { RemoteHub.install(this) }).then(TvDownloads.start(this, registry) { server?.target ?: "auto" }.manager.apiExtension)
+                .then(LearnHub.also { it.attach(this) }.api(this)),   // « Apprendre » (docs/LEARN.md)
             profile = prefs.profile(), onSettings = { prefs.saveProfile(it); updateStorageStatus() },
             onNotice = { n -> notice(n); setStatus("5-notice", n) },
             safPicker = ::launchSafPicker, settingsOpener = ::openStorageSettings, library = library,

@@ -52,11 +52,12 @@ class MainActivity : ComponentActivity() {
                         Tab(tab == 2, onClick = { tab = 2 }, text = { Text("Quiz", maxLines = 1) })
                         Tab(tab == 3, onClick = { tab = 3 }, text = { Text("Échecs", maxLines = 1) })
                         Tab(tab == 4, onClick = { tab = 4 }, text = { Text("Sur le téléphone", maxLines = 1) })
+                        Tab(tab == 5, onClick = { tab = 5 }, text = { Text("Apprendre", maxLines = 1) })
                     }
                 }
             },
             bottomBar = { castbridge.sender.player.CastMiniBar(Modifier.navigationBarsPadding()) },
-        ) { pad -> Box(Modifier.padding(pad).fillMaxSize()) { when (tab) { 0 -> App(); 1 -> TvHub(); 2 -> QuizScreen(); 3 -> ChessScreen(); else -> castbridge.sender.player.PhoneLibraryScreen() } } }
+        ) { pad -> Box(Modifier.padding(pad).fillMaxSize()) { when (tab) { 0 -> App(); 1 -> TvHub(); 2 -> QuizScreen(); 3 -> ChessScreen(); 4 -> castbridge.sender.player.PhoneLibraryScreen(); else -> LearnScreen() } } }
         MoveHandler()
     }
 

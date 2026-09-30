@@ -1,0 +1,684 @@
+{
+ "chapter": "maternelle-decouverte-formes-ch",
+ "lessons": [
+  {
+   "id": "maternelle-decouverte-formes",
+   "title": "Les formes",
+   "minutes": 10,
+   "readAloud": true,
+   "programRef": "Maternelle — Découverte du monde / activités mathématiques : formes géométriques simples (programme MINEDUB, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant de maternelle",
+   "objectives": [
+    "Reconnaître et nommer le rond, le carré, le triangle et le rectangle.",
+    "Retrouver ces formes dans des objets."
+   ],
+   "prerequisites": [
+    "maternelle-decouverte-compter"
+   ],
+   "exercises": [
+    "maternelle-decouverte-formes-01",
+    "maternelle-decouverte-formes-02",
+    "maternelle-decouverte-formes-03",
+    "maternelle-decouverte-formes-04",
+    "maternelle-decouverte-formes-05",
+    "maternelle-decouverte-formes-06"
+   ],
+   "selfCheck": [],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "On va découvrir les formes !",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "text",
+     "md": "**Les formes**"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 250,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 120,
+        "cy": 125,
+        "r": 70.0,
+        "fill": "red",
+        "stroke": "ink",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 305,
+        "y": 140,
+        "text": "rond",
+        "size": 40,
+        "color": "red",
+        "bold": true,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Rond",
+     "alt": "Un rond rouge."
+    },
+    {
+     "type": "audio",
+     "text": "Rond ! Le rond roule, comme une roue.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 250,
+      "items": [
+       {
+        "t": "rect",
+        "x": 50.0,
+        "y": 55.0,
+        "w": 140.0,
+        "h": 140.0,
+        "fill": "blue",
+        "stroke": "ink",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 305,
+        "y": 140,
+        "text": "carré",
+        "size": 40,
+        "color": "blue",
+        "bold": true,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Carré",
+     "alt": "Un carré bleu : 4 côtés tous pareils."
+    },
+    {
+     "type": "audio",
+     "text": "Carré ! Le carré a quatre côtés pareils.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 250,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         120,
+         50.0,
+         200.0,
+         190.0,
+         40.0,
+         190.0
+        ],
+        "fill": "green",
+        "stroke": "ink",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 305,
+        "y": 140,
+        "text": "triangle",
+        "size": 36,
+        "color": "green",
+        "bold": true,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Triangle",
+     "alt": "Un triangle vert : 3 côtés."
+    },
+    {
+     "type": "audio",
+     "text": "Triangle ! Le triangle a trois côtés.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 250,
+      "items": [
+       {
+        "t": "rect",
+        "x": 15.0,
+        "y": 70.0,
+        "w": 200.0,
+        "h": 110.0,
+        "fill": "orange",
+        "stroke": "ink",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 305,
+        "y": 140,
+        "text": "rectangle",
+        "size": 34,
+        "color": "#D96C00",
+        "bold": true,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Rectangle",
+     "alt": "Un rectangle orange : 2 grands côtés et 2 petits côtés."
+    },
+    {
+     "type": "audio",
+     "text": "Rectangle ! Le rectangle a deux grands côtés et deux petits côtés.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 250,
+      "items": [
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 225,
+        "x2": 380,
+        "y2": 225,
+        "color": "brown",
+        "width": 3
+       },
+       {
+        "t": "circle",
+        "cx": 60,
+        "cy": 55,
+        "r": 28,
+        "fill": "yellow",
+        "stroke": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 120,
+        "w": 160,
+        "h": 105,
+        "fill": "#E8B97A",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "poly",
+        "pts": [
+         110,
+         120,
+         210,
+         35,
+         310,
+         120
+        ],
+        "fill": "red",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 160,
+        "w": 40,
+        "h": 65,
+        "fill": "brown",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 235,
+        "y": 145,
+        "w": 34,
+        "h": 34,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       }
+      ]
+     },
+     "caption": "Une maison pleine de formes",
+     "alt": "Une maison : un toit en triangle rouge, un mur en rectangle, une porte en rectangle marron, une fenêtre carrée bleue et un soleil rond jaune."
+    },
+    {
+     "type": "audio",
+     "text": "Regarde la maison. Le toit est un triangle. La porte est un rectangle. La fenêtre est un carré. Le soleil est un rond.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "example",
+     "title": "Quelle forme a le toit ?",
+     "statement": "Regarde le toit de la maison.",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 250,
+      "items": [
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 225,
+        "x2": 380,
+        "y2": 225,
+        "color": "brown",
+        "width": 3
+       },
+       {
+        "t": "circle",
+        "cx": 60,
+        "cy": 55,
+        "r": 28,
+        "fill": "yellow",
+        "stroke": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 120,
+        "w": 160,
+        "h": 105,
+        "fill": "#E8B97A",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "poly",
+        "pts": [
+         110,
+         120,
+         210,
+         35,
+         310,
+         120
+        ],
+        "fill": "red",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 160,
+        "w": 40,
+        "h": 65,
+        "fill": "brown",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 235,
+        "y": 145,
+        "w": 34,
+        "h": 34,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       }
+      ]
+     },
+     "steps": [
+      {
+       "md": "On compte les côtés du toit avec le doigt : un, deux, trois."
+      },
+      {
+       "md": "Trois côtés : c'est un **triangle** !"
+      }
+     ],
+     "answer": "Le toit est un **triangle**."
+    },
+    {
+     "type": "audio",
+     "text": "Trois côtés. Le toit est un triangle !",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "example",
+     "title": "Carré ou rectangle ?",
+     "statement": "Cette forme est-elle un carré ?",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 250,
+      "items": [
+       {
+        "t": "rect",
+        "x": 80.0,
+        "y": 59.0,
+        "w": 240.0,
+        "h": 132.0,
+        "fill": "orange",
+        "stroke": "ink",
+        "width": 3
+       }
+      ]
+     },
+     "steps": [
+      {
+       "md": "On regarde les côtés : deux sont grands, deux sont petits."
+      },
+      {
+       "md": "Les côtés ne sont pas tous pareils : ce n'est pas un carré."
+      },
+      {
+       "md": "C'est un **rectangle** !"
+      }
+     ],
+     "answer": "C'est un **rectangle**."
+    },
+    {
+     "type": "audio",
+     "text": "Deux grands côtés, deux petits côtés. C'est un rectangle !",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "exercise",
+     "ref": "maternelle-decouverte-formes-01"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Cherche autour de toi : une assiette est ronde, une porte est un rectangle."
+     ]
+    },
+    {
+     "type": "audio",
+     "text": "Cherche des formes dans ta maison !",
+     "lang": "fr-FR"
+    }
+   ],
+   "reviewNotes": [
+    "On dit « rond » (vocabulaire de maternelle) ; « cercle » viendra plus tard — à confirmer avec l'enseignant.",
+    "L'appariement demande de lire les mots : prévoir l'aide d'un adulte."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "maternelle-decouverte-formes-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "maternelle-decouverte-formes",
+   "prompt": "Quelle est cette forme ?",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 250,
+    "items": [
+     {
+      "t": "circle",
+      "cx": 200,
+      "cy": 125,
+      "r": 91.0,
+      "fill": "red",
+      "stroke": "ink",
+      "width": 3
+     }
+    ]
+   },
+   "choices": [
+    "Rond",
+    "Carré",
+    "Triangle"
+   ],
+   "answer": 0,
+   "explanation": "C'est un **rond**. Il n'a pas de coin. Bravo !",
+   "source": "Exercice original"
+  },
+  {
+   "id": "maternelle-decouverte-formes-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "maternelle-decouverte-formes",
+   "prompt": "Quelle est cette forme ?",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 250,
+    "items": [
+     {
+      "t": "poly",
+      "pts": [
+       200,
+       32.5,
+       304.0,
+       214.5,
+       96.0,
+       214.5
+      ],
+      "fill": "green",
+      "stroke": "ink",
+      "width": 3
+     }
+    ]
+   },
+   "choices": [
+    "Triangle",
+    "Rond",
+    "Rectangle"
+   ],
+   "answer": 0,
+   "explanation": "Trois côtés : c'est un **triangle**. Super !",
+   "source": "Exercice original"
+  },
+  {
+   "id": "maternelle-decouverte-formes-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "maternelle-decouverte-formes",
+   "prompt": "C'est un carré.",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 250,
+    "items": [
+     {
+      "t": "rect",
+      "x": 109.0,
+      "y": 34.0,
+      "w": 182.0,
+      "h": 182.0,
+      "fill": "blue",
+      "stroke": "ink",
+      "width": 3
+     }
+    ]
+   },
+   "answer": true,
+   "explanation": "Oui ! Quatre côtés tous pareils : c'est un **carré**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "maternelle-decouverte-formes-04",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "maternelle-decouverte-formes",
+   "prompt": "C'est un rond.",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 250,
+    "items": [
+     {
+      "t": "rect",
+      "x": 70.0,
+      "y": 53.5,
+      "w": 260.0,
+      "h": 143.0,
+      "fill": "orange",
+      "stroke": "ink",
+      "width": 3
+     }
+    ]
+   },
+   "answer": false,
+   "explanation": "Non : cette forme a des coins et des côtés. C'est un **rectangle**. On réessaie !",
+   "source": "Exercice original"
+  },
+  {
+   "id": "maternelle-decouverte-formes-05",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "maternelle-decouverte-formes",
+   "prompt": "Combien de côtés a le triangle ?",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 250,
+    "items": [
+     {
+      "t": "poly",
+      "pts": [
+       200,
+       32.5,
+       304.0,
+       214.5,
+       96.0,
+       214.5
+      ],
+      "fill": "green",
+      "stroke": "ink",
+      "width": 3
+     }
+    ]
+   },
+   "choices": [
+    "3",
+    "4",
+    "2"
+   ],
+   "answer": 0,
+   "method": "Suivre chaque côté avec le doigt en comptant.",
+   "explanation": "Un, deux, trois : le triangle a **3** côtés. Bien joué !",
+   "source": "Exercice original"
+  },
+  {
+   "id": "maternelle-decouverte-formes-06",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "maternelle-decouverte-formes",
+   "prompt": "Relie chaque partie de la maison à sa forme.",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 250,
+    "items": [
+     {
+      "t": "line",
+      "x1": 20,
+      "y1": 225,
+      "x2": 380,
+      "y2": 225,
+      "color": "brown",
+      "width": 3
+     },
+     {
+      "t": "circle",
+      "cx": 60,
+      "cy": 55,
+      "r": 28,
+      "fill": "yellow",
+      "stroke": "orange"
+     },
+     {
+      "t": "rect",
+      "x": 130,
+      "y": 120,
+      "w": 160,
+      "h": 105,
+      "fill": "#E8B97A",
+      "stroke": "ink",
+      "width": 2
+     },
+     {
+      "t": "poly",
+      "pts": [
+       110,
+       120,
+       210,
+       35,
+       310,
+       120
+      ],
+      "fill": "red",
+      "stroke": "ink",
+      "width": 2
+     },
+     {
+      "t": "rect",
+      "x": 160,
+      "y": 160,
+      "w": 40,
+      "h": 65,
+      "fill": "brown",
+      "stroke": "ink",
+      "width": 2
+     },
+     {
+      "t": "rect",
+      "x": 235,
+      "y": 145,
+      "w": 34,
+      "h": 34,
+      "fill": "lightblue",
+      "stroke": "ink",
+      "width": 2
+     }
+    ]
+   },
+   "pairs": [
+    [
+     "Le toit",
+     "Triangle"
+    ],
+    [
+     "La porte",
+     "Rectangle"
+    ],
+    [
+     "La fenêtre",
+     "Carré"
+    ],
+    [
+     "Le soleil",
+     "Rond"
+    ]
+   ],
+   "method": "Un adulte lit les mots ; l'enfant montre la partie de la maison et dit la forme.",
+   "explanation": "Le toit : triangle. La porte : rectangle. La fenêtre : carré. Le soleil : rond. Bravo !",
+   "source": "Exercice original"
+  }
+ ]
+}

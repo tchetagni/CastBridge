@@ -1,0 +1,35 @@
+{
+  "format": 1,
+  "id": "gceol-english",
+  "version": 1,
+  "title": "English Language — GCE O Level",
+  "description": "Revision sheets, step-by-step worked examples, GCE O Level style exercises with model answers, and a mock paper: reading comprehension, grammar, reported speech, composition and summary writing.",
+  "lang": "en",
+  "cursus": "secondary",
+  "level": "Form 5",
+  "subject": "english",
+  "exam": "GCE-OL",
+  "programRef": "Cameroon GCE Board, Ordinary Level English Language syllabus (Form 5) — to be checked against the official texts",
+  "authors": ["CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"],
+  "status": "draft",
+  "updatedAt": "2026-09-30",
+  "chapters": [
+    {"id": "gceol-english-ch-reading", "title": "Reading comprehension", "order": 1, "programRef": "O Level English Language — reading comprehension (to be checked against the official texts)"},
+    {"id": "gceol-english-ch-grammar", "title": "Grammar: tenses, concord and reported speech", "order": 2, "programRef": "O Level English Language — grammar and usage (to be checked against the official texts)"},
+    {"id": "gceol-english-ch-composition", "title": "Composition: letters and argumentative essays", "order": 3, "programRef": "O Level English Language — composition / continuous writing (to be checked against the official texts)"},
+    {"id": "gceol-english-ch-summary", "title": "Summary writing", "order": 4, "programRef": "O Level English Language — summary (to be checked against the official texts)"}
+  ],
+  "mockExams": [
+    {"id": "gceol-english-mock",
+     "title": "GCE O Level mock — English Language",
+     "minutes": 120,
+     "instructions": "Answer ALL the questions. Read each passage carefully before you answer. Write complete sentences and use your own words unless you are told to quote. Marks are shown for each question (total 20). This mock paper is a CastBridge practice paper: its format is simplified and is to be checked against the official texts of the Cameroon GCE Board.",
+     "outOf": 20,
+     "sections": [
+       {"title": "Section A — Reading comprehension (6 marks)", "exercises": ["gceol-english-mock-reading"]},
+       {"title": "Section B — Grammar and reported speech (4 marks)", "exercises": ["gceol-english-mock-grammar"]},
+       {"title": "Section C — Summary (4 marks)", "exercises": ["gceol-english-mock-summary"]},
+       {"title": "Section D — Composition (6 marks)", "exercises": ["gceol-english-mock-composition"]}
+     ]}
+  ]
+}

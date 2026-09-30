@@ -1,0 +1,36 @@
+{
+  "format": 1,
+  "id": "probatoire-francais",
+  "version": 1,
+  "title": "Français — Probatoire",
+  "description": "Méthodes du résumé, de la discussion, du commentaire composé et de la dissertation : fiches, exemples résolus sur des textes originaux, exercices corrigés et épreuve blanche.",
+  "lang": "fr",
+  "cursus": "secondaire",
+  "level": "1re",
+  "subject": "francais",
+  "exam": "PROBATOIRE",
+  "series": ["A", "C", "D"],
+  "programRef": "Programme officiel de français des classes de Première (MINESEC) — à vérifier sur le texte officiel",
+  "authors": ["CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"],
+  "status": "draft",
+  "updatedAt": "2026-09-30",
+  "chapters": [
+    {"id": "probatoire-francais-resume", "title": "Le résumé de texte", "order": 1, "programRef": "1re — Contraction de texte : le résumé (à vérifier sur le texte officiel)"},
+    {"id": "probatoire-francais-discussion", "title": "La discussion", "order": 2, "programRef": "1re — Contraction de texte : la discussion (à vérifier sur le texte officiel)"},
+    {"id": "probatoire-francais-commentaire", "title": "Le commentaire composé", "order": 3, "programRef": "1re — Le commentaire composé (à vérifier sur le texte officiel)"},
+    {"id": "probatoire-francais-dissertation", "title": "La dissertation littéraire", "order": 4, "programRef": "1re — La dissertation littéraire (à vérifier sur le texte officiel)"}
+  ],
+  "mockExams": [
+    {
+      "id": "probatoire-francais-eb1",
+      "title": "Épreuve blanche de français — Probatoire",
+      "minutes": 120,
+      "outOf": 20,
+      "instructions": "Sujet de type contraction de texte : lisez le texte, faites le résumé demandé, puis traitez la discussion. Le texte est volontairement court pour l'écran. Le format, la durée et le barème officiels de l'épreuve du Probatoire sont à vérifier sur les textes officiels.",
+      "sections": [
+        {"title": "Première partie : résumé (8 points)", "exercises": ["probatoire-francais-eb1-resume"]},
+        {"title": "Deuxième partie : discussion (12 points)", "exercises": ["probatoire-francais-eb1-discussion"]}
+      ]
+    }
+  ]
+}

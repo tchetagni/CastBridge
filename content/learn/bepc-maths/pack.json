@@ -1,0 +1,37 @@
+{
+  "format": 1,
+  "id": "bepc-maths",
+  "version": 1,
+  "title": "Mathématiques — BEPC",
+  "description": "Fiches « l'essentiel », exemples résolus, exercices type BEPC corrigés et épreuve blanche.",
+  "lang": "fr",
+  "cursus": "secondaire",
+  "level": "3e",
+  "subject": "maths",
+  "exam": "BEPC",
+  "programRef": "Programme officiel de mathématiques de la classe de 3e (MINESEC) — à vérifier sur le texte officiel",
+  "authors": ["CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"],
+  "status": "draft",
+  "updatedAt": "2026-09-30",
+  "chapters": [
+    {"id": "bepc-maths-calc", "title": "Calcul littéral et identités remarquables", "order": 1, "programRef": "3e — Activités numériques : calcul littéral, identités remarquables (à vérifier sur le texte officiel)"},
+    {"id": "bepc-maths-eq", "title": "Équations, inéquations et systèmes", "order": 2, "programRef": "3e — Activités numériques : équations et inéquations du 1er degré, systèmes de deux équations à deux inconnues (à vérifier sur le texte officiel)"},
+    {"id": "bepc-maths-geo", "title": "Géométrie du triangle rectangle", "order": 3, "programRef": "3e — Relations métriques dans le triangle rectangle"},
+    {"id": "bepc-maths-thales", "title": "Théorème de Thalès", "order": 4, "programRef": "3e — Activités géométriques : théorème de Thalès et réciproque (à vérifier sur le texte officiel)"},
+    {"id": "bepc-maths-fonc", "title": "Fonctions linéaires et affines", "order": 5, "programRef": "3e — Activités numériques : applications linéaires et affines (à vérifier sur le texte officiel)"}
+  ],
+  "mockExams": [
+    {
+      "id": "bepc-maths-epreuve-1",
+      "title": "Épreuve blanche de mathématiques — BEPC",
+      "minutes": 120,
+      "instructions": "Durée : 2 heures. Noté sur 20. Trois parties indépendantes : activités numériques (8 points), activités géométriques (6 points), problème (6 points). Rédige chaque réponse et justifie tes calculs. Calculatrice selon le règlement de l'examen. Format (durée, barème, découpage en parties) proposé à titre d'entraînement : à vérifier sur les textes officiels.",
+      "outOf": 20,
+      "sections": [
+        {"title": "Partie A — Activités numériques (8 points)", "exercises": ["bepc-maths-be-01", "bepc-maths-be-02"]},
+        {"title": "Partie B — Activités géométriques (6 points)", "exercises": ["bepc-maths-be-03"]},
+        {"title": "Partie C — Problème (6 points)", "exercises": ["bepc-maths-be-04"]}
+      ]
+    }
+  ]
+}

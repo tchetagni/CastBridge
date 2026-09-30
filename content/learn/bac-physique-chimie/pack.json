@@ -1,0 +1,34 @@
+{
+  "format": 1,
+  "id": "bac-physique-chimie",
+  "version": 1,
+  "title": "Physique-Chimie — Bac C/D",
+  "description": "Fiches « l'essentiel » de Terminale C/D (mécanique, oscillations, nucléaire, acides et bases, cinétique), exemples résolus, exercices type Bac corrigés et épreuve blanche.",
+  "lang": "fr",
+  "cursus": "secondaire",
+  "level": "Tle",
+  "subject": "physique-chimie",
+  "exam": "BAC",
+  "series": ["C", "D"],
+  "programRef": "Programme officiel de physique-chimie des classes de Terminale C et D (MINESEC) — à vérifier sur le texte officiel",
+  "authors": ["CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"],
+  "status": "draft",
+  "updatedAt": "2026-09-30",
+  "chapters": [
+    {"id": "bac-physique-chimie-meca", "title": "Mécanique newtonienne", "order": 1, "programRef": "Tle C/D — Lois de Newton ; mouvement dans le champ de pesanteur uniforme (à vérifier sur le texte officiel)"},
+    {"id": "bac-physique-chimie-osc", "title": "Oscillations mécaniques libres", "order": 2, "programRef": "Tle C/D — Oscillateurs : pendule élastique ; analogie avec le circuit LC (à vérifier sur le texte officiel)"},
+    {"id": "bac-physique-chimie-nucl", "title": "Physique nucléaire", "order": 3, "programRef": "Tle C/D — Radioactivité, loi de décroissance, demi-vie (à vérifier sur le texte officiel)"},
+    {"id": "bac-physique-chimie-acidobase", "title": "Acides et bases en solution aqueuse", "order": 4, "programRef": "Tle C/D — pH, couples acide/base, pKa, dosages acido-basiques (à vérifier sur le texte officiel)"},
+    {"id": "bac-physique-chimie-cinetique", "title": "Cinétique chimique", "order": 5, "programRef": "Tle C/D — Vitesse de réaction, facteurs cinétiques, temps de demi-réaction (à vérifier sur le texte officiel)"}
+  ],
+  "mockExams": [
+    {"id": "bac-physique-chimie-eb1", "title": "Épreuve blanche de physique-chimie — Bac C/D", "minutes": 240, "outOf": 20,
+     "instructions": "Épreuve d'entraînement originale, notée sur 20. Durée proposée : 4 heures ; la durée, le coefficient et le format réels de l'épreuve sont à vérifier sur les textes officiels de l'Office du Baccalauréat. Calculatrice autorisée. Sauf indication contraire, g = 10 m/s². Donnez les résultats avec leur unité.",
+     "sections": [
+       {"title": "Exercice 1 — Mécanique (6 points)", "exercises": ["bac-physique-chimie-eb-meca"]},
+       {"title": "Exercice 2 — Oscillateur mécanique (4 points)", "exercises": ["bac-physique-chimie-eb-osc"]},
+       {"title": "Exercice 3 — Physique nucléaire (4 points)", "exercises": ["bac-physique-chimie-eb-nucl"]},
+       {"title": "Exercice 4 — Chimie : dosage acido-basique (6 points)", "exercises": ["bac-physique-chimie-eb-acide"]}
+     ]}
+  ]
+}
