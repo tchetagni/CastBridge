@@ -139,7 +139,7 @@ object PackReader {
     fun read(input: InputStream, signatures: PackSignatures = PackSignatures(), knownLessons: Set<String> = emptySet()): VerifiedPack {
         val files = LinkedHashMap<String, ByteArray>()
         var total = 0L
-        ZipInputStream(input).use { z ->
+        try { ZipInputStream(input).use { z ->
             while (true) {
                 val e = z.nextEntry ?: break
                 if (e.isDirectory) continue
@@ -151,7 +151,7 @@ object PackReader {
                 if (total > PackFormat.MAX_UNCOMPRESSED) throw Refused("pack trop gros une fois décompressé")
                 files[e.name] = b
             }
-        }
+        } } catch (e: java.io.IOException) { throw Refused("archive illisible (${e.message})") }
         val mBytes = files.remove(PackFormat.MANIFEST) ?: throw Refused("manifest.json absent")
         val m = try { PackManifest.parse(String(mBytes, Charsets.UTF_8)) } catch (e: IllegalArgumentException) { throw Refused("manifest invalide : ${e.message}") }
         val listed = m.files.associateBy { it.path }

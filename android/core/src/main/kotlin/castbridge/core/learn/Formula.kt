@@ -49,7 +49,7 @@ sealed class Tex {
                 while (i < s.length) {
                     val c = s[i]
                     if (end != null && c == end) break
-                    if (c == '}' || c == ']') { if (end == null) throw Error("« $c » sans ouverture dans « $s »"); break }
+                    if (c == '}') { if (end == null) throw Error("« } » sans ouverture dans « $s »"); break }
                     if (c == '^' || c == '_') {
                         i++
                         val arg = arg()
