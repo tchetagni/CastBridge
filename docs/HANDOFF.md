@@ -26,6 +26,7 @@ Branche d'intégration : **`feat/ssh`** (poussée sur `origin` et sur le dépôt
 `feat/connect` (apps branchées sur le serveur : consentement, identification, heartbeat, mises à jour signées, télémétrie, questions du quiz en ligne) est **fusionnée** dans `feat/ssh` (2026-10-01) ; jamais testée contre le serveur de production : premier enregistrement réel à vérifier.
 
 **ATTENTION — `wip/external-ai-changes`** (non fusionnée, NON revue) : instantané de 220 fichiers trouvés non commités dans le dossier de travail, écrits par d'autres sessions d'IA (activation/licence, contrôle parental, sudoku, deux mises à jour automatiques concurrentes `AutoUpdater`/`PhoneAutoUpdater`, suivi de l'adresse Bluetooth, assets de la charte, icônes, thème). À auditer (sécurité, doublons avec `feat/connect`) avant toute intégration ; rien de cela n'a été demandé dans les sessions de référence.
+`feat/games-hub` (non fusionnée) : catégorie **Jeux** (tuile TV unique + écran « Jeux », onglet téléphone « Jeux »), Sudoku repris par fichiers de `wip/external-ai-changes` (seuls ces 4 fichiers) et amélioré : voir `docs/GAMES.md`. À valider sur la vraie TV : D-pad et lisibilité à 3 m.
 `main` (GitHub) est resté à l'état initial : les fusions vers `main` sont à décider.
 
 ## 4. Où tourne quoi

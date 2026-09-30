@@ -73,10 +73,10 @@ class MainActivity : ComponentActivity() {
         var tab by rememberSaveable { mutableStateOf(0) }
         var settings by rememberSaveable { mutableStateOf(false) }
         // screen_time per tab (ids of EventCatalog: the "CastBridge TV" tab is the app's home)
-        val tabScreens = listOf("cast", "home", "quiz", "chess", "player", "learn")
+        val tabScreens = listOf("cast", "home", "games", "player", "learn")
         LaunchedEffect(tab, settings) { if (!settings) PhoneConnect.screens.enter(tabScreens[tab]) }
         fun select(i: Int) {
-            if (i != tab) listOf("cast", null, "quiz", "chess", "player", "learn")[i]?.let { PhoneConnect.feature(it, "tile") }
+            if (i != tab) listOf("cast", null, "games", "player", "learn")[i]?.let { PhoneConnect.feature(it, "tile") }
             tab = i
         }
         Scaffold(
@@ -93,15 +93,14 @@ class MainActivity : ComponentActivity() {
                     ScrollableTabRow(selectedTabIndex = tab, containerColor = MaterialTheme.colorScheme.surface, edgePadding = 0.dp) {
                         Tab(tab == 0, onClick = { select(0) }, text = { Text("TV DLNA", maxLines = 1) })
                         Tab(tab == 1, onClick = { select(1) }, text = { Text("CastBridge TV", maxLines = 1) })
-                        Tab(tab == 2, onClick = { select(2) }, text = { Text("Quiz", maxLines = 1) })
-                        Tab(tab == 3, onClick = { select(3) }, text = { Text("Échecs", maxLines = 1) })
-                        Tab(tab == 4, onClick = { select(4) }, text = { Text("Sur le téléphone", maxLines = 1) })
-                        Tab(tab == 5, onClick = { select(5) }, text = { Text("Apprendre", maxLines = 1) })
+                        Tab(tab == 2, onClick = { select(2) }, text = { Text("Jeux", maxLines = 1) })
+                        Tab(tab == 3, onClick = { select(3) }, text = { Text("Sur le téléphone", maxLines = 1) })
+                        Tab(tab == 4, onClick = { select(4) }, text = { Text("Apprendre", maxLines = 1) })
                     }
                 }
             },
             bottomBar = { castbridge.sender.player.CastMiniBar(Modifier.navigationBarsPadding()) },
-        ) { pad -> Box(Modifier.padding(pad).fillMaxSize()) { when (tab) { 0 -> App(); 1 -> TvHub(); 2 -> QuizScreen(); 3 -> ChessScreen(); 4 -> castbridge.sender.player.PhoneLibraryScreen(); else -> LearnScreen() } } }
+        ) { pad -> Box(Modifier.padding(pad).fillMaxSize()) { when (tab) { 0 -> App(); 1 -> TvHub(); 2 -> GamesScreen(); 3 -> castbridge.sender.player.PhoneLibraryScreen(); else -> LearnScreen() } } }
         MoveHandler()
         if (settings) SettingsScreen { settings = false }
     }
