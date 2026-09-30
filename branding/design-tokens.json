@@ -1,0 +1,147 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "name": "CastBridge Design Tokens",
+  "version": "1.0.0",
+  "color": {
+    "dark": {
+      "background": { "value": "#0A0F1E" },
+      "backgroundElevated": { "value": "#10182E" },
+      "surface": { "value": "#151D37" },
+      "surfaceHigh": { "value": "#1B2542" },
+      "outline": { "value": "#2A3550" },
+      "textHigh": { "value": "#F4F6FB" },
+      "textMedium": { "value": "#B7C0D4" },
+      "textLow": { "value": "#6E7A93" },
+      "primary": { "value": "#F5B025" },
+      "onPrimary": { "value": "#171204" },
+      "secondary": { "value": "#2E9E6B" },
+      "onSecondary": { "value": "#FFFFFF" },
+      "accent": { "value": "#FF8A3D" },
+      "focusRing": { "value": "#FFE1A6" }
+    },
+    "light": {
+      "background": { "value": "#F7F8FC" },
+      "surface": { "value": "#FFFFFF" },
+      "surfaceVariant": { "value": "#EDF0F7" },
+      "outline": { "value": "#D7DCE7" },
+      "textHigh": { "value": "#111827" },
+      "textMedium": { "value": "#3E4A61" },
+      "textLow": { "value": "#6B7487" },
+      "primary": { "value": "#B7791F" },
+      "onPrimary": { "value": "#FFFFFF" },
+      "secondary": { "value": "#1F8A5C" },
+      "onSecondary": { "value": "#FFFFFF" },
+      "accent": { "value": "#E4692E" },
+      "focusRing": { "value": "#B7791F" }
+    },
+    "semantic": {
+      "success": { "dark": { "value": "#35C08A" }, "light": { "value": "#1F8A5C" } },
+      "warning": { "dark": { "value": "#F5B025" }, "light": { "value": "#9A6500" } },
+      "error": { "dark": { "value": "#FF6B6B" }, "light": { "value": "#C5343A" } },
+      "info": { "dark": { "value": "#6CB6FF" }, "light": { "value": "#1668C7" } }
+    },
+    "brand": {
+      "castbridge": { "primary": { "value": "#F5B025" }, "background": { "value": "#0A0F1E" }, "secondary": { "value": "#2E9E6B" }, "accent": { "value": "#FF8A3D" } },
+      "castbridgeTv": { "primary": { "value": "#F5B025" }, "background": { "value": "#0A0F1E" } },
+      "quizDesMillions": { "primary": { "value": "#FF5C39" }, "secondary": { "value": "#FFB020" }, "accent": { "value": "#27C7B0" }, "background": { "value": "#0B1B1E" } },
+      "echecs": { "primary": { "value": "#2FA96B" }, "secondary": { "value": "#F2C14E" }, "accent": { "value": "#E07B39" }, "background": { "value": "#0C1B14" } },
+      "apprendre": { "primary": { "value": "#3B82F6" }, "secondary": { "value": "#F59E0B" }, "accent": { "value": "#06B6D4" }, "background": { "value": "#070D1E" }, "surface": { "value": "#101D42" } }
+    }
+  },
+  "typography": {
+    "family": {
+      "display": { "value": "Bricolage Grotesque" },
+      "body": { "value": "Inter" },
+      "quiz": { "value": "Sora" },
+      "echecs": { "value": "Manrope" }
+    },
+    "weight": {
+      "regular": { "value": 400 },
+      "medium": { "value": 500 },
+      "semibold": { "value": 600 },
+      "bold": { "value": 700 },
+      "extrabold": { "value": 800 }
+    },
+    "scale": {
+      "tv": {
+        "display": { "value": "72px", "lineHeight": 1.1, "weight": 800 },
+        "headline": { "value": "48px", "lineHeight": 1.15, "weight": 700 },
+        "title": { "value": "40px", "lineHeight": 1.2, "weight": 700 },
+        "subtitle": { "value": "32px", "lineHeight": 1.25, "weight": 600 },
+        "body": { "value": "28px", "lineHeight": 1.35, "weight": 400 },
+        "button": { "value": "28px", "lineHeight": 1.2, "weight": 700 },
+        "caption": { "value": "24px", "lineHeight": 1.3, "weight": 500 },
+        "minimum": { "value": "24px" }
+      },
+      "mobile": {
+        "display": { "value": "32sp", "lineHeight": 1.2, "weight": 800 },
+        "headline": { "value": "28sp", "lineHeight": 1.25, "weight": 700 },
+        "title": { "value": "22sp", "lineHeight": 1.3, "weight": 700 },
+        "body": { "value": "16sp", "lineHeight": 1.45, "weight": 400 },
+        "caption": { "value": "12sp", "lineHeight": 1.35, "weight": 500 }
+      }
+    }
+  },
+  "spacing": {
+    "0": { "value": "0dp" },
+    "1": { "value": "4dp" },
+    "2": { "value": "8dp" },
+    "3": { "value": "12dp" },
+    "4": { "value": "16dp" },
+    "5": { "value": "20dp" },
+    "6": { "value": "24dp" },
+    "8": { "value": "32dp" },
+    "10": { "value": "40dp" },
+    "12": { "value": "48dp" },
+    "16": { "value": "64dp" },
+    "20": { "value": "80dp" },
+    "24": { "value": "96dp" }
+  },
+  "radius": {
+    "sm": { "value": "8dp" },
+    "md": { "value": "12dp" },
+    "lg": { "value": "16dp" },
+    "xl": { "value": "24dp" },
+    "pill": { "value": "999dp" }
+  },
+  "elevation": {
+    "level1": { "value": "0 2px 8px rgba(0,0,0,0.40)" },
+    "level2": { "value": "0 8px 24px rgba(0,0,0,0.50)" },
+    "level3": { "value": "0 16px 40px rgba(0,0,0,0.60)" }
+  },
+  "focus": {
+    "tv": {
+      "ringColor": { "value": "#FFE1A6" },
+      "ringWidth": { "value": "3dp" },
+      "ringOffset": { "value": "2dp" },
+      "scale": { "value": 1.04 },
+      "description": "Anneau lumineux 3 dp visible à 3 m, sur cartes et éléments focalisés."
+    },
+    "mobile": {
+      "ringColor": { "value": "#B7791F" },
+      "ringWidth": { "value": "2dp" }
+    }
+  },
+  "motion": {
+    "duration": {
+      "fast": { "value": "120ms" },
+      "base": { "value": "200ms" },
+      "slow": { "value": "320ms" }
+    },
+    "easing": {
+      "standard": { "value": "cubic-bezier(0.2, 0, 0, 1)" },
+      "decelerate": { "value": "cubic-bezier(0.05, 0.7, 0.1, 1)" },
+      "accelerate": { "value": "cubic-bezier(0.3, 0, 1, 1)" }
+    }
+  },
+  "grid": {
+    "tvColumns": { "value": 12 },
+    "tvGutter": { "value": "24dp" },
+    "tvMargin": { "value": "48dp" },
+    "tvCardWidth": { "value": "260dp" },
+    "tvCardAspect": { "value": "16:9" },
+    "mobileColumns": { "value": 4 },
+    "mobileGutter": { "value": "16dp" },
+    "mobileMargin": { "value": "16dp" }
+  }
+}
