@@ -62,6 +62,20 @@ class LibraryServerTest {
         assertTrue(j.contains("\"resumeMs\":120000") && j.contains("\"durationMs\":600000"))
         assertTrue(j.contains("\"title\":\"a\"") && j.contains("\"hasThumb\":false"))
         assertFalse(j.contains("partial"))
+        // strict parse: a stray bracket (the "]]" bug) made phones refuse the whole list
+        @Suppress("UNCHECKED_CAST") val obj = castbridge.core.quiz.Json.obj(j)
+        assertEquals(2, (obj["files"] as List<*>).size); assertEquals(2L, (obj["count"] as Number).toLong())
+    }
+
+    @Test fun awkwardNamesStayValidJson() {
+        put("Prison Break [S01-E04] \"x\" é.avi", ByteArray(5), 1_000)    // created before the first listing: the list is cached for 1 s
+        @Suppress("UNCHECKED_CAST") val one = castbridge.core.quiz.Json.obj(tv.library())
+        assertEquals(1, (one["files"] as List<*>).size)
+    }
+
+    @Test fun emptyLibraryIsValidJson() {
+        @Suppress("UNCHECKED_CAST") val empty = castbridge.core.quiz.Json.obj(tv.library())
+        assertEquals(0, (empty["files"] as List<*>).size)
     }
 
     @Test fun thumbnailIsServedOrReportedNotReady() {

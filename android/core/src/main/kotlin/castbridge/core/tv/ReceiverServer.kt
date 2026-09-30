@@ -603,7 +603,7 @@ class ReceiverServer(
 
     fun libraryJson(): String {
         val sorted = libraryItems()
-        return sorted.joinToString(",", "{\"files\":[", "]") { i ->
+        return sorted.joinToString(",", "{\"files\":[", "") { i ->
             val m = i.meta
             "{\"name\":${q(i.name)},\"title\":${q(i.title)},\"size\":${i.size},\"mtime\":${i.mtime}," +
                 "\"volume\":${q(i.volumeId)},\"volumeLabel\":${q(i.volumeLabel)},\"kind\":${q(i.volumeKind.name.lowercase())}," +
