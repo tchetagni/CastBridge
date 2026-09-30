@@ -39,6 +39,7 @@ object BtProtocol {
      * TV -> client : status byte; if OK: u16 length | UTF-8 lines "key=value" ([LinkInfo])
      */
     const val NEGOTIATE = "CBTN"
+    const val DOWNLOAD = "CBTD"
     const val WANT_WIFI_DIRECT = 1
     /** RFCOMM service UUID shared by the TV and the phone app. */
     const val SERVICE_UUID = "7c5e3b9a-4d2f-4c61-9b0e-cb0000000001"
@@ -52,10 +53,11 @@ object BtProtocol {
     const val ERR_LOCKED = 5
     const val ERR_IO = 6
     const val ERR_SIZE = 7
+    const val ERR_NOT_FOUND = 8
     private const val MAX_NAME = 400
 
     /** Errors that retrying cannot fix. */
-    fun isFatal(code: Int) = code in setOf(ERR_MAGIC, ERR_PIN, ERR_NAME, ERR_SPACE, ERR_LOCKED, ERR_SIZE)
+    fun isFatal(code: Int) = code in setOf(ERR_MAGIC, ERR_PIN, ERR_NAME, ERR_SPACE, ERR_LOCKED, ERR_SIZE, ERR_NOT_FOUND)
 
     fun describe(code: Int) = when (code) {
         OK -> "ok"
@@ -65,6 +67,7 @@ object BtProtocol {
         ERR_SPACE -> "espace insuffisant sur la TV"
         ERR_LOCKED -> "trop d'essais, TV verrouillée"
         ERR_SIZE -> "taille invalide"
+        ERR_NOT_FOUND -> "fichier introuvable sur la TV"
         else -> "erreur TV ($code)"
     }
 
@@ -84,6 +87,8 @@ object BtProtocol {
         negotiate: ((wantWifiDirect: Boolean) -> LinkInfo)? = null,
         /** Phone remote over Bluetooth (CBTR, castbridge.core.remote.RemoteBt): runs until the phone closes the link. */
         remote: ((InputStream, OutputStream) -> Unit)? = null,
+        /** Download TV -> phone (CBTD): resolves a stored file by name and returns it, or null if not found. */
+        download: ((String) -> File?)? = null,
     ): Int {
         dir.mkdirs()
         val din = DataInputStream(input)
@@ -113,6 +118,33 @@ object BtProtocol {
             }
             dout.writeByte(OK); dout.flush()
             remote(din, dout)
+            return OK
+        }
+        if (m == DOWNLOAD && download != null) {
+            val pin = String(ByteArray(Pin.LENGTH).also { din.readFully(it) }, Charsets.US_ASCII)
+            val nameLen = din.readUnsignedShort()
+            if (nameLen == 0 || nameLen > MAX_NAME) return fail(ERR_NAME)
+            val name = String(ByteArray(nameLen).also { din.readFully(it) }, Charsets.UTF_8)
+            if (guard != null) when (guard.check(peer, pin)) {
+                PinGuard.Result.OK -> {}
+                PinGuard.Result.BAD -> return fail(ERR_PIN)
+                PinGuard.Result.LOCKED -> return fail(ERR_LOCKED)
+            }
+            val f = download(ReceiverServer.safeName(name) ?: return fail(ERR_NAME)) ?: return fail(ERR_NOT_FOUND)
+            if (!f.isFile) return fail(ERR_NOT_FOUND)
+            dout.writeByte(OK); dout.writeLong(f.length()); dout.flush()
+            f.inputStream().use { inp ->
+                val buf = ByteArray(64 * 1024)
+                var done = 0L
+                while (true) {
+                    val r = inp.read(buf)
+                    if (r < 0) break
+                    dout.write(buf, 0, r)
+                    done += r
+                }
+                if (done != f.length()) throw IOException("fichier tronqué")
+                dout.flush()
+            }
             return OK
         }
         if (m != MAGIC) return fail(ERR_MAGIC)
@@ -222,6 +254,41 @@ object BtProtocol {
         }
         val end = din.readUnsignedByte()
         if (end != OK) throw Refused(end)
+    }
+
+    /**
+     * Download TV -> phone (CBTD): asks the TV for [name] and streams it into [openAt](0). Returns the file size;
+     * throws [Refused] for an ERR_* answer and [IOException] for a broken link.
+     */
+    fun download(
+        input: InputStream, output: OutputStream, name: String, pin: String,
+        openAt: () -> java.io.OutputStream, onBytes: (Long) -> Unit = {},
+    ): Long {
+        require(Pin.isValidFormat(pin)) { "PIN must be ${Pin.LENGTH} digits" }
+        val din = DataInputStream(input)
+        val dout = DataOutputStream(output)
+        val nameBytes = name.toByteArray(Charsets.UTF_8)
+        dout.write(DOWNLOAD.toByteArray(Charsets.US_ASCII))
+        dout.write(pin.toByteArray(Charsets.US_ASCII))
+        dout.writeShort(nameBytes.size)
+        dout.write(nameBytes)
+        dout.flush()
+
+        val st = din.readUnsignedByte()
+        if (st != OK) throw Refused(st)
+        val size = din.readLong()
+        openAt().use { out ->
+            val buf = ByteArray(64 * 1024)
+            var done = 0L
+            while (done < size) {
+                val r = din.read(buf, 0, minOf(buf.size.toLong(), size - done).toInt())
+                if (r < 0) throw IOException("lien fermé à $done/$size")
+                out.write(buf, 0, r)
+                done += r
+                onBytes(r.toLong())
+            }
+        }
+        return size
     }
 }
 

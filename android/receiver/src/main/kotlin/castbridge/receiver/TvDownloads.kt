@@ -73,6 +73,7 @@ class TvDownloads private constructor(private val app: Context, @Volatile privat
             val what = f.files.firstOrNull() ?: f.name
             main.post { runCatching { Toast.makeText(app, "Téléchargement terminé : $what", Toast.LENGTH_LONG).show() } }
             notifyDone(f.name, f.volumeLabel)
+            ParentalHub.onDownload(what)
         }
         if (manager.hasWork()) supervisor.start()             // otherwise aria2 starts with the first download
         manager.start()

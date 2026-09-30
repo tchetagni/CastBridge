@@ -35,6 +35,10 @@ Une application normale **ne peut pas injecter de touches dans les autres applic
 | `GET /api/remote/state` | écran au premier plan, champ de saisie sélectionné, accessibilité activée/connectée, volume, muet |
 | `POST /api/remote/ping` | maintien de la liaison / mesure de latence |
 | `POST /api/remote/system/setup` | affiche l'aide « toute la TV » sur la TV |
+| `POST /api/remote/play?name=…&pos=…` | lit un fichier stocké sur la TV (cast par Bluetooth) |
+| `POST /api/remote/pause` · `resume` · `seek?pos=…` · `stop` · `volume?pct=…` | commandes du lecteur (cast par Bluetooth) |
+| `GET /api/remote/player` | `state`, `name`, `pos`, `dur` du lecteur (suivi du cast par Bluetooth) |
+| `GET /api/remote/file?name=…` | `exists`, `size` d'un fichier stocké (vérification avant suppression dans « Déplacer ») |
 
 Liste blanche (`castbridge.core.remote.RemoteKey`) : `DPAD_UP/DOWN/LEFT/RIGHT/CENTER` (alias `UP`, `OK`…), `BACK`, `MENU`, `HOME`, `PLAY_PAUSE`, `PLAY`, `PAUSE`, `STOP`, `NEXT`, `PREVIOUS`, `REWIND`, `FAST_FORWARD`, `VOLUME_UP/DOWN/MUTE`, `CHANNEL_UP/DOWN`, `INFO`, `CAPTIONS`, `AUDIO_TRACK`, `GUIDE`, `ENTER`, `DEL`, `0`–`9`. Tout le reste (POWER, SLEEP, codes numériques…) : 400.
 
@@ -42,3 +46,4 @@ Liste blanche (`castbridge.core.remote.RemoteKey`) : `DPAD_UP/DOWN/LEFT/RIGHT/CE
 - **Pas de doublon, pas de perte** : chaque événement porte `sid` (session du téléphone) et `seq` ; le téléphone renvoie après une reconnexion ce qui n'a pas reçu de réponse, la TV ignore un numéro déjà appliqué. Un appui vieux de plus de 3 s n'est pas rejoué (un « OK » en retard serait une surprise) ; un relâchement l'est toujours.
 - **Latence** : une seule connexion TCP ouverte (HTTP/1.1 keep-alive, `TCP_NODELAY`), un ping toutes les 3 s la garde chaude (la TV ferme les connexions inactives après 15 s). Côté TV, la touche passe devant le travail d'affichage en file (dans l'ordre) et la réponse n'attend pas plus de 150 ms un écran occupé.
 - **Sans réseau commun** : secours **Bluetooth** (TV appairée, choisi dans « Choisir la TV »). Le service Bluetooth de fichiers de la TV accepte `"CBTR" + code`, puis une requête par ligne (`POST key?code=…\n` → `200 {…}\n`), mêmes routes. Pendant une session Bluetooth de télécommande, les envois de fichiers par Bluetooth attendent. Sans Wi-Fi ni secours choisi, le téléphone affiche « Télécommande indisponible : la TV ne répond pas sur le réseau… ».
+- **Caster par Bluetooth** : dans « Diffuser sur » du lecteur, une TV appairée en Bluetooth (sans Wi-Fi commun) propose « Copier sur la TV et lire » et « Déplacer vers la TV ». Le téléphone envoie le fichier par Bluetooth (avec bascule automatique Wi-Fi / Wi-Fi Direct si possible, comme « Échange de fichiers »), puis passe les commandes `play`/`pause`/`resume`/`seek`/`stop`/`volume` et suit la lecture via `player` sur le même canal Bluetooth (CBTR). « Déplacer » ne supprime rien sur parole : il vérifie d'abord via `file` que la TV détient une copie complète de la taille exacte. La lecture en direct (`LIVE`) reste Wi-Fi : pas de flux vidéo en temps réel sur RFCOMM.

@@ -57,6 +57,22 @@ class TvClient(val base: String, val pin: String? = null) {
     /** Asks the TV to open its own storage settings, if it has any. */
     fun openTvStorageSettings(): String = call("POST", "/api/storage/open-settings")
 
+    // ---- offline activation ----
+    fun activationStatus(): String = call("GET", "/api/activation")
+    fun activation(token: String): String = call("POST", "/api/activation?token=${enc(token)}")
+
+    // ---- parental control (administered from the phone; ppin = the parental PIN) ----
+    fun parentalStatus(): String = call("GET", "/api/parental")
+    fun parentalLog(ppin: String): String = call("GET", "/api/parental/log?ppin=${enc(ppin)}")
+    fun parentalSetRestrictions(ppin: String, enabled: Boolean, blockedAfter: String?, blockedBefore: String?, requirePin: Boolean, dailyLimit: Int): String =
+        call("POST", "/api/parental/restrictions?ppin=${enc(ppin)}&enabled=${if (enabled) 1 else 0}" +
+            (blockedAfter?.let { "&blockedAfter=${enc(it)}" } ?: "") +
+            (blockedBefore?.let { "&blockedBefore=${enc(it)}" } ?: "") +
+            "&requirePin=${if (requirePin) 1 else 0}&dailyLimit=$dailyLimit")
+    fun parentalSetPin(ppin: String, new: String): String = call("POST", "/api/parental/pin?ppin=${enc(ppin)}&new=${enc(new)}")
+    fun parentalUnlock(ppin: String): String = call("POST", "/api/parental/unlock?ppin=${enc(ppin)}")
+    fun parentalClear(ppin: String): String = call("POST", "/api/parental/clear?ppin=${enc(ppin)}")
+
     /** A destination volume as seen by the pre-flight check: free space now and after the transfer, allowed by the 1 GB rule or not. */
     data class VolumeOption(val id: String, val label: String, val kind: String, val free: Long, val freeAfter: Long, val ok: Boolean)
 

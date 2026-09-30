@@ -22,6 +22,7 @@
                 <dt>Plateforme</dt><dd th:text="${@fmt.platform(dev.platform)}"></dd>
                 <dt>Fabricant / modèle</dt><dd th:text="|${dev.manufacturer ?: '—'} / ${dev.model ?: '—'}|"></dd>
                 <dt>Nom de l'appareil</dt><dd th:text="${@fmt.orDash(dev.deviceName)}"></dd>
+                <dt>Adresse Bluetooth</dt><dd><code th:text="${@fmt.orDash(dev.btAddress)}"></code></dd>
                 <dt>Système</dt><dd th:text="|${dev.osName ?: 'Android'} · SDK ${dev.sdk ?: '?'}|"></dd>
                 <dt>Build</dt><dd class="wrap" th:text="${@fmt.orDash(dev.osBuild)}"></dd>
                 <dt>Empreinte</dt><dd class="wrap small" th:text="${@fmt.orDash(dev.fingerprint)}"></dd>

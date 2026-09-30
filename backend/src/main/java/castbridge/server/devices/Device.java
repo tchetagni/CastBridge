@@ -33,6 +33,7 @@ public class Device {
     @Column(name = "force_update_check", nullable = false) public boolean forceUpdateCheck;
 
     @Column(name = "device_name") public String deviceName;
+    @Column(name = "bt_address") public String btAddress;
     public String manufacturer;
     public String model;
     public String platform;

@@ -21,6 +21,7 @@ interface DeviceFacts {
     val manufacturer: String? get() = null                // Build.MANUFACTURER
     val model: String? get() = null                       // Build.MODEL
     val deviceName: String? get() = null                  // user-visible name (Settings.Global.DEVICE_NAME / Bluetooth name)
+    val btAddress: String? get() = null                   // Bluetooth MAC address (the device's own, or the TV a phone controls)
     val buildDisplay: String? get() = null                // Build.DISPLAY
     val fingerprint: String? get() = null                 // Build.FINGERPRINT
     val hasLeanback: Boolean? get() = null                // FEATURE_LEANBACK
@@ -110,6 +111,8 @@ data class DeviceReport(
     val manufacturer: String?,
     val model: String?,
     val deviceName: String?,
+    /** Bluetooth MAC address of the device (the TV's own, or the TV a phone controls), never assumed. */
+    val btAddress: String?,
     val osName: String,
     val osBuild: String?,
     val fingerprint: String?,
@@ -131,7 +134,8 @@ data class DeviceReport(
     fun toJson(): String = JsonLite.write(linkedMapOf(
         "installId" to installId, "androidIdHash" to androidIdHash, "app" to app, "versionCode" to versionCode,
         "versionName" to versionName, "channel" to channel, "abi" to abi, "supportedAbis" to supportedAbis, "sdk" to sdk,
-        "platform" to platform, "manufacturer" to manufacturer, "model" to model, "deviceName" to deviceName, "osName" to osName,
+        "platform" to platform, "manufacturer" to manufacturer, "model" to model, "deviceName" to deviceName, "btAddress" to btAddress,
+        "osName" to osName,
         "osBuild" to osBuild, "fingerprint" to fingerprint, "screen" to screen, "densityDpi" to densityDpi,
         "ramTotalMb" to ramTotalMb, "storageFreeMb" to storageFreeMb, "storageTotalMb" to storageTotalMb,
         "usbPresent" to usbPresent, "usbFreeMb" to usbFreeMb, "btGateway" to btGateway, "sshEnabled" to sshEnabled,
@@ -159,6 +163,7 @@ data class DeviceReport(
                 manufacturer = f.manufacturer?.take(64),
                 model = f.model?.take(64),
                 deviceName = f.deviceName?.take(80),
+                btAddress = f.btAddress?.take(32),
                 osName = Platform.osName(f, platform),
                 osBuild = f.buildDisplay?.take(160),
                 fingerprint = f.fingerprint?.take(200),

@@ -54,10 +54,11 @@ import kotlinx.coroutines.withContext
 @Composable
 fun TvHub() {
     var advanced by rememberSaveable { mutableStateOf(false) }
+    var channel by rememberSaveable { mutableStateOf(Channel.WIFI) }
     if (advanced) Column(Modifier.fillMaxSize()) {
         TextButton(onClick = { advanced = false }, Modifier.padding(start = 8.dp)) { Icon(Icons.Filled.ArrowBack, null); Spacer(Modifier.width(6.dp)); Text("Accueil") }
-        TvHubAdvanced()
-    } else TvHome(onAdvanced = { advanced = true })
+        TvHubAdvanced(channel) { channel = it }
+    } else TvHome(onAdvanced = { advanced = true }, onBtFallback = { advanced = true; channel = Channel.BLUETOOTH })
 }
 
 /** The TV the home talks to (chosen once in the first-connection assistant). */
@@ -74,7 +75,7 @@ private fun eta(left: Long, bps: Long): String {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TvHome(onAdvanced: () -> Unit) {
+fun TvHome(onAdvanced: () -> Unit, onBtFallback: () -> Unit) {
     val ctx = LocalContext.current
     val scope = rememberCoroutineScope()
     val home = remember { HomeTv(ctx) }
@@ -87,6 +88,16 @@ fun TvHome(onAdvanced: () -> Unit) {
     var wizard by rememberSaveable { mutableStateOf(tvName == null || !Pin.isValidFormat(pins.get(tvName))) }
     val tv = tvs.firstOrNull { it.name == tvName }
     val client = tv?.let { TvClient(it.base, pin) }
+
+    // Not on the same Wi-Fi: after a grace period, fall back to Bluetooth automatically (a previous Bluetooth cast is
+    // remembered). The TV can still appear later: the effect re-runs on every discovery change and cancels the delay.
+    val btPrefs = remember { BtCastPrefs(ctx) }
+    LaunchedEffect(tvName, tvs) {
+        if (tvName != null && tvs.none { it.name == tvName } && btPrefs.lastAddress != null && !wizard) {
+            delay(4000)
+            if (discovery.tvs.value.none { it.name == tvName }) onBtFallback()
+        }
+    }
 
     if (wizard) {
         FirstConnection(tvs, onRetry = { discovery.restart() }, onAdvanced = onAdvanced) { name, code ->

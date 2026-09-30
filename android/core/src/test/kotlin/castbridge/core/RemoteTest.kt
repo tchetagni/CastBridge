@@ -15,6 +15,13 @@ class FakeSink : RemoteSink {
     val keys = CopyOnWriteArrayList<K>()
     val texts = CopyOnWriteArrayList<Pair<String, TextMode>>()
     val globals = CopyOnWriteArrayList<RemoteGlobal>()
+    val plays = CopyOnWriteArrayList<Pair<String, Long>>()
+    val pauses = java.util.concurrent.atomic.AtomicInteger()
+    val resumes = java.util.concurrent.atomic.AtomicInteger()
+    val seeks = CopyOnWriteArrayList<Long>()
+    val stops = java.util.concurrent.atomic.AtomicInteger()
+    val volumes = CopyOnWriteArrayList<Int>()
+    val files = CopyOnWriteArrayList<String>()
     var refuse: String? = null
     override fun key(k: RemoteKey, action: KeyAction, repeat: Int, target: RemoteTarget): Outcome {
         refuse?.let { return Outcome.refused(it) }
@@ -23,6 +30,14 @@ class FakeSink : RemoteSink {
     override fun text(value: String, mode: TextMode, target: RemoteTarget): Outcome { texts += value to mode; return Outcome.done("app") }
     override fun global(g: RemoteGlobal): Outcome { globals += g; return Outcome.done("system") }
     override fun stateJson() = """{"screen":"PlayerActivity","system":{"enabled":false}}"""
+    override fun play(name: String, pos: Long): Outcome { plays += name to pos; return Outcome.done("app") }
+    override fun pause(): Outcome { pauses.incrementAndGet(); return Outcome.done("app") }
+    override fun resume(): Outcome { resumes.incrementAndGet(); return Outcome.done("app") }
+    override fun seek(pos: Long): Outcome { seeks += pos; return Outcome.done("app") }
+    override fun stop(): Outcome { stops.incrementAndGet(); return Outcome.done("app") }
+    override fun setVolume(pct: Int): Outcome { volumes += pct; return Outcome.done("audio") }
+    override fun playerJson() = """{"state":"playing","name":"clip.mp4","pos":1234,"dur":60000}"""
+    override fun fileInfo(name: String): String { files += name; return """{"exists":true,"size":42}""" }
 }
 
 class RemoteKeysTest {
@@ -118,6 +133,39 @@ class RemoteApiTest {
         assertEquals(200, post("global", "action" to "HOME").status)
         assertEquals(RemoteGlobal.HOME, sink.globals.single())
         assertEquals(400, post("global", "action" to "REBOOT").status)
+    }
+
+    @Test fun playbackRoutes() {
+        assertEquals(200, post("play", "name" to "clip.mp4", "pos" to "1500").status)
+        assertEquals("clip.mp4" to 1500L, sink.plays.single())
+        assertEquals(400, post("play").status)
+        assertEquals(400, post("play", "name" to "").status)
+        assertEquals(400, post("play", "name" to "x".repeat(RemoteApi.MAX_NAME + 1)).status)
+        assertEquals(400, post("play", "name" to "clip.mp4", "pos" to "-1").status)
+        assertEquals(400, post("play", "name" to "clip.mp4", "pos" to "abc").status)
+        assertEquals(200, post("pause").status); assertEquals(1, sink.pauses.get())
+        assertEquals(200, post("resume").status); assertEquals(1, sink.resumes.get())
+        assertEquals(200, post("seek", "pos" to "9000").status); assertEquals(listOf(9000L), sink.seeks.toList())
+        assertEquals(400, post("seek").status)
+        assertEquals(200, post("stop").status); assertEquals(1, sink.stops.get())
+        assertEquals(200, post("volume", "pct" to "42").status); assertEquals(listOf(42), sink.volumes.toList())
+        assertEquals(400, post("volume", "pct" to "101").status)
+        assertEquals(405, api.handle("/api/remote/play", "GET", mapOf("name" to "a"))!!.status)
+    }
+
+    @Test fun playerStateRoute() {
+        val r = api.handle("/api/remote/player", "GET", emptyMap())!!
+        assertEquals(200, r.status)
+        assertTrue("\"state\":\"playing\"" in r.json && "\"pos\":1234" in r.json)
+        assertEquals(405, api.handle("/api/remote/player", "POST", emptyMap())!!.status)
+    }
+
+    @Test fun fileInfoRoute() {
+        val r = api.handle("/api/remote/file", "GET", mapOf("name" to "clip.mp4"))!!
+        assertEquals(200, r.status)
+        assertTrue("\"size\":42" in r.json)
+        assertEquals(listOf("clip.mp4"), sink.files.toList())
+        assertEquals(405, api.handle("/api/remote/file", "POST", emptyMap())!!.status)
     }
 
     @Test fun pointerBecomesArrows() {

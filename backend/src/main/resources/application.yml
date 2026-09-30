@@ -78,6 +78,8 @@ castbridge:
   signing:
     key: ${CASTBRIDGE_SIGNING_KEY:}
     key-file: ${CASTBRIDGE_SIGNING_KEY_FILE:}
+  activation:
+    secret: ${CASTBRIDGE_ACTIVATION_SECRET:}
   storage-dir: ${CASTBRIDGE_STORAGE_DIR:/data/apk}
   public-base-url: ${CASTBRIDGE_PUBLIC_BASE_URL:}
   rate-limit:

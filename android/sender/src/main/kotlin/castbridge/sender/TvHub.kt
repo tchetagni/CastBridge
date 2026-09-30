@@ -22,6 +22,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import castbridge.core.tv.Pin
 import androidx.compose.ui.Alignment
+import castbridge.core.tv.ResumableDownload
 import castbridge.core.tv.ResumableUpload
 import castbridge.core.tv.TvClient
 import kotlinx.coroutines.Dispatchers
@@ -34,12 +35,11 @@ enum class Channel(val label: String) { WIFI("Wi-Fi"), BLUETOOTH("Bluetooth"), W
 
 /** "Avancé" part of the "CastBridge TV" tab: pick the channel (Wi-Fi, Bluetooth, Wi-Fi Direct), then use the matching screen. */
 @Composable
-fun TvHubAdvanced() {
-    var channel by rememberSaveable { mutableStateOf(Channel.WIFI) }
+fun TvHubAdvanced(channel: Channel, onChannel: (Channel) -> Unit) {
     Column(Modifier.fillMaxSize()) {
         SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp)) {
             Channel.values().forEachIndexed { i, c ->
-                SegmentedButton(channel == c, { channel = c }, SegmentedButtonDefaults.itemShape(i, Channel.values().size)) {
+                SegmentedButton(channel == c, { onChannel(c) }, SegmentedButtonDefaults.itemShape(i, Channel.values().size)) {
                     Text(c.label, maxLines = 1)
                 }
             }
@@ -98,6 +98,8 @@ fun BtScreen() {
     var fileName by rememberSaveable { mutableStateOf<String?>(null) }
     val pick = rememberFilePicker { u, n -> fileUri = u; fileName = n }
     val state by BtUploadService.state.collectAsState()
+    var dlName by rememberSaveable { mutableStateOf("") }
+    val dlState by BtDownloadService.state.collectAsState()
 
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Text("Envoi par Bluetooth : appairez d'abord le téléphone avec la TV (réglages Bluetooth). " +
@@ -142,6 +144,29 @@ fun BtScreen() {
             null -> {}
         }
         BtUploadService.route.collectAsState().value?.let { if (busy) Text("Lien : $it", style = MaterialTheme.typography.bodySmall) }
+
+        // --- Téléchargement TV -> téléphone (Bluetooth, CBTD) ---
+        HorizontalDivider(Modifier.padding(vertical = 4.dp))
+        Text("Télécharger un fichier de la TV", style = MaterialTheme.typography.titleSmall)
+        Text("Récupère un fichier stocké sur la TV, sans réseau commun (Bluetooth). Saisissez le nom exact du fichier.",
+            style = MaterialTheme.typography.bodySmall)
+        OutlinedTextField(dlName, { dlName = it }, Modifier.fillMaxWidth(), singleLine = true, label = { Text("Nom du fichier sur la TV") })
+        val dlBusy = dlState is ResumableDownload.State.Downloading
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            Button(enabled = !dlBusy && granted && selected != null && Pin.isValidFormat(pin) && dlName.isNotBlank(),
+                onClick = { BtDownloadService.start(ctx, selected!!, pin, dlName.trim(), -1) }) { Text("Télécharger") }
+            if (dlBusy) OutlinedButton(onClick = { BtDownloadService.cancel(ctx) }) { Text("Annuler") }
+        }
+        when (val d = dlState) {
+            is ResumableDownload.State.Downloading -> {
+                LinearProgressIndicator({ if (d.total > 0) d.got.toFloat() / d.total else 0f }, Modifier.fillMaxWidth())
+                Text("Téléchargement : ${formatSize(d.got)}${if (d.total > 0) " / ${formatSize(d.total)}" else ""}")
+            }
+            is ResumableDownload.State.Waiting -> Text("En attente : ${d.reason}")
+            is ResumableDownload.State.Done -> Text("Fichier enregistré dans Téléchargements/CastBridge.")
+            is ResumableDownload.State.Failed -> Text("Échec : ${d.reason}", color = MaterialTheme.colorScheme.error)
+            null -> {}
+        }
         BtSshGatewayPanel()
     }
 }

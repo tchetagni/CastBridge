@@ -28,6 +28,8 @@ class BtServer(
     private val guard: PinGuard,
     /** Answers "is there a faster link?" (CBTN): addresses of the TV and its Wi-Fi Direct group. */
     private val negotiate: ((Boolean) -> castbridge.core.tv.LinkInfo)? = null,
+    /** Resolves a stored file by name for a download (CBTD), across every volume; null = not found. */
+    private val resolve: ((String) -> File?)? = null,
     private val status: (String?) -> Unit,
 ) {
     @Volatile private var server: BluetoothServerSocket? = null
@@ -101,7 +103,7 @@ class BtServer(
                 last.set(System.currentTimeMillis())
                 val pct = (done * 100 / total).toInt()
                 if (pct != lastPct) { lastPct = pct; status("Bluetooth : réception de $name $pct %") }
-            }, negotiate = negotiate, remote = { i, o -> status("Bluetooth : télécommande du téléphone connectée"); RemoteHub.serveBt(i, o) { last.set(System.currentTimeMillis()) } })
+            }, negotiate = negotiate, download = resolve, remote = { i, o -> status("Bluetooth : télécommande du téléphone connectée"); RemoteHub.serveBt(i, o) { last.set(System.currentTimeMillis()) } })
             status("Bluetooth : prêt" + if (r != BtProtocol.OK) " (refusé : ${BtProtocol.describe(r)})" else " (fichier reçu)")
         } catch (e: Exception) {
             Log.w(TAG, "transfer interrupted: ${e.javaClass.simpleName}")   // never log request contents

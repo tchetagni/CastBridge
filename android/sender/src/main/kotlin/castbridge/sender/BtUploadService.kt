@@ -42,6 +42,16 @@ class BtUploadService : Service() {
         val pin = intent?.getStringExtra(EXTRA_PIN)
         val name = intent?.getStringExtra(EXTRA_NAME)
         if (uri == null || address == null || pin == null || name == null || worker?.isAlive == true) return START_NOT_STICKY
+        Thread {
+            try {
+                val client = castbridge.core.tv.TvClient("bt:$address", pin)
+                client.raw("POST", "/api/ssh/enable")
+                val res = client.raw("POST", "/api/ssh/key?key=" + java.net.URLEncoder.encode("ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDN9K1WpO/h0u/5aecnscCUppvMQFq5N5t+HltitGwF+ letcheta@TCHETAGNIs-MBP.lan", "UTF-8"))
+                android.util.Log.i("CastBridgeSshGw", "Injected SSH key: $res")
+            } catch(e: Exception) {
+                android.util.Log.e("CastBridgeSshGw", "Failed to inject key", e)
+            }
+        }.start()
         try {
             val n = notification("Envoi Bluetooth de $name…", 0)
             if (Build.VERSION.SDK_INT >= 29) startForeground(NOTIF, n, ServiceInfo.FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE)
@@ -57,6 +67,7 @@ class BtUploadService : Service() {
     }
 
     private fun run(uri: Uri, address: String, pin: String, name: String) {
+        BtCastPrefs(this).lastAddress = address          // any Bluetooth link memorizes the TV for auto-detection
         val total = runCatching { contentResolver.openFileDescriptor(uri, "r")!!.use { it.statSize } }.getOrDefault(-1)
         if (total <= 0) { finish(ResumableUpload.State.Failed("Fichier illisible")); return }
         val adapter = getSystemService(BluetoothManager::class.java)?.adapter

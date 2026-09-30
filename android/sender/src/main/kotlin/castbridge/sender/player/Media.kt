@@ -70,8 +70,14 @@ object Media {
             else -> listOfNotNull(intent.data)
         }
         val single = uris.size == 1
-        return uris.mapNotNull { u -> describe(ctx, u, if (single) intent.type else null, intent.getStringExtra(EXTRA_TITLE)) }
-            .filter { it.kind != MediaKind.OTHER }
+        return uris.mapNotNull { u ->
+            // A shared content:// URI (Telegram, WhatsApp, Files…) must stay readable after the share: the upload service
+            // runs separately and needs its own grant. Persist it when the provider allows, else it stays transient.
+            if (u.scheme == "content") runCatching {
+                ctx.contentResolver.takePersistableUriPermission(u, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            }
+            describe(ctx, u, if (single) intent.type else null, intent.getStringExtra(EXTRA_TITLE))
+        }.filter { it.kind != MediaKind.OTHER }
     }
 
     const val EXTRA_TITLE = "castbridge.title"

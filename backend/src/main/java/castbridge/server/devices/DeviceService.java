@@ -190,6 +190,7 @@ public class DeviceService {
         if (r.manufacturer() != null) d.manufacturer = cut(r.manufacturer(), 64);
         if (r.model() != null) d.model = cut(r.model(), 64);
         if (r.deviceName() != null) d.deviceName = cut(r.deviceName(), 80);
+        if (r.btAddress() != null) d.btAddress = cut(r.btAddress(), 32);
         if (r.osName() != null) d.osName = cut(r.osName(), 64);
         if (r.osBuild() != null) d.osBuild = cut(r.osBuild(), 160);
         if (r.fingerprint() != null) d.fingerprint = cut(r.fingerprint(), 200);

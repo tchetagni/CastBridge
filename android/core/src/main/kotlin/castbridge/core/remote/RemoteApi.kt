@@ -21,6 +21,17 @@ interface RemoteSink {
     fun stateJson(): String
     /** Shows the step-by-step help for the "whole TV" mode on the TV screen. */
     fun openSetup(): Outcome = Outcome.refused("indisponible", 501)
+    // Playback control (used by the phone to "cast" over Bluetooth: send the file, then play it and act as the remote).
+    fun play(name: String, pos: Long): Outcome = Outcome.refused("indisponible", 501)
+    fun pause(): Outcome = Outcome.refused("indisponible", 501)
+    fun resume(): Outcome = Outcome.refused("indisponible", 501)
+    fun seek(pos: Long): Outcome = Outcome.refused("indisponible", 501)
+    fun stop(): Outcome = Outcome.refused("indisponible", 501)
+    fun setVolume(pct: Int): Outcome = Outcome.refused("indisponible", 501)
+    /** JSON object: what the player shows right now ("state", "name", "pos", "dur"). */
+    fun playerJson(): String = """{"state":"idle","name":null,"pos":0,"dur":0}"""
+    /** JSON object: existence and size of a stored file ("exists", "size") — the phone verifies a move over Bluetooth. */
+    fun fileInfo(name: String): String = """{"exists":false,"size":-1}"""
 }
 
 /**
@@ -33,6 +44,12 @@ interface RemoteSink {
  *  POST /api/remote/ping            cheap keep-alive / latency probe
  *  GET  /api/remote/state           what the remote can do right now
  *  POST /api/remote/system/setup    opens the "whole TV" help on the TV
+ *
+ * Playback over Bluetooth (the phone sends the file by Bluetooth, then plays it and drives it):
+ *  POST /api/remote/play?name=…&pos=…    start playing a stored file at a position
+ *  POST /api/remote/pause|resume|stop|seek?pos=…|volume?pct=…
+ *  GET  /api/remote/player               "state", "name", "pos", "dur" of the player
+ *  GET  /api/remote/file?name=…          "exists", "size" of a stored file (move check)
  *
  * [sid]/[seq] make resends after a reconnection harmless ([SeqFilter]). A held key the phone never releases is released
  * by [releaseStale], which the app calls a few times a second while [holding] is true.
@@ -48,6 +65,8 @@ class RemoteApi(private val sink: RemoteSink, private val now: () -> Long = Syst
         if (!path.startsWith(PREFIX)) return null
         val route = path.removePrefix(PREFIX)
         if (route == "state") return if (method == "GET") ApiReply(200, sink.stateJson()) else err(405, "use GET")
+        if (route == "player") return if (method == "GET") ApiReply(200, sink.playerJson()) else err(405, "use GET")
+        if (route == "file") return if (method == "GET") ApiReply(200, sink.fileInfo(params["name"] ?: "")) else err(405, "use GET")
         if (method != "POST") return err(405, "use POST")
         return when (route) {
             "ping" -> ApiReply(200, """{"ok":true,"t":${now()}}""")
@@ -56,6 +75,12 @@ class RemoteApi(private val sink: RemoteSink, private val now: () -> Long = Syst
             "pointer" -> withSeq(params) { pointer(params) }
             "global" -> withSeq(params) { global(params) }
             "system/setup" -> reply(sink.openSetup(), null)
+            "play" -> play(params)
+            "pause" -> reply(sink.pause(), null)
+            "resume" -> reply(sink.resume(), null)
+            "seek" -> seek(params)
+            "stop" -> reply(sink.stop(), null)
+            "volume" -> volume(params)
             else -> err(404, "not found")
         }
     }
@@ -129,6 +154,22 @@ class RemoteApi(private val sink: RemoteSink, private val now: () -> Long = Syst
         return reply(sink.global(g), null)
     }
 
+    private fun play(p: Map<String, String>): ApiReply {
+        val name = p["name"]?.takeIf { it.isNotEmpty() && it.length <= MAX_NAME } ?: return err(400, "name required (max $MAX_NAME)")
+        val pos = p["pos"]?.toLongOrNull()?.takeIf { it >= 0 } ?: return err(400, "bad pos")
+        return reply(sink.play(name, pos), null)
+    }
+
+    private fun seek(p: Map<String, String>): ApiReply {
+        val pos = p["pos"]?.toLongOrNull()?.takeIf { it >= 0 } ?: return err(400, "pos required")
+        return reply(sink.seek(pos), null)
+    }
+
+    private fun volume(p: Map<String, String>): ApiReply {
+        val pct = p["pct"]?.toIntOrNull()?.takeIf { it in 0..100 } ?: return err(400, "pct required (0..100)")
+        return reply(sink.setVolume(pct), null)
+    }
+
     private fun reply(o: Outcome, k: RemoteKey?): ApiReply =
         if (o.ok) ApiReply(200, """{"ok":true,"via":${q(o.via ?: "")}${k?.let { ",\"key\":${q(it.wire)}" } ?: ""}}""")
         else ApiReply(o.status, """{"ok":false,"error":${q(o.message ?: "refusé")},"message":${q(o.message ?: "refusé")}}""")
@@ -138,6 +179,7 @@ class RemoteApi(private val sink: RemoteSink, private val now: () -> Long = Syst
     companion object {
         const val PREFIX = "/api/remote/"
         const val MAX_TEXT = 500
+        const val MAX_NAME = 200
         const val MAX_REPEAT = 100_000
         const val MAX_MOVE = 4000
         private val SID = Regex("^[A-Za-z0-9_-]{1,32}$")

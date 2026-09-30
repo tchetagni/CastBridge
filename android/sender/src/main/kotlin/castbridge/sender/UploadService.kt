@@ -92,7 +92,15 @@ class UploadService : Service() {
     }
 
     private fun runJob(uri: Uri, job: Job, disc: TvDiscovery?) {
-        val total = runCatching { contentResolver.openFileDescriptor(uri, "r")!!.use { it.statSize } }.getOrDefault(-1)
+        // Some providers (Telegram, file managers…) do not report a size through the file descriptor: fall back to the
+        // OpenableColumns.SIZE column. -1 means unreadable.
+        var total = runCatching { contentResolver.openFileDescriptor(uri, "r")!!.use { it.statSize } }.getOrDefault(-1L)
+        if (total <= 0) total = runCatching {
+            contentResolver.query(uri, null, null, null, null)?.use { c ->
+                val i = c.getColumnIndex(android.provider.OpenableColumns.SIZE)
+                if (c.moveToFirst() && i >= 0 && !c.isNull(i)) c.getLong(i) else -1L
+            } ?: -1L
+        }.getOrDefault(-1L)
         if (total <= 0) { finish(State.Failed(job, "Fichier illisible")); return }
         val resolve: () -> String? = {
             job.manualHost?.let { h -> if (':' in h) "http://$h" else "http://$h:8765" } ?: disc?.find(job.tvName)?.base
@@ -284,6 +292,9 @@ class UploadService : Service() {
         private val _moveNote = MutableStateFlow<String?>(null)
         val moveNote: StateFlow<String?> = _moveNote
         fun moveHandled() { _moveReady.value = null; _moveNote.value = null }
+        /** A Bluetooth cast verifies its own copy and hands the result to the same move screen. */
+        fun offerMove(req: MoveRequest?) { _moveReady.value = req }
+        fun noteMove(note: String?) { _moveNote.value = note }
         private const val NOTIF_MOVE = 7
         const val EXTRA_MOVE = "move"
         private val _state = MutableStateFlow<State>(State.Idle)

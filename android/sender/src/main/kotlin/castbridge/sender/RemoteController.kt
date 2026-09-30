@@ -120,6 +120,7 @@ object RemoteController {
         }
         val bt = tv.btAddress ?: btFallback
         if (bt != null) {
+            BtCastPrefs(ctx).lastAddress = bt          // any Bluetooth link (remote, transfer, cast) memorizes the TV for auto-detection
             if (!hasBtPermission(ctx)) throw IOException("Secours Bluetooth : autorisation « Appareils à proximité » refusée")
             val adapter = ctx.getSystemService(BluetoothManager::class.java)?.adapter
             if (adapter == null || !adapter.isEnabled) throw IOException(if (wifiError != null) "TV injoignable par le Wi-Fi, et le Bluetooth du téléphone est éteint" else "Bluetooth éteint")

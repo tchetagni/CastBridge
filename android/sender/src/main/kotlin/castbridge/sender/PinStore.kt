@@ -17,6 +17,14 @@ class PinStore(ctx: Context) {
     fun put(key: String, pin: String) = sp.edit().putString(key, pin).apply()
 }
 
+/** Remembers the last Bluetooth TV used for a cast, so it can be auto-prioritized when there is no Wi-Fi. */
+class BtCastPrefs(ctx: Context) {
+    private val sp = ctx.applicationContext.getSharedPreferences("castbridge_bt_cast", Context.MODE_PRIVATE)
+    var lastAddress: String?
+        get() = sp.getString("addr", null)
+        set(v) { sp.edit().putString("addr", v).apply() }
+}
+
 /** PIN entry for the selected TV; the value is remembered per TV as soon as it is well formed. */
 @Composable
 fun PinField(store: PinStore, key: String?, pin: String, onPin: (String) -> Unit, modifier: Modifier = Modifier) {

@@ -89,6 +89,8 @@ class TvService : Service(), Device {
     lateinit var volProvider: AndroidVolumeProvider; private set
     lateinit var registry: VolumeRegistry; private set
     lateinit var videosDir: File; private set
+    /** Where automatically downloaded update APKs land (app cache, not the video library). */
+    private val updateDir by lazy { File(cacheDir, "updates").apply { mkdirs() } }
     lateinit var guard: PinGuard; private set
     var pin = ""; private set
     var server: ReceiverServer? = null; private set
@@ -98,6 +100,7 @@ class TvService : Service(), Device {
     var usb: UsbImporter? = null; private set
     var ssh: SshControl? = null; private set
     var updater: UpdateInstaller? = null; private set
+    var auto: AutoUpdater? = null; private set
     var gateway: BtGatewayHost? = null; private set
     @Volatile var screen: Screen? = null; private set
     @Volatile private var pending: Pending? = null
@@ -152,6 +155,9 @@ class TvService : Service(), Device {
         if (started) return
         started = true
         prefs = TvPrefs(this)
+        ParentalHub.init(this)
+        ActivationHub.init(this)
+        DeviceHub.init(this)
         volProvider = AndroidVolumeProvider(this, prefs)
         registry = VolumeRegistry(volProvider).also { it.refresh() }        // fast scan, no speed test on the main thread
         videosDir = registry.volumes().first().dir                         // internal storage is always first
@@ -164,17 +170,21 @@ class TvService : Service(), Device {
             onThumb = { n -> screen?.thumbReady(n) })
         startServer()
         register()
-        bt = BtServer(this, videosDir, guard, negotiate = ::linkInfo) { setStatus("1-bt", it) }
+        bt = BtServer(this, videosDir, guard, negotiate = ::linkInfo, resolve = { n -> resolveStoredFile(n) }) { setStatus("1-bt", it) }
         wd = WifiDirectGroup(this, prefs) { setStatus("2-wd", it) }
         usb = UsbImporter(this, videosDir) { setStatus("3-usb", it) }
         ssh = SshControl(this, { setStatus("4-ssh", it) }, { setStatus("4-ssh-bt", it) })
-        updater = UpdateInstaller(this, { registry.volumes().filter { it.kind != VolumeKind.SAF }.map { it.dir } },
+        updater = UpdateInstaller(this, { registry.volumes().filter { it.kind != VolumeKind.SAF }.map { it.dir } + updateDir },
             launch = { i, what -> launchScreen(i, what) }) { m -> setStatus("5-update", m); notice(m) }
+        auto = AutoUpdater(this, updater!!, prefs, { updateDir }, { m -> setStatus("5-update", m) }, { m -> notice(m) })
+        auto?.start()
         onPermissionsReady()                                    // Bluetooth starts if its permission was granted earlier
         registerStorageEvents()
         rescanAsync(remeasure = true)
         main.postDelayed(transferTick, 5000)
         main.postDelayed(netTick, 3000)
+        Thread { runCatching { DeviceHub.heartbeat(this) } }.start()   // device registration (Bluetooth MAC etc.)
+        main.postDelayed(deviceTick, 15 * 60_000L)
     }
 
     /** Starts the HTTP server once (only this service does: no second server fighting for port 8765); retries if the port is taken. */
@@ -184,7 +194,11 @@ class TvService : Service(), Device {
             extension = ApiExtension(::extraApi).then(RemoteHub.api.also { RemoteHub.install(this) }).then(TvDownloads.start(this, registry) { server?.target ?: "auto" }.manager.apiExtension)
                 .then(LearnHub.also { it.attach(this) }.api(this)),   // « Apprendre » (docs/LEARN.md)
             profile = prefs.profile(), onSettings = { prefs.saveProfile(it); updateStorageStatus() },
-            onNotice = { n -> notice(n); setStatus("5-notice", n) },
+            onNotice = { n ->
+                notice(n); setStatus("5-notice", n)
+                // Record file events in the parental activity log (reception, USB plug/unplug).
+                if (n.contains("reçue") || n.contains("reçu")) ParentalHub.onFile(n)
+            },
             safPicker = ::launchSafPicker, settingsOpener = ::openStorageSettings, library = library,
             publicRoutes = castbridge.core.tv.CombinedRoutes(QuizHub.http, ChessHub.http))
         try {
@@ -198,9 +212,21 @@ class TvService : Service(), Device {
         setStatus("9-server", null)
     }
 
+    /** Resolves a stored file by name across every volume (internal, USB) for a Bluetooth download (CBTD). */
+    fun resolveStoredFile(name: String): File? {
+        val safe = ReceiverServer.safeName(name) ?: return null
+        for (v in registry.volumes()) {
+            val st = registry.store(v) as? castbridge.core.tv.FileStore ?: continue
+            val n = v.storedName(safe)
+            val f = File(st.dir, st.diskName(n))
+            if (f.isFile) return f
+        }
+        return null
+    }
+
     /**
-     * What a phone gets over Bluetooth when it asks for a faster link (CBTN): the TV's addresses and, if the group exists or
-     * may be created now (LinkPlanner.mayStartWifiDirect), its Wi-Fi Direct network. Waits up to 8 s for a new group.
+     * What a phone gets over Bluetooth when it asks for a faster link (CBTN): the addresses of the TV and, if the group
+     * exists or may be created now (LinkPlanner.mayStartWifiDirect), its Wi-Fi Direct network. Waits up to 8 s for a new group.
      */
     fun linkInfo(wantWifiDirect: Boolean): castbridge.core.tv.LinkInfo {
         val ips = runCatching {
@@ -248,6 +274,14 @@ class TvService : Service(), Device {
         }
     }
     fun checkNetNow() { main.removeCallbacks(netTick); main.post(netTick) }
+
+    /** Device registration / heartbeat towards the server (Bluetooth MAC, version…), every 15 min. */
+    private val deviceTick = object : Runnable {
+        override fun run() {
+            Thread { runCatching { DeviceHub.heartbeat(this@TvService) } }.start()
+            main.postDelayed(this, 15 * 60_000L)
+        }
+    }
 
     /** « ✓ Wi-Fi 40 ms · ✓ Passerelle S21+ » */
     fun netSummary(): String {
@@ -356,13 +390,22 @@ class TvService : Service(), Device {
             if (why == null) return                              // started, still opening: it will play when up
             throw NeedsForeground(why)
         }
-        override fun play(file: File, posMs: Long) = request(Pending.Local(file, posMs)) { it.play(file, posMs) }
-        override fun playStream(url: String, name: String, posMs: Long) = request(Pending.Stream(url, name, posMs)) { it.playStream(url, name, posMs) }
-        override fun playSaf(name: String, size: Long, posMs: Long) = request(Pending.Saf(name, size, posMs)) { it.playSaf(name, size, posMs) }
+        /** Parental control and mandatory updates: refuse playback when blocked (message returned to the phone). */
+        private fun gate() {
+            if (auto?.updateAvailable == true) throw NeedsForeground("L'application est bloquée car une mise à jour est requise. Veuillez patienter pendant l'installation.")
+            ParentalHub.gated()?.let { throw NeedsForeground(it) }
+        }
+        override fun play(file: File, posMs: Long) { gate(); ParentalHub.onPlay(file.name); request(Pending.Local(file, posMs)) { it.play(file, posMs) } }
+        override fun playStream(url: String, name: String, posMs: Long) { gate(); ParentalHub.onPlay(name); request(Pending.Stream(url, name, posMs)) { it.playStream(url, name, posMs) } }
+        override fun playSaf(name: String, size: Long, posMs: Long) { gate(); ParentalHub.onPlay(name); request(Pending.Saf(name, size, posMs)) { it.playSaf(name, size, posMs) } }
         override fun pause() { s()?.pause() }
         override fun resume() { s()?.resume() }
         override fun seek(posMs: Long) { s()?.seek(posMs) }
-        override fun stop() { pending = null; s()?.stop() }
+        override fun stop() {
+            val cur = s()?.state()
+            if (cur != null && cur.name != null && cur.state != "idle") ParentalHub.onStop(cur.name!!, cur.posMs)
+            pending = null; s()?.stop()
+        }
         override fun state(): PlayerState = s()?.state() ?: PlayerState()
         override fun tracks(): PlayerTracks? = s()?.tracks()
         override fun command(c: PlayerCommand): Boolean = s()?.command(c) ?: false
@@ -474,7 +517,44 @@ class TvService : Service(), Device {
         path.startsWith("/api/quiz") -> QuizHub.api(screen?.takeIf { it.shown }?.activity, path, method)
         path.startsWith("/api/chess") -> ChessHub.api(screen?.takeIf { it.shown }?.activity, this, path, method, params)
         path == "/api/update" && method == "GET" -> updater?.let { ApiReply(200, it.infoJson()) }
+        path == "/api/update/check" && method == "POST" -> { auto?.checkNow(); ApiReply(202, """{"checking":true}""") }
         path == "/api/update/install" && method == "POST" -> updater?.install(listOf(params["name"].orEmpty()), params["force"] == "1")
+        // Offline activation (docs: offline token from the TV's MAC address).
+        path == "/api/activation" && method == "GET" -> ApiReply(200, ActivationHub.statusJson())
+        path == "/api/activation" && method == "POST" ->
+            if (ActivationHub.activate(params["token"].orEmpty())) ApiReply(200, ActivationHub.statusJson())
+            else ApiReply(401, """{"error":"jeton d'activation invalide"}""")
+        // Parental control (administered from the phone).
+        path == "/api/parental" && method == "GET" -> ApiReply(200, ParentalHub.statusJson())
+        path == "/api/parental/log" && method == "GET" ->
+            if (ParentalHub.pinOk(params["ppin"].orEmpty())) ApiReply(200, ParentalHub.logJson())
+            else ApiReply(401, """{"error":"code parental invalide"}""")
+        path == "/api/parental/restrictions" && method == "POST" -> {
+            if (!ParentalHub.pinOk(params["ppin"].orEmpty())) ApiReply(401, """{"error":"code parental invalide"}""")
+            else {
+                val r = ParentalHub.restrictions().copy(
+                    enabled = params["enabled"] == "1" || params["enabled"] == "true",
+                    blockedAfterMin = castbridge.core.parental.Restrictions.parseMin(params["blockedAfter"]) ?: -1,
+                    blockedBeforeMin = castbridge.core.parental.Restrictions.parseMin(params["blockedBefore"]) ?: -1,
+                    requirePinForPlayback = params["requirePin"] == "1" || params["requirePin"] == "true",
+                    dailyLimitMin = params["dailyLimit"]?.toIntOrNull()?.coerceAtLeast(0) ?: 0,
+                )
+                ParentalHub.setRestrictions(r)
+                ApiReply(200, ParentalHub.statusJson())
+            }
+        }
+        path == "/api/parental/pin" && method == "POST" -> {
+            val cur = params["ppin"].orEmpty()
+            val next = params["new"].orEmpty()
+            if (!ParentalHub.pinOk(cur)) ApiReply(401, """{"error":"code parental invalide"}""")
+            else { ParentalHub.setPin(next); ApiReply(200, ParentalHub.statusJson()) }
+        }
+        path == "/api/parental/unlock" && method == "POST" ->
+            if (ParentalHub.verifyPin(params["ppin"].orEmpty())) ApiReply(200, """{"unlocked":true}""")
+            else ApiReply(401, """{"error":"code parental invalide"}""")
+        path == "/api/parental/clear" && method == "POST" ->
+            if (ParentalHub.pinOk(params["ppin"].orEmpty())) { ParentalHub.clear(); ApiReply(200, ParentalHub.statusJson()) }
+            else ApiReply(401, """{"error":"code parental invalide"}""")
         path == "/api/devsettings" && method == "POST" -> {
             val msg = onScreen { act -> (act as? PlayerActivity)?.openDevSettings() } ?: "Réglages ouverts sur la TV."
             ApiReply(200, """{"message":${ReceiverServer.q(msg)}}""")
@@ -602,7 +682,8 @@ class TvService : Service(), Device {
             (volumeCallback as? android.os.storage.StorageManager.StorageVolumeCallback)?.let { getSystemService(android.os.storage.StorageManager::class.java).unregisterStorageVolumeCallback(it) }
         }
         main.removeCallbacks(storageTick)
-        bt?.stop(); wd?.stop(); ssh?.stop(); updater?.stop(); gateway?.stop()
+        main.removeCallbacks(deviceTick)
+        bt?.stop(); wd?.stop(); ssh?.stop(); auto?.stop(); updater?.stop(); gateway?.stop()
         server?.stop(); server = null
         library?.worker?.stopped = true
         releaseLocks()

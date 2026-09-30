@@ -21,8 +21,12 @@ import castbridge.core.tv.WifiDirect
  * Joins the Wi-Fi Direct group created by the TV (WifiNetworkSpecifier, Android 10+), then routes this
  * app's traffic through it so the normal HTTP API works at 192.168.49.1:8765. The system shows its own
  * approval dialog; the phone's other apps keep their usual connection.
+ *
+ * A singleton: the connection is meant to survive leaving this screen (so the user can connect here, then
+ * cast from the player, which sees the TV at 192.168.49.1). Disconnect with [disconnect] or the "Quitter"
+ * button.
  */
-class DirectLink(ctx: Context) {
+object DirectLink {
     sealed class State {
         object Idle : State()
         object Connecting : State()
@@ -30,33 +34,38 @@ class DirectLink(ctx: Context) {
         data class Failed(val reason: String) : State()
     }
 
-    private val cm = ctx.applicationContext.getSystemService(ConnectivityManager::class.java)
-    private var callback: ConnectivityManager.NetworkCallback? = null
     var state by mutableStateOf<State>(State.Idle)
         private set
+    private var cm: ConnectivityManager? = null
+    private var callback: ConnectivityManager.NetworkCallback? = null
 
-    fun connect(ssid: String, pass: String) {
+    fun connect(ctx: Context, ssid: String, pass: String) {
         if (Build.VERSION.SDK_INT < 29) { state = State.Failed("Wi-Fi Direct : Android 10 minimum sur le téléphone"); return }
         disconnect()
+        val c = ctx.applicationContext.getSystemService(ConnectivityManager::class.java)
+        cm = c
         val spec = try { WifiNetworkSpecifier.Builder().setSsid(ssid).setWpa2Passphrase(pass).build() }
         catch (e: Exception) { state = State.Failed("Nom ou mot de passe invalide"); return }
         val req = NetworkRequest.Builder().addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
             .removeCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET).setNetworkSpecifier(spec).build()
         val cb = object : ConnectivityManager.NetworkCallback() {
-            override fun onAvailable(network: Network) { cm.bindProcessToNetwork(network); state = State.Connected }
+            override fun onAvailable(network: Network) { c.bindProcessToNetwork(network); state = State.Connected }
             override fun onUnavailable() { state = State.Failed("Connexion refusée ou TV introuvable") }
-            override fun onLost(network: Network) { cm.bindProcessToNetwork(null); state = State.Failed("Liaison perdue") }
+            override fun onLost(network: Network) { c.bindProcessToNetwork(null); state = State.Failed("Liaison perdue") }
         }
         callback = cb
         state = State.Connecting
-        try { cm.requestNetwork(req, cb, 30_000) }
+        try { c.requestNetwork(req, cb, 30_000) }
         catch (e: Exception) { state = State.Failed(e.message ?: "requête refusée"); callback = null }
     }
 
     fun disconnect() {
-        callback?.let { runCatching { cm.unregisterNetworkCallback(it) } }
-        callback = null
-        runCatching { cm.bindProcessToNetwork(null) }
+        cm?.let { c ->
+            callback?.let { runCatching { c.unregisterNetworkCallback(it) } }
+            callback = null
+            runCatching { c.bindProcessToNetwork(null) }
+        }
+        cm = null
         if (state !is State.Failed) state = State.Idle
     }
 }
@@ -65,16 +74,14 @@ class DirectLink(ctx: Context) {
 fun WifiDirectScreen() {
     val ctx = LocalContext.current
     val sp = remember { ctx.getSharedPreferences("castbridge_wd", Context.MODE_PRIVATE) }
-    val link = remember { DirectLink(ctx) }
-    DisposableEffect(Unit) { onDispose { link.disconnect() } }
     var ssid by remember { mutableStateOf(sp.getString("ssid", WifiDirect.networkName()) ?: "") }
     var pass by remember { mutableStateOf(sp.getString("pass", "") ?: "") }
 
-    if (link.state == DirectLink.State.Connected) {
+    if (DirectLink.state == DirectLink.State.Connected) {
         Column(Modifier.fillMaxSize()) {
             Row(Modifier.padding(horizontal = 16.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text("Connecté à la TV en Wi-Fi Direct.", Modifier.weight(1f).padding(top = 10.dp))
-                OutlinedButton(onClick = { link.disconnect() }) { Text("Quitter") }
+                OutlinedButton(onClick = { DirectLink.disconnect() }) { Text("Quitter") }
             }
             TvScreen(fixedBase = WifiDirect.BASE_URL, extra = { AdminPanel(it) })
         }
@@ -87,10 +94,10 @@ fun WifiDirectScreen() {
         OutlinedTextField(ssid, { ssid = it }, Modifier.fillMaxWidth(), singleLine = true, label = { Text("Nom du réseau (SSID)") })
         OutlinedTextField(pass, { pass = it }, Modifier.fillMaxWidth(), singleLine = true, label = { Text("Mot de passe") })
         val ok = WifiDirect.isValidNetworkName(ssid.trim()) && WifiDirect.isValidPassphrase(pass)
-        Button(enabled = ok && link.state != DirectLink.State.Connecting, onClick = {
+        Button(enabled = ok && DirectLink.state != DirectLink.State.Connecting, onClick = {
             sp.edit().putString("ssid", ssid.trim()).putString("pass", pass).apply()
-            link.connect(ssid.trim(), pass)
-        }) { Text(if (link.state == DirectLink.State.Connecting) "Connexion…" else "Se connecter à la TV") }
-        (link.state as? DirectLink.State.Failed)?.let { Text(it.reason, color = MaterialTheme.colorScheme.error) }
+            DirectLink.connect(ctx, ssid.trim(), pass)
+        }) { Text(if (DirectLink.state == DirectLink.State.Connecting) "Connexion…" else "Se connecter à la TV") }
+        (DirectLink.state as? DirectLink.State.Failed)?.let { Text(it.reason, color = MaterialTheme.colorScheme.error) }
     }
 }

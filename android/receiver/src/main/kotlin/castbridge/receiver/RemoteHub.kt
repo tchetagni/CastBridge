@@ -27,7 +27,11 @@ import castbridge.core.remote.RemoteKey
 import castbridge.core.remote.RemoteSink
 import castbridge.core.remote.RemoteTarget
 import castbridge.core.remote.TextMode
+import castbridge.core.tv.NeedsForeground
+import castbridge.core.tv.PlayerState
+import castbridge.core.tv.ReceiverServer
 import castbridge.core.tv.ReceiverServer.Companion.q
+import java.io.File
 import java.io.InputStream
 import java.io.OutputStream
 import java.util.concurrent.CountDownLatch
@@ -188,6 +192,9 @@ object RemoteHub {
             if (k == RemoteKey.HOME) return if (action == KeyAction.UP) Outcome.done("app") else home()
             val a = front()
             if (a != null) return appKey(a, k, action, repeat)
+            // Outside CastBridge, media keys still reach the active media session (no accessibility, no permission):
+            // the remote keeps working (play/pause/±) even when the app is closed.
+            if (k.kind == RemoteKey.Kind.MEDIA) return if (action == KeyAction.UP) Outcome.done("media") else mediaKey(k)
             if (target == RemoteTarget.APP) return Outcome.refused(NO_SCREEN)
             return systemKey(k, action)
         }
@@ -219,7 +226,6 @@ object RemoteHub {
         }
 
         private fun systemKey(k: RemoteKey, action: KeyAction): Outcome {
-            if (k.kind == RemoteKey.Kind.MEDIA) return if (action == KeyAction.UP) Outcome.done("media") else mediaKey(k)
             val s = RemoteAccessibilityService.instance ?: return Outcome.refused(NO_SCREEN)
             if (action == KeyAction.UP) return Outcome.done("system")
             val ok = onMain {
@@ -301,6 +307,49 @@ object RemoteHub {
                 append(",\"sdk\":").append(Build.VERSION.SDK_INT)
                 append(",\"keys\":[").append(RemoteKey.values().joinToString(",") { q(it.wire) }).append("]}")
             }
+        }
+
+        // ---- playback control (phone "cast" over Bluetooth) ----
+
+        override fun play(name: String, pos: Long): Outcome {
+            val s = svc ?: return Outcome.refused("CastBridge TV démarre…")
+            val n = ReceiverServer.safeName(name) ?: return Outcome.refused("Nom de fichier refusé")
+            val f = File(s.videosDir, n)
+            if (!f.isFile) return Outcome.refused("Fichier « $name » introuvable sur la TV")
+            return try {
+                s.playerBridge.play(f, pos)
+                Outcome.done("app")
+            } catch (e: NeedsForeground) {
+                Outcome.refused(e.message ?: "Ouvrez CastBridge TV sur la TV")
+            } catch (e: Exception) {
+                Outcome.refused("La TV n'a pas pu lancer la lecture : ${e.message ?: e.javaClass.simpleName}")
+            }
+        }
+
+        override fun pause(): Outcome = svc?.let { it.playerBridge.pause(); Outcome.done("app") } ?: Outcome.refused("CastBridge TV démarre…")
+        override fun resume(): Outcome = svc?.let { it.playerBridge.resume(); Outcome.done("app") } ?: Outcome.refused("CastBridge TV démarre…")
+        override fun seek(pos: Long): Outcome = svc?.let { it.playerBridge.seek(pos); Outcome.done("app") } ?: Outcome.refused("CastBridge TV démarre…")
+        override fun stop(): Outcome = svc?.let { it.playerBridge.stop(); Outcome.done("app") } ?: Outcome.refused("CastBridge TV démarre…")
+
+        override fun setVolume(pct: Int): Outcome {
+            val s = svc ?: return Outcome.refused("CastBridge TV démarre…")
+            val am = s.getSystemService(AudioManager::class.java)
+            if (am.isVolumeFixed) return Outcome.refused("Le volume de cette TV est fixe (réglé par l'ampli ou la TV via HDMI) : une app ne peut pas le changer.")
+            val max = am.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+            if (max <= 0) return Outcome.refused("Volume indisponible sur cette TV")
+            return if (runCatching { am.setStreamVolume(AudioManager.STREAM_MUSIC, Math.round(pct * max / 100f), 0) }.isSuccess) Outcome.done("audio")
+            else Outcome.refused("La TV a refusé de changer le volume")
+        }
+
+        override fun playerJson(): String {
+            val st = svc?.playerBridge?.state() ?: PlayerState()
+            return """{"state":${q(st.state)},"name":${st.name?.let(::q) ?: "null"},"pos":${st.posMs},"dur":${st.durMs}}"""
+        }
+
+        override fun fileInfo(name: String): String {
+            val s = svc ?: return """{"exists":false,"size":-1}"""
+            val f = ReceiverServer.safeName(name)?.let { File(s.videosDir, it) }
+            return if (f != null && f.isFile) """{"exists":true,"size":${f.length()}}""" else """{"exists":false,"size":-1}"""
         }
     }
 }

@@ -22,6 +22,7 @@ public record CastbridgeProperties(
         String adminToken,
         Web web,
         Signing signing,
+        Activation activation,
         Path storageDir,
         String publicBaseUrl,
         RateLimit rateLimit,
@@ -33,6 +34,7 @@ public record CastbridgeProperties(
     public CastbridgeProperties {
         if (web == null) web = new Web(null, null, false);
         if (signing == null) signing = new Signing(null, null);
+        if (activation == null) activation = new Activation("");
         if (storageDir == null) storageDir = Path.of("/data/apk");
         if (publicBaseUrl == null) publicBaseUrl = "";
         if (rateLimit == null) rateLimit = new RateLimit(120, 60);
@@ -51,6 +53,9 @@ public record CastbridgeProperties(
 
     /** @param key base64 PKCS#8 DER or PEM text of the private key; @param keyFile path of a PEM/DER file (Docker secret) */
     public record Signing(String key, Path keyFile) {}
+
+    /** @param secret shared HMAC key of the offline activation tokens (the TV app embeds the same secret). */
+    public record Activation(String secret) {}
 
     /** @param perMinute sustained requests per minute and IP; @param burst extra requests allowed at once */
     public record RateLimit(int perMinute, int burst) {}

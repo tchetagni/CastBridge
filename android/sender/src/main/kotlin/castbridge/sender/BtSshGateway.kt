@@ -86,6 +86,7 @@ class BtSshGatewayService : Service() {
     }
 
     private fun serve(client: Socket, addr: String) {
+        BtCastPrefs(this).lastAddress = addr          // any Bluetooth link memorizes the TV for auto-detection
         if (relays.size >= MAX_LINKS) { runCatching { client.close() }; note("Trop de connexions simultanées (max $MAX_LINKS)"); return }
         val adapter = getSystemService(BluetoothManager::class.java)?.adapter
         if (adapter == null || !adapter.isEnabled) { runCatching { client.close() }; note("Bluetooth désactivé"); return }

@@ -224,11 +224,14 @@ fun TvTools(client: TvClient) {
     val ctx = androidx.compose.ui.platform.LocalContext.current
     var library by remember { mutableStateOf(false) }
     var transfer by remember { mutableStateOf(false) }
+    var parental by remember { mutableStateOf(false) }
     Row(Modifier.fillMaxWidth().padding(vertical = 4.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         FilledTonalButton(onClick = { library = true }) { Icon(Icons.Filled.VideoLibrary, null); Spacer(Modifier.width(6.dp)); Text("Bibliothèque") }
         FilledTonalButton(onClick = { transfer = true }) { Icon(Icons.Filled.SwapVert, null); Spacer(Modifier.width(6.dp)); Text("Échange de fichiers") }
+        FilledTonalButton(onClick = { parental = true }) { Icon(Icons.Filled.Lock, null); Spacer(Modifier.width(6.dp)); Text("Contrôle parental") }
     }
     if (library) TvLibraryDialog(client, onDismiss = { library = false },
         onDownload = { i -> DownloadService.start(ctx, client.base, client.pin, i.name, i.size); library = false; transfer = true })
     if (transfer) TvTransferDialog(client, onDismiss = { transfer = false })
+    if (parental) ParentalDialog(client, onDismiss = { parental = false })
 }

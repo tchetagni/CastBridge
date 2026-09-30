@@ -28,6 +28,7 @@ import castbridge.core.tv.ReceiverServer
 import castbridge.core.tv.VolumeKind
 import castbridge.core.tv.VolumeRegistry
 import castbridge.core.tv.then
+import castbridge.core.parental.Restrictions
 import org.videolan.libvlc.LibVLC
 import org.videolan.libvlc.Media
 import org.videolan.libvlc.MediaPlayer
@@ -400,13 +401,20 @@ class PlayerActivity : Activity(), TvService.Screen {
         return listOf(
             HomeTool(R.drawable.ic_t_library, "Bibliothèque", "Toutes vos vidéos et vos fichiers, en grille.", "${server?.libraryItems()?.size ?: 0} fichier(s)", false) { showLibrary() },
             HomeTool(R.drawable.ic_t_learn, "Apprendre", "Leçons de la maternelle à la licence, exercices corrigés, préparer le CEP, le BEPC, le GCE, le Bac.", "Élèves", true) {
+                ParentalHub.onGame("Apprendre")
                 startActivity(Intent(this, LearnActivity::class.java))
             },
             HomeTool(R.drawable.ic_t_quiz, "Quiz", "Culture générale (70 % Cameroun) et niveaux scolaires, en solo ou avec les téléphones.", "Jouer", true) {
+                ParentalHub.onGame("Quiz")
                 startActivity(Intent(this, QuizActivity::class.java))
             },
             HomeTool(R.drawable.ic_t_chess, "Échecs", "Contre l'ordinateur, à deux sur la TV ou avec les téléphones, avec compte à rebours.", "Jouer", true) {
+                ParentalHub.onGame("Échecs")
                 startActivity(Intent(this, ChessActivity::class.java))
+            },
+            HomeTool(R.drawable.ic_t_sudoku, "Sudoku", "Grilles à solution unique, quatre difficultés, notes, indice.", "Jouer", true) {
+                ParentalHub.onGame("Sudoku")
+                startActivity(Intent(this, SudokuActivity::class.java))
             },
             HomeTool(R.drawable.ic_t_update, "Téléchargements", "Télécharger sur la TV (liens, magnet, torrent) : les fichiers rejoignent la bibliothèque.", "aria2", false) {
                 startActivity(Intent(this, DownloadsActivity::class.java))
@@ -448,10 +456,115 @@ class PlayerActivity : Activity(), TvService.Screen {
                 "Version ${runCatching { packageManager.getPackageInfo(packageName, 0).versionName }.getOrNull() ?: "?"}", false) {
                 flash("Depuis le téléphone : CastBridge TV › Avancé › Installer des APK. Ou par la clé USB.")
             },
+            HomeTool(R.drawable.ic_t_parental, "Contrôle parental", "Historique d'activité, heures calmes, limite de temps, code parental.",
+                if (ParentalHub.restrictions().enabled) {
+                    val r = ParentalHub.restrictions()
+                    if (r.dailyLimitMin > 0) "Actif · ${ParentalHub.dailyUsage.remainingMinutes(r.dailyLimitMin)} min restantes" else "Actif"
+                } else "Désactivé", ParentalHub.restrictions().enabled) { showParental() },
             HomeTool(R.drawable.ic_t_settings, "Connexion & réglages", "Code, adresse, démarrage avec la TV, lecture à distance…", null, false) { showSettings() },
             HomeTool(R.drawable.ic_t_dev, "Options développeur", "Débogage USB / Wi-Fi de la TV.", null, false) { flash(openDevSettings()) },
             HomeTool(R.drawable.ic_t_help, "Aide", "Comment envoyer une vidéo depuis le téléphone.", null, false) { homeApi().openHelp() },
         )
+    }
+
+    /** Parental control screen on the TV: PIN gate, then activity log + restriction summary. */
+    private fun showParental() {
+        fun showContent() {
+            val r = ParentalHub.restrictions()
+            val entries = ParentalHub.list()
+            val info = buildList {
+                add("Contrôle parental" to if (r.enabled) "activé" else "désactivé")
+                if (r.blockedAfterMin >= 0 && r.blockedBeforeMin >= 0) add("Heures calmes" to "${Restrictions.fmt(r.blockedAfterMin)}–${Restrictions.fmt(r.blockedBeforeMin)}")
+                if (r.dailyLimitMin > 0) add("Limite quotidienne" to "${r.dailyLimitMin} min (utilisé : ${ParentalHub.dailyUsage.usedMinutes()} min)")
+                if (r.requirePinForPlayback) add("Code pour lire" to "oui")
+                add("Entrées dans l'historique" to "${entries.size}")
+            }
+            val detail = info.joinToString("\n") { "${it.first} : ${it.second}" } +
+                if (entries.isNotEmpty()) "\n\n── Historique (${entries.size.coerceAtMost(50)} dernières) ──\n" +
+                    entries.asReversed().take(50).joinToString("\n") { e ->
+                        val ts = runCatching { java.text.SimpleDateFormat("dd/MM HH:mm", java.util.Locale.FRENCH).format(java.util.Date(e.ts)) }.getOrDefault("?")
+                        "$ts  ${e.label}"
+                    } else ""
+            AlertDialog.Builder(this).setTitle("Contrôle parental").setMessage(detail)
+                .setPositiveButton("Modifier les réglages") { _, _ -> showParentalEdit() }
+                .setNegativeButton("Fermer", null).show()
+        }
+        if (!ParentalHub.hasPin()) { showContent(); return }
+        // Ask for the parental PIN.
+        val input = android.widget.EditText(this).apply {
+            hint = "Code parental"; inputType = android.text.InputType.TYPE_CLASS_NUMBER or android.text.InputType.TYPE_NUMBER_VARIATION_PASSWORD
+            setPadding(48, 24, 48, 24)
+        }
+        AlertDialog.Builder(this).setTitle("Contrôle parental").setMessage("Entrez le code parental pour accéder aux réglages.")
+            .setView(input)
+            .setPositiveButton("Valider") { _, _ ->
+                if (ParentalHub.checkPin(input.text.toString())) showContent()
+                else flash("Code parental invalide.")
+            }.setNegativeButton("Annuler", null).show()
+    }
+
+    /** Edit restrictions from the TV (D-pad dialog). */
+    private fun showParentalEdit() {
+        val r = ParentalHub.restrictions()
+        val items = mutableListOf<Pair<String, () -> Unit>>(
+            (if (r.enabled) "Désactiver le contrôle parental" else "Activer le contrôle parental") to {
+                ParentalHub.setRestrictions(r.copy(enabled = !r.enabled)); flash(if (!r.enabled) "Contrôle parental activé." else "Contrôle parental désactivé.")
+            },
+            "Heures calmes (${if (r.blockedAfterMin >= 0) "${Restrictions.fmt(r.blockedAfterMin)}–${Restrictions.fmt(r.blockedBeforeMin)}" else "non définies"})" to {
+                editQuietHours(r)
+            },
+            "Limite quotidienne (${if (r.dailyLimitMin > 0) "${r.dailyLimitMin} min" else "aucune"})" to {
+                editDailyLimit(r)
+            },
+            (if (r.requirePinForPlayback) "Ne plus demander le code pour lire" else "Demander le code pour lire une vidéo") to {
+                ParentalHub.setRestrictions(r.copy(requirePinForPlayback = !r.requirePinForPlayback)); flash("Réglage enregistré.")
+            },
+            "Effacer l'historique" to { ParentalHub.clear(); flash("Historique effacé.") },
+            "Changer le code parental" to { editParentalPin() },
+        )
+        choose("Réglages parentaux", items)
+    }
+
+    /** D-pad dialog: set quiet hours. */
+    private fun editQuietHours(r: Restrictions) {
+        val items = listOf(
+            "22:00 – 06:00" to Pair(22 * 60, 6 * 60),
+            "21:00 – 07:00" to Pair(21 * 60, 7 * 60),
+            "20:00 – 07:00" to Pair(20 * 60, 7 * 60),
+            "23:00 – 06:00" to Pair(23 * 60, 6 * 60),
+            "Supprimer les heures calmes" to Pair(-1, -1),
+        )
+        AlertDialog.Builder(this).setTitle("Heures calmes")
+            .setItems(items.map { it.first }.toTypedArray()) { _, i ->
+                ParentalHub.setRestrictions(r.copy(blockedAfterMin = items[i].second.first, blockedBeforeMin = items[i].second.second))
+                flash("Heures calmes enregistrées.")
+            }.setNegativeButton("Annuler", null).show()
+    }
+
+    /** D-pad dialog: set daily limit. */
+    private fun editDailyLimit(r: Restrictions) {
+        val choices = listOf(0, 30, 60, 90, 120, 180, 240)
+        val labels = choices.map { if (it == 0) "Pas de limite" else "$it minutes" }.toTypedArray()
+        AlertDialog.Builder(this).setTitle("Limite quotidienne de lecture")
+            .setItems(labels) { _, i ->
+                ParentalHub.setRestrictions(r.copy(dailyLimitMin = choices[i]))
+                flash(if (choices[i] == 0) "Pas de limite quotidienne." else "Limite fixée à ${choices[i]} minutes par jour.")
+            }.setNegativeButton("Annuler", null).show()
+    }
+
+    /** D-pad dialog: change or set the parental PIN. */
+    private fun editParentalPin() {
+        val input = android.widget.EditText(this).apply {
+            hint = "Nouveau code parental (4-6 chiffres)"; inputType = android.text.InputType.TYPE_CLASS_NUMBER or android.text.InputType.TYPE_NUMBER_VARIATION_PASSWORD
+            setPadding(48, 24, 48, 24)
+        }
+        AlertDialog.Builder(this).setTitle("Code parental").setView(input)
+            .setPositiveButton("Enregistrer") { _, _ ->
+                val pin = input.text.toString()
+                if (pin.length in 4..6) { ParentalHub.setPin(pin); flash("Code parental enregistré.") }
+                else flash("Le code doit contenir 4 à 6 chiffres.")
+            }.setNeutralButton("Supprimer le code") { _, _ -> ParentalHub.setPin(""); flash("Code parental supprimé.") }
+            .setNegativeButton("Annuler", null).show()
     }
 
     /** "Connexion & réglages": connection facts in plain words, and every option (the former MENU list). */
@@ -859,6 +972,14 @@ class PlayerActivity : Activity(), TvService.Screen {
     }
 
     // ---- Remote control ----
+
+    override fun dispatchKeyEvent(event: KeyEvent): Boolean {
+        if (svc?.auto?.updateAvailable == true) {
+            if (event.action == KeyEvent.ACTION_DOWN) flash("Mise à jour requise en cours...")
+            return true
+        }
+        return super.dispatchKeyEvent(event)
+    }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         if (current == null) {

@@ -28,14 +28,29 @@ import castbridge.core.tv.StorageLine
 import castbridge.core.tv.VolumeKind
 import java.util.concurrent.Executors
 
-/** Colours and sizes of the TV screens (dark, blue accent: the phone app's palette). */
+/** Colours and sizes of the TV screens (dark theme, CastBridge charter: branding/design-tokens.json). */
 object TvStyle {
-    const val BG = 0xFF0E1116.toInt()
-    const val CARD = 0xFF1B1F27.toInt()
-    const val CARD_FOCUS = 0xFF26303D.toInt()
-    const val ACCENT = 0xFF33B5E5.toInt()
-    const val MUTED = 0xFFA8AEB8.toInt()
-    const val GOOD = 0xFF2E7D32.toInt()
+    // ---- palette sombre (design-tokens.json) ----
+    const val BG = 0xFF0A0F1E.toInt()            // background
+    const val SURFACE = 0xFF151D37.toInt()        // surface
+    const val SURFACE_HIGH = 0xFF1B2542.toInt()   // surfaceHigh
+    const val OUTLINE = 0xFF2A3550.toInt()        // outline
+    const val TEXT = 0xFFF4F6FB.toInt()           // textHigh
+    const val TEXT_MEDIUM = 0xFFB7C0D4.toInt()    // textMedium
+    const val TEXT_LOW = 0xFF6E7A93.toInt()       // textLow
+    const val GOLD = 0xFFF5B025.toInt()           // primary
+    const val GREEN = 0xFF2E9E6B.toInt()          // secondary
+    const val ORANGE = 0xFFFF8A3D.toInt()         // accent
+    const val FOCUS = 0xFFFFE1A6.toInt()          // focus ring
+    const val ERROR = 0xFFFF6B6B.toInt()
+    const val SUCCESS = 0xFF35C08A.toInt()
+
+    // ---- aliases used across the screens (kept so existing code keeps compiling) ----
+    const val CARD = SURFACE
+    const val CARD_FOCUS = SURFACE_HIGH
+    const val ACCENT = GOLD                       // the old blue accent becomes the gold primary
+    const val MUTED = TEXT_MEDIUM
+    const val GOOD = GREEN
 
     fun dp(ctx: Context, v: Int) = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, v.toFloat(), ctx.resources.displayMetrics).toInt()
 
@@ -44,7 +59,7 @@ object TvStyle {
     }
 
     /** Zoom + glow when a focusable view gets the D-pad focus (GPU property animations only). */
-    fun focusZoom(v: View, scale: Float = 1.1f, onFocus: (Boolean) -> Unit = {}) {
+    fun focusZoom(v: View, scale: Float = 1.04f, onFocus: (Boolean) -> Unit = {}) {
         v.setOnFocusChangeListener { view, has ->
             view.animate().scaleX(if (has) scale else 1f).scaleY(if (has) scale else 1f).translationZ(if (has) dp(view.context, 12).toFloat() else 0f)
                 .setDuration(160).start()

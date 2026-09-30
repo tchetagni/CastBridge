@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/layout :: head('Activation')}"></head>
+<body>
+<header th:replace="~{admin/layout :: nav}"></header>
+<main>
+    <div th:replace="~{admin/layout :: flash}"></div>
+    <h1>Activation hors ligne (TV)</h1>
+
+    <div class="cols">
+        <section class="card">
+            <h2>Générer un jeton d'activation</h2>
+            <p class="muted small">La TV affiche un <b>code machine</b> (dérivé de son adresse MAC). Saisissez ce code
+                pour obtenir le <b>jeton d'activation</b>, à donner à l'utilisateur pour qu'il le saisisse sur la TV.
+                Aucun accès réseau à la TV n'est nécessaire.</p>
+            <form th:action="@{/admin/activation}" method="post" class="stack">
+                <label>Code machine de la TV
+                    <input type="text" name="code" required placeholder="XXXX-XXXX" th:value="${code}" maxlength="32"></label>
+                <button type="submit">Générer le jeton</button>
+            </form>
+            <p class="flash err" th:if="${error}" th:text="${error}"></p>
+        </section>
+
+        <section class="card" th:if="${token}">
+            <h2>Jeton d'activation</h2>
+            <p>Pour le code machine <b th:text="${code}"></b> :</p>
+            <p class="token" th:text="${token}"></p>
+            <p class="muted small">Donnez ce jeton à l'utilisateur ; sur la TV, il le saisit dans « Connexion &amp; réglages ».</p>
+        </section>
+    </div>
+</main>
+</body>
+</html>

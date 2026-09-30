@@ -35,7 +35,8 @@
     <application
         android:label="CastBridge TV"
         android:banner="@drawable/banner"
-        android:icon="@drawable/banner"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:usesCleartextTraffic="true"
         android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
         <activity
@@ -74,6 +75,13 @@
         <!-- Échecs (docs/CHESS.md): opened from the home tile or from the phone -->
         <activity
             android:name=".ChessActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|screenSize|screenLayout|keyboard|keyboardHidden|navigation" />
+        <!-- Sudoku: single player, opened from the home tile -->
+        <activity
+            android:name=".SudokuActivity"
             android:exported="false"
             android:launchMode="singleTop"
             android:screenOrientation="landscape"

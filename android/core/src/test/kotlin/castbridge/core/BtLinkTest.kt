@@ -50,6 +50,33 @@ class BtLinkTest {
         assertContentEquals(data, File(dir, "f.bin").readBytes())
     }
 
+    private fun linkDownload(download: (String) -> File?): Triple<InputStream, OutputStream, LinkedBlockingQueue<Any>> {
+        val c2s = PipedOutputStream(); val tvIn = PipedInputStream(c2s, 1 shl 16)
+        val s2c = PipedOutputStream(); val clIn = PipedInputStream(s2c, 1 shl 16)
+        val res = LinkedBlockingQueue<Any>()
+        thread(isDaemon = true) {
+            try { res.put(BtProtocol.serve(dir, tvIn, s2c, guard, "AA:BB", 0, download = download)) } catch (e: Exception) { res.put(e) }
+            finally { runCatching { s2c.close() } }
+        }
+        return Triple(clIn, c2s, res)
+    }
+
+    @Test fun downloadGetsAStoredFile() {
+        val data = Random(7).nextBytes(500_000)
+        File(dir, "video.mp4").writeBytes(data)
+        val (i, o, res) = linkDownload { name -> File(dir, name).takeIf { it.isFile } }
+        val got = ByteArrayOutputStream()
+        val size = BtProtocol.download(i, o, "video.mp4", "482913", { got })
+        assertEquals(data.size.toLong(), size)
+        assertContentEquals(data, got.toByteArray())
+        assertEquals(BtProtocol.OK, res.poll(3, TimeUnit.SECONDS))
+    }
+
+    @Test fun downloadRefusesUnknownFile() {
+        val (i, o, _) = linkDownload { null }
+        assertEquals(BtProtocol.ERR_NOT_FOUND, assertFailsWith<BtProtocol.Refused> { BtProtocol.download(i, o, "nope.mp4", "482913", { ByteArrayOutputStream() }) }.code)
+    }
+
     @Test fun linkInfoNeverCarriesHostNames() {
         val d = LinkInfo.decode("port=99999\nip=192.168.1.2\nip=evil.example.com\nip=1.2.3.4.5\nwd.ssid=DIRECT-x\nwd.pass=p\nwd.ip=host\nfuture=1")
         assertEquals(8765, d.port, "invalid port -> default"); assertEquals(listOf("192.168.1.2"), d.ips)

@@ -603,14 +603,14 @@ class ReceiverServer(
 
     fun libraryJson(): String {
         val sorted = libraryItems()
-        return sorted.joinToString(",", "{\"files\":[", "]") { i ->
+        return sorted.joinToString(",", "{\"files\":[", "],\"count\":${sorted.size}}") { i ->
             val m = i.meta
             "{\"name\":${q(i.name)},\"title\":${q(i.title)},\"size\":${i.size},\"mtime\":${i.mtime}," +
                 "\"volume\":${q(i.volumeId)},\"volumeLabel\":${q(i.volumeLabel)},\"kind\":${q(i.volumeKind.name.lowercase())}," +
                 "\"type\":${q(i.type.name.lowercase())}," +
                 "\"durationMs\":${m.durationMs},\"resumeMs\":${m.resumeMs},\"watched\":${m.watched},\"playedAt\":${m.playedAtMs}," +
                 "\"hasThumb\":${m.hasThumb},\"duplicate\":${i.duplicate},\"playing\":${i.playing}}"
-        } + "],\"count\":${sorted.size}}"
+        }
     }
 
     /** JPEG thumbnail of a stored file for the TV's own screen (null = not ready or impossible; generation is queued). */

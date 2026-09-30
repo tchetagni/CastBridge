@@ -24,6 +24,8 @@ public record DeviceReport(
         String manufacturer,
         String model,
         String deviceName,
+        /** Bluetooth MAC address of the device (the TV it is when the phone controls it), never assumed. */
+        String btAddress,
         String osName,
         String osBuild,
         String fingerprint,
@@ -46,6 +48,6 @@ public record DeviceReport(
 
     static DeviceReport empty() {
         return new DeviceReport(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-                null, null, null, null, null, null, null, null, null, null, null, null, null);
+                null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 }
