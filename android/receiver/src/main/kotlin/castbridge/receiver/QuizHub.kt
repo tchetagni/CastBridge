@@ -57,6 +57,7 @@ object QuizHub {
         path == "/api/quiz/open" && method == "POST" && activity == null ->
             ApiReply(409, "{\"error\":\"Ouvrez CastBridge TV sur la TV, puis réessayez\",\"needsForeground\":true}")
         path == "/api/quiz/open" && method == "POST" -> {
+            TvConnect.feature("quiz", "phone")
             activity!!.runOnUiThread {
                 runCatching { activity.startActivity(Intent(activity, QuizActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) }
             }

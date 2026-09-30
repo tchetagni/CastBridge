@@ -109,6 +109,7 @@ class QuizActivity : Activity() {
         val s = state
         val stage = s.s("stage")
         val game = s.m("game"); val duel = s.m("duel")
+        runCatching { stats(s, game, duel) }
         val key = when {
             stage == "CLOSED" -> "closed"
             steps.isNotEmpty() -> "setup-${steps.last()}"
@@ -138,6 +139,44 @@ class QuizActivity : Activity() {
             next.view.alpha = 0f; next.view.animate().alpha(1f).setDuration(250).start()
             next.focusFirst()
         } else screen?.update(s)
+    }
+
+    // ---- usage statistics (docs/TELEMETRY.md): quiz_game once per finished game, quiz_answer per revealed answer ----
+    private var statGameAt = 0L                   // 0 = no game being followed
+    private var statGameDone = false
+    private var statQuestionId: String? = null
+    private var statQuestionAt = 0L
+    private val statAnswered = HashSet<String>()  // "questionId" already counted in this game
+
+    private fun stats(s: Map<String, Any?>, game: Map<String, Any?>?, duel: Map<String, Any?>?) {
+        val g = game ?: duel
+        if (g == null) { statGameAt = 0; statGameDone = false; statAnswered.clear(); statQuestionId = null; return }
+        val now = SystemClock.uptimeMillis()
+        // a new game (first time, or « rejouer » straight after a finished one)
+        if (statGameAt == 0L || (statGameDone && g.s("phase") != "FINISHED")) { statGameAt = now; statGameDone = false; statAnswered.clear() }
+        val q = g.m("question")
+        val qid = q?.s("id")
+        if (qid != null && qid != statQuestionId) { statQuestionId = qid; statQuestionAt = now }
+        val answer = q?.i("answer")
+        if (qid != null && answer != null && statAnswered.add(qid)) {
+            if (game != null) {
+                val sel = game.i("selected")
+                TvConnect.track("quiz_answer", mapOf("question" to qid, "correct" to (sel == answer), "ms" to (now - statQuestionAt)))
+            } else duel!!.maps("ranking").forEach { p ->
+                (p["correct"] as? Boolean)?.let { TvConnect.track("quiz_answer", mapOf("question" to qid, "correct" to it)) }
+            }
+        }
+        if (!statGameDone && g.s("phase") == "FINISHED") {
+            statGameDone = true
+            val set = s.m("settings")
+            val base = mapOf("track" to set?.s("track"), "level" to set?.s("level"), "field" to set?.s("field"), "ms" to (now - statGameAt))
+            if (game != null) TvConnect.track("quiz_game", base + mapOf(
+                "mode" to if (game.b("practice")) "practice" else "millionaire",
+                "players" to maxOf(1, s.maps("players").size), "score" to game.l("winnings"), "jokers" to game.list("jokersUsed").size))
+            else TvConnect.track("quiz_game", base + mapOf(
+                "mode" to "duel", "duel" to duel!!.s("format")?.lowercase(), "players" to s.maps("players").size,
+                "score" to (duel.maps("ranking").maxOfOrNull { (it["score"] as? Number)?.toLong() ?: 0L } ?: 0L)))
+        }
     }
 
     private abstract inner class Screen(val key: String) {
@@ -201,7 +240,10 @@ class QuizActivity : Activity() {
         r.setCandidate(null)
         val why = r.startGame()
         steps.clear(); render()
-        if (why != null) android.widget.Toast.makeText(this, why, android.widget.Toast.LENGTH_LONG).show()
+        if (why != null) {
+            TvConnect.error("quiz", "start", why)
+            android.widget.Toast.makeText(this, why, android.widget.Toast.LENGTH_LONG).show()
+        }
     }
 
     // ---- best scores (solo against oneself), kept in the app's preferences ----

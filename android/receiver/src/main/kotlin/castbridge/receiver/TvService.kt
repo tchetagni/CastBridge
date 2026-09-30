@@ -555,7 +555,7 @@ class TvService : Service(), Device {
 
     /**
      * Server link, for the phone's advanced screen (PIN-protected like the other API routes): GET /api/server (state),
-     * POST /api/server/url?url= (empty = official server), /check-update, /install, /quiz-sync, GET /api/server/me,
+     * POST /api/server/url?url= (empty = official server), /contact, /check-update, /install, /quiz-sync, GET /api/server/me,
      * POST /api/server/erase. The consent is only given on the TV screen (information screen), never through the API.
      */
     private fun serverApi(path: String, method: String, params: Map<String, String>): ApiReply? {
@@ -573,6 +573,9 @@ class TvService : Service(), Device {
             path == "/api/server/check-update" && method == "POST" -> {
                 TvConnect.feature("updates", "phone")
                 TvConnect.post { checkUpdate(castbridge.core.update.UpdateSchedule.Trigger.USER) }; accepted("Recherche d'une mise à jour…")
+            }
+            path == "/api/server/contact" && method == "POST" -> {
+                TvConnect.post { if (contact()) flush() }; accepted("Contact du serveur et envoi des statistiques en attente…")
             }
             path == "/api/server/install" && method == "POST" -> { TvConnect.post { offerInstall(userAsked = true) }; accepted("Installation demandée : validez sur la TV si elle le demande") }
             path == "/api/server/quiz-sync" && method == "POST" -> { TvConnect.post { syncQuiz() }; accepted("Mise à jour des questions…") }

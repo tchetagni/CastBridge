@@ -62,17 +62,20 @@ class MemoryKeyValueStore : KeyValueStore {
  * Everything the app keeps about its link with the server (identity, consent, token, last contact, update schedule…).
  * The device token is a secret: it only lives here (private app storage) and is never shown or logged.
  */
-class ConnectState(private val kv: KeyValueStore) : DeviceStore {
+class ConnectState(private val kv: KeyValueStore, defaultUrl: String? = null) : DeviceStore {
     private fun long(k: String) = kv.get(k)?.toLongOrNull() ?: 0L
     private fun setLong(k: String, v: Long) = kv.put(k, if (v == 0L) null else v.toString())
 
+    /** Address used when none was set: production, unless a test build says otherwise (-Pcastbridge.serverUrl). */
+    val defaultUrl: String = defaultUrl?.takeIf { it.isNotBlank() }?.let { ServerUrl.normalize(it) } ?: ServerUrl.DEFAULT
+
     /** Server address in use (production unless changed in the advanced setting). */
     var baseUrl: String
-        get() = kv.get("base_url")?.let { ServerUrl.normalize(it) } ?: ServerUrl.DEFAULT
+        get() = kv.get("base_url")?.let { ServerUrl.normalize(it) } ?: defaultUrl
         set(v) {
             val n = ServerUrl.normalize(v) ?: throw IllegalArgumentException(ServerUrl.problem(v) ?: "adresse invalide")
             if (n == baseUrl) return
-            kv.put("base_url", n.takeIf { it != ServerUrl.DEFAULT })
+            kv.put("base_url", n.takeIf { it != defaultUrl })
             // another server does not know this device: register again there, forget what the old one said
             deviceToken = null; deviceId = null; blocked = false; serverChannel = null
             lastContactAt = 0; lastContactOk = false; lastContactMessage = null

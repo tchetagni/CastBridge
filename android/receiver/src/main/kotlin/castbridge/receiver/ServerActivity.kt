@@ -171,6 +171,7 @@ class ServerActivity : Activity() {
         val quiz = QuizHub.cachedSource(this)
         fact("Questions du quiz", "${quiz.serverCount()} reçues du serveur" + (s.quizSyncedAt.takeIf { it > 0 }?.let { " · mises à jour le ${date(it)}" } ?: "") +
             (s.quizMessage?.let { "\n$it" } ?: ""))
+        fact("Sans Internet", "depuis le téléphone : CastBridge › CastBridge TV › Avancé › Installer des APK (ou par la clé USB)")
         if (s.needsConsent) action("Lire l'écran d'information…") { open(this, MODE_CONSENT, thenFinish = false) }
         action("Vérifier maintenant") {
             TvConnect.feature("updates", "menu")
@@ -245,7 +246,7 @@ class ServerActivity : Activity() {
         fact("Internet", TvService.running?.netSummary() ?: "—")
         if (s.blocked) fact("État", "Appareil bloqué par l'administrateur : pas de mise à jour ni de quiz en ligne")
         if (s.channel == "beta") fact("Canal", "bêta (versions de test)")
-        action("Contacter le serveur maintenant") { toast("Contact du serveur…"); TvConnect.post { contact() } }
+        action("Contacter le serveur maintenant") { toast("Contact du serveur…"); TvConnect.post { if (contact()) flush() } }
         if (showAdvanced || s.customServer) {
             action("Adresse du serveur (avancé)…") { editUrl(link) }
             if (s.customServer) action("Revenir au serveur officiel") { TvConnect.post { state.baseUrl = ServerUrl.DEFAULT; tick() }; toast("Serveur officiel : ${ServerUrl.DEFAULT}") }

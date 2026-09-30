@@ -94,7 +94,7 @@ object PhoneConnect {
         @Suppress("DEPRECATION")
         versionCode = if (Build.VERSION.SDK_INT >= 28) pi.longVersionCode.toInt() else pi.versionCode
         versionName = pi.versionName.orEmpty()
-        state = ConnectState(PrefsStore(app, "castbridge_connect"))
+        state = ConnectState(PrefsStore(app, "castbridge_connect"), BuildConfig.DEFAULT_SERVER)
         crashes = CrashStore(File(app.filesDir, "crashes"))
         updater = PhoneUpdater(app) { _version.value++ }
         val keys = UpdateKeys.PUBLIC_KEYS + listOf(BuildConfig.EXTRA_UPDATE_KEY).filter { it.isNotBlank() }

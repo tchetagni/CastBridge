@@ -332,9 +332,9 @@ class ConnectTest {
         assertTrue(srv.log.none { it == "dl" })
         assertTrue(installs.isEmpty())
 
-        // the timer does not check again before 12 h (± jitter) — the user can
+        // the timer waits (backoff, at least 1 h after a check) — the user can check at once
         srv.tamper = false
-        now += 3_600_000; l.tick()
+        now += 30 * 60_000; l.tick()
         assertTrue(installs.isEmpty())
         now += 20_000
         l.checkUpdate(UpdateSchedule.Trigger.USER)

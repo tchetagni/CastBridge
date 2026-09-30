@@ -188,10 +188,14 @@ class LearnProgress(val state: LearnState = LearnState(), private val zone: Zone
         if (sp.badges.add(badge)) event("badge_earned", now, sp.profile, mapOf("badge" to badge))
     }
 
+    /** Also told of every event (the TV forwards them to the server's usage statistics, without the profile). */
+    @Volatile var onEvent: ((name: String, data: Map<String, Any?>) -> Unit)? = null
+
     fun event(name: String, now: Long, profile: String, data: Map<String, Any?>) {
         require(name in EVENTS) { "événement inconnu $name" }
         state.events += LearnEvent(name, now, profile, data)
         while (state.events.size > MAX_EVENTS) state.events.removeAt(0)
+        onEvent?.let { l -> runCatching { l(name, data) } }
     }
 
     /** Parent dashboard (phone): per subject time, lessons completed, success rate; mocks; reviews due; badges. */

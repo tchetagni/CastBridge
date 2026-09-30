@@ -38,7 +38,11 @@ object LearnHub {
 
     private fun storeFile(): File = File(app!!.filesDir, "learn/progress.json")
 
-    @Synchronized fun progress(): LearnProgress = progress ?: LearnProgress(LearnStore.load(storeFile())).also { progress = it }
+    /** Every « Apprendre » event also goes to the usage statistics (docs/TELEMETRY.md, event "learn"; never the profile). */
+    @Synchronized fun progress(): LearnProgress = progress ?: LearnProgress(LearnStore.load(storeFile())).also {
+        it.onEvent = { name, data -> TvConnect.learn(name, data) }
+        progress = it
+    }
 
     /** Saves in the background (a few kB; atomic rename). */
     fun save() {
@@ -106,6 +110,7 @@ object LearnHub {
         override fun screenJson(): String? = screen?.stateJson()
         override fun open(profile: String?): String? {
             val s = service?.screen?.takeIf { it.shown }?.activity ?: return if (screen != null) null else "Ouvrez CastBridge TV sur la TV, puis réessayez"
+            TvConnect.feature("learn", "phone")
             s.runOnUiThread { runCatching { s.startActivity(Intent(s, LearnActivity::class.java).putExtra("profile", profile).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) } }
             var waited = 0
             while (screen == null && waited < 3000) { Thread.sleep(100); waited += 100 }

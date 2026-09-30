@@ -156,6 +156,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         consentShown = false; mandatoryShown = false
         // The screen is gone: give libVLC back (the service keeps serving). Back in front = the library.
         if (mp != null && !isChangingConfigurations) {
+            playbackEnd(abandoned = true)
             current = null; snapshot = PlayerState(); releasePlayer(); reopen = null
             if (::extras.isInitialized) extras.forget()
             main.post { if (home != null) showHome() }
@@ -238,7 +239,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         p.attachViews(findViewById<VLCVideoLayout>(R.id.video), null, false, false)
         p.setEventListener { ev ->
             when (ev.type) {
-                MediaPlayer.Event.Playing -> { update("playing"); main.post { mp?.let { extras.onPlaying(it, playerSpu) } } }
+                MediaPlayer.Event.Playing -> { update("playing"); main.post { mp?.let { extras.onPlaying(it, playerSpu) }; playbackPlaying() } }
                 MediaPlayer.Event.Paused -> update("paused")
                 MediaPlayer.Event.TimeChanged -> { snapshot = snapshot.copy(posMs = ev.timeChanged); main.post { updateLead() } }
                 MediaPlayer.Event.Buffering -> {
@@ -252,6 +253,7 @@ class PlayerActivity : Activity(), TvService.Screen {
                 MediaPlayer.Event.EndReached -> {
                     update("ended"); val n = current?.name; val size = currentSize; val dur = snapshot.durMs
                     main.post {
+                        playbackEnd(abandoned = false, complete = true)
                         current = null; streamingName = null; releasePlayer()
                         n?.let { name -> bgRun { library?.db?.onEnded(name, size, dur) } }
                         val next = n?.let { name -> runCatching { server?.onPlaybackEnded(name) == true }.getOrDefault(false) } == true
@@ -264,10 +266,14 @@ class PlayerActivity : Activity(), TvService.Screen {
                         val r = reopen
                         if (!swRetry && r != null && extras.hwMode() != "off") {
                             // Hardware decoding refused this file: one retry in software at the same position.
-                            swRetry = true; extras.hwOverride = "off"; releasePlayer()
+                            swRetry = true; extras.hwOverride = "off"; releasePlayer(); pbRetry = true
                             flash("Décodage matériel impossible : nouvel essai en décodage logiciel")
                             runCatching { r(pos) }.onFailure { current = null; afterPlayback("Lecture impossible : $n") }
-                        } else { current = null; streamingName = null; releasePlayer(); afterPlayback("Lecture impossible : $n") }
+                        } else {
+                            playbackEnd(abandoned = false, ok = false, error = "decode")
+                            TvConnect.error("player", "playback", "Lecture impossible (décodage)")
+                            current = null; streamingName = null; releasePlayer(); afterPlayback("Lecture impossible : $n")
+                        }
                     }
                 }
             }
@@ -312,6 +318,44 @@ class PlayerActivity : Activity(), TvService.Screen {
         if (level >= TRIM_MEMORY_UI_HIDDEN && snapshot.state != "playing" && mp != null) {
             current = null; snapshot = PlayerState(); releasePlayer()
         }
+    }
+
+    // ---- playback statistics (docs/TELEMETRY.md: playback_start / playback_end; codec, resolution, never the file name) ----
+    private var pbSource: String? = null
+    private var pbStartedAt = 0L
+    private var pbSent = false
+    private var pbRetry = false
+    private var pbCodec: String? = null
+    private var pbRes: String? = null
+    private var pbHw: Boolean? = null
+
+    /** A file starts ([source]: internal | usb | stream | phone); the previous one, if any, was left before its end. */
+    private fun playbackBegin(source: String) {
+        if (pbRetry && pbSource != null) { pbRetry = false; return }     // same file again in software decoding
+        pbRetry = false
+        playbackEnd()
+        pbSource = source; pbStartedAt = android.os.SystemClock.elapsedRealtime(); pbSent = false; pbCodec = null; pbRes = null
+        pbHw = runCatching { extras.hwFlags().first }.getOrNull()
+    }
+
+    private fun playbackPlaying() {
+        if (pbSource == null || pbSent) return
+        pbSent = true
+        val t = runCatching { mp?.currentVideoTrack }.getOrNull()
+        pbCodec = t?.codec?.trim()?.takeIf { it.isNotEmpty() }
+        pbRes = t?.takeIf { it.width > 0 && it.height > 0 }?.let { "${it.width}x${it.height}" }
+        TvConnect.track("playback_start", mapOf("codec" to pbCodec, "resolution" to pbRes, "hw" to pbHw, "source" to pbSource))
+    }
+
+    /** End of the current file: [abandoned] null = judged from the position (less than 95 % seen). */
+    private fun playbackEnd(abandoned: Boolean? = null, ok: Boolean = true, error: String? = null, complete: Boolean = false) {
+        val src = pbSource ?: return
+        pbSource = null
+        val s = snapshot
+        val pct = if (complete) 100.0 else if (s.durMs > 0) (s.posMs * 100.0 / s.durMs).coerceIn(0.0, 100.0) else null
+        TvConnect.track("playback_end", mapOf("ms" to (android.os.SystemClock.elapsedRealtime() - pbStartedAt), "pct" to pct,
+            "codec" to pbCodec, "resolution" to pbRes, "hw" to pbHw, "source" to src,
+            "abandoned" to (abandoned ?: ((pct ?: 0.0) < 95.0)), "ok" to ok, "error" to error))
     }
 
     /** Sub-screen shown by this activity, for the screen-time statistics (docs/TELEMETRY.md): home, library, player, settings. */
@@ -733,6 +777,8 @@ class PlayerActivity : Activity(), TvService.Screen {
     override fun play(file: File, posMs: Long): Unit = onMain {
         savePosition()
         newFile(file.name, file.length())
+        val onUsb = svc?.registry?.volumes()?.firstOrNull { file.absolutePath.startsWith(it.dir.absolutePath + "/") }?.kind == VolumeKind.REMOVABLE
+        playbackBegin(if (onUsb) "usb" else "internal")
         current = file
         startedPlaying(file.name, file.length())
         extras.load(file.name, file.length(), file.parentFile)
@@ -746,6 +792,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         p.play()
         closeSafFd()
         hideScreens()
+        enterScreen("player")
         snapshot = PlayerState("playing", file.name, posMs, 0)
         flash("▶ ${file.name}")
     }
@@ -755,6 +802,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         val fd = store.openFd(name)                        // the file lives behind a ContentResolver: libVLC reads the descriptor
         savePosition()
         newFile(name, size)
+        playbackBegin("usb")                               // a folder chosen through the system picker: in practice a drive
         current = File(svc!!.videosDir, name)              // only the name is used
         startedPlaying(name, size)
         extras.load(name, size, null)
@@ -769,6 +817,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         p.play()
         runCatching { old?.close() }
         hideScreens()
+        enterScreen("player")
         snapshot = PlayerState("playing", name, posMs, 0)
         flash("▶ $name")
     }
@@ -777,6 +826,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         savePosition()
         val total = server?.progress(name)?.second ?: 0L
         newFile(name, total)
+        playbackBegin(if (total > 0) "phone" else "stream")    // being uploaded by the phone, or a link played from it
         current = File(svc!!.videosDir, name)
         startedPlaying(name, total)
         extras.load(name, total, null)
@@ -792,6 +842,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         p.play()
         closeSafFd()
         hideScreens()
+        enterScreen("player")
         snapshot = PlayerState("playing", name, posMs, 0)
         flash(if (total > 0) "▶ $name (lecture pendant l'envoi)" else "▶ $name")   // total 0: a link played from the phone
     }
@@ -813,6 +864,7 @@ class PlayerActivity : Activity(), TvService.Screen {
     }
     override fun stop() = onMain {
         val wasPlaying = current != null
+        playbackEnd()
         savePosition()
         current = null; snapshot = PlayerState(); releasePlayer(); reopen = null
         if (::extras.isInitialized) extras.forget()

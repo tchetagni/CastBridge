@@ -65,7 +65,7 @@ object TvConnect {
     @Synchronized fun init(ctx: Context) {
         if (link != null) return
         app = ctx.applicationContext
-        val state = ConnectState(PrefsStore(app, "castbridge_connect"))
+        val state = ConnectState(PrefsStore(app, "castbridge_connect"), BuildConfig.DEFAULT_SERVER)
         val pi = runCatching { app.packageManager.getPackageInfo(app.packageName, 0) }.getOrNull()
         @Suppress("DEPRECATION")
         val code = pi?.let { if (Build.VERSION.SDK_INT >= 28) it.longVersionCode.toInt() else it.versionCode } ?: 0

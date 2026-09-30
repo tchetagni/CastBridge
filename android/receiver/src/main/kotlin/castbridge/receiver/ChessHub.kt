@@ -50,6 +50,7 @@ object ChessHub {
         path == "/api/chess/open" && method == "POST" && activity == null ->
             ApiReply(409, "{\"error\":\"Ouvrez CastBridge TV sur la TV, puis réessayez\",\"needsForeground\":true}")
         path == "/api/chess/open" && method == "POST" -> {
+            TvConnect.feature("chess", "phone")
             activity!!.runOnUiThread {
                 runCatching { activity.startActivity(Intent(activity, ChessActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) }
             }
