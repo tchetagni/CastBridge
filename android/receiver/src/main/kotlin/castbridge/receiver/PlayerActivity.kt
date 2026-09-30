@@ -508,6 +508,8 @@ class PlayerActivity : Activity(), TvService.Screen {
                 if (RemoteAccessibilityService.instance != null) "Toute la TV" else "CastBridge", RemoteAccessibilityService.instance != null) {
                 startActivity(Intent(this, RemoteSetupActivity::class.java))
             },
+            tile("bluetooth", R.drawable.ic_t_bluetooth, "Ajouter un téléphone", "Le téléphone trouve et pilote la TV par Bluetooth, sans code à saisir : une seule validation ici.",
+                (svc?.trust?.list()?.size ?: 0).let { if (it == 0) "Aucun" else "$it de confiance" }, (svc?.trust?.list()?.size ?: 0) > 0) { PairActivity.open(this) },
             tile("receive", R.drawable.ic_t_cast, "Recevoir du téléphone", "Envoyer une vidéo depuis l'app CastBridge du téléphone.", "Code $pin", true) { homeApi().openHelp() },
             tile("usb", R.drawable.ic_t_usb, "Clé USB", "Importer des vidéos d'une clé, ou y ranger les nouvelles.",
                 if (drives.isEmpty()) "Aucune clé" else drives.joinToString { "${it.label} · ${it.free / (1L shl 30)} Go libres" }, drives.isNotEmpty()) {
@@ -521,7 +523,9 @@ class PlayerActivity : Activity(), TvService.Screen {
             },
             tile("bluetooth", R.drawable.ic_t_bluetooth, "Bluetooth", "Recevoir des fichiers et partager l'Internet du téléphone sans réseau commun.",
                 st["1-bt"]?.substringAfter(": ")?.take(28) ?: "Désactivé", btOk) {
-                choose("Bluetooth", listOf<Pair<String, () -> Unit>>("Rendre la TV visible (2 min) pour l'appairer" to { makeDiscoverable() }))
+                choose("Bluetooth", listOf<Pair<String, () -> Unit>>(
+                    "Ajouter un téléphone (recommandé)" to { PairActivity.open(this) },
+                    "Rendre la TV visible (2 min) pour l'appairer" to { makeDiscoverable() }))
             },
             tile("internet", R.drawable.ic_t_internet, "Internet", "Connectivité de la TV (Wi-Fi/Ethernet) et de la passerelle Bluetooth du téléphone : état et tests.",
                 s?.takeIf { it.netCheckedAt > 0 }?.netSummary()?.take(34) ?: "Vérification…",
@@ -551,9 +555,10 @@ class PlayerActivity : Activity(), TvService.Screen {
         val ip = TvService.localIp()
         val labels = mapOf("0-storage" to "Stockage", "1-bt" to "Bluetooth", "2-wd" to "Wi-Fi Direct (sans box)", "3-usb" to "Import depuis une clé",
             "4-ssh" to "Administration à distance (SSH)", "4-ssh-bt" to "SSH par Bluetooth", "5-update" to "Installation d'applications",
-            "5-notice" to "Dernier événement", "9-server" to "Serveur")
+            "5-notice" to "Dernier événement", "9-server" to "Serveur", "1-phone" to "Téléphone connecté")
         val info = buildList {
             add("Code de connexion (à saisir une fois sur le téléphone)" to pin)
+            add("Téléphones de confiance (Bluetooth, sans code)" to s.trust.list().let { l -> if (l.isEmpty()) "aucun : menu « Ajouter un téléphone »" else l.joinToString(", ") { it.name } })
             add("Adresse de la TV" to (ip?.let { "$it:${ReceiverServer.PORT}   ·   page web : http://$it:${ReceiverServer.PORT}" } ?: "pas de réseau (Bluetooth ou Wi-Fi Direct possibles)"))
             add("Démarrage avec la TV" to if (prefs.getBool("autostart", true)) "oui" else "non")
             add("Lecture lancée depuis le téléphone" to if (s.overlayAllowed()) "s'ouvre toute seule" else "demande d'ouvrir l'app (autorisation « afficher par-dessus » non accordée)")
@@ -641,6 +646,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         if (current == null) items += "Toute la bibliothèque" to { showLibrary() }
         items += "Quiz culture générale (jouer avec les téléphones)" to { startActivity(Intent(this, QuizActivity::class.java)) }
         items += "Téléchargements" to { startActivity(Intent(this, DownloadsActivity::class.java)) }
+        items += "Ajouter un téléphone / téléphones de confiance (${s.trust.list().size})…" to { PairActivity.open(this) }
         items += "Bluetooth : rendre la TV visible (2 min)" to { makeDiscoverable() }
         items += (if (prefs.getBool("wd_enabled", false)) "Wi-Fi Direct : désactiver" else "Wi-Fi Direct : activer (crée un réseau TV<->téléphone)") to { toggleWifiDirect() }
         items += "USB : importer les vidéos des clés détectées" to { usbMessage(usb?.importFromVolumes()) }
