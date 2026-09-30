@@ -32,6 +32,8 @@ TIMEOUT="${DEPLOY_HEALTH_TIMEOUT:-240}"
 # DOCKER_CMD="sudo docker" when the deploy user is not in the docker group.
 read -r -a DOCKER <<< "${DOCKER_CMD:-docker}"
 COMPOSE=("${DOCKER[@]}" compose --project-name castbridge -f "$BACKEND_DIR/docker-compose.yml" --env-file "$BACKEND_DIR/.env")
+# Server-specific additions (e.g. joining the shared reverse proxy's network), kept out of git.
+[ -f "$BACKEND_DIR/docker-compose.override.yml" ] && COMPOSE+=(-f "$BACKEND_DIR/docker-compose.override.yml")
 
 exec 9>"${TMPDIR:-/tmp}/castbridge-deploy.lock"
 flock -n 9 || die "un autre déploiement est en cours"
