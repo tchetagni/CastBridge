@@ -8,10 +8,12 @@ package castbridge.core.quiz
  */
 class QuizDuel(
     val questions: List<Question>,
-    val questionMs: Long = 20_000,
+    questionMs: Long = 20_000,
     val revealMs: Long = 6_000,
     val boardMs: Long = 6_000,
 ) {
+    /** Time to answer, never more than 20 s. */
+    val questionMs: Long = questionMs.coerceIn(1_000, QuizGame.MAX_SECONDS * 1000L)
     enum class Phase { READY, QUESTION, REVEAL, BOARD, FINISHED }
     enum class Result { OK, SAME, ALREADY_ANSWERED, CLOSED, UNKNOWN_QUESTION }
     data class Answer(val choice: Int, val atMs: Long)

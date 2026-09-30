@@ -35,13 +35,18 @@ enum class Joker(val label: String) { FIFTY("50:50"), AUDIENCE("Avis du public")
 class QuizGame(
     val questions: List<Question>,
     val ladder: Ladder = Ladder.DEFAULT,
-    /** Seconds per question level (index 0 = question 1); 0 = no clock. */
-    val timers: IntArray = DEFAULT_TIMERS,
+    /** Seconds per question level (index 0 = question 1). Every question has a countdown, never above [MAX_SECONDS]. */
+    timers: IntArray = DEFAULT_TIMERS,
     seed: Long = System.nanoTime(),
     /** « Entraînement »: a wrong answer does not end the game, every question is played, no prize (score = right answers). */
     val practice: Boolean = false,
 ) {
     enum class Phase { READY, QUESTION, CONFIRM, JOKER, LOCKED, REVEALED, FINISHED }
+
+    /** Clock per question: missing or 0 means the maximum, anything longer is cut to [MAX_SECONDS]. */
+    val timers: IntArray = IntArray(maxOf(questions.size, timers.size)) { i ->
+        timers.getOrElse(i) { 0 }.let { if (it <= 0) MAX_SECONDS else minOf(it, MAX_SECONDS) }
+    }
     enum class End { WON, WRONG, WALKED, TIMEOUT, PRACTICE_DONE }
     data class PhoneResult(val choice: Int, val confidence: Int, val friend: String?, val simulated: Boolean)
 
@@ -229,9 +234,12 @@ class QuizGame(
     fun toJson(now: Long): String = Json.write(toMap(now))
 
     companion object {
-        /** 30 s for questions 1-5, 45 s for 6-10, no clock for the last five (as on TV). */
-        val DEFAULT_TIMERS = IntArray(15) { if (it < 5) 30 else if (it < 10) 45 else 0 }
-        val NO_TIMERS = IntArray(15)
+        /** Longest time to answer a question, in every mode (Esaie: countdown, never more than 20 s). */
+        const val MAX_SECONDS = 20
+        /** 20 s for every question. */
+        val DEFAULT_TIMERS = IntArray(15) { MAX_SECONDS }
+        /** Kept for callers of the former "no clock" mode: practice also has the 20 s countdown now. */
+        val NO_TIMERS = DEFAULT_TIMERS
 
         /** Integer percentages summing to 100 (largest remainder). */
         fun percentages(votes: IntArray): IntArray {

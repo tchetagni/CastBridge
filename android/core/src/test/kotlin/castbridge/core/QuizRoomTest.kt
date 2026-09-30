@@ -136,12 +136,12 @@ class QuizRoomTest {
         assertEquals(600, w.balance("dev:device-aaaa"))
     }
 
-    @Test fun practiceModeHasNoClockAndGoesOn() {
+    @Test fun practiceModeHas20sCountdownAndGoesOn() {
         val r = room()
         assertTrue(r.configure(QuizRoom.Mode.MILLIONAIRE, QuizRoom.Play.PRACTICE, QuestionFilter(Track.SECONDARY, "3e")))
         assertNull(r.startGame(seed = 1))
         val g = r.game!!
-        assertTrue(g.practice); assertEquals(0, g.remainingMs(now))
+        assertTrue(g.practice); assertEquals(20_000, g.remainingMs(now), "practice also has the 20 s countdown")
         assertTrue(g.questions.all { it.level == "3e" })
         r.hostAct("select", (g.question.answer + 1) % 4); r.hostAct("confirm"); now += 5_000; r.tick(); r.hostAct("next")
         assertEquals(QuizGame.Phase.QUESTION, g.phase, "a mistake does not end practice")

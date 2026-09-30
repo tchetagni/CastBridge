@@ -30,7 +30,7 @@ class QuizRoom(
     /** Suspense between « dernier mot » and the reveal. */
     val suspenseMs: Long = 1_800,
     val voteMs: Long = 15_000,
-    val callMs: Long = 30_000,
+    val callMs: Long = 20_000,
     /** Ids already asked in this TV session (no repeat until the bank runs dry). */
     private val asked: MutableSet<String> = LinkedHashSet(),
     /** Stakes of the « avec mise » competition: virtual demo tokens in the POC (see [WalletProvider]). */
@@ -168,7 +168,7 @@ class QuizRoom(
         } else {
             val qs = bank.draw(duelCount, seed, asked, filter)
             asked += qs.map { it.id }
-            val window = if (play == Play.PRACTICE) duelQuestionMs * 2 else duelQuestionMs
+            val window = duelQuestionMs.coerceAtMost(QuizGame.MAX_SECONDS * 1000L)   // 20 s max, practice included
             duel = QuizDuel(qs, questionMs = window, revealMs = if (play == Play.PRACTICE) 10_000 else 6_000)
                 .also { d -> present.forEach { d.addPlayer(it.id) }; d.start(t) }
             game = null

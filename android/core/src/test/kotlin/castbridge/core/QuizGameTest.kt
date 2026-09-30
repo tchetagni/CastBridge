@@ -95,18 +95,27 @@ class QuizGameTest {
     }
 
     @Test fun clockRunsOutAndPausesDuringJokers() {
-        val g = QuizGame(qs, timers = IntArray(15) { 30 }, seed = 1).also { it.start(1_000) }
-        assertEquals(30_000, g.remainingMs(1_000))
+        val g = QuizGame(qs, timers = IntArray(15) { 20 }, seed = 1).also { it.start(1_000) }
+        assertEquals(20_000, g.remainingMs(1_000))
         assertTrue(g.beginJoker(Joker.PHONE, 11_000))
         assertFalse(g.tick(100_000), "paused during the call")
         g.finishPhone(null, null, 100_000)
-        assertEquals(20_000, g.remainingMs(100_000))
-        assertFalse(g.tick(119_000)); assertTrue(g.tick(120_000))
+        assertEquals(10_000, g.remainingMs(100_000))
+        assertFalse(g.tick(109_000)); assertTrue(g.tick(110_000))
         assertEquals(QuizGame.End.TIMEOUT, g.end)
         // once locked, the clock no longer matters
-        val h = QuizGame(qs, timers = IntArray(15) { 30 }, seed = 1).also { it.start(0) }
+        val h = QuizGame(qs, timers = IntArray(15) { 20 }, seed = 1).also { it.start(0) }
         h.select(h.question.answer, 1); h.confirm(2)
         assertFalse(h.tick(60_000)); assertTrue(h.reveal())
+    }
+
+    @Test fun everyQuestionHasACountdownOfAtMost20s() {
+        for (t in listOf(IntArray(15) { 45 }, IntArray(15), QuizGame.NO_TIMERS, IntArray(3) { 10 })) {
+            val g = QuizGame(qs, timers = t, seed = 1)
+            assertTrue(g.timers.all { it in 1..QuizGame.MAX_SECONDS }, t.joinToString())
+        }
+        assertEquals(10, QuizGame(qs, timers = IntArray(15) { 10 }, seed = 1).timers[0], "shorter clocks stay short")
+        assertEquals(20_000, QuizDuel(qs, questionMs = 60_000).questionMs)
     }
 
     @Test fun rightAnswerNeverSerializedBeforeReveal() {
