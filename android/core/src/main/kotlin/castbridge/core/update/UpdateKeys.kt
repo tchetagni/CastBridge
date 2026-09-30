@@ -12,7 +12,8 @@ package castbridge.core.update
  * with the old key that embeds the new one (or keep both in [PUBLIC_KEYS] during the transition).
  */
 object UpdateKeys {
-    const val PUBLIC_KEY: String = ""
+    /** Production key of https://bridge.sti-cm.com (keyId 6102414005737206), created 2026-09-30. */
+    const val PUBLIC_KEY: String = "SItJOVQ7KfItg1kksDbdqId9fWnkMDhU7MD5YU46rd0="
 
     /** Every accepted key (the current one, plus the next one during a key change). */
     val PUBLIC_KEYS: List<String> = listOf(PUBLIC_KEY).filter { it.isNotBlank() }
