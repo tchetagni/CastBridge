@@ -167,6 +167,28 @@ Pourquoi `libaria2c.so` : depuis `targetSdk` 29, une app ne peut exécuter un fi
 stockage de données est `noexec`) ; le gestionnaire de paquets n'y extrait que des `lib*.so`, et seulement avec
 `useLegacyPackaging = true` (`extractNativeLibs="true"`), ce qui vaut aussi pour libVLC (installé plus gros, APK plus petit).
 
+### Binaires livrés et tailles (NDK r27d, 2026-09-30)
+
+| | armeabi-v7a | arm64-v8a |
+|---|---|---|
+| `libaria2c.so` (sans symboles) | 6,2 Mo (3,1 Mo compressé dans l'APK) | 8,5 Mo |
+| APK release `:receiver` avant (libs non compressées) | 40,9 Mo | 53,6 Mo |
+| APK release `:receiver` après (libs compressées + aria2) | 23,7 Mo | 27,3 Mo |
+
+Attention à l'espace **installé** : avec `useLegacyPackaging`, les bibliothèques (libVLC 39 Mo, aria2 6,2 Mo…) sont
+extraites à l'installation en plus de l'APK : environ 70 Mo occupés en armeabi-v7a contre ~41 Mo avant (+29 Mo sur une
+mémoire interne de ~300 Mo libres). C'est le prix de l'exécution d'un binaire natif (tout ou rien par APK).
+
+La procédure est reproductible (sources et options épinglées) mais le binaire n'est pas identique octet pour octet
+d'une compilation à l'autre : aria2 y inscrit la date de compilation (`aria2c --version`).
+
+Vérifié sur un téléphone Android 14 (32 bits activé) avec le binaire armeabi-v7a : `--version` (fonctions : Async DNS,
+BitTorrent, GZip, HTTPS, Metalink, SFTP ; OpenSSL, c-ares, libssh2, expat, zlib), téléchargement HTTPS réel à 8
+connexions avec vérification du certificat (SHA-256 du fichier reçu correct), refus sans magasin de certificats,
+récupération des métadonnées d'un magnet (Big Buck Bunny, licence libre) par DHT/trackers ; puis l'app de test installée :
+aria2 démarré depuis `nativeLibraryDir` et téléchargement ajouté par l'API (le téléphone a été débranché avant la fin du
+test ; il reste peut-être l'app de test `castbridge.receiver.dltest` à désinstaller : `adb uninstall castbridge.receiver.dltest`).
+
 ## Licence (obligations GPL)
 
 aria2 est sous **GPL-2.0-or-later** (avec l'exception OpenSSL de ses auteurs). Distribuer l'APK qui contient
