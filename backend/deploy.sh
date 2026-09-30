@@ -29,12 +29,14 @@ REF="${1:-${DEPLOY_REF:-origin/main}}"
 KEY_PATH="${CASTBRIDGE_SIGNING_KEY_PATH:-./secrets/castbridge-signing.pem}"
 [ -f "$KEY_PATH" ] || die "clé de signature introuvable : $KEY_PATH (voir README, « Clés Ed25519 »)"
 TIMEOUT="${DEPLOY_HEALTH_TIMEOUT:-240}"
-COMPOSE=(docker compose --project-name castbridge -f "$BACKEND_DIR/docker-compose.yml" --env-file "$BACKEND_DIR/.env")
+# DOCKER_CMD="sudo docker" when the deploy user is not in the docker group.
+read -r -a DOCKER <<< "${DOCKER_CMD:-docker}"
+COMPOSE=("${DOCKER[@]}" compose --project-name castbridge -f "$BACKEND_DIR/docker-compose.yml" --env-file "$BACKEND_DIR/.env")
 
 exec 9>"${TMPDIR:-/tmp}/castbridge-deploy.lock"
 flock -n 9 || die "un autre déploiement est en cours"
 
-command -v docker >/dev/null || die "docker introuvable"
+command -v "${DOCKER[-1]}" >/dev/null || die "docker introuvable"
 "${COMPOSE[@]}" config -q || die "docker-compose.yml ou .env invalide"
 
 # ---- 1. revision -------------------------------------------------------------------------------
@@ -50,8 +52,8 @@ rollback() {
     log "ÉCHEC : retour à la version précédente"
     "${COMPOSE[@]}" logs --no-color --tail=80 castbridge-api || true
     git checkout --quiet --detach "$PREV_REV" || true
-    if docker image inspect castbridge-api:previous >/dev/null 2>&1; then
-        docker tag castbridge-api:previous castbridge-api:current
+    if "${DOCKER[@]}" image inspect castbridge-api:previous >/dev/null 2>&1; then
+        "${DOCKER[@]}" tag castbridge-api:previous castbridge-api:current
         "${COMPOSE[@]}" up -d --no-build castbridge-api || true
         if wait_healthy; then log "version précédente rétablie (${PREV_REV:0:10})"; else log "la version précédente ne répond pas non plus : intervention manuelle"; fi
     else
@@ -64,7 +66,7 @@ rollback() {
 wait_healthy() {
     local waited=0 state
     while [ "$waited" -lt "$TIMEOUT" ]; do
-        state="$(docker inspect -f '{{if .State.Health}}{{.State.Health.Status}}{{else}}{{.State.Status}}{{end}}' castbridge-api 2>/dev/null || echo absent)"
+        state="$("${DOCKER[@]}" inspect -f '{{if .State.Health}}{{.State.Health.Status}}{{else}}{{.State.Status}}{{end}}' castbridge-api 2>/dev/null || echo absent)"
         case "$state" in
             healthy) return 0 ;;
             unhealthy|exited|dead|absent) [ "$waited" -gt 20 ] && return 1 ;;
@@ -75,15 +77,15 @@ wait_healthy() {
 }
 
 # ---- 2. image ----------------------------------------------------------------------------------
-if docker image inspect castbridge-api:current >/dev/null 2>&1; then
-    docker tag castbridge-api:current castbridge-api:previous
+if "${DOCKER[@]}" image inspect castbridge-api:current >/dev/null 2>&1; then
+    "${DOCKER[@]}" tag castbridge-api:current castbridge-api:previous
     log "image en service conservée sous castbridge-api:previous"
 fi
 log "construction de l'image"
 "${COMPOSE[@]}" build castbridge-api || { git checkout --quiet --detach "$PREV_REV"; die "échec de la construction (rien n'a été modifié en service)"; }
 
 # ---- 3. backup before migrations -----------------------------------------------------------------
-if [ "$(docker inspect -f '{{.State.Running}}' castbridge-db 2>/dev/null || echo false)" = "true" ]; then
+if [ "$("${DOCKER[@]}" inspect -f '{{.State.Running}}' castbridge-db 2>/dev/null || echo false)" = "true" ]; then
     log "sauvegarde de la base avant migration"
     "$BACKEND_DIR/backup.sh" --db-only || die "sauvegarde impossible : déploiement annulé"
 fi
@@ -93,7 +95,7 @@ log "démarrage"
 "${COMPOSE[@]}" up -d --remove-orphans || rollback
 if wait_healthy; then
     log "OK : castbridge-api en bonne santé (${NEW_REV:0:10})"
-    docker image prune -f --filter "dangling=true" >/dev/null || true
+    "${DOCKER[@]}" image prune -f --filter "dangling=true" >/dev/null || true
 else
     rollback
 fi
