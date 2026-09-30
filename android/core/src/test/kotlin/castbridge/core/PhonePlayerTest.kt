@@ -62,6 +62,8 @@ class PhonePlayerTest {
         assertTrue(CastPlan.playsOnTv(CastAction.LIVE, photo)); assertFalse(CastPlan.playsOnTv(CastAction.COPY, photo))
         assertTrue(CastPlan.playsOnTv(CastAction.MOVE, local()))
         assertTrue(CastPlan.phoneWaitsForTv(CastAction.COPY)); assertFalse(CastPlan.phoneWaitsForTv(CastAction.LIVE))
+        // a photo sent to a DLNA TV is announced as a photo (not a video it would refuse)
+        assertTrue(castbridge.core.upnp.Didl.item("http://p/1.jpg", "p", "image/jpeg", "http-get:*:image/jpeg:*").contains("object.item.imageItem.photo"))
     }
 
     // ---- phone position -> TV position ----

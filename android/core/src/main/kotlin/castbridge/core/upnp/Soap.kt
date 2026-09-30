@@ -39,7 +39,7 @@ object Didl {
     fun item(url: String, title: String, mime: String, protocolInfo: String): String =
         """<DIDL-Lite xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/">""" +
             """<item id="0" parentID="-1" restricted="1"><dc:title>${Xml.esc(title)}</dc:title>""" +
-            "<upnp:class>${if (mime.startsWith("audio")) "object.item.audioItem" else "object.item.videoItem"}</upnp:class>" +
+            "<upnp:class>${when { mime.startsWith("audio") -> "object.item.audioItem"; mime.startsWith("image") -> "object.item.imageItem.photo"; else -> "object.item.videoItem" }}</upnp:class>" +
             """<res protocolInfo="${Xml.esc(protocolInfo)}">${Xml.esc(url)}</res></item></DIDL-Lite>"""
 
     fun protocolInfo(mime: String, features: String) = "http-get:*:$mime:$features"
