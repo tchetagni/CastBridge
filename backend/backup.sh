@@ -9,6 +9,7 @@
 #
 # Restore: see backend/README.md, "Sauvegardes".
 set -Eeuo pipefail
+read -r -a DOCKER <<< "${DOCKER_CMD:-docker}"   # e.g. DOCKER_CMD="sudo docker"
 
 cd "$(dirname "$(readlink -f "$0")")"
 [ -f .env ] && { set -a; . ./.env; set +a; }
@@ -23,7 +24,7 @@ stamp="$(date +%Y%m%d-%H%M%S)"
 out="$BACKUP_DIR/db/castbridge-$stamp.sql.gz"
 tmp="$out.part"
 # credentials stay inside the container (MYSQL_PWD, not on a command line)
-docker exec castbridge-db sh -c 'MYSQL_PWD="$MYSQL_PASSWORD" exec mysqldump --single-transaction --quick --routines --triggers \
+"${DOCKER[@]}" exec castbridge-db sh -c 'MYSQL_PWD="$MYSQL_PASSWORD" exec mysqldump --single-transaction --quick --routines --triggers \
     --no-tablespaces --default-character-set=utf8mb4 -u"$MYSQL_USER" "$MYSQL_DATABASE"' | gzip -9 > "$tmp"
 if ! gzip -dc "$tmp" | tail -n 1 | grep -q "Dump completed"; then
     rm -f "$tmp"
@@ -39,7 +40,7 @@ find "$BACKUP_DIR/db" -name '*.part' -type f -mmin +120 -delete
 
 if [ "${1:-}" != "--db-only" ]; then
     # APK files never change once published (the name carries version and hash): a mirror is enough
-    docker cp castbridge-api:/data/apk/. "$BACKUP_DIR/apk/"
+    "${DOCKER[@]}" cp castbridge-api:/data/apk/. "$BACKUP_DIR/apk/"
     rm -rf "$BACKUP_DIR/apk/.multipart" "$BACKUP_DIR/apk/.incoming"
     log "APK : $BACKUP_DIR/apk ($(du -sh "$BACKUP_DIR/apk" | cut -f1))"
 fi
