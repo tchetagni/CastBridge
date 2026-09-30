@@ -510,6 +510,8 @@ class TvService : Service(), Device {
         } ?: ApiReply(409, """{"error":"Aucun écran de CastBridge TV n'est affiché"}""")
         // The quiz screen opens from the visible TV screen only (Android 14 blocks background activity starts).
         path.startsWith("/api/quiz") -> QuizHub.api(screen?.takeIf { it.shown }?.activity, path, method)
+        path.startsWith("/api/games") -> GamesHub.api(screen?.takeIf { it.shown }?.activity, this, path, method, params)
+        path.startsWith("/api/sudoku") -> SudokuHub.api(screen?.takeIf { it.shown }?.activity, this, path, method, params)
         path.startsWith("/api/chess") -> ChessHub.api(screen?.takeIf { it.shown }?.activity, this, path, method, params)
         path == "/api/update" && method == "GET" -> updater?.let { ApiReply(200, it.infoJson()) }
         path == "/api/update/install" && method == "POST" -> updater?.install(listOf(params["name"].orEmpty()), params["force"] == "1")

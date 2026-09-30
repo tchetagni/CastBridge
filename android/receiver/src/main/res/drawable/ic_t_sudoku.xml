@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Sudoku: a 3x3 grid of 3x3 mini-grids -->
+<!-- Sudoku: 9x9 grid drawn as 3x3 boxes (stroke 1.8 on a 24 grid, like the charter's line icons). Tinted by the screen. -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="48dp" android:height="48dp" android:viewportWidth="100" android:viewportHeight="100">
-    <path android:strokeColor="#FFFFFFFF" android:strokeWidth="3"
-        android:pathData="M10,10 L10,90 M30,10 L30,90 M60,10 L60,90 M90,10 L90,90 M10,10 L90,10 M10,30 L90,30 M10,60 L90,60 M10,90 L90,90" />
-    <path android:strokeColor="#FF33B5E5" android:strokeWidth="6"
-        android:pathData="M20,20 L20,80 M40,20 L40,80 M70,20 L70,80 M20,20 L80,20 M20,40 L80,40 M20,70 L80,70 M20,80 L80,80" />
+    android:width="48dp" android:height="48dp" android:viewportWidth="24" android:viewportHeight="24">
+    <path android:strokeColor="#FFFFFFFF" android:strokeWidth="1.8" android:strokeLineCap="round" android:strokeLineJoin="round"
+        android:pathData="M5,3 L19,3 A2,2 0 0 1 21,5 L21,19 A2,2 0 0 1 19,21 L5,21 A2,2 0 0 1 3,19 L3,5 A2,2 0 0 1 5,3 Z M9.7,3 L9.7,21 M14.3,3 L14.3,21 M3,9.7 L21,9.7 M3,14.3 L21,14.3" />
 </vector>
