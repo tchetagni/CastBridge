@@ -51,10 +51,11 @@ class MainActivity : ComponentActivity() {
                         Tab(tab == 1, onClick = { tab = 1 }, text = { Text("CastBridge TV", maxLines = 1) })
                         Tab(tab == 2, onClick = { tab = 2 }, text = { Text("Quiz", maxLines = 1) })
                         Tab(tab == 3, onClick = { tab = 3 }, text = { Text("Échecs", maxLines = 1) })
+                        Tab(tab == 4, onClick = { tab = 4 }, text = { Text("Apprendre", maxLines = 1) })
                     }
                 }
             },
-        ) { pad -> Box(Modifier.padding(pad).fillMaxSize()) { when (tab) { 0 -> App(); 1 -> TvHub(); 2 -> QuizScreen(); else -> ChessScreen() } } }
+        ) { pad -> Box(Modifier.padding(pad).fillMaxSize()) { when (tab) { 0 -> App(); 1 -> TvHub(); 2 -> QuizScreen(); 3 -> ChessScreen(); else -> LearnScreen() } } }
         MoveHandler()
     }
 

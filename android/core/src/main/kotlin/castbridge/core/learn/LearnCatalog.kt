@@ -65,7 +65,7 @@ object LearnCatalog {
         Subject("francais", "Français", "French", 0xFFE53935.toInt()),
         Subject("english", "Anglais", "English Language", 0xFFD81B60.toInt()),
         Subject("sciences", "Sciences", "Science", 0xFF43A047.toInt()),
-        Subject("pct", "Physique-Chimie-Technologie", "Physics-Chemistry-Technology", 0xFF8E24AA.toInt()),
+        Subject("pct", "Physique-chimie (PCT)", "Physics-Chemistry (PCT)", 0xFF8E24AA.toInt()),
         Subject("physique-chimie", "Physique-Chimie", "Physics & Chemistry", 0xFF8E24AA.toInt()),
         Subject("svt", "SVT", "Life and Earth Sciences", 0xFF2E7D32.toInt()),
         Subject("biology", "Biologie", "Biology", 0xFF2E7D32.toInt()),

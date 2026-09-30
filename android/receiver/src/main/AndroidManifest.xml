@@ -78,6 +78,14 @@
             android:launchMode="singleTop"
             android:screenOrientation="landscape"
             android:configChanges="orientation|screenSize|screenLayout|keyboard|keyboardHidden|navigation" />
+        <!-- Apprendre (docs/LEARN.md): opened from the home tile or from the phone -->
+        <activity
+            android:name=".LearnActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="adjustPan"
+            android:configChanges="orientation|screenSize|screenLayout|keyboard|keyboardHidden|navigation" />
         <activity android:name=".DownloadsActivity" android:exported="false" android:screenOrientation="landscape"
             android:theme="@android:style/Theme.DeviceDefault.NoActionBar" />
         <service android:name=".DownloadService" android:exported="false" android:foregroundServiceType="dataSync" />
