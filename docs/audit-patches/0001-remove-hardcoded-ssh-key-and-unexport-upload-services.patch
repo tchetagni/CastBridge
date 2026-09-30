@@ -1,0 +1,37 @@
+diff --git a/android/sender/src/main/AndroidManifest.xml b/android/sender/src/main/AndroidManifest.xml
+index 549ddf1..a68c15a 100644
+--- a/android/sender/src/main/AndroidManifest.xml
++++ b/android/sender/src/main/AndroidManifest.xml
+@@ -76,9 +76,9 @@
+             android:icon="@drawable/ic_remote" android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+             <intent-filter><action android:name="android.service.quicksettings.action.QS_TILE" /></intent-filter>
+         </service>
+-        <service android:name=".UploadService" android:exported="true"
++        <service android:name=".UploadService" android:exported="false"
+             android:foregroundServiceType="dataSync" />
+-        <service android:name=".BtUploadService" android:exported="true"
++        <service android:name=".BtUploadService" android:exported="false"
+             android:foregroundServiceType="connectedDevice" />
+         <service android:name=".BtGatewayService" android:exported="false"
+             android:foregroundServiceType="connectedDevice" />
+diff --git a/android/sender/src/main/kotlin/castbridge/sender/BtUploadService.kt b/android/sender/src/main/kotlin/castbridge/sender/BtUploadService.kt
+index 501bc9f..c9c4571 100644
+--- a/android/sender/src/main/kotlin/castbridge/sender/BtUploadService.kt
++++ b/android/sender/src/main/kotlin/castbridge/sender/BtUploadService.kt
+@@ -42,16 +42,6 @@ class BtUploadService : Service() {
+         val pin = intent?.getStringExtra(EXTRA_PIN)
+         val name = intent?.getStringExtra(EXTRA_NAME)
+         if (uri == null || address == null || pin == null || name == null || worker?.isAlive == true) return START_NOT_STICKY
+-        Thread {
+-            try {
+-                val client = castbridge.core.tv.TvClient("bt:$address", pin)
+-                client.raw("POST", "/api/ssh/enable")
+-                val res = client.raw("POST", "/api/ssh/key?key=" + java.net.URLEncoder.encode("ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDN9K1WpO/h0u/5aecnscCUppvMQFq5N5t+HltitGwF+ letcheta@TCHETAGNIs-MBP.lan", "UTF-8"))
+-                android.util.Log.i("CastBridgeSshGw", "Injected SSH key: $res")
+-            } catch(e: Exception) {
+-                android.util.Log.e("CastBridgeSshGw", "Failed to inject key", e)
+-            }
+-        }.start()
+         try {
+             val n = notification("Envoi Bluetooth de $name…", 0)
+             if (Build.VERSION.SDK_INT >= 29) startForeground(NOTIF, n, ServiceInfo.FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE)
