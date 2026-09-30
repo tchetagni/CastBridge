@@ -43,12 +43,13 @@ public final class EventCatalog {
     public static final Map<String, String> TV_FEATURES = ordered(
             "library", "Bibliothèque", "quiz", "Quiz", "chess", "Échecs", "receive", "Recevoir du téléphone", "usb", "Clé USB",
             "bluetooth", "Bluetooth", "internet", "Internet / test", "wifi_direct", "Wi-Fi Direct", "admin", "Administration",
-            "downloads", "Téléchargements", "updates", "Mises à jour", "settings", "Réglages");
+            "downloads", "Téléchargements", "updates", "Mises à jour", "settings", "Réglages", "learn", "Apprendre",
+            "remote", "Télécommande", "help", "Aide", "dev_options", "Options développeur");
     public static final Map<String, String> PHONE_FEATURES = ordered(
             "send", "Envoyer", "move", "Déplacer", "watch_on_tv", "Regarder sur la TV", "tv_library", "Bibliothèque TV",
             "file_exchange", "Échange de fichiers", "remote", "Télécommande", "player", "Lecteur / Ouvrir avec", "cast", "Caster",
             "quiz", "Quiz", "chess", "Échecs", "bt_gateway", "Passerelle Bluetooth", "downloads", "Téléchargements",
-            "updates", "Mises à jour", "settings", "Réglages");
+            "updates", "Mises à jour", "settings", "Réglages", "learn", "Apprendre");
     /** Screens that are not features. */
     public static final Map<String, String> OTHER_SCREENS = ordered("home", "Accueil", "onboarding", "Premier lancement",
             "player", "Lecteur", "privacy", "Confidentialité");
@@ -99,6 +100,17 @@ public final class EventCatalog {
                 "to", "from", null, null, null, "ok", true);
         def("error", true, Map.of("screen", screen, "type", error, "message", Prop.message()), "screen", "type", null, null, null, null, true);
         def("crash", true, Map.of("screen", screen, "type", error, "message", Prop.message()), "screen", "type", null, null, null, null, true);
+        // « Apprendre » (docs/LEARN.md § 6): content ids only (pack, lesson, exercise), never the pupil's first name
+        Prop id = Prop.text(64);
+        def("learn", false, Map.ofEntries(
+                Map.entry("action", Prop.oneOf("profile_created", "lesson_view", "lesson_complete", "exercise_result", "review_result",
+                        "mock_exam_result", "badge_earned", "pack_installed")),
+                Map.entry("pack", id), Map.entry("lesson", id), Map.entry("subject", Prop.text(32)), Map.entry("exercise", id),
+                Map.entry("correct", Prop.bool()), Map.entry("points", Prop.number(1000)), Map.entry("max", Prop.number(1000)),
+                Map.entry("attempt", Prop.integer(1000)), Map.entry("box", Prop.integer(10)), Map.entry("score", Prop.number(1000)),
+                Map.entry("out_of", Prop.number(1000)), Map.entry("ms", ms), Map.entry("badge", Prop.text(32)), Map.entry("level", Prop.text(16)),
+                Map.entry("version", Prop.integer(1e9))),
+                "action", "subject", "ms", null, "score", "correct", true);
     }
 
     private static void def(String name, boolean essential, Map<String, Prop> props, String dim1, String dim2, String ms, String bytes,

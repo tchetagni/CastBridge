@@ -84,6 +84,13 @@ object CastSession {
         _state.value = Remote(target, item, action, Remote.Phase.STARTING, message = "Connexion à ${target.name}…")
         job = scope.launch {
             if (previous != null && previous.target != target) runCatching { stopTv(previous) }
+            // cast_start / cast_end for a live cast (a copy is counted by UploadService)
+            val channel = if (target is CastTarget.Dlna) "dlna" else "wifi"
+            val t0 = System.currentTimeMillis()
+            if (action == CastAction.LIVE) castbridge.sender.PhoneConnect.track("cast_start", mapOf("channel" to channel, "mode" to "direct"))
+            fun ended(ok: Boolean, error: String?) {
+                if (action == CastAction.LIVE) castbridge.sender.PhoneConnect.castEnd(channel, "direct", 0, System.currentTimeMillis() - t0, ok, error)
+            }
             try {
                 val (pos, dur) = phonePosition(item, fallbackPosMs, fallbackDurMs)
                 update { it.copy(localDurMs = dur) }
@@ -91,11 +98,14 @@ object CastSession {
                     CastAction.LIVE -> live(app, target, item, pos, dur)
                     CastAction.COPY, CastAction.MOVE -> copy(app, target as CastTarget.Box, item, action == CastAction.MOVE, dur, fallbackPosMs)
                 }
+                ended(true, null)
             } catch (e: CastFailure) {
+                ended(false, "refused")
                 update { it.copy(phase = Remote.Phase.FAILED, message = e.message) }
             } catch (e: kotlinx.coroutines.CancellationException) {
                 throw e
             } catch (e: Exception) {
+                ended(false, e.javaClass.simpleName)
                 update { it.copy(phase = Remote.Phase.FAILED, message = "Échec : ${e.message ?: e.javaClass.simpleName}") }
             }
         }

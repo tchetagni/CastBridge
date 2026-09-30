@@ -45,7 +45,8 @@ class UpdateClient(
         data class Available(val manifest: UpdateManifest, val mandatory: Boolean) : Check()
         /** The admin blocked this device: no update. */
         object Blocked : Check()
-        data class Failed(val reason: String, val retryable: Boolean = true) : Check()
+        /** [network]: the server could not be reached at all (another route, e.g. the Bluetooth gateway, may work). */
+        data class Failed(val reason: String, val retryable: Boolean = true, val network: Boolean = false) : Check()
     }
 
     fun check(me: Installed): Check {
@@ -57,7 +58,7 @@ class UpdateClient(
         val r = try {
             http.request("GET", url, headers = me.deviceToken?.let { mapOf("Authorization" to "Bearer $it") } ?: emptyMap())
         } catch (e: IOException) {
-            return Check.Failed("serveur injoignable : ${e.message ?: e.javaClass.simpleName}")
+            return Check.Failed("serveur injoignable : ${e.message ?: e.javaClass.simpleName}", network = true)
         }
         return when (r.code) {
             204 -> Check.UpToDate

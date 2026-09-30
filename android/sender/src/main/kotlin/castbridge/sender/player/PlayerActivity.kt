@@ -130,6 +130,9 @@ class PlayerActivity : ComponentActivity() {
             return
         }
         mode.value = Mode.Loading
+        // « Ouvrir avec » / « Partager » from another app: the player used as a shortcut
+        if ((intent.action == Intent.ACTION_VIEW || intent.action == Intent.ACTION_SEND || intent.action == Intent.ACTION_SEND_MULTIPLE) &&
+            referrer?.host != packageName) castbridge.sender.PhoneConnect.feature("player", "shortcut")
         lifecycleScope.launch {
             val fromTv = intent.getBooleanExtra(EXTRA_FROM_TV, false)
             val given = withContext(Dispatchers.IO) { Media.fromIntent(this@PlayerActivity, intent) }.map { if (fromTv) it.copy(fromTv = true) else it }

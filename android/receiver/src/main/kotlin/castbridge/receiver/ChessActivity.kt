@@ -63,6 +63,7 @@ class ChessActivity : Activity() {
     }
 
     override fun onDestroy() {
+        recordGame(null)                        // left in the middle of a game: abandon
         main.removeCallbacksAndMessages(null)
         drive?.close()
         room?.onChange = null
@@ -103,6 +104,7 @@ class ChessActivity : Activity() {
     // ------------------------------------------------------------------ screens
 
     private fun showSetup() {
+        recordGame(null)
         drive?.close(); drive = null
         room?.backToLobby()
         st.screen = ChessTvState.Screen.SETUP
@@ -187,6 +189,7 @@ class ChessActivity : Activity() {
     }
 
     private fun enterGame() {
+        gameStartAt = SystemClock.uptimeMillis(); gameRecorded = false
         st.screen = ChessTvState.Screen.GAME
         st.menu = null; st.overlay = null; st.promo = null; st.selected = null
         st.cursor = if (st.flipped) "e7" else "e2"
@@ -346,7 +349,31 @@ class ChessActivity : Activity() {
         view.invalidate()
     }
 
+    // ---- usage statistics (docs/TELEMETRY.md): chess_game once per game, never the players' names ----
+    private var gameStartAt = 0L
+    private var gameRecorded = true
+
+    /** [s] = final state (result read from it), null = the game was left before its end (abandon). */
+    private fun recordGame(s: Map<String, Any?>?) {
+        if (gameRecorded || gameStartAt == 0L) return
+        val cur = s ?: st.s
+        if (s == null && cur["stage"] != "PLAYING") return
+        gameRecorded = true
+        @Suppress("UNCHECKED_CAST") val winner = (cur["result"] as? Map<String, Any?>)?.get("winner") as? String
+        val result = when {
+            s == null -> "abandon"
+            winner == null -> "draw"
+            st.remoteColors.size == 1 -> if (winner in st.remoteColors) "win" else "loss"
+            else -> if (winner == "w") "win" else "loss"          // two players at the TV (or phones only): white's point of view
+        }
+        TvConnect.track("chess_game", mapOf(
+            "mode" to when (opp) { Opp.AI -> "ai"; Opp.TV2 -> "local"; Opp.PHONE1, Opp.PHONES -> "phones"; Opp.ONLINE -> "online" },
+            "ai_level" to (if (opp == Opp.AI) level else null), "time_control" to "${seconds}s",
+            "result" to result, "moves" to (cur["ply"] as? Number)?.toInt(), "ms" to SystemClock.uptimeMillis() - gameStartAt))
+    }
+
     private fun endMenu(s: Map<String, Any?>) {
+        recordGame(s)
         val d = drive
         @Suppress("UNCHECKED_CAST") val res = s["result"] as? Map<String, Any?>
         val winner = res?.get("winner") as? String

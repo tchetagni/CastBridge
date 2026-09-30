@@ -99,6 +99,9 @@ class UploadService : Service() {
         }
         progressiveNow = job.progressive
         started = false
+        val castMode = if (job.move) "move" else "copy"
+        val castStart = System.currentTimeMillis()
+        PhoneConnect.track("cast_start", mapOf("channel" to "wifi", "mode" to castMode, "bytes" to total))
         if (progressiveNow && Mp4Atoms.isIsoName(job.fileName)) {
             // An MP4 whose index (moov) is at the end cannot start before the last byte arrives.
             val layout = mp4LayoutOf(this, uri, total)
@@ -139,6 +142,13 @@ class UploadService : Service() {
                 is ResumableUpload.State.Failed -> State.Failed(job, s.reason)
             }
             notifyProgress(s)
+        }
+        run {
+            val ms = System.currentTimeMillis() - castStart
+            val ok = result == ResumableUpload.State.Done
+            val err = when { ok -> null; cancelled -> "cancelled"; else -> "failed" }
+            PhoneConnect.castEnd("wifi", castMode, if (ok) total else maxOf(0L, prevSent), ms, ok, err)
+            if (!ok && !cancelled) PhoneConnect.error("send", "upload", (result as? ResumableUpload.State.Failed)?.reason)
         }
         if (result == ResumableUpload.State.Done) moveUri?.let { u -> checkMoved(job, u, resolve()) }
         if (result == ResumableUpload.State.Done) {

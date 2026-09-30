@@ -14,9 +14,9 @@ import java.util.UUID
 object EventCatalog {
     /** Stable feature ids (tiles / menu entries). Screens use the same ids, plus [OTHER_SCREENS]. */
     val TV_FEATURES = listOf("library", "quiz", "chess", "receive", "usb", "bluetooth", "internet", "wifi_direct", "admin", "downloads",
-        "updates", "settings")
+        "updates", "settings", "learn", "remote", "help", "dev_options")
     val PHONE_FEATURES = listOf("send", "move", "watch_on_tv", "tv_library", "file_exchange", "remote", "player", "cast", "quiz", "chess",
-        "bt_gateway", "downloads", "updates", "settings")
+        "bt_gateway", "downloads", "updates", "settings", "learn")
     val OTHER_SCREENS = listOf("home", "onboarding", "player", "privacy")
 
     /** Kept even without the "usage statistics" consent: needed to maintain the apps (errors, updates). */
@@ -42,7 +42,14 @@ object EventCatalog {
         "update_install" to setOf("from", "to", "ok", "error"),
         "error" to setOf("screen", "type", "message"),
         "crash" to setOf("screen", "type", "message"),
+        // « Apprendre » (docs/LEARN.md § 6): content ids only (packs, lessons, exercises), never a pupil's first name
+        "learn" to setOf("action", "pack", "lesson", "subject", "exercise", "correct", "points", "max", "attempt", "box", "score",
+            "out_of", "ms", "badge", "level", "version"),
     )
+
+    /** Values of "action" in the "learn" event (the names of LearnProgress.EVENTS). */
+    val LEARN_ACTIONS = setOf("profile_created", "lesson_view", "lesson_complete", "exercise_result", "review_result", "mock_exam_result",
+        "badge_earned", "pack_installed")
 
     val FORBIDDEN = setOf("filename", "file", "file_name", "title", "path", "url", "uri", "email", "phone", "contact", "contacts", "password",
         "pin", "key", "token", "secret", "lat", "lon", "lng", "latitude", "longitude", "gps", "location", "ip", "ssid", "bssid", "mac",
@@ -104,6 +111,14 @@ class EventQueue(private val file: File, private val maxBytes: Long = 2L shl 20)
         rewrite(lines.drop(count))
     }
 
+    /** Removes the queued events matching [drop] (e.g. usage events when the consent is withdrawn). */
+    @Synchronized
+    fun removeIf(drop: (String) -> Boolean) {
+        val lines = readLines()
+        val kept = lines.filterNot(drop)
+        if (kept.size != lines.size) rewrite(kept)
+    }
+
     @Synchronized
     fun size(): Int = readLines().size
 
@@ -148,13 +163,18 @@ class Telemetry(
         for ((k, v) in props) {
             if (k !in allowed || v == null) continue
             kept[k] = when (v) {
-                is String -> v.take(if (k == "message") 200 else 64)
-                is Boolean, is Int, is Long, is Double, is Float -> v
-                is Number -> v.toLong()
+                // the server accepts short codes only ([A-Za-z0-9_.:+/-], ≤ 64), free text only in "message"
+                is String -> if (k == "message") v.take(200) else code(v) ?: continue
+                is Boolean -> v
+                is Int, is Long -> (v as Number).toLong().coerceAtLeast(0)
+                is Double, is Float -> (v as Number).toDouble().takeIf { it.isFinite() }?.coerceAtLeast(0.0) ?: continue
+                is Number -> v.toLong().coerceAtLeast(0)
                 else -> continue
             }
         }
         if (name == "feature_used" && kept["feature"] !in EventCatalog.features(app)) return false
+        if ((name == "screen_view" || name == "screen_time") && kept["screen"] !in EventCatalog.features(app) && kept["screen"] !in EventCatalog.OTHER_SCREENS) return false
+        if (name == "learn" && kept["action"] !in EventCatalog.LEARN_ACTIONS) return false
         queue.add(TelemetryEvent(UUID.randomUUID().toString(), clock(), sessionId, name, versionCode, kept).toJson())
         return true
     }
@@ -165,9 +185,10 @@ class Telemetry(
         track("session_start")
     }
 
-    fun endSession() {
+    /** [at]: when the session really ended (the app was hidden then), by default now. */
+    fun endSession(at: Long = clock()) {
         if (sessionId == null) return
-        track("session_end", mapOf("ms" to (clock() - sessionStart).coerceAtLeast(0)))
+        track("session_end", mapOf("ms" to (at - sessionStart).coerceAtLeast(0)))
         sessionId = null
     }
 
@@ -181,11 +202,71 @@ class Telemetry(
     fun error(screen: String?, type: String, message: String) = track("error", mapOf("screen" to screen, "type" to type, "message" to message))
 
     companion object {
+        /** A short code as the server accepts it: other characters become "_", at most 64; null if nothing is left. */
+        fun code(v: String): String? = v.trim().replace(Regex("[^A-Za-z0-9_.:+/-]+"), "_").trim('_').take(64).ifEmpty { null }
+
         /**
          * To count distinct things (e.g. distinct videos watched) without ever sending their names: SHA-256 of
          * [deviceSalt] + value, first 16 hex digits. [deviceSalt] is random per device and never sent.
          */
         fun hashForCounting(value: String, deviceSalt: String): String =
             MessageDigest.getInstance("SHA-256").digest("$deviceSalt:$value".toByteArray()).take(8).joinToString("") { "%02x".format(it) }
+    }
+}
+
+/**
+ * Time spent on each screen: [enter] sends screen_view, and the screen left gets a screen_time with its duration (at most
+ * [maxMs]: a TV left on). Screens are feature ids or [EventCatalog.OTHER_SCREENS].
+ */
+class ScreenClock(private val telemetry: () -> Telemetry?, private val clock: () -> Long = { System.currentTimeMillis() },
+                  private val maxMs: Long = 4 * 3_600_000L) {
+    private var current: String? = null
+    private var since = 0L
+
+    @Synchronized fun enter(screen: String) {
+        if (screen == current) return
+        leave()
+        current = screen; since = clock()
+        telemetry()?.screenView(screen)
+    }
+
+    @Synchronized fun leave() {
+        val c = current ?: return
+        current = null
+        val ms = clock() - since
+        if (ms >= 1000) telemetry()?.screenTime(c, minOf(ms, maxMs))
+    }
+
+    val screen: String? @Synchronized get() = current
+}
+
+/**
+ * App session: starts when the first screen of the app is shown, ends [graceMs] after the last one was hidden (a screen
+ * replacing another is not a new session). The app calls [shown] / [hidden] from its activities' onStart / onStop, and
+ * [check] from a timer.
+ */
+class SessionTracker(private val telemetry: () -> Telemetry?, private val clock: () -> Long = { System.currentTimeMillis() },
+                     private val graceMs: Long = 30_000) {
+    private var visible = 0
+    private var hiddenAt = 0L
+
+    @Synchronized fun shown() {
+        if (visible++ == 0) {
+            val t = telemetry() ?: return
+            if (t.sessionId != null && hiddenAt > 0 && clock() - hiddenAt > graceMs) t.endSession(hiddenAt)
+            if (t.sessionId == null) t.startSession()
+            hiddenAt = 0
+        }
+    }
+
+    @Synchronized fun hidden() {
+        if (visible > 0 && --visible == 0) hiddenAt = clock()
+    }
+
+    @Synchronized fun check() {
+        if (visible == 0 && hiddenAt > 0 && clock() - hiddenAt > graceMs) {
+            telemetry()?.let { if (it.sessionId != null) it.endSession(hiddenAt) }
+            hiddenAt = 0
+        }
     }
 }

@@ -54,7 +54,7 @@ fun DownloadsEntry(client: TvClient) {
     LaunchedEffect(client.base, client.pin) { DlPrefs(ctx).remember(client.base, client.pin) }
     HorizontalDivider()
     ListItem(
-        modifier = Modifier.clickable { open = true },
+        modifier = Modifier.clickable { PhoneConnect.feature("downloads", "menu"); open = true },
         colors = ListItemDefaults.colors(containerColor = MaterialTheme.colorScheme.background),
         leadingContent = { Icon(Icons.Filled.Download, null, tint = MaterialTheme.colorScheme.primary) },
         headlineContent = { Text("Téléchargements sur la TV") },

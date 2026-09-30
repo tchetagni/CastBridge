@@ -9,9 +9,16 @@ android {
         applicationId = "castbridge.receiver"
         minSdk = 26
         targetSdk = 35
-        versionCode = 18
-        versionName = "0.9"
+        // -Pcastbridge.versionCode / -Pcastbridge.versionName: build a higher version to test the automatic updates
+        versionCode = (project.findProperty("castbridge.versionCode") as String?)?.toInt() ?: 18
+        versionName = (project.findProperty("castbridge.versionName") as String?) ?: "0.9"
+        // For a LOCAL test server only (docs/API-SERVER.md, « Tester en local »): -Pcastbridge.serverUrl=http://10.0.2.2:7090 and
+        // -Pcastbridge.extraUpdateKey=<its public key>. Both empty by default: the apps built for Esaie talk to
+        // https://bridge.sti-cm.com and trust the production key alone (UpdateKeys).
+        buildConfigField("String", "EXTRA_UPDATE_KEY", "\"${(project.findProperty("castbridge.extraUpdateKey") as String?) ?: ""}\"")
+        buildConfigField("String", "DEFAULT_SERVER", "\"${(project.findProperty("castbridge.serverUrl") as String?) ?: ""}\"")
     }
+    buildFeatures { buildConfig = true }
     splits {
         abi {
             isEnable = true

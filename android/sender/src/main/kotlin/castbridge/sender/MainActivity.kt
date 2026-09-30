@@ -29,13 +29,56 @@ import kotlinx.coroutines.launch
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent { CastTheme { Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) { Root() } } }
+        setContent { CastTheme { Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) { Gate() } } }
+        installFrom(intent)
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        installFrom(intent)
+    }
+
+    /** « Mise à jour prête — Installer » notification: install now (Android asks for confirmation). */
+    private fun installFrom(i: Intent?) {
+        if (i?.getBooleanExtra(PhoneUpdater.EXTRA_INSTALL, false) != true) return
+        i.removeExtra(PhoneUpdater.EXTRA_INSTALL)
+        PhoneConnect.feature("updates", "notification")
+        PhoneConnect.agent.post { if (update.file != null) offerInstall(true) else checkUpdate(castbridge.core.update.UpdateSchedule.Trigger.USER) }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        PhoneConnect.screens.leave()
+    }
+
+    /** Information screen first (nothing sent before), then a mandatory update if any, then the app. */
+    @Composable
+    fun Gate() {
+        rememberLinkVersion()
+        val st = PhoneConnect.state
+        var consented by remember { mutableStateOf(!st.needsConsent) }
+        if (st.needsConsent) consented = false
+        val u = PhoneConnect.link.update
+        when {
+            !consented -> ConsentScreen { consented = true }
+            mustUpdate(u) -> MandatoryUpdateScreen(u)
+            else -> Root()
+        }
     }
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun Root() {
         var tab by rememberSaveable { mutableStateOf(0) }
+        var settings by rememberSaveable { mutableStateOf(false) }
+        // screen_time per tab (ids of EventCatalog: the "CastBridge TV" tab is the app's home)
+        val tabScreens = listOf("cast", "home", "quiz", "chess", "player", "learn")
+        LaunchedEffect(tab, settings) { if (!settings) PhoneConnect.screens.enter(tabScreens[tab]) }
+        fun select(i: Int) {
+            if (i != tab) listOf("cast", null, "quiz", "chess", "player", "learn")[i]?.let { PhoneConnect.feature(it, "tile") }
+            tab = i
+        }
         Scaffold(
             containerColor = MaterialTheme.colorScheme.background,
             topBar = {
@@ -43,22 +86,24 @@ class MainActivity : ComponentActivity() {
                     TopAppBar(
                         title = { Text("CastBridge") },
                         navigationIcon = { Icon(Icons.Filled.Cast, null, Modifier.padding(start = 16.dp, end = 8.dp), tint = MaterialTheme.colorScheme.primary) },
+                        actions = { IconButton({ settings = true }) { Icon(Icons.Filled.Settings, "Réglages") } },
                         colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.surface),
                     )
                     // scrollable: four tabs never squeeze or wrap their labels on a narrow phone
                     ScrollableTabRow(selectedTabIndex = tab, containerColor = MaterialTheme.colorScheme.surface, edgePadding = 0.dp) {
-                        Tab(tab == 0, onClick = { tab = 0 }, text = { Text("TV DLNA", maxLines = 1) })
-                        Tab(tab == 1, onClick = { tab = 1 }, text = { Text("CastBridge TV", maxLines = 1) })
-                        Tab(tab == 2, onClick = { tab = 2 }, text = { Text("Quiz", maxLines = 1) })
-                        Tab(tab == 3, onClick = { tab = 3 }, text = { Text("Échecs", maxLines = 1) })
-                        Tab(tab == 4, onClick = { tab = 4 }, text = { Text("Sur le téléphone", maxLines = 1) })
-                        Tab(tab == 5, onClick = { tab = 5 }, text = { Text("Apprendre", maxLines = 1) })
+                        Tab(tab == 0, onClick = { select(0) }, text = { Text("TV DLNA", maxLines = 1) })
+                        Tab(tab == 1, onClick = { select(1) }, text = { Text("CastBridge TV", maxLines = 1) })
+                        Tab(tab == 2, onClick = { select(2) }, text = { Text("Quiz", maxLines = 1) })
+                        Tab(tab == 3, onClick = { select(3) }, text = { Text("Échecs", maxLines = 1) })
+                        Tab(tab == 4, onClick = { select(4) }, text = { Text("Sur le téléphone", maxLines = 1) })
+                        Tab(tab == 5, onClick = { select(5) }, text = { Text("Apprendre", maxLines = 1) })
                     }
                 }
             },
             bottomBar = { castbridge.sender.player.CastMiniBar(Modifier.navigationBarsPadding()) },
         ) { pad -> Box(Modifier.padding(pad).fillMaxSize()) { when (tab) { 0 -> App(); 1 -> TvHub(); 2 -> QuizScreen(); 3 -> ChessScreen(); 4 -> castbridge.sender.player.PhoneLibraryScreen(); else -> LearnScreen() } } }
         MoveHandler()
+        if (settings) SettingsScreen { settings = false }
     }
 
     private fun startServer() {
@@ -117,9 +162,11 @@ class MainActivity : ComponentActivity() {
                 val url = "http://$ip:8089/media/${s.register(uri, mime)}.$ext"
                 val didl = Didl.item(url, fileName, mime, Didl.protocolInfo(mime, MediaServer.FEATURES))
                 status = "Envoi vers ${r.name}…"
+                val t0 = System.currentTimeMillis()
+                PhoneConnect.track("cast_start", mapOf("channel" to "dlna", "mode" to "direct"))
                 runCatching { Upnp.play(r, url, didl) }
-                    .onSuccess { playing = true; paused = false; status = "" }
-                    .onFailure { status = "Échec : ${it.message}" }
+                    .onSuccess { playing = true; paused = false; status = ""; PhoneConnect.castEnd("dlna", "direct", 0, System.currentTimeMillis() - t0, true) }
+                    .onFailure { status = "Échec : ${it.message}"; PhoneConnect.castEnd("dlna", "direct", 0, System.currentTimeMillis() - t0, false, "refused") }
             }
         }
         LaunchedEffect(Unit) {

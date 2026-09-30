@@ -33,6 +33,7 @@
     <uses-feature android:name="android.software.leanback" android:required="false" />
     <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
     <application
+        android:name=".TvApp"
         android:label="CastBridge TV"
         android:banner="@drawable/banner"
         android:icon="@drawable/banner"
@@ -86,6 +87,10 @@
             android:screenOrientation="landscape"
             android:windowSoftInputMode="adjustPan"
             android:configChanges="orientation|screenSize|screenLayout|keyboard|keyboardHidden|navigation" />
+        <!-- Server link (docs/TELEMETRY.md, docs/API-SERVER.md): information screen, updates, privacy, connection -->
+        <activity android:name=".ServerActivity" android:exported="false" android:screenOrientation="landscape"
+            android:launchMode="singleTop" android:windowSoftInputMode="adjustPan"
+            android:theme="@android:style/Theme.DeviceDefault.NoActionBar" />
         <activity android:name=".DownloadsActivity" android:exported="false" android:screenOrientation="landscape"
             android:theme="@android:style/Theme.DeviceDefault.NoActionBar" />
         <service android:name=".DownloadService" android:exported="false" android:foregroundServiceType="dataSync" />

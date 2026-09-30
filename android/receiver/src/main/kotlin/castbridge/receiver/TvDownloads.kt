@@ -73,10 +73,30 @@ class TvDownloads private constructor(private val app: Context, @Volatile privat
             val what = f.files.firstOrNull() ?: f.name
             main.post { runCatching { Toast.makeText(app, "Téléchargement terminé : $what", Toast.LENGTH_LONG).show() } }
             notifyDone(f.name, f.volumeLabel)
+            val seen = followed.remove(f.id)
+            TvConnect.track("download", mapOf("type" to (seen?.first ?: "http"), "bytes" to f.size, "ok" to true,
+                "ms" to seen?.let { (_, at) -> (System.currentTimeMillis() - at).coerceAtLeast(0) }))
         }
         if (manager.hasWork()) supervisor.start()             // otherwise aria2 starts with the first download
         manager.start()
-        timer.scheduleWithFixedDelay({ runCatching { engineOnDemand(); keepAwake() } }, 3, 10, TimeUnit.SECONDS)
+        timer.scheduleWithFixedDelay({ runCatching { engineOnDemand(); keepAwake(); followStats() } }, 3, 10, TimeUnit.SECONDS)
+    }
+
+    /** Download id → (type for the statistics, first seen): failures are counted once, successes in the finished listener. */
+    private val followed = java.util.concurrent.ConcurrentHashMap<String, Pair<String, Long>>()
+    private val failed = java.util.Collections.newSetFromMap(java.util.concurrent.ConcurrentHashMap<String, Boolean>())
+
+    private fun followStats() {
+        for (v in manager.views()) {
+            val type = when (v.kind) { "magnet" -> "magnet"; "torrent", "metalink" -> "torrent"; else -> "http" }
+            followed.putIfAbsent(v.id, type to maxOf(v.addedAt.takeIf { it > 0 } ?: System.currentTimeMillis(), 0))
+            if (v.state == DlState.ERROR && failed.add(v.id)) {
+                val at = followed[v.id]?.second ?: System.currentTimeMillis()
+                TvConnect.track("download", mapOf("type" to type, "bytes" to v.done, "ok" to false, "error" to "aria2",
+                    "ms" to (System.currentTimeMillis() - at).coerceAtLeast(0)))
+                TvConnect.error("downloads", "download", v.error ?: "échec du téléchargement")
+            } else if (v.state != DlState.ERROR) failed.remove(v.id)
+        }
     }
 
     /** aria2 runs only while there are downloads (plus 3 idle minutes): its DHT and buffers cost RAM on a 1 GB TV. */

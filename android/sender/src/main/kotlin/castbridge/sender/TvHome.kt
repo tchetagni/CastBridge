@@ -195,18 +195,19 @@ fun TvHome(onAdvanced: () -> Unit) {
 
         // Tasks
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            Task(Icons.Filled.CloudUpload, "Envoyer une vidéo", "Copiée : elle reste aussi sur le téléphone", Modifier.weight(1f)) { moveNext = false; pick.launch(arrayOf("video/*", "audio/*")) }
-            Task(Icons.Filled.DriveFileMove, "Déplacer vers la TV", "Libère la place du téléphone", Modifier.weight(1f)) { moveNext = true; pick.launch(arrayOf("video/*", "audio/*")) }
+            Task(Icons.Filled.CloudUpload, "Envoyer une vidéo", "Copiée : elle reste aussi sur le téléphone", Modifier.weight(1f)) { PhoneConnect.feature("send"); moveNext = false; pick.launch(arrayOf("video/*", "audio/*")) }
+            Task(Icons.Filled.DriveFileMove, "Déplacer vers la TV", "Libère la place du téléphone", Modifier.weight(1f)) { PhoneConnect.feature("move"); moveNext = true; pick.launch(arrayOf("video/*", "audio/*")) }
         }
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             Task(Icons.Filled.PlayCircle, "Regarder sur la TV", if (now != null) "Lecture en cours" else "Choisir une vidéo", Modifier.weight(1f)) {
+                PhoneConnect.feature("watch_on_tv")
                 if (now != null) showPlayer = true else showLibrary = true
             }
-            Task(Icons.Filled.SettingsRemote, "Télécommande", "Flèches, OK, volume, clavier", Modifier.weight(1f)) { RemoteActivity.open(ctx) }
+            Task(Icons.Filled.SettingsRemote, "Télécommande", "Flèches, OK, volume, clavier", Modifier.weight(1f)) { PhoneConnect.feature("remote"); RemoteActivity.open(ctx) }
         }
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            Task(Icons.Filled.VideoLibrary, "Bibliothèque de la TV", "${items.size} fichier(s)", Modifier.weight(1f)) { showLibrary = true }
-            Task(Icons.Filled.SwapVert, "Échanger des fichiers", "Dans les deux sens", Modifier.weight(1f)) { showExchange = true }
+            Task(Icons.Filled.VideoLibrary, "Bibliothèque de la TV", "${items.size} fichier(s)", Modifier.weight(1f)) { PhoneConnect.feature("tv_library"); showLibrary = true }
+            Task(Icons.Filled.SwapVert, "Échanger des fichiers", "Dans les deux sens", Modifier.weight(1f)) { PhoneConnect.feature("file_exchange"); showExchange = true }
         }
 
         // Continue watching

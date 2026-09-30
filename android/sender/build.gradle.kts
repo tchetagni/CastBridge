@@ -10,12 +10,17 @@ android {
         applicationId = "castbridge.sender"
         minSdk = 26
         targetSdk = 35
-        versionCode = 8
-        versionName = "1.0-beta"
+        // -Pcastbridge.versionCode / -Pcastbridge.versionName: build a higher version to test the automatic updates
+        versionCode = (project.findProperty("castbridge.versionCode") as String?)?.toInt() ?: 8
+        versionName = (project.findProperty("castbridge.versionName") as String?) ?: "1.0-beta"
+        // For a LOCAL test server only (docs/API-SERVER.md, « Tester en local »): -Pcastbridge.serverUrl=http://10.0.2.2:7090 and
+        // -Pcastbridge.extraUpdateKey=<its public key>. Both empty by default: production server and production key only (UpdateKeys).
+        buildConfigField("String", "EXTRA_UPDATE_KEY", "\"${(project.findProperty("castbridge.extraUpdateKey") as String?) ?: ""}\"")
+        buildConfigField("String", "DEFAULT_SERVER", "\"${(project.findProperty("castbridge.serverUrl") as String?) ?: ""}\"")
     }
     compileOptions { sourceCompatibility = JavaVersion.VERSION_17; targetCompatibility = JavaVersion.VERSION_17 }
     kotlinOptions { jvmTarget = "17" }
-    buildFeatures { compose = true }
+    buildFeatures { compose = true; buildConfig = true }
 }
 dependencies {
     implementation(project(":core"))

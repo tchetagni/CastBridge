@@ -64,7 +64,16 @@ class BtGatewayService : Service() {
                 backoff = 1000
                 _state.value = "La TV utilise l'Internet du téléphone"
                 notify("La TV utilise l'Internet du téléphone")
-                Exit(Mux(s.inputStream, s.outputStream), pin, connect = ::openOutbound, log = { Log.i(TAG, it) }, diag = ::runDiag).run()
+                val mux = Mux(s.inputStream, s.outputStream)
+                val t0 = System.currentTimeMillis()
+                active = true
+                try {
+                    Exit(mux, pin, connect = ::openOutbound, log = { Log.i(TAG, it) }, diag = ::runDiag).run()
+                } finally {
+                    active = false
+                    PhoneConnect.track("gateway_session", mapOf("ms" to System.currentTimeMillis() - t0,
+                        "bytes" to mux.received.get() + mux.sent.get()))
+                }
             } catch (e: Exception) {
                 Log.w(TAG, "gateway link ended", e)
                 if (e.message?.contains("PIN") == true) { _state.value = "Code PIN refusé par la TV"; stopping = true; break }
@@ -133,10 +142,14 @@ class BtGatewayService : Service() {
         private const val EXTRA_PIN = "pin"
         private const val ACTION_STOP = "castbridge.sender.GATEWAY_STOP"
         private val _state = MutableStateFlow("Partage inactif")
+        /** A TV is using the phone's Internet right now (reported to the server as btGateway). */
+        @Volatile var active = false; private set
         val state: StateFlow<String> = _state
 
-        fun start(ctx: Context, tvAddress: String, pin: String) =
+        fun start(ctx: Context, tvAddress: String, pin: String) {
+            PhoneConnect.feature("bt_gateway")
             ctx.startForegroundService(Intent(ctx, BtGatewayService::class.java).putExtra(EXTRA_ADDR, tvAddress).putExtra(EXTRA_PIN, pin))
+        }
         fun stop(ctx: Context) = ctx.startService(Intent(ctx, BtGatewayService::class.java).setAction(ACTION_STOP))
     }
 }

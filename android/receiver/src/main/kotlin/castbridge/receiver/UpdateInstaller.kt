@@ -50,8 +50,14 @@ class UpdateInstaller(
                     if (why != null) set("confirm", "Validez l'installation sur la TV : $why")
                 }
                 PackageInstaller.STATUS_SUCCESS ->
-                    if (pending.decrementAndGet() <= 0) set("done", "Installée") else set("installing", "Application installée, suivante…")
-                else -> { pending.decrementAndGet(); set("failed", "Échec de l'installation de ${i.getStringExtra(PackageInstaller.EXTRA_PACKAGE_NAME) ?: "l'app"} ($st) : $msg") }
+                    if (i.getBooleanExtra(EXTRA_AUTO, false)) set("done", "Mise à jour installée")
+                    else if (pending.decrementAndGet() <= 0) set("done", "Installée") else set("installing", "Application installée, suivante…")
+                else -> {
+                    if (i.getBooleanExtra(EXTRA_AUTO, false)) {
+                        set("failed", "Mise à jour non installée ($st) : $msg")
+                        autoFailed?.invoke(statusCode(st)); autoFailed = null
+                    } else { pending.decrementAndGet(); set("failed", "Échec de l'installation de ${i.getStringExtra(PackageInstaller.EXTRA_PACKAGE_NAME) ?: "l'app"} ($st) : $msg") }
+                }
             }
         }
     }
@@ -164,6 +170,62 @@ class UpdateInstaller(
         }
     }
 
+    @Volatile private var autoFailed: ((String) -> Unit)? = null
+
+    /**
+     * Automatic update from the CastBridge server (TvConnect): [apk] was already checked against the signed manifest
+     * (SHA-256, size). Installs it silently when Android allows it for this installer (Android 12+, app installed by
+     * itself), else the TV shows its usual confirmation (on screen, or a notification when the app is in the background).
+     * Returns false if nothing was started (then [failed] was called); after a start, [failed] is called on refusal.
+     * Success = Android replaces the app and restarts it (MY_PACKAGE_REPLACED → BootReceiver → TvService).
+     */
+    @Suppress("DEPRECATION")
+    fun installVerified(apk: File, versionCode: Int, versionName: String, failed: (String) -> Unit): Boolean {
+        val a = inspect(apk) ?: run { failed("invalid"); return false }
+        if (a.pkg != ctx.packageName) { failed("package"); return false }
+        if (a.code < installedCode() || a.code != versionCode.toLong()) { failed("version"); return false }
+        // Android refuses an update signed with another key: say it clearly (debug key of the build machine, see docs/API-SERVER.md)
+        if (!sameSigner(a.info)) { set("failed", "Mise à jour ignorée : signée avec une autre clé que l'app installée"); failed("signature"); return false }
+        if (!canInstall()) {
+            val why = launch(Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, Uri.parse("package:${ctx.packageName}")), "Autorisez l'installation des mises à jour")
+            set("permission", "Mise à jour $versionName prête : autorisez « Installer des apps inconnues » pour CastBridge TV" + (why?.let { " ($it)" } ?: ""))
+            failed("permission")
+            return false
+        }
+        return try {
+            val inst = ctx.packageManager.packageInstaller
+            val params = PackageInstaller.SessionParams(PackageInstaller.SessionParams.MODE_FULL_INSTALL)
+            params.setAppPackageName(ctx.packageName)
+            if (Build.VERSION.SDK_INT >= 31) params.setRequireUserAction(PackageInstaller.SessionParams.USER_ACTION_NOT_REQUIRED)
+            params.setSize(apk.length())
+            val id = inst.createSession(params)
+            inst.openSession(id).use { s ->
+                apk.inputStream().use { inp -> s.openWrite("base.apk", 0, apk.length()).use { o -> inp.copyTo(o, 64 * 1024); s.fsync(o) } }
+                autoFailed = failed
+                val pi = PendingIntent.getBroadcast(ctx, id, Intent(ACTION).setPackage(ctx.packageName).putExtra(EXTRA_AUTO, true),
+                    PendingIntent.FLAG_UPDATE_CURRENT or (if (Build.VERSION.SDK_INT >= 31) PendingIntent.FLAG_MUTABLE else 0))
+                set("installing", "Installation de la mise à jour $versionName…")
+                s.commit(pi.intentSender)
+            }
+            true
+        } catch (e: Exception) {
+            Log.w(TAG, "auto install", e)
+            set("failed", "Installation de la mise à jour impossible : ${e.message}")
+            failed("session")
+            false
+        }
+    }
+
+    private fun statusCode(st: Int) = when (st) {
+        PackageInstaller.STATUS_FAILURE_ABORTED -> "aborted"
+        PackageInstaller.STATUS_FAILURE_BLOCKED -> "blocked"
+        PackageInstaller.STATUS_FAILURE_CONFLICT -> "conflict"
+        PackageInstaller.STATUS_FAILURE_INCOMPATIBLE -> "incompatible"
+        PackageInstaller.STATUS_FAILURE_INVALID -> "invalid"
+        PackageInstaller.STATUS_FAILURE_STORAGE -> "storage"
+        else -> "status_$st"
+    }
+
     @Suppress("DEPRECATION")
     private fun sameSigner(archive: android.content.pm.PackageInfo): Boolean {
         fun digests(pi: android.content.pm.PackageInfo): Set<String> {
@@ -179,5 +241,6 @@ class UpdateInstaller(
     private companion object {
         const val TAG = "CastBridgeUpdate"
         const val ACTION = "castbridge.receiver.UPDATE_RESULT"
+        const val EXTRA_AUTO = "castbridge.auto"
     }
 }

@@ -41,9 +41,11 @@ class BtGatewayHost(private val ctx: Context, private val guard: PinGuard, priva
                     val sock = try { ss.accept() } catch (e: IOException) { break }
                     val peer = runCatching { sock.remoteDevice.name ?: sock.remoteDevice.address }.getOrDefault("téléphone")
                     Thread({
-                        try { entry.attach(Mux(sock.inputStream, sock.outputStream), peer) }
+                        val startedAt = System.currentTimeMillis()
+                        var mux: Mux? = null
+                        try { mux = Mux(sock.inputStream, sock.outputStream); entry.attach(mux, peer) }
                         catch (e: Exception) { Log.w(TAG, "gateway link: ${e.javaClass.simpleName}") }
-                        finally { runCatching { sock.close() }; refresh() }
+                        finally { runCatching { sock.close() }; refresh(); mux?.let { m -> runCatching { sessionEnded(startedAt, m) } } }
                     }, "gw-link").apply { isDaemon = true; start() }
                 }
             }, "gw-accept").apply { isDaemon = true; start() }
@@ -72,6 +74,12 @@ class BtGatewayHost(private val ctx: Context, private val guard: PinGuard, priva
         if (entry.connected && connectedSince == 0L) connectedSince = System.currentTimeMillis()
         if (!entry.connected) connectedSince = 0L
     }.let { status(if (entry.connected) "Internet via le téléphone (${entry.peerName})" else null) }
+
+    /** gateway_session (docs/TELEMETRY.md): duration and volume of one phone link, never the phone's name. */
+    private fun sessionEnded(startedAt: Long, mux: Mux) {
+        TvConnect.track("gateway_session", mapOf("ms" to (System.currentTimeMillis() - startedAt).coerceAtLeast(0),
+            "bytes" to mux.received.get() + mux.sent.get()))
+    }
 
     /** Proxy for the app's own connections when a phone shares its Internet, else null (use the TV's own network). */
     fun proxy(): Proxy? = if (entry.connected) Proxy(Proxy.Type.SOCKS, InetSocketAddress("127.0.0.1", PORT)) else null
