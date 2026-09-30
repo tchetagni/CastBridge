@@ -38,6 +38,12 @@ public class AdminWebController {
     @GetMapping("/admin/login")
     public String login() { return "admin/login"; }
 
+    /** "/admin/" (trailing slash) and "/admin/login/" are typed or bookmarked all the time: send them to the real page. */
+    @GetMapping({"/admin/", "/admin/login/"})
+    public String trailingSlash(jakarta.servlet.http.HttpServletRequest req) {
+        return "redirect:" + (req.getRequestURI().contains("/login") ? "/admin/login" : "/admin");
+    }
+
     @GetMapping("/admin")
     public String dashboard(@RequestParam(required = false) String from, @RequestParam(required = false) String to,
                             @RequestParam(required = false) String app, @RequestParam(required = false) Integer version,
