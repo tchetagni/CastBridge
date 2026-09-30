@@ -61,6 +61,8 @@ class BtUploadService : Service() {
         if (total <= 0) { finish(ResumableUpload.State.Failed("Fichier illisible")); return }
         val adapter = getSystemService(BluetoothManager::class.java)?.adapter
         if (adapter == null || !adapter.isEnabled) { finish(ResumableUpload.State.Failed("Bluetooth désactivé")); return }
+        castStart = System.currentTimeMillis(); castTotal = total; castChannel = "bluetooth"
+        PhoneConnect.track("cast_start", mapOf("channel" to "bluetooth", "mode" to "copy", "bytes" to total))
         var lastNotif = 0L
         fun connect(): Link {
             runCatching { adapter.cancelDiscovery() }   // needs BLUETOOTH_SCAN on Android 12+: optional, never fatal
@@ -80,11 +82,11 @@ class BtUploadService : Service() {
         for (r in routes) {
             if (cancelled) break
             val res = when (r) {
-                is LinkPlanner.Route.Lan -> { _route.value = r.label; httpUpload(uri, name, total, r.base, pin, name) }
+                is LinkPlanner.Route.Lan -> { _route.value = r.label; castChannel = "wifi"; httpUpload(uri, name, total, r.base, pin, name) }
                 is LinkPlanner.Route.Direct -> {
                     _route.value = "${r.label} : connexion au réseau de la TV (validez sur le téléphone)…"
                     val joined = joinWifiDirect(r.ssid, r.pass)
-                    if (joined == null) null else try { _route.value = r.label; httpUpload(uri, name, total, r.base, pin, name) } finally { leaveWifiDirect(joined) }
+                    if (joined == null) null else try { _route.value = r.label; castChannel = "wifidirect"; httpUpload(uri, name, total, r.base, pin, name) } finally { leaveWifiDirect(joined) }
                 }
                 LinkPlanner.Route.Bluetooth -> null                // below
             }
@@ -92,6 +94,7 @@ class BtUploadService : Service() {
             if (r == LinkPlanner.Route.Bluetooth) break
         }
         _route.value = "Bluetooth"
+        castChannel = "bluetooth"
         val up = ResumableBtUpload(name, total, pin,
             connect = { connect() },
             openAt = { off -> openAt(uri, off) },
@@ -178,7 +181,19 @@ class BtUploadService : Service() {
             .addAction(Notification.Action.Builder(null, "Annuler", cancel).build()).build()
     }
 
-    private fun finish(s: ResumableUpload.State) { _state.value = s; stopSelf() }
+    @Volatile private var castStart = 0L
+    @Volatile private var castTotal = 0L
+    @Volatile private var castChannel = "bluetooth"
+
+    private fun finish(s: ResumableUpload.State) {
+        if (castStart > 0) {
+            val ok = s == ResumableUpload.State.Done
+            PhoneConnect.castEnd(castChannel, "copy", if (ok) castTotal else 0, System.currentTimeMillis() - castStart, ok,
+                when { ok -> null; cancelled -> "cancelled"; else -> "failed" })
+            castStart = 0
+        }
+        _state.value = s; stopSelf()
+    }
 
     override fun onDestroy() { cancelled = true; super.onDestroy() }
 

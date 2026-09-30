@@ -82,6 +82,9 @@ class DownloadService : Service() {
             runCatching { getSystemService(NotificationManager::class.java).notify(NOTIF, notification("Téléchargement de ${job.name}", pct)) }
         }
         if (res is ResumableDownload.State.Done) runCatching { sink.finish() }.onFailure { Log.w(TAG, "finish: ${it.message}") }
+        val ok = res is ResumableDownload.State.Done
+        PhoneConnect.track("download", mapOf("type" to "http", "bytes" to (prev - start).coerceAtLeast(0), "ms" to (System.nanoTime() - t0) / 1_000_000,
+            "ok" to ok, "error" to if (ok) null else if (cancelled) "cancelled" else "failed"))
         finish(Progress(job, res, 0, _progress.value.average, sink.label))
     }
 

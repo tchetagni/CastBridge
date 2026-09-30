@@ -39,6 +39,7 @@ import java.util.concurrent.ConcurrentHashMap
 class PlaybackService : MediaLibraryService() {
     private var session: MediaLibrarySession? = null
     private lateinit var resume: ResumeTracker
+    private var stats: PlaybackStats? = null
 
     override fun onCreate() {
         super.onCreate()
@@ -58,6 +59,7 @@ class PlaybackService : MediaLibraryService() {
             .setWakeMode(C.WAKE_MODE_NETWORK)
             .build()
         resume = ResumeTracker(this, p)
+        stats = PlaybackStats(p)
         val open = PendingIntent.getActivity(this, 0, Intent(this, PlayerActivity::class.java)
             .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
         val s = MediaLibrarySession.Builder(this, p, LibraryCallback()).setSessionActivity(open).build()
@@ -76,6 +78,7 @@ class PlaybackService : MediaLibraryService() {
 
     override fun onDestroy() {
         _player.value = null
+        stats?.detach(); stats = null
         session?.let { s -> resume.save(); resume.detach(); s.player.release(); s.release() }
         session = null
         super.onDestroy()

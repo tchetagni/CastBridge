@@ -12,10 +12,13 @@ android {
         targetSdk = 35
         versionCode = 8
         versionName = "1.0-beta"
+        // Extra Ed25519 key accepted for update manifests: empty by default (production key only, UpdateKeys);
+        // `-Pcastbridge.extraUpdateKey=<base64>` for an end-to-end test against a local server (docs/API-SERVER.md).
+        buildConfigField("String", "EXTRA_UPDATE_KEY", "\"${(project.findProperty("castbridge.extraUpdateKey") as String?) ?: ""}\"")
     }
     compileOptions { sourceCompatibility = JavaVersion.VERSION_17; targetCompatibility = JavaVersion.VERSION_17 }
     kotlinOptions { jvmTarget = "17" }
-    buildFeatures { compose = true }
+    buildFeatures { compose = true; buildConfig = true }
 }
 dependencies {
     implementation(project(":core"))
