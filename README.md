@@ -57,6 +57,14 @@ Serveur SSH embarqué (module `:sshd`, MINA SSHD : shell, SFTP), désactivé par
 **Sans réseau commun**, SSH passe aussi par un tunnel Bluetooth (TV <-> passerelle du téléphone, ou `tools/bt-ssh-bridge.py` sous Linux) : `docs/ADMIN.md` §10.
 Aucun binaire natif (busybox...) n'est embarqué.
 
+## Serveur CastBridge (branche `feat/backend`)
+
+Serveur Java Spring Boot + MySQL en Docker (`backend/`, projet Maven séparé) : mises à jour automatiques des deux apps
+(manifestes signés Ed25519, APK choisi selon l'ABI, déploiement progressif), banque de questions du quiz
+(synchronisation incrémentale, tirages), suivi des appareils (enregistrement, heartbeats, plantages) et interface
+d'administration web `/admin`. Déploiement : `backend/README.md` ; routes et formats : `docs/API-SERVER.md`.
+Clients testés côté `:core` : `castbridge.core.update` et `castbridge.core.device`.
+
 ## Compilation
 
 Gradle 8.13 / 8.14 installé localement (pas de wrapper dans le dépôt), SDK 35 :
