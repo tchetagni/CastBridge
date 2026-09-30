@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/layout :: head('Appareil')}"></head>
+<body>
+<header th:replace="~{admin/layout :: nav}"></header>
+<main>
+    <div th:replace="~{admin/layout :: flash}"></div>
+    <p><a th:href="@{/admin/devices}">← Appareils</a></p>
+    <h1>
+        <span class="dot" th:classappend="${dev.blocked} ? 'blocked' : (${online} ? 'on' : 'off')"></span>
+        <span th:text="${dev.displayName()}">TV</span>
+        <small th:text="${dev.blocked} ? 'bloqué' : (${online} ? 'en ligne' : 'hors ligne · ' + ${@fmt.ago(dev.lastSeen)})"></small>
+    </h1>
+
+    <div class="cols">
+        <section class="card">
+            <h2>Fiche</h2>
+            <dl class="facts">
+                <dt>Application</dt><dd th:text="${dev.app == 'tv' ? 'App TV' : 'App téléphone'}"></dd>
+                <dt>Version</dt><dd th:text="${dev.versionName != null} ? |${dev.versionName} (${dev.versionCode})| : '—'"></dd>
+                <dt>Canal</dt><dd th:text="${channel} + (${dev.channelOverride != null} ? ' (forcé par l\'admin)' : '')"></dd>
+                <dt>Plateforme</dt><dd th:text="${@fmt.platform(dev.platform)}"></dd>
+                <dt>Fabricant / modèle</dt><dd th:text="|${dev.manufacturer ?: '—'} / ${dev.model ?: '—'}|"></dd>
+                <dt>Nom de l'appareil</dt><dd th:text="${@fmt.orDash(dev.deviceName)}"></dd>
+                <dt>Système</dt><dd th:text="|${dev.osName ?: 'Android'} · SDK ${dev.sdk ?: '?'}|"></dd>
+                <dt>Build</dt><dd class="wrap" th:text="${@fmt.orDash(dev.osBuild)}"></dd>
+                <dt>Empreinte</dt><dd class="wrap small" th:text="${@fmt.orDash(dev.fingerprint)}"></dd>
+                <dt>ABI</dt><dd th:text="|${dev.abi ?: '—'}${dev.supportedAbis != null ? ' (' + dev.supportedAbis + ')' : ''}|"></dd>
+                <dt>Écran</dt><dd th:text="|${dev.screen ?: '—'}${dev.densityDpi != null ? ' · ' + dev.densityDpi + ' dpi' : ''}|"></dd>
+                <dt>Mémoire vive</dt><dd th:text="${@fmt.mb(dev.ramTotalMb)}"></dd>
+                <dt>Stockage interne</dt>
+                <dd><span th:text="|${@fmt.mb(dev.storageFreeMb)} libres sur ${@fmt.mb(dev.storageTotalMb)}|"></span>
+                    <meter th:if="${@fmt.usedPct(dev.storageFreeMb, dev.storageTotalMb) != null}" min="0" max="100" low="70" high="90" optimum="10"
+                           th:value="${@fmt.usedPct(dev.storageFreeMb, dev.storageTotalMb)}"></meter></dd>
+                <dt>Clé USB</dt><dd th:text="${dev.usbPresent == null} ? '—' : (${dev.usbPresent} ? 'présente, ' + ${@fmt.mb(dev.usbFreeMb)} + ' libres' : 'absente')"></dd>
+                <dt>Fonctions</dt>
+                <dd>passerelle Bluetooth <b th:text="${@fmt.yesNo(dev.btGateway)}"></b> · SSH <b th:text="${@fmt.yesNo(dev.sshEnabled)}"></b>
+                    · Wi-Fi Direct <b th:text="${@fmt.yesNo(dev.wifiDirect)}"></b></dd>
+                <dt>Vidéos</dt><dd th:text="${@fmt.orDash(dev.videoCount)}"></dd>
+                <dt>Localisation</dt><dd th:text="|${dev.country ?: '—'}${dev.city != null ? ' · ' + dev.city : ''}|"></dd>
+                <dt>Adresse IP</dt><dd th:text="${dev.ip != null} ? ${dev.ip} + ' (gardée 30 jours au plus)' : '—'"></dd>
+                <dt>Premier contact</dt><dd th:text="${@fmt.date(dev.firstSeen)}"></dd>
+                <dt>Dernier contact</dt><dd th:text="${@fmt.date(dev.lastSeen)}"></dd>
+                <dt>Dernière erreur</dt><dd class="wrap" th:text="${dev.lastError != null} ? ${dev.lastError} + ' (' + ${@fmt.date(dev.lastErrorAt)} + ')' : '—'"></dd>
+                <dt>Consentement</dt><dd th:text="${dev.usageConsent} ? 'statistiques d’usage acceptées (' + ${@fmt.date(dev.consentAt)} + ')' : 'essentiel seulement'"></dd>
+                <dt>Identifiant</dt><dd class="small" th:text="${dev.publicId}"></dd>
+            </dl>
+        </section>
+
+        <section class="card">
+            <h2>Nom, note, groupe</h2>
+            <form th:action="@{/admin/devices/{id}/edit(id=${dev.publicId})}" method="post" class="stack">
+                <label>Nom affiché <input type="text" name="label" maxlength="80" th:value="${dev.label}" placeholder="ex. Salon Esaie"></label>
+                <label>Groupe <input type="text" name="group" maxlength="80" th:value="${dev.groupName}" placeholder="ex. Famille"></label>
+                <label>Note <textarea name="note" maxlength="1000" rows="3" th:text="${dev.note}"></textarea></label>
+                <button type="submit">Enregistrer</button>
+            </form>
+
+            <h2>Actions</h2>
+            <div class="actions">
+                <form th:action="@{/admin/devices/{id}/check-update(id=${dev.publicId})}" method="post">
+                    <button type="submit" th:disabled="${dev.forceUpdateCheck}"
+                            th:text="${dev.forceUpdateCheck} ? 'Vérification déjà demandée' : 'Forcer une vérification de mise à jour'"></button>
+                </form>
+                <form th:action="@{/admin/devices/{id}/channel(id=${dev.publicId})}" method="post" class="inline">
+                    <select name="channel">
+                        <option value="" th:selected="${dev.channelOverride == null}">Canal choisi par l'app</option>
+                        <option value="stable" th:selected="${dev.channelOverride == 'stable'}">Forcer stable</option>
+                        <option value="beta" th:selected="${dev.channelOverride == 'beta'}">Forcer beta</option>
+                    </select>
+                    <button type="submit">Appliquer</button>
+                </form>
+                <form th:action="@{/admin/devices/{id}/block(id=${dev.publicId})}" method="post">
+                    <input type="hidden" name="blocked" th:value="${!dev.blocked}">
+                    <button type="submit" th:class="${dev.blocked} ? '' : 'danger'"
+                            th:attr="data-confirm=${dev.blocked} ? null : 'Bloquer cet appareil ? Il ne recevra plus de mises à jour ni de quiz.'"
+                            th:text="${dev.blocked} ? 'Débloquer' : 'Bloquer l\'appareil'"></button>
+                </form>
+                <form th:action="@{/admin/devices/{id}/delete(id=${dev.publicId})}" method="post">
+                    <button type="submit" class="danger ghost" data-confirm="Effacer cet appareil, son historique et toutes ses données d'usage ? (droit à l'effacement, irréversible)">Effacer l'appareil et ses données</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <section class="card">
+        <h2>Contacts par jour <small>(30 derniers jours)</small></h2>
+        <p th:if="${bars.isEmpty()}" class="muted">Aucun contact enregistré.</p>
+        <svg th:unless="${bars.isEmpty()}" class="spark" role="img" aria-label="Contacts par jour"
+             th:attr="viewBox=|0 0 ${bars.size() * 10} 60|" preserveAspectRatio="none" width="100%" height="60">
+            <rect th:each="b : ${bars}" width="8" th:attr="x=${b.x},y=${b.y},height=${b.h}"><title th:text="${b.title}"></title></rect>
+        </svg>
+    </section>
+
+    <div class="cols">
+        <section class="card">
+            <h2>Versions successives</h2>
+            <table class="compact">
+                <tr th:each="v : ${x.versions}"><td th:text="|${v.versionName ?: '?'} (${v.versionCode})|"></td><td th:text="${@fmt.date(v.firstSeen)}"></td></tr>
+            </table>
+            <h2>Installations <small>(une nouvelle ligne = réinstallation)</small></h2>
+            <table class="compact">
+                <tr th:each="i : ${x.installs}">
+                    <td class="small" th:text="${i.installId}"></td>
+                    <td th:text="|${@fmt.date(i.firstSeen)} → ${@fmt.date(i.lastSeen)}|"></td>
+                </tr>
+            </table>
+        </section>
+        <section class="card">
+            <h2>Plantages</h2>
+            <p th:if="${x.crashes.isEmpty()}" class="muted">Aucun plantage signalé.</p>
+            <details th:each="c : ${x.crashes}">
+                <summary th:text="|${@fmt.date(c.crashedAt)} · v${c.versionCode ?: '?'} · ${c.message}|"></summary>
+                <pre th:if="${c.detail != null}" th:text="${c.detail}"></pre>
+            </details>
+        </section>
+    </div>
+
+    <section class="card">
+        <h2>Chronologie de l'usage <small th:text="${dev.usageConsent} ? '(200 derniers événements)' : '(statistiques d’usage non acceptées : erreurs et mises à jour seulement)'"></small></h2>
+        <p th:if="${timeline.isEmpty()}" class="muted">Aucun événement.</p>
+        <div class="scroll" th:unless="${timeline.isEmpty()}">
+            <table class="compact">
+                <thead><tr><th>Date (appareil)</th><th>Événement</th><th>Détail</th><th>Durée</th><th>Résultat</th><th>Version</th></tr></thead>
+                <tbody>
+                <tr th:each="e : ${timeline}">
+                    <td class="nowrap" th:text="${@fmt.date(e.device_ts.toInstant())}"></td>
+                    <td th:text="${e.name}"></td>
+                    <td class="wrap small" th:text="${e.props}"></td>
+                    <td th:text="${e.num_ms != null} ? ${@fmt.duration(e.num_ms)} : ''"></td>
+                    <td th:text="${e.ok == null} ? '' : (${e.ok} ? 'ok' : 'échec')"></td>
+                    <td th:text="${e.version_code}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="card">
+        <h2>Derniers contacts détaillés <small>(gardés 30 jours)</small></h2>
+        <div class="scroll">
+        <table>
+            <thead><tr><th>Date</th><th>Version</th><th>Libre interne</th><th>Libre USB</th><th>Vidéos</th><th>BT</th><th>SSH</th><th>Wi-Fi Direct</th></tr></thead>
+            <tbody>
+            <tr th:each="h : ${x.heartbeats}">
+                <td th:text="${@fmt.date(h.seenAt)}"></td>
+                <td th:text="${@fmt.orDash(h.versionCode)}"></td>
+                <td th:text="${@fmt.mb(h.storageFreeMb)}"></td>
+                <td th:text="${@fmt.mb(h.usbFreeMb)}"></td>
+                <td th:text="${@fmt.orDash(h.videoCount)}"></td>
+                <td th:text="${@fmt.yesNo(h.btGateway)}"></td>
+                <td th:text="${@fmt.yesNo(h.sshEnabled)}"></td>
+                <td th:text="${@fmt.yesNo(h.wifiDirect)}"></td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+    </section>
+</main>
+</body>
+</html>

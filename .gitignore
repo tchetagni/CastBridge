@@ -6,3 +6,9 @@ local.properties
 *.iml
 .kotlin/
 .claude/
+# backend/ (server): build output and secrets never committed
+backend/target/
+backend/.env
+backend/secrets/
+backend/geoip/
+backend/backups/

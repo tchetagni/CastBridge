@@ -69,6 +69,13 @@ si la clé USB est retirée et reprend à son retour. Voir **`docs/DOWNLOADS.md`
 Le moteur est le vrai **aria2 1.37.0** (GPL-2.0-or-later), compilé depuis ses sources officielles par
 `tools/build-aria2-android.sh` (versions et SHA-256 épinglés ; détail de la compilation livrée : `tools/aria2-android-build.txt`).
 Ce script et les archives qu'il désigne sont la source correspondante exigée par la GPL : ils accompagnent tout APK distribué.
+## Serveur CastBridge (branche `feat/backend`)
+
+Serveur Java Spring Boot + MySQL en Docker (`backend/`, projet Maven séparé) : mises à jour automatiques des deux apps
+(manifestes signés Ed25519, APK choisi selon l'ABI, déploiement progressif), banque de questions du quiz
+(synchronisation incrémentale, tirages), suivi des appareils (enregistrement, heartbeats, plantages) et interface
+d'administration web `/admin`. Déploiement : `backend/README.md` ; routes et formats : `docs/API-SERVER.md`.
+Clients testés côté `:core` : `castbridge.core.update` et `castbridge.core.device`.
 
 ## Compilation
 

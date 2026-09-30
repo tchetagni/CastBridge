@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<!-- Filter form: period, app, version, platform, country, group, model -->
+<form th:fragment="filters(action, sectionKey)" class="filters kpi-filters" method="get" th:action="@{${action}}">
+    <input type="hidden" name="section" th:if="${sectionKey != null}" th:value="${sectionKey}">
+    <label>Du <input type="date" name="from" th:value="${f.from}" th:max="${today}"></label>
+    <label>au <input type="date" name="to" th:value="${f.to}" th:max="${today}"></label>
+    <select name="app">
+        <option value="">TV et téléphone</option>
+        <option value="tv" th:selected="${f.app == 'tv'}">App TV</option>
+        <option value="phone" th:selected="${f.app == 'phone'}">App téléphone</option>
+    </select>
+    <select name="platform">
+        <option value="">Toutes plateformes</option>
+        <option th:each="p : ${platforms}" th:value="${p}" th:text="${@fmt.platform(p)}" th:selected="${f.platform == p}"></option>
+    </select>
+    <select name="group">
+        <option value="">Tous groupes</option>
+        <option th:each="g : ${groups}" th:value="${g}" th:text="${g}" th:selected="${f.group == g}"></option>
+    </select>
+    <input type="number" name="version" min="1" th:value="${f.version}" placeholder="versionCode">
+    <input type="text" name="country" maxlength="2" size="4" th:value="${f.country}" placeholder="Pays">
+    <input type="text" name="model" maxlength="64" th:value="${f.model}" placeholder="Modèle">
+    <button type="submit">Appliquer</button>
+    <span class="quick">
+        <a th:href="@{${action}(section=${sectionKey},from=${today.minusDays(6)},to=${today},app=${f.app},platform=${f.platform},group=${f.group},version=${f.version},country=${f.country},model=${f.model})}">7 j</a>
+        <a th:href="@{${action}(section=${sectionKey},from=${today.minusDays(29)},to=${today},app=${f.app},platform=${f.platform},group=${f.group},version=${f.version},country=${f.country},model=${f.model})}">30 j</a>
+        <a th:href="@{${action}(section=${sectionKey},from=${today.minusDays(89)},to=${today},app=${f.app},platform=${f.platform},group=${f.group},version=${f.version},country=${f.country},model=${f.model})}">90 j</a>
+        <a th:href="@{${action}(section=${sectionKey},from=${today.minusDays(364)},to=${today},app=${f.app},platform=${f.platform},group=${f.group},version=${f.version},country=${f.country},model=${f.model})}">1 an</a>
+    </span>
+</form>
+
+<!-- One chart: its data travels in an HTML-escaped attribute, admin.js draws it with the local Chart.js -->
+<figure th:fragment="chart(c)" class="chart">
+    <figcaption th:text="${c.title}">Titre</figcaption>
+    <div class="chart-box" th:classappend="${c.horizontal} ? 'tall'">
+        <canvas th:data-chart="${c.json}" role="img" th:aria-label="${c.title}"></canvas>
+    </div>
+</figure>
+
+<!-- A generic KPI section: tiles, charts, tables -->
+<div th:fragment="section(sec)">
+    <section class="tiles" th:unless="${sec.tiles.isEmpty()}">
+        <div class="tile" th:each="t : ${sec.tiles}">
+            <b th:text="${t.value}">0</b><span th:text="${t.label}">label</span>
+            <small class="muted" th:if="${t.hint != null}" th:text="${t.hint}"></small>
+        </div>
+    </section>
+    <div class="cols" th:unless="${sec.charts.isEmpty()}">
+        <section class="card" th:each="c : ${sec.charts}"><figure th:replace="~{admin/kpifrag :: chart(${c})}"></figure></section>
+    </div>
+    <div class="cols tables">
+        <section class="card" th:each="t : ${sec.tables}">
+            <h2 th:text="${t.title}">Table</h2>
+            <p class="muted" th:if="${t.rows.isEmpty()}">Aucune donnée sur la période.</p>
+            <div class="scroll" th:unless="${t.rows.isEmpty()}">
+                <table class="compact">
+                    <thead><tr><th th:each="c : ${t.columns}" th:text="${c}"></th></tr></thead>
+                    <tbody><tr th:each="r : ${t.rows}"><td th:each="v : ${r}" th:text="${v}"></td></tr></tbody>
+                </table>
+            </div>
+            <p class="muted small" th:if="${t.note != null}" th:text="${t.note}"></p>
+        </section>
+    </div>
+</div>
+
+</body>
+</html>

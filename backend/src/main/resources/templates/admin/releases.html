@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/layout :: head('Versions')}"></head>
+<body>
+<header th:replace="~{admin/layout :: nav}"></header>
+<main>
+    <div th:replace="~{admin/layout :: flash}"></div>
+    <h1>Versions des applications</h1>
+
+    <div class="cols">
+        <section class="card">
+            <h2>Publier un APK</h2>
+            <form th:action="@{/admin/releases}" method="post" enctype="multipart/form-data" class="stack">
+                <div class="row">
+                    <label>Application
+                        <select name="app" required><option value="tv">App TV</option><option value="phone">App téléphone</option></select></label>
+                    <label>ABI
+                        <select name="abi" required><option th:each="a : ${abis}" th:value="${a}" th:text="${a}" th:selected="${a == 'universal'}"></option></select></label>
+                    <label>Canal
+                        <select name="channel"><option value="stable">stable</option><option value="beta">beta</option></select></label>
+                </div>
+                <div class="row">
+                    <label>versionCode <input type="number" name="versionCode" min="1" required></label>
+                    <label>versionName <input type="text" name="versionName" maxlength="64" required placeholder="0.6"></label>
+                    <label>Déploiement % <input type="number" name="rollout" min="0" max="100" value="100"></label>
+                </div>
+                <label>Notes de version (français) <textarea name="notes" rows="3" maxlength="4000"></textarea></label>
+                <label class="check"><input type="checkbox" name="mandatory" value="true"> Mise à jour obligatoire</label>
+                <label>Fichier APK <input type="file" name="file" accept=".apk" required></label>
+                <button type="submit">Publier</button>
+                <p class="muted small">L'APK est vérifié (paquet, versionCode) quand son manifeste est lisible ; SHA-256 et taille sont calculés par le serveur.</p>
+            </form>
+        </section>
+        <section class="card">
+            <h2>Version minimale supportée</h2>
+            <p class="muted small">Un appareil en dessous reçoit la mise à jour comme obligatoire, quel que soit le déploiement progressif.</p>
+            <table class="compact">
+                <tr th:each="p : ${policies}"><td th:text="|${p.app} / ${p.channel}|"></td><td class="num" th:text="${p.minSupportedVersionCode}"></td></tr>
+                <tr th:if="${policies.isEmpty()}"><td class="muted">Aucune (toutes les versions sont supportées)</td></tr>
+            </table>
+            <form th:action="@{/admin/releases/policy}" method="post" class="stack">
+                <div class="row">
+                    <label>App <select name="app"><option value="tv">tv</option><option value="phone">phone</option></select></label>
+                    <label>Canal <select name="channel"><option value="stable">stable</option><option value="beta">beta</option></select></label>
+                    <label>versionCode min. <input type="number" name="minSupportedVersionCode" min="0" required></label>
+                </div>
+                <button type="submit">Enregistrer</button>
+            </form>
+        </section>
+    </div>
+
+    <section class="card">
+        <h2>Versions publiées</h2>
+        <p>
+            <a th:href="@{/admin/releases}" th:classappend="${app == null} ? 'on'" class="chip">Toutes</a>
+            <a th:href="@{/admin/releases(app='tv')}" th:classappend="${app == 'tv'} ? 'on'" class="chip">TV</a>
+            <a th:href="@{/admin/releases(app='phone')}" th:classappend="${app == 'phone'} ? 'on'" class="chip">Téléphone</a>
+        </p>
+        <div class="scroll">
+        <table class="list">
+            <thead><tr><th>App</th><th>Version</th><th>ABI</th><th>Canal</th><th>Taille</th><th>Publiée</th><th>Déploiement</th><th>État</th><th></th></tr></thead>
+            <tbody>
+            <tr th:each="r : ${releases}" th:classappend="${r.revoked} ? 'dim'">
+                <td th:text="${r.app}"></td>
+                <td><b th:text="${r.versionName}"></b> <span class="muted" th:text="|(${r.versionCode})|"></span>
+                    <span class="badge warn" th:if="${r.mandatory}">obligatoire</span>
+                    <div class="small muted wrap" th:text="${r.notes}"></div></td>
+                <td th:text="${r.abi}"></td>
+                <td th:text="${r.channel}"></td>
+                <td th:text="${@fmt.bytes(r.sizeBytes)}" th:title="${r.sha256}"></td>
+                <td th:text="${@fmt.date(r.publishedAt)}"></td>
+                <td>
+                    <form th:action="@{/admin/releases/{id}/rollout(id=${r.id})}" method="post" class="inline">
+                        <input type="number" name="percent" min="0" max="100" th:value="${r.rolloutPercent}" class="pct"> %
+                        <button type="submit" class="small">OK</button>
+                    </form>
+                </td>
+                <td th:text="${r.revoked} ? 'retirée' : 'active'"></td>
+                <td class="nowrap">
+                    <a class="button small ghost" th:href="@{/dl/{app}/{f}(app=${r.app},f=${r.fileName})}" th:unless="${r.revoked}">APK</a>
+                    <form th:unless="${r.revoked}" th:action="@{/admin/releases/{id}/revoke(id=${r.id})}" method="post" class="inline">
+                        <button type="submit" class="small danger" data-confirm="Retirer cette version ? Elle ne sera plus proposée ni téléchargeable.">Retirer</button>
+                    </form>
+                    <form th:action="@{/admin/releases/{id}/delete(id=${r.id})}" method="post" class="inline">
+                        <button type="submit" class="small danger ghost" data-confirm="Supprimer définitivement cette version et son fichier ?">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+            <tr th:if="${releases.isEmpty()}"><td colspan="9" class="muted">Aucune version publiée.</td></tr>
+            </tbody>
+        </table>
+        </div>
+    </section>
+</main>
+</body>
+</html>

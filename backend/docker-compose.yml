@@ -1,0 +1,110 @@
+# CastBridge server on a shared VPS: its own project name, networks, volumes and memory limits.
+# MySQL is on an internal network only (no published port, no Internet access); the API is published on
+# 127.0.0.1 only, for the local nginx. Secrets come from .env (not committed) and secrets/ (not committed).
+name: castbridge
+
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+services:
+  castbridge-db:
+    image: mysql:8.4
+    container_name: castbridge-db
+    restart: unless-stopped
+    command:
+      - --innodb-buffer-pool-size=128M
+      - --innodb-log-buffer-size=8M
+      - --performance-schema=OFF
+      - --max-connections=40
+      - --table-open-cache=400
+      - --tmp-table-size=16M
+      - --max-heap-table-size=16M
+      - --skip-name-resolve
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_0900_ai_ci
+    environment:
+      MYSQL_DATABASE: castbridge
+      MYSQL_USER: castbridge
+      MYSQL_PASSWORD: ${CASTBRIDGE_DB_PASSWORD:?CASTBRIDGE_DB_PASSWORD manquant dans .env}
+      MYSQL_ROOT_PASSWORD: ${CASTBRIDGE_DB_ROOT_PASSWORD:?CASTBRIDGE_DB_ROOT_PASSWORD manquant dans .env}
+    volumes:
+      - castbridge-mysql:/var/lib/mysql
+    networks:
+      - castbridge-internal
+    mem_limit: 512m
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: ["CMD-SHELL", "MYSQL_PWD=\"$$MYSQL_PASSWORD\" mysqladmin ping -h 127.0.0.1 -u\"$$MYSQL_USER\" --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 60s
+    logging: *logging
+
+  castbridge-api:
+    build:
+      context: .
+      args:
+        VCS_REF: ${CASTBRIDGE_VCS_REF:-unknown}
+    image: castbridge-api:current
+    container_name: castbridge-api
+    restart: unless-stopped
+    depends_on:
+      castbridge-db:
+        condition: service_healthy
+    environment:
+      CASTBRIDGE_DB_URL: "jdbc:mysql://castbridge-db:3306/castbridge?connectionTimeZone=UTC&forceConnectionTimeZoneToSession=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true"
+      CASTBRIDGE_DB_USER: castbridge
+      CASTBRIDGE_DB_PASSWORD: ${CASTBRIDGE_DB_PASSWORD:?}
+      CASTBRIDGE_ADMIN_TOKEN: ${CASTBRIDGE_ADMIN_TOKEN:?CASTBRIDGE_ADMIN_TOKEN manquant dans .env}
+      CASTBRIDGE_SIGNING_KEY_FILE: /run/secrets/castbridge_signing_key
+      CASTBRIDGE_PUBLIC_BASE_URL: ${CASTBRIDGE_PUBLIC_BASE_URL:-}
+      CASTBRIDGE_WEB_ADMIN_USER: ${CASTBRIDGE_WEB_ADMIN_USER:-}
+      CASTBRIDGE_WEB_ADMIN_PASSWORD: ${CASTBRIDGE_WEB_ADMIN_PASSWORD:-}
+      CASTBRIDGE_WEB_ADMIN_RESET_PASSWORD: ${CASTBRIDGE_WEB_ADMIN_RESET_PASSWORD:-false}
+      CASTBRIDGE_COOKIE_SECURE: ${CASTBRIDGE_COOKIE_SECURE:-true}
+      CASTBRIDGE_GEO_COUNTRY_HEADER: ${CASTBRIDGE_GEO_COUNTRY_HEADER:-}
+      CASTBRIDGE_GEOIP_DB: ${CASTBRIDGE_GEOIP_DB:-}
+      CASTBRIDGE_RATE_LIMIT_PER_MINUTE: ${CASTBRIDGE_RATE_LIMIT_PER_MINUTE:-120}
+      CASTBRIDGE_RATE_LIMIT_BURST: ${CASTBRIDGE_RATE_LIMIT_BURST:-60}
+      CASTBRIDGE_QUIZ_SEED: ${CASTBRIDGE_QUIZ_SEED:-true}
+    secrets:
+      - castbridge_signing_key
+    ports:
+      - "127.0.0.1:${CASTBRIDGE_PORT:-7090}:8080"
+    volumes:
+      - castbridge-apk:/data/apk
+      - ${CASTBRIDGE_GEOIP_DIR:-./geoip}:/geoip:ro
+    networks:
+      - castbridge-internal
+      - castbridge-edge
+    mem_limit: 512m
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    logging: *logging
+
+networks:
+  castbridge-internal:
+    name: castbridge-internal
+    internal: true
+  castbridge-edge:
+    name: castbridge-edge
+
+volumes:
+  castbridge-mysql:
+    name: castbridge-mysql
+  castbridge-apk:
+    name: castbridge-apk
+
+secrets:
+  castbridge_signing_key:
+    file: ${CASTBRIDGE_SIGNING_KEY_PATH:-./secrets/castbridge-signing.pem}

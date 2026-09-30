@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/layout :: head('Erreur')}"></head>
+<body>
+<header th:replace="~{admin/layout :: nav}"></header>
+<main>
+    <h1>Oups</h1>
+    <p class="flash err" th:text="${message}">Erreur</p>
+    <p><a th:href="@{/admin}">Retour au tableau de bord</a></p>
+</main>
+</body>
+</html>

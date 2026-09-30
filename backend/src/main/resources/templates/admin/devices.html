@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/layout :: head('Appareils')}"></head>
+<body>
+<header th:replace="~{admin/layout :: nav}"></header>
+<main>
+    <div th:replace="~{admin/layout :: flash}"></div>
+    <h1>Appareils <small th:text="|${page.totalElements} au total|"></small></h1>
+
+    <form class="filters" method="get" th:action="@{/admin/devices}">
+        <input type="search" name="q" th:value="${f.text}" placeholder="Nom, modèle, groupe, identifiant…">
+        <select name="state">
+            <option value="">Tous les états</option>
+            <option value="online" th:selected="${f.state == 'online'}">En ligne</option>
+            <option value="offline" th:selected="${f.state == 'offline'}">Hors ligne</option>
+            <option value="blocked" th:selected="${f.state == 'blocked'}">Bloqués</option>
+        </select>
+        <select name="app">
+            <option value="">TV et téléphones</option>
+            <option value="tv" th:selected="${f.app == 'tv'}">App TV</option>
+            <option value="phone" th:selected="${f.app == 'phone'}">App téléphone</option>
+        </select>
+        <select name="platform">
+            <option value="">Toutes plateformes</option>
+            <option th:each="p : ${platforms}" th:value="${p}" th:text="${@fmt.platform(p)}" th:selected="${f.platform == p}"></option>
+        </select>
+        <select name="manufacturer">
+            <option value="">Tous fabricants</option>
+            <option th:each="m : ${manufacturers}" th:value="${m}" th:text="${m}" th:selected="${f.manufacturer == m}"></option>
+        </select>
+        <select name="abi">
+            <option value="">Toutes ABI</option>
+            <option th:each="a : ${abis}" th:value="${a}" th:text="${a}" th:selected="${f.abi == a}"></option>
+        </select>
+        <select name="group">
+            <option value="">Tous groupes</option>
+            <option th:each="g : ${groups}" th:value="${g}" th:text="${g}" th:selected="${f.group == g}"></option>
+        </select>
+        <input type="number" name="version" th:value="${f.version}" placeholder="versionCode" min="1">
+        <input type="text" name="country" th:value="${f.country}" placeholder="Pays (CM)" maxlength="2" size="4">
+        <input type="hidden" name="sort" th:value="${sort}">
+        <button type="submit">Filtrer</button>
+        <a class="button ghost" th:href="@{/admin/devices}">Effacer</a>
+    </form>
+
+    <div class="scroll">
+    <table class="list">
+        <thead>
+        <tr>
+            <th></th>
+            <th><a th:href="@{/admin/devices(q=${f.text},state=${f.state},app=${f.app},platform=${f.platform},manufacturer=${f.manufacturer},abi=${f.abi},group=${f.group},version=${f.version},country=${f.country},sort='name')}">Nom</a></th>
+            <th><a th:href="@{/admin/devices(q=${f.text},state=${f.state},app=${f.app},platform=${f.platform},manufacturer=${f.manufacturer},abi=${f.abi},group=${f.group},version=${f.version},country=${f.country},sort='model')}">Modèle</a></th>
+            <th>Plateforme</th>
+            <th><a th:href="@{/admin/devices(q=${f.text},state=${f.state},app=${f.app},platform=${f.platform},manufacturer=${f.manufacturer},abi=${f.abi},group=${f.group},version=${f.version},country=${f.country},sort='version')}">Version</a></th>
+            <th><a th:href="@{/admin/devices(q=${f.text},state=${f.state},app=${f.app},platform=${f.platform},manufacturer=${f.manufacturer},abi=${f.abi},group=${f.group},version=${f.version},country=${f.country},sort='seen')}">Dernier contact</a></th>
+            <th><a th:href="@{/admin/devices(q=${f.text},state=${f.state},app=${f.app},platform=${f.platform},manufacturer=${f.manufacturer},abi=${f.abi},group=${f.group},version=${f.version},country=${f.country},sort='country')}">Pays</a></th>
+            <th>Groupe</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="d : ${page.content}" th:with="on=${d.online(now, onlineMinutes)}">
+            <td><span class="dot" th:classappend="${d.blocked} ? 'blocked' : (${on} ? 'on' : 'off')"
+                      th:title="${d.blocked} ? 'Bloqué' : (${on} ? 'En ligne' : 'Hors ligne')"></span></td>
+            <td><a th:href="@{/admin/devices/{id}(id=${d.publicId})}" th:text="${d.displayName()}">TV salon</a>
+                <small class="muted" th:text="${d.app == 'tv' ? 'TV' : 'tél.'}"></small></td>
+            <td th:text="|${d.manufacturer ?: ''} ${d.model ?: ''}|"></td>
+            <td th:text="${@fmt.platform(d.platform)}"></td>
+            <td th:text="${d.versionName != null} ? |${d.versionName} (${d.versionCode})| : '—'"></td>
+            <td th:text="${@fmt.ago(d.lastSeen)}" th:title="${@fmt.date(d.lastSeen)}"></td>
+            <td th:text="${@fmt.orDash(d.country)}"></td>
+            <td th:text="${@fmt.orDash(d.groupName)}"></td>
+        </tr>
+        <tr th:if="${page.content.isEmpty()}"><td colspan="8" class="muted">Aucun appareil.</td></tr>
+        </tbody>
+    </table>
+    </div>
+
+    <nav class="pager" th:if="${page.totalPages > 1}">
+        <a th:if="${page.hasPrevious()}" th:href="@{/admin/devices(q=${f.text},state=${f.state},app=${f.app},platform=${f.platform},manufacturer=${f.manufacturer},abi=${f.abi},group=${f.group},version=${f.version},country=${f.country},sort=${sort},page=${page.number - 1})}">← Précédents</a>
+        <span th:text="|Page ${page.number + 1} / ${page.totalPages}|"></span>
+        <a th:if="${page.hasNext()}" th:href="@{/admin/devices(q=${f.text},state=${f.state},app=${f.app},platform=${f.platform},manufacturer=${f.manufacturer},abi=${f.abi},group=${f.group},version=${f.version},country=${f.country},sort=${sort},page=${page.number + 1})}">Suivants →</a>
+    </nav>
+</main>
+</body>
+</html>
