@@ -49,10 +49,12 @@ class MainActivity : ComponentActivity() {
                         Tab(tab == 0, onClick = { tab = 0 }, text = { Text("TV DLNA") })
                         Tab(tab == 1, onClick = { tab = 1 }, text = { Text("CastBridge TV") })
                         Tab(tab == 2, onClick = { tab = 2 }, text = { Text("Quiz") })
+                        Tab(tab == 3, onClick = { tab = 3 }, text = { Text("Sur le téléphone") })
                     }
                 }
             },
-        ) { pad -> Box(Modifier.padding(pad).fillMaxSize()) { when (tab) { 0 -> App(); 1 -> TvHub(); else -> QuizScreen() } } }
+            bottomBar = { castbridge.sender.player.CastMiniBar(Modifier.navigationBarsPadding()) },
+        ) { pad -> Box(Modifier.padding(pad).fillMaxSize()) { when (tab) { 0 -> App(); 1 -> TvHub(); 2 -> QuizScreen(); else -> castbridge.sender.player.PhoneLibraryScreen() } } }
         MoveHandler()
     }
 
