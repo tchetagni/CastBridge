@@ -169,7 +169,8 @@ fun VideoPlayerScreen(act: PlayerActivity, p: ExoPlayer) {
 
         // Copy to the TV in progress: percentage and times, whatever the state of the (auto-hiding) controls.
         if (copyingThis && remote != null) {
-            Surface(Modifier.align(Alignment.TopCenter).statusBarsPadding().padding(12.dp).fillMaxWidth(), shape = RoundedCornerShape(14.dp), color = Color(0xCC0A0F1E)) {
+            // below the player's own top bar (back arrow, title, cast): the banner used to be drawn over them
+            Surface(Modifier.align(Alignment.TopCenter).statusBarsPadding().padding(start = 12.dp, end = 12.dp, top = 68.dp, bottom = 12.dp).fillMaxWidth(), shape = RoundedCornerShape(14.dp), color = Color(0xCC0A0F1E)) {
                 CopyBanner(remote!!, Modifier.padding(14.dp))
             }
         }

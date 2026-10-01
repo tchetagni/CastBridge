@@ -50,11 +50,16 @@ class TransferQueueService : Service() {
         else startForeground(NOTIF, notification())
     }
 
-    private fun notification(): Notification =
-        Notification.Builder(this, CHANNEL).setSmallIcon(android.R.drawable.stat_sys_upload)
+    private fun notification(): Notification {
+        // the percentage of the file being sent (Wi-Fi upload state; over Bluetooth its own notification carries it)
+        val pct = (UploadService.state.value as? UploadService.State.Uploading)?.let { if (it.total > 0) (it.sent * 100 / it.total).toInt() else null }
+        val text = TransferQueue.waitingText() ?: "Envoi en cours"
+        return Notification.Builder(this, CHANNEL).setSmallIcon(android.R.drawable.stat_sys_upload)
             .setContentTitle("CastBridge : envois vers la TV")
-            .setContentText(TransferQueue.waitingText() ?: "Envoi en cours")
+            .setContentText(if (pct != null) "$text · $pct %" else text)
+            .apply { if (pct != null) { setSubText("$pct %"); setProgress(100, pct, false) } }
             .setOngoing(true).build()
+    }
 
     companion object { private const val CHANNEL = "queue"; private const val NOTIF = 9 }
 }

@@ -721,7 +721,7 @@ class ReceiverServer(
 
     // /api/info is polled every second by phones and the web page: list the folders at most once per infoCacheMs.
     private class Entry(val v: StorageVolume, val name: String, val size: Long, val received: Long, val complete: Boolean, val dup: Boolean)
-    private class Listing(val at: Long, val entries: List<Entry>, val used: Map<String, Long>) {
+    private class Listing(val at: Long, val entries: List<Entry>, val used: Map<String, Long>, val partials: List<Triple<String, Long, Long>> = emptyList()) {
         val filesJson: String by lazy {
             entries.joinToString(",", "[", "]") { e ->
                 "{\"name\":${q(e.name)},\"size\":${e.size},\"received\":${e.received},\"complete\":${e.complete}," +
@@ -748,14 +748,18 @@ class ReceiverServer(
             used[v.id] = l.sumOf { it.size }
             for (e in l) if (!e.part) { raw += Entry(v, e.name, e.size, e.size, true, false); finalKeys += e.name.lowercase() }
         }
-        for ((v, l) in listed) for (e in l) if (e.part && e.name.lowercase() !in finalKeys) {
+        // what is arriving right now, for the TV screen: EVERY partial copy with a known size, even when the same name already exists complete (an episode sent again,
+        // a move target): the library listing hides those (it would show the name twice), the progress line must not
+        val arriving = ArrayList<Triple<String, Long, Long>>()
+        for ((v, l) in listed) for (e in l) if (e.part) {
             val total = (volumes.store(v) as? FileStore)?.let { Meta.read(it.dir, e.name) } ?: continue     // no size known: not listed
-            raw += Entry(v, e.name, total, e.size, false, false)
+            arriving += Triple(e.name, e.size, total)
+            if (e.name.lowercase() !in finalKeys) raw += Entry(v, e.name, total, e.size, false, false)
         }
         val count = raw.groupingBy { it.name.lowercase() to it.complete }.eachCount()
         val entries = raw.map { Entry(it.v, it.name, it.size, it.received, it.complete, (count[it.name.lowercase() to it.complete] ?: 1) > 1) }
             .sortedWith(compareBy({ it.name }, { it.v.id }))
-        return Listing(now, entries, used).also { listing = it }
+        return Listing(now, entries, used, arriving).also { listing = it }
     }
 
     /** The volume the next upload would go to (for the top-level free/used/quota numbers older clients read). */
@@ -771,7 +775,7 @@ class ReceiverServer(
     }
 
     /** Files being received right now: (name, received bytes, final size). */
-    fun receiving(): List<Triple<String, Long, Long>> = listing().entries.filter { !it.complete }.map { Triple(it.name, it.received, it.size) }
+    fun receiving(): List<Triple<String, Long, Long>> = listing().partials
 
     /** Finished files (newest first) with what the library screens need: thumbnail, duration, resume position, volume. */
     fun libraryItems(): List<LibraryItem> {

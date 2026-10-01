@@ -176,7 +176,7 @@ class BtUploadService : Service() {
         nm.createNotificationChannel(NotificationChannel(CHANNEL, "Envoi Bluetooth", NotificationManager.IMPORTANCE_LOW))
         val cancel = android.app.PendingIntent.getService(this, 2,
             Intent(this, BtUploadService::class.java).setAction(ACTION_CANCEL), android.app.PendingIntent.FLAG_IMMUTABLE)
-        return Notification.Builder(this, CHANNEL).setContentTitle("CastBridge").setContentText(text)
+        return Notification.Builder(this, CHANNEL).setContentTitle("CastBridge").setContentText("$text · $pct %").setSubText("$pct %")
             .setSmallIcon(R.drawable.ic_stat_castbridge).setOngoing(true).setOnlyAlertOnce(true)
             .setProgress(100, pct, false)
             .addAction(Notification.Action.Builder(null, "Annuler", cancel).build()).build()

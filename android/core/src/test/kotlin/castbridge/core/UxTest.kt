@@ -19,6 +19,14 @@ class UxTest {
         assertTrue(r.notices.none { it.contains(".part") || it.contains("usb-1234") || it.contains("409") }, "no jargon: ${r.notices}")
     }
 
+    @Test fun aCopyInProgressIsShownEvenWhenTheSameNameAlreadyExistsComplete() {
+        // e.g. a series episode sent again, or a move target: the TV screen must still show the progress of what arrives
+        File(r.usbDir, "ep.mkv").writeBytes(ByteArray(10))
+        val status = r.put("ep.mkv", 0, 100, ByteArray(40)).first
+        val shown = r.server.receiving()
+        assertEquals(listOf(Triple("ep.mkv", 40L, 100L)), shown, "progress hidden (upload status $status)")
+    }
+
     @Test fun phoneParsesTheRealInfoAnswer() {
         File(r.usbDir, "a.mp4").writeBytes(ByteArray(10))
         assertEquals(200, r.put("b.mkv", 0, 100, ByteArray(40)).first)      // still arriving
