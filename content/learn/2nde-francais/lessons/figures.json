@@ -1,0 +1,843 @@
+{
+ "chapter": "2nde-francais-ch-figures",
+ "lessons": [
+  {
+   "id": "2nde-francais-figures",
+   "title": "Figures de style et versification de base",
+   "minutes": 35,
+   "programRef": "2nde — Figures de style, versification : alexandrin, rimes, strophes (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; poème et vers écrits pour CastBridge ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître et nommer les figures de style courantes.",
+    "Compter les syllabes d'un alexandrin et identifier rimes et strophes.",
+    "Interpréter l'effet d'une figure."
+   ],
+   "prerequisites": [
+    "2nde-francais-lecture"
+   ],
+   "exercises": [
+    "2nde-francais-fig-1",
+    "2nde-francais-fig-2",
+    "2nde-francais-fig-3",
+    "2nde-francais-fig-4",
+    "2nde-francais-fig-5",
+    "2nde-francais-fig-6"
+   ],
+   "selfCheck": [
+    "2nde-francais-fig-q1",
+    "2nde-francais-fig-q2",
+    "2nde-francais-fig-q3",
+    "2nde-francais-fig-q4",
+    "2nde-francais-fig-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Ce que tu sauras faire",
+     "md": "- Reconnaître et nommer les principales figures de style.\n- Compter les syllabes d'un vers (alexandrin) en tenant compte du « e » muet.\n- Identifier les rimes, les strophes et analyser l'effet de ces procédés."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Figures d'analogie",
+     "md": "- **Comparaison** : rapproche deux éléments avec un outil (*comme, tel, pareil à…*) : « rapide comme l'éclair ».\n- **Métaphore** : même rapprochement sans outil : « cette femme est un roc ».\n- **Personnification** : prête des traits humains à une chose : « le fleuve s'endort »."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Figures d'opposition et d'insistance",
+     "md": "- **Antithèse** : deux idées opposées rapprochées : « Hier la joie, aujourd'hui la peine ».\n- **Oxymore** : deux mots contraires dans un même groupe : « un silence bruyant ».\n- **Hyperbole** : exagération : « un bruit à réveiller un village ».\n- **Litote** : dire moins pour suggérer plus : « Ce n'est pas bête ».\n- **Anaphore** : répétition d'un mot en tête de phrases ou de vers."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Autres figures utiles",
+     "md": "- **Métonymie** : désigner une chose par une autre qui lui est liée : « boire un verre ».\n- **Euphémisme** : adoucir une réalité pénible : « il nous a quittés ».\n- **Gradation** : termes de plus en plus forts : « il hésite, il tremble, il s'enfuit ».\n- **Périphrase** : désigner par un groupe de mots : « la capitale politique » pour Yaoundé."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Analyser une figure : trois temps",
+     "md": "1. **Citer** exactement l'expression.\n2. **Nommer** la figure (comparaison, métaphore…).\n3. **Interpréter** : que révèle-t-elle ? quelle impression ?\nUne figure n'est pas décorative : elle sert le sens. « Il y a une métaphore » ne suffit jamais."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Compter les syllabes d'un vers",
+     "md": "On compte les syllabes **prononcées**. Le **e muet** (non accentué) compte devant une consonne mais **s'élide** devant une voyelle ; en **fin de vers**, il ne compte pas. Exemple : « fleuve endormi » → *fleu-ven-dor-mi* (4). Un vers de 12 syllabes est un **alexandrin** (césure au milieu, après la 6ᵉ), de 10 un **décasyllabe**, de 8 un **octosyllabe**."
+    },
+    {
+     "type": "illustration",
+     "caption": "Un alexandrin : douze syllabes, césure après la sixième (vers original écrit pour l'exercice).",
+     "alt": "Douze cases jaunes numérotées de 1 à 12 portent les syllabes du vers : Sur, le, fleu, ven, dor, mi, et, le, so, leil, se, lè. Un trait rouge pointillé coupe le vers après la sixième syllabe. Une treizième case grise, ve, n'est pas comptée.",
+     "figure": {
+      "kind": "shapes",
+      "w": 470,
+      "h": 125,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 20,
+        "w": 32,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "radius": 3,
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 26,
+        "y": 44,
+        "text": "Sur",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 26,
+        "y": 82,
+        "text": "1",
+        "size": 12,
+        "color": "grey",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 42,
+        "y": 20,
+        "w": 32,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "radius": 3,
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 58,
+        "y": 44,
+        "text": "le",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 58,
+        "y": 82,
+        "text": "2",
+        "size": 12,
+        "color": "grey",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 74,
+        "y": 20,
+        "w": 32,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "radius": 3,
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 44,
+        "text": "fleu",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 82,
+        "text": "3",
+        "size": 12,
+        "color": "grey",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 106,
+        "y": 20,
+        "w": 32,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "radius": 3,
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 122,
+        "y": 44,
+        "text": "ven",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 122,
+        "y": 82,
+        "text": "4",
+        "size": 12,
+        "color": "grey",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 138,
+        "y": 20,
+        "w": 32,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "radius": 3,
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 154,
+        "y": 44,
+        "text": "dor",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 154,
+        "y": 82,
+        "text": "5",
+        "size": 12,
+        "color": "grey",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 170,
+        "y": 20,
+        "w": 32,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "radius": 3,
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 186,
+        "y": 44,
+        "text": "mi",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 186,
+        "y": 82,
+        "text": "6",
+        "size": 12,
+        "color": "grey",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 214,
+        "y": 20,
+        "w": 32,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "radius": 3,
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 44,
+        "text": "et",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 82,
+        "text": "7",
+        "size": 12,
+        "color": "grey",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 246,
+        "y": 20,
+        "w": 32,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "radius": 3,
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 262,
+        "y": 44,
+        "text": "le",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 262,
+        "y": 82,
+        "text": "8",
+        "size": 12,
+        "color": "grey",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 278,
+        "y": 20,
+        "w": 32,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "radius": 3,
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 294,
+        "y": 44,
+        "text": "so",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 294,
+        "y": 82,
+        "text": "9",
+        "size": 12,
+        "color": "grey",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 310,
+        "y": 20,
+        "w": 32,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "radius": 3,
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 326,
+        "y": 44,
+        "text": "leil",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 326,
+        "y": 82,
+        "text": "10",
+        "size": 12,
+        "color": "grey",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 342,
+        "y": 20,
+        "w": 32,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "radius": 3,
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 358,
+        "y": 44,
+        "text": "se",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 358,
+        "y": 82,
+        "text": "11",
+        "size": 12,
+        "color": "grey",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 374,
+        "y": 20,
+        "w": 32,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "radius": 3,
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 390,
+        "y": 44,
+        "text": "lè",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 390,
+        "y": 82,
+        "text": "12",
+        "size": 12,
+        "color": "grey",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 412,
+        "y": 20,
+        "w": 32,
+        "h": 38,
+        "fill": "lightgrey",
+        "stroke": "grey",
+        "radius": 3,
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 428,
+        "y": 44,
+        "text": "ve",
+        "size": 12,
+        "color": "grey",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 428,
+        "y": 82,
+        "text": "—",
+        "size": 12,
+        "color": "grey",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 208,
+        "y1": 12,
+        "x2": 208,
+        "y2": 66,
+        "color": "red",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 108,
+        "text": "Rouge : la césure, après la 6e syllabe",
+        "size": 12,
+        "color": "red",
+        "anchor": "middle",
+        "bold": false
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Rimes et strophes",
+     "md": "- **Rimes plates** AABB, **croisées** ABAB, **embrassées** ABBA.\n- Une rime est **féminine** si le vers finit par un e muet (*braise*), **masculine** sinon (*roseaux*) ; on alterne souvent les deux.\n- Strophes : **quatrain** (4 vers), **tercet** (3 vers), **sonnet** (2 quatrains + 2 tercets)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : scander un vers",
+     "statement": "Compte les syllabes du vers : « Sur le fleuve endormi et le soleil se lève ».",
+     "steps": [
+      {
+       "md": "On découpe : Sur-le-fleu-ven-dor-mi : « fleuve » s'élide devant « endormi » (voyelle)."
+      },
+      {
+       "md": "Puis : et-le-so-leil-se-lè-(ve) : le dernier e, en fin de vers, ne compte pas."
+      },
+      {
+       "md": "6 + 6 = 12 syllabes, avec une césure après « endormi »."
+      }
+     ],
+     "answer": "**12 syllabes** : c'est un **alexandrin** (6 + 6)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : analyser un quatrain",
+     "statement": "Texte original écrit pour l'exercice : « Le fleuve en s'endormant caresse les roseaux, / Le soir étend sur lui son grand manteau de braise ; / Et l'oiseau pêcheur plonge en brisant les cristaux, / Et le grand ciel, sur les bords, lentement s'apaise. » Quelles sont les rimes ? Quelle figure dans « le fleuve en s'endormant » ?",
+     "steps": [
+      {
+       "md": "Dernières sonorités : roseaux (A), braise (B), cristaux (A), s'apaise (B) : rimes **croisées ABAB**."
+      },
+      {
+       "md": "*roseaux* et *cristaux* sont des rimes masculines ; *braise* et *s'apaise* sont féminines : elles **alternent**."
+      },
+      {
+       "md": "Le fleuve « s'endort » comme une personne : **personnification** qui suggère le calme du soir."
+      }
+     ],
+     "answer": "Rimes **croisées ABAB**, alternance féminine/masculine ; **personnification**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre **comparaison** (outil présent) et **métaphore** (sans outil).\n- Confondre **antithèse** (deux termes éloignés) et **oxymore** (soudés dans un même groupe).\n- Compter le e muet de fin de vers, ou compter un e muet devant une voyelle.\n- Confondre la rime féminine (e muet final) et la rime « des mots féminins ».\n- Nommer une figure sans l'interpréter."
+    },
+    {
+     "type": "exercise",
+     "ref": "2nde-francais-fig-1"
+    },
+    {
+     "type": "more",
+     "items": [
+      "L'alexandrin est le vers le plus courant de la poésie classique française ; en poésie moderne, les poètes écrivent aussi en vers libres, sans mètre ni rime fixes.",
+      "Le poème de cette fiche est un texte ORIGINAL écrit pour l'exercice."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Le vers et le quatrain d'exemple sont originaux ; leur décompte syllabique (12 syllabes, élision du e muet devant voyelle) est à re-vérifier par un enseignant.",
+    "Certaines figures (métonymie, périphrase, gradation) ou notions (diérèse, synérèse) peuvent être exigibles ou non en seconde : à confirmer.",
+    "Aucune citation d'auteur n'est utilisée : tous les exemples de figures sont inventés pour l'exercice."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "2nde-francais-fig-1",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 3,
+   "lesson": "2nde-francais-figures",
+   "prompt": "Associe chaque exemple à sa figure de style.",
+   "pairs": [
+    [
+     "« Elle est rapide comme le vent. »",
+     "Comparaison"
+    ],
+    [
+     "« Cet homme est un lion. »",
+     "Métaphore"
+    ],
+    [
+     "« Le soleil se réveille. »",
+     "Personnification"
+    ],
+    [
+     "« Un silence bruyant »",
+     "Oxymore"
+    ],
+    [
+     "« Ce n'est pas mal du tout. »",
+     "Litote"
+    ]
+   ],
+   "explanation": "L'outil « comme » signale la comparaison ; « est un lion » est une métaphore ; « se réveille » prête un geste humain au soleil ; « silence » et « bruyant » sont soudés (oxymore) ; « pas mal » suggère « très bien » (litote).",
+   "method": "Cherche d'abord l'outil de comparaison, puis les mots contraires.",
+   "mistakes": [
+    "Confondre comparaison et métaphore."
+   ],
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-francais-fig-2",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "lesson": "2nde-francais-figures",
+   "prompt": "Combien de syllabes comptes-tu dans ce vers (le e final ne compte pas) : « Sur le fleuve endormi et le soleil se lève » ?",
+   "answer": 12,
+   "tolerance": 0,
+   "unit": "syllabes",
+   "explanation": "Sur-le-fleu-ven-dor-mi (6) ; et-le-so-leil-se-lè (6) : 12 syllabes.",
+   "method": "Compte les syllabes prononcées ; élide le e devant une voyelle ; ignore le e final.",
+   "mistakes": [
+    "Compter le dernier « ve » et trouver 13."
+   ],
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-francais-fig-3",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-francais-figures",
+   "prompt": "Quelle disposition de rimes a le schéma ABBA ?",
+   "choices": [
+    "Rimes embrassées",
+    "Rimes plates",
+    "Rimes croisées",
+    "Rimes suivies de tercets"
+   ],
+   "answer": 0,
+   "explanation": "ABBA : la rime A encadre la rime B ; on parle de rimes embrassées. AABB = plates ; ABAB = croisées.",
+   "method": "Note les lettres des rimes dans l'ordre.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-francais-fig-4",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "2nde-francais-figures",
+   "prompt": "Dans l'expression « une ombre lumineuse » (exemple inventé), quelle figure est employée ?",
+   "choices": [
+    "Une antithèse",
+    "Un oxymore",
+    "Une litote",
+    "Une anaphore"
+   ],
+   "answer": 1,
+   "explanation": "« Ombre » et « lumineuse » sont des mots contraires soudés dans le même groupe nominal : c'est un oxymore. Dans une antithèse, les contraires sont séparés, par exemple « l'ombre ici, la lumière là-bas ».",
+   "method": "Les contraires sont-ils collés ou séparés ?",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-francais-fig-5",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 4,
+   "lesson": "2nde-francais-figures",
+   "prompt": "Texte original : « Le vent du soir est un vieux conteur ; la lune écoute, penchée sur le toit. » Nomme deux figures de style, cite-les et interprète-les en quelques lignes.",
+   "model": "« Le vent du soir est un vieux conteur » est une **métaphore** : le vent est assimilé à un conteur, ce qui suggère qu'il murmure des histoires. « la lune écoute, penchée sur le toit » est une **personnification** : la lune est présentée comme un auditeur attentif, ce qui crée une atmosphère paisible et poétique.",
+   "rubric": [
+    "Métaphore correctement nommée et citée (1 point).",
+    "Personnification correctement nommée et citée (1 point).",
+    "Interprétation de chaque figure (1 point).",
+    "Rédaction claire, sans paraphrase (1 point)."
+   ],
+   "explanation": "Citation, procédé, interprétation.",
+   "method": "Cherche ce qu'on compare et ce qui est humanisé.",
+   "mistakes": [
+    "Dire « comparaison » pour « est un vieux conteur », alors qu'il n'y a pas d'outil."
+   ],
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-francais-fig-6",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "2nde-francais-figures",
+   "prompt": "Poème original écrit pour l'exercice :\nLe fleuve en s'endormant caresse les roseaux,\nLe soir étend sur lui son grand manteau de braise ;\nEt l'oiseau pêcheur plonge en brisant les cristaux,\nEt le grand ciel, sur les bords, lentement s'apaise.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Combien de syllabes comporte le premier vers ? (« Le fleuve en s'endormant caresse les roseaux »)",
+     "answer": 12,
+     "tolerance": 0,
+     "unit": "syllabes",
+     "explanation": "Le-fleu-ven-s'en-dor-mant (6) ca-res-se-les-ro-seaux (6) : 12 syllabes, le e de « fleuve » s'élidant devant « en ».",
+     "id": "2nde-francais-fig-6-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quel est le schéma des rimes de ce quatrain ?",
+     "explanation": "roseaux (A) / braise (B) / cristaux (A) / s'apaise (B) : rimes croisées.",
+     "id": "2nde-francais-fig-6-b",
+     "choices": [
+      "AABB (plates)",
+      "ABBA (embrassées)",
+      "ABAB (croisées)",
+      "AAAA"
+     ],
+     "answer": 2
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Relève une métaphore et une personnification. Interprète-les.",
+     "model": "Métaphore : « son grand manteau de braise » : le soir est un manteau rouge, qui évoque la couleur chaude du coucher de soleil. Personnification : « le fleuve en s'endormant » : le fleuve est un être qui s'endort, ce qui suggère la paix du soir.",
+     "rubric": [
+      "Métaphore citée et nommée (1 point).",
+      "Personnification citée et interprétée (1 point)."
+     ],
+     "explanation": "Les images créent une atmosphère paisible.",
+     "id": "2nde-francais-fig-6-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Propose deux axes de lecture pour ce poème et justifie-les en une phrase chacun.",
+     "model": "Axe 1 : un paysage qui s'apaise (verbes « s'endormant », « s'apaise », rimes douces). Axe 2 : un paysage vivant et coloré (personnifications, métaphores « manteau de braise », « cristaux »).",
+     "rubric": [
+      "Deux axes formulés par une phrase (1 point).",
+      "Chaque axe est justifié par des procédés (1 point)."
+     ],
+     "explanation": "Un axe regroupe des procédés autour d'une idée.",
+     "id": "2nde-francais-fig-6-d"
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "method": "Compte les syllabes, repère les rimes, puis relève et interprète les figures.",
+   "mistakes": [
+    "Oublier d'élider le e muet devant une voyelle."
+   ],
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-francais-fig-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-francais-figures",
+   "prompt": "Dans « cet homme est un lion », la figure est :",
+   "choices": [
+    "une métaphore",
+    "une comparaison",
+    "une litote",
+    "une hyperbole"
+   ],
+   "answer": 0,
+   "explanation": "Il n'y a pas d'outil de comparaison.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-francais-fig-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-francais-figures",
+   "prompt": "Combien de syllabes a un alexandrin ?",
+   "choices": [
+    "8",
+    "10",
+    "12",
+    "14"
+   ],
+   "answer": 2,
+   "explanation": "Un alexandrin compte 12 syllabes (6 + 6).",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-francais-fig-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-francais-figures",
+   "prompt": "Que signifie la rime féminine ?",
+   "choices": [
+    "Le vers se termine par un e muet",
+    "Le poème parle d'une femme",
+    "La rime est plus douce",
+    "Le vers est plus court"
+   ],
+   "answer": 0,
+   "explanation": "Rime féminine : e muet final ; masculine : tout autre cas.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-francais-fig-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-francais-figures",
+   "prompt": "« Un silence bruyant » est :",
+   "choices": [
+    "une antithèse",
+    "une comparaison",
+    "un oxymore",
+    "une litote"
+   ],
+   "answer": 2,
+   "explanation": "Deux mots contraires soudés dans un même groupe.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-francais-fig-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-francais-figures",
+   "prompt": "Un sonnet est composé de :",
+   "choices": [
+    "deux quatrains et deux tercets",
+    "trois quatrains",
+    "quatre tercets",
+    "un seul quatrain"
+   ],
+   "answer": 0,
+   "explanation": "Un sonnet compte 14 vers en 4 + 4 + 3 + 3.",
+   "source": "Exercice original, style devoir de 2nde"
+  }
+ ]
+}

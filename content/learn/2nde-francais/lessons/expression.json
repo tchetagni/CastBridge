@@ -1,0 +1,727 @@
+{
+ "chapter": "2nde-francais-ch-expression",
+ "lessons": [
+  {
+   "id": "2nde-francais-expression",
+   "title": "Expression écrite : récit, lettre, paragraphe argumenté et contraction de texte",
+   "minutes": 40,
+   "programRef": "2nde — Expression écrite : récit, lettre, argumentation, contraction de texte (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; textes écrits pour CastBridge ; à relire par un enseignant",
+   "objectives": [
+    "Rédiger un récit en suivant le schéma narratif.",
+    "Rédiger une lettre et un paragraphe argumenté.",
+    "Contracter un texte en respectant le nombre de mots."
+   ],
+   "prerequisites": [
+    "2nde-francais-textes"
+   ],
+   "exercises": [
+    "2nde-francais-exp-1",
+    "2nde-francais-exp-2",
+    "2nde-francais-exp-3",
+    "2nde-francais-exp-4",
+    "2nde-francais-exp-5",
+    "2nde-francais-exp-6"
+   ],
+   "selfCheck": [
+    "2nde-francais-exp-q1",
+    "2nde-francais-exp-q2",
+    "2nde-francais-exp-q3",
+    "2nde-francais-exp-q4",
+    "2nde-francais-exp-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Ce que tu sauras faire",
+     "md": "- Rédiger un récit, une lettre et un paragraphe argumenté en suivant un plan simple.\n- Contracter un texte en respectant le nombre de mots demandé.\n- Relire et corriger ta copie (temps, accords, ponctuation)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Rédiger un récit",
+     "md": "1. **Lis le sujet** : personnage, lieu, thème, nombre de lignes.\n2. **Fais un plan** : situation initiale, élément perturbateur, péripéties, dénouement, situation finale.\n3. **Choisis le narrateur** (je ou il) et les temps : passé simple pour les actions, imparfait pour les décors.\n4. **Écris** avec des paragraphes et, au besoin, un dialogue (nouveau tiret ou guillemets à chaque réplique).\n5. **Relis**."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Rédiger une lettre",
+     "md": "Une lettre contient : **lieu et date**, (pour une lettre formelle) coordonnées de l'expéditeur et du destinataire, **objet**, **formule d'appel** (« Cher ami, » / « Monsieur le Directeur, »), un **corps** en paragraphes (raison de la lettre, détails, demande), une **formule de politesse** (« Veuillez agréer, Monsieur le Directeur, l'expression de mes respectueuses salutations. »), la **signature**. Le ton est familier entre amis, soutenu pour une demande officielle."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Le paragraphe argumenté",
+     "md": "Un paragraphe argumenté défend **une idée** : 1. phrase d'**idée directrice** ; 2. un **argument** (une raison) ; 3. un **exemple** précis ; 4. une **conclusion** qui reprend l'idée. Utilise des **connecteurs** (*d'abord, de plus, en effet, par exemple, donc*). Un paragraphe = un seul argument principal."
+    },
+    {
+     "type": "illustration",
+     "caption": "Structure d'un paragraphe argumenté (schéma simplifié).",
+     "alt": "Quatre rectangles bleus superposés et reliés par des flèches vers le bas : idée directrice, argument, exemple, conclusion. À droite de chacun, une note courte : une phrase claire, une raison précise, un fait concret, on reprend l'idée.",
+     "figure": {
+      "kind": "shapes",
+      "w": 430,
+      "h": 260,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 10,
+        "w": 190,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "radius": 6,
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 115,
+        "y": 34,
+        "text": "Idée directrice",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 225,
+        "y": 34,
+        "text": "une phrase claire",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 115,
+        "y1": 48,
+        "x2": 115,
+        "y2": 72,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 72,
+        "w": 190,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "radius": 6,
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 115,
+        "y": 96,
+        "text": "Argument",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 225,
+        "y": 96,
+        "text": "une raison précise",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 115,
+        "y1": 110,
+        "x2": 115,
+        "y2": 134,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 134,
+        "w": 190,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "radius": 6,
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 115,
+        "y": 158,
+        "text": "Exemple",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 225,
+        "y": 158,
+        "text": "un fait concret",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 115,
+        "y1": 172,
+        "x2": 115,
+        "y2": 196,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 196,
+        "w": 190,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "radius": 6,
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 115,
+        "y": 220,
+        "text": "Conclusion",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 225,
+        "y": 220,
+        "text": "on reprend l'idée",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start",
+        "bold": false
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "La contraction de texte : méthode simple",
+     "md": "1. **Lis** le texte deux fois ; compte les mots du texte et calcule le nombre de mots demandé (souvent le **quart** ; tolérance de 10 % en plus ou en moins).\n2. **Repère** l'idée essentielle de chaque paragraphe.\n3. **Supprime** exemples, images, répétitions, détails.\n4. **Reformule** avec tes mots, en gardant les **personnes** et les **temps** du texte ; relie par des connecteurs.\n5. **Compte** les mots et indique leur nombre."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Ce qu'il ne faut pas faire en contraction",
+     "md": "- Ne recopie pas de phrases du texte.\n- Ne donne pas ton avis et n'ajoute aucune idée.\n- Ne change pas le système d'énonciation (si le texte dit « nous », tu dis « nous »).\n- Ne commente pas (« l'auteur dit que… » est à éviter si le sujet demande une contraction à la même personne)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : une contraction",
+     "statement": "Texte de 60 mots (original) : « Dans beaucoup de villes, le marché est bien plus qu'un lieu d'achat. On y vient pour acheter, mais aussi pour retrouver des voisins, apprendre les nouvelles et discuter les prix. Par exemple, une cliente peut y passer une heure à parler avec la vendeuse de légumes. Ainsi, le marché crée des liens entre les habitants et fait vivre le quartier. » Contracte-le en 15 mots environ (au quart, à 10 % près).",
+     "steps": [
+      {
+       "md": "Idée 1 : le marché n'est pas qu'un lieu d'achat. Idée 2 : on y retrouve les voisins et les nouvelles (c'est une explication). Idée 3 : le marché crée des liens et fait vivre le quartier."
+      },
+      {
+       "md": "On supprime l'exemple de la cliente et on rassemble les idées avec des mots personnels."
+      },
+      {
+       "md": "Contraction : « Le marché n'est pas qu'un lieu d'achat, il crée des liens et fait vivre le quartier. » (16 mots, dans la tolérance de 13 à 16 mots)."
+      }
+     ],
+     "answer": "« Le marché n'est pas qu'un lieu d'achat, il crée des liens et fait vivre le quartier. » (16 mots)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : premières lignes d'une lettre formelle",
+     "statement": "Rédige l'en-tête et le début d'une lettre où Amina, élève de 2nde, demande au proviseur l'autorisation d'organiser le nettoyage de la cour.",
+     "steps": [
+      {
+       "md": "En-tête : « Amina Fotso, élève de 2nde A — Yaoundé, le 10 octobre 2026 » puis le destinataire : « Monsieur le Proviseur du lycée ». (Noms et date fictifs.)"
+      },
+      {
+       "md": "Objet : « Demande d'autorisation d'organiser une matinée de nettoyage de la cour ». Appel : « Monsieur le Proviseur, »."
+      },
+      {
+       "md": "Début du corps : « J'ai l'honneur de solliciter votre autorisation pour organiser, samedi prochain, une matinée de nettoyage de la cour avec les élèves volontaires. »"
+      }
+     ],
+     "answer": "Lettre formelle : lieu et date, destinataire, objet, formule d'appel, début du corps."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier de compter les mots ou de dépasser largement la tolérance.\n- Recopier le texte dans la contraction.\n- Mélanger les temps dans un récit.\n- Écrire une lettre sans formule d'appel ni formule de politesse.\n- Écrire un paragraphe sans exemple, ou avec plusieurs idées mélangées.\n- Oublier de se relire : accords, ponctuation, orthographe."
+    },
+    {
+     "type": "exercise",
+     "ref": "2nde-francais-exp-1"
+    },
+    {
+     "type": "more",
+     "items": [
+      "La règle de comptage des mots (une apostrophe sépare-t-elle deux mots ?) dépend de l'enseignant : demande-lui sa convention. Dans cette fiche, « l'école » compte pour un seul mot.",
+      "Les textes à contracter et les sujets de rédaction de cette fiche sont ORIGINAUX, écrits pour l'exercice."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Rapport de la contraction (au quart, au tiers…), tolérance de 10 % et règle de comptage des mots : conventions variables, à confirmer par l'enseignant et le programme officiel.",
+    "Les formules de politesse et la présentation des lettres peuvent différer selon les usages : à faire valider.",
+    "Le programme officiel de 2nde peut aussi prévoir la dissertation ou la discussion : non traitées ici."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "2nde-francais-exp-1",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 3,
+   "lesson": "2nde-francais-expression",
+   "prompt": "Associe chaque élément d'une lettre à son rôle.",
+   "pairs": [
+    [
+     "Formule d'appel",
+     "S'adresse au destinataire au début de la lettre"
+    ],
+    [
+     "Objet",
+     "Annonce le sujet d'une lettre formelle"
+    ],
+    [
+     "Formule de politesse",
+     "Termine la lettre de façon respectueuse"
+    ],
+    [
+     "Lieu et date",
+     "Situent la lettre dans l'espace et le temps"
+    ],
+    [
+     "Signature",
+     "Identifie l'auteur de la lettre"
+    ]
+   ],
+   "explanation": "Chaque élément a une place précise : lieu et date et objet en haut, formule d'appel avant le corps, formule de politesse puis signature à la fin.",
+   "method": "Repasse dans l'ordre d'une lettre.",
+   "mistakes": [
+    "Oublier la formule de politesse."
+   ],
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-francais-exp-2",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "lesson": "2nde-francais-expression",
+   "prompt": "Un texte compte 240 mots. On demande une contraction au quart. Quel est le nombre de mots visé ?",
+   "answer": 60,
+   "tolerance": 0,
+   "unit": "mots",
+   "explanation": "240 ÷ 4 = 60 mots, avec une tolérance de 10 % (de 54 à 66 mots).",
+   "method": "Divise le nombre de mots du texte par 4.",
+   "mistakes": [
+    "Multiplier par 4 au lieu de diviser."
+   ],
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-francais-exp-3",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-francais-expression",
+   "prompt": "Vrai ou faux : dans une contraction de texte, on recopie les exemples pour ne rien oublier.",
+   "answer": false,
+   "explanation": "Faux. Les exemples, images, répétitions et détails se suppriment. On garde les idées essentielles, reformulées avec ses propres mots.",
+   "mistakes": [
+    "Recopier des phrases entières."
+   ],
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-francais-exp-4",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "2nde-francais-expression",
+   "prompt": "Texte : « Les élèves qui lisent chaque jour enrichissent leur vocabulaire, écrivent mieux et réussissent plus facilement dans toutes les matières. Par exemple, Awa lit un roman par mois. » Quelle est la meilleure contraction ?",
+   "choices": [
+    "La lecture quotidienne enrichit le vocabulaire et favorise la réussite scolaire.",
+    "Awa lit un roman par mois et réussit.",
+    "Il faut obliger tous les élèves à lire chaque jour.",
+    "Les élèves qui lisent chaque jour enrichissent leur vocabulaire et écrivent mieux."
+   ],
+   "answer": 0,
+   "explanation": "La bonne contraction reformule les idées essentielles (vocabulaire, réussite) sans l'exemple d'Awa ni opinion ajoutée (« il faut obliger »). La dernière réponse recopie le texte et oublie la réussite dans toutes les matières.",
+   "method": "Garde l'idée, supprime l'exemple, n'ajoute rien.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-francais-exp-5",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 4,
+   "lesson": "2nde-francais-expression",
+   "prompt": "Rédige un paragraphe argumenté de 6 à 8 lignes pour soutenir l'idée : « Il faut limiter l'usage du téléphone portable pendant les cours. » Utilise un argument, un exemple et des connecteurs.",
+   "model": "Il faut limiter l'usage du téléphone portable pendant les cours. **D'abord**, un élève qui regarde son écran n'écoute plus l'enseignant : il perd le fil de la leçon. **Par exemple**, il peut manquer une consigne importante et se tromper dans son exercice. **De plus**, les notifications dérangent aussi les camarades. **Ainsi**, limiter le téléphone en classe permet à chacun de mieux se concentrer.",
+   "rubric": [
+    "Idée directrice claire (1 point).",
+    "Un argument cohérent (1 point).",
+    "Un exemple concret et des connecteurs (1 point).",
+    "Conclusion, orthographe et ponctuation (1 point)."
+   ],
+   "explanation": "Un paragraphe argumenté suit : idée, argument, exemple, conclusion.",
+   "method": "Fais un mini-plan au brouillon avant d'écrire.",
+   "mistakes": [
+    "Écrire plusieurs idées sans les développer."
+   ],
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-francais-exp-6",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "2nde-francais-expression",
+   "prompt": "Texte original écrit pour l'exercice (75 mots) : « Aujourd'hui, de nombreux jeunes passent plusieurs heures par jour devant un écran. Cette habitude fatigue les yeux et réduit le temps de sommeil, ce qui rend la concentration difficile en classe. De plus, elle prend la place des jeux en plein air et des conversations en famille. Il est donc souhaitable de fixer des horaires, ce qui aide à retrouver de l'énergie. Les parents peuvent donner l'exemple en éteignant eux aussi leur téléphone le soir. » Contraction demandée : au quart, tolérance de 10 %.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quel est le nombre de mots visé pour la contraction (arrondi à l'entier le plus proche) ?",
+     "answer": 19,
+     "tolerance": 0,
+     "unit": "mots",
+     "explanation": "75 ÷ 4 = 18,75, soit 19 mots (de 17 à 21 mots avec la tolérance).",
+     "id": "2nde-francais-exp-6-a"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Relève l'idée essentielle de chaque partie du texte.",
+     "model": "Les écrans fatiguent les yeux et réduisent le sommeil, donc gênent la concentration. Ils prennent aussi la place des jeux et des échanges en famille. Solution : fixer des horaires, avec l'exemple des parents.",
+     "rubric": [
+      "Les conséquences négatives (fatigue, sommeil, concentration) (1 point).",
+      "La solution proposée (horaires, exemple des parents) (1 point)."
+     ],
+     "explanation": "On ne garde pas les détails (yeux, jeux en plein air).",
+     "id": "2nde-francais-exp-6-b"
+    },
+    {
+     "kind": "open",
+     "points": 3,
+     "prompt": "Rédige la contraction du texte (de 17 à 21 mots).",
+     "model": "Trop d'écran fatigue les jeunes, nuit au sommeil, à la concentration et aux échanges, il faut fixer des horaires, parents compris.",
+     "rubric": [
+      "Les idées essentielles sont présentes (1 point).",
+      "Aucune phrase recopiée et pas de commentaire personnel (1 point).",
+      "Nombre de mots dans la tolérance (17 à 21) (1 point)."
+     ],
+     "explanation": "Contraction type de 21 mots ; d'autres formulations sont acceptées si elles respectent le nombre de mots.",
+     "id": "2nde-francais-exp-6-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Pourquoi supprime-t-on les « yeux », les « jeux en plein air » et « les conversations en famille » dans la contraction ?",
+     "model": "Ce sont des détails et des exemples qui illustrent l'idée générale. On les résume par des termes plus larges comme « les jeunes », « les échanges ».",
+     "rubric": [
+      "Notion de détail ou d'exemple (1 point).",
+      "Idée de généraliser ou de reformuler (1 point)."
+     ],
+     "explanation": "Contracter, c'est généraliser et hiérarchiser les idées.",
+     "id": "2nde-francais-exp-6-d"
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "method": "Compte les mots, repère les idées, supprime les détails, rédige, recompte.",
+   "mistakes": [
+    "Recopier le texte ou dépasser le nombre de mots."
+   ],
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-francais-exp-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-francais-expression",
+   "prompt": "Que doit-on faire des exemples dans une contraction ?",
+   "choices": [
+    "Les recopier",
+    "Les commenter",
+    "Les développer",
+    "Les supprimer"
+   ],
+   "answer": 3,
+   "explanation": "On garde seulement les idées essentielles.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-francais-exp-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-francais-expression",
+   "prompt": "Un texte compte 120 mots ; contraction au quart : combien de mots ?",
+   "choices": [
+    "20",
+    "30",
+    "40",
+    "60"
+   ],
+   "answer": 1,
+   "explanation": "120 ÷ 4 = 30.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-francais-exp-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-francais-expression",
+   "prompt": "Quelle est la formule d'appel d'une lettre à un directeur ?",
+   "choices": [
+    "Salut mon vieux,",
+    "Cordialement,",
+    "Je vous remercie.",
+    "Monsieur le Directeur,"
+   ],
+   "answer": 3,
+   "explanation": "On emploie un ton soutenu dans une lettre officielle.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-francais-exp-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-francais-expression",
+   "prompt": "Dans un paragraphe argumenté, l'exemple sert à :",
+   "choices": [
+    "remplacer la thèse",
+    "illustrer l'argument",
+    "raconter une histoire sans lien",
+    "conclure le texte"
+   ],
+   "answer": 1,
+   "explanation": "L'exemple rend l'argument concret.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-francais-exp-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-francais-expression",
+   "prompt": "Dans un récit, l'imparfait sert surtout à :",
+   "choices": [
+    "raconter les actions ponctuelles",
+    "donner des ordres",
+    "exprimer le futur",
+    "décrire le décor et les états"
+   ],
+   "answer": 3,
+   "explanation": "Le passé simple raconte les actions ; l'imparfait décrit.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-francais-blanc-1",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "2nde-francais-expression",
+   "prompt": "PARTIE 1 — Compréhension et analyse (8 points). Texte original écrit pour l'exercice : « Le vieux manguier de la cour dominait les classes comme un grand-père veillant sur ses petits-enfants. Chaque matin, ses branches se couvraient d'oiseaux bavards. À la saison des fruits, les élèves se précipitaient sous son ombre, le nez levé, guettant la chute d'une mangue dorée. Mais, cette année-là, un violent orage brisa sa plus grosse branche. Le directeur hocha la tête : « Il a trop donné », murmura-t-il. Pourtant, dès le lendemain, les enfants vinrent l'entourer de leurs mains, comme pour le consoler. »",
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quel type de narrateur reconnais-tu ?",
+     "explanation": "Le texte emploie « il », « les élèves », « les enfants » : le narrateur n'est pas un personnage.",
+     "id": "2nde-francais-blanc-1-a",
+     "choices": [
+      "Un narrateur personnage, à la 1ʳᵉ personne",
+      "Un narrateur extérieur, à la 3ᵉ personne",
+      "Un narrateur absent, sans aucun verbe",
+      "Le directeur de l'école"
+     ],
+     "answer": 1
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Relève une comparaison et explique ce qu'elle suggère du manguier.",
+     "model": "La comparaison « comme un grand-père veillant sur ses petits-enfants » suggère que le manguier protège les élèves avec bienveillance, comme un aïeul : il est un être aimé et respecté.",
+     "rubric": [
+      "Comparaison citée (« comme un grand-père… ») (1 point).",
+      "Interprétation : protection, affection (1 point)."
+     ],
+     "explanation": "La comparaison humanise l'arbre.",
+     "id": "2nde-francais-blanc-1-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explique l'emploi de l'imparfait (« dominait », « se couvraient ») et du passé simple (« brisa », « vinrent »).",
+     "model": "L'imparfait décrit l'état habituel de la cour, en arrière-plan. Le passé simple raconte les événements ponctuels qui font avancer le récit : l'orage brise la branche, puis les enfants viennent.",
+     "rubric": [
+      "Imparfait : description, habitude (1 point).",
+      "Passé simple : événements de premier plan (1 point)."
+     ],
+     "explanation": "Les deux temps ont des rôles complémentaires dans un récit.",
+     "id": "2nde-francais-blanc-1-c"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quel est l'élément perturbateur du récit ?",
+     "explanation": "Avant l'orage, la situation est stable ; l'orage rompt l'équilibre.",
+     "id": "2nde-francais-blanc-1-d",
+     "choices": [
+      "Les oiseaux qui se couvrent de branches",
+      "L'orage qui brise la plus grosse branche",
+      "Les élèves qui guettent la mangue",
+      "La visite du directeur"
+     ],
+     "answer": 1
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Quel registre domine à la fin du texte ? Justifie par une citation.",
+     "model": "Le registre est **pathétique** : la tristesse du directeur (« Il a trop donné ») et le geste des enfants qui entourent l'arbre « comme pour le consoler » cherchent à émouvoir le lecteur.",
+     "rubric": [
+      "Registre pathétique (ou touchant/lyrique justifié) (1 point).",
+      "Justification par une citation (1 point)."
+     ],
+     "explanation": "La personnification de l'arbre consolé appelle l'émotion.",
+     "id": "2nde-francais-blanc-1-e"
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-francais-blanc-2",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "2nde-francais-expression",
+   "prompt": "PARTIE 2 — Étude de la langue (4 points). Phrase : « Quand l'orage éclata, les élèves, qui jouaient dans la cour, coururent sous le préau parce qu'ils craignaient la foudre. »",
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Combien de propositions contient cette phrase ?",
+     "answer": 4,
+     "tolerance": 0,
+     "unit": "propositions",
+     "explanation": "Verbes conjugués : éclata, jouaient, coururent, craignaient → 4 propositions.",
+     "id": "2nde-francais-blanc-2-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle est la nature de « qui jouaient dans la cour » ?",
+     "explanation": "« Qui » reprend « les élèves » : relative.",
+     "id": "2nde-francais-blanc-2-b",
+     "choices": [
+      "Une subordonnée relative",
+      "Une subordonnée circonstancielle de temps",
+      "Une subordonnée complétive",
+      "Une proposition juxtaposée"
+     ],
+     "answer": 0
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Réécris la phrase en conjuguant tous les verbes au présent de l'indicatif.",
+     "model": "Quand l'orage éclate, les élèves, qui jouent dans la cour, courent sous le préau parce qu'ils craignent la foudre.",
+     "rubric": [
+      "Quatre verbes correctement conjugués : éclate, jouent, courent, craignent (1,5 point).",
+      "Reste de la phrase inchangé, ponctuation correcte (0,5 point)."
+     ],
+     "explanation": "Le passé simple « coururent » devient « courent » ; l'imparfait « jouaient » devient « jouent ».",
+     "id": "2nde-francais-blanc-2-c"
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-francais-blanc-3",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "2nde-francais-expression",
+   "prompt": "PARTIE 3 — Expression écrite (8 points). Traite les deux sujets.",
+   "parts": [
+    {
+     "kind": "open",
+     "points": 4,
+     "prompt": "Sujet 1. Rédige un paragraphe argumenté (8 à 10 lignes) pour défendre l'idée : « Il faut protéger les arbres de la cour de l'école. » Utilise une idée directrice, un argument, un exemple et des connecteurs.",
+     "model": "Il faut protéger les arbres de la cour de l'école. **D'abord**, leur ombre abrite les élèves du soleil à la récréation. **Par exemple**, beaucoup s'y assoient pour lire ou discuter pendant les heures chaudes. **De plus**, un arbre met de longues années à pousser : s'il est abattu, il faut attendre longtemps pour le remplacer. **Ainsi**, protéger les arbres, c'est préserver un confort quotidien et un bien commun.",
+     "rubric": [
+      "Idée directrice claire (1 point).",
+      "Un argument et un exemple pertinents (1,5 point).",
+      "Connecteurs et conclusion (0,5 point).",
+      "Langue : orthographe, accords, ponctuation (1 point)."
+     ],
+     "explanation": "Un seul argument principal, bien illustré, vaut mieux que plusieurs idées juxtaposées.",
+     "id": "2nde-francais-blanc-3-a"
+    },
+    {
+     "kind": "open",
+     "points": 4,
+     "prompt": "Sujet 2. Écris une lettre au directeur de ton lycée (noms fictifs) pour proposer de planter un jeune arbre à la place de la branche brisée. Respecte la présentation d'une lettre formelle.",
+     "model": "Yaoundé, le 10 octobre 2026\nÉlève de 2nde A\nÀ Monsieur le Directeur du lycée\nObjet : Proposition de plantation d'un arbre\n\nMonsieur le Directeur,\n\nJ'ai l'honneur de vous proposer de planter un jeune arbre dans la cour, à la place de la branche brisée par l'orage. Les élèves volontaires se chargeraient de l'arrosage à tour de rôle.\n\nDans l'espoir d'une suite favorable, veuillez agréer, Monsieur le Directeur, l'expression de mes respectueuses salutations.\n\nSignature",
+     "rubric": [
+      "Présentation : lieu, date, objet, formule d'appel (1 point).",
+      "Corps : demande claire et argumentée (1,5 point).",
+      "Formule de politesse et signature (0,5 point).",
+      "Ton soutenu et langue correcte (1 point)."
+     ],
+     "explanation": "Une lettre formelle exige un ton soutenu et une présentation soignée.",
+     "id": "2nde-francais-blanc-3-b"
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "source": "Exercice original, style devoir de 2nde"
+  }
+ ]
+}

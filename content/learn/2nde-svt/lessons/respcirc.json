@@ -1,0 +1,667 @@
+{
+ "chapter": "2nde-svt-ch-respcirc",
+ "lessons": [
+  {
+   "id": "2nde-svt-respcirc",
+   "title": "Respiration et circulation : échanges gazeux, cœur et circulation",
+   "minutes": 35,
+   "programRef": "2nde — Respiration, échanges gazeux, cœur et circulation sanguine (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Décrire la ventilation pulmonaire et les échanges gazeux.",
+    "Décrire le cœur, la double circulation et le rôle du sang.",
+    "Expliquer l'adaptation à l'effort."
+   ],
+   "prerequisites": [
+    "2nde-svt-cellule"
+   ],
+   "exercises": [
+    "2nde-svt-rc-1",
+    "2nde-svt-rc-2",
+    "2nde-svt-rc-3",
+    "2nde-svt-rc-4",
+    "2nde-svt-rc-5",
+    "2nde-svt-rc-6"
+   ],
+   "selfCheck": [
+    "2nde-svt-rc-q1",
+    "2nde-svt-rc-q2",
+    "2nde-svt-rc-q3",
+    "2nde-svt-rc-q4",
+    "2nde-svt-rc-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Ce que tu sauras faire",
+     "md": "- Décrire la ventilation et les échanges gazeux au niveau des poumons.\n- Décrire le cœur, la double circulation et le rôle du sang.\n- Relier effort physique, respiration et circulation."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Respirer : ventiler et échanger",
+     "md": "La **ventilation** est le renouvellement de l'air dans les poumons : l'air entre par les fosses nasales (ou la bouche), puis passe par le pharynx, la trachée, les bronches et les bronchioles jusqu'aux **alvéoles pulmonaires**. Les **échanges gazeux** ont lieu dans les alvéoles, entre l'air et le sang."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Inspiration et expiration",
+     "md": "- **Inspiration** : le diaphragme s'abaisse, les côtes se soulèvent, le volume de la cage thoracique augmente : l'air entre.\n- **Expiration** : le diaphragme remonte, les côtes s'abaissent, le volume diminue : l'air sort.\nLe nombre de mouvements par minute est la fréquence respiratoire."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les échanges gazeux",
+     "md": "Les alvéoles sont entourées de **capillaires sanguins**. Le dioxygène passe de l'air vers le sang ; le dioxyde de carbone passe du sang vers l'air. L'air expiré est donc plus pauvre en O₂ (environ 16 % contre 21 % dans l'air inspiré) et plus riche en CO₂ (environ 4 % contre moins de 0,1 % dans l'air inspiré)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Mettre en évidence le CO₂",
+     "md": "L'**eau de chaux** se trouble en présence de dioxyde de carbone. On souffle dans un tube plongeant dans l'eau de chaux : elle se trouble. On fait de même avec de l'air pris dans la salle, à l'aide d'une pompe : elle reste limpide ou se trouble très peu. Conclusion : l'air expiré contient plus de CO₂ que l'air inspiré."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le cœur et les vaisseaux",
+     "md": "Le cœur est une pompe musculaire à **4 cavités** : 2 oreillettes (qui reçoivent le sang) et 2 ventricules (qui l'envoient). Des **valvules** empêchent le sang de refluer. Les **artères** s'éloignent du cœur, les **veines** y retournent, les **capillaires** relient les deux et permettent les échanges avec les organes."
+    },
+    {
+     "type": "illustration",
+     "caption": "Le cœur : quatre cavités et vaisseaux principaux (schéma simplifié, vu de face).",
+     "alt": "Quatre rectangles forment le cœur : oreillettes en haut, ventricules en bas, côté droit bleu et côté gauche orange. Des flèches bleues entrent par les veines caves et sortent par l'artère pulmonaire ; des flèches rouges entrent par les veines pulmonaires et sortent par l'aorte.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 262,
+      "items": [
+       {
+        "t": "rect",
+        "x": 100,
+        "y": 70,
+        "w": 100,
+        "h": 60,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "radius": 8,
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 210,
+        "y": 70,
+        "w": 100,
+        "h": 60,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "radius": 8,
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 100,
+        "y": 140,
+        "w": 100,
+        "h": 70,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "radius": 8,
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 210,
+        "y": 140,
+        "w": 100,
+        "h": 70,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "radius": 8,
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 96,
+        "text": "Oreillette",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 114,
+        "text": "droite",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 96,
+        "text": "Oreillette",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 114,
+        "text": "gauche",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 171,
+        "text": "Ventricule",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 189,
+        "text": "droit",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 171,
+        "text": "Ventricule",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 189,
+        "text": "gauche",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 24,
+        "x2": 130,
+        "y2": 68,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 14,
+        "text": "Veines caves",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 98,
+        "y1": 175,
+        "x2": 36,
+        "y2": 175,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 52,
+        "y": 160,
+        "text": "Artère",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 52,
+        "y": 198,
+        "text": "pulmonaire",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 390,
+        "y1": 100,
+        "x2": 312,
+        "y2": 100,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 352,
+        "y": 82,
+        "text": "Veines",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 352,
+        "y": 128,
+        "text": "pulmonaires",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 312,
+        "y1": 175,
+        "x2": 390,
+        "y2": 175,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 352,
+        "y": 198,
+        "text": "Aorte",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 232,
+        "text": "Bleu : sang pauvre en dioxygène",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 250,
+        "text": "Rouge : sang riche en dioxygène",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "La double circulation",
+     "md": "- **Petite circulation** (cœur-poumons) : ventricule droit → artère pulmonaire → poumons (le sang se charge en O₂) → veines pulmonaires → oreillette gauche.\n- **Grande circulation** (cœur-organes) : ventricule gauche → aorte → organes (le sang cède son O₂ et se charge en CO₂) → veines caves → oreillette droite."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : le trajet d'une molécule de dioxygène",
+     "statement": "Décris le trajet d'une molécule de dioxygène depuis l'air inspiré jusqu'à un muscle de la jambe.",
+     "steps": [
+      {
+       "md": "Elle traverse les voies respiratoires jusqu'à un alvéole, puis passe dans le sang d'un capillaire alvéolaire."
+      },
+      {
+       "md": "Le sang oxygéné quitte les poumons par les veines pulmonaires, entre dans l'oreillette gauche, puis le ventricule gauche."
+      },
+      {
+       "md": "Le ventricule gauche l'envoie dans l'aorte et les artères ; dans les capillaires du muscle, le dioxygène passe du sang aux cellules."
+      }
+     ],
+     "answer": "Alvéole → capillaire → veines pulmonaires → cœur gauche → aorte → artères → capillaires du muscle."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Le sang et l'effort",
+     "md": "Le sang est formé du **plasma** (liquide) et de cellules : **globules rouges** (hémoglobine, qui transporte le dioxygène), globules blancs (défense), plaquettes (coagulation). À l'effort, les muscles consomment plus d'O₂ : la fréquence respiratoire et la fréquence cardiaque augmentent pour apporter davantage de dioxygène."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : débit cardiaque",
+     "statement": "Le cœur d'un élève au repos bat 70 fois par minute et éjecte 70 mL de sang à chaque battement (valeurs fictives). Quel est son débit cardiaque ?",
+     "steps": [
+      {
+       "md": "Débit cardiaque = fréquence cardiaque × volume éjecté par battement."
+      },
+      {
+       "md": "Calcul :",
+       "tex": "70 \\times 70 = 4\\,900\\ \\text{mL/min}"
+      },
+      {
+       "md": "On convertit : 4 900 mL = 4,9 L par minute."
+      }
+     ],
+     "answer": "Le débit est de **4 900 mL/min**, soit 4,9 L/min."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que toutes les veines contiennent du sang pauvre en O₂ : les **veines pulmonaires** transportent du sang riche en O₂.\n- Croire que toutes les artères transportent du sang riche en O₂ : l'**artère pulmonaire** transporte du sang pauvre en O₂.\n- Dire que le poumon « fabrique » l'oxygène : il l'échange.\n- Confondre respiration (échanges) et ventilation (mouvement de l'air).\n- Confondre oreillettes (entrée) et ventricules (sortie)."
+    },
+    {
+     "type": "exercise",
+     "ref": "2nde-svt-rc-1"
+    },
+    {
+     "type": "more",
+     "items": [
+      "La fumée du tabac abîme les voies respiratoires et les alvéoles : un bon motif pour ne pas fumer.",
+      "Le pouls, que l'on prend au poignet ou au cou, traduit les battements du cœur ; il est plus rapide après une course."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Pourcentages de gaz de l'air inspiré et expiré (environ 21 %, 16 %, 4 %) : valeurs approchées couramment enseignées, à confirmer par l'enseignant.",
+    "Le programme officiel de 2nde peut traiter la circulation plus ou moins en détail (valvules, pression artérielle) : à vérifier.",
+    "Les valeurs de fréquence cardiaque et de volume d'éjection des exercices sont fictives."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "2nde-svt-rc-1",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 3,
+   "lesson": "2nde-svt-respcirc",
+   "prompt": "Associe chaque structure à sa fonction.",
+   "pairs": [
+    [
+     "Alvéole pulmonaire",
+     "Lieu des échanges gazeux avec le sang"
+    ],
+    [
+     "Globule rouge",
+     "Transporte le dioxygène grâce à l'hémoglobine"
+    ],
+    [
+     "Valvule du cœur",
+     "Empêche le retour du sang en arrière"
+    ],
+    [
+     "Ventricule gauche",
+     "Envoie le sang dans l'aorte"
+    ],
+    [
+     "Oreillette droite",
+     "Reçoit le sang des veines caves"
+    ]
+   ],
+   "explanation": "Les alvéoles sont entourées de capillaires ; l'hémoglobine des globules rouges fixe le dioxygène ; les valvules garantissent un seul sens ; le ventricule gauche alimente la grande circulation ; l'oreillette droite reçoit le sang des organes.",
+   "method": "Une structure, une fonction.",
+   "mistakes": [
+    "Confondre oreillette et ventricule."
+   ],
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-rc-2",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "lesson": "2nde-svt-respcirc",
+   "prompt": "Le cœur d'un athlète au repos bat 60 fois par minute et éjecte 80 mL de sang à chaque battement (valeurs fictives). Calcule son débit cardiaque en mL/min.",
+   "answer": 4800,
+   "tolerance": 0,
+   "unit": "mL/min",
+   "explanation": "Débit = 60 × 80 = 4 800 mL/min, soit 4,8 L/min.",
+   "method": "Débit = fréquence × volume éjecté par battement.",
+   "mistakes": [
+    "Additionner 60 + 80."
+   ],
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-rc-3",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-svt-respcirc",
+   "prompt": "Vrai ou faux : les veines pulmonaires transportent du sang riche en dioxygène.",
+   "answer": true,
+   "explanation": "Vrai. Les veines ramènent le sang vers le cœur : les veines pulmonaires ramènent le sang qui vient de se charger en dioxygène dans les poumons. C'est une exception à l'idée « veine = sang pauvre en O₂ ».",
+   "mistakes": [
+    "Croire que toutes les veines contiennent du sang pauvre en O₂."
+   ],
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-rc-4",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "2nde-svt-respcirc",
+   "prompt": "On souffle de l'air expiré dans de l'eau de chaux : elle se trouble. De l'air de la salle, amené dans un autre tube d'eau de chaux, la laisse limpide. Quelle conclusion est exacte ?",
+   "choices": [
+    "L'air expiré ne contient pas de dioxygène",
+    "L'eau de chaux contient du dioxygène",
+    "L'air expiré contient plus de dioxyde de carbone que l'air de la salle",
+    "L'air de la salle ne contient aucun gaz"
+   ],
+   "answer": 2,
+   "explanation": "Le trouble de l'eau de chaux est le test du CO₂. La différence entre les deux tubes montre que l'air expiré en contient davantage. Le test ne renseigne pas sur le dioxygène.",
+   "method": "Compare les deux tubes : seul ce qui change explique la différence.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-rc-5",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 4,
+   "lesson": "2nde-svt-respcirc",
+   "prompt": "Pendant une course de 100 mètres, un élève respire plus vite et son cœur bat plus vite. Explique ce phénomène en 4 à 6 lignes.",
+   "model": "À l'effort, les muscles consomment davantage de **dioxygène** et de glucose pour produire de l'énergie, et rejettent plus de **dioxyde de carbone**. Pour répondre à ce besoin, la **fréquence respiratoire** augmente (plus d'air et donc de dioxygène sont apportés aux poumons) et la **fréquence cardiaque** augmente (le sang circule plus vite et apporte plus de dioxygène aux muscles). Le CO₂ produit est évacué plus vite.",
+   "rubric": [
+    "Besoin accru en O₂ des muscles (1 point).",
+    "Augmentation de la fréquence respiratoire expliquée (1 point).",
+    "Augmentation de la fréquence cardiaque expliquée (1 point).",
+    "Évacuation du CO₂ mentionnée et rédaction claire (1 point)."
+   ],
+   "explanation": "Respiration et circulation travaillent ensemble : la première charge le sang en O₂, la seconde le distribue aux organes.",
+   "method": "Pars du besoin des muscles, puis explique chaque réponse.",
+   "mistakes": [
+    "Dire que le cœur « fabrique » du dioxygène."
+   ],
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-rc-6",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "2nde-svt-respcirc",
+   "prompt": "Document fictif : composition approximative de l'air (en % du volume).\n\nAir inspiré : dioxygène 21 ; dioxyde de carbone 0,04.\nAir expiré : dioxygène 16 ; dioxyde de carbone 4.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "De combien de points de pourcentage la teneur en dioxygène diminue-t-elle entre l'air inspiré et l'air expiré ?",
+     "answer": 5,
+     "tolerance": 0,
+     "unit": "points de pourcentage",
+     "explanation": "21 − 16 = 5 points de pourcentage.",
+     "id": "2nde-svt-rc-6-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Dans quelle structure ces modifications de l'air ont-elles lieu ?",
+     "explanation": "Seuls les alvéoles, entourés de capillaires, sont le lieu des échanges gazeux.",
+     "id": "2nde-svt-rc-6-b",
+     "choices": [
+      "La trachée",
+      "Les bronches",
+      "Les alvéoles pulmonaires",
+      "Le diaphragme"
+     ],
+     "answer": 2
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explique l'évolution des teneurs en dioxygène et en dioxyde de carbone.",
+     "model": "Dans les alvéoles, le dioxygène passe de l'air vers le sang, donc l'air expiré en contient moins. Le dioxyde de carbone, produit par les cellules, passe du sang vers l'air : l'air expiré en contient davantage.",
+     "rubric": [
+      "O₂ : de l'air vers le sang (1 point).",
+      "CO₂ : du sang vers l'air (1 point)."
+     ],
+     "explanation": "Les échanges se font dans les deux sens, par diffusion à travers la paroi très fine des alvéoles et des capillaires.",
+     "id": "2nde-svt-rc-6-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Quel organe fait circuler le sang chargé en dioxygène vers les muscles ? Décris le chemin du sang entre les poumons et le muscle.",
+     "model": "Le cœur, par son ventricule gauche. Le sang oxygéné quitte les poumons par les veines pulmonaires, entre dans l'oreillette gauche puis le ventricule gauche, qui l'envoie dans l'aorte et les artères jusqu'aux capillaires du muscle.",
+     "rubric": [
+      "Cœur / ventricule gauche (1 point).",
+      "Chemin : veines pulmonaires, cœur gauche, aorte, artères, capillaires (1 point)."
+     ],
+     "explanation": "C'est la grande circulation, qui part du ventricule gauche.",
+     "id": "2nde-svt-rc-6-d"
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "method": "Lis le tableau, calcule la différence, puis explique les échanges.",
+   "mistakes": [
+    "Confondre dioxygène et dioxyde de carbone."
+   ],
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-rc-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-svt-respcirc",
+   "prompt": "Où se font les échanges gazeux dans les poumons ?",
+   "choices": [
+    "Dans la trachée",
+    "Dans les alvéoles pulmonaires",
+    "Dans le diaphragme",
+    "Dans les côtes"
+   ],
+   "answer": 1,
+   "explanation": "Les alvéoles sont entourées de capillaires sanguins.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-rc-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-svt-respcirc",
+   "prompt": "Lors de l'inspiration :",
+   "choices": [
+    "le diaphragme remonte",
+    "le volume thoracique diminue",
+    "les côtes s'abaissent",
+    "le diaphragme s'abaisse et le volume thoracique augmente"
+   ],
+   "answer": 3,
+   "explanation": "L'augmentation du volume de la cage thoracique fait entrer l'air.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-rc-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-svt-respcirc",
+   "prompt": "Quelle cavité du cœur envoie le sang dans l'aorte ?",
+   "choices": [
+    "L'oreillette droite",
+    "Le ventricule gauche",
+    "Le ventricule droit",
+    "L'oreillette gauche"
+   ],
+   "answer": 1,
+   "explanation": "Le ventricule gauche alimente la grande circulation par l'aorte.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-rc-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-svt-respcirc",
+   "prompt": "Quel produit trouble l'eau de chaux ?",
+   "choices": [
+    "Le dioxygène",
+    "L'azote",
+    "La vapeur d'eau seule",
+    "Le dioxyde de carbone"
+   ],
+   "answer": 3,
+   "explanation": "Le trouble de l'eau de chaux est le test du dioxyde de carbone.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-rc-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-svt-respcirc",
+   "prompt": "Quel élément du sang transporte surtout le dioxygène ?",
+   "choices": [
+    "Les globules blancs",
+    "Les globules rouges",
+    "Les plaquettes",
+    "Le plasma seul"
+   ],
+   "answer": 1,
+   "explanation": "L'hémoglobine des globules rouges fixe le dioxygène.",
+   "source": "Exercice original, style devoir de 2nde"
+  }
+ ]
+}

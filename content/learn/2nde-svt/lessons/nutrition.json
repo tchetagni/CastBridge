@@ -1,0 +1,610 @@
+{
+ "chapter": "2nde-svt-ch-nutrition",
+ "lessons": [
+  {
+   "id": "2nde-svt-nutrition",
+   "title": "La nutrition : digestion, absorption et alimentation équilibrée",
+   "minutes": 35,
+   "programRef": "2nde — Nutrition : digestion, absorption, besoins, alimentation équilibrée (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Citer les familles d'aliments et leur rôle.",
+    "Décrire le trajet des aliments, la digestion et l'absorption.",
+    "Calculer un apport énergétique et un IMC et évaluer un repas."
+   ],
+   "prerequisites": [
+    "2nde-svt-cellule"
+   ],
+   "exercises": [
+    "2nde-svt-nut-1",
+    "2nde-svt-nut-2",
+    "2nde-svt-nut-3",
+    "2nde-svt-nut-4",
+    "2nde-svt-nut-5",
+    "2nde-svt-nut-6"
+   ],
+   "selfCheck": [
+    "2nde-svt-nut-q1",
+    "2nde-svt-nut-q2",
+    "2nde-svt-nut-q3",
+    "2nde-svt-nut-q4",
+    "2nde-svt-nut-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Ce que tu sauras faire",
+     "md": "- Distinguer les grandes familles d'aliments et leurs rôles.\n- Décrire la digestion et l'absorption des nutriments.\n- Évaluer un repas ou un régime et proposer une alimentation équilibrée."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Aliments et nutriments",
+     "md": "Un **aliment** est ce que l'on mange (plantain, poisson, haricots…). Les **nutriments** sont les petites molécules issues de la digestion, que le sang transporte vers les cellules. Les aliments contiennent de l'eau, des sels minéraux, des vitamines et trois grandes familles de matières organiques : glucides, lipides, protides."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Rôle des grandes familles",
+     "md": "- **Glucides** (sucres, amidon du manioc, du riz, du plantain) : énergie rapidement disponible.\n- **Lipides** (huiles, beurre, arachides) : réserve d'énergie, très énergétiques.\n- **Protides** (viande, poisson, œufs, haricots) : construction et réparation des cellules.\n- **Vitamines et sels minéraux** (fruits, légumes) : fonctionnement et protection de l'organisme.\n- **Eau** et **fibres** : transport et transit intestinal."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Reconnaître les nutriments par des tests",
+     "md": "- **Amidon** : l'eau iodée devient bleu-noir.\n- **Glucose** (sucre simple) : la liqueur de Fehling, chauffée, donne un précipité rouge brique.\n- **Protides** : le réactif du biuret donne une couleur violette.\n- **Lipides** : une goutte d'huile laisse une tache translucide sur le papier.\nOn réalise toujours un témoin (eau pure) pour comparer."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "La digestion : mécanique et chimique",
+     "md": "La digestion **mécanique** (mastication, brassage) réduit les aliments en morceaux. La digestion **chimique** est faite par des **enzymes** (salive, suc gastrique, suc pancréatique, bile…), qui découpent les grosses molécules : l'amidon donne du glucose, les protides des acides aminés, les lipides des acides gras et du glycérol."
+    },
+    {
+     "type": "illustration",
+     "caption": "Le tube digestif : les étapes du trajet des aliments (schéma simplifié, sans échelle).",
+     "alt": "Cinq rectangles empilés relient la bouche, l'œsophage, l'estomac, l'intestin grêle et le gros intestin par des flèches vers le bas. À droite de chacun, une courte note donne son rôle.",
+     "figure": {
+      "kind": "shapes",
+      "w": 380,
+      "h": 330,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 10,
+        "w": 130,
+        "h": 36,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "radius": 6,
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 75,
+        "w": 130,
+        "h": 36,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "radius": 6,
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 140,
+        "w": 130,
+        "h": 36,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "radius": 6,
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 205,
+        "w": 130,
+        "h": 36,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "radius": 6,
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 270,
+        "w": 130,
+        "h": 36,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "radius": 6,
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 85,
+        "y1": 46,
+        "x2": 85,
+        "y2": 75,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 85,
+        "y1": 111,
+        "x2": 85,
+        "y2": 140,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 85,
+        "y1": 176,
+        "x2": 85,
+        "y2": 205,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 85,
+        "y1": 241,
+        "x2": 85,
+        "y2": 270,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 33,
+        "text": "Bouche",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 98,
+        "text": "Œsophage",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 163,
+        "text": "Estomac",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 228,
+        "text": "Intestin grêle",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 293,
+        "text": "Gros intestin",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 33,
+        "text": "mastication, salive",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 98,
+        "text": "transport des aliments",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 163,
+        "text": "brassage, acidité",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 228,
+        "text": "absorption des nutriments",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 293,
+        "text": "absorption de l'eau",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start",
+        "bold": false
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "L'absorption",
+     "md": "L'**absorption** est le passage des nutriments du tube digestif vers le sang. Elle se fait surtout dans l'**intestin grêle**, dont la paroi très plissée (villosités) offre une grande surface d'échange. Dans le **gros intestin**, on absorbe surtout l'eau ; les déchets non digérés (fibres) sont rejetés."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : quelle est la nature de cet aliment ?",
+     "statement": "On teste un jus fictif. L'eau iodée ne change pas de couleur. La liqueur de Fehling chauffée donne un précipité rouge brique. Que contient ce jus ?",
+     "steps": [
+      {
+       "md": "L'eau iodée ne bleuit pas : il n'y a pas d'amidon."
+      },
+      {
+       "md": "La liqueur de Fehling chauffée donne un précipité rouge brique : il y a du glucose."
+      },
+      {
+       "md": "On compare avec le témoin (eau pure) qui, lui, ne réagit pas : les résultats sont bien dus au jus."
+      }
+     ],
+     "answer": "Le jus contient du **glucose** et **pas d'amidon**."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Les besoins et l'énergie",
+     "md": "Les besoins dépendent de l'âge, du sexe, de l'activité physique et de l'état (croissance, grossesse). Valeurs énergétiques approchées : **glucides et protides 4 kcal/g, lipides 9 kcal/g**.\nL'**indice de masse corporelle** : IMC = masse (kg) ÷ taille² (m²). Repères usuels : moins de 18,5 maigreur ; de 18,5 à 24,9 corpulence normale ; 25 et plus surpoids."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : valeur énergétique d'un aliment fictif",
+     "statement": "100 g d'un aliment fictif contiennent 30 g de glucides, 5 g de protides et 10 g de lipides. Calcule son apport énergétique avec 4, 4 et 9 kcal/g.",
+     "steps": [
+      {
+       "md": "Glucides : 30 × 4 = 120 kcal ; protides : 5 × 4 = 20 kcal."
+      },
+      {
+       "md": "Lipides : 10 × 9 = 90 kcal."
+      },
+      {
+       "md": "Total : 120 + 20 + 90 = 230 kcal pour 100 g."
+      }
+     ],
+     "answer": "L'apport est de **230 kcal pour 100 g**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Une alimentation équilibrée",
+     "md": "Elle est **variée**, **suffisante** et **adaptée** à la personne. On associe : aliments énergétiques (manioc, plantain, riz, mil), aliments constructeurs (poisson, haricots, œufs, viande), aliments protecteurs (fruits, légumes). Un repas comme le ndolé accompagné de plantain ou de manioc combine ainsi plusieurs familles. Boire de l'eau potable et éviter l'excès de sucre, de sel et de graisse protègent la santé."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que les aliments passent dans le sang : ce sont les **nutriments**, après digestion.\n- Dire que l'absorption se fait dans l'estomac : elle se fait surtout dans l'intestin grêle.\n- Confondre digestion mécanique (broyage) et chimique (enzymes).\n- Penser qu'il existe un aliment « complet » : l'équilibre vient de la variété.\n- Oublier de convertir la taille en mètres dans le calcul de l'IMC."
+    },
+    {
+     "type": "exercise",
+     "ref": "2nde-svt-nut-1"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Les besoins en énergie d'un adolescent actif sont élevés : un petit déjeuner avec seulement du pain et du sucre apporte peu de protides et de vitamines.",
+      "Les carences (en fer, en vitamine A, en protéines) comme les excès sont des formes de malnutrition ; leur ampleur dans un pays donné ne doit être citée qu'avec des sources officielles."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Valeurs énergétiques (4/4/9 kcal/g) et seuils d'IMC : conventions courantes à confirmer par l'enseignant ; le programme peut préférer le kilojoule.",
+    "Niveau de détail attendu sur les enzymes (amylase, pepsine, lipase) et sur les organes annexes (foie, pancréas) : à vérifier sur le programme officiel.",
+    "Aucune statistique réelle de malnutrition n'est donnée ; les exemples (Konan, jus) sont fictifs."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "2nde-svt-nut-1",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 3,
+   "lesson": "2nde-svt-nutrition",
+   "prompt": "Associe chaque test à la substance qu'il met en évidence.",
+   "pairs": [
+    [
+     "Eau iodée bleu-noir",
+     "Amidon"
+    ],
+    [
+     "Liqueur de Fehling rouge brique à chaud",
+     "Glucose"
+    ],
+    [
+     "Réactif du biuret violet",
+     "Protides"
+    ],
+    [
+     "Tache translucide sur du papier",
+     "Lipides"
+    ]
+   ],
+   "explanation": "Chaque test est spécifique : l'eau iodée détecte l'amidon, la liqueur de Fehling le glucose (à chaud), le biuret les protides, la tache translucide les lipides.",
+   "method": "Mémoriser un test pour chaque famille.",
+   "mistakes": [
+    "Confondre amidon (eau iodée) et glucose (Fehling)."
+   ],
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-nut-2",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "lesson": "2nde-svt-nutrition",
+   "prompt": "Un aliment fictif contient, pour 100 g, 50 g de glucides, 20 g de protides et 10 g de lipides. Calcule son apport énergétique en kcal avec 4, 4 et 9 kcal/g.",
+   "answer": 370,
+   "tolerance": 0,
+   "unit": "kcal",
+   "explanation": "50 × 4 = 200 ; 20 × 4 = 80 ; 10 × 9 = 90. Total : 200 + 80 + 90 = 370 kcal.",
+   "method": "Multiplier la masse de chaque famille par sa valeur énergétique puis additionner.",
+   "mistakes": [
+    "Compter 4 kcal/g pour les lipides."
+   ],
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-nut-3",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-svt-nutrition",
+   "prompt": "Vrai ou faux : l'absorption des nutriments se fait surtout dans l'estomac.",
+   "answer": false,
+   "explanation": "Faux. Elle se fait surtout dans l'intestin grêle, dont la paroi plissée offre une très grande surface d'échange avec le sang. L'estomac brasse les aliments et commence la digestion des protides.",
+   "mistakes": [
+    "Confondre digestion et absorption."
+   ],
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-nut-4",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "2nde-svt-nutrition",
+   "prompt": "Expérience fictive : de l'empois d'amidon est placé avec de la salive à 37 °C. Après 20 minutes, l'eau iodée ne bleuit plus, mais la liqueur de Fehling donne un précipité rouge brique. Quelle conclusion est correcte ?",
+   "choices": [
+    "La salive contient une substance qui transforme l'amidon en glucose",
+    "La salive contient de l'amidon",
+    "Le glucose a bleui l'eau iodée",
+    "L'amidon s'est évaporé"
+   ],
+   "answer": 0,
+   "explanation": "Au départ il y a de l'amidon ; à la fin il n'y en a plus et du glucose est apparu : une enzyme de la salive a digéré l'amidon. Un tube témoin (eau à la place de la salive) permet de le confirmer.",
+   "method": "Compare l'état avant et après, puis cherche ce qui a changé.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-nut-5",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 4,
+   "lesson": "2nde-svt-nutrition",
+   "prompt": "Un élève prend chaque matin un beignet et une boisson sucrée, puis ne mange qu'un grand plat de riz le soir. Évalue cette alimentation et propose deux améliorations.",
+   "model": "Cette alimentation est **riche en glucides** (beignet, sucre, riz) et en **lipides** (huile du beignet), mais pauvre en **protides**, en **vitamines** et en **fibres** : elle n'est ni variée ni équilibrée. De plus, un seul vrai repas concentre l'énergie. On peut ajouter du poisson, des haricots ou des œufs (protides) et des fruits ou des légumes (vitamines), et répartir les repas dans la journée.",
+   "rubric": [
+    "Identifier l'excès de glucides/lipides (1 point).",
+    "Identifier ce qui manque : protides, vitamines, fibres (1 point).",
+    "Deux améliorations concrètes et justifiées (2 points)."
+   ],
+   "explanation": "Une alimentation équilibrée associe aliments énergétiques, constructeurs et protecteurs, répartis sur la journée.",
+   "method": "Classe les aliments cités par famille, puis repère les familles absentes.",
+   "mistakes": [
+    "Se contenter de dire « il faut manger équilibré » sans donner d'exemple."
+   ],
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-nut-6",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "2nde-svt-nutrition",
+   "prompt": "Konan, 15 ans, mesure 1,60 m et pèse 52 kg (données fictives). Il se plaint d'être fatigué en fin de matinée : il part le matin sans petit déjeuner. Son repas de midi est du riz avec une sauce à l'huile.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Calcule l'IMC de Konan (arrondi au dixième).",
+     "answer": 20.3,
+     "tolerance": 0.1,
+     "explanation": "IMC = 52 ÷ 1,60² = 52 ÷ 2,56 ≈ 20,3.",
+     "id": "2nde-svt-nut-6-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Que peut-on dire de sa corpulence selon les repères usuels (18,5 à 24,9 = normale) ?",
+     "explanation": "20,3 est compris entre 18,5 et 24,9 : corpulence normale. L'IMC ne dit rien de la qualité de l'alimentation.",
+     "id": "2nde-svt-nut-6-b",
+     "choices": [
+      "Il est en maigreur",
+      "Elle est normale",
+      "Il est en surpoids",
+      "Il est obèse"
+     ],
+     "answer": 1
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explique pourquoi Konan est fatigué le matin et propose un petit déjeuner adapté.",
+     "model": "Après la nuit, les réserves d'énergie sont faibles : sans petit déjeuner, les cellules manquent de glucose, d'où la fatigue. Un bon petit déjeuner associe un aliment énergétique (pain, plantain, bouillie de mil), un aliment constructeur (œuf, haricots) et un fruit, avec de l'eau.",
+     "rubric": [
+      "Lien entre l'absence d'apport (glucose) et la fatigue (1 point).",
+      "Petit déjeuner varié avec au moins deux familles d'aliments (1 point)."
+     ],
+     "explanation": "Le petit déjeuner reconstitue l'apport d'énergie après le jeûne de la nuit.",
+     "id": "2nde-svt-nut-6-c"
+    },
+    {
+     "kind": "open",
+     "points": 1,
+     "prompt": "Que manque-t-il au repas de midi (riz et sauce à l'huile) pour être équilibré ?",
+     "model": "Il manque des protides (poisson, viande, haricots) et des vitamines et fibres (légumes, fruits).",
+     "rubric": [
+      "Citer protides et vitamines/fibres (1 point)."
+     ],
+     "explanation": "Le repas est riche en glucides (riz) et en lipides (huile).",
+     "id": "2nde-svt-nut-6-d"
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "method": "Calcule d'abord l'IMC, interprète, puis évalue l'équilibre du repas par familles d'aliments.",
+   "mistakes": [
+    "Utiliser 160 au lieu de 1,60 m dans le calcul de l'IMC."
+   ],
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-nut-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-svt-nutrition",
+   "prompt": "Où l'absorption des nutriments se fait-elle surtout ?",
+   "choices": [
+    "Dans la bouche",
+    "Dans l'estomac",
+    "Dans l'œsophage",
+    "Dans l'intestin grêle"
+   ],
+   "answer": 3,
+   "explanation": "La paroi plissée de l'intestin grêle offre une grande surface d'échange avec le sang.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-nut-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-svt-nutrition",
+   "prompt": "L'eau iodée devient bleu-noir en présence :",
+   "choices": [
+    "de glucose",
+    "d'amidon",
+    "de protides",
+    "de lipides"
+   ],
+   "answer": 1,
+   "explanation": "L'eau iodée met en évidence l'amidon.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-nut-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-svt-nutrition",
+   "prompt": "Quel nutriment sert surtout à construire et réparer les cellules ?",
+   "choices": [
+    "Les glucides",
+    "Les fibres",
+    "L'eau",
+    "Les protides"
+   ],
+   "answer": 3,
+   "explanation": "Les protides (acides aminés) servent à la construction et à la réparation.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-nut-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-svt-nutrition",
+   "prompt": "Quel est l'IMC d'une personne de 1,50 m et 54 kg ?",
+   "choices": [
+    "36",
+    "24",
+    "81",
+    "12"
+   ],
+   "answer": 1,
+   "explanation": "IMC = 54 ÷ 1,50² = 54 ÷ 2,25 = 24.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-nut-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-svt-nutrition",
+   "prompt": "Une alimentation équilibrée est :",
+   "choices": [
+    "riche uniquement en sucres",
+    "composée d'un seul aliment complet",
+    "identique pour tout le monde",
+    "variée, suffisante et adaptée à la personne"
+   ],
+   "answer": 3,
+   "explanation": "L'équilibre vient de la variété et de l'adaptation aux besoins.",
+   "source": "Exercice original, style devoir de 2nde"
+  }
+ ]
+}

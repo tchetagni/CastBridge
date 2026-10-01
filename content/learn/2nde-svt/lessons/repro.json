@@ -1,0 +1,539 @@
+{
+ "chapter": "2nde-svt-ch-repro",
+ "lessons": [
+  {
+   "id": "2nde-svt-repro",
+   "title": "La reproduction humaine et la santé reproductive",
+   "minutes": 35,
+   "programRef": "2nde — Reproduction humaine, éducation à la santé, IST, contraception (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Décrire les organes reproducteurs, les gamètes, la fécondation et la grossesse.",
+    "Expliquer le cycle menstruel en grandes lignes.",
+    "Citer les IST, le VIH/sida, leurs voies de transmission et de prévention, et les principes de la contraception."
+   ],
+   "prerequisites": [
+    "2nde-svt-cellule"
+   ],
+   "exercises": [
+    "2nde-svt-rep-1",
+    "2nde-svt-rep-2",
+    "2nde-svt-rep-3",
+    "2nde-svt-rep-4",
+    "2nde-svt-rep-5",
+    "2nde-svt-rep-6"
+   ],
+   "selfCheck": [
+    "2nde-svt-rep-q1",
+    "2nde-svt-rep-q2",
+    "2nde-svt-rep-q3",
+    "2nde-svt-rep-q4",
+    "2nde-svt-rep-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Ce que tu sauras faire",
+     "md": "- Décrire les organes reproducteurs et le rôle des gamètes.\n- Expliquer la fécondation, la nidation et le développement de l'embryon.\n- Citer des IST, dont le VIH/sida, et les moyens de s'en protéger ; connaître les grands principes de la contraception."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Puberté et organes reproducteurs",
+     "md": "À la **puberté**, des hormones déclenchent des transformations du corps et la production des **gamètes**. Chez l'homme, les **testicules** produisent les spermatozoïdes ; chez la femme, les **ovaires** libèrent les ovules, chaque cycle à partir de la puberté. Les ovaires et les testicules produisent aussi des hormones sexuelles."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Appareils reproducteurs",
+     "md": "- Homme : testicules, canaux déférents, glandes annexes (vésicules séminales, prostate), urètre, pénis.\n- Femme : ovaires, **trompes** (lieu habituel de la fécondation), **utérus** (où se développe l'embryon), vagin.\nLes gamètes sont fabriqués par une division particulière (méiose) qui divise par deux le nombre de chromosomes."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "La fécondation",
+     "md": "Après un rapport sexuel, un spermatozoïde peut rencontrer un ovule dans la trompe : c'est la **fécondation**. Leur union donne l'**œuf**. Chaque gamète humain a 23 chromosomes, l'œuf en a **46**, comme les autres cellules du corps : le nombre de chromosomes de l'espèce est conservé d'une génération à l'autre."
+    },
+    {
+     "type": "illustration",
+     "caption": "La fécondation : deux gamètes à 23 chromosomes donnent un œuf à 46 (schéma sans échelle).",
+     "alt": "Un disque orange marqué 23 est l'ovule, un petit disque bleu marqué 23 est le spermatozoïde. Une flèche mène à un grand disque jaune marqué 46, l'œuf.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 170,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 70,
+        "cy": 70,
+        "r": 32,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 75,
+        "text": "23",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 125,
+        "text": "Ovule",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 135,
+        "y": 76,
+        "text": "+",
+        "size": 22,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "circle",
+        "cx": 195,
+        "cy": 70,
+        "r": 20,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 195,
+        "y": 75,
+        "text": "23",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 195,
+        "y": 125,
+        "text": "Spermatozoïde",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 245,
+        "y1": 70,
+        "x2": 300,
+        "y2": 70,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "circle",
+        "cx": 355,
+        "cy": 70,
+        "r": 40,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 355,
+        "y": 75,
+        "text": "46",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 355,
+        "y": 125,
+        "text": "Œuf",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 155,
+        "text": "Chromosomes : 23 + 23 = 46",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "De l'œuf au bébé",
+     "md": "L'œuf se divise en cellules (mitoses) en descendant vers l'utérus, où il s'installe dans la muqueuse : c'est la **nidation**. L'embryon puis le fœtus se développent pendant environ **9 mois**. Le **placenta** permet les échanges entre le sang de la mère et celui du fœtus (dioxygène, nutriments, déchets) sans mélange des deux sangs. Des substances nocives (alcool, tabac, certains médicaments) peuvent le traverser."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Le cycle menstruel",
+     "md": "Le cycle féminin dure en moyenne **environ 28 jours** (variable d'une femme à l'autre). Vers le milieu du cycle a lieu l'**ovulation** : un ovule est libéré. L'utérus prépare sa muqueuse ; s'il n'y a pas de fécondation, la muqueuse est éliminée : ce sont les **règles**, qui marquent le début d'un nouveau cycle."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : compter les chromosomes",
+     "statement": "Une cellule de la peau humaine contient 46 chromosomes. Combien en contiennent un spermatozoïde, un ovule et l'œuf ? Pourquoi ce nombre est-il conservé ?",
+     "steps": [
+      {
+       "md": "Les gamètes ont deux fois moins de chromosomes que les cellules du corps : 46 ÷ 2 = 23 chacun."
+      },
+      {
+       "md": "À la fécondation, les deux gamètes s'unissent : 23 + 23 = 46 chromosomes dans l'œuf."
+      },
+      {
+       "md": "L'œuf se divise ensuite par mitose, qui conserve ce nombre : toutes les cellules du bébé ont 46 chromosomes."
+      }
+     ],
+     "answer": "**23** pour chaque gamète, **46** pour l'œuf : le nombre est conservé."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "IST, VIH et sida",
+     "md": "Les **infections sexuellement transmissibles (IST)** sont causées par des bactéries ou des virus (syphilis, gonococcie, hépatite B, VIH…). Le **VIH** est un virus qui détruit des cellules de défense (lymphocytes) ; le **sida** est le stade avancé de l'infection. Il se transmet par : rapports sexuels non protégés, sang (seringues ou objets tranchants partagés), de la mère à l'enfant (grossesse, accouchement, allaitement)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Prévenir les IST et les grossesses non désirées",
+     "md": "- **Préservatif** : seul moyen qui protège à la fois des IST et d'une grossesse non désirée.\n- **Abstinence** : aucune exposition.\n- **Dépistage** dans un centre de santé : savoir son statut, être soigné tôt.\n- Ne jamais partager seringues, lames ou objets tranchants.\n- Contraception (pilule, implant, stérilet…) : empêche la grossesse mais **ne protège pas des IST** ; elle se choisit avec un professionnel de santé."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : situations à risque ou non ?",
+     "statement": "Pour chaque situation, indique s'il y a un risque de transmission du VIH : (1) partager une seringue ; (2) serrer la main d'une personne séropositive ; (3) piqûre de moustique ; (4) rapport sexuel non protégé.",
+     "steps": [
+      {
+       "md": "Le VIH est transmis par certains liquides du corps (sang, liquides sexuels, lait maternel) : il faut un contact direct de ces liquides avec le sang ou une muqueuse."
+      },
+      {
+       "md": "(1) et (4) mettent en contact ces liquides : risque réel."
+      },
+      {
+       "md": "(2) et (3) ne transmettent pas le virus : ni la peau intacte ni les piqûres d'insectes ne sont des voies de transmission."
+      }
+     ],
+     "answer": "Risque pour **(1) et (4)** ; pas de risque pour **(2) et (3)**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que le VIH se transmet par une poignée de main, un repas partagé, une piqûre de moustique ou des toilettes.\n- Penser qu'une personne séropositive est toujours visiblement malade : elle peut paraître en bonne santé.\n- Penser que la pilule protège des IST.\n- Confondre fécondation (rencontre des gamètes) et nidation (installation dans l'utérus).\n- Se moquer d'une personne malade ou la rejeter : la discrimination est injuste et ne protège de rien."
+    },
+    {
+     "type": "exercise",
+     "ref": "2nde-svt-rep-1"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Pour les questions de santé reproductive, le centre de santé, l'infirmerie du lycée ou un professionnel de santé sont les meilleures sources d'information : il n'y a pas de honte à poser des questions.",
+      "Les grossesses précoces comportent des risques pour la santé de la jeune fille et pour sa scolarité : l'information protège."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Fiche d'éducation à la santé à RELIRE ATTENTIVEMENT par un enseignant ou un professionnel de santé : ton, niveau de détail et sensibilités locales.",
+    "Cycle menstruel (environ 28 jours, ovulation à mi-cycle), durée de la grossesse (environ 9 mois) : valeurs moyennes à confirmer ; la méiose et le rôle détaillé des hormones sont peut-être au programme : à vérifier.",
+    "Contraception : seules les grandes familles sont citées, sans posologie ni conseil médical ; le programme officiel et la politique de l'établissement décident du degré de détail."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "2nde-svt-rep-1",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 3,
+   "lesson": "2nde-svt-repro",
+   "prompt": "Associe chaque organe à son rôle.",
+   "pairs": [
+    [
+     "Testicule",
+     "Produit les spermatozoïdes"
+    ],
+    [
+     "Ovaire",
+     "Libère les ovules"
+    ],
+    [
+     "Trompe",
+     "Lieu habituel de la fécondation"
+    ],
+    [
+     "Utérus",
+     "Lieu de développement de l'embryon"
+    ],
+    [
+     "Placenta",
+     "Permet les échanges entre la mère et le fœtus"
+    ]
+   ],
+   "explanation": "Chaque organe a un rôle précis : testicules et ovaires produisent les gamètes ; la fécondation a lieu dans la trompe ; l'embryon se développe dans l'utérus ; le placenta assure les échanges sans mélange des sangs.",
+   "method": "Reconnaître la fonction de chaque organe.",
+   "mistakes": [
+    "Placer la fécondation dans l'utérus."
+   ],
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-rep-2",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-svt-repro",
+   "prompt": "Un ovule humain contient 23 chromosomes et un spermatozoïde humain aussi. Combien de chromosomes contient l'œuf ?",
+   "answer": 46,
+   "tolerance": 0,
+   "unit": "chromosomes",
+   "explanation": "23 + 23 = 46 chromosomes.",
+   "method": "L'œuf reçoit les chromosomes des deux gamètes.",
+   "mistakes": [
+    "Croire que l'œuf a 23 chromosomes."
+   ],
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-rep-3",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-svt-repro",
+   "prompt": "Vrai ou faux : le VIH peut se transmettre en serrant la main d'une personne séropositive.",
+   "answer": false,
+   "explanation": "Faux. Une poignée de main, un baiser, partager un repas ou un verre ne transmettent pas le VIH. Le virus se transmet par le sang, les liquides sexuels et de la mère à l'enfant.",
+   "mistakes": [
+    "Éviter ou rejeter une personne séropositive par peur injustifiée."
+   ],
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-rep-4",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "2nde-svt-repro",
+   "prompt": "Quel moyen protège à la fois d'une grossesse non désirée et des IST, dont le VIH ?",
+   "choices": [
+    "Le préservatif",
+    "La pilule contraceptive",
+    "Le calcul des jours du cycle",
+    "Le stérilet (DIU)"
+   ],
+   "answer": 0,
+   "explanation": "Le préservatif forme une barrière contre les micro-organismes et les spermatozoïdes. Les autres méthodes ne protègent pas des IST ; le calcul des jours est de plus peu fiable.",
+   "method": "Cherche la méthode qui fait barrière.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-rep-5",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 4,
+   "lesson": "2nde-svt-repro",
+   "prompt": "Un camarade affirme qu'on peut attraper le VIH en buvant dans le même verre qu'une personne séropositive. Réponds-lui en 4 à 6 lignes : donne les vraies voies de transmission et deux moyens de se protéger.",
+   "model": "Ce n'est pas exact : le VIH ne se transmet pas par un verre, une poignée de main ou un repas partagé. Il se transmet par le **sang** (seringues ou objets tranchants partagés), par les **rapports sexuels non protégés** et de la **mère à l'enfant**. On s'en protège avec le **préservatif**, en ne partageant pas les objets tranchants, et en se faisant dépister. Il faut aussi respecter les personnes malades.",
+   "rubric": [
+    "Corriger l'idée fausse (1 point).",
+    "Citer au moins deux vraies voies de transmission (1 point).",
+    "Citer deux moyens de protection (1 point).",
+    "Ton respectueux et rédaction claire (1 point)."
+   ],
+   "explanation": "Distinguer les voies réelles de transmission des fausses croyances est la base de la prévention et lutte contre la discrimination.",
+   "method": "Corrige la rumeur, explique la vérité, propose des moyens de protection.",
+   "mistakes": [
+    "Oublier la transmission par le sang."
+   ],
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-rep-6",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "2nde-svt-repro",
+   "prompt": "Dans le cadre d'une campagne de sensibilisation au lycée, un club de santé prépare des affiches sur la reproduction humaine et la prévention.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Où a lieu habituellement la fécondation ?",
+     "explanation": "L'ovule libéré par l'ovaire est recueilli par la trompe, où il rencontre habituellement un spermatozoïde.",
+     "id": "2nde-svt-rep-6-a",
+     "choices": [
+      "Dans l'ovaire",
+      "Dans une trompe",
+      "Dans le vagin",
+      "Dans l'utérus"
+     ],
+     "answer": 1
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quelle est la durée moyenne d'une grossesse, en mois ?",
+     "answer": 9,
+     "tolerance": 0,
+     "unit": "mois",
+     "explanation": "Environ 9 mois (une quarantaine de semaines) : valeur moyenne.",
+     "id": "2nde-svt-rep-6-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explique le rôle du placenta et pourquoi la femme enceinte doit éviter l'alcool et le tabac.",
+     "model": "Le placenta permet les échanges entre le sang de la mère et celui du fœtus : dioxygène et nutriments vers le fœtus, déchets vers la mère, sans mélange des sangs. Mais des substances nocives comme l'alcool ou celles du tabac peuvent le traverser et nuire au développement du fœtus.",
+     "rubric": [
+      "Échanges mère-fœtus sans mélange des sangs (1 point).",
+      "Passage de substances nocives, risque pour le fœtus (1 point)."
+     ],
+     "explanation": "Le placenta n'est pas une barrière complète contre toutes les substances.",
+     "id": "2nde-svt-rep-6-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Cite deux voies de transmission du VIH et deux moyens de prévention à mettre sur l'affiche.",
+     "model": "Voies : rapports sexuels non protégés ; sang (seringues ou objets tranchants partagés) ; de la mère à l'enfant. Prévention : préservatif ; ne pas partager d'objets tranchants ; dépistage ; abstinence.",
+     "rubric": [
+      "Deux voies exactes (1 point).",
+      "Deux moyens de prévention exacts (1 point)."
+     ],
+     "explanation": "Prévenir, c'est connaître les vraies voies de transmission.",
+     "id": "2nde-svt-rep-6-d"
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "method": "Réponds d'abord par des faits précis, puis rédige les messages de prévention.",
+   "mistakes": [
+    "Citer le moustique ou la poignée de main comme voie de transmission."
+   ],
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-rep-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-svt-repro",
+   "prompt": "Combien de chromosomes un spermatozoïde humain contient-il ?",
+   "choices": [
+    "46",
+    "92",
+    "12",
+    "23"
+   ],
+   "answer": 3,
+   "explanation": "Les gamètes ont deux fois moins de chromosomes que les cellules du corps (46).",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-rep-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-svt-repro",
+   "prompt": "La nidation est :",
+   "choices": [
+    "la rencontre d'un spermatozoïde et d'un ovule",
+    "l'installation de l'embryon dans la muqueuse de l'utérus",
+    "l'expulsion de la muqueuse utérine",
+    "la libération de l'ovule"
+   ],
+   "answer": 1,
+   "explanation": "La fécondation est la rencontre des gamètes ; la nidation est l'installation dans l'utérus.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-rep-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-svt-repro",
+   "prompt": "Quelle est la voie de transmission du VIH parmi les suivantes ?",
+   "choices": [
+    "Une piqûre de moustique",
+    "Une poignée de main",
+    "Un repas partagé",
+    "Le partage d'une seringue"
+   ],
+   "answer": 3,
+   "explanation": "Le VIH se transmet par le sang, les rapports non protégés et de la mère à l'enfant.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-rep-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-svt-repro",
+   "prompt": "La pilule contraceptive :",
+   "choices": [
+    "protège du VIH",
+    "empêche une grossesse mais ne protège pas des IST",
+    "protège de toutes les IST",
+    "empêche l'ovulation et le VIH"
+   ],
+   "answer": 1,
+   "explanation": "Seul le préservatif protège aussi des IST.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-rep-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-svt-repro",
+   "prompt": "Que sont les règles ?",
+   "choices": [
+    "La libération de l'ovule",
+    "L'installation de l'embryon",
+    "Un signe de maladie",
+    "L'élimination de la muqueuse utérine en l'absence de fécondation"
+   ],
+   "answer": 3,
+   "explanation": "Les règles marquent la fin d'un cycle sans fécondation.",
+   "source": "Exercice original, style devoir de 2nde"
+  }
+ ]
+}

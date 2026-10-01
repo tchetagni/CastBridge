@@ -1,0 +1,842 @@
+{
+ "chapter": "2nde-svt-ch-geologie",
+ "lessons": [
+  {
+   "id": "2nde-svt-geologie",
+   "title": "Géologie de base : structure du globe, roches et volcanisme",
+   "minutes": 35,
+   "programRef": "2nde — Géologie : structure du globe, roches, volcanisme (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Décrire la structure du globe et la manière de la connaître.",
+    "Distinguer les roches magmatiques, sédimentaires et métamorphiques.",
+    "Expliquer le fonctionnement d'un volcan et citer des mesures de prévention (mont Cameroun)."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "2nde-svt-geo-1",
+    "2nde-svt-geo-2",
+    "2nde-svt-geo-3",
+    "2nde-svt-geo-4",
+    "2nde-svt-geo-5",
+    "2nde-svt-geo-6"
+   ],
+   "selfCheck": [
+    "2nde-svt-geo-q1",
+    "2nde-svt-geo-q2",
+    "2nde-svt-geo-q3",
+    "2nde-svt-geo-q4",
+    "2nde-svt-geo-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Ce que tu sauras faire",
+     "md": "- Décrire la structure interne du globe terrestre et comment on la connaît.\n- Distinguer les trois grandes familles de roches.\n- Expliquer le fonctionnement d'un volcan, ses risques et son intérêt, avec l'exemple du mont Cameroun."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "L'intérieur de la Terre",
+     "md": "On ne peut pas aller au centre de la Terre : on le connaît de façon **indirecte**, surtout grâce aux **ondes sismiques** des séismes, dont la vitesse et le trajet changent selon les matériaux traversés. Le globe est formé de couches concentriques : la **croûte**, le **manteau** et le **noyau**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les trois enveloppes",
+     "md": "- **Croûte** : couche externe, solide et très mince par rapport au rayon de la Terre (continentale ou océanique).\n- **Manteau** : roches solides très chaudes, qui se déforment lentement ; il est beaucoup plus épais que la croûte.\n- **Noyau** : riche en fer ; **externe liquide**, **interne solide**.\nLa croûte et la partie supérieure du manteau forment la **lithosphère**, découpée en plaques."
+    },
+    {
+     "type": "illustration",
+     "caption": "Structure du globe terrestre en coupe (schéma simplifié, sans échelle).",
+     "alt": "Quatre disques emboîtés : la croûte en brun est un anneau très fin autour du manteau orange, puis un noyau externe jaune et un petit noyau interne rouge. Quatre étiquettes à droite désignent chaque couche.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 240,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 110,
+        "cy": 120,
+        "r": 100,
+        "fill": "brown",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 110,
+        "cy": 120,
+        "r": 94,
+        "fill": "orange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 110,
+        "cy": 120,
+        "r": 55,
+        "fill": "yellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 110,
+        "cy": 120,
+        "r": 28,
+        "fill": "red",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 34,
+        "text": "Croûte",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 244,
+        "y1": 30,
+        "x2": 160,
+        "y2": 37,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 90,
+        "text": "Manteau",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 244,
+        "y1": 86,
+        "x2": 192,
+        "y2": 98,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 140,
+        "text": "Noyau externe",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 244,
+        "y1": 136,
+        "x2": 152,
+        "y2": 150,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 194,
+        "text": "Noyau interne",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 244,
+        "y1": 190,
+        "x2": 118,
+        "y2": 145,
+        "color": "ink",
+        "width": 2
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Trois familles de roches",
+     "md": "- **Roches magmatiques** : formées par refroidissement du magma. En surface (refroidissement rapide) : roches **volcaniques**, comme le basalte, à très petits cristaux. En profondeur (refroidissement lent) : roches **plutoniques**, comme le granite, à gros cristaux.\n- **Roches sédimentaires** : dépôts de matériaux en couches (strates), parfois avec fossiles : calcaire, grès, argile.\n- **Roches métamorphiques** : roches transformées par la chaleur et la pression : gneiss, marbre."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Magma et lave",
+     "md": "Le **magma** est de la roche fondue, riche en gaz, située en profondeur. Quand il atteint la surface et perd ses gaz, on l'appelle **lave**. En refroidissant, la lave forme des roches volcaniques."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Le fonctionnement d'un volcan",
+     "md": "Le magma s'accumule dans une **chambre magmatique**, puis monte par la **cheminée** et sort par le **cratère**. Les produits émis sont des **coulées de lave**, des cendres, des projections et des gaz. Leur accumulation construit un **cône volcanique**."
+    },
+    {
+     "type": "illustration",
+     "caption": "Coupe schématique d'un volcan (sans échelle).",
+     "alt": "Un cône brun surmonté d'un cratère est traversé par une cheminée orange qui descend jusqu'à une chambre magmatique rouge, sous le sol gris. Une coulée de lave rouge descend sur le flanc gauche. Quatre étiquettes désignent la coulée, le cratère, la cheminée et la chambre magmatique.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 270,
+      "items": [
+       {
+        "t": "rect",
+        "x": 0,
+        "y": 200,
+        "w": 420,
+        "h": 70,
+        "fill": "lightgrey",
+        "stroke": "lightgrey",
+        "radius": 0,
+        "width": 2
+       },
+       {
+        "t": "poly",
+        "pts": [
+         60,
+         200,
+         170,
+         70,
+         250,
+         70,
+         360,
+         200
+        ],
+        "fill": "brown",
+        "stroke": "ink",
+        "closed": true,
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 202,
+        "y": 88,
+        "w": 16,
+        "h": 152,
+        "fill": "orange",
+        "stroke": "orange",
+        "radius": 0,
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 210,
+        "cy": 240,
+        "r": 26,
+        "fill": "red",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 170,
+        "y1": 70,
+        "x2": 100,
+        "y2": 140,
+        "color": "red",
+        "width": 4
+       },
+       {
+        "t": "text",
+        "x": 10,
+        "y": 56,
+        "text": "Coulée de lave",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 112,
+        "y1": 60,
+        "x2": 138,
+        "y2": 96,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 56,
+        "text": "Cratère",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 294,
+        "y1": 53,
+        "x2": 244,
+        "y2": 70,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 136,
+        "text": "Cheminée",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 294,
+        "y1": 132,
+        "x2": 220,
+        "y2": 136,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 246,
+        "text": "Chambre magmatique",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start",
+        "bold": false
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Deux grands types d'éruption",
+     "md": "- **Effusive** : lave fluide qui s'écoule en coulées, peu de projections ; peu d'explosions.\n- **Explosive** : lave visqueuse, riche en gaz, qui explose en projetant cendres, blocs et gaz.\nLe type dépend surtout de la **viscosité** du magma et de sa teneur en gaz."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : identifier une roche",
+     "statement": "On observe un échantillon gris-noir, dont les cristaux ne se voient qu'à la loupe, trouvé sur le flanc d'un volcan. De quelle famille s'agit-il ?",
+     "steps": [
+      {
+       "md": "Une roche située sur un volcan provient de la lave : c'est une roche magmatique."
+      },
+      {
+       "md": "Les cristaux sont minuscules : le refroidissement a été rapide, à la surface."
+      },
+      {
+       "md": "C'est donc une roche **volcanique** ; le basalte en est un exemple courant."
+      }
+     ],
+     "answer": "Roche **magmatique volcanique** (type basalte)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Le mont Cameroun, un volcan actif",
+     "md": "Le **mont Cameroun**, au sud-ouest du pays près de Buéa et du golfe de Guinée, est un **volcan actif** : il a connu des éruptions et pourrait se réveiller. Les habitants vivent à proximité de ses flancs, souvent fertiles ; il est donc **surveillé** (sismographes). Les risques sont les coulées de lave, les cendres et les gaz."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : durée d'une onde sismique",
+     "statement": "Une onde sismique (valeurs fictives) se propage à 6 km/s sur une distance de 1 200 km. Combien de temps met-elle ?",
+     "steps": [
+      {
+       "md": "On utilise t = d ÷ v, avec d en km et v en km/s."
+      },
+      {
+       "md": "Calcul :",
+       "tex": "t = \\frac{1\\,200}{6} = 200\\ \\text{s}"
+      },
+      {
+       "md": "200 s correspondent à 3 min 20 s."
+      }
+     ],
+     "answer": "L'onde met **200 s**, soit 3 min 20 s."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que la Terre est « liquide » à l'intérieur : seuls le noyau externe et le magma localement sont liquides ; le manteau est solide.\n- Confondre magma (en profondeur) et lave (en surface).\n- Croire que le granite est une roche volcanique : il refroidit lentement en profondeur.\n- Croire qu'un volcan « éteint » ne peut plus se réveiller sans l'avoir vérifié.\n- Confondre croûte et lithosphère."
+    },
+    {
+     "type": "exercise",
+     "ref": "2nde-svt-geo-1"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le volcanisme est lié au mouvement des plaques de la lithosphère : il est fréquent près de leurs limites, mais pas uniquement.",
+      "Les cendres et les laves altérées donnent des sols souvent fertiles, ce qui explique pourquoi des populations vivent près de volcans ; la surveillance permet de limiter les risques."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Mont Cameroun : seule l'information « volcan actif près de Buéa » est donnée, sans date ni altitude ni chiffre ; la nature exacte de ses laves (basaltiques) n'est pas affirmée : à confirmer par un enseignant ou une source officielle.",
+    "Épaisseurs des couches, tectonique des plaques et séismes : volontairement non détaillés ; le programme officiel de 2nde peut les inclure : à vérifier.",
+    "Les valeurs des exercices (vitesse des ondes sismiques, vitesse de coulée) sont fictives."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "2nde-svt-geo-1",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 4,
+   "lesson": "2nde-svt-geologie",
+   "prompt": "Associe chaque roche à sa famille.",
+   "pairs": [
+    [
+     "Basalte",
+     "Roche magmatique volcanique"
+    ],
+    [
+     "Granite",
+     "Roche magmatique plutonique"
+    ],
+    [
+     "Calcaire",
+     "Roche sédimentaire"
+    ],
+    [
+     "Gneiss",
+     "Roche métamorphique"
+    ]
+   ],
+   "explanation": "Le basalte vient d'une lave refroidie vite en surface ; le granite d'un magma refroidi lentement en profondeur ; le calcaire est un dépôt en couches ; le gneiss est une roche transformée par chaleur et pression.",
+   "method": "Pense au mode de formation de chaque roche.",
+   "mistakes": [
+    "Classer le granite parmi les roches volcaniques."
+   ],
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-geo-2",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "lesson": "2nde-svt-geologie",
+   "prompt": "Une onde sismique (valeurs fictives) se propage à 8 km/s. Combien de secondes met-elle pour parcourir 1 600 km ?",
+   "answer": 200,
+   "tolerance": 0,
+   "unit": "s",
+   "explanation": "t = d ÷ v = 1 600 ÷ 8 = 200 s.",
+   "method": "t = d ÷ v.",
+   "mistakes": [
+    "Multiplier 1 600 par 8."
+   ],
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-geo-3",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-svt-geologie",
+   "prompt": "Vrai ou faux : le noyau externe de la Terre est liquide.",
+   "answer": true,
+   "explanation": "Vrai. Le noyau externe est liquide ; le noyau interne, malgré la chaleur, est solide à cause de la pression très élevée. Les ondes sismiques permettent de le savoir.",
+   "mistakes": [
+    "Croire que tout l'intérieur de la Terre est liquide."
+   ],
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-geo-4",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "2nde-svt-geologie",
+   "prompt": "Une roche montre de gros cristaux visibles à l'œil nu. Que peut-on en déduire ?",
+   "choices": [
+    "Elle s'est formée par un refroidissement lent, en profondeur",
+    "Elle s'est formée par un refroidissement très rapide à l'air libre",
+    "Elle s'est formée par le dépôt de sédiments",
+    "Elle contient forcément des fossiles"
+   ],
+   "answer": 0,
+   "explanation": "De gros cristaux ont eu le temps de grandir : le magma a refroidi lentement, en profondeur (roche plutonique, comme le granite). Un refroidissement rapide donne de petits cristaux.",
+   "method": "Taille des cristaux = vitesse de refroidissement.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-geo-5",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 4,
+   "lesson": "2nde-svt-geologie",
+   "prompt": "Un volcan actif comme le mont Cameroun est entouré de villages. Cite deux dangers possibles d'une éruption, une raison pour laquelle des habitants y vivent malgré tout et deux mesures de prévention.",
+   "model": "Dangers : **coulées de lave** qui détruisent les constructions et les cultures, **cendres** et **gaz** dangereux pour la santé. Les habitants vivent près du volcan parce que les **sols volcaniques sont souvent fertiles**. Prévention : **surveillance** du volcan (sismographes), **plans d'évacuation** et information des habitants.",
+   "rubric": [
+    "Deux dangers exacts (1 point).",
+    "Une raison de l'implantation humaine (1 point).",
+    "Deux mesures de prévention (1 point).",
+    "Rédaction claire (1 point)."
+   ],
+   "explanation": "On peut vivre près d'un volcan en connaissant ses risques et en se préparant.",
+   "method": "Pense aux produits émis, aux avantages du sol, puis à la surveillance.",
+   "mistakes": [
+    "Dire qu'un volcan actif est forcément en éruption en permanence."
+   ],
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-geo-6",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "2nde-svt-geologie",
+   "prompt": "Document fictif écrit pour l'exercice : un observatoire décrit une éruption. « Du magma monte dans la cheminée. De la lave très fluide s'écoule par le cratère et descend la pente ; on observe peu de cendres. La coulée a parcouru 1,5 km en 3 heures. »",
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Comment appelle-t-on le magma qui atteint la surface et perd ses gaz ?",
+     "explanation": "Le magma en profondeur devient lave en surface.",
+     "id": "2nde-svt-geo-6-a",
+     "choices": [
+      "Le noyau",
+      "La lithosphère",
+      "La lave",
+      "La cendre"
+     ],
+     "answer": 2
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "De quel type d'éruption s'agit-il ? Justifie avec le document.",
+     "model": "C'est une éruption **effusive** : la lave est très fluide, elle s'écoule en coulée et il y a peu de cendres, donc peu d'explosions.",
+     "rubric": [
+      "Type effusif (1 point).",
+      "Justification par la lave fluide et le peu de cendres (1 point)."
+     ],
+     "explanation": "Une éruption explosive projetterait beaucoup de cendres et de blocs, avec une lave visqueuse.",
+     "id": "2nde-svt-geo-6-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la vitesse moyenne de la coulée en km/h.",
+     "answer": 0.5,
+     "tolerance": 0.01,
+     "unit": "km/h",
+     "explanation": "v = d ÷ t = 1,5 km ÷ 3 h = 0,5 km/h.",
+     "id": "2nde-svt-geo-6-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Cite un danger de cette éruption pour une ville proche et une mesure de protection.",
+     "model": "Danger : la coulée peut détruire maisons, routes et cultures sur son passage. Mesure : évacuer à temps les habitants menacés grâce à la surveillance, car la coulée est lente.",
+     "rubric": [
+      "Un danger cohérent (1 point).",
+      "Une mesure de protection cohérente (1 point)."
+     ],
+     "explanation": "Une coulée lente laisse du temps pour évacuer, mais détruit tout sur son passage.",
+     "id": "2nde-svt-geo-6-d"
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "method": "Lis le document, identifie les caractéristiques, puis conclus.",
+   "mistakes": [
+    "Confondre vitesse en km/h et distance."
+   ],
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-geo-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-svt-geologie",
+   "prompt": "Quelle est la couche la plus externe du globe ?",
+   "choices": [
+    "Le manteau",
+    "Le noyau externe",
+    "Le noyau interne",
+    "La croûte"
+   ],
+   "answer": 3,
+   "explanation": "La croûte est l'enveloppe superficielle, mince et solide.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-geo-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-svt-geologie",
+   "prompt": "Comment connaît-on l'intérieur de la Terre ?",
+   "choices": [
+    "En creusant jusqu'au centre",
+    "Surtout grâce aux ondes sismiques",
+    "En observant les nuages",
+    "Grâce aux marées seulement"
+   ],
+   "answer": 1,
+   "explanation": "Les ondes sismiques changent de vitesse selon les matériaux traversés.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-geo-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-svt-geologie",
+   "prompt": "Quelle roche est une roche volcanique ?",
+   "choices": [
+    "Le granite",
+    "Le calcaire",
+    "Le gneiss",
+    "Le basalte"
+   ],
+   "answer": 3,
+   "explanation": "Le basalte provient d'une lave refroidie rapidement en surface.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-geo-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-svt-geologie",
+   "prompt": "Par où le magma sort-il d'un volcan ?",
+   "choices": [
+    "Par la chambre magmatique",
+    "Par le cratère",
+    "Par le noyau",
+    "Par la lithosphère"
+   ],
+   "answer": 1,
+   "explanation": "Le magma monte par la cheminée et sort par le cratère.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-geo-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-svt-geologie",
+   "prompt": "Le mont Cameroun est :",
+   "choices": [
+    "un volcan éteint depuis toujours",
+    "une simple colline sans volcanisme",
+    "une île volcanique en mer",
+    "un volcan actif"
+   ],
+   "answer": 3,
+   "explanation": "Le mont Cameroun est un volcan actif, surveillé.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-blanc-1",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "2nde-svt-geologie",
+   "prompt": "PARTIE 1 — Restitution organisée des connaissances (6 points).",
+   "parts": [
+    {
+     "kind": "open",
+     "points": 3,
+     "prompt": "Décris la digestion de l'amidon (aliment : manioc ou riz) dans le tube digestif, puis l'absorption des nutriments. Indique l'organe où elle a lieu.",
+     "model": "Dans la bouche, la mastication broie l'aliment et la salive, qui contient une enzyme, commence à transformer l'amidon en sucres. La digestion se poursuit dans l'intestin grêle grâce au suc pancréatique : l'amidon est finalement transformé en glucose, un nutriment. L'**absorption** a lieu surtout dans l'**intestin grêle** : le glucose passe de l'intestin vers le sang à travers une paroi plissée (villosités) qui offre une grande surface.",
+     "rubric": [
+      "Digestion mécanique et chimique par des enzymes (1 point).",
+      "Amidon transformé en glucose (1 point).",
+      "Absorption dans l'intestin grêle, passage vers le sang (1 point)."
+     ],
+     "explanation": "Le glucose est un nutriment : il passe dans le sang puis atteint les cellules.",
+     "id": "2nde-svt-blanc-1-a"
+    },
+    {
+     "kind": "open",
+     "points": 3,
+     "prompt": "Explique en quelques lignes la double circulation sanguine en précisant le rôle du cœur et des poumons.",
+     "model": "Le cœur est une pompe à quatre cavités. Dans la **petite circulation**, le ventricule droit envoie le sang pauvre en dioxygène aux poumons par l'artère pulmonaire ; il s'y charge en O₂ et revient à l'oreillette gauche par les veines pulmonaires. Dans la **grande circulation**, le ventricule gauche envoie le sang riche en O₂ dans l'aorte vers les organes ; le sang revient chargé en CO₂ par les veines caves à l'oreillette droite.",
+     "rubric": [
+      "Cœur à quatre cavités, pompe (1 point).",
+      "Petite circulation cœur-poumons avec échanges (1 point).",
+      "Grande circulation cœur-organes (1 point)."
+     ],
+     "explanation": "Les deux circuits sont en série : le sang passe tour à tour par les poumons et par les organes.",
+     "id": "2nde-svt-blanc-1-b"
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-blanc-2",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "2nde-svt-geologie",
+   "prompt": "PARTIE 2 — Exploitation de documents (8 points). Document fictif écrit pour l'exercice. Nina mesure son rythme au repos puis après une course. Au repos : 72 battements/min, 16 mouvements respiratoires/min. Après la course : 120 battements/min, 30 mouvements respiratoires/min. Son cœur éjecte 90 mL de sang par battement après la course. Au microscope, elle observe aussi une cellule de feuille d'élodée (plante aquatique verte) et mesure 36 mm sur son dessin au grossissement ×300.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "De combien de battements par minute la fréquence cardiaque augmente-t-elle à l'effort ?",
+     "answer": 48,
+     "tolerance": 0,
+     "unit": "battements/min",
+     "explanation": "120 − 72 = 48 battements par minute.",
+     "id": "2nde-svt-blanc-2-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le débit cardiaque de Nina après la course, en mL/min.",
+     "answer": 10800,
+     "tolerance": 0,
+     "unit": "mL/min",
+     "explanation": "Débit = 120 × 90 = 10 800 mL/min.",
+     "id": "2nde-svt-blanc-2-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explique pourquoi la fréquence cardiaque et la fréquence respiratoire augmentent à l'effort.",
+     "model": "Les muscles consomment plus de dioxygène et produisent plus de CO₂. Respirer plus vite apporte plus d'O₂ au sang ; un cœur plus rapide distribue plus vite ce sang aux muscles et évacue le CO₂.",
+     "rubric": [
+      "Besoin accru en O₂ des muscles (1 point).",
+      "Rôle de chaque fréquence : apport d'O₂ par la ventilation, transport par le cœur (1 point)."
+     ],
+     "explanation": "Respiration et circulation s'adaptent ensemble à l'effort.",
+     "id": "2nde-svt-blanc-2-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la taille réelle de la cellule d'élodée, en µm.",
+     "answer": 120,
+     "tolerance": 0,
+     "unit": "µm",
+     "explanation": "36 mm ÷ 300 = 0,12 mm = 120 µm.",
+     "id": "2nde-svt-blanc-2-d"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quel organite permet à la cellule d'élodée de fabriquer de la matière organique à la lumière ?",
+     "explanation": "La photosynthèse se déroule dans les chloroplastes, qui donnent la couleur verte.",
+     "id": "2nde-svt-blanc-2-e",
+     "choices": [
+      "Le noyau",
+      "La mitochondrie",
+      "Les chloroplastes",
+      "La membrane plasmique"
+     ],
+     "answer": 2
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Cite deux structures que l'on trouve dans cette cellule et pas dans une cellule de la joue humaine.",
+     "model": "La paroi rigide et les chloroplastes (ou une grande vacuole).",
+     "rubric": [
+      "Deux éléments exacts parmi paroi, chloroplastes, grande vacuole (2 points : 1 point par élément)."
+     ],
+     "explanation": "Ce sont les trois éléments propres à la cellule végétale.",
+     "id": "2nde-svt-blanc-2-f"
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-blanc-3",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "2nde-svt-geologie",
+   "prompt": "PARTIE 3 — Santé et géologie (6 points).",
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Un élève mesure 1,65 m et pèse 60 kg (données fictives). Calcule son IMC, arrondi au dixième.",
+     "answer": 22,
+     "tolerance": 0.1,
+     "unit": "kg/m²",
+     "explanation": "IMC = 60 ÷ 1,65² = 60 ÷ 2,7225 ≈ 22,0.",
+     "id": "2nde-svt-blanc-3-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle est la corpulence de cet élève (18,5 à 24,9 = normale) ?",
+     "explanation": "22,0 est compris entre 18,5 et 24,9.",
+     "id": "2nde-svt-blanc-3-b",
+     "choices": [
+      "Normale",
+      "Maigreur",
+      "Surpoids",
+      "Obésité"
+     ],
+     "answer": 0
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Cite deux voies de transmission du VIH et deux moyens de s'en protéger.",
+     "model": "Voies : rapports sexuels non protégés ; sang (seringues ou objets tranchants partagés) ; mère à l'enfant. Protection : préservatif ; ne pas partager d'objets tranchants ; dépistage ; abstinence.",
+     "rubric": [
+      "Deux voies exactes (1 point).",
+      "Deux moyens de protection exacts (1 point)."
+     ],
+     "explanation": "Le VIH ne se transmet ni par une poignée de main, ni par un repas partagé, ni par un moustique.",
+     "id": "2nde-svt-blanc-3-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Le mont Cameroun est un volcan actif. Décris le trajet du magma de la chambre magmatique à la surface et cite un produit d'éruption.",
+     "model": "Le magma, accumulé dans la chambre magmatique, monte par la cheminée et sort par le cratère. Il devient alors de la lave qui forme des coulées ; l'éruption peut aussi émettre des cendres et des gaz.",
+     "rubric": [
+      "Chambre magmatique → cheminée → cratère (1 point).",
+      "Un produit exact : lave, cendres ou gaz (1 point)."
+     ],
+     "explanation": "Le magma devient lave en atteignant la surface.",
+     "id": "2nde-svt-blanc-3-d"
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "source": "Exercice original, style devoir de 2nde"
+  }
+ ]
+}
