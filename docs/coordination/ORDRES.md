@@ -20,3 +20,4 @@ Compare au nombre d'ordres que tu as déjà traités (garde-le dans `docs/agent-
 ORDRE 1 | 2026-10-01 15:10 | A: TOUS | cahier: aucun | Protocole en place (docs/COORDINATION.md). Aucun ordre en attente : ne fais rien.
 ORDRE 2 | 2026-10-01 15:25 | A: Castbridge-cloud | cahier: integration-2 | Fusionner usb-data, net-architect, quiz culture et lycée dans claude/integration-2.
 ORDRE 3 | 2026-10-01 15:25 | A: castbridge-content | cahier: content-export | Instantané du contenu dans castbridge-content (accords du propriétaire requis, voir le cahier).
+ORDRE 4 | 2026-10-01 15:28 | A: castbridge-content | cahier: content-phase1 | Corrections de ton rapport puis première vague de contenu N2/N4 dans castbridge-content.
