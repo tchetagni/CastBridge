@@ -1,0 +1,216 @@
+package castbridge.owner
+
+import android.content.ClipData
+import android.content.ClipDescription
+import android.content.ClipboardManager
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
+import android.os.PersistableBundle
+import android.view.WindowManager
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.selection.SelectionContainer
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import castbridge.core.lots.Right
+import castbridge.core.owner.*
+import java.time.LocalDate
+import java.time.ZoneOffset
+
+/**
+ * « CastBridge Propriétaire » : generates the activations from what a TV shows (docs/OWNER-CONSOLE.md). Separate app, never published, no permission.
+ * Hidden from screenshots and the recent-apps preview; locks itself after 2 minutes without use and when it leaves the screen.
+ */
+class OwnerActivity : ComponentActivity() {
+    private lateinit var store: OwnerStore
+    private val signer = mutableStateOf<Ed25519Signer?>(null)
+    private var lastUse = System.currentTimeMillis()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
+        store = OwnerStore(this)
+        setContent { MaterialTheme(colorScheme = darkColorScheme()) { Surface(Modifier.fillMaxSize()) { Screen() } } }
+    }
+
+    override fun onStop() { super.onStop(); signer.value = null }     // leaving the screen locks the console
+    override fun onUserInteraction() { super.onUserInteraction(); lastUse = System.currentTimeMillis() }
+
+    @Composable private fun Screen() {
+        var hasVault by remember { mutableStateOf(store.hasVault()) }
+        LaunchedEffect(signer.value) {                                      // auto-lock after 2 minutes of no use
+            while (signer.value != null) { kotlinx.coroutines.delay(5_000); if (System.currentTimeMillis() - lastUse > AUTO_LOCK_MS) signer.value = null }
+        }
+        val s = signer.value
+        Column(Modifier.fillMaxSize().systemBarsPadding().padding(16.dp)) {
+            Row(Modifier.fillMaxWidth(), verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                Text("CastBridge Propriétaire", style = MaterialTheme.typography.titleLarge, modifier = Modifier.weight(1f))
+                if (s != null) TextButton({ signer.value = null }) { Text("Verrouiller") }
+            }
+            Spacer(Modifier.height(8.dp))
+            when {
+                !hasVault -> Create { signer.value = it; hasVault = true }
+                s == null -> Unlock { signer.value = it }
+                else -> Console(s)
+            }
+        }
+    }
+
+    @Composable private fun Create(onDone: (Ed25519Signer) -> Unit) {
+        var a by remember { mutableStateOf("") }; var b by remember { mutableStateOf("") }; var msg by remember { mutableStateOf<String?>(null) }
+        var busy by remember { mutableStateOf(false) }
+        Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Text("Première utilisation : créez la clé de signature de ce téléphone.", style = MaterialTheme.typography.titleMedium)
+            Text("Cette clé est propre au téléphone (une clé par outil). Le code que vous choisissez la protège : il n'est jamais enregistré. " +
+                "Choisissez un code NEUF et long (12 caractères ou plus). Si vous le perdez, la clé est perdue.", style = MaterialTheme.typography.bodyMedium)
+            OutlinedTextField(a, { a = it }, label = { Text("Code de déverrouillage") }, visualTransformation = PasswordVisualTransformation(), singleLine = true, modifier = Modifier.fillMaxWidth())
+            OutlinedTextField(b, { b = it }, label = { Text("Confirmez le code") }, visualTransformation = PasswordVisualTransformation(), singleLine = true, modifier = Modifier.fillMaxWidth())
+            msg?.let { Text(it, color = MaterialTheme.colorScheme.error) }
+            Button({
+                when {
+                    a.length < 12 -> msg = "Code trop court : 12 caractères au moins."
+                    a != b -> msg = "Les deux codes diffèrent."
+                    else -> { busy = true; msg = null; Thread { val r = store.create(a.toCharArray()); runOnUiThread { busy = false; if (r != null) onDone(r) else msg = "Une clé existe déjà." } }.start() }
+                }
+            }, enabled = !busy, modifier = Modifier.fillMaxWidth()) { Text(if (busy) "Création…" else "Créer la clé") }
+        }
+    }
+
+    @Composable private fun Unlock(onDone: (Ed25519Signer) -> Unit) {
+        var code by remember { mutableStateOf("") }; var msg by remember { mutableStateOf<String?>(null) }; var busy by remember { mutableStateOf(false) }
+        Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Text("Console verrouillée", style = MaterialTheme.typography.titleMedium)
+            OutlinedTextField(code, { code = it }, label = { Text("Code de déverrouillage") }, visualTransformation = PasswordVisualTransformation(),
+                singleLine = true, keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(keyboardType = KeyboardType.Password), modifier = Modifier.fillMaxWidth())
+            msg?.let { Text(it, color = MaterialTheme.colorScheme.error) }
+            Button({
+                busy = true; msg = null
+                val c = code.toCharArray(); code = ""
+                Thread {
+                    val r = try { store.unlock(c) } catch (e: OwnerStore.Locked) { runOnUiThread { busy = false; msg = "Trop d'essais : réessayez dans ${(e.waitMs + 999) / 1000} s." }; return@Thread }
+                    c.fill('0')
+                    runOnUiThread { busy = false; if (r != null) { lastUse = System.currentTimeMillis(); onDone(r) } else msg = "Code incorrect." }
+                }.start()
+            }, enabled = !busy && code.isNotEmpty(), modifier = Modifier.fillMaxWidth()) { Text(if (busy) "Vérification…" else "Déverrouiller") }
+        }
+    }
+
+    @Composable private fun Console(signer: Ed25519Signer) {
+        var tab by remember { mutableIntStateOf(0) }
+        TabRow(tab) { listOf("Activer", "Clé publique", "Journal").forEachIndexed { i, t -> Tab(tab == i, { tab = i }, text = { Text(t) }) } }
+        Spacer(Modifier.height(8.dp))
+        when (tab) { 0 -> Issue(signer); 1 -> PublicKey(); else -> Journal() }
+    }
+
+    @Composable private fun Issue(signer: Ed25519Signer) {
+        var input by remember { mutableStateOf("") }; var production by remember { mutableStateOf(false) }
+        var days by remember { mutableStateOf("30") }; var license by remember { mutableStateOf("") }
+        var purchase by remember { mutableStateOf("") }; var subscription by remember { mutableStateOf("") }
+        var openProduct by remember { mutableStateOf("") }; var openDays by remember { mutableStateOf("30") }
+        var token by remember { mutableStateOf<String?>(null) }; var fileContent by remember { mutableStateOf<String?>(null) }
+        var error by remember { mutableStateOf<String?>(null) }; var info by remember { mutableStateOf<String?>(null) }
+        val save = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("text/plain")) { uri ->
+            if (uri != null) runCatching { contentResolver.openOutputStream(uri)?.use { it.write((fileContent ?: "").toByteArray()) } }
+                .onSuccess { info = "Fichier « activation » enregistré : copiez-le dans Download/CastBridge de la clé USB de la TV." }.onFailure { error = "Enregistrement impossible : ${it.message}" }
+        }
+        Column(Modifier.verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            OutlinedTextField(input, { input = it; token = null; error = null }, label = { Text("Code d'appareil (XXXX-XXXX-XXXX-XXXX) ou demande d'appareil complète") },
+                modifier = Modifier.fillMaxWidth().heightIn(min = 90.dp))
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                FilterChip(!production, { production = false }, { Text("Essai") }); FilterChip(production, { production = true }, { Text("Production") })
+            }
+            OutlinedTextField(days, { days = it.filter(Char::isDigit).take(3) }, label = { Text("Durée de validité (jours, 1 à 366)") }, keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
+            if (production) {
+                OutlinedTextField(license, { license = it }, label = { Text("Identifiant de licence") }, singleLine = true, modifier = Modifier.fillMaxWidth())
+                OutlinedTextField(purchase, { purchase = it }, label = { Text("Achat à la carte : PRODUIT:BOUQUET,BOUQUET") }, modifier = Modifier.fillMaxWidth())
+                OutlinedTextField(subscription, { subscription = it }, label = { Text("Abonnement : PRODUIT:BOUQUET:AAAA-MM-JJ") }, modifier = Modifier.fillMaxWidth())
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    OutlinedTextField(openProduct, { openProduct = it }, label = { Text("« Tout ouvert » : produit") }, singleLine = true, modifier = Modifier.weight(1f))
+                    OutlinedTextField(openDays, { openDays = it.filter(Char::isDigit).take(2) }, label = { Text("Jours (≤ 30)") }, singleLine = true, modifier = Modifier.width(110.dp))
+                }
+            }
+            Button({
+                error = null; info = null; token = null; fileContent = null
+                runCatching {
+                    val d = days.toIntOrNull() ?: throw IssueException("Durée : nombre de jours")
+                    val issuer = ActivationIssuer(signer); val now = System.currentTimeMillis(); val day = 24L * 3600 * 1000; val start = now / day * day
+                    val full = OwnerFrames.parseDeviceInfo(input.trim().replace("\r", ""))
+                    if (full != null) {
+                        if (DeviceCode.of(full.third) != full.first) throw IssueException("Le code d'appareil ne correspond pas aux empreintes de la demande (texte altéré ?)")
+                        val rights = ArrayList<Right>()
+                        if (production) {
+                            purchase.lines().filter { it.isNotBlank() }.forEach { l -> l.split(':', limit = 2).also { if (it.size < 2) throw IssueException("Achat : PRODUIT:BOUQUET") }.let { rights += Right.Purchase(it[0].trim(), it[1].split(',').map(String::trim).filter(String::isNotEmpty), now) } }
+                            subscription.lines().filter { it.isNotBlank() }.forEach { l -> l.split(':').also { if (it.size != 3) throw IssueException("Abonnement : PRODUIT:BOUQUET:AAAA-MM-JJ") }.let {
+                                val end = runCatching { LocalDate.parse(it[2].trim()).atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli() }.getOrNull() ?: throw IssueException("Date d'abonnement invalide")
+                                rights += Right.Subscription(it[0].trim(), it[1].split(',').map(String::trim).filter(String::isNotEmpty), start, end, 7 * day, false) } }
+                            if (openProduct.isNotBlank()) rights += Right.OpenAll(openProduct.trim(), start, start + (openDays.toIntOrNull() ?: throw IssueException("« Tout ouvert » : nombre de jours")) * day)
+                        }
+                        val kind = if (production) ActivationKind.PRODUCTION else ActivationKind.TRIAL
+                        val lic = if (production) license.trim() else Activation.TRIAL_LICENSE
+                        val issued = issuer.issue(ActivationIssuer.Request(kind, full.first, full.third, issuedAt = now, rights = rights, license = lic, notBefore = start, windowDays = d))
+                        token = issued.token; fileContent = issued.fileContent
+                        store.journal("activation", full.first, kind.name, lic, d)
+                    } else {
+                        val code = DeviceCode.parse(input.trim()) ?: throw IssueException("Code d'appareil mal formé (16 caractères, contrôle compris) et demande complète illisible")
+                        val kind = if (production) ActivationKind.PRODUCTION else ActivationKind.TRIAL
+                        val dayIdx = ((start - 1767225600000L) / day).toInt()
+                        token = issuer.issueCompact(kind, code, dayIdx, d)
+                        store.journal("compact", code, kind.name, "-", d)
+                        info = "Clé compacte (à saisir) : liée à ce code d'appareil, sans droits ni clés de lots. Pour une activation complète, collez la demande d'appareil exportée par la TV."
+                    }
+                }.onFailure { error = (it as? IssueException)?.message ?: "Erreur : ${it.message}" }
+            }, enabled = input.isNotBlank(), modifier = Modifier.fillMaxWidth()) { Text("Générer") }
+            error?.let { Text(it, color = MaterialTheme.colorScheme.error) }
+            info?.let { Text(it, style = MaterialTheme.typography.bodySmall) }
+            token?.let { t ->
+                Card(Modifier.fillMaxWidth()) { Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Text("Activation émise", style = MaterialTheme.typography.titleSmall)
+                    SelectionContainer { Text(t, fontFamily = FontFamily.Monospace, fontSize = 12.sp) }
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        OutlinedButton({ copy(t) }) { Text("Copier") }
+                        OutlinedButton({ startActivity(Intent.createChooser(Intent(Intent.ACTION_SEND).setType("text/plain").putExtra(Intent.EXTRA_TEXT, t), "Envoyer")) }) { Text("Partager") }
+                        if (fileContent != null) OutlinedButton({ save.launch("activation") }) { Text("Fichier") }
+                    }
+                } }
+            }
+        }
+    }
+
+    @Composable private fun PublicKey() {
+        val line = store.publicLine() ?: "—"
+        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text("Clé publique de ce téléphone : à faire accepter par les TV (liste des clés de confiance).", style = MaterialTheme.typography.bodyMedium)
+            SelectionContainer { Text(line, fontFamily = FontFamily.Monospace, fontSize = 12.sp) }
+            OutlinedButton({ copy(line) }) { Text("Copier") }
+        }
+    }
+
+    @Composable private fun Journal() {
+        val rows = remember { store.journalLines() }
+        Column(Modifier.verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            if (rows.isEmpty()) Text("Aucune émission.")
+            rows.forEach { r -> if (r.size >= 6) Text("${java.text.SimpleDateFormat("dd/MM HH:mm").format(java.util.Date(r[1].toLong()))} · ${r[2]} · ${r[3]} · ${r[4]} · ${r[5]}", style = MaterialTheme.typography.bodySmall) }
+        }
+    }
+
+    private fun copy(text: String) {
+        val cm = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText("activation", text)
+        if (android.os.Build.VERSION.SDK_INT >= 33) clip.description.extras = PersistableBundle().apply { putBoolean(ClipDescription.EXTRA_IS_SENSITIVE, true) }
+        cm.setPrimaryClip(clip)
+    }
+
+    companion object { private const val AUTO_LOCK_MS = 2 * 60 * 1000L }
+}

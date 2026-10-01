@@ -5,4 +5,4 @@ dependencyResolutionManagement {
     repositories { google(); mavenCentral() }
 }
 rootProject.name = "castbridge"
-include(":core", ":sshd", ":sender", ":receiver")
+include(":core", ":sshd", ":sender", ":receiver", ":owner")
