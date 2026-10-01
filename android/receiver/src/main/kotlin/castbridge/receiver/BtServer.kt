@@ -119,6 +119,7 @@ class BtServer(
                     val name = runCatching { sock.remoteDevice.name }.getOrNull()
                     h(p, name, req).also { last.set(System.currentTimeMillis()) } } },
                 trusted = trusted, parental = parental)
+            LotsHub.adopt(ctx, dir)     // a lot (+ its signed proof) delivered as files by the phone: verified and installed (docs/LOTS.md)
             if (!wasHello) status("Bluetooth : prêt" + if (r != BtProtocol.OK) " (refusé : ${BtProtocol.describe(r)})" else " (fichier reçu)")
         } catch (e: Exception) {
             Log.w(TAG, "transfer interrupted: ${e.javaClass.simpleName}")   // never log request contents
