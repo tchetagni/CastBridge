@@ -1,0 +1,384 @@
+{
+ "chapter": "cm1-english-there-is-are",
+ "lessons": [
+  {
+   "id": "cm1-english-there-is-are-fiche",
+   "title": "There is, there are : dire ce qu'il y a",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CM1 — Anglais d'initiation (MINEDUB), reconstitué — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Dire ce qu'il y a avec there is et there are.",
+    "Choisir entre is et are selon le singulier ou le pluriel.",
+    "Poser une question et répondre avec Is there / Are there."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cm1-english-there-is-are-01",
+    "cm1-english-there-is-are-02",
+    "cm1-english-there-is-are-03",
+    "cm1-english-there-is-are-04",
+    "cm1-english-there-is-are-05",
+    "cm1-english-there-is-are-06"
+   ],
+   "selfCheck": [
+    "cm1-english-there-is-are-q1",
+    "cm1-english-there-is-are-q2",
+    "cm1-english-there-is-are-q3",
+    "cm1-english-there-is-are-q4",
+    "cm1-english-there-is-are-q5"
+   ],
+   "reviewNotes": [
+    "some / any : vérifier si cette distinction est au programme du CM1.",
+    "L'exemple compte les objets de la figure : vérifier la lisibilité à l'écran.",
+    "Prononciation de there / their : à travailler à l'oral."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "There is, there are",
+     "md": "On dit **there is** pour **un seul** objet et **there are** pour **plusieurs** objets.\n\n*There is a book on the table.* (Il y a un livre sur la table.)\n*There are three books on the table.* (Il y a trois livres.)"
+    },
+    {
+     "type": "audio",
+     "text": "There is a mango on the table. There are three bananas in the basket.",
+     "lang": "en-GB"
+    },
+    {
+     "type": "illustration",
+     "caption": "Combien y a-t-il de mangues ?",
+     "alt": "Trois mangues dessinées en orange. Elles illustrent la phrase : there are three mangoes.",
+     "figure": {
+      "kind": "count",
+      "n": 3,
+      "shape": "circle",
+      "color": "orange",
+      "perRow": 5,
+      "w": 300,
+      "h": 110
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Négation et questions",
+     "md": "- Négation : *There isn't a pen. There aren't any pens.*\n- Question : **Is there** a pen ? **Are there** any pens ?\n- Réponses courtes : *Yes, there is. / No, there isn't. Yes, there are. / No, there aren't.*\n\n**some** s'emploie dans les phrases positives, **any** dans les négations et les questions."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les lieux : prépositions",
+     "md": "- **on** : sur\n- **in** : dans\n- **under** : sous\n- **next to** : à côté de\n\n*There is a cat under the table. There are two pens in the bag.*"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : choisir is ou are",
+     "statement": "Complète : « There ___ four chairs in the classroom. »",
+     "steps": [
+      {
+       "md": "On regarde le nom : **four chairs** : plusieurs objets."
+      },
+      {
+       "md": "Pour plusieurs objets : **there are**."
+      },
+      {
+       "md": "La phrase : *There are four chairs in the classroom.*"
+      }
+     ],
+     "answer": "**There are four chairs in the classroom.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : poser une question",
+     "statement": "Pose une question : « There is a market in my town. »",
+     "steps": [
+      {
+       "md": "On met **is** avant there : **Is there**."
+      },
+      {
+       "md": "On garde le reste : a market in your town."
+      },
+      {
+       "md": "La question : *Is there a market in your town ?*"
+      }
+     ],
+     "answer": "**Is there a market in your town ?**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Dire *There is three mangoes* : trois mangues → *There are three mangoes*.\n- Oublier there : *Is a book on the table ?* → *Is there a book on the table ?*\n- Confondre **there** (là) et **their** (leur)."
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-english-there-is-are-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-english-there-is-are-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-english-there-is-are-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-english-there-is-are-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-english-there-is-are-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-english-there-is-are-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "cm1-english-there-is-are-01",
+   "chapter": "cm1-english-there-is-are",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cm1-english-there-is-are-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Complète : « There ___ a book on the table. »",
+   "choices": [
+    "are",
+    "am",
+    "is",
+    "be"
+   ],
+   "answer": 2,
+   "explanation": "Un seul livre : there is.",
+   "method": "Un objet : is. Plusieurs objets : are.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-english-there-is-are-02",
+   "chapter": "cm1-english-there-is-are",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cm1-english-there-is-are-fiche",
+   "points": 1,
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : « There are two pens in my bag. » est correct.",
+   "answer": true,
+   "explanation": "Two pens (pluriel) : there are.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-english-there-is-are-03",
+   "chapter": "cm1-english-there-is-are",
+   "tier": "application",
+   "difficulty": 2,
+   "lesson": "cm1-english-there-is-are-fiche",
+   "points": 2,
+   "kind": "matching",
+   "prompt": "Associe chaque mot à sa traduction.",
+   "pairs": [
+    [
+     "on",
+     "sur"
+    ],
+    [
+     "in",
+     "dans"
+    ],
+    [
+     "under",
+     "sous"
+    ],
+    [
+     "next to",
+     "à côté de"
+    ]
+   ],
+   "explanation": "Prépositions de lieu.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-english-there-is-are-04",
+   "chapter": "cm1-english-there-is-are",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cm1-english-there-is-are-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quelle phrase est correcte ?",
+   "choices": [
+    "There is five children in the yard.",
+    "There be five children in the yard.",
+    "There are five children in the yard.",
+    "There five children in the yard."
+   ],
+   "answer": 2,
+   "explanation": "Cinq enfants : there are.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-english-there-is-are-05",
+   "chapter": "cm1-english-there-is-are",
+   "tier": "approfondissement",
+   "difficulty": 3,
+   "lesson": "cm1-english-there-is-are-fiche",
+   "points": 1,
+   "kind": "numeric",
+   "prompt": "Dans une classe, there are 7 desks in the first row and 8 desks in the second row. Combien de bureaux y a-t-il en tout ?",
+   "answer": 15,
+   "tolerance": 0,
+   "explanation": "7 + 8 = 15 bureaux.",
+   "method": "Additionner les deux rangées.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-english-there-is-are-06",
+   "chapter": "cm1-english-there-is-are",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "cm1-english-there-is-are-fiche",
+   "kind": "problem",
+   "prompt": "Dans la salle de classe de Tchoua.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Complète : « There ___ a map on the wall. »",
+     "choices": [
+      "are",
+      "is",
+      "am",
+      "were"
+     ],
+     "answer": 1,
+     "explanation": "Une carte : there is.",
+     "id": "cm1-english-there-is-are-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Complète : « There ___ any chairs in the room. » (négation)",
+     "choices": [
+      "aren't",
+      "isn't",
+      "don't",
+      "not"
+     ],
+     "answer": 0,
+     "explanation": "Chairs est au pluriel : there aren't any.",
+     "id": "cm1-english-there-is-are-06-b",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Réponse courte à « Is there a clock in the room ? » (oui)",
+     "choices": [
+      "Yes, there are.",
+      "Yes, it is.",
+      "Yes, I have.",
+      "Yes, there is."
+     ],
+     "answer": 3,
+     "explanation": "On répond avec there is.",
+     "id": "cm1-english-there-is-are-06-c",
+     "points": 1
+    }
+   ],
+   "explanation": "Voir la correction de chaque question.",
+   "method": "Repérer si le nom est au singulier ou au pluriel.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-english-there-is-are-q1",
+   "chapter": "cm1-english-there-is-are",
+   "tier": "autoeval",
+   "lesson": "cm1-english-there-is-are-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quelle phrase est au pluriel ?",
+   "choices": [
+    "There is a cat.",
+    "There is one cat.",
+    "There is my cat.",
+    "There are two cats."
+   ],
+   "answer": 3,
+   "explanation": "Two cats : pluriel."
+  },
+  {
+   "id": "cm1-english-there-is-are-q2",
+   "chapter": "cm1-english-there-is-are",
+   "tier": "autoeval",
+   "lesson": "cm1-english-there-is-are-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Que veut dire « There is a bank next to the market » ?",
+   "choices": [
+    "La banque est au marché.",
+    "Il n'y a pas de banque.",
+    "Il y a une banque à côté du marché.",
+    "J'aime la banque."
+   ],
+   "answer": 2,
+   "explanation": "Next to = à côté de."
+  },
+  {
+   "id": "cm1-english-there-is-are-q3",
+   "chapter": "cm1-english-there-is-are",
+   "tier": "autoeval",
+   "lesson": "cm1-english-there-is-are-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quelle négation est correcte ?",
+   "choices": [
+    "There not a pen.",
+    "There isn't a pen.",
+    "There aren't a pen.",
+    "There doesn't a pen."
+   ],
+   "answer": 1,
+   "explanation": "Singulier : isn't."
+  },
+  {
+   "id": "cm1-english-there-is-are-q4",
+   "chapter": "cm1-english-there-is-are",
+   "tier": "autoeval",
+   "lesson": "cm1-english-there-is-are-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quelle question est correcte ?",
+   "choices": [
+    "Are there any bananas ?",
+    "Is there any bananas ?",
+    "Are any bananas ?",
+    "There are any bananas ?"
+   ],
+   "answer": 0,
+   "explanation": "Pluriel : Are there any… ?"
+  },
+  {
+   "id": "cm1-english-there-is-are-q5",
+   "chapter": "cm1-english-there-is-are",
+   "tier": "autoeval",
+   "lesson": "cm1-english-there-is-are-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "« any » s'emploie surtout…",
+   "choices": [
+    "dans les questions et les négations",
+    "dans les phrases positives seulement",
+    "avec les verbes au passé seulement",
+    "jamais"
+   ],
+   "answer": 0,
+   "explanation": "Any : questions et négations ; some : phrases positives."
+  }
+ ]
+}
