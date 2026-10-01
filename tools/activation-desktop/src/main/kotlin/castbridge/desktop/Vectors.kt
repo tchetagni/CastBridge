@@ -89,7 +89,7 @@ object Vectors {
         val expect = c["expect"] as Map<String, Any?>
         val req = ActivationIssuer.Request(
             ActivationKind.valueOf(r.str("kind")!!.uppercase()), r.str("deviceCodeOverride") ?: d.code, d.fp, r.long("issuedAt")!!, Subject.valueOf(r.str("subject")!!.uppercase()),
-            rightsOf(r), r.str("license")!!, r.str("seat"), r.long("notBefore")!!, (r["windowDays"] as Number).toInt(), r.str("nonce"), null)
+            rightsOf(r), r.str("license")!!, r.str("seat"), r.long("notBefore")!!, (r["windowHours"] as Number).toInt(), (r["unlimited"] as? Boolean) ?: false, r.str("nonce"), null)
         val out = try { ActivationIssuer(k.signer, k.scopes).issue(req).token } catch (e: castbridge.core.owner.IssueException) { null }
         return if (expect["refused"] == true) { if (out != null) "devait être refusé" else null }
         else if (out == null) "refusé à tort" else if (out != expect.str("token")) "jeton différent (octets)" else null
@@ -98,7 +98,7 @@ object Vectors {
     @Suppress("UNCHECKED_CAST")
     private fun buildCompact(c: Map<String, Any?>, keys: Map<String, Key>): String? {
         val k = keys.getValue(c.str("signer")!!); val r = c["request"] as Map<String, Any?>
-        val text = ActivationIssuer(k.signer, k.scopes).issueCompact(ActivationKind.valueOf(r.str("kind")!!.uppercase()), r.str("deviceCode")!!, (r["notBeforeDay"] as Number).toInt(), (r["windowDays"] as Number).toInt(), (r["setId"] as Number).toInt())
+        val text = ActivationIssuer(k.signer, k.scopes).issueCompact(ActivationKind.valueOf(r.str("kind")!!.uppercase()), r.str("deviceCode")!!, (r["notBeforeHour"] as Number).toInt(), (r["windowHours"] as Number).toInt(), (r["setId"] as Number).toInt(), (r["unlimited"] as? Boolean) ?: false)
         return if (text != (c["expect"] as Map<String, Any?>).str("text")) "clé saisissable différente" else null
     }
 

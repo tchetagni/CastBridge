@@ -38,7 +38,7 @@ class CliTest {
     @Test fun trialEndToEndWritesTheFileTheTvReadsAndNeverTheKey() {
         val k = cli("cle-creer"); assertEquals(0, k.code, k.err)
         assertTrue(File(dir, "home/desk.key.json").isFile)
-        val i = cli("emettre", "--appareil", request.path, "--jours", "90", "--sortie", File(dir, "usb").path, "--qr"); assertEquals(0, i.code, i.err)
+        val i = cli("emettre", "--appareil", request.path, "--sortie", File(dir, "usb").path, "--qr"); assertEquals(0, i.code, i.err)
         val file = File(dir, "usb/activation"); assertTrue(file.isFile)
         val token = file.readText(); assertTrue(token.startsWith(castbridge.core.owner.Envelope.PREFIX + ".") && token.endsWith("\n") && token.trimEnd('\n').lines().size == 1)
         assertTrue(File(dir, "usb/activation.png").length() > 100)
@@ -70,7 +70,7 @@ class CliTest {
         assertEquals(0, cli("cle-creer").code)
         assertEquals(1, cli("emettre", "--appareil", request.path, "--production", "--licence", "lic-0001", "--achat", "p-cm2=classe-cm2").code, "licence inconnue : refusée")
         assertEquals(0, cli("licence", "lic-0001", "--postes", "1").code)
-        val a = cli("emettre", "--appareil", request.path, "--production", "--licence", "lic-0001", "--achat", "p-cm2=classe-cm2", "--jours", "60", "--sortie", File(dir, "u1").path)
+        val a = cli("emettre", "--appareil", request.path, "--production", "--licence", "lic-0001", "--achat", "p-cm2=classe-cm2", "--sortie", File(dir, "u1").path)
         assertEquals(0, a.code, a.err); assertTrue(a.out.contains("postes restants : 0"), a.out)
         val b = cli("emettre", "--appareil", request.path, "--production", "--licence", "lic-0001", "--achat", "p-cm2=classe-cm2", "--sortie", File(dir, "u2").path)
         assertEquals(0, b.code, b.err); assertTrue(b.out.contains("ré-activation"), b.out)
@@ -90,7 +90,7 @@ class CliTest {
 
     @Test fun compactKeyIs165CharactersAndBoundToTheCode() {
         assertEquals(0, cli("cle-creer").code)
-        val c = cli("cle-saisissable", "--code", DeviceCode.of(fp), "--jours", "30"); assertEquals(0, c.code, c.err)
+        val c = cli("cle-saisissable", "--code", DeviceCode.of(fp)); assertEquals(0, c.code, c.err)
         assertEquals(165, c.out.trim().replace("-", "").length, "33 groupes de 4 + 1 contrôle : 165 caractères sans les tirets")
     }
 
@@ -98,7 +98,7 @@ class CliTest {
         assertEquals(0, cli("cle-creer").code)
         val bad = File(dir, "mauvaise.txt").also { it.writeText("code=ABCD-EFGH-JKMN-PQRZ\nk=2\nfactor=FLASH|00") }
         val r = cli("emettre", "--appareil", bad.path); assertEquals(1, r.code); assertTrue(r.err.startsWith("Refusé"), r.err)
-        assertEquals(1, cli("emettre", "--appareil", request.path, "--jours", "400").code)
+        val old = cli("emettre", "--appareil", request.path, "--jours", "400"); assertEquals(2, old.code); assertTrue("48 h" in old.err, old.err)    // the old option is refused loudly, never ignored
         assertEquals(2, cli("inconnue").code)
     }
 }

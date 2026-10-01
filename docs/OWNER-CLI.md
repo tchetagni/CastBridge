@@ -31,7 +31,7 @@ java -jar castbridge-owner.jar activation --vault ~/castbridge-owner/coffre.txt 
 
 ## Garde-fous
 - Le code d'appareil doit correspondre aux empreintes de la demande (un fichier altéré est refusé).
-- Fenêtre d'installation : 1 à 366 jours ; « tout ouvert » : 30 jours au plus.
+- Fenêtre d'installation : **48 h à partir de la création** (plus d'option `--days`) ; `--duree illimitee` : réservé aux clés superadmin (portée `ISSUE_UNLIMITED`) ; « tout ouvert » : 30 jours au plus.
 - Un **journal** `castbridge-owner-journal.log` note chaque émission (date, code d'appareil, type, licence, durée) ; **jamais la clé ni le code**.
 - Un seul essai de code à la fois, avec un délai (la dérivation de clé est volontairement lente) ; en script : variable `CB_OWNER_PASSPHRASE`.
 

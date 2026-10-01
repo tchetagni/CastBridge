@@ -38,7 +38,7 @@ class OwnerChannelTest {
         val info = assertNotNull(l.client.deviceInfo())
         val (code, _, parsed) = assertNotNull(OwnerFrames.parseDeviceInfo(info))
         assertEquals(DeviceCode.of(fp), code); assertEquals(fp, parsed)                  // what the console needs to build a FULL activation
-        val token = ActivationIssuer(signer).issue(ActivationIssuer.Request(ActivationKind.TRIAL, code, parsed, issuedAt = now, windowDays = 30)).token
+        val token = ActivationIssuer(signer).issue(ActivationIssuer.Request(ActivationKind.TRIAL, code, parsed, issuedAt = now, windowHours = 48)).token
         val a = l.client.sendActivation(token)
         assertTrue(a.ok, a.message); assertEquals(listOf(token), accepted)
         l.close()
@@ -51,7 +51,7 @@ class OwnerChannelTest {
             activate = { t -> receiver.receive(Channel.MANUAL, t.toByteArray(), now).also { if (it is ActivationResult.Accepted) staged += t } },
             acceptedText = "Clé reçue : validez sur la TV")
         val l = Link(srv); l.client.hello()
-        val token = ActivationIssuer(signer).issue(ActivationIssuer.Request(ActivationKind.TRIAL, DeviceCode.of(fp), fp, issuedAt = now, windowDays = 30)).token
+        val token = ActivationIssuer(signer).issue(ActivationIssuer.Request(ActivationKind.TRIAL, DeviceCode.of(fp), fp, issuedAt = now, windowHours = 48)).token
         val a = l.client.sendActivation(token)
         assertTrue(a.ok); assertEquals("Clé reçue : validez sur la TV", a.message)
         assertEquals(listOf(token), staged); assertTrue(installed.isEmpty(), "nothing installed by the channel: the owner confirms on the TV")
@@ -60,14 +60,14 @@ class OwnerChannelTest {
 
     @Test fun aCompactKeyTypedOnThePhoneIsAcceptedToo() {
         val l = Link(server()); l.client.hello()
-        val key = ActivationIssuer(signer).issueCompact(ActivationKind.TRIAL, DeviceCode.of(fp), ((now - CompactActivation.EPOCH_MS) / 86_400_000L).toInt(), 30)
+        val key = ActivationIssuer(signer).issueCompact(ActivationKind.TRIAL, DeviceCode.of(fp), ((now - CompactActivation.EPOCH_MS) / 3_600_000L).toInt(), 48)
         assertTrue(l.client.sendActivation(key).ok); l.close()
     }
 
     @Test fun anActivationForAnotherTvIsRefusedWithAReasonAndHangsUpAfterThreeRefusals() {
         val refusals = IntArray(1); val l = Link(server(refusals = refusals)); l.client.hello()
         val other = Fingerprints(mapOf(FactorKind.FLASH to "d".repeat(32), FactorKind.ETHERNET to "e".repeat(32), FactorKind.SYSTEM_SERIAL to "f".repeat(32)))
-        val token = ActivationIssuer(signer).issue(ActivationIssuer.Request(ActivationKind.TRIAL, DeviceCode.of(other), other, issuedAt = now, windowDays = 30)).token
+        val token = ActivationIssuer(signer).issue(ActivationIssuer.Request(ActivationKind.TRIAL, DeviceCode.of(other), other, issuedAt = now, windowHours = 48)).token
         val a = l.client.sendActivation(token); assertFalse(a.ok); assertTrue(a.message.isNotBlank())
         l.client.sendActivation(token); l.client.sendActivation(token)
         assertEquals(3, refusals[0])

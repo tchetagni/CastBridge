@@ -19,7 +19,7 @@ private fun tv(name: String, wifi: String = "10:20:30:40:50:60") = DeviceIdentit
 private val purchase = Right.Purchase("p-classe-cm2", listOf("classe-cm2"), NOW - DAY)
 
 private fun issue(s: Signer, fp: Fingerprints, license: String, at: Long = NOW, seat: String? = null, subject: Subject = Subject.TV, scopes: Set<KeyScope> = KeyScope.ALL, nonce: String = "00".repeat(8) + at.toString(16).padStart(8, '0')): Activation =
-    ActivationIssuer(s, scopes).issue(ActivationIssuer.Request(ActivationKind.PRODUCTION, DeviceCode.of(fp), fp, at, subject, listOf(purchase), license, seat, at - DAY, 300, nonce)).activation
+    ActivationIssuer(s, scopes).issue(ActivationIssuer.Request(ActivationKind.PRODUCTION, DeviceCode.of(fp), fp, at, subject, listOf(purchase), license, seat, at - 3_600_000L, 48, false, nonce)).activation
 
 class LicenseTest {
     private fun licence(id: String = "lic-1", seats: Int = 2, cap: Int = 2) = LicenseEvent.license(desk, NOW - 10 * DAY, id, seats, cap)
@@ -57,7 +57,7 @@ class LicenseTest {
 
     @Test fun trialKeysAreLoggedButNeverCountAsSeats() {
         val fp = tv("T")
-        val trial = ActivationIssuer(desk).issue(ActivationIssuer.Request(ActivationKind.TRIAL, DeviceCode.of(fp), fp, NOW, windowDays = 30)).activation
+        val trial = ActivationIssuer(desk).issue(ActivationIssuer.Request(ActivationKind.TRIAL, DeviceCode.of(fp), fp, NOW, windowHours = 48)).activation
         val st = LicenseBook.replay(listOf(LicenseEvent.issue(desk, trial)), ring)
         assertEquals(0, st.seats.size); assertTrue(st.rejected.isEmpty())
     }
@@ -199,8 +199,8 @@ class FeatureGateTest {
         val issued = ActivationIssuer.Issued(tvActivation)
         assertIs<ActivationResult.Accepted>(receiver().receive(Channel.MANUAL, issued.token.toByteArray(), NOW), "pasted token")
         assertIs<ActivationResult.Accepted>(receiver().receive(Channel.MANUAL, issued.groupedText.lowercase().replace('-', ' ').toByteArray(), NOW), "grouped text")
-        val day0 = ((NOW - CompactActivation.EPOCH_MS) / DAY).toInt() - 1
-        val compact = ActivationIssuer(desk).issueCompact(ActivationKind.TRIAL, code, day0, 200)
+        val day0 = ((NOW - CompactActivation.EPOCH_MS) / 3_600_000L).toInt() - 1
+        val compact = ActivationIssuer(desk).issueCompact(ActivationKind.TRIAL, code, day0, 48)
         assertEquals(ActivationKind.TRIAL, assertIs<ActivationResult.Accepted>(receiver().receive(Channel.MANUAL, compact.toByteArray(), NOW)).activation.kind)
         assertEquals(Rejection.MALFORMED, assertIs<ActivationResult.Rejected>(receiver().receive(Channel.MANUAL, "n'importe quoi".toByteArray(), NOW)).reason)
     }
@@ -218,8 +218,8 @@ class FeatureGateTest {
         val tvToken = tvActivation.encode()
         val item = assertNotNull(CarrierMode.accept(tvToken))
         assertEquals(code, item.forDeviceCode); assertNotNull(CarrierMode.frame(item))
-        assertNotNull(CarrierMode.accept(ActivationIssuer.Issued(tvActivation).groupedText)); assertNotNull(CarrierMode.accept(ActivationIssuer(desk).issueCompact(ActivationKind.TRIAL, code, 100, 100)))
-        assertNull(CarrierMode.frame(CarrierMode.accept(ActivationIssuer(desk).issueCompact(ActivationKind.TRIAL, code, 100, 100))!!), "a compact key is typed on the TV, no frame")
+        assertNotNull(CarrierMode.accept(ActivationIssuer.Issued(tvActivation).groupedText)); assertNotNull(CarrierMode.accept(ActivationIssuer(desk).issueCompact(ActivationKind.TRIAL, code, 100, 48)))
+        assertNull(CarrierMode.frame(CarrierMode.accept(ActivationIssuer(desk).issueCompact(ActivationKind.TRIAL, code, 100, 48))!!), "a compact key is typed on the TV, no frame")
         assertNull(CarrierMode.accept("n'importe quoi")); assertNull(CarrierMode.accept("cba1.xx.yy"))
         assertNull(CarrierMode.accept(issue(desk, phoneFp, "lic-1", subject = Subject.PHONE).encode()), "a phone activation is not carried to a TV")
         // the phone itself stays locked: carrying never installs anything, and its own receiver refuses a TV activation

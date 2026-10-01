@@ -62,7 +62,7 @@ Pendant cette phase **aucun serveur n'est dans la boucle** : la console produit 
 | **Pas de détection de doublon par le serveur** | **non couvert pendant la phase** : une même demande d'appareil peut produire deux activations ; le journal d'audit de la console aide à repérer a posteriori ; le serveur reprend la détection à la migration |
 | **Pas de révocation immédiate** d'un droit installé | la TV hors ligne ne verra une révocation (liste de clés) qu'à son prochain message signé ; les déblocages « tout ouvert » sont **limités à 30 jours** précisément pour cela |
 | **Horloge des TV peu fiable** | `TvClock` (TRIAL-EDITION.md § 7) : dernier instant vu, détection de retour en arrière, marge, plancher signé ; les commandes n'utilisent aucune heure murale |
-| Durée d'une activation hors ligne | **1 an maximum**, vérifié par la TV |
+| Durée d'une activation hors ligne | **48 h pour l'installer, à partir de la création** (politique commerciale), vérifié par la TV ; clé **illimitée** réservée à la portée `ISSUE_UNLIMITED` (superadmin) |
 | **Migration vers le serveur** | à la fin de la phase : le serveur prend la délivrance (jetons, détection de doublon, révocation) ; les activations hors ligne arrivent à échéance ; **ce qui a été acheté reste** |
 
 ## 9. Analyse des risques
@@ -83,3 +83,8 @@ Pendant cette phase **aucun serveur n'est dans la boucle** : la console produit 
 ## Envoi de l'activation par Bluetooth (implémenté, 0.14.1-beta TV / 1.2.13-beta téléphone)
 Onglet « Activer » de la console : (1) choisir la TV appairée puis **Lire le code de la TV** (la demande d'appareil complète remplit le champ), (2) **Générer**, (3) **Envoyer l'activation à la TV**. La TV vérifie comme pour une saisie ou un fichier (signature, appareil, portée de la clé) ; trois refus sur une liaison la coupent. Le service `…05` est ouvert même quand la TV est verrouillée ; sur Android 12+ la TV demande la permission Bluetooth sur l'écran d'activation. Non encore testé sur de vrais appareils (l'émulateur n'a pas de Bluetooth) : tests JVM de bout en bout avec le vrai émetteur/vérificateur (`OwnerChannelTest`).
 
+## Clés : 48 h, ou illimitée (2026-10-01)
+- **Toute clé** (compacte à saisir ou activation complète) ne peut être **installée que pendant 48 heures à partir de sa création** ; passé ce délai, la TV répond « Clé périmée : à refaire (une clé est valable 48 h) ». Les droits qu'elle donne (essai, achat, abonnement, « tout ouvert ») gardent leurs propres durées, et une clé **déjà installée reste**.
+- **Clé illimitée** : interrupteur « Durée ILLIMITÉE (superadmin) » de l'onglet Activer de la console du téléphone, `--illimitee` / `--duree illimitee` en ligne de commande, case à cocher de l'outil de bureau. La TV l'accepte **seulement** si la clé de confiance porte la portée `ISSUE_UNLIMITED` ; la clé du serveur ne l'a jamais.
+- **Clé compacte** : format version 2 (unités en heures, 16 bits : jusqu'à mi-2033). Les TV d'avant la 0.14.8 ne lisent pas la version 2 (« Clé illisible ») : utiliser l'activation complète (fichier ou Bluetooth) pour elles.
+- **Serveur** : à aligner (48 h, jamais illimité) après la fusion de `claude/license-admin-cbx1`, qui met le serveur sur le format commun.

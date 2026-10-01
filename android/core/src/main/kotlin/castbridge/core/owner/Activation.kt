@@ -101,10 +101,20 @@ class RevocationState(val keys: Set<String> = emptySet(), val seats: Map<String,
  * activation needs; the licence seat must not be revoked; the sequence number must not go back for this key. [expect] is the kind of device doing the check. On acceptance the
  * sequence number is recorded in [seqState] (persist it).
  */
-class ActivationVerifier(private val keys: KeyRing, private val maxWindowMs: Long = MAX_OFFLINE_WINDOW_MS, private val skewMs: Long = 24L * 3600 * 1000,
+/** Commercial policy of activation codes: a code can be INSTALLED during 48 hours from its creation, no longer (the rights it grants have their own dates). Superadmin-only exception: [UNLIMITED_NOT_AFTER]. */
+object ActivationPolicy {
+    const val CODE_VALIDITY_HOURS = 48
+    const val HOUR_MS = 3_600_000L
+    const val CODE_VALIDITY_MS = CODE_VALIDITY_HOURS * HOUR_MS
+    /** `notAfter` of an unlimited activation (9999-12-31T23:59:59Z): needs the ISSUE_UNLIMITED scope on the signing key. */
+    const val UNLIMITED_NOT_AFTER = 253_402_300_799_000L
+    /** The compact key's window field when unlimited. */
+    const val UNLIMITED_UNITS = 0xFFFF
+}
+
+class ActivationVerifier(private val keys: KeyRing, private val maxWindowMs: Long = ActivationPolicy.CODE_VALIDITY_MS, private val skewMs: Long = 24L * 3600 * 1000,
                          private val revocations: RevocationState = RevocationState(), private val expect: Subject = Subject.TV, private val seqState: SeqState = SeqState()) {
     companion object {
-        const val MAX_OFFLINE_WINDOW_MS = 366L * 24 * 3600 * 1000
         const val MAX_OPEN_ALL_MS = 30L * 24 * 3600 * 1000
     }
 
@@ -121,7 +131,9 @@ class ActivationVerifier(private val keys: KeyRing, private val maxWindowMs: Lon
         if (a.kind == ActivationKind.TRIAL && a.rights.isNotEmpty()) return no(Rejection.BAD_RIGHTS, "Une clé d'essai ne porte aucun droit")
         if (a.rights.filterIsInstance<Right.OpenAll>().any { it.endsAt - it.startsAt > MAX_OPEN_ALL_MS || it.endsAt <= it.startsAt }) return no(Rejection.BAD_RIGHTS, "« Tout ouvert » : 30 jours au plus")
         if (a.subject != expect) return no(Rejection.WRONG_SUBJECT, "Cette activation est celle d'un autre type d'appareil")
-        if (a.notAfter - a.notBefore > maxWindowMs) return no(Rejection.WINDOW_TOO_LONG, "Fenêtre d'installation trop longue (1 an au plus)")
+        if (a.notAfter == ActivationPolicy.UNLIMITED_NOT_AFTER) {
+            if (!key.allows(KeyScope.ISSUE_UNLIMITED)) return no(Rejection.KEY_NOT_ALLOWED, "Cette clé ne peut pas délivrer d'activation illimitée")
+        } else if (a.notAfter - a.notBefore > maxWindowMs) return no(Rejection.WINDOW_TOO_LONG, "Fenêtre d'installation trop longue (48 h au plus)")
         if (!DeviceIdentity.matches(a.factors, a.k, device))
             return ActivationResult.Rejected(Rejection.WRONG_DEVICE, "Cette activation n'est pas celle de cet appareil : déblocage manuel possible", suspect = true)
         if (revocations.seatRevoked(a)) return no(Rejection.REVOKED_SEAT, "Ce poste de la licence a été transféré ou révoqué")
@@ -181,11 +193,12 @@ object CompactActivation {
     const val BYTES = HEADER + 64
     private const val DOMAIN = "castbridge-activation-compact-v1\n"
 
-    data class Header(val kind: ActivationKind, val keyTag: Int, val notBeforeDay: Int, val windowDays: Int, val setId: Int, val bind: ByteArray) {
+    /** [notBeforeUnit] / [windowUnits] are HOURS in version 2 (current: exact 48 h) and DAYS in version 1 (old keys, still read, capped at 2 days). [windowUnits] = [ActivationPolicy.UNLIMITED_UNITS] means unlimited (version 2). */
+    data class Header(val kind: ActivationKind, val keyTag: Int, val notBeforeUnit: Int, val windowUnits: Int, val setId: Int, val bind: ByteArray, val version: Int = 2) {
         fun bytes(): ByteArray {
             val b = ByteArray(HEADER)
-            b[0] = 1; b[1] = kind.ordinal.toByte(); b[2] = (keyTag shr 8).toByte(); b[3] = keyTag.toByte()
-            b[4] = (notBeforeDay shr 8).toByte(); b[5] = notBeforeDay.toByte(); b[6] = (windowDays shr 8).toByte(); b[7] = windowDays.toByte()
+            b[0] = version.toByte(); b[1] = kind.ordinal.toByte(); b[2] = (keyTag shr 8).toByte(); b[3] = keyTag.toByte()
+            b[4] = (notBeforeUnit shr 8).toByte(); b[5] = notBeforeUnit.toByte(); b[6] = (windowUnits shr 8).toByte(); b[7] = windowUnits.toByte()
             b[8] = (setId shr 8).toByte(); b[9] = setId.toByte(); System.arraycopy(bind, 0, b, 10, 8)
             return b
         }
@@ -193,6 +206,7 @@ object CompactActivation {
 
     const val EPOCH_MS = 1_767_225_600_000L        // 2026-01-01T00:00:00Z: day 0 of notBeforeDay
     const val DAY_MS = 24L * 3600 * 1000
+    const val HOUR_MS = ActivationPolicy.HOUR_MS
 
     fun bindOf(deviceCode: String): ByteArray = java.security.MessageDigest.getInstance("SHA-256").digest(("castbridge-bind|" + (DeviceCode.parse(deviceCode) ?: error("code"))).toByteArray()).copyOf(8)
     fun keyTag(keyId: String): Int = java.security.MessageDigest.getInstance("SHA-256").digest(keyId.toByteArray()).let { ((it[0].toInt() and 0xff) shl 8) or (it[1].toInt() and 0xff) }
@@ -224,14 +238,14 @@ object CompactActivation {
         }
         val bytes = Base32C.decode(data.toString(), BYTES) ?: return Parsed.Malformed
         val h = bytes.copyOf(HEADER)
-        if (h[0].toInt() != 1 || h[1].toInt() !in ActivationKind.values().indices) return Parsed.Malformed
+        if (h[0].toInt() !in 1..2 || h[1].toInt() !in ActivationKind.values().indices) return Parsed.Malformed
         return Parsed.Ok(Header(ActivationKind.values()[h[1].toInt()], ((h[2].toInt() and 0xff) shl 8) or (h[3].toInt() and 0xff),
             ((h[4].toInt() and 0xff) shl 8) or (h[5].toInt() and 0xff), ((h[6].toInt() and 0xff) shl 8) or (h[7].toInt() and 0xff),
-            ((h[8].toInt() and 0xff) shl 8) or (h[9].toInt() and 0xff), h.copyOfRange(10, 18)), bytes.copyOfRange(HEADER, BYTES))
+            ((h[8].toInt() and 0xff) shl 8) or (h[9].toInt() and 0xff), h.copyOfRange(10, 18), version = h[0].toInt()), bytes.copyOfRange(HEADER, BYTES))
     }
 
     /** TV side: parse, find the key by tag, verify the signature, the strict device binding and the install window. */
-    fun verify(text: String, keys: KeyRing, candidates: List<TrustedKey>, deviceCode: String, nowMs: Long, skewMs: Long = DAY_MS): ActivationResult {
+    fun verify(text: String, keys: KeyRing, candidates: List<TrustedKey>, deviceCode: String, nowMs: Long, skewMs: Long = ActivationPolicy.HOUR_MS): ActivationResult {
         val p = parse(text)
         if (p is Parsed.BadGroup) return ActivationResult.Rejected(Rejection.MALFORMED, "Groupe ${p.group} mal saisi : le ressaisir")
         if (p !is Parsed.Ok) return ActivationResult.Rejected(Rejection.MALFORMED, "Clé illisible")
@@ -240,11 +254,14 @@ object CompactActivation {
         if (!key.verify(signedText(p.header.bytes()), Base64.getEncoder().encodeToString(p.signature))) return ActivationResult.Rejected(Rejection.BAD_SIGNATURE, "Signature invalide")
         if (!key.allows(if (p.header.kind == ActivationKind.TRIAL) KeyScope.ISSUE_TRIAL else KeyScope.ISSUE_PRODUCTION)) return ActivationResult.Rejected(Rejection.KEY_NOT_ALLOWED, "Cette clé n'a pas ce droit")
         if (!p.header.bind.contentEquals(bindOf(deviceCode))) return ActivationResult.Rejected(Rejection.WRONG_DEVICE, "Cette clé n'est pas celle de cette TV", suspect = true)
-        val from = EPOCH_MS + p.header.notBeforeDay * DAY_MS
-        val to = from + p.header.windowDays * DAY_MS
-        if (p.header.windowDays > 366) return ActivationResult.Rejected(Rejection.WINDOW_TOO_LONG, "Fenêtre trop longue")
+        val unit = if (p.header.version == 1) DAY_MS else HOUR_MS
+        val from = EPOCH_MS + p.header.notBeforeUnit * unit
+        val unlimited = p.header.version == 2 && p.header.windowUnits == ActivationPolicy.UNLIMITED_UNITS
+        if (unlimited && !key.allows(KeyScope.ISSUE_UNLIMITED)) return ActivationResult.Rejected(Rejection.KEY_NOT_ALLOWED, "Cette clé ne peut pas délivrer de clé illimitée")
+        val to = if (unlimited) ActivationPolicy.UNLIMITED_NOT_AFTER else from + p.header.windowUnits * unit
+        if (!unlimited && to - from > ActivationPolicy.CODE_VALIDITY_MS) return ActivationResult.Rejected(Rejection.WINDOW_TOO_LONG, "Fenêtre trop longue (48 h au plus)")
         if (nowMs + skewMs < from) return ActivationResult.Rejected(Rejection.NOT_YET_VALID, "Clé pas encore valable")
-        if (nowMs > to) return ActivationResult.Rejected(Rejection.WINDOW_CLOSED, "Clé périmée")
+        if (nowMs > to) return ActivationResult.Rejected(Rejection.WINDOW_CLOSED, "Clé périmée : à refaire (une clé est valable 48 h)")
         return ActivationResult.Accepted(Activation(p.header.kind, Subject.TV, key.keyId, 0L, "", from, from, to, Activation.TRIAL_LICENSE, "", 0, emptyMap(), emptyList(), ""), weakIdentity = false)
     }
 }

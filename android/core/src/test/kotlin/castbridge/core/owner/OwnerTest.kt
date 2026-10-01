@@ -21,8 +21,8 @@ private class Console(seed: ByteArray = ByteArray(32).also { SecureRandom().next
     fun ring(revoked: Set<String> = emptySet()) = KeyRing(listOf(trusted), revoked)
     private fun sig(text: String) = Base64.getEncoder().encodeToString(signer.sign(text.toByteArray(Charsets.UTF_8)))
 
-    fun activation(fp: Fingerprints, kind: ActivationKind = ActivationKind.PRODUCTION, rights: List<Right> = emptyList(), issued: Long = T0, from: Long = T0 - day,
-                   to: Long = T0 + 300 * day, k: Int = DeviceIdentity.kFor(fp.n), nonce: String = "ab".repeat(8), subject: Subject = Subject.TV,
+    fun activation(fp: Fingerprints, kind: ActivationKind = ActivationKind.PRODUCTION, rights: List<Right> = emptyList(), issued: Long = T0, from: Long = T0 - 3_600_000L,
+                   to: Long = T0 + 47 * 3_600_000L, k: Int = DeviceIdentity.kFor(fp.n), nonce: String = "ab".repeat(8), subject: Subject = Subject.TV,
                    license: String = if (kind == ActivationKind.TRIAL) "trial" else "lic-1", seat: String = SeatIds.of(license, fp)): String {
         val payload = Activation.payload(kind, subject, keyId, issued, nonce, issued, from, to, license, seat, k, fp.byKind, rights)
         return Activation(kind, subject, keyId, issued, nonce, issued, from, to, license, seat, k, fp.byKind, rights, sig(payload)).encode()
@@ -34,8 +34,8 @@ private class Console(seed: ByteArray = ByteArray(32).also { SecureRandom().next
         return OwnerCommand(keyId, T0, T0, power, action, challenge, k, fp.byKind, bundles, lots, days, sig(payload)).encode()
     }
 
-    fun compact(code: String, kind: ActivationKind = ActivationKind.TRIAL, notBeforeDay: Int = ((T0 - CompactActivation.EPOCH_MS) / day).toInt() - 1, window: Int = 200, setId: Int = 0): String {
-        val h = CompactActivation.Header(kind, CompactActivation.keyTag(keyId), notBeforeDay, window, setId, CompactActivation.bindOf(code))
+    fun compact(code: String, kind: ActivationKind = ActivationKind.TRIAL, notBeforeHour: Int = ((T0 - CompactActivation.EPOCH_MS) / 3_600_000L).toInt() - 1, window: Int = 48, setId: Int = 0): String {
+        val h = CompactActivation.Header(kind, CompactActivation.keyTag(keyId), notBeforeHour, window, setId, CompactActivation.bindOf(code))
         return CompactActivation.encode(h, signer.sign(CompactActivation.signedText(h.bytes()).toByteArray(Charsets.UTF_8)))
     }
 }
@@ -146,13 +146,30 @@ class ActivationTest {
         rejected(ActivationVerifier(support.ring()).verify(support.activation(fp), fp, T0), Rejection.KEY_NOT_ALLOWED)
     }
 
-    @Test fun offlineWindowIsAtMostOneYearAndRespectsAWrongClock() {
-        rejected(v.verify(console.activation(fp, from = T0, to = T0 + 400 * day), fp, T0), Rejection.WINDOW_TOO_LONG)
-        accepted(v.verify(console.activation(fp, from = T0, to = T0 + 365 * day), fp, T0))
+    @Test fun installWindowIsAtMost48HoursAndRespectsAWrongClock() {
+        val h = 3_600_000L
+        rejected(v.verify(console.activation(fp, from = T0, to = T0 + 49 * h), fp, T0), Rejection.WINDOW_TOO_LONG)
+        accepted(v.verify(console.activation(fp, from = T0, to = T0 + 48 * h), fp, T0))
         // the TV clock says 1970 (dead battery clock): the activation's own issue date is the floor
-        accepted(v.verify(console.activation(fp, issued = T0, from = T0 - day, to = T0 + 30 * day), fp, nowMs = 0L))
-        rejected(v.verify(console.activation(fp, issued = T0, from = T0 + 100 * day, to = T0 + 130 * day), fp, T0), Rejection.NOT_YET_VALID)
-        rejected(v.verify(console.activation(fp, issued = T0 - 60 * day, from = T0 - 60 * day, to = T0 - 30 * day), fp, T0), Rejection.WINDOW_CLOSED)
+        accepted(v.verify(console.activation(fp, issued = T0, from = T0 - day, to = T0 - day + 48 * h), fp, nowMs = 0L))
+        rejected(v.verify(console.activation(fp, issued = T0, from = T0 + 100 * day, to = T0 + 100 * day + 48 * h), fp, T0), Rejection.NOT_YET_VALID)
+        rejected(v.verify(console.activation(fp, issued = T0 - 60 * day, from = T0 - 60 * day, to = T0 - 60 * day + 48 * h), fp, T0), Rejection.WINDOW_CLOSED)
+        // the 48 h run from the creation: still fine at the last millisecond, refused right after
+        val tok = console.activation(fp, issued = T0, from = T0, to = T0 + 48 * h)
+        accepted(v.verify(tok, fp, T0 + 48 * h)); rejected(v.verify(tok, fp, T0 + 48 * h + 1), Rejection.WINDOW_CLOSED)
+    }
+
+    @Test fun unlimitedInstallWindowNeedsTheUnlimitedScope() {
+        val h = 3_600_000L
+        val unlimited = console.activation(fp, from = T0, to = ActivationPolicy.UNLIMITED_NOT_AFTER)
+        accepted(v.verify(unlimited, fp, T0 + 900 * day))                              // the console key has every scope
+        val noUnlimited = KeyRing(listOf(console.signer.trusted(KeyScope.ALL - KeyScope.ISSUE_UNLIMITED)))
+        rejected(ActivationVerifier(noUnlimited).verify(unlimited, fp, T0), Rejection.KEY_NOT_ALLOWED)
+        assertFailsWith<IssueException> { ActivationIssuer(console.signer, KeyScope.ALL - KeyScope.ISSUE_UNLIMITED).issue(ActivationIssuer.Request(ActivationKind.TRIAL, DeviceCode.of(fp), fp, T0, unlimited = true)) }
+        assertFailsWith<IssueException> { ActivationIssuer(console.signer).issue(ActivationIssuer.Request(ActivationKind.TRIAL, DeviceCode.of(fp), fp, T0, windowHours = 49)) }
+        val typed = ActivationIssuer(console.signer).issueCompact(ActivationKind.TRIAL, DeviceCode.of(fp), 100, unlimited = true)
+        accepted(CompactActivation.verify(typed, console.ring(), listOf(console.trusted), DeviceCode.of(fp), CompactActivation.EPOCH_MS + 10_000 * h))
+        assertFailsWith<IssueException> { ActivationIssuer(console.signer, KeyScope.ALL - KeyScope.ISSUE_UNLIMITED).issueCompact(ActivationKind.TRIAL, DeviceCode.of(fp), 100, unlimited = true) }
     }
 
     // ---- what a TV may open ----

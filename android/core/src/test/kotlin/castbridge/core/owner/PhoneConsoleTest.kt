@@ -28,7 +28,7 @@ class PhoneConsoleTest {
 
     @Test fun trialIsIssuedWithEveryEncodingAndVerifiesOnTheTv() {
         val s = unlocked()
-        val r = s.issue(info(1), IssueSpec(ActivationKind.TRIAL, windowDays = 90))
+        val r = s.issue(info(1), IssueSpec(ActivationKind.TRIAL))
         assertTrue(r.token.startsWith(Envelope.PREFIX + ".") && r.fileContent == r.token + "\n")
         assertEquals(OwnerFrames.ACTIVATION, r.bluetoothFrame[0].toInt())
         val ring = KeyRing(listOf(own))

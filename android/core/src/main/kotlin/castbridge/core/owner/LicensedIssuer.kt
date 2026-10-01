@@ -18,7 +18,7 @@ class DeviceRequest(val code: String, val k: Int, val factors: Fingerprints) {
 /** What the owner chose. Same fields as the `request` of the test vectors (tools/activation/test-vectors.json). */
 class IssueSpec(
     val kind: ActivationKind, val subject: Subject = Subject.TV, val rights: List<Right> = emptyList(), val license: String = Activation.TRIAL_LICENSE,
-    val windowDays: Int = 30, val notBefore: Long? = null, val issuedAt: Long? = null, val seat: String? = null, val nonce: String? = null,
+    val windowHours: Int = ActivationIssuer.MAX_WINDOW_HOURS, val unlimited: Boolean = false, val notBefore: Long? = null, val issuedAt: Long? = null, val seat: String? = null, val nonce: String? = null,
 )
 
 /** Result of one issuing: every encoding of the token plus where the registry stands. */
@@ -80,7 +80,7 @@ class LicensedIssuer(
             }
         }
         val issued = issuer.issue(ActivationIssuer.Request(spec.kind, device.code, device.factors, issuedAt, spec.subject, spec.rights, spec.license, seat,
-            spec.notBefore ?: issuedAt, spec.windowDays, spec.nonce, null))
+            spec.notBefore ?: issuedAt, spec.windowHours, spec.unlimited, spec.nonce, null))
         save(LicenseBook.merge(current, listOf(LicenseEvent.issue(signer, issued.activation))))
         return Delivered(issued, issued.activation.seat, reused, left)
     }

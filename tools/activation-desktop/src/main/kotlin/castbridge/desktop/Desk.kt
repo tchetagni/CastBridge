@@ -5,6 +5,7 @@ import castbridge.core.net.JsonLite
 import castbridge.core.owner.Activation
 import castbridge.core.owner.ActivationIssuer
 import castbridge.core.owner.ActivationKind
+import castbridge.core.owner.ActivationPolicy
 import castbridge.core.owner.CompactActivation
 import castbridge.core.owner.DeviceRequest
 import castbridge.core.owner.Delivered
@@ -64,9 +65,9 @@ class Desk(private val home: File, private val signer: Signer, private val scope
     fun createLicense(license: String, seats: Int, maxTransfersPerYear: Int = LicenseBook.DEFAULT_TRANSFERS_PER_YEAR) = flow.createLicense(license, seats, maxTransfersPerYear)
 
     /** The compact key (165 characters) for manual typing: strictly bound to the device code, no rights list. */
-    fun compact(code: String, windowDays: Int, kind: ActivationKind = ActivationKind.TRIAL, startDay: Int? = null, setId: Int = 0): String {
-        val day = startDay ?: (((clock() - CompactActivation.EPOCH_MS) / DAY_MS).toInt() - 1).coerceAtLeast(0)
-        return issuer.issueCompact(kind, code, day, windowDays, setId)
+    fun compact(code: String, kind: ActivationKind = ActivationKind.TRIAL, setId: Int = 0, unlimited: Boolean = false): String {
+        val hour = ((clock() - CompactActivation.EPOCH_MS) / ActivationPolicy.HOUR_MS).toInt().coerceAtLeast(0)      // the 48 h run from the creation (to the hour)
+        return issuer.issueCompact(kind, code, hour, ActivationPolicy.CODE_VALIDITY_HOURS, setId, unlimited)
     }
 
     /** An owner command for ONE TV; [challenge] is the one that TV just issued (valid 120 s, single use). */

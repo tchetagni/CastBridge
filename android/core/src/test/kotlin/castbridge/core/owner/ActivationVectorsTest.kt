@@ -16,6 +16,7 @@ import kotlin.test.*
 class ActivationVectorsTest {
     private val t0 = 1_800_000_000_000L
     private val day = 24L * 3600 * 1000
+    private val hour = 3_600_000L
 
     // ---- fixed inputs ----
     private fun seedOf(name: String) = MessageDigest.getInstance("SHA-256").digest("castbridge-test-vector-key|$name".toByteArray())
@@ -54,14 +55,14 @@ class ActivationVectorsTest {
     private val openAll = Right.OpenAll("ouvert", t0, t0 + 10 * day)
 
     private fun req(d: String, kind: ActivationKind = ActivationKind.PRODUCTION, rights: List<Right> = listOf(purchase), license: String = "lic-0001", subject: Subject = Subject.TV,
-                    nonce: String = "00112233445566778899aabbccddeeff", issuedAt: Long = t0, notBefore: Long = t0 - day, window: Int = 300, seat: String? = null) =
+                    nonce: String = "00112233445566778899aabbccddeeff", issuedAt: Long = t0, notBefore: Long = t0 - hour, window: Int = 48, unlimited: Boolean = false, seat: String? = null) =
         ActivationIssuer.Request(kind, dev(d).code, dev(d).fp, issuedAt, subject, if (kind == ActivationKind.TRIAL) emptyList() else rights,
-            if (kind == ActivationKind.TRIAL) Activation.TRIAL_LICENSE else license, seat, notBefore, window, nonce)
+            if (kind == ActivationKind.TRIAL) Activation.TRIAL_LICENSE else license, seat, notBefore, window, unlimited, nonce)
 
     private fun reqJson(r: ActivationIssuer.Request, dev: String) = J("kind" to r.kind.name.lowercase(), "device" to dev, "issuedAt" to r.issuedAt, "subject" to r.subject.name.lowercase(),
-        "rights" to r.rights.map { Activation.rightLine(it) }, "license" to r.license, "seat" to r.seat, "notBefore" to r.notBefore, "windowDays" to r.windowDays, "nonce" to r.nonce)
+        "rights" to r.rights.map { Activation.rightLine(it) }, "license" to r.license, "seat" to r.seat, "notBefore" to r.notBefore, "windowHours" to r.windowHours, "unlimited" to r.unlimited, "nonce" to r.nonce)
 
-    private fun raw(k: String, d: String, kind: ActivationKind = ActivationKind.PRODUCTION, rights: List<Right> = listOf(purchase), issued: Long = t0, from: Long = t0 - day, to: Long = t0 + 300 * day,
+    private fun raw(k: String, d: String, kind: ActivationKind = ActivationKind.PRODUCTION, rights: List<Right> = listOf(purchase), issued: Long = t0, from: Long = t0 - hour, to: Long = t0 + 47 * hour,
                     subject: Subject = Subject.TV, license: String = "lic-0001", seat: String? = null, nonce: String = "00112233445566778899aabbccddeeff", kk: Int? = null): String {
         val fp = dev(d).fp; val s = seat ?: SeatIds.of(license, fp); val kv = kk ?: DeviceIdentity.kFor(fp.n)
         val p = Activation.payload(kind, subject, key(k).signer.keyId, issued, nonce, issued, from, to, license, s, kv, fp.byKind, rights)
@@ -127,9 +128,9 @@ class ActivationVectorsTest {
         cases += activationCase("act-bad-trial-with-rights", "une clé d'essai ne porte aucun droit", raw("desk", "tvA", kind = ActivationKind.TRIAL, rights = listOf(purchase), license = "trial"), "tvA")
         cases += activationCase("act-bad-wrong-device", "activation d'une autre TV (aucun facteur ne correspond)", prodTok, "tvB-no-ethernet-usb-wifi")
         cases += activationCase("act-bad-wrong-subject", "activation de téléphone présentée à une TV", issuer("desk").issue(req("tvA", subject = Subject.PHONE)).token, "tvA")
-        cases += activationCase("act-bad-window-too-long", "fenêtre d'installation de 400 jours (> 366)", raw("desk", "tvA", from = t0, to = t0 + 400 * day), "tvA")
-        cases += activationCase("act-bad-not-yet-valid", "pas encore valable (début dans 100 jours)", raw("desk", "tvA", from = t0 + 100 * day, to = t0 + 130 * day), "tvA")
-        cases += activationCase("act-bad-window-closed", "fenêtre close depuis 30 jours", raw("desk", "tvA", issued = t0 - 60 * day, from = t0 - 60 * day, to = t0 - 30 * day), "tvA")
+        cases += activationCase("act-bad-window-too-long", "fenêtre d'installation de 49 h (> 48 h)", raw("desk", "tvA", from = t0, to = t0 + 49 * hour), "tvA")
+        cases += activationCase("act-bad-not-yet-valid", "pas encore valable (début dans 100 jours)", raw("desk", "tvA", from = t0 + 100 * day, to = t0 + 100 * day + 48 * hour), "tvA")
+        cases += activationCase("act-bad-window-closed", "fenêtre de 48 h close depuis 58 jours", raw("desk", "tvA", issued = t0 - 60 * day, from = t0 - 60 * day, to = t0 - 60 * day + 48 * hour), "tvA")
         cases += activationCase("act-ok-wrong-clock", "horloge de la TV en 1970 : la date d'émission sert de plancher, acceptée", prodTok, "tvA", now = 0L)
         cases += activationCase("act-bad-revoked-seat", "poste transféré : révoqué à une date postérieure à l'émission", prodTok, "tvA",
             seats = listOf(J("license" to "lic-0001", "seat" to SeatIds.of("lic-0001", tvA.fp), "at" to t0 + day)), now = t0 + 2 * day)
@@ -137,10 +138,16 @@ class ActivationVectorsTest {
             seats = listOf(J("license" to "lic-0001", "seat" to SeatIds.of("lic-0001", tvA.fp), "at" to t0 + day)), now = t0 + 3 * day)
         cases += activationCase("act-bad-noncanonical", "forme non canonique (retour à la ligne final) refusée", prodTok.split('.').let { p -> p[0] + "." + Base64.getUrlEncoder().withoutPadding().encodeToString((String(Base64.getUrlDecoder().decode(p[1])) + "\n").toByteArray()) + "." + p[2] }, "tvA")
         cases += activationCase("act-bad-malformed", "texte quelconque", "pas-un-jeton", "tvA")
+        // 4b. unlimited install window: superadmin keys only (ISSUE_UNLIMITED), 48 h for everyone else
+        cases += activationCase("act-unlimited-ok", "durée illimitée délivrée par une clé superadmin (bureau)", issuer("desk").issue(req("tvA", unlimited = true)).token, "tvA", now = t0 + 900 * day)
+        cases += activationCase("act-unlimited-phone-ok", "durée illimitée délivrée par le téléphone superadmin", issuer("phone").issue(req("tvA", unlimited = true)).token, "tvA", now = t0 + 900 * day)
+        cases += activationCase("act-bad-unlimited-server", "la clé serveur ne peut pas délivrer d'activation illimitée", raw("server", "tvA", from = t0, to = ActivationPolicy.UNLIMITED_NOT_AFTER), "tvA")
+        cases += activationCase("act-ok-48h-edge", "48 h exactes : acceptée à la dernière minute", issuer("server").issue(req("tvA", notBefore = t0, window = 48)).token, "tvA", now = t0 + 48 * hour)
+        cases += activationCase("act-bad-48h-passed", "48 h écoulées : la clé est périmée", issuer("server").issue(req("tvA", notBefore = t0, window = 48)).token, "tvA", now = t0 + 48 * hour + 1)
         // 5. compact
         val code = tvA.code
-        val day0 = ((t0 - CompactActivation.EPOCH_MS) / day).toInt() - 1
-        val compactOk = issuer("desk").issueCompact(ActivationKind.TRIAL, code, day0, 200)
+        val hour0 = ((t0 - CompactActivation.EPOCH_MS) / hour).toInt() - 1
+        val compactOk = issuer("desk").issueCompact(ActivationKind.TRIAL, code, hour0, 48)
         fun compactCase(id: String, why: String, text: String, c: String = code, now: Long = t0, trusted: List<String> = listOf("desk", "phone", "server"), revoked: List<String> = emptyList()): Map<String, Any?> {
             val r = CompactActivation.verify(text, ringOf(trusted, revoked), trusted.map { key(it).signer.trusted(key(it).scopes) }, c, now)
             val exp = when (r) { is ActivationResult.Accepted -> J("result" to "accepted", "kind" to r.activation.kind.name.lowercase()); is ActivationResult.Rejected -> J("result" to "rejected", "reason" to r.reason.name) }
@@ -148,12 +155,14 @@ class ActivationVectorsTest {
         }
         cases += compactCase("compact-ok", "clé saisissable d'essai : 33 groupes de 5", compactOk)
         cases += compactCase("compact-sloppy", "saisie approximative : minuscules, espaces, O/0, I/1", compactOk.lowercase().replace('0', 'o').replace('1', 'i').replace('-', ' '))
-        cases += compactCase("compact-production", "clé saisissable de production (ensemble 3)", issuer("phone").issueCompact(ActivationKind.PRODUCTION, code, day0, 100, 3))
+        cases += compactCase("compact-production", "clé saisissable de production (ensemble 3)", issuer("phone").issueCompact(ActivationKind.PRODUCTION, code, hour0, 48, 3))
         val groups = compactOk.split('-').toMutableList(); groups[11] = groups[11].replaceRange(1, 2, if (groups[11][1] == 'A') "B" else "A")
         cases += compactCase("compact-bad-group", "groupe 12 mal saisi", groups.joinToString("-"))
         cases += compactCase("compact-bad-device", "liée strictement au code d'appareil", compactOk, c = dev("tvB-no-ethernet-usb-wifi").code)
         cases += compactCase("compact-bad-revoked", "clé révoquée", compactOk, revoked = listOf("desk"))
         cases += compactCase("compact-bad-closed", "fenêtre close", compactOk, now = t0 + 900 * day)
+        cases += compactCase("compact-unlimited-ok", "clé saisissable illimitée (bureau)", issuer("desk").issueCompact(ActivationKind.TRIAL, code, hour0, unlimited = true), now = t0 + 900 * day)
+        cases += compactCase("compact-bad-unlimited-server", "la clé serveur ne peut pas délivrer de clé saisissable illimitée", CompactActivation.encode(CompactActivation.Header(ActivationKind.TRIAL, CompactActivation.keyTag(key("server").signer.keyId), hour0, ActivationPolicy.UNLIMITED_UNITS, 0, CompactActivation.bindOf(code)).let { h -> h }, key("server").signer.sign(CompactActivation.signedText(CompactActivation.Header(ActivationKind.TRIAL, CompactActivation.keyTag(key("server").signer.keyId), hour0, ActivationPolicy.UNLIMITED_UNITS, 0, CompactActivation.bindOf(code)).bytes()).toByteArray())), now = t0 + 900 * day)
         // 6. owner commands
         val ch1 = "0123456789abcdef0123456789abcdef"; val ch2 = "fedcba9876543210fedcba9876543210"
         fun cmdCase(id: String, why: String, d: String, open: List<String>, steps: List<Triple<String, Long, String?>>, trusted: List<String> = listOf("desk", "phone", "server", "support"), revoked: List<String> = emptyList()): Map<String, Any?> {
@@ -187,10 +196,11 @@ class ActivationVectorsTest {
         cases += build("build-trial", "construire la clé d'essai", "desk", req("tvA", ActivationKind.TRIAL), "tvA")
         cases += build("build-production", "construire la production (achat + abonnement)", "desk", req("tvA", rights = listOf(purchase, sub)), "tvA")
         cases += build("build-phone", "construire une activation de téléphone", "phone", req("phoneP", rights = listOf(purchase), subject = Subject.PHONE), "phoneP")
-        cases += J("type" to "build-compact", "id" to "build-compact-trial", "description" to "construire la clé saisissable", "signer" to "desk", "request" to J("kind" to "trial", "deviceCode" to code, "notBeforeDay" to day0, "windowDays" to 200, "setId" to 0), "expect" to J("text" to compactOk))
+        cases += J("type" to "build-compact", "id" to "build-compact-trial", "description" to "construire la clé saisissable", "signer" to "desk", "request" to J("kind" to "trial", "deviceCode" to code, "notBeforeHour" to hour0, "windowHours" to 48, "setId" to 0, "unlimited" to false), "expect" to J("text" to compactOk))
         cases += J("type" to "build-command", "id" to "build-command-open-all", "description" to "construire la commande « tout ouvert »", "signer" to "desk", "request" to J("power" to "open_all", "device" to "tvA", "challenge" to ch1, "issuedAt" to t0, "days" to 7, "action" to "", "bundles" to emptyList<String>(), "lots" to emptyList<String>()), "expect" to J("token" to openCmd))
         fun refuse(id: String, why: String, k: String, r: ActivationIssuer.Request, d: String) = J("type" to "build-activation", "id" to id, "description" to why, "signer" to k, "request" to reqJson(r, d), "expect" to J("refused" to true))
-        cases += refuse("build-refuse-window", "durée hors bornes (400 jours)", "desk", req("tvA", window = 400), "tvA")
+        cases += refuse("build-refuse-window", "fenêtre hors bornes (49 h)", "desk", req("tvA", window = 49), "tvA")
+        cases += refuse("build-refuse-unlimited-server", "la clé serveur ne peut pas émettre d'activation illimitée", "server", req("tvA", unlimited = true), "tvA")
         cases += refuse("build-refuse-zero-window", "durée nulle", "desk", req("tvA", window = 0), "tvA")
         cases += refuse("build-refuse-scope", "la clé serveur ne peut pas délivrer « tout ouvert »", "server", req("tvA", rights = listOf(openAll)), "tvA")
         cases += refuse("build-refuse-open-all-long", "« tout ouvert » de 31 jours", "desk", req("tvA", rights = listOf(Right.OpenAll("ouvert", t0, t0 + 31 * day))), "tvA")
@@ -444,12 +454,12 @@ class ActivationVectorsTest {
                     val rights = (rq["rights"] as List<*>).map { Activation.parseRight(it as String) }
                     val issuer = ActivationIssuer(signerOf(c["signer"] as String), trusted(listOf(c["signer"])).single().scopes)
                     val request = ActivationIssuer.Request(ActivationKind.valueOf((rq["kind"] as String).uppercase()), (rq["deviceCodeOverride"] as String?) ?: ds.getValue(dv)["code"] as String, fp(dv), (rq["issuedAt"] as Number).toLong(),
-                        Subject.valueOf((rq["subject"] as String).uppercase()), rights, rq["license"] as String, rq["seat"] as String?, (rq["notBefore"] as Number).toLong(), (rq["windowDays"] as Number).toInt(), rq["nonce"] as String?)
+                        Subject.valueOf((rq["subject"] as String).uppercase()), rights, rq["license"] as String, rq["seat"] as String?, (rq["notBefore"] as Number).toLong(), (rq["windowHours"] as Number).toInt(), rq["unlimited"] as Boolean, rq["nonce"] as String?)
                     if (expect!!["refused"] == true) assertFailsWith<IssueException>(id) { issuer.issue(request) } else assertEquals(expect["token"], issuer.issue(request).token, id)
                 }
                 "build-compact" -> {
                     @Suppress("UNCHECKED_CAST") val rq = c["request"] as Map<String, Any?>
-                    assertEquals(expect!!["text"], ActivationIssuer(signerOf(c["signer"] as String)).issueCompact(ActivationKind.valueOf((rq["kind"] as String).uppercase()), rq["deviceCode"] as String, (rq["notBeforeDay"] as Number).toInt(), (rq["windowDays"] as Number).toInt(), (rq["setId"] as Number).toInt()), id)
+                    assertEquals(expect!!["text"], ActivationIssuer(signerOf(c["signer"] as String)).issueCompact(ActivationKind.valueOf((rq["kind"] as String).uppercase()), rq["deviceCode"] as String, (rq["notBeforeHour"] as Number).toInt(), (rq["windowHours"] as Number).toInt(), (rq["setId"] as Number).toInt(), (rq["unlimited"] as Boolean)), id)
                 }
                 "build-command" -> {
                     @Suppress("UNCHECKED_CAST") val rq = c["request"] as Map<String, Any?>

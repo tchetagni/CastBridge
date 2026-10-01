@@ -120,7 +120,7 @@ open class ConsoleActivity : ComponentActivity() {
 
     @Composable private fun Issue(signer: Ed25519Signer) {
         var input by remember { mutableStateOf("") }; var production by remember { mutableStateOf(false) }
-        var days by remember { mutableStateOf("30") }; var license by remember { mutableStateOf("") }
+        var unlimited by remember { mutableStateOf(false) }; var license by remember { mutableStateOf("") }
         var purchase by remember { mutableStateOf("") }; var subscription by remember { mutableStateOf("") }
         var openProduct by remember { mutableStateOf("") }; var openDays by remember { mutableStateOf("30") }
         var token by remember { mutableStateOf<String?>(null) }; var fileContent by remember { mutableStateOf<String?>(null) }
@@ -158,7 +158,10 @@ open class ConsoleActivity : ComponentActivity() {
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 FilterChip(!production, { production = false }, { Text("Essai") }); FilterChip(production, { production = true }, { Text("Production") })
             }
-            OutlinedTextField(days, { days = it.filter(Char::isDigit).take(3) }, label = { Text("Durée de validité (jours, 1 à 366)") }, keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
+            Row(Modifier.fillMaxWidth(), verticalAlignment = androidx.compose.ui.Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
+                Text(if (unlimited) "Durée ILLIMITÉE (superadmin)" else "Valable ${ActivationPolicy.CODE_VALIDITY_HOURS} h pour l'installer")
+                Switch(unlimited, { unlimited = it; token = null })
+            }
             if (production) {
                 OutlinedTextField(license, { license = it }, label = { Text("Identifiant de licence") }, singleLine = true, modifier = Modifier.fillMaxWidth())
                 OutlinedTextField(purchase, { purchase = it }, label = { Text("Achat à la carte : PRODUIT:BOUQUET,BOUQUET") }, modifier = Modifier.fillMaxWidth())
@@ -171,8 +174,7 @@ open class ConsoleActivity : ComponentActivity() {
             Button({
                 error = null; info = null; token = null; fileContent = null
                 runCatching {
-                    val d = days.toIntOrNull() ?: throw IssueException("Durée : nombre de jours")
-                    val issuer = ActivationIssuer(signer); val now = System.currentTimeMillis(); val day = 24L * 3600 * 1000; val start = now / day * day
+                                        val issuer = ActivationIssuer(signer); val now = System.currentTimeMillis(); val day = 24L * 3600 * 1000; val start = now / day * day
                     val full = OwnerFrames.parseDeviceInfo(input.trim().replace("\r", ""))
                     if (full != null) {
                         if (DeviceCode.of(full.third) != full.first) throw IssueException("Le code d'appareil ne correspond pas aux empreintes de la demande (texte altéré ?)")
@@ -186,15 +188,15 @@ open class ConsoleActivity : ComponentActivity() {
                         }
                         val kind = if (production) ActivationKind.PRODUCTION else ActivationKind.TRIAL
                         val lic = if (production) license.trim() else Activation.TRIAL_LICENSE
-                        val issued = issuer.issue(ActivationIssuer.Request(kind, full.first, full.third, issuedAt = now, rights = rights, license = lic, notBefore = start, windowDays = d))
+                        val issued = issuer.issue(ActivationIssuer.Request(kind, full.first, full.third, issuedAt = now, rights = rights, license = lic, unlimited = unlimited))
                         token = issued.token; fileContent = issued.fileContent
-                        store.journal("activation", full.first, kind.name, lic, d)
+                        store.journal("activation", full.first, kind.name, lic, if (unlimited) 0 else ActivationPolicy.CODE_VALIDITY_HOURS)
                     } else {
                         val code = DeviceCode.parse(input.trim()) ?: throw IssueException("Code d'appareil mal formé (16 caractères, contrôle compris) et demande complète illisible")
                         val kind = if (production) ActivationKind.PRODUCTION else ActivationKind.TRIAL
-                        val dayIdx = ((start - 1767225600000L) / day).toInt()
-                        token = issuer.issueCompact(kind, code, dayIdx, d)
-                        store.journal("compact", code, kind.name, "-", d)
+                        val hourIdx = ((now - 1767225600000L) / ActivationPolicy.HOUR_MS).toInt()
+                        token = issuer.issueCompact(kind, code, hourIdx, unlimited = unlimited)
+                        store.journal("compact", code, kind.name, "-", if (unlimited) 0 else ActivationPolicy.CODE_VALIDITY_HOURS)
                         info = "Clé compacte (à saisir) : liée à ce code d'appareil, sans droits ni clés de lots. Pour une activation complète, collez la demande d'appareil exportée par la TV."
                     }
                 }.onFailure { error = (it as? IssueException)?.message ?: "Erreur : ${it.message}" }
