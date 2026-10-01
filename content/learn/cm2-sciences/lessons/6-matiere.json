@@ -1,0 +1,524 @@
+{
+ "chapter": "cm2-sciences-matiere",
+ "lessons": [
+  {
+   "id": "cm2-sciences-matiere-fiche",
+   "title": "La matière : solide, liquide, gaz et mélanges",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CM2 — Matière : états, changements d'état, mélanges (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Reconnaître les trois états de la matière.",
+    "Nommer les changements d'état de l'eau.",
+    "Choisir une méthode pour séparer un mélange simple."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cm2-sciences-matiere-01",
+    "cm2-sciences-matiere-02",
+    "cm2-sciences-matiere-03",
+    "cm2-sciences-matiere-04",
+    "cm2-sciences-matiere-05",
+    "cm2-sciences-matiere-06"
+   ],
+   "selfCheck": [
+    "cm2-sciences-matiere-q1",
+    "cm2-sciences-matiere-q2",
+    "cm2-sciences-matiere-q3",
+    "cm2-sciences-matiere-q4",
+    "cm2-sciences-matiere-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier l'exemple de l'huile de palme et les températures (0 °C et 100 °C au niveau de la mer).",
+    "Vérifier le vocabulaire : « évaporation » et « ébullition » distingués ou non au CM2."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les trois états",
+     "md": "Tout ce qui nous entoure est de la **matière**. Elle existe sous trois états :\n\n- **solide** : forme propre (une pierre, un glaçon) ;\n- **liquide** : prend la forme du récipient (l'eau, l'huile) ;\n- **gaz** : occupe tout l'espace disponible (l'air, la vapeur d'eau)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 70,
+        "w": 100,
+        "h": 60,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 106,
+        "text": "SOLIDE",
+        "size": 16,
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 70,
+        "w": 100,
+        "h": 60,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 106,
+        "text": "LIQUIDE",
+        "size": 16,
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 440,
+        "y": 70,
+        "w": 100,
+        "h": 60,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 490,
+        "y": 106,
+        "text": "GAZ",
+        "size": 16,
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 124,
+        "y1": 85,
+        "x2": 226,
+        "y2": 85,
+        "color": "red",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 175,
+        "y": 70,
+        "text": "fusion",
+        "size": 15,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 226,
+        "y1": 117,
+        "x2": 124,
+        "y2": 117,
+        "color": "blue",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 175,
+        "y": 142,
+        "text": "solidification",
+        "size": 15,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 334,
+        "y1": 85,
+        "x2": 436,
+        "y2": 85,
+        "color": "red",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 385,
+        "y": 70,
+        "text": "évaporation",
+        "size": 15,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 436,
+        "y1": 117,
+        "x2": 334,
+        "y2": 117,
+        "color": "blue",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 385,
+        "y": 142,
+        "text": "condensation",
+        "size": 15,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 30,
+        "text": "Les changements d'état de l'eau",
+        "size": 17,
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 170,
+        "text": "glaçon",
+        "size": 14,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 170,
+        "text": "eau",
+        "size": 14,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 490,
+        "y": 170,
+        "text": "vapeur d'eau",
+        "size": 14,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Les changements d'état de l'eau.",
+     "alt": "Trois cases : solide, liquide, gaz, avec des flèches entre elles. Du solide au liquide : fusion. Du liquide au gaz : évaporation. Dans l'autre sens : solidification et condensation. En dessous : glaçon, eau, vapeur d'eau."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Changer d'état",
+     "md": "- **Fusion** : un solide devient liquide (le glaçon fond).\n- **Solidification** : un liquide devient solide (l'eau gèle).\n- **Évaporation / ébullition** : un liquide devient gaz (le linge sèche, l'eau bout).\n- **Condensation** : un gaz devient liquide (gouttes sur un verre froid).\n\nL'eau gèle à 0 °C et bout à 100 °C (au niveau de la mer)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : quel changement ?",
+     "statement": "Le beurre de karité posé au soleil devient liquide. Quel est le nom du changement ?",
+     "steps": [
+      {
+       "md": "Le beurre passe de l'état **solide** à l'état **liquide**."
+      },
+      {
+       "md": "Ce passage s'appelle la **fusion**."
+      }
+     ],
+     "answer": "**La fusion.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : retrouver le sel",
+     "statement": "Marie dissout du sel dans de l'eau. Comment récupérer le sel ?",
+     "steps": [
+      {
+       "md": "Le sel est dissous : il ne reste pas sur un filtre."
+      },
+      {
+       "md": "On chauffe l'eau : elle s'**évapore**, et le sel reste au fond."
+      }
+     ],
+     "answer": "**On fait évaporer l'eau : le sel reste.**"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Séparer un mélange",
+     "md": "- **Décantation** : on laisse reposer ; le sable tombe au fond de l'eau.\n- **Filtration** : on verse dans un filtre (tissu, papier) ; les grains restent sur le filtre.\n- **Évaporation** : on chauffe pour faire partir l'eau et garder ce qui est dissous."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que l'air n'est pas de la matière : c'est un gaz.\n- Confondre fusion (solide → liquide) et évaporation (liquide → gaz).\n- Croire qu'un liquide a une forme propre."
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-sciences-matiere-01"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Un mélange où l'on ne distingue plus les parties (sel dans l'eau) est un mélange homogène.",
+      "L'eau change d'état sans changer de nature : de la glace fondue donne la même eau."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Dans quel état se trouve l'eau d'un seau ?",
+   "choices": [
+    "Solide",
+    "Liquide",
+    "Gaz",
+    "Poudre"
+   ],
+   "answer": 1,
+   "explanation": "L'eau du seau est **liquide** : elle prend la forme du récipient.",
+   "method": "Se demander si la matière a une forme propre.",
+   "id": "cm2-sciences-matiere-01",
+   "chapter": "cm2-sciences-matiere",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cm2-sciences-matiere-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : la fusion est le passage du solide au liquide.",
+   "answer": true,
+   "explanation": "Le glaçon qui fond est un exemple de fusion.",
+   "id": "cm2-sciences-matiere-02",
+   "chapter": "cm2-sciences-matiere",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cm2-sciences-matiere-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque situation à son changement d'état.",
+   "pairs": [
+    [
+     "Un glaçon fond",
+     "Fusion"
+    ],
+    [
+     "Le linge sèche",
+     "Évaporation"
+    ],
+    [
+     "De la buée sur une vitre",
+     "Condensation"
+    ],
+    [
+     "L'eau gèle",
+     "Solidification"
+    ]
+   ],
+   "explanation": "Fusion : solide → liquide. Évaporation : liquide → gaz. Condensation : gaz → liquide. Solidification : liquide → solide.",
+   "points": 2,
+   "id": "cm2-sciences-matiere-03",
+   "chapter": "cm2-sciences-matiere",
+   "tier": "application",
+   "difficulty": 2,
+   "lesson": "cm2-sciences-matiere-fiche",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "L'eau bout à quelle température, en degrés Celsius ?",
+   "answer": 100,
+   "tolerance": 0,
+   "explanation": "L'eau bout à 100 °C (au niveau de la mer).",
+   "unit": "°C",
+   "method": "Retenir : gèle à 0 °C, bout à 100 °C.",
+   "review": true,
+   "reviewNote": "Valeur à vérifier avec le programme (altitude non considérée).",
+   "id": "cm2-sciences-matiere-04",
+   "chapter": "cm2-sciences-matiere",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cm2-sciences-matiere-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "open",
+   "prompt": "Comment séparer du sable mélangé à de l'eau ? Donne une méthode.",
+   "model": "On peut laisser reposer (décantation) puis verser doucement, ou filtrer avec un tissu.",
+   "rubric": [
+    "Une méthode est citée (décantation ou filtration).",
+    "Le sable est retenu, l'eau passe."
+   ],
+   "explanation": "Le sable n'est pas dissous : il se sépare par décantation ou filtration.",
+   "points": 3,
+   "mistakes": [
+    "Chauffer l'eau pour récupérer le sable."
+   ],
+   "id": "cm2-sciences-matiere-05",
+   "chapter": "cm2-sciences-matiere",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cm2-sciences-matiere-fiche",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Tchoua met de l'eau dans le congélateur, puis la sort et la chauffe dans une casserole. Réponds aux questions.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Que devient l'eau dans le congélateur ?",
+     "choices": [
+      "Elle devient gaz",
+      "Elle disparaît",
+      "Elle devient solide (glace)",
+      "Elle reste liquide"
+     ],
+     "answer": 2,
+     "explanation": "Elle gèle : c'est la solidification.",
+     "id": "cm2-sciences-matiere-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quand la glace est chauffée, elle…",
+     "choices": [
+      "Fond puis devient liquide",
+      "Se condense",
+      "Se solidifie",
+      "Devient du sable"
+     ],
+     "answer": 0,
+     "explanation": "Chauffée, la glace fond : c'est la fusion.",
+     "id": "cm2-sciences-matiere-06-b",
+     "points": 1
+    },
+    {
+     "kind": "truefalse",
+     "prompt": "Vrai ou faux : si on continue à chauffer l'eau jusqu'à l'ébullition, elle devient de la vapeur.",
+     "answer": true,
+     "explanation": "À l'ébullition, l'eau liquide devient gaz (vapeur d'eau).",
+     "id": "cm2-sciences-matiere-06-c",
+     "points": 1
+    }
+   ],
+   "method": "Suivre les changements d'état dans l'ordre.",
+   "id": "cm2-sciences-matiere-06",
+   "chapter": "cm2-sciences-matiere",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cm2-sciences-matiere-fiche",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel état a une pierre ?",
+   "choices": [
+    "Liquide",
+    "Gaz",
+    "Solide",
+    "Aucun"
+   ],
+   "answer": 2,
+   "explanation": "Une pierre a une forme propre.",
+   "id": "cm2-sciences-matiere-q1",
+   "chapter": "cm2-sciences-matiere",
+   "tier": "autoeval",
+   "lesson": "cm2-sciences-matiere-fiche",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'air est…",
+   "choices": [
+    "Un gaz",
+    "Un solide",
+    "Un liquide",
+    "Rien du tout"
+   ],
+   "answer": 0,
+   "explanation": "L'air est un gaz qui occupe tout l'espace.",
+   "id": "cm2-sciences-matiere-q2",
+   "chapter": "cm2-sciences-matiere",
+   "tier": "autoeval",
+   "lesson": "cm2-sciences-matiere-fiche",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La condensation est le passage…",
+   "choices": [
+    "Du solide au liquide",
+    "Du liquide au solide",
+    "Du liquide au gaz",
+    "Du gaz au liquide"
+   ],
+   "answer": 3,
+   "explanation": "Condensation : gaz → liquide.",
+   "id": "cm2-sciences-matiere-q3",
+   "chapter": "cm2-sciences-matiere",
+   "tier": "autoeval",
+   "lesson": "cm2-sciences-matiere-fiche",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour séparer du sable et de l'eau, on peut…",
+   "choices": [
+    "Allumer une lampe",
+    "Filtrer",
+    "Sécher la table",
+    "Ajouter du sel"
+   ],
+   "answer": 1,
+   "explanation": "La filtration retient le sable.",
+   "id": "cm2-sciences-matiere-q4",
+   "chapter": "cm2-sciences-matiere",
+   "tier": "autoeval",
+   "lesson": "cm2-sciences-matiere-fiche",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'eau gèle à…",
+   "choices": [
+    "100 °C",
+    "0 °C",
+    "50 °C",
+    "−10 °C seulement"
+   ],
+   "answer": 1,
+   "explanation": "À 0 °C, l'eau devient glace.",
+   "id": "cm2-sciences-matiere-q5",
+   "chapter": "cm2-sciences-matiere",
+   "tier": "autoeval",
+   "lesson": "cm2-sciences-matiere-fiche",
+   "points": 1
+  }
+ ]
+}

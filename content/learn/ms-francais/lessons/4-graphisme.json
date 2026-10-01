@@ -1,0 +1,328 @@
+{
+ "chapter": "ms-francais-graphisme-ch",
+ "lessons": [
+  {
+   "id": "ms-francais-graphisme",
+   "title": "Ponts, vagues et boucles",
+   "minutes": 8,
+   "readAloud": true,
+   "programRef": "Programme de l'éducation maternelle, moyenne section (MINEDUB) — reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant de maternelle",
+   "objectives": [
+    "Reconnaître un pont, une vague, un zigzag.",
+    "Dire quel trait continuer."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "ms-francais-graphisme-01",
+    "ms-francais-graphisme-02",
+    "ms-francais-graphisme-03",
+    "ms-francais-graphisme-04"
+   ],
+   "selfCheck": [],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "On trace des ponts, des vagues, des zigzags.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 130,
+      "items": [
+       {
+        "t": "path",
+        "d": "M 20 100 Q 50 20 80 100 Q 110 20 140 100 Q 170 20 200 100 Q 230 20 260 100 Q 290 20 320 100 Q 350 20 380 100",
+        "stroke": "blue",
+        "width": 5
+       }
+      ]
+     },
+     "caption": "Des ponts",
+     "alt": "Une ligne bleue qui fait des ponts, comme des arches."
+    },
+    {
+     "type": "audio",
+     "text": "Ce sont des ponts.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 130,
+      "items": [
+       {
+        "t": "path",
+        "d": "M 20 70 Q 40 20 60 70 Q 80 120 100 70 Q 120 20 140 70 Q 160 120 180 70 Q 200 20 220 70 Q 240 120 260 70 Q 280 20 300 70 Q 320 120 340 70 Q 360 20 380 70",
+        "stroke": "blue",
+        "width": 5
+       }
+      ]
+     },
+     "caption": "Des vagues",
+     "alt": "Une ligne bleue qui monte et descend en douceur."
+    },
+    {
+     "type": "audio",
+     "text": "Ce sont des vagues.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 130,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         30,
+         30,
+         70,
+         90,
+         110,
+         30,
+         150,
+         90,
+         190,
+         30,
+         230,
+         90,
+         270,
+         30,
+         310,
+         90,
+         350,
+         30
+        ],
+        "stroke": "blue",
+        "width": 5,
+        "closed": false
+       }
+      ]
+     },
+     "caption": "Un zigzag",
+     "alt": "Une ligne bleue en pointes, qui monte et descend."
+    },
+    {
+     "type": "audio",
+     "text": "Ce sont des pointes : un zigzag.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "example",
+     "title": "Quel trait ?",
+     "statement": "Une ligne en pointes, comment s'appelle-t-elle ?",
+     "steps": [
+      {
+       "md": "Elle monte et descend avec des pointes."
+      },
+      {
+       "md": "On l'appelle un zigzag."
+      }
+     ],
+     "answer": "Un **zigzag**."
+    },
+    {
+     "type": "audio",
+     "text": "Un zigzag !",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "exercise",
+     "ref": "ms-francais-graphisme-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ms-francais-graphisme-03"
+    }
+   ],
+   "reviewNotes": [
+    "Exercices réduits à 4 ; le geste réel (ardoise, sable, feuille) reste l'essentiel."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ms-francais-graphisme-01",
+   "chapter": "ms-francais-graphisme-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-francais-graphisme",
+   "prompt": "Quel est ce trait ?",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 130,
+    "items": [
+     {
+      "t": "path",
+      "d": "M 20 100 Q 50 20 80 100 Q 110 20 140 100 Q 170 20 200 100 Q 230 20 260 100 Q 290 20 320 100 Q 350 20 380 100",
+      "stroke": "blue",
+      "width": 5
+     }
+    ]
+   },
+   "choices": [
+    "Des vagues",
+    "Un zigzag",
+    "Des ponts"
+   ],
+   "answer": 2,
+   "explanation": "Ce sont des arches : des **ponts**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-francais-graphisme-02",
+   "chapter": "ms-francais-graphisme-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-francais-graphisme",
+   "prompt": "Quel est ce trait ?",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 120,
+    "items": [
+     {
+      "t": "poly",
+      "pts": [
+       30,
+       30,
+       70,
+       90,
+       110,
+       30,
+       150,
+       90,
+       190,
+       30,
+       230,
+       90,
+       270,
+       30,
+       310,
+       90,
+       350,
+       30
+      ],
+      "stroke": "blue",
+      "width": 5,
+      "closed": false
+     }
+    ]
+   },
+   "choices": [
+    "Des ronds",
+    "Un zigzag",
+    "Des ponts"
+   ],
+   "answer": 1,
+   "explanation": "La ligne a des pointes : un **zigzag**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-francais-graphisme-03",
+   "chapter": "ms-francais-graphisme-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-francais-graphisme",
+   "prompt": "Quel est ce trait ?",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 140,
+    "items": [
+     {
+      "t": "path",
+      "d": "M 20 70 Q 40 20 60 70 Q 80 120 100 70 Q 120 20 140 70 Q 160 120 180 70 Q 200 20 220 70 Q 240 120 260 70 Q 280 20 300 70 Q 320 120 340 70 Q 360 20 380 70",
+      "stroke": "blue",
+      "width": 5
+     }
+    ]
+   },
+   "choices": [
+    "Un zigzag",
+    "Des traits debout",
+    "Des vagues"
+   ],
+   "answer": 2,
+   "explanation": "La ligne est douce : des **vagues**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-francais-graphisme-04",
+   "chapter": "ms-francais-graphisme-ch",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-francais-graphisme",
+   "prompt": "Ces traits sont des ronds.",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 130,
+    "items": [
+     {
+      "t": "circle",
+      "cx": 60,
+      "cy": 65,
+      "r": 25,
+      "stroke": "blue",
+      "width": 5
+     },
+     {
+      "t": "circle",
+      "cx": 130,
+      "cy": 65,
+      "r": 25,
+      "stroke": "blue",
+      "width": 5
+     },
+     {
+      "t": "circle",
+      "cx": 200,
+      "cy": 65,
+      "r": 25,
+      "stroke": "blue",
+      "width": 5
+     },
+     {
+      "t": "circle",
+      "cx": 270,
+      "cy": 65,
+      "r": 25,
+      "stroke": "blue",
+      "width": 5
+     },
+     {
+      "t": "circle",
+      "cx": 340,
+      "cy": 65,
+      "r": 25,
+      "stroke": "blue",
+      "width": 5
+     }
+    ]
+   },
+   "answer": true,
+   "explanation": "Oui, ce sont des **ronds**.",
+   "source": "Exercice original"
+  }
+ ]
+}

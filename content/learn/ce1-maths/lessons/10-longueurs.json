@@ -1,0 +1,589 @@
+{
+ "chapter": "ce1-maths-mesures",
+ "lessons": [
+  {
+   "id": "ce1-maths-longueurs",
+   "title": "Mesurer des longueurs : le mètre et le centimètre",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CE1 — Programme de mathématiques du cycle 2, MINEDUB (reconstitué, à vérifier sur le texte officiel) — grandeurs et mesures : longueurs (m, cm)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Mesurer un segment avec une règle graduée.",
+    "Connaître 1 m = 100 cm.",
+    "Comparer et calculer avec des longueurs."
+   ],
+   "prerequisites": [
+    "ce1-maths-comparer-ranger"
+   ],
+   "exercises": [
+    "ce1-maths-longueurs-01",
+    "ce1-maths-longueurs-02",
+    "ce1-maths-longueurs-03",
+    "ce1-maths-longueurs-04",
+    "ce1-maths-longueurs-05",
+    "ce1-maths-longueurs-06"
+   ],
+   "selfCheck": [
+    "ce1-maths-longueurs-q1",
+    "ce1-maths-longueurs-q2",
+    "ce1-maths-longueurs-q3",
+    "ce1-maths-longueurs-q4",
+    "ce1-maths-longueurs-q5"
+   ],
+   "reviewNotes": [
+    "Équivalence m/cm ; rôle du km (non calculé) : à confirmer avec le programme officiel."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Mesurer une longueur",
+     "md": "On mesure une longueur avec une **règle graduée** (en centimètres) ou un **mètre ruban**.\n\n- Le **centimètre** (cm) : pour les petits objets (un crayon).\n- Le **mètre** (m) : pour une classe, une cour.\n- Le **kilomètre** (km) : pour les routes (de Yaoundé à Douala, on parle en km)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Équivalence",
+     "md": "**1 m = 100 cm**\n\nDonc 2 m = 200 cm, et 50 cm = la moitié d'un mètre."
+    },
+    {
+     "type": "illustration",
+     "caption": "Mesurer avec une règle.",
+     "alt": "Une règle graduée de 0 à 10 cm. Un segment rouge part de 0 et va jusqu'à 7 : il mesure 7 cm.",
+     "figure": {
+      "kind": "shapes",
+      "w": 460,
+      "h": 122,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 30,
+        "w": 420,
+        "h": 50,
+        "stroke": "ink",
+        "fill": "lightyellow"
+       },
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 30,
+        "x2": 30,
+        "y2": 60,
+        "color": "ink",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 100,
+        "text": "0",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 70,
+        "y1": 30,
+        "x2": 70,
+        "y2": 60,
+        "color": "ink",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 100,
+        "text": "1",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 30,
+        "x2": 110,
+        "y2": 60,
+        "color": "ink",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 100,
+        "text": "2",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 30,
+        "x2": 150,
+        "y2": 60,
+        "color": "ink",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 100,
+        "text": "3",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 190,
+        "y1": 30,
+        "x2": 190,
+        "y2": 60,
+        "color": "ink",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 100,
+        "text": "4",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 230,
+        "y1": 30,
+        "x2": 230,
+        "y2": 60,
+        "color": "ink",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 100,
+        "text": "5",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 270,
+        "y1": 30,
+        "x2": 270,
+        "y2": 60,
+        "color": "ink",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 100,
+        "text": "6",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 310,
+        "y1": 30,
+        "x2": 310,
+        "y2": 60,
+        "color": "ink",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 100,
+        "text": "7",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 350,
+        "y1": 30,
+        "x2": 350,
+        "y2": 60,
+        "color": "ink",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 100,
+        "text": "8",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 390,
+        "y1": 30,
+        "x2": 390,
+        "y2": 60,
+        "color": "ink",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "text",
+        "x": 390,
+        "y": 100,
+        "text": "9",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 430,
+        "y1": 30,
+        "x2": 430,
+        "y2": 60,
+        "color": "ink",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "text",
+        "x": 430,
+        "y": 100,
+        "text": "10",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 20,
+        "x2": 310,
+        "y2": 20,
+        "color": "red",
+        "width": 5,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 10,
+        "text": "7 cm",
+        "size": 15,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : lire une mesure",
+     "statement": "Un crayon commence à 0 sur la règle et finit à 14. Quelle est sa longueur ?",
+     "steps": [
+      {
+       "md": "Je place le début du crayon sur le 0."
+      },
+      {
+       "md": "Je lis le nombre où il finit : 14."
+      }
+     ],
+     "answer": "**Le crayon mesure 14 cm.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : convertir",
+     "statement": "Combien de centimètres font 3 m ?",
+     "steps": [
+      {
+       "md": "1 m = 100 cm."
+      },
+      {
+       "md": "3 m = 100 + 100 + 100 = 300 cm."
+      }
+     ],
+     "answer": "**3 m = 300 cm**"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-maths-longueurs-01"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode",
+     "md": "1. Je pose la règle avec le **0** au bout du segment.\n2. Je lis le nombre à l'autre bout.\n3. J'écris l'unité (cm).\n\nPour comparer, j'écris les deux longueurs avec la même unité."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- Ne commence pas à 1 : commence au 0.\n- Compare seulement des longueurs qui ont la **même unité** : 1 m est plus grand que 90 cm."
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Un segment mesure 8 cm. Un autre mesure 5 cm. De combien le premier est-il plus long ? (en cm)",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "8 − 5 = 3.",
+   "unit": "cm",
+   "id": "ce1-maths-longueurs-01",
+   "chapter": "ce1-maths-mesures",
+   "tier": "application",
+   "lesson": "ce1-maths-longueurs",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Combien de centimètres font 2 m ?",
+   "answer": 200,
+   "tolerance": 0,
+   "explanation": "2 × 100 = 200.",
+   "unit": "cm",
+   "id": "ce1-maths-longueurs-02",
+   "chapter": "ce1-maths-mesures",
+   "tier": "application",
+   "lesson": "ce1-maths-longueurs",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "truefalse",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Vrai ou faux : 1 m est plus long que 90 cm.",
+   "answer": true,
+   "explanation": "1 m = 100 cm et 100 > 90.",
+   "id": "ce1-maths-longueurs-03",
+   "chapter": "ce1-maths-mesures",
+   "tier": "application",
+   "lesson": "ce1-maths-longueurs",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "Combien de cm font 1 m et 50 cm ?",
+   "answer": 150,
+   "tolerance": 0,
+   "explanation": "100 + 50 = 150.",
+   "unit": "cm",
+   "id": "ce1-maths-longueurs-04",
+   "chapter": "ce1-maths-mesures",
+   "tier": "approfondissement",
+   "lesson": "ce1-maths-longueurs",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "Quelle unité choisir pour mesurer la longueur de la cour de l'école ?",
+   "choices": [
+    "le litre",
+    "le mètre",
+    "le kilomètre",
+    "le centimètre"
+   ],
+   "answer": 1,
+   "explanation": "La cour : plusieurs mètres.",
+   "id": "ce1-maths-longueurs-05",
+   "chapter": "ce1-maths-mesures",
+   "tier": "approfondissement",
+   "lesson": "ce1-maths-longueurs",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "problem",
+   "difficulty": 2,
+   "prompt": "Une couturière de Maroua coupe un tissu de 3 m pour une robe et 2 m pour une jupe.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "difficulty": 1,
+     "points": 2,
+     "prompt": "Quelle longueur de tissu a-t-elle coupée en tout, en m ?",
+     "answer": 5,
+     "tolerance": 0,
+     "explanation": "3 + 2 = 5.",
+     "unit": "m",
+     "id": "ce1-maths-longueurs-06-a"
+    },
+    {
+     "kind": "numeric",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Combien de centimètres cela fait-il ?",
+     "answer": 500,
+     "tolerance": 0,
+     "explanation": "5 × 100 = 500.",
+     "unit": "cm",
+     "id": "ce1-maths-longueurs-06-b"
+    },
+    {
+     "kind": "truefalse",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Vrai ou faux : 5 m, c'est plus que 450 cm.",
+     "answer": true,
+     "explanation": "5 m = 500 cm > 450 cm.",
+     "id": "ce1-maths-longueurs-06-c"
+    }
+   ],
+   "id": "ce1-maths-longueurs-06",
+   "chapter": "ce1-maths-mesures",
+   "tier": "examen",
+   "lesson": "ce1-maths-longueurs",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "1 m =",
+   "choices": [
+    "100 cm",
+    "10 cm",
+    "1 000 cm",
+    "50 cm"
+   ],
+   "answer": 0,
+   "explanation": "1 mètre fait 100 centimètres.",
+   "id": "ce1-maths-longueurs-q1",
+   "chapter": "ce1-maths-mesures",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-longueurs",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Pour mesurer, on place le début de l'objet sur…",
+   "choices": [
+    "le 10",
+    "le 1",
+    "le milieu",
+    "le 0"
+   ],
+   "answer": 3,
+   "explanation": "On commence toujours à 0.",
+   "id": "ce1-maths-longueurs-q2",
+   "chapter": "ce1-maths-mesures",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-longueurs",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quel outil mesure une longueur ?",
+   "choices": [
+    "une horloge",
+    "une règle",
+    "un verre doseur",
+    "une balance"
+   ],
+   "answer": 1,
+   "explanation": "Règle graduée.",
+   "id": "ce1-maths-longueurs-q3",
+   "chapter": "ce1-maths-mesures",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-longueurs",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quelle longueur est la plus grande ?",
+   "choices": [
+    "99 cm",
+    "150 cm",
+    "2 m",
+    "180 cm"
+   ],
+   "answer": 2,
+   "explanation": "2 m = 200 cm.",
+   "id": "ce1-maths-longueurs-q4",
+   "chapter": "ce1-maths-mesures",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-longueurs",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quelle unité est la plus adaptée pour la distance entre deux villes ?",
+   "choices": [
+    "le kilomètre",
+    "le gramme",
+    "le mètre",
+    "le centimètre"
+   ],
+   "answer": 0,
+   "explanation": "Km pour les longues distances.",
+   "id": "ce1-maths-longueurs-q5",
+   "chapter": "ce1-maths-mesures",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-longueurs",
+   "source": "Exercice original, niveau CE1"
+  }
+ ]
+}

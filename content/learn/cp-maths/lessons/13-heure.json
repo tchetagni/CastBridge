@@ -1,0 +1,736 @@
+{
+ "chapter": "cp-maths-mesures",
+ "lessons": [
+  {
+   "id": "cp-maths-heure",
+   "title": "L'heure : heures et demi-heures",
+   "minutes": 12,
+   "readAloud": true,
+   "programRef": "CP — Mesures : l'heure simple (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Lire l'heure sur une horloge (heure juste).",
+    "Lire une demi-heure.",
+    "Savoir ce que font la petite et la grande aiguille."
+   ],
+   "prerequisites": [
+    "cp-maths-nombres20"
+   ],
+   "exercises": [
+    "cp-maths-heure-01",
+    "cp-maths-heure-02",
+    "cp-maths-heure-03",
+    "cp-maths-heure-04",
+    "cp-maths-heure-05",
+    "cp-maths-heure-06"
+   ],
+   "selfCheck": [
+    "cp-maths-heure-q1",
+    "cp-maths-heure-q2",
+    "cp-maths-heure-q3",
+    "cp-maths-heure-q4",
+    "cp-maths-heure-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que l'heure du programme de CP se limite aux heures et demi-heures (le quart est vu plus tard)."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "On lit l'heure sur une **horloge**. Elle a deux aiguilles."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les aiguilles",
+     "md": "- La **petite aiguille** (rouge) montre l'**heure**.\n- La **grande aiguille** (bleue) montre les **minutes**.\n\nQuand la grande aiguille est sur le **12**, c'est une heure juste."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 260,
+      "h": 260,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 130,
+        "cy": 130,
+        "r": 95,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 168,
+        "y": 71,
+        "text": "1",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 195,
+        "y": 98,
+        "text": "2",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 205,
+        "y": 136,
+        "text": "3",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 195,
+        "y": 174,
+        "text": "4",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 168,
+        "y": 201,
+        "text": "5",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 211,
+        "text": "6",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 92,
+        "y": 201,
+        "text": "7",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 65,
+        "y": 174,
+        "text": "8",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 55,
+        "y": 136,
+        "text": "9",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 65,
+        "y": 98,
+        "text": "10",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 92,
+        "y": 71,
+        "text": "11",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 61,
+        "text": "12",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 130,
+        "x2": 175,
+        "y2": 130,
+        "color": "red",
+        "width": 6
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 130,
+        "x2": 130,
+        "y2": 62,
+        "color": "blue",
+        "width": 3
+       },
+       {
+        "t": "circle",
+        "cx": 130,
+        "cy": 130,
+        "r": 5,
+        "fill": "ink"
+       }
+      ]
+     },
+     "caption": "Il est 3 heures.",
+     "alt": "Une horloge : la petite aiguille rouge pointe le 3, la grande aiguille bleue pointe le 12. Il est 3 heures."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "La demie",
+     "md": "Quand la grande aiguille est sur le **6**, on dit **et demie**. La petite aiguille est entre deux nombres.\n\nSur l'horloge de 8 h et demie, la petite aiguille est entre 8 et 9."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 260,
+      "h": 260,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 130,
+        "cy": 130,
+        "r": 95,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 168,
+        "y": 71,
+        "text": "1",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 195,
+        "y": 98,
+        "text": "2",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 205,
+        "y": 136,
+        "text": "3",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 195,
+        "y": 174,
+        "text": "4",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 168,
+        "y": 201,
+        "text": "5",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 211,
+        "text": "6",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 92,
+        "y": 201,
+        "text": "7",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 65,
+        "y": 174,
+        "text": "8",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 55,
+        "y": 136,
+        "text": "9",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 65,
+        "y": 98,
+        "text": "10",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 92,
+        "y": 71,
+        "text": "11",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 61,
+        "text": "12",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 130,
+        "x2": 87,
+        "y2": 142,
+        "color": "red",
+        "width": 6
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 130,
+        "x2": 130,
+        "y2": 198,
+        "color": "blue",
+        "width": 3
+       },
+       {
+        "t": "circle",
+        "cx": 130,
+        "cy": 130,
+        "r": 5,
+        "fill": "ink"
+       }
+      ]
+     },
+     "caption": "Il est 8 heures et demie.",
+     "alt": "Une horloge : la grande aiguille bleue pointe le 6, la petite aiguille rouge est entre le 8 et le 9. Il est 8 heures et demie."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : heure juste",
+     "statement": "La petite aiguille est sur 7, la grande sur 12. Quelle heure est-il ?",
+     "steps": [
+      {
+       "md": "La grande aiguille sur 12 : c'est une heure juste."
+      },
+      {
+       "md": "La petite aiguille est sur 7."
+      }
+     ],
+     "answer": "Il est **7 heures**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : la demie",
+     "statement": "La grande aiguille est sur 6, la petite entre 10 et 11. Quelle heure ?",
+     "steps": [
+      {
+       "md": "Grande aiguille sur 6 : « et demie »."
+      },
+      {
+       "md": "La petite aiguille vient de passer le 10."
+      }
+     ],
+     "answer": "Il est **10 heures et demie**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "Ne confonds pas les deux aiguilles : la plus courte montre l'heure, la plus longue montre les minutes."
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-heure-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-heure-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-heure-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-heure-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-heure-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-heure-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Quelle heure est-il ? (écris le nombre d'heures)",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "La petite aiguille est sur 3, la grande sur 12 : 3 heures.",
+   "unit": "heures",
+   "figure": {
+    "kind": "shapes",
+    "w": 260,
+    "h": 260,
+    "items": [
+     {
+      "t": "circle",
+      "cx": 130,
+      "cy": 130,
+      "r": 95,
+      "fill": "white",
+      "stroke": "ink",
+      "width": 3
+     },
+     {
+      "t": "text",
+      "x": 168,
+      "y": 71,
+      "text": "1",
+      "size": 17,
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 195,
+      "y": 98,
+      "text": "2",
+      "size": 17,
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 205,
+      "y": 136,
+      "text": "3",
+      "size": 17,
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 195,
+      "y": 174,
+      "text": "4",
+      "size": 17,
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 168,
+      "y": 201,
+      "text": "5",
+      "size": 17,
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 130,
+      "y": 211,
+      "text": "6",
+      "size": 17,
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 92,
+      "y": 201,
+      "text": "7",
+      "size": 17,
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 65,
+      "y": 174,
+      "text": "8",
+      "size": 17,
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 55,
+      "y": 136,
+      "text": "9",
+      "size": 17,
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 65,
+      "y": 98,
+      "text": "10",
+      "size": 17,
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 92,
+      "y": 71,
+      "text": "11",
+      "size": 17,
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 130,
+      "y": 61,
+      "text": "12",
+      "size": 17,
+      "bold": true
+     },
+     {
+      "t": "line",
+      "x1": 130,
+      "y1": 130,
+      "x2": 175,
+      "y2": 130,
+      "color": "red",
+      "width": 6
+     },
+     {
+      "t": "line",
+      "x1": 130,
+      "y1": 130,
+      "x2": 130,
+      "y2": 62,
+      "color": "blue",
+      "width": 3
+     },
+     {
+      "t": "circle",
+      "cx": 130,
+      "cy": 130,
+      "r": 5,
+      "fill": "ink"
+     }
+    ]
+   },
+   "id": "cp-maths-heure-01",
+   "chapter": "cp-maths-mesures",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-heure",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle aiguille montre l'heure ?",
+   "choices": [
+    "la grande",
+    "les deux",
+    "la petite",
+    "aucune"
+   ],
+   "answer": 2,
+   "explanation": "La petite aiguille donne l'heure.",
+   "id": "cp-maths-heure-02",
+   "chapter": "cp-maths-mesures",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-heure",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Grande aiguille sur 6 : on dit…",
+   "choices": [
+    "pile",
+    "et demie",
+    "et quart",
+    "moins le quart"
+   ],
+   "answer": 1,
+   "explanation": "Sur le 6, c'est la demie.",
+   "id": "cp-maths-heure-03",
+   "chapter": "cp-maths-mesures",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-heure",
+   "points": 1
+  },
+  {
+   "kind": "numeric",
+   "prompt": "L'école commence à 7 heures. Il est 6 heures. Combien d'heures faut-il attendre ?",
+   "answer": 1,
+   "tolerance": 0,
+   "explanation": "7 − 6 = 1 heure.",
+   "unit": "heure",
+   "id": "cp-maths-heure-04",
+   "chapter": "cp-maths-mesures",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-maths-heure",
+   "points": 1
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : si la grande aiguille est sur 12, c'est toujours une heure juste.",
+   "answer": true,
+   "explanation": "Grande aiguille sur 12 : heure juste.",
+   "id": "cp-maths-heure-05",
+   "chapter": "cp-maths-mesures",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-maths-heure",
+   "points": 1
+  },
+  {
+   "kind": "problem",
+   "prompt": "Ngono se lève à 6 heures. Elle part à l'école 2 heures plus tard.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "À quelle heure part-elle à l'école ? (écris le nombre)",
+     "answer": 8,
+     "tolerance": 0,
+     "explanation": "6 + 2 = 8 : à 8 heures.",
+     "id": "cp-maths-heure-06-a",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Elle rentre à midi, c'est-à-dire 12 heures. Combien d'heures après son départ ?",
+     "answer": 4,
+     "tolerance": 0,
+     "explanation": "12 − 8 = 4 heures.",
+     "id": "cp-maths-heure-06-b",
+     "points": 1
+    }
+   ],
+   "explanation": "Elle part à 8 heures ; elle rentre 4 heures après.",
+   "id": "cp-maths-heure-06",
+   "chapter": "cp-maths-mesures",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cp-maths-heure"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Sur l'horloge, il y a combien de nombres ?",
+   "choices": [
+    "12",
+    "10",
+    "6",
+    "24"
+   ],
+   "answer": 0,
+   "explanation": "Les nombres vont de 1 à 12.",
+   "id": "cp-maths-heure-q1",
+   "chapter": "cp-maths-mesures",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-heure",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Grande aiguille sur 12, petite sur 5 :",
+   "choices": [
+    "12 heures",
+    "5 heures et demie",
+    "7 heures",
+    "5 heures"
+   ],
+   "answer": 3,
+   "explanation": "Petite sur 5, grande sur 12 : 5 heures.",
+   "id": "cp-maths-heure-q2",
+   "chapter": "cp-maths-mesures",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-heure",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La grande aiguille montre…",
+   "choices": [
+    "l'heure",
+    "le jour",
+    "les minutes",
+    "la saison"
+   ],
+   "answer": 2,
+   "explanation": "Elle montre les minutes.",
+   "id": "cp-maths-heure-q3",
+   "chapter": "cp-maths-mesures",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-heure",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La demi-heure, c'est quand la grande aiguille est sur…",
+   "choices": [
+    "le 12",
+    "le 6",
+    "le 3",
+    "le 9"
+   ],
+   "answer": 1,
+   "explanation": "Sur le 6.",
+   "id": "cp-maths-heure-q4",
+   "chapter": "cp-maths-mesures",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-heure",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle heure est-il quand les deux aiguilles sont sur 12 ?",
+   "choices": [
+    "midi",
+    "une heure",
+    "minuit seulement",
+    "6 heures"
+   ],
+   "answer": 0,
+   "explanation": "Les deux aiguilles sur 12 : midi (ou minuit).",
+   "id": "cp-maths-heure-q5",
+   "chapter": "cp-maths-mesures",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-heure",
+   "points": 1
+  }
+ ]
+}

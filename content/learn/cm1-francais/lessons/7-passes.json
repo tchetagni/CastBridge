@@ -1,0 +1,543 @@
+{
+ "chapter": "cm1-francais-conjugaison",
+ "lessons": [
+  {
+   "id": "cm1-francais-passes",
+   "title": "Le passé composé et le passé simple",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM1 — Conjugaison : passé composé, passé simple (3e personne) (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Former le passé composé avec avoir ou être et le participe passé.",
+    "Reconnaître et écrire le passé simple à la 3e personne (il, elle, ils, elles).",
+    "Distinguer, dans un récit, le passé simple (actions) et l'imparfait (décor)."
+   ],
+   "prerequisites": [
+    "cm1-francais-present"
+   ],
+   "exercises": [
+    "cm1-francais-passes-01",
+    "cm1-francais-passes-02",
+    "cm1-francais-passes-03",
+    "cm1-francais-passes-04",
+    "cm1-francais-passes-05",
+    "cm1-francais-passes-06"
+   ],
+   "selfCheck": [
+    "cm1-francais-passes-q1",
+    "cm1-francais-passes-q2",
+    "cm1-francais-passes-q3",
+    "cm1-francais-passes-q4",
+    "cm1-francais-passes-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier la liste des verbes conjugués avec être au CM1.",
+    "Le passé simple est limité à la 3e personne : à vérifier sur le programme.",
+    "Exercice 6 : les réponses supposent le récit à la 3e personne ; vérifier les choix distracteurs."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Le passé composé",
+     "md": "Il dit une action **terminée**. Il se forme avec **l'auxiliaire avoir ou être au présent** + le **participe passé**.\n\n- j'**ai mangé**, nous **avons fini**, ils **ont pris**.\n- **Être** avec : aller, venir, arriver, partir, entrer, sortir, monter, descendre, tomber, naître, mourir, rester, devenir, et les verbes pronominaux (je me suis levé)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Le participe passé",
+     "md": "- 1er groupe : **-é** (chanté, mangé).\n- 2e groupe : **-i** (fini, choisi).\n- 3e groupe : souvent -u, -i, -is, -it, -t : *venu, dit, pris, mis, fait, vu, eu, été*."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 55,
+        "w": 110,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 6
+       },
+       {
+        "t": "rect",
+        "x": 165,
+        "y": 55,
+        "w": 130,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "red",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 95,
+        "y": 81,
+        "text": "j'ai",
+        "size": 18,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 81,
+        "text": "mangé",
+        "size": 18,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 95,
+        "y": 118,
+        "text": "avoir (présent)",
+        "size": 13,
+        "color": "blue",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 118,
+        "text": "participe passé",
+        "size": 13,
+        "color": "red",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 158,
+        "y": 81,
+        "text": "+",
+        "size": 20,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 330,
+        "y": 55,
+        "w": 110,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 6
+       },
+       {
+        "t": "rect",
+        "x": 455,
+        "y": 55,
+        "w": 95,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "red",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 385,
+        "y": 81,
+        "text": "je suis",
+        "size": 18,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 502,
+        "y": 81,
+        "text": "allé",
+        "size": 18,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 385,
+        "y": 118,
+        "text": "être (présent)",
+        "size": 13,
+        "color": "blue",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 502,
+        "y": 118,
+        "text": "participe passé",
+        "size": 13,
+        "color": "red",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 448,
+        "y": 81,
+        "text": "+",
+        "size": 20,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 28,
+        "text": "Le passé composé",
+        "size": 16,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "La formation du passé composé.",
+     "alt": "Deux schémas : « j'ai » (avoir au présent) plus « mangé » (participe passé) ; « je suis » (être au présent) plus « allé »."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Le passé simple (3e personne)",
+     "md": "On l'emploie surtout **dans les récits écrits**, pour les actions principales.\n\n- 1er groupe : il chant**a**, ils chant**èrent**.\n- 2e groupe : il fin**it**, ils fin**irent**.\n- 3e groupe : il **fut** (être), il **eut** (avoir), il **fit** (faire), il **dit**, il **vit**, il **prit**, il **vint**, il **put**, il **voulut**. Au pluriel : ils furent, ils eurent, ils firent, ils dirent, ils virent, ils prirent, ils vinrent."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : passé composé",
+     "statement": "Mets au passé composé : « Ngono mange. Ses frères partent. »",
+     "steps": [
+      {
+       "md": "« manger » : avoir au présent + participe passé : Ngono **a mangé**."
+      },
+      {
+       "md": "« partir » : verbe de mouvement, auxiliaire être : ses frères **sont partis** (accord avec le sujet)."
+      }
+     ],
+     "answer": "**Ngono a mangé. Ses frères sont partis.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : récit au passé simple",
+     "statement": "Récris au passé simple (3e personne) : « Le chasseur entend un bruit, il s'arrête, puis il voit un éléphant. »",
+     "steps": [
+      {
+       "md": "« entendre » : il entendit (3e groupe, terminaison -it)."
+      },
+      {
+       "md": "« s'arrêter » : il s'arrêta (1er groupe, -a)."
+      },
+      {
+       "md": "« voir » : il vit."
+      }
+     ],
+     "answer": "**Le chasseur entendit un bruit, il s'arrêta, puis il vit un éléphant.**"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Passé simple ou imparfait ?",
+     "md": "Dans un récit : l'**imparfait** plante le décor (*Il faisait nuit. Un vent soufflait.*) ; le **passé simple** raconte les actions qui font avancer l'histoire (*Soudain, la porte s'ouvrit.*)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier l'auxiliaire : écrire « il mangé » est faux : il a mangé.\n- Écrire « il mangea » avec « ils » : ils mangèrent.\n- Confondre « il finit » (présent) et « il finit » (passé simple) : c'est le contexte qui décide."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-passes-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-passes-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-passes-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-passes-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-passes-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-passes-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "cm1-francais-passes-01",
+   "chapter": "cm1-francais-conjugaison",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "mcq",
+   "prompt": "Passé composé de « nous chantons » :",
+   "choices": [
+    "nous chantâmes",
+    "nous avons chantons",
+    "nous sommes chanté",
+    "nous avons chanté"
+   ],
+   "answer": 3,
+   "explanation": "Avoir au présent + participe passé de chanter.",
+   "points": 1,
+   "lesson": "cm1-francais-passes",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-passes-02",
+   "chapter": "cm1-francais-conjugaison",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : « Elles sont arrivées » est au passé composé.",
+   "answer": true,
+   "explanation": "Vrai : être au présent + participe passé accordé (arrivées).",
+   "points": 1,
+   "lesson": "cm1-francais-passes",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-passes-03",
+   "chapter": "cm1-francais-conjugaison",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "matching",
+   "prompt": "Associe chaque verbe à son participe passé.",
+   "pairs": [
+    [
+     "prendre",
+     "pris"
+    ],
+    [
+     "faire",
+     "fait"
+    ],
+    [
+     "venir",
+     "venu"
+    ],
+    [
+     "finir",
+     "fini"
+    ]
+   ],
+   "explanation": "Participes irréguliers : pris, fait, venu ; fini est régulier.",
+   "points": 2,
+   "lesson": "cm1-francais-passes",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-passes-04",
+   "chapter": "cm1-francais-conjugaison",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "mcq",
+   "prompt": "Passé simple de « il parle » :",
+   "choices": [
+    "il parlait",
+    "il a parlé",
+    "il parla",
+    "il parlera"
+   ],
+   "answer": 2,
+   "explanation": "1er groupe, 3e personne du singulier : -a.",
+   "method": "Il parle → il parla.",
+   "points": 1,
+   "lesson": "cm1-francais-passes",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-passes-05",
+   "chapter": "cm1-francais-conjugaison",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "mcq",
+   "prompt": "Quel temps décrit le décor dans un récit ?",
+   "choices": [
+    "le passé simple",
+    "l'imparfait",
+    "le futur",
+    "l'impératif"
+   ],
+   "answer": 1,
+   "explanation": "L'imparfait décrit le décor et les habitudes.",
+   "points": 1,
+   "lesson": "cm1-francais-passes",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-passes-06",
+   "chapter": "cm1-francais-conjugaison",
+   "tier": "examen",
+   "difficulty": 2,
+   "kind": "problem",
+   "prompt": "Récit : « Il ___ (faire) nuit. Soudain, le chien ___ (aboyer). Fotso ___ (sortir) et ___ (voir) un voleur. »",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "« Il ___ nuit. » (décor)",
+     "choices": [
+      "faisait",
+      "fit",
+      "a fait",
+      "fera"
+     ],
+     "answer": 0,
+     "explanation": "Description du décor : imparfait.",
+     "id": "cm1-francais-passes-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "« le chien ___ » (action, passé simple)",
+     "choices": [
+      "aboyait",
+      "aboyèrent",
+      "aboie",
+      "aboya"
+     ],
+     "answer": 3,
+     "explanation": "1er groupe, 3e personne du singulier : aboya.",
+     "id": "cm1-francais-passes-06-b",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "« Fotso ___ et ___ un voleur » (passé simple)",
+     "choices": [
+      "sortait … voyait",
+      "sortit … voit",
+      "sortit … vit",
+      "sortira … verra"
+     ],
+     "answer": 2,
+     "explanation": "Sortir : il sortit (2e groupe, -it) ; voir : il vit.",
+     "id": "cm1-francais-passes-06-c",
+     "points": 1
+    }
+   ],
+   "lesson": "cm1-francais-passes",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-passes-q1",
+   "chapter": "cm1-francais-conjugaison",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quel est le participe passé de « partir » ?",
+   "choices": [
+    "partit",
+    "parti",
+    "partu",
+    "partir"
+   ],
+   "answer": 1,
+   "explanation": "Partir → parti.",
+   "lesson": "cm1-francais-passes"
+  },
+  {
+   "id": "cm1-francais-passes-q2",
+   "chapter": "cm1-francais-conjugaison",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quel verbe se conjugue avec l'auxiliaire être au passé composé ?",
+   "choices": [
+    "tomber",
+    "manger",
+    "chanter",
+    "finir"
+   ],
+   "answer": 0,
+   "explanation": "Tomber se conjugue avec être : il est tombé. Manger, chanter et finir se conjuguent avec avoir.",
+   "lesson": "cm1-francais-passes"
+  },
+  {
+   "id": "cm1-francais-passes-q3",
+   "chapter": "cm1-francais-conjugaison",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Passé simple de « ils finissent » :",
+   "choices": [
+    "ils finissèrent",
+    "ils finissaient",
+    "ils ont fini",
+    "ils finirent"
+   ],
+   "answer": 3,
+   "explanation": "2e groupe : ils finirent.",
+   "lesson": "cm1-francais-passes"
+  },
+  {
+   "id": "cm1-francais-passes-q4",
+   "chapter": "cm1-francais-conjugaison",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Passé simple de « il est » :",
+   "choices": [
+    "il fût",
+    "il était",
+    "il fut",
+    "il a été"
+   ],
+   "answer": 2,
+   "explanation": "Être : il fut.",
+   "lesson": "cm1-francais-passes"
+  },
+  {
+   "id": "cm1-francais-passes-q5",
+   "chapter": "cm1-francais-conjugaison",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Passé composé de « je lis » :",
+   "choices": [
+    "j'ai lis",
+    "j'ai lu",
+    "je suis lu",
+    "je lus"
+   ],
+   "answer": 1,
+   "explanation": "Lire → lu : j'ai lu.",
+   "lesson": "cm1-francais-passes"
+  }
+ ]
+}

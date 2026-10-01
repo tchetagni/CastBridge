@@ -1,0 +1,469 @@
+{
+ "chapter": "cm1-histoire-geo-climat",
+ "lessons": [
+  {
+   "id": "cm1-histoire-geo-climat-fiche",
+   "title": "Climat et hydrographie du Cameroun",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CM1 — Histoire, géographie, ECM (MINEDUB), reconstitué — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Distinguer le climat du Sud, du Nord et de l'Extrême-Nord.",
+    "Nommer les principaux fleuves et le lac Tchad.",
+    "Relier le climat à la végétation et aux saisons."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cm1-histoire-geo-climat-01",
+    "cm1-histoire-geo-climat-02",
+    "cm1-histoire-geo-climat-03",
+    "cm1-histoire-geo-climat-04",
+    "cm1-histoire-geo-climat-05",
+    "cm1-histoire-geo-climat-06"
+   ],
+   "selfCheck": [
+    "cm1-histoire-geo-climat-q1",
+    "cm1-histoire-geo-climat-q2",
+    "cm1-histoire-geo-climat-q3",
+    "cm1-histoire-geo-climat-q4",
+    "cm1-histoire-geo-climat-q5"
+   ],
+   "reviewNotes": [
+    "Découpage climatique : « équatorial, tropical, sahélien » est une simplification ; certains manuels distinguent aussi un climat de montagne et un climat côtier.",
+    "Cours des fleuves (Sanaga, Wouri, Nyong, Bénoué, Logone) et lac Tchad : à vérifier sur une carte.",
+    "La carte est un schéma, pas une vraie carte du Cameroun."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le climat",
+     "md": "Le **climat** est le temps qu'il fait en général dans un endroit, d'année en année : chaleur, pluies, saisons.\n\nLe Cameroun s'étend du **sud** (près de l'équateur) jusqu'au **nord** (près du Sahel) : les climats changent beaucoup."
+    },
+    {
+     "type": "illustration",
+     "caption": "Trois climats du Sud au Nord.",
+     "alt": "Trois bandes superposées : en haut l'Extrême-Nord au climat sahélien, au milieu le Nord au climat tropical, en bas le Sud au climat équatorial.",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 260,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 20,
+        "w": 440,
+        "h": 70,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 48,
+        "text": "Extrême-Nord (Maroua) : climat sahélien",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 72,
+        "text": "Pluies rares, longue saison sèche",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 100,
+        "w": 440,
+        "h": 70,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 128,
+        "text": "Nord et centre (Garoua) : climat tropical",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 152,
+        "text": "Une saison des pluies, une saison sèche",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 180,
+        "w": 440,
+        "h": 70,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 208,
+        "text": "Sud (Yaoundé, Douala) : climat équatorial",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 232,
+        "text": "Chaud, humide, pluies abondantes",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Du Sud au Nord",
+     "md": "- **Sud** : climat **équatorial**, chaud et humide, pluies abondantes, forêt dense.\n- **Nord et centre** : climat **tropical**, une saison des pluies et une saison sèche, savane.\n- **Extrême-Nord** : climat **sahélien**, pluies rares, végétation de steppe.\n\nLes montagnes de l'Ouest sont plus fraîches."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les cours d'eau",
+     "md": "- Au sud et à l'ouest, des fleuves se jettent dans l'océan : la **Sanaga**, le **Wouri**, le **Nyong**.\n- Au nord, la **Bénoué** rejoint le Nigeria ; le **Logone** va vers le **lac Tchad**.\n\nLes fleuves servent à l'eau, à la pêche, au transport et à l'énergie."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : deviner le climat",
+     "statement": "À Maroua, il pleut peu et la saison sèche est longue. Quel climat ?",
+     "steps": [
+      {
+       "md": "Peu de pluies : ce n'est pas l'équatorial."
+      },
+      {
+       "md": "Maroua est dans l'Extrême-Nord, au bord du Sahel."
+      },
+      {
+       "md": "Le climat est **sahélien**."
+      }
+     ],
+     "answer": "**Climat sahélien.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : lire la végétation",
+     "statement": "Dans le sud, la forêt est dense. Pourquoi ?",
+     "steps": [
+      {
+       "md": "Les pluies sont abondantes presque toute l'année."
+      },
+      {
+       "md": "Les arbres reçoivent beaucoup d'eau et de chaleur."
+      },
+      {
+       "md": "La forêt dense pousse bien dans un climat équatorial."
+      }
+     ],
+     "answer": "**La forêt dense est liée aux pluies abondantes du climat équatorial.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que le Cameroun a le même climat partout.\n- Confondre **climat** (ce qu'on observe sur de longues années) et **météo** (le temps d'aujourd'hui).\n- Penser que tous les fleuves se jettent dans l'océan : certains vont vers le lac Tchad."
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-histoire-geo-climat-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-histoire-geo-climat-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-histoire-geo-climat-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-histoire-geo-climat-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-histoire-geo-climat-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-histoire-geo-climat-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "cm1-histoire-geo-climat-01",
+   "chapter": "cm1-histoire-geo-climat",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cm1-histoire-geo-climat-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quel climat trouve-t-on au sud du Cameroun ?",
+   "choices": [
+    "sahélien",
+    "polaire",
+    "désertique de glace",
+    "équatorial"
+   ],
+   "answer": 3,
+   "explanation": "Au sud, il fait chaud et humide : climat équatorial.",
+   "method": "Penser à la forêt dense.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-histoire-geo-climat-02",
+   "chapter": "cm1-histoire-geo-climat",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cm1-histoire-geo-climat-fiche",
+   "points": 1,
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : il pleut moins à l'Extrême-Nord qu'au sud.",
+   "answer": true,
+   "explanation": "Le climat sahélien est plus sec que l'équatorial.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-histoire-geo-climat-03",
+   "chapter": "cm1-histoire-geo-climat",
+   "tier": "application",
+   "difficulty": 2,
+   "lesson": "cm1-histoire-geo-climat-fiche",
+   "points": 2,
+   "kind": "matching",
+   "prompt": "Associe chaque climat à sa description.",
+   "pairs": [
+    [
+     "Équatorial",
+     "chaud, humide, pluies abondantes"
+    ],
+    [
+     "Tropical",
+     "une saison des pluies et une saison sèche"
+    ],
+    [
+     "Sahélien",
+     "pluies rares"
+    ]
+   ],
+   "explanation": "Équatorial : pluies abondantes ; tropical : deux saisons ; sahélien : pluies rares.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-histoire-geo-climat-04",
+   "chapter": "cm1-histoire-geo-climat",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cm1-histoire-geo-climat-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quel fleuve se jette dans l'océan Atlantique ?",
+   "choices": [
+    "le Logone",
+    "la Bénoué",
+    "la Sanaga",
+    "le Chari"
+   ],
+   "answer": 2,
+   "explanation": "La Sanaga se jette dans l'océan Atlantique.",
+   "review": true,
+   "reviewNote": "Cours des fleuves à vérifier sur une carte (Sanaga, Wouri, Nyong : océan ; Bénoué : vers le Nigeria ; Logone : lac Tchad).",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-histoire-geo-climat-05",
+   "chapter": "cm1-histoire-geo-climat",
+   "tier": "approfondissement",
+   "difficulty": 3,
+   "lesson": "cm1-histoire-geo-climat-fiche",
+   "points": 3,
+   "kind": "open",
+   "prompt": "Explique en deux phrases la différence entre un climat tropical et un climat sahélien.",
+   "model": "Dans le climat tropical, il y a une saison des pluies bien marquée et une saison sèche. Dans le climat sahélien, les pluies sont rares et la saison sèche est très longue.",
+   "rubric": [
+    "Cite la saison des pluies du tropical.",
+    "Dit que les pluies sont rares au Sahel.",
+    "Comparaison claire."
+   ],
+   "explanation": "Le Sahel est plus sec que le climat tropical.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-histoire-geo-climat-06",
+   "chapter": "cm1-histoire-geo-climat",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "cm1-histoire-geo-climat-fiche",
+   "kind": "problem",
+   "prompt": "Amina étudie le climat et les cours d'eau.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quel lac est au nord du pays ?",
+     "choices": [
+      "le lac Victoria",
+      "le lac Tchad",
+      "le lac Malawi",
+      "le lac Léman"
+     ],
+     "answer": 1,
+     "explanation": "Le lac Tchad est situé au nord du Cameroun.",
+     "review": true,
+     "reviewNote": "Position du lac Tchad à confirmer sur la carte.",
+     "id": "cm1-histoire-geo-climat-06-a",
+     "points": 1
+    },
+    {
+     "kind": "truefalse",
+     "prompt": "La Bénoué est un fleuve du nord du Cameroun.",
+     "answer": true,
+     "explanation": "La Bénoué traverse le nord du pays.",
+     "id": "cm1-histoire-geo-climat-06-b",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quel climat favorise la forêt dense ?",
+     "choices": [
+      "le sahélien",
+      "l'équatorial",
+      "le polaire",
+      "le désertique"
+     ],
+     "answer": 1,
+     "explanation": "Les pluies abondantes permettent la forêt dense.",
+     "id": "cm1-histoire-geo-climat-06-c",
+     "points": 1
+    }
+   ],
+   "explanation": "Voir la correction de chaque question.",
+   "method": "Relier climat et paysage.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-histoire-geo-climat-q1",
+   "chapter": "cm1-histoire-geo-climat",
+   "tier": "autoeval",
+   "lesson": "cm1-histoire-geo-climat-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Qu'est-ce que le climat ?",
+   "choices": [
+    "le temps habituel d'un lieu sur de nombreuses années",
+    "la météo du jour",
+    "le vent de ce matin",
+    "la température d'hier"
+   ],
+   "answer": 0,
+   "explanation": "Le climat est durable ; la météo change tous les jours."
+  },
+  {
+   "id": "cm1-histoire-geo-climat-q2",
+   "chapter": "cm1-histoire-geo-climat",
+   "tier": "autoeval",
+   "lesson": "cm1-histoire-geo-climat-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quel climat a des pluies rares ?",
+   "choices": [
+    "l'équatorial",
+    "le tropical humide",
+    "le climat de montagne seulement",
+    "le sahélien"
+   ],
+   "answer": 3,
+   "explanation": "Au Sahel, les pluies sont rares."
+  },
+  {
+   "id": "cm1-histoire-geo-climat-q3",
+   "chapter": "cm1-histoire-geo-climat",
+   "tier": "autoeval",
+   "lesson": "cm1-histoire-geo-climat-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quel cours d'eau va vers le lac Tchad ?",
+   "choices": [
+    "la Sanaga",
+    "le Wouri",
+    "le Logone",
+    "le Nyong"
+   ],
+   "answer": 2,
+   "explanation": "Le Logone coule vers le lac Tchad.",
+   "review": true,
+   "reviewNote": "À vérifier sur une carte."
+  },
+  {
+   "id": "cm1-histoire-geo-climat-q4",
+   "chapter": "cm1-histoire-geo-climat",
+   "tier": "autoeval",
+   "lesson": "cm1-histoire-geo-climat-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quelle végétation trouve-t-on au nord ?",
+   "choices": [
+    "la forêt dense",
+    "la mangrove",
+    "la savane et la steppe",
+    "la banquise"
+   ],
+   "answer": 2,
+   "explanation": "Au nord : savane, puis steppe."
+  },
+  {
+   "id": "cm1-histoire-geo-climat-q5",
+   "chapter": "cm1-histoire-geo-climat",
+   "tier": "autoeval",
+   "lesson": "cm1-histoire-geo-climat-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "À quoi servent les fleuves ?",
+   "choices": [
+    "à chauffer les maisons",
+    "à l'eau, à la pêche et au transport",
+    "à faire des routes",
+    "à empêcher les pluies"
+   ],
+   "answer": 1,
+   "explanation": "Les fleuves rendent plusieurs services."
+  }
+ ]
+}

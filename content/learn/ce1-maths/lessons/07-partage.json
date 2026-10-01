@@ -1,0 +1,486 @@
+{
+ "chapter": "ce1-maths-tables",
+ "lessons": [
+  {
+   "id": "ce1-maths-partage",
+   "title": "Partager : première approche de la division",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CE1 — Programme de mathématiques du cycle 2, MINEDUB (reconstitué, à vérifier sur le texte officiel) — calcul : partage équitable et groupes égaux (initiation à la division)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Partager des objets en parts égales.",
+    "Chercher combien de groupes on peut faire.",
+    "Utiliser les tables pour partager."
+   ],
+   "prerequisites": [
+    "ce1-maths-tables"
+   ],
+   "exercises": [
+    "ce1-maths-partage-01",
+    "ce1-maths-partage-02",
+    "ce1-maths-partage-03",
+    "ce1-maths-partage-04",
+    "ce1-maths-partage-05",
+    "ce1-maths-partage-06"
+   ],
+   "selfCheck": [
+    "ce1-maths-partage-q1",
+    "ce1-maths-partage-q2",
+    "ce1-maths-partage-q3",
+    "ce1-maths-partage-q4",
+    "ce1-maths-partage-q5"
+   ],
+   "reviewNotes": [
+    "Initiation seulement : la division posée n'est pas au programme du CE1 (à confronter au programme officiel) ; restes sur des exemples très simples."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Partager en parts égales",
+     "md": "**Partager**, c'est faire des parts **toutes pareilles**.\n\n*12 mangues partagées entre 3 enfants :* chaque enfant en reçoit 4. Car 3 × 4 = 12."
+    },
+    {
+     "type": "illustration",
+     "caption": "12 mangues partagées entre 3 enfants.",
+     "alt": "Douze ronds jaunes répartis en trois groupes de quatre.",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 20,
+        "w": 145,
+        "h": 100,
+        "stroke": "ink",
+        "fill": "lightyellow",
+        "radius": 8
+       },
+       {
+        "t": "rect",
+        "x": 170,
+        "y": 20,
+        "w": 145,
+        "h": 100,
+        "stroke": "ink",
+        "fill": "lightgreen",
+        "radius": 8
+       },
+       {
+        "t": "rect",
+        "x": 330,
+        "y": 20,
+        "w": 145,
+        "h": 100,
+        "stroke": "ink",
+        "fill": "lightblue",
+        "radius": 8
+       },
+       {
+        "t": "circle",
+        "cx": 30,
+        "cy": 50,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 60,
+        "cy": 50,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 30,
+        "cy": 90,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 60,
+        "cy": 90,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 190,
+        "cy": 50,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 220,
+        "cy": 50,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 190,
+        "cy": 90,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 220,
+        "cy": 90,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 350,
+        "cy": 50,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 380,
+        "cy": 50,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 350,
+        "cy": 90,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 380,
+        "cy": 90,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "text",
+        "x": 82,
+        "y": 138,
+        "text": "4",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 242,
+        "y": 138,
+        "text": "4",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 402,
+        "y": 138,
+        "text": "4",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Deux façons de voir",
+     "md": "- **Parts égales** : 12 partagé entre 3 → chacun a 4.\n- **Groupes** : 12 en groupes de 4 → 3 groupes.\n\nOn s'aide de la **table** : 3 × 4 = 12."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : parts égales",
+     "statement": "Ngono partage 15 arachides entre 5 amis. Combien chacun en reçoit-il ?",
+     "steps": [
+      {
+       "md": "Je cherche : 5 fois combien ? = 15."
+      },
+      {
+       "md": "5 × 3 = 15."
+      }
+     ],
+     "answer": "**Chaque ami reçoit 3 arachides.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : un reste",
+     "statement": "On veut 13 billes, en groupes de 4. Combien de groupes ?",
+     "steps": [
+      {
+       "md": "4 × 3 = 12 : on peut faire 3 groupes."
+      },
+      {
+       "md": "Il reste 1 bille (13 − 12 = 1)."
+      }
+     ],
+     "answer": "**3 groupes, il reste 1 bille.**"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-maths-partage-01"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode",
+     "md": "1. Je cherche dans la table : combien de fois le petit nombre pour arriver au grand ?\n2. S'il ne tombe pas juste, je prends la table juste avant, et le **reste** est ce qui dépasse."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- Les parts doivent être **toutes égales**.\n- On ne peut pas toujours partager sans reste : 13 en 4 donne 3 et il reste 1."
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Partage 20 billes entre 4 enfants. Combien chacun en reçoit-il ?",
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "4 × 5 = 20.",
+   "id": "ce1-maths-partage-01",
+   "chapter": "ce1-maths-tables",
+   "tier": "application",
+   "lesson": "ce1-maths-partage",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "On range 18 œufs dans des boîtes de 6. Combien de boîtes ?",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "6 × 3 = 18.",
+   "id": "ce1-maths-partage-02",
+   "chapter": "ce1-maths-tables",
+   "tier": "application",
+   "lesson": "ce1-maths-partage",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "truefalse",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Vrai ou faux : si on partage 10 bonbons entre 2 enfants, chacun en a 5.",
+   "answer": true,
+   "explanation": "2 × 5 = 10.",
+   "id": "ce1-maths-partage-03",
+   "chapter": "ce1-maths-tables",
+   "tier": "application",
+   "lesson": "ce1-maths-partage",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "On partage 21 bananes entre 3 enfants. Combien chacun en a-t-il ?",
+   "answer": 7,
+   "tolerance": 0,
+   "explanation": "3 × 7 = 21.",
+   "id": "ce1-maths-partage-04",
+   "chapter": "ce1-maths-tables",
+   "tier": "approfondissement",
+   "lesson": "ce1-maths-partage",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "On veut mettre 14 plantains dans des paniers de 4. Combien de paniers pleins peut-on faire ?",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "4 × 3 = 12, il reste 2 plantains.",
+   "id": "ce1-maths-partage-05",
+   "chapter": "ce1-maths-tables",
+   "tier": "approfondissement",
+   "lesson": "ce1-maths-partage",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "problem",
+   "difficulty": 2,
+   "prompt": "Maman a 24 mangues. Elle les partage entre 6 enfants à parts égales.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "difficulty": 1,
+     "points": 2,
+     "prompt": "Combien de mangues chaque enfant reçoit-il ?",
+     "answer": 4,
+     "tolerance": 0,
+     "explanation": "6 × 4 = 24.",
+     "id": "ce1-maths-partage-06-a"
+    },
+    {
+     "kind": "numeric",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Elle remplit des sacs de 8 mangues avec ses 24 mangues. Combien de sacs ?",
+     "answer": 3,
+     "tolerance": 0,
+     "explanation": "8 × 3 = 24.",
+     "id": "ce1-maths-partage-06-b"
+    },
+    {
+     "kind": "truefalse",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Vrai ou faux : on peut partager 24 mangues entre 6 enfants sans reste.",
+     "answer": true,
+     "explanation": "6 × 4 = 24 : pas de reste.",
+     "id": "ce1-maths-partage-06-c"
+    }
+   ],
+   "id": "ce1-maths-partage-06",
+   "chapter": "ce1-maths-tables",
+   "tier": "examen",
+   "lesson": "ce1-maths-partage",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Partager 12 en 4 parts égales donne…",
+   "choices": [
+    "8",
+    "4",
+    "3",
+    "16"
+   ],
+   "answer": 2,
+   "explanation": "4 × 3 = 12.",
+   "id": "ce1-maths-partage-q1",
+   "chapter": "ce1-maths-tables",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-partage",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quelle table aide à partager 20 en 5 ?",
+   "choices": [
+    "la table de 10",
+    "la table de 2",
+    "la table de 5",
+    "la table de 3"
+   ],
+   "answer": 2,
+   "explanation": "5 × 4 = 20.",
+   "id": "ce1-maths-partage-q2",
+   "chapter": "ce1-maths-tables",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-partage",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Partager 9 en 3 donne…",
+   "choices": [
+    "12",
+    "6",
+    "9",
+    "3"
+   ],
+   "answer": 3,
+   "explanation": "3 × 3 = 9.",
+   "id": "ce1-maths-partage-q3",
+   "chapter": "ce1-maths-tables",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-partage",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "On a 13 bonbons à partager entre 4 enfants. Chacun en reçoit…",
+   "choices": [
+    "4 et il en reste 1",
+    "2 et il en reste 5",
+    "3 et il en reste 1",
+    "3 et il en reste 0"
+   ],
+   "answer": 2,
+   "explanation": "4 × 3 = 12, 13 − 12 = 1.",
+   "id": "ce1-maths-partage-q4",
+   "chapter": "ce1-maths-tables",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-partage",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Des parts égales sont…",
+   "choices": [
+    "de 10 unités",
+    "toujours plus petites",
+    "toutes pareilles",
+    "de taille différente"
+   ],
+   "answer": 2,
+   "explanation": "On partage équitablement.",
+   "id": "ce1-maths-partage-q5",
+   "chapter": "ce1-maths-tables",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-partage",
+   "source": "Exercice original, niveau CE1"
+  }
+ ]
+}

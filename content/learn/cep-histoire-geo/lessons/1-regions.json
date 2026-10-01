@@ -1,0 +1,569 @@
+{
+ "chapter": "cep-histoire-geo-geo",
+ "lessons": [
+  {
+   "id": "cep-histoire-geo-regions",
+   "title": "Les dix régions du Cameroun et leurs chefs-lieux",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CM2 — Géographie : régions — reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; synthèse de révision orientée examen ; à faire relire par un enseignant",
+   "objectives": [
+    "Nommer les dix régions du Cameroun.",
+    "Associer chaque région à son chef-lieu.",
+    "Distinguer la capitale politique et la capitale économique."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cep-histoire-geo-regions-01",
+    "cep-histoire-geo-regions-02",
+    "cep-histoire-geo-regions-03",
+    "cep-histoire-geo-regions-04",
+    "cep-histoire-geo-regions-05",
+    "cep-histoire-geo-regions-06"
+   ],
+   "selfCheck": [
+    "cep-histoire-geo-regions-q1",
+    "cep-histoire-geo-regions-q2",
+    "cep-histoire-geo-regions-q3",
+    "cep-histoire-geo-regions-q4",
+    "cep-histoire-geo-regions-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier la liste des régions et chefs-lieux (Adamaoua Ngaoundéré, Centre Yaoundé, Est Bertoua, Extrême-Nord Maroua, Littoral Douala, Nord Garoua, Nord-Ouest Bamenda, Ouest Bafoussam, Sud Ebolowa, Sud-Ouest Buea).",
+    "Le tableau est un schéma, pas une carte : à compléter avec la carte du pays en classe."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Dix régions",
+     "md": "Le Cameroun est divisé en **dix régions**, chacune administrée depuis un **chef-lieu** (une ville principale).\n\nLa capitale politique est **Yaoundé** (région du Centre). La capitale économique est **Douala** (région du Littoral), avec le grand port du pays."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 205,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 230,
+        "h": 32,
+        "stroke": "ink",
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 32,
+        "text": "Adamaoua : Ngaoundéré",
+        "size": 14,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 250,
+        "y": 10,
+        "w": 230,
+        "h": 32,
+        "stroke": "ink",
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 365,
+        "y": 32,
+        "text": "Centre : Yaoundé",
+        "size": 14,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 48,
+        "w": 230,
+        "h": 32,
+        "stroke": "ink",
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 70,
+        "text": "Est : Bertoua",
+        "size": 14,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 250,
+        "y": 48,
+        "w": 230,
+        "h": 32,
+        "stroke": "ink",
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 365,
+        "y": 70,
+        "text": "Extrême-Nord : Maroua",
+        "size": 14,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 86,
+        "w": 230,
+        "h": 32,
+        "stroke": "ink",
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 108,
+        "text": "Littoral : Douala",
+        "size": 14,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 250,
+        "y": 86,
+        "w": 230,
+        "h": 32,
+        "stroke": "ink",
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 365,
+        "y": 108,
+        "text": "Nord : Garoua",
+        "size": 14,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 124,
+        "w": 230,
+        "h": 32,
+        "stroke": "ink",
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 146,
+        "text": "Nord-Ouest : Bamenda",
+        "size": 14,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 250,
+        "y": 124,
+        "w": 230,
+        "h": 32,
+        "stroke": "ink",
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 365,
+        "y": 146,
+        "text": "Ouest : Bafoussam",
+        "size": 14,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 162,
+        "w": 230,
+        "h": 32,
+        "stroke": "ink",
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 184,
+        "text": "Sud : Ebolowa",
+        "size": 14,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 250,
+        "y": 162,
+        "w": 230,
+        "h": 32,
+        "stroke": "ink",
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 365,
+        "y": 184,
+        "text": "Sud-Ouest : Buea",
+        "size": 14,
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Les dix régions et leurs chefs-lieux.",
+     "alt": "Un tableau de dix cases : Adamaoua Ngaoundéré, Centre Yaoundé, Est Bertoua, Extrême-Nord Maroua, Littoral Douala, Nord Garoua, Nord-Ouest Bamenda, Ouest Bafoussam, Sud Ebolowa, Sud-Ouest Buea."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Pour s'en souvenir",
+     "md": "- Au nord : Adamaoua, Nord, Extrême-Nord. À l'ouest : Ouest, Nord-Ouest, Sud-Ouest, Littoral.\n- Au sud et à l'est : Centre, Sud, Est."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : chef-lieu",
+     "statement": "Quel est le chef-lieu de la région du Nord ? et celui du Littoral ?",
+     "steps": [
+      {
+       "md": "Région du Nord : sa ville principale est **Garoua**."
+      },
+      {
+       "md": "Région du Littoral : sa ville principale est **Douala**."
+      }
+     ],
+     "answer": "Nord : **Garoua** ; Littoral : **Douala**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : situer une ville",
+     "statement": "Bamenda est le chef-lieu de quelle région ? Cette région est-elle au nord ou à l'ouest du pays ?",
+     "steps": [
+      {
+       "md": "Bamenda est le chef-lieu du **Nord-Ouest**."
+      },
+      {
+       "md": "Le Nord-Ouest se trouve à l'ouest du pays, près de la frontière avec le Nigeria."
+      }
+     ],
+     "answer": "**Région du Nord-Ouest**, à l'ouest du pays."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre capitale politique (Yaoundé) et capitale économique (Douala).\n- Confondre **Nord** et **Extrême-Nord** (Garoua et Maroua).\n- Écrire « Bafousam » : on écrit **Bafoussam**."
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-histoire-geo-regions-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-histoire-geo-regions-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-histoire-geo-regions-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-histoire-geo-regions-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-histoire-geo-regions-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-histoire-geo-regions-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Combien de régions compte le Cameroun ?",
+   "choices": [
+    "8",
+    "10",
+    "12",
+    "7"
+   ],
+   "answer": 1,
+   "explanation": "Le Cameroun compte dix régions.",
+   "id": "cep-histoire-geo-regions-01",
+   "chapter": "cep-histoire-geo-geo",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-histoire-geo-regions",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le chef-lieu de la région de l'Ouest ?",
+   "choices": [
+    "Bafoussam",
+    "Bamenda",
+    "Bertoua",
+    "Ebolowa"
+   ],
+   "answer": 0,
+   "explanation": "Bafoussam est le chef-lieu de l'Ouest.",
+   "id": "cep-histoire-geo-regions-02",
+   "chapter": "cep-histoire-geo-geo",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-histoire-geo-regions",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque région à son chef-lieu.",
+   "pairs": [
+    [
+     "Est",
+     "Bertoua"
+    ],
+    [
+     "Sud",
+     "Ebolowa"
+    ],
+    [
+     "Extrême-Nord",
+     "Maroua"
+    ],
+    [
+     "Adamaoua",
+     "Ngaoundéré"
+    ]
+   ],
+   "explanation": "Est : Bertoua ; Sud : Ebolowa ; Extrême-Nord : Maroua ; Adamaoua : Ngaoundéré.",
+   "points": 2,
+   "id": "cep-histoire-geo-regions-03",
+   "chapter": "cep-histoire-geo-geo",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-histoire-geo-regions",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la capitale économique du Cameroun ?",
+   "choices": [
+    "Yaoundé",
+    "Garoua",
+    "Kribi",
+    "Douala"
+   ],
+   "answer": 3,
+   "explanation": "Douala est la grande ville portuaire.",
+   "id": "cep-histoire-geo-regions-04",
+   "chapter": "cep-histoire-geo-geo",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cep-histoire-geo-regions",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "open",
+   "prompt": "Écris la liste des dix régions du Cameroun.",
+   "model": "Adamaoua, Centre, Est, Extrême-Nord, Littoral, Nord, Nord-Ouest, Ouest, Sud, Sud-Ouest.",
+   "rubric": [
+    "Dix régions.",
+    "Aucune région inventée."
+   ],
+   "explanation": "Dix régions.",
+   "points": 2,
+   "id": "cep-histoire-geo-regions-05",
+   "chapter": "cep-histoire-geo-geo",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cep-histoire-geo-regions",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Les régions et leurs villes.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quelle ville est la capitale politique ?",
+     "choices": [
+      "Douala",
+      "Bamenda",
+      "Yaoundé",
+      "Maroua"
+     ],
+     "answer": 2,
+     "explanation": "La capitale politique est Yaoundé.",
+     "id": "cep-histoire-geo-regions-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Buea est le chef-lieu de la région...",
+     "choices": [
+      "du Nord-Ouest",
+      "du Sud-Ouest",
+      "du Littoral",
+      "de l'Ouest"
+     ],
+     "answer": 1,
+     "explanation": "Buea : Sud-Ouest.",
+     "id": "cep-histoire-geo-regions-06-b",
+     "points": 1
+    },
+    {
+     "kind": "truefalse",
+     "prompt": "Garoua est le chef-lieu de la région du Nord.",
+     "answer": true,
+     "explanation": "Oui.",
+     "id": "cep-histoire-geo-regions-06-c",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quelle région a pour chef-lieu Ngaoundéré ?",
+     "choices": [
+      "l'Adamaoua",
+      "le Nord",
+      "l'Est",
+      "le Centre"
+     ],
+     "answer": 0,
+     "explanation": "Ngaoundéré : Adamaoua.",
+     "id": "cep-histoire-geo-regions-06-d",
+     "points": 1
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "method": "Apprends les couples région / chef-lieu.",
+   "id": "cep-histoire-geo-regions-06",
+   "chapter": "cep-histoire-geo-geo",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cep-histoire-geo-regions",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Yaoundé est dans la région du...",
+   "choices": [
+    "Littoral",
+    "Sud",
+    "Ouest",
+    "Centre"
+   ],
+   "answer": 3,
+   "explanation": "Yaoundé : Centre.",
+   "id": "cep-histoire-geo-regions-q1",
+   "chapter": "cep-histoire-geo-geo",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-histoire-geo-regions",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle région a pour chef-lieu Douala ?",
+   "choices": [
+    "le Sud-Ouest",
+    "le Centre",
+    "le Littoral",
+    "l'Ouest"
+   ],
+   "answer": 2,
+   "explanation": "Douala : Littoral.",
+   "id": "cep-histoire-geo-regions-q2",
+   "chapter": "cep-histoire-geo-geo",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-histoire-geo-regions",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le chef-lieu de la région de l'Est ?",
+   "choices": [
+    "Bamenda",
+    "Bertoua",
+    "Garoua",
+    "Buea"
+   ],
+   "answer": 1,
+   "explanation": "Bertoua : Est.",
+   "id": "cep-histoire-geo-regions-q3",
+   "chapter": "cep-histoire-geo-geo",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-histoire-geo-regions",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien de régions portent « Nord » dans leur nom ?",
+   "choices": [
+    "3",
+    "1",
+    "2",
+    "4"
+   ],
+   "answer": 0,
+   "explanation": "Nord, Extrême-Nord et Nord-Ouest.",
+   "id": "cep-histoire-geo-regions-q4",
+   "chapter": "cep-histoire-geo-geo",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-histoire-geo-regions",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Maroua est le chef-lieu de...",
+   "choices": [
+    "le Nord",
+    "l'Adamaoua",
+    "l'Ouest",
+    "l'Extrême-Nord"
+   ],
+   "answer": 3,
+   "explanation": "Maroua : Extrême-Nord.",
+   "id": "cep-histoire-geo-regions-q5",
+   "chapter": "cep-histoire-geo-geo",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-histoire-geo-regions",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  }
+ ]
+}

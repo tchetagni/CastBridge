@@ -1,0 +1,415 @@
+{
+ "chapter": "sil-maths-reperage-ch",
+ "lessons": [
+  {
+   "id": "sil-maths-reperage",
+   "title": "Se repérer : dessus, dessous, devant, derrière",
+   "minutes": 10,
+   "readAloud": true,
+   "programRef": "SIL — Espace : se repérer, vocabulaire de position (reconstitué)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Utiliser les mots dessus, dessous, devant, derrière.",
+    "Distinguer la gauche et la droite sur soi.",
+    "Décrire où est un objet."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "sil-maths-reperage-01",
+    "sil-maths-reperage-02",
+    "sil-maths-reperage-03",
+    "sil-maths-reperage-04",
+    "sil-maths-reperage-05",
+    "sil-maths-reperage-06"
+   ],
+   "selfCheck": [
+    "sil-maths-reperage-q1",
+    "sil-maths-reperage-q2",
+    "sil-maths-reperage-q3",
+    "sil-maths-reperage-q4",
+    "sil-maths-reperage-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier la question gauche/droite pour les gauchers : l'exercice ne doit pas laisser croire qu'une main est « la bonne ».",
+    "Figure table/ballons : vérifier la lisibilité des textes sur la TV."
+   ],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "Où est le ballon ? Il est sous la table. Il est devant moi. Il est à droite.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les mots de la place",
+     "md": "- **Dessus** : sur quelque chose.\n- **Dessous** : sous quelque chose.\n- **Devant** : face à moi.\n- **Derrière** : dans mon dos."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 100,
+        "w": 180,
+        "h": 14,
+        "fill": "brown",
+        "stroke": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 114,
+        "w": 12,
+        "h": 60,
+        "fill": "brown",
+        "stroke": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 278,
+        "y": 114,
+        "w": 12,
+        "h": 60,
+        "fill": "brown",
+        "stroke": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 210,
+        "cy": 75,
+        "r": 22,
+        "fill": "orange",
+        "stroke": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 210,
+        "cy": 152,
+        "r": 18,
+        "fill": "lightgreen",
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 30,
+        "text": "dessus : orange",
+        "size": 16
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 192,
+        "text": "dessous : vert",
+        "size": 16
+       }
+      ]
+     },
+     "caption": "Une table, un ballon dessus, un ballon dessous.",
+     "alt": "Une table. Un ballon orange est posé dessus, un ballon vert est sous la table."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : le sac",
+     "statement": "Le sac de Paul est posé sur la table. Où est le sac ?",
+     "steps": [
+      {
+       "md": "« Sur » veut dire dessus."
+      },
+      {
+       "md": "Le sac est du côté haut de la table."
+      }
+     ],
+     "answer": "Le sac est **dessus**."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Gauche et droite",
+     "md": "Lève ta main qui écrit : c'est souvent la **droite**. L'autre main est la **gauche**.\n\nAttention : si je te regarde en face, ma droite est de l'autre côté."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : la file",
+     "statement": "Dans la file, Amina est devant Nkeng. Qui est derrière ?",
+     "steps": [
+      {
+       "md": "Amina est devant."
+      },
+      {
+       "md": "Celui qui est dans son dos est derrière."
+      }
+     ],
+     "answer": "**Nkeng** est derrière Amina."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer !"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-maths-reperage-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-maths-reperage-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-maths-reperage-03"
+    },
+    {
+     "type": "heading",
+     "text": "Pour aller plus loin"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-maths-reperage-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-maths-reperage-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-maths-reperage-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sil-maths-reperage-01",
+   "chapter": "sil-maths-reperage-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-reperage",
+   "prompt": "Le chat dort sous la table. Où est le chat ?",
+   "choices": [
+    "dessus",
+    "dessous",
+    "devant",
+    "derrière"
+   ],
+   "answer": 1,
+   "explanation": "« Sous » veut dire dessous."
+  },
+  {
+   "id": "sil-maths-reperage-02",
+   "chapter": "sil-maths-reperage-ch",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-reperage",
+   "prompt": "Vrai ou faux : le toit est dessus la maison.",
+   "answer": true,
+   "explanation": "Le toit est en haut de la maison : dessus."
+  },
+  {
+   "id": "sil-maths-reperage-03",
+   "chapter": "sil-maths-reperage-ch",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sil-maths-reperage",
+   "prompt": "Associe chaque mot à sa place.",
+   "pairs": [
+    [
+     "sur la table",
+     "dessus"
+    ],
+    [
+     "sous la table",
+     "dessous"
+    ],
+    [
+     "dans mon dos",
+     "derrière"
+    ],
+    [
+     "face à moi",
+     "devant"
+    ]
+   ],
+   "explanation": "Sur = dessus, sous = dessous, dans le dos = derrière, face à moi = devant."
+  },
+  {
+   "id": "sil-maths-reperage-04",
+   "chapter": "sil-maths-reperage-ch",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sil-maths-reperage",
+   "prompt": "Tchoua est le premier de la file. Il est…",
+   "choices": [
+    "derrière",
+    "devant",
+    "dessous",
+    "dessus"
+   ],
+   "answer": 1,
+   "explanation": "Le premier est devant les autres."
+  },
+  {
+   "id": "sil-maths-reperage-05",
+   "chapter": "sil-maths-reperage-ch",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sil-maths-reperage",
+   "prompt": "Je lève la main qui écrit. En général, c'est la main…",
+   "choices": [
+    "gauche",
+    "dessus",
+    "derrière",
+    "droite"
+   ],
+   "answer": 3,
+   "explanation": "Pour la plupart des enfants, c'est la droite. Pour un gaucher, c'est la gauche : on vérifie avec l'enseignant."
+  },
+  {
+   "id": "sil-maths-reperage-06",
+   "chapter": "sil-maths-reperage-ch",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sil-maths-reperage",
+   "prompt": "Dans la classe.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Le cahier est sur le banc. Où est le cahier ?",
+     "choices": [
+      "dessus",
+      "dessous",
+      "derrière",
+      "à gauche"
+     ],
+     "answer": 0,
+     "explanation": "Sur le banc : dessus.",
+     "id": "sil-maths-reperage-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Le sac est par terre, sous le banc. Où est le sac ?",
+     "choices": [
+      "dessus",
+      "devant",
+      "dessous",
+      "à droite"
+     ],
+     "answer": 2,
+     "explanation": "Sous le banc : dessous.",
+     "id": "sil-maths-reperage-06-b",
+     "points": 1
+    }
+   ],
+   "explanation": "Relis chaque question avec calme."
+  },
+  {
+   "id": "sil-maths-reperage-q1",
+   "chapter": "sil-maths-reperage-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-reperage",
+   "prompt": "Le ballon est sous le lit. Il est…",
+   "choices": [
+    "dessus",
+    "devant",
+    "dessous",
+    "derrière"
+   ],
+   "answer": 2,
+   "explanation": "Sous : dessous."
+  },
+  {
+   "id": "sil-maths-reperage-q2",
+   "chapter": "sil-maths-reperage-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-reperage",
+   "prompt": "Je suis devant la porte. La porte est…",
+   "choices": [
+    "face à moi",
+    "dans mon dos",
+    "sous moi",
+    "sur moi"
+   ],
+   "answer": 0,
+   "explanation": "Devant = face à moi."
+  },
+  {
+   "id": "sil-maths-reperage-q3",
+   "chapter": "sil-maths-reperage-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-reperage",
+   "prompt": "Quel mot veut dire « en haut de » ?",
+   "choices": [
+    "dessous",
+    "derrière",
+    "près",
+    "dessus"
+   ],
+   "answer": 3,
+   "explanation": "Dessus : sur le haut."
+  },
+  {
+   "id": "sil-maths-reperage-q4",
+   "chapter": "sil-maths-reperage-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-reperage",
+   "prompt": "Dans la file, celui qui est dans mon dos est…",
+   "choices": [
+    "devant",
+    "derrière",
+    "dessus",
+    "dessous"
+   ],
+   "answer": 1,
+   "explanation": "Derrière : dans mon dos."
+  },
+  {
+   "id": "sil-maths-reperage-q5",
+   "chapter": "sil-maths-reperage-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-reperage",
+   "prompt": "La main qui écrit est souvent la…",
+   "choices": [
+    "gauche",
+    "droite",
+    "devant",
+    "derrière"
+   ],
+   "answer": 1,
+   "explanation": "Pour beaucoup d'enfants, c'est la droite."
+  }
+ ]
+}

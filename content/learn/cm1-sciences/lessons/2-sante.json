@@ -1,0 +1,570 @@
+{
+ "chapter": "cm1-sciences-sante",
+ "lessons": [
+  {
+   "id": "cm1-sciences-sante-fiche",
+   "title": "Rester en bonne santé : l'hygiène",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CM1 — Sciences et technologie (MINEDUB), reconstitué — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Citer des gestes d'hygiène qui protègent des maladies.",
+    "Expliquer comment on évite le paludisme et les maladies liées à l'eau sale.",
+    "Dire pourquoi les vaccins et les visites au centre de santé sont utiles."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cm1-sciences-sante-01",
+    "cm1-sciences-sante-02",
+    "cm1-sciences-sante-03",
+    "cm1-sciences-sante-04",
+    "cm1-sciences-sante-05",
+    "cm1-sciences-sante-06"
+   ],
+   "selfCheck": [
+    "cm1-sciences-sante-q1",
+    "cm1-sciences-sante-q2",
+    "cm1-sciences-sante-q3",
+    "cm1-sciences-sante-q4",
+    "cm1-sciences-sante-q5"
+   ],
+   "reviewNotes": [
+    "Le conseil sur le traitement de l'eau (ébullition, désinfectant) doit être validé par un agent de santé.",
+    "Vérifier la liste des vaccins du programme national si elle est ajoutée.",
+    "Vérifier que le paludisme est bien au programme de CM1."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "L'hygiène",
+     "md": "L'**hygiène** regroupe les gestes que l'on fait pour garder son corps et son environnement propres, et pour éviter les maladies.\n\nÊtre en bonne **santé**, c'est se sentir bien dans son corps et dans sa tête."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les gestes qui protègent",
+     "md": "- Se laver les mains avec du savon avant de manger et après les toilettes.\n- Se laver tous les jours, garder des vêtements propres.\n- Se brosser les dents matin et soir.\n- Couvrir les aliments, laver les fruits et légumes.\n- Utiliser des latrines propres."
+    },
+    {
+     "type": "illustration",
+     "caption": "Quelques gestes pour rester en bonne santé.",
+     "alt": "Six cases : se laver les mains avant de manger, eau propre ou traitée, moustiquaire pour dormir, dents brossées matin et soir, vaccins à jour, latrines propres et poubelles.",
+     "figure": {
+      "kind": "shapes",
+      "w": 520,
+      "h": 170,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 150,
+        "h": 60,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 35,
+        "text": "Avant de manger",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 56,
+        "text": "je me lave les mains",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 185,
+        "y": 10,
+        "w": 150,
+        "h": 60,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 35,
+        "text": "Eau propre",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 56,
+        "text": "ou eau traitée",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 360,
+        "y": 10,
+        "w": 150,
+        "h": 60,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 435,
+        "y": 35,
+        "text": "Moustiquaire",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 435,
+        "y": 56,
+        "text": "pour dormir",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 95,
+        "w": 150,
+        "h": 60,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 120,
+        "text": "Dents brossées",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 141,
+        "text": "matin et soir",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 185,
+        "y": 95,
+        "w": 150,
+        "h": 60,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 120,
+        "text": "Vaccins",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 141,
+        "text": "à jour",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 360,
+        "y": 95,
+        "w": 150,
+        "h": 60,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 435,
+        "y": 120,
+        "text": "Latrines propres",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 435,
+        "y": 141,
+        "text": "et poubelles",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Le paludisme",
+     "md": "Le paludisme est transmis par la **piqûre de certains moustiques**. Pour s'en protéger :\n\n- dormir sous une **moustiquaire**,\n- vider les eaux stagnantes (seaux, pneus, boîtes) où les moustiques pondent,\n- aller vite au **centre de santé** en cas de fièvre."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "L'eau et les vaccins",
+     "md": "L'eau sale peut donner des maladies (diarrhées, par exemple). On boit de l'eau **propre** : filtrée ou traitée, bouillie si on n'est pas sûr.\n\nLes **vaccins** préparent le corps à se défendre contre certaines maladies. On suit le **carnet de santé** et les conseils du personnel de santé."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : choisir le bon geste",
+     "statement": "Fotso a joué au football. Il va manger des beignets. Que doit-il faire d'abord ?",
+     "steps": [
+      {
+       "md": "Ses mains sont sales : elles peuvent avoir des microbes."
+      },
+      {
+       "md": "Il se lave les mains avec de l'eau propre et du **savon**."
+      },
+      {
+       "md": "Ensuite seulement, il mange."
+      }
+     ],
+     "answer": "**Se laver les mains avec du savon avant de manger.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : éviter le paludisme",
+     "statement": "Autour de la maison de Marie, il y a un vieux seau plein d'eau de pluie. Que faire ?",
+     "steps": [
+      {
+       "md": "Les moustiques pondent dans l'eau qui ne bouge pas."
+      },
+      {
+       "md": "On **vide** le seau et on le retourne, ou on le couvre."
+      },
+      {
+       "md": "La nuit, toute la famille dort sous une **moustiquaire**."
+      }
+     ],
+     "answer": "**Supprimer les eaux stagnantes et dormir sous moustiquaire.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que le paludisme vient de l'eau de pluie ou du soleil : il vient de la piqûre d'un moustique.\n- Croire qu'un médicament se prend sans conseil : c'est le personnel de santé qui conseille.\n- Penser qu'une eau claire est toujours propre : elle peut contenir des microbes."
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-sante-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-sante-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-sante-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-sante-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-sante-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-sante-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "cm1-sciences-sante-01",
+   "chapter": "cm1-sciences-sante",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cm1-sciences-sante-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quand se lave-t-on les mains avec du savon ?",
+   "choices": [
+    "avant de manger et après les toilettes",
+    "seulement le dimanche",
+    "seulement quand elles sont noires",
+    "jamais si l'eau est froide"
+   ],
+   "answer": 0,
+   "explanation": "Les mains portent des microbes : on les lave avant les repas et après les toilettes.",
+   "method": "Penser aux moments où on touche des aliments ou des saletés.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-sante-02",
+   "chapter": "cm1-sciences-sante",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cm1-sciences-sante-fiche",
+   "points": 1,
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : on peut attraper le paludisme à cause d'une piqûre de moustique.",
+   "answer": true,
+   "explanation": "Certains moustiques transmettent le paludisme en piquant.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-sante-03",
+   "chapter": "cm1-sciences-sante",
+   "tier": "application",
+   "difficulty": 2,
+   "lesson": "cm1-sciences-sante-fiche",
+   "points": 2,
+   "kind": "matching",
+   "prompt": "Associe chaque danger à une bonne protection.",
+   "pairs": [
+    [
+     "Piqûres de moustiques",
+     "moustiquaire"
+    ],
+    [
+     "Eau douteuse",
+     "la faire bouillir ou la traiter"
+    ],
+    [
+     "Mains sales",
+     "laver au savon"
+    ],
+    [
+     "Caries",
+     "brosser les dents"
+    ]
+   ],
+   "explanation": "Chaque danger a sa protection : moustiquaire, eau traitée, savon, brosse à dents.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-sante-04",
+   "chapter": "cm1-sciences-sante",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cm1-sciences-sante-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Pourquoi vide-t-on les seaux d'eau qui traînent ?",
+   "choices": [
+    "L'eau de pluie est dangereuse à boire dans tous les cas.",
+    "Les seaux se cassent au soleil.",
+    "Le vent apporte des microbes dans les seaux.",
+    "Les moustiques pondent dans l'eau qui ne bouge pas."
+   ],
+   "answer": 3,
+   "explanation": "Sans eau stagnante, les moustiques ne peuvent pas se multiplier près de la maison.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-sante-05",
+   "chapter": "cm1-sciences-sante",
+   "tier": "approfondissement",
+   "difficulty": 3,
+   "lesson": "cm1-sciences-sante-fiche",
+   "points": 3,
+   "kind": "open",
+   "prompt": "Écris trois conseils d'hygiène pour un camarade qui a souvent mal au ventre.",
+   "model": "Se laver les mains avec du savon avant de manger. Boire de l'eau propre ou traitée. Laver les fruits et couvrir les aliments.",
+   "rubric": [
+    "Au moins trois conseils différents.",
+    "Les conseils sont liés à l'hygiène des mains, de l'eau ou des aliments.",
+    "Phrases claires."
+   ],
+   "explanation": "Mains propres, eau propre et aliments protégés limitent les maladies du ventre.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-sante-06",
+   "chapter": "cm1-sciences-sante",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "cm1-sciences-sante-fiche",
+   "kind": "problem",
+   "prompt": "Au village, on parle de santé.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quel geste protège le mieux du paludisme la nuit ?",
+     "choices": [
+      "manger du sucre",
+      "boire beaucoup de jus",
+      "se coucher tard",
+      "dormir sous une moustiquaire"
+     ],
+     "answer": 3,
+     "explanation": "La moustiquaire empêche les moustiques de piquer.",
+     "id": "cm1-sciences-sante-06-a",
+     "points": 1
+    },
+    {
+     "kind": "truefalse",
+     "prompt": "Un vaccin aide le corps à se défendre contre une maladie.",
+     "answer": true,
+     "explanation": "C'est le rôle des vaccins.",
+     "id": "cm1-sciences-sante-06-b",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "En cas de fièvre, que faut-il faire ?",
+     "choices": [
+      "attendre un mois",
+      "ne rien dire à personne",
+      "aller au centre de santé",
+      "boire de l'eau sale"
+     ],
+     "answer": 2,
+     "explanation": "On consulte vite le personnel de santé.",
+     "review": true,
+     "reviewNote": "Le conseil exact (délais, traitements) est à faire relire par un agent de santé.",
+     "id": "cm1-sciences-sante-06-c",
+     "points": 1
+    }
+   ],
+   "explanation": "Voir la correction de chaque question.",
+   "method": "Choisir le geste le plus sûr.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-sante-q1",
+   "chapter": "cm1-sciences-sante",
+   "tier": "autoeval",
+   "lesson": "cm1-sciences-sante-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Qui transmet le paludisme ?",
+   "choices": [
+    "les mouches du marché seulement",
+    "certains moustiques",
+    "le soleil",
+    "le vent"
+   ],
+   "answer": 1,
+   "explanation": "Le paludisme est transmis par la piqûre de certains moustiques."
+  },
+  {
+   "id": "cm1-sciences-sante-q2",
+   "chapter": "cm1-sciences-sante",
+   "tier": "autoeval",
+   "lesson": "cm1-sciences-sante-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Que fait-on avec le carnet de santé ?",
+   "choices": [
+    "on suit les vaccins et les consultations",
+    "on y écrit des histoires",
+    "on le jette après le CP",
+    "on le prête au voisin"
+   ],
+   "answer": 0,
+   "explanation": "Il garde la trace des vaccins et des soins."
+  },
+  {
+   "id": "cm1-sciences-sante-q3",
+   "chapter": "cm1-sciences-sante",
+   "tier": "autoeval",
+   "lesson": "cm1-sciences-sante-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quel geste est bon pour les dents ?",
+   "choices": [
+    "les brosser matin et soir",
+    "manger du sucre avant de dormir",
+    "ne jamais les brosser",
+    "les nettoyer avec du sable"
+   ],
+   "answer": 0,
+   "explanation": "Le brossage enlève les restes d'aliments et protège des caries."
+  },
+  {
+   "id": "cm1-sciences-sante-q4",
+   "chapter": "cm1-sciences-sante",
+   "tier": "autoeval",
+   "lesson": "cm1-sciences-sante-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Comment rendre une eau douteuse plus sûre ?",
+   "choices": [
+    "la laisser au soleil sans la couvrir",
+    "y ajouter du sable",
+    "la verser dans un seau sale",
+    "la faire bouillir ou la traiter"
+   ],
+   "answer": 3,
+   "explanation": "L'ébullition ou le traitement détruit beaucoup de microbes.",
+   "review": true,
+   "reviewNote": "Traitement de l'eau : faire valider les méthodes par un agent de santé."
+  },
+  {
+   "id": "cm1-sciences-sante-q5",
+   "chapter": "cm1-sciences-sante",
+   "tier": "autoeval",
+   "lesson": "cm1-sciences-sante-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Pourquoi couvre-t-on les aliments ?",
+   "choices": [
+    "pour les cuire plus vite",
+    "pour leur donner du goût",
+    "pour les protéger des mouches et de la poussière",
+    "pour les rendre plus lourds"
+   ],
+   "answer": 2,
+   "explanation": "Les mouches et la poussière apportent des microbes."
+  }
+ ]
+}

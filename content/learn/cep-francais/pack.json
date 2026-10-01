@@ -1,7 +1,7 @@
 {
   "format": 1,
   "id": "cep-francais",
-  "version": 1,
+  "version": 2,
   "title": "Français — CEP",
   "description": "Accords, homophones, conjugaison, grammaire de la phrase et rédaction : fiches « l'essentiel », exemples résolus, exercices type CEP corrigés et épreuve blanche.",
   "lang": "fr",
@@ -10,24 +10,190 @@
   "subject": "francais",
   "exam": "CEP",
   "programRef": "Programme officiel de français du niveau III (CM1-CM2) de l'enseignement primaire (MINEDUB) — à vérifier sur le texte officiel",
-  "authors": ["CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"],
+  "authors": [
+    "CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"
+  ],
   "status": "draft",
-  "updatedAt": "2026-09-30",
+  "updatedAt": "2026-10-01",
   "chapters": [
-    {"id": "cep-francais-accords", "title": "Les accords", "order": 1, "programRef": "CM2 — Orthographe grammaticale : accords dans le groupe nominal, sujet-verbe, participe passé (à vérifier sur le texte officiel)"},
-    {"id": "cep-francais-homophones", "title": "Les homophones grammaticaux", "order": 2, "programRef": "CM2 — Orthographe grammaticale : homophones (à vérifier sur le texte officiel)"},
-    {"id": "cep-francais-conjugaison", "title": "La conjugaison", "order": 3, "programRef": "CM2 — Conjugaison : présent, imparfait, futur simple, passé composé (à vérifier sur le texte officiel)"},
-    {"id": "cep-francais-phrase", "title": "La grammaire de la phrase", "order": 4, "programRef": "CM2 — Grammaire : types et formes de phrases, nature et fonction (à vérifier sur le texte officiel)"},
-    {"id": "cep-francais-redaction", "title": "La rédaction", "order": 5, "programRef": "CM2 — Expression écrite : récit, description, lettre (à vérifier sur le texte officiel)"}
+    {
+      "id": "cep-francais-accords",
+      "title": "Les accords",
+      "order": 1,
+      "programRef": "CM2 — Orthographe grammaticale : accords dans le groupe nominal, sujet-verbe, participe passé (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "cep-francais-homophones",
+      "title": "Les homophones grammaticaux",
+      "order": 2,
+      "programRef": "CM2 — Orthographe grammaticale : homophones (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "cep-francais-conjugaison",
+      "title": "La conjugaison",
+      "order": 3,
+      "programRef": "CM2 — Conjugaison : présent, imparfait, futur simple, passé composé (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "cep-francais-phrase",
+      "title": "La grammaire de la phrase",
+      "order": 4,
+      "programRef": "CM2 — Grammaire : types et formes de phrases, nature et fonction (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "cep-francais-redaction",
+      "title": "La rédaction",
+      "order": 5,
+      "programRef": "CM2 — Expression écrite : récit, description, lettre (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "cep-francais-vocabulaire",
+      "title": "Le vocabulaire",
+      "programRef": "CM2 — Vocabulaire : synonymes, contraires, familles de mots, préfixes et suffixes — reconstitué, à vérifier sur le texte officiel",
+      "order": 6
+    },
+    {
+      "id": "cep-francais-usage",
+      "title": "L'orthographe d'usage",
+      "programRef": "CM2 — Orthographe lexicale : accents, m devant b, m, p, c/ç, g/ge, consonnes doubles — reconstitué, à vérifier sur le texte officiel",
+      "order": 7
+    },
+    {
+      "id": "cep-francais-dictee",
+      "title": "La préparation à la dictée",
+      "programRef": "CM2 — Dictée préparée et dictée : méthode de relecture — reconstitué, à vérifier sur le texte officiel",
+      "order": 8
+    },
+    {
+      "id": "cep-francais-comprehension",
+      "title": "La compréhension de texte",
+      "programRef": "CM2 — Lecture : comprendre un texte court, répondre par des phrases complètes — reconstitué, à vérifier sur le texte officiel",
+      "order": 9
+    },
+    {
+      "id": "cep-francais-organiser",
+      "title": "Organiser un texte",
+      "programRef": "CM2 — Expression écrite : connecteurs, dialogue — reconstitué, à vérifier sur le texte officiel",
+      "order": 10
+    },
+    {
+      "id": "cep-francais-modes",
+      "title": "Impératif et passé simple",
+      "programRef": "CM2 — Conjugaison : impératif présent, passé simple (3e personne) — reconstitué, à vérifier sur le texte officiel",
+      "order": 11
+    }
   ],
   "mockExams": [
-    {"id": "cep-francais-blanc-1", "title": "Épreuve blanche de français — CEP", "minutes": 90, "outOf": 20,
-     "instructions": "Épreuve d'entraînement originale, notée sur 20. Le format réel de l'épreuve de français du CEP (parties, durée, barème) est à vérifier sur les textes officiels. Lis bien chaque consigne, réponds au brouillon puis relis-toi : accords, homophones et ponctuation.",
-     "sections": [
-       {"title": "Grammaire (5 points)", "exercises": ["cep-francais-be-grammaire"]},
-       {"title": "Conjugaison (5 points)", "exercises": ["cep-francais-be-conjugaison"]},
-       {"title": "Orthographe (5 points)", "exercises": ["cep-francais-be-orthographe"]},
-       {"title": "Rédaction (5 points)", "exercises": ["cep-francais-be-redaction"]}
-     ]}
+    {
+      "id": "cep-francais-blanc-1",
+      "title": "Épreuve blanche de français — CEP",
+      "minutes": 90,
+      "outOf": 20,
+      "instructions": "Épreuve d'entraînement originale, notée sur 20. Le format réel de l'épreuve de français du CEP (parties, durée, barème) est à vérifier sur les textes officiels. Lis bien chaque consigne, réponds au brouillon puis relis-toi : accords, homophones et ponctuation.",
+      "sections": [
+        {
+          "title": "Grammaire (5 points)",
+          "exercises": [
+            "cep-francais-be-grammaire"
+          ]
+        },
+        {
+          "title": "Conjugaison (5 points)",
+          "exercises": [
+            "cep-francais-be-conjugaison"
+          ]
+        },
+        {
+          "title": "Orthographe (5 points)",
+          "exercises": [
+            "cep-francais-be-orthographe"
+          ]
+        },
+        {
+          "title": "Rédaction (5 points)",
+          "exercises": [
+            "cep-francais-be-redaction"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cep-francais-blanc-2",
+      "title": "Épreuve blanche de français n° 2 — CEP",
+      "minutes": 90,
+      "outOf": 20,
+      "instructions": "Épreuve d'entraînement originale (ce n'est pas un sujet officiel). Notée sur 20. Le format réel de l'épreuve de français du CEP (parties, durée, barème) est à vérifier sur les textes officiels. Lis bien chaque consigne, réponds au brouillon, puis relis-toi : accords, homophones et ponctuation.",
+      "sections": [
+        {
+          "title": "Partie 1 — Compréhension de texte (5 points)",
+          "exercises": [
+            "cep-francais-blanc-2-01"
+          ]
+        },
+        {
+          "title": "Partie 2 — Grammaire et vocabulaire (4 points)",
+          "exercises": [
+            "cep-francais-blanc-2-02"
+          ]
+        },
+        {
+          "title": "Partie 3 — Conjugaison (3 points)",
+          "exercises": [
+            "cep-francais-blanc-2-03"
+          ]
+        },
+        {
+          "title": "Partie 4 — Orthographe (3 points)",
+          "exercises": [
+            "cep-francais-blanc-2-04"
+          ]
+        },
+        {
+          "title": "Partie 5 — Rédaction (5 points)",
+          "exercises": [
+            "cep-francais-blanc-2-05"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cep-francais-blanc-3",
+      "title": "Épreuve blanche de français n° 3 — CEP",
+      "minutes": 90,
+      "outOf": 20,
+      "instructions": "Épreuve d'entraînement originale (ce n'est pas un sujet officiel). Notée sur 20. Le format réel de l'épreuve de français du CEP (parties, durée, barème) est à vérifier sur les textes officiels. Lis bien chaque consigne, réponds au brouillon, puis relis-toi : accords, homophones et ponctuation.",
+      "sections": [
+        {
+          "title": "Partie 1 — Compréhension de texte (5 points)",
+          "exercises": [
+            "cep-francais-blanc-3-01"
+          ]
+        },
+        {
+          "title": "Partie 2 — Grammaire et vocabulaire (4 points)",
+          "exercises": [
+            "cep-francais-blanc-3-02"
+          ]
+        },
+        {
+          "title": "Partie 3 — Conjugaison (3 points)",
+          "exercises": [
+            "cep-francais-blanc-3-03"
+          ]
+        },
+        {
+          "title": "Partie 4 — Orthographe (3 points)",
+          "exercises": [
+            "cep-francais-blanc-3-04"
+          ]
+        },
+        {
+          "title": "Partie 5 — Rédaction (5 points)",
+          "exercises": [
+            "cep-francais-blanc-3-05"
+          ]
+        }
+      ]
+    }
   ]
 }

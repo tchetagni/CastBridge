@@ -1,0 +1,540 @@
+{
+ "chapter": "cm1-francais-grammaire",
+ "lessons": [
+  {
+   "id": "cm1-francais-nature",
+   "title": "La nature des mots",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CM1 — Grammaire : nature des mots (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Reconnaître le nom, le déterminant, l'adjectif, le verbe et le pronom personnel.",
+    "Reconnaître l'adverbe, la préposition et la conjonction de coordination.",
+    "Donner la nature d'un mot dans une phrase."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cm1-francais-nature-01",
+    "cm1-francais-nature-02",
+    "cm1-francais-nature-03",
+    "cm1-francais-nature-04",
+    "cm1-francais-nature-05",
+    "cm1-francais-nature-06"
+   ],
+   "selfCheck": [
+    "cm1-francais-nature-q1",
+    "cm1-francais-nature-q2",
+    "cm1-francais-nature-q3",
+    "cm1-francais-nature-q4",
+    "cm1-francais-nature-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier la liste des natures au programme de CM1 (pronoms, adverbes, prépositions, conjonctions de coordination).",
+    "Le mot « au » est présenté comme « à + le » : vérifier la convention de l'enseignant."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Nature d'un mot",
+     "md": "La **nature** d'un mot dit **ce qu'il est** : un nom, un verbe, un adjectif… Elle ne change pas avec la place du mot dans la phrase. On la trouve dans le dictionnaire."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les mots qui changent (variables)",
+     "md": "- Le **nom** désigne une personne, un animal, une chose : *un marché, Ngono, la joie*.\n- Le **déterminant** accompagne le nom : *le, une, mes, ce, trois*.\n- L'**adjectif** précise le nom : *une mangue **mûre***.\n- Le **verbe** dit l'action ou l'état : *Fotso **mange**, il **est** content*.\n- Le **pronom** remplace un nom : *il, elle, nous, ils*."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les mots qui ne changent pas (invariables)",
+     "md": "- L'**adverbe** précise le verbe : *Elle marche **vite**. Il parle **doucement**.*\n- La **préposition** introduit un complément : *à, de, dans, sur, avec, pour, par, chez*.\n- La **conjonction de coordination** relie des mots ou des phrases : *mais, ou, et, donc, or, ni, car*."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode",
+     "md": "1. Je cherche le **verbe** (je mets la phrase à un autre temps : il change).\n2. Je repère les **noms** : on peut mettre un déterminant devant.\n3. Je regarde les mots qui accompagnent le nom : déterminant, adjectif.\n4. Les mots qui ne changent jamais : adverbe, préposition, conjonction."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 61.0,
+        "y": 50,
+        "w": 102,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 112.0,
+        "y": 75,
+        "text": "Les",
+        "size": 17,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 112.0,
+        "y": 112,
+        "text": "déterminant",
+        "size": 14,
+        "color": "blue",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 171.0,
+        "y": 50,
+        "w": 78,
+        "h": 38,
+        "fill": "lightgreen",
+        "stroke": "green",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 75,
+        "text": "petits",
+        "size": 17,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 112,
+        "text": "adjectif",
+        "size": 14,
+        "color": "green",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 257.0,
+        "y": 50,
+        "w": 78,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "orange",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 296.0,
+        "y": 75,
+        "text": "élèves",
+        "size": 17,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 296.0,
+        "y": 112,
+        "text": "nom",
+        "size": 14,
+        "color": "orange",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 343.0,
+        "y": 50,
+        "w": 78,
+        "h": 38,
+        "fill": "lightorange",
+        "stroke": "red",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 382.0,
+        "y": 75,
+        "text": "lisent",
+        "size": 17,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 382.0,
+        "y": 112,
+        "text": "verbe",
+        "size": 14,
+        "color": "red",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 429.0,
+        "y": 50,
+        "w": 70,
+        "h": 38,
+        "fill": "white",
+        "stroke": "grey",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 464.0,
+        "y": 75,
+        "text": "vite",
+        "size": 17,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 464.0,
+        "y": 112,
+        "text": "adverbe",
+        "size": 14,
+        "color": "grey",
+        "bold": true,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "La nature de chaque mot de la phrase.",
+     "alt": "La phrase « Les petits élèves lisent vite » découpée en cinq cases : Les (déterminant), petits (adjectif), élèves (nom), lisent (verbe), vite (adverbe)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : donner la nature des mots",
+     "statement": "Donne la nature de chaque mot : « Ma tante vend des ananas au marché. »",
+     "steps": [
+      {
+       "md": "« Ma » accompagne « tante » : c'est un déterminant (possessif). « tante » est un nom."
+      },
+      {
+       "md": "« vend » change avec le temps (vendait) : c'est un verbe. « des » est un déterminant ; « ananas » est un nom."
+      },
+      {
+       "md": "« au » (à + le) introduit un complément : c'est une préposition (contractée) avec un déterminant. « marché » est un nom."
+      }
+     ],
+     "answer": "**Ma** (dét.) **tante** (nom) **vend** (verbe) **des** (dét.) **ananas** (nom) **au** (prép. + dét.) **marché** (nom)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : un mot, deux natures",
+     "statement": "Quelle est la nature de « chante » dans : « Il chante » ? Et dans : « Le chant du coq » ?",
+     "steps": [
+      {
+       "md": "Dans « Il chante », « chante » est conjugué avec « il » : c'est un verbe."
+      },
+      {
+       "md": "Dans « Le chant du coq », « chant » est précédé de « le » : c'est un nom."
+      }
+     ],
+     "answer": "**Chante** est un verbe ; **chant** est un nom. Le sens et le contexte décident de la nature."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre l'adjectif et le nom : *un grand arbre* (grand = adjectif).\n- Croire que « au » est un seul mot : c'est « à + le ».\n- Oublier que « et, mais, ou » sont des conjonctions, pas des prépositions."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-nature-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-nature-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-nature-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-nature-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-nature-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-nature-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "cm1-francais-nature-01",
+   "chapter": "cm1-francais-grammaire",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "mcq",
+   "prompt": "Quelle est la nature du mot « mangues » dans « Nkeng vend des mangues » ?",
+   "choices": [
+    "verbe",
+    "adjectif",
+    "préposition",
+    "nom"
+   ],
+   "answer": 3,
+   "explanation": "« des mangues » : on peut mettre un déterminant devant, c'est un nom commun.",
+   "points": 1,
+   "lesson": "cm1-francais-nature",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-nature-02",
+   "chapter": "cm1-francais-grammaire",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : « rapidement » est un adverbe.",
+   "answer": true,
+   "explanation": "Vrai. « rapidement » précise le verbe (il court rapidement) et ne change jamais.",
+   "points": 1,
+   "lesson": "cm1-francais-nature",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-nature-03",
+   "chapter": "cm1-francais-grammaire",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "matching",
+   "prompt": "Associe chaque mot à sa nature.",
+   "pairs": [
+    [
+     "le",
+     "déterminant"
+    ],
+    [
+     "joli",
+     "adjectif"
+    ],
+    [
+     "chez",
+     "préposition"
+    ],
+    [
+     "mais",
+     "conjonction de coordination"
+    ]
+   ],
+   "explanation": "le → déterminant ; joli → adjectif ; chez → préposition ; mais → conjonction de coordination.",
+   "points": 2,
+   "lesson": "cm1-francais-nature",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-nature-04",
+   "chapter": "cm1-francais-grammaire",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "mcq",
+   "prompt": "Dans « Elle dort calmement », quel mot est un adverbe ?",
+   "choices": [
+    "Elle",
+    "dort",
+    "calmement",
+    "aucun"
+   ],
+   "answer": 2,
+   "explanation": "« calmement » précise comment elle dort et ne change pas.",
+   "method": "L'adverbe précise le verbe et est invariable.",
+   "points": 1,
+   "lesson": "cm1-francais-nature",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-nature-05",
+   "chapter": "cm1-francais-grammaire",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "mcq",
+   "prompt": "Quel mot est un pronom personnel ? « Nous mangeons des beignets avec nos amis. »",
+   "choices": [
+    "mangeons",
+    "Nous",
+    "des",
+    "amis"
+   ],
+   "answer": 1,
+   "explanation": "« Nous » remplace un groupe de personnes : c'est un pronom personnel sujet.",
+   "points": 1,
+   "lesson": "cm1-francais-nature",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-nature-06",
+   "chapter": "cm1-francais-grammaire",
+   "tier": "examen",
+   "difficulty": 2,
+   "kind": "problem",
+   "prompt": "Observe la phrase : « Le vieux marchand de Douala vend des bananes mûres, mais il garde les plus belles. »",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quelle est la nature de « mais » ?",
+     "choices": [
+      "conjonction de coordination",
+      "préposition",
+      "adverbe",
+      "pronom"
+     ],
+     "answer": 0,
+     "explanation": "« mais » relie deux parties de la phrase : conjonction de coordination.",
+     "id": "cm1-francais-nature-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quelle est la nature de « mûres » ?",
+     "choices": [
+      "nom",
+      "verbe",
+      "adverbe",
+      "adjectif"
+     ],
+     "answer": 3,
+     "explanation": "« mûres » précise le nom « bananes » : adjectif.",
+     "id": "cm1-francais-nature-06-b",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quelle est la nature de « de » dans « de Douala » ?",
+     "choices": [
+      "déterminant",
+      "pronom",
+      "préposition",
+      "conjonction de coordination"
+     ],
+     "answer": 2,
+     "explanation": "« de » introduit le complément « Douala » : préposition.",
+     "id": "cm1-francais-nature-06-c",
+     "points": 1
+    }
+   ],
+   "lesson": "cm1-francais-nature",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-nature-q1",
+   "chapter": "cm1-francais-grammaire",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Un adjectif sert à…",
+   "choices": [
+    "remplacer un nom",
+    "préciser un nom",
+    "relier deux phrases",
+    "dire l'action"
+   ],
+   "answer": 1,
+   "explanation": "L'adjectif précise le nom.",
+   "lesson": "cm1-francais-nature"
+  },
+  {
+   "id": "cm1-francais-nature-q2",
+   "chapter": "cm1-francais-grammaire",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quel mot est invariable ?",
+   "choices": [
+    "souvent",
+    "petit",
+    "chante",
+    "grand"
+   ],
+   "answer": 0,
+   "explanation": "« souvent » est un adverbe : il ne change jamais.",
+   "lesson": "cm1-francais-nature"
+  },
+  {
+   "id": "cm1-francais-nature-q3",
+   "chapter": "cm1-francais-grammaire",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Dans « Ils partent à Kribi », « à » est…",
+   "choices": [
+    "un verbe",
+    "un nom",
+    "un adjectif",
+    "une préposition"
+   ],
+   "answer": 3,
+   "explanation": "« à » introduit le complément de lieu : préposition.",
+   "lesson": "cm1-francais-nature"
+  },
+  {
+   "id": "cm1-francais-nature-q4",
+   "chapter": "cm1-francais-grammaire",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quel mot est un déterminant ?",
+   "choices": [
+    "chantent",
+    "grand",
+    "ces",
+    "vite"
+   ],
+   "answer": 2,
+   "explanation": "« ces » accompagne un nom : déterminant démonstratif.",
+   "lesson": "cm1-francais-nature"
+  },
+  {
+   "id": "cm1-francais-nature-q5",
+   "chapter": "cm1-francais-grammaire",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quelle conjonction de coordination utilise-t-on pour donner une raison ?",
+   "choices": [
+    "mais",
+    "car",
+    "ou",
+    "et"
+   ],
+   "answer": 1,
+   "explanation": "« car » introduit une cause : « Il reste, car il pleut ».",
+   "lesson": "cm1-francais-nature"
+  }
+ ]
+}

@@ -1,0 +1,498 @@
+{
+ "chapter": "cm1-maths-mesures",
+ "lessons": [
+  {
+   "id": "cm1-maths-perimetre",
+   "title": "Périmètre et aire",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM1 — Mesures : périmètre et aire (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Calculer le périmètre d'un polygone, d'un rectangle et d'un carré.",
+    "Calculer l'aire d'un rectangle et d'un carré.",
+    "Distinguer périmètre (longueur du contour) et aire (surface)."
+   ],
+   "prerequisites": [
+    "cm1-maths-calcul"
+   ],
+   "exercises": [
+    "cm1-maths-perimetre-01",
+    "cm1-maths-perimetre-02",
+    "cm1-maths-perimetre-03",
+    "cm1-maths-perimetre-04",
+    "cm1-maths-perimetre-05",
+    "cm1-maths-perimetre-06"
+   ],
+   "selfCheck": [
+    "cm1-maths-perimetre-q1",
+    "cm1-maths-perimetre-q2",
+    "cm1-maths-perimetre-q3",
+    "cm1-maths-perimetre-q4",
+    "cm1-maths-perimetre-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que l'aire en m² (et la conversion cm² ↔ m²) est au programme du CM1.",
+    "Prix du grillage fictif."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Périmètre et aire",
+     "md": "Le **périmètre** est la longueur du **tour** d'une figure (en cm, m, km). L'**aire** mesure la **surface** à l'intérieur (en cm², m²)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Formules",
+     "md": "- Polygone : périmètre = somme des côtés.\n- **Rectangle** : P = 2 × (L + l) ; **aire = L × l**.\n- **Carré** de côté c : P = 4 × c ; **aire = c × c**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 250,
+      "items": [
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 40,
+        "w": 320,
+        "h": 200,
+        "fill": "lightyellow",
+        "stroke": "orange"
+       },
+       {
+        "t": "line",
+        "x1": 100,
+        "y1": 40,
+        "x2": 100,
+        "y2": 240,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 140,
+        "y1": 40,
+        "x2": 140,
+        "y2": 240,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 180,
+        "y1": 40,
+        "x2": 180,
+        "y2": 240,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 220,
+        "y1": 40,
+        "x2": 220,
+        "y2": 240,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 260,
+        "y1": 40,
+        "x2": 260,
+        "y2": 240,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 40,
+        "x2": 300,
+        "y2": 240,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 340,
+        "y1": 40,
+        "x2": 340,
+        "y2": 240,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 80,
+        "x2": 380,
+        "y2": 80,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 120,
+        "x2": 380,
+        "y2": 120,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 160,
+        "x2": 380,
+        "y2": 160,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 200,
+        "x2": 380,
+        "y2": 200,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 28,
+        "text": "8 cm",
+        "size": 16,
+        "color": "blue",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 145,
+        "text": "5 cm",
+        "size": 16,
+        "color": "blue",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 430,
+        "y": 140,
+        "text": "aire",
+        "size": 16,
+        "color": "red",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 430,
+        "y": 160,
+        "text": "8 × 5",
+        "size": 16,
+        "color": "red",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 430,
+        "y": 180,
+        "text": "= 40 cm²",
+        "size": 16,
+        "color": "red",
+        "bold": true,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Un rectangle de 8 cm sur 5 cm.",
+     "alt": "Un rectangle quadrillé de 8 carreaux sur 5 carreaux : il contient 40 carrés de 1 cm²."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : périmètre d'un rectangle",
+     "statement": "Un rectangle mesure 12 cm de long et 7 cm de large. Quel est son périmètre ?",
+     "steps": [
+      {
+       "md": "L + l = 12 + 7 = 19."
+      },
+      {
+       "md": "P = 2 × 19 = 38."
+      }
+     ],
+     "answer": "**38 cm**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : aire d'un carré",
+     "statement": "Quelle est l'aire d'un carré de côté 6 cm ?",
+     "steps": [
+      {
+       "md": "Aire = côté × côté."
+      },
+      {
+       "md": "6 × 6 = 36."
+      }
+     ],
+     "answer": "**36 cm²**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre périmètre et aire.\n- Écrire des cm au lieu de cm² pour une aire.\n- Oublier de multiplier par 2 dans P = 2 × (L + l)."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-perimetre-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-perimetre-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-perimetre-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-perimetre-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-perimetre-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-perimetre-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "cm1-maths-perimetre-01",
+   "chapter": "cm1-maths-mesures",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "numeric",
+   "prompt": "Un rectangle mesure 12 cm sur 7 cm. Quel est son périmètre (cm) ?",
+   "answer": 38,
+   "tolerance": 0,
+   "explanation": "2 × (12 + 7) = 38 cm.",
+   "unit": "cm",
+   "points": 1,
+   "lesson": "cm1-maths-perimetre",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-perimetre-02",
+   "chapter": "cm1-maths-mesures",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "numeric",
+   "prompt": "Quel est le périmètre d'un carré de côté 9 cm ?",
+   "answer": 36,
+   "tolerance": 0,
+   "explanation": "4 × 9 = 36 cm.",
+   "unit": "cm",
+   "points": 1,
+   "lesson": "cm1-maths-perimetre",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-perimetre-03",
+   "chapter": "cm1-maths-mesures",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "numeric",
+   "prompt": "Quelle est l'aire d'un rectangle de 8 cm sur 5 cm (cm²) ?",
+   "answer": 40,
+   "tolerance": 0,
+   "explanation": "8 × 5 = 40 cm².",
+   "unit": "cm²",
+   "points": 1,
+   "lesson": "cm1-maths-perimetre",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-perimetre-04",
+   "chapter": "cm1-maths-mesures",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "numeric",
+   "prompt": "Un rectangle a un périmètre de 30 cm et une longueur de 9 cm. Quelle est sa largeur (cm) ?",
+   "answer": 6,
+   "tolerance": 0,
+   "explanation": "Demi-périmètre : 30 ÷ 2 = 15 ; largeur = 15 − 9 = 6 cm.",
+   "unit": "cm",
+   "method": "Demi-périmètre = L + l.",
+   "points": 1,
+   "lesson": "cm1-maths-perimetre",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-perimetre-05",
+   "chapter": "cm1-maths-mesures",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "numeric",
+   "prompt": "Un terrain rectangulaire mesure 25 m sur 18 m. Quelle est son aire (m²) ?",
+   "answer": 450,
+   "tolerance": 0,
+   "explanation": "25 × 18 = 450 m².",
+   "unit": "m²",
+   "points": 1,
+   "lesson": "cm1-maths-perimetre",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-perimetre-06",
+   "chapter": "cm1-maths-mesures",
+   "tier": "examen",
+   "difficulty": 2,
+   "kind": "problem",
+   "prompt": "Un champ rectangulaire de Bamenda mesure 40 m de long et 25 m de large.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quel est son périmètre ?",
+     "answer": 130,
+     "tolerance": 0,
+     "explanation": "2 × (40 + 25) = 130 m.",
+     "unit": "m",
+     "id": "cm1-maths-perimetre-06-a",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Le grillage coûte 1 500 FCFA le mètre. Quel est le coût de la clôture ?",
+     "answer": 195000,
+     "tolerance": 0,
+     "explanation": "130 × 1 500 = 195 000 FCFA.",
+     "unit": "FCFA",
+     "id": "cm1-maths-perimetre-06-b",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est l'aire du champ ?",
+     "answer": 1000,
+     "tolerance": 0,
+     "explanation": "40 × 25 = 1 000 m².",
+     "unit": "m²",
+     "id": "cm1-maths-perimetre-06-c",
+     "points": 1
+    }
+   ],
+   "lesson": "cm1-maths-perimetre",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-perimetre-q1",
+   "chapter": "cm1-maths-mesures",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Le périmètre d'une figure est…",
+   "choices": [
+    "sa surface",
+    "la longueur de son contour",
+    "son volume",
+    "son nom"
+   ],
+   "answer": 1,
+   "explanation": "On additionne les côtés.",
+   "lesson": "cm1-maths-perimetre"
+  },
+  {
+   "id": "cm1-maths-perimetre-q2",
+   "chapter": "cm1-maths-mesures",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Aire d'un carré de côté 4 cm :",
+   "choices": [
+    "16 cm²",
+    "8 cm²",
+    "16 cm",
+    "4 cm²"
+   ],
+   "answer": 0,
+   "explanation": "4 × 4 = 16 cm².",
+   "lesson": "cm1-maths-perimetre"
+  },
+  {
+   "id": "cm1-maths-perimetre-q3",
+   "chapter": "cm1-maths-mesures",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Périmètre d'un carré de côté 4 cm :",
+   "choices": [
+    "8 cm",
+    "16 cm²",
+    "4 cm",
+    "16 cm"
+   ],
+   "answer": 3,
+   "explanation": "4 × 4 = 16 cm. Même nombre que l'aire, mais l'unité diffère.",
+   "lesson": "cm1-maths-perimetre"
+  },
+  {
+   "id": "cm1-maths-perimetre-q4",
+   "chapter": "cm1-maths-mesures",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Une aire s'exprime en…",
+   "choices": [
+    "cm",
+    "kg",
+    "cm²",
+    "L"
+   ],
+   "answer": 2,
+   "explanation": "Unités de surface : cm², m².",
+   "lesson": "cm1-maths-perimetre"
+  },
+  {
+   "id": "cm1-maths-perimetre-q5",
+   "chapter": "cm1-maths-mesures",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Rectangle 10 cm sur 3 cm : périmètre ?",
+   "choices": [
+    "30 cm",
+    "26 cm",
+    "13 cm",
+    "60 cm"
+   ],
+   "answer": 1,
+   "explanation": "2 × (10 + 3) = 26.",
+   "lesson": "cm1-maths-perimetre"
+  }
+ ]
+}

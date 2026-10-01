@@ -1,0 +1,375 @@
+{
+ "chapter": "ce2-histoire-geo-temps",
+ "lessons": [
+  {
+   "id": "ce2-histoire-geo-temps",
+   "title": "Les repères de temps : jours, mois, années, frise",
+   "minutes": 14,
+   "readAloud": true,
+   "programRef": "Les repères de temps : jours, mois, années, frise (CE2, reconstitué) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Utiliser les mots avant, après, hier, demain.",
+    "Ranger des événements sur une frise du temps.",
+    "Connaître l'ordre des jours et des mois."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "ce2-histoire-geo-temps-01",
+    "ce2-histoire-geo-temps-02",
+    "ce2-histoire-geo-temps-03",
+    "ce2-histoire-geo-temps-04",
+    "ce2-histoire-geo-temps-05",
+    "ce2-histoire-geo-temps-06"
+   ],
+   "selfCheck": [
+    "ce2-histoire-geo-temps-q1",
+    "ce2-histoire-geo-temps-q2",
+    "ce2-histoire-geo-temps-q3",
+    "ce2-histoire-geo-temps-q4",
+    "ce2-histoire-geo-temps-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que la notion de siècle est bien hors programme au CE2 (seulement mentionnée ici).",
+    "La frise de l'exemple est une vie d'enfant, pas de l'histoire du Cameroun : aucune date historique n'est donnée."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Pour savoir quand quelque chose s'est passé, on utilise des **repères de temps** : le jour, la semaine, le mois, l'année."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les unités de temps",
+     "md": "- 1 **semaine** = 7 jours.\n- 1 **année** = 12 mois = 52 semaines environ.\n- Les jours : lundi, mardi, mercredi, jeudi, vendredi, samedi, dimanche.\n- Hier s'est passé **avant** aujourd'hui ; demain se passera **après**."
+    },
+    {
+     "type": "illustration",
+     "caption": "Une frise du temps de la vie d'Amina (exemple).",
+     "alt": "Frise du temps de 2017 à 2026 avec quatre événements : naissance en 2017, entrée à l'école en 2020, CE1 en 2023, CE2 en 2025.",
+     "figure": {
+      "kind": "timeline",
+      "from": 2017,
+      "to": 2026,
+      "events": [
+       {
+        "year": 2017,
+        "label": "Naissance"
+       },
+       {
+        "year": 2020,
+        "label": "Entrée à l'école"
+       },
+       {
+        "year": 2023,
+        "label": "CE1"
+       },
+       {
+        "year": 2025,
+        "label": "CE2"
+       }
+      ],
+      "periods": [
+       {
+        "from": 2020,
+        "to": 2026,
+        "label": "École",
+        "color": "blue"
+       }
+      ],
+      "w": 520,
+      "h": 200
+     }
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La frise du temps",
+     "md": "Une **frise du temps** est une ligne sur laquelle on range les événements dans l'ordre : le plus ancien à gauche, le plus récent à droite."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : avant ou après ?",
+     "statement": "Ngono est née avant son frère Mballa. Mballa est né avant leur petite sœur. Qui est la plus jeune ?",
+     "steps": [
+      {
+       "md": "Ngono → Mballa : Mballa est plus jeune que Ngono."
+      },
+      {
+       "md": "Mballa → petite sœur : elle est plus jeune que Mballa."
+      }
+     ],
+     "answer": "**La petite sœur est la plus jeune.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : ranger des événements",
+     "statement": "Range : « je mange », « je me lève », « je vais à l'école », « je dors ».",
+     "steps": [
+      {
+       "md": "On pense à la journée : le matin, le midi, le soir."
+      },
+      {
+       "md": "On range du plus tôt au plus tard."
+      }
+     ],
+     "answer": "**Je me lève, je vais à l'école, je mange, je dors.**"
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Générations",
+     "md": "Les grands-parents, les parents et les enfants sont trois **générations**. Les plus âgés ont vécu avant les plus jeunes."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Beaucoup de familles gardent des photos ou racontent des histoires : ce sont des **traces du passé**."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-histoire-geo-temps-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-histoire-geo-temps-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-histoire-geo-temps-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-histoire-geo-temps-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-histoire-geo-temps-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-histoire-geo-temps-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quel jour vient juste après mercredi ?",
+   "explanation": "L'ordre est lundi, mardi, mercredi, jeudi.",
+   "difficulty": 1,
+   "choices": [
+    "Vendredi",
+    "Mardi",
+    "Jeudi",
+    "Dimanche"
+   ],
+   "answer": 2,
+   "id": "ce2-histoire-geo-temps-01",
+   "chapter": "ce2-histoire-geo-temps",
+   "tier": "application",
+   "points": 1,
+   "lesson": "ce2-histoire-geo-temps",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Combien y a-t-il de jours dans une semaine ?",
+   "answer": 7,
+   "tolerance": 0,
+   "unit": "jours",
+   "explanation": "Une semaine a 7 jours.",
+   "difficulty": 1,
+   "id": "ce2-histoire-geo-temps-02",
+   "chapter": "ce2-histoire-geo-temps",
+   "tier": "application",
+   "points": 1,
+   "lesson": "ce2-histoire-geo-temps",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque mot au bon sens.",
+   "pairs": [
+    [
+     "hier",
+     "le jour d'avant"
+    ],
+    [
+     "demain",
+     "le jour d'après"
+    ],
+    [
+     "aujourd'hui",
+     "le jour présent"
+    ],
+    [
+     "une année",
+     "12 mois"
+    ]
+   ],
+   "explanation": "Hier est avant, demain est après.",
+   "difficulty": 1,
+   "id": "ce2-histoire-geo-temps-03",
+   "chapter": "ce2-histoire-geo-temps",
+   "tier": "application",
+   "points": 1,
+   "lesson": "ce2-histoire-geo-temps",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien y a-t-il de mois dans une année ?",
+   "explanation": "Janvier à décembre : 12 mois.",
+   "difficulty": 2,
+   "choices": [
+    "10",
+    "7",
+    "12",
+    "24"
+   ],
+   "answer": 2,
+   "id": "ce2-histoire-geo-temps-04",
+   "chapter": "ce2-histoire-geo-temps",
+   "tier": "approfondissement",
+   "points": 2,
+   "lesson": "ce2-histoire-geo-temps",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "open",
+   "prompt": "Range sur une frise : naissance, entrée à l'école, CE2. Écris dans l'ordre.",
+   "model": "Naissance, entrée à l'école, CE2.",
+   "rubric": [
+    "Ordre juste de 3 événements."
+   ],
+   "explanation": "Du plus ancien au plus récent.",
+   "difficulty": 2,
+   "id": "ce2-histoire-geo-temps-05",
+   "chapter": "ce2-histoire-geo-temps",
+   "tier": "approfondissement",
+   "points": 2,
+   "lesson": "ce2-histoire-geo-temps",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Aujourd'hui, c'est vendredi. Quel jour était-ce il y a deux jours ?",
+   "explanation": "Vendredi, jeudi (hier), mercredi (avant-hier).",
+   "difficulty": 3,
+   "choices": [
+    "Jeudi",
+    "Mercredi",
+    "Samedi",
+    "Lundi"
+   ],
+   "answer": 1,
+   "id": "ce2-histoire-geo-temps-06",
+   "chapter": "ce2-histoire-geo-temps",
+   "tier": "examen",
+   "points": 2,
+   "lesson": "ce2-histoire-geo-temps",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Où place-t-on les événements les plus anciens sur la frise ?",
+   "explanation": "Les plus anciens à gauche.",
+   "difficulty": 1,
+   "choices": [
+    "Au milieu",
+    "À droite",
+    "Peu importe",
+    "À gauche"
+   ],
+   "answer": 3,
+   "id": "ce2-histoire-geo-temps-q1",
+   "chapter": "ce2-histoire-geo-temps",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-histoire-geo-temps",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien de jours dans une semaine ?",
+   "explanation": "Sept jours.",
+   "difficulty": 1,
+   "choices": [
+    "12",
+    "7",
+    "5",
+    "10"
+   ],
+   "answer": 1,
+   "id": "ce2-histoire-geo-temps-q2",
+   "chapter": "ce2-histoire-geo-temps",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-histoire-geo-temps",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot veut dire « le jour qui vient avant aujourd'hui » ?",
+   "explanation": "Hier est avant.",
+   "difficulty": 1,
+   "choices": [
+    "Un mois",
+    "Demain",
+    "Hier",
+    "Lundi"
+   ],
+   "answer": 2,
+   "id": "ce2-histoire-geo-temps-q3",
+   "chapter": "ce2-histoire-geo-temps",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-histoire-geo-temps",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le mois qui suit mars est…",
+   "explanation": "Mars puis avril.",
+   "difficulty": 2,
+   "choices": [
+    "février",
+    "avril",
+    "janvier",
+    "mai"
+   ],
+   "answer": 1,
+   "id": "ce2-histoire-geo-temps-q4",
+   "chapter": "ce2-histoire-geo-temps",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-histoire-geo-temps",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qu'est-ce qu'une génération ?",
+   "explanation": "Parents, enfants et grands-parents : trois générations.",
+   "difficulty": 2,
+   "choices": [
+    "Un jour",
+    "Un mois",
+    "Un livre",
+    "Les gens d'un même âge dans une famille"
+   ],
+   "answer": 3,
+   "id": "ce2-histoire-geo-temps-q5",
+   "chapter": "ce2-histoire-geo-temps",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-histoire-geo-temps",
+   "source": "Exercice original"
+  }
+ ]
+}

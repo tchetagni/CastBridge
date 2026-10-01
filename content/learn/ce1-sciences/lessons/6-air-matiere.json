@@ -1,0 +1,522 @@
+{
+ "chapter": "ce1-sciences-c6-air-matiere",
+ "lessons": [
+  {
+   "id": "ce1-sciences-air-matiere",
+   "title": "L'air et la matière",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CE1 — La matière : solides, liquides, gaz ; l'air existe et occupe de la place ; matériaux usuels (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Montrer que l'air existe et occupe de la place.",
+    "Distinguer solide, liquide et gaz.",
+    "Reconnaître des matériaux et leurs propriétés simples."
+   ],
+   "prerequisites": [
+    "ce1-sciences-eau"
+   ],
+   "exercises": [
+    "ce1-sciences-air-matiere-01",
+    "ce1-sciences-air-matiere-02",
+    "ce1-sciences-air-matiere-03",
+    "ce1-sciences-air-matiere-04",
+    "ce1-sciences-air-matiere-05",
+    "ce1-sciences-air-matiere-06"
+   ],
+   "selfCheck": [
+    "ce1-sciences-air-matiere-q1",
+    "ce1-sciences-air-matiere-q2",
+    "ce1-sciences-air-matiere-q3",
+    "ce1-sciences-air-matiere-q4",
+    "ce1-sciences-air-matiere-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier si le programme du CE1 demande « solide, liquide, gaz » ou seulement « solide, liquide » ; le gaz est ici limité à l'air.",
+    "Vérifier l'exemple du sable (grains solides qui coulent) : réservé à la remarque « attention »."
+   ],
+   "blocks": [
+    {
+     "type": "audio",
+     "lang": "fr-FR",
+     "text": "L'air est autour de nous. On ne le voit pas, mais on peut le sentir."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "L'air existe",
+     "md": "L'**air** est partout autour de nous. Il est **invisible**.\n\nOn sait qu'il existe parce que :\n\n- on le sent quand il y a du **vent** ;\n- on le respire ;\n- il gonfle un ballon ;\n- on voit des bulles quand on souffle dans l'eau avec une paille."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : le ballon",
+     "statement": "Mballa gonfle un ballon. Pourquoi grossit-il ?",
+     "steps": [
+      {
+       "md": "Il souffle de l'air dans le ballon."
+      },
+      {
+       "md": "L'air occupe de la place et fait grossir le ballon."
+      }
+     ],
+     "answer": "**L'air occupe de la place : il gonfle le ballon.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : la bouteille vide",
+     "statement": "Amina enfonce une bouteille « vide » dans un seau d'eau, le goulot en bas. Que voit-elle ?",
+     "steps": [
+      {
+       "md": "Elle voit des bulles qui sortent."
+      },
+      {
+       "md": "La bouteille n'était pas vide : elle contenait de l'air."
+      }
+     ],
+     "answer": "**Une bouteille « vide » est pleine d'air.**"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Solide, liquide, gaz",
+     "md": "La matière existe sous trois états :\n\n- le **solide** garde sa forme (pierre, bois, fer) ;\n- le **liquide** coule et prend la forme du récipient (eau, huile, lait) ;\n- le **gaz** se répand partout (l'air, la vapeur d'eau)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Trois états de la matière.",
+     "alt": "Trois cases : solide qui garde sa forme avec la pierre, le bois et le fer ; liquide qui prend la forme du récipient avec l'eau, l'huile et le lait ; gaz qui se répand partout avec l'air et la vapeur.",
+     "figure": {
+      "kind": "shapes",
+      "w": 520,
+      "h": 210,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 20,
+        "w": 150,
+        "h": 120,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "rect",
+        "x": 185,
+        "y": 20,
+        "w": 150,
+        "h": 120,
+        "fill": "lightorange",
+        "stroke": "orange",
+        "radius": 8
+       },
+       {
+        "t": "rect",
+        "x": 360,
+        "y": 20,
+        "w": 150,
+        "h": 120,
+        "fill": "lightgreen",
+        "stroke": "green",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 50,
+        "text": "Solide",
+        "size": 18,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 80,
+        "text": "garde sa forme",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 105,
+        "text": "pierre, bois, fer",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 50,
+        "text": "Liquide",
+        "size": 18,
+        "color": "orange",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 80,
+        "text": "prend la forme",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 100,
+        "text": "du récipient",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 125,
+        "text": "eau, huile, lait",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 435,
+        "y": 50,
+        "text": "Gaz",
+        "size": 18,
+        "color": "green",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 435,
+        "y": 80,
+        "text": "se répand partout",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 435,
+        "y": 105,
+        "text": "l'air, la vapeur",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 180,
+        "text": "Tout ce qui nous entoure est fait de matière.",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Reconnaître un matériau",
+     "md": "Les objets sont faits de **matériaux** : bois, métal, verre, plastique, tissu, papier.\n\nJe peux les décrire :\n\n- dur ou mou ;\n- transparent (on voit à travers) ou non ;\n- il flotte ou il coule dans l'eau."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- L'air n'est pas « du vide » : il occupe de la place.\n- Le sable est fait de petits grains solides : il coule comme un liquide, mais ce n'est pas un liquide.\n- Une bouteille « vide » contient de l'air.\n- Ne pas jouer avec les sacs en plastique sur la tête."
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-sciences-air-matiere-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-sciences-air-matiere-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-sciences-air-matiere-03"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le vent, c'est de l'air qui se déplace. Il fait tourner les moulins et sécher le linge.",
+      "Les poissons respirent l'air qui est dans l'eau grâce à leurs branchies."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ce1-sciences-air-matiere-01",
+   "chapter": "ce1-sciences-c6-air-matiere",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Que contient une bouteille « vide » ?",
+   "choices": [
+    "de l'eau",
+    "du sable",
+    "rien du tout",
+    "de l'air"
+   ],
+   "answer": 3,
+   "explanation": "Une bouteille « vide » est pleine d'**air**.",
+   "lesson": "ce1-sciences-air-matiere",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-air-matiere-02",
+   "chapter": "ce1-sciences-c6-air-matiere",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Vrai ou faux : on peut voir l'air.",
+   "answer": false,
+   "explanation": "Faux : l'air est **invisible**, mais on sent le vent.",
+   "lesson": "ce1-sciences-air-matiere",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-air-matiere-03",
+   "chapter": "ce1-sciences-c6-air-matiere",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "prompt": "Associe chaque exemple à son état.",
+   "pairs": [
+    [
+     "une pierre",
+     "solide"
+    ],
+    [
+     "l'huile",
+     "liquide"
+    ],
+    [
+     "l'air",
+     "gaz"
+    ]
+   ],
+   "explanation": "Pierre : solide. Huile : liquide. Air : gaz.",
+   "lesson": "ce1-sciences-air-matiere",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-air-matiere-04",
+   "chapter": "ce1-sciences-c6-air-matiere",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "Comment sait-on que l'air occupe de la place ?",
+   "choices": [
+    "il gonfle un ballon",
+    "il est bleu",
+    "il a un goût sucré",
+    "il fait du bruit tout seul"
+   ],
+   "answer": 0,
+   "explanation": "L'air **gonfle** le ballon : il occupe de la place.",
+   "lesson": "ce1-sciences-air-matiere",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-air-matiere-05",
+   "chapter": "ce1-sciences-c6-air-matiere",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Associe chaque objet à son matériau.",
+   "pairs": [
+    [
+     "la fenêtre",
+     "verre"
+    ],
+    [
+     "la table",
+     "bois"
+    ],
+    [
+     "la casserole",
+     "métal"
+    ],
+    [
+     "le cahier",
+     "papier"
+    ]
+   ],
+   "explanation": "Le verre est transparent, le bois sert aux tables, le métal aux casseroles, le papier aux cahiers.",
+   "lesson": "ce1-sciences-air-matiere",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-air-matiere-06",
+   "chapter": "ce1-sciences-c6-air-matiere",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Ngono souffle dans un ballon, puis elle le laisse se vider.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Qu'est-ce qui gonfle le ballon ?",
+     "choices": [
+      "l'eau",
+      "le sable",
+      "l'air",
+      "la lumière"
+     ],
+     "answer": 2,
+     "explanation": "Elle souffle de l'**air** dans le ballon.",
+     "id": "ce1-sciences-air-matiere-06-a"
+    },
+    {
+     "kind": "truefalse",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Quand le ballon se vide, l'air sort.",
+     "answer": true,
+     "explanation": "Vrai : l'air **sort** du ballon.",
+     "id": "ce1-sciences-air-matiere-06-b"
+    },
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Dans quel état est l'air ?",
+     "choices": [
+      "solide",
+      "liquide",
+      "gaz",
+      "aucun état"
+     ],
+     "answer": 2,
+     "explanation": "L'air est un **gaz**.",
+     "id": "ce1-sciences-air-matiere-06-c"
+    }
+   ],
+   "lesson": "ce1-sciences-air-matiere",
+   "points": 3,
+   "explanation": "Corrigé détaillé question par question ci-dessous.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-air-matiere-q1",
+   "chapter": "ce1-sciences-c6-air-matiere",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quel matériau est transparent ?",
+   "choices": [
+    "le verre",
+    "le bois",
+    "le métal",
+    "le tissu épais"
+   ],
+   "answer": 0,
+   "explanation": "Le **verre** laisse passer la lumière : on voit à travers.",
+   "lesson": "ce1-sciences-air-matiere",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-air-matiere-q2",
+   "chapter": "ce1-sciences-c6-air-matiere",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quel état garde sa forme ?",
+   "choices": [
+    "le liquide",
+    "le gaz",
+    "la vapeur",
+    "le solide"
+   ],
+   "answer": 3,
+   "explanation": "Le **solide** garde sa forme.",
+   "lesson": "ce1-sciences-air-matiere",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-air-matiere-q3",
+   "chapter": "ce1-sciences-c6-air-matiere",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Que fait le vent ?",
+   "choices": [
+    "il arrête l'air",
+    "il fait bouger l'air",
+    "il produit de l'eau",
+    "il fabrique des pierres"
+   ],
+   "answer": 1,
+   "explanation": "Le vent, c'est de l'air qui se **déplace**.",
+   "lesson": "ce1-sciences-air-matiere",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-air-matiere-q4",
+   "chapter": "ce1-sciences-c6-air-matiere",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quel liquide prend la forme du verre ?",
+   "choices": [
+    "la pierre",
+    "l'eau",
+    "le bois",
+    "le fer"
+   ],
+   "answer": 1,
+   "explanation": "L'**eau** est un liquide : elle prend la forme du récipient.",
+   "lesson": "ce1-sciences-air-matiere",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-air-matiere-q5",
+   "chapter": "ce1-sciences-c6-air-matiere",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Dans quel état est le bois ?",
+   "choices": [
+    "liquide",
+    "gaz",
+    "vapeur",
+    "solide"
+   ],
+   "answer": 3,
+   "explanation": "Le bois est un **solide**.",
+   "lesson": "ce1-sciences-air-matiere",
+   "source": "Exercice original"
+  }
+ ]
+}

@@ -1,0 +1,486 @@
+{
+ "chapter": "cm2-maths-angles-polygones",
+ "lessons": [
+  {
+   "id": "cm2-maths-angles-polygones-fiche",
+   "chapter": "cm2-maths-angles-polygones",
+   "title": "Angles, triangles et quadrilatères",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM2 — Géométrie : angles, polygones (reconstitué)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Reconnaître et mesurer un angle (aigu, droit, obtus, plat).",
+    "Utiliser la somme des angles d'un triangle (180°).",
+    "Reconnaître les triangles, quadrilatères et polygones usuels et leurs propriétés."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cm2-maths-angles-polygones-01",
+    "cm2-maths-angles-polygones-02",
+    "cm2-maths-angles-polygones-03",
+    "cm2-maths-angles-polygones-04",
+    "cm2-maths-angles-polygones-05",
+    "cm2-maths-angles-polygones-06"
+   ],
+   "selfCheck": [
+    "cm2-maths-angles-polygones-q1",
+    "cm2-maths-angles-polygones-q2",
+    "cm2-maths-angles-polygones-q3",
+    "cm2-maths-angles-polygones-q4",
+    "cm2-maths-angles-polygones-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier les définitions de la hiérarchie des quadrilatères (carré = rectangle et losange) selon le programme."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Un **angle** est formé par deux demi-droites de même origine, le sommet. On le mesure en **degrés** avec un rapporteur. Un angle droit mesure 90°, un angle plat 180°."
+    },
+    {
+     "type": "illustration",
+     "caption": "Trois angles : aigu, droit et obtus.",
+     "alt": "Trois angles tracés à partir d'un même type de sommet : un angle aigu de 40 degrés, un angle droit de 90 degrés avec un petit carré, un angle obtus de 130 degrés.",
+     "figure": {
+      "kind": "shapes",
+      "w": 460,
+      "h": 150,
+      "items": [
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 110,
+        "x2": 140.0,
+        "y2": 110.0,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 110,
+        "x2": 121.3,
+        "y2": 58.6,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "angle",
+        "x": 60,
+        "y": 110,
+        "from": 0,
+        "to": 40,
+        "r": 26,
+        "right": false,
+        "color": "red"
+       },
+       {
+        "t": "text",
+        "x": 95,
+        "y": 140,
+        "text": "aigu : moins de 90°",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 110,
+        "x2": 290.0,
+        "y2": 110.0,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 110,
+        "x2": 210.0,
+        "y2": 30.0,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "angle",
+        "x": 210,
+        "y": 110,
+        "from": 0,
+        "to": 90,
+        "r": 26,
+        "right": true,
+        "color": "red"
+       },
+       {
+        "t": "text",
+        "x": 245,
+        "y": 140,
+        "text": "droit : 90°",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 350,
+        "y1": 110,
+        "x2": 430.0,
+        "y2": 110.0,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 350,
+        "y1": 110,
+        "x2": 298.6,
+        "y2": 48.7,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "angle",
+        "x": 350,
+        "y": 110,
+        "from": 0,
+        "to": 130,
+        "r": 26,
+        "right": false,
+        "color": "red"
+       },
+       {
+        "t": "text",
+        "x": 385,
+        "y": 140,
+        "text": "obtus : plus de 90°",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les angles",
+     "md": "- **aigu** : entre 0° et 90° ;\n- **droit** : 90° ;\n- **obtus** : entre 90° et 180° ;\n- **plat** : 180°.\n\nPour mesurer : on place le centre du rapporteur sur le sommet et le zéro sur un côté, puis on lit l'autre côté."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : angle manquant",
+     "statement": "Un triangle ABC a deux angles de 50° et 60°. Quelle est la mesure du troisième angle ?",
+     "steps": [
+      {
+       "md": "La somme des angles d'un triangle est 180°."
+      },
+      {
+       "md": "50 + 60 = 110 ; 180 − 110 = 70."
+      }
+     ],
+     "answer": "**Le troisième angle mesure 70°.**"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Triangles et quadrilatères",
+     "md": "- **isocèle** : 2 côtés égaux ; **équilatéral** : 3 côtés égaux (3 angles de 60°) ; **rectangle** : un angle droit.\n- **rectangle** : 4 angles droits ; **carré** : 4 angles droits et 4 côtés égaux ; **losange** : 4 côtés égaux ; **parallélogramme** : côtés opposés parallèles ; **trapèze** : 2 côtés parallèles.\n- Polygones : pentagone (5 côtés), hexagone (6), octogone (8)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : triangle isocèle",
+     "statement": "Un triangle isocèle a un angle au sommet de 40°. Calcule ses deux angles à la base.",
+     "steps": [
+      {
+       "md": "Les angles à la base d'un triangle isocèle sont égaux."
+      },
+      {
+       "md": "180 − 40 = 140 ; 140 ÷ 2 = 70."
+      }
+     ],
+     "answer": "**Chaque angle à la base mesure 70°.**"
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Pièges",
+     "md": "- Un angle obtus n'est pas « un grand angle » : il est **supérieur à 90°** mais inférieur à 180°.\n- Un carré est aussi un rectangle et un losange.\n- Au rapporteur, on lit la bonne graduation : on part de 0°, pas de 180°."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-angles-polygones-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-angles-polygones-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-angles-polygones-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-angles-polygones-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-angles-polygones-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-angles-polygones-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "La somme des angles d'un quadrilatère est 360°."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Un angle de 120° est…",
+   "choices": [
+    "aigu",
+    "droit",
+    "obtus",
+    "plat"
+   ],
+   "answer": 2,
+   "explanation": "120° est entre 90° et 180° : angle obtus.",
+   "id": "cm2-maths-angles-polygones-01",
+   "chapter": "cm2-maths-angles-polygones",
+   "tier": "application",
+   "lesson": "cm2-maths-angles-polygones-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 1,
+   "prompt": "Un triangle a deux angles de 45° et 65°. Combien mesure le troisième ?",
+   "answer": 70,
+   "tolerance": 0,
+   "explanation": "45 + 65 = 110 ; 180 − 110 = 70.",
+   "unit": "°",
+   "id": "cm2-maths-angles-polygones-02",
+   "chapter": "cm2-maths-angles-polygones",
+   "tier": "application",
+   "lesson": "cm2-maths-angles-polygones-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "truefalse",
+   "difficulty": 1,
+   "prompt": "Vrai ou faux : un carré a 4 angles droits et 4 côtés égaux.",
+   "answer": true,
+   "explanation": "C'est la définition du carré.",
+   "id": "cm2-maths-angles-polygones-03",
+   "chapter": "cm2-maths-angles-polygones",
+   "tier": "application",
+   "lesson": "cm2-maths-angles-polygones-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 2,
+   "prompt": "Combien un triangle équilatéral a-t-il de degrés à chaque angle ?",
+   "answer": 60,
+   "tolerance": 0,
+   "explanation": "180 ÷ 3 = 60.",
+   "unit": "°",
+   "id": "cm2-maths-angles-polygones-04",
+   "chapter": "cm2-maths-angles-polygones",
+   "tier": "approfondissement",
+   "lesson": "cm2-maths-angles-polygones-fiche",
+   "points": 2,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "matching",
+   "difficulty": 2,
+   "prompt": "Associe chaque figure à son nombre de côtés.",
+   "pairs": [
+    [
+     "triangle",
+     "3"
+    ],
+    [
+     "pentagone",
+     "5"
+    ],
+    [
+     "hexagone",
+     "6"
+    ],
+    [
+     "octogone",
+     "8"
+    ]
+   ],
+   "explanation": "Penta = 5, hexa = 6, octo = 8.",
+   "id": "cm2-maths-angles-polygones-05",
+   "chapter": "cm2-maths-angles-polygones",
+   "tier": "approfondissement",
+   "lesson": "cm2-maths-angles-polygones-fiche",
+   "points": 2,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "problem",
+   "difficulty": 2,
+   "prompt": "Fotso construit un cadre en bois pour un champ en forme de triangle isocèle ABC (sommet A).",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "L'angle en A mesure 80°. Combien mesure la somme des angles B et C ?",
+     "answer": 100,
+     "tolerance": 0,
+     "explanation": "180 − 80 = 100.",
+     "unit": "°",
+     "points": 1,
+     "id": "cm2-maths-angles-polygones-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Combien mesure l'angle B ?",
+     "answer": 50,
+     "tolerance": 0,
+     "explanation": "B et C sont égaux : 100 ÷ 2 = 50.",
+     "unit": "°",
+     "points": 1,
+     "id": "cm2-maths-angles-polygones-06-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Le triangle est-il rectangle ?",
+     "choices": [
+      "Non",
+      "Oui",
+      "On ne peut pas savoir",
+      "Oui, en A"
+     ],
+     "answer": 0,
+     "explanation": "Les angles mesurent 80°, 50° et 50° : aucun n'est droit.",
+     "points": 1,
+     "id": "cm2-maths-angles-polygones-06-c"
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "id": "cm2-maths-angles-polygones-06",
+   "chapter": "cm2-maths-angles-polygones",
+   "tier": "examen",
+   "lesson": "cm2-maths-angles-polygones-fiche",
+   "points": 3,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Dans un triangle, la somme des trois angles est…",
+   "choices": [
+    "90°",
+    "360°",
+    "100°",
+    "180°"
+   ],
+   "answer": 3,
+   "explanation": "Dans tout triangle, la somme des angles est 180°.",
+   "id": "cm2-maths-angles-polygones-q1",
+   "chapter": "cm2-maths-angles-polygones",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-angles-polygones-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Quel quadrilatère a 4 côtés égaux sans forcément d'angle droit ?",
+   "choices": [
+    "Le rectangle",
+    "Le losange",
+    "Le trapèze",
+    "Le pentagone"
+   ],
+   "answer": 1,
+   "explanation": "Le losange a 4 côtés égaux ; le carré est un cas particulier.",
+   "id": "cm2-maths-angles-polygones-q2",
+   "chapter": "cm2-maths-angles-polygones",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-angles-polygones-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Un angle plat mesure…",
+   "choices": [
+    "180°",
+    "90°",
+    "360°",
+    "45°"
+   ],
+   "answer": 0,
+   "explanation": "Un angle plat est un demi-tour : 180°.",
+   "id": "cm2-maths-angles-polygones-q3",
+   "chapter": "cm2-maths-angles-polygones",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-angles-polygones-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 2,
+   "prompt": "Un triangle a des angles de 90°, 30° et ?",
+   "choices": [
+    "50°",
+    "90°",
+    "60°",
+    "120°"
+   ],
+   "answer": 2,
+   "explanation": "180 − 90 − 30 = 60.",
+   "id": "cm2-maths-angles-polygones-q4",
+   "chapter": "cm2-maths-angles-polygones",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-angles-polygones-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Un hexagone a…",
+   "choices": [
+    "5 côtés",
+    "6 côtés",
+    "8 côtés",
+    "4 côtés"
+   ],
+   "answer": 1,
+   "explanation": "Hexa signifie six.",
+   "id": "cm2-maths-angles-polygones-q5",
+   "chapter": "cm2-maths-angles-polygones",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-angles-polygones-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  }
+ ]
+}

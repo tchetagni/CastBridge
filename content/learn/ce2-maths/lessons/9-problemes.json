@@ -1,0 +1,450 @@
+{
+ "chapter": "ce2-maths-problemes",
+ "lessons": [
+  {
+   "id": "ce2-maths-problemes",
+   "title": "Les problèmes à plusieurs étapes",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CE2 — Mathématiques (MINEDUB) — reconstitué, à vérifier sur le texte officiel — Problèmes : résolution de problèmes à plusieurs étapes",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Repérer les étapes d'un problème.",
+    "Choisir les bonnes opérations.",
+    "Rédiger une phrase réponse."
+   ],
+   "prerequisites": [
+    "ce2-maths-addition-soustraction",
+    "ce2-maths-multiplication",
+    "ce2-maths-division"
+   ],
+   "exercises": [
+    "ce2-maths-problemes-01",
+    "ce2-maths-problemes-02",
+    "ce2-maths-problemes-03",
+    "ce2-maths-problemes-04",
+    "ce2-maths-problemes-05",
+    "ce2-maths-problemes-06"
+   ],
+   "selfCheck": [
+    "ce2-maths-problemes-q1",
+    "ce2-maths-problemes-q2",
+    "ce2-maths-problemes-q3",
+    "ce2-maths-problemes-q4",
+    "ce2-maths-problemes-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier la complexité attendue des problèmes au CE2 (2 à 3 étapes) et le type de schéma recommandé."
+   ],
+   "blocks": [
+    {
+     "type": "heading",
+     "text": "Résoudre un problème à plusieurs étapes"
+    },
+    {
+     "type": "text",
+     "md": "Dans un **problème à plusieurs étapes**, il faut faire **plusieurs calculs** les uns après les autres. Le résultat d'un calcul sert pour le suivant."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Ma méthode",
+     "md": "1. Je **lis** l'énoncé en entier.\n2. Je repère la **question** et les **données** utiles.\n3. Je fais un **schéma** ou je dessine.\n4. Je cherche les **étapes** : qu'est-ce que je peux calculer d'abord ?\n5. Je **calcule** chaque étape et je **vérifie**.\n6. J'écris une **phrase réponse**."
+    },
+    {
+     "type": "illustration",
+     "caption": "Un schéma en barres : 3 cahiers à 250 F et un stylo à 175 F.",
+     "alt": "Une barre longue formée de deux parties : une partie bleue pour 3 cahiers à 250 F, soit 750 F, et une partie jaune pour le stylo à 175 F. Une double flèche en dessous marque le total.",
+     "figure": {
+      "kind": "shapes",
+      "w": 520,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 30,
+        "y": 40,
+        "w": 300,
+        "h": 45,
+        "stroke": "blue",
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 180.0,
+        "y": 68.1,
+        "text": "3 cahiers de 250 F : 750 F",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 335,
+        "y": 40,
+        "w": 150,
+        "h": 45,
+        "stroke": "orange",
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 410.0,
+        "y": 68.1,
+        "text": "stylo : 175 F",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 110,
+        "x2": 485,
+        "y2": 110,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 485,
+        "y1": 110,
+        "x2": 30,
+        "y2": 110,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 257,
+        "y": 135,
+        "text": "total : ?",
+        "size": 18,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : deux étapes",
+     "statement": "Ngono achète 3 cahiers à 250 F l'un et un stylo à 175 F. Combien paie-t-elle ?",
+     "steps": [
+      {
+       "md": "Étape 1 : le prix des cahiers : 3 × 250 = 750 F."
+      },
+      {
+       "md": "Étape 2 : j'ajoute le stylo : 750 + 175 = 925 F."
+      }
+     ],
+     "answer": "**Ngono paie 925 F.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : un reste",
+     "statement": "Un éleveur a 4 poulaillers de 28 poules. Il vend 35 poules. Combien lui en reste-t-il ?",
+     "steps": [
+      {
+       "md": "Étape 1 : le nombre de poules au départ : 4 × 28 = 112."
+      },
+      {
+       "md": "Étape 2 : je retire celles qui sont vendues : 112 − 35 = 77."
+      }
+     ],
+     "answer": "**Il lui reste 77 poules.**"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Quelle opération choisir ?",
+     "md": "- **Chercher un total** (ajouter) : +\n- **Chercher ce qui reste, une différence** : −\n- **Plusieurs fois la même quantité** : ×\n- **Partager en parts égales** : ÷"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- Ne cherche pas un seul calcul : il y en a plusieurs.\n- Vérifie que ta réponse est **vraisemblable**.\n- N'oublie pas la **phrase réponse** et l'**unité**."
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-problemes-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-problemes-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-problemes-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-problemes-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-problemes-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-problemes-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Invente un problème à deux étapes avec des prix du marché de ton quartier."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ce2-maths-problemes-01",
+   "chapter": "ce2-maths-problemes",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-problemes",
+   "prompt": "Quelle opération pour trouver le total de 3 paquets de 12 biscuits ?",
+   "choices": [
+    "3 × 12",
+    "3 + 12",
+    "12 − 3",
+    "12 ÷ 3"
+   ],
+   "answer": 0,
+   "explanation": "3 fois la même quantité : on multiplie.",
+   "method": "Repérer « plusieurs fois la même quantité ».",
+   "mistakes": [
+    "Additionner 3 et 12."
+   ],
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-problemes-02",
+   "chapter": "ce2-maths-problemes",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-problemes",
+   "prompt": "Vrai ou faux : on termine un problème par une phrase réponse.",
+   "answer": true,
+   "explanation": "La phrase réponse dit clairement le résultat.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-problemes-03",
+   "chapter": "ce2-maths-problemes",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-problemes",
+   "prompt": "Ibrahim a 4 sachets de 15 bonbons. On lui en donne encore 8. Combien a-t-il de bonbons ?",
+   "answer": 68,
+   "tolerance": 0,
+   "explanation": "Étape 1 : 4 × 15 = 60. Étape 2 : 60 + 8 = **68**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-problemes-04",
+   "chapter": "ce2-maths-problemes",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "ce2-maths-problemes",
+   "prompt": "Un commerçant achète 5 sacs de 25 kg de riz et en vend 80 kg. Combien de kg lui reste-t-il ?",
+   "answer": 45,
+   "tolerance": 0,
+   "unit": "kg",
+   "explanation": "5 × 25 = 125 kg ; 125 − 80 = **45** kg.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-problemes-05",
+   "chapter": "ce2-maths-problemes",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "ce2-maths-problemes",
+   "prompt": "Ibrahim a 3 000 F. Il achète 2 ballons à 750 F l'un. Combien lui reste-t-il ? Écris les étapes.",
+   "model": "2 × 750 = 1 500 F ; 3 000 − 1 500 = 1500 F. Il lui reste 1500 F.",
+   "rubric": [
+    "Étape 1 : le prix des ballons (1 500 F).",
+    "Étape 2 : la soustraction (1500 F).",
+    "Phrase réponse."
+   ],
+   "explanation": "Prix des ballons : 1 500 F. Il reste 3 000 − 1 500 = **1500** F.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-problemes-06",
+   "chapter": "ce2-maths-problemes",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "points": 2,
+   "lesson": "ce2-maths-problemes",
+   "prompt": "Mballa achète 3 kg de tomates à 400 F le kg et 2 kg d'oignons à 300 F le kg. Il paie avec un billet de 2 000 F.",
+   "method": "Une étape à la fois.",
+   "mistakes": [
+    "Oublier une étape."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "kind": "numeric",
+     "difficulty": 1,
+     "prompt": "Combien coûtent les tomates ?",
+     "answer": 1200,
+     "tolerance": 0,
+     "unit": "F",
+     "explanation": "3 × 400 = **1 200** F.",
+     "points": 1,
+     "id": "ce2-maths-problemes-06-a"
+    },
+    {
+     "kind": "numeric",
+     "difficulty": 1,
+     "prompt": "Combien coûtent les oignons ?",
+     "answer": 600,
+     "tolerance": 0,
+     "unit": "F",
+     "explanation": "2 × 300 = **600** F.",
+     "points": 1,
+     "id": "ce2-maths-problemes-06-b"
+    },
+    {
+     "kind": "numeric",
+     "difficulty": 2,
+     "prompt": "Combien paie-t-il en tout ?",
+     "answer": 1800,
+     "tolerance": 0,
+     "unit": "F",
+     "explanation": "1 200 + 600 = **1 800** F.",
+     "points": 1,
+     "id": "ce2-maths-problemes-06-c"
+    },
+    {
+     "kind": "numeric",
+     "difficulty": 2,
+     "prompt": "Combien lui rend-on ?",
+     "answer": 200,
+     "tolerance": 0,
+     "unit": "F",
+     "explanation": "2 000 − 1 800 = **200** F.",
+     "points": 1,
+     "id": "ce2-maths-problemes-06-d"
+    }
+   ]
+  },
+  {
+   "id": "ce2-maths-problemes-q1",
+   "chapter": "ce2-maths-problemes",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-problemes",
+   "prompt": "Quelle est la première chose à faire devant un problème ?",
+   "choices": [
+    "calculer tout de suite",
+    "lire l'énoncé en entier",
+    "écrire la réponse",
+    "dessiner un cercle"
+   ],
+   "answer": 1,
+   "explanation": "On lit d'abord pour comprendre.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-problemes-q2",
+   "chapter": "ce2-maths-problemes",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-problemes",
+   "prompt": "Quel est le résultat de 5 × 6 + 4 ?",
+   "choices": [
+    "50",
+    "54",
+    "34",
+    "30"
+   ],
+   "answer": 2,
+   "explanation": "5 × 6 = 30 ; 30 + 4 = 34.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-problemes-q3",
+   "chapter": "ce2-maths-problemes",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-problemes",
+   "prompt": "Quel est le résultat de 2 × 15 − 8 ?",
+   "choices": [
+    "7",
+    "38",
+    "23",
+    "22"
+   ],
+   "answer": 3,
+   "explanation": "2 × 15 = 30 ; 30 − 8 = 22.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-problemes-q4",
+   "chapter": "ce2-maths-problemes",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-problemes",
+   "prompt": "La phrase réponse sert à…",
+   "choices": [
+    "répondre clairement à la question",
+    "recopier l'énoncé",
+    "faire un dessin",
+    "effacer les calculs"
+   ],
+   "answer": 0,
+   "explanation": "Elle donne le résultat avec son unité.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-problemes-q5",
+   "chapter": "ce2-maths-problemes",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-problemes",
+   "prompt": "Un problème à plusieurs étapes demande…",
+   "choices": [
+    "un seul calcul",
+    "au moins deux calculs",
+    "aucun calcul",
+    "un dessin seulement"
+   ],
+   "answer": 1,
+   "explanation": "Le résultat d'une étape sert à la suivante.",
+   "source": "Exercice original"
+  }
+ ]
+}

@@ -1,0 +1,934 @@
+{
+ "chapter": "ce2-maths-operations",
+ "lessons": [
+  {
+   "id": "ce2-maths-addition-soustraction",
+   "title": "Addition et soustraction posées",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CE2 — Mathématiques (MINEDUB) — reconstitué, à vérifier sur le texte officiel — Opérations : addition et soustraction posées",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Poser et calculer une addition avec retenues.",
+    "Poser et calculer une soustraction avec retenues.",
+    "Vérifier un résultat (preuve, ordre de grandeur)."
+   ],
+   "prerequisites": [
+    "ce2-maths-nombres"
+   ],
+   "exercises": [
+    "ce2-maths-addition-soustraction-01",
+    "ce2-maths-addition-soustraction-02",
+    "ce2-maths-addition-soustraction-03",
+    "ce2-maths-addition-soustraction-04",
+    "ce2-maths-addition-soustraction-05",
+    "ce2-maths-addition-soustraction-06"
+   ],
+   "selfCheck": [
+    "ce2-maths-addition-soustraction-q1",
+    "ce2-maths-addition-soustraction-q2",
+    "ce2-maths-addition-soustraction-q3",
+    "ce2-maths-addition-soustraction-q4",
+    "ce2-maths-addition-soustraction-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier la technique de soustraction enseignée au Cameroun (méthode par compensation, comme ici, ou par emprunt) et l'adapter."
+   ],
+   "blocks": [
+    {
+     "type": "heading",
+     "text": "Additionner et soustraire en posant"
+    },
+    {
+     "type": "text",
+     "md": "Quand les nombres sont grands, on **pose** l'opération : on écrit les nombres **l'un sous l'autre**, les unités sous les unités, les dizaines sous les dizaines, etc. On calcule **colonne par colonne**, en commençant par la **droite**."
+    },
+    {
+     "type": "illustration",
+     "caption": "L'addition posée 1 478 + 2 359 = 3 837, avec les retenues.",
+     "alt": "Une addition posée : 1 478 plus 2 359. Les retenues sont écrites en rouge au-dessus. Le résultat est 3 837. À droite, les calculs colonne par colonne.",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 200,
+      "items": [
+       {
+        "t": "text",
+        "x": 75,
+        "y": 22,
+        "text": "1 1 1",
+        "size": 15,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 60,
+        "text": "1  4  7  8",
+        "size": 24,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 95,
+        "text": "+",
+        "size": 26,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 95,
+        "text": "2  3  5  9",
+        "size": 24,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 110,
+        "x2": 270,
+        "y2": 110,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 145,
+        "text": "3  8  3  7",
+        "size": 24,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 430,
+        "y": 40,
+        "text": "unités : 8 + 9 = 17",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 430,
+        "y": 66,
+        "text": "je pose 7, je retiens 1",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 430,
+        "y": 100,
+        "text": "dizaines : 7 + 5 + 1 = 13",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 430,
+        "y": 126,
+        "text": "je pose 3, je retiens 1",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 430,
+        "y": 160,
+        "text": "centaines : 4 + 3 + 1 = 8",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 430,
+        "y": 186,
+        "text": "milliers : 1 + 2 = 3",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Addition posée",
+     "md": "1. J'aligne les chiffres (unités sous unités).\n2. J'additionne les unités. Si le résultat est 10 ou plus, **j'écris l'unité** et **je retiens la dizaine**.\n3. Je continue avec les dizaines (en ajoutant la retenue), puis les centaines, puis les milliers."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : une addition posée",
+     "statement": "Calcule 2 345 + 1 432.",
+     "steps": [
+      {
+       "md": "Unités : 5 + 2 = 7. Dizaines : 4 + 3 = 7."
+      },
+      {
+       "md": "Centaines : 3 + 4 = 7. Milliers : 2 + 1 = 3."
+      }
+     ],
+     "answer": "**2 345 + 1 432 = 3 777**"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Soustraction posée",
+     "md": "On calcule aussi **colonne par colonne**, de droite à gauche. Si le chiffre du haut est **plus petit** que celui du bas, j'**ajoute 10** en haut et j'**ajoute 1** au chiffre du bas dans la colonne suivante (à gauche).\n\nOn vérifie avec une **addition** : si 5 204 − 2 637 = 2 567, alors 2 567 + 2 637 = 5 204."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : une soustraction avec retenues",
+     "statement": "Calcule 5 204 − 2 637.",
+     "steps": [
+      {
+       "md": "Unités : 4 < 7. Je prends 14 − 7 = 7 et j'ajoute 1 en bas aux dizaines (3 devient 4)."
+      },
+      {
+       "md": "Dizaines : 0 < 4. Je prends 10 − 4 = 6 et j'ajoute 1 en bas aux centaines (6 devient 7)."
+      },
+      {
+       "md": "Centaines : 2 < 7. Je prends 12 − 7 = 5 et j'ajoute 1 en bas aux milliers (2 devient 3). Milliers : 5 − 3 = 2."
+      }
+     ],
+     "answer": "**5 204 − 2 637 = 2 567**. Preuve : 2 567 + 2 637 = 5 204."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- N'oublie pas la **retenue**.\n- Dans une soustraction, on ne retire jamais le petit nombre du grand dans le **mauvais sens**.\n- Avant de calculer, estime le résultat : 3 987 + 2 012 est proche de 4 000 + 2 000 = 6 000."
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-addition-soustraction-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-addition-soustraction-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-addition-soustraction-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-addition-soustraction-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-addition-soustraction-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-addition-soustraction-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Pour contrôler, calcule d'abord un ordre de grandeur en arrondissant aux milliers."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ce2-maths-multiplication",
+   "title": "La multiplication posée",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CE2 — Mathématiques (MINEDUB) — reconstitué, à vérifier sur le texte officiel — Opérations : multiplication posée par un nombre à un chiffre ; multiplier par 10, 100, 1 000",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Poser une multiplication par un nombre à un chiffre.",
+    "Multiplier par 10, 100 et 1 000.",
+    "Estimer un résultat."
+   ],
+   "prerequisites": [
+    "ce2-maths-addition-soustraction"
+   ],
+   "exercises": [
+    "ce2-maths-multiplication-01",
+    "ce2-maths-multiplication-02",
+    "ce2-maths-multiplication-03",
+    "ce2-maths-multiplication-04",
+    "ce2-maths-multiplication-05",
+    "ce2-maths-multiplication-06"
+   ],
+   "selfCheck": [
+    "ce2-maths-multiplication-q1",
+    "ce2-maths-multiplication-q2",
+    "ce2-maths-multiplication-q3",
+    "ce2-maths-multiplication-q4",
+    "ce2-maths-multiplication-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier si la multiplication par un nombre à deux chiffres est exigée au CE2 : elle n'est pas traitée dans cette fiche (à ajouter si nécessaire)."
+   ],
+   "blocks": [
+    {
+     "type": "heading",
+     "text": "La multiplication posée"
+    },
+    {
+     "type": "text",
+     "md": "Multiplier, c'est **additionner plusieurs fois le même nombre** : 4 × 3 = 3 + 3 + 3 + 3. Pour les grands nombres, on pose la multiplication."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Multiplier par un nombre à un chiffre",
+     "md": "1. J'écris le grand nombre, puis le petit nombre en dessous, à droite.\n2. Je multiplie **chaque chiffre** par le petit nombre, en commençant par les **unités**.\n3. Si le résultat dépasse 9, j'écris le chiffre des unités et **je retiens** les dizaines pour la colonne suivante."
+    },
+    {
+     "type": "illustration",
+     "caption": "La multiplication posée 342 × 4 = 1 368.",
+     "alt": "La multiplication posée de 342 par 4 avec une retenue en rouge. À droite, les calculs de chaque colonne. Le résultat est 1 368.",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 190,
+      "items": [
+       {
+        "t": "text",
+        "x": 60,
+        "y": 28,
+        "text": "1 1",
+        "size": 15,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 60,
+        "text": "3  4  2",
+        "size": 24,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 95,
+        "text": "×",
+        "size": 26,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 95,
+        "text": "4",
+        "size": 24,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 110,
+        "x2": 270,
+        "y2": 110,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 145,
+        "text": "1  3  6  8",
+        "size": 24,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 430,
+        "y": 40,
+        "text": "4 × 2 = 8",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 430,
+        "y": 70,
+        "text": "4 × 4 = 16 : je pose 6, je retiens 1",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 430,
+        "y": 100,
+        "text": "4 × 3 = 12, plus 1 = 13",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 430,
+        "y": 130,
+        "text": "je pose 13",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 430,
+        "y": 170,
+        "text": "342 × 4 = 1 368",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : 342 × 4",
+     "statement": "Calcule 342 × 4.",
+     "steps": [
+      {
+       "md": "Unités : 4 × 2 = 8. Dizaines : 4 × 4 = 16 : je pose 6 et je retiens 1."
+      },
+      {
+       "md": "Centaines : 4 × 3 = 12, plus la retenue 1 = 13. Je pose 13."
+      }
+     ],
+     "answer": "**342 × 4 = 1 368**"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Multiplier par 10, 100, 1 000",
+     "md": "- × 10 : j'ajoute **un zéro** à droite. 36 × 10 = 360.\n- × 100 : j'ajoute **deux zéros**. 25 × 100 = 2 500.\n- × 1 000 : j'ajoute **trois zéros**. 7 × 1 000 = 7 000.\n\nLe double d'un nombre, c'est ce nombre × 2 ; le triple, c'est × 3."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : ordre de grandeur",
+     "statement": "Avant de calculer 463 × 5, trouve un ordre de grandeur.",
+     "steps": [
+      {
+       "md": "463 est proche de 500. 500 × 5 = 2 500."
+      },
+      {
+       "md": "Je calcule : 3 × 5 = 15 (je pose 5, je retiens 1) ; 6 × 5 = 30, plus 1 = 31 (je pose 1, je retiens 3) ; 4 × 5 = 20, plus 3 = 23."
+      }
+     ],
+     "answer": "**463 × 5 = 2 315** (proche de 2 500 : c'est vraisemblable)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- N'oublie pas d'**ajouter la retenue** après avoir multiplié.\n- Dans 40 × 3, on calcule 4 × 3 = 12 puis on ajoute le zéro : **120**.\n- Ne confonds pas × 10 (1 zéro) et × 100 (2 zéros)."
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-multiplication-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-multiplication-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-multiplication-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-multiplication-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-multiplication-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-maths-multiplication-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Pour multiplier par 20, tu peux multiplier par 2 puis par 10."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ce2-maths-addition-soustraction-01",
+   "chapter": "ce2-maths-operations",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-addition-soustraction",
+   "prompt": "Calcule : 2 345 + 1 432.",
+   "answer": 3777,
+   "tolerance": 0,
+   "explanation": "7 unités, 7 dizaines, 7 centaines, 3 milliers : **3 777**.",
+   "method": "Poser, additionner colonne par colonne.",
+   "mistakes": [
+    "Oublier d'aligner les colonnes."
+   ],
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-addition-soustraction-02",
+   "chapter": "ce2-maths-operations",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-addition-soustraction",
+   "prompt": "Calcule : 7 890 − 3 560.",
+   "answer": 4330,
+   "tolerance": 0,
+   "explanation": "Colonne par colonne : 0 − 0 = 0 ; 9 − 6 = 3 ; 8 − 5 = 3 ; 7 − 3 = 4 : **4 330**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-addition-soustraction-03",
+   "chapter": "ce2-maths-operations",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-addition-soustraction",
+   "prompt": "Vrai ou faux : 3 456 + 2 789 = 6 245.",
+   "answer": true,
+   "explanation": "Unités : 6 + 9 = 15 (je pose 5, retiens 1). Dizaines : 5 + 8 + 1 = 14 (4, retiens 1). Centaines : 4 + 7 + 1 = 12 (2, retiens 1). Milliers : 3 + 2 + 1 = 6. Résultat **6 245**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-addition-soustraction-04",
+   "chapter": "ce2-maths-operations",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "ce2-maths-addition-soustraction",
+   "prompt": "Calcule : 4 206 − 1 879.",
+   "answer": 2327,
+   "tolerance": 0,
+   "explanation": "Unités : 16 − 9 = 7 (le 7 du bas devient 8). Dizaines : 10 − 8 = 2 (le 8 du bas devient 9). Centaines : 12 − 9 = 3 (le 1 du bas devient 2). Milliers : 4 − 2 = 2. Résultat **2 327**. Preuve : 2 327 + 1 879 = 4 206.",
+   "mistakes": [
+    "Oublier d'ajouter 1 au chiffre du bas."
+   ],
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-addition-soustraction-05",
+   "chapter": "ce2-maths-operations",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "ce2-maths-addition-soustraction",
+   "prompt": "Pose et calcule : 3 758 + 2 674 + 1 205.",
+   "model": "3 758 + 2 674 + 1 205 = 7 637",
+   "rubric": [
+    "Les nombres sont bien alignés.",
+    "Les retenues sont correctes.",
+    "Résultat : 7 637."
+   ],
+   "explanation": "On additionne les trois nombres colonne par colonne : **7 637**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-addition-soustraction-06",
+   "chapter": "ce2-maths-operations",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "ce2-maths-addition-soustraction",
+   "prompt": "Un camion transporte 2 450 sacs de maïs le lundi et 1 875 sacs le mardi. L'objectif de la semaine est 5 000 sacs.",
+   "method": "Chercher d'abord le total, puis la différence.",
+   "mistakes": [
+    "Soustraire dans le mauvais ordre."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "kind": "numeric",
+     "difficulty": 2,
+     "prompt": "Combien de sacs le camion a-t-il transportés en tout ?",
+     "answer": 4325,
+     "tolerance": 0,
+     "explanation": "2 450 + 1 875 = **4 325**.",
+     "points": 1,
+     "id": "ce2-maths-addition-soustraction-06-a"
+    },
+    {
+     "kind": "numeric",
+     "difficulty": 2,
+     "prompt": "Combien de sacs manque-t-il pour atteindre l'objectif ?",
+     "answer": 675,
+     "tolerance": 0,
+     "explanation": "5 000 − 4 325 = **675**.",
+     "points": 1,
+     "id": "ce2-maths-addition-soustraction-06-b"
+    },
+    {
+     "kind": "truefalse",
+     "difficulty": 1,
+     "prompt": "Vrai ou faux : l'objectif est atteint.",
+     "answer": false,
+     "explanation": "Faux : il manque 675 sacs.",
+     "points": 1,
+     "id": "ce2-maths-addition-soustraction-06-c"
+    }
+   ]
+  },
+  {
+   "id": "ce2-maths-addition-soustraction-q1",
+   "chapter": "ce2-maths-operations",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-addition-soustraction",
+   "prompt": "Quel est le résultat de 2 500 + 1 300 ?",
+   "choices": [
+    "3 700",
+    "3 800",
+    "3 900",
+    "2 800"
+   ],
+   "answer": 1,
+   "explanation": "25 centaines + 13 centaines = 38 centaines = 3 800.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-addition-soustraction-q2",
+   "chapter": "ce2-maths-operations",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-addition-soustraction",
+   "prompt": "Quel est le résultat de 6 000 − 2 500 ?",
+   "choices": [
+    "4 500",
+    "3 000",
+    "3 500",
+    "4 000"
+   ],
+   "answer": 2,
+   "explanation": "6 000 − 2 000 = 4 000 ; 4 000 − 500 = 3 500.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-addition-soustraction-q3",
+   "chapter": "ce2-maths-operations",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-addition-soustraction",
+   "prompt": "Pour vérifier une soustraction, je fais…",
+   "choices": [
+    "une division",
+    "une multiplication",
+    "rien",
+    "une addition"
+   ],
+   "answer": 3,
+   "explanation": "Si a − b = c, alors c + b = a.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-addition-soustraction-q4",
+   "chapter": "ce2-maths-operations",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-addition-soustraction",
+   "prompt": "Quel est l'ordre de grandeur de 3 987 + 2 012 ?",
+   "choices": [
+    "environ 6 000",
+    "environ 5 000",
+    "environ 1 000",
+    "environ 60 000"
+   ],
+   "answer": 0,
+   "explanation": "3 987 ≈ 4 000 et 2 012 ≈ 2 000, donc environ 6 000.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-addition-soustraction-q5",
+   "chapter": "ce2-maths-operations",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-addition-soustraction",
+   "prompt": "En posant une addition, j'aligne…",
+   "choices": [
+    "les milliers sous les unités",
+    "les unités sous les unités",
+    "les chiffres au hasard",
+    "les centaines sous les dizaines"
+   ],
+   "answer": 1,
+   "explanation": "Chaque colonne a la même valeur.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-multiplication-01",
+   "chapter": "ce2-maths-operations",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-multiplication",
+   "prompt": "Calcule : 8 × 7.",
+   "answer": 56,
+   "tolerance": 0,
+   "explanation": "8 × 7 = **56** (table de 7).",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-multiplication-02",
+   "chapter": "ce2-maths-operations",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-multiplication",
+   "prompt": "Vrai ou faux : 6 × 9 = 54.",
+   "answer": true,
+   "explanation": "Vrai : 6 × 9 = 54 (table de 9).",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-multiplication-03",
+   "chapter": "ce2-maths-operations",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-multiplication",
+   "prompt": "Calcule : 24 × 3.",
+   "answer": 72,
+   "tolerance": 0,
+   "explanation": "4 × 3 = 12 (je pose 2, retiens 1) ; 2 × 3 = 6, plus 1 = 7. **72**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-multiplication-04",
+   "chapter": "ce2-maths-operations",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "ce2-maths-multiplication",
+   "prompt": "Calcule : 463 × 5.",
+   "answer": 2315,
+   "tolerance": 0,
+   "explanation": "3 × 5 = 15 ; 6 × 5 = 30 + 1 = 31 ; 4 × 5 = 20 + 3 = 23. **2 315**.",
+   "mistakes": [
+    "Oublier une retenue."
+   ],
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-multiplication-05",
+   "chapter": "ce2-maths-operations",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "ce2-maths-multiplication",
+   "prompt": "Pose et calcule : 1 205 × 6.",
+   "model": "1 205 × 6 = 7 230",
+   "rubric": [
+    "La multiplication est bien posée.",
+    "Les retenues sont correctes.",
+    "Résultat : 7 230."
+   ],
+   "explanation": "5 × 6 = 30 ; 0 × 6 = 0, plus 3 = 3 ; 2 × 6 = 12 ; 1 × 6 = 6, plus 1 = 7. Résultat : **7 230**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-multiplication-06",
+   "chapter": "ce2-maths-operations",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "ce2-maths-multiplication",
+   "prompt": "Mme Fotso achète 6 caisses de 24 bouteilles d'eau. Elle vend ensuite 58 bouteilles.",
+   "method": "Une opération par étape.",
+   "mistakes": [
+    "Oublier de soustraire les bouteilles vendues."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "kind": "numeric",
+     "difficulty": 2,
+     "prompt": "Combien de bouteilles a-t-elle achetées ?",
+     "answer": 144,
+     "tolerance": 0,
+     "explanation": "6 × 24 = **144**.",
+     "points": 1,
+     "id": "ce2-maths-multiplication-06-a"
+    },
+    {
+     "kind": "numeric",
+     "difficulty": 2,
+     "prompt": "Combien de bouteilles lui reste-t-il après la vente ?",
+     "answer": 86,
+     "tolerance": 0,
+     "explanation": "144 − 58 = **86**.",
+     "points": 1,
+     "id": "ce2-maths-multiplication-06-b"
+    },
+    {
+     "kind": "truefalse",
+     "difficulty": 1,
+     "prompt": "Vrai ou faux : elle a plus de 100 bouteilles à la fin.",
+     "answer": false,
+     "explanation": "Faux : il lui en reste 86.",
+     "points": 1,
+     "id": "ce2-maths-multiplication-06-c"
+    }
+   ]
+  },
+  {
+   "id": "ce2-maths-multiplication-q1",
+   "chapter": "ce2-maths-operations",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-multiplication",
+   "prompt": "Combien font 7 × 8 ?",
+   "choices": [
+    "54",
+    "63",
+    "56",
+    "48"
+   ],
+   "answer": 2,
+   "explanation": "7 × 8 = 56.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-multiplication-q2",
+   "chapter": "ce2-maths-operations",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-multiplication",
+   "prompt": "Combien font 35 × 10 ?",
+   "choices": [
+    "3 500",
+    "305",
+    "45",
+    "350"
+   ],
+   "answer": 3,
+   "explanation": "× 10 : on ajoute un zéro.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-multiplication-q3",
+   "chapter": "ce2-maths-operations",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-multiplication",
+   "prompt": "Combien font 12 × 100 ?",
+   "choices": [
+    "1 200",
+    "120",
+    "12 000",
+    "1 020"
+   ],
+   "answer": 0,
+   "explanation": "× 100 : deux zéros.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-multiplication-q4",
+   "chapter": "ce2-maths-operations",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-multiplication",
+   "prompt": "Quel est le double de 125 ?",
+   "choices": [
+    "225",
+    "250",
+    "130",
+    "500"
+   ],
+   "answer": 1,
+   "explanation": "125 × 2 = 250.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-maths-multiplication-q5",
+   "chapter": "ce2-maths-operations",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-maths-multiplication",
+   "prompt": "Combien font 3 × 1 000 ?",
+   "choices": [
+    "300",
+    "30 000",
+    "3 000",
+    "3 100"
+   ],
+   "answer": 2,
+   "explanation": "× 1 000 : trois zéros.",
+   "source": "Exercice original"
+  }
+ ]
+}

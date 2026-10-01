@@ -1,0 +1,527 @@
+{
+ "chapter": "ce1-sciences-c2-alimentation",
+ "lessons": [
+  {
+   "id": "ce1-sciences-alimentation",
+   "title": "Bien manger",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CE1 — L'alimentation : origine des aliments, repas équilibré, boire de l'eau (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Distinguer des aliments d'origine animale et végétale.",
+    "Dire pourquoi il faut manger varié.",
+    "Composer un repas équilibré avec des aliments de chez nous."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "ce1-sciences-alimentation-01",
+    "ce1-sciences-alimentation-02",
+    "ce1-sciences-alimentation-03",
+    "ce1-sciences-alimentation-04",
+    "ce1-sciences-alimentation-05",
+    "ce1-sciences-alimentation-06"
+   ],
+   "selfCheck": [
+    "ce1-sciences-alimentation-q1",
+    "ce1-sciences-alimentation-q2",
+    "ce1-sciences-alimentation-q3",
+    "ce1-sciences-alimentation-q4",
+    "ce1-sciences-alimentation-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier la classification des aliments (énergie / croissance / protection) : certains programmes ne l'utilisent pas au CE1.",
+    "Vérifier que les aliments cités sont bien familiers des élèves de la région."
+   ],
+   "blocks": [
+    {
+     "type": "audio",
+     "lang": "fr-FR",
+     "text": "Pour grandir et avoir de la force, mon corps a besoin de manger."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "D'où viennent les aliments ?",
+     "md": "Certains aliments viennent des **plantes** : le manioc, le plantain, la mangue, l'arachide, les haricots, la tomate.\n\nD'autres viennent des **animaux** : la viande, le poisson, les œufs, le lait.\n\nOn les appelle aliments d'origine **végétale** et d'origine **animale**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : l'origine d'un aliment",
+     "statement": "D'où vient un œuf de poule ?",
+     "steps": [
+      {
+       "md": "La poule est un animal."
+      },
+      {
+       "md": "L'œuf est pondu par la poule."
+      }
+     ],
+     "answer": "**L'œuf est d'origine animale.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : l'origine d'un aliment",
+     "statement": "D'où vient le plantain que Marie fait frire ?",
+     "steps": [
+      {
+       "md": "Le plantain pousse sur le bananier, une plante."
+      },
+      {
+       "md": "Donc c'est un aliment venant d'une plante."
+      }
+     ],
+     "answer": "**Le plantain est d'origine végétale.**"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Manger varié",
+     "md": "Aucun aliment ne donne tout à lui seul. Il faut **manger varié**.\n\n- Les aliments comme le manioc, le riz, le mil donnent de l'**énergie** pour jouer et travailler.\n- Le poisson, les œufs, les haricots aident à **grandir**.\n- Les fruits et les légumes **protègent** le corps."
+    },
+    {
+     "type": "illustration",
+     "caption": "Trois familles d'aliments.",
+     "alt": "Trois cases colorées : la première pour les aliments qui donnent de l'énergie, la deuxième pour ceux qui aident à grandir, la troisième pour ceux qui protègent le corps, avec des exemples de chez nous.",
+     "figure": {
+      "kind": "shapes",
+      "w": 540,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 20,
+        "w": 165,
+        "h": 130,
+        "fill": "lightyellow",
+        "stroke": "orange",
+        "radius": 8
+       },
+       {
+        "t": "rect",
+        "x": 187,
+        "y": 20,
+        "w": 165,
+        "h": 130,
+        "fill": "lightorange",
+        "stroke": "red",
+        "radius": 8
+       },
+       {
+        "t": "rect",
+        "x": 364,
+        "y": 20,
+        "w": 165,
+        "h": 130,
+        "fill": "lightgreen",
+        "stroke": "green",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 92,
+        "y": 45,
+        "text": "Donnent de",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 92,
+        "y": 64,
+        "text": "l'énergie",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 92,
+        "y": 95,
+        "text": "manioc, riz,",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 92,
+        "y": 115,
+        "text": "plantain, mil",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 269,
+        "y": 45,
+        "text": "Aident à",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 269,
+        "y": 64,
+        "text": "grandir",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 269,
+        "y": 95,
+        "text": "poisson, œufs,",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 269,
+        "y": 115,
+        "text": "haricots, viande",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 446,
+        "y": 45,
+        "text": "Protègent",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 446,
+        "y": 64,
+        "text": "le corps",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 446,
+        "y": 95,
+        "text": "mangue, orange,",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 446,
+        "y": 115,
+        "text": "tomate, légumes",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 180,
+        "text": "Un bon repas contient un peu de chaque.",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Un bon repas",
+     "md": "Pour un repas équilibré, je pense à trois choses :\n\n1. un aliment qui donne de l'énergie (riz, manioc…) ;\n2. un aliment qui aide à grandir (poisson, haricots…) ;\n3. un fruit ou un légume.\n\nEt je bois de l'**eau propre**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- Trop de sucre (bonbons, boissons sucrées) abîme les dents.\n- On lave les fruits et les légumes avant de les manger.\n- On ne mange pas un aliment périmé ou qui sent mauvais.\n- On boit de l'eau propre, pas l'eau d'une mare."
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-sciences-alimentation-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-sciences-alimentation-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-sciences-alimentation-03"
+    },
+    {
+     "type": "more",
+     "items": [
+      "On prend en général trois repas par jour : le petit déjeuner, le déjeuner et le dîner.",
+      "L'arachide est une graine qui donne de la pâte d'arachide, très utilisée dans la cuisine."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ce1-sciences-alimentation-01",
+   "chapter": "ce1-sciences-c2-alimentation",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quel aliment est d'origine animale ?",
+   "choices": [
+    "le poisson",
+    "le manioc",
+    "la mangue",
+    "le plantain"
+   ],
+   "answer": 0,
+   "explanation": "Le **poisson** vient d'un animal. Le manioc, la mangue et le plantain viennent de plantes.",
+   "lesson": "ce1-sciences-alimentation",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-alimentation-02",
+   "chapter": "ce1-sciences-c2-alimentation",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Vrai ou faux : la tomate est d'origine animale.",
+   "answer": false,
+   "explanation": "Faux : la tomate pousse sur une **plante**. C'est un aliment d'origine végétale.",
+   "lesson": "ce1-sciences-alimentation",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-alimentation-03",
+   "chapter": "ce1-sciences-c2-alimentation",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "prompt": "Associe chaque aliment à ce qui le donne.",
+   "pairs": [
+    [
+     "le lait",
+     "la vache"
+    ],
+    [
+     "l'œuf",
+     "la poule"
+    ],
+    [
+     "l'arachide",
+     "la plante d'arachide"
+    ],
+    [
+     "la mangue",
+     "le manguier"
+    ]
+   ],
+   "explanation": "Le lait vient de la vache, l'œuf de la poule (animaux) ; l'arachide et la mangue viennent de plantes.",
+   "lesson": "ce1-sciences-alimentation",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-alimentation-04",
+   "chapter": "ce1-sciences-c2-alimentation",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "Pourquoi faut-il manger varié ?",
+   "choices": [
+    "parce que c'est la mode",
+    "pour manger très vite",
+    "pour ne jamais boire",
+    "parce qu'aucun aliment ne donne tout au corps"
+   ],
+   "answer": 3,
+   "explanation": "Chaque aliment donne quelque chose de différent au corps : il faut donc **varier**.",
+   "lesson": "ce1-sciences-alimentation",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-alimentation-05",
+   "chapter": "ce1-sciences-c2-alimentation",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "prompt": "Compose un repas équilibré avec des aliments de chez toi : écris au moins trois aliments.",
+   "model": "Du riz, du poisson et une orange. Je bois de l'eau propre.",
+   "rubric": [
+    "Un aliment qui donne de l'énergie.",
+    "Un aliment qui aide à grandir.",
+    "Un fruit ou un légume."
+   ],
+   "explanation": "Un bon repas contient un aliment d'énergie, un aliment pour grandir et un fruit ou légume.",
+   "lesson": "ce1-sciences-alimentation",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-alimentation-06",
+   "chapter": "ce1-sciences-c2-alimentation",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Ibrahim mange du manioc, du poisson grillé et une mangue.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Quel aliment lui donne de l'énergie ?",
+     "choices": [
+      "le poisson",
+      "le manioc",
+      "la mangue",
+      "l'eau"
+     ],
+     "answer": 1,
+     "explanation": "Le **manioc** donne de l'énergie.",
+     "id": "ce1-sciences-alimentation-06-a"
+    },
+    {
+     "kind": "truefalse",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Le poisson est un aliment d'origine végétale.",
+     "answer": false,
+     "explanation": "Faux : le poisson est un **animal**.",
+     "id": "ce1-sciences-alimentation-06-b"
+    },
+    {
+     "kind": "truefalse",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Son repas contient un fruit.",
+     "answer": true,
+     "explanation": "Vrai : la mangue est un **fruit**.",
+     "id": "ce1-sciences-alimentation-06-c"
+    }
+   ],
+   "lesson": "ce1-sciences-alimentation",
+   "points": 3,
+   "explanation": "Corrigé détaillé question par question ci-dessous.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-alimentation-q1",
+   "chapter": "ce1-sciences-c2-alimentation",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "D'où vient le lait de vache ?",
+   "choices": [
+    "d'une plante",
+    "d'un animal",
+    "d'une pierre",
+    "du sable"
+   ],
+   "answer": 1,
+   "explanation": "Le lait vient de la vache : il est d'origine **animale**.",
+   "lesson": "ce1-sciences-alimentation",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-alimentation-q2",
+   "chapter": "ce1-sciences-c2-alimentation",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quel aliment est d'origine végétale ?",
+   "choices": [
+    "la viande",
+    "l'œuf",
+    "le lait",
+    "l'arachide"
+   ],
+   "answer": 3,
+   "explanation": "L'**arachide** est une graine de plante.",
+   "lesson": "ce1-sciences-alimentation",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-alimentation-q3",
+   "chapter": "ce1-sciences-c2-alimentation",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Que faut-il faire avant de manger une mangue ?",
+   "choices": [
+    "la laver",
+    "la jeter",
+    "la frapper",
+    "l'enterrer"
+   ],
+   "answer": 0,
+   "explanation": "On **lave** les fruits avant de les manger.",
+   "lesson": "ce1-sciences-alimentation",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-alimentation-q4",
+   "chapter": "ce1-sciences-c2-alimentation",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quel aliment aide à grandir ?",
+   "choices": [
+    "les bonbons",
+    "le sel seul",
+    "les haricots",
+    "le sirop"
+   ],
+   "answer": 2,
+   "explanation": "Les **haricots** (comme le poisson et les œufs) aident le corps à grandir.",
+   "lesson": "ce1-sciences-alimentation",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-alimentation-q5",
+   "chapter": "ce1-sciences-c2-alimentation",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Que doit-on boire chaque jour ?",
+   "choices": [
+    "de l'eau de la flaque",
+    "uniquement du sirop",
+    "de l'eau propre",
+    "rien du tout"
+   ],
+   "answer": 2,
+   "explanation": "On doit boire de l'**eau propre** chaque jour.",
+   "lesson": "ce1-sciences-alimentation",
+   "source": "Exercice original"
+  }
+ ]
+}

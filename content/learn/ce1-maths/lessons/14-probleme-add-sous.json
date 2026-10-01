@@ -1,0 +1,387 @@
+{
+ "chapter": "ce1-maths-problemes",
+ "lessons": [
+  {
+   "id": "ce1-maths-probleme-add-sous",
+   "title": "Résoudre un problème : addition et soustraction",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CE1 — Programme de mathématiques du cycle 2, MINEDUB (reconstitué, à vérifier sur le texte officiel) — résolution de problèmes : problèmes à une ou deux étapes (addition, soustraction)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Lire un énoncé et trouver la question.",
+    "Choisir entre addition et soustraction.",
+    "Rédiger une phrase-réponse."
+   ],
+   "prerequisites": [
+    "ce1-maths-addition-posee",
+    "ce1-maths-soustraction-posee"
+   ],
+   "exercises": [
+    "ce1-maths-probleme-add-sous-01",
+    "ce1-maths-probleme-add-sous-02",
+    "ce1-maths-probleme-add-sous-03",
+    "ce1-maths-probleme-add-sous-04",
+    "ce1-maths-probleme-add-sous-05",
+    "ce1-maths-probleme-add-sous-06"
+   ],
+   "selfCheck": [
+    "ce1-maths-probleme-add-sous-q1",
+    "ce1-maths-probleme-add-sous-q2",
+    "ce1-maths-probleme-add-sous-q3",
+    "ce1-maths-probleme-add-sous-q4",
+    "ce1-maths-probleme-add-sous-q5"
+   ],
+   "reviewNotes": [
+    "Problèmes originaux, noms de lieux camerounais ; vérifier que les problèmes à deux étapes (appro.) sont attendus au CE1."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Les 4 étapes d'un problème",
+     "md": "1. Je **lis** l'énoncé deux fois.\n2. Je cherche la **question** et les **données** (les nombres utiles).\n3. Je choisis l'**opération** et je calcule.\n4. J'écris une **phrase-réponse** avec l'unité."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Quelle opération ?",
+     "md": "- On **réunit**, on **ajoute**, on cherche le **total** → **addition**.\n- On **enlève**, on **compare**, on cherche ce qui **reste** ou la **différence** → **soustraction**."
+    },
+    {
+     "type": "illustration",
+     "caption": "Un problème en schéma : 125 mangues, puis 48 de plus.",
+     "alt": "Une barre bleue pour 125 mangues et une barre orange pour 48 mangues, mises bout à bout, avec un point d'interrogation pour le total.",
+     "figure": {
+      "kind": "shapes",
+      "w": 520,
+      "h": 137,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 30,
+        "w": 250,
+        "h": 45,
+        "stroke": "blue",
+        "fill": "lightblue",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 145,
+        "y": 60,
+        "text": "125",
+        "size": 22,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 270,
+        "y": 30,
+        "w": 100,
+        "h": 45,
+        "stroke": "orange",
+        "fill": "lightorange",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 320,
+        "y": 60,
+        "text": "48",
+        "size": 22,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 100,
+        "x2": 370,
+        "y2": 100,
+        "color": "grey",
+        "width": 2,
+        "dash": false,
+        "arrow": "both"
+       },
+       {
+        "t": "text",
+        "x": 195,
+        "y": 122,
+        "text": "?",
+        "size": 22,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : problème d'addition",
+     "statement": "Fotso a 125 mangues. Il en reçoit 48 de plus. Combien en a-t-il maintenant ?",
+     "steps": [
+      {
+       "md": "Je cherche le **total** : addition."
+      },
+      {
+       "md": "125 + 48 = 173."
+      }
+     ],
+     "answer": "**Il a 173 mangues.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : problème de soustraction",
+     "statement": "Amina a 250 FCFA. Elle achète un beignet à 75 FCFA. Combien lui reste-t-il ?",
+     "steps": [
+      {
+       "md": "Il s'agit de ce qui **reste** : soustraction."
+      },
+      {
+       "md": "250 − 75 = 175."
+      }
+     ],
+     "answer": "**Il lui reste 175 FCFA.**"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-maths-probleme-add-sous-01"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- Ne cherche pas l'opération avec un seul mot : relis toute l'histoire.\n- Vérifie ta réponse : a-t-elle du sens ? (un reste est plus petit que le départ)."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Pour t'aider, tu peux faire un petit dessin ou un schéma avec des barres."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Ngono a 34 billes. Elle en gagne 18. Combien en a-t-elle ?",
+   "answer": 52,
+   "tolerance": 0,
+   "explanation": "34 + 18 = 52.",
+   "id": "ce1-maths-probleme-add-sous-01",
+   "chapter": "ce1-maths-problemes",
+   "tier": "application",
+   "lesson": "ce1-maths-probleme-add-sous",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Il y a 58 élèves. 23 sont des garçons. Combien de filles ?",
+   "answer": 35,
+   "tolerance": 0,
+   "explanation": "58 − 23 = 35.",
+   "id": "ce1-maths-probleme-add-sous-02",
+   "chapter": "ce1-maths-problemes",
+   "tier": "application",
+   "lesson": "ce1-maths-probleme-add-sous",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Pour trouver combien il reste, on fait…",
+   "choices": [
+    "une multiplication",
+    "rien",
+    "une soustraction",
+    "une addition"
+   ],
+   "answer": 2,
+   "explanation": "Reste = soustraction.",
+   "id": "ce1-maths-probleme-add-sous-03",
+   "chapter": "ce1-maths-problemes",
+   "tier": "application",
+   "lesson": "ce1-maths-probleme-add-sous",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 3,
+   "points": 1,
+   "prompt": "Dans un car, il y a 47 passagers. À Bafoussam, 19 descendent et 12 montent. Combien de passagers maintenant ?",
+   "answer": 40,
+   "tolerance": 0,
+   "explanation": "47 − 19 = 28, puis 28 + 12 = 40.",
+   "id": "ce1-maths-probleme-add-sous-04",
+   "chapter": "ce1-maths-problemes",
+   "tier": "approfondissement",
+   "lesson": "ce1-maths-probleme-add-sous",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "Paul a 120 FCFA de plus que Marie. Marie a 380 FCFA. Combien Paul a-t-il ?",
+   "answer": 500,
+   "tolerance": 0,
+   "explanation": "380 + 120 = 500.",
+   "unit": "FCFA",
+   "id": "ce1-maths-probleme-add-sous-05",
+   "chapter": "ce1-maths-problemes",
+   "tier": "approfondissement",
+   "lesson": "ce1-maths-probleme-add-sous",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "problem",
+   "difficulty": 3,
+   "prompt": "Au marché de Bamenda, une commerçante a 200 plantains le matin. Elle en vend 85. L'après-midi, elle en reçoit 60 de plus.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "difficulty": 1,
+     "points": 2,
+     "prompt": "Combien lui reste-t-il de plantains après la vente du matin ?",
+     "answer": 115,
+     "tolerance": 0,
+     "explanation": "200 − 85 = 115.",
+     "id": "ce1-maths-probleme-add-sous-06-a"
+    },
+    {
+     "kind": "numeric",
+     "difficulty": 1,
+     "points": 2,
+     "prompt": "Combien en a-t-elle après l'arrivée de l'après-midi ?",
+     "answer": 175,
+     "tolerance": 0,
+     "explanation": "115 + 60 = 175.",
+     "id": "ce1-maths-probleme-add-sous-06-b"
+    },
+    {
+     "kind": "truefalse",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Vrai ou faux : elle a plus de plantains qu'au début.",
+     "answer": false,
+     "explanation": "175 < 200.",
+     "id": "ce1-maths-probleme-add-sous-06-c"
+    }
+   ],
+   "id": "ce1-maths-probleme-add-sous-06",
+   "chapter": "ce1-maths-problemes",
+   "tier": "examen",
+   "lesson": "ce1-maths-probleme-add-sous",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "La première étape d'un problème est de…",
+   "choices": [
+    "effacer les nombres",
+    "calculer sans lire",
+    "lire l'énoncé",
+    "écrire la réponse"
+   ],
+   "answer": 2,
+   "explanation": "On lit d'abord.",
+   "id": "ce1-maths-probleme-add-sous-q1",
+   "chapter": "ce1-maths-problemes",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-probleme-add-sous",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "« Total » annonce souvent…",
+   "choices": [
+    "une division",
+    "une soustraction",
+    "un dessin",
+    "une addition"
+   ],
+   "answer": 3,
+   "explanation": "Total : on ajoute.",
+   "id": "ce1-maths-probleme-add-sous-q2",
+   "chapter": "ce1-maths-problemes",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-probleme-add-sous",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "« Il reste » annonce souvent…",
+   "choices": [
+    "une multiplication",
+    "une addition",
+    "une soustraction",
+    "un partage"
+   ],
+   "answer": 2,
+   "explanation": "On enlève.",
+   "id": "ce1-maths-probleme-add-sous-q3",
+   "chapter": "ce1-maths-problemes",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-probleme-add-sous",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "À la fin, j'écris…",
+   "choices": [
+    "une phrase-réponse",
+    "rien",
+    "un dessin",
+    "seulement un nombre sans unité"
+   ],
+   "answer": 0,
+   "explanation": "Phrase-réponse avec l'unité.",
+   "id": "ce1-maths-probleme-add-sous-q4",
+   "chapter": "ce1-maths-problemes",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-probleme-add-sous",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "34 + 18 =",
+   "choices": [
+    "16",
+    "62",
+    "52",
+    "42"
+   ],
+   "answer": 2,
+   "explanation": "34 + 18 = 52.",
+   "id": "ce1-maths-probleme-add-sous-q5",
+   "chapter": "ce1-maths-problemes",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-probleme-add-sous",
+   "source": "Exercice original, niveau CE1"
+  }
+ ]
+}

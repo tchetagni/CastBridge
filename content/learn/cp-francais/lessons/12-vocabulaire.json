@@ -1,0 +1,532 @@
+{
+ "chapter": "cp-francais-vocabulaire",
+ "lessons": [
+  {
+   "id": "cp-francais-vocabulaire",
+   "title": "Classer des mots et trouver les contraires",
+   "minutes": 12,
+   "readAloud": true,
+   "programRef": "CP — Vocabulaire : classement et contraires (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Ranger des mots par famille (fruits, animaux, objets).",
+    "Trouver le contraire d'un mot.",
+    "Trouver l'intrus dans une liste."
+   ],
+   "prerequisites": [
+    "cp-francais-nom-article"
+   ],
+   "exercises": [
+    "cp-francais-vocabulaire-01",
+    "cp-francais-vocabulaire-02",
+    "cp-francais-vocabulaire-03",
+    "cp-francais-vocabulaire-04",
+    "cp-francais-vocabulaire-05",
+    "cp-francais-vocabulaire-06"
+   ],
+   "selfCheck": [
+    "cp-francais-vocabulaire-q1",
+    "cp-francais-vocabulaire-q2",
+    "cp-francais-vocabulaire-q3",
+    "cp-francais-vocabulaire-q4",
+    "cp-francais-vocabulaire-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier le choix des paires de contraires et que « monter / descendre » est à la portée du CP."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Les mots sont comme des objets : on peut les **ranger**. On peut aussi trouver des mots qui disent **le contraire**."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Classer et contraires",
+     "md": "- **Classer**, c'est mettre ensemble des mots de la même famille : banane, mangue, papaye sont des **fruits**.\n- Le **contraire** d'un mot dit l'opposé : grand ↔ petit."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Quelques contraires",
+     "md": "grand ↔ petit ; chaud ↔ froid ; jour ↔ nuit ; ouvrir ↔ fermer ; monter ↔ descendre ; plein ↔ vide."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 172,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 153,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "blue"
+       },
+       {
+        "t": "text",
+        "x": 87,
+        "y": 38,
+        "text": "fruits",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 163,
+        "y": 10,
+        "w": 153,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "blue"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 38,
+        "text": "animaux",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 317,
+        "y": 10,
+        "w": 153,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "blue"
+       },
+       {
+        "t": "text",
+        "x": 393,
+        "y": 38,
+        "text": "objets",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 48,
+        "w": 153,
+        "h": 38,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 87,
+        "y": 76,
+        "text": "mangue",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 163,
+        "y": 48,
+        "w": 153,
+        "h": 38,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 76,
+        "text": "chèvre",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 317,
+        "y": 48,
+        "w": 153,
+        "h": 38,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 393,
+        "y": 76,
+        "text": "cahier",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 86,
+        "w": 153,
+        "h": 38,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 87,
+        "y": 114,
+        "text": "papaye",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 163,
+        "y": 86,
+        "w": 153,
+        "h": 38,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 114,
+        "text": "poule",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 317,
+        "y": 86,
+        "w": 153,
+        "h": 38,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 393,
+        "y": 114,
+        "text": "crayon",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 124,
+        "w": 153,
+        "h": 38,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 87,
+        "y": 152,
+        "text": "banane",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 163,
+        "y": 124,
+        "w": 153,
+        "h": 38,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 152,
+        "text": "pangolin",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 317,
+        "y": 124,
+        "w": 153,
+        "h": 38,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 393,
+        "y": 152,
+        "text": "table",
+        "size": 17
+       }
+      ]
+     },
+     "caption": "Des mots rangés par famille.",
+     "alt": "Un tableau à trois colonnes : fruits (mangue, papaye, banane), animaux (chèvre, poule, pangolin), objets (cahier, crayon, table)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : l'intrus",
+     "statement": "Quel est l'intrus : mangue, papaye, chèvre, banane ?",
+     "steps": [
+      {
+       "md": "Mangue, papaye et banane sont des fruits."
+      },
+      {
+       "md": "Chèvre est un animal : c'est l'intrus."
+      }
+     ],
+     "answer": "L'intrus est **chèvre**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : le contraire",
+     "statement": "Quel est le contraire de « chaud » ?",
+     "steps": [
+      {
+       "md": "Je pense à une boisson : chaude ou ... ?"
+      },
+      {
+       "md": "Le contraire de chaud est **froid**."
+      }
+     ],
+     "answer": "Le contraire de chaud est **froid**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "Le contraire de « grand » est « petit », mais le contraire de « monter » est « descendre » : le contraire doit être du même genre de mot (un verbe pour un verbe)."
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-vocabulaire-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-vocabulaire-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-vocabulaire-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-vocabulaire-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-vocabulaire-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-vocabulaire-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "matching",
+   "prompt": "Relie chaque mot à son contraire.",
+   "pairs": [
+    [
+     "grand",
+     "petit"
+    ],
+    [
+     "chaud",
+     "froid"
+    ],
+    [
+     "jour",
+     "nuit"
+    ],
+    [
+     "ouvrir",
+     "fermer"
+    ]
+   ],
+   "explanation": "Ce sont des contraires courants.",
+   "id": "cp-francais-vocabulaire-01",
+   "chapter": "cp-francais-vocabulaire",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-francais-vocabulaire",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est l'intrus ? mangue, papaye, chèvre, banane",
+   "choices": [
+    "mangue",
+    "papaye",
+    "banane",
+    "chèvre"
+   ],
+   "answer": 3,
+   "explanation": "Chèvre est un animal, les autres sont des fruits.",
+   "id": "cp-francais-vocabulaire-02",
+   "chapter": "cp-francais-vocabulaire",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-francais-vocabulaire",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le contraire de « plein » ?",
+   "choices": [
+    "lourd",
+    "chaud",
+    "vide",
+    "petit"
+   ],
+   "answer": 2,
+   "explanation": "Plein ↔ vide.",
+   "id": "cp-francais-vocabulaire-03",
+   "chapter": "cp-francais-vocabulaire",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-francais-vocabulaire",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans quelle famille range-t-on « poule » ?",
+   "choices": [
+    "les fruits",
+    "les animaux",
+    "les objets",
+    "les lieux"
+   ],
+   "answer": 1,
+   "explanation": "La poule est un animal.",
+   "id": "cp-francais-vocabulaire-04",
+   "chapter": "cp-francais-vocabulaire",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-francais-vocabulaire",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est l'intrus ? cahier, crayon, table, pangolin",
+   "choices": [
+    "pangolin",
+    "cahier",
+    "crayon",
+    "table"
+   ],
+   "answer": 0,
+   "explanation": "Pangolin est un animal ; les autres sont des objets.",
+   "id": "cp-francais-vocabulaire-05",
+   "chapter": "cp-francais-vocabulaire",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-francais-vocabulaire",
+   "points": 1
+  },
+  {
+   "kind": "open",
+   "prompt": "Écris trois mots qui sont des animaux.",
+   "model": "chèvre, poule, éléphant",
+   "rubric": [
+    "Les trois mots sont bien des animaux."
+   ],
+   "explanation": "Exemples : chat, chèvre, éléphant, pangolin, poule.",
+   "id": "cp-francais-vocabulaire-06",
+   "chapter": "cp-francais-vocabulaire",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cp-francais-vocabulaire",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le contraire de « monter » est…",
+   "choices": [
+    "sauter",
+    "courir",
+    "dormir",
+    "descendre"
+   ],
+   "answer": 3,
+   "explanation": "Monter ↔ descendre.",
+   "id": "cp-francais-vocabulaire-q1",
+   "chapter": "cp-francais-vocabulaire",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-vocabulaire",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot est un fruit ?",
+   "choices": [
+    "chèvre",
+    "cahier",
+    "papaye",
+    "table"
+   ],
+   "answer": 2,
+   "explanation": "La papaye est un fruit.",
+   "id": "cp-francais-vocabulaire-q2",
+   "chapter": "cp-francais-vocabulaire",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-vocabulaire",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le contraire de « jour » est…",
+   "choices": [
+    "matin",
+    "nuit",
+    "soir",
+    "soleil"
+   ],
+   "answer": 1,
+   "explanation": "Jour ↔ nuit.",
+   "id": "cp-francais-vocabulaire-q3",
+   "chapter": "cp-francais-vocabulaire",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-vocabulaire",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est l'intrus ? lundi, mardi, banane, jeudi",
+   "choices": [
+    "banane",
+    "lundi",
+    "mardi",
+    "jeudi"
+   ],
+   "answer": 0,
+   "explanation": "Les trois autres sont des jours.",
+   "id": "cp-francais-vocabulaire-q4",
+   "chapter": "cp-francais-vocabulaire",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-vocabulaire",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Classer, c'est…",
+   "choices": [
+    "copier un mot",
+    "dessiner",
+    "compter les lettres",
+    "ranger des mots de la même famille"
+   ],
+   "answer": 3,
+   "explanation": "On met ensemble les mots de la même famille.",
+   "id": "cp-francais-vocabulaire-q5",
+   "chapter": "cp-francais-vocabulaire",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-vocabulaire",
+   "points": 1
+  }
+ ]
+}

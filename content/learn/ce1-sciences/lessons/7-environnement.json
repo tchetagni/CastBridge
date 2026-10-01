@@ -1,0 +1,492 @@
+{
+ "chapter": "ce1-sciences-c7-environnement",
+ "lessons": [
+  {
+   "id": "ce1-sciences-environnement",
+   "title": "Protéger mon environnement",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CE1 — Environnement : milieux de vie, déchets, propreté, protection de la nature (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Décrire l'environnement proche (école, quartier).",
+    "Trier des déchets simples.",
+    "Proposer des gestes pour protéger la nature."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "ce1-sciences-environnement-01",
+    "ce1-sciences-environnement-02",
+    "ce1-sciences-environnement-03",
+    "ce1-sciences-environnement-04",
+    "ce1-sciences-environnement-05",
+    "ce1-sciences-environnement-06"
+   ],
+   "selfCheck": [
+    "ce1-sciences-environnement-q1",
+    "ce1-sciences-environnement-q2",
+    "ce1-sciences-environnement-q3",
+    "ce1-sciences-environnement-q4",
+    "ce1-sciences-environnement-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier le niveau du vocabulaire (compost, pollution) pour le CE1.",
+    "Vérifier que les gestes proposés correspondent aux consignes locales (collecte des déchets)."
+   ],
+   "blocks": [
+    {
+     "type": "audio",
+     "lang": "fr-FR",
+     "text": "L'environnement, c'est ce qui nous entoure : les maisons, les arbres, l'eau, les animaux."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "L'environnement",
+     "md": "L'**environnement** est tout ce qui nous entoure : l'école, la rue, le marché, les arbres, la rivière, les animaux.\n\nOn peut avoir un environnement **propre** et sain, ou un environnement **sale** qui rend malade."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : un environnement sale",
+     "statement": "Dans la cour, il y a des sachets et des épluchures par terre. Que peut-il arriver ?",
+     "steps": [
+      {
+       "md": "Les déchets attirent des mouches et des rats."
+      },
+      {
+       "md": "Les microbes peuvent rendre les enfants malades."
+      }
+     ],
+     "answer": "**Un environnement sale est mauvais pour la santé.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : un bon geste",
+     "statement": "Paul voit un sachet vide dans la cour. Que fait-il ?",
+     "steps": [
+      {
+       "md": "Il ramasse le sachet."
+      },
+      {
+       "md": "Il le met dans la poubelle."
+      }
+     ],
+     "answer": "**Il garde la cour propre.**"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les déchets",
+     "md": "Un **déchet** est ce que l'on jette. On peut séparer :\n\n- les déchets qui pourrissent : épluchures, restes de repas (on peut en faire du compost) ;\n- les déchets qui ne pourrissent pas vite : plastique, verre, métal.\n\nOn les met dans la **poubelle**, pas dans la rue ni dans la rivière."
+    },
+    {
+     "type": "illustration",
+     "caption": "Trois bons gestes.",
+     "alt": "Trois cases : ramasser les papiers et les sachets, trier les déchets, protéger les arbres, l'eau et les animaux.",
+     "figure": {
+      "kind": "shapes",
+      "w": 520,
+      "h": 210,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 20,
+        "w": 150,
+        "h": 100,
+        "fill": "lightyellow",
+        "stroke": "orange",
+        "radius": 8
+       },
+       {
+        "t": "rect",
+        "x": 185,
+        "y": 20,
+        "w": 150,
+        "h": 100,
+        "fill": "lightgreen",
+        "stroke": "green",
+        "radius": 8
+       },
+       {
+        "t": "rect",
+        "x": 360,
+        "y": 20,
+        "w": 150,
+        "h": 100,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 50,
+        "text": "Je ramasse",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 75,
+        "text": "les papiers",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 98,
+        "text": "et les sachets",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 50,
+        "text": "Je trie",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 75,
+        "text": "restes de repas",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 98,
+        "text": "plastique, verre",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 435,
+        "y": 50,
+        "text": "Je protège",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 435,
+        "y": 75,
+        "text": "les arbres,",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 435,
+        "y": 98,
+        "text": "l'eau, les animaux",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 170,
+        "text": "Chacun peut aider à garder un environnement sain.",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Protéger la nature",
+     "md": "- Je jette mes déchets à la poubelle.\n- Je ne coupe pas les arbres et les fleurs sans raison.\n- Je ne pollue pas la rivière.\n- J'économise l'eau.\n- Je respecte les animaux."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- Les sachets en plastique restent très longtemps dans la nature.\n- Brûler les déchets plastiques fait une fumée dangereuse pour la santé.\n- Un seul geste ne suffit pas : c'est ensemble, tous les jours, qu'on protège l'environnement."
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-sciences-environnement-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-sciences-environnement-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-sciences-environnement-03"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Planter un arbre aide à avoir de l'ombre et un air plus sain.",
+      "On peut réutiliser des bouteilles et des cartons plutôt que de les jeter."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ce1-sciences-environnement-01",
+   "chapter": "ce1-sciences-c7-environnement",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Où jette-t-on un papier sale ?",
+   "choices": [
+    "à la poubelle",
+    "dans la rivière",
+    "dans la cour",
+    "sous un arbre"
+   ],
+   "answer": 0,
+   "explanation": "On jette ses déchets à la **poubelle**.",
+   "lesson": "ce1-sciences-environnement",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-environnement-02",
+   "chapter": "ce1-sciences-c7-environnement",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Vrai ou faux : un sachet en plastique pourrit vite.",
+   "answer": false,
+   "explanation": "Faux : le plastique reste très longtemps dans la nature.",
+   "lesson": "ce1-sciences-environnement",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-environnement-03",
+   "chapter": "ce1-sciences-c7-environnement",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "prompt": "Associe chaque déchet à la bonne catégorie.",
+   "pairs": [
+    [
+     "une épluchure de banane",
+     "elle pourrit vite"
+    ],
+    [
+     "une bouteille en plastique",
+     "elle reste très longtemps"
+    ],
+    [
+     "une feuille morte",
+     "elle redevient de la terre"
+    ]
+   ],
+   "explanation": "Les épluchures pourrissent, les feuilles mortes redeviennent de la terre ; le plastique reste très longtemps dans la nature.",
+   "lesson": "ce1-sciences-environnement",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-environnement-04",
+   "chapter": "ce1-sciences-c7-environnement",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "Que faut-il faire pour garder une cour propre ?",
+   "choices": [
+    "jeter les papiers par terre",
+    "casser les poubelles",
+    "ramasser les déchets",
+    "laisser les sachets au vent"
+   ],
+   "answer": 2,
+   "explanation": "Je **ramasse** les déchets et je les mets à la poubelle.",
+   "lesson": "ce1-sciences-environnement",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-environnement-05",
+   "chapter": "ce1-sciences-c7-environnement",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Écris deux gestes pour protéger la nature.",
+   "model": "Je mets mes déchets à la poubelle. Je ne coupe pas les arbres sans raison.",
+   "rubric": [
+    "Deux gestes différents.",
+    "Gestes réalistes pour un enfant."
+   ],
+   "explanation": "Poubelle, économie d'eau, respect des arbres et des animaux : ce sont des gestes simples.",
+   "lesson": "ce1-sciences-environnement",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-environnement-06",
+   "chapter": "ce1-sciences-c7-environnement",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Après la récréation, Mballa et Essomba voient des sachets et des épluchures dans la cour.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Que doivent-ils faire des sachets ?",
+     "choices": [
+      "les cacher sous une pierre",
+      "les brûler",
+      "les mettre dans la poubelle",
+      "les jeter dans la rivière"
+     ],
+     "answer": 2,
+     "explanation": "On met les sachets dans la **poubelle**.",
+     "id": "ce1-sciences-environnement-06-a"
+    },
+    {
+     "kind": "truefalse",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Les épluchures pourrissent.",
+     "answer": true,
+     "explanation": "Vrai : les épluchures **pourrissent** vite.",
+     "id": "ce1-sciences-environnement-06-b"
+    },
+    {
+     "kind": "truefalse",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Il vaut mieux brûler les sachets en plastique.",
+     "answer": false,
+     "explanation": "Faux : brûler le plastique fait une fumée **dangereuse**.",
+     "id": "ce1-sciences-environnement-06-c"
+    }
+   ],
+   "lesson": "ce1-sciences-environnement",
+   "points": 3,
+   "explanation": "Corrigé détaillé question par question ci-dessous.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-environnement-q1",
+   "chapter": "ce1-sciences-c7-environnement",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Qu'est-ce que l'environnement ?",
+   "choices": [
+    "tout ce qui nous entoure",
+    "seulement la maison",
+    "seulement les arbres",
+    "la télévision"
+   ],
+   "answer": 0,
+   "explanation": "L'**environnement** est tout ce qui nous entoure.",
+   "lesson": "ce1-sciences-environnement",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-environnement-q2",
+   "chapter": "ce1-sciences-c7-environnement",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Que doit-on faire d'un déchet ?",
+   "choices": [
+    "le jeter dans la rue",
+    "le lancer dans l'eau",
+    "l'enterrer dans la cour de l'école",
+    "le mettre à la poubelle"
+   ],
+   "answer": 3,
+   "explanation": "Je mets mon déchet à la **poubelle**.",
+   "lesson": "ce1-sciences-environnement",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-environnement-q3",
+   "chapter": "ce1-sciences-c7-environnement",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Pourquoi une cour sale est-elle mauvaise ?",
+   "choices": [
+    "elle est plus belle",
+    "elle peut rendre malade",
+    "elle fait pousser les cahiers",
+    "elle chasse la pluie"
+   ],
+   "answer": 1,
+   "explanation": "Les déchets attirent mouches et microbes : on peut tomber **malade**.",
+   "lesson": "ce1-sciences-environnement",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-environnement-q4",
+   "chapter": "ce1-sciences-c7-environnement",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quel geste protège l'eau ?",
+   "choices": [
+    "laver la poubelle dans la rivière",
+    "ne pas jeter de déchets dans la rivière",
+    "laisser couler le robinet",
+    "salir la mare"
+   ],
+   "answer": 1,
+   "explanation": "Je **ne jette pas** de déchets dans la rivière.",
+   "lesson": "ce1-sciences-environnement",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-environnement-q5",
+   "chapter": "ce1-sciences-c7-environnement",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Que peut-on faire d'une bouteille en plastique ?",
+   "choices": [
+    "la brûler",
+    "la jeter dans la rue",
+    "la laisser au vent",
+    "la réutiliser"
+   ],
+   "answer": 3,
+   "explanation": "On peut **réutiliser** une bouteille propre.",
+   "lesson": "ce1-sciences-environnement",
+   "source": "Exercice original"
+  }
+ ]
+}

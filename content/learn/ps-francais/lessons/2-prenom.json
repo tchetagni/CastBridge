@@ -1,0 +1,244 @@
+{
+ "chapter": "ps-francais-prenom-ch",
+ "lessons": [
+  {
+   "id": "ps-francais-premiere-lettre",
+   "title": "La première lettre de mon prénom",
+   "minutes": 7,
+   "readAloud": true,
+   "programRef": "Programme de l'éducation maternelle, petite section (MINEDUB) — reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant de maternelle",
+   "objectives": [
+    "Reconnaître son prénom.",
+    "Dire la première lettre d'un prénom."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "ps-francais-premiere-lettre-01",
+    "ps-francais-premiere-lettre-02",
+    "ps-francais-premiere-lettre-03",
+    "ps-francais-premiere-lettre-04",
+    "ps-francais-premiere-lettre-05"
+   ],
+   "selfCheck": [],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "Chaque prénom commence par une lettre.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 190,
+      "items": [
+       {
+        "t": "text",
+        "x": 200,
+        "y": 60,
+        "text": "Amina",
+        "size": 52,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 140,
+        "text": "commence par A",
+        "size": 28,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Amina",
+     "alt": "Le prénom Amina écrit en grand, avec la lettre A au début."
+    },
+    {
+     "type": "audio",
+     "text": "Amina commence par la lettre A.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 190,
+      "items": [
+       {
+        "t": "text",
+        "x": 200,
+        "y": 60,
+        "text": "Paul",
+        "size": 52,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 140,
+        "text": "commence par P",
+        "size": 28,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Paul",
+     "alt": "Le prénom Paul écrit en grand, avec la lettre P au début."
+    },
+    {
+     "type": "audio",
+     "text": "Paul commence par la lettre P.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "example",
+     "title": "Quelle première lettre ?",
+     "statement": "Marie commence par quelle lettre ?",
+     "steps": [
+      {
+       "md": "On écoute le début du prénom : Ma..."
+      },
+      {
+       "md": "La première lettre est M."
+      }
+     ],
+     "answer": "Par la lettre **M**."
+    },
+    {
+     "type": "audio",
+     "text": "Marie commence par M !",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Écris la première lettre de ton prénom avec ton doigt dans le sable."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "ps-francais-premiere-lettre-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ps-francais-premiere-lettre-03"
+    }
+   ],
+   "reviewNotes": [
+    "Appariement qui demande de reconnaître des lettres : à lire avec l'adulte."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ps-francais-premiere-lettre-01",
+   "chapter": "ps-francais-prenom-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ps-francais-premiere-lettre",
+   "prompt": "Amina commence par quelle lettre ?",
+   "choices": [
+    "M",
+    "A",
+    "P"
+   ],
+   "answer": 1,
+   "explanation": "**A**mina.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ps-francais-premiere-lettre-02",
+   "chapter": "ps-francais-prenom-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ps-francais-premiere-lettre",
+   "prompt": "Paul commence par quelle lettre ?",
+   "choices": [
+    "P",
+    "N",
+    "A"
+   ],
+   "answer": 0,
+   "explanation": "**P**aul.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ps-francais-premiere-lettre-03",
+   "chapter": "ps-francais-prenom-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ps-francais-premiere-lettre",
+   "prompt": "Quel prénom commence par M ?",
+   "choices": [
+    "Marie",
+    "Amina",
+    "Paul"
+   ],
+   "answer": 0,
+   "explanation": "**M**arie.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ps-francais-premiere-lettre-04",
+   "chapter": "ps-francais-prenom-ch",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ps-francais-premiere-lettre",
+   "prompt": "Ngono commence par la lettre N.",
+   "answer": true,
+   "explanation": "Oui : **N**gono.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ps-francais-premiere-lettre-05",
+   "chapter": "ps-francais-prenom-ch",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "ps-francais-premiere-lettre",
+   "prompt": "Relie le prénom à sa première lettre.",
+   "pairs": [
+    [
+     "Amina",
+     "A"
+    ],
+    [
+     "Paul",
+     "P"
+    ],
+    [
+     "Marie",
+     "M"
+    ],
+    [
+     "Ngono",
+     "N"
+    ]
+   ],
+   "explanation": "Amina A, Paul P, Marie M, Ngono N.",
+   "source": "Exercice original"
+  }
+ ]
+}

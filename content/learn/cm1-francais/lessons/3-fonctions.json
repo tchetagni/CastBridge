@@ -1,0 +1,542 @@
+{
+ "chapter": "cm1-francais-grammaire",
+ "lessons": [
+  {
+   "id": "cm1-francais-fonctions",
+   "title": "Les fonctions dans la phrase",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM1 — Grammaire : fonctions (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Trouver le sujet d'un verbe.",
+    "Distinguer le COD, le COI et l'attribut du sujet.",
+    "Reconnaître les compléments circonstanciels de lieu, de temps et de manière."
+   ],
+   "prerequisites": [
+    "cm1-francais-nature"
+   ],
+   "exercises": [
+    "cm1-francais-fonctions-01",
+    "cm1-francais-fonctions-02",
+    "cm1-francais-fonctions-03",
+    "cm1-francais-fonctions-04",
+    "cm1-francais-fonctions-05",
+    "cm1-francais-fonctions-06"
+   ],
+   "selfCheck": [
+    "cm1-francais-fonctions-q1",
+    "cm1-francais-fonctions-q2",
+    "cm1-francais-fonctions-q3",
+    "cm1-francais-fonctions-q4",
+    "cm1-francais-fonctions-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier la terminologie attendue en CM1 (COD/COI/attribut/CC) et le niveau de difficulté du COI.",
+    "La distinction COI / CC de lieu (« à Kribi » après un verbe de mouvement) est volontairement évitée : à confronter à la progression de la classe."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La fonction",
+     "md": "La **fonction** d'un mot ou d'un groupe de mots dit **son rôle dans la phrase**. Ne confonds pas avec la nature : un nom peut être sujet, COD ou complément de lieu."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Le sujet et le COD",
+     "md": "- Le **sujet** fait l'action. On le trouve avec « **Qui est-ce qui** ? » devant le verbe.\n- Le **COD** (complément d'objet direct) complète le verbe **sans préposition**. On le trouve avec « verbe + **quoi ?** ou **qui ?** ».\n\n*Ngono achète des mangues.* Qui est-ce qui achète ? Ngono (sujet). Elle achète quoi ? des mangues (COD)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Le COI et l'attribut",
+     "md": "- Le **COI** (complément d'objet indirect) est relié au verbe par une **préposition** (à, de) : *Paul parle **à son voisin**. Il se souvient **de ce jour**.* Question : verbe + **à qui ? à quoi ? de qui ? de quoi ?**\n- L'**attribut du sujet** suit un verbe d'état (être, paraître, sembler, devenir, rester) : *Le manioc est **cuit**.* Il dit comment est le sujet."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les compléments circonstanciels (CC)",
+     "md": "Ils donnent le **cadre** de l'action. On peut les déplacer ou les supprimer.\n\n- CC de **lieu** (où ?) : *dans la cour*.\n- CC de **temps** (quand ?) : *ce matin*.\n- CC de **manière** (comment ?) : *avec soin*, *doucement*."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 37.0,
+        "y": 50,
+        "w": 68,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 71.0,
+        "y": 75,
+        "text": "Ngono",
+        "size": 17,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 71.0,
+        "y": 112,
+        "text": "sujet",
+        "size": 14,
+        "color": "blue",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 113.0,
+        "y": 50,
+        "w": 68,
+        "h": 38,
+        "fill": "lightorange",
+        "stroke": "red",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 147.0,
+        "y": 75,
+        "text": "porte",
+        "size": 17,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 147.0,
+        "y": 112,
+        "text": "verbe",
+        "size": 14,
+        "color": "red",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 189.0,
+        "y": 50,
+        "w": 108,
+        "h": 38,
+        "fill": "lightgreen",
+        "stroke": "green",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 243.0,
+        "y": 75,
+        "text": "un panier",
+        "size": 17,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 243.0,
+        "y": 112,
+        "text": "COD",
+        "size": 14,
+        "color": "green",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 305.0,
+        "y": 50,
+        "w": 108,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "orange",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 359.0,
+        "y": 75,
+        "text": "au marché",
+        "size": 17,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 359.0,
+        "y": 112,
+        "text": "CC de lieu",
+        "size": 14,
+        "color": "orange",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 421.0,
+        "y": 50,
+        "w": 102,
+        "h": 38,
+        "fill": "white",
+        "stroke": "grey",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 472.0,
+        "y": 75,
+        "text": "le matin",
+        "size": 17,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 472.0,
+        "y": 112,
+        "text": "CC de temps",
+        "size": 14,
+        "color": "grey",
+        "bold": true,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Les fonctions dans une phrase.",
+     "alt": "La phrase « Ngono porte un panier au marché le matin » en cinq cases : Ngono (sujet), porte (verbe), un panier (COD), au marché (CC de lieu), le matin (CC de temps)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : sujet, COD et CC",
+     "statement": "Analyse : « Ce soir, Essomba range ses outils dans l'atelier. »",
+     "steps": [
+      {
+       "md": "Verbe : range. Qui est-ce qui range ? **Essomba** : sujet."
+      },
+      {
+       "md": "Il range quoi ? **ses outils** : COD (pas de préposition)."
+      },
+      {
+       "md": "**Ce soir** répond à « quand ? » : CC de temps. **dans l'atelier** répond à « où ? » : CC de lieu."
+      }
+     ],
+     "answer": "**Ce soir** (CC temps) **Essomba** (sujet) **range** (verbe) **ses outils** (COD) **dans l'atelier** (CC lieu)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : COI et attribut",
+     "statement": "Analyse : « Amina téléphone à sa mère. Elle semble heureuse. »",
+     "steps": [
+      {
+       "md": "Verbe « téléphone » : on dit « téléphoner **à** quelqu'un ». « à sa mère » : COI."
+      },
+      {
+       "md": "Dans la phrase 2, « semble » est un verbe d'état. « heureuse » dit comment est « elle » : attribut du sujet."
+      }
+     ],
+     "answer": "**à sa mère** : COI ; **heureuse** : attribut du sujet « elle »."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Prendre le mot juste avant le verbe pour le sujet : cherche « Qui est-ce qui ? ».\n- Confondre COD et COI : regarde s'il y a une préposition.\n- Croire qu'un CC est obligatoire : on peut souvent le supprimer."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-fonctions-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-fonctions-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-fonctions-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-fonctions-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-fonctions-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-fonctions-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "cm1-francais-fonctions-01",
+   "chapter": "cm1-francais-grammaire",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "mcq",
+   "prompt": "Quel est le sujet dans « Les enfants jouent dans la cour » ?",
+   "choices": [
+    "Les enfants",
+    "la cour",
+    "jouent",
+    "dans la cour"
+   ],
+   "answer": 0,
+   "explanation": "Qui est-ce qui joue ? Les enfants : c'est le sujet.",
+   "points": 1,
+   "lesson": "cm1-francais-fonctions",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-fonctions-02",
+   "chapter": "cm1-francais-grammaire",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : dans « Fotso mange du manioc », « du manioc » est COD.",
+   "answer": true,
+   "explanation": "Vrai. Il mange quoi ? du manioc. Il n'y a pas de préposition obligatoire entre le verbe et le complément : COD.",
+   "points": 1,
+   "lesson": "cm1-francais-fonctions",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-fonctions-03",
+   "chapter": "cm1-francais-grammaire",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "matching",
+   "prompt": "Associe chaque groupe souligné à sa fonction.",
+   "pairs": [
+    [
+     "Ce matin",
+     "CC de temps"
+    ],
+    [
+     "au marché",
+     "CC de lieu"
+    ],
+    [
+     "avec joie",
+     "CC de manière"
+    ],
+    [
+     "à Paul",
+     "COI"
+    ]
+   ],
+   "explanation": "Ce matin → quand ? ; au marché → où ? ; avec joie → comment ? ; à Paul → complément introduit par à : COI.",
+   "points": 2,
+   "lesson": "cm1-francais-fonctions",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-fonctions-04",
+   "chapter": "cm1-francais-grammaire",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "mcq",
+   "prompt": "Dans « Le ciel devient gris », « gris » est…",
+   "choices": [
+    "COD",
+    "COI",
+    "CC de manière",
+    "attribut du sujet"
+   ],
+   "answer": 3,
+   "explanation": "« devient » est un verbe d'état : « gris » dit comment est le ciel.",
+   "method": "Remplacer le verbe par « est » : « Le ciel est gris ».",
+   "points": 1,
+   "lesson": "cm1-francais-fonctions",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-fonctions-05",
+   "chapter": "cm1-francais-grammaire",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "mcq",
+   "prompt": "Dans « Marie pense à son voyage », « à son voyage » est…",
+   "choices": [
+    "COD",
+    "sujet",
+    "COI",
+    "attribut"
+   ],
+   "answer": 2,
+   "explanation": "Marie pense **à quoi** ? à son voyage : complément introduit par la préposition « à » : COI.",
+   "points": 1,
+   "lesson": "cm1-francais-fonctions",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-fonctions-06",
+   "chapter": "cm1-francais-grammaire",
+   "tier": "examen",
+   "difficulty": 2,
+   "kind": "problem",
+   "prompt": "Analyse la phrase : « Hier, Mballa a offert des mangues à ses voisins devant sa maison. »",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quel est le sujet du verbe « a offert » ?",
+     "choices": [
+      "des mangues",
+      "Mballa",
+      "ses voisins",
+      "Hier"
+     ],
+     "answer": 1,
+     "explanation": "Qui est-ce qui a offert ? Mballa.",
+     "id": "cm1-francais-fonctions-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quel est le COD ?",
+     "choices": [
+      "des mangues",
+      "à ses voisins",
+      "Hier",
+      "devant sa maison"
+     ],
+     "answer": 0,
+     "explanation": "Il a offert quoi ? des mangues.",
+     "id": "cm1-francais-fonctions-06-b",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "« devant sa maison » est…",
+     "choices": [
+      "un COI",
+      "un COD",
+      "un attribut",
+      "un CC de lieu"
+     ],
+     "answer": 3,
+     "explanation": "« devant sa maison » répond à « où ? » et on peut le supprimer : CC de lieu.",
+     "id": "cm1-francais-fonctions-06-c",
+     "points": 1
+    }
+   ],
+   "lesson": "cm1-francais-fonctions",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-fonctions-q1",
+   "chapter": "cm1-francais-grammaire",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Pour trouver le sujet, on pose la question…",
+   "choices": [
+    "Où ?",
+    "Comment ?",
+    "Qui est-ce qui ?",
+    "À quoi ?"
+   ],
+   "answer": 2,
+   "explanation": "Qui est-ce qui + verbe = sujet.",
+   "lesson": "cm1-francais-fonctions"
+  },
+  {
+   "id": "cm1-francais-fonctions-q2",
+   "chapter": "cm1-francais-grammaire",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Le COD se construit…",
+   "choices": [
+    "avec « à »",
+    "sans préposition",
+    "avec « de »",
+    "toujours avec « dans »"
+   ],
+   "answer": 1,
+   "explanation": "COD : directement après le verbe, sans préposition.",
+   "lesson": "cm1-francais-fonctions"
+  },
+  {
+   "id": "cm1-francais-fonctions-q3",
+   "chapter": "cm1-francais-grammaire",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quel groupe est un CC de lieu ?",
+   "choices": [
+    "sous le manguier",
+    "hier soir",
+    "très vite",
+    "à Paul"
+   ],
+   "answer": 0,
+   "explanation": "« sous le manguier » répond à la question où ?",
+   "lesson": "cm1-francais-fonctions"
+  },
+  {
+   "id": "cm1-francais-fonctions-q4",
+   "chapter": "cm1-francais-grammaire",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quel verbe est un verbe d'état ?",
+   "choices": [
+    "manger",
+    "courir",
+    "acheter",
+    "sembler"
+   ],
+   "answer": 3,
+   "explanation": "Sembler (comme être, paraître, devenir, rester) relie le sujet à son attribut.",
+   "lesson": "cm1-francais-fonctions"
+  },
+  {
+   "id": "cm1-francais-fonctions-q5",
+   "chapter": "cm1-francais-grammaire",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Dans « Il parle à sa sœur », « à sa sœur » est…",
+   "choices": [
+    "COD",
+    "sujet",
+    "COI",
+    "CC de temps"
+   ],
+   "answer": 2,
+   "explanation": "Parler à quelqu'un : complément introduit par à, c'est un COI.",
+   "lesson": "cm1-francais-fonctions"
+  }
+ ]
+}

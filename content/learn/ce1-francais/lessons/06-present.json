@@ -1,0 +1,633 @@
+{
+ "chapter": "ce1-francais-conjugaison",
+ "lessons": [
+  {
+   "id": "ce1-francais-present",
+   "title": "Le présent des verbes en -er, être et avoir",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CE1 — Programme de français du cycle 2, MINEDUB (reconstitué, à vérifier sur le texte officiel) — conjugaison : le présent de l'indicatif",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Conjuguer un verbe en -er au présent.",
+    "Conjuguer être et avoir au présent.",
+    "Choisir la bonne terminaison selon le sujet."
+   ],
+   "prerequisites": [
+    "ce1-francais-sujet-verbe"
+   ],
+   "exercises": [
+    "ce1-francais-present-01",
+    "ce1-francais-present-02",
+    "ce1-francais-present-03",
+    "ce1-francais-present-04",
+    "ce1-francais-present-05",
+    "ce1-francais-present-06"
+   ],
+   "selfCheck": [
+    "ce1-francais-present-q1",
+    "ce1-francais-present-q2",
+    "ce1-francais-present-q3",
+    "ce1-francais-present-q4",
+    "ce1-francais-present-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que aller (je vais, tu vas, il va, nous allons, vous allez, ils vont) est ou non attendu au CE1 ; il n'est pas traité ici."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le présent",
+     "md": "Le **présent** dit ce qui se passe **maintenant**.\n\n*Maintenant, je chante.*"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les verbes en -er (chanter)",
+     "md": "- je chant**e**\n- tu chant**es**\n- il, elle chant**e**\n- nous chant**ons**\n- vous chant**ez**\n- ils, elles chant**ent**"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Être et avoir",
+     "md": "**être** : je suis, tu es, il est, nous sommes, vous êtes, ils sont.\n\n**avoir** : j'ai, tu as, il a, nous avons, vous avez, ils ont."
+    },
+    {
+     "type": "illustration",
+     "caption": "Terminaisons du présent des verbes en -er.",
+     "alt": "Un tableau à six lignes avec les pronoms je, tu, il, nous, vous, ils et les terminaisons e, es, e, ons, ez, ent.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 10,
+        "w": 170,
+        "h": 30,
+        "stroke": "ink",
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 31,
+        "text": "sujet",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 190,
+        "y": 10,
+        "w": 210,
+        "h": 30,
+        "stroke": "ink",
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 295,
+        "y": 31,
+        "text": "fin du verbe",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 40,
+        "w": 170,
+        "h": 26,
+        "stroke": "ink",
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 59,
+        "text": "je",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 190,
+        "y": 40,
+        "w": 210,
+        "h": 26,
+        "stroke": "ink",
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 295,
+        "y": 59,
+        "text": "-e",
+        "size": 15,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 66,
+        "w": 170,
+        "h": 26,
+        "stroke": "ink",
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 85,
+        "text": "tu",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 190,
+        "y": 66,
+        "w": 210,
+        "h": 26,
+        "stroke": "ink",
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 295,
+        "y": 85,
+        "text": "-es",
+        "size": 15,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 92,
+        "w": 170,
+        "h": 26,
+        "stroke": "ink",
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 111,
+        "text": "il / elle",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 190,
+        "y": 92,
+        "w": 210,
+        "h": 26,
+        "stroke": "ink",
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 295,
+        "y": 111,
+        "text": "-e",
+        "size": 15,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 118,
+        "w": 170,
+        "h": 26,
+        "stroke": "ink",
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 137,
+        "text": "nous",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 190,
+        "y": 118,
+        "w": 210,
+        "h": 26,
+        "stroke": "ink",
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 295,
+        "y": 137,
+        "text": "-ons",
+        "size": 15,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 144,
+        "w": 170,
+        "h": 26,
+        "stroke": "ink",
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 163,
+        "text": "vous",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 190,
+        "y": 144,
+        "w": 210,
+        "h": 26,
+        "stroke": "ink",
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 295,
+        "y": 163,
+        "text": "-ez",
+        "size": 15,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 170,
+        "w": 170,
+        "h": 26,
+        "stroke": "ink",
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 189,
+        "text": "ils / elles",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 190,
+        "y": 170,
+        "w": 210,
+        "h": 26,
+        "stroke": "ink",
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 295,
+        "y": 189,
+        "text": "-ent",
+        "size": 15,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : un verbe en -er",
+     "statement": "Conjugue « jouer » au présent avec « nous » et « ils ».",
+     "steps": [
+      {
+       "md": "Le radical est **jou-**."
+      },
+      {
+       "md": "Avec nous : jou + ons."
+      },
+      {
+       "md": "Avec ils : jou + ent."
+      }
+     ],
+     "answer": "**Nous jouons. Ils jouent.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : être ou avoir",
+     "statement": "Complète : « Tu ___ faim. Ils ___ contents. »",
+     "steps": [
+      {
+       "md": "« avoir faim » : avec tu, on écrit **as**."
+      },
+      {
+       "md": "« être contents » : avec ils, on écrit **sont**."
+      }
+     ],
+     "answer": "**Tu as faim. Ils sont contents.**"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-francais-present-01"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- Avec **ils / elles**, le verbe en -er finit par **-ent** : ils chantent.\n- Avec **je**, pas de -s : je chante (mais *je suis*, *j'ai*).\n- Avec **vous**, on écrit -ez : vous chantez."
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Complète : « Je ___ une chanson. » (chanter)",
+   "choices": [
+    "chantent",
+    "chante",
+    "chantes",
+    "chantons"
+   ],
+   "answer": 1,
+   "explanation": "Avec **je**, le verbe en -er se termine par **-e**.",
+   "id": "ce1-francais-present-01",
+   "chapter": "ce1-francais-conjugaison",
+   "tier": "application",
+   "lesson": "ce1-francais-present",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "truefalse",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Vrai ou faux : « Ils mangent du riz » est bien écrit.",
+   "answer": true,
+   "explanation": "Avec ils, le verbe en -er finit par -ent : mangent.",
+   "id": "ce1-francais-present-02",
+   "chapter": "ce1-francais-conjugaison",
+   "tier": "application",
+   "lesson": "ce1-francais-present",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "matching",
+   "difficulty": 1,
+   "points": 2,
+   "prompt": "Associe chaque sujet au verbe « avoir ».",
+   "pairs": [
+    [
+     "j'",
+     "ai"
+    ],
+    [
+     "tu",
+     "as"
+    ],
+    [
+     "nous",
+     "avons"
+    ],
+    [
+     "ils",
+     "ont"
+    ]
+   ],
+   "explanation": "avoir : j'ai, tu as, il a, nous avons, vous avez, ils ont.",
+   "id": "ce1-francais-present-03",
+   "chapter": "ce1-francais-conjugaison",
+   "tier": "application",
+   "lesson": "ce1-francais-present",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "Complète : « Vous ___ le ballon. » (lancer)",
+   "choices": [
+    "lance",
+    "lançons",
+    "lancent",
+    "lancez"
+   ],
+   "answer": 3,
+   "explanation": "Avec **vous**, on écrit -ez.",
+   "id": "ce1-francais-present-04",
+   "chapter": "ce1-francais-conjugaison",
+   "tier": "approfondissement",
+   "lesson": "ce1-francais-present",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "open",
+   "difficulty": 2,
+   "points": 3,
+   "prompt": "Écris trois phrases au présent avec les verbes jouer, manger et être. Utilise des sujets différents.",
+   "model": "Je joue au ballon. Tu manges du manioc. Nous sommes à l'école.",
+   "rubric": [
+    "Les trois verbes sont conjugués au présent.",
+    "Chaque verbe est accordé avec son sujet.",
+    "Les phrases ont une majuscule et un point."
+   ],
+   "explanation": "Il faut accorder chaque verbe avec son sujet.",
+   "id": "ce1-francais-present-05",
+   "chapter": "ce1-francais-conjugaison",
+   "tier": "approfondissement",
+   "lesson": "ce1-francais-present",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "problem",
+   "difficulty": 2,
+   "prompt": "Complète les phrases au présent.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "« Les filles ___ dans la cour. » (jouer)",
+     "choices": [
+      "jouez",
+      "jouent",
+      "joue",
+      "jouons"
+     ],
+     "answer": 1,
+     "explanation": "Les filles = elles → -ent.",
+     "id": "ce1-francais-present-06-a"
+    },
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "« Nous ___ à l'école. » (être)",
+     "choices": [
+      "sont",
+      "sommes",
+      "est",
+      "êtes"
+     ],
+     "answer": 1,
+     "explanation": "être : nous sommes.",
+     "id": "ce1-francais-present-06-b"
+    },
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "« Mballa ___ un vélo. » (avoir)",
+     "choices": [
+      "à",
+      "ont",
+      "as",
+      "a"
+     ],
+     "answer": 3,
+     "explanation": "Mballa = il → il **a** (verbe avoir, sans accent).",
+     "id": "ce1-francais-present-06-c"
+    }
+   ],
+   "id": "ce1-francais-present-06",
+   "chapter": "ce1-francais-conjugaison",
+   "tier": "examen",
+   "lesson": "ce1-francais-present",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Avec « nous », un verbe en -er se termine par…",
+   "choices": [
+    "-es",
+    "-ons",
+    "-ent",
+    "-ez"
+   ],
+   "answer": 1,
+   "explanation": "nous chantons.",
+   "id": "ce1-francais-present-q1",
+   "chapter": "ce1-francais-conjugaison",
+   "tier": "autoeval",
+   "lesson": "ce1-francais-present",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Avec « ils », un verbe en -er se termine par…",
+   "choices": [
+    "-ent",
+    "-e",
+    "-ez",
+    "-ons"
+   ],
+   "answer": 0,
+   "explanation": "ils chantent.",
+   "id": "ce1-francais-present-q2",
+   "chapter": "ce1-francais-conjugaison",
+   "tier": "autoeval",
+   "lesson": "ce1-francais-present",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "« Tu ___ » (être)",
+   "choices": [
+    "es",
+    "suis",
+    "est",
+    "sont"
+   ],
+   "answer": 0,
+   "explanation": "tu es.",
+   "id": "ce1-francais-present-q3",
+   "chapter": "ce1-francais-conjugaison",
+   "tier": "autoeval",
+   "lesson": "ce1-francais-present",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "« Vous ___ » (avoir)",
+   "choices": [
+    "avons",
+    "as",
+    "ont",
+    "avez"
+   ],
+   "answer": 3,
+   "explanation": "vous avez.",
+   "id": "ce1-francais-present-q4",
+   "chapter": "ce1-francais-conjugaison",
+   "tier": "autoeval",
+   "lesson": "ce1-francais-present",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quelle phrase est au présent ?",
+   "choices": [
+    "Je mangerai du pain.",
+    "Hier, je mangeais du pain.",
+    "Je mange du pain.",
+    "J'ai mangé du pain."
+   ],
+   "answer": 2,
+   "explanation": "« Je mange » : maintenant.",
+   "id": "ce1-francais-present-q5",
+   "chapter": "ce1-francais-conjugaison",
+   "tier": "autoeval",
+   "lesson": "ce1-francais-present",
+   "source": "Exercice original, niveau CE1"
+  }
+ ]
+}

@@ -1,0 +1,538 @@
+{
+ "chapter": "ce1-histoire-geo-c3-localites",
+ "lessons": [
+  {
+   "id": "ce1-histoire-geo-localites",
+   "title": "Mon quartier, mon village, ma ville",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CE1 — Géographie : l'espace proche : l'école, le quartier, le village et la ville, plan simple, se repérer (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Distinguer un village et une ville.",
+    "Nommer des lieux utiles du quartier.",
+    "Lire un plan simple et se repérer (à droite, à gauche, devant, derrière)."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "ce1-histoire-geo-localites-01",
+    "ce1-histoire-geo-localites-02",
+    "ce1-histoire-geo-localites-03",
+    "ce1-histoire-geo-localites-04",
+    "ce1-histoire-geo-localites-05",
+    "ce1-histoire-geo-localites-06"
+   ],
+   "selfCheck": [
+    "ce1-histoire-geo-localites-q1",
+    "ce1-histoire-geo-localites-q2",
+    "ce1-histoire-geo-localites-q3",
+    "ce1-histoire-geo-localites-q4",
+    "ce1-histoire-geo-localites-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que « chef de village » et « maire » sont bien adaptés au programme (organisation administrative locale).",
+    "Le plan de quartier est schématique et fictif."
+   ],
+   "blocks": [
+    {
+     "type": "audio",
+     "lang": "fr-FR",
+     "text": "Où habites-tu ? Dans un village, dans un quartier, dans une ville ? Regardons autour de nous."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Village, quartier, ville",
+     "md": "Un **village** est un petit endroit avec des maisons, des champs et peu de commerces.\n\nUne **ville** est plus grande : il y a beaucoup de maisons, de routes, de voitures, de magasins et de services.\n\nUne ville est divisée en **quartiers**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les lieux utiles",
+     "md": "Dans une localité, il y a des lieux utiles à tous :\n\n- l'**école** pour apprendre ;\n- le **marché** pour acheter à manger ;\n- le **centre de santé** pour se soigner ;\n- la **mairie** pour les papiers ;\n- les **routes** pour se déplacer."
+    },
+    {
+     "type": "illustration",
+     "caption": "Le plan d'un quartier.",
+     "alt": "Un plan vu d'en haut : une route horizontale au milieu. Au-dessus : l'école, le marché et le centre de santé. En dessous : une maison, la mairie et un champ.",
+     "figure": {
+      "kind": "shapes",
+      "w": 520,
+      "h": 270,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 500,
+        "h": 250,
+        "fill": "lightyellow",
+        "stroke": "grey",
+        "radius": 10
+       },
+       {
+        "t": "rect",
+        "x": 0,
+        "y": 120,
+        "w": 520,
+        "h": 36,
+        "fill": "lightgrey",
+        "stroke": "grey",
+        "radius": 0
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 144,
+        "text": "la route",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 30,
+        "w": 110,
+        "h": 70,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 95,
+        "y": 70,
+        "text": "école",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 200,
+        "y": 30,
+        "w": 120,
+        "h": 70,
+        "fill": "lightorange",
+        "stroke": "orange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 70,
+        "text": "marché",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 370,
+        "y": 30,
+        "w": 120,
+        "h": 70,
+        "fill": "lightgreen",
+        "stroke": "green",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 430,
+        "y": 62,
+        "text": "centre",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 430,
+        "y": 82,
+        "text": "de santé",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 180,
+        "w": 110,
+        "h": 60,
+        "fill": "white",
+        "stroke": "ink",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 95,
+        "y": 215,
+        "text": "maison",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 200,
+        "y": 180,
+        "w": 120,
+        "h": 60,
+        "fill": "white",
+        "stroke": "ink",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 215,
+        "text": "mairie",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 370,
+        "y": 180,
+        "w": 120,
+        "h": 60,
+        "fill": "white",
+        "stroke": "ink",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 430,
+        "y": 215,
+        "text": "champ",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : lire le plan",
+     "statement": "Sur le plan, qu'y a-t-il à droite du marché ?",
+     "steps": [
+      {
+       "md": "Je regarde le marché au milieu en haut."
+      },
+      {
+       "md": "À sa droite, je vois le centre de santé."
+      }
+     ],
+     "answer": "**Le centre de santé.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : se repérer",
+     "statement": "Pour aller de la maison à l'école, que faut-il faire ?",
+     "steps": [
+      {
+       "md": "La maison est en bas, à gauche, et l'école est en haut, à gauche."
+      },
+      {
+       "md": "Il faut traverser la route et aller tout droit."
+      }
+     ],
+     "answer": "**On traverse la route et on va tout droit vers l'école.**"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Me repérer",
+     "md": "Pour me repérer, j'utilise des mots :\n\n- **à droite**, **à gauche** ;\n- **devant**, **derrière** ;\n- **près**, **loin** ;\n- **en haut**, **en bas**.\n\nJe cherche un point de repère connu : l'école, le marché, un grand arbre."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- Un plan est un dessin vu **d'en haut**, pas de face.\n- À droite et à gauche changent si on se retourne.\n- Traverser une route : toujours regarder, avec un adulte si besoin."
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-histoire-geo-localites-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-histoire-geo-localites-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-histoire-geo-localites-03"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Un village a souvent un chef de village. Une ville a un maire.",
+      "Les grandes villes du Cameroun sont par exemple Yaoundé et Douala."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ce1-histoire-geo-localites-01",
+   "chapter": "ce1-histoire-geo-c3-localites",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quel lieu sert à acheter à manger ?",
+   "choices": [
+    "le marché",
+    "l'école",
+    "la mairie",
+    "le centre de santé"
+   ],
+   "answer": 0,
+   "explanation": "On achète de la nourriture au **marché**.",
+   "lesson": "ce1-histoire-geo-localites",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-histoire-geo-localites-02",
+   "chapter": "ce1-histoire-geo-c3-localites",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Vrai ou faux : une ville est plus grande qu'un village.",
+   "answer": true,
+   "explanation": "Vrai : une ville a plus de maisons, de routes et de commerces.",
+   "lesson": "ce1-histoire-geo-localites",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-histoire-geo-localites-03",
+   "chapter": "ce1-histoire-geo-c3-localites",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "prompt": "Associe chaque lieu à son rôle.",
+   "pairs": [
+    [
+     "l'école",
+     "apprendre"
+    ],
+    [
+     "le centre de santé",
+     "se soigner"
+    ],
+    [
+     "le marché",
+     "acheter"
+    ],
+    [
+     "la mairie",
+     "faire des papiers"
+    ]
+   ],
+   "explanation": "Chaque lieu a un rôle utile aux habitants.",
+   "lesson": "ce1-histoire-geo-localites",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-histoire-geo-localites-04",
+   "chapter": "ce1-histoire-geo-c3-localites",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "Sur le plan, où est le champ ?",
+   "choices": [
+    "en haut à gauche",
+    "en haut au milieu",
+    "sur la route",
+    "en bas à droite"
+   ],
+   "answer": 3,
+   "explanation": "Le champ est **en bas à droite** du plan.",
+   "lesson": "ce1-histoire-geo-localites",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-histoire-geo-localites-05",
+   "chapter": "ce1-histoire-geo-c3-localites",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Explique à un ami comment aller de l'école au marché sur le plan.",
+   "model": "L'école est à gauche du marché : on va tout droit vers la droite, le marché est à côté.",
+   "rubric": [
+    "Utilise des mots de position (droite, gauche).",
+    "Nomme les deux lieux."
+   ],
+   "explanation": "Le marché est à droite de l'école, tout près.",
+   "lesson": "ce1-histoire-geo-localites",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-histoire-geo-localites-06",
+   "chapter": "ce1-histoire-geo-c3-localites",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Regarde le plan du quartier.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Que trouve-t-on au milieu du plan ?",
+     "choices": [
+      "la maison",
+      "la route",
+      "le champ",
+      "l'école"
+     ],
+     "answer": 1,
+     "explanation": "La **route** traverse le plan au milieu.",
+     "id": "ce1-histoire-geo-localites-06-a"
+    },
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Quel lieu est juste à gauche du marché ?",
+     "choices": [
+      "la mairie",
+      "l'école",
+      "le centre de santé",
+      "le champ"
+     ],
+     "answer": 1,
+     "explanation": "À gauche du marché, il y a l'**école**.",
+     "id": "ce1-histoire-geo-localites-06-b"
+    },
+    {
+     "kind": "truefalse",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "La mairie est au-dessus de la route.",
+     "answer": false,
+     "explanation": "Faux : la mairie est **en dessous** de la route.",
+     "id": "ce1-histoire-geo-localites-06-c"
+    }
+   ],
+   "lesson": "ce1-histoire-geo-localites",
+   "points": 3,
+   "explanation": "Corrigé détaillé question par question ci-dessous.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-histoire-geo-localites-q1",
+   "chapter": "ce1-histoire-geo-c3-localites",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Où trouve-t-on beaucoup de magasins et de voitures ?",
+   "choices": [
+    "dans un champ",
+    "au milieu de la forêt",
+    "sur un plan",
+    "dans une ville"
+   ],
+   "answer": 3,
+   "explanation": "Il y a beaucoup de magasins et de voitures dans une **ville**.",
+   "lesson": "ce1-histoire-geo-localites",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-histoire-geo-localites-q2",
+   "chapter": "ce1-histoire-geo-c3-localites",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Une ville est divisée en…",
+   "choices": [
+    "quartiers",
+    "pays",
+    "îles",
+    "continents"
+   ],
+   "answer": 0,
+   "explanation": "Une ville est composée de **quartiers**.",
+   "lesson": "ce1-histoire-geo-localites",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-histoire-geo-localites-q3",
+   "chapter": "ce1-histoire-geo-c3-localites",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quel mot indique la position ?",
+   "choices": [
+    "manger",
+    "joyeux",
+    "à gauche",
+    "vite"
+   ],
+   "answer": 2,
+   "explanation": "**À gauche** indique où est une chose.",
+   "lesson": "ce1-histoire-geo-localites",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-histoire-geo-localites-q4",
+   "chapter": "ce1-histoire-geo-c3-localites",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Un plan est un dessin vu…",
+   "choices": [
+    "de côté",
+    "de dos",
+    "d'en haut",
+    "de nuit"
+   ],
+   "answer": 2,
+   "explanation": "On dessine un plan **vu d'en haut**.",
+   "lesson": "ce1-histoire-geo-localites",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-histoire-geo-localites-q5",
+   "chapter": "ce1-histoire-geo-c3-localites",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Où va-t-on quand on est malade ?",
+   "choices": [
+    "au centre de santé",
+    "au marché",
+    "à la gare",
+    "au stade"
+   ],
+   "answer": 0,
+   "explanation": "On va au **centre de santé** pour se soigner.",
+   "lesson": "ce1-histoire-geo-localites",
+   "source": "Exercice original"
+  }
+ ]
+}

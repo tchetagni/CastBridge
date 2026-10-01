@@ -1,0 +1,367 @@
+{
+ "chapter": "sil-maths-monnaie-ch",
+ "lessons": [
+  {
+   "id": "sil-maths-monnaie",
+   "title": "La monnaie : les FCFA",
+   "minutes": 14,
+   "readAloud": true,
+   "programRef": "SIL — Grandeurs et mesures : la monnaie (FCFA), reconnaître les pièces, payer de petites sommes (reconstitué)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Nommer la monnaie du Cameroun : le franc CFA (FCFA).",
+    "Reconnaître quelques pièces et billets (10, 50, 100, 500, 1 000 FCFA).",
+    "Calculer de petites sommes avec ces valeurs."
+   ],
+   "prerequisites": [
+    "sil-maths-addition",
+    "sil-maths-soustraction"
+   ],
+   "exercises": [
+    "sil-maths-monnaie-01",
+    "sil-maths-monnaie-02",
+    "sil-maths-monnaie-03",
+    "sil-maths-monnaie-04",
+    "sil-maths-monnaie-05",
+    "sil-maths-monnaie-06"
+   ],
+   "selfCheck": [
+    "sil-maths-monnaie-q1",
+    "sil-maths-monnaie-q2",
+    "sil-maths-monnaie-q3",
+    "sil-maths-monnaie-q4",
+    "sil-maths-monnaie-q5"
+   ],
+   "reviewNotes": [
+    "VÉRIFIER les valeurs de pièces et billets en circulation (10, 50, 100, 500, 1 000 FCFA) : liste donnée à titre d'exemple, à confronter à la réalité.",
+    "Les prix (pain, arachides, banane, beignet) sont fictifs et simplifiés.",
+    "Ce programme de SIL peut ne pas aborder la monnaie ; fiche ajoutée car demandée dans le lot."
+   ],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "Au Cameroun, on paie avec des francs CFA. On écrit F CFA ou FCFA.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Notre monnaie",
+     "md": "Au Cameroun, la monnaie est le **franc CFA**. On écrit **FCFA**.\n\nIl y a des **pièces** (par exemple 10, 50, 100 et 500) et des **billets** (par exemple 1 000)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 420,
+      "h": 240,
+      "bars": [
+       {
+        "label": "10",
+        "value": 10,
+        "color": "lightgrey"
+       },
+       {
+        "label": "50",
+        "value": 50,
+        "color": "grey"
+       },
+       {
+        "label": "100",
+        "value": 100,
+        "color": "orange"
+       },
+       {
+        "label": "500",
+        "value": 500,
+        "color": "blue"
+       }
+      ],
+      "unit": "FCFA"
+     },
+     "caption": "Plus la pièce vaut cher, plus la barre est haute.",
+     "alt": "Quatre barres : pièce de 10, de 50, de 100 et de 500 FCFA. Plus la valeur est grande, plus la barre est haute."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : deux pièces",
+     "statement": "Ngono a une pièce de 100 FCFA et une pièce de 100 FCFA. Combien a-t-elle ?",
+     "steps": [
+      {
+       "md": "Je compte les centaines : cent, deux cents."
+      },
+      {
+       "md": "Je calcule 100 + 100."
+      }
+     ],
+     "answer": "**100 + 100 = 200**. Elle a 200 FCFA."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : acheter des arachides",
+     "statement": "Un sachet d'arachides coûte 50 FCFA. Fotso donne 100 FCFA. Combien le vendeur lui rend-il ?",
+     "steps": [
+      {
+       "md": "Fotso donne 100 FCFA."
+      },
+      {
+       "md": "Le sachet coûte 50 FCFA. Je calcule 100 - 50."
+      }
+     ],
+     "answer": "**100 - 50 = 50**. Le vendeur rend 50 FCFA."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Les prix changent",
+     "md": "Les prix de cette fiche sont des **exemples d'école**. Au marché, les prix peuvent être différents."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer !"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-maths-monnaie-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-maths-monnaie-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-maths-monnaie-03"
+    },
+    {
+     "type": "heading",
+     "text": "Pour aller plus loin"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-maths-monnaie-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-maths-monnaie-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-maths-monnaie-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sil-maths-monnaie-01",
+   "chapter": "sil-maths-monnaie-ch",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-monnaie",
+   "prompt": "Une pièce de 50 FCFA et une autre pièce de 50 FCFA. Combien font-elles en tout (en FCFA) ?",
+   "answer": 100,
+   "tolerance": 0,
+   "explanation": "50 + 50 = 100.",
+   "unit": "FCFA"
+  },
+  {
+   "id": "sil-maths-monnaie-02",
+   "chapter": "sil-maths-monnaie-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-monnaie",
+   "prompt": "Quelle est la monnaie du Cameroun ?",
+   "choices": [
+    "le dollar",
+    "la livre",
+    "le dinar",
+    "le franc CFA"
+   ],
+   "answer": 3,
+   "explanation": "Au Cameroun, on utilise le franc CFA (FCFA)."
+  },
+  {
+   "id": "sil-maths-monnaie-03",
+   "chapter": "sil-maths-monnaie-ch",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sil-maths-monnaie",
+   "prompt": "Vrai ou faux : 500 FCFA vaut plus que 100 FCFA.",
+   "answer": true,
+   "explanation": "500 est plus grand que 100 : la pièce de 500 vaut plus."
+  },
+  {
+   "id": "sil-maths-monnaie-04",
+   "chapter": "sil-maths-monnaie-ch",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sil-maths-monnaie",
+   "prompt": "Un pain coûte 100 FCFA. Amina en achète 3. Combien paie-t-elle en tout (en FCFA) ?",
+   "answer": 300,
+   "tolerance": 0,
+   "explanation": "100 + 100 + 100 = 300.",
+   "unit": "FCFA"
+  },
+  {
+   "id": "sil-maths-monnaie-05",
+   "chapter": "sil-maths-monnaie-ch",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sil-maths-monnaie",
+   "prompt": "Relie chaque somme au bon calcul.",
+   "pairs": [
+    [
+     "100 + 100",
+     "200"
+    ],
+    [
+     "500 - 100",
+     "400"
+    ],
+    [
+     "50 + 50",
+     "100"
+    ],
+    [
+     "1 000 - 500",
+     "500"
+    ]
+   ],
+   "explanation": "100 + 100 = 200, 500 - 100 = 400, 50 + 50 = 100, 1 000 - 500 = 500."
+  },
+  {
+   "id": "sil-maths-monnaie-06",
+   "chapter": "sil-maths-monnaie-ch",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sil-maths-monnaie",
+   "prompt": "Au petit marché de Bertoua.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Essomba achète une banane à 100 FCFA et un beignet à 50 FCFA. Combien dépense-t-il en tout (en FCFA) ?",
+     "answer": 150,
+     "tolerance": 0,
+     "explanation": "100 + 50 = 150.",
+     "unit": "FCFA",
+     "id": "sil-maths-monnaie-06-a",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Il paie avec une pièce de 500 FCFA. Combien le vendeur lui rend-il (en FCFA) ?",
+     "answer": 350,
+     "tolerance": 0,
+     "explanation": "500 - 150 = 350.",
+     "unit": "FCFA",
+     "id": "sil-maths-monnaie-06-b",
+     "points": 1
+    }
+   ],
+   "explanation": "Relis chaque question avec calme."
+  },
+  {
+   "id": "sil-maths-monnaie-q1",
+   "chapter": "sil-maths-monnaie-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-monnaie",
+   "prompt": "Comment écrit-on la monnaie du Cameroun ?",
+   "choices": [
+    "FCFA",
+    "KG",
+    "CM",
+    "LITRE"
+   ],
+   "answer": 0,
+   "explanation": "On écrit FCFA, comme franc CFA."
+  },
+  {
+   "id": "sil-maths-monnaie-q2",
+   "chapter": "sil-maths-monnaie-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-monnaie",
+   "prompt": "100 + 100 = ?",
+   "choices": [
+    "100",
+    "10",
+    "200",
+    "1 000"
+   ],
+   "answer": 2,
+   "explanation": "Cent et cent font deux cents."
+  },
+  {
+   "id": "sil-maths-monnaie-q3",
+   "chapter": "sil-maths-monnaie-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-monnaie",
+   "prompt": "Quelle pièce vaut le plus ?",
+   "choices": [
+    "10 FCFA",
+    "50 FCFA",
+    "500 FCFA",
+    "100 FCFA"
+   ],
+   "answer": 2,
+   "explanation": "500 est le plus grand nombre."
+  },
+  {
+   "id": "sil-maths-monnaie-q4",
+   "chapter": "sil-maths-monnaie-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-monnaie",
+   "prompt": "Un bonbon coûte 50 FCFA. Je donne 100 FCFA. On me rend…",
+   "choices": [
+    "50 FCFA",
+    "100 FCFA",
+    "150 FCFA",
+    "0 FCFA"
+   ],
+   "answer": 0,
+   "explanation": "100 - 50 = 50."
+  },
+  {
+   "id": "sil-maths-monnaie-q5",
+   "chapter": "sil-maths-monnaie-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-monnaie",
+   "prompt": "Avec 200 FCFA, je peux acheter 2 objets à…",
+   "choices": [
+    "150 FCFA chacun",
+    "500 FCFA chacun",
+    "250 FCFA chacun",
+    "100 FCFA chacun"
+   ],
+   "answer": 3,
+   "explanation": "2 objets à 100 FCFA font 100 + 100 = 200 FCFA."
+  }
+ ]
+}

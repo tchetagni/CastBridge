@@ -1,0 +1,385 @@
+{
+ "chapter": "ce1-english-c4-numbers",
+ "lessons": [
+  {
+   "id": "ce1-english-numbers",
+   "title": "Numbers 1 to 20 (les nombres)",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CE1 — Anglais : compter de 1 à 20 (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Dire les nombres de 1 à 20 en anglais.",
+    "Écrire les nombres en lettres anglaises (1 à 20).",
+    "Répondre à « How many? »."
+   ],
+   "prerequisites": [
+    "ce1-english-hello"
+   ],
+   "exercises": [
+    "ce1-english-numbers-01",
+    "ce1-english-numbers-02",
+    "ce1-english-numbers-03",
+    "ce1-english-numbers-04",
+    "ce1-english-numbers-05",
+    "ce1-english-numbers-06"
+   ],
+   "selfCheck": [
+    "ce1-english-numbers-q1",
+    "ce1-english-numbers-q2",
+    "ce1-english-numbers-q3",
+    "ce1-english-numbers-q4",
+    "ce1-english-numbers-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que le programme d'initiation du CE1 prévoit 1 à 20 (et pas seulement 1 à 10).",
+    "Remarque « mangoes » : pluriel de mango (on accepte aussi mangos)."
+   ],
+   "blocks": [
+    {
+     "type": "audio",
+     "lang": "en-GB",
+     "text": "One, two, three, four, five, six, seven, eight, nine, ten."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "De 1 à 10",
+     "md": "1 **one** · 2 **two** · 3 **three** · 4 **four** · 5 **five**\n\n6 **six** · 7 **seven** · 8 **eight** · 9 **nine** · 10 **ten**"
+    },
+    {
+     "type": "illustration",
+     "caption": "Compter jusqu'à 5.",
+     "alt": "Cinq mangues orange dessinées pour compter : one, two, three, four, five.",
+     "figure": {
+      "kind": "count",
+      "n": 5,
+      "shape": "circle",
+      "color": "orange",
+      "perRow": 5,
+      "w": 340,
+      "h": 90
+     }
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "De 11 à 20",
+     "md": "11 **eleven** · 12 **twelve** · 13 **thirteen** · 14 **fourteen** · 15 **fifteen**\n\n16 **sixteen** · 17 **seventeen** · 18 **eighteen** · 19 **nineteen** · 20 **twenty**"
+    },
+    {
+     "type": "audio",
+     "lang": "en-GB",
+     "text": "Eleven, twelve, thirteen, fourteen, fifteen, sixteen, seventeen, eighteen, nineteen, twenty."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Compter et demander",
+     "md": "Pour demander combien : **How many?**\n\n- **How many pens?** (Combien de stylos ?)\n- **I have three pens.** (J'ai trois stylos.)\n\nDe 13 à 19, les nombres finissent par **-teen** : thirteen, fourteen…"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : lire un nombre",
+     "statement": "Quel nombre est « eight » ?",
+     "steps": [
+      {
+       "md": "Je cherche « eight » dans la liste de 1 à 10."
+      },
+      {
+       "md": "Eight est le huitième : 8."
+      }
+     ],
+     "answer": "**8**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : un petit calcul",
+     "statement": "Calcule : five + four = ?",
+     "steps": [
+      {
+       "md": "five = 5 et four = 4."
+      },
+      {
+       "md": "5 + 4 = 9, et 9 s'écrit nine en anglais."
+      }
+     ],
+     "answer": "**nine (9)**"
+    },
+    {
+     "type": "illustration",
+     "caption": "Dix points à compter.",
+     "alt": "Dix ronds bleus, rangés sur deux lignes de cinq, pour compter jusqu'à dix.",
+     "figure": {
+      "kind": "count",
+      "n": 10,
+      "shape": "circle",
+      "color": "blue",
+      "perRow": 5,
+      "w": 340,
+      "h": 130
+     }
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- **thirteen** (13) et **thirty** (30) se ressemblent : fais attention.\n- **eight** s'écrit avec « gh ».\n- **twelve** et **eleven** ne finissent pas en -teen : ils sont à apprendre par cœur."
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-english-numbers-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-english-numbers-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-english-numbers-03"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Après 20, on dit thirty (30), forty (40)…",
+      "Pour compter les moutons ou les mangues, on dit « one mango, two mangoes »… mais on commence par apprendre à compter !"
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ce1-english-numbers-01",
+   "chapter": "ce1-english-c4-numbers",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Écris en chiffres : « seven ».",
+   "answer": 7,
+   "tolerance": 0,
+   "explanation": "**seven** = 7.",
+   "method": "Je compte sur mes doigts : one, two…",
+   "lesson": "ce1-english-numbers",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-english-numbers-02",
+   "chapter": "ce1-english-c4-numbers",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Vrai ou faux : « ten » veut dire 10.",
+   "answer": true,
+   "explanation": "Vrai : **ten** = 10.",
+   "lesson": "ce1-english-numbers",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-english-numbers-03",
+   "chapter": "ce1-english-c4-numbers",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "prompt": "Associe chaque nombre écrit en anglais à son chiffre.",
+   "pairs": [
+    [
+     "three",
+     "3"
+    ],
+    [
+     "six",
+     "6"
+    ],
+    [
+     "nine",
+     "9"
+    ],
+    [
+     "twelve",
+     "12"
+    ]
+   ],
+   "explanation": "three : 3. six : 6. nine : 9. twelve : 12.",
+   "lesson": "ce1-english-numbers",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-english-numbers-04",
+   "chapter": "ce1-english-c4-numbers",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "Combien font « five + four » ? Écris le résultat en chiffres.",
+   "answer": 9,
+   "tolerance": 0,
+   "explanation": "5 + 4 = 9, en anglais **nine**.",
+   "lesson": "ce1-english-numbers",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-english-numbers-05",
+   "chapter": "ce1-english-c4-numbers",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "Quel nombre s'écrit « fifteen » ?",
+   "choices": [
+    "15",
+    "5",
+    "50",
+    "14"
+   ],
+   "answer": 0,
+   "explanation": "**fifteen** = 15.",
+   "lesson": "ce1-english-numbers",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-english-numbers-06",
+   "chapter": "ce1-english-c4-numbers",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Ngono compte ses objets.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Elle a « four » pens. Écris le nombre en chiffres.",
+     "answer": 4,
+     "tolerance": 0,
+     "explanation": "**four** = 4.",
+     "id": "ce1-english-numbers-06-a"
+    },
+    {
+     "kind": "numeric",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Elle a « six » books. Écris le nombre en chiffres.",
+     "answer": 6,
+     "tolerance": 0,
+     "explanation": "**six** = 6.",
+     "id": "ce1-english-numbers-06-b"
+    },
+    {
+     "kind": "numeric",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Combien d'objets en tout (four + six) ? Écris le nombre en chiffres.",
+     "answer": 10,
+     "tolerance": 0,
+     "explanation": "4 + 6 = 10, soit **ten**.",
+     "id": "ce1-english-numbers-06-c"
+    }
+   ],
+   "lesson": "ce1-english-numbers",
+   "points": 3,
+   "explanation": "Corrigé détaillé question par question ci-dessous.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-english-numbers-q1",
+   "chapter": "ce1-english-c4-numbers",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Comment dit-on 8 en anglais ?",
+   "choices": [
+    "eighteen",
+    "eighty",
+    "eight",
+    "seven"
+   ],
+   "answer": 2,
+   "explanation": "**eight** = 8.",
+   "lesson": "ce1-english-numbers",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-english-numbers-q2",
+   "chapter": "ce1-english-c4-numbers",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Comment dit-on 20 en anglais ?",
+   "choices": [
+    "twelve",
+    "two",
+    "twenty",
+    "ten"
+   ],
+   "answer": 2,
+   "explanation": "**twenty** = 20.",
+   "lesson": "ce1-english-numbers",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-english-numbers-q3",
+   "chapter": "ce1-english-c4-numbers",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "« How many? » veut dire…",
+   "choices": [
+    "Combien ?",
+    "Comment ?",
+    "Pourquoi ?",
+    "Où ?"
+   ],
+   "answer": 0,
+   "explanation": "**How many?** = combien ?",
+   "lesson": "ce1-english-numbers",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-english-numbers-q4",
+   "chapter": "ce1-english-c4-numbers",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quel nombre vient après « eleven » ?",
+   "choices": [
+    "ten",
+    "thirteen",
+    "twenty",
+    "twelve"
+   ],
+   "answer": 3,
+   "explanation": "Après eleven (11) vient **twelve** (12).",
+   "lesson": "ce1-english-numbers",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-english-numbers-q5",
+   "chapter": "ce1-english-c4-numbers",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quel nombre s'écrit « nine » ?",
+   "choices": [
+    "19",
+    "9",
+    "90",
+    "5"
+   ],
+   "answer": 1,
+   "explanation": "**nine** = 9.",
+   "lesson": "ce1-english-numbers",
+   "source": "Exercice original"
+  }
+ ]
+}

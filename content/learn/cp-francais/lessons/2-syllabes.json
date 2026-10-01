@@ -1,0 +1,375 @@
+{
+ "chapter": "cp-francais-lecture",
+ "lessons": [
+  {
+   "id": "cp-francais-syllabes",
+   "title": "Les syllabes et les mots",
+   "minutes": 10,
+   "readAloud": true,
+   "programRef": "CP — Lecture : syllabes et mots (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Découper un mot en syllabes.",
+    "Compter les syllabes d'un mot.",
+    "Assembler des syllabes pour lire un mot."
+   ],
+   "prerequisites": [
+    "cp-francais-sons"
+   ],
+   "exercises": [
+    "cp-francais-syllabes-01",
+    "cp-francais-syllabes-02",
+    "cp-francais-syllabes-03",
+    "cp-francais-syllabes-04",
+    "cp-francais-syllabes-05",
+    "cp-francais-syllabes-06"
+   ],
+   "selfCheck": [
+    "cp-francais-syllabes-q1",
+    "cp-francais-syllabes-q2",
+    "cp-francais-syllabes-q3",
+    "cp-francais-syllabes-q4",
+    "cp-francais-syllabes-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier la définition « syllabe » proposée (au CP, on passe surtout par l'oral)."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Un mot est fait de **syllabes**. Pour les trouver, on **tape dans les mains** à chaque morceau du mot."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La syllabe",
+     "md": "Une syllabe, c'est un morceau du mot qui se dit d'un seul coup de voix.\n\n- chat : 1 syllabe.\n- mangue : man-gue, 2 syllabes.\n- banane : ba-na-ne, 3 syllabes."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 130,
+      "items": [
+       {
+        "t": "rect",
+        "x": 15,
+        "y": 20,
+        "w": 142,
+        "h": 50,
+        "fill": "lightorange",
+        "stroke": "red",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 86,
+        "y": 54,
+        "text": "ba",
+        "size": 24,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 165,
+        "y": 20,
+        "w": 142,
+        "h": 50,
+        "fill": "lightorange",
+        "stroke": "red",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 236,
+        "y": 54,
+        "text": "na",
+        "size": 24,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 315,
+        "y": 20,
+        "w": 142,
+        "h": 50,
+        "fill": "lightorange",
+        "stroke": "red",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 386,
+        "y": 54,
+        "text": "ne",
+        "size": 24,
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Banane = 3 syllabes.",
+     "alt": "Trois cases orange portant les syllabes ba, na, ne : le mot banane est coupé en trois."
+    },
+    {
+     "type": "audio",
+     "lang": "fr-FR",
+     "text": "Chat. Man, gue. Ba, na, ne. A, vo, cat. Pan, go, lin."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : découper",
+     "statement": "Découpe « avocat » en syllabes.",
+     "steps": [
+      {
+       "md": "Je tape dans mes mains : a - vo - cat."
+      },
+      {
+       "md": "Je compte : 3 coups."
+      }
+     ],
+     "answer": "a-vo-cat : **3 syllabes**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : assembler",
+     "statement": "Que lit-on avec les syllabes « pan », « go » et « lin » ?",
+     "steps": [
+      {
+       "md": "Je lis chaque syllabe : pan, go, lin."
+      },
+      {
+       "md": "Je les dis ensemble sans m'arrêter."
+      }
+     ],
+     "answer": "On lit **pangolin**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "Compte les syllabes avec ta voix, pas avec les lettres : « chat » a 4 lettres mais 1 seule syllabe."
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-syllabes-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-syllabes-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-syllabes-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-syllabes-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-syllabes-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-syllabes-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Combien de syllabes dans « banane » ?",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "ba-na-ne : 3 syllabes.",
+   "id": "cp-francais-syllabes-01",
+   "chapter": "cp-francais-lecture",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-francais-syllabes",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot a 2 syllabes ?",
+   "choices": [
+    "chat",
+    "mangue",
+    "avocat",
+    "éléphant"
+   ],
+   "answer": 1,
+   "explanation": "man-gue : 2 syllabes ; chat en a 1, avocat et éléphant en ont 3.",
+   "id": "cp-francais-syllabes-02",
+   "chapter": "cp-francais-lecture",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-francais-syllabes",
+   "points": 1
+  },
+  {
+   "kind": "matching",
+   "prompt": "Relie le début du mot au mot entier.",
+   "pairs": [
+    [
+     "pa",
+     "papaye"
+    ],
+    [
+     "a",
+     "avocat"
+    ],
+    [
+     "chim",
+     "chimpanzé"
+    ],
+    [
+     "man",
+     "mangue"
+    ]
+   ],
+   "explanation": "pa-pa-ye ; a-vo-cat ; chim-pan-zé ; man-gue.",
+   "id": "cp-francais-syllabes-03",
+   "chapter": "cp-francais-lecture",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-francais-syllabes",
+   "points": 1
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : le mot « chat » a deux syllabes.",
+   "answer": false,
+   "explanation": "« Chat » se dit d'un seul coup de voix : 1 syllabe.",
+   "id": "cp-francais-syllabes-04",
+   "chapter": "cp-francais-lecture",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-francais-syllabes",
+   "points": 1
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Combien de syllabes dans « chimpanzé » ?",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "chim-pan-zé : 3 syllabes.",
+   "id": "cp-francais-syllabes-05",
+   "chapter": "cp-francais-lecture",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-francais-syllabes",
+   "points": 1
+  },
+  {
+   "kind": "open",
+   "prompt": "Découpe le mot « pangolin » en syllabes.",
+   "model": "pan-go-lin (3 syllabes).",
+   "rubric": [
+    "Il écrit les trois syllabes pan, go, lin.",
+    "Il sépare les syllabes (tirets ou espaces)."
+   ],
+   "explanation": "On tape : pan - go - lin : 3 syllabes.",
+   "id": "cp-francais-syllabes-06",
+   "chapter": "cp-francais-lecture",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cp-francais-syllabes",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment découpe-t-on « papaye » ?",
+   "choices": [
+    "pa-pa-ye",
+    "pap-aye",
+    "p-apa-ye",
+    "pa-pay-e"
+   ],
+   "answer": 0,
+   "explanation": "On entend 3 syllabes : pa-pa-ye.",
+   "id": "cp-francais-syllabes-q1",
+   "chapter": "cp-francais-lecture",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-syllabes",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien de syllabes dans « avocat » ?",
+   "choices": [
+    "1",
+    "2",
+    "4",
+    "3"
+   ],
+   "answer": 3,
+   "explanation": "a-vo-cat.",
+   "id": "cp-francais-syllabes-q2",
+   "chapter": "cp-francais-lecture",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-syllabes",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot a une seule syllabe ?",
+   "choices": [
+    "banane",
+    "mangue",
+    "chat",
+    "pangolin"
+   ],
+   "answer": 2,
+   "explanation": "Chat se dit d'un coup.",
+   "id": "cp-francais-syllabes-q3",
+   "chapter": "cp-francais-lecture",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-syllabes",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Si je mets ensemble « man » et « gue », je lis…",
+   "choices": [
+    "gueman",
+    "mangue",
+    "manga",
+    "mongue"
+   ],
+   "answer": 1,
+   "explanation": "man + gue = mangue.",
+   "id": "cp-francais-syllabes-q4",
+   "chapter": "cp-francais-lecture",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-syllabes",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour trouver les syllabes, je peux…",
+   "choices": [
+    "taper dans mes mains",
+    "compter les lettres",
+    "regarder le dessin",
+    "copier le mot"
+   ],
+   "answer": 0,
+   "explanation": "À chaque syllabe, on tape un coup.",
+   "id": "cp-francais-syllabes-q5",
+   "chapter": "cp-francais-lecture",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-syllabes",
+   "points": 1
+  }
+ ]
+}

@@ -1,0 +1,410 @@
+{
+ "chapter": "cp-maths-calcul",
+ "lessons": [
+  {
+   "id": "cp-maths-addition",
+   "title": "L'addition",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CP — Calcul : addition en ligne et posée (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Calculer une addition en ligne.",
+    "Poser une addition sans retenue puis avec retenue.",
+    "Vérifier un résultat."
+   ],
+   "prerequisites": [
+    "cp-maths-dizaines-unites"
+   ],
+   "exercises": [
+    "cp-maths-addition-01",
+    "cp-maths-addition-02",
+    "cp-maths-addition-03",
+    "cp-maths-addition-04",
+    "cp-maths-addition-05",
+    "cp-maths-addition-06"
+   ],
+   "selfCheck": [
+    "cp-maths-addition-q1",
+    "cp-maths-addition-q2",
+    "cp-maths-addition-q3",
+    "cp-maths-addition-q4",
+    "cp-maths-addition-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier le vocabulaire (somme, total, retenue) et la technique de la retenue enseignée au CP."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "**Additionner**, c'est ajouter. On met ensemble deux nombres pour trouver le **total**. On écrit **+**."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "L'addition",
+     "md": "8 + 5 = 13. Le signe **+** se lit « plus ». Le résultat s'appelle la **somme** ou le total.\n\nOn peut changer l'ordre : 8 + 5 = 5 + 8."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Poser une addition",
+     "md": "1. J'écris les nombres l'un sous l'autre : unités sous unités, dizaines sous dizaines.\n2. J'additionne les **unités** d'abord.\n3. Si je trouve 10 ou plus, j'écris les unités et je retiens 1 dizaine.\n4. J'additionne les **dizaines** (avec la retenue)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 260,
+      "h": 200,
+      "items": [
+       {
+        "t": "text",
+        "x": 60,
+        "y": 110,
+        "text": "+",
+        "size": 30,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 80,
+        "text": "3",
+        "size": 30
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 80,
+        "text": "5",
+        "size": 30
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 120,
+        "text": "2",
+        "size": 30
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 120,
+        "text": "7",
+        "size": 30
+       },
+       {
+        "t": "line",
+        "x1": 50,
+        "y1": 125,
+        "x2": 210,
+        "y2": 125,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 165,
+        "text": "6",
+        "size": 30,
+        "bold": true,
+        "color": "blue"
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 165,
+        "text": "2",
+        "size": 30,
+        "bold": true,
+        "color": "blue"
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 55,
+        "text": "1",
+        "size": 18,
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 192,
+        "text": "d",
+        "size": 14,
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 192,
+        "text": "u",
+        "size": 14,
+        "color": "grey"
+       }
+      ]
+     },
+     "caption": "35 + 27 = 62 avec retenue.",
+     "alt": "Une addition posée : 35 au-dessus de 27. Les unités 5 + 7 font 12 : on écrit 2 et on retient 1 en rouge. Les dizaines 3 + 2 + 1 font 6. Résultat 62."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : sans retenue",
+     "statement": "Calcule 24 + 13.",
+     "steps": [
+      {
+       "md": "Unités : 4 + 3 = 7."
+      },
+      {
+       "md": "Dizaines : 2 + 1 = 3."
+      }
+     ],
+     "answer": "24 + 13 = **37**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : avec retenue",
+     "statement": "Calcule 35 + 27.",
+     "steps": [
+      {
+       "md": "Unités : 5 + 7 = 12. J'écris 2 et je retiens 1."
+      },
+      {
+       "md": "Dizaines : 3 + 2 + 1 (retenue) = 6."
+      }
+     ],
+     "answer": "35 + 27 = **62**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- N'oublie pas la retenue.\n- Écris bien les unités sous les unités."
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-addition-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-addition-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-addition-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-addition-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-addition-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-addition-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Calcule 6 + 7.",
+   "answer": 13,
+   "tolerance": 0,
+   "explanation": "6 + 7 = 13.",
+   "id": "cp-maths-addition-01",
+   "chapter": "cp-maths-calcul",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-addition",
+   "points": 1
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule 24 + 13.",
+   "answer": 37,
+   "tolerance": 0,
+   "explanation": "Unités 4 + 3 = 7 ; dizaines 2 + 1 = 3 : 37.",
+   "id": "cp-maths-addition-02",
+   "chapter": "cp-maths-calcul",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-addition",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien font 40 + 30 ?",
+   "choices": [
+    "7",
+    "70",
+    "700",
+    "10"
+   ],
+   "answer": 1,
+   "explanation": "4 dizaines + 3 dizaines = 7 dizaines = 70.",
+   "id": "cp-maths-addition-03",
+   "chapter": "cp-maths-calcul",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-addition",
+   "points": 1
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule 38 + 45.",
+   "answer": 83,
+   "tolerance": 0,
+   "explanation": "Unités : 8 + 5 = 13, j'écris 3 et je retiens 1. Dizaines : 3 + 4 + 1 = 8. Total 83.",
+   "method": "Poser l'addition et ne pas oublier la retenue.",
+   "id": "cp-maths-addition-04",
+   "chapter": "cp-maths-calcul",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-maths-addition",
+   "points": 1
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule 49 + 26.",
+   "answer": 75,
+   "tolerance": 0,
+   "explanation": "Unités : 9 + 6 = 15, j'écris 5, retiens 1. Dizaines : 4 + 2 + 1 = 7. Total 75.",
+   "id": "cp-maths-addition-05",
+   "chapter": "cp-maths-calcul",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-maths-addition",
+   "points": 1
+  },
+  {
+   "kind": "problem",
+   "prompt": "Au marché de Bafoussam, Mballa vend 36 avocats le matin et 28 avocats l'après-midi.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Combien d'avocats a-t-il vendus en tout ?",
+     "answer": 64,
+     "tolerance": 0,
+     "explanation": "36 + 28 = 64.",
+     "id": "cp-maths-addition-06-a",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Il en vend encore 6. Combien en a-t-il vendus maintenant ?",
+     "answer": 70,
+     "tolerance": 0,
+     "explanation": "64 + 6 = 70.",
+     "id": "cp-maths-addition-06-b",
+     "points": 1
+    }
+   ],
+   "explanation": "Il a vendu 64 avocats, puis 70.",
+   "id": "cp-maths-addition-06",
+   "chapter": "cp-maths-calcul",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cp-maths-addition"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le résultat de 5 + 9 ?",
+   "choices": [
+    "14",
+    "13",
+    "15",
+    "4"
+   ],
+   "answer": 0,
+   "explanation": "5 + 9 = 14.",
+   "id": "cp-maths-addition-q1",
+   "chapter": "cp-maths-calcul",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-addition",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le résultat de 52 + 17 ?",
+   "choices": [
+    "59",
+    "79",
+    "35",
+    "69"
+   ],
+   "answer": 3,
+   "explanation": "Unités 2 + 7 = 9 ; dizaines 5 + 1 = 6 : 69.",
+   "id": "cp-maths-addition-q2",
+   "chapter": "cp-maths-calcul",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-addition",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans une addition posée, on commence par…",
+   "choices": [
+    "les dizaines",
+    "le résultat",
+    "les unités",
+    "le signe"
+   ],
+   "answer": 2,
+   "explanation": "On additionne d'abord les unités.",
+   "id": "cp-maths-addition-q3",
+   "chapter": "cp-maths-calcul",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-addition",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le résultat d'une addition s'appelle…",
+   "choices": [
+    "la différence",
+    "la somme",
+    "le double",
+    "la moitié"
+   ],
+   "answer": 1,
+   "explanation": "Le résultat d'une addition est la somme.",
+   "id": "cp-maths-addition-q4",
+   "chapter": "cp-maths-calcul",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-addition",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le résultat de 27 + 48 ?",
+   "choices": [
+    "75",
+    "65",
+    "85",
+    "615"
+   ],
+   "answer": 0,
+   "explanation": "7 + 8 = 15, je retiens 1 ; 2 + 4 + 1 = 7 : 75.",
+   "id": "cp-maths-addition-q5",
+   "chapter": "cp-maths-calcul",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-addition",
+   "points": 1
+  }
+ ]
+}

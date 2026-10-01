@@ -1,0 +1,494 @@
+{
+ "chapter": "ce2-english-langue",
+ "lessons": [
+  {
+   "id": "ce2-english-daily-life",
+   "title": "La vie de tous les jours : le présent simple",
+   "minutes": 14,
+   "readAloud": true,
+   "programRef": "La vie de tous les jours : le présent simple (CE2, reconstitué) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Dire ce qu'on fait chaque jour avec le présent simple.",
+    "Ajouter -s avec he et she.",
+    "Dire les moments de la journée."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "ce2-english-daily-life-01",
+    "ce2-english-daily-life-02",
+    "ce2-english-daily-life-03",
+    "ce2-english-daily-life-04",
+    "ce2-english-daily-life-05",
+    "ce2-english-daily-life-06"
+   ],
+   "selfCheck": [
+    "ce2-english-daily-life-q1",
+    "ce2-english-daily-life-q2",
+    "ce2-english-daily-life-q3",
+    "ce2-english-daily-life-q4",
+    "ce2-english-daily-life-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que le présent simple (I wake up, he wakes up) est bien au programme d'initiation du CE2."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Chaque jour, on fait les mêmes choses : on se lève, on se lave, on va à l'école. En anglais, on utilise le **présent simple**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les actions de la journée",
+     "md": "I **wake up** (je me réveille), I **wash** (je me lave), I **eat** breakfast (je prends le petit déjeuner), I **go** to school (je vais à l'école), I **play** (je joue), I **sleep** (je dors)."
+    },
+    {
+     "type": "audio",
+     "lang": "en-GB",
+     "text": "I wake up. I wash. I eat breakfast. I go to school. I play. I sleep."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Le présent simple",
+     "md": "Avec I, you, we, they : le verbe ne change pas (**I play**). Avec **he** et **she** : on ajoute **-s** (**she plays**). Exceptions : go → goes, wash → washes."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les moments de la journée.",
+     "alt": "Quatre cases : morning (je me lève), afternoon (j'apprends), evening (je dîne), night (je dors).",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 130,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 40,
+        "w": 92.5,
+        "h": 56,
+        "fill": "lightorange",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 56.25,
+        "y": 59,
+        "text": "Morning",
+        "size": 15,
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 56.25,
+        "y": 77,
+        "text": "je me lève",
+        "size": 15,
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 105.5,
+        "y1": 68,
+        "x2": 129.5,
+        "y2": 68,
+        "color": "blue",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 132.5,
+        "y": 40,
+        "w": 92.5,
+        "h": 56,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 178.75,
+        "y": 59,
+        "text": "Afternoon",
+        "size": 15,
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 178.75,
+        "y": 77,
+        "text": "j'apprends",
+        "size": 15,
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 228.0,
+        "y1": 68,
+        "x2": 252.0,
+        "y2": 68,
+        "color": "blue",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 255.0,
+        "y": 40,
+        "w": 92.5,
+        "h": 56,
+        "fill": "lightgreen",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 301.25,
+        "y": 59,
+        "text": "Evening",
+        "size": 15,
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 301.25,
+        "y": 77,
+        "text": "je dîne",
+        "size": 15,
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 350.5,
+        "y1": 68,
+        "x2": 374.5,
+        "y2": 68,
+        "color": "blue",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 377.5,
+        "y": 40,
+        "w": 92.5,
+        "h": 56,
+        "fill": "lightgrey",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 423.75,
+        "y": 59,
+        "text": "Night",
+        "size": 15,
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 423.75,
+        "y": 77,
+        "text": "je dors",
+        "size": 15,
+        "anchor": "middle",
+        "bold": false
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : avec I",
+     "statement": "Dis en anglais : « Je vais à l'école le matin. »",
+     "steps": [
+      {
+       "md": "« Je vais » : « I go »."
+      },
+      {
+       "md": "« à l'école » : « to school », « le matin » : « in the morning »."
+      }
+     ],
+     "answer": "**I go to school in the morning.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : avec she",
+     "statement": "Amina se lave (wash). Écris la phrase avec « she ».",
+     "steps": [
+      {
+       "md": "Avec she, on ajoute -es à wash."
+      },
+      {
+       "md": "washes."
+      }
+     ],
+     "answer": "**She washes.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "Avec **he** et **she**, **n'oublie pas le -s** : **he plays**, pas « he play »."
+    },
+    {
+     "type": "more",
+     "items": [
+      "« Every day » = chaque jour ; « in the morning » = le matin ; « at night » = la nuit."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-english-daily-life-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-english-daily-life-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-english-daily-life-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-english-daily-life-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-english-daily-life-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-english-daily-life-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Que veut dire « I sleep » ?",
+   "explanation": "Sleep = dormir.",
+   "difficulty": 1,
+   "choices": [
+    "je joue",
+    "je cours",
+    "je mange",
+    "je dors"
+   ],
+   "answer": 3,
+   "id": "ce2-english-daily-life-01",
+   "chapter": "ce2-english-langue",
+   "tier": "application",
+   "points": 1,
+   "lesson": "ce2-english-daily-life",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : on dit « She plays ».",
+   "answer": true,
+   "explanation": "Avec she, on ajoute -s : plays.",
+   "difficulty": 1,
+   "id": "ce2-english-daily-life-02",
+   "chapter": "ce2-english-langue",
+   "tier": "application",
+   "points": 1,
+   "lesson": "ce2-english-daily-life",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque phrase à sa traduction.",
+   "pairs": [
+    [
+     "I wake up.",
+     "Je me réveille."
+    ],
+    [
+     "I eat.",
+     "Je mange."
+    ],
+    [
+     "I go to school.",
+     "Je vais à l'école."
+    ],
+    [
+     "I play.",
+     "Je joue."
+    ]
+   ],
+   "explanation": "Phrases du présent simple.",
+   "difficulty": 1,
+   "id": "ce2-english-daily-life-03",
+   "chapter": "ce2-english-langue",
+   "tier": "application",
+   "points": 1,
+   "lesson": "ce2-english-daily-life",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « He ___ football. »",
+   "explanation": "Avec he : plays.",
+   "difficulty": 2,
+   "choices": [
+    "to play",
+    "play",
+    "playing",
+    "plays"
+   ],
+   "answer": 3,
+   "id": "ce2-english-daily-life-04",
+   "chapter": "ce2-english-langue",
+   "tier": "approfondissement",
+   "points": 2,
+   "lesson": "ce2-english-daily-life",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "open",
+   "prompt": "Écris : « Elle se lave le matin. » (She … in the morning)",
+   "model": "She washes in the morning.",
+   "rubric": [
+    "She washes (1 point).",
+    "in the morning (1 point)."
+   ],
+   "explanation": "Avec she : washes.",
+   "difficulty": 2,
+   "id": "ce2-english-daily-life-05",
+   "chapter": "ce2-english-langue",
+   "tier": "approfondissement",
+   "points": 2,
+   "lesson": "ce2-english-daily-life",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Choisis la phrase correcte :",
+   "explanation": "Go devient goes avec she.",
+   "difficulty": 3,
+   "choices": [
+    "She go to school.",
+    "She to goes school.",
+    "She goes to school.",
+    "She going to school."
+   ],
+   "answer": 2,
+   "id": "ce2-english-daily-life-06",
+   "chapter": "ce2-english-langue",
+   "tier": "examen",
+   "points": 2,
+   "lesson": "ce2-english-daily-life",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que veut dire « morning » ?",
+   "explanation": "Morning = matin.",
+   "difficulty": 1,
+   "choices": [
+    "nuit",
+    "matin",
+    "midi",
+    "soir"
+   ],
+   "answer": 1,
+   "id": "ce2-english-daily-life-q1",
+   "chapter": "ce2-english-langue",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-english-daily-life",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « I ___ rice. »",
+   "explanation": "I eat.",
+   "difficulty": 1,
+   "choices": [
+    "eat",
+    "eats",
+    "am eat",
+    "eating"
+   ],
+   "answer": 0,
+   "id": "ce2-english-daily-life-q2",
+   "chapter": "ce2-english-langue",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-english-daily-life",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « She ___ . » (jouer)",
+   "explanation": "She plays.",
+   "difficulty": 2,
+   "choices": [
+    "play",
+    "plays",
+    "to play",
+    "playing"
+   ],
+   "answer": 1,
+   "id": "ce2-english-daily-life-q3",
+   "chapter": "ce2-english-langue",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-english-daily-life",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que veut dire « every day » ?",
+   "explanation": "Every day = chaque jour.",
+   "difficulty": 1,
+   "choices": [
+    "jamais",
+    "hier",
+    "chaque jour",
+    "demain"
+   ],
+   "answer": 2,
+   "id": "ce2-english-daily-life-q4",
+   "chapter": "ce2-english-langue",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-english-daily-life",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase est correcte ?",
+   "explanation": "Avec he, on ajoute -s : plays.",
+   "difficulty": 3,
+   "choices": [
+    "He plays.",
+    "He to plays.",
+    "He playing.",
+    "He play."
+   ],
+   "answer": 0,
+   "id": "ce2-english-daily-life-q5",
+   "chapter": "ce2-english-langue",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "ce2-english-daily-life",
+   "source": "Exercice original"
+  }
+ ]
+}

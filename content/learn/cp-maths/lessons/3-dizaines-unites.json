@@ -1,0 +1,402 @@
+{
+ "chapter": "cp-maths-numeration",
+ "lessons": [
+  {
+   "id": "cp-maths-dizaines-unites",
+   "title": "Dizaines et unités",
+   "minutes": 12,
+   "readAloud": true,
+   "programRef": "CP — Numération : dizaines et unités (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Faire des paquets de 10.",
+    "Dire combien un nombre a de dizaines et d'unités.",
+    "Écrire un nombre à partir de ses dizaines et unités."
+   ],
+   "prerequisites": [
+    "cp-maths-nombres100"
+   ],
+   "exercises": [
+    "cp-maths-dizaines-unites-01",
+    "cp-maths-dizaines-unites-02",
+    "cp-maths-dizaines-unites-03",
+    "cp-maths-dizaines-unites-04",
+    "cp-maths-dizaines-unites-05",
+    "cp-maths-dizaines-unites-06"
+   ],
+   "selfCheck": [
+    "cp-maths-dizaines-unites-q1",
+    "cp-maths-dizaines-unites-q2",
+    "cp-maths-dizaines-unites-q3",
+    "cp-maths-dizaines-unites-q4",
+    "cp-maths-dizaines-unites-q5"
+   ],
+   "reviewNotes": [
+    "Les mots « dizaine » et « unité » : vérifier qu'ils sont introduits à ce moment du CP."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Pour compter vite, on fait des **paquets de 10**. Un paquet de 10 s'appelle une **dizaine**. Les objets seuls sont des **unités**."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Dizaines et unités",
+     "md": "Dans un nombre à deux chiffres :\n\n- le chiffre de **gauche** dit combien de dizaines ;\n- le chiffre de **droite** dit combien d'unités.\n\nDans 47 : 4 dizaines et 7 unités. 47 = 40 + 7."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 312,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 20,
+        "w": 26,
+        "h": 90,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 4
+       },
+       {
+        "t": "rect",
+        "x": 54,
+        "y": 20,
+        "w": 26,
+        "h": 90,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 4
+       },
+       {
+        "t": "rect",
+        "x": 88,
+        "y": 20,
+        "w": 26,
+        "h": 90,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 4
+       },
+       {
+        "t": "rect",
+        "x": 152,
+        "y": 20,
+        "w": 18,
+        "h": 18,
+        "fill": "lightorange",
+        "stroke": "red",
+        "radius": 3
+       },
+       {
+        "t": "rect",
+        "x": 176,
+        "y": 20,
+        "w": 18,
+        "h": 18,
+        "fill": "lightorange",
+        "stroke": "red",
+        "radius": 3
+       },
+       {
+        "t": "rect",
+        "x": 200,
+        "y": 20,
+        "w": 18,
+        "h": 18,
+        "fill": "lightorange",
+        "stroke": "red",
+        "radius": 3
+       },
+       {
+        "t": "rect",
+        "x": 224,
+        "y": 20,
+        "w": 18,
+        "h": 18,
+        "fill": "lightorange",
+        "stroke": "red",
+        "radius": 3
+       },
+       {
+        "t": "text",
+        "x": 81,
+        "y": 135,
+        "text": "3 dizaines",
+        "size": 15,
+        "color": "blue",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 202,
+        "y": 135,
+        "text": "4 unités",
+        "size": 15,
+        "color": "red",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "34 = 3 dizaines et 4 unités.",
+     "alt": "Trois barres bleues (trois dizaines) et quatre petits carrés orange (quatre unités) : cela fait 34."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : décomposer",
+     "statement": "Combien 58 a-t-il de dizaines et d'unités ?",
+     "steps": [
+      {
+       "md": "Le chiffre de gauche est 5 : **5 dizaines**."
+      },
+      {
+       "md": "Le chiffre de droite est 8 : **8 unités**."
+      }
+     ],
+     "answer": "58 = 5 dizaines et 8 unités = 50 + 8."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : recomposer",
+     "statement": "Quel est le nombre : 6 dizaines et 3 unités ?",
+     "steps": [
+      {
+       "md": "6 dizaines = 60."
+      },
+      {
+       "md": "60 + 3 = 63."
+      }
+     ],
+     "answer": "Le nombre est **63**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- Dans 52 et 25, les chiffres sont les mêmes, mais pas le nombre : 52 = 5 dizaines et 2 unités ; 25 = 2 dizaines et 5 unités.\n- 10 unités font 1 dizaine."
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-dizaines-unites-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-dizaines-unites-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-dizaines-unites-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-dizaines-unites-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-dizaines-unites-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-dizaines-unites-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Combien de dizaines y a-t-il dans 47 ?",
+   "answer": 4,
+   "tolerance": 0,
+   "explanation": "Le chiffre de gauche de 47 est 4 : 4 dizaines.",
+   "id": "cp-maths-dizaines-unites-01",
+   "chapter": "cp-maths-numeration",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-dizaines-unites",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le chiffre des unités de 52 ?",
+   "choices": [
+    "5",
+    "52",
+    "0",
+    "2"
+   ],
+   "answer": 3,
+   "explanation": "Le chiffre de droite, 2, est celui des unités.",
+   "id": "cp-maths-dizaines-unites-02",
+   "chapter": "cp-maths-numeration",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-dizaines-unites",
+   "points": 1
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quel est le nombre : 3 dizaines et 5 unités ?",
+   "answer": 35,
+   "tolerance": 0,
+   "explanation": "30 + 5 = 35.",
+   "id": "cp-maths-dizaines-unites-03",
+   "chapter": "cp-maths-numeration",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-dizaines-unites",
+   "points": 1
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : dans 65, le chiffre 6 veut dire 6 unités.",
+   "answer": false,
+   "explanation": "Dans 65, le 6 est à gauche : il veut dire 6 dizaines, soit 60.",
+   "id": "cp-maths-dizaines-unites-04",
+   "chapter": "cp-maths-numeration",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-maths-dizaines-unites",
+   "points": 1
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Pour 70 noix de palme, combien de sacs de 10 faut-il ?",
+   "answer": 7,
+   "tolerance": 0,
+   "explanation": "70 = 7 dizaines : 7 sacs.",
+   "id": "cp-maths-dizaines-unites-05",
+   "chapter": "cp-maths-numeration",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-maths-dizaines-unites",
+   "points": 1
+  },
+  {
+   "kind": "problem",
+   "prompt": "Fotso range des mangues par sachets de 10. Il a 4 sachets pleins et 3 mangues seules.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Combien a-t-il de mangues en tout ?",
+     "answer": 43,
+     "tolerance": 0,
+     "explanation": "4 sachets = 40 mangues ; 40 + 3 = 43.",
+     "id": "cp-maths-dizaines-unites-06-a",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Combien de dizaines y a-t-il dans ce nombre ?",
+     "answer": 4,
+     "tolerance": 0,
+     "explanation": "43 a 4 dizaines.",
+     "id": "cp-maths-dizaines-unites-06-b",
+     "points": 1
+    }
+   ],
+   "explanation": "Il a 43 mangues, soit 4 dizaines et 3 unités.",
+   "id": "cp-maths-dizaines-unites-06",
+   "chapter": "cp-maths-numeration",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cp-maths-dizaines-unites"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien d'unités y a-t-il dans 81 ?",
+   "choices": [
+    "8",
+    "81",
+    "1",
+    "10"
+   ],
+   "answer": 2,
+   "explanation": "Le chiffre de droite est 1.",
+   "id": "cp-maths-dizaines-unites-q1",
+   "chapter": "cp-maths-numeration",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-dizaines-unites",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel nombre est 9 dizaines et 0 unité ?",
+   "choices": [
+    "9",
+    "90",
+    "99",
+    "19"
+   ],
+   "answer": 1,
+   "explanation": "9 dizaines = 90.",
+   "id": "cp-maths-dizaines-unites-q2",
+   "chapter": "cp-maths-numeration",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-dizaines-unites",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "40 + 6 = ?",
+   "choices": [
+    "46",
+    "64",
+    "406",
+    "10"
+   ],
+   "answer": 0,
+   "explanation": "4 dizaines et 6 unités : 46.",
+   "id": "cp-maths-dizaines-unites-q3",
+   "chapter": "cp-maths-numeration",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-dizaines-unites",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien de dizaines dans 29 ?",
+   "choices": [
+    "9",
+    "29",
+    "3",
+    "2"
+   ],
+   "answer": 3,
+   "explanation": "Dans 29 il y a 2 dizaines et 9 unités.",
+   "id": "cp-maths-dizaines-unites-q4",
+   "chapter": "cp-maths-numeration",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-dizaines-unites",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "10 unités font…",
+   "choices": [
+    "10 dizaines",
+    "100 unités",
+    "1 dizaine",
+    "2 dizaines"
+   ],
+   "answer": 2,
+   "explanation": "10 unités = 1 dizaine.",
+   "id": "cp-maths-dizaines-unites-q5",
+   "chapter": "cp-maths-numeration",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-dizaines-unites",
+   "points": 1
+  }
+ ]
+}

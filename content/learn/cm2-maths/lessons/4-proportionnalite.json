@@ -1,0 +1,483 @@
+{
+ "chapter": "cm2-maths-proportionnalite",
+ "lessons": [
+  {
+   "id": "cm2-maths-proportionnalite-fiche",
+   "chapter": "cm2-maths-proportionnalite",
+   "title": "La proportionnalité",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM2 — Proportionnalité (reconstitué)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Reconnaître une situation de proportionnalité.",
+    "Compléter un tableau avec le coefficient ou le retour à l'unité.",
+    "Résoudre un problème de prix, de vitesse ou de recette."
+   ],
+   "prerequisites": [
+    "cm2-maths-operations-fiche"
+   ],
+   "exercises": [
+    "cm2-maths-proportionnalite-01",
+    "cm2-maths-proportionnalite-02",
+    "cm2-maths-proportionnalite-03",
+    "cm2-maths-proportionnalite-04",
+    "cm2-maths-proportionnalite-05",
+    "cm2-maths-proportionnalite-06"
+   ],
+   "selfCheck": [
+    "cm2-maths-proportionnalite-q1",
+    "cm2-maths-proportionnalite-q2",
+    "cm2-maths-proportionnalite-q3",
+    "cm2-maths-proportionnalite-q4",
+    "cm2-maths-proportionnalite-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier le vocabulaire (coefficient, retour à l'unité, « règle de trois ») utilisé dans les classes et la place de la proportionnalité en CM2."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Deux grandeurs sont **proportionnelles** quand on obtient l'une en multipliant l'autre toujours par le **même nombre**, appelé coefficient. Si on achète 2 fois plus de sacs, on paie 2 fois plus."
+    },
+    {
+     "type": "illustration",
+     "caption": "Tableau de proportionnalité : on passe de la ligne des sacs à celle des prix en multipliant par 800.",
+     "alt": "Un tableau de deux lignes : sacs 2, 5, 8 et prix 1 600, 4 000, 6 400 FCFA. Une flèche entre les colonnes 2 et 5 indique « fois 2,5 ».",
+     "figure": {
+      "kind": "shapes",
+      "w": 460,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 25,
+        "w": 420,
+        "h": 40,
+        "stroke": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 65,
+        "w": 420,
+        "h": 40,
+        "stroke": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 125,
+        "y1": 25,
+        "x2": 125,
+        "y2": 105,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 230,
+        "y1": 25,
+        "x2": 230,
+        "y2": 105,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 335,
+        "y1": 25,
+        "x2": 335,
+        "y2": 105,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 72,
+        "y": 50,
+        "text": "Sacs",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 177,
+        "y": 50,
+        "text": "2",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 282,
+        "y": 50,
+        "text": "5",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 387,
+        "y": 50,
+        "text": "8",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 72,
+        "y": 90,
+        "text": "Prix (FCFA)",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 177,
+        "y": 90,
+        "text": "1 600",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 282,
+        "y": 90,
+        "text": "4 000",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 387,
+        "y": 90,
+        "text": "6 400",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 177,
+        "y1": 120,
+        "x2": 282,
+        "y2": 120,
+        "color": "blue",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 140,
+        "text": "× 2,5",
+        "size": 14,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Deux méthodes",
+     "md": "- **Coefficient** : prix = nombre × 800.\n- **Retour à l'unité** : on cherche le prix d'un seul objet, puis on multiplie.\n- **Linéarité** : si 2 sacs coûtent 1 600 FCFA, 4 sacs coûtent 3 200 FCFA (le double) ; 7 sacs = 5 sacs + 2 sacs."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : retour à l'unité",
+     "statement": "5 kg de cacao coûtent 6 000 FCFA. Quel est le prix de 8 kg ?",
+     "steps": [
+      {
+       "md": "Prix de 1 kg : 6 000 ÷ 5 = 1 200 FCFA."
+      },
+      {
+       "md": "Prix de 8 kg : 1 200 × 8 = 9 600 FCFA."
+      }
+     ],
+     "answer": "**8 kg coûtent 9 600 FCFA.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : est-ce proportionnel ?",
+     "statement": "Une fillette de 6 ans mesure 1,10 m. À 12 ans elle mesure 1,45 m. La taille est-elle proportionnelle à l'âge ?",
+     "steps": [
+      {
+       "md": "À 12 ans, on aurait 2 × 1,10 = 2,20 m si c'était proportionnel."
+      },
+      {
+       "md": "1,45 m ≠ 2,20 m : ce n'est pas proportionnel."
+      }
+     ],
+     "answer": "**Non : la taille n'est pas proportionnelle à l'âge.**"
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Pièges",
+     "md": "- Un prix de transport « fixe + supplément » n'est pas proportionnel.\n- L'âge et la taille, ou le nombre de buts et l'âge, ne sont pas proportionnels.\n- Ne pas additionner la même quantité sur les deux lignes : on **multiplie** (ou divise)."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-proportionnalite-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-proportionnalite-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-proportionnalite-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-proportionnalite-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-proportionnalite-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-proportionnalite-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "La vitesse moyenne est un exemple de proportionnalité : à vitesse constante, la distance est proportionnelle au temps."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "difficulty": 1,
+   "prompt": "3 cahiers coûtent 1 050 FCFA. Quel est le prix d'un cahier ?",
+   "answer": 350,
+   "tolerance": 0,
+   "explanation": "1 050 ÷ 3 = 350.",
+   "unit": "FCFA",
+   "id": "cm2-maths-proportionnalite-01",
+   "chapter": "cm2-maths-proportionnalite",
+   "tier": "application",
+   "lesson": "cm2-maths-proportionnalite-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 1,
+   "prompt": "Un cahier coûte 350 FCFA. Combien coûtent 6 cahiers ?",
+   "answer": 2100,
+   "tolerance": 0,
+   "explanation": "350 × 6 = 2 100.",
+   "unit": "FCFA",
+   "id": "cm2-maths-proportionnalite-02",
+   "chapter": "cm2-maths-proportionnalite",
+   "tier": "application",
+   "lesson": "cm2-maths-proportionnalite-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "truefalse",
+   "difficulty": 1,
+   "prompt": "Vrai ou faux : si 4 kg de riz coûtent 2 800 FCFA, 8 kg coûtent 5 600 FCFA.",
+   "answer": true,
+   "explanation": "8 kg = 2 fois 4 kg, donc le prix est doublé : 5 600.",
+   "id": "cm2-maths-proportionnalite-03",
+   "chapter": "cm2-maths-proportionnalite",
+   "tier": "application",
+   "lesson": "cm2-maths-proportionnalite-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 2,
+   "prompt": "4 stylos coûtent 500 FCFA. Combien coûtent 10 stylos ?",
+   "answer": 1250,
+   "tolerance": 0,
+   "explanation": "500 ÷ 4 = 125 ; 125 × 10 = 1 250.",
+   "unit": "FCFA",
+   "id": "cm2-maths-proportionnalite-04",
+   "chapter": "cm2-maths-proportionnalite",
+   "tier": "approfondissement",
+   "lesson": "cm2-maths-proportionnalite-fiche",
+   "points": 2,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 2,
+   "prompt": "Une voiture roule à vitesse constante et parcourt 90 km en 1 h 30. Quelle distance parcourt-elle en 3 h ?",
+   "answer": 180,
+   "tolerance": 0,
+   "explanation": "3 h = 2 × 1 h 30 : on double 90 km.",
+   "unit": "km",
+   "id": "cm2-maths-proportionnalite-05",
+   "chapter": "cm2-maths-proportionnalite",
+   "tier": "approfondissement",
+   "lesson": "cm2-maths-proportionnalite-fiche",
+   "points": 2,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "problem",
+   "difficulty": 2,
+   "prompt": "Ibrahim prépare un jus pour une fête à Garoua. La recette pour 4 personnes demande 6 mangues et 2 L d'eau.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Combien de mangues faut-il pour 12 personnes ?",
+     "answer": 18,
+     "tolerance": 0,
+     "explanation": "12 = 3 × 4 : 6 × 3 = 18.",
+     "points": 1,
+     "id": "cm2-maths-proportionnalite-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle quantité d'eau (en L) pour 12 personnes ?",
+     "answer": 6,
+     "tolerance": 0,
+     "explanation": "2 × 3 = 6 L.",
+     "unit": "L",
+     "points": 1,
+     "id": "cm2-maths-proportionnalite-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Combien de mangues pour 10 personnes ?",
+     "answer": 15,
+     "tolerance": 0,
+     "explanation": "Pour 1 personne : 6 ÷ 4 = 1,5 ; pour 10 : 15.",
+     "points": 2,
+     "id": "cm2-maths-proportionnalite-06-c"
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "id": "cm2-maths-proportionnalite-06",
+   "chapter": "cm2-maths-proportionnalite",
+   "tier": "examen",
+   "lesson": "cm2-maths-proportionnalite-fiche",
+   "points": 4,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Dans un tableau de proportionnalité, on passe d'une ligne à l'autre en…",
+   "choices": [
+    "ajoutant un même nombre",
+    "soustrayant un même nombre",
+    "changeant le nombre à chaque colonne",
+    "multipliant par un même nombre"
+   ],
+   "answer": 3,
+   "explanation": "C'est la définition du coefficient de proportionnalité.",
+   "id": "cm2-maths-proportionnalite-q1",
+   "chapter": "cm2-maths-proportionnalite",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-proportionnalite-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "5 mangues coûtent 750 FCFA. Prix de 2 mangues ?",
+   "choices": [
+    "150 FCFA",
+    "300 FCFA",
+    "375 FCFA",
+    "1 500 FCFA"
+   ],
+   "answer": 1,
+   "explanation": "750 ÷ 5 = 150 FCFA l'une ; 150 × 2 = 300.",
+   "id": "cm2-maths-proportionnalite-q2",
+   "chapter": "cm2-maths-proportionnalite",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-proportionnalite-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Quelle situation est proportionnelle ?",
+   "choices": [
+    "Le prix de n kg de tomates au même prix au kilo",
+    "La taille d'un enfant selon son âge",
+    "L'âge d'une mère selon l'âge de sa fille",
+    "Le poids d'un bébé selon le mois"
+   ],
+   "answer": 0,
+   "explanation": "Seul le prix d'un produit au prix constant double quand on double la quantité.",
+   "id": "cm2-maths-proportionnalite-q3",
+   "chapter": "cm2-maths-proportionnalite",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-proportionnalite-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Si 3 kg valent 1 800 FCFA, alors 9 kg valent…",
+   "choices": [
+    "3 600 FCFA",
+    "2 700 FCFA",
+    "5 400 FCFA",
+    "1 806 FCFA"
+   ],
+   "answer": 2,
+   "explanation": "9 = 3 × 3 : on triple 1 800.",
+   "id": "cm2-maths-proportionnalite-q4",
+   "chapter": "cm2-maths-proportionnalite",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-proportionnalite-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Quel est le coefficient de ce tableau : 2 → 500 ; 4 → 1 000 ; 6 → 1 500 ?",
+   "choices": [
+    "2",
+    "250",
+    "500",
+    "1 500"
+   ],
+   "answer": 1,
+   "explanation": "500 ÷ 2 = 250 ; 1 000 ÷ 4 = 250.",
+   "id": "cm2-maths-proportionnalite-q5",
+   "chapter": "cm2-maths-proportionnalite",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-proportionnalite-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  }
+ ]
+}

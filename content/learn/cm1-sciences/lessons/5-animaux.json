@@ -1,0 +1,551 @@
+{
+ "chapter": "cm1-sciences-animaux",
+ "lessons": [
+  {
+   "id": "cm1-sciences-animaux-fiche",
+   "title": "Qui mange qui ? Les chaînes alimentaires",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CM1 — Sciences et technologie (MINEDUB), reconstitué — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Classer des animaux selon leur régime alimentaire.",
+    "Construire et lire une chaîne alimentaire.",
+    "Expliquer le rôle des plantes et des décomposeurs."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cm1-sciences-animaux-01",
+    "cm1-sciences-animaux-02",
+    "cm1-sciences-animaux-03",
+    "cm1-sciences-animaux-04",
+    "cm1-sciences-animaux-05",
+    "cm1-sciences-animaux-06"
+   ],
+   "selfCheck": [
+    "cm1-sciences-animaux-q1",
+    "cm1-sciences-animaux-q2",
+    "cm1-sciences-animaux-q3",
+    "cm1-sciences-animaux-q4",
+    "cm1-sciences-animaux-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier les régimes alimentaires présentés (chimpanzé omnivore, pangolin insectivore).",
+    "Terme « décomposeur » et « producteur » au programme de CM1 ?"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Régime alimentaire",
+     "md": "Le **régime alimentaire** d'un animal est ce qu'il mange.\n\n- **Herbivore** : mange des plantes (éléphant, antilope).\n- **Carnivore** : mange d'autres animaux (lion, léopard).\n- **Omnivore** : mange des plantes et des animaux (chimpanzé).\n\nLe pangolin mange surtout des fourmis et des termites."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La chaîne alimentaire",
+     "md": "Une **chaîne alimentaire** montre qui mange qui. La **flèche** va de l'être mangé vers celui qui le mange.\n\nElle commence par une **plante** (le producteur), qui fabrique sa nourriture grâce à la lumière du Soleil."
+    },
+    {
+     "type": "illustration",
+     "caption": "Une chaîne alimentaire simple.",
+     "alt": "Quatre cases reliées par des flèches rouges : l'herbe (producteur), la sauterelle (herbivore), la grenouille (carnivore), le serpent (carnivore).",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 40,
+        "w": 115,
+        "h": 60,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 67,
+        "y": 64,
+        "text": "L'herbe",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 67,
+        "y": 86,
+        "text": "producteur",
+        "size": 13,
+        "color": "grey",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 127,
+        "y1": 70,
+        "x2": 147,
+        "y2": 70,
+        "color": "red",
+        "width": 3,
+        "dash": false,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 40,
+        "w": 115,
+        "h": 60,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 207,
+        "y": 64,
+        "text": "La sauterelle",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 207,
+        "y": 86,
+        "text": "herbivore",
+        "size": 13,
+        "color": "grey",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 267,
+        "y1": 70,
+        "x2": 287,
+        "y2": 70,
+        "color": "red",
+        "width": 3,
+        "dash": false,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 40,
+        "w": 115,
+        "h": 60,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 347,
+        "y": 64,
+        "text": "La grenouille",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 347,
+        "y": 86,
+        "text": "carnivore",
+        "size": 13,
+        "color": "grey",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 407,
+        "y1": 70,
+        "x2": 427,
+        "y2": 70,
+        "color": "red",
+        "width": 3,
+        "dash": false,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 430,
+        "y": 40,
+        "w": 115,
+        "h": 60,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 487,
+        "y": 64,
+        "text": "Le serpent",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 487,
+        "y": 86,
+        "text": "carnivore",
+        "size": 13,
+        "color": "grey",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 20,
+        "text": "Chaîne alimentaire : la flèche veut dire « est mangé par »",
+        "size": 14,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 130,
+        "text": "Le Soleil donne l'énergie à la plante, qui nourrit toute la chaîne",
+        "size": 13,
+        "color": "grey",
+        "anchor": "middle",
+        "bold": false
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Producteurs, consommateurs, décomposeurs",
+     "md": "- Les plantes sont des **producteurs**.\n- Les animaux sont des **consommateurs**.\n- Les champignons et les petits êtres du sol sont des **décomposeurs** : ils transforment les restes de plantes et d'animaux en terre riche pour les plantes."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : lire une chaîne",
+     "statement": "Lis la chaîne : herbe → antilope → léopard. Qui mange qui ?",
+     "steps": [
+      {
+       "md": "L'herbe est mangée par l'antilope : l'antilope est **herbivore**."
+      },
+      {
+       "md": "L'antilope est mangée par le léopard : le léopard est **carnivore**."
+      },
+      {
+       "md": "L'herbe, qui est une plante, est le **producteur**."
+      }
+     ],
+     "answer": "**L'antilope mange l'herbe et le léopard mange l'antilope.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : construire une chaîne",
+     "statement": "Construis une chaîne avec : un épervier, une feuille, une chenille.",
+     "steps": [
+      {
+       "md": "On commence par la plante : la **feuille**."
+      },
+      {
+       "md": "La chenille mange la feuille."
+      },
+      {
+       "md": "L'épervier mange la chenille."
+      }
+     ],
+     "answer": "**Feuille → chenille → épervier.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Dessiner la flèche dans le mauvais sens : elle va de la proie vers le prédateur.\n- Oublier de commencer par une plante.\n- Croire que tous les animaux sauvages sont carnivores : l'éléphant est herbivore."
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-animaux-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-animaux-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-animaux-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-animaux-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-animaux-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-animaux-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "cm1-sciences-animaux-01",
+   "chapter": "cm1-sciences-animaux",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cm1-sciences-animaux-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quel animal est herbivore ?",
+   "choices": [
+    "l'éléphant",
+    "le lion",
+    "le léopard",
+    "l'épervier"
+   ],
+   "answer": 0,
+   "explanation": "L'éléphant se nourrit de plantes.",
+   "method": "Chercher l'animal qui mange des plantes.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-animaux-02",
+   "chapter": "cm1-sciences-animaux",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cm1-sciences-animaux-fiche",
+   "points": 2,
+   "kind": "matching",
+   "prompt": "Associe chaque animal à son régime.",
+   "pairs": [
+    [
+     "éléphant",
+     "herbivore"
+    ],
+    [
+     "léopard",
+     "carnivore"
+    ],
+    [
+     "chimpanzé",
+     "omnivore"
+    ],
+    [
+     "pangolin",
+     "mange fourmis et termites"
+    ]
+   ],
+   "explanation": "Éléphant : plantes ; léopard : animaux ; chimpanzé : plantes et animaux ; pangolin : fourmis et termites.",
+   "review": true,
+   "reviewNote": "Régimes à vérifier dans le manuel (chimpanzé omnivore ; pangolin insectivore).",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-animaux-03",
+   "chapter": "cm1-sciences-animaux",
+   "tier": "application",
+   "difficulty": 2,
+   "lesson": "cm1-sciences-animaux-fiche",
+   "points": 1,
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : une chaîne alimentaire commence par une plante.",
+   "answer": true,
+   "explanation": "Les plantes fabriquent leur nourriture : elles sont le premier maillon.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-animaux-04",
+   "chapter": "cm1-sciences-animaux",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cm1-sciences-animaux-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Dans « herbe → criquet → oiseau », que mange l'oiseau ?",
+   "choices": [
+    "l'herbe",
+    "le Soleil",
+    "la terre",
+    "le criquet"
+   ],
+   "answer": 3,
+   "explanation": "La flèche va du criquet vers l'oiseau : l'oiseau mange le criquet.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-animaux-05",
+   "chapter": "cm1-sciences-animaux",
+   "tier": "approfondissement",
+   "difficulty": 3,
+   "lesson": "cm1-sciences-animaux-fiche",
+   "points": 1,
+   "kind": "numeric",
+   "prompt": "Dans la chaîne : feuille → chenille → oiseau → serpent → aigle, combien y a-t-il de maillons au total ?",
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "On compte : feuille, chenille, oiseau, serpent, aigle : 5 maillons.",
+   "method": "Compter chaque être vivant de la chaîne.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-animaux-06",
+   "chapter": "cm1-sciences-animaux",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "cm1-sciences-animaux-fiche",
+   "kind": "problem",
+   "prompt": "Une chaîne dans la savane.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quelle chaîne est correcte ?",
+     "choices": [
+      "lion → antilope → herbe",
+      "antilope → herbe → lion",
+      "herbe → lion → antilope",
+      "herbe → antilope → lion"
+     ],
+     "answer": 3,
+     "explanation": "La flèche part de la plante vers l'herbivore puis vers le carnivore.",
+     "id": "cm1-sciences-animaux-06-a",
+     "points": 1
+    },
+    {
+     "kind": "truefalse",
+     "prompt": "Les décomposeurs aident à refaire de la terre riche.",
+     "answer": true,
+     "explanation": "Ils transforment les restes en éléments utiles aux plantes.",
+     "id": "cm1-sciences-animaux-06-b",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Que se passe-t-il s'il n'y a plus d'herbe ?",
+     "choices": [
+      "les herbivores grossissent",
+      "les carnivores mangent de l'herbe",
+      "les herbivores manquent de nourriture",
+      "rien ne change"
+     ],
+     "answer": 2,
+     "explanation": "Sans plantes, les herbivores meurent ou partent, et les carnivores aussi manquent de nourriture.",
+     "id": "cm1-sciences-animaux-06-c",
+     "points": 1
+    }
+   ],
+   "explanation": "Voir la correction de chaque question.",
+   "method": "Suivre le sens des flèches.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-animaux-q1",
+   "chapter": "cm1-sciences-animaux",
+   "tier": "autoeval",
+   "lesson": "cm1-sciences-animaux-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quel mot désigne un animal qui mange de la viande ?",
+   "choices": [
+    "herbivore",
+    "carnivore",
+    "producteur",
+    "décomposeur"
+   ],
+   "answer": 1,
+   "explanation": "Un carnivore mange d'autres animaux."
+  },
+  {
+   "id": "cm1-sciences-animaux-q2",
+   "chapter": "cm1-sciences-animaux",
+   "tier": "autoeval",
+   "lesson": "cm1-sciences-animaux-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Qui est le producteur dans une chaîne ?",
+   "choices": [
+    "la plante",
+    "l'herbivore",
+    "le carnivore",
+    "le champignon seulement"
+   ],
+   "answer": 0,
+   "explanation": "La plante fabrique sa nourriture."
+  },
+  {
+   "id": "cm1-sciences-animaux-q3",
+   "chapter": "cm1-sciences-animaux",
+   "tier": "autoeval",
+   "lesson": "cm1-sciences-animaux-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Que veut dire la flèche dans une chaîne ?",
+   "choices": [
+    "est mangé par",
+    "mange",
+    "est plus grand que",
+    "habite avec"
+   ],
+   "answer": 0,
+   "explanation": "La flèche va de l'être mangé vers celui qui le mange."
+  },
+  {
+   "id": "cm1-sciences-animaux-q4",
+   "chapter": "cm1-sciences-animaux",
+   "tier": "autoeval",
+   "lesson": "cm1-sciences-animaux-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quel animal est omnivore ?",
+   "choices": [
+    "l'éléphant",
+    "le lion",
+    "le léopard",
+    "le chimpanzé"
+   ],
+   "answer": 3,
+   "explanation": "Le chimpanzé mange des plantes et des petits animaux.",
+   "review": true,
+   "reviewNote": "Vérifier que le régime du chimpanzé est présenté comme dans le manuel."
+  },
+  {
+   "id": "cm1-sciences-animaux-q5",
+   "chapter": "cm1-sciences-animaux",
+   "tier": "autoeval",
+   "lesson": "cm1-sciences-animaux-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "À quoi servent les décomposeurs ?",
+   "choices": [
+    "à chasser les herbivores",
+    "à produire du lait",
+    "à transformer les restes en terre riche",
+    "à couper les arbres"
+   ],
+   "answer": 2,
+   "explanation": "Ils recyclent les restes des êtres vivants."
+  }
+ ]
+}

@@ -1,0 +1,705 @@
+{
+ "chapter": "cp-histoire-geo-orientation-ch",
+ "lessons": [
+  {
+   "id": "cp-histoire-geo-orientation-fiche",
+   "title": "Me repérer : droite, gauche, nord, sud",
+   "minutes": 12,
+   "readAloud": true,
+   "programRef": "CP — Histoire-Géographie-ECM : orientation simple (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Utiliser droite, gauche, devant, derrière, dessus, dessous.",
+    "Dire où le soleil se lève et se couche.",
+    "Lire une petite carte avec les points cardinaux."
+   ],
+   "prerequisites": [
+    "cp-histoire-geo-quartier-fiche"
+   ],
+   "exercises": [
+    "cp-histoire-geo-orientation-01",
+    "cp-histoire-geo-orientation-02",
+    "cp-histoire-geo-orientation-03",
+    "cp-histoire-geo-orientation-04",
+    "cp-histoire-geo-orientation-05",
+    "cp-histoire-geo-orientation-06"
+   ],
+   "selfCheck": [
+    "cp-histoire-geo-orientation-q1",
+    "cp-histoire-geo-orientation-q2",
+    "cp-histoire-geo-orientation-q3",
+    "cp-histoire-geo-orientation-q4",
+    "cp-histoire-geo-orientation-q5"
+   ],
+   "reviewNotes": [
+    "Positions relatives des villes (Maroua au nord, Douala à l'ouest, Bertoua à l'est, Ebolowa au sud de Yaoundé) : directions approximatives à confirmer sur une carte officielle.",
+    "Carte schématique, pas à l'échelle."
+   ],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "Ma main droite écrit. Ma main gauche tient le cahier.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Se repérer",
+     "md": "Pour dire où est un objet, je dis : à **droite**, à **gauche**, **devant**, **derrière**, **sur**, **sous**, **entre**, **à côté**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les points cardinaux",
+     "md": "Le soleil se lève du côté de l'**est**. Il se couche du côté de l'**ouest**.\n\nLe **nord** et le **sud** sont les deux autres directions. Sur une carte, le nord est en haut."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 300,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 210,
+        "cy": 150,
+        "r": 30,
+        "fill": "lightyellow",
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 155,
+        "text": "Yaoundé",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 118,
+        "x2": 210,
+        "y2": 62,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 45,
+        "text": "Maroua (nord)",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 182,
+        "x2": 210,
+        "y2": 240,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 262,
+        "text": "Ebolowa (sud)",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 178,
+        "y1": 150,
+        "x2": 105,
+        "y2": 150,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 65,
+        "y": 155,
+        "text": "Douala",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 65,
+        "y": 172,
+        "text": "(ouest)",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 242,
+        "y1": 150,
+        "x2": 315,
+        "y2": 150,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 358,
+        "y": 155,
+        "text": "Bertoua",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 358,
+        "y": 172,
+        "text": "(est)",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       }
+      ]
+     },
+     "caption": "Carte très simplifiée (non à l'échelle)",
+     "alt": "Yaoundé au centre, Maroua en haut au nord, Ebolowa en bas au sud, Douala à gauche à l'ouest, Bertoua à droite à l'est."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : gauche ou droite",
+     "statement": "Ibrahim écrit avec la main droite. Avec quelle main tient-il son cahier ?",
+     "steps": [
+      {
+       "md": "Sa main qui écrit est la droite."
+      },
+      {
+       "md": "L'autre main est la gauche."
+      }
+     ],
+     "answer": "**Il tient son cahier avec la main gauche.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : la carte",
+     "statement": "Sur la carte, où est Douala par rapport à Yaoundé ?",
+     "steps": [
+      {
+       "md": "Douala est à gauche de Yaoundé."
+      },
+      {
+       "md": "À gauche, c'est l'ouest."
+      }
+     ],
+     "answer": "**Douala est à l'ouest de Yaoundé.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention !",
+     "md": "Droite et gauche changent si on se tourne. Le nord, lui, ne change pas."
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-histoire-geo-orientation-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-histoire-geo-orientation-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-histoire-geo-orientation-03"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "De quel côté le soleil se lève-t-il ?",
+   "explanation": "Le soleil se lève à l'**est**.",
+   "id": "cp-histoire-geo-orientation-01",
+   "chapter": "cp-histoire-geo-orientation-ch",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-histoire-geo-orientation-fiche",
+   "points": 1,
+   "choices": [
+    "l'ouest",
+    "l'est",
+    "le sud",
+    "le nord"
+   ],
+   "answer": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : sur une carte, le nord est en haut.",
+   "answer": true,
+   "explanation": "Oui. En général, le nord est en haut.",
+   "id": "cp-histoire-geo-orientation-02",
+   "chapter": "cp-histoire-geo-orientation-ch",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-histoire-geo-orientation-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Relie chaque mot à son contraire.",
+   "pairs": [
+    [
+     "devant",
+     "derrière"
+    ],
+    [
+     "droite",
+     "gauche"
+    ],
+    [
+     "dessus",
+     "dessous"
+    ],
+    [
+     "est",
+     "ouest"
+    ]
+   ],
+   "explanation": "Devant/derrière, droite/gauche, dessus/dessous, est/ouest.",
+   "id": "cp-histoire-geo-orientation-03",
+   "chapter": "cp-histoire-geo-orientation-ch",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-histoire-geo-orientation-fiche",
+   "points": 2,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Sur la carte, où est Maroua par rapport à Yaoundé ?",
+   "explanation": "Maroua est en haut de la carte : au nord.",
+   "figure": {
+    "kind": "shapes",
+    "w": 420,
+    "h": 300,
+    "items": [
+     {
+      "t": "circle",
+      "cx": 210,
+      "cy": 150,
+      "r": 30,
+      "fill": "lightyellow",
+      "stroke": "ink"
+     },
+     {
+      "t": "text",
+      "x": 210,
+      "y": 155,
+      "text": "Yaoundé",
+      "size": 13,
+      "color": "ink",
+      "anchor": "middle",
+      "bold": true
+     },
+     {
+      "t": "line",
+      "x1": 210,
+      "y1": 118,
+      "x2": 210,
+      "y2": 62,
+      "color": "ink",
+      "width": 2,
+      "arrow": "end"
+     },
+     {
+      "t": "text",
+      "x": 210,
+      "y": 45,
+      "text": "Maroua (nord)",
+      "size": 14,
+      "color": "ink",
+      "anchor": "middle",
+      "bold": false
+     },
+     {
+      "t": "line",
+      "x1": 210,
+      "y1": 182,
+      "x2": 210,
+      "y2": 240,
+      "color": "ink",
+      "width": 2,
+      "arrow": "end"
+     },
+     {
+      "t": "text",
+      "x": 210,
+      "y": 262,
+      "text": "Ebolowa (sud)",
+      "size": 14,
+      "color": "ink",
+      "anchor": "middle",
+      "bold": false
+     },
+     {
+      "t": "line",
+      "x1": 178,
+      "y1": 150,
+      "x2": 105,
+      "y2": 150,
+      "color": "ink",
+      "width": 2,
+      "arrow": "end"
+     },
+     {
+      "t": "text",
+      "x": 65,
+      "y": 155,
+      "text": "Douala",
+      "size": 14,
+      "color": "ink",
+      "anchor": "middle",
+      "bold": false
+     },
+     {
+      "t": "text",
+      "x": 65,
+      "y": 172,
+      "text": "(ouest)",
+      "size": 13,
+      "color": "ink",
+      "anchor": "middle",
+      "bold": false
+     },
+     {
+      "t": "line",
+      "x1": 242,
+      "y1": 150,
+      "x2": 315,
+      "y2": 150,
+      "color": "ink",
+      "width": 2,
+      "arrow": "end"
+     },
+     {
+      "t": "text",
+      "x": 358,
+      "y": 155,
+      "text": "Bertoua",
+      "size": 14,
+      "color": "ink",
+      "anchor": "middle",
+      "bold": false
+     },
+     {
+      "t": "text",
+      "x": 358,
+      "y": 172,
+      "text": "(est)",
+      "size": 13,
+      "color": "ink",
+      "anchor": "middle",
+      "bold": false
+     }
+    ]
+   },
+   "review": true,
+   "reviewNote": "Direction approximative : à confirmer sur une carte officielle.",
+   "id": "cp-histoire-geo-orientation-04",
+   "chapter": "cp-histoire-geo-orientation-ch",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-histoire-geo-orientation-fiche",
+   "points": 1,
+   "choices": [
+    "au sud",
+    "à l'ouest",
+    "à l'est",
+    "au nord"
+   ],
+   "answer": 3,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Sur la carte, quelle ville est à l'est de Yaoundé ?",
+   "explanation": "Bertoua est à droite de Yaoundé : à l'est.",
+   "figure": {
+    "kind": "shapes",
+    "w": 420,
+    "h": 300,
+    "items": [
+     {
+      "t": "circle",
+      "cx": 210,
+      "cy": 150,
+      "r": 30,
+      "fill": "lightyellow",
+      "stroke": "ink"
+     },
+     {
+      "t": "text",
+      "x": 210,
+      "y": 155,
+      "text": "Yaoundé",
+      "size": 13,
+      "color": "ink",
+      "anchor": "middle",
+      "bold": true
+     },
+     {
+      "t": "line",
+      "x1": 210,
+      "y1": 118,
+      "x2": 210,
+      "y2": 62,
+      "color": "ink",
+      "width": 2,
+      "arrow": "end"
+     },
+     {
+      "t": "text",
+      "x": 210,
+      "y": 45,
+      "text": "Maroua (nord)",
+      "size": 14,
+      "color": "ink",
+      "anchor": "middle",
+      "bold": false
+     },
+     {
+      "t": "line",
+      "x1": 210,
+      "y1": 182,
+      "x2": 210,
+      "y2": 240,
+      "color": "ink",
+      "width": 2,
+      "arrow": "end"
+     },
+     {
+      "t": "text",
+      "x": 210,
+      "y": 262,
+      "text": "Ebolowa (sud)",
+      "size": 14,
+      "color": "ink",
+      "anchor": "middle",
+      "bold": false
+     },
+     {
+      "t": "line",
+      "x1": 178,
+      "y1": 150,
+      "x2": 105,
+      "y2": 150,
+      "color": "ink",
+      "width": 2,
+      "arrow": "end"
+     },
+     {
+      "t": "text",
+      "x": 65,
+      "y": 155,
+      "text": "Douala",
+      "size": 14,
+      "color": "ink",
+      "anchor": "middle",
+      "bold": false
+     },
+     {
+      "t": "text",
+      "x": 65,
+      "y": 172,
+      "text": "(ouest)",
+      "size": 13,
+      "color": "ink",
+      "anchor": "middle",
+      "bold": false
+     },
+     {
+      "t": "line",
+      "x1": 242,
+      "y1": 150,
+      "x2": 315,
+      "y2": 150,
+      "color": "ink",
+      "width": 2,
+      "arrow": "end"
+     },
+     {
+      "t": "text",
+      "x": 358,
+      "y": 155,
+      "text": "Bertoua",
+      "size": 14,
+      "color": "ink",
+      "anchor": "middle",
+      "bold": false
+     },
+     {
+      "t": "text",
+      "x": 358,
+      "y": 172,
+      "text": "(est)",
+      "size": 13,
+      "color": "ink",
+      "anchor": "middle",
+      "bold": false
+     }
+    ]
+   },
+   "review": true,
+   "reviewNote": "Direction approximative : à confirmer sur une carte officielle.",
+   "id": "cp-histoire-geo-orientation-05",
+   "chapter": "cp-histoire-geo-orientation-ch",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-histoire-geo-orientation-fiche",
+   "points": 1,
+   "choices": [
+    "Douala",
+    "Bertoua",
+    "Ebolowa",
+    "Maroua"
+   ],
+   "answer": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "open",
+   "prompt": "Écris une phrase pour dire où est ton cahier : sur la table, sous la table, à droite ou à gauche de toi.",
+   "model": "Mon cahier est sur la table, à ma droite.",
+   "rubric": [
+    "Un mot de position est utilisé.",
+    "La phrase est complète."
+   ],
+   "explanation": "Tout mot de position bien employé est accepté.",
+   "id": "cp-histoire-geo-orientation-06",
+   "chapter": "cp-histoire-geo-orientation-ch",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cp-histoire-geo-orientation-fiche",
+   "points": 3,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le contraire de « à gauche » est…",
+   "explanation": "Gauche et droite sont contraires.",
+   "id": "cp-histoire-geo-orientation-q1",
+   "chapter": "cp-histoire-geo-orientation-ch",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-histoire-geo-orientation-fiche",
+   "points": 1,
+   "choices": [
+    "derrière",
+    "dessous",
+    "au nord",
+    "à droite"
+   ],
+   "answer": 3,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le soleil se couche à…",
+   "explanation": "Il se couche à l'ouest.",
+   "id": "cp-histoire-geo-orientation-q2",
+   "chapter": "cp-histoire-geo-orientation-ch",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-histoire-geo-orientation-fiche",
+   "points": 1,
+   "choices": [
+    "l'est",
+    "l'ouest",
+    "le nord",
+    "le centre"
+   ],
+   "answer": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le contraire de « devant » est…",
+   "explanation": "Devant/derrière.",
+   "id": "cp-histoire-geo-orientation-q3",
+   "chapter": "cp-histoire-geo-orientation-ch",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-histoire-geo-orientation-fiche",
+   "points": 1,
+   "choices": [
+    "dessus",
+    "dessous",
+    "gauche",
+    "derrière"
+   ],
+   "answer": 3,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Sur une carte, le nord est…",
+   "explanation": "Le nord est en haut.",
+   "id": "cp-histoire-geo-orientation-q4",
+   "chapter": "cp-histoire-geo-orientation-ch",
+   "tier": "autoeval",
+   "difficulty": 2,
+   "lesson": "cp-histoire-geo-orientation-fiche",
+   "points": 1,
+   "choices": [
+    "en bas",
+    "en haut",
+    "à gauche",
+    "à droite"
+   ],
+   "answer": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot dit « au-dessus de la table » ?",
+   "explanation": "Sur la table : dessus.",
+   "id": "cp-histoire-geo-orientation-q5",
+   "chapter": "cp-histoire-geo-orientation-ch",
+   "tier": "autoeval",
+   "difficulty": 2,
+   "lesson": "cp-histoire-geo-orientation-fiche",
+   "points": 1,
+   "choices": [
+    "sous",
+    "derrière",
+    "entre",
+    "sur"
+   ],
+   "answer": 3,
+   "source": "Exercice original"
+  }
+ ]
+}

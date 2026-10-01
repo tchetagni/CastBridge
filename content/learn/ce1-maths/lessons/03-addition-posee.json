@@ -1,0 +1,445 @@
+{
+ "chapter": "ce1-maths-operations",
+ "lessons": [
+  {
+   "id": "ce1-maths-addition-posee",
+   "title": "L'addition posée",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CE1 — Programme de mathématiques du cycle 2, MINEDUB (reconstitué, à vérifier sur le texte officiel) — calcul : addition posée de nombres jusqu'à 999 (avec retenue)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Poser une addition en colonnes (unités sous unités).",
+    "Calculer avec une retenue.",
+    "Vérifier un résultat avec un calcul approché."
+   ],
+   "prerequisites": [
+    "ce1-maths-nombres-1000"
+   ],
+   "exercises": [
+    "ce1-maths-addition-posee-01",
+    "ce1-maths-addition-posee-02",
+    "ce1-maths-addition-posee-03",
+    "ce1-maths-addition-posee-04",
+    "ce1-maths-addition-posee-05",
+    "ce1-maths-addition-posee-06"
+   ],
+   "selfCheck": [
+    "ce1-maths-addition-posee-q1",
+    "ce1-maths-addition-posee-q2",
+    "ce1-maths-addition-posee-q3",
+    "ce1-maths-addition-posee-q4",
+    "ce1-maths-addition-posee-q5"
+   ],
+   "reviewNotes": [
+    "Calculs vérifiés par script. Vérifier que le texte du problème et le choix de l'addition avec retenue sont adaptés au CE1."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Poser une addition",
+     "md": "On écrit les nombres **les uns sous les autres** : unités sous unités, dizaines sous dizaines, centaines sous centaines.\n\nOn calcule **de droite à gauche** : unités, dizaines, centaines."
+    },
+    {
+     "type": "illustration",
+     "caption": "L'addition posée 238 + 145.",
+     "alt": "Une addition en colonnes : 238 au-dessus, 145 en dessous avec un signe plus, un trait, et le résultat 383.",
+     "figure": {
+      "kind": "shapes",
+      "w": 300,
+      "h": 210,
+      "items": [
+       {
+        "t": "text",
+        "x": 180,
+        "y": 52,
+        "text": "8",
+        "size": 30,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 136,
+        "y": 52,
+        "text": "3",
+        "size": 30,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 92,
+        "y": 52,
+        "text": "2",
+        "size": 30,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 100,
+        "text": "5",
+        "size": 30,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 136,
+        "y": 100,
+        "text": "4",
+        "size": 30,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 92,
+        "y": 100,
+        "text": "1",
+        "size": 30,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 100,
+        "text": "+",
+        "size": 30,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 115,
+        "x2": 212,
+        "y2": 115,
+        "color": "ink",
+        "width": 3,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 155,
+        "text": "3",
+        "size": 30,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 136,
+        "y": 155,
+        "text": "8",
+        "size": 30,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 92,
+        "y": 155,
+        "text": "3",
+        "size": 30,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "La retenue",
+     "md": "Quand on obtient **10 ou plus** dans une colonne, on écrit le chiffre des unités et on **retient** la dizaine pour la colonne de gauche.\n\n*Exemple :* 8 + 5 = 13 → j'écris 3, je retiens 1."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : sans retenue",
+     "statement": "Calcule 214 + 123.",
+     "steps": [
+      {
+       "md": "Unités : 4 + 3 = 7."
+      },
+      {
+       "md": "Dizaines : 1 + 2 = 3."
+      },
+      {
+       "md": "Centaines : 2 + 1 = 3."
+      }
+     ],
+     "answer": "**214 + 123 = 337**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : avec retenue",
+     "statement": "Calcule 238 + 145.",
+     "steps": [
+      {
+       "md": "Unités : 8 + 5 = 13 → j'écris 3, je retiens 1."
+      },
+      {
+       "md": "Dizaines : 3 + 4 + 1 (retenue) = 8."
+      },
+      {
+       "md": "Centaines : 2 + 1 = 3."
+      }
+     ],
+     "answer": "**238 + 145 = 383**"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-maths-addition-posee-01"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode",
+     "md": "1. Je pose en colonnes.\n2. Je calcule de droite à gauche.\n3. Je n'oublie pas la retenue.\n4. Je vérifie : le résultat est-il plus grand que chaque nombre ?"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- Je n'oublie pas d'ajouter la retenue.\n- Je ne décale pas les colonnes : unités sous unités."
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Calcule : 123 + 234",
+   "answer": 357,
+   "tolerance": 0,
+   "explanation": "Unités : 3 + 4 = 7 ; dizaines : 2 + 3 = 5 ; centaines : 1 + 2 = 3. Résultat : 357.",
+   "id": "ce1-maths-addition-posee-01",
+   "chapter": "ce1-maths-operations",
+   "tier": "application",
+   "lesson": "ce1-maths-addition-posee",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Calcule : 48 + 27",
+   "answer": 75,
+   "tolerance": 0,
+   "explanation": "8 + 7 = 15 : j'écris 5, je retiens 1. Puis 4 + 2 + 1 = 7. Résultat : 75.",
+   "id": "ce1-maths-addition-posee-02",
+   "chapter": "ce1-maths-operations",
+   "tier": "application",
+   "lesson": "ce1-maths-addition-posee",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Dans une addition posée, on commence par…",
+   "choices": [
+    "les centaines",
+    "le signe +",
+    "les dizaines",
+    "les unités"
+   ],
+   "answer": 3,
+   "explanation": "On calcule de droite à gauche : unités d'abord.",
+   "id": "ce1-maths-addition-posee-03",
+   "chapter": "ce1-maths-operations",
+   "tier": "application",
+   "lesson": "ce1-maths-addition-posee",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "Calcule : 365 + 278",
+   "answer": 643,
+   "tolerance": 0,
+   "explanation": "5 + 8 = 13 (retenue 1) ; 6 + 7 + 1 = 14 (retenue 1) ; 3 + 2 + 1 = 6. Résultat : 643.",
+   "id": "ce1-maths-addition-posee-04",
+   "chapter": "ce1-maths-operations",
+   "tier": "approfondissement",
+   "lesson": "ce1-maths-addition-posee",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "truefalse",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "Vrai ou faux : 199 + 1 = 200.",
+   "answer": true,
+   "explanation": "9 + 1 = 10 : j'écris 0 et je retiens 1 ; 9 + 1 = 10 : j'écris 0 et je retiens 1 ; puis 1 + 1 = 2. Résultat : 200.",
+   "id": "ce1-maths-addition-posee-05",
+   "chapter": "ce1-maths-operations",
+   "tier": "approfondissement",
+   "lesson": "ce1-maths-addition-posee",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "problem",
+   "difficulty": 2,
+   "prompt": "Au marché de Bafoussam, Fotso vend 245 mangues le matin et 168 mangues l'après-midi.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "difficulty": 1,
+     "points": 2,
+     "prompt": "Combien de mangues a-t-il vendues en tout ?",
+     "answer": 413,
+     "tolerance": 0,
+     "explanation": "245 + 168 = 413.",
+     "id": "ce1-maths-addition-posee-06-a"
+    },
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Quelle opération as-tu faite ?",
+     "choices": [
+      "une division",
+      "une soustraction",
+      "une addition",
+      "une multiplication"
+     ],
+     "answer": 2,
+     "explanation": "On ajoute les mangues du matin et de l'après-midi.",
+     "id": "ce1-maths-addition-posee-06-b"
+    },
+    {
+     "kind": "truefalse",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Vrai ou faux : il a vendu plus de 400 mangues.",
+     "answer": true,
+     "explanation": "413 > 400.",
+     "id": "ce1-maths-addition-posee-06-c"
+    }
+   ],
+   "id": "ce1-maths-addition-posee-06",
+   "chapter": "ce1-maths-operations",
+   "tier": "examen",
+   "lesson": "ce1-maths-addition-posee",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Résultat de 150 + 250 ?",
+   "choices": [
+    "350",
+    "300",
+    "500",
+    "400"
+   ],
+   "answer": 3,
+   "explanation": "150 + 250 = 400.",
+   "id": "ce1-maths-addition-posee-q1",
+   "chapter": "ce1-maths-operations",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-addition-posee",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Résultat de 37 + 45 ?",
+   "choices": [
+    "72",
+    "81",
+    "82",
+    "92"
+   ],
+   "answer": 2,
+   "explanation": "7 + 5 = 12 → 2, retenue 1 ; 3 + 4 + 1 = 8 : 82.",
+   "id": "ce1-maths-addition-posee-q2",
+   "chapter": "ce1-maths-operations",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-addition-posee",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Une addition posée se calcule de…",
+   "choices": [
+    "droite à gauche",
+    "haut en bas",
+    "bas en haut",
+    "gauche à droite"
+   ],
+   "answer": 0,
+   "explanation": "Toujours en commençant par les unités.",
+   "id": "ce1-maths-addition-posee-q3",
+   "chapter": "ce1-maths-operations",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-addition-posee",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Dans 8 + 6 = 14, la retenue est…",
+   "choices": [
+    "8",
+    "1",
+    "0",
+    "4"
+   ],
+   "answer": 1,
+   "explanation": "14 = 1 dizaine et 4 unités : retenue 1.",
+   "id": "ce1-maths-addition-posee-q4",
+   "chapter": "ce1-maths-operations",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-addition-posee",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Résultat de 99 + 1 ?",
+   "choices": [
+    "100",
+    "1 000",
+    "101",
+    "90"
+   ],
+   "answer": 0,
+   "explanation": "99 + 1 = 100.",
+   "id": "ce1-maths-addition-posee-q5",
+   "chapter": "ce1-maths-operations",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-addition-posee",
+   "source": "Exercice original, niveau CE1"
+  }
+ ]
+}

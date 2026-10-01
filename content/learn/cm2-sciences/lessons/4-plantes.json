@@ -1,0 +1,507 @@
+{
+ "chapter": "cm2-sciences-plantes",
+ "lessons": [
+  {
+   "id": "cm2-sciences-plantes-fiche",
+   "title": "La plante verte : ses organes et ses besoins",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CM2 — Les plantes : organes, besoins, germination (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Nommer les organes d'une plante et leur rôle.",
+    "Citer ce dont une plante a besoin pour vivre.",
+    "Citer les conditions de la germination d'une graine."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cm2-sciences-plantes-01",
+    "cm2-sciences-plantes-02",
+    "cm2-sciences-plantes-03",
+    "cm2-sciences-plantes-04",
+    "cm2-sciences-plantes-05",
+    "cm2-sciences-plantes-06"
+   ],
+   "selfCheck": [
+    "cm2-sciences-plantes-q1",
+    "cm2-sciences-plantes-q2",
+    "cm2-sciences-plantes-q3",
+    "cm2-sciences-plantes-q4",
+    "cm2-sciences-plantes-q5"
+   ],
+   "reviewNotes": [
+    "Le mot « photosynthèse » est-il au programme du CM2 ? Sinon, le retirer.",
+    "Vérifier la formulation « la plante fabrique sa nourriture » (vocabulaire du niveau)."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les organes de la plante",
+     "md": "Une plante verte a quatre organes principaux :\n\n- les **racines** : elles tiennent la plante et absorbent l'eau et les sels minéraux du sol ;\n- la **tige** : elle porte la plante et transporte la sève ;\n- les **feuilles** : elles fabriquent la nourriture de la plante ;\n- la **fleur** : elle donne le fruit et les graines."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 460,
+      "h": 280,
+      "items": [
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 160,
+        "x2": 440,
+        "y2": 160,
+        "color": "brown",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 160,
+        "y1": 160,
+        "x2": 160,
+        "y2": 60,
+        "color": "green",
+        "width": 6
+       },
+       {
+        "t": "circle",
+        "cx": 160,
+        "cy": 40,
+        "r": 16,
+        "fill": "pink",
+        "stroke": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 120,
+        "cy": 100,
+        "r": 20,
+        "fill": "lightgreen",
+        "stroke": "green"
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 120,
+        "r": 20,
+        "fill": "lightgreen",
+        "stroke": "green"
+       },
+       {
+        "t": "line",
+        "x1": 160,
+        "y1": 160,
+        "x2": 120,
+        "y2": 220,
+        "color": "brown",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 160,
+        "y1": 160,
+        "x2": 160,
+        "y2": 240,
+        "color": "brown",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 160,
+        "y1": 160,
+        "x2": 205,
+        "y2": 215,
+        "color": "brown",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 180,
+        "y1": 40,
+        "x2": 270,
+        "y2": 40,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 276,
+        "y": 45,
+        "text": "fleur",
+        "size": 16,
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 222,
+        "y1": 120,
+        "x2": 270,
+        "y2": 100,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 276,
+        "y": 104,
+        "text": "feuilles",
+        "size": 16,
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 164,
+        "y1": 140,
+        "x2": 270,
+        "y2": 150,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 276,
+        "y": 150,
+        "text": "tige",
+        "size": 16,
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 190,
+        "y1": 200,
+        "x2": 270,
+        "y2": 215,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 276,
+        "y": 220,
+        "text": "racines",
+        "size": 16,
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 180,
+        "text": "sol",
+        "size": 14,
+        "color": "brown",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Une plante à fleurs avec ses organes.",
+     "alt": "Une plante dessinée : la fleur en haut, deux feuilles vertes sur la tige, et des racines brunes sous la ligne du sol. Quatre étiquettes : fleur, feuilles, tige, racines."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Ce dont la plante a besoin",
+     "md": "Pour vivre et grandir, une plante verte a besoin d'**eau**, de **lumière**, d'**air** et de **sels minéraux** pris dans le sol. Avec la lumière, ses feuilles vertes fabriquent des sucres, qui sont sa nourriture. On appelle cela la **photosynthèse**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : quel organe ?",
+     "statement": "Un jardinier arrose le pied d'un plant de tomate. Quel organe reçoit l'eau en premier ?",
+     "steps": [
+      {
+       "md": "L'eau coule dans le sol."
+      },
+      {
+       "md": "Ce sont les **racines** qui absorbent l'eau, puis la tige l'amène aux feuilles."
+      }
+     ],
+     "answer": "**Les racines.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : une expérience",
+     "statement": "Amina met un plant de haricot dans un placard fermé, sans lumière. Après deux semaines, il est jaune et fragile. Pourquoi ?",
+     "steps": [
+      {
+       "md": "Sans lumière, les feuilles ne peuvent plus fabriquer leur nourriture."
+      },
+      {
+       "md": "La plante s'affaiblit et perd sa couleur verte."
+      }
+     ],
+     "answer": "**La plante manque de lumière.**"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "La germination",
+     "md": "Une graine germe quand elle reçoit de l'**eau**, de l'**air** et une **température** assez douce. La lumière n'est pas nécessaire pour germer, mais elle l'est ensuite pour que la jeune plante grandisse."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Dire que la plante « mange » la terre : elle prend de l'eau et des sels minéraux, pas la terre entière.\n- Oublier l'air et la lumière.\n- Croire que les racines servent seulement à tenir la plante."
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-sciences-plantes-01"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Certaines plantes utiles : le manioc (racine mangée), le cacaoyer (graines), le caféier, le bananier.",
+      "Les feuilles de certaines plantes sont mangées : feuilles de manioc, ndolé."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quel organe absorbe l'eau du sol ?",
+   "choices": [
+    "Les feuilles",
+    "Les racines",
+    "La fleur",
+    "Le fruit"
+   ],
+   "answer": 1,
+   "explanation": "Les racines absorbent l'eau et les sels minéraux.",
+   "id": "cm2-sciences-plantes-01",
+   "chapter": "cm2-sciences-plantes",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cm2-sciences-plantes-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : les feuilles vertes fabriquent la nourriture de la plante.",
+   "answer": true,
+   "explanation": "Grâce à la lumière, les feuilles vertes fabriquent des sucres.",
+   "id": "cm2-sciences-plantes-02",
+   "chapter": "cm2-sciences-plantes",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cm2-sciences-plantes-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque organe à son rôle.",
+   "pairs": [
+    [
+     "Racines",
+     "Absorber l'eau du sol"
+    ],
+    [
+     "Tige",
+     "Porter la plante"
+    ],
+    [
+     "Feuilles",
+     "Fabriquer la nourriture"
+    ],
+    [
+     "Fleur",
+     "Donner le fruit"
+    ]
+   ],
+   "explanation": "Chaque organe a un rôle : racines (eau), tige (soutien), feuilles (nourriture), fleur (fruit).",
+   "points": 2,
+   "id": "cm2-sciences-plantes-03",
+   "chapter": "cm2-sciences-plantes",
+   "tier": "application",
+   "difficulty": 2,
+   "lesson": "cm2-sciences-plantes-fiche",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une plante placée dans le noir pendant longtemps…",
+   "choices": [
+    "Grandit mieux",
+    "S'affaiblit et jaunit",
+    "Devient plus verte",
+    "Fabrique des fleurs"
+   ],
+   "answer": 1,
+   "explanation": "Sans lumière, plus de photosynthèse.",
+   "mistakes": [
+    "Croire que la plante n'a besoin que d'eau."
+   ],
+   "id": "cm2-sciences-plantes-04",
+   "chapter": "cm2-sciences-plantes",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cm2-sciences-plantes-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "open",
+   "prompt": "Quelles conditions faut-il réunir pour faire germer un haricot dans une assiette ? Cite-en deux.",
+   "model": "De l'eau (coton humide) et une température douce ; de l'air.",
+   "rubric": [
+    "Eau citée.",
+    "Air ou chaleur cités."
+   ],
+   "explanation": "La germination demande eau, air et chaleur ; la lumière n'est pas indispensable au début.",
+   "points": 3,
+   "mistakes": [
+    "Ajouter de la terre comme condition obligatoire."
+   ],
+   "id": "cm2-sciences-plantes-05",
+   "chapter": "cm2-sciences-plantes",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cm2-sciences-plantes-fiche",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Nkeng fait germer des graines de maïs dans trois pots : A (eau, lumière), B (sans eau, lumière), C (eau, dans un placard). Réponds aux questions.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Dans quel pot les graines ne germent-elles pas ?",
+     "choices": [
+      "Le pot A",
+      "Le pot C",
+      "Tous les pots",
+      "Le pot B"
+     ],
+     "answer": 3,
+     "explanation": "Sans eau, la graine ne germe pas.",
+     "id": "cm2-sciences-plantes-06-a",
+     "points": 1
+    },
+    {
+     "kind": "truefalse",
+     "prompt": "Vrai ou faux : les graines du pot C peuvent germer.",
+     "answer": true,
+     "explanation": "L'eau est présente ; la lumière n'est pas nécessaire pour germer.",
+     "id": "cm2-sciences-plantes-06-b",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Après quelques semaines, laquelle de ces plantes aura le plus de mal à grandir ?",
+     "choices": [
+      "Celle du pot C",
+      "Celle du pot A",
+      "Aucune",
+      "Celles du pot A et B"
+     ],
+     "answer": 0,
+     "explanation": "Sans lumière, la jeune plante ne fabrique pas sa nourriture.",
+     "id": "cm2-sciences-plantes-06-c",
+     "points": 1
+    }
+   ],
+   "method": "Pour chaque pot, regarder quelle condition manque.",
+   "id": "cm2-sciences-plantes-06",
+   "chapter": "cm2-sciences-plantes",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cm2-sciences-plantes-fiche",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel organe fabrique la nourriture de la plante ?",
+   "choices": [
+    "Les racines",
+    "La tige",
+    "Les feuilles",
+    "Le sol"
+   ],
+   "answer": 2,
+   "explanation": "Les feuilles vertes.",
+   "id": "cm2-sciences-plantes-q1",
+   "chapter": "cm2-sciences-plantes",
+   "tier": "autoeval",
+   "lesson": "cm2-sciences-plantes-fiche",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que prennent les racines dans le sol ?",
+   "choices": [
+    "Des cailloux",
+    "De la lumière",
+    "De l'air",
+    "De l'eau et des sels minéraux"
+   ],
+   "answer": 3,
+   "explanation": "Racines : eau et sels minéraux.",
+   "id": "cm2-sciences-plantes-q2",
+   "chapter": "cm2-sciences-plantes",
+   "tier": "autoeval",
+   "lesson": "cm2-sciences-plantes-fiche",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel organe donne le fruit ?",
+   "choices": [
+    "La racine",
+    "La fleur",
+    "La tige",
+    "La feuille"
+   ],
+   "answer": 1,
+   "explanation": "Le fruit vient de la fleur.",
+   "id": "cm2-sciences-plantes-q3",
+   "chapter": "cm2-sciences-plantes",
+   "tier": "autoeval",
+   "lesson": "cm2-sciences-plantes-fiche",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La photosynthèse a besoin de…",
+   "choices": [
+    "Obscurité",
+    "Plastique",
+    "Lumière",
+    "Bruit"
+   ],
+   "answer": 2,
+   "explanation": "Les feuilles fabriquent des sucres avec la lumière.",
+   "id": "cm2-sciences-plantes-q4",
+   "chapter": "cm2-sciences-plantes",
+   "tier": "autoeval",
+   "lesson": "cm2-sciences-plantes-fiche",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour germer, une graine a besoin…",
+   "choices": [
+    "D'eau",
+    "De peinture",
+    "D'huile",
+    "De sel"
+   ],
+   "answer": 0,
+   "explanation": "Sans eau, pas de germination.",
+   "id": "cm2-sciences-plantes-q5",
+   "chapter": "cm2-sciences-plantes",
+   "tier": "autoeval",
+   "lesson": "cm2-sciences-plantes-fiche",
+   "points": 1
+  }
+ ]
+}

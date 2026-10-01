@@ -1,0 +1,510 @@
+{
+ "chapter": "sil-sciences-sens-ch",
+ "lessons": [
+  {
+   "id": "sil-sciences-sens",
+   "title": "Les cinq sens",
+   "minutes": 12,
+   "readAloud": true,
+   "programRef": "SIL — Éveil : les cinq sens (reconstitué)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Nommer les cinq sens.",
+    "Associer chaque sens à la partie du corps qui sert.",
+    "Dire quel sens on utilise dans une situation."
+   ],
+   "prerequisites": [
+    "sil-sciences-corps"
+   ],
+   "exercises": [
+    "sil-sciences-sens-01",
+    "sil-sciences-sens-02",
+    "sil-sciences-sens-03",
+    "sil-sciences-sens-04",
+    "sil-sciences-sens-05",
+    "sil-sciences-sens-06"
+   ],
+   "selfCheck": [
+    "sil-sciences-sens-q1",
+    "sil-sciences-sens-q2",
+    "sil-sciences-sens-q3",
+    "sil-sciences-sens-q4",
+    "sil-sciences-sens-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier le niveau de vocabulaire : « odorat », « ouïe » sont-ils attendus en SIL ou plus tard ?",
+    "Prudence : ne pas encourager l'enfant à goûter n'importe quel produit (mention dans la fiche)."
+   ],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "Je vois avec mes yeux. J'entends avec mes oreilles. Je sens avec mon nez. Je goûte avec ma langue. Je touche avec ma peau.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 8,
+        "y": 15,
+        "w": 88,
+        "h": 100,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 52,
+        "y": 55,
+        "text": "les yeux",
+        "size": 14,
+        "anchor": "middle",
+        "bold": false,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 52,
+        "y": 95,
+        "text": "la vue",
+        "size": 15,
+        "anchor": "middle",
+        "bold": true,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 102,
+        "y": 15,
+        "w": 88,
+        "h": 100,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 146,
+        "y": 55,
+        "text": "les oreilles",
+        "size": 14,
+        "anchor": "middle",
+        "bold": false,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 146,
+        "y": 95,
+        "text": "l'ouïe",
+        "size": 15,
+        "anchor": "middle",
+        "bold": true,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 196,
+        "y": 15,
+        "w": 88,
+        "h": 100,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 55,
+        "text": "le nez",
+        "size": 14,
+        "anchor": "middle",
+        "bold": false,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 95,
+        "text": "l'odorat",
+        "size": 15,
+        "anchor": "middle",
+        "bold": true,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 15,
+        "w": 88,
+        "h": 100,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 334,
+        "y": 55,
+        "text": "la langue",
+        "size": 14,
+        "anchor": "middle",
+        "bold": false,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 334,
+        "y": 95,
+        "text": "le goût",
+        "size": 15,
+        "anchor": "middle",
+        "bold": true,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 384,
+        "y": 15,
+        "w": 88,
+        "h": 100,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 428,
+        "y": 55,
+        "text": "la peau",
+        "size": 14,
+        "anchor": "middle",
+        "bold": false,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 428,
+        "y": 95,
+        "text": "le toucher",
+        "size": 15,
+        "anchor": "middle",
+        "bold": true,
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Les cinq sens.",
+     "alt": "Cinq cartes : les yeux (la vue), les oreilles (l'ouïe), le nez (l'odorat), la langue (le goût), la peau (le toucher)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Cinq sens",
+     "md": "- La **vue** : les yeux.\n- L'**ouïe** : les oreilles.\n- L'**odorat** : le nez.\n- Le **goût** : la langue.\n- Le **toucher** : la peau, surtout les mains."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : la mangue",
+     "statement": "Ngono sent l'odeur d'une mangue mûre. Quel sens utilise-t-elle ?",
+     "steps": [
+      {
+       "md": "Elle sent avec son nez."
+      },
+      {
+       "md": "Le sens du nez s'appelle l'odorat."
+      }
+     ],
+     "answer": "Elle utilise **l'odorat**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : le tam-tam",
+     "statement": "Mballa écoute un tambour. Quel sens utilise-t-il ?",
+     "steps": [
+      {
+       "md": "Il écoute avec ses oreilles."
+      },
+      {
+       "md": "Ce sens s'appelle l'ouïe."
+      }
+     ],
+     "answer": "Il utilise **l'ouïe**."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Je protège mes sens",
+     "md": "Je ne mets rien dans mes oreilles ni dans mes yeux. Je ne goûte pas ce que je ne connais pas."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer !"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-sciences-sens-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-sciences-sens-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-sciences-sens-03"
+    },
+    {
+     "type": "heading",
+     "text": "Pour aller plus loin"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-sciences-sens-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-sciences-sens-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-sciences-sens-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sil-sciences-sens-01",
+   "chapter": "sil-sciences-sens-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-sciences-sens",
+   "prompt": "Avec quoi sent-on les odeurs ?",
+   "choices": [
+    "les yeux",
+    "les oreilles",
+    "le nez",
+    "les pieds"
+   ],
+   "answer": 2,
+   "explanation": "Le nez sert à sentir : c'est l'odorat."
+  },
+  {
+   "id": "sil-sciences-sens-02",
+   "chapter": "sil-sciences-sens-ch",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-sciences-sens",
+   "prompt": "Vrai ou faux : on goûte avec la langue.",
+   "answer": true,
+   "explanation": "La langue sent le goût des aliments."
+  },
+  {
+   "id": "sil-sciences-sens-03",
+   "chapter": "sil-sciences-sens-ch",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sil-sciences-sens",
+   "prompt": "Associe chaque sens à sa partie du corps.",
+   "pairs": [
+    [
+     "la vue",
+     "les yeux"
+    ],
+    [
+     "l'ouïe",
+     "les oreilles"
+    ],
+    [
+     "l'odorat",
+     "le nez"
+    ],
+    [
+     "le goût",
+     "la langue"
+    ]
+   ],
+   "explanation": "Chaque sens a sa partie du corps."
+  },
+  {
+   "id": "sil-sciences-sens-04",
+   "chapter": "sil-sciences-sens-ch",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sil-sciences-sens",
+   "prompt": "Combien y a-t-il de sens ?",
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "Vue, ouïe, odorat, goût, toucher : cinq sens."
+  },
+  {
+   "id": "sil-sciences-sens-05",
+   "chapter": "sil-sciences-sens-ch",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sil-sciences-sens",
+   "prompt": "Je caresse un chat. Quel sens est-ce ?",
+   "choices": [
+    "la vue",
+    "l'ouïe",
+    "le toucher",
+    "le goût"
+   ],
+   "answer": 2,
+   "explanation": "On touche avec la peau."
+  },
+  {
+   "id": "sil-sciences-sens-06",
+   "chapter": "sil-sciences-sens-ch",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sil-sciences-sens",
+   "prompt": "Quel sens ?",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Je regarde une image. Je me sers…",
+     "choices": [
+      "de la vue",
+      "de l'ouïe",
+      "du goût",
+      "de l'odorat"
+     ],
+     "answer": 0,
+     "explanation": "Regarder, c'est utiliser la vue.",
+     "id": "sil-sciences-sens-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Je mange du sucre. Je me sers…",
+     "choices": [
+      "de la vue",
+      "de l'ouïe",
+      "du toucher",
+      "du goût"
+     ],
+     "answer": 3,
+     "explanation": "Goûter, c'est utiliser le goût.",
+     "id": "sil-sciences-sens-06-b",
+     "points": 1
+    }
+   ],
+   "explanation": "Relis chaque question avec calme."
+  },
+  {
+   "id": "sil-sciences-sens-q1",
+   "chapter": "sil-sciences-sens-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-sciences-sens",
+   "prompt": "Quel sens utilise-t-on pour entendre ?",
+   "choices": [
+    "la vue",
+    "l'ouïe",
+    "le goût",
+    "l'odorat"
+   ],
+   "answer": 1,
+   "explanation": "On entend avec l'ouïe."
+  },
+  {
+   "id": "sil-sciences-sens-q2",
+   "chapter": "sil-sciences-sens-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-sciences-sens",
+   "prompt": "Le toucher, c'est surtout avec…",
+   "choices": [
+    "les yeux",
+    "la peau",
+    "le nez",
+    "les oreilles"
+   ],
+   "answer": 1,
+   "explanation": "La peau, surtout les mains."
+  },
+  {
+   "id": "sil-sciences-sens-q3",
+   "chapter": "sil-sciences-sens-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-sciences-sens",
+   "prompt": "Je vois avec…",
+   "choices": [
+    "mes oreilles",
+    "ma langue",
+    "mon nez",
+    "mes yeux"
+   ],
+   "answer": 3,
+   "explanation": "Les yeux servent à voir."
+  },
+  {
+   "id": "sil-sciences-sens-q4",
+   "chapter": "sil-sciences-sens-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-sciences-sens",
+   "prompt": "Je sens une fleur. J'utilise…",
+   "choices": [
+    "mon nez",
+    "mes oreilles",
+    "mes yeux seulement",
+    "ma main seulement"
+   ],
+   "answer": 0,
+   "explanation": "Le nez sert à sentir."
+  },
+  {
+   "id": "sil-sciences-sens-q5",
+   "chapter": "sil-sciences-sens-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-sciences-sens",
+   "prompt": "Combien de sens as-tu ?",
+   "choices": [
+    "3",
+    "4",
+    "5",
+    "6"
+   ],
+   "answer": 2,
+   "explanation": "Cinq sens."
+  }
+ ]
+}

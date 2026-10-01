@@ -1,0 +1,397 @@
+{
+ "chapter": "cp-maths-geometrie",
+ "lessons": [
+  {
+   "id": "cp-maths-formes",
+   "title": "Les formes : carré, rectangle, triangle, rond",
+   "minutes": 12,
+   "readAloud": true,
+   "programRef": "CP — Géométrie : formes simples (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Reconnaître un carré, un rectangle, un triangle et un rond.",
+    "Compter les côtés et les coins.",
+    "Repérer ces formes dans la vie."
+   ],
+   "prerequisites": [
+    "cp-maths-lignes"
+   ],
+   "exercises": [
+    "cp-maths-formes-01",
+    "cp-maths-formes-02",
+    "cp-maths-formes-03",
+    "cp-maths-formes-04",
+    "cp-maths-formes-05",
+    "cp-maths-formes-06"
+   ],
+   "selfCheck": [
+    "cp-maths-formes-q1",
+    "cp-maths-formes-q2",
+    "cp-maths-formes-q3",
+    "cp-maths-formes-q4",
+    "cp-maths-formes-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier la manière dont le programme officiel traite le carré par rapport au rectangle au CP."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Autour de nous, il y a des formes : la fenêtre, la roue, le toit... Apprenons leurs noms."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 170,
+      "items": [
+       {
+        "t": "rect",
+        "x": 15,
+        "y": 20,
+        "w": 80,
+        "h": 80,
+        "fill": "lightblue",
+        "stroke": "blue"
+       },
+       {
+        "t": "text",
+        "x": 55,
+        "y": 130,
+        "text": "carré",
+        "size": 15
+       },
+       {
+        "t": "rect",
+        "x": 125,
+        "y": 35,
+        "w": 120,
+        "h": 60,
+        "fill": "lightgreen",
+        "stroke": "green"
+       },
+       {
+        "t": "text",
+        "x": 185,
+        "y": 130,
+        "text": "rectangle",
+        "size": 15
+       },
+       {
+        "t": "poly",
+        "pts": [
+         300,
+         100,
+         350,
+         20,
+         400,
+         100
+        ],
+        "fill": "lightorange",
+        "stroke": "red"
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 130,
+        "text": "triangle",
+        "size": 15
+       },
+       {
+        "t": "circle",
+        "cx": 445,
+        "cy": 60,
+        "r": 30,
+        "fill": "lightyellow",
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 445,
+        "y": 130,
+        "text": "rond",
+        "size": 15
+       }
+      ]
+     },
+     "caption": "Les quatre formes à connaître.",
+     "alt": "Quatre formes : un carré bleu, un rectangle vert, un triangle orange et un rond jaune, chacun avec son nom en dessous."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les côtés et les coins",
+     "md": "- Le **carré** : 4 côtés égaux, 4 coins.\n- Le **rectangle** : 4 côtés, 4 coins, 2 côtés longs et 2 côtés courts.\n- Le **triangle** : 3 côtés, 3 coins.\n- Le **rond** (cercle) : pas de côté, pas de coin."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : les côtés",
+     "statement": "Combien de côtés a un triangle ?",
+     "steps": [
+      {
+       "md": "Je compte les côtés d'un triangle avec le doigt : 1, 2, 3."
+      },
+      {
+       "md": "Un triangle a trois coins aussi."
+      }
+     ],
+     "answer": "Un triangle a **3** côtés."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : dans la vie",
+     "statement": "Quelle forme a la roue d'un vélo ?",
+     "steps": [
+      {
+       "md": "Une roue est ronde, sans coin."
+      },
+      {
+       "md": "Elle a la forme d'un **rond**."
+      }
+     ],
+     "answer": "La roue est un rond."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "Un carré est un rectangle particulier : ses 4 côtés sont égaux. Au CP, on dit « carré » quand les 4 côtés sont pareils, « rectangle » quand il y a des côtés longs et courts."
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-formes-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-formes-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-formes-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-formes-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-formes-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-formes-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Combien de côtés a un carré ?",
+   "answer": 4,
+   "tolerance": 0,
+   "explanation": "Un carré a 4 côtés égaux.",
+   "id": "cp-maths-formes-01",
+   "chapter": "cp-maths-geometrie",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-formes",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle forme a 3 côtés ?",
+   "choices": [
+    "le carré",
+    "le triangle",
+    "le rond",
+    "le rectangle"
+   ],
+   "answer": 1,
+   "explanation": "Tri- veut dire trois.",
+   "id": "cp-maths-formes-02",
+   "chapter": "cp-maths-geometrie",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-formes",
+   "points": 1
+  },
+  {
+   "kind": "matching",
+   "prompt": "Relie chaque objet à sa forme.",
+   "pairs": [
+    [
+     "une roue",
+     "rond"
+    ],
+    [
+     "une porte",
+     "rectangle"
+    ],
+    [
+     "une case de damier",
+     "carré"
+    ],
+    [
+     "un toit pointu de face",
+     "triangle"
+    ]
+   ],
+   "explanation": "Chaque objet ressemble à une forme.",
+   "id": "cp-maths-formes-03",
+   "chapter": "cp-maths-geometrie",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-formes",
+   "points": 1
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : un rond a des coins.",
+   "answer": false,
+   "explanation": "Un rond est arrondi : il n'a ni côté ni coin.",
+   "id": "cp-maths-formes-04",
+   "chapter": "cp-maths-geometrie",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-maths-formes",
+   "points": 1
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Combien de coins ont un carré et un triangle ensemble ?",
+   "answer": 7,
+   "tolerance": 0,
+   "explanation": "4 coins pour le carré et 3 pour le triangle : 4 + 3 = 7.",
+   "id": "cp-maths-formes-05",
+   "chapter": "cp-maths-geometrie",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-maths-formes",
+   "points": 1
+  },
+  {
+   "kind": "problem",
+   "prompt": "Sur le tableau, la maîtresse dessine 2 carrés et 3 triangles.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Combien de côtés ont les 2 carrés en tout ?",
+     "answer": 8,
+     "tolerance": 0,
+     "explanation": "2 × 4 = 4 + 4 = 8.",
+     "id": "cp-maths-formes-06-a",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Combien de côtés ont les 3 triangles en tout ?",
+     "answer": 9,
+     "tolerance": 0,
+     "explanation": "3 + 3 + 3 = 9.",
+     "id": "cp-maths-formes-06-b",
+     "points": 1
+    }
+   ],
+   "explanation": "8 côtés pour les carrés, 9 pour les triangles.",
+   "id": "cp-maths-formes-06",
+   "chapter": "cp-maths-geometrie",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cp-maths-formes"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle forme n'a aucun coin ?",
+   "choices": [
+    "le rond",
+    "le carré",
+    "le triangle",
+    "le rectangle"
+   ],
+   "answer": 0,
+   "explanation": "Le rond est arrondi.",
+   "id": "cp-maths-formes-q1",
+   "chapter": "cp-maths-geometrie",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-formes",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un carré a…",
+   "choices": [
+    "3 côtés",
+    "2 côtés",
+    "aucun côté",
+    "4 côtés égaux"
+   ],
+   "answer": 3,
+   "explanation": "C'est sa définition.",
+   "id": "cp-maths-formes-q2",
+   "chapter": "cp-maths-geometrie",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-formes",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un rectangle a…",
+   "choices": [
+    "3 côtés égaux",
+    "un seul coin",
+    "2 côtés longs et 2 côtés courts",
+    "5 côtés"
+   ],
+   "answer": 2,
+   "explanation": "Un rectangle a 4 côtés : 2 longs et 2 courts.",
+   "id": "cp-maths-formes-q3",
+   "chapter": "cp-maths-geometrie",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-formes",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un ballon de football de face ressemble à…",
+   "choices": [
+    "un carré",
+    "un rond",
+    "un triangle",
+    "un rectangle"
+   ],
+   "answer": 1,
+   "explanation": "Le contour est rond.",
+   "id": "cp-maths-formes-q4",
+   "chapter": "cp-maths-geometrie",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-formes",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien de coins a un triangle ?",
+   "choices": [
+    "3",
+    "2",
+    "4",
+    "0"
+   ],
+   "answer": 0,
+   "explanation": "Un triangle a 3 coins.",
+   "id": "cp-maths-formes-q5",
+   "chapter": "cp-maths-geometrie",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-formes",
+   "points": 1
+  }
+ ]
+}

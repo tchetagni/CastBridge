@@ -1,0 +1,438 @@
+{
+ "chapter": "cm2-sciences-energie",
+ "lessons": [
+  {
+   "id": "cm2-sciences-energie-fiche",
+   "title": "L'énergie et le circuit électrique simple",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CM2 — Énergie et électricité simple (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Citer des sources d'énergie.",
+    "Dire quand une lampe s'allume dans un circuit simple.",
+    "Classer des matériaux en conducteurs et isolants.",
+    "Connaître des règles de sécurité avec l'électricité."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cm2-sciences-energie-01",
+    "cm2-sciences-energie-02",
+    "cm2-sciences-energie-03",
+    "cm2-sciences-energie-04",
+    "cm2-sciences-energie-05",
+    "cm2-sciences-energie-06"
+   ],
+   "selfCheck": [
+    "cm2-sciences-energie-q1",
+    "cm2-sciences-energie-q2",
+    "cm2-sciences-energie-q3",
+    "cm2-sciences-energie-q4",
+    "cm2-sciences-energie-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que l'électricité est bien au programme du CM2 et au niveau « circuit simple » (sans notion de courant ni de tension).",
+    "Vérifier le vocabulaire « circuit fermé / ouvert »."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "L'énergie",
+     "md": "L'**énergie** permet de faire marcher des machines, de chauffer, d'éclairer. Les sources d'énergie sont : le **soleil**, le **vent**, l'**eau** qui coule, le **bois**, le **pétrole**. L'électricité est une forme d'énergie que l'on fabrique à partir de ces sources."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Un circuit électrique simple",
+     "md": "Un circuit simple comprend : une **pile** (elle fournit l'énergie), des **fils**, un **interrupteur** et une **ampoule**. La lampe s'allume seulement si le circuit est **fermé** (sans coupure). Si l'interrupteur est ouvert, le circuit est **ouvert** et la lampe reste éteinte."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 500,
+      "h": 260,
+      "items": [
+       {
+        "t": "path",
+        "d": "M90 70 L90 190 L400 190 L400 70 L300 70",
+        "stroke": "ink",
+        "width": 3
+       },
+       {
+        "t": "path",
+        "d": "M200 70 L90 70",
+        "stroke": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 70,
+        "x2": 270,
+        "y2": 40,
+        "color": "red",
+        "width": 3
+       },
+       {
+        "t": "circle",
+        "cx": 400,
+        "cy": 130,
+        "r": 20,
+        "fill": "yellow",
+        "stroke": "orange"
+       },
+       {
+        "t": "line",
+        "x1": 70,
+        "y1": 120,
+        "x2": 110,
+        "y2": 120,
+        "color": "ink",
+        "width": 5
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 140,
+        "x2": 100,
+        "y2": 140,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 25,
+        "text": "interrupteur",
+        "size": 15,
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 435,
+        "y": 135,
+        "text": "ampoule",
+        "size": 15,
+        "bold": true,
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 135,
+        "y": 135,
+        "text": "pile",
+        "size": 15,
+        "bold": true,
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 245,
+        "y": 218,
+        "text": "fils électriques",
+        "size": 15,
+        "anchor": "middle",
+        "color": "grey"
+       }
+      ]
+     },
+     "caption": "Un circuit simple, avec un interrupteur ouvert.",
+     "alt": "Un circuit rectangulaire : une pile à gauche, une ampoule à droite, un interrupteur ouvert en haut et des fils qui relient le tout."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : la lampe ne s'allume pas",
+     "statement": "Dans un montage, la pile, les fils et l'ampoule sont bien reliés, mais l'interrupteur est levé. Pourquoi la lampe est-elle éteinte ?",
+     "steps": [
+      {
+       "md": "Un interrupteur levé laisse une coupure dans le circuit."
+      },
+      {
+       "md": "Le courant ne peut pas passer : le circuit est ouvert."
+      }
+     ],
+     "answer": "**Le circuit est ouvert : il faut fermer l'interrupteur.**"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Conducteurs et isolants",
+     "md": "- **Conducteurs** : laissent passer le courant (les métaux : cuivre, fer, aluminium).\n- **Isolants** : ne le laissent pas passer (plastique, caoutchouc, bois sec, verre).\n\nLes fils électriques sont en métal, recouverts de plastique."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : tester un objet",
+     "statement": "Essomba met une clé en fer dans le circuit : la lampe brille. Avec une règle en plastique, elle reste éteinte. Que conclut-il ?",
+     "steps": [
+      {
+       "md": "Avec la clé, le courant passe : la clé est un **conducteur**."
+      },
+      {
+       "md": "Avec la règle, il ne passe pas : la règle est un **isolant**."
+      }
+     ],
+     "answer": "**La clé est conductrice ; la règle est isolante.**"
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Sécurité",
+     "md": "L'électricité du secteur (prises, câbles) est **dangereuse**. Ne touche jamais un fil dénudé ni une prise avec les doigts mouillés. Ne branche pas d'objets sans un adulte. Ne touche jamais un fil électrique tombé au sol : préviens un adulte."
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-sciences-energie-01"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Une pile plate est sans danger pour les expériences de l'école, mais le courant des prises ne l'est pas.",
+      "On gaspille moins d'énergie en éteignant les lampes inutiles."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Que faut-il pour qu'une lampe brille dans un circuit simple ?",
+   "choices": [
+    "Un circuit ouvert",
+    "Un fil seulement",
+    "Une pierre",
+    "Un circuit fermé"
+   ],
+   "answer": 3,
+   "explanation": "La lampe brille seulement si le circuit est fermé.",
+   "method": "Vérifier qu'il n'y a pas de coupure.",
+   "id": "cm2-sciences-energie-01",
+   "chapter": "cm2-sciences-energie",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cm2-sciences-energie-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : le plastique est un isolant.",
+   "answer": true,
+   "explanation": "Le plastique ne laisse pas passer le courant.",
+   "id": "cm2-sciences-energie-02",
+   "chapter": "cm2-sciences-energie",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cm2-sciences-energie-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque matériau à sa nature.",
+   "pairs": [
+    [
+     "Cuivre",
+     "Conducteur"
+    ],
+    [
+     "Caoutchouc",
+     "Isolant"
+    ],
+    [
+     "Pile",
+     "Fournit l'énergie"
+    ]
+   ],
+   "explanation": "Les métaux conduisent le courant ; le caoutchouc ne le conduit pas ; la pile fournit l'énergie.",
+   "points": 2,
+   "id": "cm2-sciences-energie-03",
+   "chapter": "cm2-sciences-energie",
+   "tier": "application",
+   "difficulty": 2,
+   "lesson": "cm2-sciences-energie-fiche",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la source d'énergie du panneau solaire ?",
+   "choices": [
+    "Le soleil",
+    "Le vent",
+    "L'eau",
+    "Le charbon"
+   ],
+   "answer": 0,
+   "explanation": "Un panneau solaire utilise l'énergie du soleil.",
+   "mistakes": [
+    "Confondre soleil et vent."
+   ],
+   "id": "cm2-sciences-energie-04",
+   "chapter": "cm2-sciences-energie",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cm2-sciences-energie-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "open",
+   "prompt": "Donne trois règles de sécurité à respecter avec l'électricité.",
+   "model": "Ne pas toucher aux fils dénudés ; ne pas toucher aux prises avec les mains mouillées ; prévenir un adulte devant un fil tombé.",
+   "rubric": [
+    "Trois règles citées.",
+    "Les règles sont justes et claires."
+   ],
+   "explanation": "L'électricité du secteur peut blesser gravement : on la manipule avec prudence.",
+   "points": 3,
+   "mistakes": [
+    "Jouer avec les prises."
+   ],
+   "id": "cm2-sciences-energie-05",
+   "chapter": "cm2-sciences-energie",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cm2-sciences-energie-fiche",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Nkeng construit un circuit avec une pile, une ampoule, des fils et un interrupteur. Réponds aux questions.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "L'interrupteur est fermé : que se passe-t-il ?",
+     "choices": [
+      "La lampe reste éteinte",
+      "La pile disparaît",
+      "La lampe s'allume",
+      "Le fil fond"
+     ],
+     "answer": 2,
+     "explanation": "Le circuit est fermé : le courant passe.",
+     "id": "cm2-sciences-energie-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Il remplace un fil par un bout de plastique : la lampe…",
+     "choices": [
+      "S'allume plus fort",
+      "S'allume faiblement",
+      "S'allume toujours",
+      "Reste éteinte"
+     ],
+     "answer": 3,
+     "explanation": "Le plastique est isolant : le circuit est coupé.",
+     "id": "cm2-sciences-energie-06-b",
+     "points": 1
+    },
+    {
+     "kind": "truefalse",
+     "prompt": "Vrai ou faux : une pile peut être remplacée par une pierre.",
+     "answer": false,
+     "explanation": "La pierre ne fournit pas d'énergie électrique.",
+     "id": "cm2-sciences-energie-06-c",
+     "points": 1
+    }
+   ],
+   "method": "Se demander à chaque fois : le circuit est-il fermé ?",
+   "id": "cm2-sciences-energie-06",
+   "chapter": "cm2-sciences-energie",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cm2-sciences-energie-fiche",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une pile sert à…",
+   "choices": [
+    "Donner de la lumière",
+    "Fournir de l'énergie électrique",
+    "Couper les fils",
+    "Refroidir"
+   ],
+   "answer": 1,
+   "explanation": "La pile est le générateur.",
+   "id": "cm2-sciences-energie-q1",
+   "chapter": "cm2-sciences-energie",
+   "tier": "autoeval",
+   "lesson": "cm2-sciences-energie-fiche",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un conducteur est…",
+   "choices": [
+    "Un matériau qui l'arrête",
+    "Une sorte d'ampoule",
+    "Un matériau qui laisse passer le courant",
+    "Un animal"
+   ],
+   "answer": 2,
+   "explanation": "Les métaux sont conducteurs.",
+   "id": "cm2-sciences-energie-q2",
+   "chapter": "cm2-sciences-energie",
+   "tier": "autoeval",
+   "lesson": "cm2-sciences-energie-fiche",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel matériau est un isolant ?",
+   "choices": [
+    "Le plastique",
+    "Le cuivre",
+    "Le fer",
+    "L'aluminium"
+   ],
+   "answer": 0,
+   "explanation": "Le plastique n'est pas conducteur.",
+   "id": "cm2-sciences-energie-q3",
+   "chapter": "cm2-sciences-energie",
+   "tier": "autoeval",
+   "lesson": "cm2-sciences-energie-fiche",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Lequel est dangereux ?",
+   "choices": [
+    "Allumer une lampe de poche",
+    "Utiliser une pile plate",
+    "Toucher un fil dénudé",
+    "Regarder une ampoule éteinte"
+   ],
+   "answer": 2,
+   "explanation": "Un fil dénudé du secteur peut blesser gravement.",
+   "id": "cm2-sciences-energie-q4",
+   "chapter": "cm2-sciences-energie",
+   "tier": "autoeval",
+   "lesson": "cm2-sciences-energie-fiche",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle source d'énergie vient du ciel ?",
+   "choices": [
+    "Le soleil",
+    "Le bois",
+    "Le pétrole",
+    "Le charbon"
+   ],
+   "answer": 0,
+   "explanation": "Le soleil envoie lumière et chaleur.",
+   "id": "cm2-sciences-energie-q5",
+   "chapter": "cm2-sciences-energie",
+   "tier": "autoeval",
+   "lesson": "cm2-sciences-energie-fiche",
+   "points": 1
+  }
+ ]
+}

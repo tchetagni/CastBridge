@@ -1,0 +1,407 @@
+{
+ "chapter": "cp-maths-mesures",
+ "lessons": [
+  {
+   "id": "cp-maths-fcfa",
+   "title": "L'argent : le franc CFA",
+   "minutes": 12,
+   "readAloud": true,
+   "programRef": "CP — Mesures : monnaie (FCFA) (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Reconnaître des pièces et des billets en FCFA.",
+    "Calculer le prix total de petits achats.",
+    "Rendre la monnaie."
+   ],
+   "prerequisites": [
+    "cp-maths-addition",
+    "cp-maths-soustraction"
+   ],
+   "exercises": [
+    "cp-maths-fcfa-01",
+    "cp-maths-fcfa-02",
+    "cp-maths-fcfa-03",
+    "cp-maths-fcfa-04",
+    "cp-maths-fcfa-05",
+    "cp-maths-fcfa-06"
+   ],
+   "selfCheck": [
+    "cp-maths-fcfa-q1",
+    "cp-maths-fcfa-q2",
+    "cp-maths-fcfa-q3",
+    "cp-maths-fcfa-q4",
+    "cp-maths-fcfa-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier les pièces et billets en circulation et l'ordre de grandeur des prix donnés (exemples fictifs) ; adapter aux habitudes locales."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Au Cameroun, on paye avec le **franc CFA**. On écrit **FCFA** ou **F**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 180,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 50,
+        "cy": 50,
+        "r": 30,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 50,
+        "y": 56,
+        "text": "50 F",
+        "size": 16,
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 145,
+        "cy": 50,
+        "r": 34,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 145,
+        "y": 56,
+        "text": "100 F",
+        "size": 16,
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 240,
+        "cy": 50,
+        "r": 38,
+        "fill": "lightorange",
+        "stroke": "red",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 56,
+        "text": "500 F",
+        "size": 16,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 300,
+        "y": 20,
+        "w": 150,
+        "h": 60,
+        "fill": "lightgreen",
+        "stroke": "green",
+        "width": 3,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 375,
+        "y": 58,
+        "text": "1 000 F",
+        "size": 20,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 305,
+        "y": 95,
+        "w": 150,
+        "h": 60,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "width": 3,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 380,
+        "y": 133,
+        "text": "2 000 F",
+        "size": 20,
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Pièces de 50 F, 100 F, 500 F et billets de 1 000 F et 2 000 F.",
+     "alt": "Trois pièces rondes de 50, 100 et 500 francs et deux billets rectangulaires de 1 000 et 2 000 francs."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Pour calculer avec l'argent",
+     "md": "- 2 pièces de 100 F font 200 F.\n- 1 000 F = 10 pièces de 100 F.\n- Pour payer : j'**additionne** les prix.\n- Pour la monnaie : je **soustrais** ce que je paye moins le prix."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : le total",
+     "statement": "Ngono achète du pain à 150 F et une banane à 50 F. Combien paie-t-elle ?",
+     "steps": [
+      {
+       "md": "Je cherche le total : j'additionne."
+      },
+      {
+       "md": "150 + 50 = 200."
+      }
+     ],
+     "answer": "Elle paie **200 F**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : la monnaie",
+     "statement": "Paul donne 500 F pour un cahier à 300 F. Combien lui rend-on ?",
+     "steps": [
+      {
+       "md": "Je soustrais le prix à la somme donnée."
+      },
+      {
+       "md": "500 − 300 = 200."
+      }
+     ],
+     "answer": "On lui rend **200 F**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "Compare toujours la somme donnée et le prix : on ne peut pas payer 300 F avec 100 F. Écris l'unité F dans la réponse."
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-fcfa-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-fcfa-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-fcfa-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-fcfa-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-fcfa-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-fcfa-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Combien font 100 F + 100 F + 50 F ?",
+   "answer": 250,
+   "tolerance": 0,
+   "explanation": "100 + 100 = 200 ; 200 + 50 = 250 F.",
+   "unit": "F",
+   "id": "cp-maths-fcfa-01",
+   "chapter": "cp-maths-mesures",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-fcfa",
+   "points": 1
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un beignet coûte 50 F. Combien coûtent 3 beignets ?",
+   "answer": 150,
+   "tolerance": 0,
+   "explanation": "50 + 50 + 50 = 150 F.",
+   "unit": "F",
+   "id": "cp-maths-fcfa-02",
+   "chapter": "cp-maths-mesures",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-fcfa",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien de pièces de 100 F font 1 000 F ?",
+   "choices": [
+    "10",
+    "5",
+    "100",
+    "2"
+   ],
+   "answer": 0,
+   "explanation": "10 × 100 = 1 000.",
+   "id": "cp-maths-fcfa-03",
+   "chapter": "cp-maths-mesures",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-fcfa",
+   "points": 1
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Marie a 500 F et achète une mangue à 150 F. Combien lui rend-on ?",
+   "answer": 350,
+   "tolerance": 0,
+   "explanation": "500 − 150 = 350 F.",
+   "unit": "F",
+   "id": "cp-maths-fcfa-04",
+   "chapter": "cp-maths-mesures",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-maths-fcfa",
+   "points": 1
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : avec 2 pièces de 500 F, on peut payer un objet à 1 000 F.",
+   "answer": true,
+   "explanation": "500 + 500 = 1 000 F.",
+   "id": "cp-maths-fcfa-05",
+   "chapter": "cp-maths-mesures",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-maths-fcfa",
+   "points": 1
+  },
+  {
+   "kind": "problem",
+   "prompt": "Au marché, Mballa achète des arachides à 200 F et du sucre à 300 F. Il paie avec un billet de 1 000 F.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Combien dépense-t-il ?",
+     "answer": 500,
+     "tolerance": 0,
+     "explanation": "200 + 300 = 500 F.",
+     "id": "cp-maths-fcfa-06-a",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Combien lui rend-on ?",
+     "answer": 500,
+     "tolerance": 0,
+     "explanation": "1 000 − 500 = 500 F.",
+     "id": "cp-maths-fcfa-06-b",
+     "points": 1
+    }
+   ],
+   "explanation": "Il dépense 500 F ; on lui rend 500 F.",
+   "id": "cp-maths-fcfa-06",
+   "chapter": "cp-maths-mesures",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cp-maths-fcfa"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que veut dire FCFA ?",
+   "choices": [
+    "une fête",
+    "une unité de longueur",
+    "un fruit",
+    "le franc CFA, notre argent"
+   ],
+   "answer": 3,
+   "explanation": "FCFA désigne le franc CFA.",
+   "id": "cp-maths-fcfa-q1",
+   "chapter": "cp-maths-mesures",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-fcfa",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour trouver le prix total, je fais…",
+   "choices": [
+    "une soustraction",
+    "un dessin",
+    "une addition",
+    "rien"
+   ],
+   "answer": 2,
+   "explanation": "On additionne les prix.",
+   "id": "cp-maths-fcfa-q2",
+   "chapter": "cp-maths-mesures",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-fcfa",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien font 100 F + 50 F ?",
+   "choices": [
+    "50 F",
+    "150 F",
+    "105 F",
+    "200 F"
+   ],
+   "answer": 1,
+   "explanation": "100 + 50 = 150.",
+   "id": "cp-maths-fcfa-q3",
+   "chapter": "cp-maths-mesures",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-fcfa",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Je paie 500 F un objet à 400 F. On me rend…",
+   "choices": [
+    "100 F",
+    "900 F",
+    "50 F",
+    "400 F"
+   ],
+   "answer": 0,
+   "explanation": "500 − 400 = 100.",
+   "id": "cp-maths-fcfa-q4",
+   "chapter": "cp-maths-mesures",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-fcfa",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel billet vaut le plus ?",
+   "choices": [
+    "1 000 F",
+    "500 F",
+    "100 F",
+    "2 000 F"
+   ],
+   "answer": 3,
+   "explanation": "2 000 est le plus grand.",
+   "id": "cp-maths-fcfa-q5",
+   "chapter": "cp-maths-mesures",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-fcfa",
+   "points": 1
+  }
+ ]
+}

@@ -1,0 +1,548 @@
+{
+ "chapter": "ce1-sciences-c5-eau",
+ "lessons": [
+  {
+   "id": "ce1-sciences-eau",
+   "title": "L'eau et ses états",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CE1 — La matière : l'eau, ses trois états, ses changements d'état, l'eau potable (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Reconnaître l'eau sous trois formes : solide, liquide, gaz.",
+    "Décrire la fonte de la glace et la vapeur d'eau.",
+    "Expliquer pourquoi on économise l'eau potable."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "ce1-sciences-eau-01",
+    "ce1-sciences-eau-02",
+    "ce1-sciences-eau-03",
+    "ce1-sciences-eau-04",
+    "ce1-sciences-eau-05",
+    "ce1-sciences-eau-06"
+   ],
+   "selfCheck": [
+    "ce1-sciences-eau-q1",
+    "ce1-sciences-eau-q2",
+    "ce1-sciences-eau-q3",
+    "ce1-sciences-eau-q4",
+    "ce1-sciences-eau-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier le niveau d'exigence sur le vocabulaire (fusion, évaporation, condensation) : ici on parle de « fondre » et de « s'évaporer ».",
+    "Vérifier la précision sur la buée / vapeur d'eau, simplifiée pour le CE1."
+   ],
+   "blocks": [
+    {
+     "type": "audio",
+     "lang": "fr-FR",
+     "text": "L'eau est partout : dans la pluie, la rivière, la mer. L'eau peut changer de forme."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Trois états de l'eau",
+     "md": "L'eau existe sous trois états :\n\n- **solide** : la glace, la grêle ;\n- **liquide** : l'eau du robinet, de la pluie, de la rivière ;\n- **gazeux** : la vapeur d'eau, qu'on ne voit pas toujours (la buée qui monte d'une casserole est faite de toutes petites gouttes)."
+    },
+    {
+     "type": "illustration",
+     "caption": "L'eau change d'état.",
+     "alt": "Trois cases : la glace (solide), l'eau (liquide) et la vapeur (gaz). Des flèches rouges disent chauffer vers la droite et des flèches bleues disent refroidir vers la gauche.",
+     "figure": {
+      "kind": "shapes",
+      "w": 540,
+      "h": 230,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 60,
+        "w": 130,
+        "h": 70,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "rect",
+        "x": 205,
+        "y": 60,
+        "w": 130,
+        "h": 70,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "rect",
+        "x": 400,
+        "y": 60,
+        "w": 130,
+        "h": 70,
+        "fill": "lightgrey",
+        "stroke": "grey",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 75,
+        "y": 90,
+        "text": "glace",
+        "size": 20,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 75,
+        "y": 115,
+        "text": "solide",
+        "size": 15,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 90,
+        "text": "eau",
+        "size": 20,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 115,
+        "text": "liquide",
+        "size": 15,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 465,
+        "y": 90,
+        "text": "vapeur",
+        "size": 20,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 465,
+        "y": 115,
+        "text": "gaz",
+        "size": 15,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 142,
+        "y1": 80,
+        "x2": 203,
+        "y2": 80,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 172,
+        "y": 50,
+        "text": "chauffer",
+        "size": 14,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 203,
+        "y1": 112,
+        "x2": 142,
+        "y2": 112,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 172,
+        "y": 150,
+        "text": "refroidir",
+        "size": 14,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 337,
+        "y1": 80,
+        "x2": 398,
+        "y2": 80,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 367,
+        "y": 50,
+        "text": "chauffer",
+        "size": 14,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 398,
+        "y1": 112,
+        "x2": 337,
+        "y2": 112,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 367,
+        "y": 150,
+        "text": "refroidir",
+        "size": 14,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 200,
+        "text": "Le glaçon fond ; l'eau chaude fait de la vapeur.",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Chauffer, refroidir",
+     "md": "- Quand on **chauffe** la glace, elle **fond** : elle devient de l'eau liquide.\n- Quand on **chauffe** l'eau, elle devient de la **vapeur** (elle s'évapore, elle bout).\n- Quand on **refroidit** beaucoup l'eau, elle devient de la **glace**.\n- La vapeur qui rencontre une surface froide redevient des gouttes d'eau."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : un glaçon au soleil",
+     "statement": "Fotso laisse un glaçon dans une assiette au soleil. Que voit-il après un moment ?",
+     "steps": [
+      {
+       "md": "La chaleur du soleil chauffe le glaçon."
+      },
+      {
+       "md": "Le glaçon fond et devient de l'eau liquide."
+      }
+     ],
+     "answer": "**Le glaçon a fondu : il y a de l'eau dans l'assiette.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : le linge qui sèche",
+     "statement": "Marie étend du linge mouillé au soleil. Où l'eau est-elle partie ?",
+     "steps": [
+      {
+       "md": "La chaleur change l'eau du linge en vapeur."
+      },
+      {
+       "md": "La vapeur part dans l'air : c'est l'évaporation."
+      }
+     ],
+     "answer": "**L'eau s'est évaporée : elle est dans l'air sous forme de vapeur.**"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Économiser l'eau potable",
+     "md": "L'eau potable est une eau **propre à boire**. Il ne faut pas la gaspiller :\n\n- je ferme le robinet quand je me brosse les dents ;\n- je ne laisse pas couler l'eau pour rien ;\n- je garde l'eau potable propre et je couvre le seau."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- Une eau claire n'est pas toujours potable : elle peut contenir des microbes.\n- La buée ou le « nuage » au-dessus d'une casserole n'est pas de la vapeur invisible, ce sont de petites gouttes.\n- Ne jamais toucher à l'eau chaude de la casserole sans un adulte."
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-sciences-eau-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-sciences-eau-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-sciences-eau-03"
+    },
+    {
+     "type": "more",
+     "items": [
+      "La glace fond à 0 °C et l'eau bout à 100 °C (à l'altitude de la mer).",
+      "La pluie, les rivières et la mer font partie du cycle de l'eau."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ce1-sciences-eau-01",
+   "chapter": "ce1-sciences-c5-eau",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Comment s'appelle l'eau à l'état solide ?",
+   "choices": [
+    "la vapeur",
+    "la glace",
+    "la pluie",
+    "la rosée"
+   ],
+   "answer": 1,
+   "explanation": "L'eau solide, c'est la **glace**.",
+   "lesson": "ce1-sciences-eau",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-eau-02",
+   "chapter": "ce1-sciences-c5-eau",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Vrai ou faux : un glaçon qui chauffe devient de l'eau liquide.",
+   "answer": true,
+   "explanation": "Vrai : le glaçon **fond** quand il est chauffé.",
+   "lesson": "ce1-sciences-eau",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-eau-03",
+   "chapter": "ce1-sciences-c5-eau",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "prompt": "Associe chaque exemple à l'état de l'eau.",
+   "pairs": [
+    [
+     "un glaçon",
+     "solide"
+    ],
+    [
+     "l'eau du robinet",
+     "liquide"
+    ],
+    [
+     "la vapeur d'une casserole",
+     "gaz"
+    ]
+   ],
+   "explanation": "Glaçon : solide. Eau du robinet : liquide. Vapeur : gaz.",
+   "lesson": "ce1-sciences-eau",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-eau-04",
+   "chapter": "ce1-sciences-c5-eau",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "Que se passe-t-il quand on met de l'eau au congélateur très longtemps ?",
+   "choices": [
+    "elle devient du sable",
+    "elle devient de la vapeur",
+    "elle disparaît",
+    "elle devient de la glace"
+   ],
+   "answer": 3,
+   "explanation": "En refroidissant beaucoup, l'eau devient de la **glace**.",
+   "lesson": "ce1-sciences-eau",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-eau-05",
+   "chapter": "ce1-sciences-c5-eau",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "prompt": "Explique pourquoi le linge mouillé sèche au soleil.",
+   "model": "La chaleur du soleil transforme l'eau du linge en vapeur. La vapeur part dans l'air.",
+   "rubric": [
+    "Le soleil chauffe.",
+    "L'eau devient vapeur (s'évapore).",
+    "Elle part dans l'air."
+   ],
+   "explanation": "C'est l'évaporation : l'eau liquide devient de la vapeur.",
+   "lesson": "ce1-sciences-eau",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-eau-06",
+   "chapter": "ce1-sciences-c5-eau",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Amina fait chauffer de l'eau dans une casserole. Elle y a mis un glaçon au début.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Que devient le glaçon ?",
+     "choices": [
+      "il fond",
+      "il grossit",
+      "il devient du sable",
+      "il reste identique"
+     ],
+     "answer": 0,
+     "explanation": "Chauffé, le glaçon **fond**.",
+     "id": "ce1-sciences-eau-06-a"
+    },
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Que se passe-t-il si l'eau chauffe beaucoup ?",
+     "choices": [
+      "elle devient de la glace",
+      "elle devient du bois",
+      "elle devient de la vapeur",
+      "elle devient du lait"
+     ],
+     "answer": 2,
+     "explanation": "L'eau très chaude se transforme en **vapeur**.",
+     "id": "ce1-sciences-eau-06-b"
+    },
+    {
+     "kind": "truefalse",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Cette eau chaude est sans danger : on peut la toucher.",
+     "answer": false,
+     "explanation": "Faux : l'eau chaude **brûle**. On demande à un adulte.",
+     "id": "ce1-sciences-eau-06-c"
+    }
+   ],
+   "lesson": "ce1-sciences-eau",
+   "points": 3,
+   "explanation": "Corrigé détaillé question par question ci-dessous.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-eau-q1",
+   "chapter": "ce1-sciences-c5-eau",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quels sont les trois états de l'eau ?",
+   "choices": [
+    "rouge, bleu, vert",
+    "petit, moyen, grand",
+    "solide, liquide, gaz",
+    "chaud, tiède, doux"
+   ],
+   "answer": 2,
+   "explanation": "L'eau peut être **solide, liquide ou gazeuse**.",
+   "lesson": "ce1-sciences-eau",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-eau-q2",
+   "chapter": "ce1-sciences-c5-eau",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Que devient la glace quand on la chauffe ?",
+   "choices": [
+    "de l'eau liquide",
+    "du sable",
+    "de la pierre",
+    "du bois"
+   ],
+   "answer": 0,
+   "explanation": "La glace chauffée **fond** et devient de l'eau liquide.",
+   "lesson": "ce1-sciences-eau",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-eau-q3",
+   "chapter": "ce1-sciences-c5-eau",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Qu'est-ce que l'eau potable ?",
+   "choices": [
+    "l'eau de la mer",
+    "l'eau d'une mare",
+    "n'importe quelle eau claire",
+    "une eau propre à boire"
+   ],
+   "answer": 3,
+   "explanation": "L'**eau potable** est propre à boire.",
+   "lesson": "ce1-sciences-eau",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-eau-q4",
+   "chapter": "ce1-sciences-c5-eau",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Comment économiser l'eau ?",
+   "choices": [
+    "laisser couler l'eau",
+    "fermer le robinet quand on ne s'en sert pas",
+    "jeter l'eau propre",
+    "remplir et vider un seau pour rien"
+   ],
+   "answer": 1,
+   "explanation": "Je **ferme le robinet** pour ne pas gaspiller.",
+   "lesson": "ce1-sciences-eau",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-eau-q5",
+   "chapter": "ce1-sciences-c5-eau",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quand l'eau devient-elle vapeur ?",
+   "choices": [
+    "quand on la gèle",
+    "quand on la chauffe",
+    "quand on la mélange au sel",
+    "quand on la regarde"
+   ],
+   "answer": 1,
+   "explanation": "La chaleur fait devenir l'eau de la **vapeur**.",
+   "lesson": "ce1-sciences-eau",
+   "source": "Exercice original"
+  }
+ ]
+}

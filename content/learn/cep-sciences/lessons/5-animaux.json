@@ -1,0 +1,603 @@
+{
+ "chapter": "cep-sciences-animaux",
+ "lessons": [
+  {
+   "id": "cep-sciences-animaux",
+   "title": "Les animaux : groupes et régimes alimentaires",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM2 — Le monde vivant — reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; synthèse de révision orientée examen ; à faire relire par un enseignant",
+   "objectives": [
+    "Classer des animaux en vertébrés et invertébrés.",
+    "Reconnaître les cinq groupes de vertébrés.",
+    "Distinguer herbivores, carnivores et omnivores."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cep-sciences-animaux-01",
+    "cep-sciences-animaux-02",
+    "cep-sciences-animaux-03",
+    "cep-sciences-animaux-04",
+    "cep-sciences-animaux-05",
+    "cep-sciences-animaux-06"
+   ],
+   "selfCheck": [
+    "cep-sciences-animaux-q1",
+    "cep-sciences-animaux-q2",
+    "cep-sciences-animaux-q3",
+    "cep-sciences-animaux-q4",
+    "cep-sciences-animaux-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier la classification retenue pour l'école primaire (cinq groupes de vertébrés) et le programme du CM2.",
+    "Vérifier « le pangolin mange surtout des fourmis et des termites » (fait établi)."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Vertébrés et invertébrés",
+     "md": "Les **vertébrés** ont un squelette avec une colonne vertébrale. Les **invertébrés** n'en ont pas (insectes, vers, escargots...).\n\nOn classe les vertébrés en 5 groupes selon leur peau et leur reproduction."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 500,
+      "h": 230,
+      "items": [
+       {
+        "t": "rect",
+        "x": 190,
+        "y": 10,
+        "w": 120,
+        "h": 32,
+        "stroke": "orange",
+        "fill": "lightyellow",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 32,
+        "text": "les animaux",
+        "size": 16,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 42,
+        "x2": 130,
+        "y2": 80,
+        "color": "grey",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 42,
+        "x2": 400,
+        "y2": 80,
+        "color": "grey",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 80,
+        "w": 180,
+        "h": 32,
+        "stroke": "blue",
+        "fill": "lightblue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 102,
+        "text": "vertébrés (squelette)",
+        "size": 14,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 320,
+        "y": 80,
+        "w": 160,
+        "h": 32,
+        "stroke": "green",
+        "fill": "lightgreen",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 400,
+        "y": 102,
+        "text": "invertébrés",
+        "size": 14,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 112,
+        "x2": 60,
+        "y2": 150,
+        "color": "grey",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 112,
+        "x2": 130,
+        "y2": 150,
+        "color": "grey",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 112,
+        "x2": 200,
+        "y2": 150,
+        "color": "grey",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 150,
+        "w": 100,
+        "h": 30,
+        "stroke": "blue",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 170,
+        "text": "mammifères",
+        "size": 13,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 80,
+        "y": 190,
+        "w": 100,
+        "h": 30,
+        "stroke": "blue",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 210,
+        "text": "oiseaux",
+        "size": 13,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 150,
+        "w": 100,
+        "h": 30,
+        "stroke": "blue",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 170,
+        "text": "reptiles",
+        "size": 13,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210,
+        "y": 190,
+        "w": 120,
+        "h": 30,
+        "stroke": "blue",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 210,
+        "text": "poissons",
+        "size": 13,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 260,
+        "y": 150,
+        "w": 110,
+        "h": 30,
+        "stroke": "blue",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 315,
+        "y": 170,
+        "text": "amphibiens",
+        "size": 13,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 400,
+        "y": 140,
+        "text": "insectes, vers,",
+        "size": 13,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 400,
+        "y": 158,
+        "text": "mollusques...",
+        "size": 13,
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "La classification simple des animaux.",
+     "alt": "Un schéma : les animaux se divisent en vertébrés et invertébrés. Les vertébrés comprennent les mammifères, les oiseaux, les reptiles, les poissons et les amphibiens. Les invertébrés comprennent les insectes, les vers et les mollusques."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les cinq groupes de vertébrés",
+     "md": "- **Mammifères** : poils, les petits boivent le lait de la mère (éléphant, chimpanzé, homme).\n- **Oiseaux** : plumes, bec, pondent des œufs (poule, perroquet).\n- **Reptiles** : peau à écailles, pondent des œufs (crocodile, serpent).\n- **Poissons** : écailles, branchies, vivent dans l'eau (tilapia).\n- **Amphibiens** : peau nue et humide, jeunes dans l'eau (grenouille)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : classer des animaux",
+     "statement": "Classe : léopard, perroquet, crocodile, grenouille.",
+     "steps": [
+      {
+       "md": "Le léopard a des poils et allaite ses petits : mammifère."
+      },
+      {
+       "md": "Le perroquet a des plumes : oiseau."
+      },
+      {
+       "md": "Le crocodile a des écailles et pond des œufs : reptile."
+      },
+      {
+       "md": "La grenouille a une peau nue et humide : amphibien."
+      }
+     ],
+     "answer": "Léopard : **mammifère** ; perroquet : **oiseau** ; crocodile : **reptile** ; grenouille : **amphibien**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les régimes alimentaires",
+     "md": "- **Herbivores** : mangent des végétaux (éléphant, chèvre).\n- **Carnivores** : mangent d'autres animaux (léopard, lion).\n- **Omnivores** : mangent des végétaux et de la viande (poule, chimpanzé, homme).\n- **Insectivores** : mangent surtout des insectes (le pangolin mange des fourmis et des termites)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : régime et dents",
+     "statement": "Pourquoi le lion a-t-il des dents pointues et l'éléphant des dents plates ?",
+     "steps": [
+      {
+       "md": "Le lion est **carnivore** : il déchire la viande avec des dents pointues."
+      },
+      {
+       "md": "L'éléphant est **herbivore** : il broie les végétaux avec des dents plates."
+      }
+     ],
+     "answer": "La forme des dents correspond au **régime alimentaire**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que la chauve-souris est un oiseau : c'est un mammifère (elle a des poils et allaite).\n- Croire que tous les animaux qui vivent dans l'eau sont des poissons : le crocodile est un reptile, la grenouille un amphibien.\n- Dire qu'une araignée est un insecte : elle a 8 pattes (un insecte en a 6).\n- Confondre carnivore (mange de la viande) et omnivore (mange de tout)."
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-sciences-animaux-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-sciences-animaux-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-sciences-animaux-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-sciences-animaux-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-sciences-animaux-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-sciences-animaux-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quel animal est un mammifère ?",
+   "choices": [
+    "le crocodile",
+    "l'éléphant",
+    "la poule",
+    "le tilapia"
+   ],
+   "answer": 1,
+   "explanation": "L'éléphant a de la peau, allaite ses petits : c'est un mammifère.",
+   "id": "cep-sciences-animaux-01",
+   "chapter": "cep-sciences-animaux",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-sciences-animaux",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Tous les oiseaux pondent des œufs.",
+   "answer": true,
+   "explanation": "Oui : les oiseaux sont ovipares.",
+   "id": "cep-sciences-animaux-02",
+   "chapter": "cep-sciences-animaux",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-sciences-animaux",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque animal à son régime.",
+   "pairs": [
+    [
+     "éléphant",
+     "herbivore"
+    ],
+    [
+     "léopard",
+     "carnivore"
+    ],
+    [
+     "poule",
+     "omnivore"
+    ],
+    [
+     "pangolin",
+     "insectivore"
+    ]
+   ],
+   "explanation": "Régimes : éléphant herbivore, léopard carnivore, poule omnivore, pangolin insectivore.",
+   "points": 2,
+   "id": "cep-sciences-animaux-03",
+   "chapter": "cep-sciences-animaux",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-sciences-animaux",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel animal n'est PAS un reptile ?",
+   "choices": [
+    "la grenouille",
+    "le crocodile",
+    "le serpent",
+    "le lézard"
+   ],
+   "answer": 0,
+   "explanation": "La grenouille est un amphibien.",
+   "id": "cep-sciences-animaux-04",
+   "chapter": "cep-sciences-animaux",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cep-sciences-animaux",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "open",
+   "prompt": "Explique en une phrase pourquoi la chauve-souris est un mammifère et non un oiseau.",
+   "model": "La chauve-souris a des poils et allaite ses petits : c'est un mammifère, même si elle vole.",
+   "rubric": [
+    "Mentionner les poils ou l'allaitement.",
+    "Conclure : mammifère."
+   ],
+   "explanation": "Les oiseaux ont des plumes ; la chauve-souris a des poils et donne du lait.",
+   "points": 2,
+   "id": "cep-sciences-animaux-05",
+   "chapter": "cep-sciences-animaux",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cep-sciences-animaux",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Les animaux de la forêt.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Le chimpanzé est un...",
+     "choices": [
+      "oiseau",
+      "reptile",
+      "poisson",
+      "mammifère"
+     ],
+     "answer": 3,
+     "explanation": "Il a des poils et allaite.",
+     "id": "cep-sciences-animaux-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quel animal est un vertébré ?",
+     "choices": [
+      "le ver de terre",
+      "la fourmi",
+      "le serpent",
+      "l'escargot"
+     ],
+     "answer": 2,
+     "explanation": "Le serpent a une colonne vertébrale.",
+     "id": "cep-sciences-animaux-06-b",
+     "points": 1
+    },
+    {
+     "kind": "truefalse",
+     "prompt": "Le léopard est herbivore.",
+     "answer": false,
+     "explanation": "Le léopard mange de la viande : il est carnivore.",
+     "id": "cep-sciences-animaux-06-c",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quel est le régime du pangolin ?",
+     "choices": [
+      "herbivore",
+      "insectivore",
+      "carnivore de grosses proies",
+      "végétarien strict"
+     ],
+     "answer": 1,
+     "explanation": "Il se nourrit surtout de fourmis et de termites.",
+     "id": "cep-sciences-animaux-06-d",
+     "points": 1
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "method": "Poils, plumes, écailles ; ce que mange l'animal.",
+   "id": "cep-sciences-animaux-06",
+   "chapter": "cep-sciences-animaux",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cep-sciences-animaux",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien de pattes a un insecte ?",
+   "choices": [
+    "6",
+    "4",
+    "8",
+    "10"
+   ],
+   "answer": 0,
+   "explanation": "Un insecte a 6 pattes.",
+   "id": "cep-sciences-animaux-q1",
+   "chapter": "cep-sciences-animaux",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-sciences-animaux",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un animal à plumes et à bec est un...",
+   "choices": [
+    "reptile",
+    "mammifère",
+    "poisson",
+    "oiseau"
+   ],
+   "answer": 3,
+   "explanation": "Plumes et bec : oiseau.",
+   "id": "cep-sciences-animaux-q2",
+   "chapter": "cep-sciences-animaux",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-sciences-animaux",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un animal qui mange des plantes est...",
+   "choices": [
+    "carnivore",
+    "omnivore",
+    "herbivore",
+    "insectivore"
+   ],
+   "answer": 2,
+   "explanation": "Herbivore = mange des végétaux.",
+   "id": "cep-sciences-animaux-q3",
+   "chapter": "cep-sciences-animaux",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-sciences-animaux",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel animal respire par des branchies ?",
+   "choices": [
+    "le chien",
+    "le poisson",
+    "la poule",
+    "le lézard"
+   ],
+   "answer": 1,
+   "explanation": "Les poissons respirent dans l'eau grâce aux branchies.",
+   "id": "cep-sciences-animaux-q4",
+   "chapter": "cep-sciences-animaux",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-sciences-animaux",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La grenouille est un...",
+   "choices": [
+    "amphibien",
+    "reptile",
+    "insecte",
+    "mammifère"
+   ],
+   "answer": 0,
+   "explanation": "Peau nue, jeunes dans l'eau : amphibien.",
+   "id": "cep-sciences-animaux-q5",
+   "chapter": "cep-sciences-animaux",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-sciences-animaux",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  }
+ ]
+}

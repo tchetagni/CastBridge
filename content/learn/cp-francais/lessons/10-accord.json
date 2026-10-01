@@ -1,0 +1,470 @@
+{
+ "chapter": "cp-francais-orthographe",
+ "lessons": [
+  {
+   "id": "cp-francais-accord",
+   "title": "Accorder : le pluriel et le féminin",
+   "minutes": 12,
+   "readAloud": true,
+   "programRef": "CP — Orthographe : accords simples (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Mettre un nom au pluriel avec -s.",
+    "Mettre un adjectif au féminin avec -e.",
+    "Accorder le verbe avec ils / elles (-nt)."
+   ],
+   "prerequisites": [
+    "cp-francais-nom-article",
+    "cp-francais-verbes-er"
+   ],
+   "exercises": [
+    "cp-francais-accord-01",
+    "cp-francais-accord-02",
+    "cp-francais-accord-03",
+    "cp-francais-accord-04",
+    "cp-francais-accord-05",
+    "cp-francais-accord-06"
+   ],
+   "selfCheck": [
+    "cp-francais-accord-q1",
+    "cp-francais-accord-q2",
+    "cp-francais-accord-q3",
+    "cp-francais-accord-q4",
+    "cp-francais-accord-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier les règles d'accord enseignées au CP (pluriel en -s, féminin en -e) et les exceptions à éviter (-x, -aux)."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "En français, les mots **changent** quand on parle de plusieurs choses ou d'une fille. C'est l'**accord**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Le pluriel avec -s",
+     "md": "Pour parler de plusieurs, on ajoute souvent un **-s** au nom :\n\n- une poule → des poule**s**\n- un enfant → des enfant**s**\n\nLe petit mot (le, la, un, une) change aussi : **les**, **des**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Le féminin avec -e",
+     "md": "Pour une fille ou un mot féminin, on ajoute souvent un **-e** :\n\n- un petit chat → une petit**e** chatte\n- Paul est content. → Ngono est content**e**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 180,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 230,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "blue"
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 40,
+        "text": "singulier",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 240,
+        "y": 10,
+        "w": 230,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "blue"
+       },
+       {
+        "t": "text",
+        "x": 355,
+        "y": 40,
+        "text": "pluriel",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 50,
+        "w": 230,
+        "h": 40,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 80,
+        "text": "une poule",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 240,
+        "y": 50,
+        "w": 230,
+        "h": 40,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 355,
+        "y": 80,
+        "text": "des poules",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 90,
+        "w": 230,
+        "h": 40,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 120,
+        "text": "un enfant",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 240,
+        "y": 90,
+        "w": 230,
+        "h": 40,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 355,
+        "y": 120,
+        "text": "des enfants",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 130,
+        "w": 230,
+        "h": 40,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 160,
+        "text": "la mangue mûre",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 240,
+        "y": 130,
+        "w": 230,
+        "h": 40,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 355,
+        "y": 160,
+        "text": "les mangues mûres",
+        "size": 17
+       }
+      ]
+     },
+     "caption": "Du singulier au pluriel.",
+     "alt": "Un tableau à deux colonnes : une poule devient des poules, un enfant devient des enfants, la mangue mûre devient les mangues mûres."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Pour accorder",
+     "md": "1. Je cherche le **nom**.\n2. Il y en a un seul ou plusieurs ? S'il y en a plusieurs : -s.\n3. Je mets aussi le -s aux petits mots (les, des) et aux adjectifs.\n4. Avec ils / elles, le verbe finit par **-nt** : ils chantent."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : le pluriel",
+     "statement": "Mets au pluriel : « une mangue mûre ».",
+     "steps": [
+      {
+       "md": "Plusieurs : **des** (ou les)."
+      },
+      {
+       "md": "Nom : mangue**s**. Adjectif : mûre**s**."
+      }
+     ],
+     "answer": "**des mangues mûres**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : le féminin",
+     "statement": "Complète : « Ngono est content… »",
+     "steps": [
+      {
+       "md": "Ngono est une fille : le mot est féminin."
+      },
+      {
+       "md": "J'ajoute un -e : contente."
+      }
+     ],
+     "answer": "Ngono est **contente**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "Quand on dit « les poules », on n'entend pas toujours le -s, mais on l'écrit. Et avec ils / elles, on écrit -nt : elles chantent."
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-accord-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-accord-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-accord-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-accord-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-accord-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-accord-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le pluriel de « poule » ?",
+   "choices": [
+    "poules",
+    "poule",
+    "poulle",
+    "poulx"
+   ],
+   "answer": 0,
+   "explanation": "On ajoute un -s : des poules.",
+   "id": "cp-francais-accord-01",
+   "chapter": "cp-francais-orthographe",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-francais-accord",
+   "points": 1
+  },
+  {
+   "kind": "matching",
+   "prompt": "Relie chaque groupe singulier à son pluriel.",
+   "pairs": [
+    [
+     "un chat",
+     "des chats"
+    ],
+    [
+     "une mangue",
+     "des mangues"
+    ],
+    [
+     "un enfant",
+     "des enfants"
+    ],
+    [
+     "une chèvre",
+     "des chèvres"
+    ]
+   ],
+   "explanation": "On ajoute un -s au nom et on change le petit mot.",
+   "id": "cp-francais-accord-02",
+   "chapter": "cp-francais-orthographe",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-francais-accord",
+   "points": 1
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : on écrit « des mangue ».",
+   "answer": false,
+   "explanation": "Avec des, le nom prend un -s : des mangues.",
+   "id": "cp-francais-accord-03",
+   "chapter": "cp-francais-orthographe",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-francais-accord",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : Ngono est ___.",
+   "choices": [
+    "content",
+    "contentes",
+    "contents",
+    "contente"
+   ],
+   "answer": 3,
+   "explanation": "Ngono est une fille, au singulier : -e.",
+   "id": "cp-francais-accord-04",
+   "chapter": "cp-francais-orthographe",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-francais-accord",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Mets au pluriel : « Le chat noir dort. »",
+   "choices": [
+    "Les chats noir dort.",
+    "Les chat noirs dort.",
+    "Les chats noirs dorment.",
+    "Les chats noirs dort."
+   ],
+   "answer": 2,
+   "explanation": "Le nom prend -s, l'adjectif aussi, et le verbe prend -nt.",
+   "id": "cp-francais-accord-05",
+   "chapter": "cp-francais-orthographe",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-francais-accord",
+   "points": 1
+  },
+  {
+   "kind": "open",
+   "prompt": "Écris au pluriel : « La poule blanche mange. »",
+   "model": "Les poules blanches mangent.",
+   "rubric": [
+    "Les poules blanches : -s au nom et à l'adjectif.",
+    "Mangent avec -nt.",
+    "Majuscule et point."
+   ],
+   "explanation": "Le sujet est au pluriel : les poules blanches mangent.",
+   "id": "cp-francais-accord-06",
+   "chapter": "cp-francais-orthographe",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cp-francais-accord",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour faire le pluriel, on ajoute souvent…",
+   "choices": [
+    "un point",
+    "un -s",
+    "un accent",
+    "un trait"
+   ],
+   "answer": 1,
+   "explanation": "Le -s marque le pluriel.",
+   "id": "cp-francais-accord-q1",
+   "chapter": "cp-francais-orthographe",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-accord",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel groupe est au pluriel ?",
+   "choices": [
+    "des enfants",
+    "un enfant",
+    "une enfant",
+    "le enfant"
+   ],
+   "answer": 0,
+   "explanation": "Des + -s.",
+   "id": "cp-francais-accord-q2",
+   "chapter": "cp-francais-orthographe",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-accord",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : Les filles sont ___.",
+   "choices": [
+    "petite",
+    "petit",
+    "petits",
+    "petites"
+   ],
+   "answer": 3,
+   "explanation": "Filles : féminin pluriel : -es.",
+   "id": "cp-francais-accord-q3",
+   "chapter": "cp-francais-orthographe",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-accord",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : Elles ___ (chanter).",
+   "choices": [
+    "chante",
+    "chantes",
+    "chantent",
+    "chantez"
+   ],
+   "answer": 2,
+   "explanation": "Avec elles : -ent.",
+   "id": "cp-francais-accord-q4",
+   "chapter": "cp-francais-orthographe",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-accord",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot est au féminin ?",
+   "choices": [
+    "un",
+    "une",
+    "le",
+    "des"
+   ],
+   "answer": 1,
+   "explanation": "Une est féminin.",
+   "id": "cp-francais-accord-q5",
+   "chapter": "cp-francais-orthographe",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-accord",
+   "points": 1
+  }
+ ]
+}

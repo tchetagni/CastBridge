@@ -1,0 +1,316 @@
+{
+ "chapter": "cp-maths-calcul",
+ "lessons": [
+  {
+   "id": "cp-maths-double-moitie",
+   "title": "Le double et la moitié",
+   "minutes": 10,
+   "readAloud": true,
+   "programRef": "CP — Calcul : double et moitié (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Calculer le double d'un nombre.",
+    "Calculer la moitié d'un nombre pair.",
+    "Relier le double et la moitié."
+   ],
+   "prerequisites": [
+    "cp-maths-addition"
+   ],
+   "exercises": [
+    "cp-maths-double-moitie-01",
+    "cp-maths-double-moitie-02",
+    "cp-maths-double-moitie-03",
+    "cp-maths-double-moitie-04",
+    "cp-maths-double-moitie-05",
+    "cp-maths-double-moitie-06"
+   ],
+   "selfCheck": [
+    "cp-maths-double-moitie-q1",
+    "cp-maths-double-moitie-q2",
+    "cp-maths-double-moitie-q3",
+    "cp-maths-double-moitie-q4",
+    "cp-maths-double-moitie-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que la moitié d'un nombre impair n'est pas demandée au CP."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Le **double** de 4, c'est 4 + 4 = 8. La **moitié** de 8, c'est partager 8 en deux parts égales : 4 et 4."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Double et moitié",
+     "md": "- Le **double** d'un nombre : on le prend **deux fois** (4 + 4).\n- La **moitié** d'un nombre : on le partage en **2 parts égales**.\n\nLe double et la moitié vont ensemble : la moitié de 10 est 5, le double de 5 est 10."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "count",
+      "n": 10,
+      "shape": "circle",
+      "color": "blue",
+      "perRow": 5,
+      "w": 400,
+      "h": 140
+     },
+     "caption": "La moitié de 10, c'est 5.",
+     "alt": "Dix ronds bleus en deux lignes de cinq. Chaque ligne est la moitié de dix."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : le double",
+     "statement": "Quel est le double de 6 ?",
+     "steps": [
+      {
+       "md": "Le double, c'est le nombre pris deux fois."
+      },
+      {
+       "md": "6 + 6 = 12."
+      }
+     ],
+     "answer": "Le double de 6 est **12**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : la moitié",
+     "statement": "Marie a 14 arachides. Elle en donne la moitié à Paul. Combien Paul en reçoit-il ?",
+     "steps": [
+      {
+       "md": "Je partage 14 en deux parts égales."
+      },
+      {
+       "md": "7 + 7 = 14."
+      }
+     ],
+     "answer": "Paul reçoit **7** arachides."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Quelques doubles à savoir",
+     "md": "double de 1 : 2 ; de 2 : 4 ; de 3 : 6 ; de 4 : 8 ; de 5 : 10 ; de 10 : 20 ; de 20 : 40."
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-double-moitie-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-double-moitie-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-double-moitie-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-double-moitie-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-double-moitie-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-double-moitie-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Quel est le double de 5 ?",
+   "answer": 10,
+   "tolerance": 0,
+   "explanation": "5 + 5 = 10.",
+   "id": "cp-maths-double-moitie-01",
+   "chapter": "cp-maths-calcul",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-double-moitie",
+   "points": 1
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quelle est la moitié de 12 ?",
+   "answer": 6,
+   "tolerance": 0,
+   "explanation": "6 + 6 = 12.",
+   "id": "cp-maths-double-moitie-02",
+   "chapter": "cp-maths-calcul",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-double-moitie",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le double de 8 ?",
+   "choices": [
+    "4",
+    "16",
+    "18",
+    "64"
+   ],
+   "answer": 1,
+   "explanation": "8 + 8 = 16.",
+   "id": "cp-maths-double-moitie-03",
+   "chapter": "cp-maths-calcul",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-double-moitie",
+   "points": 1
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quel est le double de 25 ?",
+   "answer": 50,
+   "tolerance": 0,
+   "explanation": "25 + 25 = 50.",
+   "id": "cp-maths-double-moitie-04",
+   "chapter": "cp-maths-calcul",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-maths-double-moitie",
+   "points": 1
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : la moitié de 9 est 5.",
+   "answer": false,
+   "explanation": "5 + 5 = 10, pas 9. 9 ne se partage pas en deux parts égales : ce n'est pas un nombre pair.",
+   "id": "cp-maths-double-moitie-05",
+   "chapter": "cp-maths-calcul",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-maths-double-moitie",
+   "points": 1
+  },
+  {
+   "kind": "problem",
+   "prompt": "Un sac contient 18 mangues. Fotso en prend la moitié.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Combien de mangues Fotso prend-il ?",
+     "answer": 9,
+     "tolerance": 0,
+     "explanation": "9 + 9 = 18 : la moitié de 18 est 9.",
+     "id": "cp-maths-double-moitie-06-a",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Il double sa part en demandant à sa sœur d'en donner autant. Combien en a-t-il ?",
+     "answer": 18,
+     "tolerance": 0,
+     "explanation": "Le double de 9 est 18.",
+     "id": "cp-maths-double-moitie-06-b",
+     "points": 1
+    }
+   ],
+   "explanation": "Il prend 9 mangues ; le double donne 18.",
+   "id": "cp-maths-double-moitie-06",
+   "chapter": "cp-maths-calcul",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cp-maths-double-moitie"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la moitié de 20 ?",
+   "choices": [
+    "10",
+    "40",
+    "5",
+    "2"
+   ],
+   "answer": 0,
+   "explanation": "10 + 10 = 20.",
+   "id": "cp-maths-double-moitie-q1",
+   "chapter": "cp-maths-calcul",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-double-moitie",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le double de 30 ?",
+   "choices": [
+    "15",
+    "33",
+    "90",
+    "60"
+   ],
+   "answer": 3,
+   "explanation": "30 + 30 = 60.",
+   "id": "cp-maths-double-moitie-q2",
+   "chapter": "cp-maths-calcul",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-double-moitie",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La moitié de 16 est…",
+   "choices": [
+    "32",
+    "6",
+    "8",
+    "4"
+   ],
+   "answer": 2,
+   "explanation": "8 + 8 = 16.",
+   "id": "cp-maths-double-moitie-q3",
+   "chapter": "cp-maths-calcul",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-double-moitie",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel nombre a pour double 14 ?",
+   "choices": [
+    "28",
+    "7",
+    "12",
+    "21"
+   ],
+   "answer": 1,
+   "explanation": "7 + 7 = 14.",
+   "id": "cp-maths-double-moitie-q4",
+   "chapter": "cp-maths-calcul",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-double-moitie",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le double de 0 est…",
+   "choices": [
+    "0",
+    "1",
+    "2",
+    "10"
+   ],
+   "answer": 0,
+   "explanation": "0 + 0 = 0.",
+   "id": "cp-maths-double-moitie-q5",
+   "chapter": "cp-maths-calcul",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-double-moitie",
+   "points": 1
+  }
+ ]
+}

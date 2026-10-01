@@ -1,0 +1,618 @@
+{
+ "chapter": "ce2-francais-grammaire",
+ "lessons": [
+  {
+   "id": "ce2-francais-pronoms",
+   "title": "Les pronoms personnels sujets",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CE2 — Français (MINEDUB) — reconstitué, à vérifier sur le texte officiel — Grammaire : pronoms personnels",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Reconnaître les pronoms personnels sujets.",
+    "Choisir le pronom qui remplace un groupe nominal.",
+    "Accorder le pronom avec le genre et le nombre."
+   ],
+   "prerequisites": [
+    "ce2-francais-groupes"
+   ],
+   "exercises": [
+    "ce2-francais-pronoms-01",
+    "ce2-francais-pronoms-02",
+    "ce2-francais-pronoms-03",
+    "ce2-francais-pronoms-04",
+    "ce2-francais-pronoms-05",
+    "ce2-francais-pronoms-06"
+   ],
+   "selfCheck": [
+    "ce2-francais-pronoms-q1",
+    "ce2-francais-pronoms-q2",
+    "ce2-francais-pronoms-q3",
+    "ce2-francais-pronoms-q4",
+    "ce2-francais-pronoms-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que l'emploi de « on » (= nous) et du vouvoiement est attendu en CE2."
+   ],
+   "blocks": [
+    {
+     "type": "heading",
+     "text": "Les pronoms personnels"
+    },
+    {
+     "type": "text",
+     "md": "Pour éviter de répéter un nom, on utilise un **pronom personnel**. *Ngono chante. **Elle** danse aussi.*"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le pronom personnel sujet",
+     "md": "Un **pronom personnel** remplace un **nom** ou un **groupe nominal**. Il indique la **personne** :\n\n- **je** : celui qui parle.\n- **tu** : celui à qui on parle.\n- **il, elle, on** : celui ou celle dont on parle.\n- **nous** : ceux qui parlent (au moins deux).\n- **vous** : ceux à qui on parle (ou une personne qu'on vouvoie).\n- **ils, elles** : ceux ou celles dont on parle."
+    },
+    {
+     "type": "illustration",
+     "caption": "Le tableau des pronoms personnels sujets.",
+     "alt": "Un tableau à deux colonnes, singulier et pluriel, et trois lignes : 1re personne je et nous, 2e personne tu et vous, 3e personne il, elle, on et ils, elles.",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 210,
+      "items": [
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 10,
+        "w": 190,
+        "h": 40,
+        "stroke": "blue",
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 245.0,
+        "y": 35.95,
+        "text": "singulier",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 350,
+        "y": 10,
+        "w": 200,
+        "h": 40,
+        "stroke": "green",
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 450.0,
+        "y": 35.95,
+        "text": "pluriel",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 60,
+        "w": 130,
+        "h": 45,
+        "stroke": "orange",
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 75.0,
+        "y": 88.1,
+        "text": "1re personne",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 60,
+        "w": 190,
+        "h": 45,
+        "stroke": "blue",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 245.0,
+        "y": 89.5,
+        "text": "je",
+        "size": 20,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 350,
+        "y": 60,
+        "w": 200,
+        "h": 45,
+        "stroke": "green",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 450.0,
+        "y": 89.5,
+        "text": "nous",
+        "size": 20,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 112,
+        "w": 130,
+        "h": 45,
+        "stroke": "orange",
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 75.0,
+        "y": 140.1,
+        "text": "2e personne",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 112,
+        "w": 190,
+        "h": 45,
+        "stroke": "blue",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 245.0,
+        "y": 141.5,
+        "text": "tu",
+        "size": 20,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 350,
+        "y": 112,
+        "w": 200,
+        "h": 45,
+        "stroke": "green",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 450.0,
+        "y": 141.5,
+        "text": "vous",
+        "size": 20,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 164,
+        "w": 130,
+        "h": 42,
+        "stroke": "orange",
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 75.0,
+        "y": 190.6,
+        "text": "3e personne",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 164,
+        "w": 190,
+        "h": 42,
+        "stroke": "blue",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 245.0,
+        "y": 191.3,
+        "text": "il, elle, on",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 350,
+        "y": 164,
+        "w": 200,
+        "h": 42,
+        "stroke": "green",
+        "fill": "white",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 450.0,
+        "y": 191.3,
+        "text": "ils, elles",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Comment choisir le bon pronom ?",
+     "md": "- Un seul garçon ou un seul animal mâle → **il**. Une seule fille → **elle**.\n- Plusieurs garçons, ou des garçons et des filles → **ils**.\n- Plusieurs filles seulement → **elles**.\n- Moi et d'autres → **nous**. Toi et d'autres → **vous**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : remplacer par un pronom",
+     "statement": "Remplace le groupe sujet : « Ngono et Amina dansent. »",
+     "steps": [
+      {
+       "md": "« Ngono et Amina » : deux filles, on parle d'elles."
+      },
+      {
+       "md": "Plusieurs filles → **elles**."
+      }
+     ],
+     "answer": "**Elles dansent.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : avec « moi » ou « toi »",
+     "statement": "Quel pronom pour « Paul et moi » ? Et pour « Toi et Marie » ?",
+     "steps": [
+      {
+       "md": "« Paul et moi » : je parle avec Paul → **nous**."
+      },
+      {
+       "md": "« Toi et Marie » : je parle à toi et à Marie → **vous**."
+      }
+     ],
+     "answer": "**Paul et moi → nous. Toi et Marie → vous.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- Le pronom doit correspondre au **genre** et au **nombre** du nom : *les mangues → elles*.\n- **Ils** s'emploie aussi pour un groupe de garçons **et** de filles.\n- Ne confonds pas **on** (= quelqu'un, nous) et **ont** (le verbe avoir)."
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-francais-pronoms-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-francais-pronoms-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-francais-pronoms-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-francais-pronoms-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-francais-pronoms-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce2-francais-pronoms-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Il existe d'autres pronoms (le, la, lui, leur…) que tu étudieras plus tard."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ce2-francais-pronoms-01",
+   "chapter": "ce2-francais-grammaire",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-pronoms",
+   "prompt": "Quel pronom peut remplacer « Les mangues » ?",
+   "choices": [
+    "ils",
+    "il",
+    "elles",
+    "nous"
+   ],
+   "answer": 2,
+   "explanation": "« Les mangues » : féminin pluriel → **elles**.",
+   "method": "Regarder genre et nombre du nom.",
+   "mistakes": [
+    "Dire « ils » pour des noms féminins."
+   ],
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-pronoms-02",
+   "chapter": "ce2-francais-grammaire",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-pronoms",
+   "prompt": "Vrai ou faux : « je » est un pronom de la 1re personne du singulier.",
+   "answer": true,
+   "explanation": "Vrai. « je » désigne celui qui parle.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-pronoms-03",
+   "chapter": "ce2-francais-grammaire",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "lesson": "ce2-francais-pronoms",
+   "prompt": "Associe chaque personne au bon pronom.",
+   "pairs": [
+    [
+     "1re personne du singulier",
+     "je"
+    ],
+    [
+     "1re personne du pluriel",
+     "nous"
+    ],
+    [
+     "2e personne du pluriel",
+     "vous"
+    ],
+    [
+     "3e personne du pluriel (que des filles)",
+     "elles"
+    ]
+   ],
+   "explanation": "Je = moi. Nous = moi et d'autres. Vous = toi et d'autres. Elles = plusieurs filles.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-pronoms-04",
+   "chapter": "ce2-francais-grammaire",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "ce2-francais-pronoms",
+   "prompt": "Complète : « Paul et moi allons au marché. ___ allons acheter du pain. »",
+   "choices": [
+    "Ils",
+    "Vous",
+    "Elles",
+    "Nous"
+   ],
+   "answer": 3,
+   "explanation": "« Paul et moi » : c'est moi et un autre → **nous**.",
+   "method": "Remplacer le groupe sujet par un pronom.",
+   "mistakes": [
+    "Choisir « ils » alors que « moi » est dans le groupe."
+   ],
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-pronoms-05",
+   "chapter": "ce2-francais-grammaire",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "ce2-francais-pronoms",
+   "prompt": "Remplace le groupe sujet par un pronom : (1) « Ma mère et ma sœur vendent des légumes. » (2) « Le chien de Tchoua court. »",
+   "model": "(1) Elles vendent des légumes. (2) Il court.",
+   "rubric": [
+    "(1) elles (deux femmes).",
+    "(2) il (un chien, masculin)."
+   ],
+   "explanation": "(1) Deux personnes féminines : elles. (2) Un seul chien masculin : il.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-pronoms-06",
+   "chapter": "ce2-francais-grammaire",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "ce2-francais-pronoms",
+   "prompt": "Remplace chaque groupe sujet par un pronom.",
+   "method": "Qui parle ? À qui parle-t-on ? De qui parle-t-on ?",
+   "mistakes": [
+    "Oublier que « vous » va avec « travaillez »."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "kind": "mcq",
+     "difficulty": 2,
+     "prompt": "Amina et Ibrahim chantent. → ___ chantent.",
+     "choices": [
+      "Ils",
+      "Elles",
+      "Elle",
+      "Nous"
+     ],
+     "answer": 0,
+     "explanation": "Une fille et un garçon : on emploie **ils**.",
+     "points": 1,
+     "id": "ce2-francais-pronoms-06-a"
+    },
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "prompt": "Marie et Ngono dansent. → ___ dansent.",
+     "choices": [
+      "Ils",
+      "Elles",
+      "Nous",
+      "Il"
+     ],
+     "answer": 1,
+     "explanation": "Deux filles : **elles**.",
+     "points": 1,
+     "id": "ce2-francais-pronoms-06-b"
+    },
+    {
+     "kind": "mcq",
+     "difficulty": 2,
+     "prompt": "Toi et ton frère travaillez. → ___ travaillez.",
+     "choices": [
+      "Ils",
+      "Nous",
+      "Vous",
+      "Tu"
+     ],
+     "answer": 2,
+     "explanation": "On parle à deux personnes : **vous**.",
+     "points": 1,
+     "id": "ce2-francais-pronoms-06-c"
+    }
+   ]
+  },
+  {
+   "id": "ce2-francais-pronoms-q1",
+   "chapter": "ce2-francais-grammaire",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-pronoms",
+   "prompt": "Un pronom personnel remplace…",
+   "choices": [
+    "un verbe",
+    "un adjectif",
+    "une phrase entière",
+    "un nom ou un groupe nominal"
+   ],
+   "answer": 3,
+   "explanation": "Il évite de répéter le nom.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-pronoms-q2",
+   "chapter": "ce2-francais-grammaire",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-pronoms",
+   "prompt": "Quel pronom remplace « Fotso » ?",
+   "choices": [
+    "il",
+    "elle",
+    "ils",
+    "nous"
+   ],
+   "answer": 0,
+   "explanation": "Fotso est un garçon : **il**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-pronoms-q3",
+   "chapter": "ce2-francais-grammaire",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-pronoms",
+   "prompt": "Quel pronom remplace « ma sœur et moi » ?",
+   "choices": [
+    "elles",
+    "nous",
+    "vous",
+    "ils"
+   ],
+   "answer": 1,
+   "explanation": "Ma sœur et moi : moi + une autre personne → **nous**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-pronoms-q4",
+   "chapter": "ce2-francais-grammaire",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-pronoms",
+   "prompt": "« Elles » désigne…",
+   "choices": [
+    "un garçon",
+    "un seul animal",
+    "plusieurs filles",
+    "un garçon et une fille"
+   ],
+   "answer": 2,
+   "explanation": "« Elles » : féminin pluriel.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce2-francais-pronoms-q5",
+   "chapter": "ce2-francais-grammaire",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ce2-francais-pronoms",
+   "prompt": "Avec le pronom « tu », je parle à…",
+   "choices": [
+    "plusieurs personnes",
+    "moi-même",
+    "un objet",
+    "une seule personne"
+   ],
+   "answer": 3,
+   "explanation": "« tu » : une personne à qui on parle. Pour plusieurs personnes, on dit « vous ».",
+   "source": "Exercice original"
+  }
+ ]
+}

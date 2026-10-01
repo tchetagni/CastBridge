@@ -1,0 +1,490 @@
+{
+ "chapter": "ce1-sciences-c3-animaux",
+ "lessons": [
+  {
+   "id": "ce1-sciences-animaux",
+   "title": "Les animaux autour de nous",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CE1 — Le monde vivant : les animaux, vertébrés et invertébrés, couverture du corps, déplacement (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Classer des animaux en vertébrés et invertébrés.",
+    "Décrire la peau ou le revêtement et le déplacement d'un animal.",
+    "Reconnaître un insecte (six pattes)."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "ce1-sciences-animaux-01",
+    "ce1-sciences-animaux-02",
+    "ce1-sciences-animaux-03",
+    "ce1-sciences-animaux-04",
+    "ce1-sciences-animaux-05",
+    "ce1-sciences-animaux-06"
+   ],
+   "selfCheck": [
+    "ce1-sciences-animaux-q1",
+    "ce1-sciences-animaux-q2",
+    "ce1-sciences-animaux-q3",
+    "ce1-sciences-animaux-q4",
+    "ce1-sciences-animaux-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier les affirmations sur la chauve-souris, le dauphin et le pangolin (mammifères) : ces cas limites sont peut-être au-delà du programme du CE1.",
+    "Vérifier que la classification (mammifère, oiseau, poisson, reptile, insecte) est bien attendue au CE1."
+   ],
+   "blocks": [
+    {
+     "type": "audio",
+     "lang": "fr-FR",
+     "text": "Il y a beaucoup d'animaux : dans la forêt, dans l'eau, dans la maison. Comment les ranger ?"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Vertébrés et invertébrés",
+     "md": "Un **vertébré** a un squelette à l'intérieur du corps, avec une **colonne vertébrale** : l'éléphant, la poule, le poisson, le crocodile.\n\nUn **invertébré** n'a pas de colonne vertébrale : la fourmi, l'araignée, le ver de terre, l'escargot."
+    },
+    {
+     "type": "illustration",
+     "caption": "Deux grands groupes d'animaux.",
+     "alt": "Deux cases : à gauche les vertébrés avec des exemples (éléphant, chèvre, poule, perroquet, poissons, reptiles), à droite les invertébrés (fourmi, abeille, araignée, ver de terre, escargot).",
+     "figure": {
+      "kind": "shapes",
+      "w": 540,
+      "h": 230,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 15,
+        "w": 255,
+        "h": 120,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "rect",
+        "x": 275,
+        "y": 15,
+        "w": 255,
+        "h": 120,
+        "fill": "lightorange",
+        "stroke": "orange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 137,
+        "y": 40,
+        "text": "Vertébrés (avec un squelette)",
+        "size": 15,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 137,
+        "y": 70,
+        "text": "mammifères : éléphant, chèvre",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 137,
+        "y": 90,
+        "text": "oiseaux : poule, perroquet",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 137,
+        "y": 110,
+        "text": "poissons, reptiles",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 402,
+        "y": 40,
+        "text": "Invertébrés (sans squelette)",
+        "size": 15,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 402,
+        "y": 70,
+        "text": "insectes : fourmi, abeille",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 402,
+        "y": 90,
+        "text": "araignée, ver de terre",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 402,
+        "y": 110,
+        "text": "escargot",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 175,
+        "text": "Un squelette avec une colonne vertébrale = vertébré",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 205,
+        "text": "Pas de colonne vertébrale = invertébré",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Comment est couvert le corps ?",
+     "md": "Le corps des animaux est couvert de façon différente.\n\n- Les **mammifères** (chèvre, éléphant, chimpanzé) ont des poils. Les petits boivent le lait de leur mère.\n- Les **oiseaux** ont des plumes et des ailes. Ils pondent des œufs.\n- Les **poissons** ont des écailles et des nageoires. Ils vivent dans l'eau.\n- Les **reptiles** (serpent, lézard, crocodile) ont la peau couverte d'écailles."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : classer un animal",
+     "statement": "L'éléphant est-il un vertébré ou un invertébré ?",
+     "steps": [
+      {
+       "md": "L'éléphant a un squelette avec une colonne vertébrale."
+      },
+      {
+       "md": "Son corps est couvert de peau avec très peu de poils ; ses petits boivent du lait."
+      }
+     ],
+     "answer": "**L'éléphant est un vertébré (un mammifère).**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : classer un animal",
+     "statement": "La fourmi est-elle un vertébré ?",
+     "steps": [
+      {
+       "md": "La fourmi n'a pas de squelette à l'intérieur."
+      },
+      {
+       "md": "Elle a six pattes : c'est un insecte."
+      }
+     ],
+     "answer": "**Non, la fourmi est un invertébré (un insecte).**"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Reconnaître un insecte",
+     "md": "Un **insecte** a :\n\n- un corps en trois parties (tête, thorax, abdomen) ;\n- **six pattes** ;\n- souvent des ailes et deux antennes.\n\nExemples : la fourmi, l'abeille, le papillon, la mouche."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- L'araignée a **huit pattes** : ce n'est pas un insecte, mais c'est un invertébré.\n- La chauve-souris vole, mais c'est un mammifère, pas un oiseau.\n- Le pangolin est un mammifère couvert d'écailles : on ne se fie pas seulement à l'aspect.\n- Le dauphin vit dans l'eau, mais il n'est pas un poisson."
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-sciences-animaux-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-sciences-animaux-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-sciences-animaux-03"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Certains animaux mangent de l'herbe : les herbivores. D'autres mangent de la viande : les carnivores.",
+      "Le chimpanzé et le pangolin vivent dans les forêts du Cameroun ; il faut les protéger."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ce1-sciences-animaux-01",
+   "chapter": "ce1-sciences-c3-animaux",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quel animal est un vertébré ?",
+   "choices": [
+    "la chèvre",
+    "la fourmi",
+    "l'escargot",
+    "l'araignée"
+   ],
+   "answer": 0,
+   "explanation": "La **chèvre** a un squelette et une colonne vertébrale. Les trois autres n'en ont pas.",
+   "lesson": "ce1-sciences-animaux",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-animaux-02",
+   "chapter": "ce1-sciences-c3-animaux",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Vrai ou faux : un insecte a six pattes.",
+   "answer": true,
+   "explanation": "Vrai. Un insecte a **six pattes** (fourmi, abeille, mouche…).",
+   "lesson": "ce1-sciences-animaux",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-animaux-03",
+   "chapter": "ce1-sciences-c3-animaux",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "prompt": "Associe chaque animal à ce qui couvre son corps.",
+   "pairs": [
+    [
+     "la poule",
+     "des plumes"
+    ],
+    [
+     "la chèvre",
+     "des poils"
+    ],
+    [
+     "le poisson",
+     "des écailles"
+    ]
+   ],
+   "explanation": "Oiseaux : plumes. Mammifères : poils. Poissons : écailles.",
+   "lesson": "ce1-sciences-animaux",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-animaux-04",
+   "chapter": "ce1-sciences-c3-animaux",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "Quel animal n'est PAS un insecte ?",
+   "choices": [
+    "la fourmi",
+    "l'abeille",
+    "le papillon",
+    "l'araignée"
+   ],
+   "answer": 3,
+   "explanation": "L'**araignée** a huit pattes : ce n'est pas un insecte (mais c'est un invertébré).",
+   "lesson": "ce1-sciences-animaux",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-animaux-05",
+   "chapter": "ce1-sciences-c3-animaux",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "Quel animal est un mammifère ?",
+   "choices": [
+    "le crocodile",
+    "le chimpanzé",
+    "le perroquet",
+    "le tilapia"
+   ],
+   "answer": 1,
+   "explanation": "Le **chimpanzé** a des poils et ses petits boivent le lait de leur mère.",
+   "lesson": "ce1-sciences-animaux",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-animaux-06",
+   "chapter": "ce1-sciences-c3-animaux",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Nkeng range des animaux en deux groupes : vertébrés et invertébrés.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Dans quel groupe range-t-il le serpent ?",
+     "choices": [
+      "les invertébrés",
+      "les vertébrés",
+      "les insectes",
+      "aucun groupe"
+     ],
+     "answer": 1,
+     "explanation": "Le serpent a une colonne vertébrale : c'est un **vertébré** (un reptile).",
+     "id": "ce1-sciences-animaux-06-a"
+    },
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Dans quel groupe range-t-il l'escargot ?",
+     "choices": [
+      "les vertébrés",
+      "les mammifères",
+      "les oiseaux",
+      "les invertébrés"
+     ],
+     "answer": 3,
+     "explanation": "L'escargot n'a pas de squelette : c'est un **invertébré**.",
+     "id": "ce1-sciences-animaux-06-b"
+    },
+    {
+     "kind": "truefalse",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Le ver de terre est un vertébré.",
+     "answer": false,
+     "explanation": "Faux : le ver de terre n'a pas de colonne vertébrale.",
+     "id": "ce1-sciences-animaux-06-c"
+    }
+   ],
+   "lesson": "ce1-sciences-animaux",
+   "points": 3,
+   "explanation": "Corrigé détaillé question par question ci-dessous.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-animaux-q1",
+   "chapter": "ce1-sciences-c3-animaux",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Que veut dire « vertébré » ?",
+   "choices": [
+    "qui a une colonne vertébrale",
+    "qui vole",
+    "qui vit dans l'eau",
+    "qui a six pattes"
+   ],
+   "answer": 0,
+   "explanation": "Un vertébré a une **colonne vertébrale**.",
+   "lesson": "ce1-sciences-animaux",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-animaux-q2",
+   "chapter": "ce1-sciences-c3-animaux",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Combien de pattes a un insecte ?",
+   "choices": [
+    "quatre",
+    "huit",
+    "six",
+    "deux"
+   ],
+   "answer": 2,
+   "explanation": "Un insecte a **six** pattes.",
+   "lesson": "ce1-sciences-animaux",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-animaux-q3",
+   "chapter": "ce1-sciences-c3-animaux",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quel animal pond des œufs et a des plumes ?",
+   "choices": [
+    "le chat",
+    "le crocodile",
+    "la poule",
+    "le poisson"
+   ],
+   "answer": 2,
+   "explanation": "La **poule** est un oiseau : plumes, ailes, œufs.",
+   "lesson": "ce1-sciences-animaux",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-animaux-q4",
+   "chapter": "ce1-sciences-c3-animaux",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Où vit le poisson ?",
+   "choices": [
+    "dans l'eau",
+    "sous la terre seulement",
+    "dans les arbres",
+    "dans le feu"
+   ],
+   "answer": 0,
+   "explanation": "Le poisson vit dans l'**eau** et respire grâce à ses branchies.",
+   "lesson": "ce1-sciences-animaux",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-animaux-q5",
+   "chapter": "ce1-sciences-c3-animaux",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Les petits d'un mammifère…",
+   "choices": [
+    "sortent d'un œuf à coquille",
+    "n'ont jamais faim",
+    "sont des insectes",
+    "boivent le lait de leur mère"
+   ],
+   "answer": 3,
+   "explanation": "Les petits d'un mammifère boivent le **lait de leur mère**.",
+   "lesson": "ce1-sciences-animaux",
+   "source": "Exercice original"
+  }
+ ]
+}

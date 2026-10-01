@@ -1,0 +1,467 @@
+{
+ "chapter": "sil-histoire-geo-quartier-ch",
+ "lessons": [
+  {
+   "id": "sil-histoire-geo-quartier",
+   "title": "Mon quartier, mon village",
+   "minutes": 12,
+   "readAloud": true,
+   "programRef": "SIL — Éveil (géographie) : le quartier ou le village, ses lieux utiles (reconstitué)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Nommer des lieux du quartier ou du village.",
+    "Dire à quoi sert chaque lieu.",
+    "Se repérer : ma maison, l'école, le marché."
+   ],
+   "prerequisites": [
+    "sil-histoire-geo-ecole"
+   ],
+   "exercises": [
+    "sil-histoire-geo-quartier-01",
+    "sil-histoire-geo-quartier-02",
+    "sil-histoire-geo-quartier-03",
+    "sil-histoire-geo-quartier-04",
+    "sil-histoire-geo-quartier-05",
+    "sil-histoire-geo-quartier-06"
+   ],
+   "selfCheck": [
+    "sil-histoire-geo-quartier-q1",
+    "sil-histoire-geo-quartier-q2",
+    "sil-histoire-geo-quartier-q3",
+    "sil-histoire-geo-quartier-q4",
+    "sil-histoire-geo-quartier-q5"
+   ],
+   "reviewNotes": [
+    "Adapter selon le contexte (ville ou village) : la fiche parle des deux ; il peut manquer un lieu local (lieu de prière, forage, etc.), volontairement neutre.",
+    "Plan du quartier : schéma très simplifié, sans échelle."
+   ],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "Dans mon quartier ou mon village, il y a des maisons, une école, un marché, une route, un centre de santé.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Des lieux utiles",
+     "md": "- La **maison** : on y vit.\n- L'**école** : on y apprend.\n- Le **marché** : on y achète et on y vend.\n- Le **centre de santé** : on s'y soigne.\n- La **route** : on y circule."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 220,
+      "items": [
+       {
+        "t": "rect",
+        "x": 0,
+        "y": 100,
+        "w": 480,
+        "h": 30,
+        "fill": "lightgrey",
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 121,
+        "text": "la route",
+        "size": 16,
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 30,
+        "w": 90,
+        "h": 60,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 65,
+        "y": 66,
+        "text": "maison",
+        "size": 17,
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 30,
+        "w": 90,
+        "h": 60,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 175,
+        "y": 66,
+        "text": "école",
+        "size": 17,
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 240,
+        "y": 30,
+        "w": 100,
+        "h": 60,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 66,
+        "text": "marché",
+        "size": 17,
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 360,
+        "y": 30,
+        "w": 100,
+        "h": 60,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 410,
+        "y": 60,
+        "text": "centre",
+        "size": 16,
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 410,
+        "y": 80,
+        "text": "de santé",
+        "size": 16,
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 175,
+        "text": "Un plan du quartier (dessin simplifié)",
+        "size": 16,
+        "anchor": "middle",
+        "bold": false
+       }
+      ]
+     },
+     "caption": "Plan simple d'un quartier.",
+     "alt": "Une route avec, au-dessus, quatre bâtiments : maison, école, marché, centre de santé."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : où acheter ?",
+     "statement": "Maman veut acheter des tomates. Où va-t-elle ?",
+     "steps": [
+      {
+       "md": "On achète et on vend des produits à cet endroit."
+      },
+      {
+       "md": "Les vendeurs sont installés avec leurs étals."
+      }
+     ],
+     "answer": "Elle va **au marché**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : où se soigner ?",
+     "statement": "Paul a mal à la tête et a de la fièvre. Où va-t-il avec un adulte ?",
+     "steps": [
+      {
+       "md": "On y trouve des infirmiers ou des médecins."
+      },
+      {
+       "md": "C'est un lieu pour se soigner."
+      }
+     ],
+     "answer": "Il va **au centre de santé**."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Traverser la route",
+     "md": "Je donne la main à un adulte. Je regarde à gauche et à droite avant de traverser."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer !"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-histoire-geo-quartier-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-histoire-geo-quartier-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-histoire-geo-quartier-03"
+    },
+    {
+     "type": "heading",
+     "text": "Pour aller plus loin"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-histoire-geo-quartier-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-histoire-geo-quartier-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-histoire-geo-quartier-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sil-histoire-geo-quartier-01",
+   "chapter": "sil-histoire-geo-quartier-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-histoire-geo-quartier",
+   "prompt": "Où apprend-on à lire ?",
+   "choices": [
+    "au marché",
+    "à la rivière",
+    "à l'école",
+    "à la route"
+   ],
+   "answer": 2,
+   "explanation": "À l'école."
+  },
+  {
+   "id": "sil-histoire-geo-quartier-02",
+   "chapter": "sil-histoire-geo-quartier-ch",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-histoire-geo-quartier",
+   "prompt": "Vrai ou faux : on achète des légumes au marché.",
+   "answer": true,
+   "explanation": "Le marché est un lieu où l'on achète et vend."
+  },
+  {
+   "id": "sil-histoire-geo-quartier-03",
+   "chapter": "sil-histoire-geo-quartier-ch",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sil-histoire-geo-quartier",
+   "prompt": "Associe chaque lieu à son usage.",
+   "pairs": [
+    [
+     "la maison",
+     "y vivre"
+    ],
+    [
+     "l'école",
+     "y apprendre"
+    ],
+    [
+     "le marché",
+     "y acheter"
+    ],
+    [
+     "le centre de santé",
+     "s'y soigner"
+    ]
+   ],
+   "explanation": "Chaque lieu a un rôle."
+  },
+  {
+   "id": "sil-histoire-geo-quartier-04",
+   "chapter": "sil-histoire-geo-quartier-ch",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sil-histoire-geo-quartier",
+   "prompt": "Sur le plan, il y a 4 bâtiments. Combien de bâtiments y a-t-il en tout si on en ajoute 1 ? (4 + 1)",
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "4 + 1 = 5."
+  },
+  {
+   "id": "sil-histoire-geo-quartier-05",
+   "chapter": "sil-histoire-geo-quartier-ch",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sil-histoire-geo-quartier",
+   "prompt": "Où circulent les voitures ?",
+   "choices": [
+    "sur la route",
+    "dans la classe",
+    "sur le cahier",
+    "dans la maison"
+   ],
+   "answer": 0,
+   "explanation": "Les voitures roulent sur la route."
+  },
+  {
+   "id": "sil-histoire-geo-quartier-06",
+   "chapter": "sil-histoire-geo-quartier-ch",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sil-histoire-geo-quartier",
+   "prompt": "Dans le quartier de Marie.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Pour acheter du poisson, Marie va…",
+     "choices": [
+      "à l'école",
+      "à la maison",
+      "au centre de santé",
+      "au marché"
+     ],
+     "answer": 3,
+     "explanation": "On achète du poisson au marché.",
+     "id": "sil-histoire-geo-quartier-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Avant de traverser la route, elle…",
+     "choices": [
+      "court",
+      "regarde des deux côtés",
+      "ferme les yeux",
+      "joue au ballon"
+     ],
+     "answer": 1,
+     "explanation": "Elle regarde avant de traverser.",
+     "id": "sil-histoire-geo-quartier-06-b",
+     "points": 1
+    }
+   ],
+   "explanation": "Relis chaque question avec calme."
+  },
+  {
+   "id": "sil-histoire-geo-quartier-q1",
+   "chapter": "sil-histoire-geo-quartier-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-histoire-geo-quartier",
+   "prompt": "Le marché sert à…",
+   "choices": [
+    "dormir",
+    "acheter et vendre",
+    "lire",
+    "courir"
+   ],
+   "answer": 1,
+   "explanation": "Au marché on achète et on vend."
+  },
+  {
+   "id": "sil-histoire-geo-quartier-q2",
+   "chapter": "sil-histoire-geo-quartier-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-histoire-geo-quartier",
+   "prompt": "Quand je suis malade, je vais…",
+   "choices": [
+    "au marché",
+    "à l'école",
+    "sur la route",
+    "au centre de santé"
+   ],
+   "answer": 3,
+   "explanation": "On va au centre de santé avec un adulte."
+  },
+  {
+   "id": "sil-histoire-geo-quartier-q3",
+   "chapter": "sil-histoire-geo-quartier-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-histoire-geo-quartier",
+   "prompt": "Où vit ma famille ?",
+   "choices": [
+    "à la maison",
+    "sur la route",
+    "au marché",
+    "à la rivière"
+   ],
+   "answer": 0,
+   "explanation": "Ma famille vit à la maison."
+  },
+  {
+   "id": "sil-histoire-geo-quartier-q4",
+   "chapter": "sil-histoire-geo-quartier-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-histoire-geo-quartier",
+   "prompt": "Pour traverser, je…",
+   "choices": [
+    "cours seul",
+    "joue au ballon",
+    "donne la main à un adulte",
+    "ferme les yeux"
+   ],
+   "answer": 2,
+   "explanation": "Prudence : je suis accompagné."
+  },
+  {
+   "id": "sil-histoire-geo-quartier-q5",
+   "chapter": "sil-histoire-geo-quartier-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-histoire-geo-quartier",
+   "prompt": "Un village est…",
+   "choices": [
+    "une grande ville",
+    "un fruit",
+    "un lieu où des gens habitent ensemble",
+    "un livre"
+   ],
+   "answer": 2,
+   "explanation": "Un village est un petit lieu d'habitation."
+  }
+ ]
+}

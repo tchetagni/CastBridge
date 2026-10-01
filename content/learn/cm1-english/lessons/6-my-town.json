@@ -1,0 +1,562 @@
+{
+ "chapter": "cm1-english-my-town",
+ "lessons": [
+  {
+   "id": "cm1-english-my-town-fiche",
+   "title": "Ma ville : my town",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CM1 — Anglais d'initiation (MINEDUB), reconstitué — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Nommer des lieux de la ville en anglais.",
+    "Situer un lieu avec next to, opposite, near.",
+    "Lire et comprendre un petit texte sur une ville."
+   ],
+   "prerequisites": [
+    "cm1-english-there-is-are-fiche"
+   ],
+   "exercises": [
+    "cm1-english-my-town-01",
+    "cm1-english-my-town-02",
+    "cm1-english-my-town-03",
+    "cm1-english-my-town-04",
+    "cm1-english-my-town-05",
+    "cm1-english-my-town-06"
+   ],
+   "selfCheck": [
+    "cm1-english-my-town-q1",
+    "cm1-english-my-town-q2",
+    "cm1-english-my-town-q3",
+    "cm1-english-my-town-q4",
+    "cm1-english-my-town-q5"
+   ],
+   "reviewNotes": [
+    "Textes courts originaux ; vérifier le niveau de lecture attendu au CM1.",
+    "Prépositions (next to, opposite, near, between) : vérifier celles du programme.",
+    "Plan fictif, sans lien avec une ville réelle."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les lieux de la ville",
+     "md": "- **school** : l'école\n- **market** : le marché\n- **hospital** : l'hôpital\n- **bank** : la banque\n- **library** : la bibliothèque\n- **post office** : le bureau de poste\n- **bus station** : la gare routière"
+    },
+    {
+     "type": "audio",
+     "text": "There is a market in my town. The school is next to the market.",
+     "lang": "en-GB"
+    },
+    {
+     "type": "illustration",
+     "caption": "Un plan de ville.",
+     "alt": "Un plan avec une rue principale appelée Main Street. En haut : school, market, hospital, bus station. En bas : bank, library, post office.",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 70,
+        "w": 540,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "radius": 0,
+        "fill": "lightgrey"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 89,
+        "text": "Main Street",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 20,
+        "w": 110,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 75,
+        "y": 45,
+        "text": "school",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 20,
+        "w": 110,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 205,
+        "y": 45,
+        "text": "market",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 20,
+        "w": 110,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 335,
+        "y": 45,
+        "text": "hospital",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 410,
+        "y": 20,
+        "w": 130,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 475,
+        "y": 45,
+        "text": "bus station",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 110,
+        "w": 110,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 75,
+        "y": 135,
+        "text": "bank",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 110,
+        "w": 110,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 205,
+        "y": 135,
+        "text": "library",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 110,
+        "w": 110,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 335,
+        "y": 135,
+        "text": "post office",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 180,
+        "text": "The market is next to the school and opposite the bank.",
+        "size": 14,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Situer un lieu",
+     "md": "- **next to** : à côté de\n- **opposite** : en face de\n- **near** : près de\n- **between** : entre\n\n*The bank is opposite the market. The library is near the post office.*"
+    },
+    {
+     "type": "text",
+     "md": "**Petit texte : My town**\n\nI live in a small town. There is a big market and two schools. The market is next to the bus station. On Saturday, my mother buys plantains and tomatoes at the market. I like my town because my friends live there."
+    },
+    {
+     "type": "audio",
+     "text": "I live in a small town. There is a big market and two schools. The market is next to the bus station.",
+     "lang": "en-GB"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : lire un texte",
+     "statement": "D'après le texte, où est le marché ?",
+     "steps": [
+      {
+       "md": "On cherche la phrase avec **market**."
+      },
+      {
+       "md": "« The market is **next to** the bus station. »"
+      },
+      {
+       "md": "Next to veut dire à côté de."
+      }
+     ],
+     "answer": "**Le marché est à côté de la gare routière.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : écrire une phrase",
+     "statement": "Écris en anglais : « Il y a un hôpital près de l'école. »",
+     "steps": [
+      {
+       "md": "Il y a = **there is** (un seul hôpital)."
+      },
+      {
+       "md": "Près de = **near**."
+      },
+      {
+       "md": "*There is a hospital near the school.*"
+      }
+     ],
+     "answer": "**There is a hospital near the school.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Dire *in front of* quand on veut dire **opposite** (en face).\n- Confondre **near** (près) et **next to** (juste à côté).\n- Oublier **there is / there are** pour dire « il y a »."
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-english-my-town-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-english-my-town-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-english-my-town-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-english-my-town-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-english-my-town-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-english-my-town-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "cm1-english-my-town-01",
+   "chapter": "cm1-english-my-town",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cm1-english-my-town-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Comment dit-on « la banque » ?",
+   "choices": [
+    "the book",
+    "the bus",
+    "the bank",
+    "the bed"
+   ],
+   "answer": 2,
+   "explanation": "Bank = banque.",
+   "method": "Revoir la liste des lieux.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-english-my-town-02",
+   "chapter": "cm1-english-my-town",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cm1-english-my-town-fiche",
+   "points": 1,
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : « opposite » veut dire « en face de ».",
+   "answer": true,
+   "explanation": "Opposite = en face de.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-english-my-town-03",
+   "chapter": "cm1-english-my-town",
+   "tier": "application",
+   "difficulty": 2,
+   "lesson": "cm1-english-my-town-fiche",
+   "points": 2,
+   "kind": "matching",
+   "prompt": "Associe chaque lieu à sa traduction.",
+   "pairs": [
+    [
+     "hospital",
+     "l'hôpital"
+    ],
+    [
+     "library",
+     "la bibliothèque"
+    ],
+    [
+     "post office",
+     "le bureau de poste"
+    ],
+    [
+     "bus station",
+     "la gare routière"
+    ]
+   ],
+   "explanation": "Vocabulaire des lieux.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-english-my-town-04",
+   "chapter": "cm1-english-my-town",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cm1-english-my-town-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Complète : « The school is ___ the market. » (à côté de)",
+   "choices": [
+    "opposite to",
+    "between to",
+    "next to",
+    "behind at"
+   ],
+   "answer": 2,
+   "explanation": "Next to = à côté de.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-english-my-town-05",
+   "chapter": "cm1-english-my-town",
+   "tier": "approfondissement",
+   "difficulty": 3,
+   "lesson": "cm1-english-my-town-fiche",
+   "points": 3,
+   "kind": "open",
+   "prompt": "Écris deux phrases en anglais pour décrire ta ville ou ton village (utilise there is ou there are).",
+   "model": "There is a market in my town. There are two schools.",
+   "rubric": [
+    "Deux phrases en anglais.",
+    "Emploi correct de there is / there are.",
+    "Un lieu connu."
+   ],
+   "explanation": "On peut décrire les lieux avec there is / there are.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-english-my-town-06",
+   "chapter": "cm1-english-my-town",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "cm1-english-my-town-fiche",
+   "kind": "problem",
+   "prompt": "Lire le texte « My town ».",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Où l'auteur habite-t-il ?",
+     "choices": [
+      "dans un grand village",
+      "dans une petite ville",
+      "dans une grande capitale",
+      "à la mer"
+     ],
+     "answer": 1,
+     "explanation": "Le texte dit : I live in a small town.",
+     "id": "cm1-english-my-town-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Qu'est-ce que la mère achète le samedi ?",
+     "choices": [
+      "des plantains et des tomates",
+      "du poisson et du riz",
+      "des livres",
+      "des chaussures"
+     ],
+     "answer": 0,
+     "explanation": "Le texte : my mother buys plantains and tomatoes.",
+     "id": "cm1-english-my-town-06-b",
+     "points": 1
+    },
+    {
+     "kind": "truefalse",
+     "prompt": "Le marché est à côté de la gare routière.",
+     "answer": true,
+     "explanation": "Le texte : the market is next to the bus station.",
+     "id": "cm1-english-my-town-06-c",
+     "points": 1
+    }
+   ],
+   "explanation": "Voir la correction de chaque question.",
+   "method": "Relire le texte avant de répondre.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-english-my-town-q1",
+   "chapter": "cm1-english-my-town",
+   "tier": "autoeval",
+   "lesson": "cm1-english-my-town-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Que veut dire « market » ?",
+   "choices": [
+    "maison",
+    "musée",
+    "montagne",
+    "marché"
+   ],
+   "answer": 3,
+   "explanation": "Market = marché."
+  },
+  {
+   "id": "cm1-english-my-town-q2",
+   "chapter": "cm1-english-my-town",
+   "tier": "autoeval",
+   "lesson": "cm1-english-my-town-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Que veut dire « near » ?",
+   "choices": [
+    "loin de",
+    "dans",
+    "sous",
+    "près de"
+   ],
+   "answer": 3,
+   "explanation": "Near = près de."
+  },
+  {
+   "id": "cm1-english-my-town-q3",
+   "chapter": "cm1-english-my-town",
+   "tier": "autoeval",
+   "lesson": "cm1-english-my-town-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Comment dit-on « il y a une banque » ?",
+   "choices": [
+    "There are a bank.",
+    "Is there bank.",
+    "There is a bank.",
+    "There bank is."
+   ],
+   "answer": 2,
+   "explanation": "Un seul : there is."
+  },
+  {
+   "id": "cm1-english-my-town-q4",
+   "chapter": "cm1-english-my-town",
+   "tier": "autoeval",
+   "lesson": "cm1-english-my-town-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Que veut dire « post office » ?",
+   "choices": [
+    "gare routière",
+    "bureau de poste",
+    "hôpital",
+    "école"
+   ],
+   "answer": 1,
+   "explanation": "Post office = bureau de poste."
+  },
+  {
+   "id": "cm1-english-my-town-q5",
+   "chapter": "cm1-english-my-town",
+   "tier": "autoeval",
+   "lesson": "cm1-english-my-town-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "« The library is opposite the bank » veut dire…",
+   "choices": [
+    "La bibliothèque est en face de la banque.",
+    "La bibliothèque est à côté de la banque.",
+    "La bibliothèque est dans la banque.",
+    "La banque est dans la bibliothèque."
+   ],
+   "answer": 0,
+   "explanation": "Opposite = en face de."
+  }
+ ]
+}

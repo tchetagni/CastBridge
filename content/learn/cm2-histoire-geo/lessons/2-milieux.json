@@ -1,0 +1,518 @@
+{
+ "chapter": "cm2-histoire-geo-milieux",
+ "lessons": [
+  {
+   "id": "cm2-histoire-geo-milieux-fiche",
+   "title": "Relief, climats et végétation du Cameroun",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CM2 — Géographie : relief, climats, végétation (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Citer les grands ensembles de relief.",
+    "Distinguer le climat du sud et celui du nord.",
+    "Associer un climat à sa végétation."
+   ],
+   "prerequisites": [
+    "cm2-histoire-geo-regions-fiche"
+   ],
+   "exercises": [
+    "cm2-histoire-geo-milieux-01",
+    "cm2-histoire-geo-milieux-02",
+    "cm2-histoire-geo-milieux-03",
+    "cm2-histoire-geo-milieux-04",
+    "cm2-histoire-geo-milieux-05",
+    "cm2-histoire-geo-milieux-06"
+   ],
+   "selfCheck": [
+    "cm2-histoire-geo-milieux-q1",
+    "cm2-histoire-geo-milieux-q2",
+    "cm2-histoire-geo-milieux-q3",
+    "cm2-histoire-geo-milieux-q4",
+    "cm2-histoire-geo-milieux-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier : « point culminant du pays » pour le mont Cameroun, le nombre de saisons du sud et du nord, et le nom « plateau de l'Adamaoua ».",
+    "Les zones sont simplifiées ; prévoir de les placer sur une vraie carte."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le relief",
+     "md": "Le Cameroun a des paysages variés :\n\n- une **plaine côtière** au bord de l'Atlantique ;\n- un **plateau du Sud** couvert de forêt ;\n- les **hauts plateaux de l'Ouest** et des montagnes ;\n- le **plateau de l'Adamaoua**, au centre ;\n- des **plaines** au nord (vallée de la Bénoué, plaine du lac Tchad).\n\nLe **mont Cameroun**, un volcan près de Buea, est le point culminant du pays."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les climats",
+     "md": "- Au **sud** : climat **équatorial**. Il pleut beaucoup, il fait chaud toute l'année ; il y a quatre saisons : grande saison sèche, petite saison des pluies, petite saison sèche, grande saison des pluies.\n- Au **nord** : climat **tropical** puis sec. Il y a deux saisons : la saison des pluies, plus courte vers le nord, et la saison sèche, plus longue."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 200,
+      "items": [
+       {
+        "t": "text",
+        "x": 280,
+        "y": 22,
+        "text": "Le paysage change du sud au nord",
+        "size": 17,
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 14,
+        "y": 50,
+        "w": 126,
+        "h": 90,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 77,
+        "y": 86,
+        "text": "Côte",
+        "size": 16,
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 77,
+        "y": 114,
+        "text": "mangrove",
+        "size": 14,
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 142,
+        "y1": 95,
+        "x2": 150,
+        "y2": 95,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 152,
+        "y": 50,
+        "w": 126,
+        "h": 90,
+        "fill": "lightgreen",
+        "stroke": "green",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 215,
+        "y": 86,
+        "text": "Sud",
+        "size": 16,
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 215,
+        "y": 114,
+        "text": "forêt dense",
+        "size": 14,
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 280,
+        "y1": 95,
+        "x2": 288,
+        "y2": 95,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 50,
+        "w": 126,
+        "h": 90,
+        "fill": "lightyellow",
+        "stroke": "orange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 353,
+        "y": 86,
+        "text": "Centre-Nord",
+        "size": 16,
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 353,
+        "y": 114,
+        "text": "savane",
+        "size": 14,
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 418,
+        "y1": 95,
+        "x2": 426,
+        "y2": 95,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 428,
+        "y": 50,
+        "w": 126,
+        "h": 90,
+        "fill": "lightorange",
+        "stroke": "brown",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 491,
+        "y": 86,
+        "text": "Extrême-Nord",
+        "size": 16,
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 491,
+        "y": 114,
+        "text": "steppe sèche",
+        "size": 14,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 170,
+        "text": "plus de pluie au sud, moins de pluie au nord",
+        "size": 15,
+        "color": "grey",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Du sud au nord, la végétation change avec la quantité de pluie.",
+     "alt": "Quatre cases côte à côte : côte avec mangrove, sud avec forêt dense, centre-nord avec savane, extrême-nord avec steppe sèche. Une phrase dit qu'il pleut plus au sud et moins au nord."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "La végétation",
+     "md": "- **Mangrove** sur la côte, dans l'eau salée.\n- **Forêt dense** au sud, là où il pleut beaucoup (acajou, ébène, nombreux arbres géants).\n- **Savane** (herbes et arbres espacés) au centre et au nord.\n- **Steppe** à l'Extrême-Nord, où les pluies sont rares."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : associer climat et végétation",
+     "statement": "À Ebolowa, il pleut presque toute l'année. Quelle végétation attend-on ?",
+     "steps": [
+      {
+       "md": "Ebolowa est au sud : le climat est **équatorial**."
+      },
+      {
+       "md": "Beaucoup de pluie : la **forêt dense**."
+      }
+     ],
+     "answer": "**Une forêt dense.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : une saison",
+     "statement": "À Maroua, la saison des pluies est courte. Quel climat est-ce ?",
+     "steps": [
+      {
+       "md": "Maroua est tout au nord du pays."
+      },
+      {
+       "md": "Il pleut peu : le climat est **sec** (tropical sec) et la végétation est une steppe."
+      }
+     ],
+     "answer": "**Un climat tropical sec, avec une steppe.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que le climat est le même dans tout le pays.\n- Croire qu'il pleut davantage au nord qu'au sud.\n- Confondre savane (herbes) et forêt (arbres serrés)."
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-histoire-geo-milieux-01"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le mont Cameroun est un volcan encore actif.",
+      "Les fleuves : le Wouri, la Sanaga, la Bénoué, le Logone ; au nord, le lac Tchad."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quelle végétation trouve-t-on au sud du Cameroun ?",
+   "choices": [
+    "La steppe",
+    "La forêt dense",
+    "Le désert",
+    "La banquise"
+   ],
+   "answer": 1,
+   "explanation": "La pluie est abondante au sud : c'est la forêt dense.",
+   "method": "Penser : plus de pluie, plus d'arbres.",
+   "id": "cm2-histoire-geo-milieux-01",
+   "chapter": "cm2-histoire-geo-milieux",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cm2-histoire-geo-milieux-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : il y a deux saisons au nord du pays.",
+   "answer": true,
+   "explanation": "Au nord : une saison des pluies et une saison sèche.",
+   "id": "cm2-histoire-geo-milieux-02",
+   "chapter": "cm2-histoire-geo-milieux",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cm2-histoire-geo-milieux-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque zone à sa végétation.",
+   "pairs": [
+    [
+     "Côte",
+     "Mangrove"
+    ],
+    [
+     "Sud",
+     "Forêt dense"
+    ],
+    [
+     "Centre et Nord",
+     "Savane"
+    ],
+    [
+     "Extrême-Nord",
+     "Steppe"
+    ]
+   ],
+   "explanation": "La mangrove borde la côte ; la forêt couvre le sud ; la savane le centre-nord ; la steppe l'Extrême-Nord.",
+   "points": 2,
+   "review": true,
+   "reviewNote": "Les limites entre zones sont simplifiées : à confronter à une carte de végétation.",
+   "id": "cm2-histoire-geo-milieux-03",
+   "chapter": "cm2-histoire-geo-milieux",
+   "tier": "application",
+   "difficulty": 2,
+   "lesson": "cm2-histoire-geo-milieux-fiche",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le nom du volcan près de Buea ?",
+   "choices": [
+    "Le mont Kilimandjaro",
+    "Le mont Everest",
+    "Le mont Cameroun",
+    "Le mont Blanc"
+   ],
+   "answer": 2,
+   "explanation": "Le mont Cameroun est un volcan du sud-ouest du pays.",
+   "review": true,
+   "reviewNote": "Altitude et rang du mont Cameroun non donnés ; ajouter seulement si vérifiés.",
+   "id": "cm2-histoire-geo-milieux-04",
+   "chapter": "cm2-histoire-geo-milieux",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cm2-histoire-geo-milieux-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "open",
+   "prompt": "Explique pourquoi la végétation n'est pas la même au sud et au nord.",
+   "model": "Au sud il pleut beaucoup : forêt. Au nord il pleut peu : savane et steppe.",
+   "rubric": [
+    "La pluie est citée.",
+    "Forêt / savane distinguées."
+   ],
+   "explanation": "La quantité de pluie explique la différence de végétation.",
+   "points": 3,
+   "mistakes": [
+    "Croire que la température est la seule cause."
+   ],
+   "id": "cm2-histoire-geo-milieux-05",
+   "chapter": "cm2-histoire-geo-milieux",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cm2-histoire-geo-milieux-fiche",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Amina compare deux villes : Kribi (sud, près de la côte) et Maroua (extrême-nord). Réponds aux questions.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Où y a-t-il le plus de pluie ?",
+     "choices": [
+      "À Kribi",
+      "À Maroua",
+      "Au même niveau",
+      "Il ne pleut jamais"
+     ],
+     "answer": 0,
+     "explanation": "Au sud et près de la côte il pleut beaucoup.",
+     "id": "cm2-histoire-geo-milieux-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quelle végétation à Maroua ?",
+     "choices": [
+      "La forêt dense",
+      "La mangrove",
+      "La steppe sèche",
+      "La banquise"
+     ],
+     "answer": 2,
+     "explanation": "À l'Extrême-Nord les pluies sont rares.",
+     "id": "cm2-histoire-geo-milieux-06-b",
+     "points": 1
+    },
+    {
+     "kind": "truefalse",
+     "prompt": "Vrai ou faux : les deux villes ont le même climat.",
+     "answer": false,
+     "explanation": "Kribi a un climat équatorial, Maroua un climat sec.",
+     "id": "cm2-histoire-geo-milieux-06-c",
+     "points": 1
+    }
+   ],
+   "method": "Comparer pluie et végétation.",
+   "id": "cm2-histoire-geo-milieux-06",
+   "chapter": "cm2-histoire-geo-milieux",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cm2-histoire-geo-milieux-fiche",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Au sud, le climat est…",
+   "choices": [
+    "Équatorial",
+    "Désertique",
+    "Polaire",
+    "Sec toute l'année"
+   ],
+   "answer": 0,
+   "explanation": "Chaud et très pluvieux.",
+   "id": "cm2-histoire-geo-milieux-q1",
+   "chapter": "cm2-histoire-geo-milieux",
+   "tier": "autoeval",
+   "lesson": "cm2-histoire-geo-milieux-fiche",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien de saisons y a-t-il au nord ?",
+   "choices": [
+    "Quatre",
+    "Une",
+    "Six",
+    "Deux"
+   ],
+   "answer": 3,
+   "explanation": "Pluies et sécheresse.",
+   "id": "cm2-histoire-geo-milieux-q2",
+   "chapter": "cm2-histoire-geo-milieux",
+   "tier": "autoeval",
+   "lesson": "cm2-histoire-geo-milieux-fiche",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle végétation de la côte est dans l'eau salée ?",
+   "choices": [
+    "La steppe",
+    "La mangrove",
+    "La savane",
+    "Le désert"
+   ],
+   "answer": 1,
+   "explanation": "La mangrove.",
+   "id": "cm2-histoire-geo-milieux-q3",
+   "chapter": "cm2-histoire-geo-milieux",
+   "tier": "autoeval",
+   "lesson": "cm2-histoire-geo-milieux-fiche",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la grande végétation du centre et du nord ?",
+   "choices": [
+    "La forêt dense",
+    "La savane",
+    "La banquise",
+    "La mangrove"
+   ],
+   "answer": 1,
+   "explanation": "Herbes et arbres espacés.",
+   "id": "cm2-histoire-geo-milieux-q4",
+   "chapter": "cm2-histoire-geo-milieux",
+   "tier": "autoeval",
+   "lesson": "cm2-histoire-geo-milieux-fiche",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le mont Cameroun est…",
+   "choices": [
+    "Un lac",
+    "Une ville",
+    "Un désert",
+    "Un volcan"
+   ],
+   "answer": 3,
+   "explanation": "C'est un volcan.",
+   "id": "cm2-histoire-geo-milieux-q5",
+   "chapter": "cm2-histoire-geo-milieux",
+   "tier": "autoeval",
+   "lesson": "cm2-histoire-geo-milieux-fiche",
+   "points": 1
+  }
+ ]
+}

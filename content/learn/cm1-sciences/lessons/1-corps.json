@@ -1,0 +1,571 @@
+{
+ "chapter": "cm1-sciences-corps",
+ "lessons": [
+  {
+   "id": "cm1-sciences-corps-fiche",
+   "title": "Digestion, respiration, circulation",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CM1 — Sciences et technologie (MINEDUB), reconstitué — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Nommer dans l'ordre les organes que traversent les aliments.",
+    "Associer la digestion, la respiration et la circulation à leurs organes.",
+    "Expliquer le rôle du cœur et des poumons."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cm1-sciences-corps-01",
+    "cm1-sciences-corps-02",
+    "cm1-sciences-corps-03",
+    "cm1-sciences-corps-04",
+    "cm1-sciences-corps-05",
+    "cm1-sciences-corps-06"
+   ],
+   "selfCheck": [
+    "cm1-sciences-corps-q1",
+    "cm1-sciences-corps-q2",
+    "cm1-sciences-corps-q3",
+    "cm1-sciences-corps-q4",
+    "cm1-sciences-corps-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier le vocabulaire (nutriments, dioxygène, dioxyde de carbone) par rapport au manuel officiel de CM1.",
+    "Vérifier si l'excrétion (urine, sueur) doit être traitée à ce niveau."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Une fonction du corps",
+     "md": "Une **fonction** est un travail que le corps fait pour vivre. Chaque fonction est assurée par des **organes** qui travaillent ensemble.\n\nDans cette fiche, tu vois trois grandes fonctions : la **digestion**, la **respiration** et la **circulation**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "La digestion",
+     "md": "Les aliments sont coupés en tout petits morceaux, les **nutriments**, que le sang peut transporter.\n\nChemin : **bouche → œsophage → estomac → intestin grêle → gros intestin**.\n\nLes nutriments passent dans le sang surtout dans l'intestin grêle. Ce qui n'est pas utile est rejeté."
+    },
+    {
+     "type": "illustration",
+     "caption": "Le chemin des aliments dans le corps.",
+     "alt": "Cinq cases reliées par des flèches rouges, de gauche à droite : bouche, œsophage, estomac, intestin grêle, gros intestin.",
+     "figure": {
+      "kind": "shapes",
+      "w": 600,
+      "h": 155,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 40,
+        "w": 100,
+        "h": 56,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 74,
+        "text": "Bouche",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 112,
+        "y1": 68,
+        "x2": 126,
+        "y2": 68,
+        "color": "red",
+        "width": 3,
+        "dash": false,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 128,
+        "y": 40,
+        "w": 100,
+        "h": 56,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 178,
+        "y": 74,
+        "text": "Œsophage",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 230,
+        "y1": 68,
+        "x2": 244,
+        "y2": 68,
+        "color": "red",
+        "width": 3,
+        "dash": false,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 246,
+        "y": 40,
+        "w": 100,
+        "h": 56,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 296,
+        "y": 74,
+        "text": "Estomac",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 348,
+        "y1": 68,
+        "x2": 362,
+        "y2": 68,
+        "color": "red",
+        "width": 3,
+        "dash": false,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 364,
+        "y": 40,
+        "w": 100,
+        "h": 56,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 414,
+        "y": 63,
+        "text": "Intestin",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 414,
+        "y": 84,
+        "text": "grêle",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 466,
+        "y1": 68,
+        "x2": 480,
+        "y2": 68,
+        "color": "red",
+        "width": 3,
+        "dash": false,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 482,
+        "y": 40,
+        "w": 100,
+        "h": 56,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 532,
+        "y": 63,
+        "text": "Gros",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 532,
+        "y": 84,
+        "text": "intestin",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 20,
+        "text": "Le chemin des aliments",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 128,
+        "text": "Les nutriments passent dans le sang surtout dans l'intestin grêle",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle",
+        "bold": false
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "La respiration",
+     "md": "On **inspire** de l'air par le nez ou la bouche. Il passe par la trachée et arrive dans les **poumons**. Le **dioxygène** de l'air passe dans le sang.\n\nEn **expirant**, on rejette du **dioxyde de carbone**, un gaz produit par le corps."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "La circulation",
+     "md": "Le **cœur** est un muscle qui fonctionne comme une pompe. Il pousse le **sang** dans les vaisseaux (artères et veines) vers tout le corps.\n\nLe sang transporte le dioxygène et les nutriments jusqu'aux muscles et aux autres organes. On sent les battements au poignet : c'est le **pouls**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : le voyage d'une bouchée",
+     "statement": "Ngono avale une bouchée de plantain. Quel chemin suit-elle ?",
+     "steps": [
+      {
+       "md": "Elle est mâchée dans la **bouche**, puis avalée : elle descend par l'**œsophage**."
+      },
+      {
+       "md": "Dans l'**estomac**, elle est brassée et devient une bouillie."
+      },
+      {
+       "md": "Dans l'**intestin grêle**, les nutriments passent dans le sang. Le reste va au **gros intestin** puis est rejeté."
+      }
+     ],
+     "answer": "**Bouche → œsophage → estomac → intestin grêle → gros intestin.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : après la course",
+     "statement": "Après une course, Mballa respire vite et son cœur bat fort. Pourquoi ?",
+     "steps": [
+      {
+       "md": "Ses muscles ont travaillé : ils ont besoin de plus de **dioxygène**."
+      },
+      {
+       "md": "Il respire plus vite pour en faire entrer davantage dans les poumons."
+      },
+      {
+       "md": "Son cœur bat plus vite pour envoyer plus de sang, donc plus de dioxygène, vers les muscles."
+      }
+     ],
+     "answer": "**L'effort demande plus de dioxygène : la respiration et le cœur s'accélèrent.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que les aliments passent dans le sang dans l'estomac : c'est surtout dans l'intestin grêle.\n- Croire que les poumons sont des sacs vides qui se gonflent tout seuls : ils se remplissent quand les muscles de la poitrine travaillent.\n- Confondre **inspirer** (faire entrer l'air) et **expirer** (le rejeter)."
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-corps-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-corps-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-corps-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-corps-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-corps-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-corps-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "cm1-sciences-corps-01",
+   "chapter": "cm1-sciences-corps",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cm1-sciences-corps-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quel organe est une pompe qui envoie le sang dans tout le corps ?",
+   "choices": [
+    "l'estomac",
+    "le poumon",
+    "l'œsophage",
+    "le cœur"
+   ],
+   "answer": 3,
+   "explanation": "Le cœur est un muscle qui pompe le sang vers tous les organes.",
+   "method": "Penser à l'organe qui fait « boum-boum ».",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-corps-02",
+   "chapter": "cm1-sciences-corps",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cm1-sciences-corps-fiche",
+   "points": 2,
+   "kind": "matching",
+   "prompt": "Associe chaque organe à son rôle.",
+   "pairs": [
+    [
+     "Poumons",
+     "échanges de gaz avec le sang"
+    ],
+    [
+     "Estomac",
+     "brasse les aliments"
+    ],
+    [
+     "Cœur",
+     "pompe le sang"
+    ],
+    [
+     "Intestin grêle",
+     "les nutriments passent dans le sang"
+    ]
+   ],
+   "explanation": "- Les poumons reçoivent l'air et échangent les gaz avec le sang.\n- L'estomac brasse les aliments.\n- Le cœur pompe le sang.\n- Les nutriments passent dans le sang dans l'intestin grêle.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-corps-03",
+   "chapter": "cm1-sciences-corps",
+   "tier": "application",
+   "difficulty": 2,
+   "lesson": "cm1-sciences-corps-fiche",
+   "points": 1,
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : les aliments passent par l'œsophage avant d'arriver dans l'estomac.",
+   "answer": true,
+   "explanation": "Après la bouche, l'aliment descend par l'œsophage, puis arrive dans l'estomac.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-corps-04",
+   "chapter": "cm1-sciences-corps",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cm1-sciences-corps-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quelle suite est dans le bon ordre ?",
+   "choices": [
+    "bouche, estomac, œsophage, intestin grêle",
+    "estomac, bouche, intestin grêle, œsophage",
+    "bouche, œsophage, estomac, intestin grêle",
+    "œsophage, bouche, estomac, gros intestin"
+   ],
+   "answer": 2,
+   "explanation": "L'aliment entre par la bouche, descend dans l'œsophage, passe dans l'estomac puis dans l'intestin grêle.",
+   "mistakes": [
+    "Placer l'estomac avant l'œsophage."
+   ],
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-corps-05",
+   "chapter": "cm1-sciences-corps",
+   "tier": "approfondissement",
+   "difficulty": 3,
+   "lesson": "cm1-sciences-corps-fiche",
+   "points": 3,
+   "kind": "open",
+   "prompt": "Explique en deux ou trois phrases pourquoi on respire plus vite et le cœur bat plus vite quand on court.",
+   "model": "Quand on court, les muscles travaillent beaucoup et ont besoin de plus de dioxygène. On respire plus vite pour en faire entrer davantage. Le cœur bat plus vite pour apporter ce dioxygène aux muscles par le sang.",
+   "rubric": [
+    "Les muscles ont besoin de plus de dioxygène.",
+    "La respiration s'accélère pour faire entrer plus d'air.",
+    "Le cœur accélère pour envoyer le sang aux muscles."
+   ],
+   "explanation": "Pendant l'effort, le corps a besoin de plus de dioxygène : poumons et cœur travaillent plus vite.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-corps-06",
+   "chapter": "cm1-sciences-corps",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "cm1-sciences-corps-fiche",
+   "kind": "problem",
+   "prompt": "Amina étudie les grandes fonctions du corps.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quel gaz rejette-t-on en plus grande quantité quand on expire que quand on inspire ?",
+     "choices": [
+      "le dioxygène",
+      "le dioxyde de carbone",
+      "l'hydrogène",
+      "l'hélium"
+     ],
+     "answer": 1,
+     "explanation": "Le corps produit du dioxyde de carbone, rejeté à l'expiration.",
+     "id": "cm1-sciences-corps-06-a",
+     "points": 1
+    },
+    {
+     "kind": "truefalse",
+     "prompt": "Le sang transporte les nutriments jusqu'aux organes.",
+     "answer": true,
+     "explanation": "Après la digestion, le sang transporte les nutriments et le dioxygène vers tout le corps.",
+     "id": "cm1-sciences-corps-06-b",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Où les nutriments passent-ils surtout dans le sang ?",
+     "choices": [
+      "dans la bouche",
+      "dans l'intestin grêle",
+      "dans l'œsophage",
+      "dans la trachée"
+     ],
+     "answer": 1,
+     "explanation": "C'est dans l'intestin grêle que la plus grande partie des nutriments passe dans le sang.",
+     "id": "cm1-sciences-corps-06-c",
+     "points": 1
+    }
+   ],
+   "explanation": "Voir la correction de chaque question.",
+   "method": "Relire le rôle de chaque organe.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-corps-q1",
+   "chapter": "cm1-sciences-corps",
+   "tier": "autoeval",
+   "lesson": "cm1-sciences-corps-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quelle fonction fait entrer le dioxygène dans le corps ?",
+   "choices": [
+    "la respiration",
+    "la digestion",
+    "la circulation du pouls",
+    "l'excrétion"
+   ],
+   "answer": 0,
+   "explanation": "Le dioxygène entre par les poumons : c'est la respiration."
+  },
+  {
+   "id": "cm1-sciences-corps-q2",
+   "chapter": "cm1-sciences-corps",
+   "tier": "autoeval",
+   "lesson": "cm1-sciences-corps-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quel conduit apporte l'air du nez aux poumons ?",
+   "choices": [
+    "l'œsophage",
+    "l'artère",
+    "l'intestin",
+    "la trachée"
+   ],
+   "answer": 3,
+   "explanation": "L'air passe par la trachée avant d'arriver aux poumons."
+  },
+  {
+   "id": "cm1-sciences-corps-q3",
+   "chapter": "cm1-sciences-corps",
+   "tier": "autoeval",
+   "lesson": "cm1-sciences-corps-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Que sont les vaisseaux sanguins ?",
+   "choices": [
+    "des muscles qui broient les aliments",
+    "des sacs remplis d'air",
+    "des tuyaux dans lesquels circule le sang",
+    "des os creux"
+   ],
+   "answer": 2,
+   "explanation": "Artères et veines sont les tuyaux où circule le sang."
+  },
+  {
+   "id": "cm1-sciences-corps-q4",
+   "chapter": "cm1-sciences-corps",
+   "tier": "autoeval",
+   "lesson": "cm1-sciences-corps-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Où l'aliment est-il brassé et transformé en bouillie ?",
+   "choices": [
+    "dans la trachée",
+    "dans le cœur",
+    "dans l'estomac",
+    "dans les poumons"
+   ],
+   "answer": 2,
+   "explanation": "L'estomac brasse les aliments."
+  },
+  {
+   "id": "cm1-sciences-corps-q5",
+   "chapter": "cm1-sciences-corps",
+   "tier": "autoeval",
+   "lesson": "cm1-sciences-corps-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Que sent-on au poignet quand on pose les doigts dessus ?",
+   "choices": [
+    "les poumons",
+    "le pouls",
+    "l'estomac",
+    "la trachée"
+   ],
+   "answer": 1,
+   "explanation": "Le pouls correspond aux battements du cœur transmis par les artères."
+  }
+ ]
+}

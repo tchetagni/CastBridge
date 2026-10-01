@@ -1,0 +1,569 @@
+{
+ "chapter": "cep-francais-modes",
+ "lessons": [
+  {
+   "id": "cep-francais-imperatif-passe-simple",
+   "title": "L'impératif présent et le passé simple",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM2 — Conjugaison — reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; synthèse de révision orientée examen ; à faire relire par un enseignant",
+   "objectives": [
+    "Conjuguer un verbe à l'impératif présent (tu, nous, vous).",
+    "Reconnaître et écrire le passé simple à la 3e personne.",
+    "Distinguer l'impératif d'un autre mode."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cep-francais-imperatif-passe-simple-01",
+    "cep-francais-imperatif-passe-simple-02",
+    "cep-francais-imperatif-passe-simple-03",
+    "cep-francais-imperatif-passe-simple-04",
+    "cep-francais-imperatif-passe-simple-05",
+    "cep-francais-imperatif-passe-simple-06"
+   ],
+   "selfCheck": [
+    "cep-francais-imperatif-passe-simple-q1",
+    "cep-francais-imperatif-passe-simple-q2",
+    "cep-francais-imperatif-passe-simple-q3",
+    "cep-francais-imperatif-passe-simple-q4",
+    "cep-francais-imperatif-passe-simple-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que le passé simple (3e personne) est bien au programme du CM2 et jusqu'où (3e personne seulement ?).",
+    "Vérifier la remarque sur « ouvrir » : au présent, 3e groupe mais terminaisons du 1er groupe.",
+    "Vérifier la règle de l'impératif pour « aller » (va / vas-y)."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "L'impératif présent",
+     "md": "On l'emploie pour **donner un ordre ou un conseil**. Il n'a **pas de sujet** et seulement trois personnes : tu, nous, vous.\n\n- chanter : chante ! chantons ! chantez !\n- finir : finis ! finissons ! finissez !\n- **être** : sois ! soyons ! soyez ! — **avoir** : aie ! ayons ! ayez !\n\nPour les verbes en -er (et aller), pas de **s** à la 2e personne du singulier : mange, cueille, va."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Le passé simple",
+     "md": "On l'emploie dans les **récits écrits** pour des actions terminées. On l'utilise surtout à la 3e personne.\n\n- verbes en -er : il chant**a**, ils chant**èrent**\n- verbes en -ir : il fin**it**, ils fin**irent**\n- être : il **fut**, ils **furent** ; avoir : il **eut**, ils **eurent**\n- aller : il alla ; faire : il **fit** ; voir : il **vit** ; dire : il **dit** ; venir : il **vint**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 170,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 460,
+        "h": 32,
+        "stroke": "orange",
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 32,
+        "text": "Passé simple, 3e personne",
+        "size": 16,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 42,
+        "w": 160,
+        "h": 30,
+        "stroke": "blue",
+        "fill": "lightblue"
+       },
+       {
+        "t": "rect",
+        "x": 170,
+        "y": 42,
+        "w": 150,
+        "h": 30,
+        "stroke": "blue",
+        "fill": "lightblue"
+       },
+       {
+        "t": "rect",
+        "x": 320,
+        "y": 42,
+        "w": 150,
+        "h": 30,
+        "stroke": "blue",
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 63,
+        "text": "verbes en -er",
+        "size": 14,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 245,
+        "y": 63,
+        "text": "il / elle : -a",
+        "size": 14,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 395,
+        "y": 63,
+        "text": "ils / elles : -èrent",
+        "size": 14,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 72,
+        "w": 160,
+        "h": 30,
+        "stroke": "green",
+        "fill": "lightgreen"
+       },
+       {
+        "t": "rect",
+        "x": 170,
+        "y": 72,
+        "w": 150,
+        "h": 30,
+        "stroke": "green",
+        "fill": "lightgreen"
+       },
+       {
+        "t": "rect",
+        "x": 320,
+        "y": 72,
+        "w": 150,
+        "h": 30,
+        "stroke": "green",
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 93,
+        "text": "verbes en -ir",
+        "size": 14,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 245,
+        "y": 93,
+        "text": "il / elle : -it",
+        "size": 14,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 395,
+        "y": 93,
+        "text": "ils / elles : -irent",
+        "size": 14,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 102,
+        "w": 160,
+        "h": 30,
+        "stroke": "orange",
+        "fill": "lightorange"
+       },
+       {
+        "t": "rect",
+        "x": 170,
+        "y": 102,
+        "w": 150,
+        "h": 30,
+        "stroke": "orange",
+        "fill": "lightorange"
+       },
+       {
+        "t": "rect",
+        "x": 320,
+        "y": 102,
+        "w": 150,
+        "h": 30,
+        "stroke": "orange",
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 123,
+        "text": "être / avoir",
+        "size": 14,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 245,
+        "y": 123,
+        "text": "fut / eut",
+        "size": 14,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 395,
+        "y": 123,
+        "text": "furent / eurent",
+        "size": 14,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 155,
+        "text": "Exemples : il chanta, il finit, il fut, il eut",
+        "size": 13,
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Les terminaisons du passé simple à la 3e personne.",
+     "alt": "Un tableau en quatre lignes : les verbes en -er (il -a, ils -èrent), les verbes en -ir (il -it, ils -irent), être et avoir (fut, eut, furent, eurent)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : l'impératif",
+     "statement": "Mets à l'impératif présent : « Tu manges tes légumes. » « Nous partons. » « Vous êtes sages. »",
+     "steps": [
+      {
+       "md": "À la 2e personne du singulier des verbes en -er, on supprime le **s** : tu manges → **mange**."
+      },
+      {
+       "md": "La 1re personne du pluriel garde sa forme : **partons**."
+      },
+      {
+       "md": "Le verbe être a des formes particulières : **soyez**."
+      }
+     ],
+     "answer": "**Mange** tes légumes ! **Partons** ! **Soyez** sages !"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : le passé simple",
+     "statement": "Mets les verbes au passé simple : « Mballa (ouvrir) la porte et (voir) un pangolin. »",
+     "steps": [
+      {
+       "md": "**ouvrir** est un verbe en -ir : il ouvr**it**. (Cas particulier : ouvrir se conjugue comme un verbe en -er au présent, mais le passé simple est en -it.)"
+      },
+      {
+       "md": "**voir** : il **vit**."
+      }
+     ],
+     "answer": "**Mballa ouvrit la porte et vit un pangolin.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Écrire « manges ! » à l'impératif : « mange ! » (pas de s).\n- Employer un pronom sujet à l'impératif : « Tu mange ! » est faux.\n- Écrire « il chantat » ou « il chanté » : c'est **il chanta**.\n- Confondre le passé simple (il finit) et le présent (il finit) : seul le **contexte** (récit au passé) permet de distinguer."
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-francais-imperatif-passe-simple-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-francais-imperatif-passe-simple-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-francais-imperatif-passe-simple-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-francais-imperatif-passe-simple-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-francais-imperatif-passe-simple-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-francais-imperatif-passe-simple-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quel est l'impératif présent de « chanter » à la 2e personne du singulier ?",
+   "choices": [
+    "chantes",
+    "chante",
+    "tu chantes",
+    "chanter"
+   ],
+   "answer": 1,
+   "explanation": "Pas de s ni de pronom : chante !",
+   "id": "cep-francais-imperatif-passe-simple-01",
+   "chapter": "cep-francais-modes",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-francais-imperatif-passe-simple",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "À l'impératif, on écrit « Tu manges ! ».",
+   "answer": false,
+   "explanation": "On n'emploie pas de pronom : « Mange ! »",
+   "id": "cep-francais-imperatif-passe-simple-02",
+   "chapter": "cep-francais-modes",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-francais-imperatif-passe-simple",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque verbe à son passé simple à la 3e personne du singulier.",
+   "pairs": [
+    [
+     "chanter",
+     "il chanta"
+    ],
+    [
+     "finir",
+     "il finit"
+    ],
+    [
+     "être",
+     "il fut"
+    ],
+    [
+     "avoir",
+     "il eut"
+    ]
+   ],
+   "explanation": "Verbes en -er : -a ; en -ir : -it ; être : fut ; avoir : eut.",
+   "points": 2,
+   "id": "cep-francais-imperatif-passe-simple-03",
+   "chapter": "cep-francais-modes",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-francais-imperatif-passe-simple",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est l'impératif de « être » à la 2e personne du pluriel ?",
+   "choices": [
+    "soyez",
+    "êtes",
+    "étez",
+    "soyé"
+   ],
+   "answer": 0,
+   "explanation": "Être : sois, soyons, soyez.",
+   "id": "cep-francais-imperatif-passe-simple-04",
+   "chapter": "cep-francais-modes",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cep-francais-imperatif-passe-simple",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "open",
+   "prompt": "Mets au passé simple : « Les garçons (aller) au marché et (acheter) du poisson. »",
+   "model": "Les garçons allèrent au marché et achetèrent du poisson.",
+   "rubric": [
+    "allèrent (aller, 3e pluriel)",
+    "achetèrent (acheter, 3e pluriel)"
+   ],
+   "explanation": "Les verbes en -er (et aller) font -èrent à la 3e personne du pluriel.",
+   "points": 2,
+   "id": "cep-francais-imperatif-passe-simple-05",
+   "chapter": "cep-francais-modes",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cep-francais-imperatif-passe-simple",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Un récit au passé simple.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Le passé simple de « faire » à la 3e personne du singulier est...",
+     "choices": [
+      "fait",
+      "faisa",
+      "fis",
+      "fit"
+     ],
+     "answer": 3,
+     "explanation": "Il fit.",
+     "id": "cep-francais-imperatif-passe-simple-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quelle forme est à l'impératif ?",
+     "choices": [
+      "Tu cueilles des mangues",
+      "Il cueille des mangues",
+      "Cueille ces mangues !",
+      "Nous cueillions des mangues"
+     ],
+     "answer": 2,
+     "explanation": "Un ordre, sans pronom sujet, à la 2e personne.",
+     "id": "cep-francais-imperatif-passe-simple-06-b",
+     "points": 1
+    },
+    {
+     "kind": "truefalse",
+     "prompt": "« Elle chantat » est la bonne forme du passé simple.",
+     "answer": false,
+     "explanation": "On écrit « elle chanta ».",
+     "id": "cep-francais-imperatif-passe-simple-06-c",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Dans « Ils furent heureux », le verbe est au...",
+     "choices": [
+      "présent",
+      "passé simple",
+      "futur",
+      "imparfait"
+     ],
+     "answer": 1,
+     "explanation": "« furent » est le passé simple d'être.",
+     "id": "cep-francais-imperatif-passe-simple-06-d",
+     "points": 1
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "method": "Repérer le sujet et le groupe du verbe.",
+   "id": "cep-francais-imperatif-passe-simple-06",
+   "chapter": "cep-francais-modes",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cep-francais-imperatif-passe-simple",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'impératif a combien de personnes ?",
+   "choices": [
+    "trois",
+    "six",
+    "une",
+    "quatre"
+   ],
+   "answer": 0,
+   "explanation": "tu, nous, vous.",
+   "id": "cep-francais-imperatif-passe-simple-q1",
+   "chapter": "cep-francais-modes",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-francais-imperatif-passe-simple",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Passé simple de « dire », il...",
+   "choices": [
+    "disa",
+    "dira",
+    "dite",
+    "dit"
+   ],
+   "answer": 3,
+   "explanation": "Il dit.",
+   "id": "cep-francais-imperatif-passe-simple-q2",
+   "chapter": "cep-francais-modes",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-francais-imperatif-passe-simple",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Impératif de « finir », vous...",
+   "choices": [
+    "finissiez",
+    "finirez",
+    "finissez",
+    "finissait"
+   ],
+   "answer": 2,
+   "explanation": "Finissez !",
+   "id": "cep-francais-imperatif-passe-simple-q3",
+   "chapter": "cep-francais-modes",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-francais-imperatif-passe-simple",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Passé simple de « chanter », ils...",
+   "choices": [
+    "chantaient",
+    "chantèrent",
+    "chanteront",
+    "chantent"
+   ],
+   "answer": 1,
+   "explanation": "Ils chantèrent.",
+   "id": "cep-francais-imperatif-passe-simple-q4",
+   "chapter": "cep-francais-modes",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-francais-imperatif-passe-simple",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Impératif de « aller », tu...",
+   "choices": [
+    "va",
+    "vas",
+    "allé",
+    "ira"
+   ],
+   "answer": 0,
+   "explanation": "Va ! (sans s)",
+   "id": "cep-francais-imperatif-passe-simple-q5",
+   "chapter": "cep-francais-modes",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-francais-imperatif-passe-simple",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  }
+ ]
+}

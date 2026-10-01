@@ -1,0 +1,346 @@
+{
+ "chapter": "cp-maths-numeration",
+ "lessons": [
+  {
+   "id": "cp-maths-comparer",
+   "title": "Comparer et ranger les nombres",
+   "minutes": 12,
+   "readAloud": true,
+   "programRef": "CP — Numération : comparer et ranger (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Dire quel nombre est le plus grand.",
+    "Utiliser les signes <, > et =.",
+    "Ranger des nombres dans l'ordre."
+   ],
+   "prerequisites": [
+    "cp-maths-dizaines-unites"
+   ],
+   "exercises": [
+    "cp-maths-comparer-01",
+    "cp-maths-comparer-02",
+    "cp-maths-comparer-03",
+    "cp-maths-comparer-04",
+    "cp-maths-comparer-05",
+    "cp-maths-comparer-06"
+   ],
+   "selfCheck": [
+    "cp-maths-comparer-q1",
+    "cp-maths-comparer-q2",
+    "cp-maths-comparer-q3",
+    "cp-maths-comparer-q4",
+    "cp-maths-comparer-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier la convention d'écriture des signes < et > (« la pointe vers le plus petit ») utilisée en classe."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Pour **comparer** deux nombres, on cherche le plus grand et le plus petit."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les signes",
+     "md": "- **<** veut dire « plus petit que » : 12 < 30.\n- **>** veut dire « plus grand que » : 45 > 20.\n- **=** veut dire « égal » : 30 = 30.\n\nLa pointe du signe regarde le plus petit nombre."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Comment comparer",
+     "md": "1. Je regarde d'abord les **dizaines** : le plus grand nombre de dizaines gagne.\n2. S'il y a autant de dizaines, je regarde les **unités**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "bars": [
+       {
+        "label": "Ngono",
+        "value": 24,
+        "color": "blue"
+       },
+       {
+        "label": "Paul",
+        "value": 31,
+        "color": "orange"
+       },
+       {
+        "label": "Amina",
+        "value": 18,
+        "color": "green"
+       }
+      ],
+      "unit": "billes",
+      "w": 400,
+      "h": 220
+     },
+     "caption": "Les billes de trois enfants.",
+     "alt": "Un diagramme en barres : Ngono a 24 billes, Paul 31 billes, Amina 18 billes. Paul en a le plus, Amina le moins."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : comparer",
+     "statement": "Compare 47 et 52.",
+     "steps": [
+      {
+       "md": "Dizaines : 4 et 5. 5 est plus grand que 4."
+      },
+      {
+       "md": "Donc 52 est plus grand que 47."
+      }
+     ],
+     "answer": "47 < 52"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : ranger",
+     "statement": "Range du plus petit au plus grand : 36, 63, 29.",
+     "steps": [
+      {
+       "md": "Dizaines : 3, 6, 2. Le plus petit : 29 (2 dizaines)."
+      },
+      {
+       "md": "Puis 36 (3 dizaines), puis 63 (6 dizaines)."
+      }
+     ],
+     "answer": "29, 36, 63"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "Ne regarde pas seulement le dernier chiffre : 29 a un 9, mais 31 est plus grand car il a plus de dizaines."
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-comparer-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-comparer-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-comparer-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-comparer-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-comparer-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-comparer-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quel nombre est le plus grand ?",
+   "choices": [
+    "36",
+    "63",
+    "29",
+    "59"
+   ],
+   "answer": 1,
+   "explanation": "63 a 6 dizaines : c'est le plus grand.",
+   "id": "cp-maths-comparer-01",
+   "chapter": "cp-maths-numeration",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-comparer",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel signe va dans 34 ___ 43 ?",
+   "choices": [
+    "<",
+    ">",
+    "=",
+    "+"
+   ],
+   "answer": 0,
+   "explanation": "34 a 3 dizaines et 43 en a 4 : 34 < 43.",
+   "id": "cp-maths-comparer-02",
+   "chapter": "cp-maths-numeration",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-comparer",
+   "points": 1
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quel est le plus petit nombre : 56, 65, 49 ?",
+   "answer": 49,
+   "tolerance": 0,
+   "explanation": "49 a 4 dizaines, les autres en ont 5 et 6.",
+   "id": "cp-maths-comparer-03",
+   "chapter": "cp-maths-numeration",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-comparer",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Range du plus petit au plus grand : 71, 17, 44.",
+   "choices": [
+    "71, 44, 17",
+    "17, 71, 44",
+    "44, 17, 71",
+    "17, 44, 71"
+   ],
+   "answer": 3,
+   "explanation": "17 (1 dizaine), 44 (4 dizaines), 71 (7 dizaines).",
+   "id": "cp-maths-comparer-04",
+   "chapter": "cp-maths-numeration",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-maths-comparer",
+   "points": 1
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : 58 > 85.",
+   "answer": false,
+   "explanation": "58 a 5 dizaines, 85 en a 8. Donc 58 < 85.",
+   "id": "cp-maths-comparer-05",
+   "chapter": "cp-maths-numeration",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-maths-comparer",
+   "points": 1
+  },
+  {
+   "kind": "problem",
+   "prompt": "Ibrahim a 27 noix. Marie a 31 noix. Amina a 19 noix.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Qui en a le plus ? Écris combien elle en a.",
+     "answer": 31,
+     "tolerance": 0,
+     "explanation": "31 est le plus grand : c'est Marie.",
+     "id": "cp-maths-comparer-06-a",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Combien de noix a celui qui en a le moins ?",
+     "answer": 19,
+     "tolerance": 0,
+     "explanation": "19 est le plus petit : c'est Amina.",
+     "id": "cp-maths-comparer-06-b",
+     "points": 1
+    }
+   ],
+   "explanation": "Marie en a le plus (31), Amina le moins (19).",
+   "id": "cp-maths-comparer-06",
+   "chapter": "cp-maths-numeration",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cp-maths-comparer"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel signe : 70 ___ 17 ?",
+   "choices": [
+    "<",
+    "=",
+    ">",
+    "-"
+   ],
+   "answer": 2,
+   "explanation": "70 a 7 dizaines, 17 en a 1 : 70 > 17.",
+   "id": "cp-maths-comparer-q1",
+   "chapter": "cp-maths-numeration",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-comparer",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel nombre est plus petit que 40 ?",
+   "choices": [
+    "41",
+    "39",
+    "40",
+    "45"
+   ],
+   "answer": 1,
+   "explanation": "39 est juste avant 40.",
+   "id": "cp-maths-comparer-q2",
+   "chapter": "cp-maths-numeration",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-comparer",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la bonne écriture ?",
+   "choices": [
+    "25 < 52",
+    "25 > 52",
+    "52 < 25",
+    "25 = 52"
+   ],
+   "answer": 0,
+   "explanation": "25 est plus petit que 52.",
+   "id": "cp-maths-comparer-q3",
+   "chapter": "cp-maths-numeration",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-comparer",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel nombre est entre 20 et 30 ?",
+   "choices": [
+    "35",
+    "19",
+    "31",
+    "25"
+   ],
+   "answer": 3,
+   "explanation": "25 est plus grand que 20 et plus petit que 30.",
+   "id": "cp-maths-comparer-q4",
+   "chapter": "cp-maths-numeration",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-comparer",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Du plus grand au plus petit : 9, 90, 19 ?",
+   "choices": [
+    "9, 19, 90",
+    "19, 90, 9",
+    "90, 19, 9",
+    "90, 9, 19"
+   ],
+   "answer": 2,
+   "explanation": "90 > 19 > 9.",
+   "id": "cp-maths-comparer-q5",
+   "chapter": "cp-maths-numeration",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-comparer",
+   "points": 1
+  }
+ ]
+}

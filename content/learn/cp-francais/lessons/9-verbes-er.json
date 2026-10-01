@@ -1,0 +1,557 @@
+{
+ "chapter": "cp-francais-conjugaison",
+ "lessons": [
+  {
+   "id": "cp-francais-verbes-er",
+   "title": "Les verbes en -er au présent",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CP — Conjugaison : verbes en -er au présent (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Reconnaître un verbe du 1er groupe (en -er).",
+    "Conjuguer chanter, jouer, danser au présent.",
+    "Écrire les terminaisons -e, -es, -e, -ons, -ez, -ent."
+   ],
+   "prerequisites": [
+    "cp-francais-etre-avoir"
+   ],
+   "exercises": [
+    "cp-francais-verbes-er-01",
+    "cp-francais-verbes-er-02",
+    "cp-francais-verbes-er-03",
+    "cp-francais-verbes-er-04",
+    "cp-francais-verbes-er-05",
+    "cp-francais-verbes-er-06"
+   ],
+   "selfCheck": [
+    "cp-francais-verbes-er-q1",
+    "cp-francais-verbes-er-q2",
+    "cp-francais-verbes-er-q3",
+    "cp-francais-verbes-er-q4",
+    "cp-francais-verbes-er-q5"
+   ],
+   "reviewNotes": [
+    "Les verbes en -ger (manger : nous mangeons) sont volontairement évités ; vérifier le choix des verbes types."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Beaucoup de verbes finissent par **-er** : chanter, jouer, danser, manger. Ils se conjuguent tous de la même façon."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 258,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 230,
+        "h": 34,
+        "fill": "lightblue",
+        "stroke": "blue"
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 34,
+        "text": "sujet",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 240,
+        "y": 10,
+        "w": 230,
+        "h": 34,
+        "fill": "lightblue",
+        "stroke": "blue"
+       },
+       {
+        "t": "text",
+        "x": 355,
+        "y": 34,
+        "text": "chanter",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 44,
+        "w": 230,
+        "h": 34,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 68,
+        "text": "je",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 240,
+        "y": 44,
+        "w": 230,
+        "h": 34,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 355,
+        "y": 68,
+        "text": "chante",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 78,
+        "w": 230,
+        "h": 34,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 102,
+        "text": "tu",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 240,
+        "y": 78,
+        "w": 230,
+        "h": 34,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 355,
+        "y": 102,
+        "text": "chantes",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 112,
+        "w": 230,
+        "h": 34,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 136,
+        "text": "il / elle",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 240,
+        "y": 112,
+        "w": 230,
+        "h": 34,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 355,
+        "y": 136,
+        "text": "chante",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 146,
+        "w": 230,
+        "h": 34,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 170,
+        "text": "nous",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 240,
+        "y": 146,
+        "w": 230,
+        "h": 34,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 355,
+        "y": 170,
+        "text": "chantons",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 180,
+        "w": 230,
+        "h": 34,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 204,
+        "text": "vous",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 240,
+        "y": 180,
+        "w": 230,
+        "h": 34,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 355,
+        "y": 204,
+        "text": "chantez",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 214,
+        "w": 230,
+        "h": 34,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 238,
+        "text": "ils / elles",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 240,
+        "y": 214,
+        "w": 230,
+        "h": 34,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 355,
+        "y": 238,
+        "text": "chantent",
+        "size": 17
+       }
+      ]
+     },
+     "caption": "Chanter au présent.",
+     "alt": "Un tableau à deux colonnes : je chante, tu chantes, il chante, nous chantons, vous chantez, ils chantent."
+    },
+    {
+     "type": "audio",
+     "lang": "fr-FR",
+     "text": "Je chante, tu chantes, il chante, nous chantons, vous chantez, ils chantent."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les terminaisons",
+     "md": "je **-e**, tu **-es**, il / elle **-e**, nous **-ons**, vous **-ez**, ils / elles **-ent**.\n\nOn enlève -er, on garde le début du verbe (chant-) et on ajoute la terminaison."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : conjuguer",
+     "statement": "Conjugue « jouer » avec tu.",
+     "steps": [
+      {
+       "md": "Je prends le début : jou-."
+      },
+      {
+       "md": "Avec tu, j'ajoute **-es** : tu joues."
+      }
+     ],
+     "answer": "Tu **joues**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : ils",
+     "statement": "Complète : Les enfants ___ (danser).",
+     "steps": [
+      {
+       "md": "« Les enfants » : on peut dire ils."
+      },
+      {
+       "md": "Avec ils, on ajoute **-ent** : dansent."
+      }
+     ],
+     "answer": "Les enfants **dansent**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "Avec ils / elles, il y a **-ent** : « ils chantent ». Il ne se prononce pas, mais on l'écrit ! Avec tu, il y a toujours **-s**."
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-verbes-er-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-verbes-er-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-verbes-er-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-verbes-er-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-verbes-er-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-verbes-er-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Complète : Je ___ (chanter).",
+   "choices": [
+    "chante",
+    "chantes",
+    "chantent",
+    "chantons"
+   ],
+   "answer": 0,
+   "explanation": "Avec je : -e.",
+   "id": "cp-francais-verbes-er-01",
+   "chapter": "cp-francais-conjugaison",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-francais-verbes-er",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : Tu ___ (jouer).",
+   "choices": [
+    "joue",
+    "jouent",
+    "jouez",
+    "joues"
+   ],
+   "answer": 3,
+   "explanation": "Avec tu : -es.",
+   "id": "cp-francais-verbes-er-02",
+   "chapter": "cp-francais-conjugaison",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-francais-verbes-er",
+   "points": 1
+  },
+  {
+   "kind": "matching",
+   "prompt": "Relie chaque pronom à la forme du verbe danser.",
+   "pairs": [
+    [
+     "je",
+     "danse"
+    ],
+    [
+     "tu",
+     "danses"
+    ],
+    [
+     "nous",
+     "dansons"
+    ],
+    [
+     "ils",
+     "dansent"
+    ]
+   ],
+   "explanation": "je danse, tu danses, nous dansons, ils dansent.",
+   "id": "cp-francais-verbes-er-03",
+   "chapter": "cp-francais-conjugaison",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-francais-verbes-er",
+   "points": 1
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : on écrit « Tu danse. »",
+   "answer": false,
+   "explanation": "Avec tu, on ajoute -s : tu danses.",
+   "id": "cp-francais-verbes-er-04",
+   "chapter": "cp-francais-conjugaison",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-francais-verbes-er",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : Nous ___ (jouer) au ballon.",
+   "choices": [
+    "jouez",
+    "jouent",
+    "jouons",
+    "joue"
+   ],
+   "answer": 2,
+   "explanation": "Avec nous : -ons.",
+   "id": "cp-francais-verbes-er-05",
+   "chapter": "cp-francais-conjugaison",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-francais-verbes-er",
+   "points": 1
+  },
+  {
+   "kind": "open",
+   "prompt": "Écris trois phrases avec le verbe « chanter » : avec je, avec tu et avec ils.",
+   "model": "Je chante. Tu chantes. Ils chantent.",
+   "rubric": [
+    "Chaque phrase utilise la bonne forme (chante, chantes, chantent).",
+    "Majuscule et point."
+   ],
+   "explanation": "La terminaison change avec le sujet.",
+   "id": "cp-francais-verbes-er-06",
+   "chapter": "cp-francais-conjugaison",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cp-francais-verbes-er",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel verbe est en -er ?",
+   "choices": [
+    "finir",
+    "manger",
+    "prendre",
+    "être"
+   ],
+   "answer": 1,
+   "explanation": "Manger finit par -er.",
+   "id": "cp-francais-verbes-er-q1",
+   "chapter": "cp-francais-conjugaison",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-verbes-er",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : Il ___ (parler).",
+   "choices": [
+    "parle",
+    "parles",
+    "parlent",
+    "parlons"
+   ],
+   "answer": 0,
+   "explanation": "Avec il : -e.",
+   "id": "cp-francais-verbes-er-q2",
+   "chapter": "cp-francais-conjugaison",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-verbes-er",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : Vous ___ (chanter).",
+   "choices": [
+    "chantes",
+    "chantent",
+    "chante",
+    "chantez"
+   ],
+   "answer": 3,
+   "explanation": "Avec vous : -ez.",
+   "id": "cp-francais-verbes-er-q3",
+   "chapter": "cp-francais-conjugaison",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-verbes-er",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : Elles ___ (danser).",
+   "choices": [
+    "danse",
+    "danses",
+    "dansent",
+    "dansez"
+   ],
+   "answer": 2,
+   "explanation": "Avec elles : -ent.",
+   "id": "cp-francais-verbes-er-q4",
+   "chapter": "cp-francais-conjugaison",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-verbes-er",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle terminaison avec « nous » ?",
+   "choices": [
+    "-ez",
+    "-ons",
+    "-ent",
+    "-es"
+   ],
+   "answer": 1,
+   "explanation": "Nous chantons.",
+   "id": "cp-francais-verbes-er-q5",
+   "chapter": "cp-francais-conjugaison",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-verbes-er",
+   "points": 1
+  }
+ ]
+}

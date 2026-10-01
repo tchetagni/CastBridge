@@ -1,0 +1,427 @@
+{
+ "chapter": "cm1-maths-geometrie",
+ "lessons": [
+  {
+   "id": "cm1-maths-cercle",
+   "title": "Le cercle",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CM1 — Géométrie : le cercle (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Nommer le centre, le rayon, le diamètre d'un cercle.",
+    "Utiliser la relation diamètre = 2 × rayon.",
+    "Tracer un cercle au compas."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cm1-maths-cercle-01",
+    "cm1-maths-cercle-02",
+    "cm1-maths-cercle-03",
+    "cm1-maths-cercle-04",
+    "cm1-maths-cercle-05",
+    "cm1-maths-cercle-06"
+   ],
+   "selfCheck": [
+    "cm1-maths-cercle-q1",
+    "cm1-maths-cercle-q2",
+    "cm1-maths-cercle-q3",
+    "cm1-maths-cercle-q4",
+    "cm1-maths-cercle-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que la question du « plus long segment » est correcte et adaptée.",
+    "Contrôler visuellement la figure."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le cercle",
+     "md": "Un **cercle** est l'ensemble des points situés à **la même distance** d'un point appelé **centre**. Le **disque** est la surface à l'intérieur du cercle."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 230,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 115,
+        "r": 90,
+        "fill": null,
+        "stroke": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 115,
+        "r": 4,
+        "fill": "ink",
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 140,
+        "text": "O",
+        "size": 16,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 115,
+        "x2": 290,
+        "y2": 115,
+        "color": "red",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 255,
+        "y": 105,
+        "text": "rayon",
+        "size": 15,
+        "color": "red",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 190,
+        "x2": 290,
+        "y2": 40,
+        "color": "green",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 380,
+        "y": 90,
+        "text": "diamètre",
+        "size": 15,
+        "color": "green",
+        "bold": true,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Un cercle de centre O.",
+     "alt": "Un cercle avec son centre O, un rayon tracé en rouge et un diamètre tracé en vert."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Rayon et diamètre",
+     "md": "- Le **rayon** relie le centre à un point du cercle.\n- Le **diamètre** relie deux points du cercle en passant par le centre.\n- **Diamètre = 2 × rayon** et **rayon = diamètre ÷ 2**."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Tracer un cercle au compas",
+     "md": "1. Je repère le centre et je le marque.\n2. J'écarte le compas de la longueur du rayon (je mesure sur la règle).\n3. Je plante la pointe sur le centre.\n4. Je fais tourner le compas sans changer l'écartement."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : rayon → diamètre",
+     "statement": "Un cercle a un rayon de 4 cm. Quel est son diamètre ?",
+     "steps": [
+      {
+       "md": "Diamètre = 2 × rayon."
+      },
+      {
+       "md": "2 × 4 = 8."
+      }
+     ],
+     "answer": "**8 cm**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : diamètre → rayon",
+     "statement": "Le diamètre d'une roue de bicyclette est 70 cm. Quel est son rayon ?",
+     "steps": [
+      {
+       "md": "Rayon = diamètre ÷ 2."
+      },
+      {
+       "md": "70 ÷ 2 = 35."
+      }
+     ],
+     "answer": "**35 cm**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Écarter le compas du diamètre au lieu du rayon.\n- Confondre rayon et diamètre.\n- Déplacer la pointe du compas pendant le tracé."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-cercle-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-cercle-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-cercle-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-cercle-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-cercle-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-maths-cercle-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "cm1-maths-cercle-01",
+   "chapter": "cm1-maths-geometrie",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "numeric",
+   "prompt": "Un cercle a un rayon de 4 cm. Quel est son diamètre (en cm) ?",
+   "answer": 8,
+   "tolerance": 0,
+   "explanation": "Diamètre = 2 × 4 = 8 cm.",
+   "unit": "cm",
+   "points": 1,
+   "lesson": "cm1-maths-cercle",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-cercle-02",
+   "chapter": "cm1-maths-geometrie",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : tous les points d'un cercle sont à la même distance du centre.",
+   "answer": true,
+   "explanation": "C'est la définition du cercle.",
+   "points": 1,
+   "lesson": "cm1-maths-cercle",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-cercle-03",
+   "chapter": "cm1-maths-geometrie",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "matching",
+   "prompt": "Associe chaque mot à sa définition.",
+   "pairs": [
+    [
+     "centre",
+     "point à égale distance de tous les points du cercle"
+    ],
+    [
+     "rayon",
+     "segment du centre à un point du cercle"
+    ],
+    [
+     "diamètre",
+     "segment qui passe par le centre et relie deux points du cercle"
+    ],
+    [
+     "disque",
+     "surface intérieure du cercle"
+    ]
+   ],
+   "explanation": "Chaque mot a une définition précise.",
+   "points": 2,
+   "lesson": "cm1-maths-cercle",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-cercle-04",
+   "chapter": "cm1-maths-geometrie",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "mcq",
+   "prompt": "Pour tracer un cercle de diamètre 10 cm, on écarte le compas de…",
+   "choices": [
+    "10 cm",
+    "20 cm",
+    "2 cm",
+    "5 cm"
+   ],
+   "answer": 3,
+   "explanation": "Le rayon est 10 ÷ 2 = 5 cm.",
+   "points": 1,
+   "lesson": "cm1-maths-cercle",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-cercle-05",
+   "chapter": "cm1-maths-geometrie",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "open",
+   "prompt": "Explique comment tracer un cercle de rayon 3 cm.",
+   "model": "Je place le centre, j'écarte le compas de 3 cm sur la règle, je plante la pointe sur le centre puis je fais tourner le compas.",
+   "rubric": [
+    "Écartement de 3 cm.",
+    "Pointe sur le centre.",
+    "Écartement conservé pendant le tracé."
+   ],
+   "explanation": "On écarte le compas du rayon (3 cm) puis on trace.",
+   "points": 3,
+   "lesson": "cm1-maths-cercle",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-cercle-06",
+   "chapter": "cm1-maths-geometrie",
+   "tier": "examen",
+   "difficulty": 2,
+   "kind": "problem",
+   "prompt": "Une roue a un diamètre de 70 cm.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quel est son rayon ?",
+     "answer": 35,
+     "tolerance": 0,
+     "explanation": "70 ÷ 2 = 35 cm.",
+     "unit": "cm",
+     "id": "cm1-maths-cercle-06-a",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "On place deux de ces roues côte à côte. Quelle longueur occupent-elles ?",
+     "answer": 140,
+     "tolerance": 0,
+     "explanation": "2 × 70 = 140 cm.",
+     "unit": "cm",
+     "id": "cm1-maths-cercle-06-b",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Un cercle de rayon 3 cm est tracé dans un carré. Le cercle touche les quatre côtés. Quel est le côté du carré ?",
+     "answer": 6,
+     "tolerance": 0,
+     "explanation": "Le côté du carré est égal au diamètre du cercle : 2 × 3 = 6 cm.",
+     "unit": "cm",
+     "id": "cm1-maths-cercle-06-c",
+     "points": 1
+    }
+   ],
+   "lesson": "cm1-maths-cercle",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-maths-cercle-q1",
+   "chapter": "cm1-maths-geometrie",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Le diamètre est égal à…",
+   "choices": [
+    "un rayon",
+    "la moitié du rayon",
+    "deux rayons",
+    "trois rayons"
+   ],
+   "answer": 2,
+   "explanation": "Diamètre = 2 × rayon.",
+   "lesson": "cm1-maths-cercle"
+  },
+  {
+   "id": "cm1-maths-cercle-q2",
+   "chapter": "cm1-maths-geometrie",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Le centre d'un cercle est…",
+   "choices": [
+    "sur le cercle",
+    "à égale distance de tous les points du cercle",
+    "toujours en dehors",
+    "au bord"
+   ],
+   "answer": 1,
+   "explanation": "C'est la définition du centre.",
+   "lesson": "cm1-maths-cercle"
+  },
+  {
+   "id": "cm1-maths-cercle-q3",
+   "chapter": "cm1-maths-geometrie",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Rayon d'un cercle de diamètre 12 cm :",
+   "choices": [
+    "6 cm",
+    "24 cm",
+    "12 cm",
+    "3 cm"
+   ],
+   "answer": 0,
+   "explanation": "12 ÷ 2 = 6.",
+   "lesson": "cm1-maths-cercle"
+  },
+  {
+   "id": "cm1-maths-cercle-q4",
+   "chapter": "cm1-maths-geometrie",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quel instrument trace un cercle ?",
+   "choices": [
+    "l'équerre",
+    "la règle",
+    "le rapporteur",
+    "le compas"
+   ],
+   "answer": 3,
+   "explanation": "Le compas trace un cercle.",
+   "lesson": "cm1-maths-cercle"
+  },
+  {
+   "id": "cm1-maths-cercle-q5",
+   "chapter": "cm1-maths-geometrie",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quel segment est le plus long dans un cercle ?",
+   "choices": [
+    "le rayon",
+    "le centre",
+    "le diamètre",
+    "le compas"
+   ],
+   "answer": 2,
+   "explanation": "Aucun segment du disque n'est plus long que le diamètre.",
+   "lesson": "cm1-maths-cercle"
+  }
+ ]
+}

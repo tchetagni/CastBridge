@@ -1,0 +1,400 @@
+{
+ "chapter": "cp-maths-calcul",
+ "lessons": [
+  {
+   "id": "cp-maths-soustraction",
+   "title": "La soustraction",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CP — Calcul : soustraction en ligne et posée (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Calculer une soustraction en ligne.",
+    "Poser une soustraction sans retenue.",
+    "Utiliser l'addition pour vérifier."
+   ],
+   "prerequisites": [
+    "cp-maths-addition"
+   ],
+   "exercises": [
+    "cp-maths-soustraction-01",
+    "cp-maths-soustraction-02",
+    "cp-maths-soustraction-03",
+    "cp-maths-soustraction-04",
+    "cp-maths-soustraction-05",
+    "cp-maths-soustraction-06"
+   ],
+   "selfCheck": [
+    "cp-maths-soustraction-q1",
+    "cp-maths-soustraction-q2",
+    "cp-maths-soustraction-q3",
+    "cp-maths-soustraction-q4",
+    "cp-maths-soustraction-q5"
+   ],
+   "reviewNotes": [
+    "La soustraction avec retenue n'est pas traitée ici : à confirmer qu'elle est bien hors programme du CP."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "**Soustraire**, c'est enlever. On écrit **−**. Si j'ai 9 mangues et j'en mange 3, il m'en reste 6."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La soustraction",
+     "md": "9 − 3 = 6. Le signe **−** se lit « moins ». Le résultat s'appelle la **différence** ou le reste."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Poser une soustraction (sans retenue)",
+     "md": "1. J'écris le plus grand nombre en haut.\n2. Je commence par les **unités** : je soustrais.\n3. Puis je soustrais les **dizaines**.\n4. Je vérifie : le résultat + le petit nombre = le grand nombre."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 260,
+      "h": 200,
+      "items": [
+       {
+        "t": "text",
+        "x": 60,
+        "y": 110,
+        "text": "−",
+        "size": 30,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 80,
+        "text": "4",
+        "size": 30
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 80,
+        "text": "8",
+        "size": 30
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 120,
+        "text": "2",
+        "size": 30
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 120,
+        "text": "5",
+        "size": 30
+       },
+       {
+        "t": "line",
+        "x1": 50,
+        "y1": 125,
+        "x2": 210,
+        "y2": 125,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 165,
+        "text": "2",
+        "size": 30,
+        "bold": true,
+        "color": "blue"
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 165,
+        "text": "3",
+        "size": 30,
+        "bold": true,
+        "color": "blue"
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 192,
+        "text": "d",
+        "size": 14,
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 192,
+        "text": "u",
+        "size": 14,
+        "color": "grey"
+       }
+      ]
+     },
+     "caption": "48 − 25 = 23.",
+     "alt": "Une soustraction posée : 48 au-dessus de 25. Unités : 8 − 5 = 3. Dizaines : 4 − 2 = 2. Résultat 23."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : en ligne",
+     "statement": "Calcule 14 − 6.",
+     "steps": [
+      {
+       "md": "Je recule de 6 à partir de 14, ou je pense : 6 + 8 = 14."
+      },
+      {
+       "md": "Donc 14 − 6 = 8."
+      }
+     ],
+     "answer": "14 − 6 = **8**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : posée",
+     "statement": "Calcule 76 − 32.",
+     "steps": [
+      {
+       "md": "Unités : 6 − 2 = 4."
+      },
+      {
+       "md": "Dizaines : 7 − 3 = 4."
+      }
+     ],
+     "answer": "76 − 32 = **44**. Vérification : 44 + 32 = 76."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "On ne change pas l'ordre : 9 − 3 n'est pas 3 − 9. On écrit toujours le plus grand nombre en premier."
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-soustraction-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-soustraction-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-soustraction-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-soustraction-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-soustraction-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-soustraction-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Calcule 9 − 4.",
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "Si je retire 4 de 9, il reste 5.",
+   "id": "cp-maths-soustraction-01",
+   "chapter": "cp-maths-calcul",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-soustraction",
+   "points": 1
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule 17 − 8.",
+   "answer": 9,
+   "tolerance": 0,
+   "explanation": "8 + 9 = 17, donc 17 − 8 = 9.",
+   "id": "cp-maths-soustraction-02",
+   "chapter": "cp-maths-calcul",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-soustraction",
+   "points": 1
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule 68 − 25.",
+   "answer": 43,
+   "tolerance": 0,
+   "explanation": "Unités : 8 − 5 = 3 ; dizaines : 6 − 2 = 4 : 43.",
+   "id": "cp-maths-soustraction-03",
+   "chapter": "cp-maths-calcul",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-soustraction",
+   "points": 1
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule 95 − 41.",
+   "answer": 54,
+   "tolerance": 0,
+   "explanation": "Unités 5 − 1 = 4 ; dizaines 9 − 4 = 5 : 54.",
+   "id": "cp-maths-soustraction-04",
+   "chapter": "cp-maths-calcul",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-maths-soustraction",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle addition permet de vérifier 58 − 23 = 35 ?",
+   "choices": [
+    "35 + 58 = 23",
+    "23 + 58 = 35",
+    "58 + 23 = 35",
+    "35 + 23 = 58"
+   ],
+   "answer": 3,
+   "explanation": "Le résultat plus le petit nombre redonne le grand : 35 + 23 = 58.",
+   "id": "cp-maths-soustraction-05",
+   "chapter": "cp-maths-calcul",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-maths-soustraction",
+   "points": 1
+  },
+  {
+   "kind": "problem",
+   "prompt": "Ngono a 48 noix de palme. Elle en donne 23 à sa voisine.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Combien de noix lui reste-t-il ?",
+     "answer": 25,
+     "tolerance": 0,
+     "explanation": "48 − 23 = 25.",
+     "id": "cp-maths-soustraction-06-a",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Elle en ramasse 10 de plus. Combien en a-t-elle alors ?",
+     "answer": 35,
+     "tolerance": 0,
+     "explanation": "25 + 10 = 35.",
+     "id": "cp-maths-soustraction-06-b",
+     "points": 1
+    }
+   ],
+   "explanation": "Il lui reste 25 noix, puis 35.",
+   "id": "cp-maths-soustraction-06",
+   "chapter": "cp-maths-calcul",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cp-maths-soustraction"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le résultat de 15 − 6 ?",
+   "choices": [
+    "8",
+    "10",
+    "9",
+    "21"
+   ],
+   "answer": 2,
+   "explanation": "6 + 9 = 15.",
+   "id": "cp-maths-soustraction-q1",
+   "chapter": "cp-maths-calcul",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-soustraction",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le résultat de 79 − 36 ?",
+   "choices": [
+    "33",
+    "43",
+    "115",
+    "53"
+   ],
+   "answer": 1,
+   "explanation": "9 − 6 = 3 ; 7 − 3 = 4 : 43.",
+   "id": "cp-maths-soustraction-q2",
+   "chapter": "cp-maths-calcul",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-soustraction",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le signe de la soustraction est…",
+   "choices": [
+    "−",
+    "+",
+    "=",
+    "×"
+   ],
+   "answer": 0,
+   "explanation": "On écrit − pour enlever.",
+   "id": "cp-maths-soustraction-q3",
+   "chapter": "cp-maths-calcul",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-soustraction",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien font 30 − 10 ?",
+   "choices": [
+    "40",
+    "10",
+    "3",
+    "20"
+   ],
+   "answer": 3,
+   "explanation": "3 dizaines − 1 dizaine = 2 dizaines.",
+   "id": "cp-maths-soustraction-q4",
+   "chapter": "cp-maths-calcul",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-soustraction",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Si 12 − 5 = 7, alors…",
+   "choices": [
+    "7 − 5 = 12",
+    "12 + 5 = 7",
+    "7 + 5 = 12",
+    "5 − 7 = 12"
+   ],
+   "answer": 2,
+   "explanation": "On vérifie avec l'addition : 7 + 5 = 12.",
+   "id": "cp-maths-soustraction-q5",
+   "chapter": "cp-maths-calcul",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-soustraction",
+   "points": 1
+  }
+ ]
+}

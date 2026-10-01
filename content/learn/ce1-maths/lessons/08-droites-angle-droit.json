@@ -1,0 +1,495 @@
+{
+ "chapter": "ce1-maths-geometrie",
+ "lessons": [
+  {
+   "id": "ce1-maths-droites-angle-droit",
+   "title": "Droites, segments et angle droit",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CE1 — Programme de mathématiques du cycle 2, MINEDUB (reconstitué, à vérifier sur le texte officiel) — géométrie : droite, segment, angle droit, perpendiculaires",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Distinguer un segment et une droite.",
+    "Reconnaître un angle droit avec une équerre.",
+    "Reconnaître des droites perpendiculaires."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "ce1-maths-droites-angle-droit-01",
+    "ce1-maths-droites-angle-droit-02",
+    "ce1-maths-droites-angle-droit-03",
+    "ce1-maths-droites-angle-droit-04",
+    "ce1-maths-droites-angle-droit-05",
+    "ce1-maths-droites-angle-droit-06"
+   ],
+   "selfCheck": [
+    "ce1-maths-droites-angle-droit-q1",
+    "ce1-maths-droites-angle-droit-q2",
+    "ce1-maths-droites-angle-droit-q3",
+    "ce1-maths-droites-angle-droit-q4",
+    "ce1-maths-droites-angle-droit-q5"
+   ],
+   "reviewNotes": [
+    "Vocabulaire géométrique (segment [AB], droite, perpendiculaires) à adapter à celui du programme MINEDUB."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Point, segment, droite",
+     "md": "- Un **point** se marque avec une croix (×) et se nomme avec une lettre : A.\n- Un **segment** a deux bouts : le segment [AB]. On peut le mesurer.\n- Une **droite** n'a pas de bouts : elle continue des deux côtés. On la trace avec une règle."
+    },
+    {
+     "type": "illustration",
+     "caption": "Un segment et une droite.",
+     "alt": "En haut, un segment AB avec deux petits traits aux extrémités. En bas, une droite avec une flèche à chaque bout.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 140,
+      "items": [
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 40,
+        "x2": 300,
+        "y2": 40,
+        "color": "blue",
+        "width": 3,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 30,
+        "x2": 60,
+        "y2": 50,
+        "color": "blue",
+        "width": 3,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 30,
+        "x2": 300,
+        "y2": 50,
+        "color": "blue",
+        "width": 3,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 22,
+        "text": "A",
+        "size": 18,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 22,
+        "text": "B",
+        "size": 18,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 68,
+        "text": "segment [AB]",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 100,
+        "x2": 390,
+        "y2": 100,
+        "color": "green",
+        "width": 3,
+        "dash": false,
+        "arrow": "both"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 128,
+        "text": "droite",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "L'angle droit",
+     "md": "Un **angle droit** est un coin « bien carré », comme le coin d'une feuille de cahier. On le vérifie avec une **équerre**. On le marque avec un petit carré."
+    },
+    {
+     "type": "illustration",
+     "caption": "Un angle droit marqué.",
+     "alt": "Deux segments qui se rejoignent en formant un coin carré, avec un petit carré rouge dans le coin.",
+     "figure": {
+      "kind": "shapes",
+      "w": 300,
+      "h": 150,
+      "items": [
+       {
+        "t": "line",
+        "x1": 50,
+        "y1": 110,
+        "x2": 50,
+        "y2": 20,
+        "color": "ink",
+        "width": 3,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "line",
+        "x1": 50,
+        "y1": 110,
+        "x2": 230,
+        "y2": 110,
+        "color": "ink",
+        "width": 3,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         50,
+         90,
+         70,
+         90,
+         70,
+         110
+        ],
+        "closed": false,
+        "stroke": "red",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 138,
+        "text": "angle droit",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Droites perpendiculaires",
+     "md": "Deux droites sont **perpendiculaires** quand elles se coupent en formant un **angle droit**. Le coin d'une table, le tableau de la classe et le bord de la porte en donnent des exemples."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : segment ou droite",
+     "statement": "Un maçon trace un trait entre deux clous : est-ce un segment ou une droite ?",
+     "steps": [
+      {
+       "md": "Le trait a deux bouts : il s'arrête aux clous."
+      },
+      {
+       "md": "Une droite ne s'arrête jamais."
+      }
+     ],
+     "answer": "**C'est un segment.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : vérifier un angle droit",
+     "statement": "Comment vérifier que le coin d'un cahier est un angle droit ?",
+     "steps": [
+      {
+       "md": "Je prends une équerre."
+      },
+      {
+       "md": "Je pose le coin de l'équerre dans le coin du cahier : si les côtés se superposent, c'est un angle droit."
+      }
+     ],
+     "answer": "**On utilise l'équerre : le coin est droit si les côtés coïncident.**"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-maths-droites-angle-droit-01"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- Un angle droit n'est pas toujours « en bas à gauche » : il peut être tourné.\n- On trace avec une **règle** bien tenue et un crayon pointu."
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Un segment a…",
+   "choices": [
+    "deux extrémités",
+    "trois extrémités",
+    "aucune extrémité",
+    "une seule extrémité"
+   ],
+   "answer": 0,
+   "explanation": "Un segment commence et finit : [AB].",
+   "id": "ce1-maths-droites-angle-droit-01",
+   "chapter": "ce1-maths-geometrie",
+   "tier": "application",
+   "lesson": "ce1-maths-droites-angle-droit",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "truefalse",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Vrai ou faux : une droite ne s'arrête jamais.",
+   "answer": true,
+   "explanation": "On la dessine avec des flèches pour montrer qu'elle continue.",
+   "id": "ce1-maths-droites-angle-droit-02",
+   "chapter": "ce1-maths-geometrie",
+   "tier": "application",
+   "lesson": "ce1-maths-droites-angle-droit",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "matching",
+   "difficulty": 1,
+   "points": 2,
+   "prompt": "Associe chaque objet à son nom.",
+   "pairs": [
+    [
+     "Une ligne qui continue des deux côtés",
+     "droite"
+    ],
+    [
+     "Une ligne qui s'arrête à A et B",
+     "segment"
+    ],
+    [
+     "Un coin bien carré",
+     "angle droit"
+    ]
+   ],
+   "explanation": "Droite : illimitée ; segment : limité ; angle droit : coin carré.",
+   "id": "ce1-maths-droites-angle-droit-03",
+   "chapter": "ce1-maths-geometrie",
+   "tier": "application",
+   "lesson": "ce1-maths-droites-angle-droit",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "Quel outil permet de vérifier un angle droit ?",
+   "choices": [
+    "un compas",
+    "un thermomètre",
+    "une équerre",
+    "un chiffon"
+   ],
+   "answer": 2,
+   "explanation": "L'équerre a un coin droit.",
+   "id": "ce1-maths-droites-angle-droit-04",
+   "chapter": "ce1-maths-geometrie",
+   "tier": "approfondissement",
+   "lesson": "ce1-maths-droites-angle-droit",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "Deux droites perpendiculaires forment…",
+   "choices": [
+    "un triangle",
+    "un cercle",
+    "un carré obligatoirement",
+    "un angle droit"
+   ],
+   "answer": 3,
+   "explanation": "Perpendiculaires = angle droit.",
+   "id": "ce1-maths-droites-angle-droit-05",
+   "chapter": "ce1-maths-geometrie",
+   "tier": "approfondissement",
+   "lesson": "ce1-maths-droites-angle-droit",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "problem",
+   "difficulty": 2,
+   "prompt": "Dans la classe, on observe des objets : le coin d'un cahier, le bord d'une règle, la porte, un ballon.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Quel objet a un angle droit ?",
+     "choices": [
+      "le coin d'un cahier",
+      "une orange",
+      "un ballon",
+      "une roue"
+     ],
+     "answer": 0,
+     "explanation": "Un cahier est rectangulaire : ses coins sont droits.",
+     "id": "ce1-maths-droites-angle-droit-06-a"
+    },
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Quel outil sert à tracer un segment droit ?",
+     "choices": [
+      "un crayon seul",
+      "une règle",
+      "une équerre seule",
+      "un compas"
+     ],
+     "answer": 1,
+     "explanation": "On trace le long d'une règle.",
+     "id": "ce1-maths-droites-angle-droit-06-b"
+    },
+    {
+     "kind": "truefalse",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Vrai ou faux : on peut mesurer un segment.",
+     "answer": true,
+     "explanation": "Un segment a une longueur ; une droite n'en a pas.",
+     "id": "ce1-maths-droites-angle-droit-06-c"
+    }
+   ],
+   "id": "ce1-maths-droites-angle-droit-06",
+   "chapter": "ce1-maths-geometrie",
+   "tier": "examen",
+   "lesson": "ce1-maths-droites-angle-droit",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Le segment [AB] relie…",
+   "choices": [
+    "seulement A",
+    "les points A et B",
+    "les points A et C",
+    "tout le plan"
+   ],
+   "answer": 1,
+   "explanation": "Segment entre A et B.",
+   "id": "ce1-maths-droites-angle-droit-q1",
+   "chapter": "ce1-maths-geometrie",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-droites-angle-droit",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quel signe marque un angle droit ?",
+   "choices": [
+    "un petit carré",
+    "un rond",
+    "une croix",
+    "une flèche"
+   ],
+   "answer": 0,
+   "explanation": "Le petit carré dans le coin.",
+   "id": "ce1-maths-droites-angle-droit-q2",
+   "chapter": "ce1-maths-geometrie",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-droites-angle-droit",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Un point se note avec…",
+   "choices": [
+    "un carré",
+    "une croix et une lettre",
+    "un grand cercle",
+    "une flèche"
+   ],
+   "answer": 1,
+   "explanation": "× A.",
+   "id": "ce1-maths-droites-angle-droit-q3",
+   "chapter": "ce1-maths-geometrie",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-droites-angle-droit",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quelle ligne n'a pas de bouts ?",
+   "choices": [
+    "le côté du cahier",
+    "le segment",
+    "la droite",
+    "le point"
+   ],
+   "answer": 2,
+   "explanation": "La droite est illimitée.",
+   "id": "ce1-maths-droites-angle-droit-q4",
+   "chapter": "ce1-maths-geometrie",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-droites-angle-droit",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Les coins d'une page de cahier sont…",
+   "choices": [
+    "des droites",
+    "des angles droits",
+    "des triangles",
+    "des cercles"
+   ],
+   "answer": 1,
+   "explanation": "Une feuille a 4 angles droits.",
+   "id": "ce1-maths-droites-angle-droit-q5",
+   "chapter": "ce1-maths-geometrie",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-droites-angle-droit",
+   "source": "Exercice original, niveau CE1"
+  }
+ ]
+}

@@ -1,0 +1,511 @@
+{
+ "chapter": "cm1-francais-orthographe",
+ "lessons": [
+  {
+   "id": "cm1-francais-accords",
+   "title": "Les accords : nom, sujet-verbe, participe passé",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM1 — Orthographe grammaticale : accords (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Accorder le déterminant et l'adjectif avec le nom.",
+    "Accorder le verbe avec son sujet, même éloigné ou inversé.",
+    "Accorder le participe passé avec être, et ne pas l'accorder avec le sujet quand l'auxiliaire est avoir."
+   ],
+   "prerequisites": [
+    "cm1-francais-fonctions"
+   ],
+   "exercises": [
+    "cm1-francais-accords-01",
+    "cm1-francais-accords-02",
+    "cm1-francais-accords-03",
+    "cm1-francais-accords-04",
+    "cm1-francais-accords-05",
+    "cm1-francais-accords-06"
+   ],
+   "selfCheck": [
+    "cm1-francais-accords-q1",
+    "cm1-francais-accords-q2",
+    "cm1-francais-accords-q3",
+    "cm1-francais-accords-q4",
+    "cm1-francais-accords-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier le niveau d'exigence sur l'accord du participe passé (CM1 : être et avoir simple).",
+    "La règle de l'accord avec le COD placé avant l'auxiliaire avoir n'est pas traitée."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Accorder",
+     "md": "Accorder un mot, c'est lui donner le **genre** (masculin, féminin) et le **nombre** (singulier, pluriel) du mot qui le commande. Le nom commande son déterminant et son adjectif ; le sujet commande le verbe."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Dans le groupe nominal",
+     "md": "- Le déterminant et l'adjectif prennent le genre et le nombre du nom : *une grande maison → de grandes maisons*.\n- Féminin : on ajoute souvent **-e** (un voisin, une voisine). Pluriel : on ajoute souvent **-s**.\n- Pluriels particuliers : -al → -aux (un cheval, des chevaux) ; -eau → -eaux (un chapeau, des chapeaux) ; noms en -s, -x, -z : ne changent pas (un prix, des prix)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Le verbe et son sujet",
+     "md": "Le verbe s'accorde avec son sujet **en personne et en nombre**. On trouve le sujet avec **Qui est-ce qui ?**\n\n- *Les enfants du quartier **jouent**.* (sujet : les enfants, pas « quartier »)\n- *Dans la rue courent les enfants.* (sujet placé après le verbe)"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Le participe passé",
+     "md": "- Avec **être** : accord avec le **sujet**. *Mes amies sont **arrivées**.*\n- Avec **avoir** : **pas d'accord avec le sujet**. *Mes amies ont **mangé**.*\n- Un adjectif attribut s'accorde aussi avec le sujet : *Les mangues sont **mûres**.*"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 70,
+        "w": 50,
+        "h": 38,
+        "fill": "white",
+        "stroke": "blue",
+        "radius": 6
+       },
+       {
+        "t": "rect",
+        "x": 80,
+        "y": 70,
+        "w": 105,
+        "h": 38,
+        "fill": "white",
+        "stroke": "blue",
+        "radius": 6
+       },
+       {
+        "t": "rect",
+        "x": 195,
+        "y": 70,
+        "w": 90,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 6
+       },
+       {
+        "t": "rect",
+        "x": 295,
+        "y": 70,
+        "w": 100,
+        "h": 38,
+        "fill": "lightorange",
+        "stroke": "red",
+        "radius": 6
+       },
+       {
+        "t": "rect",
+        "x": 405,
+        "y": 70,
+        "w": 130,
+        "h": 38,
+        "fill": "white",
+        "stroke": "grey",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 45,
+        "y": 95,
+        "text": "Les",
+        "size": 17,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 132,
+        "y": 95,
+        "text": "grandes",
+        "size": 17,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 95,
+        "text": "filles",
+        "size": 17,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 345,
+        "y": 95,
+        "text": "sont",
+        "size": 17,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 470,
+        "y": 95,
+        "text": "arrivées",
+        "size": 17,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 40,
+        "text": "le nom commande",
+        "size": 14,
+        "color": "blue",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 56,
+        "text": "↓",
+        "size": 14,
+        "color": "blue",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 345,
+        "y": 135,
+        "text": "sujet : filles",
+        "size": 14,
+        "color": "red",
+        "bold": true,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Le nom « filles » commande les accords.",
+     "alt": "Les mots « Les », « grandes », « sont » et « arrivées » s'accordent avec le nom « filles », féminin pluriel."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : mettre au pluriel",
+     "statement": "Mets au pluriel : « Le gros cheval boit l'eau du puits. »",
+     "steps": [
+      {
+       "md": "Groupe nominal : le gros cheval → **les gros chevaux** (« gros » finit par s : il ne change pas ; cheval → chevaux)."
+      },
+      {
+       "md": "Le sujet est pluriel : le verbe devient **boivent**."
+      }
+     ],
+     "answer": "**Les gros chevaux boivent l'eau du puits.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : choisir l'accord du participe",
+     "statement": "Écris correctement : « Les clientes sont (venir) tôt. Elles ont (acheter) des beignets. »",
+     "steps": [
+      {
+       "md": "« sont venir » : être → accord avec le sujet féminin pluriel : **venues**."
+      },
+      {
+       "md": "« ont acheter » : avoir → pas d'accord avec le sujet : **acheté**."
+      }
+     ],
+     "answer": "**Les clientes sont venues tôt. Elles ont acheté des beignets.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Accorder le verbe avec le nom le plus proche : *Le panier de mangues est lourd.*\n- Écrire « ils ont mangés » : avec avoir, pas d'accord avec le sujet.\n- Mettre un -s à « un prix » au pluriel : *des prix* (pas de -s en plus)."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-accords-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-accords-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-accords-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-accords-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-accords-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-accords-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "cm1-francais-accords-01",
+   "chapter": "cm1-francais-orthographe",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "mcq",
+   "prompt": "Complète : « Les élèves de la classe ___ au tableau. » (écrire)",
+   "choices": [
+    "écrivent",
+    "écrit",
+    "écrivez",
+    "écris"
+   ],
+   "answer": 0,
+   "explanation": "Le sujet « les élèves » est pluriel : écrivent.",
+   "points": 1,
+   "lesson": "cm1-francais-accords",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-accords-02",
+   "chapter": "cm1-francais-orthographe",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : « Des bananes mûres » est bien accordé.",
+   "answer": true,
+   "explanation": "Vrai : mûres est féminin pluriel comme « bananes ».",
+   "points": 1,
+   "lesson": "cm1-francais-accords",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-accords-03",
+   "chapter": "cm1-francais-orthographe",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "matching",
+   "prompt": "Associe chaque nom à son pluriel.",
+   "pairs": [
+    [
+     "un cheval",
+     "des chevaux"
+    ],
+    [
+     "un chapeau",
+     "des chapeaux"
+    ],
+    [
+     "un pneu",
+     "des pneus"
+    ],
+    [
+     "un prix",
+     "des prix"
+    ]
+   ],
+   "explanation": "cheval → chevaux ; chapeau → chapeaux ; pneu → pneus ; prix ne change pas.",
+   "points": 2,
+   "lesson": "cm1-francais-accords",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-accords-04",
+   "chapter": "cm1-francais-orthographe",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "mcq",
+   "prompt": "Complète : « Mes tantes sont ___ à Yaoundé. » (rester)",
+   "choices": [
+    "resté",
+    "restés",
+    "restée",
+    "restées"
+   ],
+   "answer": 3,
+   "explanation": "Avec être, le participe passé s'accorde avec le sujet « mes tantes », féminin pluriel.",
+   "points": 1,
+   "lesson": "cm1-francais-accords",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-accords-05",
+   "chapter": "cm1-francais-orthographe",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "open",
+   "prompt": "Réécris au pluriel : « Le petit garçon est tombé ; il a pleuré. »",
+   "model": "Les petits garçons sont tombés ; ils ont pleuré.",
+   "rubric": [
+    "Les petits garçons : groupe nominal accordé.",
+    "sont tombés : être au pluriel et participe passé accordé.",
+    "ils ont pleuré : participe passé non accordé."
+   ],
+   "explanation": "Avec être (sont tombés), le participe passé s'accorde avec le sujet. Avec avoir (ont pleuré), il ne change pas.",
+   "points": 3,
+   "lesson": "cm1-francais-accords",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-accords-06",
+   "chapter": "cm1-francais-orthographe",
+   "tier": "examen",
+   "difficulty": 2,
+   "kind": "problem",
+   "prompt": "Corrige les phrases.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "« Au fond de la cour jouent les enfants. » Quel est le sujet de « jouent » ?",
+     "choices": [
+      "la cour",
+      "le fond",
+      "les enfants",
+      "Au fond"
+     ],
+     "answer": 2,
+     "explanation": "Qui est-ce qui joue ? les enfants (sujet placé après le verbe).",
+     "id": "cm1-francais-accords-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Choisis la bonne phrase.",
+     "choices": [
+      "Les chèvres ont mangées l'herbe.",
+      "Les chèvres ont mangé l'herbe.",
+      "Les chèvres a mangé l'herbe.",
+      "Les chèvre ont mangé l'herbe."
+     ],
+     "answer": 1,
+     "explanation": "Chèvres pluriel, verbe ont, participe sans accord avec avoir.",
+     "id": "cm1-francais-accords-06-b",
+     "points": 1
+    },
+    {
+     "kind": "truefalse",
+     "prompt": "Vrai ou faux : « Les voyageuses sont arrivés. » est correct.",
+     "answer": false,
+     "explanation": "Faux : avec être, on accorde avec le sujet féminin pluriel : arrivées.",
+     "id": "cm1-francais-accords-06-c",
+     "points": 1
+    }
+   ],
+   "lesson": "cm1-francais-accords",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-accords-q1",
+   "chapter": "cm1-francais-orthographe",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Le verbe s'accorde avec…",
+   "choices": [
+    "son sujet",
+    "le COD",
+    "le dernier mot",
+    "le premier nom"
+   ],
+   "answer": 0,
+   "explanation": "On accorde le verbe avec son sujet.",
+   "lesson": "cm1-francais-accords"
+  },
+  {
+   "id": "cm1-francais-accords-q2",
+   "chapter": "cm1-francais-orthographe",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Pluriel de « un animal » :",
+   "choices": [
+    "des animals",
+    "des animales",
+    "des animauxs",
+    "des animaux"
+   ],
+   "answer": 3,
+   "explanation": "Les noms en -al font -aux.",
+   "lesson": "cm1-francais-accords"
+  },
+  {
+   "id": "cm1-francais-accords-q3",
+   "chapter": "cm1-francais-orthographe",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Avec avoir, le participe passé…",
+   "choices": [
+    "s'accorde toujours avec le sujet",
+    "prend toujours -s",
+    "ne s'accorde pas avec le sujet",
+    "devient féminin"
+   ],
+   "answer": 2,
+   "explanation": "Règle de base du CM1 : pas d'accord avec le sujet.",
+   "lesson": "cm1-francais-accords"
+  },
+  {
+   "id": "cm1-francais-accords-q4",
+   "chapter": "cm1-francais-orthographe",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quelle phrase est correcte ?",
+   "choices": [
+    "Elle est parti tôt.",
+    "Elle est partie tôt.",
+    "Elle est partit tôt.",
+    "Elle est partis tôt."
+   ],
+   "answer": 1,
+   "explanation": "Avec être, accord avec « elle » : partie.",
+   "lesson": "cm1-francais-accords"
+  },
+  {
+   "id": "cm1-francais-accords-q5",
+   "chapter": "cm1-francais-orthographe",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Pluriel de « un prix » :",
+   "choices": [
+    "des prix",
+    "des prixs",
+    "des prixes",
+    "des priz"
+   ],
+   "answer": 0,
+   "explanation": "Les noms en -x ne changent pas.",
+   "lesson": "cm1-francais-accords"
+  }
+ ]
+}

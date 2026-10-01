@@ -1,0 +1,508 @@
+{
+ "chapter": "sil-maths-comparer-ch",
+ "lessons": [
+  {
+   "id": "sil-maths-comparer",
+   "title": "Comparer et ranger",
+   "minutes": 10,
+   "readAloud": true,
+   "programRef": "SIL — Numération : comparer des quantités et des nombres, ranger (reconstitué)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Dire quel groupe a le plus (ou le moins) d'objets.",
+    "Comparer deux nombres : plus grand, plus petit, égal.",
+    "Ranger des nombres du plus petit au plus grand."
+   ],
+   "prerequisites": [
+    "sil-maths-nombres-10"
+   ],
+   "exercises": [
+    "sil-maths-comparer-01",
+    "sil-maths-comparer-02",
+    "sil-maths-comparer-03",
+    "sil-maths-comparer-04",
+    "sil-maths-comparer-05",
+    "sil-maths-comparer-06"
+   ],
+   "selfCheck": [
+    "sil-maths-comparer-q1",
+    "sil-maths-comparer-q2",
+    "sil-maths-comparer-q3",
+    "sil-maths-comparer-q4",
+    "sil-maths-comparer-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier si les signes < et > doivent être introduits en SIL (ici volontairement évités).",
+    "Figure en barres : lisibilité pour un enfant de 6 ans."
+   ],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "Plus grand, plus petit, pareil : on compare les nombres.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Comparer",
+     "md": "Le nombre le plus **grand** vient plus tard quand on compte.\n\nLe nombre le plus **petit** vient plus tôt.\n\nQuand c'est pareil, on dit **égal**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 220,
+      "bars": [
+       {
+        "label": "Paul",
+        "value": 4,
+        "color": "blue"
+       },
+       {
+        "label": "Amina",
+        "value": 7,
+        "color": "orange"
+       }
+      ],
+      "unit": "billes"
+     },
+     "caption": "Paul a 4 billes, Amina en a 7.",
+     "alt": "Deux barres : Paul 4 billes, Amina 7 billes. La barre d'Amina est plus haute."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : qui en a le plus ?",
+     "statement": "Paul a 4 billes. Amina a 7 billes. Qui en a le plus ?",
+     "steps": [
+      {
+       "md": "Je compte : on dit 4 avant 7."
+      },
+      {
+       "md": "Donc 7 est plus grand que 4."
+      }
+     ],
+     "answer": "**Amina** a le plus de billes."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Ranger",
+     "md": "Pour ranger du plus petit au plus grand, je cherche d'abord le plus petit, puis le suivant, et ainsi de suite."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : ranger",
+     "statement": "Range du plus petit au plus grand : 9, 3, 6.",
+     "steps": [
+      {
+       "md": "Le plus petit est 3."
+      },
+      {
+       "md": "Ensuite 6, puis 9."
+      }
+     ],
+     "answer": "**3, 6, 9**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 310,
+      "h": 130,
+      "items": [
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 60,
+        "x2": 280,
+        "y2": 60,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 52,
+        "x2": 30,
+        "y2": 68,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 92,
+        "text": "3",
+        "size": 18,
+        "bold": true,
+        "color": "red"
+       },
+       {
+        "t": "line",
+        "x1": 70,
+        "y1": 52,
+        "x2": 70,
+        "y2": 68,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 92,
+        "text": "4",
+        "size": 18,
+        "bold": false,
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 52,
+        "x2": 110,
+        "y2": 68,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 92,
+        "text": "5",
+        "size": 18,
+        "bold": false,
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 52,
+        "x2": 150,
+        "y2": 68,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 92,
+        "text": "6",
+        "size": 18,
+        "bold": true,
+        "color": "red"
+       },
+       {
+        "t": "line",
+        "x1": 190,
+        "y1": 52,
+        "x2": 190,
+        "y2": 68,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 92,
+        "text": "7",
+        "size": 18,
+        "bold": false,
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 230,
+        "y1": 52,
+        "x2": 230,
+        "y2": 68,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 92,
+        "text": "8",
+        "size": 18,
+        "bold": false,
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 270,
+        "y1": 52,
+        "x2": 270,
+        "y2": 68,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 92,
+        "text": "9",
+        "size": 18,
+        "bold": true,
+        "color": "red"
+       }
+      ]
+     },
+     "caption": "3, 6 et 9 sur la ligne des nombres.",
+     "alt": "Une ligne des nombres de 3 à 9 avec 3, 6 et 9 en rouge."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer !"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-maths-comparer-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-maths-comparer-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-maths-comparer-03"
+    },
+    {
+     "type": "heading",
+     "text": "Pour aller plus loin"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-maths-comparer-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-maths-comparer-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-maths-comparer-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sil-maths-comparer-01",
+   "chapter": "sil-maths-comparer-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-comparer",
+   "prompt": "Quel nombre est le plus grand ?",
+   "choices": [
+    "5",
+    "3",
+    "8",
+    "6"
+   ],
+   "answer": 2,
+   "explanation": "En comptant, 8 vient après 3, 5 et 6. C'est le plus grand."
+  },
+  {
+   "id": "sil-maths-comparer-02",
+   "chapter": "sil-maths-comparer-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-comparer",
+   "prompt": "Quel nombre est le plus petit ?",
+   "choices": [
+    "9",
+    "5",
+    "2",
+    "7"
+   ],
+   "answer": 2,
+   "explanation": "2 vient avant 5, 7 et 9."
+  },
+  {
+   "id": "sil-maths-comparer-03",
+   "chapter": "sil-maths-comparer-ch",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sil-maths-comparer",
+   "prompt": "Vrai ou faux : 6 est plus grand que 4.",
+   "answer": true,
+   "explanation": "On dit 4 avant 6. Donc 6 est plus grand."
+  },
+  {
+   "id": "sil-maths-comparer-04",
+   "chapter": "sil-maths-comparer-ch",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sil-maths-comparer",
+   "prompt": "Ibrahim a 5 mangues et Ngono en a 9. Qui en a le moins ?",
+   "choices": [
+    "Ibrahim",
+    "Ngono",
+    "Les deux pareil",
+    "On ne sait pas"
+   ],
+   "answer": 0,
+   "explanation": "5 est plus petit que 9. Ibrahim en a le moins."
+  },
+  {
+   "id": "sil-maths-comparer-05",
+   "chapter": "sil-maths-comparer-ch",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sil-maths-comparer",
+   "prompt": "Associe chaque phrase au bon mot.",
+   "pairs": [
+    [
+     "6 et 6",
+     "égal"
+    ],
+    [
+     "8 et 3",
+     "8 est plus grand"
+    ],
+    [
+     "2 et 7",
+     "2 est plus petit"
+    ]
+   ],
+   "explanation": "Quand les deux nombres sont pareils, ils sont égaux. Sinon l'un est plus grand et l'autre plus petit."
+  },
+  {
+   "id": "sil-maths-comparer-06",
+   "chapter": "sil-maths-comparer-ch",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sil-maths-comparer",
+   "prompt": "Range et compare.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quelle suite est rangée du plus petit au plus grand ?",
+     "choices": [
+      "12, 7, 4",
+      "7, 4, 12",
+      "4, 12, 7",
+      "4, 7, 12"
+     ],
+     "answer": 3,
+     "explanation": "On commence par 4, puis 7, puis 12.",
+     "id": "sil-maths-comparer-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quel nombre est plus petit que 10 ?",
+     "choices": [
+      "11",
+      "9",
+      "15",
+      "20"
+     ],
+     "answer": 1,
+     "explanation": "9 vient avant 10.",
+     "id": "sil-maths-comparer-06-b",
+     "points": 1
+    }
+   ],
+   "explanation": "Relis chaque question avec calme."
+  },
+  {
+   "id": "sil-maths-comparer-q1",
+   "chapter": "sil-maths-comparer-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-comparer",
+   "prompt": "Quel nombre est le plus grand : 12 ou 15 ?",
+   "choices": [
+    "12",
+    "15",
+    "Pareil",
+    "On ne sait pas"
+   ],
+   "answer": 1,
+   "explanation": "On dit 12 avant 15. 15 est plus grand."
+  },
+  {
+   "id": "sil-maths-comparer-q2",
+   "chapter": "sil-maths-comparer-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-comparer",
+   "prompt": "Quel nombre est le plus petit : 14, 11, 19 ?",
+   "choices": [
+    "14",
+    "19",
+    "Pareil",
+    "11"
+   ],
+   "answer": 3,
+   "explanation": "11 vient avant 14 et 19."
+  },
+  {
+   "id": "sil-maths-comparer-q3",
+   "chapter": "sil-maths-comparer-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-comparer",
+   "prompt": "Comment ranger : 5, 2, 8, du plus petit au plus grand ?",
+   "choices": [
+    "2, 5, 8",
+    "8, 5, 2",
+    "5, 2, 8",
+    "2, 8, 5"
+   ],
+   "answer": 0,
+   "explanation": "Le plus petit est 2, puis 5, puis 8."
+  },
+  {
+   "id": "sil-maths-comparer-q4",
+   "chapter": "sil-maths-comparer-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-comparer",
+   "prompt": "Si deux groupes ont le même nombre d'objets, on dit qu'ils sont…",
+   "choices": [
+    "plus grands",
+    "plus petits",
+    "égaux",
+    "vides"
+   ],
+   "answer": 2,
+   "explanation": "Même nombre = égal."
+  },
+  {
+   "id": "sil-maths-comparer-q5",
+   "chapter": "sil-maths-comparer-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-comparer",
+   "prompt": "Quel nombre est entre 6 et 8 ?",
+   "choices": [
+    "5",
+    "9",
+    "7",
+    "10"
+   ],
+   "answer": 2,
+   "explanation": "On dit : six, sept, huit. Sept est entre 6 et 8."
+  }
+ ]
+}

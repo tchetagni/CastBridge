@@ -1,0 +1,499 @@
+{
+ "chapter": "ce1-maths-geometrie",
+ "lessons": [
+  {
+   "id": "ce1-maths-carre-rectangle-triangle",
+   "title": "Le carré, le rectangle et le triangle",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CE1 — Programme de mathématiques du cycle 2, MINEDUB (reconstitué, à vérifier sur le texte officiel) — géométrie : carré, rectangle, triangle (côtés, sommets, angles droits)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Reconnaître un carré, un rectangle et un triangle.",
+    "Compter côtés et sommets.",
+    "Utiliser l'équerre pour repérer les angles droits."
+   ],
+   "prerequisites": [
+    "ce1-maths-droites-angle-droit"
+   ],
+   "exercises": [
+    "ce1-maths-carre-rectangle-triangle-01",
+    "ce1-maths-carre-rectangle-triangle-02",
+    "ce1-maths-carre-rectangle-triangle-03",
+    "ce1-maths-carre-rectangle-triangle-04",
+    "ce1-maths-carre-rectangle-triangle-05",
+    "ce1-maths-carre-rectangle-triangle-06"
+   ],
+   "selfCheck": [
+    "ce1-maths-carre-rectangle-triangle-q1",
+    "ce1-maths-carre-rectangle-triangle-q2",
+    "ce1-maths-carre-rectangle-triangle-q3",
+    "ce1-maths-carre-rectangle-triangle-q4",
+    "ce1-maths-carre-rectangle-triangle-q5"
+   ],
+   "reviewNotes": [
+    "Calcul du périmètre (tour de la figure) : peut dépasser le CE1 selon le programme officiel ; à confirmer."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le triangle",
+     "md": "Un **triangle** a **3 côtés** et **3 sommets**. Les sommets sont les « coins »."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le rectangle et le carré",
+     "md": "- Un **rectangle** a **4 côtés** et **4 angles droits**. Les côtés opposés ont la même longueur.\n- Un **carré** a **4 angles droits** et **4 côtés de même longueur**. Le carré est un rectangle particulier."
+    },
+    {
+     "type": "illustration",
+     "caption": "Un triangle, un rectangle, un carré.",
+     "alt": "Trois figures côte à côte : un triangle vert, un rectangle orange long, un carré bleu, avec leur nom écrit dessous.",
+     "figure": {
+      "kind": "shapes",
+      "w": 520,
+      "h": 170,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         20,
+         120,
+         100,
+         20,
+         180,
+         120
+        ],
+        "stroke": "green",
+        "width": 3,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 150,
+        "text": "triangle",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 210,
+        "y": 50,
+        "w": 130,
+        "h": 70,
+        "stroke": "orange",
+        "fill": "lightorange",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 275,
+        "y": 150,
+        "text": "rectangle",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 380,
+        "y": 40,
+        "w": 80,
+        "h": 80,
+        "stroke": "blue",
+        "fill": "lightblue",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 420,
+        "y": 150,
+        "text": "carré",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       }
+      ]
+     }
+    },
+    {
+     "type": "illustration",
+     "caption": "Les angles droits du carré.",
+     "alt": "Un carré dont chaque coin porte un petit carré rouge qui marque l'angle droit.",
+     "figure": {
+      "kind": "shapes",
+      "w": 260,
+      "h": 180,
+      "items": [
+       {
+        "t": "rect",
+        "x": 70,
+        "y": 30,
+        "w": 110,
+        "h": 110,
+        "stroke": "blue",
+        "fill": "lightblue",
+        "width": 3
+       },
+       {
+        "t": "poly",
+        "pts": [
+         84,
+         30,
+         84,
+         44,
+         70,
+         44
+        ],
+        "closed": false,
+        "stroke": "red",
+        "width": 2
+       },
+       {
+        "t": "poly",
+        "pts": [
+         166,
+         30,
+         166,
+         44,
+         180,
+         44
+        ],
+        "closed": false,
+        "stroke": "red",
+        "width": 2
+       },
+       {
+        "t": "poly",
+        "pts": [
+         84,
+         140,
+         84,
+         126,
+         70,
+         126
+        ],
+        "closed": false,
+        "stroke": "red",
+        "width": 2
+       },
+       {
+        "t": "poly",
+        "pts": [
+         166,
+         140,
+         166,
+         126,
+         180,
+         126
+        ],
+        "closed": false,
+        "stroke": "red",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 168,
+        "text": "4 angles droits",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : reconnaître",
+     "statement": "Une figure a 4 côtés et 4 angles droits. Les côtés ne sont pas tous égaux. Quelle est-elle ?",
+     "steps": [
+      {
+       "md": "4 côtés et 4 angles droits : rectangle ou carré."
+      },
+      {
+       "md": "Les côtés ne sont pas tous égaux : ce n'est pas un carré."
+      }
+     ],
+     "answer": "**C'est un rectangle.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : compter",
+     "statement": "Combien un triangle a-t-il de côtés et de sommets ?",
+     "steps": [
+      {
+       "md": "Je regarde la figure : 3 segments."
+      },
+      {
+       "md": "Il y a un sommet à chaque coin : 3 sommets."
+      }
+     ],
+     "answer": "**3 côtés et 3 sommets.**"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-maths-carre-rectangle-triangle-01"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Pour reconnaître une figure",
+     "md": "1. Je compte les côtés.\n2. Je cherche les angles droits avec l'équerre.\n3. Je compare la longueur des côtés (avec la règle)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- Un carré est aussi un rectangle, mais un rectangle n'est pas toujours un carré.\n- Un triangle n'a pas forcément d'angle droit."
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Combien de côtés a un triangle ?",
+   "choices": [
+    "4",
+    "2",
+    "5",
+    "3"
+   ],
+   "answer": 3,
+   "explanation": "Tri- veut dire trois : 3 côtés.",
+   "id": "ce1-maths-carre-rectangle-triangle-01",
+   "chapter": "ce1-maths-geometrie",
+   "tier": "application",
+   "lesson": "ce1-maths-carre-rectangle-triangle",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "truefalse",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Vrai ou faux : un carré a 4 côtés de même longueur.",
+   "answer": true,
+   "explanation": "C'est la définition du carré.",
+   "id": "ce1-maths-carre-rectangle-triangle-02",
+   "chapter": "ce1-maths-geometrie",
+   "tier": "application",
+   "lesson": "ce1-maths-carre-rectangle-triangle",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "matching",
+   "difficulty": 1,
+   "points": 2,
+   "prompt": "Associe chaque figure à son nombre de côtés.",
+   "pairs": [
+    [
+     "triangle",
+     "3 côtés"
+    ],
+    [
+     "carré",
+     "4 côtés égaux"
+    ],
+    [
+     "rectangle",
+     "4 côtés, côtés opposés égaux"
+    ]
+   ],
+   "explanation": "Triangle : 3 ; carré : 4 côtés égaux ; rectangle : 4 côtés, opposés égaux.",
+   "id": "ce1-maths-carre-rectangle-triangle-03",
+   "chapter": "ce1-maths-geometrie",
+   "tier": "application",
+   "lesson": "ce1-maths-carre-rectangle-triangle",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "Quelle figure a 4 angles droits ?",
+   "choices": [
+    "le triangle",
+    "aucune figure",
+    "le rectangle",
+    "le cercle"
+   ],
+   "answer": 2,
+   "explanation": "Le rectangle a 4 angles droits.",
+   "id": "ce1-maths-carre-rectangle-triangle-04",
+   "chapter": "ce1-maths-geometrie",
+   "tier": "approfondissement",
+   "lesson": "ce1-maths-carre-rectangle-triangle",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "Un carré a des côtés de 5 cm. Combien mesure son tour (la somme des 4 côtés) en cm ?",
+   "answer": 20,
+   "tolerance": 0,
+   "explanation": "5 + 5 + 5 + 5 = 20.",
+   "unit": "cm",
+   "id": "ce1-maths-carre-rectangle-triangle-05",
+   "chapter": "ce1-maths-geometrie",
+   "tier": "approfondissement",
+   "lesson": "ce1-maths-carre-rectangle-triangle",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "problem",
+   "difficulty": 2,
+   "prompt": "Un menuisier de Bertoua fabrique un cadre rectangulaire de 6 cm de long et 4 cm de large.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Combien le cadre a-t-il de côtés ?",
+     "choices": [
+      "4",
+      "3",
+      "5",
+      "6"
+     ],
+     "answer": 0,
+     "explanation": "Un rectangle a 4 côtés.",
+     "id": "ce1-maths-carre-rectangle-triangle-06-a"
+    },
+    {
+     "kind": "numeric",
+     "difficulty": 1,
+     "points": 2,
+     "prompt": "Combien mesure le tour du cadre, en cm ?",
+     "answer": 20,
+     "tolerance": 0,
+     "explanation": "6 + 4 + 6 + 4 = 20.",
+     "unit": "cm",
+     "id": "ce1-maths-carre-rectangle-triangle-06-b"
+    },
+    {
+     "kind": "truefalse",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Vrai ou faux : ce cadre est un carré.",
+     "answer": false,
+     "explanation": "Les côtés (6 cm et 4 cm) ne sont pas tous égaux.",
+     "id": "ce1-maths-carre-rectangle-triangle-06-c"
+    }
+   ],
+   "id": "ce1-maths-carre-rectangle-triangle-06",
+   "chapter": "ce1-maths-geometrie",
+   "tier": "examen",
+   "lesson": "ce1-maths-carre-rectangle-triangle",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Un carré a…",
+   "choices": [
+    "3 côtés",
+    "4 côtés égaux et 4 angles droits",
+    "aucun angle",
+    "4 côtés différents"
+   ],
+   "answer": 1,
+   "explanation": "Définition du carré.",
+   "id": "ce1-maths-carre-rectangle-triangle-q1",
+   "chapter": "ce1-maths-geometrie",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-carre-rectangle-triangle",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Le nombre de sommets d'un rectangle est…",
+   "choices": [
+    "4",
+    "2",
+    "6",
+    "3"
+   ],
+   "answer": 0,
+   "explanation": "Un sommet à chaque coin.",
+   "id": "ce1-maths-carre-rectangle-triangle-q2",
+   "chapter": "ce1-maths-geometrie",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-carre-rectangle-triangle",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quelle figure n'a que 3 sommets ?",
+   "choices": [
+    "le carré",
+    "le cadre",
+    "le triangle",
+    "le rectangle"
+   ],
+   "answer": 2,
+   "explanation": "Triangle : 3 sommets.",
+   "id": "ce1-maths-carre-rectangle-triangle-q3",
+   "chapter": "ce1-maths-geometrie",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-carre-rectangle-triangle",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Le tour d'un carré de côté 3 cm mesure…",
+   "choices": [
+    "9 cm",
+    "6 cm",
+    "12 cm",
+    "3 cm"
+   ],
+   "answer": 2,
+   "explanation": "3 + 3 + 3 + 3 = 12.",
+   "id": "ce1-maths-carre-rectangle-triangle-q4",
+   "chapter": "ce1-maths-geometrie",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-carre-rectangle-triangle",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Le carré est…",
+   "choices": [
+    "un cercle",
+    "un triangle",
+    "une droite",
+    "un rectangle particulier"
+   ],
+   "answer": 3,
+   "explanation": "4 angles droits et côtés égaux.",
+   "id": "ce1-maths-carre-rectangle-triangle-q5",
+   "chapter": "ce1-maths-geometrie",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-carre-rectangle-triangle",
+   "source": "Exercice original, niveau CE1"
+  }
+ ]
+}

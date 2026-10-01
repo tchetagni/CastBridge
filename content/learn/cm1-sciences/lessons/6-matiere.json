@@ -1,0 +1,555 @@
+{
+ "chapter": "cm1-sciences-matiere",
+ "lessons": [
+  {
+   "id": "cm1-sciences-matiere-fiche",
+   "title": "États de la matière et mélanges",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CM1 — Sciences et technologie (MINEDUB), reconstitué — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Reconnaître les trois états de la matière et les changements d'état.",
+    "Distinguer un mélange où l'on voit les composants d'un mélange où on ne les voit plus.",
+    "Choisir une méthode pour séparer un mélange (filtration, décantation, tamisage, évaporation)."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cm1-sciences-matiere-01",
+    "cm1-sciences-matiere-02",
+    "cm1-sciences-matiere-03",
+    "cm1-sciences-matiere-04",
+    "cm1-sciences-matiere-05",
+    "cm1-sciences-matiere-06"
+   ],
+   "selfCheck": [
+    "cm1-sciences-matiere-q1",
+    "cm1-sciences-matiere-q2",
+    "cm1-sciences-matiere-q3",
+    "cm1-sciences-matiere-q4",
+    "cm1-sciences-matiere-q5"
+   ],
+   "reviewNotes": [
+    "Valeurs 0 °C et 100 °C : conventionnelles au niveau de la mer ; vérifier la présentation du manuel.",
+    "Vocabulaire dissolution / évaporation / décantation à confronter au programme."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les états de la matière",
+     "md": "La matière existe sous trois états :\n\n- **solide** : a une forme propre (pierre, bois) ;\n- **liquide** : prend la forme du récipient (eau, huile) ;\n- **gazeux** : occupe tout l'espace disponible (l'air, la vapeur)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les trois états et leurs changements.",
+     "alt": "Trois cases solide, liquide, gaz. Des flèches rouges vont vers la droite : fusion, vaporisation. Des flèches bleues vont vers la gauche : solidification, condensation.",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 170,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 40,
+        "w": 150,
+        "h": 70,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 70,
+        "text": "Solide",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 95,
+        "text": "forme propre",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 205,
+        "y": 40,
+        "w": 150,
+        "h": 70,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 70,
+        "text": "Liquide",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 95,
+        "text": "prend la forme du vase",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 400,
+        "y": 40,
+        "w": 150,
+        "h": 70,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 475,
+        "y": 70,
+        "text": "Gaz",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 475,
+        "y": 95,
+        "text": "remplit l'espace",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 160,
+        "y1": 65,
+        "x2": 203,
+        "y2": 65,
+        "color": "red",
+        "width": 3,
+        "dash": false,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 182,
+        "y": 32,
+        "text": "fusion",
+        "size": 13,
+        "color": "red",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 203,
+        "y1": 90,
+        "x2": 160,
+        "y2": 90,
+        "color": "blue",
+        "width": 3,
+        "dash": false,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 182,
+        "y": 128,
+        "text": "solidification",
+        "size": 13,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 355,
+        "y1": 65,
+        "x2": 398,
+        "y2": 65,
+        "color": "red",
+        "width": 3,
+        "dash": false,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 377,
+        "y": 32,
+        "text": "vaporisation",
+        "size": 13,
+        "color": "red",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 398,
+        "y1": 90,
+        "x2": 355,
+        "y2": 90,
+        "color": "blue",
+        "width": 3,
+        "dash": false,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 377,
+        "y": 128,
+        "text": "condensation",
+        "size": 13,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": false
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Changements d'état",
+     "md": "L'eau change d'état quand on la chauffe ou la refroidit. À 0 °C elle devient glace (solide). À 100 °C elle bout et devient vapeur (gaz).\n\nLa glace qui fond, c'est la **fusion**. La vapeur qui se refroidit en gouttes, c'est la **condensation**."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les mélanges",
+     "md": "Un **mélange** réunit plusieurs substances.\n\n- Parfois on voit les composants : eau + sable, riz + cailloux.\n- Parfois on ne les voit plus : sel ou sucre **dissous** dans l'eau.\n\nOn peut souvent **séparer** un mélange."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Séparer un mélange",
+     "md": "- **Tamisage** : séparer des grains de tailles différentes (farine et son).\n- **Filtration** : séparer un liquide d'un solide non dissous (eau + sable).\n- **Décantation** : laisser reposer, le solide tombe au fond (eau boueuse).\n- **Évaporation** : faire partir l'eau pour récupérer le sel dissous."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : eau boueuse",
+     "statement": "Ngono a de l'eau boueuse. Comment l'éclaircir ?",
+     "steps": [
+      {
+       "md": "Elle laisse reposer : la terre tombe au fond, c'est la **décantation**."
+      },
+      {
+       "md": "Elle verse doucement l'eau à travers un tissu propre : c'est la **filtration**."
+      },
+      {
+       "md": "L'eau est plus claire, mais pas forcément potable."
+      }
+     ],
+     "answer": "**Décantation puis filtration.** Une eau claire n'est pas toujours propre à boire."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : récupérer le sel",
+     "statement": "On dissout du sel dans de l'eau. Comment récupérer le sel ?",
+     "steps": [
+      {
+       "md": "Le sel est dissous : un filtre ne le retient pas."
+      },
+      {
+       "md": "On chauffe l'eau : elle s'évapore."
+      },
+      {
+       "md": "Le sel reste au fond du récipient."
+      }
+     ],
+     "answer": "**On fait évaporer l'eau : le sel reste.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que le sel disparaît dans l'eau : il est dissous, il est toujours là (l'eau est salée).\n- Croire qu'on peut filtrer le sel dissous.\n- Dire que la glace fond à 100 °C : c'est à 0 °C ; 100 °C est la température d'ébullition de l'eau."
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-matiere-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-matiere-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-matiere-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-matiere-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-matiere-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-matiere-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "cm1-sciences-matiere-01",
+   "chapter": "cm1-sciences-matiere",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cm1-sciences-matiere-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Dans quel état est l'huile à température ambiante ?",
+   "choices": [
+    "solide",
+    "liquide",
+    "gazeux",
+    "aucun état"
+   ],
+   "answer": 1,
+   "explanation": "L'huile coule et prend la forme du récipient : c'est un liquide.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-matiere-02",
+   "chapter": "cm1-sciences-matiere",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cm1-sciences-matiere-fiche",
+   "points": 1,
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : la glace qui devient de l'eau, c'est la fusion.",
+   "answer": true,
+   "explanation": "Passage de solide à liquide : fusion.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-matiere-03",
+   "chapter": "cm1-sciences-matiere",
+   "tier": "application",
+   "difficulty": 2,
+   "lesson": "cm1-sciences-matiere-fiche",
+   "points": 2,
+   "kind": "matching",
+   "prompt": "Associe chaque mélange à la bonne méthode de séparation.",
+   "pairs": [
+    [
+     "eau + sable",
+     "filtration"
+    ],
+    [
+     "eau boueuse qui repose",
+     "décantation"
+    ],
+    [
+     "farine + son",
+     "tamisage"
+    ],
+    [
+     "eau salée",
+     "évaporation"
+    ]
+   ],
+   "explanation": "Chaque mélange a sa méthode : filtre, repos, tamis ou chauffage de l'eau.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-matiere-04",
+   "chapter": "cm1-sciences-matiere",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cm1-sciences-matiere-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Que devient le sucre dans une tasse de thé chaud qu'on remue ?",
+   "choices": [
+    "il disparaît pour toujours",
+    "il se dissout",
+    "il devient un gaz",
+    "il devient du sable"
+   ],
+   "answer": 1,
+   "explanation": "Le sucre est dissous : on ne le voit plus mais il est là.",
+   "method": "Penser au goût du thé.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-matiere-05",
+   "chapter": "cm1-sciences-matiere",
+   "tier": "approfondissement",
+   "difficulty": 3,
+   "lesson": "cm1-sciences-matiere-fiche",
+   "points": 1,
+   "kind": "numeric",
+   "prompt": "À quelle température (en °C) l'eau bout-elle au niveau de la mer ?",
+   "answer": 100,
+   "tolerance": 0,
+   "explanation": "L'eau bout à 100 °C au niveau de la mer.",
+   "unit": "°C",
+   "review": true,
+   "reviewNote": "Valeur conventionnelle au niveau de la mer ; vérifier la présentation attendue au CM1.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-matiere-06",
+   "chapter": "cm1-sciences-matiere",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "cm1-sciences-matiere-fiche",
+   "kind": "problem",
+   "prompt": "Mélanges de la cuisine.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "On mélange du riz et de petits cailloux. Quelle méthode utiliser ?",
+     "choices": [
+      "trier à la main ou tamiser",
+      "évaporer l'eau",
+      "faire fondre le riz",
+      "décanter"
+     ],
+     "answer": 0,
+     "explanation": "Ce sont des solides de tailles différentes : on trie ou on tamise.",
+     "id": "cm1-sciences-matiere-06-a",
+     "points": 1
+    },
+    {
+     "kind": "truefalse",
+     "prompt": "On peut retenir le sel dissous avec un filtre en tissu.",
+     "answer": false,
+     "explanation": "Le sel dissous passe à travers le filtre.",
+     "id": "cm1-sciences-matiere-06-b",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "La vapeur d'eau se refroidit sur un couvercle froid et forme des gouttes. Quel changement ?",
+     "choices": [
+      "la fusion",
+      "la solidification",
+      "la vaporisation",
+      "la condensation"
+     ],
+     "answer": 3,
+     "explanation": "Gaz vers liquide : condensation.",
+     "id": "cm1-sciences-matiere-06-c",
+     "points": 1
+    }
+   ],
+   "explanation": "Voir la correction de chaque question.",
+   "method": "Identifier si le mélange contient un solide non dissous ou une substance dissoute.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-matiere-q1",
+   "chapter": "cm1-sciences-matiere",
+   "tier": "autoeval",
+   "lesson": "cm1-sciences-matiere-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quel état prend la forme de son récipient ?",
+   "choices": [
+    "solide",
+    "aucun",
+    "liquide",
+    "tous les solides"
+   ],
+   "answer": 2,
+   "explanation": "Un liquide prend la forme du récipient."
+  },
+  {
+   "id": "cm1-sciences-matiere-q2",
+   "chapter": "cm1-sciences-matiere",
+   "tier": "autoeval",
+   "lesson": "cm1-sciences-matiere-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quelle méthode sépare l'eau et le sable ?",
+   "choices": [
+    "la fusion",
+    "la condensation",
+    "la filtration",
+    "la dissolution"
+   ],
+   "answer": 2,
+   "explanation": "Le filtre retient le sable."
+  },
+  {
+   "id": "cm1-sciences-matiere-q3",
+   "chapter": "cm1-sciences-matiere",
+   "tier": "autoeval",
+   "lesson": "cm1-sciences-matiere-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Comment s'appelle le passage de liquide à gaz ?",
+   "choices": [
+    "la fusion",
+    "la vaporisation",
+    "la solidification",
+    "la condensation"
+   ],
+   "answer": 1,
+   "explanation": "Liquide vers gaz : vaporisation."
+  },
+  {
+   "id": "cm1-sciences-matiere-q4",
+   "chapter": "cm1-sciences-matiere",
+   "tier": "autoeval",
+   "lesson": "cm1-sciences-matiere-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Le sel dans l'eau est…",
+   "choices": [
+    "dissous",
+    "fondu",
+    "brûlé",
+    "solidifié"
+   ],
+   "answer": 0,
+   "explanation": "Le sel est dissous."
+  },
+  {
+   "id": "cm1-sciences-matiere-q5",
+   "chapter": "cm1-sciences-matiere",
+   "tier": "autoeval",
+   "lesson": "cm1-sciences-matiere-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Que fait-on pour récupérer le sel d'une eau salée ?",
+   "choices": [
+    "on filtre avec un tissu",
+    "on laisse reposer une minute",
+    "on ajoute du sable",
+    "on fait évaporer l'eau"
+   ],
+   "answer": 3,
+   "explanation": "Quand l'eau s'évapore, le sel reste."
+  }
+ ]
+}

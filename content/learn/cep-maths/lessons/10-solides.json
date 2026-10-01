@@ -1,0 +1,447 @@
+{
+ "chapter": "cep-maths-solides",
+ "lessons": [
+  {
+   "id": "cep-maths-solides",
+   "title": "Les solides : faces, arêtes, volume et capacité",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM2 — Solides, volumes et capacités — reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; synthèse de révision orientée examen ; à faire relire par un enseignant",
+   "objectives": [
+    "Reconnaître et décrire cube, pavé droit, cylindre, cône, pyramide et sphère.",
+    "Compter faces, arêtes et sommets d'un cube et d'un pavé.",
+    "Calculer le volume d'un pavé droit et le convertir en litres."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cep-maths-solides-01",
+    "cep-maths-solides-02",
+    "cep-maths-solides-03",
+    "cep-maths-solides-04",
+    "cep-maths-solides-05",
+    "cep-maths-solides-06"
+   ],
+   "selfCheck": [
+    "cep-maths-solides-q1",
+    "cep-maths-solides-q2",
+    "cep-maths-solides-q3",
+    "cep-maths-solides-q4",
+    "cep-maths-solides-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier l'équivalence 1 dm³ = 1 L et 1 cm³ = 1 mL ; vérifier si le cylindre (volume) est au programme du CM2 (non traité ici).",
+    "Pyramide à base carrée : 5 faces, 8 arêtes, 5 sommets (non demandé dans les exercices)."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Faces, arêtes, sommets",
+     "md": "- Une **face** est une surface plane du solide.\n- Une **arête** est le segment où deux faces se rencontrent.\n- Un **sommet** est un coin où se rejoignent plusieurs arêtes.\n\nLe cube et le pavé droit ont **6 faces, 12 arêtes et 8 sommets**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 320,
+      "h": 180,
+      "items": [
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 70,
+        "w": 140,
+        "h": 80,
+        "stroke": "ink",
+        "fill": "lightblue"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         40,
+         70,
+         80,
+         40,
+         220,
+         40,
+         180,
+         70
+        ],
+        "stroke": "ink",
+        "fill": "lightyellow"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         180,
+         70,
+         220,
+         40,
+         220,
+         120,
+         180,
+         150
+        ],
+        "stroke": "ink",
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 172,
+        "text": "longueur L",
+        "size": 14,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 28,
+        "text": "largeur l",
+        "size": 14,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 232,
+        "y": 100,
+        "text": "hauteur h",
+        "size": 14,
+        "color": "ink",
+        "bold": true,
+        "anchor": "start"
+       }
+      ]
+     },
+     "caption": "Un pavé droit : longueur, largeur, hauteur.",
+     "alt": "Dessin en perspective d'un pavé droit. La face de devant est bleue, le dessus jaune et le côté vert. Les trois dimensions sont notées L, l et h."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Quelques solides",
+     "md": "- **Cube** : 6 faces carrées identiques.\n- **Pavé droit** : 6 faces rectangulaires.\n- **Cylindre** : 2 disques et une surface courbe (une boîte de conserve).\n- **Cône** : 1 disque et 1 sommet.\n- **Pyramide à base carrée** : 1 carré et 4 triangles.\n- **Sphère** : aucune face plane (un ballon)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Volume et capacité",
+     "md": "**Volume du pavé droit = L × l × h** (même unité pour les trois). Pour le cube : arête × arête × arête.\n\n**1 dm³ = 1 L** ; 1 m³ = 1 000 dm³ = 1 000 L ; 1 cm³ = 1 mL."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : un aquarium",
+     "statement": "Un aquarium mesure 50 cm de long, 30 cm de large et 40 cm de haut. Quelle est sa contenance en litres ?",
+     "steps": [
+      {
+       "md": "Volume : 50 × 30 × 40 = 60 000 cm³."
+      },
+      {
+       "md": "On convertit : 1 000 cm³ = 1 dm³, donc 60 000 cm³ = 60 dm³."
+      },
+      {
+       "md": "Et 1 dm³ = 1 L : 60 dm³ = 60 L."
+      }
+     ],
+     "answer": "L'aquarium contient **60 litres**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : une citerne",
+     "statement": "Une citerne a la forme d'un pavé : 2 m de long, 1,5 m de large, 1 m de haut. Calcule son volume en m³ puis en litres.",
+     "steps": [
+      {
+       "md": "Volume : 2 × 1,5 × 1 = 3 m³."
+      },
+      {
+       "md": "1 m³ = 1 000 L, donc 3 m³ = 3 000 L."
+      }
+     ],
+     "answer": "**3 m³**, soit **3 000 litres**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Multiplier des longueurs dans des unités différentes (cm et m) : convertis d'abord.\n- Confondre aire (en m²) et volume (en m³).\n- Oublier que 1 m³ = **1 000** L (et non 100).\n- Compter 6 arêtes pour le cube : il en a 12."
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-maths-solides-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-maths-solides-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-maths-solides-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-maths-solides-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-maths-solides-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-maths-solides-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Combien de faces possède un cube ?",
+   "choices": [
+    "4",
+    "8",
+    "6",
+    "12"
+   ],
+   "answer": 2,
+   "explanation": "Un cube a 6 faces carrées (dessus, dessous et 4 côtés).",
+   "id": "cep-maths-solides-01",
+   "chapter": "cep-maths-solides",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-maths-solides",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule le volume d'un pavé de 8 cm sur 5 cm sur 4 cm (en cm³).",
+   "answer": 160,
+   "tolerance": 0,
+   "explanation": "8 × 5 × 4 = 160 cm³.",
+   "unit": "cm³",
+   "id": "cep-maths-solides-02",
+   "chapter": "cep-maths-solides",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-maths-solides",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque solide à sa description.",
+   "pairs": [
+    [
+     "cube",
+     "6 faces carrées"
+    ],
+    [
+     "cylindre",
+     "2 disques et une surface courbe"
+    ],
+    [
+     "cône",
+     "1 disque et 1 sommet"
+    ],
+    [
+     "pyramide à base carrée",
+     "1 carré et 4 triangles"
+    ]
+   ],
+   "explanation": "Chaque solide a ses faces caractéristiques.",
+   "points": 2,
+   "id": "cep-maths-solides-03",
+   "chapter": "cep-maths-solides",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-maths-solides",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un bidon a la forme d'un cube de 20 cm d'arête. Quelle est sa contenance en litres ?",
+   "answer": 8,
+   "tolerance": 0,
+   "explanation": "Volume : 20 × 20 × 20 = 8 000 cm³ = 8 dm³ = 8 L.",
+   "unit": "L",
+   "id": "cep-maths-solides-04",
+   "chapter": "cep-maths-solides",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cep-maths-solides",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien d'arêtes possède un pavé droit ?",
+   "choices": [
+    "6",
+    "12",
+    "8",
+    "10"
+   ],
+   "answer": 1,
+   "explanation": "4 arêtes en haut, 4 en bas et 4 verticales : 12.",
+   "id": "cep-maths-solides-05",
+   "chapter": "cep-maths-solides",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cep-maths-solides",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "problem",
+   "prompt": "Un réservoir d'eau a la forme d'un pavé : 2 m de long, 1,5 m de large et 1 m de haut.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Calcule son volume en m³.",
+     "answer": 3,
+     "tolerance": 0,
+     "explanation": "2 × 1,5 × 1 = 3 m³.",
+     "unit": "m³",
+     "id": "cep-maths-solides-06-a",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule sa contenance en litres.",
+     "answer": 3000,
+     "tolerance": 0,
+     "explanation": "3 m³ = 3 × 1 000 = 3 000 L.",
+     "unit": "L",
+     "id": "cep-maths-solides-06-b",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Une famille utilise 150 litres par jour. Pendant combien de jours le réservoir plein suffit-il ?",
+     "answer": 20,
+     "tolerance": 0,
+     "explanation": "3 000 ÷ 150 = 20 jours.",
+     "unit": "jours",
+     "id": "cep-maths-solides-06-c",
+     "points": 1
+    },
+    {
+     "kind": "truefalse",
+     "prompt": "Un cube de 3 m d'arête a un volume de 9 m³.",
+     "answer": false,
+     "explanation": "3 × 3 × 3 = 27 m³, et non 9.",
+     "id": "cep-maths-solides-06-d",
+     "points": 1
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "method": "Volume = L × l × h ; 1 m³ = 1 000 L.",
+   "id": "cep-maths-solides-06",
+   "chapter": "cep-maths-solides",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cep-maths-solides",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel solide a un sommet et une base circulaire ?",
+   "choices": [
+    "le cône",
+    "le cylindre",
+    "la sphère",
+    "le cube"
+   ],
+   "answer": 0,
+   "explanation": "C'est le cône (comme un chapeau pointu).",
+   "id": "cep-maths-solides-q1",
+   "chapter": "cep-maths-solides",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-maths-solides",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "1 dm³ est égal à...",
+   "choices": [
+    "10 litres",
+    "100 litres",
+    "1 millilitre",
+    "1 litre"
+   ],
+   "answer": 3,
+   "explanation": "1 dm³ = 1 L.",
+   "id": "cep-maths-solides-q2",
+   "chapter": "cep-maths-solides",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-maths-solides",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le volume d'un pavé de 3 m, 2 m et 5 m est...",
+   "choices": [
+    "10 m³",
+    "30 m²",
+    "30 m³",
+    "15 m³"
+   ],
+   "answer": 2,
+   "explanation": "3 × 2 × 5 = 30 m³.",
+   "id": "cep-maths-solides-q3",
+   "chapter": "cep-maths-solides",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-maths-solides",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien de sommets possède un cube ?",
+   "choices": [
+    "6",
+    "8",
+    "12",
+    "4"
+   ],
+   "answer": 1,
+   "explanation": "4 sommets en haut et 4 en bas.",
+   "id": "cep-maths-solides-q4",
+   "chapter": "cep-maths-solides",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-maths-solides",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une boîte de conserve a la forme d'un...",
+   "choices": [
+    "cylindre",
+    "cône",
+    "cube",
+    "pavé droit"
+   ],
+   "answer": 0,
+   "explanation": "Elle a deux disques (haut et bas) et une surface courbe.",
+   "id": "cep-maths-solides-q5",
+   "chapter": "cep-maths-solides",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-maths-solides",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  }
+ ]
+}

@@ -1,0 +1,769 @@
+{
+ "chapter": "cep-maths-mult",
+ "lessons": [
+  {
+   "id": "cep-maths-multiples",
+   "title": "Multiples, diviseurs et critères de divisibilité",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CM2 — Multiples et diviseurs — reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; synthèse de révision orientée examen ; à faire relire par un enseignant",
+   "objectives": [
+    "Reconnaître un multiple et un diviseur d'un nombre.",
+    "Utiliser les critères de divisibilité par 2, 3, 5, 9 et 10.",
+    "Trouver tous les diviseurs d'un nombre inférieur à 100."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cep-maths-multiples-01",
+    "cep-maths-multiples-02",
+    "cep-maths-multiples-03",
+    "cep-maths-multiples-04",
+    "cep-maths-multiples-05",
+    "cep-maths-multiples-06"
+   ],
+   "selfCheck": [
+    "cep-maths-multiples-q1",
+    "cep-maths-multiples-q2",
+    "cep-maths-multiples-q3",
+    "cep-maths-multiples-q4",
+    "cep-maths-multiples-q5"
+   ],
+   "reviewNotes": [
+    "Les critères 3 et 9 par la somme des chiffres sont-ils au programme du CM2 camerounais ? Vérifier.",
+    "La question « entre 1 et 50 » : vérifier que 9 est bien exclu/inclus selon la convention (ici 9 est le premier multiple non nul)."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Multiple et diviseur",
+     "md": "- Un **multiple** de 6 est un nombre de la table de 6 : 6, 12, 18, 24...\n- Si 24 = 6 × 4, alors 24 est un multiple de 6 et 6 est un **diviseur** de 24 (la division 24 ÷ 6 tombe juste, reste 0).\n- Tout nombre a pour diviseurs 1 et lui-même."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les critères de divisibilité",
+     "md": "Un nombre est divisible par :\n- **2** s'il finit par 0, 2, 4, 6 ou 8 ;\n- **5** s'il finit par 0 ou 5 ;\n- **10** s'il finit par 0 ;\n- **3** si la somme de ses chiffres est dans la table de 3 ;\n- **9** si la somme de ses chiffres est dans la table de 9."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : divisible par 3 et par 9 ?",
+     "statement": "Le nombre 6 138 est-il divisible par 3 ? par 9 ? par 2 ?",
+     "steps": [
+      {
+       "md": "Somme des chiffres : 6 + 1 + 3 + 8 = 18."
+      },
+      {
+       "md": "18 est dans la table de 3 et dans la table de 9 : 6 138 est divisible par 3 et par 9."
+      },
+      {
+       "md": "Il finit par 8 (pair) : il est divisible par 2."
+      }
+     ],
+     "answer": "6 138 est divisible par **2, 3 et 9** (mais pas par 5 ni par 10)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 145,
+      "items": [
+       {
+        "t": "text",
+        "x": 220,
+        "y": 18,
+        "text": "12 = 1 × 12 = 2 × 6 = 3 × 4",
+        "size": 15,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 15,
+        "y": 40,
+        "w": 11,
+        "h": 11,
+        "stroke": "ink",
+        "fill": "lightblue",
+        "width": 1
+       },
+       {
+        "t": "rect",
+        "x": 28,
+        "y": 40,
+        "w": 11,
+        "h": 11,
+        "stroke": "ink",
+        "fill": "lightblue",
+        "width": 1
+       },
+       {
+        "t": "rect",
+        "x": 41,
+        "y": 40,
+        "w": 11,
+        "h": 11,
+        "stroke": "ink",
+        "fill": "lightblue",
+        "width": 1
+       },
+       {
+        "t": "rect",
+        "x": 54,
+        "y": 40,
+        "w": 11,
+        "h": 11,
+        "stroke": "ink",
+        "fill": "lightblue",
+        "width": 1
+       },
+       {
+        "t": "rect",
+        "x": 67,
+        "y": 40,
+        "w": 11,
+        "h": 11,
+        "stroke": "ink",
+        "fill": "lightblue",
+        "width": 1
+       },
+       {
+        "t": "rect",
+        "x": 80,
+        "y": 40,
+        "w": 11,
+        "h": 11,
+        "stroke": "ink",
+        "fill": "lightblue",
+        "width": 1
+       },
+       {
+        "t": "rect",
+        "x": 93,
+        "y": 40,
+        "w": 11,
+        "h": 11,
+        "stroke": "ink",
+        "fill": "lightblue",
+        "width": 1
+       },
+       {
+        "t": "rect",
+        "x": 106,
+        "y": 40,
+        "w": 11,
+        "h": 11,
+        "stroke": "ink",
+        "fill": "lightblue",
+        "width": 1
+       },
+       {
+        "t": "rect",
+        "x": 119,
+        "y": 40,
+        "w": 11,
+        "h": 11,
+        "stroke": "ink",
+        "fill": "lightblue",
+        "width": 1
+       },
+       {
+        "t": "rect",
+        "x": 132,
+        "y": 40,
+        "w": 11,
+        "h": 11,
+        "stroke": "ink",
+        "fill": "lightblue",
+        "width": 1
+       },
+       {
+        "t": "rect",
+        "x": 145,
+        "y": 40,
+        "w": 11,
+        "h": 11,
+        "stroke": "ink",
+        "fill": "lightblue",
+        "width": 1
+       },
+       {
+        "t": "rect",
+        "x": 158,
+        "y": 40,
+        "w": 11,
+        "h": 11,
+        "stroke": "ink",
+        "fill": "lightblue",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 75,
+        "text": "1 ligne de 12",
+        "size": 13,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 200,
+        "y": 40,
+        "w": 11,
+        "h": 11,
+        "stroke": "ink",
+        "fill": "lightgreen",
+        "width": 1
+       },
+       {
+        "t": "rect",
+        "x": 213,
+        "y": 40,
+        "w": 11,
+        "h": 11,
+        "stroke": "ink",
+        "fill": "lightgreen",
+        "width": 1
+       },
+       {
+        "t": "rect",
+        "x": 226,
+        "y": 40,
+        "w": 11,
+        "h": 11,
+        "stroke": "ink",
+        "fill": "lightgreen",
+        "width": 1
+       },
+       {
+        "t": "rect",
+        "x": 239,
+        "y": 40,
+        "w": 11,
+        "h": 11,
+        "stroke": "ink",
+        "fill": "lightgreen",
+        "width": 1
+       },
+       {
+        "t": "rect",
+        "x": 252,
+        "y": 40,
+        "w": 11,
+        "h": 11,
+        "stroke": "ink",
+        "fill": "lightgreen",
+        "width": 1
+       },
+       {
+        "t": "rect",
+        "x": 265,
+        "y": 40,
+        "w": 11,
+        "h": 11,
+        "stroke": "ink",
+        "fill": "lightgreen",
+        "width": 1
+       },
+       {
+        "t": "rect",
+        "x": 200,
+        "y": 53,
+        "w": 11,
+        "h": 11,
+        "stroke": "ink",
+        "fill": "lightgreen",
+        "width": 1
+       },
+       {
+        "t": "rect",
+        "x": 213,
+        "y": 53,
+        "w": 11,
+        "h": 11,
+        "stroke": "ink",
+        "fill": "lightgreen",
+        "width": 1
+       },
+       {
+        "t": "rect",
+        "x": 226,
+        "y": 53,
+        "w": 11,
+        "h": 11,
+        "stroke": "ink",
+        "fill": "lightgreen",
+        "width": 1
+       },
+       {
+        "t": "rect",
+        "x": 239,
+        "y": 53,
+        "w": 11,
+        "h": 11,
+        "stroke": "ink",
+        "fill": "lightgreen",
+        "width": 1
+       },
+       {
+        "t": "rect",
+        "x": 252,
+        "y": 53,
+        "w": 11,
+        "h": 11,
+        "stroke": "ink",
+        "fill": "lightgreen",
+        "width": 1
+       },
+       {
+        "t": "rect",
+        "x": 265,
+        "y": 53,
+        "w": 11,
+        "h": 11,
+        "stroke": "ink",
+        "fill": "lightgreen",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 85,
+        "text": "2 lignes de 6",
+        "size": 13,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 330,
+        "y": 40,
+        "w": 11,
+        "h": 11,
+        "stroke": "ink",
+        "fill": "lightorange",
+        "width": 1
+       },
+       {
+        "t": "rect",
+        "x": 343,
+        "y": 40,
+        "w": 11,
+        "h": 11,
+        "stroke": "ink",
+        "fill": "lightorange",
+        "width": 1
+       },
+       {
+        "t": "rect",
+        "x": 356,
+        "y": 40,
+        "w": 11,
+        "h": 11,
+        "stroke": "ink",
+        "fill": "lightorange",
+        "width": 1
+       },
+       {
+        "t": "rect",
+        "x": 369,
+        "y": 40,
+        "w": 11,
+        "h": 11,
+        "stroke": "ink",
+        "fill": "lightorange",
+        "width": 1
+       },
+       {
+        "t": "rect",
+        "x": 330,
+        "y": 53,
+        "w": 11,
+        "h": 11,
+        "stroke": "ink",
+        "fill": "lightorange",
+        "width": 1
+       },
+       {
+        "t": "rect",
+        "x": 343,
+        "y": 53,
+        "w": 11,
+        "h": 11,
+        "stroke": "ink",
+        "fill": "lightorange",
+        "width": 1
+       },
+       {
+        "t": "rect",
+        "x": 356,
+        "y": 53,
+        "w": 11,
+        "h": 11,
+        "stroke": "ink",
+        "fill": "lightorange",
+        "width": 1
+       },
+       {
+        "t": "rect",
+        "x": 369,
+        "y": 53,
+        "w": 11,
+        "h": 11,
+        "stroke": "ink",
+        "fill": "lightorange",
+        "width": 1
+       },
+       {
+        "t": "rect",
+        "x": 330,
+        "y": 66,
+        "w": 11,
+        "h": 11,
+        "stroke": "ink",
+        "fill": "lightorange",
+        "width": 1
+       },
+       {
+        "t": "rect",
+        "x": 343,
+        "y": 66,
+        "w": 11,
+        "h": 11,
+        "stroke": "ink",
+        "fill": "lightorange",
+        "width": 1
+       },
+       {
+        "t": "rect",
+        "x": 356,
+        "y": 66,
+        "w": 11,
+        "h": 11,
+        "stroke": "ink",
+        "fill": "lightorange",
+        "width": 1
+       },
+       {
+        "t": "rect",
+        "x": 369,
+        "y": 66,
+        "w": 11,
+        "h": 11,
+        "stroke": "ink",
+        "fill": "lightorange",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 356,
+        "y": 95,
+        "text": "3 lignes de 4",
+        "size": 13,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 128,
+        "text": "Les diviseurs de 12 sont : 1, 2, 3, 4, 6 et 12",
+        "size": 15,
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Trouver les diviseurs de 12 avec des rectangles de carreaux.",
+     "alt": "Trois rectangles de petits carreaux : 1 ligne de 12, 2 lignes de 6 et 3 lignes de 4. Chaque forme donne une paire de diviseurs."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Trouver tous les diviseurs",
+     "md": "1. J'essaie 1, 2, 3, 4... dans l'ordre.\n2. Chaque fois que la division tombe juste, je note **deux** diviseurs : le nombre et son compagnon.\n3. Je m'arrête quand les compagnons se rejoignent.\n\nPour 30 : 1×30, 2×15, 3×10, 5×6. Diviseurs : 1, 2, 3, 5, 6, 10, 15, 30."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : les diviseurs de 36",
+     "statement": "Donne tous les diviseurs de 36.",
+     "steps": [
+      {
+       "md": "1 × 36 ; 2 × 18 ; 3 × 12 ; 4 × 9 ; 6 × 6."
+      },
+      {
+       "md": "On s'arrête à 6 × 6 : les compagnons se rejoignent. Le diviseur 6 ne compte qu'une fois."
+      }
+     ],
+     "answer": "Diviseurs de 36 : **1, 2, 3, 4, 6, 9, 12, 18, 36** (9 diviseurs)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre multiple et diviseur : 48 est un **multiple** de 6, 6 est un **diviseur** de 48.\n- Oublier 1 et le nombre lui-même.\n- Dire que 0 n'est pas un multiple : 0 = 6 × 0 est bien un multiple de 6.\n- Appliquer le critère du 3 en regardant le dernier chiffre : il faut **additionner tous** les chiffres."
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-maths-multiples-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-maths-multiples-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-maths-multiples-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-maths-multiples-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-maths-multiples-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-maths-multiples-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quel nombre est un multiple de 7 ?",
+   "choices": [
+    "46",
+    "56",
+    "65",
+    "75"
+   ],
+   "answer": 1,
+   "explanation": "Table de 7 : 7, 14, 21, 28, 35, 42, 49, 56. 56 = 7 × 8.",
+   "id": "cep-maths-multiples-01",
+   "chapter": "cep-maths-mult",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-maths-multiples",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Le nombre 345 est divisible par 5.",
+   "answer": true,
+   "explanation": "Il finit par 5. 345 = 5 × 69.",
+   "id": "cep-maths-multiples-02",
+   "chapter": "cep-maths-mult",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-maths-multiples",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Combien de diviseurs possède le nombre 20 ? (1, 2, 4, 5, 10, 20)",
+   "answer": 6,
+   "tolerance": 0,
+   "explanation": "20 = 1×20 = 2×10 = 4×5 : les diviseurs sont 1, 2, 4, 5, 10, 20. Il y en a 6.",
+   "id": "cep-maths-multiples-03",
+   "chapter": "cep-maths-mult",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-maths-multiples",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Parmi ces nombres, lequel est divisible à la fois par 2, 3 et 5 ?",
+   "choices": [
+    "90",
+    "45",
+    "64",
+    "75"
+   ],
+   "answer": 0,
+   "explanation": "90 finit par 0 (2, 5, 10) et 9 + 0 = 9 (3 et 9). 45 est impair ; 64 ne finit pas par 0 ou 5 ; 75 est impair.",
+   "id": "cep-maths-multiples-04",
+   "chapter": "cep-maths-mult",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cep-maths-multiples",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "open",
+   "prompt": "Ngono a 48 mangues. Elle veut les ranger dans des paniers contenant chacun le même nombre de mangues, sans en laisser. Donne toutes les façons possibles.",
+   "model": "Il faut un diviseur de 48 : 1, 2, 3, 4, 6, 8, 12, 16, 24 ou 48 mangues par panier.",
+   "rubric": [
+    "Trouver les paires 1×48, 2×24, 3×16, 4×12, 6×8.",
+    "Donner les 10 diviseurs."
+   ],
+   "explanation": "Le nombre de mangues par panier doit être un diviseur de 48 : 1×48, 2×24, 3×16, 4×12, 6×8. Cela donne 10 possibilités.",
+   "points": 2,
+   "id": "cep-maths-multiples-05",
+   "chapter": "cep-maths-mult",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cep-maths-multiples",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Étude du nombre 252.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Par quel nombre 252 n'est-il PAS divisible ?",
+     "choices": [
+      "2",
+      "3",
+      "9",
+      "5"
+     ],
+     "answer": 3,
+     "explanation": "252 finit par 2 : divisible par 2, pas par 5. 2+5+2 = 9 : divisible par 3 et 9.",
+     "id": "cep-maths-multiples-06-a",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule la somme des chiffres de 252.",
+     "answer": 9,
+     "tolerance": 0,
+     "explanation": "2 + 5 + 2 = 9.",
+     "id": "cep-maths-multiples-06-b",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "252 = 4 × ... Complète.",
+     "answer": 63,
+     "tolerance": 0,
+     "explanation": "252 ÷ 4 = 63, car 4 × 63 = 252.",
+     "id": "cep-maths-multiples-06-c",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Combien de multiples de 9 y a-t-il entre 1 et 50 ?",
+     "answer": 5,
+     "tolerance": 0,
+     "explanation": "9, 18, 27, 36, 45 : cinq multiples (le suivant, 54, dépasse 50).",
+     "id": "cep-maths-multiples-06-d",
+     "points": 1
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "method": "Critères de divisibilité puis divisions.",
+   "id": "cep-maths-multiples-06",
+   "chapter": "cep-maths-mult",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cep-maths-multiples",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un nombre est divisible par 9 si...",
+   "choices": [
+    "il finit par 9",
+    "il finit par 0 ou 9",
+    "la somme de ses chiffres est dans la table de 9",
+    "la somme de ses chiffres est paire"
+   ],
+   "answer": 2,
+   "explanation": "Critère du 9 : la somme des chiffres est un multiple de 9.",
+   "id": "cep-maths-multiples-q1",
+   "chapter": "cep-maths-mult",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-maths-multiples",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Lequel est un diviseur de 54 ?",
+   "choices": [
+    "8",
+    "6",
+    "5",
+    "7"
+   ],
+   "answer": 1,
+   "explanation": "54 = 6 × 9. Les autres ne donnent pas un quotient entier.",
+   "id": "cep-maths-multiples-q2",
+   "chapter": "cep-maths-mult",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-maths-multiples",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le plus petit multiple de 8 supérieur à 50 ?",
+   "choices": [
+    "56",
+    "48",
+    "54",
+    "64"
+   ],
+   "answer": 0,
+   "explanation": "8 × 6 = 48 (< 50) et 8 × 7 = 56.",
+   "id": "cep-maths-multiples-q3",
+   "chapter": "cep-maths-mult",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-maths-multiples",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le nombre 7 140 est divisible par...",
+   "choices": [
+    "3 et 9 seulement",
+    "5 seulement",
+    "2 et 9 seulement",
+    "2, 3, 5 et 10"
+   ],
+   "answer": 3,
+   "explanation": "Il finit par 0 (2, 5, 10) ; 7+1+4+0 = 12 (table de 3, pas de 9).",
+   "id": "cep-maths-multiples-q4",
+   "chapter": "cep-maths-mult",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-maths-multiples",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien de diviseurs a le nombre 13 ?",
+   "choices": [
+    "1",
+    "3",
+    "2",
+    "13"
+   ],
+   "answer": 2,
+   "explanation": "13 n'est divisible que par 1 et 13.",
+   "id": "cep-maths-multiples-q5",
+   "chapter": "cep-maths-mult",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-maths-multiples",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  }
+ ]
+}

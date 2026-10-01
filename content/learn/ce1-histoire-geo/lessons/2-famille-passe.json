@@ -1,0 +1,603 @@
+{
+ "chapter": "ce1-histoire-geo-c2-famille-passe",
+ "lessons": [
+  {
+   "id": "ce1-histoire-geo-famille-passe",
+   "title": "Ma famille et le passé",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CE1 — Histoire : la famille, les générations, la vie d'autrefois et d'aujourd'hui (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Nommer les membres de la famille sur trois générations.",
+    "Placer des personnes dans l'ordre des générations.",
+    "Comparer la vie d'autrefois et d'aujourd'hui."
+   ],
+   "prerequisites": [
+    "ce1-histoire-geo-temps"
+   ],
+   "exercises": [
+    "ce1-histoire-geo-famille-passe-01",
+    "ce1-histoire-geo-famille-passe-02",
+    "ce1-histoire-geo-famille-passe-03",
+    "ce1-histoire-geo-famille-passe-04",
+    "ce1-histoire-geo-famille-passe-05",
+    "ce1-histoire-geo-famille-passe-06"
+   ],
+   "selfCheck": [
+    "ce1-histoire-geo-famille-passe-q1",
+    "ce1-histoire-geo-famille-passe-q2",
+    "ce1-histoire-geo-famille-passe-q3",
+    "ce1-histoire-geo-famille-passe-q4",
+    "ce1-histoire-geo-famille-passe-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier le niveau du vocabulaire (génération, autrefois) attendu au CE1.",
+    "Les exemples de vie d'autrefois sont généraux ; à adapter à la région et à la réalité locale des élèves."
+   ],
+   "blocks": [
+    {
+     "type": "audio",
+     "lang": "fr-FR",
+     "text": "Ma famille a une histoire. Mes grands-parents sont plus anciens que mes parents."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La famille et les générations",
+     "md": "Une **famille** réunit des parents, des enfants, des grands-parents, des oncles, des tantes, des cousins.\n\nUne **génération**, c'est un groupe de personnes de même âge dans la famille :\n\n- les **grands-parents** ;\n- les **parents** ;\n- les **enfants**."
+    },
+    {
+     "type": "illustration",
+     "caption": "Un arbre de famille sur trois générations.",
+     "alt": "Un arbre de famille : en haut grand-mère et grand-père, au milieu maman et papa, en bas Ngono et Paul, les enfants. Des traits relient les générations.",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 240,
+      "items": [
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 15,
+        "w": 120,
+        "h": 34,
+        "fill": "lightorange",
+        "stroke": "orange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 120.0,
+        "y": 38,
+        "text": "Grand-mère",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 210,
+        "y": 15,
+        "w": 130,
+        "h": 34,
+        "fill": "lightorange",
+        "stroke": "orange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 275.0,
+        "y": 38,
+        "text": "Grand-père",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 100,
+        "w": 100,
+        "h": 34,
+        "fill": "lightgreen",
+        "stroke": "green",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 123,
+        "text": "Maman",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 100,
+        "w": 100,
+        "h": 34,
+        "fill": "lightgreen",
+        "stroke": "green",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 280.0,
+        "y": 123,
+        "text": "Papa",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 30,
+        "y": 185,
+        "w": 100,
+        "h": 34,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 208,
+        "text": "Ngono",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 185,
+        "w": 100,
+        "h": 34,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 208,
+        "text": "Paul",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 195,
+        "y1": 49,
+        "x2": 195,
+        "y2": 66,
+        "color": "grey",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 66,
+        "x2": 280,
+        "y2": 66,
+        "color": "grey",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 66,
+        "x2": 110,
+        "y2": 98,
+        "color": "grey",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 195,
+        "y1": 134,
+        "x2": 195,
+        "y2": 150,
+        "color": "grey",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 150,
+        "x2": 195,
+        "y2": 150,
+        "color": "grey",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 150,
+        "x2": 80,
+        "y2": 183,
+        "color": "grey",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 195,
+        "y1": 150,
+        "x2": 210,
+        "y2": 150,
+        "color": "grey",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 150,
+        "x2": 210,
+        "y2": 183,
+        "color": "grey",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 40,
+        "text": "génération 1",
+        "size": 14,
+        "color": "orange",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 125,
+        "text": "génération 2",
+        "size": 14,
+        "color": "green",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 210,
+        "text": "génération 3",
+        "size": 14,
+        "color": "blue",
+        "anchor": "start",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : qui est qui ?",
+     "statement": "La maman de ma maman, qui est-ce pour moi ?",
+     "steps": [
+      {
+       "md": "La maman de ma maman est de la génération au-dessus de ma mère."
+      },
+      {
+       "md": "C'est ma grand-mère."
+      }
+     ],
+     "answer": "**Ma grand-mère.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : trouver la génération",
+     "statement": "Ngono a un frère, Paul. Quelle génération forment-ils ?",
+     "steps": [
+      {
+       "md": "Ngono et Paul sont des enfants de la même famille."
+      },
+      {
+       "md": "Ils ont à peu près le même âge : c'est la 3e génération du dessin."
+      }
+     ],
+     "answer": "**Ils sont de la même génération : celle des enfants.**"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Autrefois et aujourd'hui",
+     "md": "Avant, la vie était différente. Aujourd'hui, beaucoup de choses ont changé.\n\n- **Autrefois**, on faisait souvent la cuisine sur le feu de bois, on écrivait des lettres, on puisait l'eau.\n- **Aujourd'hui**, beaucoup de familles ont l'électricité, le robinet, le téléphone, mais ce n'est pas la même chose partout."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Interroger un ancien",
+     "md": "Pour connaître le passé de ma famille, je peux demander à un grand-parent :\n\n1. Comment était ta maison quand tu étais petit ?\n2. Comment allais-tu à l'école ?\n3. À quoi jouais-tu ?\n\nJe note ses réponses et je les compare à ma vie."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- « Autrefois » ne veut pas dire « hier » : c'est il y a très longtemps.\n- Il n'y a pas de bonne ou de mauvaise manière de vivre : la vie change avec le temps et avec les lieux.\n- Les histoires des anciens sont précieuses, mais chaque famille a la sienne."
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-histoire-geo-famille-passe-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-histoire-geo-famille-passe-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-histoire-geo-famille-passe-03"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Dans beaucoup de familles, on appelle « tonton » et « tantie » des proches de la famille ou des amis des parents.",
+      "Une photo ancienne peut nous montrer comment on s'habillait autrefois."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ce1-histoire-geo-famille-passe-01",
+   "chapter": "ce1-histoire-geo-c2-famille-passe",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Qui est la maman de ton papa ?",
+   "choices": [
+    "ta sœur",
+    "ta tante seulement",
+    "ta grand-mère",
+    "ta cousine"
+   ],
+   "answer": 2,
+   "explanation": "La maman de mon papa est ma **grand-mère**.",
+   "lesson": "ce1-histoire-geo-famille-passe",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-histoire-geo-famille-passe-02",
+   "chapter": "ce1-histoire-geo-c2-famille-passe",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Vrai ou faux : tes grands-parents sont d'une génération plus ancienne que tes parents.",
+   "answer": true,
+   "explanation": "Vrai : ils sont de la génération **au-dessus**.",
+   "lesson": "ce1-histoire-geo-famille-passe",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-histoire-geo-famille-passe-03",
+   "chapter": "ce1-histoire-geo-c2-famille-passe",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "prompt": "Associe chaque personne à sa génération.",
+   "pairs": [
+    [
+     "grand-père",
+     "génération 1"
+    ],
+    [
+     "maman",
+     "génération 2"
+    ],
+    [
+     "enfant",
+     "génération 3"
+    ]
+   ],
+   "explanation": "Grands-parents : 1. Parents : 2. Enfants : 3.",
+   "lesson": "ce1-histoire-geo-famille-passe",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-histoire-geo-famille-passe-04",
+   "chapter": "ce1-histoire-geo-c2-famille-passe",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "Qui est le fils de ton oncle ?",
+   "choices": [
+    "ton cousin",
+    "ton frère",
+    "ton grand-père",
+    "ton papa"
+   ],
+   "answer": 0,
+   "explanation": "Le fils de mon oncle est mon **cousin**.",
+   "lesson": "ce1-histoire-geo-famille-passe",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-histoire-geo-famille-passe-05",
+   "chapter": "ce1-histoire-geo-c2-famille-passe",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Écris une chose qui a changé entre le temps de tes grands-parents et aujourd'hui.",
+   "model": "Aujourd'hui on a le téléphone ; avant on envoyait des lettres.",
+   "rubric": [
+    "Une différence entre autrefois et aujourd'hui.",
+    "Phrase claire."
+   ],
+   "explanation": "Beaucoup de choses ont changé : l'électricité, le téléphone, les moyens de transport…",
+   "review": true,
+   "reviewNote": "Réponse libre : accepter toute différence plausible selon la réalité locale.",
+   "lesson": "ce1-histoire-geo-famille-passe",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-histoire-geo-famille-passe-06",
+   "chapter": "ce1-histoire-geo-c2-famille-passe",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Regarde l'arbre de famille de Ngono.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Qui est le père de Ngono ?",
+     "choices": [
+      "Paul",
+      "Grand-père",
+      "Maman",
+      "Papa"
+     ],
+     "answer": 3,
+     "explanation": "**Papa** est le père de Ngono et de Paul.",
+     "id": "ce1-histoire-geo-famille-passe-06-a"
+    },
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Qui est le frère de Ngono ?",
+     "choices": [
+      "Papa",
+      "Paul",
+      "Grand-mère",
+      "Maman"
+     ],
+     "answer": 1,
+     "explanation": "**Paul** est le frère de Ngono.",
+     "id": "ce1-histoire-geo-famille-passe-06-b"
+    },
+    {
+     "kind": "truefalse",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Grand-mère est de la même génération que Ngono.",
+     "answer": false,
+     "explanation": "Faux : Grand-mère est de la génération 1, Ngono de la génération 3.",
+     "id": "ce1-histoire-geo-famille-passe-06-c"
+    }
+   ],
+   "lesson": "ce1-histoire-geo-famille-passe",
+   "points": 3,
+   "explanation": "Corrigé détaillé question par question ci-dessous.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-histoire-geo-famille-passe-q1",
+   "chapter": "ce1-histoire-geo-c2-famille-passe",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Qui est le papa de ta maman ?",
+   "choices": [
+    "ton frère",
+    "ton grand-père",
+    "ton oncle",
+    "ton cousin"
+   ],
+   "answer": 1,
+   "explanation": "Le papa de ma maman est mon **grand-père**.",
+   "lesson": "ce1-histoire-geo-famille-passe",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-histoire-geo-famille-passe-q2",
+   "chapter": "ce1-histoire-geo-c2-famille-passe",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Que veut dire « autrefois » ?",
+   "choices": [
+    "demain",
+    "aujourd'hui",
+    "cet après-midi",
+    "il y a longtemps"
+   ],
+   "answer": 3,
+   "explanation": "**Autrefois** veut dire « il y a longtemps ».",
+   "lesson": "ce1-histoire-geo-famille-passe",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-histoire-geo-famille-passe-q3",
+   "chapter": "ce1-histoire-geo-c2-famille-passe",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Combien de générations y a-t-il dans l'arbre de Ngono ?",
+   "choices": [
+    "3",
+    "1",
+    "2",
+    "5"
+   ],
+   "answer": 0,
+   "explanation": "Grands-parents, parents, enfants : **3** générations.",
+   "lesson": "ce1-histoire-geo-famille-passe",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-histoire-geo-famille-passe-q4",
+   "chapter": "ce1-histoire-geo-c2-famille-passe",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Comment peut-on connaître la vie d'autrefois ?",
+   "choices": [
+    "en inventant une histoire",
+    "en regardant la pluie",
+    "en interrogeant un ancien",
+    "en comptant les nuages"
+   ],
+   "answer": 2,
+   "explanation": "On peut **interroger un ancien** ou regarder de vieilles photos.",
+   "lesson": "ce1-histoire-geo-famille-passe",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-histoire-geo-famille-passe-q5",
+   "chapter": "ce1-histoire-geo-c2-famille-passe",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Les sœurs et frères d'une même famille sont de…",
+   "choices": [
+    "trois générations",
+    "la génération des grands-parents",
+    "la même génération",
+    "aucune génération"
+   ],
+   "answer": 2,
+   "explanation": "Frères et sœurs forment une **même génération**.",
+   "lesson": "ce1-histoire-geo-famille-passe",
+   "source": "Exercice original"
+  }
+ ]
+}

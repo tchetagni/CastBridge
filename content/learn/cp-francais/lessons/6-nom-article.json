@@ -1,0 +1,479 @@
+{
+ "chapter": "cp-francais-grammaire",
+ "lessons": [
+  {
+   "id": "cp-francais-nom-article",
+   "title": "Le nom et l'article",
+   "minutes": 12,
+   "readAloud": true,
+   "programRef": "CP — Grammaire : le nom et l'article (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Reconnaître un nom (personne, animal, chose, lieu).",
+    "Choisir l'article qui convient : le, la, les, un, une, des.",
+    "Dire si un nom est au singulier ou au pluriel."
+   ],
+   "prerequisites": [
+    "cp-francais-phrase"
+   ],
+   "exercises": [
+    "cp-francais-nom-article-01",
+    "cp-francais-nom-article-02",
+    "cp-francais-nom-article-03",
+    "cp-francais-nom-article-04",
+    "cp-francais-nom-article-05",
+    "cp-francais-nom-article-06"
+   ],
+   "selfCheck": [
+    "cp-francais-nom-article-q1",
+    "cp-francais-nom-article-q2",
+    "cp-francais-nom-article-q3",
+    "cp-francais-nom-article-q4",
+    "cp-francais-nom-article-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier le vocabulaire grammatical (nom, article) et le choix de ne pas aborder le « déterminant » au CP."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Les **noms** servent à nommer. Devant le nom, on met souvent un petit mot : l'**article**."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le nom",
+     "md": "Un nom désigne une personne, un animal, une chose ou un lieu : Ngono, la chèvre, le cahier, Douala."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les articles",
+     "md": "- Masculin singulier : **le**, **un** (le manioc, un manioc).\n- Féminin singulier : **la**, **une** (la mangue, une mangue).\n- Pluriel : **les**, **des** (les bananes, des bananes)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 140,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 153,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "blue"
+       },
+       {
+        "t": "text",
+        "x": 87,
+        "y": 40,
+        "text": "masculin",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 163,
+        "y": 10,
+        "w": 153,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "blue"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 40,
+        "text": "féminin",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 317,
+        "y": 10,
+        "w": 153,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "blue"
+       },
+       {
+        "t": "text",
+        "x": 393,
+        "y": 40,
+        "text": "pluriel",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 50,
+        "w": 153,
+        "h": 40,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 87,
+        "y": 80,
+        "text": "le manioc",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 163,
+        "y": 50,
+        "w": 153,
+        "h": 40,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 80,
+        "text": "la mangue",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 317,
+        "y": 50,
+        "w": 153,
+        "h": 40,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 393,
+        "y": 80,
+        "text": "les bananes",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 90,
+        "w": 153,
+        "h": 40,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 87,
+        "y": 120,
+        "text": "un chat",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 163,
+        "y": 90,
+        "w": 153,
+        "h": 40,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 120,
+        "text": "une chèvre",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 317,
+        "y": 90,
+        "w": 153,
+        "h": 40,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 393,
+        "y": 120,
+        "text": "des poules",
+        "size": 17
+       }
+      ]
+     },
+     "caption": "Les articles et leurs noms.",
+     "alt": "Un tableau à trois colonnes : masculin (le manioc, un chat), féminin (la mangue, une chèvre), pluriel (les bananes, des poules)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : trouver le nom",
+     "statement": "Quel est le nom dans « Le pangolin dort. » ?",
+     "steps": [
+      {
+       "md": "Je cherche le mot qui nomme un animal : pangolin."
+      },
+      {
+       "md": "Il est précédé de l'article « le »."
+      }
+     ],
+     "answer": "Le nom est **pangolin**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : choisir l'article",
+     "statement": "Complète : ___ mangue est mûre.",
+     "steps": [
+      {
+       "md": "Le mot « mangue » est féminin singulier."
+      },
+      {
+       "md": "J'écris « la » (ou « une »)."
+      }
+     ],
+     "answer": "**La** mangue est mûre."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "Si l'article est **les** ou **des**, le nom est au pluriel et se termine souvent par un -s : les bananes, des poules."
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-nom-article-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-nom-article-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-nom-article-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-nom-article-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-nom-article-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-nom-article-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot est un nom ?",
+   "choices": [
+    "chèvre",
+    "court",
+    "mange",
+    "petit"
+   ],
+   "answer": 0,
+   "explanation": "« Chèvre » nomme un animal.",
+   "id": "cp-francais-nom-article-01",
+   "chapter": "cp-francais-grammaire",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-francais-nom-article",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : ___ mangue est mûre.",
+   "choices": [
+    "Le",
+    "Les",
+    "Un",
+    "La"
+   ],
+   "answer": 3,
+   "explanation": "Mangue est féminin singulier : la.",
+   "id": "cp-francais-nom-article-02",
+   "chapter": "cp-francais-grammaire",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-francais-nom-article",
+   "points": 1
+  },
+  {
+   "kind": "matching",
+   "prompt": "Relie chaque nom à ce qu'il désigne.",
+   "pairs": [
+    [
+     "Mballa",
+     "personne"
+    ],
+    [
+     "chimpanzé",
+     "animal"
+    ],
+    [
+     "cahier",
+     "chose"
+    ],
+    [
+     "Douala",
+     "ville"
+    ]
+   ],
+   "explanation": "Un nom peut désigner une personne, un animal, une chose ou un lieu.",
+   "id": "cp-francais-nom-article-03",
+   "chapter": "cp-francais-grammaire",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-francais-nom-article",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel article convient ? « ___ poules chantent. »",
+   "choices": [
+    "Le",
+    "La",
+    "Les",
+    "Un"
+   ],
+   "answer": 2,
+   "explanation": "Poules est au pluriel : les.",
+   "id": "cp-francais-nom-article-04",
+   "chapter": "cp-francais-grammaire",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-francais-nom-article",
+   "points": 1
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : « des bananes » est au pluriel.",
+   "answer": true,
+   "explanation": "« Des » et le -s final montrent le pluriel.",
+   "id": "cp-francais-nom-article-05",
+   "chapter": "cp-francais-grammaire",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-francais-nom-article",
+   "points": 1
+  },
+  {
+   "kind": "open",
+   "prompt": "Écris trois noms avec un article (par exemple : la mangue).",
+   "model": "le chat, une poule, des bananes",
+   "rubric": [
+    "Chaque nom est précédé d'un article.",
+    "Les trois noms sont corrects."
+   ],
+   "explanation": "Exemples : le panier, une chèvre, les enfants.",
+   "id": "cp-francais-nom-article-06",
+   "chapter": "cp-francais-grammaire",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cp-francais-nom-article",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot est un article ?",
+   "choices": [
+    "mange",
+    "une",
+    "manioc",
+    "Ngono"
+   ],
+   "answer": 1,
+   "explanation": "Une est un article.",
+   "id": "cp-francais-nom-article-q1",
+   "chapter": "cp-francais-grammaire",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-nom-article",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le nom ? « Le cahier est neuf. »",
+   "choices": [
+    "cahier",
+    "neuf",
+    "est",
+    "le"
+   ],
+   "answer": 0,
+   "explanation": "Cahier nomme une chose.",
+   "id": "cp-francais-nom-article-q2",
+   "chapter": "cp-francais-grammaire",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-nom-article",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : ___ chat dort.",
+   "choices": [
+    "La",
+    "Les",
+    "Une",
+    "Le"
+   ],
+   "answer": 3,
+   "explanation": "Chat est masculin singulier : le.",
+   "id": "cp-francais-nom-article-q3",
+   "chapter": "cp-francais-grammaire",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-nom-article",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel article va avec « chèvre » ?",
+   "choices": [
+    "un",
+    "le",
+    "une",
+    "les"
+   ],
+   "answer": 2,
+   "explanation": "Chèvre est féminin : une chèvre.",
+   "id": "cp-francais-nom-article-q4",
+   "chapter": "cp-francais-grammaire",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-nom-article",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel groupe de mots est au pluriel ?",
+   "choices": [
+    "une poule",
+    "des poules",
+    "la poule",
+    "le poulet"
+   ],
+   "answer": 1,
+   "explanation": "Des + -s : pluriel.",
+   "id": "cp-francais-nom-article-q5",
+   "chapter": "cp-francais-grammaire",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-nom-article",
+   "points": 1
+  }
+ ]
+}

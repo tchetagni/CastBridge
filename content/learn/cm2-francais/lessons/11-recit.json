@@ -1,0 +1,525 @@
+{
+ "chapter": "cm2-francais-recit",
+ "lessons": [
+  {
+   "id": "cm2-francais-recit-fiche",
+   "chapter": "cm2-francais-recit",
+   "title": "Écrire un récit et un dialogue",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM2 — Français (reconstitué, à confronter au programme officiel MINEDUB)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Construire un récit avec ses cinq étapes.",
+    "Utiliser les temps du récit (imparfait, passé simple ou passé composé).",
+    "Écrire un dialogue avec la bonne ponctuation."
+   ],
+   "prerequisites": [
+    "cm2-francais-temps-simples-fiche"
+   ],
+   "exercises": [
+    "cm2-francais-recit-01",
+    "cm2-francais-recit-02",
+    "cm2-francais-recit-03",
+    "cm2-francais-recit-04",
+    "cm2-francais-recit-05",
+    "cm2-francais-recit-06"
+   ],
+   "selfCheck": [
+    "cm2-francais-recit-q1",
+    "cm2-francais-recit-q2",
+    "cm2-francais-recit-q3",
+    "cm2-francais-recit-q4",
+    "cm2-francais-recit-q5"
+   ],
+   "reviewNotes": [
+    "Les exercices de rédaction sont évalués par une grille : un enseignant doit relire les productions modèles."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Un **récit** raconte une histoire qui s'est passée. Il répond à : **Qui ? Où ? Quand ? Que se passe-t-il ?** Il suit un ordre : on pose d'abord la situation, puis un événement la change, jusqu'à une fin."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les cinq étapes d'un récit.",
+     "alt": "Cinq cases alignées : situation initiale, élément perturbateur, péripéties, résolution, situation finale, avec une flèche indiquant que le récit avance dans le temps.",
+     "figure": {
+      "kind": "shapes",
+      "w": 570,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 40,
+        "w": 100,
+        "h": 50,
+        "stroke": "ink",
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 62,
+        "text": "Situation",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 80,
+        "text": "initiale",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 40,
+        "w": 100,
+        "h": 50,
+        "stroke": "ink",
+        "fill": "lightorange",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 62,
+        "text": "Élément",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 80,
+        "text": "perturbateur",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 40,
+        "w": 100,
+        "h": 50,
+        "stroke": "ink",
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 70,
+        "text": "Péripéties",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 340,
+        "y": 40,
+        "w": 100,
+        "h": 50,
+        "stroke": "ink",
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 390,
+        "y": 70,
+        "text": "Résolution",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 450,
+        "y": 40,
+        "w": 100,
+        "h": 50,
+        "stroke": "ink",
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 500,
+        "y": 62,
+        "text": "Situation",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 500,
+        "y": 80,
+        "text": "finale",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 100,
+        "y1": 115,
+        "x2": 550,
+        "y2": 115,
+        "color": "grey",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 320,
+        "y": 138,
+        "text": "Le récit avance dans le temps",
+        "size": 13,
+        "color": "grey",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les temps du récit",
+     "md": "- **Imparfait** : le décor, les habitudes, les actions qui durent : Il faisait chaud.\n- **Passé simple** (ou **passé composé**) : les actions qui font avancer l'histoire : Soudain, la porte s'ouvrit.\n- Des **connecteurs** relient : d'abord, puis, soudain, alors, enfin, le lendemain."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : un début de récit",
+     "statement": "Écris la situation initiale d'un récit qui se passe au marché de Bafoussam.",
+     "steps": [
+      {
+       "md": "Qui ? Marie, une jeune vendeuse. Où ? au marché. Quand ? un samedi matin."
+      },
+      {
+       "md": "On utilise l'imparfait pour poser le décor."
+      }
+     ],
+     "answer": "**Un samedi matin, Marie vendait des tomates au marché de Bafoussam. Le soleil brillait et les clients étaient nombreux.**"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Écrire un dialogue",
+     "md": "- Les paroles sont entre **guillemets** (ou après un **tiret**, à chaque changement de personne).\n- On ajoute un verbe de parole : dit, répond, demande, crie.\n- On passe à la ligne à chaque nouvelle personne.\n\n— Où vas-tu ? demanda Paul.\n— Au marché, répondit Ngono."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : ponctuer un dialogue",
+     "statement": "Écris correctement : Ngono demande à Paul où il va. Paul répond qu'il va au marché.",
+     "steps": [
+      {
+       "md": "Phrase de Ngono : « Où vas-tu ? » demande-t-elle. (point d'interrogation)."
+      },
+      {
+       "md": "Réponse de Paul : « Je vais au marché », répond-il."
+      }
+     ],
+     "answer": "**— Où vas-tu ? demande Ngono.\n— Je vais au marché, répond Paul.**"
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Pièges",
+     "md": "- Un récit sans élément perturbateur n'est pas une histoire.\n- Ne change pas de temps sans raison : reste à l'imparfait pour le décor, au passé simple pour l'action.\n- Chaque phrase commence par une majuscule et se termine par un point."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-recit-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-recit-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-recit-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-recit-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-recit-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-francais-recit-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Un bon récit est relu : accords, ponctuation, orthographe."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Quelle étape change la situation d'un récit ?",
+   "choices": [
+    "la situation initiale",
+    "l'élément perturbateur",
+    "la situation finale",
+    "la signature"
+   ],
+   "answer": 1,
+   "explanation": "C'est l'événement qui lance l'histoire.",
+   "id": "cm2-francais-recit-01",
+   "chapter": "cm2-francais-recit",
+   "tier": "application",
+   "lesson": "cm2-francais-recit-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Pour décrire le décor, on emploie surtout…",
+   "choices": [
+    "le futur",
+    "l'impératif",
+    "le conditionnel",
+    "l'imparfait"
+   ],
+   "answer": 3,
+   "explanation": "L'imparfait installe le décor.",
+   "id": "cm2-francais-recit-02",
+   "chapter": "cm2-francais-recit",
+   "tier": "application",
+   "lesson": "cm2-francais-recit-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "truefalse",
+   "difficulty": 1,
+   "prompt": "Vrai ou faux : à chaque nouvelle personne qui parle, on passe à la ligne.",
+   "answer": true,
+   "explanation": "C'est la règle du dialogue.",
+   "id": "cm2-francais-recit-03",
+   "chapter": "cm2-francais-recit",
+   "tier": "application",
+   "lesson": "cm2-francais-recit-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 2,
+   "prompt": "Quel verbe de parole convient pour une question ?",
+   "choices": [
+    "demanda",
+    "cria joyeusement",
+    "pesa",
+    "dormit"
+   ],
+   "answer": 0,
+   "explanation": "« demanda » introduit une question.",
+   "id": "cm2-francais-recit-04",
+   "chapter": "cm2-francais-recit",
+   "tier": "approfondissement",
+   "lesson": "cm2-francais-recit-fiche",
+   "points": 2,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "open",
+   "difficulty": 2,
+   "prompt": "Écris 3 phrases de début de récit : un matin, à Limbé, un pêcheur prépare sa pirogue.",
+   "model": "Un matin, à Limbé, Essomba préparait sa pirogue. La mer était calme et le ciel clair. Il se sentait heureux.",
+   "rubric": [
+    "Qui, où, quand sont présents.",
+    "Les verbes sont à l'imparfait.",
+    "Les phrases ont une majuscule et un point."
+   ],
+   "explanation": "On pose le personnage, le lieu, le temps et on utilise l'imparfait.",
+   "id": "cm2-francais-recit-05",
+   "chapter": "cm2-francais-recit",
+   "tier": "approfondissement",
+   "lesson": "cm2-francais-recit-fiche",
+   "points": 2,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "problem",
+   "difficulty": 3,
+   "prompt": "Rédaction guidée : « Un soir, à Garoua, Amina rentre et trouve la porte ouverte… »",
+   "parts": [
+    {
+     "kind": "open",
+     "prompt": "Écris l'élément perturbateur (2 à 3 phrases) au passé simple ou au passé composé.",
+     "model": "Amina entra doucement. Dans la cour, un petit chat tremblait de peur.",
+     "rubric": [
+      "Un événement qui change la situation.",
+      "Temps du passé cohérent.",
+      "Phrases correctes."
+     ],
+     "explanation": "On raconte ce qui arrive au personnage.",
+     "points": 2,
+     "id": "cm2-francais-recit-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Écris un petit dialogue de 2 répliques entre Amina et sa mère.",
+     "model": "— Maman, qui a ouvert la porte ? demanda Amina.\n— C'est moi, répondit sa mère, je cherchais le chat.",
+     "rubric": [
+      "Tirets ou guillemets.",
+      "Verbes de parole.",
+      "Ponctuation correcte."
+     ],
+     "explanation": "On revient à la ligne à chaque réplique.",
+     "points": 2,
+     "id": "cm2-francais-recit-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Écris la situation finale en une phrase.",
+     "model": "Le chat s'endormit près du feu et Amina sourit.",
+     "rubric": [
+      "Une phrase qui clôt l'histoire."
+     ],
+     "explanation": "La fin résout le problème.",
+     "points": 1,
+     "id": "cm2-francais-recit-06-c"
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "id": "cm2-francais-recit-06",
+   "chapter": "cm2-francais-recit",
+   "tier": "examen",
+   "lesson": "cm2-francais-recit-fiche",
+   "points": 5,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "La situation initiale présente…",
+   "choices": [
+    "seulement la fin",
+    "un dialogue",
+    "les personnages, le lieu et le moment",
+    "une lettre"
+   ],
+   "answer": 2,
+   "explanation": "Elle installe le décor.",
+   "id": "cm2-francais-recit-q1",
+   "chapter": "cm2-francais-recit",
+   "tier": "autoeval",
+   "lesson": "cm2-francais-recit-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "« Soudain, la porte s'ouvrit » est…",
+   "choices": [
+    "un décor",
+    "une description",
+    "une action qui fait avancer l'histoire",
+    "un titre"
+   ],
+   "answer": 2,
+   "explanation": "Passé simple pour l'action.",
+   "id": "cm2-francais-recit-q2",
+   "chapter": "cm2-francais-recit",
+   "tier": "autoeval",
+   "lesson": "cm2-francais-recit-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Dans un dialogue, un tiret indique…",
+   "choices": [
+    "le début d'une réplique",
+    "une question",
+    "la fin du texte",
+    "un nom propre"
+   ],
+   "answer": 0,
+   "explanation": "Il marque le changement de locuteur.",
+   "id": "cm2-francais-recit-q3",
+   "chapter": "cm2-francais-recit",
+   "tier": "autoeval",
+   "lesson": "cm2-francais-recit-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Un connecteur de temps est…",
+   "choices": [
+    "bleu",
+    "joli",
+    "rapidement fait",
+    "puis"
+   ],
+   "answer": 3,
+   "explanation": "Puis relie des événements.",
+   "id": "cm2-francais-recit-q4",
+   "chapter": "cm2-francais-recit",
+   "tier": "autoeval",
+   "lesson": "cm2-francais-recit-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "La situation finale…",
+   "choices": [
+    "pose le décor",
+    "termine le récit",
+    "introduit un problème",
+    "est facultative en tout cas"
+   ],
+   "answer": 1,
+   "explanation": "C'est la fin.",
+   "id": "cm2-francais-recit-q5",
+   "chapter": "cm2-francais-recit",
+   "tier": "autoeval",
+   "lesson": "cm2-francais-recit-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  }
+ ]
+}

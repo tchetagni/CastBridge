@@ -1,0 +1,401 @@
+{
+ "chapter": "cp-sciences-air-ch",
+ "lessons": [
+  {
+   "id": "cp-sciences-air-fiche",
+   "title": "L'air et le vent",
+   "minutes": 10,
+   "readAloud": true,
+   "programRef": "CP — Découverte du monde / sciences : l'air (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Dire que l'air existe même si on ne le voit pas.",
+    "Dire à quoi sert l'air.",
+    "Reconnaître le vent comme de l'air qui bouge."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cp-sciences-air-01",
+    "cp-sciences-air-02",
+    "cp-sciences-air-03",
+    "cp-sciences-air-04",
+    "cp-sciences-air-05",
+    "cp-sciences-air-06"
+   ],
+   "selfCheck": [
+    "cp-sciences-air-q1",
+    "cp-sciences-air-q2",
+    "cp-sciences-air-q3",
+    "cp-sciences-air-q4",
+    "cp-sciences-air-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que l'idée « l'air existe, on ne le voit pas » est bien celle attendue (CP)."
+   ],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "L'air est partout. On ne le voit pas, mais on le sent quand il y a du vent.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "L'air",
+     "md": "L'**air** est tout autour de nous. On ne le voit pas. On ne peut pas le toucher comme une pierre.\n\nPourtant il existe : on sent le **vent** sur la peau."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "À quoi sert l'air ?",
+     "md": "- On **respire** l'air avec le nez et la bouche.\n- Le **vent** est de l'air qui bouge.\n- Il gonfle les ballons et les pneus.\n- Il fait voler les cerfs-volants."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 60,
+        "w": 100,
+        "h": 100,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "radius": 10
+       },
+       {
+        "t": "circle",
+        "cx": 215,
+        "cy": 110,
+        "r": 45,
+        "fill": "lightorange",
+        "stroke": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 330,
+        "cy": 110,
+        "r": 20,
+        "fill": "lightyellow",
+        "stroke": "ink"
+       },
+       {
+        "t": "path",
+        "d": "M130 90 L170 90",
+        "stroke": "blue",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 115,
+        "text": "le vent",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 215,
+        "y": 115,
+        "text": "le ballon",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 165,
+        "text": "la bulle",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 215,
+        "y": 185,
+        "text": "gonflé d'air",
+        "size": 14,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": false
+       }
+      ]
+     },
+     "caption": "L'air se sent et se voit dans les objets",
+     "alt": "Le vent représenté par un trait, un ballon gonflé d'air et une bulle."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : le ballon",
+     "statement": "Fotso gonfle un ballon. Qu'y a-t-il dedans ?",
+     "steps": [
+      {
+       "md": "Il souffle dans le ballon."
+      },
+      {
+       "md": "Le ballon grossit."
+      }
+     ],
+     "answer": "**Il y a de l'air dans le ballon.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : le cerf-volant",
+     "statement": "Pourquoi le cerf-volant d'Amina monte-t-il ?",
+     "steps": [
+      {
+       "md": "On ne voit rien d'autre que le ciel."
+      },
+      {
+       "md": "Le vent pousse le cerf-volant."
+      }
+     ],
+     "answer": "**Le vent, de l'air qui bouge, le fait monter.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention !",
+     "md": "On ne met jamais un sac en plastique sur la tête : on ne pourrait plus respirer."
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-sciences-air-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-sciences-air-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-sciences-air-03"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Que respire-t-on ?",
+   "explanation": "On respire l'**air**.",
+   "id": "cp-sciences-air-01",
+   "chapter": "cp-sciences-air-ch",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-sciences-air-fiche",
+   "points": 1,
+   "choices": [
+    "le sable",
+    "l'air",
+    "l'eau",
+    "la pierre"
+   ],
+   "answer": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : on voit l'air.",
+   "answer": false,
+   "explanation": "Faux. On ne voit pas l'air, mais on le sent quand il y a du vent.",
+   "id": "cp-sciences-air-02",
+   "chapter": "cp-sciences-air-ch",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-sciences-air-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Relie chaque objet à ce qu'il contient.",
+   "pairs": [
+    [
+     "un ballon gonflé",
+     "de l'air"
+    ],
+    [
+     "un verre d'eau",
+     "de l'eau"
+    ],
+    [
+     "un sac de riz",
+     "du riz"
+    ],
+    [
+     "un seau de sable",
+     "du sable"
+    ]
+   ],
+   "explanation": "Le ballon gonflé contient de l'air.",
+   "id": "cp-sciences-air-03",
+   "chapter": "cp-sciences-air-ch",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-sciences-air-fiche",
+   "points": 2,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qu'est-ce que le vent ?",
+   "explanation": "Le vent est de l'**air qui bouge**.",
+   "id": "cp-sciences-air-04",
+   "chapter": "cp-sciences-air-ch",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-sciences-air-fiche",
+   "points": 1,
+   "choices": [
+    "de l'eau qui coule",
+    "de la terre",
+    "du feu",
+    "de l'air qui bouge"
+   ],
+   "answer": 3,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qu'est-ce qui fait voler un cerf-volant ?",
+   "explanation": "Le vent pousse le cerf-volant.",
+   "id": "cp-sciences-air-05",
+   "chapter": "cp-sciences-air-ch",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-sciences-air-fiche",
+   "points": 1,
+   "choices": [
+    "la pluie",
+    "le vent",
+    "le sable",
+    "la nuit"
+   ],
+   "answer": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "open",
+   "prompt": "Écris une phrase : comment sais-tu qu'il y a du vent ?",
+   "model": "Je sens le vent sur mon visage. Les feuilles bougent.",
+   "rubric": [
+    "Un signe du vent est cité."
+   ],
+   "explanation": "Autres signes : les habits bougent, les nuages avancent.",
+   "id": "cp-sciences-air-06",
+   "chapter": "cp-sciences-air-ch",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cp-sciences-air-fiche",
+   "points": 3,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que contient un ballon gonflé ?",
+   "explanation": "Il contient de l'air.",
+   "id": "cp-sciences-air-q1",
+   "chapter": "cp-sciences-air-ch",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-sciences-air-fiche",
+   "points": 1,
+   "choices": [
+    "de l'eau",
+    "du sable",
+    "de la terre",
+    "de l'air"
+   ],
+   "answer": 3,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que fait-on avec le nez et la bouche ?",
+   "explanation": "On respire l'air.",
+   "id": "cp-sciences-air-q2",
+   "chapter": "cp-sciences-air-ch",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-sciences-air-fiche",
+   "points": 1,
+   "choices": [
+    "on écrit",
+    "on respire",
+    "on marche",
+    "on court"
+   ],
+   "answer": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le vent est de l'…",
+   "explanation": "Le vent, c'est de l'air qui bouge.",
+   "id": "cp-sciences-air-q3",
+   "chapter": "cp-sciences-air-ch",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-sciences-air-fiche",
+   "points": 1,
+   "choices": [
+    "eau chaude",
+    "herbe",
+    "terre",
+    "air qui bouge"
+   ],
+   "answer": 3,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Peut-on voir l'air ?",
+   "explanation": "On ne voit pas l'air.",
+   "id": "cp-sciences-air-q4",
+   "chapter": "cp-sciences-air-ch",
+   "tier": "autoeval",
+   "difficulty": 2,
+   "lesson": "cp-sciences-air-fiche",
+   "points": 1,
+   "choices": [
+    "oui, toujours",
+    "non",
+    "oui, de nuit",
+    "oui, avec les mains"
+   ],
+   "answer": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que ne met-on jamais sur la tête ?",
+   "explanation": "Avec un sac, on ne peut plus respirer.",
+   "id": "cp-sciences-air-q5",
+   "chapter": "cp-sciences-air-ch",
+   "tier": "autoeval",
+   "difficulty": 2,
+   "lesson": "cp-sciences-air-fiche",
+   "points": 1,
+   "choices": [
+    "un chapeau",
+    "une casquette",
+    "un foulard",
+    "un sac en plastique"
+   ],
+   "answer": 3,
+   "source": "Exercice original"
+  }
+ ]
+}

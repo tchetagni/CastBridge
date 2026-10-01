@@ -1,0 +1,268 @@
+{
+ "chapter": "maternelle-decouverte-fruits-ch",
+ "lessons": [
+  {
+   "id": "maternelle-decouverte-fruits-legumes",
+   "title": "Fruits et légumes",
+   "minutes": 9,
+   "readAloud": true,
+   "programRef": "Programme de l'éducation maternelle, moyenne section (MINEDUB) — découverte du monde, reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant de maternelle",
+   "objectives": [
+    "Nommer quelques fruits et légumes.",
+    "Dire qu'ils sont bons pour la santé."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "maternelle-decouverte-fruits-legumes-01",
+    "maternelle-decouverte-fruits-legumes-02",
+    "maternelle-decouverte-fruits-legumes-03",
+    "maternelle-decouverte-fruits-legumes-04",
+    "maternelle-decouverte-fruits-legumes-05"
+   ],
+   "selfCheck": [],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "Les fruits et les légumes nous aident à grandir.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 205,
+      "items": [
+       {
+        "t": "path",
+        "d": "M 90 70 C 124 70 134 113 116 136 C 101 154 64 150 57 121 C 51 94 64 70 90 70 Z",
+        "fill": "orange",
+        "stroke": "ink"
+       },
+       {
+        "t": "path",
+        "d": "M 93 65 C 102 59 114 60 120 65 C 111 71 100 70 93 65 Z",
+        "fill": "green",
+        "stroke": "ink"
+       },
+       {
+        "t": "path",
+        "d": "M 230 70 Q 280 150 360 90 Q 285 128 230 70 Z",
+        "fill": "yellow",
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 185,
+        "text": "mangue",
+        "size": 24,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 295,
+        "y": 185,
+        "text": "banane",
+        "size": 24,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Deux fruits",
+     "alt": "Une mangue orange avec sa feuille et une banane jaune."
+    },
+    {
+     "type": "audio",
+     "text": "Une mangue. Une banane.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "text",
+     "md": "Des **fruits** : mangue, banane, ananas, papaye, orange. Des **légumes** : tomate, carotte, gombo, aubergine."
+    },
+    {
+     "type": "audio",
+     "text": "Des fruits : mangue, banane, ananas, papaye, orange. Des légumes : tomate, carotte, gombo, aubergine.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "example",
+     "title": "Fruit ou légume ?",
+     "statement": "La mangue est-elle un fruit ou un légume ?",
+     "steps": [
+      {
+       "md": "La mangue est sucrée."
+      },
+      {
+       "md": "Elle pousse sur un arbre."
+      },
+      {
+       "md": "C'est un fruit."
+      }
+     ],
+     "answer": "C'est un **fruit**."
+    },
+    {
+     "type": "audio",
+     "text": "La mangue est un fruit !",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "exercise",
+     "ref": "maternelle-decouverte-fruits-legumes-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "maternelle-decouverte-fruits-legumes-03"
+    }
+   ],
+   "reviewNotes": [
+    "La tomate est botaniquement un fruit mais se classe comme légume à table ; simplification à valider. Aliments courants (manioc, plantain) non traités ici."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "maternelle-decouverte-fruits-legumes-01",
+   "chapter": "maternelle-decouverte-fruits-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "maternelle-decouverte-fruits-legumes",
+   "prompt": "Quel aliment est un fruit ?",
+   "choices": [
+    "La carotte",
+    "La banane",
+    "Le gombo"
+   ],
+   "answer": 1,
+   "explanation": "La **banane** est un fruit.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "maternelle-decouverte-fruits-legumes-02",
+   "chapter": "maternelle-decouverte-fruits-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "maternelle-decouverte-fruits-legumes",
+   "prompt": "Quel aliment est un légume ?",
+   "choices": [
+    "L'ananas",
+    "La mangue",
+    "La tomate"
+   ],
+   "answer": 2,
+   "explanation": "La **tomate** est le plus souvent mangée comme un légume.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "maternelle-decouverte-fruits-legumes-03",
+   "chapter": "maternelle-decouverte-fruits-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "maternelle-decouverte-fruits-legumes",
+   "prompt": "De quelle couleur est une banane mûre ?",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 205,
+    "items": [
+     {
+      "t": "path",
+      "d": "M 90 70 C 124 70 134 113 116 136 C 101 154 64 150 57 121 C 51 94 64 70 90 70 Z",
+      "fill": "orange",
+      "stroke": "ink"
+     },
+     {
+      "t": "path",
+      "d": "M 93 65 C 102 59 114 60 120 65 C 111 71 100 70 93 65 Z",
+      "fill": "green",
+      "stroke": "ink"
+     },
+     {
+      "t": "path",
+      "d": "M 230 70 Q 280 150 360 90 Q 285 128 230 70 Z",
+      "fill": "yellow",
+      "stroke": "ink"
+     },
+     {
+      "t": "text",
+      "x": 90,
+      "y": 185,
+      "text": "mangue",
+      "size": 24,
+      "color": "ink",
+      "bold": true,
+      "anchor": "middle"
+     },
+     {
+      "t": "text",
+      "x": 295,
+      "y": 185,
+      "text": "banane",
+      "size": 24,
+      "color": "ink",
+      "bold": true,
+      "anchor": "middle"
+     }
+    ]
+   },
+   "choices": [
+    "Jaune",
+    "Rouge",
+    "Bleue"
+   ],
+   "answer": 0,
+   "explanation": "Une banane mûre est **jaune**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "maternelle-decouverte-fruits-legumes-04",
+   "chapter": "maternelle-decouverte-fruits-ch",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "maternelle-decouverte-fruits-legumes",
+   "prompt": "Les fruits et les légumes sont bons pour la santé.",
+   "answer": true,
+   "explanation": "Oui, on en mange tous les jours.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "maternelle-decouverte-fruits-legumes-05",
+   "chapter": "maternelle-decouverte-fruits-ch",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "maternelle-decouverte-fruits-legumes",
+   "prompt": "Relie l'aliment à sa catégorie.",
+   "pairs": [
+    [
+     "la papaye",
+     "fruit"
+    ],
+    [
+     "la carotte",
+     "légume"
+    ]
+   ],
+   "explanation": "Papaye : fruit. Carotte : légume.",
+   "source": "Exercice original"
+  }
+ ]
+}

@@ -1,0 +1,507 @@
+{
+ "chapter": "cm1-francais-orthographe",
+ "lessons": [
+  {
+   "id": "cm1-francais-homophones",
+   "title": "Les homophones grammaticaux",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CM1 — Orthographe : homophones grammaticaux (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Distinguer a / à, et / est, son / sont, on / ont, ou / où.",
+    "Distinguer ces / ses et ce / se.",
+    "Appliquer le truc de remplacement pour choisir la bonne écriture."
+   ],
+   "prerequisites": [
+    "cm1-francais-nature"
+   ],
+   "exercises": [
+    "cm1-francais-homophones-01",
+    "cm1-francais-homophones-02",
+    "cm1-francais-homophones-03",
+    "cm1-francais-homophones-04",
+    "cm1-francais-homophones-05",
+    "cm1-francais-homophones-06"
+   ],
+   "selfCheck": [
+    "cm1-francais-homophones-q1",
+    "cm1-francais-homophones-q2",
+    "cm1-francais-homophones-q3",
+    "cm1-francais-homophones-q4",
+    "cm1-francais-homophones-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier la liste des homophones au programme du CM1 (ce/se, c'est/s'est, leur/leurs…) : certains sont volontairement absents."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les homophones",
+     "md": "Des **homophones** sont des mots qui **se prononcent pareil** mais ne s'écrivent pas pareil et n'ont pas le même sens. Pour choisir, on **remplace** le mot par un autre."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les couples à retenir",
+     "md": "- **a** (verbe avoir) : on peut mettre *avait*. **à** (préposition) : on ne peut pas. *Il a faim. Il va à Douala.*\n- **et** (relie) : on peut mettre *et puis*. **est** (verbe être) : on peut mettre *était*.\n- **on** : on peut mettre *il*. **ont** (verbe avoir) : on peut mettre *avaient*.\n- **son** : on peut mettre *mon*. **sont** (verbe être) : on peut mettre *étaient*.\n- **ou** (choix) : on peut mettre *ou bien*. **où** (lieu, temps) : on ne peut pas."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Ces / ses et ce / se",
+     "md": "- **ces** : montre (*ces mangues-là*). **ses** : appartient à lui ou à elle (*ses mangues*, mettre *mes*).\n- **ce** : devant un nom, mettre *ce garçon* ; **se** : devant un verbe, mettre *me* (*il se lave*, je me lave)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 160,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 20,
+        "w": 250,
+        "h": 30,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 6
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 20,
+        "w": 250,
+        "h": 30,
+        "fill": "lightorange",
+        "stroke": "red",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 145,
+        "y": 41,
+        "text": "a → avait",
+        "size": 16,
+        "color": "blue",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 415,
+        "y": 41,
+        "text": "à → on ne peut pas",
+        "size": 16,
+        "color": "red",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 60,
+        "w": 250,
+        "h": 30,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 6
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 60,
+        "w": 250,
+        "h": 30,
+        "fill": "lightorange",
+        "stroke": "red",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 145,
+        "y": 81,
+        "text": "et → et puis",
+        "size": 16,
+        "color": "blue",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 415,
+        "y": 81,
+        "text": "est → était",
+        "size": 16,
+        "color": "red",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 100,
+        "w": 250,
+        "h": 30,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 6
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 100,
+        "w": 250,
+        "h": 30,
+        "fill": "lightorange",
+        "stroke": "red",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 145,
+        "y": 121,
+        "text": "on → il",
+        "size": 16,
+        "color": "blue",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 415,
+        "y": 121,
+        "text": "ont → avaient",
+        "size": 16,
+        "color": "red",
+        "bold": true,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Les trucs de remplacement.",
+     "alt": "Six cases : a se remplace par avait, à ne se remplace pas ; et par et puis, est par était ; on par il, ont par avaient."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : a ou à ?",
+     "statement": "Complète : « Ma sœur ___ un cahier ___ carreaux. »",
+     "steps": [
+      {
+       "md": "Premier trou : « Ma sœur avait un cahier » fonctionne : c'est le verbe avoir → **a**."
+      },
+      {
+       "md": "Second trou : « avait carreaux » est impossible : c'est la préposition → **à**."
+      }
+     ],
+     "answer": "**Ma sœur a un cahier à carreaux.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : son ou sont ?",
+     "statement": "Complète : « Ils ___ allés chercher ___ vélo. »",
+     "steps": [
+      {
+       "md": "« Ils étaient allés » : on peut dire étaient → **sont**."
+      },
+      {
+       "md": "« mon vélo » : on peut dire mon → **son**."
+      }
+     ],
+     "answer": "**Ils sont allés chercher son vélo.**"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode",
+     "md": "1. Je lis la phrase et je repère le mot hésitant.\n2. Je remplace par le mot-test (avait, était, avaient, mon, ou bien…).\n3. Si la phrase garde du sens : c'est le mot du test. Sinon : l'autre."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Écrire « il à faim » : il **a** faim.\n- Écrire « les enfants son là » : ils **sont** là.\n- Oublier l'accent de **où**."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-homophones-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-homophones-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-homophones-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-homophones-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-homophones-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-homophones-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "cm1-francais-homophones-01",
+   "chapter": "cm1-francais-orthographe",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "mcq",
+   "prompt": "Complète : « Tchoua ___ un chien. »",
+   "choices": [
+    "à",
+    "as",
+    "ah",
+    "a"
+   ],
+   "answer": 3,
+   "explanation": "On peut dire « avait » : verbe avoir, a.",
+   "points": 1,
+   "lesson": "cm1-francais-homophones",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-homophones-02",
+   "chapter": "cm1-francais-orthographe",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : dans « Paul est grand », on peut remplacer « est » par « était ».",
+   "answer": true,
+   "explanation": "Vrai : c'est le verbe être, on écrit est.",
+   "points": 1,
+   "lesson": "cm1-francais-homophones",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-homophones-03",
+   "chapter": "cm1-francais-orthographe",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "matching",
+   "prompt": "Associe chaque phrase au mot qui convient.",
+   "pairs": [
+    [
+     "Ils ___ partis.",
+     "sont"
+    ],
+    [
+     "Elle prend ___ sac.",
+     "son"
+    ],
+    [
+     "Veux-tu du thé ___ du café ?",
+     "ou"
+    ],
+    [
+     "Les voisins ___ des poules.",
+     "ont"
+    ]
+   ],
+   "explanation": "sont (étaient) ; son (mon) ; ou (ou bien) ; ont (avaient).",
+   "points": 2,
+   "lesson": "cm1-francais-homophones",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-homophones-04",
+   "chapter": "cm1-francais-orthographe",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "mcq",
+   "prompt": "Complète : « Voici les cahiers de Marie ; ___ crayons sont sur la table. »",
+   "choices": [
+    "ces",
+    "c'est",
+    "ses",
+    "ce"
+   ],
+   "answer": 2,
+   "explanation": "Les crayons appartiennent à Marie : on peut dire « mes crayons » → ses.",
+   "method": "Remplacer par mes.",
+   "points": 1,
+   "lesson": "cm1-francais-homophones",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-homophones-05",
+   "chapter": "cm1-francais-orthographe",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "open",
+   "prompt": "Écris une phrase avec « où » (lieu) et une phrase avec « ou » (choix).",
+   "model": "Où habites-tu ? Veux-tu du riz ou du manioc ?",
+   "rubric": [
+    "« où » porte l'accent grave.",
+    "« ou » exprime un choix.",
+    "Les phrases sont correctes."
+   ],
+   "explanation": "Où (lieu) avec accent ; ou (choix, ou bien) sans accent.",
+   "points": 2,
+   "lesson": "cm1-francais-homophones",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-homophones-06",
+   "chapter": "cm1-francais-orthographe",
+   "tier": "examen",
+   "difficulty": 2,
+   "kind": "problem",
+   "prompt": "Complète : « Mes cousins ___ arrivés de Garoua. ___ amis ___ avec eux. On ___ préparé du riz. »",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "« Mes cousins ___ arrivés »",
+     "choices": [
+      "son",
+      "sont",
+      "ont",
+      "on"
+     ],
+     "answer": 1,
+     "explanation": "« étaient arrivés » : verbe être.",
+     "id": "cm1-francais-homophones-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "« ___ amis sont avec eux » : les amis de mes cousins.",
+     "choices": [
+      "Ses",
+      "Ces",
+      "Ce",
+      "Se"
+     ],
+     "answer": 0,
+     "explanation": "Les amis de mes cousins : ses (mes amis).",
+     "id": "cm1-francais-homophones-06-b",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "« On ___ préparé du riz. »",
+     "choices": [
+      "à",
+      "as",
+      "ah",
+      "a"
+     ],
+     "answer": 3,
+     "explanation": "On avait préparé : a (avoir).",
+     "id": "cm1-francais-homophones-06-c",
+     "points": 1
+    }
+   ],
+   "lesson": "cm1-francais-homophones",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-homophones-q1",
+   "chapter": "cm1-francais-orthographe",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Pour reconnaître « ont », je mets…",
+   "choices": [
+    "mon",
+    "il",
+    "avaient",
+    "et puis"
+   ],
+   "answer": 2,
+   "explanation": "Ont = verbe avoir : avaient.",
+   "lesson": "cm1-francais-homophones"
+  },
+  {
+   "id": "cm1-francais-homophones-q2",
+   "chapter": "cm1-francais-orthographe",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Complète : « Elle va ___ Bamenda. »",
+   "choices": [
+    "a",
+    "à",
+    "as",
+    "ah"
+   ],
+   "answer": 1,
+   "explanation": "À est une préposition.",
+   "lesson": "cm1-francais-homophones"
+  },
+  {
+   "id": "cm1-francais-homophones-q3",
+   "chapter": "cm1-francais-orthographe",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Complète : « ___ est ton village ? »",
+   "choices": [
+    "Où",
+    "Ou",
+    "Hou",
+    "Ouh"
+   ],
+   "answer": 0,
+   "explanation": "Où pose une question de lieu.",
+   "lesson": "cm1-francais-homophones"
+  },
+  {
+   "id": "cm1-francais-homophones-q4",
+   "chapter": "cm1-francais-orthographe",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Complète : « Les enfants ___ contents. »",
+   "choices": [
+    "son",
+    "ont",
+    "sons",
+    "sont"
+   ],
+   "answer": 3,
+   "explanation": "Étaient contents : sont.",
+   "lesson": "cm1-francais-homophones"
+  },
+  {
+   "id": "cm1-francais-homophones-q5",
+   "chapter": "cm1-francais-orthographe",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Complète : « Le chat ___ couché sur la natte. »",
+   "choices": [
+    "et",
+    "es",
+    "est",
+    "ai"
+   ],
+   "answer": 2,
+   "explanation": "Était couché : est.",
+   "lesson": "cm1-francais-homophones"
+  }
+ ]
+}

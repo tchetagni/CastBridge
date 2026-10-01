@@ -1,0 +1,376 @@
+{
+ "chapter": "sil-francais-alphabet-ch",
+ "lessons": [
+  {
+   "id": "sil-francais-alphabet",
+   "title": "L'alphabet",
+   "minutes": 10,
+   "readAloud": true,
+   "programRef": "SIL — Sons et lettres : l'alphabet, majuscules et minuscules (reconstitué)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Réciter l'alphabet dans l'ordre.",
+    "Faire la différence entre majuscule et minuscule.",
+    "Trouver la lettre qui vient avant ou après."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "sil-francais-alphabet-01",
+    "sil-francais-alphabet-02",
+    "sil-francais-alphabet-03",
+    "sil-francais-alphabet-04",
+    "sil-francais-alphabet-05",
+    "sil-francais-alphabet-06"
+   ],
+   "selfCheck": [
+    "sil-francais-alphabet-q1",
+    "sil-francais-alphabet-q2",
+    "sil-francais-alphabet-q3",
+    "sil-francais-alphabet-q4",
+    "sil-francais-alphabet-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier le choix des écritures (script / cursive) : la figure n'affiche que le script d'imprimerie.",
+    "La figure place les minuscules en petit corps (12) : à relire pour la lisibilité sur TV."
+   ],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z. Bravo !",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "L'alphabet",
+     "md": "L'alphabet a **26 lettres**. On les écrit en **majuscules** (A, B, C) ou en **minuscules** (a, b, c)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 130,
+      "items": [
+       {
+        "t": "text",
+        "x": 240,
+        "y": 40,
+        "text": "A B C D E F G H I J K L M",
+        "size": 22,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 85,
+        "text": "N O P Q R S T U V W X Y Z",
+        "size": 22,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 120,
+        "text": "a b c d e f g h i j k l m   n o p q r s t u v w x y z",
+        "size": 12
+       }
+      ]
+     },
+     "caption": "Les 26 lettres.",
+     "alt": "Les lettres de A à Z en majuscules sur deux lignes, puis en minuscules."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Majuscule, quand ?",
+     "md": "On met une majuscule au **début d'une phrase** et au **début d'un prénom** : Ngono, Paul, Yaoundé."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : après la lettre",
+     "statement": "Quelle lettre vient juste après C ?",
+     "steps": [
+      {
+       "md": "Je chante : A, B, C…"
+      },
+      {
+       "md": "La lettre suivante est D."
+      }
+     ],
+     "answer": "Après C vient **D**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : majuscule ou minuscule",
+     "statement": "Associe la majuscule M à sa minuscule.",
+     "steps": [
+      {
+       "md": "M est la grande lettre."
+      },
+      {
+       "md": "Sa petite lettre est m."
+      }
+     ],
+     "answer": "**M** et **m** sont la même lettre."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer !"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-francais-alphabet-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-francais-alphabet-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-francais-alphabet-03"
+    },
+    {
+     "type": "heading",
+     "text": "Pour aller plus loin"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-francais-alphabet-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-francais-alphabet-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-francais-alphabet-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sil-francais-alphabet-01",
+   "chapter": "sil-francais-alphabet-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-francais-alphabet",
+   "prompt": "Quelle lettre vient juste après B ?",
+   "choices": [
+    "A",
+    "D",
+    "E",
+    "C"
+   ],
+   "answer": 3,
+   "explanation": "A, B, C : après B vient C."
+  },
+  {
+   "id": "sil-francais-alphabet-02",
+   "chapter": "sil-francais-alphabet-ch",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-francais-alphabet",
+   "prompt": "Vrai ou faux : l'alphabet a 26 lettres.",
+   "answer": true,
+   "explanation": "On compte 26 lettres de A à Z."
+  },
+  {
+   "id": "sil-francais-alphabet-03",
+   "chapter": "sil-francais-alphabet-ch",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sil-francais-alphabet",
+   "prompt": "Associe chaque majuscule à sa minuscule.",
+   "pairs": [
+    [
+     "A",
+     "a"
+    ],
+    [
+     "B",
+     "b"
+    ],
+    [
+     "M",
+     "m"
+    ],
+    [
+     "R",
+     "r"
+    ]
+   ],
+   "explanation": "Chaque lettre existe en majuscule et en minuscule."
+  },
+  {
+   "id": "sil-francais-alphabet-04",
+   "chapter": "sil-francais-alphabet-ch",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sil-francais-alphabet",
+   "prompt": "Combien de lettres dans l'alphabet ?",
+   "answer": 26,
+   "tolerance": 0,
+   "explanation": "Il y a 26 lettres, de A à Z."
+  },
+  {
+   "id": "sil-francais-alphabet-05",
+   "chapter": "sil-francais-alphabet-ch",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sil-francais-alphabet",
+   "prompt": "Quelle est la dernière lettre de l'alphabet ?",
+   "choices": [
+    "A",
+    "Z",
+    "M",
+    "Y"
+   ],
+   "answer": 1,
+   "explanation": "On finit par Z."
+  },
+  {
+   "id": "sil-francais-alphabet-06",
+   "chapter": "sil-francais-alphabet-ch",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sil-francais-alphabet",
+   "prompt": "Jeu de lettres.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quelle lettre vient juste avant E ?",
+     "choices": [
+      "F",
+      "D",
+      "C",
+      "A"
+     ],
+     "answer": 1,
+     "explanation": "A B C D E : avant E vient D.",
+     "id": "sil-francais-alphabet-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quel mot commence par une majuscule ?",
+     "choices": [
+      "mangue",
+      "riz",
+      "vélo",
+      "Amina"
+     ],
+     "answer": 3,
+     "explanation": "Un prénom commence par une majuscule : Amina.",
+     "id": "sil-francais-alphabet-06-b",
+     "points": 1
+    }
+   ],
+   "explanation": "Relis chaque question avec calme."
+  },
+  {
+   "id": "sil-francais-alphabet-q1",
+   "chapter": "sil-francais-alphabet-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-francais-alphabet",
+   "prompt": "Quelle est la première lettre de l'alphabet ?",
+   "choices": [
+    "A",
+    "B",
+    "Z",
+    "M"
+   ],
+   "answer": 0,
+   "explanation": "On commence par A."
+  },
+  {
+   "id": "sil-francais-alphabet-q2",
+   "chapter": "sil-francais-alphabet-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-francais-alphabet",
+   "prompt": "Après la lettre G vient…",
+   "choices": [
+    "F",
+    "I",
+    "H",
+    "J"
+   ],
+   "answer": 2,
+   "explanation": "G, H, I : après G vient H."
+  },
+  {
+   "id": "sil-francais-alphabet-q3",
+   "chapter": "sil-francais-alphabet-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-francais-alphabet",
+   "prompt": "« Paul » commence par…",
+   "choices": [
+    "une minuscule",
+    "un chiffre",
+    "une majuscule",
+    "un point"
+   ],
+   "answer": 2,
+   "explanation": "Les prénoms commencent par une majuscule."
+  },
+  {
+   "id": "sil-francais-alphabet-q4",
+   "chapter": "sil-francais-alphabet-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-francais-alphabet",
+   "prompt": "Quelle est la minuscule de la lettre T ?",
+   "choices": [
+    "t",
+    "d",
+    "f",
+    "l"
+   ],
+   "answer": 0,
+   "explanation": "T se fait aussi en minuscule : t."
+  },
+  {
+   "id": "sil-francais-alphabet-q5",
+   "chapter": "sil-francais-alphabet-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-francais-alphabet",
+   "prompt": "Quelle suite est dans le bon ordre ?",
+   "choices": [
+    "M, L, K",
+    "L, K, M",
+    "K, M, L",
+    "K, L, M"
+   ],
+   "answer": 3,
+   "explanation": "On dit K, L, M."
+  }
+ ]
+}

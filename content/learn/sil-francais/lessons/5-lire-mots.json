@@ -1,0 +1,459 @@
+{
+ "chapter": "sil-francais-lire-mots-ch",
+ "lessons": [
+  {
+   "id": "sil-francais-lire-mots",
+   "title": "Lire de premiers mots",
+   "minutes": 12,
+   "readAloud": true,
+   "programRef": "SIL — Lecture : déchiffrer syllabes et petits mots (reconstitué)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Lire les syllabes ma, mi, mo, la, li, lo, pa, pi, po.",
+    "Assembler des syllabes pour lire un mot.",
+    "Lire une petite phrase très simple."
+   ],
+   "prerequisites": [
+    "sil-francais-syllabes"
+   ],
+   "exercises": [
+    "sil-francais-lire-mots-01",
+    "sil-francais-lire-mots-02",
+    "sil-francais-lire-mots-03",
+    "sil-francais-lire-mots-04",
+    "sil-francais-lire-mots-05",
+    "sil-francais-lire-mots-06"
+   ],
+   "selfCheck": [
+    "sil-francais-lire-mots-q1",
+    "sil-francais-lire-mots-q2",
+    "sil-francais-lire-mots-q3",
+    "sil-francais-lire-mots-q4",
+    "sil-francais-lire-mots-q5"
+   ],
+   "reviewNotes": [
+    "Le texte « Mon premier texte » est très simple et partiellement sans sens naturel (« Ma mule a mal ») : à adapter par l'enseignant selon la méthode de lecture de l'école (syllabique, globale…).",
+    "Vérifier le choix des syllabes dans l'ordre d'introduction des sons de la classe."
+   ],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "Je lis : ma, mi, mo. la, li, lo. pa, pi, po. Puis : papa, lama, vélo, une lune.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Consonne + voyelle",
+     "md": "Une consonne et une voyelle font une **syllabe** : **m + a = ma**, **l + i = li**, **p + o = po**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 130,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 30,
+        "w": 80,
+        "h": 70,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 3,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 76,
+        "text": "ma",
+        "size": 26,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 30,
+        "w": 80,
+        "h": 70,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 3,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 76,
+        "text": "mi",
+        "size": 26,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 200,
+        "y": 30,
+        "w": 80,
+        "h": 70,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 3,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 76,
+        "text": "mo",
+        "size": 26,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 30,
+        "w": 80,
+        "h": 70,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 3,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 330.0,
+        "y": 76,
+        "text": "la",
+        "size": 26,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 380,
+        "y": 30,
+        "w": 80,
+        "h": 70,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 3,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 420.0,
+        "y": 76,
+        "text": "li",
+        "size": 26,
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Je lis les syllabes.",
+     "alt": "Cinq cartes : ma, mi, mo, la, li."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Je lis un mot",
+     "md": "Je lis chaque syllabe. Puis je les colle : **pa** + **pa** = **papa**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : lire « lune »",
+     "statement": "Comment lit-on « lune » ?",
+     "steps": [
+      {
+       "md": "Je découpe : lu-ne."
+      },
+      {
+       "md": "Je lis lu, puis ne, et je colle : lune."
+      }
+     ],
+     "answer": "On lit **lune**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : lire une phrase",
+     "statement": "Lis : « Papa a une lime. »",
+     "steps": [
+      {
+       "md": "Je lis mot par mot : Papa — a — une — lime."
+      },
+      {
+       "md": "Je relis plus vite sans m'arrêter."
+      }
+     ],
+     "answer": "**Papa a une lime.**"
+    },
+    {
+     "type": "text",
+     "md": "**Mon premier texte.** Ma mule a mal. Papa a une lime. Mimi a un vélo."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer !"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-francais-lire-mots-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-francais-lire-mots-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-francais-lire-mots-03"
+    },
+    {
+     "type": "heading",
+     "text": "Pour aller plus loin"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-francais-lire-mots-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-francais-lire-mots-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-francais-lire-mots-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sil-francais-lire-mots-01",
+   "chapter": "sil-francais-lire-mots-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-francais-lire-mots",
+   "prompt": "Comment lit-on « mi » ?",
+   "choices": [
+    "ma",
+    "mi",
+    "mo",
+    "li"
+   ],
+   "answer": 1,
+   "explanation": "m + i = mi."
+  },
+  {
+   "id": "sil-francais-lire-mots-02",
+   "chapter": "sil-francais-lire-mots-ch",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-francais-lire-mots",
+   "prompt": "Vrai ou faux : p + a = pa.",
+   "answer": true,
+   "explanation": "p et a font pa."
+  },
+  {
+   "id": "sil-francais-lire-mots-03",
+   "chapter": "sil-francais-lire-mots-ch",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sil-francais-lire-mots",
+   "prompt": "Relie la syllabe à sa lecture.",
+   "pairs": [
+    [
+     "ma",
+     "m + a"
+    ],
+    [
+     "li",
+     "l + i"
+    ],
+    [
+     "po",
+     "p + o"
+    ],
+    [
+     "mu",
+     "m + u"
+    ]
+   ],
+   "explanation": "Chaque syllabe est une consonne plus une voyelle."
+  },
+  {
+   "id": "sil-francais-lire-mots-04",
+   "chapter": "sil-francais-lire-mots-ch",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sil-francais-lire-mots",
+   "prompt": "Quel mot lit-on « papa » ?",
+   "choices": [
+    "mama",
+    "lala",
+    "pipi",
+    "papa"
+   ],
+   "answer": 3,
+   "explanation": "pa + pa = papa."
+  },
+  {
+   "id": "sil-francais-lire-mots-05",
+   "chapter": "sil-francais-lire-mots-ch",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sil-francais-lire-mots",
+   "prompt": "Quel mot est écrit avec les syllabes « vé » et « lo » ?",
+   "choices": [
+    "vélo",
+    "lovo",
+    "vèlo",
+    "lévo"
+   ],
+   "answer": 0,
+   "explanation": "vé + lo = vélo."
+  },
+  {
+   "id": "sil-francais-lire-mots-06",
+   "chapter": "sil-francais-lire-mots-ch",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sil-francais-lire-mots",
+   "prompt": "Lis la phrase : « Mimi a un vélo. »",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Qui a un vélo ?",
+     "choices": [
+      "Papa",
+      "Mama",
+      "Mimi",
+      "Lulu"
+     ],
+     "answer": 2,
+     "explanation": "Mimi a un vélo.",
+     "id": "sil-francais-lire-mots-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Que possède Mimi ?",
+     "choices": [
+      "une lune",
+      "une lime",
+      "un vélo",
+      "un lama"
+     ],
+     "answer": 2,
+     "explanation": "Dans la phrase, Mimi a un vélo.",
+     "id": "sil-francais-lire-mots-06-b",
+     "points": 1
+    }
+   ],
+   "explanation": "Relis chaque question avec calme."
+  },
+  {
+   "id": "sil-francais-lire-mots-q1",
+   "chapter": "sil-francais-lire-mots-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-francais-lire-mots",
+   "prompt": "Comment lit-on « lo » ?",
+   "choices": [
+    "lo",
+    "la",
+    "li",
+    "po"
+   ],
+   "answer": 0,
+   "explanation": "l + o = lo."
+  },
+  {
+   "id": "sil-francais-lire-mots-q2",
+   "chapter": "sil-francais-lire-mots-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-francais-lire-mots",
+   "prompt": "« ma » + « ma » donne…",
+   "choices": [
+    "papa",
+    "lala",
+    "pipi",
+    "mama"
+   ],
+   "answer": 3,
+   "explanation": "ma + ma = mama."
+  },
+  {
+   "id": "sil-francais-lire-mots-q3",
+   "chapter": "sil-francais-lire-mots-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-francais-lire-mots",
+   "prompt": "Quel mot lit-on « lune » ?",
+   "choices": [
+    "mule",
+    "lune",
+    "lime",
+    "lame"
+   ],
+   "answer": 1,
+   "explanation": "lu + ne = lune."
+  },
+  {
+   "id": "sil-francais-lire-mots-q4",
+   "chapter": "sil-francais-lire-mots-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-francais-lire-mots",
+   "prompt": "Dans « Papa a une lime. », le premier mot est…",
+   "choices": [
+    "a",
+    "Papa",
+    "une",
+    "lime"
+   ],
+   "answer": 1,
+   "explanation": "La phrase commence par Papa."
+  },
+  {
+   "id": "sil-francais-lire-mots-q5",
+   "chapter": "sil-francais-lire-mots-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-francais-lire-mots",
+   "prompt": "Pour lire un mot, je lis d'abord…",
+   "choices": [
+    "la fin",
+    "l'image",
+    "rien",
+    "chaque syllabe"
+   ],
+   "answer": 3,
+   "explanation": "Je lis syllabe par syllabe, puis je colle."
+  }
+ ]
+}

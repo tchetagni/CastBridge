@@ -1,0 +1,527 @@
+{
+ "chapter": "cm2-maths-durees",
+ "lessons": [
+  {
+   "id": "cm2-maths-durees-fiche",
+   "chapter": "cm2-maths-durees",
+   "title": "Les durées",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CM2 — Mesures : durées (reconstitué)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Convertir des heures, minutes et secondes.",
+    "Calculer une durée, une heure d'arrivée ou de départ.",
+    "Additionner des durées en tenant compte du passage à 60."
+   ],
+   "prerequisites": [
+    "cm2-maths-mesures-fiche"
+   ],
+   "exercises": [
+    "cm2-maths-durees-01",
+    "cm2-maths-durees-02",
+    "cm2-maths-durees-03",
+    "cm2-maths-durees-04",
+    "cm2-maths-durees-05",
+    "cm2-maths-durees-06"
+   ],
+   "selfCheck": [
+    "cm2-maths-durees-q1",
+    "cm2-maths-durees-q2",
+    "cm2-maths-durees-q3",
+    "cm2-maths-durees-q4",
+    "cm2-maths-durees-q5"
+   ],
+   "reviewNotes": [
+    "Les durées de trajet sont fictives : à adapter à des durées réelles validées."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Le temps ne se compte pas en base 10 : **1 h = 60 min** et **1 min = 60 s**. Donc 1 h = 3 600 s. Un jour = 24 h. Quand on additionne, on convertit dès que l'on atteint 60."
+    },
+    {
+     "type": "illustration",
+     "caption": "Un car part à 8 h 40 et arrive à 11 h 15.",
+     "alt": "Une frise horaire de 8 h à 13 h. Un point rouge marque 8 h 40, un point bleu 11 h 15. Une flèche verte entre les deux indique la durée de 2 heures 35 minutes.",
+     "figure": {
+      "kind": "shapes",
+      "w": 460,
+      "h": 160,
+      "items": [
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 70,
+        "x2": 430,
+        "y2": 70,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 62,
+        "x2": 30,
+        "y2": 78,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 62,
+        "x2": 110,
+        "y2": 78,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 190,
+        "y1": 62,
+        "x2": 190,
+        "y2": 78,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 270,
+        "y1": 62,
+        "x2": 270,
+        "y2": 78,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 350,
+        "y1": 62,
+        "x2": 350,
+        "y2": 78,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 430,
+        "y1": 62,
+        "x2": 430,
+        "y2": 78,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 98,
+        "text": "8 h",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 98,
+        "text": "9 h",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 98,
+        "text": "10 h",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 98,
+        "text": "11 h",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 98,
+        "text": "12 h",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 430,
+        "y": 98,
+        "text": "13 h",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "circle",
+        "cx": 83.36,
+        "cy": 70,
+        "r": 6,
+        "stroke": "red",
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 83.36,
+        "y": 45,
+        "text": "8 h 40",
+        "size": 13,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 290.0,
+        "cy": 70,
+        "r": 6,
+        "stroke": "blue",
+        "fill": "blue"
+       },
+       {
+        "t": "text",
+        "x": 290.0,
+        "y": 45,
+        "text": "11 h 15",
+        "size": 13,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 83,
+        "y1": 125,
+        "x2": 290,
+        "y2": 125,
+        "color": "green",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 186,
+        "y": 148,
+        "text": "2 h 35 min",
+        "size": 14,
+        "color": "green",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Calculer une durée",
+     "md": "1. On va de l'heure de départ à l'**heure ronde** suivante.\n2. Puis on avance par heures entières.\n3. Enfin on ajoute les minutes de la dernière heure.\n\n8 h 40 → 9 h : 20 min ; 9 h → 11 h : 2 h ; 11 h → 11 h 15 : 15 min. Total : 2 h 35 min."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : additionner",
+     "statement": "Une réunion dure 2 h 45 min, puis une pause de 1 h 30 min. Quelle est la durée totale ?",
+     "steps": [
+      {
+       "md": "Heures : 2 + 1 = 3 h. Minutes : 45 + 30 = 75 min."
+      },
+      {
+       "md": "75 min = 1 h 15 min. Total : 3 h + 1 h 15 min = 4 h 15 min."
+      }
+     ],
+     "answer": "**La durée totale est 4 h 15 min.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : convertir",
+     "statement": "Convertis 3,5 h en heures et minutes, puis 2 h 20 min en minutes.",
+     "steps": [
+      {
+       "md": "0,5 h = 30 min : 3,5 h = 3 h 30 min."
+      },
+      {
+       "md": "2 h = 120 min ; 120 + 20 = 140 min."
+      }
+     ],
+     "answer": "**3,5 h = 3 h 30 min ; 2 h 20 min = 140 min.**"
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Pièges",
+     "md": "- 2,5 h n'est pas 2 h 50 min : 0,5 h = 30 min.\n- 75 min ne s'écrit pas 1 h 75 : c'est 1 h 15 min.\n- Quand on passe midi, on peut utiliser le format 24 h : 15 h = 3 h de l'après-midi."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-durees-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-durees-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-durees-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-durees-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-durees-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-durees-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "La seconde est l'unité de temps du système international."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "difficulty": 1,
+   "prompt": "Convertis 3 h en minutes.",
+   "answer": 180,
+   "tolerance": 0,
+   "explanation": "3 × 60 = 180.",
+   "unit": "min",
+   "id": "cm2-maths-durees-01",
+   "chapter": "cm2-maths-durees",
+   "tier": "application",
+   "lesson": "cm2-maths-durees-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 1,
+   "prompt": "Convertis 7 200 s en heures.",
+   "answer": 2,
+   "tolerance": 0,
+   "explanation": "7 200 ÷ 3 600 = 2.",
+   "unit": "h",
+   "id": "cm2-maths-durees-02",
+   "chapter": "cm2-maths-durees",
+   "tier": "application",
+   "lesson": "cm2-maths-durees-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 1,
+   "prompt": "Combien de minutes entre 14 h 10 et 15 h 00 ?",
+   "answer": 50,
+   "tolerance": 0,
+   "explanation": "De 14 h 10 à 15 h : 50 min.",
+   "unit": "min",
+   "id": "cm2-maths-durees-03",
+   "chapter": "cm2-maths-durees",
+   "tier": "application",
+   "lesson": "cm2-maths-durees-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 2,
+   "prompt": "Un film commence à 18 h 20 et dure 1 h 50 min. Il finit à 20 h et combien de minutes ?",
+   "answer": 10,
+   "tolerance": 0,
+   "explanation": "18 h 20 + 1 h 50 = 19 h 70 min = 20 h 10 : il finit à 20 h 10.",
+   "unit": "min",
+   "id": "cm2-maths-durees-04",
+   "chapter": "cm2-maths-durees",
+   "tier": "approfondissement",
+   "lesson": "cm2-maths-durees-fiche",
+   "points": 2,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 2,
+   "prompt": "Convertis 2 h 20 min en minutes.",
+   "answer": 140,
+   "tolerance": 0,
+   "explanation": "120 + 20 = 140.",
+   "unit": "min",
+   "id": "cm2-maths-durees-05",
+   "chapter": "cm2-maths-durees",
+   "tier": "approfondissement",
+   "lesson": "cm2-maths-durees-fiche",
+   "points": 2,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "problem",
+   "difficulty": 2,
+   "prompt": "Voyage Yaoundé → Douala en car (durées fictives pour l'exercice). Le car part à 7 h 30. Le trajet dure 3 h 45 min avec une pause de 20 min comprise.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Combien de minutes dure le trajet ?",
+     "answer": 225,
+     "tolerance": 0,
+     "explanation": "3 × 60 + 45 = 225.",
+     "unit": "min",
+     "points": 1,
+     "id": "cm2-maths-durees-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "À quelle heure le car arrive-t-il ?",
+     "choices": [
+      "11 h 15",
+      "10 h 75",
+      "11 h 45",
+      "10 h 45"
+     ],
+     "answer": 0,
+     "explanation": "7 h 30 + 3 h 45 = 10 h 75 min = 11 h 15.",
+     "points": 1,
+     "id": "cm2-maths-durees-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "La pause dure 20 min. Combien de minutes roule le car ?",
+     "answer": 205,
+     "tolerance": 0,
+     "explanation": "225 − 20 = 205.",
+     "unit": "min",
+     "points": 2,
+     "id": "cm2-maths-durees-06-c"
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "id": "cm2-maths-durees-06",
+   "chapter": "cm2-maths-durees",
+   "tier": "examen",
+   "lesson": "cm2-maths-durees-fiche",
+   "points": 4,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Combien de secondes dans 1 h ?",
+   "choices": [
+    "60",
+    "360",
+    "3 600",
+    "6 000"
+   ],
+   "answer": 2,
+   "explanation": "60 × 60 = 3 600.",
+   "id": "cm2-maths-durees-q1",
+   "chapter": "cm2-maths-durees",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-durees-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "1 h 45 min + 25 min =",
+   "choices": [
+    "1 h 70 min",
+    "2 h 70 min",
+    "2 h 10 min",
+    "2 h 30 min"
+   ],
+   "answer": 2,
+   "explanation": "45 + 25 = 70 min = 1 h 10 min ; 1 h + 1 h 10 = 2 h 10.",
+   "id": "cm2-maths-durees-q2",
+   "chapter": "cm2-maths-durees",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-durees-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Entre 9 h 50 et 10 h 20, il s'écoule…",
+   "choices": [
+    "30 min",
+    "70 min",
+    "1 h 30 min",
+    "20 min"
+   ],
+   "answer": 0,
+   "explanation": "10 min jusqu'à 10 h, puis 20 min : 30 min.",
+   "id": "cm2-maths-durees-q3",
+   "chapter": "cm2-maths-durees",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-durees-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "0,25 h égale…",
+   "choices": [
+    "25 min",
+    "45 min",
+    "30 min",
+    "15 min"
+   ],
+   "answer": 3,
+   "explanation": "0,25 h = ¼ h = 15 min.",
+   "id": "cm2-maths-durees-q4",
+   "chapter": "cm2-maths-durees",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-durees-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "3 h 15 min en minutes :",
+   "choices": [
+    "315 min",
+    "195 min",
+    "180 min",
+    "75 min"
+   ],
+   "answer": 1,
+   "explanation": "180 + 15 = 195.",
+   "id": "cm2-maths-durees-q5",
+   "chapter": "cm2-maths-durees",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-durees-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  }
+ ]
+}

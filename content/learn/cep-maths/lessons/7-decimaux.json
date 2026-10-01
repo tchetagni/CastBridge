@@ -1,0 +1,601 @@
+{
+ "chapter": "cep-maths-dec",
+ "lessons": [
+  {
+   "id": "cep-maths-decimaux",
+   "title": "Les nombres décimaux : lire, comparer, arrondir, ×10 ÷10",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM2 — Nombres décimaux — reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; synthèse de révision orientée examen ; à faire relire par un enseignant",
+   "objectives": [
+    "Lire et écrire un nombre décimal avec dixièmes, centièmes et millièmes.",
+    "Multiplier et diviser un décimal par 10, 100 et 1 000.",
+    "Encadrer et arrondir un décimal.",
+    "Passer d'une fraction décimale à l'écriture décimale."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cep-maths-decimaux-01",
+    "cep-maths-decimaux-02",
+    "cep-maths-decimaux-03",
+    "cep-maths-decimaux-04",
+    "cep-maths-decimaux-05",
+    "cep-maths-decimaux-06"
+   ],
+   "selfCheck": [
+    "cep-maths-decimaux-q1",
+    "cep-maths-decimaux-q2",
+    "cep-maths-decimaux-q3",
+    "cep-maths-decimaux-q4",
+    "cep-maths-decimaux-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que l'arrondi de 3,987 à « 4 » (sans « ,0 ») est accepté par le moteur de notation numérique (la valeur 4 est comparée).",
+    "Vérifier la convention d'arrondi (5 et plus on augmente) par rapport à la méthode enseignée localement."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Un nombre décimal",
+     "md": "Un nombre décimal a une **partie entière** et une **partie décimale** séparées par une virgule.\n\n- 1er chiffre après la virgule : les **dixièmes** (1/10)\n- 2e chiffre : les **centièmes** (1/100)\n- 3e chiffre : les **millièmes** (1/1 000)\n\nExemple : 12,345 = 12 unités, 3 dixièmes, 4 centièmes et 5 millièmes."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 130,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 20,
+        "w": 150,
+        "h": 28,
+        "stroke": "ink",
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 95,
+        "y": 40,
+        "text": "partie entière",
+        "size": 13,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 190,
+        "y": 20,
+        "w": 230,
+        "h": 28,
+        "stroke": "ink",
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 305,
+        "y": 40,
+        "text": "partie décimale",
+        "size": 13,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 48,
+        "w": 75,
+        "h": 30,
+        "stroke": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 95,
+        "y": 48,
+        "w": 75,
+        "h": 30,
+        "stroke": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 190,
+        "y": 48,
+        "w": 76,
+        "h": 30,
+        "stroke": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 266,
+        "y": 48,
+        "w": 76,
+        "h": 30,
+        "stroke": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 342,
+        "y": 48,
+        "w": 78,
+        "h": 30,
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 57,
+        "y": 68,
+        "text": "dizaines",
+        "size": 13,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 132,
+        "y": 68,
+        "text": "unités",
+        "size": 13,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 228,
+        "y": 68,
+        "text": "dixièmes",
+        "size": 13,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 304,
+        "y": 68,
+        "text": "centièmes",
+        "size": 13,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 381,
+        "y": 68,
+        "text": "millièmes",
+        "size": 13,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 78,
+        "w": 75,
+        "h": 40,
+        "stroke": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 95,
+        "y": 78,
+        "w": 75,
+        "h": 40,
+        "stroke": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 190,
+        "y": 78,
+        "w": 76,
+        "h": 40,
+        "stroke": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 266,
+        "y": 78,
+        "w": 76,
+        "h": 40,
+        "stroke": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 342,
+        "y": 78,
+        "w": 78,
+        "h": 40,
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 57,
+        "y": 108,
+        "text": "1",
+        "size": 24,
+        "color": "blue",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 132,
+        "y": 108,
+        "text": "2",
+        "size": 24,
+        "color": "blue",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 110,
+        "text": ",",
+        "size": 28,
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 228,
+        "y": 108,
+        "text": "3",
+        "size": 24,
+        "color": "green",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 304,
+        "y": 108,
+        "text": "4",
+        "size": 24,
+        "color": "green",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 381,
+        "y": 108,
+        "text": "5",
+        "size": 24,
+        "color": "green",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Le nombre 12,345 dans le tableau de numération décimale.",
+     "alt": "Tableau : deux cases pour la partie entière, dizaines (1) et unités (2), puis la virgule, puis trois cases pour la partie décimale, dixièmes (3), centièmes (4) et millièmes (5)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Multiplier ou diviser par 10, 100, 1 000",
+     "md": "- Quand on **multiplie** par 10, 100, 1 000, chaque chiffre devient 10, 100, 1 000 fois plus grand : la virgule se décale de 1, 2, 3 rangs **vers la droite**.\n- Quand on **divise**, la virgule se décale vers la **gauche**.\n- On complète avec des **zéros** si besoin.\n\n4,35 × 100 = 435 ; 52,6 ÷ 10 = 5,26 ; 7 ÷ 100 = 0,07."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : décaler la virgule",
+     "statement": "Calcule 0,7 × 1 000 puis 52,6 ÷ 100.",
+     "steps": [
+      {
+       "md": "0,7 × 1 000 : la virgule se décale de 3 rangs vers la droite. On écrit 0,7 → 7 → 70 → 700 (il faut ajouter des zéros)."
+      },
+      {
+       "md": "52,6 ÷ 100 : la virgule se décale de 2 rangs vers la gauche : 52,6 → 5,26 → 0,526."
+      }
+     ],
+     "answer": "**0,7 × 1 000 = 700** et **52,6 ÷ 100 = 0,526**."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Arrondir un décimal",
+     "md": "1. Je repère le chiffre de l'ordre demandé (unité, dixième, centième).\n2. Je regarde le chiffre **juste après**.\n3. S'il est **0, 1, 2, 3 ou 4**, je garde le chiffre. S'il est **5, 6, 7, 8 ou 9**, j'ajoute 1.\n4. Je supprime les chiffres suivants."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : arrondir et encadrer",
+     "statement": "Arrondis 28,476 au dixième, puis au centième. Encadre-le entre deux entiers consécutifs.",
+     "steps": [
+      {
+       "md": "Au dixième : le chiffre des dixièmes est 4 ; le suivant est 7 (≥ 5), donc on ajoute 1 : 28,5."
+      },
+      {
+       "md": "Au centième : le chiffre des centièmes est 7 ; le suivant est 6 (≥ 5), donc 7 devient 8 : 28,48."
+      },
+      {
+       "md": "Encadrement : 28 < 28,476 < 29."
+      }
+     ],
+     "answer": "**28,5** au dixième ; **28,48** au centième ; **28 < 28,476 < 29**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que 4,75 > 4,8 parce que 75 > 8 : on compare d'abord les dixièmes (7 < 8).\n- Écrire 3,5 × 10 = 3,50 : il faut décaler la virgule, c'est 35.\n- Arrondir « vers le bas » en coupant : 3,987 arrondi au dixième donne **4,0**, pas 3,9.\n- 0,5 × 10 = 5, pas 0,50."
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-maths-decimaux-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-maths-decimaux-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-maths-decimaux-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-maths-decimaux-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-maths-decimaux-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-maths-decimaux-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Calcule : 3,07 × 100",
+   "answer": 307,
+   "tolerance": 0,
+   "explanation": "La virgule se décale de 2 rangs vers la droite : 3,07 → 307.",
+   "method": "Décaler la virgule vers la droite.",
+   "id": "cep-maths-decimaux-01",
+   "chapter": "cep-maths-dec",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-maths-decimaux",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est l'écriture décimale de la fraction $\\frac{47}{100}$ ?",
+   "choices": [
+    "4,7",
+    "0,47",
+    "0,047",
+    "47,0"
+   ],
+   "answer": 1,
+   "explanation": "$\\frac{47}{100}$ = 47 centièmes = 0,47.",
+   "method": "Autant de chiffres après la virgule que de zéros au dénominateur.",
+   "id": "cep-maths-decimaux-02",
+   "chapter": "cep-maths-dec",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-maths-decimaux",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque calcul à son résultat.",
+   "pairs": [
+    [
+     "8,5 × 10",
+     "85"
+    ],
+    [
+     "8,5 ÷ 10",
+     "0,85"
+    ],
+    [
+     "8,5 × 100",
+     "850"
+    ],
+    [
+     "8,5 ÷ 100",
+     "0,085"
+    ]
+   ],
+   "explanation": "× 10 : un rang à droite (85). ÷ 10 : un rang à gauche (0,85). × 100 : deux rangs à droite (850). ÷ 100 : deux rangs à gauche (0,085).",
+   "points": 2,
+   "id": "cep-maths-decimaux-03",
+   "chapter": "cep-maths-dec",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-maths-decimaux",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Arrondis 6,2849 au centième.",
+   "choices": [
+    "6,28",
+    "6,29",
+    "6,3",
+    "6,2"
+   ],
+   "answer": 0,
+   "explanation": "Le chiffre des centièmes est 8 ; le suivant est 4 (< 5) : on garde 8. On obtient 6,28.",
+   "mistakes": [
+    "Arrondir 6,2849 en 6,29 en partant de la droite (9 → 5 → 4 → 8...)."
+   ],
+   "id": "cep-maths-decimaux-04",
+   "chapter": "cep-maths-dec",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cep-maths-decimaux",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "open",
+   "prompt": "Range ces nombres du plus petit au plus grand : 5,06 ; 5,6 ; 5,006 ; 5,60 ; 4,99.",
+   "model": "4,99 < 5,006 < 5,06 < 5,6 = 5,60",
+   "rubric": [
+    "4,99 est le plus petit (partie entière 4).",
+    "5,006 < 5,06 : on compare les centièmes (0 < 6).",
+    "5,6 et 5,60 sont égaux."
+   ],
+   "explanation": "On compare la partie entière, puis les dixièmes, puis les centièmes, puis les millièmes. 5,6 = 5,60.",
+   "points": 2,
+   "id": "cep-maths-decimaux-05",
+   "chapter": "cep-maths-dec",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cep-maths-decimaux",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Une balance affiche des masses en kilogrammes. Réponds aux questions.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Calcule : 8,45 × 1 000",
+     "answer": 8450,
+     "tolerance": 0,
+     "explanation": "La virgule se décale de 3 rangs vers la droite : 8,45 → 8 450.",
+     "id": "cep-maths-decimaux-06-a",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule : 62,5 ÷ 100",
+     "answer": 0.625,
+     "tolerance": 0,
+     "explanation": "La virgule se décale de 2 rangs vers la gauche : 62,5 → 0,625.",
+     "id": "cep-maths-decimaux-06-b",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Arrondis 3,987 au dixième.",
+     "answer": 4,
+     "tolerance": 0,
+     "explanation": "Le chiffre des dixièmes est 9 ; le suivant est 8 (≥ 5) : 9 + 1 = 10, on retient 1 : 3,987 ≈ 4,0, soit 4.",
+     "id": "cep-maths-decimaux-06-c",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quel nombre est compris entre 2,3 et 2,4 ?",
+     "choices": [
+      "2,5",
+      "2,25",
+      "2,04",
+      "2,35"
+     ],
+     "answer": 3,
+     "explanation": "2,3 = 2,30 et 2,4 = 2,40 : 2,35 est entre les deux.",
+     "id": "cep-maths-decimaux-06-d",
+     "points": 1
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "method": "Décaler la virgule ; comparer chiffre par chiffre.",
+   "id": "cep-maths-decimaux-06",
+   "chapter": "cep-maths-dec",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cep-maths-decimaux",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans 7,914, quel est le chiffre des centièmes ?",
+   "choices": [
+    "9",
+    "4",
+    "1",
+    "7"
+   ],
+   "answer": 2,
+   "explanation": "Après la virgule : 9 dixièmes, 1 centième, 4 millièmes.",
+   "id": "cep-maths-decimaux-q1",
+   "chapter": "cep-maths-dec",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-maths-decimaux",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que vaut 0,6 × 10 ?",
+   "choices": [
+    "0,06",
+    "6",
+    "60",
+    "0,60"
+   ],
+   "answer": 1,
+   "explanation": "On décale la virgule d'un rang vers la droite : 0,6 → 6.",
+   "id": "cep-maths-decimaux-q2",
+   "chapter": "cep-maths-dec",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-maths-decimaux",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel nombre est le plus grand ?",
+   "choices": [
+    "0,5",
+    "0,45",
+    "0,099",
+    "0,4999"
+   ],
+   "answer": 0,
+   "explanation": "0,5 = 0,500 ; les autres ont moins de dixièmes (4, 0 et 4).",
+   "id": "cep-maths-decimaux-q3",
+   "chapter": "cep-maths-dec",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-maths-decimaux",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "12 ÷ 1 000 = ?",
+   "choices": [
+    "0,12",
+    "1,2",
+    "0,0012",
+    "0,012"
+   ],
+   "answer": 3,
+   "explanation": "12 → 0,012 : la virgule recule de 3 rangs.",
+   "id": "cep-maths-decimaux-q4",
+   "chapter": "cep-maths-dec",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-maths-decimaux",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle fraction décimale vaut 0,03 ?",
+   "choices": [
+    "$\\frac{3}{10}$",
+    "$\\frac{3}{1000}$",
+    "$\\frac{3}{100}$",
+    "$\\frac{30}{100}$"
+   ],
+   "answer": 2,
+   "explanation": "0,03 = 3 centièmes = $\\frac{3}{100}$.",
+   "id": "cep-maths-decimaux-q5",
+   "chapter": "cep-maths-dec",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-maths-decimaux",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  }
+ ]
+}

@@ -1,0 +1,402 @@
+{
+ "chapter": "cp-sciences-eau-ch",
+ "lessons": [
+  {
+   "id": "cp-sciences-eau-fiche",
+   "title": "L'eau",
+   "minutes": 10,
+   "readAloud": true,
+   "programRef": "CP — Découverte du monde / sciences : l'eau (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Dire à quoi sert l'eau.",
+    "Distinguer eau propre et eau sale.",
+    "Citer des gestes pour économiser l'eau."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cp-sciences-eau-01",
+    "cp-sciences-eau-02",
+    "cp-sciences-eau-03",
+    "cp-sciences-eau-04",
+    "cp-sciences-eau-05",
+    "cp-sciences-eau-06"
+   ],
+   "selfCheck": [
+    "cp-sciences-eau-q1",
+    "cp-sciences-eau-q2",
+    "cp-sciences-eau-q3",
+    "cp-sciences-eau-q4",
+    "cp-sciences-eau-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier le message sur la potabilité : en CP, rester simple et renvoyer à un adulte.",
+    "Vérifier que la notion de liquide est adaptée au CP."
+   ],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "L'eau est précieuse. Je ne la gaspille pas.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "L'eau",
+     "md": "L'eau est un **liquide**. Elle coule. Elle n'a pas de forme : elle prend la forme du verre.\n\nOn trouve l'eau dans la pluie, les rivières, la mer et les puits."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "À quoi sert l'eau ?",
+     "md": "- On **boit** l'eau.\n- On se **lave** avec l'eau.\n- On **cuisine** avec l'eau.\n- On **arrose** les plantes.\n- On **lave** les habits."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 140,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 30,
+        "w": 104.5,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 62.25,
+        "y": 61,
+        "text": "la pluie",
+        "size": 14,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 128.5,
+        "y": 30,
+        "w": 104.5,
+        "h": 50,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 180.75,
+        "y": 61,
+        "text": "la rivière",
+        "size": 14,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 247.0,
+        "y": 30,
+        "w": 104.5,
+        "h": 50,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 299.25,
+        "y": 61,
+        "text": "le puits",
+        "size": 14,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 365.5,
+        "y": 30,
+        "w": 104.5,
+        "h": 50,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 417.75,
+        "y": 61,
+        "text": "le robinet",
+        "size": 14,
+        "bold": true
+       }
+      ]
+     },
+     "caption": "D'où vient l'eau",
+     "alt": "Quatre étiquettes : la pluie, la rivière, le puits et le robinet, des endroits où l'on trouve de l'eau."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : eau propre ou sale ?",
+     "statement": "L'eau d'une flaque est brune. Peut-on la boire ?",
+     "steps": [
+      {
+       "md": "Elle est brune et pleine de saletés."
+      },
+      {
+       "md": "Elle peut rendre malade."
+      }
+     ],
+     "answer": "**Non. C'est de l'eau sale. On ne la boit pas.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : ne pas gaspiller",
+     "statement": "Marie se brosse les dents. Que fait-elle du robinet ?",
+     "steps": [
+      {
+       "md": "Si le robinet coule, l'eau est perdue."
+      },
+      {
+       "md": "Elle ferme le robinet quand elle brosse."
+      }
+     ],
+     "answer": "**Elle ferme le robinet pour ne pas gaspiller l'eau.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention !",
+     "md": "Une eau qui a l'air claire n'est pas toujours propre. Un adulte sait si l'eau est bonne à boire."
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-sciences-eau-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-sciences-eau-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-sciences-eau-03"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "À quoi sert l'eau ?",
+   "explanation": "On **boit** l'eau.",
+   "id": "cp-sciences-eau-01",
+   "chapter": "cp-sciences-eau-ch",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-sciences-eau-fiche",
+   "points": 1,
+   "choices": [
+    "à rouler",
+    "à boire",
+    "à chanter",
+    "à voler"
+   ],
+   "answer": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : on peut boire l'eau sale d'une flaque.",
+   "answer": false,
+   "explanation": "Faux. L'eau sale rend malade.",
+   "id": "cp-sciences-eau-02",
+   "chapter": "cp-sciences-eau-ch",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-sciences-eau-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Relie chaque geste à son usage de l'eau.",
+   "pairs": [
+    [
+     "boire",
+     "j'ai soif"
+    ],
+    [
+     "me laver",
+     "je suis sale"
+    ],
+    [
+     "arroser",
+     "la plante a soif"
+    ],
+    [
+     "cuisiner",
+     "je prépare le repas"
+    ]
+   ],
+   "explanation": "L'eau sert à boire, se laver, arroser et cuisiner.",
+   "id": "cp-sciences-eau-03",
+   "chapter": "cp-sciences-eau-ch",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-sciences-eau-fiche",
+   "points": 2,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que fait-on pour ne pas gaspiller l'eau ?",
+   "explanation": "On ferme le robinet.",
+   "id": "cp-sciences-eau-04",
+   "chapter": "cp-sciences-eau-ch",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-sciences-eau-fiche",
+   "points": 1,
+   "choices": [
+    "on laisse le robinet ouvert",
+    "on verse l'eau par terre",
+    "on joue avec le robinet",
+    "on ferme le robinet"
+   ],
+   "answer": 3,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'eau est…",
+   "explanation": "L'eau coule : c'est un **liquide**.",
+   "id": "cp-sciences-eau-05",
+   "chapter": "cp-sciences-eau-ch",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-sciences-eau-fiche",
+   "points": 1,
+   "choices": [
+    "un caillou",
+    "un liquide",
+    "un solide dur",
+    "de la poussière"
+   ],
+   "answer": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "open",
+   "prompt": "Écris deux choses que tu fais avec de l'eau chaque jour.",
+   "model": "Je me lave. Je bois de l'eau.",
+   "rubric": [
+    "Deux usages sont donnés."
+   ],
+   "explanation": "On peut aussi écrire : je lave mes habits, j'arrose les plantes.",
+   "id": "cp-sciences-eau-06",
+   "chapter": "cp-sciences-eau-ch",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cp-sciences-eau-fiche",
+   "points": 3,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Où trouve-t-on de l'eau ?",
+   "explanation": "On trouve l'eau dans les rivières.",
+   "id": "cp-sciences-eau-q1",
+   "chapter": "cp-sciences-eau-ch",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-sciences-eau-fiche",
+   "points": 1,
+   "choices": [
+    "dans une pierre",
+    "dans un cahier",
+    "dans le feu",
+    "dans la rivière"
+   ],
+   "answer": 3,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle eau doit-on boire ?",
+   "explanation": "On boit seulement de l'eau propre.",
+   "id": "cp-sciences-eau-q2",
+   "chapter": "cp-sciences-eau-ch",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-sciences-eau-fiche",
+   "points": 1,
+   "choices": [
+    "l'eau de flaque",
+    "l'eau propre",
+    "l'eau boueuse",
+    "l'eau sale"
+   ],
+   "answer": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que fait l'eau quand on la verse ?",
+   "explanation": "L'eau coule : c'est un liquide.",
+   "id": "cp-sciences-eau-q3",
+   "chapter": "cp-sciences-eau-ch",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-sciences-eau-fiche",
+   "points": 1,
+   "choices": [
+    "elle saute",
+    "elle s'envole d'un coup",
+    "elle reste dure",
+    "elle coule"
+   ],
+   "answer": 3,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour économiser l'eau, on…",
+   "explanation": "On ferme le robinet.",
+   "id": "cp-sciences-eau-q4",
+   "chapter": "cp-sciences-eau-ch",
+   "tier": "autoeval",
+   "difficulty": 2,
+   "lesson": "cp-sciences-eau-fiche",
+   "points": 1,
+   "choices": [
+    "ouvre tous les robinets",
+    "ferme le robinet",
+    "laisse couler",
+    "remplit un seau pour le verser"
+   ],
+   "answer": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que fait la pluie ?",
+   "explanation": "La pluie tombe des nuages.",
+   "id": "cp-sciences-eau-q5",
+   "chapter": "cp-sciences-eau-ch",
+   "tier": "autoeval",
+   "difficulty": 2,
+   "lesson": "cp-sciences-eau-fiche",
+   "points": 1,
+   "choices": [
+    "elle monte de la terre",
+    "elle est du sable",
+    "elle est du feu",
+    "elle tombe du ciel"
+   ],
+   "answer": 3,
+   "source": "Exercice original"
+  }
+ ]
+}

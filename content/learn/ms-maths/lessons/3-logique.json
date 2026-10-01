@@ -1,0 +1,1032 @@
+{
+ "chapter": "ms-maths-logique-ch",
+ "lessons": [
+  {
+   "id": "ms-maths-trier-classer",
+   "title": "Trier et classer",
+   "minutes": 8,
+   "readAloud": true,
+   "programRef": "Programme de l'éducation maternelle, moyenne section (MINEDUB) — reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant de maternelle",
+   "objectives": [
+    "Trier des objets selon la couleur ou la forme.",
+    "Dire pourquoi on les met ensemble."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "ms-maths-trier-classer-01",
+    "ms-maths-trier-classer-02",
+    "ms-maths-trier-classer-03",
+    "ms-maths-trier-classer-04"
+   ],
+   "selfCheck": [],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "On trie les objets.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 200,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 60.0,
+        "cy": 100,
+        "r": 24,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "rect",
+        "x": 106.0,
+        "y": 76,
+        "w": 48,
+        "h": 48,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 200.0,
+        "cy": 100,
+        "r": 24,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "rect",
+        "x": 246.0,
+        "y": 76,
+        "w": 48,
+        "h": 48,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         340.0,
+         76,
+         364.0,
+         119.2,
+         316.0,
+         119.2
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       }
+      ]
+     },
+     "caption": "Plusieurs formes",
+     "alt": "Un rond rouge, un carré bleu, un rond rouge, un carré bleu, un triangle vert."
+    },
+    {
+     "type": "audio",
+     "text": "Il y a des ronds, des carrés et un triangle.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "text",
+     "md": "On peut trier par **couleur** ou par **forme**."
+    },
+    {
+     "type": "example",
+     "title": "Trier par couleur",
+     "statement": "Quels objets vont dans la boîte rouge ?",
+     "steps": [
+      {
+       "md": "On cherche les objets rouges."
+      },
+      {
+       "md": "Il y en a deux : les deux ronds."
+      }
+     ],
+     "answer": "Les deux **ronds rouges**.",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 200,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 95.0,
+        "cy": 100,
+        "r": 24,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "rect",
+        "x": 141.0,
+        "y": 76,
+        "w": 48,
+        "h": 48,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 235.0,
+        "cy": 100,
+        "r": 24,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "rect",
+        "x": 281.0,
+        "y": 76,
+        "w": 48,
+        "h": 48,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       }
+      ]
+     }
+    },
+    {
+     "type": "audio",
+     "text": "Les ronds rouges vont dans la boîte rouge.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "example",
+     "title": "Trier par forme",
+     "statement": "Quels objets vont dans la boîte des carrés ?",
+     "steps": [
+      {
+       "md": "On cherche les carrés."
+      },
+      {
+       "md": "Il y a deux carrés, ils sont bleus."
+      }
+     ],
+     "answer": "Les deux **carrés**.",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 200,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 95.0,
+        "cy": 100,
+        "r": 24,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "rect",
+        "x": 141.0,
+        "y": 76,
+        "w": 48,
+        "h": 48,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 235.0,
+        "cy": 100,
+        "r": 24,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "rect",
+        "x": 281.0,
+        "y": 76,
+        "w": 48,
+        "h": 48,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       }
+      ]
+     }
+    },
+    {
+     "type": "audio",
+     "text": "Les carrés vont ensemble.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "exercise",
+     "ref": "ms-maths-trier-classer-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ms-maths-trier-classer-03"
+    }
+   ],
+   "reviewNotes": [
+    "Exercices réduits à 4 ; critères de tri à annoncer à l'oral avant l'exercice."
+   ]
+  },
+  {
+   "id": "ms-maths-suites",
+   "title": "Les suites logiques",
+   "minutes": 9,
+   "readAloud": true,
+   "programRef": "Programme de l'éducation maternelle, moyenne section (MINEDUB) — reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant de maternelle",
+   "objectives": [
+    "Continuer une suite d'objets qui se répète.",
+    "Trouver l'objet qui manque."
+   ],
+   "prerequisites": [
+    "ms-maths-trier-classer"
+   ],
+   "exercises": [
+    "ms-maths-suites-01",
+    "ms-maths-suites-02",
+    "ms-maths-suites-03",
+    "ms-maths-suites-04",
+    "ms-maths-suites-05"
+   ],
+   "selfCheck": [],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "On continue la suite !",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "text",
+     "md": "Une suite se répète : rouge, bleu, rouge, bleu..."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 200,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 60.0,
+        "cy": 100,
+        "r": 24,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 130.0,
+        "cy": 100,
+        "r": 24,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 200.0,
+        "cy": 100,
+        "r": 24,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 270.0,
+        "cy": 100,
+        "r": 24,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "rect",
+        "x": 316.0,
+        "y": 76,
+        "w": 48,
+        "h": 48,
+        "stroke": "grey",
+        "width": 2,
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 340.0,
+        "y": 110,
+        "text": "?",
+        "size": 30,
+        "color": "grey",
+        "bold": true,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Une suite",
+     "alt": "Rond rouge, rond bleu, rond rouge, rond bleu, puis une case avec un point d'interrogation."
+    },
+    {
+     "type": "audio",
+     "text": "Rouge, bleu, rouge, bleu... Et après ? Rouge !",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "example",
+     "title": "Quel est le suivant ?",
+     "statement": "Rond rouge, rond bleu, rond rouge, rond bleu, ... ?",
+     "steps": [
+      {
+       "md": "On repère le groupe qui se répète : rouge, bleu."
+      },
+      {
+       "md": "Le dernier est bleu."
+      },
+      {
+       "md": "Donc le suivant est rouge."
+      }
+     ],
+     "answer": "Un rond **rouge**.",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 200,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 60.0,
+        "cy": 100,
+        "r": 24,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 130.0,
+        "cy": 100,
+        "r": 24,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 200.0,
+        "cy": 100,
+        "r": 24,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 270.0,
+        "cy": 100,
+        "r": 24,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "rect",
+        "x": 316.0,
+        "y": 76,
+        "w": 48,
+        "h": 48,
+        "stroke": "grey",
+        "width": 2,
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 340.0,
+        "y": 110,
+        "text": "?",
+        "size": 30,
+        "color": "grey",
+        "bold": true,
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "audio",
+     "text": "Le suivant est rouge !",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "example",
+     "title": "Une suite de formes",
+     "statement": "Carré, rond, carré, rond, ... ?",
+     "steps": [
+      {
+       "md": "Le groupe qui se répète : carré, rond."
+      },
+      {
+       "md": "Le dernier est un rond."
+      },
+      {
+       "md": "Le suivant est un carré."
+      }
+     ],
+     "answer": "Un **carré**.",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 36.0,
+        "y": 76,
+        "w": 48,
+        "h": 48,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 130.0,
+        "cy": 100,
+        "r": 24,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 176.0,
+        "y": 76,
+        "w": 48,
+        "h": 48,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 270.0,
+        "cy": 100,
+        "r": 24,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 316.0,
+        "y": 76,
+        "w": 48,
+        "h": 48,
+        "stroke": "grey",
+        "width": 2,
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 340.0,
+        "y": 110,
+        "text": "?",
+        "size": 30,
+        "color": "grey",
+        "bold": true,
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "exercise",
+     "ref": "ms-maths-suites-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ms-maths-suites-03"
+    }
+   ],
+   "reviewNotes": [
+    "La case « ? » est une figure shapes ; vérifier le rendu sur la TV."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ms-maths-trier-classer-01",
+   "chapter": "ms-maths-logique-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-maths-trier-classer",
+   "prompt": "Combien y a-t-il de carrés ?",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 140,
+    "items": [
+     {
+      "t": "circle",
+      "cx": 95.0,
+      "cy": 100,
+      "r": 24,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "red"
+     },
+     {
+      "t": "rect",
+      "x": 141.0,
+      "y": 76,
+      "w": 48,
+      "h": 48,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     },
+     {
+      "t": "circle",
+      "cx": 235.0,
+      "cy": 100,
+      "r": 24,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "red"
+     },
+     {
+      "t": "rect",
+      "x": 281.0,
+      "y": 76,
+      "w": 48,
+      "h": 48,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     }
+    ]
+   },
+   "choices": [
+    "2",
+    "1",
+    "4"
+   ],
+   "answer": 0,
+   "explanation": "Deux carrés bleus.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-maths-trier-classer-02",
+   "chapter": "ms-maths-logique-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-maths-trier-classer",
+   "prompt": "Combien y a-t-il d'objets verts ?",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 140,
+    "items": [
+     {
+      "t": "circle",
+      "cx": 95.0,
+      "cy": 100,
+      "r": 24,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "green"
+     },
+     {
+      "t": "rect",
+      "x": 141.0,
+      "y": 76,
+      "w": 48,
+      "h": 48,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     },
+     {
+      "t": "poly",
+      "pts": [
+       235.0,
+       76,
+       259.0,
+       119.2,
+       211.0,
+       119.2
+      ],
+      "stroke": "ink",
+      "width": 2,
+      "fill": "green"
+     },
+     {
+      "t": "rect",
+      "x": 281.0,
+      "y": 76,
+      "w": 48,
+      "h": 48,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "green"
+     }
+    ]
+   },
+   "choices": [
+    "2",
+    "3",
+    "1"
+   ],
+   "answer": 1,
+   "explanation": "Trois objets verts.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-maths-trier-classer-03",
+   "chapter": "ms-maths-logique-ch",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-maths-trier-classer",
+   "prompt": "On a rangé ensemble 3 ronds : c'est un tri par forme.",
+   "answer": true,
+   "explanation": "Oui, ils ont la **même forme**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-maths-trier-classer-04",
+   "chapter": "ms-maths-logique-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "ms-maths-trier-classer",
+   "prompt": "Quel objet est l'intrus dans ce groupe de ronds ?",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 140,
+    "items": [
+     {
+      "t": "circle",
+      "cx": 95.0,
+      "cy": 100,
+      "r": 24,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "red"
+     },
+     {
+      "t": "circle",
+      "cx": 165.0,
+      "cy": 100,
+      "r": 24,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     },
+     {
+      "t": "rect",
+      "x": 211.0,
+      "y": 76,
+      "w": 48,
+      "h": 48,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "red"
+     },
+     {
+      "t": "circle",
+      "cx": 305.0,
+      "cy": 100,
+      "r": 24,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "green"
+     }
+    ]
+   },
+   "choices": [
+    "Un rond rouge",
+    "Le carré",
+    "Un rond bleu"
+   ],
+   "answer": 1,
+   "explanation": "Les autres sont des ronds : le **carré** est différent.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-maths-suites-01",
+   "chapter": "ms-maths-logique-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-maths-suites",
+   "prompt": "Quel est l'objet suivant ?",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 140,
+    "items": [
+     {
+      "t": "circle",
+      "cx": 45.0,
+      "cy": 100,
+      "r": 24,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "red"
+     },
+     {
+      "t": "circle",
+      "cx": 107.0,
+      "cy": 100,
+      "r": 24,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     },
+     {
+      "t": "circle",
+      "cx": 169.0,
+      "cy": 100,
+      "r": 24,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "red"
+     },
+     {
+      "t": "circle",
+      "cx": 231.0,
+      "cy": 100,
+      "r": 24,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     },
+     {
+      "t": "circle",
+      "cx": 293.0,
+      "cy": 100,
+      "r": 24,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "red"
+     },
+     {
+      "t": "rect",
+      "x": 331.0,
+      "y": 76,
+      "w": 48,
+      "h": 48,
+      "stroke": "grey",
+      "width": 2,
+      "fill": "white"
+     },
+     {
+      "t": "text",
+      "x": 355.0,
+      "y": 110,
+      "text": "?",
+      "size": 30,
+      "color": "grey",
+      "bold": true,
+      "anchor": "middle"
+     }
+    ]
+   },
+   "choices": [
+    "Un carré bleu",
+    "Un rond bleu",
+    "Un rond rouge"
+   ],
+   "answer": 1,
+   "explanation": "Rouge, bleu, rouge, bleu, rouge, **bleu**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-maths-suites-02",
+   "chapter": "ms-maths-logique-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "ms-maths-suites",
+   "prompt": "Quel est l'objet suivant ?",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 140,
+    "items": [
+     {
+      "t": "circle",
+      "cx": 45.0,
+      "cy": 100,
+      "r": 24,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "red"
+     },
+     {
+      "t": "rect",
+      "x": 83.0,
+      "y": 76,
+      "w": 48,
+      "h": 48,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "red"
+     },
+     {
+      "t": "poly",
+      "pts": [
+       169.0,
+       76,
+       193.0,
+       119.2,
+       145.0,
+       119.2
+      ],
+      "stroke": "ink",
+      "width": 2,
+      "fill": "red"
+     },
+     {
+      "t": "circle",
+      "cx": 231.0,
+      "cy": 100,
+      "r": 24,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "red"
+     },
+     {
+      "t": "rect",
+      "x": 269.0,
+      "y": 76,
+      "w": 48,
+      "h": 48,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "red"
+     },
+     {
+      "t": "rect",
+      "x": 331.0,
+      "y": 76,
+      "w": 48,
+      "h": 48,
+      "stroke": "grey",
+      "width": 2,
+      "fill": "white"
+     },
+     {
+      "t": "text",
+      "x": 355.0,
+      "y": 110,
+      "text": "?",
+      "size": 30,
+      "color": "grey",
+      "bold": true,
+      "anchor": "middle"
+     }
+    ]
+   },
+   "choices": [
+    "Un rond",
+    "Un carré",
+    "Un triangle"
+   ],
+   "answer": 2,
+   "explanation": "Le groupe est rond, carré, triangle : après un carré vient un **triangle**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-maths-suites-03",
+   "chapter": "ms-maths-logique-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "ms-maths-suites",
+   "prompt": "Quel est l'objet qui manque, à la place du point d'interrogation ?",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 140,
+    "items": [
+     {
+      "t": "circle",
+      "cx": 100,
+      "cy": 100,
+      "r": 24,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "green"
+     },
+     {
+      "t": "rect",
+      "x": 146,
+      "y": 76,
+      "w": 48,
+      "h": 48,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "green"
+     },
+     {
+      "t": "circle",
+      "cx": 240,
+      "cy": 100,
+      "r": 24,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "green"
+     },
+     {
+      "t": "rect",
+      "x": 286,
+      "y": 76,
+      "w": 48,
+      "h": 48,
+      "stroke": "grey",
+      "width": 2,
+      "fill": "white"
+     },
+     {
+      "t": "text",
+      "x": 310,
+      "y": 110,
+      "text": "?",
+      "size": 30,
+      "color": "grey",
+      "bold": true,
+      "anchor": "middle"
+     }
+    ]
+   },
+   "choices": [
+    "Un carré vert",
+    "Un rond vert",
+    "Un carré rouge"
+   ],
+   "answer": 0,
+   "explanation": "La suite est carré vert, rond vert, carré vert, rond vert.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-maths-suites-04",
+   "chapter": "ms-maths-logique-ch",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-maths-suites",
+   "prompt": "La suite rouge, bleu, rouge, bleu continue par un rond rouge.",
+   "answer": true,
+   "explanation": "Oui : après bleu vient **rouge**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-maths-suites-05",
+   "chapter": "ms-maths-logique-ch",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-maths-suites",
+   "prompt": "Quel est le suivant : grand, petit, grand, petit, ... ?",
+   "choices": [
+    "Grand",
+    "Petit",
+    "Moyen"
+   ],
+   "answer": 0,
+   "explanation": "Le groupe grand, petit se répète : après petit vient **grand**.",
+   "source": "Exercice original"
+  }
+ ]
+}
