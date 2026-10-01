@@ -109,15 +109,22 @@ object RemoteController {
 
     fun setWholeTv(on: Boolean) { session?.target = if (on) RemoteTarget.AUTO else RemoteTarget.APP }
 
-    fun key(k: RemoteKey, action: KeyAction = KeyAction.PRESS, repeat: Int = 0) { session?.key(k, action, repeat) }
-    fun text(value: String, mode: TextMode = TextMode.INSERT) { session?.text(value, mode) }
+    /** Keys go to the smart remote (docs/REMOTE.md) when « Ma TV » drives a TV with another strategy than CastBridge-TV's own link. */
+    fun key(k: RemoteKey, action: KeyAction = KeyAction.PRESS, repeat: Int = 0) {
+        if (SmartRemote.handles()) { if (action != KeyAction.UP) SmartRemote.send(k); return }
+        session?.key(k, action, repeat)
+    }
+    fun text(value: String, mode: TextMode = TextMode.INSERT) {
+        if (SmartRemote.handles()) { if (mode != TextMode.CLEAR) SmartRemote.sendText(value); return }
+        session?.text(value, mode)
+    }
     fun global(g: RemoteGlobal) { session?.global(g) }
     fun setup() { session?.queue?.offer("system/setup", emptyMap()) }
 
     /** A session exists (connected or retrying): the background service keeps it alive. */
     val hasSession: Boolean get() = session != null
 
-    val connected: Boolean get() = session != null && _status.value.link == RemoteSession.Link.CONNECTED
+    val connected: Boolean get() = SmartRemote.handles() || session != null && _status.value.link == RemoteSession.Link.CONNECTED
 
     @SuppressLint("MissingPermission")
     private fun open(ctx: Context, tv: RemoteTv, pin: String, btFallback: String?): RemoteTransport {

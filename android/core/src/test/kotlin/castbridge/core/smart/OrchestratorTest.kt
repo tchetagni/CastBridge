@@ -99,9 +99,9 @@ class OrchestratorTest {
         val o = orch(fp(StrategyIds.CVTE), a, b)
         assertTrue(o.test())                                                  // volume + then −
         assertEquals(listOf(RemoteKey.VOLUME_UP, RemoteKey.VOLUME_DOWN), a.sent)
-        assertNull(memory.get("tv1"), "rien n'est mémorisé avant le « oui »")
+        assertNull(memory.recall("tv1"), "rien n'est mémorisé avant le « oui »")
         o.confirmTest(true)
-        assertEquals(StrategyIds.CVTE, memory.get("tv1")!!.strategyId); assertEquals(now, memory.get("tv1")!!.at)
+        assertEquals(StrategyIds.CVTE, memory.recall("tv1")!!.strategyId); assertEquals(now, memory.recall("tv1")!!.at)
         // a new orchestrator for the same TV puts the remembered strategy first even if the fingerprint says otherwise
         val o2 = orch(fp(StrategyIds.DLNA), FakeStrategy(StrategyIds.CVTE), FakeStrategy(StrategyIds.DLNA))
         assertEquals("cvte", o2.plan().first().id)
@@ -112,15 +112,15 @@ class OrchestratorTest {
         val o = orch(fp(StrategyIds.CVTE), a, b)
         memory.put("tv1", Remembered("cvte", now))
         o.test(); o.confirmTest(false)
-        assertNull(memory.get("tv1")); assertNull(o.active)
+        assertNull(memory.recall("tv1")); assertNull(o.active)
         assertEquals(AttemptOutcome.FAILED, o.attempts().first { it.strategyId == "cvte" }.outcome)
     }
 
     @Test fun aStrategyThatAcknowledgesKeysIsRememberedByItself() {
         val a = FakeStrategy(StrategyIds.ROKU, verifiesDelivery = true)
         val o = orch(fp(StrategyIds.ROKU), a)
-        assertNull(memory.get("tv1")); o.send(RemoteKey.HOME)
-        assertEquals("roku-ecp", memory.get("tv1")!!.strategyId)
+        assertNull(memory.recall("tv1")); o.send(RemoteKey.HOME)
+        assertEquals("roku-ecp", memory.recall("tv1")!!.strategyId)
     }
 
     @Test fun testNeedsVolumeAndNeverLeavesTheVolumeUp() {
