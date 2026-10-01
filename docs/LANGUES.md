@@ -432,3 +432,13 @@ Questions restantes (non bloquantes) :
 | `tools/content-budget/langues_budget.py` | plan chiffré et vérification de l'enveloppe |
 | `android/core/src/main/kotlin/castbridge/core/langues/` | squelette de code |
 | `android/core/src/test/kotlin/castbridge/core/LanguesTest.kt` | 21 tests |
+
+## 13. Décisions du propriétaire (journal, 2026-10-01, après le rapport de conception)
+1. **Quota média du téléphone pour les Langues : 500 Mo**, réglable (et non les 1 à 2 Go évoqués dans le rapport). Le budget serveur de 6 Go reste l'enveloppe totale de la catégorie ; le téléphone n'en garde que ce quota.
+2. **Contenu dérivé publié sous CC BY-SA 4.0 : oui.** Le propriétaire offrira la possibilité de **tout télécharger séparément** (archive publique complète). Conséquences que la conception doit respecter :
+   - Le contenu **dérivé de sources CC BY-SA** est **libre** : il n'est **ni chiffré par TV, ni verrouillé par une mesure technique** qui empêcherait d'exercer les droits de la licence (CC BY-SA 4.0, § 2(a)(4)). Il porte l'**attribution** exigée, un **manifeste de licences par fichier**, et la **même licence** pour les œuvres dérivées.
+   - Il doit exister une **archive téléchargeable séparément**, contenant tout ce qui est sous CC BY-SA, sans clé ni activation.
+   - Le système de droits distingue deux familles de lots : **lots libres (SA)**, sans clé de contenu, et **lots réservés** (contenu **original** ou de domaine public / CC0), chiffrés par TV. **Ne mélange jamais** les deux dans un même lot. Le verrouillage « usage soumis à autorisation » de l'**application** reste un choix du propriétaire sur le logiciel, pas sur le contenu SA.
+   - **Point à faire valider par un juriste** avant toute vente ou production en masse : l'articulation entre une licence de contenu libre, un logiciel soumis à autorisation et des lots payants (le coordinateur ne donne pas d'avis juridique).
+3. **Voix : les deux.** Phase actuelle (petit budget) : **synthèse libre, clairement marquée comme synthétique**. **Enregistrements humains** prévus pour le contenu payant dès que le budget le permet. Les modèles neuronaux libres (Kokoro, MeloTTS, Piper) restent à **tester hors du cloud** (leurs modèles y sont injoignables) ; sans cela seule la voix `espeak-ng` (robotique) est disponible.
+
