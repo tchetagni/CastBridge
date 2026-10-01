@@ -136,25 +136,27 @@ fun TvHome(onAdvanced: () -> Unit) {
         }
     }
     var moveNext by remember { mutableStateOf(false) }       // the next picked file is moved (deleted from the phone once on the TV)
-    val pick = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
-        if (uri == null || (tvName == null && session == null)) return@rememberLauncherForActivityResult
-        // Keep write access when the provider gives it: a move deletes the original once the TV holds it.
-        runCatching { ctx.contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION) }
-            .onFailure { runCatching { ctx.contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION) } }
-        var name = uri.lastPathSegment ?: "video"; var size = 0L
-        runCatching { ctx.contentResolver.query(uri, null, null, null, null)?.use { c -> if (c.moveToFirst()) {
-            name = c.getString(c.getColumnIndexOrThrow(OpenableColumns.DISPLAY_NAME)) ?: name; size = c.getLong(c.getColumnIndexOrThrow(OpenableColumns.SIZE)) } } }
-        // Little room on the TV: play while the file arrives instead of storing it all first.
-        val progressive = info?.let { size > 0 && it.free < size * 2 } ?: false
+    val pick = rememberLauncherForActivityResult(ActivityResultContracts.OpenMultipleDocuments()) { uris ->
+        if (uris.isEmpty() || (tvName == null && session == null)) return@rememberLauncherForActivityResult
         val move = moveNext; moveNext = false
-        if (session != null && session.base == null) {
-            // no Wi-Fi in common: Bluetooth (slower), still without any code
-            runCatching { BtUploadService.start(ctx, uri, name, session.tv.address, session.credential); msg = "Envoi par Bluetooth (plus lent que le Wi-Fi)" }
-                .onFailure { msg = "Impossible de démarrer l'envoi : ${it.message}" }
-            return@rememberLauncherForActivityResult
+        var queued = 0
+        uris.forEach { uri ->
+            // Keep write access when the provider gives it: a move deletes the original once the TV holds it.
+            runCatching { ctx.contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION) }
+                .onFailure { runCatching { ctx.contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION) } }
+            val (name, size) = OpenWithActivity.describe(ctx, uri)
+            // Little room on the TV: play while the file arrives instead of storing it all first (one file only).
+            val progressive = uris.size == 1 && (info?.let { size > 0 && it.free < size * 2 } ?: false)
+            if (session != null) {
+                runCatching { TransferQueue.enqueue(ctx, uri, name, size, move, autoPlay = uris.size == 1, progressive = progressive); queued++ }
+                    .onFailure { msg = "Impossible de mettre l'envoi en file : ${it.message}" }
+            } else if (uris.size == 1) {
+                runCatching { UploadService.start(ctx, uri, name, tvName!!, null, pin, progressive, move = move) }
+                    .onFailure { msg = "Impossible de démarrer l'envoi : ${it.message}" }
+            } else msg = "Plusieurs fichiers : ajoutez d'abord la TV (association) pour utiliser la file d'attente."
         }
-        runCatching { UploadService.start(ctx, uri, name, session?.tv?.mdns ?: tvName!!, session?.base?.removePrefix("http://"), session?.credential ?: pin, progressive, move = move) }
-            .onFailure { msg = "Impossible de démarrer l'envoi : ${it.message}" }
+        if (queued > 1) msg = "$queued fichiers ajoutés à la file d'attente : ils partent l'un après l'autre."
+        else if (queued == 1 && session?.base == null) msg = "Envoi par Bluetooth (plus lent que le Wi-Fi)"
     }
     fun cmd(f: TvClient.() -> Unit) = scope.launch {
         val c = client ?: return@launch
@@ -217,6 +219,35 @@ fun TvHome(onAdvanced: () -> Unit) {
         }
         (u as? UploadService.State.Done)?.let { Text("« ${LibraryLogic.title(it.job.fileName)} » est sur la TV ✓", style = MaterialTheme.typography.bodyMedium, color = Cb.success) }
         (u as? UploadService.State.Failed)?.let { Text(it.reason, style = MaterialTheme.typography.bodyMedium, color = cs.error) }
+
+        // Queue of the files waiting to be sent (several files, « Ouvrir avec », …): one at a time, cancel one by one.
+        val queue by TransferQueue.items.collectAsState()
+        val shownQueue = queue.filter { it.status == castbridge.core.tv.QueueStatus.WAITING || it.status == castbridge.core.tv.QueueStatus.RUNNING || it.status == castbridge.core.tv.QueueStatus.FAILED }
+        AnimatedVisibility(shownQueue.isNotEmpty()) {
+            ElevatedCard(Modifier.fillMaxWidth()) {
+                Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                    val waiting = shownQueue.count { it.status == castbridge.core.tv.QueueStatus.WAITING }
+                    Text("File d'attente des envois" + if (waiting > 0) " · $waiting en attente" else "", style = MaterialTheme.typography.labelLarge, color = cs.primary)
+                    shownQueue.forEach { q ->
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Column(Modifier.weight(1f)) {
+                                Text(LibraryLogic.title(q.name), maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.bodyMedium)
+                                Text(when (q.status) {
+                                    castbridge.core.tv.QueueStatus.RUNNING -> "En cours" + if (q.move) " (déplacement)" else ""
+                                    castbridge.core.tv.QueueStatus.WAITING -> "En attente" + if (q.move) " (déplacement)" else "" + if (q.size > 0) " · ${formatSize(q.size)}" else ""
+                                    else -> "Échec : ${q.error ?: "envoi interrompu"}"
+                                }, style = MaterialTheme.typography.bodySmall, color = if (q.status == castbridge.core.tv.QueueStatus.FAILED) cs.error else cs.onSurfaceVariant)
+                            }
+                            if (q.status != castbridge.core.tv.QueueStatus.FAILED) TextButton(onClick = { TransferQueue.cancel(ctx, q.id) }) { Text("Annuler") }
+                        }
+                    }
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        if (waiting > 1) TextButton(onClick = { TransferQueue.cancelWaiting() }) { Text("Annuler les envois en attente") }
+                        if (shownQueue.any { it.status == castbridge.core.tv.QueueStatus.FAILED }) TextButton(onClick = { TransferQueue.clearFinished() }) { Text("Effacer les échecs") }
+                    }
+                }
+            }
+        }
 
         // Now playing
         val now = info?.takeIf { it.playing != null && it.state != "idle" }

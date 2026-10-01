@@ -70,18 +70,15 @@ class OpenWithActivity : ComponentActivity() {
     }
 
     private fun send(uri: Uri, name: String, move: Boolean) {
-        val s = (TvLinkManager.state.value as? LinkUi.Connected)?.session ?: return
         // Keep read access beyond this window when the provider allows it (a move deletes the original once the TV holds it).
         runCatching { contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION) }
             .onFailure { runCatching { contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION) } }
-        runCatching {
-            val base = s.base
-            if (base == null) BtUploadService.start(this, uri, name, s.tv.address, s.credential)
-            else UploadService.start(this, uri, name, s.tv.mdns ?: s.tv.name, base.removePrefix("http://"), s.credential, progressive = false, autoPlay = false, move = move)
-        }.onSuccess {
-            Toast.makeText(this, (if (move) "Déplacement" else "Copie") + " vers la TV en arrière-plan : voir la notification.", Toast.LENGTH_LONG).show()
-            finish()
-        }.onFailure { Toast.makeText(this, "Impossible de démarrer l'envoi : ${it.message}", Toast.LENGTH_LONG).show() }
+        val size = describe(this, uri).second
+        runCatching { TransferQueue.enqueue(this, uri, name, size, move) }
+            .onSuccess { where ->
+                Toast.makeText(this, (if (move) "Déplacement" else "Copie") + " vers la TV en arrière-plan (" + where + ") : voir la notification.", Toast.LENGTH_LONG).show()
+                finish()
+            }.onFailure { Toast.makeText(this, "Impossible de mettre l'envoi en file : ${it.message}", Toast.LENGTH_LONG).show() }
     }
 
     /** Hands the very same intent to the player (grants included). */

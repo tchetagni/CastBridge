@@ -118,6 +118,8 @@
         <!-- Remote kept alive when the app is not in front: notification keys + phone volume buttons (docs/REMOTE.md) -->
         <service android:name=".RemoteService" android:exported="false"
             android:foregroundServiceType="connectedDevice" />
+        <service android:name=".TransferQueueService" android:exported="false"
+            android:foregroundServiceType="dataSync" />
         <service android:name=".BtUploadService" android:exported="false"
             android:foregroundServiceType="connectedDevice" />
         <service android:name=".BtGatewayService" android:exported="false"
