@@ -30,6 +30,9 @@ class SshControl(ctx: Context, private val onChange: (String?) -> Unit, onBtStat
 
     val running get() = server.running
 
+    /** Sessions carried by the Bluetooth tunnel right now (the rest of the SSH sessions come over the LAN). */
+    fun btSessions(): Int = tunnel.active().size
+
     /** One line for the idle screen, null when SSH is off. */
     fun statusLine(): String? = if (!server.running) null else
         "SSH actif : port ${server.port}, arrêt auto dans ${(server.policy.secondsLeft() + 59) / 60} min" +

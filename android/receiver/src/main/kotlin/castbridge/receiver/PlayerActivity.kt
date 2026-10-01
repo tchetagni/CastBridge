@@ -106,8 +106,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         if (settingsPanel == null) settingsPanel = SettingsPanel(this, findViewById(R.id.settings))
         panel = PlayerPanel(this, panelApi())
         if (!::bar.isInitialized) bar = ProgressOverlay(this, findViewById(android.R.id.content))
-        showNetStateBadge(s.netState)                        // Internet state already known when the screen (re)opens
-        showSshBadge(s.statuses["4-ssh-n"])                  // connections already open when the screen (re)opens
+        refreshStatusBar()                                   // connections already known when the screen (re)opens
         s.attach(this)                                       // may run a play request that arrived while the screen was closed
         requestRuntimePermissions()
         if (current == null && libScreen?.visible != true) showHome()
@@ -171,7 +170,8 @@ class PlayerActivity : Activity(), TvService.Screen {
     override val shown: Boolean get() = resumed && !isFinishing
     override val activity: Activity get() = this
     override fun notice(msg: String) { flash(msg) }
-    override fun statusesChanged() { if (settingsPanel?.visible == true) showSettings(); showNetBadge(svc?.statuses?.get("6-gw")); showNetStateBadge(svc?.netState); showSshBadge(svc?.statuses?.get("4-ssh-n")) }
+    override fun statusesChanged() { if (settingsPanel?.visible == true) showSettings(); refreshStatusBar() }
+    override fun iconsChanged() { refreshStatusBar() }
     override fun thumbReady(name: String) { thumbs?.ready(name); libScreen?.onThumbReady(name); home?.onThumbReady(name) }
     override fun runPending(r: TvService.Pending) {
         runCatching {
@@ -370,17 +370,20 @@ class PlayerActivity : Activity(), TvService.Screen {
         libScreen?.hide(); settingsPanel?.hide()
         home?.show()
         enterScreen("home")
+        refreshStatusBar()
     }
 
     /** Hides every screen (a video starts). */
     private fun hideScreens() {
         home?.hide(); libScreen?.hide(); settingsPanel?.hide()
+        refreshStatusBar()
     }
 
     private fun showLibrary() {
         home?.hide(); settingsPanel?.hide()
         libScreen?.show()
         enterScreen("library")
+        refreshStatusBar()
     }
 
     /** Back from a video (BACK, end of file, error): the home with its "Reprendre" row, not an empty screen. */
@@ -575,7 +578,7 @@ class PlayerActivity : Activity(), TvService.Screen {
                     (if (st.lastContactAt > 0) " · dernier contact ${ServerActivity.date(st.lastContactAt)}" else ""))
             }
         }
-        settingsPanel?.show(info, menuItems())
+        settingsPanel?.show(info, menuItems()); refreshStatusBar()
         enterScreen("settings")
     }
 
@@ -707,40 +710,21 @@ class PlayerActivity : Activity(), TvService.Screen {
         return "Réglages inaccessibles sur cette TV : ouvrez-les avec la télécommande de la TV."
     }
 
-    /** Always-visible badge at the top right (also over a playing video) while someone is connected over SSH: the owner sees it at once. */
-    private fun showSshBadge(text: String?) {
-        val b = findViewById<TextView>(R.id.sshBadge) ?: return
-        if (text == null) { b.animate().alpha(0f).setDuration(300).withEndAction { b.visibility = View.GONE }; return }
-        b.text = text
-        if (b.visibility != View.VISIBLE) { b.animate().cancel(); b.alpha = 0f; b.visibility = View.VISIBLE; b.animate().alpha(1f).setDuration(300) }
+    // ---- Permanent status bar (core StatusIconModel, drawn by StatusBarView): Internet, phones, remote, SSH, gateway, USB, Wi-Fi Direct... ----
+    private var statusBar: StatusBarView? = null
+
+    private fun ensureStatusBar(): StatusBarView? {
+        statusBar?.let { return it }
+        val box = findViewById<android.widget.LinearLayout>(R.id.statusBar) ?: return null
+        return StatusBarView(this, box, onOpen = { svc?.let { statusBar?.openPanel(it) } }, leaveFocus = { home?.takeIf { it.visible }?.headerChip?.requestFocus() }).also { statusBar = it }
     }
 
-    /** Always-visible badge (also over a playing video and the home): by which path the TV really reaches Internet, or none. */
-    private fun showNetStateBadge(st: castbridge.core.net.NetState?) {
-        val b = findViewById<TextView>(R.id.netStateBadge) ?: return
-        if (st == null) return
-        val icon = when (st) {
-            castbridge.core.net.NetState.INTERNET_WIFI -> R.drawable.ic_cb_wifi
-            castbridge.core.net.NetState.INTERNET_ETHERNET -> R.drawable.ic_cb_ethernet
-            castbridge.core.net.NetState.INTERNET_VIA_PHONE -> R.drawable.ic_cb_passerelle_bluetooth
-            castbridge.core.net.NetState.NONE -> R.drawable.ic_cb_sans_internet
-            castbridge.core.net.NetState.CHECKING -> R.drawable.ic_cb_wifi
-        }
-        b.setBackgroundResource(if (st == castbridge.core.net.NetState.NONE) R.drawable.badge_warn_bg else R.drawable.badge_bg)
-        b.setCompoundDrawablesRelativeWithIntrinsicBounds(icon, 0, 0, 0)
-        if (b.text.toString() != st.label) b.text = st.label
-        b.contentDescription = st.label
-        b.alpha = if (st == castbridge.core.net.NetState.CHECKING) 0.7f else 1f
-        b.visibility = View.VISIBLE
-    }
-
-    /** Always-visible badge (also over a playing video) while the TV's Internet goes through the phone. */
-    private fun showNetBadge(text: String?) {
-        val b = findViewById<TextView>(R.id.netBadge) ?: return
-        if (text == null) { b.animate().alpha(0f).setDuration(300).withEndAction { b.visibility = View.GONE }; return }
-        b.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_cb_passerelle_bluetooth, 0, 0, 0)
-        b.text = text.replace("Internet via le téléphone", "Internet via")
-        if (b.visibility != View.VISIBLE) { b.alpha = 0f; b.visibility = View.VISIBLE; b.animate().alpha(1f).setDuration(300) }
+    /** Redraws the bar from the service's model; it takes the remote's focus only on the home screen (never over a video or another screen). */
+    private fun refreshStatusBar() {
+        val bar = ensureStatusBar() ?: return
+        val s = svc ?: return
+        bar.interactive = current == null && home?.visible == true && libScreen?.visible != true && settingsPanel?.visible != true
+        bar.render(s.icons.snapshot())
     }
 
     // ---- Internet diagnostics panel (ping / traceroute), readable from the sofa ----
@@ -1018,6 +1002,7 @@ class PlayerActivity : Activity(), TvService.Screen {
                 }
                 return true
             }
+            if (keyCode == KeyEvent.KEYCODE_DPAD_UP && home?.visible == true && currentFocus === home?.headerChip && statusBar?.focusFirst() == true) return true
             if (libScreen?.visible != true && keyCode in LIBRARY_KEYS) { showLibrary(); return true }
         }
         if (keyCode == KeyEvent.KEYCODE_MENU) { if (current != null && mp != null) panel.show() else showMenu(); return true }

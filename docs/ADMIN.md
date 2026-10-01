@@ -70,6 +70,7 @@ Les noms de fichiers sont sans `/`, `\`, ni `.part` final, 200 caractères max. 
 | `POST /api/autostart?enabled=1\|0` | « Démarrer avec la TV » | comme `background` |
 | `POST /api/overlay-permission` | ouvre sur la TV le réglage « Afficher par-dessus les autres apps » (seulement si l'écran CastBridge est affiché) | `{"opened","message"}` |
 | `GET /api/net` | **Internet de la TV** (même état que le badge en haut à droite de l'écran) : par quel chemin la TV atteint réellement Internet, d'après le test 204 (jamais « un lien est actif ») | `{"state":"checking\|wifi\|ethernet\|phone\|none","label","working","link":"wifi\|ethernet\|other\|none","direct":{"ok","ms"},"gateway":{"connected","ok","ms","alsoAvailable"},"checkedAt"}` |
+| `GET /api/connections` | **Connexions de la TV** (la barre d'icônes de l'écran) : une entrée par appareil ou mode actif, étiquettes seulement (jamais de jeton, PIN ni adresse Bluetooth) | `{"connections":[{"kind","technology","secondary","label","state","since","count","latencyMs"}],"visible","hidden","now"}` (`kind` : internet, phone, remote, ssh, gateway, cast, usb, wifi_direct, quiz, chess, download, parental, update ; `technology` : ethernet, wifi_lan, wifi_direct, usb, ssh_lan, bluetooth_tunnel, ssh_bluetooth, bluetooth, none ; `state` : connected, connecting, degraded, error ; `since` en ms epoch) |
 | `GET /api/usb` | état de l'import USB et volumes détectés | `{"running","message","volumes":[chemins]}` |
 | `POST /api/usb/import` | copie les vidéos des clés détectées (dossier de l'app sur la clé) | comme `usb` |
 
@@ -212,10 +213,35 @@ Codes : `400` paramètre invalide, `401` PIN faux ou IP verrouillée, `404`, `40
 offset (le corps donne `length`), `413` fichier trop gros pour le volume, `503` volume retiré/indisponible, `501` non supporté sur cet appareil, `507` espace insuffisant (moins de **1 Go** libre
 après l'envoi, voir « Échange de fichiers » ; le corps donne `message`).
 
-### Badge « Internet » de la TV (toujours visible)
+### Barre d'icônes de statut de la TV (toujours visible)
 
-En haut à droite de l'écran de CastBridge-TV (sous l'horloge, au-dessus du badge SSH ; aussi sur l'accueil et par-dessus une vidéo), un badge dit **par où** la TV a vraiment Internet :
-« Internet : Wi-Fi », « Internet : Ethernet », « Internet : via le téléphone » (passerelle Bluetooth, voir ci-dessous) ou, en rouge, « Pas d'Internet ». Au démarrage : « vérification… ».
+Les connexions et les modes de CastBridge-TV ne sont plus annoncés par des bandeaux fugitifs : une **barre d'icônes permanente** (colonne en haut à droite, sous l'horloge, sur l'accueil, les réglages et par-dessus une vidéo) montre une icône par connexion ou mode actif, tant qu'il est actif. Elle remplace les anciens badges séparés (Internet, passerelle, SSH) : une seule colonne, rien qui se chevauche. Chaque icône = un pictogramme (le « quoi ») + une petite marque de technologie en bas à droite (le « comment »), et éventuellement une seconde marque plus petite en bas à gauche.
+
+| Icône | Signification | Marque de technologie |
+|---|---|---|
+| Wi-Fi / Ethernet / sans Internet / passerelle | **Internet** de la TV (voir ci-dessous) | (le pictogramme est la technologie) |
+| Téléphone | un téléphone de confiance connecté (un seul par téléphone, même en Bluetooth + Wi-Fi : la meilleure technologie est affichée, l'autre en petit) | Bluetooth, Wi-Fi, Wi-Fi Direct |
+| Télécommande | la télécommande du téléphone est utilisée | Bluetooth, Wi-Fi |
+| Clé à molette | sessions **SSH** (nombre dans l'étiquette) | Wi-Fi (réseau local) ou Bluetooth (tunnel) |
+| Passerelle | le téléphone partage son Internet à la TV | Bluetooth |
+| Clé USB | une clé USB est branchée | USB |
+| Wi-Fi Direct | le groupe Wi-Fi Direct de la TV est actif | Wi-Fi Direct |
+| Quiz / Échecs | un joueur connecté à la salle (une icône par joueur) | Wi-Fi |
+| Téléchargements | un téléchargement est en cours | — |
+| Bouclier | mode enfant (contrôle parental) actif | — |
+
+États : **connecté** (plein) ; **connexion…** (estompé + point doré) ; **reconnexion** (estompé + point doré + libellé « reconnexion » : une coupure brève ne retire pas l'icône, elle n'est retirée qu'après 20 s d'absence stable, et reprend son « depuis » si la liaison revient avant) ; **erreur** (liseré rouge + point rouge, jamais cachée par le « +N »). L'état n'est jamais porté par la seule couleur.
+- Au plus **6 icônes**, puis une pastille « +N ». L'ordre est stable (Internet, téléphones, télécommande, SSH, passerelle… puis par ordre d'arrivée) et ne change ni selon l'état ni selon l'arrivée.
+- Le libellé français court (nom du téléphone, tronqué à 24 caractères, sans caractère de contrôle) n'apparaît que sur une icône **nouvelle ou qui vient de changer** (4 s, avec une brève animation d'apparition), **ayant le focus**, ou quand le panneau est ouvert. Plus de bandeau « X connecté » : l'apparition de l'icône suffit. Les avertissements (refus, erreur, « nouvelle application ») restent des messages ponctuels.
+- **Télécommande** : la barre ne prend jamais le focus pendant une vidéo ni dans les autres écrans. Sur l'**accueil**, HAUT depuis l'en-tête (« prêt · code ») atteint la barre ; **OK** ouvre le panneau **« Connexions »** : pour chaque connexion, nom, technologie (et la seconde), « depuis N min », latence quand elle est connue, état ; actions : **« Retirer ce téléphone »** (avec la confirmation habituelle ; « Annuler » est sélectionné) et **« Arrêter SSH »**. BAS/RETOUR rend le focus à l'accueil.
+- Logique pure et testée : `core/.../status/StatusIcons.kt` (`StatusIconModel`, `StatusIconsTest`). Alimentée par le service : Internet (`NetStateTracker`), téléphones (CBTH et jeton HTTP, bail de 10 min renouvelé à chaque signe de vie), télécommande, SSH (`SshPolicy.onSessions`, tunnel Bluetooth compté à part), puis relevé toutes les 5 s de la passerelle, de Wi-Fi Direct, des clés USB, des téléchargements, du mode enfant et des salles Quiz/Échecs. Le passage par le tunnel API Bluetooth (branche `claude/bt-everything`) se branche en appelant `phoneSeen(adresse, Tech.BLUETOOTH_TUNNEL)` : aucune dépendance aujourd'hui.
+- Limites connues : un téléphone n'ayant parlé qu'en Bluetooth (sans HTTP) reste affiché pendant le bail (10 min) après son départ ; la technologie d'une requête HTTP est « Wi-Fi » (l'adresse source n'est pas transmise au contrôle du jeton ; `Tech.fromIp` reconnaît 192.168.49.x = Wi-Fi Direct pour le jour où elle le sera). Pas de pastille « mise à jour disponible » ni « diffusion » pour l'instant (types prévus dans le modèle).
+- Confidentialité : étiquettes seulement à l'écran et dans `/api/connections` ; ni PIN, ni jeton, ni adresse Bluetooth ; aucune nouvelle télémétrie.
+
+#### Icône « Internet » (toujours visible)
+
+L'icône Internet de la barre (anciennement un badge à part) dit **par où** la TV a vraiment Internet :
+« Internet : Wi-Fi », « Internet : Ethernet », « Internet : via le téléphone » (passerelle Bluetooth, voir ci-dessous) ou, en rouge, « Pas d'Internet ». Au démarrage : « vérification… » (estompée).
 - Le badge se fonde sur le test 204 existant (`connectivitycheck.gstatic.com`), pas sur l'état du lien : un Wi-Fi « connecté » sans Internet n'est jamais affiché comme connecté.
 - Règle : réseau de la TV d'abord s'il répond, sinon passerelle du téléphone si elle répond, sinon « Pas d'Internet ». Quand les deux répondent, le badge montre le réseau de la TV ; la passerelle disponible reste visible dans « Internet » (réglages) et dans `/api/net` (`gateway.alsoAvailable`).
 - Anti-clignotement (Wi-Fi instable) : 1 succès = en ligne tout de suite, 2 échecs de suite = hors ligne ; un changement de chemin attend 8 s d'affichage minimum (sauf la sortie de « Pas d'Internet »).

@@ -76,6 +76,8 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
     private var revealUntil = 0L
     private var lastFocused: LibraryItem? = null
     val visible get() = container.visibility == View.VISIBLE
+    /** The « ready · code » chip of the header: the status bar is reached with UP from it. */
+    val headerChip: View get() = chip
 
     init {
         val root = FrameLayout(act).apply { setBackgroundColor(TvStyle.BG) }

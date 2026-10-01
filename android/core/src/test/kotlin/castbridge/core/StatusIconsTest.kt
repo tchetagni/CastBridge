@@ -125,4 +125,12 @@ class StatusIconsTest {
     }
 
     @Test fun `tech from ip`() { assertEquals(Tech.WIFI_DIRECT, Tech.fromIp("192.168.49.12")); assertEquals(Tech.WIFI_LAN, Tech.fromIp("192.168.1.9")); assertEquals(Tech.WIFI_LAN, Tech.fromIp(null)) }
+
+    @Test fun `chip text and since text are French and carry more than colour`() {
+        val m = model(); m.up(P, "1", Tech.BLUETOOTH, "Léa"); m.setSsh(2)
+        assertEquals("Léa · Bluetooth", m.snapshot().icons[0].text()); assertEquals("SSH ×2 · SSH (Wi-Fi)", m.snapshot().icons[1].text())
+        m.down(P, "1"); assertEquals("Léa · Bluetooth · reconnexion", m.snapshot().icons[0].text())
+        val i = m.snapshot().icons[0]
+        assertEquals("depuis moins d'une minute", i.sinceText(i.since + 30_000)); assertEquals("depuis 5 min", i.sinceText(i.since + 300_000)); assertEquals("depuis 1 h 2 min", i.sinceText(i.since + 3_720_000))
+    }
 }

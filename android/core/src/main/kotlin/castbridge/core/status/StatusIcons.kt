@@ -51,6 +51,23 @@ data class StatusIcon(
 ) {
     /** Stable id for the views (one per device and kind). */
     val id get() = kind.wire + ":" + ref
+
+    /** Short French text of the chip (shown only when the bar is expanded, focused or just changed), colour never being the only signal. */
+    fun text(): String {
+        val head = when {
+            kind == IconKind.INTERNET -> label
+            count > 1 && (kind == IconKind.SSH) -> "SSH ×$count"
+            else -> label
+        }
+        val mark = if (kind != IconKind.INTERNET && tech != Tech.NONE && tech.label.isNotEmpty()) " · ${tech.label}" else ""
+        return head + mark + (if (state == IconState.DEGRADED || state == IconState.ERROR) " · ${state.label}" else "")
+    }
+
+    /** « depuis 3 min » for the Connexions panel. */
+    fun sinceText(now: Long): String {
+        val s = ((now - since) / 1000).coerceAtLeast(0)
+        return when { s < 60 -> "depuis moins d'une minute"; s < 3600 -> "depuis ${s / 60} min"; else -> "depuis ${s / 3600} h ${(s % 3600) / 60} min" }
+    }
 }
 
 /** What the bar shows: the visible icons in a stable order, and how many more did not fit (« +N »). */
