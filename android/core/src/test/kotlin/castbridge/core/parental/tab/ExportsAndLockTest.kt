@@ -109,3 +109,28 @@ class LiveReportTest {
         assertEquals(0, l.absorb(reports))
     }
 }
+
+class SessionTrackerTest {
+    @Test fun sessionsAreMeasuredFromTicks() {
+        var now = 10_000_000L
+        val j = TvJournal(castbridge.core.parental.MemoryKv(), { now })
+        val t = SessionTracker(j, { now })
+        repeat(10) { now += 60_000; t.tick(EventType.VIDEO, "Bluey", "p1", 60_000) }          // 10 min of video
+        repeat(3) { now += 60_000; t.tick(EventType.QUIZ, "Quiz", "p1", 60_000) }               // title change closes the video
+        t.tick(null, "", "p1", 0)                                                              // nothing running closes the quiz
+        t.tick(EventType.GAME, "Échecs", "p1", 10_000); t.tick(null, "", "p1", 0)               // 10 s glimpse: ignored
+        val ev = j.all()
+        assertEquals(2, ev.size)
+        assertEquals("video", ev[0]["t"]); assertEquals(10, (ev[0]["min"] as Number).toInt()); assertEquals("Bluey", ev[0]["title"])
+        assertEquals("quiz", ev[1]["t"]); assertEquals(3, (ev[1]["min"] as Number).toInt())
+    }
+
+    @Test fun veryLongSessionIsCutAndNoProfileMeansNothing() {
+        var now = 10_000_000L
+        val j = TvJournal(castbridge.core.parental.MemoryKv(), { now }); val t = SessionTracker(j, { now }, maxMs = 5 * 60_000L)
+        repeat(12) { now += 60_000; t.tick(EventType.VIDEO, "Film", "p1", 60_000) }; t.close()
+        assertEquals(listOf(5, 5, 2), j.all().map { (it["min"] as Number).toInt() })
+        repeat(5) { t.tick(EventType.VIDEO, "Film", null, 60_000) }; t.close()
+        assertEquals(3, j.all().size)
+    }
+}

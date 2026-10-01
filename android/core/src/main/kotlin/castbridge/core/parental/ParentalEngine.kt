@@ -70,12 +70,16 @@ class ParentalEngine(
         return null
     }
 
+    /** Called after a refused PIN (the TV glue journals the attempt: « tentatives de déverrouillage »). It never receives the PIN. */
+    @Volatile var onPinFailure: (() -> Unit)? = null
+
     /** Checks the parental PIN with progressive lockout. An empty PIN is a wrong PIN (and counts). */
     @Synchronized fun verifyPin(pin: String?): PinResult {
         val stored = store.get("pin") ?: return PinResult.NoPin
         if (pinLock.isLocked()) return PinResult.Locked((pinLock.remainingMs() + 999) / 1000)
         if (pin != null && hasher.verify(pin, stored)) { pinLock.recordSuccess(); return PinResult.Ok }
         pinLock.recordFailure()
+        onPinFailure?.invoke()
         return if (pinLock.isLocked()) PinResult.Locked((pinLock.remainingMs() + 999) / 1000) else PinResult.Wrong(pinLock.attemptsLeft())
     }
 

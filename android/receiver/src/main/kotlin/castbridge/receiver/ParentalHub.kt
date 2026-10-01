@@ -17,6 +17,10 @@ import castbridge.core.parental.KvStore
 import castbridge.core.parental.ParentalApi
 import castbridge.core.parental.ParentalEngine
 import castbridge.core.parental.ParentalReports
+import castbridge.core.parental.tab.EventType
+import castbridge.core.parental.tab.LearnDigest
+import castbridge.core.parental.tab.SessionTracker
+import castbridge.core.parental.tab.TvJournal
 import castbridge.core.parental.ReportOutbox
 import castbridge.core.parental.ReportRecipients
 import castbridge.core.parental.ReportSyncHost
@@ -63,6 +67,10 @@ object ParentalHub {
     private var lastTick = 0L
     @Volatile private var reportsOrNull: ParentalReports? = null
     @Volatile private var syncOrNull: ReportSyncHost? = null
+    // journal of what CastBridge-TV itself did (measured first-hand): carried by the daily report to the parent's phone (docs/PARENTAL.md, « Onglet Parental »)
+    @Volatile private var journalOrNull: TvJournal? = null
+    @Volatile private var tracker: SessionTracker? = null
+    @Volatile private var currentVideo = ""
     // whole-TV supervision (main thread only)
     private var fgPkg: String? = null
     private var lastApp = 0L
@@ -95,6 +103,10 @@ object ParentalHub {
         val outbox = ReportOutbox(rkv)
         val rp = ParentalReports(rkv, engine, recipients, outbox, tvName)
         reportsOrNull = rp
+        val journal = TvJournal(rkv).also { journalOrNull = it }
+        tracker = SessionTracker(journal)
+        rp.extras = { p, since -> journalExtras(p, since, journal) }
+        engine.onPinFailure = { main.post { runCatching { journal.record(EventType.UNLOCK, engine.activeProfile()?.id, "Code parental refusé sur la TV") } } }
         syncOrNull = ReportSyncHost(recipients, outbox, trusted, tvName)
         // Events reach the reports layer through the main thread, never under the engine's lock (the reports layer calls the engine: one lock order only).
         engine.onEvent = { ev -> main.post { runCatching { rp.onEvent(ev) } } }
@@ -106,6 +118,16 @@ object ParentalHub {
         ForegroundWatcher.start(c)
         lastTick = SystemClock.elapsedRealtime()
         main.postDelayed(ticker, TICK_MS)
+    }
+
+    /** Additive fields of the daily report: the TV's journal and the progress of « Apprendre » for the profile (nothing new is collected: existing counters). */
+    private fun journalExtras(p: ChildProfile, since: Long, journal: TvJournal): Map<String, Any?> {
+        val learn = runCatching { LearnHub.progress() }.getOrNull()
+        val lid = p.learnId
+        val ev = journal.forReport(p.id, since) + (if (learn != null && lid != null) TvJournal.fromLearn(learn.state, lid, p.id, since).takeLast(40) else emptyList())
+        val out = linkedMapOf<String, Any?>("events" to ev)
+        if (learn != null && lid != null) LearnDigest.build(learn, lid, System.currentTimeMillis())?.let { out["learn"] = it }
+        return out
     }
 
     private fun learnProfiles(): List<Triple<String, String, String?>> =
@@ -215,6 +237,7 @@ object ParentalHub {
      */
     fun gatePlay(name: String) {
         if (engineOrNull == null) return
+        currentVideo = name
         val vol = volumeLabelOf(name)
         val locked = engine.needsPinToPlay(name, vol)
         val granted = grantedName == name && SystemClock.elapsedRealtime() < grantedUntil
@@ -331,6 +354,11 @@ object ParentalHub {
         // a category that became blocked while its screen is open (end of a parent session, profile switched)
         if (t != null && t !is ParentalLockActivity) enforce(t)
         val r = e.tick(kind, dt)
+        runCatching {
+            val type = when { playing -> EventType.VIDEO; t is QuizActivity -> EventType.QUIZ; t is ChessActivity -> EventType.GAME; t is DownloadsActivity -> EventType.DOWNLOAD; else -> null }
+            val title = when { playing -> currentVideo.ifBlank { "Vidéo" }; t is QuizActivity -> "Quiz"; t is ChessActivity -> "Échecs"; else -> "Téléchargements" }
+            tracker?.tick(type, title, e.activeProfile()?.id, dt)
+        }
         r.warnMinutes?.let { m ->
             app?.let { Toast.makeText(it, "Il reste ${if (m <= 1) "1 minute" else "$m minutes"} d'écran. Pensez à terminer.", Toast.LENGTH_LONG).show() }
         }
