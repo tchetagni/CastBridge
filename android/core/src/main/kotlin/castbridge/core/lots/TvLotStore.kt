@@ -168,19 +168,23 @@ class TvLotStore(
         val have = held().firstOrNull { it.id == id }
         if (have != null && have.version > meta.version) { file.delete(); return Result.Refused("version plus récente déjà installée (${have.version})") }
         if (have != null && have.version == meta.version && have.sha256 == meta.sha256) { file.delete(); clearRejections(id); return Result.Ok(emptyList()) }
+        // editions: a full lot replaces its trial twin (never both on the TV); a trial lot is refused once the full one is there
+        if (meta.edition == Edition.TRIAL && held().any { it.id == LotEditions.fullOf(id) }) { file.delete(); return Result.Refused("la version complète est déjà installée") }
+        val twin = if (meta.edition == Edition.FULL) held().firstOrNull { it.id == LotEditions.trialOf(id) } else null
         // the budget: strict, evicting only non-priority lots, and only if that is enough
         val free = maxBytes - usedBytes()
-        val net = meta.bytes - (have?.bytes ?: 0L)
+        val net = meta.bytes - (have?.bytes ?: 0L) - (twin?.bytes ?: 0L)
         val evict = ArrayList<LotId>()
         if (net > free) {
             var f = free
-            for (v in evictionOrder(except = id)) { evict += v; f += held().first { it.id == v }.bytes; if (net <= f) break }
+            for (v in evictionOrder(except = id).filter { it != twin?.id }) { evict += v; f += held().first { it.id == v }.bytes; if (net <= f) break }
             if (net > f) return no("Pas assez de place sur la TV : « ${meta.title} » (${LotStore.mo(meta.bytes)}) dépasse les ${LotStore.mo(maxBytes)} prévus " +
                 "(il manque ${LotStore.mo(net - f)} ; les données prioritaires sont conservées)")
         }
         val ok = runCatching { consumer.install(meta, file) }.getOrDefault(false)
         if (!ok) return no("installation refusée par « ${id.feature} » : la version précédente reste en place")
         evict.forEach { consumers[it.feature]?.remove(it); installedAt.remove(it) }
+        if (twin != null) { consumers[twin.id.feature]?.remove(twin.id); installedAt.remove(twin.id) }
         // hard guarantee: whatever the consumer reported, never stay over the cap
         if (usedBytes() > maxBytes) {
             consumer.remove(id)

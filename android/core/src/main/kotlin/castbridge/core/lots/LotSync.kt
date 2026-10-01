@@ -75,8 +75,10 @@ class LotSync(
     private val appVersion: Int,
     private val net: () -> Net,
     private val sleep: (Long) -> Unit = { Thread.sleep(it) },
+    /** Edition rule (docs/TRIAL-EDITION.md): may this device hold this lot? Default: yes (nothing changes without the edition model). */
+    private val allowed: (LotMeta) -> Boolean = { true },
 ) {
-    enum class Outcome { UP_TO_DATE, INSTALLED, UPDATED, SKIPPED_FULL, SKIPPED_APP_TOO_OLD, NOT_IN_CATALOG, FAILED, CANCELLED }
+    enum class Outcome { UP_TO_DATE, INSTALLED, UPDATED, SKIPPED_FULL, SKIPPED_APP_TOO_OLD, NOT_IN_CATALOG, FAILED, CANCELLED, NOT_ENTITLED }
 
     data class Result(val id: LotId, val outcome: Outcome, val message: String = "", val bytes: Long = 0)
 
@@ -125,6 +127,7 @@ class LotSync(
             val have = store.get(id)?.meta
             results += when {
                 m == null -> Result(id, Outcome.NOT_IN_CATALOG, "pas (encore) publié par le serveur")
+                !allowed(m) -> Result(id, Outcome.NOT_ENTITLED, "« ${m.title} » fait partie de la version complète : débloquez-le pour le télécharger")
                 have != null && have.version >= m.version && have.sha256 == m.sha256 -> Result(id, Outcome.UP_TO_DATE)
                 have != null && have.version > m.version -> Result(id, Outcome.UP_TO_DATE)
                 m.minAppVersion > appVersion -> Result(id, Outcome.SKIPPED_APP_TOO_OLD, "« ${m.title} » demande une version plus récente de CastBridge")
@@ -134,6 +137,7 @@ class LotSync(
                 }
             }
         }
+        store.dropSupersededTrials()
         return Report(cat, null, results)
     }
 

@@ -1,0 +1,1960 @@
+{
+  "format": "castbridge-activation-test-vectors-v1",
+  "warning": "CLÉS DE TEST UNIQUEMENT : ces graines sont dérivées de textes publics et ne valent rien ; ne jamais les utiliser ailleurs que dans les tests",
+  "nowMs": 1800000000000,
+  "compactEpochMs": 1767225600000,
+  "keys": [
+    {
+      "name": "desk",
+      "seed": "81c053a3abe5f280a6f0e9f499ad973d6809efd85dab1ff1ec538a263d6aab61",
+      "publicKey": "cDpSEwttrWQrJ+SvfTmvQEhkwwnCQYlpymjT4qIs9bI=",
+      "kid": "b2e5b41860d1d8be",
+      "scopes": ["COMMAND_OPEN_ALL", "COMMAND_SUPPORT", "COMMAND_UNLOCK", "ISSUE_PRODUCTION", "ISSUE_TRIAL", "REGISTRY", "REVOKE", "TRANSFER"]
+    },
+    {
+      "name": "phone",
+      "seed": "042d00035f87ec3c05b60144e17470e576c27ff0b65395e5d54248dc5d415aad",
+      "publicKey": "oi6Kn0N+IQS+3UGsnwQoJokisUgBFhS0oBiD++pBboY=",
+      "kid": "edec55f2f651c508",
+      "scopes": ["COMMAND_OPEN_ALL", "COMMAND_SUPPORT", "COMMAND_UNLOCK", "ISSUE_PRODUCTION", "ISSUE_TRIAL", "REVOKE", "TRANSFER"]
+    },
+    {
+      "name": "server",
+      "seed": "ba644f4d626ec4d740001dda44c15a137227798345349498f5a7318958ebc5ad",
+      "publicKey": "NkwlTOU+5giijtjEeVIUX8OpzDb0s1OGSMIRxZcy4u4=",
+      "kid": "ce202dfdbe57b99a",
+      "scopes": ["ISSUE_PRODUCTION", "ISSUE_TRIAL", "REGISTRY", "REVOKE"]
+    },
+    {
+      "name": "support",
+      "seed": "339768e7e0d2d7013ed5331333a25619decd58294a5f31ff6269056a6200d825",
+      "publicKey": "rqgajMxPtM5thi82wG9ZaaQeTWTtW7uaY+bZxibOIoU=",
+      "kid": "e56fb4fffa794a41",
+      "scopes": ["COMMAND_SUPPORT"]
+    },
+    {
+      "name": "rogue",
+      "seed": "a77b7a4fbe7182020cdcdb5c53edd36dde88808c6f16816e33dd455df5ebe16c",
+      "publicKey": "A6uTO2WcNrl5dJcB2pgRqXV/dt3GMF5gBGDF7+N1nho=",
+      "kid": "df9e7c0d8cc2809d",
+      "scopes": ["COMMAND_OPEN_ALL", "COMMAND_SUPPORT", "COMMAND_UNLOCK", "ISSUE_PRODUCTION", "ISSUE_TRIAL", "REGISTRY", "REVOKE", "TRANSFER"]
+    }
+  ],
+  "devices": [
+    {
+      "name": "tvA",
+      "raw": {
+        "flashSerial": "FLASHSERIAL-A1",
+        "flashCid": "cid-a1",
+        "ethernetMac": "AA:BB:CC:00:11:01",
+        "wifiMac": "10:20:30:40:50:01",
+        "wifiSysfsPath": "/sys/devices/platform/soc/ffe03000.sd/mmc_host/mmc1/mmc1:0001/net/wlan0",
+        "systemSerial": "SYSA0001",
+        "bluetoothAddress": "11:22:33:44:55:01"
+      },
+      "code": "ZX8P-S2TH-N5PG-V9V7",
+      "fingerprints": {
+        "FLASH": "c48cacd81b9663d0ba97c221cbd17f4f",
+        "ETHERNET": "f91efd89e0025c2262da12cfbed43632",
+        "WIFI": "ea8b552e2240bbdd8c88c42313c4deab",
+        "SYSTEM_SERIAL": "774beacbf351b0d205f9166669e4d3c7",
+        "BLUETOOTH": "d365ea67e00585edaf8bef4d7378850d"
+      }
+    },
+    {
+      "name": "tvA-swapped-wifi",
+      "raw": {
+        "flashSerial": "FLASHSERIAL-A1",
+        "flashCid": "cid-a1",
+        "ethernetMac": "AA:BB:CC:00:11:01",
+        "wifiMac": "99:99:99:99:99:99",
+        "wifiSysfsPath": "/sys/devices/platform/soc/ffe03000.sd/mmc_host/mmc1/mmc1:0001/net/wlan0",
+        "systemSerial": "SYSA0001",
+        "bluetoothAddress": "11:22:33:44:55:01"
+      },
+      "code": "ZGQE-4E64-PTJ1-E3VZ",
+      "fingerprints": {
+        "FLASH": "c48cacd81b9663d0ba97c221cbd17f4f",
+        "ETHERNET": "f91efd89e0025c2262da12cfbed43632",
+        "WIFI": "3b3be8657cfa25b97f464ec3d62efb8e",
+        "SYSTEM_SERIAL": "774beacbf351b0d205f9166669e4d3c7",
+        "BLUETOOTH": "d365ea67e00585edaf8bef4d7378850d"
+      }
+    },
+    {
+      "name": "tvB-no-ethernet-usb-wifi",
+      "raw": {
+        "flashSerial": "FLASHSERIAL-B2",
+        "flashCid": "cid-b2",
+        "ethernetMac": null,
+        "wifiMac": "10:20:30:40:50:02",
+        "wifiSysfsPath": "/sys/devices/platform/soc/fe340000.usb/usb1/1-1/1-1.1:1.0/net/wlan0",
+        "systemSerial": "SYSB0002",
+        "bluetoothAddress": "11:22:33:44:55:02"
+      },
+      "code": "SWT8-1ZDP-WZF0-SX84",
+      "fingerprints": {
+        "FLASH": "7ce26676ef99dd28f2f66ab38eaf5c8c",
+        "SYSTEM_SERIAL": "bda7f8b8f612a9d126fc3252b4a6b514",
+        "BLUETOOTH": "29094a4d59e4ab6b18d658efa9bcdbdb"
+      }
+    },
+    {
+      "name": "tvC-weak",
+      "raw": {
+        "flashSerial": null,
+        "flashCid": null,
+        "ethernetMac": null,
+        "wifiMac": null,
+        "wifiSysfsPath": null,
+        "systemSerial": "SYSC0003",
+        "bluetoothAddress": null
+      },
+      "code": "8R1S-GJWS-TXDW-K9SP",
+      "fingerprints": {
+        "SYSTEM_SERIAL": "0543e3858e7237c525706296248ffd2d"
+      }
+    },
+    {
+      "name": "phoneP",
+      "raw": {
+        "flashSerial": null,
+        "flashCid": null,
+        "ethernetMac": null,
+        "wifiMac": null,
+        "wifiSysfsPath": null,
+        "systemSerial": "androidid:9774d56d682e549c",
+        "bluetoothAddress": null
+      },
+      "code": "83MZ-QPNX-0AX0-K2Y9",
+      "fingerprints": {
+        "SYSTEM_SERIAL": "bf398694573db9e7d052b335b1c51e10"
+      }
+    },
+    {
+      "name": "tvN1",
+      "raw": {
+        "flashSerial": "FLASHSERIAL-N1",
+        "flashCid": "cid-n1",
+        "ethernetMac": "AA:BB:CC:00:11:11",
+        "wifiMac": "10:20:30:40:50:11",
+        "wifiSysfsPath": "/sys/devices/platform/soc/ffe03000.sd/mmc_host/mmc1/mmc1:0001/net/wlan0",
+        "systemSerial": "SYSN0001",
+        "bluetoothAddress": "11:22:33:44:55:11"
+      },
+      "code": "Z5MM-152E-TM7N-P3XP",
+      "fingerprints": {
+        "FLASH": "10d123edb545f91fabebe21e2016c1ed",
+        "ETHERNET": "83b03b3f4ba4617a09264faa6fc31d78",
+        "WIFI": "44e6abc95cd4a3682b49152f4b621c4f",
+        "SYSTEM_SERIAL": "c44a4a0841d7abd8dd38f29fc2d205f6",
+        "BLUETOOTH": "af004d08653b0d081bbf216f082f78f5"
+      }
+    },
+    {
+      "name": "tvN2",
+      "raw": {
+        "flashSerial": "FLASHSERIAL-N2",
+        "flashCid": "cid-n2",
+        "ethernetMac": "AA:BB:CC:00:11:12",
+        "wifiMac": "10:20:30:40:50:12",
+        "wifiSysfsPath": "/sys/devices/platform/soc/ffe03000.sd/mmc_host/mmc1/mmc1:0001/net/wlan0",
+        "systemSerial": "SYSN0002",
+        "bluetoothAddress": "11:22:33:44:55:12"
+      },
+      "code": "ZMXA-6TJY-Y7YM-ADNH",
+      "fingerprints": {
+        "FLASH": "e32c14fac420b4484777764c85d77a67",
+        "ETHERNET": "ea713de37c8c3382760664841093a5b5",
+        "WIFI": "7c06c397bfd0ec9ea44ee605c272b3b6",
+        "SYSTEM_SERIAL": "6af178dca910403de7a0f475ef6e9580",
+        "BLUETOOTH": "f7df24c4473f5b38ec92ae4c8bf81ab4"
+      }
+    },
+    {
+      "name": "tvN3",
+      "raw": {
+        "flashSerial": "FLASHSERIAL-N3",
+        "flashCid": "cid-n3",
+        "ethernetMac": "AA:BB:CC:00:11:13",
+        "wifiMac": "10:20:30:40:50:13",
+        "wifiSysfsPath": "/sys/devices/platform/soc/ffe03000.sd/mmc_host/mmc1/mmc1:0001/net/wlan0",
+        "systemSerial": "SYSN0003",
+        "bluetoothAddress": "11:22:33:44:55:13"
+      },
+      "code": "Z601-1J4G-5TH4-9ED3",
+      "fingerprints": {
+        "FLASH": "3f71d6c11d29fe6c7e40d260f8f4398f",
+        "ETHERNET": "1d804ca7a15b4b0681b9088fc89e3494",
+        "WIFI": "2272ad38a17ee952f59db46f5604b5ad",
+        "SYSTEM_SERIAL": "c69e20e6e067b8cd30940c0d6e510399",
+        "BLUETOOTH": "ad95dd5bfd5e43868db59d0b7f0054c2"
+      }
+    }
+  ],
+  "cases": [
+    {
+      "type": "fingerprints",
+      "id": "fp-tvA",
+      "description": "facteurs bruts -> empreintes, code d'appareil, k",
+      "raw": {
+        "flashSerial": "FLASHSERIAL-A1",
+        "flashCid": "cid-a1",
+        "ethernetMac": "AA:BB:CC:00:11:01",
+        "wifiMac": "10:20:30:40:50:01",
+        "wifiSysfsPath": "/sys/devices/platform/soc/ffe03000.sd/mmc_host/mmc1/mmc1:0001/net/wlan0",
+        "systemSerial": "SYSA0001",
+        "bluetoothAddress": "11:22:33:44:55:01"
+      },
+      "expect": {
+        "fingerprints": {
+          "FLASH": "c48cacd81b9663d0ba97c221cbd17f4f",
+          "ETHERNET": "f91efd89e0025c2262da12cfbed43632",
+          "WIFI": "ea8b552e2240bbdd8c88c42313c4deab",
+          "SYSTEM_SERIAL": "774beacbf351b0d205f9166669e4d3c7",
+          "BLUETOOTH": "d365ea67e00585edaf8bef4d7378850d"
+        },
+        "code": "ZX8P-S2TH-N5PG-V9V7",
+        "k": 4,
+        "weak": false,
+        "setHash": "ea2d916a352da1b4ee02fc4b5807b2ef09a74b3b2f0d7c5aed4ab461dd7ccdea"
+      }
+    },
+    {
+      "type": "fingerprints",
+      "id": "fp-tvA-swapped-wifi",
+      "description": "facteurs bruts -> empreintes, code d'appareil, k",
+      "raw": {
+        "flashSerial": "FLASHSERIAL-A1",
+        "flashCid": "cid-a1",
+        "ethernetMac": "AA:BB:CC:00:11:01",
+        "wifiMac": "99:99:99:99:99:99",
+        "wifiSysfsPath": "/sys/devices/platform/soc/ffe03000.sd/mmc_host/mmc1/mmc1:0001/net/wlan0",
+        "systemSerial": "SYSA0001",
+        "bluetoothAddress": "11:22:33:44:55:01"
+      },
+      "expect": {
+        "fingerprints": {
+          "FLASH": "c48cacd81b9663d0ba97c221cbd17f4f",
+          "ETHERNET": "f91efd89e0025c2262da12cfbed43632",
+          "WIFI": "3b3be8657cfa25b97f464ec3d62efb8e",
+          "SYSTEM_SERIAL": "774beacbf351b0d205f9166669e4d3c7",
+          "BLUETOOTH": "d365ea67e00585edaf8bef4d7378850d"
+        },
+        "code": "ZGQE-4E64-PTJ1-E3VZ",
+        "k": 4,
+        "weak": false,
+        "setHash": "85dc471896d482e1edcf1faf9f3206e41404ddda7f0b3c8ec967698f8112356f"
+      }
+    },
+    {
+      "type": "fingerprints",
+      "id": "fp-tvB-no-ethernet-usb-wifi",
+      "description": "facteurs bruts -> empreintes, code d'appareil, k",
+      "raw": {
+        "flashSerial": "FLASHSERIAL-B2",
+        "flashCid": "cid-b2",
+        "ethernetMac": null,
+        "wifiMac": "10:20:30:40:50:02",
+        "wifiSysfsPath": "/sys/devices/platform/soc/fe340000.usb/usb1/1-1/1-1.1:1.0/net/wlan0",
+        "systemSerial": "SYSB0002",
+        "bluetoothAddress": "11:22:33:44:55:02"
+      },
+      "expect": {
+        "fingerprints": {
+          "FLASH": "7ce26676ef99dd28f2f66ab38eaf5c8c",
+          "SYSTEM_SERIAL": "bda7f8b8f612a9d126fc3252b4a6b514",
+          "BLUETOOTH": "29094a4d59e4ab6b18d658efa9bcdbdb"
+        },
+        "code": "SWT8-1ZDP-WZF0-SX84",
+        "k": 2,
+        "weak": false,
+        "setHash": "e6901fb6dcfbc19ea206632b4a366917654aa260bc54c908653970a2d3faec51"
+      }
+    },
+    {
+      "type": "fingerprints",
+      "id": "fp-tvC-weak",
+      "description": "facteurs bruts -> empreintes, code d'appareil, k",
+      "raw": {
+        "flashSerial": null,
+        "flashCid": null,
+        "ethernetMac": null,
+        "wifiMac": null,
+        "wifiSysfsPath": null,
+        "systemSerial": "SYSC0003",
+        "bluetoothAddress": null
+      },
+      "expect": {
+        "fingerprints": {
+          "SYSTEM_SERIAL": "0543e3858e7237c525706296248ffd2d"
+        },
+        "code": "8R1S-GJWS-TXDW-K9SP",
+        "k": 1,
+        "weak": true,
+        "setHash": "c07309733aeb7934e5c94390ce4c9d952d79d00d592a5ffda0e7ee6a144593a8"
+      }
+    },
+    {
+      "type": "fingerprints",
+      "id": "fp-phoneP",
+      "description": "facteurs bruts -> empreintes, code d'appareil, k",
+      "raw": {
+        "flashSerial": null,
+        "flashCid": null,
+        "ethernetMac": null,
+        "wifiMac": null,
+        "wifiSysfsPath": null,
+        "systemSerial": "androidid:9774d56d682e549c",
+        "bluetoothAddress": null
+      },
+      "expect": {
+        "fingerprints": {
+          "SYSTEM_SERIAL": "bf398694573db9e7d052b335b1c51e10"
+        },
+        "code": "83MZ-QPNX-0AX0-K2Y9",
+        "k": 1,
+        "weak": true,
+        "setHash": "1d3f7b57a057413178bf87971d34d19f5326d28fd721bf51f8b5704de26983de"
+      }
+    },
+    {
+      "type": "fingerprints",
+      "id": "fp-tvN1",
+      "description": "facteurs bruts -> empreintes, code d'appareil, k",
+      "raw": {
+        "flashSerial": "FLASHSERIAL-N1",
+        "flashCid": "cid-n1",
+        "ethernetMac": "AA:BB:CC:00:11:11",
+        "wifiMac": "10:20:30:40:50:11",
+        "wifiSysfsPath": "/sys/devices/platform/soc/ffe03000.sd/mmc_host/mmc1/mmc1:0001/net/wlan0",
+        "systemSerial": "SYSN0001",
+        "bluetoothAddress": "11:22:33:44:55:11"
+      },
+      "expect": {
+        "fingerprints": {
+          "FLASH": "10d123edb545f91fabebe21e2016c1ed",
+          "ETHERNET": "83b03b3f4ba4617a09264faa6fc31d78",
+          "WIFI": "44e6abc95cd4a3682b49152f4b621c4f",
+          "SYSTEM_SERIAL": "c44a4a0841d7abd8dd38f29fc2d205f6",
+          "BLUETOOTH": "af004d08653b0d081bbf216f082f78f5"
+        },
+        "code": "Z5MM-152E-TM7N-P3XP",
+        "k": 4,
+        "weak": false,
+        "setHash": "2d281289daa1eb61f5dc7b2c4bc5bdb4e550e617a1ddc8a902eaa9ce7fc2f502"
+      }
+    },
+    {
+      "type": "fingerprints",
+      "id": "fp-tvN2",
+      "description": "facteurs bruts -> empreintes, code d'appareil, k",
+      "raw": {
+        "flashSerial": "FLASHSERIAL-N2",
+        "flashCid": "cid-n2",
+        "ethernetMac": "AA:BB:CC:00:11:12",
+        "wifiMac": "10:20:30:40:50:12",
+        "wifiSysfsPath": "/sys/devices/platform/soc/ffe03000.sd/mmc_host/mmc1/mmc1:0001/net/wlan0",
+        "systemSerial": "SYSN0002",
+        "bluetoothAddress": "11:22:33:44:55:12"
+      },
+      "expect": {
+        "fingerprints": {
+          "FLASH": "e32c14fac420b4484777764c85d77a67",
+          "ETHERNET": "ea713de37c8c3382760664841093a5b5",
+          "WIFI": "7c06c397bfd0ec9ea44ee605c272b3b6",
+          "SYSTEM_SERIAL": "6af178dca910403de7a0f475ef6e9580",
+          "BLUETOOTH": "f7df24c4473f5b38ec92ae4c8bf81ab4"
+        },
+        "code": "ZMXA-6TJY-Y7YM-ADNH",
+        "k": 4,
+        "weak": false,
+        "setHash": "a7546d4bde3fa8a6d4715feaa69a9a48db505a802b58cf11202be10c7848dd9f"
+      }
+    },
+    {
+      "type": "fingerprints",
+      "id": "fp-tvN3",
+      "description": "facteurs bruts -> empreintes, code d'appareil, k",
+      "raw": {
+        "flashSerial": "FLASHSERIAL-N3",
+        "flashCid": "cid-n3",
+        "ethernetMac": "AA:BB:CC:00:11:13",
+        "wifiMac": "10:20:30:40:50:13",
+        "wifiSysfsPath": "/sys/devices/platform/soc/ffe03000.sd/mmc_host/mmc1/mmc1:0001/net/wlan0",
+        "systemSerial": "SYSN0003",
+        "bluetoothAddress": "11:22:33:44:55:13"
+      },
+      "expect": {
+        "fingerprints": {
+          "FLASH": "3f71d6c11d29fe6c7e40d260f8f4398f",
+          "ETHERNET": "1d804ca7a15b4b0681b9088fc89e3494",
+          "WIFI": "2272ad38a17ee952f59db46f5604b5ad",
+          "SYSTEM_SERIAL": "c69e20e6e067b8cd30940c0d6e510399",
+          "BLUETOOTH": "ad95dd5bfd5e43868db59d0b7f0054c2"
+        },
+        "code": "Z601-1J4G-5TH4-9ED3",
+        "k": 4,
+        "weak": false,
+        "setHash": "3002191205d448973588713ba865087999c407deeda0f453309aaf34254cbb6d"
+      }
+    },
+    {
+      "type": "fingerprints",
+      "id": "fp-placeholders",
+      "description": "valeurs bidon ignorées, aucun facteur",
+      "raw": {
+        "flashSerial": "0000000000",
+        "flashCid": null,
+        "ethernetMac": "02:00:00:00:00:00",
+        "wifiMac": null,
+        "wifiSysfsPath": null,
+        "systemSerial": "unknown",
+        "bluetoothAddress": "00:00:00:00:00:00"
+      },
+      "expect": {
+        "fingerprints": {},
+        "code": null,
+        "k": 1,
+        "weak": true,
+        "setHash": null
+      }
+    },
+    {
+      "type": "base32",
+      "id": "b32-1",
+      "description": "Base32 Crockford, sans remplissage",
+      "bytesHex": "00ff10",
+      "expectText": "03ZH0"
+    },
+    {
+      "type": "grouped",
+      "id": "grouped-1",
+      "description": "groupes de 5 (4 + contrôle), préfixe de longueur sur 2 octets",
+      "bytesHex": "63617374627269646765",
+      "expectText": "0056A-6RBKR-EHH7W-4TB41-CXJGG"
+    },
+    {
+      "type": "grouped-decode",
+      "id": "grouped-bad-group",
+      "description": "un caractère faux : le groupe 2 est désigné",
+      "text": "0056A-ARBKR-EHH7W-4TB41-CXJGG",
+      "expect": {
+        "result": "bad-group",
+        "group": 2
+      }
+    },
+    {
+      "type": "grouped-decode",
+      "id": "grouped-sloppy",
+      "description": "minuscules, espaces, O pour 0 et I pour 1 acceptés",
+      "text": "oo56a 6rbkr ehh7w 4tb4i cxjgg",
+      "expect": {
+        "result": "ok",
+        "bytesHex": "63617374627269646765"
+      }
+    },
+    {
+      "type": "device-code-parse",
+      "id": "code-confusions",
+      "description": "code d'appareil saisi avec confusions O/0 I/1 et minuscules",
+      "text": "zx8p-s2th-n5pg-v9v7",
+      "expect": {
+        "result": "ok",
+        "code": "ZX8P-S2TH-N5PG-V9V7"
+      }
+    },
+    {
+      "type": "device-code-parse",
+      "id": "code-bad-check",
+      "description": "somme de contrôle fausse",
+      "text": "ZX8P-S2TH-N5PG-V9VA",
+      "expect": {
+        "result": "invalid"
+      }
+    },
+    {
+      "type": "activation",
+      "id": "act-trial",
+      "description": "clé d'essai pour la TV (aucun droit, licence trial)",
+      "token": "cba1.Y2FzdGJyaWRnZS1hY3RpdmF0aW9uLXYxCmtpbmQ9dHJpYWwKc3ViamVjdD10dgpraWQ9YjJlNWI0MTg2MGQxZDhiZQpub25jZT0wMDExMjIzMzQ0NTU2Njc3ODg5OWFhYmJjY2RkZWVmZgppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xNzk5OTEzNjAwMDAwCm5vdEFmdGVyPTE4MjU4MzM2MDAwMDAKbGljZW5zZT10cmlhbApzZWF0PTM4OWI1ODNhYjZiZWE4NTYKaz00CmZhY3Rvcj1GTEFTSHxjNDhjYWNkODFiOTY2M2QwYmE5N2MyMjFjYmQxN2Y0ZgpmYWN0b3I9RVRIRVJORVR8ZjkxZWZkODllMDAyNWMyMjYyZGExMmNmYmVkNDM2MzIKZmFjdG9yPVdJRkl8ZWE4YjU1MmUyMjQwYmJkZDhjODhjNDIzMTNjNGRlYWIKZmFjdG9yPVNZU1RFTV9TRVJJQUx8Nzc0YmVhY2JmMzUxYjBkMjA1ZjkxNjY2NjllNGQzYzcKZmFjdG9yPUJMVUVUT09USHxkMzY1ZWE2N2UwMDU4NWVkYWY4YmVmNGQ3Mzc4ODUwZA.2GPtfCXYZOnWqQ9+a37s+rnbVnIq53G8II8nA/g3neZhQENO6TSGRtHYgLINL3omaE+4Cb9Jf5wo2QiPRazlBg==",
+      "device": "tvA",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "revokedSeats": [],
+      "expectSubject": "tv",
+      "expect": {
+        "result": "accepted",
+        "kind": "trial",
+        "subject": "tv",
+        "license": "trial",
+        "seat": "389b583ab6bea856",
+        "weakIdentity": false
+      }
+    },
+    {
+      "type": "activation",
+      "id": "act-production",
+      "description": "production : achat + abonnement",
+      "token": "cba1.Y2FzdGJyaWRnZS1hY3RpdmF0aW9uLXYxCmtpbmQ9cHJvZHVjdGlvbgpzdWJqZWN0PXR2CmtpZD1iMmU1YjQxODYwZDFkOGJlCm5vbmNlPTAwMTEyMjMzNDQ1NTY2Nzc4ODk5YWFiYmNjZGRlZWZmCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE3OTk5MTM2MDAwMDAKbm90QWZ0ZXI9MTgyNTgzMzYwMDAwMApsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNAprPTQKZmFjdG9yPUZMQVNIfGM0OGNhY2Q4MWI5NjYzZDBiYTk3YzIyMWNiZDE3ZjRmCmZhY3Rvcj1FVEhFUk5FVHxmOTFlZmQ4OWUwMDI1YzIyNjJkYTEyY2ZiZWQ0MzYzMgpmYWN0b3I9V0lGSXxlYThiNTUyZTIyNDBiYmRkOGM4OGM0MjMxM2M0ZGVhYgpmYWN0b3I9U1lTVEVNX1NFUklBTHw3NzRiZWFjYmYzNTFiMGQyMDVmOTE2NjY2OWU0ZDNjNwpmYWN0b3I9QkxVRVRPT1RIfGQzNjVlYTY3ZTAwNTg1ZWRhZjhiZWY0ZDczNzg4NTBkCnJpZ2h0PXB1cmNoYXNlfHAtY2xhc3NlLWNtMnxjbGFzc2UtY20yfDE3OTkxMzYwMDAwMDAKcmlnaHQ9c3Vic2NyaXB0aW9ufGFiby10b3V0fHRvdXR8MTc5OTkxMzYwMDAwMHwxODA3Nzc2MDAwMDAwfDYwNDgwMDAwMHwx.gdb00NSa6WzWq/KhoS9cFCBp7uLVkvbtAW69c3BP0IWYvCiD502H661/v1tCu8oHOumVRvuFUMP6hKyeMAr1Bg==",
+      "device": "tvA",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "revokedSeats": [],
+      "expectSubject": "tv",
+      "expect": {
+        "result": "accepted",
+        "kind": "production",
+        "subject": "tv",
+        "license": "lic-0001",
+        "seat": "f36757c226dd2ee4",
+        "weakIdentity": false
+      }
+    },
+    {
+      "type": "activation",
+      "id": "act-open-all",
+      "description": "« tout ouvert » de 10 jours porté par la clé bureau",
+      "token": "cba1.Y2FzdGJyaWRnZS1hY3RpdmF0aW9uLXYxCmtpbmQ9cHJvZHVjdGlvbgpzdWJqZWN0PXR2CmtpZD1iMmU1YjQxODYwZDFkOGJlCm5vbmNlPTAwMTEyMjMzNDQ1NTY2Nzc4ODk5YWFiYmNjZGRlZWZmCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE3OTk5MTM2MDAwMDAKbm90QWZ0ZXI9MTgyNTgzMzYwMDAwMApsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNAprPTQKZmFjdG9yPUZMQVNIfGM0OGNhY2Q4MWI5NjYzZDBiYTk3YzIyMWNiZDE3ZjRmCmZhY3Rvcj1FVEhFUk5FVHxmOTFlZmQ4OWUwMDI1YzIyNjJkYTEyY2ZiZWQ0MzYzMgpmYWN0b3I9V0lGSXxlYThiNTUyZTIyNDBiYmRkOGM4OGM0MjMxM2M0ZGVhYgpmYWN0b3I9U1lTVEVNX1NFUklBTHw3NzRiZWFjYmYzNTFiMGQyMDVmOTE2NjY2OWU0ZDNjNwpmYWN0b3I9QkxVRVRPT1RIfGQzNjVlYTY3ZTAwNTg1ZWRhZjhiZWY0ZDczNzg4NTBkCnJpZ2h0PW9wZW5hbGx8b3V2ZXJ0fDE4MDAwMDAwMDAwMDB8MTgwMDg2NDAwMDAwMA.GJZhPSPKE8ofuVsx2qXYNDb+GEEvmdwtnz+WIpish06to3RQIs74xHisfC4OWReZ4wBz7HfA3c4oAjguAZhRCA==",
+      "device": "tvA",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "revokedSeats": [],
+      "expectSubject": "tv",
+      "expect": {
+        "result": "accepted",
+        "kind": "production",
+        "subject": "tv",
+        "license": "lic-0001",
+        "seat": "f36757c226dd2ee4",
+        "weakIdentity": false
+      }
+    },
+    {
+      "type": "activation",
+      "id": "act-swapped-module",
+      "description": "même activation, module Wi-Fi remplacé : k=4 sur n=5, acceptée",
+      "token": "cba1.Y2FzdGJyaWRnZS1hY3RpdmF0aW9uLXYxCmtpbmQ9cHJvZHVjdGlvbgpzdWJqZWN0PXR2CmtpZD1iMmU1YjQxODYwZDFkOGJlCm5vbmNlPTAwMTEyMjMzNDQ1NTY2Nzc4ODk5YWFiYmNjZGRlZWZmCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE3OTk5MTM2MDAwMDAKbm90QWZ0ZXI9MTgyNTgzMzYwMDAwMApsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNAprPTQKZmFjdG9yPUZMQVNIfGM0OGNhY2Q4MWI5NjYzZDBiYTk3YzIyMWNiZDE3ZjRmCmZhY3Rvcj1FVEhFUk5FVHxmOTFlZmQ4OWUwMDI1YzIyNjJkYTEyY2ZiZWQ0MzYzMgpmYWN0b3I9V0lGSXxlYThiNTUyZTIyNDBiYmRkOGM4OGM0MjMxM2M0ZGVhYgpmYWN0b3I9U1lTVEVNX1NFUklBTHw3NzRiZWFjYmYzNTFiMGQyMDVmOTE2NjY2OWU0ZDNjNwpmYWN0b3I9QkxVRVRPT1RIfGQzNjVlYTY3ZTAwNTg1ZWRhZjhiZWY0ZDczNzg4NTBkCnJpZ2h0PXB1cmNoYXNlfHAtY2xhc3NlLWNtMnxjbGFzc2UtY20yfDE3OTkxMzYwMDAwMDAKcmlnaHQ9c3Vic2NyaXB0aW9ufGFiby10b3V0fHRvdXR8MTc5OTkxMzYwMDAwMHwxODA3Nzc2MDAwMDAwfDYwNDgwMDAwMHwx.gdb00NSa6WzWq/KhoS9cFCBp7uLVkvbtAW69c3BP0IWYvCiD502H661/v1tCu8oHOumVRvuFUMP6hKyeMAr1Bg==",
+      "device": "tvA-swapped-wifi",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "revokedSeats": [],
+      "expectSubject": "tv",
+      "expect": {
+        "result": "accepted",
+        "kind": "production",
+        "subject": "tv",
+        "license": "lic-0001",
+        "seat": "f36757c226dd2ee4",
+        "weakIdentity": false
+      }
+    },
+    {
+      "type": "activation",
+      "id": "act-no-ethernet-tv",
+      "description": "TV sans Ethernet, Wi-Fi USB exclu : n=3, k=2",
+      "token": "cba1.Y2FzdGJyaWRnZS1hY3RpdmF0aW9uLXYxCmtpbmQ9cHJvZHVjdGlvbgpzdWJqZWN0PXR2CmtpZD1jZTIwMmRmZGJlNTdiOTlhCm5vbmNlPTAwMTEyMjMzNDQ1NTY2Nzc4ODk5YWFiYmNjZGRlZWZmCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE3OTk5MTM2MDAwMDAKbm90QWZ0ZXI9MTgyNTgzMzYwMDAwMApsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9M2NkMmJmMWU2ZTA1NjQ5NAprPTIKZmFjdG9yPUZMQVNIfDdjZTI2Njc2ZWY5OWRkMjhmMmY2NmFiMzhlYWY1YzhjCmZhY3Rvcj1TWVNURU1fU0VSSUFMfGJkYTdmOGI4ZjYxMmE5ZDEyNmZjMzI1MmI0YTZiNTE0CmZhY3Rvcj1CTFVFVE9PVEh8MjkwOTRhNGQ1OWU0YWI2YjE4ZDY1OGVmYTliY2RiZGIKcmlnaHQ9cHVyY2hhc2V8cC1jbGFzc2UtY20yfGNsYXNzZS1jbTJ8MTc5OTEzNjAwMDAwMA.ZK3J3tY4q3ksAcYsTK2yJsAt4sjG8hRLVu6cJ5v1nx2EVNGx+h/yATr9gmgZj+601sb7RShQSE+C9PK11XJBAw==",
+      "device": "tvB-no-ethernet-usb-wifi",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "revokedSeats": [],
+      "expectSubject": "tv",
+      "expect": {
+        "result": "accepted",
+        "kind": "production",
+        "subject": "tv",
+        "license": "lic-0001",
+        "seat": "3cd2bf1e6e056494",
+        "weakIdentity": false
+      }
+    },
+    {
+      "type": "activation",
+      "id": "act-weak-identity",
+      "description": "identité faible (un seul facteur faible) : acceptée, signalée",
+      "token": "cba1.Y2FzdGJyaWRnZS1hY3RpdmF0aW9uLXYxCmtpbmQ9cHJvZHVjdGlvbgpzdWJqZWN0PXR2CmtpZD1iMmU1YjQxODYwZDFkOGJlCm5vbmNlPTAwMTEyMjMzNDQ1NTY2Nzc4ODk5YWFiYmNjZGRlZWZmCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE3OTk5MTM2MDAwMDAKbm90QWZ0ZXI9MTgyNTgzMzYwMDAwMApsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9NTBkNTQwZjM3MjlkOTM5NQprPTEKZmFjdG9yPVNZU1RFTV9TRVJJQUx8MDU0M2UzODU4ZTcyMzdjNTI1NzA2Mjk2MjQ4ZmZkMmQKcmlnaHQ9cHVyY2hhc2V8cC1jbGFzc2UtY20yfGNsYXNzZS1jbTJ8MTc5OTEzNjAwMDAwMA.c7vKF3b0Ew7STRjpAU2CeRtAllJChjsgb7hOjHv9Qz2yi5guAa0MmLJi6e8+oVS0GfpgQuCfO8bEDC+4auUJAQ==",
+      "device": "tvC-weak",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "revokedSeats": [],
+      "expectSubject": "tv",
+      "expect": {
+        "result": "accepted",
+        "kind": "production",
+        "subject": "tv",
+        "license": "lic-0001",
+        "seat": "50d540f3729d9395",
+        "weakIdentity": true
+      }
+    },
+    {
+      "type": "activation",
+      "id": "act-phone",
+      "description": "activation de téléphone (sujet phone)",
+      "token": "cba1.Y2FzdGJyaWRnZS1hY3RpdmF0aW9uLXYxCmtpbmQ9cHJvZHVjdGlvbgpzdWJqZWN0PXBob25lCmtpZD1iMmU1YjQxODYwZDFkOGJlCm5vbmNlPTAwMTEyMjMzNDQ1NTY2Nzc4ODk5YWFiYmNjZGRlZWZmCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE3OTk5MTM2MDAwMDAKbm90QWZ0ZXI9MTgyNTgzMzYwMDAwMApsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9YzQ3NDFmOWNhYjIxYTMzMwprPTEKZmFjdG9yPVNZU1RFTV9TRVJJQUx8YmYzOTg2OTQ1NzNkYjllN2QwNTJiMzM1YjFjNTFlMTAKcmlnaHQ9cHVyY2hhc2V8cC1jbGFzc2UtY20yfGNsYXNzZS1jbTJ8MTc5OTEzNjAwMDAwMA.Bl/o6DSRu+UXN+WO/uDndYqq+5V9bc4+iUfKQpDONsSY0MEC9EpEDMYPqOiigivRg2JSQAcIj2WSCqzsyUMAAQ==",
+      "device": "phoneP",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "revokedSeats": [],
+      "expectSubject": "phone",
+      "expect": {
+        "result": "accepted",
+        "kind": "production",
+        "subject": "phone",
+        "license": "lic-0001",
+        "seat": "c4741f9cab21a333",
+        "weakIdentity": true
+      }
+    },
+    {
+      "type": "activation",
+      "id": "act-server-key",
+      "description": "clé serveur : essai et achats seulement",
+      "token": "cba1.Y2FzdGJyaWRnZS1hY3RpdmF0aW9uLXYxCmtpbmQ9cHJvZHVjdGlvbgpzdWJqZWN0PXR2CmtpZD1jZTIwMmRmZGJlNTdiOTlhCm5vbmNlPTAwMTEyMjMzNDQ1NTY2Nzc4ODk5YWFiYmNjZGRlZWZmCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE3OTk5MTM2MDAwMDAKbm90QWZ0ZXI9MTgyNTgzMzYwMDAwMApsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNAprPTQKZmFjdG9yPUZMQVNIfGM0OGNhY2Q4MWI5NjYzZDBiYTk3YzIyMWNiZDE3ZjRmCmZhY3Rvcj1FVEhFUk5FVHxmOTFlZmQ4OWUwMDI1YzIyNjJkYTEyY2ZiZWQ0MzYzMgpmYWN0b3I9V0lGSXxlYThiNTUyZTIyNDBiYmRkOGM4OGM0MjMxM2M0ZGVhYgpmYWN0b3I9U1lTVEVNX1NFUklBTHw3NzRiZWFjYmYzNTFiMGQyMDVmOTE2NjY2OWU0ZDNjNwpmYWN0b3I9QkxVRVRPT1RIfGQzNjVlYTY3ZTAwNTg1ZWRhZjhiZWY0ZDczNzg4NTBkCnJpZ2h0PXB1cmNoYXNlfHAtY2xhc3NlLWNtMnxjbGFzc2UtY20yfDE3OTkxMzYwMDAwMDA.lY0CKe0ENhdPJcFqYaerGjc+LZmYKaosRWpxmM/q3B8sE/ALLHV4ZAZp/z0IZXgHxHv2kL9XzzCwFO4wbwsEDg==",
+      "device": "tvA",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "revokedSeats": [],
+      "expectSubject": "tv",
+      "expect": {
+        "result": "accepted",
+        "kind": "production",
+        "subject": "tv",
+        "license": "lic-0001",
+        "seat": "f36757c226dd2ee4",
+        "weakIdentity": false
+      }
+    },
+    {
+      "type": "activation",
+      "id": "act-reissue-same-seat",
+      "description": "ré-émission : même matériel, même poste (même seat), autre nonce",
+      "token": "cba1.Y2FzdGJyaWRnZS1hY3RpdmF0aW9uLXYxCmtpbmQ9cHJvZHVjdGlvbgpzdWJqZWN0PXR2CmtpZD1lZGVjNTVmMmY2NTFjNTA4Cm5vbmNlPWZmZWVkZGNjYmJhYTk5ODg3NzY2NTU0NDMzMjIxMTAwCmlzc3VlZEF0PTE4MDAwODY0MDAwMDAKbm90QmVmb3JlPTE3OTk5MTM2MDAwMDAKbm90QWZ0ZXI9MTgyNTgzMzYwMDAwMApsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNAprPTQKZmFjdG9yPUZMQVNIfGM0OGNhY2Q4MWI5NjYzZDBiYTk3YzIyMWNiZDE3ZjRmCmZhY3Rvcj1FVEhFUk5FVHxmOTFlZmQ4OWUwMDI1YzIyNjJkYTEyY2ZiZWQ0MzYzMgpmYWN0b3I9V0lGSXxlYThiNTUyZTIyNDBiYmRkOGM4OGM0MjMxM2M0ZGVhYgpmYWN0b3I9U1lTVEVNX1NFUklBTHw3NzRiZWFjYmYzNTFiMGQyMDVmOTE2NjY2OWU0ZDNjNwpmYWN0b3I9QkxVRVRPT1RIfGQzNjVlYTY3ZTAwNTg1ZWRhZjhiZWY0ZDczNzg4NTBkCnJpZ2h0PXB1cmNoYXNlfHAtY2xhc3NlLWNtMnxjbGFzc2UtY20yfDE3OTkxMzYwMDAwMDA.DuLRbvESHRm7g7Ulf6s1lFtyTsT+chy+cUZubbkN8kQYsJ8ZDrb+JMatMSWrIPfazmr4v9BDM+Y5RkAjBxVxBQ==",
+      "device": "tvA",
+      "nowMs": 1800086400000,
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "revokedSeats": [],
+      "expectSubject": "tv",
+      "expect": {
+        "result": "accepted",
+        "kind": "production",
+        "subject": "tv",
+        "license": "lic-0001",
+        "seat": "f36757c226dd2ee4",
+        "weakIdentity": false
+      }
+    },
+    {
+      "type": "activation",
+      "id": "act-bad-tampered",
+      "description": "charge utile modifiée après signature",
+      "token": "cba1.Y2FzdGJyaWRnZS1hY3RpdmF0aW9uLXYxCmtpbmQ9cHJvZHVjdGlvbgpzdWJqZWN0PXR2CmtpZD1iMmU1YjQxODYwZDFkOGJlCm5vbmNlPTAwMTEyMjMzNDQ1NTY2Nzc4ODk5YWFiYmNjZGRlZWZmCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE3OTk5MTM2MDAwMDAKbm90QWZ0ZXI9MTgyNTgzMzYwMDAwMApsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNAprPTQKZmFjdG9yPUZMQVNIfGM0OGNhY2Q4MWI5NjYzZDBiYTk3YzIyMWNiZDE3ZjRmCmZhY3Rvcj1FVEhFUk5FVHxmOTFlZmQ4OWUwMDI1YzIyNjJkYTEyY2ZiZWQ0MzYzMgpmYWN0b3I9V0lGSXxlYThiNTUyZTIyNDBiYmRkOGM4OGM0MjMxM2M0ZGVhYgpmYWN0b3I9U1lTVEVNX1NFUklBTHw3NzRiZWFjYmYzNTFiMGQyMDVmOTE2NjY2OWU0ZDNjNwpmYWN0b3I9QkxVRVRPT1RIfGQzNjVlYTY3ZTAwNTg1ZWRhZjhiZWY0ZDczNzg4NTBkCnJpZ2h0PXB1cmNoYXNlfHAtY2xhc3NlLTZlfGNsYXNzZS02ZXwxNzk5MTM2MDAwMDAwCnJpZ2h0PXN1YnNjcmlwdGlvbnxhYm8tdG91dHx0b3V0fDE3OTk5MTM2MDAwMDB8MTgwNzc3NjAwMDAwMHw2MDQ4MDAwMDB8MQ.gdb00NSa6WzWq/KhoS9cFCBp7uLVkvbtAW69c3BP0IWYvCiD502H661/v1tCu8oHOumVRvuFUMP6hKyeMAr1Bg==",
+      "device": "tvA",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "revokedSeats": [],
+      "expectSubject": "tv",
+      "expect": {
+        "result": "rejected",
+        "reason": "BAD_SIGNATURE",
+        "suspect": false
+      }
+    },
+    {
+      "type": "activation",
+      "id": "act-bad-unknown-key",
+      "description": "signée par une clé absente de l'anneau",
+      "token": "cba1.Y2FzdGJyaWRnZS1hY3RpdmF0aW9uLXYxCmtpbmQ9cHJvZHVjdGlvbgpzdWJqZWN0PXR2CmtpZD1kZjllN2MwZDhjYzI4MDlkCm5vbmNlPTAwMTEyMjMzNDQ1NTY2Nzc4ODk5YWFiYmNjZGRlZWZmCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE3OTk5MTM2MDAwMDAKbm90QWZ0ZXI9MTgyNTgzMzYwMDAwMApsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNAprPTQKZmFjdG9yPUZMQVNIfGM0OGNhY2Q4MWI5NjYzZDBiYTk3YzIyMWNiZDE3ZjRmCmZhY3Rvcj1FVEhFUk5FVHxmOTFlZmQ4OWUwMDI1YzIyNjJkYTEyY2ZiZWQ0MzYzMgpmYWN0b3I9V0lGSXxlYThiNTUyZTIyNDBiYmRkOGM4OGM0MjMxM2M0ZGVhYgpmYWN0b3I9U1lTVEVNX1NFUklBTHw3NzRiZWFjYmYzNTFiMGQyMDVmOTE2NjY2OWU0ZDNjNwpmYWN0b3I9QkxVRVRPT1RIfGQzNjVlYTY3ZTAwNTg1ZWRhZjhiZWY0ZDczNzg4NTBkCnJpZ2h0PXB1cmNoYXNlfHAtY2xhc3NlLWNtMnxjbGFzc2UtY20yfDE3OTkxMzYwMDAwMDA.i32ZR8pwEsFJEEWHsc4KtwMLnLBdj8+rtsEunfaLXiXH4Rdkpg7VeDxJhMHktxVLaaw3E9r7frLbD5hqwnzZBg==",
+      "device": "tvA",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "revokedSeats": [],
+      "expectSubject": "tv",
+      "expect": {
+        "result": "rejected",
+        "reason": "UNKNOWN_KEY",
+        "suspect": false
+      }
+    },
+    {
+      "type": "activation",
+      "id": "act-bad-revoked-key",
+      "description": "signée par une clé révoquée",
+      "token": "cba1.Y2FzdGJyaWRnZS1hY3RpdmF0aW9uLXYxCmtpbmQ9cHJvZHVjdGlvbgpzdWJqZWN0PXR2CmtpZD1iMmU1YjQxODYwZDFkOGJlCm5vbmNlPTAwMTEyMjMzNDQ1NTY2Nzc4ODk5YWFiYmNjZGRlZWZmCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE3OTk5MTM2MDAwMDAKbm90QWZ0ZXI9MTgyNTgzMzYwMDAwMApsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNAprPTQKZmFjdG9yPUZMQVNIfGM0OGNhY2Q4MWI5NjYzZDBiYTk3YzIyMWNiZDE3ZjRmCmZhY3Rvcj1FVEhFUk5FVHxmOTFlZmQ4OWUwMDI1YzIyNjJkYTEyY2ZiZWQ0MzYzMgpmYWN0b3I9V0lGSXxlYThiNTUyZTIyNDBiYmRkOGM4OGM0MjMxM2M0ZGVhYgpmYWN0b3I9U1lTVEVNX1NFUklBTHw3NzRiZWFjYmYzNTFiMGQyMDVmOTE2NjY2OWU0ZDNjNwpmYWN0b3I9QkxVRVRPT1RIfGQzNjVlYTY3ZTAwNTg1ZWRhZjhiZWY0ZDczNzg4NTBkCnJpZ2h0PXB1cmNoYXNlfHAtY2xhc3NlLWNtMnxjbGFzc2UtY20yfDE3OTkxMzYwMDAwMDAKcmlnaHQ9c3Vic2NyaXB0aW9ufGFiby10b3V0fHRvdXR8MTc5OTkxMzYwMDAwMHwxODA3Nzc2MDAwMDAwfDYwNDgwMDAwMHwx.gdb00NSa6WzWq/KhoS9cFCBp7uLVkvbtAW69c3BP0IWYvCiD502H661/v1tCu8oHOumVRvuFUMP6hKyeMAr1Bg==",
+      "device": "tvA",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": ["desk"],
+      "revokedSeats": [],
+      "expectSubject": "tv",
+      "expect": {
+        "result": "rejected",
+        "reason": "REVOKED_KEY",
+        "suspect": false
+      }
+    },
+    {
+      "type": "activation",
+      "id": "act-bad-scope-trial-only",
+      "description": "clé sans le droit de délivrer la production",
+      "token": "cba1.Y2FzdGJyaWRnZS1hY3RpdmF0aW9uLXYxCmtpbmQ9cHJvZHVjdGlvbgpzdWJqZWN0PXR2CmtpZD1lNTZmYjRmZmZhNzk0YTQxCm5vbmNlPTAwMTEyMjMzNDQ1NTY2Nzc4ODk5YWFiYmNjZGRlZWZmCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE3OTk5MTM2MDAwMDAKbm90QWZ0ZXI9MTgyNTkyMDAwMDAwMApsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNAprPTQKZmFjdG9yPUZMQVNIfGM0OGNhY2Q4MWI5NjYzZDBiYTk3YzIyMWNiZDE3ZjRmCmZhY3Rvcj1FVEhFUk5FVHxmOTFlZmQ4OWUwMDI1YzIyNjJkYTEyY2ZiZWQ0MzYzMgpmYWN0b3I9V0lGSXxlYThiNTUyZTIyNDBiYmRkOGM4OGM0MjMxM2M0ZGVhYgpmYWN0b3I9U1lTVEVNX1NFUklBTHw3NzRiZWFjYmYzNTFiMGQyMDVmOTE2NjY2OWU0ZDNjNwpmYWN0b3I9QkxVRVRPT1RIfGQzNjVlYTY3ZTAwNTg1ZWRhZjhiZWY0ZDczNzg4NTBkCnJpZ2h0PXB1cmNoYXNlfHAtY2xhc3NlLWNtMnxjbGFzc2UtY20yfDE3OTkxMzYwMDAwMDA.lJqGPpRXD29U1i5dwL6rA3H+Gk1JKfu24bAPEQIcPG78Ku1oVElxTy3QuGLfEPHxv2jzUSn1AqJq9zov3s0cDA==",
+      "device": "tvA",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "revokedSeats": [],
+      "expectSubject": "tv",
+      "expect": {
+        "result": "rejected",
+        "reason": "KEY_NOT_ALLOWED",
+        "suspect": false
+      }
+    },
+    {
+      "type": "activation",
+      "id": "act-bad-scope-open-all",
+      "description": "la clé serveur ne peut pas délivrer « tout ouvert »",
+      "token": "cba1.Y2FzdGJyaWRnZS1hY3RpdmF0aW9uLXYxCmtpbmQ9cHJvZHVjdGlvbgpzdWJqZWN0PXR2CmtpZD1jZTIwMmRmZGJlNTdiOTlhCm5vbmNlPTAwMTEyMjMzNDQ1NTY2Nzc4ODk5YWFiYmNjZGRlZWZmCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE3OTk5MTM2MDAwMDAKbm90QWZ0ZXI9MTgyNTkyMDAwMDAwMApsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNAprPTQKZmFjdG9yPUZMQVNIfGM0OGNhY2Q4MWI5NjYzZDBiYTk3YzIyMWNiZDE3ZjRmCmZhY3Rvcj1FVEhFUk5FVHxmOTFlZmQ4OWUwMDI1YzIyNjJkYTEyY2ZiZWQ0MzYzMgpmYWN0b3I9V0lGSXxlYThiNTUyZTIyNDBiYmRkOGM4OGM0MjMxM2M0ZGVhYgpmYWN0b3I9U1lTVEVNX1NFUklBTHw3NzRiZWFjYmYzNTFiMGQyMDVmOTE2NjY2OWU0ZDNjNwpmYWN0b3I9QkxVRVRPT1RIfGQzNjVlYTY3ZTAwNTg1ZWRhZjhiZWY0ZDczNzg4NTBkCnJpZ2h0PW9wZW5hbGx8b3V2ZXJ0fDE4MDAwMDAwMDAwMDB8MTgwMDg2NDAwMDAwMA.b5hSZNI86I8hMFe4Y5YYV2iRJdhtF3Ga2mNTzSbvvXfJm9JeMZmbEXL1H81X4I1E+wAIVndJQ3FCQLnAA33OCg==",
+      "device": "tvA",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "revokedSeats": [],
+      "expectSubject": "tv",
+      "expect": {
+        "result": "rejected",
+        "reason": "KEY_NOT_ALLOWED",
+        "suspect": false
+      }
+    },
+    {
+      "type": "activation",
+      "id": "act-bad-open-all-too-long",
+      "description": "« tout ouvert » de 40 jours refusé par la TV",
+      "token": "cba1.Y2FzdGJyaWRnZS1hY3RpdmF0aW9uLXYxCmtpbmQ9cHJvZHVjdGlvbgpzdWJqZWN0PXR2CmtpZD1iMmU1YjQxODYwZDFkOGJlCm5vbmNlPTAwMTEyMjMzNDQ1NTY2Nzc4ODk5YWFiYmNjZGRlZWZmCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE3OTk5MTM2MDAwMDAKbm90QWZ0ZXI9MTgyNTkyMDAwMDAwMApsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNAprPTQKZmFjdG9yPUZMQVNIfGM0OGNhY2Q4MWI5NjYzZDBiYTk3YzIyMWNiZDE3ZjRmCmZhY3Rvcj1FVEhFUk5FVHxmOTFlZmQ4OWUwMDI1YzIyNjJkYTEyY2ZiZWQ0MzYzMgpmYWN0b3I9V0lGSXxlYThiNTUyZTIyNDBiYmRkOGM4OGM0MjMxM2M0ZGVhYgpmYWN0b3I9U1lTVEVNX1NFUklBTHw3NzRiZWFjYmYzNTFiMGQyMDVmOTE2NjY2OWU0ZDNjNwpmYWN0b3I9QkxVRVRPT1RIfGQzNjVlYTY3ZTAwNTg1ZWRhZjhiZWY0ZDczNzg4NTBkCnJpZ2h0PW9wZW5hbGx8b3V2ZXJ0fDE4MDAwMDAwMDAwMDB8MTgwMzQ1NjAwMDAwMA.kxEkiVjlkZbEelk5O/vnMX1lEc/486v0bF7JV4cEv/CivbFC74bvG3+DU+Wk+rODg/wW3pFiVZctW2tcyNxrBg==",
+      "device": "tvA",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "revokedSeats": [],
+      "expectSubject": "tv",
+      "expect": {
+        "result": "rejected",
+        "reason": "BAD_RIGHTS",
+        "suspect": false
+      }
+    },
+    {
+      "type": "activation",
+      "id": "act-bad-trial-with-rights",
+      "description": "une clé d'essai ne porte aucun droit",
+      "token": "cba1.Y2FzdGJyaWRnZS1hY3RpdmF0aW9uLXYxCmtpbmQ9dHJpYWwKc3ViamVjdD10dgpraWQ9YjJlNWI0MTg2MGQxZDhiZQpub25jZT0wMDExMjIzMzQ0NTU2Njc3ODg5OWFhYmJjY2RkZWVmZgppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xNzk5OTEzNjAwMDAwCm5vdEFmdGVyPTE4MjU5MjAwMDAwMDAKbGljZW5zZT10cmlhbApzZWF0PTM4OWI1ODNhYjZiZWE4NTYKaz00CmZhY3Rvcj1GTEFTSHxjNDhjYWNkODFiOTY2M2QwYmE5N2MyMjFjYmQxN2Y0ZgpmYWN0b3I9RVRIRVJORVR8ZjkxZWZkODllMDAyNWMyMjYyZGExMmNmYmVkNDM2MzIKZmFjdG9yPVdJRkl8ZWE4YjU1MmUyMjQwYmJkZDhjODhjNDIzMTNjNGRlYWIKZmFjdG9yPVNZU1RFTV9TRVJJQUx8Nzc0YmVhY2JmMzUxYjBkMjA1ZjkxNjY2NjllNGQzYzcKZmFjdG9yPUJMVUVUT09USHxkMzY1ZWE2N2UwMDU4NWVkYWY4YmVmNGQ3Mzc4ODUwZApyaWdodD1wdXJjaGFzZXxwLWNsYXNzZS1jbTJ8Y2xhc3NlLWNtMnwxNzk5MTM2MDAwMDAw.wPj4cnMlmJRpdrCeWt3lUDEL+yvGGRfx8DbuHsyfFGtPGERNAWoxpnvRz5IJRAK4x3atBwx8LY699LaS4O0sAQ==",
+      "device": "tvA",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "revokedSeats": [],
+      "expectSubject": "tv",
+      "expect": {
+        "result": "rejected",
+        "reason": "BAD_RIGHTS",
+        "suspect": false
+      }
+    },
+    {
+      "type": "activation",
+      "id": "act-bad-wrong-device",
+      "description": "activation d'une autre TV (aucun facteur ne correspond)",
+      "token": "cba1.Y2FzdGJyaWRnZS1hY3RpdmF0aW9uLXYxCmtpbmQ9cHJvZHVjdGlvbgpzdWJqZWN0PXR2CmtpZD1iMmU1YjQxODYwZDFkOGJlCm5vbmNlPTAwMTEyMjMzNDQ1NTY2Nzc4ODk5YWFiYmNjZGRlZWZmCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE3OTk5MTM2MDAwMDAKbm90QWZ0ZXI9MTgyNTgzMzYwMDAwMApsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNAprPTQKZmFjdG9yPUZMQVNIfGM0OGNhY2Q4MWI5NjYzZDBiYTk3YzIyMWNiZDE3ZjRmCmZhY3Rvcj1FVEhFUk5FVHxmOTFlZmQ4OWUwMDI1YzIyNjJkYTEyY2ZiZWQ0MzYzMgpmYWN0b3I9V0lGSXxlYThiNTUyZTIyNDBiYmRkOGM4OGM0MjMxM2M0ZGVhYgpmYWN0b3I9U1lTVEVNX1NFUklBTHw3NzRiZWFjYmYzNTFiMGQyMDVmOTE2NjY2OWU0ZDNjNwpmYWN0b3I9QkxVRVRPT1RIfGQzNjVlYTY3ZTAwNTg1ZWRhZjhiZWY0ZDczNzg4NTBkCnJpZ2h0PXB1cmNoYXNlfHAtY2xhc3NlLWNtMnxjbGFzc2UtY20yfDE3OTkxMzYwMDAwMDAKcmlnaHQ9c3Vic2NyaXB0aW9ufGFiby10b3V0fHRvdXR8MTc5OTkxMzYwMDAwMHwxODA3Nzc2MDAwMDAwfDYwNDgwMDAwMHwx.gdb00NSa6WzWq/KhoS9cFCBp7uLVkvbtAW69c3BP0IWYvCiD502H661/v1tCu8oHOumVRvuFUMP6hKyeMAr1Bg==",
+      "device": "tvB-no-ethernet-usb-wifi",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "revokedSeats": [],
+      "expectSubject": "tv",
+      "expect": {
+        "result": "rejected",
+        "reason": "WRONG_DEVICE",
+        "suspect": true
+      }
+    },
+    {
+      "type": "activation",
+      "id": "act-bad-wrong-subject",
+      "description": "activation de téléphone présentée à une TV",
+      "token": "cba1.Y2FzdGJyaWRnZS1hY3RpdmF0aW9uLXYxCmtpbmQ9cHJvZHVjdGlvbgpzdWJqZWN0PXBob25lCmtpZD1iMmU1YjQxODYwZDFkOGJlCm5vbmNlPTAwMTEyMjMzNDQ1NTY2Nzc4ODk5YWFiYmNjZGRlZWZmCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE3OTk5MTM2MDAwMDAKbm90QWZ0ZXI9MTgyNTgzMzYwMDAwMApsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNAprPTQKZmFjdG9yPUZMQVNIfGM0OGNhY2Q4MWI5NjYzZDBiYTk3YzIyMWNiZDE3ZjRmCmZhY3Rvcj1FVEhFUk5FVHxmOTFlZmQ4OWUwMDI1YzIyNjJkYTEyY2ZiZWQ0MzYzMgpmYWN0b3I9V0lGSXxlYThiNTUyZTIyNDBiYmRkOGM4OGM0MjMxM2M0ZGVhYgpmYWN0b3I9U1lTVEVNX1NFUklBTHw3NzRiZWFjYmYzNTFiMGQyMDVmOTE2NjY2OWU0ZDNjNwpmYWN0b3I9QkxVRVRPT1RIfGQzNjVlYTY3ZTAwNTg1ZWRhZjhiZWY0ZDczNzg4NTBkCnJpZ2h0PXB1cmNoYXNlfHAtY2xhc3NlLWNtMnxjbGFzc2UtY20yfDE3OTkxMzYwMDAwMDA.p1V+Lp5FhlBc4duKH1XTzgpIhxyog+EPeJc08UhnzcKTDldUxt3BsQExvX0s6CgU1GHb1WVY8z/sv4fAiss5CA==",
+      "device": "tvA",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "revokedSeats": [],
+      "expectSubject": "tv",
+      "expect": {
+        "result": "rejected",
+        "reason": "WRONG_SUBJECT",
+        "suspect": false
+      }
+    },
+    {
+      "type": "activation",
+      "id": "act-bad-window-too-long",
+      "description": "fenêtre d'installation de 400 jours (> 366)",
+      "token": "cba1.Y2FzdGJyaWRnZS1hY3RpdmF0aW9uLXYxCmtpbmQ9cHJvZHVjdGlvbgpzdWJqZWN0PXR2CmtpZD1iMmU1YjQxODYwZDFkOGJlCm5vbmNlPTAwMTEyMjMzNDQ1NTY2Nzc4ODk5YWFiYmNjZGRlZWZmCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKbm90QWZ0ZXI9MTgzNDU2MDAwMDAwMApsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNAprPTQKZmFjdG9yPUZMQVNIfGM0OGNhY2Q4MWI5NjYzZDBiYTk3YzIyMWNiZDE3ZjRmCmZhY3Rvcj1FVEhFUk5FVHxmOTFlZmQ4OWUwMDI1YzIyNjJkYTEyY2ZiZWQ0MzYzMgpmYWN0b3I9V0lGSXxlYThiNTUyZTIyNDBiYmRkOGM4OGM0MjMxM2M0ZGVhYgpmYWN0b3I9U1lTVEVNX1NFUklBTHw3NzRiZWFjYmYzNTFiMGQyMDVmOTE2NjY2OWU0ZDNjNwpmYWN0b3I9QkxVRVRPT1RIfGQzNjVlYTY3ZTAwNTg1ZWRhZjhiZWY0ZDczNzg4NTBkCnJpZ2h0PXB1cmNoYXNlfHAtY2xhc3NlLWNtMnxjbGFzc2UtY20yfDE3OTkxMzYwMDAwMDA.PbDAFiqNTeOSxtrovSPJifuDS9agDhZSA/tFT/5l8D2124gBrZU41sIHAOuFWVkRngSThoRZ/qDAcs6XcouiBQ==",
+      "device": "tvA",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "revokedSeats": [],
+      "expectSubject": "tv",
+      "expect": {
+        "result": "rejected",
+        "reason": "WINDOW_TOO_LONG",
+        "suspect": false
+      }
+    },
+    {
+      "type": "activation",
+      "id": "act-bad-not-yet-valid",
+      "description": "pas encore valable (début dans 100 jours)",
+      "token": "cba1.Y2FzdGJyaWRnZS1hY3RpdmF0aW9uLXYxCmtpbmQ9cHJvZHVjdGlvbgpzdWJqZWN0PXR2CmtpZD1iMmU1YjQxODYwZDFkOGJlCm5vbmNlPTAwMTEyMjMzNDQ1NTY2Nzc4ODk5YWFiYmNjZGRlZWZmCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDg2NDAwMDAwMDAKbm90QWZ0ZXI9MTgxMTIzMjAwMDAwMApsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNAprPTQKZmFjdG9yPUZMQVNIfGM0OGNhY2Q4MWI5NjYzZDBiYTk3YzIyMWNiZDE3ZjRmCmZhY3Rvcj1FVEhFUk5FVHxmOTFlZmQ4OWUwMDI1YzIyNjJkYTEyY2ZiZWQ0MzYzMgpmYWN0b3I9V0lGSXxlYThiNTUyZTIyNDBiYmRkOGM4OGM0MjMxM2M0ZGVhYgpmYWN0b3I9U1lTVEVNX1NFUklBTHw3NzRiZWFjYmYzNTFiMGQyMDVmOTE2NjY2OWU0ZDNjNwpmYWN0b3I9QkxVRVRPT1RIfGQzNjVlYTY3ZTAwNTg1ZWRhZjhiZWY0ZDczNzg4NTBkCnJpZ2h0PXB1cmNoYXNlfHAtY2xhc3NlLWNtMnxjbGFzc2UtY20yfDE3OTkxMzYwMDAwMDA.X/KrY9nPuH7zmM5b+4ltcQYmfRFneCDgfBOrqEF1XbNX9ldCvKk660iHwJ0H1WCYHYGtjzV9J6k+a7AOaEzFAA==",
+      "device": "tvA",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "revokedSeats": [],
+      "expectSubject": "tv",
+      "expect": {
+        "result": "rejected",
+        "reason": "NOT_YET_VALID",
+        "suspect": false
+      }
+    },
+    {
+      "type": "activation",
+      "id": "act-bad-window-closed",
+      "description": "fenêtre close depuis 30 jours",
+      "token": "cba1.Y2FzdGJyaWRnZS1hY3RpdmF0aW9uLXYxCmtpbmQ9cHJvZHVjdGlvbgpzdWJqZWN0PXR2CmtpZD1iMmU1YjQxODYwZDFkOGJlCm5vbmNlPTAwMTEyMjMzNDQ1NTY2Nzc4ODk5YWFiYmNjZGRlZWZmCmlzc3VlZEF0PTE3OTQ4MTYwMDAwMDAKbm90QmVmb3JlPTE3OTQ4MTYwMDAwMDAKbm90QWZ0ZXI9MTc5NzQwODAwMDAwMApsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNAprPTQKZmFjdG9yPUZMQVNIfGM0OGNhY2Q4MWI5NjYzZDBiYTk3YzIyMWNiZDE3ZjRmCmZhY3Rvcj1FVEhFUk5FVHxmOTFlZmQ4OWUwMDI1YzIyNjJkYTEyY2ZiZWQ0MzYzMgpmYWN0b3I9V0lGSXxlYThiNTUyZTIyNDBiYmRkOGM4OGM0MjMxM2M0ZGVhYgpmYWN0b3I9U1lTVEVNX1NFUklBTHw3NzRiZWFjYmYzNTFiMGQyMDVmOTE2NjY2OWU0ZDNjNwpmYWN0b3I9QkxVRVRPT1RIfGQzNjVlYTY3ZTAwNTg1ZWRhZjhiZWY0ZDczNzg4NTBkCnJpZ2h0PXB1cmNoYXNlfHAtY2xhc3NlLWNtMnxjbGFzc2UtY20yfDE3OTkxMzYwMDAwMDA.omf8VS09J2zjQ4xVrzg8FYNnamLzf1Tr3dHAtzWfU0fz/MTuoGwQaRppPh4AJT3Q43ZxcLFqaeXfmFgJ2NqDBg==",
+      "device": "tvA",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "revokedSeats": [],
+      "expectSubject": "tv",
+      "expect": {
+        "result": "rejected",
+        "reason": "WINDOW_CLOSED",
+        "suspect": false
+      }
+    },
+    {
+      "type": "activation",
+      "id": "act-ok-wrong-clock",
+      "description": "horloge de la TV en 1970 : la date d'émission sert de plancher, acceptée",
+      "token": "cba1.Y2FzdGJyaWRnZS1hY3RpdmF0aW9uLXYxCmtpbmQ9cHJvZHVjdGlvbgpzdWJqZWN0PXR2CmtpZD1iMmU1YjQxODYwZDFkOGJlCm5vbmNlPTAwMTEyMjMzNDQ1NTY2Nzc4ODk5YWFiYmNjZGRlZWZmCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE3OTk5MTM2MDAwMDAKbm90QWZ0ZXI9MTgyNTgzMzYwMDAwMApsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNAprPTQKZmFjdG9yPUZMQVNIfGM0OGNhY2Q4MWI5NjYzZDBiYTk3YzIyMWNiZDE3ZjRmCmZhY3Rvcj1FVEhFUk5FVHxmOTFlZmQ4OWUwMDI1YzIyNjJkYTEyY2ZiZWQ0MzYzMgpmYWN0b3I9V0lGSXxlYThiNTUyZTIyNDBiYmRkOGM4OGM0MjMxM2M0ZGVhYgpmYWN0b3I9U1lTVEVNX1NFUklBTHw3NzRiZWFjYmYzNTFiMGQyMDVmOTE2NjY2OWU0ZDNjNwpmYWN0b3I9QkxVRVRPT1RIfGQzNjVlYTY3ZTAwNTg1ZWRhZjhiZWY0ZDczNzg4NTBkCnJpZ2h0PXB1cmNoYXNlfHAtY2xhc3NlLWNtMnxjbGFzc2UtY20yfDE3OTkxMzYwMDAwMDAKcmlnaHQ9c3Vic2NyaXB0aW9ufGFiby10b3V0fHRvdXR8MTc5OTkxMzYwMDAwMHwxODA3Nzc2MDAwMDAwfDYwNDgwMDAwMHwx.gdb00NSa6WzWq/KhoS9cFCBp7uLVkvbtAW69c3BP0IWYvCiD502H661/v1tCu8oHOumVRvuFUMP6hKyeMAr1Bg==",
+      "device": "tvA",
+      "nowMs": 0,
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "revokedSeats": [],
+      "expectSubject": "tv",
+      "expect": {
+        "result": "accepted",
+        "kind": "production",
+        "subject": "tv",
+        "license": "lic-0001",
+        "seat": "f36757c226dd2ee4",
+        "weakIdentity": false
+      }
+    },
+    {
+      "type": "activation",
+      "id": "act-bad-revoked-seat",
+      "description": "poste transféré : révoqué à une date postérieure à l'émission",
+      "token": "cba1.Y2FzdGJyaWRnZS1hY3RpdmF0aW9uLXYxCmtpbmQ9cHJvZHVjdGlvbgpzdWJqZWN0PXR2CmtpZD1iMmU1YjQxODYwZDFkOGJlCm5vbmNlPTAwMTEyMjMzNDQ1NTY2Nzc4ODk5YWFiYmNjZGRlZWZmCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE3OTk5MTM2MDAwMDAKbm90QWZ0ZXI9MTgyNTgzMzYwMDAwMApsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNAprPTQKZmFjdG9yPUZMQVNIfGM0OGNhY2Q4MWI5NjYzZDBiYTk3YzIyMWNiZDE3ZjRmCmZhY3Rvcj1FVEhFUk5FVHxmOTFlZmQ4OWUwMDI1YzIyNjJkYTEyY2ZiZWQ0MzYzMgpmYWN0b3I9V0lGSXxlYThiNTUyZTIyNDBiYmRkOGM4OGM0MjMxM2M0ZGVhYgpmYWN0b3I9U1lTVEVNX1NFUklBTHw3NzRiZWFjYmYzNTFiMGQyMDVmOTE2NjY2OWU0ZDNjNwpmYWN0b3I9QkxVRVRPT1RIfGQzNjVlYTY3ZTAwNTg1ZWRhZjhiZWY0ZDczNzg4NTBkCnJpZ2h0PXB1cmNoYXNlfHAtY2xhc3NlLWNtMnxjbGFzc2UtY20yfDE3OTkxMzYwMDAwMDAKcmlnaHQ9c3Vic2NyaXB0aW9ufGFiby10b3V0fHRvdXR8MTc5OTkxMzYwMDAwMHwxODA3Nzc2MDAwMDAwfDYwNDgwMDAwMHwx.gdb00NSa6WzWq/KhoS9cFCBp7uLVkvbtAW69c3BP0IWYvCiD502H661/v1tCu8oHOumVRvuFUMP6hKyeMAr1Bg==",
+      "device": "tvA",
+      "nowMs": 1800172800000,
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "revokedSeats": [
+        {
+          "license": "lic-0001",
+          "seat": "f36757c226dd2ee4",
+          "at": 1800086400000
+        }
+      ],
+      "expectSubject": "tv",
+      "expect": {
+        "result": "rejected",
+        "reason": "REVOKED_SEAT",
+        "suspect": false
+      }
+    },
+    {
+      "type": "activation",
+      "id": "act-ok-reissued-after-revocation",
+      "description": "ré-émise après la révocation du poste : valide",
+      "token": "cba1.Y2FzdGJyaWRnZS1hY3RpdmF0aW9uLXYxCmtpbmQ9cHJvZHVjdGlvbgpzdWJqZWN0PXR2CmtpZD1iMmU1YjQxODYwZDFkOGJlCm5vbmNlPTBhMGIwYzBkMGUwZjAwMDEwMjAzMDQwNTA2MDcwODA5Cmlzc3VlZEF0PTE4MDAyNTkyMDAwMDAKbm90QmVmb3JlPTE4MDAyNTkyMDAwMDAKbm90QWZ0ZXI9MTgyNjE3OTIwMDAwMApsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNAprPTQKZmFjdG9yPUZMQVNIfGM0OGNhY2Q4MWI5NjYzZDBiYTk3YzIyMWNiZDE3ZjRmCmZhY3Rvcj1FVEhFUk5FVHxmOTFlZmQ4OWUwMDI1YzIyNjJkYTEyY2ZiZWQ0MzYzMgpmYWN0b3I9V0lGSXxlYThiNTUyZTIyNDBiYmRkOGM4OGM0MjMxM2M0ZGVhYgpmYWN0b3I9U1lTVEVNX1NFUklBTHw3NzRiZWFjYmYzNTFiMGQyMDVmOTE2NjY2OWU0ZDNjNwpmYWN0b3I9QkxVRVRPT1RIfGQzNjVlYTY3ZTAwNTg1ZWRhZjhiZWY0ZDczNzg4NTBkCnJpZ2h0PXB1cmNoYXNlfHAtY2xhc3NlLWNtMnxjbGFzc2UtY20yfDE3OTkxMzYwMDAwMDA.FBQ7CVdNxP+sF+BH/c7To9QlOsRMPWCXzqQlcsYLH7mlqaVnwRd1ojcUhqXSBBoujl8eVQ5Evkr18LC+D7E7Dw==",
+      "device": "tvA",
+      "nowMs": 1800259200000,
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "revokedSeats": [
+        {
+          "license": "lic-0001",
+          "seat": "f36757c226dd2ee4",
+          "at": 1800086400000
+        }
+      ],
+      "expectSubject": "tv",
+      "expect": {
+        "result": "accepted",
+        "kind": "production",
+        "subject": "tv",
+        "license": "lic-0001",
+        "seat": "f36757c226dd2ee4",
+        "weakIdentity": false
+      }
+    },
+    {
+      "type": "activation",
+      "id": "act-bad-noncanonical",
+      "description": "forme non canonique (retour à la ligne final) refusée",
+      "token": "cba1.Y2FzdGJyaWRnZS1hY3RpdmF0aW9uLXYxCmtpbmQ9cHJvZHVjdGlvbgpzdWJqZWN0PXR2CmtpZD1iMmU1YjQxODYwZDFkOGJlCm5vbmNlPTAwMTEyMjMzNDQ1NTY2Nzc4ODk5YWFiYmNjZGRlZWZmCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE3OTk5MTM2MDAwMDAKbm90QWZ0ZXI9MTgyNTgzMzYwMDAwMApsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNAprPTQKZmFjdG9yPUZMQVNIfGM0OGNhY2Q4MWI5NjYzZDBiYTk3YzIyMWNiZDE3ZjRmCmZhY3Rvcj1FVEhFUk5FVHxmOTFlZmQ4OWUwMDI1YzIyNjJkYTEyY2ZiZWQ0MzYzMgpmYWN0b3I9V0lGSXxlYThiNTUyZTIyNDBiYmRkOGM4OGM0MjMxM2M0ZGVhYgpmYWN0b3I9U1lTVEVNX1NFUklBTHw3NzRiZWFjYmYzNTFiMGQyMDVmOTE2NjY2OWU0ZDNjNwpmYWN0b3I9QkxVRVRPT1RIfGQzNjVlYTY3ZTAwNTg1ZWRhZjhiZWY0ZDczNzg4NTBkCnJpZ2h0PXB1cmNoYXNlfHAtY2xhc3NlLWNtMnxjbGFzc2UtY20yfDE3OTkxMzYwMDAwMDAKcmlnaHQ9c3Vic2NyaXB0aW9ufGFiby10b3V0fHRvdXR8MTc5OTkxMzYwMDAwMHwxODA3Nzc2MDAwMDAwfDYwNDgwMDAwMHwxCg.gdb00NSa6WzWq/KhoS9cFCBp7uLVkvbtAW69c3BP0IWYvCiD502H661/v1tCu8oHOumVRvuFUMP6hKyeMAr1Bg==",
+      "device": "tvA",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "revokedSeats": [],
+      "expectSubject": "tv",
+      "expect": {
+        "result": "rejected",
+        "reason": "MALFORMED",
+        "suspect": false
+      }
+    },
+    {
+      "type": "activation",
+      "id": "act-bad-malformed",
+      "description": "texte quelconque",
+      "token": "pas-un-jeton",
+      "device": "tvA",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "revokedSeats": [],
+      "expectSubject": "tv",
+      "expect": {
+        "result": "rejected",
+        "reason": "MALFORMED",
+        "suspect": false
+      }
+    },
+    {
+      "type": "compact",
+      "id": "compact-ok",
+      "description": "clé saisissable d'essai : 33 groupes de 5",
+      "text": "040DE-B581Q-F80CG-G000C-K7557-8PGJ2-50JC4-SNM6Y-C2YYS-TZ7TP-S6X98-749VH-R8DEE-NKWDQ-8ZSV8-QJG2V-NBRJ3-04WM2-B47A5-TMN83-Z2PWA-828G0-BGKF4-ZZ6K7-NJBZA-NHRVK-DNFEP-EVWGZ-FF5NK-BTYMD-W10PJ-YZD13-RM5G4",
+      "deviceCode": "ZX8P-S2TH-N5PG-V9V7",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server"],
+      "revokedKeys": [],
+      "expect": {
+        "result": "accepted",
+        "kind": "trial"
+      }
+    },
+    {
+      "type": "compact",
+      "id": "compact-sloppy",
+      "description": "saisie approximative : minuscules, espaces, O/0, I/1",
+      "text": "o4ode b58iq f8ocg goooc k7557 8pgj2 5ojc4 snm6y c2yys tz7tp s6x98 749vh r8dee nkwdq 8zsv8 qjg2v nbrj3 o4wm2 b47a5 tmn83 z2pwa 828go bgkf4 zz6k7 njbza nhrvk dnfep evwgz ff5nk btymd wiopj yzdi3 rm5g4",
+      "deviceCode": "ZX8P-S2TH-N5PG-V9V7",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server"],
+      "revokedKeys": [],
+      "expect": {
+        "result": "accepted",
+        "kind": "trial"
+      }
+    },
+    {
+      "type": "compact",
+      "id": "compact-production",
+      "description": "clé saisissable de production (ensemble 3)",
+      "text": "040N6-FB015-F8066-8003S-K7557-8PGJ2-50JC4-RMKH2-X1F3Z-GNCMX-JPWC1-NDHTV-18SAQ-87F5D-GFW73-FGTAQ-S8VDA-1A8GN-YXS4K-65CSC-5TNEH-T86MP-4DZSP-Z1SXJ-YVCX5-0R4C6-BCT6R-RR8V9-7SDGE-J1H3H-F9YTF-NYKP8-E86GV",
+      "deviceCode": "ZX8P-S2TH-N5PG-V9V7",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server"],
+      "revokedKeys": [],
+      "expect": {
+        "result": "accepted",
+        "kind": "production"
+      }
+    },
+    {
+      "type": "compact",
+      "id": "compact-bad-group",
+      "description": "groupe 12 mal saisi",
+      "text": "040DE-B581Q-F80CG-G000C-K7557-8PGJ2-50JC4-SNM6Y-C2YYS-TZ7TP-S6X98-7A9VH-R8DEE-NKWDQ-8ZSV8-QJG2V-NBRJ3-04WM2-B47A5-TMN83-Z2PWA-828G0-BGKF4-ZZ6K7-NJBZA-NHRVK-DNFEP-EVWGZ-FF5NK-BTYMD-W10PJ-YZD13-RM5G4",
+      "deviceCode": "ZX8P-S2TH-N5PG-V9V7",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server"],
+      "revokedKeys": [],
+      "expect": {
+        "result": "rejected",
+        "reason": "MALFORMED"
+      }
+    },
+    {
+      "type": "compact",
+      "id": "compact-bad-device",
+      "description": "liée strictement au code d'appareil",
+      "text": "040DE-B581Q-F80CG-G000C-K7557-8PGJ2-50JC4-SNM6Y-C2YYS-TZ7TP-S6X98-749VH-R8DEE-NKWDQ-8ZSV8-QJG2V-NBRJ3-04WM2-B47A5-TMN83-Z2PWA-828G0-BGKF4-ZZ6K7-NJBZA-NHRVK-DNFEP-EVWGZ-FF5NK-BTYMD-W10PJ-YZD13-RM5G4",
+      "deviceCode": "SWT8-1ZDP-WZF0-SX84",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server"],
+      "revokedKeys": [],
+      "expect": {
+        "result": "rejected",
+        "reason": "WRONG_DEVICE"
+      }
+    },
+    {
+      "type": "compact",
+      "id": "compact-bad-revoked",
+      "description": "clé révoquée",
+      "text": "040DE-B581Q-F80CG-G000C-K7557-8PGJ2-50JC4-SNM6Y-C2YYS-TZ7TP-S6X98-749VH-R8DEE-NKWDQ-8ZSV8-QJG2V-NBRJ3-04WM2-B47A5-TMN83-Z2PWA-828G0-BGKF4-ZZ6K7-NJBZA-NHRVK-DNFEP-EVWGZ-FF5NK-BTYMD-W10PJ-YZD13-RM5G4",
+      "deviceCode": "ZX8P-S2TH-N5PG-V9V7",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server"],
+      "revokedKeys": ["desk"],
+      "expect": {
+        "result": "rejected",
+        "reason": "REVOKED_KEY"
+      }
+    },
+    {
+      "type": "compact",
+      "id": "compact-bad-closed",
+      "description": "fenêtre close",
+      "text": "040DE-B581Q-F80CG-G000C-K7557-8PGJ2-50JC4-SNM6Y-C2YYS-TZ7TP-S6X98-749VH-R8DEE-NKWDQ-8ZSV8-QJG2V-NBRJ3-04WM2-B47A5-TMN83-Z2PWA-828G0-BGKF4-ZZ6K7-NJBZA-NHRVK-DNFEP-EVWGZ-FF5NK-BTYMD-W10PJ-YZD13-RM5G4",
+      "deviceCode": "ZX8P-S2TH-N5PG-V9V7",
+      "nowMs": 1877760000000,
+      "trustedKeys": ["desk", "phone", "server"],
+      "revokedKeys": [],
+      "expect": {
+        "result": "rejected",
+        "reason": "WINDOW_CLOSED"
+      }
+    },
+    {
+      "type": "command",
+      "id": "cmd-open-all",
+      "description": "« tout ouvert » 7 jours, défi émis par la TV",
+      "device": "tvA",
+      "openChallenges": ["0123456789abcdef0123456789abcdef"],
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "steps": [
+        {
+          "token": "cbo1.Y2FzdGJyaWRnZS1vd25lci1jb21tYW5kLXYxCmtpZD1iMmU1YjQxODYwZDFkOGJlCnBvd2VyPW9wZW5fYWxsCmFjdGlvbj0KY2hhbGxlbmdlPTAxMjM0NTY3ODlhYmNkZWYwMTIzNDU2Nzg5YWJjZGVmCms9NApmYWN0b3I9RkxBU0h8YzQ4Y2FjZDgxYjk2NjNkMGJhOTdjMjIxY2JkMTdmNGYKZmFjdG9yPUVUSEVSTkVUfGY5MWVmZDg5ZTAwMjVjMjI2MmRhMTJjZmJlZDQzNjMyCmZhY3Rvcj1XSUZJfGVhOGI1NTJlMjI0MGJiZGQ4Yzg4YzQyMzEzYzRkZWFiCmZhY3Rvcj1TWVNURU1fU0VSSUFMfDc3NGJlYWNiZjM1MWIwZDIwNWY5MTY2NjY5ZTRkM2M3CmZhY3Rvcj1CTFVFVE9PVEh8ZDM2NWVhNjdlMDA1ODVlZGFmOGJlZjRkNzM3ODg1MGQKYnVuZGxlcz0KbG90cz0KZGF5cz03.dc9ULBiZ5NwVyjw0fPB9BBdbwz30U2gcCNiBnAWDVCwcaa03pPO1NzkpiA9G+prlS2xHLQT/NEzjv1Gpj9+YCQ==",
+          "wallMs": 1800000000000,
+          "expect": {
+            "result": "accepted",
+            "power": "open_all",
+            "untilMs": 1800604800000,
+            "clamped": false
+          }
+        }
+      ]
+    },
+    {
+      "type": "command",
+      "id": "cmd-replay",
+      "description": "le même jeton rejoué : refusé",
+      "device": "tvA",
+      "openChallenges": ["0123456789abcdef0123456789abcdef"],
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "steps": [
+        {
+          "token": "cbo1.Y2FzdGJyaWRnZS1vd25lci1jb21tYW5kLXYxCmtpZD1iMmU1YjQxODYwZDFkOGJlCnBvd2VyPW9wZW5fYWxsCmFjdGlvbj0KY2hhbGxlbmdlPTAxMjM0NTY3ODlhYmNkZWYwMTIzNDU2Nzg5YWJjZGVmCms9NApmYWN0b3I9RkxBU0h8YzQ4Y2FjZDgxYjk2NjNkMGJhOTdjMjIxY2JkMTdmNGYKZmFjdG9yPUVUSEVSTkVUfGY5MWVmZDg5ZTAwMjVjMjI2MmRhMTJjZmJlZDQzNjMyCmZhY3Rvcj1XSUZJfGVhOGI1NTJlMjI0MGJiZGQ4Yzg4YzQyMzEzYzRkZWFiCmZhY3Rvcj1TWVNURU1fU0VSSUFMfDc3NGJlYWNiZjM1MWIwZDIwNWY5MTY2NjY5ZTRkM2M3CmZhY3Rvcj1CTFVFVE9PVEh8ZDM2NWVhNjdlMDA1ODVlZGFmOGJlZjRkNzM3ODg1MGQKYnVuZGxlcz0KbG90cz0KZGF5cz03.dc9ULBiZ5NwVyjw0fPB9BBdbwz30U2gcCNiBnAWDVCwcaa03pPO1NzkpiA9G+prlS2xHLQT/NEzjv1Gpj9+YCQ==",
+          "wallMs": 1800000000000,
+          "expect": {
+            "result": "accepted",
+            "power": "open_all",
+            "untilMs": 1800604800000,
+            "clamped": false
+          }
+        },
+        {
+          "token": "cbo1.Y2FzdGJyaWRnZS1vd25lci1jb21tYW5kLXYxCmtpZD1iMmU1YjQxODYwZDFkOGJlCnBvd2VyPW9wZW5fYWxsCmFjdGlvbj0KY2hhbGxlbmdlPTAxMjM0NTY3ODlhYmNkZWYwMTIzNDU2Nzg5YWJjZGVmCms9NApmYWN0b3I9RkxBU0h8YzQ4Y2FjZDgxYjk2NjNkMGJhOTdjMjIxY2JkMTdmNGYKZmFjdG9yPUVUSEVSTkVUfGY5MWVmZDg5ZTAwMjVjMjI2MmRhMTJjZmJlZDQzNjMyCmZhY3Rvcj1XSUZJfGVhOGI1NTJlMjI0MGJiZGQ4Yzg4YzQyMzEzYzRkZWFiCmZhY3Rvcj1TWVNURU1fU0VSSUFMfDc3NGJlYWNiZjM1MWIwZDIwNWY5MTY2NjY5ZTRkM2M3CmZhY3Rvcj1CTFVFVE9PVEh8ZDM2NWVhNjdlMDA1ODVlZGFmOGJlZjRkNzM3ODg1MGQKYnVuZGxlcz0KbG90cz0KZGF5cz03.dc9ULBiZ5NwVyjw0fPB9BBdbwz30U2gcCNiBnAWDVCwcaa03pPO1NzkpiA9G+prlS2xHLQT/NEzjv1Gpj9+YCQ==",
+          "wallMs": 1800000000000,
+          "expect": {
+            "result": "rejected",
+            "reason": "REPLAY"
+          }
+        }
+      ]
+    },
+    {
+      "type": "command",
+      "id": "cmd-unknown-challenge",
+      "description": "défi jamais émis par cette TV",
+      "device": "tvA",
+      "openChallenges": ["fedcba9876543210fedcba9876543210"],
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "steps": [
+        {
+          "token": "cbo1.Y2FzdGJyaWRnZS1vd25lci1jb21tYW5kLXYxCmtpZD1iMmU1YjQxODYwZDFkOGJlCnBvd2VyPW9wZW5fYWxsCmFjdGlvbj0KY2hhbGxlbmdlPTAxMjM0NTY3ODlhYmNkZWYwMTIzNDU2Nzg5YWJjZGVmCms9NApmYWN0b3I9RkxBU0h8YzQ4Y2FjZDgxYjk2NjNkMGJhOTdjMjIxY2JkMTdmNGYKZmFjdG9yPUVUSEVSTkVUfGY5MWVmZDg5ZTAwMjVjMjI2MmRhMTJjZmJlZDQzNjMyCmZhY3Rvcj1XSUZJfGVhOGI1NTJlMjI0MGJiZGQ4Yzg4YzQyMzEzYzRkZWFiCmZhY3Rvcj1TWVNURU1fU0VSSUFMfDc3NGJlYWNiZjM1MWIwZDIwNWY5MTY2NjY5ZTRkM2M3CmZhY3Rvcj1CTFVFVE9PVEh8ZDM2NWVhNjdlMDA1ODVlZGFmOGJlZjRkNzM3ODg1MGQKYnVuZGxlcz0KbG90cz0KZGF5cz03.dc9ULBiZ5NwVyjw0fPB9BBdbwz30U2gcCNiBnAWDVCwcaa03pPO1NzkpiA9G+prlS2xHLQT/NEzjv1Gpj9+YCQ==",
+          "wallMs": 1800000000000,
+          "expect": {
+            "result": "rejected",
+            "reason": "REPLAY"
+          }
+        }
+      ]
+    },
+    {
+      "type": "command",
+      "id": "cmd-wrong-tv",
+      "description": "commande destinée à une autre TV",
+      "device": "tvB-no-ethernet-usb-wifi",
+      "openChallenges": ["0123456789abcdef0123456789abcdef"],
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "steps": [
+        {
+          "token": "cbo1.Y2FzdGJyaWRnZS1vd25lci1jb21tYW5kLXYxCmtpZD1iMmU1YjQxODYwZDFkOGJlCnBvd2VyPW9wZW5fYWxsCmFjdGlvbj0KY2hhbGxlbmdlPTAxMjM0NTY3ODlhYmNkZWYwMTIzNDU2Nzg5YWJjZGVmCms9NApmYWN0b3I9RkxBU0h8YzQ4Y2FjZDgxYjk2NjNkMGJhOTdjMjIxY2JkMTdmNGYKZmFjdG9yPUVUSEVSTkVUfGY5MWVmZDg5ZTAwMjVjMjI2MmRhMTJjZmJlZDQzNjMyCmZhY3Rvcj1XSUZJfGVhOGI1NTJlMjI0MGJiZGQ4Yzg4YzQyMzEzYzRkZWFiCmZhY3Rvcj1TWVNURU1fU0VSSUFMfDc3NGJlYWNiZjM1MWIwZDIwNWY5MTY2NjY5ZTRkM2M3CmZhY3Rvcj1CTFVFVE9PVEh8ZDM2NWVhNjdlMDA1ODVlZGFmOGJlZjRkNzM3ODg1MGQKYnVuZGxlcz0KbG90cz0KZGF5cz03.dc9ULBiZ5NwVyjw0fPB9BBdbwz30U2gcCNiBnAWDVCwcaa03pPO1NzkpiA9G+prlS2xHLQT/NEzjv1Gpj9+YCQ==",
+          "wallMs": 1800000000000,
+          "expect": {
+            "result": "rejected",
+            "reason": "WRONG_DEVICE"
+          }
+        }
+      ]
+    },
+    {
+      "type": "command",
+      "id": "cmd-revoked-key",
+      "description": "clé révoquée",
+      "device": "tvA",
+      "openChallenges": ["0123456789abcdef0123456789abcdef"],
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": ["desk"],
+      "steps": [
+        {
+          "token": "cbo1.Y2FzdGJyaWRnZS1vd25lci1jb21tYW5kLXYxCmtpZD1iMmU1YjQxODYwZDFkOGJlCnBvd2VyPW9wZW5fYWxsCmFjdGlvbj0KY2hhbGxlbmdlPTAxMjM0NTY3ODlhYmNkZWYwMTIzNDU2Nzg5YWJjZGVmCms9NApmYWN0b3I9RkxBU0h8YzQ4Y2FjZDgxYjk2NjNkMGJhOTdjMjIxY2JkMTdmNGYKZmFjdG9yPUVUSEVSTkVUfGY5MWVmZDg5ZTAwMjVjMjI2MmRhMTJjZmJlZDQzNjMyCmZhY3Rvcj1XSUZJfGVhOGI1NTJlMjI0MGJiZGQ4Yzg4YzQyMzEzYzRkZWFiCmZhY3Rvcj1TWVNURU1fU0VSSUFMfDc3NGJlYWNiZjM1MWIwZDIwNWY5MTY2NjY5ZTRkM2M3CmZhY3Rvcj1CTFVFVE9PVEh8ZDM2NWVhNjdlMDA1ODVlZGFmOGJlZjRkNzM3ODg1MGQKYnVuZGxlcz0KbG90cz0KZGF5cz03.dc9ULBiZ5NwVyjw0fPB9BBdbwz30U2gcCNiBnAWDVCwcaa03pPO1NzkpiA9G+prlS2xHLQT/NEzjv1Gpj9+YCQ==",
+          "wallMs": 1800000000000,
+          "expect": {
+            "result": "rejected",
+            "reason": "REVOKED_KEY"
+          }
+        }
+      ]
+    },
+    {
+      "type": "command",
+      "id": "cmd-clamped-30-days",
+      "description": "90 jours demandés : la TV borne à 30 jours",
+      "device": "tvA",
+      "openChallenges": ["0123456789abcdef0123456789abcdef"],
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "steps": [
+        {
+          "token": "cbo1.Y2FzdGJyaWRnZS1vd25lci1jb21tYW5kLXYxCmtpZD1iMmU1YjQxODYwZDFkOGJlCnBvd2VyPW9wZW5fYWxsCmFjdGlvbj0KY2hhbGxlbmdlPTAxMjM0NTY3ODlhYmNkZWYwMTIzNDU2Nzg5YWJjZGVmCms9NApmYWN0b3I9RkxBU0h8YzQ4Y2FjZDgxYjk2NjNkMGJhOTdjMjIxY2JkMTdmNGYKZmFjdG9yPUVUSEVSTkVUfGY5MWVmZDg5ZTAwMjVjMjI2MmRhMTJjZmJlZDQzNjMyCmZhY3Rvcj1XSUZJfGVhOGI1NTJlMjI0MGJiZGQ4Yzg4YzQyMzEzYzRkZWFiCmZhY3Rvcj1TWVNURU1fU0VSSUFMfDc3NGJlYWNiZjM1MWIwZDIwNWY5MTY2NjY5ZTRkM2M3CmZhY3Rvcj1CTFVFVE9PVEh8ZDM2NWVhNjdlMDA1ODVlZGFmOGJlZjRkNzM3ODg1MGQKYnVuZGxlcz0KbG90cz0KZGF5cz05MA.YEpFA2xcqO1uod0p6QhDhr55WmWMCaOqHp0l1vQKWwD3P3ehMRtsD/PZQGpvgT9s/yqBm3q4mWRLAWIPSTx1BQ==",
+          "wallMs": 1800000000000,
+          "expect": {
+            "result": "accepted",
+            "power": "open_all",
+            "untilMs": 1802592000000,
+            "clamped": true
+          }
+        }
+      ]
+    },
+    {
+      "type": "command",
+      "id": "cmd-support-key-open-all",
+      "description": "clé de support seule : pouvoir « tout ouvert » refusé",
+      "device": "tvA",
+      "openChallenges": ["0123456789abcdef0123456789abcdef"],
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "steps": [
+        {
+          "token": "cbo1.Y2FzdGJyaWRnZS1vd25lci1jb21tYW5kLXYxCmtpZD1lNTZmYjRmZmZhNzk0YTQxCnBvd2VyPW9wZW5fYWxsCmFjdGlvbj0KY2hhbGxlbmdlPTAxMjM0NTY3ODlhYmNkZWYwMTIzNDU2Nzg5YWJjZGVmCms9NApmYWN0b3I9RkxBU0h8YzQ4Y2FjZDgxYjk2NjNkMGJhOTdjMjIxY2JkMTdmNGYKZmFjdG9yPUVUSEVSTkVUfGY5MWVmZDg5ZTAwMjVjMjI2MmRhMTJjZmJlZDQzNjMyCmZhY3Rvcj1XSUZJfGVhOGI1NTJlMjI0MGJiZGQ4Yzg4YzQyMzEzYzRkZWFiCmZhY3Rvcj1TWVNURU1fU0VSSUFMfDc3NGJlYWNiZjM1MWIwZDIwNWY5MTY2NjY5ZTRkM2M3CmZhY3Rvcj1CTFVFVE9PVEh8ZDM2NWVhNjdlMDA1ODVlZGFmOGJlZjRkNzM3ODg1MGQKYnVuZGxlcz0KbG90cz0KZGF5cz01.tF9coU4VR9FkeJ/5wQLBjP9YwCHXF3gfrzKxSgWudXA81viOgWyZmadRPm+ORrgKVIcOJq1OBPog1Tj3cK+8CQ==",
+          "wallMs": 1800000000000,
+          "expect": {
+            "result": "rejected",
+            "reason": "KEY_NOT_ALLOWED"
+          }
+        }
+      ]
+    },
+    {
+      "type": "command",
+      "id": "cmd-support-reset",
+      "description": "support : remise à zéro de l'essai",
+      "device": "tvA",
+      "openChallenges": ["fedcba9876543210fedcba9876543210"],
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "steps": [
+        {
+          "token": "cbo1.Y2FzdGJyaWRnZS1vd25lci1jb21tYW5kLXYxCmtpZD1lNTZmYjRmZmZhNzk0YTQxCnBvd2VyPXN1cHBvcnQKYWN0aW9uPXJlc2V0LXRyaWFsCmNoYWxsZW5nZT1mZWRjYmE5ODc2NTQzMjEwZmVkY2JhOTg3NjU0MzIxMAprPTQKZmFjdG9yPUZMQVNIfGM0OGNhY2Q4MWI5NjYzZDBiYTk3YzIyMWNiZDE3ZjRmCmZhY3Rvcj1FVEhFUk5FVHxmOTFlZmQ4OWUwMDI1YzIyNjJkYTEyY2ZiZWQ0MzYzMgpmYWN0b3I9V0lGSXxlYThiNTUyZTIyNDBiYmRkOGM4OGM0MjMxM2M0ZGVhYgpmYWN0b3I9U1lTVEVNX1NFUklBTHw3NzRiZWFjYmYzNTFiMGQyMDVmOTE2NjY2OWU0ZDNjNwpmYWN0b3I9QkxVRVRPT1RIfGQzNjVlYTY3ZTAwNTg1ZWRhZjhiZWY0ZDczNzg4NTBkCmJ1bmRsZXM9CmxvdHM9CmRheXM9MA.MMEoQLDxTql6E0FfPXfdB51HsC/UdtARUVGE2JFqpkKZmNRIvr1t2fmBQ1cjh6guPI2kwTixm9kYp8GjDareDg==",
+          "wallMs": 1800000000000,
+          "expect": {
+            "result": "accepted",
+            "power": "support",
+            "untilMs": 0,
+            "clamped": false
+          }
+        }
+      ]
+    },
+    {
+      "type": "command",
+      "id": "cmd-unlock-lots",
+      "description": "déblocage de lots précis, 10 jours",
+      "device": "tvA",
+      "openChallenges": ["0123456789abcdef0123456789abcdef"],
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "steps": [
+        {
+          "token": "cbo1.Y2FzdGJyaWRnZS1vd25lci1jb21tYW5kLXYxCmtpZD1lZGVjNTVmMmY2NTFjNTA4CnBvd2VyPXVubG9jawphY3Rpb249CmNoYWxsZW5nZT0wMTIzNDU2Nzg5YWJjZGVmMDEyMzQ1Njc4OWFiY2RlZgprPTQKZmFjdG9yPUZMQVNIfGM0OGNhY2Q4MWI5NjYzZDBiYTk3YzIyMWNiZDE3ZjRmCmZhY3Rvcj1FVEhFUk5FVHxmOTFlZmQ4OWUwMDI1YzIyNjJkYTEyY2ZiZWQ0MzYzMgpmYWN0b3I9V0lGSXxlYThiNTUyZTIyNDBiYmRkOGM4OGM0MjMxM2M0ZGVhYgpmYWN0b3I9U1lTVEVNX1NFUklBTHw3NzRiZWFjYmYzNTFiMGQyMDVmOTE2NjY2OWU0ZDNjNwpmYWN0b3I9QkxVRVRPT1RIfGQzNjVlYTY3ZTAwNTg1ZWRhZjhiZWY0ZDczNzg4NTBkCmJ1bmRsZXM9CmxvdHM9bGVhcm46Y20yLHF1aXo6Y20yCmRheXM9MTA.Jr8YjfnaV0zrdXjspfoiRadhVhLOnggi5sF8rTg9T2kphgVJNVuZDmBItJSQVyt367EcBxTc2pSxOpkhgBRgAw==",
+          "wallMs": 1800000000000,
+          "expect": {
+            "result": "accepted",
+            "power": "unlock",
+            "untilMs": 1800864000000,
+            "clamped": false
+          }
+        }
+      ]
+    },
+    {
+      "type": "build-activation",
+      "id": "build-trial",
+      "description": "construire la clé d'essai",
+      "signer": "desk",
+      "request": {
+        "kind": "trial",
+        "device": "tvA",
+        "issuedAt": 1800000000000,
+        "subject": "tv",
+        "rights": [],
+        "license": "trial",
+        "seat": null,
+        "notBefore": 1799913600000,
+        "windowDays": 300,
+        "nonce": "00112233445566778899aabbccddeeff"
+      },
+      "expect": {
+        "token": "cba1.Y2FzdGJyaWRnZS1hY3RpdmF0aW9uLXYxCmtpbmQ9dHJpYWwKc3ViamVjdD10dgpraWQ9YjJlNWI0MTg2MGQxZDhiZQpub25jZT0wMDExMjIzMzQ0NTU2Njc3ODg5OWFhYmJjY2RkZWVmZgppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xNzk5OTEzNjAwMDAwCm5vdEFmdGVyPTE4MjU4MzM2MDAwMDAKbGljZW5zZT10cmlhbApzZWF0PTM4OWI1ODNhYjZiZWE4NTYKaz00CmZhY3Rvcj1GTEFTSHxjNDhjYWNkODFiOTY2M2QwYmE5N2MyMjFjYmQxN2Y0ZgpmYWN0b3I9RVRIRVJORVR8ZjkxZWZkODllMDAyNWMyMjYyZGExMmNmYmVkNDM2MzIKZmFjdG9yPVdJRkl8ZWE4YjU1MmUyMjQwYmJkZDhjODhjNDIzMTNjNGRlYWIKZmFjdG9yPVNZU1RFTV9TRVJJQUx8Nzc0YmVhY2JmMzUxYjBkMjA1ZjkxNjY2NjllNGQzYzcKZmFjdG9yPUJMVUVUT09USHxkMzY1ZWE2N2UwMDU4NWVkYWY4YmVmNGQ3Mzc4ODUwZA.2GPtfCXYZOnWqQ9+a37s+rnbVnIq53G8II8nA/g3neZhQENO6TSGRtHYgLINL3omaE+4Cb9Jf5wo2QiPRazlBg=="
+      }
+    },
+    {
+      "type": "build-activation",
+      "id": "build-production",
+      "description": "construire la production (achat + abonnement)",
+      "signer": "desk",
+      "request": {
+        "kind": "production",
+        "device": "tvA",
+        "issuedAt": 1800000000000,
+        "subject": "tv",
+        "rights": ["purchase|p-classe-cm2|classe-cm2|1799136000000", "subscription|abo-tout|tout|1799913600000|1807776000000|604800000|1"],
+        "license": "lic-0001",
+        "seat": null,
+        "notBefore": 1799913600000,
+        "windowDays": 300,
+        "nonce": "00112233445566778899aabbccddeeff"
+      },
+      "expect": {
+        "token": "cba1.Y2FzdGJyaWRnZS1hY3RpdmF0aW9uLXYxCmtpbmQ9cHJvZHVjdGlvbgpzdWJqZWN0PXR2CmtpZD1iMmU1YjQxODYwZDFkOGJlCm5vbmNlPTAwMTEyMjMzNDQ1NTY2Nzc4ODk5YWFiYmNjZGRlZWZmCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE3OTk5MTM2MDAwMDAKbm90QWZ0ZXI9MTgyNTgzMzYwMDAwMApsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNAprPTQKZmFjdG9yPUZMQVNIfGM0OGNhY2Q4MWI5NjYzZDBiYTk3YzIyMWNiZDE3ZjRmCmZhY3Rvcj1FVEhFUk5FVHxmOTFlZmQ4OWUwMDI1YzIyNjJkYTEyY2ZiZWQ0MzYzMgpmYWN0b3I9V0lGSXxlYThiNTUyZTIyNDBiYmRkOGM4OGM0MjMxM2M0ZGVhYgpmYWN0b3I9U1lTVEVNX1NFUklBTHw3NzRiZWFjYmYzNTFiMGQyMDVmOTE2NjY2OWU0ZDNjNwpmYWN0b3I9QkxVRVRPT1RIfGQzNjVlYTY3ZTAwNTg1ZWRhZjhiZWY0ZDczNzg4NTBkCnJpZ2h0PXB1cmNoYXNlfHAtY2xhc3NlLWNtMnxjbGFzc2UtY20yfDE3OTkxMzYwMDAwMDAKcmlnaHQ9c3Vic2NyaXB0aW9ufGFiby10b3V0fHRvdXR8MTc5OTkxMzYwMDAwMHwxODA3Nzc2MDAwMDAwfDYwNDgwMDAwMHwx.gdb00NSa6WzWq/KhoS9cFCBp7uLVkvbtAW69c3BP0IWYvCiD502H661/v1tCu8oHOumVRvuFUMP6hKyeMAr1Bg=="
+      }
+    },
+    {
+      "type": "build-activation",
+      "id": "build-phone",
+      "description": "construire une activation de téléphone",
+      "signer": "phone",
+      "request": {
+        "kind": "production",
+        "device": "phoneP",
+        "issuedAt": 1800000000000,
+        "subject": "phone",
+        "rights": ["purchase|p-classe-cm2|classe-cm2|1799136000000"],
+        "license": "lic-0001",
+        "seat": null,
+        "notBefore": 1799913600000,
+        "windowDays": 300,
+        "nonce": "00112233445566778899aabbccddeeff"
+      },
+      "expect": {
+        "token": "cba1.Y2FzdGJyaWRnZS1hY3RpdmF0aW9uLXYxCmtpbmQ9cHJvZHVjdGlvbgpzdWJqZWN0PXBob25lCmtpZD1lZGVjNTVmMmY2NTFjNTA4Cm5vbmNlPTAwMTEyMjMzNDQ1NTY2Nzc4ODk5YWFiYmNjZGRlZWZmCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE3OTk5MTM2MDAwMDAKbm90QWZ0ZXI9MTgyNTgzMzYwMDAwMApsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9YzQ3NDFmOWNhYjIxYTMzMwprPTEKZmFjdG9yPVNZU1RFTV9TRVJJQUx8YmYzOTg2OTQ1NzNkYjllN2QwNTJiMzM1YjFjNTFlMTAKcmlnaHQ9cHVyY2hhc2V8cC1jbGFzc2UtY20yfGNsYXNzZS1jbTJ8MTc5OTEzNjAwMDAwMA.aLuOrHC4jh7xDEDXglJE7dAdUj9EacEA0n+sE9FIIcM3Xn/8xQk3OnAZL7/Dtm+2T5wl1EE00N5P6yLxe91yAA=="
+      }
+    },
+    {
+      "type": "build-compact",
+      "id": "build-compact-trial",
+      "description": "construire la clé saisissable",
+      "signer": "desk",
+      "request": {
+        "kind": "trial",
+        "deviceCode": "ZX8P-S2TH-N5PG-V9V7",
+        "notBeforeDay": 378,
+        "windowDays": 200,
+        "setId": 0
+      },
+      "expect": {
+        "text": "040DE-B581Q-F80CG-G000C-K7557-8PGJ2-50JC4-SNM6Y-C2YYS-TZ7TP-S6X98-749VH-R8DEE-NKWDQ-8ZSV8-QJG2V-NBRJ3-04WM2-B47A5-TMN83-Z2PWA-828G0-BGKF4-ZZ6K7-NJBZA-NHRVK-DNFEP-EVWGZ-FF5NK-BTYMD-W10PJ-YZD13-RM5G4"
+      }
+    },
+    {
+      "type": "build-command",
+      "id": "build-command-open-all",
+      "description": "construire la commande « tout ouvert »",
+      "signer": "desk",
+      "request": {
+        "power": "open_all",
+        "device": "tvA",
+        "challenge": "0123456789abcdef0123456789abcdef",
+        "days": 7,
+        "action": "",
+        "bundles": [],
+        "lots": []
+      },
+      "expect": {
+        "token": "cbo1.Y2FzdGJyaWRnZS1vd25lci1jb21tYW5kLXYxCmtpZD1iMmU1YjQxODYwZDFkOGJlCnBvd2VyPW9wZW5fYWxsCmFjdGlvbj0KY2hhbGxlbmdlPTAxMjM0NTY3ODlhYmNkZWYwMTIzNDU2Nzg5YWJjZGVmCms9NApmYWN0b3I9RkxBU0h8YzQ4Y2FjZDgxYjk2NjNkMGJhOTdjMjIxY2JkMTdmNGYKZmFjdG9yPUVUSEVSTkVUfGY5MWVmZDg5ZTAwMjVjMjI2MmRhMTJjZmJlZDQzNjMyCmZhY3Rvcj1XSUZJfGVhOGI1NTJlMjI0MGJiZGQ4Yzg4YzQyMzEzYzRkZWFiCmZhY3Rvcj1TWVNURU1fU0VSSUFMfDc3NGJlYWNiZjM1MWIwZDIwNWY5MTY2NjY5ZTRkM2M3CmZhY3Rvcj1CTFVFVE9PVEh8ZDM2NWVhNjdlMDA1ODVlZGFmOGJlZjRkNzM3ODg1MGQKYnVuZGxlcz0KbG90cz0KZGF5cz03.dc9ULBiZ5NwVyjw0fPB9BBdbwz30U2gcCNiBnAWDVCwcaa03pPO1NzkpiA9G+prlS2xHLQT/NEzjv1Gpj9+YCQ=="
+      }
+    },
+    {
+      "type": "build-activation",
+      "id": "build-refuse-window",
+      "description": "durée hors bornes (400 jours)",
+      "signer": "desk",
+      "request": {
+        "kind": "production",
+        "device": "tvA",
+        "issuedAt": 1800000000000,
+        "subject": "tv",
+        "rights": ["purchase|p-classe-cm2|classe-cm2|1799136000000"],
+        "license": "lic-0001",
+        "seat": null,
+        "notBefore": 1799913600000,
+        "windowDays": 400,
+        "nonce": "00112233445566778899aabbccddeeff"
+      },
+      "expect": {
+        "refused": true
+      }
+    },
+    {
+      "type": "build-activation",
+      "id": "build-refuse-zero-window",
+      "description": "durée nulle",
+      "signer": "desk",
+      "request": {
+        "kind": "production",
+        "device": "tvA",
+        "issuedAt": 1800000000000,
+        "subject": "tv",
+        "rights": ["purchase|p-classe-cm2|classe-cm2|1799136000000"],
+        "license": "lic-0001",
+        "seat": null,
+        "notBefore": 1799913600000,
+        "windowDays": 0,
+        "nonce": "00112233445566778899aabbccddeeff"
+      },
+      "expect": {
+        "refused": true
+      }
+    },
+    {
+      "type": "build-activation",
+      "id": "build-refuse-scope",
+      "description": "la clé serveur ne peut pas délivrer « tout ouvert »",
+      "signer": "server",
+      "request": {
+        "kind": "production",
+        "device": "tvA",
+        "issuedAt": 1800000000000,
+        "subject": "tv",
+        "rights": ["openall|ouvert|1800000000000|1800864000000"],
+        "license": "lic-0001",
+        "seat": null,
+        "notBefore": 1799913600000,
+        "windowDays": 300,
+        "nonce": "00112233445566778899aabbccddeeff"
+      },
+      "expect": {
+        "refused": true
+      }
+    },
+    {
+      "type": "build-activation",
+      "id": "build-refuse-open-all-long",
+      "description": "« tout ouvert » de 31 jours",
+      "signer": "desk",
+      "request": {
+        "kind": "production",
+        "device": "tvA",
+        "issuedAt": 1800000000000,
+        "subject": "tv",
+        "rights": ["openall|ouvert|1800000000000|1802678400000"],
+        "license": "lic-0001",
+        "seat": null,
+        "notBefore": 1799913600000,
+        "windowDays": 300,
+        "nonce": "00112233445566778899aabbccddeeff"
+      },
+      "expect": {
+        "refused": true
+      }
+    },
+    {
+      "type": "build-activation",
+      "id": "build-refuse-no-rights",
+      "description": "production sans droit",
+      "signer": "desk",
+      "request": {
+        "kind": "production",
+        "device": "tvA",
+        "issuedAt": 1800000000000,
+        "subject": "tv",
+        "rights": [],
+        "license": "lic-0001",
+        "seat": null,
+        "notBefore": 1799913600000,
+        "windowDays": 300,
+        "nonce": "00112233445566778899aabbccddeeff"
+      },
+      "expect": {
+        "refused": true
+      }
+    },
+    {
+      "type": "build-activation",
+      "id": "build-refuse-bad-code",
+      "description": "code d'appareil mal formé",
+      "signer": "desk",
+      "request": {
+        "kind": "production",
+        "device": "tvA",
+        "issuedAt": 1800000000000,
+        "subject": "tv",
+        "rights": ["purchase|p-classe-cm2|classe-cm2|1799136000000"],
+        "license": "lic-0001",
+        "seat": null,
+        "notBefore": 1799913600000,
+        "windowDays": 300,
+        "nonce": "00112233445566778899aabbccddeeff",
+        "deviceCodeOverride": "ABCD-EFGH-JKMN-PQRZ"
+      },
+      "expect": {
+        "refused": true
+      }
+    },
+    {
+      "type": "licence",
+      "id": "lic-seat-reuse",
+      "description": "même matériel : le poste est réutilisé quel que soit l'outil (aussi avec un module remplacé), un autre matériel prend le second poste",
+      "trustedKeys": ["desk", "phone", "server"],
+      "events": [
+        {
+          "id": "09d7e31c1341f890",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=license\nkid=b2e5b41860d1d8be\nat=1799136000000\nlicense=lic-0001\nseats=2\nmaxTransfersPerYear=2",
+          "signature": "V81Zruyxs9C78InxUAn2LB65E/TXJBZ9hjcqk3PZmGHwHrDX7hgBevsRzAv8lMj5w1k+9/ii58WzHBS3Klh4Cw=="
+        },
+        {
+          "id": "a164326828003f17",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=issue\nkid=b2e5b41860d1d8be\nat=1800000000000\nlicense=lic-0001\nseat=f36757c226dd2ee4\nsubject=tv\nkind=production\nnonce=00112233445566778899aabbccddeeff\nnotAfter=1825833600000\nk=4\nfactor=FLASH|c48cacd81b9663d0ba97c221cbd17f4f\nfactor=ETHERNET|f91efd89e0025c2262da12cfbed43632\nfactor=WIFI|ea8b552e2240bbdd8c88c42313c4deab\nfactor=SYSTEM_SERIAL|774beacbf351b0d205f9166669e4d3c7\nfactor=BLUETOOTH|d365ea67e00585edaf8bef4d7378850d",
+          "signature": "YnUgUXvMgBAIFg3JaIYF0zi7osU+XYtuhN7ECEKqTRe4XzSNMUrmY7EZIB3imtSWhbLf2bCUlKiAXTJdZj5LDg=="
+        },
+        {
+          "id": "971c247a0f5f8a16",
+          "kid": "edec55f2f651c508",
+          "text": "castbridge-licence-event-v1\ntype=issue\nkid=edec55f2f651c508\nat=1800086400000\nlicense=lic-0001\nseat=f36757c226dd2ee4\nsubject=tv\nkind=production\nnonce=ffeeddccbbaa99887766554433221100\nnotAfter=1825920000000\nk=4\nfactor=FLASH|c48cacd81b9663d0ba97c221cbd17f4f\nfactor=ETHERNET|f91efd89e0025c2262da12cfbed43632\nfactor=WIFI|ea8b552e2240bbdd8c88c42313c4deab\nfactor=SYSTEM_SERIAL|774beacbf351b0d205f9166669e4d3c7\nfactor=BLUETOOTH|d365ea67e00585edaf8bef4d7378850d",
+          "signature": "fHxIpL+lw9sjbFkLtWL0NQ6iwm83v1K9QwYVT5uInpSpfuRaVVjXRy3oRKMIhQ4NlS/LkZv9wcGW7/I/PoLyBA=="
+        }
+      ],
+      "plans": [
+        {
+          "license": "lic-0001",
+          "device": "tvA",
+          "subject": "tv",
+          "expect": {
+            "plan": "reuse",
+            "seat": "f36757c226dd2ee4"
+          }
+        },
+        {
+          "license": "lic-0001",
+          "device": "tvA-swapped-wifi",
+          "subject": "tv",
+          "expect": {
+            "plan": "reuse",
+            "seat": "f36757c226dd2ee4"
+          }
+        },
+        {
+          "license": "lic-0001",
+          "device": "tvB-no-ethernet-usb-wifi",
+          "subject": "tv",
+          "expect": {
+            "plan": "new",
+            "seat": "3cd2bf1e6e056494",
+            "left": 0
+          }
+        },
+        {
+          "license": "lic-0001",
+          "device": "tvA",
+          "subject": "phone",
+          "expect": {
+            "plan": "new",
+            "seat": "f36757c226dd2ee4",
+            "left": 0
+          }
+        },
+        {
+          "license": "nope",
+          "device": "tvA",
+          "subject": "tv",
+          "expect": {
+            "plan": "refused",
+            "reason": "UNKNOWN_LICENSE"
+          }
+        }
+      ],
+      "expect": {
+        "seats": ["lic-0001|f36757c226dd2ee4"],
+        "used": {
+          "lic-0001": 1
+        },
+        "transfers": 0,
+        "duplicates": 0,
+        "rejected": [],
+        "revokedSeats": {},
+        "warnings": 0
+      }
+    },
+    {
+      "type": "licence",
+      "id": "lic-no-seat-left",
+      "description": "licence à un poste : le second matériel est refusé, il faut un transfert",
+      "trustedKeys": ["desk", "phone", "server"],
+      "events": [
+        {
+          "id": "c16f57de58033986",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=license\nkid=b2e5b41860d1d8be\nat=1799136000000\nlicense=lic-0001\nseats=1\nmaxTransfersPerYear=2",
+          "signature": "m6HFJgqFv05BCbjl98ONbyk8g+k9YTd6F4e/kC79SEgFJuGJYzYPwVZlTIMxF3iB3mYl6dRIZC0YJisbU2uEAw=="
+        },
+        {
+          "id": "a164326828003f17",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=issue\nkid=b2e5b41860d1d8be\nat=1800000000000\nlicense=lic-0001\nseat=f36757c226dd2ee4\nsubject=tv\nkind=production\nnonce=00112233445566778899aabbccddeeff\nnotAfter=1825833600000\nk=4\nfactor=FLASH|c48cacd81b9663d0ba97c221cbd17f4f\nfactor=ETHERNET|f91efd89e0025c2262da12cfbed43632\nfactor=WIFI|ea8b552e2240bbdd8c88c42313c4deab\nfactor=SYSTEM_SERIAL|774beacbf351b0d205f9166669e4d3c7\nfactor=BLUETOOTH|d365ea67e00585edaf8bef4d7378850d",
+          "signature": "YnUgUXvMgBAIFg3JaIYF0zi7osU+XYtuhN7ECEKqTRe4XzSNMUrmY7EZIB3imtSWhbLf2bCUlKiAXTJdZj5LDg=="
+        }
+      ],
+      "plans": [
+        {
+          "license": "lic-0001",
+          "device": "tvB-no-ethernet-usb-wifi",
+          "subject": "tv",
+          "expect": {
+            "plan": "refused",
+            "reason": "NO_SEAT_LEFT"
+          }
+        },
+        {
+          "license": "lic-0001",
+          "device": "tvA",
+          "subject": "tv",
+          "expect": {
+            "plan": "reuse",
+            "seat": "f36757c226dd2ee4"
+          }
+        }
+      ],
+      "expect": {
+        "seats": ["lic-0001|f36757c226dd2ee4"],
+        "used": {
+          "lic-0001": 1
+        },
+        "transfers": 0,
+        "duplicates": 0,
+        "rejected": [],
+        "revokedSeats": {},
+        "warnings": 0
+      }
+    },
+    {
+      "type": "licence",
+      "id": "lic-duplicate-hardware",
+      "description": "deux outils ont émis le même matériel sous deux identifiants de poste : détecté, compté une fois, le plus ancien gardé",
+      "trustedKeys": ["desk", "phone", "server"],
+      "events": [
+        {
+          "id": "09d7e31c1341f890",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=license\nkid=b2e5b41860d1d8be\nat=1799136000000\nlicense=lic-0001\nseats=2\nmaxTransfersPerYear=2",
+          "signature": "V81Zruyxs9C78InxUAn2LB65E/TXJBZ9hjcqk3PZmGHwHrDX7hgBevsRzAv8lMj5w1k+9/ii58WzHBS3Klh4Cw=="
+        },
+        {
+          "id": "a164326828003f17",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=issue\nkid=b2e5b41860d1d8be\nat=1800000000000\nlicense=lic-0001\nseat=f36757c226dd2ee4\nsubject=tv\nkind=production\nnonce=00112233445566778899aabbccddeeff\nnotAfter=1825833600000\nk=4\nfactor=FLASH|c48cacd81b9663d0ba97c221cbd17f4f\nfactor=ETHERNET|f91efd89e0025c2262da12cfbed43632\nfactor=WIFI|ea8b552e2240bbdd8c88c42313c4deab\nfactor=SYSTEM_SERIAL|774beacbf351b0d205f9166669e4d3c7\nfactor=BLUETOOTH|d365ea67e00585edaf8bef4d7378850d",
+          "signature": "YnUgUXvMgBAIFg3JaIYF0zi7osU+XYtuhN7ECEKqTRe4XzSNMUrmY7EZIB3imtSWhbLf2bCUlKiAXTJdZj5LDg=="
+        },
+        {
+          "id": "d5a5a2cd9610a3d0",
+          "kid": "edec55f2f651c508",
+          "text": "castbridge-licence-event-v1\ntype=issue\nkid=edec55f2f651c508\nat=1800086400000\nlicense=lic-0001\nseat=aa3f971650513434\nsubject=tv\nkind=production\nnonce=00112233445566778899aabbccddeeff\nnotAfter=1825920000000\nk=4\nfactor=FLASH|c48cacd81b9663d0ba97c221cbd17f4f\nfactor=ETHERNET|f91efd89e0025c2262da12cfbed43632\nfactor=WIFI|3b3be8657cfa25b97f464ec3d62efb8e\nfactor=SYSTEM_SERIAL|774beacbf351b0d205f9166669e4d3c7\nfactor=BLUETOOTH|d365ea67e00585edaf8bef4d7378850d",
+          "signature": "TCFB8Xt3UXGKGmpdwPYyvCH4msIsVRAVTBk4krliVthZgWHJ6wt/otaRJ5smosFGAOtuAHqUEw0N/jGF8FKVCw=="
+        }
+      ],
+      "plans": [],
+      "expect": {
+        "seats": ["lic-0001|f36757c226dd2ee4"],
+        "used": {
+          "lic-0001": 1
+        },
+        "transfers": 0,
+        "duplicates": 1,
+        "rejected": [],
+        "revokedSeats": {},
+        "warnings": 0
+      }
+    },
+    {
+      "type": "licence",
+      "id": "lic-over-issued",
+      "description": "plus de postes émis que prévu : signalé (avertissement), jamais caché",
+      "trustedKeys": ["desk", "phone", "server"],
+      "events": [
+        {
+          "id": "c16f57de58033986",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=license\nkid=b2e5b41860d1d8be\nat=1799136000000\nlicense=lic-0001\nseats=1\nmaxTransfersPerYear=2",
+          "signature": "m6HFJgqFv05BCbjl98ONbyk8g+k9YTd6F4e/kC79SEgFJuGJYzYPwVZlTIMxF3iB3mYl6dRIZC0YJisbU2uEAw=="
+        },
+        {
+          "id": "a164326828003f17",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=issue\nkid=b2e5b41860d1d8be\nat=1800000000000\nlicense=lic-0001\nseat=f36757c226dd2ee4\nsubject=tv\nkind=production\nnonce=00112233445566778899aabbccddeeff\nnotAfter=1825833600000\nk=4\nfactor=FLASH|c48cacd81b9663d0ba97c221cbd17f4f\nfactor=ETHERNET|f91efd89e0025c2262da12cfbed43632\nfactor=WIFI|ea8b552e2240bbdd8c88c42313c4deab\nfactor=SYSTEM_SERIAL|774beacbf351b0d205f9166669e4d3c7\nfactor=BLUETOOTH|d365ea67e00585edaf8bef4d7378850d",
+          "signature": "YnUgUXvMgBAIFg3JaIYF0zi7osU+XYtuhN7ECEKqTRe4XzSNMUrmY7EZIB3imtSWhbLf2bCUlKiAXTJdZj5LDg=="
+        },
+        {
+          "id": "c382e1d5fdc9be3b",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=issue\nkid=b2e5b41860d1d8be\nat=1800172800000\nlicense=lic-0001\nseat=3cd2bf1e6e056494\nsubject=tv\nkind=production\nnonce=00112233445566778899aabbccddeeff\nnotAfter=1826006400000\nk=2\nfactor=FLASH|7ce26676ef99dd28f2f66ab38eaf5c8c\nfactor=SYSTEM_SERIAL|bda7f8b8f612a9d126fc3252b4a6b514\nfactor=BLUETOOTH|29094a4d59e4ab6b18d658efa9bcdbdb",
+          "signature": "YL/cM3k1SbDWLjqE0TpUzAcKiPTRLyYsFEc7BP1sAJ9ij/eew1LebE3LAMkwqbYtREQ/z1YUud4hJlhhqWqwCg=="
+        }
+      ],
+      "plans": [],
+      "expect": {
+        "seats": ["lic-0001|3cd2bf1e6e056494", "lic-0001|f36757c226dd2ee4"],
+        "used": {
+          "lic-0001": 2
+        },
+        "transfers": 0,
+        "duplicates": 0,
+        "rejected": [],
+        "revokedSeats": {},
+        "warnings": 1
+      }
+    },
+    {
+      "type": "licence",
+      "id": "lic-transfer-ok",
+      "description": "transfert du poste vers un autre matériel : l'ancien poste est révoqué, le nouveau matériel retrouve le poste",
+      "trustedKeys": ["desk", "phone", "server"],
+      "events": [
+        {
+          "id": "09d7e31c1341f890",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=license\nkid=b2e5b41860d1d8be\nat=1799136000000\nlicense=lic-0001\nseats=2\nmaxTransfersPerYear=2",
+          "signature": "V81Zruyxs9C78InxUAn2LB65E/TXJBZ9hjcqk3PZmGHwHrDX7hgBevsRzAv8lMj5w1k+9/ii58WzHBS3Klh4Cw=="
+        },
+        {
+          "id": "a164326828003f17",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=issue\nkid=b2e5b41860d1d8be\nat=1800000000000\nlicense=lic-0001\nseat=f36757c226dd2ee4\nsubject=tv\nkind=production\nnonce=00112233445566778899aabbccddeeff\nnotAfter=1825833600000\nk=4\nfactor=FLASH|c48cacd81b9663d0ba97c221cbd17f4f\nfactor=ETHERNET|f91efd89e0025c2262da12cfbed43632\nfactor=WIFI|ea8b552e2240bbdd8c88c42313c4deab\nfactor=SYSTEM_SERIAL|774beacbf351b0d205f9166669e4d3c7\nfactor=BLUETOOTH|d365ea67e00585edaf8bef4d7378850d",
+          "signature": "YnUgUXvMgBAIFg3JaIYF0zi7osU+XYtuhN7ECEKqTRe4XzSNMUrmY7EZIB3imtSWhbLf2bCUlKiAXTJdZj5LDg=="
+        },
+        {
+          "id": "672dc4a7e0097b8d",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=transfer\nkid=b2e5b41860d1d8be\nat=1800432000000\nlicense=lic-0001\nseat=f36757c226dd2ee4\nk=4\nnonce=a1a1a1a1a1a1a1a1\nfactor=FLASH|10d123edb545f91fabebe21e2016c1ed\nfactor=ETHERNET|83b03b3f4ba4617a09264faa6fc31d78\nfactor=WIFI|44e6abc95cd4a3682b49152f4b621c4f\nfactor=SYSTEM_SERIAL|c44a4a0841d7abd8dd38f29fc2d205f6\nfactor=BLUETOOTH|af004d08653b0d081bbf216f082f78f5",
+          "signature": "CZbW7O9t2U65HTBc4NUdWq2bfr7YN+VWBA59mKbAqO+Ob1yYXk/Vn59GHn35NOXFQrVNssUdCqfMOIXO4qCUBg=="
+        }
+      ],
+      "plans": [
+        {
+          "license": "lic-0001",
+          "device": "tvN1",
+          "subject": "tv",
+          "expect": {
+            "plan": "reuse",
+            "seat": "f36757c226dd2ee4"
+          }
+        },
+        {
+          "license": "lic-0001",
+          "device": "tvA",
+          "subject": "tv",
+          "expect": {
+            "plan": "new",
+            "seat": "f36757c226dd2ee4",
+            "left": 0
+          }
+        }
+      ],
+      "expect": {
+        "seats": ["lic-0001|f36757c226dd2ee4"],
+        "used": {
+          "lic-0001": 1
+        },
+        "transfers": 1,
+        "duplicates": 0,
+        "rejected": [],
+        "revokedSeats": {
+          "lic-0001|f36757c226dd2ee4": 1800432000000
+        },
+        "warnings": 0
+      }
+    },
+    {
+      "type": "licence",
+      "id": "lic-transfer-cap",
+      "description": "plafond de 2 transferts par an : le troisième est refusé",
+      "trustedKeys": ["desk", "phone", "server"],
+      "events": [
+        {
+          "id": "09d7e31c1341f890",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=license\nkid=b2e5b41860d1d8be\nat=1799136000000\nlicense=lic-0001\nseats=2\nmaxTransfersPerYear=2",
+          "signature": "V81Zruyxs9C78InxUAn2LB65E/TXJBZ9hjcqk3PZmGHwHrDX7hgBevsRzAv8lMj5w1k+9/ii58WzHBS3Klh4Cw=="
+        },
+        {
+          "id": "a164326828003f17",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=issue\nkid=b2e5b41860d1d8be\nat=1800000000000\nlicense=lic-0001\nseat=f36757c226dd2ee4\nsubject=tv\nkind=production\nnonce=00112233445566778899aabbccddeeff\nnotAfter=1825833600000\nk=4\nfactor=FLASH|c48cacd81b9663d0ba97c221cbd17f4f\nfactor=ETHERNET|f91efd89e0025c2262da12cfbed43632\nfactor=WIFI|ea8b552e2240bbdd8c88c42313c4deab\nfactor=SYSTEM_SERIAL|774beacbf351b0d205f9166669e4d3c7\nfactor=BLUETOOTH|d365ea67e00585edaf8bef4d7378850d",
+          "signature": "YnUgUXvMgBAIFg3JaIYF0zi7osU+XYtuhN7ECEKqTRe4XzSNMUrmY7EZIB3imtSWhbLf2bCUlKiAXTJdZj5LDg=="
+        },
+        {
+          "id": "672dc4a7e0097b8d",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=transfer\nkid=b2e5b41860d1d8be\nat=1800432000000\nlicense=lic-0001\nseat=f36757c226dd2ee4\nk=4\nnonce=a1a1a1a1a1a1a1a1\nfactor=FLASH|10d123edb545f91fabebe21e2016c1ed\nfactor=ETHERNET|83b03b3f4ba4617a09264faa6fc31d78\nfactor=WIFI|44e6abc95cd4a3682b49152f4b621c4f\nfactor=SYSTEM_SERIAL|c44a4a0841d7abd8dd38f29fc2d205f6\nfactor=BLUETOOTH|af004d08653b0d081bbf216f082f78f5",
+          "signature": "CZbW7O9t2U65HTBc4NUdWq2bfr7YN+VWBA59mKbAqO+Ob1yYXk/Vn59GHn35NOXFQrVNssUdCqfMOIXO4qCUBg=="
+        },
+        {
+          "id": "a7b53e6087aec40f",
+          "kid": "edec55f2f651c508",
+          "text": "castbridge-licence-event-v1\ntype=transfer\nkid=edec55f2f651c508\nat=1800518400000\nlicense=lic-0001\nseat=f36757c226dd2ee4\nk=4\nnonce=a2a2a2a2a2a2a2a2\nfactor=FLASH|e32c14fac420b4484777764c85d77a67\nfactor=ETHERNET|ea713de37c8c3382760664841093a5b5\nfactor=WIFI|7c06c397bfd0ec9ea44ee605c272b3b6\nfactor=SYSTEM_SERIAL|6af178dca910403de7a0f475ef6e9580\nfactor=BLUETOOTH|f7df24c4473f5b38ec92ae4c8bf81ab4",
+          "signature": "0abiZqsHuKwbbb/8PoEozKN4ObvlNHtDGfGe4XgG4eBAgE6uXMorRd2eAME2cCfZXwTe+2RFpPf9avFi6wO/AA=="
+        },
+        {
+          "id": "b528a73d0e3e3f10",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=transfer\nkid=b2e5b41860d1d8be\nat=1800604800000\nlicense=lic-0001\nseat=f36757c226dd2ee4\nk=4\nnonce=a3a3a3a3a3a3a3a3\nfactor=FLASH|3f71d6c11d29fe6c7e40d260f8f4398f\nfactor=ETHERNET|1d804ca7a15b4b0681b9088fc89e3494\nfactor=WIFI|2272ad38a17ee952f59db46f5604b5ad\nfactor=SYSTEM_SERIAL|c69e20e6e067b8cd30940c0d6e510399\nfactor=BLUETOOTH|ad95dd5bfd5e43868db59d0b7f0054c2",
+          "signature": "LMUWg55k2/dyAMFNBkk3GL4ZRqScqe2/zERUJ+yFxJiUEVY1FTelQJosIpY450Rjkb8ot8weLAGcYKFrNPpQCQ=="
+        }
+      ],
+      "plans": [],
+      "expect": {
+        "seats": ["lic-0001|f36757c226dd2ee4"],
+        "used": {
+          "lic-0001": 1
+        },
+        "transfers": 2,
+        "duplicates": 0,
+        "rejected": ["TRANSFER_LIMIT"],
+        "revokedSeats": {
+          "lic-0001|f36757c226dd2ee4": 1800518400000
+        },
+        "warnings": 0
+      }
+    },
+    {
+      "type": "licence",
+      "id": "lic-transfer-next-year",
+      "description": "un an plus tard le transfert est de nouveau permis",
+      "trustedKeys": ["desk", "phone", "server"],
+      "events": [
+        {
+          "id": "09d7e31c1341f890",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=license\nkid=b2e5b41860d1d8be\nat=1799136000000\nlicense=lic-0001\nseats=2\nmaxTransfersPerYear=2",
+          "signature": "V81Zruyxs9C78InxUAn2LB65E/TXJBZ9hjcqk3PZmGHwHrDX7hgBevsRzAv8lMj5w1k+9/ii58WzHBS3Klh4Cw=="
+        },
+        {
+          "id": "a164326828003f17",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=issue\nkid=b2e5b41860d1d8be\nat=1800000000000\nlicense=lic-0001\nseat=f36757c226dd2ee4\nsubject=tv\nkind=production\nnonce=00112233445566778899aabbccddeeff\nnotAfter=1825833600000\nk=4\nfactor=FLASH|c48cacd81b9663d0ba97c221cbd17f4f\nfactor=ETHERNET|f91efd89e0025c2262da12cfbed43632\nfactor=WIFI|ea8b552e2240bbdd8c88c42313c4deab\nfactor=SYSTEM_SERIAL|774beacbf351b0d205f9166669e4d3c7\nfactor=BLUETOOTH|d365ea67e00585edaf8bef4d7378850d",
+          "signature": "YnUgUXvMgBAIFg3JaIYF0zi7osU+XYtuhN7ECEKqTRe4XzSNMUrmY7EZIB3imtSWhbLf2bCUlKiAXTJdZj5LDg=="
+        },
+        {
+          "id": "672dc4a7e0097b8d",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=transfer\nkid=b2e5b41860d1d8be\nat=1800432000000\nlicense=lic-0001\nseat=f36757c226dd2ee4\nk=4\nnonce=a1a1a1a1a1a1a1a1\nfactor=FLASH|10d123edb545f91fabebe21e2016c1ed\nfactor=ETHERNET|83b03b3f4ba4617a09264faa6fc31d78\nfactor=WIFI|44e6abc95cd4a3682b49152f4b621c4f\nfactor=SYSTEM_SERIAL|c44a4a0841d7abd8dd38f29fc2d205f6\nfactor=BLUETOOTH|af004d08653b0d081bbf216f082f78f5",
+          "signature": "CZbW7O9t2U65HTBc4NUdWq2bfr7YN+VWBA59mKbAqO+Ob1yYXk/Vn59GHn35NOXFQrVNssUdCqfMOIXO4qCUBg=="
+        },
+        {
+          "id": "a7b53e6087aec40f",
+          "kid": "edec55f2f651c508",
+          "text": "castbridge-licence-event-v1\ntype=transfer\nkid=edec55f2f651c508\nat=1800518400000\nlicense=lic-0001\nseat=f36757c226dd2ee4\nk=4\nnonce=a2a2a2a2a2a2a2a2\nfactor=FLASH|e32c14fac420b4484777764c85d77a67\nfactor=ETHERNET|ea713de37c8c3382760664841093a5b5\nfactor=WIFI|7c06c397bfd0ec9ea44ee605c272b3b6\nfactor=SYSTEM_SERIAL|6af178dca910403de7a0f475ef6e9580\nfactor=BLUETOOTH|f7df24c4473f5b38ec92ae4c8bf81ab4",
+          "signature": "0abiZqsHuKwbbb/8PoEozKN4ObvlNHtDGfGe4XgG4eBAgE6uXMorRd2eAME2cCfZXwTe+2RFpPf9avFi6wO/AA=="
+        },
+        {
+          "id": "1c6f883f31bc5b49",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=transfer\nkid=b2e5b41860d1d8be\nat=1834560000000\nlicense=lic-0001\nseat=f36757c226dd2ee4\nk=4\nnonce=a4a4a4a4a4a4a4a4\nfactor=FLASH|3f71d6c11d29fe6c7e40d260f8f4398f\nfactor=ETHERNET|1d804ca7a15b4b0681b9088fc89e3494\nfactor=WIFI|2272ad38a17ee952f59db46f5604b5ad\nfactor=SYSTEM_SERIAL|c69e20e6e067b8cd30940c0d6e510399\nfactor=BLUETOOTH|ad95dd5bfd5e43868db59d0b7f0054c2",
+          "signature": "BlaXoKcav4zhKN++5Gu5lq2pHUPIq9AAR251KGCh6HFu/dwMi1Ape8oeAH/rbm675sX/neKIjuWWLbbe/fCcAg=="
+        }
+      ],
+      "plans": [],
+      "expect": {
+        "seats": ["lic-0001|f36757c226dd2ee4"],
+        "used": {
+          "lic-0001": 1
+        },
+        "transfers": 3,
+        "duplicates": 0,
+        "rejected": [],
+        "revokedSeats": {
+          "lic-0001|f36757c226dd2ee4": 1834560000000
+        },
+        "warnings": 0
+      }
+    },
+    {
+      "type": "licence",
+      "id": "lic-server-cannot-transfer",
+      "description": "la clé serveur n'a pas la portée transfer",
+      "trustedKeys": ["desk", "phone", "server"],
+      "events": [
+        {
+          "id": "09d7e31c1341f890",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=license\nkid=b2e5b41860d1d8be\nat=1799136000000\nlicense=lic-0001\nseats=2\nmaxTransfersPerYear=2",
+          "signature": "V81Zruyxs9C78InxUAn2LB65E/TXJBZ9hjcqk3PZmGHwHrDX7hgBevsRzAv8lMj5w1k+9/ii58WzHBS3Klh4Cw=="
+        },
+        {
+          "id": "a164326828003f17",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=issue\nkid=b2e5b41860d1d8be\nat=1800000000000\nlicense=lic-0001\nseat=f36757c226dd2ee4\nsubject=tv\nkind=production\nnonce=00112233445566778899aabbccddeeff\nnotAfter=1825833600000\nk=4\nfactor=FLASH|c48cacd81b9663d0ba97c221cbd17f4f\nfactor=ETHERNET|f91efd89e0025c2262da12cfbed43632\nfactor=WIFI|ea8b552e2240bbdd8c88c42313c4deab\nfactor=SYSTEM_SERIAL|774beacbf351b0d205f9166669e4d3c7\nfactor=BLUETOOTH|d365ea67e00585edaf8bef4d7378850d",
+          "signature": "YnUgUXvMgBAIFg3JaIYF0zi7osU+XYtuhN7ECEKqTRe4XzSNMUrmY7EZIB3imtSWhbLf2bCUlKiAXTJdZj5LDg=="
+        },
+        {
+          "id": "d26c5a9c0a76efb2",
+          "kid": "ce202dfdbe57b99a",
+          "text": "castbridge-licence-event-v1\ntype=transfer\nkid=ce202dfdbe57b99a\nat=1800432000000\nlicense=lic-0001\nseat=f36757c226dd2ee4\nk=4\nnonce=b1b1b1b1b1b1b1b1\nfactor=FLASH|10d123edb545f91fabebe21e2016c1ed\nfactor=ETHERNET|83b03b3f4ba4617a09264faa6fc31d78\nfactor=WIFI|44e6abc95cd4a3682b49152f4b621c4f\nfactor=SYSTEM_SERIAL|c44a4a0841d7abd8dd38f29fc2d205f6\nfactor=BLUETOOTH|af004d08653b0d081bbf216f082f78f5",
+          "signature": "2+pE3GsTWnbCbp6PUYehaCclrR0KEqqVgPaToRwx6Cmh3JYJqNERFgSMliVI9VgN9ldF7hFSqBPDmyG8c0ZxAg=="
+        }
+      ],
+      "plans": [],
+      "expect": {
+        "seats": ["lic-0001|f36757c226dd2ee4"],
+        "used": {
+          "lic-0001": 1
+        },
+        "transfers": 0,
+        "duplicates": 0,
+        "rejected": ["KEY_NOT_ALLOWED"],
+        "revokedSeats": {},
+        "warnings": 0
+      }
+    },
+    {
+      "type": "licence",
+      "id": "lic-forged-and-unknown",
+      "description": "événement falsifié et événement d'une clé inconnue : refusés",
+      "trustedKeys": ["desk", "phone", "server"],
+      "events": [
+        {
+          "id": "006bcf29c0ccdd84",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=license\nkid=b2e5b41860d1d8be\nat=1799136000000\nlicense=lic-0001\nseats=200\nmaxTransfersPerYear=2",
+          "signature": "V81Zruyxs9C78InxUAn2LB65E/TXJBZ9hjcqk3PZmGHwHrDX7hgBevsRzAv8lMj5w1k+9/ii58WzHBS3Klh4Cw=="
+        },
+        {
+          "id": "8276190c7bcf1cb5",
+          "kid": "df9e7c0d8cc2809d",
+          "text": "castbridge-licence-event-v1\ntype=license\nkid=df9e7c0d8cc2809d\nat=1800000000000\nlicense=lic-evil\nseats=99\nmaxTransfersPerYear=2",
+          "signature": "H2FtEsBGVp4GZeWEkaBcUutiDuRdkwTYlV77vgbgGckd4751siITKdA7yTc3uotYtiD2Km135UVFlOXKSMrEDg=="
+        }
+      ],
+      "plans": [],
+      "expect": {
+        "seats": [],
+        "used": {},
+        "transfers": 0,
+        "duplicates": 0,
+        "rejected": ["BAD_SIGNATURE", "UNKNOWN_KEY"],
+        "revokedSeats": {},
+        "warnings": 0
+      }
+    },
+    {
+      "type": "licence",
+      "id": "lic-revoke-seat",
+      "description": "révocation explicite d'un poste",
+      "trustedKeys": ["desk", "phone", "server"],
+      "events": [
+        {
+          "id": "09d7e31c1341f890",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=license\nkid=b2e5b41860d1d8be\nat=1799136000000\nlicense=lic-0001\nseats=2\nmaxTransfersPerYear=2",
+          "signature": "V81Zruyxs9C78InxUAn2LB65E/TXJBZ9hjcqk3PZmGHwHrDX7hgBevsRzAv8lMj5w1k+9/ii58WzHBS3Klh4Cw=="
+        },
+        {
+          "id": "a164326828003f17",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=issue\nkid=b2e5b41860d1d8be\nat=1800000000000\nlicense=lic-0001\nseat=f36757c226dd2ee4\nsubject=tv\nkind=production\nnonce=00112233445566778899aabbccddeeff\nnotAfter=1825833600000\nk=4\nfactor=FLASH|c48cacd81b9663d0ba97c221cbd17f4f\nfactor=ETHERNET|f91efd89e0025c2262da12cfbed43632\nfactor=WIFI|ea8b552e2240bbdd8c88c42313c4deab\nfactor=SYSTEM_SERIAL|774beacbf351b0d205f9166669e4d3c7\nfactor=BLUETOOTH|d365ea67e00585edaf8bef4d7378850d",
+          "signature": "YnUgUXvMgBAIFg3JaIYF0zi7osU+XYtuhN7ECEKqTRe4XzSNMUrmY7EZIB3imtSWhbLf2bCUlKiAXTJdZj5LDg=="
+        },
+        {
+          "id": "c387397cded30477",
+          "kid": "ce202dfdbe57b99a",
+          "text": "castbridge-licence-event-v1\ntype=revoke\nkid=ce202dfdbe57b99a\nat=1800259200000\ntarget=seat\nvalue=lic-0001|f36757c226dd2ee4",
+          "signature": "eE6mEhyLQGgrybNFcQodis8L6z9mp29JavO8WXpcza1qn66URC1DYAGJ1C3tc11C99PLNn+EyfU8+A2PIHUCDA=="
+        }
+      ],
+      "plans": [],
+      "expect": {
+        "seats": ["lic-0001|f36757c226dd2ee4"],
+        "used": {
+          "lic-0001": 1
+        },
+        "transfers": 0,
+        "duplicates": 0,
+        "rejected": [],
+        "revokedSeats": {
+          "lic-0001|f36757c226dd2ee4": 1800259200000
+        },
+        "warnings": 0
+      }
+    }
+  ]
+}

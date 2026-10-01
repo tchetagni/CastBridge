@@ -43,6 +43,21 @@ object Ed25519 {
         return equal(left, right)
     }
 
+    /** The raw 32-byte public key of a 32-byte [seed] (RFC 8032 section 5.1.5): used by the issuing tools to publish the key they sign with. */
+    fun publicKey(seed: ByteArray): ByteArray {
+        require(seed.size == 32)
+        val h = MessageDigest.getInstance("SHA-512").digest(seed)
+        h[0] = (h[0].toInt() and 248).toByte(); h[31] = (h[31].toInt() and 127).toByte(); h[31] = (h[31].toInt() or 64).toByte()
+        val a = mul(leInt(h.copyOfRange(0, 32)), B)
+        val zi = inv(a.z)
+        val x = a.x.multiply(zi).mod(P); val y = a.y.multiply(zi).mod(P)
+        val out = ByteArray(32)
+        val yb = y.toByteArray().reversedArray()
+        for (i in 0 until minOf(32, yb.size)) out[i] = yb[i]
+        if (x.testBit(0)) out[31] = (out[31].toInt() or 0x80).toByte()
+        return out
+    }
+
     private fun inv(x: BigInteger): BigInteger = x.modPow(P.subtract(TWO), P)
 
     private fun leInt(b: ByteArray): BigInteger = BigInteger(1, b.reversedArray())
