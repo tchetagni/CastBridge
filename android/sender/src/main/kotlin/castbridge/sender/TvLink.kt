@@ -78,7 +78,7 @@ sealed class LinkUi {
     data class Connecting(val tv: SavedTv) : LinkUi()
     data class Connected(val session: LinkSession) : LinkUi()
     /** The TV does not answer (off, out of range, Bluetooth off there): retried quietly. */
-    data class Absent(val tv: SavedTv, val why: String) : LinkUi()
+    data class Absent(val tv: SavedTv, val why: String, val failures: Int = 0) : LinkUi()
     /** The TV answered "I do not know you" (or refused): the user has to add it again. */
     data class Refused(val tv: SavedTv, val code: Int, val message: String, val needsPairing: Boolean) : LinkUi()
 }
@@ -194,7 +194,8 @@ object TvLinkManager {
                 val stillGood = now < due && (cur.base?.let { reachable(it) } ?: (now - issuedAt < 60_000))
                 if (stillGood) { pause(minOf(due - now, 15_000).coerceAtLeast(1_000)); continue }
             }
-            if (session == null) _state.value = LinkUi.Connecting(tv)
+            // keep the "introuvable" card steady while retrying: flipping to "Connexion…" at every attempt made its buttons vanish under the finger
+            if (session == null && _state.value !is LinkUi.Absent) _state.value = LinkUi.Connecting(tv)
             when (val r = link().connect(tv)) {
                 is PhoneLink.Result.Connected -> {
                     failures = 0
@@ -206,7 +207,7 @@ object TvLinkManager {
                 }
                 is PhoneLink.Result.TvAbsent -> {
                     failures++; session = null
-                    _state.value = LinkUi.Absent(tv, r.why)
+                    _state.value = LinkUi.Absent(tv, r.why, failures)
                     if (foreground) pause(ReconnectPolicy.retryDelayMs(failures)) else wake.receive()
                 }
                 is PhoneLink.Result.BluetoothProblem -> { session = null; _state.value = LinkUi.BluetoothProblem(r.reason); pause(5_000) }

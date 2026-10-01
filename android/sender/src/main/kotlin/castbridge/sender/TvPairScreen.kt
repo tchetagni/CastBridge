@@ -52,7 +52,9 @@ fun TvLinkStatus(link: LinkUi, onAdd: () -> Unit, onManage: () -> Unit, modifier
             is LinkPlanner.Route.Direct -> "Par Wi-Fi Direct"
             else -> "Par Bluetooth seulement : plus lent (Wi-Fi différent ?)"
         })
-        is LinkUi.Absent -> Triple(cs.outline, "${link.tv.name} est introuvable", "Allumez la TV et restez à proximité : la connexion est automatique.")
+        is LinkUi.Absent -> Triple(cs.outline, "${link.tv.name} est introuvable",
+            if (link.failures >= 3) "Allumez la TV et restez à proximité. Si vous avez réinstallé CastBridge-TV, réassociez la TV."
+            else "Allumez la TV et restez à proximité : la connexion est automatique.")
         is LinkUi.Refused -> Triple(cs.error, link.tv.name, link.message)
         is LinkUi.BluetoothProblem -> Triple(cs.error, "Bluetooth indisponible", when (link.reason) {
             BtUnavailable.Reason.OFF -> "Activez le Bluetooth du téléphone."
@@ -68,7 +70,13 @@ fun TvLinkStatus(link: LinkUi, onAdd: () -> Unit, onManage: () -> Unit, modifier
             Text(sub, style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
         }
         val needsAdd = link == LinkUi.NoTv || (link is LinkUi.Refused && link.needsPairing)
-        TextButton(onClick = if (needsAdd) onAdd else onManage) { Text(if (needsAdd) "Ajouter" else "Mes TV") }
+        if (link is LinkUi.Absent && link.failures >= 3) {
+            // several failures in a row: most often the TV was reinstalled and forgot this phone: one tap forgets it and starts the pairing again
+            Column(horizontalAlignment = Alignment.End) {
+                Button(onClick = { TvLinkManager.forget(link.tv.address); onAdd() }) { Text("Réassocier") }
+                TextButton(onClick = onManage) { Text("Mes TV") }
+            }
+        } else TextButton(onClick = if (needsAdd) onAdd else onManage) { Text(if (needsAdd) "Ajouter" else "Mes TV") }
     }
 }
 
