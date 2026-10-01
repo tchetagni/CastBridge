@@ -1,0 +1,465 @@
+{
+ "chapter": "bac-chimie-cd-organique-ch-esters",
+ "lessons": [
+  {
+   "id": "bac-chimie-cd-organique-esters",
+   "title": "Esters : estérification, hydrolyse, saponification, savons",
+   "minutes": 45,
+   "programRef": "Tle C/D — Esters ; estérification et hydrolyse ; équilibre chimique et rendement ; saponification ; savons (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Nommer un ester et écrire l'équation d'estérification.",
+    "Calculer K et un rendement à partir d'un tableau d'avancement.",
+    "Décrire les moyens d'améliorer le rendement.",
+    "Écrire l'équation de saponification et en exploiter les quantités de matière."
+   ],
+   "prerequisites": [
+    "bac-chimie-cd-organique-carbonyles"
+   ],
+   "exercises": [
+    "bac-chimie-cd-organique-est-01",
+    "bac-chimie-cd-organique-est-02",
+    "bac-chimie-cd-organique-est-03",
+    "bac-chimie-cd-organique-est-04",
+    "bac-chimie-cd-organique-est-05",
+    "bac-chimie-cd-organique-est-06"
+   ],
+   "selfCheck": [
+    "bac-chimie-cd-organique-est-q1",
+    "bac-chimie-cd-organique-est-q2",
+    "bac-chimie-cd-organique-est-q3",
+    "bac-chimie-cd-organique-est-q4",
+    "bac-chimie-cd-organique-est-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Esters",
+     "md": "Un **ester** possède le groupe −COO− : R−CO−O−R'. Nom : **alcanoate d'alkyle** : le nom de l'acide (acide éthanoïque → éthanoate) puis le groupe alkyle de l'alcool. Exemple : CH₃COOCH₂CH₃ = **éthanoate d'éthyle**. Beaucoup d'esters ont une odeur fruitée (arômes, parfums)."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Estérification",
+     "md": "Acide carboxylique + alcool ⇌ ester + eau. Cette réaction est **lente**, **limitée** (elle conduit à un équilibre), quasi **athermique**. Un catalyseur (H₂SO₄ concentré) et le chauffage à reflux accélèrent la réaction **sans changer l'état d'équilibre**.",
+     "tex": "\\text{CH}_{3}\\text{COOH} + \\text{C}_{2}\\text{H}_{5}\\text{OH} \\text{ ⇌ } \\text{CH}_{3}\\text{COOC}_{2}\\text{H}_{5} + \\text{H}_{2}\\text{O}"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Constante d'équilibre et rendement",
+     "md": "Dans l'état d'équilibre (même volume pour tous les constituants) et avec les quantités de matière :",
+     "tex": "K = \\dfrac{n_{ester}\\,n_{eau}}{n_{acide}\\,n_{alcool}} \\qquad r = \\dfrac{n_{ester\\ obtenu}}{n_{ester\\ max}}"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Valeurs usuelles du rendement",
+     "md": "Pour un mélange **équimolaire** acide + alcool : rendement ≈ **67 %** (K = 4) avec un alcool primaire, ≈ 60 % avec un secondaire, ≈ 5 % avec un tertiaire (valeurs usuelles). L'hydrolyse est la réaction inverse (K' = 1/K = 0,25) : elle est aussi lente et limitée."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 5,
+      "ymin": 0,
+      "ymax": 1,
+      "grid": 0.5,
+      "xlabel": "temps (échelle arbitraire)",
+      "ylabel": "rendement (fraction)",
+      "curves": [
+       {
+        "expr": "0.667*(1-exp(-x))",
+        "color": "blue",
+        "label": "sans catalyseur"
+       },
+       {
+        "expr": "0.667*(1-exp(-3*x))",
+        "color": "red",
+        "label": "avec catalyseur"
+       }
+      ],
+      "points": [
+       {
+        "x": 4.4,
+        "y": 0.667,
+        "label": "limite 2/3",
+        "color": "green"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 0,
+        "y1": 0.667,
+        "x2": 5,
+        "y2": 0.667,
+        "dash": true,
+        "color": "grey"
+       }
+      ]
+     },
+     "caption": "Schéma qualitatif : le catalyseur fait atteindre plus vite la même limite (2/3 pour un mélange équimolaire d'un acide et d'un alcool primaire).",
+     "alt": "Deux courbes croissantes qui tendent vers la même limite horizontale pointillée à 2 tiers : la courbe rouge, avec catalyseur, monte plus vite que la bleue, sans catalyseur."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Améliorer le rendement",
+     "md": "Pour déplacer l'équilibre vers l'ester :\n- utiliser un **excès** de l'un des réactifs (en général le moins coûteux) ;\n- **éliminer** un produit (l'eau avec un Dean-Stark, ou l'ester par distillation) ;\n- remplacer l'acide par un **chlorure d'acyle** ou un **anhydride d'acide** : réaction rapide et **totale**.",
+     "tex": "\\text{CH}_{3}\\text{COCl} + \\text{C}_{2}\\text{H}_{5}\\text{OH} \\to \\text{CH}_{3}\\text{COOC}_{2}\\text{H}_{5} + \\text{HCl}"
+    },
+    {
+     "type": "formula",
+     "tex": "\\text{(CH}_{3}\\text{CO)}_{2}\\text{O} + \\text{C}_{2}\\text{H}_{5}\\text{OH} \\to \\text{CH}_{3}\\text{COOC}_{2}\\text{H}_{5} + \\text{CH}_{3}\\text{COOH}",
+     "caption": "Avec l'anhydride éthanoïque : réaction rapide et totale."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Saponification",
+     "md": "L'hydrolyse basique d'un ester par l'ion hydroxyde est **lente mais totale** : elle donne un ion carboxylate et un alcool :",
+     "tex": "\\text{CH}_{3}\\text{COOC}_{2}\\text{H}_{5} + \\text{HO}^{-} \\to \\text{CH}_{3}\\text{COO}^{-} + \\text{C}_{2}\\text{H}_{5}\\text{OH}"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Savons",
+     "md": "Un **savon** est un carboxylate de sodium à longue chaîne, obtenu par saponification d'un triglycéride (corps gras) avec la soude. Sa molécule a une tête hydrophile (−COO⁻) et une chaîne hydrophobe ; elle entoure les graisses en **micelles** (action détergente).",
+     "tex": "\\text{C}_{57}\\text{H}_{110}\\text{O}_{6} + 3\\,\\text{NaOH} \\to \\text{C}_{3}\\text{H}_{8}\\text{O}_{3} + 3\\,\\text{C}_{17}\\text{H}_{35}\\text{COONa}"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : rendement d'un mélange équimolaire",
+     "statement": "On mélange 1,0 mol d'acide éthanoïque et 1,0 mol d'éthanol (K = 4). Calcule la quantité d'ester à l'équilibre et le rendement.",
+     "steps": [
+      {
+       "md": "Soit x l'avancement. À l'équilibre : acide = alcool = 1 − x ; ester = eau = x.",
+       "tex": "K = \\dfrac{x^2}{(1-x)^2} = 4"
+      },
+      {
+       "md": "On prend la racine carrée (x et 1 − x sont positifs) :",
+       "tex": "\\dfrac{x}{1-x} = 2 \\Rightarrow x = \\dfrac{2}{3} \\approx 0{,}667\\ \\text{mol}"
+      },
+      {
+       "md": "L'avancement maximal est 1,0 mol : rendement = 0,667/1,0 ≈ 67 %."
+      }
+     ],
+     "answer": "**n(ester) ≈ 0,67 mol ; rendement ≈ 67 %**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : excès d'alcool",
+     "statement": "Même acide (1,0 mol) mais 3,0 mol d'éthanol, K = 4. Calcule le rendement.",
+     "steps": [
+      {
+       "md": "À l'équilibre : acide 1 − x ; alcool 3 − x ; ester = eau = x :",
+       "tex": "\\dfrac{x^2}{(1-x)(3-x)} = 4 \\Rightarrow 3x^2 - 16x + 12 = 0"
+      },
+      {
+       "md": "Discriminant 256 − 144 = 112 ; on garde la racine inférieure à 1 :",
+       "tex": "x = \\dfrac{16 - \\sqrt{112}}{6} \\approx 0{,}903\\ \\text{mol}"
+      },
+      {
+       "md": "Rendement = x/1,0 (le réactif limitant est l'acide)."
+      }
+     ],
+     "answer": "**Rendement ≈ 90,3 %** : l'excès d'alcool améliore nettement le rendement (de 67 % à 90 %)."
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-chimie-cd-organique-est-01"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que le catalyseur augmente le rendement : il accélère seulement.\n- Écrire une flèche simple pour l'estérification ou l'hydrolyse (c'est un équilibre ⇌), mais flèche simple pour la saponification (totale).\n- Prendre le mauvais réactif limitant pour le rendement.\n- Oublier l'eau dans la constante d'équilibre (elle compte ici, solvant absent).\n- Se tromper de sens pour le nom : éthanoate **d'éthyle** (acide puis alcool)."
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-chimie-cd-organique-est-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-chimie-cd-organique-est-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-chimie-cd-organique-est-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-chimie-cd-organique-est-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-chimie-cd-organique-est-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Les savons du commerce sont fabriqués à partir d'huiles et de soude ; l'huile de palme et l'huile de karité sont des triglycérides utilisés dans la savonnerie artisanale.",
+      "Dans l'eau dure, les ions Ca²⁺ forment un précipité avec le savon (moins d'efficacité) : c'est l'une des raisons de l'usage des détergents synthétiques."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Rendements limites 67 % / 60 % / 5 % et K = 4 : valeurs usuelles des manuels, à confirmer ; résolution d'équations du second degré par la racine carrée (mélange équimolaire) ou discriminant : vérifier le niveau attendu.",
+    "Le quotient de réaction, le taux d'avancement final et la loi d'action de masse sont traités de façon élémentaire (rapport des quantités de matière à volume constant) ; à adapter si le programme introduit les concentrations.",
+    "Équations (estérification, chlorure d'acyle, anhydride, saponification, tristéarine) vérifiées atome par atome par script Python ; M(C₁₇H₃₅COONa) = 306 g/mol avec M(Na) = 23."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "prompt": "Quel est le nom de l'ester CH₃COOCH₂CH₃ ?",
+   "points": 1,
+   "choices": [
+    "Éthanoate d'éthyle",
+    "Acétate de méthyle",
+    "Éthanol d'acide éthanoïque",
+    "Propanoate de méthyle"
+   ],
+   "answer": 0,
+   "explanation": "Le groupe acyle vient de l'acide éthanoïque (éthanoate), le groupe alkyle de l'éthanol (éthyle).",
+   "method": "Nom = alcanoate d'alkyle.",
+   "mistakes": [
+    "Inverser acide et alcool."
+   ],
+   "id": "bac-chimie-cd-organique-est-01",
+   "lesson": "bac-chimie-cd-organique-esters",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "prompt": "Les caractéristiques de la réaction d'estérification sont :",
+   "points": 1,
+   "choices": [
+    "lente, limitée, quasi athermique",
+    "rapide, totale, très exothermique",
+    "rapide, limitée, endothermique",
+    "lente, totale, athermique"
+   ],
+   "answer": 0,
+   "explanation": "C'est un équilibre qui s'établit lentement ; le catalyseur ne modifie que la vitesse.",
+   "method": "Estérification/hydrolyse : lentes, limitées.",
+   "mistakes": [
+    "Confondre avec la saponification (totale)."
+   ],
+   "id": "bac-chimie-cd-organique-est-02",
+   "lesson": "bac-chimie-cd-organique-esters",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "prompt": "À partir de 0,45 mol d'acide et 0,45 mol d'alcool (mélange équimolaire), on obtient 0,30 mol d'ester. Calcule le rendement, en %.",
+   "points": 1,
+   "answer": 66.7,
+   "tolerance": 0.1,
+   "unit": "%",
+   "explanation": "Avancement maximal : 0,45 mol (réactifs en quantité stœchiométrique). r = 0,30/0,45 = 0,667 soit 66,7 %.",
+   "method": "r = n_obtenu / n_max.",
+   "mistakes": [
+    "Diviser par 0,90 en additionnant les deux réactifs."
+   ],
+   "id": "bac-chimie-cd-organique-est-03",
+   "lesson": "bac-chimie-cd-organique-esters",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "prompt": "On mélange 0,50 mol d'acide et 0,50 mol d'alcool. À l'équilibre, il se forme 0,333 mol d'ester. Calcule la constante d'équilibre K.",
+   "points": 2,
+   "answer": 4.0,
+   "tolerance": 0.1,
+   "explanation": "À l'équilibre : ester = eau = 0,333 mol ; acide = alcool = 0,167 mol. K = 0,333²/0,167² ≈ 4,0.",
+   "method": "Tableau d'avancement puis K = n_ester n_eau / (n_acide n_alcool).",
+   "mistakes": [
+    "Oublier l'eau au numérateur."
+   ],
+   "id": "bac-chimie-cd-organique-est-04",
+   "lesson": "bac-chimie-cd-organique-esters",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "prompt": "Avec K = 4, on mélange 1,0 mol d'acide et 2,0 mol d'alcool. Calcule le rendement, en %.",
+   "points": 2,
+   "answer": 84.5,
+   "tolerance": 0.2,
+   "unit": "%",
+   "explanation": "x² = 4 (1 − x)(2 − x) donne 3x² − 12x + 8 = 0 ; x = (12 − √48)/6 ≈ 0,845 mol ; rendement = x/1,0 ≈ 84,5 %.",
+   "method": "Équation du second degré en x ; garder la racine < 1.",
+   "mistakes": [
+    "Garder la racine supérieure à 1."
+   ],
+   "id": "bac-chimie-cd-organique-est-05",
+   "lesson": "bac-chimie-cd-organique-esters",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "On saponifie 89,0 g de tristéarine C₅₇H₁₁₀O₆ (corps gras supposé pur) par de la soude : C₅₇H₁₁₀O₆ + 3 NaOH → C₃H₈O₃ + 3 C₁₇H₃₅COONa. M(C) = 12 ; M(H) = 1 ; M(O) = 16 ; M(Na) = 23 g/mol.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "La réaction de saponification est :",
+     "points": 1,
+     "choices": [
+      "lente et totale",
+      "rapide et limitée",
+      "lente et limitée",
+      "rapide et réversible"
+     ],
+     "answer": 0,
+     "explanation": "L'ion hydroxyde est consommé et le carboxylate formé ne réagit pas en sens inverse : réaction totale, lente.",
+     "id": "bac-chimie-cd-organique-est-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule la masse molaire de la tristéarine, en g/mol.",
+     "points": 1,
+     "answer": 890.0,
+     "tolerance": 0,
+     "unit": "g/mol",
+     "explanation": "M = 57×12 + 110×1 + 6×16 = 684 + 110 + 96 = 890 g/mol.",
+     "id": "bac-chimie-cd-organique-est-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule le volume de solution de soude à 2,0 mol/L nécessaire pour saponifier tout le corps gras, en mL.",
+     "points": 1.5,
+     "answer": 150.0,
+     "tolerance": 1,
+     "unit": "mL",
+     "explanation": "n(tristéarine) = 89,0/890 = 0,100 mol ; n(NaOH) = 3 × 0,100 = 0,300 mol ; V = 0,300/2,0 = 0,150 L = 150 mL.",
+     "id": "bac-chimie-cd-organique-est-06-c"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule la masse maximale de savon (stéarate de sodium, M = 306 g/mol) formée, en g.",
+     "points": 1,
+     "answer": 91.8,
+     "tolerance": 0.2,
+     "unit": "g",
+     "explanation": "n(savon) = 3 × 0,100 = 0,300 mol ; m = 0,300 × 306 = 91,8 g.",
+     "id": "bac-chimie-cd-organique-est-06-d"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Le rendement de la fabrication est de 80 %. Quelle masse de savon obtient-on, en g ?",
+     "points": 0.5,
+     "answer": 73.4,
+     "tolerance": 0.2,
+     "unit": "g",
+     "explanation": "m = 0,80 × 91,8 ≈ 73,4 g.",
+     "id": "bac-chimie-cd-organique-est-06-e"
+    }
+   ],
+   "method": "Tableau d'avancement à coefficients 1 : 3 : 1 : 3, puis masses molaires.",
+   "mistakes": [
+    "Oublier le facteur 3 sur NaOH et sur le savon."
+   ],
+   "id": "bac-chimie-cd-organique-est-06",
+   "lesson": "bac-chimie-cd-organique-esters",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "Le groupe caractéristique des esters est :",
+   "points": 1,
+   "choices": [
+    "−COO−",
+    "−COOH",
+    "−CO−",
+    "−O−"
+   ],
+   "answer": 0,
+   "explanation": "R−CO−O−R'.",
+   "id": "bac-chimie-cd-organique-est-q1",
+   "lesson": "bac-chimie-cd-organique-esters"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "Pour améliorer le rendement d'une estérification, on peut :",
+   "points": 1,
+   "choices": [
+    "utiliser un excès d'un réactif ou éliminer l'eau",
+    "ajouter un catalyseur",
+    "diminuer la température à 0 °C",
+    "utiliser moins d'alcool"
+   ],
+   "answer": 0,
+   "explanation": "Déplacer l'équilibre vers les produits ; le catalyseur ne change pas le rendement.",
+   "id": "bac-chimie-cd-organique-est-q2",
+   "lesson": "bac-chimie-cd-organique-esters"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "La réaction inverse de l'estérification est :",
+   "points": 1,
+   "choices": [
+    "l'hydrolyse de l'ester",
+    "la saponification",
+    "la déshydratation",
+    "l'oxydation"
+   ],
+   "answer": 0,
+   "explanation": "Ester + eau ⇌ acide + alcool.",
+   "id": "bac-chimie-cd-organique-est-q3",
+   "lesson": "bac-chimie-cd-organique-esters"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "Un savon est :",
+   "points": 1,
+   "choices": [
+    "un carboxylate de sodium à longue chaîne",
+    "un ester de glycérol",
+    "un alcool gras",
+    "un acide carboxylique"
+   ],
+   "answer": 0,
+   "explanation": "Obtenu par saponification d'un corps gras.",
+   "id": "bac-chimie-cd-organique-est-q4",
+   "lesson": "bac-chimie-cd-organique-esters"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "Pour un mélange équimolaire acide + alcool primaire, le rendement limite vaut environ :",
+   "points": 1,
+   "choices": [
+    "67 %",
+    "100 %",
+    "33 %",
+    "5 %"
+   ],
+   "answer": 0,
+   "explanation": "K = 4 donne x = 2/3.",
+   "id": "bac-chimie-cd-organique-est-q5",
+   "lesson": "bac-chimie-cd-organique-esters"
+  }
+ ]
+}

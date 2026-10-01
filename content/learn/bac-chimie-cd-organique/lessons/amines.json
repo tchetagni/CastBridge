@@ -1,0 +1,529 @@
+{
+ "chapter": "bac-chimie-cd-organique-ch-amines",
+ "lessons": [
+  {
+   "id": "bac-chimie-cd-organique-amines",
+   "title": "Amines, acides α-aminés et liaison peptidique",
+   "minutes": 40,
+   "programRef": "Tle C/D — Amines ; acides α-aminés ; liaison peptidique (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Nommer une amine et donner sa classe ; relier basicité et couple acide-base.",
+    "Décrire un acide α-aminé, le zwitterion et les domaines de pH.",
+    "Écrire la formation d'une liaison peptidique et calculer la masse molaire d'un peptide.",
+    "Dénombrer des peptides."
+   ],
+   "prerequisites": [
+    "bac-chimie-cd-organique-carbonyles"
+   ],
+   "exercises": [
+    "bac-chimie-cd-organique-ami-01",
+    "bac-chimie-cd-organique-ami-02",
+    "bac-chimie-cd-organique-ami-03",
+    "bac-chimie-cd-organique-ami-04",
+    "bac-chimie-cd-organique-ami-05",
+    "bac-chimie-cd-organique-ami-06"
+   ],
+   "selfCheck": [
+    "bac-chimie-cd-organique-ami-q1",
+    "bac-chimie-cd-organique-ami-q2",
+    "bac-chimie-cd-organique-ami-q3",
+    "bac-chimie-cd-organique-ami-q4",
+    "bac-chimie-cd-organique-ami-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Amines",
+     "md": "Une **amine** dérive de l'ammoniac NH₃ par remplacement d'un ou plusieurs H par des groupes alkyle. Classes : **primaire** R−NH₂, **secondaire** R−NH−R', **tertiaire** N(R)(R')R''. Nom : alcane + **amine** (méthanamine CH₃NH₂, propan-2-amine (CH₃)₂CHNH₂) ; N-méthyléthanamine pour CH₃NHCH₂CH₃ (le N indique le substituant porté par l'azote)."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Caractère basique",
+     "md": "Le doublet non liant de l'azote capte un proton : les amines sont des **bases faibles**. Le couple est R−NH₃⁺/R−NH₂ (pKa ≈ 10,6 pour la méthylamine, valeur usuelle). Dans l'eau puis avec un acide :",
+     "tex": "\\text{CH}_{3}\\text{NH}_{2} + \\text{H}_{2}\\text{O} \\text{ ⇌ } \\text{CH}_{3}\\text{NH}_{3}^{+} + \\text{HO}^{-}"
+    },
+    {
+     "type": "formula",
+     "tex": "\\text{CH}_{3}\\text{NH}_{2} + \\text{H}_{3}\\text{O}^{+} \\to \\text{CH}_{3}\\text{NH}_{3}^{+} + \\text{H}_{2}\\text{O}",
+     "caption": "Une amine réagit totalement avec un acide fort : formation de l'ion alkylammonium."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "pH d'une base faible",
+     "md": "Pour une base faible B de concentration c, peu dissociée (pKa du couple BH⁺/B) :",
+     "tex": "\\text{pH} = 7 + \\dfrac{1}{2}\\left(\\text{p}K_a + \\log c\\right)"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Amines et amides",
+     "md": "L'amine est aussi **nucléophile** : avec un chlorure d'acyle, elle donne un **amide** (groupe −CO−NH−) ; il faut deux amines (la seconde capte HCl) :",
+     "tex": "\\text{CH}_{3}\\text{COCl} + 2\\,\\text{CH}_{3}\\text{NH}_{2} \\to \\text{CH}_{3}\\text{CONHCH}_{3} + \\text{CH}_{3}\\text{NH}_{3}^{+} + \\text{Cl}^{-}"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Acides α-aminés",
+     "md": "Un acide α-aminé possède un groupe amino −NH₂ et un groupe carboxyle −COOH portés par le **même carbone (α)** : $H_2N-CHR-COOH$. Glycine (R = H, acide 2-aminoéthanoïque), alanine (R = CH₃, acide 2-aminopropanoïque). Sauf la glycine, le carbone α est **asymétrique** : deux énantiomères, **L** (naturels, dans les protéines) et **D**."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Zwitterion et amphotère",
+     "md": "En solution, l'acide aminé existe sous forme d'ion dipolaire (**zwitterion**) $H_3N^+-CHR-COO^-$, à la fois acide et base (**amphotère**). Deux couples : $H_3N^+CHRCOOH / H_3N^+CHRCOO^-$ (pKa₁ ≈ 2,3) et $H_3N^+CHRCOO^- / H_2N-CHR-COO^-$ (pKa₂ ≈ 9,7 pour l'alanine)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 150,
+      "items": [
+       {
+        "t": "text",
+        "x": 210,
+        "y": 20,
+        "text": "Alanine : espèce prédominante selon le pH",
+        "size": 14,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 36,
+        "w": 62.099999999999994,
+        "h": 50,
+        "fill": "lightorange",
+        "stroke": "grey"
+       },
+       {
+        "t": "rect",
+        "x": 82.1,
+        "y": 36,
+        "w": 199.79999999999998,
+        "h": 50,
+        "fill": "lightgreen",
+        "stroke": "grey"
+       },
+       {
+        "t": "rect",
+        "x": 281.9,
+        "y": 36,
+        "w": 116.10000000000002,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 51.05,
+        "y": 66,
+        "text": "cation",
+        "size": 13
+       },
+       {
+        "t": "text",
+        "x": 182.0,
+        "y": 66,
+        "text": "zwitterion",
+        "size": 14,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 339.95,
+        "y": 66,
+        "text": "anion",
+        "size": 13
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 108,
+        "text": "0",
+        "size": 13
+       },
+       {
+        "t": "text",
+        "x": 82.1,
+        "y": 108,
+        "text": "2,3",
+        "size": 13
+       },
+       {
+        "t": "text",
+        "x": 281.9,
+        "y": 108,
+        "text": "9,7",
+        "size": 13
+       },
+       {
+        "t": "text",
+        "x": 398,
+        "y": 108,
+        "text": "14",
+        "size": 13
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 134,
+        "text": "pH (pKa₁ = 2,3 ; pKa₂ = 9,7)",
+        "size": 13,
+        "color": "grey"
+       }
+      ]
+     },
+     "caption": "Domaines de prédominance de l'alanine : cation en milieu très acide, zwitterion pour pH entre pKa₁ et pKa₂, anion en milieu basique (valeurs usuelles arrondies).",
+     "alt": "Une barre horizontale graduée de pH 0 à 14, découpée en trois zones colorées : cation de 0 à 2,3, zwitterion de 2,3 à 9,7, anion de 9,7 à 14."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Liaison peptidique",
+     "md": "Le groupe −COOH d'un acide aminé et le groupe −NH₂ d'un autre se condensent avec perte d'eau, formant une liaison **amide −CO−NH−** appelée **liaison peptidique** ; on obtient un **dipeptide** (3 acides : tripeptide ...), puis polypeptide et protéine. On nomme le peptide du côté NH₂ libre (N-terminal) vers COOH libre : Gly-Ala ≠ Ala-Gly.",
+     "tex": "\\text{NH}_{2}\\text{CH}_{2}\\text{COOH} + \\text{NH}_{2}\\text{CH(CH}_{3}\\text{)COOH} \\to \\text{NH}_{2}\\text{CH}_{2}\\text{CONHCH(CH}_{3}\\text{)COOH} + \\text{H}_{2}\\text{O}"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode",
+     "md": "1. Reconnaître la fonction (amine, acide aminé, amide) et sa classe.\n2. pH et prédominance : comparer pH, pKa₁, pKa₂.\n3. Peptide : M(peptide) = Σ M(acides aminés) − (n − 1) × 18, avec n acides.\n4. Dénombrer : n acides **différents**, chacun utilisé une fois, donnent n! peptides (n! = 1×2×…×n)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : nom, classe et force d'une amine",
+     "statement": "Donne le nom et la classe de (CH₃)₂CH−NH₂, puis le pH d'une solution à 0,10 mol/L de méthylamine (pKa du couple = 10,6).",
+     "steps": [
+      {
+       "md": "(CH₃)₂CH−NH₂ : l'azote est lié à un seul carbone : amine **primaire** ; le groupe −NH₂ est sur le carbone 2 d'une chaîne de 3 carbones : **propan-2-amine**."
+      },
+      {
+       "md": "Base faible peu dissociée :",
+       "tex": "\\text{pH} = 7 + \\dfrac{1}{2}\\left(10{,}6 + \\log 0{,}10\\right) = 7 + \\dfrac{1}{2}(10{,}6 - 1) = 11{,}8"
+      },
+      {
+       "md": "Ordre de grandeur cohérent : solution nettement basique (pH > 7), mais pH < 13 car la base est faible."
+      }
+     ],
+     "answer": "**Propan-2-amine, primaire ; pH ≈ 11,8**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : tripeptide Gly-Ala-Val",
+     "statement": "La glycine (M = 75 g/mol), l'alanine (89 g/mol) et la valine (117 g/mol) forment le tripeptide Gly-Ala-Val. Calcule sa masse molaire et dis combien de tripeptides distincts on peut former avec ces trois acides, chacun utilisé une fois.",
+     "steps": [
+      {
+       "md": "Deux liaisons peptidiques : on perd 2 molécules d'eau :",
+       "tex": "M = 75 + 89 + 117 - 2 \\times 18 = 245\\ \\text{g/mol}"
+      },
+      {
+       "md": "Dénombrement : 3 choix pour le premier, 2 pour le deuxième, 1 pour le dernier :",
+       "tex": "3 \\times 2 \\times 1 = 6"
+      }
+     ],
+     "answer": "**M = 245 g/mol ; 6 tripeptides** (Gly-Ala-Val, Gly-Val-Ala, Ala-Gly-Val, Ala-Val-Gly, Val-Gly-Ala, Val-Ala-Gly)."
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-chimie-cd-organique-ami-01"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Compter la classe d'une amine par le nombre de H au lieu du nombre de **carbones** liés à N.\n- Oublier que la glycine n'a pas de carbone asymétrique.\n- Retirer une seule molécule d'eau pour un tripeptide (il faut n − 1).\n- Écrire un acide aminé « neutre » H₂N−CHR−COOH en solution alors que le zwitterion prédomine à pH voisin de 6.\n- Confondre Gly-Ala et Ala-Gly : l'ordre fixe qui porte le NH₂ libre."
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-chimie-cd-organique-ami-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-chimie-cd-organique-ami-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-chimie-cd-organique-ami-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-chimie-cd-organique-ami-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-chimie-cd-organique-ami-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Les protéines (enzymes, hémoglobine) sont des polypeptides ; certains acides aminés dits essentiels doivent être apportés par l'alimentation (niébé, arachide, poisson, soja...).",
+      "La synthèse sélective d'un dipeptide demande de protéger les groupes −NH₂ et −COOH non concernés : sinon on obtient un mélange de quatre dipeptides."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Valeurs de pKa (méthylamine 10,6 ; alanine 2,3 et 9,7) : valeurs usuelles arrondies, à confirmer avec la table du manuel local.",
+    "Représentation de Fischer, configurations L/D et pH isoélectrique : seulement évoqués ; vérifier si le programme de Tle C/D les exige.",
+    "Nomenclature N-substituée des amines (N-méthyléthanamine) : à vérifier selon le niveau attendu ; l'équation d'acylation avec deux équivalents d'amine a été vérifiée atomes et charges."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "prompt": "Dans quelle classe est la diméthylamine (CH₃)₂NH ?",
+   "points": 1,
+   "choices": [
+    "Amine secondaire",
+    "Amine primaire",
+    "Amine tertiaire",
+    "Amide"
+   ],
+   "answer": 0,
+   "explanation": "L'azote est lié à deux atomes de carbone : amine secondaire.",
+   "method": "Classe = nombre de carbones liés à N.",
+   "mistakes": [
+    "Compter les hydrogènes."
+   ],
+   "id": "bac-chimie-cd-organique-ami-01",
+   "lesson": "bac-chimie-cd-organique-amines",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "prompt": "Combien d'amines isomères de formule C₃H₉N existe-t-il ?",
+   "points": 1,
+   "answer": 4,
+   "tolerance": 0,
+   "explanation": "Propan-1-amine et propan-2-amine (primaires), N-méthyléthanamine (secondaire), N,N-diméthylméthanamine (tertiaire) : 4 isomères.",
+   "method": "Répartir les 3 carbones autour de l'azote.",
+   "mistakes": [
+    "Oublier l'amine tertiaire."
+   ],
+   "id": "bac-chimie-cd-organique-ami-02",
+   "lesson": "bac-chimie-cd-organique-amines",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "prompt": "À pH = 12, l'alanine (pKa₁ = 2,3 ; pKa₂ = 9,7) se trouve majoritairement sous forme :",
+   "points": 1,
+   "choices": [
+    "d'anion H₂N−CH(CH₃)−COO⁻",
+    "de cation H₃N⁺−CH(CH₃)−COOH",
+    "de zwitterion",
+    "de molécule neutre H₂N−CH(CH₃)−COOH"
+   ],
+   "answer": 0,
+   "explanation": "pH > pKa₂ : le groupe −NH₃⁺ a perdu son proton ; le carboxylate reste : forme anionique.",
+   "method": "Comparer le pH aux pKa.",
+   "mistakes": [
+    "Choisir le zwitterion par habitude."
+   ],
+   "id": "bac-chimie-cd-organique-ami-03",
+   "lesson": "bac-chimie-cd-organique-amines",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "prompt": "Calcule le pH d'une solution de méthylamine à 0,10 mol/L (pKa du couple CH₃NH₃⁺/CH₃NH₂ = 10,6), en négligeant la dissociation de la base.",
+   "points": 2,
+   "answer": 11.8,
+   "tolerance": 0.05,
+   "explanation": "pH = 7 + ½ (pKa + log c) = 7 + ½ (10,6 − 1) = 11,8.",
+   "method": "pH = 7 + ½ (pKa + log c) pour une base faible.",
+   "mistakes": [
+    "Utiliser la formule d'un acide faible."
+   ],
+   "id": "bac-chimie-cd-organique-ami-04",
+   "lesson": "bac-chimie-cd-organique-amines",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "prompt": "On dispose des trois acides aminés glycine, alanine et valine. Combien de tripeptides distincts contenant chacun une fois chaque acide peut-on former ?",
+   "points": 2,
+   "answer": 6,
+   "tolerance": 0,
+   "explanation": "Permutations : 3! = 6.",
+   "method": "n! arrangements.",
+   "mistakes": [
+    "Répondre 3 (nombre d'acides)."
+   ],
+   "id": "bac-chimie-cd-organique-ami-05",
+   "lesson": "bac-chimie-cd-organique-amines",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "On synthétise le dipeptide Gly-Ala à partir de glycine (M = 75 g/mol) et d'alanine (M = 89 g/mol). M(H₂O) = 18 g/mol.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quelle liaison relie les deux acides aminés dans le dipeptide ?",
+     "points": 1,
+     "choices": [
+      "Une liaison amide −CO−NH−",
+      "Une liaison ester −COO−",
+      "Une liaison ionique",
+      "Une liaison hydrogène seulement"
+     ],
+     "answer": 0,
+     "explanation": "Le COOH de la glycine réagit avec le NH₂ de l'alanine : liaison peptidique (amide) et élimination d'eau.",
+     "id": "bac-chimie-cd-organique-ami-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule la masse molaire de Gly-Ala, en g/mol.",
+     "points": 1,
+     "answer": 146.0,
+     "tolerance": 0,
+     "unit": "g/mol",
+     "explanation": "M = 75 + 89 − 18 = 146 g/mol (C₅H₁₀N₂O₃).",
+     "id": "bac-chimie-cd-organique-ami-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "On part de 0,050 mol de chaque acide aminé, la réaction étant supposée totale. Quelle masse de Gly-Ala obtient-on, en g ?",
+     "points": 1,
+     "answer": 7.3,
+     "tolerance": 0.02,
+     "unit": "g",
+     "explanation": "n(dipeptide) = 0,050 mol ; m = 0,050 × 146 = 7,30 g.",
+     "id": "bac-chimie-cd-organique-ami-06-c"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Avec un rendement de 40 %, quelle masse obtient-on, en g ?",
+     "points": 1,
+     "answer": 2.92,
+     "tolerance": 0.02,
+     "unit": "g",
+     "explanation": "m = 0,40 × 7,30 = 2,92 g.",
+     "id": "bac-chimie-cd-organique-ami-06-d"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Si on mélange glycine et alanine sans protection des groupes, combien de dipeptides différents peut-on obtenir ?",
+     "points": 1,
+     "choices": [
+      "4 (Gly-Gly, Ala-Ala, Gly-Ala, Ala-Gly)",
+      "1",
+      "2",
+      "8"
+     ],
+     "answer": 0,
+     "explanation": "Chaque acide peut être N-terminal ou C-terminal : 2 × 2 = 4 dipeptides.",
+     "id": "bac-chimie-cd-organique-ami-06-e"
+    }
+   ],
+   "method": "Liaison peptidique, masse molaire (− 18 par liaison), stœchiométrie 1 : 1, rendement.",
+   "mistakes": [
+    "Oublier de retirer 18 g/mol.",
+    "Compter seulement Gly-Ala et Ala-Gly."
+   ],
+   "id": "bac-chimie-cd-organique-ami-06",
+   "lesson": "bac-chimie-cd-organique-amines",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "Le groupe caractéristique des amines est :",
+   "points": 1,
+   "choices": [
+    "−NH₂ (ou azote lié à des carbones)",
+    "−OH",
+    "−COOH",
+    "−CO−"
+   ],
+   "answer": 0,
+   "explanation": "Atome d'azote lié à un, deux ou trois carbones.",
+   "id": "bac-chimie-cd-organique-ami-q1",
+   "lesson": "bac-chimie-cd-organique-amines"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "Les amines sont des :",
+   "points": 1,
+   "choices": [
+    "bases faibles",
+    "acides forts",
+    "acides faibles",
+    "espèces neutres inertes"
+   ],
+   "answer": 0,
+   "explanation": "Le doublet de l'azote capte un proton (couple RNH₃⁺/RNH₂).",
+   "id": "bac-chimie-cd-organique-ami-q2",
+   "lesson": "bac-chimie-cd-organique-amines"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "Dans un acide α-aminé, le groupe amino est porté par :",
+   "points": 1,
+   "choices": [
+    "le carbone voisin du groupe carboxyle",
+    "le dernier carbone de la chaîne",
+    "un atome d'oxygène",
+    "un cycle benzénique"
+   ],
+   "answer": 0,
+   "explanation": "Position α = carbone adjacent à COOH.",
+   "id": "bac-chimie-cd-organique-ami-q3",
+   "lesson": "bac-chimie-cd-organique-amines"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "Pour former un tripeptide à partir de trois acides aminés, on élimine :",
+   "points": 1,
+   "choices": [
+    "2 molécules d'eau",
+    "1 molécule d'eau",
+    "3 molécules d'eau",
+    "aucune molécule d'eau"
+   ],
+   "answer": 0,
+   "explanation": "n − 1 = 2 liaisons peptidiques.",
+   "id": "bac-chimie-cd-organique-ami-q4",
+   "lesson": "bac-chimie-cd-organique-amines"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "Le zwitterion d'un acide aminé est :",
+   "points": 1,
+   "choices": [
+    "un ion portant à la fois une charge + et une charge −",
+    "un ion toujours chargé +",
+    "une molécule sans charge ni dipôle",
+    "un ion toujours chargé −"
+   ],
+   "answer": 0,
+   "explanation": "H₃N⁺−CHR−COO⁻, globalement neutre.",
+   "id": "bac-chimie-cd-organique-ami-q5",
+   "lesson": "bac-chimie-cd-organique-amines"
+  }
+ ]
+}

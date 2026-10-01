@@ -1,0 +1,471 @@
+{
+ "chapter": "bac-physique-cd-complements-ch-induction",
+ "lessons": [
+  {
+   "id": "bac-physique-cd-complements-induction",
+   "title": "Induction électromagnétique et auto-induction",
+   "minutes": 40,
+   "programRef": "Tle C/D — Induction électromagnétique ; loi de Faraday-Lenz ; auto-induction ; dipôle RL (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Calculer un flux magnétique et appliquer la loi de Faraday.",
+    "Utiliser la loi de Lenz pour prévoir un sens.",
+    "Utiliser e = −L di/dt et l'énergie d'une bobine.",
+    "Étudier l'établissement et la rupture du courant dans un dipôle RL."
+   ],
+   "prerequisites": [
+    "bac-physique-cd-complements-champ-magnetique"
+   ],
+   "exercises": [
+    "bac-physique-cd-complements-ind-01",
+    "bac-physique-cd-complements-ind-02",
+    "bac-physique-cd-complements-ind-03",
+    "bac-physique-cd-complements-ind-04",
+    "bac-physique-cd-complements-ind-05",
+    "bac-physique-cd-complements-ind-06"
+   ],
+   "selfCheck": [
+    "bac-physique-cd-complements-ind-q1",
+    "bac-physique-cd-complements-ind-q2",
+    "bac-physique-cd-complements-ind-q3",
+    "bac-physique-cd-complements-ind-q4",
+    "bac-physique-cd-complements-ind-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Flux magnétique",
+     "md": "Le **flux** du champ $\\vec{B}$ à travers une surface plane d'aire S (N spires) est, pour un champ uniforme :",
+     "tex": "\\Phi = N\\,B\\,S\\,\\cos\\theta \\quad (\\text{weber, Wb})"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Phénomène d'induction",
+     "md": "Une variation du flux à travers un circuit (variation de B, de S ou de l'angle θ) y fait apparaître une **force électromotrice induite** e. Si le circuit est fermé, un courant induit circule. Pas de variation de flux, pas de f.é.m. : un aimant immobile n'induit rien."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Loi de Faraday et loi de Lenz",
+     "md": "**Faraday** : la f.é.m. induite est l'opposée de la dérivée du flux :",
+     "tex": "e = -\\dfrac{d\\Phi}{dt} \\qquad e_{moy} = -\\dfrac{\\Delta\\Phi}{\\Delta t}"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Loi de Lenz",
+     "md": "Le courant induit a des effets qui **s'opposent à la cause** qui lui donne naissance (le signe moins). Un aimant qui approche un solénoïde y crée une face qui le repousse ; s'il s'éloigne, une face qui le retient."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Auto-induction",
+     "md": "Un circuit parcouru par un courant i variable crée un flux propre $\\Phi = L\\,i$ ; L est l'**inductance** (henry, H). La f.é.m. d'auto-induction et la tension aux bornes d'une bobine (résistance r) valent :",
+     "tex": "e = -L\\dfrac{di}{dt} \\qquad u_L = L\\dfrac{di}{dt} + r\\,i"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Inductance d'un solénoïde et énergie",
+     "md": "Pour un solénoïde long de N spires, de section S et de longueur l, et pour l'énergie magnétique stockée :",
+     "tex": "L_{bobine} = \\mu_0\\dfrac{N^2 S}{l} \\qquad E_m = \\dfrac{1}{2}\\,L\\,i^2"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Dipôle RL soumis à un échelon",
+     "md": "Bobine (L, r) en série avec un résistor, résistance totale R, sous la tension E. L'équation différentielle est $L\\,di/dt + R\\,i = E$ ; la solution et la constante de temps sont :",
+     "tex": "i(t) = \\dfrac{E}{R}\\left(1 - e^{-t/\\tau}\\right) \\qquad \\tau = \\dfrac{L}{R}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 5,
+      "ymin": 0,
+      "ymax": 1.2,
+      "grid": 1,
+      "xlabel": "t / τ",
+      "ylabel": "i / I∞",
+      "curves": [
+       {
+        "expr": "1-exp(-x)",
+        "color": "blue",
+        "label": "établissement"
+       },
+       {
+        "expr": "exp(-x)",
+        "color": "red",
+        "label": "rupture"
+       }
+      ],
+      "points": [
+       {
+        "x": 1,
+        "y": 0.632,
+        "label": "63 %",
+        "color": "green"
+       },
+       {
+        "x": 1,
+        "y": 0.368,
+        "label": "37 %",
+        "color": "green"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 0,
+        "y1": 1,
+        "x2": 5,
+        "y2": 1,
+        "dash": true,
+        "color": "grey"
+       }
+      ]
+     },
+     "caption": "Établissement (bleu) et rupture (rouge) du courant dans un dipôle RL, en unités réduites. À t = τ, i atteint 63 % de sa valeur finale (établissement) ou tombe à 37 % (rupture). Le courant ne varie jamais brusquement dans une bobine.",
+     "alt": "Deux courbes en fonction de t sur τ : une courbe bleue qui monte de 0 vers 1 en passant par 0,63 pour t égal à τ, et une courbe rouge qui descend de 1 vers 0 en passant par 0,37."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode",
+     "md": "1. Choisir un sens positif pour i, orienter la surface (normale liée à i par la règle de la main droite).\n2. Calculer Φ, puis e = −dΦ/dt (ou −ΔΦ/Δt pour une valeur moyenne).\n3. Pour la loi de Lenz, chercher l'effet qui s'oppose à la variation de flux.\n4. Pour un circuit RL, écrire la loi des mailles, utiliser τ = L/R."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : f.é.m. moyenne induite",
+     "statement": "Une bobine de N = 200 spires, de section S = 50 cm², a son axe parallèle à un champ B qui diminue uniformément de 0,30 T à 0 en 0,10 s. Calcule la valeur de la f.é.m. moyenne induite.",
+     "steps": [
+      {
+       "md": "Axe parallèle à B : θ = 0, cos θ = 1. Le flux varie de :",
+       "tex": "\\Delta\\Phi = N\\,S\\,\\Delta B = 200 \\times 50\\times10^{-4} \\times (0 - 0{,}30) = -0{,}30\\ \\text{Wb}"
+      },
+      {
+       "md": "Valeur de la f.é.m. :",
+       "tex": "e_{moy} = -\\dfrac{\\Delta\\Phi}{\\Delta t} = \\dfrac{0{,}30}{0{,}10} = 3{,}0\\ \\text{V}"
+      }
+     ],
+     "answer": "**e = 3,0 V** (en valeur algébrique, positive pour ce sens choisi)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : établissement du courant dans une bobine",
+     "statement": "Une bobine d'inductance L = 0,20 H, de résistance totale (avec son résistor) R = 40 Ω, est branchée à t = 0 sur E = 12 V. Calcule τ, le courant final, puis i à t = τ.",
+     "steps": [
+      {
+       "md": "Constante de temps :",
+       "tex": "\\tau = \\dfrac{L}{R} = \\dfrac{0{,}20}{40} = 5{,}0\\times10^{-3}\\ \\text{s} = 5{,}0\\ \\text{ms}"
+      },
+      {
+       "md": "En régime permanent, di/dt = 0 donc :",
+       "tex": "I_\\infty = \\dfrac{E}{R} = \\dfrac{12}{40} = 0{,}30\\ \\text{A}"
+      },
+      {
+       "md": "À t = τ, le facteur 1 − e⁻¹ ≈ 0,632 :",
+       "tex": "i(\\tau) = 0{,}30 \\times 0{,}632 \\approx 0{,}19\\ \\text{A}"
+      }
+     ],
+     "answer": "**τ = 5,0 ms ; I∞ = 0,30 A ; i(τ) ≈ 0,19 A**."
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-physique-cd-complements-ind-01"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre flux (Wb) et champ (T) : Φ = B S cos θ, avec θ angle entre B et la **normale** à la surface.\n- Oublier le facteur N pour une bobine.\n- Penser que Lenz « empêche » toute variation : il s'y oppose seulement.\n- Dire que le courant dans une bobine peut sauter : i est continu, la tension, elle, peut sauter.\n- Confondre τ = L/R avec τ = RC (circuit capacitif)."
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-physique-cd-complements-ind-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-physique-cd-complements-ind-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-physique-cd-complements-ind-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-physique-cd-complements-ind-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-physique-cd-complements-ind-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Les transformateurs, alternateurs et plaques à induction reposent sur la loi de Faraday ; les courants de Foucault en sont une conséquence.",
+      "La loi de Lenz est une conséquence de la conservation de l'énergie."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Conventions d'orientation (e en convention générateur, u_L en convention récepteur) : à harmoniser avec le manuel local.",
+    "Le dipôle RC et la charge d'un condensateur sont supposés connus (programme de 1re/Tle) : fiche non incluse dans ce pack.",
+    "Inductance du solénoïde L = µ₀N²S/ℓ : vérifier si elle est exigible ou donnée dans l'énoncé."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "prompt": "Une spire de surface S = 200 cm² est placée dans un champ uniforme B = 0,50 T ; la normale à la spire fait 60° avec $\\vec{B}$. Calcule le flux, en mWb.",
+   "points": 1,
+   "answer": 5.0,
+   "tolerance": 0.05,
+   "unit": "mWb",
+   "explanation": "Φ = B S cos θ = 0,50 × 200×10⁻⁴ × cos 60° = 0,50 × 0,020 × 0,5 = 5,0×10⁻³ Wb = 5,0 mWb.",
+   "method": "Φ = B S cos θ (S en m²).",
+   "mistakes": [
+    "Garder S en cm².",
+    "Utiliser sin θ au lieu de cos θ."
+   ],
+   "id": "bac-physique-cd-complements-ind-01",
+   "lesson": "bac-physique-cd-complements-induction",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "prompt": "On approche le pôle nord d'un aimant de la face d'une bobine fermée. D'après la loi de Lenz, la face de la bobine tournée vers l'aimant devient :",
+   "points": 1,
+   "choices": [
+    "une face nord, qui repousse l'aimant",
+    "une face sud, qui repousse l'aimant",
+    "une face nord, qui attire l'aimant",
+    "une face sud, qui attire l'aimant"
+   ],
+   "answer": 0,
+   "explanation": "Le flux augmente ; le courant induit s'oppose à cette augmentation en repoussant l'aimant. Une face nord en regard d'un pôle nord repousse.",
+   "method": "Lenz : l'effet s'oppose à la cause.",
+   "mistakes": [
+    "Croire que l'effet favorise le mouvement."
+   ],
+   "id": "bac-physique-cd-complements-ind-02",
+   "lesson": "bac-physique-cd-complements-induction",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "prompt": "Dans une bobine d'inductance L = 0,50 H et de résistance négligeable, le courant passe de 1,0 A à 3,0 A en 0,50 s de façon linéaire. Calcule la valeur de la tension à ses bornes, en V.",
+   "points": 1,
+   "answer": 2.0,
+   "tolerance": 0.01,
+   "unit": "V",
+   "explanation": "di/dt = (3,0 − 1,0)/0,50 = 4,0 A/s ; u = L di/dt = 0,50 × 4,0 = 2,0 V.",
+   "method": "u = L di/dt avec r négligeable.",
+   "mistakes": [
+    "Oublier le temps et faire L × ΔI."
+   ],
+   "id": "bac-physique-cd-complements-ind-03",
+   "lesson": "bac-physique-cd-complements-induction",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "prompt": "Une tige conductrice de longueur 0,20 m glisse à v = 3,0 m/s, perpendiculairement à B = 0,50 T, sur deux rails reliés par un résistor : la résistance totale du circuit est 0,60 Ω. Calcule la force de Laplace qui freine la tige, en mN.",
+   "points": 2,
+   "answer": 50.0,
+   "tolerance": 1,
+   "unit": "mN",
+   "explanation": "e = B L v = 0,50 × 0,20 × 3,0 = 0,30 V ; I = e/R = 0,50 A ; F = I L B = 0,50 × 0,20 × 0,50 = 0,050 N = 50 mN.",
+   "method": "e = B L v, I = e/R, F = I L B.",
+   "mistakes": [
+    "Oublier que F s'oppose au mouvement.",
+    "Utiliser v au lieu de e/R."
+   ],
+   "id": "bac-physique-cd-complements-ind-04",
+   "lesson": "bac-physique-cd-complements-induction",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "prompt": "Un solénoïde long a N = 1000 spires, une section S = 20 cm² et une longueur de 0,50 m. Calcule son inductance, en mH (µ₀ = 4π×10⁻⁷ SI).",
+   "points": 2,
+   "answer": 5.0,
+   "tolerance": 0.1,
+   "unit": "mH",
+   "explanation": "L = µ₀ N² S / l = 4π×10⁻⁷ × 10⁶ × 20×10⁻⁴ / 0,50 ≈ 5,0 mH.",
+   "method": "L = µ₀ N² S / l (l = longueur du solénoïde) ; S en m².",
+   "mistakes": [
+    "Oublier le carré de N.",
+    "S en cm²."
+   ],
+   "id": "bac-physique-cd-complements-ind-05",
+   "lesson": "bac-physique-cd-complements-induction",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Une bobine d'inductance L = 0,10 H et de résistance interne r = 10 Ω est montée en série avec un résistor de 20 Ω et un générateur de tension constante E = 6,0 V ; on ferme l'interrupteur à t = 0 (courant initial nul).",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quelle est l'équation différentielle vérifiée par i ?",
+     "points": 1,
+     "choices": [
+      "$0{,}10\\,\\dfrac{di}{dt} + 30\\,i = 6{,}0$",
+      "$0{,}10\\,\\dfrac{di}{dt} + 20\\,i = 6{,}0$",
+      "$30\\,\\dfrac{di}{dt} + 0{,}10\\,i = 6{,}0$",
+      "$0{,}10\\,\\dfrac{di}{dt} - 30\\,i = 6{,}0$"
+     ],
+     "answer": 0,
+     "explanation": "Loi des mailles : E = L di/dt + (r + R) i avec r + R = 30 Ω.",
+     "id": "bac-physique-cd-complements-ind-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule la constante de temps τ, en ms.",
+     "points": 1,
+     "answer": 3.33,
+     "tolerance": 0.02,
+     "unit": "ms",
+     "explanation": "τ = L/(R + r) = 0,10/30 ≈ 3,33 ms.",
+     "id": "bac-physique-cd-complements-ind-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule l'intensité en régime permanent, en mA.",
+     "points": 1,
+     "answer": 200.0,
+     "tolerance": 1,
+     "unit": "mA",
+     "explanation": "I = E/(R + r) = 6,0/30 = 0,20 A = 200 mA.",
+     "id": "bac-physique-cd-complements-ind-06-c"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Au bout de combien de temps i atteint-il 95 % de sa valeur finale ? (en ms)",
+     "points": 1.5,
+     "answer": 10.0,
+     "tolerance": 0.1,
+     "unit": "ms",
+     "explanation": "1 − e^{−t/τ} = 0,95 donne t = −τ ln 0,05 ≈ 3 τ ≈ 10,0 ms.",
+     "id": "bac-physique-cd-complements-ind-06-d"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule l'énergie magnétique stockée en régime permanent, en mJ.",
+     "points": 1.5,
+     "answer": 2.0,
+     "tolerance": 0.05,
+     "unit": "mJ",
+     "explanation": "E = ½ L I² = 0,5 × 0,10 × 0,20² = 2,0×10⁻³ J = 2,0 mJ.",
+     "id": "bac-physique-cd-complements-ind-06-e"
+    }
+   ],
+   "method": "Loi des mailles, puis résolution de l'équation en i (τ = L/R totale).",
+   "mistakes": [
+    "Oublier la résistance interne de la bobine dans R.",
+    "Prendre i = E/r en régime permanent."
+   ],
+   "id": "bac-physique-cd-complements-ind-06",
+   "lesson": "bac-physique-cd-complements-induction",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "L'unité de l'inductance est :",
+   "points": 1,
+   "choices": [
+    "le henry (H)",
+    "le weber (Wb)",
+    "le tesla (T)",
+    "le farad (F)"
+   ],
+   "answer": 0,
+   "explanation": "Le henry mesure L ; le weber le flux, le tesla le champ, le farad la capacité.",
+   "id": "bac-physique-cd-complements-ind-q1",
+   "lesson": "bac-physique-cd-complements-induction"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "Un aimant immobile est placé près d'une bobine fermée : la f.é.m. induite est :",
+   "points": 1,
+   "choices": [
+    "nulle, car le flux ne varie pas",
+    "maximale",
+    "égale à B S",
+    "proportionnelle à N seulement"
+   ],
+   "answer": 0,
+   "explanation": "e = −dΦ/dt : sans variation de flux, e = 0.",
+   "id": "bac-physique-cd-complements-ind-q2",
+   "lesson": "bac-physique-cd-complements-induction"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "Dans un dipôle RL, la constante de temps vaut :",
+   "points": 1,
+   "choices": [
+    "$\\tau = L / R$",
+    "$\\tau = R L$",
+    "$\\tau = R / L$",
+    "$\\tau = L R^2$"
+   ],
+   "answer": 0,
+   "explanation": "τ = L/R, en secondes.",
+   "id": "bac-physique-cd-complements-ind-q3",
+   "lesson": "bac-physique-cd-complements-induction"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "À t = τ lors de l'établissement du courant, i atteint environ :",
+   "points": 1,
+   "choices": [
+    "63 % de sa valeur finale",
+    "37 % de sa valeur finale",
+    "50 % de sa valeur finale",
+    "100 % de sa valeur finale"
+   ],
+   "answer": 0,
+   "explanation": "1 − e⁻¹ ≈ 0,63.",
+   "id": "bac-physique-cd-complements-ind-q4",
+   "lesson": "bac-physique-cd-complements-induction"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "L'énergie stockée dans une bobine d'inductance L parcourue par i vaut :",
+   "points": 1,
+   "choices": [
+    "$\\dfrac{1}{2} L i^2$",
+    "$L i^2$",
+    "$\\dfrac{1}{2} L i$",
+    "$\\dfrac{1}{2} i^2 / L$"
+   ],
+   "answer": 0,
+   "explanation": "E = ½ L i².",
+   "id": "bac-physique-cd-complements-ind-q5",
+   "lesson": "bac-physique-cd-complements-induction"
+  }
+ ]
+}

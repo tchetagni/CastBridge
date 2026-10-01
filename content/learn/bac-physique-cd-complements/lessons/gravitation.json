@@ -1,0 +1,492 @@
+{
+ "chapter": "bac-physique-cd-complements-ch-gravitation",
+ "lessons": [
+  {
+   "id": "bac-physique-cd-complements-gravitation",
+   "title": "Gravitation et mouvement des satellites",
+   "minutes": 40,
+   "programRef": "Tle C/D — Loi de gravitation universelle ; champ de gravitation ; satellites et planètes ; lois de Kepler (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Appliquer la loi de gravitation et calculer g(h).",
+    "Établir v et T d'un satellite en orbite circulaire.",
+    "Utiliser la troisième loi de Kepler.",
+    "Caractériser un satellite géostationnaire."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "bac-physique-cd-complements-gra-01",
+    "bac-physique-cd-complements-gra-02",
+    "bac-physique-cd-complements-gra-03",
+    "bac-physique-cd-complements-gra-04",
+    "bac-physique-cd-complements-gra-05",
+    "bac-physique-cd-complements-gra-06"
+   ],
+   "selfCheck": [
+    "bac-physique-cd-complements-gra-q1",
+    "bac-physique-cd-complements-gra-q2",
+    "bac-physique-cd-complements-gra-q3",
+    "bac-physique-cd-complements-gra-q4",
+    "bac-physique-cd-complements-gra-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Loi de gravitation universelle",
+     "md": "Deux corps ponctuels (ou à répartition sphérique de masse) de masses m et M, distants de r, s'attirent avec des forces opposées de même norme :",
+     "tex": "F = G\\dfrac{m\\,M}{r^2} \\qquad G = 6{,}67\\times10^{-11}\\ \\text{SI}"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Champ de gravitation de la Terre",
+     "md": "À l'altitude h, la distance au centre est r = R + h (R rayon de la Terre) et le champ de gravitation vaut :",
+     "tex": "g(h) = \\dfrac{G\\,M}{(R+h)^2} \\qquad g_0 = \\dfrac{G\\,M}{R^2} \\approx 9{,}8\\ \\text{m·s}^{-2}"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Satellite en orbite circulaire",
+     "md": "Dans un référentiel géocentrique, un satellite (masse m) en orbite circulaire de rayon r n'est soumis qu'à la gravitation. La 2e loi de Newton montre que le mouvement est **uniforme** et que :",
+     "tex": "v = \\sqrt{\\dfrac{G\\,M}{r}} \\qquad T = \\dfrac{2\\pi r}{v} = 2\\pi\\sqrt{\\dfrac{r^3}{G\\,M}} \\qquad \\dfrac{T^2}{r^3} = \\dfrac{4\\pi^2}{G\\,M}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 360,
+      "h": 260,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 180,
+        "cy": 130,
+        "r": 38,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 136,
+        "text": "Terre",
+        "size": 14,
+        "color": "blue",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 180,
+        "cy": 130,
+        "r": 100,
+        "fill": null,
+        "stroke": "grey",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "circle",
+        "cx": 280,
+        "cy": 130,
+        "r": 8,
+        "fill": "orange",
+        "stroke": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 272,
+        "y1": 130,
+        "x2": 222,
+        "y2": 130,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 247,
+        "y": 120,
+        "text": "F",
+        "size": 16,
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 280,
+        "y1": 122,
+        "x2": 280,
+        "y2": 72,
+        "color": "green",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 298,
+        "y": 88,
+        "text": "v",
+        "size": 16,
+        "color": "green",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 296,
+        "y": 152,
+        "text": "satellite",
+        "size": 13,
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Satellite en orbite circulaire : la force de gravitation F est dirigée vers le centre de la Terre ; la vitesse v est tangente à l'orbite. La masse du satellite n'intervient pas dans v ni dans T.",
+     "alt": "Un disque bleu, la Terre, entouré d'un cercle en pointillés gris, l'orbite. Un satellite orange à droite avec une flèche rouge F vers la Terre et une flèche verte v vers le haut, tangente à l'orbite."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Conséquences",
+     "md": "- Plus l'orbite est haute, plus le satellite est **lent** et sa période **longue**.\n- v et T ne dépendent pas de la masse du satellite.\n- **Troisième loi de Kepler** : T²/r³ est la même pour tous les corps qui tournent autour du même astre.\n- Énergies : $E_c = \\dfrac{GMm}{2r}$, $E_p = -\\dfrac{GMm}{r}$, $E = -\\dfrac{GMm}{2r}$ (référence d'énergie potentielle nulle à l'infini)."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Satellite géostationnaire",
+     "md": "Il paraît immobile pour un observateur terrestre. Conditions : orbite **circulaire dans le plan équatorial**, **même sens de rotation** que la Terre, **période égale à la période de rotation de la Terre** (≈ 86 164 s, jour sidéral). Cela fixe son rayon (≈ 42 000 km du centre) : télécommunications, météo."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode",
+     "md": "1. Le système : le satellite ; le référentiel : géocentrique (supposé galiléen) ; la force : gravitation seule.\n2. 2e loi de Newton : $\\vec{a} = \\dfrac{GM}{r^2}\\vec{n}$, accélération centripète.\n3. Identifier $a = v^2/r$ pour trouver v, puis $T = 2\\pi r/v$.\n4. Convertir : r en m (R + h avec h en m), T en minutes ou en heures à la fin."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : satellite à 800 km d'altitude",
+     "statement": "Un satellite circule à h = 800 km sur une orbite circulaire. Données : G = 6,67×10⁻¹¹ SI ; M = 5,97×10²⁴ kg ; R = 6,38×10⁶ m. Calcule sa vitesse et sa période.",
+     "steps": [
+      {
+       "md": "Rayon de l'orbite : r = R + h = 6,38×10⁶ + 0,80×10⁶ = 7,18×10⁶ m. Vitesse :",
+       "tex": "v = \\sqrt{\\dfrac{GM}{r}} = \\sqrt{\\dfrac{6{,}67\\times10^{-11}\\times5{,}97\\times10^{24}}{7{,}18\\times10^{6}}} \\approx 7447\\ \\text{m/s}"
+      },
+      {
+       "md": "Période :",
+       "tex": "T = \\dfrac{2\\pi r}{v} \\approx \\dfrac{2\\pi \\times 7{,}18\\times10^{6}}{7447} \\approx 6058\\ \\text{s} \\approx 101\\ \\text{min}"
+      }
+     ],
+     "answer": "**v ≈ 7,45 km/s ; T ≈ 101 min**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : orbite géostationnaire",
+     "statement": "Calcule le rayon de l'orbite géostationnaire et l'altitude correspondante (T = 86 164 s).",
+     "steps": [
+      {
+       "md": "Troisième loi de Kepler appliquée à T = 86 164 s :",
+       "tex": "r^3 = \\dfrac{G M T^2}{4\\pi^2} \\Rightarrow r = \\left(\\dfrac{GM\\,T^2}{4\\pi^2}\\right)^{1/3}"
+      },
+      {
+       "md": "Application numérique :",
+       "tex": "r \\approx 42150\\ \\text{km}\\qquad h = r - R \\approx 35770\\ \\text{km}"
+      }
+     ],
+     "answer": "**r ≈ 42150 km du centre, soit h ≈ 35770 km** (environ 36 000 km) ; sa vitesse vaut environ 3,07 km/s."
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-physique-cd-complements-gra-01"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier d'ajouter R à l'altitude : r = R + h (et pas h).\n- Garder h en km dans une formule en SI.\n- Penser qu'un satellite plus lourd tourne plus lentement : la masse se simplifie.\n- Croire qu'un satellite en orbite est en « apesanteur » sans force : il est en chute libre sous l'action de la gravitation.\n- Confondre orbite géostationnaire et orbite polaire."
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-physique-cd-complements-gra-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-physique-cd-complements-gra-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-physique-cd-complements-gra-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-physique-cd-complements-gra-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-physique-cd-complements-gra-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Les satellites d'observation de la Terre sont souvent en orbite basse (quelques centaines de km) pour une bonne résolution ; les satellites de télécommunication sont géostationnaires.",
+      "Les lois de Kepler (orbites elliptiques, loi des aires, T²/a³ = constante) sont énoncées pour les planètes ; nous traitons ici les trajectoires circulaires."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Choix éditorial : gravitation/satellites traités ; le champ électrique (condensateur plan, déviation d'un électron) n'est pas couvert dans ce pack — à ajouter si le programme de la série l'exige.",
+    "Données arrondies annoncées : G = 6,67×10⁻¹¹ SI ; M(Terre) = 5,97×10²⁴ kg ; R = 6,38×10⁶ m ; jour sidéral 86 164 s. Les épreuves donnent parfois M = 6,0×10²⁴ kg et R = 6400 km : les résultats diffèrent légèrement.",
+    "Énergie mécanique du satellite et vitesse de libération : mentionnées sans exercice dédié ; vérifier leur présence au programme."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "prompt": "Calcule le champ de gravitation de la Terre à l'altitude h = 400 km, en m/s² (G = 6,67×10⁻¹¹ SI ; M = 5,97×10²⁴ kg ; R = 6,38×10⁶ m).",
+   "points": 1,
+   "answer": 8.66,
+   "tolerance": 0.02,
+   "unit": "m/s²",
+   "explanation": "r = 6,38×10⁶ + 0,40×10⁶ = 6,78×10⁶ m ; g = GM/r² ≈ 8,66 m/s² (un peu plus faible qu'au sol, où g₀ ≈ 9,78 m/s²).",
+   "method": "g = GM/(R+h)².",
+   "mistakes": [
+    "Prendre r = h.",
+    "Oublier de convertir km en m."
+   ],
+   "id": "bac-physique-cd-complements-gra-01",
+   "lesson": "bac-physique-cd-complements-gravitation",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "prompt": "Un satellite géostationnaire :",
+   "points": 1,
+   "choices": [
+    "a pour période celle de rotation de la Terre et orbite dans le plan équatorial",
+    "orbite au-dessus des pôles",
+    "a une période de 1,5 h",
+    "est immobile dans le référentiel géocentrique"
+   ],
+   "answer": 0,
+   "explanation": "Il tourne dans le plan équatorial, dans le sens de la rotation terrestre, avec la même période (≈ 24 h) : il est fixe seulement dans le référentiel terrestre.",
+   "method": "Trois conditions : plan équatorial, même sens, même période.",
+   "mistakes": [
+    "Dire qu'il est immobile dans le référentiel géocentrique."
+   ],
+   "id": "bac-physique-cd-complements-gra-02",
+   "lesson": "bac-physique-cd-complements-gravitation",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "prompt": "Calcule la vitesse d'un satellite en orbite circulaire à l'altitude 1200 km, en km/s (mêmes données).",
+   "points": 1,
+   "answer": 7.25,
+   "tolerance": 0.02,
+   "unit": "km/s",
+   "explanation": "r = 7,58×10⁶ m ; v = √(GM/r) ≈ 7248 m/s ≈ 7,25 km/s.",
+   "method": "v = √(GM/(R+h)).",
+   "mistakes": [
+    "Oublier R.",
+    "Mettre h en km."
+   ],
+   "id": "bac-physique-cd-complements-gra-03",
+   "lesson": "bac-physique-cd-complements-gravitation",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "prompt": "La Lune décrit une orbite quasi circulaire de rayon 3,84×10⁸ m autour de la Terre. Calcule sa période de révolution, en jours (1 jour = 86 400 s).",
+   "points": 2,
+   "answer": 27.4,
+   "tolerance": 0.2,
+   "unit": "jours",
+   "explanation": "T = 2π√(r³/GM) ≈ 2369336 s ≈ 27,4 jours.",
+   "method": "T = 2π√(r³/(GM)) puis conversion.",
+   "mistakes": [
+    "Utiliser v au lieu de r dans la racine.",
+    "Oublier de convertir en jours."
+   ],
+   "id": "bac-physique-cd-complements-gra-04",
+   "lesson": "bac-physique-cd-complements-gravitation",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "prompt": "Un satellite A orbite à la distance r du centre d'un astre ; un satellite B à 4 r. Calcule le rapport T_B / T_A des périodes.",
+   "points": 2,
+   "answer": 8.0,
+   "tolerance": 0.01,
+   "explanation": "T² / r³ est constant : (T_B/T_A)² = (4)³ = 64, donc T_B/T_A = 8.",
+   "method": "Troisième loi de Kepler.",
+   "mistakes": [
+    "Trouver 4 ou 16 en confondant les puissances."
+   ],
+   "id": "bac-physique-cd-complements-gra-05",
+   "lesson": "bac-physique-cd-complements-gravitation",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Un satellite d'observation (fictif) décrit une orbite circulaire à l'altitude h = 600 km autour de la Terre (G = 6,67×10⁻¹¹ SI ; M = 5,97×10²⁴ kg ; R = 6,38×10⁶ m).",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Un deuxième satellite, deux fois plus lourd, est placé sur la même orbite. Sa vitesse est :",
+     "points": 1,
+     "choices": [
+      "la même",
+      "deux fois plus grande",
+      "deux fois plus petite",
+      "√2 fois plus grande"
+     ],
+     "answer": 0,
+     "explanation": "v = √(GM/r) ne dépend pas de la masse du satellite.",
+     "id": "bac-physique-cd-complements-gra-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule le rayon de l'orbite, en km.",
+     "points": 0.5,
+     "answer": 6980.0,
+     "tolerance": 1,
+     "unit": "km",
+     "explanation": "r = R + h = 6380 + 600 = 6980 km.",
+     "id": "bac-physique-cd-complements-gra-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule la vitesse du satellite, en km/s.",
+     "points": 1.5,
+     "answer": 7.55,
+     "tolerance": 0.02,
+     "unit": "km/s",
+     "explanation": "v = √(GM/r) = √(6,67×10⁻¹¹ × 5,97×10²⁴ / 6,98×10⁶) ≈ 7,55 km/s.",
+     "id": "bac-physique-cd-complements-gra-06-c"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule sa période, en minutes.",
+     "points": 1,
+     "answer": 96.8,
+     "tolerance": 0.2,
+     "unit": "min",
+     "explanation": "T = 2π r / v ≈ 5806 s ≈ 96,8 min.",
+     "id": "bac-physique-cd-complements-gra-06-d"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Combien de révolutions effectue-t-il en 24 h ? (donne la valeur décimale)",
+     "points": 1,
+     "answer": 14.9,
+     "tolerance": 0.1,
+     "explanation": "24 h = 1440 min ; 1440 / 96,8 ≈ 14,9 révolutions (donc environ 14 tours complets).",
+     "id": "bac-physique-cd-complements-gra-06-e"
+    }
+   ],
+   "method": "r = R + h, v = √(GM/r), T = 2πr/v.",
+   "mistakes": [
+    "Prendre r = 600 km.",
+    "Oublier de convertir T en minutes."
+   ],
+   "id": "bac-physique-cd-complements-gra-06",
+   "lesson": "bac-physique-cd-complements-gravitation",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "La force de gravitation entre deux masses m et M distantes de r est :",
+   "points": 1,
+   "choices": [
+    "proportionnelle à m M et inversement proportionnelle à r²",
+    "proportionnelle à r",
+    "inversement proportionnelle à m M",
+    "indépendante de r"
+   ],
+   "answer": 0,
+   "explanation": "F = G m M / r².",
+   "id": "bac-physique-cd-complements-gra-q1",
+   "lesson": "bac-physique-cd-complements-gravitation"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "Un satellite en orbite circulaire autour de la Terre a un mouvement :",
+   "points": 1,
+   "choices": [
+    "circulaire uniforme",
+    "rectiligne uniforme",
+    "circulaire uniformément accéléré",
+    "parabolique"
+   ],
+   "answer": 0,
+   "explanation": "L'accélération est centripète de norme constante : v est de norme constante.",
+   "id": "bac-physique-cd-complements-gra-q2",
+   "lesson": "bac-physique-cd-complements-gravitation"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "Si le rayon de l'orbite augmente, la vitesse du satellite :",
+   "points": 1,
+   "choices": [
+    "diminue",
+    "augmente",
+    "reste constante",
+    "devient nulle"
+   ],
+   "answer": 0,
+   "explanation": "v = √(GM/r) diminue quand r augmente.",
+   "id": "bac-physique-cd-complements-gra-q3",
+   "lesson": "bac-physique-cd-complements-gravitation"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "La troisième loi de Kepler s'écrit pour une orbite circulaire :",
+   "points": 1,
+   "choices": [
+    "T² / r³ = 4π² / (G M)",
+    "T / r = 4π² / (G M)",
+    "T² r³ = 4π² G M",
+    "T² / r² = G M"
+   ],
+   "answer": 0,
+   "explanation": "On l'obtient à partir de T = 2π√(r³/GM).",
+   "id": "bac-physique-cd-complements-gra-q4",
+   "lesson": "bac-physique-cd-complements-gravitation"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "À l'altitude h, le champ de gravitation terrestre est :",
+   "points": 1,
+   "choices": [
+    "$g = GM / (R + h)^2$",
+    "$g = GM / h^2$",
+    "$g = GM / R^2$ quelle que soit h",
+    "$g = GM (R + h)$"
+   ],
+   "answer": 0,
+   "explanation": "La distance au centre est R + h.",
+   "id": "bac-physique-cd-complements-gra-q5",
+   "lesson": "bac-physique-cd-complements-gravitation"
+  }
+ ]
+}
