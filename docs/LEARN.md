@@ -101,6 +101,8 @@ et français du Bac A, GCE A Level, Physics/Chemistry O Level, probabilités (lo
 (similitudes, coniques, arithmétique) du Bac, statistiques et trigonométrie du BEPC, primaire hors CM2/Class 6,
 secondaire hors classes d'examen, licence (le catalogue prévoit L1-L3 par filière : droit, économie…), vidéos.
 
+> **Premier cycle francophone (6e → 3e)** : 27 packs ajoutés/étendus depuis ce tableau (403 fiches, 4 476 exercices) ; couverture détaillée dans `docs/coverage/learn-college.md`.
+
 ### Points marqués « à vérifier » (principaux)
 Chaque fiche liste ses doutes dans `reviewNotes` (visibles des relecteurs, jamais présentés comme des faits aux élèves ;
 les blocs `review` s'affichent avec « ⚑ à vérifier »). En résumé :
