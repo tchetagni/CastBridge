@@ -12,7 +12,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 /** CastBridge server: app updates, quiz question bank, light device statistics. */
 @SpringBootApplication(exclude = UserDetailsServiceAutoConfiguration.class) // no user store: bearer token only
 @EnableScheduling
-@EnableConfigurationProperties(CastbridgeProperties.class)
+@EnableConfigurationProperties({CastbridgeProperties.class, castbridge.server.licenses.LicenseProperties.class})
 public class CastbridgeApplication {
 
     /** Every date shown to people is in Cameroon time; the database stores UTC. */

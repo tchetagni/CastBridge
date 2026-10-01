@@ -22,4 +22,7 @@ public class AdminUser {
     @Column(name = "locked_until") public Instant lockedUntil;
     @Column(name = "last_login") public Instant lastLogin;
     @Column(name = "created_at", nullable = false) public Instant createdAt;
+    /** OWNER, SUPPORT or READONLY (licence module); existing accounts are OWNER. */
+    @Column(nullable = false) public String role = "OWNER";
+    @Column(name = "totp_enabled", nullable = false) public boolean totpEnabled;
 }

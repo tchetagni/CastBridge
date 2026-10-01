@@ -22,6 +22,7 @@
         <springdoc.version>2.8.17</springdoc.version>
         <bouncycastle.version>1.86</bouncycastle.version>
         <geoip2.version>4.4.0</geoip2.version>
+        <zxing.version>3.5.3</zxing.version>
     </properties>
 
     <dependencies>
@@ -55,6 +56,12 @@
             <groupId>com.maxmind.geoip2</groupId>
             <artifactId>geoip2</artifactId>
             <version>${geoip2.version}</version>
+        </dependency>
+        <!-- QR code of an activation (rendered server-side as an SVG image: no script in the page) -->
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>${zxing.version}</version>
         </dependency>
         <dependency>
             <groupId>org.flywaydb</groupId>

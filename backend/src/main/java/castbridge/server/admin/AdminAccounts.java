@@ -48,7 +48,8 @@ public class AdminAccounts implements UserDetailsService, ApplicationRunner {
                 .orElseThrow(() -> new UsernameNotFoundException("unknown"));
         boolean locked = u.lockedUntil != null && u.lockedUntil.isAfter(Instant.now());
         return User.withUsername(u.username).password(u.passwordHash).accountLocked(locked)
-                .authorities(List.of(new SimpleGrantedAuthority("ROLE_WEBADMIN"))).build();
+                .authorities(List.of(new SimpleGrantedAuthority("ROLE_WEBADMIN"),
+                        new SimpleGrantedAuthority("ROLE_LIC_" + (u.role == null ? "READONLY" : u.role)))).build();
     }
 
     @EventListener

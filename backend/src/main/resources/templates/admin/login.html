@@ -10,6 +10,8 @@
     <form th:action="@{/admin/login}" method="post">
         <label>Identifiant <input type="text" name="username" autocomplete="username" required autofocus></label>
         <label>Mot de passe <input type="password" name="password" autocomplete="current-password" required></label>
+        <label>Code à 6 chiffres <small>(si la double authentification est activée sur le compte)</small>
+            <input type="text" name="totp" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9 ]*" maxlength="8"></label>
         <button type="submit">Se connecter</button>
     </form>
 </main>
