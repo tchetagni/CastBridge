@@ -68,7 +68,12 @@ class LangBudget(root: Map<String, Any?>) {
         return Report(e, per, total)
     }
 
-    companion object { fun parse(text: String) = LangBudget(Json.obj(text)) }
+    companion object {
+        fun parse(text: String) = LangBudget(Json.obj(text))
+        /** Default quota of the phone's « Langues » space (owner decision: architect's choice); user-adjustable from 100 MB to the whole envelope. */
+        const val PHONE_LANG_DEFAULT_MB = 2048
+        const val PHONE_LANG_MIN_MB = 100
+    }
 }
 
 /** What a learner follows: languages (target + start), where they are. */

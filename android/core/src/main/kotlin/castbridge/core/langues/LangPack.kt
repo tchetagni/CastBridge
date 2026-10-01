@@ -39,7 +39,7 @@ data class LangUnit(
 
 data class MediaEntry(
     val id: String, val file: String, val kind: String, val bytes: Long, val durationMs: Int?, val license: String,
-    val author: String?, val source: String?, val url: String?, val engine: String?, val synthetic: Boolean, val lang: String?,
+    val author: String?, val source: String?, val url: String?, val engine: String?, val synthetic: Boolean, val lang: String?, val voiceLicense: String? = null,
 )
 
 data class LangPack(val id: String, val version: Int, val parts: LangLots.Parts, val title: String, val state: String, val units: List<LangUnit>, val media: Map<String, MediaEntry>) {
@@ -78,7 +78,7 @@ object LangPackJson {
     private fun media(m: Map<String, Any?>): MediaEntry {
         val id = m.req("id", "media.json")
         return MediaEntry(id, m.req("file", "media $id"), m.req("kind", "media $id"), (m["bytes"] as? Number)?.toLong() ?: throw ParseError("media $id : \"bytes\" manquant"),
-            m.int("durationMs"), m.req("license", "media $id"), m.str("author"), m.str("source"), m.str("url"), m.str("engine"), (m["synthetic"] as? Boolean) ?: false, m.str("lang"))
+            m.int("durationMs"), m.req("license", "media $id"), m.str("author"), m.str("source"), m.str("url"), m.str("engine"), (m["synthetic"] as? Boolean) ?: false, m.str("lang"), m.str("voiceLicense"))
     }
 
     private fun line(m: Map<String, Any?>, w: String) = DialogueLine(m.str("who") ?: "", m.req("text", w), m.str("reading"), m.req("tr", w), m.str("audio"))
@@ -111,8 +111,11 @@ object LangPackJson {
 
 /** Licences we may redistribute (docs/LANGUES.md § 7); "CASTBRIDGE-ORIGINAL" = made by us, released under CC BY-SA 4.0 with the app's content. */
 object LangLicences {
-    val allowed = setOf("CC0", "PD", "CC-BY-4.0", "CC-BY-SA-4.0", "CASTBRIDGE-ORIGINAL")
-    private val needsAttribution = setOf("CC-BY-4.0", "CC-BY-SA-4.0")
+    /** Content licences: the maximum of free licences (owner decision 2026-10-01); never NC / ND. */
+    val allowed = setOf("CC0", "PD", "CC-BY-2.0", "CC-BY-3.0", "CC-BY-4.0", "CC-BY-SA-3.0", "CC-BY-SA-4.0", "MIT", "Apache-2.0", "BSD", "OFL-1.1", "CASTBRIDGE-ORIGINAL")
+    /** Voices: the same, plus GPL-3.0 for the output of a free engine (espeak-ng). */
+    val allowedVoices = allowed + "GPL-3.0"
+    private val needsAttribution = setOf("CC-BY-2.0", "CC-BY-3.0", "CC-BY-4.0", "CC-BY-SA-3.0", "CC-BY-SA-4.0")
     fun needsAttribution(l: String) = l in needsAttribution
 }
 
@@ -154,6 +157,7 @@ object LangValidator {
             if (m.license !in LangLicences.allowed) e += "$w : licence « ${m.license} » non redistribuable"
             if (LangLicences.needsAttribution(m.license) && (m.author.isNullOrBlank() || m.source.isNullOrBlank() || m.url.isNullOrBlank())) e += "$w : auteur, source et URL obligatoires pour ${m.license}"
             if (m.engine != null && !m.synthetic) e += "$w : audio produit par un moteur de synthèse ($) doit être marqué synthetic".replace("($)", "(${m.engine})")
+            if (m.synthetic && m.voiceLicense !in LangLicences.allowedVoices) e += "$w : licence de la voix « ${m.voiceLicense} » absente ou non libre"
             if (m.bytes <= 0) e += "$w : taille invalide"
             if (m.kind !in setOf("audio", "video", "image")) e += "$w : kind « ${m.kind} » inconnu"
         }

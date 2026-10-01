@@ -1,7 +1,7 @@
 # Langues : la catégorie « Langues » d'Apprendre (conception, avant production)
 
 > **Statut : conception à valider par le propriétaire.** Aucun contenu en masse n'est produit ici (un seul pack d'exemple, `content/langues/zh-a0-salut-fr`).
-> Code : `android/core/src/main/kotlin/castbridge/core/langues/` (logique pure, 20 tests JVM `LanguesTest`). Outils : `tools/content-budget/langues_budget.py`, `tools/langues/gen-graph.py`.
+> Code : `android/core/src/main/kotlin/castbridge/core/langues/` (logique pure, 21 tests JVM `LanguesTest`). Outils : `tools/content-budget/langues_budget.py`, `tools/langues/gen-graph.py`.
 > Documents liés : [LEARN](LEARN.md) (moteur, figures, animations), [LOTS](LOTS.md) (cadre des lots), [QUIZ](QUIZ.md), et, sur la branche `claude/net-architect` : `CONTENT-ARCHITECTURE`, `MEDIA-POLICY`, `PEDAGOGY-RUBRIC`, `CONTENT-PUBLISH` (pas encore fusionnés dans `integration/agents` ; voir § 10 pour les points à aligner).
 > Tout le contenu reste **« bêta : non validé »** (`state: review`) jusqu'au passage des agents vérificateurs, puis des humains.
 
@@ -12,7 +12,7 @@
 - **Enveloppe 6 Go, séparée** des 3 Go du reste de la base : 6 144 Mo répartis par langue et niveau (§ 4), vérifiés par un outil et par du code testé.
 - **Deux sortes de lots** : **texte** (≤ 3 Mo, TV et téléphone) et **média** (≤ 100 Mo, téléphone, copiés vers la TV sur demande). La TV ne télécharge jamais d'Internet.
 - **Faisabilité mesurée dans l'environnement cloud** (§ 8) : texte, figures, animations vectorielles et données structurées : oui. Audio : synthèse **espeak-ng** (robotique, marquée « synthétique ») ; voix naturelles et vidéo avec personnes : **non** ici, il faudra des enregistrements humains ou une autre chaîne.
-- **Trois décisions du propriétaire à prendre avant la vague 1** (§ 11) : quota média du téléphone (le plafond de 100 Mo des lots ne peut pas contenir 6 Go), licence CC BY-SA du contenu dérivé, enregistrements humains.
+- **Trois décisions prises par le propriétaire le 2026-10-01** (§ 11) : taille au choix de l'architecte (espace Langues du téléphone **2 Go réglable**), **maximum de licences libres** (CC BY-SA acceptée, contenu dérivé publié en CC BY-SA 4.0), **voix de synthèse d'excellente qualité** (neuronales libres, produites hors du cloud ; chaîne prête dans `tools/langues/tts_synth.py`).
 
 ## 1. Cadre pédagogique
 
@@ -263,9 +263,16 @@ Vérifié dans le cloud : `ffmpeg` dispose de `libopus`, `libx264`, `libwebp`, `
 {"id":"zh-a1-salut","kind":"langue-media","feature":"langues-media","tv":false,"lang":"zh","levels":["N1"],"title":{"fr":"Chinois A1 — Se saluer (audio, vidéo)","en":"Chinese A1 — Greetings (audio, video)"}}
 ```
 
-### 4.6 Contraintes du cadre de lots à lever (décision du propriétaire, § 11)
+### 4.6 Quota média : décision prise (le cadre des lots reste inchangé)
 
-Aujourd'hui `LotBudget.PHONE_MAX_BYTES` = **100 Mo pour tous les lots du téléphone** et le serveur refuse un lot de plus de **10 Mo**. Un seul lot média (≤ 100 Mo) remplit déjà le quota ; 6 Go sont hors de portée. Il faut donc, **avant la vague 4** : (a) un **espace Langues** séparé sur le téléphone, de quota choisi par l'utilisateur (défaut proposé : 1 Go, jusqu'à la totalité) ; (b) une limite serveur propre à `langues-media` (≤ 100 Mo par lot) et un validateur de lot `langues` (ZIP, `langue.json` valide, `LangValidator`) ; (c) côté TV, des médias copiés **dans le volume de la bibliothèque** (clé USB d'abord, règle de 1 Go libre) et non dans les 10 Mo des lots. Rien de cela n'est implémenté ici (le cadre des lots reste inchangé) ; le squelette (`LangPlanner`) calcule déjà avec un budget donné en paramètre.
+Aujourd'hui `LotBudget.PHONE_MAX_BYTES` = 100 Mo pour *tous* les lots du téléphone et le serveur refuse un lot de plus de 10 Mo. **Taille retenue (décision « à mon choix »)** :
+
+- **Téléphone** : un **espace Langues** distinct, quota **2 Go par défaut**, réglable de 100 Mo à 6 Go (2 Go ≈ une langue complète jusqu'au B2, ou le début de plusieurs) ; éviction : jamais la langue active, sinon le lot média le moins récemment utilisé ; les 100 Mo des autres lots restent intacts.
+- **Lot média** : **≤ 100 Mo** (inchangé), **lot texte ≤ 3 Mo** (inchangé).
+- **Serveur** : limite propre à `langues-media` (≤ 100 Mo par lot), les autres lots restent à 10 Mo ; validateur `langues` (ZIP sain, `langue.json` valide, `LangValidator`).
+- **TV** : médias copiés **dans le volume de la bibliothèque** (clé USB d'abord, règle de 1 Go libre), jamais dans les 10 Mo ; copie **par lot et sur demande** depuis le téléphone.
+
+Rien de cela n'est implémenté (le cadre des lots est un autre chantier) ; `LangPlanner` calcule déjà avec un budget donné en paramètre, et `LangBudget.PHONE_LANG_DEFAULT_MB` (2 048) fixe le défaut.
 
 ## 5. Droits d'auteur et sources autorisées
 
@@ -273,13 +280,16 @@ Aujourd'hui `LotBudget.PHONE_MAX_BYTES` = **100 Mo pour tous les lots du télép
 
 | Source | Licence | Usage | Condition |
 |---|---|---|---|
-| Contenu créé par CastBridge (agents + relecteurs) | `CASTBRIDGE-ORIGINAL` (publié sous CC BY-SA 4.0 avec les données dérivées, voir § 11) | cœur du contenu : leçons, dialogues, exercices, figures, animations | original, pas de recopie d'un manuel |
+| Contenu créé par CastBridge (agents + relecteurs) | `CASTBRIDGE-ORIGINAL` (publié sous **CC BY-SA 4.0**, décision du § 11) | cœur du contenu : leçons, dialogues, exercices, figures, animations | original, pas de recopie d'un manuel |
 | **Tatoeba** (phrases + traductions) | CC BY 2.0 FR (certaines CC0) | phrases d'exemple, traductions | attribution (`author` = contributeur, `url` de la phrase) |
 | **Wiktionary / CC-CEDICT / JMdict / KANJIDIC** | CC BY-SA (3.0/4.0) | dictionnaires, lectures, traits | attribution + **partage dans les mêmes conditions** pour le dérivé |
 | **Wikimedia Commons** (images, audio) | CC0, CC BY, CC BY-SA, domaine public | images, enregistrements | vérifier fichier par fichier ; exclure NC/ND et les fichiers « fair use » |
 | **Common Voice** (Mozilla) | CC0 | voix humaines (phrases) | pour l'audio de phrases quand l'accès réseau existe |
 | **Domaine public** (littérature : Hugo, Dickens, Goethe, Cervantes, Dante, Lu Xun/Natsume Sōseki selon pays…) | domaine public | extraits du niveau natif | vérifier la date de décès de l'auteur **et** de l'éditeur de la traduction |
-| **Voix de synthèse libres** (`espeak-ng`, Piper selon la licence de la voix) | moteur libre ; **la licence de la voix** doit être vérifiée | audio synthétique marqué | `synthetic: true` ; pas d'usage de voix « clonée » d'une personne |
+| **Voix de synthèse libres** (Kokoro-82M Apache-2.0, MeloTTS MIT, Piper MIT + licence de chaque voix, espeak-ng GPL-3.0 en secours) | moteur **et voix** libres ; **la licence de la voix est inscrite** dans `media.json` (`voiceLicense`) et doit être libre | `synthetic: true` ; jamais une voix clonée d'une personne ; voix NC (p. ex. XTTS/CPML) exclues |
+| **Données et polices libres** (MIT, Apache-2.0, BSD, OFL-1.1, CC BY 3.0/2.0, CC BY-SA 3.0) | libres | listes de fréquence, polices de repli, traits | attribution et partage selon la licence |
+
+**Politique : le maximum de licences libres** (décision du propriétaire) : tout ce qui est redistribuable avec attribution et partage identique est accepté ; sont exclus seulement les licences NC / ND, « usage non commercial », « recherche seulement » et toute licence qui interdit la redistribution dans l'application.
 
 Interdits : manuels et méthodes du commerce, annales officielles, vidéos YouTube, pistes sous licence NC, polices non libres. Chaque lot embarque un fichier de **crédits** produit depuis `media.json` ; chaque auteur est cité tel que sa licence l'exige.
 
@@ -319,7 +329,7 @@ Flèches ◀ ▶ = page précédente / suivante (ou carte précédente / suivant
 | `LangLogic.kt` | `LangMarking` (correction), `Srs` (répétition espacée), `Placement` (test), `LangSkillGraph` (graphe, validation, nœuds disponibles) |
 | `LangBudget.kt` | `LangBudget` (6 Go, répartition, vérification de lots), `LangPlanner` (sélection des lots texte pour la TV et média pour le téléphone/la TV, lots média jouables) |
 
-`gradle :core:test --tests 'castbridge.core.LanguesTest'` : 20 tests (scopes, parseur, validateur, licences, correction, SRS, positionnement, graphes, budget, sélection de lots). **Non vérifié ici** : `gradle` ne résout pas le plugin Kotlin dans le cloud (Maven : 429) ; les tests ont été exécutés avec le compilateur Kotlin livré avec Gradle et une petite doublure de `kotlin.test` (voir le rapport), **à relancer avec `gradle :core:test` sur le Mac**.
+`gradle :core:test --tests 'castbridge.core.LanguesTest'` : 21 tests (scopes, parseur, validateur, licences, correction, SRS, positionnement, graphes, budget, sélection de lots). **Non vérifié ici** : `gradle` ne résout pas le plugin Kotlin dans le cloud (Maven : 429) ; les tests ont été exécutés avec le compilateur Kotlin livré avec Gradle et une petite doublure de `kotlin.test` (voir le rapport), **à relancer avec `gradle :core:test` sur le Mac**.
 
 ## 7. Plan de production par vagues
 
@@ -346,7 +356,7 @@ Les vagues 1 à 3 s'enchaînent **par langue** (une langue peut être en vague 2
 ### 7.2 Critères de qualité des médias (vague 4)
 
 - Chaque piste : transcription alignée au texte du lot ; débit de parole adapté au niveau (A1 lent, C1 naturel) ; bruit < −50 dBFS ; pas de coupure en milieu de mot ; **normalisation à −16 LUFS** ; un seul locuteur par piste de mots, 2 à 3 voix pour les dialogues.
-- Voix synthétique : **uniquement** A0–B1 (mots, phrases, dialogues simples), jamais pour des tons du chinois ou la mélodie du japonais **sans relecture d'un natif** (la synthèse libre déforme les tons ; voir § 8) ; toujours marquée.
+- Voix synthétique (décision : **excellentes voix neuronales libres**, § 8) : tous niveaux, 1 voix de référence par langue et par genre (2 voix par langue pour les dialogues), débit réglé par niveau ; **relecture d'un natif obligatoire** pour les tons du chinois, la mélodie (accent de hauteur) du japonais, les noms propres et chiffres ; échantillon d'écoute validé avant la production de masse ; toujours marquée `synthetic`.
 - Vidéos : ≤ 30 s, 480p, sous-titres (`caption`) dans la langue cible et la langue de départ ; gestes et situations ; **aucun visage identifiable sans autorisation écrite** (la politique médias interdit déjà les photos de personnes).
 
 ## 8. Ce qui est faisable ici et ce qui ne l'est pas
@@ -358,7 +368,7 @@ Mesuré dans l'environnement cloud de cette session (1er octobre 2026).
 | Texte, dialogues, exercices, graphes, JSON | **oui** | c'est la vague 1 à 3 ; qualité à faire relire (natifs) |
 | Figures et animations vectorielles (traits, articulation, gestes) | **oui** | moteur et modèles existants ; les **tracés de traits** exigent des données libres ou des tracés écrits à la main |
 | Synthèse vocale libre | **partiellement** | `apt` installe `espeak-ng` ; testé : les 7 langues se synthétisent (cmn, ja, en, de, fr, it, es) ; la qualité est **robotique** (adéquate pour des mots isolés d'A0 ; **tons chinois approximatifs**, mélodie japonaise plate) ; **marquée synthétique** |
-| Voix neuronales libres (Piper, VITS) | **non vérifié** | `pip` joint PyPI (paquet `piper-tts` téléchargeable) mais les **modèles de voix** sont sur Hugging Face, **non joignable** depuis l'environnement ; à faire sur une machine avec accès (le propriétaire ou une session locale) |
+| Voix neuronales libres (Kokoro, MeloTTS, Piper) | **non dans le cloud ; chaîne prête** | les **modèles** sont sur Hugging Face, injoignable d'ici (`pip` joint PyPI) ; `tools/langues/tts_synth.py` synthétise un fichier de répliques avec le moteur choisi (repli espeak-ng), encode en Opus, calcule les tailles et écrit `media.json` ; **à exécuter sur un poste avec accès réseau** (Mac du propriétaire, session locale) ; modèles et licences de voix à vérifier au téléchargement |
 | Enregistrements humains libres (Tatoeba, Common Voice, Wikimedia Commons) | **non** depuis le cloud | `tatoeba.org`, `commons.wikimedia.org`, Hugging Face : **refusés** par le proxy du cloud (réponse vide) ; à télécharger **hors du cloud** dans le dépôt privé `castbridge-content`, avec le manifeste de licences |
 | Encodage Opus, H.264 480p, WebP | **oui** | `ffmpeg` avec `libopus`, `libx264`, `libwebp` et `aac` (mesuré : 28 Ko → 1,2 Ko pour 1 s de voix) |
 | Vidéo avec personnes (dialogues filmés) | **non** | exige des acteurs, une prise de vue et des droits à l'image |
@@ -394,14 +404,20 @@ Par vague, un rapport JSON comme celui de la rubrique pédagogique (un par lot) 
 - **Rubrique pédagogique** : critère `levelFidelity` à interpréter pour les langues en « fidélité au descripteur du niveau CECRL du § 1.2 » ; critères `assessmentAlignment` = item / compétence / niveau annoncés.
 - **`LotApi`** : aucune modification ; deux `feature` nouvelles (`langues`, `langues-media`) suffisent au contrat existant (`LotId(feature, scope)`).
 
-## 11. Décisions et questions pour le propriétaire
+## 11. Décisions du propriétaire (2026-10-01) et questions restantes
 
-1. **Quota média du téléphone et de la TV (bloquant pour la vague 4).** Le cadre des lots limite le téléphone à 100 Mo pour *tous* les lots et le serveur à 10 Mo par lot. Il faut un **espace Langues** distinct. *Recommandation* : quota réglable par l'utilisateur sur le téléphone (défaut 1 Go), copie vers la TV dans le volume de la bibliothèque (USB d'abord), serveur : 100 Mo par lot média.
-2. **Licence du contenu dérivé.** Utiliser des données CC BY-SA (CC-CEDICT, JMdict, Wiktionary, Tatoeba en partie) oblige à publier le contenu dérivé **sous la même licence**. *Recommandation* : publier tout le contenu « Langues » sous **CC BY-SA 4.0** (le code reste sous la licence du dépôt) et exclure toute source NC/ND ; à confirmer par vous ou un juriste. Les données de traits **Make Me a Hanzi (licence Arphic)** sont à examiner avant tout usage ; KanjiVG (CC BY-SA 3.0) est compatible.
-3. **Enregistrements humains.** Aucun agent cloud ne peut produire de bonnes voix. Voulez-vous (a) recruter des voix natives (budget et personnes), (b) accepter la synthèse libre pour A0–B1 avec marquage, (c) importer des enregistrements libres depuis `castbridge-content` avec un accès réseau ? *Recommandation* : (b) pour démarrer + (c) pour les phrases, (a) pour les tons du chinois et la suite.
-4. **Ordre des langues dans la vague 1.** Toutes les sept en parallèle (≈ 340 lots) ou d'abord anglais / chinois ? *Recommandation* : anglais, chinois et espagnol en tête (demande et poids), puis les autres.
-5. **Variétés du français et de l'anglais.** Faut-il inclure l'**anglais camerounais / pidgin** et le **français d'Afrique** comme variétés dès B2 ? *Recommandation* : oui, en compréhension, niveau natif.
-6. **Langues de départ supplémentaires** (langues camerounaises) : ouvertes par le format ; à décider plus tard.
+| # | Question | Décision | Conséquence |
+|---|---|---|---|
+| 1 | taille du quota média | **au choix de l'architecte** | espace Langues du téléphone **2 Go par défaut, 100 Mo à 6 Go réglable** ; lot média ≤ 100 Mo, lot texte ≤ 3 Mo ; serveur 100 Mo pour `langues-media` ; TV : volume de la bibliothèque (§ 4.6) |
+| 2 | licences | **le maximum de licences libres** | CC BY-SA acceptée donc contenu dérivé publié en **CC BY-SA 4.0** ; liste élargie (CC BY 2.0/3.0/4.0, CC BY-SA 3.0/4.0, MIT, Apache-2.0, BSD, OFL-1.1, GPL-3.0 pour la sortie d'un moteur) ; NC/ND exclues (§ 5, `LangLicences`) |
+| 3 | audio | **excellentes voix de synthèse** | voix neuronales libres à tous les niveaux, produites hors du cloud par `tools/langues/tts_synth.py`, marquées synthétiques, tons et mélodie relus par un natif (§ 7.2, § 8) |
+
+Questions restantes (non bloquantes) :
+1. **Exécution de la synthèse** : qui la lance ? Il faut un poste avec accès à Hugging Face (modèles Kokoro / MeloTTS / Piper) : le Mac du propriétaire ou la session `castbridge-content` ; ~1 à 2 h de calcul par langue et par niveau sur un CPU récent.
+2. **Données de traits** : Make Me a Hanzi (licence Arphic) reste à faire examiner ; KanjiVG (CC BY-SA 3.0) est accepté.
+3. **Ordre des langues dans la vague 1** : recommandé, anglais, chinois, espagnol en tête.
+4. **Variétés** (anglais camerounais / pidgin, français d'Afrique) : recommandé en compréhension, niveau natif.
+5. **Langues de départ supplémentaires** (langues camerounaises) : ouvertes par le format, à décider plus tard.
 
 ## 12. Outils et fichiers
 
@@ -412,6 +428,7 @@ Par vague, un rapport JSON comme celui de la rubrique pédagogique (un par lot) 
 | `content/langues/zh-a0-salut-fr/` | pack d'exemple (une unité, textes uniquement ; audio décrit dans `media.json` mais non produit) |
 | `content/graph/langue-<code>.json` | 7 graphes générés |
 | `tools/langues/gen-graph.py` | générateur des graphes |
+| `tools/langues/tts_synth.py` | synthèse vocale par lots (Kokoro / MeloTTS / Piper, repli espeak-ng) vers Opus + `media.json` |
 | `tools/content-budget/langues_budget.py` | plan chiffré et vérification de l'enveloppe |
 | `android/core/src/main/kotlin/castbridge/core/langues/` | squelette de code |
-| `android/core/src/test/kotlin/castbridge/core/LanguesTest.kt` | 20 tests |
+| `android/core/src/test/kotlin/castbridge/core/LanguesTest.kt` | 21 tests |

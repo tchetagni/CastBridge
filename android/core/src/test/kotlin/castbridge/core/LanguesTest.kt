@@ -183,4 +183,14 @@ class LanguesTest {
         assertEquals(setOf(media.id), LangPlanner.playableMedia(setOf(LotId("langues", "zh-a1-salut-en")), setOf(media.id)))   // the English text twin is enough
         assertNull(LangLots.parseMedia("zh-a1-salut-fr")); assertEquals(Lang.ZH, LangLots.targetOf(media.id)); assertNull(LangLots.targetOf(LotId("quiz", "zh-a1-salut")))
     }
+    @Test fun freeLicencesAreAcceptedAndSyntheticVoicesNeedAFreeVoiceLicence() {
+        val p = samplePack()
+        val m = p.media.values.first()
+        for (l in listOf("CC-BY-SA-3.0", "MIT", "Apache-2.0", "OFL-1.1", "CC-BY-3.0")) assertTrue(l in LangLicences.allowed, l)
+        for (l in listOf("CC-BY-NC-4.0", "CC-BY-ND-4.0", "CPML")) assertFalse(l in LangLicences.allowed, l)
+        assertEquals(emptyList(), LangValidator.validate(p.copy(media = p.media + (m.id to m.copy(voiceLicense = "Apache-2.0", engine = "kokoro-82m")))))
+        assertContains(LangValidator.validate(p.copy(media = p.media + (m.id to m.copy(voiceLicense = null)))).joinToString(), "licence de la voix")
+        assertContains(LangValidator.validate(p.copy(media = p.media + (m.id to m.copy(voiceLicense = "CPML")))).joinToString(), "licence de la voix")
+        assertEquals(2048, LangBudget.PHONE_LANG_DEFAULT_MB)
+    }
 }
