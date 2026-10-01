@@ -1,0 +1,1743 @@
+{
+ "chapter": "form2-maths-geometry",
+ "lessons": [
+  {
+   "id": "form2-maths-polygons",
+   "title": "Polygons: interior and exterior angles",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 2 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Name polygons by their number of sides",
+    "Find the sum of the interior angles of a polygon",
+    "Find interior and exterior angles of regular polygons",
+    "Decide which regular polygons fit round a point"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form2-maths-geometry-e01",
+    "form2-maths-geometry-e02",
+    "form2-maths-geometry-e03",
+    "form2-maths-geometry-e04",
+    "form2-maths-geometry-e05",
+    "form2-maths-geometry-e06"
+   ],
+   "selfCheck": [
+    "form2-maths-polygons-q1",
+    "form2-maths-polygons-q2",
+    "form2-maths-polygons-q3",
+    "form2-maths-polygons-q4",
+    "form2-maths-polygons-q5"
+   ],
+   "reviewNotes": [
+    "The hexagon drawing uses six vertices computed at 60° intervals.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Sum of angles",
+     "md": "A polygon with n sides can be cut into (n − 2) triangles from one vertex, so the interior angles add up to:",
+     "tex": "S = (n - 2) \\times 180^\\circ"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Regular polygons",
+     "md": "A **regular** polygon has all sides equal and all angles equal. Its exterior angles add up to 360°, so each exterior angle is $\\frac{360^\\circ}{n}$ and each interior angle is $180^\\circ - \\frac{360^\\circ}{n}$. At a vertex, interior + exterior = 180°."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Names",
+     "md": "3 sides: triangle; 4: quadrilateral; 5: pentagon; 6: hexagon; 7: heptagon; 8: octagon; 9: nonagon; 10: decagon; 12: dodecagon. In a **tessellation** shapes fit together with no gaps: the angles round each point must add up to 360°."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using n × 180 instead of (n − 2) × 180.\n- Using the interior angle instead of the exterior angle to find the number of sides.\n- Assuming every irregular polygon has equal angles."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: unknown angle",
+     "statement": "Five angles of a hexagon are 110°, 120°, 130°, 140° and 150°. Find the sixth.",
+     "steps": [
+      "Sum for a hexagon: (6 − 2) × 180 = 720°.",
+      "The five known angles add up to 110 + 120 + 130 + 140 + 150 = 650°.",
+      "The sixth angle is 720 − 650 = 70°."
+     ],
+     "answer": "**70°**",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 250,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         280.0,
+         120.0,
+         240.0,
+         50.7,
+         160.0,
+         50.7,
+         120.0,
+         120.0,
+         160.0,
+         189.3,
+         240.0,
+         189.3
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 125,
+        "text": "120° each",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 235,
+        "text": "Regular hexagon: (6 − 2) × 180 = 720°",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2: regular polygon",
+     "statement": "Each exterior angle of a regular polygon is 40°. How many sides has it and what is each interior angle? Can the polygon tessellate?",
+     "steps": [
+      "Number of sides = 360 ÷ 40 = 9.",
+      "Interior angle = 180 − 40 = 140°.",
+      "140 does not divide 360, so identical regular nonagons alone cannot fill the plane without gaps."
+     ],
+     "answer": "**9 sides; 140°; no tessellation.**"
+    }
+   ],
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-bearings-scale",
+   "title": "Bearings and scale drawing",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 2 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Measure and write three-figure bearings",
+    "Find a back bearing",
+    "Use scales on maps and scale drawings",
+    "Solve simple navigation problems"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form2-maths-geometry-e07",
+    "form2-maths-geometry-e08",
+    "form2-maths-geometry-e09",
+    "form2-maths-geometry-e10",
+    "form2-maths-geometry-e11",
+    "form2-maths-geometry-e12"
+   ],
+   "selfCheck": [
+    "form2-maths-bearings-scale-q1",
+    "form2-maths-bearings-scale-q2",
+    "form2-maths-bearings-scale-q3",
+    "form2-maths-bearings-scale-q4",
+    "form2-maths-bearings-scale-q5"
+   ],
+   "reviewNotes": [
+    "The bearing figure is schematic. In the ship example the bearing is computed with tan⁻¹ (right-angled trigonometry is formally taught in Form 3); check where the scheme introduces it.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Three-figure bearings",
+     "md": "A **bearing** is an angle measured **clockwise from North**, always written with three figures: North = 000°, East = 090°, South = 180°, West = 270°. The bearing of B from A means: stand at A, face North, then turn clockwise to face B."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Back bearings",
+     "md": "The bearing of A from B differs from the bearing of B from A by 180°. If B is on a bearing of 065° from A, then A is on a bearing of 065° + 180° = 245° from B. If the first bearing is more than 180°, **subtract** 180° instead."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 220,
+      "items": [
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 175,
+        "x2": 200,
+        "y2": 45,
+        "color": "grey",
+        "width": 2,
+        "dash": true,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 36,
+        "text": "N",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 175,
+        "x2": 299.7,
+        "y2": 128.5,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 188,
+        "y": 193,
+        "text": "A",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 309.7,
+        "y": 122.5,
+        "text": "B",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 236,
+        "y": 118,
+        "text": "065°",
+        "size": 13,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "A at the centre, North dashed up, B on a bearing of 065° from A.",
+     "alt": "A diagram with north line and a line from A to B at 65 degrees clockwise from north."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Scales",
+     "md": "A map scale 1 : 50 000 means 1 cm on the map stands for 50 000 cm = 500 m on the ground. To find a real distance multiply the map distance by the scale; for a scale drawing choose a convenient scale, such as 1 cm : 2 km, draw the north line at every point and measure bearings with a protractor."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Measuring anticlockwise instead of clockwise.\n- Writing 65° instead of 065°.\n- Measuring the angle from the wrong point: the bearing 'of B from A' starts at A."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: back bearing and scale",
+     "statement": "B is on a bearing of 065° from A. Find the bearing of A from B. On a map with scale 1 : 50 000, A and B are 4 cm apart; find the real distance.",
+     "steps": [
+      "Back bearing = 065° + 180° = 245°.",
+      "Real distance = 4 × 50 000 = 200 000 cm.",
+      "200 000 cm = 2 000 m = 2 km."
+     ],
+     "answer": "**245°; 2 km.**",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 220,
+      "items": [
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 175,
+        "x2": 200,
+        "y2": 45,
+        "color": "grey",
+        "width": 2,
+        "dash": true,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 36,
+        "text": "N",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 175,
+        "x2": 299.7,
+        "y2": 128.5,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 188,
+        "y": 193,
+        "text": "A",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 309.7,
+        "y": 122.5,
+        "text": "B",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 236,
+        "y": 118,
+        "text": "065°",
+        "size": 13,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2: ship",
+     "statement": "A boat leaves port A and sails 12 km due east to B, then 5 km due north to C. Find AC and the bearing of C from A.",
+     "steps": [
+      "Right-angled triangle: AC² = 12² + 5² = 169, so AC = 13 km.",
+      "Measured clockwise from North, the angle is tan⁻¹(east ÷ north) = tan⁻¹(12 ÷ 5) ≈ 67.4°.",
+      "The bearing is 067.4°, i.e. about 067°."
+     ],
+     "answer": "**AC = 13 km; bearing about 067°.**",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 200,
+        "x2": 200,
+        "y2": 200,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 200,
+        "x2": 200,
+        "y2": 150,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 200,
+        "x2": 200,
+        "y2": 150,
+        "color": "red",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "text",
+        "x": 66,
+        "y": 205,
+        "text": "A",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 214,
+        "y": 205,
+        "text": "B",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 214,
+        "y": 150,
+        "text": "C",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 140,
+        "y": 220,
+        "text": "12 km east",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 178,
+        "text": "5 km north",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 160,
+        "text": "13 km",
+        "size": 13,
+        "anchor": "middle",
+        "color": "red"
+       }
+      ]
+     }
+    }
+   ],
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-circles",
+   "title": "Circles: circumference and area",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 2 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Name the parts of a circle",
+    "Calculate circumference and area",
+    "Use π = 22/7 or 3.14 as the question directs",
+    "Find perimeters and areas of shapes made from circles and rectangles"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form2-maths-geometry-e13",
+    "form2-maths-geometry-e14",
+    "form2-maths-geometry-e15",
+    "form2-maths-geometry-e16",
+    "form2-maths-geometry-e17",
+    "form2-maths-geometry-e18"
+   ],
+   "selfCheck": [
+    "form2-maths-circles-q1",
+    "form2-maths-circles-q2",
+    "form2-maths-circles-q3",
+    "form2-maths-circles-q4",
+    "form2-maths-circles-q5"
+   ],
+   "reviewNotes": [
+    "Arc length and sector area are left for Form 3. Check which value of π the exam convention requires.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Parts of a circle",
+     "md": "The **circumference** is the distance round the circle. The **radius** r goes from the centre to the circle, the **diameter** d = 2r goes through the centre. An **arc** is part of the circumference, a **chord** joins two points, and a **sector** is a slice like a pizza slice. The number π (about 3.14, or 22/7) is the ratio circumference ÷ diameter for every circle."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Formulae",
+     "md": "Circumference and area of a circle of radius r:",
+     "tex": "C = 2 \\pi r \\qquad A = \\pi r^2"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 120,
+        "r": 80,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 120,
+        "x2": 280,
+        "y2": 120,
+        "color": "grey",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 120,
+        "x2": 251.42300877492315,
+        "y2": 58.71644455048176,
+        "color": "red",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 112,
+        "text": "d",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 262,
+        "y": 70,
+        "text": "r",
+        "size": 14,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 225,
+        "text": "C = 2πr = πd,   A = πr²",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A circle with diameter d, radius r and the formulae for C and A.",
+     "alt": "A circle with a dashed diameter and a red radius."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Method",
+     "md": "Check whether you are given the radius or the diameter (r = d ÷ 2). Use π = 22/7 when the radius is a multiple of 7, otherwise use 3.14 or the π key; say which value you use. For a **semicircle**, take half of the circle but remember to add the diameter when you want the perimeter."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using the diameter in A = πr² without halving it.\n- Mixing up circumference (a length, in cm) and area (in cm²).\n- Forgetting the straight edge when the perimeter of a semicircle is needed."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: a wheel",
+     "statement": "A bicycle wheel has a diameter of 70 cm (take π = 22/7). Find its circumference. How many turns does it make on a 1.1 km road?",
+     "steps": [
+      "Circumference = π × d = 22/7 × 70 = 220 cm.",
+      "1.1 km = 110 000 cm.",
+      "Turns = 110 000 ÷ 220 = 500."
+     ],
+     "answer": "**220 cm; 500 turns.**",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 120,
+        "r": 80,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 120,
+        "x2": 280,
+        "y2": 120,
+        "color": "grey",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 120,
+        "x2": 251.42300877492315,
+        "y2": 58.71644455048176,
+        "color": "red",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 112,
+        "text": "d",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 262,
+        "y": 70,
+        "text": "r",
+        "size": 14,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 225,
+        "text": "C = 2πr = πd,   A = πr²",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2: a compound shape",
+     "statement": "A play area at Garoua is a rectangle 20 m by 14 m with a semicircle of diameter 14 m added on one short side (π = 22/7). Find its area and perimeter.",
+     "steps": [
+      "Area = 20 × 14 + ½ × 22/7 × 7² = 280 + 77 = 357 m².",
+      "Curved edge = ½ × 22/7 × 14 = 22 m.",
+      "Perimeter = 20 + 20 + 14 + 22 = 76 m (the diameter side is inside)."
+     ],
+     "answer": "**357 m²; 76 m**"
+    }
+   ],
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-volume",
+   "title": "Volume and capacity of prisms and cylinders",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 2 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Calculate the volume of cuboids, cubes and prisms",
+    "Calculate the volume of a cylinder",
+    "Convert between m³, cm³ and litres",
+    "Solve problems on tanks and containers"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form2-maths-geometry-e19",
+    "form2-maths-geometry-e20",
+    "form2-maths-geometry-e21",
+    "form2-maths-geometry-e22",
+    "form2-maths-geometry-e23",
+    "form2-maths-geometry-e24"
+   ],
+   "selfCheck": [
+    "form2-maths-volume-q1",
+    "form2-maths-volume-q2",
+    "form2-maths-volume-q3",
+    "form2-maths-volume-q4",
+    "form2-maths-volume-q5"
+   ],
+   "reviewNotes": [
+    "Cones, pyramids and spheres are left for Form 3.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Volume formulae",
+     "md": "The volume of a **prism** (any solid with a constant cross-section) is the area of the cross-section times the length. For a cuboid and a cylinder:",
+     "tex": "V_{\\text{cuboid}} = l \\times w \\times h \\qquad V_{\\text{cylinder}} = \\pi r^2 h"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Units of volume and capacity",
+     "md": "1 m³ = 1 000 000 cm³. 1 litre = 1 000 cm³, so 1 m³ = 1 000 litres. Volume is measured in cubic units (cm³, m³). **Capacity** is how much a container holds, in litres. Always convert all lengths to the same unit before multiplying."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 220,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         60,
+         170,
+         240,
+         170,
+         240,
+         70,
+         60,
+         70
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         240,
+         70,
+         300,
+         30,
+         120,
+         30,
+         60,
+         70
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         240,
+         170,
+         300,
+         130,
+         300,
+         30,
+         240,
+         70
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 190,
+        "text": "2 m",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 308,
+        "y": 105.0,
+        "text": "1 m",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 284.0,
+        "y": 44.0,
+        "text": "1.5 m",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A cuboid tank 2 m long, 1.5 m wide and 1 m high.",
+     "alt": "A drawing of a rectangular box with its three dimensions labelled."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Method for prisms",
+     "md": "Step 1: find the area of the cross-section (for a triangle ½ × base × height). Step 2: multiply by the length of the prism. Step 3: write the unit. A triangular prism with base 6 cm, height 4 cm and length 10 cm has V = ½ × 6 × 4 × 10 = 120 cm³."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Writing volume in square units.\n- Forgetting the ½ for a triangular cross-section.\n- Mixing cm and m in the same product."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: a water tank",
+     "statement": "A rectangular tank at Bamenda measures 2 m by 1.5 m by 1 m. Find its volume and how many litres it holds when full.",
+     "steps": [
+      "V = 2 × 1.5 × 1 = 3 m³.",
+      "1 m³ = 1 000 litres.",
+      "Capacity = 3 000 litres."
+     ],
+     "answer": "**3 m³ = 3 000 litres.**",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 220,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         60,
+         170,
+         240,
+         170,
+         240,
+         70,
+         60,
+         70
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         240,
+         70,
+         300,
+         30,
+         120,
+         30,
+         60,
+         70
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         240,
+         170,
+         300,
+         130,
+         300,
+         30,
+         240,
+         70
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 190,
+        "text": "2 m",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 308,
+        "y": 105.0,
+        "text": "1 m",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 284.0,
+        "y": 44.0,
+        "text": "1.5 m",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2: cylinder",
+     "statement": "A tin is a cylinder with radius 7 cm and height 10 cm (π = 22/7). Find its volume in cm³ and litres.",
+     "steps": [
+      "V = π r² h = 22/7 × 7² × 10 = 22/7 × 490 = 1 540 cm³.",
+      "1 000 cm³ = 1 litre.",
+      "V = 1.54 litres."
+     ],
+     "answer": "**1 540 cm³ = 1.54 litres.**"
+    }
+   ],
+   "chapter": "form2-maths-geometry"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form2-maths-geometry-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form2-maths-polygons",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find the sum of the interior angles of an octagon.",
+   "answer": 1080,
+   "tolerance": 0,
+   "unit": "°",
+   "explanation": "(8 − 2) × 180 = 1 080°.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-geometry-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form2-maths-polygons",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find each exterior angle of a regular pentagon.",
+   "answer": 72,
+   "tolerance": 0,
+   "unit": "°",
+   "explanation": "360 ÷ 5 = 72°.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-geometry-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form2-maths-polygons",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Each interior angle of a regular hexagon is:",
+   "choices": [
+    "120°",
+    "135°",
+    "108°",
+    "60°"
+   ],
+   "answer": 0,
+   "explanation": "720 ÷ 6 = 120.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-geometry-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form2-maths-polygons",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Each interior angle of a regular polygon is 156°. How many sides does it have?",
+   "answer": 15,
+   "tolerance": 0,
+   "explanation": "Exterior = 24°; 360 ÷ 24 = 15.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-geometry-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form2-maths-polygons",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Show that two regular octagons and one square fit together round a point.",
+   "model": "Each octagon angle is 135° and a square angle is 90°. 135 + 135 + 90 = 360°, so there is no gap.",
+   "rubric": "1 mark for 135°, 1 mark for the 90°, 1 mark for the sum of 360°.",
+   "explanation": "Each octagon angle is 135° and a square angle is 90°. 135 + 135 + 90 = 360°, so there is no gap.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-geometry-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form2-maths-polygons",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A floor design in Douala uses regular hexagonal tiles.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find each interior angle of a regular hexagon (°).",
+     "answer": 120,
+     "tolerance": 0,
+     "explanation": "720 ÷ 6.",
+     "unit": "°",
+     "id": "form2-maths-geometry-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "How many hexagons meet at one point?",
+     "answer": 3,
+     "tolerance": 0,
+     "explanation": "360 ÷ 120 = 3.",
+     "id": "form2-maths-geometry-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "Which statement is correct?",
+     "choices": [
+      "Regular heptagons tessellate",
+      "Regular pentagons tessellate",
+      "Regular hexagons tessellate",
+      "Regular octagons alone tessellate"
+     ],
+     "answer": 2,
+     "explanation": "Only 3, 4 and 6 sides give interior angles dividing 360.",
+     "id": "form2-maths-geometry-e06-c"
+    }
+   ],
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-polygons-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-polygons",
+   "prompt": "The interior angles of a pentagon add up to:",
+   "choices": [
+    "900°",
+    "360°",
+    "720°",
+    "540°"
+   ],
+   "answer": 3,
+   "explanation": "(5 − 2) × 180.",
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-polygons-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-polygons",
+   "prompt": "A regular polygon with exterior angle 60° has:",
+   "choices": [
+    "6 sides",
+    "8 sides",
+    "12 sides",
+    "5 sides"
+   ],
+   "answer": 0,
+   "explanation": "360 ÷ 60.",
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-polygons-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-polygons",
+   "prompt": "The exterior angles of any polygon add up to:",
+   "choices": [
+    "180°",
+    "540°",
+    "720°",
+    "360°"
+   ],
+   "answer": 3,
+   "explanation": "One full turn.",
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-polygons-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-polygons",
+   "prompt": "A polygon with 10 sides is a:",
+   "choices": [
+    "octagon",
+    "hexagon",
+    "decagon",
+    "nonagon"
+   ],
+   "answer": 2,
+   "explanation": "Names.",
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-polygons-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-polygons",
+   "prompt": "Interior plus exterior angle at one vertex is:",
+   "choices": [
+    "90°",
+    "180°",
+    "270°",
+    "360°"
+   ],
+   "answer": 1,
+   "explanation": "They lie on a straight line.",
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-geometry-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form2-maths-bearings-scale",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The bearing of East is:",
+   "choices": [
+    "270°",
+    "090°",
+    "180°",
+    "009°"
+   ],
+   "answer": 1,
+   "explanation": "East is a quarter turn clockwise from North.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-geometry-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form2-maths-bearings-scale",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "B is on a bearing of 120° from A. Find the bearing of A from B.",
+   "answer": 300,
+   "tolerance": 0,
+   "unit": "°",
+   "explanation": "120 + 180 = 300°.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-geometry-e09",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form2-maths-bearings-scale",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Map scale 1 : 25 000: 6 cm on the map is how many metres on the ground?",
+   "answer": 1500,
+   "tolerance": 0,
+   "unit": "m",
+   "explanation": "6 × 25 000 = 150 000 cm = 1 500 m.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-geometry-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form2-maths-bearings-scale",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "C is on a bearing of 250° from D. Find the bearing of D from C.",
+   "answer": 70,
+   "tolerance": 0,
+   "unit": "°",
+   "explanation": "250 − 180 = 70°, written 070°.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-geometry-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form2-maths-bearings-scale",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Explain why the bearing 'of B from A' is not the same as 'of A from B' and how they are related.",
+   "model": "The first starts at A and the second at B, with North lines at each point. The two bearings differ by 180°: add 180° if the first is under 180°, subtract 180° if it is over.",
+   "rubric": "1 mark for different starting points, 1 mark for 180°, 1 mark for the add/subtract rule.",
+   "explanation": "The first starts at A and the second at B, with North lines at each point. The two bearings differ by 180°: add 180° if the first is under 180°, subtract 180° if it is over.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-geometry-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form2-maths-bearings-scale",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A hiker walks from Buea 8 km due north and then 6 km due east.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "How far is the hiker in a straight line from Buea (km)?",
+     "answer": 10,
+     "tolerance": 0,
+     "explanation": "√(8² + 6²) = 10.",
+     "unit": "km",
+     "id": "form2-maths-geometry-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the bearing of the hiker from Buea to the nearest degree (use tan⁻¹(6/8)).",
+     "answer": 37,
+     "tolerance": 0.5,
+     "explanation": "tan⁻¹(6 ÷ 8) = 36.9°, so 037°.",
+     "unit": "°",
+     "id": "form2-maths-geometry-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the bearing of Buea from the hiker (°).",
+     "answer": 217,
+     "tolerance": 0.5,
+     "explanation": "37 + 180 = 217°.",
+     "unit": "°",
+     "id": "form2-maths-geometry-e12-c"
+    }
+   ],
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-bearings-scale-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-bearings-scale",
+   "prompt": "A bearing is measured:",
+   "choices": [
+    "from the equator",
+    "from East",
+    "clockwise from North",
+    "anticlockwise from North"
+   ],
+   "answer": 2,
+   "explanation": "Standard convention.",
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-bearings-scale-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-bearings-scale",
+   "prompt": "South has the bearing:",
+   "choices": [
+    "180°",
+    "000°",
+    "090°",
+    "270°"
+   ],
+   "answer": 0,
+   "explanation": "Half turn.",
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-bearings-scale-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-bearings-scale",
+   "prompt": "The bearing 045° points:",
+   "choices": [
+    "South-east",
+    "North-east",
+    "North-west",
+    "South-west"
+   ],
+   "answer": 1,
+   "explanation": "Halfway between N and E.",
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-bearings-scale-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-bearings-scale",
+   "prompt": "On a 1 : 100 000 map, 3 cm represents:",
+   "choices": [
+    "30 km",
+    "300 m",
+    "30 m",
+    "3 km"
+   ],
+   "answer": 3,
+   "explanation": "3 × 100 000 cm = 3 km.",
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-bearings-scale-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-bearings-scale",
+   "prompt": "Bearings should be written with:",
+   "choices": [
+    "two figures",
+    "three figures",
+    "a letter",
+    "one figure"
+   ],
+   "answer": 1,
+   "explanation": "e.g. 007°.",
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-geometry-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form2-maths-circles",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find the circumference of a circle of radius 7 cm (π = 22/7).",
+   "answer": 44,
+   "tolerance": 0,
+   "unit": "cm",
+   "explanation": "2 × 22/7 × 7 = 44 cm.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-geometry-e14",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form2-maths-circles",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find the area of a circle of radius 14 m (π = 22/7).",
+   "answer": 616,
+   "tolerance": 0,
+   "unit": "m²",
+   "explanation": "22/7 × 196 = 616 m².",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-geometry-e15",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form2-maths-circles",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The circumference of a circle with diameter 10 cm (π = 3.14) is:",
+   "choices": [
+    "62.8 cm",
+    "78.5 cm",
+    "31.4 cm",
+    "314 cm"
+   ],
+   "answer": 2,
+   "explanation": "π × d.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-geometry-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form2-maths-circles",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A circular pond has circumference 88 m. Find its radius (π = 22/7).",
+   "answer": 14,
+   "tolerance": 0,
+   "unit": "m",
+   "explanation": "2 × 22/7 × r = 88, so r = 14 m.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-geometry-e17",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form2-maths-circles",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A student says the area of a circle of diameter 10 cm is 3.14 × 10² = 314 cm². Find the mistake and give the correct area.",
+   "model": "She used the diameter instead of the radius. r = 5 cm, so A = 3.14 × 25 = 78.5 cm².",
+   "rubric": "1 mark for the mistake, 1 mark for r = 5, 1 mark for 78.5.",
+   "explanation": "She used the diameter instead of the radius. r = 5 cm, so A = 3.14 × 25 = 78.5 cm².",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-geometry-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form2-maths-circles",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A circular market square in Bafoussam has radius 21 m (take π = 22/7).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find its circumference (m).",
+     "answer": 132,
+     "tolerance": 0,
+     "explanation": "2 × 22/7 × 21 = 132.",
+     "unit": "m",
+     "id": "form2-maths-geometry-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find its area (m²).",
+     "answer": 1386,
+     "tolerance": 0,
+     "explanation": "22/7 × 441 = 1 386.",
+     "unit": "m²",
+     "id": "form2-maths-geometry-e18-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Paving costs 1 500 FCFA per m². Find the cost in millions of FCFA to 2 d.p.",
+     "answer": 2.08,
+     "tolerance": 0.01,
+     "explanation": "1 386 × 1 500 = 2 079 000 FCFA ≈ 2.08 million.",
+     "id": "form2-maths-geometry-e18-c"
+    }
+   ],
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-circles-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-circles",
+   "prompt": "The diameter is:",
+   "choices": [
+    "π times the radius",
+    "twice the radius",
+    "half the radius",
+    "equal to the radius"
+   ],
+   "answer": 1,
+   "explanation": "d = 2r.",
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-circles-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-circles",
+   "prompt": "The formula for the area of a circle:",
+   "choices": [
+    "$2\\pi r$",
+    "$\\pi d^2$",
+    "$\\pi r$",
+    "$\\pi r^2$"
+   ],
+   "answer": 3,
+   "explanation": "Area uses r².",
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-circles-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-circles",
+   "prompt": "Circumference of a circle with radius 7 (π = 22/7):",
+   "choices": [
+    "14",
+    "22",
+    "154",
+    "44"
+   ],
+   "answer": 3,
+   "explanation": "2πr.",
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-circles-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-circles",
+   "prompt": "The line joining two points on a circle is a:",
+   "choices": [
+    "radius",
+    "sector",
+    "tangent",
+    "chord"
+   ],
+   "answer": 3,
+   "explanation": "Definition.",
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-circles-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-circles",
+   "prompt": "A sector is:",
+   "choices": [
+    "a slice bounded by two radii and an arc",
+    "the circle's centre",
+    "a straight line",
+    "a diameter"
+   ],
+   "answer": 0,
+   "explanation": "Pizza slice.",
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-geometry-e19",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form2-maths-volume",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find the volume of a cube of edge 5 cm.",
+   "answer": 125,
+   "tolerance": 0,
+   "unit": "cm³",
+   "explanation": "5³ = 125 cm³.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-geometry-e20",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form2-maths-volume",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find the volume of a cuboid 8 cm by 5 cm by 3 cm.",
+   "answer": 120,
+   "tolerance": 0,
+   "unit": "cm³",
+   "explanation": "8 × 5 × 3.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-geometry-e21",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form2-maths-volume",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "2 500 cm³ is how many litres?",
+   "choices": [
+    "250 litres",
+    "0.25 litres",
+    "25 litres",
+    "2.5 litres"
+   ],
+   "answer": 3,
+   "explanation": "Divide by 1 000.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-geometry-e22",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form2-maths-volume",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A triangular prism has a triangular face with base 6 cm and height 4 cm, and is 10 cm long. Find its volume.",
+   "answer": 120,
+   "tolerance": 0,
+   "unit": "cm³",
+   "explanation": "½ × 6 × 4 × 10 = 120 cm³.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-geometry-e23",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form2-maths-volume",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A cylinder has radius 14 cm and height 5 cm. Show that its volume is 3 080 cm³ (π = 22/7).",
+   "model": "V = 22/7 × 14² × 5 = 22/7 × 196 × 5 = 22 × 28 × 5 = 3 080 cm³.",
+   "rubric": "1 mark for the formula, 1 mark for substituting r = 14, 1 mark for 3 080.",
+   "explanation": "V = 22/7 × 14² × 5 = 22/7 × 196 × 5 = 22 × 28 × 5 = 3 080 cm³.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-geometry-e24",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form2-maths-volume",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A cylindrical water tank at Kumba has radius 0.7 m and height 2 m (π = 22/7).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find its volume in m³.",
+     "answer": 3.08,
+     "tolerance": 0.001,
+     "explanation": "22/7 × 0.49 × 2 = 3.08.",
+     "unit": "m³",
+     "id": "form2-maths-geometry-e24-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find its capacity in litres.",
+     "answer": 3080,
+     "tolerance": 0,
+     "explanation": "3.08 × 1 000.",
+     "unit": "l",
+     "id": "form2-maths-geometry-e24-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Water costs 500 FCFA per m³. How much does it cost to fill the tank (FCFA)?",
+     "answer": 1540,
+     "tolerance": 0,
+     "explanation": "3.08 × 500 = 1 540.",
+     "unit": "FCFA",
+     "id": "form2-maths-geometry-e24-c"
+    }
+   ],
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-volume-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-volume",
+   "prompt": "The unit of volume is:",
+   "choices": [
+    "cm³",
+    "cm²",
+    "kg",
+    "cm"
+   ],
+   "answer": 0,
+   "explanation": "Cubic units.",
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-volume-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-volume",
+   "prompt": "1 m³ equals:",
+   "choices": [
+    "100 litres",
+    "1 000 litres",
+    "10 litres",
+    "1 000 000 litres"
+   ],
+   "answer": 1,
+   "explanation": "Common conversion.",
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-volume-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-volume",
+   "prompt": "The volume of a cylinder is:",
+   "choices": [
+    "$2\\pi r h$",
+    "$\\frac{1}{3}\\pi r^2 h$",
+    "$\\pi r h$",
+    "$\\pi r^2 h$"
+   ],
+   "answer": 3,
+   "explanation": "Base area times height.",
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-volume-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-volume",
+   "prompt": "A cuboid 4 m by 3 m by 2 m has volume:",
+   "choices": [
+    "12 m³",
+    "24 m²",
+    "24 m³",
+    "9 m³"
+   ],
+   "answer": 2,
+   "explanation": "4 × 3 × 2.",
+   "chapter": "form2-maths-geometry"
+  },
+  {
+   "id": "form2-maths-volume-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-maths-volume",
+   "prompt": "For capacity, 1 litre equals:",
+   "choices": [
+    "10 cm³",
+    "1 000 cm³",
+    "10 000 cm³",
+    "100 cm³"
+   ],
+   "answer": 1,
+   "explanation": "Standard.",
+   "chapter": "form2-maths-geometry"
+  }
+ ]
+}

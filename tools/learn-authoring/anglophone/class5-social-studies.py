@@ -1,0 +1,282 @@
+import sys, os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from p45_kit import *
+
+TAG["v"] = "Class 5 Social Studies"
+p = Pack("class5-social-studies", "Social Studies — Class 5", level="Class 5", subject="histoire-geo", cursus="primary",
+         description="Class 5 Social Studies for the English-speaking primary subsystem: Africa, map skills, the resources and people of Cameroon, early peoples, colonial rule, independence and unification, government and citizenship, regional organisations and natural hazards.",
+         programRef="MINEDUB primary school curriculum (English-speaking subsystem), Level III (Class 5) — Social Studies; to be checked against the official syllabus",
+         wanted="social-studies")
+REF = p.programRef
+SENS = "Facts are limited to well-established, neutral points; names and dates to be checked by a teacher against the official textbook."
+
+# ===================================================== 1. Africa and maps
+ch = p.chapter("africa-maps", "Africa and map skills", REF)
+
+fig = table([["Feature", "Fact"], ["Sahara", "largest hot desert in the world"], ["River Nile", "longest river in Africa"], ["River Congo", "great river of Central Africa"], ["Mount Kilimanjaro", "highest mountain in Africa"], ["Lake Victoria", "largest lake in Africa"]], [130, 240], rh=28, size=13)
+build(ch, "africa", "The continent of Africa", 30,
+      ["Say where Africa is and name the oceans around it.", "Name the five regions of Africa and some famous features.", "Place Cameroon in Africa."],
+      [("key", "definition", "Africa", "Africa is the **second largest continent**. It is surrounded by the **Mediterranean Sea** (north), the **Atlantic Ocean** (west), the **Indian Ocean** (east) and the **Red Sea** (north-east). The **Equator** crosses the middle of Africa. There are **more than fifty countries**. Africa is often divided into five regions: **North, West, Central, East and Southern Africa**."),
+       ("fig", fig, "Some famous African features.", "A table of features and facts: the Sahara is the largest hot desert in the world; the River Nile is the longest river in Africa; the River Congo is a great river of Central Africa; Mount Kilimanjaro is the highest mountain in Africa; Lake Victoria is the largest lake in Africa."),
+       ("key", "retenir", "Cameroon in Africa", "Cameroon is in **Central Africa**, just north of the Equator, on the Atlantic coast. Its neighbours are Nigeria, Chad, the Central African Republic, the Republic of the Congo, Gabon and Equatorial Guinea. Africa has **many climates and peoples**: deserts in the north, rainforests near the Equator and savannas in between."),
+       ("key", "pieges", "Common mistakes", "- Thinking that Africa is a country: it is a **continent** with many countries.\n- Saying that all Africa is desert or all Africa is forest.\n- Putting Mount Kilimanjaro in Cameroon: it is in Tanzania.\n- Confusing a continent with an ocean.")],
+      [("ex", "Example 1", "Name two oceans or seas next to Africa.", ["Look at the sides of Africa.", "The Atlantic Ocean in the west and the Indian Ocean in the east."], "Atlantic Ocean and Indian Ocean.", None),
+       ("ex", "Example 2", "In which region of Africa is Cameroon?", ["Cameroon is near the Equator and the Gulf of Guinea.", "It is in Central Africa."], "Central Africa", fig)],
+      [M("application", "On which continent is Cameroon?", "Africa", ["Asia", "Europe", "South America"], "Africa."),
+       M("application", "Which is the longest river in Africa?", "the Nile", ["the Wouri", "the Sanaga", "the Benue"], "The Nile."),
+       M("application", "Which ocean is on the west side of Africa?", "the Atlantic Ocean", ["the Indian Ocean", "the Pacific Ocean", "the Arctic Ocean"], "Atlantic."),
+       TF("approfondissement", "Africa is a country.", False, "Africa is a continent with more than fifty countries."),
+       MA("approfondissement", "Match each feature with its description.", [("Sahara", "largest hot desert"), ("Kilimanjaro", "highest mountain in Africa"), ("Lake Victoria", "largest lake in Africa"), ("Nile", "longest river in Africa")], "Learn these famous features."),
+       P("A pupil in Garoua looks at a map of Africa. He sees the Sahara in the north, the Congo basin near the Equator and Cameroon in the middle-west.",
+         [PM("In which part of Africa is the Sahara?", "the north", ["the south", "the east", "the west coast only"], "The Sahara is in North Africa."),
+          PM("Which region is Cameroon in?", "Central Africa", ["North Africa", "Southern Africa", "East Africa"], "Central."),
+          PM("What crosses the middle of Africa?", "the Equator", ["the Nile only", "the Sahara only", "the Red Sea"], "The Equator.", points=2)])],
+      [("Africa is a...", "continent", ["country", "city", "river"], "It has many countries."),
+       ("The Equator...", "crosses the middle of Africa", ["is north of Africa", "is in Europe", "is a river"], "An imaginary line."),
+       ("The largest hot desert is the...", "Sahara", ["Congo", "Nile", "Alps"], "In North Africa."),
+       ("Which is the highest mountain in Africa?", "Mount Kilimanjaro", ["Mount Cameroon", "Mount Everest", "Mount Oku"], "In Tanzania."),
+       ("Cameroon is in...", "Central Africa", ["North Africa", "Southern Africa", "East Africa"], "Near the Gulf of Guinea.")],
+      [SENS, "'Second largest continent', 'more than fifty countries' and the listed features are standard facts; check the five-region division with the textbook."])
+
+fig = shapes([CIRCLE(110, 100, 80, fill="lightblue", width=3), LINE(30, 100, 190, 100, color="red", width=3), LINE(110, 20, 110, 180, color="green", width=3),
+              T(205, 55, "Northern hemisphere", 12, anchor="start", bold=True), T(205, 104, "Equator (red line)", 12, anchor="start", bold=True, color="red"),
+              T(205, 155, "Southern hemisphere", 12, anchor="start", bold=True), T(110, 200, "Prime meridian (green line)", 12, color="green", bold=True)], 400, 215)
+assert 4.5 * 50 == 225 and 225 / 50 == 4.5
+build(ch, "map-skills", "Map skills: scale, equator and grid references", 35,
+      ["Use a scale to find real distances.", "Say what the Equator and the Prime Meridian are.", "Use grid references and directions on a map."],
+      [("key", "definition", "Scale", "A **scale** tells how much the real distance is shrunk on the map. A scale of **1 cm to 50 km** means that 1 cm on the map is 50 km on the ground. To find a real distance, **measure** the map distance in centimetres and **multiply** by the scale: 4.5 cm on the map is 4.5 × 50 = **225 km**. A **scale bar** shows the same idea."),
+       ("key", "definition", "Equator and meridian", "The **Equator** is an imaginary line round the middle of the Earth. It divides the world into the **Northern and Southern hemispheres**. The **Prime Meridian** runs from north to south through Greenwich in London; it divides the world into the **Eastern and Western hemispheres**. **Latitude** measures north or south of the Equator; **longitude** measures east or west of the Prime Meridian."),
+       ("fig", fig, "The Equator and the Prime Meridian.", "A circle for the Earth with a horizontal red line for the Equator and a vertical green line for the Prime Meridian. Labels name the northern and southern hemispheres."),
+       ("key", "pieges", "Common mistakes", "- Forgetting to multiply by the scale (reading 4.5 cm as 4.5 km).\n- Measuring along the wrong line: use a ruler for straight distances.\n- Mixing the Equator (east-west line) and the Prime Meridian (north-south line).\n- Writing grid references with the wrong order: letter first, then number.")],
+      [("ex", "Example 1", "Two towns are 4.5 cm apart on a map with scale 1 cm to 50 km. How far apart are they?", ["Real distance = map distance × scale.", "4.5 × 50 = 225."], "225 km", None),
+       ("ex", "Example 2", "Is Cameroon north or south of the Equator?", ["Cameroon lies a little north of the Equator.", "So it is in the Northern hemisphere."], "North of the Equator.", fig)],
+      [N("application", "The scale is 1 cm to 20 km. Two towns are 6 cm apart on the map. What is the real distance?", 120, "6 × 20 = 120.", unit="km"),
+       M("application", "The Equator divides the Earth into...", "northern and southern hemispheres", ["east and west hemispheres", "two oceans", "day and night"], "The Equator is a line of latitude."),
+       M("application", "In a grid reference such as C4, the letter gives the...", "column", ["row", "scale", "key"], "Letter first."),
+       N("approfondissement", "On a map with scale 1 cm to 10 km, a road is 13.5 cm long. How many km is it?", 135, "13.5 × 10 = 135.", unit="km"),
+       TF("approfondissement", "The Prime Meridian passes through Greenwich.", True, "A convention used for longitude."),
+       P("On a map of Cameroon the scale is 1 cm to 40 km. Buea and Douala are 2 cm apart. Douala and Yaoundé are 6 cm apart.",
+         [PN("What is the real distance from Buea to Douala?", 80, "2 × 40 = 80.", unit="km"),
+          PN("What is the real distance from Douala to Yaoundé?", 240, "6 × 40 = 240.", unit="km"),
+          PN("How far is it from Buea to Yaoundé if you go through Douala?", 320, "80 + 240 = 320.", unit="km", points=2)])],
+      [("A scale of 1 cm to 5 km means 3 cm is...", "15 km", ["3 km", "8 km", "5 km"], "3 × 5."),
+       ("The Equator is at a latitude of...", "0 degrees", ["90 degrees", "180 degrees", "45 degrees"], "The starting line for latitude."),
+       ("The Prime Meridian helps us to measure...", "longitude", ["latitude", "rainfall", "height"], "East and west."),
+       ("To find a real distance we...", "multiply the map distance by the scale", ["add the scale", "divide by 10", "subtract the scale"], "Map distance × scale."),
+       ("The letter in a grid reference is written...", "first", ["last", "in brackets", "twice"], "Like C4.")],
+      [SENS, "Distances in the problems are exercise values, not real distances."])
+
+# ===================================================== 2. Cameroon
+ch = p.chapter("cameroon", "Resources and people of Cameroon", REF)
+
+fig = table([["Resource", "Where / how used"], ["fertile soil", "cocoa, coffee, bananas, food crops"], ["forests", "timber, firewood, wildlife"], ["rivers", "fish, water, electric power (dams)"], ["petroleum", "offshore, sold abroad"], ["sea and ports", "fishing, trade (Douala, Kribi)"]], [130, 250], rh=28, size=13)
+build(ch, "resources", "Natural resources and industries of Cameroon", 35,
+      ["Name the main natural resources of Cameroon.", "Tell raw materials from manufactured goods.", "Explain why processing crops brings more money."],
+      [("key", "definition", "Resources", "**Natural resources** are useful things from nature: **fertile soil** for crops, **forests** for timber, **rivers** for fish and **hydroelectric power**, the **sea** for fish and ports, and **petroleum**. Cameroon sells **raw materials** such as cocoa, coffee, cotton, timber and bananas to other countries."),
+       ("fig", fig, "Natural resources and their uses.", "A table of natural resources and uses: fertile soil for cocoa, coffee, bananas and food crops; forests for timber, firewood and wildlife; rivers for fish, water and electric power; petroleum offshore sold abroad; sea and ports for fishing and trade."),
+       ("key", "retenir", "Industries", "**Industries** turn raw materials into goods. Examples: **cocoa beans** into chocolate, **cotton** into cloth, **palm nuts** into oil, **logs** into planks, **sugar cane** into sugar. This is called **processing**. Processed goods sell for **more money** than raw ones and give people **jobs**. Many factories are in **Douala**, the biggest port and city."),
+       ("key", "pieges", "Common mistakes", "- Thinking that a resource lasts forever: forests, soil and fish must be protected.\n- Saying that only farming is important: industry, trade and services matter too.\n- Calling cocoa beans a manufactured good: they are raw materials; chocolate is manufactured.\n- Believing that natural resources are the same in every region.")],
+      [("ex", "Example 1", "Sort into raw materials or manufactured goods: cotton, cloth, cocoa beans, chocolate.", ["Cotton and cocoa beans come straight from the farm: raw materials.", "Cloth and chocolate are made in factories: manufactured goods."], "Raw: cotton, cocoa beans; manufactured: cloth, chocolate.", None),
+       ("ex", "Example 2", "A farmer sells 800 kg of cocoa beans at 1,000 FCFA per kg. A factory sells the same weight of processed cocoa products at 2,500 FCFA per kg. How much more money does the processed cocoa bring?", ["Raw: 800 × 1,000 = 800,000. Processed: 800 × 2,500 = 2,000,000.", "Difference: 2,000,000 − 800,000 = 1,200,000."], "1,200,000 FCFA more.", None)],
+      [M("application", "Which is a natural resource?", "a forest", ["a road", "a factory", "a school"], "It comes from nature."),
+       M("application", "Which is a manufactured good?", "cloth", ["cotton in the field", "cocoa beans", "logs in the forest"], "A factory makes it."),
+       M("application", "What is processing?", "turning raw materials into other goods", ["growing crops", "hunting animals", "planting trees"], "Factories change raw materials."),
+       N("approfondissement", "A factory buys 5 tonnes of cotton at 400,000 FCFA per tonne. How much does it pay?", 2000000, "5 × 400,000 = 2,000,000.", unit="FCFA"),
+       TF("approfondissement", "Processing crops creates jobs.", True, "Factories need workers."),
+       P("A cooperative in Kumba produces 2,000 kg of palm oil a month and sells it at 1,200 FCFA per kg.",
+         [PN("How much money does it earn in a month?", 2400000, "2,000 × 1,200 = 2,400,000.", unit="FCFA"),
+          PN("How much does it earn in 6 months at the same level?", 14400000, "2,400,000 × 6 = 14,400,000.", unit="FCFA"),
+          PM("Why does processing palm nuts into oil bring more money?", "the product is worth more and gives jobs", ["palm nuts are poisonous", "oil is a raw material", "it removes jobs"], "Value is added.", points=2)])],
+      [("Hydroelectric power comes from...", "flowing water", ["wind only", "coal", "petrol"], "Dams on rivers."),
+       ("Sawing logs into planks is...", "processing", ["farming", "fishing", "trading only"], "Making goods."),
+       ("A raw material is...", "a material before it is processed", ["a finished product", "a machine", "a shop"], "Like cocoa beans."),
+       ("Which port is the biggest in Cameroon?", "Douala", ["Garoua", "Bamenda", "Bertoua"], "Douala."),
+       ("Natural resources must be...", "used wisely and protected", ["wasted", "ignored", "burned"], "So that they last.")],
+      [SENS, "Prices and quantities in problems are invented exercise values; no production statistics are given on purpose."])
+
+fig = table([["Place", "What you find"], ["village", "farms, fishing, quiet"], ["town", "markets, shops, schools"], ["city", "factories, ports, many jobs"]], [100, 240], rh=30, size=13)
+build(ch, "settlement", "Villages, towns and cities", 30,
+      ["Tell rural and urban areas apart.", "Say why towns grow near certain places.", "Give advantages and problems of city life."],
+      [("key", "definition", "Rural and urban", "A **rural** area is the countryside: villages with farms, forests and few services. An **urban** area is a town or **city**: many people, houses, shops, schools, hospitals, offices, factories and busy roads. **Yaoundé** and **Douala** are Cameroon's biggest cities; **Bamenda**, **Bafoussam**, **Garoua**, **Maroua**, **Buea** and **Limbe** are other well-known towns."),
+       ("fig", fig, "Village, town and city.", "Three boxes: village with farming, fishing and quiet; town with markets, shops and schools; city with factories, ports and jobs."),
+       ("key", "retenir", "Why towns grow, and rural-urban migration", "Towns grow where there are **ports** (Douala), **roads and railways**, **good soil** and **water**, **markets** and **administration** (Yaoundé). Many people move from villages to cities for **jobs, schools and hospitals**: this is **rural-urban migration**. Cities have **opportunities**, but also **crowding, traffic, rubbish and high rents**. Villages need good roads, schools and clinics so that people can also live well there."),
+       ("key", "pieges", "Common mistakes", "- Thinking that cities have only advantages (or only problems).\n- Looking down on village life: farmers feed the country.\n- Throwing rubbish in drains and streets in towns.\n- Saying that Douala is the capital: it is Yaoundé.")],
+      [("ex", "Example 1", "Give two reasons why people move from villages to cities.", ["Cities offer more jobs and more schools.", "They also have hospitals and other services."], "For jobs and for schools and hospitals.", None),
+       ("ex", "Example 2", "Give one problem of a growing city.", ["Many people live in a small area.", "Traffic jams, rubbish and crowded housing are problems."], "For example traffic jams and rubbish.", None)],
+      [M("application", "A town or city is an...", "urban area", ["rural area", "ocean", "forest only"], "Urban means town."),
+       M("application", "Which place is a rural area?", "a village with farms", ["a big port", "an airport city", "an office district"], "The countryside."),
+       M("application", "Why did Douala grow into a big city?", "it has the main port", ["it has no roads", "it has no people", "it is on a mountain"], "A port brings trade and jobs."),
+       TF("approfondissement", "Rural-urban migration means people move from the village to the town.", True, "Rural to urban."),
+       MA("approfondissement", "Match each town with its region.", [("Bamenda", "North-West"), ("Buea", "South-West"), ("Garoua", "North"), ("Bafoussam", "West")], "Regional capitals."),
+       O("Write four sentences: say one advantage and one problem of living in a big city, and one advantage of village life.",
+         "A big city has many schools, hospitals and jobs. It also has traffic jams and a lot of rubbish. In the village the air is clean and families grow their own food. I think every place needs good roads, schools and clinics.",
+         "Marks (4): one correct advantage of the city (1); one problem of the city (1); one advantage of village life (1); clear sentences and spelling (1).", tier="examen", points=4, difficulty=2)],
+      [("Rural means...", "the countryside", ["the city", "the sea", "the sky"], "Villages and farms."),
+       ("Urban means...", "a town or city", ["a farm", "a forest", "a river"], "Many people."),
+       ("A problem of big cities is...", "traffic and rubbish", ["too much silence only", "no people", "no shops"], "Crowding."),
+       ("Rural-urban migration is the movement of people from...", "villages to cities", ["cities to the sea", "farms to the sky", "schools to markets"], "Searching for jobs, schools, services."),
+       ("Which is the capital of Cameroon?", "Yaoundé", ["Douala", "Bamenda", "Garoua"], "Yaoundé.")],
+      [SENS, "No population figures are given on purpose."])
+
+# ===================================================== 3. history
+ch = p.chapter("history", "History of Cameroon", REF)
+
+fig = table([["People", "Where", "Known for"], ["Bamum", "West (Foumban)", "own writing system"], ["Duala", "the coast", "coastal traders"], ["Grassfields", "West, North-West", "fons, art, markets"], ["Baka", "South and East forests", "forest knowledge"]], [100, 140, 140], rh=34, size=11)
+build(ch, "early-peoples", "Early peoples and kingdoms", 30,
+      ["Name some peoples and kingdoms of Cameroon before colonial rule.", "Say how people lived: farming, trade, crafts and chiefs.", "Explain why oral history is important."],
+      [("key", "definition", "Peoples and kingdoms", "Long before European arrival, many peoples lived in Cameroon. In the **West**, the **Bamum** kingdom around **Foumban**; King **Njoya** is remembered for creating a **writing system** for the Bamum language, around the year 1900. On the **coast**, the **Duala** chiefs traded with sailors. In the **Grassfields** there were chiefdoms led by **fons**. **Forest peoples** such as the **Baka** knew the forest very well."),
+       ("fig", fig, "Some early peoples and kingdoms.", "A table of four peoples: Bamum in the West with a script, Duala on the coast as traders, Grassfields chiefdoms with fons, art and markets, and forest peoples such as the Baka in the South and East."),
+       ("key", "retenir", "How people lived", "People were **farmers, hunters, fishers, herders, traders and craftspeople**. They made **pottery, cloth, wood carvings and metal tools**. **Markets** and trade routes joined regions. Leaders such as **fons and chiefs** helped with justice and ceremonies. History was passed down by **storytelling** (**oral history**), songs, art and royal objects, because many societies had no writing."),
+       ("key", "pieges", "Common mistakes", "- Thinking that history in Africa began when Europeans arrived.\n- Thinking that all peoples lived in the same way.\n- Forgetting that oral history is a valuable source.\n- Mixing the Duala (coast) with the Bamum (West).")],
+      [("ex", "Example 1", "Why was Njoya's writing system important?", ["It let the Bamum people write their own language and keep records.", "It shows that African societies had their own knowledge."], "It let the Bamum write and keep their own history.", None),
+       ("ex", "Example 2", "How did people pass history on before writing was common?", ["They told stories and sang songs.", "They also kept it in art and objects."], "By oral history: stories, songs and art.", fig)],
+      [M("application", "In which part of Cameroon is the Bamum kingdom?", "the West", ["the Far North", "the East", "the South-West coast"], "Around Foumban."),
+       M("application", "Which people lived on the coast and traded with sailors?", "the Duala", ["the Bamum", "the Baka", "the Fulani"], "Along the Wouri."),
+       M("application", "What is oral history?", "history told by speaking", ["history written in a book", "history drawn on maps", "history in a film"], "Passed from person to person."),
+       TF("approfondissement", "The Bamum had their own writing system.", True, "Created under King Njoya."),
+       MA("approfondissement", "Match each group with a place.", [("Bamum", "Foumban"), ("Duala", "the coast"), ("Baka", "forests of the South and East"), ("Grassfields fons", "the West and North-West")], "Peoples and places."),
+       P("A grandmother in Foumban tells her grandchildren stories about the Bamum kings and how they ruled. A teacher says: these stories are part of our history.",
+         [PM("What kind of history is this?", "oral history", ["written history only", "a map", "a science lesson"], "Spoken stories."),
+          PM("Which kingdom is she talking about?", "the Bamum kingdom", ["the Duala kingdom", "the German empire", "the Baka kingdom"], "Foumban is in the West."),
+          PM("Why should we keep these stories?", "they tell us about our past", ["they are always false", "they are boring", "they have no use"], "They are valuable.", points=2)])],
+      [("The Bamum kingdom is in the...", "West", ["Far North", "East", "South"], "Foumban."),
+       ("The Duala are known as...", "traders on the coast", ["mountain climbers", "desert farmers", "airmen"], "They met European sailors."),
+       ("Oral history is passed on by...", "telling stories", ["only books", "only films", "only maps"], "Spoken."),
+       ("King Njoya created...", "a writing system", ["a railway", "a flag", "a port"], "For the Bamum language."),
+       ("Fons are...", "traditional leaders in the Grassfields", ["foreign soldiers", "rivers", "mountains"], "Traditional chiefs.")],
+      [SENS, "Njoya's script is dated 'around 1900' (commonly 1896-1910). Only a few well-known peoples are named, and many are missing; a teacher should add local history. Peoples' names (Baka, Duala, Bamum) to be checked for current spelling."])
+
+fig = timeline(1450, 1970, [(1472, "Portuguese on the Wouri"), (1884, "German protectorate"), (1916, "Britain and France"), (1946, "UN trusteeship")], [], 480, 230)
+assert 1916 - 1884 == 32 and 1884 - 1472 == 412
+build(ch, "colonial-period", "The colonial period", 35,
+      ["Order the main events from the Portuguese arrival to 1960.", "Explain what a protectorate, a mandate and a trusteeship are.", "Say why Cameroon has two official languages."],
+      [("key", "definition", "From the Portuguese to the Germans", "About **1472** Portuguese sailors reached the River **Wouri** and called it *Rio dos Camarões* ('river of prawns'): this is the origin of the name Cameroon. In **1884** treaties between Duala chiefs and Germany made the country a German **protectorate** (**Kamerun**). The Germans built roads, railways and plantations. Many people worked for them under hard conditions, and some resisted."),
+       ("fig", fig, "A timeline from the Portuguese to trusteeship.", "A timeline from 1450 to 1970 with four events: Portuguese on the Wouri about 1472, German protectorate 1884, Britain and France 1916, UN trusteeship 1946."),
+       ("key", "retenir", "Britain and France", "During the First World War, British and French forces took Kamerun. By **1916** the Germans had left, and the land was **shared**: a smaller western part, the **British Cameroons**, and a larger eastern part, **French Cameroun**. After the war, the League of Nations gave them **mandates**; after 1945 the United Nations gave them **trusteeship**. Each ruler used its own language, schools and laws, which is why Cameroon has **English and French** today."),
+       ("key", "pieges", "Common mistakes", "- Mixing the dates: 1472 (Portuguese), 1884 (Germans), 1916 (Britain and France).\n- Saying that the Portuguese ruled Cameroon.\n- Forgetting that British Cameroons had two parts, Northern and Southern.\n- Thinking that people always accepted colonial rule without resistance.")],
+      [("ex", "Example 1", "How many years passed from the German protectorate (1884) to the Britain-France division (1916)?", ["Subtract: 1916 − 1884.", "1916 − 1884 = 32."], "32 years", None),
+       ("ex", "Example 2", "Why is the name 'Cameroon' linked to prawns?", ["The Portuguese found many prawns in the Wouri.", "They called it the 'river of prawns', Rio dos Camarões."], "From Rio dos Camarões.", None)],
+      [M("application", "Who made Kamerun a protectorate in 1884?", "Germany", ["Britain", "France", "Portugal"], "German protectorate."),
+       N("application", "How many years are there between 1472 and 1884?", 412, "1884 − 1472 = 412.", unit="years"),
+       M("application", "What was the larger part after 1916 called?", "French Cameroun", ["British Cameroons", "Kamerun", "Nigeria"], "France had the larger part."),
+       TF("approfondissement", "The British Cameroons were ruled by Britain.", True, "Britain administered them."),
+       MA("approfondissement", "Match each term with its meaning.", [("protectorate", "a land controlled by a stronger country"), ("mandate", "rule given by the League of Nations"), ("trusteeship", "rule given by the United Nations"), ("Rio dos Camarões", "river of prawns")], "Learn the words."),
+       P("Read: In 1884, Germany made Kamerun a protectorate. In 1916 the Germans left and Britain and France divided the land.",
+         [PN("How many years was it between these two events?", 32, "1916 − 1884 = 32.", unit="years"),
+          PM("Which two countries divided Kamerun?", "Britain and France", ["Germany and Portugal", "Nigeria and Chad", "Spain and Italy"], "After 1916."),
+          PM("What is a reason why English and French are official today?", "Britain and France ruled parts of Cameroon", ["Portugal taught English", "Nigeria brought French", "there is no reason"], "Colonial languages remained.", points=2)])],
+      [("Rio dos Camarões means...", "river of prawns", ["river of gold", "red river", "river of fish only"], "Portuguese."),
+       ("A protectorate is...", "a land controlled by a stronger country", ["a free country", "a school", "a river"], "Kamerun in 1884."),
+       ("After 1916 the larger part was ruled by...", "France", ["Germany", "Portugal", "Spain"], "French Cameroun."),
+       ("A mandate was given by the...", "League of Nations", ["African Union", "Commonwealth", "school"], "After the First World War."),
+       ("Which date is for the German protectorate?", "1884", ["1472", "1916", "1960"], "1884.")],
+      [SENS, "Dates are standard textbook dates (1472 approximate, 1884, 1916, 1946). Resistance and forced labour mentioned only in general terms. Details of the mandate/trusteeship dates (1922, 1946) are to be checked."])
+
+fig = shapes([LINE(30, 100, 370, 100, width=3, arrow="end"),
+              CIRCLE(60, 100, 6, fill="red"), T(60, 70, "1960", 14, bold=True), T(60, 130, "French Cameroun", 11), T(60, 145, "independent", 11),
+              CIRCLE(150, 100, 6, fill="red"), T(150, 70, "1961", 14, bold=True), T(150, 130, "Southern Cameroons", 11), T(150, 145, "joins", 11),
+              CIRCLE(250, 100, 6, fill="red"), T(250, 70, "1972", 14, bold=True), T(250, 130, "United Republic", 11), T(250, 145, "(20 May)", 11),
+              CIRCLE(340, 100, 6, fill="red"), T(340, 70, "1984", 14, bold=True), T(340, 130, "Republic of", 11), T(340, 145, "Cameroon", 11)], 400, 175)
+assert 1972 - 1960 == 12 and 1984 - 1972 == 12
+build(ch, "independence", "Independence and unification", 35,
+      ["Say when French Cameroun became independent.", "Describe the 1961 plebiscite.", "Name 20 May, 11 February and 1 October."],
+      [("key", "definition", "Independence", "**French Cameroun** became independent on **1 January 1960**; its first president was **Ahmadou Ahidjo**. The **British Cameroons** (Northern and Southern) were still under UN trusteeship. To decide their future, the people voted in a **plebiscite** on **11 February 1961**."),
+       ("fig", fig, "Independence, unification and the later names of the state.", "A timeline with 1960, French Cameroun becomes independent; 1961, Southern Cameroons joins; 1972, United Republic, 20 May; 1984, Republic of Cameroon."),
+       ("key", "retenir", "Unification and later changes", "In the plebiscite, **Northern Cameroons** chose to join **Nigeria** and **Southern Cameroons** chose to join the **Republic of Cameroon**. On **1 October 1961** Southern Cameroons joined and the **Federal Republic of Cameroon** was formed, with two federated states. On **20 May 1972** a referendum created the **United Republic of Cameroon**; in **1984** the name became the **Republic of Cameroon**. Ahmadou Ahidjo was president until 1982; **Paul Biya** has been president since 1982."),
+       ("key", "pieges", "Common mistakes", "- Mixing 1960 (independence of French Cameroun) and 1961 (unification).\n- Saying that all the British Cameroons joined Cameroon: the Northern part chose Nigeria.\n- Mixing 11 February (Youth Day) and 20 May (National Day).\n- Giving opinions about politics instead of facts.")],
+      [("ex", "Example 1", "How many years are there from 1960 to 1972?", ["Subtract 1960 from 1972.", "1972 − 1960 = 12."], "12 years", None),
+       ("ex", "Example 2", "What did Southern Cameroons decide in 1961?", ["The vote took place on 11 February 1961.", "They chose to join the Republic of Cameroon (and Northern Cameroons chose Nigeria)."], "They chose to join the Republic of Cameroon.", fig)],
+      [M("application", "When did French Cameroun become independent?", "1 January 1960", ["20 May 1972", "1 October 1961", "11 February 1961"], "1 January 1960."),
+       M("application", "What is a plebiscite?", "a vote of the people on a question", ["a type of tax", "a market", "a festival"], "A direct vote."),
+       N("application", "How many years are there between 1961 and 1972?", 1972 - 1961, "1972 − 1961 = 11.", unit="years"),
+       TF("approfondissement", "Northern Cameroons chose to join Nigeria in 1961.", True, "Yes, it voted for Nigeria."),
+       MA("approfondissement", "Match each date with the event.", [("1 January 1960", "independence of French Cameroun"), ("11 February 1961", "plebiscite in the British Cameroons"), ("1 October 1961", "Southern Cameroons joins; federation"), ("20 May 1972", "United Republic of Cameroon")], "Learn the order."),
+       P("Read: The Southern Cameroons voted in 1961 and joined the Republic of Cameroon on 1 October 1961. In 1972 the country became one state, the United Republic of Cameroon.",
+         [PM("In which year did Southern Cameroons vote?", "1961", ["1960", "1972", "1984"], "11 February 1961."),
+          PM("What was the new state of 1 October 1961 called?", "the Federal Republic of Cameroon", ["Kamerun", "the British Cameroons", "Nigeria"], "A federation."),
+          PN("How many years after 1961 was the United Republic created?", 11, "1972 − 1961 = 11.", unit="years", points=2)])],
+      [("Who was the first president of independent Cameroon?", "Ahmadou Ahidjo", ["Paul Biya", "King Njoya", "King Bell"], "From 1960 to 1982."),
+       ("The vote in the British Cameroons took place in...", "1961", ["1884", "1916", "1972"], "11 February 1961."),
+       ("National Day is on...", "20 May", ["11 February", "1 January", "25 December"], "20 May."),
+       ("Which part chose to join Nigeria?", "Northern Cameroons", ["Southern Cameroons", "Douala", "the Littoral"], "In the 1961 plebiscite."),
+       ("Youth Day is on...", "11 February", ["20 May", "1 October", "1 January"], "11 February.")],
+      [SENS, "Dates are standard facts. Political events after 1990 and debates about the 1961 union are deliberately not covered. Wording about 1 October to be checked against the textbook."])
+
+# ===================================================== 4. citizenship and the world
+ch = p.chapter("citizenship", "Citizenship, government and the wider world", REF)
+
+fig = table([["Level", "Who leads", "Does what"], ["national", "President, ministers", "country policy, defence"], ["parliament", "deputies and senators", "make laws"], ["courts", "judges", "apply the laws"], ["local council", "mayor, councillors", "markets, roads, birth records"]], [90, 140, 150], rh=32, size=11)
+build(ch, "government", "How Cameroon is governed", 35,
+      ["Name the three powers of government.", "Say what a mayor and a local council do.", "Explain the duties of a good citizen."],
+      [("key", "definition", "Government", "A **government** looks after the country. **Executive**: the **President** and the ministers run the country. **Legislative**: **Parliament** (the National Assembly and the Senate) **makes laws**. **Judiciary**: **courts** and judges **apply the laws** and settle disputes. Citizens **elect** their leaders by voting. In towns, a **mayor** and a **council** look after local services such as markets, roads and birth certificates."),
+       ("fig", fig, "Some parts of government.", "A table: national level with the President and ministers; parliament with deputies and senators who make laws; courts with judges who apply the laws; local council with the mayor and councillors who look after markets, roads and birth records."),
+       ("key", "retenir", "Citizens", "A **citizen** has **rights**: to education, health, safety, speech, and to vote when old enough. A citizen has **duties**: **obey the law**, **pay taxes**, **respect** others and public property, **protect** the environment, and **defend** the nation peacefully. Taxes pay for roads, schools and hospitals. **Peace and unity** are values for all Cameroonians."),
+       ("key", "pieges", "Common mistakes", "- Thinking that the President makes all laws by himself: Parliament makes laws.\n- Thinking that only the government must look after roads and schools: citizens must care for them too.\n- Thinking that rights have no limits.\n- Forgetting that voting is a right and a duty of citizens.")],
+      [("ex", "Example 1", "Which part of government makes laws?", ["Making laws is the job of the legislature.", "In Cameroon this is Parliament."], "Parliament", None),
+       ("ex", "Example 2", "Give two duties of a citizen.", ["Obey the law and respect others.", "Also pay taxes and protect public property."], "Obey the law; respect public property.", fig)],
+      [M("application", "Who makes laws?", "Parliament", ["the courts", "the police", "the mayor only"], "The legislature."),
+       M("application", "Who applies the laws and settles disputes?", "the courts", ["the farmers", "the traders", "the teachers"], "Judges."),
+       M("application", "Who looks after local services in a town?", "the mayor and the council", ["the President alone", "the army only", "nobody"], "Local government."),
+       TF("approfondissement", "Taxes help to pay for schools and roads.", True, "Taxes fund public services."),
+       MA("approfondissement", "Match each institution with its job.", [("Parliament", "makes laws"), ("courts", "apply laws"), ("President", "leads the executive"), ("mayor", "runs local services")], "Roles of government."),
+       P("A new market is built in a town. The council collects a small fee from the traders. The mayor says the money will be used to repair the roads.",
+         [PM("Who runs the local services?", "the mayor and the council", ["the courts", "Parliament only", "the pupils"], "Local government."),
+          PM("What do we call money paid to the government or council?", "taxes and fees", ["gifts", "prizes", "loans"], "They pay for public services."),
+          PM("What should citizens do with public property?", "look after it", ["break it", "sell it", "ignore it"], "It belongs to everyone.", points=2)])],
+      [("The head of the executive is the...", "President", ["judge", "mayor only", "teacher"], "The President runs the country with ministers."),
+       ("The courts...", "apply the laws", ["make the laws", "collect taxes", "build roads"], "Judiciary."),
+       ("A duty of a citizen is to...", "obey the law", ["break rules", "harm others", "waste water"], "Duty."),
+       ("To elect means to...", "choose by voting", ["fight", "run away", "ignore"], "Citizens vote."),
+       ("Taxes are used for...", "public services", ["private parties", "nothing", "only one person"], "Roads, schools, hospitals.")],
+      [SENS, "The institutional description is general (executive, legislature, judiciary; National Assembly and Senate). Voting age and electoral rules are not stated; check the current constitution and textbook."])
+
+fig = table([["Organisation", "What it is"], ["United Nations (UN)", "world peace; Cameroon joined 1960"], ["African Union (AU)", "organisation of African states"], ["Commonwealth", "Cameroon joined in 1995"], ["Francophonie", "French-speaking countries"], ["CEMAC", "Central African states, FCFA"]], [150, 230], rh=28, size=11)
+build(ch, "organisations", "Cameroon and the world: international organisations", 30,
+      ["Name some organisations that Cameroon belongs to.", "Say why countries work together.", "Explain what the FCFA is."],
+      [("key", "definition", "Working together", "Countries work together to keep **peace**, to **trade**, to fight **disease** and to help each other. Cameroon is a member of the **United Nations (UN)**, the **African Union (AU)**, the **Commonwealth** (since 1995), the **Francophonie** and **CEMAC**, the Central African Economic and Monetary Community. CEMAC states share the money called the **Central African CFA franc (FCFA)**."),
+       ("fig", fig, "Some organisations Cameroon belongs to.", "A table of organisations: the United Nations, the African Union, the Commonwealth, the Francophonie and CEMAC with short descriptions."),
+       ("key", "retenir", "Why it matters", "Membership helps with **peace and safety**, **education and health programmes** (for example vaccination campaigns), **trade** and **sports and cultural exchange**. Cameroonian players, athletes and peacekeepers represent the country abroad. Because Cameroon belongs to both the **Commonwealth** and the **Francophonie**, it has links with English-speaking and French-speaking countries."),
+       ("key", "pieges", "Common mistakes", "- Thinking that the UN is a country.\n- Mixing the Commonwealth (mainly former British territories) and the Francophonie (French-speaking countries).\n- Saying that the FCFA is used in all of Africa.\n- Mixing up the AU (Africa) and the UN (the whole world).")],
+      [("ex", "Example 1", "Which organisation joins countries of the whole world to work for peace?", ["It is a world organisation, not only African.", "It is the United Nations."], "The United Nations", None),
+       ("ex", "Example 2", "Why does it help Cameroon to belong to both the Commonwealth and the Francophonie?", ["Cameroon uses English and French.", "The two organisations give links with English-speaking and French-speaking countries."], "It gives links with both English-speaking and French-speaking countries.", fig)],
+      [M("application", "Which organisation is for African states?", "the African Union", ["the Commonwealth", "the Francophonie", "the UN"], "AU."),
+       M("application", "Which is the money used in Cameroon?", "the FCFA", ["the naira", "the dollar", "the euro"], "Central African CFA franc."),
+       M("application", "Which organisation has the world as members?", "the United Nations", ["CEMAC", "the AU", "a school"], "World peace."),
+       TF("approfondissement", "Cameroon joined the Commonwealth in 1995.", True, "Commonly stated."),
+       MA("approfondissement", "Match each organisation with its main idea.", [("United Nations", "world peace and cooperation"), ("African Union", "cooperation among African states"), ("Commonwealth", "links with countries linked to Britain"), ("CEMAC", "economic cooperation in Central Africa")], "Learn the main idea."),
+       P("A class visits a clinic where nurses vaccinate children. The nurse says that vaccination campaigns are supported by health organisations that work with many countries.",
+         [PM("Why do countries work together on health?", "diseases cross borders and sharing helps everyone", ["to stop all trade", "to close schools", "to hide information"], "Cooperation helps health."),
+          PM("Which organisation is made up of many countries around the world?", "the United Nations", ["the school", "the market", "the clinic"], "UN."),
+          PM("Which money is shared by the CEMAC states?", "the FCFA", ["the pound", "the dollar", "the yen"], "Central African CFA franc.", points=2)])],
+      [("The UN is...", "an organisation of countries", ["a country", "a city", "a river"], "United Nations."),
+       ("CEMAC states share...", "the FCFA", ["the euro", "the pound", "the naira"], "Central African CFA franc."),
+       ("The AU is the organisation of...", "African states", ["Asian states", "European states", "American states"], "African Union."),
+       ("Countries work together to...", "keep peace and trade", ["start wars", "close borders always", "avoid health care"], "Cooperation."),
+       ("The Francophonie links countries where...", "French is spoken", ["English is spoken only", "Spanish is spoken", "no language is spoken"], "French-speaking.")],
+      [SENS, "Membership facts (UN 1960, Commonwealth 1995, CEMAC, FCFA) are standard but must be checked; the list of organisations is not complete."])
+
+fig = table([["Hazard", "Cause", "Safety"], ["flood", "heavy rain, blocked drains", "keep drains clear"], ["drought", "no rain for a long time", "save water, store food"], ["landslide", "rain on bare slopes", "plant trees on slopes"], ["volcano", "Mount Cameroon", "follow warnings"]], [70, 170, 150], rh=34, size=11)
+build(ch, "hazards-environment", "Natural hazards and caring for the environment", 30,
+      ["Name natural hazards that can affect Cameroon.", "Say how people can reduce the risks.", "Explain how to protect forests, water and soil."],
+      [("key", "definition", "Natural hazards", "A **natural hazard** is a natural event that can harm people. In Cameroon: **floods** after heavy rain, especially where drains are blocked; **drought** in dry areas; **landslides** on steep, bare slopes in the rainy season; and **volcanic activity** from Mount Cameroon, which has erupted several times. In 1986 a release of gas from **Lake Nyos** in the North-West Region killed many people."),
+       ("fig", fig, "Hazards, causes and safety.", "A table with four hazards: flood caused by heavy rain and blocked drains, drought from no rain for a long time, landslide from rain on bare slopes, volcano on Mount Cameroon, each with a safety idea."),
+       ("key", "retenir", "Reducing risk and caring for nature", "People can **plan and prepare**: keep **drains clean**, not build in flood zones or on steep slopes, **plant trees**, store water and food and follow **warnings** from the authorities. Everyone must also protect nature: do not **cut forests without replanting**, do not **pollute water**, put rubbish in bins and **reduce, reuse and recycle**."),
+       ("key", "pieges", "Common mistakes", "- Throwing rubbish in drains (this causes floods).\n- Cutting trees on a steep slope.\n- Believing that natural hazards are always a punishment: they have natural causes.\n- Ignoring warnings from the authorities.")],
+      [("ex", "Example 1", "Why does throwing rubbish in drains increase the risk of flooding?", ["Rubbish blocks the drain.", "Water cannot flow away and spreads onto the street."], "It blocks the drains so rain water cannot flow away.", None),
+       ("ex", "Example 2", "Name two ways to reduce the risk of landslides.", ["Roots hold soil together.", "Plant trees and avoid building on steep slopes."], "Plant trees; avoid building on steep slopes.", fig)],
+      [M("application", "What can block drains and cause floods?", "rubbish", ["trees", "sunshine", "wind"], "Keep drains clear."),
+       M("application", "Which hazard can happen on Mount Cameroon?", "volcanic activity", ["a blizzard", "a tsunami", "a glacier"], "It is an active volcano."),
+       M("application", "Which action helps to prevent landslides?", "planting trees on slopes", ["cutting trees", "burning grass", "digging up the slope"], "Roots hold soil."),
+       TF("approfondissement", "A drought is a long time with very little rain.", True, "That is the meaning of drought."),
+       MA("approfondissement", "Match each hazard with a safety idea.", [("flood", "keep drains clear"), ("drought", "save water"), ("landslide", "plant trees on slopes"), ("volcano", "follow official warnings")], "Reduce risk."),
+       O("A heavy storm is expected tomorrow in your town. Write four sentences telling your neighbours how to get ready.",
+         "Clear the rubbish from the drain in front of your house. Move important things and food to a high place. Keep children away from rivers and flooded roads. Listen to the radio for news and follow the advice of the authorities.",
+         "Marks (4): four sensible, safe actions (1 each); no unsafe advice (e.g. crossing flooded roads).", tier="examen", points=4, difficulty=2)],
+      [("A flood is when...", "too much water covers the land", ["there is no rain", "a volcano erupts", "a bird sings"], "Water spreads."),
+       ("A drought is...", "a long time without much rain", ["a flood", "a storm of snow", "a market day"], "Dry weather."),
+       ("To avoid blocked drains we should...", "keep rubbish out of them", ["throw rubbish in", "build over them", "fill them with stones"], "Keep them clear."),
+       ("Mount Cameroon is...", "an active volcano", ["a lake", "a desert", "a river"], "In the South-West."),
+       ("Trees on slopes...", "help hold the soil", ["cause landslides", "dry the rivers", "attract floods"], "Roots bind the soil.")],
+      [SENS, "The Lake Nyos event (1986) is stated without casualty figures and should be handled with care in class; the exact list of volcanic eruptions is not given."])
+
+p.write()

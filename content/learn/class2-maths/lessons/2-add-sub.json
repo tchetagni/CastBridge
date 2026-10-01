@@ -1,0 +1,2049 @@
+{
+ "chapter": "class2-maths-add-sub",
+ "lessons": [
+  {
+   "id": "class2-maths-add-2digit",
+   "title": "Adding two-digit numbers",
+   "minutes": 12,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level I (Class 2) — Mathematics; to be checked against the official texts",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Add two numbers with tens and ones.",
+    "Add without carrying."
+   ],
+   "prerequisites": [
+    "class2-maths-place-value-100"
+   ],
+   "exercises": [
+    "class2-maths-add-sub-e01",
+    "class2-maths-add-sub-e02",
+    "class2-maths-add-sub-e03",
+    "class2-maths-add-sub-e04",
+    "class2-maths-add-sub-e05",
+    "class2-maths-add-sub-e06"
+   ],
+   "selfCheck": [
+    "class2-maths-add-2digit-q1",
+    "class2-maths-add-2digit-q2",
+    "class2-maths-add-2digit-q3",
+    "class2-maths-add-2digit-q4",
+    "class2-maths-add-2digit-q5"
+   ],
+   "reviewNotes": [
+    "Range of numbers, methods (e.g. regrouping layout) and the classes where ×/÷ and fractions start are to be checked against the official syllabus.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Add tens and ones",
+     "md": "To add 34 + 25, add the ones first: 4 + 5 = 9. Then add the tens: 30 + 20 = 50. Put them together: 59."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 106,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 12,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "rect",
+        "x": 28,
+        "y": 10,
+        "w": 12,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "rect",
+        "x": 46,
+        "y": 10,
+        "w": 12,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "rect",
+        "x": 64,
+        "y": 10,
+        "w": 12,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "rect",
+        "x": 82,
+        "y": 10,
+        "w": 12,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 10,
+        "w": 12,
+        "h": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 126,
+        "y": 10,
+        "w": 12,
+        "h": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 142,
+        "y": 10,
+        "w": 12,
+        "h": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 158,
+        "y": 10,
+        "w": 12,
+        "h": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 174,
+        "y": 10,
+        "w": 12,
+        "h": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 28,
+        "w": 12,
+        "h": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 126,
+        "y": 28,
+        "w": 12,
+        "h": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 142,
+        "y": 28,
+        "w": 12,
+        "h": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 158,
+        "y": 28,
+        "w": 12,
+        "h": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 10,
+        "y": 82,
+        "text": "0 hundreds  5 tens  9 ones",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "34 + 25 = 59.",
+     "alt": "Five tens and nine ones."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Column method",
+     "md": "Write the numbers one under the other. Ones under ones. Tens under tens. Add the ones. Then add the tens."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Line up the digits.\n- Add ones with ones, tens with tens.\n- Check: the answer must be bigger than both numbers."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "34 + 25 = ?",
+     "steps": [
+      "Ones: 4 + 5 = 9.",
+      "Tens: 30 + 20 = 50. Together: 59."
+     ],
+     "answer": "59",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 106,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 12,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "rect",
+        "x": 28,
+        "y": 10,
+        "w": 12,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "rect",
+        "x": 46,
+        "y": 10,
+        "w": 12,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "rect",
+        "x": 64,
+        "y": 10,
+        "w": 12,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "rect",
+        "x": 82,
+        "y": 10,
+        "w": 12,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 10,
+        "w": 12,
+        "h": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 126,
+        "y": 10,
+        "w": 12,
+        "h": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 142,
+        "y": 10,
+        "w": 12,
+        "h": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 158,
+        "y": 10,
+        "w": 12,
+        "h": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 174,
+        "y": 10,
+        "w": 12,
+        "h": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 28,
+        "w": 12,
+        "h": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 126,
+        "y": 28,
+        "w": 12,
+        "h": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 142,
+        "y": 28,
+        "w": 12,
+        "h": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 158,
+        "y": 28,
+        "w": 12,
+        "h": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 10,
+        "y": 82,
+        "text": "0 hundreds  5 tens  9 ones",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "40 + 37 = ?",
+     "steps": [
+      "Ones: 0 + 7 = 7.",
+      "Tens: 40 + 30 = 70. Together: 77."
+     ],
+     "answer": "77"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-regroup",
+   "title": "Adding with carrying",
+   "minutes": 12,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level I (Class 2) — Mathematics; to be checked against the official texts",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Add when the ones make 10 or more.",
+    "Carry a ten."
+   ],
+   "prerequisites": [
+    "class2-maths-add-2digit"
+   ],
+   "exercises": [
+    "class2-maths-add-sub-e07",
+    "class2-maths-add-sub-e08",
+    "class2-maths-add-sub-e09",
+    "class2-maths-add-sub-e10",
+    "class2-maths-add-sub-e11",
+    "class2-maths-add-sub-e12"
+   ],
+   "selfCheck": [
+    "class2-maths-add-regroup-q1",
+    "class2-maths-add-regroup-q2",
+    "class2-maths-add-regroup-q3",
+    "class2-maths-add-regroup-q4",
+    "class2-maths-add-regroup-q5"
+   ],
+   "reviewNotes": [
+    "Range of numbers, methods (e.g. regrouping layout) and the classes where ×/÷ and fractions start are to be checked against the official syllabus.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Carry",
+     "md": "When the ones add up to 10 or more, make a new ten. 27 + 18: ones 7 + 8 = 15. That is 1 ten and 5 ones. Write 5 and carry 1 ten."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 112,
+      "items": [
+       {
+        "t": "rect",
+        "x": 8.0,
+        "y": 8,
+        "w": 184.0,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 32.9,
+        "text": "27 + 18",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 8,
+        "w": 184.0,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 292.0,
+        "y": 32.9,
+        "text": "7 + 8 = 15",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 8.0,
+        "y": 56,
+        "w": 184.0,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 80.9,
+        "text": "write 5, carry 1",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 56,
+        "w": 184.0,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "pink",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 292.0,
+        "y": 80.9,
+        "text": "answer: 45",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Steps of 27 + 18.",
+     "alt": "Four boxes showing the steps of adding 27 and 18."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Steps",
+     "md": "1. Add the ones. 2. If 10 or more, write the ones and carry the ten. 3. Add the tens and the carried ten. 27 + 18: tens 2 + 1 + 1 = 4. Answer 45."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Do not forget the carried ten.\n- 15 ones is one ten and five ones.\n- Check by adding in a different order."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "27 + 18 = ?",
+     "steps": [
+      "Ones: 7 + 8 = 15. Write 5, carry 1.",
+      "Tens: 2 + 1 + 1 = 4. Answer 45."
+     ],
+     "answer": "45"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "48 + 36 = ?",
+     "steps": [
+      "Ones: 8 + 6 = 14. Write 4, carry 1.",
+      "Tens: 4 + 3 + 1 = 8. Answer 84."
+     ],
+     "answer": "84"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-sub-2digit",
+   "title": "Taking away two-digit numbers",
+   "minutes": 12,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level I (Class 2) — Mathematics; to be checked against the official texts",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Subtract numbers with tens and ones.",
+    "Check by adding."
+   ],
+   "prerequisites": [
+    "class2-maths-add-2digit"
+   ],
+   "exercises": [
+    "class2-maths-add-sub-e13",
+    "class2-maths-add-sub-e14",
+    "class2-maths-add-sub-e15",
+    "class2-maths-add-sub-e16",
+    "class2-maths-add-sub-e17",
+    "class2-maths-add-sub-e18"
+   ],
+   "selfCheck": [
+    "class2-maths-sub-2digit-q1",
+    "class2-maths-sub-2digit-q2",
+    "class2-maths-sub-2digit-q3",
+    "class2-maths-sub-2digit-q4",
+    "class2-maths-sub-2digit-q5"
+   ],
+   "reviewNotes": [
+    "Range of numbers, methods (e.g. regrouping layout) and the classes where ×/÷ and fractions start are to be checked against the official syllabus.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Subtract",
+     "md": "To subtract 58 − 23: ones 8 − 3 = 5. Tens 50 − 20 = 30. Answer 35. The answer is called the **difference**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 106,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 12,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "rect",
+        "x": 28,
+        "y": 10,
+        "w": 12,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "rect",
+        "x": 46,
+        "y": 10,
+        "w": 12,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "rect",
+        "x": 64,
+        "y": 10,
+        "w": 12,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "rect",
+        "x": 92,
+        "y": 10,
+        "w": 12,
+        "h": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 108,
+        "y": 10,
+        "w": 12,
+        "h": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 124,
+        "y": 10,
+        "w": 12,
+        "h": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 140,
+        "y": 10,
+        "w": 12,
+        "h": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 156,
+        "y": 10,
+        "w": 12,
+        "h": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 10,
+        "y": 82,
+        "text": "0 hundreds  4 tens  5 ones",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "76 − 31 = 45.",
+     "alt": "Four tens and five ones."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Check",
+     "md": "Add the answer to the small number. 35 + 23 = 58. If you get the first number, it is right."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Take the small number from the big one.\n- Line up ones and tens.\n- Subtraction makes a smaller number."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "76 − 31 = ?",
+     "steps": [
+      "Ones: 6 − 1 = 5.",
+      "Tens: 70 − 30 = 40. Answer 45."
+     ],
+     "answer": "45"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "89 − 45 = ?",
+     "steps": [
+      "Ones: 9 − 5 = 4.",
+      "Tens: 80 − 40 = 40. Answer 44."
+     ],
+     "answer": "44"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-sub-regroup",
+   "title": "Taking away with borrowing",
+   "minutes": 12,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level I (Class 2) — Mathematics; to be checked against the official texts",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Subtract when the ones digit is too small.",
+    "Borrow a ten."
+   ],
+   "prerequisites": [
+    "class2-maths-sub-2digit"
+   ],
+   "exercises": [
+    "class2-maths-add-sub-e19",
+    "class2-maths-add-sub-e20",
+    "class2-maths-add-sub-e21",
+    "class2-maths-add-sub-e22",
+    "class2-maths-add-sub-e23",
+    "class2-maths-add-sub-e24"
+   ],
+   "selfCheck": [
+    "class2-maths-sub-regroup-q1",
+    "class2-maths-sub-regroup-q2",
+    "class2-maths-sub-regroup-q3",
+    "class2-maths-sub-regroup-q4",
+    "class2-maths-sub-regroup-q5"
+   ],
+   "reviewNotes": [
+    "Range of numbers, methods (e.g. regrouping layout) and the classes where ×/÷ and fractions start are to be checked against the official syllabus.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Borrow",
+     "md": "For 52 − 27 we cannot take 7 from 2. Break one ten into 10 ones. 52 is 4 tens and 12 ones. Now 12 − 7 = 5 and 4 tens − 2 tens = 2 tens. Answer 25."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 112,
+      "items": [
+       {
+        "t": "rect",
+        "x": 8.0,
+        "y": 8,
+        "w": 184.0,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 32.9,
+        "text": "52",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 8,
+        "w": 184.0,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 292.0,
+        "y": 32.9,
+        "text": "4 tens + 12 ones",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 8.0,
+        "y": 56,
+        "w": 184.0,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 80.9,
+        "text": "12 − 7 = 5",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 56,
+        "w": 184.0,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "pink",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 292.0,
+        "y": 80.9,
+        "text": "4 − 2 = 2 tens",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Borrowing in 52 − 27.",
+     "alt": "Four boxes showing how to borrow in 52 minus 27."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Steps",
+     "md": "1. Look at the ones. Is the top ones digit smaller? 2. Borrow 1 ten: tens go down by 1, ones go up by 10. 3. Subtract ones. 4. Subtract tens."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Do not turn 7 − 2 round. Top minus bottom.\n- Remember to take 1 from the tens.\n- Check by adding: 25 + 27 = 52."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "52 − 27 = ?",
+     "steps": [
+      "Borrow: 52 is 4 tens and 12 ones.",
+      "12 − 7 = 5. 4 tens − 2 tens = 2 tens. Answer 25."
+     ],
+     "answer": "25"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "81 − 36 = ?",
+     "steps": [
+      "Borrow: 81 is 7 tens and 11 ones.",
+      "11 − 6 = 5. 7 − 3 = 4 tens. Answer 45."
+     ],
+     "answer": "45"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-story-problems",
+   "title": "Story problems with + and −",
+   "minutes": 12,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level I (Class 2) — Mathematics; to be checked against the official texts",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Decide whether to add or subtract.",
+    "Solve two-step stories."
+   ],
+   "prerequisites": [
+    "class2-maths-add-regroup",
+    "class2-maths-sub-regroup"
+   ],
+   "exercises": [
+    "class2-maths-add-sub-e25",
+    "class2-maths-add-sub-e26",
+    "class2-maths-add-sub-e27",
+    "class2-maths-add-sub-e28",
+    "class2-maths-add-sub-e29",
+    "class2-maths-add-sub-e30"
+   ],
+   "selfCheck": [
+    "class2-maths-story-problems-q1",
+    "class2-maths-story-problems-q2",
+    "class2-maths-story-problems-q3",
+    "class2-maths-story-problems-q4",
+    "class2-maths-story-problems-q5"
+   ],
+   "reviewNotes": [
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Plan",
+     "md": "Read twice. Find the numbers. Decide: put together (add) or take away / compare (subtract). Do the sum. Write the answer with the unit."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 106,
+      "items": [
+       {
+        "t": "rect",
+        "x": 8.0,
+        "y": 8,
+        "w": 184.0,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 30.9,
+        "text": "add: altogether",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 8,
+        "w": 184.0,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 292.0,
+        "y": 30.9,
+        "text": "subtract: left",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 8.0,
+        "y": 52,
+        "w": 184.0,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 74.9,
+        "text": "add: total",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 52,
+        "w": 184.0,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "pink",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 292.0,
+        "y": 74.9,
+        "text": "subtract: difference",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Clue words.",
+     "alt": "Four boxes with clue words for adding and subtracting."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Clue words",
+     "md": "**Altogether**, **total**, **more**: add. **Left**, **fewer**, **difference**: subtract."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Do not just add every number you see.\n- A two-step story has two sums.\n- Check that the answer is sensible."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "A baker makes 45 loaves in the morning and 38 in the afternoon. How many in all?",
+     "steps": [
+      "In all means add.",
+      "45 + 38 = 83."
+     ],
+     "answer": "83 loaves"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "A bus has 60 seats. 47 are taken. How many are free?",
+     "steps": [
+      "Free seats means take away.",
+      "60 − 47 = 13."
+     ],
+     "answer": "13 seats"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class2-maths-add-sub"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "class2-maths-add-sub-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class2-maths-add-2digit",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "21 + 13 = ?",
+   "answer": 34,
+   "tolerance": 0,
+   "explanation": "21 + 13 = 34.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-sub-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class2-maths-add-2digit",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "45 + 32 = ?",
+   "answer": 77,
+   "tolerance": 0,
+   "explanation": "45 + 32 = 77.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-sub-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class2-maths-add-2digit",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "50 + 28 = ?",
+   "answer": 78,
+   "tolerance": 0,
+   "explanation": "50 + 28 = 78.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-sub-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class2-maths-add-2digit",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "63 + 24 = ?",
+   "answer": 87,
+   "tolerance": 0,
+   "explanation": "63 + 24 = 87.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-sub-e05",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class2-maths-add-2digit",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "32 + 45 = 77",
+   "answer": true,
+   "explanation": "32 + 45 = 77.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-sub-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class2-maths-add-2digit",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A shop in Limbe sells fish.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Monday: 23 fish. Tuesday: 35 fish. How many fish in two days?",
+     "answer": 58,
+     "tolerance": 0,
+     "explanation": "23 + 35 = 58.",
+     "id": "class2-maths-add-sub-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Wednesday: 21 fish. How many fish in three days?",
+     "answer": 79,
+     "tolerance": 0,
+     "explanation": "58 + 21 = 79.",
+     "id": "class2-maths-add-sub-e06-b"
+    }
+   ],
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-2digit-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-add-2digit",
+   "prompt": "Class 2 maths adding: 22 + 15 equals...",
+   "choices": [
+    "47",
+    "27",
+    "307",
+    "37"
+   ],
+   "answer": 3,
+   "explanation": "22 + 15 = 37.",
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-2digit-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-add-2digit",
+   "prompt": "Class 2 maths adding: 40 + 40 equals...",
+   "choices": [
+    "800",
+    "44",
+    "4",
+    "80"
+   ],
+   "answer": 3,
+   "explanation": "80.",
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-2digit-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-add-2digit",
+   "prompt": "When we add in columns, we add first the...",
+   "choices": [
+    "colour",
+    "tens",
+    "hundreds",
+    "ones"
+   ],
+   "answer": 3,
+   "explanation": "Start with ones.",
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-2digit-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-add-2digit",
+   "prompt": "56 + 12 equals...",
+   "choices": [
+    "68",
+    "44",
+    "78",
+    "67"
+   ],
+   "answer": 0,
+   "explanation": "56 + 12 = 68.",
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-2digit-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-add-2digit",
+   "prompt": "The answer of an addition is called the...",
+   "choices": [
+    "difference",
+    "factor",
+    "half",
+    "sum"
+   ],
+   "answer": 3,
+   "explanation": "Sum.",
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-sub-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class2-maths-add-regroup",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "19 + 15 = ?",
+   "answer": 34,
+   "tolerance": 0,
+   "explanation": "34.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-sub-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class2-maths-add-regroup",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "38 + 25 = ?",
+   "answer": 63,
+   "tolerance": 0,
+   "explanation": "63.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-sub-e09",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class2-maths-add-regroup",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "47 + 27 = ?",
+   "answer": 74,
+   "tolerance": 0,
+   "explanation": "74.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-sub-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class2-maths-add-regroup",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "56 + 39 = ?",
+   "answer": 95,
+   "tolerance": 0,
+   "explanation": "95.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-sub-e11",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "class2-maths-add-regroup",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which sum is right?",
+   "choices": [
+    "29 + 14 = 43",
+    "29 + 14 = 413",
+    "29 + 14 = 33",
+    "29 + 14 = 42"
+   ],
+   "answer": 0,
+   "explanation": "9 + 4 = 13; carry 1; 2 + 1 + 1 = 4; 43.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-sub-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class2-maths-add-regroup",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "At Kumba market, Mama sells plantains.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "In the morning she sells 48 plantains. In the afternoon she sells 37. How many in all?",
+     "answer": 85,
+     "tolerance": 0,
+     "explanation": "48 + 37 = 85.",
+     "id": "class2-maths-add-sub-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "The next day she sells 65 plantains. How many plantains in the two days? (85 + 65)",
+     "answer": 150,
+     "tolerance": 0,
+     "explanation": "85 + 65 = 150.",
+     "id": "class2-maths-add-sub-e12-b"
+    }
+   ],
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-regroup-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-add-regroup",
+   "prompt": "Class 2 maths carrying: 15 + 27 equals...",
+   "choices": [
+    "312",
+    "52",
+    "42",
+    "32"
+   ],
+   "answer": 2,
+   "explanation": "42.",
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-regroup-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-add-regroup",
+   "prompt": "Class 2 maths carrying: 8 + 7 ones is...",
+   "choices": [
+    "15 tens",
+    "1 ten and 5 ones",
+    "7 tens",
+    "8 ones"
+   ],
+   "answer": 1,
+   "explanation": "15 ones.",
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-regroup-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-add-regroup",
+   "prompt": "When ones make 14, we write...",
+   "choices": [
+    "0 and carry 14",
+    "4 and carry 1",
+    "1 and carry 4",
+    "14 and carry 0"
+   ],
+   "answer": 1,
+   "explanation": "Write 4, carry 1.",
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-regroup-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-add-regroup",
+   "prompt": "36 + 36 equals...",
+   "choices": [
+    "62",
+    "66",
+    "72",
+    "612"
+   ],
+   "answer": 2,
+   "explanation": "72.",
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-regroup-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-add-regroup",
+   "prompt": "69 + 1 equals...",
+   "choices": [
+    "70",
+    "79",
+    "691",
+    "60"
+   ],
+   "answer": 0,
+   "explanation": "70.",
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-sub-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class2-maths-sub-2digit",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "68 − 24 = ?",
+   "answer": 44,
+   "tolerance": 0,
+   "explanation": "44.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-sub-e14",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class2-maths-sub-2digit",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "95 − 52 = ?",
+   "answer": 43,
+   "tolerance": 0,
+   "explanation": "43.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-sub-e15",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class2-maths-sub-2digit",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "70 − 30 = ?",
+   "answer": 40,
+   "tolerance": 0,
+   "explanation": "40.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-sub-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class2-maths-sub-2digit",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "87 − 65 = ?",
+   "answer": 22,
+   "tolerance": 0,
+   "explanation": "22.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-sub-e17",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "class2-maths-sub-2digit",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which add checks 49 − 23 = 26?",
+   "choices": [
+    "49 + 23",
+    "26 − 23",
+    "23 − 26",
+    "26 + 23"
+   ],
+   "answer": 3,
+   "explanation": "26 + 23 = 49.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-sub-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class2-maths-sub-2digit",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A school in Buea has 96 pupils in two classes.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Class A has 45 pupils. How many are in class B?",
+     "answer": 51,
+     "tolerance": 0,
+     "explanation": "96 − 45 = 51.",
+     "id": "class2-maths-add-sub-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Today 11 pupils of class B are away. How many are present?",
+     "answer": 40,
+     "tolerance": 0,
+     "explanation": "51 − 11 = 40.",
+     "id": "class2-maths-add-sub-e18-b"
+    }
+   ],
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-sub-2digit-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-sub-2digit",
+   "prompt": "Class 2 maths subtracting: 59 − 24 equals...",
+   "choices": [
+    "45",
+    "25",
+    "35",
+    "83"
+   ],
+   "answer": 2,
+   "explanation": "35.",
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-sub-2digit-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-sub-2digit",
+   "prompt": "Class 2 maths subtracting: 80 − 50 equals...",
+   "choices": [
+    "20",
+    "30",
+    "40",
+    "130"
+   ],
+   "answer": 1,
+   "explanation": "30.",
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-sub-2digit-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-sub-2digit",
+   "prompt": "The answer of a subtraction is the...",
+   "choices": [
+    "sum",
+    "difference",
+    "product",
+    "factor"
+   ],
+   "answer": 1,
+   "explanation": "Difference.",
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-sub-2digit-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-sub-2digit",
+   "prompt": "To check 78 − 34 = 44 we do...",
+   "choices": [
+    "44 + 34",
+    "34 − 44",
+    "78 + 34",
+    "44 − 34"
+   ],
+   "answer": 0,
+   "explanation": "44 + 34 = 78.",
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-sub-2digit-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-sub-2digit",
+   "prompt": "67 − 7 equals...",
+   "choices": [
+    "60",
+    "74",
+    "7",
+    "61"
+   ],
+   "answer": 0,
+   "explanation": "60.",
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-sub-e19",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class2-maths-sub-regroup",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "43 − 18 = ?",
+   "answer": 25,
+   "tolerance": 0,
+   "explanation": "25.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-sub-e20",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class2-maths-sub-regroup",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "70 − 24 = ?",
+   "answer": 46,
+   "tolerance": 0,
+   "explanation": "46.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-sub-e21",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class2-maths-sub-regroup",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "91 − 55 = ?",
+   "answer": 36,
+   "tolerance": 0,
+   "explanation": "36.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-sub-e22",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class2-maths-sub-regroup",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "60 − 38 = ?",
+   "answer": 22,
+   "tolerance": 0,
+   "explanation": "22.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-sub-e23",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class2-maths-sub-regroup",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "62 − 29 = 33",
+   "answer": true,
+   "explanation": "62 − 29 = 33.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-sub-e24",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class2-maths-sub-regroup",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Mama has 82 oranges for sale.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "She sells 47 oranges. How many are left?",
+     "answer": 35,
+     "tolerance": 0,
+     "explanation": "82 − 47 = 35.",
+     "id": "class2-maths-add-sub-e24-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Then 18 oranges go bad. How many good oranges are left?",
+     "answer": 17,
+     "tolerance": 0,
+     "explanation": "35 − 18 = 17.",
+     "id": "class2-maths-add-sub-e24-b"
+    }
+   ],
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-sub-regroup-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-sub-regroup",
+   "prompt": "Class 2 maths borrowing: 61 − 24 equals...",
+   "choices": [
+    "43",
+    "85",
+    "37",
+    "47"
+   ],
+   "answer": 2,
+   "explanation": "37.",
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-sub-regroup-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-sub-regroup",
+   "prompt": "Class 2 maths borrowing: 50 − 21 equals...",
+   "choices": [
+    "39",
+    "29",
+    "71",
+    "31"
+   ],
+   "answer": 1,
+   "explanation": "29.",
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-sub-regroup-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-sub-regroup",
+   "prompt": "When the ones digit is too small to subtract, we...",
+   "choices": [
+    "add the tens",
+    "stop",
+    "borrow a ten",
+    "skip the ones"
+   ],
+   "answer": 2,
+   "explanation": "Borrow.",
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-sub-regroup-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-sub-regroup",
+   "prompt": "Borrowing one ten gives us...",
+   "choices": [
+    "10 more ones",
+    "10 more tens",
+    "1 more one",
+    "nothing"
+   ],
+   "answer": 0,
+   "explanation": "10 ones.",
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-sub-regroup-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-sub-regroup",
+   "prompt": "90 − 45 equals...",
+   "choices": [
+    "55",
+    "45",
+    "135",
+    "44"
+   ],
+   "answer": 1,
+   "explanation": "45.",
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-sub-e25",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class2-maths-story-problems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Ada has 36 beads. Bih has 29 beads. How many beads in all?",
+   "answer": 65,
+   "tolerance": 0,
+   "explanation": "65.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-sub-e26",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class2-maths-story-problems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A bag has 75 groundnuts. You eat 28. How many are left?",
+   "answer": 47,
+   "tolerance": 0,
+   "explanation": "47.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-sub-e27",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class2-maths-story-problems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A class has 26 girls and 24 boys. How many pupils?",
+   "answer": 50,
+   "tolerance": 0,
+   "explanation": "50.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-sub-e28",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class2-maths-story-problems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A taxi has 15 men, 12 women and 9 children. How many passengers?",
+   "answer": 36,
+   "tolerance": 0,
+   "explanation": "36.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-sub-e29",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "class2-maths-story-problems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which sum finds the difference between 90 and 64?",
+   "choices": [
+    "90 − 64",
+    "90 + 90",
+    "64 + 64",
+    "90 + 64"
+   ],
+   "answer": 0,
+   "explanation": "Difference means subtract.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-add-sub-e30",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class2-maths-story-problems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In a school garden in Bali, pupils plant maize.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "On Monday they plant 48 seeds. On Tuesday they plant 35 seeds. How many seeds in all?",
+     "answer": 83,
+     "tolerance": 0,
+     "explanation": "83.",
+     "id": "class2-maths-add-sub-e30-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "17 seeds do not grow. How many seeds grow?",
+     "answer": 66,
+     "tolerance": 0,
+     "explanation": "83 − 17 = 66.",
+     "id": "class2-maths-add-sub-e30-b"
+    }
+   ],
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-story-problems-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-story-problems",
+   "prompt": "Class 2 maths story problems: 'altogether' tells us to...",
+   "choices": [
+    "stop",
+    "add",
+    "subtract",
+    "share"
+   ],
+   "answer": 1,
+   "explanation": "Add.",
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-story-problems-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-story-problems",
+   "prompt": "Class 2 maths story problems: 'how many are left' tells us to...",
+   "choices": [
+    "subtract",
+    "double",
+    "add",
+    "count"
+   ],
+   "answer": 0,
+   "explanation": "Subtract.",
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-story-problems-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-story-problems",
+   "prompt": "Tom has 52 stickers and gives away 20. How many are left?",
+   "choices": [
+    "42",
+    "32",
+    "30",
+    "72"
+   ],
+   "answer": 1,
+   "explanation": "52 − 20 = 32.",
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-story-problems-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-story-problems",
+   "prompt": "Two girls have 30 and 45 coins. How many altogether?",
+   "choices": [
+    "75",
+    "7",
+    "15",
+    "65"
+   ],
+   "answer": 0,
+   "explanation": "30 + 45 = 75.",
+   "chapter": "class2-maths-add-sub"
+  },
+  {
+   "id": "class2-maths-story-problems-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-story-problems",
+   "prompt": "In a two-step story we do...",
+   "choices": [
+    "ten sums",
+    "no sums",
+    "one sum only",
+    "two sums"
+   ],
+   "answer": 3,
+   "explanation": "Two steps.",
+   "chapter": "class2-maths-add-sub"
+  }
+ ]
+}

@@ -1,0 +1,890 @@
+{
+ "chapter": "lower6-chemistry-ch-atoms",
+ "lessons": [
+  {
+   "id": "lower6-chemistry-atoms",
+   "title": "Atomic structure, isotopes and electron configuration",
+   "minutes": 35,
+   "programRef": "GCE Advanced Level Chemistry — atomic structure and the Periodic Table (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe protons, neutrons and electrons and write nuclide symbols; calculate relative atomic mass from isotopic abundances",
+    "Write electronic configurations of atoms and ions using s, p and d subshells",
+    "Define first ionisation energy and use successive ionisation energies to deduce the group of an element"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-chemistry-ch-atoms-e01",
+    "lower6-chemistry-ch-atoms-e02",
+    "lower6-chemistry-ch-atoms-e03",
+    "lower6-chemistry-ch-atoms-e04",
+    "lower6-chemistry-ch-atoms-e05",
+    "lower6-chemistry-ch-atoms-e06"
+   ],
+   "selfCheck": [
+    "lower6-chemistry-atoms-q1",
+    "lower6-chemistry-atoms-q2",
+    "lower6-chemistry-atoms-q3",
+    "lower6-chemistry-atoms-q4",
+    "lower6-chemistry-atoms-q5"
+   ],
+   "reviewNotes": [
+    "Data used: Ar values rounded as in common school tables (H 1.0, C 12.0, N 14.0, O 16.0, Na 23.0, Mg 24.0, Al 27.0, S 32.0, Cl 35.5, K 39.0, Ca 40.0, Fe 56.0, Cu 63.5, Zn 65.0); molar volume of a gas 24.0 dm³ at room temperature and pressure (25 °C, 1 atm), 22.4 dm³ at stp; R = 8.31 J mol⁻¹ K⁻¹; N_A = 6.02 × 10²³ mol⁻¹.",
+    "Orbital shapes, spin-pair rules and Hund's rule are only mentioned; check the depth required.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "The atom and its isotopes",
+     "md": "An atom has a small, dense **nucleus** of protons (relative mass 1, charge +1) and neutrons (mass 1, charge 0) surrounded by electrons (mass about 1/1836, charge −1). The **atomic number** Z = number of protons; the **mass number** A = protons + neutrons.\n\n**Isotopes** are atoms of the same element (same Z) with different numbers of neutrons. They have the same chemical properties and slightly different physical properties."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Relative atomic mass",
+     "md": "The **relative atomic mass** A_r is the weighted mean mass of an atom of the element compared with 1/12 of the mass of an atom of carbon-12.\n\n**A_r = Σ(mass number × abundance %) ÷ 100.** A mass spectrometer ionises the atoms, accelerates them, deflects them in a magnetic field and detects them: each peak shows one isotope with its abundance.",
+     "tex": "A_r=\\frac{\\sum (\\text{mass number}\\times\\text{abundance}\\ \\%)}{100}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 250,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 125,
+        "r": 14,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 129,
+        "text": "11p",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 125,
+        "r": 36,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "circle",
+        "cx": 184.3921136085218,
+        "cy": 114.36127256019178,
+        "r": 5,
+        "stroke": "blue",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 115.60788639147819,
+        "cy": 135.6387274398082,
+        "r": 5,
+        "stroke": "blue",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 125,
+        "r": 62,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "circle",
+        "cx": 201.17080812440005,
+        "cy": 89.99216664950781,
+        "r": 5,
+        "stroke": "blue",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 161.42894906677736,
+        "cy": 64.06249821965943,
+        "r": 5,
+        "stroke": "blue",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 114.99216664950781,
+        "cy": 73.82919187559995,
+        "r": 5,
+        "stroke": "blue",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 89.06249821965945,
+        "cy": 113.57105093322265,
+        "r": 5,
+        "stroke": "blue",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 98.82919187559995,
+        "cy": 160.0078333504922,
+        "r": 5,
+        "stroke": "blue",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 138.5710509332226,
+        "cy": 185.93750178034054,
+        "r": 5,
+        "stroke": "blue",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 185.00783335049215,
+        "cy": 176.17080812440008,
+        "r": 5,
+        "stroke": "blue",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 210.93750178034054,
+        "cy": 136.4289490667774,
+        "r": 5,
+        "stroke": "blue",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 125,
+        "r": 88,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "circle",
+        "cx": 234.06961104305333,
+        "cy": 98.99422181380211,
+        "r": 5,
+        "stroke": "blue",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 90,
+        "text": "sodium",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 114,
+        "text": "11 protons",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 134,
+        "text": "12 neutrons",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 154,
+        "text": "2, 8, 1",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 174,
+        "text": "1s² 2s² 2p⁶ 3s¹",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Sodium atom: 11 protons, 12 neutrons and electrons in shells 2, 8, 1.",
+     "alt": "A nucleus with three concentric circles holding two, eight and one electrons."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Electron configuration",
+     "md": "Electrons occupy shells (n = 1, 2, 3…) made of subshells s (2 electrons, 1 orbital), p (6 electrons, 3 orbitals) and d (10 electrons, 5 orbitals). Fill in order of increasing energy: **1s 2s 2p 3s 3p 4s 3d 4p…** Each orbital holds two electrons of opposite spin; in a subshell, orbitals are filled singly first (Hund's rule).\n\nExceptions: Cr is [Ar] 3d⁵ 4s¹ and Cu is [Ar] 3d¹⁰ 4s¹ (half-full and full 3d are stable). Atoms form positive ions by losing the **4s** electrons before the 3d ones."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Ionisation energy",
+     "md": "The **first ionisation energy** is the energy needed to remove one electron from each atom in one mole of gaseous atoms: X(g) → X⁺(g) + e⁻ (kJ mol⁻¹). Successive ionisation energies increase, and a **large jump** shows the start of a new, inner shell: for example a big jump after the 2nd ionisation energy means 2 outer electrons (Group 2)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using the mass number (a whole number) instead of the weighted A_r (35.5 for chlorine).\n- Writing Fe²⁺ as losing 3d electrons first: the 4s electrons go first.\n- Saying isotopes differ in the number of protons or electrons.\n- Forgetting that A_r has no units (it is relative)."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Relative atomic mass",
+     "statement": "Chlorine consists of 75 % ³⁵Cl and 25 % ³⁷Cl. Calculate A_r. Then give the number of protons, neutrons and electrons in ⁵⁶Fe³⁺.",
+     "steps": [
+      "A_r = (35 × 75 + 37 × 25)/100 = (2625 + 925)/100 = 35.5.",
+      "Fe has Z = 26, so 26 protons; neutrons = 56 − 26 = 30.",
+      "Fe³⁺ has lost three electrons: 26 − 3 = 23 electrons."
+     ],
+     "answer": "A_r = 35.5; ⁵⁶Fe³⁺: 26 p, 30 n, 23 e"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Configurations",
+     "statement": "Write the electron configurations of Fe, Fe²⁺ and Fe³⁺.",
+     "steps": [
+      "Fe (Z = 26): 1s² 2s² 2p⁶ 3s² 3p⁶ 3d⁶ 4s² (write 3d before 4s or after: both are accepted).",
+      "Fe²⁺ loses the two 4s electrons: 1s² 2s² 2p⁶ 3s² 3p⁶ 3d⁶.",
+      "Fe³⁺ then loses one 3d electron: 1s² 2s² 2p⁶ 3s² 3p⁶ 3d⁵ (a stable half-filled 3d subshell)."
+     ],
+     "answer": "Fe³⁺ is [Ar] 3d⁵"
+    }
+   ],
+   "chapter": "lower6-chemistry-ch-atoms"
+  },
+  {
+   "id": "lower6-chemistry-periodicity",
+   "title": "Periodic trends: radius, ionisation energy and structure",
+   "minutes": 35,
+   "programRef": "GCE Advanced Level Chemistry — atomic structure and the Periodic Table (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe and explain trends in atomic radius, first ionisation energy and electronegativity across period 3 and down a group",
+    "Explain the dips in first ionisation energy at Al and S",
+    "Relate melting points of the period 3 elements to their structure and bonding"
+   ],
+   "prerequisites": [
+    "lower6-chemistry-atoms"
+   ],
+   "exercises": [
+    "lower6-chemistry-ch-atoms-e07",
+    "lower6-chemistry-ch-atoms-e08",
+    "lower6-chemistry-ch-atoms-e09",
+    "lower6-chemistry-ch-atoms-e10",
+    "lower6-chemistry-ch-atoms-e11",
+    "lower6-chemistry-ch-atoms-e12"
+   ],
+   "selfCheck": [
+    "lower6-chemistry-periodicity-q1",
+    "lower6-chemistry-periodicity-q2",
+    "lower6-chemistry-periodicity-q3",
+    "lower6-chemistry-periodicity-q4",
+    "lower6-chemistry-periodicity-q5"
+   ],
+   "reviewNotes": [
+    "The first ionisation energies are standard textbook values (Na 496, Mg 738, Al 578, Si 786, P 1012, S 1000, Cl 1251, Ar 1521 kJ/mol). Check the board's data booklet.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Atomic radius and shielding",
+     "md": "Across a period the nuclear charge increases while electrons are added to the same shell with similar shielding: the attraction increases and the **atomic radius decreases**. Down a group the outer electrons are in a higher shell, further from the nucleus and better shielded by the inner shells: the radius **increases** and the first ionisation energy **decreases**.\n\n**Electronegativity** (the power of an atom to attract the bonding electrons in a covalent bond) increases across a period and decreases down a group; fluorine is the most electronegative."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "First ionisation energy across period 3",
+     "md": "Generally the first ionisation energy **increases** across period 3 (greater nuclear charge, smaller radius). Two dips occur:\n\n- **Mg → Al**: the 3p electron of Al is in a higher-energy subshell than the 3s electrons and is shielded by them, so is easier to remove.\n- **P → S**: in S, the 3p⁴ configuration has a pair of electrons in one p orbital; the repulsion between them makes one easier to remove than the unpaired electrons of P (3p³)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 420,
+      "h": 250,
+      "bars": [
+       {
+        "label": "Na",
+        "value": 496,
+        "color": "orange"
+       },
+       {
+        "label": "Mg",
+        "value": 738,
+        "color": "orange"
+       },
+       {
+        "label": "Al",
+        "value": 578,
+        "color": "blue"
+       },
+       {
+        "label": "Si",
+        "value": 786,
+        "color": "orange"
+       },
+       {
+        "label": "P",
+        "value": 1012,
+        "color": "orange"
+       },
+       {
+        "label": "S",
+        "value": 1000,
+        "color": "blue"
+       },
+       {
+        "label": "Cl",
+        "value": 1251,
+        "color": "orange"
+       },
+       {
+        "label": "Ar",
+        "value": 1521,
+        "color": "orange"
+       }
+      ],
+      "unit": "kJ/mol"
+     },
+     "caption": "First ionisation energy across period 3 (kJ/mol): the dips are at Al and S.",
+     "alt": "A bar chart of the first ionisation energies of sodium to argon with aluminium and sulfur lower than their predecessors."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Structure and melting point (period 3)",
+     "md": "- **Na, Mg, Al**: metallic lattices; melting points rise (98 °C, 650 °C, 660 °C) as the ion charge (1+, 2+, 3+) and the number of delocalised electrons increase and the ions become smaller.\n- **Si**: giant covalent network: very high melting point (about 1410 °C).\n- **P₄, S₈, Cl₂**: simple molecules held by weak London forces: low melting points (S₈ > P₄ > Cl₂, as the molecules are larger).\n- **Ar**: single atoms, very low melting point."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Explaining ionisation energy trends only by 'more protons': also name the radius and shielding.\n- Saying that the shielding increases across a period: it stays about the same.\n- Explaining the melting points of molecular solids by the strength of covalent bonds: only the weak intermolecular forces are overcome.\n- Forgetting that noble gases have no bonds between atoms apart from London forces."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Explaining a trend",
+     "statement": "Explain why the first ionisation energy of Mg (738 kJ mol⁻¹) is greater than that of Na (496 kJ mol⁻¹), and why that of Al (578 kJ mol⁻¹) is lower than that of Mg.",
+     "steps": [
+      "Na → Mg: the nuclear charge increases from 11+ to 12+ while the outer electron is in the same shell (3s), so the attraction is stronger: IE increases.",
+      "Mg → Al: Al's outer electron is a 3p electron, in a higher-energy subshell, shielded by the 3s electrons and by the filled inner shells.",
+      "The extra distance and shielding outweigh the greater nuclear charge, so Al needs less energy: 578 < 738."
+     ],
+     "answer": "Mg → Al dip: the 3p electron is higher in energy and shielded"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Predicting properties",
+     "statement": "Predict which has the higher melting point, magnesium (2+, two delocalised electrons per atom) or sodium, and which of S₈ and Cl₂ has the higher melting point. Give reasons.",
+     "steps": [
+      "Mg²⁺ has a higher charge and is smaller than Na⁺ and contributes two electrons: stronger metallic bonding, so Mg melts higher (650 °C against 98 °C).",
+      "S₈ and Cl₂ are simple molecules: melting needs only the London forces to be overcome.",
+      "The larger S₈ molecule has more electrons and stronger London forces, so S₈ has the higher melting point."
+     ],
+     "answer": "Mg > Na; S₈ > Cl₂"
+    }
+   ],
+   "chapter": "lower6-chemistry-ch-atoms"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "lower6-chemistry-ch-atoms-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-chemistry-atoms",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Boron is 20 % ¹⁰B and 80 % ¹¹B. Calculate A_r (3 s.f.).",
+   "answer": 10.8,
+   "tolerance": 0.01,
+   "explanation": "(10 × 20 + 11 × 80)/100 = 10.8.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-chemistry-ch-atoms"
+  },
+  {
+   "id": "lower6-chemistry-ch-atoms-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-chemistry-atoms",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Which is the electron configuration of the sulfide ion S²⁻ (Z = 16)?",
+   "choices": [
+    "1s² 2s² 2p⁶ 3s² 3p²",
+    "1s² 2s² 2p⁶ 3s² 3p⁶",
+    "1s² 2s² 2p⁶ 3s² 3p⁶ 4s²",
+    "1s² 2s² 2p⁶ 3s² 3p⁴"
+   ],
+   "answer": 1,
+   "explanation": "S has 16 electrons; S²⁻ has 18, the same as argon.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-chemistry-ch-atoms"
+  },
+  {
+   "id": "lower6-chemistry-ch-atoms-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-chemistry-atoms",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "True or false: isotopes of an element have different numbers of protons.",
+   "answer": false,
+   "explanation": "They have the same number of protons (same Z) and different numbers of neutrons.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-chemistry-ch-atoms"
+  },
+  {
+   "id": "lower6-chemistry-ch-atoms-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-chemistry-atoms",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Magnesium is 78.6 % ²⁴Mg, 10.1 % ²⁵Mg and 11.3 % ²⁶Mg. Calculate A_r (3 s.f.).",
+   "answer": 24.3,
+   "tolerance": 0.01,
+   "explanation": "(24 × 78.6 + 25 × 10.1 + 26 × 11.3)/100 = 24.3.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-chemistry-ch-atoms"
+  },
+  {
+   "id": "lower6-chemistry-ch-atoms-e05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-chemistry-atoms",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "The first ionisation energies of Be and B are 900 and 801 kJ mol⁻¹. The lower value for B is best explained by",
+   "choices": [
+    "B has a smaller nuclear charge than Be",
+    "B has fewer electrons than Be",
+    "B is a metal and Be is not",
+    "the 2p electron removed from B is at a higher energy and better shielded than the 2s electron removed from Be"
+   ],
+   "answer": 3,
+   "explanation": "The 2p subshell is higher in energy and is shielded by the 2s electrons, so it is easier to remove.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-chemistry-ch-atoms"
+  },
+  {
+   "id": "lower6-chemistry-ch-atoms-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-chemistry-atoms",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "An element X in period 3 has the following successive ionisation energies (kJ mol⁻¹): 738, 1451, 7733, 10540, 13630.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "After which ionisation energy is the big jump (give the number of the ionisation energy: 1st, 2nd…).",
+     "answer": 2,
+     "tolerance": 0,
+     "explanation": "The jump from 1451 to 7733 occurs between the 2nd and 3rd.",
+     "id": "lower6-chemistry-ch-atoms-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many electrons are in the outer shell of X?",
+     "answer": 2,
+     "tolerance": 0,
+     "explanation": "The first two electrons are removed from the outer shell; the third comes from an inner shell.",
+     "id": "lower6-chemistry-ch-atoms-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "X is",
+     "choices": [
+      "Mg (Group 2)",
+      "Al (Group 3)",
+      "Si (Group 4)",
+      "Na (Group 1)"
+     ],
+     "answer": 0,
+     "explanation": "Two outer electrons and three shells: magnesium.",
+     "id": "lower6-chemistry-ch-atoms-e06-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explain why the 3rd ionisation energy is much larger than the 2nd.",
+     "model": "The third electron is removed from an inner shell (n = 2) which is closer to the nucleus and less shielded, so the attraction is much stronger and much more energy is needed.",
+     "rubric": "1 mark: inner shell / closer to the nucleus; 1 mark: less shielding / stronger attraction.",
+     "explanation": "The third electron is removed from an inner shell (n = 2) which is closer to the nucleus and less shielded, so the attraction is much stronger and much more energy is needed.",
+     "id": "lower6-chemistry-ch-atoms-e06-d"
+    }
+   ],
+   "chapter": "lower6-chemistry-ch-atoms"
+  },
+  {
+   "id": "lower6-chemistry-atoms-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-atoms",
+   "prompt": "An atom has 17 protons and 18 neutrons. Its mass number is",
+   "choices": [
+    "18",
+    "17",
+    "52",
+    "35"
+   ],
+   "answer": 3,
+   "explanation": "A = 17 + 18 = 35.",
+   "chapter": "lower6-chemistry-ch-atoms"
+  },
+  {
+   "id": "lower6-chemistry-atoms-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-atoms",
+   "prompt": "The maximum number of electrons in a p subshell is",
+   "choices": [
+    "6",
+    "3",
+    "10",
+    "2"
+   ],
+   "answer": 0,
+   "explanation": "Three orbitals of two electrons.",
+   "chapter": "lower6-chemistry-ch-atoms"
+  },
+  {
+   "id": "lower6-chemistry-atoms-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-atoms",
+   "prompt": "Which electron is lost first when Cu forms Cu⁺?",
+   "choices": [
+    "a 4s electron",
+    "a 3d electron",
+    "a 2p electron",
+    "a 3s electron"
+   ],
+   "answer": 0,
+   "explanation": "Cu is [Ar] 3d¹⁰ 4s¹; the 4s electron goes first.",
+   "chapter": "lower6-chemistry-ch-atoms"
+  },
+  {
+   "id": "lower6-chemistry-atoms-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-atoms",
+   "prompt": "Isotopes of an element differ in",
+   "choices": [
+    "the number of electrons in the neutral atom",
+    "the number of neutrons",
+    "chemical reactions",
+    "the number of protons"
+   ],
+   "answer": 1,
+   "explanation": "Same Z, different A.",
+   "chapter": "lower6-chemistry-ch-atoms"
+  },
+  {
+   "id": "lower6-chemistry-atoms-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-atoms",
+   "prompt": "The first ionisation energy is the energy needed to",
+   "choices": [
+    "break a molecule",
+    "add an electron to an atom",
+    "remove all electrons",
+    "remove one electron from each gaseous atom in a mole"
+   ],
+   "answer": 3,
+   "explanation": "X(g) → X⁺(g) + e⁻ per mole.",
+   "chapter": "lower6-chemistry-ch-atoms"
+  },
+  {
+   "id": "lower6-chemistry-ch-atoms-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-chemistry-periodicity",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Across period 3 (Na to Cl) the atomic radius",
+   "choices": [
+    "increases then decreases",
+    "stays constant",
+    "decreases",
+    "increases"
+   ],
+   "answer": 2,
+   "explanation": "Nuclear charge increases with similar shielding.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-chemistry-ch-atoms"
+  },
+  {
+   "id": "lower6-chemistry-ch-atoms-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-chemistry-periodicity",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Which element has the highest first ionisation energy?",
+   "choices": [
+    "Na",
+    "Ar",
+    "Mg",
+    "S"
+   ],
+   "answer": 1,
+   "explanation": "The noble gas at the end of the period has the largest value (1521 kJ/mol).",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-chemistry-ch-atoms"
+  },
+  {
+   "id": "lower6-chemistry-ch-atoms-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-chemistry-periodicity",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "True or false: the first ionisation energy of potassium is lower than that of sodium.",
+   "answer": true,
+   "explanation": "K's outer electron is in a higher shell and better shielded.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-chemistry-ch-atoms"
+  },
+  {
+   "id": "lower6-chemistry-ch-atoms-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-chemistry-periodicity",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "The first ionisation energy of S (1000) is lower than that of P (1012) because",
+   "choices": [
+    "S has a smaller nuclear charge",
+    "S has fewer protons than P",
+    "the paired 3p electrons in S repel each other",
+    "S has a full 3p subshell"
+   ],
+   "answer": 2,
+   "explanation": "Electron–electron repulsion in the occupied 3p orbital makes one electron easier to remove.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-chemistry-ch-atoms"
+  },
+  {
+   "id": "lower6-chemistry-ch-atoms-e11",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "lower6-chemistry-periodicity",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Match each element to the structure of its solid.",
+   "pairs": [
+    [
+     "Si",
+     "giant covalent"
+    ],
+    [
+     "Mg",
+     "metallic lattice"
+    ],
+    [
+     "Cl₂",
+     "simple molecules (London forces)"
+    ],
+    [
+     "Ar",
+     "separate atoms (London forces)"
+    ]
+   ],
+   "explanation": "Silicon forms a giant covalent network; magnesium is a metal; chlorine is Cl₂ molecules; argon is monatomic.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-chemistry-ch-atoms"
+  },
+  {
+   "id": "lower6-chemistry-ch-atoms-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-chemistry-periodicity",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "The first ionisation energies (kJ mol⁻¹) of the period 3 elements Na to Ar are: 496, 738, 578, 786, 1012, 1000, 1251, 1521.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many elements have a lower first ionisation energy than the element before them?",
+     "answer": 2,
+     "tolerance": 0,
+     "explanation": "Al (578 < 738) and S (1000 < 1012).",
+     "id": "lower6-chemistry-ch-atoms-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which pair of elements shows the dips?",
+     "choices": [
+      "Si and Cl",
+      "Al and S",
+      "Mg and P",
+      "Na and Cl"
+     ],
+     "answer": 1,
+     "explanation": "Al follows Mg and S follows P.",
+     "id": "lower6-chemistry-ch-atoms-e12-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explain the dip at Al.",
+     "model": "Al's outer electron is in a 3p orbital, which is higher in energy than the 3s orbital of Mg, and it is partly shielded by the 3s electrons; so it is easier to remove despite the greater nuclear charge.",
+     "rubric": "1 mark: 3p higher energy than 3s; 1 mark: shielding by 3s electrons / further from nucleus.",
+     "explanation": "Al's outer electron is in a 3p orbital, which is higher in energy than the 3s orbital of Mg, and it is partly shielded by the 3s electrons; so it is easier to remove despite the greater nuclear charge.",
+     "id": "lower6-chemistry-ch-atoms-e12-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explain why the first ionisation energy generally increases across the period.",
+     "model": "The nuclear charge increases while the electrons enter the same shell with similar shielding, so the radius decreases and the attraction on the outer electron increases.",
+     "rubric": "1 mark: increasing nuclear charge; 1 mark: same shell / similar shielding / smaller radius.",
+     "explanation": "The nuclear charge increases while the electrons enter the same shell with similar shielding, so the radius decreases and the attraction on the outer electron increases.",
+     "id": "lower6-chemistry-ch-atoms-e12-d"
+    }
+   ],
+   "chapter": "lower6-chemistry-ch-atoms"
+  },
+  {
+   "id": "lower6-chemistry-periodicity-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-periodicity",
+   "prompt": "Down Group 1, the first ionisation energy",
+   "choices": [
+    "increases",
+    "decreases",
+    "stays the same",
+    "is zero"
+   ],
+   "answer": 1,
+   "explanation": "The outer electron is further from the nucleus and more shielded.",
+   "chapter": "lower6-chemistry-ch-atoms"
+  },
+  {
+   "id": "lower6-chemistry-periodicity-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-periodicity",
+   "prompt": "Which has the highest melting point?",
+   "choices": [
+    "Ar",
+    "P₄",
+    "Cl₂",
+    "Si"
+   ],
+   "answer": 3,
+   "explanation": "Silicon is a giant covalent network.",
+   "chapter": "lower6-chemistry-ch-atoms"
+  },
+  {
+   "id": "lower6-chemistry-periodicity-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-periodicity",
+   "prompt": "Electronegativity across a period",
+   "choices": [
+    "is zero",
+    "stays constant",
+    "increases",
+    "decreases"
+   ],
+   "answer": 2,
+   "explanation": "Greater nuclear charge and smaller radius.",
+   "chapter": "lower6-chemistry-ch-atoms"
+  },
+  {
+   "id": "lower6-chemistry-periodicity-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-periodicity",
+   "prompt": "Metallic bonding is stronger in Al than Na because",
+   "choices": [
+    "Al³⁺ is smaller and more highly charged and gives more delocalised electrons",
+    "Al is a gas",
+    "Al has more neutrons",
+    "Al is more electronegative"
+   ],
+   "answer": 0,
+   "explanation": "Greater charge density and more electrons in the sea.",
+   "chapter": "lower6-chemistry-ch-atoms"
+  },
+  {
+   "id": "lower6-chemistry-periodicity-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-periodicity",
+   "prompt": "Why do noble gases have the lowest melting points in their periods?",
+   "choices": [
+    "they are ionic",
+    "they have strong covalent bonds",
+    "only weak London forces act between single atoms",
+    "they are metals"
+   ],
+   "answer": 2,
+   "explanation": "Little energy is needed to separate the atoms.",
+   "chapter": "lower6-chemistry-ch-atoms"
+  }
+ ]
+}

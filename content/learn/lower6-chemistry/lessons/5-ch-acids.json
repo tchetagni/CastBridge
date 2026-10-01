@@ -1,0 +1,2434 @@
+{
+ "chapter": "lower6-chemistry-ch-acids",
+ "lessons": [
+  {
+   "id": "lower6-chemistry-acids",
+   "title": "Acids, bases and pH",
+   "minutes": 40,
+   "programRef": "GCE Advanced Level Chemistry — acids, bases and buffers (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define acids and bases (Brønsted–Lowry) and conjugate acid–base pairs; distinguish strong and weak",
+    "Calculate pH of strong acids and bases using pH = −lg[H⁺] and K_w = [H⁺][OH⁻] = 1.0 × 10⁻¹⁴",
+    "Use K_a to calculate the pH of a weak acid and to find K_a from pH"
+   ],
+   "prerequisites": [
+    "lower6-chemistry-equilibrium"
+   ],
+   "exercises": [
+    "lower6-chemistry-ch-acids-e01",
+    "lower6-chemistry-ch-acids-e02",
+    "lower6-chemistry-ch-acids-e03",
+    "lower6-chemistry-ch-acids-e04",
+    "lower6-chemistry-ch-acids-e05",
+    "lower6-chemistry-ch-acids-e06"
+   ],
+   "selfCheck": [
+    "lower6-chemistry-acids-q1",
+    "lower6-chemistry-acids-q2",
+    "lower6-chemistry-acids-q3",
+    "lower6-chemistry-acids-q4",
+    "lower6-chemistry-acids-q5"
+   ],
+   "reviewNotes": [
+    "K_a of ethanoic acid 1.8 × 10⁻⁵ mol dm⁻³ and K_w = 1.0 × 10⁻¹⁴ (25 °C) are standard values.",
+    "Hydrolysis of salts and pH of mixtures of acid and base are not included.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Brønsted–Lowry theory",
+     "md": "An **acid** is a proton (H⁺) donor and a **base** is a proton acceptor. When HA donates a proton, A⁻ is its **conjugate base**; when B accepts a proton, BH⁺ is its conjugate acid.\n\nA **strong acid** (HCl, HNO₃, H₂SO₄ for the first proton) is completely ionised in water; a **weak acid** (ethanoic acid, carbonic acid) is only partly ionised: HA ⇌ H⁺ + A⁻."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "pH calculations",
+     "md": "**pH = −lg[H⁺]** ([H⁺] in mol dm⁻³), so [H⁺] = 10^(−pH). Water ionises slightly: **K_w = [H⁺][OH⁻] = 1.0 × 10⁻¹⁴** at 25 °C, so pH + pOH = 14.\n\nWeak acid: **K_a = [H⁺][A⁻]/[HA]**. If ionisation is small and [H⁺] = [A⁻]: **[H⁺] ≈ √(K_a × c)**. pK_a = −lg K_a (a smaller pK_a means a stronger acid).",
+     "tex": "\\text{pH}=-\\log[\\text{H}^+]\\qquad K_a=\\frac{[\\text{H}^+][\\text{A}^-]}{[\\text{HA}]}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 70,
+        "w": 26,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "red"
+       },
+       {
+        "t": "rect",
+        "x": 46,
+        "y": 70,
+        "w": 26,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "red"
+       },
+       {
+        "t": "rect",
+        "x": 72,
+        "y": 70,
+        "w": 26,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "red"
+       },
+       {
+        "t": "rect",
+        "x": 98,
+        "y": 70,
+        "w": 26,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 124,
+        "y": 70,
+        "w": 26,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 70,
+        "w": 26,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "yellow"
+       },
+       {
+        "t": "rect",
+        "x": 176,
+        "y": 70,
+        "w": 26,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "yellow"
+       },
+       {
+        "t": "rect",
+        "x": 202,
+        "y": 70,
+        "w": 26,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "green"
+       },
+       {
+        "t": "rect",
+        "x": 228,
+        "y": 70,
+        "w": 26,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "cyan"
+       },
+       {
+        "t": "rect",
+        "x": 254,
+        "y": 70,
+        "w": 26,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "cyan"
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 70,
+        "w": 26,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "blue"
+       },
+       {
+        "t": "rect",
+        "x": 306,
+        "y": 70,
+        "w": 26,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "blue"
+       },
+       {
+        "t": "rect",
+        "x": 332,
+        "y": 70,
+        "w": 26,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "purple"
+       },
+       {
+        "t": "rect",
+        "x": 358,
+        "y": 70,
+        "w": 26,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "purple"
+       },
+       {
+        "t": "text",
+        "x": 33,
+        "y": 135,
+        "text": "0",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 111,
+        "y": 135,
+        "text": "3",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 215,
+        "y": 135,
+        "text": "7",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 319,
+        "y": 135,
+        "text": "11",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 384,
+        "y": 135,
+        "text": "14",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 40,
+        "text": "pH scale (25 °C)",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 175,
+        "text": "acidic",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 175,
+        "text": "neutral",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 335,
+        "y": 175,
+        "text": "alkaline",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "The pH scale from 0 (strongly acidic) to 14 (strongly alkaline).",
+     "alt": "A row of fourteen coloured boxes from red at pH 0 to purple at pH 14 with labels acidic, neutral and alkaline."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Method",
+     "md": "- **Strong acid**: [H⁺] = c (times the number of H⁺ per formula); pH = −lg[H⁺].\n- **Strong base**: [OH⁻] = c; [H⁺] = K_w/[OH⁻]; or pOH = −lg[OH⁻] and pH = 14 − pOH.\n- **Weak acid**: use [H⁺] = √(K_a c) (state the approximation) and then pH. To find K_a from pH: [H⁺] = 10^(−pH), then K_a ≈ [H⁺]²/c."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Confusing strong with concentrated: strength is the extent of ionisation, concentration is the amount per dm³.\n- Taking pH = −lg c for a weak acid.\n- Forgetting that diprotic H₂SO₄ gives [H⁺] = 2c (to a first approximation).\n- Giving pH with too many figures: the number of decimal places in a pH equals the number of significant figures in [H⁺]."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Strong acid and base",
+     "statement": "Find the pH of 0.020 mol dm⁻³ HCl and of 0.010 mol dm⁻³ NaOH (K_w = 1.0 × 10⁻¹⁴).",
+     "steps": [
+      "HCl is strong: [H⁺] = 0.020, so pH = −lg 0.020 = 1.70.",
+      "NaOH is strong: [OH⁻] = 0.010, so pOH = 2.00.",
+      "pH = 14.00 − 2.00 = 12.0."
+     ],
+     "answer": "pH 1.70 and pH 12.0"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — A weak acid",
+     "statement": "Find the pH of 0.10 mol dm⁻³ ethanoic acid (K_a = 1.8 × 10⁻⁵ mol dm⁻³) and the percentage ionised.",
+     "steps": [
+      "[H⁺] ≈ √(K_a c) = √(1.8 × 10⁻⁵ × 0.10) = √(1.8 × 10⁻⁶) = 1.34 × 10⁻³ mol dm⁻³.",
+      "pH = −lg(1.34 × 10⁻³) = 2.87.",
+      "Percentage ionised = 1.34 × 10⁻³/0.10 × 100 = 1.3 % (so the approximation is reasonable)."
+     ],
+     "answer": "pH = 2.87; 1.3 % ionised"
+    }
+   ],
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-buffers",
+   "title": "Buffers and acid–base titrations",
+   "minutes": 45,
+   "programRef": "GCE Advanced Level Chemistry — acids, bases and buffers (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Explain how a buffer solution resists changes in pH and calculate its pH using K_a (Henderson equation)",
+    "Describe titration curves for strong/strong and weak/strong combinations and choose an indicator",
+    "Do titration calculations including dilution factors"
+   ],
+   "prerequisites": [
+    "lower6-chemistry-acids"
+   ],
+   "exercises": [
+    "lower6-chemistry-ch-acids-e07",
+    "lower6-chemistry-ch-acids-e08",
+    "lower6-chemistry-ch-acids-e09",
+    "lower6-chemistry-ch-acids-e10",
+    "lower6-chemistry-ch-acids-e11",
+    "lower6-chemistry-ch-acids-e12"
+   ],
+   "selfCheck": [
+    "lower6-chemistry-buffers-q1",
+    "lower6-chemistry-buffers-q2",
+    "lower6-chemistry-buffers-q3",
+    "lower6-chemistry-buffers-q4",
+    "lower6-chemistry-buffers-q5"
+   ],
+   "reviewNotes": [
+    "Indicator ranges (methyl orange 3.1–4.4; phenolphthalein 8.3–10) are standard textbook values.",
+    "Vinegar strength of about 5 % is a typical value (to be verified). ",
+    "Titration curve for weak acid/strong base is described but not drawn.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Buffer solutions",
+     "md": "A **buffer** resists a change in pH when small amounts of acid or alkali are added. An acidic buffer is a **weak acid with its conjugate base** (e.g. CH₃COOH and CH₃COONa): the large reservoir of A⁻ removes added H⁺ (A⁻ + H⁺ → HA) and the large reservoir of HA removes added OH⁻ (HA + OH⁻ → A⁻ + H₂O).\n\nExamples: ethanoic acid/ethanoate; ammonia/ammonium (alkaline buffer); in blood, carbonic acid/hydrogencarbonate keeps the pH near 7.4."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Buffer pH",
+     "md": "From K_a = [H⁺][A⁻]/[HA]: **pH = pK_a + lg([A⁻]/[HA])** (Henderson–Hasselbalch). When [A⁻] = [HA], pH = pK_a. The ratio can be taken as the ratio of **moles** (the volume cancels). After adding a small amount of strong acid or base, recalculate the moles of HA and A⁻ and apply the equation again.",
+     "tex": "\\text{pH}=\\text{p}K_a+\\log\\frac{[\\text{A}^-]}{[\\text{HA}]}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 50,
+      "ymin": 0,
+      "ymax": 14,
+      "grid": 5,
+      "w": 400,
+      "h": 260,
+      "curves": [],
+      "points": [
+       {
+        "x": 25,
+        "y": 7,
+        "label": "equivalence 25 cm³",
+        "color": "red"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 0,
+        "y1": 1.0,
+        "x2": 5,
+        "y2": 1.1760912590556813,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 5,
+        "y1": 1.1760912590556813,
+        "x2": 10,
+        "y2": 1.3679767852945943,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 10,
+        "y1": 1.3679767852945943,
+        "x2": 15,
+        "y2": 1.6020599913279623,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 15,
+        "y1": 1.6020599913279623,
+        "x2": 20,
+        "y2": 1.9542425094393248,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 20,
+        "y1": 1.9542425094393248,
+        "x2": 22,
+        "y2": 2.194976603216055,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 22,
+        "y1": 2.194976603216055,
+        "x2": 24,
+        "y2": 2.690196080028514,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 24,
+        "y1": 2.690196080028514,
+        "x2": 24.5,
+        "y2": 2.9956351945975497,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 24.5,
+        "y1": 2.9956351945975497,
+        "x2": 24.9,
+        "y2": 3.6981005456233835,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 24.9,
+        "y1": 3.6981005456233835,
+        "x2": 25,
+        "y2": 7.0,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 25,
+        "y1": 7.0,
+        "x2": 25.1,
+        "y2": 10.30016227413276,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 25.1,
+        "y1": 10.30016227413276,
+        "x2": 25.5,
+        "y2": 10.995678626217357,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 25.5,
+        "y1": 10.995678626217357,
+        "x2": 26,
+        "y2": 11.292429823902063,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 26,
+        "y1": 11.292429823902063,
+        "x2": 28,
+        "y2": 11.752845385118874,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 28,
+        "y1": 11.752845385118874,
+        "x2": 30,
+        "y2": 11.958607314841775,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 30,
+        "y1": 11.958607314841775,
+        "x2": 35,
+        "y2": 12.221848749616356,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 35,
+        "y1": 12.221848749616356,
+        "x2": 40,
+        "y2": 12.363177902412826,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 40,
+        "y1": 12.363177902412826,
+        "x2": 50,
+        "y2": 12.522878745280337,
+        "color": "blue",
+        "dash": false
+       }
+      ],
+      "xlabel": "volume of NaOH added / cm³",
+      "ylabel": "pH"
+     },
+     "caption": "Titration curve of a strong acid with a strong base: pH rises sharply near 25 cm³.",
+     "alt": "A curve starting at pH 1 rising slowly then very steeply at 25 cm³ to about pH 12 and levelling near 13."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Titration curves and indicators",
+     "md": "In a titration the volume of one solution needed to react exactly with another is measured. At the **equivalence point** the acid and base have reacted in the mole ratio of the equation. Strong acid + strong base: pH 7 at equivalence, a very steep rise. Weak acid + strong base: pH above 7 at equivalence (the salt is basic). Indicators change colour over about 2 pH units: **methyl orange** (about 3.1–4.4), **phenolphthalein** (about 8.3–10); choose one whose range lies in the steep part."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Saying the buffer 'neutralises' all added acid: it only limits the change in pH while the reservoirs last.\n- Using a buffer mixture of a weak acid with a strong acid salt (e.g. HA and NaCl): it needs the conjugate base.\n- Forgetting the dilution factor when the titrated solution was made up to a larger volume.\n- Choosing methyl orange for a weak acid/strong base titration: its range is far from the equivalence pH."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Buffer pH",
+     "statement": "A buffer is made from 0.10 mol dm⁻³ ethanoic acid and 0.10 mol dm⁻³ sodium ethanoate (K_a = 1.8 × 10⁻⁵, pK_a = 4.74). Find its pH, then the pH if 10.0 cm³ of 0.100 mol dm⁻³ HCl is added to 100 cm³ of the buffer.",
+     "steps": [
+      "pH = pK_a + lg(0.10/0.10) = 4.74 + 0 = 4.74.",
+      "Moles: HA = A⁻ = 0.0100 mol; added H⁺ = 0.00100 mol reacts with A⁻: A⁻ = 0.0090, HA = 0.0110 mol.",
+      "pH = 4.74 + lg(0.0090/0.0110) = 4.74 − 0.087 = 4.66 (only a change of 0.08)."
+     ],
+     "answer": "pH = 4.74, then 4.66"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Titration of vinegar",
+     "statement": "10.0 cm³ of vinegar is made up to 250 cm³. 25.0 cm³ of this solution needs 8.30 cm³ of 0.100 mol dm⁻³ NaOH. Find the concentration of ethanoic acid in the vinegar (CH₃COOH + NaOH → CH₃COONa + H₂O; M = 60.0).",
+     "steps": [
+      "n(NaOH) = 0.100 × 8.30/1000 = 8.30 × 10⁻⁴ mol = n(acid) in 25.0 cm³ (1 : 1).",
+      "Concentration of the diluted solution = 8.30 × 10⁻⁴/0.0250 = 0.0332 mol dm⁻³; undiluted = × 25 = 0.830 mol dm⁻³.",
+      "Mass concentration = 0.830 × 60.0 = 49.8 g dm⁻³, about 5 % (g per 100 cm³), a typical value for vinegar."
+     ],
+     "answer": "0.830 mol dm⁻³ (about 50 g dm⁻³)"
+    }
+   ],
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-redox",
+   "title": "Redox reactions and oxidation numbers",
+   "minutes": 40,
+   "programRef": "GCE Advanced Level Chemistry — acids, bases and buffers (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define oxidation and reduction in terms of electron transfer and oxidation number; assign oxidation numbers",
+    "Write and combine half-equations, including in acidic solution, and recognise disproportionation",
+    "Do calculations for redox titrations (for example KMnO₄ with Fe²⁺)"
+   ],
+   "prerequisites": [
+    "lower6-chemistry-mole"
+   ],
+   "exercises": [
+    "lower6-chemistry-ch-acids-e13",
+    "lower6-chemistry-ch-acids-e14",
+    "lower6-chemistry-ch-acids-e15",
+    "lower6-chemistry-ch-acids-e16",
+    "lower6-chemistry-ch-acids-e17",
+    "lower6-chemistry-ch-acids-e18"
+   ],
+   "selfCheck": [
+    "lower6-chemistry-redox-q1",
+    "lower6-chemistry-redox-q2",
+    "lower6-chemistry-redox-q3",
+    "lower6-chemistry-redox-q4",
+    "lower6-chemistry-redox-q5"
+   ],
+   "reviewNotes": [
+    "Data used: Ar values rounded as in common school tables (H 1.0, C 12.0, N 14.0, O 16.0, Na 23.0, Mg 24.0, Al 27.0, S 32.0, Cl 35.5, K 39.0, Ca 40.0, Fe 56.0, Cu 63.5, Zn 65.0); molar volume of a gas 24.0 dm³ at room temperature and pressure (25 °C, 1 atm), 22.4 dm³ at stp; R = 8.31 J mol⁻¹ K⁻¹; N_A = 6.02 × 10²³ mol⁻¹.",
+    "Mass of iron tablets used in problems is illustrative; chosen for round numbers.",
+    "Balancing in alkaline solution is not covered.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Oxidation and reduction",
+     "md": "**Oxidation** is loss of electrons (oxidation number increases); **reduction** is gain of electrons (oxidation number decreases): *OIL RIG*. An **oxidising agent** is reduced; a **reducing agent** is oxidised.\n\nRules for **oxidation numbers**: elements 0; simple ions = charge; O is −2 (except in peroxides, −1); H is +1 (except in metal hydrides, −1); the sum in a neutral compound is 0 and in an ion equals its charge. Examples: Mn in MnO₄⁻ is +7; Cr in Cr₂O₇²⁻ is +6."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Balancing a redox equation",
+     "md": "1. Write the two half-equations (oxidation and reduction).\n2. Balance atoms other than O and H; then O using H₂O; then H using H⁺ (acidic solution); then charge using electrons.\n3. Multiply so that the electrons cancel and add the half-equations.\n\nExample: MnO₄⁻ + 8H⁺ + 5e⁻ → Mn²⁺ + 4H₂O and Fe²⁺ → Fe³⁺ + e⁻ give **MnO₄⁻ + 8H⁺ + 5Fe²⁺ → Mn²⁺ + 4H₂O + 5Fe³⁺**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 330,
+      "h": 270,
+      "items": [
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 20,
+        "w": 16,
+        "h": 120,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 138,
+        "y1": 140,
+        "x2": 138,
+        "y2": 160,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 70,
+        "text": "burette:",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 88,
+        "text": "KMnO₄ (purple)",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         95,
+         230,
+         185,
+         230,
+         155,
+         170,
+         125,
+         170
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 140,
+        "y": 255,
+        "text": "conical flask: Fe²⁺(aq)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Titration apparatus: KMnO₄ from the burette is added to Fe²⁺ solution in the flask.",
+     "alt": "A burette above a conical flask containing a pale solution."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Disproportionation and titrations",
+     "md": "In **disproportionation** the same element is both oxidised and reduced: Cl₂ + 2NaOH → NaCl + NaClO + H₂O (Cl: 0 → −1 and +1). In a **redox titration** with acidified potassium manganate(VII), the purple MnO₄⁻ is its own indicator: the end-point is the first permanent pale pink colour. Use dilute sulfuric acid (not hydrochloric acid, which MnO₄⁻ oxidises)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Forgetting that oxidation numbers are written +7, −2 with the sign, and that they are per atom.\n- Not cancelling electrons (5Fe²⁺ for each MnO₄⁻).\n- Using HCl to acidify a permanganate titration.\n- Saying oxidation is gain of oxygen only: the electron definition is more general."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Oxidation numbers",
+     "statement": "Find the oxidation number of (a) S in H₂SO₄, (b) N in NH₄⁺, (c) Cr in Cr₂O₇²⁻. State what happens to Cl in Cl₂ + 2NaOH → NaCl + NaClO + H₂O.",
+     "steps": [
+      "(a) 2(+1) + S + 4(−2) = 0, so S = +6. (b) N + 4(+1) = +1, so N = −3. (c) 2Cr + 7(−2) = −2, so Cr = +6.",
+      "Chlorine goes from 0 in Cl₂ to −1 in NaCl (reduced) and to +1 in NaClO (oxidised): disproportionation."
+     ],
+     "answer": "S +6, N −3, Cr +6; Cl is disproportionated"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Redox titration",
+     "statement": "25.0 cm³ of an iron(II) solution needs 20.00 cm³ of 0.0200 mol dm⁻³ KMnO₄ in acid. Find the concentration of Fe²⁺.",
+     "steps": [
+      "n(MnO₄⁻) = 0.0200 × 20.00/1000 = 4.00 × 10⁻⁴ mol.",
+      "Ratio MnO₄⁻ : Fe²⁺ = 1 : 5, so n(Fe²⁺) = 2.00 × 10⁻³ mol.",
+      "c = 2.00 × 10⁻³/0.0250 = 0.0800 mol dm⁻³."
+     ],
+     "answer": "[Fe²⁺] = 0.0800 mol dm⁻³"
+    }
+   ],
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-electrolysis",
+   "title": "Electrolysis and Faraday's laws",
+   "minutes": 40,
+   "programRef": "GCE Advanced Level Chemistry — acids, bases and buffers (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe electrolysis of molten compounds and aqueous solutions and predict the products at each electrode",
+    "Use Q = It and the Faraday constant to calculate masses and volumes deposited",
+    "Describe applications: extraction of aluminium, electroplating and purification of copper"
+   ],
+   "prerequisites": [
+    "lower6-chemistry-redox"
+   ],
+   "exercises": [
+    "lower6-chemistry-ch-acids-e19",
+    "lower6-chemistry-ch-acids-e20",
+    "lower6-chemistry-ch-acids-e21",
+    "lower6-chemistry-ch-acids-e22",
+    "lower6-chemistry-ch-acids-e23",
+    "lower6-chemistry-ch-acids-e24"
+   ],
+   "selfCheck": [
+    "lower6-chemistry-electrolysis-q1",
+    "lower6-chemistry-electrolysis-q2",
+    "lower6-chemistry-electrolysis-q3",
+    "lower6-chemistry-electrolysis-q4",
+    "lower6-chemistry-electrolysis-q5"
+   ],
+   "reviewNotes": [
+    "Data used: Ar values rounded as in common school tables (H 1.0, C 12.0, N 14.0, O 16.0, Na 23.0, Mg 24.0, Al 27.0, S 32.0, Cl 35.5, K 39.0, Ca 40.0, Fe 56.0, Cu 63.5, Zn 65.0); molar volume of a gas 24.0 dm³ at room temperature and pressure (25 °C, 1 atm), 22.4 dm³ at stp; R = 8.31 J mol⁻¹ K⁻¹; N_A = 6.02 × 10²³ mol⁻¹. F = 96 500 C mol⁻¹.",
+    "A Cameroonian industrial example (aluminium smelter) was deliberately left out of the lesson text until a teacher can confirm the facts.",
+    "Standard electrode potentials (to predict discharge) are in the Upper Sixth pack.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Electrolysis",
+     "md": "**Electrolysis** is the decomposition of an ionic compound (molten or in solution) by an electric current through an **electrolyte** between two **electrodes**. At the **cathode** (−) cations are **reduced**; at the **anode** (+) anions are **oxidised** (the mnemonic: *RedCat, AnOx*).\n\nIn molten compounds the ions are discharged directly (e.g. molten PbBr₂: Pb at the cathode, Br₂ at the anode)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Products from aqueous solutions",
+     "md": "At the **cathode** the less reactive metal ion is reduced (Cu²⁺ before H⁺; for K⁺, Na⁺, Ca²⁺, Al³⁺ hydrogen is formed). At the **anode**: halide ions (Cl⁻, Br⁻, I⁻) are discharged if reasonably concentrated; otherwise hydroxide (from water) is oxidised to O₂; sulfate and nitrate ions are not discharged. With copper electrodes in CuSO₄(aq) the anode dissolves and copper is deposited at the cathode (purification, electroplating)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 250,
+      "items": [
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 70,
+        "w": 160,
+        "h": 120,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 50,
+        "x2": 150,
+        "y2": 150,
+        "color": "grey",
+        "width": 6
+       },
+       {
+        "t": "line",
+        "x1": 230,
+        "y1": 50,
+        "x2": 230,
+        "y2": 150,
+        "color": "orange",
+        "width": 6
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 50,
+        "x2": 150,
+        "y2": 20,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 230,
+        "y1": 50,
+        "x2": 230,
+        "y2": 20,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 20,
+        "x2": 175,
+        "y2": 20,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 205,
+        "y1": 20,
+        "x2": 230,
+        "y2": 20,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 183,
+        "y1": 10,
+        "x2": 183,
+        "y2": 30,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 197,
+        "y1": 17,
+        "x2": 197,
+        "y2": 23,
+        "color": "ink",
+        "width": 4
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 8,
+        "text": "supply",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 175,
+        "text": "cathode (−)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 175,
+        "text": "anode (+)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "orange"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 215,
+        "text": "reduction: Cu²⁺ + 2e⁻ → Cu",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 235,
+        "text": "oxidation: 2Cl⁻ → Cl₂ + 2e⁻",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "An electrolysis cell: reduction at the cathode (−), oxidation at the anode (+).",
+     "alt": "A beaker with two electrodes connected to a supply, the negative cathode and positive anode labelled with the half-reactions."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Faraday's laws",
+     "md": "**Q = It** (coulombs). The **Faraday constant** F = 96 500 C mol⁻¹ is the charge of one mole of electrons (F = N_A × e). Moles of electrons = Q/F. For an ion of charge z, moles of substance = Q/(zF). For a gas, 1 mol at rtp = 24.0 dm³.\n\nAluminium is extracted by electrolysis of alumina dissolved in molten cryolite (Al³⁺ + 3e⁻ → Al); the carbon anodes burn away.",
+     "tex": "Q=It\\qquad n(e^-)=\\frac{Q}{F}"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using minutes instead of seconds in Q = It.\n- Forgetting the charge z: Cu²⁺ needs 2 mol of electrons per mole of copper; Al³⁺ needs 3.\n- Saying electrons flow through the electrolyte: they flow in the wires; ions carry the current in the electrolyte.\n- Confusing the polarity: anode is positive in electrolysis (the opposite of a galvanic cell's labelling by polarity)."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Copper plating",
+     "statement": "A current of 2.00 A flows for 30.0 minutes through copper(II) sulfate solution. Find the mass of copper deposited (A_r Cu = 63.5, F = 96 500 C mol⁻¹).",
+     "steps": [
+      "Q = It = 2.00 × 30.0 × 60 = 3600 C; n(e⁻) = 3600/96 500 = 0.0373 mol.",
+      "Cu²⁺ + 2e⁻ → Cu, so n(Cu) = 0.0373/2 = 0.01865 mol.",
+      "m = 0.01865 × 63.5 = 1.18 g."
+     ],
+     "answer": "1.18 g of copper"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Water",
+     "statement": "A current of 5.0 A passes through dilute sulfuric acid for 10 minutes using inert electrodes. Find the volumes of H₂ and O₂ at rtp.",
+     "steps": [
+      "Q = 5.0 × 600 = 3000 C; n(e⁻) = 3000/96 500 = 0.0311 mol.",
+      "Cathode: 2H⁺ + 2e⁻ → H₂ gives 0.01555 mol, i.e. 0.01555 × 24.0 = 0.373 dm³.",
+      "Anode: 4OH⁻ → O₂ + 2H₂O + 4e⁻ gives 0.00777 mol = 0.187 dm³ (half the volume of H₂)."
+     ],
+     "answer": "373 cm³ of H₂ and 187 cm³ of O₂"
+    }
+   ],
+   "chapter": "lower6-chemistry-ch-acids"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "lower6-chemistry-ch-acids-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-chemistry-acids",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Calculate the pH of 0.0010 mol dm⁻³ HNO₃ (strong acid).",
+   "answer": 3.0,
+   "tolerance": 0.01,
+   "explanation": "[H⁺] = 1.0 × 10⁻³, so pH = 3.0.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-ch-acids-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-chemistry-acids",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Calculate [H⁺] (mol dm⁻³, in units of 10⁻⁵) for a solution of pH 4.50 (3 s.f.).",
+   "answer": 3.16,
+   "tolerance": 0.02,
+   "unit": "× 10⁻⁵ mol/dm³",
+   "explanation": "[H⁺] = 10⁻⁴·⁵ = 3.16 × 10⁻⁵ mol dm⁻³.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-ch-acids-e03",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "lower6-chemistry-acids",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Match each substance with its role in water.",
+   "pairs": [
+    [
+     "HCl",
+     "strong acid"
+    ],
+    [
+     "CH₃COOH",
+     "weak acid"
+    ],
+    [
+     "NaOH",
+     "strong base"
+    ],
+    [
+     "NH₃",
+     "weak base"
+    ]
+   ],
+   "explanation": "HCl and NaOH ionise/dissociate completely; ethanoic acid and ammonia only partly.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-ch-acids-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-chemistry-acids",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Find the pH of 0.050 mol dm⁻³ H₂SO₄, treating it as fully ionised to 2H⁺ (3 s.f.).",
+   "answer": 1.0,
+   "tolerance": 0.01,
+   "explanation": "[H⁺] = 2 × 0.050 = 0.10, pH = 1.00.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-ch-acids-e05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-chemistry-acids",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "A weak acid HA of concentration 0.050 mol dm⁻³ has pH 3.00. Estimate K_a (in units of 10⁻⁵ mol dm⁻³, 2 s.f.).",
+   "answer": 2.0,
+   "tolerance": 0.1,
+   "unit": "× 10⁻⁵ mol/dm³",
+   "explanation": "[H⁺] = 1.0 × 10⁻³; K_a ≈ [H⁺]²/c = 10⁻⁶/0.050 = 2.0 × 10⁻⁵.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-ch-acids-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-chemistry-acids",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Ethanoic acid has K_a = 1.8 × 10⁻⁵ mol dm⁻³ at 25 °C.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "[H⁺] in 0.10 mol dm⁻³ ethanoic acid (10⁻³ mol dm⁻³, 3 s.f.).",
+     "answer": 1.34,
+     "tolerance": 0.01,
+     "explanation": "√(1.8 × 10⁻⁵ × 0.10) = 1.34 × 10⁻³ mol dm⁻³.",
+     "unit": "× 10⁻³ mol/dm³",
+     "id": "lower6-chemistry-ch-acids-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "pH of the solution (3 s.f.).",
+     "answer": 2.87,
+     "tolerance": 0.01,
+     "explanation": "pH = −lg(1.342 × 10⁻³) = 2.87.",
+     "id": "lower6-chemistry-ch-acids-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "pK_a of ethanoic acid (3 s.f.).",
+     "answer": 4.74,
+     "tolerance": 0.01,
+     "explanation": "pK_a = −lg(1.8 × 10⁻⁵) = 4.74 (4.745).",
+     "id": "lower6-chemistry-ch-acids-e06-c"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "If the solution is diluted tenfold, the pH",
+     "choices": [
+      "stays the same",
+      "rises by about 0.5",
+      "falls",
+      "rises by 1"
+     ],
+     "answer": 1,
+     "explanation": "[H⁺] ∝ √c: tenfold dilution divides [H⁺] by √10, so pH rises by 0.5.",
+     "id": "lower6-chemistry-ch-acids-e06-d"
+    }
+   ],
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 200,
+    "items": [
+     {
+      "t": "rect",
+      "x": 20,
+      "y": 70,
+      "w": 26,
+      "h": 40,
+      "stroke": "ink",
+      "width": 1,
+      "fill": "red"
+     },
+     {
+      "t": "rect",
+      "x": 46,
+      "y": 70,
+      "w": 26,
+      "h": 40,
+      "stroke": "ink",
+      "width": 1,
+      "fill": "red"
+     },
+     {
+      "t": "rect",
+      "x": 72,
+      "y": 70,
+      "w": 26,
+      "h": 40,
+      "stroke": "ink",
+      "width": 1,
+      "fill": "red"
+     },
+     {
+      "t": "rect",
+      "x": 98,
+      "y": 70,
+      "w": 26,
+      "h": 40,
+      "stroke": "ink",
+      "width": 1,
+      "fill": "orange"
+     },
+     {
+      "t": "rect",
+      "x": 124,
+      "y": 70,
+      "w": 26,
+      "h": 40,
+      "stroke": "ink",
+      "width": 1,
+      "fill": "orange"
+     },
+     {
+      "t": "rect",
+      "x": 150,
+      "y": 70,
+      "w": 26,
+      "h": 40,
+      "stroke": "ink",
+      "width": 1,
+      "fill": "yellow"
+     },
+     {
+      "t": "rect",
+      "x": 176,
+      "y": 70,
+      "w": 26,
+      "h": 40,
+      "stroke": "ink",
+      "width": 1,
+      "fill": "yellow"
+     },
+     {
+      "t": "rect",
+      "x": 202,
+      "y": 70,
+      "w": 26,
+      "h": 40,
+      "stroke": "ink",
+      "width": 1,
+      "fill": "green"
+     },
+     {
+      "t": "rect",
+      "x": 228,
+      "y": 70,
+      "w": 26,
+      "h": 40,
+      "stroke": "ink",
+      "width": 1,
+      "fill": "cyan"
+     },
+     {
+      "t": "rect",
+      "x": 254,
+      "y": 70,
+      "w": 26,
+      "h": 40,
+      "stroke": "ink",
+      "width": 1,
+      "fill": "cyan"
+     },
+     {
+      "t": "rect",
+      "x": 280,
+      "y": 70,
+      "w": 26,
+      "h": 40,
+      "stroke": "ink",
+      "width": 1,
+      "fill": "blue"
+     },
+     {
+      "t": "rect",
+      "x": 306,
+      "y": 70,
+      "w": 26,
+      "h": 40,
+      "stroke": "ink",
+      "width": 1,
+      "fill": "blue"
+     },
+     {
+      "t": "rect",
+      "x": 332,
+      "y": 70,
+      "w": 26,
+      "h": 40,
+      "stroke": "ink",
+      "width": 1,
+      "fill": "purple"
+     },
+     {
+      "t": "rect",
+      "x": 358,
+      "y": 70,
+      "w": 26,
+      "h": 40,
+      "stroke": "ink",
+      "width": 1,
+      "fill": "purple"
+     },
+     {
+      "t": "text",
+      "x": 33,
+      "y": 135,
+      "text": "0",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 111,
+      "y": 135,
+      "text": "3",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 215,
+      "y": 135,
+      "text": "7",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 319,
+      "y": 135,
+      "text": "11",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 384,
+      "y": 135,
+      "text": "14",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 200,
+      "y": 40,
+      "text": "pH scale (25 °C)",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 60,
+      "y": 175,
+      "text": "acidic",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 200,
+      "y": 175,
+      "text": "neutral",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 335,
+      "y": 175,
+      "text": "alkaline",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink"
+     }
+    ]
+   },
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-acids-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-acids",
+   "prompt": "A Brønsted–Lowry acid is",
+   "choices": [
+    "an electron donor",
+    "a proton acceptor",
+    "a hydroxide donor",
+    "a proton donor"
+   ],
+   "answer": 3,
+   "explanation": "H⁺ donors.",
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-acids-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-acids",
+   "prompt": "The conjugate base of H₂O is",
+   "choices": [
+    "H₂",
+    "OH⁻",
+    "O²⁻",
+    "H₃O⁺"
+   ],
+   "answer": 1,
+   "explanation": "Remove one H⁺.",
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-acids-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-acids",
+   "prompt": "A solution has [OH⁻] = 1.0 × 10⁻⁴ mol dm⁻³. Its pH is",
+   "choices": [
+    "11",
+    "10",
+    "4",
+    "7"
+   ],
+   "answer": 1,
+   "explanation": "pOH = 4; pH = 14 − 4 = 10.",
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-acids-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-acids",
+   "prompt": "A weak acid",
+   "choices": [
+    "has pH 7",
+    "is always dilute",
+    "is a strong proton donor",
+    "is only partly ionised in solution"
+   ],
+   "answer": 3,
+   "explanation": "HA ⇌ H⁺ + A⁻.",
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-acids-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-acids",
+   "prompt": "If pH changes from 3 to 5, [H⁺] changes by a factor of",
+   "choices": [
+    "1000 (decreases)",
+    "100 (decreases)",
+    "10 (increases)",
+    "2"
+   ],
+   "answer": 1,
+   "explanation": "Each pH unit is a tenfold change: two units give 100.",
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-ch-acids-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-chemistry-buffers",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "25.0 cm³ of NaOH is neutralised by 21.50 cm³ of 0.100 mol dm⁻³ HCl. Find the concentration of NaOH (mol dm⁻³, 3 s.f.).",
+   "answer": 0.086,
+   "tolerance": 0.0005,
+   "unit": "mol/dm³",
+   "explanation": "n(HCl) = 0.100 × 0.02150 = 2.15 × 10⁻³ mol = n(NaOH); c = 2.15 × 10⁻³/0.0250 = 0.0860 mol dm⁻³.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-ch-acids-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-chemistry-buffers",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "A buffer solution can be made from",
+   "choices": [
+    "nitric acid and water",
+    "ethanoic acid and sodium ethanoate",
+    "hydrochloric acid and sodium chloride",
+    "sodium hydroxide and sodium chloride"
+   ],
+   "answer": 1,
+   "explanation": "A weak acid and its salt (conjugate base).",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-ch-acids-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-chemistry-buffers",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "True or false: a weak acid titrated with a strong base has an equivalence point at pH 7.",
+   "answer": false,
+   "explanation": "The salt formed is basic (its anion hydrolyses), so the pH at equivalence is greater than 7.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-ch-acids-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-chemistry-buffers",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "A buffer has [HA] = 0.10 and [A⁻] = 0.20 mol dm⁻³ with pK_a = 4.74. Find the pH (3 s.f.).",
+   "answer": 5.05,
+   "tolerance": 0.01,
+   "explanation": "pH = 4.74 + lg 2 = 5.04 (5.05 using pK_a = 4.745).",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-ch-acids-e11",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-chemistry-buffers",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Which indicator is suitable for titrating ethanoic acid with sodium hydroxide?",
+   "choices": [
+    "methyl orange",
+    "no indicator can be used",
+    "phenolphthalein",
+    "methyl red only"
+   ],
+   "answer": 2,
+   "explanation": "The equivalence pH is about 8.7, within phenolphthalein's range (8.3–10).",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-ch-acids-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-chemistry-buffers",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "25.0 cm³ of 0.100 mol dm⁻³ hydrochloric acid is titrated with 0.100 mol dm⁻³ sodium hydroxide (see the titration curve).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Volume of NaOH needed to reach the equivalence point (cm³).",
+     "answer": 25.0,
+     "tolerance": 0.05,
+     "explanation": "Equal concentrations and a 1 : 1 ratio: 25.0 cm³.",
+     "unit": "cm³",
+     "id": "lower6-chemistry-ch-acids-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "pH at the equivalence point.",
+     "answer": 7.0,
+     "tolerance": 0.1,
+     "explanation": "Strong acid + strong base give a neutral salt: pH 7.",
+     "id": "lower6-chemistry-ch-acids-e12-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "A suitable indicator is",
+     "choices": [
+      "universal indicator only",
+      "methyl orange or phenolphthalein (the steep rise covers both ranges)",
+      "starch",
+      "none: the pH change is too small"
+     ],
+     "answer": 1,
+     "explanation": "The jump from about pH 4 to 10 covers both ranges.",
+     "id": "lower6-chemistry-ch-acids-e12-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "pH after adding 20.0 cm³ of NaOH (3 s.f.).",
+     "answer": 1.95,
+     "tolerance": 0.02,
+     "explanation": "Excess H⁺: (25 − 20) × 0.100/45 = 0.0111 mol dm⁻³, so pH = 1.95.",
+     "id": "lower6-chemistry-ch-acids-e12-d"
+    }
+   ],
+   "figure": {
+    "kind": "plot",
+    "xmin": 0,
+    "xmax": 50,
+    "ymin": 0,
+    "ymax": 14,
+    "grid": 5,
+    "w": 400,
+    "h": 260,
+    "curves": [],
+    "points": [
+     {
+      "x": 25,
+      "y": 7,
+      "label": "equivalence 25 cm³",
+      "color": "red"
+     }
+    ],
+    "segments": [
+     {
+      "x1": 0,
+      "y1": 1.0,
+      "x2": 5,
+      "y2": 1.1760912590556813,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 5,
+      "y1": 1.1760912590556813,
+      "x2": 10,
+      "y2": 1.3679767852945943,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 10,
+      "y1": 1.3679767852945943,
+      "x2": 15,
+      "y2": 1.6020599913279623,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 15,
+      "y1": 1.6020599913279623,
+      "x2": 20,
+      "y2": 1.9542425094393248,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 20,
+      "y1": 1.9542425094393248,
+      "x2": 22,
+      "y2": 2.194976603216055,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 22,
+      "y1": 2.194976603216055,
+      "x2": 24,
+      "y2": 2.690196080028514,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 24,
+      "y1": 2.690196080028514,
+      "x2": 24.5,
+      "y2": 2.9956351945975497,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 24.5,
+      "y1": 2.9956351945975497,
+      "x2": 24.9,
+      "y2": 3.6981005456233835,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 24.9,
+      "y1": 3.6981005456233835,
+      "x2": 25,
+      "y2": 7.0,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 25,
+      "y1": 7.0,
+      "x2": 25.1,
+      "y2": 10.30016227413276,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 25.1,
+      "y1": 10.30016227413276,
+      "x2": 25.5,
+      "y2": 10.995678626217357,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 25.5,
+      "y1": 10.995678626217357,
+      "x2": 26,
+      "y2": 11.292429823902063,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 26,
+      "y1": 11.292429823902063,
+      "x2": 28,
+      "y2": 11.752845385118874,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 28,
+      "y1": 11.752845385118874,
+      "x2": 30,
+      "y2": 11.958607314841775,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 30,
+      "y1": 11.958607314841775,
+      "x2": 35,
+      "y2": 12.221848749616356,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 35,
+      "y1": 12.221848749616356,
+      "x2": 40,
+      "y2": 12.363177902412826,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 40,
+      "y1": 12.363177902412826,
+      "x2": 50,
+      "y2": 12.522878745280337,
+      "color": "blue",
+      "dash": false
+     }
+    ],
+    "xlabel": "volume of NaOH added / cm³",
+    "ylabel": "pH"
+   },
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-buffers-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-buffers",
+   "prompt": "In a buffer of HA and A⁻, added OH⁻ is removed by",
+   "choices": [
+    "the indicator",
+    "HA",
+    "water only",
+    "A⁻"
+   ],
+   "answer": 1,
+   "explanation": "HA + OH⁻ → A⁻ + H₂O.",
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-buffers-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-buffers",
+   "prompt": "When [A⁻] = [HA] the pH of a buffer equals",
+   "choices": [
+    "2 pK_a",
+    "7",
+    "pK_w",
+    "pK_a"
+   ],
+   "answer": 3,
+   "explanation": "lg 1 = 0.",
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-buffers-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-buffers",
+   "prompt": "At the equivalence point of a titration",
+   "choices": [
+    "the pH is always 7",
+    "one solution is in excess",
+    "the indicator is colourless",
+    "the acid and base have reacted in the ratio of the equation"
+   ],
+   "answer": 3,
+   "explanation": "Stoichiometric amounts.",
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-buffers-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-buffers",
+   "prompt": "The pH in the blood is kept steady mainly by",
+   "choices": [
+    "methyl orange",
+    "sodium chloride",
+    "the carbonic acid/hydrogencarbonate buffer",
+    "water alone"
+   ],
+   "answer": 2,
+   "explanation": "A natural buffer system.",
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-buffers-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-buffers",
+   "prompt": "Which is the correct apparatus to measure 25.0 cm³ of solution accurately?",
+   "choices": [
+    "a pipette",
+    "a measuring cylinder",
+    "a beaker",
+    "a conical flask"
+   ],
+   "answer": 0,
+   "explanation": "Pipettes give the best accuracy.",
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-ch-acids-e13",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-chemistry-redox",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "What is the oxidation number of Mn in KMnO₄?",
+   "choices": [
+    "+2",
+    "+6",
+    "+4",
+    "+7"
+   ],
+   "answer": 3,
+   "explanation": "K +1; four O at −2 = −8; so Mn = +7.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-ch-acids-e14",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-chemistry-redox",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Find the oxidation number of Cr in K₂Cr₂O₇.",
+   "answer": 6,
+   "tolerance": 0,
+   "explanation": "2(+1) + 2Cr + 7(−2) = 0, so Cr = +6.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-ch-acids-e15",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-chemistry-redox",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "True or false: in the reaction Zn + Cu²⁺ → Zn²⁺ + Cu, zinc is oxidised.",
+   "answer": true,
+   "explanation": "Zn loses two electrons (0 → +2): it is oxidised and acts as the reducing agent.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-ch-acids-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-chemistry-redox",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "25.0 cm³ of Fe²⁺ solution needs 15.00 cm³ of 0.0200 mol dm⁻³ KMnO₄. Find [Fe²⁺] (mol dm⁻³, 3 s.f.).",
+   "answer": 0.06,
+   "tolerance": 0.0005,
+   "unit": "mol/dm³",
+   "explanation": "n(MnO₄⁻) = 3.00 × 10⁻⁴; n(Fe²⁺) = 1.50 × 10⁻³ mol; c = 0.0600 mol dm⁻³.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-ch-acids-e17",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-chemistry-redox",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "In Cl₂ + 2NaOH → NaCl + NaClO + H₂O, chlorine is",
+   "choices": [
+    "only oxidised",
+    "only reduced",
+    "both oxidised and reduced",
+    "neither"
+   ],
+   "answer": 2,
+   "explanation": "Its oxidation number goes 0 → −1 and 0 → +1.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-ch-acids-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-chemistry-redox",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "An iron tablet of mass 0.50 g is dissolved in dilute sulfuric acid and made up to 100 cm³. 25.0 cm³ of this solution needs 22.50 cm³ of 0.0100 mol dm⁻³ KMnO₄ (A_r: Fe 56.0).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Moles of MnO₄⁻ used (10⁻⁴ mol, 3 s.f.).",
+     "answer": 2.25,
+     "tolerance": 0.01,
+     "explanation": "0.0100 × 0.02250 = 2.25 × 10⁻⁴ mol.",
+     "unit": "× 10⁻⁴ mol",
+     "id": "lower6-chemistry-ch-acids-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Moles of Fe²⁺ in 25.0 cm³ (10⁻³ mol, 3 s.f.).",
+     "answer": 1.12,
+     "tolerance": 0.01,
+     "explanation": "5 × 2.25 × 10⁻⁴ = 1.125 × 10⁻³ mol (1.12 or 1.13 in these units).",
+     "unit": "× 10⁻³ mol",
+     "id": "lower6-chemistry-ch-acids-e18-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Mass of iron in the whole tablet (g, 3 s.f.).",
+     "answer": 0.252,
+     "tolerance": 0.002,
+     "explanation": "Moles in 100 cm³ = 4 × 1.125 × 10⁻³ = 4.50 × 10⁻³ mol; mass = 4.50 × 10⁻³ × 56.0 = 0.252 g.",
+     "unit": "g",
+     "id": "lower6-chemistry-ch-acids-e18-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Percentage of iron in the tablet by mass (%, 3 s.f.).",
+     "answer": 50.4,
+     "tolerance": 0.2,
+     "explanation": "0.252/0.50 × 100 = 50.4 %.",
+     "unit": "%",
+     "id": "lower6-chemistry-ch-acids-e18-d"
+    }
+   ],
+   "figure": {
+    "kind": "shapes",
+    "w": 330,
+    "h": 270,
+    "items": [
+     {
+      "t": "rect",
+      "x": 130,
+      "y": 20,
+      "w": 16,
+      "h": 120,
+      "stroke": "ink",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 138,
+      "y1": 140,
+      "x2": 138,
+      "y2": 160,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "text",
+      "x": 160,
+      "y": 70,
+      "text": "burette:",
+      "size": 12,
+      "anchor": "start",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 160,
+      "y": 88,
+      "text": "KMnO₄ (purple)",
+      "size": 12,
+      "anchor": "start",
+      "color": "ink"
+     },
+     {
+      "t": "poly",
+      "pts": [
+       95,
+       230,
+       185,
+       230,
+       155,
+       170,
+       125,
+       170
+      ],
+      "stroke": "ink",
+      "width": 2,
+      "closed": true,
+      "fill": "lightyellow"
+     },
+     {
+      "t": "text",
+      "x": 140,
+      "y": 255,
+      "text": "conical flask: Fe²⁺(aq)",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     }
+    ]
+   },
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-redox-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-redox",
+   "prompt": "Oxidation is",
+   "choices": [
+    "gain of electrons",
+    "gain of protons",
+    "loss of neutrons",
+    "loss of electrons"
+   ],
+   "answer": 3,
+   "explanation": "OIL RIG.",
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-redox-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-redox",
+   "prompt": "The oxidising agent in MnO₄⁻ + 8H⁺ + 5Fe²⁺ → Mn²⁺ + 4H₂O + 5Fe³⁺ is",
+   "choices": [
+    "H₂O",
+    "Fe²⁺",
+    "H⁺",
+    "MnO₄⁻"
+   ],
+   "answer": 3,
+   "explanation": "MnO₄⁻ is reduced (+7 → +2), so it is the oxidising agent.",
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-redox-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-redox",
+   "prompt": "The oxidation number of oxygen in H₂O₂ is",
+   "choices": [
+    "−2",
+    "−1",
+    "0",
+    "+1"
+   ],
+   "answer": 1,
+   "explanation": "In peroxides O is −1.",
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-redox-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-redox",
+   "prompt": "The end-point colour in a permanganate titration is",
+   "choices": [
+    "blue-black",
+    "yellow",
+    "permanent pale pink",
+    "colourless"
+   ],
+   "answer": 2,
+   "explanation": "MnO₄⁻ acts as its own indicator.",
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-redox-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-redox",
+   "prompt": "Which acid is used to acidify KMnO₄ titrations?",
+   "choices": [
+    "hydrochloric acid",
+    "dilute sulfuric acid",
+    "nitric acid",
+    "ethanoic acid"
+   ],
+   "answer": 1,
+   "explanation": "Neither Cl⁻ nor NO₃⁻ should interfere.",
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-ch-acids-e19",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-chemistry-electrolysis",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Find the charge passed by 0.50 A in 20 minutes (C).",
+   "answer": 600.0,
+   "tolerance": 0.5,
+   "unit": "C",
+   "explanation": "Q = It = 0.50 × 1200 = 600 C.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-ch-acids-e20",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-chemistry-electrolysis",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "At the cathode during the electrolysis of aqueous copper(II) sulfate (inert electrodes), the product is",
+   "choices": [
+    "copper",
+    "hydrogen",
+    "oxygen",
+    "sulfur"
+   ],
+   "answer": 0,
+   "explanation": "Cu²⁺ is reduced in preference to H⁺.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-ch-acids-e21",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-chemistry-electrolysis",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "True or false: in electrolysis, electrons flow through the electrolyte.",
+   "answer": false,
+   "explanation": "Ions carry the current in the electrolyte; electrons flow in the external wires.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-ch-acids-e22",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-chemistry-electrolysis",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Calculate the mass of silver deposited by 0.500 A for 1.00 hour (A_r Ag = 108; Ag⁺ + e⁻ → Ag; g, 3 s.f.).",
+   "answer": 2.01,
+   "tolerance": 0.02,
+   "unit": "g",
+   "explanation": "Q = 1800 C; n(e⁻) = 0.01865 mol = n(Ag); m = 0.01865 × 108 = 2.01 g.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-ch-acids-e23",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-chemistry-electrolysis",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "How long must 100 kA pass to deposit 1.00 kg of aluminium (Al³⁺ + 3e⁻ → Al; A_r = 27.0)? Give seconds (3 s.f.).",
+   "answer": 107.0,
+   "tolerance": 1,
+   "unit": "s",
+   "explanation": "n(Al) = 1000/27.0 = 37.0 mol; n(e⁻) = 111 mol; Q = 111 × 96 500 = 1.07 × 10⁷ C; t = Q/I = 107 s.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-ch-acids-e24",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-chemistry-electrolysis",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "An aluminium smelter electrolyses alumina (Al₂O₃) dissolved in molten cryolite using a current of 80 kA (A_r Al = 27.0; F = 96 500 C mol⁻¹). Consider 1.0 hour at 100 % current efficiency.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Charge passed in one hour (10⁸ C, 3 s.f.).",
+     "answer": 2.88,
+     "tolerance": 0.01,
+     "explanation": "Q = It = 8.0 × 10⁴ × 3600 = 2.88 × 10⁸ C.",
+     "unit": "× 10⁸ C",
+     "id": "lower6-chemistry-ch-acids-e24-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Moles of electrons (10³ mol, 3 s.f.).",
+     "answer": 2.98,
+     "tolerance": 0.02,
+     "explanation": "n(e⁻) = 2.88 × 10⁸/96 500 = 2.98 × 10³ mol.",
+     "unit": "× 10³ mol",
+     "id": "lower6-chemistry-ch-acids-e24-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Mass of aluminium formed (kg, 3 s.f.).",
+     "answer": 26.9,
+     "tolerance": 0.2,
+     "explanation": "n(Al) = 2985/3 = 995 mol; m = 995 × 27.0 = 26.9 kg.",
+     "unit": "kg",
+     "id": "lower6-chemistry-ch-acids-e24-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explain why the carbon anodes must be replaced regularly.",
+     "model": "Oxygen formed at the anode reacts with the hot carbon to form carbon dioxide, so the anodes burn away.",
+     "rubric": "1 mark: oxygen produced at the anode; 1 mark: reacts with (hot) carbon to form CO₂/CO.",
+     "explanation": "Oxygen formed at the anode reacts with the hot carbon to form carbon dioxide, so the anodes burn away.",
+     "id": "lower6-chemistry-ch-acids-e24-d"
+    }
+   ],
+   "figure": {
+    "kind": "shapes",
+    "w": 420,
+    "h": 250,
+    "items": [
+     {
+      "t": "rect",
+      "x": 110,
+      "y": 70,
+      "w": 160,
+      "h": 120,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightblue"
+     },
+     {
+      "t": "line",
+      "x1": 150,
+      "y1": 50,
+      "x2": 150,
+      "y2": 150,
+      "color": "grey",
+      "width": 6
+     },
+     {
+      "t": "line",
+      "x1": 230,
+      "y1": 50,
+      "x2": 230,
+      "y2": 150,
+      "color": "orange",
+      "width": 6
+     },
+     {
+      "t": "line",
+      "x1": 150,
+      "y1": 50,
+      "x2": 150,
+      "y2": 20,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 230,
+      "y1": 50,
+      "x2": 230,
+      "y2": 20,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 150,
+      "y1": 20,
+      "x2": 175,
+      "y2": 20,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 205,
+      "y1": 20,
+      "x2": 230,
+      "y2": 20,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 183,
+      "y1": 10,
+      "x2": 183,
+      "y2": 30,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 197,
+      "y1": 17,
+      "x2": 197,
+      "y2": 23,
+      "color": "ink",
+      "width": 4
+     },
+     {
+      "t": "text",
+      "x": 190,
+      "y": 8,
+      "text": "supply",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 150,
+      "y": 175,
+      "text": "cathode (−)",
+      "size": 12,
+      "anchor": "middle",
+      "color": "grey"
+     },
+     {
+      "t": "text",
+      "x": 230,
+      "y": 175,
+      "text": "anode (+)",
+      "size": 12,
+      "anchor": "middle",
+      "color": "orange"
+     },
+     {
+      "t": "text",
+      "x": 150,
+      "y": 215,
+      "text": "reduction: Cu²⁺ + 2e⁻ → Cu",
+      "size": 12,
+      "anchor": "start",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 150,
+      "y": 235,
+      "text": "oxidation: 2Cl⁻ → Cl₂ + 2e⁻",
+      "size": 12,
+      "anchor": "start",
+      "color": "ink"
+     }
+    ]
+   },
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-electrolysis-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-electrolysis",
+   "prompt": "The Faraday constant is the charge of",
+   "choices": [
+    "one coulomb",
+    "one mole of atoms",
+    "one mole of electrons",
+    "one electron"
+   ],
+   "answer": 2,
+   "explanation": "F = N_A × e.",
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-electrolysis-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-electrolysis",
+   "prompt": "Which is produced at the anode when concentrated aqueous NaCl is electrolysed with inert electrodes?",
+   "choices": [
+    "oxygen only",
+    "sodium",
+    "chlorine",
+    "hydrogen"
+   ],
+   "answer": 2,
+   "explanation": "Cl⁻ is discharged in preference to OH⁻ in concentrated solution.",
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-electrolysis-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-electrolysis",
+   "prompt": "To deposit 1 mol of Cu from Cu²⁺ you need",
+   "choices": [
+    "0.5 mol of electrons",
+    "1 mol of electrons",
+    "3 mol of electrons",
+    "2 mol of electrons"
+   ],
+   "answer": 3,
+   "explanation": "Cu²⁺ + 2e⁻ → Cu.",
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-electrolysis-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-electrolysis",
+   "prompt": "In the purification of copper, the impure copper is the",
+   "choices": [
+    "salt bridge",
+    "anode",
+    "electrolyte",
+    "cathode"
+   ],
+   "answer": 1,
+   "explanation": "It dissolves as Cu²⁺ and pure copper plates on the cathode.",
+   "chapter": "lower6-chemistry-ch-acids"
+  },
+  {
+   "id": "lower6-chemistry-electrolysis-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-electrolysis",
+   "prompt": "Increasing the time of electrolysis by a factor of 3 (same current) changes the mass deposited by a factor of",
+   "choices": [
+    "1/3",
+    "1",
+    "3",
+    "9"
+   ],
+   "answer": 2,
+   "explanation": "m ∝ Q = It.",
+   "chapter": "lower6-chemistry-ch-acids"
+  }
+ ]
+}

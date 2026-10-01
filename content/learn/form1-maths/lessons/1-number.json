@@ -1,0 +1,1583 @@
+{
+ "chapter": "form1-maths-number",
+ "lessons": [
+  {
+   "id": "form1-maths-whole-numbers",
+   "title": "Whole numbers, order of operations and rounding",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 1 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Read and write whole numbers using place value",
+    "Use the order of operations (BODMAS)",
+    "Round numbers to the nearest 10, 100 or 1 000",
+    "Estimate an answer before calculating"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form1-maths-number-e01",
+    "form1-maths-number-e02",
+    "form1-maths-number-e03",
+    "form1-maths-number-e04",
+    "form1-maths-number-e05",
+    "form1-maths-number-e06"
+   ],
+   "selfCheck": [
+    "form1-maths-whole-numbers-q1",
+    "form1-maths-whole-numbers-q2",
+    "form1-maths-whole-numbers-q3",
+    "form1-maths-whole-numbers-q4",
+    "form1-maths-whole-numbers-q5"
+   ],
+   "reviewNotes": [
+    "BODMAS wording: some schools use BIDMAS or PEMDAS; both are shown as equivalent.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Place value",
+     "md": "In a whole number every digit has a **place value**: units, tens, hundreds, thousands and so on. In 4 305 the digit 4 means 4 thousands, 3 means 3 hundreds, 0 means no tens and 5 means 5 units. A zero keeps the other digits in their right places."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Order of operations (BODMAS)",
+     "md": "Work in this order: **B**rackets, **O**rders (powers and roots), **D**ivision and **M**ultiplication (from left to right), then **A**ddition and **S**ubtraction (from left to right). Example: 2 + 3 × 4 = 2 + 12 = 14, not 20."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 380,
+      "h": 108,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 90,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 55.0,
+        "y": 30.0,
+        "text": "Thousands",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 100,
+        "y": 10,
+        "w": 90,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 145.0,
+        "y": 30.0,
+        "text": "Hundreds",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 190,
+        "y": 10,
+        "w": 90,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 235.0,
+        "y": 30.0,
+        "text": "Tens",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 10,
+        "w": 90,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 325.0,
+        "y": 30.0,
+        "text": "Units",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 40,
+        "w": 90,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 55.0,
+        "y": 60.0,
+        "text": "4",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 100,
+        "y": 40,
+        "w": 90,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 145.0,
+        "y": 60.0,
+        "text": "3",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 190,
+        "y": 40,
+        "w": 90,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 235.0,
+        "y": 60.0,
+        "text": "0",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 40,
+        "w": 90,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 325.0,
+        "y": 60.0,
+        "text": "5",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Place value in 4 305.",
+     "alt": "A table with the digits 4, 3, 0 and 5 under thousands, hundreds, tens and units."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Rounding",
+     "md": "To round to the nearest 10 (or 100, 1 000) look at the digit just to the right. If it is **5 or more**, round up; if it is **less than 5**, keep the digit and replace the rest with zeros. Estimating means rounding each number first, then calculating quickly."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Calculating from left to right and ignoring BODMAS.\n- Rounding 4 876 to the nearest hundred as 4 800: the next digit is 7, so the answer is 4 900.\n- Forgetting that 6 ÷ 2 × 3 is worked from left to right: it is 9, not 1."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: BODMAS",
+     "statement": "Calculate 8 + 4 × (12 − 7)² ÷ 10.",
+     "steps": [
+      "Brackets first: 12 − 7 = 5.",
+      "Order: 5² = 25. The sum is now 8 + 4 × 25 ÷ 10.",
+      "Multiply and divide from the left: 4 × 25 = 100, then 100 ÷ 10 = 10.",
+      "Add: 8 + 10 = 18."
+     ],
+     "answer": "**18**"
+    },
+    {
+     "type": "example",
+     "title": "Example 2: rounding and estimating",
+     "statement": "Round 4 876 to the nearest 10 and the nearest 100. Then estimate 28 × 52 and compare with the exact answer.",
+     "steps": [
+      "Nearest 10: the units digit is 6 (5 or more), so 4 876 → 4 880.",
+      "Nearest 100: the tens digit is 7, so 4 876 → 4 900.",
+      "Estimate: 28 ≈ 30 and 52 ≈ 50, so 30 × 50 = 1 500.",
+      "Exact: 28 × 52 = 1 456. The estimate is close, so the answer is reasonable."
+     ],
+     "answer": "**4 880; 4 900; estimate 1 500, exact 1 456.**"
+    }
+   ],
+   "chapter": "form1-maths-number"
+  },
+  {
+   "id": "form1-maths-directed-numbers",
+   "title": "Directed numbers (positive and negative)",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 1 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Place positive and negative numbers on a number line and order them",
+    "Add and subtract directed numbers",
+    "Multiply and divide directed numbers using the sign rules",
+    "Solve simple problems with temperature and money"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form1-maths-number-e07",
+    "form1-maths-number-e08",
+    "form1-maths-number-e09",
+    "form1-maths-number-e10",
+    "form1-maths-number-e11",
+    "form1-maths-number-e12"
+   ],
+   "selfCheck": [
+    "form1-maths-directed-numbers-q1",
+    "form1-maths-directed-numbers-q2",
+    "form1-maths-directed-numbers-q3",
+    "form1-maths-directed-numbers-q4",
+    "form1-maths-directed-numbers-q5"
+   ],
+   "reviewNotes": [
+    "The first key block mentions temperature; check that the wording is suitable.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Directed numbers",
+     "md": "**Directed numbers** have a sign: positive (+) or negative (−). On a number line, numbers increase to the right. −5 is smaller than −2, and any negative number is smaller than any positive number. Negative numbers describe temperatures below 0 °C, money owed, or a level below the sea."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Adding and subtracting",
+     "md": "Adding a negative number is the same as subtracting: 5 + (−3) = 5 − 3 = 2. Subtracting a negative number is the same as adding: 3 − (−8) = 3 + 8 = 11. On the number line, add means move right, subtract means move left."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 130,
+      "items": [
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 50,
+        "x2": 400,
+        "y2": 50,
+        "color": "ink",
+        "width": 2,
+        "arrow": "both"
+       },
+       {
+        "t": "line",
+        "x1": 30.0,
+        "y1": 45,
+        "x2": 30.0,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 30.0,
+        "y": 74,
+        "text": "−6",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 60.0,
+        "y1": 45,
+        "x2": 60.0,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 74,
+        "text": "−5",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 90.0,
+        "y1": 45,
+        "x2": 90.0,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 90.0,
+        "y": 74,
+        "text": "−4",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 120.0,
+        "y1": 45,
+        "x2": 120.0,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 120.0,
+        "y": 74,
+        "text": "−3",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 150.0,
+        "y1": 45,
+        "x2": 150.0,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 74,
+        "text": "−2",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 180.0,
+        "y1": 45,
+        "x2": 180.0,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 180.0,
+        "y": 74,
+        "text": "−1",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 210.0,
+        "y1": 45,
+        "x2": 210.0,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 74,
+        "text": "0",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 240.0,
+        "y1": 45,
+        "x2": 240.0,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 74,
+        "text": "1",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 270.0,
+        "y1": 45,
+        "x2": 270.0,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 270.0,
+        "y": 74,
+        "text": "2",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 300.0,
+        "y1": 45,
+        "x2": 300.0,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 300.0,
+        "y": 74,
+        "text": "3",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 330.0,
+        "y1": 45,
+        "x2": 330.0,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 330.0,
+        "y": 74,
+        "text": "4",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 360.0,
+        "y1": 45,
+        "x2": 360.0,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 360.0,
+        "y": 74,
+        "text": "5",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 390.0,
+        "y1": 45,
+        "x2": 390.0,
+        "y2": 55,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 390.0,
+        "y": 74,
+        "text": "6",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 150.0,
+        "cy": 50,
+        "r": 6,
+        "stroke": "red",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 300.0,
+        "cy": 50,
+        "r": 6,
+        "stroke": "red",
+        "width": 2,
+        "fill": "red"
+       }
+      ]
+     },
+     "caption": "Number line from −6 to 6: −2 lies left of 3.",
+     "alt": "A number line from minus 6 to 6 with points marked at −2 and 3."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Sign rules for × and ÷",
+     "md": "- same signs give a **positive** answer: (−6) × (−4) = 24 and (−20) ÷ (−5) = 4;\n- different signs give a **negative** answer: 6 × (−4) = −24 and 20 ÷ (−5) = −4."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Thinking −9 is larger than −2: on the number line −9 is further left.\n- Writing 3 − (−8) = −5; two minus signs together make a plus: 3 + 8 = 11.\n- Applying the 'two negatives make a positive' rule to addition: −3 + (−4) = −7."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: add and subtract",
+     "statement": "Calculate (a) −7 + 12, (b) −3 − 4, (c) 3 − (−8).",
+     "steps": [
+      "(a) Start at −7 and move 12 to the right: −7 + 12 = 5.",
+      "(b) Start at −3 and move 4 to the left: −7.",
+      "(c) Subtracting −8 is adding 8: 3 + 8 = 11."
+     ],
+     "answer": "**(a) 5, (b) −7, (c) 11**"
+    },
+    {
+     "type": "example",
+     "title": "Example 2: multiply and divide",
+     "statement": "Calculate (a) (−6) × (−4), (b) 20 ÷ (−5), (c) (−2) × 3 × (−5).",
+     "steps": [
+      "(a) Same signs, positive: 6 × 4 = 24.",
+      "(b) Different signs, negative: 20 ÷ 5 = 4, so −4.",
+      "(c) (−2) × 3 = −6, then (−6) × (−5) = 30."
+     ],
+     "answer": "**(a) 24, (b) −4, (c) 30**"
+    }
+   ],
+   "chapter": "form1-maths-number"
+  },
+  {
+   "id": "form1-maths-factors-multiples",
+   "title": "Factors, multiples, primes, HCF and LCM",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 1 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Find the factors and multiples of a number",
+    "Recognise prime numbers and write a number as a product of primes",
+    "Find the HCF and the LCM of two numbers",
+    "Use divisibility tests"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form1-maths-number-e13",
+    "form1-maths-number-e14",
+    "form1-maths-number-e15",
+    "form1-maths-number-e16",
+    "form1-maths-number-e17",
+    "form1-maths-number-e18"
+   ],
+   "selfCheck": [
+    "form1-maths-factors-multiples-q1",
+    "form1-maths-factors-multiples-q2",
+    "form1-maths-factors-multiples-q3",
+    "form1-maths-factors-multiples-q4",
+    "form1-maths-factors-multiples-q5"
+   ],
+   "reviewNotes": [
+    "Prime factor notation uses powers; check that powers are introduced in Form 1 in the official scheme.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Factors, multiples and primes",
+     "md": "A **factor** of a number divides it exactly: the factors of 12 are 1, 2, 3, 4, 6, 12. A **multiple** of 12 is in its times table: 12, 24, 36… A **prime number** has exactly two factors, 1 and itself (2, 3, 5, 7, 11, 13…). The number 1 is not prime."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Divisibility tests",
+     "md": "- by 2: the last digit is even;\n- by 3: the sum of the digits is divisible by 3;\n- by 5: the last digit is 0 or 5;\n- by 9: the sum of the digits is divisible by 9;\n- by 10: the last digit is 0."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 150,
+      "items": [
+       {
+        "t": "text",
+        "x": 200,
+        "y": 22,
+        "text": "60",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 190,
+        "y1": 30,
+        "x2": 130,
+        "y2": 60,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 30,
+        "x2": 270,
+        "y2": 60,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 78,
+        "text": "6",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 275,
+        "y": 78,
+        "text": "10",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 118,
+        "y1": 85,
+        "x2": 85,
+        "y2": 115,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 132,
+        "y1": 85,
+        "x2": 165,
+        "y2": 115,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 268,
+        "y1": 85,
+        "x2": 235,
+        "y2": 115,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 282,
+        "y1": 85,
+        "x2": 315,
+        "y2": 115,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 132,
+        "text": "2",
+        "size": 16,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 168,
+        "y": 132,
+        "text": "3",
+        "size": 16,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 132,
+        "text": "2",
+        "size": 16,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 318,
+        "y": 132,
+        "text": "5",
+        "size": 16,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "A factor tree for 60 ending in primes 2, 3, 2, 5.",
+     "alt": "A factor tree: 60 splits into 6 and 10, then into the primes 2, 3, 2 and 5."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "HCF and LCM by prime factors",
+     "md": "Write each number as a product of primes (use a factor tree). The **HCF** (highest common factor) is the product of the primes common to both, with the **smallest** powers. The **LCM** (lowest common multiple) is the product of all primes, with the **largest** powers."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Saying 1 is a prime number, or that 2 is not prime (2 is the only even prime).\n- Mixing up HCF (a factor, never bigger than the numbers) and LCM (a multiple, never smaller).\n- Stopping a factor tree before every branch ends in a prime."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: prime factors",
+     "statement": "Write 60 as a product of prime numbers.",
+     "steps": [
+      "Split 60 = 6 × 10.",
+      "Split again: 6 = 2 × 3 and 10 = 2 × 5, so every end is prime.",
+      "60 = 2 × 2 × 3 × 5 = $2^2 \\times 3 \\times 5$."
+     ],
+     "answer": "**60 = 2² × 3 × 5**",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 150,
+      "items": [
+       {
+        "t": "text",
+        "x": 200,
+        "y": 22,
+        "text": "60",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 190,
+        "y1": 30,
+        "x2": 130,
+        "y2": 60,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 30,
+        "x2": 270,
+        "y2": 60,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 78,
+        "text": "6",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 275,
+        "y": 78,
+        "text": "10",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 118,
+        "y1": 85,
+        "x2": 85,
+        "y2": 115,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 132,
+        "y1": 85,
+        "x2": 165,
+        "y2": 115,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 268,
+        "y1": 85,
+        "x2": 235,
+        "y2": 115,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 282,
+        "y1": 85,
+        "x2": 315,
+        "y2": 115,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 132,
+        "text": "2",
+        "size": 16,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 168,
+        "y": 132,
+        "text": "3",
+        "size": 16,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 132,
+        "text": "2",
+        "size": 16,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 318,
+        "y": 132,
+        "text": "5",
+        "size": 16,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2: HCF and LCM",
+     "statement": "Find the HCF and LCM of 36 and 48.",
+     "steps": [
+      "36 = $2^2 \\times 3^2$ and 48 = $2^4 \\times 3$.",
+      "HCF: smallest powers, $2^2 \\times 3 = 12$.",
+      "LCM: largest powers, $2^4 \\times 3^2 = 144$.",
+      "Check: HCF × LCM = 12 × 144 = 1 728 = 36 × 48."
+     ],
+     "answer": "**HCF = 12, LCM = 144**"
+    }
+   ],
+   "chapter": "form1-maths-number"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form1-maths-number-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form1-maths-whole-numbers",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Calculate 5 × (3 + 4) − 6 ÷ 2.",
+   "answer": 32,
+   "tolerance": 0,
+   "explanation": "Brackets: 7. Then 5 × 7 = 35 and 6 ÷ 2 = 3. So 35 − 3 = 32.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form1-maths-number"
+  },
+  {
+   "id": "form1-maths-number-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form1-maths-whole-numbers",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Round 6 450 to the nearest 100.",
+   "choices": [
+    "6 500",
+    "6 000",
+    "6 400",
+    "6 450"
+   ],
+   "answer": 0,
+   "explanation": "The tens digit is 5, so round up to 6 500.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form1-maths-number"
+  },
+  {
+   "id": "form1-maths-number-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form1-maths-whole-numbers",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "What is the value of the digit 7 in 37 412?",
+   "choices": [
+    "7 thousands",
+    "7 hundreds",
+    "7 ten-thousands",
+    "7 tens"
+   ],
+   "answer": 0,
+   "explanation": "37 412 = 3 ten-thousands + 7 thousands + 4 hundreds + 1 ten + 2 units.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form1-maths-number"
+  },
+  {
+   "id": "form1-maths-number-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form1-maths-whole-numbers",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A trader in Douala buys 24 bags of rice at 3 500 FCFA each. How much does she pay in all (FCFA)?",
+   "answer": 84000,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "24 × 3 500 = 84 000 FCFA.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form1-maths-number"
+  },
+  {
+   "id": "form1-maths-number-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form1-maths-whole-numbers",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Explain, with an example, why BODMAS is needed.",
+   "model": "Without an agreed order, 2 + 3 × 4 could be 20 or 14. The rule says multiplication comes before addition, so the answer is always 2 + 12 = 14.",
+   "rubric": "1 mark for the idea of one agreed order; 1 mark for a correct example; 1 mark for the right result.",
+   "explanation": "Without an agreed order, 2 + 3 × 4 could be 20 or 14. The rule says multiplication comes before addition, so the answer is always 2 + 12 = 14.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form1-maths-number"
+  },
+  {
+   "id": "form1-maths-number-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form1-maths-whole-numbers",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A school in Bamenda buys 36 desks at 8 450 FCFA each.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Estimate the total cost by rounding 8 450 to the nearest 1 000 and 36 to the nearest 10 (answer in FCFA).",
+     "answer": 320000,
+     "tolerance": 0,
+     "explanation": "8 450 → 8 000 and 36 → 40, so 40 × 8 000 = 320 000 FCFA.",
+     "unit": "FCFA",
+     "id": "form1-maths-number-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Calculate the exact total (FCFA).",
+     "answer": 304200,
+     "tolerance": 0,
+     "explanation": "36 × 8 450 = 304 200 FCFA.",
+     "unit": "FCFA",
+     "id": "form1-maths-number-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "The school has 350 000 FCFA. Is that enough?",
+     "choices": [
+      "Yes, with 4 200 FCFA left",
+      "Yes, with 45 800 FCFA left",
+      "No, 45 800 FCFA short",
+      "No, 4 200 FCFA short"
+     ],
+     "answer": 1,
+     "explanation": "350 000 − 304 200 = 45 800.",
+     "id": "form1-maths-number-e06-c"
+    }
+   ],
+   "chapter": "form1-maths-number"
+  },
+  {
+   "id": "form1-maths-whole-numbers-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-whole-numbers",
+   "prompt": "In whole numbers, which operation is done first in 7 + 2 × 5?",
+   "choices": [
+    "Subtraction",
+    "Addition",
+    "Whichever is on the left",
+    "Multiplication"
+   ],
+   "answer": 3,
+   "explanation": "BODMAS puts multiplication before addition.",
+   "chapter": "form1-maths-number"
+  },
+  {
+   "id": "form1-maths-whole-numbers-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-whole-numbers",
+   "prompt": "Value of 7 + 2 × 5:",
+   "choices": [
+    "17",
+    "35",
+    "14",
+    "45"
+   ],
+   "answer": 0,
+   "explanation": "2 × 5 = 10, then 7 + 10 = 17.",
+   "chapter": "form1-maths-number"
+  },
+  {
+   "id": "form1-maths-whole-numbers-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-whole-numbers",
+   "prompt": "Round 3 649 to the nearest 100:",
+   "choices": [
+    "3 650",
+    "3 700",
+    "3 000",
+    "3 600"
+   ],
+   "answer": 3,
+   "explanation": "The tens digit 4 is below 5.",
+   "chapter": "form1-maths-number"
+  },
+  {
+   "id": "form1-maths-whole-numbers-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-whole-numbers",
+   "prompt": "In the number 5 062, the digit 0 stands for:",
+   "choices": [
+    "no hundreds",
+    "nothing at all",
+    "no thousands",
+    "no units"
+   ],
+   "answer": 0,
+   "explanation": "It holds the hundreds place.",
+   "chapter": "form1-maths-number"
+  },
+  {
+   "id": "form1-maths-whole-numbers-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-whole-numbers",
+   "prompt": "To estimate 48 × 21 we can calculate:",
+   "choices": [
+    "50 × 20",
+    "40 × 10",
+    "40 × 30",
+    "50 × 10"
+   ],
+   "answer": 0,
+   "explanation": "Round each number to the nearest 10.",
+   "chapter": "form1-maths-number"
+  },
+  {
+   "id": "form1-maths-number-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form1-maths-directed-numbers",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Calculate −9 + 4.",
+   "answer": -5,
+   "tolerance": 0,
+   "explanation": "Start at −9 and move 4 to the right: −5.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form1-maths-number"
+  },
+  {
+   "id": "form1-maths-number-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form1-maths-directed-numbers",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Calculate (−8) × (−3).",
+   "answer": 24,
+   "tolerance": 0,
+   "explanation": "Same signs give a positive: 24.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form1-maths-number"
+  },
+  {
+   "id": "form1-maths-number-e09",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form1-maths-directed-numbers",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Which list is in increasing order?",
+   "choices": [
+    "−7, −2, 0, 3",
+    "0, −2, 3, −7",
+    "−2, −7, 0, 3",
+    "3, 0, −2, −7"
+   ],
+   "answer": 0,
+   "explanation": "Smaller numbers are further left on the number line.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form1-maths-number"
+  },
+  {
+   "id": "form1-maths-number-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form1-maths-directed-numbers",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The temperature on top of a high mountain is −4 °C in the morning and rises by 9 °C by noon. What is the noon temperature?",
+   "answer": 5,
+   "tolerance": 0,
+   "unit": "°C",
+   "explanation": "−4 + 9 = 5 °C.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form1-maths-number"
+  },
+  {
+   "id": "form1-maths-number-e11",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form1-maths-directed-numbers",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Calculate 6 − (−9) − 10.",
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "6 + 9 = 15, and 15 − 10 = 5.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form1-maths-number"
+  },
+  {
+   "id": "form1-maths-number-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form1-maths-directed-numbers",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Ngu keeps a note of his savings in FCFA. A negative number means money he owes his brother.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "On Monday Ngu has −2 000 (he owes 2 000). He earns 5 000. What is the new balance (FCFA)?",
+     "answer": 3000,
+     "tolerance": 0,
+     "explanation": "−2 000 + 5 000 = 3 000.",
+     "unit": "FCFA",
+     "id": "form1-maths-number-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "On Tuesday he spends 4 500. What is the balance (FCFA)?",
+     "answer": -1500,
+     "tolerance": 0,
+     "explanation": "3 000 − 4 500 = −1 500: he owes 1 500 FCFA.",
+     "unit": "FCFA",
+     "id": "form1-maths-number-e12-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "Which statement is true about −1 500 and −2 000?",
+     "choices": [
+      "They are equal",
+      "−1 500 is smaller than −2 000",
+      "−1 500 is greater than −2 000",
+      "Neither can be compared"
+     ],
+     "answer": 2,
+     "explanation": "−1 500 is to the right of −2 000 on the number line.",
+     "id": "form1-maths-number-e12-c"
+    }
+   ],
+   "chapter": "form1-maths-number"
+  },
+  {
+   "id": "form1-maths-directed-numbers-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-directed-numbers",
+   "prompt": "The value of −5 − (−2):",
+   "choices": [
+    "7",
+    "−7",
+    "3",
+    "−3"
+   ],
+   "answer": 3,
+   "explanation": "−5 + 2 = −3.",
+   "chapter": "form1-maths-number"
+  },
+  {
+   "id": "form1-maths-directed-numbers-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-directed-numbers",
+   "prompt": "The product (−7) × 3:",
+   "choices": [
+    "21",
+    "−4",
+    "4",
+    "−21"
+   ],
+   "answer": 3,
+   "explanation": "Different signs give a negative.",
+   "chapter": "form1-maths-number"
+  },
+  {
+   "id": "form1-maths-directed-numbers-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-directed-numbers",
+   "prompt": "The quotient (−18) ÷ (−6):",
+   "choices": [
+    "−3",
+    "3",
+    "12",
+    "−12"
+   ],
+   "answer": 1,
+   "explanation": "Same signs give a positive.",
+   "chapter": "form1-maths-number"
+  },
+  {
+   "id": "form1-maths-directed-numbers-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-directed-numbers",
+   "prompt": "The smallest of these directed numbers: 2, −9, −1, 0",
+   "choices": [
+    "2",
+    "−9",
+    "0",
+    "−1"
+   ],
+   "answer": 1,
+   "explanation": "−9 is furthest left.",
+   "chapter": "form1-maths-number"
+  },
+  {
+   "id": "form1-maths-directed-numbers-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-directed-numbers",
+   "prompt": "Adding a negative number to a number is like:",
+   "choices": [
+    "doing nothing",
+    "multiplying it",
+    "subtracting a positive number",
+    "dividing it"
+   ],
+   "answer": 2,
+   "explanation": "5 + (−3) = 5 − 3.",
+   "chapter": "form1-maths-number"
+  },
+  {
+   "id": "form1-maths-number-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form1-maths-factors-multiples",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find the HCF of 18 and 24.",
+   "answer": 6,
+   "tolerance": 0,
+   "explanation": "18 = 2 × 3², 24 = 2³ × 3; the common smallest powers give 2 × 3 = 6.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form1-maths-number"
+  },
+  {
+   "id": "form1-maths-number-e14",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form1-maths-factors-multiples",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Which number is prime?",
+   "choices": [
+    "29",
+    "39",
+    "27",
+    "33"
+   ],
+   "answer": 0,
+   "explanation": "27, 33 and 39 are all divisible by 3; 29 has no other factor.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form1-maths-number"
+  },
+  {
+   "id": "form1-maths-number-e15",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form1-maths-factors-multiples",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find the LCM of 6 and 8.",
+   "answer": 24,
+   "tolerance": 0,
+   "explanation": "Multiples of 8: 8, 16, 24; 24 is the first one divisible by 6.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form1-maths-number"
+  },
+  {
+   "id": "form1-maths-number-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form1-maths-factors-multiples",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Two buses leave the Bafoussam station together. One leaves every 12 minutes and the other every 18 minutes. After how many minutes do they next leave together?",
+   "answer": 36,
+   "tolerance": 0,
+   "unit": "min",
+   "explanation": "LCM of 12 and 18 is 36 minutes.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form1-maths-number"
+  },
+  {
+   "id": "form1-maths-number-e17",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form1-maths-factors-multiples",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Is 4 725 divisible by 3? By 5? By 9? Give reasons.",
+   "model": "The digit sum is 4+7+2+5 = 18, which is divisible by 3 and by 9, so yes to both. The last digit is 5, so it is divisible by 5 as well.",
+   "rubric": "1 mark for each correct test and conclusion.",
+   "explanation": "The digit sum is 4+7+2+5 = 18, which is divisible by 3 and by 9, so yes to both. The last digit is 5, so it is divisible by 5 as well.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form1-maths-number"
+  },
+  {
+   "id": "form1-maths-number-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form1-maths-factors-multiples",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A tailor in Garoua has two pieces of cloth, 84 m and 126 m long. He cuts both into equal lengths with no waste.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Write 84 as a product of primes and find the number of 2s used (an integer).",
+     "answer": 2,
+     "tolerance": 0,
+     "explanation": "84 = 2 × 2 × 3 × 7, so two 2s.",
+     "id": "form1-maths-number-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "What is the greatest possible length of each piece (m)?",
+     "answer": 42,
+     "tolerance": 0,
+     "explanation": "HCF(84, 126) = 42.",
+     "unit": "m",
+     "id": "form1-maths-number-e18-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "How many pieces does he get in total?",
+     "answer": 5,
+     "tolerance": 0,
+     "explanation": "84 ÷ 42 = 2 and 126 ÷ 42 = 3, total 5.",
+     "id": "form1-maths-number-e18-c"
+    }
+   ],
+   "chapter": "form1-maths-number"
+  },
+  {
+   "id": "form1-maths-factors-multiples-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-factors-multiples",
+   "prompt": "The factors of 10 are:",
+   "choices": [
+    "1, 10",
+    "2, 5",
+    "1, 2, 5, 10",
+    "10, 20, 30"
+   ],
+   "answer": 2,
+   "explanation": "A factor divides 10 exactly.",
+   "chapter": "form1-maths-number"
+  },
+  {
+   "id": "form1-maths-factors-multiples-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-factors-multiples",
+   "prompt": "Which statement is true about factors and prime numbers?",
+   "choices": [
+    "all odd numbers are prime",
+    "9 is prime",
+    "1 is prime",
+    "2 is the only even prime"
+   ],
+   "answer": 3,
+   "explanation": "Every other even number has the factor 2.",
+   "chapter": "form1-maths-number"
+  },
+  {
+   "id": "form1-maths-factors-multiples-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-factors-multiples",
+   "prompt": "The HCF of 12 and 20 is:",
+   "choices": [
+    "4",
+    "60",
+    "2",
+    "8"
+   ],
+   "answer": 0,
+   "explanation": "12 = 2² × 3 and 20 = 2² × 5.",
+   "chapter": "form1-maths-number"
+  },
+  {
+   "id": "form1-maths-factors-multiples-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-factors-multiples",
+   "prompt": "The LCM of 4 and 10 is:",
+   "choices": [
+    "14",
+    "2",
+    "20",
+    "40"
+   ],
+   "answer": 2,
+   "explanation": "First common multiple.",
+   "chapter": "form1-maths-number"
+  },
+  {
+   "id": "form1-maths-factors-multiples-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-factors-multiples",
+   "prompt": "A number is divisible by 9 when:",
+   "choices": [
+    "the digit sum is divisible by 9",
+    "it is odd",
+    "it ends in 9",
+    "it ends in 0"
+   ],
+   "answer": 0,
+   "explanation": "Test for 9.",
+   "chapter": "form1-maths-number"
+  }
+ ]
+}

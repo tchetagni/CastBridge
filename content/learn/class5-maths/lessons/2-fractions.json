@@ -1,0 +1,1888 @@
+{
+ "chapter": "class5-maths-fractions",
+ "lessons": [
+  {
+   "id": "class5-maths-fractions-ops",
+   "title": "Fractions: adding, subtracting and multiplying",
+   "minutes": 35,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level III (Class 5) — Mathematics; to be checked against the official syllabus",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Change fractions to a common denominator.",
+    "Add and subtract fractions and mixed numbers.",
+    "Multiply a fraction by a whole number or a fraction."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "class5-maths-fractions-e01",
+    "class5-maths-fractions-e02",
+    "class5-maths-fractions-e03",
+    "class5-maths-fractions-e04",
+    "class5-maths-fractions-e05",
+    "class5-maths-fractions-e06"
+   ],
+   "selfCheck": [
+    "class5-maths-fractions-ops-q1",
+    "class5-maths-fractions-ops-q2",
+    "class5-maths-fractions-ops-q3",
+    "class5-maths-fractions-ops-q4",
+    "class5-maths-fractions-ops-q5"
+   ],
+   "reviewNotes": [
+    "Mixed numbers are used simply; check whether the curriculum requires multiplication of two fractions at Class 5.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Unlike denominators",
+     "md": "To add or subtract fractions with **different denominators**, first change them to the **same denominator** (use the LCM). $\\frac{1}{2} + \\frac{1}{4}$: change $\\frac{1}{2}$ to $\\frac{2}{4}$, then $\\frac{2}{4} + \\frac{1}{4} = \\frac{3}{4}$. Add or subtract the numerators; keep the denominator."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 140,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20.0,
+        "y": 10,
+        "w": 60.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "rect",
+        "x": 80.0,
+        "y": 10,
+        "w": 60.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "rect",
+        "x": 140.0,
+        "y": 10,
+        "w": 60.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 10,
+        "w": 60.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 274,
+        "y": 28.0,
+        "text": "1/2 = 2/4",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 20.0,
+        "y": 50,
+        "w": 60.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "rect",
+        "x": 80.0,
+        "y": 50,
+        "w": 60.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 140.0,
+        "y": 50,
+        "w": 60.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 50,
+        "w": 60.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 274,
+        "y": 68.0,
+        "text": "+ 1/4",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 20.0,
+        "y": 90,
+        "w": 60.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "rect",
+        "x": 80.0,
+        "y": 90,
+        "w": 60.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "rect",
+        "x": 140.0,
+        "y": 90,
+        "w": 60.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 90,
+        "w": 60.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 274,
+        "y": 108.0,
+        "text": "= 3/4",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "1/2 + 1/4 = 3/4.",
+     "alt": "Three bars on quarters: 2 quarters shaded, then 1 quarter, then 3 quarters."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Multiplying fractions",
+     "md": "To multiply fractions, **multiply the numerators** and **multiply the denominators**: $\\frac{2}{3} \\times \\frac{3}{5} = \\frac{6}{15} = \\frac{2}{5}$. To multiply a fraction by a whole number, multiply the numerator: $\\frac{3}{4} \\times 8 = \\frac{24}{4} = 6$. Always simplify the answer."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Mixed numbers",
+     "md": "An **improper fraction** has a numerator bigger than the denominator: $\\frac{7}{4} = 1\\frac{3}{4}$ (one and three quarters). To change $2\\frac{1}{3}$ to an improper fraction: 2 × 3 + 1 = 7, so $\\frac{7}{3}$."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Adding both numerators and denominators: $\\frac{1}{2} + \\frac{1}{4}$ is not $\\frac{2}{6}$.\n- Forgetting to change the numerator when you change the denominator.\n- Not simplifying: $\\frac{6}{15}$ should be $\\frac{2}{5}$."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Work out 2/3 + 1/6.",
+     "steps": [
+      "The LCM of 3 and 6 is 6: 2/3 = 4/6.",
+      "4/6 + 1/6 = 5/6."
+     ],
+     "answer": "5/6"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Work out 3/4 of 20 and 2/5 × 3/4.",
+     "steps": [
+      "3/4 of 20: 20 ÷ 4 = 5, then 5 × 3 = 15.",
+      "2/5 × 3/4 = 6/20 = 3/10."
+     ],
+     "answer": "15 and 3/10"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-decimals-ops",
+   "title": "Decimals: place value and the four operations",
+   "minutes": 30,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level III (Class 5) — Mathematics; to be checked against the official syllabus",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Read decimals to hundredths and thousandths.",
+    "Add, subtract, multiply and divide decimals.",
+    "Multiply and divide by 10, 100 and 1,000."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "class5-maths-fractions-e07",
+    "class5-maths-fractions-e08",
+    "class5-maths-fractions-e09",
+    "class5-maths-fractions-e10",
+    "class5-maths-fractions-e11",
+    "class5-maths-fractions-e12"
+   ],
+   "selfCheck": [
+    "class5-maths-decimals-ops-q1",
+    "class5-maths-decimals-ops-q2",
+    "class5-maths-decimals-ops-q3",
+    "class5-maths-decimals-ops-q4",
+    "class5-maths-decimals-ops-q5"
+   ],
+   "reviewNotes": [
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Place value",
+     "md": "In 4.52 the 4 is **ones**, the 5 is **5 tenths** (0.5) and the 2 is **2 hundredths** (0.02). We can write $4.52 = 4 + \\frac{5}{10} + \\frac{2}{100}$. Add zeros at the end without changing the value: 3.5 = 3.50."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 140,
+      "items": [
+       {
+        "t": "rect",
+        "x": 30.0,
+        "y": 10,
+        "w": 120,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 90.0,
+        "y": 30.0,
+        "text": "Place",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150.0,
+        "y": 10,
+        "w": 90,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 195.0,
+        "y": 30.0,
+        "text": "Value",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 240.0,
+        "y": 10,
+        "w": 130,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 305.0,
+        "y": 30.0,
+        "text": "Example 4.52",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 30.0,
+        "y": 40,
+        "w": 120,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 90.0,
+        "y": 60.0,
+        "text": "ones",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 150.0,
+        "y": 40,
+        "w": 90,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 195.0,
+        "y": 60.0,
+        "text": "1",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 240.0,
+        "y": 40,
+        "w": 130,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 305.0,
+        "y": 60.0,
+        "text": "4",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 30.0,
+        "y": 70,
+        "w": 120,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 90.0,
+        "y": 90.0,
+        "text": "tenths",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 150.0,
+        "y": 70,
+        "w": 90,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 195.0,
+        "y": 90.0,
+        "text": "0.1",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 240.0,
+        "y": 70,
+        "w": 130,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 305.0,
+        "y": 90.0,
+        "text": "5",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 30.0,
+        "y": 100,
+        "w": 120,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 90.0,
+        "y": 120.0,
+        "text": "hundredths",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 150.0,
+        "y": 100,
+        "w": 90,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 195.0,
+        "y": 120.0,
+        "text": "0.01",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 240.0,
+        "y": 100,
+        "w": 130,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 305.0,
+        "y": 120.0,
+        "text": "2",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Place value of 4.52.",
+     "alt": "A table with places ones, tenths, hundredths, their values 1, 0.1 and 0.01, and the digits 4, 5 and 2 of the number 4.52."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "The four operations",
+     "md": "**Add and subtract**: line up the decimal points. **Multiply**: ignore the points, multiply, then put back as many decimal places as there are in both numbers: 3.6 × 4 = 14.4. **Divide** by a whole number: divide as usual and keep the point in the same place: 7.5 ÷ 5 = 1.5."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Times and divided by 10, 100, 1,000",
+     "md": "To multiply by **10**, move the point **one place right**: 2.35 × 10 = 23.5. By 100: two places right. To divide by 10, move the point one place **left**: 45 ÷ 10 = 4.5. By 100: two places left."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Not lining up the points when adding: 4.5 + 0.25 is 4.75, not 0.70.\n- Thinking 0.45 is bigger than 0.5.\n- Moving the point the wrong way when multiplying or dividing by 10.\n- Forgetting the point in the answer."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Work out 12.75 − 4.9.",
+     "steps": [
+      "Write 4.9 as 4.90 and line up the points.",
+      "12.75 − 4.90 = 7.85."
+     ],
+     "answer": "7.85"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "A rope costs 350 FCFA per metre. How much do 2.5 m cost?",
+     "steps": [
+      "Multiply: 350 × 2.5 = 350 × 2 + 350 × 0.5.",
+      "700 + 175 = 875."
+     ],
+     "answer": "875 FCFA"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-percentages",
+   "title": "Percentages",
+   "minutes": 30,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level III (Class 5) — Mathematics; to be checked against the official syllabus",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Say what per cent means.",
+    "Change fractions and decimals to percentages and back.",
+    "Find a percentage of an amount and work out a discount."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "class5-maths-fractions-e13",
+    "class5-maths-fractions-e14",
+    "class5-maths-fractions-e15",
+    "class5-maths-fractions-e16",
+    "class5-maths-fractions-e17",
+    "class5-maths-fractions-e18"
+   ],
+   "selfCheck": [
+    "class5-maths-percentages-q1",
+    "class5-maths-percentages-q2",
+    "class5-maths-percentages-q3",
+    "class5-maths-percentages-q4",
+    "class5-maths-percentages-q5"
+   ],
+   "reviewNotes": [
+    "Discounts are only a first application; no compound percentage questions.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Per cent",
+     "md": "**Per cent** means **out of 100**. The symbol is **%**. 25% means $\\frac{25}{100}$ = 0.25 = $\\frac{1}{4}$. 50% is a half. 100% is the whole. We use percentages for marks, discounts, interest and the share of a crowd."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 180,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20.0,
+        "y": 10,
+        "w": 60.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 80.0,
+        "y": 10,
+        "w": 60.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 140.0,
+        "y": 10,
+        "w": 60.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 10,
+        "w": 60.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 274,
+        "y": 28.0,
+        "text": "25% = 1/4",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 20.0,
+        "y": 50,
+        "w": 60.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 80.0,
+        "y": 50,
+        "w": 60.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 140.0,
+        "y": 50,
+        "w": 60.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 50,
+        "w": 60.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 274,
+        "y": 68.0,
+        "text": "50% = 1/2",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 20.0,
+        "y": 90,
+        "w": 60.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 80.0,
+        "y": 90,
+        "w": 60.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 140.0,
+        "y": 90,
+        "w": 60.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 90,
+        "w": 60.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 274,
+        "y": 108.0,
+        "text": "75% = 3/4",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 20.0,
+        "y": 130,
+        "w": 60.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 80.0,
+        "y": 130,
+        "w": 60.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 140.0,
+        "y": 130,
+        "w": 60.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 130,
+        "w": 60.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 274,
+        "y": 148.0,
+        "text": "100% = whole",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Common percentages as fractions.",
+     "alt": "Four bars: 1 of 4 parts is 25%, 2 of 4 is 50%, 3 of 4 is 75% and all 4 is 100%."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Percentage of an amount",
+     "md": "To find **10%** divide by 10. To find **50%** divide by 2. To find **25%** divide by 4. For other percentages build up: 15% = 10% + 5%. Or use a fraction: 20% of 150 = $\\frac{20}{100}$ × 150 = 30. To change a fraction to a percentage, make the denominator 100: $\\frac{3}{5} = \\frac{60}{100} = 60\\%$."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Writing 25% as 25 and not 25/100 or 0.25.\n- Thinking that 100% of anything is more than the whole: it is the whole.\n- A **discount** is taken **off** the price: the new price is smaller.\n- Mixing 10% and 1/10 with 1%: 1% is 1/100."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "A shirt costs 8,000 FCFA. The shop gives a 25% discount. What is the new price?",
+     "steps": [
+      "25% = 1/4. 8,000 ÷ 4 = 2,000 is the discount.",
+      "New price: 8,000 − 2,000 = 6,000 FCFA."
+     ],
+     "answer": "6,000 FCFA"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Anne scored 18 out of 20. What is her mark as a percentage?",
+     "steps": [
+      "18/20 = 90/100 (multiply by 5).",
+      "So her mark is 90%."
+     ],
+     "answer": "90%"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-ratio-proportion",
+   "title": "Ratio and proportion",
+   "minutes": 30,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level III (Class 5) — Mathematics; to be checked against the official syllabus",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Write a ratio and simplify it.",
+    "Share an amount in a given ratio.",
+    "Solve simple direct proportion problems."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "class5-maths-fractions-e19",
+    "class5-maths-fractions-e20",
+    "class5-maths-fractions-e21",
+    "class5-maths-fractions-e22",
+    "class5-maths-fractions-e23",
+    "class5-maths-fractions-e24"
+   ],
+   "selfCheck": [
+    "class5-maths-ratio-proportion-q1",
+    "class5-maths-ratio-proportion-q2",
+    "class5-maths-ratio-proportion-q3",
+    "class5-maths-ratio-proportion-q4",
+    "class5-maths-ratio-proportion-q5"
+   ],
+   "reviewNotes": [
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Ratio",
+     "md": "A **ratio** compares two amounts of the same kind. If a bag has 3 red and 5 blue balls, the ratio of red to blue is **3 : 5** (read '3 to 5'). We can **simplify** a ratio like a fraction: 6 : 9 = 2 : 3 (divide both by 3). Order matters: 3 : 5 is not 5 : 3."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 120,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 30,
+        "cy": 50,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 56,
+        "cy": 50,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 82,
+        "cy": 50,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 108,
+        "cy": 50,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 134,
+        "cy": 50,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 160,
+        "cy": 50,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 186,
+        "cy": 50,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 212,
+        "cy": 50,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 100,
+        "text": "3 red",
+        "size": 14,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 100,
+        "text": "5 blue",
+        "size": 14,
+        "anchor": "middle",
+        "color": "blue",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 55,
+        "text": "red : blue = 3 : 5",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Three red counters to five blue counters is 3 : 5.",
+     "alt": "Eight circles in a row: three red and five blue, with the label red to blue equals 3 to 5."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Sharing in a ratio",
+     "md": "To share 40,000 FCFA in the ratio 3 : 5: add the parts 3 + 5 = 8. One part = 40,000 ÷ 8 = 5,000. Then 3 parts = 15,000 and 5 parts = 25,000. **Check**: 15,000 + 25,000 = 40,000."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Direct proportion",
+     "md": "If 4 loaves cost 1,000 FCFA, then 8 loaves cost twice as much. Use the **unit method**: find the price of 1, then multiply. 1,000 ÷ 4 = 250 FCFA for 1 loaf, so 7 loaves cost 7 × 250 = 1,750 FCFA."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Writing the ratio in the wrong order.\n- Dividing by one of the numbers of the ratio: first **add the parts**, then divide the total by that number.\n- Mixing units: compare 50 cm to 1 m as 50 : 100 = 1 : 2, not 50 : 1.\n- Forgetting to check that the shares add to the total."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Share 40,000 FCFA between Ako and Bih in the ratio 3 : 5.",
+     "steps": [
+      "Number of parts: 3 + 5 = 8. One part: 40,000 ÷ 8 = 5,000.",
+      "Ako: 3 × 5,000 = 15,000. Bih: 5 × 5,000 = 25,000."
+     ],
+     "answer": "Ako 15,000 FCFA; Bih 25,000 FCFA."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "5 kg of rice cost 3,000 FCFA. How much do 8 kg cost?",
+     "steps": [
+      "Price of 1 kg: 3,000 ÷ 5 = 600 FCFA.",
+      "Price of 8 kg: 8 × 600 = 4,800 FCFA."
+     ],
+     "answer": "4,800 FCFA"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class5-maths-fractions"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "class5-maths-fractions-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class5-maths-fractions-ops",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Work out 1/2 + 1/4.",
+   "choices": [
+    "2/4",
+    "3/4",
+    "2/6",
+    "1/6"
+   ],
+   "answer": 1,
+   "explanation": "1/2 = 2/4, 2/4 + 1/4 = 3/4.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-fractions-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class5-maths-fractions-ops",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Work out 5/6 − 1/3.",
+   "choices": [
+    "1/2",
+    "4/3",
+    "4/6",
+    "1/3"
+   ],
+   "answer": 0,
+   "explanation": "1/3 = 2/6, so 3/6 = 1/2.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-fractions-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class5-maths-fractions-ops",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Work out 3/4 × 8.",
+   "answer": 6,
+   "tolerance": 0,
+   "explanation": "24/4 = 6.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-fractions-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "class5-maths-fractions-ops",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Change 7/4 to a mixed number.",
+   "choices": [
+    "2 3/4",
+    "1 1/4",
+    "7 1/4",
+    "1 3/4"
+   ],
+   "answer": 3,
+   "explanation": "7 = 4 + 3.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-fractions-e05",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class5-maths-fractions-ops",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "2/3 × 3/5 = 2/5.",
+   "answer": true,
+   "explanation": "6/15 = 2/5.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-fractions-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class5-maths-fractions-ops",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A farmer in Dschang uses 1/2 of his land for maize, 1/4 for beans and the rest for vegetables. The land is 20 acres.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What fraction is used for maize and beans together?",
+     "choices": [
+      "2/6",
+      "1/6",
+      "3/4",
+      "2/4"
+     ],
+     "answer": 2,
+     "explanation": "1/2 + 1/4 = 3/4.",
+     "id": "class5-maths-fractions-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What fraction is left for vegetables?",
+     "choices": [
+      "2/4",
+      "1/2",
+      "1/4",
+      "3/4"
+     ],
+     "answer": 2,
+     "explanation": "1 − 3/4 = 1/4.",
+     "id": "class5-maths-fractions-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "How many acres are used for vegetables?",
+     "answer": 5,
+     "tolerance": 0,
+     "explanation": "1/4 of 20 = 5.",
+     "unit": "acres",
+     "id": "class5-maths-fractions-e06-c"
+    }
+   ],
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-fractions-ops-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-fractions-ops",
+   "prompt": "Class 5 Maths (Fractions) – Which is equal to 1/3 + 1/6?",
+   "choices": [
+    "1/9",
+    "2/9",
+    "2/6",
+    "1/2"
+   ],
+   "answer": 3,
+   "explanation": "2/6 + 1/6 = 3/6 = 1/2.",
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-fractions-ops-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-fractions-ops",
+   "prompt": "Class 5 Maths (Fractions) – Simplify 6/9.",
+   "choices": [
+    "3/6",
+    "2/3",
+    "3/2",
+    "1/3"
+   ],
+   "answer": 1,
+   "explanation": "Divide by 3.",
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-fractions-ops-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-fractions-ops",
+   "prompt": "Class 5 Maths (Fractions) – What is 1/2 × 1/2?",
+   "choices": [
+    "1",
+    "2/4",
+    "1/2",
+    "1/4"
+   ],
+   "answer": 3,
+   "explanation": "1 × 1 over 2 × 2.",
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-fractions-ops-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-fractions-ops",
+   "prompt": "Class 5 Maths (Fractions) – The mixed number 1 1/2 equals...",
+   "choices": [
+    "11/2",
+    "3/2",
+    "2/3",
+    "1/2"
+   ],
+   "answer": 1,
+   "explanation": "1 × 2 + 1 = 3 halves.",
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-fractions-ops-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-fractions-ops",
+   "prompt": "Class 5 Maths (Fractions) – 1 − 3/8 =",
+   "choices": [
+    "3/8",
+    "2/8",
+    "5/8",
+    "4/8"
+   ],
+   "answer": 2,
+   "explanation": "8/8 − 3/8.",
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-fractions-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class5-maths-decimals-ops",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Work out 3.45 + 2.8.",
+   "answer": 6.25,
+   "tolerance": 0.001,
+   "explanation": "3.45 + 2.80 = 6.25.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-fractions-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class5-maths-decimals-ops",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Work out 2.35 × 10.",
+   "answer": 23.5,
+   "tolerance": 0.001,
+   "explanation": "Move the point one place right.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-fractions-e09",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class5-maths-decimals-ops",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which is the biggest?",
+   "choices": [
+    "0.045",
+    "0.5",
+    "0.45",
+    "0.405"
+   ],
+   "answer": 1,
+   "explanation": "0.5 = 0.500 is more than 0.450.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-fractions-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class5-maths-decimals-ops",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Work out 6.4 ÷ 8.",
+   "answer": 0.8,
+   "tolerance": 0.001,
+   "explanation": "8 × 0.8 = 6.4.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-fractions-e11",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class5-maths-decimals-ops",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "3.5 and 3.50 have the same value.",
+   "answer": true,
+   "explanation": "A zero at the end does not change the value.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-fractions-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class5-maths-decimals-ops",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Mr Eko buys 2.5 kg of rice at 600 FCFA per kg, and 1.5 litres of oil at 1,200 FCFA per litre.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Cost of the rice?",
+     "answer": 1500.0,
+     "tolerance": 0.01,
+     "explanation": "2.5 × 600 = 1,500.",
+     "unit": "FCFA",
+     "id": "class5-maths-fractions-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Cost of the oil?",
+     "answer": 1800.0,
+     "tolerance": 0.01,
+     "explanation": "1.5 × 1,200 = 1,800.",
+     "unit": "FCFA",
+     "id": "class5-maths-fractions-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Total cost?",
+     "answer": 3300.0,
+     "tolerance": 0.01,
+     "explanation": "1,500 + 1,800 = 3,300.",
+     "unit": "FCFA",
+     "id": "class5-maths-fractions-e12-c"
+    }
+   ],
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-decimals-ops-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-decimals-ops",
+   "prompt": "Class 5 Maths (Decimals) – In 6.07 the 7 is worth...",
+   "choices": [
+    "7 tenths",
+    "70",
+    "7 ones",
+    "7 hundredths"
+   ],
+   "answer": 3,
+   "explanation": "Second digit after the point.",
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-decimals-ops-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-decimals-ops",
+   "prompt": "Class 5 Maths (Decimals) – Work out 0.5 + 0.25.",
+   "choices": [
+    "0.55",
+    "0.525",
+    "0.75",
+    "0.30"
+   ],
+   "answer": 2,
+   "explanation": "50 + 25 hundredths.",
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-decimals-ops-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-decimals-ops",
+   "prompt": "Class 5 Maths (Decimals) – 45 ÷ 100 =",
+   "choices": [
+    "0.045",
+    "4.5",
+    "0.45",
+    "4,500"
+   ],
+   "answer": 2,
+   "explanation": "Move the point two places left.",
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-decimals-ops-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-decimals-ops",
+   "prompt": "Class 5 Maths (Decimals) – Which is the smallest?",
+   "choices": [
+    "0.09",
+    "0.19",
+    "0.1",
+    "0.9"
+   ],
+   "answer": 0,
+   "explanation": "0.09 has only 9 hundredths.",
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-decimals-ops-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-decimals-ops",
+   "prompt": "Class 5 Maths (Decimals) – Work out 1.2 × 3.",
+   "choices": [
+    "0.36",
+    "36",
+    "3.2",
+    "3.6"
+   ],
+   "answer": 3,
+   "explanation": "12 × 3 = 36 with one decimal place.",
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-fractions-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class5-maths-percentages",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find 10% of 500.",
+   "answer": 50,
+   "tolerance": 0,
+   "explanation": "500 ÷ 10 = 50.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-fractions-e14",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class5-maths-percentages",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which fraction is the same as 50%?",
+   "choices": [
+    "5/2",
+    "1/2",
+    "2/5",
+    "1/5"
+   ],
+   "answer": 1,
+   "explanation": "50 out of 100.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-fractions-e15",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class5-maths-percentages",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find 25% of 80.",
+   "answer": 20,
+   "tolerance": 0,
+   "explanation": "80 ÷ 4.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-fractions-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class5-maths-percentages",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find 15% of 200.",
+   "answer": 30,
+   "tolerance": 0,
+   "explanation": "10% = 20, 5% = 10; total 30.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-fractions-e17",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class5-maths-percentages",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "0.75 is the same as 75%.",
+   "answer": true,
+   "explanation": "75/100 = 0.75.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-fractions-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class5-maths-percentages",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A trader in Bafoussam sells a bag of maize for 12,000 FCFA. During the market day he gives a 10% discount.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How much is the discount?",
+     "answer": 1200,
+     "tolerance": 0,
+     "explanation": "10% of 12,000 = 1,200.",
+     "unit": "FCFA",
+     "id": "class5-maths-fractions-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "What is the price after the discount?",
+     "answer": 10800,
+     "tolerance": 0,
+     "explanation": "12,000 − 1,200 = 10,800.",
+     "unit": "FCFA",
+     "id": "class5-maths-fractions-e18-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "What percentage of the price must a customer pay?",
+     "choices": [
+      "9%",
+      "10%",
+      "90%",
+      "110%"
+     ],
+     "answer": 2,
+     "explanation": "100% − 10% = 90%.",
+     "id": "class5-maths-fractions-e18-c"
+    }
+   ],
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-percentages-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-percentages",
+   "prompt": "Class 5 Maths (Percentages) – Per cent means...",
+   "choices": [
+    "out of 100",
+    "out of 1,000",
+    "out of 10",
+    "out of 50"
+   ],
+   "answer": 0,
+   "explanation": "From the Latin per centum.",
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-percentages-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-percentages",
+   "prompt": "Class 5 Maths (Percentages) – 10% of 360 is...",
+   "choices": [
+    "100",
+    "36",
+    "360",
+    "3.6"
+   ],
+   "answer": 1,
+   "explanation": "Divide by 10.",
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-percentages-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-percentages",
+   "prompt": "Class 5 Maths (Percentages) – 1/4 as a percentage is...",
+   "choices": [
+    "25%",
+    "40%",
+    "14%",
+    "4%"
+   ],
+   "answer": 0,
+   "explanation": "25/100.",
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-percentages-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-percentages",
+   "prompt": "Class 5 Maths (Percentages) – A price of 2,000 FCFA reduced by 50% becomes...",
+   "choices": [
+    "1,500 FCFA",
+    "1,000 FCFA",
+    "500 FCFA",
+    "2,500 FCFA"
+   ],
+   "answer": 1,
+   "explanation": "Half of 2,000.",
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-percentages-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-percentages",
+   "prompt": "Class 5 Maths (Percentages) – A mark of 15 out of 20 is...",
+   "choices": [
+    "85%",
+    "15%",
+    "75%",
+    "20%"
+   ],
+   "answer": 2,
+   "explanation": "15/20 = 75/100.",
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-fractions-e19",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class5-maths-ratio-proportion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Simplify the ratio 6 : 9.",
+   "choices": [
+    "1 : 3",
+    "3 : 2",
+    "6 : 3",
+    "2 : 3"
+   ],
+   "answer": 3,
+   "explanation": "Divide both by 3.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-fractions-e20",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class5-maths-ratio-proportion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Share 60 sweets in the ratio 1 : 2. How many does the bigger share get?",
+   "answer": 40,
+   "tolerance": 0,
+   "explanation": "3 parts: 20 each; 2 parts = 40.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-fractions-e21",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class5-maths-ratio-proportion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "3 pens cost 450 FCFA. What is the cost of 1 pen?",
+   "answer": 150,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "450 ÷ 3 = 150.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-fractions-e22",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class5-maths-ratio-proportion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Share 90,000 FCFA in the ratio 4 : 5. How much is the bigger share?",
+   "answer": 50000,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "9 parts of 10,000; 5 parts = 50,000.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-fractions-e23",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class5-maths-ratio-proportion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The ratio 4 : 6 is equal to 2 : 3.",
+   "answer": true,
+   "explanation": "Divide both by 2.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-fractions-e24",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class5-maths-ratio-proportion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In a class in Kumba there are 12 girls and 18 boys.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What is the ratio of girls to boys in its simplest form?",
+     "choices": [
+      "3 : 2",
+      "1 : 2",
+      "12 : 18 cannot be simplified",
+      "2 : 3"
+     ],
+     "answer": 3,
+     "explanation": "Divide by 6.",
+     "id": "class5-maths-fractions-e24-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many pupils are in the class?",
+     "answer": 30,
+     "tolerance": 0,
+     "explanation": "12 + 18 = 30.",
+     "id": "class5-maths-fractions-e24-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "In another class with the same ratio there are 20 girls. How many boys?",
+     "answer": 30,
+     "tolerance": 0,
+     "explanation": "2 : 3 = 20 : 30.",
+     "id": "class5-maths-fractions-e24-c"
+    }
+   ],
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-ratio-proportion-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-ratio-proportion",
+   "prompt": "Class 5 Maths (Ratio and proportion) – The ratio of 2 oranges to 6 oranges is...",
+   "choices": [
+    "1 : 6",
+    "1 : 3",
+    "3 : 1",
+    "2 : 6 cannot be simplified"
+   ],
+   "answer": 1,
+   "explanation": "Divide by 2.",
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-ratio-proportion-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-ratio-proportion",
+   "prompt": "Class 5 Maths (Ratio and proportion) – To share 100 in the ratio 1 : 4 we first add...",
+   "choices": [
+    "4 − 1",
+    "100 + 5",
+    "1 × 4",
+    "1 + 4 = 5"
+   ],
+   "answer": 3,
+   "explanation": "There are 5 parts.",
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-ratio-proportion-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-ratio-proportion",
+   "prompt": "Class 5 Maths (Ratio and proportion) – If 2 books cost 1,000 FCFA, 6 books cost...",
+   "choices": [
+    "2,000 FCFA",
+    "1,500 FCFA",
+    "3,000 FCFA",
+    "6,000 FCFA"
+   ],
+   "answer": 2,
+   "explanation": "3 times as many.",
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-ratio-proportion-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-ratio-proportion",
+   "prompt": "Class 5 Maths (Ratio and proportion) – 5 : 10 in simplest form is...",
+   "choices": [
+    "5 : 2",
+    "1 : 2",
+    "1 : 10",
+    "2 : 1"
+   ],
+   "answer": 1,
+   "explanation": "Divide by 5.",
+   "chapter": "class5-maths-fractions"
+  },
+  {
+   "id": "class5-maths-ratio-proportion-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-ratio-proportion",
+   "prompt": "Class 5 Maths (Ratio and proportion) – The ratio of 50 cm to 1 m is...",
+   "choices": [
+    "50 : 1",
+    "1 : 2",
+    "2 : 1",
+    "1 : 50"
+   ],
+   "answer": 1,
+   "explanation": "1 m = 100 cm.",
+   "chapter": "class5-maths-fractions"
+  }
+ ]
+}

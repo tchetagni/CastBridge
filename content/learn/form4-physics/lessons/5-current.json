@@ -1,0 +1,1101 @@
+{
+ "chapter": "form4-physics-current",
+ "lessons": [
+  {
+   "id": "form4-physics-ohm-circuits",
+   "title": "Current, potential difference, resistance and Ohm's law",
+   "minutes": 35,
+   "programRef": "Form 4 Physics — Current, p.d., resistance, Ohm's law, power and domestic electricity (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define current, potential difference and resistance with their units.",
+    "State and use Ohm's law V = IR and the graph of V against I.",
+    "Combine resistors in series and in parallel."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form4-physics-current-e01",
+    "form4-physics-current-e02",
+    "form4-physics-current-e03",
+    "form4-physics-current-e04",
+    "form4-physics-current-e05",
+    "form4-physics-current-e06"
+   ],
+   "selfCheck": [
+    "form4-physics-ohm-circuits-q1",
+    "form4-physics-ohm-circuits-q2",
+    "form4-physics-ohm-circuits-q3",
+    "form4-physics-ohm-circuits-q4",
+    "form4-physics-ohm-circuits-q5"
+   ],
+   "reviewNotes": [
+    "Units written as A, V, Ω; formulae V = IR, Q = It standard. Check the syllabus for resistivity (ρ = RA/L), which is not included here.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Current, p.d. and resistance",
+     "md": "**Current I = Q ÷ t** (charge per second): unit **ampere (A)** = 1 C/s, measured with an **ammeter in series**. **Potential difference (p.d.) V** is the energy transferred per coulomb: unit **volt (V)** = 1 J/C, measured with a **voltmeter in parallel**. **Resistance R = V ÷ I**, unit **ohm (Ω)**. **Ohm's law**: for a metal at constant temperature, **V = I R**: current is proportional to p.d."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 205,
+      "items": [
+       {
+        "t": "line",
+        "x1": 60.0,
+        "y1": 70.0,
+        "x2": 118.0,
+        "y2": 70.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 118.0,
+        "y": 63.0,
+        "w": 40,
+        "h": 14,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "white"
+       },
+       {
+        "t": "line",
+        "x1": 158.0,
+        "y1": 70.0,
+        "x2": 242.0,
+        "y2": 70.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 255.0,
+        "cy": 70.0,
+        "r": 12,
+        "stroke": "ink",
+        "width": 1.8,
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 255.0,
+        "y": 75.0,
+        "text": "A",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 268.0,
+        "y1": 70.0,
+        "x2": 320,
+        "y2": 70,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 320.0,
+        "y1": 70.0,
+        "x2": 320,
+        "y2": 170,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 320.0,
+        "y1": 170.0,
+        "x2": 206.0,
+        "y2": 170.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 176.0,
+        "cy": 170.0,
+        "r": 2.5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 204.0,
+        "cy": 170.0,
+        "r": 2.5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 176.0,
+        "y1": 170.0,
+        "x2": 200.0,
+        "y2": 156.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 174.0,
+        "y1": 170.0,
+        "x2": 60,
+        "y2": 170,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 60.0,
+        "y1": 170.0,
+        "x2": 60.0,
+        "y2": 125.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 48.0,
+        "y1": 116.0,
+        "x2": 72.0,
+        "y2": 116.0,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 54.0,
+        "y1": 124.0,
+        "x2": 66.0,
+        "y2": 124.0,
+        "color": "ink",
+        "width": 5
+       },
+       {
+        "t": "line",
+        "x1": 60.0,
+        "y1": 115.0,
+        "x2": 60,
+        "y2": 70,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 118,
+        "y1": 70,
+        "x2": 118,
+        "y2": 36,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 118,
+        "y1": 36,
+        "x2": 138,
+        "y2": 36,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 151,
+        "cy": 36,
+        "r": 12,
+        "stroke": "ink",
+        "width": 1.8,
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 151,
+        "y": 41,
+        "text": "V",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 164,
+        "y1": 36,
+        "x2": 178,
+        "y2": 36,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 178,
+        "y1": 36,
+        "x2": 178,
+        "y2": 70,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 138,
+        "y": 100,
+        "text": "R",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 225,
+        "y": 92,
+        "text": "ammeter",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 125,
+        "text": "cell",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 192,
+        "text": "switch",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 28,
+        "text": "voltmeter across R",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Measuring current (ammeter in series) and p.d. (voltmeter across the resistor).",
+     "alt": "A circuit with a cell, a resistor R and an ammeter in the top wire, an open switch at the bottom and a voltmeter connected across the resistor."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 3,
+      "ymin": 0,
+      "ymax": 6,
+      "grid": 1,
+      "w": 380,
+      "h": 250,
+      "curves": [],
+      "points": [
+       {
+        "x": 2,
+        "y": 4,
+        "label": "(2 A, 4 V)",
+        "color": "red"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 0,
+        "y1": 0,
+        "x2": 3,
+        "y2": 6,
+        "color": "blue",
+        "dash": false
+       }
+      ],
+      "xlabel": "I (A)",
+      "ylabel": "V (V)"
+     },
+     "caption": "V-I graph for a 2 Ω resistor: a straight line through the origin.",
+     "alt": "A graph of V against I: a straight line from the origin through the point 2 A, 4 V; its gradient is the resistance, 2 ohms."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Series and parallel",
+     "md": "**Series**: same current everywhere; p.d.s add up to the supply; **R = R₁ + R₂**. **Parallel**: same p.d. across each branch; branch currents add; **1/R = 1/R₁ + 1/R₂** (the total is less than the smallest resistor). The resistance of a wire **increases with length**, **decreases with cross-sectional area**, and depends on the material; for a metal it rises with temperature."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- An ammeter has very low resistance and goes in **series**; a voltmeter has very high resistance and goes in **parallel**.\n- In parallel use 1/R, then invert the answer.\n- The V-I graph of a filament lamp is a curve: it does not obey Ohm's law because its temperature rises."
+    },
+    {
+     "type": "example",
+     "title": "Ohm's law",
+     "statement": "A p.d. of 12 V is applied across a 4 Ω resistor. Find the current.",
+     "steps": [
+      "I = V ÷ R.",
+      "12 ÷ 4 = 3 A."
+     ],
+     "answer": "3 A"
+    },
+    {
+     "type": "example",
+     "title": "Two resistors",
+     "statement": "A 6 Ω and a 3 Ω resistor are connected to a 12 V supply. Find the total resistance and the current when they are (a) in series and (b) in parallel.",
+     "steps": [
+      "Series: R = 6 + 3 = 9 Ω; I = 12 ÷ 9 = 1.33 A.",
+      "Parallel: 1/R = 1/6 + 1/3 = 1/2, R = 2 Ω; I = 12 ÷ 2 = 6 A."
+     ],
+     "answer": "Series 9 Ω, 1.33 A; parallel 2 Ω, 6 A"
+    },
+    {
+     "type": "exercise",
+     "ref": "form4-physics-current-e01"
+    }
+   ],
+   "chapter": "form4-physics-current"
+  },
+  {
+   "id": "form4-physics-power-domestic",
+   "title": "Electrical power, energy and domestic electricity",
+   "minutes": 30,
+   "programRef": "Form 4 Physics — Current, p.d., resistance, Ohm's law, power and domestic electricity (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Calculate electrical power P = VI and energy E = Pt.",
+    "Calculate the energy in kWh and its cost.",
+    "Describe fuses, earthing and safe use of mains electricity."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form4-physics-current-e07",
+    "form4-physics-current-e08",
+    "form4-physics-current-e09",
+    "form4-physics-current-e10",
+    "form4-physics-current-e11",
+    "form4-physics-current-e12"
+   ],
+   "selfCheck": [
+    "form4-physics-power-domestic-q1",
+    "form4-physics-power-domestic-q2",
+    "form4-physics-power-domestic-q3",
+    "form4-physics-power-domestic-q4",
+    "form4-physics-power-domestic-q5"
+   ],
+   "reviewNotes": [
+    "Mains voltage (220 V) and the price of electricity are assumed values; the tariff is illustrative and must not be taken as the real price.",
+    "Fuse sizes (5, 10, 13 A) follow a common school example; check the standard in use locally.",
+    "Safety advice general, to be reviewed by a qualified electrician.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Power and energy",
+     "md": "**Electrical power P = V × I**, also **P = I² R = V² ÷ R**; unit the **watt (W)**. **Energy E = P × t**: in joules if P is in W and t in s. The household unit is the **kilowatt-hour (kWh)**: **1 kWh = 1 kW × 1 h = 3.6 × 10⁶ J**. **Cost = number of kWh × price per kWh**. The mains in Cameroon is about 220 V a.c. (alternating current, 50 Hz)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 205,
+      "items": [
+       {
+        "t": "line",
+        "x1": 70.0,
+        "y1": 60.0,
+        "x2": 121.5,
+        "y2": 60.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 121.5,
+        "y": 54.0,
+        "w": 32,
+        "h": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "white"
+       },
+       {
+        "t": "line",
+        "x1": 121.5,
+        "y1": 60.0,
+        "x2": 153.5,
+        "y2": 60.0,
+        "color": "ink",
+        "width": 1.5
+       },
+       {
+        "t": "line",
+        "x1": 153.5,
+        "y1": 60.0,
+        "x2": 202.5,
+        "y2": 60.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 204.5,
+        "cy": 60.0,
+        "r": 2.5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 232.5,
+        "cy": 60.0,
+        "r": 2.5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 204.5,
+        "y1": 60.0,
+        "x2": 228.5,
+        "y2": 46.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 234.5,
+        "y1": 60.0,
+        "x2": 340,
+        "y2": 60,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 340.0,
+        "y1": 60.0,
+        "x2": 340.0,
+        "y2": 102.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 340.0,
+        "cy": 115.0,
+        "r": 12,
+        "stroke": "ink",
+        "width": 1.8,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "line",
+        "x1": 332.0,
+        "y1": 107.0,
+        "x2": 348.0,
+        "y2": 123.0,
+        "color": "ink",
+        "width": 1.5
+       },
+       {
+        "t": "line",
+        "x1": 348.0,
+        "y1": 107.0,
+        "x2": 332.0,
+        "y2": 123.0,
+        "color": "ink",
+        "width": 1.5
+       },
+       {
+        "t": "line",
+        "x1": 340.0,
+        "y1": 128.0,
+        "x2": 340,
+        "y2": 170,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 340.0,
+        "y1": 170.0,
+        "x2": 70,
+        "y2": 170,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 70.0,
+        "y1": 170.0,
+        "x2": 70,
+        "y2": 60,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 40,
+        "text": "live",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 192,
+        "text": "neutral",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 90,
+        "text": "fuse",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 90,
+        "text": "switch",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 118,
+        "text": "mains supply →",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 118,
+        "text": "lamp",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 30,
+        "y": 100,
+        "w": 20,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 125,
+        "text": "~",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A mains circuit: the fuse and switch are in the live wire.",
+     "alt": "A circuit with a source on the left, a fuse and a switch in the top (live) wire, a lamp on the right and the neutral wire along the bottom."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Fuses, earthing and safety",
+     "md": "A **fuse** is a thin wire that **melts** and breaks the circuit if the current is too large; it goes in the **live** wire with a rating **just above** the normal current. The **earth wire** joins the metal case of an appliance to the ground so that a fault current flows to earth and blows the fuse instead of shocking you. **Switches** go in the live wire. A **circuit breaker** does the same job as a fuse and can be reset."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Safety at home",
+     "md": "Do not touch switches, plugs or wires with wet hands; do not overload sockets with many appliances; replace damaged cables; never push objects into sockets; keep children away; switch off before repairs; and let a **qualified electrician** do any mains wiring. Wire colour codes vary between wiring systems: always follow the local code."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Convert to kW and hours for kWh: 1500 W for 2 h = 1.5 kW × 2 h = 3 kWh, not 3000.\n- A fuse protects the **wiring** from overheating; it does not make an appliance safe by itself.\n- A fuse in the neutral wire would leave the appliance live when it blows."
+    },
+    {
+     "type": "example",
+     "title": "Cost of using an iron",
+     "statement": "An iron rated 1500 W is used for 2 hours. How many kWh are used and what is the cost at an assumed price of 100 FCFA per kWh?",
+     "steps": [
+      "Energy = 1.5 kW × 2 h = 3 kWh.",
+      "Cost = 3 × 100 = 300 FCFA (illustrative price)."
+     ],
+     "answer": "3 kWh; 300 FCFA"
+    },
+    {
+     "type": "example",
+     "title": "Current and fuse",
+     "statement": "A 2200 W heater runs on 220 V. Find the current and suggest a suitable fuse from 5 A, 10 A and 13 A.",
+     "steps": [
+      "I = P ÷ V = 2200 ÷ 220 = 10 A.",
+      "A 10 A fuse would be at the limit; a 13 A fuse is just above the normal current."
+     ],
+     "answer": "10 A; use a 13 A fuse"
+    },
+    {
+     "type": "exercise",
+     "ref": "form4-physics-current-e07"
+    }
+   ],
+   "chapter": "form4-physics-current"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form4-physics-current-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-physics-ohm-circuits",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A current of 2 A flows for 30 s. How much charge passes? (C)",
+   "answer": 60,
+   "tolerance": 0,
+   "unit": "C",
+   "explanation": "Q = I t = 2 × 30 = 60 C.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-physics-current"
+  },
+  {
+   "id": "form4-physics-current-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-physics-ohm-circuits",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A resistor passes a current of 0.5 A when the p.d. across it is 6 V. Find its resistance in ohms.",
+   "answer": 12,
+   "tolerance": 0,
+   "unit": "Ω",
+   "explanation": "R = V ÷ I = 6 ÷ 0.5 = 12 Ω.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-physics-current"
+  },
+  {
+   "id": "form4-physics-current-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-physics-ohm-circuits",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the total resistance of 10 Ω and 15 Ω in series.",
+   "answer": 25,
+   "tolerance": 0,
+   "unit": "Ω",
+   "explanation": "10 + 15 = 25 Ω.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-physics-current"
+  },
+  {
+   "id": "form4-physics-current-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form4-physics-ohm-circuits",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the total resistance of 6 Ω and 12 Ω in parallel (Ω).",
+   "answer": 4,
+   "tolerance": 0.01,
+   "unit": "Ω",
+   "explanation": "1/R = 1/6 + 1/12 = 3/12, R = 4 Ω.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form4-physics-current"
+  },
+  {
+   "id": "form4-physics-current-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form4-physics-ohm-circuits",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Describe how to find the resistance of a resistor in the laboratory.",
+   "model": "Connect the resistor in series with an ammeter and a variable supply or rheostat, with a voltmeter across the resistor. Read V and I for several settings and calculate R = V ÷ I for each, or plot a graph of V against I and find the gradient.",
+   "rubric": [
+    "1 mark: ammeter in series, voltmeter in parallel",
+    "1 mark: several readings of V and I",
+    "1 mark: R = V ÷ I or gradient"
+   ],
+   "explanation": "Connect the resistor in series with an ammeter and a variable supply or rheostat, with a voltmeter across the resistor. Read V and I for several settings and calculate R = V ÷ I for each, or plot a graph of V against I and find the gradient.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-physics-current"
+  },
+  {
+   "id": "form4-physics-current-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form4-physics-ohm-circuits",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Two resistors of 6 Ω and 3 Ω are connected in series to a 12 V supply.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Total resistance (Ω).",
+     "answer": 9,
+     "tolerance": 0,
+     "explanation": "6 + 3 = 9 Ω.",
+     "unit": "Ω",
+     "id": "form4-physics-current-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Current in the circuit (A), to 2 d.p.",
+     "answer": 1.33,
+     "tolerance": 0.01,
+     "explanation": "12 ÷ 9 = 1.33 A.",
+     "unit": "A",
+     "id": "form4-physics-current-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "P.d. across the 6 Ω resistor (V), to 1 d.p.",
+     "answer": 8.0,
+     "tolerance": 0.1,
+     "explanation": "V = I R = 1.33 × 6 = 8.0 V.",
+     "unit": "V",
+     "id": "form4-physics-current-e06-c"
+    }
+   ],
+   "chapter": "form4-physics-current"
+  },
+  {
+   "id": "form4-physics-ohm-circuits-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-ohm-circuits",
+   "prompt": "The SI unit for electric current is the:",
+   "choices": [
+    "joule",
+    "volt",
+    "ohm",
+    "ampere"
+   ],
+   "answer": 3,
+   "explanation": "A.",
+   "chapter": "form4-physics-current"
+  },
+  {
+   "id": "form4-physics-ohm-circuits-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-ohm-circuits",
+   "prompt": "Ohm's law is:",
+   "choices": [
+    "V = I ÷ R",
+    "V = R ÷ I",
+    "V = I + R",
+    "V = IR"
+   ],
+   "answer": 3,
+   "explanation": "For a conductor at constant temperature.",
+   "chapter": "form4-physics-current"
+  },
+  {
+   "id": "form4-physics-ohm-circuits-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-ohm-circuits",
+   "prompt": "An ammeter is connected:",
+   "choices": [
+    "in parallel",
+    "in series",
+    "across the supply",
+    "through the earth"
+   ],
+   "answer": 1,
+   "explanation": "It measures the current through itself.",
+   "chapter": "form4-physics-current"
+  },
+  {
+   "id": "form4-physics-ohm-circuits-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-ohm-circuits",
+   "prompt": "In a series circuit the current is:",
+   "choices": [
+    "zero",
+    "largest at the cell",
+    "the same everywhere",
+    "different in each part"
+   ],
+   "answer": 2,
+   "explanation": "No branches.",
+   "chapter": "form4-physics-current"
+  },
+  {
+   "id": "form4-physics-ohm-circuits-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-ohm-circuits",
+   "prompt": "The total resistance of resistors in parallel is:",
+   "choices": [
+    "zero",
+    "more than the largest",
+    "equal to their sum",
+    "less than the smallest one"
+   ],
+   "answer": 3,
+   "explanation": "More paths for the current.",
+   "chapter": "form4-physics-current"
+  },
+  {
+   "id": "form4-physics-current-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-physics-power-domestic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A lamp is rated 60 W on a 220 V supply. Find the current in A (2 d.p.).",
+   "answer": 0.27,
+   "tolerance": 0.01,
+   "unit": "A",
+   "explanation": "I = 60 ÷ 220 = 0.27 A.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-physics-current"
+  },
+  {
+   "id": "form4-physics-current-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-physics-power-domestic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A 100 W bulb is on for 10 hours. How many kWh are used?",
+   "answer": 1,
+   "tolerance": 0,
+   "unit": "kWh",
+   "explanation": "0.1 kW × 10 h = 1 kWh.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-physics-current"
+  },
+  {
+   "id": "form4-physics-current-e09",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form4-physics-power-domestic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The fuse of an appliance should be placed in the:",
+   "choices": [
+    "live wire",
+    "neutral wire",
+    "case",
+    "earth wire"
+   ],
+   "answer": 0,
+   "explanation": "So that the appliance is dead when it blows.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-physics-current"
+  },
+  {
+   "id": "form4-physics-current-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form4-physics-power-domestic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "At an assumed price of 100 FCFA per kWh, what is the cost of running a 2 kW heater for 3 hours? (FCFA)",
+   "answer": 600,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "2 × 3 = 6 kWh; 6 × 100 = 600 FCFA.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form4-physics-current"
+  },
+  {
+   "id": "form4-physics-current-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form4-physics-power-domestic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain how the earth wire protects a user of a metal-cased appliance if the live wire touches the case.",
+   "model": "The fault current flows through the earth wire to the ground, which is a large current that melts the fuse and cuts off the supply, so the case does not stay live.",
+   "rubric": [
+    "1 mark: current flows to earth",
+    "1 mark: large current blows fuse/trips breaker"
+   ],
+   "explanation": "The fault current flows through the earth wire to the ground, which is a large current that melts the fuse and cuts off the supply, so the case does not stay live.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-physics-current"
+  },
+  {
+   "id": "form4-physics-current-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form4-physics-power-domestic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A kettle is rated 2000 W, 220 V, and is used for 6 minutes each day. Assume a price of 100 FCFA per kWh (illustrative).",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Energy used each day in kWh.",
+     "answer": 0.2,
+     "tolerance": 0.001,
+     "explanation": "2 kW × 0.1 h = 0.2 kWh.",
+     "unit": "kWh",
+     "id": "form4-physics-current-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Cost for 30 days in FCFA.",
+     "answer": 600,
+     "tolerance": 0,
+     "explanation": "0.2 × 30 × 100 = 600 FCFA.",
+     "unit": "FCFA",
+     "id": "form4-physics-current-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Current drawn in A (to 1 d.p.).",
+     "answer": 9.1,
+     "tolerance": 0.1,
+     "explanation": "2000 ÷ 220 = 9.09 A.",
+     "unit": "A",
+     "id": "form4-physics-current-e12-c"
+    }
+   ],
+   "chapter": "form4-physics-current"
+  },
+  {
+   "id": "form4-physics-power-domestic-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-power-domestic",
+   "prompt": "Electrical power equals:",
+   "choices": [
+    "V ÷ I",
+    "I ÷ V",
+    "V + I",
+    "V × I"
+   ],
+   "answer": 3,
+   "explanation": "P = VI.",
+   "chapter": "form4-physics-current"
+  },
+  {
+   "id": "form4-physics-power-domestic-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-power-domestic",
+   "prompt": "1 kWh is equal to:",
+   "choices": [
+    "3.6 × 10⁶ J",
+    "1000 J",
+    "36 J",
+    "3600 J"
+   ],
+   "answer": 0,
+   "explanation": "1000 W × 3600 s.",
+   "chapter": "form4-physics-current"
+  },
+  {
+   "id": "form4-physics-power-domestic-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-power-domestic",
+   "prompt": "A fuse works by:",
+   "choices": [
+    "storing charge",
+    "making light",
+    "reducing voltage",
+    "melting when the current is too large"
+   ],
+   "answer": 3,
+   "explanation": "It breaks the circuit.",
+   "chapter": "form4-physics-current"
+  },
+  {
+   "id": "form4-physics-power-domestic-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-power-domestic",
+   "prompt": "The earth wire is connected to the:",
+   "choices": [
+    "switch contact",
+    "battery",
+    "metal case of the appliance",
+    "bulb filament"
+   ],
+   "answer": 2,
+   "explanation": "To carry fault current to earth.",
+   "chapter": "form4-physics-current"
+  },
+  {
+   "id": "form4-physics-power-domestic-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-power-domestic",
+   "prompt": "A safe action with electricity is to:",
+   "choices": [
+    "dry your hands before touching a switch",
+    "overload a socket",
+    "poke a wire into a socket",
+    "use a wet cloth on a socket"
+   ],
+   "answer": 0,
+   "explanation": "Water conducts electricity.",
+   "chapter": "form4-physics-current"
+  }
+ ]
+}

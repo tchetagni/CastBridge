@@ -1,0 +1,2671 @@
+{
+ "chapter": "gceal-chemistry-ch-organic",
+ "lessons": [
+  {
+   "id": "gceal-chemistry-carbonyls",
+   "title": "Aldehydes and ketones",
+   "minutes": 40,
+   "programRef": "GCE Advanced Level Chemistry — organic chemistry (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Name aldehydes and ketones and describe their preparation by oxidation of alcohols",
+    "Describe nucleophilic addition (with HCN) and reduction (with NaBH₄) and the mechanism of addition",
+    "Use 2,4-DNPH, Tollens' and Fehling's tests to identify carbonyl compounds and deduce formulae"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-chemistry-ch-organic-e01",
+    "gceal-chemistry-ch-organic-e02",
+    "gceal-chemistry-ch-organic-e03",
+    "gceal-chemistry-ch-organic-e04",
+    "gceal-chemistry-ch-organic-e05",
+    "gceal-chemistry-ch-organic-e06"
+   ],
+   "selfCheck": [
+    "gceal-chemistry-carbonyls-q1",
+    "gceal-chemistry-carbonyls-q2",
+    "gceal-chemistry-carbonyls-q3",
+    "gceal-chemistry-carbonyls-q4",
+    "gceal-chemistry-carbonyls-q5"
+   ],
+   "reviewNotes": [
+    "Data used: Ar H 1.0, C 12.0, N 14.0, O 16.0, Na 23.0, Mg 24.0, Al 27.0, S 32.0, Cl 35.5, K 39.0, Ca 40.0, Fe 56.0, Cu 63.5, Zn 65.0, Ag 108.0, Ba 137.0; R = 8.31 J mol⁻¹ K⁻¹; F = 96 500 C mol⁻¹; molar volume 24.0 dm³ at room temperature and pressure; K_w = 1.0 × 10⁻¹⁴ at 25 °C.",
+    "Mechanism drawn in words only (no curly arrows). Reagent details (Tollens' preparation, Fehling's) are descriptive; the practical syllabus may require more.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Aldehydes and ketones",
+     "md": "Both contain the **carbonyl group C=O**. In an **aldehyde** the carbonyl carbon is at the end of a chain (–CHO, suffix **-al**: ethanal CH₃CHO); in a **ketone** it is in the middle (suffix **-one**: propanone CH₃COCH₃). They are made by oxidising alcohols: primary → aldehyde (distil off as formed), secondary → ketone, using acidified K₂Cr₂O₇.\n\nThe C=O bond is polar (C δ⁺, O δ⁻); the carbon is attacked by nucleophiles."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Nucleophilic addition and reduction",
+     "md": "**With HCN** (KCN + dilute acid): C=O + HCN → C(OH)CN, a hydroxynitrile; the nucleophile CN⁻ attacks C δ⁺, the intermediate anion then picks up H⁺. The product has **one more carbon** (useful in synthesis).\n\n**Reduction** with NaBH₄ (or LiAlH₄): aldehyde → primary alcohol; ketone → secondary alcohol (H⁻ is the nucleophile). Aldehydes are also **oxidised** easily to carboxylic acids; ketones are not."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 215,
+      "items": [
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 15,
+        "w": 140,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 38,
+        "text": "unknown C=O compound",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 52,
+        "x2": 200,
+        "y2": 80,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 82,
+        "w": 180,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 105,
+        "text": "2,4-DNPH: orange precipitate",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 160,
+        "y1": 120,
+        "x2": 90,
+        "y2": 150,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 240,
+        "y1": 120,
+        "x2": 310,
+        "y2": 150,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 152,
+        "w": 160,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 172,
+        "text": "Tollens': silver mirror",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 190,
+        "text": "→ aldehyde",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 152,
+        "w": 160,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 172,
+        "text": "no silver mirror",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 190,
+        "text": "→ ketone",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Distinguishing aldehydes from ketones.",
+     "alt": "A flow chart: an unknown carbonyl compound gives an orange precipitate with 2,4-DNPH; Tollens' reagent then separates an aldehyde (silver mirror) from a ketone (no mirror)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Tests",
+     "md": "- **2,4-DNPH** (2,4-dinitrophenylhydrazine): orange/yellow precipitate with any aldehyde or ketone (the melting point of the crystals identifies the compound).\n- **Tollens' reagent** (ammoniacal AgNO₃, warm): a **silver mirror** with aldehydes only (Ag⁺ → Ag).\n- **Fehling's/Benedict's solution** (warm): blue → brick-red Cu₂O with aliphatic aldehydes only.\n- **Iodoform test** (I₂/NaOH): yellow precipitate CHI₃ with CH₃CO– (or CH₃CH(OH)–) compounds."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using 2,4-DNPH to distinguish an aldehyde from a ketone: it detects only C=O in general.\n- Forgetting to distil an aldehyde as it forms (it is further oxidised to the acid otherwise).\n- Saying that NaBH₄ reduces C=C bonds: it does not (under these conditions).\n- Drawing the curly arrow from the C atom instead of from the nucleophile's lone pair."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Deducing a formula",
+     "statement": "A compound has 62.1 % C, 10.3 % H and 27.6 % O by mass and M = 58. It forms an orange precipitate with 2,4-DNPH but no silver mirror with Tollens' reagent. Identify it.",
+     "steps": [
+      "Moles: C 62.1/12 = 5.18; H 10.3/1 = 10.3; O 27.6/16 = 1.73. Ratio ÷ 1.73 = 3 : 6 : 1, so the empirical formula is C₃H₆O (M = 58, the same).",
+      "The 2,4-DNPH test shows C=O; no silver mirror means it is not an aldehyde, so it is a ketone.",
+      "Propanone, CH₃COCH₃."
+     ],
+     "answer": "Propanone (CH₃COCH₃)"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Mechanism and yield",
+     "statement": "5.8 g of propanone (M = 58) reacts with HCN to give (CH₃)₂C(OH)CN (M = 85). Describe the first step of the mechanism and find the mass obtained at a 70 % yield.",
+     "steps": [
+      "Step 1: the cyanide ion CN⁻ (nucleophile) attacks the δ⁺ carbon of C=O; the π electrons move to oxygen, giving an anion (alkoxide) intermediate; step 2: this picks up H⁺ (from HCN or acid) to form the hydroxynitrile.",
+      "n(propanone) = 5.8/58 = 0.100 mol; theoretical mass = 0.100 × 85 = 8.5 g.",
+      "Actual mass = 0.70 × 8.5 = 5.95 g."
+     ],
+     "answer": "Nucleophilic addition; 5.95 g"
+    }
+   ],
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-acids",
+   "title": "Carboxylic acids and their derivatives",
+   "minutes": 40,
+   "programRef": "GCE Advanced Level Chemistry — organic chemistry (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe the acidity and reactions of carboxylic acids and the esterification and hydrolysis of esters",
+    "Describe the preparation and reactions of acyl chlorides and amides",
+    "Explain the saponification of fats and oils and calculate masses and yields"
+   ],
+   "prerequisites": [
+    "gceal-chemistry-carbonyls"
+   ],
+   "exercises": [
+    "gceal-chemistry-ch-organic-e07",
+    "gceal-chemistry-ch-organic-e08",
+    "gceal-chemistry-ch-organic-e09",
+    "gceal-chemistry-ch-organic-e10",
+    "gceal-chemistry-ch-organic-e11",
+    "gceal-chemistry-ch-organic-e12"
+   ],
+   "selfCheck": [
+    "gceal-chemistry-acids-q1",
+    "gceal-chemistry-acids-q2",
+    "gceal-chemistry-acids-q3",
+    "gceal-chemistry-acids-q4",
+    "gceal-chemistry-acids-q5"
+   ],
+   "reviewNotes": [
+    "Data used: Ar H 1.0, C 12.0, N 14.0, O 16.0, Na 23.0, Mg 24.0, Al 27.0, S 32.0, Cl 35.5, K 39.0, Ca 40.0, Fe 56.0, Cu 63.5, Zn 65.0, Ag 108.0, Ba 137.0; R = 8.31 J mol⁻¹ K⁻¹; F = 96 500 C mol⁻¹; molar volume 24.0 dm³ at room temperature and pressure; K_w = 1.0 × 10⁻¹⁴ at 25 °C. M(tristearin) = 890, sodium stearate 306.",
+    "Local soap-making with palm oil is mentioned generally; check local practice. Mechanism of addition–elimination is named only.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Carboxylic acids",
+     "md": "The functional group is **–COOH** (suffix -oic acid). They are **weak acids** (ethanoic acid pK_a ≈ 4.8, K_a ≈ 1.8 × 10⁻⁵) because the carboxylate ion is stabilised by delocalisation of the charge over the two oxygen atoms; they are stronger than alcohols and phenol. Reactions of an acid: with metals (H₂), with alkalis (salt + water), with **carbonates (CO₂ effervescence: the test that distinguishes them from phenols and alcohols)**.\n\nBoiling points are high because of hydrogen bonding (dimers); the lower members are soluble in water."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Esters",
+     "md": "**Esterification**: RCOOH + R′OH ⇌ RCOOR′ + H₂O, catalysed by concentrated H₂SO₄ and heated under reflux (reversible, K_c small). Esters have fruity smells and are used as flavourings, solvents and perfumes.\n\n**Hydrolysis**: with acid (reversible) the ester gives acid + alcohol; with **alkali** (NaOH, heat) it goes to completion giving the **carboxylate salt** + alcohol. The hydrolysis of a fat or oil (a **triglyceride**, an ester of glycerol with three fatty acids) with NaOH is **saponification**, giving glycerol and **soap** (sodium salts of fatty acids)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 230,
+      "items": [
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 100,
+        "w": 100,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 125,
+        "text": "R–COOH",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 20,
+        "w": 100,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 43,
+        "text": "R–COCl",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 100,
+        "w": 100,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 125,
+        "text": "ester R–COOR′",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 100,
+        "w": 100,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 340,
+        "y": 125,
+        "text": "amide R–CONH₂",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 175,
+        "w": 140,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 198,
+        "text": "carboxylate salt",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 98,
+        "x2": 200,
+        "y2": 58,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 82,
+        "text": "SOCl₂ / PCl₅",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 148,
+        "y1": 120,
+        "x2": 112,
+        "y2": 120,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 108,
+        "text": "R′OH, H⁺",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 252,
+        "y1": 120,
+        "x2": 288,
+        "y2": 120,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 108,
+        "text": "NH₃ (via RCOCl)",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 142,
+        "x2": 200,
+        "y2": 173,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 160,
+        "text": "NaOH / Na₂CO₃",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Carboxylic acid and its derivatives: reagents for the main conversions.",
+     "alt": "A central box for the carboxylic acid with arrows to an acyl chloride, an ester, an amide and a carboxylate salt, each labelled with a reagent."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Acyl chlorides and amides",
+     "md": "**Acyl chlorides** RCOCl (made from RCOOH + SOCl₂ or PCl₅) are far more reactive than the acids: they react at room temperature with water (→ acid + HCl), alcohols (→ ester + HCl), ammonia (→ amide) and amines (→ N-substituted amide): *nucleophilic addition–elimination*. **Amides** RCONH₂ are neutral and are hydrolysed by hot acid or alkali.\n\nSoap from palm oil or palm kernel oil with an alkali is a traditional local product."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Expecting complete conversion in an esterification (it is an equilibrium: use excess of one reagent or remove water).\n- Writing the ester as R′COOR: the acid part is the R–CO– part, the alcohol part follows the O.\n- Forgetting that alkaline hydrolysis gives a salt, not the free acid.\n- Saying acyl chlorides are less reactive than acids."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Ester yield",
+     "statement": "6.0 g of ethanoic acid (M = 60) is heated with excess ethanol and a little concentrated sulfuric acid to give ethyl ethanoate (M = 88). The yield is 65 %. Find the mass of ester.",
+     "steps": [
+      "n(CH₃COOH) = 6.0/60 = 0.100 mol; theoretical ester = 0.100 mol.",
+      "Theoretical mass = 0.100 × 88 = 8.8 g.",
+      "Actual = 0.65 × 8.8 = 5.72 g."
+     ],
+     "answer": "5.7 g of ethyl ethanoate"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Saponification",
+     "statement": "What mass of NaOH is needed to saponify 1.00 kg of tristearin, (C₁₇H₃₅COO)₃C₃H₅ (M = 890)? Find also the mass of soap, sodium stearate C₁₇H₃₅COONa (M = 306).",
+     "steps": [
+      "n(tristearin) = 1000/890 = 1.124 mol; each mole needs 3 mol NaOH, so n(NaOH) = 3.37 mol.",
+      "Mass of NaOH = 3.37 × 40.0 = 135 g.",
+      "Soap formed = 3.37 mol × 306 = 1.03 × 10³ g (about 1.03 kg), plus glycerol."
+     ],
+     "answer": "135 g NaOH; 1.03 kg soap"
+    }
+   ],
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-arenes",
+   "title": "Benzene and aromatic chemistry",
+   "minutes": 40,
+   "programRef": "GCE Advanced Level Chemistry — organic chemistry (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe the structure of benzene and the evidence for delocalisation (bond lengths and enthalpy of hydrogenation)",
+    "Describe electrophilic substitution of benzene (nitration, halogenation, Friedel–Crafts) and its mechanism",
+    "Compare the reactivity of benzene, alkenes and phenol"
+   ],
+   "prerequisites": [
+    "gceal-chemistry-acids"
+   ],
+   "exercises": [
+    "gceal-chemistry-ch-organic-e13",
+    "gceal-chemistry-ch-organic-e14",
+    "gceal-chemistry-ch-organic-e15",
+    "gceal-chemistry-ch-organic-e16",
+    "gceal-chemistry-ch-organic-e17",
+    "gceal-chemistry-ch-organic-e18"
+   ],
+   "selfCheck": [
+    "gceal-chemistry-arenes-q1",
+    "gceal-chemistry-arenes-q2",
+    "gceal-chemistry-arenes-q3",
+    "gceal-chemistry-arenes-q4",
+    "gceal-chemistry-arenes-q5"
+   ],
+   "reviewNotes": [
+    "Data used: Ar H 1.0, C 12.0, N 14.0, O 16.0, Na 23.0, Mg 24.0, Al 27.0, S 32.0, Cl 35.5, K 39.0, Ca 40.0, Fe 56.0, Cu 63.5, Zn 65.0, Ag 108.0, Ba 137.0; R = 8.31 J mol⁻¹ K⁻¹; F = 96 500 C mol⁻¹; molar volume 24.0 dm³ at room temperature and pressure; K_w = 1.0 × 10⁻¹⁴ at 25 °C. ΔH_hyd values (cyclohexene −120, benzene −208 kJ mol⁻¹) are textbook values.",
+    "Orientation effects (activating/deactivating groups) and diazonium/azo dyes are not covered; check the syllabus.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Structure of benzene",
+     "md": "Benzene, C₆H₆, is a **planar hexagon** with bond angles of 120°; each carbon uses three σ bonds, and the remaining p electrons overlap to form a **delocalised π ring** above and below the plane. Evidence: all six C–C bonds have the same length (0.139 nm, between C–C 0.154 and C=C 0.134 nm); benzene does not decolourise bromine water; and the **enthalpy of hydrogenation** is about −208 kJ mol⁻¹, much less than the −360 kJ mol⁻¹ expected for three localised C=C bonds (3 × −120): the difference, **152 kJ mol⁻¹**, is the delocalisation (stabilisation) energy."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Electrophilic substitution",
+     "md": "Benzene's stable ring makes it undergo **substitution** (keeping the ring) rather than addition. The electron-rich π system attacks an **electrophile**.\n\n- **Nitration**: conc. HNO₃ + conc. H₂SO₄, about 50 °C → nitrobenzene; the electrophile is NO₂⁺ (HNO₃ + 2H₂SO₄ → NO₂⁺ + H₃O⁺ + 2HSO₄⁻).\n- **Halogenation**: Br₂ with FeBr₃ (or Fe) → bromobenzene.\n- **Friedel–Crafts**: RCl or RCOCl with AlCl₃ → alkylbenzene or phenyl ketone."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 230,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         210.62177826491072,
+         85.0,
+         150.0,
+         50.0,
+         89.37822173508928,
+         85.0,
+         89.3782217350893,
+         155.0,
+         150.0,
+         190.0,
+         210.6217782649107,
+         155.00000000000003
+        ],
+        "stroke": "ink",
+        "width": 3,
+        "closed": true
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 120,
+        "r": 46,
+        "stroke": "blue",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 20,
+        "text": "benzene C₆H₆",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 90,
+        "text": "planar hexagon",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 112,
+        "text": "all C–C = 0.139 nm",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 134,
+        "text": "120° bond angles",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 156,
+        "text": "delocalised π ring",
+        "size": 12,
+        "anchor": "start",
+        "color": "blue"
+       }
+      ]
+     },
+     "caption": "Benzene: planar hexagon with a delocalised π ring (shown as a circle).",
+     "alt": "A hexagon with an inner circle, labelled with bond length 0.139 nm and 120 degree bond angles."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Mechanism",
+     "md": "1. The π electrons of the ring attack the electrophile E⁺, forming a bond to one carbon: the ring loses aromaticity and becomes a positively charged intermediate (arenium ion).\n2. A base (HSO₄⁻ or FeBr₄⁻) removes H⁺ from the carbon bearing E, and the π system is restored; the catalyst is regenerated.\n\n**Phenol** (C₆H₅OH) is more reactive than benzene (the O lone pair feeds into the ring): bromine water gives a white precipitate of 2,4,6-tribromophenol with no catalyst. Phenol is a weak acid (pK_a about 10): it reacts with NaOH but not with carbonates."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Drawing benzene with alternating single and double bonds as if they were fixed: use the delocalised circle (or Kekulé forms with a note).\n- Using bromine water with benzene as a test for unsaturation: no reaction occurs.\n- Forgetting the catalyst (FeBr₃, AlCl₃, H₂SO₄) in electrophilic substitution.\n- Saying benzene is unreactive: it reacts, but by substitution under harsher conditions."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Delocalisation energy",
+     "statement": "ΔH_hydrogenation is −120 kJ mol⁻¹ for cyclohexene and −208 kJ mol⁻¹ for benzene. Use these to estimate the stabilisation of benzene.",
+     "steps": [
+      "If benzene had three separate C=C bonds, the expected value = 3 × (−120) = −360 kJ mol⁻¹.",
+      "The observed value is −208 kJ mol⁻¹: less energy released, so benzene is more stable than expected.",
+      "Stabilisation = −208 − (−360) = 152 kJ mol⁻¹ (the delocalisation energy)."
+     ],
+     "answer": "152 kJ mol⁻¹"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Nitration yield",
+     "statement": "7.8 g of benzene (M = 78) is nitrated to nitrobenzene (M = 123) with a yield of 75 %. Find the mass of nitrobenzene and name the electrophile.",
+     "steps": [
+      "n(C₆H₆) = 7.8/78 = 0.100 mol; theoretical = 0.100 × 123 = 12.3 g.",
+      "Actual = 0.75 × 12.3 = 9.2 g.",
+      "The electrophile is the nitronium ion, NO₂⁺, formed from HNO₃ and H₂SO₄."
+     ],
+     "answer": "9.2 g; NO₂⁺"
+    }
+   ],
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-amines",
+   "title": "Amines, amino acids and proteins",
+   "minutes": 40,
+   "programRef": "GCE Advanced Level Chemistry — organic chemistry (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe the basicity and preparation of amines and compare aliphatic and aromatic amines",
+    "Describe amino acids as amphoteric zwitterions, the formation of peptides and protein structure",
+    "Calculate the mass of peptides and the isoelectric point; describe electrophoresis and chromatography of amino acids"
+   ],
+   "prerequisites": [
+    "gceal-chemistry-acids"
+   ],
+   "exercises": [
+    "gceal-chemistry-ch-organic-e19",
+    "gceal-chemistry-ch-organic-e20",
+    "gceal-chemistry-ch-organic-e21",
+    "gceal-chemistry-ch-organic-e22",
+    "gceal-chemistry-ch-organic-e23",
+    "gceal-chemistry-ch-organic-e24"
+   ],
+   "selfCheck": [
+    "gceal-chemistry-amines-q1",
+    "gceal-chemistry-amines-q2",
+    "gceal-chemistry-amines-q3",
+    "gceal-chemistry-amines-q4",
+    "gceal-chemistry-amines-q5"
+   ],
+   "reviewNotes": [
+    "Data used: Ar H 1.0, C 12.0, N 14.0, O 16.0, Na 23.0, Mg 24.0, Al 27.0, S 32.0, Cl 35.5, K 39.0, Ca 40.0, Fe 56.0, Cu 63.5, Zn 65.0, Ag 108.0, Ba 137.0; R = 8.31 J mol⁻¹ K⁻¹; F = 96 500 C mol⁻¹; molar volume 24.0 dm³ at room temperature and pressure; K_w = 1.0 × 10⁻¹⁴ at 25 °C.",
+    "pK values for glycine (2.34 and 9.60) are textbook values. Basic strengths are described qualitatively. Ninhydrin test and R_f are mentioned only.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Amines",
+     "md": "Amines contain the –NH₂ (primary), –NHR (secondary) or –NR₂ (tertiary) group; they are derived from ammonia. The lone pair on N makes them **bases** and **nucleophiles**: RNH₂ + H⁺ → RNH₃⁺. Alkylamines are **stronger bases** than ammonia (alkyl groups push electrons towards N), while **phenylamine** (aniline) is a much weaker base because the lone pair is delocalised into the ring.\n\nPreparation: halogenoalkane + excess NH₃ (ethanol, heat) → primary amine; reduction of a nitrile (LiAlH₄); phenylamine from nitrobenzene with Sn/conc. HCl, then NaOH."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Amino acids",
+     "md": "An **α-amino acid** is RCH(NH₂)COOH. In solution it exists mainly as a **zwitterion** H₃N⁺CH(R)COO⁻, with no overall charge. It is **amphoteric**: with acid the –COO⁻ is protonated (cation), with alkali the –NH₃⁺ loses H⁺ (anion). At the **isoelectric point (pI)** the net charge is zero; for glycine pI = (pK₁ + pK₂)/2 = (2.34 + 9.60)/2 = 5.97.\n\nIn electrophoresis, at pH below the pI the amino acid moves to the cathode, above the pI to the anode."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 225,
+      "items": [
+       {
+        "t": "text",
+        "x": 200,
+        "y": 25,
+        "text": "amino acid (zwitterion form)",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 55,
+        "text": "H₃N⁺ – CH(R) – COO⁻",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 100,
+        "text": "two amino acids join with loss of water",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 135,
+        "text": "H₂N–CH(R₁)–CO–NH–CH(R₂)–COOH",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 188,
+        "y": 118,
+        "w": 34,
+        "h": 24,
+        "stroke": "red",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 168,
+        "text": "peptide bond (amide link)",
+        "size": 13,
+        "anchor": "middle",
+        "color": "red"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 205,
+        "text": "proteins: chains of many amino acids",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "An amino acid as a zwitterion, and the peptide bond in a dipeptide.",
+     "alt": "Text drawings of the zwitterion form of an amino acid and of a dipeptide with the peptide bond boxed."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Peptides and proteins",
+     "md": "Two amino acids join by a **condensation** reaction forming a **peptide (amide) bond** –CO–NH– and water. A chain of many is a polypeptide or **protein**. **Primary** structure: the amino-acid sequence; **secondary**: α-helix or β-sheet held by hydrogen bonds; **tertiary**: folding of the chain by R-group interactions (hydrogen bonds, ionic bonds, disulfide bridges S–S, hydrophobic interactions); **quaternary**: several chains.\n\nHydrolysis by hot 6 mol dm⁻³ HCl gives the amino acids, which can be separated by **chromatography** (R_f values, visualised with ninhydrin) or electrophoresis."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Forgetting to subtract the water when finding the mass of a peptide (M = ΣM(amino acids) − (n − 1) × 18).\n- Writing an amino acid as uncharged in water: it is mainly the zwitterion.\n- Saying aromatic amines are stronger bases than ammonia.\n- Confusing primary and secondary structure: the first is sequence, the second is local shape."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — A dipeptide",
+     "statement": "Glycine (NH₂CH₂COOH, M = 75) and alanine (NH₂CH(CH₃)COOH, M = 89) form a dipeptide. Find its molar mass and the number of different dipeptides possible from these two amino acids.",
+     "steps": [
+      "Condensation loses one molecule of water (M = 18): M = 75 + 89 − 18 = 146.",
+      "Gly–Ala (glycine's –COOH joined to alanine's –NH₂) and Ala–Gly are different compounds.",
+      "So two different dipeptides are possible (with the same molar mass 146)."
+     ],
+     "answer": "M = 146; two dipeptides: Gly–Ala and Ala–Gly"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Electrophoresis",
+     "statement": "For glycine pK₁ = 2.34 (–COOH) and pK₂ = 9.60 (–NH₃⁺). Find the isoelectric point and the direction of movement at pH 2 and pH 11.",
+     "steps": [
+      "pI = (2.34 + 9.60)/2 = 5.97.",
+      "At pH 2 (below the pI) the amino acid is mostly the cation H₃N⁺CH₂COOH, which moves to the cathode (−).",
+      "At pH 11 (above the pI) it is the anion H₂NCH₂COO⁻, which moves to the anode (+)."
+     ],
+     "answer": "pI = 5.97; cathode at pH 2, anode at pH 11"
+    }
+   ],
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-polymers",
+   "title": "Polymers: addition and condensation",
+   "minutes": 35,
+   "programRef": "GCE Advanced Level Chemistry — organic chemistry (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Distinguish addition and condensation polymers and draw repeat units",
+    "Describe polyesters and polyamides (nylon) and their formation from monomers",
+    "Discuss properties, biodegradability and disposal of polymers; calculate degrees of polymerisation"
+   ],
+   "prerequisites": [
+    "gceal-chemistry-amines"
+   ],
+   "exercises": [
+    "gceal-chemistry-ch-organic-e25",
+    "gceal-chemistry-ch-organic-e26",
+    "gceal-chemistry-ch-organic-e27",
+    "gceal-chemistry-ch-organic-e28",
+    "gceal-chemistry-ch-organic-e29",
+    "gceal-chemistry-ch-organic-e30"
+   ],
+   "selfCheck": [
+    "gceal-chemistry-polymers-q1",
+    "gceal-chemistry-polymers-q2",
+    "gceal-chemistry-polymers-q3",
+    "gceal-chemistry-polymers-q4",
+    "gceal-chemistry-polymers-q5"
+   ],
+   "reviewNotes": [
+    "Data used: Ar H 1.0, C 12.0, N 14.0, O 16.0, Na 23.0, Mg 24.0, Al 27.0, S 32.0, Cl 35.5, K 39.0, Ca 40.0, Fe 56.0, Cu 63.5, Zn 65.0, Ag 108.0, Ba 137.0; R = 8.31 J mol⁻¹ K⁻¹; F = 96 500 C mol⁻¹; molar volume 24.0 dm³ at room temperature and pressure; K_w = 1.0 × 10⁻¹⁴ at 25 °C.",
+    "Local policies on plastic bags and waste are not stated (to be added by a teacher after verification).",
+    "Natural rubber and thermosetting plastics are not covered; check the syllabus.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Addition polymers",
+     "md": "**Addition polymerisation**: unsaturated monomers (alkenes) join with the opening of C=C and **no other product**. Examples: ethene → poly(ethene); propene → poly(propene); chloroethene → PVC; tetrafluoroethene → PTFE. The polymer has a saturated carbon chain with the repeat unit –[CH₂–CH₂]ₙ–; it is made of strong C–C bonds and non-polar, so is **not biodegradable**.\n\nProperties depend on chain length, branching and intermolecular forces (low-density and high-density poly(ethene))."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Condensation polymers",
+     "md": "**Condensation polymerisation**: monomers with two functional groups join by forming a link and losing a small molecule (H₂O or HCl).\n\n- **Polyesters** (e.g. Terylene/PET): diol + dicarboxylic acid (or its acyl chloride) → ester links.\n- **Polyamides** (nylon-6,6): hexane-1,6-diamine + hexanedioic acid (or hexanedioyl chloride) → amide links –CO–NH–. Proteins are natural polyamides (polypeptides); starch and cellulose are polysaccharides made by condensation of sugars.\n\nCondensation polymers contain polar links and can be **hydrolysed** (partly biodegradable)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 215,
+      "items": [
+       {
+        "t": "text",
+        "x": 200,
+        "y": 25,
+        "text": "condensation polymerisation (nylon-6,6)",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 60,
+        "text": "n HOOC–(CH₂)₄–COOH  +  n H₂N–(CH₂)₆–NH₂",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 70,
+        "x2": 200,
+        "y2": 100,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 90,
+        "text": "heat",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 124,
+        "text": "–[CO–(CH₂)₄–CO–NH–(CH₂)₆–NH]ₙ–  +  2n H₂O",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 160,
+        "text": "repeat unit: M = 226 g/mol",
+        "size": 13,
+        "anchor": "middle",
+        "color": "blue"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 195,
+        "text": "addition polymers lose nothing: poly(ethene) = –[CH₂–CH₂]ₙ–",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Condensation polymerisation of nylon-6,6 from a diacid and a diamine.",
+     "alt": "A scheme showing the diacid and diamine reacting with heat to give a polyamide and water, with the repeat unit mass 226."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Repeat units and degree of polymerisation",
+     "md": "To draw the repeat unit of an **addition** polymer, open the double bond and show the continuing bonds: CH₂=CHCl gives –[CH₂–CHCl]ₙ–. For a **condensation** polymer, remove the ends and join the two monomers' residues: M(repeat unit) = M(diacid) + M(diamine) − 2 × 18.\n\n**Degree of polymerisation** n = M(polymer)/M(repeat unit)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Drawing C=C in the repeat unit of an addition polymer.\n- Forgetting the small molecule (H₂O or HCl) in condensation polymerisation.\n- Saying all plastics are biodegradable: addition polymers are not, and plastic waste persists in the environment.\n- Using the monomer mass for the repeat unit of a condensation polymer (two monomers form one unit)."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Nylon-6,6",
+     "statement": "Find the molar mass of the repeat unit of nylon-6,6 from hexanedioic acid (M = 146) and hexane-1,6-diamine (M = 116), and the degree of polymerisation for a polymer of M = 22 600.",
+     "steps": [
+      "Each repeat unit uses one diacid and one diamine and loses two water molecules: 146 + 116 − 2 × 18 = 226.",
+      "Check: C₁₂H₂₂N₂O₂ = 12 × 12 + 22 × 1 + 2 × 14 + 2 × 16 = 226.",
+      "n = 22 600/226 = 100."
+     ],
+     "answer": "M(repeat unit) = 226; n = 100"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Poly(ethene)",
+     "statement": "A sample of poly(ethene) has M = 56 000. Find n and give the repeat unit. Explain why it is not biodegradable.",
+     "steps": [
+      "Repeat unit –[CH₂–CH₂]ₙ–, M = 28; n = 56 000/28 = 2000.",
+      "The chain contains only non-polar C–C and C–H bonds, which microorganisms and water cannot attack.",
+      "So it persists for a very long time as litter; recycling or energy recovery is preferred."
+     ],
+     "answer": "n = 2000; non-biodegradable due to inert C–C chain"
+    }
+   ],
+   "chapter": "gceal-chemistry-ch-organic"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceal-chemistry-ch-organic-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-chemistry-carbonyls",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Which test gives a silver mirror?",
+   "choices": [
+    "propanone with Tollens' reagent",
+    "ethanol with 2,4-DNPH",
+    "ethanal with Tollens' reagent",
+    "propanone with Fehling's solution"
+   ],
+   "answer": 2,
+   "explanation": "Only aldehydes reduce Tollens' reagent.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-ch-organic-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-chemistry-carbonyls",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "What mass of ethanol is obtained by reducing 4.4 g of ethanal (M = 44) completely (g, 2 s.f.)?",
+   "answer": 4.6000000000000005,
+   "tolerance": 0.05,
+   "unit": "g",
+   "explanation": "n(CH₃CHO) = 0.100 mol → 0.100 mol ethanol × 46 = 4.6 g.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-ch-organic-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-chemistry-carbonyls",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "True or false: propanone can be oxidised easily by acidified potassium dichromate(VI).",
+   "answer": false,
+   "explanation": "A ketone has no H on the carbonyl carbon, so it resists mild oxidation.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-ch-organic-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-chemistry-carbonyls",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "The reaction of an aldehyde with HCN is",
+   "choices": [
+    "elimination",
+    "free-radical substitution",
+    "electrophilic addition",
+    "nucleophilic addition"
+   ],
+   "answer": 3,
+   "explanation": "CN⁻ attacks the δ⁺ carbon of C=O.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-ch-organic-e05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-chemistry-carbonyls",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Which compound gives a yellow precipitate (CHI₃) with alkaline iodine?",
+   "choices": [
+    "methanol",
+    "propanal",
+    "ethane",
+    "propanone"
+   ],
+   "answer": 3,
+   "explanation": "It contains the CH₃CO– group.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-ch-organic-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-chemistry-carbonyls",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Compounds X (CH₃CH₂CHO) and Y (CH₃COCH₃) are isomers of formula C₃H₆O.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which reagent distinguishes X from Y?",
+     "choices": [
+      "NaBH₄ followed by water",
+      "2,4-DNPH",
+      "bromine water",
+      "Tollens' reagent"
+     ],
+     "answer": 3,
+     "explanation": "X gives a silver mirror; Y does not.",
+     "id": "gceal-chemistry-ch-organic-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Reduction of X with NaBH₄ gives",
+     "choices": [
+      "propanoic acid",
+      "propan-1-ol",
+      "propane",
+      "propan-2-ol"
+     ],
+     "answer": 1,
+     "explanation": "An aldehyde is reduced to a primary alcohol.",
+     "id": "gceal-chemistry-ch-organic-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Reduction of Y with NaBH₄ gives",
+     "choices": [
+      "propan-2-ol",
+      "propanal",
+      "propene",
+      "propan-1-ol"
+     ],
+     "answer": 0,
+     "explanation": "A ketone is reduced to a secondary alcohol.",
+     "id": "gceal-chemistry-ch-organic-e06-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Draw (describe) the product of the reaction of X with HCN and explain how the carbon chain changes.",
+     "model": "CH₃CH₂CH(OH)CN: 2-hydroxybutanenitrile. The carbon chain is lengthened by one carbon (the CN carbon).",
+     "rubric": "1 mark: correct hydroxynitrile; 1 mark: chain lengthened by one carbon.",
+     "explanation": "CH₃CH₂CH(OH)CN: 2-hydroxybutanenitrile. The carbon chain is lengthened by one carbon (the CN carbon).",
+     "id": "gceal-chemistry-ch-organic-e06-d"
+    }
+   ],
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 215,
+    "items": [
+     {
+      "t": "rect",
+      "x": 130,
+      "y": 15,
+      "w": 140,
+      "h": 36,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightyellow"
+     },
+     {
+      "t": "text",
+      "x": 200,
+      "y": 38,
+      "text": "unknown C=O compound",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 200,
+      "y1": 52,
+      "x2": 200,
+      "y2": 80,
+      "color": "ink",
+      "width": 2,
+      "arrow": "end"
+     },
+     {
+      "t": "rect",
+      "x": 110,
+      "y": 82,
+      "w": 180,
+      "h": 36,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightorange"
+     },
+     {
+      "t": "text",
+      "x": 200,
+      "y": 105,
+      "text": "2,4-DNPH: orange precipitate",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 160,
+      "y1": 120,
+      "x2": 90,
+      "y2": 150,
+      "color": "ink",
+      "width": 2,
+      "arrow": "end"
+     },
+     {
+      "t": "line",
+      "x1": 240,
+      "y1": 120,
+      "x2": 310,
+      "y2": 150,
+      "color": "ink",
+      "width": 2,
+      "arrow": "end"
+     },
+     {
+      "t": "rect",
+      "x": 10,
+      "y": 152,
+      "w": 160,
+      "h": 50,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightgreen"
+     },
+     {
+      "t": "text",
+      "x": 90,
+      "y": 172,
+      "text": "Tollens': silver mirror",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 90,
+      "y": 190,
+      "text": "→ aldehyde",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "rect",
+      "x": 230,
+      "y": 152,
+      "w": 160,
+      "h": 50,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightblue"
+     },
+     {
+      "t": "text",
+      "x": 310,
+      "y": 172,
+      "text": "no silver mirror",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 310,
+      "y": 190,
+      "text": "→ ketone",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     }
+    ]
+   },
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-carbonyls-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-carbonyls",
+   "prompt": "The functional group of a ketone is",
+   "choices": [
+    "–COOH",
+    "–CHO at the chain end",
+    "C=O inside the carbon chain",
+    "–OH"
+   ],
+   "answer": 2,
+   "explanation": "A ketone has a carbonyl bonded to two carbons.",
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-carbonyls-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-carbonyls",
+   "prompt": "Fehling's solution with an aldehyde gives",
+   "choices": [
+    "a yellow precipitate",
+    "no change",
+    "a silver mirror",
+    "a brick-red precipitate"
+   ],
+   "answer": 3,
+   "explanation": "Cu²⁺ is reduced to Cu₂O.",
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-carbonyls-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-carbonyls",
+   "prompt": "The reagent used to reduce a ketone to a secondary alcohol is",
+   "choices": [
+    "K₂Cr₂O₇/H⁺",
+    "HCN",
+    "concentrated H₂SO₄",
+    "NaBH₄"
+   ],
+   "answer": 3,
+   "explanation": "A source of the hydride nucleophile.",
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-carbonyls-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-carbonyls",
+   "prompt": "The empirical formula of a compound with 40.0 % C, 6.7 % H and 53.3 % O is",
+   "choices": [
+    "CH₃O",
+    "CHO",
+    "CH₂O",
+    "C₂H₄O"
+   ],
+   "answer": 2,
+   "explanation": "Moles 3.33 : 6.7 : 3.33 = 1 : 2 : 1.",
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-carbonyls-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-carbonyls",
+   "prompt": "The product of the oxidation of propan-2-ol with acidified dichromate is",
+   "choices": [
+    "propene",
+    "propanoic acid",
+    "propanal",
+    "propanone"
+   ],
+   "answer": 3,
+   "explanation": "A secondary alcohol gives a ketone.",
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-ch-organic-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-chemistry-acids",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Which reagent gives CO₂ with a carboxylic acid but not with a phenol?",
+   "choices": [
+    "bromine water",
+    "sodium carbonate solution",
+    "sodium hydroxide solution",
+    "sodium metal"
+   ],
+   "answer": 1,
+   "explanation": "Phenol (pK_a about 10) is too weak an acid to release CO₂ from carbonate.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-ch-organic-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-chemistry-acids",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "What volume of CO₂ (dm³, 3 s.f.) is released at rtp when 6.0 g ethanoic acid reacts with excess sodium carbonate (2CH₃COOH + Na₂CO₃ → 2CH₃COONa + H₂O + CO₂)?",
+   "answer": 1.2,
+   "tolerance": 0.02,
+   "unit": "dm³",
+   "explanation": "n(acid) = 0.100 mol → n(CO₂) = 0.050 mol → 1.20 dm³ (24.0 dm³/mol).",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-ch-organic-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-chemistry-acids",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "True or false: hydrolysis of an ester with hot aqueous NaOH goes essentially to completion.",
+   "answer": true,
+   "explanation": "The carboxylic acid formed is converted into its sodium salt, which removes it from the equilibrium.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-ch-organic-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-chemistry-acids",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "What mass of CH₃COOC₂H₅ (M = 88) can be obtained from 4.6 g of ethanol (M = 46) with excess ethanoic acid at a 60 % yield (g, 3 s.f.)?",
+   "answer": 5.28,
+   "tolerance": 0.03,
+   "unit": "g",
+   "explanation": "n(ethanol) = 0.100 mol; theoretical = 8.80 g; × 0.60 = 5.28 g.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-ch-organic-e11",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-chemistry-acids",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Which is the most reactive towards water at room temperature?",
+   "choices": [
+    "ethyl ethanoate",
+    "ethanamide",
+    "ethanoyl chloride",
+    "ethanoic acid"
+   ],
+   "answer": 2,
+   "explanation": "Acyl chlorides hydrolyse immediately, releasing HCl fumes.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-ch-organic-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-chemistry-acids",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Ethyl ethanoate is hydrolysed by hot aqueous sodium hydroxide: CH₃COOC₂H₅ + NaOH → CH₃COONa + C₂H₅OH. 4.40 g of the ester (M = 88) is used with excess NaOH.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Moles of ester.",
+     "answer": 0.05,
+     "tolerance": 0.0005,
+     "explanation": "4.40/88 = 0.0500 mol.",
+     "unit": "mol",
+     "id": "gceal-chemistry-ch-organic-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Mass of sodium ethanoate formed (M = 82; g, 3 s.f.).",
+     "answer": 4.1,
+     "tolerance": 0.03,
+     "explanation": "0.0500 × 82 = 4.10 g.",
+     "unit": "g",
+     "id": "gceal-chemistry-ch-organic-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Mass of ethanol formed (g, 3 s.f.).",
+     "answer": 2.3,
+     "tolerance": 0.02,
+     "explanation": "0.0500 × 46 = 2.30 g.",
+     "unit": "g",
+     "id": "gceal-chemistry-ch-organic-e12-c"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "This reaction is described as",
+     "choices": [
+      "reduction",
+      "esterification",
+      "condensation polymerisation",
+      "alkaline hydrolysis (saponification)"
+     ],
+     "answer": 3,
+     "explanation": "An ester is split by water in the presence of base.",
+     "id": "gceal-chemistry-ch-organic-e12-d"
+    }
+   ],
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 230,
+    "items": [
+     {
+      "t": "rect",
+      "x": 150,
+      "y": 100,
+      "w": 100,
+      "h": 40,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightyellow"
+     },
+     {
+      "t": "text",
+      "x": 200,
+      "y": 125,
+      "text": "R–COOH",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "rect",
+      "x": 150,
+      "y": 20,
+      "w": 100,
+      "h": 36,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightorange"
+     },
+     {
+      "t": "text",
+      "x": 200,
+      "y": 43,
+      "text": "R–COCl",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "rect",
+      "x": 10,
+      "y": 100,
+      "w": 100,
+      "h": 40,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightgreen"
+     },
+     {
+      "t": "text",
+      "x": 60,
+      "y": 125,
+      "text": "ester R–COOR′",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "rect",
+      "x": 290,
+      "y": 100,
+      "w": 100,
+      "h": 40,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightblue"
+     },
+     {
+      "t": "text",
+      "x": 340,
+      "y": 125,
+      "text": "amide R–CONH₂",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "rect",
+      "x": 130,
+      "y": 175,
+      "w": 140,
+      "h": 36,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightgrey"
+     },
+     {
+      "t": "text",
+      "x": 200,
+      "y": 198,
+      "text": "carboxylate salt",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 200,
+      "y1": 98,
+      "x2": 200,
+      "y2": 58,
+      "color": "ink",
+      "width": 2,
+      "arrow": "end"
+     },
+     {
+      "t": "text",
+      "x": 250,
+      "y": 82,
+      "text": "SOCl₂ / PCl₅",
+      "size": 11,
+      "anchor": "start",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 148,
+      "y1": 120,
+      "x2": 112,
+      "y2": 120,
+      "color": "ink",
+      "width": 2,
+      "arrow": "end"
+     },
+     {
+      "t": "text",
+      "x": 130,
+      "y": 108,
+      "text": "R′OH, H⁺",
+      "size": 11,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 252,
+      "y1": 120,
+      "x2": 288,
+      "y2": 120,
+      "color": "ink",
+      "width": 2,
+      "arrow": "end"
+     },
+     {
+      "t": "text",
+      "x": 270,
+      "y": 108,
+      "text": "NH₃ (via RCOCl)",
+      "size": 11,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 200,
+      "y1": 142,
+      "x2": 200,
+      "y2": 173,
+      "color": "ink",
+      "width": 2,
+      "arrow": "end"
+     },
+     {
+      "t": "text",
+      "x": 210,
+      "y": 160,
+      "text": "NaOH / Na₂CO₃",
+      "size": 11,
+      "anchor": "start",
+      "color": "ink"
+     }
+    ]
+   },
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-acids-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-acids",
+   "prompt": "The functional group of a carboxylic acid is",
+   "choices": [
+    "–COCl",
+    "–COOH",
+    "–CHO",
+    "–CONH₂"
+   ],
+   "answer": 1,
+   "explanation": "Carboxyl group.",
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-acids-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-acids",
+   "prompt": "Esterification is catalysed by",
+   "choices": [
+    "concentrated sulfuric acid",
+    "aqueous NaOH",
+    "iron",
+    "UV light"
+   ],
+   "answer": 0,
+   "explanation": "Acid catalyst and heat.",
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-acids-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-acids",
+   "prompt": "Soap is made by heating a fat or oil with",
+   "choices": [
+    "bromine",
+    "hydrochloric acid",
+    "sodium hydroxide solution",
+    "water only"
+   ],
+   "answer": 2,
+   "explanation": "Saponification.",
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-acids-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-acids",
+   "prompt": "Which is formed when an acyl chloride reacts with ammonia?",
+   "choices": [
+    "an acid",
+    "an amide",
+    "an amine",
+    "an ester"
+   ],
+   "answer": 1,
+   "explanation": "RCOCl + 2NH₃ → RCONH₂ + NH₄Cl.",
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-acids-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-acids",
+   "prompt": "The carboxylic acids have higher boiling points than alcohols of similar M because of",
+   "choices": [
+    "covalent bonding between molecules",
+    "stronger hydrogen bonding (dimers)",
+    "metallic bonding",
+    "ionic bonding"
+   ],
+   "answer": 1,
+   "explanation": "Two hydrogen bonds link two acid molecules.",
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-ch-organic-e13",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-chemistry-arenes",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "The electrophile in the nitration of benzene is",
+   "choices": [
+    "NH₃",
+    "H₃O⁺",
+    "NO₃⁻",
+    "NO₂⁺"
+   ],
+   "answer": 3,
+   "explanation": "Formed from conc. HNO₃ and conc. H₂SO₄.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-ch-organic-e14",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-chemistry-arenes",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "The C–C bonds in benzene are all the same length. State this length in nm.",
+   "answer": 0.139,
+   "tolerance": 0.002,
+   "unit": "nm",
+   "explanation": "0.139 nm, between 0.154 (C–C) and 0.134 (C=C).",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-ch-organic-e15",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-chemistry-arenes",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "True or false: benzene decolourises bromine water readily.",
+   "answer": false,
+   "explanation": "The delocalised ring resists addition; benzene reacts only with Br₂ and a catalyst, by substitution.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-ch-organic-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-chemistry-arenes",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Calculate the delocalisation energy (kJ mol⁻¹) if ΔH_hyd(cyclohexene) = −120 and ΔH_hyd(benzene) = −208 kJ mol⁻¹.",
+   "answer": 152,
+   "tolerance": 0.5,
+   "unit": "kJ/mol",
+   "explanation": "(−208) − 3(−120) = +152 kJ mol⁻¹ (benzene is more stable).",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-ch-organic-e17",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-chemistry-arenes",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Phenol reacts with bromine water without a catalyst because",
+   "choices": [
+    "the lone pair on oxygen increases the electron density of the ring",
+    "phenol is an alkene",
+    "phenol is a salt",
+    "bromine is more reactive in water"
+   ],
+   "answer": 0,
+   "explanation": "The activated ring reacts as an electron-rich nucleophile.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-ch-organic-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-chemistry-arenes",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Benzene is converted to bromobenzene with bromine in the presence of iron(III) bromide.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The reaction type is",
+     "choices": [
+      "electrophilic substitution",
+      "electrophilic addition",
+      "nucleophilic substitution",
+      "radical addition"
+     ],
+     "answer": 0,
+     "explanation": "H is replaced by Br while the ring is retained.",
+     "id": "gceal-chemistry-ch-organic-e18-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The role of FeBr₃ is to",
+     "choices": [
+      "form a precipitate",
+      "polarise Br₂ to give an electrophile (Br⁺)",
+      "act as a solvent",
+      "reduce benzene"
+     ],
+     "answer": 1,
+     "explanation": "FeBr₃ accepts Br⁻ from Br₂ to generate Br⁺ character.",
+     "id": "gceal-chemistry-ch-organic-e18-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Mass of bromobenzene (M = 157; g, 3 s.f.) from 3.90 g of benzene (M = 78) at a 60 % yield.",
+     "answer": 4.71,
+     "tolerance": 0.03,
+     "explanation": "n = 0.0500 mol; theoretical = 7.85 g; 60 % = 4.71 g.",
+     "unit": "g",
+     "id": "gceal-chemistry-ch-organic-e18-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explain why benzene undergoes substitution rather than addition.",
+     "model": "Addition would destroy the delocalised π system and lose the 152 kJ mol⁻¹ of stabilisation energy; substitution keeps the stable ring.",
+     "rubric": "1 mark: delocalised ring is stable; 1 mark: addition would lose stabilisation energy.",
+     "explanation": "Addition would destroy the delocalised π system and lose the 152 kJ mol⁻¹ of stabilisation energy; substitution keeps the stable ring.",
+     "id": "gceal-chemistry-ch-organic-e18-d"
+    }
+   ],
+   "figure": {
+    "kind": "shapes",
+    "w": 440,
+    "h": 230,
+    "items": [
+     {
+      "t": "poly",
+      "pts": [
+       210.62177826491072,
+       85.0,
+       150.0,
+       50.0,
+       89.37822173508928,
+       85.0,
+       89.3782217350893,
+       155.0,
+       150.0,
+       190.0,
+       210.6217782649107,
+       155.00000000000003
+      ],
+      "stroke": "ink",
+      "width": 3,
+      "closed": true
+     },
+     {
+      "t": "circle",
+      "cx": 150,
+      "cy": 120,
+      "r": 46,
+      "stroke": "blue",
+      "width": 2
+     },
+     {
+      "t": "text",
+      "x": 150,
+      "y": 20,
+      "text": "benzene C₆H₆",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 300,
+      "y": 90,
+      "text": "planar hexagon",
+      "size": 12,
+      "anchor": "start",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 300,
+      "y": 112,
+      "text": "all C–C = 0.139 nm",
+      "size": 12,
+      "anchor": "start",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 300,
+      "y": 134,
+      "text": "120° bond angles",
+      "size": 12,
+      "anchor": "start",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 300,
+      "y": 156,
+      "text": "delocalised π ring",
+      "size": 12,
+      "anchor": "start",
+      "color": "blue"
+     }
+    ]
+   },
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-arenes-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-arenes",
+   "prompt": "The shape of the benzene molecule is",
+   "choices": [
+    "pyramidal",
+    "planar hexagonal",
+    "tetrahedral",
+    "linear"
+   ],
+   "answer": 1,
+   "explanation": "All six C and H atoms lie in one plane.",
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-arenes-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-arenes",
+   "prompt": "Which is the catalyst for the Friedel–Crafts alkylation?",
+   "choices": [
+    "FeBr₃",
+    "H₂SO₄",
+    "Ni",
+    "AlCl₃"
+   ],
+   "answer": 3,
+   "explanation": "It generates the carbocation electrophile.",
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-arenes-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-arenes",
+   "prompt": "Phenol is",
+   "choices": [
+    "a base",
+    "a strong acid",
+    "neutral and unreactive",
+    "a weak acid"
+   ],
+   "answer": 3,
+   "explanation": "pK_a about 10.",
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-arenes-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-arenes",
+   "prompt": "The arenium ion is",
+   "choices": [
+    "the positively charged intermediate in electrophilic substitution",
+    "the electrophile",
+    "the catalyst",
+    "the product"
+   ],
+   "answer": 0,
+   "explanation": "The ring has lost its aromaticity temporarily.",
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-arenes-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-arenes",
+   "prompt": "Compared with ethene, benzene reacts with bromine",
+   "choices": [
+    "less readily, by substitution",
+    "more readily, by addition",
+    "in the same way",
+    "not at all in any conditions"
+   ],
+   "answer": 0,
+   "explanation": "Delocalisation stabilises the ring.",
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-ch-organic-e19",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-chemistry-amines",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Find the molar mass of the tripeptide formed from three glycine molecules (M = 75 each).",
+   "answer": 189,
+   "tolerance": 0.5,
+   "unit": "g/mol",
+   "explanation": "M = 3 × 75 − 2 × 18 = 189.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-ch-organic-e20",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-chemistry-amines",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "A zwitterion has",
+   "choices": [
+    "a negative charge only",
+    "no polar groups",
+    "only a positive charge",
+    "a positive and a negative charge in the same molecule"
+   ],
+   "answer": 3,
+   "explanation": "H₃N⁺–CH(R)–COO⁻.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-ch-organic-e21",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-chemistry-amines",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "True or false: phenylamine is a stronger base than ethylamine.",
+   "answer": false,
+   "explanation": "The N lone pair is delocalised into the benzene ring, so it is less available to accept H⁺.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-ch-organic-e22",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-chemistry-amines",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "How many different tripeptides can be made if each of the three amino acids Gly, Ala and Ser is used once (order matters)?",
+   "answer": 6,
+   "tolerance": 0,
+   "explanation": "3! = 6 sequences.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-ch-organic-e23",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-chemistry-amines",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "At a pH below its isoelectric point an amino acid in an electric field moves towards the",
+   "choices": [
+    "cathode (negative electrode)",
+    "anode (positive electrode)",
+    "both",
+    "neither"
+   ],
+   "answer": 0,
+   "explanation": "It carries a net positive charge.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-ch-organic-e24",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-chemistry-amines",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Nitrobenzene (M = 123) is reduced to phenylamine (M = 93) using tin and concentrated hydrochloric acid, then sodium hydroxide. 12.3 g of nitrobenzene is used with an 80 % yield.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Moles of nitrobenzene.",
+     "answer": 0.1,
+     "tolerance": 0.001,
+     "explanation": "12.3/123 = 0.100 mol.",
+     "unit": "mol",
+     "id": "gceal-chemistry-ch-organic-e24-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Mass of phenylamine (g, 3 s.f.).",
+     "answer": 7.44,
+     "tolerance": 0.03,
+     "explanation": "Theoretical = 0.100 × 93 = 9.30 g; × 0.80 = 7.44 g.",
+     "unit": "g",
+     "id": "gceal-chemistry-ch-organic-e24-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Sodium hydroxide is added at the end to",
+     "choices": [
+      "make an amide",
+      "reduce the nitro group",
+      "oxidise the amine",
+      "liberate the free amine from its salt"
+     ],
+     "answer": 3,
+     "explanation": "The product is first formed as C₆H₅NH₃⁺ (salt) in acid.",
+     "id": "gceal-chemistry-ch-organic-e24-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explain why phenylamine is a weaker base than ethylamine.",
+     "model": "In phenylamine the lone pair on nitrogen is delocalised into the benzene ring and is less available to accept a proton; in ethylamine the alkyl group pushes electrons towards N, making the lone pair more available.",
+     "rubric": "1 mark: lone pair delocalised in the ring (phenylamine); 1 mark: electron-donating alkyl group in ethylamine.",
+     "explanation": "In phenylamine the lone pair on nitrogen is delocalised into the benzene ring and is less available to accept a proton; in ethylamine the alkyl group pushes electrons towards N, making the lone pair more available.",
+     "id": "gceal-chemistry-ch-organic-e24-d"
+    }
+   ],
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 225,
+    "items": [
+     {
+      "t": "text",
+      "x": 200,
+      "y": 25,
+      "text": "amino acid (zwitterion form)",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 200,
+      "y": 55,
+      "text": "H₃N⁺ – CH(R) – COO⁻",
+      "size": 15,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 200,
+      "y": 100,
+      "text": "two amino acids join with loss of water",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 200,
+      "y": 135,
+      "text": "H₂N–CH(R₁)–CO–NH–CH(R₂)–COOH",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "rect",
+      "x": 188,
+      "y": 118,
+      "w": 34,
+      "h": 24,
+      "stroke": "red",
+      "width": 2
+     },
+     {
+      "t": "text",
+      "x": 200,
+      "y": 168,
+      "text": "peptide bond (amide link)",
+      "size": 13,
+      "anchor": "middle",
+      "color": "red"
+     },
+     {
+      "t": "text",
+      "x": 200,
+      "y": 205,
+      "text": "proteins: chains of many amino acids",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink"
+     }
+    ]
+   },
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-amines-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-amines",
+   "prompt": "An α-amino acid contains",
+   "choices": [
+    "only an –NH₂ group",
+    "an –NH₂ group and a –COOH group on the same carbon",
+    "a C=O and a C=C",
+    "two –COOH groups"
+   ],
+   "answer": 1,
+   "explanation": "R–CH(NH₂)–COOH.",
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-amines-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-amines",
+   "prompt": "A peptide bond is",
+   "choices": [
+    "–CO–O–",
+    "–CO–NH–",
+    "–NH–NH–",
+    "–CH₂–O–"
+   ],
+   "answer": 1,
+   "explanation": "An amide link.",
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-amines-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-amines",
+   "prompt": "The secondary structure of a protein is held by",
+   "choices": [
+    "peptide bonds only",
+    "disulfide bridges only",
+    "hydrogen bonds along the chain",
+    "ionic bonds only"
+   ],
+   "answer": 2,
+   "explanation": "α-helices and β-sheets.",
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-amines-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-amines",
+   "prompt": "A primary amine is prepared from a halogenoalkane by heating with",
+   "choices": [
+    "aqueous NaOH",
+    "bromine water",
+    "dilute acid",
+    "excess ammonia in ethanol"
+   ],
+   "answer": 3,
+   "explanation": "NH₃ is the nucleophile.",
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-amines-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-amines",
+   "prompt": "The isoelectric point is the pH at which an amino acid",
+   "choices": [
+    "has a +2 charge",
+    "is insoluble in water always",
+    "has no net charge",
+    "is a gas"
+   ],
+   "answer": 2,
+   "explanation": "It is mostly the zwitterion.",
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-ch-organic-e25",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-chemistry-polymers",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "The monomer of PVC is chloroethene, CH₂=CHCl. What is the molar mass (g/mol, 3 s.f.) of the repeat unit?",
+   "answer": 62.5,
+   "tolerance": 0.1,
+   "unit": "g/mol",
+   "explanation": "CH₂–CHCl: 12 + 2 + 12 + 1 + 35.5 = 62.5 g mol⁻¹.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-ch-organic-e26",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-chemistry-polymers",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Which polymer is made by condensation polymerisation?",
+   "choices": [
+    "nylon-6,6",
+    "poly(ethene)",
+    "poly(propene)",
+    "PVC"
+   ],
+   "answer": 0,
+   "explanation": "Diamine + diacid with loss of water.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-ch-organic-e27",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-chemistry-polymers",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "True or false: addition polymerisation produces water as a by-product.",
+   "answer": false,
+   "explanation": "The monomers simply add together; nothing is lost.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-ch-organic-e28",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-chemistry-polymers",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "A sample of PVC has M = 125 000. Find the degree of polymerisation (repeat unit 62.5).",
+   "answer": 2000.0,
+   "tolerance": 0.5,
+   "explanation": "n = 125 000/62.5 = 2000.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-ch-organic-e29",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-chemistry-polymers",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Why are polyesters and polyamides partly biodegradable whereas poly(ethene) is not?",
+   "choices": [
+    "they contain C=C bonds",
+    "they have lower M",
+    "they are ionic",
+    "they have polar ester/amide links that can be hydrolysed"
+   ],
+   "answer": 3,
+   "explanation": "The polar links are attacked by water, acids or enzymes.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-ch-organic-e30",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-chemistry-polymers",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Terylene (PET) is formed from benzene-1,4-dicarboxylic acid (M = 166) and ethane-1,2-diol (M = 62).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The type of polymerisation is",
+     "choices": [
+      "addition",
+      "condensation",
+      "electrophilic substitution",
+      "radical substitution"
+     ],
+     "answer": 1,
+     "explanation": "Ester links form and water is lost.",
+     "id": "gceal-chemistry-ch-organic-e30-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Molar mass of the repeat unit (g/mol).",
+     "answer": 192,
+     "tolerance": 0.5,
+     "explanation": "166 + 62 − 2 × 18 = 192 g mol⁻¹.",
+     "unit": "g/mol",
+     "id": "gceal-chemistry-ch-organic-e30-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Degree of polymerisation for M = 19 200.",
+     "answer": 100.0,
+     "tolerance": 0.5,
+     "explanation": "19 200/192 = 100.",
+     "id": "gceal-chemistry-ch-organic-e30-c"
+    },
+    {
+     "kind": "open",
+     "points": 3,
+     "prompt": "Suggest two problems caused by the disposal of plastics and one way to reduce them.",
+     "model": "Plastics persist in the environment (non-biodegradable), blocking drains and harming animals; burning can release toxic gases (HCl from PVC). Reduce by recycling, reuse, using biodegradable polymers and reducing single-use plastics.",
+     "rubric": "1 mark each for two problems; 1 mark for a valid way to reduce them.",
+     "explanation": "Plastics persist in the environment (non-biodegradable), blocking drains and harming animals; burning can release toxic gases (HCl from PVC). Reduce by recycling, reuse, using biodegradable polymers and reducing single-use plastics.",
+     "id": "gceal-chemistry-ch-organic-e30-d"
+    }
+   ],
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 215,
+    "items": [
+     {
+      "t": "text",
+      "x": 200,
+      "y": 25,
+      "text": "condensation polymerisation (nylon-6,6)",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 200,
+      "y": 60,
+      "text": "n HOOC–(CH₂)₄–COOH  +  n H₂N–(CH₂)₆–NH₂",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 200,
+      "y1": 70,
+      "x2": 200,
+      "y2": 100,
+      "color": "ink",
+      "width": 3,
+      "arrow": "end"
+     },
+     {
+      "t": "text",
+      "x": 210,
+      "y": 90,
+      "text": "heat",
+      "size": 11,
+      "anchor": "start",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 200,
+      "y": 124,
+      "text": "–[CO–(CH₂)₄–CO–NH–(CH₂)₆–NH]ₙ–  +  2n H₂O",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 200,
+      "y": 160,
+      "text": "repeat unit: M = 226 g/mol",
+      "size": 13,
+      "anchor": "middle",
+      "color": "blue"
+     },
+     {
+      "t": "text",
+      "x": 200,
+      "y": 195,
+      "text": "addition polymers lose nothing: poly(ethene) = –[CH₂–CH₂]ₙ–",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     }
+    ]
+   },
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-polymers-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-polymers",
+   "prompt": "The repeat unit of poly(ethene) is",
+   "choices": [
+    "–CH₃–",
+    "–CH₂–CH₂–O–",
+    "–CH₂–CH₂–",
+    "–CH=CH–"
+   ],
+   "answer": 2,
+   "explanation": "No C=C remains.",
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-polymers-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-polymers",
+   "prompt": "In nylon-6,6 the link between monomers is",
+   "choices": [
+    "an ester link",
+    "an ether link",
+    "an amide link",
+    "a C–C bond"
+   ],
+   "answer": 2,
+   "explanation": "–CO–NH–.",
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-polymers-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-polymers",
+   "prompt": "Proteins are natural",
+   "choices": [
+    "polyalkenes",
+    "polyamides",
+    "polysaccharides",
+    "polyesters"
+   ],
+   "answer": 1,
+   "explanation": "Peptide bonds are amide links.",
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-polymers-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-polymers",
+   "prompt": "A condensation polymer loses",
+   "choices": [
+    "nothing",
+    "a small molecule such as water",
+    "a metal",
+    "a proton only"
+   ],
+   "answer": 1,
+   "explanation": "At each link formed.",
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-polymers-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-polymers",
+   "prompt": "The best way to reduce plastic waste is to",
+   "choices": [
+    "reduce, reuse and recycle",
+    "bury it only",
+    "throw it into rivers",
+    "burn it in the open"
+   ],
+   "answer": 0,
+   "explanation": "Waste hierarchy.",
+   "chapter": "gceal-chemistry-ch-organic"
+  },
+  {
+   "id": "gceal-chemistry-ch-organic-m01",
+   "kind": "mcq",
+   "tier": "examen",
+   "lesson": "gceal-chemistry-carbonyls",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Which reagent distinguishes propanal from propanone?",
+   "choices": [
+    "acidified KMnO₄ only",
+    "2,4-DNPH",
+    "aqueous NaOH",
+    "Tollens' reagent"
+   ],
+   "answer": 3,
+   "explanation": "Only the aldehyde gives a silver mirror; both give an orange precipitate with 2,4-DNPH.",
+   "difficulty": 3,
+   "points": 2,
+   "chapter": "gceal-chemistry-ch-organic"
+  }
+ ]
+}

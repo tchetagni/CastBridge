@@ -1,0 +1,440 @@
+{
+ "chapter": "form3-biology-respiration",
+ "lessons": [
+  {
+   "id": "form3-biology-respiration",
+   "title": "Respiration, breathing and gas exchange",
+   "minutes": 30,
+   "programRef": "Form 3 Biology — Respiration and breathing (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Write the equations for aerobic and anaerobic respiration and distinguish them.",
+    "Describe the gas exchange system and breathing movements.",
+    "Compare inhaled and exhaled air and describe the effects of exercise and smoking."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form3-biology-respiration-e01",
+    "form3-biology-respiration-e02",
+    "form3-biology-respiration-e03",
+    "form3-biology-respiration-e04",
+    "form3-biology-respiration-e05",
+    "form3-biology-respiration-e06"
+   ],
+   "selfCheck": [
+    "form3-biology-respiration-q1",
+    "form3-biology-respiration-q2",
+    "form3-biology-respiration-q3",
+    "form3-biology-respiration-q4",
+    "form3-biology-respiration-q5"
+   ],
+   "reviewNotes": [
+    "Smoking and health content is conservative and to be reviewed by a health worker. Composition of inhaled and exhaled air uses the usual textbook approximations (21/16 % O₂, 0.04/4 % CO₂).",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Respiration",
+     "md": "**Respiration** is the release of energy from food in every living cell. **Aerobic respiration** (with oxygen) takes place in the **mitochondria**: glucose + oxygen → carbon dioxide + water + energy, or C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + energy. **Anaerobic respiration** (without oxygen) releases much less energy: in **muscles** glucose → **lactic acid** (causing cramp and an **oxygen debt**); in **yeast** C₆H₁₂O₆ → 2C₂H₅OH + 2CO₂ (fermentation). Some of the energy appears as **heat**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Breathing and gas exchange",
+     "md": "Air passes through the **nose** (hairs and mucus filter it), **trachea** (rings of cartilage), **bronchi**, **bronchioles** to the **alveoli**. Alveoli have a **large surface area**, **thin walls**, a **rich blood supply** and a moist lining, so oxygen **diffuses into the blood** and carbon dioxide diffuses out. **Breathing in**: ribs move up and out, diaphragm flattens, volume increases, pressure falls and air flows in. **Breathing out**: the reverse."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 200,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 160,
+        "cy": 105,
+        "r": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "circle",
+        "cx": 160,
+        "cy": 105,
+        "r": 48,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 110,
+        "text": "air",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 78,
+        "x2": 130,
+        "y2": 50,
+        "color": "blue",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 190,
+        "y1": 50,
+        "x2": 190,
+        "y2": 78,
+        "color": "red",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 42,
+        "text": "oxygen in",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 195,
+        "y": 42,
+        "text": "carbon dioxide out",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 112,
+        "y1": 150,
+        "x2": 40,
+        "y2": 175,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 44,
+        "y": 179,
+        "text": "alveolus wall (one cell thick)",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 160,
+        "y1": 165,
+        "x2": 260,
+        "y2": 175,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 264,
+        "y": 179,
+        "text": "capillary with blood",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Gas exchange at an alveolus.",
+     "alt": "An air sac surrounded by a capillary with arrows showing oxygen passing into the blood and carbon dioxide passing out."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Inhaled and exhaled air; exercise",
+     "md": "Inhaled air: about 21 % oxygen, 0.04 % carbon dioxide. Exhaled air: about 16 % oxygen, 4 % carbon dioxide, and more water vapour. Exhaled air turns **limewater milky faster** than inhaled air. During **exercise** muscles respire faster, so **breathing rate and depth increase**. Example: 15 breaths of 500 mL each minute give 7.5 L per minute; 30 breaths give 15 L per minute."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Smoking and health",
+     "md": "Tobacco smoke contains **tar** (causes cancer and damages the lungs), **nicotine** (addictive) and **carbon monoxide** (stops the blood carrying oxygen). Smoking increases the risk of lung cancer, bronchitis and heart disease. The best advice is not to start, and anyone who smokes should seek help from a health worker to stop."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- **Breathing** (moving air) is not the same as **respiration** (releasing energy in cells).\n- Plants respire all the time, not only at night.\n- Anaerobic respiration releases less energy, not more."
+    },
+    {
+     "type": "example",
+     "title": "Breathing volume",
+     "statement": "A boy breathes 20 times per minute, taking in 400 mL each breath. Find the volume of air breathed per minute.",
+     "steps": [
+      "Volume per minute = 20 × 400 = 8000 mL.",
+      "= 8.0 litres per minute."
+     ],
+     "answer": "8.0 litres per minute"
+    },
+    {
+     "type": "example",
+     "title": "Why do muscles get cramp?",
+     "statement": "Explain why a sprinter's muscles may ache after a 100 m race.",
+     "steps": [
+      "The muscles respire anaerobically when oxygen cannot be supplied fast enough, making lactic acid.",
+      "Lactic acid causes the ache; the oxygen debt is repaid by breathing hard afterwards."
+     ],
+     "answer": "Lactic acid from anaerobic respiration."
+    },
+    {
+     "type": "exercise",
+     "ref": "form3-biology-respiration-e01"
+    }
+   ],
+   "chapter": "form3-biology-respiration"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form3-biology-respiration-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-biology-respiration",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Aerobic respiration releases energy from glucose using:",
+   "choices": [
+    "nitrogen",
+    "oxygen",
+    "limewater",
+    "carbon dioxide"
+   ],
+   "answer": 1,
+   "explanation": "Aerobic means with oxygen.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-biology-respiration"
+  },
+  {
+   "id": "form3-biology-respiration-e02",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "form3-biology-respiration",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each part with its function.",
+   "pairs": [
+    [
+     "trachea",
+     "carries air to the bronchi"
+    ],
+    [
+     "alveoli",
+     "gas exchange surface"
+    ],
+    [
+     "diaphragm",
+     "muscle that flattens to breathe in"
+    ],
+    [
+     "ribs",
+     "protect the lungs and move to change chest volume"
+    ]
+   ],
+   "explanation": "Standard functions.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form3-biology-respiration"
+  },
+  {
+   "id": "form3-biology-respiration-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "form3-biology-respiration",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Anaerobic respiration in yeast makes lactic acid.",
+   "answer": false,
+   "explanation": "Yeast makes ethanol and carbon dioxide.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-biology-respiration"
+  },
+  {
+   "id": "form3-biology-respiration-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form3-biology-respiration",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A girl breathes 12 times per minute and takes in 500 mL each time. Find the volume breathed per minute in mL.",
+   "answer": 6000,
+   "tolerance": 0,
+   "unit": "mL",
+   "explanation": "12 × 500 = 6000 mL.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form3-biology-respiration"
+  },
+  {
+   "id": "form3-biology-respiration-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form3-biology-respiration",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Describe three features of the alveoli that make gas exchange efficient.",
+   "model": "A large surface area from millions of alveoli; walls only one cell thick for a short diffusion distance; a rich blood supply of capillaries that keeps a steep concentration gradient; moist surface in which gases dissolve.",
+   "rubric": [
+    "1 mark each, maximum 3"
+   ],
+   "explanation": "A large surface area from millions of alveoli; walls only one cell thick for a short diffusion distance; a rich blood supply of capillaries that keeps a steep concentration gradient; moist surface in which gases dissolve.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-biology-respiration"
+  },
+  {
+   "id": "form3-biology-respiration-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form3-biology-respiration",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A student breathes through a tube into limewater for 30 s at rest and again after exercise. The limewater turns milky faster after exercise.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "This shows that exhaled air after exercise contains more:",
+     "choices": [
+      "nitrogen",
+      "carbon dioxide",
+      "oxygen",
+      "hydrogen"
+     ],
+     "answer": 1,
+     "explanation": "Muscles respired faster.",
+     "id": "form3-biology-respiration-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The gas in the limewater test is:",
+     "choices": [
+      "water vapour",
+      "carbon dioxide",
+      "nitrogen",
+      "oxygen"
+     ],
+     "answer": 1,
+     "explanation": "Limewater turns milky with CO₂.",
+     "id": "form3-biology-respiration-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Name two changes in the body during exercise that deliver more oxygen to the muscles.",
+     "model": "Breathing rate and depth increase and the heart beats faster.",
+     "rubric": [
+      "1 mark each"
+     ],
+     "explanation": "Breathing rate and depth increase and the heart beats faster.",
+     "id": "form3-biology-respiration-e06-c"
+    }
+   ],
+   "chapter": "form3-biology-respiration"
+  },
+  {
+   "id": "form3-biology-respiration-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-respiration",
+   "prompt": "Aerobic respiration occurs mostly in the:",
+   "choices": [
+    "cell wall",
+    "mitochondria",
+    "nucleus",
+    "vacuole"
+   ],
+   "answer": 1,
+   "explanation": "Energy is released there.",
+   "chapter": "form3-biology-respiration"
+  },
+  {
+   "id": "form3-biology-respiration-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-respiration",
+   "prompt": "Breathed-out air is shown to contain more carbon dioxide than fresh air by using:",
+   "choices": [
+    "iodine solution",
+    "Benedict's solution",
+    "limewater, which turns milky faster",
+    "a glowing splint"
+   ],
+   "answer": 2,
+   "explanation": "Calcium carbonate forms.",
+   "chapter": "form3-biology-respiration"
+  },
+  {
+   "id": "form3-biology-respiration-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-respiration",
+   "prompt": "When you breathe in the diaphragm:",
+   "choices": [
+    "flattens",
+    "relaxes upwards",
+    "disappears",
+    "rests"
+   ],
+   "answer": 0,
+   "explanation": "It moves down.",
+   "chapter": "form3-biology-respiration"
+  },
+  {
+   "id": "form3-biology-respiration-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-respiration",
+   "prompt": "Yeast respires anaerobically to make:",
+   "choices": [
+    "lactic acid",
+    "starch",
+    "ethanol and carbon dioxide",
+    "oxygen"
+   ],
+   "answer": 2,
+   "explanation": "Fermentation.",
+   "chapter": "form3-biology-respiration"
+  },
+  {
+   "id": "form3-biology-respiration-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-respiration",
+   "prompt": "Carbon monoxide in cigarette smoke:",
+   "choices": [
+    "makes the lungs bigger",
+    "improves breathing",
+    "reduces the oxygen carried by the blood",
+    "kills germs"
+   ],
+   "answer": 2,
+   "explanation": "It binds haemoglobin.",
+   "chapter": "form3-biology-respiration"
+  }
+ ]
+}

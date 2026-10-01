@@ -1,0 +1,1011 @@
+{
+ "chapter": "form4-physics-light",
+ "lessons": [
+  {
+   "id": "form4-physics-reflection-mirrors",
+   "title": "Reflection and curved mirrors",
+   "minutes": 30,
+   "programRef": "Form 4 Physics — Reflection, curved mirrors, refraction and lenses (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Use the laws of reflection and describe the image in a plane mirror.",
+    "Describe the action of concave and convex mirrors on parallel rays.",
+    "Use the mirror formula 1/f = 1/u + 1/v and magnification."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form4-physics-light-e01",
+    "form4-physics-light-e02",
+    "form4-physics-light-e03",
+    "form4-physics-light-e04",
+    "form4-physics-light-e05",
+    "form4-physics-light-e06"
+   ],
+   "selfCheck": [
+    "form4-physics-reflection-mirrors-q1",
+    "form4-physics-reflection-mirrors-q2",
+    "form4-physics-reflection-mirrors-q3",
+    "form4-physics-reflection-mirrors-q4",
+    "form4-physics-reflection-mirrors-q5"
+   ],
+   "reviewNotes": [
+    "Real-is-positive sign convention used; check whether the syllabus uses the Cartesian or the real-is-positive convention.",
+    "The ray diagram is schematic (paraxial rays).",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Laws of reflection",
+     "md": "1. The angle of incidence **i** equals the angle of reflection **r** (both measured from the normal).\n2. The incident ray, reflected ray and normal lie in the same plane.\n\nA **plane mirror** forms a **virtual**, upright image, the same size as the object and as far behind the mirror as the object is in front. A **virtual** image cannot be shown on a screen; a **real** image can. If a plane mirror turns by θ, the reflected ray turns by 2θ."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Curved mirrors",
+     "md": "A **concave** (converging) mirror brings parallel rays to the **principal focus F**. The distance from the mirror to F is the **focal length f**; the **centre of curvature C** is at 2f. A **convex** (diverging) mirror spreads parallel rays out as if from a virtual focus behind it. Rays: parallel to the axis → through F; through F → parallel to the axis; through C → back along itself."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 450,
+      "h": 190,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         356.5685424949238,
+         53.4314575050762,
+         361.28355544951825,
+         58.57699122507686,
+         365.53216354311934,
+         64.11388509191632,
+         369.2820323027551,
+         70.0,
+         372.504622962932,
+         76.19053906074404,
+         375.17540966287265,
+         82.63838853394651,
+         377.27406610312545,
+         89.29447639179834,
+         378.78462024097666,
+         96.10814578664558,
+         379.6955758473396,
+         103.02754058018735,
+         380.0,
+         110.0,
+         379.6955758473396,
+         116.97245941981265,
+         378.78462024097666,
+         123.89185421335442,
+         377.27406610312545,
+         130.70552360820164,
+         375.17540966287265,
+         137.3616114660535,
+         372.504622962932,
+         143.80946093925596,
+         369.2820323027551,
+         150.0,
+         365.53216354311934,
+         155.8861149080837,
+         361.28355544951825,
+         161.42300877492315,
+         356.5685424949238,
+         166.5685424949238
+        ],
+        "stroke": "ink",
+        "width": 4,
+        "closed": false
+       },
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 110,
+        "x2": 440,
+        "y2": 110,
+        "color": "grey",
+        "width": 1.2
+       },
+       {
+        "t": "line",
+        "x1": 260,
+        "y1": 110,
+        "x2": 260,
+        "y2": 70,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 320,
+        "y1": 110,
+        "x2": 320,
+        "y2": 129,
+        "color": "green",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 260,
+        "y1": 70,
+        "x2": 369.2820323027551,
+        "y2": 70,
+        "color": "red",
+        "width": 1.5
+       },
+       {
+        "t": "line",
+        "x1": 369.2820323027551,
+        "y1": 70,
+        "x2": 320,
+        "y2": 129,
+        "color": "red",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 260,
+        "y1": 70,
+        "x2": 377.74238309665077,
+        "y2": 128.87119154832538,
+        "color": "orange",
+        "width": 1.5
+       },
+       {
+        "t": "line",
+        "x1": 377.74238309665077,
+        "y1": 128.87119154832538,
+        "x2": 320,
+        "y2": 129,
+        "color": "orange",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 150,
+        "text": "C",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 340,
+        "y": 150,
+        "text": "F",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 58,
+        "text": "object",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 322,
+        "y": 172,
+        "text": "image",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 100,
+        "text": "principal axis",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Image in a concave mirror when the object is beyond C: real, inverted and smaller.",
+     "alt": "A concave mirror on the right, an object arrow beyond C on the left and a smaller inverted image arrow between C and F, with two reflected rays meeting at the image tip."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Mirror formula and uses",
+     "md": "**1/f = 1/u + 1/v** (real-is-positive: u object distance, v image distance, f focal length of a concave mirror positive). **Magnification m = v / u = image height ÷ object height**. Uses: **concave**: torch and headlight reflectors, shaving mirrors, dentists' mirrors (magnified when the object is within f); **convex**: driving mirrors and shop security mirrors because they give a wide field of view."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Measure angles from the **normal**, not from the mirror.\n- The image in a plane mirror is as far **behind** the mirror as the object is in front, so the distance between object and image is twice the distance to the mirror.\n- A real image is inverted; a virtual image formed by a mirror is upright."
+    },
+    {
+     "type": "example",
+     "title": "Image in a concave mirror",
+     "statement": "An object is 30 cm from a concave mirror of focal length 10 cm. Find the image distance and the magnification.",
+     "steps": [
+      "1/v = 1/f − 1/u = 1/10 − 1/30 = 2/30, so v = 15 cm.",
+      "m = v ÷ u = 15 ÷ 30 = 0.5 (half the size, real, inverted)."
+     ],
+     "answer": "v = 15 cm; m = 0.5"
+    },
+    {
+     "type": "example",
+     "title": "Plane mirror distance",
+     "statement": "A boy stands 2.5 m from a plane mirror and walks 1 m towards it. How far is he now from his image?",
+     "steps": [
+      "He is now 2.5 − 1 = 1.5 m from the mirror.",
+      "The image is 1.5 m behind it: distance = 3.0 m."
+     ],
+     "answer": "3.0 m"
+    },
+    {
+     "type": "exercise",
+     "ref": "form4-physics-light-e01"
+    }
+   ],
+   "chapter": "form4-physics-light"
+  },
+  {
+   "id": "form4-physics-refraction-lenses",
+   "title": "Refraction and lenses",
+   "minutes": 30,
+   "programRef": "Form 4 Physics — Reflection, curved mirrors, refraction and lenses (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe refraction and use the refractive index n = sin i / sin r.",
+    "Explain total internal reflection and the critical angle.",
+    "Describe image formation by a converging lens and use 1/f = 1/u + 1/v."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form4-physics-light-e07",
+    "form4-physics-light-e08",
+    "form4-physics-light-e09",
+    "form4-physics-light-e10",
+    "form4-physics-light-e11",
+    "form4-physics-light-e12"
+   ],
+   "selfCheck": [
+    "form4-physics-refraction-lenses-q1",
+    "form4-physics-refraction-lenses-q2",
+    "form4-physics-refraction-lenses-q3",
+    "form4-physics-refraction-lenses-q4",
+    "form4-physics-refraction-lenses-q5"
+   ],
+   "reviewNotes": [
+    "n for water 1.33 and glass 1.5 are standard school values; the critical angle for water is 48.8°, quoted as about 49°.",
+    "Ray diagrams are schematic (paraxial rays).",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Refraction",
+     "md": "**Refraction** is the bending of light when it passes from one transparent material to another, because its **speed changes**. Light entering a **denser** medium (air to glass) bends **towards the normal**; leaving it bends **away**. The **refractive index** **n = sin i ÷ sin r** (i in air, r in the material); n = 1.33 for water and about 1.5 for glass. Refraction makes a pool look shallower than it is."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 210,
+      "items": [
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 110,
+        "w": 280,
+        "h": 90,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 30,
+        "x2": 200,
+        "y2": 195,
+        "color": "grey",
+        "width": 1.5,
+        "dash": true
+       },
+       {
+        "t": "line",
+        "x1": 129.28932188134524,
+        "y1": 39.289321881345245,
+        "x2": 200,
+        "y2": 110,
+        "color": "red",
+        "width": 2.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 110,
+        "x2": 247.14045207910317,
+        "y2": 198.19171036881968,
+        "color": "red",
+        "width": 2.5,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 205,
+        "y": 36,
+        "text": "normal",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 50,
+        "y": 60,
+        "text": "air",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 130,
+        "text": "glass (n = 1.5)",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 78,
+        "text": "i = 45°",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 212,
+        "y": 160,
+        "text": "r = 28°",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A ray passing from air into glass bends towards the normal.",
+     "alt": "A ray hitting the top of a glass block at 45 degrees to the normal and bending to about 28 degrees inside the glass."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Total internal reflection",
+     "md": "When light travels from a **denser to a less dense** medium and the angle of incidence is **larger than the critical angle c**, **all** the light is reflected inside: **total internal reflection**. **sin c = 1 / n**. For glass c ≈ 42°; for water c ≈ 49°. Uses: prisms in binoculars, bicycle reflectors, **optical fibres** for telephone and internet signals and for medical viewing."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 470,
+      "h": 190,
+      "items": [
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 110,
+        "x2": 460,
+        "y2": 110,
+        "color": "grey",
+        "width": 1.2
+       },
+       {
+        "t": "line",
+        "x1": 240,
+        "y1": 30,
+        "x2": 240,
+        "y2": 190,
+        "color": "ink",
+        "width": 3,
+        "arrow": "both"
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 110,
+        "x2": 60,
+        "y2": 70,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 330,
+        "y1": 110,
+        "x2": 330,
+        "y2": 130,
+        "color": "green",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 70,
+        "x2": 240,
+        "y2": 70,
+        "color": "red",
+        "width": 1.5
+       },
+       {
+        "t": "line",
+        "x1": 240,
+        "y1": 70,
+        "x2": 330,
+        "y2": 130,
+        "color": "red",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 70,
+        "x2": 240,
+        "y2": 110,
+        "color": "orange",
+        "width": 1.5
+       },
+       {
+        "t": "line",
+        "x1": 240,
+        "y1": 110,
+        "x2": 330,
+        "y2": 130,
+        "color": "orange",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 146,
+        "text": "2F",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 146,
+        "text": "F",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 146,
+        "text": "F",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 360,
+        "y": 146,
+        "text": "2F",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 58,
+        "text": "object",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 166,
+        "text": "image",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Image formed by a converging lens when the object is beyond 2F: real, inverted and smaller.",
+     "alt": "A converging lens with an object arrow far to the left and a smaller inverted image arrow on the right, with two rays crossing at the image tip."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Converging lens",
+     "md": "A **converging (convex) lens** brings parallel rays to the **principal focus F**. **1/f = 1/u + 1/v** (real-is-positive), **m = v / u**. Object beyond 2F: small real inverted image (camera). Object between F and 2F: enlarged real image (projector). Object **inside F**: enlarged, upright, **virtual** image: a **magnifying glass**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- n = sin i ÷ sin r uses the sines of angles, not the angles themselves.\n- Total internal reflection needs **both** a denser-to-less-dense path **and** an angle above c.\n- A magnifying glass uses the object **inside** the focal length."
+    },
+    {
+     "type": "example",
+     "title": "Refraction into glass",
+     "statement": "A ray hits glass (n = 1.5) at 45° to the normal. Find the angle of refraction.",
+     "steps": [
+      "sin r = sin 45° ÷ 1.5 = 0.7071 ÷ 1.5 = 0.4714.",
+      "r = 28.1°."
+     ],
+     "answer": "r ≈ 28°"
+    },
+    {
+     "type": "example",
+     "title": "Lens image",
+     "statement": "An object is 45 cm from a converging lens of focal length 15 cm. Find v and the magnification.",
+     "steps": [
+      "1/v = 1/15 − 1/45 = 2/45, so v = 22.5 cm.",
+      "m = 22.5 ÷ 45 = 0.5."
+     ],
+     "answer": "v = 22.5 cm; m = 0.5"
+    },
+    {
+     "type": "exercise",
+     "ref": "form4-physics-light-e07"
+    }
+   ],
+   "chapter": "form4-physics-light"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form4-physics-light-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-physics-reflection-mirrors",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A ray makes an angle of 20° with a plane mirror's surface. What is the angle of reflection (from the normal)?",
+   "answer": 70,
+   "tolerance": 0,
+   "unit": "°",
+   "explanation": "Angle of incidence = 90° − 20° = 70°, so r = 70°.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-physics-light"
+  },
+  {
+   "id": "form4-physics-light-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form4-physics-reflection-mirrors",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which mirror gives a wide field of view and is used as a car's wing mirror?",
+   "choices": [
+    "concave",
+    "a cracked mirror",
+    "convex",
+    "plane only"
+   ],
+   "answer": 2,
+   "explanation": "A convex mirror makes a smaller image of a wider scene.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-physics-light"
+  },
+  {
+   "id": "form4-physics-light-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-physics-reflection-mirrors",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A concave mirror has f = 12 cm. An object is placed 36 cm from it. Find the image distance in cm.",
+   "answer": 18,
+   "tolerance": 0.01,
+   "unit": "cm",
+   "explanation": "1/v = 1/12 − 1/36 = 2/36, so v = 18 cm.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-physics-light"
+  },
+  {
+   "id": "form4-physics-light-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "form4-physics-reflection-mirrors",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The image in a plane mirror is:",
+   "choices": [
+    "real and inverted",
+    "real and smaller",
+    "virtual and the same size as the object",
+    "virtual and enlarged"
+   ],
+   "answer": 2,
+   "explanation": "Standard properties.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form4-physics-light"
+  },
+  {
+   "id": "form4-physics-light-e05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form4-physics-reflection-mirrors",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A plane mirror turns through 15°. Through what angle does the reflected ray turn? (°)",
+   "answer": 30,
+   "tolerance": 0,
+   "unit": "°",
+   "explanation": "The reflected ray turns through twice the angle: 30°.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form4-physics-light"
+  },
+  {
+   "id": "form4-physics-light-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form4-physics-reflection-mirrors",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An object 4.0 cm tall is placed 30 cm in front of a concave mirror of focal length 10 cm.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Image distance v (cm).",
+     "answer": 15,
+     "tolerance": 0.01,
+     "explanation": "1/v = 1/10 − 1/30 so v = 15 cm.",
+     "unit": "cm",
+     "id": "form4-physics-light-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Magnification.",
+     "answer": 0.5,
+     "tolerance": 0.01,
+     "explanation": "m = v ÷ u = 15 ÷ 30 = 0.5.",
+     "id": "form4-physics-light-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Image height (cm).",
+     "answer": 2.0,
+     "tolerance": 0.01,
+     "explanation": "2.0 cm = 0.5 × 4.0 cm.",
+     "unit": "cm",
+     "id": "form4-physics-light-e06-c"
+    }
+   ],
+   "chapter": "form4-physics-light"
+  },
+  {
+   "id": "form4-physics-reflection-mirrors-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-reflection-mirrors",
+   "prompt": "The angle of incidence is measured between the incident ray and the:",
+   "choices": [
+    "mirror surface",
+    "normal",
+    "focus",
+    "image"
+   ],
+   "answer": 1,
+   "explanation": "Normal is perpendicular to the mirror.",
+   "chapter": "form4-physics-light"
+  },
+  {
+   "id": "form4-physics-reflection-mirrors-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-reflection-mirrors",
+   "prompt": "A concave mirror brings parallel rays to the:",
+   "choices": [
+    "normal",
+    "principal focus",
+    "object",
+    "centre of the Earth"
+   ],
+   "answer": 1,
+   "explanation": "It converges them.",
+   "chapter": "form4-physics-light"
+  },
+  {
+   "id": "form4-physics-reflection-mirrors-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-reflection-mirrors",
+   "prompt": "A virtual image:",
+   "choices": [
+    "is always real",
+    "cannot be formed on a screen",
+    "is always inverted",
+    "is always smaller"
+   ],
+   "answer": 1,
+   "explanation": "Rays only appear to come from it.",
+   "chapter": "form4-physics-light"
+  },
+  {
+   "id": "form4-physics-reflection-mirrors-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-reflection-mirrors",
+   "prompt": "The magnification of a mirror is:",
+   "choices": [
+    "u × v",
+    "v ÷ u",
+    "f ÷ v",
+    "u − v"
+   ],
+   "answer": 1,
+   "explanation": "Image distance over object distance.",
+   "chapter": "form4-physics-light"
+  },
+  {
+   "id": "form4-physics-reflection-mirrors-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-reflection-mirrors",
+   "prompt": "A shaving mirror is usually:",
+   "choices": [
+    "convex",
+    "frosted",
+    "concave",
+    "curved outward"
+   ],
+   "answer": 2,
+   "explanation": "The face is within the focal length, giving an enlarged upright image.",
+   "chapter": "form4-physics-light"
+  },
+  {
+   "id": "form4-physics-light-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form4-physics-refraction-lenses",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Light entering water from air bends:",
+   "choices": [
+    "back into the air",
+    "towards the normal",
+    "away from the normal",
+    "not at all"
+   ],
+   "answer": 1,
+   "explanation": "It slows down in the denser medium.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-physics-light"
+  },
+  {
+   "id": "form4-physics-light-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-physics-refraction-lenses",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Calculate the critical angle for glass of n = 1.5 (to the nearest degree).",
+   "answer": 42,
+   "tolerance": 0.5,
+   "unit": "°",
+   "explanation": "sin c = 1 ÷ 1.5 = 0.667, so c = 41.8° ≈ 42°.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-physics-light"
+  },
+  {
+   "id": "form4-physics-light-e09",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-physics-refraction-lenses",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A ray in air hits water (n = 1.33) at 30° to the normal. Find the angle of refraction in degrees (1 d.p.).",
+   "answer": 22.1,
+   "tolerance": 0.2,
+   "unit": "°",
+   "explanation": "sin r = 0.5 ÷ 1.33 = 0.376, r = 22.1°.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-physics-light"
+  },
+  {
+   "id": "form4-physics-light-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "form4-physics-refraction-lenses",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An optical fibre carries light along it by:",
+   "choices": [
+    "dispersion only",
+    "diffraction",
+    "absorption",
+    "total internal reflection"
+   ],
+   "answer": 3,
+   "explanation": "The light is repeatedly reflected at the walls.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form4-physics-light"
+  },
+  {
+   "id": "form4-physics-light-e11",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form4-physics-refraction-lenses",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A convex lens of focal length 20 cm forms a real image 60 cm away. Find the object distance in cm.",
+   "answer": 30,
+   "tolerance": 0.01,
+   "unit": "cm",
+   "explanation": "1/u = 1/20 − 1/60 = 2/60, u = 30 cm.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form4-physics-light"
+  },
+  {
+   "id": "form4-physics-light-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form4-physics-refraction-lenses",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A slide projector lens has f = 10 cm and the slide is 12 cm from it.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Image distance v (cm).",
+     "answer": 60,
+     "tolerance": 0.01,
+     "explanation": "1/v = 1/10 − 1/12 = 2/120, so v = 60 cm.",
+     "unit": "cm",
+     "id": "form4-physics-light-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Magnification.",
+     "answer": 5,
+     "tolerance": 0.01,
+     "explanation": "m = 60 ÷ 12 = 5.",
+     "id": "form4-physics-light-e12-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The image on the screen is:",
+     "choices": [
+      "real and smaller",
+      "virtual and upright",
+      "virtual and inverted",
+      "real, inverted and enlarged"
+     ],
+     "answer": 3,
+     "explanation": "Object between F and 2F.",
+     "id": "form4-physics-light-e12-c"
+    }
+   ],
+   "chapter": "form4-physics-light"
+  },
+  {
+   "id": "form4-physics-refraction-lenses-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-refraction-lenses",
+   "prompt": "The refractive index is calculated as:",
+   "choices": [
+    "i ÷ r",
+    "sin i ÷ sin r",
+    "sin i × sin r",
+    "i − r"
+   ],
+   "answer": 1,
+   "explanation": "Snell's law.",
+   "chapter": "form4-physics-light"
+  },
+  {
+   "id": "form4-physics-refraction-lenses-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-refraction-lenses",
+   "prompt": "Total internal reflection can happen when light goes from:",
+   "choices": [
+    "glass to air at a large angle",
+    "air to glass",
+    "vacuum to air",
+    "air to water"
+   ],
+   "answer": 0,
+   "explanation": "Dense to less dense.",
+   "chapter": "form4-physics-light"
+  },
+  {
+   "id": "form4-physics-refraction-lenses-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-refraction-lenses",
+   "prompt": "A converging lens used as a magnifying glass has the object:",
+   "choices": [
+    "at 2F",
+    "inside the focal length",
+    "at infinity",
+    "beyond 2F"
+   ],
+   "answer": 1,
+   "explanation": "It gives a virtual enlarged image.",
+   "chapter": "form4-physics-light"
+  },
+  {
+   "id": "form4-physics-refraction-lenses-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-refraction-lenses",
+   "prompt": "A pool looks shallower than it is because of:",
+   "choices": [
+    "refraction",
+    "reflection",
+    "interference",
+    "dispersion"
+   ],
+   "answer": 0,
+   "explanation": "Rays bend away from the normal on leaving water.",
+   "chapter": "form4-physics-light"
+  },
+  {
+   "id": "form4-physics-refraction-lenses-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-refraction-lenses",
+   "prompt": "Optical fibres are used for:",
+   "choices": [
+    "measuring mass",
+    "cooling food",
+    "boiling water",
+    "carrying telephone and internet signals"
+   ],
+   "answer": 3,
+   "explanation": "Light signals travel by total internal reflection.",
+   "chapter": "form4-physics-light"
+  }
+ ]
+}

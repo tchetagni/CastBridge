@@ -1,0 +1,1754 @@
+{
+ "chapter": "form3-maths-geometry",
+ "lessons": [
+  {
+   "id": "form3-maths-pythagoras",
+   "title": "Pythagoras' theorem",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 3 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "State and use Pythagoras' theorem",
+    "Find a missing side of a right-angled triangle",
+    "Use the converse to test for a right angle",
+    "Solve practical problems and find distances between points"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form3-maths-geometry-e01",
+    "form3-maths-geometry-e02",
+    "form3-maths-geometry-e03",
+    "form3-maths-geometry-e04",
+    "form3-maths-geometry-e05",
+    "form3-maths-geometry-e06"
+   ],
+   "selfCheck": [
+    "form3-maths-pythagoras-q1",
+    "form3-maths-pythagoras-q2",
+    "form3-maths-pythagoras-q3",
+    "form3-maths-pythagoras-q4",
+    "form3-maths-pythagoras-q5"
+   ],
+   "reviewNotes": [
+    "Surds are only touched lightly (square roots); full surd simplification is outside this lesson.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Pythagoras' theorem",
+     "md": "In a right-angled triangle the square of the **hypotenuse** (the side opposite the right angle, the longest side) equals the sum of the squares of the other two sides:",
+     "tex": "a^2 + b^2 = c^2"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Method",
+     "md": "Draw the triangle and mark the hypotenuse. To find the **hypotenuse**: add the squares, then take the square root. To find a **shorter side**: subtract the squares, then take the square root. Examples: 5² + 12² = 169, so c = 13. And 2.5² − 0.7² = 6.25 − 0.49 = 5.76, so the side is 2.4."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         60,
+         190,
+         210,
+         190,
+         60,
+         110
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "angle",
+        "x": 60,
+        "y": 190,
+        "from": 0,
+        "to": 90,
+        "r": 14,
+        "right": true,
+        "color": "red"
+       },
+       {
+        "t": "text",
+        "x": 135.0,
+        "y": 210,
+        "text": "a",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 46,
+        "y": 155.0,
+        "text": "b",
+        "size": 14,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 147.0,
+        "y": 144.0,
+        "text": "c (hypotenuse)",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A right-angled triangle with legs a and b and hypotenuse c: a² + b² = c².",
+     "alt": "A right-angled triangle with the sides labelled a, b and the hypotenuse c."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Converse and triples",
+     "md": "If the sides of a triangle satisfy $a^2 + b^2 = c^2$, the triangle is right-angled. Whole-number sets are called **Pythagorean triples**: (3, 4, 5), (5, 12, 13), (8, 15, 17), (7, 24, 25). For points, the distance between (x₁, y₁) and (x₂, y₂) is $\\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Adding the squares when looking for a shorter side (you must subtract).\n- Forgetting the square root at the end.\n- Using the theorem on a triangle with no right angle."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: a ladder",
+     "statement": "A ladder 2.5 m long leans against a wall with its foot 0.7 m from the wall. How high does it reach?",
+     "steps": [
+      "The ladder is the hypotenuse: h² = 2.5² − 0.7².",
+      "h² = 6.25 − 0.49 = 5.76.",
+      "h = 2.4 m."
+     ],
+     "answer": "**2.4 m**",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         100,
+         190,
+         142,
+         190,
+         100,
+         46
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "angle",
+        "x": 100,
+        "y": 190,
+        "from": 0,
+        "to": 90,
+        "r": 14,
+        "right": true,
+        "color": "red"
+       },
+       {
+        "t": "text",
+        "x": 121,
+        "y": 210,
+        "text": "0.7 m",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 86,
+        "y": 118,
+        "text": "h",
+        "size": 14,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 135,
+        "y": 110,
+        "text": "ladder 2.5 m",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2: a field",
+     "statement": "A rectangular field at Bamenda is 120 m by 50 m. Find the diagonal and how much shorter it is to walk along the diagonal than along two sides.",
+     "steps": [
+      "Diagonal² = 120² + 50² = 14 400 + 2 500 = 16 900, so the diagonal is 130 m.",
+      "Along two sides: 120 + 50 = 170 m.",
+      "Saving = 170 − 130 = 40 m."
+     ],
+     "answer": "**130 m; saves 40 m.**"
+    }
+   ],
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-right-trigonometry",
+   "title": "Trigonometry in right-angled triangles",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 3 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Name the sides opposite, adjacent and hypotenuse",
+    "Use sine, cosine and tangent to find sides",
+    "Use the inverse functions to find angles",
+    "Solve problems with angles of elevation and depression"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form3-maths-geometry-e07",
+    "form3-maths-geometry-e08",
+    "form3-maths-geometry-e09",
+    "form3-maths-geometry-e10",
+    "form3-maths-geometry-e11",
+    "form3-maths-geometry-e12"
+   ],
+   "selfCheck": [
+    "form3-maths-right-trigonometry-q1",
+    "form3-maths-right-trigonometry-q2",
+    "form3-maths-right-trigonometry-q3",
+    "form3-maths-right-trigonometry-q4",
+    "form3-maths-right-trigonometry-q5"
+   ],
+   "reviewNotes": [
+    "Values like tan 35° are from calculator tables; the content assumes degrees mode. Check whether four-figure tables are still used in exams.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "The three ratios",
+     "md": "Label the sides from the angle θ you are using. The ratios are (remember SOH-CAH-TOA):",
+     "tex": "\\sin \\theta = \\frac{\\text{opp}}{\\text{hyp}} \\qquad \\cos \\theta = \\frac{\\text{adj}}{\\text{hyp}} \\qquad \\tan \\theta = \\frac{\\text{opp}}{\\text{adj}}"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Finding a side or an angle",
+     "md": "To find a **side**: choose the ratio that has the known side and the wanted side, write the equation and solve. For example sin 30° = x ÷ 10 gives x = 5. To find an **angle**: use the inverse key: if sin θ = 0.875 then θ = sin⁻¹(0.875) ≈ 61.0°. Make sure the calculator is in **degree** mode."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         60,
+         190,
+         260,
+         190,
+         60,
+         80
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "angle",
+        "x": 60,
+        "y": 190,
+        "from": 0,
+        "to": 90,
+        "r": 14,
+        "right": true,
+        "color": "red"
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 210,
+        "text": "adjacent",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 46,
+        "y": 140.0,
+        "text": "opposite",
+        "size": 14,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 172.0,
+        "y": 129.0,
+        "text": "hypotenuse",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 222,
+        "y": 180,
+        "text": "θ",
+        "size": 15,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "A right-angled triangle with θ, opposite, adjacent and hypotenuse labelled.",
+     "alt": "A right-angled triangle showing the adjacent side along the base, the opposite side vertical and the hypotenuse."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Elevation and depression",
+     "md": "The **angle of elevation** is the angle **above** the horizontal when you look up at an object. The **angle of depression** is the angle **below** the horizontal when you look down. The two angles are equal for the same line of sight, because they are alternate angles."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Calling a side 'opposite' without checking which angle you are using.\n- Calculator in radian mode: sin 30° must give 0.5.\n- Rounding too early: keep 3 or 4 digits until the final step."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: a tower",
+     "statement": "From a point 30 m from the base of a tower at Bafoussam, the angle of elevation of the top is 35°. Find the height (to 3 s.f.).",
+     "steps": [
+      "The known side (30 m) is adjacent and the wanted side is opposite: use tan.",
+      "tan 35° = h ÷ 30, so h = 30 × tan 35° = 30 × 0.7002.",
+      "h ≈ 21.0 m."
+     ],
+     "answer": "**About 21.0 m.**",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 220,
+      "items": [
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 180,
+        "x2": 300,
+        "y2": 55,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 180,
+        "x2": 300,
+        "y2": 180,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 180,
+        "x2": 300,
+        "y2": 55,
+        "color": "red",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "text",
+        "x": 112,
+        "y": 172,
+        "text": "35°",
+        "size": 13,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 312,
+        "y": 120,
+        "text": "h",
+        "size": 15,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 200,
+        "text": "30 m",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 50,
+        "y": 195,
+        "text": "eye",
+        "size": 12,
+        "anchor": "end",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2: angles",
+     "statement": "A 4 m ladder reaches 3.5 m up a wall. Find the angle it makes with the ground. A 6 m market ramp rises 1.2 m: find the angle of the ramp.",
+     "steps": [
+      "Ladder: sin θ = 3.5 ÷ 4 = 0.875, so θ = sin⁻¹ 0.875 ≈ 61.0°.",
+      "Ramp: sin θ = 1.2 ÷ 6 = 0.2, so θ = sin⁻¹ 0.2 ≈ 11.5°."
+     ],
+     "answer": "**About 61.0°; about 11.5°.**",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         60,
+         190,
+         260,
+         190,
+         60,
+         80
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "angle",
+        "x": 60,
+        "y": 190,
+        "from": 0,
+        "to": 90,
+        "r": 14,
+        "right": true,
+        "color": "red"
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 210,
+        "text": "adjacent",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 46,
+        "y": 140.0,
+        "text": "opposite",
+        "size": 14,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 172.0,
+        "y": 129.0,
+        "text": "hypotenuse",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 222,
+        "y": 180,
+        "text": "θ",
+        "size": 15,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       }
+      ]
+     }
+    }
+   ],
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-arcs-sectors",
+   "title": "Arc length and area of a sector",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 3 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Find the length of an arc",
+    "Find the area of a sector",
+    "Find the perimeter of a sector",
+    "Find the angle or the radius from given arc length or area"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form3-maths-geometry-e13",
+    "form3-maths-geometry-e14",
+    "form3-maths-geometry-e15",
+    "form3-maths-geometry-e16",
+    "form3-maths-geometry-e17",
+    "form3-maths-geometry-e18"
+   ],
+   "selfCheck": [
+    "form3-maths-arcs-sectors-q1",
+    "form3-maths-arcs-sectors-q2",
+    "form3-maths-arcs-sectors-q3",
+    "form3-maths-arcs-sectors-q4",
+    "form3-maths-arcs-sectors-q5"
+   ],
+   "reviewNotes": [
+    "Segment areas and chord lengths are left for Form 4.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Arc and sector",
+     "md": "A sector with angle θ at the centre of a circle of radius r is the fraction $\\frac{\\theta}{360}$ of the whole circle. Therefore:",
+     "tex": "\\text{arc} = \\frac{\\theta}{360} \\times 2 \\pi r \\qquad \\text{area} = \\frac{\\theta}{360} \\times \\pi r^2"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Method",
+     "md": "Write the fraction θ/360 first and simplify it. Example: r = 21 cm and θ = 60° (π = 22/7): fraction 1/6. Arc = 1/6 × 2 × 22/7 × 21 = 22 cm. Area = 1/6 × 22/7 × 441 = 231 cm². The **perimeter** of a sector is the arc **plus the two radii**: 22 + 21 + 21 = 64 cm."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "path",
+        "d": "M 140 130 L 230 130 A 90 90 0 0 0 185.0 52.1 Z",
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 185.0,
+        "y": 148,
+        "text": "r = 21 cm",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 177.44486372867092,
+        "y": 117.0,
+        "text": "60°",
+        "size": 13,
+        "anchor": "start",
+        "color": "red",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "A sector of radius 21 cm and angle 60°.",
+     "alt": "A sector shape with its radius labelled 21 cm and angle 60 degrees."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Working backwards",
+     "md": "If the arc is known, solve for θ: θ = arc ÷ (2πr) × 360. An arc of 11 cm on a circle of radius 7 cm (circumference 44 cm) gives θ = 11 ÷ 44 × 360 = 90°. Use π = 22/7 when r is a multiple of 7, else 3.14."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Forgetting to add the two radii for the perimeter of a sector.\n- Using the area formula for the arc.\n- Using θ/180 instead of θ/360."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: arc and area",
+     "statement": "A sector of a circle has radius 21 cm and angle 60°. Find the arc length, area and perimeter (π = 22/7).",
+     "steps": [
+      "Fraction = 60/360 = 1/6.",
+      "Arc = 1/6 × 2 × 22/7 × 21 = 22 cm; area = 1/6 × 22/7 × 21² = 231 cm².",
+      "Perimeter = 22 + 21 + 21 = 64 cm."
+     ],
+     "answer": "**Arc 22 cm, area 231 cm², perimeter 64 cm.**",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "path",
+        "d": "M 140 130 L 230 130 A 90 90 0 0 0 185.0 52.1 Z",
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 185.0,
+        "y": 148,
+        "text": "r = 21 cm",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 177.44486372867092,
+        "y": 117.0,
+        "text": "60°",
+        "size": 13,
+        "anchor": "start",
+        "color": "red",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2: a flower bed",
+     "statement": "A circular lawn at Buea has radius 14 m. A quarter of it (a 90° sector) is planted with roses. Find the area of the roses and the length of fencing along its three edges (π = 22/7).",
+     "steps": [
+      "Area = 1/4 × 22/7 × 14² = 154 m².",
+      "Arc = 1/4 × 2 × 22/7 × 14 = 22 m.",
+      "Fencing = 22 + 14 + 14 = 50 m."
+     ],
+     "answer": "**154 m²; 50 m**"
+    }
+   ],
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-solids",
+   "title": "Cones, pyramids and spheres",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 3 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Calculate the volume of a pyramid, cone and sphere",
+    "Calculate the curved and total surface area of a cone and the area of a sphere",
+    "Use the slant height with Pythagoras",
+    "Solve practical problems on heaps, tanks and containers"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form3-maths-geometry-e19",
+    "form3-maths-geometry-e20",
+    "form3-maths-geometry-e21",
+    "form3-maths-geometry-e22",
+    "form3-maths-geometry-e23",
+    "form3-maths-geometry-e24"
+   ],
+   "selfCheck": [
+    "form3-maths-solids-q1",
+    "form3-maths-solids-q2",
+    "form3-maths-solids-q3",
+    "form3-maths-solids-q4",
+    "form3-maths-solids-q5"
+   ],
+   "reviewNotes": [
+    "The Bafut hut figures are invented for practice; check if the 'traditional hut' context is suitable. Frustums and composite solids are left for Form 4.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Volumes",
+     "md": "A pyramid or cone has one-third of the volume of the prism or cylinder with the same base and height. For a sphere of radius r:",
+     "tex": "V_{\\text{pyramid}} = \\frac{1}{3} A h \\qquad V_{\\text{cone}} = \\frac{1}{3}\\pi r^2 h \\qquad V_{\\text{sphere}} = \\frac{4}{3}\\pi r^3"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Surface areas",
+     "md": "For a cone with slant height l and a sphere of radius r:",
+     "tex": "A_{\\text{curved cone}} = \\pi r l \\qquad A_{\\text{sphere}} = 4 \\pi r^2"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 210,
+      "items": [
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 30,
+        "x2": 110,
+        "y2": 170,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 30,
+        "x2": 290,
+        "y2": 170,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "path",
+        "d": "M 110 170 A 90 18 0 0 0 290 170",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "path",
+        "d": "M 110 170 A 90 18 0 0 1 290 170",
+        "stroke": "grey",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 30,
+        "x2": 200,
+        "y2": 170,
+        "color": "grey",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 170,
+        "x2": 290,
+        "y2": 170,
+        "color": "red",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 105,
+        "text": "h = 24",
+        "size": 13,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 245,
+        "y": 190,
+        "text": "r = 7",
+        "size": 13,
+        "anchor": "middle",
+        "color": "red"
+       },
+       {
+        "t": "text",
+        "x": 262,
+        "y": 90,
+        "text": "l = 25",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A cone with radius 7, height 24 and slant height 25.",
+     "alt": "A cone with its height as a dashed line, the radius and the slant height labelled."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "The slant height",
+     "md": "The slant height l, the height h and the radius r form a right-angled triangle: $l^2 = r^2 + h^2$. A cone with r = 7 and h = 24 has $l = \\sqrt{49 + 576} = 25$. Then V = 1/3 × 22/7 × 49 × 24 = 1 232 and the curved area is 22/7 × 7 × 25 = 550. Add the base πr² = 154 for the total surface area: 704."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using the slant height instead of the vertical height in the volume of a cone.\n- Forgetting the factor 1/3 for cones and pyramids.\n- Mixing units: cm and m in the same calculation."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: a cone",
+     "statement": "A cone has radius 7 cm and height 24 cm (π = 22/7). Find the slant height, the volume and the curved surface area.",
+     "steps": [
+      "l² = 7² + 24² = 625, so l = 25 cm.",
+      "V = 1/3 × 22/7 × 49 × 24 = 1 232 cm³.",
+      "Curved area = π r l = 22/7 × 7 × 25 = 550 cm²."
+     ],
+     "answer": "**l = 25 cm; V = 1 232 cm³; curved area 550 cm².**",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 210,
+      "items": [
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 30,
+        "x2": 110,
+        "y2": 170,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 30,
+        "x2": 290,
+        "y2": 170,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "path",
+        "d": "M 110 170 A 90 18 0 0 0 290 170",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "path",
+        "d": "M 110 170 A 90 18 0 0 1 290 170",
+        "stroke": "grey",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 30,
+        "x2": 200,
+        "y2": 170,
+        "color": "grey",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 170,
+        "x2": 290,
+        "y2": 170,
+        "color": "red",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 105,
+        "text": "h = 24",
+        "size": 13,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 245,
+        "y": 190,
+        "text": "r = 7",
+        "size": 13,
+        "anchor": "middle",
+        "color": "red"
+       },
+       {
+        "t": "text",
+        "x": 262,
+        "y": 90,
+        "text": "l = 25",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2: a grain heap",
+     "statement": "A heap of maize at a store in Bamenda is cone-shaped with radius 2.1 m and height 2 m (π = 22/7). Find its volume. How many 0.5 m³ bags could it fill?",
+     "steps": [
+      "V = 1/3 × 22/7 × 2.1² × 2 = 1/3 × 22/7 × 4.41 × 2 = 9.24 m³.",
+      "Number of bags = 9.24 ÷ 0.5 = 18.48.",
+      "So 18 full bags."
+     ],
+     "answer": "**9.24 m³; 18 full bags.**"
+    }
+   ],
+   "chapter": "form3-maths-geometry"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form3-maths-geometry-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-maths-pythagoras",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A right-angled triangle has shorter sides 6 cm and 8 cm. Find the hypotenuse.",
+   "answer": 10,
+   "tolerance": 0,
+   "unit": "cm",
+   "explanation": "36 + 64 = 100, so 10 cm.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-geometry-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-maths-pythagoras",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The hypotenuse is 13 cm and one side 5 cm. Find the other side.",
+   "answer": 12,
+   "tolerance": 0,
+   "unit": "cm",
+   "explanation": "169 − 25 = 144, so 12 cm.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-geometry-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-maths-pythagoras",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Which set of lengths forms a right-angled triangle?",
+   "choices": [
+    "5, 10, 12",
+    "8, 15, 17",
+    "6, 7, 8",
+    "9, 10, 14"
+   ],
+   "answer": 1,
+   "explanation": "8² + 15² = 289 = 17².",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-geometry-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form3-maths-pythagoras",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find the distance between A(1, 2) and B(7, 10).",
+   "answer": 10,
+   "tolerance": 0,
+   "explanation": "√(6² + 8²) = 10.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-geometry-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form3-maths-pythagoras",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A triangle has sides 7 cm, 24 cm and 25 cm. Is it right-angled? Show your working.",
+   "model": "7² + 24² = 49 + 576 = 625 = 25². So the converse of Pythagoras' theorem shows it is right-angled, with the right angle opposite the 25 cm side.",
+   "rubric": "1 mark for each square, 1 mark for the comparison and conclusion.",
+   "explanation": "7² + 24² = 49 + 576 = 625 = 25². So the converse of Pythagoras' theorem shows it is right-angled, with the right angle opposite the 25 cm side.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-geometry-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form3-maths-pythagoras",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A telephone mast at Kumba is held by a steel cable from the top to a point on the ground 9 m from the base. The mast is 12 m high.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the length of the cable (m).",
+     "answer": 15,
+     "tolerance": 0,
+     "explanation": "√(9² + 12²) = √225 = 15.",
+     "unit": "m",
+     "id": "form3-maths-geometry-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "The cable is 15 m. A second mast of height 20 m has its cable fixed 15 m from its base. Find that cable length (m).",
+     "answer": 25,
+     "tolerance": 0,
+     "explanation": "√(15² + 20²) = √625 = 25.",
+     "unit": "m",
+     "id": "form3-maths-geometry-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which triple do both masts follow?",
+     "choices": [
+      "Multiples of (8, 15, 17)",
+      "No triple",
+      "Multiples of (3, 4, 5)",
+      "Multiples of (5, 12, 13)"
+     ],
+     "answer": 2,
+     "explanation": "9-12-15 and 15-20-25 are 3-4-5 scaled.",
+     "id": "form3-maths-geometry-e06-c"
+    }
+   ],
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-pythagoras-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-pythagoras",
+   "prompt": "The hypotenuse is:",
+   "choices": [
+    "any side",
+    "the shortest side",
+    "the side next to the right angle",
+    "the longest side opposite the right angle"
+   ],
+   "answer": 3,
+   "explanation": "Definition.",
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-pythagoras-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-pythagoras",
+   "prompt": "In a triangle with sides 3, 4, 5 the hypotenuse is:",
+   "choices": [
+    "12",
+    "4",
+    "3",
+    "5"
+   ],
+   "answer": 3,
+   "explanation": "5² = 3² + 4².",
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-pythagoras-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-pythagoras",
+   "prompt": "To find a shorter side you:",
+   "choices": [
+    "multiply the sides",
+    "subtract the squares and take the square root",
+    "add the squares",
+    "divide by 2"
+   ],
+   "answer": 1,
+   "explanation": "c² − b² = a².",
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-pythagoras-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-pythagoras",
+   "prompt": "A triangle with sides 5, 12, 13 is:",
+   "choices": [
+    "right-angled",
+    "not possible",
+    "isosceles",
+    "equilateral"
+   ],
+   "answer": 0,
+   "explanation": "25 + 144 = 169.",
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-pythagoras-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-pythagoras",
+   "prompt": "Pythagoras' theorem applies to:",
+   "choices": [
+    "circles",
+    "all triangles",
+    "rectangles only",
+    "right-angled triangles only"
+   ],
+   "answer": 3,
+   "explanation": "Right angle needed.",
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-geometry-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-maths-right-trigonometry",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "In a right triangle the hypotenuse is 10 cm and the angle is 30°. Find the opposite side.",
+   "answer": 5,
+   "tolerance": 0,
+   "unit": "cm",
+   "explanation": "10 × sin 30° = 5 cm.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-geometry-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-maths-right-trigonometry",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "tan θ equals:",
+   "choices": [
+    "hypotenuse ÷ adjacent",
+    "opposite ÷ hypotenuse",
+    "adjacent ÷ hypotenuse",
+    "opposite ÷ adjacent"
+   ],
+   "answer": 3,
+   "explanation": "TOA.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-geometry-e09",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-maths-right-trigonometry",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "If sin θ = 0.5, find θ in degrees.",
+   "answer": 30,
+   "tolerance": 0,
+   "unit": "°",
+   "explanation": "sin⁻¹ 0.5 = 30°.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-geometry-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form3-maths-right-trigonometry",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A girl 50 m from a tree sees the top at an angle of elevation of 40°. Find the height of the tree (m, to 1 d.p.).",
+   "answer": 42,
+   "tolerance": 0.1,
+   "unit": "m",
+   "explanation": "50 × tan 40° = 50 × 0.8391 = 41.96 m.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-geometry-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form3-maths-right-trigonometry",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Explain what SOH-CAH-TOA helps you remember and use it to choose the ratio when you know the hypotenuse and want the adjacent side.",
+   "model": "It helps to remember sin = opposite/hypotenuse, cos = adjacent/hypotenuse, tan = opposite/adjacent. With the hypotenuse and the adjacent side we use cosine.",
+   "rubric": "1 mark for the three ratios, 1 mark for cosine, 1 mark for the reason.",
+   "explanation": "It helps to remember sin = opposite/hypotenuse, cos = adjacent/hypotenuse, tan = opposite/adjacent. With the hypotenuse and the adjacent side we use cosine.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-geometry-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form3-maths-right-trigonometry",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A surveyor at Limbe looks up at the top of a lighthouse 80 m away on level ground. The angle of elevation is 25°. Her eye is 1.5 m above the ground.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the height of the lighthouse above her eye level (m, 1 d.p.).",
+     "answer": 37.3,
+     "tolerance": 0.1,
+     "explanation": "80 × tan 25° = 37.3 m.",
+     "unit": "m",
+     "id": "form3-maths-geometry-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the total height of the lighthouse (m, 1 d.p.).",
+     "answer": 38.8,
+     "tolerance": 0.1,
+     "explanation": "37.3 + 1.5 = 38.8 m.",
+     "unit": "m",
+     "id": "form3-maths-geometry-e12-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What is the angle of depression from the top back to her eye?",
+     "choices": [
+      "90°",
+      "65°",
+      "155°",
+      "25°"
+     ],
+     "answer": 3,
+     "explanation": "Alternate angles are equal.",
+     "id": "form3-maths-geometry-e12-c"
+    }
+   ],
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-right-trigonometry-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-right-trigonometry",
+   "prompt": "sin θ is:",
+   "choices": [
+    "hypotenuse ÷ opposite",
+    "opposite ÷ hypotenuse",
+    "adjacent ÷ hypotenuse",
+    "opposite ÷ adjacent"
+   ],
+   "answer": 1,
+   "explanation": "SOH.",
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-right-trigonometry-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-right-trigonometry",
+   "prompt": "The angle of elevation is measured:",
+   "choices": [
+    "from the vertical",
+    "from the ground at the object",
+    "below the horizontal",
+    "above the horizontal"
+   ],
+   "answer": 3,
+   "explanation": "Definition.",
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-right-trigonometry-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-right-trigonometry",
+   "prompt": "cos 60° equals:",
+   "choices": [
+    "1",
+    "0",
+    "0.5",
+    "0.866"
+   ],
+   "answer": 2,
+   "explanation": "Standard value.",
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-right-trigonometry-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-right-trigonometry",
+   "prompt": "To find an angle from its sine we use:",
+   "choices": [
+    "cos",
+    "sin",
+    "tan",
+    "sin⁻¹"
+   ],
+   "answer": 3,
+   "explanation": "Inverse function.",
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-right-trigonometry-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-right-trigonometry",
+   "prompt": "In a right triangle with tan θ = 1 the angle is:",
+   "choices": [
+    "90°",
+    "45°",
+    "60°",
+    "30°"
+   ],
+   "answer": 1,
+   "explanation": "Opposite equals adjacent.",
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-geometry-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-maths-arcs-sectors",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find the arc length for r = 7 cm and θ = 90° (π = 22/7).",
+   "answer": 11,
+   "tolerance": 0,
+   "unit": "cm",
+   "explanation": "1/4 × 44 = 11 cm.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-geometry-e14",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-maths-arcs-sectors",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find the area of a sector with r = 14 cm and θ = 90° (π = 22/7).",
+   "answer": 154,
+   "tolerance": 0,
+   "unit": "cm²",
+   "explanation": "1/4 × 22/7 × 196 = 154 cm².",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-geometry-e15",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-maths-arcs-sectors",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A sector of angle 180° is:",
+   "choices": [
+    "a semicircle",
+    "a chord",
+    "a quarter circle",
+    "a full circle"
+   ],
+   "answer": 0,
+   "explanation": "180/360 = 1/2.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-geometry-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form3-maths-arcs-sectors",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "An arc is 22 cm long on a circle of radius 21 cm (π = 22/7). Find the angle at the centre.",
+   "answer": 60,
+   "tolerance": 0,
+   "unit": "°",
+   "explanation": "Circumference 132; 22 ÷ 132 × 360 = 60°.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-geometry-e17",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form3-maths-arcs-sectors",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A sector has radius 10 cm and angle 72°. Show that its area is one-fifth of the circle's area.",
+   "model": "72 ÷ 360 = 1/5, so the sector area = 1/5 × πr² = 1/5 × π × 100 = 20π cm², one-fifth of the 100π cm² circle.",
+   "rubric": "1 mark for 72/360 = 1/5, 1 mark for the circle area, 1 mark for the conclusion.",
+   "explanation": "72 ÷ 360 = 1/5, so the sector area = 1/5 × πr² = 1/5 × π × 100 = 20π cm², one-fifth of the 100π cm² circle.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-geometry-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form3-maths-arcs-sectors",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A windscreen wiper at Douala sweeps a sector of angle 120° with radius 42 cm (use π = 22/7).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the arc length swept by the tip (cm).",
+     "answer": 88,
+     "tolerance": 0,
+     "explanation": "1/3 × 2 × 22/7 × 42 = 88.",
+     "unit": "cm",
+     "id": "form3-maths-geometry-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the area swept (cm²).",
+     "answer": 1848,
+     "tolerance": 0,
+     "explanation": "1/3 × 22/7 × 1 764 = 1 848.",
+     "unit": "cm²",
+     "id": "form3-maths-geometry-e18-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the perimeter of the swept sector (cm).",
+     "answer": 172,
+     "tolerance": 0,
+     "explanation": "88 + 42 + 42 = 172.",
+     "unit": "cm",
+     "id": "form3-maths-geometry-e18-c"
+    }
+   ],
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-arcs-sectors-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-arcs-sectors",
+   "prompt": "The area of a sector is:",
+   "choices": [
+    "θ × πr²",
+    "360/θ × πr²",
+    "θ/360 × πr²",
+    "θ/360 × 2πr"
+   ],
+   "answer": 2,
+   "explanation": "Fraction of the circle's area.",
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-arcs-sectors-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-arcs-sectors",
+   "prompt": "The perimeter of a sector is the arc plus:",
+   "choices": [
+    "the chord",
+    "two radii",
+    "the diameter",
+    "one radius"
+   ],
+   "answer": 1,
+   "explanation": "Two straight edges.",
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-arcs-sectors-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-arcs-sectors",
+   "prompt": "A 90° sector is:",
+   "choices": [
+    "a quarter of the circle",
+    "a third",
+    "an eighth",
+    "half"
+   ],
+   "answer": 0,
+   "explanation": "90/360.",
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-arcs-sectors-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-arcs-sectors",
+   "prompt": "An arc of a circle is:",
+   "choices": [
+    "a straight line",
+    "a radius",
+    "part of the circumference",
+    "the centre"
+   ],
+   "answer": 2,
+   "explanation": "Definition.",
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-arcs-sectors-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-arcs-sectors",
+   "prompt": "A 45° sector has fraction:",
+   "choices": [
+    "1/6",
+    "1/4",
+    "1/2",
+    "1/8"
+   ],
+   "answer": 3,
+   "explanation": "45/360.",
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-geometry-e19",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-maths-solids",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find the volume of a pyramid with a square base of side 6 cm and height 10 cm.",
+   "answer": 120,
+   "tolerance": 0,
+   "unit": "cm³",
+   "explanation": "1/3 × 36 × 10 = 120 cm³.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-geometry-e20",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-maths-solids",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find the surface area of a sphere of radius 7 cm (π = 22/7).",
+   "answer": 616,
+   "tolerance": 0,
+   "unit": "cm²",
+   "explanation": "4 × 22/7 × 49 = 616 cm².",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-geometry-e21",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-maths-solids",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The volume of a cone is:",
+   "choices": [
+    "$\\pi r^2 h$",
+    "$\\frac{4}{3}\\pi r^3$",
+    "$\\frac{1}{3}\\pi r^2 h$",
+    "$\\pi r l$"
+   ],
+   "answer": 2,
+   "explanation": "One-third of the cylinder.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-geometry-e22",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form3-maths-solids",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find the volume of a sphere of radius 7 cm (π = 22/7), to the nearest cm³.",
+   "answer": 1437,
+   "tolerance": 1,
+   "unit": "cm³",
+   "explanation": "4/3 × 22/7 × 343 = 1 437.3.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-geometry-e23",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form3-maths-solids",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A cone has radius 5 cm and slant height 13 cm. Find its height and explain your method.",
+   "model": "The height h satisfies h² = l² − r² = 169 − 25 = 144, so h = 12 cm. We used Pythagoras in the right-angled triangle formed by h, r and l.",
+   "rubric": "1 mark for the triangle, 1 mark for 144, 1 mark for h = 12.",
+   "explanation": "The height h satisfies h² = l² − r² = 169 − 25 = 144, so h = 12 cm. We used Pythagoras in the right-angled triangle formed by h, r and l.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-geometry-e24",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form3-maths-solids",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A cone-shaped roof of a traditional hut near Bafut has radius 3.5 m, height 2.4 m and slant height 4.25 m (π = 22/7).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the area of thatch needed to cover the curved surface (m²).",
+     "answer": 46.75,
+     "tolerance": 0.01,
+     "explanation": "22/7 × 3.5 × 4.25 = 46.75.",
+     "unit": "m²",
+     "id": "form3-maths-geometry-e24-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Check the height using Pythagoras: find h when r = 3.5 and l = 4.25 (m, 1 d.p.).",
+     "answer": 2.4,
+     "tolerance": 0.05,
+     "explanation": "h² = 18.0625 − 12.25 = 5.8125, so h ≈ 2.41.",
+     "unit": "m",
+     "id": "form3-maths-geometry-e24-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the volume of air in the cone (m³, 1 d.p.), taking h = 2.4 m.",
+     "answer": 30.8,
+     "tolerance": 0.05,
+     "explanation": "1/3 × 22/7 × 12.25 × 2.4 = 30.8.",
+     "unit": "m³",
+     "id": "form3-maths-geometry-e24-c"
+    }
+   ],
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-solids-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-solids",
+   "prompt": "The volume of a sphere is:",
+   "choices": [
+    "$4\\pi r^2$",
+    "$\\pi r^2 h$",
+    "$\\frac{4}{3}\\pi r^3$",
+    "$\\frac{1}{3}\\pi r^2 h$"
+   ],
+   "answer": 2,
+   "explanation": "Sphere volume.",
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-solids-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-solids",
+   "prompt": "The surface area of a sphere is:",
+   "choices": [
+    "$2\\pi r$",
+    "$\\pi r^2$",
+    "$4\\pi r^2$",
+    "$\\frac{4}{3}\\pi r^3$"
+   ],
+   "answer": 2,
+   "explanation": "Sphere area.",
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-solids-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-solids",
+   "prompt": "For a cone the slant height satisfies:",
+   "choices": [
+    "l² = r² + h²",
+    "l² = h² − r²",
+    "l = r × h",
+    "l = r + h"
+   ],
+   "answer": 0,
+   "explanation": "Pythagoras.",
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-solids-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-solids",
+   "prompt": "A pyramid has volume:",
+   "choices": [
+    "1/3 × base area × height",
+    "base area × height",
+    "base area + height",
+    "2/3 × base area"
+   ],
+   "answer": 0,
+   "explanation": "One-third rule.",
+   "chapter": "form3-maths-geometry"
+  },
+  {
+   "id": "form3-maths-solids-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-solids",
+   "prompt": "1 m³ holds:",
+   "choices": [
+    "1 000 000 litres",
+    "10 litres",
+    "100 litres",
+    "1 000 litres"
+   ],
+   "answer": 3,
+   "explanation": "Conversion.",
+   "chapter": "form3-maths-geometry"
+  }
+ ]
+}

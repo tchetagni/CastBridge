@@ -1,0 +1,907 @@
+{
+ "chapter": "class3-maths-fractions",
+ "lessons": [
+  {
+   "id": "class3-maths-fractions-basic",
+   "title": "Fractions of a whole",
+   "minutes": 12,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level II (Class 3) — Mathematics; to be checked against the official texts",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Name halves, thirds, quarters and fifths.",
+    "Read and write a fraction."
+   ],
+   "prerequisites": [
+    "class3-maths-division-remainders"
+   ],
+   "exercises": [
+    "class3-maths-fractions-e01",
+    "class3-maths-fractions-e02",
+    "class3-maths-fractions-e03",
+    "class3-maths-fractions-e04",
+    "class3-maths-fractions-e05",
+    "class3-maths-fractions-e06"
+   ],
+   "selfCheck": [
+    "class3-maths-fractions-basic-q1",
+    "class3-maths-fractions-basic-q2",
+    "class3-maths-fractions-basic-q3",
+    "class3-maths-fractions-basic-q4",
+    "class3-maths-fractions-basic-q5"
+   ],
+   "reviewNotes": [
+    "Fractions with denominators up to 10 are assumed; check the syllabus limit.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Fraction",
+     "md": "A **fraction** is a part of a whole. The whole is cut into **equal** parts. The bottom number (denominator) says how many equal parts. The top number (numerator) says how many parts we take. 3/4 means 3 of 4 equal parts."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 300,
+      "h": 96,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 10,
+        "w": 93.33333333333333,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 103.33333333333333,
+        "y": 10,
+        "w": 93.33333333333333,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "white"
+       },
+       {
+        "t": "rect",
+        "x": 196.66666666666666,
+        "y": 10,
+        "w": 93.33333333333333,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 82,
+        "text": "1 out of 3 parts",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "1/3 of the bar is coloured.",
+     "alt": "A bar with 3 parts, one coloured."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Names",
+     "md": "2 parts: halves. 3 parts: thirds. 4 parts: quarters. 5 parts: fifths. 1/2, 1/3, 1/4, 1/5 are **unit fractions**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Parts must be equal.\n- 1/3 is bigger than 1/4.\n- The bottom number is not the number of parts we take."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "What fraction is coloured?",
+     "steps": [
+      "The bar has 5 equal parts.",
+      "2 parts are coloured. So 2/5."
+     ],
+     "answer": "2/5",
+     "figure": {
+      "kind": "shapes",
+      "w": 300,
+      "h": 96,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 10,
+        "w": 56.0,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 66.0,
+        "y": 10,
+        "w": 56.0,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 122.0,
+        "y": 10,
+        "w": 56.0,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "white"
+       },
+       {
+        "t": "rect",
+        "x": 178.0,
+        "y": 10,
+        "w": 56.0,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "white"
+       },
+       {
+        "t": "rect",
+        "x": 234.0,
+        "y": 10,
+        "w": 56.0,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 82,
+        "text": "2 out of 5 parts",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "A plantain is cut into 4 equal parts. Ada eats 3. What fraction did she eat?",
+     "steps": [
+      "The whole has 4 parts.",
+      "She ate 3 of them: 3/4."
+     ],
+     "answer": "3/4",
+     "figure": {
+      "kind": "shapes",
+      "w": 300,
+      "h": 96,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 10,
+        "w": 70.0,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 80.0,
+        "y": 10,
+        "w": 70.0,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 150.0,
+        "y": 10,
+        "w": 70.0,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 220.0,
+        "y": 10,
+        "w": 70.0,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 82,
+        "text": "3 out of 4 parts",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     }
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class3-maths-fractions"
+  },
+  {
+   "id": "class3-maths-fractions-equal-compare",
+   "title": "Equal fractions and fractions of a number",
+   "minutes": 12,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level II (Class 3) — Mathematics; to be checked against the official texts",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Show that 1/2 = 2/4.",
+    "Find a fraction of a number."
+   ],
+   "prerequisites": [
+    "class3-maths-fractions-basic"
+   ],
+   "exercises": [
+    "class3-maths-fractions-e07",
+    "class3-maths-fractions-e08",
+    "class3-maths-fractions-e09",
+    "class3-maths-fractions-e10",
+    "class3-maths-fractions-e11",
+    "class3-maths-fractions-e12"
+   ],
+   "selfCheck": [
+    "class3-maths-fractions-equal-compare-q1",
+    "class3-maths-fractions-equal-compare-q2",
+    "class3-maths-fractions-equal-compare-q3",
+    "class3-maths-fractions-equal-compare-q4",
+    "class3-maths-fractions-equal-compare-q5"
+   ],
+   "reviewNotes": [
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Equal fractions",
+     "md": "Different fractions can show the same amount. 1/2 = 2/4 = 3/6. Look at the bars: the coloured part is the same size."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 200,
+      "h": 160,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 160,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "white"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 80,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "line",
+        "x1": 90,
+        "y1": 10,
+        "x2": 90,
+        "y2": 50,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 70,
+        "text": "1/2",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 90,
+        "w": 160,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "white"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 90,
+        "w": 80,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "line",
+        "x1": 50,
+        "y1": 90,
+        "x2": 50,
+        "y2": 130,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 90,
+        "y1": 90,
+        "x2": 90,
+        "y2": 130,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 90,
+        "x2": 130,
+        "y2": 130,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 150,
+        "text": "2/4",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "1/2 and 2/4 cover the same part.",
+     "alt": "Two bars: one cut in two with one coloured half, one cut in four with two quarters coloured."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Fraction of a number",
+     "md": "To find 1/4 of 20: divide by 4. 20 ÷ 4 = 5. To find 3/4 of 20: find 1/4 (5) and multiply by 3: 15."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- 1/2 does not equal 1/4.\n- To find 3/5 of a number, divide by 5 first, then multiply by 3.\n- Same denominator: the bigger numerator is the bigger fraction."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Find 1/5 of 30 mangoes.",
+     "steps": [
+      "Divide 30 by 5.",
+      "30 ÷ 5 = 6."
+     ],
+     "answer": "6"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Find 3/4 of 28.",
+     "steps": [
+      "1/4 of 28 is 28 ÷ 4 = 7.",
+      "3/4 is 3 × 7 = 21."
+     ],
+     "answer": "21"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class3-maths-fractions"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "class3-maths-fractions-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class3-maths-fractions-basic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In 3/5 the bottom number is...",
+   "choices": [
+    "8",
+    "5",
+    "2",
+    "3"
+   ],
+   "answer": 1,
+   "explanation": "5 equal parts.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class3-maths-fractions"
+  },
+  {
+   "id": "class3-maths-fractions-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class3-maths-fractions-basic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What fraction is shown?",
+   "choices": [
+    "3/7",
+    "1/4",
+    "3/4",
+    "4/3"
+   ],
+   "answer": 2,
+   "explanation": "3 of 4 parts.",
+   "difficulty": 1,
+   "points": 1,
+   "figure": {
+    "kind": "shapes",
+    "w": 300,
+    "h": 96,
+    "items": [
+     {
+      "t": "rect",
+      "x": 10.0,
+      "y": 10,
+      "w": 70.0,
+      "h": 50,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "rect",
+      "x": 80.0,
+      "y": 10,
+      "w": 70.0,
+      "h": 50,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "rect",
+      "x": 150.0,
+      "y": 10,
+      "w": 70.0,
+      "h": 50,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "rect",
+      "x": 220.0,
+      "y": 10,
+      "w": 70.0,
+      "h": 50,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "white"
+     },
+     {
+      "t": "text",
+      "x": 150.0,
+      "y": 82,
+      "text": "3 out of 4 parts",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     }
+    ]
+   },
+   "chapter": "class3-maths-fractions"
+  },
+  {
+   "id": "class3-maths-fractions-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class3-maths-fractions-basic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which is the bigger part: 1/2 or 1/4?",
+   "choices": [
+    "1/2",
+    "they are equal",
+    "1/4",
+    "none"
+   ],
+   "answer": 0,
+   "explanation": "Fewer parts means bigger parts.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class3-maths-fractions"
+  },
+  {
+   "id": "class3-maths-fractions-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class3-maths-fractions-basic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A cake is cut into 8 equal slices. You eat 3. How many slices are left?",
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "8 − 3 = 5.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class3-maths-fractions"
+  },
+  {
+   "id": "class3-maths-fractions-e05",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "class3-maths-fractions-basic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match the fraction with its name.",
+   "pairs": [
+    [
+     "1/2",
+     "a half"
+    ],
+    [
+     "1/3",
+     "a third"
+    ],
+    [
+     "1/4",
+     "a quarter"
+    ],
+    [
+     "1/5",
+     "a fifth"
+    ]
+   ],
+   "explanation": "Names of unit fractions.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "class3-maths-fractions"
+  },
+  {
+   "id": "class3-maths-fractions-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class3-maths-fractions-basic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Mama cuts a loaf into 6 equal pieces.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "She gives 2 pieces to Bih. What is the top number of the fraction she gave?",
+     "answer": 2,
+     "tolerance": 0,
+     "explanation": "2/6.",
+     "id": "class3-maths-fractions-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many pieces are left?",
+     "answer": 4,
+     "tolerance": 0,
+     "explanation": "6 − 2 = 4.",
+     "id": "class3-maths-fractions-e06-b"
+    }
+   ],
+   "chapter": "class3-maths-fractions"
+  },
+  {
+   "id": "class3-maths-fractions-basic-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-maths-fractions-basic",
+   "prompt": "Class 3 maths fractions: the top number of a fraction is called the...",
+   "choices": [
+    "whole",
+    "numerator",
+    "denominator",
+    "sum"
+   ],
+   "answer": 1,
+   "explanation": "Numerator.",
+   "chapter": "class3-maths-fractions"
+  },
+  {
+   "id": "class3-maths-fractions-basic-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-maths-fractions-basic",
+   "prompt": "Class 3 maths fractions: 2/3 means 2 of...",
+   "choices": [
+    "3 pieces always",
+    "5 parts",
+    "3 equal parts",
+    "2 equal parts"
+   ],
+   "answer": 2,
+   "explanation": "3 equal parts.",
+   "chapter": "class3-maths-fractions"
+  },
+  {
+   "id": "class3-maths-fractions-basic-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-maths-fractions-basic",
+   "prompt": "A pizza is cut into 8 equal parts. Each part is...",
+   "choices": [
+    "1/2",
+    "8/1",
+    "1/4",
+    "1/8"
+   ],
+   "answer": 3,
+   "explanation": "One eighth.",
+   "chapter": "class3-maths-fractions"
+  },
+  {
+   "id": "class3-maths-fractions-basic-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-maths-fractions-basic",
+   "prompt": "Which is the biggest: 1/2, 1/3, 1/5?",
+   "choices": [
+    "1/3",
+    "1/2",
+    "1/5",
+    "all equal"
+   ],
+   "answer": 1,
+   "explanation": "Half.",
+   "chapter": "class3-maths-fractions"
+  },
+  {
+   "id": "class3-maths-fractions-basic-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-maths-fractions-basic",
+   "prompt": "The bottom number is called the...",
+   "choices": [
+    "product",
+    "numerator",
+    "remainder",
+    "denominator"
+   ],
+   "answer": 3,
+   "explanation": "Denominator.",
+   "chapter": "class3-maths-fractions"
+  },
+  {
+   "id": "class3-maths-fractions-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class3-maths-fractions-equal-compare",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "1/3 of 12 = ?",
+   "answer": 4,
+   "tolerance": 0,
+   "explanation": "12 ÷ 3.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class3-maths-fractions"
+  },
+  {
+   "id": "class3-maths-fractions-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class3-maths-fractions-equal-compare",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "1/2 of 50 = ?",
+   "answer": 25,
+   "tolerance": 0,
+   "explanation": "50 ÷ 2.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class3-maths-fractions"
+  },
+  {
+   "id": "class3-maths-fractions-e09",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class3-maths-fractions-equal-compare",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "3/5 of 20 = ?",
+   "answer": 12,
+   "tolerance": 0,
+   "explanation": "20 ÷ 5 = 4; 4 × 3 = 12.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class3-maths-fractions"
+  },
+  {
+   "id": "class3-maths-fractions-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "class3-maths-fractions-equal-compare",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which fraction equals 1/2?",
+   "choices": [
+    "4/8",
+    "1/4",
+    "2/3",
+    "3/8"
+   ],
+   "answer": 0,
+   "explanation": "4/8 is half of 8.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class3-maths-fractions"
+  },
+  {
+   "id": "class3-maths-fractions-e11",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class3-maths-fractions-equal-compare",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "2/3 of 18 = ?",
+   "answer": 12,
+   "tolerance": 0,
+   "explanation": "18 ÷ 3 = 6; × 2 = 12.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class3-maths-fractions"
+  },
+  {
+   "id": "class3-maths-fractions-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class3-maths-fractions-equal-compare",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A farmer in Bafoussam has 40 chickens.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "1/4 of them are cocks. How many cocks?",
+     "answer": 10,
+     "tolerance": 0,
+     "explanation": "40 ÷ 4.",
+     "id": "class3-maths-fractions-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "3/5 of them are white. How many are white?",
+     "answer": 24,
+     "tolerance": 0,
+     "explanation": "40 ÷ 5 = 8; × 3 = 24.",
+     "id": "class3-maths-fractions-e12-b"
+    }
+   ],
+   "chapter": "class3-maths-fractions"
+  },
+  {
+   "id": "class3-maths-fractions-equal-compare-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-maths-fractions-equal-compare",
+   "prompt": "Class 3 maths equal fractions: 1/2 is equal to...",
+   "choices": [
+    "3/4",
+    "1/4",
+    "2/4",
+    "2/3"
+   ],
+   "answer": 2,
+   "explanation": "2/4.",
+   "chapter": "class3-maths-fractions"
+  },
+  {
+   "id": "class3-maths-fractions-equal-compare-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-maths-fractions-equal-compare",
+   "prompt": "Class 3 maths fraction of a number: 1/4 of 16 is...",
+   "choices": [
+    "2",
+    "4",
+    "8",
+    "12"
+   ],
+   "answer": 1,
+   "explanation": "16 ÷ 4.",
+   "chapter": "class3-maths-fractions"
+  },
+  {
+   "id": "class3-maths-fractions-equal-compare-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-maths-fractions-equal-compare",
+   "prompt": "3/4 of 8 is...",
+   "choices": [
+    "3",
+    "4",
+    "6",
+    "2"
+   ],
+   "answer": 2,
+   "explanation": "8 ÷ 4 = 2; 3 × 2 = 6.",
+   "chapter": "class3-maths-fractions"
+  },
+  {
+   "id": "class3-maths-fractions-equal-compare-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-maths-fractions-equal-compare",
+   "prompt": "Which fraction is the biggest: 3/8, 5/8, 1/8?",
+   "choices": [
+    "3/8",
+    "1/8",
+    "5/8",
+    "equal"
+   ],
+   "answer": 2,
+   "explanation": "Same bottom: bigger top.",
+   "chapter": "class3-maths-fractions"
+  },
+  {
+   "id": "class3-maths-fractions-equal-compare-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-maths-fractions-equal-compare",
+   "prompt": "1/10 of 100 is...",
+   "choices": [
+    "100",
+    "1",
+    "50",
+    "10"
+   ],
+   "answer": 3,
+   "explanation": "100 ÷ 10.",
+   "chapter": "class3-maths-fractions"
+  }
+ ]
+}

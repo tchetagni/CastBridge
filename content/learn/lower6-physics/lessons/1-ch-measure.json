@@ -1,0 +1,927 @@
+{
+ "chapter": "lower6-physics-ch-measure",
+ "lessons": [
+  {
+   "id": "lower6-physics-units",
+   "title": "SI units, prefixes and homogeneity",
+   "minutes": 20,
+   "programRef": "GCE Advanced Level Physics — measurement (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "State the seven SI base units and give the units of common derived quantities in base units",
+    "Use prefixes and convert units correctly, including squared and cubed units",
+    "Test whether an equation is homogeneous (consistent in its units)"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-physics-ch-measure-e01",
+    "lower6-physics-ch-measure-e02",
+    "lower6-physics-ch-measure-e03",
+    "lower6-physics-ch-measure-e04",
+    "lower6-physics-ch-measure-e05",
+    "lower6-physics-ch-measure-e06"
+   ],
+   "selfCheck": [
+    "lower6-physics-units-q1",
+    "lower6-physics-units-q2",
+    "lower6-physics-units-q3",
+    "lower6-physics-units-q4",
+    "lower6-physics-units-q5"
+   ],
+   "reviewNotes": [
+    "Whether the syllabus asks for the candela is unclear; it is listed here only as part of the SI list.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Base and derived units",
+     "md": "The SI system has seven **base units**: metre (m), kilogram (kg), second (s), ampere (A), kelvin (K), mole (mol) and candela (cd). Every other unit is **derived** from them.\n\nExamples: newton N = kg m s⁻²; joule J = N m = kg m² s⁻²; watt W = J s⁻¹ = kg m² s⁻³; pascal Pa = N m⁻² = kg m⁻¹ s⁻²; coulomb C = A s."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Prefixes and conversions",
+     "md": "Giga G = 10⁹, mega M = 10⁶, kilo k = 10³, milli m = 10⁻³, micro μ = 10⁻⁶, nano n = 10⁻⁹. To change units, multiply by the conversion factor written as a fraction equal to 1.\n\nSquared units: 1 cm = 10⁻² m, so 1 cm² = (10⁻²)² m² = 10⁻⁴ m², and 1 cm³ = 10⁻⁶ m³."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 160,
+      "items": [
+       {
+        "t": "rect",
+        "x": 14,
+        "y": 40,
+        "w": 58,
+        "h": 70,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 43,
+        "y": 62,
+        "text": "giga",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 43,
+        "y": 84,
+        "text": "(G)",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 43,
+        "y": 104,
+        "text": "10⁹",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 78,
+        "y": 40,
+        "w": 58,
+        "h": 70,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 107,
+        "y": 62,
+        "text": "mega",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 107,
+        "y": 84,
+        "text": "(M)",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 107,
+        "y": 104,
+        "text": "10⁶",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 142,
+        "y": 40,
+        "w": 58,
+        "h": 70,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 171,
+        "y": 62,
+        "text": "kilo",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 171,
+        "y": 84,
+        "text": "(k)",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 171,
+        "y": 104,
+        "text": "10³",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 206,
+        "y": 40,
+        "w": 58,
+        "h": 70,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 235,
+        "y": 62,
+        "text": "milli",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 235,
+        "y": 84,
+        "text": "(m)",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 235,
+        "y": 104,
+        "text": "10⁻³",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 270,
+        "y": 40,
+        "w": 58,
+        "h": 70,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 299,
+        "y": 62,
+        "text": "micro",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 299,
+        "y": 84,
+        "text": "(μ)",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 299,
+        "y": 104,
+        "text": "10⁻⁶",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 334,
+        "y": 40,
+        "w": 58,
+        "h": 70,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 363,
+        "y": 62,
+        "text": "nano",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 363,
+        "y": 84,
+        "text": "(n)",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 363,
+        "y": 104,
+        "text": "10⁻⁹",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 24,
+        "text": "SI prefixes: multiply the unit by the power of ten",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 140,
+        "text": "1 km = 10³ m      1 mm = 10⁻³ m      1 μs = 10⁻⁶ s",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "SI prefixes used most often in physics.",
+     "alt": "Six boxes showing the prefixes giga, mega, kilo, milli, micro and nano with their powers of ten."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Homogeneity test",
+     "md": "An equation can only be correct if every term has the same units (the same dimensions). To test it: write the units of each term in base units and compare.\n\nPure numbers (2, π, ½) and angles have no units. Homogeneity is **necessary but not sufficient**: a homogeneous equation can still be wrong by a numerical factor."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Converting 250 cm² to m² by dividing by 100 instead of 10 000.\n- Writing the kilogram as a derived unit: it is a base unit (the gram is not).\n- Forgetting to convert km/h to m/s: divide by 3.6.\n- Adding quantities of different units (e.g. a speed plus an acceleration)."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Units of pressure",
+     "statement": "Show that the pascal (1 Pa = 1 N m⁻²) can be written kg m⁻¹ s⁻².",
+     "steps": [
+      "Force: F = ma, so 1 N = 1 kg × 1 m s⁻² = 1 kg m s⁻².",
+      "Pressure = force ÷ area, so 1 Pa = (kg m s⁻²) ÷ m² .",
+      "Subtract the powers of m: m¹ ÷ m² = m⁻¹."
+     ],
+     "answer": "1 Pa = 1 kg m⁻¹ s⁻²"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Is it homogeneous?",
+     "statement": "A student writes v² = u² + 2as and T = 2π√(l/g) for a pendulum. Check both by units (v, u: m s⁻¹; a, g: m s⁻²; s, l: m; T: s).",
+     "steps": [
+      "v² has units m² s⁻² and u² the same. 2as has m s⁻² × m = m² s⁻²: all three terms agree, so v² = u² + 2as is homogeneous.",
+      "For T: l/g has units m ÷ (m s⁻²) = s². The square root gives s, and 2π has no units.",
+      "So both sides of T = 2π√(l/g) are in seconds: the formula is homogeneous."
+     ],
+     "answer": "Both equations are homogeneous (which does not by itself prove they are correct)"
+    }
+   ],
+   "chapter": "lower6-physics-ch-measure"
+  },
+  {
+   "id": "lower6-physics-uncertainties",
+   "title": "Uncertainties and significant figures",
+   "minutes": 25,
+   "programRef": "GCE Advanced Level Physics — measurement (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Distinguish accuracy, precision, random and systematic errors",
+    "Express absolute, fractional and percentage uncertainties and combine them for sums, products and powers",
+    "Quote a result with a sensible number of significant figures and an uncertainty"
+   ],
+   "prerequisites": [
+    "lower6-physics-units"
+   ],
+   "exercises": [
+    "lower6-physics-ch-measure-e07",
+    "lower6-physics-ch-measure-e08",
+    "lower6-physics-ch-measure-e09",
+    "lower6-physics-ch-measure-e10",
+    "lower6-physics-ch-measure-e11",
+    "lower6-physics-ch-measure-e12"
+   ],
+   "selfCheck": [
+    "lower6-physics-uncertainties-q1",
+    "lower6-physics-uncertainties-q2",
+    "lower6-physics-uncertainties-q3",
+    "lower6-physics-uncertainties-q4",
+    "lower6-physics-uncertainties-q5"
+   ],
+   "reviewNotes": [
+    "Rule 'half the range' and 'add percentages' are the simple maximum-uncertainty methods; check whether the syllabus asks for statistical (standard deviation) treatment.",
+    "Number of significant figures conventions in the GCE Board mark schemes should be checked.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Types of error and uncertainty",
+     "md": "**Random errors** scatter readings above and below the true value; repeating and averaging reduces them. **Systematic errors** shift every reading the same way (zero error, wrong calibration) and averaging does not remove them.\n\nThe **absolute uncertainty** Δx has the units of x. The **fractional uncertainty** is Δx/x and the **percentage uncertainty** is Δx/x × 100 %. **Precision** describes the scatter of readings; **accuracy** describes closeness to the true value."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Combining uncertainties",
+     "md": "- Adding or subtracting: **add the absolute uncertainties**.\n- Multiplying or dividing: **add the percentage uncertainties**.\n- Raising to a power n: **multiply** the percentage uncertainty by n (for the square root, by ½).\n- A mean of repeated readings: uncertainty ≈ half the range (a simple method).\n\nThese give a maximum uncertainty; a rough but safe estimate at this level.",
+     "tex": "\\frac{\\Delta (xy)}{xy}=\\frac{\\Delta x}{x}+\\frac{\\Delta y}{y}\\qquad \\frac{\\Delta (x^n)}{x^n}=n\\,\\frac{\\Delta x}{x}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 6,
+      "ymin": 0,
+      "ymax": 6,
+      "grid": 1,
+      "w": 380,
+      "h": 240,
+      "curves": [],
+      "points": [
+       {
+        "x": 1,
+        "y": 0.9,
+        "label": null,
+        "color": "blue"
+       },
+       {
+        "x": 2,
+        "y": 2.2,
+        "label": null,
+        "color": "blue"
+       },
+       {
+        "x": 3,
+        "y": 2.9,
+        "label": null,
+        "color": "blue"
+       },
+       {
+        "x": 4,
+        "y": 4.2,
+        "label": null,
+        "color": "blue"
+       },
+       {
+        "x": 5,
+        "y": 4.9,
+        "label": null,
+        "color": "blue"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 0,
+        "y1": 0,
+        "x2": 6,
+        "y2": 6,
+        "color": "red",
+        "dash": false,
+        "label": "best fit"
+       },
+       {
+        "x1": 0,
+        "y1": 0.4,
+        "x2": 6,
+        "y2": 5.4,
+        "color": "grey",
+        "dash": true
+       },
+       {
+        "x1": 0,
+        "y1": -0.4,
+        "x2": 6,
+        "y2": 6.6,
+        "color": "grey",
+        "dash": true
+       }
+      ],
+      "xlabel": "load / N",
+      "ylabel": "extension / cm"
+     },
+     "caption": "Extension against load: the best-fit line (red) and the steepest and shallowest lines (dashed) give the uncertainty in the gradient.",
+     "alt": "A straight-line graph with five points, the best-fit line and two dashed lines above and below used to estimate the uncertainty in the gradient."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Reporting results",
+     "md": "Give the uncertainty to **1 significant figure** (2 at most) and round the value to the same decimal place. Example: g = 9.77 ± 0.21 m s⁻² is written g = 9.8 ± 0.2 m s⁻².\n\nA final answer should not have more significant figures than the least precise data used in the calculation. Carry extra digits in the middle of a calculation and round only at the end."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Subtracting uncertainties when subtracting quantities: they always **add**.\n- Forgetting to multiply by the power: for T² the percentage uncertainty is doubled.\n- Quoting a result as 9.7692 ± 0.2: the value must be rounded to match the uncertainty.\n- Confusing a systematic error (zero error) with a random one."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Area of a plate",
+     "statement": "A plate measures 20.0 ± 0.1 cm by 5.0 ± 0.1 cm. Find its area with the uncertainty.",
+     "steps": [
+      "Percentage uncertainties: 0.1/20.0 = 0.5 % and 0.1/5.0 = 2.0 %.",
+      "Area = 20.0 × 5.0 = 100 cm². Multiplying, so add the percentages: 0.5 + 2.0 = 2.5 %.",
+      "Absolute uncertainty = 2.5 % of 100 = 2.5 cm², written to 1 s.f. as 3 cm² (or keep 2.5 and quote 100 ± 3)."
+     ],
+     "answer": "A = (100 ± 3) cm² (2.5 %)"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — g from a pendulum",
+     "statement": "A pendulum has length l = 1.000 ± 0.002 m and period T = 2.01 ± 0.02 s. Use g = 4π²l/T² to find g and its uncertainty.",
+     "steps": [
+      "g = 4π² × 1.000 ÷ 2.01² = 9.77 m s⁻².",
+      "Percentage uncertainties: l: 0.2 %. T: 0.02/2.01 = 1.0 %, and T is squared so it counts twice: 2.0 %.",
+      "Total = 0.2 + 2.0 = 2.2 %, so Δg = 2.2 % of 9.77 ≈ 0.21 m s⁻², quoted as 0.2."
+     ],
+     "answer": "g = (9.8 ± 0.2) m s⁻²"
+    }
+   ],
+   "chapter": "lower6-physics-ch-measure"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "lower6-physics-ch-measure-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-physics-units",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Which of these is a base SI unit?",
+   "choices": [
+    "joule",
+    "newton",
+    "kilogram",
+    "pascal"
+   ],
+   "answer": 2,
+   "explanation": "The kilogram is one of the seven base units; N, J and Pa are derived.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-physics-ch-measure"
+  },
+  {
+   "id": "lower6-physics-ch-measure-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-physics-units",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A car travels at 72 km/h. Express this speed in m s⁻¹.",
+   "answer": 20.0,
+   "tolerance": 0,
+   "unit": "m/s",
+   "explanation": "72 km/h = 72 000 m ÷ 3600 s = 20 m s⁻¹ (divide by 3.6).",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-physics-ch-measure"
+  },
+  {
+   "id": "lower6-physics-ch-measure-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-physics-units",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "True or false: 1 cm² equals 10⁻² m².",
+   "answer": false,
+   "explanation": "1 cm² = (10⁻² m)² = 10⁻⁴ m². The factor must be squared.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-physics-ch-measure"
+  },
+  {
+   "id": "lower6-physics-ch-measure-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-physics-units",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "The density of iron is 7800 kg m⁻³. Express it in g cm⁻³.",
+   "answer": 7.8,
+   "tolerance": 0,
+   "unit": "g/cm³",
+   "explanation": "7800 kg = 7.8 × 10⁶ g and 1 m³ = 10⁶ cm³, so density = 7.8 g cm⁻³.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-physics-ch-measure"
+  },
+  {
+   "id": "lower6-physics-ch-measure-e05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-physics-units",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Which expression gives the SI base units of energy (the joule)?",
+   "choices": [
+    "kg m² s⁻³",
+    "kg m s⁻²",
+    "kg m² s⁻²",
+    "kg m⁻¹ s⁻²"
+   ],
+   "answer": 2,
+   "explanation": "E = ½mv²: kg × (m s⁻¹)² = kg m² s⁻². The others are the newton, the watt and the pascal.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-physics-ch-measure"
+  },
+  {
+   "id": "lower6-physics-ch-measure-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-physics-units",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "The drag force on a sphere moving slowly through a fluid is proposed to be F = 6πηrv, where η is the viscosity, r the radius and v the speed.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What are the base units of force F?",
+     "choices": [
+      "kg m⁻¹ s⁻²",
+      "kg m s⁻¹",
+      "kg m² s⁻²",
+      "kg m s⁻²"
+     ],
+     "answer": 3,
+     "explanation": "F = ma gives kg m s⁻².",
+     "id": "lower6-physics-ch-measure-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "η has units kg m⁻¹ s⁻¹. How many metres (power of m) appear in the base units of 6πηrv? Give the net power of m.",
+     "answer": 1,
+     "tolerance": 0,
+     "explanation": "η: m⁻¹; r: m¹; v: m¹ → net m⁻¹⁺¹⁺¹ = m¹ (and kg¹ s⁻¹⁻¹ = s⁻²), i.e. kg m s⁻².",
+     "id": "lower6-physics-ch-measure-e06-b"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "The equation F = 6πηrv is therefore homogeneous.",
+     "answer": true,
+     "explanation": "Its units are kg m s⁻², the same as a force.",
+     "id": "lower6-physics-ch-measure-e06-c"
+    }
+   ],
+   "chapter": "lower6-physics-ch-measure"
+  },
+  {
+   "id": "lower6-physics-units-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-units",
+   "prompt": "The unit kW h (kilowatt-hour) measures",
+   "choices": [
+    "energy",
+    "force",
+    "power",
+    "charge"
+   ],
+   "answer": 0,
+   "explanation": "Power × time = energy: 1 kW h = 3.6 × 10⁶ J.",
+   "chapter": "lower6-physics-ch-measure"
+  },
+  {
+   "id": "lower6-physics-units-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-units",
+   "prompt": "A volume of 2.5 × 10⁵ cm³ is equal to",
+   "choices": [
+    "25 m³",
+    "2.5 m³",
+    "0.025 m³",
+    "0.25 m³"
+   ],
+   "answer": 3,
+   "explanation": "1 cm³ = 10⁻⁶ m³, so 2.5 × 10⁵ cm³ = 0.25 m³.",
+   "chapter": "lower6-physics-ch-measure"
+  },
+  {
+   "id": "lower6-physics-units-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-units",
+   "prompt": "Which equation is NOT homogeneous? (s = distance, t = time, v = speed, a = acceleration)",
+   "choices": [
+    "v = at",
+    "s = ½at²",
+    "s = v + at",
+    "s = vt"
+   ],
+   "answer": 2,
+   "explanation": "v and at are both speeds, so v + at is a speed; s is a length, so the two sides have different units.",
+   "chapter": "lower6-physics-ch-measure"
+  },
+  {
+   "id": "lower6-physics-units-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-units",
+   "prompt": "A homogeneous equation is",
+   "choices": [
+    "one with only base units",
+    "one whose terms all have the same units",
+    "one with no numbers in it",
+    "always correct"
+   ],
+   "answer": 1,
+   "explanation": "Homogeneity checks units only; numerical factors such as ½ are not tested.",
+   "chapter": "lower6-physics-ch-measure"
+  },
+  {
+   "id": "lower6-physics-units-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-units",
+   "prompt": "1 μs is",
+   "choices": [
+    "10⁻³ s",
+    "10⁻⁶ s",
+    "10⁶ s",
+    "10⁻⁹ s"
+   ],
+   "answer": 1,
+   "explanation": "Micro = 10⁻⁶.",
+   "chapter": "lower6-physics-ch-measure"
+  },
+  {
+   "id": "lower6-physics-ch-measure-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-physics-uncertainties",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Which type of error is a ruler worn so that it starts at 1 mm instead of 0?",
+   "choices": [
+    "a precision error",
+    "a parallax-free error",
+    "a random error",
+    "a systematic error"
+   ],
+   "answer": 3,
+   "explanation": "Every reading is shifted by the same amount, which is a systematic (zero) error.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-physics-ch-measure"
+  },
+  {
+   "id": "lower6-physics-ch-measure-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-physics-uncertainties",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A length is measured as 25.0 ± 0.5 cm. What is the percentage uncertainty?",
+   "answer": 2.0,
+   "tolerance": 0,
+   "unit": "%",
+   "explanation": "0.5/25.0 × 100 = 2.0 %.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-physics-ch-measure"
+  },
+  {
+   "id": "lower6-physics-ch-measure-e09",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-physics-uncertainties",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Two lengths 12.0 ± 0.2 cm and 8.0 ± 0.1 cm are added. What is the absolute uncertainty in the total (in cm)?",
+   "answer": 0.3,
+   "tolerance": 0.001,
+   "unit": "cm",
+   "explanation": "When adding, add the absolute uncertainties: 0.2 + 0.1 = 0.3 cm.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-physics-ch-measure"
+  },
+  {
+   "id": "lower6-physics-ch-measure-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-physics-uncertainties",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "The radius of a sphere is 2.0 ± 0.1 cm. Its volume is proportional to r³. What is the percentage uncertainty in the volume?",
+   "answer": 15,
+   "tolerance": 0,
+   "unit": "%",
+   "explanation": "r³ → multiply the percentage uncertainty by 3: (0.1/2.0 = 5 %) × 3 = 15 %.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-physics-ch-measure"
+  },
+  {
+   "id": "lower6-physics-ch-measure-e11",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-physics-uncertainties",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Five readings of a length (cm): 12.4, 12.6, 12.5, 12.7, 12.3. Find half the range, as an estimate of the uncertainty of the mean (in cm).",
+   "answer": 0.1999999999999993,
+   "tolerance": 0.001,
+   "unit": "cm",
+   "explanation": "Range = 12.7 − 12.3 = 0.4 cm, half the range = 0.2 cm (mean 12.5 cm).",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-physics-ch-measure"
+  },
+  {
+   "id": "lower6-physics-ch-measure-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-physics-uncertainties",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "In an experiment to find the density of a cylinder: mass m = 150.0 ± 0.5 g, diameter d = 2.00 ± 0.02 cm, length h = 6.00 ± 0.05 cm. Density ρ = 4m/(πd²h).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calculate ρ in g cm⁻³ (3 s.f.).",
+     "answer": 7.96,
+     "tolerance": 0.01,
+     "explanation": "ρ = 4 × 150.0 ÷ (π × 2.00² × 6.00) = 7.96 g cm⁻³.",
+     "unit": "g/cm³",
+     "id": "lower6-physics-ch-measure-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Calculate the percentage uncertainty in ρ (add m once, d twice, h once).",
+     "answer": 3.17,
+     "tolerance": 0.1,
+     "explanation": "m: 0.33 %; d: 1.0 % × 2 = 2.0 %; h: 0.83 %. Total = 3.17 % ≈ 3.2 %.",
+     "unit": "%",
+     "id": "lower6-physics-ch-measure-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Calculate the absolute uncertainty in ρ (g cm⁻³, 2 s.f.).",
+     "answer": 0.25,
+     "tolerance": 0.02,
+     "explanation": "3.17 % of 7.96 = 0.25 g cm⁻³, so ρ = 8.0 ± 0.3 g cm⁻³ (to match the uncertainty).",
+     "unit": "g/cm³",
+     "id": "lower6-physics-ch-measure-e12-c"
+    }
+   ],
+   "chapter": "lower6-physics-ch-measure"
+  },
+  {
+   "id": "lower6-physics-uncertainties-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-uncertainties",
+   "prompt": "A percentage uncertainty of 4 % in a speed v. What is the percentage uncertainty in v²?",
+   "choices": [
+    "2 %",
+    "16 %",
+    "4 %",
+    "8 %"
+   ],
+   "answer": 3,
+   "explanation": "A power n multiplies the percentage uncertainty by n: 2 × 4 % = 8 %.",
+   "chapter": "lower6-physics-ch-measure"
+  },
+  {
+   "id": "lower6-physics-uncertainties-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-uncertainties",
+   "prompt": "The best way to reduce a RANDOM error is to",
+   "choices": [
+    "use a different zero",
+    "round the answer more",
+    "add the uncertainties",
+    "repeat the readings and take the mean"
+   ],
+   "answer": 3,
+   "explanation": "Random scatter averages out; systematic errors do not.",
+   "chapter": "lower6-physics-ch-measure"
+  },
+  {
+   "id": "lower6-physics-uncertainties-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-uncertainties",
+   "prompt": "Which result is correctly quoted?",
+   "choices": [
+    "(4 ± 0.2) m",
+    "(4.512 ± 0.2) m",
+    "(4.5 ± 0.213) m",
+    "(4.5 ± 0.2) m"
+   ],
+   "answer": 3,
+   "explanation": "The uncertainty has 1 s.f. and the value is rounded to the same decimal place.",
+   "chapter": "lower6-physics-ch-measure"
+  },
+  {
+   "id": "lower6-physics-uncertainties-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-uncertainties",
+   "prompt": "Lengths a = 10.0 ± 0.1 cm and b = 4.0 ± 0.1 cm are subtracted. The uncertainty in a − b is",
+   "choices": [
+    "0.1 cm",
+    "0.2 cm",
+    "0.0 cm",
+    "0.4 cm"
+   ],
+   "answer": 1,
+   "explanation": "Uncertainties always add, even in a subtraction.",
+   "chapter": "lower6-physics-ch-measure"
+  },
+  {
+   "id": "lower6-physics-uncertainties-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-uncertainties",
+   "prompt": "Precision of a set of readings refers to",
+   "choices": [
+    "how close the readings are to each other",
+    "the number of readings",
+    "the size of the zero error",
+    "how close the mean is to the true value"
+   ],
+   "answer": 0,
+   "explanation": "Precision = scatter (repeatability); accuracy = closeness to the true value.",
+   "chapter": "lower6-physics-ch-measure"
+  }
+ ]
+}

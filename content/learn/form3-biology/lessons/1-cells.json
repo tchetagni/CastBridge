@@ -1,0 +1,1201 @@
+{
+ "chapter": "form3-biology-cells",
+ "lessons": [
+  {
+   "id": "form3-biology-microscope",
+   "title": "The light microscope and measuring cells",
+   "minutes": 30,
+   "programRef": "Form 3 Biology — Microscope, cells and organisation (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Name the parts of a light microscope and state their functions.",
+    "Calculate magnification and the actual size of a specimen.",
+    "Describe good rules for biological drawings and use units such as mm and µm."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form3-biology-cells-e01",
+    "form3-biology-cells-e02",
+    "form3-biology-cells-e03",
+    "form3-biology-cells-e04",
+    "form3-biology-cells-e05",
+    "form3-biology-cells-e06"
+   ],
+   "selfCheck": [
+    "form3-biology-microscope-q1",
+    "form3-biology-microscope-q2",
+    "form3-biology-microscope-q3",
+    "form3-biology-microscope-q4",
+    "form3-biology-microscope-q5"
+   ],
+   "reviewNotes": [
+    "Content overlaps in a simplified form with form4-biology (microscope): intentional, as Form 3 is the first biology course. Check whether µm and the condenser/iris diaphragm are required.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "How a light microscope works",
+     "md": "A **light microscope** shines light **through a thin specimen** on the **stage**. The **objective lens** forms an enlarged image which the **eyepiece lens** enlarges again. A **mirror or lamp** supplies light; the **coarse** and **fine focusing knobs** move the lens to make the image sharp. **Total magnification = eyepiece magnification × objective magnification**, e.g. ×10 × ×40 = ×400."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 230,
+      "items": [
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 205,
+        "w": 150,
+        "h": 14,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey"
+       },
+       {
+        "t": "line",
+        "x1": 185,
+        "y1": 205,
+        "x2": 185,
+        "y2": 70,
+        "color": "grey",
+        "width": 10
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 55,
+        "w": 90,
+        "h": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey",
+        "radius": 3
+       },
+       {
+        "t": "line",
+        "x1": 125,
+        "y1": 60,
+        "x2": 125,
+        "y2": 40,
+        "color": "ink",
+        "width": 14
+       },
+       {
+        "t": "line",
+        "x1": 122,
+        "y1": 70,
+        "x2": 122,
+        "y2": 130,
+        "color": "grey",
+        "width": 12
+       },
+       {
+        "t": "rect",
+        "x": 112,
+        "y": 130,
+        "w": 20,
+        "h": 10,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightblue"
+       },
+       {
+        "t": "rect",
+        "x": 80,
+        "y": 155,
+        "w": 110,
+        "h": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey"
+       },
+       {
+        "t": "circle",
+        "cx": 120,
+        "cy": 195,
+        "r": 8,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "yellow"
+       },
+       {
+        "t": "line",
+        "x1": 125,
+        "y1": 36,
+        "x2": 260,
+        "y2": 22,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 264,
+        "y": 26,
+        "text": "eyepiece lens",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 122,
+        "y1": 100,
+        "x2": 260,
+        "y2": 85,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 264,
+        "y": 89,
+        "text": "body tube",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 122,
+        "y1": 136,
+        "x2": 260,
+        "y2": 125,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 264,
+        "y": 129,
+        "text": "objective lens",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 190,
+        "y1": 158,
+        "x2": 260,
+        "y2": 160,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 264,
+        "y": 164,
+        "text": "stage",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 128,
+        "y1": 196,
+        "x2": 260,
+        "y2": 200,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 264,
+        "y": 204,
+        "text": "mirror or lamp",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 185,
+        "y1": 120,
+        "x2": 260,
+        "y2": 50,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 264,
+        "y": 54,
+        "text": "arm",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A light microscope.",
+     "alt": "A microscope with eyepiece lens, body tube, objective lens, arm, stage and mirror or lamp labelled."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Sizes and units",
+     "md": "**Magnification = image size ÷ actual size**, so **actual size = image size ÷ magnification**. Use one unit: **1 mm = 1000 µm** (micrometres). Most animal and plant cells are 10 to 100 µm across; the smallest thing seen with a light microscope is about 0.2 µm. Example: a drawing 45 mm wide at ×150 is 45 ÷ 150 = **0.30 mm = 300 µm** in real life."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Using the microscope and drawing",
+     "md": "Start with the **lowest-power objective**, lower it close to the slide while looking from the side, then focus **upwards**. Change to a higher power and use only the **fine focus**. **Drawing rules**: use a sharp pencil; draw large, clear single lines, no shading; draw only what you see; label with **ruled lines that do not cross**; give a **title** and the magnification."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Focusing **downwards** while looking through the eyepiece can break the slide.\n- Do not add the magnifications: **multiply** them.\n- Do not forget to convert mm to µm: 0.3 mm is 300 µm, not 3 µm."
+    },
+    {
+     "type": "example",
+     "title": "Actual size",
+     "statement": "A student draws a cell 20 mm long and the magnification is ×400. Find the actual length in mm and in µm.",
+     "steps": [
+      "Actual = 20 ÷ 400 = 0.05 mm.",
+      "0.05 × 1000 = 50 µm."
+     ],
+     "answer": "0.05 mm = 50 µm"
+    },
+    {
+     "type": "example",
+     "title": "Total magnification",
+     "statement": "A microscope has eyepiece ×10 and objectives ×4, ×10 and ×40. Give the total magnifications.",
+     "steps": [
+      "Multiply each objective by 10.",
+      "×4 gives ×40; ×10 gives ×100; ×40 gives ×400."
+     ],
+     "answer": "×40, ×100 and ×400"
+    },
+    {
+     "type": "exercise",
+     "ref": "form3-biology-cells-e01"
+    }
+   ],
+   "chapter": "form3-biology-cells"
+  },
+  {
+   "id": "form3-biology-cell-structure",
+   "title": "Cell structure and organisation",
+   "minutes": 30,
+   "programRef": "Form 3 Biology — Microscope, cells and organisation (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Name the parts of animal and plant cells and state their functions.",
+    "Explain how specialised cells are adapted to their jobs.",
+    "Describe the levels of organisation in living things."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form3-biology-cells-e07",
+    "form3-biology-cells-e08",
+    "form3-biology-cells-e09",
+    "form3-biology-cells-e10",
+    "form3-biology-cells-e11",
+    "form3-biology-cells-e12"
+   ],
+   "selfCheck": [
+    "form3-biology-cell-structure-q1",
+    "form3-biology-cell-structure-q2",
+    "form3-biology-cell-structure-q3",
+    "form3-biology-cell-structure-q4",
+    "form3-biology-cell-structure-q5"
+   ],
+   "reviewNotes": [
+    "Some syllabuses introduce organelles (ribosomes, endoplasmic reticulum) only later; check the level. Bacterial cell mention is minimal.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Parts of a cell",
+     "md": "- **Cell membrane**: controls what enters and leaves.\n- **Cytoplasm**: where most chemical reactions happen.\n- **Nucleus**: contains the **DNA** (genes) and controls the cell.\n- **Mitochondria**: release energy in **respiration**.\n\n**Plant cells** also have a **cell wall** of **cellulose** (support), **chloroplasts** with chlorophyll (photosynthesis) and a large **permanent vacuole** with cell sap. Animal cells have none of these three, but small temporary vacuoles. **Bacterial cells** have a cell wall but **no nucleus**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 138,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 10,
+        "w": 144.0,
+        "h": 52,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightorange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 82.0,
+        "y": 33.0,
+        "text": "red blood cell",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 82.0,
+        "y": 47.0,
+        "text": "carries oxygen",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 168.0,
+        "y": 10,
+        "w": 144.0,
+        "h": 52,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightyellow",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 33.0,
+        "text": "white blood cell",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 47.0,
+        "text": "fights germs",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 326.0,
+        "y": 10,
+        "w": 144.0,
+        "h": 52,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightblue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 398.0,
+        "y": 33.0,
+        "text": "nerve cell",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 398.0,
+        "y": 47.0,
+        "text": "carries impulses",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 76,
+        "w": 144.0,
+        "h": 52,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgreen",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 82.0,
+        "y": 99.0,
+        "text": "root hair cell",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 82.0,
+        "y": 113.0,
+        "text": "absorbs water",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 168.0,
+        "y": 76,
+        "w": 144.0,
+        "h": 52,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgreen",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 99.0,
+        "text": "palisade cell",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 113.0,
+        "text": "photosynthesis",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 326.0,
+        "y": 76,
+        "w": 144.0,
+        "h": 52,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgrey",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 398.0,
+        "y": 99.0,
+        "text": "sperm cell",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 398.0,
+        "y": 113.0,
+        "text": "fertilises the egg",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Six specialised cells and their jobs.",
+     "alt": "Six boxes: red blood cell carries oxygen; white blood cell fights germs; nerve cell carries impulses; root hair cell absorbs water; palisade cell does photosynthesis; sperm cell fertilises the egg."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Specialised cells: structure fits function",
+     "md": "A **red blood cell** has no nucleus and is a flattened disc, giving more room for **haemoglobin** and a large surface area. A **root hair cell** has a long thin extension that increases the surface for absorbing water. A **palisade cell** is packed with chloroplasts near the top of the leaf. A **nerve cell** has a long fibre to carry messages. A **sperm cell** has a tail to swim and many mitochondria."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 126,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 41.0,
+        "w": 80.8,
+        "h": 44,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightblue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 50.4,
+        "y": 60.0,
+        "text": "cell",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 50.4,
+        "y": 74.0,
+        "text": "(muscle cell)",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 93.8,
+        "y1": 63.0,
+        "x2": 101.8,
+        "y2": 63.0,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 104.8,
+        "y": 41.0,
+        "w": 80.8,
+        "h": 44,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgreen",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 145.2,
+        "y": 60.0,
+        "text": "tissue",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 145.2,
+        "y": 74.0,
+        "text": "(muscle)",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 188.6,
+        "y1": 63.0,
+        "x2": 196.6,
+        "y2": 63.0,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 199.6,
+        "y": 41.0,
+        "w": 80.8,
+        "h": 44,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightorange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 60.0,
+        "text": "organ",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 74.0,
+        "text": "(heart)",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 283.4,
+        "y1": 63.0,
+        "x2": 291.4,
+        "y2": 63.0,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 294.4,
+        "y": 41.0,
+        "w": 80.8,
+        "h": 44,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightyellow",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 334.79999999999995,
+        "y": 60.0,
+        "text": "system",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 334.79999999999995,
+        "y": 74.0,
+        "text": "(circulatory)",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 378.2,
+        "y1": 63.0,
+        "x2": 386.2,
+        "y2": 63.0,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 389.2,
+        "y": 41.0,
+        "w": 80.8,
+        "h": 44,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgrey",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 429.59999999999997,
+        "y": 60.0,
+        "text": "organism",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 429.59999999999997,
+        "y": 74.0,
+        "text": "(person)",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Levels of organisation from cell to organism.",
+     "alt": "Five boxes joined by arrows: cell (muscle cell), tissue (muscle), organ (heart), system (circulatory), organism (person)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- The cell wall is **not** the cell membrane: all cells have a membrane, only plants and bacteria have a wall.\n- A tissue is a group of **similar cells**; an organ has **several tissues**.\n- Mature red blood cells have no nucleus, but they are still cells."
+    },
+    {
+     "type": "example",
+     "title": "Identify the cell",
+     "statement": "A cell has a nucleus, a cell wall, many chloroplasts and a large vacuole. Is it an animal or a plant cell? Which job does it probably do?",
+     "steps": [
+      "The cell wall, chloroplasts and large vacuole are plant features.",
+      "Many chloroplasts show it makes food by photosynthesis, like a palisade cell."
+     ],
+     "answer": "A plant cell, probably a palisade cell, making food."
+    },
+    {
+     "type": "example",
+     "title": "Adaptation",
+     "statement": "Explain how a red blood cell is adapted to carry oxygen.",
+     "steps": [
+      "It contains haemoglobin which combines with oxygen.",
+      "It has no nucleus and is disc-shaped, giving more space for haemoglobin and a large surface area."
+     ],
+     "answer": "Haemoglobin, no nucleus, large surface area."
+    },
+    {
+     "type": "exercise",
+     "ref": "form3-biology-cells-e07"
+    }
+   ],
+   "chapter": "form3-biology-cells"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form3-biology-cells-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-biology-microscope",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which part of the microscope should be used FIRST when looking for a specimen?",
+   "choices": [
+    "the lowest-power objective lens",
+    "the highest-power objective lens",
+    "the mirror only",
+    "the stage clips only"
+   ],
+   "answer": 0,
+   "explanation": "It has the widest field of view.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-biology-cells"
+  },
+  {
+   "id": "form3-biology-cells-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-biology-microscope",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An eyepiece lens is ×10 and the objective lens is ×25. What is the total magnification?",
+   "answer": 250,
+   "tolerance": 0,
+   "explanation": "10 × 25 = 250.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-biology-cells"
+  },
+  {
+   "id": "form3-biology-cells-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-biology-microscope",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A cell is drawn 30 mm wide at a magnification of ×150. What is its actual width in µm?",
+   "answer": 200,
+   "tolerance": 0,
+   "unit": "µm",
+   "explanation": "30 ÷ 150 = 0.2 mm = 200 µm.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-biology-cells"
+  },
+  {
+   "id": "form3-biology-cells-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "form3-biology-microscope",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Biological drawings should be done with:",
+   "choices": [
+    "coloured pens and shading",
+    "thick wax crayons",
+    "a ruler to draw every part",
+    "a sharp pencil and clear single lines"
+   ],
+   "answer": 3,
+   "explanation": "Clear, accurate lines.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form3-biology-cells"
+  },
+  {
+   "id": "form3-biology-cells-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form3-biology-microscope",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Describe how to focus a microscope on a slide, starting with the objective lens.",
+   "model": "Place the slide on the stage, turn to the lowest-power objective and lower it close to the slide while looking from the side; then look through the eyepiece and focus upwards with the coarse knob; use the fine knob to sharpen the image and change to a stronger lens only after centring the specimen.",
+   "rubric": [
+    "1 mark: lowest power first",
+    "1 mark: focus upwards, away from the slide",
+    "1 mark: fine focus for high power"
+   ],
+   "explanation": "Place the slide on the stage, turn to the lowest-power objective and lower it close to the slide while looking from the side; then look through the eyepiece and focus upwards with the coarse knob; use the fine knob to sharpen the image and change to a stronger lens only after centring the specimen.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-biology-cells"
+  },
+  {
+   "id": "form3-biology-cells-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form3-biology-microscope",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A plant cell image measured 36 mm across in a photograph labelled ×300.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Actual width of the cell in mm.",
+     "answer": 0.12,
+     "tolerance": 0.001,
+     "explanation": "36 ÷ 300 = 0.12 mm.",
+     "unit": "mm",
+     "id": "form3-biology-cells-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Actual width in µm.",
+     "answer": 120,
+     "tolerance": 0.5,
+     "explanation": "0.12 × 1000 = 120 µm.",
+     "unit": "µm",
+     "id": "form3-biology-cells-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "To make the image larger, you should:",
+     "choices": [
+      "add a thicker slide",
+      "use a higher-power objective",
+      "use a lower-power objective",
+      "close the lamp"
+     ],
+     "answer": 1,
+     "explanation": "Total magnification would increase.",
+     "id": "form3-biology-cells-e06-c"
+    }
+   ],
+   "chapter": "form3-biology-cells"
+  },
+  {
+   "id": "form3-biology-microscope-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-microscope",
+   "prompt": "The lens nearest to the specimen is the:",
+   "choices": [
+    "condenser",
+    "mirror",
+    "objective lens",
+    "eyepiece lens"
+   ],
+   "answer": 2,
+   "explanation": "It forms the first image.",
+   "chapter": "form3-biology-cells"
+  },
+  {
+   "id": "form3-biology-microscope-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-microscope",
+   "prompt": "1 mm is equal to:",
+   "choices": [
+    "10 000 µm",
+    "100 µm",
+    "1000 µm",
+    "10 µm"
+   ],
+   "answer": 2,
+   "explanation": "Kilo to milli: 10³.",
+   "chapter": "form3-biology-cells"
+  },
+  {
+   "id": "form3-biology-microscope-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-microscope",
+   "prompt": "A drawing that is 10 mm across of a cell that is really 0.1 mm across has a magnification of:",
+   "choices": [
+    "×100",
+    "×0.01",
+    "×1000",
+    "×10"
+   ],
+   "answer": 0,
+   "explanation": "10 ÷ 0.1.",
+   "chapter": "form3-biology-cells"
+  },
+  {
+   "id": "form3-biology-microscope-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-microscope",
+   "prompt": "Why must a specimen be thin?",
+   "choices": [
+    "so it fits the stage",
+    "so it floats",
+    "so it is cheaper",
+    "so that light can pass through it"
+   ],
+   "answer": 3,
+   "explanation": "A thick specimen blocks light.",
+   "chapter": "form3-biology-cells"
+  },
+  {
+   "id": "form3-biology-microscope-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-microscope",
+   "prompt": "Which should be used to sharpen the image at high power?",
+   "choices": [
+    "the stage",
+    "the mirror",
+    "the fine focus knob",
+    "the coarse focus knob"
+   ],
+   "answer": 2,
+   "explanation": "To avoid hitting the slide.",
+   "chapter": "form3-biology-cells"
+  },
+  {
+   "id": "form3-biology-cells-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-biology-cell-structure",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which part of a cell contains the genes?",
+   "choices": [
+    "cytoplasm",
+    "cell wall",
+    "nucleus",
+    "vacuole"
+   ],
+   "answer": 2,
+   "explanation": "DNA is in the nucleus.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-biology-cells"
+  },
+  {
+   "id": "form3-biology-cells-e08",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "form3-biology-cell-structure",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each cell part with its function.",
+   "pairs": [
+    [
+     "mitochondria",
+     "release energy by respiration"
+    ],
+    [
+     "chloroplast",
+     "carries out photosynthesis"
+    ],
+    [
+     "cell wall",
+     "supports a plant cell"
+    ],
+    [
+     "cell membrane",
+     "controls what enters and leaves"
+    ]
+   ],
+   "explanation": "Standard functions.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form3-biology-cells"
+  },
+  {
+   "id": "form3-biology-cells-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "form3-biology-cell-structure",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An animal cell has a cell wall made of cellulose.",
+   "answer": false,
+   "explanation": "Only plant cells do.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-biology-cells"
+  },
+  {
+   "id": "form3-biology-cells-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "form3-biology-cell-structure",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Cells of the same kind that work together form a:",
+   "choices": [
+    "nucleus",
+    "system",
+    "tissue",
+    "organ"
+   ],
+   "answer": 2,
+   "explanation": "Cells, then tissue, then organ.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form3-biology-cells"
+  },
+  {
+   "id": "form3-biology-cells-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form3-biology-cell-structure",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Describe two ways in which a root hair cell is adapted for absorbing water.",
+   "model": "It has a long thin extension that gives a large surface area, and a thin wall; it has a large vacuole with a concentrated cell sap, helping water to enter by osmosis.",
+   "rubric": [
+    "1 mark each, maximum 2"
+   ],
+   "explanation": "It has a long thin extension that gives a large surface area, and a thin wall; it has a large vacuole with a concentrated cell sap, helping water to enter by osmosis.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-biology-cells"
+  },
+  {
+   "id": "form3-biology-cells-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form3-biology-cell-structure",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Arrange the following: organ, cell, organism, tissue, system. Then use the heart as an example.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The correct order from smallest to largest is:",
+     "choices": [
+      "cell, organ, tissue, system, organism",
+      "tissue, cell, organ, organism, system",
+      "cell, tissue, organ, system, organism",
+      "organ, cell, system, tissue, organism"
+     ],
+     "answer": 2,
+     "explanation": "Levels of organisation.",
+     "id": "form3-biology-cells-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "In the human body the heart is classed as an:",
+     "choices": [
+      "cell",
+      "tissue",
+      "organ",
+      "organism"
+     ],
+     "answer": 2,
+     "explanation": "It has muscle and other tissues.",
+     "id": "form3-biology-cells-e12-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Name the system that the heart belongs to and one other organ in that system.",
+     "model": "The circulatory system; the blood vessels (arteries, veins) are also part of it.",
+     "rubric": [
+      "1 mark: circulatory system",
+      "1 mark: another correct part"
+     ],
+     "explanation": "The circulatory system; the blood vessels (arteries, veins) are also part of it.",
+     "id": "form3-biology-cells-e12-c"
+    }
+   ],
+   "chapter": "form3-biology-cells"
+  },
+  {
+   "id": "form3-biology-cell-structure-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-cell-structure",
+   "prompt": "The organelle that releases energy for the cell is the:",
+   "choices": [
+    "mitochondrion",
+    "chloroplast",
+    "nucleus",
+    "vacuole"
+   ],
+   "answer": 0,
+   "explanation": "Respiration happens there.",
+   "chapter": "form3-biology-cells"
+  },
+  {
+   "id": "form3-biology-cell-structure-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-cell-structure",
+   "prompt": "Which of these structures would be missing from a human cheek cell?",
+   "choices": [
+    "cell membrane",
+    "nucleus",
+    "mitochondrion",
+    "chloroplast"
+   ],
+   "answer": 3,
+   "explanation": "For photosynthesis.",
+   "chapter": "form3-biology-cells"
+  },
+  {
+   "id": "form3-biology-cell-structure-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-cell-structure",
+   "prompt": "A group of different tissues working together is an:",
+   "choices": [
+    "organ",
+    "organism",
+    "atom",
+    "organelle"
+   ],
+   "answer": 0,
+   "explanation": "For example the stomach.",
+   "chapter": "form3-biology-cells"
+  },
+  {
+   "id": "form3-biology-cell-structure-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-cell-structure",
+   "prompt": "Red blood cells contain the pigment:",
+   "choices": [
+    "haemoglobin",
+    "iodine",
+    "chlorophyll",
+    "melanin"
+   ],
+   "answer": 0,
+   "explanation": "It carries oxygen.",
+   "chapter": "form3-biology-cells"
+  },
+  {
+   "id": "form3-biology-cell-structure-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-cell-structure",
+   "prompt": "The permanent vacuole of a plant cell contains:",
+   "choices": [
+    "blood",
+    "cell sap",
+    "chlorophyll",
+    "DNA"
+   ],
+   "answer": 1,
+   "explanation": "Water with sugars and salts.",
+   "chapter": "form3-biology-cells"
+  }
+ ]
+}

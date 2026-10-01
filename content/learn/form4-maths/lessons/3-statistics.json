@@ -1,0 +1,1826 @@
+{
+ "chapter": "form4-maths-statistics",
+ "lessons": [
+  {
+   "id": "form4-maths-cumulative-frequency",
+   "title": "Cumulative frequency, median and quartiles",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 4 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Build a cumulative frequency table from grouped data",
+    "Draw a cumulative frequency curve (ogive)",
+    "Estimate the median, quartiles and interquartile range",
+    "Use the curve to estimate how many values lie above or below a given value"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form4-maths-statistics-e01",
+    "form4-maths-statistics-e02",
+    "form4-maths-statistics-e03",
+    "form4-maths-statistics-e04",
+    "form4-maths-statistics-e05",
+    "form4-maths-statistics-e06"
+   ],
+   "selfCheck": [
+    "form4-maths-cumulative-frequency-q1",
+    "form4-maths-cumulative-frequency-q2",
+    "form4-maths-cumulative-frequency-q3",
+    "form4-maths-cumulative-frequency-q4",
+    "form4-maths-cumulative-frequency-q5"
+   ],
+   "reviewNotes": [
+    "The curve is drawn as joined straight segments between the plotted points; students in exams draw a smooth curve.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Cumulative frequency",
+     "md": "For grouped data the **cumulative frequency** is the running total of the frequencies, up to the **upper boundary** of each class. Marks of 80 pupils in classes of width 10 with frequencies 4, 10, 18, 24, 14, 8, 2 give cumulative frequencies 4, 14, 32, 56, 70, 78, 80 at marks 10, 20, 30, 40, 50, 60, 70."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "The curve and the estimates",
+     "md": "Plot the cumulative frequency against the **upper boundary** and join the points with a smooth curve (or straight segments in a polygon), starting at (0, 0). The **median** is the value at n ÷ 2, the **lower quartile Q₁** at n ÷ 4 and the **upper quartile Q₃** at 3n ÷ 4. Draw a horizontal line from the frequency to the curve, then down to the axis. The **interquartile range** is Q₃ − Q₁."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 70,
+      "ymin": 0,
+      "ymax": 90,
+      "grid": 10,
+      "w": 420,
+      "h": 280,
+      "curves": [],
+      "points": [
+       {
+        "x": 10,
+        "y": 4,
+        "label": null,
+        "color": "blue"
+       },
+       {
+        "x": 20,
+        "y": 14,
+        "label": null,
+        "color": "blue"
+       },
+       {
+        "x": 30,
+        "y": 32,
+        "label": null,
+        "color": "blue"
+       },
+       {
+        "x": 40,
+        "y": 56,
+        "label": null,
+        "color": "blue"
+       },
+       {
+        "x": 50,
+        "y": 70,
+        "label": null,
+        "color": "blue"
+       },
+       {
+        "x": 60,
+        "y": 78,
+        "label": null,
+        "color": "blue"
+       },
+       {
+        "x": 70,
+        "y": 80,
+        "label": null,
+        "color": "blue"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 0,
+        "y1": 0,
+        "x2": 10,
+        "y2": 4,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 10,
+        "y1": 4,
+        "x2": 20,
+        "y2": 14,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 20,
+        "y1": 14,
+        "x2": 30,
+        "y2": 32,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 30,
+        "y1": 32,
+        "x2": 40,
+        "y2": 56,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 40,
+        "y1": 56,
+        "x2": 50,
+        "y2": 70,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 50,
+        "y1": 70,
+        "x2": 60,
+        "y2": 78,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 60,
+        "y1": 78,
+        "x2": 70,
+        "y2": 80,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 0,
+        "y1": 40,
+        "x2": 33.33,
+        "y2": 40,
+        "color": "red",
+        "dash": true
+       },
+       {
+        "x1": 33.33,
+        "y1": 40,
+        "x2": 33.33,
+        "y2": 0,
+        "color": "red",
+        "dash": true
+       }
+      ],
+      "xlabel": "mark",
+      "ylabel": "cumulative frequency"
+     },
+     "caption": "A cumulative frequency graph for 80 marks with the median read at 33.3.",
+     "alt": "A rising curve from 0 to 80 with dashed lines showing the median at cumulative frequency 40."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Reading the curve",
+     "md": "To find how many pupils scored more than 40: read the cumulative frequency at 40 (56) and subtract from the total: 80 − 56 = 24. By interpolating inside the class we may calculate: median position 40, so median = 30 + (40 − 32) ÷ 24 × 10 = 33.3. Q₁ at position 20: 20 + (20 − 14) ÷ 18 × 10 = 23.3. Q₃ at position 60: 42.9."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Plotting at the middle of the class instead of the upper boundary.\n- Forgetting to start the curve at zero.\n- Using the frequency (not the cumulative frequency) to find the median position."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: median and quartiles",
+     "statement": "From the cumulative frequencies 4, 14, 32, 56, 70, 78, 80 for classes of width 10 from 0 to 70, estimate the median, the quartiles and the interquartile range.",
+     "steps": [
+      "Median at position 40 lies in the class 30–40: 30 + (40 − 32) ÷ 24 × 10 = 33.3.",
+      "Q₁ at position 20 is in 20–30: 20 + (20 − 14) ÷ 18 × 10 = 23.3. Q₃ at 60 is in 40–50: 40 + (60 − 56) ÷ 14 × 10 = 42.9.",
+      "IQR = 42.9 − 23.3 = 19.5."
+     ],
+     "answer": "**Median ≈ 33.3; Q₁ ≈ 23.3; Q₃ ≈ 42.9; IQR ≈ 19.5.**",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 70,
+      "ymin": 0,
+      "ymax": 90,
+      "grid": 10,
+      "w": 420,
+      "h": 280,
+      "curves": [],
+      "points": [
+       {
+        "x": 10,
+        "y": 4,
+        "label": null,
+        "color": "blue"
+       },
+       {
+        "x": 20,
+        "y": 14,
+        "label": null,
+        "color": "blue"
+       },
+       {
+        "x": 30,
+        "y": 32,
+        "label": null,
+        "color": "blue"
+       },
+       {
+        "x": 40,
+        "y": 56,
+        "label": null,
+        "color": "blue"
+       },
+       {
+        "x": 50,
+        "y": 70,
+        "label": null,
+        "color": "blue"
+       },
+       {
+        "x": 60,
+        "y": 78,
+        "label": null,
+        "color": "blue"
+       },
+       {
+        "x": 70,
+        "y": 80,
+        "label": null,
+        "color": "blue"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 0,
+        "y1": 0,
+        "x2": 10,
+        "y2": 4,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 10,
+        "y1": 4,
+        "x2": 20,
+        "y2": 14,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 20,
+        "y1": 14,
+        "x2": 30,
+        "y2": 32,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 30,
+        "y1": 32,
+        "x2": 40,
+        "y2": 56,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 40,
+        "y1": 56,
+        "x2": 50,
+        "y2": 70,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 50,
+        "y1": 70,
+        "x2": 60,
+        "y2": 78,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 60,
+        "y1": 78,
+        "x2": 70,
+        "y2": 80,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 0,
+        "y1": 40,
+        "x2": 33.33,
+        "y2": 40,
+        "color": "red",
+        "dash": true
+       },
+       {
+        "x1": 33.33,
+        "y1": 40,
+        "x2": 33.33,
+        "y2": 0,
+        "color": "red",
+        "dash": true
+       }
+      ],
+      "xlabel": "mark",
+      "ylabel": "cumulative frequency"
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2: counting above a mark",
+     "statement": "Using the same data, how many pupils scored more than 40? The pass mark is 40: what percentage passed?",
+     "steps": [
+      "Cumulative frequency at 40 is 56, so 56 pupils scored 40 or less.",
+      "Above 40: 80 − 56 = 24 pupils.",
+      "Percentage = 24 ÷ 80 × 100 = 30%."
+     ],
+     "answer": "**24 pupils; 30%.**"
+    }
+   ],
+   "chapter": "form4-maths-statistics"
+  },
+  {
+   "id": "form4-maths-histograms",
+   "title": "Histograms with unequal class widths",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 4 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Calculate the frequency density",
+    "Draw a histogram with unequal class widths",
+    "Read frequencies from the areas of the bars",
+    "Estimate the mean from grouped data"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form4-maths-statistics-e07",
+    "form4-maths-statistics-e08",
+    "form4-maths-statistics-e09",
+    "form4-maths-statistics-e10",
+    "form4-maths-statistics-e11",
+    "form4-maths-statistics-e12"
+   ],
+   "selfCheck": [
+    "form4-maths-histograms-q1",
+    "form4-maths-histograms-q2",
+    "form4-maths-histograms-q3",
+    "form4-maths-histograms-q4",
+    "form4-maths-histograms-q5"
+   ],
+   "reviewNotes": [
+    "The waiting times are invented for practice.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Frequency density",
+     "md": "In a histogram the **area** of each bar is proportional to the frequency. When the classes have unequal widths, the height of the bar is the **frequency density**: frequency density = frequency ÷ class width. The bars touch, there are no gaps, and the horizontal axis is a continuous scale."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Drawing and reading",
+     "md": "Waiting times (minutes) at a clinic with frequencies 8, 14, 30, 12, 16 in the classes 0–10, 10–20, 20–40, 40–60, 60–100 have densities 0.8, 1.4, 1.5, 0.6, 0.4. To find the frequency in part of a class, multiply the density by the **width of that part**: between 50 and 60 minutes, 0.6 × 10 = 6 people."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 280,
+      "items": [
+       {
+        "t": "line",
+        "x1": 28.0,
+        "y1": 246.0,
+        "x2": 392.0,
+        "y2": 246.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 34.0,
+        "y1": 252.0,
+        "x2": 34.0,
+        "y2": 28.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 34.0,
+        "y1": 243.0,
+        "x2": 34.0,
+        "y2": 249.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 34.0,
+        "y": 263.0,
+        "text": "0",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 69.2,
+        "y1": 243.0,
+        "x2": 69.2,
+        "y2": 249.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 69.2,
+        "y": 263.0,
+        "text": "10",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 104.4,
+        "y1": 243.0,
+        "x2": 104.4,
+        "y2": 249.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 104.4,
+        "y": 263.0,
+        "text": "20",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 174.8,
+        "y1": 243.0,
+        "x2": 174.8,
+        "y2": 249.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 174.8,
+        "y": 263.0,
+        "text": "40",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 245.2,
+        "y1": 243.0,
+        "x2": 245.2,
+        "y2": 249.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 245.2,
+        "y": 263.0,
+        "text": "60",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 386.0,
+        "y1": 243.0,
+        "x2": 386.0,
+        "y2": 249.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 386.0,
+        "y": 263.0,
+        "text": "100",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 187.11111111111111,
+        "x2": 37.0,
+        "y2": 187.11111111111111,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 191.11111111111111,
+        "text": "0.5",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 128.22222222222223,
+        "x2": 37.0,
+        "y2": 128.22222222222223,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 132.22222222222223,
+        "text": "1",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 69.33333333333334,
+        "x2": 37.0,
+        "y2": 69.33333333333334,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 73.33333333333334,
+        "text": "1.5",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         34.0,
+         246.0,
+         69.2,
+         246.0,
+         69.2,
+         151.8,
+         34.0,
+         151.8
+        ],
+        "stroke": "blue",
+        "width": 2,
+        "closed": true,
+        "fill": "lightblue"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         69.2,
+         246.0,
+         104.4,
+         246.0,
+         104.4,
+         81.1,
+         69.2,
+         81.1
+        ],
+        "stroke": "blue",
+        "width": 2,
+        "closed": true,
+        "fill": "lightblue"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         104.4,
+         246.0,
+         174.8,
+         246.0,
+         174.8,
+         69.3,
+         104.4,
+         69.3
+        ],
+        "stroke": "blue",
+        "width": 2,
+        "closed": true,
+        "fill": "lightblue"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         174.8,
+         246.0,
+         245.2,
+         246.0,
+         245.2,
+         175.3,
+         174.8,
+         175.3
+        ],
+        "stroke": "blue",
+        "width": 2,
+        "closed": true,
+        "fill": "lightblue"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         245.2,
+         246.0,
+         386.0,
+         246.0,
+         386.0,
+         198.9,
+         245.2,
+         198.9
+        ],
+        "stroke": "blue",
+        "width": 2,
+        "closed": true,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 227.6,
+        "y": 43.422222222222246,
+        "text": "frequency density",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A histogram of waiting times with unequal class widths; the tallest bar is 1.5 for 20–40 minutes.",
+     "alt": "Five touching bars of different widths and heights."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Mean from grouped data",
+     "md": "Use the **midpoint** of each class: estimated mean = Σ(f × midpoint) ÷ Σf. With midpoints 5, 15, 30, 50, 80: (40 + 210 + 900 + 600 + 1 280) ÷ 80 = 3 030 ÷ 80 ≈ 37.9 minutes. This is an **estimate** because we do not know the exact values."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using the frequency as the height of a bar when widths are unequal.\n- Leaving gaps between the bars.\n- Forgetting to multiply the density by the width when reading frequencies."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: frequency density",
+     "statement": "Waiting times of 80 patients at a Bamenda clinic: 0–10 min (8), 10–20 (14), 20–40 (30), 40–60 (12), 60–100 (16). Find the frequency densities and the height of the tallest bar.",
+     "steps": [
+      "Densities: 8 ÷ 10 = 0.8; 14 ÷ 10 = 1.4; 30 ÷ 20 = 1.5; 12 ÷ 20 = 0.6; 16 ÷ 40 = 0.4.",
+      "The tallest bar is 1.5, for the class 20–40.",
+      "Check: areas 8 + 14 + 30 + 12 + 16 = 80."
+     ],
+     "answer": "**0.8, 1.4, 1.5, 0.6, 0.4; tallest 1.5.**",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 280,
+      "items": [
+       {
+        "t": "line",
+        "x1": 28.0,
+        "y1": 246.0,
+        "x2": 392.0,
+        "y2": 246.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 34.0,
+        "y1": 252.0,
+        "x2": 34.0,
+        "y2": 28.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 34.0,
+        "y1": 243.0,
+        "x2": 34.0,
+        "y2": 249.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 34.0,
+        "y": 263.0,
+        "text": "0",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 69.2,
+        "y1": 243.0,
+        "x2": 69.2,
+        "y2": 249.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 69.2,
+        "y": 263.0,
+        "text": "10",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 104.4,
+        "y1": 243.0,
+        "x2": 104.4,
+        "y2": 249.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 104.4,
+        "y": 263.0,
+        "text": "20",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 174.8,
+        "y1": 243.0,
+        "x2": 174.8,
+        "y2": 249.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 174.8,
+        "y": 263.0,
+        "text": "40",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 245.2,
+        "y1": 243.0,
+        "x2": 245.2,
+        "y2": 249.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 245.2,
+        "y": 263.0,
+        "text": "60",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 386.0,
+        "y1": 243.0,
+        "x2": 386.0,
+        "y2": 249.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 386.0,
+        "y": 263.0,
+        "text": "100",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 187.11111111111111,
+        "x2": 37.0,
+        "y2": 187.11111111111111,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 191.11111111111111,
+        "text": "0.5",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 128.22222222222223,
+        "x2": 37.0,
+        "y2": 128.22222222222223,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 132.22222222222223,
+        "text": "1",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 69.33333333333334,
+        "x2": 37.0,
+        "y2": 69.33333333333334,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 73.33333333333334,
+        "text": "1.5",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         34.0,
+         246.0,
+         69.2,
+         246.0,
+         69.2,
+         151.8,
+         34.0,
+         151.8
+        ],
+        "stroke": "blue",
+        "width": 2,
+        "closed": true,
+        "fill": "lightblue"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         69.2,
+         246.0,
+         104.4,
+         246.0,
+         104.4,
+         81.1,
+         69.2,
+         81.1
+        ],
+        "stroke": "blue",
+        "width": 2,
+        "closed": true,
+        "fill": "lightblue"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         104.4,
+         246.0,
+         174.8,
+         246.0,
+         174.8,
+         69.3,
+         104.4,
+         69.3
+        ],
+        "stroke": "blue",
+        "width": 2,
+        "closed": true,
+        "fill": "lightblue"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         174.8,
+         246.0,
+         245.2,
+         246.0,
+         245.2,
+         175.3,
+         174.8,
+         175.3
+        ],
+        "stroke": "blue",
+        "width": 2,
+        "closed": true,
+        "fill": "lightblue"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         245.2,
+         246.0,
+         386.0,
+         246.0,
+         386.0,
+         198.9,
+         245.2,
+         198.9
+        ],
+        "stroke": "blue",
+        "width": 2,
+        "closed": true,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 227.6,
+        "y": 43.422222222222246,
+        "text": "frequency density",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2: estimates",
+     "statement": "Use the histogram to estimate how many patients waited between 50 and 60 minutes, and the mean waiting time.",
+     "steps": [
+      "Between 50 and 60 the density is 0.6, so 0.6 × 10 = 6 patients.",
+      "Mean = (8×5 + 14×15 + 30×30 + 12×50 + 16×80) ÷ 80.",
+      "= 3 030 ÷ 80 ≈ 37.9 minutes."
+     ],
+     "answer": "**6 patients; mean about 37.9 minutes.**"
+    }
+   ],
+   "chapter": "form4-maths-statistics"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form4-maths-statistics-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-maths-cumulative-frequency",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The cumulative frequencies are 5, 12, 20, 25. Find the frequency of the third class.",
+   "answer": 8,
+   "tolerance": 0,
+   "explanation": "20 − 12 = 8.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form4-maths-statistics"
+  },
+  {
+   "id": "form4-maths-statistics-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-maths-cumulative-frequency",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "For a set of 100 values, at which cumulative frequency do we read the median?",
+   "answer": 50,
+   "tolerance": 0,
+   "explanation": "n ÷ 2.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form4-maths-statistics"
+  },
+  {
+   "id": "form4-maths-statistics-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form4-maths-cumulative-frequency",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "On the cumulative frequency graph the points are plotted at:",
+   "choices": [
+    "the upper class boundary",
+    "the class midpoint",
+    "the class width",
+    "the lower class boundary"
+   ],
+   "answer": 0,
+   "explanation": "Cumulative total up to the end of the class.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-maths-statistics"
+  },
+  {
+   "id": "form4-maths-statistics-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form4-maths-cumulative-frequency",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Q₁ = 24 and Q₃ = 41. Find the interquartile range.",
+   "answer": 17,
+   "tolerance": 0,
+   "explanation": "41 − 24.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-maths-statistics"
+  },
+  {
+   "id": "form4-maths-statistics-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form4-maths-cumulative-frequency",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Explain why the interquartile range is better than the range to describe the spread when there are unusual values.",
+   "model": "The range uses only the largest and smallest values, so one extreme value changes it a lot. The IQR measures the spread of the middle half of the data, so extreme values hardly affect it.",
+   "rubric": "1 mark for the range using the extremes, 1 mark for the IQR being the middle half, 1 mark for the conclusion.",
+   "explanation": "The range uses only the largest and smallest values, so one extreme value changes it a lot. The IQR measures the spread of the middle half of the data, so extreme values hardly affect it.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-maths-statistics"
+  },
+  {
+   "id": "form4-maths-statistics-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form4-maths-cumulative-frequency",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The cumulative frequency curve shows the marks of 80 pupils at a school in Bafoussam. Frequencies by class (width 10) are 4, 10, 18, 24, 14, 8, 2.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many pupils scored 30 or less?",
+     "answer": 32,
+     "tolerance": 0,
+     "explanation": "4 + 10 + 18.",
+     "id": "form4-maths-statistics-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Estimate the median mark (1 d.p.).",
+     "answer": 33.3,
+     "tolerance": 0.1,
+     "explanation": "30 + 8/24 × 10 = 33.3.",
+     "id": "form4-maths-statistics-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Estimate the number of pupils scoring more than 50.",
+     "answer": 10,
+     "tolerance": 0,
+     "explanation": "80 − 70.",
+     "id": "form4-maths-statistics-e06-c"
+    }
+   ],
+   "figure": {
+    "kind": "plot",
+    "xmin": 0,
+    "xmax": 70,
+    "ymin": 0,
+    "ymax": 90,
+    "grid": 10,
+    "w": 420,
+    "h": 280,
+    "curves": [],
+    "points": [
+     {
+      "x": 10,
+      "y": 4,
+      "label": null,
+      "color": "blue"
+     },
+     {
+      "x": 20,
+      "y": 14,
+      "label": null,
+      "color": "blue"
+     },
+     {
+      "x": 30,
+      "y": 32,
+      "label": null,
+      "color": "blue"
+     },
+     {
+      "x": 40,
+      "y": 56,
+      "label": null,
+      "color": "blue"
+     },
+     {
+      "x": 50,
+      "y": 70,
+      "label": null,
+      "color": "blue"
+     },
+     {
+      "x": 60,
+      "y": 78,
+      "label": null,
+      "color": "blue"
+     },
+     {
+      "x": 70,
+      "y": 80,
+      "label": null,
+      "color": "blue"
+     }
+    ],
+    "segments": [
+     {
+      "x1": 0,
+      "y1": 0,
+      "x2": 10,
+      "y2": 4,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 10,
+      "y1": 4,
+      "x2": 20,
+      "y2": 14,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 20,
+      "y1": 14,
+      "x2": 30,
+      "y2": 32,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 30,
+      "y1": 32,
+      "x2": 40,
+      "y2": 56,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 40,
+      "y1": 56,
+      "x2": 50,
+      "y2": 70,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 50,
+      "y1": 70,
+      "x2": 60,
+      "y2": 78,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 60,
+      "y1": 78,
+      "x2": 70,
+      "y2": 80,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 0,
+      "y1": 40,
+      "x2": 33.33,
+      "y2": 40,
+      "color": "red",
+      "dash": true
+     },
+     {
+      "x1": 33.33,
+      "y1": 40,
+      "x2": 33.33,
+      "y2": 0,
+      "color": "red",
+      "dash": true
+     }
+    ],
+    "xlabel": "mark",
+    "ylabel": "cumulative frequency"
+   },
+   "chapter": "form4-maths-statistics"
+  },
+  {
+   "id": "form4-maths-cumulative-frequency-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-cumulative-frequency",
+   "prompt": "Cumulative frequency is:",
+   "choices": [
+    "the class width",
+    "the mean",
+    "a running total",
+    "the largest frequency"
+   ],
+   "answer": 2,
+   "explanation": "Definition.",
+   "chapter": "form4-maths-statistics"
+  },
+  {
+   "id": "form4-maths-cumulative-frequency-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-cumulative-frequency",
+   "prompt": "The median is at cumulative frequency:",
+   "choices": [
+    "n",
+    "2n",
+    "n ÷ 4",
+    "n ÷ 2"
+   ],
+   "answer": 3,
+   "explanation": "Middle value.",
+   "chapter": "form4-maths-statistics"
+  },
+  {
+   "id": "form4-maths-cumulative-frequency-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-cumulative-frequency",
+   "prompt": "The interquartile range is:",
+   "choices": [
+    "median − Q₁ only",
+    "Q₃ − Q₁",
+    "Q₃ + Q₁",
+    "Q₁ − Q₃"
+   ],
+   "answer": 1,
+   "explanation": "Spread of the middle half.",
+   "chapter": "form4-maths-statistics"
+  },
+  {
+   "id": "form4-maths-cumulative-frequency-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-cumulative-frequency",
+   "prompt": "The final cumulative frequency equals:",
+   "choices": [
+    "the total number of values",
+    "the median",
+    "zero",
+    "the mean"
+   ],
+   "answer": 0,
+   "explanation": "Total.",
+   "chapter": "form4-maths-statistics"
+  },
+  {
+   "id": "form4-maths-cumulative-frequency-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-cumulative-frequency",
+   "prompt": "To find how many are above a value we:",
+   "choices": [
+    "subtract its cumulative frequency from the total",
+    "multiply by 2",
+    "divide by 2",
+    "add it to the total"
+   ],
+   "answer": 0,
+   "explanation": "Complement.",
+   "chapter": "form4-maths-statistics"
+  },
+  {
+   "id": "form4-maths-statistics-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-maths-histograms",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A class of width 5 has frequency 20. Find the frequency density.",
+   "answer": 4,
+   "tolerance": 0,
+   "explanation": "20 ÷ 5.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form4-maths-statistics"
+  },
+  {
+   "id": "form4-maths-statistics-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-maths-histograms",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A bar has width 20 and height 1.5. Find the frequency.",
+   "answer": 30,
+   "tolerance": 0,
+   "explanation": "Area = 1.5 × 20.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form4-maths-statistics"
+  },
+  {
+   "id": "form4-maths-statistics-e09",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form4-maths-histograms",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "In a histogram the frequency is represented by the:",
+   "choices": [
+    "width of the bar",
+    "height of the bar only",
+    "colour",
+    "area of the bar"
+   ],
+   "answer": 3,
+   "explanation": "Area ∝ frequency.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-maths-statistics"
+  },
+  {
+   "id": "form4-maths-statistics-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form4-maths-histograms",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A histogram bar is 15 units wide and 0.8 high. How many values does it represent?",
+   "answer": 12,
+   "tolerance": 0,
+   "explanation": "15 × 0.8.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-maths-statistics"
+  },
+  {
+   "id": "form4-maths-statistics-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form4-maths-histograms",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Explain why a bar chart with equal widths can use height for frequency but a histogram with unequal widths cannot.",
+   "model": "If widths are equal, area is proportional to height, so height shows frequency. With unequal widths a wider class would look bigger even for the same frequency, so the area must show the frequency and the height is the density.",
+   "rubric": "1 mark for equal widths, 1 mark for unequal widths, 1 mark for the area/density idea.",
+   "explanation": "If widths are equal, area is proportional to height, so height shows frequency. With unequal widths a wider class would look bigger even for the same frequency, so the area must show the frequency and the height is the density.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-maths-statistics"
+  },
+  {
+   "id": "form4-maths-statistics-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form4-maths-histograms",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The histogram shows the waiting times of 80 patients (classes 0–10, 10–20, 20–40, 40–60, 60–100; frequencies 8, 14, 30, 12, 16).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the frequency density of the class 60–100.",
+     "answer": 0.4,
+     "tolerance": 0.001,
+     "explanation": "16 ÷ 40.",
+     "id": "form4-maths-statistics-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many waited more than 60 minutes?",
+     "answer": 16,
+     "tolerance": 0,
+     "explanation": "The whole class 60–100.",
+     "id": "form4-maths-statistics-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 3,
+     "prompt": "Estimate the mean waiting time (minutes, 1 d.p.).",
+     "answer": 37.9,
+     "tolerance": 0.1,
+     "explanation": "3 030 ÷ 80 = 37.875.",
+     "unit": "min",
+     "id": "form4-maths-statistics-e12-c"
+    }
+   ],
+   "figure": {
+    "kind": "shapes",
+    "w": 420,
+    "h": 280,
+    "items": [
+     {
+      "t": "line",
+      "x1": 28.0,
+      "y1": 246.0,
+      "x2": 392.0,
+      "y2": 246.0,
+      "color": "ink",
+      "width": 1.5,
+      "arrow": "end"
+     },
+     {
+      "t": "line",
+      "x1": 34.0,
+      "y1": 252.0,
+      "x2": 34.0,
+      "y2": 28.0,
+      "color": "ink",
+      "width": 1.5,
+      "arrow": "end"
+     },
+     {
+      "t": "line",
+      "x1": 34.0,
+      "y1": 243.0,
+      "x2": 34.0,
+      "y2": 249.0,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 34.0,
+      "y": 263.0,
+      "text": "0",
+      "size": 11,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 69.2,
+      "y1": 243.0,
+      "x2": 69.2,
+      "y2": 249.0,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 69.2,
+      "y": 263.0,
+      "text": "10",
+      "size": 11,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 104.4,
+      "y1": 243.0,
+      "x2": 104.4,
+      "y2": 249.0,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 104.4,
+      "y": 263.0,
+      "text": "20",
+      "size": 11,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 174.8,
+      "y1": 243.0,
+      "x2": 174.8,
+      "y2": 249.0,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 174.8,
+      "y": 263.0,
+      "text": "40",
+      "size": 11,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 245.2,
+      "y1": 243.0,
+      "x2": 245.2,
+      "y2": 249.0,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 245.2,
+      "y": 263.0,
+      "text": "60",
+      "size": 11,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 386.0,
+      "y1": 243.0,
+      "x2": 386.0,
+      "y2": 249.0,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 386.0,
+      "y": 263.0,
+      "text": "100",
+      "size": 11,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 31.0,
+      "y1": 187.11111111111111,
+      "x2": 37.0,
+      "y2": 187.11111111111111,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 26.0,
+      "y": 191.11111111111111,
+      "text": "0.5",
+      "size": 11,
+      "anchor": "end",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 31.0,
+      "y1": 128.22222222222223,
+      "x2": 37.0,
+      "y2": 128.22222222222223,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 26.0,
+      "y": 132.22222222222223,
+      "text": "1",
+      "size": 11,
+      "anchor": "end",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 31.0,
+      "y1": 69.33333333333334,
+      "x2": 37.0,
+      "y2": 69.33333333333334,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 26.0,
+      "y": 73.33333333333334,
+      "text": "1.5",
+      "size": 11,
+      "anchor": "end",
+      "color": "ink"
+     },
+     {
+      "t": "poly",
+      "pts": [
+       34.0,
+       246.0,
+       69.2,
+       246.0,
+       69.2,
+       151.8,
+       34.0,
+       151.8
+      ],
+      "stroke": "blue",
+      "width": 2,
+      "closed": true,
+      "fill": "lightblue"
+     },
+     {
+      "t": "poly",
+      "pts": [
+       69.2,
+       246.0,
+       104.4,
+       246.0,
+       104.4,
+       81.1,
+       69.2,
+       81.1
+      ],
+      "stroke": "blue",
+      "width": 2,
+      "closed": true,
+      "fill": "lightblue"
+     },
+     {
+      "t": "poly",
+      "pts": [
+       104.4,
+       246.0,
+       174.8,
+       246.0,
+       174.8,
+       69.3,
+       104.4,
+       69.3
+      ],
+      "stroke": "blue",
+      "width": 2,
+      "closed": true,
+      "fill": "lightblue"
+     },
+     {
+      "t": "poly",
+      "pts": [
+       174.8,
+       246.0,
+       245.2,
+       246.0,
+       245.2,
+       175.3,
+       174.8,
+       175.3
+      ],
+      "stroke": "blue",
+      "width": 2,
+      "closed": true,
+      "fill": "lightblue"
+     },
+     {
+      "t": "poly",
+      "pts": [
+       245.2,
+       246.0,
+       386.0,
+       246.0,
+       386.0,
+       198.9,
+       245.2,
+       198.9
+      ],
+      "stroke": "blue",
+      "width": 2,
+      "closed": true,
+      "fill": "lightblue"
+     },
+     {
+      "t": "text",
+      "x": 227.6,
+      "y": 43.422222222222246,
+      "text": "frequency density",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     }
+    ]
+   },
+   "chapter": "form4-maths-statistics"
+  },
+  {
+   "id": "form4-maths-histograms-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-histograms",
+   "prompt": "Frequency density equals:",
+   "choices": [
+    "frequency + width",
+    "frequency ÷ class width",
+    "class width ÷ frequency",
+    "frequency × class width"
+   ],
+   "answer": 1,
+   "explanation": "Definition.",
+   "chapter": "form4-maths-statistics"
+  },
+  {
+   "id": "form4-maths-histograms-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-histograms",
+   "prompt": "The area of a histogram bar represents:",
+   "choices": [
+    "the median",
+    "the frequency",
+    "the mean",
+    "the class width"
+   ],
+   "answer": 1,
+   "explanation": "Area.",
+   "chapter": "form4-maths-statistics"
+  },
+  {
+   "id": "form4-maths-histograms-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-histograms",
+   "prompt": "The bars of a histogram:",
+   "choices": [
+    "touch each other",
+    "are all equal in height",
+    "are all the same colour",
+    "have gaps"
+   ],
+   "answer": 0,
+   "explanation": "Continuous data.",
+   "chapter": "form4-maths-statistics"
+  },
+  {
+   "id": "form4-maths-histograms-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-histograms",
+   "prompt": "To estimate the mean of grouped data we use:",
+   "choices": [
+    "the frequencies only",
+    "the upper boundaries",
+    "the class midpoints",
+    "the class widths"
+   ],
+   "answer": 2,
+   "explanation": "Midpoints.",
+   "chapter": "form4-maths-statistics"
+  },
+  {
+   "id": "form4-maths-histograms-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-histograms",
+   "prompt": "The frequency of a part of a class is:",
+   "choices": [
+    "density × width of that part",
+    "density + width",
+    "density ÷ width",
+    "width only"
+   ],
+   "answer": 0,
+   "explanation": "Area of the part.",
+   "chapter": "form4-maths-statistics"
+  }
+ ]
+}

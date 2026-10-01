@@ -1,0 +1,494 @@
+{
+ "chapter": "form3-chemistry-acids",
+ "lessons": [
+  {
+   "id": "form3-chemistry-acids-bases",
+   "title": "Acids, bases, indicators and pH",
+   "minutes": 30,
+   "programRef": "Form 3 Chemistry — Acids, bases, pH and neutralisation (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe the properties and reactions of acids and bases.",
+    "Use indicators and the pH scale.",
+    "Describe neutralisation and write word and symbol equations for acid reactions."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form3-chemistry-acids-e01",
+    "form3-chemistry-acids-e02",
+    "form3-chemistry-acids-e03",
+    "form3-chemistry-acids-e04",
+    "form3-chemistry-acids-e05",
+    "form3-chemistry-acids-e06"
+   ],
+   "selfCheck": [
+    "form3-chemistry-acids-bases-q1",
+    "form3-chemistry-acids-bases-q2",
+    "form3-chemistry-acids-bases-q3",
+    "form3-chemistry-acids-bases-q4",
+    "form3-chemistry-acids-bases-q5"
+   ],
+   "reviewNotes": [
+    "pH colours of universal indicator vary by brand; the definition of acid (H⁺ producer, Arrhenius) is used at this level. Practicals with strong acids/alkalis are teacher-led.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Acids and bases",
+     "md": "An **acid** produces **H⁺ ions** in water: hydrochloric acid HCl, sulphuric acid H₂SO₄, nitric acid HNO₃, ethanoic acid (vinegar). A **base** is a metal oxide or hydroxide that reacts with an acid to form a salt and water; a base that dissolves in water is an **alkali** and produces **OH⁻ ions**: sodium hydroxide NaOH, potassium hydroxide KOH, calcium hydroxide Ca(OH)₂ (limewater), ammonia solution. **Strong** acids and alkalis are fully ionised; **weak** ones only partly (ethanoic acid)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 200,
+      "items": [
+       {
+        "t": "text",
+        "x": 80,
+        "y": 18,
+        "text": "indicator",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 18,
+        "text": "in acid",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 380,
+        "y": 18,
+        "text": "in alkali",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 10,
+        "y": 50,
+        "text": "litmus",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 190,
+        "y": 30,
+        "w": 100,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "red"
+       },
+       {
+        "t": "rect",
+        "x": 330,
+        "y": 30,
+        "w": 100,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "blue"
+       },
+       {
+        "t": "text",
+        "x": 10,
+        "y": 86,
+        "text": "methyl orange",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 190,
+        "y": 66,
+        "w": 100,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "red"
+       },
+       {
+        "t": "rect",
+        "x": 330,
+        "y": 66,
+        "w": 100,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "yellow"
+       },
+       {
+        "t": "text",
+        "x": 10,
+        "y": 122,
+        "text": "phenolphthalein",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 190,
+        "y": 102,
+        "w": 100,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "white"
+       },
+       {
+        "t": "rect",
+        "x": 330,
+        "y": 102,
+        "w": 100,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "pink"
+       },
+       {
+        "t": "text",
+        "x": 10,
+        "y": 158,
+        "text": "universal indicator",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 190,
+        "y": 138,
+        "w": 100,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "red"
+       },
+       {
+        "t": "rect",
+        "x": 330,
+        "y": 138,
+        "w": 100,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "purple"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 188,
+        "text": "(white = colourless)",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Colours of common indicators in acid and alkali.",
+     "alt": "A table with four indicators and the colour of each in acid and in alkali: litmus red and blue, methyl orange red and yellow, phenolphthalein colourless and pink, universal indicator red and purple."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Reactions of acids",
+     "md": "- Acid + **metal** → salt + hydrogen: Mg + 2HCl → MgCl₂ + H₂ (hydrogen gives a squeaky pop).\n- Acid + **carbonate** → salt + water + carbon dioxide: CaCO₃ + 2HCl → CaCl₂ + H₂O + CO₂.\n- Acid + **base** → salt + water: CuO + H₂SO₄ → CuSO₄ + H₂O.\n- Acid + **alkali** (neutralisation): NaOH + HCl → NaCl + H₂O; ionic equation H⁺ + OH⁻ → H₂O."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "pH and salts",
+     "md": "**pH 0–6 acidic, 7 neutral, 8–14 alkaline.** Salt names: **chlorides** from HCl, **sulphates** from H₂SO₄, **nitrates** from HNO₃. Everyday: toothpaste and antacids are weak bases, soap is alkaline, lemon juice and vinegar are acidic. Wear eye protection with dilute acids; strong acids and alkalis are corrosive."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Not every base is an alkali: copper(II) oxide is a base that does not dissolve.\n- A strong acid is not the same as a concentrated acid: strength is about ionisation, concentration is about how much acid is in the solution.\n- pH 7 is neutral; the pH of a strongly acidic solution is a small number."
+    },
+    {
+     "type": "example",
+     "title": "Complete the equation",
+     "statement": "Write the balanced equation for zinc reacting with dilute sulphuric acid and name the gas.",
+     "steps": [
+      "Zinc + sulphuric acid → zinc sulphate + hydrogen: Zn + H₂SO₄ → ZnSO₄ + H₂.",
+      "The gas burns with a squeaky pop: hydrogen."
+     ],
+     "answer": "Zn + H₂SO₄ → ZnSO₄ + H₂; hydrogen"
+    },
+    {
+     "type": "example",
+     "title": "Name the salt",
+     "statement": "Name the salt formed when sodium hydroxide neutralises nitric acid.",
+     "steps": [
+      "Metal part from the base: sodium. Acid part from HNO₃: nitrate.",
+      "Salt: sodium nitrate (plus water)."
+     ],
+     "answer": "Sodium nitrate"
+    },
+    {
+     "type": "exercise",
+     "ref": "form3-chemistry-acids-e01"
+    }
+   ],
+   "chapter": "form3-chemistry-acids"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form3-chemistry-acids-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-chemistry-acids-bases",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A solution of pH 12 is:",
+   "choices": [
+    "neutral",
+    "alkaline",
+    "an acid",
+    "acidic"
+   ],
+   "answer": 1,
+   "explanation": "Above 7.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-chemistry-acids"
+  },
+  {
+   "id": "form3-chemistry-acids-e02",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "form3-chemistry-acids-bases",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each reaction with its products.",
+   "pairs": [
+    [
+     "acid + carbonate",
+     "salt + water + carbon dioxide"
+    ],
+    [
+     "acid + metal",
+     "salt + hydrogen"
+    ],
+    [
+     "acid + alkali",
+     "salt + water"
+    ],
+    [
+     "acid + metal oxide",
+     "salt + water (a base reacting)"
+    ]
+   ],
+   "explanation": "Standard reactions.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form3-chemistry-acids"
+  },
+  {
+   "id": "form3-chemistry-acids-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-chemistry-acids-bases",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which ion do all acids produce in water?",
+   "choices": [
+    "Cl⁻",
+    "OH⁻",
+    "H⁺",
+    "Na⁺"
+   ],
+   "answer": 2,
+   "explanation": "Definition of an acid.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-chemistry-acids"
+  },
+  {
+   "id": "form3-chemistry-acids-e04",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "form3-chemistry-acids-bases",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Methyl orange is yellow in alkali.",
+   "answer": true,
+   "explanation": "Red in acid, yellow in alkali.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form3-chemistry-acids"
+  },
+  {
+   "id": "form3-chemistry-acids-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form3-chemistry-acids-bases",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Describe a test that identifies the gas given off when dilute hydrochloric acid is added to marble chips.",
+   "model": "Pass the gas into limewater: it turns milky, showing carbon dioxide.",
+   "rubric": [
+    "1 mark: limewater",
+    "1 mark: milky, carbon dioxide"
+   ],
+   "explanation": "Pass the gas into limewater: it turns milky, showing carbon dioxide.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-chemistry-acids"
+  },
+  {
+   "id": "form3-chemistry-acids-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form3-chemistry-acids-bases",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Dilute hydrochloric acid is added drop by drop to sodium hydroxide solution containing phenolphthalein.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "At the start the solution is:",
+     "choices": [
+      "colourless",
+      "yellow",
+      "red",
+      "pink"
+     ],
+     "answer": 3,
+     "explanation": "Phenolphthalein is pink in alkali.",
+     "id": "form3-chemistry-acids-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "At neutralisation it becomes:",
+     "choices": [
+      "blue",
+      "pink",
+      "yellow",
+      "colourless"
+     ],
+     "answer": 3,
+     "explanation": "Colourless in acid or neutral.",
+     "id": "form3-chemistry-acids-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Write the balanced equation for the reaction.",
+     "model": "NaOH + HCl → NaCl + H₂O",
+     "rubric": [
+      "1 mark: formulae",
+      "1 mark: balanced"
+     ],
+     "explanation": "NaOH + HCl → NaCl + H₂O",
+     "id": "form3-chemistry-acids-e06-c"
+    }
+   ],
+   "chapter": "form3-chemistry-acids"
+  },
+  {
+   "id": "form3-chemistry-acids-bases-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-chemistry-acids-bases",
+   "prompt": "On the pH scale a neutral solution has the value:",
+   "choices": [
+    "14",
+    "0",
+    "7",
+    "10"
+   ],
+   "answer": 2,
+   "explanation": "pH 7.",
+   "chapter": "form3-chemistry-acids"
+  },
+  {
+   "id": "form3-chemistry-acids-bases-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-chemistry-acids-bases",
+   "prompt": "Hydrogen gas is identified by:",
+   "choices": [
+    "relighting a glowing splint",
+    "a squeaky pop with a lit splint",
+    "turning limewater milky",
+    "bleaching litmus"
+   ],
+   "answer": 1,
+   "explanation": "Test for hydrogen.",
+   "chapter": "form3-chemistry-acids"
+  },
+  {
+   "id": "form3-chemistry-acids-bases-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-chemistry-acids-bases",
+   "prompt": "Sulphuric acid forms salts called:",
+   "choices": [
+    "carbonates",
+    "nitrates",
+    "chlorides",
+    "sulphates"
+   ],
+   "answer": 3,
+   "explanation": "From SO₄²⁻.",
+   "chapter": "form3-chemistry-acids"
+  },
+  {
+   "id": "form3-chemistry-acids-bases-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-chemistry-acids-bases",
+   "prompt": "A soluble base is called an:",
+   "choices": [
+    "indicator",
+    "alkali",
+    "acid",
+    "salt"
+   ],
+   "answer": 1,
+   "explanation": "Alkali.",
+   "chapter": "form3-chemistry-acids"
+  },
+  {
+   "id": "form3-chemistry-acids-bases-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-chemistry-acids-bases",
+   "prompt": "The reaction of an acid with an alkali is:",
+   "choices": [
+    "evaporation",
+    "decomposition",
+    "neutralisation",
+    "combustion"
+   ],
+   "answer": 2,
+   "explanation": "Forms a salt and water.",
+   "chapter": "form3-chemistry-acids"
+  }
+ ]
+}

@@ -1,0 +1,2310 @@
+{
+ "chapter": "class3-science-matter-energy",
+ "lessons": [
+  {
+   "id": "class3-science-water-cycle",
+   "title": "The water cycle",
+   "minutes": 12,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level II (Class 3) — Elementary Science; to be checked against the official texts",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe the water cycle.",
+    "Name evaporation, condensation and rain."
+   ],
+   "prerequisites": [
+    "class3-science-disease-prevention"
+   ],
+   "exercises": [
+    "class3-science-matter-energy-e01",
+    "class3-science-matter-energy-e02",
+    "class3-science-matter-energy-e03",
+    "class3-science-matter-energy-e04",
+    "class3-science-matter-energy-e05",
+    "class3-science-matter-energy-e06"
+   ],
+   "selfCheck": [
+    "class3-science-water-cycle-q1",
+    "class3-science-water-cycle-q2",
+    "class3-science-water-cycle-q3",
+    "class3-science-water-cycle-q4",
+    "class3-science-water-cycle-q5"
+   ],
+   "reviewNotes": [
+    "Elementary science content is kept to simple, textbook-level facts; to be reviewed by a primary teacher.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Water cycle",
+     "md": "Water moves in a **cycle**. The Sun warms water in seas, rivers and lakes. Water turns into a gas called **water vapour**: this is **evaporation**. The vapour rises, cools and turns into tiny drops that make **clouds**: this is **condensation**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 120,
+      "items": [
+       {
+        "t": "rect",
+        "x": 8.0,
+        "y": 8,
+        "w": 184.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 35.25,
+        "text": "evaporation",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 8,
+        "w": 184.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 292.0,
+        "y": 35.25,
+        "text": "condensation",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 8.0,
+        "y": 60,
+        "w": 184.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 87.25,
+        "text": "rain",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 60,
+        "w": 184.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "pink",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 292.0,
+        "y": 87.25,
+        "text": "rivers to the sea",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Steps of the water cycle.",
+     "alt": "Four boxes: evaporation, condensation, rain, rivers to the sea."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Rain",
+     "md": "When the drops in clouds get big and heavy, they fall as **rain**. Rain runs into streams and rivers and goes back to the sea. Then the cycle starts again."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Evaporation needs heat from the Sun.\n- Clouds are made of tiny drops of water, not smoke.\n- The water does not get used up; it moves round."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "What happens to sea water when the Sun warms it?",
+     "steps": [
+      "It becomes a gas.",
+      "It evaporates."
+     ],
+     "answer": "It evaporates",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 106,
+      "items": [
+       {
+        "t": "rect",
+        "x": 8.0,
+        "y": 8,
+        "w": 88.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 52.0,
+        "y": 34.2,
+        "text": "Sun warms water",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 104.0,
+        "y": 8,
+        "w": 88.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 148.0,
+        "y": 34.2,
+        "text": "evaporation",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 8,
+        "w": 88.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 244.0,
+        "y": 34.2,
+        "text": "condensation: cloud",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 296.0,
+        "y": 8,
+        "w": 88.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "pink",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 340.0,
+        "y": 34.2,
+        "text": "rain",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "What forms when water vapour cools?",
+     "steps": [
+      "It turns into drops.",
+      "Clouds form."
+     ],
+     "answer": "Clouds"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-states-of-matter",
+   "title": "Solids, liquids and gases",
+   "minutes": 12,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level II (Class 3) — Elementary Science; to be checked against the official texts",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Name the three states of matter.",
+    "Say how water changes state."
+   ],
+   "prerequisites": [
+    "class3-science-water-cycle"
+   ],
+   "exercises": [
+    "class3-science-matter-energy-e07",
+    "class3-science-matter-energy-e08",
+    "class3-science-matter-energy-e09",
+    "class3-science-matter-energy-e10",
+    "class3-science-matter-energy-e11",
+    "class3-science-matter-energy-e12"
+   ],
+   "selfCheck": [
+    "class3-science-states-of-matter-q1",
+    "class3-science-states-of-matter-q2",
+    "class3-science-states-of-matter-q3",
+    "class3-science-states-of-matter-q4",
+    "class3-science-states-of-matter-q5"
+   ],
+   "reviewNotes": [
+    "Boiling point 100 degrees Celsius and freezing point 0 are for pure water at sea level; kept simple.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "States of matter",
+     "md": "Everything is made of **matter**. Matter can be a **solid**, a **liquid** or a **gas**. A solid keeps its shape (stone, wood). A liquid flows and takes the shape of its container (water, oil). A gas spreads out to fill space (air, steam)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 106,
+      "items": [
+       {
+        "t": "rect",
+        "x": 8.0,
+        "y": 8,
+        "w": 88.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 52.0,
+        "y": 34.55,
+        "text": "melting",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 104.0,
+        "y": 8,
+        "w": 88.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 148.0,
+        "y": 34.55,
+        "text": "freezing",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 8,
+        "w": 88.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 244.0,
+        "y": 34.55,
+        "text": "boiling",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 296.0,
+        "y": 8,
+        "w": 88.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "pink",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 340.0,
+        "y": 34.55,
+        "text": "condensing",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Changes of state.",
+     "alt": "Four boxes: melting, freezing, boiling, condensing."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Changes",
+     "md": "**Melting**: solid → liquid (ice melts). **Freezing**: liquid → solid (water freezes at 0 degrees Celsius). **Evaporating** or **boiling**: liquid → gas (water boils at 100 degrees Celsius). **Condensing**: gas → liquid."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Steam is a gas (water vapour); the white cloud we see is tiny drops.\n- Air is matter too: it takes up space.\n- Be careful with hot water and boiling liquids."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Ice melts in the sun. What state change is this?",
+     "steps": [
+      "Ice is a solid.",
+      "It becomes water, a liquid: melting."
+     ],
+     "answer": "Melting",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 106,
+      "items": [
+       {
+        "t": "rect",
+        "x": 8.0,
+        "y": 8,
+        "w": 120.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 68.0,
+        "y": 34.9,
+        "text": "solid: ice",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 136.0,
+        "y": 8,
+        "w": 120.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 196.0,
+        "y": 34.9,
+        "text": "liquid: water",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 264.0,
+        "y": 8,
+        "w": 120.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 324.0,
+        "y": 34.9,
+        "text": "gas: steam",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Is oil a solid, a liquid or a gas?",
+     "steps": [
+      "Oil flows.",
+      "It is a liquid."
+     ],
+     "answer": "A liquid"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-forces",
+   "title": "Forces: push, pull and friction",
+   "minutes": 12,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level II (Class 3) — Elementary Science; to be checked against the official texts",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Say that a force is a push or a pull.",
+    "Say what friction does."
+   ],
+   "prerequisites": [
+    "class3-science-states-of-matter"
+   ],
+   "exercises": [
+    "class3-science-matter-energy-e13",
+    "class3-science-matter-energy-e14",
+    "class3-science-matter-energy-e15",
+    "class3-science-matter-energy-e16",
+    "class3-science-matter-energy-e17",
+    "class3-science-matter-energy-e18"
+   ],
+   "selfCheck": [
+    "class3-science-forces-q1",
+    "class3-science-forces-q2",
+    "class3-science-forces-q3",
+    "class3-science-forces-q4",
+    "class3-science-forces-q5"
+   ],
+   "reviewNotes": [
+    "Newtons are mentioned only in passing; remove if not in the syllabus.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Forces",
+     "md": "A **force** is a **push** or a **pull**. Forces can make things start to move, stop, go faster or slower, or change direction. We measure force in **newtons** (you do not need to learn this yet)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 120,
+      "items": [
+       {
+        "t": "rect",
+        "x": 8.0,
+        "y": 8,
+        "w": 184.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 34.9,
+        "text": "push: start",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 8,
+        "w": 184.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 292.0,
+        "y": 34.9,
+        "text": "pull: bring",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 8.0,
+        "y": 60,
+        "w": 184.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 86.9,
+        "text": "friction: slows",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 60,
+        "w": 184.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "pink",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 292.0,
+        "y": 86.9,
+        "text": "gravity: pulls down",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Forces.",
+     "alt": "Four boxes about push, pull, friction and gravity."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Friction and gravity",
+     "md": "**Friction** is a force when two things rub together. It slows things down. Rough surfaces have more friction than smooth ones. **Gravity** pulls things down towards the Earth. That is why a dropped ball falls."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Friction is not always bad: it stops our shoes from slipping.\n- Heavier things are pulled down by gravity with a bigger force, but all things fall to the ground.\n- Pushing and pulling are both forces."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "You open a door by pulling the handle. What force is it?",
+     "steps": [
+      "You bring the door towards you.",
+      "A pull."
+     ],
+     "answer": "A pull",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 106,
+      "items": [
+       {
+        "t": "rect",
+        "x": 8.0,
+        "y": 8,
+        "w": 88.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 52.0,
+        "y": 34.9,
+        "text": "push",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 104.0,
+        "y": 8,
+        "w": 88.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 148.0,
+        "y": 34.9,
+        "text": "pull",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 8,
+        "w": 88.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 244.0,
+        "y": 34.9,
+        "text": "friction",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 296.0,
+        "y": 8,
+        "w": 88.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "pink",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 340.0,
+        "y": 34.9,
+        "text": "gravity",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Why does a ball roll further on a smooth floor than on grass?",
+     "steps": [
+      "There is less friction on a smooth floor.",
+      "It slows down less."
+     ],
+     "answer": "Less friction"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-light-shadows",
+   "title": "Light and shadows",
+   "minutes": 12,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level II (Class 3) — Elementary Science; to be checked against the official texts",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Say where light comes from.",
+    "Explain how a shadow is made."
+   ],
+   "prerequisites": [
+    "class3-science-forces"
+   ],
+   "exercises": [
+    "class3-science-matter-energy-e19",
+    "class3-science-matter-energy-e20",
+    "class3-science-matter-energy-e21",
+    "class3-science-matter-energy-e22",
+    "class3-science-matter-energy-e23",
+    "class3-science-matter-energy-e24"
+   ],
+   "selfCheck": [
+    "class3-science-light-shadows-q1",
+    "class3-science-light-shadows-q2",
+    "class3-science-light-shadows-q3",
+    "class3-science-light-shadows-q4",
+    "class3-science-light-shadows-q5"
+   ],
+   "reviewNotes": [
+    "Shadow length claim: long when the Sun is low, short when high (in the tropics near noon the shadow is very short).",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Light",
+     "md": "**Light** lets us see. Sources of light: the **Sun**, a **fire**, a **lamp**, a **torch**. The Moon does not make light: it reflects the Sun's light. Light travels in **straight lines**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 330,
+      "h": 140,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 40,
+        "cy": 70,
+        "r": 22,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 40,
+        "w": 20,
+        "h": 60,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 190,
+        "y": 90,
+        "w": 100,
+        "h": 10,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "grey"
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 115,
+        "text": "light",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 120,
+        "text": "object",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 120,
+        "text": "shadow",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "A shadow forms behind an object.",
+     "alt": "A yellow light, an orange object and a grey shadow behind it."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Shadows",
+     "md": "A **shadow** forms when an **opaque** object (one that light cannot pass through) blocks light. **Transparent** things (glass) let light through. **Translucent** things (tracing paper) let some through. Shadows are longest in the early morning and late afternoon, and shortest at midday."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- A shadow is not an object; it is the absence of light.\n- Never look straight at the Sun.\n- Shadows point away from the light."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Which of these makes a shadow: a wooden board or clear glass?",
+     "steps": [
+      "Wood blocks light.",
+      "The wooden board makes a shadow."
+     ],
+     "answer": "The wooden board",
+     "figure": {
+      "kind": "shapes",
+      "w": 330,
+      "h": 140,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 40,
+        "cy": 70,
+        "r": 22,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 40,
+        "w": 20,
+        "h": 60,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 190,
+        "y": 90,
+        "w": 100,
+        "h": 10,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "grey"
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 115,
+        "text": "light",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 120,
+        "text": "object",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 120,
+        "text": "shadow",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "At what time of day is a shadow shortest?",
+     "steps": [
+      "The Sun is high in the sky.",
+      "Around midday."
+     ],
+     "answer": "Midday"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-magnets",
+   "title": "Magnets",
+   "minutes": 12,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level II (Class 3) — Elementary Science; to be checked against the official texts",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Say what a magnet attracts.",
+    "Name the poles."
+   ],
+   "prerequisites": [
+    "class3-science-light-shadows"
+   ],
+   "exercises": [
+    "class3-science-matter-energy-e25",
+    "class3-science-matter-energy-e26",
+    "class3-science-matter-energy-e27",
+    "class3-science-matter-energy-e28",
+    "class3-science-matter-energy-e29",
+    "class3-science-matter-energy-e30"
+   ],
+   "selfCheck": [
+    "class3-science-magnets-q1",
+    "class3-science-magnets-q2",
+    "class3-science-magnets-q3",
+    "class3-science-magnets-q4",
+    "class3-science-magnets-q5"
+   ],
+   "reviewNotes": [
+    "Which coins are magnetic varies; the lesson avoids stating anything about FCFA coins.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Magnets",
+     "md": "A **magnet** attracts things made of **iron** or **steel**, such as nails, pins and paper clips. It does not attract wood, plastic, glass or paper. Magnets can be bar-shaped, horseshoe-shaped or round."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 240,
+      "h": 120,
+      "items": [
+       {
+        "t": "rect",
+        "x": 50,
+        "y": 40,
+        "w": 70,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 40,
+        "w": 70,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 60,
+        "text": "N",
+        "size": 16,
+        "anchor": "middle",
+        "color": "white",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 155,
+        "y": 60,
+        "text": "S",
+        "size": 16,
+        "anchor": "middle",
+        "color": "white",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 100,
+        "text": "a bar magnet",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "A bar magnet with N and S poles.",
+     "alt": "A bar magnet with a red north end and a blue south end."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Poles",
+     "md": "A magnet has two **poles**: **north** and **south**. **Opposite poles attract** (N and S). **Like poles repel** (N and N, or S and S). A magnet pulls strongest at its poles."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Magnets do not attract all metals. Aluminium, copper and gold are not attracted.\n- Keep magnets away from phones, cards and screens.\n- Like poles push apart."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Will a magnet pick up a plastic ruler?",
+     "steps": [
+      "Plastic is not iron.",
+      "No."
+     ],
+     "answer": "No",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 120,
+      "items": [
+       {
+        "t": "rect",
+        "x": 8.0,
+        "y": 8,
+        "w": 184.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 34.9,
+        "text": "attracts: nail",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 8,
+        "w": 184.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 292.0,
+        "y": 34.9,
+        "text": "attracts: pin",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 8.0,
+        "y": 60,
+        "w": 184.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 86.9,
+        "text": "no: wood",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 60,
+        "w": 184.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "pink",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 292.0,
+        "y": 86.9,
+        "text": "no: plastic",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Two north poles are brought together. What happens?",
+     "steps": [
+      "Like poles repel.",
+      "They push apart."
+     ],
+     "answer": "They repel"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class3-science-matter-energy"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "class3-science-matter-energy-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class3-science-water-cycle",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Water turns to vapour by...",
+   "choices": [
+    "evaporation",
+    "freezing",
+    "condensation",
+    "melting"
+   ],
+   "answer": 0,
+   "explanation": "Evaporation.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-matter-energy-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class3-science-water-cycle",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Clouds form by...",
+   "choices": [
+    "condensation",
+    "evaporation",
+    "digestion",
+    "growth"
+   ],
+   "answer": 0,
+   "explanation": "Condensation.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-matter-energy-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "class3-science-water-cycle",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The Sun helps water to evaporate.",
+   "answer": true,
+   "explanation": "Yes.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-matter-energy-e04",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "class3-science-water-cycle",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match the word with its meaning.",
+   "pairs": [
+    [
+     "evaporation",
+     "water becomes vapour"
+    ],
+    [
+     "condensation",
+     "vapour becomes drops"
+    ],
+    [
+     "rain",
+     "drops fall from clouds"
+    ]
+   ],
+   "explanation": "Meanings.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-matter-energy-e05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "class3-science-water-cycle",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "After rain, water flows into...",
+   "choices": [
+    "the Sun",
+    "the moon",
+    "rivers and the sea",
+    "the clouds first"
+   ],
+   "answer": 2,
+   "explanation": "Rivers.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-matter-energy-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class3-science-water-cycle",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A pupil puts wet cloth in the sun. After an hour it is dry.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Where did the water go?",
+     "choices": [
+      "it disappeared forever",
+      "it froze",
+      "it went into the cloth",
+      "it evaporated into the air"
+     ],
+     "answer": 3,
+     "explanation": "Evaporation.",
+     "id": "class3-science-matter-energy-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What helped?",
+     "choices": [
+      "heat from the Sun",
+      "noise",
+      "darkness",
+      "cold"
+     ],
+     "answer": 0,
+     "explanation": "Heat.",
+     "id": "class3-science-matter-energy-e06-b"
+    }
+   ],
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-water-cycle-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-science-water-cycle",
+   "prompt": "Class 3 science water cycle: water becomes vapour by...",
+   "choices": [
+    "evaporation",
+    "freezing",
+    "condensation",
+    "growing"
+   ],
+   "answer": 0,
+   "explanation": "Evaporation.",
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-water-cycle-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-science-water-cycle",
+   "prompt": "Class 3 science water cycle: clouds are made of...",
+   "choices": [
+    "smoke",
+    "tiny drops of water",
+    "cotton",
+    "dust only"
+   ],
+   "answer": 1,
+   "explanation": "Water drops.",
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-water-cycle-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-science-water-cycle",
+   "prompt": "What heats the water to make it evaporate?",
+   "choices": [
+    "the stars",
+    "the Sun",
+    "the wind only",
+    "the Moon"
+   ],
+   "answer": 1,
+   "explanation": "Sun.",
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-water-cycle-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-science-water-cycle",
+   "prompt": "Rain falls from...",
+   "choices": [
+    "trees",
+    "the Moon",
+    "clouds",
+    "rivers"
+   ],
+   "answer": 2,
+   "explanation": "Clouds.",
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-water-cycle-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-science-water-cycle",
+   "prompt": "The water cycle...",
+   "choices": [
+    "makes salt",
+    "stops forever",
+    "happens once",
+    "goes round and round"
+   ],
+   "answer": 3,
+   "explanation": "Cycle.",
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-matter-energy-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class3-science-states-of-matter",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which is a solid?",
+   "choices": [
+    "water",
+    "oil",
+    "a stone",
+    "air"
+   ],
+   "answer": 2,
+   "explanation": "Stone.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-matter-energy-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class3-science-states-of-matter",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Water changes to ice by...",
+   "choices": [
+    "freezing",
+    "melting",
+    "growing",
+    "boiling"
+   ],
+   "answer": 0,
+   "explanation": "Freezing.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-matter-energy-e09",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class3-science-states-of-matter",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "At how many degrees Celsius does water boil (at sea level)?",
+   "answer": 100,
+   "tolerance": 0,
+   "unit": "degrees Celsius",
+   "explanation": "100.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-matter-energy-e10",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "class3-science-states-of-matter",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match the state with an example.",
+   "pairs": [
+    [
+     "solid",
+     "wood"
+    ],
+    [
+     "liquid",
+     "milk"
+    ],
+    [
+     "gas",
+     "air"
+    ]
+   ],
+   "explanation": "States.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-matter-energy-e11",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class3-science-states-of-matter",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A liquid takes the shape of its container.",
+   "answer": true,
+   "explanation": "Yes.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-matter-energy-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class3-science-states-of-matter",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A pupil heats ice in a pan (with an adult). It melts, then the water warms up.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What is the first change?",
+     "choices": [
+      "melting",
+      "boiling",
+      "condensing",
+      "freezing"
+     ],
+     "answer": 0,
+     "explanation": "Melting.",
+     "id": "class3-science-matter-energy-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Water freezes at how many degrees Celsius?",
+     "answer": 0,
+     "tolerance": 0,
+     "explanation": "0.",
+     "unit": "degrees Celsius",
+     "id": "class3-science-matter-energy-e12-b"
+    }
+   ],
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-states-of-matter-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-science-states-of-matter",
+   "prompt": "Class 3 science matter: a liquid...",
+   "choices": [
+    "keeps its shape always",
+    "flows",
+    "is always hard",
+    "cannot be poured"
+   ],
+   "answer": 1,
+   "explanation": "Flows.",
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-states-of-matter-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-science-states-of-matter",
+   "prompt": "Class 3 science matter: ice melting is a change from...",
+   "choices": [
+    "gas to liquid",
+    "solid to gas",
+    "solid to liquid",
+    "liquid to gas"
+   ],
+   "answer": 2,
+   "explanation": "Melting.",
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-states-of-matter-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-science-states-of-matter",
+   "prompt": "Air is a...",
+   "choices": [
+    "liquid",
+    "solid",
+    "stone",
+    "gas"
+   ],
+   "answer": 3,
+   "explanation": "Gas.",
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-states-of-matter-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-science-states-of-matter",
+   "prompt": "Water boils at about...",
+   "choices": [
+    "100 degrees Celsius",
+    "1000 degrees Celsius",
+    "0 degrees Celsius",
+    "10 degrees Celsius"
+   ],
+   "answer": 0,
+   "explanation": "100.",
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-states-of-matter-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-science-states-of-matter",
+   "prompt": "Which is a solid?",
+   "choices": [
+    "wood",
+    "oil",
+    "milk",
+    "air"
+   ],
+   "answer": 0,
+   "explanation": "Wood.",
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-matter-energy-e13",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class3-science-forces",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A force is a...",
+   "choices": [
+    "smell",
+    "push or a pull",
+    "colour",
+    "sound"
+   ],
+   "answer": 1,
+   "explanation": "Push or pull.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-matter-energy-e14",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class3-science-forces",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Gravity pulls things...",
+   "choices": [
+    "up to the sky",
+    "sideways only",
+    "to the Moon",
+    "down towards the Earth"
+   ],
+   "answer": 3,
+   "explanation": "Down.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-matter-energy-e15",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "class3-science-forces",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Friction slows moving things.",
+   "answer": true,
+   "explanation": "Yes.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-matter-energy-e16",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "class3-science-forces",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each action with the force.",
+   "pairs": [
+    [
+     "kicking a ball",
+     "push"
+    ],
+    [
+     "opening a drawer",
+     "pull"
+    ],
+    [
+     "a dropped coin falling",
+     "gravity"
+    ]
+   ],
+   "explanation": "Forces.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-matter-energy-e17",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "class3-science-forces",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which surface has the most friction?",
+   "choices": [
+    "ice",
+    "wet tile",
+    "polished floor",
+    "rough ground"
+   ],
+   "answer": 3,
+   "explanation": "Rough.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-matter-energy-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class3-science-forces",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Pupils slide a book on a table, then on a rough mat.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "On which surface does the book stop sooner?",
+     "choices": [
+      "the smooth table",
+      "neither",
+      "the rough mat",
+      "both the same"
+     ],
+     "answer": 2,
+     "explanation": "More friction.",
+     "id": "class3-science-matter-energy-e18-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Why?",
+     "choices": [
+      "there is more friction",
+      "air is heavy",
+      "there is less friction",
+      "gravity stops"
+     ],
+     "answer": 0,
+     "explanation": "Friction.",
+     "id": "class3-science-matter-energy-e18-b"
+    }
+   ],
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-forces-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-science-forces",
+   "prompt": "Class 3 science forces: pushing and pulling are...",
+   "choices": [
+    "forces",
+    "colours",
+    "smells",
+    "sounds"
+   ],
+   "answer": 0,
+   "explanation": "Forces.",
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-forces-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-science-forces",
+   "prompt": "Class 3 science forces: friction...",
+   "choices": [
+    "slows things down",
+    "makes light",
+    "speeds all things",
+    "makes sound"
+   ],
+   "answer": 0,
+   "explanation": "Slows.",
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-forces-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-science-forces",
+   "prompt": "A dropped mango falls because of...",
+   "choices": [
+    "gravity",
+    "friction",
+    "light",
+    "magnetism"
+   ],
+   "answer": 0,
+   "explanation": "Gravity.",
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-forces-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-science-forces",
+   "prompt": "Which has the least friction?",
+   "choices": [
+    "sand",
+    "ice",
+    "rough mat",
+    "grass"
+   ],
+   "answer": 1,
+   "explanation": "Ice.",
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-forces-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-science-forces",
+   "prompt": "Kicking a ball is a...",
+   "choices": [
+    "sound",
+    "push",
+    "pull",
+    "light"
+   ],
+   "answer": 1,
+   "explanation": "Push.",
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-matter-energy-e19",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class3-science-light-shadows",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which is a source of light?",
+   "choices": [
+    "a torch",
+    "a stone",
+    "a mirror",
+    "the Moon"
+   ],
+   "answer": 0,
+   "explanation": "Torch.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-matter-energy-e20",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class3-science-light-shadows",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which material is transparent?",
+   "choices": [
+    "wood",
+    "metal",
+    "a brick",
+    "clear glass"
+   ],
+   "answer": 3,
+   "explanation": "Glass.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-matter-energy-e21",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "class3-science-light-shadows",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Light travels in straight lines.",
+   "answer": true,
+   "explanation": "Yes.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-matter-energy-e22",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "class3-science-light-shadows",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match the word with its meaning.",
+   "pairs": [
+    [
+     "opaque",
+     "no light passes"
+    ],
+    [
+     "transparent",
+     "all light passes"
+    ],
+    [
+     "translucent",
+     "some light passes"
+    ]
+   ],
+   "explanation": "Words.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-matter-energy-e23",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "class3-science-light-shadows",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A shadow is shortest at...",
+   "choices": [
+    "sunrise",
+    "midday",
+    "sunset",
+    "midnight"
+   ],
+   "answer": 1,
+   "explanation": "Midday.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-matter-energy-e24",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class3-science-light-shadows",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A pupil holds a book between a torch and a wall.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What appears on the wall?",
+     "choices": [
+      "a sound",
+      "a colour",
+      "nothing",
+      "a shadow"
+     ],
+     "answer": 3,
+     "explanation": "A shadow.",
+     "id": "class3-science-matter-energy-e24-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The book is...",
+     "choices": [
+      "transparent",
+      "translucent",
+      "a source of light",
+      "opaque"
+     ],
+     "answer": 3,
+     "explanation": "Opaque.",
+     "id": "class3-science-matter-energy-e24-b"
+    }
+   ],
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-light-shadows-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-science-light-shadows",
+   "prompt": "Class 3 science light: shadows are made when light is...",
+   "choices": [
+    "heard",
+    "made",
+    "smelled",
+    "blocked"
+   ],
+   "answer": 3,
+   "explanation": "Blocked.",
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-light-shadows-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-science-light-shadows",
+   "prompt": "Class 3 science light: the Moon...",
+   "choices": [
+    "is a lamp",
+    "makes light",
+    "reflects light",
+    "is a fire"
+   ],
+   "answer": 2,
+   "explanation": "Reflects.",
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-light-shadows-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-science-light-shadows",
+   "prompt": "Which material lets light pass through?",
+   "choices": [
+    "brick",
+    "metal",
+    "wood",
+    "clear glass"
+   ],
+   "answer": 3,
+   "explanation": "Glass.",
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-light-shadows-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-science-light-shadows",
+   "prompt": "A source of light is...",
+   "choices": [
+    "the Sun",
+    "a mirror",
+    "a stone",
+    "the Moon"
+   ],
+   "answer": 0,
+   "explanation": "Sun.",
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-light-shadows-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-science-light-shadows",
+   "prompt": "Shadows are longest in the...",
+   "choices": [
+    "midday",
+    "at noon sharp",
+    "never",
+    "early morning"
+   ],
+   "answer": 3,
+   "explanation": "Morning.",
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-matter-energy-e25",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class3-science-magnets",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A magnet attracts...",
+   "choices": [
+    "an iron nail",
+    "a wooden spoon",
+    "a plastic pen",
+    "a glass cup"
+   ],
+   "answer": 0,
+   "explanation": "Iron.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-matter-energy-e26",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class3-science-magnets",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Opposite poles...",
+   "choices": [
+    "grow",
+    "repel",
+    "attract",
+    "melt"
+   ],
+   "answer": 2,
+   "explanation": "Attract.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-matter-energy-e27",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "class3-science-magnets",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Like poles repel.",
+   "answer": true,
+   "explanation": "Yes.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-matter-energy-e28",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "class3-science-magnets",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match the object with whether a magnet attracts it.",
+   "pairs": [
+    [
+     "steel pin",
+     "attracted"
+    ],
+    [
+     "wooden stick",
+     "not attracted"
+    ]
+   ],
+   "explanation": "Test.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-matter-energy-e29",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "class3-science-magnets",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A magnet pulls strongest at its...",
+   "choices": [
+    "colour",
+    "middle",
+    "poles",
+    "label"
+   ],
+   "answer": 2,
+   "explanation": "Poles.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-matter-energy-e30",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class3-science-magnets",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Neba tests 6 things with a magnet: a nail, a coin of copper, a pin, a plastic cup, a paper clip and a key of steel.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many of these contain iron or steel (nail, pin, paper clip, steel key)?",
+     "answer": 4,
+     "tolerance": 0,
+     "explanation": "Four.",
+     "id": "class3-science-matter-energy-e30-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Will the plastic cup be attracted?",
+     "choices": [
+      "only at night",
+      "yes",
+      "only wet",
+      "no"
+     ],
+     "answer": 3,
+     "explanation": "Plastic is not magnetic.",
+     "id": "class3-science-matter-energy-e30-b"
+    }
+   ],
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-magnets-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-science-magnets",
+   "prompt": "Class 3 science magnets: a magnet attracts...",
+   "choices": [
+    "paper",
+    "plastic",
+    "wood",
+    "iron and steel"
+   ],
+   "answer": 3,
+   "explanation": "Iron.",
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-magnets-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-science-magnets",
+   "prompt": "Class 3 science magnets: opposite poles...",
+   "choices": [
+    "repel",
+    "melt",
+    "float",
+    "attract"
+   ],
+   "answer": 3,
+   "explanation": "Attract.",
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-magnets-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-science-magnets",
+   "prompt": "A magnet has how many poles?",
+   "choices": [
+    "1",
+    "2",
+    "10",
+    "3"
+   ],
+   "answer": 1,
+   "explanation": "Two.",
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-magnets-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-science-magnets",
+   "prompt": "Like poles...",
+   "choices": [
+    "attract",
+    "break",
+    "repel",
+    "melt"
+   ],
+   "answer": 2,
+   "explanation": "Repel.",
+   "chapter": "class3-science-matter-energy"
+  },
+  {
+   "id": "class3-science-magnets-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-science-magnets",
+   "prompt": "Which is NOT attracted?",
+   "choices": [
+    "a steel key",
+    "an iron pin",
+    "a steel nail",
+    "a plastic pen"
+   ],
+   "answer": 3,
+   "explanation": "Plastic.",
+   "chapter": "class3-science-matter-energy"
+  }
+ ]
+}
