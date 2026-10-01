@@ -91,9 +91,14 @@ class ReceiverServer(
     private val meters = java.util.concurrent.ConcurrentHashMap<String, RateMeter>()
     @Volatile private var moveJob: MoveJob? = null
     private val uploading = java.util.concurrent.atomic.AtomicInteger()
+    /** Multi-connection transfers (/api/transfer/..., see docs/TRANSFER.md); old phones never call it. */
+    private val transfers = castbridge.core.xfer.TransferHost(maxStreams = maxOf(2, cfg.maxHttpThreads - 2)).also { h ->
+        h.finalSizeOf = { n -> findFinal(n)?.size }
+    }
+    private val chunking = java.util.concurrent.atomic.AtomicInteger()
 
     /** Uploads being received right now (the TV app keeps a partial wake lock only while this is above zero). */
-    fun activeTransfers(): Int = uploading.get() + (if (moveJob?.state == "running") 1 else 0)
+    fun activeTransfers(): Int = uploading.get() + chunking.get() + (if (moveJob?.state == "running") 1 else 0)
     @Volatile private var playingVolume: String? = null
     /** "Play one after the other" (library section, selection); null = single file. */
     @Volatile private var playlist: Playlist? = null
@@ -134,7 +139,7 @@ class ReceiverServer(
      */
     fun busyReason(name: String, strictPlaying: Boolean = true): String? = when {
         moving(name) -> "moving"
-        findPart(name) != null -> "uploading"
+        findPart(name) != null || transfers.hasName(name) -> "uploading"
         volumes.volumes().any { streamUse.busy(it.storedName(name)) } || streamUse.busy(name) -> "streaming"
         strictPlaying && isPlaying(name) -> "playing"
         else -> null
@@ -178,6 +183,7 @@ class ReceiverServer(
         val st = volumes.store(v) as? FileStore ?: return
         val age = if (v.kind == VolumeKind.REMOVABLE) cfg.orphanPartMaxAgeMs * 7 else cfg.orphanPartMaxAgeMs
         runCatching { Storage.cleanOrphans(st.dir, age) }
+        transfers.sweep(cfg.orphanPartMaxAgeMs)
     }
 
     /**
@@ -272,6 +278,9 @@ class ReceiverServer(
             // NanoHTTPD already percent-decoded the URI. A rejected upload leaves its body unread on the
             // socket, which would corrupt the next keep-alive request: close the connection instead.
             s.method == Method.PUT && path.startsWith("/upload/") -> upload(s, path.removePrefix("/upload/"), p).also {
+                if (it.status != Response.Status.OK) it.addHeader("Connection", "close")
+            }
+            path.startsWith("/api/transfer/") -> transfer(s, path.removePrefix("/api/transfer/"), p).also {
                 if (it.status != Response.Status.OK) it.addHeader("Connection", "close")
             }
             path == "/api/info" -> ok(info())
@@ -567,6 +576,118 @@ class ReceiverServer(
             invalidate()
             return ok(partJson(name))
         }
+    }
+
+    // ---- multi-connection transfer: /api/transfer/{caps,begin,chunk,state,finish,abort} ----
+
+    private fun transfer(s: IHTTPSession, op: String, p: Map<String, String>): Response = when {
+        op == "caps" && s.method == Method.GET ->
+            ok("""{"version":${castbridge.core.xfer.TransferHost.API_VERSION},"maxStreams":${transfers.maxStreams},"slice":${castbridge.core.xfer.Manifest.SLICE}}""")
+        op == "begin" && s.method == Method.POST -> transferBegin(p)
+        op == "chunk" && s.method == Method.PUT -> transferChunk(s, p)
+        op == "state" && s.method == Method.GET -> transfers.session(p["id"].orEmpty())?.let { ok(transfers.stateJson(it, p["hashes"] == "1")) }
+            ?: json(Response.Status.NOT_FOUND, """{"error":"unknown transfer"}""")
+        op == "finish" && s.method == Method.POST -> transferFinish(p)
+        op == "abort" && s.method == Method.POST -> { transfers.discard(p["id"].orEmpty()); ok("""{"ok":true}""") }
+        else -> json(Response.Status.NOT_FOUND, """{"error":"not found"}""")
+    }
+
+    private fun transferBegin(p: Map<String, String>): Response {
+        val name = safeName(p["name"].orEmpty()) ?: return bad("bad name")
+        val size = p["size"]?.toLongOrNull()?.takeIf { it >= 0 } ?: return bad("size required")
+        val bs = p["blockSize"]?.toIntOrNull() ?: return bad("blockSize required")
+        val m = try { castbridge.core.xfer.Manifest(name, size, bs).also { require(bs <= 16 shl 20) } } catch (e: IllegalArgumentException) { return bad("bad blockSize") }
+        val target = p["target"]?.takeIf { it.isNotEmpty() } ?: cfg.target
+        if (!StoragePolicy.isValidTarget(target, volumes.volumes() + volumes.missingVolumes())) return bad("bad target")
+        uploading.incrementAndGet()
+        try {
+            synchronized(FileLocks.of(LOCK_ROOT, name)) {
+                if (moving(name)) return json(Response.Status.CONFLICT, """{"error":"moving"}""")
+                val r = transfers.begin(m) { mf -> allocateTransfer(mf, target) }
+                return when (r) {
+                    is castbridge.core.xfer.TransferHost.Begin.AlreadyThere -> ok("""{"done":true,"name":${q(name)}}""")
+                    is castbridge.core.xfer.TransferHost.Begin.Refused ->
+                        json(status(r.http), """{"error":${q(r.message)},"message":${q(humanRefusal(r.message))}}""")
+                    is castbridge.core.xfer.TransferHost.Begin.Ok -> ok(transfers.stateJson(r.s))
+                }
+            }
+        } finally { uploading.decrementAndGet() }
+    }
+
+    /** Picks the volume like an upload does (policy, quota, "free space after the transfer" rule); folders only (not the system picker's). */
+    private fun allocateTransfer(m: castbridge.core.xfer.Manifest, target: String): castbridge.core.xfer.Allocation {
+        findPart(m.name)?.let { return castbridge.core.xfer.Allocation.Refused(409, "upload in progress") }
+        if (volumes.missingOwner(m.name) != null) return castbridge.core.xfer.Allocation.Refused(503, "volume removed")
+        val plan = StoragePolicy.plan(volumes.snapshot(), target, m.size, TransferRule.minFree(cfg), reclaimable = ::reclaimable)
+        plan.refusal?.let { r -> return castbridge.core.xfer.Allocation.Refused(r.http, if (r.http == 507) spaceMessage(r.message, target, m.size).second else r.message) }
+        var why: String? = null
+        for (c in plan.candidates) {
+            val st = volumes.store(c.volume) as? FileStore
+            if (st == null) { why = "not supported on this volume"; continue }
+            val w = ensureRoom(c.volume, m.size, xferCfg)
+            if (w != null) { why = w; continue }
+            return castbridge.core.xfer.Allocation.At(st.dir, c.volume.storedName(m.name), c.volume.id)
+        }
+        val reason = why ?: "no storage available"
+        return if (reason == "not supported on this volume") castbridge.core.xfer.Allocation.Refused(501, reason)
+        else castbridge.core.xfer.Allocation.Refused(507, spaceMessage(reason, target, m.size).second)
+    }
+
+    private fun transferChunk(s: IHTTPSession, p: Map<String, String>): Response {
+        val sess = transfers.session(p["id"].orEmpty()) ?: return json(Response.Status.NOT_FOUND, """{"error":"unknown transfer"}""")
+        val v = volumes[sess.volumeId]?.takeIf { volumes.alive(it) }
+        if (v == null) { transfers.remove(sess.manifest.id); sess.assembler.close(); return removed() }
+        val idx = p["idx"]?.toIntOrNull() ?: return bad("idx required")
+        val len = s.headers["content-length"]?.toLongOrNull() ?: return bad("content-length required")
+        val sha = s.headers["x-cb-sha256"].orEmpty().lowercase()
+        if (idx !in 0 until sess.manifest.blocks) return bad("bad block index")
+        if (chunking.get() >= transfers.maxStreams || !transfers.mayAccept(sess.manifest.length(idx).toLong()))
+            return json(status(429), """{"error":"busy","retryMs":250,"writeBps":${transfers.stats.bytesPerSec()}}""")
+        chunking.incrementAndGet()
+        try {
+            val a = sess.assembler
+            val r = p["slice"]?.let { k -> a.writeSlice(idx, k.toIntOrNull() ?: return bad("bad slice"), sha, s.inputStream, len) }
+                ?: a.writeBlock(idx, sha, s.inputStream, len, s.headers["x-cb-enc"].equals("gzip", true))
+            return when (r) {
+                is castbridge.core.xfer.PartAssembler.Block.Ok -> ok("""{"ok":true,"done":${a.map.count()},"writeBps":${transfers.stats.bytesPerSec()}}""")
+                is castbridge.core.xfer.PartAssembler.Block.Already -> ok("""{"already":true}""")
+                is castbridge.core.xfer.PartAssembler.Block.Corrupt -> json(status(422), """{"error":"corrupt block","idx":$idx}""")
+                is castbridge.core.xfer.PartAssembler.Block.Bad -> bad(r.reason)
+                is castbridge.core.xfer.PartAssembler.Block.Interrupted -> bad("interrupted")
+                is castbridge.core.xfer.PartAssembler.Block.DiskFail -> try { diskFailure(v, DiskError(r.cause)) } finally { if (!volumes.alive(v)) { transfers.remove(sess.manifest.id); a.close() } }
+            }
+        } finally { chunking.decrementAndGet() }
+    }
+
+    private fun transferFinish(p: Map<String, String>): Response {
+        val sess = transfers.session(p["id"].orEmpty()) ?: return json(Response.Status.NOT_FOUND, """{"error":"unknown transfer"}""")
+        val root = p["root"].orEmpty()
+        val name = sess.manifest.name
+        val v = volumes[sess.volumeId]?.takeIf { volumes.alive(it) } ?: return removed()
+        uploading.incrementAndGet()
+        sess.finishing = true
+        try {
+            synchronized(FileLocks.of(LOCK_ROOT, name)) {
+                return when (val r = sess.assembler.finish(root, sess.diskName)) {
+                    is castbridge.core.xfer.PartAssembler.Finish.Missing -> json(Response.Status.CONFLICT, transfers.stateJson(sess))
+                    is castbridge.core.xfer.PartAssembler.Finish.Corrupt -> json(status(422), transfers.stateJson(sess))
+                    castbridge.core.xfer.PartAssembler.Finish.RootMismatch -> bad("root mismatch")
+                    is castbridge.core.xfer.PartAssembler.Finish.DiskFail -> diskFailure(v, DiskError(r.cause))
+                    is castbridge.core.xfer.PartAssembler.Finish.Done -> {
+                        val st = volumes.store(v); val fileStore = st as? FileStore
+                        try { st.commit(sess.diskName) } catch (e: IOException) { return diskFailure(v, DiskError(e)) }
+                        fileStore?.let { Storage.forget(it.dir, sess.diskName); Meta.delete(it.dir, sess.diskName) }
+                        transfers.remove(sess.manifest.id)
+                        onNotice(when (MediaType.of(name)) { MediaType.VIDEO -> "Vidéo reçue"; MediaType.AUDIO -> "Musique reçue"; MediaType.OTHER -> "Fichier reçu" } + " ✓  ${LibraryLogic.title(name)}")
+                        finals(name).filter { it.v.id != v.id && !isPlaying(name) }.forEach {
+                            it.st.deleteFinal(it.name); (it.st as? FileStore)?.let { f -> Storage.forget(f.dir, it.name) }
+                        }
+                        invalidate()
+                        ok("""{"done":true,"name":${q(name)},"volume":${q(v.id)}}""")
+                    }
+                }
+            }
+        } finally { sess.finishing = false; uploading.decrementAndGet() }
     }
 
     /** Why a disk write failed: drive pulled (503, retry), read-only (503), file too big for the FS (413), no space (507). */
