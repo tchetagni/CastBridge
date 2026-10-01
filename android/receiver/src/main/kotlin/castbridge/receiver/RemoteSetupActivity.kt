@@ -72,9 +72,15 @@ class RemoteSetupActivity : Activity() {
     }
 
     private fun openSettings() {
-        for (action in listOf(Settings.ACTION_ACCESSIBILITY_SETTINGS, Settings.ACTION_SETTINGS)) {
-            if (runCatching { startActivity(Intent(action)) }.isSuccess) return
-        }
+        // Standard Android first; then the accessibility screen of CVTE's « LiteSettings » (the Amlogic/GaiaOS TVs have no stock Settings app and
+        // answer « Aucune de vos applications ne permet d'effectuer cette action » to ACTION_ACCESSIBILITY_SETTINGS); last, the general settings.
+        val tries = listOf(
+            Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS),
+            Intent("com.cvte.intent.action.ACCESSIBILITY_SETTING"),
+            Intent().setClassName("com.cvte.settings", "com.cvte.settings.Settings\$AccessibilitySettings"),
+            Intent(Settings.ACTION_SETTINGS),
+        )
+        for (i in tries) if (runCatching { startActivity(i) }.isSuccess) return
         state.text = "Cette TV n'a pas d'écran de réglages d'accessibilité accessible : le mode « toute la TV » n'y est pas possible."
     }
 

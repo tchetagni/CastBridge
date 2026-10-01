@@ -39,14 +39,17 @@ class RemoteService : Service() {
             ACTION_STOP -> { quit(); return START_NOT_STICKY }
             ACTION_KEY -> { RemoteKey.entries.firstOrNull { it.wire == intent.getStringExtra(EXTRA_KEY) }?.let { RemoteController.key(it, KeyAction.PRESS) }; return START_NOT_STICKY }
         }
-        if (!RemoteController.hasSession) { stopSelf(); return START_NOT_STICKY }     // nothing to keep alive (process restarted)
         if (running) return START_NOT_STICKY
+        // startForegroundService() obliges this service to call startForeground() within seconds, whatever happens next: stopping first
+        // (the remote screen starts us before its link exists) made Android kill the whole app. So: foreground first, decide after.
         try {
             val n = notification()
             if (Build.VERSION.SDK_INT >= 29) startForeground(NOTIF, n, ServiceInfo.FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE) else startForeground(NOTIF, n)
         } catch (e: Exception) { stopSelf(); return START_NOT_STICKY }
         running = true
         setupVolumeKeys()
+        // the link is opened by the remote screen just after: if none ever appears (process restarted, screen closed), stop quietly
+        scope.launch { kotlinx.coroutines.delay(NO_SESSION_GRACE_MS); if (!RemoteController.hasSession) quit() }
         scope.launch {
             RemoteController.status.collect { st ->
                 text = when (st.link) {
@@ -112,6 +115,7 @@ class RemoteService : Service() {
         private const val ACTION_STOP = "castbridge.sender.REMOTE_STOP"
         private const val ACTION_KEY = "castbridge.sender.REMOTE_KEY"
         private const val EXTRA_KEY = "key"
+        private const val NO_SESSION_GRACE_MS = 30_000L
         @Volatile var running = false; private set
 
         fun start(ctx: Context) {
