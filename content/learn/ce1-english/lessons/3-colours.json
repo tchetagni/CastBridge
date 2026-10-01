@@ -1,0 +1,551 @@
+{
+ "chapter": "ce1-english-c3-colours",
+ "lessons": [
+  {
+   "id": "ce1-english-colours",
+   "title": "The colours (les couleurs)",
+   "minutes": 12,
+   "readAloud": true,
+   "programRef": "CE1 — Anglais : les couleurs, phrases « It is… » (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Nommer huit couleurs en anglais.",
+    "Dire la couleur d'un objet : It is red.",
+    "Demander : What colour is it?"
+   ],
+   "prerequisites": [
+    "ce1-english-hello"
+   ],
+   "exercises": [
+    "ce1-english-colours-01",
+    "ce1-english-colours-02",
+    "ce1-english-colours-03",
+    "ce1-english-colours-04",
+    "ce1-english-colours-05",
+    "ce1-english-colours-06"
+   ],
+   "selfCheck": [
+    "ce1-english-colours-q1",
+    "ce1-english-colours-q2",
+    "ce1-english-colours-q3",
+    "ce1-english-colours-q4",
+    "ce1-english-colours-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier l'orthographe « colour » (britannique) cohérente avec en-GB.",
+    "Vérifier le mélange bleu + jaune = vert (valable pour la peinture)."
+   ],
+   "blocks": [
+    {
+     "type": "audio",
+     "lang": "en-GB",
+     "text": "Red, blue, green, yellow, black, white, orange, pink."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les couleurs",
+     "md": "- **red** : rouge\n- **blue** : bleu\n- **green** : vert\n- **yellow** : jaune\n- **black** : noir\n- **white** : blanc\n- **orange** : orange\n- **pink** : rose\n\nÉcoute les mots, puis répète."
+    },
+    {
+     "type": "illustration",
+     "caption": "Huit couleurs.",
+     "alt": "Huit rectangles colorés avec leur nom écrit en anglais : red, blue, green, yellow, black, white, orange, pink.",
+     "figure": {
+      "kind": "shapes",
+      "w": 520,
+      "h": 235,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 12,
+        "w": 105,
+        "h": 55,
+        "fill": "red",
+        "stroke": "ink",
+        "radius": 10
+       },
+       {
+        "t": "text",
+        "x": 62,
+        "y": 90,
+        "text": "red",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 135,
+        "y": 12,
+        "w": 105,
+        "h": 55,
+        "fill": "blue",
+        "stroke": "ink",
+        "radius": 10
+       },
+       {
+        "t": "text",
+        "x": 187,
+        "y": 90,
+        "text": "blue",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 260,
+        "y": 12,
+        "w": 105,
+        "h": 55,
+        "fill": "green",
+        "stroke": "ink",
+        "radius": 10
+       },
+       {
+        "t": "text",
+        "x": 312,
+        "y": 90,
+        "text": "green",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 385,
+        "y": 12,
+        "w": 105,
+        "h": 55,
+        "fill": "yellow",
+        "stroke": "ink",
+        "radius": 10
+       },
+       {
+        "t": "text",
+        "x": 437,
+        "y": 90,
+        "text": "yellow",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 117,
+        "w": 105,
+        "h": 55,
+        "fill": "black",
+        "stroke": "ink",
+        "radius": 10
+       },
+       {
+        "t": "text",
+        "x": 62,
+        "y": 195,
+        "text": "black",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 135,
+        "y": 117,
+        "w": 105,
+        "h": 55,
+        "fill": "white",
+        "stroke": "ink",
+        "radius": 10
+       },
+       {
+        "t": "text",
+        "x": 187,
+        "y": 195,
+        "text": "white",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 260,
+        "y": 117,
+        "w": 105,
+        "h": 55,
+        "fill": "orange",
+        "stroke": "ink",
+        "radius": 10
+       },
+       {
+        "t": "text",
+        "x": 312,
+        "y": 195,
+        "text": "orange",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 385,
+        "y": 117,
+        "w": 105,
+        "h": 55,
+        "fill": "pink",
+        "stroke": "ink",
+        "radius": 10
+       },
+       {
+        "t": "text",
+        "x": 437,
+        "y": 195,
+        "text": "pink",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Demander et répondre",
+     "md": "Pour demander la couleur : **What colour is it?** (De quelle couleur est-ce ?)\n\nOn répond : **It is** + la couleur.\n\n- **It is red.** (C'est rouge.)\n- **It is blue.** (C'est bleu.)"
+    },
+    {
+     "type": "audio",
+     "lang": "en-GB",
+     "text": "What colour is it? It is green."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : le drapeau",
+     "statement": "Le drapeau du Cameroun a une étoile. Quelle est la couleur de l'étoile ?",
+     "steps": [
+      {
+       "md": "L'étoile est jaune."
+      },
+      {
+       "md": "En anglais, jaune se dit « yellow »."
+      }
+     ],
+     "answer": "**It is yellow.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : un objet",
+     "statement": "Une banane mûre est jaune. Comment le dis-tu en anglais ?",
+     "steps": [
+      {
+       "md": "On dit : The banana is yellow."
+      },
+      {
+       "md": "Ou plus simple : It is yellow."
+      }
+     ],
+     "answer": "**The banana is yellow.**"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Pour retenir",
+     "md": "Je regarde autour de moi et je dis la couleur en anglais : « My bag is blue. The board is black. »"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- **white** s'écrit avec « wh » ; **yellow** avec deux « l ».\n- On dit « a red bag » : **la couleur se place avant le nom**.\n- **orange** est à la fois un fruit et une couleur."
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-english-colours-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-english-colours-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-english-colours-03"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Quand on mélange du bleu et du jaune, on obtient du vert : blue + yellow = green.",
+      "En anglais, on dit aussi « the colour » ; en anglais américain, on écrit « color »."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ce1-english-colours-01",
+   "chapter": "ce1-english-c3-colours",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Comment dit-on « rouge » en anglais ?",
+   "choices": [
+    "blue",
+    "red",
+    "green",
+    "black"
+   ],
+   "answer": 1,
+   "explanation": "**Red** veut dire rouge.",
+   "lesson": "ce1-english-colours",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-english-colours-02",
+   "chapter": "ce1-english-c3-colours",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Vrai ou faux : « yellow » veut dire jaune.",
+   "answer": true,
+   "explanation": "Vrai : **yellow** = jaune.",
+   "lesson": "ce1-english-colours",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-english-colours-03",
+   "chapter": "ce1-english-c3-colours",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "prompt": "Associe chaque mot anglais à sa couleur.",
+   "pairs": [
+    [
+     "blue",
+     "bleu"
+    ],
+    [
+     "green",
+     "vert"
+    ],
+    [
+     "black",
+     "noir"
+    ],
+    [
+     "white",
+     "blanc"
+    ]
+   ],
+   "explanation": "blue : bleu. green : vert. black : noir. white : blanc.",
+   "lesson": "ce1-english-colours",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-english-colours-04",
+   "chapter": "ce1-english-c3-colours",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "De quelle couleur est une tomate mûre ? « The tomato is ___. »",
+   "choices": [
+    "blue",
+    "black",
+    "white",
+    "red"
+   ],
+   "answer": 3,
+   "explanation": "Une tomate mûre est **red**.",
+   "lesson": "ce1-english-colours",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-english-colours-05",
+   "chapter": "ce1-english-c3-colours",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Écris en anglais la couleur de ton cartable, par exemple « My bag is… »",
+   "model": "My bag is blue.",
+   "rubric": [
+    "Une phrase avec « My bag is »",
+    "Une couleur anglaise correcte."
+   ],
+   "explanation": "Par exemple : **My bag is blue.**",
+   "lesson": "ce1-english-colours",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-english-colours-06",
+   "chapter": "ce1-english-c3-colours",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Ngono regarde les objets de la classe.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Le tableau est noir. « The board is ___. »",
+     "choices": [
+      "black",
+      "white",
+      "pink",
+      "yellow"
+     ],
+     "answer": 0,
+     "explanation": "Noir se dit **black**.",
+     "id": "ce1-english-colours-06-a"
+    },
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "La craie est blanche. « The chalk is ___. »",
+     "choices": [
+      "black",
+      "red",
+      "white",
+      "orange"
+     ],
+     "answer": 2,
+     "explanation": "Blanc se dit **white**.",
+     "id": "ce1-english-colours-06-b"
+    },
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "« What colour is it? » veut dire…",
+     "choices": [
+      "Quel âge as-tu ?",
+      "Comment t'appelles-tu ?",
+      "De quelle couleur est-ce ?",
+      "Où est-ce ?"
+     ],
+     "answer": 2,
+     "explanation": "**What colour is it?** = De quelle couleur est-ce ?",
+     "id": "ce1-english-colours-06-c"
+    }
+   ],
+   "lesson": "ce1-english-colours",
+   "points": 3,
+   "explanation": "Corrigé détaillé question par question ci-dessous.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-english-colours-q1",
+   "chapter": "ce1-english-c3-colours",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Comment dit-on « vert » en anglais ?",
+   "choices": [
+    "green",
+    "red",
+    "blue",
+    "pink"
+   ],
+   "answer": 0,
+   "explanation": "**Green** veut dire vert.",
+   "lesson": "ce1-english-colours",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-english-colours-q2",
+   "chapter": "ce1-english-c3-colours",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Comment dit-on « rose » en anglais ?",
+   "choices": [
+    "red",
+    "white",
+    "brown",
+    "pink"
+   ],
+   "answer": 3,
+   "explanation": "**Pink** veut dire rose.",
+   "lesson": "ce1-english-colours",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-english-colours-q3",
+   "chapter": "ce1-english-c3-colours",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "« blue » veut dire…",
+   "choices": [
+    "noir",
+    "bleu",
+    "vert",
+    "jaune"
+   ],
+   "answer": 1,
+   "explanation": "**Blue** = bleu.",
+   "lesson": "ce1-english-colours",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-english-colours-q4",
+   "chapter": "ce1-english-c3-colours",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quelle phrase veut dire « C'est noir » ?",
+   "choices": [
+    "It is white.",
+    "It is black.",
+    "It is blue.",
+    "It is red."
+   ],
+   "answer": 1,
+   "explanation": "**It is black.**",
+   "lesson": "ce1-english-colours",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-english-colours-q5",
+   "chapter": "ce1-english-c3-colours",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quelle est la bonne phrase ?",
+   "choices": [
+    "a bag red",
+    "red a bag",
+    "bag a red",
+    "a red bag"
+   ],
+   "answer": 3,
+   "explanation": "La couleur se place avant le nom : **a red bag**.",
+   "lesson": "ce1-english-colours",
+   "source": "Exercice original"
+  }
+ ]
+}
