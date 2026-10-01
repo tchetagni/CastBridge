@@ -92,3 +92,20 @@ class ExportsAndLockTest {
         assertEquals(0.8, LearnQuizStats.parseRatio("12/15")!!, 0.0001)
     }
 }
+
+class LiveReportTest {
+    @Test fun wifiPullFeedsTheSamePipelineAndNewestWins() {
+        val l = newLedger()
+        l.absorb(listOf(daily("bt", "2026-09-29", ms("2026-09-29", 20), play = 10)))
+        val live = mapOf("days" to listOf(mapOf("day" to "2026-09-29", "profiles" to listOf(mapOf("id" to "p1", "name" to "Léa", "play" to 25, "games" to 5, "downloads" to 0, "apps" to 10,
+            "byApp" to listOf(mapOf("pkg" to "yt", "label" to "YouTube", "min" to 10)))))),
+            "blocked" to listOf(mapOf("ts" to ms("2026-09-29", 15), "who" to "Léa", "what" to "Appli", "why" to "bloquée")),
+            "supervision" to mapOf("state" to "active", "label" to "x"), "tamper" to emptyList<Any>())
+        val cfg = castbridge.core.parental.ChildProfile("p1", "Léa", dailyLimitMin = 60)
+        val reports = LiveReport.toReports("TV salon", live, listOf(cfg), ms("2026-09-30"))
+        assertEquals(1, l.absorb(reports))
+        val f = l.facts().single(); assertEquals(25, f.play); assertEquals(10, f.appsMin); assertEquals(60, f.limitMin)
+        assertEquals(1, l.events().count { it.type == EventType.BLOCK })
+        assertEquals(0, l.absorb(reports))
+    }
+}
