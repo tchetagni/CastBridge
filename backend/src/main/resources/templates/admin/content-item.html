@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/layout :: head('Contenu')}"></head>
+<body>
+<header th:replace="~{admin/layout :: nav}"></header>
+<main>
+    <div th:replace="~{admin/layout :: flash}"></div>
+    <p><a th:href="@{/admin/content{b}(b=${back})}">← File de relecture</a></p>
+    <h1 th:text="${r.id}"></h1>
+    <p><span class="badge" th:text="${stateLabels[r.state]}" th:classappend="${r.state == 'validated'} ? 'good' : (${r.state == 'review'} ? 'warn' : 'bad')"></span>
+        <span class="muted small" th:text="|${r.kind} · ${r.lot} · ${r.classKey} · ${r.subject} · difficulté ${r.difficulty ?: '—'} · empreinte ${r.hash ?: '—'}|"></span></p>
+    <p class="wrap" th:text="${r.excerpt}"></p>
+    <p class="small muted" th:if="${r.reviewer != null}" th:text="|Dernière décision : ${r.reviewer}, ${r.decidedOn}${r.note != null ? ' — ' + r.note : ''}|"></p>
+
+    <section class="card">
+        <h2>Chiffres d'usage <small>(testeurs qui ont accepté les statistiques)</small></h2>
+        <table class="compact">
+            <tr><td>Vu</td><td class="num" th:text="${r.shown}"></td></tr>
+            <tr><td>Réussite</td><td class="num" th:text="${r.successRate() == null} ? '—' : ${#numbers.formatDecimal(r.successRate() * 100, 1, 0)} + ' %'"></td></tr>
+            <tr><td>Temps moyen</td><td class="num" th:text="${r.averageMs() == null} ? '—' : ${@fmt.duration(r.averageMs())}"></td></tr>
+            <tr><td>Appareils ayant signalé</td><td class="num" th:text="${r.reports}"></td></tr>
+            <tr><td>Suspicion</td><td class="num" th:text="${#numbers.formatDecimal(r.suspicion.score, 1, 2)}"></td></tr>
+        </table>
+        <ul class="small" th:if="${!r.suspicion.reasons.isEmpty()}"><li th:each="x : ${r.suspicion.reasons}" th:text="${x}"></li></ul>
+    </section>
+
+    <section class="card">
+        <h2>Signalements</h2>
+        <p class="small" th:if="${!reasonCounts.isEmpty()}"><span th:each="e : ${reasonCounts}" class="chip" th:text="|${reasons[e.key]} : ${e.value}|"></span></p>
+        <table class="compact" th:if="${!reports.isEmpty()}">
+            <tr><th>Quand</th><th>Motif</th><th>Texte</th><th>Canal</th><th></th></tr>
+            <tr th:each="p : ${reports}" th:classappend="${!p.current} ? 'dim'">
+                <td th:text="${@fmt.date(p.at)}"></td><td th:text="${reasons[p.reason]}"></td><td class="wrap" th:text="${p.note}"></td>
+                <td th:text="${p.channel}"></td><td class="small muted" th:text="${p.current} ? '' : 'ancienne version du contenu'"></td>
+            </tr>
+        </table>
+        <p class="muted" th:if="${reports.isEmpty()}">Aucun signalement.</p>
+    </section>
+
+    <section class="card">
+        <h2>Décision</h2>
+        <form th:action="@{/admin/content/decide}" method="post" class="stack">
+            <input type="hidden" name="kind" th:value="${r.kind}"><input type="hidden" name="id" th:value="${r.id}"><input type="hidden" name="back" th:value="${back}">
+            <label>Nouvel état
+                <select name="state"><option th:each="s : ${next}" th:value="${s}" th:text="${stateLabels[s]}"></option></select></label>
+            <label>Note (obligatoire pour « rejeté » et « à corriger ») <input type="text" name="note" maxlength="500"></label>
+            <button type="submit">Enregistrer</button>
+        </form>
+    </section>
+</main>
+</body>
+</html>

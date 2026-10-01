@@ -214,6 +214,7 @@ public class TelemetryService {
         Map<List<Object>, long[]> perFeature = new HashMap<>();    // (day, feature) -> uses, views, time_ms
         Map<List<Object>, long[]> perEvent = new HashMap<>();      // (day, name, dim1, dim2) -> events, ok, ko, ms, bytes
         Map<String, long[]> perQuestion = new HashMap<>();         // uuid -> answers, correct, ms
+        Map<String, long[]> perContent = new HashMap<>();          // "kind|item" -> shown, correct, ms (docs/CONTENT-VALIDATION.md)
         for (Clean c : events) {
             long[] d = perDay.computeIfAbsent(c.day(), k -> new long[3]);
             d[0]++;
@@ -231,6 +232,15 @@ public class TelemetryService {
                         if (Boolean.TRUE.equals(c.ok())) q[1]++;
                         if (c.ms() != null) q[2] += c.ms();
                     }
+                }
+                case "content_stat" -> {
+                    try {
+                        com.fasterxml.jackson.databind.JsonNode p = json.readTree(c.props());
+                        if (c.dim1() != null && c.dim2() != null) {
+                            long[] v = perContent.computeIfAbsent(c.dim1() + "|" + c.dim2(), k -> new long[3]);
+                            v[0] += p.path("shown").asLong(); v[1] += Math.min(p.path("correct").asLong(), p.path("shown").asLong()); v[2] += p.path("ms").asLong();
+                        }
+                    } catch (java.io.IOException ignored) { /* props were written by validate(): cannot happen */ }
                 }
                 default -> { }
             }
@@ -263,6 +273,7 @@ public class TelemetryService {
                 insert into kpi_question (question_uuid, answers, correct, sum_ms, updated_at) values (?,?,?,?,?)
                 on duplicate key update answers = answers + values(answers), correct = correct + values(correct),
                   sum_ms = sum_ms + values(sum_ms), updated_at = values(updated_at)""", q, v[0], v[1], v[2], t));
+        castbridge.server.content.ContentService.addStats(jdbc, perContent, now);
     }
 
     // ================================================================ device side: access and erasure

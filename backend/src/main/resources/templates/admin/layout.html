@@ -22,6 +22,7 @@
         <a th:href="@{/admin/devices}" th:classappend="${active == 'devices'} ? 'on'">Appareils</a>
         <a th:href="@{/admin/releases}" th:classappend="${active == 'releases'} ? 'on'">Versions</a>
         <a th:href="@{/admin/quiz}" th:classappend="${active == 'quiz'} ? 'on'">Quiz</a>
+        <a th:href="@{/admin/content}" th:classappend="${active == 'content'} ? 'on'">Contenus</a>
     </nav>
     <form th:action="@{/admin/logout}" method="post" class="logout">
         <button type="submit" class="link">Déconnexion</button>
