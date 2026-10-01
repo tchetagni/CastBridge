@@ -53,6 +53,12 @@ object BtProtocol {
      */
     const val HELLO = "CBTH"
     const val HELLO_REQUEST_TRUST = 1
+    /**
+     * "Do you have reports for me?": the parent's phone pulls the reports of the parental control that wait in the TV's outbox
+     * (docs/PARENTAL.md). Only over the paired RFCOMM link; the peer is the socket's device. An older TV answers ERR_MAGIC and an
+     * older phone never sends it. See [castbridge.core.parental.ParentalSyncProtocol] for the frames.
+     */
+    const val PARENTAL = castbridge.core.parental.ParentalSyncProtocol.MAGIC
     /** RFCOMM service UUID shared by the TV and the phone app. */
     const val SERVICE_UUID = "7c5e3b9a-4d2f-4c61-9b0e-cb0000000001"
     /** Second RFCOMM service: a plain byte tunnel to the TV's SSH server (see castbridge.core.ssh.SshTunnel). */
@@ -118,6 +124,8 @@ object BtProtocol {
         hello: ((peer: String, requestTrust: Boolean) -> HelloReply)? = null,
         /** Is this peer (address proven by the paired link) a trusted phone? Then the PIN field is not checked. */
         trusted: ((String) -> Boolean)? = null,
+        /** Reports of the parental control for a designated phone (CBTP); null = this TV does not offer it (ERR_MAGIC). */
+        parental: castbridge.core.parental.ReportSyncHost? = null,
     ): Int {
         dir.mkdirs()
         val din = DataInputStream(input)
@@ -142,6 +150,7 @@ object BtProtocol {
                 }
             }
         }
+        if (m == PARENTAL && parental != null) return castbridge.core.parental.ParentalSyncProtocol.serve(din, dout, peer, parental)
         if (m == NEGOTIATE && negotiate != null) {
             val pin = String(ByteArray(Pin.LENGTH).also { din.readFully(it) }, Charsets.US_ASCII)
             val flags = din.readUnsignedByte()

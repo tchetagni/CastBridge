@@ -181,7 +181,7 @@ class TvService : Service(), Device {
         btApi = BtApiControl(this, prefs, ::btBonded, ::btTrusted, { (server?.activeTransfers() ?: 0) > 0 }) { setStatus("4-api-bt", it) }
         startServer()
         register()
-        bt = BtServer(this, videosDir, guard, negotiate = ::linkInfo, hello = ::btHello, trusted = ::btTrusted) { setStatus("1-bt", it) }
+        bt = BtServer(this, videosDir, guard, negotiate = ::linkInfo, hello = ::btHello, trusted = ::btTrusted, parental = ParentalHub.syncHost) { setStatus("1-bt", it) }
         wd = WifiDirectGroup(this, prefs) { setStatus("2-wd", it) }
         usb = UsbImporter(this, videosDir) { setStatus("3-usb", it) }
         ssh = SshControl(this, { setStatus("4-ssh", it) }, { setStatus("4-ssh-bt", it) },

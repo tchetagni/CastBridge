@@ -32,6 +32,8 @@ class BtServer(
     private val hello: ((String, String?, Boolean) -> castbridge.core.tv.HelloReply)? = null,
     /** Trusted phone (registered AND still paired): its PIN field is not checked. */
     private val trusted: ((String) -> Boolean)? = null,
+    /** Reports of the parental control for a designated phone (CBTP, docs/PARENTAL.md): the peer is the socket's paired device. */
+    private val parental: castbridge.core.parental.ReportSyncHost? = null,
     private val status: (String?) -> Unit,
 ) {
     @Volatile private var server: BluetoothServerSocket? = null
@@ -116,7 +118,7 @@ class BtServer(
                 hello = hello?.let { h -> { p, req -> wasHello = true; idleLimit.set(90_000); last.set(System.currentTimeMillis())
                     val name = runCatching { sock.remoteDevice.name }.getOrNull()
                     h(p, name, req).also { last.set(System.currentTimeMillis()) } } },
-                trusted = trusted)
+                trusted = trusted, parental = parental)
             if (!wasHello) status("Bluetooth : prêt" + if (r != BtProtocol.OK) " (refusé : ${BtProtocol.describe(r)})" else " (fichier reçu)")
         } catch (e: Exception) {
             Log.w(TAG, "transfer interrupted: ${e.javaClass.simpleName}")   // never log request contents

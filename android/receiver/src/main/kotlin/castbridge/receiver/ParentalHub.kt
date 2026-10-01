@@ -10,11 +10,18 @@ import android.os.Handler
 import android.os.Looper
 import android.os.SystemClock
 import android.widget.Toast
+import castbridge.core.parental.AppEnv
 import castbridge.core.parental.Category
 import castbridge.core.parental.ChildProfile
 import castbridge.core.parental.KvStore
 import castbridge.core.parental.ParentalApi
 import castbridge.core.parental.ParentalEngine
+import castbridge.core.parental.ParentalReports
+import castbridge.core.parental.ReportOutbox
+import castbridge.core.parental.ReportRecipients
+import castbridge.core.parental.ReportSyncHost
+import castbridge.core.parental.SupervisionInfo
+import castbridge.core.parental.SupervisionState
 import castbridge.core.parental.PinResult
 import castbridge.core.parental.Rating
 import castbridge.core.parental.RatingRule
@@ -31,11 +38,15 @@ import castbridge.core.tv.NeedsForeground
  *  - [lifecycle]: an activity of a blocked category (games, downloads, settings...) is closed at once and replaced by the lock screen;
  *  - [gatePlay]: the TV's player bridge refuses a video above the profile's age, outside the hours or beyond the daily time;
  *  - [guardTile] / [wrapMenu]: home tiles and menu entries of a blocked category;
- *  - [tick]: every 15 s, counts the time spent (video, games, downloads), warns 5 minutes before the end, then stops.
+ *  - [tick]: every 15 s, counts the time spent (video, games, downloads), warns 5 minutes before the end, then stops;
+ *  - whole-TV supervision ([ForegroundWatcher] -> [onForeground]): another app in front is checked against the per-app rules, counted into
+ *    the daily quota, and, when refused, the TV goes HOME and the lock screen comes in front ([enforceApp]);
+ *  - reports for the parent's phone: queued in an outbox on the TV ([reports]) and pulled by the designated phone over Bluetooth (CBTP).
  * BACK and HOME are never intercepted; the lock screen always offers "Saisir le PIN parental" and "Retour à l'accueil".
  */
 object ParentalHub {
     private const val PREFS = "castbridge_parental"
+    const val PREFS_REPORTS = "castbridge_parental_reports"
     private const val TICK_MS = 15_000L
 
     /** SharedPreferences with synchronous writes: a lockout counter must survive a kill of the app. */
@@ -50,18 +61,49 @@ object ParentalHub {
     @Volatile private var apiOrNull: ParentalApi? = null
     @Volatile private var top: Activity? = null
     private var lastTick = 0L
+    @Volatile private var reportsOrNull: ParentalReports? = null
+    @Volatile private var syncOrNull: ReportSyncHost? = null
+    // whole-TV supervision (main thread only)
+    private var fgPkg: String? = null
+    private var lastApp = 0L
+    private var lastSyncApps = 0L
+    private val lastEnforce = HashMap<String, Long>()
+    @Volatile private var superviseCache = false
+    @Volatile private var superviseAt = 0L
 
     val engine: ParentalEngine get() = engineOrNull ?: error("ParentalHub.init")
 
     /** The HTTP routes (docs/PARENTAL.md), chained into the TV's API by TvService. */
     val api: ParentalApi get() = apiOrNull ?: error("ParentalHub.init")
 
+    /** Reports for the parent's phone (docs/PARENTAL.md): designation, options, outbox. */
+    val reports: ParentalReports get() = reportsOrNull ?: error("ParentalHub.init")
+
+    /** TV side of the CBTP message of the Bluetooth link: the designated phone pulls its reports here. */
+    val syncHost: ReportSyncHost get() = syncOrNull ?: error("ParentalHub.init")
+
     @Synchronized fun init(ctx: Context) {
         if (engineOrNull != null) return
         val c = ctx.applicationContext
         app = c
         engineOrNull = ParentalEngine(PrefsKv(c.getSharedPreferences(PREFS, Context.MODE_PRIVATE)))
-        apiOrNull = ParentalApi(engine, learnProfiles = { learnProfiles() }) { }
+        // reports and their signing keys live in their own preferences file (excluded from backups, see backup_rules.xml)
+        val rkv = PrefsKv(c.getSharedPreferences(PREFS_REPORTS, Context.MODE_PRIVATE))
+        val trusted = { addr: String -> runCatching { TvService.running?.btTrusted(addr) == true }.getOrDefault(false) }
+        val tvName = { TvService.running?.tvName() ?: "CastBridge TV" }
+        val recipients = ReportRecipients(rkv, trusted)
+        val outbox = ReportOutbox(rkv)
+        val rp = ParentalReports(rkv, engine, recipients, outbox, tvName)
+        reportsOrNull = rp
+        syncOrNull = ReportSyncHost(recipients, outbox, trusted, tvName)
+        // Events reach the reports layer through the main thread, never under the engine's lock (the reports layer calls the engine: one lock order only).
+        engine.onEvent = { ev -> main.post { runCatching { rp.onEvent(ev) } } }
+        engine.supervisionProbe = { supervisionInfo() }
+        apiOrNull = ParentalApi(engine, learnProfiles = { learnProfiles() }, installed = { AppCatalog.launcherApps(c) }, appEnv = { AppCatalog.env(c) },
+            supervisionSetup = { setupMap() }, reports = rp,
+            trustedPhones = { runCatching { TvService.running?.trust?.list()?.map { it.address to it.name } }.getOrNull().orEmpty() }) { }
+        ForegroundWatcher.onChange = { pkg -> main.post { onForeground(pkg) } }
+        ForegroundWatcher.start(c)
         lastTick = SystemClock.elapsedRealtime()
         main.postDelayed(ticker, TICK_MS)
     }
@@ -273,10 +315,14 @@ object ParentalHub {
         val now = SystemClock.elapsedRealtime()
         val dt = (now - lastTick).coerceIn(0, 2 * TICK_MS); lastTick = now
         val e = engineOrNull ?: return
+        runCatching { reportsOrNull?.tick() }                       // daily / weekly summaries: a few comparisons
+        runCatching { superviseTick(e, now) }
         if (e.activeProfile() == null) return
         val t = top
-        val playing = TvService.running?.playerBridge?.state()?.state == "playing"
-        val kind = when {
+        // another app in front: it is counted by [accountApp]; CastBridge-TV's own meter must not count it a second time
+        val elsewhere = e.supervising() && fgPkg != null && fgPkg != app?.packageName
+        val playing = !elsewhere && TvService.running?.playerBridge?.state()?.state == "playing"
+        val kind = if (elsewhere) null else when {
             playing -> UseKind.PLAY
             t is QuizActivity || t is ChessActivity -> UseKind.GAMES
             t is DownloadsActivity -> UseKind.DOWNLOADS
@@ -294,6 +340,105 @@ object ParentalHub {
             val a = top ?: app
             if (a != null && t !is ParentalLockActivity) ParentalLockActivity.show(a, r.blockReason!!, null)
         }
+    }
+
+    // ------------------------------------------------------------------ whole-TV supervision (other apps)
+
+    /** The parent switched the supervision on (cached 10 s: asked by the detector thread at every poll). */
+    fun superviseWanted(): Boolean {
+        val t = SystemClock.elapsedRealtime()
+        if (t - superviseAt > 10_000) { superviseCache = engineOrNull?.appSettings()?.supervise == true; superviseAt = t }
+        return superviseCache
+    }
+
+    /** The real state, measured now: never « active » unless a detector works AND the lock screen can be brought in front. */
+    fun supervisionInfo(): SupervisionInfo {
+        val c = app ?: return SupervisionInfo(SupervisionState.UNAVAILABLE)
+        val usage = ForegroundWatcher.usageGranted(c)
+        val a11y = ForegroundWatcher.accessibilityOn()
+        val enforce = ForegroundWatcher.canEnforce(c)
+        val fresh = ForegroundWatcher.fresh(c)
+        val st = SupervisionState.compute(engineOrNull?.appSettings()?.supervise == true, usage, ForegroundWatcher.usageExists(c), a11y, fresh, enforce)
+        val detail = when {
+            st == SupervisionState.OFF || st == SupervisionState.ACTIVE -> null
+            !usage && !a11y -> "accès aux données d'utilisation non accordé"
+            !enforce -> "« Afficher par-dessus les autres applications » non autorisé"
+            !fresh -> "détecteur arrêté"
+            else -> null
+        }
+        return SupervisionInfo(st, if (usage) "usage" else if (a11y) "accessibility" else "none", detail = detail)
+    }
+
+    /** What the setup screen and the phone show to help the parent (no secret). */
+    fun setupMap(): Map<String, Any?> {
+        val c = app ?: return emptyMap()
+        val pkg = c.packageName
+        fun resolves(i: Intent) = runCatching { c.packageManager.resolveActivity(i, 0) != null }.getOrDefault(false)
+        return linkedMapOf(
+            "package" to pkg,
+            "usageGranted" to ForegroundWatcher.usageGranted(c), "usageSettingsExists" to resolves(Intent(android.provider.Settings.ACTION_USAGE_ACCESS_SETTINGS)),
+            "overlayGranted" to runCatching { android.provider.Settings.canDrawOverlays(c) }.getOrDefault(false),
+            "accessibilityOn" to ForegroundWatcher.accessibilityOn(),
+            "adbUsage" to "adb shell appops set $pkg GET_USAGE_STATS allow",
+            "adbOverlay" to "adb shell appops set $pkg SYSTEM_ALERT_WINDOW allow",
+        )
+    }
+
+    /** State, tampering alert, new apps and the time of the app in front: every 15 s while the supervision is wanted (main thread). */
+    private fun superviseTick(e: ParentalEngine, now: Long) {
+        val c = app ?: return
+        if (!superviseWanted()) { fgPkg = null; return }
+        e.reportSupervision(supervisionInfo())
+        if (now - lastSyncApps > 300_000L && ForegroundWatcher.screenOn(c)) { lastSyncApps = now; e.syncInstalled(AppCatalog.launcherApps(c)) }
+        accountApp(now)
+    }
+
+    /** The detector saw [pkg] come to the front (null = nothing known: screen off, supervision off). Main thread. */
+    private fun onForeground(pkg: String?) {
+        val e = engineOrNull ?: return
+        val c = app ?: return
+        accountApp(SystemClock.elapsedRealtime())               // time of the app that just left
+        fgPkg = pkg
+        lastApp = SystemClock.elapsedRealtime()
+        if (pkg == null || !e.supervising()) return
+        val env = AppCatalog.env(c)
+        if (env.isEssential(pkg)) return
+        val d = e.checkApp(pkg, env)
+        if (!d.allowed) {
+            val label = AppCatalog.label(c, pkg)
+            e.denyApp(pkg, label, d)
+            enforceApp(c, pkg, d.code, d.reason ?: "Cette application est protégée.")
+        }
+    }
+
+    /** Counts the time since the last call on the app in front (if any, and if it is not CastBridge-TV or the launcher). */
+    private fun accountApp(now: Long) {
+        val e = engineOrNull ?: return
+        val c = app ?: return
+        val pkg = fgPkg
+        val dt = (now - lastApp).coerceIn(0, 2 * TICK_MS); lastApp = now
+        if (pkg == null || dt == 0L || !e.supervising()) return
+        val env: AppEnv = AppCatalog.env(c)
+        if (env.isEssential(pkg)) return
+        val label = AppCatalog.label(c, pkg)
+        val r = e.appTick(pkg, label, dt, env)
+        r.warnMinutes?.let { m -> Toast.makeText(c, "Il reste ${if (m <= 1) "1 minute" else "$m minutes"} sur cette application. Pensez à terminer.", Toast.LENGTH_LONG).show() }
+        if (r.blockReason != null) enforceApp(c, pkg, e.checkApp(pkg, env).code, r.blockReason!!)
+    }
+
+    /**
+     * Sends the TV HOME and brings the lock screen in front. Never traps: the lock screen offers the PIN and « Retour à l'accueil », BACK and
+     * HOME work. Needs « Afficher par-dessus les autres apps » (or the accessibility service) on Android 10+: without them the TV cannot do it
+     * and the supervision says so ([supervisionInfo]).
+     */
+    private fun enforceApp(c: Context, pkg: String, code: String, reason: String) {
+        val t = SystemClock.elapsedRealtime()
+        if (t - (lastEnforce[pkg] ?: 0L) < 1_500L) return
+        lastEnforce[pkg] = t
+        val a11y = RemoteAccessibilityService.instance
+        val homed = a11y?.global(android.accessibilityservice.AccessibilityService.GLOBAL_ACTION_HOME) == true
+        if (!homed) runCatching { c.startActivity(Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_HOME).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) }
+        ParentalLockActivity.showForApp(c, reason, pkg, code)
     }
 
     /** Learn profiles for the import screen. */

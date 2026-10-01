@@ -4,9 +4,11 @@
     <cloud-backup>
         <exclude domain="file" path="trusted_phones.txt" />
         <exclude domain="file" path="trusted_phones.txt.tmp" />
+        <exclude domain="sharedpref" path="castbridge_parental_reports.xml" />
     </cloud-backup>
     <device-transfer>
         <exclude domain="file" path="trusted_phones.txt" />
         <exclude domain="file" path="trusted_phones.txt.tmp" />
+        <exclude domain="sharedpref" path="castbridge_parental_reports.xml" />
     </device-transfer>
 </data-extraction-rules>
