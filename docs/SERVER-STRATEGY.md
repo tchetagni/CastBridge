@@ -1,6 +1,6 @@
 # Stratégie serveur (bridge.sti-cm.com)
 
-Accès : le propriétaire a donné au coordinateur (session locale) un accès total pour la mise en œuvre du projet, pendant 3 mois (annonce du 2026-10-01 ; le premier accord courait jusqu'au 2026-11-30 : **à reconfirmer la date de fin exacte**). Les agents cloud n'ont PAS d'accès au serveur : ils spécifient et écrivent le code dans le dépôt, le coordinateur déploie.
+Accès : le propriétaire a donné au coordinateur (session locale) un accès total pour la mise en œuvre du projet, jusqu'au **2026-12-31** (confirmé par le propriétaire le 2026-10-01 ; le premier accord courait jusqu'au 2026-11-30). Les agents cloud n'ont PAS d'accès au serveur : ils spécifient et écrivent le code dans le dépôt, le coordinateur déploie.
 Limites que je m'impose : rester dans le projet CastBridge (conteneurs `castbridge-*`, dossier du projet), ne jamais lire ni modifier les autres projets de la machine ; **toute modification de l'infrastructure partagée (nginx commun, certbot) se fait avec sauvegarde, test de configuration, et accord explicite du propriétaire** car elle touche d'autres services en production.
 
 ## État mesuré le 2026-10-01 (lecture seule)
@@ -25,4 +25,4 @@ Limites que je m'impose : rester dans le projet CastBridge (conteneurs `castbrid
 6. **Exploitation** : surveillance (état de santé, disque, mémoire, certificats), rotation des journaux, limites de débit, sauvegardes testées par restauration, limites de ressources adaptées (la JVM à 512 Mo suffit si les médias ne passent pas par elle).
 
 ## Risques à surveiller
-Machine partagée (mémoire et disque communs), limites de 512 Mo des conteneurs, aucun dépôt Git sur le serveur (déploiement à partir du dépôt GitHub : tracer la version déployée), fin de l'accord dans 3 mois au plus.
+Machine partagée (mémoire et disque communs), limites de 512 Mo des conteneurs, aucun dépôt Git sur le serveur (déploiement à partir du dépôt GitHub : tracer la version déployée), fin de l'accord le 2026-12-31 : prévoir avant cette date la remise des accès, des sauvegardes et de la documentation d'exploitation.
