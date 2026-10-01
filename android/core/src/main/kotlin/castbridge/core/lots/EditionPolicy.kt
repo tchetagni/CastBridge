@@ -99,9 +99,10 @@ object EditionPolicy {
      * a lot that is no longer allowed is listed in [Reconciliation.demotions] with a French message and only appears in
      * [Reconciliation.removableNow] once its id is in [acknowledged] (the user saw the notice).
      */
-    fun reconcile(held: Collection<LotMeta>, access: Access, bundles: BundleCatalog, acknowledged: Set<LotId> = emptySet()): Reconciliation {
+    fun reconcile(held: Collection<LotMeta>, access: Access, bundles: BundleCatalog, acknowledged: Set<LotId> = emptySet(), rentedLots: Set<LotId> = emptySet()): Reconciliation {
         val allowed = allowedFull(access, bundles)
-        val fullHeld = held.filter { it.edition == Edition.FULL }
+        // rented lots are ended by the autonomous sweep (key destroyed, then files), with their own message: never by this "demotion" path
+        val fullHeld = held.filter { it.edition == Edition.FULL && it.id !in rentedLots }
         val keep = fullHeld.filter { it.id in allowed }
         val lost = fullHeld.filter { it.id !in allowed }.sortedWith(compareBy({ it.id.feature }, { it.id.scope }))
         val demotions = lost.map {

@@ -33,6 +33,23 @@ sealed class Right {
         override val bundleIds: List<String> get() = listOf(ALL_BUNDLE)
     }
 
+    /**
+     * LOCATION (docs/RENTAL-LOTS.md): bundles opened for [durationDays] from [startsAt] (at most 366, offline), with an optional offline [graceMs] and an optional second ceiling of
+     * [maxUsageMinutes] of use (0 = none); [maxConcurrent] = at most that many rentals of one licence at once on a device (0 = no limit). [period] = start of the contract this line belongs to:
+     * a RENEWAL is a new line with the same product and the same [period] (it extends the same rental, never duplicates it). [box] = the rental key wrapped per device ([RentalKeys]).
+     * Wire line: [RentalLines]. A device that does not know this right ignores it and grants NOTHING (see [Unknown]).
+     */
+    data class Rental(override val productId: String, override val bundleIds: List<String>, val startsAt: Long, val period: Long, val durationDays: Int, val graceMs: Long = 0L,
+                      val maxUsageMinutes: Int = 0, val maxConcurrent: Int = 0, val box: String = "") : Right() {
+        val endsAt: Long get() = startsAt + durationDays * RentalLines.DAY_MS
+    }
+
+    /** A right line of a kind this build does not know (a newer format): kept VERBATIM so the signed canonical text rebuilds exactly, and it grants nothing, never "everything". */
+    data class Unknown(val raw: String) : Right() {
+        override val productId: String get() = "unknown"
+        override val bundleIds: List<String> get() = emptyList()
+    }
+
     companion object { const val ALL_BUNDLE = "tout" }
 }
 
@@ -65,6 +82,8 @@ data class Entitlement(val deviceId: String, val issuedAt: Long, val keyId: Stri
             is Right.Purchase -> "purchase|${r.productId}|${r.bundleIds.sorted().joinToString(",")}|${r.grantedAt}"
             is Right.Subscription -> "subscription|${r.productId}|${r.bundleIds.sorted().joinToString(",")}|${r.startsAt}|${r.endsAt}|${r.graceMs}|${if (r.autoRenew) 1 else 0}"
             is Right.OpenAll -> "openall|${r.productId}|${r.startsAt}|${r.endsAt}"
+            is Right.Rental -> RentalLines.line(r)
+            is Right.Unknown -> r.raw
         }
 
         /** Null when the text is not a well-formed token (the signature is NOT checked here). */
@@ -86,7 +105,8 @@ data class Entitlement(val deviceId: String, val issuedAt: Long, val keyId: Stri
                     "purchase" -> { require(f.size == 4 && ID.matches(f[1])); Right.Purchase(f[1], ids(f[2]), f[3].toLong()) }
                     "subscription" -> { require(f.size == 7 && ID.matches(f[1])); Right.Subscription(f[1], ids(f[2]), f[3].toLong(), f[4].toLong(), f[5].toLong(), f[6] == "1") }
                     "openall" -> { require(f.size == 4 && ID.matches(f[1])); Right.OpenAll(f[1], f[2].toLong(), f[3].toLong()) }
-                    else -> error("right")
+                    RentalLines.KIND -> RentalLines.parse(f)
+                    else -> RentalLines.unknown(l.removePrefix("right="))
                 }
             }
             val e = Entitlement(device, issued, keyId, rights, parts[2])
@@ -114,8 +134,12 @@ data class Access(
     val message: String,
     /** Single lots opened for a limited time by an owner command (no bundle needed); empty for ordinary tokens. */
     val extraLots: Set<LotId> = emptySet(),
+    /** Bundles reachable ONLY through a usable rental (a bundle already owned or subscribed is never listed here: no double count). Empty unless the TV evaluated its rentals. */
+    val rented: Set<String> = emptySet(),
+    /** Every rental seen with its state and countdown (for the screens). */
+    val rentals: List<RentalStatus> = emptyList(),
 ) {
-    val granted: Set<String> get() = purchased + subscribed
+    val granted: Set<String> get() = purchased + subscribed + rented
     fun grants(bundleId: String) = bundleId in granted
     /** True while a subscription is past its end but still honoured: the screen asks to reconnect. */
     val inGrace: Boolean get() = subscriptions.any { it.state == SubState.GRACE }
