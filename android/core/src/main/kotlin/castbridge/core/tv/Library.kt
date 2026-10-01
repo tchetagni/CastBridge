@@ -62,6 +62,8 @@ interface LibraryEntry {
     val watched: Boolean
     val playedAtMs: Long
     val type: MediaType
+    /** Virtual folder of the file ("" = root or not supported): the library screens add one row per folder. */
+    val folder: String get() = ""
 }
 
 /** One finished file with everything the library screens show. */
@@ -75,6 +77,8 @@ data class LibraryItem(
     val meta: FileMeta,
     val duplicate: Boolean = false,
     val playing: Boolean = false,
+    /** Virtual folder ("Séries/Prison Break/Saison 01"), "" = root. The files themselves stay flat (see [FolderIndex]). */
+    override val folder: String = "",
 ) : LibraryEntry {
     override val title: String get() = LibraryLogic.title(name)
     override val resumeMs: Long get() = meta.resumeMs
@@ -129,6 +133,8 @@ object LibrarySections {
     const val RECENT = "recent"
     const val ALL = "all"
     const val OTHER = "other"
+    /** Prefix of the section ids built from folders ("folder:Séries/Prison Break/Saison 01"). */
+    const val FOLDER = "folder:"
 
     data class Section<T : LibraryEntry>(val id: String, val title: String, val items: List<T>)
 
@@ -143,12 +149,15 @@ object LibrarySections {
         val recent = LibraryLogic.sortNewestFirst(media, { it.mtime }, { it.name }).take(recentCount)
         val all = media.sortedWith(compareBy<T> { it.title.lowercase() }.thenBy { it.name })
         val other = items.filter { it.type == MediaType.OTHER }.sortedBy { it.name.lowercase() }
-        return listOf(
+        // one row per folder (flat files stay in the sections above: a file is never hidden by being in a folder)
+        val byFolder = items.filter { it.folder.isNotEmpty() }.groupBy { it.folder }.toSortedMap(String.CASE_INSENSITIVE_ORDER)
+            .map { (f, l) -> Section(FOLDER + f, f.replace("/", " › "), l.sortedWith(compareBy<T> { it.name.lowercase() })) }
+        return (listOf(
             Section(RESUME, "Reprendre", resume),
             // Only worth its own row when the library is bigger than the row itself.
             Section(RECENT, "Récemment ajoutés", if (media.size > recentCount / 2) recent else emptyList()),
             Section(ALL, "Toutes", all),
             Section(OTHER, "Autres fichiers", other),
-        ).filter { it.items.isNotEmpty() }
+        ) + byFolder).filter { it.items.isNotEmpty() }
     }
 }

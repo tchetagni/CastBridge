@@ -76,6 +76,8 @@ data class LibrarySnapshot(
     val protectedCount: Int = 0,
     /** The TV did not say whether the parental control is on (older version): everything is treated as protected. */
     val guardUnsupported: Boolean = false,
+    /** The source keeps folders for its files (phone: real folders; TV: virtual folders, `/api/library` says `folders:true`). */
+    val foldersSupported: Boolean = false,
 )
 
 /** A parental-control hook: marked content is never renamed, moved or trashed, and never sent anywhere. */

@@ -64,6 +64,8 @@ class ReceiverServer(
     private val contentFlags: ContentFlags? = null,
     /** Readers of `/stream/` right now; shared with the assistant's bin so that nothing is binned under a reader. */
     private val streamUse: StreamUse = StreamUse(),
+    /** Virtual folders of the library (see [FolderIndex]); null = no folders (the library stays a flat list). */
+    private val folders: FolderIndex? = null,
 ) : NanoHTTPD(port) {
 
     /** Single internal folder (tests, simple setups). */
@@ -223,6 +225,7 @@ class ReceiverServer(
         val h = hits.firstOrNull { it.v.id == playingVolume } ?: hits.firstOrNull() ?: return
         synchronized(FileLocks.of(LOCK_ROOT, n)) {
             h.st.deleteFinal(h.name)
+            folders?.deleted(h.name)
             (h.st as? FileStore)?.let { Storage.forget(it.dir, h.name) }
             invalidate()
         }
@@ -338,6 +341,7 @@ class ReceiverServer(
                         val toStored = src.v.storedName(to)
                         if (!src.st.rename(src.name, toStored)) throw IOException("rename failed")
                         library?.renamed(src.name, toStored, src.size)
+                        folders?.renamed(src.name, toStored)
                         (src.st as? FileStore)?.let { fs ->
                             if (src.name in Storage.playedNames(fs.dir)) { Storage.forget(fs.dir, src.name); Storage.markPlayed(fs.dir, toStored) }
                         }
@@ -360,7 +364,7 @@ class ReceiverServer(
                 synchronized(FileLocks.of(LOCK_ROOT, name)) {
                     volumes.volumes().filter { only == null || it.id == only }.forEach { v ->
                         val st = volumes.store(v); val n = v.storedName(name)
-                        st.finalSize(n)?.let { sz -> library?.deleted(n, sz) }
+                        st.finalSize(n)?.let { sz -> library?.deleted(n, sz); folders?.deleted(n) }
                         st.deleteFinal(n); st.deletePart(n)
                         (st as? FileStore)?.let { Meta.delete(it.dir, n); Storage.forget(it.dir, n) }
                         volumes.forgetPart(v, n)
@@ -591,6 +595,9 @@ class ReceiverServer(
     @Volatile private var listing: Listing? = null
     private fun invalidate() { listing = null }
 
+    /** The library changed behind the server's back (the bin, a returned drive...): the next listing is read again. */
+    fun changed() = invalidate()
+
     private fun listing(): Listing {
         val now = System.nanoTime() / 1_000_000
         listing?.let { if (now - it.at < cfg.infoCacheMs) return it }
@@ -638,7 +645,7 @@ class ReceiverServer(
             val f = (volumes.store(e.v) as? FileStore)?.let { File(it.dir, it.diskName(e.name)) }
             val m = lib?.meta(e.name, e.size, f) ?: FileMeta()
             LibraryItem(e.name, e.size, f?.lastModified() ?: 0L, e.v.id, e.v.label, e.v.kind, m, e.dup,
-                ps.state != "idle" && ps.name == e.name)
+                ps.state != "idle" && ps.name == e.name, folders?.folderOf(e.name) ?: "")
         }
         return LibraryLogic.sortNewestFirst(files, { it.mtime }, { it.name })
     }
@@ -647,7 +654,7 @@ class ReceiverServer(
         val sorted = libraryItems()
         val flags = contentFlags
         val prot = flags?.protectedNames(sorted).orEmpty()
-        val head = if (flags == null) "{\"files\":[" else "{\"guard\":true,\"childActive\":${flags.childActive()},\"files\":["
+        val head = "{" + (if (folders != null) "\"folders\":true," else "") + (if (flags == null) "" else "\"guard\":true,\"childActive\":${flags.childActive()},") + "\"files\":["
         return sorted.joinToString(",", head, "") { i ->
             val m = i.meta
             "{\"name\":${q(i.name)},\"title\":${q(i.title)},\"size\":${i.size},\"mtime\":${i.mtime}," +
@@ -655,7 +662,7 @@ class ReceiverServer(
                 "\"type\":${q(i.type.name.lowercase())}," +
                 "\"durationMs\":${m.durationMs},\"resumeMs\":${m.resumeMs},\"watched\":${m.watched},\"playedAt\":${m.playedAtMs}," +
                 "\"hasThumb\":${m.hasThumb},\"duplicate\":${i.duplicate},\"playing\":${i.playing}" +
-                (if (flags != null) ",\"protected\":${i.name in prot}" else "") + "}"
+                (if (flags != null) ",\"protected\":${i.name in prot}" else "") + (if (folders != null) ",\"folder\":${q(i.folder)}" else "") + "}"
         } + "],\"count\":${sorted.size}}"
     }
 

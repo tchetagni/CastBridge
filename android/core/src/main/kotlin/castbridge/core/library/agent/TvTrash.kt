@@ -4,6 +4,7 @@ import castbridge.core.tv.ApiExtension
 import castbridge.core.tv.ApiReply
 import castbridge.core.tv.FileLocks
 import castbridge.core.tv.FileStore
+import castbridge.core.tv.FolderIndex
 import castbridge.core.tv.LibraryMeta
 import castbridge.core.tv.NameSpace
 import castbridge.core.tv.VolumeKind
@@ -39,6 +40,10 @@ class TrashApi(
     private val retentionMs: Long = RETENTION_MS,
     /** Why [name] must not be touched right now (moving, being uploaded, being streamed to a phone), or null. Asked on every put. */
     private val busy: (String) -> String? = { null },
+    /** Folders of the library: a binned file keeps its folder, and gets it back on restore. */
+    private val folders: FolderIndex? = null,
+    /** The library changed (put, restore, purge): the server must list again. */
+    private val changed: () -> Unit = {},
 ) : ApiExtension {
 
     private data class Item(val id: String, val name: String, val volume: StorageVolume, val file: File, val at: Long, val size: Long)
@@ -105,7 +110,9 @@ class TrashApi(
             if (!src.renameTo(target)) return err(500, "rename failed")
             syncQuietly(v, target)
             library?.deleted(stored, size)
+            folders?.stash(id, stored)
             Storage.forget(dir, stored)
+            changed()
             return ApiReply(200, """{"id":${q(id)},"name":${q(stored)},"volume":${q(v.id)},"size":$size}""")
         }
     }
@@ -131,7 +138,9 @@ class TrashApi(
             if (target.exists()) return err(409, "target exists")
             if (!it.file.renameTo(target)) return err(500, "rename failed")
             syncQuietly(it.volume, target)
-            return ApiReply(200, """{"name":${q(stored)},"volume":${q(it.volume.id)},"size":${it.size}}""")
+            val folder = folders?.unstash(id)?.also { f -> folders.set(stored, f) } ?: ""
+            changed()
+            return ApiReply(200, """{"name":${q(stored)},"volume":${q(it.volume.id)},"size":${it.size},"folder":${q(folder)}}""")
         }
     }
 

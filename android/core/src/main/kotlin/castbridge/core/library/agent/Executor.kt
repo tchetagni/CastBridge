@@ -131,7 +131,7 @@ class Executor(
                 else -> {}
             }
             var name = cur.name
-            if (ops.nameTaken(Loc(cur.volume, wantFolder, name))) {           // same name already in the target folder: make ours unique first
+            if (!ops.flatNames && ops.nameTaken(Loc(cur.volume, wantFolder, name))) {           // same name already in the target folder: make ours unique first
                 val free = freeName(cur.volume, wantFolder, name)
                 val seq = journal.nextSeq()
                 val to = cur.copy(name = free)
@@ -254,7 +254,7 @@ class Executor(
                     to == null -> fail("journal incomplet")
                     ops.stat(to) == null -> fail("le fichier « ${to.name} » n'est plus là")
                     ops.isPlaying(to) -> fail("en cours de lecture")
-                    ops.nameTaken(Loc(e.from.volume, e.from.folder, to.name)) -> fail("un fichier du même nom est déjà dans « ${e.from.folder.ifEmpty { "la racine" }} »")
+                    !ops.flatNames && ops.nameTaken(Loc(e.from.volume, e.from.folder, to.name)) -> fail("un fichier du même nom est déjà dans « ${e.from.folder.ifEmpty { "la racine" }} »")
                     else -> when (val x = ops.moveToFolder(to, e.from.folder)) { is OpResult.Ok -> ok(); is OpResult.Fail -> fail(x.reason) }
                 }
                 Op.MOVE_VOLUME -> when {
