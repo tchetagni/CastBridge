@@ -1,0 +1,542 @@
+{
+ "chapter": "2nde-physique-c-ch-electricite",
+ "lessons": [
+  {
+   "id": "2nde-physique-c-electricite",
+   "title": "Électricité : courant, tension, loi d'Ohm, puissance",
+   "minutes": 40,
+   "programRef": "2nde C — Électricité : courant, tension, lois, résistors, puissance et énergie (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Mesurer une intensité et une tension (branchements).",
+    "Appliquer les lois des nœuds et des mailles et la loi d'Ohm.",
+    "Calculer la résistance équivalente en série et en dérivation.",
+    "Calculer une puissance et une énergie électriques."
+   ],
+   "prerequisites": [
+    "2nde-physique-c-grandeurs"
+   ],
+   "exercises": [
+    "2nde-physique-c-elc-01",
+    "2nde-physique-c-elc-02",
+    "2nde-physique-c-elc-03",
+    "2nde-physique-c-elc-04",
+    "2nde-physique-c-elc-05",
+    "2nde-physique-c-elc-06"
+   ],
+   "selfCheck": [
+    "2nde-physique-c-elc-q1",
+    "2nde-physique-c-elc-q2",
+    "2nde-physique-c-elc-q3",
+    "2nde-physique-c-elc-q4",
+    "2nde-physique-c-elc-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Courant et tension",
+     "md": "Le **courant électrique** est un déplacement de charges ; son **intensité** I se mesure en ampères (A) avec un ampèremètre monté **en série**. Sens conventionnel : de la borne + vers la borne − à l'extérieur du générateur.\nLa **tension** U (volts, V) se mesure avec un voltmètre monté **en dérivation**. Charge : $Q = I\\,t$ (en coulombs)."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Loi des nœuds",
+     "md": "En un nœud, la somme des intensités des courants qui **arrivent** est égale à la somme des intensités des courants qui **partent** : $\\sum I_{\\text{entrants}} = \\sum I_{\\text{sortants}}$. C'est la conservation de la charge."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Loi des mailles",
+     "md": "Dans une maille (boucle fermée), la somme algébrique des tensions est nulle. En pratique : dans un circuit en **série**, la tension du générateur est égale à la somme des tensions aux bornes des dipôles ; en **dérivation**, les branches ont la même tension."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Loi d'Ohm",
+     "md": "Pour un conducteur ohmique de résistance R (ohms, Ω) :\n$U = R\\,I$\nLa caractéristique $U = f(I)$ est une droite passant par l'origine. La résistance mesure l'opposition au passage du courant."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 170,
+      "items": [
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 30,
+        "x2": 360,
+        "y2": 30,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 360,
+        "y1": 30,
+        "x2": 360,
+        "y2": 130,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 360,
+        "y1": 130,
+        "x2": 40,
+        "y2": 130,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 30,
+        "x2": 40,
+        "y2": 68,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 85,
+        "x2": 40,
+        "y2": 130,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 25,
+        "y1": 68,
+        "x2": 55,
+        "y2": 68,
+        "color": "ink",
+        "width": 4
+       },
+       {
+        "t": "line",
+        "x1": 32,
+        "y1": 85,
+        "x2": 48,
+        "y2": 85,
+        "color": "ink",
+        "width": 4
+       },
+       {
+        "t": "text",
+        "x": 72,
+        "y": 66,
+        "text": "+",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 72,
+        "y": 98,
+        "text": "−",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 22,
+        "w": 60,
+        "h": 16,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 240,
+        "y": 22,
+        "w": 60,
+        "h": 16,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 14,
+        "text": "R₁",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 14,
+        "text": "R₂",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 70,
+        "y1": 30,
+        "x2": 105,
+        "y2": 30,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 88,
+        "y": 50,
+        "text": "I",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 160,
+        "text": "Circuit série : même intensité I partout",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Circuit série : un générateur et deux résistors ; le courant I est le même dans tout le circuit.",
+     "alt": "Un circuit rectangulaire avec un générateur à gauche, deux résistors en haut et une flèche rouge indiquant le sens du courant."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Associations de résistors",
+     "md": "**En série** : $R_{\\text{éq}} = R_1 + R_2 + \\dots$ ; même intensité, les tensions s'ajoutent.\n**En dérivation** : $\\frac{1}{R_{\\text{éq}}} = \\frac{1}{R_1} + \\frac{1}{R_2} + \\dots$ ; même tension, les intensités s'ajoutent. $R_{\\text{éq}}$ est plus petite que la plus petite des résistances."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Puissance et énergie",
+     "md": "Puissance reçue par un dipôle : $P = U\\,I$ (watts). Pour un résistor : $P = R\\,I^2 = \\frac{U^2}{R}$ (effet Joule : l'énergie est transformée en chaleur).\nÉnergie : $E = P\\,t$ en joules (t en s). En pratique : le **kilowattheure** : 1 kWh = $3{,}6 \\times 10^{6}$ J."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : résistors en série",
+     "statement": "Deux résistors de 100 Ω et 150 Ω sont en série avec un générateur de 6 V. Calcule l'intensité et la tension aux bornes de chaque résistor.",
+     "steps": [
+      {
+       "md": "Résistance équivalente puis loi d'Ohm :",
+       "tex": "R = 250\\ \\Omega \\ ;\\ I = \\frac{6}{250} = 0{,}024\\ \\text{A}"
+      },
+      {
+       "md": "Tensions : $U_1 = 100 \\times 0{,}024$ et $U_2 = 150 \\times 0{,}024$. Contrôle : $U_1 + U_2 = 6$ V.",
+       "tex": "U_1 = 2{,}4\\ \\text{V} \\ ;\\ U_2 = 3{,}6\\ \\text{V}"
+      }
+     ],
+     "answer": "I = **24 mA**, $U_1$ = **2,4 V**, $U_2$ = **3,6 V**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : dérivation",
+     "statement": "Deux résistors de 60 Ω et 30 Ω sont en dérivation aux bornes d'un générateur de 12 V. Calcule la résistance équivalente et les courants.",
+     "steps": [
+      {
+       "md": "Résistance équivalente :",
+       "tex": "\\frac{1}{R} = \\frac{1}{60} + \\frac{1}{30} = \\frac{3}{60} \\Rightarrow R = 20\\ \\Omega"
+      },
+      {
+       "md": "Chaque branche est sous 12 V : $I_1 = 12/60 = 0{,}2$ A et $I_2 = 12/30 = 0{,}4$ A. Loi des nœuds :",
+       "tex": "I = I_1 + I_2 = 0{,}6\\ \\text{A} = \\frac{12}{20}"
+      }
+     ],
+     "answer": "**R = 20 Ω**, $I_1$ = 0,2 A, $I_2$ = 0,4 A, I = 0,6 A."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : énergie consommée",
+     "statement": "Un fer à repasser de 1 100 W fonctionne 30 min. Calcule l'énergie consommée en kWh, puis le coût avec un prix fictif de 100 FCFA par kWh.",
+     "steps": [
+      {
+       "md": "Puissance 1,1 kW, durée 0,5 h :",
+       "tex": "E = P\\,t = 1{,}1 \\times 0{,}5 = 0{,}55\\ \\text{kWh}"
+      },
+      {
+       "md": "Coût : $0{,}55 \\times 100 = 55$ FCFA (prix du kWh fictif, uniquement pour l'exercice)."
+      }
+     ],
+     "answer": "**0,55 kWh**, soit **55 FCFA** avec le prix fictif donné."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Brancher un ampèremètre en dérivation (risque de court-circuit).\n- Additionner les résistances en dérivation.\n- Oublier de convertir les unités : mA en A, min en h, W en kW.\n- Croire que le courant « s'use » dans une lampe : il est le même avant et après un dipôle en série.\n- Confondre énergie (J, kWh) et puissance (W)."
+    },
+    {
+     "type": "exercise",
+     "ref": "2nde-physique-c-elc-01"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Sur une facture d'électricité (par exemple d'Eneo), l'énergie est comptée en kWh : savoir calculer E = P × t aide à comprendre sa consommation.",
+      "Les lois d'association se démontrent à partir de la loi des nœuds, de la loi des mailles et de la loi d'Ohm."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Lois des nœuds et des mailles : forme « mailles » en 2nde (somme algébrique des tensions) à confirmer avec le programme officiel.",
+    "Prix du kWh fictif (100 FCFA) : aucune tarification réelle n'est affirmée.",
+    "Charge Q = I t et effet Joule : exigibles en Seconde C ? À vérifier.",
+    "Convention fléchage des tensions : ici simplifiée."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "2nde-physique-c-elc-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-physique-c-electricite",
+   "prompt": "Un conducteur ohmique de résistance 220 Ω est soumis à une tension de 11 V. Calcule l'intensité du courant en ampères.",
+   "answer": 0.05,
+   "tolerance": 0.0005,
+   "unit": "A",
+   "explanation": "$I = \\frac{U}{R} = \\frac{11}{220} = 0{,}05$ A, soit 50 mA.",
+   "method": "Loi d'Ohm : $U = R\\,I$, donc $I = U/R$.",
+   "mistakes": [
+    "Calculer $R/U$ au lieu de $U/R$."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-physique-c-elc-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-physique-c-electricite",
+   "prompt": "Dans un nœud, un courant de 3,0 A arrive. Il se répartit entre deux branches. La première branche porte 1,8 A. Quelle est l'intensité (en A) dans la seconde ?",
+   "answer": 1.2,
+   "tolerance": 0.01,
+   "unit": "A",
+   "explanation": "Loi des nœuds : courant entrant = somme des courants sortants, donc $3{,}0 = 1{,}8 + I_2$ et $I_2 = 1{,}2$ A.",
+   "method": "Somme des intensités entrantes = somme des intensités sortantes.",
+   "mistakes": [
+    "Additionner 3,0 et 1,8."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-physique-c-elc-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-physique-c-electricite",
+   "prompt": "Deux résistors de 47 Ω et 68 Ω sont associés en série. Quelle est la résistance équivalente (en Ω) ?",
+   "answer": 115,
+   "tolerance": 0,
+   "unit": "Ω",
+   "explanation": "En série, les résistances s'ajoutent : $47 + 68 = 115$ Ω.",
+   "method": "$R_{\\text{éq}} = R_1 + R_2$ en série.",
+   "mistakes": [
+    "Utiliser la formule de la dérivation."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-physique-c-elc-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "2nde-physique-c-electricite",
+   "prompt": "Deux résistors de 30 Ω et 20 Ω sont associés en dérivation. Quelle est la résistance équivalente (en Ω) ?",
+   "answer": 12,
+   "tolerance": 0.01,
+   "unit": "Ω",
+   "explanation": "$\\frac{1}{R} = \\frac{1}{30} + \\frac{1}{20} = \\frac{5}{60}$, donc $R = 12$ Ω. Remarque : le résultat est plus petit que la plus petite résistance (20 Ω).",
+   "method": "$\\frac{1}{R_{\\text{éq}}} = \\frac{1}{R_1} + \\frac{1}{R_2}$.",
+   "mistakes": [
+    "Additionner 30 et 20 (50 Ω)."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-physique-c-elc-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "2nde-physique-c-electricite",
+   "prompt": "Un chauffe-eau de puissance 2 000 W fonctionne 45 min par jour pendant 30 jours. Quelle énergie électrique consomme-t-il (en kWh) ?",
+   "answer": 45,
+   "tolerance": 0.01,
+   "unit": "kWh",
+   "explanation": "$P = 2$ kW ; durée totale $= 0{,}75 \\times 30 = 22{,}5$ h ; $E = P\\,t = 2 \\times 22{,}5 = 45$ kWh.",
+   "method": "$E = P\\,t$ avec P en kW et t en h donne E en kWh.",
+   "mistakes": [
+    "Oublier de convertir 45 min en heures (0,75 h)."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-physique-c-elc-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "2nde-physique-c-electricite",
+   "prompt": "Un générateur de tension E = 12 V alimente un résistor $R_1 = 10$ Ω en série avec deux résistors $R_2 = R_3 = 20$ Ω montés en dérivation (valeurs d'exercice).",
+   "parts": [
+    {
+     "id": "2nde-physique-c-elc-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la résistance équivalente du groupement de $R_2$ et $R_3$ en dérivation (en Ω).",
+     "answer": 10,
+     "tolerance": 0.01,
+     "unit": "Ω",
+     "explanation": "$\\frac{1}{R_{23}} = \\frac{1}{20} + \\frac{1}{20} = \\frac{1}{10}$ : $R_{23} = 10$ Ω (deux résistances égales en dérivation donnent la moitié)."
+    },
+    {
+     "id": "2nde-physique-c-elc-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la résistance équivalente de tout le circuit (en Ω).",
+     "answer": 20,
+     "tolerance": 0.01,
+     "unit": "Ω",
+     "explanation": "$R_1$ est en série avec le groupement : $R_{\\text{éq}} = 10 + 10 = 20$ Ω."
+    },
+    {
+     "id": "2nde-physique-c-elc-06-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule l'intensité du courant débité par le générateur (en A).",
+     "answer": 0.6,
+     "tolerance": 0.005,
+     "unit": "A",
+     "explanation": "$I = \\frac{E}{R_{\\text{éq}}} = \\frac{12}{20} = 0{,}6$ A."
+    },
+    {
+     "id": "2nde-physique-c-elc-06-d",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quelle est l'intensité $I_2$ dans le résistor $R_2$ (en A) ?",
+     "answer": 0.3,
+     "tolerance": 0.005,
+     "unit": "A",
+     "explanation": "$U_{23} = R_{23}\\,I = 10 \\times 0{,}6 = 6$ V ; $I_2 = \\frac{U_{23}}{R_2} = \\frac{6}{20} = 0{,}3$ A. (Par symétrie, $I$ se partage en deux parts égales.)"
+    },
+    {
+     "id": "2nde-physique-c-elc-06-e",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quelle puissance électrique le générateur fournit-il au circuit (en W) ?",
+     "answer": 7.2,
+     "tolerance": 0.05,
+     "unit": "W",
+     "explanation": "$P = E\\,I = 12 \\times 0{,}6 = 7{,}2$ W."
+    }
+   ],
+   "method": "Réduire le circuit pas à pas : dérivation, puis série ; revenir ensuite aux courants et tensions.",
+   "mistakes": [
+    "Appliquer la tension E aux bornes de chaque résistor."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-physique-c-elc-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-physique-c-electricite",
+   "prompt": "Comment branche-t-on un ampèremètre ?",
+   "choices": [
+    "en dérivation aux bornes du dipôle",
+    "en parallèle avec le générateur",
+    "en série dans la branche",
+    "au hasard"
+   ],
+   "answer": 2,
+   "explanation": "L'ampèremètre mesure l'intensité qui le traverse : il se place en série."
+  },
+  {
+   "id": "2nde-physique-c-elc-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-physique-c-electricite",
+   "prompt": "Comment branche-t-on un voltmètre ?",
+   "choices": [
+    "en série avec le dipôle",
+    "il n'a pas de sens de branchement",
+    "en série avec le générateur",
+    "en dérivation aux bornes du dipôle"
+   ],
+   "answer": 3,
+   "explanation": "Le voltmètre mesure une différence de potentiel entre deux points : il se place en dérivation."
+  },
+  {
+   "id": "2nde-physique-c-elc-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-physique-c-electricite",
+   "prompt": "Quelle est la loi d'Ohm pour un conducteur ohmique ?",
+   "choices": [
+    "$U = R / I$",
+    "$I = U\\,R$",
+    "$R = U\\,I$",
+    "$U = R\\,I$"
+   ],
+   "answer": 3,
+   "explanation": "La tension aux bornes est proportionnelle à l'intensité : $U = R I$."
+  },
+  {
+   "id": "2nde-physique-c-elc-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-physique-c-electricite",
+   "prompt": "Dans un circuit en série, laquelle de ces grandeurs est identique dans tous les dipôles ?",
+   "choices": [
+    "la tension",
+    "la résistance",
+    "l'intensité du courant",
+    "la puissance"
+   ],
+   "answer": 2,
+   "explanation": "En série, il n'y a qu'un seul chemin : le courant est le même partout."
+  },
+  {
+   "id": "2nde-physique-c-elc-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-physique-c-electricite",
+   "prompt": "Quelle est l'unité SI de la puissance électrique ?",
+   "choices": [
+    "le joule (J)",
+    "le volt (V)",
+    "l'ohm (Ω)",
+    "le watt (W)"
+   ],
+   "answer": 3,
+   "explanation": "P s'exprime en watts : $1\\ \\text{W} = 1\\ \\text{J/s}$."
+  }
+ ]
+}

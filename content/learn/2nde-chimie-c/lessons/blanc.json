@@ -1,0 +1,217 @@
+{
+ "chapter": "2nde-chimie-c-ch-reaction",
+ "lessons": [],
+ "exercises": [
+  {
+   "id": "2nde-chimie-c-blanc-ex1",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "2nde-chimie-c-melanges",
+   "prompt": "Exercice 1 : on dissout 18 g de glucose $C_6H_{12}O_6$ ($M = 180$ g/mol) dans de l'eau pour obtenir 500 mL de solution S.",
+   "parts": [
+    {
+     "id": "2nde-chimie-c-blanc-ex1-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la concentration massique de S (en g/L).",
+     "answer": 36,
+     "tolerance": 0.1,
+     "unit": "g/L",
+     "explanation": "$C_m = \\frac{18}{0{,}500} = 36$ g/L."
+    },
+    {
+     "id": "2nde-chimie-c-blanc-ex1-b",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule la concentration molaire de S (en mol/L).",
+     "answer": 0.2,
+     "tolerance": 0.002,
+     "unit": "mol/L",
+     "explanation": "$n = \\frac{18}{180} = 0{,}10$ mol ; $C = \\frac{0{,}10}{0{,}500} = 0{,}20$ mol/L (ou $C_m / M = 36/180$)."
+    },
+    {
+     "id": "2nde-chimie-c-blanc-ex1-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "On veut préparer 250 mL de solution à 0,040 mol/L par dilution de S. Quel volume de S faut-il prélever (en mL) ?",
+     "answer": 50,
+     "tolerance": 0.5,
+     "unit": "mL",
+     "explanation": "$V_i = \\frac{C_f V_f}{C_i} = \\frac{0{,}040 \\times 250}{0{,}20} = 50$ mL."
+    },
+    {
+     "id": "2nde-chimie-c-blanc-ex1-d",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Pour récupérer le sel d'une eau salée, on utilise :",
+     "choices": [
+      "l'évaporation de l'eau",
+      "la filtration",
+      "la décantation",
+      "l'aimantation"
+     ],
+     "answer": 0,
+     "explanation": "Le sel est dissous : un filtre ne le retient pas. On chasse l'eau par évaporation pour récupérer le solide."
+    },
+    {
+     "id": "2nde-chimie-c-blanc-ex1-e",
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "Quand on dilue une solution, la quantité de matière de soluté diminue.",
+     "answer": false,
+     "explanation": "Faux : la quantité de soluté est conservée, c'est la concentration qui diminue car le volume augmente."
+    }
+   ],
+   "method": "C = n/V, C_m = m/V, dilution C_i V_i = C_f V_f.",
+   "mistakes": [
+    "Oublier de convertir mL en L."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-chimie-c-blanc-ex2",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "2nde-chimie-c-atome",
+   "prompt": "Exercice 2 : l'azote est l'élément de numéro atomique Z = 7 ; son isotope courant a pour nombre de nucléons A = 14.",
+   "parts": [
+    {
+     "id": "2nde-chimie-c-blanc-ex2-a",
+     "kind": "mcq",
+     "points": 1.5,
+     "prompt": "Quelle est la structure électronique de l'atome d'azote ?",
+     "choices": [
+      "$(K)^2(L)^7$",
+      "$(K)^7$",
+      "$(K)^2(L)^5$",
+      "$(K)^5(L)^2$"
+     ],
+     "answer": 2,
+     "explanation": "7 électrons : 2 sur K (pleine) et 5 sur L."
+    },
+    {
+     "id": "2nde-chimie-c-blanc-ex2-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Combien de neutrons le noyau contient-il ?",
+     "answer": 7,
+     "tolerance": 0,
+     "explanation": "$N = A - Z = 14 - 7 = 7$."
+    },
+    {
+     "id": "2nde-chimie-c-blanc-ex2-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Dans la molécule d'ammoniac $NH_3$, combien de liaisons covalentes simples l'azote forme-t-il ?",
+     "answer": 3,
+     "tolerance": 0,
+     "explanation": "L'azote a 5 électrons externes : il lui en manque 3 pour l'octet ; il partage donc 3 doublets avec 3 atomes d'hydrogène (chacun atteint le duet)."
+    },
+    {
+     "id": "2nde-chimie-c-blanc-ex2-d",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Le sodium (Z = 11) forme l'ion stable :",
+     "choices": [
+      "$Na^+$",
+      "$Na^-$",
+      "$Na^{2+}$",
+      "$Na^{7+}$"
+     ],
+     "answer": 0,
+     "explanation": "$(K)^2(L)^8(M)^1$ : il perd son électron externe et prend la structure du néon."
+    },
+    {
+     "id": "2nde-chimie-c-blanc-ex2-e",
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "Le noyau de l'ion $Na^+$ contient 10 protons.",
+     "answer": false,
+     "explanation": "Faux : un ion se forme par perte ou gain d'électrons ; le noyau est inchangé (11 protons). C'est le nombre d'électrons qui passe à 10."
+    }
+   ],
+   "method": "Structure électronique, Z, A, règles du duet et de l'octet.",
+   "mistakes": [
+    "Croire que le noyau change quand l'atome devient un ion."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-chimie-c-blanc-ex3",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "2nde-chimie-c-reaction",
+   "prompt": "Exercice 3 : on fait réagir 2,7 g d'aluminium avec 1,2 L de dioxygène (gaz mesuré à 20 °C sous 1 atm, $V_m = 24$ L/mol) : $4\\,Al + 3\\,O_2 \\to 2\\,Al_2O_3$. Données : $M(Al) = 27$ g/mol ; $M(O) = 16$ g/mol.",
+   "parts": [
+    {
+     "id": "2nde-chimie-c-blanc-ex3-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la quantité d'aluminium (en mol).",
+     "answer": 0.1,
+     "tolerance": 0.001,
+     "unit": "mol",
+     "explanation": "$n(Al) = \\frac{2{,}7}{27} = 0{,}10$ mol."
+    },
+    {
+     "id": "2nde-chimie-c-blanc-ex3-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la quantité de dioxygène (en mol).",
+     "answer": 0.05,
+     "tolerance": 0.0005,
+     "unit": "mol",
+     "explanation": "$n(O_2) = \\frac{1{,}2}{24} = 0{,}050$ mol."
+    },
+    {
+     "id": "2nde-chimie-c-blanc-ex3-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule l'avancement maximal (en mol, arrondi à $10^{-4}$).",
+     "answer": 0.0167,
+     "tolerance": 0.0003,
+     "unit": "mol",
+     "explanation": "Al : $0{,}10/4 = 0{,}025$ ; $O_2$ : $0{,}050/3 \\approx 0{,}0167$. $x_{max} \\approx 0{,}0167$ mol : $O_2$ est limitant."
+    },
+    {
+     "id": "2nde-chimie-c-blanc-ex3-d",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule la quantité d'oxyde d'aluminium $Al_2O_3$ formée (en mol, arrondie à $10^{-3}$).",
+     "answer": 0.033,
+     "tolerance": 0.001,
+     "unit": "mol",
+     "explanation": "$n(Al_2O_3) = 2\\,x_{max} \\approx 0{,}0333$ mol."
+    },
+    {
+     "id": "2nde-chimie-c-blanc-ex3-e",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule la masse d'oxyde d'aluminium formée (en g) ; $M(Al_2O_3) = 102$ g/mol.",
+     "answer": 3.4,
+     "tolerance": 0.05,
+     "unit": "g",
+     "explanation": "$m = 0{,}0333 \\times 102 \\approx 3{,}4$ g."
+    },
+    {
+     "id": "2nde-chimie-c-blanc-ex3-f",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Quelle masse d'aluminium reste-t-il (en g) ?",
+     "answer": 0.9,
+     "tolerance": 0.05,
+     "unit": "g",
+     "explanation": "$n(Al)_{restant} = 0{,}10 - 4 \\times 0{,}0167 \\approx 0{,}0333$ mol ; $m \\approx 0{,}0333 \\times 27 = 0{,}9$ g."
+    }
+   ],
+   "method": "n = m/M et n = V/V_m, tableau d'avancement, bilan final.",
+   "mistakes": [
+    "Oublier les coefficients stœchiométriques en cherchant le réactif limitant."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  }
+ ]
+}

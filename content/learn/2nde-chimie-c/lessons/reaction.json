@@ -1,0 +1,412 @@
+{
+ "chapter": "2nde-chimie-c-ch-reaction",
+ "lessons": [
+  {
+   "id": "2nde-chimie-c-reaction",
+   "title": "Réaction chimique, équation-bilan et avancement",
+   "minutes": 40,
+   "programRef": "2nde C — Réaction chimique, équation-bilan, avancement et bilans de matière (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Écrire et équilibrer une équation chimique.",
+    "Dresser un bilan de matière à l'aide de l'avancement.",
+    "Déterminer le réactif limitant et l'avancement maximal.",
+    "Calculer des masses ou volumes de produits formés."
+   ],
+   "prerequisites": [
+    "2nde-chimie-c-matiere"
+   ],
+   "exercises": [
+    "2nde-chimie-c-rea-01",
+    "2nde-chimie-c-rea-02",
+    "2nde-chimie-c-rea-03",
+    "2nde-chimie-c-rea-04",
+    "2nde-chimie-c-rea-05",
+    "2nde-chimie-c-rea-06"
+   ],
+   "selfCheck": [
+    "2nde-chimie-c-rea-q1",
+    "2nde-chimie-c-rea-q2",
+    "2nde-chimie-c-rea-q3",
+    "2nde-chimie-c-rea-q4",
+    "2nde-chimie-c-rea-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Réaction chimique",
+     "md": "Une **transformation chimique** transforme des **réactifs** en **produits** : de nouvelles espèces apparaissent, d'autres disparaissent. On l'écrit avec une **équation chimique** : réactifs → produits. On peut ajouter l'état physique : (s) solide, (l) liquide, (g) gaz, (aq) en solution aqueuse."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Équilibrer une équation",
+     "md": "Lors de la réaction, les **éléments** et les **charges** se conservent. On ajuste les **coefficients stœchiométriques** (jamais les indices) pour avoir autant d'atomes de chaque élément de chaque côté.\nExemple : $2\\,Mg + O_2 \\to 2\\,MgO$ : 2 Mg et 2 O de chaque côté. La masse totale se conserve."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Avancement et réactif limitant",
+     "md": "Pour $aA + bB \\to cC + dD$, l'**avancement** x (mol) mesure la progression : $n(A) = n_i(A) - a\\,x$ ; $n(C) = c\\,x$.\nL'avancement maximal $x_{max}$ est la plus petite des valeurs $\\frac{n_i(A)}{a}$ et $\\frac{n_i(B)}{b}$. Le réactif qui fixe $x_{max}$ est le **réactif limitant** ; il est entièrement consommé."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 460,
+      "h": 240,
+      "unit": "mol",
+      "bars": [
+       {
+        "label": "Mg début",
+        "value": 0.3,
+        "color": "blue"
+       },
+       {
+        "label": "Mg fin",
+        "value": 0.1,
+        "color": "lightblue"
+       },
+       {
+        "label": "O₂ début",
+        "value": 0.1,
+        "color": "green"
+       },
+       {
+        "label": "O₂ fin",
+        "value": 0,
+        "color": "lightgreen"
+       },
+       {
+        "label": "MgO fin",
+        "value": 0.2,
+        "color": "orange"
+       }
+      ]
+     },
+     "caption": "Bilan de $2\\,Mg + O_2 \\to 2\\,MgO$ pour 0,30 mol de Mg et 0,10 mol de O₂ : O₂ est limitant, il reste 0,10 mol de Mg.",
+     "alt": "Un diagramme en barres des quantités de matière : Mg passe de 0,30 à 0,10 mol, O₂ de 0,10 à 0, et MgO atteint 0,20 mol."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : bilan de matière",
+     "md": "1. Écrire l'équation équilibrée.\n2. Convertir les données en quantités de matière ($n = m/M$, $n = C V$, $n = V/V_m$).\n3. Dresser le tableau d'avancement : état initial, état intermédiaire (x), état final ($x_{max}$).\n4. Déterminer $x_{max}$ et le réactif limitant.\n5. Calculer les quantités finales, puis les masses ou volumes demandés."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : équilibrer",
+     "statement": "Équilibre l'équation de combustion du propane : $C_3H_8 + O_2 \\to CO_2 + H_2O$.",
+     "steps": [
+      {
+       "md": "On équilibre C puis H : 3 C donnent $3\\,CO_2$ ; 8 H donnent $4\\,H_2O$. On obtient $C_3H_8 + O_2 \\to 3\\,CO_2 + 4\\,H_2O$."
+      },
+      {
+       "md": "Reste O : $3 \\times 2 + 4 = 10$ atomes à droite, donc 5 molécules de $O_2$ :",
+       "tex": "C_3H_8 + 5\\,O_2 \\to 3\\,CO_2 + 4\\,H_2O"
+      }
+     ],
+     "answer": "$C_3H_8 + 5\\,O_2 \\to 3\\,CO_2 + 4\\,H_2O$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : réactif limitant",
+     "statement": "On fait brûler 0,30 mol de magnésium dans 0,10 mol de dioxygène : $2\\,Mg + O_2 \\to 2\\,MgO$. Détermine $x_{max}$ et l'état final.",
+     "steps": [
+      {
+       "md": "Mg : $0{,}30/2 = 0{,}15$ ; $O_2$ : $0{,}10/1 = 0{,}10$.",
+       "tex": "x_{max} = \\min(0{,}15 ; 0{,}10) = 0{,}10\\ \\text{mol}"
+      },
+      {
+       "md": "$O_2$ est limitant. État final : $n(O_2) = 0$ ; $n(Mg) = 0{,}30 - 2 \\times 0{,}10 = 0{,}10$ mol ; $n(MgO) = 2 \\times 0{,}10 = 0{,}20$ mol."
+      }
+     ],
+     "answer": "$x_{max}$ = **0,10 mol** ; final : Mg 0,10 mol, O₂ 0, MgO 0,20 mol."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : volume de gaz",
+     "statement": "Du zinc (6,5 g, $M = 65$ g/mol) est attaqué par un excès d'acide chlorhydrique : $Zn + 2\\,HCl \\to ZnCl_2 + H_2$. Quel volume de dihydrogène se dégage à 20 °C, 1 atm ($V_m = 24$ L/mol) ?",
+     "steps": [
+      {
+       "md": "Le zinc est limitant :",
+       "tex": "n(Zn) = \\frac{6{,}5}{65} = 0{,}10\\ \\text{mol} = x_{max}"
+      },
+      {
+       "md": "Les coefficients de Zn et $H_2$ sont égaux :",
+       "tex": "n(H_2) = 0{,}10\\ \\text{mol} \\Rightarrow V = 0{,}10 \\times 24 = 2{,}4\\ \\text{L}"
+      }
+     ],
+     "answer": "**V = 2,4 L** de dihydrogène."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Modifier les indices au lieu des coefficients pour équilibrer.\n- Oublier de convertir les masses en quantités de matière avant de comparer les réactifs.\n- Choisir le réactif limitant sans diviser par les coefficients stœchiométriques.\n- Additionner des moles de substances différentes pour trouver « la quantité totale » : seules les masses totales se conservent.\n- Utiliser $V_m = 24$ L/mol pour un liquide ou un solide."
+    },
+    {
+     "type": "exercise",
+     "ref": "2nde-chimie-c-rea-01"
+    },
+    {
+     "type": "more",
+     "items": [
+      "La combustion du gaz de cuisine produit du dioxyde de carbone et de l'eau : c'est une réaction du même type que celle du propane étudiée ici.",
+      "Les « cendres » et la « fumée » d'un feu de bois montrent que les produits d'une combustion ne sont pas ceux des réactifs de départ."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Place de la notion d'avancement et du tableau d'avancement en Seconde C (peut débuter en Première) : à vérifier sur le texte officiel.",
+    "Volume molaire 24 L/mol à 20 °C sous 1 atm (choix du pack, rappelé dans les énoncés) ; différent de 22,4 L/mol à 0 °C.",
+    "Réactions choisies (Mg + O₂, Zn + HCl, CaCO₃, propane) : vérifier qu'elles figurent aux travaux pratiques du programme.",
+    "Notation $x_{max}$ et symboles ν non utilisés : à aligner sur le formalisme enseigné."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "2nde-chimie-c-rea-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-chimie-c-reaction",
+   "prompt": "Quels coefficients équilibrent l'équation $\\ldots\\,Al + \\ldots\\,O_2 \\to \\ldots\\,Al_2O_3$ (dans l'ordre) ?",
+   "choices": [
+    "2, 3, 1",
+    "4, 3, 2",
+    "1, 1, 1",
+    "2, 2, 2"
+   ],
+   "answer": 1,
+   "explanation": "Il faut le même nombre d'atomes de chaque élément de part et d'autre : $4\\,Al + 3\\,O_2 \\to 2\\,Al_2O_3$ donne 4 Al et 6 O des deux côtés.",
+   "method": "Équilibrer d'abord l'élément qui apparaît dans un seul réactif et un seul produit.",
+   "mistakes": [
+    "Changer les indices (Al₂O₃) au lieu des coefficients : cela change la substance."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-chimie-c-rea-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-chimie-c-reaction",
+   "prompt": "Dans $2\\,H_2 + O_2 \\to 2\\,H_2O$, on part de 3 mol de dihydrogène, le dioxygène étant en excès. Quelle quantité d'eau (en mol) se forme ?",
+   "answer": 3,
+   "tolerance": 0,
+   "unit": "mol",
+   "explanation": "Les coefficients de $H_2$ et $H_2O$ sont égaux (2 et 2) : chaque mole de $H_2$ donne une mole d'eau. Il se forme donc 3 mol d'eau.",
+   "method": "Rapport des coefficients stœchiométriques.",
+   "mistakes": [
+    "Diviser par 2 sans regarder les coefficients."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-chimie-c-rea-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-chimie-c-reaction",
+   "prompt": "La combustion du méthane est $CH_4 + 2\\,O_2 \\to CO_2 + 2\\,H_2O$. Quelle quantité de dioxygène (en mol) est consommée par 0,50 mol de méthane ?",
+   "answer": 1,
+   "tolerance": 0,
+   "unit": "mol",
+   "explanation": "Pour 1 mol de $CH_4$, il faut 2 mol de $O_2$ : $n(O_2) = 2 \\times 0{,}50 = 1{,}0$ mol.",
+   "method": "$n(O_2) = 2\\,n(CH_4)$ d'après les coefficients.",
+   "mistakes": [
+    "Répondre 0,25 mol en divisant par 2."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-chimie-c-rea-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "2nde-chimie-c-reaction",
+   "prompt": "On mélange 0,50 mol de $H_2$ et 0,50 mol de $O_2$ : $2\\,H_2 + O_2 \\to 2\\,H_2O$. Quelle quantité de $O_2$ (en mol) reste-t-il à la fin ?",
+   "answer": 0.25,
+   "tolerance": 0.005,
+   "unit": "mol",
+   "explanation": "Avancement maximal : $H_2$ : 0,50/2 = 0,25 ; $O_2$ : 0,50/1 = 0,50. Donc $x_{max} = 0{,}25$ mol ($H_2$ est limitant). $n(O_2)_{final} = 0{,}50 - 0{,}25 = 0{,}25$ mol.",
+   "method": "Calculer $n_i / \\text{coefficient}$ pour chaque réactif ; le plus petit donne $x_{max}$.",
+   "mistakes": [
+    "Croire que le réactif limitant est celui dont la quantité de matière est la plus petite, sans tenir compte des coefficients."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-chimie-c-rea-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "2nde-chimie-c-reaction",
+   "prompt": "La décomposition thermique du calcaire est $CaCO_3 \\to CaO + CO_2$. Quelle masse de chaux vive CaO (en g) obtient-on à partir de 10 g de $CaCO_3$ (totalement décomposé) ? Données : $M(CaCO_3) = 100$ g/mol ; $M(CaO) = 56$ g/mol.",
+   "answer": 5.6,
+   "tolerance": 0.05,
+   "unit": "g",
+   "explanation": "$n(CaCO_3) = \\frac{10}{100} = 0{,}10$ mol ; les coefficients sont égaux, donc $n(CaO) = 0{,}10$ mol ; $m = 0{,}10 \\times 56 = 5{,}6$ g. Le reste (4,4 g) part sous forme de $CO_2$ : la masse totale se conserve.",
+   "method": "m → n → rapport des coefficients → n du produit → m.",
+   "mistakes": [
+    "Penser que la masse de CaO est égale à celle de CaCO₃."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-chimie-c-rea-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "2nde-chimie-c-reaction",
+   "prompt": "On introduit 13 g de zinc Zn dans 100 mL d'une solution d'acide chlorhydrique à 3,0 mol/L. La réaction est totale : $Zn + 2\\,HCl \\to ZnCl_2 + H_2$.",
+   "parts": [
+    {
+     "id": "2nde-chimie-c-rea-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la quantité de zinc introduite (en mol). $M(Zn) = 65$ g/mol.",
+     "answer": 0.2,
+     "tolerance": 0.002,
+     "unit": "mol",
+     "explanation": "$n(Zn) = \\frac{13}{65} = 0{,}20$ mol."
+    },
+    {
+     "id": "2nde-chimie-c-rea-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la quantité de chlorure d'hydrogène HCl introduite (en mol).",
+     "answer": 0.3,
+     "tolerance": 0.003,
+     "unit": "mol",
+     "explanation": "$n(HCl) = C\\,V = 3{,}0 \\times 0{,}100 = 0{,}30$ mol."
+    },
+    {
+     "id": "2nde-chimie-c-rea-06-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule l'avancement maximal $x_{max}$ (en mol).",
+     "answer": 0.15,
+     "tolerance": 0.002,
+     "unit": "mol",
+     "explanation": "Zn : $0{,}20 - x = 0 \\Rightarrow x = 0{,}20$. HCl : $0{,}30 - 2x = 0 \\Rightarrow x = 0{,}15$. Le plus petit, 0,15 mol, est $x_{max}$ : HCl est le réactif limitant."
+    },
+    {
+     "id": "2nde-chimie-c-rea-06-d",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quel volume de dihydrogène se dégage (en L), à 20 °C et 1 atm ($V_m = 24$ L/mol) ?",
+     "answer": 3.6,
+     "tolerance": 0.05,
+     "unit": "L",
+     "explanation": "$n(H_2) = x_{max} = 0{,}15$ mol ; $V = 0{,}15 \\times 24 = 3{,}6$ L."
+    },
+    {
+     "id": "2nde-chimie-c-rea-06-e",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Quelle masse de zinc reste-t-il à la fin (en g) ?",
+     "answer": 3.25,
+     "tolerance": 0.05,
+     "unit": "g",
+     "explanation": "$n(Zn)_{restant} = 0{,}20 - 0{,}15 = 0{,}05$ mol ; $m = 0{,}05 \\times 65 = 3{,}25$ g."
+    }
+   ],
+   "method": "Tableau d'avancement : $n_i - \\nu\\,x$ pour chaque réactif ; $x_{max}$ est le plus petit des quotients.",
+   "mistakes": [
+    "Oublier le coefficient 2 de HCl dans la recherche de $x_{max}$."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-chimie-c-rea-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-chimie-c-reaction",
+   "prompt": "Dans une équation chimique, les réactifs sont placés :",
+   "choices": [
+    "à droite de la flèche",
+    "à gauche de la flèche",
+    "au-dessus de la flèche",
+    "des deux côtés"
+   ],
+   "answer": 1,
+   "explanation": "Réactifs → produits."
+  },
+  {
+   "id": "2nde-chimie-c-rea-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-chimie-c-reaction",
+   "prompt": "Pour équilibrer une équation, on modifie :",
+   "choices": [
+    "les coefficients stœchiométriques",
+    "les indices des formules",
+    "les noms des corps",
+    "la flèche"
+   ],
+   "answer": 0,
+   "explanation": "Changer un indice changerait la substance ; on ne change que les coefficients."
+  },
+  {
+   "id": "2nde-chimie-c-rea-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-chimie-c-reaction",
+   "prompt": "Au cours d'une transformation chimique, se conservent :",
+   "choices": [
+    "les molécules",
+    "le nombre de moles de chaque substance",
+    "le volume",
+    "les éléments chimiques et la masse totale"
+   ],
+   "answer": 3,
+   "explanation": "Les atomes sont réarrangés mais conservés ; les molécules ne le sont pas."
+  },
+  {
+   "id": "2nde-chimie-c-rea-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-chimie-c-reaction",
+   "prompt": "Le réactif limitant est celui qui :",
+   "choices": [
+    "est le plus abondant",
+    "a la plus grande masse molaire",
+    "disparaît le premier",
+    "reste à la fin"
+   ],
+   "answer": 2,
+   "explanation": "Quand il est épuisé, la réaction s'arrête."
+  },
+  {
+   "id": "2nde-chimie-c-rea-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-chimie-c-reaction",
+   "prompt": "L'avancement x d'une réaction s'exprime en :",
+   "choices": [
+    "mol",
+    "g",
+    "L",
+    "mol/L"
+   ],
+   "answer": 0,
+   "explanation": "x est une quantité de matière : mole."
+  }
+ ]
+}

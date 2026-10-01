@@ -1,0 +1,480 @@
+{
+ "chapter": "2nde-chimie-c-ch-melanges",
+ "lessons": [
+  {
+   "id": "2nde-chimie-c-melanges",
+   "title": "Corps purs, mélanges, solutions et concentrations",
+   "minutes": 35,
+   "programRef": "2nde C — Corps purs et mélanges, séparations, solutions et concentrations (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer corps pur, mélange homogène et mélange hétérogène.",
+    "Choisir une technique de séparation adaptée.",
+    "Calculer des concentrations massique et molaire.",
+    "Préparer une solution par dissolution ou dilution."
+   ],
+   "exercises": [
+    "2nde-chimie-c-mel-01",
+    "2nde-chimie-c-mel-02",
+    "2nde-chimie-c-mel-03",
+    "2nde-chimie-c-mel-04",
+    "2nde-chimie-c-mel-05",
+    "2nde-chimie-c-mel-06"
+   ],
+   "selfCheck": [
+    "2nde-chimie-c-mel-q1",
+    "2nde-chimie-c-mel-q2",
+    "2nde-chimie-c-mel-q3",
+    "2nde-chimie-c-mel-q4",
+    "2nde-chimie-c-mel-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Corps pur et mélange",
+     "md": "Un **corps pur** est constitué d'une seule espèce chimique : il a des constantes physiques précises (par exemple, l'eau pure fond à 0 °C et bout à 100 °C sous la pression normale ; sa température reste constante pendant le changement d'état). Un **mélange** contient plusieurs espèces : **homogène** (un seul aspect visible : eau salée) ou **hétérogène** (plusieurs phases : sable et eau)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Techniques de séparation",
+     "md": "- **Décantation** : laisser se déposer un solide dans un liquide, puis verser le liquide.\n- **Filtration** : retenir un solide insoluble avec un filtre.\n- **Évaporation** : récupérer un solide dissous (le sel) en chassant l'eau.\n- **Distillation** : séparer des liquides de températures d'ébullition différentes.\n- **Chromatographie** : séparer des substances colorées entraînées par un solvant."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 460,
+      "h": 215,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         100,
+         30,
+         220,
+         30,
+         175,
+         95,
+         145,
+         95
+        ],
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 152,
+        "y": 95,
+        "w": 16,
+        "h": 30,
+        "fill": null,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 140,
+        "w": 100,
+        "h": 65,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 78,
+        "r": 5,
+        "fill": "brown",
+        "stroke": "brown"
+       },
+       {
+        "t": "circle",
+        "cx": 165,
+        "cy": 82,
+        "r": 5,
+        "fill": "brown",
+        "stroke": "brown"
+       },
+       {
+        "t": "circle",
+        "cx": 160,
+        "cy": 70,
+        "r": 5,
+        "fill": "brown",
+        "stroke": "brown"
+       },
+       {
+        "t": "line",
+        "x1": 160,
+        "y1": 8,
+        "x2": 160,
+        "y2": 28,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 20,
+        "text": "Mélange sable + eau versé",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 70,
+        "text": "Résidu : sable retenu",
+        "size": 14,
+        "color": "brown",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 180,
+        "text": "Filtrat : eau limpide",
+        "size": 14,
+        "color": "blue",
+        "anchor": "start"
+       }
+      ]
+     },
+     "caption": "Filtration d'un mélange sable-eau : le sable reste sur le filtre, l'eau limpide traverse (le filtrat).",
+     "alt": "Un entonnoir contenant du sable au-dessus d'un bécher bleu rempli d'eau, avec des étiquettes pour le résidu et le filtrat."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Solution, soluté, solvant",
+     "md": "Une **solution** est un mélange homogène obtenu en dissolvant un **soluté** (solide, liquide ou gaz) dans un **solvant** (l'eau pour une solution aqueuse). Si l'on ne peut plus dissoudre de soluté, la solution est **saturée**."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Concentrations",
+     "md": "**Concentration massique** : $C_m = \\frac{m}{V}$ (g/L).\n**Concentration molaire** : $C = \\frac{n}{V}$ (mol/L).\nRelation entre les deux : $C_m = C \\times M$ où M est la masse molaire du soluté (g/mol). V est le volume de **solution** (en litres)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Dilution",
+     "md": "Diluer, c'est ajouter du solvant : la quantité de soluté **ne change pas**.\n$C_i V_i = C_f V_f$ (même unité de volume des deux côtés).\nFacteur de dilution : $F = \\frac{C_i}{C_f} = \\frac{V_f}{V_i}$. Protocole : prélever $V_i$ à la pipette jaugée, le placer dans une fiole jaugée de volume $V_f$, compléter avec de l'eau distillée jusqu'au trait de jauge, puis homogénéiser."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : concentration massique",
+     "statement": "On dissout 12 g de sucre dans de l'eau pour obtenir 250 mL de solution. Calcule la concentration massique en g/L.",
+     "steps": [
+      {
+       "md": "On convertit le volume : 250 mL = 0,250 L.",
+       "tex": "V = 0{,}250\\ \\text{L}"
+      },
+      {
+       "md": "On applique la définition :",
+       "tex": "C_m = \\frac{12}{0{,}250} = 48\\ \\text{g/L}"
+      }
+     ],
+     "answer": "**$C_m$ = 48 g/L**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : dilution",
+     "statement": "On veut 100 mL de solution à 0,10 mol/L à partir d'une solution mère à 0,50 mol/L. Quel volume de solution mère faut-il prélever ?",
+     "steps": [
+      {
+       "md": "Conservation de la quantité de matière :",
+       "tex": "C_i V_i = C_f V_f \\Rightarrow V_i = \\frac{0{,}10 \\times 100}{0{,}50}"
+      },
+      {
+       "md": "On trouve $V_i = 20$ mL (facteur de dilution 5). On prélève 20 mL à la pipette jaugée, on complète à 100 mL dans une fiole jaugée."
+      }
+     ],
+     "answer": "Il faut prélever **20 mL** de solution mère."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : passer de C à Cm",
+     "statement": "Une solution de NaCl a pour concentration molaire 0,20 mol/L. Calcule sa concentration massique ($M = 58{,}5$ g/mol).",
+     "steps": [
+      {
+       "md": "On utilise $C_m = C \\times M$ :",
+       "tex": "C_m = 0{,}20 \\times 58{,}5"
+      },
+      {
+       "md": "On obtient 11,7 g/L : chaque litre de solution contient 11,7 g de sel."
+      }
+     ],
+     "answer": "**$C_m$ = 11,7 g/L**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Utiliser le volume de solvant au lieu du volume de **solution**.\n- Oublier de convertir les mL en L.\n- Verser l'eau d'un coup jusqu'au trait sans avoir dissous le soluté.\n- Penser que diluer fait diminuer la quantité de soluté : c'est la concentration qui diminue.\n- Croire qu'un liquide « limpide » est un corps pur (l'eau de source est un mélange)."
+    },
+    {
+     "type": "exercise",
+     "ref": "2nde-chimie-c-mel-01"
+    },
+    {
+     "type": "more",
+     "items": [
+      "L'eau potable est un mélange : elle contient des sels minéraux dissous. Seule l'eau distillée est (presque) un corps pur.",
+      "Dans la fabrication du sel par évaporation d'eau salée, on récupère un soluté solide : c'est un exemple d'évaporation."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Définition du corps pur et de la saturation : formulation simplifiée à adapter au vocabulaire du programme officiel.",
+    "Place de la dilution en Seconde C (peut être vue en Première) : à vérifier.",
+    "Constantes physiques de l'eau (0 °C et 100 °C) : valables sous pression normale uniquement.",
+    "Masses molaires atomiques arrondies (Cl = 35,5 g/mol, Na = 23 g/mol) : à confirmer avec la classification donnée en classe."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "2nde-chimie-c-mel-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-chimie-c-melanges",
+   "prompt": "On dissout 5 g de sel dans de l'eau pour obtenir 0,5 L de solution. Calcule la concentration massique (en g/L).",
+   "answer": 10,
+   "tolerance": 0,
+   "unit": "g/L",
+   "explanation": "$C_m = \\frac{m}{V} = \\frac{5}{0{,}5} = 10$ g/L.",
+   "method": "$C_m = m / V$ avec V en litres.",
+   "mistakes": [
+    "Diviser par 5 au lieu de par 0,5."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-chimie-c-mel-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-chimie-c-melanges",
+   "prompt": "Quelle technique permet de séparer du sable d'un mélange sable-eau ?",
+   "choices": [
+    "la distillation",
+    "la chromatographie",
+    "la filtration",
+    "l'aimantation"
+   ],
+   "answer": 2,
+   "explanation": "Le sable est un solide insoluble : on le retient avec un filtre. (La distillation sépare des liquides miscibles ; la chromatographie sépare de petites quantités de substances colorées.)",
+   "method": "Identifier l'état physique et la solubilité des constituants.",
+   "mistakes": [
+    "Choisir la distillation pour un solide insoluble."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-chimie-c-mel-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-chimie-c-melanges",
+   "prompt": "On dissout 0,20 mol de soluté dans 0,40 L de solution. Calcule la concentration molaire (en mol/L).",
+   "answer": 0.5,
+   "tolerance": 0.005,
+   "unit": "mol/L",
+   "explanation": "$C = \\frac{n}{V} = \\frac{0{,}20}{0{,}40} = 0{,}50$ mol/L.",
+   "method": "$C = n / V$.",
+   "mistakes": [
+    "Multiplier n par V."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-chimie-c-mel-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "2nde-chimie-c-melanges",
+   "prompt": "Une solution de glucose $C_6H_{12}O_6$ a une concentration massique de 18 g/L. Sa masse molaire est $M = 180$ g/mol. Calcule sa concentration molaire (en mol/L).",
+   "answer": 0.1,
+   "tolerance": 0.001,
+   "unit": "mol/L",
+   "explanation": "$C = \\frac{C_m}{M} = \\frac{18}{180} = 0{,}10$ mol/L.",
+   "method": "$C_m = C \\times M$, donc $C = C_m / M$.",
+   "mistakes": [
+    "Multiplier 18 par 180."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-chimie-c-mel-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "2nde-chimie-c-melanges",
+   "prompt": "On prélève 10 mL d'une solution à 0,50 mol/L et on complète avec de l'eau distillée jusqu'à 250 mL. Quelle est la concentration de la solution obtenue (en mol/L) ?",
+   "answer": 0.02,
+   "tolerance": 0.0005,
+   "unit": "mol/L",
+   "explanation": "Pendant la dilution, la quantité de matière de soluté se conserve : $C_f = \\frac{C_i V_i}{V_f} = \\frac{0{,}50 \\times 10}{250} = 0{,}020$ mol/L (facteur de dilution 25).",
+   "method": "$C_i V_i = C_f V_f$ (les volumes dans la même unité).",
+   "mistakes": [
+    "Oublier que le volume final est 250 mL, et non 240 mL d'eau ajoutés."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-chimie-c-mel-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "2nde-chimie-c-melanges",
+   "prompt": "On veut préparer 500 mL d'une solution de chlorure de sodium NaCl de concentration 0,10 mol/L. Données : $M(\\text{Na}) = 23$ g/mol ; $M(\\text{Cl}) = 35{,}5$ g/mol.",
+   "parts": [
+    {
+     "id": "2nde-chimie-c-mel-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la quantité de matière de NaCl à dissoudre pour préparer 500 mL à 0,10 mol/L (en mol).",
+     "answer": 0.05,
+     "tolerance": 0.0005,
+     "unit": "mol",
+     "explanation": "$n = C\\,V = 0{,}10 \\times 0{,}500 = 0{,}050$ mol."
+    },
+    {
+     "id": "2nde-chimie-c-mel-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la masse de NaCl correspondante (en g) ; $M(\\text{NaCl}) = 58{,}5$ g/mol.",
+     "answer": 2.925,
+     "tolerance": 0.01,
+     "unit": "g",
+     "explanation": "$m = n\\,M = 0{,}050 \\times 58{,}5 = 2{,}925 \\approx 2{,}93$ g."
+    },
+    {
+     "id": "2nde-chimie-c-mel-06-c",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quel protocole est correct ?",
+     "choices": [
+      "Verser 500 mL d'eau sur le sel dans un bécher, sans fiole jaugée",
+      "Mettre le sel dans la fiole, remplir tout de suite jusqu'au trait, sans agiter",
+      "Dissoudre le sel dans une fiole jaugée de 500 mL à moitié remplie d'eau, puis compléter jusqu'au trait de jauge et homogénéiser",
+      "Dissoudre le sel dans 1 L d'eau puis jeter la moitié"
+     ],
+     "answer": 2,
+     "explanation": "On dissout d'abord, puis on complète au trait de jauge : le volume final est alors exactement 500 mL. On homogénéise en retournant la fiole bouchée."
+    },
+    {
+     "id": "2nde-chimie-c-mel-06-d",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "On dispose d'une solution mère de NaCl à 1,0 mol/L. Quel volume (en mL) faut-il prélever pour obtenir 500 mL à 0,10 mol/L ?",
+     "answer": 50,
+     "tolerance": 0.5,
+     "unit": "mL",
+     "explanation": "$V_i = \\frac{C_f V_f}{C_i} = \\frac{0{,}10 \\times 500}{1{,}0} = 50$ mL (pipette jaugée de 50 mL, puis fiole de 500 mL)."
+    }
+   ],
+   "method": "n = C V, puis m = n M ; dilution : C_i V_i = C_f V_f.",
+   "mistakes": [
+    "Oublier de convertir mL en L."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-chimie-c-mel-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-chimie-c-melanges",
+   "prompt": "De l'eau salée est :",
+   "choices": [
+    "un mélange homogène",
+    "un corps pur",
+    "un mélange hétérogène",
+    "un élément chimique"
+   ],
+   "answer": 0,
+   "explanation": "On ne distingue pas les constituants à l'œil nu : mélange homogène (une solution)."
+  },
+  {
+   "id": "2nde-chimie-c-mel-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-chimie-c-melanges",
+   "prompt": "Dans une solution de sucre dans l'eau, le solvant est :",
+   "choices": [
+    "le sucre",
+    "l'eau",
+    "le mélange",
+    "l'air"
+   ],
+   "answer": 1,
+   "explanation": "Le solvant est le constituant majoritaire qui dissout ; le sucre est le soluté."
+  },
+  {
+   "id": "2nde-chimie-c-mel-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-chimie-c-melanges",
+   "prompt": "Quelle est l'unité usuelle de la concentration molaire ?",
+   "choices": [
+    "g/L",
+    "mol",
+    "mol/L",
+    "L/mol"
+   ],
+   "answer": 2,
+   "explanation": "$C = n/V$ s'exprime en mol/L (ou mol·L⁻¹)."
+  },
+  {
+   "id": "2nde-chimie-c-mel-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-chimie-c-melanges",
+   "prompt": "On dilue 10 fois une solution. Sa concentration est :",
+   "choices": [
+    "multipliée par 10",
+    "inchangée",
+    "divisée par 10",
+    "divisée par 100"
+   ],
+   "answer": 2,
+   "explanation": "Facteur de dilution 10 : $C_f = C_i / 10$."
+  },
+  {
+   "id": "2nde-chimie-c-mel-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-chimie-c-melanges",
+   "prompt": "Quelle relation lie $C_m$, C et M ?",
+   "choices": [
+    "$C_m = C / M$",
+    "$C = C_m \\times M$",
+    "$C_m = C \\times M$",
+    "$M = C_m \\times C$"
+   ],
+   "answer": 2,
+   "explanation": "Concentration massique (g/L) = concentration molaire (mol/L) × masse molaire (g/mol)."
+  }
+ ]
+}

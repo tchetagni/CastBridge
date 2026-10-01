@@ -1,0 +1,504 @@
+{
+ "chapter": "2nde-physique-c-ch-mouvement",
+ "lessons": [
+  {
+   "id": "2nde-physique-c-mouvement",
+   "title": "Mouvement : référentiel, vitesse, MRU et MRUV",
+   "minutes": 35,
+   "programRef": "2nde C — Cinématique : référentiel, trajectoire, vitesse, mouvements rectilignes (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Choisir un référentiel et décrire une trajectoire.",
+    "Calculer une vitesse moyenne et convertir km/h en m/s.",
+    "Utiliser les équations horaires du MRU et du MRUV.",
+    "Calculer une durée de freinage ou une distance d'arrêt."
+   ],
+   "prerequisites": [
+    "2nde-physique-c-grandeurs"
+   ],
+   "exercises": [
+    "2nde-physique-c-mvt-01",
+    "2nde-physique-c-mvt-02",
+    "2nde-physique-c-mvt-03",
+    "2nde-physique-c-mvt-04",
+    "2nde-physique-c-mvt-05",
+    "2nde-physique-c-mvt-06"
+   ],
+   "selfCheck": [
+    "2nde-physique-c-mvt-q1",
+    "2nde-physique-c-mvt-q2",
+    "2nde-physique-c-mvt-q3",
+    "2nde-physique-c-mvt-q4",
+    "2nde-physique-c-mvt-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Référentiel et trajectoire",
+     "md": "Le mouvement d'un objet se décrit **par rapport à un référentiel** (un objet de référence muni d'un repère et d'une horloge). Le mouvement est **relatif** : il dépend du référentiel choisi.\nLa **trajectoire** est l'ensemble des positions successives du point étudié : droite, cercle, courbe quelconque."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Vitesse moyenne",
+     "md": "$v = \\frac{d}{\\Delta t}$ où d est la distance parcourue et $\\Delta t$ la durée. Unité SI : m/s.\nConversion : $\\text{km/h} \\div 3{,}6 = \\text{m/s}$.\nLa vitesse **instantanée** est celle que lit le compteur à un instant donné ; la vitesse moyenne couvre tout le trajet, arrêts compris."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Mouvement rectiligne uniforme (MRU)",
+     "md": "Trajectoire **droite** et vitesse **constante** (accélération nulle). Dans un repère d'axe Ox :\n$x(t) = x_0 + v\\,t$\nOn lit la vitesse sur le graphe de x(t) : c'est la pente de la droite."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Mouvement rectiligne uniformément varié (MRUV)",
+     "md": "Trajectoire droite et **accélération constante** a (en m/s²) :\n- $v(t) = v_0 + a\\,t$ ;\n- $x(t) = x_0 + v_0 t + \\frac{1}{2} a t^2$ ;\n- $v^2 - v_0^2 = 2a\\,(x - x_0)$.\nSi a et v sont de même sens, le mouvement est accéléré ; sinon il est retardé (freinage)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 140,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 30,
+        "cy": 70,
+        "r": 5,
+        "fill": "blue",
+        "stroke": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 90,
+        "cy": 70,
+        "r": 5,
+        "fill": "blue",
+        "stroke": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 70,
+        "r": 5,
+        "fill": "blue",
+        "stroke": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 210,
+        "cy": 70,
+        "r": 5,
+        "fill": "blue",
+        "stroke": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 270,
+        "cy": 70,
+        "r": 5,
+        "fill": "blue",
+        "stroke": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 330,
+        "cy": 70,
+        "r": 5,
+        "fill": "blue",
+        "stroke": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 20,
+        "cy": 120,
+        "r": 5,
+        "fill": "red",
+        "stroke": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 40,
+        "cy": 120,
+        "r": 5,
+        "fill": "red",
+        "stroke": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 80,
+        "cy": 120,
+        "r": 5,
+        "fill": "red",
+        "stroke": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 140,
+        "cy": 120,
+        "r": 5,
+        "fill": "red",
+        "stroke": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 220,
+        "cy": 120,
+        "r": 5,
+        "fill": "red",
+        "stroke": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 320,
+        "cy": 120,
+        "r": 5,
+        "fill": "red",
+        "stroke": "red"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 30,
+        "text": "MRU : écarts égaux entre positions successives",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 98,
+        "text": "MRUV : écarts qui augmentent",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 10,
+        "y1": 70,
+        "x2": 390,
+        "y2": 70,
+        "color": "lightgrey",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 10,
+        "y1": 120,
+        "x2": 390,
+        "y2": 120,
+        "color": "lightgrey",
+        "width": 1
+       }
+      ]
+     },
+     "caption": "Positions d'un mobile à intervalles de temps égaux : MRU en haut (positions équidistantes), MRUV en bas (écarts croissants).",
+     "alt": "Deux rangées de points : en haut des points régulièrement espacés, en bas des points de plus en plus éloignés les uns des autres."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : résoudre un problème de mouvement",
+     "md": "1. Choisir le référentiel, l'axe et l'origine.\n2. Convertir toutes les données en unités SI (m, s, m/s).\n3. Repérer le type de mouvement (v constante ou a constante).\n4. Écrire les équations horaires avec les conditions initiales ($x_0$, $v_0$).\n5. Résoudre, puis vérifier l'ordre de grandeur et l'unité."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : vitesse moyenne",
+     "statement": "Un car parcourt 240 km (distance fictive) en 3 h 20 min. Calcule sa vitesse moyenne en km/h puis en m/s.",
+     "steps": [
+      {
+       "md": "On convertit la durée : 3 h 20 min = 3 + 20/60 = 10/3 h.",
+       "tex": "v = \\frac{240}{10/3} = 72\\ \\text{km/h}"
+      },
+      {
+       "md": "On convertit : $72 \\div 3{,}6 = 20$ m/s."
+      }
+     ],
+     "answer": "**72 km/h, soit 20 m/s.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : démarrage",
+     "statement": "Une voiture démarre sans vitesse initiale avec une accélération constante de 2 m/s². Quelle est sa vitesse et la distance parcourue au bout de 8 s ?",
+     "steps": [
+      {
+       "md": "Vitesse : $v_0 = 0$.",
+       "tex": "v = a\\,t = 2 \\times 8 = 16\\ \\text{m/s}"
+      },
+      {
+       "md": "Distance : $x_0 = 0$ et $v_0 = 0$.",
+       "tex": "d = \\frac{1}{2} a t^2 = \\frac{1}{2} \\times 2 \\times 8^2 = 64\\ \\text{m}"
+      }
+     ],
+     "answer": "Au bout de 8 s : **v = 16 m/s** et **d = 64 m**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : freinage",
+     "statement": "Une voiture roule à 20 m/s et freine avec $a = -5$ m/s². Calcule la durée du freinage et la distance d'arrêt.",
+     "steps": [
+      {
+       "md": "À l'arrêt, $v = 0$ : $0 = 20 - 5t$.",
+       "tex": "t = \\frac{20}{5} = 4\\ \\text{s}"
+      },
+      {
+       "md": "On utilise $v^2 - v_0^2 = 2a\\,d$ avec $v = 0$.",
+       "tex": "d = \\frac{v_0^2}{2\\,|a|} = \\frac{400}{10} = 40\\ \\text{m}"
+      }
+     ],
+     "answer": "Durée **4 s**, distance d'arrêt **40 m**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Mélanger km/h et m/s dans une même formule.\n- Calculer la vitesse moyenne comme la moyenne arithmétique de deux vitesses : cela n'est vrai que si les durées sont égales.\n- Oublier le signe de l'accélération au freinage.\n- Oublier $x_0$ ou $v_0$ dans les équations horaires.\n- Doubler la vitesse ne double pas la distance de freinage : elle est multipliée par 4."
+    },
+    {
+     "type": "exercise",
+     "ref": "2nde-physique-c-mvt-01"
+    },
+    {
+     "type": "more",
+     "items": [
+      "La distance de freinage augmente avec le carré de la vitesse : c'est une raison de respecter les limitations de vitesse sur les routes de Yaoundé à Douala."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Programme exact de Seconde C : le MRUV et la relation $v^2 - v_0^2 = 2a\\Delta x$ sont-ils au programme de Seconde ou de Première ? À vérifier.",
+    "Utilisation des vecteurs vitesse et accélération : volontairement limitée aux mouvements rectilignes ; à compléter selon le programme.",
+    "Données de distances et de durées toutes fictives (aucune statistique réelle)."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "2nde-physique-c-mvt-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-physique-c-mouvement",
+   "prompt": "Convertis 90 km/h en m/s.",
+   "answer": 25,
+   "tolerance": 0,
+   "unit": "m/s",
+   "explanation": "$90 \\div 3{,}6 = 25$ m/s.",
+   "method": "km/h → m/s : on divise par 3,6.",
+   "mistakes": [
+    "Multiplier par 3,6 au lieu de diviser."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-physique-c-mvt-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-physique-c-mouvement",
+   "prompt": "Un mobile en mouvement rectiligne uniforme part de $x_0 = 50$ m avec une vitesse de 4 m/s. Quelle est son abscisse à t = 12 s ?",
+   "answer": 98,
+   "tolerance": 0,
+   "unit": "m",
+   "explanation": "$x = x_0 + vt = 50 + 4 \\times 12 = 98$ m.",
+   "method": "MRU : $x = x_0 + vt$.",
+   "mistakes": [
+    "Oublier d'ajouter la position initiale $x_0$."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-physique-c-mvt-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-physique-c-mouvement",
+   "prompt": "Un passager est assis dans un car qui roule. Par rapport à qui est-il en mouvement ?",
+   "choices": [
+    "Par rapport au car, mais pas par rapport à la route",
+    "Par rapport à la route et au car",
+    "Il n'est en mouvement par rapport à rien",
+    "Par rapport à la route, mais pas par rapport au car"
+   ],
+   "answer": 3,
+   "explanation": "Le mouvement dépend du référentiel : immobile dans le référentiel du car, le passager se déplace dans le référentiel terrestre (la route).",
+   "method": "Toujours préciser le référentiel d'étude.",
+   "mistakes": [
+    "Penser qu'un objet est « en mouvement » ou « au repos » de façon absolue."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-physique-c-mvt-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "2nde-physique-c-mouvement",
+   "prompt": "Une moto passe de 0 à 108 km/h en 12 s avec une accélération constante. Calcule cette accélération en m/s².",
+   "answer": 2.5,
+   "tolerance": 0.01,
+   "unit": "m/s²",
+   "explanation": "108 km/h = 30 m/s. $a = \\frac{\\Delta v}{\\Delta t} = \\frac{30 - 0}{12} = 2{,}5$ m/s².",
+   "method": "Convertir la vitesse en m/s avant de calculer $a = \\Delta v / \\Delta t$.",
+   "mistakes": [
+    "Utiliser 108 directement : on obtient 9 m/s², faux car l'unité n'est pas cohérente."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-physique-c-mvt-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "2nde-physique-c-mouvement",
+   "prompt": "Un véhicule roule à 72 km/h et freine avec une décélération constante de 4 m/s². Quelle distance parcourt-il avant de s'arrêter ?",
+   "answer": 50,
+   "tolerance": 0.1,
+   "unit": "m",
+   "explanation": "72 km/h = 20 m/s. De $v^2 - v_0^2 = 2a\\,d$ avec $v = 0$ et $a = -4$ : $d = \\frac{20^2}{2 \\times 4} = 50$ m.",
+   "method": "$v^2 - v_0^2 = 2a(x - x_0)$ avec a négative au freinage.",
+   "mistakes": [
+    "Oublier de convertir en m/s.",
+    "Oublier le facteur 2 au dénominateur."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-physique-c-mvt-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "2nde-physique-c-mouvement",
+   "prompt": "Deux villes fictives A et B sont distantes de 120 km sur une route droite. À 8 h, un cycliste part de A vers B à 40 km/h et un autre part de B vers A à 60 km/h. Tous deux roulent à vitesse constante.",
+   "parts": [
+    {
+     "id": "2nde-physique-c-mvt-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Avec quelle vitesse les deux cyclistes se rapprochent-ils l'un de l'autre (en km/h) ?",
+     "answer": 100,
+     "tolerance": 0,
+     "unit": "km/h",
+     "explanation": "Ils roulent l'un vers l'autre : les vitesses s'ajoutent, $40 + 60 = 100$ km/h."
+    },
+    {
+     "id": "2nde-physique-c-mvt-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Au bout de quelle durée se croisent-ils (en h) ?",
+     "answer": 1.2,
+     "tolerance": 0.01,
+     "unit": "h",
+     "explanation": "$t = \\frac{120}{100} = 1{,}2$ h, soit 1 h 12 min."
+    },
+    {
+     "id": "2nde-physique-c-mvt-06-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "À quelle distance de la ville A se croisent-ils (en km) ?",
+     "answer": 48,
+     "tolerance": 0.1,
+     "unit": "km",
+     "explanation": "$d_A = v_A \\times t = 40 \\times 1{,}2 = 48$ km. Vérification : le cycliste B parcourt $60 \\times 1{,}2 = 72$ km, et $48 + 72 = 120$."
+    }
+   ],
+   "method": "Écrire les équations horaires dans le même repère, ou raisonner avec la vitesse de rapprochement.",
+   "mistakes": [
+    "Soustraire les vitesses au lieu de les additionner quand les mobiles vont l'un vers l'autre."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-physique-c-mvt-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-physique-c-mouvement",
+   "prompt": "Quelle est l'unité SI de la vitesse ?",
+   "choices": [
+    "le mètre par seconde carrée (m/s²)",
+    "le kilomètre (km)",
+    "le mètre par seconde (m/s)",
+    "le newton (N)"
+   ],
+   "answer": 2,
+   "explanation": "Vitesse = distance ÷ durée : m/s."
+  },
+  {
+   "id": "2nde-physique-c-mvt-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-physique-c-mouvement",
+   "prompt": "Dans un mouvement rectiligne uniforme :",
+   "choices": [
+    "la trajectoire est un cercle",
+    "la trajectoire est une droite et la vitesse est constante",
+    "la vitesse augmente régulièrement",
+    "l'accélération est non nulle"
+   ],
+   "answer": 1,
+   "explanation": "MRU : trajectoire rectiligne et vitesse constante, donc accélération nulle."
+  },
+  {
+   "id": "2nde-physique-c-mvt-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-physique-c-mouvement",
+   "prompt": "Pour un MRUV, l'abscisse à l'instant t s'écrit :",
+   "choices": [
+    "$x = x_0 + v_0 t + \\frac{1}{2} a t^2$",
+    "$x = x_0 + v_0 t$",
+    "$x = x_0 + a t$",
+    "$x = x_0 + \\frac{1}{2} v_0 t^2$"
+   ],
+   "answer": 0,
+   "explanation": "Équation horaire du mouvement uniformément varié."
+  },
+  {
+   "id": "2nde-physique-c-mvt-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-physique-c-mouvement",
+   "prompt": "72 km/h équivaut à :",
+   "choices": [
+    "259,2 m/s",
+    "20 m/s",
+    "7,2 m/s",
+    "200 m/s"
+   ],
+   "answer": 1,
+   "explanation": "$72 \\div 3{,}6 = 20$ m/s."
+  },
+  {
+   "id": "2nde-physique-c-mvt-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-physique-c-mouvement",
+   "prompt": "Un mobile passe de 0 à 10 m/s en 5 s. Son accélération moyenne vaut :",
+   "choices": [
+    "2 m/s²",
+    "50 m/s²",
+    "0,5 m/s²",
+    "15 m/s²"
+   ],
+   "answer": 0,
+   "explanation": "$a = \\Delta v / \\Delta t = 10 / 5 = 2$ m/s²."
+  }
+ ]
+}

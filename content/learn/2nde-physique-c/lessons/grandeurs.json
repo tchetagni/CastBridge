@@ -1,0 +1,556 @@
+{
+ "chapter": "2nde-physique-c-ch-grandeurs",
+ "lessons": [
+  {
+   "id": "2nde-physique-c-grandeurs",
+   "title": "Grandeurs, unités SI, mesures et incertitudes",
+   "minutes": 35,
+   "programRef": "2nde C — Mesures, grandeurs et unités (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Utiliser les unités du Système International et les préfixes.",
+    "Écrire un résultat de mesure avec son incertitude et le bon nombre de chiffres significatifs.",
+    "Convertir des unités et utiliser la notation scientifique.",
+    "Vérifier l'homogénéité d'une relation par analyse dimensionnelle."
+   ],
+   "exercises": [
+    "2nde-physique-c-gra-01",
+    "2nde-physique-c-gra-02",
+    "2nde-physique-c-gra-03",
+    "2nde-physique-c-gra-04",
+    "2nde-physique-c-gra-05",
+    "2nde-physique-c-gra-06"
+   ],
+   "selfCheck": [
+    "2nde-physique-c-gra-q1",
+    "2nde-physique-c-gra-q2",
+    "2nde-physique-c-gra-q3",
+    "2nde-physique-c-gra-q4",
+    "2nde-physique-c-gra-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Grandeurs et unités SI",
+     "md": "Une **grandeur physique** se mesure : on donne un nombre et une **unité**. Le Système International (SI) retient 7 unités de base, dont :\n- longueur : mètre (m) ; masse : kilogramme (kg) ;\n- temps : seconde (s) ; intensité du courant : ampère (A) ;\n- température : kelvin (K) ; quantité de matière : mole (mol) ;\n- (intensité lumineuse : candela, cd)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Préfixes et conversions",
+     "md": "Un préfixe est une puissance de 10 : kilo (k) $10^{3}$ ; centi (c) $10^{-2}$ ; milli (m) $10^{-3}$ ; micro (µ) $10^{-6}$ ; méga (M) $10^{6}$ ; giga (G) $10^{9}$.\nDurées : 1 h = 3 600 s. Vitesses : 1 m/s = 3,6 km/h.\n**Notation scientifique** : $a \\times 10^{n}$ avec $1 \\leq a < 10$."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 140,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 30,
+        "w": 360,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 30,
+        "x2": 20,
+        "y2": 50,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 56,
+        "y1": 30,
+        "x2": 56,
+        "y2": 50,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 92,
+        "y1": 30,
+        "x2": 92,
+        "y2": 50,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 128,
+        "y1": 30,
+        "x2": 128,
+        "y2": 50,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 164,
+        "y1": 30,
+        "x2": 164,
+        "y2": 50,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 30,
+        "x2": 200,
+        "y2": 50,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 236,
+        "y1": 30,
+        "x2": 236,
+        "y2": 50,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 272,
+        "y1": 30,
+        "x2": 272,
+        "y2": 50,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 308,
+        "y1": 30,
+        "x2": 308,
+        "y2": 50,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 344,
+        "y1": 30,
+        "x2": 344,
+        "y2": 50,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 380,
+        "y1": 30,
+        "x2": 380,
+        "y2": 50,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 66,
+        "text": "0",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 92,
+        "y": 66,
+        "text": "2",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 164,
+        "y": 66,
+        "text": "4",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 236,
+        "y": 66,
+        "text": "6",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 308,
+        "y": 66,
+        "text": "8",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 380,
+        "y": 66,
+        "text": "10",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 282.8,
+        "y1": 110,
+        "x2": 282.8,
+        "y2": 74,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 282.8,
+        "y": 128,
+        "text": "lecture : 7,3 cm",
+        "size": 14,
+        "color": "red",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Lecture d'une règle graduée au millimètre : on lit 7,3 cm.",
+     "alt": "Une règle graduée de 0 à 10 cm avec une flèche rouge pointant la graduation 7,3 cm."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Mesure et incertitude simple",
+     "md": "Toute mesure est entachée d'une **incertitude** $\\Delta x$. On écrit $x = \\text{valeur} \\pm \\Delta x$ (avec l'unité). Pour un appareil gradué, on retient souvent une incertitude de lecture égale à une **demi-graduation** ou à une graduation selon l'appareil et la consigne du professeur.\n**Incertitude relative** : $\\frac{\\Delta x}{x}$ (souvent en %). Plus elle est petite, plus la mesure est précise."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Chiffres significatifs",
+     "md": "Les chiffres significatifs sont les chiffres connus avec certitude (plus le dernier, incertain).\n- Les zéros au début ne comptent pas : 0,0560 a 3 chiffres significatifs.\n- **Produit ou quotient** : on garde autant de chiffres significatifs que la donnée la moins précise.\n- **Somme ou différence** : on garde le plus petit nombre de décimales.\nOn arrondit seulement à la fin du calcul."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Analyse dimensionnelle",
+     "md": "La **dimension** d'une grandeur s'exprime avec L (longueur), M (masse), T (temps). Exemples : vitesse $L\\,T^{-1}$ ; accélération $L\\,T^{-2}$ ; force $M\\,L\\,T^{-2}$ (le newton vaut 1 kg·m·s⁻²).\nUne relation physique doit être **homogène** : les deux membres d'une égalité ont la même dimension, et on n'additionne que des grandeurs de même dimension."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : conversions",
+     "statement": "Exprime 72 km/h en m/s, puis 0,0034 s en notation scientifique.",
+     "steps": [
+      {
+       "md": "On convertit les unités : 1 km = 1 000 m et 1 h = 3 600 s.",
+       "tex": "72\\,\\text{km/h} = \\frac{72 \\times 1\\,000}{3\\,600}\\,\\text{m/s}"
+      },
+      {
+       "md": "On calcule : 72 000 ÷ 3 600 = 20. Pour la durée, on décale la virgule de 3 rangs.",
+       "tex": "0{,}0034 = 3{,}4 \\times 10^{-3}\\ \\text{s}"
+      }
+     ],
+     "answer": "72 km/h = **20 m/s** et $0{,}0034$ s = $3{,}4 \\times 10^{-3}$ s."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : homogénéité",
+     "statement": "Vérifie que la période d'un pendule $T = 2\\pi \\sqrt{\\frac{l}{g}}$ est bien une durée (l en m, g en m·s⁻²).",
+     "steps": [
+      {
+       "md": "On calcule la dimension du quotient sous la racine :",
+       "tex": "\\frac{l}{g} \\to \\frac{L}{L\\,T^{-2}} = T^{2}"
+      },
+      {
+       "md": "La racine carrée de $T^{2}$ est T : le membre de droite est bien une durée. Le facteur 2π n'a pas de dimension. La relation est homogène."
+      }
+     ],
+     "answer": "**La relation est homogène** : T est une durée."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : chiffres significatifs",
+     "statement": "Un rectangle mesure 2,5 cm sur 3,20 cm. Calcule son aire avec le bon nombre de chiffres significatifs.",
+     "steps": [
+      {
+       "md": "Calcul brut :",
+       "tex": "2{,}5 \\times 3{,}20 = 8{,}000\\ \\text{cm}^{2}"
+      },
+      {
+       "md": "La donnée la moins précise (2,5) a 2 chiffres significatifs : on garde 2 chiffres. On écrit donc 8,0 cm²."
+      }
+     ],
+     "answer": "Aire = **8,0 cm²**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Convertir une aire ou un volume comme une longueur : 1 m² = $10^{4}$ cm² (et non $10^{2}$).\n- Écrire un résultat sans unité, ou avec trop de décimales par rapport à l'incertitude.\n- Arrondir en cours de calcul : on arrondit seulement le résultat final.\n- Confondre « 0,0560 » (3 chiffres significatifs) et « 560 » (2 ou 3 selon le contexte)."
+    },
+    {
+     "type": "exercise",
+     "ref": "2nde-physique-c-gra-01"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Les relevés fictifs d'un marché (prix, masses de sacs de cacao) sont de bons exercices d'unités : kg, g, tonne (1 t = 1 000 kg)."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Convention d'incertitude de lecture (demi-graduation, graduation) : à aligner sur la consigne des enseignants de Seconde.",
+    "La notion d'incertitude et l'analyse dimensionnelle sont-elles exigibles en Seconde C ? Niveau d'exigence à vérifier sur le texte officiel.",
+    "Règles d'arrondi (somme/produit) : version simplifiée volontairement."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "2nde-physique-c-gra-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-physique-c-grandeurs",
+   "prompt": "Convertis 2,5 h en secondes.",
+   "answer": 9000,
+   "tolerance": 0,
+   "unit": "s",
+   "explanation": "$2{,}5 \\text{ h} = 2{,}5 \\times 3\\,600 = 9\\,000 \\text{ s}$.",
+   "method": "1 h = 3 600 s : on multiplie.",
+   "mistakes": [
+    "Multiplier par 60 au lieu de 3 600."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-physique-c-gra-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-physique-c-grandeurs",
+   "prompt": "Quelle écriture correspond à 0,35 mm exprimé en mètres ?",
+   "choices": [
+    "$3{,}5 \\times 10^{-2}$ m",
+    "$3{,}5 \\times 10^{-4}$ m",
+    "$3{,}5 \\times 10^{-1}$ m",
+    "$3{,}5 \\times 10^{-6}$ m"
+   ],
+   "answer": 1,
+   "explanation": "1 mm = $10^{-3}$ m, donc $0{,}35 \\text{ mm} = 0{,}35 \\times 10^{-3} = 3{,}5 \\times 10^{-4}$ m.",
+   "method": "Remplacer le préfixe par sa puissance de 10, puis écrire en notation scientifique.",
+   "mistakes": [
+    "Confondre milli ($10^{-3}$) et centi ($10^{-2}$)."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-physique-c-gra-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-physique-c-grandeurs",
+   "prompt": "Combien de chiffres significatifs possède la mesure 0,0560 g ?",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "Les zéros à gauche (0,0) ne sont pas significatifs ; le zéro final de 0,0560 l'est, car il traduit la précision de la mesure. Chiffres significatifs : 5, 6 et 0, soit 3.",
+   "method": "Ignorer les zéros situés avant le premier chiffre non nul.",
+   "mistakes": [
+    "Compter 4 ou 5 chiffres en comptant les zéros du début."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-physique-c-gra-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "2nde-physique-c-grandeurs",
+   "prompt": "On mesure une tension $U = 4{,}50$ V avec une incertitude $\\Delta U = 0{,}05$ V. Calcule l'incertitude relative $\\Delta U / U$ en pourcentage (arrondie au dixième).",
+   "answer": 1.1,
+   "tolerance": 0.05,
+   "unit": "%",
+   "explanation": "$\\frac{\\Delta U}{U} = \\frac{0{,}05}{4{,}50} \\approx 0{,}0111$, soit environ 1,1 %.",
+   "method": "Incertitude relative = incertitude absolue ÷ valeur mesurée.",
+   "mistakes": [
+    "Oublier de multiplier par 100 pour passer en pourcentage."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-physique-c-gra-05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "2nde-physique-c-grandeurs",
+   "prompt": "Une distance s'écrit $d = \\frac{1}{2} a t^2$ avec a une accélération (unité m·s⁻²) et t une durée. Cette relation est-elle homogène à une longueur ?",
+   "choices": [
+    "Non : on obtient des m·s⁻¹",
+    "Non : on obtient des m·s⁻²",
+    "Oui : $\\text{m·s}^{-2} \\times \\text{s}^2 = \\text{m}$",
+    "Oui, car le facteur 1/2 change l'unité en m·s"
+   ],
+   "answer": 2,
+   "explanation": "Dimensionnellement, $[a][t]^2 = L\\,T^{-2} \\times T^2 = L$ : c'est bien une longueur. Le facteur 1/2 est un nombre sans dimension.",
+   "method": "Remplacer chaque grandeur par son unité et simplifier.",
+   "mistakes": [
+    "Croire qu'un facteur numérique modifie l'unité."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-physique-c-gra-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "2nde-physique-c-grandeurs",
+   "prompt": "Pour mesurer l'épaisseur d'une feuille de papier, un élève empile 50 feuilles identiques : la pile mesure $5{,}2$ mm, avec une incertitude de lecture de 0,1 mm (données fictives).",
+   "parts": [
+    {
+     "id": "2nde-physique-c-gra-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule l'épaisseur e d'une seule feuille, en mm (arrondie à 0,001 mm).",
+     "answer": 0.104,
+     "tolerance": 0.0005,
+     "unit": "mm",
+     "explanation": "$e = \\frac{5{,}2}{50} = 0{,}104$ mm."
+    },
+    {
+     "id": "2nde-physique-c-gra-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quelle est l'incertitude sur l'épaisseur d'une feuille, en mm ? (on divise l'incertitude de la mesure du lot par 50)",
+     "answer": 0.002,
+     "tolerance": 0.0001,
+     "unit": "mm",
+     "explanation": "$\\frac{0{,}1}{50} = 0{,}002$ mm. Mesurer un lot réduit l'incertitude relative sur une feuille."
+    },
+    {
+     "id": "2nde-physique-c-gra-06-c",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle écriture du résultat est correcte ?",
+     "choices": [
+      "$e = 0{,}1040 \\pm 0{,}002$ mm",
+      "$e = 0{,}10 \\pm 0{,}002$ mm",
+      "$e = 0{,}104 \\pm 0{,}0020$ mm",
+      "$e = 0{,}104 \\pm 0{,}002$ mm"
+     ],
+     "answer": 3,
+     "explanation": "L'incertitude 0,002 s'arrête au millième : le résultat doit s'arrêter au même rang décimal, soit 0,104."
+    }
+   ],
+   "method": "Diviser la mesure du lot et son incertitude par le nombre de feuilles, puis écrire le résultat avec le bon nombre de décimales.",
+   "mistakes": [
+    "Garder trop de chiffres après la virgule par rapport à l'incertitude."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-physique-c-gra-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-physique-c-grandeurs",
+   "prompt": "Quelle est l'unité SI de la masse ?",
+   "choices": [
+    "le kilogramme (kg)",
+    "le gramme (g)",
+    "le newton (N)",
+    "la tonne (t)"
+   ],
+   "answer": 0,
+   "explanation": "Le kilogramme est l'unité SI de masse (le gramme en est un sous-multiple)."
+  },
+  {
+   "id": "2nde-physique-c-gra-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-physique-c-grandeurs",
+   "prompt": "Combien de mètres dans 4,2 km ?",
+   "choices": [
+    "420 m",
+    "42 m",
+    "4 200 m",
+    "4,2 m"
+   ],
+   "answer": 2,
+   "explanation": "1 km = 1 000 m : $4{,}2 \\times 1\\,000 = 4\\,200$ m."
+  },
+  {
+   "id": "2nde-physique-c-gra-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-physique-c-grandeurs",
+   "prompt": "Dans un produit de deux mesures, combien de chiffres significatifs garde-t-on ?",
+   "choices": [
+    "Autant que la mesure la plus précise",
+    "Toujours 2",
+    "Autant que dans la somme des deux",
+    "Autant que la mesure la moins précise"
+   ],
+   "answer": 3,
+   "explanation": "Le résultat ne peut pas être plus précis que la donnée la moins précise."
+  },
+  {
+   "id": "2nde-physique-c-gra-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-physique-c-grandeurs",
+   "prompt": "Quelle est la dimension d'une vitesse ?",
+   "choices": [
+    "$L\\,T$",
+    "$L\\,T^{-1}$",
+    "$L\\,T^{-2}$",
+    "$M\\,L^{-1}$"
+   ],
+   "answer": 1,
+   "explanation": "Vitesse = longueur ÷ temps, donc $L\\,T^{-1}$ (en m·s⁻¹)."
+  },
+  {
+   "id": "2nde-physique-c-gra-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-physique-c-grandeurs",
+   "prompt": "Une mesure de 12,4 cm est donnée avec une incertitude de 0,1 cm. On écrit :",
+   "choices": [
+    "$12{,}4 \\pm 0{,}1$ cm",
+    "$12 \\pm 0{,}1$ cm",
+    "$12{,}40 \\pm 0{,}1$ cm",
+    "$12{,}4 \\pm 1$ cm"
+   ],
+   "answer": 0,
+   "explanation": "La valeur et l'incertitude s'arrêtent au même rang décimal (le dixième)."
+  }
+ ]
+}
