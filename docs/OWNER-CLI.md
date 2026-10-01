@@ -31,7 +31,7 @@ java -jar castbridge-owner.jar activation --vault ~/castbridge-owner/coffre.txt 
 
 ## Garde-fous
 - Le code d'appareil doit correspondre aux empreintes de la demande (un fichier altéré est refusé).
-- Fenêtre d'installation : **48 h à partir de la création** (plus d'option `--days`) ; `--permanente oui` : licence d'usage sans fin (achat du bouquet `tout`), réservée aux clés superadmin (portée `ISSUE_UNLIMITED`), avec `activation` seulement ; « tout ouvert » : 30 jours au plus.
+- Fenêtre d'installation : **48 h à partir de la création** (plus d'option `--days`) ; `--super oui` : privilège **SUPER_UNLIMITED** (lit et débloque tout, locations permanentes), réservé à la clé super administrateur (portée `SUPER_UNLIMITED`), avec `activation` seulement ; un compte **illimité** non super s'obtient avec `--purchase illimite:tout` (ses locations expirent) ; « tout ouvert » : 30 jours au plus.
 - Un **journal** `castbridge-owner-journal.log` note chaque émission (date, code d'appareil, type, licence, durée) ; **jamais la clé ni le code**.
 - Un seul essai de code à la fois, avec un délai (la dérivation de clé est volontairement lente) ; en script : variable `CB_OWNER_PASSPHRASE`.
 

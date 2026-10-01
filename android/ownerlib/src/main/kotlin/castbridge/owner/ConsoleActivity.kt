@@ -121,7 +121,7 @@ open class ConsoleActivity : ComponentActivity() {
 
     @Composable private fun Issue(signer: Ed25519Signer) {
         var input by remember { mutableStateOf("") }; var production by remember { mutableStateOf(false) }
-        var permanent by remember { mutableStateOf(false) }; var license by remember { mutableStateOf("") }
+        var superUnlimited by remember { mutableStateOf(false) }; var license by remember { mutableStateOf("") }
         var purchase by remember { mutableStateOf("") }; var subscription by remember { mutableStateOf("") }
         var rental by remember { mutableStateOf("") }
         var openProduct by remember { mutableStateOf("") }; var openDays by remember { mutableStateOf("30") }
@@ -162,8 +162,8 @@ open class ConsoleActivity : ComponentActivity() {
             }
             Text("Le code est valable ${ActivationPolicy.CODE_VALIDITY_HOURS} h pour l'installer (pour tous les codes).", style = MaterialTheme.typography.bodySmall)
             if (production) Row(Modifier.fillMaxWidth(), verticalAlignment = androidx.compose.ui.Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
-                Text(if (permanent) "Licence d'usage PERMANENTE (superadmin)" else "Licence d'usage selon les droits ci-dessous")
-                Switch(permanent, { permanent = it; token = null })
+                Text(if (superUnlimited) "SUPER_UNLIMITED : lit et débloque tout, locations permanentes" else "Droits selon la saisie ci-dessous")
+                Switch(superUnlimited, { superUnlimited = it; token = null })
             }
             if (production) {
                 OutlinedTextField(license, { license = it }, label = { Text("Identifiant de licence") }, singleLine = true, modifier = Modifier.fillMaxWidth())
@@ -188,7 +188,7 @@ open class ConsoleActivity : ComponentActivity() {
                             subscription.lines().filter { it.isNotBlank() }.forEach { l -> l.split(':').also { if (it.size != 3) throw IssueException("Abonnement : PRODUIT:BOUQUET:AAAA-MM-JJ") }.let {
                                 val end = runCatching { LocalDate.parse(it[2].trim()).atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli() }.getOrNull() ?: throw IssueException("Date d'abonnement invalide")
                                 rights += Right.Subscription(it[0].trim(), it[1].split(',').map(String::trim).filter(String::isNotEmpty), start, end, 7 * day, false) } }
-                            if (permanent) rights += Right.Purchase("licence-permanente", listOf(ActivationPolicy.ALL_BUNDLE), now)      // never ends: needs the ISSUE_UNLIMITED scope on this key
+                            if (superUnlimited) rights += Right.Super("super-illimite", now)      // reads and unlocks everything for good: needs the SUPER_UNLIMITED scope on this key (the TV refuses it otherwise)
                             rental.lines().filter { it.isNotBlank() }.forEach { l ->
                                 rights += RentalIssuing.right(RightsSyntax.rental(l.trim()), now, license.trim(), SeatIds.of(license.trim(), full.third), full.third, RentalKeys.masterFrom(signer))
                             }
@@ -198,12 +198,12 @@ open class ConsoleActivity : ComponentActivity() {
                         val lic = if (production) license.trim() else Activation.TRIAL_LICENSE
                         val issued = issuer.issue(ActivationIssuer.Request(kind, full.first, full.third, issuedAt = now, rights = rights, license = lic))
                         token = issued.token; fileContent = issued.fileContent
-                        store.journal(if (permanent && production) "permanente" else "activation", full.first, kind.name, lic, ActivationPolicy.CODE_VALIDITY_HOURS)
+                        store.journal(if (superUnlimited && production) "super" else "activation", full.first, kind.name, lic, ActivationPolicy.CODE_VALIDITY_HOURS)
                     } else {
                         val code = DeviceCode.parse(input.trim()) ?: throw IssueException("Code d'appareil mal formé (16 caractères, contrôle compris) et demande complète illisible")
                         val kind = if (production) ActivationKind.PRODUCTION else ActivationKind.TRIAL
                         val hourIdx = ((now - 1767225600000L) / ActivationPolicy.HOUR_MS).toInt()
-                        if (permanent && production) throw IssueException("Une licence permanente exige la demande d'appareil complète (fichier ou Bluetooth) : une clé à saisir ne porte aucun droit")
+                        if (superUnlimited && production) throw IssueException("SUPER_UNLIMITED exige la demande d'appareil complète (fichier ou Bluetooth) : une clé à saisir ne porte aucun droit")
                         token = issuer.issueCompact(kind, code, hourIdx)
                         store.journal("compact", code, kind.name, "-", ActivationPolicy.CODE_VALIDITY_HOURS)
                         info = "Clé compacte (à saisir) : liée à ce code d'appareil, sans droits ni clés de lots. Pour une activation complète, collez la demande d'appareil exportée par la TV."

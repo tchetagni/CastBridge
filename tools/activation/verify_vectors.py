@@ -22,12 +22,8 @@ DAY = 86400000
 EPOCH_MS = 1767225600000
 HOUR = 3600000
 MAX_WINDOW = 48 * HOUR              # an activation can be installed during 48 h from its creation
-ALL_BUNDLE = "tout"                 # bought, a permanent full licence: only a key with ISSUE_UNLIMITED may sign it
-
-
-def is_permanent(line):
-    f = line.split("|")
-    return f[0] == "purchase" and ALL_BUNDLE in f[2].split(",")
+def is_super(line):                 # the `super` right (SUPER_UNLIMITED): only the super administrator's key may sign it
+    return line.split("|")[0] == "super"
 MAX_OPEN_ALL = 30 * DAY
 CHALLENGE_TTL_MS = 120000
 PLACEHOLDER = {"", "unknown", "null", "none", "n/a", "default string", "not specified", "123456789abcdef0", "123456789abcdef", "0123456789abcdef", "020000000000"}
@@ -237,7 +233,7 @@ def parse_envelope(token):
 
 def right_line_ok(line):
     f = line.split("|")
-    return (f[0] == "purchase" and len(f) == 4) or (f[0] == "subscription" and len(f) == 7) or (f[0] == "openall" and len(f) == 4)
+    return (f[0] == "purchase" and len(f) == 4) or (f[0] == "subscription" and len(f) == 7) or (f[0] == "openall" and len(f) == 4) or (f[0] == "super" and len(f) == 3)
 
 
 def activation_view(e):
@@ -300,7 +296,7 @@ def verify_activation(c, keys, devices):
     opens = [r.split("|") for r in a["rights"] if r.startswith("openall|")]
     if opens and "COMMAND_OPEN_ALL" not in scopes:
         return ("rejected", "KEY_NOT_ALLOWED")
-    if any(is_permanent(r) for r in a["rights"]) and "ISSUE_UNLIMITED" not in scopes:
+    if any(is_super(r) for r in a["rights"]) and "SUPER_UNLIMITED" not in scopes:
         return ("rejected", "KEY_NOT_ALLOWED")
     if a["kind"] == "trial" and a["rights"]:
         return ("rejected", "BAD_RIGHTS")
@@ -346,7 +342,7 @@ def issue_activation(c, keys, devices):
         return None
     if not 1 <= r["windowHours"] <= 48:
         return None
-    if any(is_permanent(line) for line in r["rights"]) and "ISSUE_UNLIMITED" not in scopes:
+    if any(is_super(line) for line in r["rights"]) and "SUPER_UNLIMITED" not in scopes:
         return None
     if r["kind"] == "trial":
         if "ISSUE_TRIAL" not in scopes or r["rights"] or r["license"] != "trial":

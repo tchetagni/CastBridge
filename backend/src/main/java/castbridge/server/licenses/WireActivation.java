@@ -19,12 +19,9 @@ public final class WireActivation {
     /** An activation can be installed during 48 h from its creation (docs/ACTIVATION-FORMAT.md § Durées), for everybody. */
     public static final long HOUR_MS = 3_600_000L;
     public static final int MAX_WINDOW_HOURS = 48;
-    /** Bundle of "everything": bought, a permanent full licence; only a key holding ISSUE_UNLIMITED may sign such a purchase (never the server's). */
-    public static final String ALL_BUNDLE = "tout";
-
-    public static boolean isPermanent(String rightLine) {
-        String[] f = rightLine.split("\\|", -1);
-        return f.length > 2 && f[0].equals("purchase") && java.util.Arrays.asList(f[2].split(",")).contains(ALL_BUNDLE);
+    /** The `super` right (SUPER_UNLIMITED): reads and unlocks everything, rentals included, for good; only a key holding SUPER_UNLIMITED may sign it (never the server's). */
+    public static boolean isSuper(String rightLine) {
+        return rightLine.startsWith("super|");
     }
     public static final long MAX_OPEN_ALL_MS = 30 * DAY_MS;
     public static final Pattern ID = Envelope.ID;
@@ -83,6 +80,11 @@ public final class WireActivation {
                     if (f.length != 4 || !ID.matcher(f[1]).matches()) return false;
                     Long.parseLong(f[2]);
                     Long.parseLong(f[3]);
+                    return true;
+                }
+                case "super" -> {     // SUPER_UNLIMITED: super|<produit>|<date ms> (only the super administrator's key signs it)
+                    if (f.length != 3 || !ID.matcher(f[1]).matches()) return false;
+                    Long.parseLong(f[2]);
                     return true;
                 }
                 default -> {

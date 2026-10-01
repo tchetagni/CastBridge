@@ -120,6 +120,32 @@ class RentalClockTest {
         rig.wall = T0 + 12 * DAY; assertEquals(RentalState.EXPIRED, rig.status().single().state)
     }
 
+    @Test fun anAccountActivatedBySuperUnlimitedKeepsEveryRentalForGood() {
+        val rig = RentalRig()
+        // two rentals with a short date, a usage ceiling and a limit of ONE at a time: for an ordinary account all of that bites
+        rig.install(rig.issue(rig.rental(days = 10, grace = 2 * DAY, usage = 600, conc = 1), rig.rental("loc-b", listOf("quiz-cm2"), days = 10, conc = 1), Right.Super("super-illimite", T0)))
+        rig.wall = T0 + 400 * DAY                                                       // far past the end, the grace and the 45-day clock doubt
+        val all = rig.status()
+        assertEquals(2, all.size)
+        all.forEach { assertEquals(RentalState.ACTIVE, it.state); assertTrue(it.usable); assertEquals(RentalEngine.PERMANENT, it.message); assertNull(it.remainingMs); assertEquals(RentalWarning.NONE, it.warning) }
+        assertTrue(RentalEngine.superUnlimited(rig.installed))
+    }
+
+    @Test fun anOrdinaryAccountSeesTheSameRentalsEnd() {
+        val rig = RentalRig(); rig.install(rig.issue(rig.rental(days = 10, grace = 2 * DAY)))
+        rig.wall = T0 + 400 * DAY
+        assertNotEquals(RentalState.ACTIVE, rig.status().single().state)
+        assertFalse(RentalEngine.superUnlimited(rig.installed))
+    }
+
+    @Test fun superUnlimitedCannotBringBackARentalAlreadySweptAway() {
+        val rig = RentalRig(); val a = rig.issue(rig.rental(days = 10), Right.Super("super-illimite", T0))
+        val c = RentalEngine.contracts(listOf(a)).single()
+        // the key of a swept rental is destroyed and its files removed: nothing can resurrect it
+        val st = RentalEngine.evaluate(listOf(c), RentalInputs(JudgedTime(T0, null), expired = mapOf(c.key to ExpiryReason.DATE), superUnlimited = true)).single()
+        assertEquals(RentalState.EXPIRED, st.state)
+    }
+
     @Test fun aClockSetBackNeverExtendsAndIsSuspendedVisibly() {
         val rig = RentalRig(); rig.install(rig.issue(rig.rental(days = 30)))
         rig.wall = T0 + 20 * DAY; rig.ledger.observe()
@@ -319,6 +345,27 @@ class RentalSweepTest {
         assertFalse(rig.vault.hasKey(key)); assertEquals(setOf(CM2, CM2Q), lots.removed.toSet()); assertTrue(rig.vault.heldLotFolders().isEmpty())
         assertEquals(listOf(RentalEngine.ENDED), rep.notices); assertEquals(RentalPhase.DONE, rig.ledger.phase(key))
         assertEquals("Location terminée : ce contenu n'est plus disponible. Reprendre la location ?", RentalEngine.ENDED)
+    }
+
+    @Test fun anUnlimitedAccountThatIsNotSuperAdministratorStillSeesItsRentalsEndAndBeDeleted() {
+        // "illimité" = a permanent usage account (bought bundle "tout"): it opens everything for good, but it is NOT SUPER_UNLIMITED, so a rental still expires and is swept
+        val rig = RentalRig(); val lots = FakeLots(); val key = setup(rig, lots)
+        rig.install(rig.issue(Right.Purchase("illimite", listOf(Right.ALL_BUNDLE), T0), license = "lic-illimite-1"))
+        val access = TvGate.evaluate(rig.installed.toList(), emptyList(), T0 + 5_000 * DAY)
+        assertEquals("Illimité", access.label); assertFalse(access.superUnlimited); assertTrue(Right.ALL_BUNDLE in access.access.granted)
+        assertFalse(RentalEngine.superUnlimited(rig.installed))
+        rig.wall = T0 + 10 * DAY; rig.sweeper(lots).sweep(SweepTrigger.APP_START)
+        assertEquals(setOf(CM2, CM2Q), lots.removed.toSet(), "the ended rental is deleted in an unlimited account"); assertEquals(RentalPhase.DONE, rig.ledger.phase(key))
+    }
+
+    @Test fun theSweepNeverDeletesTheRentalsOfASuperUnlimitedAccount_butDeletesThoseOfAnyOther() {
+        val ordinary = RentalRig(); val lots1 = FakeLots(); val key1 = setup(ordinary, lots1)
+        ordinary.wall = T0 + 10 * DAY; ordinary.sweeper(lots1).sweep(SweepTrigger.APP_START)
+        assertEquals(setOf(CM2, CM2Q), lots1.removed.toSet(), "an ordinary account: the ended rental is deleted automatically"); assertEquals(RentalPhase.DONE, ordinary.ledger.phase(key1))
+        val sup = RentalRig(); val lots2 = FakeLots(); val key2 = setup(sup, lots2)
+        sup.install(sup.issue(Right.Super("super-illimite", T0), license = "lic-super-1"))            // activated by the super administrator code
+        sup.wall = T0 + 10 * DAY; sup.sweeper(lots2).sweep(SweepTrigger.APP_START)
+        assertTrue(lots2.removed.isEmpty(), "super administrator account: nothing is deleted"); assertTrue(sup.vault.hasKey(key2)); assertTrue(sup.steps.isEmpty())
     }
 
     @Test fun aPowerCutAtEveryStepResumesAndFinishes() {

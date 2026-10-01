@@ -31,7 +31,7 @@ data class SweepReport(
  */
 class RentalSweeper(
     private val ledger: RentalLedger, private val vault: RentalVault, private val lots: RentedLots, private val activations: () -> List<Activation>,
-    /** Lots a purchase, a subscription or a grant allows right now. */ private val owned: () -> Set<LotId> = { emptySet() },
+    /** Lots a purchase, a subscription or a grant allows right now. (An account activated by the super administrator code never reaches the deletion: its rentals are permanent, see [RentalEngine.superUnlimited].) */ private val owned: () -> Set<LotId> = { emptySet() },
     private val wall: () -> Long = System::currentTimeMillis, private val onStep: (String) -> Unit = {},
 ) {
     companion object { const val PERIOD_MS = 6L * 3600 * 1000 }

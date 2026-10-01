@@ -5,7 +5,6 @@ import castbridge.core.owner.Delivered
 import castbridge.core.owner.DeviceRequest
 import castbridge.core.owner.IssueSpec
 import castbridge.core.owner.RightsSyntax
-import castbridge.core.owner.ActivationPolicy
 import castbridge.core.lots.Right
 import castbridge.core.owner.ActivationKind
 import castbridge.core.owner.DeviceCode
@@ -97,7 +96,7 @@ object Gui {
             val kind = JComboBox(arrayOf("Essai (aucun droit)", "Production (licence et droits)"))
             val subject = JComboBox(arrayOf("TV", "Téléphone"))
             val license = JTextField("trial")
-            val permanent = JCheckBox("Licence d'usage PERMANENTE (clé superadmin seulement) ; le code reste valable 48 h pour l'installer")
+            val permanent = JCheckBox("SUPER_UNLIMITED : lit et débloque tout, locations permanentes (clé super administrateur seulement) ; le code reste valable 48 h pour l'installer")
             val rights = JTextArea(4, 50).apply { toolTipText = "Une ligne par droit : achat produit=bouquet1,bouquet2 | abonnement produit=bouquets:jours[:tolérance[:auto]] | tout-ouvert produit:jours" }
             val pass = JPasswordField()
             val load = JButton("Ouvrir une demande…").apply { addActionListener { chooseFile(false)?.let { request.text = it.readText() } } }
@@ -111,7 +110,7 @@ object Gui {
                         val d = unlocked(p) ?: return@addActionListener
                         val now = System.currentTimeMillis()
                         val k = if (kind.selectedIndex == 0) ActivationKind.TRIAL else ActivationKind.PRODUCTION
-                        val spec = IssueSpec(k, if (subject.selectedIndex == 0) Subject.TV else Subject.PHONE, RightsSyntax.parseBox(rights.text, now) + (if (permanent.isSelected && k == ActivationKind.PRODUCTION) listOf(Right.Purchase("licence-permanente", listOf(ActivationPolicy.ALL_BUNDLE), now)) else emptyList()), license.text.trim().ifEmpty { Activation.TRIAL_LICENSE })
+                        val spec = IssueSpec(k, if (subject.selectedIndex == 0) Subject.TV else Subject.PHONE, RightsSyntax.parseBox(rights.text, now) + (if (permanent.isSelected && k == ActivationKind.PRODUCTION) listOf(Right.Super("super-illimite", now)) else emptyList()), license.text.trim().ifEmpty { Activation.TRIAL_LICENSE })
                         val r = d.issue(device, spec)
                         last = r; token.text = r.issued.token
                         qr.icon = ImageIcon(Qr.image(r.issued.token, 4))
@@ -128,7 +127,7 @@ object Gui {
             }
             val savePng = JButton("Enregistrer le code QR…").apply { addActionListener { last?.let { r -> chooseFile(true, "activation.png")?.let { f -> Qr.png(r.issued.token, f); info("Code QR enregistré : ${f.path}") } } } }
             val form = JPanel(); gb(form, listOf("Demande d'appareil (collée depuis la TV)" to JScrollPane(request), "" to load, "Type" to kind, "Pour" to subject, "Licence" to license,
-                "Licence" to permanent, "Droits (un par ligne)" to JScrollPane(rights), "Code de déverrouillage" to pass, "" to go))
+                "Privilège" to permanent, "Droits (un par ligne)" to JScrollPane(rights), "Code de déverrouillage" to pass, "" to go))
             val out = JPanel(BorderLayout()).apply {
                 add(JScrollPane(token), BorderLayout.NORTH); add(qr, BorderLayout.CENTER)
                 add(JPanel(FlowLayout(FlowLayout.LEFT)).apply { add(copy); add(save); add(savePng) }, BorderLayout.SOUTH)

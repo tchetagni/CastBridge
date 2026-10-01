@@ -159,20 +159,23 @@ class ActivationTest {
         accepted(v.verify(tok, fp, T0 + 48 * h)); rejected(v.verify(tok, fp, T0 + 48 * h + 1), Rejection.WINDOW_CLOSED)
     }
 
-    @Test fun permanentLicenceNeedsTheUnlimitedScopeAndTheInstallWindowStays48Hours() {
+    @Test fun superUnlimitedNeedsTheSuperScopeOpensEverythingAndTheInstallWindowStays48Hours() {
         val h = 3_600_000L
-        val permanent = Right.Purchase("licence-permanente", listOf(ActivationPolicy.ALL_BUNDLE), T0)
-        val tok = console.activation(fp, rights = listOf(permanent))
+        val sup = Right.Super("super-illimite", T0)
+        val tok = console.activation(fp, rights = listOf(sup))
         val act = accepted(v.verify(tok, fp, T0))                                       // the console key has every scope
         val gate = TvGate.evaluate(listOf(act), emptyList(), T0 + 5_000 * day)           // 13 years later: still everything
-        assertTrue("tout" in gate.access.granted); assertEquals("Licence permanente", gate.label)
-        val noUnlimited = KeyRing(listOf(console.signer.trusted(KeyScope.ALL - KeyScope.ISSUE_UNLIMITED)))
-        rejected(ActivationVerifier(noUnlimited).verify(tok, fp, T0), Rejection.KEY_NOT_ALLOWED)
-        assertFailsWith<IssueException> { ActivationIssuer(console.signer, KeyScope.ALL - KeyScope.ISSUE_UNLIMITED).issue(ActivationIssuer.Request(ActivationKind.PRODUCTION, DeviceCode.of(fp), fp, T0, rights = listOf(permanent), license = "lic-1")) }
+        assertTrue("tout" in gate.access.granted); assertEquals("Super illimité", gate.label); assertTrue(gate.superUnlimited)
+        val notSuper = KeyRing(listOf(console.signer.trusted(KeyScope.ALL - KeyScope.SUPER_UNLIMITED)))
+        rejected(ActivationVerifier(notSuper).verify(tok, fp, T0), Rejection.KEY_NOT_ALLOWED)
+        assertFailsWith<IssueException> { ActivationIssuer(console.signer, KeyScope.ALL - KeyScope.SUPER_UNLIMITED).issue(ActivationIssuer.Request(ActivationKind.PRODUCTION, DeviceCode.of(fp), fp, T0, rights = listOf(sup), license = "lic-1")) }
         assertFailsWith<IssueException> { ActivationIssuer(console.signer).issue(ActivationIssuer.Request(ActivationKind.TRIAL, DeviceCode.of(fp), fp, T0, windowHours = 49)) }
-        // a permanent licence is still INSTALLED within 48 h: there is no unlimited install window any more
-        val late = console.activation(fp, issued = T0, from = T0, to = T0 + 48 * h, rights = listOf(permanent))
+        // even SUPER_UNLIMITED is INSTALLED within 48 h: there is no unlimited install window
+        val late = console.activation(fp, issued = T0, from = T0, to = T0 + 48 * h, rights = listOf(sup))
         rejected(v.verify(late, fp, T0 + 48 * h + 1), Rejection.WINDOW_CLOSED)
+        // a bought "tout" bundle is ordinary commerce: no special scope, and it is not SUPER_UNLIMITED
+        val bought = accepted(ActivationVerifier(notSuper).verify(console.activation(fp, rights = listOf(Right.Purchase("p-tout", listOf("tout"), T0))), fp, T0))
+        assertFalse(TvGate.evaluate(listOf(bought), emptyList(), T0).superUnlimited)
     }
 
     // ---- what a TV may open ----

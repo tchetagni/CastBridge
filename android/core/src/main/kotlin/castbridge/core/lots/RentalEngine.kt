@@ -52,13 +52,18 @@ data class RentalStatus(
 }
 
 /** What the TV knows for the evaluation: its clock, the minutes of use already counted, the contracts already ended and swept. */
-class RentalInputs(val judged: JudgedTime, val usedMinutes: Map<String, Long> = emptyMap(), val expired: Map<String, ExpiryReason> = emptyMap())
+class RentalInputs(val judged: JudgedTime, val usedMinutes: Map<String, Long> = emptyMap(), val expired: Map<String, ExpiryReason> = emptyMap(), /** The account was activated with the super administrator code (SUPER_UNLIMITED): its rentals never end and are never deleted. */ val superUnlimited: Boolean = false)
 
 /** The time to trust and why (docs/RENTAL-LOTS.md § 3). [now] is NEVER earlier than the highest time ever seen: a rollback can only freeze, never extend. */
 data class JudgedTime(val now: Long, val doubt: ClockDoubt?)
 
 object RentalEngine {
+    const val PERMANENT = "Location permanente"
+
     fun contractKey(productId: String, period: Long) = "$productId@$period"
+
+    /** Is the `super` right (SUPER_UNLIMITED, the super administrator's code) among the installed activations? Then every rental of the account is permanent. */
+    fun superUnlimited(activations: List<Activation>) = activations.any { a -> a.rights.any { it is Right.Super } }
 
     /** The doubt rules: the TV time is `max(wall, lastSeen, floor)`; behind that by more than a day = BEHIND; far ahead (or more than [TvClock.MAX_JUMP_MS], never believed) = AHEAD. */
     fun judge(tv: TvClock, wall: Long, cfg: RentalConfig = RentalConfig()): JudgedTime {
@@ -106,7 +111,8 @@ object RentalEngine {
             val leftUsage = if (c.maxUsageMinutes > 0) maxOf(0L, c.maxUsageMinutes - used) else null
             val over = inputs.expired[c.key]
             when {
-                over != null -> status(c, RentalState.EXPIRED, over, t.doubt, null, leftUsage)
+                over != null -> status(c, RentalState.EXPIRED, over, t.doubt, null, leftUsage)                 // already swept: the key is gone, nothing can bring it back
+                inputs.superUnlimited -> RentalStatus(c, RentalState.ACTIVE, null, null, null, null, RentalWarning.NONE, PERMANENT)   // super administrator account: no end, no usage ceiling, whatever the clock says
                 leftUsage != null && leftUsage == 0L -> status(c, RentalState.EXPIRED, ExpiryReason.USAGE, t.doubt, null, 0L)
                 t.now >= c.graceEndsAt -> status(c, RentalState.EXPIRED, ExpiryReason.DATE, t.doubt, null, leftUsage)
                 t.doubt != null -> status(c, RentalState.SUSPENDED, null, t.doubt, null, leftUsage)
@@ -117,7 +123,7 @@ object RentalEngine {
         }
         // simultaneous limit, per licence: the oldest usable rentals keep their right, the others wait (they are not deleted)
         val demoted = HashSet<String>()
-        base.filter { it.usable }.groupBy { it.contract.license }.forEach { (_, list) ->
+        if (!inputs.superUnlimited) base.filter { it.usable }.groupBy { it.contract.license }.forEach { (_, list) ->
             val limit = list.map { it.contract.maxConcurrent }.filter { it > 0 }.minOrNull() ?: return@forEach
             list.sortedWith(compareBy({ it.contract.period }, { it.contract.productId })).drop(limit).forEach { demoted += it.key }
         }

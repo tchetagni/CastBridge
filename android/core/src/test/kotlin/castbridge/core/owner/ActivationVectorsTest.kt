@@ -138,12 +138,12 @@ class ActivationVectorsTest {
             seats = listOf(J("license" to "lic-0001", "seat" to SeatIds.of("lic-0001", tvA.fp), "at" to t0 + day)), now = t0 + 3 * day)
         cases += activationCase("act-bad-noncanonical", "forme non canonique (retour à la ligne final) refusée", prodTok.split('.').let { p -> p[0] + "." + Base64.getUrlEncoder().withoutPadding().encodeToString((String(Base64.getUrlDecoder().decode(p[1])) + "\n").toByteArray()) + "." + p[2] }, "tvA")
         cases += activationCase("act-bad-malformed", "texte quelconque", "pas-un-jeton", "tvA")
-        // 4b. permanent usage licence (purchase of the bundle "tout", no end): superadmin keys only (ISSUE_UNLIMITED); the install window stays 48 h for everybody
-        val permanent = Right.Purchase("licence-permanente", listOf(ActivationPolicy.ALL_BUNDLE), t0)
-        cases += activationCase("act-permanent-ok", "licence d'usage permanente délivrée par une clé superadmin (bureau)", issuer("desk").issue(req("tvA", rights = listOf(permanent))).token, "tvA")
-        cases += activationCase("act-permanent-phone-ok", "licence permanente délivrée par le téléphone superadmin", issuer("phone").issue(req("tvA", rights = listOf(permanent))).token, "tvA")
-        cases += activationCase("act-bad-permanent-server", "la clé serveur ne peut pas délivrer de licence permanente", raw("server", "tvA", rights = listOf(permanent)), "tvA")
-        cases += activationCase("act-bad-permanent-48h-passed", "même une licence permanente se pose dans les 48 h : après, la clé est périmée", issuer("desk").issue(req("tvA", notBefore = t0, window = 48, rights = listOf(permanent))).token, "tvA", now = t0 + 48 * hour + 1)
+        // 4b. SUPER_UNLIMITED (the `super` right: reads and unlocks everything, rentals included, for good): super administrator keys only; the install window stays 48 h for everybody
+        val superRight = Right.Super("super-illimite", t0)
+        cases += activationCase("act-super-ok", "SUPER_UNLIMITED délivré par une clé super administrateur (bureau)", issuer("desk").issue(req("tvA", rights = listOf(superRight))).token, "tvA")
+        cases += activationCase("act-super-phone-ok", "SUPER_UNLIMITED délivré par le téléphone super administrateur", issuer("phone").issue(req("tvA", rights = listOf(superRight))).token, "tvA")
+        cases += activationCase("act-bad-super-server", "la clé serveur ne peut pas délivrer SUPER_UNLIMITED", raw("server", "tvA", rights = listOf(superRight)), "tvA")
+        cases += activationCase("act-bad-super-48h-passed", "même SUPER_UNLIMITED se pose dans les 48 h : après, la clé est périmée", issuer("desk").issue(req("tvA", notBefore = t0, window = 48, rights = listOf(superRight))).token, "tvA", now = t0 + 48 * hour + 1)
         cases += activationCase("act-ok-48h-edge", "48 h exactes : acceptée à la dernière minute", issuer("server").issue(req("tvA", notBefore = t0, window = 48)).token, "tvA", now = t0 + 48 * hour)
         cases += activationCase("act-bad-48h-passed", "48 h écoulées : la clé est périmée", issuer("server").issue(req("tvA", notBefore = t0, window = 48)).token, "tvA", now = t0 + 48 * hour + 1)
         // 5. compact
@@ -200,7 +200,7 @@ class ActivationVectorsTest {
         cases += J("type" to "build-command", "id" to "build-command-open-all", "description" to "construire la commande « tout ouvert »", "signer" to "desk", "request" to J("power" to "open_all", "device" to "tvA", "challenge" to ch1, "issuedAt" to t0, "days" to 7, "action" to "", "bundles" to emptyList<String>(), "lots" to emptyList<String>()), "expect" to J("token" to openCmd))
         fun refuse(id: String, why: String, k: String, r: ActivationIssuer.Request, d: String) = J("type" to "build-activation", "id" to id, "description" to why, "signer" to k, "request" to reqJson(r, d), "expect" to J("refused" to true))
         cases += refuse("build-refuse-window", "fenêtre hors bornes (49 h)", "desk", req("tvA", window = 49), "tvA")
-        cases += refuse("build-refuse-permanent-server", "la clé serveur ne peut pas émettre de licence permanente", "server", req("tvA", rights = listOf(permanent)), "tvA")
+        cases += refuse("build-refuse-super-server", "la clé serveur ne peut pas émettre SUPER_UNLIMITED", "server", req("tvA", rights = listOf(superRight)), "tvA")
         cases += refuse("build-refuse-zero-window", "durée nulle", "desk", req("tvA", window = 0), "tvA")
         cases += refuse("build-refuse-scope", "la clé serveur ne peut pas délivrer « tout ouvert »", "server", req("tvA", rights = listOf(openAll)), "tvA")
         cases += refuse("build-refuse-open-all-long", "« tout ouvert » de 31 jours", "desk", req("tvA", rights = listOf(Right.OpenAll("ouvert", t0, t0 + 31 * day))), "tvA")

@@ -44,6 +44,15 @@ sealed class Right {
         val endsAt: Long get() = startsAt + durationDays * RentalLines.DAY_MS
     }
 
+    /**
+     * SUPER_UNLIMITED: reads everything and unlocks everything, for good: every bundle (the "tout" bundle) with no end, and every rental of the device becomes permanent
+     * (never ends, no usage ceiling, no limit of simultaneous rentals, never swept). Only a key holding the SUPER_UNLIMITED scope (the super administrator's) may sign it:
+     * a device refuses it from any other key. A device that does not know this right ignores it ([Unknown]).
+     */
+    data class Super(override val productId: String, val grantedAt: Long) : Right() {
+        override val bundleIds: List<String> get() = listOf(ALL_BUNDLE)
+    }
+
     /** A right line of a kind this build does not know (a newer format): kept VERBATIM so the signed canonical text rebuilds exactly, and it grants nothing, never "everything". */
     data class Unknown(val raw: String) : Right() {
         override val productId: String get() = "unknown"
@@ -83,6 +92,7 @@ data class Entitlement(val deviceId: String, val issuedAt: Long, val keyId: Stri
             is Right.Subscription -> "subscription|${r.productId}|${r.bundleIds.sorted().joinToString(",")}|${r.startsAt}|${r.endsAt}|${r.graceMs}|${if (r.autoRenew) 1 else 0}"
             is Right.OpenAll -> "openall|${r.productId}|${r.startsAt}|${r.endsAt}"
             is Right.Rental -> RentalLines.line(r)
+            is Right.Super -> "super|${r.productId}|${r.grantedAt}"
             is Right.Unknown -> r.raw
         }
 

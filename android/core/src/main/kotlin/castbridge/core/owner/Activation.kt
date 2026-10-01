@@ -53,6 +53,7 @@ data class Activation(
             is Right.Subscription -> "subscription|${r.productId}|${r.bundleIds.sorted().joinToString(",")}|${r.startsAt}|${r.endsAt}|${r.graceMs}|${if (r.autoRenew) 1 else 0}"
             is Right.OpenAll -> "openall|${r.productId}|${r.startsAt}|${r.endsAt}"
             is Right.Rental -> RentalLines.line(r)
+            is Right.Super -> "super|${r.productId}|${r.grantedAt}"
             is Right.Unknown -> r.raw
         }
 
@@ -63,6 +64,7 @@ data class Activation(
                 "purchase" -> { require(f.size == 4 && ID.matches(f[1])); Right.Purchase(f[1], ids(f[2]), f[3].toLong()) }
                 "subscription" -> { require(f.size == 7 && ID.matches(f[1])); Right.Subscription(f[1], ids(f[2]), f[3].toLong(), f[4].toLong(), f[5].toLong(), f[6] == "1") }
                 "openall" -> { require(f.size == 4 && ID.matches(f[1])); Right.OpenAll(f[1], f[2].toLong(), f[3].toLong()) }
+                "super" -> { require(f.size == 3 && ID.matches(f[1])); Right.Super(f[1], f[2].toLong()) }
                 RentalLines.KIND -> RentalLines.parse(f)
                 else -> RentalLines.unknown(line)
             }
@@ -109,15 +111,12 @@ class RevocationState(val keys: Set<String> = emptySet(), val seats: Map<String,
  */
 /**
  * Commercial policy of activation codes: a code can be INSTALLED during 48 hours from its creation, no longer, for everybody (the rights it grants have their own dates).
- * What the superadmin may add (scope ISSUE_UNLIMITED) is a PERMANENT usage licence: a purchase of the bundle [ALL_BUNDLE], which never ends.
+ * What the super administrator may add (scope SUPER_UNLIMITED) is the `super` right: reads and unlocks everything, rentals included, for good.
  */
 object ActivationPolicy {
     const val CODE_VALIDITY_HOURS = 48
     const val HOUR_MS = 3_600_000L
     const val CODE_VALIDITY_MS = CODE_VALIDITY_HOURS * HOUR_MS
-    /** Bundle of "everything": bought, it is a permanent full licence; only a key with ISSUE_UNLIMITED may sign such a purchase. */
-    const val ALL_BUNDLE = "tout"
-    fun isPermanent(r: Right) = r is Right.Purchase && ALL_BUNDLE in r.bundleIds
 }
 
 class ActivationVerifier(private val keys: KeyRing, private val maxWindowMs: Long = ActivationPolicy.CODE_VALIDITY_MS, private val skewMs: Long = 24L * 3600 * 1000,
@@ -136,7 +135,7 @@ class ActivationVerifier(private val keys: KeyRing, private val maxWindowMs: Lon
         val allowed = if (a.kind == ActivationKind.TRIAL) key.allows(KeyScope.ISSUE_TRIAL) else key.allows(KeyScope.ISSUE_PRODUCTION) || key.allows(KeyScope.REACTIVATE)
         if (!allowed) return no(Rejection.KEY_NOT_ALLOWED, "Cette clé n'a pas le droit de délivrer ce type d'activation")
         if (a.rights.any { it is Right.OpenAll } && !key.allows(KeyScope.COMMAND_OPEN_ALL)) return no(Rejection.KEY_NOT_ALLOWED, "Cette clé ne peut pas délivrer « tout ouvert »")
-        if (a.rights.any(ActivationPolicy::isPermanent) && !key.allows(KeyScope.ISSUE_UNLIMITED)) return no(Rejection.KEY_NOT_ALLOWED, "Cette clé ne peut pas délivrer de licence permanente")
+        if (a.rights.any { it is Right.Super } && !key.allows(KeyScope.SUPER_UNLIMITED)) return no(Rejection.KEY_NOT_ALLOWED, "Cette clé n'est pas celle du super administrateur")
         if (a.kind == ActivationKind.TRIAL && a.rights.isNotEmpty()) return no(Rejection.BAD_RIGHTS, "Une clé d'essai ne porte aucun droit")
         if (a.rights.filterIsInstance<Right.OpenAll>().any { it.endsAt - it.startsAt > MAX_OPEN_ALL_MS || it.endsAt <= it.startsAt }) return no(Rejection.BAD_RIGHTS, "« Tout ouvert » : 30 jours au plus")
         a.rights.filterIsInstance<Right.Rental>().firstNotNullOfOrNull { RentalLines.bounds(it) }?.let { return no(Rejection.BAD_RIGHTS, "Location : $it") }
@@ -157,7 +156,7 @@ class ActivationVerifier(private val keys: KeyRing, private val maxWindowMs: Lon
 }
 
 /** What a TV may open, computed from what it holds. No key installed = nothing at all (not even the trial). */
-data class TvAccess(val keyInstalled: Boolean, val access: Access, val openAllUntil: Long?, val label: String) {
+data class TvAccess(val keyInstalled: Boolean, val access: Access, val openAllUntil: Long?, val label: String, /** SUPER_UNLIMITED installed: everything, rentals included, for good. */ val superUnlimited: Boolean = false) {
     val opensContent get() = keyInstalled
 }
 
@@ -180,9 +179,11 @@ object TvGate {
         val openAll = listOfNotNull(live.filter { it.power == Power.OPEN_ALL }.maxOfOrNull { it.untilMs }, openAllRights).maxOrNull()
         val extraBundles = live.flatMap { it.bundleIds }.toSortedSet()
         val extraLots = live.flatMap { it.lots }.toSet()
-        val bundles = (subscribed + extraBundles + if (openAll != null) setOf("tout") else emptySet()).toSortedSet()
+        val superUnlimited = rights.any { it is Right.Super }                    // reads and unlocks everything, rentals included (RentalEngine makes them permanent)
+        val bundles = (subscribed + extraBundles + if (openAll != null || superUnlimited) setOf("tout") else emptySet()).toSortedSet()
         val label = when {
-            rights.any(ActivationPolicy::isPermanent) -> "Licence permanente"
+            superUnlimited -> "Super illimité"
+            Right.ALL_BUNDLE in purchased -> "Illimité"                    // a permanent account (bought "tout"): everything, but its rentals still end
             openAll != null -> "Tout ouvert (temporaire)"
             activations.any { it.kind == ActivationKind.PRODUCTION } || live.isNotEmpty() -> "Version complète"
             else -> "Version d'essai"
@@ -190,7 +191,7 @@ object TvGate {
         // rentals are evaluated by the RentalLedger (clock rules, usage ceiling); with none given (an old caller) a rental line grants NOTHING
         val access = RentalPolicy.mergeAccess(Access(Verdict.OK, purchased, bundles, subs, "", extraLots), rentals)
         val rentedLabel = if (access.rented.isNotEmpty() && access.purchased.isEmpty() && bundles.isEmpty() && openAll == null) "Location en cours" else label
-        return TvAccess(true, access, openAll, rentedLabel)
+        return TvAccess(true, access, openAll, rentedLabel, superUnlimited)
     }
 }
 

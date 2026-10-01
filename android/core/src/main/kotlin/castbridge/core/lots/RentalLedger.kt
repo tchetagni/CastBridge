@@ -54,12 +54,12 @@ class RentalLedger(private val dir: File, val clock: TvClock = TvClock(), val co
         clock.lastSeen = w; save(); true
     }
 
-    private fun inputs(): RentalInputs = synchronized(lock) {
-        RentalInputs(RentalEngine.judge(clock, wall(), config), recs.mapValues { it.value.used }, recs.filterValues { it.phase != RentalPhase.LIVE }.mapValues { it.value.reason ?: ExpiryReason.DATE })
+    private fun inputs(superUnlimited: Boolean = false): RentalInputs = synchronized(lock) {
+        RentalInputs(RentalEngine.judge(clock, wall(), config), recs.mapValues { it.value.used }, recs.filterValues { it.phase != RentalPhase.LIVE }.mapValues { it.value.reason ?: ExpiryReason.DATE }, superUnlimited)
     }
 
     /** The state of every rental in [activations] right now. Tombstoned contracts stay EXPIRED. */
-    fun status(activations: List<Activation>): List<RentalStatus> = RentalEngine.evaluate(RentalEngine.contracts(activations), inputs(), config)
+    fun status(activations: List<Activation>): List<RentalStatus> = RentalEngine.evaluate(RentalEngine.contracts(activations), inputs(RentalEngine.superUnlimited(activations)), config)
 
     /**
      * Installs the keys of the rentals of [activation] that are usable now: opens the box with the device's factors and puts the key in [vault]. A tombstoned contract is never reopened.

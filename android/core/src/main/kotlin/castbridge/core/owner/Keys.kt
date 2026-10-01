@@ -30,8 +30,8 @@ enum class KeyScope {
     REACTIVATE,
     /** Sign deferred orders (management policies, docs/agent-briefs/deferred-orders.md). The server key has it; no key gets it implicitly from another scope. */
     POLICY,
-    /** Issue a PERMANENT usage licence (purchase of the bundle "tout"): superadmin phone / desk only, never the server. Every code can be installed during [ActivationPolicy.CODE_VALIDITY_HOURS] hours, this scope included. */
-    ISSUE_UNLIMITED;
+    /** SUPER_UNLIMITED: sign the `super` right (reads and unlocks everything, rentals included, for good). The super administrator's key only (phone superadmin, desk): never the server. Every code can still be installed during [ActivationPolicy.CODE_VALIDITY_HOURS] hours, this scope included. */
+    SUPER_UNLIMITED;
 
     companion object {
         val ALL: Set<KeyScope> = values().toSet()
@@ -39,7 +39,7 @@ enum class KeyScope {
         fun upTo(power: Power): Set<KeyScope> = buildSet {
             add(COMMAND_SUPPORT)
             if (power.rank >= Power.UNLOCK.rank) { add(COMMAND_UNLOCK); add(ISSUE_TRIAL); add(ISSUE_PRODUCTION) }
-            if (power.rank >= Power.OPEN_ALL.rank) { add(COMMAND_OPEN_ALL); add(TRANSFER); add(REVOKE); add(REGISTRY); add(REACTIVATE); add(POLICY); add(ISSUE_UNLIMITED) }
+            if (power.rank >= Power.OPEN_ALL.rank) { add(COMMAND_OPEN_ALL); add(TRANSFER); add(REVOKE); add(REGISTRY); add(REACTIVATE); add(POLICY); add(SUPER_UNLIMITED) }
         }
         fun of(p: Power) = when (p) { Power.SUPPORT -> COMMAND_SUPPORT; Power.UNLOCK -> COMMAND_UNLOCK; Power.OPEN_ALL -> COMMAND_OPEN_ALL }
     }

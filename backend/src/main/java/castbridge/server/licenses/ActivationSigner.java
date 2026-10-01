@@ -22,7 +22,7 @@ public interface ActivationSigner {
     SignedActivation sign(ActivationRequest request);
 
     /** The scopes of the format (§ 2). The server key never holds TRANSFER nor COMMAND_OPEN_ALL. */
-    enum SignerScope { ISSUE_TRIAL, ISSUE_PRODUCTION, COMMAND_SUPPORT, COMMAND_UNLOCK, COMMAND_OPEN_ALL, TRANSFER, REVOKE, REGISTRY, REACTIVATE, POLICY , ISSUE_UNLIMITED }
+    enum SignerScope { ISSUE_TRIAL, ISSUE_PRODUCTION, COMMAND_SUPPORT, COMMAND_UNLOCK, COMMAND_OPEN_ALL, TRANSFER, REVOKE, REGISTRY, REACTIVATE, POLICY , SUPER_UNLIMITED }
 
     /** What an issuance is for; each kind needs one scope. TRANSFER and OPEN_ALL exist only to be refused to the server key. */
     enum IssueKind {

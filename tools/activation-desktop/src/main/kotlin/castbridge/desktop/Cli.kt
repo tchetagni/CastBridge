@@ -168,7 +168,7 @@ class Cli(private val env: Env) {
         val d = desk(a)
         val kind = if (a.flags.contains("production")) ActivationKind.PRODUCTION else ActivationKind.TRIAL
         val now = env.clock()
-        a.get("jours")?.let { throw UsageException("--jours n'existe plus : une clé s'installe dans les 48 h suivant sa création (--permanente : licence sans fin, clés superadmin seulement)") }
+        a.get("jours")?.let { throw UsageException("--jours n'existe plus : une clé s'installe dans les 48 h suivant sa création (--super : SUPER_UNLIMITED, clés super administrateur seulement)") }
         val period = a.get("periode")?.toLongOrNull()
         if (a.get("periode") != null && period == null) throw UsageException("--periode attend le début (ms) de la location à prolonger")
         val rentals = a.all("location").map { RightsSyntax.rental(it, period) }
@@ -192,11 +192,11 @@ class Cli(private val env: Env) {
         return 0
     }
 
-    /** `--permanente`: the PERMANENT usage licence (purchase of the bundle « tout »); the TV refuses it unless the signing key holds ISSUE_UNLIMITED. */
+    /** `--super`: the SUPER_UNLIMITED right (reads and unlocks everything, rentals included, for good); the TV refuses it unless the signing key holds SUPER_UNLIMITED. */
     private fun permanent(a: Args, kind: ActivationKind, now: Long): List<castbridge.core.lots.Right> =
-        if (!a.flags.contains("permanente")) emptyList()
-        else if (kind != ActivationKind.PRODUCTION) throw UsageException("--permanente : licence de production seulement (--production)")
-        else listOf(castbridge.core.lots.Right.Purchase("licence-permanente", listOf(castbridge.core.owner.ActivationPolicy.ALL_BUNDLE), now))
+        if (!a.flags.contains("super")) emptyList()
+        else if (kind != ActivationKind.PRODUCTION) throw UsageException("--super : licence de production seulement (--production)")
+        else listOf(castbridge.core.lots.Right.Super("super-illimite", now))
 
     /** Refuses a rental whose bundles hold a free lot (CC BY-SA) or an unknown bundle, from the bundle catalogue (`--catalogue TRIAL-MANIFEST.json`) and the list of free lots (`--lots-libres FICHIER`, one lot « fonction:périmètre » per line). */
     private fun rentalCheck(a: Args): ((castbridge.core.owner.RentalSpec) -> String?)? {
@@ -285,7 +285,7 @@ Commandes (français ; alias anglais : keygen key trust device license issue com
   faire-confiance F  ajoute la clé publique d'un autre outil (téléphone propriétaire, serveur) à l'anneau
   appareil [F|-]     lit la « demande d'appareil » donnée par la TV (code=…, k=…, factor=TYPE|empreinte)
   licence ID --postes N [--transferts N]    crée une licence (un achat)
-  emettre --appareil F [--production] [--licence ID] [--permanente] [--sujet tv|phone]   (clé à installer dans les 48 h ; --permanente : licence d'usage sans fin, clés superadmin seulement)
+  emettre --appareil F [--production] [--licence ID] [--super] [--sujet tv|phone]   (clé à installer dans les 48 h ; --super : SUPER_UNLIMITED, lit et débloque tout, locations permanentes, clé super administrateur seulement)
           [--achat produit=b1,b2] [--abonnement produit=b1:jours[:tolérance[:auto]]] [--tout-ouvert produit:jours] [--droit ligne]
           [--location produit=b1,b2:JOURS[:MINUTES_D_USAGE_MAX[:TOLERANCE_JOURS[:SIMULTANEES]]]]   (répétable ; 1 à 366 jours ; production seulement)
           [--periode MS]  prolonge la location commencée à cet instant (même clé, pas de doublon) au lieu d'en commencer une nouvelle

@@ -84,7 +84,7 @@ object RentalVectors {
         val used = (c["usedMinutes"] as? Map<String, Any?>).orEmpty().mapValues { (it.value as Number).toLong() }
         val expired = (c["expired"] as? Map<String, Any?>).orEmpty().mapValues { ExpiryReason.valueOf(it.value as String) }
         val tv = TvClock(clock.long("lastSeen") ?: 0L, clock.long("floor") ?: 0L)
-        val st = RentalEngine.evaluate(RentalEngine.contracts(acts), RentalInputs(RentalEngine.judge(tv, c.long("wallMs")!!), used, expired))
+        val st = RentalEngine.evaluate(RentalEngine.contracts(acts), RentalInputs(RentalEngine.judge(tv, c.long("wallMs")!!), used, expired, RentalEngine.superUnlimited(acts)))
         check(dev.n > 0)
         return st.map(::statusJson)
     }

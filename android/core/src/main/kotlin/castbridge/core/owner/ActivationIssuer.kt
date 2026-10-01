@@ -111,9 +111,10 @@ class ActivationIssuer(private val signer: Signer, private val scopes: Set<KeySc
         when (r) {
             is Right.Unknown -> throw IssueException("Droit inconnu : à ne pas émettre")
             is Right.Rental -> { need(r.bundleIds.isNotEmpty(), "Location sans bouquet"); RentalLines.bounds(r)?.let { throw IssueException("Location : $it") } }
-            is Right.Purchase -> {
-                need(r.grantedAt > 0, "Date d'achat invalide")
-                if (ActivationPolicy.isPermanent(r)) need(KeyScope.ISSUE_UNLIMITED in scopes, "Cette clé ne peut pas délivrer de licence permanente")
+            is Right.Purchase -> need(r.grantedAt > 0, "Date d'achat invalide")
+            is Right.Super -> {
+                need(r.grantedAt > 0, "Date invalide")
+                need(KeyScope.SUPER_UNLIMITED in scopes, "Cette clé n'est pas celle du super administrateur : elle ne peut pas délivrer SUPER_UNLIMITED")
             }
             is Right.Subscription -> {
                 need(r.endsAt > r.startsAt, "Abonnement : fin avant le début")
