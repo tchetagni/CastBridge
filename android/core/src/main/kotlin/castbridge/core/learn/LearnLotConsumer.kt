@@ -95,7 +95,10 @@ class LearnLotConsumer(
     fun diskBytes(): Long = installedAll().sumOf { it.file.length() }
 
     /** Index of an installed lot (lessons, titles, hashes), or null. */
-    fun index(scope: String): LotIndex? = installedOne(scope)?.let { runCatching { LotReader.index(it.file) }.getOrNull() }
+    fun index(scope: String): LotIndex? = installedOne(scope)?.let { i ->
+        synchronized(idx) { idx.getOrPut("${i.meta.id.scope}@${i.meta.sha256}") { runCatching { LotReader.index(i.file) }.getOrNull() ?: return null } }
+    }
+    private val idx = HashMap<String, LotIndex>()
 
     /** Content hash of a lesson in the installed lots (progress compatibility: « mise à jour »), null if unknown. */
     fun lessonHash(lesson: String): String? = installedAll().firstNotNullOfOrNull { index(it.meta.id.scope)?.hashOf(lesson) }
@@ -185,7 +188,7 @@ data class LearnClassStatus(val scope: String, val title: String, val installedV
     val updateAvailable get() = installedVersion != null && availableVersion != null && availableVersion > installedVersion
 
     /** The call to action under the class: « Télécharger 3e – BEPC : 4,2 Mo », « Mettre à jour… », or null when nothing to do. */
-    fun action(size: (Long) -> String): String? = when {
+    fun action(size: (Long) -> String = LearnFormat::size): String? = when {
         !downloaded && availableBytes != null -> "Télécharger $title : ${size(availableBytes)}"
         updateAvailable && availableBytes != null -> "Mettre à jour $title : ${size(availableBytes)}"
         else -> null
@@ -202,5 +205,22 @@ data class LearnClassStatus(val scope: String, val title: String, val installedV
                     avail[s]?.version, avail[s]?.bytes, s in onTv)
             }
         }
+    }
+}
+
+/** French wording shared by both apps: sizes (« 4,2 Mo ») and the freshness of the data (« données du 12 sept. »). Never mentions Internet. */
+object LearnFormat {
+    private val MONTHS = listOf("janv.", "févr.", "mars", "avr.", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc.")
+
+    fun size(b: Long): String = when {
+        b < 1024 -> "$b o"
+        b < 1L shl 20 -> "${(b + 1023) / 1024} Ko"
+        else -> String.format(java.util.Locale.ROOT, "%.1f", b / 1048576.0).replace('.', ',') + " Mo"
+    }
+
+    /** « données du 12 sept. » from an ISO date (2026-09-12); « données d'origine inconnue » when there is none. */
+    fun dataDate(iso: String?): String {
+        val d = runCatching { java.time.LocalDate.parse(iso) }.getOrNull() ?: return "date des données inconnue"
+        return "données du ${d.dayOfMonth}${if (d.dayOfMonth == 1) "er" else ""} ${MONTHS[d.monthValue - 1]}"
     }
 }

@@ -38,6 +38,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import castbridge.core.lots.LotId
+import castbridge.core.lots.LotMeta
+import java.io.File
 import java.net.URLEncoder
 
 /**
@@ -59,8 +62,25 @@ fun LearnScreen() {
     }
 }
 
+/**
+ * What the lots framework (Données screen, synchronisation with the server, delivery to the TV) plugs into « Apprendre ».
+ * The defaults keep the tab fully usable offline with the lots already stored; nothing here needs Internet to be read.
+ */
+object LearnLotsHooks {
+    /** Lots offered by the server at the last synchronisation (kept on the phone, so it can be shown offline). */
+    @Volatile var catalog: () -> List<LotMeta> = { emptyList() }
+    /** Classes the TV reported holding at the last meeting. */
+    @Volatile var onTv: () -> Set<String> = { emptySet() }
+    /** Starts the download (or the update) of a class; null until the framework wires it: the screen then points to « Données ». */
+    @Volatile var download: ((LotId) -> Unit)? = null
+}
+
 private object PhoneLibrary {
-    val lib by lazy { LearnLibrary(listOf(EmbeddedLessonSource())) }
+    @Volatile private var lots: LearnLotConsumer? = null
+    /** The installed lots (filesDir/lots/learn): the lots framework installs the downloaded Apprendre lots with this consumer. */
+    @Synchronized fun lots(ctx: android.content.Context): LearnLotConsumer = lots ?: LearnLotConsumer(File(ctx.filesDir, "lots/learn")).also { lots = it }
+    /** Installed lots first, then the starter packs of the app: every class already on the phone reads without any network. */
+    fun lib(ctx: android.content.Context) = LearnLibrary(listOf(LearnLotSource(lots(ctx)), EmbeddedLessonSource()))
 }
 
 // ====================================================================== lessons on the phone
@@ -70,8 +90,11 @@ private fun LessonsTab() {
     var packId by rememberSaveable { mutableStateOf<String?>(null) }
     var lessonId by rememberSaveable { mutableStateOf<String?>(null) }
     var series by rememberSaveable { mutableStateOf<String?>(null) }   // "graded" | "self" | "exam"
-    val packs = remember { runCatching { PhoneLibrary.lib.packs() }.getOrDefault(emptyList()) }
-    val pack = packId?.let { id -> remember(id) { PhoneLibrary.lib.pack(id) } }
+    var scope by rememberSaveable { mutableStateOf<String?>(null) }    // « Mes classes »: the class whose packs are listed
+    val ctx = LocalContext.current
+    val lib = remember { PhoneLibrary.lib(ctx) }
+    val packs = remember { runCatching { lib.packs() }.getOrDefault(emptyList()) }
+    val pack = packId?.let { id -> remember(id) { lib.pack(id) } }
     val lesson = lessonId?.let { pack?.lesson(it) }
 
     if (pack != null && series != null) {
@@ -105,9 +128,10 @@ private fun LessonsTab() {
     }
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
         Text("Apprendre", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
-        Text("Fiches « l'essentiel », exemples résolus pas à pas et exercices corrigés. Le téléphone contient le socle (mathématiques de chaque examen et la maternelle) ; " +
-            "tous les packs se lisent sur la TV (onglet « Piloter la TV »).", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-        for (r in packs.sortedBy { LearnCatalog.level(it.manifest.level)?.order ?: 0 }) {
+        Text("Fiches « l'essentiel », exemples résolus pas à pas et exercices corrigés. Les classes téléchargées se lisent sans Internet ; " +
+            "elles se mettent à jour quand le téléphone est en ligne, puis passent sur la TV quand les deux se retrouvent.", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        MyClasses(PhoneLibrary.lots(ctx), scope) { scope = it }
+        for (r in packs.filter { scope == null || it.scope == scope }.sortedBy { LearnCatalog.level(it.manifest.level)?.order ?: 0 }) {
             val m = r.manifest
             Card(Modifier.fillMaxWidth().clickable { packId = m.id }) { Row(Modifier.padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
                 Box(Modifier.size(12.dp, 40.dp).background(Color(LearnCatalog.subject(m.subject)?.color ?: 0xFF1E88E5.toInt()), RoundedCornerShape(4.dp)))
@@ -115,6 +139,37 @@ private fun LessonsTab() {
                 Column { Text(m.title, fontWeight = FontWeight.SemiBold); Text("${LearnCatalog.level(m.level)?.label ?: m.level} · ${m.lessons} fiches · ${m.exercises} exercices", style = MaterialTheme.typography.bodySmall) }
             } }
         }
+    }
+}
+
+/** « Mes classes »: one card per class (lot) with its status, and the call to action when a class is not on the phone yet. */
+@Composable
+private fun MyClasses(lots: LearnLotConsumer, scope: String?, onScope: (String?) -> Unit) {
+    val installed = remember { lots.installedAll() }
+    val starter = remember { LearnLotCatalog(lots, EmbeddedLessonSource()).classes().filter { it.fromStarter }.associateBy { it.scope } }
+    val statuses = remember { LearnClassStatus.of(installed, LearnLotsHooks.catalog(), LearnLotsHooks.onTv()) }
+    val all = statuses + starter.values.filter { c -> statuses.none { it.scope == c.scope } }.map { LearnClassStatus(it.scope, it.title, null, null, null, null, null, false) }
+    Text("Mes classes", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+    if (scope != null) OutlinedButton(onClick = { onScope(null) }) { Text("Toutes les classes") }
+    for (c in all.sortedBy { LearnScopes.ladders.values.flatMap { l -> l.flatten() }.indexOf(it.scope).let { k -> if (k < 0) 99 else k } }) {
+        val action = c.action()
+        Card(Modifier.fillMaxWidth().clickable { onScope(c.scope) }) { Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(c.title, fontWeight = FontWeight.SemiBold, modifier = Modifier.weight(1f))
+                if (c.onTv) Text("sur la TV", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
+            }
+            Text(
+                when {
+                    c.downloaded -> "v${c.installedVersion} · ${LearnFormat.size(c.installedBytes ?: 0)} · ${LearnFormat.dataDate(c.dataDate)}" + if (c.updateAvailable) " · mise à jour disponible" else ""
+                    starter.containsKey(c.scope) -> "Aperçu inclus dans l'app"
+                    else -> "Pas encore sur ce téléphone"
+                }, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            if (action != null) {
+                val dl = LearnLotsHooks.download
+                if (dl != null) Button(onClick = { dl(LotId("learn", c.scope)) }) { Text(action) }
+                else Text("$action (écran Données)", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.tertiary)
+            }
+        } }
     }
 }
 
@@ -338,6 +393,7 @@ private fun enc(s: String) = URLEncoder.encode(s, "UTF-8")
 @Composable
 private fun RemoteTab() {
     val scope = rememberCoroutineScope()
+    val ctx = LocalContext.current
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
         Text("Piloter « Apprendre » sur la TV", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
         Text("Mode classe : la leçon s'affiche en grand sur la TV, vous tournez les pages et faites répondre la classe d'ici.", style = MaterialTheme.typography.bodySmall)
@@ -382,10 +438,11 @@ private fun RemoteTab() {
                     }
                 } }
                 Text("Ouvrir une fiche sur la TV", style = MaterialTheme.typography.titleMedium)
-                val packs = remember { runCatching { PhoneLibrary.lib.packs() }.getOrDefault(emptyList()) }
+                val lib = remember { PhoneLibrary.lib(ctx) }
+                val packs = remember { runCatching { lib.packs() }.getOrDefault(emptyList()) }
                 var pick by remember { mutableStateOf<String?>(null) }
                 packs.forEach { r -> TextButton(onClick = { pick = if (pick == r.id) null else r.id }) { Text(r.manifest.title) }
-                    if (pick == r.id) PhoneLibrary.lib.pack(r.id)?.lessons?.forEach { l -> Text("   • " + l.title, Modifier.fillMaxWidth().clickable { cmd("action=lesson&pack=${enc(r.id)}&lesson=${enc(l.id)}") }.padding(6.dp)) } }
+                    if (pick == r.id) lib.pack(r.id)?.lessons?.forEach { l -> Text("   • " + l.title, Modifier.fillMaxWidth().clickable { cmd("action=lesson&pack=${enc(r.id)}&lesson=${enc(l.id)}") }.padding(6.dp)) } }
             }
             if (msg.isNotEmpty()) Text(msg, color = MaterialTheme.colorScheme.error)
         }

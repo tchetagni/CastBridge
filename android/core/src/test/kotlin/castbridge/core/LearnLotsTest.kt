@@ -405,6 +405,17 @@ class LearnLotsTest {
         assertFalse(LearnProgress(s).lessonUpdated("p1", "L", "anything"), "an old record without hash is never flagged")
     }
 
+    @Test fun frenchWordingOfSizesAndFreshness() {
+        assertEquals("77 Ko", LearnFormat.size(78_638)); assertEquals("4,2 Mo", LearnFormat.size(4_400_000)); assertEquals("900 o", LearnFormat.size(900))
+        assertEquals("données du 12 sept.", LearnFormat.dataDate("2026-09-12")); assertEquals("données du 1er oct.", LearnFormat.dataDate("2026-10-01"))
+        assertEquals("date des données inconnue", LearnFormat.dataDate(null))
+        val s = LearnClassStatus("3e", "3e – BEPC", null, null, null, 2, 4_400_000, false)
+        assertEquals("Télécharger 3e – BEPC : 4,2 Mo", s.action())
+        assertEquals("Mettre à jour 3e – BEPC : 4,2 Mo", s.copy(installedVersion = 1, installedBytes = 5).action())
+        assertNull(s.copy(installedVersion = 2, availableVersion = 2).action())
+        for (t in listOf(s.action(), LearnFormat.dataDate("2026-10-01"))) assertFalse(t!!.contains("nternet"), "no message implies Internet")
+    }
+
     // ---- review report ----
     @Test fun reviewReportIsUpToDate() {
         val doc = File(content, "../../docs/LEARN-REVIEW.md")

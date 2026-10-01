@@ -5,6 +5,8 @@ import android.content.Intent
 import castbridge.core.learn.DirectoryLessonSource
 import castbridge.core.learn.EmbeddedLessonSource
 import castbridge.core.learn.LearnApi
+import castbridge.core.learn.LearnLotConsumer
+import castbridge.core.learn.LearnLotSource
 import castbridge.core.learn.LearnLibrary
 import castbridge.core.learn.LearnProgress
 import castbridge.core.learn.LearnStore
@@ -72,7 +74,19 @@ object LearnHub {
         return if (i > 0) File(p.substring(0, i)).takeIf { runCatching { File(it, "CastBridge/Packs").canRead() }.getOrDefault(false) } else null
     }
 
-    @Synchronized fun library(): LearnLibrary = lib ?: LearnLibrary(listOf(DirectoryLessonSource(::packDirs), EmbeddedLessonSource())).also { lib = it }
+    @Volatile private var lots: LearnLotConsumer? = null
+
+    /**
+     * The installed « Apprendre » lots (one folder per class in filesDir/lots/learn). Lots arrive from the phone whenever it can
+     * talk to the TV (the lots framework installs them with this consumer): the TV never needs Internet. Read first, then the
+     * packs of a drive, then the starter packs of the APK.
+     */
+    @Synchronized fun lots(): LearnLotConsumer = lots ?: LearnLotConsumer(File(app!!.filesDir, "lots/learn")).also { lots = it }
+
+    /** Content hash of a lesson in the installed lots (null = starter/loose pack): detects « mise à jour » after a lot update. */
+    fun lessonHash(lesson: String): String? = runCatching { lots().lessonHash(lesson) }.getOrNull()
+
+    @Synchronized fun library(): LearnLibrary = lib ?: LearnLibrary(listOf(LearnLotSource(lots()), DirectoryLessonSource(::packDirs), EmbeddedLessonSource())).also { lib = it }
 
     /** Where a new pack can be written, with the free space (USB drive first, then the TV). */
     fun installTargets(): List<PackInstaller.Target> = packDirs().filter { !it.second.absolutePath.contains("(racine)") }
