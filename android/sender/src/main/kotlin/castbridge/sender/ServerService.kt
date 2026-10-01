@@ -19,7 +19,7 @@ class ServerService : Service() {
         val nm = getSystemService(NotificationManager::class.java)
         nm.createNotificationChannel(NotificationChannel("cast", "Diffusion", NotificationManager.IMPORTANCE_LOW))
         val n = Notification.Builder(this, "cast").setContentTitle("CastBridge")
-            .setContentText("Diffusion en cours").setSmallIcon(android.R.drawable.ic_media_play).build()
+            .setContentText("Diffusion en cours").setSmallIcon(R.drawable.ic_stat_castbridge).build()
         startForeground(1, n)
         if (server == null) {
             try {

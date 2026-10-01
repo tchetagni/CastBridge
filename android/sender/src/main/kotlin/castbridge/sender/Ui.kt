@@ -1,5 +1,7 @@
 package castbridge.sender
 
+import androidx.annotation.DrawableRes
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -13,9 +15,41 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.luminance
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+
+/** A logo of the charte (VectorDrawable generated from branding/logo), [height] high, width from its own aspect ratio. */
+@Composable
+fun CbLogo(@DrawableRes res: Int, height: Dp, modifier: Modifier = Modifier, description: String? = null) =
+    Image(painterResource(res), description, modifier.height(height), contentScale = ContentScale.Fit)
+
+/** « CastBridge » wordmark + symbol, in the variant that reads on the current theme (dark or light background). */
+@Composable
+fun CastBridgeLogo(height: Dp, modifier: Modifier = Modifier) =
+    CbLogo(if (MaterialTheme.colorScheme.background.luminance() < 0.5f) R.drawable.logo_castbridge_logo_horizontal else R.drawable.logo_castbridge_logo_horizontal_light,
+        height, modifier, "CastBridge")
+
+/** An icon of the charte as an [androidx.compose.ui.graphics.vector.ImageVector] (for APIs that take a vector). */
+@Composable
+fun cbv(@DrawableRes res: Int) = androidx.compose.ui.graphics.vector.ImageVector.Companion.vectorResource(res)
+
+/** An icon of the charte (branding/icons, 24 grid, 1.8 stroke), tinted like any [Icon]. */
+@Composable
+fun CbIcon(@DrawableRes res: Int, description: String? = null, modifier: Modifier = Modifier, tint: Color = LocalContentColor.current) =
+    Icon(painterResource(res), description, modifier, tint)
+
+/** Thin band with the sub-brand's own logo (its palette is part of the logo, the rest of the screen stays in the app theme). */
+@Composable
+fun SubBrandHeader(@DrawableRes logo: Int, name: String) {
+    Box(Modifier.fillMaxWidth().background(MaterialTheme.colorScheme.surface).padding(horizontal = 16.dp, vertical = 6.dp)) {
+        CbLogo(logo, 40.dp, description = name)
+    }
+}
 
 fun fmtTime(ms: Long): String {
     val s = ms / 1000
@@ -36,9 +70,9 @@ fun SectionHeader(text: String, action: (@Composable () -> Unit)? = null) {
 fun Artwork(size: Dp, modifier: Modifier = Modifier) {
     Box(
         modifier.size(size).clip(RoundedCornerShape(size / 8))
-            .background(Brush.linearGradient(listOf(Color(0xFF1F6F8B), Color(0xFF12384A)))),
+            .background(Brush.linearGradient(listOf(MaterialTheme.colorScheme.surfaceVariant, MaterialTheme.colorScheme.surface))),
         contentAlignment = Alignment.Center,
-    ) { Icon(Icons.Filled.Movie, null, Modifier.size(size / 2), tint = Color.White.copy(alpha = 0.85f)) }
+    ) { Icon(Icons.Filled.Movie, null, Modifier.size(size / 2), tint = MaterialTheme.colorScheme.primary) }
 }
 
 @Composable
@@ -69,7 +103,7 @@ fun MiniPlayer(title: String, subtitle: String, playing: Boolean, progress: Floa
                     Text(subtitle, maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
-                IconButton(onToggle) { Icon(if (playing) Icons.Filled.Pause else Icons.Filled.PlayArrow, "Lecture / pause") }
+                IconButton(onToggle) { Icon(if (playing) cbv(R.drawable.ic_cb_pause) else cbv(R.drawable.ic_cb_lecture), "Lecture / pause") }
                 IconButton(onStop) { Icon(Icons.Filled.Stop, "Stop") }
             }
         }
@@ -99,16 +133,16 @@ fun NowPlayingSheet(title: String, subtitle: String, playing: Boolean, posMs: Lo
                 }
             }
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                IconButton({ onSkip(-10) }) { Icon(Icons.Filled.Replay10, "-10 s", Modifier.size(32.dp)) }
+                IconButton({ onSkip(-10) }) { Icon(cbv(R.drawable.ic_cb_recul_10s), "-10 s", Modifier.size(32.dp)) }
                 FilledIconButton(onToggle, Modifier.size(72.dp)) {
-                    Icon(if (playing) Icons.Filled.Pause else Icons.Filled.PlayArrow, "Lecture / pause", Modifier.size(40.dp))
+                    Icon(if (playing) cbv(R.drawable.ic_cb_pause) else cbv(R.drawable.ic_cb_lecture), "Lecture / pause", Modifier.size(40.dp))
                 }
-                IconButton({ onSkip(10) }) { Icon(Icons.Filled.Forward10, "+10 s", Modifier.size(32.dp)) }
+                IconButton({ onSkip(10) }) { Icon(cbv(R.drawable.ic_cb_avance_10s), "+10 s", Modifier.size(32.dp)) }
             }
             Row {
                 TextButton(onStop) { Icon(Icons.Filled.Stop, null); Spacer(Modifier.width(8.dp)); Text("Arrêter") }
                 onSettings?.let { TextButton(it) { Icon(Icons.Filled.Tune, null); Spacer(Modifier.width(8.dp)); Text("Réglages") } }
-                onRemote?.let { TextButton(it) { Icon(Icons.Filled.SettingsRemote, null); Spacer(Modifier.width(8.dp)); Text("Télécommande") } }
+                onRemote?.let { TextButton(it) { Icon(cbv(R.drawable.ic_cb_telecommande), null); Spacer(Modifier.width(8.dp)); Text("Télécommande") } }
             }
         }
     }

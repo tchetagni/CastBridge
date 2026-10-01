@@ -56,7 +56,7 @@ fun DownloadsEntry(client: TvClient) {
     ListItem(
         modifier = Modifier.clickable { PhoneConnect.feature("downloads", "menu"); open = true },
         colors = ListItemDefaults.colors(containerColor = MaterialTheme.colorScheme.background),
-        leadingContent = { Icon(Icons.Filled.Download, null, tint = MaterialTheme.colorScheme.primary) },
+        leadingContent = { Icon(cbv(R.drawable.ic_cb_telechargements), null, tint = MaterialTheme.colorScheme.primary) },
         headlineContent = { Text("Téléchargements sur la TV") },
         supportingContent = { Text("La TV télécharge elle-même un lien ou un torrent, même téléphone éteint.") },
         trailingContent = { Icon(Icons.Filled.ChevronRight, null) },
@@ -199,7 +199,7 @@ fun DownloadsScreen(dc: DownloadsClient, onClose: () -> Unit, initialLink: Strin
                                 val note = withContext(Dispatchers.IO) { dc.add(l) }
                                 link = ""; message = note ?: "C'est parti : la TV télécharge."
                             }
-                        }) { Icon(Icons.Filled.Download, null); Spacer(Modifier.width(8.dp)); Text("Télécharger sur la TV") }
+                        }) { Icon(cbv(R.drawable.ic_cb_telechargements), null); Spacer(Modifier.width(8.dp)); Text("Télécharger sur la TV") }
                         OutlinedButton(enabled = !busy && s?.warningAccepted == true,
                             onClick = { torrentPicker.launch(arrayOf("application/x-bittorrent", "application/metalink4+xml", "application/octet-stream", "*/*")) }) {
                             Text(".torrent")
@@ -229,7 +229,7 @@ fun DownloadsScreen(dc: DownloadsClient, onClose: () -> Unit, initialLink: Strin
                             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                                 d.files.firstOrNull()?.let { f ->
                                     Button(onClick = { run { withContext(Dispatchers.IO) { dc.play(f) }; message = "Lecture lancée sur la TV." } }) {
-                                        Icon(Icons.Filled.PlayArrow, null); Spacer(Modifier.width(6.dp)); Text("Regarder sur la TV")
+                                        Icon(cbv(R.drawable.ic_cb_lecture), null); Spacer(Modifier.width(6.dp)); Text("Regarder sur la TV")
                                     }
                                 }
                                 TextButton(onClick = { removeOf = d.id to d.name }) { Text("Supprimer") }
@@ -291,8 +291,8 @@ private fun TaskCard(t: DownloadsClient.Task, onPause: () -> Unit, onResume: () 
                 color = if (bad) cs.error else cs.onSurfaceVariant)
             t.error?.let { Text(it, style = MaterialTheme.typography.bodySmall, color = if (bad) cs.error else cs.onSurfaceVariant) }
             Row(horizontalArrangement = Arrangement.spacedBy(4.dp), verticalAlignment = Alignment.CenterVertically) {
-                if (t.canPause) IconButton(onClick = onPause) { Icon(Icons.Filled.Pause, "Pause") }
-                if (t.canResume) IconButton(onClick = onResume) { Icon(if (t.state == "error") Icons.Filled.Refresh else Icons.Filled.PlayArrow, "Reprendre") }
+                if (t.canPause) IconButton(onClick = onPause) { Icon(cbv(R.drawable.ic_cb_pause), "Pause") }
+                if (t.canResume) IconButton(onClick = onResume) { Icon(if (t.state == "error") Icons.Filled.Refresh else cbv(R.drawable.ic_cb_lecture), "Reprendre") }
                 if (t.state == "queued" || t.state == "paused") IconButton(onClick = onTop) { Icon(Icons.Filled.VerticalAlignTop, "Passer en premier") }
                 if (t.files > 1) TextButton(onClick = onFiles) { Text("Fichiers (${t.files})") }
                 if (t.canPause) TextButton(onClick = onLimit) { Text("Vitesse") }

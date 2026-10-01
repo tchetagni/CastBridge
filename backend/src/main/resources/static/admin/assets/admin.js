@@ -10,9 +10,9 @@ document.addEventListener('submit', function (e) {
 // Charts: each <canvas data-chart="{…}"> carries its data (HTML-escaped JSON), drawn with the local Chart.js.
 document.addEventListener('DOMContentLoaded', function () {
   if (!window.Chart) return;
-  var palette = ['#4ea1ff', '#3ecf8e', '#f5b841', '#ff6b6b', '#b388ff', '#4dd0e1', '#ff9f68', '#a3e635'];
-  Chart.defaults.color = '#8b95a3';
-  Chart.defaults.borderColor = '#2a3039';
+  var palette = ['#F5B025', '#35C08A', '#6CB6FF', '#FF6B6B', '#FF8A3D', '#27C7B0', '#3B82F6', '#F2C14E'];
+  Chart.defaults.color = '#B7C0D4';
+  Chart.defaults.borderColor = '#2A3550';
   Chart.defaults.font.family = 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif';
   document.querySelectorAll('canvas[data-chart]').forEach(function (canvas) {
     var spec;

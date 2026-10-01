@@ -59,11 +59,11 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
     private val dp = { v: Int -> TvStyle.dp(act, v) }
     private val bg = ImageView(act).apply { scaleType = ImageView.ScaleType.CENTER_CROP; alpha = 0.5f }
     private val zoom = SlowZoom(bg)
-    private val heroTitle = TextView(act).apply { setTextColor(Color.WHITE); textSize = 34f; typeface = Typeface.DEFAULT_BOLD; maxLines = 1; ellipsize = TextUtils.TruncateAt.END }
-    private val heroSub = TextView(act).apply { setTextColor(0xFFDDE3EA.toInt()); textSize = 17f; maxLines = 2 }
+    private val heroTitle = TextView(act).apply { setTextColor(Color.WHITE); textSize = 34f; typeface = TvFonts.bold; maxLines = 1; ellipsize = TextUtils.TruncateAt.END }
+    private val heroSub = TextView(act).apply { setTextColor(TvStyle.TEXT2); textSize = TvStyle.Type.BODY; maxLines = 2 }
     private val chip = TextView(act).apply {
-        setTextColor(Color.WHITE); textSize = 15f; isFocusable = true; isClickable = true
-        setPadding(dp(14), dp(6), dp(14), dp(6)); background = TvStyle.rounded(act, 0x99000000.toInt(), 20)
+        setTextColor(Color.WHITE); textSize = TvStyle.Type.CAPTION; isFocusable = true; isClickable = true
+        setPadding(dp(14), dp(6), dp(14), dp(6)); background = TvStyle.rounded(act, 0x99000000.toInt(), TvStyle.R_XL)
     }
     // Room inside the scroll area for the focus zoom (+10 %) of the first/last cards, so nothing is cut off.
     private val rowsBox = LinearLayout(act).apply { orientation = LinearLayout.VERTICAL; setPadding(dp(8), dp(18), dp(8), dp(60)); clipChildren = false; clipToPadding = false }
@@ -81,13 +81,13 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
         val root = FrameLayout(act).apply { setBackgroundColor(TvStyle.BG) }
         root.addView(bg, FrameLayout.LayoutParams(-1, -1))
         // Legibility: dark from the left and from the bottom, over the picture.
-        root.addView(View(act).apply { background = GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, intArrayOf(0xF00E1116.toInt(), 0x800E1116.toInt(), 0x300E1116)) }, FrameLayout.LayoutParams(-1, -1))
-        root.addView(View(act).apply { background = GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, intArrayOf(0x000E1116, 0xC00E1116.toInt(), 0xFF0E1116.toInt())) }, FrameLayout.LayoutParams(-1, -1))
+        root.addView(View(act).apply { background = GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, intArrayOf(0xF00A0F1E.toInt(), 0x800A0F1E.toInt(), 0x300A0F1E)) }, FrameLayout.LayoutParams(-1, -1))
+        root.addView(View(act).apply { background = GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, intArrayOf(0x000A0F1E, 0xC00A0F1E.toInt(), TvStyle.BG)) }, FrameLayout.LayoutParams(-1, -1))
         // clipChildren = true: Android clips each child to ITS OWN bounds only when the PARENT asks for it. Without it the
         // scroll area drew its scrolled-out rows over the title (texts piled up while scrolling on 720p TVs).
         val content = LinearLayout(act).apply { orientation = LinearLayout.VERTICAL; setPadding(dp(56), dp(28), dp(40), 0); clipChildren = true }
         val top = LinearLayout(act).apply { orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER_VERTICAL }
-        top.addView(TextView(act).apply { text = "CastBridge"; textSize = 26f; typeface = Typeface.DEFAULT_BOLD; setTextColor(TvStyle.ACCENT) })
+        top.addView(TvStyle.logo(act, R.drawable.logo_castbridge_tv_horizontal, 52).apply { contentDescription = "CastBridge TV" })
         top.addView(View(act), LinearLayout.LayoutParams(0, 1, 1f))
         top.addView(chip, LinearLayout.LayoutParams(-2, -2).apply { rightMargin = dp(20) })
         top.addView(TextClock(act).apply { format24Hour = "HH:mm"; format12Hour = "HH:mm"; textSize = 30f; setTextColor(Color.WHITE) })
@@ -100,7 +100,7 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
         root.addView(content, FrameLayout.LayoutParams(-1, -1))
         container.addView(root, FrameLayout.LayoutParams(-1, -1))
         chip.setOnClickListener { revealUntil = System.currentTimeMillis() + 10_000; refreshStatus() }
-        TvStyle.focusZoom(chip, 1.05f)
+        TvStyle.focusZoom(chip)
     }
 
     private val tick = object : Runnable { override fun run() { if (visible) { reload(); refreshTools(); main.postDelayed(this, 4000) } } }
@@ -149,7 +149,7 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
             // Tools first: every feature (Internet test, USB, Bluetooth, quiz…) is visible without scrolling.
             toolsRow = tools().also { rowsBox.addView(it) }
             for ((title, _) in wanted) {
-                val h = TextView(act).apply { setTextColor(Color.WHITE); textSize = 21f; typeface = Typeface.DEFAULT_BOLD; setPadding(dp(10), dp(14), 0, 0) }
+                val h = TextView(act).apply { setTextColor(Color.WHITE); textSize = 21f; typeface = TvFonts.bold; setPadding(dp(10), dp(14), 0, 0) }
                 val a = RowAdapter(title)
                 val rv = RecyclerView(act).apply {
                     layoutManager = LinearLayoutManager(act, LinearLayoutManager.HORIZONTAL, false)
@@ -181,7 +181,7 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
     private fun tools(): View {
         val w = dp(170)
         val box = LinearLayout(act).apply { orientation = LinearLayout.HORIZONTAL; setPadding(dp(4), dp(8), 0, 0); clipChildren = false }
-        val title = TextView(act).apply { text = "Outils et fonctions"; setTextColor(0xFFDDE3EA.toInt()); textSize = 20f; typeface = Typeface.DEFAULT_BOLD; setPadding(dp(14), dp(4), 0, 0) }
+        val title = TextView(act).apply { text = "Outils et fonctions"; setTextColor(TvStyle.TEXT2); textSize = 20f; typeface = TvFonts.bold; setPadding(dp(14), dp(4), 0, 0) }
         fillTools(box)
         return LinearLayout(act).apply {
             orientation = LinearLayout.VERTICAL; clipChildren = false
@@ -194,9 +194,9 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
     private fun fillTools(box: LinearLayout) {
         val w = dp(170)
         val list = api.tools().ifEmpty {
-            listOf(HomeTool(R.drawable.ic_t_library, "Bibliothèque", "Toutes vos vidéos et vos fichiers, en grille.", null, false) { api.openLibrary() },
-                HomeTool(R.drawable.ic_t_settings, "Connexion & réglages", "Code, adresse, Bluetooth, stockage…", null, false) { api.openSettings() },
-                HomeTool(R.drawable.ic_t_help, "Aide", "Comment envoyer une vidéo depuis le téléphone.", null, false) { api.openHelp() })
+            listOf(HomeTool(R.drawable.ic_cb_bibliotheque, "Bibliothèque", "Toutes vos vidéos et vos fichiers, en grille.", null, false) { api.openLibrary() },
+                HomeTool(R.drawable.ic_cb_reglages, "Connexion & réglages", "Code, adresse, Bluetooth, stockage…", null, false) { api.openSettings() },
+                HomeTool(R.drawable.ic_cb_aide, "Aide", "Comment envoyer une vidéo depuis le téléphone.", null, false) { api.openHelp() })
         }
         toolsSig = list.joinToString("|") { "${it.label}:${it.status}:${it.on}" }
         val focusedIndex = (0 until box.childCount).firstOrNull { box.getChildAt(it).hasFocus() }
@@ -254,7 +254,7 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
             val card = MediaCard(parent.context, dp(220))
             card.layoutParams = RecyclerView.LayoutParams(dp(220), ViewGroup.LayoutParams.WRAP_CONTENT).apply { setMargins(dp(10), dp(10), dp(10), dp(10)) }
             val h = object : RecyclerView.ViewHolder(card) {}
-            TvStyle.focusZoom(card, 1.1f) { has -> if (has) card.item?.let { describe(it) } }
+            TvStyle.focusZoom(card) { has -> if (has) card.item?.let { describe(it) } }
             card.setOnClickListener { val p = h.bindingAdapterPosition; if (p >= 0) api.open(list[p], list, p) }
             card.setOnLongClickListener { val p = h.bindingAdapterPosition; if (p >= 0) api.actions(list[p], list, p); true }
             card.setOnKeyListener { _, code, ev ->
@@ -279,12 +279,15 @@ class SettingsPanel(private val act: Activity, private val container: FrameLayou
     fun show(info: List<Pair<String, String>>, actions: List<Pair<String, () -> Unit>>) {
         container.removeAllViews()
         val root = LinearLayout(act).apply {
-            orientation = LinearLayout.HORIZONTAL; setBackgroundColor(0xF20E1116.toInt()); setPadding(dp(56), dp(40), dp(56), dp(30))
+            orientation = LinearLayout.HORIZONTAL; setBackgroundColor(TvStyle.BG); setPadding(dp(56), dp(40), dp(56), dp(30))
         }
         val left = LinearLayout(act).apply { orientation = LinearLayout.VERTICAL }
-        left.addView(TextView(act).apply { text = "Connexion & réglages"; textSize = 30f; typeface = Typeface.DEFAULT_BOLD; setTextColor(Color.WHITE) })
+        left.addView(TvStyle.logo(act, R.drawable.logo_castbridge_tv_horizontal, 48).apply { contentDescription = "CastBridge TV"
+            (layoutParams as LinearLayout.LayoutParams).bottomMargin = dp(4) })
+        left.addView(TextView(act).apply { text = "À propos · version ${BuildConfig.VERSION_NAME} · code ${BuildConfig.VERSION_CODE}"; textSize = TvStyle.Type.CAPTION; setTextColor(TvStyle.MUTED); setPadding(0, 0, 0, dp(8)) })
+        left.addView(TextView(act).apply { text = "Connexion & réglages"; textSize = 30f; typeface = TvFonts.bold; setTextColor(Color.WHITE) })
         for ((k, v) in info) {
-            left.addView(TextView(act).apply { text = k; textSize = 14f; setTextColor(TvStyle.MUTED); setPadding(0, dp(14), 0, 0) })
+            left.addView(TextView(act).apply { text = k; textSize = TvStyle.Type.CAPTION; setTextColor(TvStyle.MUTED); setPadding(0, dp(14), 0, 0) })
             left.addView(TextView(act).apply { text = v; textSize = 19f; setTextColor(Color.WHITE) })
         }
         root.addView(ScrollView(act).apply { addView(left) }, LinearLayout.LayoutParams(0, -1, 1f))
@@ -292,11 +295,11 @@ class SettingsPanel(private val act: Activity, private val container: FrameLayou
         var first: View? = null
         for ((label, f) in actions) {
             val b = TextView(act).apply {
-                text = label; textSize = 18f; setTextColor(Color.WHITE); isFocusable = true; isClickable = true
+                text = label; textSize = TvStyle.Type.BODY; setTextColor(Color.WHITE); isFocusable = true; isClickable = true
                 setPadding(dp(18), dp(12), dp(18), dp(12))
                 background = android.graphics.drawable.StateListDrawable().apply {
-                    addState(intArrayOf(android.R.attr.state_focused), TvStyle.rounded(act, TvStyle.CARD_FOCUS, 10, TvStyle.ACCENT, 2))
-                    addState(intArrayOf(), TvStyle.rounded(act, 0x00000000, 10))
+                    addState(intArrayOf(android.R.attr.state_focused), TvStyle.rounded(act, TvStyle.CARD_FOCUS, TvStyle.R_MD, TvStyle.RING, 3))
+                    addState(intArrayOf(), TvStyle.rounded(act, 0x00000000, TvStyle.R_MD))
                 }
                 setOnClickListener { f() }
             }

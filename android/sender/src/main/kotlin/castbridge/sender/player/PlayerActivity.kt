@@ -33,6 +33,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.media3.common.C
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
+import castbridge.sender.R
 import castbridge.core.phone.MediaKind
 import castbridge.core.phone.ResumeBook
 import castbridge.sender.CastTheme
@@ -233,7 +234,7 @@ class PlayerActivity : ComponentActivity() {
         } else Rational(16, 9)
         val playing = player?.isPlaying == true
         val pi = PendingIntent.getBroadcast(this, 0, Intent(ACTION_PIP_TOGGLE).setPackage(packageName), PendingIntent.FLAG_IMMUTABLE)
-        val action = RemoteAction(Icon.createWithResource(this, if (playing) android.R.drawable.ic_media_pause else android.R.drawable.ic_media_play),
+        val action = RemoteAction(Icon.createWithResource(this, if (playing) R.drawable.ic_cb_pause else R.drawable.ic_cb_lecture),
             if (playing) "Pause" else "Lecture", if (playing) "Pause" else "Lecture", pi)
         val b = PictureInPictureParams.Builder().setAspectRatio(ratio).setActions(listOf(action))
         if (Build.VERSION.SDK_INT >= 31) b.setAutoEnterEnabled(playing && currentIsVideo()).setSeamlessResizeEnabled(true)

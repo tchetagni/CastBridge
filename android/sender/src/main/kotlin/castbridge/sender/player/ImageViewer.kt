@@ -1,5 +1,7 @@
 package castbridge.sender.player
 
+import castbridge.sender.cbv
+
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -80,11 +82,11 @@ fun ImageViewer(act: PlayerActivity, items: List<PlayItem>, start: Int) {
                 IconButton({ act.finish() }) { Icon(Icons.AutoMirrored.Filled.ArrowBack, "Retour", tint = Color.White) }
                 Column(Modifier.weight(1f)) {
                     Text(current?.name ?: "", color = Color.White, maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.titleMedium)
-                    if (items.size > 1) Text("${pager.currentPage + 1} / ${items.size}", color = Color(0xFFBBBBBB), style = MaterialTheme.typography.labelSmall)
+                    if (items.size > 1) Text("${pager.currentPage + 1} / ${items.size}", color = Color(castbridge.core.brand.BrandTokens.Dark.TEXT_MEDIUM), style = MaterialTheme.typography.labelSmall)
                 }
-                IconButton({ castOpen = true }) { Icon(Icons.Filled.Cast, "Caster", tint = Color.White) }
+                IconButton({ castOpen = true }) { Icon(cbv(castbridge.sender.R.drawable.ic_cb_caster), "Caster", tint = Color.White) }
                 if (items.size > 1) IconButton({ slideshow = !slideshow; if (slideshow) chrome = false }) {
-                    Icon(if (slideshow) Icons.Filled.Pause else Icons.Filled.Slideshow, "Diaporama", tint = Color.White)
+                    Icon(if (slideshow) cbv(castbridge.sender.R.drawable.ic_cb_pause) else Icons.Filled.Slideshow, "Diaporama", tint = Color.White)
                 }
             }
         }
@@ -92,7 +94,7 @@ fun ImageViewer(act: PlayerActivity, items: List<PlayItem>, start: Int) {
             if (r.item.kind == castbridge.core.phone.MediaKind.IMAGE) Surface(Modifier.align(Alignment.BottomCenter).navigationBarsPadding().padding(16.dp),
                 color = MaterialTheme.colorScheme.surface.copy(alpha = 0.92f), contentColor = MaterialTheme.colorScheme.onSurface, shape = MaterialTheme.shapes.large) {
                 Row(Modifier.padding(horizontal = 16.dp, vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
-                    Icon(Icons.Filled.CastConnected, null, tint = MaterialTheme.colorScheme.primary); Spacer(Modifier.width(8.dp))
+                    Icon(cbv(castbridge.sender.R.drawable.ic_cb_caster), null, tint = MaterialTheme.colorScheme.primary); Spacer(Modifier.width(8.dp))
                     Text(r.message ?: "Affiché sur ${r.target.name}", Modifier.weight(1f, fill = false), style = MaterialTheme.typography.bodyMedium)
                     TextButton({ if (r.tvHasIt || r.phase == Remote.Phase.STARTING) CastSession.stop(ctx) else CastSession.dismiss(ctx) }) { Text(if (r.phase == Remote.Phase.FAILED) "Fermer" else "Arrêter") }
                 }

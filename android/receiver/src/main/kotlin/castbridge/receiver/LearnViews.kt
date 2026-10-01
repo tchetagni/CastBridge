@@ -44,7 +44,7 @@ class LearnStyle(val act: Activity) {
     fun size(tv: TextView, v: Float) = tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, v * u * scale)
 
     fun text(s: CharSequence, size: Float = 26f, color: Int = Color.WHITE, bold: Boolean = false, lines: Int = 0): TextView = TextView(act).apply {
-        text = s; setTextColor(color); size(this, size); if (bold) typeface = Typeface.DEFAULT_BOLD
+        text = s; setTextColor(color); size(this, size); if (bold) typeface = TvFonts.bold
         if (lines > 0) { maxLines = lines; ellipsize = TextUtils.TruncateAt.END }
         setLineSpacing(0f, 1.12f); includeFontPadding = true
     }
@@ -57,8 +57,8 @@ class LearnStyle(val act: Activity) {
     fun focusable(v: View, fill: Int = CARD, radius: Float = 14f) {
         v.isFocusable = true; v.isFocusableInTouchMode = true; v.isClickable = true
         v.background = StateListDrawable().apply {
-            addState(intArrayOf(android.R.attr.state_focused), rounded(FOCUS, radius, ACCENT, 4f))
-            addState(intArrayOf(android.R.attr.state_pressed), rounded(FOCUS, radius, ACCENT, 4f))
+            addState(intArrayOf(android.R.attr.state_focused), rounded(FOCUS, radius, RING, 3f))
+            addState(intArrayOf(android.R.attr.state_pressed), rounded(FOCUS, radius, RING, 3f))
             addState(intArrayOf(), rounded(fill, radius))
         }
     }
@@ -120,19 +120,21 @@ class LearnStyle(val act: Activity) {
     }
 
     companion object {
-        const val BG = 0xFF0E1116.toInt()
-        const val CARD = 0xFF1B2230.toInt()
-        const val FOCUS = 0xFF2B3A52.toInt()
-        const val ACCENT = 0xFF33B5E5.toInt()
-        const val MUTED = 0xFFB4BCC8.toInt()
-        const val GOOD = 0xFF43A047.toInt()
-        const val BAD = 0xFFE53935.toInt()
-        const val GOLD = 0xFFFFC107.toInt()
+        private val A = castbridge.core.brand.BrandTokens.Apprendre
+        const val BG = castbridge.core.brand.BrandTokens.Apprendre.BACKGROUND
+        const val CARD = castbridge.core.brand.BrandTokens.Apprendre.SURFACE
+        const val FOCUS = 0xFF1B2E66.toInt()             // surface lightened, under the 3 dp focus ring
+        const val RING = castbridge.core.brand.BrandTokens.Dark.FOCUS_RING
+        const val ACCENT = castbridge.core.brand.BrandTokens.Apprendre.PRIMARY
+        const val MUTED = castbridge.core.brand.BrandTokens.Dark.TEXT_MEDIUM
+        const val GOOD = castbridge.core.brand.BrandTokens.Semantic.SUCCESS_LIGHT
+        const val BAD = castbridge.core.brand.BrandTokens.Semantic.ERROR_LIGHT
+        const val GOLD = castbridge.core.brand.BrandTokens.Apprendre.SECONDARY
         const val PAPER = 0xFFFDFCF7.toInt()
         val BOX: Map<String, Int> = mapOf(
-            "definition" to 0xFF1E88E5.toInt(), "propriete" to 0xFF1E88E5.toInt(), "formule" to 0xFF1E88E5.toInt(),
-            "retenir" to 0xFF43A047.toInt(), "methode" to 0xFF8E24AA.toInt(), "attention" to 0xFFF4511E.toInt(),
-            "pieges" to 0xFFF4511E.toInt(), "objectifs" to 0xFF00ACC1.toInt(),
+            "definition" to A.PRIMARY, "propriete" to A.PRIMARY, "formule" to A.PRIMARY,
+            "retenir" to castbridge.core.brand.BrandTokens.Semantic.SUCCESS_DARK, "methode" to A.ACCENT, "attention" to castbridge.core.brand.BrandTokens.Semantic.ERROR_DARK,
+            "pieges" to castbridge.core.brand.BrandTokens.Semantic.ERROR_DARK, "objectifs" to A.SECONDARY,
         )
         val BOX_LABEL: Map<String, String> = mapOf(
             "definition" to "Définition", "propriete" to "Propriété", "formule" to "Formule", "retenir" to "À retenir",
@@ -207,7 +209,7 @@ class FigureView(ctx: Context, private val scene: Scene) : View(ctx) {
                         stroke.pathEffect = if (op.dash) DashPathEffect(floatArrayOf(f(6.0), f(5.0)), 0f) else null
                         c.drawPath(p, stroke); stroke.pathEffect = null }
                 }
-                is Op.Text -> { txt.color = op.color; txt.textSize = f(op.size); txt.typeface = if (op.bold) Typeface.DEFAULT_BOLD else Typeface.DEFAULT
+                is Op.Text -> { txt.color = op.color; txt.textSize = f(op.size); txt.typeface = if (op.bold) TvFonts.bold else TvFonts.body
                     txt.textAlign = when (op.anchor) { "start" -> Paint.Align.LEFT; "end" -> Paint.Align.RIGHT; else -> Paint.Align.CENTER }
                     // a thin paper-coloured halo first: a label stays readable where a curve or a line crosses it
                     txt.style = Paint.Style.STROKE; txt.strokeWidth = f(op.size) * 0.22f; val col = txt.color; txt.color = LearnStyle.PAPER

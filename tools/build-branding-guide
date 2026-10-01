@@ -1,0 +1,577 @@
+#!/usr/bin/env python3
+"""Régénère le guide PDF de la charte graphique : branding/guide/CastBridge-charte-graphique.pdf
+
+    tools/build-branding-guide            (depuis la racine du dépôt)
+
+Reproductible : tout vient de branding/ (design-tokens.json, logo/*.svg, icons/*.svg, fonts/, guide/screens/*.jpg, export, ressources
+des apps). Les logos sont rastérisés avec leurs proportions d'origine (largeur imposée, hauteur déduite : plus de logos étirés).
+Dépendances : reportlab, fonttools (pip install reportlab fonttools) et rsvg-convert (brew install librsvg ; apt install librsvg2-bin).
+Les polices Inter / Bricolage Grotesque / Sora / Manrope doivent être installées pour que rsvg dessine les textes des SVG.
+"""
+import io
+import json
+import os
+import re
+import subprocess
+import sys
+import tempfile
+
+from fontTools.ttLib import TTFont
+from fontTools.varLib import instancer
+from reportlab.lib import colors
+from reportlab.lib.enums import TA_CENTER
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.styles import ParagraphStyle
+from reportlab.lib.units import mm
+from reportlab.lib.utils import ImageReader
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont as RLFont
+from reportlab.platypus import (BaseDocTemplate, Frame, Image, KeepTogether, NextPageTemplate, PageBreak, PageTemplate, Paragraph, Spacer,
+                                Table, TableStyle, Flowable)
+
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BR = os.path.join(REPO, "branding")
+RES = {"sender": os.path.join(REPO, "android", "sender", "src", "main", "res"), "receiver": os.path.join(REPO, "android", "receiver", "src", "main", "res")}
+TMP = tempfile.mkdtemp(prefix="cbguide-")
+TOK = json.load(open(os.path.join(BR, "design-tokens.json"), encoding="utf-8"))
+C = TOK["color"]
+
+
+def hexv(path):
+    n = C
+    for p in path.split("."):
+        n = n[p]
+    return n["value"]
+
+
+def lum(h):
+    h = h.lstrip("#")
+    c = [int(h[i:i + 2], 16) / 255 for i in (0, 2, 4)]
+    c = [x / 12.92 if x <= 0.03928 else ((x + 0.055) / 1.055) ** 2.4 for x in c]
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]
+
+
+def ratio(a, b):
+    x, y = lum(a), lum(b)
+    return (max(x, y) + 0.05) / (min(x, y) + 0.05)
+
+
+def col(h):
+    return colors.HexColor(h)
+
+
+INK, PAPER = col(hexv("dark.background")), colors.white
+SURF, GOLD = col(hexv("dark.surface")), col(hexv("dark.primary"))
+TXT = col(hexv("light.textHigh"))
+TXT2 = col(hexv("light.textMedium"))
+TXT3 = col(hexv("light.textLow"))
+GOLD_TXT = col(hexv("light.primary"))      # or lisible sur blanc (corrigé v1.1)
+LINE = col("#DDE3EF")
+
+# ---------------- polices (instances statiques des polices variables) ----------------
+def font(name, file, axes):
+    f = TTFont(os.path.join(BR, "fonts", file))
+    f = instancer.instantiateVariableFont(f, axes, inplace=False)
+    p = os.path.join(TMP, name + ".ttf")
+    f.save(p)
+    pdfmetrics.registerFont(RLFont(name, p))
+    return name
+
+
+HEAD = font("Bricolage-ExtraBold", "BricolageGrotesque.ttf", {"opsz": 48, "wdth": 100, "wght": 800})
+HEAD_B = font("Bricolage-Bold", "BricolageGrotesque.ttf", {"opsz": 48, "wdth": 100, "wght": 700})
+BODY = font("Inter-Regular", "Inter.ttf", {"opsz": 14, "wght": 400})
+BODY_B = font("Inter-Bold", "Inter.ttf", {"opsz": 14, "wght": 700})
+QUIZ = font("Sora-Bold", "Sora.ttf", {"wght": 700})
+CHESS = font("Manrope-Bold", "Manrope.ttf", {"wght": 700})
+pdfmetrics.registerFontFamily("Inter-Regular", normal="Inter-Regular", bold="Inter-Bold", italic="Inter-Regular", boldItalic="Inter-Bold")
+
+ST = {
+    "h1": ParagraphStyle("h1", fontName=HEAD, fontSize=22, leading=26, textColor=INK, spaceBefore=0, spaceAfter=8, keepWithNext=1),
+    "h2": ParagraphStyle("h2", fontName=HEAD_B, fontSize=13, leading=16, textColor=GOLD_TXT, spaceBefore=10, spaceAfter=4, keepWithNext=1),
+    "body": ParagraphStyle("body", fontName=BODY, fontSize=9.5, leading=14, textColor=TXT, spaceAfter=5),
+    "small": ParagraphStyle("small", fontName=BODY, fontSize=8, leading=11, textColor=TXT3),
+    "cell": ParagraphStyle("cell", fontName=BODY, fontSize=8.5, leading=11, textColor=TXT),
+    "cellb": ParagraphStyle("cellb", fontName=BODY_B, fontSize=8.5, leading=11, textColor=TXT),
+    "cap": ParagraphStyle("cap", fontName=BODY, fontSize=7.5, leading=9.5, textColor=TXT2, alignment=TA_CENTER),
+    "toc": ParagraphStyle("toc", fontName=BODY, fontSize=11, leading=19, textColor=TXT),
+    "cover": ParagraphStyle("cover", fontName=HEAD, fontSize=40, leading=44, textColor=col(hexv("dark.textHigh")), alignment=TA_CENTER),
+    "coversub": ParagraphStyle("coversub", fontName=BODY, fontSize=14, leading=19, textColor=GOLD, alignment=TA_CENTER),
+    "covermini": ParagraphStyle("covermini", fontName=BODY, fontSize=9, leading=12, textColor=col(hexv("dark.textMedium")), alignment=TA_CENTER),
+}
+W = A4[0] - 36 * mm
+
+
+def P(t, s="body"):
+    return Paragraph(t, ST[s])
+
+
+def H1(t):
+    return P(t, "h1")
+
+
+def H2(t):
+    return P(t, "h2")
+
+
+_n = [0]
+
+
+def raster(svg_path_or_text, width_px, bg=None, recolor=None):
+    """SVG -> PNG (largeur imposée, proportions conservées)."""
+    _n[0] += 1
+    src = os.path.join(TMP, f"s{_n[0]}.svg")
+    text = svg_path_or_text if svg_path_or_text.lstrip().startswith("<") else open(svg_path_or_text, encoding="utf-8").read()
+    if recolor:
+        text = text.replace("currentColor", recolor)
+    open(src, "w", encoding="utf-8").write(text)
+    out = os.path.join(TMP, f"r{_n[0]}.png")
+    cmd = ["rsvg-convert", "-w", str(width_px)] + (["-b", bg] if bg else []) + [src, "-o", out]
+    subprocess.run(cmd, check=True)
+    return out
+
+
+def pic(path, width_mm=None, height_mm=None):
+    iw, ih = ImageReader(path).getSize()
+    if width_mm:
+        return Image(path, width=width_mm * mm, height=width_mm * mm * ih / iw)
+    return Image(path, width=height_mm * mm * iw / ih, height=height_mm * mm)
+
+
+def logo(name, width_mm, bg=None):
+    return pic(raster(os.path.join(BR, "logo", name + ".svg"), int(width_mm * 14)), width_mm)
+
+
+def panel(flowable, bg=None, pad=5, width=None):
+    t = Table([[flowable]], colWidths=[width or W])
+    st = [("ALIGN", (0, 0), (-1, -1), "CENTER"), ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+          ("TOPPADDING", (0, 0), (-1, -1), pad), ("BOTTOMPADDING", (0, 0), (-1, -1), pad)]
+    if bg:
+        st += [("BACKGROUND", (0, 0), (-1, -1), bg), ("BOX", (0, 0), (-1, -1), 0.4, col("#B9C2D4"))]
+    t.setStyle(TableStyle(st))
+    return t
+
+
+def table(rows, widths, head=True, extra=None):
+    t = Table(rows, colWidths=widths, repeatRows=1 if head else 0)
+    st = [("VALIGN", (0, 0), (-1, -1), "MIDDLE"), ("TOPPADDING", (0, 0), (-1, -1), 3), ("BOTTOMPADDING", (0, 0), (-1, -1), 3),
+          ("LINEBELOW", (0, 0), (-1, -1), 0.3, LINE)] + (extra or [])
+    t.setStyle(TableStyle(st))
+    return t
+
+
+def swatches(rows):
+    data, st = [], []
+    for i, (label, path, use) in enumerate(rows):
+        h = hexv(path)
+        data.append(["", P(label, "cellb"), P(h, "cell"), P(use, "small")])
+        st += [("BACKGROUND", (0, i), (0, i), col(h)), ("BOX", (0, i), (0, i), 0.3, col("#B9C2D4"))]
+    return table(data, [11 * mm, 38 * mm, 24 * mm, None], head=False, extra=st)
+
+
+# ---------------- pages ----------------
+story = []
+
+
+def cover():
+    sym = pic(raster(os.path.join(BR, "logo", "castbridge-symbol.svg"), 600), 44)
+    cells = [[Spacer(1, 30 * mm)], [sym], [Spacer(1, 9 * mm)], [P("CastBridge", "cover")], [Spacer(1, 3 * mm)],
+             [P("Charte graphique - Le pont simple entre vos écrans", "coversub")], [Spacer(1, 6 * mm)],
+             [P("Écosystème TV + smartphone - Cameroun &amp; Afrique francophone", "covermini")],
+             [Spacer(1, 6 * mm)], [P("Version 1.1 - contrastes WCAG AA corrigés, icônes complétées, application aux apps et au serveur", "covermini")],
+             [Spacer(1, 30 * mm)]]
+    t = Table(cells, colWidths=[W])
+    t.setStyle(TableStyle([("ALIGN", (0, 0), (-1, -1), "CENTER"), ("BACKGROUND", (0, 0), (-1, -1), INK),
+                           ("TOPPADDING", (0, 0), (-1, -1), 0), ("BOTTOMPADDING", (0, 0), (-1, -1), 0)]))
+    story.extend([t, NextPageTemplate("main"), PageBreak()])
+
+
+def toc():
+    story.append(H1("Sommaire"))
+    for l in ["1. Plateforme de marque", "2. Architecture de marque", "3. Logo et symbolique", "4. Couleurs et contrastes", "5. Typographie",
+              "6. Grille, espacements, rayons, élévation", "7. États de focus et animations", "8. Iconographie", "9. Sous-marques",
+              "10. Spécifications Android", "11. Les apps habillées (captures)", "12. Livrables et fichiers"]:
+        story.append(P(l, "toc"))
+    story.append(PageBreak())
+
+
+def brand():
+    story.append(H1("1. Plateforme de marque"))
+    for k, v in [("Positionnement", "CastBridge relie le téléphone à la télévision pour partager, regarder et jouer ensemble, même sans connexion."),
+                 ("Personnalité", "moderne, chaleureuse, fiable, fièrement africaine - sans folklore."),
+                 ("Ton", "français courant, phrases courtes, verbes d'action (Envoie, Continue, Joue)."),
+                 ("Tutoiement", "le tutoiement est la règle dans l'app (proximité, public jeune et familial). Le vouvoiement est réservé au support et aux mentions légales.")]:
+        story.append(P(f"<font name='{BODY_B}'>{k}</font> : {v}"))
+    story.append(Spacer(1, 4 * mm))
+    story.append(H1("2. Architecture de marque"))
+    story.append(P("Les trois pistes créatives forment l'ADN de l'écosystème. Chaque marque garde les proportions de son logo : jamais d'étirement."))
+    rows = []
+    for n, nm, d in [("castbridge-logo-horizontal", "CastBridge (marque mère)", "Piste 1 « Le Pont » - or / indigo"),
+                     ("castbridge-tv-horizontal", "CastBridge TV", "Le pont, icône et en-têtes de l'app TV"),
+                     ("quiz-des-millions-horizontal", "Quiz des Millions", "Piste 2 « Le Signal » - corail / ambre"),
+                     ("echecs-horizontal", "Échecs", "Piste 3 « Le Lien » - vert / or"),
+                     ("apprendre-horizontal", "Apprendre", "Sous-marque éducation - bleu / ambre")]:
+        rows.append([panel(logo(n, 52), INK, pad=3, width=58 * mm), P(f"<font name='{BODY_B}'>{nm}</font>", "cell"), P(d, "small")])
+    story.append(table(rows, [60 * mm, 45 * mm, None], head=False, extra=[("TOPPADDING", (0, 0), (-1, -1), 5), ("BOTTOMPADDING", (0, 0), (-1, -1), 5)]))
+    story.append(PageBreak())
+
+
+def logos():
+    story.append(H1("3. Logo et symbolique"))
+    story.append(P("Le symbole : un pont-arc entre deux écrans (téléphone et télé), une lueur qui transite. Lisible dès la petite taille."))
+    story.append(H2("Symbole (fond sombre / fond clair)"))
+    a = panel(pic(raster(os.path.join(BR, "logo", "castbridge-symbol.svg"), 500), 38), None, pad=0, width=80 * mm)
+    b = panel(pic(raster(os.path.join(BR, "logo", "castbridge-symbol-light.svg"), 500), 38), None, pad=0, width=80 * mm)
+    story.append(Table([[a, b]], colWidths=[W / 2, W / 2]))
+    story.append(H2("Verrouillage horizontal (sombre / clair)"))
+    story.append(panel(logo("castbridge-logo-horizontal", 110), INK, pad=8))
+    story.append(Spacer(1, 3 * mm))
+    story.append(panel(logo("castbridge-logo-horizontal-light", 110), PAPER, pad=8))
+    story.append(PageBreak())
+    story.append(H2("Verrouillage vertical (sombre / clair)"))
+    a = panel(logo("castbridge-logo-vertical", 62), INK, pad=8, width=80 * mm)
+    b = panel(logo("castbridge-logo-vertical-light", 62), PAPER, pad=8, width=80 * mm)
+    story.append(Table([[a, b]], colWidths=[W / 2, W / 2]))
+    story.append(H2("Monochrome (tampon, une seule couleur)"))
+    a = panel(logo("castbridge-logo-monochrome-white", 80), INK, pad=8, width=80 * mm)
+    b = panel(logo("castbridge-logo-monochrome-ink", 80), PAPER, pad=8, width=80 * mm)
+    story.append(Table([[a, b]], colWidths=[W / 2, W / 2]))
+    story.append(H2("Règles"))
+    for t in ["Zone de protection : au minimum la hauteur du téléphone (pilier gauche) tout autour du logo.",
+              "Taille minimale : 24 px pour le symbole seul, 96 px de large pour le verrouillage horizontal.",
+              "Ne jamais étirer, pivoter, recolorier hors des variantes ci-dessus, ni ajouter d'ombre ou de flou.",
+              "Sur fond photo ou vidéo : utiliser la variante monochrome blanche, sur une surface sombre."]:
+        story.append(P("• " + t))
+    story.append(PageBreak())
+
+
+def colours():
+    story.append(H1("4. Couleurs et contrastes"))
+    story.append(P("Le thème sombre est premier (TV), le thème clair sert au téléphone. <b>Version 1.1</b> : toutes les paires texte / fond ci-dessous atteignent "
+                   "WCAG AA (4,5:1 en texte courant, 3:1 pour les grands éléments et icônes) ; elles sont vérifiées par un test automatique."))
+    story.append(H2("Thème sombre (TV)"))
+    story.append(swatches([("Fond", "dark.background", "arrière-plan principal"), ("Surface", "dark.surface", "cartes, rangs"),
+                           ("Surface haute", "dark.surfaceHigh", "survol, dialogues"), ("Primaire", "dark.primary", "actions, sélection (texte sur fond sombre : 8,8:1)"),
+                           ("Secondaire", "dark.secondary", "bibliothèque, succès (texte dessus : #0A0F1E)"), ("Accent", "dark.accent", "caster"),
+                           ("Texte", "dark.textHigh", "texte principal"), ("Texte secondaire", "dark.textMedium", "métadonnées"),
+                           ("Texte discret", "dark.textLow", "aides, états inactifs - éclairci en v1.1"), ("Contour", "dark.outline", "bordures"),
+                           ("Anneau de focus", "dark.focusRing", "3 dp, décalage 2 dp")]))
+    story.append(H2("Thème clair (téléphone)"))
+    story.append(swatches([("Fond", "light.background", "arrière-plan"), ("Surface", "light.surface", "cartes"),
+                           ("Primaire", "light.primary", "actions, liens - assombri en v1.1"), ("Primaire de marque", "light.primaryBrand", "grands éléments et icônes seulement"),
+                           ("Secondaire", "light.secondary", "succès - assombri en v1.1"), ("Accent", "light.accent", "caster - assombri en v1.1"),
+                           ("Accent de marque", "light.accentBrand", "grands éléments et icônes seulement"),
+                           ("Texte", "light.textHigh", "texte principal"), ("Texte secondaire", "light.textMedium", "métadonnées"),
+                           ("Texte discret", "light.textLow", "aides - assombri en v1.1"), ("Contour", "light.outline", "bordures")]))
+    story.append(PageBreak())
+    story.append(H2("Couleurs sémantiques (sombre / clair)"))
+    sem = []
+    for k, lab in [("success", "Succès"), ("warning", "Alerte"), ("error", "Erreur"), ("info", "Info")]:
+        sem.append([P(lab, "cellb"), "", P(C["semantic"][k]["dark"]["value"], "cell"), "", P(C["semantic"][k]["light"]["value"], "cell")])
+    st = []
+    for i, k in enumerate(["success", "warning", "error", "info"]):
+        st += [("BACKGROUND", (1, i), (1, i), col(C["semantic"][k]["dark"]["value"])), ("BACKGROUND", (3, i), (3, i), col(C["semantic"][k]["light"]["value"]))]
+    story.append(table([[P("", "cell"), P("sombre", "cellb"), "", P("clair", "cellb"), ""]] + sem, [34 * mm, 11 * mm, 30 * mm, 11 * mm, None],
+                       extra=[("SPAN", (1, 0), (2, 0)), ("SPAN", (3, 0), (4, 0))] + [("BACKGROUND", (1, i + 1), (1, i + 1), col(C["semantic"][k]["dark"]["value"])) for i, k in enumerate(["success", "warning", "error", "info"])] +
+                             [("BACKGROUND", (3, i + 1), (3, i + 1), col(C["semantic"][k]["light"]["value"])) for i, k in enumerate(["success", "warning", "error", "info"])]))
+    story.append(H2("Palettes des sous-marques"))
+    rows = []
+    ABBR = {"background": "fond", "primary": "primaire", "secondary": "secondaire", "accent": "accent", "surface": "surface"}
+    names = {"quizDesMillions": "Quiz des Millions (Sora)", "echecs": "Échecs (Manrope)", "apprendre": "Apprendre (Inter)", "castbridgeTv": "CastBridge TV"}
+    for b in ("castbridgeTv", "quizDesMillions", "echecs", "apprendre"):
+        cells = [P(names[b], "cellb")]
+        for k in ("background", "primary", "secondary", "accent", "surface"):
+            if k in C["brand"][b]:
+                v = C["brand"][b][k]["value"]
+                cells.append(P(f"<font color='{v}'>■</font> {ABBR[k]}<br/>{v}", "cell"))
+            else:
+                cells.append("")
+        rows.append(cells)
+    story.append(table(rows, [38 * mm, 29 * mm, 29 * mm, 29 * mm, 29 * mm, None][:6], head=False))
+    story.append(H2("Contrastes : avant / après (v1.0 -> v1.1)"))
+    pairs = [("Primaire clair sur blanc", "#B7791F", "#FFFFFF", hexv("light.primary")),
+             ("Accent clair sur blanc", "#E4692E", "#FFFFFF", hexv("light.accent")),
+             ("Blanc sur secondaire clair", "#FFFFFF", "#1F8A5C", None),
+             ("Blanc sur secondaire sombre", "#FFFFFF", "#2E9E6B", None),
+             ("Texte discret sur fond sombre", "#6E7A93", "#0A0F1E", hexv("dark.textLow")),
+             ("Texte discret sur surface sombre", "#6E7A93", "#151D37", hexv("dark.textLow"))]
+    rows = [[P("Paire", "cellb"), P("avant", "cellb"), P("après", "cellb"), P("correction", "cellb")]]
+    for lab, fg, bg, new in pairs:
+        before = ratio(fg, bg)
+        if lab == "Blanc sur secondaire clair":
+            afterfg, afterbg, note = "#FFFFFF", hexv("light.secondary"), f"secondaire {hexv('light.secondary')}"
+        elif lab == "Blanc sur secondaire sombre":
+            afterfg, afterbg, note = hexv("dark.onSecondary"), hexv("dark.secondary"), f"texte {hexv('dark.onSecondary')} sur {hexv('dark.secondary')}"
+        else:
+            afterfg, afterbg, note = new, bg, f"{fg} -> {new}"
+        after = ratio(afterfg, afterbg)
+        rows.append([P(lab, "cell"), P(f"{before:.1f}:1", "cell"), P(f"<b>{after:.1f}:1</b>", "cell"), P(note, "small")])
+    story.append(table(rows, [60 * mm, 20 * mm, 20 * mm, None]))
+    story.append(P("Les teintes d'origine du clair (#B7791F, #E4692E) restent la couleur de marque pour les grands éléments, icônes et anneaux ; le texte courant utilise les valeurs corrigées.", "small"))
+    story.append(PageBreak())
+
+
+def typo():
+    story.append(H1("5. Typographie"))
+    story.append(P("Polices Google Fonts libres (licence OFL), embarquées dans les apps en sous-ensemble latin (français) : Bricolage Grotesque (titres), Inter (texte), Sora (Quiz), Manrope (Échecs)."))
+    spec = Table([[P("Bricolage Grotesque - titres", "cell"), P("Inter - texte courant", "cell")],
+                  [Paragraph("Le pont simple", ParagraphStyle("a", fontName=HEAD, fontSize=24, leading=28, textColor=INK)),
+                   Paragraph("Envoie une vidéo à la télé", ParagraphStyle("b", fontName=BODY, fontSize=14, leading=18, textColor=INK))],
+                  [P("Sora - Quiz des Millions", "cell"), P("Manrope - Échecs", "cell")],
+                  [Paragraph("Question à un million", ParagraphStyle("c", fontName=QUIZ, fontSize=17, leading=22, textColor=INK)),
+                   Paragraph("Échec et mat en 3 coups", ParagraphStyle("d", fontName=CHESS, fontSize=17, leading=22, textColor=INK))]],
+                 colWidths=[W / 2, W / 2])
+    spec.setStyle(TableStyle([("TOPPADDING", (0, 0), (-1, -1), 3), ("BOTTOMPADDING", (0, 0), (-1, -1), 3), ("LINEBELOW", (0, 1), (-1, 1), 0.3, LINE)]))
+    story.append(spec)
+    story.append(H2("Hiérarchie TV (canevas 1080p, lecture à 3 m - minimum 24 px)"))
+    tv = TOK["typography"]["scale"]["tv"]
+    names = {"display": "Display", "headline": "Titre de page", "title": "Titre de rangée", "subtitle": "Sous-titre", "body": "Corps", "button": "Bouton", "caption": "Légende"}
+    rows = [[P("Rôle", "cellb"), P("Guide (px / graisse)", "cellb"), P("Dans l'app TV (canevas 1280 dp)", "cellb")]]
+    for k, v in tv.items():
+        if k == "minimum":
+            continue
+        px = int(re.match(r"\d+", v["value"]).group(0))
+        rows.append([P(names[k], "cell"), P(f"{px} px / {v['weight']}", "cell"), P(f"{round(px * 2 / 3)} sp (x 2/3)", "cell")])
+    story.append(table(rows, [45 * mm, 45 * mm, None]))
+    story.append(P("L'interface TV est dessinée sur 1280 x 720 dp (la TV d'Esaie) : un pixel du guide vaut 2/3 sp. Le minimum de 24 px devient 16 sp ; aucun texte TV n'est plus petit.", "small"))
+    story.append(H2("Hiérarchie mobile (sp)"))
+    rows = [[P("Rôle", "cellb"), P("Taille / graisse", "cellb")]]
+    for k, v in TOK["typography"]["scale"]["mobile"].items():
+        rows.append([P(k.capitalize(), "cell"), P(f"{v['value']} / {v['weight']}", "cell")])
+    story.append(table(rows, [45 * mm, None]))
+    story.append(PageBreak())
+
+
+def grid():
+    story.append(H1("6. Grille, espacements, rayons, élévation"))
+    g = TOK["grid"]
+    story.append(P(f"Grille TV : {g['tvColumns']['value']} colonnes, gouttière {g['tvGutter']['value']}, marge {g['tvMargin']['value']}, carte {g['tvCardWidth']['value']} en 16:9. "
+                   f"Mobile : {g['mobileColumns']['value']} colonnes, gouttière et marge {g['mobileMargin']['value']}."))
+    story.append(H2("Espacements (dp)"))
+
+    class Bars(Flowable):
+        def __init__(self):
+            super().__init__()
+            self.height = 20 * mm
+            self.width = W
+
+        def draw(self):
+            c = self.canv
+            x = 0
+            for k, v in TOK["spacing"].items():
+                n = int(re.match(r"\d+", v["value"]).group(0))
+                if n == 0:
+                    continue
+                c.setFillColor(GOLD)
+                c.rect(x, 5 * mm, n * 0.18 * mm if n < 40 else n * 0.1 * mm + 3 * mm, 8 * mm, stroke=0, fill=1)
+                c.setFillColor(TXT2)
+                c.setFont(BODY, 7)
+                c.drawString(x, 1.5 * mm, str(n))
+                x += (n * 0.18 * mm if n < 40 else n * 0.1 * mm + 3 * mm) + 3 * mm
+
+    story.append(Bars())
+    story.append(H2("Rayons (dp)"))
+
+    class Radii(Flowable):
+        def __init__(self):
+            super().__init__()
+            self.height = 24 * mm
+            self.width = W
+
+        def draw(self):
+            c = self.canv
+            x = 0
+            for k, v in TOK["radius"].items():
+                r = min(int(re.match(r"\d+", v["value"]).group(0)), 100)
+                c.setFillColor(SURF)
+                c.roundRect(x, 6 * mm, 26 * mm, 16 * mm, min(r * 0.5 * mm * 0.5, 8 * mm), stroke=0, fill=1)
+                c.setFillColor(TXT2)
+                c.setFont(BODY, 7.5)
+                c.drawString(x, 2 * mm, f"{k} {v['value'].replace('dp', '') if k != 'pill' else '999'}")
+                x += 32 * mm
+
+    story.append(Radii())
+    story.append(H2("Élévation"))
+    story.append(table([[P(k, "cellb"), P(v["value"], "cell")] for k, v in TOK["elevation"].items()], [25 * mm, None], head=False))
+    story.append(P("Trois niveaux d'ombre, discrets sur fond sombre. Carte au repos : niveau 1 ; carte focalisée, menu : niveau 2 ; dialogue : niveau 3.", "small"))
+    story.append(PageBreak())
+
+
+def focus():
+    story.append(H1("7. États de focus et animations"))
+    f = TOK["focus"]["tv"]
+
+    class FocusDemo(Flowable):
+        def __init__(self):
+            super().__init__()
+            self.height = 42 * mm
+            self.width = W
+
+        def draw(self):
+            c = self.canv
+            c.setFillColor(INK)
+            c.roundRect(0, 0, W, 42 * mm, 3 * mm, stroke=0, fill=1)
+            for i, focused in enumerate((False, True, False)):
+                x = 12 * mm + i * 55 * mm
+                y = 9 * mm
+                w, h = 44 * mm, 24 * mm
+                if focused:
+                    s = 1.04
+                    x2, y2, w2, h2 = x - w * (s - 1) / 2, y - h * (s - 1) / 2, w * s, h * s
+                    c.setStrokeColor(col(hexv("dark.focusRing")))
+                    c.setLineWidth(1.4)
+                    c.setFillColor(col(hexv("dark.surfaceHigh")))
+                    c.roundRect(x2, y2, w2, h2, 3 * mm, stroke=1, fill=1)
+                else:
+                    c.setFillColor(SURF)
+                    c.roundRect(x, y, w, h, 3 * mm, stroke=0, fill=1)
+                c.setFillColor(col(hexv("dark.textHigh")))
+                c.setFont(BODY_B, 8)
+                c.drawCentredString(x + w / 2, y + h / 2 - 1, "Focalisé" if focused else "Repos")
+
+    story.append(FocusDemo())
+    story.append(Spacer(1, 3 * mm))
+    story.append(P(f"<font name='{BODY_B}'>Focus TV (critique à la télécommande)</font> : anneau {f['ringColor']['value']} de {f['ringWidth']['value']}, décalage {f['ringOffset']['value']}, "
+                   f"et mise à l'échelle {f['scale']['value']} de l'élément focalisé. Le focus doit rester visible à 3 m ; jamais de simple changement de couleur subtil."))
+    story.append(P(f"<font name='{BODY_B}'>Mobile</font> : anneau {TOK['focus']['mobile']['ringWidth']['value']} {TOK['focus']['mobile']['ringColor']['value']}."))
+    m = TOK["motion"]
+    story.append(H2("Animations"))
+    story.append(table([[P("Durées", "cellb"), P(" · ".join(f"{k} {v['value']}" for k, v in m["duration"].items()), "cell")]] +
+                       [[P("Courbe " + k, "cellb"), P(v["value"], "cell")] for k, v in m["easing"].items()], [35 * mm, None], head=False))
+    story.append(P("Appliquées aux cartes, boutons, dialogues et au focus (apps TV et téléphone, pages /admin du serveur). Respecter prefers-reduced-motion côté web.", "small"))
+    story.append(P("Rappel mémoire : pas de vidéo ni d'images lourdes en fond - uniquement vecteurs et dégradés simples (TV ~ 1 Go de RAM).", "body"))
+    story.append(PageBreak())
+
+
+def icons():
+    story.append(H1("8. Iconographie"))
+    story.append(P("Pictogrammes en trait 1,8 dp, coins et extrémités arrondis, couleur currentColor (thématisables). Grille 24 x 24. "
+                   "Les icônes marquées d'un point doré ont été créées en v1.1 dans le même style (SVG source dans branding/icons/)."))
+    new = {"telecommande": "Télécommande", "sur-le-telephone": "Sur le téléphone", "passerelle-bluetooth": "Passerelle Bluetooth", "options-developpeur": "Options développeur"}
+    labels = {"administration": "Administration", "aide": "Aide", "apprendre": "Apprendre", "avance-10s": "Avancer 10 s", "bibliotheque": "Bibliothèque",
+              "bluetooth": "Bluetooth", "caster": "Caster", "cle-usb": "Clé USB", "copier": "Copier", "deplacer-vers-tv": "Déplacer vers la TV", "echecs": "Échecs",
+              "envoyer": "Envoyer", "lecture": "Lecture", "mises-a-jour": "Mises à jour", "pause": "Pause", "pistes-audio": "Pistes audio", "quiz": "Quiz",
+              "recevoir-du-telephone": "Recevoir du tél.", "recul-10s": "Reculer 10 s", "reglages": "Réglages", "sous-titres": "Sous-titres", "telechargements": "Téléchargements",
+              "test-internet": "Test Internet", "wifi-direct": "Wi-Fi Direct", "wifi": "Wi-Fi"}
+    labels.update(new)
+    names = sorted(labels, key=lambda n: (n not in new, labels[n]))
+    names = sorted(labels, key=lambda n: labels[n])
+    cells, row = [], []
+    for n in names:
+        im = pic(raster(os.path.join(BR, "icons", n + ".svg"), 160, recolor="#111827"), 12)
+        mark = " <font color='%s'>●</font>" % hexv("light.primaryBrand") if n in new else ""
+        cell = Table([[im], [P(labels[n] + mark, "cap")]], colWidths=[28 * mm])
+        cell.setStyle(TableStyle([("ALIGN", (0, 0), (-1, -1), "CENTER"), ("TOPPADDING", (0, 0), (-1, -1), 1), ("BOTTOMPADDING", (0, 0), (-1, -1), 1)]))
+        row.append(cell)
+        if len(row) == 6:
+            cells.append(row)
+            row = []
+    if row:
+        cells.append(row + [""] * (6 - len(row)))
+    t = Table(cells, colWidths=[W / 6] * 6)
+    t.setStyle(TableStyle([("VALIGN", (0, 0), (-1, -1), "TOP"), ("TOPPADDING", (0, 0), (-1, -1), 6), ("BOTTOMPADDING", (0, 0), (-1, -1), 6)]))
+    story.append(t)
+    story.append(P("Dans les apps : les 29 icônes sont des VectorDrawable (res/drawable/ic_cb_*.xml), générés par branding/tools/gen_app_assets.py ; les icônes génériques sans équivalent (Fermer, Retour, Supprimer...) restent celles de Material.", "small"))
+    story.append(PageBreak())
+
+
+def subs():
+    story.append(H1("9. Sous-marques"))
+    story.append(P("Chaque sous-marque reprend la géométrie de la marque mère avec son propre accent, pour rester cohérente. Le pictogramme (carré arrondi) sert d'icône, le verrouillage horizontal d'en-tête."))
+    rows = []
+    for sym, hor, nm, note in [("castbridge-tv", "castbridge-tv-horizontal", "CastBridge TV", "pont / or ; pastille TV"),
+                               ("quiz-des-millions", "quiz-des-millions-horizontal", "Quiz des Millions", "corail #FF5C39 et ambre #FFB020 sur vert d'eau #0B1B1E ; Sora"),
+                               ("echecs", "echecs-horizontal", "Échecs", "vert #2FA96B et or #F2C14E sur vert forêt #0C1B14 ; Manrope"),
+                               ("apprendre", "apprendre-horizontal", "Apprendre", "bleu #3B82F6, ambre #F59E0B, cyan #06B6D4 sur #070D1E")]:
+        rows.append([pic(raster(os.path.join(BR, "logo", sym + ".svg"), 400), 20), panel(logo(hor, 70), INK, pad=3, width=76 * mm), P(f"<font name='{BODY_B}'>{nm}</font><br/>{note}", "cell")])
+    story.append(table(rows, [26 * mm, 80 * mm, None], head=False, extra=[("TOPPADDING", (0, 0), (-1, -1), 8), ("BOTTOMPADDING", (0, 0), (-1, -1), 8)]))
+    story.append(PageBreak())
+
+
+def android():
+    story.append(H1("10. Spécifications Android"))
+    story.append(P("Les éléments ci-dessous sont ceux réellement embarqués dans les apps (captures des ressources, pas des maquettes)."))
+    story.append(H2("Icône de lanceur (adaptative : fond + avant-plan + monochrome Android 13+)"))
+    ic = []
+    for app, lab in (("sender", "CastBridge (téléphone)"), ("receiver", "CastBridge TV")):
+        a = pic(os.path.join(RES[app], "mipmap-xxxhdpi", "ic_launcher.png"), 26)
+        b = pic(os.path.join(RES[app], "mipmap-xxxhdpi", "ic_launcher_round.png"), 26)
+        ic.append(Table([[a, b], [P(lab + " - carré / rond", "cap"), ""]], colWidths=[W / 4, W / 4], style=[("SPAN", (0, 1), (1, 1)), ("ALIGN", (0, 0), (-1, -1), "CENTER")]))
+    story.append(Table([ic], colWidths=[W / 2, W / 2]))
+    story.append(P("Canevas 108 dp, zone sûre 66 dp (le symbole occupe ~ 55 dp). PNG de repli mdpi à xxxhdpi, adaptatif en anydpi-v26.", "small"))
+    story.append(H2("Bannière Android TV (320 x 180 dp, sans vidéo)"))
+    story.append(panel(pic(os.path.join(RES["receiver"], "drawable-xhdpi", "banner.png"), 80), None, pad=2))
+    story.append(H2("Icône de notification (monochrome) et écran de lancement"))
+    stat = raster(os.path.join(BR, "logo", "castbridge-notification.svg"), 200, bg="#0A0F1E")
+    splash = raster('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 90"><rect width="160" height="90" fill="#0A0F1E"/><g transform="translate(26 -9) scale(0.5)">' +
+                    open(os.path.join(BR, "logo", "adaptive-foreground.svg"), encoding="utf-8").read().split(">", 1)[1].rsplit("</svg>", 1)[0] + "</g></svg>", 600)
+    story.append(Table([[pic(stat, 22), pic(splash, 70)], [P("Petit symbole blanc (services)", "cap"), P("Fond #0A0F1E + symbole (Android 12+ : SplashScreen)", "cap")]],
+                       colWidths=[W / 3, W * 2 / 3], style=[("ALIGN", (0, 0), (-1, -1), "CENTER"), ("VALIGN", (0, 0), (-1, -1), "MIDDLE")]))
+    story.append(P("Play Store : 512 x 512 px plein cadre (export/png/playstore-512.png). Favicon : SVG + PNG 16/32/48/180 + .ico, repris par les pages /admin du serveur.", "small"))
+    story.append(PageBreak())
+
+
+def screens():
+    story.append(H1("11. Les apps habillées (captures)"))
+    story.append(P("Captures d'émulateur des apps réellement habillées (Android TV 1920x1080 @ 320 dpi et 1280x720 @ 160 dpi ; téléphone 1080x2400)."))
+    d = os.path.join(BR, "guide", "screens")
+
+    def shot(n, w, cap):
+        return Table([[Image(os.path.join(d, n), width=w * mm, height=w * mm * ImageReader(os.path.join(d, n)).getSize()[1] / ImageReader(os.path.join(d, n)).getSize()[0])],
+                      [P(cap, "cap")]], colWidths=[w * mm + 2 * mm], style=[("ALIGN", (0, 0), (-1, -1), "CENTER"), ("TOPPADDING", (0, 0), (-1, -1), 2), ("BOTTOMPADDING", (0, 0), (-1, -1), 2)])
+
+    story.append(H2("Android TV"))
+    story.append(Table([[shot("tv-accueil-1080p.jpg", 80, "Accueil, 1080p"), shot("tv-accueil-720p.jpg", 80, "Accueil, 1280x720 @160 dpi")],
+                        [shot("tv-quiz-1080p.jpg", 80, "Quiz des Millions"), shot("tv-echecs-1080p.jpg", 80, "Échecs")],
+                        [shot("tv-apprendre-1080p.jpg", 80, "Apprendre"), shot("tv-reglages-720p.jpg", 80, "Connexion &amp; réglages (À propos)")]],
+                       colWidths=[W / 2, W / 2]))
+    story.append(PageBreak())
+    story.append(H2("Android TV (suite)"))
+    story.append(Table([[shot("tv-bibliotheque-720p.jpg", 80, "Bibliothèque, 720p"), shot("tv-telechargements-1080p.jpg", 80, "Dialogue (surface haute, rayon xl)")]], colWidths=[W / 2, W / 2]))
+    story.append(H2("Téléphone"))
+    story.append(Table([[shot("tel-accueil.jpg", 38, "Accueil (sombre)"), shot("tel-clair.jpg", 38, "Thème clair"), shot("tel-reglages.jpg", 38, "Réglages, À propos"), shot("tel-quiz.jpg", 38, "Quiz")]],
+                       colWidths=[W / 4] * 4))
+    story.append(shot("tel-lecteur.jpg", 100, "Lecteur du téléphone, icônes de la charte"))
+    story.append(PageBreak())
+
+
+def files():
+    story.append(H1("12. Livrables et fichiers"))
+    rows = [("branding/design-tokens.json", "source de vérité (couleurs v1.1, typo, espacements, rayons, élévation, focus, animations, paires de contraste)"),
+            ("branding/logo/", "SVG du logo, des sous-marques (Quiz, Échecs, Apprendre, TV), calques adaptatifs, icône de notification"),
+            ("branding/icons/", "29 SVG (25 d'origine + télécommande, sur le téléphone, passerelle Bluetooth, options développeur)"),
+            ("branding/fonts/", "polices OFL complètes ; fonts/subset/ : sous-ensembles latin embarqués dans les apps"),
+            ("branding/export/", "PNG, favicon, drawables et manifestes de l'icône adaptative"),
+            ("branding/tools/", "svg2vd.py, gen_app_assets.py, gen_tokens.py, subset_fonts.py"),
+            ("tools/build-branding-guide", "ce guide (régénérable)"),
+            ("android/core/.../brand/BrandTokens.kt", "tokens Kotlin générés ; test BrandContrastTest (WCAG)"),
+            ("backend/.../static/admin/assets/", "cb-tokens.css (variables CSS générées), favicon, logo, polices du /admin")]
+    story.append(table([[P(a, "cellb"), P(b, "cell")] for a, b in rows], [62 * mm, None], head=False))
+
+
+def footer(canvas, doc):
+    canvas.saveState()
+    if doc.page > 1:
+        canvas.setFillColor(TXT3)
+        canvas.setFont(BODY, 7.5)
+        canvas.drawString(18 * mm, 10 * mm, "CastBridge - Charte graphique v1.1")
+        canvas.drawRightString(A4[0] - 18 * mm, 10 * mm, f"Page {doc.page}")
+        canvas.setStrokeColor(LINE)
+        canvas.line(18 * mm, 14 * mm, A4[0] - 18 * mm, 14 * mm)
+    canvas.restoreState()
+
+
+def main():
+    out = os.path.join(BR, "guide", "CastBridge-charte-graphique.pdf")
+    doc = BaseDocTemplate(out, pagesize=A4, leftMargin=18 * mm, rightMargin=18 * mm, topMargin=18 * mm, bottomMargin=18 * mm,
+                          title="CastBridge - Charte graphique", author="CastBridge")
+    frame = Frame(18 * mm, 18 * mm, W, A4[1] - 36 * mm, id="f", leftPadding=0, rightPadding=0, topPadding=0, bottomPadding=0)
+    doc.addPageTemplates([PageTemplate(id="main", frames=[frame], onPage=footer)])
+    for f in (cover, toc, brand, logos, colours, typo, grid, focus, icons, subs, android, screens, files):
+        f()
+    doc.build(story)
+    print("écrit", out)
+
+
+if __name__ == "__main__":
+    main()

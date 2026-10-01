@@ -127,7 +127,7 @@ class ReaderScreen(a: LearnActivity, val pack: Pack, val lesson: Lesson, private
         val color = LearnStyle.BOX[b.style] ?: LearnStyle.ACCENT
         val box = LinearLayout(a).apply {
             orientation = LinearLayout.VERTICAL; setPadding(a.st.px(28), a.st.px(20), a.st.px(28), a.st.px(20))
-            background = a.st.rounded(0xFF151C27.toInt(), 18f, color, 3f)
+            background = a.st.rounded(LearnStyle.CARD, 18f, color, 3f)
         }
         box.addView(a.st.text((LearnStyle.BOX_LABEL[b.style] ?: "") .let { if (en) enLabel(b.style) else it }.uppercase(), 20f, color, true))
         b.title?.let { box.addView(a.st.text(it, 32f, Color.WHITE, true, 2), box.lp(top = a.st.px(4), bottom = a.st.px(8))) }
@@ -363,7 +363,7 @@ class MockExamScreen(a: LearnActivity, val pack: Pack, val spec: MockExamSpec) :
         spec.sections.forEach { s -> col.addView(a.st.text("• " + s.title, 24f), col.lp(bottom = a.st.px(4))) }
         spec.instructions?.let { col.addView(a.st.text(a.st.md(it), 21f, LearnStyle.MUTED), col.lp(top = a.st.px(10), bottom = a.st.px(12))) }
         col.addView(a.st.text(t("Sujet original d'entraînement, écrit « dans le style » de l'examen : ce n'est pas un sujet officiel.", "Original practice paper in the style of the exam: not an official paper."), 19f, LearnStyle.MUTED), col.lp(bottom = a.st.px(14)))
-        col.addView(a.st.button(t("Commencer l'épreuve", "Start the paper"), fill = 0xFF1F5A2E.toInt()) { session; a.rebuild() }, col.lp(-2, -2))
+        col.addView(a.st.button(t("Commencer l'épreuve", "Start the paper"), fill = LearnStyle.GOOD) { session; a.rebuild() }, col.lp(-2, -2))
         return a.frame(t("Épreuve blanche", "Mock exam"), pack.title, ScrollView(a).apply { clipChildren = true; addView(col) }, t("OK : commencer   ·   RETOUR : plus tard", "OK: start   ·   BACK: later"))
     }
 

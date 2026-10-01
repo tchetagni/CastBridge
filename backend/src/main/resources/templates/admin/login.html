@@ -3,7 +3,8 @@
 <head th:replace="~{admin/layout :: head('Connexion')}"></head>
 <body class="login">
 <main class="login-box">
-    <h1>CastBridge <span>admin</span></h1>
+    <img class="logo" th:src="@{/admin/assets/castbridge-logo.svg}" alt="CastBridge">
+    <h1><span>Administration</span></h1>
     <p class="flash err" th:if="${param.erreur}">Identifiant ou mot de passe incorrect. Après 5 échecs, le compte est verrouillé 15 minutes.</p>
     <p class="flash ok" th:if="${param.deconnexion}">Vous êtes déconnecté.</p>
     <form th:action="@{/admin/login}" method="post">

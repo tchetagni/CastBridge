@@ -32,11 +32,13 @@
     <application
         android:name=".CastBridgeApp"
         android:label="CastBridge"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:usesCleartextTraffic="true"
         android:fullBackupContent="@xml/backup_rules"
         android:dataExtractionRules="@xml/data_extraction_rules"
-        android:theme="@android:style/Theme.Material.NoActionBar">
-        <activity android:name=".MainActivity" android:exported="true">
+        android:theme="@style/Theme.CastBridge">
+        <activity android:name=".MainActivity" android:exported="true" android:theme="@style/Theme.CastBridge.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -44,7 +46,7 @@
         </activity>
         <!-- "Share > CastBridge" of a link, magnet: links and .torrent files: the TV downloads them (docs/DOWNLOADS.md) -->
         <activity android:name=".ShareToTvActivity" android:exported="true" android:label="Télécharger sur la TV"
-            android:theme="@android:style/Theme.Material.NoActionBar">
+            android:theme="@style/Theme.CastBridge">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -75,7 +77,7 @@
         <activity android:name=".RemoteActivity" android:exported="false" android:label="Télécommande TV"
             android:theme="@android:style/Theme.Material.NoActionBar" android:windowSoftInputMode="adjustResize" />
         <service android:name=".RemoteTileService" android:exported="true" android:label="Télécommande TV"
-            android:icon="@drawable/ic_remote" android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            android:icon="@drawable/ic_cb_telecommande" android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter><action android:name="android.service.quicksettings.action.QS_TILE" /></intent-filter>
         </service>
         <service android:name=".UploadService" android:exported="false"

@@ -337,7 +337,7 @@ fun RemoteScreen(onClose: () -> Unit) {
                 SystemButton(Icons.Filled.Tv, "Accueil TV") { RemoteController.global(RemoteGlobal.HOME) }
                 SystemButton(Icons.Filled.ViewCarousel, "Récents") { RemoteController.global(RemoteGlobal.RECENTS) }
                 SystemButton(Icons.Filled.Notifications, "Notifs") { RemoteController.global(RemoteGlobal.NOTIFICATIONS) }
-                SystemButton(Icons.Filled.Settings, "Réglages") { RemoteController.global(RemoteGlobal.QUICK_SETTINGS) }
+                SystemButton(cbv(R.drawable.ic_cb_reglages), "Réglages") { RemoteController.global(RemoteGlobal.QUICK_SETTINGS) }
             }
 
             SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
@@ -355,9 +355,9 @@ fun RemoteScreen(onClose: () -> Unit) {
             // Playback
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly, verticalAlignment = Alignment.CenterVertically) {
                 RemoteKeyButton(RemoteKey.PREVIOUS, Icons.Filled.SkipPrevious, size = 48)
-                RemoteKeyButton(RemoteKey.REWIND, Icons.Filled.Replay10, size = 52)
-                RemoteKeyButton(RemoteKey.PLAY_PAUSE, Icons.Filled.PlayArrow, size = 64, accent = true)
-                RemoteKeyButton(RemoteKey.FAST_FORWARD, Icons.Filled.Forward10, size = 52)
+                RemoteKeyButton(RemoteKey.REWIND, cbv(R.drawable.ic_cb_recul_10s), size = 52)
+                RemoteKeyButton(RemoteKey.PLAY_PAUSE, cbv(R.drawable.ic_cb_lecture), size = 64, accent = true)
+                RemoteKeyButton(RemoteKey.FAST_FORWARD, cbv(R.drawable.ic_cb_avance_10s), size = 52)
                 RemoteKeyButton(RemoteKey.NEXT, Icons.Filled.SkipNext, size = 48)
                 RemoteKeyButton(RemoteKey.STOP, Icons.Filled.Stop, size = 48)
             }
@@ -395,10 +395,10 @@ private fun screenName(s: String) = when (s) {
 @Composable
 private fun LinkBadge(s: RemoteSession.Status, rtt: Long?) {
     val (color, text) = when (s.link) {
-        RemoteSession.Link.CONNECTED -> Color(0xFF4ADE80) to "${s.via ?: ""}${(s.rttMs ?: rtt)?.let { " · $it ms" } ?: ""}"
-        RemoteSession.Link.CONNECTING -> Color(0xFFFFA726) to "connexion…"
-        RemoteSession.Link.OFFLINE -> Color(0xFFFF6B6B) to "hors ligne"
-        RemoteSession.Link.BAD_PIN -> Color(0xFFFF6B6B) to "code ?"
+        RemoteSession.Link.CONNECTED -> Cb.success to "${s.via ?: ""}${(s.rttMs ?: rtt)?.let { " · $it ms" } ?: ""}"
+        RemoteSession.Link.CONNECTING -> Cb.warning to "connexion…"
+        RemoteSession.Link.OFFLINE -> Cb.error to "hors ligne"
+        RemoteSession.Link.BAD_PIN -> Cb.error to "code ?"
     }
     Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(end = 4.dp).semantics { contentDescription = "Liaison : $text" }) {
         Box(Modifier.size(10.dp).clip(CircleShape).background(color))

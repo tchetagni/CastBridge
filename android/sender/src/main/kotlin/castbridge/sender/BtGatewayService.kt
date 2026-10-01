@@ -128,7 +128,7 @@ class BtGatewayService : Service() {
         if (Build.VERSION.SDK_INT >= 26) nm.createNotificationChannel(NotificationChannel(CHANNEL, "Internet partagé avec la TV", NotificationManager.IMPORTANCE_LOW))
         val stop = android.app.PendingIntent.getService(this, 1, Intent(this, BtGatewayService::class.java).setAction(ACTION_STOP),
             android.app.PendingIntent.FLAG_IMMUTABLE)
-        return Notification.Builder(this, CHANNEL).setSmallIcon(android.R.drawable.stat_sys_data_bluetooth)
+        return Notification.Builder(this, CHANNEL).setSmallIcon(R.drawable.ic_stat_castbridge)
             .setContentTitle("CastBridge").setContentText(text).setOngoing(true)
             .addAction(Notification.Action.Builder(null, "Arrêter", stop).build()).build()
     }

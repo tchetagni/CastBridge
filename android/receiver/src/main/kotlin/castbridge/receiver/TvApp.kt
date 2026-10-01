@@ -9,6 +9,7 @@ import android.app.Application
 class TvApp : Application() {
     override fun onCreate() {
         super.onCreate()
+        TvFonts.init(this)
         TvConnect.installCrashHandler(this)
         runCatching { TvConnect.init(this) }.onFailure { TvConnect.logw("init: ${it.javaClass.simpleName}") }
         registerActivityLifecycleCallbacks(TvConnect.lifecycle)

@@ -74,8 +74,8 @@ class LibraryScreen(
             setBackgroundColor(TvStyle.BG)
             setPadding(TvStyle.dp(act, 48), TvStyle.dp(act, 28), TvStyle.dp(act, 48), 0)
         }
-        root.addView(TextView(act).apply { text = "Bibliothèque"; setTextColor(Color.WHITE); textSize = 30f; typeface = Typeface.DEFAULT_BOLD })
-        header = TextView(act).apply { setTextColor(TvStyle.MUTED); textSize = 15f; setPadding(0, TvStyle.dp(act, 4), 0, TvStyle.dp(act, 8)) }
+        root.addView(TextView(act).apply { text = "Bibliothèque"; setTextColor(Color.WHITE); textSize = 30f; typeface = TvFonts.bold })
+        header = TextView(act).apply { setTextColor(TvStyle.MUTED); textSize = TvStyle.Type.CAPTION; setPadding(0, TvStyle.dp(act, 4), 0, TvStyle.dp(act, 8)) }
         root.addView(header)
         list = RecyclerView(act).apply {
             layoutManager = GridLayoutManager(act, COLS).apply {
@@ -226,7 +226,7 @@ class LibraryScreen(
                 val card = MediaCard(parent.context)
                 val m = TvStyle.dp(act, 10)
                 card.layoutParams = RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply { setMargins(m, m, m, m) }
-                TvStyle.focusZoom(card, 1.07f)
+                TvStyle.focusZoom(card)
                 object : RecyclerView.ViewHolder(card) {}.also { h ->
                     fun row() = rows.getOrNull(h.bindingAdapterPosition) as? Row.Card
                     card.setOnClickListener { row()?.let { open(it.item, it.sectionItems, it.index) } }
@@ -241,7 +241,7 @@ class LibraryScreen(
             else -> object : RecyclerView.ViewHolder(TextView(parent.context).apply {
                 layoutParams = RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
                 setTextColor(if (viewType == 0) TvStyle.ACCENT else TvStyle.MUTED); textSize = 20f
-                if (viewType == 0) typeface = Typeface.DEFAULT_BOLD
+                if (viewType == 0) typeface = TvFonts.bold
                 setPadding(TvStyle.dp(act, 4), TvStyle.dp(act, 18), 0, TvStyle.dp(act, 8)); isFocusable = false
             }) {}
         }

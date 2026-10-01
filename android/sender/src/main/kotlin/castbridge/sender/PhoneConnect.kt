@@ -36,6 +36,7 @@ class CastBridgeApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        ThemePrefs.load(this)
         PhoneConnect.init(this)
         TvLinkManager.init(this)
         // Light crash handler: one small file written at once, sent at the next start (POST /api/v1/devices/crash).

@@ -177,7 +177,7 @@ fun TvScreen(fixedBase: String? = null, extra: @Composable (TvClient) -> Unit = 
                 ListItem(
                     modifier = Modifier.clickable { picker.launch(arrayOf("video/*", "audio/*")) },
                     colors = ListItemDefaults.colors(containerColor = Color.Transparent),
-                    leadingContent = { Icon(Icons.Filled.VideoLibrary, null, tint = cs.primary) },
+                    leadingContent = { Icon(cbv(R.drawable.ic_cb_bibliotheque), null, tint = cs.primary) },
                     headlineContent = { Text(fileName ?: "Aucun fichier", maxLines = 1) },
                     supportingContent = { Text("Toucher pour choisir un fichier") },
                 )
@@ -197,7 +197,7 @@ fun TvScreen(fixedBase: String? = null, extra: @Composable (TvClient) -> Unit = 
                             UploadService.start(ctx, fileUri!!, fileName!!, target,
                                 fixedBase?.removePrefix("http://") ?: if (useManual) manualIp.trim() else null, pin, progressive)
                         }.onFailure { message = "Impossible de démarrer l'envoi : ${it.message}" }
-                    }) { Icon(Icons.Filled.CloudUpload, null); Spacer(Modifier.width(8.dp)); Text("Envoyer et lire") }
+                    }) { Icon(cbv(R.drawable.ic_cb_envoyer), null); Spacer(Modifier.width(8.dp)); Text("Envoyer et lire") }
                     if (busy) OutlinedButton(onClick = { UploadService.cancel(ctx) }) { Text("Annuler") }
                 }
             }

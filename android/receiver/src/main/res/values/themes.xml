@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Charte CastBridge (design-tokens.json): Inter for the text, gold accent, rounded surface-high dialogs. -->
+    <style name="CastBridge.Dialog" parent="@android:style/Theme.DeviceDefault.Dialog.Alert">
+        <item name="android:fontFamily">@font/cb_inter</item>
+        <item name="android:windowBackground">@drawable/cb_dialog_bg</item>
+        <item name="android:colorBackground">@color/cb_surface_high</item>
+        <item name="android:textColorPrimary">@color/cb_text_high</item>
+        <item name="android:textColorSecondary">@color/cb_text_medium</item>
+        <item name="android:colorAccent">@color/cb_primary</item>
+        <item name="android:textColorHint">@color/cb_text_low</item>
+    </style>
+    <!-- App theme of the TV (full screen, black behind the video). -->
+    <style name="Theme.CastBridge.Tv" parent="@android:style/Theme.Black.NoTitleBar.Fullscreen">
+        <item name="android:fontFamily">@font/cb_inter</item>
+        <item name="android:alertDialogTheme">@style/CastBridge.Dialog</item>
+        <item name="android:colorAccent">@color/cb_primary</item>
+    </style>
+    <!-- Secondary screens (server, downloads, remote help): same look on the charte background. -->
+    <style name="Theme.CastBridge.Tv.Screen" parent="@android:style/Theme.DeviceDefault.NoActionBar">
+        <item name="android:fontFamily">@font/cb_inter</item>
+        <item name="android:windowBackground">@color/cb_background</item>
+        <item name="android:alertDialogTheme">@style/CastBridge.Dialog</item>
+        <item name="android:colorAccent">@color/cb_primary</item>
+    </style>
+    <!-- Launch theme only: the activity goes back to Theme.CastBridge.Tv in onCreate (setTheme). Before Android 12: charte
+         background + symbol; Android 12+: system splash screen (see values-v31). -->
+    <style name="Theme.CastBridge.Tv.Splash" parent="Theme.CastBridge.Tv">
+        <item name="android:windowBackground">@drawable/splash_window</item>
+    </style>
+</resources>

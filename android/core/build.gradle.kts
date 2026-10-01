@@ -50,5 +50,8 @@ tasks.test {
     environment("LC_ALL", "C.UTF-8")
     // « Apprendre »: the tests validate every pack source of the repository (docs/LEARN.md)
     systemProperty("learn.content", learnContent.absolutePath)
+    // Charte graphique: the tests read branding/design-tokens.json (contrasts, generated Kotlin in sync)
+    systemProperty("branding.dir", rootProject.projectDir.parentFile.resolve("branding").absolutePath)
+    inputs.dir(rootProject.projectDir.parentFile.resolve("branding")).withPropertyName("branding").optional()
     inputs.dir(learnContent).withPropertyName("learnContent").optional()
 }

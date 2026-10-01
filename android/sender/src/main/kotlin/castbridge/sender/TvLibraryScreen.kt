@@ -157,15 +157,15 @@ fun TvLibraryDialog(client: TvClient, onDismiss: () -> Unit, onDownload: ((TvLib
                             modifier = Modifier.combinedClickable(onClick = { menuFor = null; f() }),
                             colors = ListItemDefaults.colors(containerColor = Color.Transparent))
                     if (i.type != MediaType.OTHER) {
-                        if (i.resumeMs > 0 && !i.watched) row(Icons.Filled.PlayArrow, "Reprendre à ${LibraryLogic.clock(i.resumeMs)}") { play(i, i.resumeMs) }
+                        if (i.resumeMs > 0 && !i.watched) row(cbv(R.drawable.ic_cb_lecture), "Reprendre à ${LibraryLogic.clock(i.resumeMs)}") { play(i, i.resumeMs) }
                         row(Icons.Filled.Replay, "Lire depuis le début") { play(i, 0) }
                         row(if (i.watched) Icons.Filled.VisibilityOff else Icons.Filled.Visibility, if (i.watched) "Marquer comme non vu" else "Marquer comme vu") {
                             act("Marquage") { setWatched(i.name, !i.watched) }
                         }
                     }
-                    onDownload?.let { d -> row(Icons.Filled.Download, "Télécharger sur le téléphone") { d(i) } }
+                    onDownload?.let { d -> row(cbv(R.drawable.ic_cb_telechargements), "Télécharger sur le téléphone") { d(i) } }
                     volumes.filter { it.present && it.writable && it.id != i.volume }.forEach { v ->
-                        row(Icons.Filled.DriveFileMove, "Déplacer vers ${v.label}") { act("Déplacement") { moveFile(i.name, v.id) }.also { msg = "Déplacement vers ${v.label} lancé" } }
+                        row(cbv(R.drawable.ic_cb_deplacer_vers_tv), "Déplacer vers ${v.label}") { act("Déplacement") { moveFile(i.name, v.id) }.also { msg = "Déplacement vers ${v.label} lancé" } }
                     }
                     row(Icons.Filled.Edit, "Renommer") { renameFor = i }
                     row(Icons.Filled.Delete, "Supprimer") { deleteFor = i }
@@ -200,7 +200,7 @@ private fun LibCard(client: TvClient, i: TvLibItem, modifier: Modifier) {
                 when (i.type) { MediaType.VIDEO -> Icons.Filled.Movie; MediaType.AUDIO -> Icons.Filled.MusicNote; MediaType.OTHER -> Icons.Filled.Description },
                 null, Modifier.size(36.dp), tint = cs.onSurfaceVariant)
             Badge(if (i.volumeKind == "internal") "Interne" else if (i.volumeKind == "saf") "Dossier" else "Clé", cs.primaryContainer, Modifier.align(Alignment.TopStart))
-            if (i.watched) Badge("VU", Color(0xFF1B5E20), Modifier.align(Alignment.TopEnd))
+            if (i.watched) Badge("VU", Color(0xE61C7C53), Modifier.align(Alignment.TopEnd))
             if (i.playing) Badge("▶ en lecture", cs.primary.copy(alpha = 0.85f), Modifier.align(Alignment.Center))
             if (i.durationMs > 0) Badge(LibraryLogic.clock(i.durationMs), Color.Black.copy(alpha = 0.7f), Modifier.align(Alignment.BottomEnd).padding(bottom = 4.dp))
             val p = if (i.resumeMs > 0 && !i.watched) LibraryLogic.progress(i.resumeMs, i.durationMs) else 0f
@@ -225,7 +225,7 @@ fun TvTools(client: TvClient) {
     var library by remember { mutableStateOf(false) }
     var transfer by remember { mutableStateOf(false) }
     Row(Modifier.fillMaxWidth().padding(vertical = 4.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-        FilledTonalButton(onClick = { library = true }) { Icon(Icons.Filled.VideoLibrary, null); Spacer(Modifier.width(6.dp)); Text("Bibliothèque") }
+        FilledTonalButton(onClick = { library = true }) { Icon(cbv(R.drawable.ic_cb_bibliotheque), null); Spacer(Modifier.width(6.dp)); Text("Bibliothèque") }
         FilledTonalButton(onClick = { transfer = true }) { Icon(Icons.Filled.SwapVert, null); Spacer(Modifier.width(6.dp)); Text("Échange de fichiers") }
     }
     if (library) TvLibraryDialog(client, onDismiss = { library = false },

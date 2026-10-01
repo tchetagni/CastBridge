@@ -40,11 +40,11 @@ class GameDef(
 
 object Games {
     val all: List<GameDef> = listOf(
-        GameDef("quiz", R.drawable.ic_t_quiz, "Quiz des Millions", "Solo · Multijoueur",
+        GameDef("quiz", R.drawable.ic_cb_quiz, "Quiz des Millions", "Solo · Multijoueur",
             "Culture générale et niveaux scolaires, en solo ou avec les téléphones.", GamesColors.QUIZ,
             { c -> quizBest(c)?.let { "Meilleur score : $it" } ?: "Pas encore joué" },
             { a -> a.startActivity(Intent(a, QuizActivity::class.java)) }),
-        GameDef("chess", R.drawable.ic_t_chess, "Échecs", "Solo · À deux · En ligne",
+        GameDef("chess", R.drawable.ic_cb_echecs, "Échecs", "Solo · À deux · En ligne",
             "Contre l'ordinateur, à deux sur la TV ou en ligne.", GamesColors.CHESS,
             { _ -> if (ChessHub.room?.stage.let { it != null && it != castbridge.core.chess.ChessRoom.Stage.CLOSED }) "Partie en cours" else "Prêt à jouer" },
             { a -> a.startActivity(Intent(a, ChessActivity::class.java)) }),

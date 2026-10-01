@@ -127,7 +127,7 @@ fun TvTransferDialog(client: TvClient, onDismiss: () -> Unit) {
                         OutlinedButton(onClick = { pick.launch(arrayOf("*/*")) }) { Icon(Icons.Filled.AttachFile, null); Spacer(Modifier.width(6.dp)); Text("Choisir des fichiers") }
                         val allOk = picked.isNotEmpty() && picked.all { checks[it.name]?.ok == true }
                         val busy = upload is UploadService.State.Uploading || upload is UploadService.State.Waiting
-                        Button(enabled = allOk && !busy && next < 0, onClick = { startUpload(0) }) { Icon(Icons.Filled.CloudUpload, null); Spacer(Modifier.width(6.dp)); Text("Envoyer") }
+                        Button(enabled = allOk && !busy && next < 0, onClick = { startUpload(0) }) { Icon(cbv(R.drawable.ic_cb_envoyer), null); Spacer(Modifier.width(6.dp)); Text("Envoyer") }
                         if (busy) TextButton(onClick = { UploadService.cancel(ctx); next = -1 }) { Text("Annuler") }
                     }
                     picked.forEach { p ->
@@ -188,7 +188,7 @@ fun TvTransferDialog(client: TvClient, onDismiss: () -> Unit) {
                             supportingContent = { Text("${formatSize(f.size)} · ${f.volumeLabel}") },
                             trailingContent = {
                                 IconButton(enabled = d.state !is ResumableDownload.State.Downloading, onClick = { DownloadService.start(ctx, client.base, client.pin, f.name, f.size, tree) }) {
-                                    Icon(Icons.Filled.Download, "Télécharger")
+                                    Icon(cbv(R.drawable.ic_cb_telechargements), "Télécharger")
                                 }
                             })
                     }

@@ -5,13 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <title th:text="${title} + ' · CastBridge admin'">CastBridge admin</title>
+    <link rel="icon" type="image/svg+xml" th:href="@{/admin/assets/favicon.svg}">
+    <link rel="icon" sizes="any" th:href="@{/admin/assets/favicon.ico}">
+    <link rel="apple-touch-icon" th:href="@{/admin/assets/apple-touch-icon.png}">
+    <meta name="theme-color" content="#0A0F1E">
     <link rel="stylesheet" th:href="@{/admin/assets/admin.css}">
     <script th:src="@{/admin/assets/chart.umd.min.js}" defer></script>
     <script th:src="@{/admin/assets/admin.js}" defer></script>
 </head>
 <body>
 <header th:fragment="nav" class="top">
-    <a class="brand" th:href="@{/admin}">CastBridge <span>admin</span></a>
+    <a class="brand" th:href="@{/admin}"><img th:src="@{/admin/assets/castbridge-logo.svg}" alt="CastBridge"> <span>admin</span></a>
     <nav>
         <a th:href="@{/admin}" th:classappend="${active == 'dashboard'} ? 'on'">Tableau de bord</a>
         <a th:href="@{/admin/kpi}" th:classappend="${active == 'kpi'} ? 'on'">Indicateurs</a>

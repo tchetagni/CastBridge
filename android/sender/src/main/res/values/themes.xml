@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Charte CastBridge : fond #0A0F1E (design-tokens.json, color.dark.background). -->
+    <style name="Theme.CastBridge" parent="@android:style/Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/cb_background</item>
+        <item name="android:statusBarColor">@color/cb_background</item>
+        <item name="android:navigationBarColor">@color/cb_background</item>
+    </style>
+    <!-- Thème de lancement uniquement : MainActivity repasse sur Theme.CastBridge dès onCreate (setTheme). -->
+    <style name="Theme.CastBridge.Splash" parent="Theme.CastBridge">
+        <item name="android:windowBackground">@drawable/splash_window</item>
+    </style>
+</resources>

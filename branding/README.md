@@ -11,7 +11,7 @@ Dossier complet de la charte graphique CastBridge (écosystème TV + smartphone)
 - `guide/CastBridge-charte-graphique.pdf` - guide PDF de la charte (11 pages).
 - `mockups/index.html` - maquettes clés TV (1920 x 1080) et mobile (360 x 800).
 - `export/` - exports PNG et formats Android.
-- `tools/` - scripts reproductibles (`build_guide.py`, `gen_android_icons.py`).
+- `tools/` - scripts reproductibles (`svg2vd.py`, `gen_app_assets.py`, `gen_tokens.py`, `subset_fonts.py`, `gen_android_icons.py`) ; le guide PDF se régénère avec `tools/build-branding-guide` (racine du dépôt).
 
 ## Exports Android
 
@@ -23,8 +23,8 @@ Dossier complet de la charte graphique CastBridge (écosystème TV + smartphone)
 ## Palette (source de vérité)
 
 - Sombre (TV) : fond `#0A0F1E`, surface `#151D37`, primaire `#F5B025`, secondaire `#2E9E6B`, accent `#FF8A3D`.
-- Clair (téléphone) : fond `#F7F8FC`, surface `#FFFFFF`, primaire `#B7791F`.
-- Sémantique : succès `#35C08A` / `#1F8A5C`, alerte `#F5B025` / `#9A6500`, erreur `#FF6B6B` / `#C5343A`, info `#6CB6FF` / `#1668C7`.
+- Clair (téléphone) : fond `#F7F8FC`, surface `#FFFFFF`, primaire `#946219` (v1.1 ; `#B7791F` reste la teinte de marque pour les grands éléments et icônes), accent `#B05123`, secondaire `#1C7C53`.
+- Sémantique : succès `#35C08A` / `#1C7C53`, alerte `#F5B025` / `#9A6500`, erreur `#FF6B6B` / `#C5343A`, info `#6CB6FF` / `#1668C7`.
 
 ## Sous-marques
 
@@ -37,3 +37,11 @@ Dossier complet de la charte graphique CastBridge (écosystème TV + smartphone)
 - Le thème sombre est premier (TV) ; le thème clair sert au téléphone.
 - Aucun fond vidéo ni image lourde : uniquement vecteurs et dégradés simples (TV ~ 1 Go de RAM).
 - Focus télécommande : anneau `#FFE1A6` 3 dp + échelle 1,04, visible à 3 m.
+
+## Version 1.1 (application aux apps et au serveur)
+
+- Contrastes WCAG AA corrigés dans `design-tokens.json` (voir `contrast.note`) ; le test JVM `BrandContrastTest` (module `:core`) vérifie toutes les paires déclarées dans `contrast.pairs`.
+- `python3 branding/tools/gen_tokens.py` génère `BrandTokens.kt` (Kotlin partagé), les couleurs XML des apps et `cb-tokens.css` (pages /admin).
+- `python3 branding/tools/gen_app_assets.py` génère les ressources Android (icônes `ic_cb_*`, logos `logo_*`, lanceur, bannière TV, notification, polices).
+- `fonts/subset/` : sous-ensembles latin des polices (embarqués dans les apps) ; `tools/build-branding-guide` régénère le PDF.
+- Icônes créées : télécommande, sur le téléphone, passerelle Bluetooth, options développeur.

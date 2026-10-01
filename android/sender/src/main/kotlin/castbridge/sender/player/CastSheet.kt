@@ -1,5 +1,7 @@
 package castbridge.sender.player
 
+import castbridge.sender.cbv
+
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -69,7 +71,7 @@ fun CastSheet(item: PlayItem, posMs: Long, durMs: Long, only: CastAction? = null
         LazyColumn(Modifier.fillMaxWidth().padding(bottom = 24.dp)) {
             item {
                 Row(Modifier.padding(horizontal = 20.dp), verticalAlignment = Alignment.CenterVertically) {
-                    Icon(Icons.Filled.Cast, null, tint = MaterialTheme.colorScheme.primary)
+                    Icon(cbv(castbridge.sender.R.drawable.ic_cb_caster), null, tint = MaterialTheme.colorScheme.primary)
                     Spacer(Modifier.width(12.dp))
                     Column(Modifier.weight(1f)) {
                         Text("Diffuser sur", style = MaterialTheme.typography.titleLarge)
@@ -128,7 +130,7 @@ fun CastSheet(item: PlayItem, posMs: Long, durMs: Long, only: CastAction? = null
                         leadingContent = { Icon(Icons.Filled.Tv, null, tint = MaterialTheme.colorScheme.onSurfaceVariant) },
                         headlineContent = { Text(r.name, maxLines = 1, overflow = TextOverflow.Ellipsis) },
                         supportingContent = { Text("DLNA · lecture en direct depuis le téléphone") },
-                        trailingContent = { Icon(Icons.Filled.PlayArrow, null) },
+                        trailingContent = { Icon(cbv(castbridge.sender.R.drawable.ic_cb_lecture), null) },
                     )
                 }
             }
@@ -137,10 +139,11 @@ fun CastSheet(item: PlayItem, posMs: Long, durMs: Long, only: CastAction? = null
     }
 }
 
+@androidx.compose.runtime.Composable
 private fun icon(a: CastAction): ImageVector = when (a) {
-    CastAction.LIVE -> Icons.Filled.CastConnected
-    CastAction.COPY -> Icons.Filled.ContentCopy
-    CastAction.MOVE -> Icons.Filled.DriveFileMove
+    CastAction.LIVE -> cbv(castbridge.sender.R.drawable.ic_cb_caster)
+    CastAction.COPY -> cbv(castbridge.sender.R.drawable.ic_cb_copier)
+    CastAction.MOVE -> cbv(castbridge.sender.R.drawable.ic_cb_deplacer_vers_tv)
 }
 
 private fun subtitle(a: CastAction, item: PlayItem): String = when (a) {

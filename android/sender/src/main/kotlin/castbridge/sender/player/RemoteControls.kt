@@ -1,5 +1,7 @@
 package castbridge.sender.player
 
+import castbridge.sender.cbv
+
 import android.content.Intent
 import android.widget.Toast
 import androidx.compose.foundation.background
@@ -39,17 +41,17 @@ fun RemoteControls(r: Remote, modifier: Modifier = Modifier, onClose: () -> Unit
     var seeking by remember { mutableStateOf<Float?>(null) }
     val pos = r.clock.now(now)
     val dur = r.clock.durMs
-    Column(modifier.fillMaxSize().background(Color(0xFF0B0B0B)).systemBarsPadding().padding(24.dp),
+    Column(modifier.fillMaxSize().background(Color(castbridge.core.brand.BrandTokens.Dark.BACKGROUND)).systemBarsPadding().padding(24.dp),
         horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(10.dp, Alignment.CenterVertically)) {
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
             IconButton(onClose) { Icon(Icons.AutoMirrored.Filled.ArrowBack, "Fermer", tint = Color.White) }
             Spacer(Modifier.weight(1f))
         }
         Spacer(Modifier.weight(1f))
-        Icon(Icons.Filled.CastConnected, null, Modifier.size(72.dp), tint = MaterialTheme.colorScheme.primary)
+        Icon(cbv(castbridge.sender.R.drawable.ic_cb_caster), null, Modifier.size(72.dp), tint = MaterialTheme.colorScheme.primary)
         Text("Sur ${r.target.name}", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.primary)
         Text(r.item.name, style = MaterialTheme.typography.titleLarge, color = Color.White, maxLines = 2, overflow = TextOverflow.Ellipsis, textAlign = TextAlign.Center)
-        r.message?.let { Text(it, style = MaterialTheme.typography.bodyMedium, color = Color(0xFFBBBBBB), textAlign = TextAlign.Center) }
+        r.message?.let { Text(it, style = MaterialTheme.typography.bodyMedium, color = Color(castbridge.core.brand.BrandTokens.Dark.TEXT_MEDIUM), textAlign = TextAlign.Center) }
         if (r.item.kind != MediaKind.IMAGE && r.phase == Remote.Phase.PLAYING) {
             if (dur > 0) {
                 Slider(seeking ?: pos.toFloat(), { seeking = it }, valueRange = 0f..dur.toFloat(),
@@ -60,11 +62,11 @@ fun RemoteControls(r: Remote, modifier: Modifier = Modifier, onClose: () -> Unit
                 }
             }
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(20.dp)) {
-                IconButton({ CastSession.skip(-10_000) }) { Icon(Icons.Filled.Replay10, "-10 s", Modifier.size(36.dp), tint = Color.White) }
+                IconButton({ CastSession.skip(-10_000) }) { Icon(cbv(castbridge.sender.R.drawable.ic_cb_recul_10s), "-10 s", Modifier.size(36.dp), tint = Color.White) }
                 FilledIconButton(CastSession::toggle, Modifier.size(76.dp)) {
-                    Icon(if (r.clock.playing) Icons.Filled.Pause else Icons.Filled.PlayArrow, "Lecture / pause", Modifier.size(44.dp))
+                    Icon(if (r.clock.playing) cbv(castbridge.sender.R.drawable.ic_cb_pause) else cbv(castbridge.sender.R.drawable.ic_cb_lecture), "Lecture / pause", Modifier.size(44.dp))
                 }
-                IconButton({ CastSession.skip(10_000) }) { Icon(Icons.Filled.Forward10, "+10 s", Modifier.size(36.dp), tint = Color.White) }
+                IconButton({ CastSession.skip(10_000) }) { Icon(cbv(castbridge.sender.R.drawable.ic_cb_avance_10s), "+10 s", Modifier.size(36.dp), tint = Color.White) }
             }
             r.volume?.let { v ->
                 var vol by remember(r.target) { mutableStateOf<Float?>(null) }
@@ -80,7 +82,7 @@ fun RemoteControls(r: Remote, modifier: Modifier = Modifier, onClose: () -> Unit
         Spacer(Modifier.weight(1f))
         if (r.item.kind != MediaKind.IMAGE && r.phase != Remote.Phase.FAILED && r.phase != Remote.Phase.STARTING)
             Button({ CastSession.backToPhone(ctx) }, Modifier.fillMaxWidth()) {
-                Icon(Icons.Filled.PhoneAndroid, null); Spacer(Modifier.width(8.dp)); Text("Revenir sur le téléphone")
+                Icon(cbv(castbridge.sender.R.drawable.ic_cb_sur_le_telephone), null); Spacer(Modifier.width(8.dp)); Text("Revenir sur le téléphone")
             }
         OutlinedButton({ if (r.tvHasIt || r.phase == Remote.Phase.STARTING) CastSession.stop(ctx) else CastSession.dismiss(ctx) }, Modifier.fillMaxWidth()) {
             Icon(Icons.Filled.StopCircle, null); Spacer(Modifier.width(8.dp))
@@ -120,6 +122,6 @@ fun AudioArt(title: String, subtitle: String?, art: androidx.compose.ui.graphics
         else Artwork(220.dp)
         Spacer(Modifier.height(16.dp))
         Text(title, style = MaterialTheme.typography.titleLarge, color = Color.White, maxLines = 2, overflow = TextOverflow.Ellipsis, textAlign = TextAlign.Center)
-        subtitle?.let { Text(it, style = MaterialTheme.typography.bodyMedium, color = Color(0xFFBBBBBB)) }
+        subtitle?.let { Text(it, style = MaterialTheme.typography.bodyMedium, color = Color(castbridge.core.brand.BrandTokens.Dark.TEXT_MEDIUM)) }
     }
 }
