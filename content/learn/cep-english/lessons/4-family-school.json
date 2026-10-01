@@ -1,0 +1,587 @@
+{
+ "chapter": "cep-english-vocab",
+ "lessons": [
+  {
+   "id": "cep-english-family-school",
+   "title": "My family and my school",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM2 — Anglais : famille, école, corps — reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; synthèse de révision orientée examen ; à faire relire par un enseignant",
+   "objectives": [
+    "Nommer les membres de la famille en anglais.",
+    "Nommer les objets de la classe et les parties du corps.",
+    "Employer this is / these are et le pluriel."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cep-english-family-school-01",
+    "cep-english-family-school-02",
+    "cep-english-family-school-03",
+    "cep-english-family-school-04",
+    "cep-english-family-school-05",
+    "cep-english-family-school-06"
+   ],
+   "selfCheck": [
+    "cep-english-family-school-q1",
+    "cep-english-family-school-q2",
+    "cep-english-family-school-q3",
+    "cep-english-family-school-q4",
+    "cep-english-family-school-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que ce lexique est conforme aux listes de vocabulaire officielles du CM2.",
+    "L'arbre de famille est un schéma simplifié."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "The family",
+     "md": "**mother** (mum), **father** (dad), **brother**, **sister**, **grandmother**, **grandfather**, **uncle**, **aunt**, **cousin**.\n\nOn dit **my** mother, **my** father (mon, ma, mes)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 500,
+      "h": 215,
+      "items": [
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 10,
+        "w": 140,
+        "h": 34,
+        "stroke": "ink",
+        "fill": "lightgrey",
+        "radius": 6
+       },
+       {
+        "t": "rect",
+        "x": 200,
+        "y": 10,
+        "w": 140,
+        "h": 34,
+        "stroke": "ink",
+        "fill": "lightgrey",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 32,
+        "text": "grandmother",
+        "size": 14,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 32,
+        "text": "grandfather",
+        "size": 14,
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 44,
+        "x2": 190,
+        "y2": 80,
+        "color": "grey",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 270,
+        "y1": 44,
+        "x2": 190,
+        "y2": 80,
+        "color": "grey",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 80,
+        "w": 100,
+        "h": 34,
+        "stroke": "blue",
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "rect",
+        "x": 200,
+        "y": 80,
+        "w": 100,
+        "h": 34,
+        "stroke": "blue",
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 102,
+        "text": "mother",
+        "size": 14,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 102,
+        "text": "father",
+        "size": 14,
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 114,
+        "x2": 110,
+        "y2": 150,
+        "color": "grey",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 114,
+        "x2": 250,
+        "y2": 150,
+        "color": "grey",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 150,
+        "x2": 250,
+        "y2": 150,
+        "color": "grey",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 180,
+        "y1": 150,
+        "x2": 180,
+        "y2": 170,
+        "color": "grey",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 150,
+        "x2": 110,
+        "y2": 170,
+        "color": "grey",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 150,
+        "x2": 250,
+        "y2": 170,
+        "color": "grey",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 170,
+        "w": 100,
+        "h": 34,
+        "stroke": "green",
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 192,
+        "text": "brother",
+        "size": 14,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 180,
+        "y": 170,
+        "w": 50,
+        "h": 34,
+        "stroke": "orange",
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 205,
+        "y": 192,
+        "text": "me",
+        "size": 14,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 260,
+        "y": 170,
+        "w": 100,
+        "h": 34,
+        "stroke": "green",
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 192,
+        "text": "sister",
+        "size": 14,
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Un arbre de famille.",
+     "alt": "Un arbre : grandmother et grandfather en haut ; mother et father au milieu ; brother, me et sister en bas."
+    },
+    {
+     "type": "audio",
+     "lang": "en-GB",
+     "text": "This is my mother. This is my father. I have got one brother and one sister."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "In the classroom",
+     "md": "**pen**, **pencil**, **book**, **notebook**, **ruler**, **bag**, **desk**, **chair**, **blackboard**, **teacher**, **pupil**.\n\nLe corps : **head**, **arm**, **hand**, **leg**, **foot** (pluriel : **feet**), **eye**, **ear**, **nose**, **mouth**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : this is / these are",
+     "statement": "Complète : « (1 book) This is a book. (2 books) These … books. »",
+     "steps": [
+      {
+       "md": "Un objet proche : **This is** a book."
+      },
+      {
+       "md": "Plusieurs objets proches : **These are** books (on ajoute -s au nom)."
+      }
+     ],
+     "answer": "**This is a book. These are books.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : les pluriels irréguliers",
+     "statement": "Écris le pluriel de : child, foot, man.",
+     "steps": [
+      {
+       "md": "Certains mots ne prennent pas -s."
+      },
+      {
+       "md": "child → **children** ; foot → **feet** ; man → **men**."
+      }
+     ],
+     "answer": "**children, feet, men.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Dire « I have two brother » : on écrit **two brothers**.\n- Dire « my sister, he » : **she** pour une fille.\n- Écrire « childs » : le pluriel de child est **children**.\n- Confondre **this** (un seul) et **these** (plusieurs).\n- Oublier a / an : **a** book, **an** orange (devant une voyelle)."
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-english-family-school-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-english-family-school-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-english-family-school-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-english-family-school-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-english-family-school-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-english-family-school-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Comment dit-on « grand-mère » ?",
+   "choices": [
+    "grandfather",
+    "aunt",
+    "sister",
+    "grandmother"
+   ],
+   "answer": 3,
+   "explanation": "Grandmother.",
+   "id": "cep-english-family-school-01",
+   "chapter": "cep-english-vocab",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-english-family-school",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Le pluriel de « foot » est « foots ».",
+   "answer": false,
+   "explanation": "C'est feet.",
+   "id": "cep-english-family-school-02",
+   "chapter": "cep-english-vocab",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-english-family-school",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque mot anglais à sa traduction.",
+   "pairs": [
+    [
+     "pencil",
+     "crayon"
+    ],
+    [
+     "ruler",
+     "règle"
+    ],
+    [
+     "blackboard",
+     "tableau noir"
+    ],
+    [
+     "bag",
+     "sac"
+    ]
+   ],
+   "explanation": "Objets de classe.",
+   "points": 2,
+   "id": "cep-english-family-school-03",
+   "chapter": "cep-english-vocab",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-english-family-school",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « I have got two … (brother) »",
+   "choices": [
+    "brother",
+    "brothers'",
+    "brothers",
+    "brotheres"
+   ],
+   "answer": 2,
+   "explanation": "Le pluriel régulier prend un -s.",
+   "id": "cep-english-family-school-04",
+   "chapter": "cep-english-vocab",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cep-english-family-school",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "open",
+   "prompt": "Écris en anglais une phrase pour présenter ton frère ou ta sœur.",
+   "model": "This is my brother. His name is Paul. (ou : This is my sister. Her name is Amina.)",
+   "rubric": [
+    "This is my …",
+    "Nom du frère ou de la sœur."
+   ],
+   "explanation": "This is my brother/sister.",
+   "points": 2,
+   "id": "cep-english-family-school-05",
+   "chapter": "cep-english-vocab",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cep-english-family-school",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Family and school.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Comment dit-on « tante » ?",
+     "choices": [
+      "uncle",
+      "aunt",
+      "cousin",
+      "mother"
+     ],
+     "answer": 1,
+     "explanation": "Aunt = tante.",
+     "id": "cep-english-family-school-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quel est le pluriel de « child » ?",
+     "choices": [
+      "children",
+      "childs",
+      "childes",
+      "childrens"
+     ],
+     "answer": 0,
+     "explanation": "Children.",
+     "id": "cep-english-family-school-06-b",
+     "points": 1
+    },
+    {
+     "kind": "truefalse",
+     "prompt": "« These are pens » veut dire « Ce sont des stylos ».",
+     "answer": true,
+     "explanation": "These are = ce sont (plusieurs objets).",
+     "id": "cep-english-family-school-06-c",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Choisis l'article : « … orange »",
+     "choices": [
+      "a",
+      "the",
+      "some",
+      "an"
+     ],
+     "answer": 3,
+     "explanation": "An devant une voyelle.",
+     "id": "cep-english-family-school-06-d",
+     "points": 1
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "method": "Article, singulier / pluriel.",
+   "id": "cep-english-family-school-06",
+   "chapter": "cep-english-vocab",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cep-english-family-school",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment dit-on « père » ?",
+   "choices": [
+    "brother",
+    "uncle",
+    "father",
+    "grandfather"
+   ],
+   "answer": 2,
+   "explanation": "Father.",
+   "id": "cep-english-family-school-q1",
+   "chapter": "cep-english-vocab",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-english-family-school",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Ear » signifie...",
+   "choices": [
+    "œil",
+    "oreille",
+    "nez",
+    "bouche"
+   ],
+   "answer": 1,
+   "explanation": "Ear = oreille.",
+   "id": "cep-english-family-school-q2",
+   "chapter": "cep-english-vocab",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-english-family-school",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pluriel de « man » :",
+   "choices": [
+    "men",
+    "mans",
+    "manes",
+    "man"
+   ],
+   "answer": 0,
+   "explanation": "Men.",
+   "id": "cep-english-family-school-q3",
+   "chapter": "cep-english-vocab",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-english-family-school",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« This is » s'emploie pour...",
+   "choices": [
+    "plusieurs objets",
+    "la famille",
+    "le temps",
+    "un objet proche"
+   ],
+   "answer": 3,
+   "explanation": "This is = c'est (un seul).",
+   "id": "cep-english-family-school-q4",
+   "chapter": "cep-english-vocab",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-english-family-school",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment dit-on « crayon » ?",
+   "choices": [
+    "pen",
+    "ruler",
+    "pencil",
+    "chalk"
+   ],
+   "answer": 2,
+   "explanation": "Pencil.",
+   "id": "cep-english-family-school-q5",
+   "chapter": "cep-english-vocab",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-english-family-school",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  }
+ ]
+}

@@ -1,0 +1,496 @@
+{
+ "chapter": "cep-histoire-geo-geo",
+ "lessons": [
+  {
+   "id": "cep-histoire-geo-relief-climat",
+   "title": "Relief, climats, végétation et cours d'eau",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM2 — Géographie : relief et climat — reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; synthèse de révision orientée examen ; à faire relire par un enseignant",
+   "objectives": [
+    "Décrire les grandes zones de végétation du Cameroun.",
+    "Associer un climat à une région.",
+    "Citer des fleuves et des montagnes du pays."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cep-histoire-geo-relief-climat-01",
+    "cep-histoire-geo-relief-climat-02",
+    "cep-histoire-geo-relief-climat-03",
+    "cep-histoire-geo-relief-climat-04",
+    "cep-histoire-geo-relief-climat-05",
+    "cep-histoire-geo-relief-climat-06"
+   ],
+   "selfCheck": [
+    "cep-histoire-geo-relief-climat-q1",
+    "cep-histoire-geo-relief-climat-q2",
+    "cep-histoire-geo-relief-climat-q3",
+    "cep-histoire-geo-relief-climat-q4",
+    "cep-histoire-geo-relief-climat-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier les noms de fleuves cités (Sanaga, Wouri, Nyong, Bénoué) et la position du lac Tchad.",
+    "Vérifier le vocabulaire des climats avec le manuel officiel (le pays est souvent décrit avec des sous-types).",
+    "Le schéma des zones de végétation est très simplifié ; aucun chiffre de température, de pluie ou d'altitude n'est donné."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Un pays varié",
+     "md": "Le Cameroun est parfois appelé « l'Afrique en miniature » parce qu'on y trouve la **côte**, la **forêt**, la **savane**, des **hauts plateaux**, des **montagnes** et le **désert qui s'approche** au nord.\n\nIl est situé en **Afrique centrale**, au fond du golfe de Guinée (océan Atlantique)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 230,
+      "items": [
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 10,
+        "w": 330,
+        "h": 48,
+        "stroke": "orange",
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 205,
+        "y": 38,
+        "text": "Steppe et sahel (Extrême-Nord)",
+        "size": 15,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 58,
+        "w": 330,
+        "h": 48,
+        "stroke": "orange",
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 205,
+        "y": 87,
+        "text": "Savane (Nord, Adamaoua)",
+        "size": 15,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 106,
+        "w": 330,
+        "h": 48,
+        "stroke": "green",
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 205,
+        "y": 135,
+        "text": "Forêt équatoriale (Sud, Est)",
+        "size": 15,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 154,
+        "w": 330,
+        "h": 48,
+        "stroke": "blue",
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 205,
+        "y": 183,
+        "text": "Côte : mangrove et océan Atlantique",
+        "size": 15,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 420,
+        "y1": 30,
+        "x2": 420,
+        "y2": 190,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 445,
+        "y": 24,
+        "text": "nord",
+        "size": 13,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 445,
+        "y": 205,
+        "text": "sud",
+        "size": 13,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 205,
+        "y": 222,
+        "text": "Schéma simplifié, non à l'échelle",
+        "size": 12,
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Les grandes zones de végétation, du nord au sud.",
+     "alt": "Quatre bandes empilées du nord vers le sud : steppe et sahel au nord, savane, forêt équatoriale, puis la côte avec la mangrove et l'océan Atlantique. Une flèche indique le sens nord-sud."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les climats",
+     "md": "- **Sud** : climat **équatorial**, chaud et humide, pluies abondantes, forêt dense.\n- **Centre-nord** : climat **tropical**, une saison des pluies et une longue saison sèche, savane.\n- **Extrême-Nord** : climat **sahélien**, très sec une grande partie de l'année, peu de pluie.\n- **Ouest et Nord-Ouest** : hauts plateaux, plus frais."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : associer climat et paysage",
+     "statement": "Quel paysage trouve-t-on dans la région du Sud et pourquoi ?",
+     "steps": [
+      {
+       "md": "Le Sud a un climat chaud et très pluvieux."
+      },
+      {
+       "md": "La chaleur et la pluie toute l'année permettent à la **forêt équatoriale** de pousser."
+      }
+     ],
+     "answer": "La **forêt équatoriale**, grâce au climat chaud et pluvieux."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Montagnes et cours d'eau",
+     "md": "- Le **mont Cameroun**, près de la côte, est un grand volcan, l'un des sommets les plus connus du pays.\n- Les **hauts plateaux** de l'Ouest sont des régions élevées et fraîches.\n- Des fleuves importants : la **Sanaga**, le **Wouri** (à Douala), le **Nyong** (vers l'océan) et la **Bénoué** (au nord). Le **lac Tchad** se trouve tout au nord, à la frontière du pays."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : lire un fleuve",
+     "statement": "Le Wouri se jette dans l'océan Atlantique près de Douala. Pourquoi cela est-il utile à la ville ?",
+     "steps": [
+      {
+       "md": "L'estuaire du Wouri forme un abri pour les navires."
+      },
+      {
+       "md": "Il permet d'installer le grand port de Douala."
+      }
+     ],
+     "answer": "Le Wouri permet un **port** important à Douala."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que tout le Cameroun a le même climat.\n- Confondre climat (la météo habituelle) et relief (les montagnes, les plaines).\n- Placer le lac Tchad au sud.\n- Oublier que les noms de régions indiquent la position (Nord, Sud...) mais pas le climat.\n- Dire que le mont Cameroun est dans le Nord."
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-histoire-geo-relief-climat-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-histoire-geo-relief-climat-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-histoire-geo-relief-climat-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-histoire-geo-relief-climat-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-histoire-geo-relief-climat-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-histoire-geo-relief-climat-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quel climat trouve-t-on au sud du Cameroun ?",
+   "choices": [
+    "sahélien",
+    "désertique",
+    "équatorial",
+    "polaire"
+   ],
+   "answer": 2,
+   "explanation": "Le sud est chaud et humide.",
+   "id": "cep-histoire-geo-relief-climat-01",
+   "chapter": "cep-histoire-geo-geo",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-histoire-geo-relief-climat",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Le Cameroun est en Afrique centrale.",
+   "answer": true,
+   "explanation": "Il est au fond du golfe de Guinée.",
+   "id": "cep-histoire-geo-relief-climat-02",
+   "chapter": "cep-histoire-geo-geo",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-histoire-geo-relief-climat",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque zone à son paysage.",
+   "pairs": [
+    [
+     "Sud",
+     "forêt équatoriale"
+    ],
+    [
+     "Nord",
+     "savane"
+    ],
+    [
+     "Extrême-Nord",
+     "steppe et sahel"
+    ],
+    [
+     "Côte",
+     "mangrove"
+    ]
+   ],
+   "explanation": "Chaque zone a sa végétation.",
+   "points": 2,
+   "id": "cep-histoire-geo-relief-climat-03",
+   "chapter": "cep-histoire-geo-geo",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-histoire-geo-relief-climat",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel fleuve passe à Douala ?",
+   "choices": [
+    "la Bénoué",
+    "le Wouri",
+    "le Nyong",
+    "le Logone"
+   ],
+   "answer": 1,
+   "explanation": "Le Wouri se jette dans l'Atlantique près de Douala.",
+   "id": "cep-histoire-geo-relief-climat-04",
+   "chapter": "cep-histoire-geo-geo",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cep-histoire-geo-relief-climat",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "open",
+   "prompt": "Pourquoi dit-on que le Cameroun est « l'Afrique en miniature » ?",
+   "model": "Parce qu'on y trouve plusieurs types de paysages et de climats : côte, forêt, savane, montagnes, sahel.",
+   "rubric": [
+    "Plusieurs paysages.",
+    "Plusieurs climats."
+   ],
+   "explanation": "Variété de paysages.",
+   "points": 2,
+   "id": "cep-histoire-geo-relief-climat-05",
+   "chapter": "cep-histoire-geo-geo",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cep-histoire-geo-relief-climat",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Les paysages du Cameroun.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Dans quelle zone trouve-t-on la mangrove ?",
+     "choices": [
+      "sur la côte",
+      "au nord",
+      "dans la savane",
+      "sur les hauts plateaux"
+     ],
+     "answer": 0,
+     "explanation": "La mangrove est une forêt d'arbres dans l'eau salée.",
+     "id": "cep-histoire-geo-relief-climat-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quel climat caractérise l'Extrême-Nord ?",
+     "choices": [
+      "équatorial",
+      "de montagne",
+      "océanique",
+      "sahélien"
+     ],
+     "answer": 3,
+     "explanation": "Peu de pluie, climat sec.",
+     "id": "cep-histoire-geo-relief-climat-06-b",
+     "points": 1
+    },
+    {
+     "kind": "truefalse",
+     "prompt": "Le mont Cameroun est un volcan.",
+     "answer": true,
+     "explanation": "C'est un volcan près de la côte.",
+     "id": "cep-histoire-geo-relief-climat-06-c",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quel lac se trouve à l'extrême nord ?",
+     "choices": [
+      "le lac Victoria",
+      "le lac Nyos",
+      "le lac Tchad",
+      "le lac Léman"
+     ],
+     "answer": 2,
+     "explanation": "Le lac Tchad.",
+     "id": "cep-histoire-geo-relief-climat-06-d",
+     "points": 1
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "method": "Associe climat, végétation et région.",
+   "id": "cep-histoire-geo-relief-climat-06",
+   "chapter": "cep-histoire-geo-geo",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cep-histoire-geo-relief-climat",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La forêt équatoriale pousse là où il fait...",
+   "choices": [
+    "froid et sec",
+    "chaud et très pluvieux",
+    "sec toute l'année",
+    "gelé"
+   ],
+   "answer": 1,
+   "explanation": "Chaleur et pluie toute l'année.",
+   "id": "cep-histoire-geo-relief-climat-q1",
+   "chapter": "cep-histoire-geo-geo",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-histoire-geo-relief-climat",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La savane est un paysage de...",
+   "choices": [
+    "hautes herbes et quelques arbres",
+    "forêt dense",
+    "sable seulement",
+    "glace"
+   ],
+   "answer": 0,
+   "explanation": "Herbes hautes et arbres espacés.",
+   "id": "cep-histoire-geo-relief-climat-q2",
+   "chapter": "cep-histoire-geo-geo",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-histoire-geo-relief-climat",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les hauts plateaux de l'Ouest sont...",
+   "choices": [
+    "plus chauds que le sud",
+    "désertiques",
+    "couverts de mer",
+    "plus frais"
+   ],
+   "answer": 3,
+   "explanation": "L'altitude rafraîchit le climat.",
+   "id": "cep-histoire-geo-relief-climat-q3",
+   "chapter": "cep-histoire-geo-geo",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-histoire-geo-relief-climat",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La Sanaga est...",
+   "choices": [
+    "une montagne",
+    "une ville",
+    "un fleuve",
+    "un lac"
+   ],
+   "answer": 2,
+   "explanation": "La Sanaga est un grand fleuve du pays.",
+   "id": "cep-histoire-geo-relief-climat-q4",
+   "chapter": "cep-histoire-geo-geo",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-histoire-geo-relief-climat",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le golfe de Guinée borde le Cameroun au...",
+   "choices": [
+    "nord",
+    "sud-ouest",
+    "est",
+    "centre"
+   ],
+   "answer": 1,
+   "explanation": "La côte camerounaise est à l'ouest/sud-ouest du pays.",
+   "id": "cep-histoire-geo-relief-climat-q5",
+   "chapter": "cep-histoire-geo-geo",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-histoire-geo-relief-climat",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  }
+ ]
+}

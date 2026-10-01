@@ -1,0 +1,543 @@
+{
+ "chapter": "cep-english-hello",
+ "lessons": [
+  {
+   "id": "cep-english-greetings",
+   "title": "Greetings and introductions",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CM2 — Anglais : salutations — reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; synthèse de révision orientée examen ; à faire relire par un enseignant",
+   "objectives": [
+    "Saluer en anglais selon le moment de la journée.",
+    "Se présenter : nom, âge, origine.",
+    "Poser et répondre à « How are you ? »."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cep-english-greetings-01",
+    "cep-english-greetings-02",
+    "cep-english-greetings-03",
+    "cep-english-greetings-04",
+    "cep-english-greetings-05",
+    "cep-english-greetings-06"
+   ],
+   "selfCheck": [
+    "cep-english-greetings-q1",
+    "cep-english-greetings-q2",
+    "cep-english-greetings-q3",
+    "cep-english-greetings-q4",
+    "cep-english-greetings-q5"
+   ],
+   "reviewNotes": [
+    "Matière « english » = anglais d'initiation en classe francophone : vérifier le niveau et le lexique demandés dans le programme officiel de CM2.",
+    "Prononciation : l'audio utilise la synthèse vocale en/GB ; contrôler la qualité par un enseignant."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Saluer",
+     "md": "- **Hello** / **Hi** : à tout moment.\n- **Good morning** (le matin), **Good afternoon** (l'après-midi), **Good evening** (le soir).\n- **Good night** : seulement pour dire bonne nuit, au moment d'aller dormir.\n- **Goodbye** / **Bye** : au revoir."
+    },
+    {
+     "type": "audio",
+     "lang": "en-GB",
+     "text": "Hello! Good morning. How are you? I am fine, thank you. Goodbye!"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 500,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 15,
+        "w": 112,
+        "h": 55,
+        "stroke": "ink",
+        "fill": "lightyellow",
+        "radius": 8
+       },
+       {
+        "t": "rect",
+        "x": 132,
+        "y": 15,
+        "w": 112,
+        "h": 55,
+        "stroke": "ink",
+        "fill": "lightorange",
+        "radius": 8
+       },
+       {
+        "t": "rect",
+        "x": 254,
+        "y": 15,
+        "w": 112,
+        "h": 55,
+        "stroke": "ink",
+        "fill": "lightblue",
+        "radius": 8
+       },
+       {
+        "t": "rect",
+        "x": 376,
+        "y": 15,
+        "w": 112,
+        "h": 55,
+        "stroke": "ink",
+        "fill": "lightgrey",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 66,
+        "y": 38,
+        "text": "morning",
+        "size": 14,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 188,
+        "y": 38,
+        "text": "afternoon",
+        "size": 14,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 38,
+        "text": "evening",
+        "size": 14,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 432,
+        "y": 38,
+        "text": "night",
+        "size": 14,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 66,
+        "y": 58,
+        "text": "until noon",
+        "size": 12,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 188,
+        "y": 58,
+        "text": "noon to 6 pm",
+        "size": 12,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 58,
+        "text": "after 6 pm",
+        "size": 12,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 432,
+        "y": 58,
+        "text": "to say goodnight",
+        "size": 12,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 66,
+        "y": 100,
+        "text": "Good morning",
+        "size": 13,
+        "color": "blue",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 188,
+        "y": 100,
+        "text": "Good afternoon",
+        "size": 13,
+        "color": "blue",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 100,
+        "text": "Good evening",
+        "size": 13,
+        "color": "blue",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 432,
+        "y": 100,
+        "text": "Good night",
+        "size": 13,
+        "color": "blue",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 135,
+        "text": "Hello and Hi: for every time of the day",
+        "size": 13,
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Les salutations de la journée.",
+     "alt": "Quatre cases : morning (jusqu'à midi), afternoon (de midi à 18 h), evening (après 18 h), night (pour dire bonne nuit), avec les salutations correspondantes."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Se présenter",
+     "md": "- **My name is** Ngono. (Je m'appelle Ngono.)\n- **I am** ten years old. (J'ai dix ans.)\n- **I am from** Cameroon. / **I live in** Douala.\n- **Nice to meet you.** (Enchanté.)\n\nQuestions : **What is your name?** — **How old are you?** — **Where are you from?**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : saluer",
+     "statement": "Tu arrives à l'école à 8 h du matin et tu rencontres ton maître. Que dis-tu ?",
+     "steps": [
+      {
+       "md": "À 8 h, c'est le **matin** : on dit « Good morning »."
+      },
+      {
+       "md": "On peut ajouter « Sir » ou « Madam » pour être poli."
+      }
+     ],
+     "answer": "**Good morning, Sir.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : se présenter",
+     "statement": "Présente-toi en anglais : tu t'appelles Mballa, tu as 11 ans, tu viens de Yaoundé.",
+     "steps": [
+      {
+       "md": "Le nom : « My name is Mballa. »"
+      },
+      {
+       "md": "L'âge : « I am eleven years old. »"
+      },
+      {
+       "md": "L'origine : « I am from Yaoundé. »"
+      }
+     ],
+     "answer": "**My name is Mballa. I am eleven years old. I am from Yaoundé.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Dire « I have ten years » : en anglais on dit « I **am** ten years old ».\n- Dire « Good night » en arrivant le soir : c'est « Good evening ». « Good night » se dit en partant dormir.\n- Oublier la majuscule à **I** (je) et aux noms propres.\n- Dire « I am agree » : on dit « I agree » (verbe sans « am »)."
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-english-greetings-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-english-greetings-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-english-greetings-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-english-greetings-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-english-greetings-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-english-greetings-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Que dit-on le matin pour saluer ?",
+   "choices": [
+    "Good night",
+    "Good morning",
+    "Good evening",
+    "Goodbye"
+   ],
+   "answer": 1,
+   "explanation": "Le matin : Good morning.",
+   "id": "cep-english-greetings-01",
+   "chapter": "cep-english-hello",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-english-greetings",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "« I have ten years » est une phrase correcte pour dire son âge.",
+   "answer": false,
+   "explanation": "On dit : I am ten years old.",
+   "id": "cep-english-greetings-02",
+   "chapter": "cep-english-hello",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-english-greetings",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque phrase anglaise à sa traduction.",
+   "pairs": [
+    [
+     "My name is Amina.",
+     "Je m'appelle Amina."
+    ],
+    [
+     "How are you?",
+     "Comment vas-tu ?"
+    ],
+    [
+     "Nice to meet you.",
+     "Enchanté."
+    ],
+    [
+     "Goodbye.",
+     "Au revoir."
+    ]
+   ],
+   "explanation": "Phrases de base à connaître.",
+   "points": 2,
+   "id": "cep-english-greetings-03",
+   "chapter": "cep-english-hello",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-english-greetings",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment répond-on à « How are you? » ?",
+   "choices": [
+    "I am fine, thank you.",
+    "My name is Paul.",
+    "I am from Douala.",
+    "Good night."
+   ],
+   "answer": 0,
+   "explanation": "On répond « I am fine, thank you ».",
+   "id": "cep-english-greetings-04",
+   "chapter": "cep-english-hello",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cep-english-greetings",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "open",
+   "prompt": "Écris en anglais deux phrases pour te présenter (nom et âge).",
+   "model": "My name is Fotso. I am twelve years old.",
+   "rubric": [
+    "« My name is … »",
+    "« I am … years old. »"
+   ],
+   "explanation": "My name is… ; I am… years old.",
+   "points": 2,
+   "id": "cep-english-greetings-05",
+   "chapter": "cep-english-hello",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cep-english-greetings",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "problem",
+   "prompt": "A short dialogue.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Complète : « … morning, Marie. » ",
+     "choices": [
+      "Well",
+      "Nice",
+      "Happy",
+      "Good"
+     ],
+     "answer": 3,
+     "explanation": "Good morning.",
+     "id": "cep-english-greetings-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quelle est la bonne question pour demander le nom ?",
+     "choices": [
+      "How old are you?",
+      "Where is your name?",
+      "What is your name?",
+      "How are you name?"
+     ],
+     "answer": 2,
+     "explanation": "What is your name ?",
+     "id": "cep-english-greetings-06-b",
+     "points": 1
+    },
+    {
+     "kind": "truefalse",
+     "prompt": "« I am from Bamenda » signifie « Je viens de Bamenda ».",
+     "answer": true,
+     "explanation": "I am from = je viens de.",
+     "id": "cep-english-greetings-06-c",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quelle phrase est correcte ?",
+     "choices": [
+      "I have eleven years.",
+      "I am eleven years old.",
+      "I am eleven years.",
+      "I eleven years old."
+     ],
+     "answer": 1,
+     "explanation": "En anglais : I am ... years old.",
+     "id": "cep-english-greetings-06-d",
+     "points": 1
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "method": "I am … ; My name is … ; I am from …",
+   "id": "cep-english-greetings-06",
+   "chapter": "cep-english-hello",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cep-english-greetings",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Good evening se dit...",
+   "choices": [
+    "le soir",
+    "le matin",
+    "à midi",
+    "jamais"
+   ],
+   "answer": 0,
+   "explanation": "Après 18 h environ.",
+   "id": "cep-english-greetings-q1",
+   "chapter": "cep-english-hello",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-english-greetings",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que signifie « Nice to meet you » ?",
+   "choices": [
+    "Au revoir",
+    "Merci",
+    "Bonne nuit",
+    "Enchanté"
+   ],
+   "answer": 3,
+   "explanation": "On le dit en rencontrant quelqu'un.",
+   "id": "cep-english-greetings-q2",
+   "chapter": "cep-english-hello",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-english-greetings",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment demande-t-on l'âge ?",
+   "choices": [
+    "What age have you?",
+    "How many years?",
+    "How old are you?",
+    "Where are you?"
+   ],
+   "answer": 2,
+   "explanation": "How old are you ?",
+   "id": "cep-english-greetings-q3",
+   "chapter": "cep-english-hello",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-english-greetings",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Goodbye » veut dire...",
+   "choices": [
+    "bonjour",
+    "au revoir",
+    "merci",
+    "pardon"
+   ],
+   "answer": 1,
+   "explanation": "Goodbye = au revoir.",
+   "id": "cep-english-greetings-q4",
+   "chapter": "cep-english-hello",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-english-greetings",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Where are you from? » demande...",
+   "choices": [
+    "ton origine",
+    "ton âge",
+    "ton nom",
+    "ton école"
+   ],
+   "answer": 0,
+   "explanation": "Where … from = d'où viens-tu.",
+   "id": "cep-english-greetings-q5",
+   "chapter": "cep-english-hello",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-english-greetings",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  }
+ ]
+}

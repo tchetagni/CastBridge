@@ -1,0 +1,535 @@
+{
+ "chapter": "cep-english-grammar",
+ "lessons": [
+  {
+   "id": "cep-english-routine",
+   "title": "My daily routine: the present simple",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM2 — Anglais : présent simple — reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; synthèse de révision orientée examen ; à faire relire par un enseignant",
+   "objectives": [
+    "Conjuguer un verbe au présent simple (routine).",
+    "Ajouter -s ou -es à la 3e personne du singulier.",
+    "Écrire une phrase négative avec do not / does not."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cep-english-routine-01",
+    "cep-english-routine-02",
+    "cep-english-routine-03",
+    "cep-english-routine-04",
+    "cep-english-routine-05",
+    "cep-english-routine-06"
+   ],
+   "selfCheck": [
+    "cep-english-routine-q1",
+    "cep-english-routine-q2",
+    "cep-english-routine-q3",
+    "cep-english-routine-q4",
+    "cep-english-routine-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que le présent simple (et la négation/question) est bien au programme de CM2 en anglais d'initiation.",
+    "Vérifier l'orthographe des verbes en -y (studies, flies)."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Le présent simple",
+     "md": "On l'emploie pour les **habitudes** et les **vérités générales**.\n\n**I / you / we / they** : le verbe ne change pas : I **get up** at six.\n**he / she / it** : on ajoute **-s** : she **gets up**.\nAprès s, sh, ch, x, o : **-es** : he **goes**, she **watches**. Après consonne + y : **-ies** : he **studies**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 520,
+      "h": 170,
+      "items": [
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 70,
+        "x2": 500,
+        "y2": 70,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "circle",
+        "cx": 50,
+        "cy": 70,
+        "r": 6,
+        "stroke": "ink",
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 70,
+        "r": 6,
+        "stroke": "ink",
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 250,
+        "cy": 70,
+        "r": 6,
+        "stroke": "ink",
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 350,
+        "cy": 70,
+        "r": 6,
+        "stroke": "ink",
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 450,
+        "cy": 70,
+        "r": 6,
+        "stroke": "ink",
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 50,
+        "y": 50,
+        "text": "6:00",
+        "size": 14,
+        "color": "blue",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 50,
+        "text": "7:00",
+        "size": 14,
+        "color": "blue",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 50,
+        "text": "7:30",
+        "size": 14,
+        "color": "blue",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 50,
+        "text": "13:00",
+        "size": 14,
+        "color": "blue",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 450,
+        "y": 50,
+        "text": "21:00",
+        "size": 14,
+        "color": "blue",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 50,
+        "y": 100,
+        "text": "get up",
+        "size": 12,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 100,
+        "text": "have breakfast",
+        "size": 12,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 100,
+        "text": "go to school",
+        "size": 12,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 100,
+        "text": "have lunch",
+        "size": 12,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 450,
+        "y": 100,
+        "text": "go to bed",
+        "size": 12,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 145,
+        "text": "I get up at six. She gets up at six.",
+        "size": 14,
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Une journée ordinaire.",
+     "alt": "Une ligne du temps avec cinq moments : 6 h get up, 7 h have breakfast, 7 h 30 go to school, 13 h have lunch, 21 h go to bed."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Négation et question",
+     "md": "- Négation : **do not** (don't) / **does not** (doesn't) + verbe sans s : She **does not** go to school on Sunday.\n- Question : **Do** you get up early ? — **Does** he play football ?\n\nAprès does / doesn't, le verbe reste à l'infinitif : « Does he **play** ? » (pas « plays »)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : ajouter -s ou -es",
+     "statement": "Mets à la 3e personne : « I go to school. I watch TV. I study. »",
+     "steps": [
+      {
+       "md": "go → he **goes** (verbe en -o : -es)."
+      },
+      {
+       "md": "watch → he **watches** (ch : -es)."
+      },
+      {
+       "md": "study → he **studies** (consonne + y : -ies)."
+      }
+     ],
+     "answer": "**He goes to school. He watches TV. He studies.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : la négation",
+     "statement": "Mets à la forme négative : « Mballa plays football on Monday. »",
+     "steps": [
+      {
+       "md": "Sujet « Mballa » = he : on emploie **does not**."
+      },
+      {
+       "md": "Le verbe perd son -s : **play**."
+      }
+     ],
+     "answer": "**Mballa does not play football on Monday.**"
+    },
+    {
+     "type": "audio",
+     "lang": "en-GB",
+     "text": "I get up at six. I have breakfast at seven. I go to school at half past seven."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier le -s : « He go » ; il faut **He goes**.\n- Ajouter -s après does : « Does he plays ? » est faux.\n- Dire « I am go to school » : **I go**.\n- Écrire « studys » : **studies**.\n- Confondre **do** (I, you, we, they) et **does** (he, she, it)."
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-english-routine-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-english-routine-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-english-routine-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-english-routine-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-english-routine-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-english-routine-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « She … to school. »",
+   "choices": [
+    "go",
+    "goes",
+    "going",
+    "gos"
+   ],
+   "answer": 1,
+   "explanation": "3e personne : goes.",
+   "id": "cep-english-routine-01",
+   "chapter": "cep-english-grammar",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-english-routine",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "« He watchs TV » est correct.",
+   "answer": false,
+   "explanation": "On écrit watches.",
+   "id": "cep-english-routine-02",
+   "chapter": "cep-english-grammar",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-english-routine",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque verbe à sa forme avec he.",
+   "pairs": [
+    [
+     "go",
+     "goes"
+    ],
+    [
+     "watch",
+     "watches"
+    ],
+    [
+     "study",
+     "studies"
+    ],
+    [
+     "play",
+     "plays"
+    ]
+   ],
+   "explanation": "Verbes en o, ch, consonne+y, voyelle+y.",
+   "points": 2,
+   "id": "cep-english-routine-03",
+   "chapter": "cep-english-grammar",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-english-routine",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase est correcte ?",
+   "choices": [
+    "He does not like fish.",
+    "He do not like fish.",
+    "He does not likes fish.",
+    "He not like fish."
+   ],
+   "answer": 0,
+   "explanation": "does not + verbe sans s.",
+   "id": "cep-english-routine-04",
+   "chapter": "cep-english-grammar",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cep-english-routine",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "open",
+   "prompt": "Écris 3 phrases pour décrire ta routine du matin (get up, have breakfast, go to school).",
+   "model": "I get up at six. I have breakfast at seven. I go to school at half past seven.",
+   "rubric": [
+    "3 phrases.",
+    "Verbes au présent simple.",
+    "Heures indiquées."
+   ],
+   "explanation": "Présent simple, sujet I : verbe sans s.",
+   "points": 2,
+   "id": "cep-english-routine-05",
+   "chapter": "cep-english-grammar",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cep-english-routine",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Daily routine.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Complète : « We … football on Saturday. »",
+     "choices": [
+      "plays",
+      "playing",
+      "are play",
+      "play"
+     ],
+     "answer": 3,
+     "explanation": "We play.",
+     "id": "cep-english-routine-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Complète : « He … up at six. »",
+     "choices": [
+      "get",
+      "getting",
+      "gets",
+      "gots"
+     ],
+     "answer": 2,
+     "explanation": "He gets.",
+     "id": "cep-english-routine-06-b",
+     "points": 1
+    },
+    {
+     "kind": "truefalse",
+     "prompt": "« Does she plays football ? » est correct.",
+     "answer": false,
+     "explanation": "Après does, le verbe est sans s : Does she play ?",
+     "id": "cep-english-routine-06-c",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Traduction de « I go to bed at nine » :",
+     "choices": [
+      "Je me lève à neuf heures.",
+      "Je me couche à neuf heures.",
+      "Je vais à l'école à neuf heures.",
+      "Je mange à neuf heures."
+     ],
+     "answer": 1,
+     "explanation": "Go to bed = aller se coucher.",
+     "id": "cep-english-routine-06-d",
+     "points": 1
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "method": "3e personne = -s / -es ; negation avec do / does.",
+   "id": "cep-english-routine-06",
+   "chapter": "cep-english-grammar",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cep-english-routine",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « They … lunch at one. »",
+   "choices": [
+    "have",
+    "has",
+    "having",
+    "haves"
+   ],
+   "answer": 0,
+   "explanation": "They have.",
+   "id": "cep-english-routine-q1",
+   "chapter": "cep-english-grammar",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-english-routine",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La 3e personne de « fly » est...",
+   "choices": [
+    "flys",
+    "flyes",
+    "fly",
+    "flies"
+   ],
+   "answer": 3,
+   "explanation": "Consonne + y : -ies.",
+   "id": "cep-english-routine-q2",
+   "chapter": "cep-english-grammar",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-english-routine",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que signifie « get up » ?",
+   "choices": [
+    "se coucher",
+    "manger",
+    "se lever",
+    "étudier"
+   ],
+   "answer": 2,
+   "explanation": "Get up = se lever.",
+   "id": "cep-english-routine-q3",
+   "chapter": "cep-english-grammar",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-english-routine",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « I … not like fish. »",
+   "choices": [
+    "does",
+    "do",
+    "am",
+    "is"
+   ],
+   "answer": 1,
+   "explanation": "I do not like.",
+   "id": "cep-english-routine-q4",
+   "chapter": "cep-english-grammar",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-english-routine",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la question correcte ?",
+   "choices": [
+    "Do you go to school?",
+    "You go to school?",
+    "Are you go to school?",
+    "Does you go to school?"
+   ],
+   "answer": 0,
+   "explanation": "Do + you + verbe.",
+   "id": "cep-english-routine-q5",
+   "chapter": "cep-english-grammar",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-english-routine",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  }
+ ]
+}
