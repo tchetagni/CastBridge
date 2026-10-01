@@ -50,9 +50,9 @@ enum class Category(val code: String, val label: String, val blockable: Boolean)
     }
 }
 
-/** What time rules count: playing videos, playing games, using the download screen. */
+/** What time rules count: playing videos, playing games, using the download screen, and (whole-TV supervision) any other app. */
 enum class UseKind(val code: String, val label: String) {
-    PLAY("play", "Lecture"), GAMES("games", "Jeux"), DOWNLOADS("downloads", "Téléchargements");
+    PLAY("play", "Lecture"), GAMES("games", "Jeux"), DOWNLOADS("downloads", "Téléchargements"), APPS("apps", "Autres applications");
 
     companion object { fun of(code: String?) = values().firstOrNull { it.code == code } }
 }
