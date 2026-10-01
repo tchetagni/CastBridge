@@ -1,0 +1,333 @@
+{
+ "chapter": "cp-maths-problemes",
+ "lessons": [
+  {
+   "id": "cp-maths-problemes",
+   "title": "Résoudre un petit problème",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CP — Problèmes : addition, soustraction, groupes égaux (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Lire un énoncé et trouver la question.",
+    "Choisir entre addition, soustraction, double, moitié, multiplication.",
+    "Rédiger une phrase-réponse."
+   ],
+   "prerequisites": [
+    "cp-maths-addition",
+    "cp-maths-soustraction"
+   ],
+   "exercises": [
+    "cp-maths-problemes-01",
+    "cp-maths-problemes-02",
+    "cp-maths-problemes-03",
+    "cp-maths-problemes-04",
+    "cp-maths-problemes-05",
+    "cp-maths-problemes-06"
+   ],
+   "selfCheck": [
+    "cp-maths-problemes-q1",
+    "cp-maths-problemes-q2",
+    "cp-maths-problemes-q3",
+    "cp-maths-problemes-q4",
+    "cp-maths-problemes-q5"
+   ],
+   "reviewNotes": [
+    "Les prix et les quantités des énoncés sont fictifs : vérifier qu'ils sont plausibles pour des élèves."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Un **problème**, c'est une petite histoire avec des nombres. On cherche une réponse à une **question**."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Les étapes",
+     "md": "1. Je **lis** l'histoire deux fois.\n2. Je trouve la **question**.\n3. Je choisis l'opération : + pour ajouter, − pour enlever ou comparer, × pour des groupes égaux.\n4. Je **calcule**.\n5. J'écris une **phrase-réponse**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les mots qui aident",
+     "md": "- **en tout**, **ensemble**, **de plus** : souvent une addition.\n- **il reste**, **perd**, **donne**, **de moins** : souvent une soustraction.\n- **chacun**, **fois**, **groupes égaux** : souvent une multiplication."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "bars": [
+       {
+        "label": "Hier",
+        "value": 12,
+        "color": "blue"
+       },
+       {
+        "label": "Aujourd'hui",
+        "value": 15,
+        "color": "orange"
+       }
+      ],
+      "unit": "mangues",
+      "w": 360,
+      "h": 210
+     },
+     "caption": "Mangues vendues hier et aujourd'hui.",
+     "alt": "Un diagramme en barres : 12 mangues vendues hier et 15 aujourd'hui. Il y en a 3 de plus aujourd'hui."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : une addition",
+     "statement": "Mballa a 23 billes. Il en gagne 14. Combien en a-t-il maintenant ?",
+     "steps": [
+      {
+       "md": "Question : combien de billes en tout. Il en gagne : on ajoute."
+      },
+      {
+       "md": "23 + 14 = 37."
+      }
+     ],
+     "answer": "**Il a 37 billes.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : une soustraction",
+     "statement": "Amina a 45 FCFA. Elle achète un bonbon à 20 FCFA. Combien lui reste-t-il ?",
+     "steps": [
+      {
+       "md": "Elle dépense : on enlève."
+      },
+      {
+       "md": "45 − 20 = 25."
+      }
+     ],
+     "answer": "**Il lui reste 25 FCFA.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "Ne fais pas une opération au hasard avec tous les nombres. Lis la question : elle dit ce qu'il faut chercher. Écris toujours la phrase-réponse."
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-problemes-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-problemes-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-problemes-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-problemes-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-problemes-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-problemes-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Marie a 12 mangues. Elle en cueille 7. Combien en a-t-elle ?",
+   "answer": 19,
+   "tolerance": 0,
+   "explanation": "Elle en cueille : on ajoute. 12 + 7 = 19.",
+   "id": "cp-maths-problemes-01",
+   "chapter": "cp-maths-problemes",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-problemes",
+   "points": 1
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Paul a 30 billes. Il en perd 12. Combien lui en reste-t-il ?",
+   "answer": 18,
+   "tolerance": 0,
+   "explanation": "Il en perd : on enlève. 30 − 12 = 18.",
+   "id": "cp-maths-problemes-02",
+   "chapter": "cp-maths-problemes",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-problemes",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Amina a 8 bonbons, Ibrahim en a 5. Combien en ont-ils ensemble ? » Quelle opération ?",
+   "choices": [
+    "8 − 5",
+    "8 × 5",
+    "5 − 8",
+    "8 + 5"
+   ],
+   "answer": 3,
+   "explanation": "Ensemble : on ajoute.",
+   "id": "cp-maths-problemes-03",
+   "chapter": "cp-maths-problemes",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-problemes",
+   "points": 1
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Dans un panier, il y a 3 sachets de 6 arachides. Combien d'arachides en tout ?",
+   "answer": 18,
+   "tolerance": 0,
+   "explanation": "3 groupes de 6 : 6 + 6 + 6 = 18.",
+   "id": "cp-maths-problemes-04",
+   "chapter": "cp-maths-problemes",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-maths-problemes",
+   "points": 1
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Fotso a 24 noix. Il en donne la moitié à Ngono. Combien lui en reste-t-il ?",
+   "answer": 12,
+   "tolerance": 0,
+   "explanation": "La moitié de 24 est 12 ; il lui en reste 12.",
+   "id": "cp-maths-problemes-05",
+   "chapter": "cp-maths-problemes",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-maths-problemes",
+   "points": 1
+  },
+  {
+   "kind": "problem",
+   "prompt": "Au marché de Douala, Mballa a 40 poissons. Il en vend 18 le matin et 15 l'après-midi.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Combien de poissons a-t-il vendus en tout ?",
+     "answer": 33,
+     "tolerance": 0,
+     "explanation": "18 + 15 = 33.",
+     "id": "cp-maths-problemes-06-a",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Combien lui en reste-t-il ?",
+     "answer": 7,
+     "tolerance": 0,
+     "explanation": "40 − 33 = 7.",
+     "id": "cp-maths-problemes-06-b",
+     "points": 1
+    }
+   ],
+   "explanation": "Il en a vendu 33 ; il lui en reste 7.",
+   "id": "cp-maths-problemes-06",
+   "chapter": "cp-maths-problemes",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cp-maths-problemes"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans un problème, on commence par…",
+   "choices": [
+    "calculer vite",
+    "écrire la réponse",
+    "lire l'histoire",
+    "dessiner un rond"
+   ],
+   "answer": 2,
+   "explanation": "On lit d'abord, puis on cherche la question.",
+   "id": "cp-maths-problemes-q1",
+   "chapter": "cp-maths-problemes",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-problemes",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Il reste » fait penser à…",
+   "choices": [
+    "une addition",
+    "une soustraction",
+    "un rond",
+    "un carré"
+   ],
+   "answer": 1,
+   "explanation": "Il reste : on enlève.",
+   "id": "cp-maths-problemes-q2",
+   "chapter": "cp-maths-problemes",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-problemes",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que faut-il écrire à la fin ?",
+   "choices": [
+    "une phrase-réponse",
+    "rien",
+    "seulement l'opération",
+    "un dessin"
+   ],
+   "answer": 0,
+   "explanation": "On répond par une phrase.",
+   "id": "cp-maths-problemes-q3",
+   "chapter": "cp-maths-problemes",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-problemes",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Il achète 2 paquets de 5 gâteaux. Combien de gâteaux ? » est…",
+   "choices": [
+    "2 + 5",
+    "5 − 2",
+    "2 − 5",
+    "2 × 5"
+   ],
+   "answer": 3,
+   "explanation": "Groupes égaux : 2 × 5 = 10.",
+   "id": "cp-maths-problemes-q4",
+   "chapter": "cp-maths-problemes",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-problemes",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La question d'un problème commence souvent par…",
+   "choices": [
+    "« Voici »",
+    "« Il était une fois »",
+    "« Combien… ? »",
+    "« Merci »"
+   ],
+   "answer": 2,
+   "explanation": "Combien ... ? demande un nombre.",
+   "id": "cp-maths-problemes-q5",
+   "chapter": "cp-maths-problemes",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-problemes",
+   "points": 1
+  }
+ ]
+}

@@ -1,0 +1,375 @@
+{
+ "chapter": "cp-maths-numeration",
+ "lessons": [
+  {
+   "id": "cp-maths-nombres20",
+   "title": "Les nombres de 0 à 20",
+   "minutes": 10,
+   "readAloud": true,
+   "programRef": "CP — Numération : nombres de 0 à 20 (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Compter des objets jusqu'à 20.",
+    "Dire et écrire les nombres de 0 à 20.",
+    "Trouver le nombre qui vient avant ou après."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cp-maths-nombres20-01",
+    "cp-maths-nombres20-02",
+    "cp-maths-nombres20-03",
+    "cp-maths-nombres20-04",
+    "cp-maths-nombres20-05",
+    "cp-maths-nombres20-06"
+   ],
+   "selfCheck": [
+    "cp-maths-nombres20-q1",
+    "cp-maths-nombres20-q2",
+    "cp-maths-nombres20-q3",
+    "cp-maths-nombres20-q4",
+    "cp-maths-nombres20-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que les noms de nombres (dix-sept, dix-huit, dix-neuf) sont bien ceux du programme."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Aujourd'hui, on compte jusqu'à **20**. On dit les nombres dans l'ordre, on touche chaque objet une seule fois."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les nombres de 0 à 20",
+     "md": "0 zéro, 1 un, 2 deux, 3 trois, 4 quatre, 5 cinq, 6 six, 7 sept, 8 huit, 9 neuf, 10 dix.\n\n11 onze, 12 douze, 13 treize, 14 quatorze, 15 quinze, 16 seize.\n\n17 dix-sept, 18 dix-huit, 19 dix-neuf, 20 vingt."
+    },
+    {
+     "type": "audio",
+     "lang": "fr-FR",
+     "text": "Zéro, un, deux, trois, quatre, cinq, six, sept, huit, neuf, dix. Onze, douze, treize, quatorze, quinze, seize. Dix-sept, dix-huit, dix-neuf, vingt."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "count",
+      "n": 13,
+      "shape": "circle",
+      "color": "orange",
+      "perRow": 5,
+      "w": 400,
+      "h": 200
+     },
+     "caption": "13 mangues : on les compte une par une.",
+     "alt": "13 ronds orange rangés par lignes de cinq : deux lignes pleines et une ligne de trois."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Pour bien compter",
+     "md": "1. Je range les objets en lignes.\n2. Je touche chaque objet avec le doigt.\n3. Je dis un nombre à chaque objet.\n4. Le dernier nombre dit est le total."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : compter",
+     "statement": "Combien y a-t-il d'étoiles ?",
+     "steps": [
+      {
+       "md": "Je touche chaque étoile : 1, 2, 3 ... jusqu'à la dernière."
+      },
+      {
+       "md": "Le dernier nombre dit est **16**."
+      }
+     ],
+     "answer": "Il y a **16** étoiles.",
+     "figure": {
+      "kind": "count",
+      "n": 16,
+      "shape": "star",
+      "color": "orange",
+      "perRow": 8,
+      "w": 400,
+      "h": 140
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : avant et après",
+     "statement": "Quel nombre vient juste après 19 ? Quel nombre vient juste avant 12 ?",
+     "steps": [
+      {
+       "md": "Après 19, je dis le nombre suivant : **20**."
+      },
+      {
+       "md": "Avant 12, je recule d'un pas : **11**."
+      }
+     ],
+     "answer": "Après 19 : **20**. Avant 12 : **11**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- Ne compte pas deux fois le même objet.\n- 16 se dit « seize » ; 17 se dit « dix-sept » (dix et sept)."
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-nombres20-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-nombres20-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-nombres20-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-nombres20-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-nombres20-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-nombres20-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Combien de ronds vois-tu ?",
+   "answer": 14,
+   "tolerance": 0,
+   "explanation": "On compte un par un : il y a 14 ronds.",
+   "method": "Je touche chaque rond.",
+   "figure": {
+    "kind": "count",
+    "n": 14,
+    "shape": "circle",
+    "color": "blue",
+    "perRow": 5,
+    "w": 400,
+    "h": 200
+   },
+   "id": "cp-maths-nombres20-01",
+   "chapter": "cp-maths-numeration",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-nombres20",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel nombre vient juste après 15 ?",
+   "choices": [
+    "14",
+    "16",
+    "17",
+    "15"
+   ],
+   "answer": 1,
+   "explanation": "Après 15 on dit 16.",
+   "id": "cp-maths-nombres20-02",
+   "chapter": "cp-maths-numeration",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-nombres20",
+   "points": 1
+  },
+  {
+   "kind": "matching",
+   "prompt": "Relie chaque nombre à son écriture en lettres.",
+   "pairs": [
+    [
+     "12",
+     "douze"
+    ],
+    [
+     "15",
+     "quinze"
+    ],
+    [
+     "17",
+     "dix-sept"
+    ],
+    [
+     "19",
+     "dix-neuf"
+    ]
+   ],
+   "explanation": "12 douze, 15 quinze, 17 dix-sept, 19 dix-neuf.",
+   "id": "cp-maths-nombres20-03",
+   "chapter": "cp-maths-numeration",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-nombres20",
+   "points": 1
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Paul compte à l'envers : 20, 19, 18, 17, 16, 15. Combien de nombres a-t-il dits ?",
+   "answer": 6,
+   "tolerance": 0,
+   "explanation": "Il a dit 20, 19, 18, 17, 16 et 15 : 6 nombres.",
+   "id": "cp-maths-nombres20-04",
+   "chapter": "cp-maths-numeration",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-maths-nombres20",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel nombre manque : 13, 14, ___, 16, 17 ?",
+   "choices": [
+    "15",
+    "12",
+    "18",
+    "14"
+   ],
+   "answer": 0,
+   "explanation": "Entre 14 et 16, il y a 15.",
+   "id": "cp-maths-nombres20-05",
+   "chapter": "cp-maths-numeration",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-maths-nombres20",
+   "points": 1
+  },
+  {
+   "kind": "problem",
+   "prompt": "Mballa a des billes.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Combien de billes vois-tu ?",
+     "answer": 16,
+     "tolerance": 0,
+     "figure": {
+      "kind": "count",
+      "n": 16,
+      "shape": "circle",
+      "color": "green",
+      "perRow": 8,
+      "w": 400,
+      "h": 140
+     },
+     "explanation": "On compte : 16 billes.",
+     "id": "cp-maths-nombres20-06-a",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Combien de billes faut-il pour arriver à 20 ?",
+     "answer": 4,
+     "tolerance": 0,
+     "explanation": "De 16 à 20 : 17, 18, 19, 20. Il en manque 4.",
+     "id": "cp-maths-nombres20-06-b",
+     "points": 1
+    }
+   ],
+   "explanation": "16 billes ; il en manque 4 pour faire 20.",
+   "id": "cp-maths-nombres20-06",
+   "chapter": "cp-maths-numeration",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cp-maths-nombres20"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel nombre s'écrit « seize » ?",
+   "choices": [
+    "6",
+    "17",
+    "60",
+    "16"
+   ],
+   "answer": 3,
+   "explanation": "Seize s'écrit 16.",
+   "id": "cp-maths-nombres20-q1",
+   "chapter": "cp-maths-numeration",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-nombres20",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel nombre vient avant 20 ?",
+   "choices": [
+    "21",
+    "18",
+    "19",
+    "10"
+   ],
+   "answer": 2,
+   "explanation": "Juste avant 20 il y a 19.",
+   "id": "cp-maths-nombres20-q2",
+   "chapter": "cp-maths-numeration",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-nombres20",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le plus grand nombre ?",
+   "choices": [
+    "8",
+    "18",
+    "15",
+    "13"
+   ],
+   "answer": 1,
+   "explanation": "18 est le plus grand de ces nombres.",
+   "id": "cp-maths-nombres20-q3",
+   "chapter": "cp-maths-numeration",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-nombres20",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment écrit-on 17 en lettres ?",
+   "choices": [
+    "dix-sept",
+    "sept",
+    "dix-huit",
+    "seize"
+   ],
+   "answer": 0,
+   "explanation": "17 = dix + sept : dix-sept.",
+   "id": "cp-maths-nombres20-q4",
+   "chapter": "cp-maths-numeration",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-nombres20",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien de doigts as-tu sur tes deux mains ?",
+   "choices": [
+    "5",
+    "20",
+    "12",
+    "10"
+   ],
+   "answer": 3,
+   "explanation": "Cinq doigts par main : 10 doigts.",
+   "id": "cp-maths-nombres20-q5",
+   "chapter": "cp-maths-numeration",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-nombres20",
+   "points": 1
+  }
+ ]
+}

@@ -1,0 +1,324 @@
+{
+ "chapter": "cp-maths-calcul",
+ "lessons": [
+  {
+   "id": "cp-maths-multiplication",
+   "title": "Je découvre la multiplication",
+   "minutes": 12,
+   "readAloud": true,
+   "programRef": "CP — Calcul : initiation à la multiplication (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Reconnaître des groupes égaux.",
+    "Écrire une multiplication comme une addition répétée.",
+    "Calculer des produits simples (×2, ×5, ×10)."
+   ],
+   "prerequisites": [
+    "cp-maths-addition",
+    "cp-maths-double-moitie"
+   ],
+   "exercises": [
+    "cp-maths-multiplication-01",
+    "cp-maths-multiplication-02",
+    "cp-maths-multiplication-03",
+    "cp-maths-multiplication-04",
+    "cp-maths-multiplication-05",
+    "cp-maths-multiplication-06"
+   ],
+   "selfCheck": [
+    "cp-maths-multiplication-q1",
+    "cp-maths-multiplication-q2",
+    "cp-maths-multiplication-q3",
+    "cp-maths-multiplication-q4",
+    "cp-maths-multiplication-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que la multiplication n'est qu'une initiation au CP (tables de 2, 5 et 10) dans la progression locale."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Quand on a **plusieurs groupes égaux**, on peut calculer plus vite. Par exemple 3 groupes de 4 : 4 + 4 + 4 = 12."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La multiplication",
+     "md": "3 × 4 se lit « trois fois quatre ». Cela veut dire 4 + 4 + 4 = 12.\n\nLe signe **×** veut dire « fois ». On l'utilise quand les groupes sont **égaux**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "count",
+      "n": 12,
+      "shape": "square",
+      "color": "green",
+      "perRow": 4,
+      "w": 260,
+      "h": 200
+     },
+     "caption": "3 lignes de 4 : 3 × 4 = 12.",
+     "alt": "Douze carrés verts rangés en 3 lignes de 4. Trois fois quatre font douze."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : addition répétée",
+     "statement": "Écris 4 × 2 avec une addition.",
+     "steps": [
+      {
+       "md": "4 × 2, c'est 4 fois le nombre 2."
+      },
+      {
+       "md": "2 + 2 + 2 + 2 = 8."
+      }
+     ],
+     "answer": "4 × 2 = **8**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : ×5",
+     "statement": "Un régime a 5 bananes. Combien de bananes dans 3 régimes ?",
+     "steps": [
+      {
+       "md": "3 groupes de 5 : 5 + 5 + 5."
+      },
+      {
+       "md": "5 + 5 = 10 ; 10 + 5 = 15."
+      }
+     ],
+     "answer": "3 × 5 = **15** bananes."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Pour calculer vite",
+     "md": "- × 2 : c'est le double (6 × 2 = 12).\n- × 10 : on pense aux dizaines (4 × 10 = 40).\n- × 5 : on compte de 5 en 5 : 5, 10, 15, 20..."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "Une multiplication n'est possible que si tous les groupes sont **égaux**."
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-multiplication-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-multiplication-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-multiplication-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-multiplication-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-multiplication-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-multiplication-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Calcule 2 + 2 + 2.",
+   "answer": 6,
+   "tolerance": 0,
+   "explanation": "3 groupes de 2 : 2 + 2 + 2 = 6, donc 3 × 2 = 6.",
+   "id": "cp-maths-multiplication-01",
+   "chapter": "cp-maths-calcul",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-multiplication",
+   "points": 1
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule 5 × 2.",
+   "answer": 10,
+   "tolerance": 0,
+   "explanation": "5 fois 2 : 2 + 2 + 2 + 2 + 2 = 10.",
+   "id": "cp-maths-multiplication-02",
+   "chapter": "cp-maths-calcul",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-multiplication",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle multiplication correspond à 4 + 4 + 4 ?",
+   "choices": [
+    "4 × 4",
+    "3 × 3",
+    "4 × 3 + 4",
+    "3 × 4"
+   ],
+   "answer": 3,
+   "explanation": "Trois groupes de 4 : 3 × 4. (On écrit aussi 4 × 3, qui donne le même résultat.)",
+   "id": "cp-maths-multiplication-03",
+   "chapter": "cp-maths-calcul",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-multiplication",
+   "points": 1
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule 5 × 4.",
+   "answer": 20,
+   "tolerance": 0,
+   "explanation": "5, 10, 15, 20 : quatre sauts de 5 donnent 20.",
+   "id": "cp-maths-multiplication-04",
+   "chapter": "cp-maths-calcul",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-maths-multiplication",
+   "points": 1
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule 6 × 10.",
+   "answer": 60,
+   "tolerance": 0,
+   "explanation": "6 dizaines = 60.",
+   "id": "cp-maths-multiplication-05",
+   "chapter": "cp-maths-calcul",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-maths-multiplication",
+   "points": 1
+  },
+  {
+   "kind": "problem",
+   "prompt": "Amina achète 4 sachets de 5 bonbons.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Combien de bonbons a-t-elle en tout ? (écris 4 × 5)",
+     "answer": 20,
+     "tolerance": 0,
+     "explanation": "5 + 5 + 5 + 5 = 20.",
+     "id": "cp-maths-multiplication-06-a",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Elle en mange 3. Combien lui en reste-t-il ?",
+     "answer": 17,
+     "tolerance": 0,
+     "explanation": "20 − 3 = 17.",
+     "id": "cp-maths-multiplication-06-b",
+     "points": 1
+    }
+   ],
+   "explanation": "Elle a 20 bonbons, puis il lui en reste 17.",
+   "id": "cp-maths-multiplication-06",
+   "chapter": "cp-maths-calcul",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cp-maths-multiplication"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "3 × 3 = ?",
+   "choices": [
+    "6",
+    "33",
+    "9",
+    "12"
+   ],
+   "answer": 2,
+   "explanation": "3 + 3 + 3 = 9.",
+   "id": "cp-maths-multiplication-q1",
+   "chapter": "cp-maths-calcul",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-multiplication",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "2 × 7 = ?",
+   "choices": [
+    "9",
+    "14",
+    "27",
+    "72"
+   ],
+   "answer": 1,
+   "explanation": "Le double de 7 est 14.",
+   "id": "cp-maths-multiplication-q2",
+   "chapter": "cp-maths-calcul",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-multiplication",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que veut dire 4 × 5 ?",
+   "choices": [
+    "5 + 5 + 5 + 5",
+    "4 + 5",
+    "5 + 5 + 5",
+    "4 + 4 + 4 + 4 + 4 + 4"
+   ],
+   "answer": 0,
+   "explanation": "4 groupes de 5.",
+   "id": "cp-maths-multiplication-q3",
+   "chapter": "cp-maths-calcul",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-multiplication",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "10 × 3 = ?",
+   "choices": [
+    "13",
+    "3",
+    "103",
+    "30"
+   ],
+   "answer": 3,
+   "explanation": "3 dizaines = 30.",
+   "id": "cp-maths-multiplication-q4",
+   "chapter": "cp-maths-calcul",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-multiplication",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien de pattes ont 3 poules (2 pattes chacune) ?",
+   "choices": [
+    "5",
+    "3",
+    "6",
+    "8"
+   ],
+   "answer": 2,
+   "explanation": "3 × 2 = 6.",
+   "id": "cp-maths-multiplication-q5",
+   "chapter": "cp-maths-calcul",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-multiplication",
+   "points": 1
+  }
+ ]
+}

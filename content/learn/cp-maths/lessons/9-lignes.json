@@ -1,0 +1,410 @@
+{
+ "chapter": "cp-maths-geometrie",
+ "lessons": [
+  {
+   "id": "cp-maths-lignes",
+   "title": "Les lignes",
+   "minutes": 10,
+   "readAloud": true,
+   "programRef": "CP — Géométrie : les lignes (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Reconnaître une ligne droite, une ligne courbe, une ligne brisée.",
+    "Dire ce qu'est un segment.",
+    "Tracer une ligne droite avec la règle."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cp-maths-lignes-01",
+    "cp-maths-lignes-02",
+    "cp-maths-lignes-03",
+    "cp-maths-lignes-04",
+    "cp-maths-lignes-05",
+    "cp-maths-lignes-06"
+   ],
+   "selfCheck": [
+    "cp-maths-lignes-q1",
+    "cp-maths-lignes-q2",
+    "cp-maths-lignes-q3",
+    "cp-maths-lignes-q4",
+    "cp-maths-lignes-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier le vocabulaire (segment, ligne brisée) et la place du mot « droite » dans le programme de CP."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Dans les dessins, on voit des **lignes**. Il y a plusieurs sortes de lignes."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les sortes de lignes",
+     "md": "- **Ligne droite** : elle ne tourne pas. On la trace avec la règle.\n- **Ligne courbe** : elle est arrondie.\n- **Ligne brisée** : elle est faite de morceaux de droites qui changent de direction.\n- **Segment** : un morceau de ligne droite avec un début et une fin."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 190,
+      "items": [
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 50,
+        "x2": 200,
+        "y2": 50,
+        "color": "blue",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 85,
+        "text": "ligne droite",
+        "size": 15
+       },
+       {
+        "t": "path",
+        "d": "M270 60 C300 10 330 90 360 40 S420 80 450 50",
+        "stroke": "red",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 360,
+        "y": 85,
+        "text": "ligne courbe",
+        "size": 15
+       },
+       {
+        "t": "poly",
+        "pts": [
+         20,
+         160,
+         70,
+         115,
+         120,
+         160,
+         170,
+         115,
+         220,
+         160
+        ],
+        "closed": false,
+        "stroke": "green",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 185,
+        "text": "ligne brisée",
+        "size": 15
+       },
+       {
+        "t": "line",
+        "x1": 290,
+        "y1": 150,
+        "x2": 440,
+        "y2": 150,
+        "color": "orange",
+        "width": 4
+       },
+       {
+        "t": "circle",
+        "cx": 290,
+        "cy": 150,
+        "r": 5,
+        "fill": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 440,
+        "cy": 150,
+        "r": 5,
+        "fill": "ink"
+       },
+       {
+        "t": "text",
+        "x": 365,
+        "y": 180,
+        "text": "segment",
+        "size": 15
+       }
+      ]
+     },
+     "caption": "Quatre sortes de lignes.",
+     "alt": "Quatre dessins : une ligne droite bleue, une ligne courbe rouge, une ligne brisée verte en zigzag et un segment orange avec deux points aux extrémités."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Tracer un segment",
+     "md": "1. Je pose la règle sur la feuille et je la tiens bien.\n2. Je place mon crayon bien taillé au début.\n3. Je trace en suivant le bord de la règle jusqu'au point de fin."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : reconnaître",
+     "statement": "Le chemin d'une rivière qui tourne partout est-il une ligne droite ?",
+     "steps": [
+      {
+       "md": "Une rivière a des virages arrondis."
+      },
+      {
+       "md": "Ce n'est pas droit : c'est une ligne **courbe**."
+      }
+     ],
+     "answer": "C'est une ligne courbe."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : segment",
+     "statement": "Un fil bien tendu entre deux piquets est quelle sorte de ligne ?",
+     "steps": [
+      {
+       "md": "Le fil est tendu : il ne tourne pas."
+      },
+      {
+       "md": "Il commence à un piquet et finit à l'autre : c'est un **segment**."
+      }
+     ],
+     "answer": "C'est un segment (ligne droite)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "Une ligne droite ne se trace pas à main levée : on utilise la règle. Une ligne brisée a des coins, pas des arrondis."
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-lignes-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-lignes-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-lignes-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-lignes-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-lignes-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-lignes-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quelle ligne est arrondie ?",
+   "choices": [
+    "la ligne droite",
+    "la ligne courbe",
+    "le segment",
+    "la ligne brisée"
+   ],
+   "answer": 1,
+   "explanation": "Une ligne arrondie est une ligne courbe.",
+   "id": "cp-maths-lignes-01",
+   "chapter": "cp-maths-geometrie",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-lignes",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Avec quel outil trace-t-on une ligne droite ?",
+   "choices": [
+    "la règle",
+    "la gomme",
+    "le taille-crayon",
+    "le cahier"
+   ],
+   "answer": 0,
+   "explanation": "On trace une droite avec la règle.",
+   "id": "cp-maths-lignes-02",
+   "chapter": "cp-maths-geometrie",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-lignes",
+   "points": 1
+  },
+  {
+   "kind": "matching",
+   "prompt": "Relie chaque objet à sa ligne.",
+   "pairs": [
+    [
+     "un fil tendu",
+     "segment"
+    ],
+    [
+     "un escalier en zigzag",
+     "ligne brisée"
+    ],
+    [
+     "un arc-en-ciel",
+     "ligne courbe"
+    ]
+   ],
+   "explanation": "Tendu = droit ; zigzag = brisé ; arrondi = courbe.",
+   "id": "cp-maths-lignes-03",
+   "chapter": "cp-maths-geometrie",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-lignes",
+   "points": 1
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : un segment a un début et une fin.",
+   "answer": true,
+   "explanation": "Un segment est un morceau de droite : il a deux extrémités.",
+   "id": "cp-maths-lignes-04",
+   "chapter": "cp-maths-geometrie",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-maths-lignes",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une ligne qui fait un zigzag est…",
+   "choices": [
+    "une ligne courbe",
+    "un segment",
+    "un rond",
+    "une ligne brisée"
+   ],
+   "answer": 3,
+   "explanation": "Un zigzag est fait de morceaux droits : ligne brisée.",
+   "id": "cp-maths-lignes-05",
+   "chapter": "cp-maths-geometrie",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-maths-lignes",
+   "points": 1
+  },
+  {
+   "kind": "open",
+   "prompt": "Décris avec des mots un chemin fait de trois segments qui changent de direction. Comment s'appelle cette ligne ?",
+   "model": "C'est une ligne brisée : elle est faite de segments qui changent de direction.",
+   "rubric": [
+    "Il dit « ligne brisée ».",
+    "Il parle de segments ou de morceaux droits."
+   ],
+   "explanation": "Une ligne faite de morceaux droits qui tournent est une ligne brisée.",
+   "id": "cp-maths-lignes-06",
+   "chapter": "cp-maths-geometrie",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cp-maths-lignes",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une ligne droite…",
+   "choices": [
+    "est arrondie",
+    "fait des zigzags",
+    "ne tourne pas",
+    "est toujours courte"
+   ],
+   "answer": 2,
+   "explanation": "Une droite va tout droit.",
+   "id": "cp-maths-lignes-q1",
+   "chapter": "cp-maths-geometrie",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-lignes",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le bord d'une règle est…",
+   "choices": [
+    "courbe",
+    "droit",
+    "brisé",
+    "rond"
+   ],
+   "answer": 1,
+   "explanation": "On trace des lignes droites le long de la règle.",
+   "id": "cp-maths-lignes-q2",
+   "chapter": "cp-maths-geometrie",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-lignes",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un morceau de ligne droite s'appelle…",
+   "choices": [
+    "un segment",
+    "une courbe",
+    "un rond",
+    "un carré"
+   ],
+   "answer": 0,
+   "explanation": "C'est la définition du segment.",
+   "id": "cp-maths-lignes-q3",
+   "chapter": "cp-maths-geometrie",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-lignes",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une ligne en zigzag s'appelle…",
+   "choices": [
+    "une ligne droite",
+    "un segment",
+    "une courbe",
+    "une ligne brisée"
+   ],
+   "answer": 3,
+   "explanation": "Elle change de direction avec des coins.",
+   "id": "cp-maths-lignes-q4",
+   "chapter": "cp-maths-geometrie",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-lignes",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le tour d'un ballon est une ligne…",
+   "choices": [
+    "droite",
+    "brisée",
+    "courbe",
+    "de 3 cm"
+   ],
+   "answer": 2,
+   "explanation": "Le contour d'un ballon est arrondi.",
+   "id": "cp-maths-lignes-q5",
+   "chapter": "cp-maths-geometrie",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-lignes",
+   "points": 1
+  }
+ ]
+}

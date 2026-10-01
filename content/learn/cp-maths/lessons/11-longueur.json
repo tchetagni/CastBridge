@@ -1,0 +1,725 @@
+{
+ "chapter": "cp-maths-mesures",
+ "lessons": [
+  {
+   "id": "cp-maths-longueur",
+   "title": "Mesurer des longueurs",
+   "minutes": 12,
+   "readAloud": true,
+   "programRef": "CP — Mesures : longueurs (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Mesurer un segment avec une règle graduée.",
+    "Utiliser le centimètre et le mètre.",
+    "Comparer des longueurs."
+   ],
+   "prerequisites": [
+    "cp-maths-lignes",
+    "cp-maths-comparer"
+   ],
+   "exercises": [
+    "cp-maths-longueur-01",
+    "cp-maths-longueur-02",
+    "cp-maths-longueur-03",
+    "cp-maths-longueur-04",
+    "cp-maths-longueur-05",
+    "cp-maths-longueur-06"
+   ],
+   "selfCheck": [
+    "cp-maths-longueur-q1",
+    "cp-maths-longueur-q2",
+    "cp-maths-longueur-q3",
+    "cp-maths-longueur-q4",
+    "cp-maths-longueur-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier la place des mesures en cm et en m au CP et la taille standard de règles (15 ou 20 cm) utilisées en classe."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Pour savoir si un crayon est long ou court, on le **mesure**. On utilise une règle."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les unités de longueur",
+     "md": "- Le **centimètre** (cm) sert pour les petits objets : un crayon, une gomme.\n- Le **mètre** (m) sert pour les grands objets : une salle de classe, une corde. 1 m = 100 cm."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Mesurer avec la règle",
+     "md": "1. Je pose le **0** de la règle au début de l'objet.\n2. Je lis le nombre en face de la fin de l'objet.\n3. J'écris la mesure avec l'unité : 6 cm."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 140,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 60,
+        "w": 440,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 60,
+        "x2": 30,
+        "y2": 82,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 96,
+        "text": "0",
+        "size": 14
+       },
+       {
+        "t": "line",
+        "x1": 70,
+        "y1": 60,
+        "x2": 70,
+        "y2": 82,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 96,
+        "text": "1",
+        "size": 14
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 60,
+        "x2": 110,
+        "y2": 82,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 96,
+        "text": "2",
+        "size": 14
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 60,
+        "x2": 150,
+        "y2": 82,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 96,
+        "text": "3",
+        "size": 14
+       },
+       {
+        "t": "line",
+        "x1": 190,
+        "y1": 60,
+        "x2": 190,
+        "y2": 82,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 96,
+        "text": "4",
+        "size": 14
+       },
+       {
+        "t": "line",
+        "x1": 230,
+        "y1": 60,
+        "x2": 230,
+        "y2": 82,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 96,
+        "text": "5",
+        "size": 14
+       },
+       {
+        "t": "line",
+        "x1": 270,
+        "y1": 60,
+        "x2": 270,
+        "y2": 82,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 96,
+        "text": "6",
+        "size": 14
+       },
+       {
+        "t": "line",
+        "x1": 310,
+        "y1": 60,
+        "x2": 310,
+        "y2": 82,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 96,
+        "text": "7",
+        "size": 14
+       },
+       {
+        "t": "line",
+        "x1": 350,
+        "y1": 60,
+        "x2": 350,
+        "y2": 82,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 96,
+        "text": "8",
+        "size": 14
+       },
+       {
+        "t": "line",
+        "x1": 390,
+        "y1": 60,
+        "x2": 390,
+        "y2": 82,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 390,
+        "y": 96,
+        "text": "9",
+        "size": 14
+       },
+       {
+        "t": "line",
+        "x1": 430,
+        "y1": 60,
+        "x2": 430,
+        "y2": 82,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 430,
+        "y": 96,
+        "text": "10",
+        "size": 14
+       },
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 35,
+        "x2": 270,
+        "y2": 35,
+        "color": "red",
+        "width": 6
+       }
+      ]
+     },
+     "caption": "Ce segment rouge mesure 6 cm.",
+     "alt": "Une règle graduée de 0 à 10 cm. Un trait rouge part du 0 et finit au 6 : il mesure 6 centimètres."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : lire",
+     "statement": "Un crayon commence au 0 de la règle et finit au 12. Quelle est sa mesure ?",
+     "steps": [
+      {
+       "md": "Je lis le nombre où le crayon finit : 12."
+      },
+      {
+       "md": "J'écris l'unité : cm."
+      }
+     ],
+     "answer": "Le crayon mesure **12 cm**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : choisir l'unité",
+     "statement": "Avec quelle unité mesure-t-on la longueur de la cour de l'école ?",
+     "steps": [
+      {
+       "md": "La cour est très grande."
+      },
+      {
+       "md": "Le centimètre est trop petit : on utilise le **mètre**."
+      }
+     ],
+     "answer": "On mesure la cour en **mètres**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- Ne commence pas à mesurer au bord de la règle s'il y a un petit espace : pars toujours du **0**.\n- N'oublie pas d'écrire l'unité."
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-longueur-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-longueur-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-longueur-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-longueur-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-longueur-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-longueur-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Le trait rouge mesure combien de centimètres ?",
+   "answer": 6,
+   "tolerance": 0,
+   "explanation": "Il commence à 0 et finit à 6 : 6 cm.",
+   "unit": "cm",
+   "figure": {
+    "kind": "shapes",
+    "w": 480,
+    "h": 140,
+    "items": [
+     {
+      "t": "rect",
+      "x": 20,
+      "y": 60,
+      "w": 440,
+      "h": 40,
+      "fill": "lightyellow",
+      "stroke": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 30,
+      "y1": 60,
+      "x2": 30,
+      "y2": 82,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "text",
+      "x": 30,
+      "y": 96,
+      "text": "0",
+      "size": 14
+     },
+     {
+      "t": "line",
+      "x1": 70,
+      "y1": 60,
+      "x2": 70,
+      "y2": 82,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "text",
+      "x": 70,
+      "y": 96,
+      "text": "1",
+      "size": 14
+     },
+     {
+      "t": "line",
+      "x1": 110,
+      "y1": 60,
+      "x2": 110,
+      "y2": 82,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "text",
+      "x": 110,
+      "y": 96,
+      "text": "2",
+      "size": 14
+     },
+     {
+      "t": "line",
+      "x1": 150,
+      "y1": 60,
+      "x2": 150,
+      "y2": 82,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "text",
+      "x": 150,
+      "y": 96,
+      "text": "3",
+      "size": 14
+     },
+     {
+      "t": "line",
+      "x1": 190,
+      "y1": 60,
+      "x2": 190,
+      "y2": 82,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "text",
+      "x": 190,
+      "y": 96,
+      "text": "4",
+      "size": 14
+     },
+     {
+      "t": "line",
+      "x1": 230,
+      "y1": 60,
+      "x2": 230,
+      "y2": 82,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "text",
+      "x": 230,
+      "y": 96,
+      "text": "5",
+      "size": 14
+     },
+     {
+      "t": "line",
+      "x1": 270,
+      "y1": 60,
+      "x2": 270,
+      "y2": 82,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "text",
+      "x": 270,
+      "y": 96,
+      "text": "6",
+      "size": 14
+     },
+     {
+      "t": "line",
+      "x1": 310,
+      "y1": 60,
+      "x2": 310,
+      "y2": 82,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "text",
+      "x": 310,
+      "y": 96,
+      "text": "7",
+      "size": 14
+     },
+     {
+      "t": "line",
+      "x1": 350,
+      "y1": 60,
+      "x2": 350,
+      "y2": 82,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "text",
+      "x": 350,
+      "y": 96,
+      "text": "8",
+      "size": 14
+     },
+     {
+      "t": "line",
+      "x1": 390,
+      "y1": 60,
+      "x2": 390,
+      "y2": 82,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "text",
+      "x": 390,
+      "y": 96,
+      "text": "9",
+      "size": 14
+     },
+     {
+      "t": "line",
+      "x1": 430,
+      "y1": 60,
+      "x2": 430,
+      "y2": 82,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "text",
+      "x": 430,
+      "y": 96,
+      "text": "10",
+      "size": 14
+     },
+     {
+      "t": "line",
+      "x1": 30,
+      "y1": 35,
+      "x2": 270,
+      "y2": 35,
+      "color": "red",
+      "width": 6
+     }
+    ]
+   },
+   "id": "cp-maths-longueur-01",
+   "chapter": "cp-maths-mesures",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-longueur",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle unité pour mesurer une gomme ?",
+   "choices": [
+    "le mètre",
+    "le litre",
+    "le kilo",
+    "le centimètre"
+   ],
+   "answer": 3,
+   "explanation": "Une gomme est petite : on utilise le centimètre.",
+   "id": "cp-maths-longueur-02",
+   "chapter": "cp-maths-mesures",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-longueur",
+   "points": 1
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un ruban mesure 4 cm, un autre 3 cm. Quelle est la longueur des deux bout à bout ?",
+   "answer": 7,
+   "tolerance": 0,
+   "explanation": "4 + 3 = 7 cm.",
+   "unit": "cm",
+   "id": "cp-maths-longueur-03",
+   "chapter": "cp-maths-mesures",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-longueur",
+   "points": 1
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un fil mesure 9 cm. On en coupe 4 cm. Combien en reste-t-il ?",
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "9 − 4 = 5 cm.",
+   "unit": "cm",
+   "id": "cp-maths-longueur-04",
+   "chapter": "cp-maths-mesures",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-maths-longueur",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel objet est le plus long ?",
+   "choices": [
+    "un crayon de 15 cm",
+    "une gomme de 3 cm",
+    "la corde de 2 m",
+    "une clé de 6 cm"
+   ],
+   "answer": 2,
+   "explanation": "2 m = 200 cm : c'est de loin le plus long.",
+   "id": "cp-maths-longueur-05",
+   "chapter": "cp-maths-mesures",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-maths-longueur",
+   "points": 1
+  },
+  {
+   "kind": "problem",
+   "prompt": "Ngono a un ruban de 12 cm. Amina a un ruban de 8 cm.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "De combien de centimètres le ruban de Ngono est-il plus long ?",
+     "answer": 4,
+     "tolerance": 0,
+     "explanation": "12 − 8 = 4 cm.",
+     "id": "cp-maths-longueur-06-a",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Si on met les deux rubans bout à bout, quelle est la longueur ?",
+     "answer": 20,
+     "tolerance": 0,
+     "explanation": "12 + 8 = 20 cm.",
+     "id": "cp-maths-longueur-06-b",
+     "points": 1
+    }
+   ],
+   "explanation": "4 cm de plus ; 20 cm en tout.",
+   "id": "cp-maths-longueur-06",
+   "chapter": "cp-maths-mesures",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cp-maths-longueur"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Où place-t-on le début de l'objet sur la règle ?",
+   "choices": [
+    "sur le 5",
+    "sur le 0",
+    "sur le 10",
+    "n'importe où"
+   ],
+   "answer": 1,
+   "explanation": "On part toujours du 0.",
+   "id": "cp-maths-longueur-q1",
+   "chapter": "cp-maths-mesures",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-longueur",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "1 mètre, c'est…",
+   "choices": [
+    "100 centimètres",
+    "10 centimètres",
+    "1 000 centimètres",
+    "1 centimètre"
+   ],
+   "answer": 0,
+   "explanation": "1 m = 100 cm.",
+   "id": "cp-maths-longueur-q2",
+   "chapter": "cp-maths-mesures",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-longueur",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle unité pour mesurer la longueur d'un terrain de football ?",
+   "choices": [
+    "le centimètre",
+    "le gramme",
+    "la minute",
+    "le mètre"
+   ],
+   "answer": 3,
+   "explanation": "Un terrain est grand.",
+   "id": "cp-maths-longueur-q3",
+   "chapter": "cp-maths-mesures",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-longueur",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un stylo de 14 cm est plus long que…",
+   "choices": [
+    "une règle de 20 cm",
+    "un cahier de 21 cm",
+    "une gomme de 3 cm",
+    "un bâton de 1 m"
+   ],
+   "answer": 2,
+   "explanation": "14 > 3.",
+   "id": "cp-maths-longueur-q4",
+   "chapter": "cp-maths-mesures",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-longueur",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le symbole de centimètre est…",
+   "choices": [
+    "kg",
+    "cm",
+    "cl",
+    "m²"
+   ],
+   "answer": 1,
+   "explanation": "cm veut dire centimètre.",
+   "id": "cp-maths-longueur-q5",
+   "chapter": "cp-maths-mesures",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-longueur",
+   "points": 1
+  }
+ ]
+}

@@ -1,0 +1,544 @@
+{
+ "chapter": "cp-maths-numeration",
+ "lessons": [
+  {
+   "id": "cp-maths-nombres100",
+   "title": "Les nombres jusqu'à 100",
+   "minutes": 12,
+   "readAloud": true,
+   "programRef": "CP — Numération : nombres jusqu'à 100 (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Lire et écrire les nombres jusqu'à 100.",
+    "Compter de 10 en 10.",
+    "Trouver le nombre suivant et le nombre précédent."
+   ],
+   "prerequisites": [
+    "cp-maths-nombres20"
+   ],
+   "exercises": [
+    "cp-maths-nombres100-01",
+    "cp-maths-nombres100-02",
+    "cp-maths-nombres100-03",
+    "cp-maths-nombres100-04",
+    "cp-maths-nombres100-05",
+    "cp-maths-nombres100-06"
+   ],
+   "selfCheck": [
+    "cp-maths-nombres100-q1",
+    "cp-maths-nombres100-q2",
+    "cp-maths-nombres100-q3",
+    "cp-maths-nombres100-q4",
+    "cp-maths-nombres100-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier l'ordre d'apparition des nombres 70 à 99 (soixante-dix, quatre-vingts) dans la progression locale."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Après 20, on continue de compter : **21, 22, 23**... jusqu'à **100**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les dizaines rondes",
+     "md": "10 dix, 20 vingt, 30 trente, 40 quarante, 50 cinquante, 60 soixante.\n\n70 soixante-dix, 80 quatre-vingts, 90 quatre-vingt-dix, 100 cent."
+    },
+    {
+     "type": "audio",
+     "lang": "fr-FR",
+     "text": "Dix, vingt, trente, quarante, cinquante, soixante, soixante-dix, quatre-vingts, quatre-vingt-dix, cent."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 120,
+      "items": [
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 70,
+        "x2": 450,
+        "y2": 70,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 62,
+        "x2": 30,
+        "y2": 78,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 100,
+        "text": "0",
+        "size": 15
+       },
+       {
+        "t": "line",
+        "x1": 72,
+        "y1": 62,
+        "x2": 72,
+        "y2": 78,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 72,
+        "y": 100,
+        "text": "10",
+        "size": 15
+       },
+       {
+        "t": "line",
+        "x1": 114,
+        "y1": 62,
+        "x2": 114,
+        "y2": 78,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 114,
+        "y": 100,
+        "text": "20",
+        "size": 15
+       },
+       {
+        "t": "line",
+        "x1": 156,
+        "y1": 62,
+        "x2": 156,
+        "y2": 78,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 156,
+        "y": 100,
+        "text": "30",
+        "size": 15
+       },
+       {
+        "t": "line",
+        "x1": 198,
+        "y1": 62,
+        "x2": 198,
+        "y2": 78,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 198,
+        "y": 100,
+        "text": "40",
+        "size": 15
+       },
+       {
+        "t": "line",
+        "x1": 240,
+        "y1": 62,
+        "x2": 240,
+        "y2": 78,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 100,
+        "text": "50",
+        "size": 15
+       },
+       {
+        "t": "line",
+        "x1": 282,
+        "y1": 62,
+        "x2": 282,
+        "y2": 78,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 282,
+        "y": 100,
+        "text": "60",
+        "size": 15
+       },
+       {
+        "t": "line",
+        "x1": 324,
+        "y1": 62,
+        "x2": 324,
+        "y2": 78,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 324,
+        "y": 100,
+        "text": "70",
+        "size": 15
+       },
+       {
+        "t": "line",
+        "x1": 366,
+        "y1": 62,
+        "x2": 366,
+        "y2": 78,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 366,
+        "y": 100,
+        "text": "80",
+        "size": 15
+       },
+       {
+        "t": "line",
+        "x1": 408,
+        "y1": 62,
+        "x2": 408,
+        "y2": 78,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 408,
+        "y": 100,
+        "text": "90",
+        "size": 15
+       },
+       {
+        "t": "line",
+        "x1": 450,
+        "y1": 62,
+        "x2": 450,
+        "y2": 78,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 450,
+        "y": 100,
+        "text": "100",
+        "size": 15
+       },
+       {
+        "t": "circle",
+        "cx": 198,
+        "cy": 70,
+        "r": 9,
+        "fill": "lightorange",
+        "stroke": "red"
+       },
+       {
+        "t": "text",
+        "x": 198,
+        "y": 40,
+        "text": "40",
+        "size": 15,
+        "color": "red",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "La file des nombres de 10 en 10.",
+     "alt": "Une droite graduée de 0 à 100, de 10 en 10. Le point 40 est marqué."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : lire un nombre",
+     "statement": "Comment lit-on 45 ? Et 72 ?",
+     "steps": [
+      {
+       "md": "45 = quarante-cinq (quarante et cinq)."
+      },
+      {
+       "md": "72 = soixante-douze (soixante et douze)."
+      }
+     ],
+     "answer": "45 : **quarante-cinq** ; 72 : **soixante-douze**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : compter de 10 en 10",
+     "statement": "Complète : 30, 40, ___, 60.",
+     "steps": [
+      {
+       "md": "On ajoute 10 à chaque fois."
+      },
+      {
+       "md": "30 + 10 = 40 ; 40 + 10 = 50 ; 50 + 10 = 60."
+      }
+     ],
+     "answer": "Le nombre manquant est **50**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- 71 se dit « soixante et onze », 91 se dit « quatre-vingt-onze ».\n- Ne confonds pas 16 (seize) et 60 (soixante)."
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-nombres100-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-nombres100-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-nombres100-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-nombres100-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-nombres100-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-maths-nombres100-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quel nombre vient juste après 39 ?",
+   "choices": [
+    "30",
+    "49",
+    "40",
+    "38"
+   ],
+   "answer": 2,
+   "explanation": "Après 39 on passe à la dizaine suivante : 40.",
+   "id": "cp-maths-nombres100-01",
+   "chapter": "cp-maths-numeration",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-nombres100",
+   "points": 1
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Complète : 10, 20, 30, 40, ___.",
+   "answer": 50,
+   "tolerance": 0,
+   "explanation": "On ajoute 10 : 40 + 10 = 50.",
+   "id": "cp-maths-nombres100-02",
+   "chapter": "cp-maths-numeration",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-nombres100",
+   "points": 1
+  },
+  {
+   "kind": "matching",
+   "prompt": "Relie chaque nombre à son écriture en lettres.",
+   "pairs": [
+    [
+     "30",
+     "trente"
+    ],
+    [
+     "50",
+     "cinquante"
+    ],
+    [
+     "60",
+     "soixante"
+    ],
+    [
+     "100",
+     "cent"
+    ]
+   ],
+   "explanation": "Ce sont les dizaines rondes à connaître par cœur.",
+   "id": "cp-maths-nombres100-03",
+   "chapter": "cp-maths-numeration",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-maths-nombres100",
+   "points": 1
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quel nombre vient juste avant 70 ?",
+   "answer": 69,
+   "tolerance": 0,
+   "explanation": "Juste avant 70, on dit 69.",
+   "id": "cp-maths-nombres100-04",
+   "chapter": "cp-maths-numeration",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-maths-nombres100",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle suite est juste ?",
+   "choices": [
+    "58, 59, 50, 51",
+    "58, 59, 60, 61",
+    "58, 60, 59, 61",
+    "58, 59, 70, 71"
+   ],
+   "answer": 1,
+   "explanation": "Après 59 vient 60, puis 61.",
+   "id": "cp-maths-nombres100-05",
+   "chapter": "cp-maths-numeration",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-maths-nombres100",
+   "points": 1
+  },
+  {
+   "kind": "problem",
+   "prompt": "Ngono compte les noix de palme de 10 en 10 : 10, 20, 30...",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Elle dit : 10, 20, 30, 40, 50, 60. Combien de nombres dit-elle ?",
+     "answer": 6,
+     "tolerance": 0,
+     "explanation": "10, 20, 30, 40, 50, 60 : six nombres.",
+     "id": "cp-maths-nombres100-06-a",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quel nombre dit-elle ensuite ?",
+     "answer": 70,
+     "tolerance": 0,
+     "explanation": "60 + 10 = 70.",
+     "id": "cp-maths-nombres100-06-b",
+     "points": 1
+    }
+   ],
+   "explanation": "Elle dit 6 nombres, puis 70.",
+   "id": "cp-maths-nombres100-06",
+   "chapter": "cp-maths-numeration",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cp-maths-nombres100"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment écrit-on « quarante-trois » ?",
+   "choices": [
+    "43",
+    "34",
+    "403",
+    "4"
+   ],
+   "answer": 0,
+   "explanation": "Quarante = 40, trois = 3 : 43.",
+   "id": "cp-maths-nombres100-q1",
+   "chapter": "cp-maths-numeration",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-nombres100",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel nombre vient juste avant 80 ?",
+   "choices": [
+    "81",
+    "70",
+    "89",
+    "79"
+   ],
+   "answer": 3,
+   "explanation": "Avant 80, il y a 79.",
+   "id": "cp-maths-nombres100-q2",
+   "chapter": "cp-maths-numeration",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-nombres100",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "De 10 en 10 : 20, 30, ___, 50",
+   "choices": [
+    "35",
+    "45",
+    "40",
+    "60"
+   ],
+   "answer": 2,
+   "explanation": "On ajoute 10 : 30 + 10 = 40.",
+   "id": "cp-maths-nombres100-q3",
+   "chapter": "cp-maths-numeration",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-nombres100",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel nombre est « soixante-douze » ?",
+   "choices": [
+    "62",
+    "72",
+    "52",
+    "612"
+   ],
+   "answer": 1,
+   "explanation": "Soixante-douze = 60 + 12 = 72.",
+   "id": "cp-maths-nombres100-q4",
+   "chapter": "cp-maths-numeration",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-nombres100",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le plus grand nombre de la liste ?",
+   "choices": [
+    "100",
+    "99",
+    "90",
+    "19"
+   ],
+   "answer": 0,
+   "explanation": "100 est plus grand que 99.",
+   "id": "cp-maths-nombres100-q5",
+   "chapter": "cp-maths-numeration",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-maths-nombres100",
+   "points": 1
+  }
+ ]
+}
