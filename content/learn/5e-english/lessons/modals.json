@@ -1,0 +1,1423 @@
+{
+ "chapter": "5e-english-modals",
+ "lessons": [
+  {
+   "id": "5e-english-can",
+   "title": "Can and can't: ability, permission, requests",
+   "minutes": 25,
+   "programRef": "5e — Anglais (APC), can, could (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Exprimer une capacité (can / can't).",
+    "Demander une permission ou faire une demande poliment (Can I…? Could you…?)."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "5e-english-can-01",
+    "5e-english-can-02",
+    "5e-english-can-03",
+    "5e-english-can-04",
+    "5e-english-can-05",
+    "5e-english-can-06"
+   ],
+   "selfCheck": [
+    "5e-english-can-q1",
+    "5e-english-can-q2",
+    "5e-english-can-q3",
+    "5e-english-can-q4",
+    "5e-english-can-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Can",
+     "md": "**can** + verbe à l'infinitif sans to, pour **tous** les sujets, **sans -s** : She **can swim**. · I **can't** (cannot) drive.\nSens : **capacité** (I can speak English), **permission** (Can I open the window ?), **demande** (Can you help me ?)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Négation et question",
+     "md": "- Négation : **can't** ou **cannot** : He can**'t** run fast.\n- Question : **Can** + sujet + verbe ? **Can** you swim ? — **Yes, I can.** / **No, I can't.**\n- Plus poli : **Could** you open the door, please ? **Could** = même sens, plus poli ; **could** sert aussi pour la capacité passée : I could read at five."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les emplois de can.",
+     "alt": "Un tableau qui montre quatre emplois de can et could.",
+     "figure": {
+      "kind": "shapes",
+      "w": 460,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 440,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 34,
+        "text": "Phrase",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 34,
+        "text": "Sens",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 46,
+        "w": 440,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 70,
+        "text": "I can swim.",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 70,
+        "text": "capacité",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 82,
+        "w": 440,
+        "h": 36,
+        "fill": "paper",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 106,
+        "text": "Can I come in?",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 106,
+        "text": "permission",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 118,
+        "w": 440,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 142,
+        "text": "Can you help me?",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 142,
+        "text": "demande",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 154,
+        "w": 440,
+        "h": 36,
+        "fill": "paper",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 178,
+        "text": "Could you help me?",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 178,
+        "text": "demande polie",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : capacité",
+     "statement": "Écris : « Amina sait jouer du piano mais elle ne sait pas chanter. »",
+     "steps": [
+      {
+       "md": "Savoir faire = can ; piano = play the piano."
+      },
+      {
+       "md": "Négation : can't sing."
+      }
+     ],
+     "answer": "**Amina can play the piano but she can't sing.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : poli",
+     "statement": "Demande poliment à ton professeur de répéter la phrase.",
+     "steps": [
+      {
+       "md": "On emploie Could you … please ? pour être poli."
+      },
+      {
+       "md": "répéter = repeat."
+      }
+     ],
+     "answer": "**Could you repeat the sentence, please?**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- « She cans swim » : can ne prend pas de **-s**.\n- « I can to swim » : jamais **to** après can.\n- « Do you can swim ? » : on dit **Can you swim ?** (pas de do)."
+    }
+   ],
+   "reviewNotes": [
+    "could (passé de can) est simplement mentionné ; vérifier la progression officielle."
+   ]
+  },
+  {
+   "id": "5e-english-must-have-to",
+   "title": "Must, mustn't and have to",
+   "minutes": 25,
+   "programRef": "5e — Anglais (APC), must, have to (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Exprimer l'obligation (must / have to) et l'interdiction (mustn't).",
+    "Distinguer mustn't et don't have to."
+   ],
+   "prerequisites": [
+    "5e-english-can"
+   ],
+   "exercises": [
+    "5e-english-must-have-to-01",
+    "5e-english-must-have-to-02",
+    "5e-english-must-have-to-03",
+    "5e-english-must-have-to-04",
+    "5e-english-must-have-to-05",
+    "5e-english-must-have-to-06"
+   ],
+   "selfCheck": [
+    "5e-english-must-have-to-q1",
+    "5e-english-must-have-to-q2",
+    "5e-english-must-have-to-q3",
+    "5e-english-must-have-to-q4",
+    "5e-english-must-have-to-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Obligation",
+     "md": "**must** + infinitif sans to : You **must** wear a uniform. (obligation forte, règle)\n**have to** / **has to** : She **has to** get up early. (obligation venant des circonstances)\nPas de -s pour must ; **has to** à he/she/it."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Interdiction ou absence d'obligation",
+     "md": "- **mustn't** = **interdit** : You **mustn't** run in the corridor.\n- **don't have to** / **doesn't have to** = **pas obligé** (c'est permis, mais pas nécessaire) : You **don't have to** wear a tie.\nAttention : ce n'est pas le même sens !"
+    },
+    {
+     "type": "illustration",
+     "caption": "Obligation, interdiction et absence d'obligation.",
+     "alt": "Un tableau de quatre phrases avec must, mustn't, have to et don't have to.",
+     "figure": {
+      "kind": "shapes",
+      "w": 460,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 440,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 34,
+        "text": "Phrase",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 34,
+        "text": "Sens",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 46,
+        "w": 440,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 70,
+        "text": "You must study.",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 70,
+        "text": "obligation",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 82,
+        "w": 440,
+        "h": 36,
+        "fill": "paper",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 106,
+        "text": "You mustn't talk.",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 106,
+        "text": "interdit",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 118,
+        "w": 440,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 142,
+        "text": "You have to wake up.",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 142,
+        "text": "obligation",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 154,
+        "w": 440,
+        "h": 36,
+        "fill": "paper",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 178,
+        "text": "You don't have to come.",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 178,
+        "text": "pas nécessaire",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : règle de l'école",
+     "statement": "Écris une règle : « Il est interdit d'utiliser un téléphone en classe. »",
+     "steps": [
+      {
+       "md": "Interdit = mustn't."
+      },
+      {
+       "md": "Utiliser un téléphone = use a phone."
+      }
+     ],
+     "answer": "**You mustn't use a phone in class.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : pas obligé",
+     "statement": "Choisis : « Tomorrow is Sunday. We (mustn't / don't have to) go to school. »",
+     "steps": [
+      {
+       "md": "Dimanche, il n'y a pas école : ce n'est pas nécessaire."
+      },
+      {
+       "md": "Ce n'est pas interdit d'y aller : don't have to."
+      }
+     ],
+     "answer": "**don't have to**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre **mustn't** (interdit) et **don't have to** (pas obligé).\n- « She musts » : **She must** (jamais de s).\n- « I must to go » : **I must go**."
+    }
+   ],
+   "reviewNotes": [
+    "Le contraste mustn't / don't have to est parfois reporté en 4e ; vérifier le programme officiel."
+   ]
+  },
+  {
+   "id": "5e-english-should",
+   "title": "Giving advice with should / shouldn't",
+   "minutes": 20,
+   "programRef": "5e — Anglais (APC), should (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Donner un conseil avec should et shouldn't.",
+    "Demander un conseil (What should I do?)."
+   ],
+   "prerequisites": [
+    "5e-english-must-have-to"
+   ],
+   "exercises": [
+    "5e-english-should-01",
+    "5e-english-should-02",
+    "5e-english-should-03",
+    "5e-english-should-04",
+    "5e-english-should-05",
+    "5e-english-should-06"
+   ],
+   "selfCheck": [
+    "5e-english-should-q1",
+    "5e-english-should-q2",
+    "5e-english-should-q3",
+    "5e-english-should-q4",
+    "5e-english-should-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Should",
+     "md": "**should** + infinitif sans to : You **should** drink water. (conseil) · You **shouldn't** eat too much sugar.\nIl ne prend pas de -s ; **should** est moins fort que **must**."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Demander et donner un conseil",
+     "md": "- **What should I do ?** — You should rest.\n- **Should I** call the doctor ? — Yes, you **should**. / No, you **shouldn't**.\n- Pour un mal : **I have a headache. — You should take a rest.**"
+    },
+    {
+     "type": "illustration",
+     "caption": "Comparer should et les autres verbes modaux.",
+     "alt": "Un tableau qui compare must, should, can et mustn't.",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 420,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 34,
+        "text": "Verbe",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 34,
+        "text": "Sens",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 46,
+        "w": 420,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 70,
+        "text": "must",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 70,
+        "text": "obligation forte",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 82,
+        "w": 420,
+        "h": 36,
+        "fill": "paper",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 106,
+        "text": "should",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 106,
+        "text": "conseil",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 118,
+        "w": 420,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 142,
+        "text": "can",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 142,
+        "text": "possibilité",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 154,
+        "w": 420,
+        "h": 36,
+        "fill": "paper",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 178,
+        "text": "mustn't",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 178,
+        "text": "interdit",
+        "size": 16,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : conseil",
+     "statement": "Boris has a toothache. Donne-lui un conseil.",
+     "steps": [
+      {
+       "md": "Un mal de dents : il faut voir le dentiste."
+      },
+      {
+       "md": "Structure : You should + verbe."
+      }
+     ],
+     "answer": "**You should see a dentist.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : déconseiller",
+     "statement": "Dis à Amina de ne pas dormir tard avant l'examen.",
+     "steps": [
+      {
+       "md": "Déconseiller = shouldn't."
+      },
+      {
+       "md": "dormir tard = go to bed late."
+      }
+     ],
+     "answer": "**You shouldn't go to bed late.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- « You should to rest » : **You should rest**.\n- « He shoulds » : pas de s.\n- Confondre conseil (should) et obligation (must)."
+    }
+   ],
+   "reviewNotes": [
+    "ought to et had better ne sont pas traités ; à vérifier s'ils sont attendus."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Forme correcte :",
+   "choices": [
+    "He can run fast.",
+    "He cans run fast.",
+    "He can runs fast.",
+    "He can to run fast."
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "can + infinitif sans to ni s.",
+   "id": "5e-english-can-01",
+   "tier": "application",
+   "lesson": "5e-english-can",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Question correcte :",
+   "choices": [
+    "Do you can help me?",
+    "Can you help me?",
+    "You can help me?",
+    "Can you to help me?"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Can + sujet + verbe.",
+   "id": "5e-english-can-02",
+   "tier": "application",
+   "lesson": "5e-english-can",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase exprime une permission ?",
+   "choices": [
+    "I can swim.",
+    "Can I go out?",
+    "She can sing.",
+    "We can't cook."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Can I … ? = puis-je ?",
+   "id": "5e-english-can-03",
+   "tier": "application",
+   "lesson": "5e-english-can",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle formule est la plus polie ?",
+   "choices": [
+    "Open the window!",
+    "You open the window.",
+    "Could you open the window, please?",
+    "Open!"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Could + please = poli.",
+   "id": "5e-english-can-04",
+   "tier": "approfondissement",
+   "lesson": "5e-english-can",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle réponse est correcte à « Can she swim? » (non) ?",
+   "choices": [
+    "No, she doesn't.",
+    "No, she isn't.",
+    "No, she cans't.",
+    "No, she can't."
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "On répond avec can't.",
+   "id": "5e-english-can-05",
+   "tier": "approfondissement",
+   "lesson": "5e-english-can",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Voici ce que savent faire trois élèves : Amina : swim, sing. Boris : play football, cook. Nkeng : draw, sing.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Qui sait chanter ET dessiner ?",
+     "choices": [
+      "Amina",
+      "Boris",
+      "Tous les trois",
+      "Nkeng"
+     ],
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Nkeng : draw, sing.",
+     "id": "5e-english-can-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quelle phrase est vraie ?",
+     "choices": [
+      "Boris can cook but he can't swim.",
+      "Boris can swim.",
+      "Amina can cook.",
+      "Nkeng can play football."
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "D'après la liste, Boris ne nage pas.",
+     "id": "5e-english-can-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Écris 3 phrases : ce que tu sais faire (2 phrases) et ce que tu ne sais pas faire (1 phrase) avec can/can't.",
+     "model": "I can swim. I can play football. I can't sing.",
+     "rubric": [
+      "Deux phrases avec can.",
+      "Une phrase avec can't.",
+      "Pas de -s ni de to après can."
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "5e-english-can-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-english-can-06",
+   "tier": "examen",
+   "lesson": "5e-english-can",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Can I borrow your pen? » est :",
+   "choices": [
+    "une demande de permission",
+    "une négation",
+    "une habitude",
+    "un ordre"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Can I … ? permission.",
+   "id": "5e-english-can-q1",
+   "tier": "autoeval",
+   "lesson": "5e-english-can",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Forme négative de « I can swim » :",
+   "choices": [
+    "I don't can swim.",
+    "I can not to swim.",
+    "I can't swim.",
+    "I amn't swim."
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "can't.",
+   "id": "5e-english-can-q2",
+   "tier": "autoeval",
+   "lesson": "5e-english-can",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Could » est :",
+   "choices": [
+    "le futur de can",
+    "le pluriel de can",
+    "un can plus poli ou au passé",
+    "un nom"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "could = passé / politesse.",
+   "id": "5e-english-can-q3",
+   "tier": "autoeval",
+   "lesson": "5e-english-can",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« They can ___ English. »",
+   "choices": [
+    "speak",
+    "speaks",
+    "to speak",
+    "speaking"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Verbe nu après can.",
+   "id": "5e-english-can-q4",
+   "tier": "autoeval",
+   "lesson": "5e-english-can",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase avec la négation de can est juste ?",
+   "choices": [
+    "She cans drive.",
+    "She doesn't can drive.",
+    "She can't drive.",
+    "She not can drive."
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "can't + verbe.",
+   "id": "5e-english-can-q5",
+   "tier": "autoeval",
+   "lesson": "5e-english-can",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « You ___ be quiet in the library. »",
+   "choices": [
+    "must",
+    "musts",
+    "have",
+    "musted"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Règle : must + infinitif.",
+   "id": "5e-english-must-have-to-01",
+   "tier": "application",
+   "lesson": "5e-english-must-have-to",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« You mustn't run » signifie :",
+   "choices": [
+    "Il est interdit de courir.",
+    "Tu n'es pas obligé de courir.",
+    "Tu dois courir.",
+    "Tu peux courir."
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "mustn't = interdit.",
+   "id": "5e-english-must-have-to-02",
+   "tier": "application",
+   "lesson": "5e-english-must-have-to",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « My sister ___ get up at five. » (obligation)",
+   "choices": [
+    "have to",
+    "must to",
+    "has to",
+    "mustn't"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "she → has to.",
+   "id": "5e-english-must-have-to-03",
+   "tier": "application",
+   "lesson": "5e-english-must-have-to",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« You don't have to wear a tie » signifie :",
+   "choices": [
+    "La cravate est interdite.",
+    "La cravate n'est pas obligatoire.",
+    "Tu dois porter une cravate.",
+    "Tu ne peux pas."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "don't have to = pas obligatoire.",
+   "id": "5e-english-must-have-to-04",
+   "tier": "approfondissement",
+   "lesson": "5e-english-must-have-to",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase est correcte ?",
+   "choices": [
+    "He musts do his homework.",
+    "He must do his homework.",
+    "He must to do his homework.",
+    "He must does his homework."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "must + infinitif sans to ni s.",
+   "id": "5e-english-must-have-to-05",
+   "tier": "approfondissement",
+   "lesson": "5e-english-must-have-to",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Voici le règlement d'un club de sport : « Members must arrive on time. They mustn't use phones. They don't have to bring a ball, but they have to wear sports shoes. »",
+   "parts": [
+    {
+     "kind": "truefalse",
+     "prompt": "Les membres doivent arriver à l'heure.",
+     "answer": true,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Members must arrive on time.",
+     "id": "5e-english-must-have-to-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Que doivent-ils apporter obligatoirement ?",
+     "choices": [
+      "un ballon",
+      "un téléphone",
+      "un uniforme",
+      "rien d'autre que des chaussures de sport portées"
+     ],
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Ils n'ont pas à apporter un ballon, mais doivent porter des chaussures de sport.",
+     "id": "5e-english-must-have-to-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Écris 3 règles pour ta classe avec must, mustn't et have to.",
+     "model": "We must be on time. We mustn't shout. We have to do our homework.",
+     "rubric": [
+      "Une phrase avec must.",
+      "Une phrase avec mustn't.",
+      "Une phrase avec have to ou don't have to."
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "5e-english-must-have-to-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-english-must-have-to-06",
+   "tier": "examen",
+   "lesson": "5e-english-must-have-to",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« We ___ shout in class. » (interdit)",
+   "choices": [
+    "don't have to",
+    "haven't",
+    "musts",
+    "mustn't"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "mustn't = interdit.",
+   "id": "5e-english-must-have-to-q1",
+   "tier": "autoeval",
+   "lesson": "5e-english-must-have-to",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« She has to » signifie :",
+   "choices": [
+    "elle peut",
+    "elle aime",
+    "elle doit",
+    "elle a"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "has to = doit.",
+   "id": "5e-english-must-have-to-q2",
+   "tier": "autoeval",
+   "lesson": "5e-english-must-have-to",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle forme est correcte à la 3e personne ?",
+   "choices": [
+    "He have to leave.",
+    "He haves to leave.",
+    "He has to leave.",
+    "He musts leave."
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "has to.",
+   "id": "5e-english-must-have-to-q3",
+   "tier": "autoeval",
+   "lesson": "5e-english-must-have-to",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« You mustn't be late » veut dire :",
+   "choices": [
+    "Tu peux être en retard",
+    "Tu n'es pas obligé d'être en retard",
+    "Tu es en retard",
+    "Ne sois pas en retard (interdit)"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "mustn't = interdit.",
+   "id": "5e-english-must-have-to-q4",
+   "tier": "autoeval",
+   "lesson": "5e-english-must-have-to",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« I don't have to go » veut dire :",
+   "choices": [
+    "Il est interdit d'y aller.",
+    "Je ne suis pas obligé d'y aller.",
+    "Je dois y aller.",
+    "Je n'ai pas d'affaires."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "pas obligé.",
+   "id": "5e-english-must-have-to-q5",
+   "tier": "autoeval",
+   "lesson": "5e-english-must-have-to",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « You ___ study for the exam. »",
+   "choices": [
+    "should",
+    "shoulds",
+    "should to",
+    "shoulding"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "should + infinitif.",
+   "id": "5e-english-should-01",
+   "tier": "application",
+   "lesson": "5e-english-should",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase est un conseil ?",
+   "choices": [
+    "You must pay.",
+    "You can't swim.",
+    "You are thirsty.",
+    "You should drink water."
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "should = conseil.",
+   "id": "5e-english-should-02",
+   "tier": "application",
+   "lesson": "5e-english-should",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Question correcte :",
+   "choices": [
+    "Do I should call him?",
+    "Should I call him?",
+    "I should call him?",
+    "Should I to call him?"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Should + sujet + infinitif.",
+   "id": "5e-english-should-03",
+   "tier": "application",
+   "lesson": "5e-english-should",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« You shouldn't eat too many sweets » est :",
+   "choices": [
+    "un conseil négatif",
+    "une obligation",
+    "une permission",
+    "une capacité"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "shouldn't = il vaut mieux ne pas.",
+   "id": "5e-english-should-04",
+   "tier": "approfondissement",
+   "lesson": "5e-english-should",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel conseil convient à « I have a cough » ?",
+   "choices": [
+    "You should see a doctor.",
+    "You should swim.",
+    "You should run fast.",
+    "You should sing."
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Un conseil lié à la santé.",
+   "id": "5e-english-should-05",
+   "tier": "approfondissement",
+   "lesson": "5e-english-should",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Amina says: « I'm tired. I go to bed at midnight and I get up at six. »",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quel conseil est le plus logique ?",
+     "choices": [
+      "You should go to bed earlier.",
+      "You should eat more.",
+      "You should go to bed later.",
+      "You must run."
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Elle manque de sommeil.",
+     "id": "5e-english-should-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quelle phrase déconseille ?",
+     "choices": [
+      "You should sleep.",
+      "You shouldn't stay up late.",
+      "You must wake up.",
+      "You can rest."
+     ],
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "shouldn't = déconseille.",
+     "id": "5e-english-should-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Écris 3 conseils à un ami qui va passer un examen d'anglais (should / shouldn't).",
+     "model": "You should revise every day. You should sleep well. You shouldn't be late.",
+     "rubric": [
+      "Trois conseils avec should ou shouldn't.",
+      "Pas de to après should."
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "5e-english-should-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-english-should-06",
+   "tier": "examen",
+   "lesson": "5e-english-should",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« You ___ be late » (conseil négatif)",
+   "choices": [
+    "don't should",
+    "shouldn'",
+    "not should",
+    "shouldn't"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "shouldn't.",
+   "id": "5e-english-should-q1",
+   "tier": "autoeval",
+   "lesson": "5e-english-should",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle forme est correcte ?",
+   "choices": [
+    "She should listen.",
+    "She shoulds listen.",
+    "She should to listen.",
+    "She should listens."
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "should + infinitif.",
+   "id": "5e-english-should-q2",
+   "tier": "autoeval",
+   "lesson": "5e-english-should",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« What should I do? » demande :",
+   "choices": [
+    "une permission",
+    "un conseil",
+    "l'heure",
+    "un prix"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Question de conseil.",
+   "id": "5e-english-should-q3",
+   "tier": "autoeval",
+   "lesson": "5e-english-should",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase conseille de boire ?",
+   "choices": [
+    "You mustn't drink water.",
+    "You can't drink water.",
+    "You didn't drink water.",
+    "You should drink water."
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "should = conseil.",
+   "id": "5e-english-should-q4",
+   "tier": "autoeval",
+   "lesson": "5e-english-should",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Should est :",
+   "choices": [
+    "plus fort que must",
+    "moins fort que must",
+    "un verbe au passé",
+    "un nom"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "should = conseil.",
+   "id": "5e-english-should-q5",
+   "tier": "autoeval",
+   "lesson": "5e-english-should",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}
