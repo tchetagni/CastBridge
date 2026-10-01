@@ -111,7 +111,7 @@ private fun AppsBlock(client: ParentalClient, profiles: List<ChildProfile>, pin:
 }
 
 @Composable
-private fun ReportsBlock(client: ParentalClient, profiles: List<ChildProfile>, pin: String, scope: CoroutineScope, onMsg: (String?) -> Unit) {
+internal fun ReportsBlock(client: ParentalClient, profiles: List<ChildProfile>, pin: String, scope: CoroutineScope, onMsg: (String?) -> Unit) {
     val ctx = LocalContext.current
     ParentalInbox.init(ctx)
     var rl by remember(client) { mutableStateOf<ParentalClient.ReportsLoaded?>(null) }
