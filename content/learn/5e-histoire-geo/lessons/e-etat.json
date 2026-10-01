@@ -1,0 +1,820 @@
+{
+ "chapter": "5e-histoire-geo-e-etat",
+ "lessons": [
+  {
+   "id": "5e-histoire-geo-environnement",
+   "title": "La protection de l'environnement",
+   "minutes": 20,
+   "programRef": "5e — Éducation à la citoyenneté et à la morale (à vérifier sur le programme officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Identifier les atteintes à l'environnement (déchets, déforestation, pollution).",
+    "Proposer des gestes concrets pour protéger la nature."
+   ],
+   "prerequisites": [
+    "5e-histoire-geo-paix-conflits"
+   ],
+   "exercises": [
+    "5e-histoire-geo-environnement-01",
+    "5e-histoire-geo-environnement-02",
+    "5e-histoire-geo-environnement-03",
+    "5e-histoire-geo-environnement-04",
+    "5e-histoire-geo-environnement-05",
+    "5e-histoire-geo-environnement-06"
+   ],
+   "selfCheck": [
+    "5e-histoire-geo-environnement-q1",
+    "5e-histoire-geo-environnement-q2",
+    "5e-histoire-geo-environnement-q3",
+    "5e-histoire-geo-environnement-q4",
+    "5e-histoire-geo-environnement-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "L'environnement",
+     "md": "L'**environnement** est l'ensemble de ce qui nous entoure : air, eau, sols, plantes, animaux, villes. Nous en dépendons pour respirer, boire et manger. Le protéger est un devoir pour tous."
+    },
+    {
+     "type": "illustration",
+     "caption": "Quelques gestes pour protéger l'environnement.",
+     "alt": "Trois cadres : planter, économiser l'eau, trier les déchets.",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 170,
+      "items": [
+       {
+        "t": "rect",
+        "x": 30,
+        "y": 40,
+        "w": 120,
+        "h": 60,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 40,
+        "w": 120,
+        "h": 60,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 40,
+        "w": 120,
+        "h": 60,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 75,
+        "text": "Planter",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 75,
+        "text": "Économiser l'eau",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 75,
+        "text": "Trier les déchets",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 140,
+        "text": "Trois gestes pour l'environnement",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les atteintes",
+     "md": "- **Déchets** jetés dans la rue ou les caniveaux, déchets plastiques.\n- **Déforestation** : coupe excessive des arbres.\n- **Pollution** de l'eau et de l'air.\n- **Gaspillage** de l'eau et de l'énergie.\n- Mauvaise gestion des ordures."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les gestes qui protègent",
+     "md": "Trier et jeter les déchets à la poubelle, planter des arbres, économiser l'eau et l'électricité, réutiliser, entretenir les caniveaux, éviter de polluer les rivières. L'**assainissement** du quartier améliore la santé de tous."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : cause et conséquence",
+     "statement": "Pourquoi jeter des plastiques dans un caniveau pose-t-il problème ?",
+     "steps": [
+      {
+       "md": "Les plastiques bouchent les caniveaux."
+      },
+      {
+       "md": "En saison des pluies, l'eau déborde et provoque des inondations et des maladies."
+      }
+     ],
+     "answer": "**Ils bouchent les caniveaux et causent des inondations.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : un projet d'école",
+     "statement": "Propose une action de classe pour protéger l'environnement.",
+     "steps": [
+      {
+       "md": "La classe peut planter des arbres dans la cour."
+      },
+      {
+       "md": "Chaque élève s'occupe d'un arbre, ce qui rend la cour plus fraîche et protège le sol."
+      }
+     ],
+     "answer": "**Planter et entretenir des arbres**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire qu'un seul geste ne change rien : les petits gestes multipliés comptent.\n- Brûler des déchets plastiques : la fumée est dangereuse pour la santé.\n- Penser que l'environnement ne concerne que les adultes."
+    }
+   ],
+   "reviewNotes": [
+    "Aucune statistique ; seuls des principes et gestes simples sont donnés. Vérifier les thèmes du programme (assainissement, déchets, reboisement, biodiversité)."
+   ]
+  },
+  {
+   "id": "5e-histoire-geo-institutions",
+   "title": "Les institutions de la République : principes",
+   "minutes": 22,
+   "programRef": "5e — ECM : institutions de la République (à vérifier sur le programme officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Expliquer pourquoi un État a une Constitution et des institutions.",
+    "Distinguer les trois pouvoirs et citer leurs rôles."
+   ],
+   "prerequisites": [
+    "5e-histoire-geo-citoyennete"
+   ],
+   "exercises": [
+    "5e-histoire-geo-institutions-01",
+    "5e-histoire-geo-institutions-02",
+    "5e-histoire-geo-institutions-03",
+    "5e-histoire-geo-institutions-04",
+    "5e-histoire-geo-institutions-05",
+    "5e-histoire-geo-institutions-06"
+   ],
+   "selfCheck": [
+    "5e-histoire-geo-institutions-q1",
+    "5e-histoire-geo-institutions-q2",
+    "5e-histoire-geo-institutions-q3",
+    "5e-histoire-geo-institutions-q4",
+    "5e-histoire-geo-institutions-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La Constitution",
+     "md": "La **Constitution** est la loi fondamentale de l'État : elle organise les pouvoirs publics, garantit les droits et fixe les devoirs. Toutes les autres lois doivent la respecter. Le Cameroun est une **République** : le pouvoir vient du peuple."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les trois pouvoirs dans une République.",
+     "alt": "La Constitution au-dessus des pouvoirs exécutif, législatif et judiciaire.",
+     "figure": {
+      "kind": "shapes",
+      "w": 460,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 20,
+        "w": 140,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 47,
+        "text": "Constitution",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 110,
+        "w": 130,
+        "h": 60,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 165,
+        "y": 110,
+        "w": 130,
+        "h": 60,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 310,
+        "y": 110,
+        "w": 130,
+        "h": 60,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 145,
+        "text": "Exécutif",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 145,
+        "text": "Législatif",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 375,
+        "y": 145,
+        "text": "Judiciaire",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 60,
+        "x2": 85,
+        "y2": 110,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 230,
+        "y1": 60,
+        "x2": 230,
+        "y2": 110,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 260,
+        "y1": 60,
+        "x2": 375,
+        "y2": 110,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Trois pouvoirs",
+     "md": "- Le **pouvoir exécutif** applique les lois et dirige l'État : le **Président de la République** et le **gouvernement**.\n- Le **pouvoir législatif** fait les lois : le **Parlement** (Assemblée nationale et Sénat).\n- Le **pouvoir judiciaire** rend la justice : les **tribunaux** et les juges."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Pourquoi séparer les pouvoirs ?",
+     "md": "On sépare les pouvoirs pour éviter qu'une seule personne ou un seul groupe ne détienne tout le pouvoir, et pour garantir l'équilibre, la justice et la liberté."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : à qui revient quoi ?",
+     "statement": "Qui vote une loi ? Qui l'applique ?",
+     "steps": [
+      {
+       "md": "Le Parlement vote les lois : pouvoir législatif."
+      },
+      {
+       "md": "Le gouvernement les applique : pouvoir exécutif."
+      }
+     ],
+     "answer": "**Le Parlement vote, le gouvernement applique.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : le rôle de la justice",
+     "statement": "Quel est le rôle des tribunaux ?",
+     "steps": [
+      {
+       "md": "Ils examinent les litiges et les infractions."
+      },
+      {
+       "md": "Ils appliquent la loi pour rendre la justice, en toute impartialité."
+      }
+     ],
+     "answer": "**Rendre la justice selon la loi**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que le président fait toutes les lois : il y a un Parlement.\n- Confondre les trois pouvoirs.\n- Croire que la Constitution est une loi parmi d'autres : elle est la loi suprême."
+    }
+   ],
+   "reviewNotes": [
+    "Seuls des principes sont donnés : à vérifier avec la Constitution en vigueur (noms et rôles exacts des institutions, durée des mandats, etc.).",
+    "La mention du Sénat et de l'Assemblée nationale est un fait établi depuis 2013 ; à reconfirmer."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Un geste qui protège l'environnement est...",
+   "choices": [
+    "jeter les déchets à la poubelle",
+    "brûler du plastique",
+    "polluer la rivière",
+    "couper des arbres sans replanter"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un déchet jeté à sa place ne pollue pas.",
+   "id": "5e-histoire-geo-environnement-01",
+   "tier": "application",
+   "lesson": "5e-histoire-geo-environnement",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La déforestation est...",
+   "choices": [
+    "la plantation d'arbres",
+    "la pêche",
+    "la disparition des forêts",
+    "l'irrigation"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Coupe excessive des arbres.",
+   "id": "5e-histoire-geo-environnement-02",
+   "tier": "application",
+   "lesson": "5e-histoire-geo-environnement",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Économiser l'eau, c'est...",
+   "choices": [
+    "laisser couler",
+    "gaspiller",
+    "jeter de l'eau pour s'amuser",
+    "fermer le robinet quand on ne l'utilise pas"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'eau est précieuse.",
+   "id": "5e-histoire-geo-environnement-03",
+   "tier": "application",
+   "lesson": "5e-histoire-geo-environnement",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pourquoi planter des arbres est-il utile ?",
+   "choices": [
+    "ils polluent l'air",
+    "ils asséchent les rivières",
+    "ils attirent la foudre uniquement",
+    "ils apportent de l'ombre et protègent le sol"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Les arbres protègent le sol et rafraîchissent.",
+   "id": "5e-histoire-geo-environnement-04",
+   "tier": "approfondissement",
+   "lesson": "5e-histoire-geo-environnement",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque geste à son bénéfice.",
+   "pairs": [
+    [
+     "Trier les déchets",
+     "moins de pollution"
+    ],
+    [
+     "Planter un arbre",
+     "plus d'ombre"
+    ],
+    [
+     "Fermer le robinet",
+     "économie d'eau"
+    ],
+    [
+     "Nettoyer un caniveau",
+     "moins d'inondations"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Gestes et effets.",
+   "id": "5e-histoire-geo-environnement-05",
+   "tier": "approfondissement",
+   "lesson": "5e-histoire-geo-environnement",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Dans ton quartier, un tas d'ordures bloque un caniveau. En saison des pluies, la rue est inondée.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quelle est la cause principale de l'inondation ?",
+     "choices": [
+      "la sécheresse",
+      "les arbres",
+      "les montagnes",
+      "le caniveau bouché"
+     ],
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "L'eau ne s'écoule plus.",
+     "id": "5e-histoire-geo-environnement-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Propose deux actions que les habitants peuvent mener.",
+     "model": "Organiser une journée de nettoyage du caniveau ; installer des poubelles et sensibiliser les voisins ; informer la mairie.",
+     "rubric": [
+      "Deux actions",
+      "Actions réalistes"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "5e-histoire-geo-environnement-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-histoire-geo-environnement-06",
+   "tier": "examen",
+   "lesson": "5e-histoire-geo-environnement",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les déchets plastiques mettent...",
+   "choices": [
+    "quelques minutes",
+    "une heure",
+    "très longtemps à disparaître",
+    "un jour"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ils persistent dans la nature.",
+   "id": "5e-histoire-geo-environnement-q1",
+   "tier": "autoeval",
+   "lesson": "5e-histoire-geo-environnement",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un quartier propre est...",
+   "choices": [
+    "meilleur pour la santé",
+    "plus dangereux",
+    "plus bruyant",
+    "plus coûteux pour tous"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Moins de maladies.",
+   "id": "5e-histoire-geo-environnement-q2",
+   "tier": "autoeval",
+   "lesson": "5e-histoire-geo-environnement",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Protéger l'environnement est le devoir...",
+   "choices": [
+    "des animaux seulement",
+    "des adultes seulement",
+    "de chacun",
+    "de personne"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Responsabilité collective.",
+   "id": "5e-histoire-geo-environnement-q3",
+   "tier": "autoeval",
+   "lesson": "5e-histoire-geo-environnement",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une pollution de l'eau peut...",
+   "choices": [
+    "rendre malade",
+    "guérir",
+    "nourrir",
+    "rafraîchir"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'eau polluée est dangereuse.",
+   "id": "5e-histoire-geo-environnement-q4",
+   "tier": "autoeval",
+   "lesson": "5e-histoire-geo-environnement",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'assainissement vise à...",
+   "choices": [
+    "construire des routes",
+    "évacuer et traiter les eaux et déchets",
+    "planter des céréales",
+    "développer le commerce"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il protège la santé publique.",
+   "id": "5e-histoire-geo-environnement-q5",
+   "tier": "autoeval",
+   "lesson": "5e-histoire-geo-environnement",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La Constitution est...",
+   "choices": [
+    "la loi fondamentale",
+    "un décret municipal",
+    "un journal",
+    "un manuel scolaire"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle organise l'État.",
+   "id": "5e-histoire-geo-institutions-01",
+   "tier": "application",
+   "lesson": "5e-histoire-geo-institutions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qui fait les lois ?",
+   "choices": [
+    "le pouvoir législatif",
+    "les tribunaux",
+    "l'armée seulement",
+    "le directeur d'école"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le Parlement.",
+   "id": "5e-histoire-geo-institutions-02",
+   "tier": "application",
+   "lesson": "5e-histoire-geo-institutions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qui rend la justice ?",
+   "choices": [
+    "le Parlement",
+    "le ministre de l'école",
+    "le maire seulement",
+    "les tribunaux"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Pouvoir judiciaire.",
+   "id": "5e-histoire-geo-institutions-03",
+   "tier": "application",
+   "lesson": "5e-histoire-geo-institutions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pourquoi sépare-t-on les pouvoirs ?",
+   "choices": [
+    "pour éviter la concentration du pouvoir",
+    "pour compliquer",
+    "pour dépenser plus",
+    "pour supprimer la loi"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Équilibre et liberté.",
+   "id": "5e-histoire-geo-institutions-04",
+   "tier": "approfondissement",
+   "lesson": "5e-histoire-geo-institutions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque pouvoir à son rôle.",
+   "pairs": [
+    [
+     "Exécutif",
+     "appliquer les lois"
+    ],
+    [
+     "Législatif",
+     "voter les lois"
+    ],
+    [
+     "Judiciaire",
+     "rendre la justice"
+    ],
+    [
+     "Constitution",
+     "loi fondamentale"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Les trois pouvoirs et la Constitution.",
+   "id": "5e-histoire-geo-institutions-05",
+   "tier": "approfondissement",
+   "lesson": "5e-histoire-geo-institutions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Explique en cinq lignes le rôle de la Constitution et la séparation des pouvoirs.",
+   "model": "La Constitution est la loi suprême : elle fixe l'organisation de l'État et garantit les droits. Les pouvoirs exécutif, législatif et judiciaire sont séparés pour éviter les abus et assurer l'équilibre et la justice.",
+   "rubric": [
+    "Définit la Constitution",
+    "Cite les trois pouvoirs",
+    "Explique l'utilité de la séparation"
+   ],
+   "points": 4,
+   "difficulty": 2,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "5e-histoire-geo-institutions-06",
+   "tier": "examen",
+   "lesson": "5e-histoire-geo-institutions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le Président de la République fait partie...",
+   "choices": [
+    "du pouvoir judiciaire",
+    "du pouvoir législatif",
+    "du pouvoir exécutif",
+    "du pouvoir religieux"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il dirige l'exécutif.",
+   "id": "5e-histoire-geo-institutions-q1",
+   "tier": "autoeval",
+   "lesson": "5e-histoire-geo-institutions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le Parlement camerounais comprend...",
+   "choices": [
+    "le tribunal et la mairie",
+    "l'Assemblée nationale et le Sénat",
+    "le gouvernement seulement",
+    "le chef de village"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Pouvoir législatif.",
+   "id": "5e-histoire-geo-institutions-q2",
+   "tier": "autoeval",
+   "lesson": "5e-histoire-geo-institutions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une loi doit...",
+   "choices": [
+    "l'ignorer",
+    "la contredire",
+    "la remplacer",
+    "respecter la Constitution"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La Constitution est au sommet.",
+   "id": "5e-histoire-geo-institutions-q3",
+   "tier": "autoeval",
+   "lesson": "5e-histoire-geo-institutions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un juge doit être...",
+   "choices": [
+    "partial",
+    "impartial",
+    "absent",
+    "toujours d'accord avec un camp"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Impartialité = justice équitable.",
+   "id": "5e-histoire-geo-institutions-q4",
+   "tier": "autoeval",
+   "lesson": "5e-histoire-geo-institutions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La République signifie que...",
+   "choices": [
+    "le pouvoir vient du peuple",
+    "le pouvoir vient d'un seul homme",
+    "il n'y a pas de loi",
+    "le pays n'a pas de chef"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Pouvoir exercé au nom du peuple.",
+   "id": "5e-histoire-geo-institutions-q5",
+   "tier": "autoeval",
+   "lesson": "5e-histoire-geo-institutions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

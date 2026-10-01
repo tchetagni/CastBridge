@@ -1,0 +1,336 @@
+{
+ "chapter": "6e-histoire-geo-g-population",
+ "lessons": [
+  {
+   "id": "6e-histoire-geo-population",
+   "title": "La population : répartition et densité",
+   "minutes": 20,
+   "programRef": "6e — Géographie : la population (à vérifier sur le programme officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Définir population, densité, répartition inégale.",
+    "Calculer une densité simple."
+   ],
+   "prerequisites": [
+    "6e-histoire-geo-carte-echelle"
+   ],
+   "exercises": [
+    "6e-histoire-geo-population-01",
+    "6e-histoire-geo-population-02",
+    "6e-histoire-geo-population-03",
+    "6e-histoire-geo-population-04",
+    "6e-histoire-geo-population-05",
+    "6e-histoire-geo-population-06"
+   ],
+   "selfCheck": [
+    "6e-histoire-geo-population-q1",
+    "6e-histoire-geo-population-q2",
+    "6e-histoire-geo-population-q3",
+    "6e-histoire-geo-population-q4",
+    "6e-histoire-geo-population-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Population et densité",
+     "md": "La **population** est l'ensemble des habitants d'un territoire. La **densité** est le nombre moyen d'habitants par kilomètre carré (hab/km²). Elle se calcule en divisant la population par la superficie."
+    },
+    {
+     "type": "illustration",
+     "caption": "Densités fictives pour illustrer la comparaison (nombres inventés pour l'exercice).",
+     "alt": "Un diagramme à barres comparant trois densités fictives.",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "bars": [
+       {
+        "label": "Village A",
+        "value": 20,
+        "color": "lightgreen"
+       },
+       {
+        "label": "Village B",
+        "value": 50,
+        "color": "orange"
+       },
+       {
+        "label": "Ville C",
+        "value": 200,
+        "color": "red"
+       }
+      ],
+      "unit": "hab/km² (exemple fictif)"
+     }
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Calcul de la densité",
+     "md": "densité = nombre d'habitants ÷ superficie en km². Exemple : 1 000 habitants sur 10 km² donnent 100 hab/km²."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Une répartition inégale",
+     "md": "Les hommes ne sont pas répartis également : on trouve de fortes densités dans les **villes**, sur les côtes, dans les régions fertiles au climat favorable ; de faibles densités dans les déserts, les forêts épaisses et les hautes montagnes difficiles d'accès. Au Cameroun, de grandes villes comme Douala et Yaoundé sont très peuplées."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : calculer une densité",
+     "statement": "Un village fictif compte 3 000 habitants pour une superficie de 30 km². Quelle est sa densité ?",
+     "steps": [
+      {
+       "md": "On divise le nombre d'habitants par la superficie."
+      },
+      {
+       "md": "Calcul :",
+       "tex": "3\\,000 \\div 30 = 100"
+      }
+     ],
+     "answer": "**100 hab/km²**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : comparer",
+     "statement": "Une zone A a 80 hab/km² et une zone B 15 hab/km². Laquelle est la plus peuplée par rapport à sa surface ?",
+     "steps": [
+      {
+       "md": "La densité compare le peuplement à surface égale."
+      },
+      {
+       "md": "80 est supérieur à 15 : la zone A est plus densément peuplée."
+      }
+     ],
+     "answer": "**La zone A**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre population et densité : une grande population sur un très grand territoire peut avoir une faible densité.\n- Oublier d'indiquer l'unité hab/km².\n- Croire que la population est répartie de façon égale sur le territoire."
+    }
+   ],
+   "reviewNotes": [
+    "Aucune donnée réelle de population du Cameroun n'est donnée : seuls des nombres fictifs sont utilisés. Ne pas ajouter de chiffres sans source (recensement) et mention « environ ».",
+    "Vérifier le vocabulaire du programme (densité, natalité, mortalité...)."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Une ville fictive a 6 000 habitants sur 3 km². Quelle est sa densité (hab/km²) ?",
+   "answer": 2000,
+   "unit": "hab/km²",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "6 000 ÷ 3 = 2 000 hab/km².",
+   "id": "6e-histoire-geo-population-01",
+   "tier": "application",
+   "lesson": "6e-histoire-geo-population",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La densité s'exprime en...",
+   "choices": [
+    "km par heure",
+    "mètres",
+    "habitants par km²",
+    "degrés"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Nombre d'habitants divisé par la surface.",
+   "id": "6e-histoire-geo-population-02",
+   "tier": "application",
+   "lesson": "6e-histoire-geo-population",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Où trouve-t-on souvent les plus fortes densités ?",
+   "choices": [
+    "dans le désert",
+    "dans les villes",
+    "au sommet des montagnes",
+    "en pleine forêt dense"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les villes concentrent les habitants.",
+   "id": "6e-histoire-geo-population-03",
+   "tier": "application",
+   "lesson": "6e-histoire-geo-population",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un territoire fictif de 50 km² a une densité de 40 hab/km². Combien d'habitants ?",
+   "answer": 2000,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "40 × 50 = 2 000 habitants.",
+   "id": "6e-histoire-geo-population-04",
+   "tier": "approfondissement",
+   "lesson": "6e-histoire-geo-population",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Si la population double sur la même superficie, la densité...",
+   "choices": [
+    "double aussi",
+    "est divisée par deux",
+    "ne change pas",
+    "devient nulle"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Densité proportionnelle à la population.",
+   "id": "6e-histoire-geo-population-05",
+   "tier": "approfondissement",
+   "lesson": "6e-histoire-geo-population",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Deux localités fictives : X (4 000 habitants, 20 km²) et Y (3 000 habitants, 60 km²).",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Densité de X en hab/km² ?",
+     "answer": 200,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "4 000 ÷ 20 = 200.",
+     "id": "6e-histoire-geo-population-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Densité de Y en hab/km² ?",
+     "answer": 50,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "3 000 ÷ 60 = 50.",
+     "id": "6e-histoire-geo-population-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Laquelle est la plus peuplée par rapport à sa surface ? Justifie.",
+     "model": "X, car sa densité (200 hab/km²) est supérieure à celle de Y (50 hab/km²).",
+     "rubric": [
+      "Compare les densités",
+      "Conclut correctement"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "6e-histoire-geo-population-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "6e-histoire-geo-population-06",
+   "tier": "examen",
+   "lesson": "6e-histoire-geo-population",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une zone à très faible densité est...",
+   "choices": [
+    "très peuplée",
+    "sans habitants jamais",
+    "peu peuplée par rapport à sa superficie",
+    "une ville"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Peu d'habitants par km².",
+   "id": "6e-histoire-geo-population-q1",
+   "tier": "autoeval",
+   "lesson": "6e-histoire-geo-population",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel facteur peut attirer la population ?",
+   "choices": [
+    "un désert sans eau",
+    "des terres fertiles et un climat favorable",
+    "une montagne inaccessible",
+    "une zone sans route"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les hommes s'installent où l'on vit mieux.",
+   "id": "6e-histoire-geo-population-q2",
+   "tier": "autoeval",
+   "lesson": "6e-histoire-geo-population",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Densité = ...",
+   "choices": [
+    "superficie ÷ population",
+    "population × superficie",
+    "population ÷ superficie",
+    "population − superficie"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Formule de base.",
+   "id": "6e-histoire-geo-population-q3",
+   "tier": "autoeval",
+   "lesson": "6e-histoire-geo-population",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la densité d'une zone de 100 habitants sur 2 km² ?",
+   "choices": [
+    "200 hab/km²",
+    "50 hab/km²",
+    "100 hab/km²",
+    "2 hab/km²"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "100 ÷ 2 = 50.",
+   "id": "6e-histoire-geo-population-q4",
+   "tier": "autoeval",
+   "lesson": "6e-histoire-geo-population",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une répartition inégale signifie que...",
+   "choices": [
+    "la population se concentre dans certaines zones",
+    "chaque km² compte autant d'habitants",
+    "personne n'habite nulle part",
+    "tous vivent en ville"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Concentration dans certains lieux.",
+   "id": "6e-histoire-geo-population-q5",
+   "tier": "autoeval",
+   "lesson": "6e-histoire-geo-population",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}
