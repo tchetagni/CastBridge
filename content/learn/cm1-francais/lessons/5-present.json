@@ -1,0 +1,632 @@
+{
+ "chapter": "cm1-francais-conjugaison",
+ "lessons": [
+  {
+   "id": "cm1-francais-present",
+   "title": "Le présent et l'impératif",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM1 — Conjugaison : présent et impératif présent (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Conjuguer un verbe du 1er et du 2e groupe au présent.",
+    "Conjuguer quelques verbes du 3e groupe très courants (être, avoir, aller, faire, dire, venir, prendre).",
+    "Former l'impératif présent (2e personne du singulier, 1re et 2e personnes du pluriel)."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cm1-francais-present-01",
+    "cm1-francais-present-02",
+    "cm1-francais-present-03",
+    "cm1-francais-present-04",
+    "cm1-francais-present-05",
+    "cm1-francais-present-06"
+   ],
+   "selfCheck": [
+    "cm1-francais-present-q1",
+    "cm1-francais-present-q2",
+    "cm1-francais-present-q3",
+    "cm1-francais-present-q4",
+    "cm1-francais-present-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier les formes du présent et de l'impératif (verbes irréguliers) sur un tableau de conjugaison de référence.",
+    "Convention : 2e groupe défini par -issons ; le verbe « aller » est classé au 3e groupe."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les trois groupes de verbes",
+     "md": "- **1er groupe** : infinitif en **-er** (chanter, manger). Sauf *aller*.\n- **2e groupe** : infinitif en **-ir**, avec -issons au pluriel (finir, grandir, choisir).\n- **3e groupe** : tous les autres (être, avoir, aller, faire, dire, venir, prendre, pouvoir, vouloir…)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Terminaisons du présent",
+     "md": "- 1er groupe : -e, -es, -e, -ons, -ez, -ent.\n- 2e groupe : -is, -is, -it, -issons, -issez, -issent.\n- 3e groupe : souvent -s, -s, -t, -ons, -ez, -ent (mais il y a beaucoup de verbes irréguliers)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 216,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 10,
+        "w": 173.33333333333334,
+        "h": 28,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 96.66666666666667,
+        "y": 30,
+        "text": "chanter",
+        "size": 16,
+        "color": "blue",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 96.66666666666667,
+        "y": 62,
+        "text": "je chante",
+        "size": 15,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 96.66666666666667,
+        "y": 88,
+        "text": "tu chantes",
+        "size": 15,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 96.66666666666667,
+        "y": 114,
+        "text": "il chante",
+        "size": 15,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 96.66666666666667,
+        "y": 140,
+        "text": "nous chantons",
+        "size": 15,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 96.66666666666667,
+        "y": 166,
+        "text": "vous chantez",
+        "size": 15,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 96.66666666666667,
+        "y": 192,
+        "text": "ils chantent",
+        "size": 15,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 193.33333333333334,
+        "y": 10,
+        "w": 173.33333333333334,
+        "h": 28,
+        "fill": "lightgreen",
+        "stroke": "green",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 280.0,
+        "y": 30,
+        "text": "finir",
+        "size": 16,
+        "color": "green",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 280.0,
+        "y": 62,
+        "text": "je finis",
+        "size": 15,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 280.0,
+        "y": 88,
+        "text": "tu finis",
+        "size": 15,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 280.0,
+        "y": 114,
+        "text": "il finit",
+        "size": 15,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 280.0,
+        "y": 140,
+        "text": "nous finissons",
+        "size": 15,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 280.0,
+        "y": 166,
+        "text": "vous finissez",
+        "size": 15,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 280.0,
+        "y": 192,
+        "text": "ils finissent",
+        "size": 15,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 376.6666666666667,
+        "y": 10,
+        "w": 173.33333333333334,
+        "h": 28,
+        "fill": "lightorange",
+        "stroke": "red",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 463.33333333333337,
+        "y": 30,
+        "text": "aller",
+        "size": 16,
+        "color": "red",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 463.33333333333337,
+        "y": 62,
+        "text": "je vais",
+        "size": 15,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 463.33333333333337,
+        "y": 88,
+        "text": "tu vas",
+        "size": 15,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 463.33333333333337,
+        "y": 114,
+        "text": "il va",
+        "size": 15,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 463.33333333333337,
+        "y": 140,
+        "text": "nous allons",
+        "size": 15,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 463.33333333333337,
+        "y": 166,
+        "text": "vous allez",
+        "size": 15,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 463.33333333333337,
+        "y": 192,
+        "text": "ils vont",
+        "size": 15,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Trois verbes au présent.",
+     "alt": "Trois colonnes : chanter (je chante, tu chantes, il chante, nous chantons, vous chantez, ils chantent), finir (je finis… ils finissent) et aller (je vais… ils vont)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Être, avoir, faire, dire, venir, prendre",
+     "md": "- **être** : je suis, tu es, il est, nous sommes, vous êtes, ils sont.\n- **avoir** : j'ai, tu as, il a, nous avons, vous avez, ils ont.\n- **faire** : je fais, tu fais, il fait, nous faisons, vous faites, ils font.\n- **dire** : je dis, tu dis, il dit, nous disons, vous dites, ils disent.\n- **venir** : je viens, tu viens, il vient, nous venons, vous venez, ils viennent.\n- **prendre** : je prends, tu prends, il prend, nous prenons, vous prenez, ils prennent."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "L'impératif présent",
+     "md": "L'impératif sert à donner un ordre, un conseil ou une consigne. Il n'a **pas de sujet** et trois formes : tu, nous, vous.\n\n- chanter : **chante**, chantons, chantez (pas de -s pour les verbes en -er à la 2e personne du singulier).\n- finir : **finis**, finissons, finissez.\n- être : **sois**, soyons, soyez ; avoir : **aie**, ayons, ayez.\n- aller : **va**, allons, allez ; faire : **fais**, faisons, faites."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : conjuguer au présent",
+     "statement": "Conjugue au présent avec « ils » : (choisir) un fruit, (manger) du riz, (aller) au marché.",
+     "steps": [
+      {
+       "md": "« choisir » : 2e groupe. Avec ils : -issent → ils **choisissent**."
+      },
+      {
+       "md": "« manger » : 1er groupe. Avec ils : -ent → ils **mangent**."
+      },
+      {
+       "md": "« aller » est irrégulier : ils **vont**."
+      }
+     ],
+     "answer": "**Ils choisissent un fruit, ils mangent du riz, ils vont au marché.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : passer à l'impératif",
+     "statement": "Mets à l'impératif, 2e personne du singulier : « Tu ranges ta chambre. Tu es sage. »",
+     "steps": [
+      {
+       "md": "On supprime « tu » : « ranges ta chambre ». Verbe en -er : on enlève le -s → **range**."
+      },
+      {
+       "md": "« Tu es sage » → verbe être à l'impératif : **sois** sage."
+      }
+     ],
+     "answer": "**Range ta chambre. Sois sage.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Écrire « vous disez » : on écrit **vous dites**. De même : vous faites, vous êtes.\n- Écrire « tu manges » à l'impératif : on écrit **mange**.\n- Écrire « nous mangons » : on garde le e (nous mangeons) pour que le g reste doux."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-present-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-present-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-present-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-present-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-present-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-present-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "cm1-francais-present-01",
+   "chapter": "cm1-francais-conjugaison",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "mcq",
+   "prompt": "Complète au présent : « Nous ___ du manioc. » (manger)",
+   "choices": [
+    "mangeons",
+    "mangons",
+    "mangez",
+    "mangent"
+   ],
+   "answer": 0,
+   "explanation": "Avec « nous », terminaison -ons ; on garde le e pour que le g reste doux : mangeons.",
+   "points": 1,
+   "lesson": "cm1-francais-present",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-present-02",
+   "chapter": "cm1-francais-conjugaison",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : « finir » est un verbe du 2e groupe.",
+   "answer": true,
+   "explanation": "Vrai : infinitif en -ir et -issons au pluriel (nous finissons).",
+   "points": 1,
+   "lesson": "cm1-francais-present",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-present-03",
+   "chapter": "cm1-francais-conjugaison",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "matching",
+   "prompt": "Associe chaque sujet à la bonne forme du verbe « être » au présent.",
+   "pairs": [
+    [
+     "je",
+     "suis"
+    ],
+    [
+     "tu",
+     "es"
+    ],
+    [
+     "nous",
+     "sommes"
+    ],
+    [
+     "ils",
+     "sont"
+    ]
+   ],
+   "explanation": "je suis ; tu es ; nous sommes ; ils sont.",
+   "points": 2,
+   "lesson": "cm1-francais-present",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-present-04",
+   "chapter": "cm1-francais-conjugaison",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "mcq",
+   "prompt": "Quelle phrase est à l'impératif ?",
+   "choices": [
+    "Tu ouvres la porte.",
+    "Il ouvre la porte.",
+    "Nous ouvrions la porte.",
+    "Ouvre la porte."
+   ],
+   "answer": 3,
+   "explanation": "L'impératif n'a pas de sujet : « Ouvre la porte. »",
+   "points": 1,
+   "lesson": "cm1-francais-present",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-present-05",
+   "chapter": "cm1-francais-conjugaison",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "mcq",
+   "prompt": "Complète : « Vous ___ la vérité. » (dire)",
+   "choices": [
+    "disez",
+    "disent",
+    "dites",
+    "dises"
+   ],
+   "answer": 2,
+   "explanation": "Dire est irrégulier : vous dites.",
+   "mistakes": [
+    "Écrire « vous disez »."
+   ],
+   "points": 1,
+   "lesson": "cm1-francais-present",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-present-06",
+   "chapter": "cm1-francais-conjugaison",
+   "tier": "examen",
+   "difficulty": 2,
+   "kind": "problem",
+   "prompt": "Observe : « Mon cousin ___ (aller) à Douala. Il ___ (prendre) le car. Ses amis ___ (venir) le voir. »",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Verbe aller avec « il » :",
+     "choices": [
+      "vas",
+      "va",
+      "vais",
+      "allent"
+     ],
+     "answer": 1,
+     "explanation": "Il va.",
+     "id": "cm1-francais-present-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Verbe prendre avec « il » :",
+     "choices": [
+      "prend",
+      "prends",
+      "prent",
+      "prendent"
+     ],
+     "answer": 0,
+     "explanation": "Il prend (3e personne du singulier, avec un -d).",
+     "id": "cm1-francais-present-06-b",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Verbe venir avec « ses amis » :",
+     "choices": [
+      "venent",
+      "viennes",
+      "vienent",
+      "viennent"
+     ],
+     "answer": 3,
+     "explanation": "Ses amis (ils) viennent.",
+     "id": "cm1-francais-present-06-c",
+     "points": 1
+    }
+   ],
+   "lesson": "cm1-francais-present",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-present-q1",
+   "chapter": "cm1-francais-conjugaison",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quel verbe est du 3e groupe ?",
+   "choices": [
+    "chanter",
+    "finir",
+    "prendre",
+    "manger"
+   ],
+   "answer": 2,
+   "explanation": "Prendre ne finit ni en -er ni en -issons : 3e groupe.",
+   "lesson": "cm1-francais-present"
+  },
+  {
+   "id": "cm1-francais-present-q2",
+   "chapter": "cm1-francais-conjugaison",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Terminaison de « tu » au présent, 1er groupe ?",
+   "choices": [
+    "-e",
+    "-es",
+    "-s",
+    "-ent"
+   ],
+   "answer": 1,
+   "explanation": "Tu chantes.",
+   "lesson": "cm1-francais-present"
+  },
+  {
+   "id": "cm1-francais-present-q3",
+   "chapter": "cm1-francais-conjugaison",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Impératif de « finir » (tu) :",
+   "choices": [
+    "finis",
+    "fini",
+    "finit",
+    "finisse"
+   ],
+   "answer": 0,
+   "explanation": "Tu finis → impératif : finis.",
+   "lesson": "cm1-francais-present"
+  },
+  {
+   "id": "cm1-francais-present-q4",
+   "chapter": "cm1-francais-conjugaison",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "« Ils ___ » (avoir) :",
+   "choices": [
+    "ons",
+    "a",
+    "avent",
+    "ont"
+   ],
+   "answer": 3,
+   "explanation": "Avoir : ils ont.",
+   "lesson": "cm1-francais-present"
+  },
+  {
+   "id": "cm1-francais-present-q5",
+   "chapter": "cm1-francais-conjugaison",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "L'impératif sert à…",
+   "choices": [
+    "raconter une histoire passée",
+    "dire ce qui arrivera",
+    "donner un ordre ou un conseil",
+    "poser une question"
+   ],
+   "answer": 2,
+   "explanation": "Impératif : ordre, conseil, consigne.",
+   "lesson": "cm1-francais-present"
+  }
+ ]
+}

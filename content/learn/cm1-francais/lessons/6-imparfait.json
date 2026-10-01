@@ -1,0 +1,634 @@
+{
+ "chapter": "cm1-francais-conjugaison",
+ "lessons": [
+  {
+   "id": "cm1-francais-imparfait",
+   "title": "L'imparfait, le futur et le conditionnel",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM1 — Conjugaison : imparfait, futur simple, conditionnel présent (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Former l'imparfait à partir de « nous » du présent.",
+    "Former le futur simple et le conditionnel présent à partir de l'infinitif.",
+    "Choisir le temps qui convient : décor, action à venir, souhait poli ou hypothèse."
+   ],
+   "prerequisites": [
+    "cm1-francais-present"
+   ],
+   "exercises": [
+    "cm1-francais-imparfait-01",
+    "cm1-francais-imparfait-02",
+    "cm1-francais-imparfait-03",
+    "cm1-francais-imparfait-04",
+    "cm1-francais-imparfait-05",
+    "cm1-francais-imparfait-06"
+   ],
+   "selfCheck": [
+    "cm1-francais-imparfait-q1",
+    "cm1-francais-imparfait-q2",
+    "cm1-francais-imparfait-q3",
+    "cm1-francais-imparfait-q4",
+    "cm1-francais-imparfait-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier les verbes irréguliers du futur et du conditionnel.",
+    "Les usages du conditionnel (politesse, hypothèse) sont simplifiés ; à confronter à la progression de la classe."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "L'imparfait",
+     "md": "Il sert à décrire, à parler d'une habitude passée ou d'une action qui dure. **Radical** : celui de « nous » au présent (nous chantons → chant-). **Terminaisons** : -ais, -ais, -ait, -ions, -iez, -aient.\n\n- Quand j'étais petit, je **jouais** sous le manguier.\n- Cas particulier : *être* → j'**étais**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Le futur simple",
+     "md": "Il dit ce qui se passera plus tard. On part de **l'infinitif** et on ajoute : -ai, -as, -a, -ons, -ez, -ont.\n\n- chanter → je chanterai ; finir → tu finiras ; prendre → il prendra.\n- Irréguliers : être → je **serai** ; avoir → j'**aurai** ; aller → j'**irai** ; faire → je **ferai** ; venir → je **viendrai** ; pouvoir → je **pourrai** ; voir → je **verrai**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Le conditionnel présent",
+     "md": "Il sert à demander poliment (*Je voudrais du pain*), à imaginer (*Je partirais si…*), à dire ce qui pourrait arriver. **Radical du futur** + **terminaisons de l'imparfait** : -ais, -ais, -ait, -ions, -iez, -aient.\n\n- Si j'avais un vélo (imparfait), j'**irais** à Kribi (conditionnel)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 216,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 10,
+        "w": 173.33333333333334,
+        "h": 28,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 96.66666666666667,
+        "y": 30,
+        "text": "imparfait",
+        "size": 16,
+        "color": "blue",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 96.66666666666667,
+        "y": 62,
+        "text": "je chantais",
+        "size": 15,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 96.66666666666667,
+        "y": 88,
+        "text": "tu chantais",
+        "size": 15,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 96.66666666666667,
+        "y": 114,
+        "text": "il chantait",
+        "size": 15,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 96.66666666666667,
+        "y": 140,
+        "text": "nous chantions",
+        "size": 15,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 96.66666666666667,
+        "y": 166,
+        "text": "vous chantiez",
+        "size": 15,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 96.66666666666667,
+        "y": 192,
+        "text": "ils chantaient",
+        "size": 15,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 193.33333333333334,
+        "y": 10,
+        "w": 173.33333333333334,
+        "h": 28,
+        "fill": "lightgreen",
+        "stroke": "green",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 280.0,
+        "y": 30,
+        "text": "futur",
+        "size": 16,
+        "color": "green",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 280.0,
+        "y": 62,
+        "text": "je chanterai",
+        "size": 15,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 280.0,
+        "y": 88,
+        "text": "tu chanteras",
+        "size": 15,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 280.0,
+        "y": 114,
+        "text": "il chantera",
+        "size": 15,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 280.0,
+        "y": 140,
+        "text": "nous chanterons",
+        "size": 15,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 280.0,
+        "y": 166,
+        "text": "vous chanterez",
+        "size": 15,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 280.0,
+        "y": 192,
+        "text": "ils chanteront",
+        "size": 15,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 376.6666666666667,
+        "y": 10,
+        "w": 173.33333333333334,
+        "h": 28,
+        "fill": "lightorange",
+        "stroke": "red",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 463.33333333333337,
+        "y": 30,
+        "text": "conditionnel",
+        "size": 16,
+        "color": "red",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 463.33333333333337,
+        "y": 62,
+        "text": "je chanterais",
+        "size": 15,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 463.33333333333337,
+        "y": 88,
+        "text": "tu chanterais",
+        "size": 15,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 463.33333333333337,
+        "y": 114,
+        "text": "il chanterait",
+        "size": 15,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 463.33333333333337,
+        "y": 140,
+        "text": "nous chanterions",
+        "size": 15,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 463.33333333333337,
+        "y": 166,
+        "text": "vous chanteriez",
+        "size": 15,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 463.33333333333337,
+        "y": 192,
+        "text": "ils chanteraient",
+        "size": 15,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Chanter à trois temps.",
+     "alt": "Trois colonnes pour le verbe chanter : imparfait, futur et conditionnel, avec les six personnes."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : imparfait",
+     "statement": "Mets à l'imparfait : « Nous finissons nos devoirs. Je suis fatigué. »",
+     "steps": [
+      {
+       "md": "« nous finissons » : radical **finiss-**. Avec « nous » : -ions → nous **finissions**."
+      },
+      {
+       "md": "« être » à l'imparfait : j'**étais** fatigué."
+      }
+     ],
+     "answer": "**Nous finissions nos devoirs. J'étais fatigué.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : futur ou conditionnel ?",
+     "statement": "Complète : « Demain, nous (aller) à Limbé. » puis « Si j'avais de l'argent, j'(aller) à Limbé. »",
+     "steps": [
+      {
+       "md": "« Demain » annonce l'avenir : futur simple, nous **irons**."
+      },
+      {
+       "md": "« Si j'avais » (imparfait) → on emploie le conditionnel : j'**irais**."
+      }
+     ],
+     "answer": "**Nous irons ... j'irais.**"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode",
+     "md": "- Imparfait : je pars de **nous** au présent et j'enlève -ons.\n- Futur et conditionnel : je pars de **l'infinitif** (verbes irréguliers : je connais le radical).\n- Futur : terminaisons -ai, -as, -a… ; conditionnel : -ais, -ais, -ait…"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre « je chanterai » (futur) et « je chanterais » (conditionnel).\n- Oublier la lettre i dans « nous chantions, vous chantiez ».\n- Écrire « je serais » au lieu de « je serai » pour l'avenir."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Après « si » on n'emploie pas le conditionnel : *Si tu venais, nous jouerions.* (imparfait puis conditionnel)."
+     ]
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-imparfait-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-imparfait-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-imparfait-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-imparfait-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-imparfait-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-imparfait-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "cm1-francais-imparfait-01",
+   "chapter": "cm1-francais-conjugaison",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "mcq",
+   "prompt": "Complète à l'imparfait : « Autrefois, les enfants ___ au bord du fleuve. » (jouer)",
+   "choices": [
+    "jouent",
+    "jouaient",
+    "joueront",
+    "joueraient"
+   ],
+   "answer": 1,
+   "explanation": "Habitude passée : imparfait, avec ils : -aient.",
+   "points": 1,
+   "lesson": "cm1-francais-imparfait",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-imparfait-02",
+   "chapter": "cm1-francais-conjugaison",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : « Demain, je viendrai te voir » est au futur.",
+   "answer": true,
+   "explanation": "Vrai. « viendrai » est le futur de venir, avec « demain ».",
+   "points": 1,
+   "lesson": "cm1-francais-imparfait",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-imparfait-03",
+   "chapter": "cm1-francais-conjugaison",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "matching",
+   "prompt": "Associe chaque verbe à son futur (je).",
+   "pairs": [
+    [
+     "être",
+     "je serai"
+    ],
+    [
+     "avoir",
+     "j'aurai"
+    ],
+    [
+     "aller",
+     "j'irai"
+    ],
+    [
+     "faire",
+     "je ferai"
+    ]
+   ],
+   "explanation": "Ces quatre verbes ont un radical irrégulier au futur.",
+   "points": 2,
+   "lesson": "cm1-francais-imparfait",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-imparfait-04",
+   "chapter": "cm1-francais-conjugaison",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "mcq",
+   "prompt": "Choisis la forme polie : « ___-vous m'aider ? » (pouvoir)",
+   "choices": [
+    "Pourriez",
+    "Pouviez",
+    "Pourrez",
+    "Pouvez"
+   ],
+   "answer": 0,
+   "explanation": "Une demande polie utilise le conditionnel : pourriez-vous.",
+   "method": "Demande polie : conditionnel.",
+   "points": 1,
+   "lesson": "cm1-francais-imparfait",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-imparfait-05",
+   "chapter": "cm1-francais-conjugaison",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "open",
+   "prompt": "Écris deux phrases : l'une avec « demain » (futur), l'autre avec « si j'avais un vélo » (conditionnel). Verbe : aller.",
+   "model": "Demain, j'irai au marché. Si j'avais un vélo, j'irais à Kribi.",
+   "rubric": [
+    "Futur correct après « demain ».",
+    "Conditionnel correct après « si j'avais ».",
+    "Les phrases sont complètes."
+   ],
+   "explanation": "Futur : j'irai. Conditionnel : j'irais (le r est conservé, terminaison -ais).",
+   "points": 3,
+   "lesson": "cm1-francais-imparfait",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-imparfait-06",
+   "chapter": "cm1-francais-conjugaison",
+   "tier": "examen",
+   "difficulty": 2,
+   "kind": "problem",
+   "prompt": "Complète le texte : « Quand j'___ (être) petit, je ___ (jouer) souvent avec mes cousins. Plus tard, je ___ (devenir) maître d'école. »",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "« j'___ (être) »",
+     "choices": [
+      "serai",
+      "serais",
+      "suis",
+      "étais"
+     ],
+     "answer": 3,
+     "explanation": "Quand j'étais petit : imparfait.",
+     "id": "cm1-francais-imparfait-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "« je ___ (jouer) souvent »",
+     "choices": [
+      "jouerai",
+      "jouerais",
+      "jouais",
+      "joue"
+     ],
+     "answer": 2,
+     "explanation": "Habitude passée : imparfait.",
+     "id": "cm1-francais-imparfait-06-b",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "« je ___ (devenir) maître d'école » (avenir)",
+     "choices": [
+      "devenais",
+      "deviendrai",
+      "deviendrais",
+      "devins"
+     ],
+     "answer": 1,
+     "explanation": "« Plus tard » : futur simple, je deviendrai.",
+     "id": "cm1-francais-imparfait-06-c",
+     "points": 1
+    }
+   ],
+   "lesson": "cm1-francais-imparfait",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-imparfait-q1",
+   "chapter": "cm1-francais-conjugaison",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Terminaison de « nous » à l'imparfait :",
+   "choices": [
+    "-ions",
+    "-ons",
+    "-ez",
+    "-ais"
+   ],
+   "answer": 0,
+   "explanation": "Nous chantions.",
+   "lesson": "cm1-francais-imparfait"
+  },
+  {
+   "id": "cm1-francais-imparfait-q2",
+   "chapter": "cm1-francais-conjugaison",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Futur de « finir » (tu) :",
+   "choices": [
+    "finis",
+    "finirais",
+    "finisses",
+    "finiras"
+   ],
+   "answer": 3,
+   "explanation": "Infinitif finir + -as.",
+   "lesson": "cm1-francais-imparfait"
+  },
+  {
+   "id": "cm1-francais-imparfait-q3",
+   "chapter": "cm1-francais-conjugaison",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quelle forme est un conditionnel ?",
+   "choices": [
+    "nous irons",
+    "nous allons",
+    "nous irions",
+    "nous allions"
+   ],
+   "answer": 2,
+   "explanation": "Radical ir- + terminaison -ions.",
+   "lesson": "cm1-francais-imparfait"
+  },
+  {
+   "id": "cm1-francais-imparfait-q4",
+   "chapter": "cm1-francais-conjugaison",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "« Hier, il ___ beau. » (faire)",
+   "choices": [
+    "fera",
+    "faisait",
+    "ferait",
+    "fait"
+   ],
+   "answer": 1,
+   "explanation": "Description dans le passé : imparfait.",
+   "lesson": "cm1-francais-imparfait"
+  },
+  {
+   "id": "cm1-francais-imparfait-q5",
+   "chapter": "cm1-francais-conjugaison",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Futur de « avoir » (j') :",
+   "choices": [
+    "aurai",
+    "aurais",
+    "avais",
+    "ai"
+   ],
+   "answer": 0,
+   "explanation": "J'aurai : futur de avoir.",
+   "lesson": "cm1-francais-imparfait"
+  }
+ ]
+}

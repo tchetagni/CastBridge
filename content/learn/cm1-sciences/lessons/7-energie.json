@@ -1,0 +1,535 @@
+{
+ "chapter": "cm1-sciences-energie",
+ "lessons": [
+  {
+   "id": "cm1-sciences-energie-fiche",
+   "title": "L'énergie autour de nous",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CM1 — Sciences et technologie (MINEDUB), reconstitué — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Citer des formes d'énergie (chaleur, lumière, mouvement, électricité).",
+    "Distinguer les sources d'énergie renouvelables des sources qui s'épuisent.",
+    "Donner des gestes pour économiser l'énergie et rester prudent avec l'électricité."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cm1-sciences-energie-01",
+    "cm1-sciences-energie-02",
+    "cm1-sciences-energie-03",
+    "cm1-sciences-energie-04",
+    "cm1-sciences-energie-05",
+    "cm1-sciences-energie-06"
+   ],
+   "selfCheck": [
+    "cm1-sciences-energie-q1",
+    "cm1-sciences-energie-q2",
+    "cm1-sciences-energie-q3",
+    "cm1-sciences-energie-q4",
+    "cm1-sciences-energie-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier si les formes d'énergie et la notion de transformation sont au programme du CM1.",
+    "Sécurité électrique : valider la formulation par un enseignant."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "L'énergie",
+     "md": "L'**énergie** permet de chauffer, d'éclairer, de faire bouger ou de faire fonctionner des appareils.\n\nOn la trouve sous plusieurs formes : **chaleur**, **lumière**, **mouvement**, **électricité**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "D'où vient l'énergie ?",
+     "md": "Les **sources d'énergie** sont les réserves ou les phénomènes qui fournissent de l'énergie.\n\n- **Renouvelables** (ne s'épuisent pas à notre échelle) : le Soleil, le vent, l'eau qui coule.\n- **Épuisables** (il n'y en aura plus un jour) : le pétrole, le gaz, le charbon.\n\nLe bois peut repousser si on replante les arbres."
+    },
+    {
+     "type": "illustration",
+     "caption": "Quelques sources d'énergie.",
+     "alt": "Quatre cases : Soleil, vent, eau qui coule (sources renouvelables) et bois, pétrole (sources épuisables). Une phrase dit qu'une lampe change l'énergie électrique en lumière.",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 180,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 20,
+        "w": 120,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 50,
+        "text": "Soleil",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 20,
+        "w": 120,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 50,
+        "text": "Vent",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 20,
+        "w": 120,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 50,
+        "text": "Eau qui coule",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 430,
+        "y": 20,
+        "w": 120,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 490,
+        "y": 50,
+        "text": "Bois, pétrole",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 100,
+        "text": "Sources renouvelables",
+        "size": 15,
+        "color": "green",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 490,
+        "y": 100,
+        "text": "Sources épuisables",
+        "size": 15,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 70,
+        "y1": 72,
+        "x2": 70,
+        "y2": 86,
+        "color": "green",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 72,
+        "x2": 210,
+        "y2": 86,
+        "color": "green",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "line",
+        "x1": 350,
+        "y1": 72,
+        "x2": 350,
+        "y2": 86,
+        "color": "green",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "line",
+        "x1": 490,
+        "y1": 72,
+        "x2": 490,
+        "y2": 86,
+        "color": "red",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 150,
+        "text": "Une lampe change l'énergie électrique en lumière (et un peu de chaleur)",
+        "size": 13,
+        "color": "grey",
+        "anchor": "middle",
+        "bold": false
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Transformer l'énergie",
+     "md": "Un appareil **transforme** l'énergie.\n\n- Une lampe : électricité → lumière (et un peu de chaleur).\n- Un ventilateur : électricité → mouvement.\n- Un panneau solaire : lumière du Soleil → électricité.\n- Une bougie : chimique (cire) → lumière et chaleur."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Sécurité avec l'électricité",
+     "md": "- Ne touche jamais une prise ou un fil dénudé avec les mains mouillées.\n- Ne bricole pas les fils ni les prises.\n- Ne mets rien d'autre que la fiche dans une prise.\n- Si un fil est cassé ou chaud, préviens un adulte."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : classer des sources",
+     "statement": "Classe le Soleil, le pétrole et le vent : renouvelable ou épuisable ?",
+     "steps": [
+      {
+       "md": "Le **Soleil** brille chaque jour : renouvelable."
+      },
+      {
+       "md": "Le **vent** souffle toujours : renouvelable."
+      },
+      {
+       "md": "Le **pétrole** se forme en des millions d'années : on l'épuise, donc épuisable."
+      }
+     ],
+     "answer": "**Soleil et vent : renouvelables ; pétrole : épuisable.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : économiser",
+     "statement": "Ibrahim quitte la classe. Que peut-il faire pour économiser l'énergie ?",
+     "steps": [
+      {
+       "md": "La salle est vide : la lumière ne sert à rien."
+      },
+      {
+       "md": "Il **éteint** les lampes et les ventilateurs."
+      },
+      {
+       "md": "Il laisse la fenêtre ouverte le jour pour profiter de la lumière naturelle."
+      }
+     ],
+     "answer": "**Éteindre les appareils qu'on n'utilise pas.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que l'énergie « disparaît » : elle change de forme.\n- Croire que toutes les sources sont inépuisables.\n- Brancher ou débrancher avec les mains mouillées : c'est dangereux."
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-energie-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-energie-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-energie-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-energie-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-energie-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-energie-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "cm1-sciences-energie-01",
+   "chapter": "cm1-sciences-energie",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cm1-sciences-energie-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quelle source d'énergie est renouvelable ?",
+   "choices": [
+    "le pétrole",
+    "le gaz",
+    "le charbon",
+    "le vent"
+   ],
+   "answer": 3,
+   "explanation": "Le vent souffle chaque jour : on ne l'épuise pas.",
+   "method": "Chercher la source qui ne s'épuise pas.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-energie-02",
+   "chapter": "cm1-sciences-energie",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cm1-sciences-energie-fiche",
+   "points": 2,
+   "kind": "matching",
+   "prompt": "Associe chaque appareil à la transformation d'énergie.",
+   "pairs": [
+    [
+     "Lampe",
+     "électricité → lumière"
+    ],
+    [
+     "Ventilateur",
+     "électricité → mouvement"
+    ],
+    [
+     "Panneau solaire",
+     "lumière → électricité"
+    ],
+    [
+     "Bougie",
+     "cire → lumière et chaleur"
+    ]
+   ],
+   "explanation": "Chaque appareil transforme une forme d'énergie en une autre.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-energie-03",
+   "chapter": "cm1-sciences-energie",
+   "tier": "application",
+   "difficulty": 2,
+   "lesson": "cm1-sciences-energie-fiche",
+   "points": 1,
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : il faut débrancher un appareil avec les mains mouillées.",
+   "answer": false,
+   "explanation": "Eau et électricité sont dangereuses ensemble : on a les mains sèches.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-energie-04",
+   "chapter": "cm1-sciences-energie",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cm1-sciences-energie-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quel geste économise l'énergie ?",
+   "choices": [
+    "laisser la télé allumée",
+    "allumer toutes les lampes le jour",
+    "éteindre la lampe en sortant d'une pièce",
+    "laisser le ventilateur tourner dans une salle vide"
+   ],
+   "answer": 2,
+   "explanation": "Un appareil éteint ne consomme rien.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-energie-05",
+   "chapter": "cm1-sciences-energie",
+   "tier": "approfondissement",
+   "difficulty": 3,
+   "lesson": "cm1-sciences-energie-fiche",
+   "points": 1,
+   "kind": "numeric",
+   "prompt": "Une classe a 4 lampes allumées inutilement pendant 3 heures. Combien d'heures de lampe cela fait-il au total ?",
+   "answer": 12,
+   "tolerance": 0,
+   "explanation": "4 lampes × 3 heures = 12 heures de lampe.",
+   "unit": "heures",
+   "method": "Multiplier le nombre de lampes par le nombre d'heures.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-energie-06",
+   "chapter": "cm1-sciences-energie",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "cm1-sciences-energie-fiche",
+   "kind": "problem",
+   "prompt": "Une maison utilise un panneau solaire.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "D'où vient l'énergie du panneau solaire ?",
+     "choices": [
+      "du vent seulement",
+      "du Soleil",
+      "du pétrole",
+      "du charbon"
+     ],
+     "answer": 1,
+     "explanation": "Il transforme la lumière du Soleil en électricité.",
+     "id": "cm1-sciences-energie-06-a",
+     "points": 1
+    },
+    {
+     "kind": "truefalse",
+     "prompt": "Le Soleil est une source d'énergie renouvelable.",
+     "answer": true,
+     "explanation": "Il brille chaque jour.",
+     "id": "cm1-sciences-energie-06-b",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Que fait une lampe branchée ?",
+     "choices": [
+      "elle fabrique du pétrole",
+      "elle transforme l'électricité en lumière",
+      "elle fabrique du vent",
+      "elle fait pousser les plantes"
+     ],
+     "answer": 1,
+     "explanation": "Une lampe change l'énergie électrique en lumière et un peu de chaleur.",
+     "id": "cm1-sciences-energie-06-c",
+     "points": 1
+    }
+   ],
+   "explanation": "Voir la correction de chaque question.",
+   "method": "Chercher quelle énergie entre et laquelle sort.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-energie-q1",
+   "chapter": "cm1-sciences-energie",
+   "tier": "autoeval",
+   "lesson": "cm1-sciences-energie-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quelle forme d'énergie fait briller une lampe ?",
+   "choices": [
+    "la lumière",
+    "le froid",
+    "le son seul",
+    "la glace"
+   ],
+   "answer": 0,
+   "explanation": "Une lampe produit de la lumière."
+  },
+  {
+   "id": "cm1-sciences-energie-q2",
+   "chapter": "cm1-sciences-energie",
+   "tier": "autoeval",
+   "lesson": "cm1-sciences-energie-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quelle source s'épuise ?",
+   "choices": [
+    "le Soleil",
+    "le vent",
+    "l'eau qui coule",
+    "le pétrole"
+   ],
+   "answer": 3,
+   "explanation": "Le pétrole n'est pas renouvelable."
+  },
+  {
+   "id": "cm1-sciences-energie-q3",
+   "chapter": "cm1-sciences-energie",
+   "tier": "autoeval",
+   "lesson": "cm1-sciences-energie-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Pourquoi éteindre une lampe inutile ?",
+   "choices": [
+    "pour la faire briller plus fort",
+    "pour la rendre plus grande",
+    "pour économiser l'énergie",
+    "pour réchauffer la pièce"
+   ],
+   "answer": 2,
+   "explanation": "Éteindre économise l'énergie."
+  },
+  {
+   "id": "cm1-sciences-energie-q4",
+   "chapter": "cm1-sciences-energie",
+   "tier": "autoeval",
+   "lesson": "cm1-sciences-energie-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Que fait un ventilateur ?",
+   "choices": [
+    "il fabrique du courant",
+    "il fabrique de l'eau",
+    "il transforme l'électricité en mouvement",
+    "il produit de la lumière du Soleil"
+   ],
+   "answer": 2,
+   "explanation": "Le moteur fait tourner les pales."
+  },
+  {
+   "id": "cm1-sciences-energie-q5",
+   "chapter": "cm1-sciences-energie",
+   "tier": "autoeval",
+   "lesson": "cm1-sciences-energie-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Que fait-on si un fil électrique est dénudé ?",
+   "choices": [
+    "on le touche pour voir",
+    "on prévient un adulte et on n'y touche pas",
+    "on le mouille",
+    "on le coupe soi-même"
+   ],
+   "answer": 1,
+   "explanation": "C'est dangereux : on ne touche pas, on prévient un adulte."
+  }
+ ]
+}

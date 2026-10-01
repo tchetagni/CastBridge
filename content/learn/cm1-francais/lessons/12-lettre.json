@@ -1,0 +1,535 @@
+{
+ "chapter": "cm1-francais-expression",
+ "lessons": [
+  {
+   "id": "cm1-francais-lettre",
+   "title": "Le dialogue et la lettre",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM1 — Expression écrite : dialogue et lettre (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Écrire un dialogue avec ses signes (guillemets ou tirets, verbes de parole).",
+    "Organiser une lettre : lieu et date, appel, corps, formule de politesse, signature.",
+    "Adapter le ton à la personne à qui on écrit."
+   ],
+   "prerequisites": [
+    "cm1-francais-recit"
+   ],
+   "exercises": [
+    "cm1-francais-lettre-01",
+    "cm1-francais-lettre-02",
+    "cm1-francais-lettre-03",
+    "cm1-francais-lettre-04",
+    "cm1-francais-lettre-05",
+    "cm1-francais-lettre-06"
+   ],
+   "selfCheck": [
+    "cm1-francais-lettre-q1",
+    "cm1-francais-lettre-q2",
+    "cm1-francais-lettre-q3",
+    "cm1-francais-lettre-q4",
+    "cm1-francais-lettre-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier les formules de politesse enseignées en CM1 (lettre amicale / lettre formelle).",
+    "Les productions sont libres : fournir une grille de correction à l'enseignant."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le dialogue",
+     "md": "Un **dialogue** rapporte les paroles des personnages. On change de ligne à chaque prise de parole.\n\n- Deux points puis **guillemets** : *Ngono dit : « Viens vite ! »*\n- Ou **tiret** en début de ligne : *— Où vas-tu ? demande Paul.*"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Verbes de parole et ponctuation",
+     "md": "Verbes de parole : *dire, demander, répondre, s'écrire, murmurer, crier.* On met : le **point d'interrogation** pour une question, le **point d'exclamation** pour la surprise ou l'ordre.\n\n— Tu viens au marché ? demanda Amina.\n— Oui, répondit Ibrahim, j'arrive !"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 330,
+        "y": 8,
+        "w": 220,
+        "h": 24,
+        "fill": null,
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 440,
+        "y": 26,
+        "text": "Yaoundé, le 12 mars",
+        "size": 14,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 50,
+        "w": 160,
+        "h": 24,
+        "fill": null,
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 68,
+        "text": "Chère tante,",
+        "size": 14,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 90,
+        "w": 380,
+        "h": 50,
+        "fill": null,
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 120,
+        "text": "Je t'écris pour te remercier... (corps)",
+        "size": 14,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 150,
+        "w": 330,
+        "h": 24,
+        "fill": null,
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 175,
+        "y": 168,
+        "text": "Je t'embrasse très fort.",
+        "size": 14,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 360,
+        "y": 150,
+        "w": 190,
+        "h": 24,
+        "fill": null,
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 455,
+        "y": 168,
+        "text": "Ngono",
+        "size": 14,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 440,
+        "y": 46,
+        "text": "lieu et date",
+        "size": 12,
+        "color": "blue",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 86,
+        "text": "formule d'appel",
+        "size": 12,
+        "color": "red",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 500,
+        "y": 108,
+        "text": "corps",
+        "size": 12,
+        "color": "green",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 175,
+        "y": 190,
+        "text": "formule de politesse",
+        "size": 12,
+        "color": "orange",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 455,
+        "y": 190,
+        "text": "signature",
+        "size": 12,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Les parties d'une lettre.",
+     "alt": "Une lettre avec le lieu et la date en haut à droite, la formule d'appel, le corps du message, la formule de politesse et la signature."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : un dialogue",
+     "statement": "Écris un petit dialogue entre Paul et sa mère.",
+     "steps": [
+      {
+       "md": "Je change de ligne à chaque personne qui parle."
+      },
+      {
+       "md": "Je mets un tiret au début de chaque ligne."
+      },
+      {
+       "md": "J'ajoute un verbe de parole."
+      }
+     ],
+     "answer": "**— Maman, je peux aller jouer ? demanda Paul.\n— Oui, mais reviens avant la nuit, répondit sa mère.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : une lettre",
+     "statement": "Écris une lettre de remerciement à ta tante.",
+     "steps": [
+      {
+       "md": "Je note lieu et date en haut à droite."
+      },
+      {
+       "md": "Je commence par « Chère tante, »."
+      },
+      {
+       "md": "J'écris le corps : merci, nouvelles, question."
+      },
+      {
+       "md": "Je termine par une formule de politesse et je signe."
+      }
+     ],
+     "answer": "**Yaoundé, le 12 mars. Chère tante, merci pour le beau cahier. Je m'en sers tous les jours. J'espère que tu vas bien. Je t'embrasse très fort. Ngono**"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Choisir le ton",
+     "md": "À un ami ou à un parent : ton familier (*Salut, Mon cher Paul*). À une directrice ou à un inconnu : ton poli (*Madame la Directrice, Je vous prie d'agréer mes salutations respectueuses.*)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier de changer de ligne quand un autre personnage parle.\n- Oublier la date ou la signature.\n- Mélanger « tu » et « vous » dans la même lettre."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-lettre-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-lettre-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-lettre-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-lettre-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-lettre-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-lettre-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "cm1-francais-lettre-01",
+   "chapter": "cm1-francais-expression",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "mcq",
+   "prompt": "Quel signe annonce une prise de parole ?",
+   "choices": [
+    "l'astérisque",
+    "le tiret ou les guillemets",
+    "la parenthèse",
+    "le point-virgule"
+   ],
+   "answer": 1,
+   "explanation": "On utilise les guillemets ou le tiret.",
+   "points": 1,
+   "lesson": "cm1-francais-lettre",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-lettre-02",
+   "chapter": "cm1-francais-expression",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : on signe une lettre à la fin.",
+   "answer": true,
+   "explanation": "Vrai : le prénom ou le nom de l'auteur se met en dernier.",
+   "points": 1,
+   "lesson": "cm1-francais-lettre",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-lettre-03",
+   "chapter": "cm1-francais-expression",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "matching",
+   "prompt": "Associe chaque partie de la lettre à son exemple.",
+   "pairs": [
+    [
+     "Formule d'appel",
+     "Cher Paul,"
+    ],
+    [
+     "Lieu et date",
+     "Douala, le 5 mai"
+    ],
+    [
+     "Formule de politesse",
+     "Je t'embrasse."
+    ],
+    [
+     "Signature",
+     "Ngono"
+    ]
+   ],
+   "explanation": "Chaque partie a sa place dans la lettre.",
+   "points": 2,
+   "lesson": "cm1-francais-lettre",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-lettre-04",
+   "chapter": "cm1-francais-expression",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "mcq",
+   "prompt": "Quel verbe de parole exprime une question ?",
+   "choices": [
+    "demander",
+    "murmurer",
+    "crier",
+    "répondre"
+   ],
+   "answer": 0,
+   "explanation": "Demander accompagne une question.",
+   "points": 1,
+   "lesson": "cm1-francais-lettre",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-lettre-05",
+   "chapter": "cm1-francais-expression",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "open",
+   "prompt": "Écris un dialogue de deux répliques entre deux élèves qui se rencontrent à la sortie de l'école.",
+   "model": "— Bonjour Amina, tu rentres à pied ? demanda Paul.\n— Oui, j'habite tout près, répondit Amina.",
+   "rubric": [
+    "Un tiret ou des guillemets à chaque réplique.",
+    "Au moins un verbe de parole.",
+    "Ponctuation correcte."
+   ],
+   "explanation": "Chaque personne parle sur une ligne, avec tiret et verbe de parole.",
+   "points": 3,
+   "lesson": "cm1-francais-lettre",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-lettre-06",
+   "chapter": "cm1-francais-expression",
+   "tier": "examen",
+   "difficulty": 2,
+   "kind": "problem",
+   "prompt": "Lis cette lettre : « Bafoussam, le 3 juin. Cher Fotso, merci pour ton invitation. Je viendrai avec plaisir. À bientôt ! Marie »",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quelle est la formule d'appel ?",
+     "choices": [
+      "Bafoussam, le 3 juin.",
+      "À bientôt !",
+      "Marie",
+      "Cher Fotso,"
+     ],
+     "answer": 3,
+     "explanation": "La formule d'appel s'adresse à la personne.",
+     "id": "cm1-francais-lettre-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Que représente « À bientôt ! » dans la lettre ?",
+     "choices": [
+      "la date",
+      "le lieu",
+      "la formule de fin",
+      "la signature"
+     ],
+     "answer": 2,
+     "explanation": "« À bientôt ! » termine la lettre avant la signature : c'est la formule de fin.",
+     "id": "cm1-francais-lettre-06-b",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Qui écrit la lettre ?",
+     "choices": [
+      "Fotso",
+      "Marie",
+      "Bafoussam",
+      "Juin"
+     ],
+     "answer": 1,
+     "explanation": "Marie signe : elle écrit à Fotso.",
+     "id": "cm1-francais-lettre-06-c",
+     "points": 1
+    }
+   ],
+   "lesson": "cm1-francais-lettre",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-lettre-q1",
+   "chapter": "cm1-francais-expression",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Dans un dialogue, on change de ligne…",
+   "choices": [
+    "à chaque personne qui parle",
+    "à chaque phrase",
+    "jamais",
+    "à chaque mot"
+   ],
+   "answer": 0,
+   "explanation": "Une ligne par prise de parole.",
+   "lesson": "cm1-francais-lettre"
+  },
+  {
+   "id": "cm1-francais-lettre-q2",
+   "chapter": "cm1-francais-expression",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "La date se place…",
+   "choices": [
+    "après la signature",
+    "au milieu du corps",
+    "sur l'enveloppe seulement",
+    "en haut de la lettre"
+   ],
+   "answer": 3,
+   "explanation": "Lieu et date en haut à droite.",
+   "lesson": "cm1-francais-lettre"
+  },
+  {
+   "id": "cm1-francais-lettre-q3",
+   "chapter": "cm1-francais-expression",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Ponctuation d'une question :",
+   "choices": [
+    "!",
+    ".",
+    "?",
+    ";"
+   ],
+   "answer": 2,
+   "explanation": "Une question se termine par un point d'interrogation.",
+   "lesson": "cm1-francais-lettre"
+  },
+  {
+   "id": "cm1-francais-lettre-q4",
+   "chapter": "cm1-francais-expression",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quelle formule d'appel convient pour un ami ?",
+   "choices": [
+    "Madame la Directrice,",
+    "Cher Paul,",
+    "Monsieur,",
+    "À qui de droit"
+   ],
+   "answer": 1,
+   "explanation": "Entre amis, on écrit « Cher… ».",
+   "lesson": "cm1-francais-lettre"
+  },
+  {
+   "id": "cm1-francais-lettre-q5",
+   "chapter": "cm1-francais-expression",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quel verbe de parole exprime la surprise ?",
+   "choices": [
+    "s'écrier",
+    "sourire",
+    "dormir",
+    "courir"
+   ],
+   "answer": 0,
+   "explanation": "S'écrier introduit un cri de surprise.",
+   "lesson": "cm1-francais-lettre"
+  }
+ ]
+}

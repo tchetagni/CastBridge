@@ -1,0 +1,551 @@
+{
+ "chapter": "cm1-francais-expression",
+ "lessons": [
+  {
+   "id": "cm1-francais-recit",
+   "title": "Écrire un récit et une description",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM1 — Expression écrite : récit et description (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Construire un récit en suivant ses étapes.",
+    "Employer des connecteurs de temps et les temps du récit.",
+    "Décrire un lieu ou un personnage de façon ordonnée."
+   ],
+   "prerequisites": [
+    "cm1-francais-passes"
+   ],
+   "exercises": [
+    "cm1-francais-recit-01",
+    "cm1-francais-recit-02",
+    "cm1-francais-recit-03",
+    "cm1-francais-recit-04",
+    "cm1-francais-recit-05",
+    "cm1-francais-recit-06"
+   ],
+   "selfCheck": [
+    "cm1-francais-recit-q1",
+    "cm1-francais-recit-q2",
+    "cm1-francais-recit-q3",
+    "cm1-francais-recit-q4",
+    "cm1-francais-recit-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier la terminologie du schéma narratif retenue en CM1.",
+    "Les productions sont libres : fournir une grille de correction à l'enseignant."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le récit",
+     "md": "Un **récit** raconte une histoire. Il suit des étapes : la **situation de départ** (qui, où, quand), un **événement** qui change tout, des **péripéties**, la **fin** (résolution) et la **situation finale**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les temps et les mots du récit",
+     "md": "- **Imparfait** : décor, habitudes. *Il faisait nuit.*\n- **Passé simple** (ou passé composé) : actions. *Soudain, un bruit retentit.*\n- Connecteurs de temps : *d'abord, puis, ensuite, soudain, un jour, pendant ce temps, enfin, finalement.*"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 40,
+        "w": 100,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 6
+       },
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 40,
+        "w": 100,
+        "h": 50,
+        "fill": "lightgreen",
+        "stroke": "green",
+        "radius": 6
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 40,
+        "w": 100,
+        "h": 50,
+        "fill": "lightyellow",
+        "stroke": "orange",
+        "radius": 6
+       },
+       {
+        "t": "rect",
+        "x": 340,
+        "y": 40,
+        "w": 100,
+        "h": 50,
+        "fill": "lightorange",
+        "stroke": "red",
+        "radius": 6
+       },
+       {
+        "t": "rect",
+        "x": 450,
+        "y": 40,
+        "w": 100,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 62,
+        "text": "Départ",
+        "size": 15,
+        "color": "blue",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 80,
+        "text": "(situation)",
+        "size": 12,
+        "color": "blue",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 62,
+        "text": "Événement",
+        "size": 15,
+        "color": "green",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 80,
+        "text": "qui change",
+        "size": 12,
+        "color": "green",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 62,
+        "text": "Péripéties",
+        "size": 15,
+        "color": "orange",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 80,
+        "text": "(épreuves)",
+        "size": 12,
+        "color": "orange",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 390,
+        "y": 62,
+        "text": "Fin",
+        "size": 15,
+        "color": "red",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 390,
+        "y": 80,
+        "text": "(résolution)",
+        "size": 12,
+        "color": "red",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 500,
+        "y": 62,
+        "text": "Situation",
+        "size": 15,
+        "color": "blue",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 500,
+        "y": 80,
+        "text": "finale",
+        "size": 12,
+        "color": "blue",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 125,
+        "text": "Les étapes d'un récit",
+        "size": 16,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Le schéma d'un récit.",
+     "alt": "Cinq cases à la suite : départ, événement qui change, péripéties, fin et situation finale."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "La description",
+     "md": "Décrire, c'est **faire voir**. On avance dans un **ordre** (de loin à près, de haut en bas, du général au détail) et on emploie des adjectifs, des comparaisons et des **mots de lieu** (*devant, derrière, au milieu, à gauche*).\n\nOn utilise surtout l'**imparfait** (ou le présent)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : un début de récit",
+     "statement": "Écris le début d'un récit avec : Ngono, la rivière, une barque.",
+     "steps": [
+      {
+       "md": "Je plante le décor à l'imparfait : où, quand, qui."
+      },
+      {
+       "md": "J'ajoute l'événement au passé simple."
+      }
+     ],
+     "answer": "**Ce matin-là, la rivière brillait sous le soleil. Ngono lavait le linge près de la rive. Soudain, une petite barque glissa vers elle, vide et sans rameur.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : une description",
+     "statement": "Décris un marché en quatre phrases, du plus loin au plus près.",
+     "steps": [
+      {
+       "md": "Je commence par le lieu général."
+      },
+      {
+       "md": "Je donne des détails : couleurs, bruits, odeurs."
+      },
+      {
+       "md": "J'utilise des mots de lieu."
+      }
+     ],
+     "answer": "**Au fond de la place s'étendait le grand marché. Les étals étaient couverts de tomates rouges et de bananes jaunes. Devant moi, une vendeuse criait ses prix. Une odeur de beignets chauds montait de tous côtés.**"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode pour écrire",
+     "md": "1. Je choisis mes personnages et mon lieu.\n2. Je note le plan : départ, événement, péripéties, fin.\n3. J'écris en paragraphes avec des connecteurs.\n4. Je relis : temps, accords, ponctuation."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Mélanger sans raison les temps (présent et passé simple).\n- Oublier de situer l'histoire (où ? quand ?).\n- Écrire une liste d'actions sans lien : utilise les connecteurs."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-recit-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-recit-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-recit-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-recit-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-recit-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-recit-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "cm1-francais-recit-01",
+   "chapter": "cm1-francais-expression",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "mcq",
+   "prompt": "Quel temps utilise-t-on surtout pour décrire le décor dans un récit ?",
+   "choices": [
+    "le futur",
+    "l'impératif",
+    "le conditionnel",
+    "l'imparfait"
+   ],
+   "answer": 3,
+   "explanation": "L'imparfait installe le décor.",
+   "points": 1,
+   "lesson": "cm1-francais-recit",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-recit-02",
+   "chapter": "cm1-francais-expression",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : un récit a une fin.",
+   "answer": true,
+   "explanation": "Vrai : la fin résout ce qui s'est passé.",
+   "points": 1,
+   "lesson": "cm1-francais-recit",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-recit-03",
+   "chapter": "cm1-francais-expression",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "matching",
+   "prompt": "Associe chaque connecteur à son rôle.",
+   "pairs": [
+    [
+     "d'abord",
+     "début"
+    ],
+    [
+     "soudain",
+     "événement imprévu"
+    ],
+    [
+     "pendant ce temps",
+     "en même temps"
+    ],
+    [
+     "enfin",
+     "fin"
+    ]
+   ],
+   "explanation": "Chaque connecteur place l'action dans le temps.",
+   "points": 2,
+   "lesson": "cm1-francais-recit",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-recit-04",
+   "chapter": "cm1-francais-expression",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "mcq",
+   "prompt": "Quelle étape vient en premier ?",
+   "choices": [
+    "la fin",
+    "les péripéties",
+    "la situation de départ",
+    "la situation finale"
+   ],
+   "answer": 2,
+   "explanation": "On commence par présenter personnages et lieu.",
+   "method": "Ordre : départ, événement, péripéties, fin.",
+   "points": 1,
+   "lesson": "cm1-francais-recit",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-recit-05",
+   "chapter": "cm1-francais-expression",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "open",
+   "prompt": "Écris deux phrases qui décrivent ta cour d'école avec des mots de lieu.",
+   "model": "Devant le bâtiment s'étend une grande cour. Au milieu, un manguier donne de l'ombre.",
+   "rubric": [
+    "Deux phrases.",
+    "Au moins deux mots de lieu.",
+    "Imparfait ou présent, orthographe soignée."
+   ],
+   "explanation": "On décrit dans un ordre clair : devant, au milieu, derrière…",
+   "points": 3,
+   "lesson": "cm1-francais-recit",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-recit-06",
+   "chapter": "cm1-francais-expression",
+   "tier": "examen",
+   "difficulty": 2,
+   "kind": "problem",
+   "prompt": "Voici le début d'un récit : « Il faisait nuit. Mballa gardait ses chèvres près de Garoua. Soudain, il entendit un bruit dans les herbes. »",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quelle phrase plante le décor ?",
+     "choices": [
+      "Soudain, il entendit un bruit.",
+      "Il faisait nuit.",
+      "il entendit un bruit",
+      "dans les herbes"
+     ],
+     "answer": 1,
+     "explanation": "Décor : quand, où (imparfait).",
+     "id": "cm1-francais-recit-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quel mot annonce l'événement ?",
+     "choices": [
+      "Soudain",
+      "Il",
+      "près de",
+      "gardait"
+     ],
+     "answer": 0,
+     "explanation": "Soudain annonce quelque chose d'inattendu.",
+     "id": "cm1-francais-recit-06-b",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "« il entendit » est…",
+     "choices": [
+      "à l'imparfait",
+      "au futur",
+      "au présent",
+      "au passé simple"
+     ],
+     "answer": 3,
+     "explanation": "Entendre : il entendit, passé simple.",
+     "id": "cm1-francais-recit-06-c",
+     "points": 1
+    }
+   ],
+   "lesson": "cm1-francais-recit",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-recit-q1",
+   "chapter": "cm1-francais-expression",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Pour raconter une action qui interrompt le décor, on emploie…",
+   "choices": [
+    "l'imparfait",
+    "le futur",
+    "le passé simple",
+    "l'impératif"
+   ],
+   "answer": 2,
+   "explanation": "Le passé simple fait avancer l'histoire.",
+   "lesson": "cm1-francais-recit"
+  },
+  {
+   "id": "cm1-francais-recit-q2",
+   "chapter": "cm1-francais-expression",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quel connecteur indique la fin ?",
+   "choices": [
+    "d'abord",
+    "enfin",
+    "soudain",
+    "pendant"
+   ],
+   "answer": 1,
+   "explanation": "Enfin conclut la suite d'événements.",
+   "lesson": "cm1-francais-recit"
+  },
+  {
+   "id": "cm1-francais-recit-q3",
+   "chapter": "cm1-francais-expression",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Décrire, c'est…",
+   "choices": [
+    "faire voir avec des mots",
+    "donner un ordre",
+    "poser une question",
+    "compter"
+   ],
+   "answer": 0,
+   "explanation": "La description fait voir.",
+   "lesson": "cm1-francais-recit"
+  },
+  {
+   "id": "cm1-francais-recit-q4",
+   "chapter": "cm1-francais-expression",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quelle expression est un mot de lieu ?",
+   "choices": [
+    "hier",
+    "puis",
+    "très",
+    "au milieu de"
+   ],
+   "answer": 3,
+   "explanation": "Au milieu de situe un objet.",
+   "lesson": "cm1-francais-recit"
+  },
+  {
+   "id": "cm1-francais-recit-q5",
+   "chapter": "cm1-francais-expression",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Dans un récit, la « situation de départ » dit…",
+   "choices": [
+    "comment l'histoire se termine",
+    "pourquoi on écrit",
+    "qui, où, quand",
+    "le titre"
+   ],
+   "answer": 2,
+   "explanation": "On présente personnages, lieu, moment.",
+   "lesson": "cm1-francais-recit"
+  }
+ ]
+}

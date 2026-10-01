@@ -1,0 +1,515 @@
+{
+ "chapter": "cm1-francais-vocabulaire",
+ "lessons": [
+  {
+   "id": "cm1-francais-vocabulaire",
+   "title": "Familles de mots, champs lexicaux, synonymes et contraires",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CM1 — Vocabulaire : familles de mots, champs lexicaux, synonymes, antonymes (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Trouver des mots de la même famille et reconnaître le radical, le préfixe, le suffixe.",
+    "Repérer les mots d'un champ lexical.",
+    "Employer des synonymes et des antonymes."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cm1-francais-vocabulaire-01",
+    "cm1-francais-vocabulaire-02",
+    "cm1-francais-vocabulaire-03",
+    "cm1-francais-vocabulaire-04",
+    "cm1-francais-vocabulaire-05",
+    "cm1-francais-vocabulaire-06"
+   ],
+   "selfCheck": [
+    "cm1-francais-vocabulaire-q1",
+    "cm1-francais-vocabulaire-q2",
+    "cm1-francais-vocabulaire-q3",
+    "cm1-francais-vocabulaire-q4",
+    "cm1-francais-vocabulaire-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que les mots de famille proposés (terre, dent, lait) sont corrects et adaptés ; éviter les familles discutées."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La famille de mots",
+     "md": "Les mots d'une même **famille** viennent du même **radical**. On peut ajouter un **préfixe** (devant) ou un **suffixe** (derrière).\n\n- terre → **terr**ain, **en**terrer, **at**terrir, **sou**terrain, terrestre.\n- Le radical *terr-* garde le sens de « sol »."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Le champ lexical",
+     "md": "Un **champ lexical** est l'ensemble des mots qui parlent du même sujet.\n\n- Le marché : *étal, client, vendre, acheter, prix, balance, panier.*"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Synonymes et antonymes",
+     "md": "- **Synonymes** : mots de sens proche : *grand, immense* ; *content, heureux*.\n- **Antonymes** (contraires) : *chaud ≠ froid* ; *lourd ≠ léger*.\n- Préfixes qui donnent le contraire : **in-, im-, il-, ir-, dé-, mal-, mé-** : *possible → impossible, faire → défaire, heureux → malheureux, lisible → illisible*."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 200,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 280,
+        "cy": 100,
+        "r": 40,
+        "fill": "lightyellow",
+        "stroke": "orange"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 106,
+        "text": "terre",
+        "size": 18,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 20,
+        "w": 110,
+        "h": 30,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 95,
+        "y": 41,
+        "text": "terrain",
+        "size": 16,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 150,
+        "w": 110,
+        "h": 30,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 95,
+        "y": 171,
+        "text": "enterrer",
+        "size": 16,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 410,
+        "y": 20,
+        "w": 120,
+        "h": 30,
+        "fill": "lightgreen",
+        "stroke": "green",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 470,
+        "y": 41,
+        "text": "atterrir",
+        "size": 16,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 410,
+        "y": 150,
+        "w": 120,
+        "h": 30,
+        "fill": "lightgreen",
+        "stroke": "green",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 470,
+        "y": 171,
+        "text": "terrestre",
+        "size": 16,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 40,
+        "x2": 245,
+        "y2": 82,
+        "color": "grey",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 160,
+        "x2": 245,
+        "y2": 120,
+        "color": "grey",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 410,
+        "y1": 40,
+        "x2": 315,
+        "y2": 82,
+        "color": "grey",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 410,
+        "y1": 160,
+        "x2": 315,
+        "y2": 120,
+        "color": "grey",
+        "width": 2
+       }
+      ]
+     },
+     "caption": "La famille du mot « terre ».",
+     "alt": "Le mot terre au centre, relié à terrain, enterrer, atterrir et terrestre."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : trouver l'intrus",
+     "statement": "Quel mot n'est pas de la famille de « lait » : laitier, laiterie, lacté, lac ?",
+     "steps": [
+      {
+       "md": "« laitier », « laiterie », « lacté » ont le radical lait / lact-."
+      },
+      {
+       "md": "« lac » désigne une étendue d'eau : aucun lien de sens."
+      }
+     ],
+     "answer": "**Lac** est l'intrus."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : un contraire avec un préfixe",
+     "statement": "Donne le contraire de « lisible », « heureux », « faire ».",
+     "steps": [
+      {
+       "md": "« lisible » : devant un l, on utilise il- → **illisible**."
+      },
+      {
+       "md": "« heureux » → **malheureux** (mal-)."
+      },
+      {
+       "md": "« faire » → **défaire** (dé-)."
+      }
+     ],
+     "answer": "**illisible, malheureux, défaire.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire qu'un mot qui ressemble est de la même famille : il faut le même sens (lac / lait).\n- Utiliser un synonyme qui change le sens ou le registre.\n- Mettre in- devant p, b, m : on écrit **im-** (impossible, imbuvable)."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-vocabulaire-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-vocabulaire-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-vocabulaire-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-vocabulaire-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-vocabulaire-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-vocabulaire-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "cm1-francais-vocabulaire-01",
+   "chapter": "cm1-francais-vocabulaire",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "mcq",
+   "prompt": "Quel mot est de la famille de « dent » ?",
+   "choices": [
+    "dinde",
+    "dentiste",
+    "danse",
+    "rente"
+   ],
+   "answer": 1,
+   "explanation": "Dentiste soigne les dents : même radical dent-.",
+   "points": 1,
+   "lesson": "cm1-francais-vocabulaire",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-vocabulaire-02",
+   "chapter": "cm1-francais-vocabulaire",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : « grand » et « immense » sont des synonymes.",
+   "answer": true,
+   "explanation": "Ils ont un sens proche (immense = très grand).",
+   "points": 1,
+   "lesson": "cm1-francais-vocabulaire",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-vocabulaire-03",
+   "chapter": "cm1-francais-vocabulaire",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "matching",
+   "prompt": "Associe chaque mot à son contraire.",
+   "pairs": [
+    [
+     "lourd",
+     "léger"
+    ],
+    [
+     "chaud",
+     "froid"
+    ],
+    [
+     "possible",
+     "impossible"
+    ],
+    [
+     "heureux",
+     "malheureux"
+    ]
+   ],
+   "explanation": "lourd/léger et chaud/froid sont des contraires ; possible/impossible et heureux/malheureux utilisent un préfixe.",
+   "points": 2,
+   "lesson": "cm1-francais-vocabulaire",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-vocabulaire-04",
+   "chapter": "cm1-francais-vocabulaire",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "mcq",
+   "prompt": "Quel mot appartient au champ lexical de l'école ?",
+   "choices": [
+    "cahier",
+    "pangolin",
+    "mangrove",
+    "balance"
+   ],
+   "answer": 0,
+   "explanation": "Le cahier, le maître, la craie… parlent de l'école.",
+   "points": 1,
+   "lesson": "cm1-francais-vocabulaire",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-vocabulaire-05",
+   "chapter": "cm1-francais-vocabulaire",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "open",
+   "prompt": "Écris trois mots de la famille de « marché » ou de « terre ».",
+   "model": "Terre : terrain, enterrer, atterrir. (Marché : marchand, marchander, supermarché.)",
+   "rubric": [
+    "Les mots proposés ont le même radical.",
+    "Aucun intrus.",
+    "Au moins trois mots."
+   ],
+   "explanation": "Les mots d'une famille partagent le radical et le sens : marchand, marchander, marchandise.",
+   "points": 3,
+   "lesson": "cm1-francais-vocabulaire",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-vocabulaire-06",
+   "chapter": "cm1-francais-vocabulaire",
+   "tier": "examen",
+   "difficulty": 2,
+   "kind": "problem",
+   "prompt": "Observe cette liste de mots : « vendre, client, balance, étal, mangue, prix ».",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "De quel champ lexical vient la plupart de ces mots ?",
+     "choices": [
+      "la forêt",
+      "l'école",
+      "la musique",
+      "le marché"
+     ],
+     "answer": 3,
+     "explanation": "Vendre, client, étal, prix, balance : tous parlent du marché.",
+     "id": "cm1-francais-vocabulaire-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quel mot de la liste est le moins lié au commerce ?",
+     "choices": [
+      "vendre",
+      "étal",
+      "mangue",
+      "prix"
+     ],
+     "answer": 2,
+     "explanation": "Mangue est un fruit : c'est ce qui est vendu, pas un mot du commerce.",
+     "id": "cm1-francais-vocabulaire-06-b",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quel est le contraire de « vendre » ?",
+     "choices": [
+      "rendre",
+      "acheter",
+      "prendre",
+      "offrir"
+     ],
+     "answer": 1,
+     "explanation": "Vendre ≠ acheter.",
+     "id": "cm1-francais-vocabulaire-06-c",
+     "points": 1
+    }
+   ],
+   "lesson": "cm1-francais-vocabulaire",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-vocabulaire-q1",
+   "chapter": "cm1-francais-vocabulaire",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Le radical d'une famille de mots, c'est…",
+   "choices": [
+    "la partie commune à tous les mots",
+    "le dernier mot",
+    "le préfixe",
+    "le contraire"
+   ],
+   "answer": 0,
+   "explanation": "Le radical porte le sens commun.",
+   "lesson": "cm1-francais-vocabulaire"
+  },
+  {
+   "id": "cm1-francais-vocabulaire-q2",
+   "chapter": "cm1-francais-vocabulaire",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Contraire de « légal » :",
+   "choices": [
+    "inlégal",
+    "délégal",
+    "malégal",
+    "illégal"
+   ],
+   "answer": 3,
+   "explanation": "Devant un l, in- devient il-.",
+   "lesson": "cm1-francais-vocabulaire"
+  },
+  {
+   "id": "cm1-francais-vocabulaire-q3",
+   "chapter": "cm1-francais-vocabulaire",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Synonyme de « content » :",
+   "choices": [
+    "triste",
+    "fâché",
+    "heureux",
+    "fatigué"
+   ],
+   "answer": 2,
+   "explanation": "Content et heureux ont le même sens.",
+   "lesson": "cm1-francais-vocabulaire"
+  },
+  {
+   "id": "cm1-francais-vocabulaire-q4",
+   "chapter": "cm1-francais-vocabulaire",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quel mot est un antonyme de « rapide » ?",
+   "choices": [
+    "vite",
+    "lent",
+    "prompt",
+    "fort"
+   ],
+   "answer": 1,
+   "explanation": "Rapide ≠ lent.",
+   "lesson": "cm1-francais-vocabulaire"
+  },
+  {
+   "id": "cm1-francais-vocabulaire-q5",
+   "chapter": "cm1-francais-vocabulaire",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "« Cheval, selle, galop, écurie » : champ lexical…",
+   "choices": [
+    "du cheval",
+    "de la mer",
+    "du football",
+    "de la cuisine"
+   ],
+   "answer": 0,
+   "explanation": "Ces mots parlent du cheval.",
+   "lesson": "cm1-francais-vocabulaire"
+  }
+ ]
+}

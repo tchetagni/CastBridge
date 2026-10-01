@@ -1,0 +1,541 @@
+{
+ "chapter": "cm1-sciences-nutrition",
+ "lessons": [
+  {
+   "id": "cm1-sciences-nutrition-fiche",
+   "title": "Bien manger : une alimentation variée",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CM1 — Sciences et technologie (MINEDUB), reconstitué — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Classer des aliments selon leur rôle (énergie, croissance, protection).",
+    "Composer un repas équilibré avec des aliments locaux.",
+    "Expliquer pourquoi il faut boire de l'eau et varier les repas."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cm1-sciences-nutrition-01",
+    "cm1-sciences-nutrition-02",
+    "cm1-sciences-nutrition-03",
+    "cm1-sciences-nutrition-04",
+    "cm1-sciences-nutrition-05",
+    "cm1-sciences-nutrition-06"
+   ],
+   "selfCheck": [
+    "cm1-sciences-nutrition-q1",
+    "cm1-sciences-nutrition-q2",
+    "cm1-sciences-nutrition-q3",
+    "cm1-sciences-nutrition-q4",
+    "cm1-sciences-nutrition-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier la classification des aliments (énergétiques, bâtisseurs, protecteurs) avec le vocabulaire du manuel officiel.",
+    "Choix des aliments locaux : vérifier qu'ils sont courants dans la région visée."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Une alimentation équilibrée",
+     "md": "Une alimentation est **équilibrée** quand elle contient, chaque jour, des aliments de plusieurs sortes en quantité suffisante. Un seul aliment ne suffit jamais."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Trois grandes familles",
+     "md": "- Les aliments **énergétiques** donnent de la force : manioc, riz, plantain, igname, maïs, huile.\n- Les aliments **bâtisseurs** font grandir et réparent le corps : poisson, viande, œufs, haricots, arachides.\n- Les aliments **protecteurs** aident à se défendre contre les maladies : fruits et légumes."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les trois familles d'aliments.",
+     "alt": "Trois cases : aliments énergétiques (manioc, riz, plantain), bâtisseurs (poisson, œufs, haricots), protecteurs (fruits, légumes), avec leur rôle écrit dessous.",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 190,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 20,
+        "w": 160,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 42,
+        "text": "Aliments énergétiques",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 60,
+        "text": "manioc, riz, plantain",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 200,
+        "y": 20,
+        "w": 160,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 42,
+        "text": "Aliments bâtisseurs",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 60,
+        "text": "poisson, œufs, haricots",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 380,
+        "y": 20,
+        "w": 160,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 460,
+        "y": 42,
+        "text": "Aliments protecteurs",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 460,
+        "y": 60,
+        "text": "fruits, légumes",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 100,
+        "y1": 72,
+        "x2": 100,
+        "y2": 105,
+        "color": "grey",
+        "width": 2,
+        "dash": false,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 280,
+        "y1": 72,
+        "x2": 280,
+        "y2": 105,
+        "color": "grey",
+        "width": 2,
+        "dash": false,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 460,
+        "y1": 72,
+        "x2": 460,
+        "y2": 105,
+        "color": "grey",
+        "width": 2,
+        "dash": false,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 125,
+        "text": "donnent de la force",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 125,
+        "text": "font grandir le corps",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 460,
+        "y": 125,
+        "text": "aident à se défendre",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 170,
+        "text": "L'eau est aussi indispensable",
+        "size": 14,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "L'eau et les habitudes",
+     "md": "On boit de l'**eau** tous les jours : le corps en a besoin pour fonctionner.\n\n- On mange à heures régulières, sans trop de sucreries.\n- On **varie** les repas et on mange des fruits.\n- On ne gaspille pas la nourriture."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : classer des aliments",
+     "statement": "Dans quelle famille range-t-on le manioc, le poisson et la papaye ?",
+     "steps": [
+      {
+       "md": "Le manioc donne de la force : aliment **énergétique**."
+      },
+      {
+       "md": "Le poisson aide à grandir : aliment **bâtisseur**."
+      },
+      {
+       "md": "La papaye est un fruit : aliment **protecteur**."
+      }
+     ],
+     "answer": "**Manioc : énergétique ; poisson : bâtisseur ; papaye : protecteur.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : composer un repas",
+     "statement": "Ibrahim veut un repas équilibré avec du riz. Que peut-il ajouter ?",
+     "steps": [
+      {
+       "md": "Le riz est déjà énergétique."
+      },
+      {
+       "md": "Il ajoute des haricots ou du poisson (bâtisseur)."
+      },
+      {
+       "md": "Il ajoute des légumes et un fruit (protecteurs), et il boit de l'eau."
+      }
+     ],
+     "answer": "**Riz + poisson (ou haricots) + légumes + fruit + eau.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire qu'on peut manger seulement des aliments sucrés ou seulement du manioc.\n- Oublier les fruits et les légumes parce qu'ils ne « remplissent » pas le ventre.\n- Croire qu'une famille d'aliments est plus importante que les autres : il faut les trois."
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-nutrition-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-nutrition-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-nutrition-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-nutrition-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-nutrition-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-nutrition-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "cm1-sciences-nutrition-01",
+   "chapter": "cm1-sciences-nutrition",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cm1-sciences-nutrition-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quel aliment est surtout énergétique ?",
+   "choices": [
+    "la papaye",
+    "le manioc",
+    "l'orange",
+    "le citron"
+   ],
+   "answer": 1,
+   "explanation": "Le manioc est riche en aliments qui donnent de l'énergie.",
+   "method": "Chercher l'aliment qui donne de la force.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-nutrition-02",
+   "chapter": "cm1-sciences-nutrition",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cm1-sciences-nutrition-fiche",
+   "points": 2,
+   "kind": "matching",
+   "prompt": "Associe chaque aliment à sa famille.",
+   "pairs": [
+    [
+     "riz",
+     "énergétique"
+    ],
+    [
+     "poisson",
+     "bâtisseur"
+    ],
+    [
+     "mangue",
+     "protecteur"
+    ],
+    [
+     "huile de palme",
+     "énergétique (gras)"
+    ]
+   ],
+   "explanation": "Riz et huile : énergie ; poisson : bâtisseur ; mangue : fruit protecteur.",
+   "review": true,
+   "reviewNote": "L'huile de palme est classée ici parmi les aliments énergétiques ; vérifier la classification du manuel.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-nutrition-03",
+   "chapter": "cm1-sciences-nutrition",
+   "tier": "application",
+   "difficulty": 2,
+   "lesson": "cm1-sciences-nutrition-fiche",
+   "points": 1,
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : il faut boire de l'eau tous les jours.",
+   "answer": true,
+   "explanation": "Le corps a besoin d'eau pour fonctionner.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-nutrition-04",
+   "chapter": "cm1-sciences-nutrition",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cm1-sciences-nutrition-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quel repas est le plus équilibré ?",
+   "choices": [
+    "beignets et bonbons",
+    "riz, poisson, légumes et un fruit",
+    "seulement du pain",
+    "seulement du manioc"
+   ],
+   "answer": 1,
+   "explanation": "Il contient de l'énergie, un aliment bâtisseur et des protecteurs.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-nutrition-05",
+   "chapter": "cm1-sciences-nutrition",
+   "tier": "approfondissement",
+   "difficulty": 3,
+   "lesson": "cm1-sciences-nutrition-fiche",
+   "points": 3,
+   "kind": "open",
+   "prompt": "Compose un repas équilibré avec des aliments que l'on trouve près de chez toi, et justifie ton choix.",
+   "model": "Plantain, poisson, feuilles de légumes et une papaye. Le plantain donne de l'énergie, le poisson fait grandir, les légumes et la papaye protègent.",
+   "rubric": [
+    "Au moins un aliment de chaque famille.",
+    "Aliments réalistes.",
+    "Une justification du rôle de chaque aliment."
+   ],
+   "explanation": "Un repas équilibré contient les trois familles.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-nutrition-06",
+   "chapter": "cm1-sciences-nutrition",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "cm1-sciences-nutrition-fiche",
+   "kind": "problem",
+   "prompt": "Nkeng prépare le repas de midi.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quel aliment ajouter à un plat de manioc pour avoir un aliment bâtisseur ?",
+     "choices": [
+      "du poisson",
+      "de l'eau seule",
+      "du sucre",
+      "de l'huile seule"
+     ],
+     "answer": 0,
+     "explanation": "Le poisson est un aliment bâtisseur.",
+     "id": "cm1-sciences-nutrition-06-a",
+     "points": 1
+    },
+    {
+     "kind": "truefalse",
+     "prompt": "Les fruits et les légumes aident le corps à se défendre.",
+     "answer": true,
+     "explanation": "Ce sont des aliments protecteurs.",
+     "id": "cm1-sciences-nutrition-06-b",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Pourquoi faut-il varier les repas ?",
+     "choices": [
+      "Pour manger plus vite.",
+      "Pour que la cuisine coûte cher.",
+      "Parce qu'un seul aliment est interdit.",
+      "Chaque aliment apporte des choses différentes."
+     ],
+     "answer": 3,
+     "explanation": "Aucun aliment ne contient tout ce qu'il faut au corps.",
+     "id": "cm1-sciences-nutrition-06-c",
+     "points": 1
+    }
+   ],
+   "explanation": "Voir la correction de chaque question.",
+   "method": "Penser aux trois familles.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-nutrition-q1",
+   "chapter": "cm1-sciences-nutrition",
+   "tier": "autoeval",
+   "lesson": "cm1-sciences-nutrition-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "À quoi servent les aliments bâtisseurs ?",
+   "choices": [
+    "à produire seulement de la chaleur",
+    "à remplacer l'eau",
+    "à faire grandir et réparer le corps",
+    "à nettoyer les dents"
+   ],
+   "answer": 2,
+   "explanation": "Ils servent à la croissance."
+  },
+  {
+   "id": "cm1-sciences-nutrition-q2",
+   "chapter": "cm1-sciences-nutrition",
+   "tier": "autoeval",
+   "lesson": "cm1-sciences-nutrition-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quelle famille contient les fruits et légumes ?",
+   "choices": [
+    "les énergétiques",
+    "les bâtisseurs",
+    "les protecteurs",
+    "les liquides"
+   ],
+   "answer": 2,
+   "explanation": "Fruits et légumes protègent."
+  },
+  {
+   "id": "cm1-sciences-nutrition-q3",
+   "chapter": "cm1-sciences-nutrition",
+   "tier": "autoeval",
+   "lesson": "cm1-sciences-nutrition-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Qu'est-ce qu'une alimentation équilibrée ?",
+   "choices": [
+    "manger seulement ce qu'on aime",
+    "une alimentation variée et suffisante",
+    "manger très peu",
+    "manger toujours la même chose"
+   ],
+   "answer": 1,
+   "explanation": "Il faut des aliments de plusieurs familles."
+  },
+  {
+   "id": "cm1-sciences-nutrition-q4",
+   "chapter": "cm1-sciences-nutrition",
+   "tier": "autoeval",
+   "lesson": "cm1-sciences-nutrition-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quel aliment est un fruit ?",
+   "choices": [
+    "l'ananas",
+    "le poisson",
+    "le riz",
+    "l'huile"
+   ],
+   "answer": 0,
+   "explanation": "L'ananas est un fruit."
+  },
+  {
+   "id": "cm1-sciences-nutrition-q5",
+   "chapter": "cm1-sciences-nutrition",
+   "tier": "autoeval",
+   "lesson": "cm1-sciences-nutrition-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Que doit-on boire chaque jour ?",
+   "choices": [
+    "seulement des boissons sucrées",
+    "rien",
+    "de l'eau sale",
+    "de l'eau propre"
+   ],
+   "answer": 3,
+   "explanation": "L'eau est indispensable."
+  }
+ ]
+}

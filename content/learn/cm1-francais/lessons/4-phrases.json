@@ -1,0 +1,454 @@
+{
+ "chapter": "cm1-francais-grammaire",
+ "lessons": [
+  {
+   "id": "cm1-francais-phrases",
+   "title": "Phrase simple, phrase complexe, propositions",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CM1 — Grammaire : phrase simple et complexe, propositions (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Repérer les verbes conjugués d'une phrase.",
+    "Distinguer une phrase simple d'une phrase complexe.",
+    "Reconnaître des propositions juxtaposées, coordonnées et une subordonnée."
+   ],
+   "prerequisites": [
+    "cm1-francais-nature"
+   ],
+   "exercises": [
+    "cm1-francais-phrases-01",
+    "cm1-francais-phrases-02",
+    "cm1-francais-phrases-03",
+    "cm1-francais-phrases-04",
+    "cm1-francais-phrases-05",
+    "cm1-francais-phrases-06"
+   ],
+   "selfCheck": [
+    "cm1-francais-phrases-q1",
+    "cm1-francais-phrases-q2",
+    "cm1-francais-phrases-q3",
+    "cm1-francais-phrases-q4",
+    "cm1-francais-phrases-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier la présentation de la subordination (sans entrer dans la nature des subordonnées) pour le CM1."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Phrase simple, phrase complexe",
+     "md": "Une **phrase simple** contient **un seul verbe conjugué**. Une **phrase complexe** en contient **plusieurs**.\n\n- *Ngono ouvre la porte.* (1 verbe : phrase simple)\n- *Ngono ouvre la porte et le chat sort.* (2 verbes : phrase complexe)"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La proposition",
+     "md": "Dans une phrase complexe, chaque verbe conjugué est le noyau d'une **proposition**. Il y a donc autant de propositions que de verbes conjugués."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Comment relier les propositions ?",
+     "md": "- **Juxtaposées** : séparées par une virgule ou un point-virgule. *Il pleut, nous rentrons.*\n- **Coordonnées** : reliées par une conjonction de coordination (mais, ou, et, donc, or, ni, car). *Il pleut **donc** nous rentrons.*\n- **Principale + subordonnée** : la subordonnée dépend de la principale, par un mot comme *que, quand, parce que, si, qui*. *Nous rentrons **parce qu'il pleut**.*"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 35,
+        "w": 230,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 35,
+        "w": 250,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "red",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 135,
+        "y": 61,
+        "text": "Nous rentrons",
+        "size": 18,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 415,
+        "y": 61,
+        "text": "parce qu'il pleut",
+        "size": 18,
+        "color": "ink",
+        "bold": false,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 135,
+        "y": 100,
+        "text": "proposition principale",
+        "size": 14,
+        "color": "blue",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 415,
+        "y": 100,
+        "text": "proposition subordonnée",
+        "size": 14,
+        "color": "red",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 61,
+        "text": "←",
+        "size": 18,
+        "color": "grey",
+        "bold": false,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Une phrase complexe avec une principale et une subordonnée.",
+     "alt": "La phrase « Nous rentrons parce qu'il pleut » en deux cases : la proposition principale « Nous rentrons » et la proposition subordonnée « parce qu'il pleut »."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : compter les propositions",
+     "statement": "Combien de propositions : « Fotso range ses outils, il ferme l'atelier et il rentre. » ?",
+     "steps": [
+      {
+       "md": "Je cherche les verbes conjugués : range, ferme, rentre."
+      },
+      {
+       "md": "Trois verbes conjugués : trois propositions."
+      },
+      {
+       "md": "Les deux premières sont juxtaposées (virgule), les deux dernières coordonnées (et)."
+      }
+     ],
+     "answer": "**Phrase complexe à 3 propositions.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : trouver la subordonnée",
+     "statement": "Souligne la subordonnée : « Ngono sourit quand elle voit la mer. »",
+     "steps": [
+      {
+       "md": "Les verbes conjugués : sourit, voit : deux propositions."
+      },
+      {
+       "md": "« quand elle voit la mer » commence par « quand » et dépend de « Ngono sourit »."
+      }
+     ],
+     "answer": "**Subordonnée : « quand elle voit la mer ». Principale : « Ngono sourit ».**"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode",
+     "md": "1. Je souligne **tous les verbes conjugués**.\n2. Je compte : 1 verbe = phrase simple ; plusieurs = phrase complexe.\n3. Je regarde ce qui relie les verbes : virgule, conjonction de coordination, ou mot subordonnant (que, quand, parce que, si…)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Compter un verbe à l'infinitif : *Il veut partir* a un seul verbe conjugué (veut).\n- Compter le verbe auxiliaire et le participe passé pour deux verbes : *Elle a mangé* = 1 verbe conjugué."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-phrases-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-phrases-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-phrases-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-phrases-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-phrases-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-francais-phrases-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "cm1-francais-phrases-01",
+   "chapter": "cm1-francais-grammaire",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "mcq",
+   "prompt": "Quelle phrase est simple ?",
+   "choices": [
+    "Le chat dort et le chien joue.",
+    "Le chat dort sur la natte.",
+    "Il pleut, nous restons.",
+    "Je sors quand il ne pleut plus."
+   ],
+   "answer": 1,
+   "explanation": "Un seul verbe conjugué : dort.",
+   "points": 1,
+   "lesson": "cm1-francais-phrases",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-phrases-02",
+   "chapter": "cm1-francais-grammaire",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : « Amina chante et Paul danse » est une phrase complexe.",
+   "answer": true,
+   "explanation": "Vrai. Deux verbes conjugués : chante, danse (propositions coordonnées par « et »).",
+   "points": 1,
+   "lesson": "cm1-francais-phrases",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-phrases-03",
+   "chapter": "cm1-francais-grammaire",
+   "tier": "application",
+   "difficulty": 1,
+   "kind": "matching",
+   "prompt": "Associe chaque phrase à ce qui relie ses propositions.",
+   "pairs": [
+    [
+     "Il neige, nous restons.",
+     "virgule"
+    ],
+    [
+     "Il neige donc nous restons.",
+     "conjonction de coordination"
+    ],
+    [
+     "Nous restons parce qu'il neige.",
+     "subordination"
+    ],
+    [
+     "Nous restons.",
+     "une seule proposition"
+    ]
+   ],
+   "explanation": "Virgule → juxtaposées ; donc → coordonnées ; parce que → subordonnée ; un seul verbe → phrase simple.",
+   "points": 2,
+   "lesson": "cm1-francais-phrases",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-phrases-04",
+   "chapter": "cm1-francais-grammaire",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "mcq",
+   "prompt": "Combien de propositions : « Ibrahim arrive, salue tout le monde et s'assied. » ?",
+   "choices": [
+    "3",
+    "1",
+    "2",
+    "4"
+   ],
+   "answer": 0,
+   "explanation": "Trois verbes conjugués : arrive, salue, s'assied.",
+   "points": 1,
+   "lesson": "cm1-francais-phrases",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-phrases-05",
+   "chapter": "cm1-francais-grammaire",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "kind": "open",
+   "prompt": "Réunis ces deux phrases en une seule phrase complexe avec « parce que » : « Paul reste à la maison. Il est malade. »",
+   "model": "Paul reste à la maison parce qu'il est malade.",
+   "rubric": [
+    "La conjonction « parce que » est utilisée.",
+    "Les deux verbes sont conjugués.",
+    "La phrase est correcte et complète."
+   ],
+   "explanation": "On relie la cause à la principale : Paul reste à la maison parce qu'il est malade.",
+   "points": 2,
+   "lesson": "cm1-francais-phrases",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-phrases-06",
+   "chapter": "cm1-francais-grammaire",
+   "tier": "examen",
+   "difficulty": 2,
+   "kind": "problem",
+   "prompt": "Lis la phrase : « Quand le soleil se lève, les coqs chantent et le village s'éveille. »",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Combien de verbes conjugués y a-t-il ?",
+     "answer": 3,
+     "tolerance": 0,
+     "explanation": "Les verbes conjugués sont : se lève, chantent, s'éveille. Il y en a 3, donc 3 propositions.",
+     "id": "cm1-francais-phrases-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quelle proposition est la subordonnée ?",
+     "choices": [
+      "les coqs chantent",
+      "le village s'éveille",
+      "et le village",
+      "Quand le soleil se lève"
+     ],
+     "answer": 3,
+     "explanation": "Elle commence par « quand » et dépend du reste de la phrase.",
+     "id": "cm1-francais-phrases-06-b",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quel mot coordonne « les coqs chantent » et « le village s'éveille » ?",
+     "choices": [
+      "quand",
+      "se",
+      "et",
+      "le"
+     ],
+     "answer": 2,
+     "explanation": "« et » est la conjonction de coordination qui relie les deux propositions.",
+     "id": "cm1-francais-phrases-06-c",
+     "points": 1
+    }
+   ],
+   "lesson": "cm1-francais-phrases",
+   "source": "Exercice original (CM1)"
+  },
+  {
+   "id": "cm1-francais-phrases-q1",
+   "chapter": "cm1-francais-grammaire",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Une phrase complexe contient…",
+   "choices": [
+    "un seul verbe",
+    "plusieurs verbes conjugués",
+    "jamais de verbe",
+    "seulement des noms"
+   ],
+   "answer": 1,
+   "explanation": "Plusieurs verbes conjugués = plusieurs propositions.",
+   "lesson": "cm1-francais-phrases"
+  },
+  {
+   "id": "cm1-francais-phrases-q2",
+   "chapter": "cm1-francais-grammaire",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quelle phrase contient une subordonnée ?",
+   "choices": [
+    "Je viens si tu m'appelles.",
+    "Je viens.",
+    "Je viens, tu restes.",
+    "Je viens et tu pars."
+   ],
+   "answer": 0,
+   "explanation": "« si tu m'appelles » dépend de « Je viens ».",
+   "lesson": "cm1-francais-phrases"
+  },
+  {
+   "id": "cm1-francais-phrases-q3",
+   "chapter": "cm1-francais-grammaire",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quelles propositions sont juxtaposées ?",
+   "choices": [
+    "Il fait chaud donc nous buvons.",
+    "Nous buvons parce qu'il fait chaud.",
+    "Il fait chaud et nous buvons.",
+    "Il fait chaud, nous buvons."
+   ],
+   "answer": 3,
+   "explanation": "Seule la virgule les sépare, sans mot de liaison.",
+   "lesson": "cm1-francais-phrases"
+  },
+  {
+   "id": "cm1-francais-phrases-q4",
+   "chapter": "cm1-francais-grammaire",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Combien de verbes conjugués : « Il veut partir demain » ?",
+   "choices": [
+    "2",
+    "3",
+    "1",
+    "0"
+   ],
+   "answer": 2,
+   "explanation": "« veut » est conjugué ; « partir » est à l'infinitif.",
+   "lesson": "cm1-francais-phrases"
+  },
+  {
+   "id": "cm1-francais-phrases-q5",
+   "chapter": "cm1-francais-grammaire",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quelle conjonction coordonne ?",
+   "choices": [
+    "quand",
+    "mais",
+    "parce que",
+    "si"
+   ],
+   "answer": 1,
+   "explanation": "« mais » est une conjonction de coordination ; les autres introduisent une subordonnée.",
+   "lesson": "cm1-francais-phrases"
+  }
+ ]
+}

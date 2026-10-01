@@ -1,0 +1,591 @@
+{
+ "chapter": "cm1-sciences-plantes",
+ "lessons": [
+  {
+   "id": "cm1-sciences-plantes-fiche",
+   "title": "De la fleur à la graine",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CM1 — Sciences et technologie (MINEDUB), reconstitué — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Nommer les parties d'une fleur.",
+    "Expliquer le chemin de la fleur au fruit puis à la graine.",
+    "Dire ce qu'il faut à une graine pour germer."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cm1-sciences-plantes-01",
+    "cm1-sciences-plantes-02",
+    "cm1-sciences-plantes-03",
+    "cm1-sciences-plantes-04",
+    "cm1-sciences-plantes-05",
+    "cm1-sciences-plantes-06"
+   ],
+   "selfCheck": [
+    "cm1-sciences-plantes-q1",
+    "cm1-sciences-plantes-q2",
+    "cm1-sciences-plantes-q3",
+    "cm1-sciences-plantes-q4",
+    "cm1-sciences-plantes-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier le vocabulaire (pistil, étamine, pollinisation) et le niveau attendu en CM1.",
+    "Reproduction asexuée (bouture, tubercule : manioc, igname) non traitée : à ajouter si le programme l'exige."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La reproduction des plantes",
+     "md": "Beaucoup de plantes se reproduisent grâce à leurs **fleurs**. La fleur donne un **fruit**, et le fruit contient des **graines**. Chaque graine peut donner une nouvelle plante."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les parties d'une fleur.",
+     "alt": "Une fleur rose avec un centre jaune, une tige et une feuille. Des traits désignent le pétale, le pistil, l'étamine, la tige et la feuille.",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 265,
+      "items": [
+       {
+        "t": "rect",
+        "x": 204,
+        "y": 125,
+        "w": 12,
+        "h": 130,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 0,
+        "fill": "green"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         216,
+         210,
+         290,
+         185,
+         300,
+         200,
+         260,
+         225
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "circle",
+        "cx": 244.0,
+        "cy": 95.0,
+        "r": 22,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "pink"
+       },
+       {
+        "t": "circle",
+        "cx": 227.0,
+        "cy": 124.44486372867091,
+        "r": 22,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "pink"
+       },
+       {
+        "t": "circle",
+        "cx": 193.0,
+        "cy": 124.44486372867092,
+        "r": 22,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "pink"
+       },
+       {
+        "t": "circle",
+        "cx": 176.0,
+        "cy": 95.0,
+        "r": 22,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "pink"
+       },
+       {
+        "t": "circle",
+        "cx": 193.0,
+        "cy": 65.5551362713291,
+        "r": 22,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "pink"
+       },
+       {
+        "t": "circle",
+        "cx": 227.0,
+        "cy": 65.55513627132909,
+        "r": 22,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "pink"
+       },
+       {
+        "t": "circle",
+        "cx": 210,
+        "cy": 95,
+        "r": 16,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "rect",
+        "x": 206,
+        "y": 60,
+        "w": 8,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 0,
+        "fill": "orange"
+       },
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 70,
+        "x2": 176,
+        "y2": 86,
+        "color": "grey",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 68,
+        "text": "Pétale",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 40,
+        "x2": 216,
+        "y2": 66,
+        "color": "grey",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "text",
+        "x": 322,
+        "y": 38,
+        "text": "Pistil",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 115,
+        "x2": 226,
+        "y2": 100,
+        "color": "grey",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "text",
+        "x": 332,
+        "y": 118,
+        "text": "Étamine",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 100,
+        "y1": 205,
+        "x2": 204,
+        "y2": 205,
+        "color": "grey",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "text",
+        "x": 66,
+        "y": 208,
+        "text": "Tige",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 340,
+        "y1": 165,
+        "x2": 296,
+        "y2": 196,
+        "color": "grey",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "text",
+        "x": 370,
+        "y": 160,
+        "text": "Feuille",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Dans la fleur",
+     "md": "- Les **pétales** attirent les insectes par leur couleur.\n- Les **étamines** fabriquent le **pollen** (partie mâle).\n- Le **pistil** contient les petits grains qui deviendront des graines (partie femelle)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "De la fleur au fruit",
+     "md": "1. Un insecte, le vent ou l'eau transporte le **pollen** vers le pistil : c'est la **pollinisation**.\n2. Le pistil grossit et devient le **fruit**.\n3. Les **graines** sont dans le fruit (la mangue, l'orange, le haricot…).\n\nLes graines voyagent : le vent, les animaux ou l'eau les transportent."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "La germination",
+     "md": "Une graine germe quand elle a de l'**eau**, de l'**air** et de la **chaleur**. Une petite racine sort d'abord, puis une tige avec des feuilles.\n\nPour grandir ensuite, la jeune plante a besoin de **lumière**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : suivre une mangue",
+     "statement": "Comment une fleur de manguier devient-elle une mangue ?",
+     "steps": [
+      {
+       "md": "Des abeilles viennent sur la fleur et déposent du **pollen** sur le pistil."
+      },
+      {
+       "md": "Le pistil grossit lentement et devient la **mangue**."
+      },
+      {
+       "md": "Dans la mangue se trouve un gros **noyau** : c'est la graine."
+      }
+     ],
+     "answer": "**Fleur → pollinisation → fruit → graine.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : faire germer des haricots",
+     "statement": "Tchoua met des haricots sur du coton mouillé, dans un coin tiède de la classe. Que va-t-il voir ?",
+     "steps": [
+      {
+       "md": "Les graines ont de l'**eau**, de l'**air** et de la **chaleur**."
+      },
+      {
+       "md": "Après quelques jours, une **racine** sort, puis une tige."
+      },
+      {
+       "md": "S'il oublie de mouiller le coton, rien ne se passe : l'eau manque."
+      }
+     ],
+     "answer": "**Les haricots germent : racine, puis tige et feuilles.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que la graine a besoin de lumière pour germer : il lui faut surtout eau, air et chaleur.\n- Croire que le fruit est toujours sucré : le haricot, le piment et la tomate sont aussi des fruits.\n- Confondre **pollen** (grains fins des étamines) et **graine** (dans le fruit)."
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-plantes-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-plantes-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-plantes-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-plantes-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-plantes-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm1-sciences-plantes-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le manioc peut aussi se multiplier avec une **bouture** : un morceau de tige planté en terre donne une nouvelle plante."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "cm1-sciences-plantes-01",
+   "chapter": "cm1-sciences-plantes",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cm1-sciences-plantes-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quelle partie de la fleur fabrique le pollen ?",
+   "choices": [
+    "le pétale",
+    "la tige",
+    "la racine",
+    "l'étamine"
+   ],
+   "answer": 3,
+   "explanation": "Les étamines sont la partie mâle : elles fabriquent le pollen.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-plantes-02",
+   "chapter": "cm1-sciences-plantes",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cm1-sciences-plantes-fiche",
+   "points": 1,
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : les graines se trouvent dans le fruit.",
+   "answer": true,
+   "explanation": "Le fruit protège les graines.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-plantes-03",
+   "chapter": "cm1-sciences-plantes",
+   "tier": "application",
+   "difficulty": 2,
+   "lesson": "cm1-sciences-plantes-fiche",
+   "points": 2,
+   "kind": "matching",
+   "prompt": "Associe chaque partie de la fleur à son rôle.",
+   "pairs": [
+    [
+     "Pétales",
+     "attirent les insectes"
+    ],
+    [
+     "Étamines",
+     "fabriquent le pollen"
+    ],
+    [
+     "Pistil",
+     "devient le fruit"
+    ],
+    [
+     "Tige",
+     "porte la fleur"
+    ]
+   ],
+   "explanation": "Chaque partie a un rôle : pétales colorés, étamines pour le pollen, pistil qui grossit en fruit, tige qui porte la fleur.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-plantes-04",
+   "chapter": "cm1-sciences-plantes",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cm1-sciences-plantes-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Que faut-il à une graine pour germer ?",
+   "choices": [
+    "seulement du soleil fort",
+    "de la lumière et du sable sec",
+    "de l'eau, de l'air et de la chaleur",
+    "du vent et du froid"
+   ],
+   "answer": 2,
+   "explanation": "Eau, air et chaleur sont les conditions de la germination.",
+   "mistakes": [
+    "Croire que la lumière est nécessaire pour germer."
+   ],
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-plantes-05",
+   "chapter": "cm1-sciences-plantes",
+   "tier": "approfondissement",
+   "difficulty": 3,
+   "lesson": "cm1-sciences-plantes-fiche",
+   "points": 1,
+   "kind": "numeric",
+   "prompt": "Un fruit contient 4 graines. Combien de graines y a-t-il dans 3 fruits de ce type ?",
+   "answer": 12,
+   "tolerance": 0,
+   "explanation": "3 × 4 = 12 graines.",
+   "method": "Multiplier le nombre de fruits par le nombre de graines.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-plantes-06",
+   "chapter": "cm1-sciences-plantes",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "cm1-sciences-plantes-fiche",
+   "kind": "problem",
+   "prompt": "Étude d'un haricot.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Comment s'appelle le transport du pollen vers le pistil ?",
+     "choices": [
+      "la germination",
+      "la pollinisation",
+      "la digestion",
+      "la condensation"
+     ],
+     "answer": 1,
+     "explanation": "La pollinisation est le transport du pollen vers le pistil.",
+     "id": "cm1-sciences-plantes-06-a",
+     "points": 1
+    },
+    {
+     "kind": "truefalse",
+     "prompt": "Une graine qui reste sèche, sans eau, germe bien.",
+     "answer": false,
+     "explanation": "Sans eau, la graine ne germe pas.",
+     "id": "cm1-sciences-plantes-06-b",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Qui peut transporter les graines loin de la plante ?",
+     "choices": [
+      "seulement la pluie du soir",
+      "le vent, les animaux ou l'eau",
+      "seulement la nuit",
+      "rien ni personne"
+     ],
+     "answer": 1,
+     "explanation": "Les graines voyagent par le vent, les animaux ou l'eau.",
+     "id": "cm1-sciences-plantes-06-c",
+     "points": 1
+    }
+   ],
+   "explanation": "Voir la correction de chaque question.",
+   "method": "Relire les étapes de la fleur à la graine.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "cm1-sciences-plantes-q1",
+   "chapter": "cm1-sciences-plantes",
+   "tier": "autoeval",
+   "lesson": "cm1-sciences-plantes-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Que devient le pistil après la pollinisation ?",
+   "choices": [
+    "un fruit",
+    "une racine",
+    "un pétale",
+    "une feuille"
+   ],
+   "answer": 0,
+   "explanation": "Le pistil grossit et devient le fruit."
+  },
+  {
+   "id": "cm1-sciences-plantes-q2",
+   "chapter": "cm1-sciences-plantes",
+   "tier": "autoeval",
+   "lesson": "cm1-sciences-plantes-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quelle partie sort en premier d'une graine qui germe ?",
+   "choices": [
+    "la fleur",
+    "le fruit",
+    "la feuille adulte",
+    "la racine"
+   ],
+   "answer": 3,
+   "explanation": "La racine sort d'abord."
+  },
+  {
+   "id": "cm1-sciences-plantes-q3",
+   "chapter": "cm1-sciences-plantes",
+   "tier": "autoeval",
+   "lesson": "cm1-sciences-plantes-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quel rôle ont les pétales colorés ?",
+   "choices": [
+    "fabriquer l'eau",
+    "protéger du froid",
+    "attirer les insectes",
+    "transporter le sang"
+   ],
+   "answer": 2,
+   "explanation": "Les couleurs attirent les insectes qui transportent le pollen."
+  },
+  {
+   "id": "cm1-sciences-plantes-q4",
+   "chapter": "cm1-sciences-plantes",
+   "tier": "autoeval",
+   "lesson": "cm1-sciences-plantes-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Quel animal transporte souvent le pollen ?",
+   "choices": [
+    "le poisson",
+    "le serpent",
+    "l'abeille",
+    "le lézard"
+   ],
+   "answer": 2,
+   "explanation": "Les abeilles et autres insectes transportent le pollen."
+  },
+  {
+   "id": "cm1-sciences-plantes-q5",
+   "chapter": "cm1-sciences-plantes",
+   "tier": "autoeval",
+   "lesson": "cm1-sciences-plantes-fiche",
+   "points": 1,
+   "kind": "mcq",
+   "prompt": "Où se trouve la graine d'une orange ?",
+   "choices": [
+    "dans la tige",
+    "dans le fruit",
+    "dans la racine",
+    "dans la feuille"
+   ],
+   "answer": 1,
+   "explanation": "Les pépins sont dans la pulpe du fruit."
+  }
+ ]
+}
