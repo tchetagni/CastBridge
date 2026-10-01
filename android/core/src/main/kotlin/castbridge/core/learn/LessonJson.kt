@@ -69,6 +69,7 @@ object LessonJson {
             author = m.s("author"), source = m.s("source"), lang = m.s("lang"), readAloud = m.b("readAloud"),
             exercises = m.strs("exercises"), selfCheck = m.strs("selfCheck"), reviewNotes = m.strs("reviewNotes"),
             state = castbridge.core.content.ContentState.of(m.s("state")),
+            skill = m.s("skill"), level = m.s("level"), prereqSkills = m.strs("prereq"), lot = m.s("lot"), media = m.strs("media"),
         )
     }
 
@@ -99,7 +100,7 @@ object LessonJson {
         return Exercise(
             id = id, chapter = m.s("chapter") ?: defChapter ?: if (isPart) "" else throw ParseError("$w : \"chapter\" manquant"),
             kind = kind, prompt = m.req("prompt", w), points = m.d("points") ?: 1.0,
-            tier = m.s("tier")?.let { ExerciseTier.of(it) ?: throw ParseError("$w : \"tier\" inconnu « $it »") } ?: ExerciseTier.APPLICATION,
+            tier = ExerciseTier.ofOrHardest(m.s("tier")) ?: ExerciseTier.APPLICATION,
             difficulty = m.i("difficulty") ?: 1, tex = m.s("tex"),
             figure = m["figure"]?.let { figure(it.obj("$w figure"), "$w figure") },
             choices = m.strs("choices"),
@@ -116,6 +117,8 @@ object LessonJson {
             explanation = m.s("explanation") ?: "", steps = m.strs("steps"), method = m.s("method"), mistakes = m.strs("mistakes"),
             review = m.b("review") ?: false, reviewNote = m.s("reviewNote"), source = m.s("source"), lesson = m.s("lesson"),
             state = castbridge.core.content.ContentState.of(m.s("state")),
+            skill = m.s("skill"), level = m.s("level"), lot = m.s("lot"), media = m.strs("media"),
+            calibration = (m["calibration"] as? Map<*, *>)?.mapNotNull { (k, v) -> (k as? String)?.let { kk -> (v as? Number)?.toDouble()?.let { kk to it } } }?.toMap() ?: emptyMap(),
         )
     }
 

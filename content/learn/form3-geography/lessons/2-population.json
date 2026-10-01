@@ -1,0 +1,337 @@
+{
+ "chapter": "form3-geography-population",
+ "lessons": [
+  {
+   "id": "form3-geography-population-density",
+   "title": "Population distribution, density and growth",
+   "minutes": 20,
+   "programRef": "Cameroon anglophone secondary Geography syllabus, Form 3 — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define population density and calculate it",
+    "Explain the factors affecting population distribution",
+    "Calculate natural increase from birth and death rates",
+    "Explain causes and effects of migration"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form3-geography-population-e01",
+    "form3-geography-population-e02",
+    "form3-geography-population-e03",
+    "form3-geography-population-e04",
+    "form3-geography-population-e05",
+    "form3-geography-population-e06"
+   ],
+   "selfCheck": [
+    "form3-geography-population-density-q1",
+    "form3-geography-population-density-q2",
+    "form3-geography-population-density-q3",
+    "form3-geography-population-density-q4",
+    "form3-geography-population-density-q5"
+   ],
+   "reviewNotes": [
+    "Teacher to verify that the syllabus uses the same definitions; no real population statistics are given on purpose (use the latest census figures when the teacher adds them).",
+    "Draft for teacher review: this course follows the Cameroon anglophone secondary Geography syllabus as generally understood; scope and level per Form, places, figures and examples must be checked against the official syllabus and a current atlas before release."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "**Population distribution** shows how people are spread over an area. Some places are crowded and others almost empty. **Population density** is the average number of people living in one square kilometre: density = **population ÷ area (km²)**. Density is only an average: a region may have a crowded town and empty countryside."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 260,
+      "bars": [
+       {
+        "label": "Zone A",
+        "value": 30,
+        "color": "green"
+       },
+       {
+        "label": "Zone B",
+        "value": 60,
+        "color": "orange"
+       },
+       {
+        "label": "Zone C",
+        "value": 90,
+        "color": "red"
+       }
+      ],
+      "unit": "people/km² (invented figures)"
+     },
+     "caption": "Illustrative population densities",
+     "alt": "Bar chart showing three zones with densities of 30, 60 and 90 people per square kilometre; invented figures."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Factors of distribution",
+     "md": "People crowd where there is: **fertile soil and enough rain** for farming, **gentle relief**, **water supply**, **jobs** (ports, industries, plantations, administration), good **transport**, and **safety**. Few people live in thick forest, steep mountains, deserts or swamps. In Cameroon the cities of Douala and Yaoundé, the Western Highlands and parts of the north are densely settled; large areas of the forest in the south-east have few people."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Birth rate, death rate and natural increase",
+     "md": "**Birth rate** = births per 1000 people per year; **death rate** = deaths per 1000 per year. **Natural increase** = birth rate − death rate (per 1000). To change it to a percentage, divide by 10. Example: birth rate 38, death rate 12: natural increase = 26 per 1000 = 2.6 % a year."
+    },
+    {
+     "type": "text",
+     "md": "**Migration** is the movement of people from one place to another to live. **Rural–urban migration** means moving from villages to towns. **Push factors** make people leave (poor land, few jobs and services); **pull factors** attract them (jobs, schools, hospitals, a better life). Effects: towns grow fast and become crowded, villages lose young workers, and money is sent home by migrants."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Be careful",
+     "md": "- Density uses area, not the number of towns; always check the unit: people per km².\n- A high birth rate does not by itself give a fast rise: look at the death rate too.\n- Do not call all migration bad: it can bring skills and income as well as problems."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: density",
+     "statement": "A division has 240 000 people and an area of 800 km². Find its population density.",
+     "steps": [
+      "Density = population ÷ area.",
+      "240 000 ÷ 800 = 300.",
+      "Unit: people per km²."
+     ],
+     "answer": "300 people per km²."
+    },
+    {
+     "type": "example",
+     "title": "Example 2: natural increase",
+     "statement": "A country has a birth rate of 35 per 1000 and a death rate of 9 per 1000. Find the natural increase as a percentage.",
+     "steps": [
+      "Natural increase = 35 − 9 = 26 per 1000.",
+      "26 ÷ 10 = 2.6 per cent.",
+      "The population is growing by 2.6 % a year from natural causes."
+     ],
+     "answer": "2.6 % a year."
+    }
+   ],
+   "chapter": "form3-geography-population"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form3-geography-population-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-geography-population-density",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Population density is measured in",
+   "choices": [
+    "km per person",
+    "persons per tonne",
+    "people per km²",
+    "degrees"
+   ],
+   "answer": 2,
+   "explanation": "Density = population ÷ area.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-geography-population"
+  },
+  {
+   "id": "form3-geography-population-e02",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "form3-geography-population-density",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Rural–urban migration means moving from villages to towns.",
+   "answer": true,
+   "explanation": "That is the definition.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-geography-population"
+  },
+  {
+   "id": "form3-geography-population-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-geography-population-density",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A town has 150 000 people living in an area of 50 km². What is its density in people per km²?",
+   "answer": 3000,
+   "tolerance": 0,
+   "unit": "people per km²",
+   "explanation": "150 000 ÷ 50 = 3000.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-geography-population"
+  },
+  {
+   "id": "form3-geography-population-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form3-geography-population-density",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Birth rate 32 per 1000 and death rate 14 per 1000. What is the natural increase per cent per year?",
+   "answer": 1.8,
+   "tolerance": 0.01,
+   "unit": "%",
+   "explanation": "32 − 14 = 18 per 1000 = 1.8 %.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-geography-population"
+  },
+  {
+   "id": "form3-geography-population-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form3-geography-population-density",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain three push or pull factors that lead young people from villages to the cities.",
+   "model": "Push: shortage of jobs and poor services in the village, tired farmland. Pull: jobs and business in the city, schools, hospitals and electricity, hope of a better income.",
+   "rubric": "1 mark per well-explained factor.",
+   "explanation": "Push: shortage of jobs and poor services in the village, tired farmland. Pull: jobs and business in the city, schools, hospitals and electricity, hope of a better income.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-geography-population"
+  },
+  {
+   "id": "form3-geography-population-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form3-geography-population-density",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Division X has 450 000 people in 900 km². Division Y has 120 000 people in 1200 km².",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the density of X (people per km²).",
+     "answer": 500,
+     "tolerance": 0,
+     "explanation": "450 000 ÷ 900 = 500.",
+     "unit": "people/km²",
+     "id": "form3-geography-population-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the density of Y (people per km²).",
+     "answer": 100,
+     "tolerance": 0,
+     "explanation": "120 000 ÷ 1200 = 100.",
+     "unit": "people/km²",
+     "id": "form3-geography-population-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which division is more densely populated?",
+     "choices": [
+      "Y",
+      "X",
+      "They are equal",
+      "Cannot be known"
+     ],
+     "answer": 1,
+     "explanation": "500 is greater than 100.",
+     "id": "form3-geography-population-e06-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Suggest two reasons why X might be more crowded than Y.",
+     "model": "It may have a big town or port, fertile land, plantations or industries, good roads and services, while Y may be forest, mountain or swamp.",
+     "rubric": "1 mark per reason.",
+     "explanation": "It may have a big town or port, fertile land, plantations or industries, good roads and services, while Y may be forest, mountain or swamp.",
+     "id": "form3-geography-population-e06-d"
+    }
+   ],
+   "chapter": "form3-geography-population"
+  },
+  {
+   "id": "form3-geography-population-density-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-geography-population-density",
+   "prompt": "Birth rate is the number of births",
+   "choices": [
+    "per km²",
+    "per 1000 people per year",
+    "per household",
+    "in total"
+   ],
+   "answer": 1,
+   "explanation": "It is a rate per 1000.",
+   "chapter": "form3-geography-population"
+  },
+  {
+   "id": "form3-geography-population-density-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-geography-population-density",
+   "prompt": "The formula for population density is",
+   "choices": [
+    "population ÷ area",
+    "area ÷ population",
+    "population × area",
+    "births − deaths"
+   ],
+   "answer": 0,
+   "explanation": "People per square kilometre.",
+   "chapter": "form3-geography-population"
+  },
+  {
+   "id": "form3-geography-population-density-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-geography-population-density",
+   "prompt": "A pull factor for a town is",
+   "choices": [
+    "job opportunities",
+    "drought",
+    "lack of schools",
+    "poor roads"
+   ],
+   "answer": 0,
+   "explanation": "Jobs attract migrants.",
+   "chapter": "form3-geography-population"
+  },
+  {
+   "id": "form3-geography-population-density-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-geography-population-density",
+   "prompt": "Natural increase equals (Form 3 population)",
+   "choices": [
+    "death rate − birth rate",
+    "birth rate + death rate",
+    "birth rate − death rate",
+    "density × area"
+   ],
+   "answer": 2,
+   "explanation": "It is the difference between births and deaths.",
+   "chapter": "form3-geography-population"
+  },
+  {
+   "id": "form3-geography-population-density-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-geography-population-density",
+   "prompt": "Which area usually has the lowest density?",
+   "choices": [
+    "a fertile plain with jobs",
+    "thick forest or desert",
+    "a port city",
+    "a market town"
+   ],
+   "answer": 1,
+   "explanation": "Hard environments attract fewer people.",
+   "chapter": "form3-geography-population"
+  }
+ ]
+}

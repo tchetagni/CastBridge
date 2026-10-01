@@ -65,6 +65,7 @@ fun TvScreen(fixedBase: String? = null, extra: @Composable (TvClient) -> Unit = 
     var badPin by remember { mutableStateOf<String?>(null) }
     var fileSize by remember { mutableStateOf(0L) }
     var progressive by rememberSaveable { mutableStateOf(false) }
+    var fastTransfer by remember { mutableStateOf(FastTransfer.enabled(ctx)) }
     val notice by UploadService.notice.collectAsState()
     val speed by UploadService.speed.collectAsState()
 
@@ -192,6 +193,13 @@ fun TvScreen(fixedBase: String? = null, extra: @Composable (TvClient) -> Unit = 
                 Row(Modifier.padding(horizontal = 16.dp), verticalAlignment = Alignment.CenterVertically) {
                     Checkbox(progressive, onCheckedChange = { progressive = it }, enabled = !busy)
                     Text("Lire pendant l'envoi (le fichier n'a pas besoin de tenir en entier sur la TV)",
+                        style = MaterialTheme.typography.bodySmall)
+                }
+            }
+            item {
+                Row(Modifier.padding(horizontal = 16.dp), verticalAlignment = Alignment.CenterVertically) {
+                    Checkbox(fastTransfer, onCheckedChange = { fastTransfer = it; FastTransfer.set(ctx, it) }, enabled = !busy)
+                    Text("Transfert rapide (plusieurs voies) : plusieurs connexions en même temps, si la TV le permet. Désactivé pendant « Lire pendant l'envoi ».",
                         style = MaterialTheme.typography.bodySmall)
                 }
             }

@@ -1,0 +1,342 @@
+{
+ "chapter": "form4-geography-data",
+ "lessons": [
+  {
+   "id": "form4-geography-graphs-data",
+   "title": "Using graphs, climate data and photographs",
+   "minutes": 20,
+   "programRef": "Cameroon anglophone secondary Geography syllabus, Form 4 — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Draw and read bar graphs and line graphs",
+    "Calculate angles for a pie chart",
+    "Read a climate graph",
+    "Interpret a photograph or sketch in geography"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form4-geography-data-e01",
+    "form4-geography-data-e02",
+    "form4-geography-data-e03",
+    "form4-geography-data-e04",
+    "form4-geography-data-e05",
+    "form4-geography-data-e06"
+   ],
+   "selfCheck": [
+    "form4-geography-graphs-data-q1",
+    "form4-geography-graphs-data-q2",
+    "form4-geography-graphs-data-q3",
+    "form4-geography-graphs-data-q4",
+    "form4-geography-graphs-data-q5"
+   ],
+   "reviewNotes": [
+    "Teacher to verify that the syllabus uses these graph types and conventions; all numbers in the graphs and exercises are invented.",
+    "Draft for teacher review: this course follows the Cameroon anglophone secondary Geography syllabus as generally understood; scope and level per Form, places, figures and examples must be checked against the official syllabus and a current atlas before release."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Geographers use **graphs** to show data clearly. A **bar graph** compares quantities in separate groups (for example crop production by region). A **line graph** shows change over time (for example monthly temperature). A **pie chart** shows how a total is divided: the whole circle is 360°. Every graph needs a **title**, **labels** on the axes, a suitable **scale** and **units**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 260,
+      "bars": [
+       {
+        "label": "Jan",
+        "value": 40,
+        "color": "blue"
+       },
+       {
+        "label": "Feb",
+        "value": 60,
+        "color": "blue"
+       },
+       {
+        "label": "Mar",
+        "value": 120,
+        "color": "blue"
+       },
+       {
+        "label": "Apr",
+        "value": 160,
+        "color": "blue"
+       },
+       {
+        "label": "May",
+        "value": 200,
+        "color": "blue"
+       }
+      ],
+      "unit": "Rain (mm), invented figures"
+     },
+     "caption": "Example of a rainfall bar graph",
+     "alt": "Bar graph showing rainfall rising from January to May; invented figures."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Pie chart angles",
+     "md": "Angle for a category = (value ÷ total) × 360°. Example: if cassava is 40 tonnes of a total of 200 tonnes, its angle is 40 ÷ 200 × 360 = **72°**. Check that all angles add up to 360° before drawing with a protractor."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Climate graph",
+     "md": "A climate graph shows **temperature** as a line and **rainfall** as bars for each month. Read: (1) the highest and lowest monthly temperature and the **annual range** (highest − lowest); (2) the rainy months and the dry months; (3) the annual rainfall (add the monthly bars); then describe the climate. A hot place with rain all year is equatorial; hot with a long dry season is tropical."
+    },
+    {
+     "type": "text",
+     "md": "**Photographs and sketches.** To interpret a photograph, say what is in the **foreground** (near), **middle ground** and **background** (far), name features (relief, vegetation, buildings, rivers, farming), say what they show about the area (climate, human activities) and add a short sketch with labels. Always describe what you can see before explaining why."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Do not start a vertical scale in the middle: begin at zero for bar graphs.\n- Pie chart angles must add up to 360°.\n- Describing a photograph is not the same as inventing facts: write only what the picture shows."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: pie chart angle",
+     "statement": "In a village, 30 of the 120 families grow coffee. What angle represents coffee on a pie chart?",
+     "steps": [
+      "Fraction = 30 ÷ 120 = 1/4.",
+      "1/4 of 360° = 90°.",
+      "Check: the other categories must give 270°."
+     ],
+     "answer": "90°."
+    },
+    {
+     "type": "example",
+     "title": "Example 2: annual range",
+     "statement": "A town has a hottest month of 29 °C and a coolest month of 24 °C. What is the annual temperature range?",
+     "steps": [
+      "Range = highest − lowest.",
+      "29 − 24 = 5.",
+      "A small range is typical near the Equator."
+     ],
+     "answer": "5 °C."
+    }
+   ],
+   "chapter": "form4-geography-data"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form4-geography-data-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form4-geography-graphs-data",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A pie chart is a circle of how many degrees?",
+   "choices": [
+    "100°",
+    "90°",
+    "360°",
+    "180°"
+   ],
+   "answer": 2,
+   "explanation": "All the categories together form 360°.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-geography-data"
+  },
+  {
+   "id": "form4-geography-data-e02",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "form4-geography-graphs-data",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A line graph is best for showing change over time.",
+   "answer": true,
+   "explanation": "It follows values month by month or year by year.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-geography-data"
+  },
+  {
+   "id": "form4-geography-data-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-geography-graphs-data",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In a survey of 80 pupils, 20 walk to school. What angle represents walkers in a pie chart? (degrees)",
+   "answer": 90,
+   "tolerance": 0,
+   "unit": "°",
+   "explanation": "20 ÷ 80 × 360 = 90.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-geography-data"
+  },
+  {
+   "id": "form4-geography-data-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form4-geography-graphs-data",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The total annual rainfall is the sum of the monthly values. Rain in four months is 150, 200, 250 and 100 mm; the other eight months have 0 mm. What is the total, in mm?",
+   "answer": 700,
+   "tolerance": 0,
+   "unit": "mm",
+   "explanation": "150 + 200 + 250 + 100 = 700.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-geography-data"
+  },
+  {
+   "id": "form4-geography-data-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form4-geography-graphs-data",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain how you would describe the climate of a place from a climate graph.",
+   "model": "State the temperature pattern (highest, lowest and range), then the rainfall pattern (wet months, dry months and annual total) and conclude which climate type it matches, with reasons.",
+   "rubric": "1 mark temperature; 1 mark rainfall; 1 mark conclusion.",
+   "explanation": "State the temperature pattern (highest, lowest and range), then the rainfall pattern (wet months, dry months and annual total) and conclude which climate type it matches, with reasons.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-geography-data"
+  },
+  {
+   "id": "form4-geography-data-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form4-geography-graphs-data",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Farmers in a division produce 100 tonnes of crops: cassava 50, maize 30 and groundnuts 20.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Angle for cassava in a pie chart (degrees).",
+     "answer": 180,
+     "tolerance": 0,
+     "explanation": "50 ÷ 100 × 360 = 180.",
+     "unit": "°",
+     "id": "form4-geography-data-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Angle for maize (degrees).",
+     "answer": 108,
+     "tolerance": 0,
+     "explanation": "30 ÷ 100 × 360 = 108.",
+     "unit": "°",
+     "id": "form4-geography-data-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Angle for groundnuts (degrees).",
+     "answer": 72,
+     "tolerance": 0,
+     "explanation": "20 ÷ 100 × 360 = 72.",
+     "unit": "°",
+     "id": "form4-geography-data-e06-c"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "The three angles together equal 360°.",
+     "answer": true,
+     "explanation": "180 + 108 + 72 = 360.",
+     "id": "form4-geography-data-e06-d"
+    }
+   ],
+   "chapter": "form4-geography-data"
+  },
+  {
+   "id": "form4-geography-graphs-data-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-geography-graphs-data",
+   "prompt": "A bar graph needs",
+   "choices": [
+    "no units",
+    "a pie slice",
+    "labelled axes and a title",
+    "no title"
+   ],
+   "answer": 2,
+   "explanation": "Clear labels make it readable.",
+   "chapter": "form4-geography-data"
+  },
+  {
+   "id": "form4-geography-graphs-data-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-geography-graphs-data",
+   "prompt": "The annual temperature range is the",
+   "choices": [
+    "difference between the highest and lowest monthly means",
+    "average rainfall",
+    "sum of all months",
+    "rainy season length"
+   ],
+   "answer": 0,
+   "explanation": "Highest minus lowest.",
+   "chapter": "form4-geography-data"
+  },
+  {
+   "id": "form4-geography-graphs-data-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-geography-graphs-data",
+   "prompt": "Foreground in a photograph means",
+   "choices": [
+    "the caption",
+    "the part nearest the viewer",
+    "the sky only",
+    "the horizon"
+   ],
+   "answer": 1,
+   "explanation": "Foreground is in front.",
+   "chapter": "form4-geography-data"
+  },
+  {
+   "id": "form4-geography-graphs-data-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-geography-graphs-data",
+   "prompt": "In a climate graph, rainfall is usually shown by",
+   "choices": [
+    "a pie",
+    "bars",
+    "a map",
+    "a table only"
+   ],
+   "answer": 1,
+   "explanation": "Bars show the amount per month.",
+   "chapter": "form4-geography-data"
+  },
+  {
+   "id": "form4-geography-graphs-data-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-geography-graphs-data",
+   "prompt": "The angle for a category that is half the total is",
+   "choices": [
+    "90°",
+    "180°",
+    "50°",
+    "360°"
+   ],
+   "answer": 1,
+   "explanation": "Half of 360° is 180°.",
+   "chapter": "form4-geography-data"
+  }
+ ]
+}

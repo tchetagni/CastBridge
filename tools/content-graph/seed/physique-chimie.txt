@@ -1,0 +1,62 @@
+# slug | level | years | fr | en | prereqs | minutes | tags
+observe-matter|N0|y0-2|Observer et décrire la matière autour de soi|Observe and describe matter around us||20|eveil
+solid-liquid-gas|N0|y2|Solide, liquide, gaz|Solid, liquid, gas|observe-matter|20|matiere
+light-shadow-n0|N0|y3|Lumière et ombre, chaud et froid|Light, shadow, hot and cold|observe-matter|20|eveil
+measure-simple|N0|y3|Mesurer longueur, masse, durée|Measure length, mass and time|observe-matter|25|mesures
+states-change|N1|y5|Changements d'état de l'eau|Changes of state of water|solid-liquid-gas|25|matiere
+mixtures|N1|y5|Mélanges et séparation (tri, filtration)|Mixtures and separation|solid-liquid-gas|25|matiere,chimie
+electricity-simple|N1|y5|Circuit électrique simple, piles|A simple circuit and cells|light-shadow-n0|30|electricite
+cep-science-phys|N1|y6|Éveil scientifique du CEP : matière, énergie, lumière|CEP science: matter, energy and light|states-change,electricity-simple,mixtures|35|examen
+energy-intro|N1|y7|Énergie : formes et conversions|Energy: forms and conversions|cep-science-phys|30|energie
+mass-volume|N1|y7|Masse, volume et masse volumique|Mass, volume and density|measure-simple,cep-science-phys|35|matiere,mesures
+atoms-molecules|N1|y8|Atomes, molécules et corps purs|Atoms, molecules and pure substances|mixtures,mass-volume|35|chimie
+reaction-intro|N1|y8|Transformation chimique et réaction|Chemical change and reaction|atoms-molecules|35|chimie
+forces|N1|y8|Forces, poids et équilibre|Forces, weight and equilibrium|mass-volume,energy-intro|35|mecanique
+electric-circuit|N1|y8|Circuit : intensité, tension, résistance|Circuits: current, voltage, resistance|electricity-simple,eq-link|35|electricite
+eq-link|N1|y8|Outil : équations et proportions pour la physique|Tool: equations and proportions in physics|math.eq-1,math.ratio-prop|30|outil
+ohm-law|N1|y9|Loi d'Ohm et associations de résistances|Ohm's law and resistor networks|electric-circuit|35|electricite
+solutions-acid|N1|y9|Solutions, acides et bases, pH|Solutions, acids and bases, pH|reaction-intro|40|chimie
+combustion|N1|y9|Combustions et air|Combustion and air|reaction-intro|35|chimie
+light-optics|N1|y9|Réflexion, réfraction, lentilles|Reflection, refraction, lenses|forces|40|optique
+bepc-pct|N1|y10|Physique-chimie-technologie du BEPC|BEPC physics-chemistry-technology|ohm-law,solutions-acid,light-optics|45|examen
+mol-mole|N1|y10|Quantité de matière : la mole|Amount of substance: the mole|atoms-molecules,math.powers|40|chimie
+kinematics|N1|y11|Mouvement : vitesse et accélération|Motion: speed and acceleration|forces,math.func-lin|40|mecanique
+newton-laws|N1|y11|Lois de Newton|Newton's laws|kinematics|45|mecanique
+work-power|N1|y11|Travail, énergie, puissance|Work, energy and power|newton-laws,energy-intro|45|energie
+organic-1|N1|y11|Chimie organique : alcanes, alcools|Organic chemistry: alkanes and alcohols|mol-mole,combustion|45|chimie
+em-fields|N1|y12|Champs électrique et magnétique|Electric and magnetic fields|ohm-law,newton-laws|50|electricite
+oscillations|N1|y12|Oscillations et ondes mécaniques|Oscillations and mechanical waves|work-power,math.seq|50|ondes
+kinetics-eq|N1|y12|Cinétique et équilibres chimiques|Kinetics and chemical equilibrium|organic-1,mol-mole|50|chimie
+acids-titration|N1|y12|Dosages acido-basiques|Acid-base titrations|solutions-acid,mol-mole|50|chimie
+rc-rl|N1|y13|Circuits RC, RL, RLC|RC, RL and RLC circuits|em-fields,math.diff-eq|55|electricite
+mech-adv|N1|y13|Mécanique avancée : chute, projectile, satellites|Advanced mechanics: projectiles and satellites|newton-laws,math.deriv-app|55|mecanique
+nuclear|N1|y13|Physique nucléaire et radioactivité|Nuclear physics and radioactivity|work-power,math.log-exp|50|nucleaire
+chem-adv|N1|y13|Chimie du Bac : électrochimie, esters, piles|Baccalauréat chemistry: electrochemistry and esters|kinetics-eq,acids-titration|55|chimie
+bac-pc|N1|y13|Épreuves de physique-chimie du Bac C/D|Baccalauréat physics-chemistry papers|rc-rl,mech-adv,nuclear,chem-adv|60|examen
+thermo-1|N1|y14|Thermodynamique de première année|First-year thermodynamics|chem-adv,math.analysis-1|55|superieur
+mech-uni|N1|y14|Mécanique du point et du solide|Mechanics of point masses and rigid bodies|mech-adv|55|superieur,mecanique
+em-uni|N1|y15|Électromagnétisme universitaire|University electromagnetism|rc-rl,math.linalg-1|60|superieur,electricite
+# N2
+n2-estimation|N2|y8|Estimation, ordres de grandeur et modèles simples|Estimation, orders of magnitude and simple models|forces,reaction-intro|40|concours,modelisation
+n2-circuits-puzzle|N2|y9|Problèmes de circuits à plusieurs mailles|Multi-loop circuit problems|ohm-law,n2-estimation|45|concours,electricite
+n2-chem-quant|N2|y10|Stœchiométrie et bilans de matière avancés|Advanced stoichiometry and mass balance|mol-mole,n2-estimation|50|concours,chimie
+n2-mechanics-problems|N2|y11|Problèmes de mécanique multi-étapes|Multi-step mechanics problems|newton-laws,n2-circuits-puzzle|55|concours,mecanique
+n2-energy-conservation|N2|y11|Conservation de l'énergie et de la quantité de mouvement|Conservation of energy and momentum|work-power,n2-mechanics-problems|55|concours,energie
+n2-waves-optics|N2|y12|Ondes et optique : interférences, diffraction|Waves and optics: interference and diffraction|oscillations,n2-energy-conservation|55|concours,ondes
+n2-chem-equilibria|N2|y12|Équilibres en solution : problèmes de concours|Solution equilibria: contest problems|kinetics-eq,acids-titration,n2-chem-quant|60|concours,chimie
+n2-bac-excellence|N2|y13|Physique du Bac au niveau des meilleurs candidats|Baccalauréat physics at top-candidate level|bac-pc,n2-waves-optics|65|concours
+n2-experimental-design|N2|y13|Plan d'expérience, incertitudes et exploitation de mesures|Experimental design and uncertainty|n2-bac-excellence,n2-chem-equilibria|60|concours,experimental
+n2-uni-physics|N2|y14|Physique générale niveau classes préparatoires|General physics at preparatory-class level|mech-uni,thermo-1,n2-bac-excellence|65|superieur
+# N3
+n3-lagrangian-intro|N3|y13|Mécanique analytique élémentaire : énergie, moments, oscillateurs|Elementary analytical mechanics|n2-energy-conservation,math.n2-analysis-bac|70|olympiade,mecanique
+n3-thermo-stat|N3|y14|Thermodynamique et physique statistique qualitative|Thermodynamics and qualitative statistical physics|n2-bac-excellence,thermo-1|70|olympiade
+n3-em-waves|N3|y15|Ondes électromagnétiques et relativité restreinte|Electromagnetic waves and special relativity|n2-waves-optics,em-uni,math.n2-linalg|70|olympiade
+n3-organic-mech|N3|y14|Chimie organique : mécanismes réactionnels|Organic chemistry: reaction mechanisms|n2-chem-equilibria,organic-1|70|olympiade,chimie
+n3-experimental|N3|y14|Épreuve expérimentale d'olympiade : conception et analyse|Olympiad experimental problem|n2-experimental-design|75|olympiade,experimental
+n3-quantum-intro|N3|y15|Physique quantique : postulats et systèmes simples|Quantum physics: postulates and simple systems|n3-em-waves,math.n3-linalg-abstract|70|international
+# N4
+n4-olympiad-theory|N4|y15|Problèmes théoriques d'olympiade internationale de physique|International Physics Olympiad theory problems|n3-lagrangian-intro,n3-thermo-stat,n3-em-waves|90|olympiade-int
+n4-olympiad-chem|N4|y15|Problèmes d'olympiade internationale de chimie|International Chemistry Olympiad problems|n3-organic-mech,n3-thermo-stat|90|olympiade-int,chimie
+n4-olympiad-exp|N4|y15|Épreuves expérimentales d'olympiade internationale|International olympiad experimental tasks|n3-experimental,n3-lagrangian-intro|90|olympiade-int,experimental
+n4-uni-quantum|N4|y15|Mécanique quantique et physique statistique de premier cycle d'élite|Elite first-cycle quantum and statistical physics|n3-quantum-intro,math.n4-analysis-uni|90|universite-int
+n4-research-physics|N4|y15|Modéliser et analyser un phénomène physique ouvert|Modelling and analysing an open physical problem|n4-olympiad-theory,math.n4-research-problem|90|universite-int,modelisation

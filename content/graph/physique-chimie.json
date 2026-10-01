@@ -1,0 +1,1715 @@
+{
+ "format": 1,
+ "domain": "physique-chimie",
+ "prefix": "phc",
+ "title": {
+  "fr": "Physique-chimie",
+  "en": "Physics and chemistry"
+ },
+ "skills": [
+  {
+   "id": "phc.observe-matter",
+   "title": {
+    "fr": "Observer et décrire la matière autour de soi",
+    "en": "Observe and describe matter around us"
+   },
+   "level": "N0",
+   "prereq": [],
+   "years": [
+    0,
+    1,
+    2
+   ],
+   "classes": [
+    "mat",
+    "nursery",
+    "sil",
+    "class1",
+    "cp",
+    "class2"
+   ],
+   "exams": [],
+   "lots": [
+    "mat",
+    "nursery"
+   ],
+   "minutes": 20,
+   "tags": [
+    "eveil",
+    "probe"
+   ]
+  },
+  {
+   "id": "phc.solid-liquid-gas",
+   "title": {
+    "fr": "Solide, liquide, gaz",
+    "en": "Solid, liquid, gas"
+   },
+   "level": "N0",
+   "prereq": [
+    "phc.observe-matter"
+   ],
+   "years": [
+    2
+   ],
+   "classes": [
+    "cp",
+    "class2"
+   ],
+   "exams": [],
+   "lots": [
+    "cp",
+    "class2"
+   ],
+   "minutes": 20,
+   "tags": [
+    "matiere",
+    "probe"
+   ]
+  },
+  {
+   "id": "phc.light-shadow-n0",
+   "title": {
+    "fr": "Lumière et ombre, chaud et froid",
+    "en": "Light, shadow, hot and cold"
+   },
+   "level": "N0",
+   "prereq": [
+    "phc.observe-matter"
+   ],
+   "years": [
+    3
+   ],
+   "classes": [
+    "ce1",
+    "class3"
+   ],
+   "exams": [],
+   "lots": [
+    "ce1",
+    "class3"
+   ],
+   "minutes": 20,
+   "tags": [
+    "eveil",
+    "probe"
+   ]
+  },
+  {
+   "id": "phc.measure-simple",
+   "title": {
+    "fr": "Mesurer longueur, masse, durée",
+    "en": "Measure length, mass and time"
+   },
+   "level": "N0",
+   "prereq": [
+    "phc.observe-matter"
+   ],
+   "years": [
+    3
+   ],
+   "classes": [
+    "ce1",
+    "class3"
+   ],
+   "exams": [],
+   "lots": [
+    "ce1",
+    "class3"
+   ],
+   "minutes": 25,
+   "tags": [
+    "mesures"
+   ]
+  },
+  {
+   "id": "phc.states-change",
+   "title": {
+    "fr": "Changements d'état de l'eau",
+    "en": "Changes of state of water"
+   },
+   "level": "N1",
+   "prereq": [
+    "phc.solid-liquid-gas"
+   ],
+   "years": [
+    5
+   ],
+   "classes": [
+    "cm1",
+    "class5"
+   ],
+   "exams": [],
+   "lots": [
+    "cm1",
+    "class5"
+   ],
+   "minutes": 25,
+   "tags": [
+    "matiere"
+   ]
+  },
+  {
+   "id": "phc.mixtures",
+   "title": {
+    "fr": "Mélanges et séparation (tri, filtration)",
+    "en": "Mixtures and separation"
+   },
+   "level": "N1",
+   "prereq": [
+    "phc.solid-liquid-gas"
+   ],
+   "years": [
+    5
+   ],
+   "classes": [
+    "cm1",
+    "class5"
+   ],
+   "exams": [],
+   "lots": [
+    "cm1",
+    "class5"
+   ],
+   "minutes": 25,
+   "tags": [
+    "matiere",
+    "chimie"
+   ]
+  },
+  {
+   "id": "phc.electricity-simple",
+   "title": {
+    "fr": "Circuit électrique simple, piles",
+    "en": "A simple circuit and cells"
+   },
+   "level": "N1",
+   "prereq": [
+    "phc.light-shadow-n0"
+   ],
+   "years": [
+    5
+   ],
+   "classes": [
+    "cm1",
+    "class5"
+   ],
+   "exams": [],
+   "lots": [
+    "cm1",
+    "class5"
+   ],
+   "minutes": 30,
+   "tags": [
+    "electricite",
+    "probe"
+   ]
+  },
+  {
+   "id": "phc.cep-science-phys",
+   "title": {
+    "fr": "Éveil scientifique du CEP : matière, énergie, lumière",
+    "en": "CEP science: matter, energy and light"
+   },
+   "level": "N1",
+   "prereq": [
+    "phc.states-change",
+    "phc.electricity-simple",
+    "phc.mixtures"
+   ],
+   "years": [
+    6
+   ],
+   "classes": [
+    "cm2",
+    "class6"
+   ],
+   "exams": [
+    "cep",
+    "fslc"
+   ],
+   "lots": [
+    "cm2",
+    "class6"
+   ],
+   "minutes": 35,
+   "tags": [
+    "examen",
+    "probe"
+   ]
+  },
+  {
+   "id": "phc.energy-intro",
+   "title": {
+    "fr": "Énergie : formes et conversions",
+    "en": "Energy: forms and conversions"
+   },
+   "level": "N1",
+   "prereq": [
+    "phc.cep-science-phys"
+   ],
+   "years": [
+    7
+   ],
+   "classes": [
+    "6e",
+    "form1"
+   ],
+   "exams": [],
+   "lots": [
+    "6e",
+    "form1"
+   ],
+   "minutes": 30,
+   "tags": [
+    "energie",
+    "probe"
+   ]
+  },
+  {
+   "id": "phc.mass-volume",
+   "title": {
+    "fr": "Masse, volume et masse volumique",
+    "en": "Mass, volume and density"
+   },
+   "level": "N1",
+   "prereq": [
+    "phc.measure-simple",
+    "phc.cep-science-phys"
+   ],
+   "years": [
+    7
+   ],
+   "classes": [
+    "6e",
+    "form1"
+   ],
+   "exams": [],
+   "lots": [
+    "6e",
+    "form1"
+   ],
+   "minutes": 35,
+   "tags": [
+    "matiere",
+    "mesures"
+   ]
+  },
+  {
+   "id": "phc.atoms-molecules",
+   "title": {
+    "fr": "Atomes, molécules et corps purs",
+    "en": "Atoms, molecules and pure substances"
+   },
+   "level": "N1",
+   "prereq": [
+    "phc.mixtures",
+    "phc.mass-volume"
+   ],
+   "years": [
+    8
+   ],
+   "classes": [
+    "5e",
+    "form2"
+   ],
+   "exams": [],
+   "lots": [
+    "5e",
+    "form2"
+   ],
+   "minutes": 35,
+   "tags": [
+    "chimie"
+   ]
+  },
+  {
+   "id": "phc.reaction-intro",
+   "title": {
+    "fr": "Transformation chimique et réaction",
+    "en": "Chemical change and reaction"
+   },
+   "level": "N1",
+   "prereq": [
+    "phc.atoms-molecules"
+   ],
+   "years": [
+    8
+   ],
+   "classes": [
+    "5e",
+    "form2"
+   ],
+   "exams": [],
+   "lots": [
+    "5e",
+    "form2"
+   ],
+   "minutes": 35,
+   "tags": [
+    "chimie"
+   ]
+  },
+  {
+   "id": "phc.forces",
+   "title": {
+    "fr": "Forces, poids et équilibre",
+    "en": "Forces, weight and equilibrium"
+   },
+   "level": "N1",
+   "prereq": [
+    "phc.mass-volume",
+    "phc.energy-intro"
+   ],
+   "years": [
+    8
+   ],
+   "classes": [
+    "5e",
+    "form2"
+   ],
+   "exams": [],
+   "lots": [
+    "5e",
+    "form2"
+   ],
+   "minutes": 35,
+   "tags": [
+    "mecanique",
+    "probe"
+   ]
+  },
+  {
+   "id": "phc.electric-circuit",
+   "title": {
+    "fr": "Circuit : intensité, tension, résistance",
+    "en": "Circuits: current, voltage, resistance"
+   },
+   "level": "N1",
+   "prereq": [
+    "phc.electricity-simple",
+    "phc.eq-link"
+   ],
+   "years": [
+    8
+   ],
+   "classes": [
+    "5e",
+    "form2"
+   ],
+   "exams": [],
+   "lots": [
+    "5e",
+    "form2"
+   ],
+   "minutes": 35,
+   "tags": [
+    "electricite"
+   ]
+  },
+  {
+   "id": "phc.eq-link",
+   "title": {
+    "fr": "Outil : équations et proportions pour la physique",
+    "en": "Tool: equations and proportions in physics"
+   },
+   "level": "N1",
+   "prereq": [
+    "math.eq-1",
+    "math.ratio-prop"
+   ],
+   "years": [
+    8
+   ],
+   "classes": [
+    "5e",
+    "form2"
+   ],
+   "exams": [],
+   "lots": [
+    "5e",
+    "form2"
+   ],
+   "minutes": 30,
+   "tags": [
+    "outil"
+   ]
+  },
+  {
+   "id": "phc.ohm-law",
+   "title": {
+    "fr": "Loi d'Ohm et associations de résistances",
+    "en": "Ohm's law and resistor networks"
+   },
+   "level": "N1",
+   "prereq": [
+    "phc.electric-circuit"
+   ],
+   "years": [
+    9
+   ],
+   "classes": [
+    "4e",
+    "form3"
+   ],
+   "exams": [],
+   "lots": [
+    "4e",
+    "form3"
+   ],
+   "minutes": 35,
+   "tags": [
+    "electricite",
+    "probe"
+   ]
+  },
+  {
+   "id": "phc.solutions-acid",
+   "title": {
+    "fr": "Solutions, acides et bases, pH",
+    "en": "Solutions, acids and bases, pH"
+   },
+   "level": "N1",
+   "prereq": [
+    "phc.reaction-intro"
+   ],
+   "years": [
+    9
+   ],
+   "classes": [
+    "4e",
+    "form3"
+   ],
+   "exams": [],
+   "lots": [
+    "4e",
+    "form3"
+   ],
+   "minutes": 40,
+   "tags": [
+    "chimie"
+   ]
+  },
+  {
+   "id": "phc.combustion",
+   "title": {
+    "fr": "Combustions et air",
+    "en": "Combustion and air"
+   },
+   "level": "N1",
+   "prereq": [
+    "phc.reaction-intro"
+   ],
+   "years": [
+    9
+   ],
+   "classes": [
+    "4e",
+    "form3"
+   ],
+   "exams": [],
+   "lots": [
+    "4e",
+    "form3"
+   ],
+   "minutes": 35,
+   "tags": [
+    "chimie"
+   ]
+  },
+  {
+   "id": "phc.light-optics",
+   "title": {
+    "fr": "Réflexion, réfraction, lentilles",
+    "en": "Reflection, refraction, lenses"
+   },
+   "level": "N1",
+   "prereq": [
+    "phc.forces"
+   ],
+   "years": [
+    9
+   ],
+   "classes": [
+    "4e",
+    "form3"
+   ],
+   "exams": [],
+   "lots": [
+    "4e",
+    "form3"
+   ],
+   "minutes": 40,
+   "tags": [
+    "optique"
+   ]
+  },
+  {
+   "id": "phc.bepc-pct",
+   "title": {
+    "fr": "Physique-chimie-technologie du BEPC",
+    "en": "BEPC physics-chemistry-technology"
+   },
+   "level": "N1",
+   "prereq": [
+    "phc.ohm-law",
+    "phc.solutions-acid",
+    "phc.light-optics"
+   ],
+   "years": [
+    10
+   ],
+   "classes": [
+    "3e",
+    "form4"
+   ],
+   "exams": [
+    "bepc"
+   ],
+   "lots": [
+    "3e",
+    "form4"
+   ],
+   "minutes": 45,
+   "tags": [
+    "examen"
+   ]
+  },
+  {
+   "id": "phc.mol-mole",
+   "title": {
+    "fr": "Quantité de matière : la mole",
+    "en": "Amount of substance: the mole"
+   },
+   "level": "N1",
+   "prereq": [
+    "phc.atoms-molecules",
+    "math.powers"
+   ],
+   "years": [
+    10
+   ],
+   "classes": [
+    "3e",
+    "form4"
+   ],
+   "exams": [
+    "bepc"
+   ],
+   "lots": [
+    "3e",
+    "form4"
+   ],
+   "minutes": 40,
+   "tags": [
+    "chimie",
+    "probe"
+   ]
+  },
+  {
+   "id": "phc.kinematics",
+   "title": {
+    "fr": "Mouvement : vitesse et accélération",
+    "en": "Motion: speed and acceleration"
+   },
+   "level": "N1",
+   "prereq": [
+    "phc.forces",
+    "math.func-lin"
+   ],
+   "years": [
+    11
+   ],
+   "classes": [
+    "2nde",
+    "form5"
+   ],
+   "exams": [
+    "gce-ol"
+   ],
+   "lots": [
+    "2nde",
+    "form5"
+   ],
+   "minutes": 40,
+   "tags": [
+    "mecanique"
+   ]
+  },
+  {
+   "id": "phc.newton-laws",
+   "title": {
+    "fr": "Lois de Newton",
+    "en": "Newton's laws"
+   },
+   "level": "N1",
+   "prereq": [
+    "phc.kinematics"
+   ],
+   "years": [
+    11
+   ],
+   "classes": [
+    "2nde",
+    "form5"
+   ],
+   "exams": [
+    "gce-ol"
+   ],
+   "lots": [
+    "2nde",
+    "form5"
+   ],
+   "minutes": 45,
+   "tags": [
+    "mecanique",
+    "probe"
+   ]
+  },
+  {
+   "id": "phc.work-power",
+   "title": {
+    "fr": "Travail, énergie, puissance",
+    "en": "Work, energy and power"
+   },
+   "level": "N1",
+   "prereq": [
+    "phc.newton-laws",
+    "phc.energy-intro"
+   ],
+   "years": [
+    11
+   ],
+   "classes": [
+    "2nde",
+    "form5"
+   ],
+   "exams": [
+    "gce-ol"
+   ],
+   "lots": [
+    "2nde",
+    "form5"
+   ],
+   "minutes": 45,
+   "tags": [
+    "energie"
+   ]
+  },
+  {
+   "id": "phc.organic-1",
+   "title": {
+    "fr": "Chimie organique : alcanes, alcools",
+    "en": "Organic chemistry: alkanes and alcohols"
+   },
+   "level": "N1",
+   "prereq": [
+    "phc.mol-mole",
+    "phc.combustion"
+   ],
+   "years": [
+    11
+   ],
+   "classes": [
+    "2nde",
+    "form5"
+   ],
+   "exams": [
+    "gce-ol"
+   ],
+   "lots": [
+    "2nde",
+    "form5"
+   ],
+   "minutes": 45,
+   "tags": [
+    "chimie"
+   ]
+  },
+  {
+   "id": "phc.em-fields",
+   "title": {
+    "fr": "Champs électrique et magnétique",
+    "en": "Electric and magnetic fields"
+   },
+   "level": "N1",
+   "prereq": [
+    "phc.ohm-law",
+    "phc.newton-laws"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "exams": [
+    "probatoire"
+   ],
+   "lots": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "minutes": 50,
+   "tags": [
+    "electricite"
+   ]
+  },
+  {
+   "id": "phc.oscillations",
+   "title": {
+    "fr": "Oscillations et ondes mécaniques",
+    "en": "Oscillations and mechanical waves"
+   },
+   "level": "N1",
+   "prereq": [
+    "phc.work-power",
+    "math.seq"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "exams": [
+    "probatoire"
+   ],
+   "lots": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "minutes": 50,
+   "tags": [
+    "ondes"
+   ]
+  },
+  {
+   "id": "phc.kinetics-eq",
+   "title": {
+    "fr": "Cinétique et équilibres chimiques",
+    "en": "Kinetics and chemical equilibrium"
+   },
+   "level": "N1",
+   "prereq": [
+    "phc.organic-1",
+    "phc.mol-mole"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "exams": [
+    "probatoire"
+   ],
+   "lots": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "minutes": 50,
+   "tags": [
+    "chimie"
+   ]
+  },
+  {
+   "id": "phc.acids-titration",
+   "title": {
+    "fr": "Dosages acido-basiques",
+    "en": "Acid-base titrations"
+   },
+   "level": "N1",
+   "prereq": [
+    "phc.solutions-acid",
+    "phc.mol-mole"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "exams": [
+    "probatoire"
+   ],
+   "lots": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "minutes": 50,
+   "tags": [
+    "chimie",
+    "probe"
+   ]
+  },
+  {
+   "id": "phc.rc-rl",
+   "title": {
+    "fr": "Circuits RC, RL, RLC",
+    "en": "RC, RL and RLC circuits"
+   },
+   "level": "N1",
+   "prereq": [
+    "phc.em-fields",
+    "math.diff-eq"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [
+    "bac",
+    "gce-al"
+   ],
+   "lots": [
+    "tle",
+    "upper-sixth"
+   ],
+   "minutes": 55,
+   "tags": [
+    "electricite"
+   ]
+  },
+  {
+   "id": "phc.mech-adv",
+   "title": {
+    "fr": "Mécanique avancée : chute, projectile, satellites",
+    "en": "Advanced mechanics: projectiles and satellites"
+   },
+   "level": "N1",
+   "prereq": [
+    "phc.newton-laws",
+    "math.deriv-app"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [
+    "bac",
+    "gce-al"
+   ],
+   "lots": [
+    "tle",
+    "upper-sixth"
+   ],
+   "minutes": 55,
+   "tags": [
+    "mecanique"
+   ]
+  },
+  {
+   "id": "phc.nuclear",
+   "title": {
+    "fr": "Physique nucléaire et radioactivité",
+    "en": "Nuclear physics and radioactivity"
+   },
+   "level": "N1",
+   "prereq": [
+    "phc.work-power",
+    "math.log-exp"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [
+    "bac",
+    "gce-al"
+   ],
+   "lots": [
+    "tle",
+    "upper-sixth"
+   ],
+   "minutes": 50,
+   "tags": [
+    "nucleaire"
+   ]
+  },
+  {
+   "id": "phc.chem-adv",
+   "title": {
+    "fr": "Chimie du Bac : électrochimie, esters, piles",
+    "en": "Baccalauréat chemistry: electrochemistry and esters"
+   },
+   "level": "N1",
+   "prereq": [
+    "phc.kinetics-eq",
+    "phc.acids-titration"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [
+    "bac",
+    "gce-al"
+   ],
+   "lots": [
+    "tle",
+    "upper-sixth"
+   ],
+   "minutes": 55,
+   "tags": [
+    "chimie",
+    "probe"
+   ]
+  },
+  {
+   "id": "phc.bac-pc",
+   "title": {
+    "fr": "Épreuves de physique-chimie du Bac C/D",
+    "en": "Baccalauréat physics-chemistry papers"
+   },
+   "level": "N1",
+   "prereq": [
+    "phc.rc-rl",
+    "phc.mech-adv",
+    "phc.nuclear",
+    "phc.chem-adv"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [
+    "bac",
+    "gce-al"
+   ],
+   "lots": [
+    "tle",
+    "upper-sixth"
+   ],
+   "minutes": 60,
+   "tags": [
+    "examen"
+   ]
+  },
+  {
+   "id": "phc.thermo-1",
+   "title": {
+    "fr": "Thermodynamique de première année",
+    "en": "First-year thermodynamics"
+   },
+   "level": "N1",
+   "prereq": [
+    "phc.chem-adv",
+    "math.analysis-1"
+   ],
+   "years": [
+    14
+   ],
+   "classes": [
+    "l1",
+    "l1-en"
+   ],
+   "exams": [],
+   "lots": [
+    "l1",
+    "l1-en"
+   ],
+   "minutes": 55,
+   "tags": [
+    "superieur",
+    "probe"
+   ]
+  },
+  {
+   "id": "phc.mech-uni",
+   "title": {
+    "fr": "Mécanique du point et du solide",
+    "en": "Mechanics of point masses and rigid bodies"
+   },
+   "level": "N1",
+   "prereq": [
+    "phc.mech-adv"
+   ],
+   "years": [
+    14
+   ],
+   "classes": [
+    "l1",
+    "l1-en"
+   ],
+   "exams": [],
+   "lots": [
+    "l1",
+    "l1-en"
+   ],
+   "minutes": 55,
+   "tags": [
+    "superieur",
+    "mecanique"
+   ]
+  },
+  {
+   "id": "phc.em-uni",
+   "title": {
+    "fr": "Électromagnétisme universitaire",
+    "en": "University electromagnetism"
+   },
+   "level": "N1",
+   "prereq": [
+    "phc.rc-rl",
+    "math.linalg-1"
+   ],
+   "years": [
+    15
+   ],
+   "classes": [
+    "l2",
+    "l2-en"
+   ],
+   "exams": [
+    "bts",
+    "licence"
+   ],
+   "lots": [
+    "l2",
+    "l2-en"
+   ],
+   "minutes": 60,
+   "tags": [
+    "superieur",
+    "electricite",
+    "probe"
+   ]
+  },
+  {
+   "id": "phc.n2-estimation",
+   "title": {
+    "fr": "Estimation, ordres de grandeur et modèles simples",
+    "en": "Estimation, orders of magnitude and simple models"
+   },
+   "level": "N2",
+   "prereq": [
+    "phc.forces",
+    "phc.reaction-intro"
+   ],
+   "years": [
+    8
+   ],
+   "classes": [
+    "5e",
+    "form2"
+   ],
+   "exams": [],
+   "lots": [
+    "5e-exc",
+    "form2-exc"
+   ],
+   "minutes": 40,
+   "tags": [
+    "concours",
+    "modelisation",
+    "probe"
+   ]
+  },
+  {
+   "id": "phc.n2-circuits-puzzle",
+   "title": {
+    "fr": "Problèmes de circuits à plusieurs mailles",
+    "en": "Multi-loop circuit problems"
+   },
+   "level": "N2",
+   "prereq": [
+    "phc.ohm-law",
+    "phc.n2-estimation"
+   ],
+   "years": [
+    9
+   ],
+   "classes": [
+    "4e",
+    "form3"
+   ],
+   "exams": [],
+   "lots": [
+    "4e-exc",
+    "form3-exc"
+   ],
+   "minutes": 45,
+   "tags": [
+    "concours",
+    "electricite",
+    "probe"
+   ]
+  },
+  {
+   "id": "phc.n2-chem-quant",
+   "title": {
+    "fr": "Stœchiométrie et bilans de matière avancés",
+    "en": "Advanced stoichiometry and mass balance"
+   },
+   "level": "N2",
+   "prereq": [
+    "phc.mol-mole",
+    "phc.n2-estimation"
+   ],
+   "years": [
+    10
+   ],
+   "classes": [
+    "3e",
+    "form4"
+   ],
+   "exams": [],
+   "lots": [
+    "3e-exc",
+    "form4-exc"
+   ],
+   "minutes": 50,
+   "tags": [
+    "concours",
+    "chimie",
+    "probe"
+   ]
+  },
+  {
+   "id": "phc.n2-mechanics-problems",
+   "title": {
+    "fr": "Problèmes de mécanique multi-étapes",
+    "en": "Multi-step mechanics problems"
+   },
+   "level": "N2",
+   "prereq": [
+    "phc.newton-laws",
+    "phc.n2-circuits-puzzle"
+   ],
+   "years": [
+    11
+   ],
+   "classes": [
+    "2nde",
+    "form5"
+   ],
+   "exams": [],
+   "lots": [
+    "2nde-exc",
+    "form5-exc"
+   ],
+   "minutes": 55,
+   "tags": [
+    "concours",
+    "mecanique"
+   ]
+  },
+  {
+   "id": "phc.n2-energy-conservation",
+   "title": {
+    "fr": "Conservation de l'énergie et de la quantité de mouvement",
+    "en": "Conservation of energy and momentum"
+   },
+   "level": "N2",
+   "prereq": [
+    "phc.work-power",
+    "phc.n2-mechanics-problems"
+   ],
+   "years": [
+    11
+   ],
+   "classes": [
+    "2nde",
+    "form5"
+   ],
+   "exams": [],
+   "lots": [
+    "2nde-exc",
+    "form5-exc"
+   ],
+   "minutes": 55,
+   "tags": [
+    "concours",
+    "energie",
+    "probe"
+   ]
+  },
+  {
+   "id": "phc.n2-waves-optics",
+   "title": {
+    "fr": "Ondes et optique : interférences, diffraction",
+    "en": "Waves and optics: interference and diffraction"
+   },
+   "level": "N2",
+   "prereq": [
+    "phc.oscillations",
+    "phc.n2-energy-conservation"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "1ere-exc",
+    "lower-sixth-exc"
+   ],
+   "minutes": 55,
+   "tags": [
+    "concours",
+    "ondes"
+   ]
+  },
+  {
+   "id": "phc.n2-chem-equilibria",
+   "title": {
+    "fr": "Équilibres en solution : problèmes de concours",
+    "en": "Solution equilibria: contest problems"
+   },
+   "level": "N2",
+   "prereq": [
+    "phc.kinetics-eq",
+    "phc.acids-titration",
+    "phc.n2-chem-quant"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "1ere-exc",
+    "lower-sixth-exc"
+   ],
+   "minutes": 60,
+   "tags": [
+    "concours",
+    "chimie",
+    "probe"
+   ]
+  },
+  {
+   "id": "phc.n2-bac-excellence",
+   "title": {
+    "fr": "Physique du Bac au niveau des meilleurs candidats",
+    "en": "Baccalauréat physics at top-candidate level"
+   },
+   "level": "N2",
+   "prereq": [
+    "phc.bac-pc",
+    "phc.n2-waves-optics"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "tle-exc",
+    "upper-sixth-exc"
+   ],
+   "minutes": 65,
+   "tags": [
+    "concours",
+    "probe"
+   ]
+  },
+  {
+   "id": "phc.n2-experimental-design",
+   "title": {
+    "fr": "Plan d'expérience, incertitudes et exploitation de mesures",
+    "en": "Experimental design and uncertainty"
+   },
+   "level": "N2",
+   "prereq": [
+    "phc.n2-bac-excellence",
+    "phc.n2-chem-equilibria"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "tle-exc",
+    "upper-sixth-exc"
+   ],
+   "minutes": 60,
+   "tags": [
+    "concours",
+    "experimental"
+   ]
+  },
+  {
+   "id": "phc.n2-uni-physics",
+   "title": {
+    "fr": "Physique générale niveau classes préparatoires",
+    "en": "General physics at preparatory-class level"
+   },
+   "level": "N2",
+   "prereq": [
+    "phc.mech-uni",
+    "phc.thermo-1",
+    "phc.n2-bac-excellence"
+   ],
+   "years": [
+    14
+   ],
+   "classes": [
+    "l1",
+    "l1-en"
+   ],
+   "exams": [],
+   "lots": [
+    "l1-exc",
+    "l1-en-exc"
+   ],
+   "minutes": 65,
+   "tags": [
+    "superieur",
+    "probe"
+   ]
+  },
+  {
+   "id": "phc.n3-lagrangian-intro",
+   "title": {
+    "fr": "Mécanique analytique élémentaire : énergie, moments, oscillateurs",
+    "en": "Elementary analytical mechanics"
+   },
+   "level": "N3",
+   "prereq": [
+    "phc.n2-energy-conservation",
+    "math.n2-analysis-bac"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "tle-exc",
+    "upper-sixth-exc"
+   ],
+   "minutes": 70,
+   "tags": [
+    "olympiade",
+    "mecanique",
+    "probe"
+   ]
+  },
+  {
+   "id": "phc.n3-thermo-stat",
+   "title": {
+    "fr": "Thermodynamique et physique statistique qualitative",
+    "en": "Thermodynamics and qualitative statistical physics"
+   },
+   "level": "N3",
+   "prereq": [
+    "phc.n2-bac-excellence",
+    "phc.thermo-1"
+   ],
+   "years": [
+    14
+   ],
+   "classes": [
+    "l1",
+    "l1-en"
+   ],
+   "exams": [],
+   "lots": [
+    "l1-exc",
+    "l1-en-exc"
+   ],
+   "minutes": 70,
+   "tags": [
+    "olympiade",
+    "probe"
+   ]
+  },
+  {
+   "id": "phc.n3-em-waves",
+   "title": {
+    "fr": "Ondes électromagnétiques et relativité restreinte",
+    "en": "Electromagnetic waves and special relativity"
+   },
+   "level": "N3",
+   "prereq": [
+    "phc.n2-waves-optics",
+    "phc.em-uni",
+    "math.n2-linalg"
+   ],
+   "years": [
+    15
+   ],
+   "classes": [
+    "l2",
+    "l2-en"
+   ],
+   "exams": [],
+   "lots": [
+    "l2-exc",
+    "l2-en-exc"
+   ],
+   "minutes": 70,
+   "tags": [
+    "olympiade",
+    "probe"
+   ]
+  },
+  {
+   "id": "phc.n3-organic-mech",
+   "title": {
+    "fr": "Chimie organique : mécanismes réactionnels",
+    "en": "Organic chemistry: reaction mechanisms"
+   },
+   "level": "N3",
+   "prereq": [
+    "phc.n2-chem-equilibria",
+    "phc.organic-1"
+   ],
+   "years": [
+    14
+   ],
+   "classes": [
+    "l1",
+    "l1-en"
+   ],
+   "exams": [],
+   "lots": [
+    "l1-exc",
+    "l1-en-exc"
+   ],
+   "minutes": 70,
+   "tags": [
+    "olympiade",
+    "chimie"
+   ]
+  },
+  {
+   "id": "phc.n3-experimental",
+   "title": {
+    "fr": "Épreuve expérimentale d'olympiade : conception et analyse",
+    "en": "Olympiad experimental problem"
+   },
+   "level": "N3",
+   "prereq": [
+    "phc.n2-experimental-design"
+   ],
+   "years": [
+    14
+   ],
+   "classes": [
+    "l1",
+    "l1-en"
+   ],
+   "exams": [],
+   "lots": [
+    "l1-exc",
+    "l1-en-exc"
+   ],
+   "minutes": 75,
+   "tags": [
+    "olympiade",
+    "experimental"
+   ]
+  },
+  {
+   "id": "phc.n3-quantum-intro",
+   "title": {
+    "fr": "Physique quantique : postulats et systèmes simples",
+    "en": "Quantum physics: postulates and simple systems"
+   },
+   "level": "N3",
+   "prereq": [
+    "phc.n3-em-waves",
+    "math.n3-linalg-abstract"
+   ],
+   "years": [
+    15
+   ],
+   "classes": [
+    "l2",
+    "l2-en"
+   ],
+   "exams": [],
+   "lots": [
+    "l2-exc",
+    "l2-en-exc"
+   ],
+   "minutes": 70,
+   "tags": [
+    "international"
+   ]
+  },
+  {
+   "id": "phc.n4-olympiad-theory",
+   "title": {
+    "fr": "Problèmes théoriques d'olympiade internationale de physique",
+    "en": "International Physics Olympiad theory problems"
+   },
+   "level": "N4",
+   "prereq": [
+    "phc.n3-lagrangian-intro",
+    "phc.n3-thermo-stat",
+    "phc.n3-em-waves"
+   ],
+   "years": [
+    15
+   ],
+   "classes": [
+    "l2",
+    "l2-en"
+   ],
+   "exams": [],
+   "lots": [
+    "l2-exc",
+    "l2-en-exc"
+   ],
+   "minutes": 90,
+   "tags": [
+    "olympiade-int",
+    "probe"
+   ]
+  },
+  {
+   "id": "phc.n4-olympiad-chem",
+   "title": {
+    "fr": "Problèmes d'olympiade internationale de chimie",
+    "en": "International Chemistry Olympiad problems"
+   },
+   "level": "N4",
+   "prereq": [
+    "phc.n3-organic-mech",
+    "phc.n3-thermo-stat"
+   ],
+   "years": [
+    15
+   ],
+   "classes": [
+    "l2",
+    "l2-en"
+   ],
+   "exams": [],
+   "lots": [
+    "l2-exc",
+    "l2-en-exc"
+   ],
+   "minutes": 90,
+   "tags": [
+    "olympiade-int",
+    "chimie"
+   ]
+  },
+  {
+   "id": "phc.n4-olympiad-exp",
+   "title": {
+    "fr": "Épreuves expérimentales d'olympiade internationale",
+    "en": "International olympiad experimental tasks"
+   },
+   "level": "N4",
+   "prereq": [
+    "phc.n3-experimental",
+    "phc.n3-lagrangian-intro"
+   ],
+   "years": [
+    15
+   ],
+   "classes": [
+    "l2",
+    "l2-en"
+   ],
+   "exams": [],
+   "lots": [
+    "l2-exc",
+    "l2-en-exc"
+   ],
+   "minutes": 90,
+   "tags": [
+    "olympiade-int",
+    "experimental"
+   ]
+  },
+  {
+   "id": "phc.n4-uni-quantum",
+   "title": {
+    "fr": "Mécanique quantique et physique statistique de premier cycle d'élite",
+    "en": "Elite first-cycle quantum and statistical physics"
+   },
+   "level": "N4",
+   "prereq": [
+    "phc.n3-quantum-intro",
+    "math.n4-analysis-uni"
+   ],
+   "years": [
+    15
+   ],
+   "classes": [
+    "l2",
+    "l2-en"
+   ],
+   "exams": [],
+   "lots": [
+    "l2-exc",
+    "l2-en-exc"
+   ],
+   "minutes": 90,
+   "tags": [
+    "universite-int"
+   ]
+  },
+  {
+   "id": "phc.n4-research-physics",
+   "title": {
+    "fr": "Modéliser et analyser un phénomène physique ouvert",
+    "en": "Modelling and analysing an open physical problem"
+   },
+   "level": "N4",
+   "prereq": [
+    "phc.n4-olympiad-theory",
+    "math.n4-research-problem"
+   ],
+   "years": [
+    15
+   ],
+   "classes": [
+    "l2",
+    "l2-en"
+   ],
+   "exams": [],
+   "lots": [
+    "l2-exc",
+    "l2-en-exc"
+   ],
+   "minutes": 90,
+   "tags": [
+    "universite-int",
+    "modelisation"
+   ]
+  }
+ ]
+}

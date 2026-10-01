@@ -1,0 +1,27 @@
+{
+ "format": 1,
+ "lot": "learn:cm2-exc",
+ "lotVersion": 1,
+ "reviewedAt": "2026-10-01",
+ "reviewer": {"kind": "agent", "name": "qa-pedagogy-sample"},
+ "language": "fr",
+ "targetLevels": ["N2"],
+ "note": "EXEMPLE de format : ne décrit pas un vrai lot.",
+ "scores": {
+  "clarity": {"score": 3.5, "evidence": "Les énoncés tiennent en 3 phrases ; le vocabulaire des consignes est constant."},
+  "progression": {"score": 3, "evidence": "Chaque fiche renvoie à son prérequis N1 (math.ratio-prop) avant le problème de concours."},
+  "workedExamples": {"score": 3.5, "evidence": "Deux exemples résolus par fiche, dont un qui montre une fausse piste."},
+  "misconceptions": {"score": 3, "evidence": "Bloc « pièges » : confusion aire/périmètre, additionner au lieu de proportionner."},
+  "culturalRelevance": {"score": 3.5, "evidence": "Contextes : marché de Mokolo, tarifs de taxi-moto, FCFA, calendrier scolaire camerounais."},
+  "languageLevel": {"score": 3, "evidence": "Phrases ≤ 20 mots, termes mathématiques définis à la première occurrence."},
+  "cognitiveLoad": {"score": 2.5, "evidence": "Une fiche enchaîne quatre étapes sur une page.", "issues": [{"severity": "minor", "ref": "cm2-exc-rates-02", "note": "Scinder l'étape 3 en deux pages."}]},
+  "accessibility": {"score": 3.5, "evidence": "Figures avec alt fr/en, aucune information portée par la couleur seule, police lisible à 3 m."},
+  "assessmentAlignment": {"score": 3.5, "evidence": "Chaque compétence N2 a ≥ 3 exercices excellence-cm dont la difficulté est 3-4."},
+  "levelFidelity": {"score": 3.5, "evidence": "Les problèmes demandent un raisonnement en plusieurs étapes et un transfert à une situation inédite : niveau des meilleurs élèves de CM2 du pays."}
+ },
+ "accessibilityChecks": {"colourBlindSafe": true, "dyslexiaFriendly": true, "altTextEverywhere": true, "captionsAndTranscripts": true, "reducedMotionFallback": true, "noFlashing": true, "tvReadable3m": true},
+ "levelFidelity": {"claimed": "N2", "standard": "cm-excellence", "verdict": "meets", "challengeForTopLearner": 3.5, "itemsChecked": 12,
+  "notes": "Un élève du top 5 national bute sur 3 problèmes sur 12 sans indice : le niveau est atteint."},
+ "humanValidation": {"required": true, "dueAfterBetaMonths": 3, "status": "pending"},
+ "decision": "pass"
+}

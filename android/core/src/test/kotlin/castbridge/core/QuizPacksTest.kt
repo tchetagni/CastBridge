@@ -372,7 +372,7 @@ class QuizPacksTest {
             val course = listOfNotNull(m["track"] as String, m["level"] as String?, m["field"] as String?).joinToString("/")
             perCourse.merge(course, c.bank.all.size, Int::plus)
         }
-        assertTrue(total < QUIZ_PACK_MAX_BYTES, "all the packs together: $total bytes")
+        assertTrue(total < 3L shl 30, "all the packs together stay far below the 3 GB ceiling of the content base: $total bytes")   // the TV keeps only QUIZ_PACK_MAX_BYTES of them (cache), the phone and the server hold the whole catalogue
         println("QUIZ PACKS: ${infos.size} packs, $questions questions, $total bytes = ${questions * 1_000_000L / total} questions per MB; per course $perCourse")
     }
 }

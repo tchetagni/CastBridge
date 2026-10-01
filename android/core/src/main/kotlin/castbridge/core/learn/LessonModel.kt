@@ -67,6 +67,12 @@ data class Lesson(
     val reviewNotes: List<String> = emptyList(),
     /** Validation state written by tools/content-validation (docs/CONTENT-VALIDATION.md); null = derived from [status]. */
     val state: castbridge.core.content.ContentState? = null,
+    /** Curriculum graph (additive, optional, docs/CONTENT-ARCHITECTURE.md § 5): the skill taught, its level N0..N4, prerequisite skills, lot scope, media ids. */
+    val skill: String? = null,
+    val level: String? = null,
+    val prereqSkills: List<String> = emptyList(),
+    val lot: String? = null,
+    val media: List<String> = emptyList(),
 )
 
 /** One step of a worked example: text (restricted Markdown) and/or a formula. */
@@ -100,11 +106,24 @@ enum class ExerciseKind(val key: String) {
     companion object { fun of(k: String?) = values().firstOrNull { it.key == k } }
 }
 
-/** Where the exercise sits in a fiche: application, approfondissement, examen (« type examen »), or a self-check question. */
-enum class ExerciseTier(val key: String, val label: String) {
-    APPLICATION("application", "Application"), DEEPER("approfondissement", "Approfondissement"),
-    EXAM("examen", "Type examen"), SELFCHECK("autoeval", "Auto-évaluation");
-    companion object { fun of(k: String?) = values().firstOrNull { it.key == k } }
+/**
+ * Where the exercise sits in a fiche: application, approfondissement, examen (« type examen »), a self-check question,
+ * or (additive, docs/CONTENT-ARCHITECTURE.md § 6) the excellence tiers: [EXCELLENCE_CM] = Cameroonian national
+ * excellence (level N2), [EXCELLENCE_MONDE] = world-class excellence (levels N3-N4). [rank] orders the difficulty
+ * (self-check questions rank like application ones); a reader that meets a tier it does not know uses [HARDEST].
+ */
+enum class ExerciseTier(val key: String, val label: String, val rank: Int) {
+    APPLICATION("application", "Application", 0), DEEPER("approfondissement", "Approfondissement", 1),
+    EXAM("examen", "Type examen", 2), SELFCHECK("autoeval", "Auto-évaluation", 0),
+    EXCELLENCE_CM("excellence-cm", "Excellence Cameroun", 3), EXCELLENCE_MONDE("excellence-monde", "Excellence monde", 4);
+    val excellence: Boolean get() = rank >= 3
+    companion object {
+        /** The hardest tier this reader knows: what an unknown (future) tier is read as. */
+        val HARDEST = EXCELLENCE_MONDE
+        fun of(k: String?) = values().firstOrNull { it.key == k }
+        /** Tolerant reading: null stays null, an unknown key gives [HARDEST] (never an exception). */
+        fun ofOrHardest(k: String?): ExerciseTier? = if (k == null) null else of(k) ?: HARDEST
+    }
 }
 
 data class Exercise(
@@ -145,6 +164,13 @@ data class Exercise(
     val lesson: String? = null,
     /** Validation state written by tools/content-validation; null = derived from [review]. */
     val state: castbridge.core.content.ContentState? = null,
+    /** Curriculum graph (additive, optional): the skill assessed, its level N0..N4, lot scope, media ids. */
+    val skill: String? = null,
+    val level: String? = null,
+    val lot: String? = null,
+    val media: List<String> = emptyList(),
+    /** Item calibration: target success rate (0..1) by learner level key ("N0".."N4"); empty = default of [castbridge.core.curriculum.LevelScale]. */
+    val calibration: Map<String, Double> = emptyMap(),
 ) {
     val autoMarked: Boolean get() = kind != ExerciseKind.OPEN && (kind != ExerciseKind.PROBLEM || parts.all { it.autoMarked })
     val totalPoints: Double get() = if (kind == ExerciseKind.PROBLEM) parts.sumOf { it.points } else points

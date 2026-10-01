@@ -1,0 +1,16 @@
+# castbridge-content: text and vector assets live in plain git; HEAVY media go through Git LFS (or release assets).
+# Rule: no single file above 50 MB, no binary above 5 MB outside LFS (tools/content-split-repo/check_sizes.py enforces both).
+* text=auto eol=lf
+*.json text
+*.md text
+*.sh text eol=lf
+*.py text eol=lf
+
+# heavy media -> LFS (phone-only "media" lots: docs/MEDIA-POLICY.md)
+*.webm filter=lfs diff=lfs merge=lfs -text
+*.mp4 filter=lfs diff=lfs merge=lfs -text
+*.opus filter=lfs diff=lfs merge=lfs -text
+*.ogg filter=lfs diff=lfs merge=lfs -text
+*.webp filter=lfs diff=lfs merge=lfs -text
+# built artefacts are never committed (they are produced by tools/publish-content.sh)
+*.lot -text

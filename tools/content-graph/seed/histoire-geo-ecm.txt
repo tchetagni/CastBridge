@@ -1,0 +1,42 @@
+# slug | level | years | fr | en | prereqs | minutes | tags
+my-place|N0|y0-2|Mon école, ma famille, mon village|My school, family and village||20|ecm,cameroun
+space-orientation|N0|y2|Se repérer : droite, gauche, plan, points cardinaux|Orientation: left, right, plan and compass points|my-place|20|geo
+time-past|N0|y2|Hier, aujourd'hui, demain : le temps qui passe|Time: past, present, future|my-place|20|histoire
+rules-living|N0|y1-2|Vivre ensemble : règles, respect, droits de l'enfant|Living together: rules, respect, children's rights|my-place|20|ecm
+symbols-cm|N0|y3|Les symboles du Cameroun : drapeau, hymne, devise|Symbols of Cameroon: flag, anthem, motto|rules-living|20|ecm,cameroun
+map-reading|N1|y4|Lire une carte et un plan|Reading maps and plans|space-orientation|25|geo
+cm-regions|N1|y4|Les régions du Cameroun|The regions of Cameroon|map-reading,symbols-cm|30|geo,cameroun
+timeline|N1|y4|Frise chronologique et repères du temps|Timelines and dates|time-past|25|histoire
+cm-before-colonial|N1|y5|Royaumes et peuples du Cameroun avant la colonisation|Kingdoms and peoples of Cameroon before colonisation|timeline,cm-regions|35|histoire,cameroun
+cm-colonisation|N1|y5|Du Kamerun à l'indépendance : 1884-1961|From Kamerun to independence 1884-1961|cm-before-colonial|40|histoire,cameroun
+institutions-cm|N1|y5|Les institutions du Cameroun|Institutions of Cameroon|symbols-cm|30|ecm,cameroun
+cep-hge|N1|y6|Histoire, géographie, ECM du CEP|CEP history, geography, civics|cm-colonisation,institutions-cm,cm-regions|40|examen
+africa-geo|N1|y7|Géographie de l'Afrique : reliefs, climats, populations|Geography of Africa|cep-hge|40|geo
+ancient-africa|N1|y7|Grandes civilisations africaines : Égypte, Mali, Zimbabwe|Great African civilisations|cep-hge|40|histoire
+citizenship-1|N1|y7|Citoyenneté, droits et devoirs|Citizenship, rights and duties|institutions-cm|35|ecm
+slave-trade|N1|y8|Traites négrières et leurs effets|The slave trades and their effects|ancient-africa|40|histoire
+world-geo|N1|y8|Continents, océans et grands ensembles du monde|Continents, oceans and world regions|africa-geo|40|geo
+cm-geo-economy|N1|y9|Économie et villes du Cameroun|Economy and cities of Cameroon|cm-regions,africa-geo|40|geo,cameroun
+colonisation-africa|N1|y9|La colonisation de l'Afrique|The colonisation of Africa|slave-trade|40|histoire
+democracy-ecm|N1|y9|Démocratie, justice, pouvoirs publics|Democracy, justice and public powers|citizenship-1|40|ecm
+independence-africa|N1|y10|Les indépendances africaines|African independence|colonisation-africa|45|histoire
+bepc-hge|N1|y10|Histoire-géographie-ECM du BEPC|BEPC history-geography-civics|independence-africa,cm-geo-economy,democracy-ecm|45|examen
+world-wars|N1|y11|Les deux guerres mondiales|The two world wars|colonisation-africa|45|histoire
+globalisation|N1|y11|Mondialisation et développement|Globalisation and development|world-geo,cm-geo-economy|45|geo
+ecm-human-rights|N1|y11|Droits de l'homme et institutions internationales|Human rights and international institutions|democracy-ecm|40|ecm
+cm-contemporary|N1|y12|Le Cameroun depuis 1960 : État, unité, défis|Cameroon since 1960|independence-africa,institutions-cm|45|histoire,cameroun
+cold-war|N1|y12|Guerre froide et nouveau monde|Cold War and the new world|world-wars|45|histoire
+geo-sustain|N1|y12|Environnement, ressources et développement durable|Environment, resources and sustainability|globalisation|45|geo
+bac-hge|N1|y13|Histoire-géographie du Bac|Baccalauréat history-geography|cm-contemporary,cold-war,geo-sustain,ecm-human-rights|60|examen
+methods-hist|N1|y14|Méthodes de l'historien et du géographe (L1)|Historical and geographical methods|bac-hge|50|superieur
+# N2
+n2-source-analysis|N2|y9|Analyser des sources : document, auteur, point de vue|Source analysis: document, author, viewpoint|colonisation-africa,cm-geo-economy|45|concours,methode
+n2-hist-argument|N2|y10|Composition d'histoire argumentée|Argued history essay|independence-africa,n2-source-analysis|50|concours,expression
+n2-geo-spatial|N2|y11|Raisonnement géographique : croquis, échelles, comparaisons|Geographic reasoning: sketch maps, scale and comparison|globalisation,n2-source-analysis|50|concours,geo
+n2-civic-reasoning|N2|y11|Raisonnement civique : cas, arguments et institutions|Civic reasoning: cases, arguments, institutions|ecm-human-rights,n2-hist-argument|50|concours,ecm
+n2-dissertation-hist|N2|y12|Dissertation d'histoire-géographie de haut niveau|High-level history-geography essay|cm-contemporary,cold-war,n2-geo-spatial|60|concours,expression
+n2-bac-hge-excellence|N2|y13|Histoire-géographie du Bac niveau meilleurs candidats|Top-candidate Baccalauréat history-geography|bac-hge,n2-dissertation-hist,n2-civic-reasoning|65|concours
+# N3
+n3-historiography|N3|y13|Historiographie de l'Afrique et débats internationaux|African historiography and international debates|n2-bac-hge-excellence|65|international,histoire
+n3-comparative-geo|N3|y14|Géographie comparée : territoires, données, SIG (initiation)|Comparative geography: territories, data, GIS (intro)|n2-geo-spatial,methods-hist|65|international,geo
+n3-intl-relations|N3|y14|Relations internationales et droit international (initiation)|International relations and law (intro)|n2-civic-reasoning,cold-war|65|international,ecm

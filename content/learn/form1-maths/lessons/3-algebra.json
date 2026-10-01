@@ -1,0 +1,1561 @@
+{
+ "chapter": "form1-maths-algebra",
+ "lessons": [
+  {
+   "id": "form1-maths-sets-basics",
+   "title": "Sets and Venn diagrams",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 1 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe a set by listing or by a rule",
+    "Use the symbols ∈, ⊂, ∪, ∩ and ∅",
+    "Draw and read a Venn diagram with two sets",
+    "Solve a simple survey problem"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form1-maths-algebra-e01",
+    "form1-maths-algebra-e02",
+    "form1-maths-algebra-e03",
+    "form1-maths-algebra-e04",
+    "form1-maths-algebra-e05",
+    "form1-maths-algebra-e06"
+   ],
+   "selfCheck": [
+    "form1-maths-sets-basics-q1",
+    "form1-maths-sets-basics-q2",
+    "form1-maths-sets-basics-q3",
+    "form1-maths-sets-basics-q4",
+    "form1-maths-sets-basics-q5"
+   ],
+   "reviewNotes": [
+    "Set-builder notation is not introduced; check whether the official Form 1 scheme requires it.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Sets",
+     "md": "A **set** is a well-defined collection of objects, written in curly brackets: A = {2, 4, 6, 8}. Each object is an **element**: 4 ∈ A means '4 belongs to A'; 5 ∉ A. The number of elements is n(A) = 4. The empty set ∅ has no elements. B is a **subset** of A, written B ⊂ A, if every element of B is in A."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Union and intersection",
+     "md": "- The **union** A ∪ B contains the elements that are in A **or** in B (or both).\n- The **intersection** A ∩ B contains the elements in **both** A and B.\n- The **universal set** ξ contains all the elements being discussed; the **complement** A′ holds the elements of ξ not in A.\n- n(A ∪ B) = n(A) + n(B) − n(A ∩ B)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 380,
+        "h": 220,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 28,
+        "y": 32,
+        "text": "ξ",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 125,
+        "r": 70,
+        "stroke": "blue",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 250,
+        "cy": 125,
+        "r": 70,
+        "stroke": "red",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 50,
+        "text": "French",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 295,
+        "y": 50,
+        "text": "English",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 130,
+        "text": "6",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 130,
+        "text": "4",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 295,
+        "y": 130,
+        "text": "8",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 360,
+        "y": 215,
+        "text": "7",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A Venn diagram: 6 speak only French, 4 both, 8 only English, 7 neither.",
+     "alt": "Two overlapping circles labelled French and English with 6, 4, 8 inside and 7 outside."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Venn diagrams",
+     "md": "Draw a rectangle for ξ and one circle per set, overlapping if the sets share elements. Fill the **intersection first**, then the rest of each set, and finally the outside. The numbers in all regions add up to n(ξ)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Counting the elements in the overlap twice when finding n(A ∪ B).\n- Writing the elements of the intersection in only one circle.\n- Forgetting the elements that are in neither set (outside the circles but inside the rectangle)."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: listing",
+     "statement": "A = {1, 2, 3, 4, 5, 6} and B = {2, 4, 6, 8}. Find A ∩ B, A ∪ B and n(A ∪ B).",
+     "steps": [
+      "A ∩ B = elements in both = {2, 4, 6}.",
+      "A ∪ B = all elements in either, listed once = {1, 2, 3, 4, 5, 6, 8}.",
+      "n(A ∪ B) = 7. Check: 6 + 4 − 3 = 7."
+     ],
+     "answer": "**A ∩ B = {2, 4, 6}; A ∪ B = {1, 2, 3, 4, 5, 6, 8}; n(A ∪ B) = 7**"
+    },
+    {
+     "type": "example",
+     "title": "Example 2: survey",
+     "statement": "In a class of 25 pupils in Yaoundé, 10 speak French at home, 12 speak English at home, and 4 speak both. How many speak only French, only English, and neither?",
+     "steps": [
+      "Both = 4. Only French = 10 − 4 = 6; only English = 12 − 4 = 8.",
+      "At least one language: 6 + 4 + 8 = 18.",
+      "Neither = 25 − 18 = 7."
+     ],
+     "answer": "**6 only French, 8 only English, 7 neither.**",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 380,
+        "h": 220,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 28,
+        "y": 32,
+        "text": "ξ",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 125,
+        "r": 70,
+        "stroke": "blue",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 250,
+        "cy": 125,
+        "r": 70,
+        "stroke": "red",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 50,
+        "text": "French",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 295,
+        "y": 50,
+        "text": "English",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 130,
+        "text": "6",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 130,
+        "text": "4",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 295,
+        "y": 130,
+        "text": "8",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 360,
+        "y": 215,
+        "text": "7",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     }
+    }
+   ],
+   "chapter": "form1-maths-algebra"
+  },
+  {
+   "id": "form1-maths-algebra-basics",
+   "title": "Introduction to algebra",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 1 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Use letters to stand for numbers",
+    "Simplify expressions by collecting like terms",
+    "Substitute numbers into expressions",
+    "Expand brackets with a number outside"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form1-maths-algebra-e07",
+    "form1-maths-algebra-e08",
+    "form1-maths-algebra-e09",
+    "form1-maths-algebra-e10",
+    "form1-maths-algebra-e11",
+    "form1-maths-algebra-e12"
+   ],
+   "selfCheck": [
+    "form1-maths-algebra-basics-q1",
+    "form1-maths-algebra-basics-q2",
+    "form1-maths-algebra-basics-q3",
+    "form1-maths-algebra-basics-q4",
+    "form1-maths-algebra-basics-q5"
+   ],
+   "reviewNotes": [
+    "The mobile-money charge formula is invented for practice and is not a real tariff; flagged for a teacher check.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Letters and terms",
+     "md": "In algebra a letter stands for a number. 3a means 3 × a. A **term** is a number, a letter or a product such as 5b or x². **Like terms** have the same letters: 3a and 5a are like terms, but 3a and 3b are not. An **expression** has terms joined by + and −; it has no equals sign."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Simplifying and expanding",
+     "md": "Collect like terms by adding or subtracting their numbers: 3a + 5b − a + 2b = 2a + 7b. To **expand** a bracket, multiply every term inside by the number outside: 3(2x − 4) = 6x − 12. Take care with signs: −2(x − 5) = −2x + 10."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 50,
+        "w": 200,
+        "h": 100,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "line",
+        "x1": 160,
+        "y1": 50,
+        "x2": 160,
+        "y2": 150,
+        "color": "grey",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 105,
+        "text": "4x",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 105,
+        "text": "12",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 40,
+        "text": "x",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 40,
+        "text": "3",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 285,
+        "y": 105,
+        "text": "4",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 180,
+        "text": "Area = 4(x + 3) = 4x + 12",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A rectangle of width 4 split into x and 3: area 4x + 12.",
+     "alt": "A rectangle split into two parts with areas 4x and 12."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Substitution",
+     "md": "Replace each letter by its value, keep brackets round negative numbers, then use BODMAS. If x = 3 and y = −2, then 2x² − y = 2 × 3² − (−2) = 18 + 2 = 20."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Adding unlike terms: 3a + 2b is **not** 5ab.\n- Expanding only the first term: 3(x + 4) is 3x + 12, not 3x + 4.\n- Writing x² as 2x: x² means x × x, so with x = 3 it is 9, not 6."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: simplify and expand",
+     "statement": "Simplify 4a + 3b − a + 2b, then expand 3(2x − 4).",
+     "steps": [
+      "Collect the a terms: 4a − a = 3a. Collect the b terms: 3b + 2b = 5b. So 3a + 5b.",
+      "Expand: 3 × 2x = 6x and 3 × (−4) = −12, so 6x − 12."
+     ],
+     "answer": "**3a + 5b; 6x − 12**"
+    },
+    {
+     "type": "example",
+     "title": "Example 2: a rectangle",
+     "statement": "A rectangular plot at Buea has length (x + 3) m and width 4 m. Write its area in expanded form and find it when x = 5.",
+     "steps": [
+      "Area = 4(x + 3) = 4x + 12.",
+      "Substitute x = 5: 4 × 5 + 12 = 32.",
+      "The area is 32 m²."
+     ],
+     "answer": "**4x + 12; 32 m²**",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 50,
+        "w": 200,
+        "h": 100,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "line",
+        "x1": 160,
+        "y1": 50,
+        "x2": 160,
+        "y2": 150,
+        "color": "grey",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 105,
+        "text": "4x",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 105,
+        "text": "12",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 40,
+        "text": "x",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 40,
+        "text": "3",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 285,
+        "y": 105,
+        "text": "4",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 180,
+        "text": "Area = 4(x + 3) = 4x + 12",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     }
+    }
+   ],
+   "chapter": "form1-maths-algebra"
+  },
+  {
+   "id": "form1-maths-linear-equations",
+   "title": "Solving linear equations",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 1 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Solve one-step and two-step equations",
+    "Solve equations with brackets and with x on both sides",
+    "Form an equation from a word problem and solve it",
+    "Check an answer by substitution"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form1-maths-algebra-e13",
+    "form1-maths-algebra-e14",
+    "form1-maths-algebra-e15",
+    "form1-maths-algebra-e16",
+    "form1-maths-algebra-e17",
+    "form1-maths-algebra-e18"
+   ],
+   "selfCheck": [
+    "form1-maths-linear-equations-q1",
+    "form1-maths-linear-equations-q2",
+    "form1-maths-linear-equations-q3",
+    "form1-maths-linear-equations-q4",
+    "form1-maths-linear-equations-q5"
+   ],
+   "reviewNotes": [
+    "Equations with fractions are left for Form 2.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Equation",
+     "md": "An **equation** states that two expressions are equal: 3x + 7 = 22. To **solve** it means finding the value of x that makes it true. We keep the equation balanced: whatever we do to one side we do to the other side."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Method",
+     "md": "Use **inverse operations** to undo what has been done to x, in reverse order. 3x + 7 = 22: subtract 7 to get 3x = 15, then divide by 3 to get x = 5. Check: 3 × 5 + 7 = 22. With x on both sides, move the x terms to one side and the numbers to the other."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 180,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 40,
+        "w": 70,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 45,
+        "y": 65,
+        "text": "x",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 60,
+        "x2": 110,
+        "y2": 60,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 40,
+        "w": 70,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 145,
+        "y": 65,
+        "text": "× 3",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 180,
+        "y1": 60,
+        "x2": 210,
+        "y2": 60,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 210,
+        "y": 40,
+        "w": 70,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 245,
+        "y": 65,
+        "text": "+ 7",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 280,
+        "y1": 60,
+        "x2": 310,
+        "y2": 60,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 310,
+        "y": 40,
+        "w": 70,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 345,
+        "y": 65,
+        "text": "22",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 310,
+        "y1": 120,
+        "x2": 280,
+        "y2": 120,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 120,
+        "x2": 180,
+        "y2": 120,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 195,
+        "y": 150,
+        "text": "undo: − 7",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 345,
+        "y": 150,
+        "text": "undo: ÷ 3",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 345,
+        "y": 115,
+        "text": "5",
+        "size": 15,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Flow chart for 3x + 7 = 22 and the inverse steps.",
+     "alt": "A flow chart: x times 3 plus 7 gives 22; undoing with minus 7 then divide by 3 gives 5."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Brackets and word problems",
+     "md": "Expand brackets first: 2(x − 3) = x + 4 becomes 2x − 6 = x + 4, so x = 10. For a word problem, define a letter (let x be …), write the equation from the story, solve it, and answer in words with the unit."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Doing the operation on only one side of the equation.\n- Dividing only the x term: in 3x + 6 = 15 divide **everything** by 3, or first subtract 6.\n- Changing the sign wrongly when a term moves across the equals sign."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: two-step and brackets",
+     "statement": "Solve (a) 3x + 7 = 22 and (b) 2(x − 3) = x + 4.",
+     "steps": [
+      "(a) Subtract 7: 3x = 15. Divide by 3: x = 5. Check 3 × 5 + 7 = 22.",
+      "(b) Expand: 2x − 6 = x + 4.",
+      "(b) Subtract x: x − 6 = 4. Add 6: x = 10. Check 2 × 7 = 14 = 10 + 4."
+     ],
+     "answer": "**(a) x = 5; (b) x = 10**",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 180,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 40,
+        "w": 70,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 45,
+        "y": 65,
+        "text": "x",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 60,
+        "x2": 110,
+        "y2": 60,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 40,
+        "w": 70,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 145,
+        "y": 65,
+        "text": "× 3",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 180,
+        "y1": 60,
+        "x2": 210,
+        "y2": 60,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 210,
+        "y": 40,
+        "w": 70,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 245,
+        "y": 65,
+        "text": "+ 7",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 280,
+        "y1": 60,
+        "x2": 310,
+        "y2": 60,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 310,
+        "y": 40,
+        "w": 70,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 345,
+        "y": 65,
+        "text": "22",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 310,
+        "y1": 120,
+        "x2": 280,
+        "y2": 120,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 120,
+        "x2": 180,
+        "y2": 120,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 195,
+        "y": 150,
+        "text": "undo: − 7",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 345,
+        "y": 150,
+        "text": "undo: ÷ 3",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 345,
+        "y": 115,
+        "text": "5",
+        "size": 15,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2: a word problem",
+     "statement": "A mother is 3 times as old as her son. The sum of their ages is 56. Find the son's age.",
+     "steps": [
+      "Let the son's age be x; the mother's age is 3x.",
+      "x + 3x = 56, so 4x = 56.",
+      "x = 14. Mother: 3 × 14 = 42. Check: 14 + 42 = 56."
+     ],
+     "answer": "**The son is 14 years old.**"
+    }
+   ],
+   "chapter": "form1-maths-algebra"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form1-maths-algebra-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form1-maths-sets-basics",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A = {3, 6, 9, 12}. Find n(A).",
+   "answer": 4,
+   "tolerance": 0,
+   "explanation": "Count the elements: 4.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form1-maths-algebra"
+  },
+  {
+   "id": "form1-maths-algebra-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form1-maths-sets-basics",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Which symbol means 'is an element of'?",
+   "choices": [
+    "∈",
+    "∪",
+    "∩",
+    "⊂"
+   ],
+   "answer": 0,
+   "explanation": "∈ is membership; ⊂ is subset.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form1-maths-algebra"
+  },
+  {
+   "id": "form1-maths-algebra-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form1-maths-sets-basics",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "n(A) = 8, n(B) = 5 and n(A ∩ B) = 2. Find n(A ∪ B).",
+   "answer": 11,
+   "tolerance": 0,
+   "explanation": "8 + 5 − 2 = 11.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form1-maths-algebra"
+  },
+  {
+   "id": "form1-maths-algebra-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form1-maths-sets-basics",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "In a class of 30, 18 play football, 14 play handball and 6 play both. How many play neither?",
+   "answer": 4,
+   "tolerance": 0,
+   "explanation": "18 + 14 − 6 = 26 play at least one; 30 − 26 = 4.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form1-maths-algebra"
+  },
+  {
+   "id": "form1-maths-algebra-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form1-maths-sets-basics",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "List all the subsets of {a, b}.",
+   "model": "∅, {a}, {b} and {a, b}: four subsets.",
+   "rubric": "1 mark each for ∅ and {a, b}, 1 mark for the two single-element sets.",
+   "explanation": "∅, {a}, {b} and {a, b}: four subsets.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form1-maths-algebra"
+  },
+  {
+   "id": "form1-maths-algebra-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form1-maths-sets-basics",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Of 40 families surveyed in a Kumba neighbourhood, 22 grow cassava (C), 15 grow plantain (P) and 7 grow both.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many families grow only cassava?",
+     "answer": 15,
+     "tolerance": 0,
+     "explanation": "22 − 7 = 15.",
+     "id": "form1-maths-algebra-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many families grow only plantain?",
+     "answer": 8,
+     "tolerance": 0,
+     "explanation": "15 − 7 = 8.",
+     "id": "form1-maths-algebra-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "How many families grow neither?",
+     "answer": 10,
+     "tolerance": 0,
+     "explanation": "15 + 7 + 8 = 30 grow something; 40 − 30 = 10.",
+     "id": "form1-maths-algebra-e06-c"
+    }
+   ],
+   "chapter": "form1-maths-algebra"
+  },
+  {
+   "id": "form1-maths-sets-basics-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-sets-basics",
+   "prompt": "The set {2, 4, 6} ∩ {4, 6, 8} is:",
+   "choices": [
+    "{2, 8}",
+    "{2, 4, 6, 8}",
+    "{4, 6}",
+    "∅"
+   ],
+   "answer": 2,
+   "explanation": "Elements common to both.",
+   "chapter": "form1-maths-algebra"
+  },
+  {
+   "id": "form1-maths-sets-basics-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-sets-basics",
+   "prompt": "The union of {1, 2} and {2, 3} contains:",
+   "choices": [
+    "4 elements",
+    "1 element",
+    "3 elements",
+    "2 elements"
+   ],
+   "answer": 2,
+   "explanation": "{1, 2, 3}.",
+   "chapter": "form1-maths-algebra"
+  },
+  {
+   "id": "form1-maths-sets-basics-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-sets-basics",
+   "prompt": "The empty set has:",
+   "choices": [
+    "0 elements",
+    "the element 0",
+    "1 element",
+    "infinitely many elements"
+   ],
+   "answer": 0,
+   "explanation": "∅ = { }.",
+   "chapter": "form1-maths-algebra"
+  },
+  {
+   "id": "form1-maths-sets-basics-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-sets-basics",
+   "prompt": "In a Venn diagram, the overlap of two circles shows:",
+   "choices": [
+    "the complement",
+    "the intersection",
+    "the union",
+    "the empty set"
+   ],
+   "answer": 1,
+   "explanation": "Elements belonging to both sets.",
+   "chapter": "form1-maths-algebra"
+  },
+  {
+   "id": "form1-maths-sets-basics-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-sets-basics",
+   "prompt": "If B ⊂ A, then:",
+   "choices": [
+    "every element of A is in B",
+    "every element of B is in A",
+    "A and B have nothing in common",
+    "n(B) > n(A)"
+   ],
+   "answer": 1,
+   "explanation": "That is the definition of subset.",
+   "chapter": "form1-maths-algebra"
+  },
+  {
+   "id": "form1-maths-algebra-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form1-maths-algebra-basics",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Simplify 7x − 3x + 2 and find its value when x = 2.",
+   "answer": 10,
+   "tolerance": 0,
+   "explanation": "7x − 3x + 2 = 4x + 2; with x = 2, 8 + 2 = 10.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form1-maths-algebra"
+  },
+  {
+   "id": "form1-maths-algebra-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form1-maths-algebra-basics",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Expand 5(y − 2).",
+   "choices": [
+    "5y − 2",
+    "y − 10",
+    "5y + 10",
+    "5y − 10"
+   ],
+   "answer": 3,
+   "explanation": "Multiply both terms by 5.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form1-maths-algebra"
+  },
+  {
+   "id": "form1-maths-algebra-e09",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form1-maths-algebra-basics",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find 3a − b when a = 4 and b = −5.",
+   "answer": 17,
+   "tolerance": 0,
+   "explanation": "3 × 4 − (−5) = 12 + 5 = 17.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form1-maths-algebra"
+  },
+  {
+   "id": "form1-maths-algebra-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form1-maths-algebra-basics",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find the value of 2x² − y when x = 3 and y = −2.",
+   "answer": 20,
+   "tolerance": 0,
+   "explanation": "2 × 9 + 2 = 20.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form1-maths-algebra"
+  },
+  {
+   "id": "form1-maths-algebra-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form1-maths-algebra-basics",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Explain why 3a + 2b cannot be simplified to 5ab.",
+   "model": "3a and 2b are unlike terms: a and b are different numbers, so they cannot be added. Example: a = 1, b = 2 gives 3 + 4 = 7, but 5ab = 10.",
+   "rubric": "1 mark for like/unlike terms; 1 mark for a numerical check; 1 mark for the conclusion.",
+   "explanation": "3a and 2b are unlike terms: a and b are different numbers, so they cannot be added. Example: a = 1, b = 2 gives 3 + 4 = 7, but 5ab = 10.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form1-maths-algebra"
+  },
+  {
+   "id": "form1-maths-algebra-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form1-maths-algebra-basics",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A mobile-money agent in Limbe charges 100 FCFA plus 2 FCFA for each 100 FCFA sent. For n hundreds the charge is C = 100 + 2n.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the charge for sending 5 000 FCFA (n = 50).",
+     "answer": 200,
+     "tolerance": 0,
+     "explanation": "100 + 2 × 50 = 200 FCFA.",
+     "unit": "FCFA",
+     "id": "form1-maths-algebra-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find n when the charge is 160 FCFA.",
+     "answer": 30,
+     "tolerance": 0,
+     "explanation": "100 + 2n = 160, so 2n = 60 and n = 30.",
+     "id": "form1-maths-algebra-e12-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "Which expression gives the charge for a person sending x hundreds twice?",
+     "choices": [
+      "100 + 2x²",
+      "200 + 2x + 2x + 100",
+      "2(100 + 2x)",
+      "100 + 4x + 100x"
+     ],
+     "answer": 2,
+     "explanation": "Two transfers each cost 100 + 2x: 2(100 + 2x) = 200 + 4x.",
+     "id": "form1-maths-algebra-e12-c"
+    }
+   ],
+   "chapter": "form1-maths-algebra"
+  },
+  {
+   "id": "form1-maths-algebra-basics-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-algebra-basics",
+   "prompt": "In 5x the number 5 is called:",
+   "choices": [
+    "the power",
+    "the constant term",
+    "the variable",
+    "the coefficient"
+   ],
+   "answer": 3,
+   "explanation": "It multiplies the letter.",
+   "chapter": "form1-maths-algebra"
+  },
+  {
+   "id": "form1-maths-algebra-basics-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-algebra-basics",
+   "prompt": "Simplify 2a + 3a:",
+   "choices": [
+    "5a",
+    "6a",
+    "5a²",
+    "5"
+   ],
+   "answer": 0,
+   "explanation": "Add the coefficients.",
+   "chapter": "form1-maths-algebra"
+  },
+  {
+   "id": "form1-maths-algebra-basics-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-algebra-basics",
+   "prompt": "Expand 2(x + 6):",
+   "choices": [
+    "2x + 8",
+    "2x + 12",
+    "2x + 6",
+    "x + 12"
+   ],
+   "answer": 1,
+   "explanation": "Multiply every term.",
+   "chapter": "form1-maths-algebra"
+  },
+  {
+   "id": "form1-maths-algebra-basics-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-algebra-basics",
+   "prompt": "When n = 4, the value of n² is:",
+   "choices": [
+    "6",
+    "2",
+    "8",
+    "16"
+   ],
+   "answer": 3,
+   "explanation": "4 × 4.",
+   "chapter": "form1-maths-algebra"
+  },
+  {
+   "id": "form1-maths-algebra-basics-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-algebra-basics",
+   "prompt": "Which of these are like terms?",
+   "choices": [
+    "4xy and 7xy",
+    "x² and x",
+    "2a and 2",
+    "3x and 3y"
+   ],
+   "answer": 0,
+   "explanation": "Same letters.",
+   "chapter": "form1-maths-algebra"
+  },
+  {
+   "id": "form1-maths-algebra-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form1-maths-linear-equations",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Solve x + 9 = 15.",
+   "answer": 6,
+   "tolerance": 0,
+   "explanation": "Subtract 9 from both sides.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form1-maths-algebra"
+  },
+  {
+   "id": "form1-maths-algebra-e14",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form1-maths-linear-equations",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Solve 4x − 3 = 17.",
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "4x = 20, so x = 5.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form1-maths-algebra"
+  },
+  {
+   "id": "form1-maths-algebra-e15",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form1-maths-linear-equations",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Solve 5x = 40:",
+   "choices": [
+    "x = 200",
+    "x = 35",
+    "x = 8",
+    "x = 45"
+   ],
+   "answer": 2,
+   "explanation": "Divide both sides by 5.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form1-maths-algebra"
+  },
+  {
+   "id": "form1-maths-algebra-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form1-maths-linear-equations",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Solve 5x + 2 = 3x + 14.",
+   "answer": 6,
+   "tolerance": 0,
+   "explanation": "2x = 12, so x = 6.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form1-maths-algebra"
+  },
+  {
+   "id": "form1-maths-algebra-e17",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form1-maths-linear-equations",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Solve 3(x − 2) = 15.",
+   "answer": 7,
+   "tolerance": 0,
+   "explanation": "x − 2 = 5, so x = 7.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form1-maths-algebra"
+  },
+  {
+   "id": "form1-maths-algebra-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form1-maths-linear-equations",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A trader in Douala buys 3 sacks of rice and pays 2 500 FCFA for transport. The total bill is 77 500 FCFA. Let x FCFA be the price of one sack.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which equation fits the story?",
+     "choices": [
+      "3 + x = 77 500",
+      "3x + 2 500 = 77 500",
+      "3x − 2 500 = 77 500",
+      "x + 3 + 2 500 = 77 500"
+     ],
+     "answer": 1,
+     "explanation": "Three sacks cost 3x, plus transport.",
+     "id": "form1-maths-algebra-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Solve for x (FCFA).",
+     "answer": 25000,
+     "tolerance": 0,
+     "explanation": "3x = 75 000, so x = 25 000.",
+     "unit": "FCFA",
+     "id": "form1-maths-algebra-e18-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "The trader sells each sack for 28 500 FCFA. What is her profit on the three sacks, excluding transport (FCFA)?",
+     "answer": 10500,
+     "tolerance": 0,
+     "explanation": "3 × (28 500 − 25 000) = 10 500.",
+     "unit": "FCFA",
+     "id": "form1-maths-algebra-e18-c"
+    }
+   ],
+   "chapter": "form1-maths-algebra"
+  },
+  {
+   "id": "form1-maths-linear-equations-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-linear-equations",
+   "prompt": "The solution of x − 4 = 10 is:",
+   "choices": [
+    "14",
+    "−6",
+    "6",
+    "40"
+   ],
+   "answer": 0,
+   "explanation": "Add 4 to both sides.",
+   "chapter": "form1-maths-algebra"
+  },
+  {
+   "id": "form1-maths-linear-equations-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-linear-equations",
+   "prompt": "To solve 2x + 5 = 11 the first step is to:",
+   "choices": [
+    "multiply by 2",
+    "add 5",
+    "divide by 5",
+    "subtract 5"
+   ],
+   "answer": 3,
+   "explanation": "Undo + 5 first.",
+   "chapter": "form1-maths-algebra"
+  },
+  {
+   "id": "form1-maths-linear-equations-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-linear-equations",
+   "prompt": "Solve 3x = −12:",
+   "choices": [
+    "x = 4",
+    "x = −4",
+    "x = −36",
+    "x = 36"
+   ],
+   "answer": 1,
+   "explanation": "Divide by 3.",
+   "chapter": "form1-maths-algebra"
+  },
+  {
+   "id": "form1-maths-linear-equations-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-linear-equations",
+   "prompt": "If x = 3, which equation is true?",
+   "choices": [
+    "2x + 1 = 7",
+    "x + 5 = 6",
+    "3x = 6",
+    "x − 1 = 4"
+   ],
+   "answer": 0,
+   "explanation": "2 × 3 + 1 = 7.",
+   "chapter": "form1-maths-algebra"
+  },
+  {
+   "id": "form1-maths-linear-equations-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-linear-equations",
+   "prompt": "Solve x/2 = 6:",
+   "choices": [
+    "x = 12",
+    "x = 8",
+    "x = 4",
+    "x = 3"
+   ],
+   "answer": 0,
+   "explanation": "Multiply both sides by 2.",
+   "chapter": "form1-maths-algebra"
+  }
+ ]
+}

@@ -3,8 +3,15 @@ package castbridge.core.lots
 /** A lot = a homogeneous, versioned, signed bundle of the data of ONE feature for ONE scope (e.g. all Apprendre content of one class). */
 data class LotId(val feature: String, val scope: String)   // feature: "learn" | "quiz"; scope: e.g. "cm2", "3e", "tle-c", "droit-l1"
 
+/**
+ * Edition of a lot (docs/TRIAL-EDITION.md). [TRIAL] = the free sample of a lot ("<scope>-trial", see [LotEditions]); [FULL] = the lot
+ * itself. Additive: every existing catalog, store and proof is [FULL] by default and stays byte-identical.
+ */
+enum class Edition { TRIAL, FULL }
+
 /** What the server/phone/TV know about a lot version. [bytes] = size on disk once installed; [sha256] of the lot file. */
-data class LotMeta(val id: LotId, val version: Int, val bytes: Long, val sha256: String, val title: String, val minAppVersion: Int = 0)
+data class LotMeta(val id: LotId, val version: Int, val bytes: Long, val sha256: String, val title: String, val minAppVersion: Int = 0,
+                   val edition: Edition = Edition.FULL)
 
 /** Where lots come from: the server (phone side), or the phone (TV side). */
 interface LotSource {

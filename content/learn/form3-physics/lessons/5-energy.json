@@ -1,0 +1,702 @@
+{
+ "chapter": "form3-physics-energy",
+ "lessons": [
+  {
+   "id": "form3-physics-work-energy-power",
+   "title": "Work, energy and power",
+   "minutes": 30,
+   "programRef": "Form 3 Physics — Work, energy, power, simple machines (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Calculate work done, kinetic energy and potential energy.",
+    "State the principle of conservation of energy and apply it to a falling object.",
+    "Calculate power."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form3-physics-energy-e01",
+    "form3-physics-energy-e02",
+    "form3-physics-energy-e03",
+    "form3-physics-energy-e04",
+    "form3-physics-energy-e05",
+    "form3-physics-energy-e06"
+   ],
+   "selfCheck": [
+    "form3-physics-work-energy-power-q1",
+    "form3-physics-work-energy-power-q2",
+    "form3-physics-work-energy-power-q3",
+    "form3-physics-work-energy-power-q4",
+    "form3-physics-work-energy-power-q5"
+   ],
+   "reviewNotes": [
+    "g = 10 N/kg is used; efficiency and machines follow in the next lesson.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Work and power",
+     "md": "**Work done = force × distance moved in the direction of the force**, **W = F × d**. The unit is the **joule (J)**: 1 J = 1 N m. **Power** is the rate of doing work: **P = W ÷ t**, unit the **watt (W)** = 1 J/s. A 100 W bulb transfers 100 J of energy each second."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Kinetic and potential energy",
+     "md": "**Kinetic energy** (moving): **KE = ½ m v²**. **Gravitational potential energy** (height): **PE = m g h** (g = 10 N/kg). Energy is measured in joules. Doing work on an object transfers energy to it: work done = energy transferred."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 420,
+      "h": 250,
+      "bars": [
+       {
+        "label": "PE top",
+        "value": 100,
+        "color": "orange"
+       },
+       {
+        "label": "PE half",
+        "value": 50,
+        "color": "orange"
+       },
+       {
+        "label": "KE half",
+        "value": 50,
+        "color": "red"
+       },
+       {
+        "label": "KE end",
+        "value": 100,
+        "color": "red"
+       }
+      ]
+     },
+     "caption": "A 2 kg ball dropped from 5 m: potential energy changes to kinetic energy (joules).",
+     "alt": "A bar chart: potential energy 100 J at the top and 50 J half-way, kinetic energy 50 J half-way and 100 J at the end."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Conservation of energy",
+     "md": "Energy is **never created or destroyed**, only changed from one form to another: **the total energy stays the same** (when no energy is lost as heat by friction). For a ball falling freely, PE lost = KE gained: **m g h = ½ m v²**, so **v = √(2 g h)**. Some energy is always spread as heat, which is why machines are less than 100 % efficient."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- No work is done if there is no movement, e.g. pushing a wall that does not move.\n- Use the weight (N), not the mass, in W = F × d when lifting; weight = m × 10.\n- In KE = ½ m v² the speed is **squared**: doubling the speed multiplies KE by 4."
+    },
+    {
+     "type": "example",
+     "title": "Work and power in lifting",
+     "statement": "A porter lifts a 50 kg bag steadily through 2 m in 5 s (g = 10 N/kg). Find the work done and the power.",
+     "steps": [
+      "Force = weight = 50 × 10 = 500 N; W = 500 × 2 = 1000 J.",
+      "P = W ÷ t = 1000 ÷ 5 = 200 W."
+     ],
+     "answer": "1000 J; 200 W"
+    },
+    {
+     "type": "example",
+     "title": "Speed of a falling ball",
+     "statement": "A 2 kg ball is dropped from 5 m. Find its speed just before it hits the ground (ignore air resistance).",
+     "steps": [
+      "PE at the top = 2 × 10 × 5 = 100 J, all becomes KE: ½ × 2 × v² = 100.",
+      "v² = 100, so v = 10 m/s."
+     ],
+     "answer": "10 m/s"
+    },
+    {
+     "type": "exercise",
+     "ref": "form3-physics-energy-e01"
+    }
+   ],
+   "chapter": "form3-physics-energy"
+  },
+  {
+   "id": "form3-physics-machines",
+   "title": "Simple machines and efficiency",
+   "minutes": 30,
+   "programRef": "Form 3 Physics — Work, energy, power, simple machines (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define a machine, mechanical advantage, velocity ratio and efficiency.",
+    "Name the three classes of lever and give an example of each.",
+    "Calculate MA, VR and efficiency for levers, pulleys and inclined planes."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form3-physics-energy-e07",
+    "form3-physics-energy-e08",
+    "form3-physics-energy-e09",
+    "form3-physics-energy-e10",
+    "form3-physics-energy-e11",
+    "form3-physics-energy-e12"
+   ],
+   "selfCheck": [
+    "form3-physics-machines-q1",
+    "form3-physics-machines-q2",
+    "form3-physics-machines-q3",
+    "form3-physics-machines-q4",
+    "form3-physics-machines-q5"
+   ],
+   "reviewNotes": [
+    "For pulley systems VR = number of supporting ropes (ideal model); check the syllabus definition of efficiency (output/input work).",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Machines",
+     "md": "A **machine** makes work easier by changing the size or direction of a force (it does not give extra energy). Simple machines: **lever**, **pulley**, **inclined plane (ramp)**, **wheel and axle**, **screw**, **wedge**. The **load** is the force to overcome and the **effort** is the force applied."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 185,
+      "items": [
+       {
+        "t": "line",
+        "x1": 50,
+        "y1": 120,
+        "x2": 410,
+        "y2": 120,
+        "color": "brown",
+        "width": 6
+       },
+       {
+        "t": "poly",
+        "pts": [
+         160,
+         120,
+         145,
+         150,
+         175,
+         150
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "grey"
+       },
+       {
+        "t": "line",
+        "x1": 90,
+        "y1": 70,
+        "x2": 90,
+        "y2": 116,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 60,
+        "text": "load",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 370,
+        "y1": 70,
+        "x2": 370,
+        "y2": 116,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 370,
+        "y": 60,
+        "text": "effort",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 170,
+        "text": "pivot (fulcrum)",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A lever: load and effort on either side of the pivot.",
+     "alt": "A beam on a pivot with a load arrow downward on the left and an effort arrow downward on the right."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "MA, VR and efficiency",
+     "md": "**Mechanical advantage MA = load ÷ effort** (no unit). **Velocity ratio VR = distance moved by the effort ÷ distance moved by the load** (for a ramp: length of the slope ÷ height; for a pulley system: the number of supporting ropes). **Efficiency = (work output ÷ work input) × 100 % = (MA ÷ VR) × 100 %**. Efficiency is always **below 100 %** because of friction."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Classes of lever",
+     "md": "**Class 1**: pivot between load and effort (seesaw, scissors, crowbar). **Class 2**: load between pivot and effort (wheelbarrow, nutcracker). **Class 3**: effort between pivot and load (tweezers, a person's forearm, fishing rod). Class 2 levers always have MA greater than 1; class 3 levers have MA less than 1 but give speed and range."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- A machine cannot have an efficiency over 100 %: that would create energy.\n- MA has **no unit**; VR also has none.\n- A big MA means a small effort but a **long** distance for the effort."
+    },
+    {
+     "type": "example",
+     "title": "Pulley system",
+     "statement": "A pulley system with 4 supporting ropes raises a 400 N load with an effort of 150 N. Find MA, VR and the efficiency.",
+     "steps": [
+      "MA = 400 ÷ 150 = 2.67; VR = 4.",
+      "Efficiency = (2.67 ÷ 4) × 100 = 66.7 %."
+     ],
+     "answer": "MA 2.67; VR 4; efficiency 66.7 %"
+    },
+    {
+     "type": "example",
+     "title": "Ramp",
+     "statement": "A 600 N barrel is pushed up a ramp 3 m long and 1 m high with an effort of 300 N. Find MA, VR and efficiency.",
+     "steps": [
+      "MA = 600 ÷ 300 = 2; VR = 3 ÷ 1 = 3.",
+      "Efficiency = (2 ÷ 3) × 100 = 66.7 %."
+     ],
+     "answer": "MA 2; VR 3; efficiency 66.7 %"
+    },
+    {
+     "type": "exercise",
+     "ref": "form3-physics-energy-e07"
+    }
+   ],
+   "chapter": "form3-physics-energy"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form3-physics-energy-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-physics-work-energy-power",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A force of 40 N moves a box 6 m along the floor. Find the work done in J.",
+   "answer": 240,
+   "tolerance": 0,
+   "unit": "J",
+   "explanation": "40 × 6 = 240 J.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-physics-energy"
+  },
+  {
+   "id": "form3-physics-energy-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-physics-work-energy-power",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the kinetic energy of a 1000 kg car moving at 20 m/s (J).",
+   "answer": 200000,
+   "tolerance": 0,
+   "unit": "J",
+   "explanation": "½ × 1000 × 400 = 200 000 J.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-physics-energy"
+  },
+  {
+   "id": "form3-physics-energy-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-physics-work-energy-power",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A machine does 3000 J of work in 20 s. Find its power in W.",
+   "answer": 150,
+   "tolerance": 0,
+   "unit": "W",
+   "explanation": "3000 ÷ 20 = 150 W.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-physics-energy"
+  },
+  {
+   "id": "form3-physics-energy-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form3-physics-work-energy-power",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the potential energy gained by a 4 kg object raised 3 m. (g = 10 N/kg)",
+   "answer": 120,
+   "tolerance": 0,
+   "unit": "J",
+   "explanation": "mgh = 4 × 10 × 3 = 120 J.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form3-physics-energy"
+  },
+  {
+   "id": "form3-physics-energy-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form3-physics-work-energy-power",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A student says: 'I held a heavy box for one minute so I did a lot of work.' Is she right? Explain.",
+   "model": "No. Work = force × distance moved; the box did not move, so no work was done on it in the physics sense, although her muscles used energy.",
+   "rubric": [
+    "1 mark: no work if no movement",
+    "1 mark: uses W = F × d"
+   ],
+   "explanation": "No. Work = force × distance moved; the box did not move, so no work was done on it in the physics sense, although her muscles used energy.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-physics-energy"
+  },
+  {
+   "id": "form3-physics-energy-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form3-physics-work-energy-power",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A 0.5 kg stone is thrown vertically upward at 20 m/s (g = 10 m/s², ignore air resistance).",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Initial kinetic energy (J).",
+     "answer": 100,
+     "tolerance": 0,
+     "explanation": "½ × 0.5 × 20² = 100 J.",
+     "unit": "J",
+     "id": "form3-physics-energy-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Maximum height reached (m), where all KE has become PE.",
+     "answer": 20,
+     "tolerance": 0,
+     "explanation": "mgh = 100, so h = 100 ÷ (0.5 × 10) = 20 m.",
+     "unit": "m",
+     "id": "form3-physics-energy-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Kinetic energy at the top (J).",
+     "answer": 0,
+     "tolerance": 0,
+     "explanation": "The stone is momentarily at rest.",
+     "unit": "J",
+     "id": "form3-physics-energy-e06-c"
+    }
+   ],
+   "chapter": "form3-physics-energy"
+  },
+  {
+   "id": "form3-physics-work-energy-power-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-work-energy-power",
+   "prompt": "The joule is the unit used to measure:",
+   "choices": [
+    "energy",
+    "force",
+    "power",
+    "pressure"
+   ],
+   "answer": 0,
+   "explanation": "Energy and work are in J.",
+   "chapter": "form3-physics-energy"
+  },
+  {
+   "id": "form3-physics-work-energy-power-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-work-energy-power",
+   "prompt": "Power is calculated by:",
+   "choices": [
+    "work × time",
+    "mass × speed",
+    "work ÷ time",
+    "force × time"
+   ],
+   "answer": 2,
+   "explanation": "P = W/t.",
+   "chapter": "form3-physics-energy"
+  },
+  {
+   "id": "form3-physics-work-energy-power-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-work-energy-power",
+   "prompt": "Kinetic energy is:",
+   "choices": [
+    "mgh",
+    "Fd",
+    "mv",
+    "½mv²"
+   ],
+   "answer": 3,
+   "explanation": "Energy of motion.",
+   "chapter": "form3-physics-energy"
+  },
+  {
+   "id": "form3-physics-work-energy-power-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-work-energy-power",
+   "prompt": "When an object falls freely its potential energy:",
+   "choices": [
+    "changes into kinetic energy",
+    "doubles",
+    "is destroyed",
+    "becomes mass"
+   ],
+   "answer": 0,
+   "explanation": "Conservation of energy.",
+   "chapter": "form3-physics-energy"
+  },
+  {
+   "id": "form3-physics-work-energy-power-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-work-energy-power",
+   "prompt": "A power of 60 W means:",
+   "choices": [
+    "60 J of energy transferred per second",
+    "60 J in a minute",
+    "60 m of height",
+    "60 N of force"
+   ],
+   "answer": 0,
+   "explanation": "Watt = joule per second.",
+   "chapter": "form3-physics-energy"
+  },
+  {
+   "id": "form3-physics-energy-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-physics-machines",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A machine lifts a load of 900 N using an effort of 300 N. Find its mechanical advantage.",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "MA = 900 ÷ 300 = 3.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-physics-energy"
+  },
+  {
+   "id": "form3-physics-energy-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-physics-machines",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A pulley system has MA 3 and VR 4. Find the efficiency in %.",
+   "answer": 75,
+   "tolerance": 0,
+   "unit": "%",
+   "explanation": "(3 ÷ 4) × 100 = 75 %.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-physics-energy"
+  },
+  {
+   "id": "form3-physics-energy-e09",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-physics-machines",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A wheelbarrow is a lever of which class?",
+   "choices": [
+    "class 3",
+    "class 1",
+    "class 2",
+    "it is not a lever"
+   ],
+   "answer": 2,
+   "explanation": "The load is between the pivot (wheel) and the effort.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-physics-energy"
+  },
+  {
+   "id": "form3-physics-energy-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form3-physics-machines",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A ramp is 5 m long and 1 m high. What is its velocity ratio?",
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "VR = 5 ÷ 1 = 5.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form3-physics-energy"
+  },
+  {
+   "id": "form3-physics-energy-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form3-physics-machines",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Why is the efficiency of every real machine less than 100 %?",
+   "model": "Some of the input energy is used to overcome friction between moving parts and is transferred as heat, so the useful output work is less than the input work.",
+   "rubric": [
+    "1 mark: friction",
+    "1 mark: energy wasted as heat"
+   ],
+   "explanation": "Some of the input energy is used to overcome friction between moving parts and is transferred as heat, so the useful output work is less than the input work.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-physics-energy"
+  },
+  {
+   "id": "form3-physics-energy-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form3-physics-machines",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A lever raises a 240 N load 0.10 m when an effort of 100 N moves 0.30 m.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Work done on the load (J).",
+     "answer": 24,
+     "tolerance": 0,
+     "explanation": "240 × 0.10 = 24 J.",
+     "unit": "J",
+     "id": "form3-physics-energy-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Work done by the effort (J).",
+     "answer": 30,
+     "tolerance": 0,
+     "explanation": "100 × 0.30 = 30 J.",
+     "unit": "J",
+     "id": "form3-physics-energy-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Efficiency in %.",
+     "answer": 80,
+     "tolerance": 0,
+     "explanation": "24 ÷ 30 × 100 = 80 %.",
+     "unit": "%",
+     "id": "form3-physics-energy-e12-c"
+    }
+   ],
+   "chapter": "form3-physics-energy"
+  },
+  {
+   "id": "form3-physics-machines-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-machines",
+   "prompt": "Mechanical advantage is:",
+   "choices": [
+    "load × effort",
+    "effort ÷ load",
+    "effort − load",
+    "load ÷ effort"
+   ],
+   "answer": 3,
+   "explanation": "MA = L/E.",
+   "chapter": "form3-physics-energy"
+  },
+  {
+   "id": "form3-physics-machines-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-machines",
+   "prompt": "The efficiency of a machine can never be:",
+   "choices": [
+    "80 %",
+    "less than 100 %",
+    "more than 100 %",
+    "60 %"
+   ],
+   "answer": 2,
+   "explanation": "That would create energy.",
+   "chapter": "form3-physics-energy"
+  },
+  {
+   "id": "form3-physics-machines-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-machines",
+   "prompt": "Scissors are an example of a lever of class:",
+   "choices": [
+    "0",
+    "2",
+    "3",
+    "1"
+   ],
+   "answer": 3,
+   "explanation": "Pivot between effort and load.",
+   "chapter": "form3-physics-energy"
+  },
+  {
+   "id": "form3-physics-machines-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-machines",
+   "prompt": "The VR of a ramp 4 m long and 1 m high is:",
+   "choices": [
+    "4",
+    "0.25",
+    "1",
+    "5"
+   ],
+   "answer": 0,
+   "explanation": "Length ÷ height.",
+   "chapter": "form3-physics-energy"
+  },
+  {
+   "id": "form3-physics-machines-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-machines",
+   "prompt": "A machine makes work easier by:",
+   "choices": [
+    "creating energy",
+    "removing friction completely",
+    "reducing the load's weight",
+    "changing the size or direction of the force"
+   ],
+   "answer": 3,
+   "explanation": "It cannot create energy.",
+   "chapter": "form3-physics-energy"
+  }
+ ]
+}

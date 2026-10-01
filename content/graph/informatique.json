@@ -1,0 +1,1025 @@
+{
+ "format": 1,
+ "domain": "informatique",
+ "prefix": "inf",
+ "title": {
+  "fr": "Informatique et numérique",
+  "en": "Computing and digital skills"
+ },
+ "skills": [
+  {
+   "id": "inf.device-basics",
+   "title": {
+    "fr": "Découvrir le téléphone, la TV et l'ordinateur",
+    "en": "Discover phones, TVs and computers"
+   },
+   "level": "N0",
+   "prereq": [],
+   "years": [
+    2
+   ],
+   "classes": [
+    "cp",
+    "class2"
+   ],
+   "exams": [],
+   "lots": [
+    "cp",
+    "class2"
+   ],
+   "minutes": 20,
+   "tags": [
+    "numerique",
+    "probe"
+   ]
+  },
+  {
+   "id": "inf.keyboard-touch",
+   "title": {
+    "fr": "Écran tactile, clavier et souris",
+    "en": "Touchscreen, keyboard and mouse"
+   },
+   "level": "N0",
+   "prereq": [
+    "inf.device-basics"
+   ],
+   "years": [
+    3
+   ],
+   "classes": [
+    "ce1",
+    "class3"
+   ],
+   "exams": [],
+   "lots": [
+    "ce1",
+    "class3"
+   ],
+   "minutes": 20,
+   "tags": [
+    "numerique",
+    "probe"
+   ]
+  },
+  {
+   "id": "inf.safe-use",
+   "title": {
+    "fr": "Un usage sûr : données personnelles, inconnus en ligne",
+    "en": "Safe use: personal data and strangers online"
+   },
+   "level": "N0",
+   "prereq": [
+    "inf.device-basics"
+   ],
+   "years": [
+    3
+   ],
+   "classes": [
+    "ce1",
+    "class3"
+   ],
+   "exams": [],
+   "lots": [
+    "ce1",
+    "class3"
+   ],
+   "minutes": 25,
+   "tags": [
+    "numerique",
+    "securite"
+   ]
+  },
+  {
+   "id": "inf.sequence-instructions",
+   "title": {
+    "fr": "Suivre et donner des instructions pas à pas",
+    "en": "Following and giving step-by-step instructions"
+   },
+   "level": "N0",
+   "prereq": [],
+   "years": [
+    3
+   ],
+   "classes": [
+    "ce1",
+    "class3"
+   ],
+   "exams": [],
+   "lots": [
+    "ce1",
+    "class3"
+   ],
+   "minutes": 20,
+   "tags": [
+    "algorithmique"
+   ]
+  },
+  {
+   "id": "inf.files-folders",
+   "title": {
+    "fr": "Fichiers et dossiers",
+    "en": "Files and folders"
+   },
+   "level": "N1",
+   "prereq": [
+    "inf.keyboard-touch"
+   ],
+   "years": [
+    4
+   ],
+   "classes": [
+    "ce2",
+    "class4"
+   ],
+   "exams": [],
+   "lots": [
+    "ce2",
+    "class4"
+   ],
+   "minutes": 25,
+   "tags": [
+    "numerique",
+    "probe"
+   ]
+  },
+  {
+   "id": "inf.text-processing",
+   "title": {
+    "fr": "Traitement de texte",
+    "en": "Word processing"
+   },
+   "level": "N1",
+   "prereq": [
+    "inf.files-folders"
+   ],
+   "years": [
+    5
+   ],
+   "classes": [
+    "cm1",
+    "class5"
+   ],
+   "exams": [],
+   "lots": [
+    "cm1",
+    "class5"
+   ],
+   "minutes": 30,
+   "tags": [
+    "bureautique"
+   ]
+  },
+  {
+   "id": "inf.internet-search",
+   "title": {
+    "fr": "Chercher et vérifier une information en ligne",
+    "en": "Searching and checking information online"
+   },
+   "level": "N1",
+   "prereq": [
+    "inf.safe-use",
+    "inf.files-folders"
+   ],
+   "years": [
+    5
+   ],
+   "classes": [
+    "cm1",
+    "class5"
+   ],
+   "exams": [],
+   "lots": [
+    "cm1",
+    "class5"
+   ],
+   "minutes": 30,
+   "tags": [
+    "numerique",
+    "fiabilite"
+   ]
+  },
+  {
+   "id": "inf.algorithms-1",
+   "title": {
+    "fr": "Algorithmes : séquences, boucles, conditions",
+    "en": "Algorithms: sequences, loops, conditions"
+   },
+   "level": "N1",
+   "prereq": [
+    "inf.sequence-instructions"
+   ],
+   "years": [
+    5
+   ],
+   "classes": [
+    "cm1",
+    "class5"
+   ],
+   "exams": [],
+   "lots": [
+    "cm1",
+    "class5"
+   ],
+   "minutes": 30,
+   "tags": [
+    "algorithmique",
+    "probe"
+   ]
+  },
+  {
+   "id": "inf.spreadsheet",
+   "title": {
+    "fr": "Tableur : formules et graphiques",
+    "en": "Spreadsheets: formulas and charts"
+   },
+   "level": "N1",
+   "prereq": [
+    "inf.text-processing",
+    "math.mean"
+   ],
+   "years": [
+    7
+   ],
+   "classes": [
+    "6e",
+    "form1"
+   ],
+   "exams": [],
+   "lots": [
+    "6e",
+    "form1"
+   ],
+   "minutes": 35,
+   "tags": [
+    "bureautique"
+   ]
+  },
+  {
+   "id": "inf.blocks-programming",
+   "title": {
+    "fr": "Programmer avec des blocs (Scratch)",
+    "en": "Block programming (Scratch)"
+   },
+   "level": "N1",
+   "prereq": [
+    "inf.algorithms-1"
+   ],
+   "years": [
+    7
+   ],
+   "classes": [
+    "6e",
+    "form1"
+   ],
+   "exams": [],
+   "lots": [
+    "6e",
+    "form1"
+   ],
+   "minutes": 35,
+   "tags": [
+    "programmation",
+    "probe"
+   ]
+  },
+  {
+   "id": "inf.email-collab",
+   "title": {
+    "fr": "Courriel, messagerie et travail collaboratif",
+    "en": "Email, messaging and collaboration"
+   },
+   "level": "N1",
+   "prereq": [
+    "inf.internet-search"
+   ],
+   "years": [
+    7
+   ],
+   "classes": [
+    "6e",
+    "form1"
+   ],
+   "exams": [],
+   "lots": [
+    "6e",
+    "form1"
+   ],
+   "minutes": 30,
+   "tags": [
+    "numerique"
+   ]
+  },
+  {
+   "id": "inf.hardware-os",
+   "title": {
+    "fr": "Matériel, système d'exploitation, réseaux",
+    "en": "Hardware, operating systems and networks"
+   },
+   "level": "N1",
+   "prereq": [
+    "inf.files-folders"
+   ],
+   "years": [
+    8
+   ],
+   "classes": [
+    "5e",
+    "form2"
+   ],
+   "exams": [],
+   "lots": [
+    "5e",
+    "form2"
+   ],
+   "minutes": 35,
+   "tags": [
+    "systeme",
+    "probe"
+   ]
+  },
+  {
+   "id": "inf.python-basics",
+   "title": {
+    "fr": "Python : variables, conditions, boucles",
+    "en": "Python: variables, conditions, loops"
+   },
+   "level": "N1",
+   "prereq": [
+    "inf.blocks-programming",
+    "math.alg-letters"
+   ],
+   "years": [
+    9
+   ],
+   "classes": [
+    "4e",
+    "form3"
+   ],
+   "exams": [],
+   "lots": [
+    "4e",
+    "form3"
+   ],
+   "minutes": 40,
+   "tags": [
+    "programmation",
+    "probe"
+   ]
+  },
+  {
+   "id": "inf.data-representation",
+   "title": {
+    "fr": "Représenter l'information : binaire, texte, images",
+    "en": "Data representation: binary, text, images"
+   },
+   "level": "N1",
+   "prereq": [
+    "inf.hardware-os",
+    "math.powers"
+   ],
+   "years": [
+    9
+   ],
+   "classes": [
+    "4e",
+    "form3"
+   ],
+   "exams": [],
+   "lots": [
+    "4e",
+    "form3"
+   ],
+   "minutes": 40,
+   "tags": [
+    "systeme"
+   ]
+  },
+  {
+   "id": "inf.networks-internet",
+   "title": {
+    "fr": "Réseaux et Internet : protocoles, web",
+    "en": "Networks and the Internet: protocols and the web"
+   },
+   "level": "N1",
+   "prereq": [
+    "inf.hardware-os",
+    "inf.email-collab"
+   ],
+   "years": [
+    10
+   ],
+   "classes": [
+    "3e",
+    "form4"
+   ],
+   "exams": [
+    "bepc"
+   ],
+   "lots": [
+    "3e",
+    "form4"
+   ],
+   "minutes": 40,
+   "tags": [
+    "reseaux"
+   ]
+  },
+  {
+   "id": "inf.python-functions",
+   "title": {
+    "fr": "Python : fonctions, listes, fichiers",
+    "en": "Python: functions, lists, files"
+   },
+   "level": "N1",
+   "prereq": [
+    "inf.python-basics"
+   ],
+   "years": [
+    10
+   ],
+   "classes": [
+    "3e",
+    "form4"
+   ],
+   "exams": [
+    "bepc"
+   ],
+   "lots": [
+    "3e",
+    "form4"
+   ],
+   "minutes": 40,
+   "tags": [
+    "programmation",
+    "probe"
+   ]
+  },
+  {
+   "id": "inf.digital-citizenship",
+   "title": {
+    "fr": "Citoyenneté numérique : droit, éthique, désinformation",
+    "en": "Digital citizenship: law, ethics, misinformation"
+   },
+   "level": "N1",
+   "prereq": [
+    "inf.internet-search",
+    "inf.networks-internet"
+   ],
+   "years": [
+    10
+   ],
+   "classes": [
+    "3e",
+    "form4"
+   ],
+   "exams": [
+    "bepc"
+   ],
+   "lots": [
+    "3e",
+    "form4"
+   ],
+   "minutes": 35,
+   "tags": [
+    "securite",
+    "ecm"
+   ]
+  },
+  {
+   "id": "inf.databases-1",
+   "title": {
+    "fr": "Bases de données et SQL de base",
+    "en": "Databases and basic SQL"
+   },
+   "level": "N1",
+   "prereq": [
+    "inf.spreadsheet",
+    "inf.python-functions"
+   ],
+   "years": [
+    11
+   ],
+   "classes": [
+    "2nde",
+    "form5"
+   ],
+   "exams": [
+    "gce-ol"
+   ],
+   "lots": [
+    "2nde",
+    "form5"
+   ],
+   "minutes": 45,
+   "tags": [
+    "donnees",
+    "probe"
+   ]
+  },
+  {
+   "id": "inf.web-dev",
+   "title": {
+    "fr": "Pages web : HTML, CSS",
+    "en": "Web pages: HTML and CSS"
+   },
+   "level": "N1",
+   "prereq": [
+    "inf.networks-internet",
+    "inf.text-processing"
+   ],
+   "years": [
+    11
+   ],
+   "classes": [
+    "2nde",
+    "form5"
+   ],
+   "exams": [
+    "gce-ol"
+   ],
+   "lots": [
+    "2nde",
+    "form5"
+   ],
+   "minutes": 40,
+   "tags": [
+    "web"
+   ]
+  },
+  {
+   "id": "inf.data-structures",
+   "title": {
+    "fr": "Structures de données : piles, files, arbres",
+    "en": "Data structures: stacks, queues, trees"
+   },
+   "level": "N1",
+   "prereq": [
+    "inf.python-functions"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "exams": [
+    "probatoire"
+   ],
+   "lots": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "minutes": 50,
+   "tags": [
+    "programmation"
+   ]
+  },
+  {
+   "id": "inf.algorithms-2",
+   "title": {
+    "fr": "Algorithmes de tri et de recherche, complexité",
+    "en": "Sorting and searching algorithms, complexity"
+   },
+   "level": "N1",
+   "prereq": [
+    "inf.python-functions",
+    "math.seq"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "exams": [
+    "probatoire"
+   ],
+   "lots": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "minutes": 50,
+   "tags": [
+    "algorithmique",
+    "probe"
+   ]
+  },
+  {
+   "id": "inf.security-crypto",
+   "title": {
+    "fr": "Sécurité et cryptographie de base",
+    "en": "Security and basic cryptography"
+   },
+   "level": "N1",
+   "prereq": [
+    "inf.data-representation",
+    "inf.digital-citizenship"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "exams": [
+    "probatoire"
+   ],
+   "lots": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "minutes": 45,
+   "tags": [
+    "securite"
+   ]
+  },
+  {
+   "id": "inf.oop",
+   "title": {
+    "fr": "Programmation orientée objet",
+    "en": "Object-oriented programming"
+   },
+   "level": "N1",
+   "prereq": [
+    "inf.data-structures"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [
+    "bac",
+    "gce-al"
+   ],
+   "lots": [
+    "tle",
+    "upper-sixth"
+   ],
+   "minutes": 50,
+   "tags": [
+    "programmation"
+   ]
+  },
+  {
+   "id": "inf.bac-info",
+   "title": {
+    "fr": "Informatique du Bac / A Level Computing",
+    "en": "Baccalauréat / A Level computing"
+   },
+   "level": "N1",
+   "prereq": [
+    "inf.algorithms-2",
+    "inf.databases-1",
+    "inf.oop"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [
+    "bac",
+    "gce-al"
+   ],
+   "lots": [
+    "tle",
+    "upper-sixth"
+   ],
+   "minutes": 60,
+   "tags": [
+    "examen",
+    "probe"
+   ]
+  },
+  {
+   "id": "inf.systems-uni",
+   "title": {
+    "fr": "Systèmes, architecture et réseaux de première année",
+    "en": "First-year systems, architecture and networks"
+   },
+   "level": "N1",
+   "prereq": [
+    "inf.bac-info"
+   ],
+   "years": [
+    14
+   ],
+   "classes": [
+    "l1",
+    "l1-en"
+   ],
+   "exams": [],
+   "lots": [
+    "l1",
+    "l1-en"
+   ],
+   "minutes": 55,
+   "tags": [
+    "superieur",
+    "probe"
+   ]
+  },
+  {
+   "id": "inf.n2-algo-contest",
+   "title": {
+    "fr": "Problèmes d'algorithmique de concours",
+    "en": "Contest algorithm problems"
+   },
+   "level": "N2",
+   "prereq": [
+    "inf.python-basics",
+    "inf.algorithms-1"
+   ],
+   "years": [
+    9
+   ],
+   "classes": [
+    "4e",
+    "form3"
+   ],
+   "exams": [],
+   "lots": [
+    "4e-exc",
+    "form3-exc"
+   ],
+   "minutes": 45,
+   "tags": [
+    "concours",
+    "algorithmique",
+    "probe"
+   ]
+  },
+  {
+   "id": "inf.n2-decomposition",
+   "title": {
+    "fr": "Décomposer et résoudre des problèmes de programmation complexes",
+    "en": "Decomposing and solving complex programming problems"
+   },
+   "level": "N2",
+   "prereq": [
+    "inf.python-functions",
+    "inf.n2-algo-contest"
+   ],
+   "years": [
+    10
+   ],
+   "classes": [
+    "3e",
+    "form4"
+   ],
+   "exams": [],
+   "lots": [
+    "3e-exc",
+    "form4-exc"
+   ],
+   "minutes": 50,
+   "tags": [
+    "concours",
+    "programmation",
+    "probe"
+   ]
+  },
+  {
+   "id": "inf.n2-data-structures-contest",
+   "title": {
+    "fr": "Structures de données et complexité en concours",
+    "en": "Data structures and complexity in contests"
+   },
+   "level": "N2",
+   "prereq": [
+    "inf.data-structures",
+    "inf.algorithms-2",
+    "inf.n2-decomposition"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "1ere-exc",
+    "lower-sixth-exc"
+   ],
+   "minutes": 60,
+   "tags": [
+    "concours",
+    "algorithmique",
+    "probe"
+   ]
+  },
+  {
+   "id": "inf.n2-systems-security",
+   "title": {
+    "fr": "Sécurité des systèmes : menaces, analyse, défense",
+    "en": "Systems security: threats, analysis and defence"
+   },
+   "level": "N2",
+   "prereq": [
+    "inf.security-crypto",
+    "inf.networks-internet"
+   ],
+   "years": [
+    12
+   ],
+   "classes": [
+    "1ere",
+    "lower-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "1ere-exc",
+    "lower-sixth-exc"
+   ],
+   "minutes": 55,
+   "tags": [
+    "concours",
+    "securite"
+   ]
+  },
+  {
+   "id": "inf.n2-bac-info-excellence",
+   "title": {
+    "fr": "Informatique du Bac niveau meilleurs candidats",
+    "en": "Top-candidate Baccalauréat computing"
+   },
+   "level": "N2",
+   "prereq": [
+    "inf.bac-info",
+    "inf.n2-data-structures-contest"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "tle-exc",
+    "upper-sixth-exc"
+   ],
+   "minutes": 65,
+   "tags": [
+    "concours",
+    "probe"
+   ]
+  },
+  {
+   "id": "inf.n2-project-dev",
+   "title": {
+    "fr": "Concevoir, tester et documenter un projet logiciel",
+    "en": "Designing, testing and documenting a software project"
+   },
+   "level": "N2",
+   "prereq": [
+    "inf.oop",
+    "inf.n2-decomposition"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "tle-exc",
+    "upper-sixth-exc"
+   ],
+   "minutes": 60,
+   "tags": [
+    "concours",
+    "projet"
+   ]
+  },
+  {
+   "id": "inf.n3-algorithms-adv",
+   "title": {
+    "fr": "Programmation dynamique, graphes, algorithmes gloutons",
+    "en": "Dynamic programming, graphs and greedy algorithms"
+   },
+   "level": "N3",
+   "prereq": [
+    "inf.n2-data-structures-contest"
+   ],
+   "years": [
+    13
+   ],
+   "classes": [
+    "tle",
+    "upper-sixth"
+   ],
+   "exams": [],
+   "lots": [
+    "tle-exc",
+    "upper-sixth-exc"
+   ],
+   "minutes": 70,
+   "tags": [
+    "olympiade",
+    "probe"
+   ]
+  },
+  {
+   "id": "inf.n3-theory-computation",
+   "title": {
+    "fr": "Calculabilité, langages et automates (initiation)",
+    "en": "Computability, languages and automata (intro)"
+   },
+   "level": "N3",
+   "prereq": [
+    "inf.n2-bac-info-excellence",
+    "math.n2-linalg"
+   ],
+   "years": [
+    14
+   ],
+   "classes": [
+    "l1",
+    "l1-en"
+   ],
+   "exams": [],
+   "lots": [
+    "l1-exc",
+    "l1-en-exc"
+   ],
+   "minutes": 70,
+   "tags": [
+    "international"
+   ]
+  },
+  {
+   "id": "inf.n3-ml-intro",
+   "title": {
+    "fr": "Apprendre à partir de données : initiation à l'IA et ses limites",
+    "en": "Learning from data: intro to AI and its limits"
+   },
+   "level": "N3",
+   "prereq": [
+    "inf.n2-project-dev",
+    "math.stats-inf"
+   ],
+   "years": [
+    15
+   ],
+   "classes": [
+    "l2",
+    "l2-en"
+   ],
+   "exams": [],
+   "lots": [
+    "l2-exc",
+    "l2-en-exc"
+   ],
+   "minutes": 70,
+   "tags": [
+    "international",
+    "ia",
+    "probe"
+   ]
+  },
+  {
+   "id": "inf.n3-systems-arch",
+   "title": {
+    "fr": "Systèmes d'exploitation et architecture des machines",
+    "en": "Operating systems and machine architecture"
+   },
+   "level": "N3",
+   "prereq": [
+    "inf.systems-uni",
+    "inf.n2-systems-security"
+   ],
+   "years": [
+    14
+   ],
+   "classes": [
+    "l1",
+    "l1-en"
+   ],
+   "exams": [],
+   "lots": [
+    "l1-exc",
+    "l1-en-exc"
+   ],
+   "minutes": 70,
+   "tags": [
+    "international",
+    "systeme",
+    "probe"
+   ]
+  }
+ ]
+}

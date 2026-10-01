@@ -46,6 +46,10 @@ data class TvProfile(
     val uploadBufferBytes: Int = 256 * 1024,
     /** On a removable drive, flush an upload to the medium every this many bytes (and at the end), never after every block. */
     val removableSyncBytes: Long = 64L shl 20,
+    /** « Contenus lourds sur la clé USB » : with a drive present, videos go to `<clé>/Download/CastBridge/` (survives the uninstall). */
+    val heavyOnUsb: Boolean = true,
+    /** Drive chosen by the user when several are plugged in ("" = automatic: the emptiest). */
+    val heavyDriveId: String = "",
 )
 
 /** The "keep 1 GB free after the transfer" rule and its human explanation. Pure. */
@@ -125,6 +129,7 @@ object Storage {
             }
             if (orphan && f.delete()) n++
         }
+        n += castbridge.core.xfer.PartAssembler.sweep(dir, maxAgeMs, now)    // abandoned multi-connection transfers (.cbx)
         return n
     }
 

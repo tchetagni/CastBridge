@@ -1,0 +1,915 @@
+{
+ "chapter": "class5-science-living",
+ "lessons": [
+  {
+   "id": "class5-science-plant-reproduction",
+   "title": "Plants: making food, pollination and seed dispersal",
+   "minutes": 35,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level III (Class 5) — Elementary Science and Technology; to be checked against the official syllabus",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Explain how leaves make food (photosynthesis).",
+    "Describe pollination and how seeds are spread.",
+    "Put the stages of a plant's life cycle in order."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "class5-science-living-e01",
+    "class5-science-living-e02",
+    "class5-science-living-e03",
+    "class5-science-living-e04",
+    "class5-science-living-e05",
+    "class5-science-living-e06"
+   ],
+   "selfCheck": [
+    "class5-science-plant-reproduction-q1",
+    "class5-science-plant-reproduction-q2",
+    "class5-science-plant-reproduction-q3",
+    "class5-science-plant-reproduction-q4",
+    "class5-science-plant-reproduction-q5"
+   ],
+   "reviewNotes": [
+    "Photosynthesis described at the simple level; check whether chlorophyll and pollination are expected in Class 5.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Making food",
+     "md": "Green leaves contain **chlorophyll**, which gives them their colour. Using **sunlight**, leaves turn **carbon dioxide** (from the air) and **water** (from the soil) into **food** (sugar) and give out **oxygen**. This is **photosynthesis**. The food is used for growth and stored in roots, stems, fruits and seeds, for example in cassava and yam."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 104,
+      "items": [
+       {
+        "t": "rect",
+        "x": 11.0,
+        "y": 20,
+        "w": 58,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 40.0,
+        "y": 50,
+        "text": "seed",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 69.0,
+        "y1": 45,
+        "x2": 91.0,
+        "y2": 45,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 91.0,
+        "y": 20,
+        "w": 58,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 120.0,
+        "y": 50,
+        "text": "seedling",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 149.0,
+        "y1": 45,
+        "x2": 171.0,
+        "y2": 45,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 171.0,
+        "y": 20,
+        "w": 58,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 50,
+        "text": "plant",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 229.0,
+        "y1": 45,
+        "x2": 251.0,
+        "y2": 45,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 251.0,
+        "y": 20,
+        "w": 58,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 280.0,
+        "y": 50,
+        "text": "flower",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 309.0,
+        "y1": 45,
+        "x2": 331.0,
+        "y2": 45,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 331.0,
+        "y": 20,
+        "w": 58,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 360.0,
+        "y": 50,
+        "text": "fruit",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Life cycle of a flowering plant.",
+     "alt": "Five boxes joined by arrows: seed, seedling, plant, flower, fruit."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Pollination and seeds",
+     "md": "**Pollination** is the moving of **pollen** from one flower to the **stigma** of a flower of the same kind, by **insects** (bees, butterflies) or by the **wind**. After pollination the flower can make **seeds** inside a **fruit**. Seeds are spread (**dispersed**) by **wind** (light, winged or fluffy seeds), **water** (coconut), **animals** (sticky burrs, fruit eaten and dropped) or by the **pod bursting open** (beans)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Saying that plants take in oxygen to make food: they take in **carbon dioxide** (they also breathe like all living things).\n- Thinking that soil is the plant's food: the food is made in the leaves.\n- Thinking that pollination and seed dispersal are the same.\n- Forgetting that seeds are spread so that new plants do not crowd the parent."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Name three things a leaf needs to make food and one thing it gives out.",
+     "steps": [
+      "It needs sunlight, water and carbon dioxide.",
+      "It gives out oxygen."
+     ],
+     "answer": "Needs sunlight, water, carbon dioxide; gives out oxygen."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "A coconut falls into a river and lands on a beach far away. How was the seed dispersed?",
+     "steps": [
+      "The seed floated and was carried by the water.",
+      "This is dispersal by water."
+     ],
+     "answer": "By water"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class5-science-living"
+  },
+  {
+   "id": "class5-science-food-chains",
+   "title": "Food chains and adaptation",
+   "minutes": 30,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level III (Class 5) — Elementary Science and Technology; to be checked against the official syllabus",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Build a food chain and name producers and consumers.",
+    "Say where energy in a food chain comes from.",
+    "Give examples of how animals are adapted to their habitats."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "class5-science-living-e07",
+    "class5-science-living-e08",
+    "class5-science-living-e09",
+    "class5-science-living-e10",
+    "class5-science-living-e11",
+    "class5-science-living-e12"
+   ],
+   "selfCheck": [
+    "class5-science-food-chains-q1",
+    "class5-science-food-chains-q2",
+    "class5-science-food-chains-q3",
+    "class5-science-food-chains-q4",
+    "class5-science-food-chains-q5"
+   ],
+   "reviewNotes": [
+    "The chain examples are generic and not claimed as exact Cameroon food webs.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Food chains",
+     "md": "A **food chain** shows who eats whom. **Plants** are **producers**: they make their own food using sunlight. Animals are **consumers**: **herbivores** (primary consumers) eat plants; **carnivores** (secondary consumers) eat other animals. The arrow means 'is eaten by'. **Decomposers** (bacteria, fungi, some insects) break down dead plants and animals."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 104,
+      "items": [
+       {
+        "t": "rect",
+        "x": 11.0,
+        "y": 20,
+        "w": 78,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 50.0,
+        "y": 50,
+        "text": "maize",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 89.0,
+        "y1": 45,
+        "x2": 111.0,
+        "y2": 45,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 111.0,
+        "y": 20,
+        "w": 78,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 50,
+        "text": "rat",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 189.0,
+        "y1": 45,
+        "x2": 211.0,
+        "y2": 45,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 211.0,
+        "y": 20,
+        "w": 78,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 250.0,
+        "y": 50,
+        "text": "snake",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 289.0,
+        "y1": 45,
+        "x2": 311.0,
+        "y2": 45,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 311.0,
+        "y": 20,
+        "w": 78,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 350.0,
+        "y": 50,
+        "text": "eagle",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "A food chain: maize, rat, snake, eagle.",
+     "alt": "Four boxes joined by arrows: maize, rat, snake, eagle."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Energy and adaptation",
+     "md": "The **Sun** is the first source of energy: plants capture it and pass it on along the chain. An **adaptation** is a feature that helps an animal to live in its habitat: a **fish** has gills and fins for water; a **bird** has wings and light bones to fly; a **chameleon** changes colour to hide; a **lion** has sharp teeth for eating meat. A **food web** joins many food chains."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Drawing the arrow the wrong way: the arrow goes **from the food to the eater** (maize → rat).\n- Forgetting that every food chain starts with a plant.\n- Thinking that animals choose to change their bodies: adaptations develop over many generations.\n- Putting a herbivore after a carnivore in a chain."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "In the chain grass → grasshopper → bird → hawk, name the producer and the top consumer.",
+     "steps": [
+      "The producer is the plant that makes food: grass.",
+      "The last animal in the chain is the hawk."
+     ],
+     "answer": "Producer: grass; top consumer: hawk."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "What happens to the rats if all the snakes in a field are killed?",
+     "steps": [
+      "Fewer animals eat the rats, so the rat numbers may increase.",
+      "They may then eat too much of the maize."
+     ],
+     "answer": "The number of rats may grow and damage the crops."
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class5-science-living"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "class5-science-living-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class5-science-plant-reproduction",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What gives leaves their green colour?",
+   "choices": [
+    "soil",
+    "chlorophyll",
+    "oxygen",
+    "pollen"
+   ],
+   "answer": 1,
+   "explanation": "Chlorophyll is the green substance.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-science-living"
+  },
+  {
+   "id": "class5-science-living-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class5-science-plant-reproduction",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What do plants give out during photosynthesis?",
+   "choices": [
+    "carbon dioxide",
+    "smoke",
+    "oxygen",
+    "pollen"
+   ],
+   "answer": 2,
+   "explanation": "They release oxygen.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-science-living"
+  },
+  {
+   "id": "class5-science-living-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class5-science-plant-reproduction",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which animals help with pollination?",
+   "choices": [
+    "snakes",
+    "crabs",
+    "fish",
+    "bees"
+   ],
+   "answer": 3,
+   "explanation": "Insects carry pollen.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-science-living"
+  },
+  {
+   "id": "class5-science-living-e04",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class5-science-plant-reproduction",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Light fluffy seeds are often spread by the wind.",
+   "answer": true,
+   "explanation": "The wind carries them far.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-science-living"
+  },
+  {
+   "id": "class5-science-living-e05",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "class5-science-plant-reproduction",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each seed with the way it is spread.",
+   "pairs": [
+    [
+     "a coconut",
+     "water"
+    ],
+    [
+     "a seed with wings or fluff",
+     "wind"
+    ],
+    [
+     "a sticky burr",
+     "animals"
+    ],
+    [
+     "a bean pod that bursts",
+     "the pod bursting"
+    ]
+   ],
+   "explanation": "Look at the seed's shape.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "class5-science-living"
+  },
+  {
+   "id": "class5-science-living-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class5-science-plant-reproduction",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Ako covers one leaf of a plant with black paper for one week while the rest of the plant gets sunlight. The covered leaf turns pale and weak.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Why does the covered leaf turn pale?",
+     "choices": [
+      "it gets too much water",
+      "it is too cold",
+      "it has no roots",
+      "it gets no light to make food"
+     ],
+     "answer": 3,
+     "explanation": "Photosynthesis needs light.",
+     "id": "class5-science-living-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which part of the plant makes the food?",
+     "choices": [
+      "the soil",
+      "the flower only",
+      "the roots",
+      "the green leaves"
+     ],
+     "answer": 3,
+     "explanation": "Leaves contain chlorophyll.",
+     "id": "class5-science-living-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "Which gas do the uncovered leaves take in?",
+     "choices": [
+      "carbon dioxide",
+      "nitrogen only",
+      "oxygen only",
+      "smoke"
+     ],
+     "answer": 0,
+     "explanation": "It is needed for photosynthesis.",
+     "id": "class5-science-living-e06-c"
+    }
+   ],
+   "chapter": "class5-science-living"
+  },
+  {
+   "id": "class5-science-plant-reproduction-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-science-plant-reproduction",
+   "prompt": "Class 5 Science (Plants) – Photosynthesis needs...",
+   "choices": [
+    "stones",
+    "only soil",
+    "only oxygen",
+    "sunlight, water and carbon dioxide"
+   ],
+   "answer": 3,
+   "explanation": "Three raw materials.",
+   "chapter": "class5-science-living"
+  },
+  {
+   "id": "class5-science-plant-reproduction-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-science-plant-reproduction",
+   "prompt": "Class 5 Science (Plants) – Pollination is moving...",
+   "choices": [
+    "roots to the ground",
+    "pollen to the stigma",
+    "water to leaves",
+    "seeds to the soil"
+   ],
+   "answer": 1,
+   "explanation": "Insects and wind do it.",
+   "chapter": "class5-science-living"
+  },
+  {
+   "id": "class5-science-plant-reproduction-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-science-plant-reproduction",
+   "prompt": "Class 5 Science (Plants) – Which seed is dispersed by water?",
+   "choices": [
+    "a burr",
+    "a fluffy seed",
+    "a bean",
+    "a coconut"
+   ],
+   "answer": 3,
+   "explanation": "It floats.",
+   "chapter": "class5-science-living"
+  },
+  {
+   "id": "class5-science-plant-reproduction-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-science-plant-reproduction",
+   "prompt": "Class 5 Science (Plants) – A seed grows first into a...",
+   "choices": [
+    "seedling",
+    "pod",
+    "flower",
+    "fruit"
+   ],
+   "answer": 0,
+   "explanation": "Then a plant.",
+   "chapter": "class5-science-living"
+  },
+  {
+   "id": "class5-science-plant-reproduction-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-science-plant-reproduction",
+   "prompt": "Class 5 Science (Plants) – Which gas does a plant give out in the light?",
+   "choices": [
+    "carbon dioxide",
+    "smoke",
+    "nitrogen only",
+    "oxygen"
+   ],
+   "answer": 3,
+   "explanation": "A product of photosynthesis.",
+   "chapter": "class5-science-living"
+  },
+  {
+   "id": "class5-science-living-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class5-science-food-chains",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In a food chain, what is a producer?",
+   "choices": [
+    "a rat",
+    "a snake",
+    "a hawk",
+    "a green plant"
+   ],
+   "answer": 3,
+   "explanation": "Plants make their own food.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-science-living"
+  },
+  {
+   "id": "class5-science-living-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class5-science-food-chains",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which animal is a herbivore?",
+   "choices": [
+    "an eagle",
+    "a snake",
+    "a goat",
+    "a lion"
+   ],
+   "answer": 2,
+   "explanation": "A goat eats plants.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-science-living"
+  },
+  {
+   "id": "class5-science-living-e09",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class5-science-food-chains",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What does the arrow in a food chain mean?",
+   "choices": [
+    "is eaten by",
+    "lives near",
+    "sleeps with",
+    "is faster than"
+   ],
+   "answer": 0,
+   "explanation": "From food to eater.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-science-living"
+  },
+  {
+   "id": "class5-science-living-e10",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class5-science-food-chains",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The first source of energy for a food chain is the Sun.",
+   "answer": true,
+   "explanation": "Plants capture the Sun's energy.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-science-living"
+  },
+  {
+   "id": "class5-science-living-e11",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "class5-science-food-chains",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each animal with an adaptation.",
+   "pairs": [
+    [
+     "fish",
+     "gills for breathing in water"
+    ],
+    [
+     "bird",
+     "wings for flying"
+    ],
+    [
+     "chameleon",
+     "colour change to hide"
+    ],
+    [
+     "lion",
+     "sharp teeth for meat"
+    ]
+   ],
+   "explanation": "Adaptations fit the habitat.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "class5-science-living"
+  },
+  {
+   "id": "class5-science-living-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class5-science-food-chains",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A food chain in a farm in the Western Highlands: maize → grasshopper → lizard → hawk.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which one is the producer?",
+     "choices": [
+      "maize",
+      "hawk",
+      "grasshopper",
+      "lizard"
+     ],
+     "answer": 0,
+     "explanation": "It is a plant.",
+     "id": "class5-science-living-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which one is a secondary consumer (a carnivore eating a herbivore)?",
+     "choices": [
+      "lizard",
+      "maize",
+      "grasshopper",
+      "the Sun"
+     ],
+     "answer": 0,
+     "explanation": "It eats the grasshopper, a herbivore.",
+     "id": "class5-science-living-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "How many living things are there in the chain?",
+     "answer": 4,
+     "tolerance": 0,
+     "explanation": "Maize, grasshopper, lizard and hawk.",
+     "id": "class5-science-living-e12-c"
+    }
+   ],
+   "chapter": "class5-science-living"
+  },
+  {
+   "id": "class5-science-food-chains-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-science-food-chains",
+   "prompt": "Class 5 Science (Food chains and adaptation) – A producer is a...",
+   "choices": [
+    "snake",
+    "lion",
+    "hawk",
+    "plant"
+   ],
+   "answer": 3,
+   "explanation": "It makes its own food.",
+   "chapter": "class5-science-living"
+  },
+  {
+   "id": "class5-science-food-chains-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-science-food-chains",
+   "prompt": "Class 5 Science (Food chains and adaptation) – An animal that eats only plants is a...",
+   "choices": [
+    "herbivore",
+    "decomposer",
+    "producer",
+    "carnivore"
+   ],
+   "answer": 0,
+   "explanation": "Herbivore.",
+   "chapter": "class5-science-living"
+  },
+  {
+   "id": "class5-science-food-chains-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-science-food-chains",
+   "prompt": "Class 5 Science (Food chains and adaptation) – Decomposers...",
+   "choices": [
+    "make sunlight",
+    "fly",
+    "produce rain",
+    "break down dead plants and animals"
+   ],
+   "answer": 3,
+   "explanation": "Bacteria and fungi.",
+   "chapter": "class5-science-living"
+  },
+  {
+   "id": "class5-science-food-chains-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-science-food-chains",
+   "prompt": "Class 5 Science (Food chains and adaptation) – Which is an adaptation of a fish?",
+   "choices": [
+    "fur",
+    "gills",
+    "feathers",
+    "legs"
+   ],
+   "answer": 1,
+   "explanation": "To breathe in water.",
+   "chapter": "class5-science-living"
+  },
+  {
+   "id": "class5-science-food-chains-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-science-food-chains",
+   "prompt": "Class 5 Science (Food chains and adaptation) – Every food chain begins with...",
+   "choices": [
+    "a lion",
+    "a decomposer",
+    "a snake",
+    "a plant"
+   ],
+   "answer": 3,
+   "explanation": "Producers come first.",
+   "chapter": "class5-science-living"
+  }
+ ]
+}

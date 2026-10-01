@@ -1,0 +1,1148 @@
+{
+ "chapter": "form4-physics-heat",
+ "lessons": [
+  {
+   "id": "form4-physics-temperature-expansion",
+   "title": "Temperature, thermometers and expansion",
+   "minutes": 25,
+   "programRef": "Form 4 Physics — Temperature, expansion, specific heat, latent heat (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe how a liquid-in-glass thermometer works and define the fixed points.",
+    "Convert between degrees Celsius and kelvin.",
+    "Describe expansion of solids, liquids and gases and the bimetallic strip."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form4-physics-heat-e01",
+    "form4-physics-heat-e02",
+    "form4-physics-heat-e03",
+    "form4-physics-heat-e04",
+    "form4-physics-heat-e05",
+    "form4-physics-heat-e06"
+   ],
+   "selfCheck": [
+    "form4-physics-temperature-expansion-q1",
+    "form4-physics-temperature-expansion-q2",
+    "form4-physics-temperature-expansion-q3",
+    "form4-physics-temperature-expansion-q4",
+    "form4-physics-temperature-expansion-q5"
+   ],
+   "reviewNotes": [
+    "Use of 273 (rather than 273.15) is a common school convention; check the local convention.",
+    "Thermometer 'sensitivity' and 'range' may be beyond the syllabus.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Temperature and thermometers",
+     "md": "**Temperature** measures how hot an object is. A **liquid-in-glass thermometer** uses the regular **expansion** of a liquid (mercury or coloured alcohol) in a narrow tube. Its scale is set using two **fixed points**: the **lower fixed point 0 °C** (pure melting ice) and the **upper fixed point 100 °C** (steam from pure boiling water at standard pressure). The distance between them is divided into 100 equal parts."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 210,
+      "items": [
+       {
+        "t": "rect",
+        "x": 190,
+        "y": 30,
+        "w": 20,
+        "h": 130,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "white"
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 175,
+        "r": 18,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "rect",
+        "x": 193,
+        "y": 100,
+        "w": 14,
+        "h": 62,
+        "stroke": "none",
+        "width": 0,
+        "fill": "red"
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 45,
+        "x2": 225,
+        "y2": 45,
+        "color": "ink",
+        "width": 1.5
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 155,
+        "x2": 225,
+        "y2": 155,
+        "color": "ink",
+        "width": 1.5
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 100,
+        "x2": 225,
+        "y2": 100,
+        "color": "ink",
+        "width": 1.5
+       },
+       {
+        "t": "text",
+        "x": 232,
+        "y": 49,
+        "text": "100 °C (steam point)",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 232,
+        "y": 159,
+        "text": "0 °C (ice point)",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 232,
+        "y": 104,
+        "text": "50 °C",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 190,
+        "y1": 130,
+        "x2": 130,
+        "y2": 120,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 126,
+        "y": 124,
+        "text": "liquid thread",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 190,
+        "x2": 130,
+        "y2": 196,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 126,
+        "y": 200,
+        "text": "bulb",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A liquid-in-glass thermometer and its fixed points.",
+     "alt": "A thermometer with a bulb and thread, marked 0 °C at the ice point near the bottom, 50 °C and 100 °C at the steam point near the top."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "The kelvin scale",
+     "md": "The **kelvin (K)** is the SI unit of temperature: **T (K) = θ (°C) + 273**. The lowest possible temperature, **absolute zero**, is 0 K = −273 °C. A change of 1 °C equals a change of 1 K. A thermometer is more **sensitive** with a narrower tube or a larger bulb, and has greater **range** when the scale is longer."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Expansion",
+     "md": "Solids, liquids and gases **expand** when heated: gases most, solids least. Uses and effects: gaps in railways and bridges, rollers under bridges, tight metal tyres put on wheels hot. A **bimetallic strip** has two metals bonded together; the metal that expands more is on the **outside of the bend** when heated. It is used in thermostats and fire alarms. **Water** is unusual: it contracts from 0 °C to 4 °C and is **densest at 4 °C**, so ice floats and lakes freeze from the top."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Add 273, not 100, to change °C to K (use 273 in this course).\n- The expansion of a liquid in a thermometer is due to the liquid, but the glass also expands a little.\n- Ice floats because ice is less dense than liquid water, not because it is colder."
+    },
+    {
+     "type": "example",
+     "title": "Unmarked thermometer",
+     "statement": "A thermometer's liquid is 2 cm long at 0 °C and 22 cm long at 100 °C. At a certain temperature the length is 12 cm. Find the temperature.",
+     "steps": [
+      "Range = 22 − 2 = 20 cm for 100 °C. Rise above 0 °C = 12 − 2 = 10 cm.",
+      "Temperature = (10 ÷ 20) × 100 = 50 °C."
+     ],
+     "answer": "50 °C"
+    },
+    {
+     "type": "example",
+     "title": "Kelvin",
+     "statement": "Convert 25 °C and 373 K.",
+     "steps": [
+      "25 + 273 = 298 K.",
+      "373 − 273 = 100 °C."
+     ],
+     "answer": "25 °C = 298 K; 373 K = 100 °C"
+    },
+    {
+     "type": "exercise",
+     "ref": "form4-physics-heat-e01"
+    }
+   ],
+   "chapter": "form4-physics-heat"
+  },
+  {
+   "id": "form4-physics-specific-heat",
+   "title": "Heat capacity and specific heat capacity",
+   "minutes": 30,
+   "programRef": "Form 4 Physics — Temperature, expansion, specific heat, latent heat (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define heat capacity and specific heat capacity.",
+    "Use Q = m c Δθ and E = P t in calculations.",
+    "Solve simple mixing problems."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form4-physics-heat-e07",
+    "form4-physics-heat-e08",
+    "form4-physics-heat-e09",
+    "form4-physics-heat-e10",
+    "form4-physics-heat-e11",
+    "form4-physics-heat-e12"
+   ],
+   "selfCheck": [
+    "form4-physics-specific-heat-q1",
+    "form4-physics-specific-heat-q2",
+    "form4-physics-specific-heat-q3",
+    "form4-physics-specific-heat-q4",
+    "form4-physics-specific-heat-q5"
+   ],
+   "reviewNotes": [
+    "c(water) = 4200 J/(kg °C) used (4180 exact); the specific heat capacities of metals are rounded textbook values.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Specific heat capacity",
+     "md": "The **specific heat capacity c** of a substance is the energy needed to raise the temperature of **1 kg** by **1 °C** (or 1 K). Unit: **J/(kg °C)**. The energy gained or lost is **Q = m × c × Δθ** (Δθ = change in temperature). The **heat capacity** of a whole object is **C = m c** (J/°C). Water has a large specific heat capacity, **4200 J/(kg °C)**, so it heats and cools slowly."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 420,
+      "h": 250,
+      "bars": [
+       {
+        "label": "water",
+        "value": 4200,
+        "color": "blue"
+       },
+       {
+        "label": "aluminium",
+        "value": 900,
+        "color": "grey"
+       },
+       {
+        "label": "iron",
+        "value": 450,
+        "color": "orange"
+       },
+       {
+        "label": "copper",
+        "value": 390,
+        "color": "brown"
+       }
+      ]
+     },
+     "caption": "Approximate specific heat capacities in J/(kg °C).",
+     "alt": "A bar chart: water 4200, aluminium 900, iron 450 and copper 390 joules per kilogram per degree Celsius."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Electrical heating",
+     "md": "An electric heater of power P running for time t supplies energy **E = P t**. If all of it heats the water: **P t = m c Δθ**. In real situations some energy is lost to the surroundings, so the measured temperature rise is smaller. **Mixing**: heat lost by the hot liquid = heat gained by the cold liquid (if no heat is lost)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Uses",
+     "md": "Water's high specific heat capacity makes it a good coolant (car radiators), a good heat store (hot-water bottles) and explains why coastal areas have milder temperatures than inland areas. Metals such as copper heat up quickly because of their low specific heat capacity, so they suit pots and kettles."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Use the **change** in temperature Δθ, not the final temperature.\n- Mass must be in kg: 500 g = 0.5 kg.\n- When mixing, the final temperature lies **between** the two starting temperatures."
+    },
+    {
+     "type": "example",
+     "title": "Heating water",
+     "statement": "Find the energy needed to heat 2 kg of water from 20 °C to 70 °C (c = 4200 J/(kg °C)).",
+     "steps": [
+      "Δθ = 70 − 20 = 50 °C.",
+      "Q = m c Δθ = 2 × 4200 × 50 = 420 000 J."
+     ],
+     "answer": "420 000 J (420 kJ)"
+    },
+    {
+     "type": "example",
+     "title": "A 2 kW kettle",
+     "statement": "How long does a 2000 W kettle take to heat 1 kg of water from 20 °C to 100 °C, assuming no energy is lost?",
+     "steps": [
+      "Q = 1 × 4200 × 80 = 336 000 J.",
+      "t = Q ÷ P = 336 000 ÷ 2000 = 168 s."
+     ],
+     "answer": "168 s (2 min 48 s)"
+    },
+    {
+     "type": "exercise",
+     "ref": "form4-physics-heat-e07"
+    }
+   ],
+   "chapter": "form4-physics-heat"
+  },
+  {
+   "id": "form4-physics-latent-heat",
+   "title": "Change of state and latent heat",
+   "minutes": 30,
+   "programRef": "Form 4 Physics — Temperature, expansion, specific heat, latent heat (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Explain why temperature stays constant during a change of state.",
+    "Define specific latent heat and use Q = m L.",
+    "Distinguish evaporation from boiling."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form4-physics-heat-e13",
+    "form4-physics-heat-e14",
+    "form4-physics-heat-e15",
+    "form4-physics-heat-e16",
+    "form4-physics-heat-e17",
+    "form4-physics-heat-e18"
+   ],
+   "selfCheck": [
+    "form4-physics-latent-heat-q1",
+    "form4-physics-latent-heat-q2",
+    "form4-physics-latent-heat-q3",
+    "form4-physics-latent-heat-q4",
+    "form4-physics-latent-heat-q5"
+   ],
+   "reviewNotes": [
+    "L_f = 3.4 × 10⁵ J/kg (some texts use 3.3 × 10⁵) and L_v = 2.3 × 10⁶ J/kg (exact about 2.26 × 10⁶): check the values in the class text.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Latent heat",
+     "md": "During **melting** and **boiling** the temperature stays constant although heat is supplied. The energy is used to **break the bonds between particles**, not to raise their speed. This hidden energy is the **latent heat**. **Specific latent heat of fusion (L_f)** is the energy to melt 1 kg of solid at its melting point. **Specific latent heat of vaporisation (L_v)** is the energy to change 1 kg of liquid to gas at its boiling point. Unit: **J/kg**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 14,
+      "ymin": -20,
+      "ymax": 120,
+      "grid": 2,
+      "w": 440,
+      "h": 270,
+      "curves": [],
+      "points": [
+       {
+        "x": 2,
+        "y": 0,
+        "label": "melting",
+        "color": "red"
+       },
+       {
+        "x": 9.5,
+        "y": 100,
+        "label": "boiling",
+        "color": "red"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 0,
+        "y1": -10,
+        "x2": 1,
+        "y2": 0,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 1,
+        "y1": 0,
+        "x2": 3,
+        "y2": 0,
+        "color": "red",
+        "dash": false
+       },
+       {
+        "x1": 3,
+        "y1": 0,
+        "x2": 7,
+        "y2": 100,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 7,
+        "y1": 100,
+        "x2": 12,
+        "y2": 100,
+        "color": "red",
+        "dash": false
+       },
+       {
+        "x1": 12,
+        "y1": 100,
+        "x2": 14,
+        "y2": 120,
+        "color": "blue",
+        "dash": false
+       }
+      ],
+      "xlabel": "heat supplied",
+      "ylabel": "θ (°C)"
+     },
+     "caption": "A heating curve: temperature against heat supplied for ice becoming steam (schematic).",
+     "alt": "A graph: temperature rises from below 0 °C to 0 °C, stays flat while melting, rises to 100 °C, stays flat while boiling, then rises again as steam."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Calculations",
+     "md": "**Q = m × L**. In this course: **L_f (ice) = 3.4 × 10⁵ J/kg** and **L_v (water) = 2.3 × 10⁶ J/kg**; c(water) = 4200 J/(kg °C). To go from ice at 0 °C to steam at 100 °C, add the stages: melt (m L_f), warm the water (m c Δθ), boil (m L_v)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Evaporation and boiling",
+     "md": "**Boiling** happens throughout the liquid at one fixed temperature. **Evaporation** happens only at the **surface**, at any temperature, and the faster particles escape, so the liquid **cools**. Evaporation is faster when the liquid is warmer, the surface area larger, the air drier and moving. This is why sweat cools the body and clay water pots keep water cool."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- The temperature does not change while a pure substance melts or boils: do not use m c Δθ for the change of state.\n- Steam at 100 °C contains much more energy than water at 100 °C.\n- L is per kilogram: use mass in kg."
+    },
+    {
+     "type": "example",
+     "title": "Melting ice",
+     "statement": "How much energy melts 0.5 kg of ice at 0 °C? (L_f = 3.4 × 10⁵ J/kg)",
+     "steps": [
+      "Q = m L_f.",
+      "0.5 × 3.4 × 10⁵ = 1.7 × 10⁵ J = 170 000 J."
+     ],
+     "answer": "170 000 J"
+    },
+    {
+     "type": "example",
+     "title": "Ice to steam",
+     "statement": "Find the energy to change 0.1 kg of ice at 0 °C into steam at 100 °C.",
+     "steps": [
+      "Melt: 0.1 × 3.4 × 10⁵ = 34 000 J. Warm: 0.1 × 4200 × 100 = 42 000 J. Boil: 0.1 × 2.3 × 10⁶ = 230 000 J.",
+      "Total = 34 000 + 42 000 + 230 000 = 306 000 J."
+     ],
+     "answer": "306 000 J"
+    },
+    {
+     "type": "exercise",
+     "ref": "form4-physics-heat-e13"
+    }
+   ],
+   "chapter": "form4-physics-heat"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form4-physics-heat-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-physics-temperature-expansion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Convert 37 °C to kelvin.",
+   "answer": 310,
+   "tolerance": 0,
+   "unit": "K",
+   "explanation": "37 + 273 = 310 K.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-physics-heat"
+  },
+  {
+   "id": "form4-physics-heat-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-physics-temperature-expansion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Convert 300 K to °C.",
+   "answer": 27,
+   "tolerance": 0,
+   "unit": "°C",
+   "explanation": "300 − 273 = 27 °C.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-physics-heat"
+  },
+  {
+   "id": "form4-physics-heat-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form4-physics-temperature-expansion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The upper fixed point of the Celsius scale is the temperature of:",
+   "choices": [
+    "melting ice",
+    "a Bunsen flame",
+    "steam from pure boiling water",
+    "the human body"
+   ],
+   "answer": 2,
+   "explanation": "100 °C at standard pressure.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-physics-heat"
+  },
+  {
+   "id": "form4-physics-heat-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "form4-physics-temperature-expansion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Railway lines are laid with small gaps because:",
+   "choices": [
+    "the gaps drain water",
+    "it saves money",
+    "metal shrinks in rain",
+    "the metal expands in hot weather"
+   ],
+   "answer": 3,
+   "explanation": "Expansion would otherwise buckle the track.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form4-physics-heat"
+  },
+  {
+   "id": "form4-physics-heat-e05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form4-physics-temperature-expansion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A liquid thread is 4 cm long at 0 °C and 24 cm long at 100 °C. Find the temperature when it is 14 cm long.",
+   "answer": 50,
+   "tolerance": 0,
+   "unit": "°C",
+   "explanation": "(14 − 4) ÷ 20 × 100 = 50 °C.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form4-physics-heat"
+  },
+  {
+   "id": "form4-physics-heat-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form4-physics-temperature-expansion",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A bimetallic strip is made of brass and iron joined together. Brass expands more than iron for the same rise in temperature.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "When the strip is heated it bends so that the brass is on the:",
+     "choices": [
+      "straight edge",
+      "bottom always",
+      "inside of the curve",
+      "outside of the curve"
+     ],
+     "answer": 3,
+     "explanation": "The metal that expands more is on the outside.",
+     "id": "form4-physics-heat-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "A common use of the strip is in a:",
+     "choices": [
+      "thermostat",
+      "microscope",
+      "barometer",
+      "voltmeter"
+     ],
+     "answer": 0,
+     "explanation": "It breaks a circuit when too hot.",
+     "id": "form4-physics-heat-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Describe how it can act as a fire alarm.",
+     "model": "When the temperature rises the strip bends until it touches a contact, completing a circuit that sounds the alarm.",
+     "rubric": [
+      "1 mark: bends when heated",
+      "1 mark: completes the alarm circuit"
+     ],
+     "explanation": "When the temperature rises the strip bends until it touches a contact, completing a circuit that sounds the alarm.",
+     "id": "form4-physics-heat-e06-c"
+    }
+   ],
+   "chapter": "form4-physics-heat"
+  },
+  {
+   "id": "form4-physics-temperature-expansion-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-temperature-expansion",
+   "prompt": "0 K is also written as:",
+   "choices": [
+    "−273 °C",
+    "−100 °C",
+    "0 °C",
+    "273 °C"
+   ],
+   "answer": 0,
+   "explanation": "Absolute zero.",
+   "chapter": "form4-physics-heat"
+  },
+  {
+   "id": "form4-physics-temperature-expansion-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-temperature-expansion",
+   "prompt": "The lower fixed point of the Celsius scale is:",
+   "choices": [
+    "0 °C, pure melting ice",
+    "100 °C",
+    "−273 °C",
+    "37 °C"
+   ],
+   "answer": 0,
+   "explanation": "Ice point.",
+   "chapter": "form4-physics-heat"
+  },
+  {
+   "id": "form4-physics-temperature-expansion-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-temperature-expansion",
+   "prompt": "Water has its greatest density at:",
+   "choices": [
+    "4 °C",
+    "0 °C",
+    "100 °C",
+    "37 °C"
+   ],
+   "answer": 0,
+   "explanation": "Anomalous expansion of water.",
+   "chapter": "form4-physics-heat"
+  },
+  {
+   "id": "form4-physics-temperature-expansion-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-temperature-expansion",
+   "prompt": "The metal that expands more in a bimetallic strip ends up:",
+   "choices": [
+    "removed",
+    "on the inside",
+    "in the middle",
+    "on the outside of the bend"
+   ],
+   "answer": 3,
+   "explanation": "Longer outer edge.",
+   "chapter": "form4-physics-heat"
+  },
+  {
+   "id": "form4-physics-temperature-expansion-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-temperature-expansion",
+   "prompt": "Which usually expands the most for the same temperature rise?",
+   "choices": [
+    "a solid",
+    "a liquid",
+    "a gas",
+    "a vacuum"
+   ],
+   "answer": 2,
+   "explanation": "Gases expand most.",
+   "chapter": "form4-physics-heat"
+  },
+  {
+   "id": "form4-physics-heat-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-physics-specific-heat",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the energy needed to raise the temperature of 0.5 kg of water by 40 °C. (c = 4200 J/(kg °C))",
+   "answer": 84000,
+   "tolerance": 0,
+   "unit": "J",
+   "explanation": "0.5 × 4200 × 40 = 84 000 J.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-physics-heat"
+  },
+  {
+   "id": "form4-physics-heat-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-physics-specific-heat",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A 0.2 kg iron bar (c = 450 J/(kg °C)) is heated from 20 °C to 120 °C. Find the energy gained.",
+   "answer": 9000,
+   "tolerance": 0,
+   "unit": "J",
+   "explanation": "0.2 × 450 × 100 = 9000 J.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-physics-heat"
+  },
+  {
+   "id": "form4-physics-heat-e09",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form4-physics-specific-heat",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A substance has a high specific heat capacity. It will:",
+   "choices": [
+    "heat up slowly",
+    "never heat",
+    "always melt",
+    "heat up quickly"
+   ],
+   "answer": 0,
+   "explanation": "It needs much energy per degree.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-physics-heat"
+  },
+  {
+   "id": "form4-physics-heat-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form4-physics-specific-heat",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A 1000 W heater runs for 5 minutes and all the energy heats water. Find the energy in J.",
+   "answer": 300000,
+   "tolerance": 0,
+   "unit": "J",
+   "explanation": "1000 × 300 = 300 000 J.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form4-physics-heat"
+  },
+  {
+   "id": "form4-physics-heat-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form4-physics-specific-heat",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain why a coastal town like Limbe has smaller temperature changes than an inland town.",
+   "model": "The sea has a large mass of water with a high specific heat capacity, so it heats and cools slowly and keeps the air near the coast at a steadier temperature.",
+   "rubric": [
+    "1 mark: water has high specific heat capacity",
+    "1 mark: slow temperature change of sea"
+   ],
+   "explanation": "The sea has a large mass of water with a high specific heat capacity, so it heats and cools slowly and keeps the air near the coast at a steadier temperature.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-physics-heat"
+  },
+  {
+   "id": "form4-physics-heat-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form4-physics-specific-heat",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "0.2 kg of hot water at 80 °C is added to 0.3 kg of cold water at 20 °C in an insulated container. (c = 4200 J/(kg °C))",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Let the final temperature be θ. Energy lost by the hot water equals energy gained by the cold. Find θ in °C.",
+     "answer": 44,
+     "tolerance": 0.1,
+     "explanation": "0.2 × (80 − θ) = 0.3 × (θ − 20); 16 − 0.2θ = 0.3θ − 6; 22 = 0.5θ; θ = 44 °C.",
+     "unit": "°C",
+     "id": "form4-physics-heat-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Energy gained by the cold water (J).",
+     "answer": 30240,
+     "tolerance": 1,
+     "explanation": "0.3 × 4200 × 24 = 30 240 J.",
+     "unit": "J",
+     "id": "form4-physics-heat-e12-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The final temperature must be:",
+     "choices": [
+      "exactly 50 °C",
+      "above 80 °C",
+      "below 20 °C",
+      "between 20 °C and 80 °C"
+     ],
+     "answer": 3,
+     "explanation": "Hot loses and cold gains.",
+     "id": "form4-physics-heat-e12-c"
+    }
+   ],
+   "chapter": "form4-physics-heat"
+  },
+  {
+   "id": "form4-physics-specific-heat-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-specific-heat",
+   "prompt": "Specific heat capacity is measured in:",
+   "choices": [
+    "N",
+    "J/kg",
+    "J/(kg °C)",
+    "W"
+   ],
+   "answer": 2,
+   "explanation": "Energy per kg per degree.",
+   "chapter": "form4-physics-heat"
+  },
+  {
+   "id": "form4-physics-specific-heat-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-specific-heat",
+   "prompt": "The formula for the energy needed to heat a mass is:",
+   "choices": [
+    "Q = m c Δθ",
+    "Q = m ÷ c",
+    "Q = m + c",
+    "Q = c ÷ Δθ"
+   ],
+   "answer": 0,
+   "explanation": "Standard equation.",
+   "chapter": "form4-physics-heat"
+  },
+  {
+   "id": "form4-physics-specific-heat-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-specific-heat",
+   "prompt": "Which has the highest specific heat capacity?",
+   "choices": [
+    "water",
+    "iron",
+    "copper",
+    "aluminium"
+   ],
+   "answer": 0,
+   "explanation": "4200 J/(kg °C).",
+   "chapter": "form4-physics-heat"
+  },
+  {
+   "id": "form4-physics-specific-heat-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-specific-heat",
+   "prompt": "A 500 W heater supplies how much energy in 10 s?",
+   "choices": [
+    "50 000 J",
+    "5000 J",
+    "50 J",
+    "500 J"
+   ],
+   "answer": 1,
+   "explanation": "E = Pt.",
+   "chapter": "form4-physics-heat"
+  },
+  {
+   "id": "form4-physics-specific-heat-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-specific-heat",
+   "prompt": "A copper pot heats quickly because copper has:",
+   "choices": [
+    "a high specific heat capacity",
+    "a low specific heat capacity",
+    "a high density only",
+    "no mass"
+   ],
+   "answer": 1,
+   "explanation": "Little energy needed per degree.",
+   "chapter": "form4-physics-heat"
+  },
+  {
+   "id": "form4-physics-heat-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-physics-latent-heat",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How much energy is needed to boil away 0.2 kg of water already at 100 °C? (L_v = 2.3 × 10⁶ J/kg)",
+   "answer": 460000,
+   "tolerance": 0,
+   "unit": "J",
+   "explanation": "0.2 × 2.3 × 10⁶ = 460 000 J.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-physics-heat"
+  },
+  {
+   "id": "form4-physics-heat-e14",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form4-physics-latent-heat",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "While ice is melting at 0 °C its temperature:",
+   "choices": [
+    "becomes 100 °C",
+    "rises steadily",
+    "stays constant",
+    "falls"
+   ],
+   "answer": 2,
+   "explanation": "Energy goes into breaking bonds.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-physics-heat"
+  },
+  {
+   "id": "form4-physics-heat-e15",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-physics-latent-heat",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the energy needed to melt 2 kg of ice at 0 °C. (L_f = 3.4 × 10⁵ J/kg)",
+   "answer": 680000,
+   "tolerance": 0,
+   "unit": "J",
+   "explanation": "2 × 3.4 × 10⁵ = 680 000 J.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-physics-heat"
+  },
+  {
+   "id": "form4-physics-heat-e16",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "form4-physics-latent-heat",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Sweating cools the body because evaporation:",
+   "choices": [
+    "makes the skin dry",
+    "adds heat",
+    "raises the pressure",
+    "removes the most energetic particles from the skin"
+   ],
+   "answer": 3,
+   "explanation": "The remaining liquid is cooler.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form4-physics-heat"
+  },
+  {
+   "id": "form4-physics-heat-e17",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form4-physics-latent-heat",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain the difference between boiling and evaporation.",
+   "model": "Boiling occurs throughout the liquid at the boiling point with bubbles of vapour; evaporation occurs only at the surface at any temperature and causes cooling.",
+   "rubric": [
+    "1 mark: boiling throughout at fixed temperature",
+    "1 mark: evaporation at the surface at any temperature"
+   ],
+   "explanation": "Boiling occurs throughout the liquid at the boiling point with bubbles of vapour; evaporation occurs only at the surface at any temperature and causes cooling.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-physics-heat"
+  },
+  {
+   "id": "form4-physics-heat-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form4-physics-latent-heat",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A heater of power 1000 W is used to melt 0.5 kg of ice at 0 °C. (L_f = 3.4 × 10⁵ J/kg)",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Energy needed (J).",
+     "answer": 170000,
+     "tolerance": 0,
+     "explanation": "0.5 × 3.4 × 10⁵ = 170 000 J.",
+     "unit": "J",
+     "id": "form4-physics-heat-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Time taken if all the heater's energy melts the ice (s).",
+     "answer": 170,
+     "tolerance": 0,
+     "explanation": "170 000 ÷ 1000 = 170 s.",
+     "unit": "s",
+     "id": "form4-physics-heat-e18-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "During this time the temperature of the ice-water mixture:",
+     "choices": [
+      "falls to −5 °C",
+      "rises to 20 °C",
+      "rises to 100 °C",
+      "stays at 0 °C"
+     ],
+     "answer": 3,
+     "explanation": "Change of state at constant temperature.",
+     "id": "form4-physics-heat-e18-c"
+    }
+   ],
+   "chapter": "form4-physics-heat"
+  },
+  {
+   "id": "form4-physics-latent-heat-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-latent-heat",
+   "prompt": "Latent heat is the energy used to:",
+   "choices": [
+    "raise the temperature of a solid",
+    "change the state without changing temperature",
+    "compress a gas",
+    "colour a liquid"
+   ],
+   "answer": 1,
+   "explanation": "Breaks bonds.",
+   "chapter": "form4-physics-heat"
+  },
+  {
+   "id": "form4-physics-latent-heat-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-latent-heat",
+   "prompt": "The unit of specific latent heat is:",
+   "choices": [
+    "J",
+    "W",
+    "J/kg",
+    "J/°C"
+   ],
+   "answer": 2,
+   "explanation": "Energy per kilogram.",
+   "chapter": "form4-physics-heat"
+  },
+  {
+   "id": "form4-physics-latent-heat-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-latent-heat",
+   "prompt": "Which change takes the most energy for 1 kg of water?",
+   "choices": [
+    "boiling at 100 °C",
+    "warming from 0 to 1 °C",
+    "freezing",
+    "melting at 0 °C"
+   ],
+   "answer": 0,
+   "explanation": "L_v is the largest.",
+   "chapter": "form4-physics-heat"
+  },
+  {
+   "id": "form4-physics-latent-heat-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-latent-heat",
+   "prompt": "The formula Q = mL is used for:",
+   "choices": [
+    "a change in colour",
+    "a change in temperature",
+    "a change in volume",
+    "a change of state"
+   ],
+   "answer": 3,
+   "explanation": "No temperature change.",
+   "chapter": "form4-physics-heat"
+  },
+  {
+   "id": "form4-physics-latent-heat-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-latent-heat",
+   "prompt": "Evaporation happens:",
+   "choices": [
+    "only in solids",
+    "only inside a liquid",
+    "only at 100 °C",
+    "at any temperature, at the surface"
+   ],
+   "answer": 3,
+   "explanation": "Surface effect.",
+   "chapter": "form4-physics-heat"
+  }
+ ]
+}

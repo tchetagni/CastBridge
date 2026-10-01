@@ -1,0 +1,780 @@
+{
+ "chapter": "form4-chemistry-energy-rates",
+ "lessons": [
+  {
+   "id": "form4-chemistry-energy-changes",
+   "title": "Energy changes in reactions",
+   "minutes": 25,
+   "programRef": "Form 4 Chemistry — Exothermic and endothermic reactions, rates (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Distinguish exothermic from endothermic reactions with examples.",
+    "Explain energy changes in terms of bond breaking and bond making.",
+    "Calculate heat energy from a temperature change."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form4-chemistry-energy-rates-e01",
+    "form4-chemistry-energy-rates-e02",
+    "form4-chemistry-energy-rates-e03",
+    "form4-chemistry-energy-rates-e04",
+    "form4-chemistry-energy-rates-e05",
+    "form4-chemistry-energy-rates-e06"
+   ],
+   "selfCheck": [
+    "form4-chemistry-energy-changes-q1",
+    "form4-chemistry-energy-changes-q2",
+    "form4-chemistry-energy-changes-q3",
+    "form4-chemistry-energy-changes-q4",
+    "form4-chemistry-energy-changes-q5"
+   ],
+   "reviewNotes": [
+    "Energy level diagrams are schematic; ΔH sign convention (negative for exothermic) stated. Standard enthalpy calculations are left for the later course.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Exothermic and endothermic",
+     "md": "An **exothermic** reaction **gives out** heat to the surroundings: the temperature **rises** (combustion, neutralisation, respiration, rusting, many oxidations). An **endothermic** reaction **takes in** heat: the temperature **falls** (dissolving ammonium nitrate, thermal decomposition of calcium carbonate, photosynthesis). Energy is **not lost**; it moves between the chemicals and the surroundings."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 200,
+      "items": [
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 190,
+        "x2": 40,
+        "y2": 20,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 50,
+        "y": 18,
+        "text": "energy",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 60,
+        "x2": 150,
+        "y2": 60,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 130,
+        "x2": 300,
+        "y2": 130,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 62,
+        "x2": 210,
+        "y2": 128,
+        "color": "red",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 50,
+        "text": "reactants",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 255,
+        "y": 150,
+        "text": "products",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 100,
+        "text": "energy released",
+        "size": 11,
+        "anchor": "start",
+        "color": "red"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 185,
+        "text": "exothermic: ΔH negative",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 340,
+        "y1": 130,
+        "x2": 400,
+        "y2": 130,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 440,
+        "y1": 60,
+        "x2": 470,
+        "y2": 60,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 400,
+        "y1": 132,
+        "x2": 440,
+        "y2": 62,
+        "color": "blue",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 370,
+        "y": 150,
+        "text": "reactants",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 455,
+        "y": 50,
+        "text": "products",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Energy level diagrams: an exothermic change (left) and an endothermic change (right, schematic).",
+     "alt": "Two diagrams: on the left the products are lower than the reactants with an arrow down for energy released; on the right the products are higher than the reactants with an arrow up."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Bonds and energy",
+     "md": "Breaking bonds **takes in** energy; making bonds **releases** energy. If more energy is released making the new bonds than is needed to break the old ones, the reaction is **exothermic** (ΔH negative); if not, it is **endothermic** (ΔH positive). **Fuels** are chosen for the energy they release per kilogram and for safe, clean burning."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Heat from a temperature change",
+     "md": "For solutions, heat energy **Q = m × c × ΔT**, using c = 4.2 J/(g °C) for water and assuming 1 cm³ of solution has a mass of 1 g. Example: 100 cm³ of solution rising by 6.5 °C gains 100 × 4.2 × 6.5 = **2730 J**. Heat losses to the air and the cup make the measured value too low; a lid and an insulated cup reduce this."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Exothermic does not mean the reaction is fast, and endothermic does not mean it is slow.\n- Bond breaking is endothermic, bond making is exothermic.\n- ΔT is a temperature change, not the final temperature."
+    },
+    {
+     "type": "example",
+     "title": "Classify",
+     "statement": "When ammonium nitrate dissolves in water the beaker feels cold. Is this exothermic or endothermic?",
+     "steps": [
+      "The temperature of the surroundings falls.",
+      "Energy has been taken in from the surroundings: endothermic."
+     ],
+     "answer": "Endothermic"
+    },
+    {
+     "type": "example",
+     "title": "Heat released",
+     "statement": "50 cm³ of acid and 50 cm³ of alkali are mixed and the temperature rises by 6.5 °C. Find the heat released (c = 4.2 J/g °C, 1 cm³ = 1 g).",
+     "steps": [
+      "Mass = 50 + 50 = 100 g.",
+      "Q = 100 × 4.2 × 6.5 = 2730 J."
+     ],
+     "answer": "2730 J"
+    },
+    {
+     "type": "exercise",
+     "ref": "form4-chemistry-energy-rates-e01"
+    }
+   ],
+   "chapter": "form4-chemistry-energy-rates"
+  },
+  {
+   "id": "form4-chemistry-rates",
+   "title": "Rates of reaction",
+   "minutes": 30,
+   "programRef": "Form 4 Chemistry — Exothermic and endothermic reactions, rates (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe how to measure the rate of a reaction.",
+    "Explain the effect of concentration, temperature, surface area and a catalyst using collision theory.",
+    "Read a rate graph."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form4-chemistry-energy-rates-e07",
+    "form4-chemistry-energy-rates-e08",
+    "form4-chemistry-energy-rates-e09",
+    "form4-chemistry-energy-rates-e10",
+    "form4-chemistry-energy-rates-e11",
+    "form4-chemistry-energy-rates-e12"
+   ],
+   "selfCheck": [
+    "form4-chemistry-rates-q1",
+    "form4-chemistry-rates-q2",
+    "form4-chemistry-rates-q3",
+    "form4-chemistry-rates-q4",
+    "form4-chemistry-rates-q5"
+   ],
+   "reviewNotes": [
+    "The curves are drawn from the function V = 40(1 − e^(−t/τ)); only the shape matters. Average rates 28.5/10 and 15.7/10 are quoted as about 2.9 and 1.6 cm³/s.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Rate of reaction",
+     "md": "The **rate** of a reaction is how fast reactants are used up or products formed: **rate = change in amount ÷ time**. It can be followed by the **volume of gas** given off over time (gas syringe), the **loss in mass** of a flask, or the time for a **cloudy precipitate** to hide a cross. Example: CaCO₃ + 2HCl → CaCl₂ + H₂O + CO₂ (marble chips and acid)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 60,
+      "ymin": 0,
+      "ymax": 45,
+      "grid": 10,
+      "w": 440,
+      "h": 270,
+      "curves": [
+       {
+        "expr": "40*(1-exp(-x/8))",
+        "color": "red",
+        "label": "hot"
+       },
+       {
+        "expr": "40*(1-exp(-x/20))",
+        "color": "blue",
+        "label": "cold"
+       }
+      ],
+      "points": [],
+      "segments": [],
+      "xlabel": "time (s)",
+      "ylabel": "gas (cm³)"
+     },
+     "caption": "Volume of gas against time: the steeper curve is the faster reaction.",
+     "alt": "Two curves of gas volume against time that level off at 40 cm³: the red curve for hot acid rises steeply and the blue curve for cold acid rises more slowly."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Factors and collision theory",
+     "md": "Reactions happen when particles **collide with enough energy** (activation energy). The rate is **increased** by: **higher concentration** (more collisions per second); **higher temperature** (particles move faster so more collisions and more are energetic enough); **larger surface area** (smaller pieces expose more particles); a **catalyst** (gives an easier route with lower activation energy and is not used up); higher pressure for gases. Examples: manganese(IV) oxide speeds up 2H₂O₂ → 2H₂O + O₂; enzymes are biological catalysts; a car's catalytic converter."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Reading the graph",
+     "md": "The **gradient** of a volume-time graph is the **rate**: steep means fast. The graph **levels off** when one reactant is used up (the reaction has stopped). Equal final volumes mean the same amount of the limiting reactant. For the curves above the average rate in the first 10 s is about 2.9 cm³/s for the hot acid and 1.6 cm³/s for the cold acid."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- A catalyst does not change the **amount** of product, only how fast it forms.\n- Heating a reaction does not change the final volume of gas if the amounts of reactants are the same.\n- Powder reacts faster than a lump because of its larger surface area, not because it is 'purer'."
+    },
+    {
+     "type": "example",
+     "title": "Compare rates",
+     "statement": "Marble chips are added to dilute acid in two experiments: in A the chips are small and in B they are large (same mass, same acid). Which gives gas faster and why?",
+     "steps": [
+      "The small chips have a larger surface area.",
+      "More acid particles can collide with the marble each second, so A is faster."
+     ],
+     "answer": "A, because of the larger surface area."
+    },
+    {
+     "type": "example",
+     "title": "Average rate",
+     "statement": "40 cm³ of gas is collected in 20 s in an experiment. Find the average rate of production.",
+     "steps": [
+      "Average rate = volume ÷ time.",
+      "40 ÷ 20 = 2 cm³/s."
+     ],
+     "answer": "2 cm³/s"
+    },
+    {
+     "type": "exercise",
+     "ref": "form4-chemistry-energy-rates-e07"
+    }
+   ],
+   "chapter": "form4-chemistry-energy-rates"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form4-chemistry-energy-rates-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form4-chemistry-energy-changes",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A reaction in which the temperature of the mixture rises is:",
+   "choices": [
+    "not a reaction",
+    "endothermic",
+    "a physical change only",
+    "exothermic"
+   ],
+   "answer": 3,
+   "explanation": "Heat is given out.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-chemistry-energy-rates"
+  },
+  {
+   "id": "form4-chemistry-energy-rates-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form4-chemistry-energy-changes",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which process is endothermic?",
+   "choices": [
+    "respiration",
+    "neutralisation",
+    "burning charcoal",
+    "dissolving ammonium nitrate in water"
+   ],
+   "answer": 3,
+   "explanation": "The solution gets cold.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-chemistry-energy-rates"
+  },
+  {
+   "id": "form4-chemistry-energy-rates-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-chemistry-energy-changes",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "100 g of solution rises in temperature by 5.0 °C. Find the heat gained in J (c = 4.2 J/g °C).",
+   "answer": 2100,
+   "tolerance": 0,
+   "unit": "J",
+   "explanation": "100 × 4.2 × 5.0 = 2100 J.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-chemistry-energy-rates"
+  },
+  {
+   "id": "form4-chemistry-energy-rates-e04",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "form4-chemistry-energy-changes",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In an exothermic reaction more energy is released making bonds than is taken in breaking bonds.",
+   "answer": true,
+   "explanation": "Net energy is released.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form4-chemistry-energy-rates"
+  },
+  {
+   "id": "form4-chemistry-energy-rates-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form4-chemistry-energy-changes",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain why a polystyrene cup with a lid gives a better measurement of heat released than an open glass beaker.",
+   "model": "The cup is a poor conductor and the lid reduces losses by evaporation and convection, so less heat escapes and the measured temperature rise is closer to the true value.",
+   "rubric": [
+    "1 mark: insulation",
+    "1 mark: fewer heat losses to the surroundings"
+   ],
+   "explanation": "The cup is a poor conductor and the lid reduces losses by evaporation and convection, so less heat escapes and the measured temperature rise is closer to the true value.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-chemistry-energy-rates"
+  },
+  {
+   "id": "form4-chemistry-energy-rates-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form4-chemistry-energy-changes",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A student mixes 25 cm³ of hydrochloric acid with 25 cm³ of sodium hydroxide solution. The temperature rises from 24.0 °C to 30.5 °C.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Temperature rise (°C).",
+     "answer": 6.5,
+     "tolerance": 0.01,
+     "explanation": "30.5 − 24.0 = 6.5 °C.",
+     "unit": "°C",
+     "id": "form4-chemistry-energy-rates-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Heat released in J (50 g, c = 4.2 J/g °C).",
+     "answer": 1365,
+     "tolerance": 1,
+     "explanation": "50 × 4.2 × 6.5 = 1365 J.",
+     "unit": "J",
+     "id": "form4-chemistry-energy-rates-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The reaction is:",
+     "choices": [
+      "endothermic",
+      "exothermic",
+      "a precipitation",
+      "reversible only"
+     ],
+     "answer": 1,
+     "explanation": "Temperature rose.",
+     "id": "form4-chemistry-energy-rates-e06-c"
+    }
+   ],
+   "chapter": "form4-chemistry-energy-rates"
+  },
+  {
+   "id": "form4-chemistry-energy-changes-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-chemistry-energy-changes",
+   "prompt": "An endothermic reaction:",
+   "choices": [
+    "gives out heat",
+    "takes in heat from the surroundings",
+    "has no energy change",
+    "always explodes"
+   ],
+   "answer": 1,
+   "explanation": "Temperature falls.",
+   "chapter": "form4-chemistry-energy-rates"
+  },
+  {
+   "id": "form4-chemistry-energy-changes-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-chemistry-energy-changes",
+   "prompt": "Which is exothermic?",
+   "choices": [
+    "burning a fuel",
+    "photosynthesis",
+    "melting ice",
+    "dissolving ammonium nitrate"
+   ],
+   "answer": 0,
+   "explanation": "Combustion releases heat.",
+   "chapter": "form4-chemistry-energy-rates"
+  },
+  {
+   "id": "form4-chemistry-energy-changes-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-chemistry-energy-changes",
+   "prompt": "Making bonds:",
+   "choices": [
+    "releases energy",
+    "takes in energy",
+    "destroys atoms",
+    "needs no energy"
+   ],
+   "answer": 0,
+   "explanation": "Exothermic step.",
+   "chapter": "form4-chemistry-energy-rates"
+  },
+  {
+   "id": "form4-chemistry-energy-changes-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-chemistry-energy-changes",
+   "prompt": "The unit of heat energy used here is the:",
+   "choices": [
+    "mole",
+    "watt",
+    "joule",
+    "newton"
+   ],
+   "answer": 2,
+   "explanation": "J.",
+   "chapter": "form4-chemistry-energy-rates"
+  },
+  {
+   "id": "form4-chemistry-energy-changes-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-chemistry-energy-changes",
+   "prompt": "Q = m c ΔT uses ΔT to mean:",
+   "choices": [
+    "the mass of water",
+    "the time",
+    "the final temperature only",
+    "the temperature change"
+   ],
+   "answer": 3,
+   "explanation": "Final minus initial.",
+   "chapter": "form4-chemistry-energy-rates"
+  },
+  {
+   "id": "form4-chemistry-energy-rates-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form4-chemistry-rates",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which change will NOT increase the rate of reaction between marble chips and acid?",
+   "choices": [
+    "using more concentrated acid",
+    "warming the acid",
+    "using a larger single lump of marble",
+    "using powdered marble"
+   ],
+   "answer": 2,
+   "explanation": "A lump has a smaller surface area.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-chemistry-energy-rates"
+  },
+  {
+   "id": "form4-chemistry-energy-rates-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-chemistry-rates",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A reaction gives 60 cm³ of gas in 30 s. Find the average rate in cm³/s.",
+   "answer": 2,
+   "tolerance": 0,
+   "unit": "cm³/s",
+   "explanation": "60 ÷ 30 = 2 cm³/s.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-chemistry-energy-rates"
+  },
+  {
+   "id": "form4-chemistry-energy-rates-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "form4-chemistry-rates",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A catalyst is used up during a reaction.",
+   "answer": false,
+   "explanation": "A catalyst is unchanged at the end.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-chemistry-energy-rates"
+  },
+  {
+   "id": "form4-chemistry-energy-rates-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "form4-chemistry-rates",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Increasing the temperature speeds up a reaction mainly because:",
+   "choices": [
+    "more particles have enough energy to react",
+    "the acid is diluted",
+    "the reaction becomes exothermic",
+    "the particles become bigger"
+   ],
+   "answer": 0,
+   "explanation": "More successful collisions.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form4-chemistry-energy-rates"
+  },
+  {
+   "id": "form4-chemistry-energy-rates-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form4-chemistry-rates",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain, using collision theory, why increasing the concentration of an acid increases the rate.",
+   "model": "There are more acid particles in the same volume, so collisions between the reacting particles happen more often, giving more successful collisions per second.",
+   "rubric": [
+    "1 mark: more particles per volume",
+    "1 mark: more frequent collisions"
+   ],
+   "explanation": "There are more acid particles in the same volume, so collisions between the reacting particles happen more often, giving more successful collisions per second.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-chemistry-energy-rates"
+  },
+  {
+   "id": "form4-chemistry-energy-rates-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form4-chemistry-rates",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In an experiment 1.0 g of marble chips is added to 50 cm³ of hydrochloric acid and the gas volumes are recorded: 0 s: 0 cm³; 10 s: 12 cm³; 20 s: 20 cm³; 30 s: 24 cm³; 40 s: 24 cm³.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Average rate in the first 10 s (cm³/s).",
+     "answer": 1.2,
+     "tolerance": 0.01,
+     "explanation": "12 ÷ 10 = 1.2 cm³/s.",
+     "unit": "cm³/s",
+     "id": "form4-chemistry-energy-rates-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The reaction stops after:",
+     "choices": [
+      "10 s",
+      "about 30 s",
+      "never",
+      "20 s"
+     ],
+     "answer": 1,
+     "explanation": "The volume stops changing at 30 s.",
+     "id": "form4-chemistry-energy-rates-e12-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Suggest why the rate is fastest at the beginning.",
+     "model": "The acid concentration is highest at the start and then falls as the acid is used up, so the collisions become less frequent.",
+     "rubric": [
+      "1 mark: concentration highest at start",
+      "1 mark: decreases as reactants are used"
+     ],
+     "explanation": "The acid concentration is highest at the start and then falls as the acid is used up, so the collisions become less frequent.",
+     "id": "form4-chemistry-energy-rates-e12-c"
+    }
+   ],
+   "chapter": "form4-chemistry-energy-rates"
+  },
+  {
+   "id": "form4-chemistry-rates-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-chemistry-rates",
+   "prompt": "A catalyst:",
+   "choices": [
+    "speeds up a reaction and is not used up",
+    "slows a reaction",
+    "adds energy to the products",
+    "is consumed"
+   ],
+   "answer": 0,
+   "explanation": "Definition.",
+   "chapter": "form4-chemistry-energy-rates"
+  },
+  {
+   "id": "form4-chemistry-rates-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-chemistry-rates",
+   "prompt": "The rate of reaction is calculated by:",
+   "choices": [
+    "amount × time",
+    "time ÷ amount",
+    "change in amount ÷ time",
+    "mass × volume"
+   ],
+   "answer": 2,
+   "explanation": "Rate.",
+   "chapter": "form4-chemistry-energy-rates"
+  },
+  {
+   "id": "form4-chemistry-rates-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-chemistry-rates",
+   "prompt": "Powdered chalk reacts faster than a lump because of:",
+   "choices": [
+    "a catalyst",
+    "a larger surface area",
+    "a lower temperature",
+    "less mass"
+   ],
+   "answer": 1,
+   "explanation": "More particles exposed.",
+   "chapter": "form4-chemistry-energy-rates"
+  },
+  {
+   "id": "form4-chemistry-rates-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-chemistry-rates",
+   "prompt": "A volume-time graph that is flat shows that the reaction:",
+   "choices": [
+    "has stopped",
+    "is exothermic",
+    "has not started",
+    "is at its fastest"
+   ],
+   "answer": 0,
+   "explanation": "No more gas.",
+   "chapter": "form4-chemistry-energy-rates"
+  },
+  {
+   "id": "form4-chemistry-rates-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-chemistry-rates",
+   "prompt": "Which factor does NOT change the rate?",
+   "choices": [
+    "surface area",
+    "concentration",
+    "the colour of the container",
+    "temperature"
+   ],
+   "answer": 2,
+   "explanation": "Not a factor.",
+   "chapter": "form4-chemistry-energy-rates"
+  }
+ ]
+}

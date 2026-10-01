@@ -1,0 +1,1123 @@
+{
+ "chapter": "form3-biology-reproduction",
+ "lessons": [
+  {
+   "id": "form3-biology-plant-reproduction",
+   "title": "Reproduction in flowering plants",
+   "minutes": 30,
+   "programRef": "Form 3 Biology — Reproduction in flowering plants and humans (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Name the parts of a flower and state their functions.",
+    "Distinguish pollination from fertilisation and describe seed and fruit formation and dispersal.",
+    "Describe asexual (vegetative) reproduction and calculate a germination percentage."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form3-biology-reproduction-e01",
+    "form3-biology-reproduction-e02",
+    "form3-biology-reproduction-e03",
+    "form3-biology-reproduction-e04",
+    "form3-biology-reproduction-e05",
+    "form3-biology-reproduction-e06"
+   ],
+   "selfCheck": [
+    "form3-biology-plant-reproduction-q1",
+    "form3-biology-plant-reproduction-q2",
+    "form3-biology-plant-reproduction-q3",
+    "form3-biology-plant-reproduction-q4",
+    "form3-biology-plant-reproduction-q5"
+   ],
+   "reviewNotes": [
+    "Flower diagram is schematic. Check whether the Form 3 syllabus asks for seed structure and germination details (covered partly in the Basic Science pack).",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Parts of a flower",
+     "md": "- **Sepals**: protect the bud.\n- **Petals**: attract insects (in insect-pollinated flowers).\n- **Stamen** (male): **anther** makes pollen; **filament** holds it up.\n- **Carpel** (female): **stigma** receives pollen; **style** joins it to the **ovary**; the ovary contains **ovules**, each with an egg cell."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 210,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         190,
+         190,
+         160,
+         183,
+         185,
+         172
+        ],
+        "stroke": "ink",
+        "width": 1.5,
+        "closed": true,
+        "fill": "green"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         210,
+         190,
+         240,
+         183,
+         215,
+         172
+        ],
+        "stroke": "ink",
+        "width": 1.5,
+        "closed": true,
+        "fill": "green"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         190,
+         182,
+         135,
+         150,
+         125,
+         100,
+         172,
+         132
+        ],
+        "stroke": "ink",
+        "width": 1.5,
+        "closed": true,
+        "fill": "pink"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         210,
+         182,
+         265,
+         150,
+         275,
+         100,
+         228,
+         132
+        ],
+        "stroke": "ink",
+        "width": 1.5,
+        "closed": true,
+        "fill": "pink"
+       },
+       {
+        "t": "line",
+        "x1": 186,
+        "y1": 172,
+        "x2": 165,
+        "y2": 108,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 165,
+        "cy": 102,
+        "r": 7,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "yellow"
+       },
+       {
+        "t": "line",
+        "x1": 214,
+        "y1": 172,
+        "x2": 235,
+        "y2": 108,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 235,
+        "cy": 102,
+        "r": 7,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 160,
+        "r": 18,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 163,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1.2,
+        "fill": "yellow"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 142,
+        "x2": 200,
+        "y2": 90,
+        "color": "green",
+        "width": 4
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 84,
+        "r": 7,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "orange"
+       },
+       {
+        "t": "line",
+        "x1": 208,
+        "y1": 84,
+        "x2": 300,
+        "y2": 62,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 304,
+        "y": 66,
+        "text": "stigma",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 203,
+        "y1": 115,
+        "x2": 300,
+        "y2": 100,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 304,
+        "y": 104,
+        "text": "style",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 218,
+        "y1": 160,
+        "x2": 300,
+        "y2": 140,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 304,
+        "y": 144,
+        "text": "ovary",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 204,
+        "y1": 165,
+        "x2": 300,
+        "y2": 182,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 304,
+        "y": 186,
+        "text": "ovule",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 158,
+        "y1": 102,
+        "x2": 60,
+        "y2": 80,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 56,
+        "y": 84,
+        "text": "anther",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 172,
+        "y1": 135,
+        "x2": 60,
+        "y2": 115,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 56,
+        "y": 119,
+        "text": "filament",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 140,
+        "y1": 130,
+        "x2": 60,
+        "y2": 150,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 56,
+        "y": 154,
+        "text": "petal",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 165,
+        "y1": 182,
+        "x2": 60,
+        "y2": 195,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 56,
+        "y": 199,
+        "text": "sepal",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A flower cut in half.",
+     "alt": "A flower section with the stigma, style, ovary, ovule, anther, filament, petal and sepal labelled."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Pollination and fertilisation",
+     "md": "**Pollination** is the transfer of pollen from an **anther** to a **stigma**. **Insect-pollinated** flowers have bright petals, scent, nectar and sticky pollen. **Wind-pollinated** flowers (maize, grasses) are small and dull with feathery stigmas and anthers hanging out. After landing, the pollen grain grows a **pollen tube** down the style to the ovule; the male nucleus joins the female nucleus: **fertilisation**. The **ovule** becomes the **seed** and the **ovary** becomes the **fruit**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Dispersal and germination",
+     "md": "Seeds are **dispersed** by **wind** (light, winged or hairy seeds), **animals** (fleshy fruits eaten, hooked fruits), **water** (coconut) or **explosion** (pods). Dispersal reduces competition. A seed **germinates** with **water, oxygen and a suitable temperature**; it does not need light. **Asexual reproduction** from one parent gives identical offspring: cassava stem cuttings, banana suckers and yam tubers. It is fast but gives no variation, so disease can affect all plants."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Pollination is not fertilisation: pollen landing on the stigma is only the first step.\n- A wind-pollinated flower does not need bright petals or nectar.\n- Seeds are not produced by vegetative reproduction."
+    },
+    {
+     "type": "example",
+     "title": "Germination percentage",
+     "statement": "A farmer plants 200 maize seeds and 164 germinate. Find the germination percentage.",
+     "steps": [
+      "Percentage = 164 ÷ 200 × 100.",
+      "= 82 %."
+     ],
+     "answer": "82 %"
+    },
+    {
+     "type": "example",
+     "title": "Insect or wind?",
+     "statement": "A flower has small green petals, long feathery stigmas and anthers hanging outside. How is it pollinated and why?",
+     "steps": [
+      "Small dull flowers with feathery stigmas and exposed anthers are features of wind pollination.",
+      "No need for bright petals or nectar to attract insects."
+     ],
+     "answer": "By wind"
+    },
+    {
+     "type": "exercise",
+     "ref": "form3-biology-reproduction-e01"
+    }
+   ],
+   "chapter": "form3-biology-reproduction"
+  },
+  {
+   "id": "form3-biology-human-reproduction",
+   "title": "Human reproduction in outline",
+   "minutes": 25,
+   "programRef": "Form 3 Biology — Reproduction in flowering plants and humans (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Name the main parts of the male and female reproductive systems and their functions.",
+    "Describe fertilisation, pregnancy and the role of the placenta.",
+    "State the main changes at puberty and give basic reproductive health advice."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form3-biology-reproduction-e07",
+    "form3-biology-reproduction-e08",
+    "form3-biology-reproduction-e09",
+    "form3-biology-reproduction-e10",
+    "form3-biology-reproduction-e11",
+    "form3-biology-reproduction-e12"
+   ],
+   "selfCheck": [
+    "form3-biology-human-reproduction-q1",
+    "form3-biology-human-reproduction-q2",
+    "form3-biology-human-reproduction-q3",
+    "form3-biology-human-reproduction-q4",
+    "form3-biology-human-reproduction-q5"
+   ],
+   "reviewNotes": [
+    "Human reproduction content is conservative, outlined only and flagged for review by a health worker and the school's policy; some schools teach this in Form 4 or 5. Menstrual cycle length and puberty ages are averages.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "The reproductive systems",
+     "md": "**Male**: **testes** make **sperm** (and the hormone testosterone), **sperm ducts** carry sperm, the **penis** places sperm in the female body. **Female**: **ovaries** release an **egg** about once a month (**ovulation**) and make oestrogen; the **oviduct** carries the egg, and is where **fertilisation** usually occurs; the **uterus** (womb) holds the developing baby; the **vagina** receives the sperm. Fertilisation is **internal**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 126,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 40.0,
+        "w": 80.8,
+        "h": 46,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightblue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 50.4,
+        "y": 60.0,
+        "text": "Egg and",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 50.4,
+        "y": 74.0,
+        "text": "sperm meet",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 93.8,
+        "y1": 63.0,
+        "x2": 101.8,
+        "y2": 63.0,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 104.8,
+        "y": 40.0,
+        "w": 80.8,
+        "h": 46,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgreen",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 145.2,
+        "y": 60.0,
+        "text": "Fertilisation",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 145.2,
+        "y": 74.0,
+        "text": "(oviduct)",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 188.6,
+        "y1": 63.0,
+        "x2": 196.6,
+        "y2": 63.0,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 199.6,
+        "y": 40.0,
+        "w": 80.8,
+        "h": 46,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightorange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 60.0,
+        "text": "Embryo",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 74.0,
+        "text": "implants in uterus",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 283.4,
+        "y1": 63.0,
+        "x2": 291.4,
+        "y2": 63.0,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 294.4,
+        "y": 40.0,
+        "w": 80.8,
+        "h": 46,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightyellow",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 334.79999999999995,
+        "y": 60.0,
+        "text": "Foetus grows",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 334.79999999999995,
+        "y": 74.0,
+        "text": "(about 9 months)",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 378.2,
+        "y1": 63.0,
+        "x2": 386.2,
+        "y2": 63.0,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 389.2,
+        "y": 40.0,
+        "w": 80.8,
+        "h": 46,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgrey",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 429.59999999999997,
+        "y": 67.0,
+        "text": "Birth",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "From fertilisation to birth.",
+     "alt": "Five boxes joined by arrows: egg and sperm meet, fertilisation in the oviduct, embryo implants in the uterus, foetus grows for about 9 months, birth."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Pregnancy",
+     "md": "The fertilised egg divides to form an **embryo** that **implants** in the lining of the uterus. A **placenta** forms: the baby's blood and the mother's blood come close but **do not mix**; **oxygen and food pass to the baby** and **carbon dioxide and urea pass to the mother**. The baby floats in **amniotic fluid** in the **amnion**, which protects it. Pregnancy lasts about **40 weeks** (about 280 days). **Breast milk** gives the best food and antibodies for a newborn."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Puberty and menstruation",
+     "md": "At **puberty** (usually between about 10 and 16 years) the body changes under **hormones**: in boys the voice deepens, hair grows on the face and body and sperm production begins; in girls the breasts develop, hips widen and **menstruation** begins. The **menstrual cycle** is about 28 days on average and varies between girls and women; ovulation is around the middle of the cycle."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Reproductive health",
+     "md": "Some infections, including **HIV**, spread by sexual contact; HIV also spreads through blood and from mother to child. Prevention includes abstaining from sex, being faithful to one tested partner and correct use of condoms; people should seek testing and care at a health centre, where effective treatment is available. Pregnant women should attend **antenatal clinics** and follow a health worker's advice. Questions about growing up should be discussed with a parent, teacher or health worker."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- The placenta passes substances between mother and baby but the two bloods **do not mix**.\n- Fertilisation takes place in the oviduct, not in the uterus.\n- HIV is not spread by hugging, sharing food or mosquito bites."
+    },
+    {
+     "type": "example",
+     "title": "Pregnancy duration",
+     "statement": "A pregnancy lasts about 40 weeks. How many days is that?",
+     "steps": [
+      "1 week = 7 days.",
+      "40 × 7 = 280 days."
+     ],
+     "answer": "About 280 days"
+    },
+    {
+     "type": "example",
+     "title": "Trace the egg",
+     "statement": "Give the order of the places visited by an egg from its release to the start of pregnancy.",
+     "steps": [
+      "It is released from the ovary and enters the oviduct where it can be fertilised.",
+      "The embryo then moves to the uterus and implants."
+     ],
+     "answer": "ovary, oviduct (fertilisation), uterus"
+    },
+    {
+     "type": "exercise",
+     "ref": "form3-biology-reproduction-e07"
+    }
+   ],
+   "chapter": "form3-biology-reproduction"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form3-biology-reproduction-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-biology-plant-reproduction",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which part of the flower makes pollen?",
+   "choices": [
+    "ovary",
+    "anther",
+    "petal",
+    "stigma"
+   ],
+   "answer": 1,
+   "explanation": "Male part.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-biology-reproduction"
+  },
+  {
+   "id": "form3-biology-reproduction-e02",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "form3-biology-plant-reproduction",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each flower part with its function.",
+   "pairs": [
+    [
+     "stigma",
+     "receives pollen"
+    ],
+    [
+     "ovary",
+     "contains ovules"
+    ],
+    [
+     "petal",
+     "attracts insects"
+    ],
+    [
+     "anther",
+     "produces pollen"
+    ]
+   ],
+   "explanation": "Standard functions.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form3-biology-reproduction"
+  },
+  {
+   "id": "form3-biology-reproduction-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "form3-biology-plant-reproduction",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A seed needs light to germinate.",
+   "answer": false,
+   "explanation": "Water, oxygen and warmth are needed.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-biology-reproduction"
+  },
+  {
+   "id": "form3-biology-reproduction-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form3-biology-plant-reproduction",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Out of 250 bean seeds, 200 germinate. Find the germination percentage.",
+   "answer": 80,
+   "tolerance": 0,
+   "unit": "%",
+   "explanation": "200 ÷ 250 × 100 = 80 %.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form3-biology-reproduction"
+  },
+  {
+   "id": "form3-biology-reproduction-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form3-biology-plant-reproduction",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain why farmers plant cassava from stem cuttings, and give one disadvantage.",
+   "model": "Cuttings grow quickly into plants identical to the parent, keeping a good variety; a disadvantage is that there is no variation, so a disease can affect all the plants.",
+   "rubric": [
+    "1 mark: fast and identical",
+    "1 mark: disadvantage"
+   ],
+   "explanation": "Cuttings grow quickly into plants identical to the parent, keeping a good variety; a disadvantage is that there is no variation, so a disease can affect all the plants.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-biology-reproduction"
+  },
+  {
+   "id": "form3-biology-reproduction-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form3-biology-plant-reproduction",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A flower is visited by bees and has bright petals, a sweet scent and sticky pollen.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "It is probably pollinated by:",
+     "choices": [
+      "water",
+      "no agent",
+      "wind",
+      "insects"
+     ],
+     "answer": 3,
+     "explanation": "These features attract insects.",
+     "id": "form3-biology-reproduction-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "After pollination the next step is:",
+     "choices": [
+      "falling of the seed",
+      "formation of the petals",
+      "germination",
+      "growth of the pollen tube to the ovule"
+     ],
+     "answer": 3,
+     "explanation": "Then fertilisation.",
+     "id": "form3-biology-reproduction-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "What does the ovary become after fertilisation?",
+     "model": "The fruit (and the ovules become seeds).",
+     "rubric": [
+      "1 mark for fruit"
+     ],
+     "explanation": "The fruit (and the ovules become seeds).",
+     "id": "form3-biology-reproduction-e06-c"
+    }
+   ],
+   "chapter": "form3-biology-reproduction"
+  },
+  {
+   "id": "form3-biology-plant-reproduction-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-plant-reproduction",
+   "prompt": "The female part of a flower is the:",
+   "choices": [
+    "sepal",
+    "stamen",
+    "carpel",
+    "petal"
+   ],
+   "answer": 2,
+   "explanation": "Stigma, style and ovary.",
+   "chapter": "form3-biology-reproduction"
+  },
+  {
+   "id": "form3-biology-plant-reproduction-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-plant-reproduction",
+   "prompt": "Transfer of pollen to a stigma is called:",
+   "choices": [
+    "dispersal",
+    "germination",
+    "fertilisation",
+    "pollination"
+   ],
+   "answer": 3,
+   "explanation": "First step.",
+   "chapter": "form3-biology-reproduction"
+  },
+  {
+   "id": "form3-biology-plant-reproduction-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-plant-reproduction",
+   "prompt": "After fertilisation the ovule becomes a:",
+   "choices": [
+    "fruit",
+    "petal",
+    "stigma",
+    "seed"
+   ],
+   "answer": 3,
+   "explanation": "Seed.",
+   "chapter": "form3-biology-reproduction"
+  },
+  {
+   "id": "form3-biology-plant-reproduction-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-plant-reproduction",
+   "prompt": "Which of these is a way of vegetative propagation?",
+   "choices": [
+    "planting cassava stem cuttings",
+    "burning the bush",
+    "pollinating flowers",
+    "sowing maize seeds"
+   ],
+   "answer": 0,
+   "explanation": "One parent, no seeds.",
+   "chapter": "form3-biology-reproduction"
+  },
+  {
+   "id": "form3-biology-plant-reproduction-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-plant-reproduction",
+   "prompt": "Seeds with hooks are mainly dispersed by:",
+   "choices": [
+    "wind",
+    "gravity only",
+    "animals",
+    "water"
+   ],
+   "answer": 2,
+   "explanation": "They stick to fur or clothes.",
+   "chapter": "form3-biology-reproduction"
+  },
+  {
+   "id": "form3-biology-reproduction-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-biology-human-reproduction",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Where does fertilisation usually take place?",
+   "choices": [
+    "in the ovary",
+    "in the vagina",
+    "in the oviduct",
+    "in the uterus"
+   ],
+   "answer": 2,
+   "explanation": "Egg meets sperm there.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-biology-reproduction"
+  },
+  {
+   "id": "form3-biology-reproduction-e08",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "form3-biology-human-reproduction",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each organ with its function.",
+   "pairs": [
+    [
+     "testis",
+     "makes sperm"
+    ],
+    [
+     "ovary",
+     "releases eggs"
+    ],
+    [
+     "uterus",
+     "holds the developing baby"
+    ],
+    [
+     "placenta",
+     "passes food and oxygen to the baby"
+    ]
+   ],
+   "explanation": "Standard functions.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form3-biology-reproduction"
+  },
+  {
+   "id": "form3-biology-reproduction-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "form3-biology-human-reproduction",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The mother's blood and the baby's blood mix in the placenta.",
+   "answer": false,
+   "explanation": "Substances pass across but the bloods stay separate.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-biology-reproduction"
+  },
+  {
+   "id": "form3-biology-reproduction-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form3-biology-human-reproduction",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many days are there in a pregnancy of 38 weeks?",
+   "answer": 266,
+   "tolerance": 0,
+   "unit": "days",
+   "explanation": "38 × 7 = 266.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form3-biology-reproduction"
+  },
+  {
+   "id": "form3-biology-reproduction-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form3-biology-human-reproduction",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Name two substances that pass from the mother to the baby and two that pass from the baby to the mother through the placenta.",
+   "model": "To the baby: oxygen and digested food (glucose, amino acids). To the mother: carbon dioxide and urea.",
+   "rubric": [
+    "1 mark for two to baby",
+    "1 mark for two to mother"
+   ],
+   "explanation": "To the baby: oxygen and digested food (glucose, amino acids). To the mother: carbon dioxide and urea.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-biology-reproduction"
+  },
+  {
+   "id": "form3-biology-reproduction-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form3-biology-human-reproduction",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A pupil's health talk covers reproductive health.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which action is advised to prevent HIV infection?",
+     "choices": [
+      "hugging",
+      "correct and consistent condom use, or abstaining from sex",
+      "using a mosquito net",
+      "sharing razor blades"
+     ],
+     "answer": 1,
+     "explanation": "Basic prevention.",
+     "id": "form3-biology-reproduction-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Where should a person go for an HIV test and advice?",
+     "choices": [
+      "a bus station",
+      "a market",
+      "a health centre",
+      "a mechanic"
+     ],
+     "answer": 2,
+     "explanation": "Testing and care are provided by health services.",
+     "id": "form3-biology-reproduction-e12-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Give one reason why pregnant women should attend antenatal clinics.",
+     "model": "To check the health of mother and baby, receive advice, vaccines and treatment, and prepare for safe delivery.",
+     "rubric": [
+      "1 mark for one sensible reason"
+     ],
+     "explanation": "To check the health of mother and baby, receive advice, vaccines and treatment, and prepare for safe delivery.",
+     "id": "form3-biology-reproduction-e12-c"
+    }
+   ],
+   "chapter": "form3-biology-reproduction"
+  },
+  {
+   "id": "form3-biology-human-reproduction-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-human-reproduction",
+   "prompt": "In a male, sperm cells are produced in the:",
+   "choices": [
+    "uterus",
+    "ovaries",
+    "oviduct",
+    "testes"
+   ],
+   "answer": 3,
+   "explanation": "Male gonads.",
+   "chapter": "form3-biology-reproduction"
+  },
+  {
+   "id": "form3-biology-human-reproduction-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-human-reproduction",
+   "prompt": "The foetus develops in the:",
+   "choices": [
+    "uterus",
+    "bladder",
+    "ovary",
+    "oviduct"
+   ],
+   "answer": 0,
+   "explanation": "The womb.",
+   "chapter": "form3-biology-reproduction"
+  },
+  {
+   "id": "form3-biology-human-reproduction-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-human-reproduction",
+   "prompt": "A pregnancy lasts about:",
+   "choices": [
+    "60 weeks",
+    "10 weeks",
+    "20 weeks",
+    "40 weeks"
+   ],
+   "answer": 3,
+   "explanation": "About 9 months.",
+   "chapter": "form3-biology-reproduction"
+  },
+  {
+   "id": "form3-biology-human-reproduction-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-human-reproduction",
+   "prompt": "The placenta allows:",
+   "choices": [
+    "growth of hair",
+    "exchange of oxygen and food without mixing blood",
+    "formation of eggs",
+    "mixing of the two bloods"
+   ],
+   "answer": 1,
+   "explanation": "Exchange across a thin barrier.",
+   "chapter": "form3-biology-reproduction"
+  },
+  {
+   "id": "form3-biology-human-reproduction-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-human-reproduction",
+   "prompt": "Breast milk provides:",
+   "choices": [
+    "food and antibodies for the baby",
+    "only vitamins",
+    "only water",
+    "no protection"
+   ],
+   "answer": 0,
+   "explanation": "Best food for newborns.",
+   "chapter": "form3-biology-reproduction"
+  }
+ ]
+}

@@ -1,0 +1,856 @@
+{
+ "chapter": "lower6-physics-ch-materials",
+ "lessons": [
+  {
+   "id": "lower6-physics-elasticity",
+   "title": "Hooke's law, stress, strain and the Young modulus",
+   "minutes": 30,
+   "programRef": "GCE Advanced Level Physics — properties of matter (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "State Hooke's law, use F = kx and calculate the energy stored in a stretched spring or wire",
+    "Define stress, strain and the Young modulus and use them for a wire",
+    "Interpret force–extension and stress–strain graphs (limit of proportionality, elastic limit, plastic deformation)"
+   ],
+   "prerequisites": [
+    "lower6-physics-newton",
+    "lower6-physics-energy"
+   ],
+   "exercises": [
+    "lower6-physics-ch-materials-e01",
+    "lower6-physics-ch-materials-e02",
+    "lower6-physics-ch-materials-e03",
+    "lower6-physics-ch-materials-e04",
+    "lower6-physics-ch-materials-e05",
+    "lower6-physics-ch-materials-e06"
+   ],
+   "selfCheck": [
+    "lower6-physics-elasticity-q1",
+    "lower6-physics-elasticity-q2",
+    "lower6-physics-elasticity-q3",
+    "lower6-physics-elasticity-q4",
+    "lower6-physics-elasticity-q5"
+   ],
+   "reviewNotes": [
+    "Young modulus of steel is quoted as about 2 × 10¹¹ Pa; the data sheet of the board may give a different rounded value.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Hooke's law",
+     "md": "Within the **limit of proportionality** the extension x of a spring or wire is directly proportional to the force F: **F = kx**, where k (N m⁻¹) is the **force constant** (stiffness).\n\nSprings in **series**: 1/k = 1/k₁ + 1/k₂ (softer). Springs in **parallel**: k = k₁ + k₂ (stiffer).\n\nThe energy stored (elastic potential energy) is the area under the F–x graph: **E = ½Fx = ½kx²**."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Stress, strain and Young modulus",
+     "md": "**Stress** σ = F/A (Pa = N m⁻²). **Strain** ε = extension/original length = x/L (no unit). In the proportional region the ratio is constant:\n\n**Young modulus E = σ/ε = FL/(Ax)** (Pa). It depends on the material, not on the size of the sample.\n\nTypical value for steel: about 2 × 10¹¹ Pa (a textbook value; check your table).",
+     "tex": "E=\\frac{\\sigma}{\\varepsilon}=\\frac{F/A}{x/L}=\\frac{FL}{Ax}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 250,
+      "items": [
+       {
+        "t": "line",
+        "x1": 50,
+        "y1": 210,
+        "x2": 50,
+        "y2": 25,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 50,
+        "y1": 210,
+        "x2": 360,
+        "y2": 210,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 52,
+        "y": 18,
+        "text": "force F",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 360,
+        "y": 232,
+        "text": "extension x",
+        "size": 13,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 50,
+        "y1": 210,
+        "x2": 190,
+        "y2": 90,
+        "color": "blue",
+        "width": 3
+       },
+       {
+        "t": "path",
+        "d": "M 190 90 C 230 62 260 58 320 52",
+        "stroke": "blue",
+        "width": 3
+       },
+       {
+        "t": "circle",
+        "cx": 190,
+        "cy": 90,
+        "r": 5,
+        "stroke": "red",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 112,
+        "text": "limit of proportionality",
+        "size": 12,
+        "anchor": "start",
+        "color": "red"
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 130,
+        "text": "gradient = k",
+        "size": 13,
+        "anchor": "start",
+        "color": "blue"
+       }
+      ]
+     },
+     "caption": "Force–extension graph: linear up to the limit of proportionality, then curving.",
+     "alt": "A graph of force against extension, a straight line to a red point marked limit of proportionality and a curve flattening beyond it."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Behaviour beyond Hooke's law",
+     "md": "Beyond the **elastic limit** the material is permanently stretched (**plastic deformation**) and does not return to its original length when the load is removed. At the **yield point** the extension increases with little extra force, and the material finally breaks at the breaking stress. A **brittle** material (glass) breaks with little plastic deformation; a **ductile** one (copper) stretches a lot."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using the total length of the wire after stretching as L: use the **original** length.\n- Converting diameter instead of radius: A = π(d/2)², with d in metres (0.80 mm = 0.80 × 10⁻³ m).\n- Mixing up the limit of proportionality (Hooke's law fails) with the elastic limit (permanent deformation starts); they are close together but not identical.\n- Forgetting the ½ in the energy stored."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — A spring",
+     "statement": "A spring has force constant k = 200 N/m and is stretched by 0.15 m. Find the force applied and the energy stored.",
+     "steps": [
+      "F = kx = 200 × 0.15 = 30 N.",
+      "E = ½kx² = ½ × 200 × 0.15² = 2.25 J (also ½Fx = ½ × 30 × 0.15)."
+     ],
+     "answer": "F = 30 N and E = 2.25 J"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — A steel wire",
+     "statement": "A steel wire of length 2.0 m and diameter 0.80 mm carries a load of 100 N. Take E = 2.0 × 10¹¹ Pa. Find the stress, the strain and the extension.",
+     "steps": [
+      "A = π(0.40 × 10⁻³)² = 5.03 × 10⁻⁷ m², so stress = 100/5.03 × 10⁻⁷ = 1.99 × 10⁸ Pa.",
+      "Strain = stress/E = 1.99 × 10⁸/2.0 × 10¹¹ = 9.9 × 10⁻⁴.",
+      "Extension = strain × L = 9.9 × 10⁻⁴ × 2.0 = 1.99 × 10⁻³ m ≈ 2.0 mm."
+     ],
+     "answer": "Stress 2.0 × 10⁸ Pa, strain 1.0 × 10⁻³, extension 2.0 mm"
+    }
+   ],
+   "chapter": "lower6-physics-ch-materials"
+  },
+  {
+   "id": "lower6-physics-fluids",
+   "title": "Density, pressure and fluids",
+   "minutes": 30,
+   "programRef": "GCE Advanced Level Physics — properties of matter (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define density and pressure and use p = ρgh for the pressure due to a liquid column",
+    "Use Archimedes' principle to find upthrust and explain floating",
+    "Apply the equation of continuity (A₁v₁ = A₂v₂) and the idea of terminal velocity in a viscous fluid"
+   ],
+   "prerequisites": [
+    "lower6-physics-energy",
+    "lower6-physics-elasticity"
+   ],
+   "exercises": [
+    "lower6-physics-ch-materials-e07",
+    "lower6-physics-ch-materials-e08",
+    "lower6-physics-ch-materials-e09",
+    "lower6-physics-ch-materials-e10",
+    "lower6-physics-ch-materials-e11",
+    "lower6-physics-ch-materials-e12"
+   ],
+   "selfCheck": [
+    "lower6-physics-fluids-q1",
+    "lower6-physics-fluids-q2",
+    "lower6-physics-fluids-q3",
+    "lower6-physics-fluids-q4",
+    "lower6-physics-fluids-q5"
+   ],
+   "reviewNotes": [
+    "Bernoulli's equation may not be on the syllabus at this level; it is only mentioned.",
+    "Atmospheric pressure is taken as 1.0 × 10⁵ Pa (1.01 × 10⁵ Pa in more precise tables).",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Density and pressure",
+     "md": "**Density** ρ = m/V (kg m⁻³); fresh water 1000 kg m⁻³. **Pressure** p = F/A (pascal, Pa = N m⁻²).\n\nIn a liquid at rest the pressure at depth h is **p = ρgh** (plus the atmospheric pressure at the surface, about 1.0 × 10⁵ Pa). It depends on depth and density, not on the shape of the container, and acts equally in all directions."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Upthrust and floating",
+     "md": "**Archimedes' principle**: the upthrust on a body fully or partly immersed in a fluid equals the weight of the fluid displaced: **U = ρ_fluid V_displaced g**.\n\nA body **floats** when upthrust = weight. For a floating body: ρ_body/ρ_fluid = fraction of its volume submerged. A body sinks if its average density exceeds the fluid's.",
+     "tex": "p=\\rho g h\\qquad U=\\rho_{f}V g"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 380,
+      "h": 240,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         40,
+         80,
+         160,
+         80,
+         220,
+         110,
+         340,
+         110,
+         340,
+         150,
+         220,
+         150,
+         160,
+         180,
+         40,
+         180
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightblue"
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 130,
+        "x2": 140,
+        "y2": 130,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 115,
+        "text": "v₁, A₁",
+        "size": 13,
+        "anchor": "middle",
+        "color": "red"
+       },
+       {
+        "t": "line",
+        "x1": 240,
+        "y1": 130,
+        "x2": 320,
+        "y2": 130,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 105,
+        "text": "v₂, A₂",
+        "size": 13,
+        "anchor": "middle",
+        "color": "red"
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 215,
+        "text": "A₁v₁ = A₂v₂ : narrower pipe, faster flow",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Equation of continuity: the fluid speeds up in the narrow section.",
+     "alt": "A pipe narrowing from a wide section on the left to a narrow section on the right, with arrows showing faster flow in the narrow part."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Fluids in motion",
+     "md": "For an incompressible fluid in a pipe, the **equation of continuity** says the volume flow rate is constant: **A₁v₁ = A₂v₂** (narrower section, faster flow).\n\nFor smooth (streamline) flow of a non-viscous liquid, Bernoulli's equation relates pressure and speed: p + ½ρv² + ρgh = constant (included for completeness; check the syllabus). In a **viscous** fluid a falling sphere reaches a terminal velocity when weight = upthrust + viscous drag."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Forgetting atmospheric pressure when the question asks for the **total (absolute)** pressure; the gauge pressure is ρgh alone.\n- Using the volume of the whole body for upthrust when only part is submerged.\n- Confusing density and relative density (relative density has no unit).\n- Converting cm³ to m³ wrongly (1 cm³ = 10⁻⁶ m³)."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Pressure in water",
+     "statement": "Find the extra pressure and the total pressure 10 m below the surface of a lake (ρ = 1000 kg m⁻³, g = 9.8, atmospheric pressure 1.0 × 10⁵ Pa).",
+     "steps": [
+      "Extra pressure p = ρgh = 1000 × 9.8 × 10 = 9.8 × 10⁴ Pa.",
+      "Total pressure = 9.8 × 10⁴ + 1.0 × 10⁵ = 1.98 × 10⁵ Pa (about twice atmospheric)."
+     ],
+     "answer": "9.8 × 10⁴ Pa extra; 1.98 × 10⁵ Pa total"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — A submerged block",
+     "statement": "A steel block of mass 15.6 kg and volume 2.0 × 10⁻³ m³ is lowered fully into water. Find the upthrust and its apparent weight in water.",
+     "steps": [
+      "U = ρVg = 1000 × 2.0 × 10⁻³ × 9.8 = 19.6 N.",
+      "True weight = 15.6 × 9.8 = 152.9 N.",
+      "Apparent weight = 152.9 − 19.6 = 133.3 N."
+     ],
+     "answer": "U = 19.6 N; apparent weight = 133 N"
+    }
+   ],
+   "chapter": "lower6-physics-ch-materials"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "lower6-physics-ch-materials-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-physics-elasticity",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A spring (k = 80 N/m) is stretched by 0.25 m. Find the force (N).",
+   "answer": 20.0,
+   "tolerance": 0.05,
+   "unit": "N",
+   "explanation": "F = kx = 80 × 0.25 = 20 N.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-physics-ch-materials"
+  },
+  {
+   "id": "lower6-physics-ch-materials-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-physics-elasticity",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A 150 N force acts on a wire of cross-section 3.0 × 10⁻⁶ m². Find the stress (10⁷ Pa).",
+   "answer": 5.0,
+   "tolerance": 0.01,
+   "unit": "× 10⁷ Pa",
+   "explanation": "σ = F/A = 150/3.0 × 10⁻⁶ = 5.0 × 10⁷ Pa, i.e. 5.0 in units of 10⁷ Pa.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-physics-ch-materials"
+  },
+  {
+   "id": "lower6-physics-ch-materials-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-physics-elasticity",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "True or false: the Young modulus of a material depends on the length of the wire used.",
+   "answer": false,
+   "explanation": "E is a property of the material; length and area cancel out in FL/Ax.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-physics-ch-materials"
+  },
+  {
+   "id": "lower6-physics-ch-materials-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-physics-elasticity",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Two identical springs, each k = 200 N/m, are joined in series. What is the force constant of the combination (N/m)?",
+   "answer": 100.0,
+   "tolerance": 0.5,
+   "unit": "N/m",
+   "explanation": "1/k = 1/200 + 1/200 = 1/100, so k = 100 N/m. (In parallel it would be 400 N/m.)",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-physics-ch-materials"
+  },
+  {
+   "id": "lower6-physics-ch-materials-e05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-physics-elasticity",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A wire of original length 1.50 m and cross-section 1.0 × 10⁻⁶ m² extends by 1.5 mm under a load of 80 N. Find the Young modulus (10¹¹ Pa, 3 s.f.).",
+   "answer": 0.8,
+   "tolerance": 0.01,
+   "unit": "× 10¹¹ Pa",
+   "explanation": "E = FL/Ax = 80 × 1.5/(1.0 × 10⁻⁶ × 1.5 × 10⁻³) = 8.0 × 10¹⁰ Pa = 0.800 × 10¹¹ Pa.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-physics-ch-materials"
+  },
+  {
+   "id": "lower6-physics-ch-materials-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-physics-elasticity",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A student loads a spring with weights and measures the extension. The force–extension graph is a straight line through the origin up to 6.0 N, where the extension is 0.12 m.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the force constant of the spring (N/m).",
+     "answer": 50.0,
+     "tolerance": 0.5,
+     "explanation": "k = F/x = 6.0/0.12 = 50 N/m.",
+     "unit": "N/m",
+     "id": "lower6-physics-ch-materials-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the energy stored at an extension of 0.12 m (J).",
+     "answer": 0.36,
+     "tolerance": 0.005,
+     "explanation": "E = ½Fx = ½ × 6.0 × 0.12 = 0.36 J.",
+     "unit": "J",
+     "id": "lower6-physics-ch-materials-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Beyond 6.0 N the line begins to curve. This point is called the",
+     "choices": [
+      "centre of mass",
+      "breaking point",
+      "yield stress of the load",
+      "limit of proportionality"
+     ],
+     "answer": 3,
+     "explanation": "Beyond it F is no longer proportional to x, so Hooke's law no longer applies.",
+     "id": "lower6-physics-ch-materials-e06-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "A second identical spring is placed in parallel with the first. What load gives the same extension of 0.12 m (N)?",
+     "answer": 12.0,
+     "tolerance": 0.05,
+     "explanation": "k doubles to 100 N/m, so F = 100 × 0.12 = 12 N.",
+     "unit": "N",
+     "id": "lower6-physics-ch-materials-e06-d"
+    }
+   ],
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 250,
+    "items": [
+     {
+      "t": "line",
+      "x1": 50,
+      "y1": 210,
+      "x2": 50,
+      "y2": 25,
+      "color": "ink",
+      "width": 2,
+      "arrow": "end"
+     },
+     {
+      "t": "line",
+      "x1": 50,
+      "y1": 210,
+      "x2": 360,
+      "y2": 210,
+      "color": "ink",
+      "width": 2,
+      "arrow": "end"
+     },
+     {
+      "t": "text",
+      "x": 52,
+      "y": 18,
+      "text": "force F",
+      "size": 13,
+      "anchor": "start",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 360,
+      "y": 232,
+      "text": "extension x",
+      "size": 13,
+      "anchor": "end",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 50,
+      "y1": 210,
+      "x2": 190,
+      "y2": 90,
+      "color": "blue",
+      "width": 3
+     },
+     {
+      "t": "path",
+      "d": "M 190 90 C 230 62 260 58 320 52",
+      "stroke": "blue",
+      "width": 3
+     },
+     {
+      "t": "circle",
+      "cx": 190,
+      "cy": 90,
+      "r": 5,
+      "stroke": "red",
+      "width": 2,
+      "fill": "red"
+     },
+     {
+      "t": "text",
+      "x": 200,
+      "y": 112,
+      "text": "limit of proportionality",
+      "size": 12,
+      "anchor": "start",
+      "color": "red"
+     },
+     {
+      "t": "text",
+      "x": 85,
+      "y": 130,
+      "text": "gradient = k",
+      "size": 13,
+      "anchor": "start",
+      "color": "blue"
+     }
+    ]
+   },
+   "chapter": "lower6-physics-ch-materials"
+  },
+  {
+   "id": "lower6-physics-elasticity-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-elasticity",
+   "prompt": "The unit of the Young modulus is the same as that of",
+   "choices": [
+    "strain",
+    "force",
+    "pressure",
+    "energy"
+   ],
+   "answer": 2,
+   "explanation": "E = stress ÷ strain and strain has no unit, so E is in Pa.",
+   "chapter": "lower6-physics-ch-materials"
+  },
+  {
+   "id": "lower6-physics-elasticity-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-elasticity",
+   "prompt": "The area under a force–extension graph (straight-line part) gives",
+   "choices": [
+    "stress",
+    "force constant",
+    "strain",
+    "energy stored"
+   ],
+   "answer": 3,
+   "explanation": "Area = ½Fx, the elastic potential energy.",
+   "chapter": "lower6-physics-ch-materials"
+  },
+  {
+   "id": "lower6-physics-elasticity-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-elasticity",
+   "prompt": "A wire's length and radius are both doubled (same material, same load). The extension",
+   "choices": [
+    "quadruples",
+    "is halved",
+    "is unchanged",
+    "doubles"
+   ],
+   "answer": 1,
+   "explanation": "x = FL/AE: L ×2 and A ×4 gives x × 2/4 = ½ the original extension.",
+   "chapter": "lower6-physics-ch-materials"
+  },
+  {
+   "id": "lower6-physics-elasticity-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-elasticity",
+   "prompt": "A material that stretches a great deal before breaking is",
+   "choices": [
+    "elastic only",
+    "brittle",
+    "ductile",
+    "rigid"
+   ],
+   "answer": 2,
+   "explanation": "Ductile materials show large plastic deformation, e.g. copper.",
+   "chapter": "lower6-physics-ch-materials"
+  },
+  {
+   "id": "lower6-physics-elasticity-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-elasticity",
+   "prompt": "Springs in parallel have a combined force constant that is",
+   "choices": [
+    "the sum of the individual constants",
+    "the product",
+    "less than either",
+    "the average of the two"
+   ],
+   "answer": 0,
+   "explanation": "Each spring takes part of the load, so k = k₁ + k₂.",
+   "chapter": "lower6-physics-ch-materials"
+  },
+  {
+   "id": "lower6-physics-ch-materials-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-physics-fluids",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Find the mass of 0.50 m³ of a liquid of density 800 kg m⁻³ (kg).",
+   "answer": 400,
+   "tolerance": 0.5,
+   "unit": "kg",
+   "explanation": "m = ρV = 800 × 0.50 = 400 kg.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-physics-ch-materials"
+  },
+  {
+   "id": "lower6-physics-ch-materials-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-physics-fluids",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A force of 200 N acts on an area of 0.040 m². Find the pressure (Pa).",
+   "answer": 5000,
+   "tolerance": 5,
+   "unit": "Pa",
+   "explanation": "p = F/A = 200/0.040 = 5000 Pa.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-physics-ch-materials"
+  },
+  {
+   "id": "lower6-physics-ch-materials-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-physics-fluids",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "True or false: the pressure at a given depth in a liquid depends on the shape of the container.",
+   "answer": false,
+   "explanation": "p = ρgh depends only on density and depth.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-physics-ch-materials"
+  },
+  {
+   "id": "lower6-physics-ch-materials-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-physics-fluids",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Water flows at 2.0 m/s in a pipe of diameter 4.0 cm into a section of diameter 2.0 cm. What is the speed in the narrow section (m/s)?",
+   "answer": 8.0,
+   "tolerance": 0.05,
+   "unit": "m/s",
+   "explanation": "A ∝ d², so A₂ = A₁/4 and v₂ = 4 × 2.0 = 8.0 m/s.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-physics-ch-materials"
+  },
+  {
+   "id": "lower6-physics-ch-materials-e11",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-physics-fluids",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A cube of wood (density 600 kg m⁻³) floats in water. What fraction of its volume is submerged (give a decimal)?",
+   "answer": 0.6,
+   "tolerance": 0.005,
+   "explanation": "Fraction = ρ_wood/ρ_water = 600/1000 = 0.60.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-physics-ch-materials"
+  },
+  {
+   "id": "lower6-physics-ch-materials-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-physics-fluids",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A hydrometer-like glass tube has a cross-sectional area of 2.0 × 10⁻⁴ m² and a mass of 0.060 kg. It floats upright in water (ρ = 1000 kg m⁻³, g = 9.8).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "What is the upthrust on the tube when floating (N)?",
+     "answer": 0.588,
+     "tolerance": 0.005,
+     "explanation": "Floating means U = weight = 0.060 × 9.8 = 0.588 N.",
+     "unit": "N",
+     "id": "lower6-physics-ch-materials-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the volume of water displaced (10⁻⁵ m³, 2 s.f.).",
+     "answer": 6.0,
+     "tolerance": 0.05,
+     "explanation": "V = m/ρ = 0.060/1000 = 6.0 × 10⁻⁵ m³.",
+     "unit": "× 10⁻⁵ m³",
+     "id": "lower6-physics-ch-materials-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the length of the tube below the water surface (m, 2 s.f.).",
+     "answer": 0.3,
+     "tolerance": 0.005,
+     "explanation": "L = V/A = 6.0 × 10⁻⁵/2.0 × 10⁻⁴ = 0.30 m.",
+     "unit": "m",
+     "id": "lower6-physics-ch-materials-e12-c"
+    }
+   ],
+   "chapter": "lower6-physics-ch-materials"
+  },
+  {
+   "id": "lower6-physics-fluids-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-fluids",
+   "prompt": "The pressure due to a liquid column of height h and density ρ is",
+   "choices": [
+    "ρgh",
+    "h/ρg",
+    "ρh/g",
+    "ρg/h"
+   ],
+   "answer": 0,
+   "explanation": "p = ρgh.",
+   "chapter": "lower6-physics-ch-materials"
+  },
+  {
+   "id": "lower6-physics-fluids-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-fluids",
+   "prompt": "An object floats when",
+   "choices": [
+    "it is hollow",
+    "upthrust equals weight",
+    "density is zero",
+    "upthrust is zero"
+   ],
+   "answer": 1,
+   "explanation": "Equilibrium requires equal and opposite forces.",
+   "chapter": "lower6-physics-ch-materials"
+  },
+  {
+   "id": "lower6-physics-fluids-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-fluids",
+   "prompt": "The SI unit of pressure, the pascal, is",
+   "choices": [
+    "kg m s⁻²",
+    "N m",
+    "N m⁻²",
+    "N kg⁻¹"
+   ],
+   "answer": 2,
+   "explanation": "p = F/A.",
+   "chapter": "lower6-physics-ch-materials"
+  },
+  {
+   "id": "lower6-physics-fluids-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-fluids",
+   "prompt": "An iron nail sinks in water because",
+   "choices": [
+    "water has no pressure",
+    "it has no upthrust",
+    "its density is greater than that of water",
+    "it is heavy only"
+   ],
+   "answer": 2,
+   "explanation": "Weight exceeds the upthrust for a body denser than the fluid.",
+   "chapter": "lower6-physics-ch-materials"
+  },
+  {
+   "id": "lower6-physics-fluids-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-fluids",
+   "prompt": "In a pipe the cross-section halves. The flow speed (incompressible fluid) becomes",
+   "choices": [
+    "half",
+    "double",
+    "unchanged",
+    "four times"
+   ],
+   "answer": 1,
+   "explanation": "A₁v₁ = A₂v₂ so v doubles.",
+   "chapter": "lower6-physics-ch-materials"
+  }
+ ]
+}

@@ -1,0 +1,1982 @@
+{
+ "chapter": "lower6-chemistry-ch-organic",
+ "lessons": [
+  {
+   "id": "lower6-chemistry-isomers",
+   "title": "Homologous series, naming and isomerism",
+   "minutes": 40,
+   "programRef": "GCE Advanced Level Chemistry — organic chemistry (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Name and draw simple alkanes, alkenes, alcohols and halogenoalkanes (IUPAC) and give general formulae",
+    "Distinguish chain, position and functional-group structural isomers",
+    "Explain E/Z isomerism in alkenes and recognise a chiral carbon"
+   ],
+   "prerequisites": [
+    "lower6-chemistry-bonding"
+   ],
+   "exercises": [
+    "lower6-chemistry-ch-organic-e01",
+    "lower6-chemistry-ch-organic-e02",
+    "lower6-chemistry-ch-organic-e03",
+    "lower6-chemistry-ch-organic-e04",
+    "lower6-chemistry-ch-organic-e05",
+    "lower6-chemistry-ch-organic-e06"
+   ],
+   "selfCheck": [
+    "lower6-chemistry-isomers-q1",
+    "lower6-chemistry-isomers-q2",
+    "lower6-chemistry-isomers-q3",
+    "lower6-chemistry-isomers-q4",
+    "lower6-chemistry-isomers-q5"
+   ],
+   "reviewNotes": [
+    "Optical isomerism and the Cahn–Ingold–Prelog rules are only introduced; detailed treatment (R/S) is not included.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Homologous series",
+     "md": "A **homologous series** is a family of compounds with the same functional group and general formula; successive members differ by CH₂. **Alkanes** C_nH₂ₙ₊₂ (single bonds); **alkenes** C_nH₂ₙ (C=C); **alcohols** C_nH₂ₙ₊₁OH (–OH); **halogenoalkanes** C_nH₂ₙ₊₁X (–Cl, –Br, –I); also carboxylic acids (–COOH), aldehydes (–CHO) and ketones (C=O) in the Upper Sixth.\n\nThe **functional group** gives the characteristic reactions. Physical properties change gradually along the series (boiling points rise with chain length)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "IUPAC naming",
+     "md": "1. Find the **longest carbon chain** containing the functional group: meth-, eth-, prop-, but-, pent-, hex-…\n2. Number from the end that gives the **lowest number** to the functional group (then to substituents).\n3. Name side groups (methyl, ethyl, chloro, bromo) as prefixes in **alphabetical order**, with locants.\n4. Add the ending: -ane, -ene, -an-1-ol, etc. Example: CH₃CH(CH₃)CH₂CH₃ = **2-methylbutane**; CH₃CH=CHCH₃ = **but-2-ene**; CH₃CH(OH)CH₃ = **propan-2-ol**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 215,
+      "items": [
+       {
+        "t": "line",
+        "x1": 70,
+        "y1": 107,
+        "x2": 125,
+        "y2": 107,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 70,
+        "y1": 113,
+        "x2": 125,
+        "y2": 113,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 70,
+        "y1": 110,
+        "x2": 40,
+        "y2": 70,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 125,
+        "y1": 110,
+        "x2": 155,
+        "y2": 70,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 70,
+        "y1": 110,
+        "x2": 40,
+        "y2": 150,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 125,
+        "y1": 110,
+        "x2": 155,
+        "y2": 150,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 62,
+        "text": "CH₃",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 155,
+        "y": 62,
+        "text": "CH₃",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 168,
+        "text": "H",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 155,
+        "y": 168,
+        "text": "H",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 98,
+        "y": 200,
+        "text": "Z-but-2-ene (cis)",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 270,
+        "y1": 107,
+        "x2": 325,
+        "y2": 107,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 270,
+        "y1": 113,
+        "x2": 325,
+        "y2": 113,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 270,
+        "y1": 110,
+        "x2": 240,
+        "y2": 70,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 325,
+        "y1": 110,
+        "x2": 355,
+        "y2": 150,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 270,
+        "y1": 110,
+        "x2": 240,
+        "y2": 150,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 325,
+        "y1": 110,
+        "x2": 355,
+        "y2": 70,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 62,
+        "text": "CH₃",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 355,
+        "y": 168,
+        "text": "CH₃",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 168,
+        "text": "H",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 355,
+        "y": 62,
+        "text": "H",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 298,
+        "y": 200,
+        "text": "E-but-2-ene (trans)",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Z-but-2-ene (cis) and E-but-2-ene (trans): the methyl groups on the same side or on opposite sides of the double bond.",
+     "alt": "Two drawings of but-2-ene with a double bond; in one the two methyl groups point the same way and in the other in opposite directions."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Isomerism",
+     "md": "**Isomers** have the same molecular formula but different structures. **Structural isomers**: *chain* (different carbon skeleton: butane and 2-methylpropane), *position* (but-1-ene and but-2-ene), *functional group* (ethanol and methoxymethane).\n\n**E/Z isomers** need a C=C (restricted rotation) with two different groups on each carbon: **Z** if the higher-priority groups are on the same side, **E** if opposite (cis/trans for simple cases). An **optical isomer** needs a **chiral carbon** with four different groups (two mirror-image forms)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Choosing the longest chain without the functional group (the chain must include C=C or C–OH).\n- Numbering from the wrong end: the functional group gets the lowest locant.\n- Counting a rotated drawing as a new isomer: rotation about single bonds gives the same compound.\n- Expecting E/Z isomers where one carbon of the double bond has two identical groups (propene has none)."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Isomeric alkenes",
+     "statement": "Draw and name the alkene isomers of C₄H₈ (open-chain).",
+     "steps": [
+      "Chain length 4: but-1-ene CH₂=CHCH₂CH₃ and but-2-ene CH₃CH=CHCH₃.",
+      "But-2-ene has two different groups on each double-bonded carbon, so it exists as **E** and **Z** forms.",
+      "Branched chain: 2-methylpropene (CH₃)₂C=CH₂ (no E/Z). Total: 4 alkenes (counting E and Z separately)."
+     ],
+     "answer": "but-1-ene, (E)-but-2-ene, (Z)-but-2-ene, 2-methylpropene"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Isomeric alcohols",
+     "statement": "Name the four alcohols with formula C₄H₁₀O and classify each as primary, secondary or tertiary.",
+     "steps": [
+      "Straight chain: butan-1-ol (primary, OH on a CH₂ at the end) and butan-2-ol (secondary).",
+      "Branched chain: 2-methylpropan-1-ol (primary) and 2-methylpropan-2-ol (tertiary: the carbon with OH bears three carbon groups).",
+      "Ethers such as ethoxyethane are further functional-group isomers but are not alcohols."
+     ],
+     "answer": "butan-1-ol, butan-2-ol, 2-methylpropan-1-ol, 2-methylpropan-2-ol"
+    }
+   ],
+   "chapter": "lower6-chemistry-ch-organic"
+  },
+  {
+   "id": "lower6-chemistry-hydrocarbons",
+   "title": "Alkanes and alkenes: reactions and mechanisms",
+   "minutes": 40,
+   "programRef": "GCE Advanced Level Chemistry — organic chemistry (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe the combustion, cracking and free-radical substitution of alkanes",
+    "Describe and explain electrophilic addition to alkenes, including Markovnikov's rule, and the test for unsaturation",
+    "Describe addition polymerisation and calculate masses and volumes in these reactions"
+   ],
+   "prerequisites": [
+    "lower6-chemistry-isomers",
+    "lower6-chemistry-enthalpy"
+   ],
+   "exercises": [
+    "lower6-chemistry-ch-organic-e07",
+    "lower6-chemistry-ch-organic-e08",
+    "lower6-chemistry-ch-organic-e09",
+    "lower6-chemistry-ch-organic-e10",
+    "lower6-chemistry-ch-organic-e11",
+    "lower6-chemistry-ch-organic-e12"
+   ],
+   "selfCheck": [
+    "lower6-chemistry-hydrocarbons-q1",
+    "lower6-chemistry-hydrocarbons-q2",
+    "lower6-chemistry-hydrocarbons-q3",
+    "lower6-chemistry-hydrocarbons-q4",
+    "lower6-chemistry-hydrocarbons-q5"
+   ],
+   "reviewNotes": [
+    "Cameroonian context (refinery at Limbe, plastic waste) is not included until verified.",
+    "Detailed curly-arrow drawings are not reproduced; the mechanism is given as a scheme.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Alkanes",
+     "md": "Alkanes (C_nH₂ₙ₊₂) are **saturated**, with strong, non-polar C–C and C–H bonds: unreactive except for combustion and substitution with halogens in UV light. They are obtained from crude oil by fractional distillation; heavier fractions are **cracked** (heat/catalyst) into shorter alkanes and **alkenes**.\n\nComplete combustion: CH₄ + 2O₂ → CO₂ + 2H₂O. In limited oxygen **carbon monoxide** (toxic: it binds to haemoglobin) or carbon (soot) forms."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Free-radical substitution (CH₄ + Cl₂, UV)",
+     "md": "- **Initiation**: Cl₂ → 2Cl• (homolytic fission by UV).\n- **Propagation**: CH₄ + Cl• → •CH₃ + HCl, then •CH₃ + Cl₂ → CH₃Cl + Cl• (a chain reaction).\n- **Termination**: two radicals combine: Cl• + Cl• → Cl₂; •CH₃ + Cl• → CH₃Cl; •CH₃ + •CH₃ → C₂H₆.\n\nA mixture of products (CH₂Cl₂, CHCl₃, CCl₄) forms because further substitution is possible."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 425,
+      "h": 205,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 40,
+        "w": 120,
+        "h": 60,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 66,
+        "text": "CH₂=CH₂",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 86,
+        "text": "+ H–Br",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 135,
+        "y1": 70,
+        "x2": 175,
+        "y2": 70,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 155,
+        "y": 55,
+        "text": "slow",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 180,
+        "y": 40,
+        "w": 110,
+        "h": 60,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 235,
+        "y": 62,
+        "text": "CH₃–CH₂⁺",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 235,
+        "y": 84,
+        "text": "+ Br⁻",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 295,
+        "y1": 70,
+        "x2": 330,
+        "y2": 70,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 312,
+        "y": 55,
+        "text": "fast",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 335,
+        "y": 40,
+        "w": 80,
+        "h": 60,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 375,
+        "y": 76,
+        "text": "CH₃CH₂Br",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 150,
+        "text": "carbocation intermediate",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 180,
+        "text": "H⁺ is attacked by the π electrons (an electrophile)",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Electrophilic addition of HBr to ethene through a carbocation intermediate.",
+     "alt": "Three boxes joined by arrows: ethene plus hydrogen bromide, a carbocation with a bromide ion, then bromoethane."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Alkenes and electrophilic addition",
+     "md": "Alkenes (C_nH₂ₙ) contain a C=C: a σ bond and an electron-rich π bond that is attacked by **electrophiles** (electron-pair acceptors). Reactions: with Br₂ (the orange bromine water is **decolourised**: test for C=C), with HBr (→ bromoalkane), with steam/H₃PO₄ (→ alcohol), with H₂/Ni (→ alkane).\n\n**Markovnikov's rule**: in the addition of HBr to propene the major product is 2-bromopropane, via the more stable (secondary) carbocation (tertiary > secondary > primary). **Addition polymerisation**: many alkene molecules join to give poly(ethene), poly(propene), PVC."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Calling alkane reactions with Cl₂ 'addition' (it is substitution via radicals).\n- Drawing the curly arrow from the H–Br bond instead of from the π bond.\n- Writing the monomer instead of the repeat unit in a polymer (poly(ethene) is –[CH₂–CH₂]ₙ–, with no C=C).\n- Using bromine water as a test with alkanes: it stays orange."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Gas volumes in combustion",
+     "statement": "20 cm³ of propane is burnt in 150 cm³ of oxygen at room conditions: C₃H₈ + 5O₂ → 3CO₂ + 4H₂O(l). Find the gas volume after cooling.",
+     "steps": [
+      "CO₂ formed = 3 × 20 = 60 cm³; O₂ used = 5 × 20 = 100 cm³.",
+      "O₂ left = 150 − 100 = 50 cm³.",
+      "Total gas = 60 + 50 = 110 cm³ (water is liquid and takes no volume)."
+     ],
+     "answer": "110 cm³ (60 cm³ CO₂ and 50 cm³ O₂)"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Markovnikov's rule",
+     "statement": "Predict and explain the major product of HBr + CH₃CH=CH₂.",
+     "steps": [
+      "H⁺ adds to either carbon: adding to C-1 gives CH₃–CH⁺–CH₃ (secondary); adding to C-2 gives CH₃CH₂CH₂⁺ (primary).",
+      "Alkyl groups push electrons towards the positive carbon, so the secondary carbocation is more stable and is formed faster.",
+      "Br⁻ attacks it: the major product is **2-bromopropane**, CH₃CHBrCH₃."
+     ],
+     "answer": "2-bromopropane (major)"
+    }
+   ],
+   "chapter": "lower6-chemistry-ch-organic"
+  },
+  {
+   "id": "lower6-chemistry-halogenoalcohols",
+   "title": "Halogenoalkanes and alcohols",
+   "minutes": 40,
+   "programRef": "GCE Advanced Level Chemistry — organic chemistry (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe nucleophilic substitution and elimination of halogenoalkanes and the trend in reactivity C–Cl, C–Br, C–I",
+    "Classify alcohols and describe their oxidation, dehydration and combustion",
+    "Describe the manufacture of ethanol by hydration of ethene and by fermentation and calculate yields"
+   ],
+   "prerequisites": [
+    "lower6-chemistry-hydrocarbons"
+   ],
+   "exercises": [
+    "lower6-chemistry-ch-organic-e13",
+    "lower6-chemistry-ch-organic-e14",
+    "lower6-chemistry-ch-organic-e15",
+    "lower6-chemistry-ch-organic-e16",
+    "lower6-chemistry-ch-organic-e17",
+    "lower6-chemistry-ch-organic-e18"
+   ],
+   "selfCheck": [
+    "lower6-chemistry-halogenoalcohols-q1",
+    "lower6-chemistry-halogenoalcohols-q2",
+    "lower6-chemistry-halogenoalcohols-q3",
+    "lower6-chemistry-halogenoalcohols-q4",
+    "lower6-chemistry-halogenoalcohols-q5"
+   ],
+   "reviewNotes": [
+    "Data used: Ar values rounded as in common school tables (H 1.0, C 12.0, N 14.0, O 16.0, Na 23.0, Mg 24.0, Al 27.0, S 32.0, Cl 35.5, K 39.0, Ca 40.0, Fe 56.0, Cu 63.5, Zn 65.0); molar volume of a gas 24.0 dm³ at room temperature and pressure (25 °C, 1 atm), 22.4 dm³ at stp; R = 8.31 J mol⁻¹ K⁻¹; N_A = 6.02 × 10²³ mol⁻¹.",
+    "C–X bond enthalpies (346, 290, 228 kJ mol⁻¹) are textbook values; check the data booklet.",
+    "Fermentation of palm sap is mentioned as an example only; the yield is illustrative (real yields differ).",
+    "S_N1/S_N2 are introduced qualitatively; the full curly-arrow mechanisms are not drawn.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Halogenoalkanes",
+     "md": "In a halogenoalkane the C–X bond is **polar** (carbon δ⁺), so it is attacked by **nucleophiles** (lone-pair donors such as OH⁻, CN⁻, NH₃). **Nucleophilic substitution**: R–X + OH⁻ (aq, warm) → R–OH + X⁻ (alcohol); with KCN → nitrile (lengthens the chain); with excess NH₃ → amine.\n\nWith **ethanolic** KOH (hot), **elimination** of HX gives an alkene. Reactivity: **C–I > C–Br > C–Cl** because the bond enthalpies fall (C–Cl 346, C–Br 290, C–I 228 kJ mol⁻¹): weaker bonds break more easily."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Mechanisms and tests",
+     "md": "Primary halogenoalkanes react by **S_N2** (one step, nucleophile attacks as the halide leaves); tertiary ones by **S_N1** (carbocation intermediate). To identify the halogen: warm with NaOH, acidify with dilute HNO₃, add AgNO₃(aq): **AgCl white, AgBr cream, AgI yellow** precipitate.\n\nCFCs (chlorofluorocarbons) release Cl• in the upper atmosphere and destroy ozone: they are being phased out."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 410,
+      "h": 235,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 20,
+        "w": 100,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 43,
+        "text": "primary alcohol",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 20,
+        "w": 90,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 195,
+        "y": 43,
+        "text": "aldehyde",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 20,
+        "w": 110,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 345,
+        "y": 43,
+        "text": "carboxylic acid",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 112,
+        "y1": 38,
+        "x2": 148,
+        "y2": 38,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 242,
+        "y1": 38,
+        "x2": 288,
+        "y2": 38,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 90,
+        "w": 100,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 113,
+        "text": "secondary alcohol",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 90,
+        "w": 90,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 195,
+        "y": 113,
+        "text": "ketone",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 112,
+        "y1": 108,
+        "x2": 148,
+        "y2": 108,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 160,
+        "w": 100,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 183,
+        "text": "tertiary alcohol",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 183,
+        "text": "not oxidised",
+        "size": 13,
+        "anchor": "middle",
+        "color": "red"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 213,
+        "text": "oxidising agent: K₂Cr₂O₇ / H⁺ (orange → green), heat",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Oxidation of primary, secondary and tertiary alcohols with acidified potassium dichromate(VI).",
+     "alt": "A flow chart: primary alcohol to aldehyde to carboxylic acid; secondary alcohol to ketone; tertiary alcohol not oxidised."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Alcohols",
+     "md": "Alcohols are **primary**, **secondary** or **tertiary** depending on how many carbon groups are attached to the carbon bearing –OH. With acidified K₂Cr₂O₇ (heat): primary → aldehyde (distil off) → carboxylic acid (reflux); secondary → ketone; tertiary → no reaction. The colour changes from orange to green.\n\n**Dehydration** (conc. H₂SO₄ or hot Al₂O₃): alcohol → alkene + H₂O. **Combustion**; reaction with sodium (H₂ + sodium alkoxide); esterification with carboxylic acids (Upper Sixth)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using aqueous KOH when ethanolic KOH is needed for elimination, and vice versa.\n- Adding AgNO₃ without first acidifying: hydroxide ions would give a brown precipitate of Ag₂O.\n- Saying the C–F bond is the most reactive: C–F is the strongest.\n- Thinking tertiary alcohols are oxidised by acidified dichromate (they are not)."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Identifying a halogenoalkane",
+     "statement": "A halogenoalkane is warmed with aqueous NaOH, acidified with dilute nitric acid, and silver nitrate solution is added. A cream precipitate forms. Which halogen is present, and why would the bromo compound react faster than the chloro one?",
+     "steps": [
+      "A cream precipitate is silver bromide: the compound is a bromoalkane (R–Br).",
+      "Hydrolysis breaks the C–X bond; C–Br (290 kJ mol⁻¹) is weaker than C–Cl (346 kJ mol⁻¹).",
+      "So the bromoalkane reacts faster than the chloroalkane (the polarity of the bond is not the deciding factor)."
+     ],
+     "answer": "R–Br; the weaker C–Br bond breaks faster"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Ethanol by fermentation",
+     "statement": "Glucose ferments to ethanol: C₆H₁₂O₆ → 2C₂H₅OH + 2CO₂ (palm sap and other sugary juices ferment in this way). Find the mass of ethanol from 180 g of glucose with a 70 % yield (A_r: C 12, H 1, O 16).",
+     "steps": [
+      "M(glucose) = 180 g mol⁻¹, so n = 180/180 = 1.00 mol.",
+      "Theoretical n(ethanol) = 2.00 mol = 2.00 × 46.0 = 92.0 g.",
+      "Actual mass = 70 % × 92.0 = 64.4 g."
+     ],
+     "answer": "64.4 g of ethanol"
+    }
+   ],
+   "chapter": "lower6-chemistry-ch-organic"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "lower6-chemistry-ch-organic-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-chemistry-isomers",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "How many hydrogen atoms are in an alkane with 8 carbon atoms?",
+   "answer": 18,
+   "tolerance": 0,
+   "explanation": "C_nH₂ₙ₊₂: 2(8) + 2 = 18 (octane, C₈H₁₈).",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-chemistry-ch-organic"
+  },
+  {
+   "id": "lower6-chemistry-ch-organic-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-chemistry-isomers",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "What is the name of CH₃CH₂CH(CH₃)CH₃?",
+   "choices": [
+    "pentane",
+    "3-methylbutane",
+    "2-ethylpropane",
+    "2-methylbutane"
+   ],
+   "answer": 3,
+   "explanation": "The longest chain is four carbons; numbering from the end near the methyl gives 2-methylbutane.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-chemistry-ch-organic"
+  },
+  {
+   "id": "lower6-chemistry-ch-organic-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-chemistry-isomers",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "True or false: butane and 2-methylpropane are chain isomers.",
+   "answer": true,
+   "explanation": "Both are C₄H₁₀ with different carbon skeletons.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-chemistry-ch-organic"
+  },
+  {
+   "id": "lower6-chemistry-ch-organic-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-chemistry-isomers",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "How many structural isomers does pentane's formula C₅H₁₂ have (counting pentane itself)?",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "Pentane, 2-methylbutane and 2,2-dimethylpropane.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-chemistry-ch-organic"
+  },
+  {
+   "id": "lower6-chemistry-ch-organic-e05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-chemistry-isomers",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Which compound shows E/Z isomerism?",
+   "choices": [
+    "2-methylpropene",
+    "ethene",
+    "propene",
+    "but-2-ene"
+   ],
+   "answer": 3,
+   "explanation": "Each carbon of the double bond in but-2-ene carries two different groups (H and CH₃).",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-chemistry-ch-organic"
+  },
+  {
+   "id": "lower6-chemistry-ch-organic-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-chemistry-isomers",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Consider the molecules A: CH₃CH₂CH₂CH₂OH, B: CH₃CH(OH)CH₂CH₃, C: (CH₃)₃COH and D: CH₃CH=CHCH₃.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which pair are position isomers?",
+     "choices": [
+      "A and C",
+      "C and D",
+      "A and B",
+      "B and D"
+     ],
+     "answer": 2,
+     "explanation": "Both are straight-chain butanols with OH on different carbons.",
+     "id": "lower6-chemistry-ch-organic-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which is a tertiary alcohol?",
+     "choices": [
+      "A",
+      "B",
+      "C",
+      "D"
+     ],
+     "answer": 2,
+     "explanation": "The carbon bearing OH is bonded to three carbon atoms.",
+     "id": "lower6-chemistry-ch-organic-e06-b"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "Compound D shows E/Z isomerism.",
+     "answer": true,
+     "explanation": "Each double-bonded carbon has H and CH₃.",
+     "id": "lower6-chemistry-ch-organic-e06-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "State why 2-methylpropan-2-ol cannot show optical isomerism.",
+     "model": "It has no chiral carbon: the carbon bearing OH has three identical CH₃ groups, so it does not have four different groups.",
+     "rubric": "1 mark: no chiral carbon / not four different groups attached.",
+     "explanation": "It has no chiral carbon: the carbon bearing OH has three identical CH₃ groups, so it does not have four different groups.",
+     "id": "lower6-chemistry-ch-organic-e06-d"
+    }
+   ],
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 215,
+    "items": [
+     {
+      "t": "line",
+      "x1": 70,
+      "y1": 107,
+      "x2": 125,
+      "y2": 107,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 70,
+      "y1": 113,
+      "x2": 125,
+      "y2": 113,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 70,
+      "y1": 110,
+      "x2": 40,
+      "y2": 70,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 125,
+      "y1": 110,
+      "x2": 155,
+      "y2": 70,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 70,
+      "y1": 110,
+      "x2": 40,
+      "y2": 150,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 125,
+      "y1": 110,
+      "x2": 155,
+      "y2": 150,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "text",
+      "x": 40,
+      "y": 62,
+      "text": "CH₃",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 155,
+      "y": 62,
+      "text": "CH₃",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 40,
+      "y": 168,
+      "text": "H",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 155,
+      "y": 168,
+      "text": "H",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 98,
+      "y": 200,
+      "text": "Z-but-2-ene (cis)",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 270,
+      "y1": 107,
+      "x2": 325,
+      "y2": 107,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 270,
+      "y1": 113,
+      "x2": 325,
+      "y2": 113,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 270,
+      "y1": 110,
+      "x2": 240,
+      "y2": 70,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 325,
+      "y1": 110,
+      "x2": 355,
+      "y2": 150,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 270,
+      "y1": 110,
+      "x2": 240,
+      "y2": 150,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 325,
+      "y1": 110,
+      "x2": 355,
+      "y2": 70,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "text",
+      "x": 240,
+      "y": 62,
+      "text": "CH₃",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 355,
+      "y": 168,
+      "text": "CH₃",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 240,
+      "y": 168,
+      "text": "H",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 355,
+      "y": 62,
+      "text": "H",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 298,
+      "y": 200,
+      "text": "E-but-2-ene (trans)",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink"
+     }
+    ]
+   },
+   "chapter": "lower6-chemistry-ch-organic"
+  },
+  {
+   "id": "lower6-chemistry-isomers-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-isomers",
+   "prompt": "The general formula of the alkenes is",
+   "choices": [
+    "CₙHₙ",
+    "CₙH₂ₙ₊₂",
+    "CₙH₂ₙ₋₂",
+    "CₙH₂ₙ"
+   ],
+   "answer": 3,
+   "explanation": "One double bond: two fewer hydrogens than the alkane.",
+   "chapter": "lower6-chemistry-ch-organic"
+  },
+  {
+   "id": "lower6-chemistry-isomers-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-isomers",
+   "prompt": "The functional group of an alcohol is",
+   "choices": [
+    "C=C",
+    "–Cl",
+    "–COOH",
+    "–OH"
+   ],
+   "answer": 3,
+   "explanation": "Hydroxyl group.",
+   "chapter": "lower6-chemistry-ch-organic"
+  },
+  {
+   "id": "lower6-chemistry-isomers-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-isomers",
+   "prompt": "Isomers have",
+   "choices": [
+    "the same structure",
+    "different molecular formulae",
+    "the same boiling point",
+    "the same molecular formula but different structures"
+   ],
+   "answer": 3,
+   "explanation": "By definition.",
+   "chapter": "lower6-chemistry-ch-organic"
+  },
+  {
+   "id": "lower6-chemistry-isomers-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-isomers",
+   "prompt": "A chiral carbon has",
+   "choices": [
+    "four different groups attached",
+    "a double bond",
+    "two identical groups",
+    "three groups"
+   ],
+   "answer": 0,
+   "explanation": "It has non-superimposable mirror images.",
+   "chapter": "lower6-chemistry-ch-organic"
+  },
+  {
+   "id": "lower6-chemistry-isomers-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-isomers",
+   "prompt": "The name of CH₃CH₂CH₂Br is",
+   "choices": [
+    "propyl bromine",
+    "2-bromopropane",
+    "1-bromopropane",
+    "bromopropene"
+   ],
+   "answer": 2,
+   "explanation": "Br on carbon 1 of a three-carbon chain.",
+   "chapter": "lower6-chemistry-ch-organic"
+  },
+  {
+   "id": "lower6-chemistry-ch-organic-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-chemistry-hydrocarbons",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "What mass of CO₂ is formed by complete combustion of 11.0 g of propane, C₃H₈ (A_r: C 12, H 1, O 16)? (g)",
+   "answer": 33.0,
+   "tolerance": 0.1,
+   "unit": "g",
+   "explanation": "n(C₃H₈) = 11.0/44.0 = 0.250 mol; n(CO₂) = 0.750 mol; m = 0.750 × 44.0 = 33.0 g.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-chemistry-ch-organic"
+  },
+  {
+   "id": "lower6-chemistry-ch-organic-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-chemistry-hydrocarbons",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Which reagent decolourises bromine water at room temperature in the dark?",
+   "choices": [
+    "ethene",
+    "hexane",
+    "ethane",
+    "methane"
+   ],
+   "answer": 0,
+   "explanation": "Ethene is unsaturated and adds bromine.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-chemistry-ch-organic"
+  },
+  {
+   "id": "lower6-chemistry-ch-organic-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-chemistry-hydrocarbons",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "True or false: the reaction of methane with chlorine in UV light is an addition reaction.",
+   "answer": false,
+   "explanation": "It is a free-radical substitution: H is replaced by Cl.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-chemistry-ch-organic"
+  },
+  {
+   "id": "lower6-chemistry-ch-organic-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-chemistry-hydrocarbons",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "2.80 g of ethene is converted to ethanol by hydration with a yield of 70 % (C₂H₄ + H₂O → C₂H₅OH). Find the mass of ethanol (g, 3 s.f.).",
+   "answer": 3.22,
+   "tolerance": 0.02,
+   "unit": "g",
+   "explanation": "n(C₂H₄) = 2.80/28.0 = 0.100 mol; theoretical ethanol = 4.60 g; 70 % of 4.60 = 3.22 g.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-chemistry-ch-organic"
+  },
+  {
+   "id": "lower6-chemistry-ch-organic-e11",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-chemistry-hydrocarbons",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Why is the major product of HBr with propene 2-bromopropane?",
+   "choices": [
+    "propene has a primary carbon",
+    "the secondary carbocation is more stable than the primary one",
+    "Br is more electronegative than C",
+    "H⁺ cannot attack C-2"
+   ],
+   "answer": 1,
+   "explanation": "Markovnikov's rule is explained by carbocation stability.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-chemistry-ch-organic"
+  },
+  {
+   "id": "lower6-chemistry-ch-organic-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-chemistry-hydrocarbons",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Dodecane (C₁₂H₂₆, M = 170) can be cracked: C₁₂H₂₆ → C₈H₁₈ + 2C₂H₄. 17.0 g of dodecane is cracked completely (A_r: C 12.0, H 1.0; molar volume 24.0 dm³).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Moles of dodecane.",
+     "answer": 0.1,
+     "tolerance": 0.001,
+     "explanation": "17.0/170 = 0.100 mol.",
+     "unit": "mol",
+     "id": "lower6-chemistry-ch-organic-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Mass of ethene produced (g, 3 s.f.).",
+     "answer": 5.6,
+     "tolerance": 0.02,
+     "explanation": "n(C₂H₄) = 2 × 0.100 = 0.200 mol; m = 0.200 × 28.0 = 5.60 g.",
+     "unit": "g",
+     "id": "lower6-chemistry-ch-organic-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Volume of ethene at rtp (dm³, 3 s.f.).",
+     "answer": 4.8,
+     "tolerance": 0.02,
+     "explanation": "0.200 × 24.0 = 4.80 dm³.",
+     "unit": "dm³",
+     "id": "lower6-chemistry-ch-organic-e12-c"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The alkene product can be identified because it",
+     "choices": [
+      "burns with a clean flame",
+      "reacts with sodium",
+      "decolourises bromine water",
+      "turns litmus red"
+     ],
+     "answer": 2,
+     "explanation": "Alkenes react by electrophilic addition with Br₂.",
+     "id": "lower6-chemistry-ch-organic-e12-d"
+    }
+   ],
+   "figure": {
+    "kind": "shapes",
+    "w": 425,
+    "h": 205,
+    "items": [
+     {
+      "t": "rect",
+      "x": 10,
+      "y": 40,
+      "w": 120,
+      "h": 60,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightyellow"
+     },
+     {
+      "t": "text",
+      "x": 70,
+      "y": 66,
+      "text": "CH₂=CH₂",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 70,
+      "y": 86,
+      "text": "+ H–Br",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 135,
+      "y1": 70,
+      "x2": 175,
+      "y2": 70,
+      "color": "ink",
+      "width": 3,
+      "arrow": "end"
+     },
+     {
+      "t": "text",
+      "x": 155,
+      "y": 55,
+      "text": "slow",
+      "size": 11,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "rect",
+      "x": 180,
+      "y": 40,
+      "w": 110,
+      "h": 60,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightorange"
+     },
+     {
+      "t": "text",
+      "x": 235,
+      "y": 62,
+      "text": "CH₃–CH₂⁺",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 235,
+      "y": 84,
+      "text": "+ Br⁻",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 295,
+      "y1": 70,
+      "x2": 330,
+      "y2": 70,
+      "color": "ink",
+      "width": 3,
+      "arrow": "end"
+     },
+     {
+      "t": "text",
+      "x": 312,
+      "y": 55,
+      "text": "fast",
+      "size": 11,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "rect",
+      "x": 335,
+      "y": 40,
+      "w": 80,
+      "h": 60,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightgreen"
+     },
+     {
+      "t": "text",
+      "x": 375,
+      "y": 76,
+      "text": "CH₃CH₂Br",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 210,
+      "y": 150,
+      "text": "carbocation intermediate",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 210,
+      "y": 180,
+      "text": "H⁺ is attacked by the π electrons (an electrophile)",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink"
+     }
+    ]
+   },
+   "chapter": "lower6-chemistry-ch-organic"
+  },
+  {
+   "id": "lower6-chemistry-hydrocarbons-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-hydrocarbons",
+   "prompt": "The mechanism for the reaction of an alkene with HBr is",
+   "choices": [
+    "nucleophilic substitution",
+    "elimination",
+    "electrophilic addition",
+    "free-radical substitution"
+   ],
+   "answer": 2,
+   "explanation": "The π bond attacks the electrophile H⁺.",
+   "chapter": "lower6-chemistry-ch-organic"
+  },
+  {
+   "id": "lower6-chemistry-hydrocarbons-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-hydrocarbons",
+   "prompt": "The initiation step of the chlorination of methane is",
+   "choices": [
+    "2Cl• → Cl₂",
+    "CH₄ → •CH₃ + H•",
+    "Cl₂ → 2Cl•",
+    "Cl• + CH₄ → HCl + •CH₃"
+   ],
+   "answer": 2,
+   "explanation": "UV light splits Cl₂ homolytically.",
+   "chapter": "lower6-chemistry-ch-organic"
+  },
+  {
+   "id": "lower6-chemistry-hydrocarbons-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-hydrocarbons",
+   "prompt": "Carbon monoxide is dangerous because it",
+   "choices": [
+    "is acidic",
+    "is flammable only",
+    "dissolves in blood",
+    "binds to haemoglobin and prevents oxygen transport"
+   ],
+   "answer": 3,
+   "explanation": "Incomplete combustion in poorly ventilated rooms can be fatal.",
+   "chapter": "lower6-chemistry-ch-organic"
+  },
+  {
+   "id": "lower6-chemistry-hydrocarbons-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-hydrocarbons",
+   "prompt": "The repeat unit of poly(ethene) is",
+   "choices": [
+    "–CH₃",
+    "–CH₂–CH₂–",
+    "–CH=CH–",
+    "–CH₂Cl"
+   ],
+   "answer": 1,
+   "explanation": "The double bond is used in polymerisation.",
+   "chapter": "lower6-chemistry-ch-organic"
+  },
+  {
+   "id": "lower6-chemistry-hydrocarbons-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-hydrocarbons",
+   "prompt": "Cracking of long-chain alkanes is used to make",
+   "choices": [
+    "alcohols only",
+    "longer alkanes",
+    "carbon dioxide only",
+    "shorter alkanes and alkenes"
+   ],
+   "answer": 3,
+   "explanation": "Heavy fractions are in less demand than petrol and alkenes for plastics.",
+   "chapter": "lower6-chemistry-ch-organic"
+  },
+  {
+   "id": "lower6-chemistry-ch-organic-e13",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-chemistry-halogenoalcohols",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Which precipitate forms with AgNO₃(aq) after hydrolysis of an iodoalkane?",
+   "choices": [
+    "cream AgBr",
+    "white AgCl",
+    "black Ag₂O",
+    "yellow AgI"
+   ],
+   "answer": 3,
+   "explanation": "Iodide gives a yellow precipitate.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-chemistry-ch-organic"
+  },
+  {
+   "id": "lower6-chemistry-ch-organic-e14",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-chemistry-halogenoalcohols",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Propan-2-ol is a",
+   "choices": [
+    "primary alcohol",
+    "tertiary alcohol",
+    "carboxylic acid",
+    "secondary alcohol"
+   ],
+   "answer": 3,
+   "explanation": "The carbon bearing –OH is bonded to two other carbons.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-chemistry-ch-organic"
+  },
+  {
+   "id": "lower6-chemistry-ch-organic-e15",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-chemistry-halogenoalcohols",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "True or false: a tertiary alcohol is oxidised by acidified potassium dichromate(VI).",
+   "answer": false,
+   "explanation": "A tertiary alcohol has no H on the carbon bearing OH, so it resists oxidation under these conditions.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-chemistry-ch-organic"
+  },
+  {
+   "id": "lower6-chemistry-ch-organic-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-chemistry-halogenoalcohols",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "23.0 g of ethanol is dehydrated to ethene (C₂H₅OH → C₂H₄ + H₂O) with a 70 % yield. Find the mass of ethene (g, 3 s.f.).",
+   "answer": 9.8,
+   "tolerance": 0.05,
+   "unit": "g",
+   "explanation": "n(ethanol) = 23.0/46.0 = 0.500 mol; theoretical ethene = 14.0 g; × 0.70 = 9.80 g.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-chemistry-ch-organic"
+  },
+  {
+   "id": "lower6-chemistry-ch-organic-e17",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-chemistry-halogenoalcohols",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Which is the correct order of reactivity towards hydrolysis?",
+   "choices": [
+    "R–Cl > R–Br > R–I",
+    "R–Br > R–I > R–Cl",
+    "R–I > R–Br > R–Cl",
+    "all the same"
+   ],
+   "answer": 2,
+   "explanation": "Reactivity follows the weakness of the C–X bond.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-chemistry-ch-organic"
+  },
+  {
+   "id": "lower6-chemistry-ch-organic-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-chemistry-halogenoalcohols",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Butan-2-ol, CH₃CH(OH)CH₂CH₃, and 2-methylpropan-2-ol, (CH₃)₃COH, are heated separately with acidified potassium dichromate(VI).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Butan-2-ol is oxidised to",
+     "choices": [
+      "butanal",
+      "but-2-ene",
+      "butanone",
+      "butanoic acid"
+     ],
+     "answer": 2,
+     "explanation": "A secondary alcohol gives a ketone.",
+     "id": "lower6-chemistry-ch-organic-e18-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What colour change is seen with butan-2-ol?",
+     "choices": [
+      "colourless to purple",
+      "no change",
+      "green to orange",
+      "orange to green"
+     ],
+     "answer": 3,
+     "explanation": "Cr₂O₇²⁻ (orange) is reduced to Cr³⁺ (green).",
+     "id": "lower6-chemistry-ch-organic-e18-b"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "2-methylpropan-2-ol also changes the colour of the dichromate solution.",
+     "answer": false,
+     "explanation": "Tertiary alcohols are not oxidised: the solution stays orange.",
+     "id": "lower6-chemistry-ch-organic-e18-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Name the type of reaction when an alcohol forms an alkene with concentrated sulfuric acid and give the other product.",
+     "model": "Dehydration (an elimination reaction); the other product is water.",
+     "rubric": "1 mark: elimination/dehydration; 1 mark: water.",
+     "explanation": "Dehydration (an elimination reaction); the other product is water.",
+     "id": "lower6-chemistry-ch-organic-e18-d"
+    }
+   ],
+   "figure": {
+    "kind": "shapes",
+    "w": 410,
+    "h": 235,
+    "items": [
+     {
+      "t": "rect",
+      "x": 10,
+      "y": 20,
+      "w": 100,
+      "h": 36,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightyellow"
+     },
+     {
+      "t": "text",
+      "x": 60,
+      "y": 43,
+      "text": "primary alcohol",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "rect",
+      "x": 150,
+      "y": 20,
+      "w": 90,
+      "h": 36,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightorange"
+     },
+     {
+      "t": "text",
+      "x": 195,
+      "y": 43,
+      "text": "aldehyde",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "rect",
+      "x": 290,
+      "y": 20,
+      "w": 110,
+      "h": 36,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightgreen"
+     },
+     {
+      "t": "text",
+      "x": 345,
+      "y": 43,
+      "text": "carboxylic acid",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 112,
+      "y1": 38,
+      "x2": 148,
+      "y2": 38,
+      "color": "ink",
+      "width": 2,
+      "arrow": "end"
+     },
+     {
+      "t": "line",
+      "x1": 242,
+      "y1": 38,
+      "x2": 288,
+      "y2": 38,
+      "color": "ink",
+      "width": 2,
+      "arrow": "end"
+     },
+     {
+      "t": "rect",
+      "x": 10,
+      "y": 90,
+      "w": 100,
+      "h": 36,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightyellow"
+     },
+     {
+      "t": "text",
+      "x": 60,
+      "y": 113,
+      "text": "secondary alcohol",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "rect",
+      "x": 150,
+      "y": 90,
+      "w": 90,
+      "h": 36,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightorange"
+     },
+     {
+      "t": "text",
+      "x": 195,
+      "y": 113,
+      "text": "ketone",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 112,
+      "y1": 108,
+      "x2": 148,
+      "y2": 108,
+      "color": "ink",
+      "width": 2,
+      "arrow": "end"
+     },
+     {
+      "t": "rect",
+      "x": 10,
+      "y": 160,
+      "w": 100,
+      "h": 36,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightyellow"
+     },
+     {
+      "t": "text",
+      "x": 60,
+      "y": 183,
+      "text": "tertiary alcohol",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 250,
+      "y": 183,
+      "text": "not oxidised",
+      "size": 13,
+      "anchor": "middle",
+      "color": "red"
+     },
+     {
+      "t": "text",
+      "x": 250,
+      "y": 213,
+      "text": "oxidising agent: K₂Cr₂O₇ / H⁺ (orange → green), heat",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     }
+    ]
+   },
+   "chapter": "lower6-chemistry-ch-organic"
+  },
+  {
+   "id": "lower6-chemistry-halogenoalcohols-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-halogenoalcohols",
+   "prompt": "Nucleophilic substitution of a bromoalkane with aqueous NaOH gives",
+   "choices": [
+    "a carboxylic acid",
+    "an alkane",
+    "an alcohol",
+    "an alkene"
+   ],
+   "answer": 2,
+   "explanation": "OH⁻ replaces Br⁻.",
+   "chapter": "lower6-chemistry-ch-organic"
+  },
+  {
+   "id": "lower6-chemistry-halogenoalcohols-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-halogenoalcohols",
+   "prompt": "Elimination of HBr from a bromoalkane needs",
+   "choices": [
+    "dilute acid",
+    "UV light",
+    "aqueous KOH, cold",
+    "ethanolic KOH, heat"
+   ],
+   "answer": 3,
+   "explanation": "The alkoxide/ethanolic base removes H and Br.",
+   "chapter": "lower6-chemistry-ch-organic"
+  },
+  {
+   "id": "lower6-chemistry-halogenoalcohols-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-halogenoalcohols",
+   "prompt": "Oxidation of a primary alcohol with excess oxidant under reflux gives",
+   "choices": [
+    "a ketone",
+    "an alkane",
+    "an alkene",
+    "a carboxylic acid"
+   ],
+   "answer": 3,
+   "explanation": "First the aldehyde forms, then it is oxidised further.",
+   "chapter": "lower6-chemistry-ch-organic"
+  },
+  {
+   "id": "lower6-chemistry-halogenoalcohols-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-halogenoalcohols",
+   "prompt": "CFCs are harmful because they",
+   "choices": [
+    "are poisonous gases when burnt",
+    "release chlorine radicals that destroy ozone",
+    "dissolve in rain only",
+    "are acidic"
+   ],
+   "answer": 1,
+   "explanation": "Chlorine radicals catalyse ozone breakdown.",
+   "chapter": "lower6-chemistry-ch-organic"
+  },
+  {
+   "id": "lower6-chemistry-halogenoalcohols-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-halogenoalcohols",
+   "prompt": "The best nucleophile among these is",
+   "choices": [
+    "OH⁻",
+    "Na⁺",
+    "H₃O⁺",
+    "CH₄"
+   ],
+   "answer": 0,
+   "explanation": "A nucleophile has a lone pair to donate.",
+   "chapter": "lower6-chemistry-ch-organic"
+  }
+ ]
+}

@@ -1,0 +1,422 @@
+{
+ "chapter": "form2-geography-relief-maps",
+ "lessons": [
+  {
+   "id": "form2-geography-contours",
+   "title": "Contours, slopes and gradient",
+   "minutes": 20,
+   "programRef": "Cameroon anglophone secondary Geography syllabus, Form 2 — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define a contour line and contour interval",
+    "Recognise steep and gentle slopes, hills, valleys and spurs on a map",
+    "Calculate the gradient between two points"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form2-geography-relief-maps-e01",
+    "form2-geography-relief-maps-e02",
+    "form2-geography-relief-maps-e03",
+    "form2-geography-relief-maps-e04",
+    "form2-geography-relief-maps-e05",
+    "form2-geography-relief-maps-e06"
+   ],
+   "selfCheck": [
+    "form2-geography-contours-q1",
+    "form2-geography-contours-q2",
+    "form2-geography-contours-q3",
+    "form2-geography-contours-q4",
+    "form2-geography-contours-q5"
+   ],
+   "reviewNotes": [
+    "Teacher to verify the exact conventions used in the Form 2 syllabus (V-shaped contours for valleys and spurs, intervisibility) and the worked gradient examples.",
+    "Draft for teacher review: this course follows the Cameroon anglophone secondary Geography syllabus as generally understood; scope and level per Form, places, figures and examples must be checked against the official syllabus and a current atlas before release."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "A **contour line** is a line on a map joining all places of the **same height** above sea level. The **contour interval** is the vertical distance between two neighbouring contours, for example 20 m. A **spot height** gives the height of a single point, and a **trigonometrical point** is a surveyed point on high ground."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 200,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 190,
+        "cy": 105,
+        "r": 85,
+        "stroke": "brown",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 170,
+        "cy": 105,
+        "r": 55,
+        "stroke": "brown",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 105,
+        "r": 25,
+        "stroke": "brown",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 25,
+        "text": "100 m",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 196,
+        "y": 52,
+        "text": "200 m",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 175,
+        "text": "100 m",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 172,
+        "y": 78,
+        "text": "300 m",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 109,
+        "text": "400 m",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 60,
+        "text": "Gentle slope: lines far apart",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 40,
+        "text": "Steep:",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 55,
+        "text": "lines close",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 175,
+        "text": "East side",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Contours of a hill",
+     "alt": "Concentric contour rings with the closest lines on the west side."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Reading contours",
+     "md": "- Lines **close together**: a **steep** slope. Lines **far apart**: a **gentle** slope.\n- Closed circles with rising numbers: a **hill** or peak.\n- **V-shapes pointing uphill**: a **valley** (a river often flows in it); V-shapes pointing downhill: a **spur**.\n- Evenly spaced lines: a **uniform** slope."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Gradient",
+     "md": "**Gradient** = vertical interval ÷ horizontal distance, with both in the same unit. If a road rises 50 m over a horizontal distance of 1000 m, the gradient is 50 ÷ 1000 = 1 in 20 (1 : 20). Use the scale of the map to convert the map distance into metres."
+    },
+    {
+     "type": "text",
+     "md": "A **cross-section** (profile) shows the shape of the land along a line: draw the line on the map, mark where it crosses each contour, then plot the heights on a graph. **Intervisibility** asks whether you can see from one point to another: if a hill is higher than the line of sight between them, you cannot."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Do not read the interval from the number of lines: use the numbers written on them.\n- Convert units before dividing (all in metres).\n- A gradient of 1 in 20 is gentler than 1 in 5."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: gradient",
+     "statement": "A path climbs 40 m over a horizontal distance of 800 m. Find the gradient as 1 in n.",
+     "steps": [
+      "Gradient = 40 ÷ 800 = 1/20.",
+      "That means a rise of 1 m for every 20 m along.",
+      "So the gradient is 1 in 20."
+     ],
+     "answer": "1 in 20."
+    },
+    {
+     "type": "example",
+     "title": "Example 2: which slope is steeper?",
+     "statement": "Slope A has contours 1 mm apart; slope B has contours 5 mm apart (same map, same interval). Which is steeper?",
+     "steps": [
+      "Closer contours mean the height changes over a shorter distance.",
+      "A has the closer contours.",
+      "So A is steeper."
+     ],
+     "answer": "Slope A."
+    }
+   ],
+   "chapter": "form2-geography-relief-maps"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form2-geography-relief-maps-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form2-geography-contours",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A line on a map joining points of equal height is a",
+   "choices": [
+    "river",
+    "contour",
+    "meridian",
+    "route"
+   ],
+   "answer": 1,
+   "explanation": "Contours show relief.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-geography-relief-maps"
+  },
+  {
+   "id": "form2-geography-relief-maps-e02",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "form2-geography-contours",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Contours that are very close together show a steep slope.",
+   "answer": true,
+   "explanation": "The height changes quickly.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-geography-relief-maps"
+  },
+  {
+   "id": "form2-geography-relief-maps-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form2-geography-contours",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A road climbs 60 m in a horizontal distance of 1200 m. What is n in the gradient 1 in n?",
+   "answer": 20,
+   "tolerance": 0,
+   "explanation": "1200 ÷ 60 = 20.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-geography-relief-maps"
+  },
+  {
+   "id": "form2-geography-relief-maps-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form2-geography-contours",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A map has scale 1 : 50 000 and 2 cm separate two points on the map. How far apart are they on the ground, in metres?",
+   "answer": 1000,
+   "tolerance": 0,
+   "unit": "m",
+   "explanation": "2 cm × 500 m per cm = 1000 m.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-geography-relief-maps"
+  },
+  {
+   "id": "form2-geography-relief-maps-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form2-geography-contours",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain how to recognise a valley on a contour map.",
+   "model": "The contour lines form V-shapes or U-shapes whose points face uphill, towards higher ground, and a stream usually runs along the middle of the V.",
+   "rubric": "1 mark: V-shape; 1 mark: points uphill; 1 mark: river.",
+   "explanation": "The contour lines form V-shapes or U-shapes whose points face uphill, towards higher ground, and a stream usually runs along the middle of the V.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form2-geography-relief-maps"
+  },
+  {
+   "id": "form2-geography-relief-maps-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form2-geography-contours",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A hill has contours at 100 m, 200 m and 300 m. A path from the 100 m contour to the 300 m contour is 2 km long on the ground.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many metres does the path climb?",
+     "answer": 200,
+     "tolerance": 0,
+     "explanation": "300 − 100 = 200 m.",
+     "unit": "m",
+     "id": "form2-geography-relief-maps-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Give the gradient as 1 in n (use metres).",
+     "answer": 10,
+     "tolerance": 0,
+     "explanation": "2 km = 2000 m; 2000 ÷ 200 = 10, so the gradient is 1 in 10.",
+     "id": "form2-geography-relief-maps-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "If the contours were twice as close together, the slope would be",
+     "choices": [
+      "steeper",
+      "unchanged",
+      "gentler",
+      "flat"
+     ],
+     "answer": 0,
+     "explanation": "Closer contours mean a steeper slope.",
+     "id": "form2-geography-relief-maps-e06-c"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "A spot height is a number that gives the height of a point.",
+     "answer": true,
+     "explanation": "Spot heights mark exact points.",
+     "id": "form2-geography-relief-maps-e06-d"
+    }
+   ],
+   "chapter": "form2-geography-relief-maps"
+  },
+  {
+   "id": "form2-geography-contours-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-geography-contours",
+   "prompt": "The vertical distance between two contours is the",
+   "choices": [
+    "scale",
+    "key",
+    "grid",
+    "contour interval"
+   ],
+   "answer": 3,
+   "explanation": "It is usually the same across a map.",
+   "chapter": "form2-geography-relief-maps"
+  },
+  {
+   "id": "form2-geography-contours-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-geography-contours",
+   "prompt": "A gentle slope is shown by contours that are",
+   "choices": [
+    "red",
+    "close together",
+    "broken",
+    "far apart"
+   ],
+   "answer": 3,
+   "explanation": "Gentle slopes spread the lines out.",
+   "chapter": "form2-geography-relief-maps"
+  },
+  {
+   "id": "form2-geography-contours-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-geography-contours",
+   "prompt": "The gradient 1 in 10 means",
+   "choices": [
+    "no rise",
+    "a rise of 10 m for every 1 m",
+    "a rise of 1 m for every 10 m",
+    "a fall of 10 m"
+   ],
+   "answer": 2,
+   "explanation": "It compares rise to horizontal distance.",
+   "chapter": "form2-geography-relief-maps"
+  },
+  {
+   "id": "form2-geography-contours-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-geography-contours",
+   "prompt": "A cross-section shows",
+   "choices": [
+    "the climate",
+    "the population",
+    "the shape of the land along a line",
+    "the route of rivers"
+   ],
+   "answer": 2,
+   "explanation": "It is a side view of the relief.",
+   "chapter": "form2-geography-relief-maps"
+  },
+  {
+   "id": "form2-geography-contours-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-geography-contours",
+   "prompt": "V-shaped contours pointing uphill show",
+   "choices": [
+    "a road",
+    "a valley",
+    "a lake",
+    "a peak"
+   ],
+   "answer": 1,
+   "explanation": "Contours bend up valleys.",
+   "chapter": "form2-geography-relief-maps"
+  }
+ ]
+}

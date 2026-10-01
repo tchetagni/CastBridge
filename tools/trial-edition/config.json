@@ -1,0 +1,83 @@
+{
+  "comment": "Règles de l'édition d'essai (docs/TRIAL-EDITION.md). Aucune valeur ici n'est un prix. Tout est lu par trial_edition.py ; modifier une règle = relancer l'outil, jamais éditer le manifeste à la main.",
+  "format": 1,
+  "capBytes": 104857600,
+  "reserveBytes": 2097152,
+  "textLotMaxBytes": 3145728,
+  "mediaLotMaxBytes": 104857600,
+  "maxShareOfFull": 0.35,
+  "categoryFillShare": {
+    "learn": 0.4,
+    "quiz": 0.25,
+    "langues": 0.35
+  },
+  "floors": {
+    "learnExercises": 3,
+    "quizPerDifficulty": 3,
+    "audioMaxMs": 60000,
+    "audioMaxBytes": 262144,
+    "videoMaxMs": 30000,
+    "videoMaxBytes": 1572864
+  },
+  "examScopes": [
+    "cm2",
+    "3e",
+    "1ere",
+    "tle-cd",
+    "tle-commun",
+    "class6",
+    "form1"
+  ],
+  "examScopePrefixes": [
+    "tle"
+  ],
+  "levels": {
+    "difficultyLabels": {
+      "1": "N0",
+      "2": "N1",
+      "3": "N2",
+      "4": "N3",
+      "5": "N4"
+    },
+    "languageLevels": [
+      "A0",
+      "A1",
+      "A2",
+      "B1",
+      "B2",
+      "C1",
+      "C2",
+      "NATIF"
+    ]
+  },
+  "expectedLanguages": [
+    "zh",
+    "ja",
+    "en",
+    "de",
+    "es",
+    "it",
+    "fr"
+  ],
+  "allowedLicenses": [
+    "CASTBRIDGE-ORIGINAL",
+    "CC0",
+    "CC-BY",
+    "CC-BY-SA",
+    "PUBLIC-DOMAIN"
+  ],
+  "trialSuffix": "-trial",
+  "lotFeatures": {
+    "learn": "learn",
+    "quiz": "quiz",
+    "langues": "langues",
+    "langmedia": "langmedia"
+  },
+  "bundleQuizAliases": {
+    "class6": "class-6",
+    "form1": "form-1",
+    "form2": "form-2",
+    "form3": "form-3",
+    "tle-cd": "tle"
+  }
+}

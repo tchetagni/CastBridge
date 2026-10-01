@@ -1,0 +1,1347 @@
+{
+ "chapter": "form4-maths-measure-number",
+ "lessons": [
+  {
+   "id": "form4-maths-mensuration",
+   "title": "Mensuration: composite solids, frustum and surface area",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 4 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Calculate the surface area of a cylinder and a hemisphere",
+    "Calculate the volume of a composite solid",
+    "Calculate the volume of a frustum of a cone",
+    "Solve practical problems with costs"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form4-maths-measure-number-e01",
+    "form4-maths-measure-number-e02",
+    "form4-maths-measure-number-e03",
+    "form4-maths-measure-number-e04",
+    "form4-maths-measure-number-e05",
+    "form4-maths-measure-number-e06"
+   ],
+   "selfCheck": [
+    "form4-maths-mensuration-q1",
+    "form4-maths-mensuration-q2",
+    "form4-maths-mensuration-q3",
+    "form4-maths-mensuration-q4",
+    "form4-maths-mensuration-q5"
+   ],
+   "reviewNotes": [
+    "The silo and bucket sizes are invented for practice.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Cylinder and hemisphere",
+     "md": "For a cylinder of radius r and height h, and a hemisphere of radius r:",
+     "tex": "A_{\\text{cyl}} = 2\\pi r h + 2\\pi r^2 \\qquad V_{\\text{hemi}} = \\frac{2}{3}\\pi r^3 \\qquad A_{\\text{curved hemi}} = 2\\pi r^2"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Composite solids",
+     "md": "Split the solid into simple shapes, compute each volume (or area), then add. Be careful about **faces that are joined**: they are not on the outside. A silo made of a cylinder (r = 3.5 m, h = 8 m) with a hemisphere on top (π = 22/7): V = 22/7 × 3.5² × 8 + 2/3 × 22/7 × 3.5³ = 308 + 89.8 = 397.8 m³."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 235,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         130,
+         190,
+         270,
+         190,
+         270,
+         100,
+         130,
+         100
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "path",
+        "d": "M 130 100 A 70 70 0 0 1 270 100 Z",
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 215,
+        "text": "d = 7 m",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 285,
+        "y": 150,
+        "text": "h = 8 m",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 60,
+        "text": "hemisphere r = 3.5 m",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A silo: a cylinder of radius 3.5 m and height 8 m with a hemispherical roof.",
+     "alt": "A rectangle topped by a semicircle representing a cylinder with a dome."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Frustum of a cone",
+     "md": "A **frustum** is a cone with its top cut off by a plane parallel to the base. Its volume is the **big cone minus the small cone** removed. The two cones are similar. For a big cone with r = 6 and h = 12, and a small cone cut off with r = 3 and h = 6 (π = 22/7): V = 452.6 − 56.6 = 396."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Including the joining face of a composite solid in the outside area.\n- Forgetting the top circle of a closed cylinder (2πr²).\n- Subtracting the wrong height: the frustum's height is the **difference** of the two heights (12 − 6 = 6)."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: a silo",
+     "statement": "A grain silo at Garoua has a cylindrical part with radius 3.5 m and height 8 m and a hemispherical roof (π = 22/7). Find its volume, and the outside area excluding the base. Painting costs 800 FCFA per m².",
+     "steps": [
+      "Volume = 308 + 89.8 = 397.8 m³.",
+      "Curved cylinder = 2 × 22/7 × 3.5 × 8 = 176 m²; hemisphere roof = 2 × 22/7 × 3.5² = 77 m²; total 253 m².",
+      "Cost = 253 × 800 = 202 400 FCFA."
+     ],
+     "answer": "**397.8 m³; 253 m²; 202 400 FCFA.**",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 235,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         130,
+         190,
+         270,
+         190,
+         270,
+         100,
+         130,
+         100
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "path",
+        "d": "M 130 100 A 70 70 0 0 1 270 100 Z",
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 215,
+        "text": "d = 7 m",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 285,
+        "y": 150,
+        "text": "h = 8 m",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 60,
+        "text": "hemisphere r = 3.5 m",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2: a frustum",
+     "statement": "A bucket has the shape of a frustum with a base radius of 6 cm and a top radius of 3 cm cut at height 6 cm of a cone of height 12 cm. Find its volume (π = 22/7).",
+     "steps": [
+      "Big cone: 1/3 × 22/7 × 6² × 12 = 452.57 cm³.",
+      "Small cone removed: 1/3 × 22/7 × 3² × 6 = 56.57 cm³.",
+      "Frustum = 452.57 − 56.57 = 396 cm³."
+     ],
+     "answer": "**396 cm³**"
+    }
+   ],
+   "chapter": "form4-maths-measure-number"
+  },
+  {
+   "id": "form4-maths-number-bases",
+   "title": "Number bases",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 4 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Write numbers in bases 2, 5, 8 and other bases",
+    "Convert between base 10 and other bases",
+    "Add, subtract and multiply in other bases",
+    "Solve simple equations involving bases"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form4-maths-measure-number-e07",
+    "form4-maths-measure-number-e08",
+    "form4-maths-measure-number-e09",
+    "form4-maths-measure-number-e10",
+    "form4-maths-measure-number-e11",
+    "form4-maths-measure-number-e12"
+   ],
+   "selfCheck": [
+    "form4-maths-number-bases-q1",
+    "form4-maths-number-bases-q2",
+    "form4-maths-number-bases-q3",
+    "form4-maths-number-bases-q4",
+    "form4-maths-number-bases-q5"
+   ],
+   "reviewNotes": [
+    "The statement about computers using base 2 is simplified; check it fits the level.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Place value in a base",
+     "md": "In **base 10** the places are powers of 10. In **base b** the places are powers of b and the digits go from 0 to b − 1. We write the base as a subscript: 1101₂ is a base-2 (binary) number: 1×8 + 1×4 + 0×2 + 1×1 = 13. In base 5: 213₅ = 2×25 + 1×5 + 3 = 58."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Converting base 10 to base b",
+     "md": "Divide repeatedly by b and read the **remainders from the last to the first**. Example: 45 to base 2: 45 ÷ 2 = 22 r 1; 22 ÷ 2 = 11 r 0; 11 ÷ 2 = 5 r 1; 5 ÷ 2 = 2 r 1; 2 ÷ 2 = 1 r 0; 1 ÷ 2 = 0 r 1. Reading upwards: 101101₂. Check: 32 + 8 + 4 + 1 = 45."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 320,
+      "h": 110,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 60,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 40.0,
+        "y": 30.0,
+        "text": "2⁴",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 70,
+        "y": 10,
+        "w": 60,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 30.0,
+        "text": "2³",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 10,
+        "w": 60,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 30.0,
+        "text": "2²",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 190,
+        "y": 10,
+        "w": 60,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 30.0,
+        "text": "2¹",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 250,
+        "y": 10,
+        "w": 60,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 280.0,
+        "y": 30.0,
+        "text": "2⁰",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 40,
+        "w": 60,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 40.0,
+        "y": 60.0,
+        "text": "16",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 70,
+        "y": 40,
+        "w": 60,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 60.0,
+        "text": "8",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 40,
+        "w": 60,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 60.0,
+        "text": "4",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 190,
+        "y": 40,
+        "w": 60,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 60.0,
+        "text": "2",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 250,
+        "y": 40,
+        "w": 60,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 280.0,
+        "y": 60.0,
+        "text": "1",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 70,
+        "w": 60,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 40.0,
+        "y": 90.0,
+        "text": "0",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 70,
+        "y": 70,
+        "w": 60,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 90.0,
+        "text": "1",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 70,
+        "w": 60,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 90.0,
+        "text": "1",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 190,
+        "y": 70,
+        "w": 60,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 90.0,
+        "text": "0",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 250,
+        "y": 70,
+        "w": 60,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 280.0,
+        "y": 90.0,
+        "text": "1",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Place values in base 2 and the binary number 01101 = 13.",
+     "alt": "A table with powers of 2 and the digits 0, 1, 1, 0, 1 below."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Calculating in other bases",
+     "md": "Add or multiply column by column, **carrying when a column reaches the base** (not 10). 1011₂ + 110₂: 1 + 0 = 1; 1 + 1 = 10 (write 0 carry 1); 0 + 1 + 1 = 10 (write 0 carry 1); 1 + 1 = 10. The answer is 10001₂ (11 + 6 = 17). Or convert to base 10, calculate, and convert back."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using a digit not allowed in the base (a 5 in base 5).\n- Reading the remainders from top to bottom instead of bottom to top.\n- Carrying at 10 instead of at the base."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: conversions",
+     "statement": "Convert 45 to base 2, 213₅ to base 10, and 100 to base 5.",
+     "steps": [
+      "45 = 32 + 8 + 4 + 1 = 101101₂ (using the remainder method).",
+      "213₅ = 2 × 25 + 1 × 5 + 3 = 58.",
+      "100 ÷ 25 = 4 remainder 0, so 100 = 4 × 25 + 0 × 5 + 0 = 400₅."
+     ],
+     "answer": "**101101₂; 58; 400₅**",
+     "figure": {
+      "kind": "shapes",
+      "w": 320,
+      "h": 110,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 60,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 40.0,
+        "y": 30.0,
+        "text": "2⁴",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 70,
+        "y": 10,
+        "w": 60,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 30.0,
+        "text": "2³",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 10,
+        "w": 60,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 30.0,
+        "text": "2²",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 190,
+        "y": 10,
+        "w": 60,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 30.0,
+        "text": "2¹",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 250,
+        "y": 10,
+        "w": 60,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 280.0,
+        "y": 30.0,
+        "text": "2⁰",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 40,
+        "w": 60,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 40.0,
+        "y": 60.0,
+        "text": "16",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 70,
+        "y": 40,
+        "w": 60,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 60.0,
+        "text": "8",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 40,
+        "w": 60,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 60.0,
+        "text": "4",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 190,
+        "y": 40,
+        "w": 60,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 60.0,
+        "text": "2",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 250,
+        "y": 40,
+        "w": 60,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 280.0,
+        "y": 60.0,
+        "text": "1",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 70,
+        "w": 60,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 40.0,
+        "y": 90.0,
+        "text": "0",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 70,
+        "y": 70,
+        "w": 60,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 90.0,
+        "text": "1",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 70,
+        "w": 60,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 90.0,
+        "text": "1",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 190,
+        "y": 70,
+        "w": 60,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 90.0,
+        "text": "0",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 250,
+        "y": 70,
+        "w": 60,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 280.0,
+        "y": 90.0,
+        "text": "1",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2: arithmetic and an unknown base",
+     "statement": "Work out 1011₂ + 110₂ and 23₅ × 4₅. Find the base b if 21 in base b equals 17 in base 10.",
+     "steps": [
+      "1011₂ + 110₂ = 10001₂ (11 + 6 = 17).",
+      "23₅ = 13 and 13 × 4 = 52 = 2 × 25 + 0 × 5 + 2, so 202₅.",
+      "2b + 1 = 17 gives b = 8."
+     ],
+     "answer": "**10001₂; 202₅; base 8.**"
+    }
+   ],
+   "chapter": "form4-maths-measure-number"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form4-maths-measure-number-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-maths-mensuration",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find the total surface area of a closed cylinder with r = 7 cm and h = 20 cm (π = 22/7).",
+   "answer": 1188,
+   "tolerance": 0,
+   "unit": "cm²",
+   "explanation": "2 × 22/7 × 7 × 27 = 1 188 cm².",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form4-maths-measure-number"
+  },
+  {
+   "id": "form4-maths-measure-number-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-maths-mensuration",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find the volume of a hemisphere of radius 3 cm (π = 3.14, answer to 1 d.p.).",
+   "answer": 56.5,
+   "tolerance": 0.1,
+   "unit": "cm³",
+   "explanation": "2/3 × 3.14 × 27 = 56.52.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form4-maths-measure-number"
+  },
+  {
+   "id": "form4-maths-measure-number-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form4-maths-mensuration",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The volume of a frustum is found by:",
+   "choices": [
+    "big cone times 2",
+    "big cone minus small cone",
+    "big cone plus small cone",
+    "the cylinder volume"
+   ],
+   "answer": 1,
+   "explanation": "Cut-off part removed.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-maths-measure-number"
+  },
+  {
+   "id": "form4-maths-measure-number-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form4-maths-mensuration",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A solid is a cylinder (r = 7 cm, h = 10 cm) with a cone of the same radius and height 24 cm on top. Find the total volume (cm³, π = 22/7).",
+   "answer": 2772,
+   "tolerance": 0,
+   "unit": "cm³",
+   "explanation": "Cylinder 1 540 + cone 1 232 = 2 772.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-maths-measure-number"
+  },
+  {
+   "id": "form4-maths-measure-number-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form4-maths-mensuration",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Explain how you would find the volume of a frustum when you only know the radii of the two circles and the height of the frustum.",
+   "model": "Use similar triangles to find the height of the missing small cone, then calculate the big cone and small cone volumes and subtract them.",
+   "rubric": "1 mark for similar triangles, 1 mark for both cones, 1 mark for subtracting.",
+   "explanation": "Use similar triangles to find the height of the missing small cone, then calculate the big cone and small cone volumes and subtract them.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-maths-measure-number"
+  },
+  {
+   "id": "form4-maths-measure-number-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form4-maths-mensuration",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A water tower near Bafoussam is a cylinder of radius 3.5 m and height 8 m topped by a hemisphere of the same radius (π = 22/7).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the volume of the cylinder (m³).",
+     "answer": 308,
+     "tolerance": 0,
+     "explanation": "22/7 × 12.25 × 8.",
+     "unit": "m³",
+     "id": "form4-maths-measure-number-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the volume of the whole tower (m³, 1 d.p.).",
+     "answer": 397.8,
+     "tolerance": 0.1,
+     "explanation": "308 + 89.8.",
+     "unit": "m³",
+     "id": "form4-maths-measure-number-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "How many litres can it hold (nearest 100)?",
+     "answer": 397800,
+     "tolerance": 100,
+     "explanation": "1 m³ = 1 000 litres.",
+     "unit": "l",
+     "id": "form4-maths-measure-number-e06-c"
+    }
+   ],
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 235,
+    "items": [
+     {
+      "t": "poly",
+      "pts": [
+       130,
+       190,
+       270,
+       190,
+       270,
+       100,
+       130,
+       100
+      ],
+      "stroke": "ink",
+      "width": 2,
+      "closed": true,
+      "fill": "lightyellow"
+     },
+     {
+      "t": "path",
+      "d": "M 130 100 A 70 70 0 0 1 270 100 Z",
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightorange"
+     },
+     {
+      "t": "text",
+      "x": 200,
+      "y": 215,
+      "text": "d = 7 m",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 285,
+      "y": 150,
+      "text": "h = 8 m",
+      "size": 13,
+      "anchor": "start",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 200,
+      "y": 60,
+      "text": "hemisphere r = 3.5 m",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink"
+     }
+    ]
+   },
+   "chapter": "form4-maths-measure-number"
+  },
+  {
+   "id": "form4-maths-mensuration-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-mensuration",
+   "prompt": "The volume of a hemisphere is:",
+   "choices": [
+    "πr²h",
+    "(2/3)πr³",
+    "2πr²",
+    "(4/3)πr³"
+   ],
+   "answer": 1,
+   "explanation": "Half the sphere.",
+   "chapter": "form4-maths-measure-number"
+  },
+  {
+   "id": "form4-maths-mensuration-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-mensuration",
+   "prompt": "The total surface area of a closed cylinder is:",
+   "choices": [
+    "2πr + 2πh",
+    "πrh",
+    "πr²h",
+    "2πrh + 2πr²"
+   ],
+   "answer": 3,
+   "explanation": "Curved plus two ends.",
+   "chapter": "form4-maths-measure-number"
+  },
+  {
+   "id": "form4-maths-mensuration-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-mensuration",
+   "prompt": "A frustum is:",
+   "choices": [
+    "a cone with no base",
+    "a sphere cut in half",
+    "a cone with the top cut off",
+    "a cylinder"
+   ],
+   "answer": 2,
+   "explanation": "Definition.",
+   "chapter": "form4-maths-measure-number"
+  },
+  {
+   "id": "form4-maths-mensuration-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-mensuration",
+   "prompt": "The curved surface area of a hemisphere is:",
+   "choices": [
+    "3πr²",
+    "4πr²",
+    "πr²",
+    "2πr²"
+   ],
+   "answer": 3,
+   "explanation": "Half of the sphere's area.",
+   "chapter": "form4-maths-measure-number"
+  },
+  {
+   "id": "form4-maths-mensuration-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-mensuration",
+   "prompt": "The volume of a composite solid is found by:",
+   "choices": [
+    "subtracting always",
+    "using the biggest part only",
+    "adding the volumes of its parts",
+    "multiplying them"
+   ],
+   "answer": 2,
+   "explanation": "Split and add.",
+   "chapter": "form4-maths-measure-number"
+  },
+  {
+   "id": "form4-maths-measure-number-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-maths-number-bases",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Convert 1101₂ to base 10.",
+   "answer": 13,
+   "tolerance": 0,
+   "explanation": "8 + 4 + 0 + 1.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form4-maths-measure-number"
+  },
+  {
+   "id": "form4-maths-measure-number-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-maths-number-bases",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Convert 213₅ to base 10.",
+   "answer": 58,
+   "tolerance": 0,
+   "explanation": "2 × 25 + 5 + 3.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form4-maths-measure-number"
+  },
+  {
+   "id": "form4-maths-measure-number-e09",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form4-maths-number-bases",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Which digit cannot appear in a base-5 number?",
+   "choices": [
+    "5",
+    "4",
+    "3",
+    "0"
+   ],
+   "answer": 0,
+   "explanation": "Base 5 uses the digits 0 to 4.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-maths-measure-number"
+  },
+  {
+   "id": "form4-maths-measure-number-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form4-maths-number-bases",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Express 53₈ − 27₈ in base 8 and give its value in base 10.",
+   "answer": 20,
+   "tolerance": 0,
+   "explanation": "43 − 23 = 20, which is 24₈.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-maths-measure-number"
+  },
+  {
+   "id": "form4-maths-measure-number-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form4-maths-number-bases",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Explain why computers use base 2.",
+   "model": "Electronic circuits have two stable states, on and off, which are naturally represented by the digits 1 and 0, so every number can be stored using only two symbols.",
+   "rubric": "1 mark for two states, 1 mark for the digits 0 and 1, 1 mark for the conclusion.",
+   "explanation": "Electronic circuits have two stable states, on and off, which are naturally represented by the digits 1 and 0, so every number can be stored using only two symbols.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-maths-measure-number"
+  },
+  {
+   "id": "form4-maths-measure-number-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form4-maths-number-bases",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A student at a school in Yaoundé learns to use bases with the number 37.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Write 37 in base 2 (it is 100101₂). How many digits does the binary number have?",
+     "answer": 6,
+     "tolerance": 0,
+     "explanation": "37 = 32 + 4 + 1 = 100101₂, which has 6 digits.",
+     "id": "form4-maths-measure-number-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Convert 37 to base 5 and give the sum of the digits of your answer.",
+     "answer": 5,
+     "tolerance": 0,
+     "explanation": "37 = 1 × 25 + 2 × 5 + 2, so 122₅; 1 + 2 + 2 = 5.",
+     "id": "form4-maths-measure-number-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Convert 100101₂ back to base 10.",
+     "answer": 37,
+     "tolerance": 0,
+     "explanation": "32 + 4 + 1.",
+     "id": "form4-maths-measure-number-e12-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "In which base b is the number 37 (base 10) written as 45?",
+     "answer": 8,
+     "tolerance": 0,
+     "explanation": "4b = 32, so b = 8.",
+     "id": "form4-maths-measure-number-e12-d"
+    }
+   ],
+   "chapter": "form4-maths-measure-number"
+  },
+  {
+   "id": "form4-maths-number-bases-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-number-bases",
+   "prompt": "In base 2 the digits used are:",
+   "choices": [
+    "0 to 9",
+    "0 and 1",
+    "1 and 2",
+    "0 to 2"
+   ],
+   "answer": 1,
+   "explanation": "Binary.",
+   "chapter": "form4-maths-measure-number"
+  },
+  {
+   "id": "form4-maths-number-bases-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-number-bases",
+   "prompt": "1010₂ in base 10 is:",
+   "choices": [
+    "10",
+    "5",
+    "12",
+    "8"
+   ],
+   "answer": 0,
+   "explanation": "8 + 2.",
+   "chapter": "form4-maths-measure-number"
+  },
+  {
+   "id": "form4-maths-number-bases-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-number-bases",
+   "prompt": "10₅ in base 10 is:",
+   "choices": [
+    "10",
+    "50",
+    "5",
+    "2"
+   ],
+   "answer": 2,
+   "explanation": "1 × 5 + 0.",
+   "chapter": "form4-maths-measure-number"
+  },
+  {
+   "id": "form4-maths-number-bases-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-number-bases",
+   "prompt": "To change a base-10 number to base 2 we divide by:",
+   "choices": [
+    "10 repeatedly",
+    "the number itself",
+    "2 repeatedly",
+    "5 repeatedly"
+   ],
+   "answer": 2,
+   "explanation": "Remainder method.",
+   "chapter": "form4-maths-measure-number"
+  },
+  {
+   "id": "form4-maths-number-bases-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-maths-number-bases",
+   "prompt": "In base 8 the largest digit is:",
+   "choices": [
+    "8",
+    "7",
+    "9",
+    "10"
+   ],
+   "answer": 1,
+   "explanation": "Digits 0 to 7.",
+   "chapter": "form4-maths-measure-number"
+  }
+ ]
+}

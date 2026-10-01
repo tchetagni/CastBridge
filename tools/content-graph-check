@@ -1,0 +1,6 @@
+#!/bin/sh
+# Validates the curriculum skill graph (content/graph) and the content that names a skill. Same as: gradle :core:checkContentGraph
+#   tools/content-graph-check [--require-content]
+ROOT=$(cd "$(dirname "$0")/.." && pwd)
+if [ "${1:-}" = "--require-content" ]; then exec "${GRADLE_RUNNER:-$ROOT/tools/core-harness/run.sh}" -q :core:checkContentGraph -PrequireContent; fi
+exec "${GRADLE_RUNNER:-$ROOT/tools/core-harness/run.sh}" -q :core:checkContentGraph

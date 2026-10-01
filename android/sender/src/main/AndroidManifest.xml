@@ -21,6 +21,16 @@
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" android:usesPermissionFlags="neverForLocation" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE" />
     <uses-feature android:name="android.hardware.bluetooth" android:required="false" />
+    <!-- Smart remote (docs/REMOTE.md): infrared emitter (optional) and the makers' remote apps we may open -->
+    <uses-permission android:name="android.permission.TRANSMIT_IR" />
+    <uses-feature android:name="android.hardware.consumerir" android:required="false" />
+    <queries>
+        <package android:name="com.samsung.android.oneconnect" />
+        <package android:name="com.lgeha.nuts" />
+        <package android:name="com.roku.remote" />
+        <package android:name="com.sony.tvsideview.phone" />
+        <package android:name="com.google.android.apps.chromecast.app" />
+    </queries>
     <!-- Phone player: background playback with its media notification -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
     <!-- "Sur le téléphone" library (Android 13+: per media type; 14+: partial access to selected photos/videos) -->
@@ -77,6 +87,8 @@
         <!-- Remote control of CastBridge TV (docs/REMOTE.md): its own screen (phone volume buttons drive the TV there) and an
              optional Quick Settings tile -->
         <activity android:name=".RemoteActivity" android:exported="false" android:label="Télécommande TV"
+            android:theme="@android:style/Theme.Material.NoActionBar" android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".MyTvActivity" android:exported="false" android:label="Ma TV"
             android:theme="@android:style/Theme.Material.NoActionBar" android:windowSoftInputMode="adjustResize" />
         <service android:name=".RemoteTileService" android:exported="true" android:label="Télécommande TV"
             android:icon="@drawable/ic_cb_telecommande" android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">

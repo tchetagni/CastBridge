@@ -1,0 +1,54 @@
+# slug | level | years | fr | en | prereqs | minutes | tags
+listen-speak|N0|y0|Écouter, parler, raconter en français|Listen, speak and retell in French||20|oral
+sounds|N0|y0-1|Reconnaître les sons et les syllabes|Recognise sounds and syllables|listen-speak|20|lecture
+letters|N0|y1|Connaître les lettres et les écrire|Know and write the letters|sounds|25|ecriture
+read-syllables|N0|y1|Lire des syllabes et de petits mots|Read syllables and short words|letters|25|lecture
+read-sentences|N0|y1|Lire une phrase simple|Read a simple sentence|read-syllables|25|lecture
+write-words|N0|y1-2|Écrire des mots et une phrase|Write words and a sentence|letters,read-syllables|25|ecriture
+alpha-adult|N0|y1|Alphabétisation des adultes : lire et écrire ses premiers mots|Adult literacy: first words|sounds|30|adultes
+fluent-reading|N1|y2|Lire un texte court avec aisance|Read a short text fluently|read-sentences|25|lecture
+sentence|N1|y2|La phrase : majuscule, point, ordre des mots|The sentence|write-words|20|grammaire
+nouns-articles|N1|y2|Noms, articles, singulier et pluriel|Nouns, articles, singular and plural|sentence|20|grammaire
+verb-present|N1|y3|Le verbe et le présent|The verb and the present tense|sentence|25|conjugaison
+adjective|N1|y3|L'adjectif et l'accord|The adjective and agreement|nouns-articles|25|grammaire
+spelling-basic|N1|y3|Orthographe : sons complexes, accents|Spelling: complex sounds and accents|write-words,fluent-reading|25|orthographe
+reading-comp-1|N1|y3|Comprendre un texte court|Understand a short text|fluent-reading|25|lecture
+passe-futur|N1|y4|Passé composé, imparfait, futur|Past and future tenses|verb-present|30|conjugaison
+sentence-types|N1|y4|Types et formes de phrases|Types of sentences|sentence|25|grammaire
+functions-1|N1|y4|Sujet, verbe, compléments|Subject, verb, complements|sentence-types|30|grammaire
+dictation|N1|y4|Dictée et accords simples|Dictation and simple agreement|spelling-basic,adjective|30|orthographe
+vocab-family|N1|y4|Mots de la même famille, synonymes, contraires|Word families, synonyms and antonyms|reading-comp-1|25|vocabulaire
+short-text|N1|y5|Rédiger un court texte (récit, lettre)|Write a short text (story, letter)|functions-1,dictation|35|expression
+agreement-pp|N1|y5|Accord du participe passé (être, avoir)|Past participle agreement|passe-futur,functions-1|35|orthographe
+complex-sent|N1|y5|Phrase simple et phrase complexe|Simple and complex sentences|functions-1|30|grammaire
+reading-comp-2|N1|y5|Comprendre et résumer un texte|Understand and summarise a text|reading-comp-1,vocab-family|30|lecture
+cep-writing|N1|y6|Expression écrite du CEP : rédaction guidée|CEP written expression|short-text,agreement-pp|40|examen,expression
+cep-grammar|N1|y6|Grammaire, conjugaison, orthographe du CEP|CEP grammar, conjugation and spelling|complex-sent,agreement-pp|40|examen
+cep-reading|N1|y6|Lecture et compréhension du CEP|CEP reading comprehension|reading-comp-2|35|examen,lecture
+tenses-moods|N1|y7|Temps et modes : indicatif, impératif, conditionnel|Tenses and moods|passe-futur|35|conjugaison
+narration|N1|y7|Le récit : schéma narratif et points de vue|Narration: narrative structure|short-text,cep-reading|35|expression
+subordinate|N1|y8|Propositions subordonnées|Subordinate clauses|complex-sent,tenses-moods|40|grammaire
+description-dialogue|N1|y8|Description et dialogue|Description and dialogue|narration|35|expression
+figures-speech|N1|y9|Figures de style et registres|Figures of speech and registers|description-dialogue|35|litterature
+argumentation-1|N1|y9|L'argumentation simple : thèse, arguments, exemples|Basic argumentation|description-dialogue|40|expression
+bepc-writing|N1|y10|Rédaction du BEPC : contraction, expression|BEPC writing|argumentation-1,subordinate|45|examen,expression
+bepc-grammar|N1|y10|Grammaire et conjugaison du BEPC|BEPC grammar and conjugation|subordinate,figures-speech|40|examen
+text-analysis|N1|y11|Analyse d'un texte littéraire|Literary text analysis|figures-speech,bepc-writing|45|litterature
+essay-dissertation|N1|y11|La dissertation et le commentaire (initiation)|Essay and commentary (introduction)|argumentation-1,text-analysis|50|expression
+poetry-theatre|N1|y12|Poésie et théâtre : lecture analytique|Poetry and theatre: close reading|text-analysis|45|litterature
+probatoire-essay|N1|y12|Dissertation et commentaire du Probatoire|Probatoire essay and commentary|essay-dissertation,poetry-theatre|55|examen,expression
+african-lit|N1|y12|Littérature africaine et camerounaise d'expression française|African and Cameroonian literature in French|text-analysis|45|litterature,cameroun
+bac-philo-writing|N1|y13|Épreuve de français du Bac : dissertation littéraire|Baccalauréat French writing|probatoire-essay,african-lit|55|examen,expression
+academic-writing|N1|y14|Écrits universitaires : synthèse, exposé, rapport|University writing: synthesis, presentation, report|bac-philo-writing|50|superieur
+# N2
+n2-concours-text|N2|y6|Compréhension fine et rédaction de concours du CM2|Close reading and writing at top CM2 level|cep-reading,cep-writing|45|concours
+n2-vocab-rich|N2|y8|Vocabulaire riche, nuances et étymologie|Rich vocabulary, nuance and etymology|vocab-family,subordinate|40|concours,vocabulaire
+n2-syntax-advanced|N2|y9|Syntaxe avancée : modes, concordance des temps|Advanced syntax: moods and sequence of tenses|subordinate,n2-vocab-rich|45|concours,grammaire
+n2-writing-style|N2|y10|Style et composition de rédaction d'excellence|Style and composition at excellence level|bepc-writing,n2-syntax-advanced|50|concours,expression
+n2-literary-essay|N2|y11|Commentaire composé de haut niveau|High-level literary commentary|text-analysis,n2-writing-style|55|concours,litterature
+n2-dissertation|N2|y12|Dissertation argumentée : problématique et plan|Argued essay: problem and plan|probatoire-essay,n2-literary-essay|60|concours,expression
+n2-concours-general|N2|y13|Dissertation et commentaire niveau concours général|Essay and commentary at top-national level|bac-philo-writing,n2-dissertation|65|concours,expression
+# N3
+n3-rhetoric|N3|y12|Rhétorique et stylistique comparées|Rhetoric and comparative stylistics|n2-literary-essay|60|international,litterature
+n3-comparative-lit|N3|y13|Littérature comparée francophone et mondiale|Comparative francophone and world literature|n2-concours-general,african-lit|65|international,litterature
+n3-research-writing|N3|y14|Écriture de recherche : argumentation soutenue et sources|Research writing: sustained argument and sources|n2-concours-general,academic-writing|65|international,expression

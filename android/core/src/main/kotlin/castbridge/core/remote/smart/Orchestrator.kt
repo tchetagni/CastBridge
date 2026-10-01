@@ -7,14 +7,14 @@ import java.io.IOException
 data class Remembered(val strategyId: String, val at: Long)
 
 interface StrategyMemory {
-    fun get(tvId: String): Remembered?
+    fun recall(tvId: String): Remembered?
     fun put(tvId: String, r: Remembered)
     fun forget(tvId: String)
 }
 
 class MemoryStrategyMemory : StrategyMemory {
     private val m = java.util.concurrent.ConcurrentHashMap<String, Remembered>()
-    override fun get(tvId: String) = m[tvId]
+    override fun recall(tvId: String) = m[tvId]
     override fun put(tvId: String, r: Remembered) { m[tvId] = r }
     override fun forget(tvId: String) { m.remove(tvId) }
 }
@@ -87,7 +87,7 @@ class Orchestrator(
         val byId = all.associateBy { it.id }
         val ids = LinkedHashSet<String>()
         forced?.let { ids += it }
-        memory.get(tvId)?.let { ids += it.strategyId }
+        memory.recall(tvId)?.let { ids += it.strategyId }
         if (fingerprint.vendor == Vendor.CASTBRIDGE || StrategyIds.CASTBRIDGE in fingerprint.candidates) ids += StrategyIds.CASTBRIDGE
         ids += fingerprint.candidates
         ids += StrategyIds.DEFAULT_ORDER
@@ -112,7 +112,7 @@ class Orchestrator(
         if (!s.probe().reachable) { note(s.id, AttemptOutcome.FAILED, "injoignable (sondage)"); return false }
         return try {
             s.connect()
-            val confirmed = memory.get(tvId)?.strategyId == s.id
+            val confirmed = memory.recall(tvId)?.strategyId == s.id
             note(s.id, if (confirmed) AttemptOutcome.CONFIRMED else AttemptOutcome.TO_CONFIRM)
             if (!confirmed && !s.verifiesDelivery) synchronized(unconfirmed) { unconfirmed += s.id }
             true
@@ -155,7 +155,7 @@ class Orchestrator(
 
     private fun deliver(s: RemoteStrategy, key: RemoteKey): SendResult {
         s.send(key)
-        if (s.verifiesDelivery && memory.get(tvId)?.strategyId != s.id) { memory.put(tvId, Remembered(s.id, clock())); note(s.id, AttemptOutcome.CONFIRMED, "la TV a accusé réception") }
+        if (s.verifiesDelivery && memory.recall(tvId)?.strategyId != s.id) { memory.put(tvId, Remembered(s.id, clock())); note(s.id, AttemptOutcome.CONFIRMED, "la TV a accusé réception") }
         return SendResult.Sent(s.id)
     }
 
@@ -190,7 +190,7 @@ class Orchestrator(
         if (saw) { memory.put(tvId, Remembered(s.id, clock())); note(s.id, AttemptOutcome.CONFIRMED, "confirmé par l'utilisateur"); synchronized(unconfirmed) { unconfirmed -= s.id } }
         else {
             note(s.id, AttemptOutcome.FAILED, "l'utilisateur n'a rien vu changer")
-            if (memory.get(tvId)?.strategyId == s.id) memory.forget(tvId)
+            if (memory.recall(tvId)?.strategyId == s.id) memory.forget(tvId)
             runCatching { s.close() }; active = null
         }
     }

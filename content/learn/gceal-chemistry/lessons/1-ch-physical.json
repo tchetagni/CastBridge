@@ -1,0 +1,2203 @@
+{
+ "chapter": "gceal-chemistry-ch-physical",
+ "lessons": [
+  {
+   "id": "gceal-chemistry-electrode",
+   "title": "Electrode potentials and electrochemical cells",
+   "minutes": 40,
+   "programRef": "GCE Advanced Level Chemistry — physical chemistry (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define standard electrode potential E° using the standard hydrogen electrode and write cell diagrams",
+    "Calculate E°cell, predict the feasibility of redox reactions and explain the limits of such predictions",
+    "Relate E°cell to ΔG° and K, and describe the effect of concentration (Nernst equation) and common cells"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-chemistry-ch-physical-e01",
+    "gceal-chemistry-ch-physical-e02",
+    "gceal-chemistry-ch-physical-e03",
+    "gceal-chemistry-ch-physical-e04",
+    "gceal-chemistry-ch-physical-e05",
+    "gceal-chemistry-ch-physical-e06"
+   ],
+   "selfCheck": [
+    "gceal-chemistry-electrode-q1",
+    "gceal-chemistry-electrode-q2",
+    "gceal-chemistry-electrode-q3",
+    "gceal-chemistry-electrode-q4",
+    "gceal-chemistry-electrode-q5"
+   ],
+   "reviewNotes": [
+    "Data used: Ar H 1.0, C 12.0, N 14.0, O 16.0, Na 23.0, Mg 24.0, Al 27.0, S 32.0, Cl 35.5, K 39.0, Ca 40.0, Fe 56.0, Cu 63.5, Zn 65.0, Ag 108.0, Ba 137.0; R = 8.31 J mol⁻¹ K⁻¹; F = 96 500 C mol⁻¹; molar volume 24.0 dm³ at room temperature and pressure; K_w = 1.0 × 10⁻¹⁴ at 25 °C.",
+    "E° values are standard 298 K values; check against the board's data booklet. The Nernst equation and the link to K may go beyond the syllabus: flagged for the teacher.",
+    "Cell types (fuel cells, lead–acid battery) are not covered here.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Standard electrode potential",
+     "md": "A **half-cell** is a metal in contact with a solution of its ions (or an inert electrode with two species in solution). The **standard electrode potential E°** is the emf of a half-cell connected to a **standard hydrogen electrode** (H₂ at 100 kPa, 1 mol dm⁻³ H⁺, platinum, 298 K) under standard conditions (1 mol dm⁻³ for all ions, 298 K): E°(H⁺/H₂) = 0.00 V.\n\nMore **positive** E° means the species on the left (the oxidised form) is a stronger **oxidising agent**; more negative means the metal is a stronger reducing agent."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Cells and feasibility",
+     "md": "In a cell, the half-cell with the more negative E° is the **negative electrode** (oxidation, anode), the more positive is the **positive electrode** (reduction, cathode): **E°cell = E°(positive) − E°(negative)**. A reaction is **feasible** if E°cell > 0.\n\nValues at 298 K (V): Mg²⁺/Mg −2.37; Al³⁺/Al −1.66; Zn²⁺/Zn −0.76; Fe²⁺/Fe −0.44; H⁺/H₂ 0.00; Cu²⁺/Cu +0.34; I₂/I⁻ +0.54; Fe³⁺/Fe²⁺ +0.77; Ag⁺/Ag +0.80; Br₂/Br⁻ +1.07; Cl₂/Cl⁻ +1.36; Cr₂O₇²⁻/Cr³⁺ +1.33; MnO₄⁻/Mn²⁺ +1.51.",
+     "tex": "E^{\\circ}_{cell}=E^{\\circ}_{positive}-E^{\\circ}_{negative}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 235,
+      "items": [
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 100,
+        "w": 110,
+        "h": 100,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "rect",
+        "x": 250,
+        "y": 100,
+        "w": 110,
+        "h": 100,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "line",
+        "x1": 90,
+        "y1": 60,
+        "x2": 90,
+        "y2": 170,
+        "color": "grey",
+        "width": 6
+       },
+       {
+        "t": "line",
+        "x1": 310,
+        "y1": 60,
+        "x2": 310,
+        "y2": 170,
+        "color": "brown",
+        "width": 6
+       },
+       {
+        "t": "text",
+        "x": 95,
+        "y": 215,
+        "text": "Zn | ZnSO₄(aq)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 305,
+        "y": 215,
+        "text": "Cu | CuSO₄(aq)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 90,
+        "y1": 60,
+        "x2": 90,
+        "y2": 25,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 310,
+        "y1": 60,
+        "x2": 310,
+        "y2": 25,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 90,
+        "y1": 25,
+        "x2": 175,
+        "y2": 25,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 225,
+        "y1": 25,
+        "x2": 310,
+        "y2": 25,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 25,
+        "r": 24,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 30,
+        "text": "V",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 70,
+        "text": "1.10 V",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "path",
+        "d": "M 120 100 L 120 78 L 280 78 L 280 100",
+        "stroke": "grey",
+        "width": 8
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 92,
+        "text": "salt bridge",
+        "size": 11,
+        "anchor": "middle",
+        "color": "white"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 12,
+        "text": "negative (−)",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 12,
+        "text": "positive (+)",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "The zinc–copper cell: zinc is the negative electrode, copper the positive electrode (E°cell = +1.10 V).",
+     "alt": "Two beakers with a zinc electrode in zinc sulfate and a copper electrode in copper sulfate joined by a salt bridge and a voltmeter reading 1.10 volts."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Energy, equilibrium and concentration",
+     "md": "**ΔG° = −nFE°cell** (n = moles of electrons in the equation); a positive E°cell means a negative ΔG° (spontaneous). Also **ln K = nFE°/RT**, i.e. at 298 K lg K = nE°/0.0592.\n\nFor non-standard concentrations the **Nernst equation** at 298 K gives **E = E° − (0.0592/n) lg Q**, where Q is the reaction quotient (as for K but with the actual concentrations).",
+     "tex": "\\Delta G^{\\circ}=-nFE^{\\circ}\\qquad E=E^{\\circ}-\\frac{0.0592}{n}\\log Q"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Multiplying E° by the stoichiometric coefficients when balancing: E° does **not** change.\n- Subtracting the wrong way: positive electrode minus negative electrode.\n- Saying 'feasible' means 'fast': a positive E°cell says nothing about the rate (kinetic barrier).\n- Applying standard values to non-standard conditions without commenting (e.g. concentrations, temperature)."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — The Daniell cell",
+     "statement": "A cell has a zinc electrode in 1.0 mol dm⁻³ ZnSO₄ and a copper electrode in 1.0 mol dm⁻³ CuSO₄ joined by a salt bridge. Find E°cell and ΔG° (E°: Zn²⁺/Zn −0.76 V, Cu²⁺/Cu +0.34 V).",
+     "steps": [
+      "Zinc is more negative, so zinc is the negative electrode (Zn → Zn²⁺ + 2e⁻) and copper the positive (Cu²⁺ + 2e⁻ → Cu).",
+      "E°cell = +0.34 − (−0.76) = +1.10 V.",
+      "ΔG° = −nFE° = −2 × 96 500 × 1.10 = −2.12 × 10⁵ J = −212 kJ mol⁻¹."
+     ],
+     "answer": "E°cell = +1.10 V; ΔG° = −212 kJ mol⁻¹"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Feasibility and Nernst",
+     "statement": "Is it feasible for Fe³⁺ to oxidise I⁻ to I₂? What is E for the Zn/Cu cell when [Zn²⁺] = 0.010 mol dm⁻³ and [Cu²⁺] = 1.0 mol dm⁻³?",
+     "steps": [
+      "2Fe³⁺ + 2I⁻ → 2Fe²⁺ + I₂: E°cell = 0.77 − 0.54 = +0.23 V > 0, feasible.",
+      "Nernst: Q = [Zn²⁺]/[Cu²⁺] = 0.010; E = 1.10 − (0.0592/2) lg 0.010 = 1.10 + 0.0592 = 1.16 V.",
+      "A lower [Zn²⁺] makes the cell reaction more favourable, so E rises, as Le Chatelier predicts."
+     ],
+     "answer": "Feasible (+0.23 V); E = 1.16 V"
+    }
+   ],
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-kpksp",
+   "title": "Kp, solubility product and the common-ion effect",
+   "minutes": 40,
+   "programRef": "GCE Advanced Level Chemistry — physical chemistry (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Write K_p expressions, calculate partial pressures and K_p for gaseous equilibria",
+    "Write K_sp expressions and calculate K_sp from solubility and solubility from K_sp",
+    "Predict precipitation and explain the common-ion effect"
+   ],
+   "prerequisites": [
+    "gceal-chemistry-electrode"
+   ],
+   "exercises": [
+    "gceal-chemistry-ch-physical-e07",
+    "gceal-chemistry-ch-physical-e08",
+    "gceal-chemistry-ch-physical-e09",
+    "gceal-chemistry-ch-physical-e10",
+    "gceal-chemistry-ch-physical-e11",
+    "gceal-chemistry-ch-physical-e12"
+   ],
+   "selfCheck": [
+    "gceal-chemistry-kpksp-q1",
+    "gceal-chemistry-kpksp-q2",
+    "gceal-chemistry-kpksp-q3",
+    "gceal-chemistry-kpksp-q4",
+    "gceal-chemistry-kpksp-q5"
+   ],
+   "reviewNotes": [
+    "K_sp(AgCl) = 1.8 × 10⁻¹⁰ is a typical textbook value; values in the board's data booklet may differ slightly.",
+    "The bar chart shows 1.34 and 0.00018 (in units of 10⁻⁵ mol dm⁻³); the second bar is almost invisible by design.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "K_p for gaseous equilibria",
+     "md": "For a gas mixture the **partial pressure** of A is p_A = (mole fraction of A) × p_total. For aA(g) + bB(g) ⇌ cC(g) + dD(g): **K_p = p_C^c p_D^d / (p_A^a p_B^b)** with the units following from the expression (e.g. atm or Pa to a power). K_p depends only on temperature.\n\nRelation to K_c: K_p = K_c (RT)^Δn, with Δn = moles of gaseous products − moles of gaseous reactants (SI units).",
+     "tex": "K_p=\\frac{p_C^{\\,c}\\,p_D^{\\,d}}{p_A^{\\,a}\\,p_B^{\\,b}}\\qquad K_p=K_c(RT)^{\\Delta n}"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Solubility product",
+     "md": "For a sparingly soluble salt in equilibrium with its saturated solution, e.g. AgCl(s) ⇌ Ag⁺(aq) + Cl⁻(aq): **K_sp = [Ag⁺][Cl⁻]** (the solid is omitted). For PbI₂: K_sp = [Pb²⁺][I⁻]². If the solubility is s mol dm⁻³: AgCl: K_sp = s²; PbI₂: K_sp = s(2s)² = **4s³**; Mg(OH)₂: 4s³.\n\nA precipitate forms when the **ionic product Q exceeds K_sp**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 380,
+      "h": 240,
+      "bars": [
+       {
+        "label": "s in water",
+        "value": 1.34,
+        "color": "blue"
+       },
+       {
+        "label": "s in 0.1 M NaCl",
+        "value": 0.00018,
+        "color": "orange"
+       }
+      ],
+      "unit": "solubility of AgCl (× 10⁻⁵ mol/dm³)"
+     },
+     "caption": "Solubility of AgCl in water and in 0.10 mol dm⁻³ NaCl: the common ion lowers the solubility (values × 10⁻⁵ mol dm⁻³).",
+     "alt": "Two bars: a tall one for solubility in pure water and a very short one in sodium chloride solution."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Common-ion effect",
+     "md": "Adding a solution that contains one of the ions of the salt (e.g. NaCl to AgCl) shifts the equilibrium to the left (Le Chatelier): the solubility of the salt **decreases**, but K_sp is unchanged. The effect is used to precipitate ions completely (for example in gravimetric analysis) and explains why salts are less soluble in solutions of common ions."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Forgetting to take mole fractions or to use the total pressure when finding partial pressures.\n- Using the wrong power: for PbI₂ [I⁻] = 2s and is squared.\n- Not accounting for dilution when two solutions are mixed (concentrations are halved when equal volumes are mixed).\n- Saying K_sp changes in the presence of a common ion: only the solubility changes."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — K_p",
+     "statement": "Initially 1.00 mol of N₂O₄ is heated in a vessel at a constant total pressure of 2.0 atm; at equilibrium 30 % has dissociated: N₂O₄ ⇌ 2NO₂. Find K_p.",
+     "steps": [
+      "At equilibrium: N₂O₄ 0.70 mol, NO₂ 0.60 mol, total 1.30 mol.",
+      "Partial pressures: p(N₂O₄) = (0.70/1.30) × 2.0 = 1.08 atm; p(NO₂) = (0.60/1.30) × 2.0 = 0.923 atm.",
+      "K_p = p(NO₂)²/p(N₂O₄) = 0.923²/1.08 = 0.79 atm."
+     ],
+     "answer": "K_p ≈ 0.79 atm"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — K_sp and precipitation",
+     "statement": "K_sp(AgCl) = 1.8 × 10⁻¹⁰ mol² dm⁻⁶. Find its solubility in water and in 0.10 mol dm⁻³ NaCl. Will AgCl precipitate if 50 cm³ of 2.0 × 10⁻⁵ mol dm⁻³ AgNO₃ is mixed with 50 cm³ of 2.0 × 10⁻⁵ mol dm⁻³ NaCl?",
+     "steps": [
+      "In water: s = √K_sp = √(1.8 × 10⁻¹⁰) = 1.3 × 10⁻⁵ mol dm⁻³. In 0.10 M NaCl: [Cl⁻] ≈ 0.10 so s = K_sp/0.10 = 1.8 × 10⁻⁹ mol dm⁻³ (7000 times smaller).",
+      "After mixing, each concentration is halved: [Ag⁺] = [Cl⁻] = 1.0 × 10⁻⁵ mol dm⁻³, so Q = 1.0 × 10⁻¹⁰.",
+      "Q = 1.0 × 10⁻¹⁰ < K_sp = 1.8 × 10⁻¹⁰: no precipitate forms."
+     ],
+     "answer": "s = 1.3 × 10⁻⁵ (water); 1.8 × 10⁻⁹ (0.10 M NaCl); no precipitate"
+    }
+   ],
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-acidbase",
+   "title": "Weak acids and bases: salts, titration curves and indicators",
+   "minutes": 40,
+   "programRef": "GCE Advanced Level Chemistry — physical chemistry (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Calculate the pH of solutions of weak bases and of salts of weak acids (hydrolysis)",
+    "Sketch and interpret the titration curve of a weak acid with a strong base, including the half-equivalence point",
+    "Choose an indicator and relate pK_a to indicator range"
+   ],
+   "prerequisites": [
+    "gceal-chemistry-kpksp"
+   ],
+   "exercises": [
+    "gceal-chemistry-ch-physical-e13",
+    "gceal-chemistry-ch-physical-e14",
+    "gceal-chemistry-ch-physical-e15",
+    "gceal-chemistry-ch-physical-e16",
+    "gceal-chemistry-ch-physical-e17",
+    "gceal-chemistry-ch-physical-e18"
+   ],
+   "selfCheck": [
+    "gceal-chemistry-acidbase-q1",
+    "gceal-chemistry-acidbase-q2",
+    "gceal-chemistry-acidbase-q3",
+    "gceal-chemistry-acidbase-q4",
+    "gceal-chemistry-acidbase-q5"
+   ],
+   "reviewNotes": [
+    "Data used: Ar H 1.0, C 12.0, N 14.0, O 16.0, Na 23.0, Mg 24.0, Al 27.0, S 32.0, Cl 35.5, K 39.0, Ca 40.0, Fe 56.0, Cu 63.5, Zn 65.0, Ag 108.0, Ba 137.0; R = 8.31 J mol⁻¹ K⁻¹; F = 96 500 C mol⁻¹; molar volume 24.0 dm³ at room temperature and pressure; K_w = 1.0 × 10⁻¹⁴ at 25 °C.",
+    "K_a = 1.8 × 10⁻⁵ (ethanoic acid) and K_b = 1.8 × 10⁻⁵ (ammonia) are standard textbook values (they happen to be equal); indicator ranges are approximate.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Weak bases and salts",
+     "md": "For a weak base B + H₂O ⇌ BH⁺ + OH⁻: K_b = [BH⁺][OH⁻]/[B], so [OH⁻] ≈ √(K_b c); then pOH = −lg[OH⁻] and pH = 14 − pOH. For a conjugate pair: **K_a × K_b = K_w**.\n\nThe salt of a weak acid and a strong base (CH₃COONa) is **basic** in water because the anion hydrolyses: CH₃COO⁻ + H₂O ⇌ CH₃COOH + OH⁻, with K_b = K_w/K_a. The salt of a strong acid and a weak base (NH₄Cl) is acidic.",
+     "tex": "K_aK_b=K_w\\qquad [\\text{OH}^-]\\approx\\sqrt{K_bc}"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Weak acid titrated with strong base",
+     "md": "The curve starts at a higher pH than for a strong acid, rises gradually in the **buffer region**, and has a steep rise at the equivalence point, which is above pH 7. At **half-equivalence** (half of the acid neutralised) [HA] = [A⁻], so **pH = pK_a**: a method to measure K_a. After the equivalence point the curve follows that of excess strong base."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 50,
+      "ymin": 0,
+      "ymax": 14,
+      "grid": 5,
+      "w": 400,
+      "h": 260,
+      "curves": [],
+      "points": [
+       {
+        "x": 12.5,
+        "y": 4.7447274948966935,
+        "label": "pH = pKa",
+        "color": "red"
+       },
+       {
+        "x": 25,
+        "y": 8.721848749616356,
+        "label": "equivalence",
+        "color": "green"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 0,
+        "y1": 2.8723637474483468,
+        "x2": 2.5,
+        "y2": 3.790484985457369,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 2.5,
+        "y1": 3.790484985457369,
+        "x2": 5,
+        "y2": 4.142667503568731,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 5,
+        "y1": 4.142667503568731,
+        "x2": 7.5,
+        "y2": 4.376750709602099,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 7.5,
+        "y1": 4.376750709602099,
+        "x2": 10,
+        "y2": 4.568636235841012,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 10,
+        "y1": 4.568636235841012,
+        "x2": 12.5,
+        "y2": 4.7447274948966935,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 12.5,
+        "y1": 4.7447274948966935,
+        "x2": 15,
+        "y2": 4.920818753952375,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 15,
+        "y1": 4.920818753952375,
+        "x2": 20,
+        "y2": 5.346787486224656,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 20,
+        "y1": 5.346787486224656,
+        "x2": 22.5,
+        "y2": 5.698970004336019,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 22.5,
+        "y1": 5.698970004336019,
+        "x2": 24,
+        "y2": 6.1249387366083,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 24,
+        "y1": 6.1249387366083,
+        "x2": 24.9,
+        "y2": 7.140926841992424,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 24.9,
+        "y1": 7.140926841992424,
+        "x2": 25,
+        "y2": 8.721848749616356,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 25,
+        "y1": 8.721848749616356,
+        "x2": 25.1,
+        "y2": 10.30016227413276,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 25.1,
+        "y1": 10.30016227413276,
+        "x2": 26,
+        "y2": 11.292429823902063,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 26,
+        "y1": 11.292429823902063,
+        "x2": 27.5,
+        "y2": 11.67778070526608,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 27.5,
+        "y1": 11.67778070526608,
+        "x2": 30,
+        "y2": 11.958607314841775,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 30,
+        "y1": 11.958607314841775,
+        "x2": 35,
+        "y2": 12.221848749616356,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 35,
+        "y1": 12.221848749616356,
+        "x2": 40,
+        "y2": 12.363177902412826,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 40,
+        "y1": 12.363177902412826,
+        "x2": 50,
+        "y2": 12.522878745280337,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 0,
+        "y1": 4.7447274948966935,
+        "x2": 12.5,
+        "y2": 4.7447274948966935,
+        "color": "grey",
+        "dash": true
+       },
+       {
+        "x1": 12.5,
+        "y1": 0,
+        "x2": 12.5,
+        "y2": 4.7447274948966935,
+        "color": "grey",
+        "dash": true
+       }
+      ],
+      "xlabel": "volume of NaOH / cm³",
+      "ylabel": "pH"
+     },
+     "caption": "Titration of a weak acid (ethanoic acid) with a strong base: pH = pK_a at half-equivalence (12.5 cm³), pH about 8.7 at equivalence.",
+     "alt": "A titration curve beginning near pH 3, rising slowly through the buffer region, steeply at 25 cm³ to about 11 and flattening near 13."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Choosing an indicator",
+     "md": "An indicator is itself a weak acid HIn/In⁻ whose colours differ; the colour change range is about **pK_In ± 1**. The range must lie in the steep part of the titration curve:\n\n- strong acid + strong base: methyl orange (about 3.1–4.4) or phenolphthalein (8.3–10);\n- weak acid + strong base: **phenolphthalein**;\n- strong acid + weak base: **methyl orange**;\n- weak acid + weak base: no sharp change, use a pH meter."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using K_a instead of K_b for the salt of a weak acid (the anion acts as a base).\n- Forgetting that mixing changes concentrations (the total volume rises).\n- Reading pH = 7 at equivalence for a weak acid titration.\n- Using the buffer equation at the equivalence point or beyond: there it is a salt solution or excess base."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — A salt of a weak acid",
+     "statement": "Find the pH of 0.10 mol dm⁻³ sodium ethanoate (K_a(CH₃COOH) = 1.8 × 10⁻⁵, K_w = 1.0 × 10⁻¹⁴).",
+     "steps": [
+      "K_b = K_w/K_a = 1.0 × 10⁻¹⁴/1.8 × 10⁻⁵ = 5.56 × 10⁻¹⁰.",
+      "[OH⁻] = √(K_b c) = √(5.56 × 10⁻¹¹) = 7.45 × 10⁻⁶ mol dm⁻³, pOH = 5.13.",
+      "pH = 14 − 5.13 = 8.87 (basic)."
+     ],
+     "answer": "pH = 8.87"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Titration of ethanoic acid",
+     "statement": "25.0 cm³ of 0.100 mol dm⁻³ ethanoic acid is titrated with 0.100 mol dm⁻³ NaOH. Find the pH after 12.5 cm³ and at the equivalence point.",
+     "steps": [
+      "12.5 cm³ is half-equivalence: [HA] = [A⁻], so pH = pK_a = 4.74.",
+      "At 25.0 cm³: n(A⁻) = 2.50 × 10⁻³ mol in 50.0 cm³: [A⁻] = 0.0500 mol dm⁻³; [OH⁻] = √(5.56 × 10⁻¹⁰ × 0.0500) = 5.27 × 10⁻⁶.",
+      "pOH = 5.28, so pH = 8.72: phenolphthalein is suitable."
+     ],
+     "answer": "pH 4.74 at half-equivalence; 8.72 at equivalence"
+    }
+   ],
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-thermo",
+   "title": "Lattice enthalpy, entropy and free energy",
+   "minutes": 45,
+   "programRef": "GCE Advanced Level Chemistry — physical chemistry (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Construct a Born–Haber cycle and calculate lattice enthalpy; explain trends in lattice enthalpy",
+    "Explain entropy and calculate ΔS° and ΔG° = ΔH° − TΔS°; find the temperature at which a reaction becomes feasible",
+    "Relate ΔG° to the equilibrium constant"
+   ],
+   "prerequisites": [
+    "gceal-chemistry-acidbase"
+   ],
+   "exercises": [
+    "gceal-chemistry-ch-physical-e19",
+    "gceal-chemistry-ch-physical-e20",
+    "gceal-chemistry-ch-physical-e21",
+    "gceal-chemistry-ch-physical-e22",
+    "gceal-chemistry-ch-physical-e23",
+    "gceal-chemistry-ch-physical-e24"
+   ],
+   "selfCheck": [
+    "gceal-chemistry-thermo-q1",
+    "gceal-chemistry-thermo-q2",
+    "gceal-chemistry-thermo-q3",
+    "gceal-chemistry-thermo-q4",
+    "gceal-chemistry-thermo-q5"
+   ],
+   "reviewNotes": [
+    "Data used: Ar H 1.0, C 12.0, N 14.0, O 16.0, Na 23.0, Mg 24.0, Al 27.0, S 32.0, Cl 35.5, K 39.0, Ca 40.0, Fe 56.0, Cu 63.5, Zn 65.0, Ag 108.0, Ba 137.0; R = 8.31 J mol⁻¹ K⁻¹; F = 96 500 C mol⁻¹; molar volume 24.0 dm³ at room temperature and pressure; K_w = 1.0 × 10⁻¹⁴ at 25 °C.",
+    "Enthalpy, entropy and electron-affinity data are standard textbook values (check the board's data booklet). Entropy and Gibbs energy may be beyond the board's core syllabus for some options: flagged.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Lattice enthalpy and Born–Haber cycles",
+     "md": "The **lattice enthalpy** (of formation) is the enthalpy change when one mole of an ionic solid forms from its gaseous ions: Na⁺(g) + Cl⁻(g) → NaCl(s). It cannot be measured directly; a **Born–Haber cycle** applies Hess's law to: enthalpy of formation, **atomisation** of the elements, **ionisation energy** of the metal, **electron affinity** of the non-metal and the lattice enthalpy.\n\nLattice enthalpy is more exothermic for ions with a **higher charge** and a **smaller radius** (MgO ≫ NaCl > KCl)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Entropy and free energy",
+     "md": "**Entropy** S (J K⁻¹ mol⁻¹) measures the dispersal of energy/disorder: gas ≫ liquid > solid; more particles or moles of gas means higher S. **ΔS° = ΣS°(products) − ΣS°(reactants)**.\n\nThe reaction is **feasible** if the free energy change **ΔG° = ΔH° − TΔS°** is negative (ΔS in kJ K⁻¹ mol⁻¹ = J/1000). For ΔH > 0 and ΔS > 0 the reaction becomes feasible above T = ΔH/ΔS. Also **ΔG° = −RT ln K**.",
+     "tex": "\\Delta G^{\\circ}=\\Delta H^{\\circ}-T\\Delta S^{\\circ}\\qquad \\Delta G^{\\circ}=-RT\\ln K"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 262,
+      "items": [
+       {
+        "t": "line",
+        "x1": 140,
+        "y1": 12.799999999999983,
+        "x2": 260,
+        "y2": 12.799999999999983,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 16.799999999999983,
+        "text": "Na⁺(g) + Cl(g) + e⁻  +725",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 140,
+        "y1": 82.6,
+        "x2": 260,
+        "y2": 82.6,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 86.6,
+        "text": "Na⁺(g) + Cl⁻(g)  +376",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 140,
+        "y1": 112.0,
+        "x2": 260,
+        "y2": 112.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 116.0,
+        "text": "Na(g) + Cl(g)  +229",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 140,
+        "y1": 136.39999999999998,
+        "x2": 260,
+        "y2": 136.39999999999998,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 140.39999999999998,
+        "text": "Na(g) + ½Cl₂(g)  +107",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 140,
+        "y1": 157.8,
+        "x2": 260,
+        "y2": 157.8,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 161.8,
+        "text": "Na(s) + ½Cl₂(g)  0",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 140,
+        "y1": 240.0,
+        "x2": 260,
+        "y2": 240.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 244.0,
+        "text": "NaCl(s)  -411",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 82.6,
+        "x2": 120,
+        "y2": 238.0,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 112,
+        "y": 150,
+        "text": "lattice",
+        "size": 12,
+        "anchor": "end",
+        "color": "red"
+       },
+       {
+        "t": "text",
+        "x": 112,
+        "y": 166,
+        "text": "enthalpy −787",
+        "size": 12,
+        "anchor": "end",
+        "color": "red"
+       }
+      ]
+     },
+     "caption": "Born–Haber cycle for NaCl (enthalpies in kJ mol⁻¹, not to scale).",
+     "alt": "A ladder of energy levels from NaCl(s) at minus 411 up to gaseous sodium ions and chlorine atoms at plus 725, with a red arrow for the lattice enthalpy minus 787."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Reading ΔG",
+     "md": "ΔG < 0: feasible (spontaneous in the thermodynamic sense; the rate may still be slow). ΔG = 0: equilibrium. A large negative ΔG° means K ≫ 1; a large positive ΔG° means K ≪ 1. A reaction with ΔH < 0 and ΔS > 0 is feasible at all temperatures; ΔH > 0 and ΔS < 0 never."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Mixing the units of ΔS (J) and ΔH (kJ) in ΔG = ΔH − TΔS.\n- Using °C instead of kelvin.\n- Forgetting to multiply atomisation and ionisation steps by the correct number of moles.\n- Saying a negative ΔG means the reaction is fast."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Born–Haber for NaCl",
+     "statement": "Find the lattice enthalpy of NaCl from: ΔH_f(NaCl) = −411; atomisation of Na +107; first ionisation energy of Na +496; atomisation of ½Cl₂ +122; electron affinity of Cl −349 (all kJ mol⁻¹).",
+     "steps": [
+      "Hess's law: ΔH_f = ΔH_at(Na) + IE(Na) + ΔH_at(Cl) + EA(Cl) + ΔH_latt.",
+      "Sum of the first four steps = 107 + 496 + 122 − 349 = +376 kJ mol⁻¹.",
+      "ΔH_latt = −411 − 376 = −787 kJ mol⁻¹."
+     ],
+     "answer": "Lattice enthalpy = −787 kJ mol⁻¹"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Decomposition of limestone",
+     "statement": "CaCO₃(s) → CaO(s) + CO₂(g): ΔH_f (kJ mol⁻¹): CaCO₃ −1206.9, CaO −635.1, CO₂ −393.5; S° (J K⁻¹ mol⁻¹): CaCO₃ 92.9, CaO 39.7, CO₂ 213.6. Find ΔG° at 298 K and the temperature above which the reaction is feasible.",
+     "steps": [
+      "ΔH° = −635.1 − 393.5 + 1206.9 = +178.3 kJ mol⁻¹; ΔS° = 39.7 + 213.6 − 92.9 = +160.4 J K⁻¹ mol⁻¹.",
+      "ΔG°(298) = 178.3 − 298 × 0.1604 = +130.5 kJ mol⁻¹ (not feasible at room temperature).",
+      "Feasible when ΔG° < 0: T > 178 300/160.4 = 1110 K (about 840 °C)."
+     ],
+     "answer": "ΔG°(298) = +130 kJ mol⁻¹; feasible above about 1110 K"
+    }
+   ],
+   "chapter": "gceal-chemistry-ch-physical"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceal-chemistry-ch-physical-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-chemistry-electrode",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Calculate E°cell for a cell made from Cu²⁺/Cu (+0.34 V) and Ag⁺/Ag (+0.80 V) (V).",
+   "answer": 0.46,
+   "tolerance": 0.005,
+   "unit": "V",
+   "explanation": "E°cell = 0.80 − 0.34 = +0.46 V (silver is the positive electrode).",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-ch-physical-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-chemistry-electrode",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Which of these is the strongest reducing agent (E° in V: Mg²⁺/Mg −2.37, Zn²⁺/Zn −0.76, Cu²⁺/Cu +0.34)?",
+   "choices": [
+    "Cu",
+    "Zn",
+    "Mg",
+    "Mg²⁺"
+   ],
+   "answer": 2,
+   "explanation": "The most negative E° belongs to the metal that loses electrons most readily.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-ch-physical-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-chemistry-electrode",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "True or false: multiplying a half-equation by 2 doubles its E° value.",
+   "answer": false,
+   "explanation": "E° is an intensive property: it does not depend on the amount of substance.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-ch-physical-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-chemistry-electrode",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Calculate ΔG° (kJ mol⁻¹, 3 s.f.) for Zn + Cu²⁺ → Zn²⁺ + Cu, using E°cell = 1.10 V and F = 96 500 C mol⁻¹.",
+   "answer": -212.0,
+   "tolerance": 0.5,
+   "unit": "kJ/mol",
+   "explanation": "ΔG° = −2 × 96 500 × 1.10 = −212 000 J mol⁻¹ = −212 kJ mol⁻¹.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-ch-physical-e05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-chemistry-electrode",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Cl₂(aq) is added to a solution containing Br⁻. A reaction occurs because",
+   "choices": [
+    "Cl₂ is a liquid",
+    "E°(Br₂/Br⁻) is more positive",
+    "Br⁻ is larger than Cl⁻",
+    "E°(Cl₂/Cl⁻) is more positive than E°(Br₂/Br⁻)"
+   ],
+   "answer": 3,
+   "explanation": "E°cell = 1.36 − 1.07 = +0.29 V > 0: Cl₂ oxidises Br⁻ to Br₂.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-ch-physical-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-chemistry-electrode",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "A cell is set up from Fe³⁺/Fe²⁺ (E° = +0.77 V) and Cr₂O₇²⁻/Cr³⁺ (E° = +1.33 V) half-cells in acid (Pt electrodes). F = 96 500 C mol⁻¹.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The positive electrode is the",
+     "choices": [
+      "Cr₂O₇²⁻/Cr³⁺ half-cell",
+      "salt bridge",
+      "voltmeter",
+      "Fe³⁺/Fe²⁺ half-cell"
+     ],
+     "answer": 0,
+     "explanation": "It has the more positive E°.",
+     "id": "gceal-chemistry-ch-physical-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "E°cell (V).",
+     "answer": 0.56,
+     "tolerance": 0.005,
+     "explanation": "1.33 − 0.77 = +0.56 V.",
+     "unit": "V",
+     "id": "gceal-chemistry-ch-physical-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "ΔG° for the reaction in which 6 electrons are transferred (Cr₂O₇²⁻ + 14H⁺ + 6Fe²⁺ → 2Cr³⁺ + 7H₂O + 6Fe³⁺) in kJ mol⁻¹ (3 s.f.).",
+     "answer": -324.0,
+     "tolerance": 1,
+     "explanation": "ΔG° = −6 × 96 500 × 0.56 = −3.24 × 10⁵ J = −324 kJ mol⁻¹.",
+     "unit": "kJ/mol",
+     "id": "gceal-chemistry-ch-physical-e06-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Why might a reaction with a positive E°cell still not occur at a noticeable rate?",
+     "model": "E°cell only shows that the reaction is thermodynamically feasible; it may have a high activation energy, so the rate can be very slow; non-standard conditions can also change E.",
+     "rubric": "1 mark: feasibility does not give the rate (kinetics/activation energy); 1 mark: conditions differ from standard.",
+     "explanation": "E°cell only shows that the reaction is thermodynamically feasible; it may have a high activation energy, so the rate can be very slow; non-standard conditions can also change E.",
+     "id": "gceal-chemistry-ch-physical-e06-d"
+    }
+   ],
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 235,
+    "items": [
+     {
+      "t": "rect",
+      "x": 40,
+      "y": 100,
+      "w": 110,
+      "h": 100,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightblue"
+     },
+     {
+      "t": "rect",
+      "x": 250,
+      "y": 100,
+      "w": 110,
+      "h": 100,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightorange"
+     },
+     {
+      "t": "line",
+      "x1": 90,
+      "y1": 60,
+      "x2": 90,
+      "y2": 170,
+      "color": "grey",
+      "width": 6
+     },
+     {
+      "t": "line",
+      "x1": 310,
+      "y1": 60,
+      "x2": 310,
+      "y2": 170,
+      "color": "brown",
+      "width": 6
+     },
+     {
+      "t": "text",
+      "x": 95,
+      "y": 215,
+      "text": "Zn | ZnSO₄(aq)",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 305,
+      "y": 215,
+      "text": "Cu | CuSO₄(aq)",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 90,
+      "y1": 60,
+      "x2": 90,
+      "y2": 25,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 310,
+      "y1": 60,
+      "x2": 310,
+      "y2": 25,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 90,
+      "y1": 25,
+      "x2": 175,
+      "y2": 25,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 225,
+      "y1": 25,
+      "x2": 310,
+      "y2": 25,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "circle",
+      "cx": 200,
+      "cy": 25,
+      "r": 24,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "white"
+     },
+     {
+      "t": "text",
+      "x": 200,
+      "y": 30,
+      "text": "V",
+      "size": 16,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 200,
+      "y": 70,
+      "text": "1.10 V",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "path",
+      "d": "M 120 100 L 120 78 L 280 78 L 280 100",
+      "stroke": "grey",
+      "width": 8
+     },
+     {
+      "t": "text",
+      "x": 200,
+      "y": 92,
+      "text": "salt bridge",
+      "size": 11,
+      "anchor": "middle",
+      "color": "white"
+     },
+     {
+      "t": "text",
+      "x": 60,
+      "y": 12,
+      "text": "negative (−)",
+      "size": 11,
+      "anchor": "start",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 260,
+      "y": 12,
+      "text": "positive (+)",
+      "size": 11,
+      "anchor": "start",
+      "color": "ink"
+     }
+    ]
+   },
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-electrode-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-electrode",
+   "prompt": "The standard hydrogen electrode uses",
+   "choices": [
+    "H₂ at 100 kPa, 1 mol dm⁻³ H⁺, platinum",
+    "Zn in 1 mol dm⁻³ Zn²⁺",
+    "Cu in CuSO₄",
+    "O₂ at 1 atm in NaOH"
+   ],
+   "answer": 0,
+   "explanation": "It is the reference half-cell, E° = 0.00 V.",
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-electrode-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-electrode",
+   "prompt": "In a galvanic cell, oxidation takes place at the",
+   "choices": [
+    "voltmeter",
+    "positive electrode",
+    "salt bridge",
+    "negative electrode (anode)"
+   ],
+   "answer": 3,
+   "explanation": "The metal with the more negative E° loses electrons.",
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-electrode-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-electrode",
+   "prompt": "The function of the salt bridge is to",
+   "choices": [
+    "complete the circuit by allowing ion movement",
+    "react with the electrodes",
+    "increase the emf",
+    "supply electrons"
+   ],
+   "answer": 0,
+   "explanation": "It balances charge without mixing the solutions.",
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-electrode-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-electrode",
+   "prompt": "A positive E°cell means that ΔG° is",
+   "choices": [
+    "equal to F",
+    "positive",
+    "zero",
+    "negative"
+   ],
+   "answer": 3,
+   "explanation": "ΔG° = −nFE°.",
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-electrode-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-electrode",
+   "prompt": "Increasing [Cu²⁺] in the Zn/Cu cell",
+   "choices": [
+    "has no effect",
+    "decreases the emf",
+    "increases the emf",
+    "reverses the cell"
+   ],
+   "answer": 2,
+   "explanation": "Q decreases, so E increases (Nernst/Le Chatelier).",
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-ch-physical-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-chemistry-kpksp",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "The K_sp expression for Ca(OH)₂ is",
+   "choices": [
+    "[Ca²⁺]²[OH⁻]",
+    "[Ca²⁺][OH⁻]",
+    "[Ca²⁺][OH⁻]²",
+    "[Ca(OH)₂]"
+   ],
+   "answer": 2,
+   "explanation": "The solid is omitted; [OH⁻] is squared.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-ch-physical-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-chemistry-kpksp",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "A mixture contains 2.0 mol N₂ and 1.0 mol H₂ at a total pressure of 3.0 atm. Find p(N₂) (atm).",
+   "answer": 2.0,
+   "tolerance": 0.01,
+   "unit": "atm",
+   "explanation": "Mole fraction = 2.0/3.0; p = 2/3 × 3.0 = 2.0 atm.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-ch-physical-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-chemistry-kpksp",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "True or false: adding NaCl to a saturated solution of AgCl changes the value of K_sp.",
+   "answer": false,
+   "explanation": "K_sp depends on temperature only; the solubility decreases (common-ion effect).",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-ch-physical-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-chemistry-kpksp",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "The solubility of PbI₂ is 1.3 × 10⁻³ mol dm⁻³. Calculate K_sp (units 10⁻⁹ mol³ dm⁻⁹, 2 s.f.).",
+   "answer": 8.8,
+   "tolerance": 0.05,
+   "unit": "× 10⁻⁹",
+   "explanation": "K_sp = 4s³ = 4 × (1.3 × 10⁻³)³ = 8.8 × 10⁻⁹ mol³ dm⁻⁹.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-ch-physical-e11",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-chemistry-kpksp",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "K_sp(AgCl) = 1.8 × 10⁻¹⁰. Find the solubility of AgCl in 0.10 mol dm⁻³ NaCl (10⁻⁹ mol dm⁻³).",
+   "answer": 1.7999999999999998,
+   "tolerance": 0.01,
+   "unit": "× 10⁻⁹ mol/dm³",
+   "explanation": "s = K_sp/[Cl⁻] = 1.8 × 10⁻¹⁰/0.10 = 1.8 × 10⁻⁹ mol dm⁻³.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-ch-physical-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-chemistry-kpksp",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "K_sp for Mg(OH)₂ is 1.8 × 10⁻¹¹ mol³ dm⁻⁹ at 25 °C (K_w = 1.0 × 10⁻¹⁴).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The solubility s is related to K_sp by",
+     "choices": [
+      "K_sp = 2s³",
+      "K_sp = s³",
+      "K_sp = 4s³",
+      "K_sp = s²"
+     ],
+     "answer": 2,
+     "explanation": "[Mg²⁺] = s and [OH⁻] = 2s, so K_sp = s(2s)² = 4s³.",
+     "id": "gceal-chemistry-ch-physical-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Solubility (10⁻⁴ mol dm⁻³, 3 s.f.).",
+     "answer": 1.65,
+     "tolerance": 0.02,
+     "explanation": "s = (K_sp/4)^(1/3) = (4.5 × 10⁻¹²)^(1/3) = 1.65 × 10⁻⁴ mol dm⁻³.",
+     "unit": "× 10⁻⁴ mol/dm³",
+     "id": "gceal-chemistry-ch-physical-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "pH of the saturated solution (3 s.f.).",
+     "answer": 10.5,
+     "tolerance": 0.02,
+     "explanation": "[OH⁻] = 2s = 3.30 × 10⁻⁴; pOH = 3.48; pH = 10.5.",
+     "id": "gceal-chemistry-ch-physical-e12-c"
+    }
+   ],
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-kpksp-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-kpksp",
+   "prompt": "A precipitate forms when",
+   "choices": [
+    "the ionic product exceeds K_sp",
+    "K_sp exceeds the ionic product",
+    "the solution is unsaturated",
+    "the ionic product equals zero"
+   ],
+   "answer": 0,
+   "explanation": "Q > K_sp means the solution is supersaturated.",
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-kpksp-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-kpksp",
+   "prompt": "The units of K_sp for Ag₂CrO₄ are",
+   "choices": [
+    "mol² dm⁻⁶",
+    "mol³ dm⁻⁹",
+    "dm⁶ mol⁻²",
+    "mol dm⁻³"
+   ],
+   "answer": 1,
+   "explanation": "K_sp = [Ag⁺]²[CrO₄²⁻] has concentration to the power 3.",
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-kpksp-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-kpksp",
+   "prompt": "For an equilibrium with Δn = 0, K_p and K_c are",
+   "choices": [
+    "unrelated",
+    "equal",
+    "both zero",
+    "different by RT"
+   ],
+   "answer": 1,
+   "explanation": "K_p = K_c(RT)⁰ = K_c.",
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-kpksp-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-kpksp",
+   "prompt": "The partial pressure of a gas in a mixture is",
+   "choices": [
+    "total pressure ÷ 2",
+    "its volume",
+    "mole fraction × total pressure",
+    "mass fraction × total pressure"
+   ],
+   "answer": 2,
+   "explanation": "Dalton's law.",
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-kpksp-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-kpksp",
+   "prompt": "The solubility of AgCl is lowest in",
+   "choices": [
+    "0.10 mol dm⁻³ NaNO₃",
+    "0.10 mol dm⁻³ KNO₃",
+    "0.10 mol dm⁻³ NaCl",
+    "pure water"
+   ],
+   "answer": 2,
+   "explanation": "Cl⁻ is the common ion.",
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-ch-physical-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-chemistry-acidbase",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Calculate K_b of the ethanoate ion (10⁻¹⁰ mol dm⁻³, 3 s.f.) from K_a = 1.8 × 10⁻⁵ and K_w = 1.0 × 10⁻¹⁴.",
+   "answer": 5.56,
+   "tolerance": 0.2,
+   "unit": "× 10⁻¹⁰",
+   "explanation": "K_b = 1.0 × 10⁻¹⁴/1.8 × 10⁻⁵ = 5.56 × 10⁻¹⁰.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-ch-physical-e14",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-chemistry-acidbase",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "A solution of sodium ethanoate has pH",
+   "choices": [
+    "above 7",
+    "below 7",
+    "exactly 7",
+    "equal to pK_a"
+   ],
+   "answer": 0,
+   "explanation": "The anion hydrolyses to give OH⁻.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-ch-physical-e15",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-chemistry-acidbase",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "True or false: at the half-equivalence point of a weak acid/strong base titration, pH = pK_a.",
+   "answer": true,
+   "explanation": "[HA] = [A⁻], so lg([A⁻]/[HA]) = 0.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-ch-physical-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-chemistry-acidbase",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Calculate the pH of 0.10 mol dm⁻³ ammonia (K_b = 1.8 × 10⁻⁵ mol dm⁻³, 3 s.f.).",
+   "answer": 11.1,
+   "tolerance": 0.02,
+   "explanation": "[OH⁻] = √(1.8 × 10⁻⁵ × 0.10) = 1.34 × 10⁻³; pOH = 2.87; pH = 11.1.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-ch-physical-e17",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-chemistry-acidbase",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Which indicator is suitable for titrating ammonia solution with hydrochloric acid?",
+   "choices": [
+    "none",
+    "methyl orange",
+    "phenolphthalein",
+    "starch"
+   ],
+   "answer": 1,
+   "explanation": "The equivalence point is acidic (NH₄⁺ salt), near pH 5.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-ch-physical-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-chemistry-acidbase",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "25.0 cm³ of 0.100 mol dm⁻³ ethanoic acid (K_a = 1.8 × 10⁻⁵) is titrated with 0.100 mol dm⁻³ NaOH.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Initial pH (3 s.f.).",
+     "answer": 2.87,
+     "tolerance": 0.02,
+     "explanation": "[H⁺] = √(1.8 × 10⁻⁶) = 1.34 × 10⁻³; pH = 2.87.",
+     "id": "gceal-chemistry-ch-physical-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "pH after 12.5 cm³ of NaOH (3 s.f.).",
+     "answer": 4.74,
+     "tolerance": 0.02,
+     "explanation": "Half-neutralised: pH = pK_a = 4.74.",
+     "id": "gceal-chemistry-ch-physical-e18-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "pH at the equivalence point (3 s.f.).",
+     "answer": 8.72,
+     "tolerance": 0.03,
+     "explanation": "[A⁻] = 0.0500; pOH = 5.28; pH = 8.72.",
+     "id": "gceal-chemistry-ch-physical-e18-c"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "A suitable indicator is",
+     "choices": [
+      "bromophenol blue (3.0–4.6)",
+      "phenolphthalein",
+      "none: the change is too small",
+      "methyl orange"
+     ],
+     "answer": 1,
+     "explanation": "Its range (about 8.3–10) lies in the steep part of the curve above pH 7.",
+     "id": "gceal-chemistry-ch-physical-e18-d"
+    }
+   ],
+   "figure": {
+    "kind": "plot",
+    "xmin": 0,
+    "xmax": 50,
+    "ymin": 0,
+    "ymax": 14,
+    "grid": 5,
+    "w": 400,
+    "h": 260,
+    "curves": [],
+    "points": [
+     {
+      "x": 12.5,
+      "y": 4.7447274948966935,
+      "label": "pH = pKa",
+      "color": "red"
+     },
+     {
+      "x": 25,
+      "y": 8.721848749616356,
+      "label": "equivalence",
+      "color": "green"
+     }
+    ],
+    "segments": [
+     {
+      "x1": 0,
+      "y1": 2.8723637474483468,
+      "x2": 2.5,
+      "y2": 3.790484985457369,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 2.5,
+      "y1": 3.790484985457369,
+      "x2": 5,
+      "y2": 4.142667503568731,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 5,
+      "y1": 4.142667503568731,
+      "x2": 7.5,
+      "y2": 4.376750709602099,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 7.5,
+      "y1": 4.376750709602099,
+      "x2": 10,
+      "y2": 4.568636235841012,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 10,
+      "y1": 4.568636235841012,
+      "x2": 12.5,
+      "y2": 4.7447274948966935,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 12.5,
+      "y1": 4.7447274948966935,
+      "x2": 15,
+      "y2": 4.920818753952375,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 15,
+      "y1": 4.920818753952375,
+      "x2": 20,
+      "y2": 5.346787486224656,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 20,
+      "y1": 5.346787486224656,
+      "x2": 22.5,
+      "y2": 5.698970004336019,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 22.5,
+      "y1": 5.698970004336019,
+      "x2": 24,
+      "y2": 6.1249387366083,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 24,
+      "y1": 6.1249387366083,
+      "x2": 24.9,
+      "y2": 7.140926841992424,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 24.9,
+      "y1": 7.140926841992424,
+      "x2": 25,
+      "y2": 8.721848749616356,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 25,
+      "y1": 8.721848749616356,
+      "x2": 25.1,
+      "y2": 10.30016227413276,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 25.1,
+      "y1": 10.30016227413276,
+      "x2": 26,
+      "y2": 11.292429823902063,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 26,
+      "y1": 11.292429823902063,
+      "x2": 27.5,
+      "y2": 11.67778070526608,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 27.5,
+      "y1": 11.67778070526608,
+      "x2": 30,
+      "y2": 11.958607314841775,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 30,
+      "y1": 11.958607314841775,
+      "x2": 35,
+      "y2": 12.221848749616356,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 35,
+      "y1": 12.221848749616356,
+      "x2": 40,
+      "y2": 12.363177902412826,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 40,
+      "y1": 12.363177902412826,
+      "x2": 50,
+      "y2": 12.522878745280337,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 0,
+      "y1": 4.7447274948966935,
+      "x2": 12.5,
+      "y2": 4.7447274948966935,
+      "color": "grey",
+      "dash": true
+     },
+     {
+      "x1": 12.5,
+      "y1": 0,
+      "x2": 12.5,
+      "y2": 4.7447274948966935,
+      "color": "grey",
+      "dash": true
+     }
+    ],
+    "xlabel": "volume of NaOH / cm³",
+    "ylabel": "pH"
+   },
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-acidbase-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-acidbase",
+   "prompt": "K_a × K_b for a conjugate acid–base pair equals",
+   "choices": [
+    "pK_w",
+    "K_w",
+    "1",
+    "K_a²"
+   ],
+   "answer": 1,
+   "explanation": "K_w = 1.0 × 10⁻¹⁴ at 25 °C.",
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-acidbase-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-acidbase",
+   "prompt": "The pH at the equivalence point of a weak acid/strong base titration is",
+   "choices": [
+    "less than 7",
+    "greater than 7",
+    "exactly 7",
+    "equal to pK_a"
+   ],
+   "answer": 1,
+   "explanation": "The conjugate base is formed.",
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-acidbase-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-acidbase",
+   "prompt": "The salt NH₄Cl dissolves to give a solution that is",
+   "choices": [
+    "strongly alkaline",
+    "slightly acidic",
+    "basic",
+    "neutral"
+   ],
+   "answer": 1,
+   "explanation": "NH₄⁺ is a weak acid.",
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-acidbase-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-acidbase",
+   "prompt": "An indicator changes colour when",
+   "choices": [
+    "pH = 0",
+    "pH ≈ pK_In ± 1",
+    "pH = 7",
+    "pH = 14"
+   ],
+   "answer": 1,
+   "explanation": "[HIn] and [In⁻] are comparable.",
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-acidbase-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-acidbase",
+   "prompt": "In the buffer region of the curve, the pH changes",
+   "choices": [
+    "randomly",
+    "slowly",
+    "not at all",
+    "rapidly"
+   ],
+   "answer": 1,
+   "explanation": "The mixture of HA and A⁻ resists change in pH.",
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-ch-physical-e19",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-chemistry-thermo",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Calculate ΔG° (kJ mol⁻¹) for ΔH° = −50.0 kJ mol⁻¹, ΔS° = −100 J K⁻¹ mol⁻¹ at 298 K (3 s.f.).",
+   "answer": -20.2,
+   "tolerance": 0.2,
+   "unit": "kJ/mol",
+   "explanation": "ΔG° = −50.0 − 298 × (−0.100) = −50.0 + 29.8 = −20.2 kJ mol⁻¹.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-ch-physical-e20",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-chemistry-thermo",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Which has the highest entropy at 298 K?",
+   "choices": [
+    "1 mol of CO₂(g)",
+    "1 mol of diamond",
+    "1 mol of NaCl(s)",
+    "1 mol of H₂O(l)"
+   ],
+   "answer": 0,
+   "explanation": "Gases are the most disordered.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-ch-physical-e21",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-chemistry-thermo",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "True or false: ΔS is positive when a solid decomposes to give a gas and a solid.",
+   "answer": true,
+   "explanation": "More moles of gas means more disorder.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-ch-physical-e22",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-chemistry-thermo",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Use ΔG° = −RT ln K to find K (3 s.f.) when ΔG° = −10.0 kJ mol⁻¹ at 298 K (R = 8.31).",
+   "answer": 56.7,
+   "tolerance": 0.5,
+   "explanation": "ln K = 10 000/(8.31 × 298) = 4.04, K = 56.7.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-ch-physical-e23",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-chemistry-thermo",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "The lattice enthalpy of MgO is more exothermic than that of NaCl mainly because",
+   "choices": [
+    "O is less electronegative than Cl",
+    "MgO has covalent character only",
+    "Mg is a larger atom than Na",
+    "Mg²⁺ and O²⁻ have higher charges and smaller radii"
+   ],
+   "answer": 3,
+   "explanation": "Attraction ∝ q₁q₂/r.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-ch-physical-e24",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-chemistry-thermo",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Consider the reaction 2NO₂(g) → N₂O₄(g) with ΔH° = −57.2 kJ mol⁻¹ and ΔS° = −176 J K⁻¹ mol⁻¹ (per mole of N₂O₄ formed).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "ΔG° at 298 K (kJ mol⁻¹, 3 s.f.).",
+     "answer": -4.75,
+     "tolerance": 0.05,
+     "explanation": "ΔG° = −57.2 − 298 × (−0.176) = −57.2 + 52.45 = −4.75 kJ mol⁻¹.",
+     "unit": "kJ/mol",
+     "id": "gceal-chemistry-ch-physical-e24-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "At 298 K the reaction is",
+     "choices": [
+      "endothermic",
+      "not feasible",
+      "at equilibrium",
+      "feasible"
+     ],
+     "answer": 3,
+     "explanation": "ΔG° is negative.",
+     "id": "gceal-chemistry-ch-physical-e24-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Temperature above which the reaction is no longer feasible (K, 3 s.f.).",
+     "answer": 325.0,
+     "tolerance": 1,
+     "explanation": "ΔG° = 0 when T = ΔH/ΔS = 57 200/176 = 325 K.",
+     "unit": "K",
+     "id": "gceal-chemistry-ch-physical-e24-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explain why ΔS° is negative.",
+     "model": "Two moles of gas combine to give one mole of gas, so there are fewer gas particles and the system becomes less disordered.",
+     "rubric": "1 mark: fewer moles of gas; 1 mark: less disorder / lower entropy.",
+     "explanation": "Two moles of gas combine to give one mole of gas, so there are fewer gas particles and the system becomes less disordered.",
+     "id": "gceal-chemistry-ch-physical-e24-d"
+    }
+   ],
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-thermo-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-thermo",
+   "prompt": "The lattice enthalpy of formation of an ionic solid is the enthalpy change when",
+   "choices": [
+    "one mole of gas forms",
+    "one mole of solid dissolves",
+    "an atom loses an electron",
+    "one mole of solid forms from its gaseous ions"
+   ],
+   "answer": 3,
+   "explanation": "It is highly exothermic.",
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-thermo-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-thermo",
+   "prompt": "For ΔH > 0 and ΔS > 0, the reaction is feasible",
+   "choices": [
+    "at all temperatures",
+    "never",
+    "at high temperature",
+    "at low temperature only"
+   ],
+   "answer": 2,
+   "explanation": "TΔS must exceed ΔH.",
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-thermo-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-thermo",
+   "prompt": "A spontaneous reaction has",
+   "choices": [
+    "ΔG < 0",
+    "ΔG = 1",
+    "ΔG > 0",
+    "ΔS < 0 always"
+   ],
+   "answer": 0,
+   "explanation": "Negative free energy change.",
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-thermo-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-thermo",
+   "prompt": "Which step in a Born–Haber cycle for NaCl is exothermic?",
+   "choices": [
+    "ionisation of sodium",
+    "atomisation of chlorine",
+    "atomisation of sodium",
+    "electron affinity of chlorine (first)"
+   ],
+   "answer": 3,
+   "explanation": "Chlorine gains an electron releasing energy (−349 kJ mol⁻¹).",
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-thermo-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-thermo",
+   "prompt": "A large positive ΔG° means that K is",
+   "choices": [
+    "much greater than 1",
+    "equal to 1",
+    "much less than 1",
+    "zero"
+   ],
+   "answer": 2,
+   "explanation": "ΔG° = −RT ln K.",
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-ch-physical-m01",
+   "kind": "mcq",
+   "tier": "examen",
+   "lesson": "gceal-chemistry-kpksp",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "K_sp for AgCl is 1.8 × 10⁻¹⁰ mol² dm⁻⁶. The concentration of Ag⁺ in a saturated solution in pure water is",
+   "choices": [
+    "1.8 × 10⁻¹⁰ mol dm⁻³",
+    "1.3 × 10⁻⁵ mol dm⁻³",
+    "3.6 × 10⁻¹⁰ mol dm⁻³",
+    "9.0 × 10⁻¹¹ mol dm⁻³"
+   ],
+   "answer": 1,
+   "explanation": "[Ag⁺] = [Cl⁻] = √K_sp = 1.3 × 10⁻⁵ mol dm⁻³.",
+   "difficulty": 3,
+   "points": 2,
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-ch-physical-m02",
+   "kind": "mcq",
+   "tier": "examen",
+   "lesson": "gceal-chemistry-acidbase",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "The pH of 0.0010 mol dm⁻³ Ba(OH)₂ (a strong base; K_w = 1.0 × 10⁻¹⁴) is",
+   "choices": [
+    "3.0",
+    "2.7",
+    "11.0",
+    "11.3"
+   ],
+   "answer": 3,
+   "explanation": "[OH⁻] = 2 × 0.0010 = 2.0 × 10⁻³; pOH = 2.70; pH = 11.30.",
+   "difficulty": 3,
+   "points": 2,
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-ch-physical-m03",
+   "kind": "mcq",
+   "tier": "examen",
+   "lesson": "gceal-chemistry-electrode",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Given E°(Zn²⁺/Zn) = −0.76 V, E°(Cu²⁺/Cu) = +0.34 V and E°(Ag⁺/Ag) = +0.80 V, the strongest oxidising agent is",
+   "choices": [
+    "Zn",
+    "Cu²⁺",
+    "Ag⁺",
+    "Zn²⁺"
+   ],
+   "answer": 2,
+   "explanation": "The most positive E° belongs to the species that is reduced most readily.",
+   "difficulty": 3,
+   "points": 2,
+   "chapter": "gceal-chemistry-ch-physical"
+  },
+  {
+   "id": "gceal-chemistry-ch-physical-m04",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-chemistry-electrode",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Question 5 (4 marks). A cell is made from a Zn²⁺/Zn half-cell (E° = −0.76 V) and a Fe³⁺/Fe²⁺ half-cell with a platinum electrode (E° = +0.77 V). F = 96 500 C mol⁻¹.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "E°cell (V).",
+     "answer": 1.53,
+     "tolerance": 0.005,
+     "explanation": "E° = +0.77 − (−0.76) = +1.53 V.",
+     "unit": "V",
+     "id": "gceal-chemistry-ch-physical-m04-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "ΔG° (kJ mol⁻¹, 3 s.f.) for 2Fe³⁺ + Zn → 2Fe²⁺ + Zn²⁺ (n = 2).",
+     "answer": -295.0,
+     "tolerance": 1,
+     "explanation": "ΔG° = −nFE° = −2 × 96 500 × 1.53 = −2.95 × 10⁵ J = −295 kJ mol⁻¹.",
+     "unit": "kJ/mol",
+     "id": "gceal-chemistry-ch-physical-m04-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The reaction is",
+     "choices": [
+      "always fast",
+      "not feasible, because ΔG° is positive",
+      "feasible, because E°cell is positive",
+      "at equilibrium"
+     ],
+     "answer": 2,
+     "explanation": "A positive E°cell means ΔG° < 0.",
+     "id": "gceal-chemistry-ch-physical-m04-c"
+    }
+   ],
+   "chapter": "gceal-chemistry-ch-physical"
+  }
+ ]
+}

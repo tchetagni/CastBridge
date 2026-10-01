@@ -1,0 +1,2109 @@
+{
+ "chapter": "gceal-chemistry-ch-analysis",
+ "lessons": [
+  {
+   "id": "gceal-chemistry-analysis",
+   "title": "Mass spectrometry, infrared and NMR spectroscopy",
+   "minutes": 45,
+   "programRef": "GCE Advanced Level Chemistry — analytical techniques, industrial chemistry, practical work (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Interpret mass spectra (molecular ion, fragments, isotope patterns) and use the M+1 peak",
+    "Use infrared absorption ranges to identify functional groups",
+    "Interpret ¹H NMR spectra (number of signals, chemical shift, integration, splitting) and combine data to deduce a structure"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-chemistry-ch-analysis-e01",
+    "gceal-chemistry-ch-analysis-e02",
+    "gceal-chemistry-ch-analysis-e03",
+    "gceal-chemistry-ch-analysis-e04",
+    "gceal-chemistry-ch-analysis-e05",
+    "gceal-chemistry-ch-analysis-e06"
+   ],
+   "selfCheck": [
+    "gceal-chemistry-analysis-q1",
+    "gceal-chemistry-analysis-q2",
+    "gceal-chemistry-analysis-q3",
+    "gceal-chemistry-analysis-q4",
+    "gceal-chemistry-analysis-q5"
+   ],
+   "reviewNotes": [
+    "Absorption and chemical shift ranges are typical textbook values; the board's data booklet values may differ slightly.",
+    "¹³C NMR and mass spectrometry of larger fragments are not covered; check the syllabus.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Mass spectrometry",
+     "md": "In the mass spectrometer a molecule loses an electron to give the **molecular ion M⁺**; its m/z gives the relative molecular mass. M⁺ breaks into **fragments** whose peaks reveal the structure (m/z 15 CH₃⁺, 29 C₂H₅⁺, 43 C₃H₇⁺ or CH₃CO⁺, 45 COOH⁺, 77 C₆H₅⁺). Compounds with **Br** show M and M+2 peaks of equal height (⁷⁹Br : ⁸¹Br about 1 : 1); with **Cl** about 3 : 1.\n\nThe **M+1 peak** (due to ¹³C, 1.1 % abundance) gives the number of carbons: n ≈ (height of M+1 ÷ height of M) × 100/1.1."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Infrared absorption (wavenumber / cm⁻¹)",
+     "md": "A bond absorbs IR when its vibration changes the dipole. Characteristic ranges: **O–H** (alcohol) 3200–3550 broad; **O–H** (carboxylic acid) 2500–3300 very broad; **N–H** 3300–3500; **C–H** 2850–3100; **C≡N** 2200–2260; **C=O** 1680–1750 (strong, sharp); **C=C** 1620–1680; **C–O** 1000–1300. The region below about 1500 cm⁻¹ is the **fingerprint region**, unique to each compound.\n\nExample: a strong band near 1715 cm⁻¹ and no broad O–H means a ketone or aldehyde."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 245,
+      "items": [
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 190,
+        "x2": 400,
+        "y2": 190,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 89.50000000000003,
+        "y1": 190,
+        "x2": 89.50000000000003,
+        "y2": 175,
+        "color": "blue",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 98.50000000000003,
+        "y1": 190,
+        "x2": 98.50000000000003,
+        "y2": 145,
+        "color": "blue",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 107.50000000000003,
+        "y1": 190,
+        "x2": 107.50000000000003,
+        "y2": 145,
+        "color": "blue",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 116.50000000000003,
+        "y1": 190,
+        "x2": 116.50000000000003,
+        "y2": 175,
+        "color": "blue",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 250.0,
+        "y1": 190,
+        "x2": 250.0,
+        "y2": 120,
+        "color": "blue",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 297.0,
+        "y1": 190,
+        "x2": 297.0,
+        "y2": 168,
+        "color": "blue",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 306.0,
+        "y1": 190,
+        "x2": 306.0,
+        "y2": 146,
+        "color": "blue",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 315.0,
+        "y1": 190,
+        "x2": 315.0,
+        "y2": 168,
+        "color": "blue",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 103.00000000000003,
+        "y": 140,
+        "text": "OCH₂ (q)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 250.0,
+        "y": 108,
+        "text": "CH₃CO (s)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 306.0,
+        "y": 140,
+        "text": "CH₃ (t)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 390,
+        "y": 212,
+        "text": "0",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 320,
+        "y": 212,
+        "text": "1",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 212,
+        "text": "2",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 212,
+        "text": "3",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 212,
+        "text": "4",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 212,
+        "text": "5",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 215,
+        "y": 232,
+        "text": "δ / ppm  (ethyl ethanoate)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Schematic ¹H NMR spectrum of ethyl ethanoate: a triplet (CH₃), a singlet (CH₃CO) and a quartet (OCH₂).",
+     "alt": "A schematic NMR spectrum with a triplet near 1.2 ppm, a singlet near 2.0 ppm and a quartet near 4.1 ppm."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "¹H NMR",
+     "md": "Protons in different chemical environments give separate signals. **Number of signals** = number of environments; **chemical shift** δ (ppm, from TMS = 0): alkyl C–H 0.9–1.5; next to C=O 2.0–2.7; O–CH₂ 3.3–4.3; alkene 4.5–6.5; aromatic 6.5–8.0; aldehyde 9–10; carboxylic acid 10–12. **Integration** gives the ratio of H atoms. **Splitting**: a signal is split into (n + 1) lines by n protons on the adjacent carbons (singlet, doublet, triplet 1:2:1, quartet 1:3:3:1). OH and NH signals vanish on shaking with D₂O."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Reading M+2 for chlorine and bromine the wrong way round (Br 1 : 1, Cl 3 : 1).\n- Counting H atoms from the signal height instead of the integration.\n- Confusing C=O (about 1700 cm⁻¹) and C=C (about 1650 cm⁻¹).\n- Forgetting that equivalent protons do not split each other (for example CH₃–CH₂– gives a triplet and a quartet, each split only by the neighbour)."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Deducing a structure",
+     "statement": "A compound C₄H₈O₂ has a strong IR absorption at 1740 cm⁻¹ and no broad band above 2500 cm⁻¹. Its ¹H NMR has three signals: δ 1.2 (triplet, 3H), δ 2.0 (singlet, 3H), δ 4.1 (quartet, 2H). Identify it.",
+     "steps": [
+      "Degree of unsaturation = (2 × 4 + 2 − 8)/2 = 1. The strong band at 1740 cm⁻¹ shows C=O; no broad O–H means it is not an acid: an ester.",
+      "δ 4.1 quartet (2H) = O–CH₂ next to CH₃; δ 1.2 triplet (3H) = the CH₃ of the ethyl group; δ 2.0 singlet (3H) = CH₃ next to C=O with no neighbours.",
+      "The compound is CH₃COOCH₂CH₃, ethyl ethanoate."
+     ],
+     "answer": "Ethyl ethanoate"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Mass spectrum",
+     "statement": "A compound shows peaks at m/z 108 and 110 of equal height, and a fragment at m/z 29. Identify it.",
+     "steps": [
+      "Equal M and M+2 peaks indicate one bromine atom (⁷⁹Br and ⁸¹Br).",
+      "m/z 29 = C₂H₅⁺. M = 108 = C₂H₅ (29) + ⁷⁹Br (79).",
+      "The compound is bromoethane, CH₃CH₂Br."
+     ],
+     "answer": "Bromoethane"
+    }
+   ],
+   "chapter": "gceal-chemistry-ch-analysis"
+  },
+  {
+   "id": "gceal-chemistry-industry",
+   "title": "Industrial and environmental chemistry",
+   "minutes": 40,
+   "programRef": "GCE Advanced Level Chemistry — analytical techniques, industrial chemistry, practical work (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe the Haber and Contact processes, justify the conditions and explain the compromise between rate and yield",
+    "Calculate masses, yields, percentage nitrogen in fertilisers and atom economy",
+    "Describe the causes and effects of acid rain, the greenhouse effect, ozone depletion and eutrophication"
+   ],
+   "prerequisites": [
+    "gceal-chemistry-kpksp"
+   ],
+   "exercises": [
+    "gceal-chemistry-ch-analysis-e07",
+    "gceal-chemistry-ch-analysis-e08",
+    "gceal-chemistry-ch-analysis-e09",
+    "gceal-chemistry-ch-analysis-e10",
+    "gceal-chemistry-ch-analysis-e11",
+    "gceal-chemistry-ch-analysis-e12"
+   ],
+   "selfCheck": [
+    "gceal-chemistry-industry-q1",
+    "gceal-chemistry-industry-q2",
+    "gceal-chemistry-industry-q3",
+    "gceal-chemistry-industry-q4",
+    "gceal-chemistry-industry-q5"
+   ],
+   "reviewNotes": [
+    "Data used: Ar H 1.0, C 12.0, N 14.0, O 16.0, Na 23.0, Mg 24.0, Al 27.0, S 32.0, Cl 35.5, K 39.0, Ca 40.0, Fe 56.0, Cu 63.5, Zn 65.0, Ag 108.0, Ba 137.0; R = 8.31 J mol⁻¹ K⁻¹; F = 96 500 C mol⁻¹; molar volume 24.0 dm³ at room temperature and pressure; K_w = 1.0 × 10⁻¹⁴ at 25 °C.",
+    "Conditions for the Haber and Contact processes are typical textbook values (ranges). Cameroonian context (fertilisers used on cocoa, banana, maize; Lake Nyos 1986 carbon dioxide release) was NOT included in the lesson text because specific figures were not verified; a teacher may add them.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "The Haber process",
+     "md": "N₂(g) + 3H₂(g) ⇌ 2NH₃(g), ΔH = −92 kJ mol⁻¹. Conditions: iron catalyst, about **400–450 °C**, **150–250 atm**. A low temperature would give a better yield (exothermic) but too slow a rate; a high pressure favours fewer gas moles (4 → 2) but is expensive: so a **compromise**. The ammonia is condensed to a liquid and the unreacted gases are **recycled**. Ammonia is used to make fertilisers (ammonium nitrate, ammonium sulfate, urea), nitric acid and explosives."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "The Contact process",
+     "md": "S → SO₂ (burning sulfur or roasting sulfide ores), then **2SO₂ + O₂ ⇌ 2SO₃** (ΔH = −196 kJ mol⁻¹) with a **V₂O₅ catalyst**, about 450 °C and 1–2 atm (the yield is already high at this pressure, so a high pressure is not worth the cost). SO₃ is absorbed in concentrated H₂SO₄ to make oleum (H₂S₂O₇), which is diluted with water; SO₃ is not dissolved directly in water (a mist forms). Uses: fertilisers, detergents, batteries, paints, ore processing."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 215,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 30,
+        "w": 100,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 52,
+        "text": "N₂ + H₂ (1 : 3)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 30,
+        "w": 100,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 52,
+        "text": "compressor",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 30,
+        "w": 100,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 340,
+        "y": 46,
+        "text": "reactor",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 340,
+        "y": 60,
+        "text": "Fe, 450 °C",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 112,
+        "y1": 47,
+        "x2": 148,
+        "y2": 47,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 252,
+        "y1": 47,
+        "x2": 288,
+        "y2": 47,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 340,
+        "y1": 66,
+        "x2": 340,
+        "y2": 100,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 102,
+        "w": 100,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 340,
+        "y": 124,
+        "text": "condenser",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 288,
+        "y1": 120,
+        "x2": 252,
+        "y2": 120,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 102,
+        "w": 100,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 124,
+        "text": "NH₃ (liquid)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 340,
+        "y1": 138,
+        "x2": 340,
+        "y2": 175,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 340,
+        "y1": 175,
+        "x2": 60,
+        "y2": 175,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 175,
+        "x2": 60,
+        "y2": 66,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 195,
+        "text": "unreacted N₂ and H₂ recycled",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 10,
+        "text": "Haber process",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Flow diagram of the Haber process with recycling of unreacted gases.",
+     "alt": "Boxes for the nitrogen–hydrogen feed, compressor, reactor, condenser and liquid ammonia with a recycle line back to the feed."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Calculations and green chemistry",
+     "md": "**Percentage yield** = actual/theoretical × 100. **Atom economy** = (M of desired product ÷ sum of M of all products, or reactants) × 100: higher is better. **Percentage N** in a fertiliser = (mass of N ÷ M) × 100: urea 46.7 %, NH₄NO₃ 35 %, (NH₄)₂SO₄ 21 %.\n\nPrinciples: use catalysts, recycle unreacted materials, reduce waste and energy, use renewable feedstocks."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Saying the best conditions are those giving the highest yield: cost, rate and safety matter too.\n- Claiming a catalyst increases the yield of a reversible reaction.\n- Forgetting to recycle unreacted gases when describing the Haber process.\n- Mixing up acid rain (SO₂, NOₓ) with the greenhouse effect (CO₂, CH₄) and ozone depletion (CFCs)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Environmental chemistry",
+     "md": "- **Acid rain**: SO₂ (from burning sulfur-containing fuels) and NOₓ dissolve in water to give H₂SO₄ and HNO₃; damages buildings, forests and lakes.\n- **Greenhouse effect**: CO₂, CH₄ and water vapour absorb infrared radiation; more CO₂ increases global temperature.\n- **Ozone depletion**: Cl• from CFCs catalyses the breakdown of ozone: Cl• + O₃ → ClO• + O₂.\n- **Eutrophication**: excess nitrate and phosphate (fertilisers) causes algal blooms that deplete oxygen in water."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Ammonia and fertilisers",
+     "statement": "How much ammonia can be made from 1.00 tonne of nitrogen at 100 % yield? What mass of urea, CO(NH₂)₂ (M = 60), supplies 25.0 kg of nitrogen to a field?",
+     "steps": [
+      "N₂ → 2NH₃: 28 g N₂ gives 34 g NH₃, so 1.00 t gives 34/28 = 1.21 t.",
+      "Percentage N in urea = 28/60 × 100 = 46.7 % (two N atoms).",
+      "Mass of urea for 25.0 kg N = 25.0/0.467 = 53.6 kg."
+     ],
+     "answer": "1.21 t of ammonia; 53.6 kg of urea"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Conversion and atom economy",
+     "statement": "In a Haber reactor 1.0 mol N₂ and 3.0 mol H₂ react until 20 % of the N₂ has reacted. Find the mole fraction of NH₃. Calculate the atom economy of making ethanol by fermentation: C₆H₁₂O₆ → 2C₂H₅OH + 2CO₂.",
+     "steps": [
+      "N₂ left 0.80 mol, H₂ left 2.40 mol, NH₃ formed 0.40 mol; total = 3.60 mol; mole fraction of NH₃ = 0.40/3.60 = 0.111.",
+      "Atom economy of fermentation (for ethanol) = 2 × 46/180 × 100 = 51 %.",
+      "Hydration of ethene (C₂H₄ + H₂O → C₂H₅OH) has an atom economy of 100 %."
+     ],
+     "answer": "x(NH₃) = 0.111; atom economy 51 %"
+    }
+   ],
+   "chapter": "gceal-chemistry-ch-analysis"
+  },
+  {
+   "id": "gceal-chemistry-practical",
+   "title": "Practical skills: titration, uncertainty and qualitative analysis",
+   "minutes": 40,
+   "programRef": "GCE Advanced Level Chemistry — analytical techniques, industrial chemistry, practical work (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe good practice in titrations and calculate the percentage uncertainty from apparatus readings",
+    "Plan an investigation and evaluate methods, including sources of error and improvements",
+    "Identify ions and gases using standard qualitative tests"
+   ],
+   "prerequisites": [
+    "gceal-chemistry-transition"
+   ],
+   "exercises": [
+    "gceal-chemistry-ch-analysis-e13",
+    "gceal-chemistry-ch-analysis-e14",
+    "gceal-chemistry-ch-analysis-e15",
+    "gceal-chemistry-ch-analysis-e16",
+    "gceal-chemistry-ch-analysis-e17",
+    "gceal-chemistry-ch-analysis-e18"
+   ],
+   "selfCheck": [
+    "gceal-chemistry-practical-q1",
+    "gceal-chemistry-practical-q2",
+    "gceal-chemistry-practical-q3",
+    "gceal-chemistry-practical-q4",
+    "gceal-chemistry-practical-q5"
+   ],
+   "reviewNotes": [
+    "Data used: Ar H 1.0, C 12.0, N 14.0, O 16.0, Na 23.0, Mg 24.0, Al 27.0, S 32.0, Cl 35.5, K 39.0, Ca 40.0, Fe 56.0, Cu 63.5, Zn 65.0, Ag 108.0, Ba 137.0; R = 8.31 J mol⁻¹ K⁻¹; F = 96 500 C mol⁻¹; molar volume 24.0 dm³ at room temperature and pressure; K_w = 1.0 × 10⁻¹⁴ at 25 °C.",
+    "Practical assessment format of the Cameroon GCE Board (practical examination, continuous assessment) is not described; apparatus uncertainty values are typical.",
+    "Complete qualitative analysis schemes are not given.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Titration technique and uncertainty",
+     "md": "Rinse the pipette with the solution it will deliver and the burette with its own solution; use a white tile; swirl; add dropwise near the end-point; read at the bottom of the meniscus at eye level; repeat until **concordant titres** (within 0.10 cm³). Uncertainty: the burette has an uncertainty of ±0.05 cm³ for each reading, so a titre (two readings) has **±0.10 cm³**; a 25.00 cm³ pipette ±0.06 cm³ (typical). **Percentage uncertainty** = (absolute ÷ measured value) × 100; add the percentages of all measurements used in a quotient/product."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Planning and evaluation",
+     "md": "State the independent, dependent and control variables; choose apparatus with suitable precision; give quantities and a method for **safety** (dilute acids, fume cupboards for chlorine/ammonia); predict the shape of the results. To evaluate: identify the largest percentage uncertainty (it limits the accuracy), distinguish systematic (zero errors, wrong indicator) from random errors, and suggest improvements (larger titres, a more precise balance, repeats)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 240,
+      "items": [
+       {
+        "t": "text",
+        "x": 210,
+        "y": 18,
+        "text": "tests with NaOH(aq) (and excess NH₃ for Cu²⁺)",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 30,
+        "w": 60,
+        "h": 32,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 51,
+        "text": "Cu²⁺",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 51,
+        "text": "blue ppt, dissolves in excess NH₃: deep blue",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 70,
+        "w": 60,
+        "h": 32,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 91,
+        "text": "Fe²⁺",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 91,
+        "text": "green ppt → brown in air",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 110,
+        "w": 60,
+        "h": 32,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 131,
+        "text": "Fe³⁺",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 131,
+        "text": "red-brown ppt",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 150,
+        "w": 60,
+        "h": 32,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey"
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 171,
+        "text": "Al³⁺",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 171,
+        "text": "white ppt, dissolves in excess NaOH",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 190,
+        "w": 60,
+        "h": 32,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 211,
+        "text": "NH₄⁺",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 211,
+        "text": "warm with NaOH: NH₃ turns damp red litmus blue",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Test results for some cations with sodium hydroxide solution.",
+     "alt": "Five labelled rows listing ions Cu2+, Fe2+, Fe3+, Al3+ and NH4+ with the colour of the precipitate or the observation."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Qualitative tests",
+     "md": "**Gases**: H₂ burns with a squeaky pop; O₂ relights a glowing splint; CO₂ turns limewater milky; NH₃ turns damp red litmus blue; Cl₂ bleaches damp litmus; SO₂ turns acidified dichromate from orange to green. **Anions**: carbonate (dilute acid → CO₂); sulfate (acidified BaCl₂ → white precipitate); halides (acidified AgNO₃ → white/cream/yellow). **Cations**: NaOH(aq) and NH₃(aq) as in the figure; ammonium ions: warm with NaOH, NH₃ released; flame tests for Group 1 and 2 metals."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using a measuring cylinder instead of a pipette for the accurate volume.\n- Including the first rough titre in the mean.\n- Rinsing the conical flask with the solution it will contain (the pipette should be rinsed, not the flask).\n- Reporting only 'a precipitate' without its colour, and writing 'turns the splint on' instead of 'relights a glowing splint'."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Percentage uncertainty",
+     "statement": "A 25.00 cm³ pipette (±0.06 cm³) delivers acid, and the burette titre is 20.00 cm³ (two readings, each ±0.05 cm³). The concentration is 0.0800 mol dm⁻³. Find the percentage uncertainty in the concentration and the absolute uncertainty.",
+     "steps": [
+      "Pipette: 0.06/25.00 × 100 = 0.24 %. Burette titre: 0.10/20.00 × 100 = 0.50 %.",
+      "Total percentage uncertainty = 0.24 + 0.50 = 0.74 % (the concentration depends on both volumes).",
+      "Absolute uncertainty = 0.74 % of 0.0800 = 0.0006 mol dm⁻³, so c = (0.0800 ± 0.0006) mol dm⁻³."
+     ],
+     "answer": "0.74 % (± 0.0006 mol dm⁻³)"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Identifying an unknown",
+     "statement": "Solid X dissolves in water. With NaOH(aq) it gives a green precipitate that turns brown on standing; with acidified BaCl₂ it gives a white precipitate. Identify X.",
+     "steps": [
+      "Green precipitate turning brown: Fe(OH)₂ oxidised in air to Fe(OH)₃, so the cation is Fe²⁺.",
+      "White precipitate with acidified BaCl₂: sulfate ions (BaSO₄).",
+      "X is iron(II) sulfate, FeSO₄."
+     ],
+     "answer": "Iron(II) sulfate"
+    }
+   ],
+   "chapter": "gceal-chemistry-ch-analysis"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceal-chemistry-ch-analysis-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-chemistry-analysis",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "The molecular formula C₄H₈O₂ has what degree of unsaturation (double bond equivalents)?",
+   "answer": 1,
+   "tolerance": 0,
+   "explanation": "(2 × 4 + 2 − 8)/2 = 1.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-chemistry-ch-analysis"
+  },
+  {
+   "id": "gceal-chemistry-ch-analysis-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-chemistry-analysis",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "In a TLC experiment the spot travels 3.2 cm and the solvent front 8.0 cm. Find R_f.",
+   "answer": 0.4,
+   "tolerance": 0.005,
+   "explanation": "R_f = 3.2/8.0 = 0.40.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-chemistry-ch-analysis"
+  },
+  {
+   "id": "gceal-chemistry-ch-analysis-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-chemistry-analysis",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "True or false: a compound with a molecular ion pair at m/z 78 and 80 in the ratio 3 : 1 contains chlorine.",
+   "answer": true,
+   "explanation": "The ³⁵Cl : ³⁷Cl ratio is about 3 : 1.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-chemistry-ch-analysis"
+  },
+  {
+   "id": "gceal-chemistry-ch-analysis-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-chemistry-analysis",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "In a mass spectrum the M peak has height 100 and the M+1 peak has height 4.4. How many carbon atoms does the molecule contain?",
+   "answer": 4.0,
+   "tolerance": 0.2,
+   "explanation": "n ≈ 4.4/100 × 100/1.1 = 4.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-chemistry-ch-analysis"
+  },
+  {
+   "id": "gceal-chemistry-ch-analysis-e05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-chemistry-analysis",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "A strong, broad absorption between 2500 and 3300 cm⁻¹ together with a strong band at 1710 cm⁻¹ indicates",
+   "choices": [
+    "an alkene",
+    "a carboxylic acid",
+    "an ester",
+    "a ketone"
+   ],
+   "answer": 1,
+   "explanation": "Very broad O–H and C=O together point to –COOH.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-chemistry-ch-analysis"
+  },
+  {
+   "id": "gceal-chemistry-ch-analysis-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-chemistry-analysis",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Compound P has the composition 48.6 % C, 8.1 % H and 43.2 % O and M = 74. Its IR spectrum has a strong band at 1740 cm⁻¹ and no broad O–H band. Its ¹H NMR spectrum has signals at δ 3.7 (singlet, 3H), δ 2.3 (quartet, 2H) and δ 1.1 (triplet, 3H).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "The number of carbon atoms in the molecular formula.",
+     "answer": 3,
+     "tolerance": 0,
+     "explanation": "Empirical formula C₃H₆O₂ (moles 4.05 : 8.1 : 2.70 = 1.5 : 3 : 1 → ×2); M = 74 so the molecular formula is C₃H₆O₂ with 3 C.",
+     "id": "gceal-chemistry-ch-analysis-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The functional group is",
+     "choices": [
+      "a carboxylic acid",
+      "an aldehyde",
+      "an ester",
+      "an alcohol"
+     ],
+     "answer": 2,
+     "explanation": "C=O at 1740 cm⁻¹ and no O–H band.",
+     "id": "gceal-chemistry-ch-analysis-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The structure of P is",
+     "choices": [
+      "CH₃CH₂COOCH₃",
+      "CH₃COCH₂CH₂OH",
+      "CH₃COOCH₂CH₃",
+      "CH₃CH₂CH₂COOH"
+     ],
+     "answer": 0,
+     "explanation": "δ 3.7 (3H, s) = O–CH₃; δ 2.3 (2H, q) and δ 1.1 (3H, t) = CH₃CH₂–C=O.",
+     "id": "gceal-chemistry-ch-analysis-e06-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "State and explain why the signal at δ 2.3 is a quartet.",
+     "model": "The CH₂ protons have three neighbouring protons on the adjacent CH₃, so by the n + 1 rule they give 3 + 1 = 4 lines (a quartet).",
+     "rubric": "1 mark: three adjacent H; 1 mark: n + 1 rule gives four lines.",
+     "explanation": "The CH₂ protons have three neighbouring protons on the adjacent CH₃, so by the n + 1 rule they give 3 + 1 = 4 lines (a quartet).",
+     "id": "gceal-chemistry-ch-analysis-e06-d"
+    }
+   ],
+   "figure": {
+    "kind": "shapes",
+    "w": 420,
+    "h": 245,
+    "items": [
+     {
+      "t": "line",
+      "x1": 30,
+      "y1": 190,
+      "x2": 400,
+      "y2": 190,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 89.50000000000003,
+      "y1": 190,
+      "x2": 89.50000000000003,
+      "y2": 175,
+      "color": "blue",
+      "width": 3
+     },
+     {
+      "t": "line",
+      "x1": 98.50000000000003,
+      "y1": 190,
+      "x2": 98.50000000000003,
+      "y2": 145,
+      "color": "blue",
+      "width": 3
+     },
+     {
+      "t": "line",
+      "x1": 107.50000000000003,
+      "y1": 190,
+      "x2": 107.50000000000003,
+      "y2": 145,
+      "color": "blue",
+      "width": 3
+     },
+     {
+      "t": "line",
+      "x1": 116.50000000000003,
+      "y1": 190,
+      "x2": 116.50000000000003,
+      "y2": 175,
+      "color": "blue",
+      "width": 3
+     },
+     {
+      "t": "line",
+      "x1": 250.0,
+      "y1": 190,
+      "x2": 250.0,
+      "y2": 120,
+      "color": "blue",
+      "width": 3
+     },
+     {
+      "t": "line",
+      "x1": 297.0,
+      "y1": 190,
+      "x2": 297.0,
+      "y2": 168,
+      "color": "blue",
+      "width": 3
+     },
+     {
+      "t": "line",
+      "x1": 306.0,
+      "y1": 190,
+      "x2": 306.0,
+      "y2": 146,
+      "color": "blue",
+      "width": 3
+     },
+     {
+      "t": "line",
+      "x1": 315.0,
+      "y1": 190,
+      "x2": 315.0,
+      "y2": 168,
+      "color": "blue",
+      "width": 3
+     },
+     {
+      "t": "text",
+      "x": 103.00000000000003,
+      "y": 140,
+      "text": "OCH₂ (q)",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 250.0,
+      "y": 108,
+      "text": "CH₃CO (s)",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 306.0,
+      "y": 140,
+      "text": "CH₃ (t)",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 390,
+      "y": 212,
+      "text": "0",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 320,
+      "y": 212,
+      "text": "1",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 250,
+      "y": 212,
+      "text": "2",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 180,
+      "y": 212,
+      "text": "3",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 110,
+      "y": 212,
+      "text": "4",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 40,
+      "y": 212,
+      "text": "5",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 215,
+      "y": 232,
+      "text": "δ / ppm  (ethyl ethanoate)",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     }
+    ]
+   },
+   "chapter": "gceal-chemistry-ch-analysis"
+  },
+  {
+   "id": "gceal-chemistry-analysis-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-analysis",
+   "prompt": "The molecular ion peak in a mass spectrum gives",
+   "choices": [
+    "the relative molecular mass",
+    "the number of carbons only",
+    "the boiling point",
+    "the functional group"
+   ],
+   "answer": 0,
+   "explanation": "m/z of M⁺ = M for a singly charged ion.",
+   "chapter": "gceal-chemistry-ch-analysis"
+  },
+  {
+   "id": "gceal-chemistry-analysis-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-analysis",
+   "prompt": "A band at 1710 cm⁻¹ in the IR spectrum is due to",
+   "choices": [
+    "O–H",
+    "C≡N",
+    "C–H",
+    "C=O"
+   ],
+   "answer": 3,
+   "explanation": "Carbonyl stretching.",
+   "chapter": "gceal-chemistry-ch-analysis"
+  },
+  {
+   "id": "gceal-chemistry-analysis-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-analysis",
+   "prompt": "In ¹H NMR, TMS is used as",
+   "choices": [
+    "the solvent",
+    "the sample",
+    "the catalyst",
+    "the reference at δ = 0"
+   ],
+   "answer": 3,
+   "explanation": "All shifts are measured from tetramethylsilane.",
+   "chapter": "gceal-chemistry-ch-analysis"
+  },
+  {
+   "id": "gceal-chemistry-analysis-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-analysis",
+   "prompt": "A CH₃ group next to a CH₂ group gives a signal that is a",
+   "choices": [
+    "quartet",
+    "singlet",
+    "triplet",
+    "doublet"
+   ],
+   "answer": 2,
+   "explanation": "n = 2 neighbours: 2 + 1 = 3 lines.",
+   "chapter": "gceal-chemistry-ch-analysis"
+  },
+  {
+   "id": "gceal-chemistry-analysis-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-analysis",
+   "prompt": "Which technique tells the relative molecular mass most directly?",
+   "choices": [
+    "mass spectrometry",
+    "IR spectroscopy",
+    "¹H NMR",
+    "TLC"
+   ],
+   "answer": 0,
+   "explanation": "Molecular ion peak.",
+   "chapter": "gceal-chemistry-ch-analysis"
+  },
+  {
+   "id": "gceal-chemistry-ch-analysis-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-chemistry-industry",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Calculate the percentage of nitrogen in ammonium nitrate, NH₄NO₃ (M = 80) (%).",
+   "answer": 35.0,
+   "tolerance": 0.1,
+   "unit": "%",
+   "explanation": "2 × 14/80 × 100 = 35 %.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-chemistry-ch-analysis"
+  },
+  {
+   "id": "gceal-chemistry-ch-analysis-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-chemistry-industry",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Why is the Contact process carried out at only 1–2 atm?",
+   "choices": [
+    "the catalyst needs low pressure",
+    "pressure has no effect",
+    "the reaction is endothermic",
+    "the equilibrium yield is already high and high pressure is costly"
+   ],
+   "answer": 3,
+   "explanation": "A conversion above 95 % is obtained at 450 °C and low pressure.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-chemistry-ch-analysis"
+  },
+  {
+   "id": "gceal-chemistry-ch-analysis-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-chemistry-industry",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "True or false: using a catalyst in the Haber process increases the equilibrium yield of ammonia.",
+   "answer": false,
+   "explanation": "It increases the rate only; the position of equilibrium is unchanged.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-chemistry-ch-analysis"
+  },
+  {
+   "id": "gceal-chemistry-ch-analysis-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-chemistry-industry",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Calculate the mass of sulfuric acid (tonnes, 3 s.f.) that could be made from 1.00 tonne of sulfur at 100 % yield (S → H₂SO₄; A_r: S 32, M(H₂SO₄) = 98).",
+   "answer": 3.06,
+   "tolerance": 0.02,
+   "unit": "t",
+   "explanation": "98/32 = 3.06 tonnes.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-chemistry-ch-analysis"
+  },
+  {
+   "id": "gceal-chemistry-ch-analysis-e11",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-chemistry-industry",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Which gas contributes most to acid rain?",
+   "choices": [
+    "carbon dioxide only",
+    "sulfur dioxide",
+    "nitrogen",
+    "oxygen"
+   ],
+   "answer": 1,
+   "explanation": "SO₂ gives H₂SO₃/H₂SO₄ (and NOₓ gives HNO₃).",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-chemistry-ch-analysis"
+  },
+  {
+   "id": "gceal-chemistry-ch-analysis-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-chemistry-industry",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "In a Haber reactor 1.0 mol of N₂ and 3.0 mol of H₂ are heated until 20 % of the N₂ has reacted.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Moles of NH₃ formed.",
+     "answer": 0.4,
+     "tolerance": 0.005,
+     "explanation": "0.20 mol N₂ reacts → 0.40 mol NH₃.",
+     "unit": "mol",
+     "id": "gceal-chemistry-ch-analysis-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Total moles of gas at the end.",
+     "answer": 3.6,
+     "tolerance": 0.01,
+     "explanation": "0.80 + 2.40 + 0.40 = 3.60 mol.",
+     "unit": "mol",
+     "id": "gceal-chemistry-ch-analysis-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Mole fraction of NH₃ (3 s.f.).",
+     "answer": 0.111,
+     "tolerance": 0.002,
+     "explanation": "0.40/3.60 = 0.111.",
+     "id": "gceal-chemistry-ch-analysis-e12-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explain why the temperature of 450 °C is a compromise.",
+     "model": "The reaction is exothermic so a lower temperature gives a higher equilibrium yield, but the rate would be too slow; at 450 °C the rate is acceptable with the catalyst and the yield is reasonable.",
+     "rubric": "1 mark: exothermic → lower T gives more NH₃; 1 mark: but rate too slow at low T.",
+     "explanation": "The reaction is exothermic so a lower temperature gives a higher equilibrium yield, but the rate would be too slow; at 450 °C the rate is acceptable with the catalyst and the yield is reasonable.",
+     "id": "gceal-chemistry-ch-analysis-e12-d"
+    }
+   ],
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 215,
+    "items": [
+     {
+      "t": "rect",
+      "x": 10,
+      "y": 30,
+      "w": 100,
+      "h": 34,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightyellow"
+     },
+     {
+      "t": "text",
+      "x": 60,
+      "y": 52,
+      "text": "N₂ + H₂ (1 : 3)",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "rect",
+      "x": 150,
+      "y": 30,
+      "w": 100,
+      "h": 34,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightblue"
+     },
+     {
+      "t": "text",
+      "x": 200,
+      "y": 52,
+      "text": "compressor",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "rect",
+      "x": 290,
+      "y": 30,
+      "w": 100,
+      "h": 34,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightorange"
+     },
+     {
+      "t": "text",
+      "x": 340,
+      "y": 46,
+      "text": "reactor",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 340,
+      "y": 60,
+      "text": "Fe, 450 °C",
+      "size": 11,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 112,
+      "y1": 47,
+      "x2": 148,
+      "y2": 47,
+      "color": "ink",
+      "width": 2,
+      "arrow": "end"
+     },
+     {
+      "t": "line",
+      "x1": 252,
+      "y1": 47,
+      "x2": 288,
+      "y2": 47,
+      "color": "ink",
+      "width": 2,
+      "arrow": "end"
+     },
+     {
+      "t": "line",
+      "x1": 340,
+      "y1": 66,
+      "x2": 340,
+      "y2": 100,
+      "color": "ink",
+      "width": 2,
+      "arrow": "end"
+     },
+     {
+      "t": "rect",
+      "x": 290,
+      "y": 102,
+      "w": 100,
+      "h": 34,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightblue"
+     },
+     {
+      "t": "text",
+      "x": 340,
+      "y": 124,
+      "text": "condenser",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 288,
+      "y1": 120,
+      "x2": 252,
+      "y2": 120,
+      "color": "ink",
+      "width": 2,
+      "arrow": "end"
+     },
+     {
+      "t": "rect",
+      "x": 150,
+      "y": 102,
+      "w": 100,
+      "h": 34,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightgreen"
+     },
+     {
+      "t": "text",
+      "x": 200,
+      "y": 124,
+      "text": "NH₃ (liquid)",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 340,
+      "y1": 138,
+      "x2": 340,
+      "y2": 175,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 340,
+      "y1": 175,
+      "x2": 60,
+      "y2": 175,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 60,
+      "y1": 175,
+      "x2": 60,
+      "y2": 66,
+      "color": "ink",
+      "width": 2,
+      "arrow": "end"
+     },
+     {
+      "t": "text",
+      "x": 200,
+      "y": 195,
+      "text": "unreacted N₂ and H₂ recycled",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 200,
+      "y": 10,
+      "text": "Haber process",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     }
+    ]
+   },
+   "chapter": "gceal-chemistry-ch-analysis"
+  },
+  {
+   "id": "gceal-chemistry-industry-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-industry",
+   "prompt": "The catalyst in the Contact process is",
+   "choices": [
+    "platinum gauze",
+    "nickel",
+    "iron",
+    "vanadium(V) oxide"
+   ],
+   "answer": 3,
+   "explanation": "V₂O₅.",
+   "chapter": "gceal-chemistry-ch-analysis"
+  },
+  {
+   "id": "gceal-chemistry-industry-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-industry",
+   "prompt": "Eutrophication is caused by",
+   "choices": [
+    "CFCs",
+    "acid rain",
+    "excess nitrates and phosphates in water",
+    "carbon monoxide"
+   ],
+   "answer": 2,
+   "explanation": "Fertiliser runoff.",
+   "chapter": "gceal-chemistry-ch-analysis"
+  },
+  {
+   "id": "gceal-chemistry-industry-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-industry",
+   "prompt": "Which is a greenhouse gas?",
+   "choices": [
+    "oxygen",
+    "argon",
+    "methane",
+    "nitrogen"
+   ],
+   "answer": 2,
+   "explanation": "CH₄ absorbs infrared radiation.",
+   "chapter": "gceal-chemistry-ch-analysis"
+  },
+  {
+   "id": "gceal-chemistry-industry-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-industry",
+   "prompt": "The atom economy of an addition reaction forming a single product is",
+   "choices": [
+    "it cannot be calculated",
+    "0 %",
+    "50 %",
+    "100 %"
+   ],
+   "answer": 3,
+   "explanation": "All atoms of the reactants end up in the product.",
+   "chapter": "gceal-chemistry-ch-analysis"
+  },
+  {
+   "id": "gceal-chemistry-industry-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-industry",
+   "prompt": "Recycling unreacted N₂ and H₂ in the Haber process",
+   "choices": [
+    "changes ΔH",
+    "removes the catalyst",
+    "decreases the rate",
+    "increases the overall yield and saves cost"
+   ],
+   "answer": 3,
+   "explanation": "The unreacted gases get another chance to react.",
+   "chapter": "gceal-chemistry-ch-analysis"
+  },
+  {
+   "id": "gceal-chemistry-ch-analysis-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-chemistry-practical",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "A burette reading is 12.30 cm³ (initial 0.00, ±0.05 cm³ each reading). What is the percentage uncertainty in this titre? (%, 2 s.f.)",
+   "answer": 0.81,
+   "tolerance": 0.02,
+   "unit": "%",
+   "explanation": "0.10/12.30 × 100 = 0.81 %.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-chemistry-ch-analysis"
+  },
+  {
+   "id": "gceal-chemistry-ch-analysis-e14",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-chemistry-practical",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Which test shows the presence of carbon dioxide?",
+   "choices": [
+    "it relights a glowing splint",
+    "it burns with a pop",
+    "it bleaches litmus",
+    "it turns limewater milky"
+   ],
+   "answer": 3,
+   "explanation": "CO₂ + Ca(OH)₂ → CaCO₃ (white).",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-chemistry-ch-analysis"
+  },
+  {
+   "id": "gceal-chemistry-ch-analysis-e15",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-chemistry-practical",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "True or false: the rough (first) titre is normally included in the mean of concordant titres.",
+   "answer": false,
+   "explanation": "It is a trial; only concordant accurate titres are averaged.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-chemistry-ch-analysis"
+  },
+  {
+   "id": "gceal-chemistry-ch-analysis-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-chemistry-practical",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Titres obtained: 21.20, 20.55, 20.60, 20.50 cm³. Find the mean of the concordant titres (within 0.10 cm³; cm³, 2 d.p.).",
+   "answer": 20.55,
+   "tolerance": 0.02,
+   "unit": "cm³",
+   "explanation": "Concordant titres: 20.55, 20.60 and 20.50 (the first rough value is excluded): mean = 20.55 cm³.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-chemistry-ch-analysis"
+  },
+  {
+   "id": "gceal-chemistry-ch-analysis-e17",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-chemistry-practical",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "A student wants to reduce the percentage uncertainty in a titration. The best improvement is to",
+   "choices": [
+    "use a larger titre (more concentrated or smaller aliquot)",
+    "stop at a pale colour",
+    "use a smaller burette reading",
+    "use more indicator"
+   ],
+   "answer": 0,
+   "explanation": "The same ±0.10 cm³ is a smaller percentage of a larger volume.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-chemistry-ch-analysis"
+  },
+  {
+   "id": "gceal-chemistry-ch-analysis-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-chemistry-practical",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "A student titrates 25.00 cm³ (pipette ±0.06 cm³) of sodium hydroxide solution with 0.1000 mol dm⁻³ hydrochloric acid. The mean titre is 21.50 cm³ (burette uncertainty ±0.10 cm³ for a titre).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Concentration of NaOH (mol dm⁻³, 3 s.f.).",
+     "answer": 0.086,
+     "tolerance": 0.0003,
+     "explanation": "n(HCl) = 0.1000 × 0.02150 = 2.150 × 10⁻³ mol = n(NaOH); c = 2.150 × 10⁻³/0.02500 = 0.0860 mol dm⁻³.",
+     "unit": "mol/dm³",
+     "id": "gceal-chemistry-ch-analysis-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Percentage uncertainty in the burette titre (%, 2 s.f.).",
+     "answer": 0.47,
+     "tolerance": 0.01,
+     "explanation": "0.10/21.50 × 100 = 0.47 %.",
+     "unit": "%",
+     "id": "gceal-chemistry-ch-analysis-e18-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Total percentage uncertainty in the concentration (pipette + burette; %, 2 s.f.).",
+     "answer": 0.71,
+     "tolerance": 0.01,
+     "explanation": "0.24 + 0.47 = 0.71 %.",
+     "unit": "%",
+     "id": "gceal-chemistry-ch-analysis-e18-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Suggest one change to reduce the uncertainty and explain why it helps.",
+     "model": "Use a more dilute acid so that the titre is larger (for example 40 cm³ with a 50 cm³ burette): the fixed ±0.10 cm³ is then a smaller percentage of the titre.",
+     "rubric": "1 mark: increase the titre volume (or use a more precise apparatus); 1 mark: smaller percentage uncertainty.",
+     "explanation": "Use a more dilute acid so that the titre is larger (for example 40 cm³ with a 50 cm³ burette): the fixed ±0.10 cm³ is then a smaller percentage of the titre.",
+     "id": "gceal-chemistry-ch-analysis-e18-d"
+    }
+   ],
+   "figure": {
+    "kind": "shapes",
+    "w": 440,
+    "h": 240,
+    "items": [
+     {
+      "t": "text",
+      "x": 210,
+      "y": 18,
+      "text": "tests with NaOH(aq) (and excess NH₃ for Cu²⁺)",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "rect",
+      "x": 10,
+      "y": 30,
+      "w": 60,
+      "h": 32,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightblue"
+     },
+     {
+      "t": "text",
+      "x": 40,
+      "y": 51,
+      "text": "Cu²⁺",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 80,
+      "y": 51,
+      "text": "blue ppt, dissolves in excess NH₃: deep blue",
+      "size": 12,
+      "anchor": "start",
+      "color": "ink"
+     },
+     {
+      "t": "rect",
+      "x": 10,
+      "y": 70,
+      "w": 60,
+      "h": 32,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightgreen"
+     },
+     {
+      "t": "text",
+      "x": 40,
+      "y": 91,
+      "text": "Fe²⁺",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 80,
+      "y": 91,
+      "text": "green ppt → brown in air",
+      "size": 12,
+      "anchor": "start",
+      "color": "ink"
+     },
+     {
+      "t": "rect",
+      "x": 10,
+      "y": 110,
+      "w": 60,
+      "h": 32,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightorange"
+     },
+     {
+      "t": "text",
+      "x": 40,
+      "y": 131,
+      "text": "Fe³⁺",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 80,
+      "y": 131,
+      "text": "red-brown ppt",
+      "size": 12,
+      "anchor": "start",
+      "color": "ink"
+     },
+     {
+      "t": "rect",
+      "x": 10,
+      "y": 150,
+      "w": 60,
+      "h": 32,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightgrey"
+     },
+     {
+      "t": "text",
+      "x": 40,
+      "y": 171,
+      "text": "Al³⁺",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 80,
+      "y": 171,
+      "text": "white ppt, dissolves in excess NaOH",
+      "size": 12,
+      "anchor": "start",
+      "color": "ink"
+     },
+     {
+      "t": "rect",
+      "x": 10,
+      "y": 190,
+      "w": 60,
+      "h": 32,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightyellow"
+     },
+     {
+      "t": "text",
+      "x": 40,
+      "y": 211,
+      "text": "NH₄⁺",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 80,
+      "y": 211,
+      "text": "warm with NaOH: NH₃ turns damp red litmus blue",
+      "size": 12,
+      "anchor": "start",
+      "color": "ink"
+     }
+    ]
+   },
+   "chapter": "gceal-chemistry-ch-analysis"
+  },
+  {
+   "id": "gceal-chemistry-practical-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-practical",
+   "prompt": "A deep blue solution forms when excess ammonia is added to Cu²⁺(aq). The blue ion is",
+   "choices": [
+    "CuCO₃",
+    "Cu(OH)₂",
+    "[Cu(NH₃)₄(H₂O)₂]²⁺",
+    "Cu₂O"
+   ],
+   "answer": 2,
+   "explanation": "Ligand exchange.",
+   "chapter": "gceal-chemistry-ch-analysis"
+  },
+  {
+   "id": "gceal-chemistry-practical-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-practical",
+   "prompt": "The gas that turns damp red litmus paper blue is",
+   "choices": [
+    "hydrogen",
+    "carbon dioxide",
+    "chlorine",
+    "ammonia"
+   ],
+   "answer": 3,
+   "explanation": "NH₃ is alkaline.",
+   "chapter": "gceal-chemistry-ch-analysis"
+  },
+  {
+   "id": "gceal-chemistry-practical-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-practical",
+   "prompt": "A concordant titre is one that is",
+   "choices": [
+    "the largest",
+    "the first",
+    "within 0.10 cm³ of another titre",
+    "exactly 25.00 cm³"
+   ],
+   "answer": 2,
+   "explanation": "Used to decide when enough titrations are done.",
+   "chapter": "gceal-chemistry-ch-analysis"
+  },
+  {
+   "id": "gceal-chemistry-practical-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-practical",
+   "prompt": "Which precipitate dissolves in excess aqueous sodium hydroxide?",
+   "choices": [
+    "Fe(OH)₃",
+    "Mg(OH)₂",
+    "Cu(OH)₂",
+    "Al(OH)₃"
+   ],
+   "answer": 3,
+   "explanation": "Aluminium hydroxide is amphoteric.",
+   "chapter": "gceal-chemistry-ch-analysis"
+  },
+  {
+   "id": "gceal-chemistry-practical-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-practical",
+   "prompt": "The reading of a burette is taken at",
+   "choices": [
+    "any point",
+    "the tap",
+    "the bottom of the meniscus, eye level",
+    "the top of the meniscus"
+   ],
+   "answer": 2,
+   "explanation": "To avoid parallax error.",
+   "chapter": "gceal-chemistry-ch-analysis"
+  },
+  {
+   "id": "gceal-chemistry-ch-analysis-m01",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-chemistry-analysis",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Question 6 (4 marks). Compound P has 48.6 % C, 8.1 % H and 43.2 % O, M = 74. It shows a strong IR band at 1740 cm⁻¹ with no broad O–H band; its ¹H NMR has signals at δ 3.7 (3H, singlet), δ 2.3 (2H, quartet) and δ 1.1 (3H, triplet).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Number of carbon atoms in a molecule of P.",
+     "answer": 3,
+     "tolerance": 0,
+     "explanation": "Ratio C : H : O = 1.5 : 3 : 1 = 3 : 6 : 2 (C₃H₆O₂, M = 74).",
+     "id": "gceal-chemistry-ch-analysis-m01-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The functional group in P is",
+     "choices": [
+      "a carboxylic acid",
+      "a ketone",
+      "an alcohol",
+      "an ester"
+     ],
+     "answer": 3,
+     "explanation": "C=O at 1740 cm⁻¹; no O–H.",
+     "id": "gceal-chemistry-ch-analysis-m01-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "P is",
+     "choices": [
+      "propyl methanoate",
+      "methyl propanoate, CH₃CH₂COOCH₃",
+      "ethyl ethanoate",
+      "propanoic acid"
+     ],
+     "answer": 1,
+     "explanation": "δ 3.7 (s, 3H) = OCH₃; δ 2.3 (q) and δ 1.1 (t) = CH₃CH₂–CO.",
+     "id": "gceal-chemistry-ch-analysis-m01-c"
+    }
+   ],
+   "chapter": "gceal-chemistry-ch-analysis"
+  },
+  {
+   "id": "gceal-chemistry-ch-analysis-m02",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-chemistry-industry",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Question 7 (4 marks). In a Haber process reactor 1.0 mol of N₂ and 3.0 mol of H₂ react until 0.40 mol of NH₃ has formed. N₂ + 3H₂ ⇌ 2NH₃, ΔH = −92 kJ mol⁻¹.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Mole fraction of NH₃ in the equilibrium mixture (3 s.f.).",
+     "answer": 0.111,
+     "tolerance": 0.002,
+     "explanation": "Moles: N₂ 0.80, H₂ 2.40, NH₃ 0.40; total 3.60; x = 0.40/3.60 = 0.111.",
+     "id": "gceal-chemistry-ch-analysis-m02-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Increasing the pressure at constant temperature will",
+     "choices": [
+      "have no effect on the yield",
+      "increase the yield of NH₃",
+      "decrease the rate",
+      "decrease the yield of NH₃"
+     ],
+     "answer": 1,
+     "explanation": "There are fewer gas moles on the right (2 against 4).",
+     "id": "gceal-chemistry-ch-analysis-m02-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The iron catalyst",
+     "choices": [
+      "increases the rate but does not change the equilibrium yield",
+      "decreases ΔH",
+      "increases the yield",
+      "is used up"
+     ],
+     "answer": 0,
+     "explanation": "A catalyst speeds both reactions equally.",
+     "id": "gceal-chemistry-ch-analysis-m02-c"
+    }
+   ],
+   "chapter": "gceal-chemistry-ch-analysis"
+  }
+ ]
+}

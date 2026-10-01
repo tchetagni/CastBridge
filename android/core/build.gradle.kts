@@ -47,6 +47,16 @@ tasks.register<JavaExec>("buildLearnLots") {
     args(listOf("lots", learnContent.absolutePath, layout.buildDirectory.dir("learn-lots").get().asFile.absolutePath) + (if (project.hasProperty("update")) listOf("--update") else emptyList()))
 }
 
+// Transfer bench (docs/TRANSFER.md): gradle :core:transferBench -Pargs="--tv http://IP:8765 --pin 123456" (or tools/transfer-bench/run.sh)
+tasks.register<JavaExec>("transferBench") {
+    group = "castbridge"
+    description = "Measures phone -> TV throughput for 1, 2, 4, 8 connections (needs --tv, or --simulate)"
+    dependsOn(tasks.named("classes"))
+    classpath = learnToolClasspath
+    mainClass.set("castbridge.core.xfer.TransferBench")
+    args(((project.findProperty("args") as String?) ?: "--help").split(" ").filter { it.isNotEmpty() })
+}
+
 tasks.register<JavaExec>("reviewLearn") {
     group = "castbridge"
     description = "Writes docs/LEARN-REVIEW.md: per lot, what the teachers must verify"
@@ -65,11 +75,23 @@ tasks.register<JavaExec>("checkLearnContent") {
     args(listOf("check", learnContent.absolutePath) + ((project.findProperty("packs") as String?)?.split(",") ?: emptyList()))
 }
 
+// ---- Skill graph (docs/CONTENT-ARCHITECTURE.md): content/graph/*.json ----
+tasks.register<JavaExec>("checkContentGraph") {
+    group = "castbridge"
+    description = "Validates the curriculum skill graph (content/graph) and the content that names a skill"
+    dependsOn(tasks.named("compileKotlin"))
+    classpath = learnToolClasspath
+    mainClass.set("castbridge.core.curriculum.GraphTool")
+    args(listOf("check", rootProject.projectDir.parentFile.resolve("content").absolutePath) + (if (project.hasProperty("requireContent")) listOf("--require-content") else emptyList()))
+}
+
 // UTF-8 file names in tests, as on Android (CI/containers often have no locale set)
 tasks.test {
     environment("LC_ALL", "C.UTF-8")
     // « Apprendre »: the tests validate every pack source of the repository (docs/LEARN.md)
     systemProperty("learn.content", learnContent.absolutePath)
+    // Skill graph + scopes (content/graph): the tests validate them
+    systemProperty("graph.content", rootProject.projectDir.parentFile.resolve("content").absolutePath)
     // Charte graphique: the tests read branding/design-tokens.json (contrasts, generated Kotlin in sync)
     systemProperty("branding.dir", rootProject.projectDir.parentFile.resolve("branding").absolutePath)
     inputs.dir(rootProject.projectDir.parentFile.resolve("branding")).withPropertyName("branding").optional()
@@ -94,3 +116,16 @@ val checkStarterBudget by tasks.registering(JavaExec::class) {
     jvmArgs("-Dfile.encoding=UTF-8", "-Dstdout.encoding=UTF-8")
 }
 tasks.named("check") { dependsOn(checkStarterBudget) }
+
+// ---- « castbridge-owner » : the desk activation tool, one runnable jar for Mac / Windows / Linux (Java 17+) ----
+tasks.register<Jar>("ownerToolJar") {
+    group = "castbridge"
+    description = "Builds build/libs/castbridge-owner.jar (java -jar castbridge-owner.jar help)"
+    archiveBaseName.set("castbridge-owner"); archiveVersion.set("")
+    manifest { attributes["Main-Class"] = "castbridge.core.owner.OwnerCli" }
+    dependsOn(tasks.named("compileKotlin"))
+    from(sourceSets.main.get().output.classesDirs)
+    from({ configurations.runtimeClasspath.get().filter { it.name.endsWith(".jar") }.map { zipTree(it) } })
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    exclude("META-INF/*.SF", "META-INF/*.DSA", "META-INF/*.RSA", "META-INF/MANIFEST.MF")
+}

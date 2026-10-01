@@ -1,0 +1,634 @@
+{
+ "chapter": "form3-chemistry-separation",
+ "lessons": [
+  {
+   "id": "form3-chemistry-separation-methods",
+   "title": "Methods of separation",
+   "minutes": 30,
+   "programRef": "Form 3 Chemistry — Separation methods (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe filtration, evaporation, crystallisation, simple and fractional distillation, chromatography and use of a separating funnel.",
+    "Choose the correct method for a mixture.",
+    "Calculate Rf values and describe how melting and boiling points show purity."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form3-chemistry-separation-e01",
+    "form3-chemistry-separation-e02",
+    "form3-chemistry-separation-e03",
+    "form3-chemistry-separation-e04",
+    "form3-chemistry-separation-e05",
+    "form3-chemistry-separation-e06"
+   ],
+   "selfCheck": [
+    "form3-chemistry-separation-methods-q1",
+    "form3-chemistry-separation-methods-q2",
+    "form3-chemistry-separation-methods-q3",
+    "form3-chemistry-separation-methods-q4",
+    "form3-chemistry-separation-methods-q5"
+   ],
+   "reviewNotes": [
+    "Fractional distillation is mentioned at an introductory level; check the Form 3 syllabus. Safety: heating flammable liquids to be done by the teacher.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Choosing a method",
+     "md": "- **Filtration**: insoluble solid from a liquid (sand from water). The solid is the **residue**, the liquid the **filtrate**.\n- **Evaporation / crystallisation**: dissolved solid from a solution (salt from sea water; salt pans at the coast).\n- **Simple distillation**: pure solvent from a solution (pure water).\n- **Fractional distillation**: liquids with different boiling points (ethanol and water; crude oil).\n- **Separating funnel**: immiscible liquids (oil and water).\n- **Magnet**: iron from other solids. **Sublimation**: iodine or ammonium chloride from sand."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 200,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 70,
+        "cy": 125,
+        "r": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "line",
+        "x1": 70,
+        "y1": 95,
+        "x2": 70,
+        "y2": 70,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 70,
+        "y1": 70,
+        "x2": 170,
+        "y2": 62,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "poly",
+        "pts": [
+         60,
+         170,
+         70,
+         150,
+         80,
+         170
+        ],
+        "stroke": "ink",
+        "width": 1.5,
+        "closed": true,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 170,
+        "y": 55,
+        "w": 140,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "rect",
+        "x": 176,
+        "y": 63,
+        "w": 128,
+        "h": 14,
+        "stroke": "none",
+        "width": 0,
+        "fill": "lightblue"
+       },
+       {
+        "t": "line",
+        "x1": 310,
+        "y1": 70,
+        "x2": 345,
+        "y2": 120,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 325,
+        "y": 120,
+        "w": 60,
+        "h": 55,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "white"
+       },
+       {
+        "t": "rect",
+        "x": 327,
+        "y": 150,
+        "w": 56,
+        "h": 23,
+        "stroke": "none",
+        "width": 0,
+        "fill": "lightblue"
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 118,
+        "x2": 300,
+        "y2": 87,
+        "color": "blue",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 185,
+        "y1": 52,
+        "x2": 185,
+        "y2": 22,
+        "color": "blue",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 76,
+        "y1": 40,
+        "x2": 76,
+        "y2": 98,
+        "color": "red",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 268,
+        "y": 135,
+        "text": "cold water in",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 185,
+        "y": 16,
+        "text": "water out",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 76,
+        "y": 33,
+        "text": "thermometer",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 190,
+        "text": "flask + heat",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 105,
+        "text": "condenser",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 355,
+        "y": 192,
+        "text": "pure liquid",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Simple distillation of a solution.",
+     "alt": "A flask with a thermometer and heat on the left, a slanting condenser with cold water going in at the lower end and out at the upper end, and a beaker collecting pure liquid on the right."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Chromatography and purity",
+     "md": "In **paper chromatography** a spot of the mixture is placed above the solvent on the start line; the solvent rises and carries the substances by different distances. **Rf = distance moved by the substance ÷ distance moved by the solvent front**. The same substance always gives the same Rf in the same solvent. A **pure** substance has a **sharp** melting or boiling point; an impure one melts over a range and at a lower temperature, boils at a higher temperature."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 20,
+        "w": 180,
+        "h": 150,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "white"
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 150,
+        "x2": 310,
+        "y2": 150,
+        "color": "grey",
+        "width": 1.2,
+        "dash": true
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 40,
+        "x2": 310,
+        "y2": 40,
+        "color": "blue",
+        "width": 1.2,
+        "dash": true
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 154,
+        "text": "start line",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 44,
+        "text": "solvent front",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 160,
+        "cy": 96,
+        "r": 6,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 160,
+        "cy": 62,
+        "r": 6,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 220,
+        "cy": 96,
+        "r": 6,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 280,
+        "cy": 62,
+        "r": 6,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "blue"
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 186,
+        "text": "mixture",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 186,
+        "text": "dye 1",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 186,
+        "text": "dye 2",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 98,
+        "text": "spot",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A chromatogram: the mixture contains two dyes, as shown by comparing with dye 1 and dye 2.",
+     "alt": "A paper strip with a start line and solvent front; the mixture column has two spots matching the single spots of dye 1 and dye 2."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Filtration cannot separate a dissolved solid: use evaporation or crystallisation.\n- The start line of a chromatogram is drawn in **pencil** (pencil does not dissolve) and kept **above** the solvent.\n- Distillation uses a thermometer at the top of the flask near the side arm: it reads the boiling point of the vapour."
+    },
+    {
+     "type": "example",
+     "title": "Rf value",
+     "statement": "In a chromatogram the solvent front moved 6.0 cm and a dye spot moved 3.6 cm. Find its Rf.",
+     "steps": [
+      "Rf = 3.6 ÷ 6.0.",
+      "= 0.6."
+     ],
+     "answer": "Rf = 0.6"
+    },
+    {
+     "type": "example",
+     "title": "Separate salt and sand",
+     "statement": "Describe how to obtain dry sand and dry salt from a mixture.",
+     "steps": [
+      "Add water, stir to dissolve the salt, then filter; wash and dry the residue (sand).",
+      "Heat the filtrate in an evaporating dish until crystals form and dry them (salt)."
+     ],
+     "answer": "Dissolve, filter, evaporate the filtrate."
+    },
+    {
+     "type": "exercise",
+     "ref": "form3-chemistry-separation-e01"
+    }
+   ],
+   "chapter": "form3-chemistry-separation"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form3-chemistry-separation-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-chemistry-separation-methods",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which method separates ethanol from a mixture of ethanol and water?",
+   "choices": [
+    "chromatography only",
+    "filtration",
+    "using a magnet",
+    "fractional distillation"
+   ],
+   "answer": 3,
+   "explanation": "Their boiling points differ.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-chemistry-separation"
+  },
+  {
+   "id": "form3-chemistry-separation-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-chemistry-separation-methods",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A spot moves 2.4 cm while the solvent front moves 8.0 cm. Find the Rf.",
+   "answer": 0.3,
+   "tolerance": 0.01,
+   "explanation": "2.4 ÷ 8.0 = 0.3.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-chemistry-separation"
+  },
+  {
+   "id": "form3-chemistry-separation-e03",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "form3-chemistry-separation-methods",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each mixture with a separation method.",
+   "pairs": [
+    [
+     "sand and water",
+     "filtration"
+    ],
+    [
+     "oil and water",
+     "separating funnel"
+    ],
+    [
+     "iron filings and sulphur",
+     "magnet"
+    ],
+    [
+     "dyes in black ink",
+     "paper chromatography"
+    ]
+   ],
+   "explanation": "Based on different properties.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form3-chemistry-separation"
+  },
+  {
+   "id": "form3-chemistry-separation-e04",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "form3-chemistry-separation-methods",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A pure substance melts over a wide range of temperatures.",
+   "answer": false,
+   "explanation": "A pure substance has a sharp melting point.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form3-chemistry-separation"
+  },
+  {
+   "id": "form3-chemistry-separation-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form3-chemistry-separation-methods",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Describe how to obtain pure water from salt water in the laboratory.",
+   "model": "Heat the salt water in a flask fitted with a thermometer; the water boils and the steam passes through a condenser with cold water, where it condenses and is collected in a beaker; the salt remains in the flask.",
+   "rubric": [
+    "1 mark: boil",
+    "1 mark: condense in condenser",
+    "1 mark: collect pure water, salt left behind"
+   ],
+   "explanation": "Heat the salt water in a flask fitted with a thermometer; the water boils and the steam passes through a condenser with cold water, where it condenses and is collected in a beaker; the salt remains in the flask.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-chemistry-separation"
+  },
+  {
+   "id": "form3-chemistry-separation-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form3-chemistry-separation-methods",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A student has a mixture of salt, sand and iron filings.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which solid is removed first with a magnet?",
+     "choices": [
+      "salt",
+      "water",
+      "sand",
+      "iron"
+     ],
+     "answer": 3,
+     "explanation": "Only iron is attracted.",
+     "id": "form3-chemistry-separation-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "After adding water and filtering, the residue is:",
+     "choices": [
+      "sand",
+      "salt",
+      "iron",
+      "water"
+     ],
+     "answer": 0,
+     "explanation": "Sand is insoluble.",
+     "id": "form3-chemistry-separation-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "How is the salt obtained from the filtrate?",
+     "model": "Evaporate most of the water and crystallise the salt, or evaporate to dryness.",
+     "rubric": [
+      "1 mark for evaporation/crystallisation"
+     ],
+     "explanation": "Evaporate most of the water and crystallise the salt, or evaporate to dryness.",
+     "id": "form3-chemistry-separation-e06-c"
+    }
+   ],
+   "chapter": "form3-chemistry-separation"
+  },
+  {
+   "id": "form3-chemistry-separation-methods-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-chemistry-separation-methods",
+   "prompt": "The liquid that passes through a filter is the:",
+   "choices": [
+    "filtrate",
+    "precipitate",
+    "solvent front",
+    "residue"
+   ],
+   "answer": 0,
+   "explanation": "Filtrate.",
+   "chapter": "form3-chemistry-separation"
+  },
+  {
+   "id": "form3-chemistry-separation-methods-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-chemistry-separation-methods",
+   "prompt": "Rf is calculated as:",
+   "choices": [
+    "spot distance × solvent distance",
+    "spot distance − solvent distance",
+    "distance moved by the spot ÷ distance moved by the solvent",
+    "distance of solvent ÷ distance of spot"
+   ],
+   "answer": 2,
+   "explanation": "Always less than 1.",
+   "chapter": "form3-chemistry-separation"
+  },
+  {
+   "id": "form3-chemistry-separation-methods-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-chemistry-separation-methods",
+   "prompt": "Simple distillation is used to obtain:",
+   "choices": [
+    "pure water from salt water",
+    "salt from sand",
+    "sand from water",
+    "iron from sand"
+   ],
+   "answer": 0,
+   "explanation": "The liquid is boiled off and condensed.",
+   "chapter": "form3-chemistry-separation"
+  },
+  {
+   "id": "form3-chemistry-separation-methods-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-chemistry-separation-methods",
+   "prompt": "Crude oil is separated by:",
+   "choices": [
+    "fractional distillation",
+    "magnetism",
+    "filtration",
+    "crystallisation"
+   ],
+   "answer": 0,
+   "explanation": "Different boiling points.",
+   "chapter": "form3-chemistry-separation"
+  },
+  {
+   "id": "form3-chemistry-separation-methods-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-chemistry-separation-methods",
+   "prompt": "Which substance is likely pure?",
+   "choices": [
+    "one that colours the flame green",
+    "one with a sharp boiling point",
+    "one that boils over a wide range",
+    "one that floats"
+   ],
+   "answer": 1,
+   "explanation": "Purity test.",
+   "chapter": "form3-chemistry-separation"
+  }
+ ]
+}

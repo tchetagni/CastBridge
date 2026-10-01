@@ -121,6 +121,11 @@ class LotStore(
     }
 
     /** Deletes stale partial downloads (older than [olderThanMs]). */
+    /** Trial lots whose full twin is installed: removed (same identifiers inside the full lot, so nothing is lost; no duplicates). */
+    fun dropSupersededTrials(): List<LotId> = synchronized(lock) {
+        LotEditions.supersededTrials(entries.keys).also { ids -> ids.forEach { remove(it) } }
+    }
+
     fun purgeParts(olderThanMs: Long = 7L * 24 * 3600 * 1000) {
         File(dir, ".part").listFiles()?.filter { now() - it.lastModified() > olderThanMs }?.forEach { it.delete() }
     }

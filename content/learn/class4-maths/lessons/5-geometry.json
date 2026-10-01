@@ -1,0 +1,1460 @@
+{
+ "chapter": "class4-maths-geometry",
+ "lessons": [
+  {
+   "id": "class4-maths-perimeter-area",
+   "title": "Perimeter and area of rectangles and squares",
+   "minutes": 30,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level II (Class 4) — Mathematics; to be checked against the official syllabus",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Find the perimeter of a rectangle, a square and other shapes.",
+    "Find the area of a rectangle and a square.",
+    "Use the right units (m, m²)."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "class4-maths-geometry-e01",
+    "class4-maths-geometry-e02",
+    "class4-maths-geometry-e03",
+    "class4-maths-geometry-e04",
+    "class4-maths-geometry-e05",
+    "class4-maths-geometry-e06"
+   ],
+   "selfCheck": [
+    "class4-maths-perimeter-area-q1",
+    "class4-maths-perimeter-area-q2",
+    "class4-maths-perimeter-area-q3",
+    "class4-maths-perimeter-area-q4",
+    "class4-maths-perimeter-area-q5"
+   ],
+   "reviewNotes": [
+    "Area of rectangle and square only; triangles and other shapes belong to later classes.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Perimeter and area",
+     "md": "The **perimeter** is the **distance around** a shape: add all the sides. The **area** is the **space inside** a shape: we count square units (cm², m²). A rectangle with length $l$ and width $w$ has perimeter $2 \\times (l + w)$ and area $l \\times w$. A square with side $s$ has perimeter $4 \\times s$ and area $s \\times s$."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 160,
+      "items": [
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 30,
+        "w": 200,
+        "h": 100,
+        "stroke": "ink",
+        "width": 3,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 20,
+        "text": "12 m",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 272,
+        "y": 85,
+        "text": "8 m",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 85,
+        "text": "Area = 12 × 8",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A rectangle 12 m long and 8 m wide.",
+     "alt": "A rectangle labelled 12 m on the top side and 8 m on the right side. Inside it is written area equals 12 times 8."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Units",
+     "md": "Perimeter is a **length**: cm, m, km. Area is in **square units**: cm², m², km². A square metre (1 m²) is the area of a square with sides of 1 m. A football pitch or a plot of land is measured in m²."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Writing the area in metres instead of square metres.\n- Adding only two sides for the perimeter: add all four (or double the sum of length and width).\n- Multiplying for the perimeter or adding for the area.\n- Mixing up the units: change cm to m first."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "A rectangular school garden is 12 m long and 8 m wide. Find its perimeter and area.",
+     "steps": [
+      "Perimeter = 2 × (12 + 8) = 2 × 20 = 40 m.",
+      "Area = 12 × 8 = 96 m²."
+     ],
+     "answer": "Perimeter 40 m; area 96 m².",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 160,
+      "items": [
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 30,
+        "w": 200,
+        "h": 100,
+        "stroke": "ink",
+        "width": 3,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 20,
+        "text": "12 m",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 272,
+        "y": 85,
+        "text": "8 m",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 85,
+        "text": "Area = 12 × 8",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "A square classroom has a side of 7 m. What is its area?",
+     "steps": [
+      "Area of a square = side × side.",
+      "7 × 7 = 49."
+     ],
+     "answer": "49 m²"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class4-maths-geometry"
+  },
+  {
+   "id": "class4-maths-angles",
+   "title": "Angles: right, acute and obtuse",
+   "minutes": 25,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level II (Class 4) — Mathematics; to be checked against the official syllabus",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Say what an angle is and name its parts.",
+    "Tell right, acute, obtuse and straight angles apart.",
+    "Use a right angle as a test (set square)."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "class4-maths-geometry-e07",
+    "class4-maths-geometry-e08",
+    "class4-maths-geometry-e09",
+    "class4-maths-geometry-e10",
+    "class4-maths-geometry-e11",
+    "class4-maths-geometry-e12"
+   ],
+   "selfCheck": [
+    "class4-maths-angles-q1",
+    "class4-maths-angles-q2",
+    "class4-maths-angles-q3",
+    "class4-maths-angles-q4",
+    "class4-maths-angles-q5"
+   ],
+   "reviewNotes": [
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Angles",
+     "md": "An **angle** is formed where two lines (arms) meet at a point (the vertex). We measure angles in **degrees (°)**. A **right angle** is **90°** (a square corner). An **acute angle** is **less than 90°**. An **obtuse angle** is **more than 90° and less than 180°**. A **straight angle** is **180°**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 175,
+      "items": [
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 140,
+        "x2": 200,
+        "y2": 140,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 140,
+        "x2": 130,
+        "y2": 70,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "angle",
+        "x": 60,
+        "y": 140,
+        "from": 0,
+        "to": 45,
+        "r": 28,
+        "right": false,
+        "color": "red",
+        "label": "45°"
+       },
+       {
+        "t": "line",
+        "x1": 260,
+        "y1": 140,
+        "x2": 380,
+        "y2": 140,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 260,
+        "y1": 140,
+        "x2": 260,
+        "y2": 40,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "angle",
+        "x": 260,
+        "y": 140,
+        "from": 0,
+        "to": 90,
+        "r": 24,
+        "right": true,
+        "color": "red"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 100,
+        "text": "90°",
+        "size": 14,
+        "anchor": "middle",
+        "color": "red"
+       }
+      ]
+     },
+     "caption": "An acute angle (45°) and a right angle (90°).",
+     "alt": "Two angles. The first has a 45 degree arc between a horizontal line and a slanted line. The second is a right angle with a square mark and 90 degrees."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Finding angles around us",
+     "md": "The corner of a page, a door or a window is a **right angle**. The hands of a clock at 3 o'clock make a right angle. A quarter turn is 90°, a half turn is 180°, a full turn is 360°. Test an angle by placing the corner of a sheet of paper on it."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Thinking that a longer arm means a bigger angle: the **opening** matters, not the length of the lines.\n- Calling 120° acute: it is more than 90°, so it is **obtuse**.\n- Forgetting that a straight line is also an angle (180°)."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Say what kind of angle: 30°, 90°, 120°, 180°.",
+     "steps": [
+      "30° is less than 90°: acute. 90° is a right angle.",
+      "120° is more than 90° but less than 180°: obtuse. 180° is a straight angle."
+     ],
+     "answer": "acute, right, obtuse, straight."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "How many degrees does the minute hand turn from 12 to 3 on the clock?",
+     "steps": [
+      "From 12 to 3 is a quarter of a whole turn.",
+      "A whole turn is 360°, so 360 ÷ 4 = 90°."
+     ],
+     "answer": "90°",
+     "figure": {
+      "kind": "shapes",
+      "w": 200,
+      "h": 200,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 100.0,
+        "cy": 92.0,
+        "r": 70,
+        "stroke": "ink",
+        "width": 3,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 128.0,
+        "y": 48.50257738807144,
+        "text": "1",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 148.49742261192858,
+        "y": 69.0,
+        "text": "2",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 156.0,
+        "y": 97.0,
+        "text": "3",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 148.49742261192858,
+        "y": 125.0,
+        "text": "4",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 128.0,
+        "y": 145.49742261192856,
+        "text": "5",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 153.0,
+        "text": "6",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 72.00000000000001,
+        "y": 145.49742261192858,
+        "text": "7",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 51.50257738807143,
+        "y": 125.0,
+        "text": "8",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 44.0,
+        "y": 97.0,
+        "text": "9",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 51.50257738807144,
+        "y": 69.0,
+        "text": "10",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 71.99999999999997,
+        "y": 48.50257738807145,
+        "text": "11",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 99.99999999999999,
+        "y": 41.0,
+        "text": "12",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 100.0,
+        "y1": 92.0,
+        "x2": 138.0,
+        "y2": 92.0,
+        "color": "ink",
+        "width": 5
+       },
+       {
+        "t": "line",
+        "x1": 100.0,
+        "y1": 92.0,
+        "x2": 100.0,
+        "y2": 36.0,
+        "color": "red",
+        "width": 3
+       },
+       {
+        "t": "circle",
+        "cx": 100.0,
+        "cy": 92.0,
+        "r": 4,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "ink"
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 182.0,
+        "text": "3:00",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     }
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class4-maths-geometry"
+  },
+  {
+   "id": "class4-maths-shapes",
+   "title": "2-D and 3-D shapes",
+   "minutes": 30,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level II (Class 4) — Mathematics; to be checked against the official syllabus",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Name and describe common 2-D shapes (sides, corners).",
+    "Name common 3-D shapes (faces, edges, vertices).",
+    "Find shapes in the things around us."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "class4-maths-geometry-e13",
+    "class4-maths-geometry-e14",
+    "class4-maths-geometry-e15",
+    "class4-maths-geometry-e16",
+    "class4-maths-geometry-e17",
+    "class4-maths-geometry-e18"
+   ],
+   "selfCheck": [
+    "class4-maths-shapes-q1",
+    "class4-maths-shapes-q2",
+    "class4-maths-shapes-q3",
+    "class4-maths-shapes-q4",
+    "class4-maths-shapes-q5"
+   ],
+   "reviewNotes": [
+    "Cone/cylinder given at a basic level; face/edge/vertex counts for cube and cuboid are standard.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "2-D shapes",
+     "md": "A **2-D (flat) shape** has length and width. A **square** has 4 equal sides and 4 right angles. A **rectangle** has 4 sides (opposite sides equal) and 4 right angles. A **triangle** has 3 sides and 3 corners. A **circle** is round with no corners. A **pentagon** has 5 sides and a **hexagon** has 6."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 125,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 20,
+        "w": 60,
+        "h": 60,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 50,
+        "y": 100,
+        "text": "square",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 25,
+        "w": 90,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 155,
+        "y": 100,
+        "text": "rectangle",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         250,
+         80,
+         290,
+         80,
+         270,
+         25
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 100,
+        "text": "triangle",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 350,
+        "cy": 50,
+        "r": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 100,
+        "text": "circle",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Four flat shapes.",
+     "alt": "A square, a rectangle, a triangle and a circle, each with a name below."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "3-D shapes",
+     "md": "A **3-D (solid) shape** has length, width and height. A **cube** has 6 square faces, 12 edges and 8 vertices (corners). A **cuboid** has 6 rectangular faces, 12 edges and 8 vertices (a box). A **sphere** is round like a ball. A **cylinder** has two flat circles and one curved face. A **cone** has a circle and a point."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 145,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         30,
+         45,
+         55,
+         20,
+         125,
+         20,
+         100,
+         45
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         100,
+         45,
+         125,
+         20,
+         125,
+         70,
+         100,
+         95
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightorange"
+       },
+       {
+        "t": "rect",
+        "x": 30,
+        "y": 45,
+        "w": 70,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 120,
+        "text": "cuboid",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 40,
+        "w": 55,
+        "h": 55,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         150,
+         40,
+         170,
+         20,
+         225,
+         20,
+         205,
+         40
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         205,
+         40,
+         225,
+         20,
+         225,
+         75,
+         205,
+         95
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 120,
+        "text": "cube",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 310,
+        "cy": 70,
+        "r": 38,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 130,
+        "text": "sphere",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A cuboid, a cube and a sphere.",
+     "alt": "Three solid shapes: a cuboid like a box, a cube and a sphere, each with a name."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Saying that a square is not a rectangle: a square is a special rectangle with 4 equal sides.\n- Calling a flat shape (circle) a solid shape (sphere).\n- Counting the faces of a cube as 4: there are 6."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Name the shape of: a football, a tin of milk, a dice, a door.",
+     "steps": [
+      "A football is round: sphere. A tin of milk is a cylinder.",
+      "A dice is a cube. A door is a rectangle (its face)."
+     ],
+     "answer": "sphere, cylinder, cube, rectangle."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "How many faces, edges and vertices does a cuboid have?",
+     "steps": [
+      "Faces: top, bottom and four sides = 6.",
+      "Edges = 12 and vertices (corners) = 8."
+     ],
+     "answer": "6 faces, 12 edges, 8 vertices."
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class4-maths-geometry"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "class4-maths-geometry-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class4-maths-perimeter-area",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Perimeter of a rectangle 9 cm by 5 cm.",
+   "answer": 28,
+   "tolerance": 0,
+   "unit": "cm",
+   "explanation": "2 × 14 = 28.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-geometry"
+  },
+  {
+   "id": "class4-maths-geometry-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class4-maths-perimeter-area",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Area of a square of side 6 m.",
+   "answer": 36,
+   "tolerance": 0,
+   "unit": "m²",
+   "explanation": "6 × 6.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-geometry"
+  },
+  {
+   "id": "class4-maths-geometry-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class4-maths-perimeter-area",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which unit is used for area?",
+   "choices": [
+    "m²",
+    "m",
+    "kg",
+    "litre"
+   ],
+   "answer": 0,
+   "explanation": "Area uses square units.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-geometry"
+  },
+  {
+   "id": "class4-maths-geometry-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class4-maths-perimeter-area",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A rectangle has area 60 m² and length 10 m. What is its width?",
+   "answer": 6,
+   "tolerance": 0,
+   "unit": "m",
+   "explanation": "60 ÷ 10 = 6.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-geometry"
+  },
+  {
+   "id": "class4-maths-geometry-e05",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class4-maths-perimeter-area",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A square with a perimeter of 20 cm has sides of 5 cm.",
+   "answer": true,
+   "explanation": "20 ÷ 4 = 5.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-geometry"
+  },
+  {
+   "id": "class4-maths-geometry-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class4-maths-perimeter-area",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Mr Tabi has a rectangular plot in Bali, 25 m long and 20 m wide. He wants to put a fence around it and to plant maize in it.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "What length of fence does he need?",
+     "answer": 90,
+     "tolerance": 0,
+     "explanation": "2 × 45 = 90.",
+     "unit": "m",
+     "id": "class4-maths-geometry-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "What is the area of the plot?",
+     "answer": 500,
+     "tolerance": 0,
+     "explanation": "25 × 20 = 500.",
+     "unit": "m²",
+     "id": "class4-maths-geometry-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "The fence costs 1,500 FCFA per metre. What is the cost?",
+     "answer": 135000,
+     "tolerance": 0,
+     "explanation": "90 × 1,500 = 135,000.",
+     "unit": "FCFA",
+     "id": "class4-maths-geometry-e06-c"
+    }
+   ],
+   "chapter": "class4-maths-geometry"
+  },
+  {
+   "id": "class4-maths-perimeter-area-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-perimeter-area",
+   "prompt": "Class 4 Maths (Perimeter and area of rectangles and squar) – The distance around a shape is its...",
+   "choices": [
+    "angle",
+    "perimeter",
+    "volume",
+    "area"
+   ],
+   "answer": 1,
+   "explanation": "Add all sides.",
+   "chapter": "class4-maths-geometry"
+  },
+  {
+   "id": "class4-maths-perimeter-area-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-perimeter-area",
+   "prompt": "Class 4 Maths (Perimeter and area of rectangles and squar) – Area of a rectangle 5 m by 4 m is...",
+   "choices": [
+    "20 m²",
+    "18 m",
+    "20 m",
+    "9 m²"
+   ],
+   "answer": 0,
+   "explanation": "5 × 4 = 20 square metres.",
+   "chapter": "class4-maths-geometry"
+  },
+  {
+   "id": "class4-maths-perimeter-area-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-perimeter-area",
+   "prompt": "Class 4 Maths (Perimeter and area of rectangles and squar) – Perimeter of a square with side 3 cm is...",
+   "choices": [
+    "9 cm",
+    "9 cm²",
+    "12 cm",
+    "6 cm"
+   ],
+   "answer": 2,
+   "explanation": "4 × 3.",
+   "chapter": "class4-maths-geometry"
+  },
+  {
+   "id": "class4-maths-perimeter-area-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-perimeter-area",
+   "prompt": "Class 4 Maths (Perimeter and area of rectangles and squar) – The area is measured in...",
+   "choices": [
+    "kilograms",
+    "litres",
+    "metres only",
+    "square units"
+   ],
+   "answer": 3,
+   "explanation": "For example cm² or m².",
+   "chapter": "class4-maths-geometry"
+  },
+  {
+   "id": "class4-maths-perimeter-area-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-perimeter-area",
+   "prompt": "Class 4 Maths (Perimeter and area of rectangles and squar) – A rectangle 10 cm by 3 cm has perimeter...",
+   "choices": [
+    "26 cm",
+    "13 cm",
+    "36 cm",
+    "30 cm"
+   ],
+   "answer": 0,
+   "explanation": "2 × (10 + 3).",
+   "chapter": "class4-maths-geometry"
+  },
+  {
+   "id": "class4-maths-geometry-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class4-maths-angles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An angle of 45° is...",
+   "choices": [
+    "obtuse",
+    "acute",
+    "straight",
+    "right"
+   ],
+   "answer": 1,
+   "explanation": "It is less than 90°.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-geometry"
+  },
+  {
+   "id": "class4-maths-geometry-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class4-maths-angles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many degrees are in a right angle?",
+   "answer": 90,
+   "tolerance": 0,
+   "unit": "°",
+   "explanation": "A square corner is 90°.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-geometry"
+  },
+  {
+   "id": "class4-maths-geometry-e09",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class4-maths-angles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which angle is obtuse?",
+   "choices": [
+    "135°",
+    "35°",
+    "180°",
+    "90°"
+   ],
+   "answer": 0,
+   "explanation": "Between 90° and 180°.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-geometry"
+  },
+  {
+   "id": "class4-maths-geometry-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class4-maths-angles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many degrees are in a half turn?",
+   "answer": 180,
+   "tolerance": 0,
+   "unit": "°",
+   "explanation": "360 ÷ 2.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-geometry"
+  },
+  {
+   "id": "class4-maths-geometry-e11",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "class4-maths-angles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match the angle with its name.",
+   "pairs": [
+    [
+     "60°",
+     "acute"
+    ],
+    [
+     "90°",
+     "right angle"
+    ],
+    [
+     "150°",
+     "obtuse"
+    ],
+    [
+     "180°",
+     "straight angle"
+    ]
+   ],
+   "explanation": "Compare with 90°.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "class4-maths-geometry"
+  },
+  {
+   "id": "class4-maths-geometry-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class4-maths-angles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Look at the clock at different times.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "At 3:00, the angle between the hands is a...",
+     "choices": [
+      "acute angle",
+      "right angle",
+      "straight angle",
+      "obtuse angle"
+     ],
+     "answer": 1,
+     "explanation": "Quarter turn = 90°.",
+     "id": "class4-maths-geometry-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "At 6:00, the angle between the hands is a...",
+     "choices": [
+      "acute angle",
+      "obtuse angle",
+      "straight angle",
+      "right angle"
+     ],
+     "answer": 2,
+     "explanation": "Half turn = 180°.",
+     "id": "class4-maths-geometry-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "How many degrees is a quarter of a full turn?",
+     "answer": 90,
+     "tolerance": 0,
+     "explanation": "360 ÷ 4 = 90.",
+     "unit": "°",
+     "id": "class4-maths-geometry-e12-c"
+    }
+   ],
+   "chapter": "class4-maths-geometry"
+  },
+  {
+   "id": "class4-maths-angles-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-angles",
+   "prompt": "Class 4 Maths (Angles) – An angle less than 90° is called...",
+   "choices": [
+    "obtuse",
+    "acute",
+    "right",
+    "straight"
+   ],
+   "answer": 1,
+   "explanation": "Acute angles are small.",
+   "chapter": "class4-maths-geometry"
+  },
+  {
+   "id": "class4-maths-angles-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-angles",
+   "prompt": "Class 4 Maths (Angles) – A square corner is...",
+   "choices": [
+    "360°",
+    "180°",
+    "45°",
+    "90°"
+   ],
+   "answer": 3,
+   "explanation": "A right angle.",
+   "chapter": "class4-maths-geometry"
+  },
+  {
+   "id": "class4-maths-angles-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-angles",
+   "prompt": "Class 4 Maths (Angles) – The unit for measuring angles is the...",
+   "choices": [
+    "metre",
+    "degree",
+    "gram",
+    "litre"
+   ],
+   "answer": 1,
+   "explanation": "Written °.",
+   "chapter": "class4-maths-geometry"
+  },
+  {
+   "id": "class4-maths-angles-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-angles",
+   "prompt": "Class 4 Maths (Angles) – A full turn is...",
+   "choices": [
+    "100°",
+    "360°",
+    "180°",
+    "90°"
+   ],
+   "answer": 1,
+   "explanation": "All the way round.",
+   "chapter": "class4-maths-geometry"
+  },
+  {
+   "id": "class4-maths-angles-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-angles",
+   "prompt": "Class 4 Maths (Angles) – Which of these is obtuse?",
+   "choices": [
+    "90°",
+    "100°",
+    "80°",
+    "20°"
+   ],
+   "answer": 1,
+   "explanation": "More than 90°, less than 180°.",
+   "chapter": "class4-maths-geometry"
+  },
+  {
+   "id": "class4-maths-geometry-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class4-maths-shapes",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many sides has a hexagon?",
+   "answer": 6,
+   "tolerance": 0,
+   "explanation": "Hex means six.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-geometry"
+  },
+  {
+   "id": "class4-maths-geometry-e14",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class4-maths-shapes",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What 3-D shape is a cooking gas bottle most like?",
+   "choices": [
+    "square",
+    "cylinder",
+    "cube",
+    "cone"
+   ],
+   "answer": 1,
+   "explanation": "It has two circle ends and a curved side.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-geometry"
+  },
+  {
+   "id": "class4-maths-geometry-e15",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class4-maths-shapes",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which shape has no corners?",
+   "choices": [
+    "circle",
+    "square",
+    "triangle",
+    "rectangle"
+   ],
+   "answer": 0,
+   "explanation": "A circle is round.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-geometry"
+  },
+  {
+   "id": "class4-maths-geometry-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class4-maths-shapes",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many vertices has a cube?",
+   "answer": 8,
+   "tolerance": 0,
+   "explanation": "A cube has 8 corners.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-geometry"
+  },
+  {
+   "id": "class4-maths-geometry-e17",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class4-maths-shapes",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A square is a special kind of rectangle.",
+   "answer": true,
+   "explanation": "It has four right angles and its sides are all equal.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-geometry"
+  },
+  {
+   "id": "class4-maths-geometry-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class4-maths-shapes",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Neba studies the objects in her classroom: a ball, a box of chalk, a blackboard and a tin.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "A box of chalk is most like a...",
+     "choices": [
+      "sphere",
+      "cone",
+      "cuboid",
+      "cylinder"
+     ],
+     "answer": 2,
+     "explanation": "It has 6 rectangular faces.",
+     "id": "class4-maths-geometry-e18-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The face of the blackboard is a...",
+     "choices": [
+      "sphere",
+      "circle",
+      "rectangle",
+      "triangle"
+     ],
+     "answer": 2,
+     "explanation": "It has 4 right angles.",
+     "id": "class4-maths-geometry-e18-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "How many edges has the box of chalk?",
+     "answer": 12,
+     "tolerance": 0,
+     "explanation": "A cuboid has 12 edges.",
+     "id": "class4-maths-geometry-e18-c"
+    }
+   ],
+   "chapter": "class4-maths-geometry"
+  },
+  {
+   "id": "class4-maths-shapes-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-shapes",
+   "prompt": "Class 4 Maths (2-D and 3-D shapes) – A triangle has how many sides?",
+   "choices": [
+    "5",
+    "6",
+    "3",
+    "4"
+   ],
+   "answer": 2,
+   "explanation": "Tri means three.",
+   "chapter": "class4-maths-geometry"
+  },
+  {
+   "id": "class4-maths-shapes-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-shapes",
+   "prompt": "Class 4 Maths (2-D and 3-D shapes) – A dice is shaped like a...",
+   "choices": [
+    "cone",
+    "sphere",
+    "cube",
+    "cylinder"
+   ],
+   "answer": 2,
+   "explanation": "It has 6 square faces.",
+   "chapter": "class4-maths-geometry"
+  },
+  {
+   "id": "class4-maths-shapes-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-shapes",
+   "prompt": "Class 4 Maths (2-D and 3-D shapes) – A cuboid has how many faces?",
+   "choices": [
+    "6",
+    "12",
+    "4",
+    "8"
+   ],
+   "answer": 0,
+   "explanation": "Top, bottom and 4 sides.",
+   "chapter": "class4-maths-geometry"
+  },
+  {
+   "id": "class4-maths-shapes-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-shapes",
+   "prompt": "Class 4 Maths (2-D and 3-D shapes) – Which 3-D shape is like a ball?",
+   "choices": [
+    "sphere",
+    "cube",
+    "cone",
+    "square"
+   ],
+   "answer": 0,
+   "explanation": "Round all over.",
+   "chapter": "class4-maths-geometry"
+  },
+  {
+   "id": "class4-maths-shapes-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-shapes",
+   "prompt": "Class 4 Maths (2-D and 3-D shapes) – How many sides has a pentagon?",
+   "choices": [
+    "5",
+    "8",
+    "4",
+    "6"
+   ],
+   "answer": 0,
+   "explanation": "Penta means five.",
+   "chapter": "class4-maths-geometry"
+  }
+ ]
+}

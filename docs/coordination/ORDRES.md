@@ -22,3 +22,5 @@ ORDRE 2 | 2026-10-01 15:25 | A: Castbridge-cloud | cahier: integration-2 | Fusio
 ORDRE 3 | 2026-10-01 15:25 | A: castbridge-content | cahier: content-export | Instantané du contenu dans castbridge-content (accords du propriétaire requis, voir le cahier).
 ORDRE 4 | 2026-10-01 15:28 | A: castbridge-content | cahier: content-phase1 | Corrections de ton rapport puis première vague de contenu N2/N4 dans castbridge-content.
 ORDRE 5 | 2026-10-01 15:54 | A: castbridge-content | cahier: content-phase2 | Vague 2 : Quiz N2/N4 puis autres classes et matières ; tu es la session permanente des contenus d'apprentissage.
+ORDRE 6 | 2026-10-01 16:54 | A: castbridge-content | cahier: content-langues-w1 | Langues, vague 1 (A0 à A2, 7 langues) : à faire avant la suite de la phase 2 ; deux familles de lots (libres SA / réservés).
+ORDRE 7 | 2026-10-01 17:09 | A: Castbridge-cloud | cahier: activation-tools | URGENT : outils d'activation (bureau d'abord) à partir du format livré (docs/ACTIVATION-FORMAT.md, 65 vecteurs).

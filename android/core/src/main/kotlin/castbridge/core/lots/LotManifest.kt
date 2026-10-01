@@ -26,10 +26,12 @@ object LotHash {
 /** Names of lots: ids are safe path segments, file names are the same on the server, the phone and the TV. */
 object LotNames {
     private val SEGMENT = Regex("^[a-z0-9][a-z0-9-]{0,31}$")
-    private val FILE = Regex("^castbridge-lot-([a-z0-9][a-z0-9-]{0,31})-([a-z0-9][a-z0-9-]{0,31})-v(\\d{1,9})\\.lot$")
+    /** A feature is a single word (no hyphen), so that "castbridge-lot-learn-cm2-trial-v1.lot" parses without ambiguity: scopes may contain hyphens ("droit-l1", "cm2-trial"). */
+    private val FEATURE = Regex("^[a-z0-9]{1,32}$")
+    private val FILE = Regex("^castbridge-lot-([a-z0-9]{1,32})-([a-z0-9][a-z0-9-]{0,31})-v(\\d{1,9})\\.lot$")
     const val PROOF_SUFFIX = ".json"
 
-    fun valid(id: LotId) = SEGMENT.matches(id.feature) && SEGMENT.matches(id.scope)
+    fun valid(id: LotId) = FEATURE.matches(id.feature) && SEGMENT.matches(id.scope)
     /** "learn:cm2" (stable key for maps, query strings and files). */
     fun key(id: LotId) = "${id.feature}:${id.scope}"
     fun parseKey(k: String): LotId? = k.split(':').takeIf { it.size == 2 }?.let { LotId(it[0], it[1]) }?.takeIf(::valid)
@@ -42,14 +44,15 @@ object LotNames {
     }
 }
 
-fun LotMeta.toMap(): Map<String, Any?> = linkedMapOf("feature" to id.feature, "scope" to id.scope, "version" to version, "bytes" to bytes,
-    "sha256" to sha256, "title" to title, "minAppVersion" to minAppVersion)
+fun LotMeta.toMap(): Map<String, Any?> = linkedMapOf<String, Any?>("feature" to id.feature, "scope" to id.scope, "version" to version, "bytes" to bytes,
+    "sha256" to sha256, "title" to title, "minAppVersion" to minAppVersion).also { if (edition == Edition.TRIAL) it["edition"] = "trial" }
 
 fun parseLotMeta(m: Map<String, Any?>): LotMeta? = runCatching {
     val id = LotId(m.str("feature") ?: error("feature"), m.str("scope") ?: error("scope"))
     LotMeta(id, m.int("version") ?: error("version"), m.long("bytes") ?: error("bytes"), (m.str("sha256") ?: error("sha256")).lowercase(),
-        m.str("title") ?: "", m.int("minAppVersion") ?: 0)
-}.getOrNull()?.takeIf { LotNames.valid(it.id) && it.version > 0 && it.bytes >= 0 && it.sha256.length == 64 }
+        m.str("title") ?: "", m.int("minAppVersion") ?: 0,
+        when (m.str("edition")) { null, "full" -> Edition.FULL; "trial" -> Edition.TRIAL; else -> error("edition") })
+}.getOrNull()?.takeIf { LotNames.valid(it.id) && it.version > 0 && it.bytes >= 0 && it.sha256.length == 64 && LotEditions.consistent(it) }
 
 /**
  * The signed catalog of the server (GET /api/v1/lots/catalog?feature=&channel=, backend LotManifest.java).
@@ -78,7 +81,9 @@ data class LotManifest(
         add("feature=${feature ?: "*"}")
         add("generatedAt=$generatedAt")
         lots.sortedWith(compareBy({ it.id.feature }, { it.id.scope }, { it.version })).forEach {
-            add("lot=${it.id.feature}|${it.id.scope}|${it.version}|${it.bytes}|${it.sha256}|${it.minAppVersion}|${LotHash.sha256Hex(it.title.toByteArray(Charsets.UTF_8))}")
+            add("lot=${it.id.feature}|${it.id.scope}|${it.version}|${it.bytes}|${it.sha256}|${it.minAppVersion}|${LotHash.sha256Hex(it.title.toByteArray(Charsets.UTF_8))}" +
+                // FULL lines are unchanged (old signatures stay valid); a TRIAL lot is bound by its signature so nobody can pass one off as FULL
+                if (it.edition == Edition.TRIAL) "|trial" else "")
         }
     }.joinToString("\n")
 

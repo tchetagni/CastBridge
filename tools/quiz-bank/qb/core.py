@@ -154,7 +154,7 @@ def build_question(course, d, tpl, verif, source_text, region=None, category=Non
     wrongs = pick_distractors(d.text, d.right, d.wrongs, d.alt)
     if wrongs is None:
         return None
-    pos = int(sha("p|" + d.text + d.right)[:4], 16) % 4
+    pos = int(sha("p|" + c.get("salt", "") + d.text + d.right)[:4], 16) % 4      # `salt` (optional, per course) re-draws the positions: see tools/quiz-bank/lycee_caps.py
     choices = wrongs[:]
     choices.insert(pos, d.right)
     region = d.region or region or ("WORLD" if course != "general" else "CM")
@@ -163,7 +163,7 @@ def build_question(course, d, tpl, verif, source_text, region=None, category=Non
         "track": c["track"], "level": c["level"], "field": c["field"], "region": region,
         "category": d.cat or category, "difficulty": d.diff or difficulty, "question": d.text, "choices": choices,
         "answer": pos, "explanation": d.expl, "source": d.src or source_text, "status": STATUS_REVIEW, "verif": verif,
-        "lang": c.get("lang", "fr"), "tpl": tpl,
+        "lang": getattr(d, "lang", None) or c.get("lang", "fr"), "tpl": tpl,
     }
 
 
