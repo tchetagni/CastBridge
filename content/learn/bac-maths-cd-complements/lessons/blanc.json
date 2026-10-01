@@ -1,0 +1,233 @@
+{
+ "chapter": "bac-maths-cd-complements-ch-limites",
+ "lessons": [],
+ "exercises": [
+  {
+   "id": "bac-maths-cd-complements-blanc-ex1",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "bac-maths-cd-complements-proba",
+   "prompt": "Une usine fictive de jus de Douala a deux chaînes de remplissage : la chaîne A produit 60 % des bouteilles, la chaîne B 40 %. 2 % des bouteilles de A et 5 % de celles de B sont défectueuses. On choisit une bouteille au hasard.",
+   "parts": [
+    {
+     "id": "bac-maths-cd-complements-blanc-ex1-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la probabilité que la bouteille soit défectueuse.",
+     "explanation": "$P(D) = 0{,}6 \\times 0{,}02 + 0{,}4 \\times 0{,}05 = 0{,}012 + 0{,}02 = 0{,}032$.",
+     "answer": 0.032,
+     "tolerance": 0.0001
+    },
+    {
+     "id": "bac-maths-cd-complements-blanc-ex1-b",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "La bouteille est défectueuse : quelle est la probabilité qu'elle vienne de B ?",
+     "explanation": "$P_D(B) = \\frac{0{,}4 \\times 0{,}05}{0{,}032} = \\frac{0{,}02}{0{,}032} = 0{,}625$.",
+     "answer": 0.625,
+     "tolerance": 0.001
+    },
+    {
+     "id": "bac-maths-cd-complements-blanc-ex1-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "On prélève 12 bouteilles de façon indépendante et X est le nombre de bouteilles défectueuses (loi binomiale de paramètres 12 et 0,032). Calcule $E(X)$.",
+     "explanation": "$E(X) = np = 12 \\times 0{,}032 = 0{,}384$.",
+     "answer": 0.384,
+     "tolerance": 0.001
+    },
+    {
+     "id": "bac-maths-cd-complements-blanc-ex1-d",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule $P(X = 0)$, arrondi à 0,001.",
+     "explanation": "$P(X = 0) = 0{,}968^{12} \\approx 0{,}6769$.",
+     "answer": 0.677,
+     "tolerance": 0.001
+    },
+    {
+     "id": "bac-maths-cd-complements-blanc-ex1-e",
+     "kind": "numeric",
+     "points": 0.5,
+     "prompt": "Déduis-en la probabilité qu'au moins une bouteille soit défectueuse (arrondi à 0,001).",
+     "explanation": "$1 - 0{,}6769 \\approx 0{,}3231$.",
+     "answer": 0.323,
+     "tolerance": 0.001
+    }
+   ],
+   "method": "Probabilités totales, Bayes, loi binomiale.",
+   "mistakes": [
+    "Confondre $P_D(B)$ et $P_B(D)$."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-cd-complements-blanc-ex2",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "bac-maths-cd-complements-espace",
+   "prompt": "Dans un repère orthonormé de l'espace, on donne le plan P d'équation $x + 2y - 2z - 3 = 0$, le point $A(1, 1, 0)$ et le point $M(2, 3, 1)$.",
+   "parts": [
+    {
+     "id": "bac-maths-cd-complements-blanc-ex2-a",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Un vecteur normal à P est :",
+     "explanation": "Les coefficients de x, y, z sont 1, 2, −2.",
+     "choices": [
+      "$\\vec{n}(1, 2, 2)$",
+      "$\\vec{n}(1, 2, -3)$",
+      "$\\vec{n}(2, 3, 1)$",
+      "$\\vec{n}(1, 2, -2)$"
+     ],
+     "answer": 3
+    },
+    {
+     "id": "bac-maths-cd-complements-blanc-ex2-b",
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "Le point A appartient à P.",
+     "explanation": "$1 + 2 - 0 - 3 = 0$.",
+     "answer": true
+    },
+    {
+     "id": "bac-maths-cd-complements-blanc-ex2-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule la distance de M au plan P.",
+     "explanation": "$\\frac{|2 + 6 - 2 - 3|}{\\sqrt{1 + 4 + 4}} = \\frac{3}{3} = 1$.",
+     "answer": 1,
+     "tolerance": 0.001
+    },
+    {
+     "id": "bac-maths-cd-complements-blanc-ex2-d",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Le projeté orthogonal H de M sur P s'écrit $H = M + t\\,\\vec{n}$, soit $(2 + t, 3 + 2t, 1 - 2t)$. Détermine t (arrondi à 0,001).",
+     "explanation": "On remplace dans l'équation de P : $9t + 3 = 0$, donc $t = -\\frac{1}{3}$.",
+     "answer": -0.333,
+     "tolerance": 0.001
+    },
+    {
+     "id": "bac-maths-cd-complements-blanc-ex2-e",
+     "kind": "numeric",
+     "points": 0.5,
+     "prompt": "Donne l'abscisse de H (arrondie à 0,001).",
+     "explanation": "$x_H = 2 - \\frac{1}{3} = \\frac{5}{3} \\approx 1{,}667$.",
+     "answer": 1.667,
+     "tolerance": 0.001
+    }
+   ],
+   "method": "Vecteur normal, distance, projection orthogonale par une droite paramétrée.",
+   "mistakes": [
+    "Oublier la valeur absolue dans la distance."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-cd-complements-blanc-pb",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "bac-maths-cd-complements-diff",
+   "prompt": "Partie A. On considère l'équation différentielle (E) : $y' = -2y + 4$ et g la solution de (E) telle que $g(0) = 5$.\nPartie B. Soit f la fonction définie sur $\\mathbb{R}$ par $f(x) = x + g(x)$ ; $(C)$ est sa courbe.",
+   "parts": [
+    {
+     "id": "bac-maths-cd-complements-blanc-pb-a",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Partie A. La solution constante de (E) est :",
+     "explanation": "$0 = -2y + 4$ donne $y = 2$ ; les solutions sont $g(x) = Ce^{-2x} + 2$.",
+     "choices": [
+      "−2",
+      "4",
+      "2",
+      "0"
+     ],
+     "answer": 2
+    },
+    {
+     "id": "bac-maths-cd-complements-blanc-pb-b",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Partie A. Détermine C tel que $g(0) = 5$.",
+     "explanation": "$C + 2 = 5$ donc $C = 3$ : $g(x) = 3e^{-2x} + 2$.",
+     "answer": 3,
+     "tolerance": 0
+    },
+    {
+     "id": "bac-maths-cd-complements-blanc-pb-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Partie A. Calcule $g(1)$, arrondi à 0,001.",
+     "explanation": "$g(1) = 3e^{-2} + 2 \\approx 2{,}406$.",
+     "answer": 2.406,
+     "tolerance": 0.001
+    },
+    {
+     "id": "bac-maths-cd-complements-blanc-pb-d",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Partie A. Que vaut $\\lim_{x \\to +\\infty} g(x)$ ?",
+     "explanation": "$e^{-2x} \\to 0$, donc $g(x) \\to 2$.",
+     "choices": [
+      "0",
+      "2",
+      "$+\\infty$",
+      "5"
+     ],
+     "answer": 1
+    },
+    {
+     "id": "bac-maths-cd-complements-blanc-pb-e",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Partie B. $f(x) = x + 2 + 3e^{-2x}$. La droite $y = x + b$ est asymptote oblique de (C) en $+\\infty$. Donne b.",
+     "explanation": "$f(x) - (x + 2) = 3e^{-2x} \\to 0$ : $b = 2$.",
+     "answer": 2,
+     "tolerance": 0
+    },
+    {
+     "id": "bac-maths-cd-complements-blanc-pb-f",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Partie B. $f'(x) = 1 - 6e^{-2x}$ s'annule en $x_0$. Donne $x_0$, arrondi à 0,001.",
+     "explanation": "$1 - 6e^{-2x} = 0 \\Leftrightarrow e^{-2x} = \\frac{1}{6} \\Leftrightarrow x_0 = \\frac{\\ln 6}{2} \\approx 0{,}896$ ; f' est négative avant, positive après.",
+     "answer": 0.896,
+     "tolerance": 0.001
+    },
+    {
+     "id": "bac-maths-cd-complements-blanc-pb-g",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Partie B. Calcule le minimum $f(x_0)$, arrondi à 0,001.",
+     "explanation": "$f(x_0) = \\frac{\\ln 6}{2} + 2 + 3 \\times \\frac{1}{6} = \\frac{\\ln 6}{2} + 2{,}5 \\approx 3{,}396$.",
+     "answer": 3.396,
+     "tolerance": 0.001
+    },
+    {
+     "id": "bac-maths-cd-complements-blanc-pb-h",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Partie B. En $-\\infty$, $\\frac{f(x)}{x}$ tend vers $-\\infty$ ; la courbe (C) présente :",
+     "explanation": "$\\frac{3e^{-2x}}{x} \\to -\\infty$ quand $x \\to -\\infty$ (croissances comparées) : branche parabolique de direction (Oy).",
+     "choices": [
+      "une asymptote oblique de pente −1",
+      "une branche parabolique de direction (Oy)",
+      "une asymptote horizontale",
+      "une branche parabolique de direction (Ox)"
+     ],
+     "answer": 1
+    }
+   ],
+   "method": "Équation différentielle, limites, asymptote oblique, dérivée et minimum, branche infinie.",
+   "mistakes": [
+    "Oublier la solution constante.",
+    "Dire $e^{-2x} \\to 0$ en $-\\infty$."
+   ],
+   "source": "Exercice original, style Bac"
+  }
+ ]
+}

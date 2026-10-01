@@ -1,0 +1,408 @@
+{
+ "chapter": "bac-maths-a-ch-lnexp",
+ "lessons": [
+  {
+   "id": "bac-maths-a-ln-exp",
+   "title": "Logarithme népérien et exponentielle",
+   "minutes": 35,
+   "programRef": "Tle A — Analyse : fonctions ln et exp, niveau simple (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Utiliser les propriétés algébriques de ln et de exp.",
+    "Résoudre des équations et inéquations simples avec ln et exp.",
+    "Dériver des fonctions de la forme $e^{u}$ et $\\ln u$.",
+    "Étudier une fonction simple contenant ln ou exp."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Logarithme népérien et exponentielle",
+     "md": "La fonction **ln** est définie sur ]0 ; +∞[ : ln x n'existe que pour x > 0. La fonction **exp** (notée $e^x$) est définie sur $\\mathbb{R}$ et $e^x>0$ pour tout x. Ce sont des fonctions **réciproques** :\n- $\\ln(e^x)=x$ pour tout réel x ;\n- $e^{\\ln x}=x$ pour tout x > 0 ;\n- ln 1 = 0 ; ln e = 1 ; $e^0=1$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Règles de calcul",
+     "md": "Pour a > 0 et b > 0 :\n- $\\ln(ab)=\\ln a+\\ln b$ ; $\\ln\\frac{a}{b}=\\ln a-\\ln b$ ; $\\ln(a^n)=n\\ln a$.\nPour tous réels a et b :\n- $e^{a+b}=e^a\\times e^b$ ; $e^{-a}=\\frac{1}{e^a}$ ; $(e^a)^n=e^{na}$."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : équations et inéquations",
+     "md": "- $\\ln x=a \\Leftrightarrow x=e^a$ (avec x > 0).\n- $e^x=a \\Leftrightarrow x=\\ln a$ (seulement si a > 0 ; si a ≤ 0 il n'y a **pas de solution**).\n- ln et exp sont **croissantes** : $\\ln x<\\ln y \\Leftrightarrow x<y$ et $e^x<e^y\\Leftrightarrow x<y$.\nPense à vérifier les conditions d'existence avant de résoudre."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Dérivées et limites",
+     "md": "- $(\\ln x)'=\\frac{1}{x}$ ; $(e^x)'=e^x$.\n- $(\\ln u)'=\\frac{u'}{u}$ (u > 0) ; $(e^{u})'=u'e^{u}$.\n- Limites : $\\lim_{x\\to+\\infty}\\ln x=+\\infty$ ; $\\lim_{x\\to0^+}\\ln x=-\\infty$ ; $\\lim_{x\\to+\\infty}e^x=+\\infty$ ; $\\lim_{x\\to-\\infty}e^x=0$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : résoudre des équations",
+     "statement": "Résous dans $\\mathbb{R}$ : (1) $\\ln(x-1)=2$ ; (2) $e^{2x}=5$.",
+     "steps": [
+      {
+       "md": "(1) Condition : x − 1 > 0, donc x > 1. Alors $\\ln(x-1)=2 \\Leftrightarrow x-1=e^2$.",
+       "tex": "x=1+e^2\\approx 8{,}389"
+      },
+      {
+       "md": "Cette valeur est bien supérieure à 1 : elle convient."
+      },
+      {
+       "md": "(2) $e^{2x}=5$ avec 5 > 0 :",
+       "tex": "2x=\\ln 5 \\quad\\text{donc}\\quad x=\\frac{\\ln 5}{2}\\approx 0{,}805"
+      }
+     ],
+     "answer": "(1) $x=1+e^2$ ; (2) $x=\\frac{\\ln 5}{2}$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : étude de $f(x)=e^x-x$",
+     "statement": "Étudie les variations de f sur $\\mathbb{R}$ et donne son minimum.",
+     "steps": [
+      {
+       "md": "On dérive :",
+       "tex": "f'(x)=e^x-1"
+      },
+      {
+       "md": "$e^x-1>0 \\Leftrightarrow e^x>1 \\Leftrightarrow x>0$. Donc f est décroissante sur ]−∞ ; 0] et croissante sur [0 ; +∞[."
+      },
+      {
+       "md": "Le minimum est $f(0)=e^0-0=1$. Valeurs de contrôle : $f(-2)\\approx 2{,}14$ et $f(2)\\approx 5{,}39$."
+      }
+     ],
+     "answer": "**Minimum : f(0) = 1.**",
+     "figure": {
+      "kind": "plot",
+      "xmin": -2,
+      "xmax": 2,
+      "ymin": 0,
+      "ymax": 6,
+      "grid": 1,
+      "xlabel": "x",
+      "ylabel": "y",
+      "curves": [
+       {
+        "expr": "exp(x)-x",
+        "color": "blue",
+        "label": "f"
+       }
+      ],
+      "points": [
+       {
+        "x": 0,
+        "y": 1,
+        "label": "min",
+        "color": "red"
+       }
+      ]
+     }
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": -2,
+      "xmax": 2,
+      "ymin": 0,
+      "ymax": 7,
+      "grid": 1,
+      "xlabel": "x",
+      "ylabel": "y",
+      "curves": [
+       {
+        "expr": "exp(x)",
+        "color": "blue",
+        "label": "y = e^x"
+       },
+       {
+        "expr": "x+1",
+        "color": "grey",
+        "label": "tangente en 0"
+       }
+      ]
+     },
+     "caption": "La courbe de l'exponentielle reste au-dessus de la tangente en 0, d'équation y = x + 1.",
+     "alt": "Courbe bleue de l'exponentielle, toujours positive, croissante, qui passe par (0 ; 1). Une droite grise, la tangente en ce point, reste sous la courbe."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Écrire $\\ln(a+b)=\\ln a+\\ln b$ : c'est **faux**. La règle vaut pour un produit, pas pour une somme.\n- Résoudre $\\ln x=a$ sans vérifier que x > 0.\n- Écrire $e^{a+b}=e^a+e^b$ au lieu de $e^a\\times e^b$.\n- Dériver $e^{2x}$ en $e^{2x}$ : il faut le facteur 2, soit $2e^{2x}$."
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-maths-a-lne-01"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le logarithme sert à résoudre des équations où l'inconnue est un exposant, par exemple les intérêts composés (fiche suivante).",
+      "Les croissances comparées (par exemple $\\frac{\\ln x}{x}$ en $+\\infty$) ne sont pas utilisées ici : à ajouter si le programme de Tle A les prévoit."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Tle A : vérifier si les limites et la dérivée de $e^{u}$ sont exigées ou seulement ln/exp de base.",
+    "Les valeurs approchées utilisent ln 2 ≈ 0,693 et e ≈ 2,718 ; la tolérance de la calculatrice peut varier.",
+    "Les croissances comparées sont volontairement omises."
+   ],
+   "exercises": [
+    "bac-maths-a-lne-01",
+    "bac-maths-a-lne-02",
+    "bac-maths-a-lne-03",
+    "bac-maths-a-lne-04",
+    "bac-maths-a-lne-05",
+    "bac-maths-a-lne-06"
+   ],
+   "selfCheck": [
+    "bac-maths-a-lne-q1",
+    "bac-maths-a-lne-q2",
+    "bac-maths-a-lne-q3",
+    "bac-maths-a-lne-q4",
+    "bac-maths-a-lne-q5"
+   ],
+   "prerequisites": [
+    "bac-maths-a-fonctions"
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "bac-maths-a-lne-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Résous $e^x=20$. Donne x arrondi au millième.",
+   "answer": 2.996,
+   "tolerance": 0.001,
+   "explanation": "$e^x=20 \\Leftrightarrow x=\\ln 20\\approx 2{,}9957$, soit 2,996 au millième.",
+   "method": "$e^x=a\\Leftrightarrow x=\\ln a$.",
+   "mistakes": [
+    "Écrire $x=\\frac{20}{e}$."
+   ],
+   "lesson": "bac-maths-a-ln-exp",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-lne-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Que vaut $\\ln 6$ en fonction de $\\ln 2$ et $\\ln 3$ ?",
+   "choices": [
+    "$\\ln 2+\\ln 3$",
+    "$\\ln 2\\times\\ln 3$",
+    "$\\ln 3-\\ln 2$",
+    "$\\ln 2+3$"
+   ],
+   "answer": 0,
+   "explanation": "6 = 2 × 3 donc $\\ln 6=\\ln 2+\\ln 3$ (le logarithme transforme un produit en somme).",
+   "method": "Écrire l'argument comme un produit.",
+   "mistakes": [
+    "Confondre avec $\\ln 2\\times\\ln 3$."
+   ],
+   "lesson": "bac-maths-a-ln-exp",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-lne-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Vrai ou faux : pour a > 0 et b > 0, $\\ln(a+b)=\\ln a+\\ln b$.",
+   "answer": false,
+   "explanation": "Faux. Par exemple $\\ln(1+1)=\\ln 2\\approx0{,}693$ alors que $\\ln 1+\\ln 1=0$. La règle concerne le produit : $\\ln(ab)=\\ln a+\\ln b$.",
+   "lesson": "bac-maths-a-ln-exp",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-lne-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Soit $f(x)=(x+1)e^x$. Calcule $f'(0)$.",
+   "answer": 2,
+   "tolerance": 0,
+   "explanation": "Produit de $u=x+1$ et $v=e^x$ : $f'(x)=1\\times e^x+(x+1)e^x=(x+2)e^x$. Donc $f'(0)=2\\times1=2$.",
+   "method": "$(uv)'=u'v+uv'$.",
+   "mistakes": [
+    "Oublier le terme $u'v$ et ne garder que $(x+1)e^x$ : on trouverait 1."
+   ],
+   "lesson": "bac-maths-a-ln-exp",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-lne-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Le stock d'une boutique est multiplié par 1,5 chaque semaine (modèle fictif). Quel est le plus petit entier n tel que $1{,}5^n>100$ ?",
+   "answer": 12,
+   "tolerance": 0,
+   "explanation": "$1{,}5^n>100 \\Leftrightarrow n\\ln1{,}5>\\ln100 \\Leftrightarrow n>\\frac{\\ln 100}{\\ln 1{,}5}\\approx11{,}36$ (ln 1,5 > 0, le sens est conservé). Donc n = 12. Contrôle : $1{,}5^{11}\\approx86{,}5$ et $1{,}5^{12}\\approx129{,}7$.",
+   "method": "Prendre ln des deux membres.",
+   "mistakes": [
+    "Arrondir 11,36 à 11 : 1,5¹¹ est encore inférieur à 100."
+   ],
+   "lesson": "bac-maths-a-ln-exp",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-lne-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Soit g la fonction définie sur ]0 ; +∞[ par $g(x)=2\\ln x-x$.",
+   "parts": [
+    {
+     "id": "bac-maths-a-lne-06-a",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle est l'expression de $g'(x)$ ?",
+     "explanation": "$(2\\ln x)'=\\frac{2}{x}$ et $(x)'=1$ : $g'(x)=\\frac{2}{x}-1=\\frac{2-x}{x}$.",
+     "choices": [
+      "$\\frac{2-x}{x}$",
+      "$\\frac{2}{x}+1$",
+      "$2x-1$",
+      "$\\frac{2-x}{x^2}$"
+     ],
+     "answer": 0
+    },
+    {
+     "id": "bac-maths-a-lne-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "En quelle valeur de x la fonction g atteint-elle son maximum ?",
+     "explanation": "Sur ]0 ; +∞[, x > 0 donc g′ a le signe de 2 − x : positive avant 2, négative après 2. Le maximum est en x = 2.",
+     "answer": 2,
+     "tolerance": 0
+    },
+    {
+     "id": "bac-maths-a-lne-06-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule ce maximum, arrondi au millième.",
+     "explanation": "$g(2)=2\\ln2-2\\approx1{,}3863-2=-0{,}6137$, soit −0,614.",
+     "answer": -0.614,
+     "tolerance": 0.001
+    },
+    {
+     "id": "bac-maths-a-lne-06-d",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Combien de solutions l'équation $g(x)=0$ admet-elle dans ]0 ; +∞[ ?",
+     "explanation": "Le maximum de g est négatif (≈ −0,614) : g(x) < 0 pour tout x > 0. L'équation g(x) = 0 n'a **aucune** solution.",
+     "answer": 0,
+     "tolerance": 0
+    }
+   ],
+   "method": "Dériver, étudier le signe de g′, calculer le maximum et conclure sur le signe de g.",
+   "mistakes": [
+    "Calculer g(2) avec ln 2 ≈ 0,69 puis arrondir trop tôt : garder au moins 4 décimales."
+   ],
+   "lesson": "bac-maths-a-ln-exp",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-lne-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quelle est la solution de $\\ln x=3$ ?",
+   "choices": [
+    "$e^3$",
+    "$3e$",
+    "$\\ln 3$",
+    "3"
+   ],
+   "answer": 0,
+   "explanation": "$\\ln x=3\\Leftrightarrow x=e^3$.",
+   "lesson": "bac-maths-a-ln-exp",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-lne-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "La dérivée de $\\ln x$ est :",
+   "choices": [
+    "$\\frac{1}{x}$",
+    "$x$",
+    "$\\ln x$",
+    "$e^x$"
+   ],
+   "answer": 0,
+   "explanation": "$(\\ln x)'=\\frac{1}{x}$.",
+   "lesson": "bac-maths-a-ln-exp",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-lne-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "L'équation $e^x=-2$ :",
+   "choices": [
+    "n'a pas de solution",
+    "a pour solution $\\ln 2$",
+    "a pour solution $-\\ln 2$",
+    "a pour solution −2"
+   ],
+   "answer": 0,
+   "explanation": "$e^x>0$ pour tout x : il ne peut pas valoir −2.",
+   "lesson": "bac-maths-a-ln-exp",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-lne-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "$\\ln(e^5)$ vaut :",
+   "choices": [
+    "5",
+    "$e^5$",
+    "$5e$",
+    "$\\frac{1}{5}$"
+   ],
+   "answer": 0,
+   "explanation": "$\\ln(e^x)=x$, donc $\\ln(e^5)=5$.",
+   "lesson": "bac-maths-a-ln-exp",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-lne-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "La dérivée de $e^{3x}$ est :",
+   "choices": [
+    "$3e^{3x}$",
+    "$e^{3x}$",
+    "$3xe^{3x}$",
+    "$e^{3}$"
+   ],
+   "answer": 0,
+   "explanation": "$(e^{u})'=u'e^{u}$ avec u = 3x et u′ = 3.",
+   "lesson": "bac-maths-a-ln-exp",
+   "source": "Exercice original, style Bac A"
+  }
+ ]
+}

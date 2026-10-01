@@ -1,0 +1,743 @@
+{
+ "chapter": "tle-physique-e-ti-ch-thermo",
+ "lessons": [
+  {
+   "id": "tle-physique-e-ti-thermo",
+   "title": "Thermodynamique de base : chaleur, calorimétrie, changements d'état",
+   "minutes": 35,
+   "programRef": "Tle E/TI — Chaleur et calorimétrie (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale, brouillon IA ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer chaleur et température.",
+    "Calculer une chaleur sensible et une chaleur latente.",
+    "Résoudre un problème de calorimétrie.",
+    "Relier énergie, puissance et rendement d'un chauffage."
+   ],
+   "exercises": [
+    "tle-physique-e-ti-thermo-01",
+    "tle-physique-e-ti-thermo-02",
+    "tle-physique-e-ti-thermo-03",
+    "tle-physique-e-ti-thermo-04",
+    "tle-physique-e-ti-thermo-05",
+    "tle-physique-e-ti-thermo-06"
+   ],
+   "selfCheck": [
+    "tle-physique-e-ti-the-q1",
+    "tle-physique-e-ti-the-q2",
+    "tle-physique-e-ti-the-q3",
+    "tle-physique-e-ti-the-q4",
+    "tle-physique-e-ti-the-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Objectifs",
+     "md": "Distinguer chaleur et température ; calculer une quantité de chaleur avec Q = mcΔT ; utiliser la chaleur latente pour un changement d'état ; résoudre un problème de calorimétrie ; relier énergie, puissance et rendement d'un chauffage."
+    },
+    {
+     "type": "heading",
+     "text": "1. Chaleur et capacité thermique massique"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Chaleur et température",
+     "md": "La **température** (en °C ou en K) mesure l'agitation thermique ; la **chaleur** Q (en J) est l'énergie transférée d'un corps chaud vers un corps froid. Un écart de 1 °C est égal à un écart de 1 K ; T(K) = θ(°C) + 273,15."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Chaleur sensible",
+     "md": "Pour échauffer ou refroidir une masse m sans changement d'état, avec la capacité thermique massique c (en J/(kg·K)) :",
+     "tex": "Q = m \\, c \\, (\\theta_f - \\theta_i)"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Quelques valeurs usuelles (à vérifier)",
+     "md": "Eau liquide : c ≈ 4 180 J/(kg·K) ; glace : c ≈ 2 100 J/(kg·K) environ. Chaleur latente de fusion de la glace : $L_f \\approx 3{,}34 \\times 10^5$ J/kg ; de vaporisation de l'eau : $L_v \\approx 2{,}26 \\times 10^6$ J/kg. Ces valeurs sont **données dans l'énoncé** en cas d'examen."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : chauffer de l'eau",
+     "statement": "Quelle quantité de chaleur faut-il fournir à 2 kg d'eau pour la faire passer de 25 °C à 100 °C ? (c = 4 180 J/(kg·K))",
+     "steps": [
+      {
+       "md": "Variation de température : 100 − 25 = 75 K.",
+       "tex": "\\Delta\\theta = 75 \\text{ K}"
+      },
+      {
+       "md": "Chaleur reçue :",
+       "tex": "Q = 2 \\times 4180 \\times 75 = 627\\,000 \\text{ J}"
+      }
+     ],
+     "answer": "Q = **627 000 J**, soit 627 kJ."
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-physique-e-ti-thermo-01"
+    },
+    {
+     "type": "heading",
+     "text": "2. Changements d'état"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Chaleur latente",
+     "md": "Pendant un changement d'état d'un corps pur (fusion, vaporisation), la **température reste constante** malgré l'apport de chaleur. La chaleur absorbée est $Q = m L$ (L en J/kg) ; elle est libérée en sens inverse (solidification, condensation). À la pression normale, la glace fond à 0 °C et l'eau bout à 100 °C."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 240,
+      "items": [
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 210,
+        "x2": 405,
+        "y2": 210,
+        "color": "ink",
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 210,
+        "x2": 60,
+        "y2": 20,
+        "color": "ink",
+        "arrow": "end"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         70,
+         166,
+         120,
+         150,
+         170,
+         150,
+         270,
+         70,
+         340,
+         70,
+         385,
+         40
+        ],
+        "closed": false,
+        "stroke": "red",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 52,
+        "y": 154,
+        "text": "0 °C",
+        "size": 12,
+        "anchor": "end"
+       },
+       {
+        "t": "text",
+        "x": 52,
+        "y": 74,
+        "text": "100 °C",
+        "size": 12,
+        "anchor": "end"
+       },
+       {
+        "t": "text",
+        "x": 95,
+        "y": 195,
+        "text": "glace",
+        "size": 12
+       },
+       {
+        "t": "text",
+        "x": 145,
+        "y": 136,
+        "text": "fusion",
+        "size": 12
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 150,
+        "text": "eau liquide",
+        "size": 12
+       },
+       {
+        "t": "text",
+        "x": 305,
+        "y": 56,
+        "text": "ébullition",
+        "size": 12
+       },
+       {
+        "t": "text",
+        "x": 368,
+        "y": 90,
+        "text": "vapeur",
+        "size": 12
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 232,
+        "text": "chaleur reçue",
+        "size": 12
+       }
+      ]
+     },
+     "caption": "Courbe de chauffage schématique de l'eau : paliers de température à 0 °C et à 100 °C.",
+     "alt": "Une ligne qui monte, avec un palier horizontal à 0 °C (fusion), une montée jusqu'à 100 °C, un second palier (ébullition) puis une montée en vapeur."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode en calorimétrie",
+     "md": "Dans un calorimètre bien isolé, **la somme des quantités de chaleur échangées est nulle** : $\\sum Q = 0$. On écrit $Q = mc\\Delta\\theta$ pour chaque corps (positif s'il se réchauffe, négatif s'il se refroidit) et, s'il y a un changement d'état, on ajoute $mL$. On vérifie ensuite que l'état final supposé est cohérent."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : mélange d'eau chaude et d'eau froide",
+     "statement": "On mélange 0,5 kg d'eau à 80 °C et 1,5 kg d'eau à 20 °C dans un récipient isolé. Quelle est la température finale θ ?",
+     "steps": [
+      {
+       "md": "Bilan : ΣQ = 0 (les capacités s'éliminent, c'est la même eau).",
+       "tex": "0{,}5 \\times (\\theta - 80) + 1{,}5 \\times (\\theta - 20) = 0"
+      },
+      {
+       "md": "On résout :",
+       "tex": "2\\theta = 40 + 30 = 70 \\text{ donc } \\theta = 35 \\text{ °C}"
+      },
+      {
+       "md": "Vérification : l'eau chaude perd 0,5 × 4 180 × 45 = 94 050 J ; l'eau froide gagne 1,5 × 4 180 × 15 = 94 050 J."
+      }
+     ],
+     "answer": "θ = **35 °C**."
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-physique-e-ti-thermo-02"
+    },
+    {
+     "type": "heading",
+     "text": "3. Chauffage, puissance et rendement"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Énergie, puissance, rendement",
+     "md": "Un appareil de puissance P pendant une durée t fournit l'énergie $E = P t$ (J si P en W et t en s). Pour un chauffage, la chaleur utile est $Q$ et le rendement $\\eta = \\frac{Q}{P t}$. 1 kW·h = 3,6·10⁶ J."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : chauffe-eau électrique",
+     "statement": "Un chauffe-eau de 2 000 W, de rendement 90 %, chauffe 50 L d'eau (50 kg) de 20 °C à 60 °C. Calcule la chaleur nécessaire, la durée et l'énergie en kW·h.",
+     "steps": [
+      {
+       "md": "Chaleur utile : Q = 50 × 4 180 × 40 = **8360000 J**."
+      },
+      {
+       "md": "Durée : t = Q ÷ (η P) = 8360000 ÷ (0,90 × 2 000) ≈ **4644 s**, soit environ 77,4 min."
+      },
+      {
+       "md": "Énergie utile : 8360000 ÷ 3,6·10⁶ ≈ **2,32 kW·h** (à un tarif de 100 FCFA/kW·h, valeur fictive, cela fait environ 232 FCFA)."
+      }
+     ],
+     "answer": "Q = 8360000 J ; t ≈ 4644 s ; énergie utile ≈ 2,32 kW·h."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Chercher une montée de température pendant un **changement d'état** : le palier est à température constante.\n- Oublier de convertir kJ en J, ou les litres d'eau en kg (1 L d'eau ≈ 1 kg).\n- Mélanger °C et K : seules les **différences** de température comptent dans Q = mcΔθ.\n- Oublier de diviser par le rendement pour trouver l'énergie à fournir."
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-physique-e-ti-thermo-03"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Les transferts de chaleur se font par conduction, convection et rayonnement ; un isolant ralentit ces transferts.",
+      "Pour l'eau du robinet à Yaoundé comme à Garoua, la capacité thermique massique reste la même : seule la quantité d'eau et l'écart de température comptent."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Programme exact incertain en E/TI : premier principe, gaz parfaits, cycles de machines thermiques pourraient figurer ; ici seulement la chaleur de base.",
+    "Valeurs de c et de L (eau, glace) : usuelles, à remplacer par celles du manuel ; elles sont données dans les énoncés d'examen.",
+    "Le tarif de l'électricité (100 FCFA/kW·h) est fictif."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "tle-physique-e-ti-thermo-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-physique-e-ti-thermo",
+   "prompt": "Quelle chaleur (en J) faut-il pour élever de 10 K la température de 3 kg d'eau (c = 4 180 J/(kg·K)) ?",
+   "answer": 125400,
+   "tolerance": 1,
+   "unit": "J",
+   "explanation": "Q = m c Δθ = 3 × 4 180 × 10 = 125 400 J.",
+   "method": "Q = mcΔθ.",
+   "mistakes": [
+    "Oublier la masse dans le calcul."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-physique-e-ti-thermo-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-physique-e-ti-thermo",
+   "prompt": "Combien de joules faut-il pour faire fondre 0,5 kg de glace déjà à 0 °C (L_f = 3,34·10⁵ J/kg) ?",
+   "answer": 167000,
+   "tolerance": 1,
+   "unit": "J",
+   "explanation": "Q = m L_f = 0,5 × 3,34·10⁵ = 1,67·10⁵ J, soit 167 000 J.",
+   "method": "Q = mL (température constante).",
+   "mistakes": [
+    "Ajouter une variation de température qui n'existe pas pendant la fusion."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-physique-e-ti-thermo-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-physique-e-ti-thermo",
+   "prompt": "On mélange 1 kg d'eau à 60 °C et 1 kg d'eau à 20 °C. Quelle est la température finale (en °C) ?",
+   "answer": 40,
+   "tolerance": 0,
+   "unit": "°C",
+   "explanation": "Masses égales : moyenne (60 + 20) ÷ 2 = 40 °C.",
+   "method": "ΣQ = 0.",
+   "mistakes": [
+    "Additionner les températures."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-physique-e-ti-thermo-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "tle-physique-e-ti-thermo",
+   "prompt": "On met 100 g de glace à 0 °C dans 400 g d'eau à 30 °C, dans un calorimètre isolé de capacité négligeable. Quelle est la température finale (en °C, au dixième) ? (c = 4 180 J/(kg·K) ; L_f = 3,34·10⁵ J/kg)",
+   "answer": 8.0,
+   "tolerance": 0.1,
+   "unit": "°C",
+   "explanation": "L'eau refroidie jusqu'à 0 °C cède 0,4 × 4 180 × 30 = 50160 J, suffisant pour fondre toute la glace (33 400 J). Il reste 16760 J pour chauffer 0,5 kg d'eau : Δθ = 16760 ÷ (0,5 × 4 180) ≈ 8 °C.",
+   "method": "Vérifier d'abord si toute la glace fond, puis écrire ΣQ = 0.",
+   "mistakes": [
+    "Supposer sans vérifier que la température finale est 0 °C."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-physique-e-ti-thermo-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "tle-physique-e-ti-thermo",
+   "prompt": "Quelle chaleur faut-il pour vaporiser 0,2 kg d'eau déjà à 100 °C (L_v = 2,26·10⁶ J/kg) ? Réponds en kJ.",
+   "answer": 452,
+   "tolerance": 0.5,
+   "unit": "kJ",
+   "explanation": "Q = m L_v = 0,2 × 2,26·10⁶ = 4,52·10⁵ J = 452 kJ.",
+   "method": "Q = mL_v puis conversion en kJ.",
+   "mistakes": [
+    "Oublier la conversion J → kJ."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-physique-e-ti-thermo-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "tle-physique-e-ti-thermo",
+   "prompt": "Une bouilloire de 1 500 W, de rendement 80 %, contient 1,0 kg d'eau à 20 °C. (c = 4 180 J/(kg·K) ; L_v = 2,26·10⁶ J/kg.)",
+   "parts": [
+    {
+     "id": "tle-physique-e-ti-thermo-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la chaleur utile nécessaire pour amener l'eau à 100 °C (en J).",
+     "answer": 334400,
+     "tolerance": 1,
+     "unit": "J",
+     "explanation": "Q = 1,0 × 4 180 × 80 = 334 400 J."
+    },
+    {
+     "id": "tle-physique-e-ti-thermo-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule l'énergie électrique à fournir (en J).",
+     "answer": 418000,
+     "tolerance": 1,
+     "unit": "J",
+     "explanation": "E = Q ÷ η = 334 400 ÷ 0,80 = 418 000 J."
+    },
+    {
+     "id": "tle-physique-e-ti-thermo-06-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule la durée de chauffe (en s, au dixième).",
+     "answer": 278.7,
+     "tolerance": 0.2,
+     "unit": "s",
+     "explanation": "t = E ÷ P = 418 000 ÷ 1 500 ≈ 278,7 s (environ 4,6 min)."
+    },
+    {
+     "id": "tle-physique-e-ti-thermo-06-d",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "On laisse bouillir et on vaporise 0,1 kg d'eau. Quelle chaleur utile est nécessaire (en J) ?",
+     "answer": 226000,
+     "tolerance": 1,
+     "unit": "J",
+     "explanation": "Q = m L_v = 0,1 × 2,26·10⁶ = 226 000 J."
+    },
+    {
+     "id": "tle-physique-e-ti-thermo-06-e",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Combien de temps supplémentaire faut-il (en s, au dixième) ?",
+     "answer": 188.3,
+     "tolerance": 0.2,
+     "unit": "s",
+     "explanation": "t = Q ÷ (η P) = 226 000 ÷ (0,8 × 1 500) ≈ 188,3 s."
+    }
+   ],
+   "method": "Chaleur sensible, rendement, durée, puis chaleur latente.",
+   "mistakes": [
+    "Oublier le rendement dans la durée."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-physique-e-ti-the-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-physique-e-ti-thermo",
+   "prompt": "La chaleur s'exprime en :",
+   "choices": [
+    "kelvins",
+    "watts",
+    "degrés Celsius",
+    "joules"
+   ],
+   "answer": 3,
+   "explanation": "La chaleur est une énergie : joule."
+  },
+  {
+   "id": "tle-physique-e-ti-the-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-physique-e-ti-thermo",
+   "prompt": "Pendant la fusion de la glace à pression normale, la température :",
+   "choices": [
+    "reste à 0 °C",
+    "monte régulièrement",
+    "descend",
+    "atteint 100 °C"
+   ],
+   "answer": 0,
+   "explanation": "Palier de changement d'état."
+  },
+  {
+   "id": "tle-physique-e-ti-the-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-physique-e-ti-thermo",
+   "prompt": "Dans un calorimètre bien isolé :",
+   "choices": [
+    "l'eau gagne toujours de la chaleur",
+    "la somme des chaleurs échangées est nulle",
+    "la température finale est celle du corps le plus chaud",
+    "la glace ne fond jamais"
+   ],
+   "answer": 1,
+   "explanation": "Aucune chaleur ne sort : ΣQ = 0."
+  },
+  {
+   "id": "tle-physique-e-ti-the-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-physique-e-ti-thermo",
+   "prompt": "Quelle énergie, en joules, correspond à 1 kW·h ?",
+   "choices": [
+    "3 600 J",
+    "1 000 J",
+    "3,6·10⁶ J",
+    "36·10⁹ J"
+   ],
+   "answer": 2,
+   "explanation": "1 kW·h = 1 000 W × 3 600 s."
+  },
+  {
+   "id": "tle-physique-e-ti-the-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-physique-e-ti-thermo",
+   "prompt": "Pour chauffer 1 kg d'eau de 10 K, il faut environ :",
+   "choices": [
+    "4 180 J",
+    "418 000 J",
+    "10 J",
+    "41 800 J"
+   ],
+   "answer": 3,
+   "explanation": "Q = 1 × 4 180 × 10 = 41 800 J."
+  },
+  {
+   "id": "tle-physique-e-ti-blanc-ex1",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "tle-physique-e-ti-electricite",
+   "prompt": "Exercice 1 — Régime sinusoïdal. Un dipôle est formé d'une résistance R = 20 Ω, d'une bobine idéale L = 0,05 H et d'un condensateur C = 100 µF en série. Il est alimenté par une tension sinusoïdale de valeur efficace 100 V et de fréquence 50 Hz.",
+   "parts": [
+    {
+     "id": "tle-physique-e-ti-blanc-ex1-a",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule l'impédance Z (en Ω, au dixième).",
+     "answer": 25.7,
+     "tolerance": 0.1,
+     "unit": "Ω",
+     "explanation": "ω = 314,16 rad/s ; Lω = 15,71 Ω ; 1/(Cω) = 31,83 Ω ; X = -16,12 Ω ; Z = √(20² + -16,12²) ≈ 25,7 Ω."
+    },
+    {
+     "id": "tle-physique-e-ti-blanc-ex1-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le courant efficace I (en A, au dixième).",
+     "answer": 3.9,
+     "tolerance": 0.05,
+     "unit": "A",
+     "explanation": "I = 100 ÷ 25,69 ≈ 3,9 A."
+    },
+    {
+     "id": "tle-physique-e-ti-blanc-ex1-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le facteur de puissance cos φ (au centième).",
+     "answer": 0.78,
+     "tolerance": 0.005,
+     "explanation": "cos φ = R ÷ Z = 20 ÷ 25,69 ≈ 0,78."
+    },
+    {
+     "id": "tle-physique-e-ti-blanc-ex1-d",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule la puissance active (en W, arrondie à l'unité).",
+     "answer": 303,
+     "tolerance": 1,
+     "unit": "W",
+     "explanation": "P = R I² = 20 × 3,89² ≈ 303 W."
+    }
+   ],
+   "method": "Calculer X, Z, I, cos φ puis P = R I².",
+   "mistakes": [
+    "Oublier la conversion µF → F."
+   ],
+   "source": "Exercice original, style examen technique"
+  },
+  {
+   "id": "tle-physique-e-ti-blanc-ex2",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "tle-physique-e-ti-machines",
+   "prompt": "Exercice 2 — Transformateur. Un transformateur monophasé a un primaire de 1 150 spires alimenté sous 230 V et un secondaire de 120 spires. Il débite 5 A au secondaire, sous une charge purement résistive. Les pertes fer valent 8 W et les pertes Joule 12 W.",
+   "parts": [
+    {
+     "id": "tle-physique-e-ti-blanc-ex2-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la tension au secondaire (en V), supposée proportionnelle au nombre de spires.",
+     "answer": 24,
+     "tolerance": 0.1,
+     "unit": "V",
+     "explanation": "U₂ = 230 × 120 ÷ 1 150 = 24 V."
+    },
+    {
+     "id": "tle-physique-e-ti-blanc-ex2-b",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Pour un transformateur parfait, quel serait le courant primaire pour la même charge (en A, au centième) ?",
+     "answer": 0.52,
+     "tolerance": 0.01,
+     "unit": "A",
+     "explanation": "U₁ I₁ = U₂ I₂ donc I₁ = 24 × 5 ÷ 230 ≈ 0,52 A."
+    },
+    {
+     "id": "tle-physique-e-ti-blanc-ex2-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la puissance absorbée par le transformateur réel (en W).",
+     "answer": 140,
+     "tolerance": 0,
+     "unit": "W",
+     "explanation": "P₂ = U₂ I₂ = 24 × 5 = 120 W ; P₁ = 120 + 8 + 12 = 140 W."
+    },
+    {
+     "id": "tle-physique-e-ti-blanc-ex2-d",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule son rendement (en %, au dixième).",
+     "answer": 85.7,
+     "tolerance": 0.1,
+     "unit": "%",
+     "explanation": "η = 120 ÷ 140 ≈ 85,7 %."
+    }
+   ],
+   "method": "Rapport de transformation, conservation de la puissance puis bilan avec pertes.",
+   "mistakes": [
+    "Oublier les pertes dans le bilan de puissance."
+   ],
+   "source": "Exercice original, style examen technique"
+  },
+  {
+   "id": "tle-physique-e-ti-blanc-ex3",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "tle-physique-e-ti-mecanique",
+   "prompt": "Exercice 3 — Mécanique. Un camion de 3 000 kg part du repos et accélère de façon constante à 1,5 m/s² pendant 8 s sur une route horizontale rectiligne.",
+   "parts": [
+    {
+     "id": "tle-physique-e-ti-blanc-ex3-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quelle vitesse atteint-il (en m/s) ?",
+     "answer": 12,
+     "tolerance": 0,
+     "unit": "m/s",
+     "explanation": "v = a t = 1,5 × 8 = 12 m/s."
+    },
+    {
+     "id": "tle-physique-e-ti-blanc-ex3-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quelle distance a-t-il parcourue (en m) ?",
+     "answer": 48,
+     "tolerance": 0,
+     "unit": "m",
+     "explanation": "x = ½ a t² = 0,5 × 1,5 × 64 = 48 m."
+    },
+    {
+     "id": "tle-physique-e-ti-blanc-ex3-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Quelle est son énergie cinétique finale (en J) ?",
+     "answer": 216000,
+     "tolerance": 0,
+     "unit": "J",
+     "explanation": "E_c = ½ m v² = 0,5 × 3 000 × 12² = 216 000 J."
+    },
+    {
+     "id": "tle-physique-e-ti-blanc-ex3-d",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Quelle est la puissance moyenne de la force motrice résultante (en W) ? (Contrôle : F = m a = 4 500 N, W = F d.)",
+     "answer": 27000,
+     "tolerance": 0,
+     "unit": "W",
+     "explanation": "W = F d = 4 500 × 48 = 216 000 J, égal à E_c ; P = W ÷ t = 216 000 ÷ 8 = 27 000 W."
+    }
+   ],
+   "method": "Cinématique, énergie cinétique, puis puissance moyenne ; le contrôle par le travail confirme E_c.",
+   "mistakes": [
+    "Confondre énergie (J) et puissance (W)."
+   ],
+   "source": "Exercice original, style examen technique"
+  },
+  {
+   "id": "tle-physique-e-ti-blanc-ex4",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "tle-physique-e-ti-thermo",
+   "prompt": "Exercice 4 — Calorimétrie. Dans un récipient isolé, on mélange 2 kg d'eau à 15 °C et 0,5 kg d'eau à 90 °C. (c = 4 180 J/(kg·K).) Ensuite, on chauffe les 2,5 kg d'eau de 30 °C à 60 °C avec une résistance de 2 000 W dont le rendement est de 75 %.",
+   "parts": [
+    {
+     "id": "tle-physique-e-ti-blanc-ex4-a",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule la température finale du mélange (en °C).",
+     "answer": 30,
+     "tolerance": 0,
+     "unit": "°C",
+     "explanation": "2 × (θ − 15) + 0,5 × (θ − 90) = 0 donne 2,5 θ = 30 + 45 = 75, soit θ = 30 °C."
+    },
+    {
+     "id": "tle-physique-e-ti-blanc-ex4-b",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule la chaleur utile pour passer de 30 °C à 60 °C (en J).",
+     "answer": 313500,
+     "tolerance": 1,
+     "unit": "J",
+     "explanation": "Q = 2,5 × 4 180 × 30 = 313500 J."
+    },
+    {
+     "id": "tle-physique-e-ti-blanc-ex4-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la durée de chauffage (en s, arrondie à l'unité).",
+     "answer": 209,
+     "tolerance": 1,
+     "unit": "s",
+     "explanation": "t = Q ÷ (η P) = 313500 ÷ (0,75 × 2 000) ≈ 209 s."
+    },
+    {
+     "id": "tle-physique-e-ti-blanc-ex4-d",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quelle énergie électrique est consommée (en kW·h, au millième) ?",
+     "answer": 0.116,
+     "tolerance": 0.001,
+     "unit": "kW·h",
+     "explanation": "E = Q ÷ η = 418000 J ; ÷ 3,6·10⁶ ≈ 0,116 kW·h."
+    }
+   ],
+   "method": "Calorimétrie ΣQ = 0, puis chaleur utile, rendement et conversion en kW·h.",
+   "mistakes": [
+    "Oublier le rendement."
+   ],
+   "source": "Exercice original, style examen technique"
+  }
+ ]
+}

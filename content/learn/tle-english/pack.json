@@ -1,0 +1,84 @@
+{
+  "format": 1,
+  "id": "tle-english",
+  "version": 1,
+  "title": "Anglais — Bac",
+  "description": "Anglais pour francophones, Terminale : temps, conditionnels et inversion, modaux, passif et causatif, compréhension de l'écrit et expression écrite, avec exercices corrigés et épreuve blanche.",
+  "lang": "fr",
+  "cursus": "secondaire",
+  "level": "Tle",
+  "subject": "english",
+  "exam": "BAC",
+  "series": [
+    "A",
+    "C",
+    "D"
+  ],
+  "programRef": "Programme officiel d'anglais de Terminale (MINESEC) — à vérifier sur le texte officiel",
+  "authors": [
+    "CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-10-01",
+  "chapters": [
+    {
+      "id": "tle-english-tenses",
+      "title": "Tenses and aspect",
+      "order": 1,
+      "programRef": "Tle — Anglais : temps et aspects (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "tle-english-conditionals",
+      "title": "Conditionals, wishes, subjunctive, inversion",
+      "order": 2,
+      "programRef": "Tle — Anglais : conditionnel, souhaits, subjonctif, inversion (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "tle-english-modals-passive",
+      "title": "Modals, passive and causative",
+      "order": 3,
+      "programRef": "Tle — Anglais : modaux, voix passive, causatif (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "tle-english-reading",
+      "title": "Reading comprehension",
+      "order": 4,
+      "programRef": "Tle — Anglais : compréhension de l'écrit (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "tle-english-writing",
+      "title": "Writing skills",
+      "order": 5,
+      "programRef": "Tle — Anglais : expression écrite (à vérifier sur le texte officiel)"
+    }
+  ],
+  "mockExams": [
+    {
+      "id": "tle-english-eb1",
+      "title": "Épreuve blanche d'anglais — Bac",
+      "minutes": 180,
+      "outOf": 20,
+      "instructions": "Trois parties : compréhension de l'écrit (8 points), langue (6 points) et expression écrite (6 points). Textes originaux et fictifs écrits pour l'exercice. Format, durée et barème officiels de l'épreuve d'anglais du Bac (séries A, C, D) à vérifier sur les textes officiels.",
+      "sections": [
+        {
+          "title": "Reading comprehension (8 points)",
+          "exercises": [
+            "tle-english-blanc-reading"
+          ]
+        },
+        {
+          "title": "Language (6 points)",
+          "exercises": [
+            "tle-english-blanc-language"
+          ]
+        },
+        {
+          "title": "Writing (6 points)",
+          "exercises": [
+            "tle-english-blanc-writing"
+          ]
+        }
+      ]
+    }
+  ]
+}

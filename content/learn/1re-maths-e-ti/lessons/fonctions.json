@@ -1,0 +1,531 @@
+{
+ "chapter": "1re-maths-e-ti-ch-fonctions",
+ "lessons": [
+  {
+   "id": "1re-maths-e-ti-fonctions",
+   "title": "Fonctions numériques, second degré et dérivation",
+   "minutes": 40,
+   "programRef": "1re E/TI — Fonctions, trinôme du second degré, dérivation (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Résoudre une équation du second degré et étudier le signe d'un trinôme.",
+    "Calculer des dérivées de polynômes, de produits et de quotients simples.",
+    "Dresser un tableau de variations et trouver un extremum.",
+    "Utiliser ces outils dans un contexte électrique ou mécanique."
+   ],
+   "exercises": [
+    "1re-maths-e-ti-fon-01",
+    "1re-maths-e-ti-fon-02",
+    "1re-maths-e-ti-fon-03",
+    "1re-maths-e-ti-fon-04",
+    "1re-maths-e-ti-fon-05",
+    "1re-maths-e-ti-fon-06"
+   ],
+   "selfCheck": [
+    "1re-maths-e-ti-fon-q1",
+    "1re-maths-e-ti-fon-q2",
+    "1re-maths-e-ti-fon-q3",
+    "1re-maths-e-ti-fon-q4",
+    "1re-maths-e-ti-fon-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Fonction polynôme du second degré",
+     "md": "Une fonction du second degré s'écrit $f(x) = ax^2 + bx + c$ avec $a \\neq 0$. Sa courbe est une **parabole** : tournée vers le haut si $a > 0$, vers le bas si $a < 0$. Son **sommet** a pour abscisse :",
+     "tex": "\\alpha = -\\frac{b}{2a}"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Discriminant et racines",
+     "md": "On calcule $\\Delta = b^2 - 4ac$.\n- Si $\\Delta > 0$ : deux racines $x_{1,2} = \\frac{-b \\pm \\sqrt{\\Delta}}{2a}$.\n- Si $\\Delta = 0$ : une racine double $x = -\\frac{b}{2a}$.\n- Si $\\Delta < 0$ : aucune racine réelle.\nLa somme des racines vaut $-\\frac{b}{a}$ et leur produit $\\frac{c}{a}$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Signe du trinôme",
+     "md": "Si $\\Delta > 0$, $f(x)$ a le signe de **a** à l'extérieur des racines et le signe de **−a** entre les racines. Si $\\Delta \\leq 0$, $f(x)$ a le signe de a (sauf en la racine double où il s'annule)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": -1,
+      "xmax": 5,
+      "ymin": -2,
+      "ymax": 5,
+      "grid": 1,
+      "xlabel": "x",
+      "ylabel": "y",
+      "w": 400,
+      "h": 280,
+      "curves": [
+       {
+        "expr": "x^2-4*x+3",
+        "color": "blue",
+        "label": "y = x² − 4x + 3"
+       }
+      ],
+      "points": [
+       {
+        "x": 1,
+        "y": 0,
+        "label": "1",
+        "color": "red"
+       },
+       {
+        "x": 3,
+        "y": 0,
+        "label": "3",
+        "color": "red"
+       },
+       {
+        "x": 2,
+        "y": -1,
+        "label": "S(2 ; −1)",
+        "color": "green"
+       }
+      ]
+     },
+     "caption": "Parabole de $f(x) = x^2 - 4x + 3$ : racines 1 et 3, sommet S(2 ; −1).",
+     "alt": "Parabole bleue tournée vers le haut coupant l'axe des abscisses en 1 et 3, avec un sommet vert au point (2 ; −1)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Dérivées usuelles",
+     "md": "Pour une constante $k$ et un entier $n$ :\n- $(k)' = 0$ ; $(x)' = 1$ ; $(x^n)' = n x^{n-1}$ ;\n- $(u + v)' = u' + v'$ ; $(k u)' = k u'$ ;\n- $(u \\times v)' = u'v + uv'$ ; $\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}$ (avec $v \\neq 0$)."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Dérivée et variations",
+     "md": "Sur un intervalle : si $f'(x) > 0$, $f$ est **croissante** ; si $f'(x) < 0$, $f$ est **décroissante** ; si $f'$ s'annule en changeant de signe, $f$ a un **extremum** (maximum ou minimum local). La **tangente** en $a$ a pour équation $y = f'(a)(x - a) + f(a)$."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : étudier une fonction",
+     "md": "1. Déterminer l'ensemble de définition.\n2. Calculer $f'(x)$ et factoriser.\n3. Étudier le signe de $f'(x)$ (tableau de signes).\n4. Dresser le tableau de variations avec les valeurs aux points clés.\n5. Tracer la courbe (points, tangentes) ; interpréter dans le contexte."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : second degré",
+     "statement": "Résous $x^2 - 4x + 3 = 0$, étudie le signe de $f(x) = x^2 - 4x + 3$ et donne le sommet de la parabole.",
+     "steps": [
+      {
+       "md": "On calcule $\\Delta = (-4)^2 - 4 \\times 1 \\times 3 = 4$, donc $\\sqrt{\\Delta} = 2$.",
+       "tex": "x_1 = \\frac{4 - 2}{2} = 1 \\quad \\text{et} \\quad x_2 = \\frac{4 + 2}{2} = 3"
+      },
+      {
+       "md": "Comme $a = 1 > 0$ : $f(x) > 0$ pour $x < 1$ ou $x > 3$ ; $f(x) < 0$ pour $1 < x < 3$."
+      },
+      {
+       "md": "Sommet : $\\alpha = \\frac{4}{2} = 2$ et $f(2) = 4 - 8 + 3 = -1$.",
+       "tex": "S(2\\,;\\,-1)"
+      }
+     ],
+     "answer": "Racines **1 et 3** ; signe négatif entre elles ; sommet **S(2 ; −1)**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : dérivation et variations",
+     "statement": "Étudie les variations de $g(x) = x^3 - 3x^2 + 2$ sur $\\mathbb{R}$.",
+     "steps": [
+      {
+       "md": "On dérive et on factorise :",
+       "tex": "g'(x) = 3x^2 - 6x = 3x(x - 2)"
+      },
+      {
+       "md": "Signe de $g'$ : positif pour $x < 0$ ou $x > 2$ ; négatif pour $0 < x < 2$."
+      },
+      {
+       "md": "Donc $g$ est croissante sur $]-\\infty ; 0]$, décroissante sur $[0 ; 2]$, croissante sur $[2 ; +\\infty[$."
+      },
+      {
+       "md": "Valeurs : $g(0) = 2$ (maximum local) et $g(2) = 8 - 12 + 2 = -2$ (minimum local)."
+      }
+     ],
+     "answer": "Maximum local **2** en $x = 0$ ; minimum local **−2** en $x = 2$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : application électrique",
+     "statement": "Un générateur de fem E = 12 V et de résistance interne r = 2 Ω débite un courant I. La puissance utile (en W) est $P(I) = 12 I - 2 I^2$. Pour quelle intensité P est-elle maximale ?",
+     "steps": [
+      {
+       "md": "$P$ est du second degré avec $a = -2 < 0$ : sa courbe est une parabole tournée vers le bas, donc elle a un **maximum** au sommet."
+      },
+      {
+       "md": "Abscisse du sommet :",
+       "tex": "I = -\\frac{12}{2 \\times (-2)} = 3\\ \\text{A}"
+      },
+      {
+       "md": "Valeur du maximum :",
+       "tex": "P(3) = 12 \\times 3 - 2 \\times 9 = 18\\ \\text{W}"
+      }
+     ],
+     "answer": "La puissance est maximale pour **I = 3 A** et vaut **18 W**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier de mettre l'équation sous la forme $ax^2 + bx + c = 0$ avant de calculer $\\Delta$.\n- Se tromper de signe : $-b$ avec $b = -4$ donne $+4$.\n- Dériver $x^3$ en $3x^3$ au lieu de $3x^2$.\n- Écrire $(uv)' = u'v'$ : c'est **faux**, la formule est $u'v + uv'$.\n- Conclure sur le signe de $f$ en lisant le signe de $f'$ (variations ≠ signe)."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-e-ti-fon-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-e-ti-fon-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Applications techniques : maximum de puissance d'un générateur, trajectoire d'un projectile (hauteur $h(t) = -5t^2 + v_0 t$ avec $g \\approx 10$ m/s² en première approximation), optimisation d'une surface ou d'un coût.",
+      "La vitesse instantanée d'un mobile est la dérivée de sa position par rapport au temps."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Le programme exact des séries E et TI (étendue de la dérivation : quotients, composées ; étude de fonctions rationnelles ; fonctions trigonométriques) est à vérifier : seul le niveau « polynômes » est traité ici.",
+    "Les valeurs numériques utilisent $g \\approx 10$ m/s² par simplification ; vérifier la convention de la classe (9,8 m/s²).",
+    "Vérifier si le vocabulaire « trinôme », « discriminant » et la notation $\\alpha$ du sommet sont ceux du manuel."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "1re-maths-e-ti-fon-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Calcule le discriminant de $2x^2 - 3x - 2$.",
+   "answer": 25,
+   "tolerance": 0,
+   "explanation": "$\\Delta = b^2 - 4ac = (-3)^2 - 4 \\times 2 \\times (-2) = 9 + 16 = 25$.",
+   "method": "$\\Delta = b^2 - 4ac$ en gardant les signes.",
+   "mistakes": [
+    "Oublier que $-4ac = +16$ ici."
+   ],
+   "lesson": "1re-maths-e-ti-fonctions",
+   "source": "Exercice original, style devoir de Première E/TI"
+  },
+  {
+   "id": "1re-maths-e-ti-fon-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quelles sont les solutions de $x^2 - 5x + 6 = 0$ ?",
+   "choices": [
+    "2 et 3",
+    "−2 et −3",
+    "1 et 6",
+    "−1 et −6"
+   ],
+   "answer": 0,
+   "explanation": "$\\Delta = 25 - 24 = 1$ ; $x = \\frac{5 \\pm 1}{2}$ donne 2 et 3. Vérification : somme 5, produit 6.",
+   "method": "Somme des racines = 5, produit = 6.",
+   "mistakes": [
+    "Confondre les signes : somme $= -b/a = 5$."
+   ],
+   "lesson": "1re-maths-e-ti-fonctions",
+   "source": "Exercice original, style devoir de Première E/TI"
+  },
+  {
+   "id": "1re-maths-e-ti-fon-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Soit $f(x) = x^3 - 4x$. Calcule $f'(2)$.",
+   "answer": 8,
+   "tolerance": 0,
+   "explanation": "$f'(x) = 3x^2 - 4$ donc $f'(2) = 3 \\times 4 - 4 = 8$.",
+   "method": "Dériver terme à terme.",
+   "mistakes": [
+    "Dériver $x^3$ en $3x^3$."
+   ],
+   "lesson": "1re-maths-e-ti-fonctions",
+   "source": "Exercice original, style devoir de Première E/TI"
+  },
+  {
+   "id": "1re-maths-e-ti-fon-04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "Soit $f(x) = x^2 + 1$. Quelle est l'équation de la tangente à la courbe en $a = 1$ ?",
+   "choices": [
+    "$y = 2x$",
+    "$y = x + 1$",
+    "$y = 2x + 2$",
+    "$y = x^2$"
+   ],
+   "answer": 0,
+   "explanation": "$f(1) = 2$ et $f'(x) = 2x$ donc $f'(1) = 2$. La tangente est $y = 2(x - 1) + 2 = 2x$.",
+   "method": "$y = f'(a)(x - a) + f(a)$.",
+   "mistakes": [
+    "Oublier d'ajouter $f(a)$."
+   ],
+   "lesson": "1re-maths-e-ti-fonctions",
+   "source": "Exercice original, style devoir de Première E/TI"
+  },
+  {
+   "id": "1re-maths-e-ti-fon-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "Une balle lancée verticalement est à la hauteur $h(t) = -5t^2 + 20t$ (en m, t en s). Quelle est la hauteur maximale ?",
+   "answer": 20,
+   "tolerance": 0,
+   "unit": "m",
+   "explanation": "Sommet en $t = -\\frac{20}{2 \\times (-5)} = 2$ s ; $h(2) = -20 + 40 = 20$ m.",
+   "method": "Maximum = valeur au sommet de la parabole.",
+   "mistakes": [
+    "Donner l'instant (2 s) au lieu de la hauteur."
+   ],
+   "lesson": "1re-maths-e-ti-fonctions",
+   "source": "Exercice original, style devoir de Première E/TI"
+  },
+  {
+   "id": "1re-maths-e-ti-fon-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Un chariot se déplace sur un rail. Sa position (en m) en fonction du temps t (en s, $0 \\leq t \\leq 3$) est $x(t) = 2t^3 - 9t^2 + 12t$. Sa vitesse est $v(t) = x'(t)$.",
+   "method": "Dériver, factoriser $x'$, étudier son signe, calculer les positions.",
+   "mistakes": [
+    "Confondre position et vitesse."
+   ],
+   "parts": [
+    {
+     "id": "1re-maths-e-ti-fon-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la vitesse initiale $v(0)$ en m/s.",
+     "answer": 12,
+     "tolerance": 0,
+     "unit": "m/s",
+     "explanation": "$x'(t) = 6t^2 - 18t + 12$ donc $v(0) = 12$ m/s."
+    },
+    {
+     "id": "1re-maths-e-ti-fon-06-b",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "À quels instants la vitesse est-elle nulle ?",
+     "choices": [
+      "t = 1 s et t = 2 s",
+      "t = 0 s et t = 3 s",
+      "t = 2 s et t = 3 s",
+      "t = 0 s et t = 1 s"
+     ],
+     "answer": 0,
+     "explanation": "$6t^2 - 18t + 12 = 6(t - 1)(t - 2) = 0$ donc $t = 1$ ou $t = 2$."
+    },
+    {
+     "id": "1re-maths-e-ti-fon-06-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la position à l'instant t = 1 s (en m).",
+     "answer": 5,
+     "tolerance": 0,
+     "unit": "m",
+     "explanation": "$x(1) = 2 - 9 + 12 = 5$ m."
+    },
+    {
+     "id": "1re-maths-e-ti-fon-06-d",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la position à l'instant t = 2 s (en m).",
+     "answer": 4,
+     "tolerance": 0,
+     "unit": "m",
+     "explanation": "$x(2) = 16 - 36 + 24 = 4$ m."
+    },
+    {
+     "id": "1re-maths-e-ti-fon-06-e",
+     "kind": "open",
+     "points": 2,
+     "prompt": "Décris le mouvement entre t = 1 s et t = 2 s.",
+     "model": "Pour $1 < t < 2$, $v(t) = 6(t - 1)(t - 2) < 0$ : le chariot **recule**, de la position 5 m à 4 m. Avant t = 1 et après t = 2, la vitesse est positive : il avance.",
+     "rubric": [
+      "Étudie le signe de $v$ entre 1 et 2.",
+      "Conclut que le chariot recule.",
+      "Cite les positions 5 m et 4 m."
+     ],
+     "explanation": "Entre 1 et 2, $v(t) < 0$ : le chariot recule de 5 m à 4 m ; puis il repart en avant."
+    }
+   ],
+   "lesson": "1re-maths-e-ti-fonctions",
+   "source": "Exercice original, style devoir de Première E/TI"
+  },
+  {
+   "id": "1re-maths-e-ti-fon-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quel est le discriminant de $x^2 - 6x + 9$ ?",
+   "choices": [
+    "0",
+    "36",
+    "−36",
+    "18"
+   ],
+   "answer": 0,
+   "explanation": "$\\Delta = 36 - 36 = 0$ : racine double $x = 3$.",
+   "lesson": "1re-maths-e-ti-fonctions",
+   "source": "Exercice original, style devoir de Première E/TI"
+  },
+  {
+   "id": "1re-maths-e-ti-fon-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quelle est la dérivée de $f(x) = 3x^2 + 5x$ ?",
+   "choices": [
+    "$6x + 5$",
+    "$3x + 5$",
+    "$6x^2 + 5$",
+    "$6x$"
+   ],
+   "answer": 0,
+   "explanation": "$(3x^2)' = 6x$ et $(5x)' = 5$.",
+   "lesson": "1re-maths-e-ti-fonctions",
+   "source": "Exercice original, style devoir de Première E/TI"
+  },
+  {
+   "id": "1re-maths-e-ti-fon-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Une parabole $y = ax^2 + bx + c$ avec $a < 0$ est tournée :",
+   "choices": [
+    "vers le bas",
+    "vers le haut",
+    "vers la droite",
+    "vers la gauche"
+   ],
+   "answer": 0,
+   "explanation": "Si $a < 0$, la parabole est « fâchée » : tournée vers le bas, avec un maximum.",
+   "lesson": "1re-maths-e-ti-fonctions",
+   "source": "Exercice original, style devoir de Première E/TI"
+  },
+  {
+   "id": "1re-maths-e-ti-fon-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Si $f'(x) < 0$ sur un intervalle, alors $f$ est :",
+   "choices": [
+    "décroissante",
+    "croissante",
+    "constante",
+    "positive"
+   ],
+   "answer": 0,
+   "explanation": "Un signe négatif de la dérivée signifie que la fonction décroît.",
+   "lesson": "1re-maths-e-ti-fonctions",
+   "source": "Exercice original, style devoir de Première E/TI"
+  },
+  {
+   "id": "1re-maths-e-ti-fon-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quel est le sommet de $y = x^2 - 6x + 5$ ?",
+   "choices": [
+    "S(3 ; −4)",
+    "S(−3 ; −4)",
+    "S(3 ; 4)",
+    "S(6 ; 5)"
+   ],
+   "answer": 0,
+   "explanation": "$\\alpha = 3$ et $f(3) = 9 - 18 + 5 = -4$.",
+   "lesson": "1re-maths-e-ti-fonctions",
+   "source": "Exercice original, style devoir de Première E/TI"
+  },
+  {
+   "id": "1re-maths-e-ti-blanc-ex1",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "**Exercice 1.** Un générateur de fem E = 24 V et de résistance interne r = 3 Ω alimente un circuit. La puissance utile (en W) qu'il fournit, en fonction de l'intensité I (en A, $0 \\leq I \\leq 8$), est $P(I) = 24 I - 3 I^2$.",
+   "method": "Dériver, étudier le signe, utiliser le sommet de la parabole.",
+   "mistakes": [
+    "Oublier l'intervalle d'étude."
+   ],
+   "parts": [
+    {
+     "id": "1re-maths-e-ti-blanc-ex1-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule $P(2)$ (en W).",
+     "answer": 36,
+     "tolerance": 0,
+     "unit": "W",
+     "explanation": "$P(2) = 48 - 12 = 36$ W."
+    },
+    {
+     "id": "1re-maths-e-ti-blanc-ex1-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la dérivée $P'(I)$ au point I = 2.",
+     "answer": 12,
+     "tolerance": 0,
+     "explanation": "$P'(I) = 24 - 6I$ donc $P'(2) = 12$."
+    },
+    {
+     "id": "1re-maths-e-ti-blanc-ex1-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Pour quelle intensité (en A) P est-elle maximale ?",
+     "answer": 4,
+     "tolerance": 0,
+     "unit": "A",
+     "explanation": "$P'(I) = 0$ pour $I = 4$ A ; c'est un maximum car $P'$ passe de positif à négatif."
+    },
+    {
+     "id": "1re-maths-e-ti-blanc-ex1-d",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quelle est la puissance maximale (en W) ?",
+     "answer": 48,
+     "tolerance": 0,
+     "unit": "W",
+     "explanation": "$P(4) = 96 - 48 = 48$ W."
+    },
+    {
+     "id": "1re-maths-e-ti-blanc-ex1-e",
+     "kind": "open",
+     "points": 2,
+     "prompt": "Résous $P(I) = 36$ (en A) et interprète les solutions.",
+     "model": "$24I - 3I^2 = 36 \\Leftrightarrow 3I^2 - 24I + 36 = 0 \\Leftrightarrow I^2 - 8I + 12 = 0$. $\\Delta = 64 - 48 = 16$, donc $I = \\frac{8 - 4}{2} = 2$ ou $I = \\frac{8 + 4}{2} = 6$. La puissance de 36 W est obtenue pour **2 A** et **6 A**, de part et d'autre du maximum (4 A).",
+     "rubric": [
+      "Met l'équation sous la forme $aI^2 + bI + c = 0$.",
+      "Calcule $\\Delta = 16$.",
+      "Trouve les deux solutions 2 et 6.",
+      "Interprète par rapport au maximum en 4 A."
+     ],
+     "explanation": "$24I - 3I^2 = 36$ équivaut à $I^2 - 8I + 12 = 0$ ; $\\Delta = 64 - 48 = 16$ ; $I = 2$ ou $I = 6$."
+    }
+   ],
+   "lesson": "1re-maths-e-ti-fonctions",
+   "source": "Exercice original, style devoir de Première E/TI"
+  }
+ ]
+}

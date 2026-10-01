@@ -1,0 +1,481 @@
+{
+ "chapter": "2nde-physique-c-ch-forces",
+ "lessons": [
+  {
+   "id": "2nde-physique-c-forces",
+   "title": "Forces, principe d'inertie, poids et équilibre",
+   "minutes": 35,
+   "programRef": "2nde C — Forces, principe d'inertie, poids, équilibre d'un solide (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Représenter une force par un vecteur et faire un bilan des forces.",
+    "Énoncer et utiliser le principe d'inertie.",
+    "Calculer un poids et distinguer masse et poids.",
+    "Écrire les conditions d'équilibre d'un solide soumis à deux ou trois forces."
+   ],
+   "prerequisites": [
+    "2nde-physique-c-mouvement"
+   ],
+   "exercises": [
+    "2nde-physique-c-frc-01",
+    "2nde-physique-c-frc-02",
+    "2nde-physique-c-frc-03",
+    "2nde-physique-c-frc-04",
+    "2nde-physique-c-frc-05",
+    "2nde-physique-c-frc-06"
+   ],
+   "selfCheck": [
+    "2nde-physique-c-frc-q1",
+    "2nde-physique-c-frc-q2",
+    "2nde-physique-c-frc-q3",
+    "2nde-physique-c-frc-q4",
+    "2nde-physique-c-frc-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Force",
+     "md": "Une **force** modélise une action mécanique exercée sur un solide (contact ou à distance). On la représente par un **vecteur** : point d'application, direction, sens, intensité. Unité : le **newton** (N), mesuré avec un dynamomètre."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Principe d'inertie",
+     "md": "Dans un référentiel galiléen (le référentiel terrestre convient pour les durées courtes), si la somme vectorielle des forces extérieures est nulle, le centre d'inertie du solide est **au repos** ou en **mouvement rectiligne uniforme**. Réciproquement, s'il est au repos ou en MRU, les forces se compensent : $\\sum \\vec{F} = \\vec{0}$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Poids et masse",
+     "md": "Le poids $\\vec{P}$ est l'attraction de la Terre sur un corps : vertical, vers le bas, d'intensité $P = m\\,g$.\nm : masse (kg) ; g : intensité de la pesanteur (N/kg). Dans ce cours, **g = 10 N/kg** (la valeur 9,8 N/kg est plus précise). La masse est invariable ; le poids dépend du lieu."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Réaction d'un support",
+     "md": "Un support exerce sur le solide une **réaction** $\\vec{R}$. Sans frottement, elle est perpendiculaire au support. Avec frottement, elle se décompose en une composante normale $\\vec{R}_N$ (perpendiculaire) et une force de frottement $\\vec{f}$ (parallèle au support, opposée au glissement)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Équilibre d'un solide",
+     "md": "1. Définir le système et le référentiel.\n2. Faire le **bilan des forces** (poids, réaction, tension, frottement…).\n3. Écrire $\\sum \\vec{F} = \\vec{0}$.\n4. Projeter sur des axes (horizontal et vertical) et résoudre.\nPour **deux forces**, elles ont même direction, sens opposés et même intensité. Pour trois forces non parallèles, elles sont coplanaires et concourantes."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 220,
+      "items": [
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 80,
+        "w": 100,
+        "h": 60,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 140,
+        "x2": 380,
+        "y2": 140,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 170,
+        "y1": 110,
+        "x2": 170,
+        "y2": 190,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 206,
+        "text": "P (poids)",
+        "size": 14,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 170,
+        "y1": 80,
+        "x2": 170,
+        "y2": 10,
+        "color": "green",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 220,
+        "y1": 110,
+        "x2": 320,
+        "y2": 110,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 345,
+        "y": 114,
+        "text": "T",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 125,
+        "x2": 60,
+        "y2": 125,
+        "color": "orange",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 129,
+        "text": "f",
+        "size": 16,
+        "color": "orange",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 182,
+        "y": 40,
+        "text": "R (réaction normale)",
+        "size": 14,
+        "color": "green",
+        "anchor": "start"
+       }
+      ]
+     },
+     "caption": "Caisse tirée à vitesse constante sur un sol horizontal : P et R se compensent, T et f se compensent.",
+     "alt": "Une caisse sur le sol avec quatre flèches : le poids vers le bas, la réaction vers le haut, la traction vers la droite et le frottement vers la gauche."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : caisse immobile",
+     "statement": "Une caisse de 30 kg repose sur le sol horizontal. Fais le bilan des forces et calcule la réaction du sol (g = 10 N/kg).",
+     "steps": [
+      {
+       "md": "Bilan : le poids $\\vec{P}$ (vertical, vers le bas) et la réaction $\\vec{R}$ du sol (verticale, vers le haut). La caisse est immobile : $\\vec{P} + \\vec{R} = \\vec{0}$."
+      },
+      {
+       "md": "Les deux forces ont la même intensité :",
+       "tex": "R = P = m\\,g = 30 \\times 10 = 300\\ \\text{N}"
+      }
+     ],
+     "answer": "**R = 300 N**, verticale vers le haut."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : vitesse constante",
+     "statement": "On tire un traîneau sur un sol horizontal avec une force horizontale de 80 N. Il avance à vitesse constante. Que vaut la force de frottement ?",
+     "steps": [
+      {
+       "md": "Mouvement rectiligne uniforme : d'après le principe d'inertie, la somme des forces est nulle."
+      },
+      {
+       "md": "Sur l'axe horizontal, la traction T et le frottement f s'équilibrent :",
+       "tex": "T - f = 0 \\Rightarrow f = T = 80\\ \\text{N}"
+      }
+     ],
+     "answer": "**f = 80 N**, de sens opposé au mouvement."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : masse et poids",
+     "statement": "Un objet suspendu à un dynamomètre fait lire 4,5 N sur Terre (g = 10 N/kg). Quelle est sa masse ? Quel serait son poids sur la Lune (g = 1,6 N/kg) ?",
+     "steps": [
+      {
+       "md": "Sur Terre :",
+       "tex": "m = \\frac{P}{g} = \\frac{4{,}5}{10} = 0{,}45\\ \\text{kg}"
+      },
+      {
+       "md": "La masse ne change pas. Sur la Lune :",
+       "tex": "P_{\\text{Lune}} = 0{,}45 \\times 1{,}6 = 0{,}72\\ \\text{N}"
+      }
+     ],
+     "answer": "Masse **0,45 kg** ; poids lunaire **0,72 N**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Dire que la masse « se mesure en newtons » ou que le poids « se mesure en kg ».\n- Croire qu'un objet en mouvement uniforme subit forcément une force dans le sens du mouvement.\n- Oublier une force dans le bilan (la réaction ou le frottement).\n- Appliquer « deux forces égales » à un solide soumis à trois forces.\n- Représenter le poids perpendiculaire à un plan incliné : il reste vertical."
+    },
+    {
+     "type": "exercise",
+     "ref": "2nde-physique-c-frc-01"
+    },
+    {
+     "type": "more",
+     "items": [
+      "La valeur de g varie un peu selon le lieu (altitude, latitude) : c'est pourquoi on donne souvent g = 9,8 ou 10 N/kg selon la précision voulue.",
+      "Poids de la Lune : valeur voisine de 1,6 N/kg, à vérifier selon la source donnée par l'enseignant."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Choix g = 10 N/kg (annoncé dans la fiche) : certains enseignants imposent 9,8 N/kg ; les résultats des exercices changent légèrement.",
+    "Valeur de g sur la Lune (1,6 N/kg) : à re-vérifier sur la source de référence du cours.",
+    "Équilibre à trois forces et projection avec trigonométrie : exigible en Seconde C ? À vérifier sur le texte officiel.",
+    "Notation vectorielle et distinction poids/force de gravitation : niveau de détail à confirmer."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "2nde-physique-c-frc-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-physique-c-forces",
+   "prompt": "Calcule le poids d'un objet de masse 12 kg (prends g = 10 N/kg).",
+   "answer": 120,
+   "tolerance": 0,
+   "unit": "N",
+   "explanation": "$P = m\\,g = 12 \\times 10 = 120$ N.",
+   "method": "$P = m g$ avec m en kg.",
+   "mistakes": [
+    "Donner le résultat en kg au lieu de N."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-physique-c-frc-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-physique-c-forces",
+   "prompt": "Un dynamomètre indique 2,5 N lorsqu'on y suspend un objet. Quelle est la masse de l'objet en kg (g = 10 N/kg) ?",
+   "answer": 0.25,
+   "tolerance": 0.001,
+   "unit": "kg",
+   "explanation": "$m = \\frac{P}{g} = \\frac{2{,}5}{10} = 0{,}25$ kg, soit 250 g.",
+   "method": "$m = P / g$.",
+   "mistakes": [
+    "Confondre le poids lu en newtons et la masse en kg."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-physique-c-frc-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-physique-c-forces",
+   "prompt": "Un solide se déplace en ligne droite à vitesse constante. Que peut-on dire des forces qui s'exercent sur lui ?",
+   "choices": [
+    "Il existe forcément une force dans le sens du mouvement qui vaut son poids",
+    "Il n'y a aucune force qui s'exerce sur lui",
+    "Leur somme vectorielle est nulle",
+    "Leur somme est non nulle et dirigée dans le sens du mouvement"
+   ],
+   "answer": 2,
+   "explanation": "Principe d'inertie : vitesse constante en ligne droite équivaut à des forces qui se compensent (somme vectorielle nulle). Cela n'exclut pas la présence de forces, comme le poids ou la réaction.",
+   "method": "Énoncer le principe d'inertie dans le sens réciproque.",
+   "mistakes": [
+    "Croire qu'il faut une force pour entretenir un mouvement uniforme."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-physique-c-frc-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "2nde-physique-c-forces",
+   "prompt": "Sur la Lune, l'intensité de la pesanteur vaut environ 1,6 N/kg. Quel est le poids, sur la Lune, d'un astronaute de masse 60 kg ?",
+   "answer": 96,
+   "tolerance": 0.5,
+   "unit": "N",
+   "explanation": "$P = m\\,g_{\\text{Lune}} = 60 \\times 1{,}6 = 96$ N. Sa masse reste 60 kg : seul le poids change.",
+   "method": "Utiliser la valeur de g du lieu.",
+   "mistakes": [
+    "Penser que la masse change aussi avec le lieu."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-physique-c-frc-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 3,
+   "points": 2,
+   "lesson": "2nde-physique-c-forces",
+   "prompt": "Une lampe de masse 6 kg est suspendue par deux câbles identiques, chacun faisant un angle de 30° avec l'horizontale. Quelle est la tension de chaque câble (g = 10 N/kg) ?",
+   "answer": 60,
+   "tolerance": 0.5,
+   "unit": "N",
+   "explanation": "Équilibre : projection verticale $2T\\sin 30° = P$. Avec $P = 60$ N et $\\sin 30° = 0{,}5$ : $T = \\frac{60}{2 \\times 0{,}5} = 60$ N.",
+   "method": "ΣF = 0, puis projection sur l'axe vertical.",
+   "mistakes": [
+    "Écrire $T = P/2 = 30$ N en oubliant que les câbles sont inclinés."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-physique-c-frc-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "2nde-physique-c-forces",
+   "prompt": "Un sac de cacao de 50 kg est tiré sur le sol horizontal d'un hangar par une corde horizontale, avec une force de traction de 120 N. Le sac glisse à vitesse constante (g = 10 N/kg).",
+   "parts": [
+    {
+     "id": "2nde-physique-c-frc-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le poids du sac (g = 10 N/kg).",
+     "answer": 500,
+     "tolerance": 0,
+     "unit": "N",
+     "explanation": "$P = 50 \\times 10 = 500$ N."
+    },
+    {
+     "id": "2nde-physique-c-frc-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quelle est la valeur de la composante normale de la réaction du sol ?",
+     "answer": 500,
+     "tolerance": 0,
+     "unit": "N",
+     "explanation": "Le sac ne bouge pas verticalement : la composante normale R de la réaction équilibre le poids, $R = P = 500$ N."
+    },
+    {
+     "id": "2nde-physique-c-frc-06-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Le sac glisse à vitesse constante. Quelle est la valeur de la force de frottement ?",
+     "answer": 120,
+     "tolerance": 0,
+     "unit": "N",
+     "explanation": "Mouvement rectiligne uniforme : ΣF = 0, donc la force de frottement équilibre la traction, $f = 120$ N."
+    },
+    {
+     "id": "2nde-physique-c-frc-06-d",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "On tire maintenant avec 200 N. Que devient le mouvement du sac (frottement supposé inchangé) ?",
+     "choices": [
+      "Il continue à vitesse constante",
+      "Il accélère dans le sens de la traction",
+      "Il s'arrête",
+      "Il recule"
+     ],
+     "answer": 1,
+     "explanation": "La traction (200 N) dépasse le frottement (120 N) : la somme des forces est non nulle, dirigée dans le sens de la traction ; la vitesse augmente."
+    }
+   ],
+   "method": "Faire le bilan des forces, appliquer ΣF = 0 pour chaque direction.",
+   "mistakes": [
+    "Oublier la réaction du sol dans le bilan des forces."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-physique-c-frc-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-physique-c-forces",
+   "prompt": "Quelle est l'unité SI d'une force ?",
+   "choices": [
+    "le kilogramme (kg)",
+    "le newton (N)",
+    "le joule (J)",
+    "le watt (W)"
+   ],
+   "answer": 1,
+   "explanation": "La force se mesure en newtons, avec un dynamomètre."
+  },
+  {
+   "id": "2nde-physique-c-frc-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-physique-c-forces",
+   "prompt": "Que vaut le poids d'un objet de 5 kg (g = 10 N/kg) ?",
+   "choices": [
+    "5 N",
+    "50 N",
+    "0,5 N",
+    "15 N"
+   ],
+   "answer": 1,
+   "explanation": "$P = m g = 5 \\times 10 = 50$ N."
+  },
+  {
+   "id": "2nde-physique-c-frc-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-physique-c-forces",
+   "prompt": "Si la somme des forces sur un solide est nulle, alors le solide :",
+   "choices": [
+    "est au repos ou en mouvement rectiligne uniforme",
+    "est forcément immobile",
+    "accélère",
+    "tourne forcément sur lui-même"
+   ],
+   "answer": 0,
+   "explanation": "C'est le principe d'inertie : repos ou MRU (dans un référentiel galiléen)."
+  },
+  {
+   "id": "2nde-physique-c-frc-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-physique-c-forces",
+   "prompt": "Quelle grandeur ne dépend pas du lieu ?",
+   "choices": [
+    "la masse",
+    "le poids",
+    "l'intensité de la pesanteur",
+    "la réaction du support"
+   ],
+   "answer": 0,
+   "explanation": "La masse est liée à la quantité de matière ; le poids dépend de g, donc du lieu."
+  },
+  {
+   "id": "2nde-physique-c-frc-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-physique-c-forces",
+   "prompt": "Le poids d'un objet est dirigé :",
+   "choices": [
+    "horizontalement",
+    "verticalement vers le bas",
+    "vers le haut",
+    "perpendiculairement au sol incliné"
+   ],
+   "answer": 1,
+   "explanation": "Le poids est vertical et dirigé vers le centre de la Terre."
+  }
+ ]
+}

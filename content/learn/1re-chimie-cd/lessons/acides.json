@@ -1,0 +1,479 @@
+{
+ "chapter": "1re-chimie-cd-ch-acides",
+ "lessons": [
+  {
+   "id": "1re-chimie-cd-acides",
+   "chapter": "1re-chimie-cd-ch-acides",
+   "title": "Acides et bases en solution aqueuse : pH, force, dosage",
+   "minutes": 45,
+   "programRef": "1re C/D — Chimie : acides et bases, pH, dosages (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale d'après le programme de 1re C et D ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître un acide, une base et un couple acide/base (théorie de Brønsted).",
+    "Calculer un pH, une concentration en ions oxonium, et distinguer acide fort et acide faible.",
+    "Exploiter un dosage acido-basique à l'équivalence."
+   ],
+   "prerequisites": [
+    "1re-chimie-cd-matiere"
+   ],
+   "exercises": [
+    "1re-chimie-cd-ab-01",
+    "1re-chimie-cd-ab-02",
+    "1re-chimie-cd-ab-03",
+    "1re-chimie-cd-ab-04",
+    "1re-chimie-cd-ab-05",
+    "1re-chimie-cd-ab-06"
+   ],
+   "selfCheck": [
+    "1re-chimie-cd-ab-q1",
+    "1re-chimie-cd-ab-q2",
+    "1re-chimie-cd-ab-q3",
+    "1re-chimie-cd-ab-q4",
+    "1re-chimie-cd-ab-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Ce que tu sauras faire",
+     "md": "- Identifier les couples acide/base.\n- Calculer le pH de solutions d'acide fort et de base forte.\n- Comparer des acides par leur force et exploiter un dosage."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Acide, base, couple (Brønsted)",
+     "md": "Un **acide** est une espèce capable de **céder** un proton H⁺ ; une **base** est une espèce capable d'en **capter** un. Un couple acide/base s'écrit AH/A⁻ avec $\\text{AH} = \\text{A}^- + \\text{H}^+$.\nExemples : $\\text{CH}_3\\text{COOH}/\\text{CH}_3\\text{COO}^-$ ; $\\text{NH}_4^+/\\text{NH}_3$ ; $\\text{H}_3\\text{O}^+/\\text{H}_2\\text{O}$ ; $\\text{H}_2\\text{O}/\\text{HO}^-$.\nL'eau est **amphotère** (ampholyte) : acide dans un couple, base dans l'autre. Une réaction acido-basique est un transfert de proton."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "pH et produit ionique de l'eau",
+     "md": "- $\\text{pH} = -\\log\\,[\\text{H}_3\\text{O}^+]$, donc $[\\text{H}_3\\text{O}^+] = 10^{-\\text{pH}}$ mol/L.\n- À 25 °C : $[\\text{H}_3\\text{O}^+] \\times [\\text{HO}^-] = K_e = 10^{-14}$, donc $\\text{pH} + \\text{pOH} = 14$.\n- pH < 7 : solution **acide** ; pH = 7 : **neutre** ; pH > 7 : **basique**.\nUne diminution d'une unité de pH correspond à une concentration en $\\text{H}_3\\text{O}^+$ multipliée par 10."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 30,
+        "y": 55,
+        "w": 180,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "rect",
+        "x": 210,
+        "y": 55,
+        "w": 180,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 42,
+        "text": "acide",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 42,
+        "text": "basique",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 108,
+        "text": "0",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 108,
+        "text": "7",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 390,
+        "y": 108,
+        "text": "14",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 134,
+        "text": "neutre (25 °C)",
+        "size": 13,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 55,
+        "x2": 210,
+        "y2": 90,
+        "color": "ink",
+        "width": 3
+       }
+      ]
+     },
+     "caption": "Échelle de pH à 25 °C : de 0 à 7 les solutions sont acides, à 7 elles sont neutres, de 7 à 14 elles sont basiques.",
+     "alt": "Une barre horizontale graduée de 0 à 14. La moitié gauche, de 0 à 7, est orange et marquée acide ; la moitié droite, de 7 à 14, est bleue et marquée basique. Un trait marque le pH 7, neutre."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Acide fort, base forte",
+     "md": "- **Acide fort** (HCl, HNO₃) : réaction **totale** avec l'eau, $\\text{HA} + \\text{H}_2\\text{O} \\to \\text{A}^- + \\text{H}_3\\text{O}^+$. Pour une concentration $C$ (pas trop faible) : $\\text{pH} = -\\log C$.\n- **Base forte** (NaOH, KOH) : dissociation totale, $[\\text{HO}^-] = C$ et $\\text{pH} = 14 + \\log C$ à 25 °C.\n- Diluer 10 fois un acide fort **augmente** son pH de 1 ; diluer 10 fois une base forte le **diminue** de 1."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Acide faible et pKa (introduction)",
+     "md": "Un **acide faible** réagit **partiellement** avec l'eau : AH + H₂O ⇌ A⁻ + H₃O⁺ (le signe ⇌ indique une réaction limitée). Son pH est **supérieur** à $-\\log C$. Le taux d'avancement final est $\\tau = \\frac{[\\text{H}_3\\text{O}^+]}{C} < 1$.\nLa constante d'acidité $K_A$ et $\\text{p}K_A = -\\log K_A$ mesurent la force : **plus le $\\text{p}K_A$ est petit, plus l'acide est fort**. Valeurs usuelles : $\\text{CH}_3\\text{COOH}/\\text{CH}_3\\text{COO}^-$ : 4,8 ; $\\text{NH}_4^+/\\text{NH}_3$ : 9,2."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Dosage acido-basique",
+     "md": "L'équation de réaction d'un acide fort avec une base forte est $\\text{H}_3\\text{O}^+ + \\text{HO}^- \\to 2\\,\\text{H}_2\\text{O}$ ; à l'équivalence, $C_aV_a = C_bV_b$ (coefficients égaux à 1). On repère l'équivalence par un indicateur coloré dont la zone de virage contient le pH à l'équivalence : bleu de bromothymol (jaune, vert puis bleu, vers pH 6 à 7,6) ; phénolphtaléine (incolore puis rose, vers pH 8,2 à 10). Acide fort et base forte : pH = 7 à l'équivalence."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : acide fort",
+     "statement": "Une solution d'acide chlorhydrique a pour concentration $C = 1{,}0 \\times 10^{-2}$ mol/L. Calcule son pH, puis la concentration en ions hydroxyde.",
+     "steps": [
+      {
+       "md": "L'acide chlorhydrique est un acide fort : $[\\text{H}_3\\text{O}^+] = C$.",
+       "tex": "\\text{pH} = -\\log (10^{-2}) = 2{,}0"
+      },
+      {
+       "md": "Avec $K_e = 10^{-14}$ :",
+       "tex": "[\\text{HO}^-] = \\frac{10^{-14}}{10^{-2}} = 10^{-12}\\ \\text{mol/L}"
+      }
+     ],
+     "answer": "**pH = 2,0 ; [HO⁻] = 10⁻¹² mol/L.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : base forte",
+     "statement": "Une solution d'hydroxyde de sodium a pour concentration $C = 2{,}0 \\times 10^{-2}$ mol/L. Calcule son pH à 25 °C.",
+     "steps": [
+      {
+       "md": "NaOH est une base forte : $[\\text{HO}^-] = C = 0{,}020$ mol/L.",
+       "tex": "[\\text{H}_3\\text{O}^+] = \\frac{10^{-14}}{0{,}020} = 5{,}0 \\times 10^{-13}\\ \\text{mol/L}"
+      },
+      {
+       "md": "Donc :",
+       "tex": "\\text{pH} = -\\log (5{,}0 \\times 10^{-13}) \\approx 12{,}30 \\quad (= 14 + \\log 0{,}020)"
+      }
+     ],
+     "answer": "**pH ≈ 12,30.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : force d'un acide",
+     "statement": "Une solution d'acide éthanoïque de concentration 0,10 mol/L a un pH mesuré de 3,0 (valeur fictive pour l'exercice). Cet acide est-il fort ? Calcule son taux d'avancement.",
+     "steps": [
+      {
+       "md": "Si l'acide était fort, on aurait $\\text{pH} = -\\log 0{,}10 = 1{,}0$. Le pH mesuré (3,0) est plus grand : la réaction avec l'eau est **partielle**."
+      },
+      {
+       "md": "$[\\text{H}_3\\text{O}^+] = 10^{-3}$ mol/L, donc :",
+       "tex": "\\tau = \\frac{10^{-3}}{0{,}10} = 0{,}010 = 1\\ \\%"
+      }
+     ],
+     "answer": "**Acide faible, taux d'avancement τ = 1 %.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Dire que le pH peut se calculer par $-\\log C$ pour un acide faible.\n- Calculer le pH d'une base forte avec $-\\log C$ (on obtiendrait une valeur acide).\n- Oublier que le pH est une échelle logarithmique : pH 3 est dix fois plus acide que pH 4.\n- Confondre « acide fort » (réaction totale avec l'eau) et « acide concentré » (grande concentration).\n- Écrire $\\text{H}^+$ seul en solution : l'ion est solvaté, noté $\\text{H}_3\\text{O}^+$ (ion oxonium)."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-chimie-cd-ab-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-chimie-cd-ab-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-chimie-cd-ab-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le pH du sang humain est maintenu à une valeur voisine de 7,4 : il est très peu variable grâce à des couples acide/base tampons.",
+      "Le jus de citron est acide (acide citrique), le savon est légèrement basique : on le voit au toucher, glissant, et on évite le contact de la soude concentrée avec la peau."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Le pKA et la relation pH = pKA + log([A⁻]/[AH]) sont-ils au programme de la 1re C/D ou seulement de la Tle ? Fiche écrite au niveau introductif : seule la comparaison des forces par le pKA est mentionnée.",
+    "Valeurs de pKA (4,8 pour CH₃COOH/CH₃COO⁻ ; 9,2 pour NH₄⁺/NH₃) et zones de virage des indicateurs : valeurs usuelles à re-vérifier.",
+    "Formule pH = −log C valable pour un acide fort en solution pas trop diluée (C supérieure à environ 10⁻⁶ mol/L) ; la correction de l'autoprotolyse n'est pas traitée.",
+    "Vérifier si le programme officiel exige la courbe pH = f(V) et le pH à l'équivalence pour acide faible/base forte."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "1re-chimie-cd-ab-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-chimie-cd-acides",
+   "prompt": "Calcule le pH d'une solution d'acide chlorhydrique (acide fort) de concentration $1{,}0 \\times 10^{-3}$ mol/L.",
+   "answer": 3,
+   "tolerance": 0.01,
+   "explanation": "$\\text{pH} = -\\log C = -\\log 10^{-3} = 3$.",
+   "method": "Acide fort : $\\text{pH} = -\\log C$.",
+   "mistakes": [
+    "Donner pH = 1 en ne regardant que le « 1,0 »."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-chimie-cd-ab-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-chimie-cd-acides",
+   "prompt": "Une solution a un pH de 2,0. Quelle est la concentration en ions $\\text{H}_3\\text{O}^+$ (en mmol/L) ?",
+   "answer": 10,
+   "tolerance": 0.01,
+   "unit": "mmol/L",
+   "explanation": "$[\\text{H}_3\\text{O}^+] = 10^{-2}$ mol/L = 10 mmol/L.",
+   "method": "$[\\text{H}_3\\text{O}^+] = 10^{-\\text{pH}}$.",
+   "mistakes": [
+    "Confondre mol/L et mmol/L (écrire 0,01)."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-chimie-cd-ab-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-chimie-cd-acides",
+   "prompt": "Vrai ou faux : à 25 °C, une solution de pH = 9 est acide.",
+   "answer": false,
+   "explanation": "Faux : pH > 7 signifie une solution basique. Une solution acide a un pH inférieur à 7.",
+   "mistakes": [
+    "Croire que « plus le pH est grand, plus la solution est acide »."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-chimie-cd-ab-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "1re-chimie-cd-acides",
+   "prompt": "Calcule le pH à 25 °C d'une solution d'hydroxyde de sodium (base forte) de concentration 0,020 mol/L (arrondi au centième).",
+   "answer": 12.3,
+   "tolerance": 0.01,
+   "explanation": "$\\text{pH} = 14 + \\log C = 14 + \\log 0{,}020 = 14 - 1{,}70 = 12{,}30$.",
+   "method": "Base forte : $\\text{pH} = 14 + \\log C$.",
+   "mistakes": [
+    "Calculer $-\\log 0{,}020 = 1{,}70$."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-chimie-cd-ab-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "1re-chimie-cd-acides",
+   "prompt": "Une solution d'acide chlorhydrique a un pH de 2,0. On la dilue 100 fois avec de l'eau. Quel est le pH de la solution diluée ?",
+   "answer": 4,
+   "tolerance": 0.01,
+   "explanation": "La concentration est divisée par 100 : $[\\text{H}_3\\text{O}^+]$ passe de $10^{-2}$ à $10^{-4}$ mol/L, donc $\\text{pH} = 4$ (acide fort : chaque division par 10 ajoute 1).",
+   "method": "Acide fort : dilution ×10 ajoute 1 au pH.",
+   "mistakes": [
+    "Diviser le pH par 100."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-chimie-cd-ab-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "1re-chimie-cd-acides",
+   "prompt": "On dose 20,0 mL d'une solution d'hydroxyde de sodium (base forte) par de l'acide chlorhydrique à 0,10 mol/L. L'équivalence est atteinte pour 15,0 mL d'acide versés. Donnée : $M(\\text{NaOH}) = 40$ g/mol.",
+   "method": "Équation, relation d'équivalence, pH d'une base forte, concentration massique.",
+   "mistakes": [
+    "Utiliser $-\\log C$ pour une base.",
+    "Utiliser le volume d'acide au lieu du volume de base dans la division."
+   ],
+   "source": "Exercice original, style Probatoire C/D",
+   "parts": [
+    {
+     "id": "1re-chimie-cd-ab-06-a",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle est l'équation de la réaction de dosage ?",
+     "choices": [
+      "$\\text{H}_3\\text{O}^+ + \\text{HO}^- \\to 2\\,\\text{H}_2\\text{O}$",
+      "$\\text{H}_3\\text{O}^+ + \\text{Na}^+ \\to \\text{H}_2\\text{O} + \\text{NaH}$",
+      "$\\text{HO}^- + \\text{Cl}^- \\to \\text{HOCl} + e^-$",
+      "$2\\,\\text{H}_2\\text{O} \\to \\text{H}_3\\text{O}^+ + \\text{HO}^-$"
+     ],
+     "answer": 0,
+     "explanation": "Transfert d'un proton de l'ion oxonium (acide) vers l'ion hydroxyde (base)."
+    },
+    {
+     "id": "1re-chimie-cd-ab-06-b",
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Calcule la concentration de la solution de soude (en mol/L).",
+     "answer": 0.075,
+     "tolerance": 0.0005,
+     "unit": "mol/L",
+     "explanation": "À l'équivalence $C_aV_a = C_bV_b$ : $C_b = \\frac{0{,}10 \\times 15{,}0}{20{,}0} = 0{,}075$ mol/L."
+    },
+    {
+     "id": "1re-chimie-cd-ab-06-c",
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Calcule le pH de la solution de soude avant dosage (à 25 °C, arrondi au centième).",
+     "answer": 12.88,
+     "tolerance": 0.01,
+     "explanation": "$\\text{pH} = 14 + \\log 0{,}075 \\approx 14 - 1{,}125 \\approx 12{,}88$."
+    },
+    {
+     "id": "1re-chimie-cd-ab-06-d",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la concentration massique de la soude (en g/L).",
+     "answer": 3.0,
+     "tolerance": 0.01,
+     "unit": "g/L",
+     "explanation": "$C_m = C \\times M = 0{,}075 \\times 40 = 3{,}0$ g/L."
+    }
+   ]
+  },
+  {
+   "id": "1re-chimie-cd-ab-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-chimie-cd-acides",
+   "prompt": "Un acide, au sens de Brønsted, est une espèce qui peut :",
+   "choices": [
+    "capter un proton H⁺",
+    "capter un électron",
+    "céder un électron",
+    "céder un proton H⁺"
+   ],
+   "answer": 3,
+   "explanation": "Acide = donneur de protons ; base = accepteur de protons."
+  },
+  {
+   "id": "1re-chimie-cd-ab-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-chimie-cd-acides",
+   "prompt": "Quelle est la base conjuguée de l'acide éthanoïque $\\text{CH}_3\\text{COOH}$ ?",
+   "choices": [
+    "$\\text{CH}_3\\text{COO}^-$",
+    "$\\text{CH}_3\\text{COOH}_2^+$",
+    "$\\text{CH}_3\\text{OH}$",
+    "$\\text{H}_3\\text{O}^+$"
+   ],
+   "answer": 0,
+   "explanation": "Le couple est $\\text{CH}_3\\text{COOH}/\\text{CH}_3\\text{COO}^-$ : la base est l'acide privé de H⁺."
+  },
+  {
+   "id": "1re-chimie-cd-ab-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-chimie-cd-acides",
+   "prompt": "À 25 °C, une solution a $[\\text{H}_3\\text{O}^+] = 10^{-5}$ mol/L. Son pH et sa nature sont :",
+   "choices": [
+    "pH = 5, basique",
+    "pH = 5, acide",
+    "pH = 9, acide",
+    "pH = 9, basique"
+   ],
+   "answer": 1,
+   "explanation": "$\\text{pH} = -\\log 10^{-5} = 5 < 7$ : solution acide."
+  },
+  {
+   "id": "1re-chimie-cd-ab-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-chimie-cd-acides",
+   "prompt": "Un acide faible, de concentration C, a un pH :",
+   "choices": [
+    "égal à $-\\log C$",
+    "inférieur à $-\\log C$",
+    "supérieur à $-\\log C$",
+    "égal à 7"
+   ],
+   "answer": 2,
+   "explanation": "Sa réaction avec l'eau est partielle : $[\\text{H}_3\\text{O}^+] < C$, donc le pH est plus grand."
+  },
+  {
+   "id": "1re-chimie-cd-ab-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-chimie-cd-acides",
+   "prompt": "On dilue 10 fois une solution d'acide fort. Son pH :",
+   "choices": [
+    "diminue de 1",
+    "est multiplié par 10",
+    "ne change pas",
+    "augmente de 1"
+   ],
+   "answer": 3,
+   "explanation": "$[\\text{H}_3\\text{O}^+]$ est divisée par 10, donc $\\text{pH}$ augmente de 1."
+  }
+ ]
+}

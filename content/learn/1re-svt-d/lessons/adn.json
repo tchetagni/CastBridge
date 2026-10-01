@@ -1,0 +1,539 @@
+{
+ "chapter": "1re-svt-d-ch-adn",
+ "lessons": [
+  {
+   "id": "1re-svt-d-adn",
+   "title": "Cellule, ADN et synthèse des protéines",
+   "minutes": 35,
+   "programRef": "1re D — Cellule, ADN, synthèse des protéines (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Décrire les éléments d'une cellule et le rôle des organites.",
+    "Décrire la structure de l'ADN et la complémentarité des bases.",
+    "Expliquer la réplication, la transcription et la traduction.",
+    "Déterminer une séquence d'ARNm et la protéine correspondante avec le code génétique."
+   ],
+   "exercises": [
+    "1re-svt-d-adn-01",
+    "1re-svt-d-adn-02",
+    "1re-svt-d-adn-03",
+    "1re-svt-d-adn-04",
+    "1re-svt-d-adn-05",
+    "1re-svt-d-adn-06"
+   ],
+   "selfCheck": [
+    "1re-svt-d-adn-q1",
+    "1re-svt-d-adn-q2",
+    "1re-svt-d-adn-q3",
+    "1re-svt-d-adn-q4",
+    "1re-svt-d-adn-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La cellule eucaryote",
+     "md": "La **cellule** est l'unité de base des êtres vivants. Une cellule eucaryote comprend :\n- une **membrane plasmique** qui la délimite ;\n- un **cytoplasme** contenant des organites ;\n- un **noyau** qui renferme l'ADN.\nOrganites : **mitochondries** (respiration), **ribosomes** (fabrication des protéines), réticulum endoplasmique, appareil de Golgi."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Cellule végétale",
+     "md": "En plus des éléments précédents, la cellule végétale possède :\n- une **paroi** (cellulose) qui la rend rigide ;\n- des **chloroplastes**, siège de la photosynthèse ;\n- une grande **vacuole** qui stocke de l'eau et des substances.\nLes bactéries n'ont pas de vrai noyau : leur ADN est libre dans le cytoplasme."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "ADN, gène, chromosome",
+     "md": "L'**ADN** est une molécule en **double hélice** formée de deux brins de nucléotides. Un nucléotide = un phosphate, un sucre (désoxyribose) et une base : **A, T, C ou G**.\n- Les bases se lient par **complémentarité** : A avec T, C avec G.\n- Un **gène** est une portion d'ADN qui contient l'information pour fabriquer une protéine.\n- Un **chromosome** est une très longue molécule d'ADN associée à des protéines."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 540,
+      "h": 170,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 50,
+        "w": 100,
+        "h": 70,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 90,
+        "text": "ADN",
+        "size": 16,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 140,
+        "text": "noyau",
+        "size": 13,
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 85,
+        "x2": 220,
+        "y2": 85,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 165,
+        "y": 72,
+        "text": "transcription",
+        "size": 12,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 220,
+        "y": 50,
+        "w": 100,
+        "h": 70,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 90,
+        "text": "ARNm",
+        "size": 16,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 140,
+        "text": "cytoplasme",
+        "size": 13,
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 320,
+        "y1": 85,
+        "x2": 430,
+        "y2": 85,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 375,
+        "y": 72,
+        "text": "traduction",
+        "size": 12,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 430,
+        "y": 50,
+        "w": 100,
+        "h": 70,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 480,
+        "y": 90,
+        "text": "protéine",
+        "size": 16,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 480,
+        "y": 140,
+        "text": "ribosome",
+        "size": 13,
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "De l'ADN à la protéine : deux étapes, deux lieux de la cellule.",
+     "alt": "Trois cadres alignés : ADN dans le noyau, ARNm dans le cytoplasme, protéine au ribosome. Une flèche nommée transcription relie l'ADN à l'ARNm, une flèche nommée traduction relie l'ARNm à la protéine."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "La réplication de l'ADN",
+     "md": "Avant chaque division cellulaire, pendant l'interphase, l'ADN est **copié** : c'est la **réplication**.\n- Les deux brins se séparent ; chacun sert de **modèle** pour fabriquer un brin complémentaire (par complémentarité A-T, C-G).\n- On obtient **deux molécules identiques** à la molécule de départ.\n- Chaque molécule fille garde un brin ancien et un brin neuf : la réplication est **semi-conservative**."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "La transcription",
+     "md": "La **transcription** copie un gène en **ARN messager** (ARNm), dans le noyau.\n- L'ARN est **simple brin**, son sucre est le ribose et il contient la base **U** (uracile) à la place de T.\n- L'ARNm est complémentaire du brin d'ADN transcrit : A→U, T→A, C→G, G→C.\n- L'ARNm sort ensuite du noyau vers le cytoplasme."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Code génétique et traduction",
+     "md": "La **traduction** a lieu dans le cytoplasme, sur les **ribosomes** : l'ARNm est lu par groupes de trois bases, les **codons**.\n- Il existe 64 codons : 61 codent un acide aminé (20 acides aminés différents), 3 sont des codons **stop**.\n- AUG est le codon d'initiation (méthionine).\n- Le code est **redondant** (plusieurs codons pour un acide aminé) et pratiquement **universel**.\nLes acides aminés s'enchaînent en une protéine."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : de l'ADN à la protéine",
+     "md": "1. Écrire l'ARNm complémentaire du brin transcrit (T→A, A→U, C→G, G→C).\n2. Découper l'ARNm en codons (groupes de 3).\n3. Remplacer chaque codon par son acide aminé avec le tableau du code génétique.\n4. S'arrêter au codon stop : il ne code aucun acide aminé."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-svt-d-adn-01"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : de l'ARNm à la protéine",
+     "statement": "On donne l'ARNm : AUG AAA CCG GAA UAA. Quel est le brin d'ADN transcrit et quelle protéine est fabriquée ? Extrait du code : AUG = Met, AAA = Lys, CCG = Pro, GAA = Glu, UAA = stop.",
+     "steps": [
+      {
+       "md": "Le brin transcrit est complémentaire de l'ARNm (U→A, A→T, G→C, C→G) :",
+       "tex": "TAC TTT GGC CTT ATT"
+      },
+      {
+       "md": "On lit les codons un par un : AUG = Met, AAA = Lys, CCG = Pro, GAA = Glu, puis UAA est un codon stop : la traduction s'arrête."
+      },
+      {
+       "md": "La chaîne obtenue compte **4 acides aminés**, bien que l'ARNm ait 5 codons (le stop ne code rien)."
+      }
+     ],
+     "answer": "Brin transcrit : TAC TTT GGC CTT ATT ; protéine : **Met-Lys-Pro-Glu**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : pourcentages de bases",
+     "statement": "Une molécule d'ADN double brin compte 1 200 nucléotides (au total) dont 18 % de thymine. Combien contient-elle de cytosine ?",
+     "steps": [
+      {
+       "md": "Par complémentarité, A = T : il y a donc 18 % d'adénine, soit 36 % pour A + T."
+      },
+      {
+       "md": "Il reste 100 − 36 = 64 % pour C + G. Comme C = G, la cytosine représente 32 %."
+      },
+      {
+       "md": "Nombre de cytosines :",
+       "tex": "\\frac{32}{100} \\times 1200 = 384"
+      }
+     ],
+     "answer": "**384 cytosines** (et 384 guanines, 216 adénines, 216 thymines)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Mettre de la thymine (T) dans l'ARN : l'ARN contient de l'**uracile** (U).\n- Confondre le brin transcrit et l'ARNm : l'ARNm est **complémentaire** du brin transcrit.\n- Compter le codon stop comme un acide aminé.\n- Confondre réplication (ADN→ADN, avant la division) et transcription (ADN→ARN).\n- Confondre codon (sur l'ARNm) et anticodon (sur l'ARN de transfert)."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-svt-d-adn-05"
+    },
+    {
+     "type": "more",
+     "items": [
+      "L'ARN de transfert (ARNt) apporte les acides aminés : son **anticodon** s'apparie au codon de l'ARNm sur le ribosome.",
+      "Une **mutation** est une modification de la séquence de l'ADN ; elle peut changer (ou non) la protéine, car le code est redondant.",
+      "Les protéines sont des enzymes, des hormones, des anticorps... : ce sont elles qui déterminent les caractères visibles."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Niveau de détail attendu en 1re D (enzymes, sens 5'→3', ARNt, ribosome) : à vérifier sur le programme officiel.",
+    "Le sens de lecture 5'→3' n'est pas utilisé ici : à ajouter si le programme l'exige.",
+    "Nombre d'ATP, noms d'enzymes et conventions de notation du brin transcrit : à confirmer avec l'enseignant."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "1re-svt-d-adn-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-svt-d-adn",
+   "prompt": "Quelle base de l'ARN remplace la thymine de l'ADN ?",
+   "choices": [
+    "L'uracile (U)",
+    "L'adénine (A)",
+    "La cytosine (C)",
+    "La guanine (G)"
+   ],
+   "answer": 0,
+   "explanation": "L'ARN ne contient pas de thymine : l'uracile prend sa place et s'apparie avec l'adénine.",
+   "mistakes": [
+    "Écrire T dans un ARNm."
+   ],
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-adn-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-svt-d-adn",
+   "prompt": "Un fragment d'ADN contient 28 % de guanine. Quel est son pourcentage d'adénine ? (réponse en %)",
+   "answer": 22,
+   "tolerance": 0,
+   "unit": "%",
+   "explanation": "G = C = 28 %, donc C + G = 56 %. Il reste 44 % pour A + T, soit A = T = 22 %.",
+   "method": "A = T, C = G et le total fait 100 %.",
+   "mistakes": [
+    "Répondre 44 % (A + T) au lieu de 22 %."
+   ],
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-adn-03",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "lesson": "1re-svt-d-adn",
+   "prompt": "Associe chaque organite à son rôle.",
+   "pairs": [
+    [
+     "Noyau",
+     "Contient l'ADN"
+    ],
+    [
+     "Ribosome",
+     "Fabrique les protéines (traduction)"
+    ],
+    [
+     "Mitochondrie",
+     "Libère l'énergie par la respiration"
+    ],
+    [
+     "Chloroplaste",
+     "Réalise la photosynthèse"
+    ],
+    [
+     "Paroi",
+     "Rend la cellule végétale rigide"
+    ]
+   ],
+   "explanation": "Le noyau protège l'ADN, les ribosomes lisent l'ARNm, les mitochondries assurent la respiration cellulaire, les chloroplastes la photosynthèse ; la paroi n'existe que chez les végétaux.",
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-adn-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "1re-svt-d-adn",
+   "prompt": "Une région codante d'un ARNm compte 366 nucléotides, codon stop compris. Combien d'acides aminés la protéine contient-elle ?",
+   "answer": 121,
+   "tolerance": 0,
+   "explanation": "366 ÷ 3 = 122 codons. Le dernier est le codon stop, qui ne code aucun acide aminé : 122 − 1 = 121 acides aminés.",
+   "method": "Nombre de codons = nombre de nucléotides ÷ 3 ; retirer le stop.",
+   "mistakes": [
+    "Répondre 122 en comptant le codon stop.",
+    "Répondre 366 en confondant nucléotides et acides aminés."
+   ],
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-adn-05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "1re-svt-d-adn",
+   "prompt": "Un brin d'ADN transcrit est : TAC GGA TTT CTT ACT. Extrait du code : AUG = Met, CCU = Pro, AAA = Lys, GAA = Glu, UGA = stop. Quelle est la protéine ?",
+   "choices": [
+    "Met-Glu-Lys-Pro",
+    "Met-Pro-Lys-Glu",
+    "Tyr-Gly-Phe-Leu",
+    "Met-Pro-Lys-Glu-stop"
+   ],
+   "answer": 1,
+   "explanation": "ARNm = AUG CCU AAA GAA UGA (T→A, A→U, C→G, G→C). Traduction : Met, Pro, Lys, Glu ; UGA est un codon stop et n'entre pas dans la chaîne.",
+   "mistakes": [
+    "Lire directement le brin d'ADN comme si c'était l'ARNm.",
+    "Inclure le stop dans la protéine."
+   ],
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-adn-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "1re-svt-d-adn",
+   "prompt": "La drépanocytose est une maladie due à une hémoglobine anormale. Dans un gène de l'hémoglobine, un codon normal de l'ARNm est GAG ; chez un malade il est GUG (il s'agit d'une mutation). Extrait du code : GAG = Glu (acide glutamique), GUG = Val (valine).",
+   "method": "Écrire l'ARNm, comparer les codons, puis relier ADN, protéine et caractère.",
+   "mistakes": [
+    "Dire que la mutation modifie directement le caractère sans passer par la protéine."
+   ],
+   "source": "Exercice original, style Probatoire",
+   "parts": [
+    {
+     "id": "1re-svt-d-adn-06-a",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quel est le brin d'ADN transcrit correspondant au codon normal GAG ?",
+     "choices": [
+      "CTC",
+      "GAG",
+      "CUC",
+      "GTG"
+     ],
+     "answer": 0,
+     "explanation": "Le brin transcrit est complémentaire de l'ARNm : G→C, A→T, G→C, soit CTC. L'ADN ne contient pas d'uracile, donc CUC est impossible."
+    },
+    {
+     "id": "1re-svt-d-adn-06-b",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle est la nature de la mutation ?",
+     "choices": [
+      "Substitution d'une seule base",
+      "Disparition d'un codon",
+      "Ajout d'une base",
+      "Doublement du gène"
+     ],
+     "answer": 0,
+     "explanation": "Entre GAG et GUG, une seule base change (A→U) : c'est une substitution de bases. Le nombre de codons est inchangé."
+    },
+    {
+     "id": "1re-svt-d-adn-06-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quel est le nombre d'acides aminés différents entre la chaîne normale et la chaîne mutée, si seule cette mutation existe ?",
+     "answer": 1,
+     "tolerance": 0,
+     "explanation": "Seul le codon muté change d'acide aminé (Glu devient Val) : une différence. Le reste de la chaîne est identique."
+    },
+    {
+     "id": "1re-svt-d-adn-06-d",
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explique en 2 à 3 phrases le lien entre la modification de l'ADN et le caractère « hémoglobine anormale ».",
+     "model": "La modification d'une base de l'ADN change un codon de l'ARNm lors de la transcription. À la traduction, un autre acide aminé est placé dans la protéine, ce qui modifie l'hémoglobine. Cette protéine anormale explique le caractère observé : de l'ADN à la protéine, puis au caractère.",
+     "rubric": [
+      "L'enchaînement ADN → ARNm → protéine est cité (1 point).",
+      "Le changement d'acide aminé est relié au caractère de la protéine modifiée (1 point)."
+     ],
+     "explanation": "Le message passe de l'ADN à l'ARNm puis à la protéine : un changement d'ADN peut donc modifier la protéine et le caractère."
+    }
+   ]
+  },
+  {
+   "id": "1re-svt-d-adn-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-svt-d-adn",
+   "prompt": "Combien de nucléotides forment un codon ?",
+   "choices": [
+    "3",
+    "2",
+    "4",
+    "20"
+   ],
+   "answer": 0,
+   "explanation": "Un codon est un groupe de trois nucléotides consécutifs de l'ARNm.",
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-adn-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-svt-d-adn",
+   "prompt": "Où se déroule la traduction ?",
+   "choices": [
+    "Dans le noyau",
+    "Sur les ribosomes, dans le cytoplasme",
+    "Dans les chloroplastes uniquement",
+    "Dans la membrane plasmique"
+   ],
+   "answer": 1,
+   "explanation": "La traduction a lieu sur les ribosomes, dans le cytoplasme ; la transcription a lieu dans le noyau.",
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-adn-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-svt-d-adn",
+   "prompt": "La réplication de l'ADN est dite semi-conservative car :",
+   "choices": [
+    "l'ADN fille ne contient que des brins neufs",
+    "seule la moitié du gène est copiée",
+    "chaque molécule fille garde un brin ancien",
+    "l'ADN est détruit puis recréé"
+   ],
+   "answer": 2,
+   "explanation": "Chaque molécule fille contient un brin de la molécule mère et un brin neuf.",
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-adn-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-svt-d-adn",
+   "prompt": "Quel brin d'ADN est complémentaire de ATGC ?",
+   "choices": [
+    "TAGC",
+    "UACG",
+    "ATGC",
+    "TACG"
+   ],
+   "answer": 3,
+   "explanation": "A↔T, T↔A, G↔C, C↔G donne TACG. L'ADN ne contient jamais U.",
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-adn-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-svt-d-adn",
+   "prompt": "Pourquoi dit-on que le code génétique est redondant ?",
+   "choices": [
+    "Plusieurs codons peuvent coder le même acide aminé",
+    "Un codon code plusieurs acides aminés",
+    "Il n'y a que 20 codons",
+    "Il change selon l'espèce"
+   ],
+   "answer": 0,
+   "explanation": "Il y a 61 codons pour 20 acides aminés : plusieurs codons codent le même acide aminé.",
+   "source": "Exercice original, style Probatoire"
+  }
+ ]
+}

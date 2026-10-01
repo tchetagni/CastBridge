@@ -1,0 +1,459 @@
+{
+ "chapter": "tle-economie-ch-comptabilite",
+ "lessons": [
+  {
+   "id": "tle-economie-comptabilite-nationale",
+   "title": "Comptabilité nationale : PIB, croissance, revenu",
+   "minutes": 40,
+   "programRef": "Tle — Économie : comptabilité nationale, PIB, croissance, revenu (à vérifier sur le texte officiel ; présence de la matière selon les séries incertaine)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Définir la comptabilité nationale.",
+    "Calculer VA, PIB, croissance, PIB par habitant.",
+    "Distinguer nominal/réel et PIB/revenu.",
+    "Connaître les limites du PIB."
+   ],
+   "exercises": [
+    "tle-economie-cn-01",
+    "tle-economie-cn-02",
+    "tle-economie-cn-03",
+    "tle-economie-cn-04",
+    "tle-economie-cn-05",
+    "tle-economie-cn-06"
+   ],
+   "selfCheck": [
+    "tle-economie-cn-q1",
+    "tle-economie-cn-q2",
+    "tle-economie-cn-q3",
+    "tle-economie-cn-q4",
+    "tle-economie-cn-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Objectifs",
+     "md": "- Définir la comptabilité nationale et ses agents.\n- Calculer valeur ajoutée, PIB, croissance, PIB par habitant.\n- Distinguer PIB nominal et réel, PIB et revenu.\n- Connaître les limites du PIB."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La comptabilité nationale",
+     "md": "Description **chiffrée** de l'activité économique d'un pays sur une période (en général un an), par grands **agents économiques** : ménages, entreprises, administrations publiques, institutions financières, **reste du monde**."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "La valeur ajoutée",
+     "md": "La **valeur ajoutée** (VA) est la richesse créée par une entreprise : production − consommations intermédiaires (matières, énergie, services achetés et détruits ou transformés dans la production).",
+     "tex": "VA = \\text{Production} - \\text{Consommations intermédiaires}"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Le PIB : trois optiques",
+     "md": "- **Production** : somme des valeurs ajoutées + impôts sur les produits − subventions.\n- **Dépenses** : $PIB = C + I + G + X - M$ (consommation, investissement, dépenses publiques, exportations, importations).\n- **Revenus** : rémunérations + excédents d'exploitation + impôts − subventions.\n\nLes trois optiques donnent en principe le **même résultat**.",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "unit": "milliards de FCFA (fictifs)",
+      "w": 420,
+      "h": 240,
+      "bars": [
+       {
+        "label": "C",
+        "value": 5200,
+        "color": "blue"
+       },
+       {
+        "label": "I",
+        "value": 1800,
+        "color": "green"
+       },
+       {
+        "label": "G",
+        "value": 1500,
+        "color": "orange"
+       },
+       {
+        "label": "X",
+        "value": 1300,
+        "color": "purple"
+       },
+       {
+        "label": "M",
+        "value": 1700,
+        "color": "red"
+       }
+      ]
+     },
+     "caption": "PIB par les dépenses (données fictives) : C, I, G, X et M sont donnés en milliards de FCFA.",
+     "alt": "Diagramme à barres (données fictives) : C 5 200, I 1 800, G 1 500, X 1 300, M 1 700 milliards de FCFA."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : valeur ajoutée",
+     "statement": "Une entreprise fictive produit 1 200 000 FCFA de biens et achète 700 000 FCFA de matières et services pour cela. Calcule sa valeur ajoutée.",
+     "steps": [
+      {
+       "md": "**Formule** : VA = production − consommations intermédiaires."
+      },
+      {
+       "md": "Calcul :",
+       "tex": "1\\,200\\,000 - 700\\,000 = 500\\,000"
+      },
+      {
+       "md": "**Lecture** : l'entreprise a créé 500 000 FCFA de richesse ; c'est cette somme (et non la production brute) qui compte dans le PIB, pour éviter de compter deux fois les mêmes biens."
+      }
+     ],
+     "answer": "**VA = 500 000 FCFA** (données fictives)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Croissance, nominal et réel",
+     "md": "- **Taux de croissance** :",
+     "tex": "\\dfrac{PIB_t - PIB_{t-1}}{PIB_{t-1}} \\times 100"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "PIB nominal et réel",
+     "md": "- **PIB nominal** : aux prix de l'année (comprend l'effet des hausses de prix).\n- **PIB réel** : aux prix d'une année de base : il mesure l'évolution des **volumes**.\n- Si l'indice des prix de base 100 vaut 105 : PIB réel = PIB nominal ÷ 1,05.\n- **PIB par habitant** = PIB ÷ population."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : PIB et croissance",
+     "statement": "Pays fictif (en milliards de FCFA) : C = 5 200, I = 1 800, G = 1 500, X = 1 300, M = 1 700. L'année précédente, le PIB était de 7 500. Calcule le PIB et le taux de croissance.",
+     "steps": [
+      {
+       "md": "**PIB** par les dépenses :",
+       "tex": "5\\,200 + 1\\,800 + 1\\,500 + 1\\,300 - 1\\,700 = 8\\,100"
+      },
+      {
+       "md": "**Variation** : 8 100 − 7 500 = 600."
+      },
+      {
+       "md": "**Taux** :",
+       "tex": "\\dfrac{600}{7\\,500} \\times 100 = 8"
+      },
+      {
+       "md": "**Lecture** : le PIB augmente de 8 % (en valeur ; pour la croissance réelle, il faudrait corriger de l'inflation)."
+      }
+     ],
+     "answer": "**PIB = 8 100 milliards de FCFA ; croissance = 8 %** (données fictives)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "PIB, RNB et revenu",
+     "md": "- **RNB** (revenu national brut) = PIB + revenus reçus de l'étranger − revenus versés à l'étranger.\n- **Revenu disponible** : revenu après impôts et cotisations, majoré des prestations ; il est utilisé en **consommation** ou en **épargne**.\n- **Taux d'épargne** = épargne ÷ revenu disponible × 100."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Les limites du PIB",
+     "md": "Le PIB ne compte pas : le travail non rémunéré (domestique), une partie de l'**économie informelle**, les dégâts à l'**environnement**, ni la répartition des richesses (inégalités). **Croissance ≠ développement.**"
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-economie-cn-03"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Additionner les **productions** de toutes les entreprises : on compte plusieurs fois les mêmes biens ; il faut additionner les **valeurs ajoutées**.\n- Oublier de **soustraire les importations** dans C + I + G + X − M.\n- Calculer le taux de croissance en divisant par la valeur finale.\n- Confondre PIB **nominal** (prix courants) et **réel**."
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-economie-cn-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Toutes les valeurs de cette fiche sont **fictives**.",
+      "Entraîne-toi à recalculer chaque exemple sans regarder la solution."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "L'économie est-elle au programme de Terminale, et dans quelles séries ? Non vérifié : à confirmer sur les textes officiels avant toute mention d'une série.",
+    "Intitulés et formules (optique production, revenus) simplifiés : à comparer avec le manuel utilisé.",
+    "Toutes les données chiffrées sont fictives.",
+    "Niveau de détail (RNB, revenu disponible) : à ajuster."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "tle-economie-cn-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-economie-comptabilite-nationale",
+   "prompt": "Une entreprise fictive produit pour 900 000 FCFA et consomme 550 000 FCFA de consommations intermédiaires. Quelle est sa valeur ajoutée (en FCFA) ?",
+   "answer": 350000,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "VA = 900 000 − 550 000 = 350 000 FCFA.",
+   "method": "VA = production − consommations intermédiaires.",
+   "mistakes": [
+    "Donner la production brute."
+   ],
+   "source": "Exercice original, style Bac",
+   "chapter": "tle-economie-ch-comptabilite"
+  },
+  {
+   "id": "tle-economie-cn-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-economie-comptabilite-nationale",
+   "prompt": "Données fictives (milliards de FCFA) : C = 3 000, I = 900, G = 700, X = 600, M = 800. Calcule le PIB.",
+   "answer": 4400,
+   "tolerance": 0,
+   "unit": "milliards FCFA",
+   "explanation": "PIB = C + I + G + X − M = 3 000 + 900 + 700 + 600 − 800 = 4 400.",
+   "method": "Additionner puis soustraire les importations.",
+   "mistakes": [
+    "Ajouter M au lieu de le soustraire (5 000)."
+   ],
+   "source": "Exercice original, style Bac",
+   "chapter": "tle-economie-ch-comptabilite"
+  },
+  {
+   "id": "tle-economie-cn-03",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "lesson": "tle-economie-comptabilite-nationale",
+   "prompt": "Associe chaque notion à sa définition.",
+   "pairs": [
+    [
+     "Valeur ajoutée",
+     "Production moins consommations intermédiaires"
+    ],
+    [
+     "PIB par habitant",
+     "PIB divisé par la population"
+    ],
+    [
+     "PIB réel",
+     "PIB corrigé de l'évolution des prix"
+    ],
+    [
+     "Taux d'épargne",
+     "Épargne divisée par le revenu disponible"
+    ],
+    [
+     "Consommation finale",
+     "Dépense des ménages pour satisfaire leurs besoins"
+    ]
+   ],
+   "explanation": "Ce sont les définitions de base de la comptabilité nationale.",
+   "source": "Exercice original, style Bac",
+   "chapter": "tle-economie-ch-comptabilite"
+  },
+  {
+   "id": "tle-economie-cn-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "tle-economie-comptabilite-nationale",
+   "prompt": "Le PIB (fictif) passe de 4 000 à 4 200 milliards de FCFA. Quel est le taux de croissance, en % ?",
+   "answer": 5,
+   "tolerance": 0,
+   "unit": "%",
+   "explanation": "(4 200 − 4 000) ÷ 4 000 × 100 = 5 %.",
+   "method": "(valeur finale − valeur initiale) ÷ valeur initiale × 100.",
+   "mistakes": [
+    "Diviser par 4 200 : 4,76 %."
+   ],
+   "source": "Exercice original, style Bac",
+   "chapter": "tle-economie-ch-comptabilite"
+  },
+  {
+   "id": "tle-economie-cn-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "tle-economie-comptabilite-nationale",
+   "prompt": "Un PIB nominal fictif vaut 5 250 milliards de FCFA ; l'indice des prix (base 100) est de 105. Quel est le PIB réel ?",
+   "answer": 5000,
+   "tolerance": 0,
+   "unit": "milliards FCFA",
+   "explanation": "PIB réel = 5 250 ÷ 1,05 = 5 000 milliards de FCFA.",
+   "method": "Diviser le nominal par l'indice (divisé par 100).",
+   "mistakes": [
+    "Multiplier au lieu de diviser."
+   ],
+   "source": "Exercice original, style Bac",
+   "chapter": "tle-economie-ch-comptabilite"
+  },
+  {
+   "id": "tle-economie-cn-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "tle-economie-comptabilite-nationale",
+   "prompt": "Un pays fictif présente (en milliards de FCFA) : C = 6 000, I = 2 000, G = 1 800, X = 1 500, M = 1 800 ; le PIB de l'année précédente est de 9 000. Population : 25 millions d'habitants.",
+   "method": "Appliquer les formules dans l'ordre : PIB, croissance, PIB par habitant.",
+   "mistakes": [
+    "Oublier de soustraire M."
+   ],
+   "source": "Exercice original, style Bac",
+   "parts": [
+    {
+     "id": "tle-economie-cn-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le PIB.",
+     "explanation": "PIB = 6 000 + 2 000 + 1 800 + 1 500 − 1 800 = 9 500.",
+     "answer": 9500,
+     "tolerance": 0,
+     "unit": "milliards FCFA"
+    },
+    {
+     "id": "tle-economie-cn-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le taux de croissance, arrondi à 0,1 %.",
+     "explanation": "(9 500 − 9 000) ÷ 9 000 × 100 = 5,555… ≈ 5,6 %.",
+     "answer": 5.6,
+     "tolerance": 0.05,
+     "unit": "%"
+    },
+    {
+     "id": "tle-economie-cn-06-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le PIB par habitant, en FCFA.",
+     "explanation": "9 500 milliards = 9,5 × 10^12 FCFA ; ÷ 25 millions = 380 000 FCFA par habitant.",
+     "answer": 380000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "tle-economie-cn-06-d",
+     "kind": "open",
+     "points": 2,
+     "prompt": "Cette hausse du PIB signifie-t-elle forcément une amélioration du niveau de vie ? Justifie.",
+     "explanation": "Voir le modèle.",
+     "model": "Non, pas forcément. Il faut corriger de l'**inflation** (PIB réel), tenir compte de la **croissance de la population** (PIB par habitant) et de la **répartition** des richesses. De plus, le PIB ignore l'économie informelle et les dégâts à l'environnement : **croissance ≠ développement**.",
+     "rubric": [
+      "Mention de l'inflation ou du PIB réel.",
+      "Mention de la population ou de la répartition.",
+      "Distinction croissance / développement."
+     ]
+    }
+   ],
+   "chapter": "tle-economie-ch-comptabilite"
+  },
+  {
+   "id": "tle-economie-cn-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-economie-comptabilite-nationale",
+   "prompt": "La valeur ajoutée est égale à :",
+   "choices": [
+    "Production − consommations intermédiaires",
+    "Production + consommations intermédiaires",
+    "Production × prix",
+    "Consommation − épargne"
+   ],
+   "answer": 0,
+   "explanation": "On retire les achats détruits ou transformés dans la production.",
+   "source": "Exercice original",
+   "chapter": "tle-economie-ch-comptabilite"
+  },
+  {
+   "id": "tle-economie-cn-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-economie-comptabilite-nationale",
+   "prompt": "Le PIB par les dépenses se calcule :",
+   "choices": [
+    "C + I + G + X + M",
+    "C + I + G + X − M",
+    "C − I − G",
+    "X + M"
+   ],
+   "answer": 1,
+   "explanation": "Les importations se soustraient.",
+   "source": "Exercice original",
+   "chapter": "tle-economie-ch-comptabilite"
+  },
+  {
+   "id": "tle-economie-cn-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-economie-comptabilite-nationale",
+   "prompt": "Si le PIB passe de 200 à 210, la croissance est de :",
+   "choices": [
+    "10 %",
+    "4,76 %",
+    "5 %",
+    "21 %"
+   ],
+   "answer": 2,
+   "explanation": "(210 − 200) ÷ 200 × 100 = 5 %.",
+   "source": "Exercice original",
+   "chapter": "tle-economie-ch-comptabilite"
+  },
+  {
+   "id": "tle-economie-cn-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-economie-comptabilite-nationale",
+   "prompt": "Le PIB réel est :",
+   "choices": [
+    "Un PIB sans importations",
+    "Un PIB par habitant",
+    "Un PIB exprimé en euros",
+    "Un PIB corrigé de l'évolution des prix"
+   ],
+   "answer": 3,
+   "explanation": "Il mesure l'évolution des volumes.",
+   "source": "Exercice original",
+   "chapter": "tle-economie-ch-comptabilite"
+  },
+  {
+   "id": "tle-economie-cn-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-economie-comptabilite-nationale",
+   "prompt": "Une limite du PIB est qu'il :",
+   "choices": [
+    "Ne mesure pas la répartition des richesses",
+    "Compte toutes les inégalités",
+    "Inclut le travail non rémunéré",
+    "Mesure le bonheur"
+   ],
+   "answer": 0,
+   "explanation": "Il ne dit rien sur les inégalités ni sur l'environnement.",
+   "source": "Exercice original",
+   "chapter": "tle-economie-ch-comptabilite"
+  }
+ ]
+}

@@ -1,0 +1,461 @@
+{
+ "chapter": "1re-maths-cd-ch-second-degre",
+ "lessons": [
+  {
+   "id": "1re-maths-cd-second-degre",
+   "title": "Second degré, polynômes et paramètres",
+   "minutes": 40,
+   "programRef": "1re C/D — Algèbre : polynômes, équations et inéquations du second degré (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale d'après le programme habituel de Première ; à relire par un enseignant",
+   "objectives": [
+    "Résoudre équations et inéquations du second degré.",
+    "Utiliser la forme canonique, la somme et le produit des racines.",
+    "Discuter selon un paramètre.",
+    "Factoriser un polynôme dont on connaît une racine."
+   ],
+   "exercises": [
+    "1re-maths-cd-sd-01",
+    "1re-maths-cd-sd-02",
+    "1re-maths-cd-sd-03",
+    "1re-maths-cd-sd-04",
+    "1re-maths-cd-sd-05",
+    "1re-maths-cd-sd-06"
+   ],
+   "selfCheck": [
+    "1re-maths-cd-sd-q1",
+    "1re-maths-cd-sd-q2",
+    "1re-maths-cd-sd-q3",
+    "1re-maths-cd-sd-q4",
+    "1re-maths-cd-sd-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier si la division euclidienne de polynômes et les polynômes de degré 3 sont exigés en 1re C/D selon le programme officiel.",
+    "La discussion paramétrique (signe des racines) est courante au Probatoire mais le niveau attendu est à confirmer."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Ce que tu sauras faire",
+     "md": "- Résoudre une équation ou une inéquation du second degré.\n- Étudier le signe d'un trinôme et utiliser la forme canonique.\n- Discuter le nombre de racines selon un paramètre m.\n- Factoriser un polynôme dont on connaît une racine."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Trinôme et discriminant",
+     "md": "Un **trinôme du second degré** s'écrit $f(x) = ax^2 + bx + c$ avec $a \\neq 0$. Son **discriminant** est $\\Delta = b^2 - 4ac$.\n- $\\Delta > 0$ : deux racines distinctes $x_{1,2} = \\frac{-b \\pm \\sqrt{\\Delta}}{2a}$.\n- $\\Delta = 0$ : une racine double $x_0 = \\frac{-b}{2a}$.\n- $\\Delta < 0$ : aucune racine réelle."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Forme canonique et sommet",
+     "md": "$f(x) = a\\left(x + \\frac{b}{2a}\\right)^2 - \\frac{\\Delta}{4a}$. La parabole a pour sommet $S\\left(-\\frac{b}{2a} \\, ; \\, -\\frac{\\Delta}{4a}\\right)$ et pour axe de symétrie la droite $x = -\\frac{b}{2a}$. Elle est tournée vers le haut si a > 0, vers le bas si a < 0."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Somme et produit des racines",
+     "md": "Si $\\Delta \\geq 0$, les racines $x_1$ et $x_2$ vérifient $S = x_1 + x_2 = -\\frac{b}{a}$ et $P = x_1 x_2 = \\frac{c}{a}$.\n- Si P < 0 : racines de signes contraires (et Δ > 0 automatiquement).\n- Si P > 0 et S > 0 : racines positives ; si P > 0 et S < 0 : racines négatives."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Signe du trinôme",
+     "md": "Le trinôme est du **signe de a** à l'extérieur des racines et du **signe contraire de a** entre les racines. Si Δ = 0, il est du signe de a sauf en $x_0$ où il s'annule. Si Δ < 0, il est toujours du signe de a."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": -3,
+      "xmax": 5,
+      "ymin": -5,
+      "ymax": 5,
+      "grid": 1,
+      "xlabel": "x",
+      "ylabel": "y",
+      "curves": [
+       {
+        "expr": "x^2-2*x-3",
+        "color": "blue",
+        "label": "y = x² − 2x − 3"
+       }
+      ],
+      "points": [
+       {
+        "x": -1,
+        "y": 0,
+        "label": "-1",
+        "color": "red"
+       },
+       {
+        "x": 3,
+        "y": 0,
+        "label": "3",
+        "color": "red"
+       },
+       {
+        "x": 1,
+        "y": -4,
+        "label": "S(1 ; -4)",
+        "color": "green"
+       }
+      ]
+     },
+     "caption": "Parabole de $f(x) = x^2 - 2x - 3$ : racines −1 et 3, sommet S(1 ; −4). Le trinôme est négatif entre les racines.",
+     "alt": "Parabole tournée vers le haut coupant l'axe des abscisses en -1 et en 3, de sommet S(1 ; -4) situé sous l'axe."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : équation et inéquation",
+     "statement": "Résous dans $\\mathbb{R}$ : $2x^2 - 3x - 5 = 0$, puis $2x^2 - 3x - 5 \\leq 0$.",
+     "steps": [
+      {
+       "md": "On calcule le discriminant :",
+       "tex": "\\Delta = (-3)^2 - 4 \\times 2 \\times (-5) = 9 + 40 = 49"
+      },
+      {
+       "md": "Deux racines distinctes :",
+       "tex": "x_1 = \\frac{3 - 7}{4} = -1 \\quad \\text{et} \\quad x_2 = \\frac{3 + 7}{4} = \\frac{5}{2}"
+      },
+      {
+       "md": "Comme a = 2 > 0, le trinôme est négatif **entre** les racines : l'inéquation $\\leq 0$ est vérifiée sur l'intervalle fermé de bornes −1 et 5/2."
+      }
+     ],
+     "answer": "Équation : $S = \\{-1 ; \\frac{5}{2}\\}$. Inéquation : $S = \\left[-1 ; \\frac{5}{2}\\right]$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : discussion selon un paramètre",
+     "statement": "Soit (E) : $x^2 - 2x + m - 3 = 0$. Pour quelles valeurs de m a-t-elle deux racines de signes contraires ?",
+     "steps": [
+      {
+       "md": "Le discriminant réduit (b = −2, b' = −1) vaut :",
+       "tex": "\\Delta' = 1 - (m - 3) = 4 - m"
+      },
+      {
+       "md": "Deux racines de signes contraires équivalent à P < 0, c'est-à-dire $m - 3 < 0$, soit m < 3."
+      },
+      {
+       "md": "Il faut aussi Δ > 0 : pour m < 3, on a $4 - m > 1 > 0$, donc la condition est automatiquement remplie."
+      }
+     ],
+     "answer": "**(E) a deux racines de signes contraires si et seulement si m < 3.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : factoriser un polynôme",
+     "statement": "Montre que 1 est racine de $P(x) = x^3 - 2x^2 - 5x + 6$ et factorise P.",
+     "steps": [
+      {
+       "md": "On calcule :",
+       "tex": "P(1) = 1 - 2 - 5 + 6 = 0"
+      },
+      {
+       "md": "Donc $(x - 1)$ divise P : $P(x) = (x - 1)(x^2 + \\alpha x + \\beta)$. En identifiant (ou par division) on trouve :",
+       "tex": "P(x) = (x - 1)(x^2 - x - 6)"
+      },
+      {
+       "md": "Le trinôme $x^2 - x - 6$ a pour discriminant 25 et pour racines −2 et 3, donc il s'écrit $(x + 2)(x - 3)$."
+      }
+     ],
+     "answer": "$P(x) = (x - 1)(x - 3)(x + 2)$."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-cd-sd-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-cd-sd-02"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : discuter selon m",
+     "md": "1. Calculer Δ en fonction de m (c'est lui-même un trinôme en m).\n2. Étudier son signe : cela donne le nombre de racines.\n3. Pour le signe des racines, utiliser S et P.\n4. Conclure par un tableau ou une phrase en distinguant tous les cas, y compris la valeur où Δ = 0."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-cd-sd-03"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Pièges fréquents",
+     "md": "- Oublier de vérifier a ≠ 0 quand un paramètre est devant $x^2$ (si $a = 0$, l'équation devient du premier degré).\n- Se tromper de signe dans $-b$ quand b est négatif.\n- Pour une inéquation, résoudre l'équation puis oublier d'étudier le signe.\n- Écrire « Δ < 0 donc pas de solution » dans une inéquation : le trinôme garde alors le signe de a."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-cd-sd-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-cd-sd-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-cd-sd-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Équations qui se ramènent au second degré : bicarrées $ax^4 + bx^2 + c = 0$ avec $X = x^2$ (ne garder que les valeurs X ≥ 0).",
+      "Le programme exact (polynômes de degré 3, division euclidienne, systèmes) est à vérifier sur le texte officiel."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "1re-maths-cd-sd-01",
+   "kind": "numeric",
+   "points": 1,
+   "prompt": "Calcule le discriminant de $3x^2 - 5x - 2$.",
+   "answer": 49,
+   "tolerance": 0,
+   "explanation": "$\\Delta = (-5)^2 - 4 \\times 3 \\times (-2) = 25 + 24 = 49$.",
+   "tier": "application",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "method": "$\\Delta = b^2 - 4ac$ avec a = 3, b = −5, c = −2.",
+   "mistakes": [
+    "Oublier que $-4ac$ devient $+24$ car c est négatif."
+   ],
+   "lesson": "1re-maths-cd-second-degre"
+  },
+  {
+   "id": "1re-maths-cd-sd-02",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Quel est l'ensemble des solutions de $x^2 - 5x + 6 \\leq 0$ ?",
+   "choices": [
+    "$]-\\infty ; 2] \\cup [3 ; +\\infty[$",
+    "$]2 ; 3[$",
+    "$[2 ; 3]$",
+    "$\\{2 ; 3\\}$"
+   ],
+   "answer": 2,
+   "explanation": "Les racines sont 2 et 3 ($\\Delta = 1$). Comme a = 1 > 0, le trinôme est négatif ou nul entre les racines, bornes comprises : $[2 ; 3]$.",
+   "tier": "application",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "method": "Racines, puis signe de a à l'extérieur.",
+   "mistakes": [
+    "Prendre l'extérieur des racines (signe de a oublié).",
+    "Exclure les bornes alors que l'inégalité est large."
+   ],
+   "lesson": "1re-maths-cd-second-degre"
+  },
+  {
+   "id": "1re-maths-cd-sd-03",
+   "kind": "truefalse",
+   "points": 1,
+   "prompt": "L'équation $x^2 + x + 1 = 0$ a deux solutions réelles distinctes.",
+   "answer": false,
+   "explanation": "$\\Delta = 1 - 4 = -3 < 0$ : aucune racine réelle.",
+   "tier": "application",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "method": "Calculer Δ.",
+   "mistakes": [
+    "Conclure à partir du seul fait que tous les coefficients sont positifs."
+   ],
+   "lesson": "1re-maths-cd-second-degre"
+  },
+  {
+   "id": "1re-maths-cd-sd-04",
+   "kind": "numeric",
+   "points": 2,
+   "prompt": "Déterminer m pour que l'équation $x^2 - 6x + m = 0$ ait une racine double. Donne m.",
+   "answer": 9,
+   "tolerance": 0,
+   "explanation": "Racine double $\\iff \\Delta = 0$ : $36 - 4m = 0$, donc m = 9 (la racine double est alors 3).",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "source": "Exercice original, style Probatoire",
+   "method": "Racine double : Δ = 0.",
+   "mistakes": [
+    "Écrire $\\Delta = 36 + 4m$ en oubliant le signe de $-4ac$."
+   ],
+   "lesson": "1re-maths-cd-second-degre"
+  },
+  {
+   "id": "1re-maths-cd-sd-05",
+   "kind": "mcq",
+   "points": 2,
+   "prompt": "Quelle est la factorisation de $P(x) = x^3 - 2x^2 - 5x + 6$ ?",
+   "choices": [
+    "$(x + 1)(x + 3)(x - 2)$",
+    "$(x - 1)(x - 3)(x + 2)$",
+    "$(x - 1)(x + 3)(x + 2)$",
+    "$(x - 1)(x - 3)(x - 2)$"
+   ],
+   "answer": 1,
+   "explanation": "P(1) = 0 donc $P(x) = (x - 1)(x^2 - x - 6) = (x - 1)(x - 3)(x + 2)$. Les racines sont 1, 3 et −2 ; on vérifie que leur produit vaut −(6) : $1 \\times 3 \\times (-2) = -6$.",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "source": "Exercice original, style Probatoire",
+   "method": "Racine évidente, division, puis trinôme.",
+   "mistakes": [
+    "Changer le signe des racines en écrivant $(x + a)$ au lieu de $(x - a)$."
+   ],
+   "lesson": "1re-maths-cd-second-degre"
+  },
+  {
+   "id": "1re-maths-cd-sd-06",
+   "kind": "problem",
+   "prompt": "Soit $m$ un réel. On considère l'équation $(E_m)$ : $x^2 - 2mx + 2m + 3 = 0$.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le discriminant réduit $\\Delta' = m^2 - (2m + 3)$ pour m = 4.",
+     "answer": 5,
+     "tolerance": 0,
+     "explanation": "$\\Delta' = 16 - 11 = 5$. (En général $\\Delta' = m^2 - 2m - 3 = (m - 3)(m + 1)$.)",
+     "id": "1re-maths-cd-sd-06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1.5,
+     "prompt": "Pour quelles valeurs de m l'équation $(E_m)$ a-t-elle deux racines distinctes ?",
+     "choices": [
+      "$-1 < m < 3$",
+      "$m < -1$ ou $m > 3$",
+      "$m > 3$ seulement",
+      "$m < -3$ ou $m > 1$"
+     ],
+     "answer": 1,
+     "explanation": "On étudie $(m - 3)(m + 1) > 0$ : le trinôme en m est positif à l'extérieur de ses racines −1 et 3.",
+     "id": "1re-maths-cd-sd-06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Pour m = 4, donne la somme S des deux racines de $(E_4)$.",
+     "answer": 8,
+     "tolerance": 0,
+     "explanation": "$S = -\\frac{b}{a} = 2m = 8$ (les racines sont $4 \\pm \\sqrt{5}$).",
+     "id": "1re-maths-cd-sd-06-c"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "Pour quelles valeurs de m les racines sont-elles de signes contraires ?",
+     "choices": [
+      "$m < -\\frac{3}{2}$",
+      "$m > -\\frac{3}{2}$",
+      "$m < 3$",
+      "$-1 < m < 3$"
+     ],
+     "answer": 0,
+     "explanation": "Il faut $P = 2m + 3 < 0$, soit $m < -\\frac{3}{2}$, et Δ' > 0 : or $m < -\\frac{3}{2}$ implique $m < -1$, donc la deuxième condition est vérifiée.",
+     "id": "1re-maths-cd-sd-06-d"
+    }
+   ],
+   "tier": "examen",
+   "difficulty": 2,
+   "source": "Exercice original, style Probatoire",
+   "method": "Calculer Δ', étudier son signe en m, puis utiliser S et P.",
+   "mistakes": [
+    "Oublier de vérifier Δ > 0 quand on utilise P < 0.",
+    "Se tromper de signe en factorisant $m^2 - 2m - 3$."
+   ],
+   "lesson": "1re-maths-cd-second-degre"
+  },
+  {
+   "id": "1re-maths-cd-sd-q1",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Quel est le sommet de la parabole $y = x^2 - 4x + 1$ ?",
+   "choices": [
+    "S(2 ; −3)",
+    "S(2 ; 3)",
+    "S(−2 ; −3)",
+    "S(4 ; 1)"
+   ],
+   "answer": 0,
+   "explanation": "$x_S = -\\frac{b}{2a} = 2$ et $y_S = 4 - 8 + 1 = -3$.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "lesson": "1re-maths-cd-second-degre"
+  },
+  {
+   "id": "1re-maths-cd-sd-q2",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Si $\\Delta = 0$, l'équation $ax^2 + bx + c = 0$ a :",
+   "choices": [
+    "deux racines distinctes",
+    "aucune racine",
+    "une racine double",
+    "trois racines"
+   ],
+   "answer": 2,
+   "explanation": "Si Δ = 0, la racine unique est $-\\frac{b}{2a}$ (racine double).",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "lesson": "1re-maths-cd-second-degre"
+  },
+  {
+   "id": "1re-maths-cd-sd-q3",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Le produit des racines de $2x^2 - 8x + 6 = 0$ vaut :",
+   "choices": [
+    "3",
+    "−4",
+    "4",
+    "6"
+   ],
+   "answer": 0,
+   "explanation": "$P = \\frac{c}{a} = \\frac{6}{2} = 3$ (les racines sont 1 et 3).",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "lesson": "1re-maths-cd-second-degre"
+  },
+  {
+   "id": "1re-maths-cd-sd-q4",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Pour a < 0 et Δ < 0, le trinôme $ax^2 + bx + c$ est :",
+   "choices": [
+    "toujours strictement positif",
+    "positif entre les racines",
+    "nul en un point",
+    "toujours strictement négatif"
+   ],
+   "answer": 3,
+   "explanation": "Sans racine, il garde le signe de a, ici négatif.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "lesson": "1re-maths-cd-second-degre"
+  },
+  {
+   "id": "1re-maths-cd-sd-q5",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Si $-3$ est racine d'un polynôme P, alors :",
+   "choices": [
+    "$(x - 3)$ divise P(x)",
+    "$(x + 3)$ divise P(x)",
+    "$P(3) = 0$",
+    "$P(x) = x + 3$"
+   ],
+   "answer": 1,
+   "explanation": "Si α est racine, $(x - \\alpha)$ divise P ; avec α = −3 : $x - (-3) = x + 3$.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "lesson": "1re-maths-cd-second-degre"
+  }
+ ]
+}

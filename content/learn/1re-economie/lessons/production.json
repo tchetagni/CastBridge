@@ -1,0 +1,424 @@
+{
+ "chapter": "1re-economie-ch-production",
+ "lessons": [
+  {
+   "id": "1re-economie-production",
+   "title": "Production, productivité, coûts et profit",
+   "minutes": 40,
+   "programRef": "Économie de Première — production, productivité, coûts (programme général probable, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Nommer les facteurs de production et calculer une valeur ajoutée.",
+    "Calculer et interpréter une productivité.",
+    "Distinguer coûts fixes et variables, calculer coût total, moyen, profit.",
+    "Déterminer un seuil de rentabilité."
+   ],
+   "prerequisites": [
+    "1re-economie-agents"
+   ],
+   "exercises": [
+    "1re-economie-pr-01",
+    "1re-economie-pr-02",
+    "1re-economie-pr-03",
+    "1re-economie-pr-04",
+    "1re-economie-pr-05",
+    "1re-economie-pr-06"
+   ],
+   "selfCheck": [
+    "1re-economie-pr-q1",
+    "1re-economie-pr-q2",
+    "1re-economie-pr-q3",
+    "1re-economie-pr-q4",
+    "1re-economie-pr-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Produire",
+     "md": "**Produire**, c'est créer des biens et des services qui ont une valeur. Pour produire, l'entreprise combine des **facteurs de production** :\n- le **travail** (le temps et l'effort des personnes) ;\n- le **capital** (machines, bâtiments, outils, stocks) ;\n- les **ressources naturelles** (terre, eau, minerais).\nExemple : un atelier de couture combine couturiers, machines à coudre et tissu."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Valeur ajoutée",
+     "md": "La **valeur ajoutée** mesure la richesse créée par l'entreprise : la valeur de ce qu'elle vend, moins ce qu'elle a acheté pour le fabriquer (**consommations intermédiaires** : matières, énergie, services achetés).",
+     "tex": "VA = \\text{production} - \\text{consommations intermédiaires}"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Productivité du travail",
+     "md": "La **productivité** mesure l'efficacité avec laquelle un facteur est utilisé :",
+     "tex": "\\text{productivité du travail} = \\frac{\\text{quantité produite}}{\\text{quantité de travail}}"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Productivité : calculs",
+     "md": "Le travail se mesure en nombre de travailleurs ou en heures. La productivité augmente grâce à l'équipement, à la formation, à une meilleure organisation.\nVariation en pourcentage : $\\frac{P_1 - P_0}{P_0} \\times 100$ (P₀ valeur de départ, P₁ valeur d'arrivée).\nUne hausse de productivité permet de produire plus avec les mêmes moyens."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les coûts de production",
+     "md": "- **Coûts fixes** (CF) : indépendants de la quantité produite à court terme (loyer, amortissement des machines, assurance).\n- **Coûts variables** (CV) : dépendent de la quantité (matières premières, énergie, salaires à la tâche).\n- **Coût total** : CT = CF + CV.\n- **Coût moyen** (par unité) : CM = CT ÷ Q."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Recette et profit",
+     "md": "La **recette totale** est le prix de vente multiplié par la quantité ; le **profit** (bénéfice) est la différence avec le coût total. Si le profit est négatif, c'est une perte.",
+     "tex": "RT = p \\times Q \\qquad \\text{Profit} = RT - CT"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Seuil de rentabilité",
+     "md": "Le **seuil de rentabilité** est la quantité à partir de laquelle l'entreprise ne perd plus d'argent (RT = CT). Si le coût variable par unité est cv :",
+     "tex": "Q^{*} = \\frac{CF}{p - cv}"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : un problème de coûts",
+     "md": "1. Distinguer coûts fixes et coûts variables.\n2. Calculer CV = cv × Q puis CT = CF + CV.\n3. Calculer RT = p × Q puis le profit RT − CT.\n4. Pour le seuil, résoudre RT = CT ; toujours donner l'unité (FCFA, unités produites)."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-economie-pr-01"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : productivité du travail",
+     "statement": "Un atelier de couture de Douala (données fictives) emploie 8 ouvriers pour 480 chemises par mois. Après l'achat de machines, 10 ouvriers produisent 800 chemises. Calcule la productivité avant, après, et sa variation.",
+     "steps": [
+      {
+       "md": "Avant :",
+       "tex": "\\frac{480}{8} = 60\\ \\text{chemises par ouvrier}"
+      },
+      {
+       "md": "Après :",
+       "tex": "\\frac{800}{10} = 80\\ \\text{chemises par ouvrier}"
+      },
+      {
+       "md": "Variation :",
+       "tex": "\\frac{80 - 60}{60} \\times 100 \\approx 33{,}3\\ \\%"
+      }
+     ],
+     "answer": "Productivité : 60 puis 80 chemises par ouvrier, soit **environ +33,3 %**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : coûts, profit et seuil",
+     "statement": "Une boulangerie (données fictives) a des coûts fixes de 150 000 FCFA par mois et un coût variable de 120 FCFA par pain. Elle vend 3 000 pains à 200 FCFA. Calcule CT, RT, le profit, le coût moyen et le seuil de rentabilité.",
+     "steps": [
+      {
+       "md": "Coût total :",
+       "tex": "CT = 150\\,000 + 120 \\times 3000 = 510\\,000\\ \\text{FCFA}"
+      },
+      {
+       "md": "Recette et profit :",
+       "tex": "RT = 200 \\times 3000 = 600\\,000 \\quad \\text{Profit} = 90\\,000\\ \\text{FCFA}"
+      },
+      {
+       "md": "Coût moyen et seuil :",
+       "tex": "CM = \\frac{510\\,000}{3000} = 170\\ \\text{FCFA} \\quad Q^{*} = \\frac{150\\,000}{200 - 120} = 1875\\ \\text{pains}"
+      }
+     ],
+     "answer": "**CT = 510 000 FCFA ; RT = 600 000 FCFA ; profit = 90 000 FCFA ; CM = 170 FCFA ; seuil = 1 875 pains.**",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 4000,
+      "ymin": 0,
+      "ymax": 900,
+      "grid": 500,
+      "xlabel": "pains",
+      "ylabel": "milliers de F",
+      "w": 420,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "0.2*x",
+        "color": "green",
+        "label": "recette"
+       },
+       {
+        "expr": "150+0.12*x",
+        "color": "red",
+        "label": "coût"
+       }
+      ],
+      "points": [
+       {
+        "x": 1875,
+        "y": 375,
+        "label": "seuil",
+        "color": "blue"
+       }
+      ],
+      "segments": []
+     }
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Mettre le loyer dans les coûts **variables** : il est fixe.\n- Calculer le profit avec le **coût variable** seul au lieu du coût total.\n- Confondre **recette** (ce que l'on encaisse) et **profit** (ce qu'il reste après les coûts).\n- Calculer la variation en pourcentage avec la nouvelle valeur au dénominateur : on divise par la valeur de **départ**.\n- Oublier l'unité ou mélanger FCFA et milliers de FCFA."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-economie-pr-04"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Les **rendements** : au-delà d'un certain point, ajouter du travail sur un même équipement augmente de moins en moins la production.",
+      "Le **taux de marge** mesure le profit rapporté à la recette : $\\frac{\\text{profit}}{RT} \\times 100$.",
+      "Au Cameroun, transformer localement le cacao ou le café plutôt que les exporter bruts augmente la valeur ajoutée."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Programme probable : notions de coût marginal, rendements et fonctions de coût à introduire ou non en 1re : à vérifier.",
+    "Facteurs de production : certains manuels n'en citent que deux (travail, capital) ; ressources naturelles parfois intégrées au capital.",
+    "Données (ateliers de Douala et Garoua, prix) fictives : à remplacer par des données locales validées si souhaité."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "1re-economie-pr-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-economie-production",
+   "prompt": "Un tracteur utilisé dans une plantation est :",
+   "choices": [
+    "un facteur de production de type travail",
+    "une ressource naturelle",
+    "un facteur de production de type capital",
+    "une consommation intermédiaire"
+   ],
+   "answer": 2,
+   "explanation": "Le tracteur est un équipement durable : il fait partie du capital de l'entreprise.",
+   "source": "Exercice original, style devoir d'économie de Première"
+  },
+  {
+   "id": "1re-economie-pr-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-economie-production",
+   "prompt": "4 travailleurs récoltent 1 200 kg de cacao en une semaine (données fictives). Quelle est la productivité du travail en kg par travailleur ?",
+   "answer": 300,
+   "tolerance": 0,
+   "unit": "kg/travailleur",
+   "explanation": "1 200 ÷ 4 = 300 kg par travailleur.",
+   "method": "Quantité produite ÷ nombre de travailleurs.",
+   "source": "Exercice original, style devoir d'économie de Première"
+  },
+  {
+   "id": "1re-economie-pr-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-economie-production",
+   "prompt": "Une entreprise a une recette totale de 750 000 FCFA et un coût total de 620 000 FCFA. Quel est son profit ? (en FCFA)",
+   "answer": 130000,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "Profit = RT − CT = 750 000 − 620 000 = 130 000 FCFA.",
+   "mistakes": [
+    "Inverser la soustraction."
+   ],
+   "source": "Exercice original, style devoir d'économie de Première"
+  },
+  {
+   "id": "1re-economie-pr-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "1re-economie-production",
+   "prompt": "Une entreprise a des coûts fixes de 200 000 FCFA, un coût variable de 300 FCFA par unité et vend chaque unité 500 FCFA. Quel est son seuil de rentabilité ? (en unités)",
+   "answer": 1000,
+   "tolerance": 0,
+   "explanation": "Chaque unité vendue rapporte 500 − 300 = 200 FCFA pour couvrir les coûts fixes : 200 000 ÷ 200 = 1 000 unités.",
+   "method": "Seuil = CF ÷ (p − cv).",
+   "mistakes": [
+    "Diviser les coûts fixes par le prix (400 unités) en oubliant le coût variable."
+   ],
+   "source": "Exercice original, style devoir d'économie de Première"
+  },
+  {
+   "id": "1re-economie-pr-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "1re-economie-production",
+   "prompt": "Une scierie vend pour 5 000 000 FCFA de planches. Elle a acheté pour 3 200 000 FCFA de grumes, d'énergie et de services pour les fabriquer. Quelle est sa valeur ajoutée ? (en FCFA)",
+   "answer": 1800000,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "VA = production − consommations intermédiaires = 5 000 000 − 3 200 000 = 1 800 000 FCFA. Ce n'est pas le profit : il faut encore payer salaires, amortissement, impôts.",
+   "mistakes": [
+    "Confondre valeur ajoutée et profit."
+   ],
+   "source": "Exercice original, style devoir d'économie de Première"
+  },
+  {
+   "id": "1re-economie-pr-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "1re-economie-production",
+   "prompt": "Un atelier de menuiserie de Garoua (données fictives) paie 300 000 FCFA par mois de coûts fixes. Chaque table coûte 25 000 FCFA en bois et main-d'œuvre (coût variable) et se vend 40 000 FCFA. En un mois, l'atelier fabrique et vend 40 tables.",
+   "method": "CT = CF + CV ; profit = RT − CT ; seuil = CF ÷ (p − cv).",
+   "mistakes": [
+    "Oublier les coûts fixes."
+   ],
+   "source": "Exercice original, style devoir d'économie de Première",
+   "parts": [
+    {
+     "id": "1re-economie-pr-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le coût total du mois. (en FCFA)",
+     "answer": 1300000,
+     "tolerance": 0,
+     "unit": "FCFA",
+     "explanation": "CV = 25 000 × 40 = 1 000 000. CT = 300 000 + 1 000 000 = 1 300 000 FCFA."
+    },
+    {
+     "id": "1re-economie-pr-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le profit du mois. (en FCFA)",
+     "answer": 300000,
+     "tolerance": 0,
+     "unit": "FCFA",
+     "explanation": "RT = 40 000 × 40 = 1 600 000. Profit = 1 600 000 − 1 300 000 = 300 000 FCFA."
+    },
+    {
+     "id": "1re-economie-pr-06-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le seuil de rentabilité. (en tables par mois)",
+     "answer": 20,
+     "tolerance": 0,
+     "explanation": "Chaque table apporte 40 000 − 25 000 = 15 000 FCFA. Le seuil vaut 300 000 ÷ 15 000 = 20 tables."
+    },
+    {
+     "id": "1re-economie-pr-06-d",
+     "kind": "open",
+     "points": 2,
+     "prompt": "Que se passe-t-il si l'atelier fabrique 15 tables ? Propose deux moyens d'améliorer sa situation.",
+     "model": "Avec 15 tables, la production est inférieure au seuil de 20 tables : la recette (600 000 FCFA) ne couvre pas le coût total (675 000 FCFA), donc l'atelier perd 75 000 FCFA. Pour s'améliorer : augmenter la production et les ventes ou réduire les coûts (négocier le prix du bois, mieux utiliser les machines), ou relever le prix si le marché l'accepte.",
+     "rubric": [
+      "Constat d'une perte car 15 est inférieur au seuil de 20 (1 point).",
+      "Deux moyens cohérents : vendre plus, réduire les coûts ou augmenter le prix (1 point)."
+     ],
+     "explanation": "Comparer 15 au seuil de 20 tables."
+    }
+   ]
+  },
+  {
+   "id": "1re-economie-pr-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-economie-production",
+   "prompt": "Quel est le coût total ?",
+   "choices": [
+    "Coûts fixes + coûts variables",
+    "Recette − profit uniquement",
+    "Coûts fixes × quantité",
+    "Prix × quantité"
+   ],
+   "answer": 0,
+   "explanation": "CT = CF + CV.",
+   "source": "Exercice original, style devoir d'économie de Première"
+  },
+  {
+   "id": "1re-economie-pr-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-economie-production",
+   "prompt": "La valeur ajoutée est égale à :",
+   "choices": [
+    "recette + coût",
+    "production − consommations intermédiaires",
+    "profit + impôt",
+    "prix × quantité"
+   ],
+   "answer": 1,
+   "explanation": "La valeur ajoutée mesure la richesse créée, après déduction des consommations intermédiaires.",
+   "source": "Exercice original, style devoir d'économie de Première"
+  },
+  {
+   "id": "1re-economie-pr-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-economie-production",
+   "prompt": "Lequel est un coût fixe ?",
+   "choices": [
+    "La farine du boulanger",
+    "L'huile pour les machines selon la production",
+    "Le loyer de l'atelier",
+    "Les emballages"
+   ],
+   "answer": 2,
+   "explanation": "Le loyer reste le même quelle que soit la quantité produite.",
+   "source": "Exercice original, style devoir d'économie de Première"
+  },
+  {
+   "id": "1re-economie-pr-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-economie-production",
+   "prompt": "La productivité du travail augmente quand :",
+   "choices": [
+    "on produit plus avec le même nombre de travailleurs",
+    "on emploie plus de travailleurs pour la même production",
+    "le prix de vente baisse",
+    "le loyer augmente"
+   ],
+   "answer": 0,
+   "explanation": "Productivité = production ÷ travail : elle augmente si la production croît à travail égal.",
+   "source": "Exercice original, style devoir d'économie de Première"
+  },
+  {
+   "id": "1re-economie-pr-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-economie-production",
+   "prompt": "Au seuil de rentabilité :",
+   "choices": [
+    "le profit est maximal",
+    "les coûts fixes sont nuls",
+    "la recette est égale au coût variable",
+    "la recette est égale au coût total"
+   ],
+   "answer": 3,
+   "explanation": "Le seuil est la quantité pour laquelle RT = CT, soit un profit nul.",
+   "source": "Exercice original, style devoir d'économie de Première"
+  }
+ ]
+}

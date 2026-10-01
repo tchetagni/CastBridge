@@ -1,0 +1,414 @@
+{
+ "chapter": "bac-maths-e-ti-ch-lnexp",
+ "lessons": [
+  {
+   "id": "bac-maths-e-ti-exp-ln",
+   "title": "Exponentielle et logarithme : propriétés, limites, étude",
+   "minutes": 40,
+   "programRef": "Tle E/TI — Analyse : fonctions exponentielle et logarithme népérien, limites, croissances comparées (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Utiliser les propriétés de exp et ln pour calculer et résoudre.",
+    "Connaître les limites usuelles et les croissances comparées.",
+    "Dériver $e^{u}$ et $\\ln u$ et étudier une fonction contenant exp ou ln.",
+    "Modéliser une décharge ou une décroissance et résoudre par ln."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Propriétés algébriques",
+     "md": "- $e^{a+b}=e^ae^b$ ; $e^{-a}=\\frac{1}{e^a}$ ; $(e^a)^n=e^{na}$ ; $e^x>0$ pour tout x.\n- Pour a, b > 0 : $\\ln(ab)=\\ln a+\\ln b$ ; $\\ln\\frac{a}{b}=\\ln a-\\ln b$ ; $\\ln(a^n)=n\\ln a$.\n- ln et exp sont réciproques : $\\ln(e^x)=x$ ; $e^{\\ln x}=x$ (x > 0)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Équations et inéquations",
+     "md": "- $e^{x}=a\\Leftrightarrow x=\\ln a$ si a > 0 (pas de solution si a ≤ 0).\n- $\\ln x=a\\Leftrightarrow x=e^a$, avec la condition x > 0.\n- ln et exp sont croissantes : elles conservent le sens des inégalités.\nPour isoler un exposant, on prend le **logarithme** des deux membres."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Dérivées et limites",
+     "md": "- $(e^{u})'=u'e^{u}$ ; $(\\ln u)'=\\frac{u'}{u}$ (u > 0).\n- $\\lim_{x\\to+\\infty}e^x=+\\infty$ ; $\\lim_{x\\to-\\infty}e^x=0$ ; $\\lim_{x\\to+\\infty}\\ln x=+\\infty$ ; $\\lim_{x\\to0^+}\\ln x=-\\infty$.\n- **Croissances comparées** : $\\lim_{x\\to+\\infty}\\frac{e^x}{x}=+\\infty$ ; $\\lim_{x\\to+\\infty}xe^{-x}=0$ ; $\\lim_{x\\to+\\infty}\\frac{\\ln x}{x}=0$ ; $\\lim_{x\\to0^+}x\\ln x=0$."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Décharge exponentielle",
+     "md": "Un condensateur de capacité C se décharge dans une résistance R : $u(t)=U_0e^{-t/\\tau}$ avec la **constante de temps** $\\tau=RC$ (R en ohms, C en farads, τ en secondes). À t = τ, la tension vaut $U_0e^{-1}\\approx0{,}37\\,U_0$ : environ 37 % de la valeur initiale."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : décharge d'un condensateur",
+     "statement": "Un condensateur de 250 µF se décharge dans R = 2 000 Ω : $\\tau=RC=2000\\times250\\times10^{-6}=0{,}5$ s. La tension initiale est 12 V, donc $u(t)=12e^{-2t}$. À quel instant u vaut-elle 6 V, puis 1 V ?",
+     "steps": [
+      {
+       "md": "$12e^{-2t}=6\\Leftrightarrow e^{-2t}=\\frac{1}{2}$. En prenant ln :",
+       "tex": "-2t=-\\ln2 \\quad\\text{donc}\\quad t=\\frac{\\ln2}{2}\\approx0{,}347\\ \\text{s}"
+      },
+      {
+       "md": "$12e^{-2t}=1\\Leftrightarrow e^{-2t}=\\frac{1}{12}\\Leftrightarrow t=\\frac{\\ln12}{2}\\approx1{,}242$ s."
+      }
+     ],
+     "answer": "**t ≈ 0,347 s** pour 6 V ; **t ≈ 1,242 s** pour 1 V."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : étude de $f(x)=xe^{-x}$",
+     "statement": "Étudie f sur [0 ; +∞[ : dérivée, variations, limite en $+\\infty$.",
+     "steps": [
+      {
+       "md": "Produit de x et $e^{-x}$ :",
+       "tex": "f'(x)=1\\times e^{-x}+x\\times(-e^{-x})=(1-x)e^{-x}"
+      },
+      {
+       "md": "Comme $e^{-x}>0$, f′ a le signe de 1 − x : f croît sur [0 ; 1] et décroît sur [1 ; +∞[. Maximum : $f(1)=e^{-1}\\approx0{,}368$."
+      },
+      {
+       "md": "Par croissance comparée, $\\lim_{x\\to+\\infty}xe^{-x}=0$ : l'axe des abscisses est asymptote."
+      }
+     ],
+     "answer": "Maximum **f(1) = 1/e ≈ 0,368** ; asymptote y = 0 en $+\\infty$.",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 5,
+      "ymin": 0,
+      "ymax": 0.5,
+      "grid": 1,
+      "xlabel": "x",
+      "ylabel": "y",
+      "curves": [
+       {
+        "expr": "x*exp(-x)",
+        "color": "blue",
+        "label": "f"
+       }
+      ],
+      "points": [
+       {
+        "x": 1,
+        "y": 0.3679,
+        "label": "max",
+        "color": "red"
+       }
+      ]
+     }
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 2.5,
+      "ymin": 0,
+      "ymax": 12,
+      "grid": 1,
+      "xlabel": "t (s)",
+      "ylabel": "u (V)",
+      "curves": [
+       {
+        "expr": "12*exp(-2*x)",
+        "color": "blue",
+        "label": "u(t)"
+       },
+       {
+        "expr": "6",
+        "color": "grey",
+        "label": "6 V"
+       }
+      ],
+      "points": [
+       {
+        "x": 0.3466,
+        "y": 6,
+        "label": "0,347 s",
+        "color": "red"
+       }
+      ]
+     },
+     "caption": "Décharge du condensateur : la tension est divisée par 2 au bout de 0,347 s, puis encore par 2 au bout du même temps.",
+     "alt": "Courbe bleue décroissante de 12 V à t = 0 vers 0 V. Une droite grise horizontale à 6 V coupe la courbe au point d'abscisse 0,347 s."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Écrire $\\ln(a+b)=\\ln a+\\ln b$ : c'est faux (vrai seulement pour un produit).\n- Résoudre $e^x=a$ pour a ≤ 0 : il n'y a pas de solution.\n- Oublier le signe moins : $(e^{-2t})'=-2e^{-2t}$.\n- Dans une inéquation avec $\\ln$ d'un nombre inférieur à 1 ou une division par un nombre négatif, le sens de l'inégalité se **retourne**."
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-maths-e-ti-exp-01"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Les logarithmes servent à mesurer des rapports très étendus (décibels en acoustique, par exemple, avec le logarithme décimal).",
+      "La demi-vie, ou temps pour diviser une grandeur par 2, vaut τ ln 2 pour une décroissance $e^{-t/\\tau}$."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Croissances comparées : confirmer qu'elles sont au programme (admises ou démontrées) en Tle E/TI.",
+    "Le logarithme décimal (log) n'est pas traité : à ajouter si le programme de TI l'exige.",
+    "Valeurs R, C, U fictives ; la relation τ = RC est standard."
+   ],
+   "exercises": [
+    "bac-maths-e-ti-exp-01",
+    "bac-maths-e-ti-exp-02",
+    "bac-maths-e-ti-exp-03",
+    "bac-maths-e-ti-exp-04",
+    "bac-maths-e-ti-exp-05",
+    "bac-maths-e-ti-exp-06"
+   ],
+   "selfCheck": [
+    "bac-maths-e-ti-exp-q1",
+    "bac-maths-e-ti-exp-q2",
+    "bac-maths-e-ti-exp-q3",
+    "bac-maths-e-ti-exp-q4",
+    "bac-maths-e-ti-exp-q5"
+   ],
+   "prerequisites": [
+    "bac-maths-e-ti-fonctions"
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "bac-maths-e-ti-exp-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Résous $e^{2x}=7$. Donne x arrondi au millième.",
+   "answer": 0.973,
+   "tolerance": 0.001,
+   "explanation": "$2x=\\ln7$ donc $x=\\frac{\\ln7}{2}\\approx0{,}973$.",
+   "method": "$e^{u}=a\\Leftrightarrow u=\\ln a$.",
+   "mistakes": [
+    "Oublier de diviser par 2."
+   ],
+   "lesson": "bac-maths-e-ti-exp-ln",
+   "source": "Exercice original, style Terminale E/TI"
+  },
+  {
+   "id": "bac-maths-e-ti-exp-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "La dérivée de $e^{-3x}$ est :",
+   "choices": [
+    "$-3e^{-3x}$",
+    "$e^{-3x}$",
+    "$3e^{-3x}$",
+    "$-3xe^{-3x}$"
+   ],
+   "answer": 0,
+   "explanation": "$(e^{u})'=u'e^{u}$ avec u = −3x et u′ = −3.",
+   "method": "$(e^{u})'=u'e^{u}$.",
+   "mistakes": [
+    "Oublier le facteur −3."
+   ],
+   "lesson": "bac-maths-e-ti-exp-ln",
+   "source": "Exercice original, style Terminale E/TI"
+  },
+  {
+   "id": "bac-maths-e-ti-exp-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Vrai ou faux : $\\lim_{x\\to+\\infty}xe^{-x}=0$.",
+   "answer": true,
+   "explanation": "Vrai : par croissance comparée, $e^{-x}$ tend vers 0 « plus vite » que x ne tend vers l'infini ; le produit tend vers 0.",
+   "lesson": "bac-maths-e-ti-exp-ln",
+   "source": "Exercice original, style Terminale E/TI"
+  },
+  {
+   "id": "bac-maths-e-ti-exp-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Avec $u(t)=12e^{-2t}$ (en V, t en s), calcule u(1), arrondi au millième.",
+   "answer": 1.624,
+   "tolerance": 0.001,
+   "unit": "V",
+   "explanation": "$u(1)=12e^{-2}\\approx12\\times0{,}135335=1{,}624$ V.",
+   "method": "Remplacer t par 1.",
+   "mistakes": [
+    "Calculer $12e^{-1}$ en oubliant le facteur 2."
+   ],
+   "lesson": "bac-maths-e-ti-exp-ln",
+   "source": "Exercice original, style Terminale E/TI"
+  },
+  {
+   "id": "bac-maths-e-ti-exp-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "À partir de quel instant (en s, arrondi au millième) la tension $12e^{-2t}$ devient-elle inférieure à 1 V ?",
+   "answer": 1.242,
+   "tolerance": 0.001,
+   "unit": "s",
+   "explanation": "$12e^{-2t}<1\\Leftrightarrow e^{-2t}<\\frac{1}{12}\\Leftrightarrow-2t<-\\ln12\\Leftrightarrow t>\\frac{\\ln12}{2}\\approx1{,}2425$ (le sens se retourne en divisant par −2). Seuil ≈ 1,242 s.",
+   "method": "Prendre ln, puis diviser par −2 en retournant l'inégalité.",
+   "mistakes": [
+    "Ne pas retourner l'inégalité."
+   ],
+   "lesson": "bac-maths-e-ti-exp-ln",
+   "source": "Exercice original, style Terminale E/TI"
+  },
+  {
+   "id": "bac-maths-e-ti-exp-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Soit $f(x)=(x+1)e^{-x}$ définie sur $\\mathbb{R}$.",
+   "parts": [
+    {
+     "id": "bac-maths-e-ti-exp-06-a",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle est l'expression de f′(x) ?",
+     "explanation": "$f'(x)=1\\times e^{-x}+(x+1)(-e^{-x})=-xe^{-x}$.",
+     "choices": [
+      "$-xe^{-x}$",
+      "$e^{-x}$",
+      "$(x+2)e^{-x}$",
+      "$xe^{-x}$"
+     ],
+     "answer": 0
+    },
+    {
+     "id": "bac-maths-e-ti-exp-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "En quelle valeur de x f atteint-elle son maximum ?",
+     "explanation": "$f'(x)=-xe^{-x}$ est positive pour x < 0 et négative pour x > 0 : maximum en x = 0.",
+     "answer": 0,
+     "tolerance": 0
+    },
+    {
+     "id": "bac-maths-e-ti-exp-06-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule f(2), arrondi au millième.",
+     "explanation": "$f(2)=3e^{-2}\\approx0{,}406$.",
+     "answer": 0.406,
+     "tolerance": 0.001
+    },
+    {
+     "id": "bac-maths-e-ti-exp-06-d",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Combien de solutions l'équation $f(x)=0{,}5$ admet-elle sur $\\mathbb{R}$ ? (On donne $f(-1)=0$, $f(0)=1$, $\\lim_{x\\to+\\infty}f=0$.)",
+     "explanation": "Sur ]−∞ ; 0], f est croissante et continue de valeurs allant de −∞ à 1 : une solution. Sur [0 ; +∞[, f décroît de 1 vers 0 : une solution. Total : 2.",
+     "answer": 2,
+     "tolerance": 0
+    }
+   ],
+   "method": "Dériver, signe de f′, puis théorème des valeurs intermédiaires sur chaque intervalle de monotonie.",
+   "mistakes": [
+    "Oublier de compter la solution située sur l'un des deux intervalles."
+   ],
+   "lesson": "bac-maths-e-ti-exp-ln",
+   "source": "Exercice original, style Terminale E/TI"
+  },
+  {
+   "id": "bac-maths-e-ti-exp-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Que vaut $\\ln(e^4)$ ?",
+   "choices": [
+    "4",
+    "$e^4$",
+    "$4e$",
+    "$\\frac{1}{4}$"
+   ],
+   "answer": 0,
+   "explanation": "$\\ln(e^x)=x$.",
+   "lesson": "bac-maths-e-ti-exp-ln",
+   "source": "Exercice original, style Terminale E/TI"
+  },
+  {
+   "id": "bac-maths-e-ti-exp-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "La constante de temps d'un circuit RC est :",
+   "choices": [
+    "$\\tau=RC$",
+    "$\\tau=\\frac{R}{C}$",
+    "$\\tau=R+C$",
+    "$\\tau=\\frac{C}{R}$"
+   ],
+   "answer": 0,
+   "explanation": "Pour un circuit RC, $\\tau=RC$.",
+   "lesson": "bac-maths-e-ti-exp-ln",
+   "source": "Exercice original, style Terminale E/TI"
+  },
+  {
+   "id": "bac-maths-e-ti-exp-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "L'équation $e^{x}=-5$ :",
+   "choices": [
+    "n'a pas de solution",
+    "a pour solution $\\ln5$",
+    "a pour solution $-\\ln5$",
+    "a pour solution −5"
+   ],
+   "answer": 0,
+   "explanation": "$e^x>0$ pour tout x.",
+   "lesson": "bac-maths-e-ti-exp-ln",
+   "source": "Exercice original, style Terminale E/TI"
+  },
+  {
+   "id": "bac-maths-e-ti-exp-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "La dérivée de $\\ln(2x+1)$ est :",
+   "choices": [
+    "$\\frac{2}{2x+1}$",
+    "$\\frac{1}{2x+1}$",
+    "$\\frac{2x}{2x+1}$",
+    "$2\\ln(2x+1)$"
+   ],
+   "answer": 0,
+   "explanation": "$(\\ln u)'=\\frac{u'}{u}$ avec u′ = 2.",
+   "lesson": "bac-maths-e-ti-exp-ln",
+   "source": "Exercice original, style Terminale E/TI"
+  },
+  {
+   "id": "bac-maths-e-ti-exp-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "$\\lim_{x\\to-\\infty}e^{x}$ vaut :",
+   "choices": [
+    "0",
+    "$+\\infty$",
+    "$-\\infty$",
+    "1"
+   ],
+   "answer": 0,
+   "explanation": "Quand x tend vers −∞, $e^x=\\frac{1}{e^{-x}}$ tend vers 0.",
+   "lesson": "bac-maths-e-ti-exp-ln",
+   "source": "Exercice original, style Terminale E/TI"
+  }
+ ]
+}

@@ -1,0 +1,589 @@
+{
+ "chapter": "2nde-maths-c-ch-ensembles",
+ "lessons": [
+  {
+   "id": "2nde-maths-c-ensembles",
+   "title": "Ensembles, logique et raisonnement",
+   "minutes": 35,
+   "programRef": "2nde C — Ensembles, logique, raisonnement (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale conforme au programme de seconde ; à relire par un enseignant",
+   "objectives": [
+    "Utiliser les notations d'appartenance, d'inclusion, de réunion, d'intersection et de complémentaire.",
+    "Calculer le cardinal d'une réunion.",
+    "Manipuler les intervalles de $\\mathbb{R}$.",
+    "Écrire la négation, la réciproque et la contraposée d'une proposition ; choisir un type de raisonnement."
+   ],
+   "exercises": [
+    "2nde-maths-c-ens-01",
+    "2nde-maths-c-ens-02",
+    "2nde-maths-c-ens-03",
+    "2nde-maths-c-ens-04",
+    "2nde-maths-c-ens-05",
+    "2nde-maths-c-ens-06"
+   ],
+   "selfCheck": [
+    "2nde-maths-c-ens-q1",
+    "2nde-maths-c-ens-q2",
+    "2nde-maths-c-ens-q3",
+    "2nde-maths-c-ens-q4",
+    "2nde-maths-c-ens-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Ensembles et notations",
+     "md": "Un **ensemble** est une collection d'éléments. On écrit $x \\in A$ (x appartient à A) ou $x \\notin A$. $A \\subset B$ signifie que tout élément de A est dans B. L'ensemble vide, noté $\\emptyset$, n'a aucun élément. Le **cardinal** de A, noté card(A), est son nombre d'éléments."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Opérations sur les ensembles",
+     "md": "- **Intersection** $A \\cap B$ : éléments qui sont dans A **et** dans B.\n- **Réunion** $A \\cup B$ : éléments qui sont dans A **ou** dans B (ou les deux).\n- **Complémentaire** de A dans E, noté $\\overline{A}$ : éléments de E qui ne sont pas dans A.\n- Si $A \\cap B = \\emptyset$, A et B sont **disjoints**."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Cardinal d'une réunion",
+     "md": "Pour deux ensembles finis A et B :",
+     "tex": "\\text{card}(A \\cup B) = \\text{card}(A) + \\text{card}(B) - \\text{card}(A \\cap B)"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les ensembles de nombres",
+     "md": "On a $\\mathbb{N} \\subset \\mathbb{Z} \\subset \\text{D} \\subset \\mathbb{Q} \\subset \\mathbb{R}$ : entiers naturels, entiers relatifs, nombres décimaux, rationnels (quotients d'entiers), réels. Par exemple $\\frac{1}{3} \\in \\mathbb{Q}$ mais $\\frac{1}{3} \\notin \\text{D}$ ; $\\sqrt{2} \\in \\mathbb{R}$ mais $\\sqrt{2} \\notin \\mathbb{Q}$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Intervalles de $\\mathbb{R}$",
+     "md": "$[a ; b]$ contient a et b ; $]a ; b[$ ne les contient pas ; $[a ; +\\infty[$ est l'ensemble des réels $x \\geq a$. Le crochet est toujours **ouvert vers l'extérieur** pour $\\pm\\infty$. Pour l'intersection, on garde ce qui est commun ; pour la réunion, on regroupe."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Propositions et connecteurs",
+     "md": "Une **proposition** est vraie ou fausse. « P et Q » est vraie si P et Q le sont ; « P ou Q » est vraie si l'une au moins l'est (« ou » inclusif). La **négation** de P est « non P ». La négation de « P et Q » est « non P ou non Q » ; celle de « P ou Q » est « non P et non Q »."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Implication, réciproque, contraposée",
+     "md": "Pour « P $\\Rightarrow$ Q » :\n- **réciproque** : Q $\\Rightarrow$ P (pas équivalente en général) ;\n- **contraposée** : non Q $\\Rightarrow$ non P (**toujours équivalente**) ;\n- **équivalence** P $\\Leftrightarrow$ Q : P $\\Rightarrow$ Q et Q $\\Rightarrow$ P."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Quantificateurs",
+     "md": "$\\forall$ signifie « pour tout », $\\exists$ signifie « il existe ». Négations : la négation de « $\\forall x \\in E, P(x)$ » est « $\\exists x \\in E$, non P(x) » ; la négation de « $\\exists x \\in E, P(x)$ » est « $\\forall x \\in E$, non P(x) »."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 20,
+        "w": 360,
+        "h": 200,
+        "stroke": "grey",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 120,
+        "r": 70,
+        "stroke": "blue",
+        "width": 3
+       },
+       {
+        "t": "circle",
+        "cx": 250,
+        "cy": 120,
+        "r": 70,
+        "stroke": "red",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 125,
+        "text": "17",
+        "size": 20,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 125,
+        "text": "8",
+        "size": 20,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 295,
+        "y": 125,
+        "text": "10",
+        "size": 20,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 40,
+        "text": "F",
+        "size": 20,
+        "bold": true,
+        "color": "blue"
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 40,
+        "text": "B",
+        "size": 20,
+        "bold": true,
+        "color": "red"
+       },
+       {
+        "t": "text",
+        "x": 355,
+        "y": 205,
+        "text": "5",
+        "size": 20,
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Diagramme de Venn : 40 élèves, F = footballeurs, B = basketteurs. Les nombres donnent l'effectif de chaque zone.",
+     "alt": "Un rectangle contient deux cercles qui se chevauchent, F à gauche et B à droite. La partie de F seule contient 17, la zone commune 8, la partie de B seule 10, et le nombre 5 est en dehors des cercles, dans le coin du rectangle."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthodes de raisonnement",
+     "md": "- **Contre-exemple** : un seul cas suffit pour montrer qu'une phrase « $\\forall x$ » est fausse.\n- **Contraposée** : pour montrer P $\\Rightarrow$ Q, montrer non Q $\\Rightarrow$ non P.\n- **Absurde** : supposer le contraire de ce qu'on veut prouver et aboutir à une contradiction.\n- **Disjonction de cas** : traiter chaque cas possible (n pair, n impair)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : réunion et intersection",
+     "statement": "Dans une classe de 40 élèves, 25 jouent au football (F) et 18 au basketball (B) ; 8 pratiquent les deux. Combien d'élèves ne pratiquent aucun des deux sports ?",
+     "steps": [
+      {
+       "md": "On applique la formule du cardinal de la réunion :",
+       "tex": "\\text{card}(F \\cup B) = 25 + 18 - 8 = 35"
+      },
+      {
+       "md": "35 élèves pratiquent au moins un sport, sur 40 élèves en tout."
+      },
+      {
+       "md": "Le complémentaire de $F \\cup B$ contient donc :",
+       "tex": "40 - 35 = 5"
+      }
+     ],
+     "answer": "**5 élèves** ne pratiquent aucun des deux sports.",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 20,
+        "w": 360,
+        "h": 200,
+        "stroke": "grey",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 120,
+        "r": 70,
+        "stroke": "blue",
+        "width": 3
+       },
+       {
+        "t": "circle",
+        "cx": 250,
+        "cy": 120,
+        "r": 70,
+        "stroke": "red",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 125,
+        "text": "17",
+        "size": 20,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 125,
+        "text": "8",
+        "size": 20,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 295,
+        "y": 125,
+        "text": "10",
+        "size": 20,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 40,
+        "text": "F",
+        "size": 20,
+        "bold": true,
+        "color": "blue"
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 40,
+        "text": "B",
+        "size": 20,
+        "bold": true,
+        "color": "red"
+       },
+       {
+        "t": "text",
+        "x": 355,
+        "y": 205,
+        "text": "5",
+        "size": 20,
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : intervalles",
+     "statement": "Soit $A = [-2 ; 3[$ et $B = ]1 ; 5]$. Détermine $A \\cap B$ et $A \\cup B$.",
+     "steps": [
+      {
+       "md": "Sur la droite réelle, A va de −2 (inclus) à 3 (exclu) ; B va de 1 (exclu) à 5 (inclus)."
+      },
+      {
+       "md": "Intersection : points communs, de 1 (exclu car 1 ∉ B) à 3 (exclu car 3 ∉ A) : $A \\cap B = ]1 ; 3[$."
+      },
+      {
+       "md": "Réunion : tout est recouvert de −2 (inclus) à 5 (inclus), car les deux intervalles se chevauchent : $A \\cup B = [-2 ; 5]$."
+      }
+     ],
+     "answer": "$A \\cap B = ]1 ; 3[$ et $A \\cup B = [-2 ; 5]$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : raisonnement par contraposée",
+     "statement": "Démontre : si $n^2$ est impair, alors n est impair (n entier).",
+     "steps": [
+      {
+       "md": "Contraposée : « si n est pair, alors $n^2$ est pair ». Si on la démontre, l'énoncé de départ l'est aussi."
+      },
+      {
+       "md": "Si n est pair, n = 2k avec k entier. Alors $n^2 = 4k^2 = 2 \\times (2k^2)$, qui est un multiple de 2."
+      },
+      {
+       "md": "La contraposée est vraie, donc l'implication de départ l'est aussi."
+      }
+     ],
+     "answer": "Si $n^2$ est impair, alors **n est impair**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Écrire $\\frac{1}{3} \\in \\text{D}$ : un décimal a un nombre fini de chiffres après la virgule.\n- Confondre $\\in$ (élément et ensemble) et $\\subset$ (ensemble et ensemble) : $3 \\in \\mathbb{N}$, mais $\\mathbb{N} \\subset \\mathbb{Z}$.\n- Croire que la réciproque d'une implication vraie est vraie : « si n est multiple de 4 alors n est pair » est vraie, sa réciproque est fausse.\n- Nier « tous » par « aucun » : la négation de « tous » est « au moins un ne… pas »."
+    },
+    {
+     "type": "exercise",
+     "ref": "2nde-maths-c-ens-01"
+    },
+    {
+     "type": "more",
+     "items": [
+      "L'intersection de deux intervalles est vide ou est encore un intervalle ; la réunion peut ne pas en être un (par exemple $]-\\infty ; 1[ \\cup ]2 ; +\\infty[$).",
+      "Un raisonnement par l'absurde classique montre que $\\sqrt{2}$ n'est pas rationnel : il sera revu plus tard dans l'année ou en classe supérieure."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Programme exact de seconde C à vérifier : l'étendue des notions de logique (tables de vérité, quantificateurs) varie selon les manuels.",
+    "La notation du complémentaire ($\\overline{A}$) peut différer selon les enseignants (A^c, CₑA)."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "2nde-maths-c-ens-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Dans un lycée de Ngaoundéré, 60 élèves d'une promotion sont interrogés : 35 apprennent l'allemand, 28 l'espagnol, 12 les deux. Combien n'apprennent aucune de ces deux langues ?",
+   "answer": 9,
+   "tolerance": 0,
+   "explanation": "card(allemand ∪ espagnol) = 35 + 28 − 12 = 51. Il reste 60 − 51 = 9 élèves.",
+   "method": "card(A ∪ B) = card(A) + card(B) − card(A ∩ B), puis le complémentaire.",
+   "mistakes": [
+    "Oublier de retirer 12 : 35 + 28 = 63 > 60, ce qui est impossible."
+   ],
+   "source": "Exercice original, style devoir de 2nde",
+   "lesson": "2nde-maths-c-ensembles",
+   "chapter": "2nde-maths-c-ch-ensembles"
+  },
+  {
+   "id": "2nde-maths-c-ens-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Soit $A = [-1 ; 4]$ et $B = ]2 ; 7[$. Quelle est l'intersection $A \\cap B$ ?",
+   "choices": [
+    "$[2 ; 4]$",
+    "$]2 ; 4]$",
+    "$]2 ; 4[$",
+    "$[-1 ; 7[$"
+   ],
+   "answer": 1,
+   "explanation": "Les réels communs vont de 2 à 4. 2 n'est pas dans B (crochet ouvert) donc il est exclu ; 4 est dans A (crochet fermé) et dans B (4 < 7) donc il est inclus : $]2 ; 4]$.",
+   "method": "Comparer les bornes une à une, en regardant l'ouverture de chaque crochet.",
+   "mistakes": [
+    "Garder le crochet fermé en 2 parce qu'il est fermé en −1 (confusion de bornes).",
+    "Choisir la réunion au lieu de l'intersection."
+   ],
+   "source": "Exercice original, style devoir de 2nde",
+   "lesson": "2nde-maths-c-ensembles",
+   "chapter": "2nde-maths-c-ch-ensembles"
+  },
+  {
+   "id": "2nde-maths-c-ens-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Vrai ou faux : la négation de « tous les élèves de la classe ont plus de 15 ans » est « aucun élève de la classe n'a plus de 15 ans ».",
+   "answer": false,
+   "explanation": "La négation d'un « pour tout » est un « il existe » : « il existe au moins un élève qui a 15 ans ou moins ». « Aucun » est plus fort que la négation.",
+   "method": "Nier un ∀ : on obtient ∃ et on nie la propriété.",
+   "mistakes": [
+    "Remplacer « tous » par « aucun »."
+   ],
+   "source": "Exercice original, style devoir de 2nde",
+   "lesson": "2nde-maths-c-ensembles",
+   "chapter": "2nde-maths-c-ch-ensembles"
+  },
+  {
+   "id": "2nde-maths-c-ens-04",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Associe chaque proposition à sa réciproque, contraposée ou négation.",
+   "pairs": [
+    [
+     "Réciproque de « si n est multiple de 4, alors n est pair »",
+     "Si n est pair, alors n est multiple de 4"
+    ],
+    [
+     "Contraposée de « si n est multiple de 4, alors n est pair »",
+     "Si n est impair, alors n n'est pas multiple de 4"
+    ],
+    [
+     "Négation de « n est pair et n > 10 »",
+     "n est impair ou n ≤ 10"
+    ],
+    [
+     "Négation de « pour tout réel x, $x^2 \\geq 0$ »",
+     "Il existe un réel x tel que $x^2 < 0$"
+    ]
+   ],
+   "explanation": "La réciproque échange les deux parties. La contraposée les échange ET les nie. La négation de « et » donne « ou » avec chaque partie niée ; la négation de ∀ donne ∃ avec la propriété niée.",
+   "method": "Écrire P et Q séparément avant de transformer.",
+   "mistakes": [
+    "Confondre contraposée et réciproque : seule la contraposée est équivalente à l'implication."
+   ],
+   "source": "Exercice original, style devoir de 2nde",
+   "lesson": "2nde-maths-c-ensembles",
+   "chapter": "2nde-maths-c-ch-ensembles"
+  },
+  {
+   "id": "2nde-maths-c-ens-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Deux ensembles finis vérifient card(A) = 17, card(B) = 12 et card(A ∪ B) = 24. Calcule card(A ∩ B).",
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "24 = 17 + 12 − card(A ∩ B), donc card(A ∩ B) = 29 − 24 = 5.",
+   "method": "Retourner la formule du cardinal de la réunion.",
+   "mistakes": [
+    "Calculer 24 − 17 = 7 sans utiliser la formule."
+   ],
+   "source": "Exercice original, style devoir de 2nde",
+   "lesson": "2nde-maths-c-ensembles",
+   "chapter": "2nde-maths-c-ch-ensembles"
+  },
+  {
+   "id": "2nde-maths-c-ens-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Dans un lycée de Bafoussam (données fictives), on interroge 120 élèves de seconde : 70 pratiquent le football (F), 55 le handball (H) et 20 ne pratiquent aucun des deux sports.",
+   "method": "Un diagramme de Venn aide : placer d'abord l'intersection, puis compléter.",
+   "mistakes": [
+    "Additionner 70 + 55 sans retirer l'intersection."
+   ],
+   "source": "Exercice original, style devoir de 2nde",
+   "parts": [
+    {
+     "id": "2nde-maths-c-ens-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Combien d'élèves pratiquent au moins un des deux sports, c'est-à-dire quel est card(F ∪ H) ?",
+     "answer": 100,
+     "tolerance": 0,
+     "explanation": "120 − 20 = 100 élèves pratiquent au moins un sport."
+    },
+    {
+     "id": "2nde-maths-c-ens-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Combien pratiquent à la fois le football et le handball ?",
+     "answer": 25,
+     "tolerance": 0,
+     "explanation": "card(F ∩ H) = 70 + 55 − 100 = 25."
+    },
+    {
+     "id": "2nde-maths-c-ens-06-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Combien pratiquent uniquement le football ?",
+     "answer": 45,
+     "tolerance": 0,
+     "explanation": "70 − 25 = 45 élèves jouent au football sans pratiquer le handball."
+    },
+    {
+     "id": "2nde-maths-c-ens-06-d",
+     "kind": "open",
+     "points": 2,
+     "prompt": "Démontre par contraposée : si $n^2$ est pair, alors n est pair (n entier).",
+     "model": "Contraposée : si n est impair, alors $n^2$ est impair. Si n est impair, n = 2k + 1, donc $n^2 = 4k^2 + 4k + 1 = 2(2k^2 + 2k) + 1$ est impair. La contraposée est vraie, donc l'implication aussi.",
+     "rubric": [
+      "Énonce la contraposée correctement.",
+      "Écrit n impair sous la forme 2k + 1 et développe.",
+      "Conclut explicitement."
+     ],
+     "explanation": "Voir le modèle : on remplace l'implication par sa contraposée, équivalente."
+    }
+   ],
+   "lesson": "2nde-maths-c-ensembles",
+   "chapter": "2nde-maths-c-ch-ensembles"
+  },
+  {
+   "id": "2nde-maths-c-ens-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "Quel est le plus petit des ensembles $\\mathbb{N}$, $\\mathbb{Z}$, $\\text{D}$, $\\mathbb{Q}$, $\\mathbb{R}$ qui contient $\\frac{1}{3}$ ?",
+   "choices": [
+    "$\\text{D}$",
+    "$\\mathbb{Q}$",
+    "$\\mathbb{Z}$",
+    "$\\mathbb{N}$"
+   ],
+   "answer": 1,
+   "explanation": "$\\frac{1}{3} = 0{,}333\\ldots$ n'est pas décimal, mais c'est un quotient d'entiers : il appartient à $\\mathbb{Q}$.",
+   "lesson": "2nde-maths-c-ensembles",
+   "chapter": "2nde-maths-c-ch-ensembles"
+  },
+  {
+   "id": "2nde-maths-c-ens-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "Si A et B sont disjoints, que vaut card(A ∪ B) ?",
+   "choices": [
+    "card(A) − card(B)",
+    "card(A) × card(B)",
+    "card(A) + card(B)",
+    "card(A) + card(B) − 1"
+   ],
+   "answer": 2,
+   "explanation": "Disjoints : card(A ∩ B) = 0, donc la formule se réduit à la somme.",
+   "lesson": "2nde-maths-c-ensembles",
+   "chapter": "2nde-maths-c-ch-ensembles"
+  },
+  {
+   "id": "2nde-maths-c-ens-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "Quelle est la négation de « il existe un réel x tel que $x^2 = -1$ » ?",
+   "choices": [
+    "Il existe un réel x tel que $x^2 \\neq -1$",
+    "Pour tout réel x, $x^2 = -1$",
+    "Il n'existe aucun réel x tel que $x^2 \\neq -1$",
+    "Pour tout réel x, $x^2 \\neq -1$"
+   ],
+   "answer": 3,
+   "explanation": "La négation d'un ∃ est un ∀ avec la propriété niée.",
+   "lesson": "2nde-maths-c-ensembles",
+   "chapter": "2nde-maths-c-ch-ensembles"
+  },
+  {
+   "id": "2nde-maths-c-ens-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "La contraposée de « si P alors Q » est :",
+   "choices": [
+    "si non Q alors non P",
+    "si Q alors P",
+    "si non P alors non Q",
+    "P ou Q"
+   ],
+   "answer": 0,
+   "explanation": "On échange ET on nie : non Q ⇒ non P.",
+   "lesson": "2nde-maths-c-ensembles",
+   "chapter": "2nde-maths-c-ch-ensembles"
+  },
+  {
+   "id": "2nde-maths-c-ens-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "$[1 ; 5[ \\cup ]3 ; 8]$ est égal à :",
+   "choices": [
+    "$]3 ; 5[$",
+    "$[1 ; 8]$",
+    "$[1 ; 8[$",
+    "$]1 ; 8]$"
+   ],
+   "answer": 1,
+   "explanation": "Les deux intervalles se chevauchent ; 1 est dans le premier et 8 dans le second : la réunion est $[1 ; 8]$.",
+   "lesson": "2nde-maths-c-ensembles",
+   "chapter": "2nde-maths-c-ch-ensembles"
+  }
+ ]
+}

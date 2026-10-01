@@ -1,0 +1,557 @@
+{
+ "chapter": "2nde-maths-c-ch-calcul",
+ "lessons": [
+  {
+   "id": "2nde-maths-c-calcul",
+   "title": "Calcul numérique et algébrique, équations et inéquations",
+   "minutes": 45,
+   "programRef": "2nde C — Calcul numérique et algébrique, équations et inéquations (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale conforme au programme de seconde ; à relire par un enseignant",
+   "objectives": [
+    "Calculer avec les puissances et les racines carrées.",
+    "Développer et factoriser avec les identités remarquables ; factoriser un polynôme dont on connaît une racine.",
+    "Résoudre équations et inéquations du 1er degré.",
+    "Résoudre équations et inéquations du 2nd degré avec le discriminant et le signe du trinôme."
+   ],
+   "prerequisites": [
+    "2nde-maths-c-ensembles"
+   ],
+   "exercises": [
+    "2nde-maths-c-cal-01",
+    "2nde-maths-c-cal-02",
+    "2nde-maths-c-cal-03",
+    "2nde-maths-c-cal-04",
+    "2nde-maths-c-cal-05",
+    "2nde-maths-c-cal-06"
+   ],
+   "selfCheck": [
+    "2nde-maths-c-cal-q1",
+    "2nde-maths-c-cal-q2",
+    "2nde-maths-c-cal-q3",
+    "2nde-maths-c-cal-q4",
+    "2nde-maths-c-cal-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Puissances",
+     "md": "Pour a ≠ 0 et m, n entiers relatifs :\n- $a^m \\times a^n = a^{m+n}$ ; $\\frac{a^m}{a^n} = a^{m-n}$ ;\n- $(a^m)^n = a^{mn}$ ; $(ab)^n = a^n b^n$ ;\n- $a^0 = 1$ et $a^{-n} = \\frac{1}{a^n}$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Racines carrées",
+     "md": "Pour $a \\geq 0$ et $b \\geq 0$ : $\\sqrt{a}\\sqrt{b} = \\sqrt{ab}$, $\\sqrt{a^2} = a$ ; pour $b > 0$, $\\sqrt{\\frac{a}{b}} = \\frac{\\sqrt{a}}{\\sqrt{b}}$. Pour tout réel x, $\\sqrt{x^2} = |x|$. **Attention** : $\\sqrt{a+b} \\neq \\sqrt{a} + \\sqrt{b}$. Pour supprimer une racine au dénominateur : $\\frac{1}{\\sqrt{a}} = \\frac{\\sqrt{a}}{a}$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Identités remarquables",
+     "md": "Pour tous réels a et b :",
+     "tex": "(a+b)^2 = a^2 + 2ab + b^2 \\quad (a-b)^2 = a^2 - 2ab + b^2 \\quad a^2 - b^2 = (a-b)(a+b)"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Polynômes et factorisation",
+     "md": "Un **polynôme** de degré n s'écrit $a_n x^n + \\ldots + a_1 x + a_0$ avec $a_n \\neq 0$. Un réel a est une **racine** de P si P(a) = 0 ; dans ce cas, P(x) = (x − a)Q(x) où Q est un polynôme de degré n − 1. Pour factoriser : facteur commun, identité remarquable, ou racine « évidente » puis division."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Équations et inéquations du 1er degré",
+     "md": "- $ax + b = 0$ (a ≠ 0) a pour solution $x = -\\frac{b}{a}$.\n- On résout $ax + b > 0$ comme une équation, **mais** si on multiplie ou divise par un nombre **négatif**, on change le sens de l'inégalité.\n- Pour un produit ou un quotient, on dresse un **tableau de signes** facteur par facteur."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Second degré : $ax^2 + bx + c = 0$ (a ≠ 0)",
+     "md": "On calcule le discriminant :",
+     "tex": "\\Delta = b^2 - 4ac"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Résultats selon le signe de Δ",
+     "md": "- Δ > 0 : deux racines $x_{1,2} = \\frac{-b \\pm \\sqrt{\\Delta}}{2a}$.\n- Δ = 0 : une racine double $x_0 = -\\frac{b}{2a}$.\n- Δ < 0 : aucune racine réelle.\nSomme des racines : $-\\frac{b}{a}$ ; produit : $\\frac{c}{a}$ (quand elles existent)."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Signe de $ax^2 + bx + c$",
+     "md": "- Δ > 0 : signe de **a** à l'extérieur des racines, signe de **−a** entre les racines.\n- Δ = 0 : signe de a partout, sauf en la racine double.\n- Δ < 0 : signe de a pour tout réel x.\nOn peut le retrouver en imaginant la parabole : ouverte vers le haut si a > 0, vers le bas si a < 0."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : puissances et racines",
+     "statement": "Simplifie $A = \\sqrt{50} - 3\\sqrt{8} + \\sqrt{2}$ et $B = \\frac{3^4 \\times 3^{-2}}{3}$.",
+     "steps": [
+      {
+       "md": "On fait apparaître des carrés parfaits sous les racines :",
+       "tex": "\\sqrt{50} = 5\\sqrt{2} \\quad \\sqrt{8} = 2\\sqrt{2}"
+      },
+      {
+       "md": "Donc :",
+       "tex": "A = 5\\sqrt{2} - 6\\sqrt{2} + \\sqrt{2} = 0"
+      },
+      {
+       "md": "Pour B, on additionne les exposants :",
+       "tex": "B = 3^{4 - 2 - 1} = 3^1 = 3"
+      }
+     ],
+     "answer": "**A = 0** et **B = 3**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : équation du second degré",
+     "statement": "Résous $2x^2 - 3x - 5 = 0$.",
+     "steps": [
+      {
+       "md": "On calcule le discriminant avec a = 2, b = −3, c = −5 :",
+       "tex": "\\Delta = (-3)^2 - 4 \\times 2 \\times (-5) = 9 + 40 = 49"
+      },
+      {
+       "md": "Δ > 0 et $\\sqrt{\\Delta} = 7$ : deux racines."
+      },
+      {
+       "md": "Calcul des racines :",
+       "tex": "x_1 = \\frac{3 + 7}{4} = \\frac{5}{2} \\quad x_2 = \\frac{3 - 7}{4} = -1"
+      },
+      {
+       "md": "Vérification : la somme $\\frac{5}{2} - 1 = \\frac{3}{2}$ vaut $-\\frac{b}{a} = \\frac{3}{2}$."
+      }
+     ],
+     "answer": "$S = \\left\\{ -1 ; \\frac{5}{2} \\right\\}$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : inéquation du second degré",
+     "statement": "Résous $x^2 - x - 6 \\leq 0$.",
+     "steps": [
+      {
+       "md": "Racines de $x^2 - x - 6$ : Δ = 1 + 24 = 25, donc :",
+       "tex": "x_1 = \\frac{1 - 5}{2} = -2 \\quad x_2 = \\frac{1 + 5}{2} = 3"
+      },
+      {
+       "md": "Le coefficient de x² est positif : le trinôme est négatif **entre** les racines (la parabole est sous l'axe des abscisses)."
+      },
+      {
+       "md": "Les inégalités sont larges (≤) : on garde les racines."
+      }
+     ],
+     "answer": "$S = [-2 ; 3]$.",
+     "figure": {
+      "kind": "plot",
+      "xmin": -4,
+      "xmax": 5,
+      "ymin": -8,
+      "ymax": 6,
+      "grid": 1,
+      "xlabel": "x",
+      "ylabel": "y",
+      "curves": [
+       {
+        "expr": "x^2-x-6",
+        "color": "blue",
+        "label": "y = x² − x − 6"
+       }
+      ],
+      "points": [
+       {
+        "x": -2,
+        "y": 0,
+        "label": "−2",
+        "color": "red"
+       },
+       {
+        "x": 3,
+        "y": 0,
+        "label": "3",
+        "color": "red"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 4 : factoriser un polynôme",
+     "statement": "Factorise $P(x) = x^3 - 2x^2 - 5x + 6$.",
+     "steps": [
+      {
+       "md": "On cherche une racine évidente : P(1) = 1 − 2 − 5 + 6 = 0. Donc P(x) = (x − 1)Q(x) avec Q de degré 2 : on trouve par identification",
+       "tex": "Q(x) = x^2 - x - 6"
+      },
+      {
+       "md": "Vérification : $(x-1)(x^2 - x - 6) = x^3 - x^2 - 6x - x^2 + x + 6 = x^3 - 2x^2 - 5x + 6$."
+      },
+      {
+       "md": "$x^2 - x - 6$ a pour racines −2 et 3, donc $x^2 - x - 6 = (x+2)(x-3)$."
+      }
+     ],
+     "answer": "$P(x) = (x-1)(x+2)(x-3)$."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Écrire $(a+b)^2 = a^2 + b^2$ : il manque le double produit 2ab.\n- Écrire $\\sqrt{9 + 16} = 3 + 4$ : en réalité $\\sqrt{25} = 5$.\n- Oublier de changer le sens de l'inégalité en divisant par un nombre négatif.\n- Se tromper de signe de b dans $-b$ : si b = −3, alors −b = 3.\n- Simplifier une équation en divisant par x (on perd la solution x = 0) : on factorise plutôt."
+    },
+    {
+     "type": "exercise",
+     "ref": "2nde-maths-c-cal-01"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": -4,
+      "xmax": 5,
+      "ymin": -8,
+      "ymax": 6,
+      "grid": 1,
+      "xlabel": "x",
+      "ylabel": "y",
+      "curves": [
+       {
+        "expr": "x^2-x-6",
+        "color": "blue",
+        "label": "y = x² − x − 6"
+       }
+      ],
+      "points": [
+       {
+        "x": -2,
+        "y": 0,
+        "label": "−2",
+        "color": "red"
+       },
+       {
+        "x": 3,
+        "y": 0,
+        "label": "3",
+        "color": "red"
+       }
+      ]
+     },
+     "caption": "Parabole $y = x^2 - x - 6$ : elle coupe l'axe des abscisses en −2 et en 3 ; elle est sous l'axe entre ces deux valeurs.",
+     "alt": "Courbe en forme de U, ouverte vers le haut, qui coupe l'axe des abscisses aux points d'abscisses −2 et 3 et passe sous l'axe entre ces deux points."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Pour a ≠ 0, une équation du second degré peut aussi se résoudre par la forme canonique $a\\left((x + \\frac{b}{2a})^2 - \\frac{\\Delta}{4a^2}\\right)$, revue dans la fiche sur les fonctions.",
+      "Quand b est pair (b = 2b'), on peut utiliser $\\Delta' = b'^2 - ac$ ; ce raccourci est facultatif."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier si la division euclidienne de polynômes figure au programme de 2nde C : ici seule la factorisation avec une racine évidente est présentée.",
+    "Le discriminant en seconde est parfois repoussé à la première selon les programmes : à confirmer."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "2nde-maths-c-cal-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Calcule $\\frac{2^5 \\times 2^{-2}}{2}$.",
+   "answer": 4,
+   "tolerance": 0,
+   "explanation": "On additionne et soustrait les exposants : $2^{5 - 2 - 1} = 2^2 = 4$.",
+   "method": "Même base : on additionne les exposants au produit, on les soustrait au quotient.",
+   "mistakes": [
+    "Multiplier les exposants : 5 × (−2)."
+   ],
+   "source": "Exercice original, style devoir de 2nde",
+   "lesson": "2nde-maths-c-calcul",
+   "chapter": "2nde-maths-c-ch-calcul"
+  },
+  {
+   "id": "2nde-maths-c-cal-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quel est le développement de $(2x - 3)^2$ ?",
+   "choices": [
+    "$4x^2 - 9$",
+    "$4x^2 + 9$",
+    "$2x^2 - 12x + 9$",
+    "$4x^2 - 12x + 9$"
+   ],
+   "answer": 3,
+   "explanation": "$(a - b)^2 = a^2 - 2ab + b^2$ avec a = 2x et b = 3 : $4x^2 - 12x + 9$.",
+   "method": "Identifier a et b avant d'appliquer l'identité.",
+   "mistakes": [
+    "Oublier le double produit.",
+    "Ne pas élever 2 au carré."
+   ],
+   "source": "Exercice original, style devoir de 2nde",
+   "lesson": "2nde-maths-c-calcul",
+   "chapter": "2nde-maths-c-ch-calcul"
+  },
+  {
+   "id": "2nde-maths-c-cal-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Résous $3(x - 2) + 5 = 2x + 4$. Donne la valeur de x.",
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "On développe : 3x − 6 + 5 = 2x + 4, soit 3x − 1 = 2x + 4, donc x = 5. Vérification : 3 × 3 + 5 = 14 et 2 × 5 + 4 = 14.",
+   "method": "Développer, regrouper les x d'un côté et les nombres de l'autre.",
+   "mistakes": [
+    "Oublier de multiplier −2 par 3."
+   ],
+   "source": "Exercice original, style devoir de 2nde",
+   "lesson": "2nde-maths-c-calcul",
+   "chapter": "2nde-maths-c-ch-calcul"
+  },
+  {
+   "id": "2nde-maths-c-cal-04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Quel est l'ensemble des solutions de $x^2 - 5x + 6 > 0$ ?",
+   "choices": [
+    "$]2 ; 3[$",
+    "$]-\\infty ; 2[ \\cup ]3 ; +\\infty[$",
+    "$[2 ; 3]$",
+    "$]-\\infty ; 2] \\cup [3 ; +\\infty[$"
+   ],
+   "answer": 1,
+   "explanation": "Racines : Δ = 25 − 24 = 1, donc x = 2 et x = 3. Le coefficient de x² est positif : le trinôme est positif à l'extérieur des racines. L'inégalité est stricte : racines exclues.",
+   "method": "Racines, puis signe de a à l'extérieur.",
+   "mistakes": [
+    "Choisir l'intervalle entre les racines.",
+    "Inclure les racines alors que l'inégalité est stricte."
+   ],
+   "source": "Exercice original, style devoir de 2nde",
+   "lesson": "2nde-maths-c-calcul",
+   "chapter": "2nde-maths-c-ch-calcul"
+  },
+  {
+   "id": "2nde-maths-c-cal-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Quelle est la somme des racines de $2x^2 - 7x + 3 = 0$ ?",
+   "answer": 3.5,
+   "tolerance": 0,
+   "explanation": "Δ = 49 − 24 = 25, donc x = (7 ± 5)/4, soit 3 et 1/2. La somme est 7/2 = 3,5, ce qui est bien $-\\frac{b}{a} = \\frac{7}{2}$.",
+   "method": "Formule de la somme −b/a, à confirmer en calculant les racines.",
+   "mistakes": [
+    "Écrire −7/2 (oubli du signe de b)."
+   ],
+   "source": "Exercice original, style devoir de 2nde",
+   "lesson": "2nde-maths-c-calcul",
+   "chapter": "2nde-maths-c-ch-calcul"
+  },
+  {
+   "id": "2nde-maths-c-cal-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Un champ rectangulaire à Garoua a un périmètre de 56 m et une aire de 187 m². On note x sa longueur (en m), la largeur étant la plus petite dimension.",
+   "method": "Mettre le problème en équation avec une seule inconnue, puis résoudre.",
+   "mistakes": [
+    "Oublier que la deuxième racine donne la largeur."
+   ],
+   "source": "Exercice original, style devoir de 2nde",
+   "parts": [
+    {
+     "id": "2nde-maths-c-cal-06-a",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle équation vérifie x ?",
+     "choices": [
+      "$x^2 - 28x + 187 = 0$",
+      "$x^2 - 56x + 187 = 0$",
+      "$x^2 + 28x - 187 = 0$",
+      "$x^2 - 28x - 187 = 0$"
+     ],
+     "answer": 0,
+     "explanation": "Demi-périmètre : x + l = 28, donc l = 28 − x. L'aire vaut x(28 − x) = 187, soit $x^2 - 28x + 187 = 0$."
+    },
+    {
+     "id": "2nde-maths-c-cal-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le discriminant Δ.",
+     "answer": 36,
+     "tolerance": 0,
+     "explanation": "Δ = (−28)² − 4 × 187 = 784 − 748 = 36."
+    },
+    {
+     "id": "2nde-maths-c-cal-06-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Quelle est la longueur du champ, en mètres (la plus grande racine) ?",
+     "answer": 17,
+     "tolerance": 0,
+     "unit": "m",
+     "explanation": "x = (28 ± 6)/2 : x = 17 ou x = 11. La longueur est la plus grande : 17 m."
+    },
+    {
+     "id": "2nde-maths-c-cal-06-d",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Quelle est la largeur, en mètres ?",
+     "answer": 11,
+     "tolerance": 0,
+     "unit": "m",
+     "explanation": "l = 28 − 17 = 11 m. Vérification : 17 × 11 = 187 m² et 2 × (17 + 11) = 56 m."
+    }
+   ],
+   "lesson": "2nde-maths-c-calcul",
+   "chapter": "2nde-maths-c-ch-calcul"
+  },
+  {
+   "id": "2nde-maths-c-cal-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "$\\sqrt{12}$ est égal à :",
+   "choices": [
+    "$3\\sqrt{2}$",
+    "$4\\sqrt{3}$",
+    "6",
+    "$2\\sqrt{3}$"
+   ],
+   "answer": 3,
+   "explanation": "$\\sqrt{12} = \\sqrt{4 \\times 3} = 2\\sqrt{3}$.",
+   "lesson": "2nde-maths-c-calcul",
+   "chapter": "2nde-maths-c-ch-calcul"
+  },
+  {
+   "id": "2nde-maths-c-cal-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "Quelle est la solution de $-2x + 6 > 0$ ?",
+   "choices": [
+    "$x < 3$",
+    "$x > 3$",
+    "$x < -3$",
+    "$x > -3$"
+   ],
+   "answer": 0,
+   "explanation": "−2x > −6, on divise par −2 et on change le sens : x < 3.",
+   "lesson": "2nde-maths-c-calcul",
+   "chapter": "2nde-maths-c-ch-calcul"
+  },
+  {
+   "id": "2nde-maths-c-cal-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "Le discriminant de $x^2 - 4x + 4 = 0$ vaut :",
+   "choices": [
+    "16",
+    "0",
+    "−16",
+    "4"
+   ],
+   "answer": 1,
+   "explanation": "Δ = 16 − 16 = 0 : une racine double x = 2.",
+   "lesson": "2nde-maths-c-calcul",
+   "chapter": "2nde-maths-c-ch-calcul"
+  },
+  {
+   "id": "2nde-maths-c-cal-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "Factoriser $x^2 - 25$ donne :",
+   "choices": [
+    "$(x-5)^2$",
+    "$(x+5)^2$",
+    "$(x-5)(x+5)$",
+    "$x(x-25)$"
+   ],
+   "answer": 2,
+   "explanation": "C'est $a^2 - b^2$ avec a = x et b = 5.",
+   "lesson": "2nde-maths-c-calcul",
+   "chapter": "2nde-maths-c-ch-calcul"
+  },
+  {
+   "id": "2nde-maths-c-cal-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "Combien de racines réelles possède $x^2 + x + 1$ ?",
+   "choices": [
+    "Une",
+    "Deux",
+    "Trois",
+    "Aucune"
+   ],
+   "answer": 3,
+   "explanation": "Δ = 1 − 4 = −3 < 0 : aucune racine réelle.",
+   "lesson": "2nde-maths-c-calcul",
+   "chapter": "2nde-maths-c-ch-calcul"
+  },
+  {
+   "id": "2nde-maths-c-blanc-ex1",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Exercice 1 — Calcul algébrique (5 points). Les questions sont indépendantes.",
+   "source": "Exercice original, style devoir de 2nde C",
+   "parts": [
+    {
+     "id": "2nde-maths-c-blanc-ex1-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "On pose $A = \\sqrt{75} - \\sqrt{12}$. Il existe un entier k tel que $A = k\\sqrt{3}$. Donne k.",
+     "answer": 3,
+     "tolerance": 0,
+     "explanation": "$\\sqrt{75} = 5\\sqrt{3}$ et $\\sqrt{12} = 2\\sqrt{3}$, donc $A = 3\\sqrt{3}$ : k = 3."
+    },
+    {
+     "id": "2nde-maths-c-blanc-ex1-b",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Résous $2x^2 - 5x - 3 = 0$. Donne la plus grande solution.",
+     "answer": 3,
+     "tolerance": 0,
+     "explanation": "Δ = 25 + 24 = 49. x = (5 ± 7)/4, soit 3 ou −1/2. La plus grande est 3."
+    },
+    {
+     "id": "2nde-maths-c-blanc-ex1-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Combien d'entiers relatifs vérifient $x^2 - x - 12 \\leq 0$ ?",
+     "answer": 8,
+     "tolerance": 0,
+     "explanation": "Racines : Δ = 1 + 48 = 49, x = (1 ± 7)/2 donne 4 et −3. Le trinôme est négatif entre les racines : $[-3 ; 4]$. Les entiers −3, −2, …, 4 sont au nombre de 8."
+    },
+    {
+     "id": "2nde-maths-c-blanc-ex1-d",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Résous $3(x + 1) - 2(x - 4) = x + 11$.",
+     "choices": [
+      "Tous les réels sont solutions",
+      "x = 0",
+      "Aucune solution",
+      "x = 11"
+     ],
+     "answer": 0,
+     "explanation": "On développe : 3x + 3 − 2x + 8 = x + 11, soit x + 11 = x + 11. L'égalité est vraie pour tout réel x."
+    }
+   ],
+   "lesson": "2nde-maths-c-calcul",
+   "chapter": "2nde-maths-c-ch-calcul"
+  }
+ ]
+}

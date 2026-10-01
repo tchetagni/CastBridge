@@ -1,0 +1,567 @@
+{
+ "chapter": "bac-chimie-cd-organique-ch-carbonyles",
+ "lessons": [
+  {
+   "id": "bac-chimie-cd-organique-carbonyles",
+   "title": "Aldéhydes, cétones et acides carboxyliques",
+   "minutes": 40,
+   "programRef": "Tle C/D — Composés carbonylés, tests d'identification, acides carboxyliques et dérivés (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Nommer aldéhydes, cétones et acides carboxyliques.",
+    "Identifier une famille par les tests (DNPH, Tollens, Fehling).",
+    "Écrire les équations d'oxydation et de dissociation de l'acide.",
+    "Exploiter un dosage acide-base du vinaigre."
+   ],
+   "prerequisites": [
+    "bac-chimie-cd-organique-alcools"
+   ],
+   "exercises": [
+    "bac-chimie-cd-organique-car-01",
+    "bac-chimie-cd-organique-car-02",
+    "bac-chimie-cd-organique-car-03",
+    "bac-chimie-cd-organique-car-04",
+    "bac-chimie-cd-organique-car-05",
+    "bac-chimie-cd-organique-car-06"
+   ],
+   "selfCheck": [
+    "bac-chimie-cd-organique-car-q1",
+    "bac-chimie-cd-organique-car-q2",
+    "bac-chimie-cd-organique-car-q3",
+    "bac-chimie-cd-organique-car-q4",
+    "bac-chimie-cd-organique-car-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Aldéhydes et cétones",
+     "md": "Le groupe **carbonyle** C=O caractérise deux familles :\n- **aldéhyde** : C=O en **bout de chaîne** (−CHO, le carbone est lié à un H) ; nom en **-al** (éthanal, propanal, butanal) ;\n- **cétone** : C=O **à l'intérieur** de la chaîne, lié à deux carbones ; nom en **-one** avec position (propanone, butanone, pentan-2-one).\nExemple d'isomères : propanal et propanone (C₃H₆O)."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Identification",
+     "md": "- **DNPH** : précipité **jaune-orangé** avec un aldéhyde **ou** une cétone (preuve du groupe C=O).\n- **Réactif de Tollens** (ion diamminoargent) : **miroir d'argent** avec un aldéhyde seulement.\n- **Liqueur de Fehling** : précipité **rouge brique** de Cu₂O avec un aldéhyde seulement, à chaud.\n- **Réactif de Schiff** : coloration rose avec un aldéhyde."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 290,
+      "items": [
+       {
+        "t": "rect",
+        "x": 100,
+        "y": 8,
+        "w": 220,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 33.0,
+        "text": "Composé inconnu + DNPH",
+        "size": 13,
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 48,
+        "x2": 210,
+        "y2": 72,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 100,
+        "y": 74,
+        "w": 220,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 99.0,
+        "text": "Précipité jaune : groupe C=O",
+        "size": 13,
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 114,
+        "x2": 210,
+        "y2": 138,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 100,
+        "y": 140,
+        "w": 220,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 165.0,
+        "text": "Ajouter Tollens ou Fehling",
+        "size": 13,
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 180,
+        "x2": 100,
+        "y2": 214,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 270,
+        "y1": 180,
+        "x2": 320,
+        "y2": 214,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 8,
+        "y": 216,
+        "w": 196,
+        "h": 40,
+        "fill": "lightgreen",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 106.0,
+        "y": 241.0,
+        "text": "Test positif : aldéhyde",
+        "size": 13,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 216,
+        "y": 216,
+        "w": 196,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 314.0,
+        "y": 241.0,
+        "text": "Test négatif : cétone",
+        "size": 13,
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Démarche d'identification d'un composé carbonylé : DNPH pour reconnaître C=O, puis Tollens ou Fehling pour distinguer aldéhyde et cétone.",
+     "alt": "Quatre cases en cascade : composé inconnu avec DNPH, précipité jaune groupe C=O, ajouter Tollens ou Fehling, puis deux cases finales : test positif, aldéhyde ; test négatif, cétone."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Oxydation d'un aldéhyde",
+     "md": "Un aldéhyde est oxydé en acide carboxylique (en milieu basique : ion carboxylate). Avec le réactif de Tollens, puis la liqueur de Fehling :",
+     "tex": "\\text{RCHO} + 2\\,\\text{Ag(NH}_{3}\\text{)}_{2}^{+} + 3\\,\\text{HO}^{-} \\to \\text{RCOO}^{-} + 2\\,\\text{Ag} + 4\\,\\text{NH}_{3} + 2\\,\\text{H}_{2}\\text{O}"
+    },
+    {
+     "type": "formula",
+     "tex": "\\text{RCHO} + 2\\,\\text{Cu}^{2+} + 5\\,\\text{HO}^{-} \\to \\text{RCOO}^{-} + \\text{Cu}_{2}\\text{O} + 3\\,\\text{H}_{2}\\text{O}",
+     "caption": "Avec la liqueur de Fehling (ion cuivre(II) en milieu basique) : précipité rouge brique de Cu₂O."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Acides carboxyliques",
+     "md": "Groupe **carboxyle** −COOH ; nom : **acide ...-oïque** (acide méthanoïque, éthanoïque, propanoïque, butanoïque). On les obtient par oxydation d'un alcool primaire ou d'un aldéhyde. L'acide éthanoïque est le constituant acide du vinaigre ; le vinaigre commercial contient environ 6 g d'acide pour 100 g (6 degrés) — valeur indicative."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Propriétés des acides carboxyliques",
+     "md": "Ce sont des **acides faibles** (pKa de l'acide éthanoïque ≈ 4,8) ; ils réagissent avec l'eau, les bases, les métaux et les carbonates :",
+     "tex": "\\text{CH}_{3}\\text{COOH} + \\text{H}_{2}\\text{O} \\text{ ⇌ } \\text{CH}_{3}\\text{COO}^{-} + \\text{H}_{3}\\text{O}^{+}"
+    },
+    {
+     "type": "formula",
+     "tex": "\\text{CH}_{3}\\text{COOH} + \\text{HO}^{-} \\to \\text{CH}_{3}\\text{COO}^{-} + \\text{H}_{2}\\text{O} \\qquad 2\\,\\text{CH}_{3}\\text{COOH} + \\text{Zn} \\to 2\\,\\text{CH}_{3}\\text{COO}^{-} + \\text{Zn}^{2+} + \\text{H}_{2}",
+     "caption": "Avec une base forte et avec le zinc (dégagement de dihydrogène)."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Dérivés d'acides",
+     "md": "Pour rendre l'acide plus réactif (estérification complète, amides), on le transforme en **chlorure d'acyle** (avec SOCl₂) ou en **anhydride d'acide** (par déshydratation) :",
+     "tex": "\\text{CH}_{3}\\text{COOH} + \\text{SOCl}_{2} \\to \\text{CH}_{3}\\text{COCl} + \\text{SO}_{2} + \\text{HCl} \\qquad 2\\,\\text{CH}_{3}\\text{COOH} \\to \\text{(CH}_{3}\\text{CO)}_{2}\\text{O} + \\text{H}_{2}\\text{O}"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode",
+     "md": "1. Repérer le groupe caractéristique (−CHO, C=O, −COOH).\n2. Pour un test : DNPH (C=O ?), puis Tollens/Fehling (aldéhyde ?).\n3. Équilibrer atomes et charges (O avec H₂O, H avec H⁺ ou HO⁻).\n4. Pour un dosage acide-base : à l'équivalence, $c_A V_A = c_B V_B$ (acide monoacide)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : identifier un composé C₃H₆O",
+     "statement": "Un liquide de formule C₃H₆O donne un précipité jaune avec la DNPH, mais reste sans effet sur le réactif de Tollens. Quel est ce composé ?",
+     "steps": [
+      {
+       "md": "La DNPH est positive : il y a un groupe C=O (aldéhyde ou cétone)."
+      },
+      {
+       "md": "Tollens est négatif : ce n'est pas un aldéhyde. C'est donc une cétone."
+      },
+      {
+       "md": "Seule cétone à 3 carbones : la propanone CH₃COCH₃ (l'autre isomère C₃H₆O, le propanal CH₃CH₂CHO, aurait donné un miroir d'argent)."
+      }
+     ],
+     "answer": "**Propanone** (acétone)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : dosage d'un vinaigre",
+     "statement": "On dilue 10 fois un vinaigre. On dose 20,0 mL du vinaigre dilué par de la soude à 0,10 mol/L ; l'équivalence est atteinte pour V_E = 12,0 mL. Calcule la concentration en acide éthanoïque (M = 60 g/mol) du vinaigre, en mol/L puis en g/L.",
+     "steps": [
+      {
+       "md": "À l'équivalence (équation 1 pour 1) :",
+       "tex": "\\text{CH}_{3}\\text{COOH} + \\text{HO}^{-} \\to \\text{CH}_{3}\\text{COO}^{-} + \\text{H}_{2}\\text{O}"
+      },
+      {
+       "md": "Concentration du vinaigre dilué :",
+       "tex": "c_d = \\dfrac{c_B V_E}{V_A} = \\dfrac{0{,}10 \\times 12{,}0}{20{,}0} = 0{,}060\\ \\text{mol/L}"
+      },
+      {
+       "md": "Vinaigre initial (× 10) :",
+       "tex": "c = 0{,}60\\ \\text{mol/L} \\qquad c_m = c \\times M = 0{,}60 \\times 60 = 36\\ \\text{g/L}"
+      }
+     ],
+     "answer": "**c = 0,60 mol/L, soit 36 g/L** (données fictives pour l'exercice)."
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-chimie-cd-organique-car-01"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Dire qu'une cétone réagit avec Tollens ou Fehling : seuls les aldéhydes réagissent.\n- Confondre aldéhyde (−CHO terminal) et cétone (C=O au milieu) dans le nom (-al / -one).\n- Oublier de multiplier par le facteur de dilution dans un dosage.\n- Écrire un acide fort : les acides carboxyliques sont faibles (équilibre, ⇌).\n- Équilibrer sans tenir compte des charges (Tollens, Fehling)."
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-chimie-cd-organique-car-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-chimie-cd-organique-car-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-chimie-cd-organique-car-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-chimie-cd-organique-car-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-chimie-cd-organique-car-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le formol (solution de méthanal) et la vanilline sont des composés carbonylés de la vie courante.",
+      "Les réductions (aldéhyde → alcool primaire, cétone → alcool secondaire) sont signalées sans exercices ici ; vérifier leur présence au programme."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Équations de Tollens et de Fehling vérifiées (atomes et charges) par script Python ; les formules de Cu₂O et du complexe sont simplifiées selon l'usage scolaire : vérifier la convention du manuel (Tollens parfois écrit avec Ag⁺).",
+    "Le programme exige-t-il les chlorures d'acyle, anhydrides et la réduction ? À confirmer ; ils sont ici seulement évoqués.",
+    "pKa de l'acide éthanoïque ≈ 4,8 et teneur du vinaigre (6°) : valeurs usuelles à re-vérifier ; les données du dosage sont fictives."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "prompt": "Quel est le nom du composé CH₃CH₂CHO ?",
+   "points": 1,
+   "choices": [
+    "Propanal",
+    "Propanone",
+    "Propan-1-ol",
+    "Acide propanoïque"
+   ],
+   "answer": 0,
+   "explanation": "Le groupe −CHO terminal caractérise un aldéhyde ; chaîne de 3 carbones : propanal.",
+   "method": "Terminaison -al pour un aldéhyde.",
+   "mistakes": [
+    "Confondre avec la propanone, qui est une cétone."
+   ],
+   "id": "bac-chimie-cd-organique-car-01",
+   "lesson": "bac-chimie-cd-organique-carbonyles",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "prompt": "Quel test distingue un aldéhyde d'une cétone ?",
+   "points": 1,
+   "choices": [
+    "Le réactif de Tollens (miroir d'argent pour l'aldéhyde)",
+    "La DNPH",
+    "Le papier pH",
+    "Le test à l'eau de chaux"
+   ],
+   "answer": 0,
+   "explanation": "La DNPH réagit avec les deux ; seuls les aldéhydes réduisent l'ion diamminoargent en argent métallique.",
+   "method": "DNPH = C=O ; Tollens/Fehling = aldéhyde.",
+   "mistakes": [
+    "Penser que la DNPH distingue les deux familles."
+   ],
+   "id": "bac-chimie-cd-organique-car-02",
+   "lesson": "bac-chimie-cd-organique-carbonyles",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "prompt": "On oxyde 0,020 mol d'éthanal par un excès de réactif de Tollens. Calcule la masse d'argent formée, en g (M(Ag) = 108 g/mol ; 1 aldéhyde donne 2 Ag).",
+   "points": 1,
+   "answer": 4.32,
+   "tolerance": 0.02,
+   "unit": "g",
+   "explanation": "n(Ag) = 2 × 0,020 = 0,040 mol ; m = 0,040 × 108 = 4,32 g.",
+   "method": "Coefficients de l'équation : 1 RCHO pour 2 Ag.",
+   "mistakes": [
+    "Oublier le coefficient 2 (2,16 g)."
+   ],
+   "id": "bac-chimie-cd-organique-car-03",
+   "lesson": "bac-chimie-cd-organique-carbonyles",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "prompt": "On dose 20,0 mL de vinaigre dilué 10 fois par de la soude à 0,10 mol/L ; V_E = 12,0 mL. Calcule la concentration massique en acide éthanoïque du vinaigre non dilué, en g/L (M = 60 g/mol).",
+   "points": 2,
+   "answer": 36.0,
+   "tolerance": 0.5,
+   "unit": "g/L",
+   "explanation": "c_d = 0,10 × 12,0/20,0 = 0,060 mol/L ; c = 0,60 mol/L ; c_m = 0,60 × 60 = 36 g/L.",
+   "method": "c_A V_A = c_B V_E, puis facteur de dilution et M.",
+   "mistakes": [
+    "Oublier la dilution (3,6 g/L)."
+   ],
+   "id": "bac-chimie-cd-organique-car-04",
+   "lesson": "bac-chimie-cd-organique-carbonyles",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "prompt": "Combien de composés carbonylés (aldéhydes et cétones) de formule C₄H₈O existe-t-il ?",
+   "points": 2,
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "Aldéhydes : butanal et 2-méthylpropanal ; cétone : butanone. Total : 3.",
+   "method": "Placer C=O sur les chaînes linéaire et ramifiée.",
+   "mistakes": [
+    "Oublier le 2-méthylpropanal."
+   ],
+   "id": "bac-chimie-cd-organique-car-05",
+   "lesson": "bac-chimie-cd-organique-carbonyles",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Un composé organique A, de formule C₄H₈O, à chaîne carbonée linéaire, donne un précipité jaune avec la DNPH et un miroir d'argent avec le réactif de Tollens. On donne M(C) = 12 ; M(H) = 1 ; M(O) = 16 ; M(Ag) = 108 g/mol.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "À quelle famille appartient A ?",
+     "points": 1,
+     "choices": [
+      "Aldéhyde",
+      "Cétone",
+      "Alcool",
+      "Acide carboxylique"
+     ],
+     "answer": 0,
+     "explanation": "Le test à la DNPH montre C=O ; Tollens positif : aldéhyde.",
+     "id": "bac-chimie-cd-organique-car-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule la masse molaire de A, en g/mol.",
+     "points": 0.5,
+     "answer": 72,
+     "tolerance": 0,
+     "unit": "g/mol",
+     "explanation": "M = 4×12 + 8×1 + 16 = 72 g/mol.",
+     "id": "bac-chimie-cd-organique-car-06-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quel est le nom de A ?",
+     "points": 1,
+     "choices": [
+      "Butanal",
+      "Butanone",
+      "Acide butanoïque",
+      "Butan-1-ol"
+     ],
+     "answer": 0,
+     "explanation": "Aldéhyde linéaire à 4 carbones : butanal CH₃CH₂CH₂CHO.",
+     "id": "bac-chimie-cd-organique-car-06-c"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "On fait réagir 7,2 g de A avec un excès de réactif de Tollens. Calcule la masse d'argent formée, en g.",
+     "points": 1.5,
+     "answer": 21.6,
+     "tolerance": 0.1,
+     "unit": "g",
+     "explanation": "n(A) = 7,2/72 = 0,10 mol ; n(Ag) = 0,20 mol ; m = 0,20 × 108 = 21,6 g.",
+     "id": "bac-chimie-cd-organique-car-06-d"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "L'oxydation de A par un excès de permanganate acide donne :",
+     "points": 1,
+     "choices": [
+      "l'acide butanoïque",
+      "la butanone",
+      "le butan-1-ol",
+      "le butane"
+     ],
+     "answer": 0,
+     "explanation": "Un aldéhyde est oxydé en acide carboxylique de même chaîne : 5 CH₃CH₂CH₂CHO + 2 MnO₄⁻ + 6 H⁺ → 5 CH₃CH₂CH₂COOH + 2 Mn²⁺ + 3 H₂O.",
+     "id": "bac-chimie-cd-organique-car-06-e"
+    }
+   ],
+   "method": "Tests caractéristiques → famille ; M ; coefficients stœchiométriques 1 : 2.",
+   "mistakes": [
+    "Oublier que A est un aldéhyde et lui donner une formule de cétone."
+   ],
+   "id": "bac-chimie-cd-organique-car-06",
+   "lesson": "bac-chimie-cd-organique-carbonyles",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "Dans un aldéhyde, le groupe C=O est :",
+   "points": 1,
+   "choices": [
+    "en bout de chaîne, le carbone étant lié à un hydrogène",
+    "à l'intérieur de la chaîne",
+    "lié à un groupe −OH",
+    "lié à un atome d'azote"
+   ],
+   "answer": 0,
+   "explanation": "−CHO terminal ; une cétone a C=O à l'intérieur.",
+   "id": "bac-chimie-cd-organique-car-q1",
+   "lesson": "bac-chimie-cd-organique-carbonyles"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "Le précipité rouge brique avec la liqueur de Fehling caractérise :",
+   "points": 1,
+   "choices": [
+    "un aldéhyde",
+    "une cétone",
+    "un alcool tertiaire",
+    "un alcane"
+   ],
+   "answer": 0,
+   "explanation": "Cu²⁺ est réduit en Cu₂O par un aldéhyde.",
+   "id": "bac-chimie-cd-organique-car-q2",
+   "lesson": "bac-chimie-cd-organique-carbonyles"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "Le groupe caractéristique d'un acide carboxylique est :",
+   "points": 1,
+   "choices": [
+    "−COOH",
+    "−CHO",
+    "−OH",
+    "−NH₂"
+   ],
+   "answer": 0,
+   "explanation": "Le carboxyle −COOH.",
+   "id": "bac-chimie-cd-organique-car-q3",
+   "lesson": "bac-chimie-cd-organique-carbonyles"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "Un acide carboxylique dans l'eau :",
+   "points": 1,
+   "choices": [
+    "se dissocie partiellement (acide faible)",
+    "se dissocie totalement",
+    "ne réagit pas avec l'eau",
+    "donne un ion hydroxyde"
+   ],
+   "answer": 0,
+   "explanation": "CH₃COOH + H₂O ⇌ CH₃COO⁻ + H₃O⁺, équilibre.",
+   "id": "bac-chimie-cd-organique-car-q4",
+   "lesson": "bac-chimie-cd-organique-carbonyles"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "L'oxydation ménagée d'un alcool primaire en excès d'oxydant donne :",
+   "points": 1,
+   "choices": [
+    "un acide carboxylique",
+    "une cétone",
+    "un alcène",
+    "un ester"
+   ],
+   "answer": 0,
+   "explanation": "Alcool primaire → aldéhyde → acide.",
+   "id": "bac-chimie-cd-organique-car-q5",
+   "lesson": "bac-chimie-cd-organique-carbonyles"
+  }
+ ]
+}

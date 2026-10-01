@@ -1,0 +1,633 @@
+{
+ "chapter": "1re-svt-d-ch-energie",
+ "lessons": [
+  {
+   "id": "1re-svt-d-energie",
+   "title": "Nutrition et métabolisme énergétique",
+   "minutes": 40,
+   "programRef": "1re D — Métabolisme énergétique : respiration, fermentations, photosynthèse (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Écrire et équilibrer les équations de la respiration, des fermentations et de la photosynthèse.",
+    "Situer chaque étape dans la cellule.",
+    "Calculer des quantités de matière et des masses à partir d'une équation.",
+    "Interpréter une courbe d'échanges gazeux d'une feuille."
+   ],
+   "prerequisites": [
+    "1re-svt-d-adn"
+   ],
+   "exercises": [
+    "1re-svt-d-ene-01",
+    "1re-svt-d-ene-02",
+    "1re-svt-d-ene-03",
+    "1re-svt-d-ene-04",
+    "1re-svt-d-ene-05",
+    "1re-svt-d-ene-06"
+   ],
+   "selfCheck": [
+    "1re-svt-d-ene-q1",
+    "1re-svt-d-ene-q2",
+    "1re-svt-d-ene-q3",
+    "1re-svt-d-ene-q4",
+    "1re-svt-d-ene-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "ATP, l'énergie de la cellule",
+     "md": "Une cellule vivante a besoin d'énergie pour fonctionner. Elle la libère à partir de molécules organiques (glucose) sous forme d'**ATP**, molécule qui sert de « monnaie énergétique » dans toute la cellule.\nLes êtres **autotrophes** (plantes vertes) fabriquent leur matière organique par photosynthèse ; les **hétérotrophes** (animaux, champignons) se nourrissent de matière organique."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "La respiration cellulaire",
+     "md": "Avec du dioxygène, le glucose est dégradé complètement. **Glycolyse** dans le cytoplasme, puis **cycle de Krebs** et **chaîne respiratoire** dans la **mitochondrie**.",
+     "tex": "\\text{C}_6\\text{H}_{12}\\text{O}_6 + 6\\ \\text{O}_2 \\to 6\\ \\text{CO}_2 + 6\\ \\text{H}_2\\text{O} + \\text{énergie (ATP)}"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Les fermentations",
+     "md": "Sans dioxygène, le glucose est dégradé **partiellement**, dans le cytoplasme : la glycolyse donne seulement 2 ATP par glucose.\n- **Fermentation alcoolique** (levures) : glucose → 2 éthanol + 2 CO₂ (pain qui lève, vin de palme, bière).\n- **Fermentation lactique** (bactéries lactiques, muscle manquant d'O₂) : glucose → 2 acide lactique (yaourt, lait caillé)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 540,
+      "h": 270,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 110,
+        "w": 100,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 140,
+        "text": "Glucose",
+        "size": 15,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 135,
+        "x2": 190,
+        "y2": 135,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 122,
+        "text": "glycolyse",
+        "size": 12,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 190,
+        "y": 110,
+        "w": 100,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 140,
+        "text": "Pyruvate",
+        "size": 15,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 290,
+        "y1": 125,
+        "x2": 360,
+        "y2": 70,
+        "color": "green",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 85,
+        "text": "avec O₂",
+        "size": 13,
+        "color": "green"
+       },
+       {
+        "t": "rect",
+        "x": 360,
+        "y": 20,
+        "w": 170,
+        "h": 70,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 445,
+        "y": 52,
+        "text": "CO₂ + H₂O",
+        "size": 15,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 445,
+        "y": 76,
+        "text": "respiration",
+        "size": 13,
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 290,
+        "y1": 145,
+        "x2": 360,
+        "y2": 200,
+        "color": "orange",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 205,
+        "text": "sans O₂",
+        "size": 13,
+        "color": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 360,
+        "y": 170,
+        "w": 170,
+        "h": 80,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 445,
+        "y": 198,
+        "text": "éthanol + CO₂",
+        "size": 14,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 445,
+        "y": 218,
+        "text": "ou lactate",
+        "size": 13,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 445,
+        "y": 238,
+        "text": "fermentation",
+        "size": 13,
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Devenir du glucose : la glycolyse est commune ; la suite dépend de la présence de dioxygène.",
+     "alt": "Schéma : le glucose est transformé en pyruvate par la glycolyse. Avec O2, il mène à CO2 et H2O (respiration) ; sans O2, à l'éthanol ou au lactate (fermentation)."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Respiration et fermentation : bilan",
+     "md": "La respiration libère **beaucoup plus d'énergie** que les fermentations pour une même quantité de glucose : de l'ordre de 36 ATP contre 2 ATP (valeur indicative des manuels). Dans la fermentation, la matière organique n'est pas entièrement oxydée : il reste de l'éthanol ou de l'acide lactique, qui contiennent encore de l'énergie."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "La photosynthèse",
+     "md": "Dans les chloroplastes, grâce à la **lumière** captée par la **chlorophylle**, la plante fabrique de la matière organique à partir de CO₂ et d'eau et libère du dioxygène. La matière organique est stockée, notamment sous forme d'**amidon**.",
+     "tex": "6\\ \\text{CO}_2 + 6\\ \\text{H}_2\\text{O} \\to \\text{C}_6\\text{H}_{12}\\text{O}_6 + 6\\ \\text{O}_2"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 6,
+      "ymin": -2,
+      "ymax": 2,
+      "grid": 1,
+      "xlabel": "lumière",
+      "ylabel": "CO2 absorbé",
+      "w": 420,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "3*x/(x+1)-1.5",
+        "color": "green",
+        "label": "feuille"
+       }
+      ],
+      "points": [
+       {
+        "x": 0,
+        "y": -1.5,
+        "label": "R",
+        "color": "red"
+       },
+       {
+        "x": 1,
+        "y": 0,
+        "label": "C",
+        "color": "blue"
+       }
+      ],
+      "segments": []
+     },
+     "caption": "Échanges de CO₂ d'une feuille selon la lumière (courbe schématique, unités arbitraires) : R = rejet à l'obscurité (respiration), C = point de compensation.",
+     "alt": "Courbe croissante : à lumière nulle la feuille rejette du CO2 (point R). Au point C la courbe coupe l'axe horizontal : photosynthèse et respiration se compensent. Au-delà, la feuille absorbe du CO2."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : équilibrer et calculer des masses",
+     "md": "1. Compter les atomes C, H, O de chaque côté et ajuster les coefficients.\n2. Masses molaires (g/mol) : C = 12, H = 1, O = 16 ; ainsi glucose 180, O₂ 32, CO₂ 44, H₂O 18.\n3. Convertir : $n = \\frac{m}{M}$ ; utiliser les coefficients de l'équation ; revenir à la masse $m = n \\times M$."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-svt-d-ene-01"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : équilibrer la respiration",
+     "statement": "Équilibre : C₆H₁₂O₆ + ? O₂ → ? CO₂ + ? H₂O.",
+     "steps": [
+      {
+       "md": "Carbone : 6 C à gauche, donc 6 CO₂ à droite. Hydrogène : 12 H à gauche, donc 6 H₂O (soit 12 H) à droite."
+      },
+      {
+       "md": "Oxygène à droite : 6 × 2 + 6 × 1 = 18 atomes. À gauche : 6 (dans le glucose) + 2x, donc 2x = 12 et x = 6."
+      },
+      {
+       "md": "Vérification : 6 + 12 = 18 atomes d'oxygène de chaque côté."
+      }
+     ],
+     "answer": "**C₆H₁₂O₆ + 6 O₂ → 6 CO₂ + 6 H₂O**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : bilan de matière",
+     "statement": "Une cellule respire 18 g de glucose (M = 180 g/mol). Quelle masse de CO₂ est rejetée (M = 44 g/mol) ? Quelle masse de dioxygène est consommée (M = 32 g/mol) ?",
+     "steps": [
+      {
+       "md": "Quantité de glucose :",
+       "tex": "n = \\frac{18}{180} = 0{,}1\\ \\text{mol}"
+      },
+      {
+       "md": "D'après l'équation, 1 glucose donne 6 CO₂ et consomme 6 O₂ :",
+       "tex": "n(\\text{CO}_2) = n(\\text{O}_2) = 0{,}6\\ \\text{mol}"
+      },
+      {
+       "md": "Masses :",
+       "tex": "m(\\text{CO}_2) = 0{,}6 \\times 44 = 26{,}4\\ \\text{g} \\quad m(\\text{O}_2) = 0{,}6 \\times 32 = 19{,}2\\ \\text{g}"
+      }
+     ],
+     "answer": "**26,4 g de CO₂ rejetés ; 19,2 g de O₂ consommés.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Dire que les plantes ne respirent pas : elles respirent **jour et nuit**, et photosynthétisent seulement à la lumière.\n- Confondre respiration cellulaire (dans les cellules) et ventilation (mouvements respiratoires).\n- Oublier que la fermentation ne consomme pas d'O₂ et ne passe pas par la mitochondrie.\n- Équilibrer en changeant les formules (indices) au lieu des coefficients.\n- Mélanger moles et masses : toujours convertir avec la masse molaire."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-svt-d-ene-04"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Quotient respiratoire : volume (ou quantité) de CO₂ rejeté divisé par O₂ consommé ; il vaut 1 pour le glucose, d'après l'équation de la respiration.",
+      "La photosynthèse comprend une phase claire (lumière, dans les thylacoïdes) et une phase sombre (cycle de Calvin, dans le stroma).",
+      "La respiration et la photosynthèse sont complémentaires : l'une libère l'énergie stockée par l'autre."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Rendement de la respiration (36, 38 ou autre selon le manuel) : à aligner sur le programme.",
+    "Détail du cycle de Krebs, de la chaîne respiratoire et des phases de la photosynthèse : niveau de détail à confirmer en 1re D.",
+    "Conventions de notation : formule brute de l'éthanol (C₂H₆O ou C₂H₅OH) à harmoniser avec les manuels.",
+    "Le programme peut traiter la nutrition de l'animal (digestion, absorption) : thème non couvert ici."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "1re-svt-d-ene-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-svt-d-energie",
+   "prompt": "Quels sont les produits de la fermentation alcoolique du glucose ?",
+   "choices": [
+    "De l'acide lactique seul",
+    "Du dioxygène et de l'eau",
+    "De l'éthanol et du dioxyde de carbone",
+    "De l'amidon et du dioxygène"
+   ],
+   "answer": 2,
+   "explanation": "Les levures transforment le glucose en éthanol et en CO₂ : c'est pourquoi la pâte à pain gonfle.",
+   "mistakes": [
+    "Confondre avec la fermentation lactique."
+   ],
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-ene-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-svt-d-energie",
+   "prompt": "Par la fermentation lactique, une molécule de glucose donne combien de molécules d'acide lactique ?",
+   "answer": 2,
+   "tolerance": 0,
+   "explanation": "C₆H₁₂O₆ → 2 C₃H₆O₃ : deux molécules d'acide lactique (3 carbones chacune, 6 au total).",
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-ene-03",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "1re-svt-d-energie",
+   "prompt": "Associe chaque équation à son nom.",
+   "pairs": [
+    [
+     "C₆H₁₂O₆ + 6 O₂ → 6 CO₂ + 6 H₂O",
+     "Respiration"
+    ],
+    [
+     "6 CO₂ + 6 H₂O → C₆H₁₂O₆ + 6 O₂",
+     "Photosynthèse"
+    ],
+    [
+     "C₆H₁₂O₆ → 2 C₂H₆O + 2 CO₂",
+     "Fermentation alcoolique"
+    ],
+    [
+     "C₆H₁₂O₆ → 2 C₃H₆O₃",
+     "Fermentation lactique"
+    ]
+   ],
+   "explanation": "La photosynthèse consomme CO₂ et H₂O et produit du glucose ; la respiration fait l'inverse en consommant O₂. La fermentation alcoolique dégage du CO₂, la lactique n'en dégage pas.",
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-ene-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "1re-svt-d-energie",
+   "prompt": "Une levure respire 90 g de glucose (M = 180 g/mol). Quelle masse de CO₂ (M = 44 g/mol) est rejetée ? (réponse en g)",
+   "answer": 132,
+   "tolerance": 0,
+   "unit": "g",
+   "explanation": "n(glucose) = 90 ÷ 180 = 0,5 mol. Chaque glucose donne 6 CO₂ : n(CO₂) = 3 mol. m = 3 × 44 = 132 g.",
+   "method": "n = m ÷ M, coefficients de l'équation, puis m = n × M.",
+   "mistakes": [
+    "Oublier le coefficient 6.",
+    "Répondre 22 g en utilisant 1 CO₂ par glucose."
+   ],
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-ene-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "1re-svt-d-energie",
+   "prompt": "Pour fabriquer du glucose, une plante absorbe 264 g de CO₂ (M = 44 g/mol). Quelle masse de glucose (M = 180 g/mol) peut-elle produire au maximum ? (réponse en g)",
+   "answer": 180,
+   "tolerance": 0,
+   "unit": "g",
+   "explanation": "n(CO₂) = 264 ÷ 44 = 6 mol. Pour 6 CO₂, l'équation donne 1 glucose : n = 1 mol, soit m = 180 g.",
+   "method": "6 CO₂ pour 1 glucose.",
+   "mistakes": [
+    "Répondre 264 g en supposant que la masse se conserve entre CO₂ et glucose (de l'eau est aussi consommée)."
+   ],
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-ene-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "1re-svt-d-energie",
+   "prompt": "On étudie une feuille éclairée de plus en plus fort. La courbe donne la quantité nette de CO₂ absorbée par la feuille (unités arbitraires ; une valeur négative signifie un rejet de CO₂) en fonction de la lumière.",
+   "figure": {
+    "kind": "plot",
+    "xmin": 0,
+    "xmax": 6,
+    "ymin": -2,
+    "ymax": 2,
+    "grid": 1,
+    "xlabel": "lumière",
+    "ylabel": "CO2 absorbé",
+    "w": 420,
+    "h": 260,
+    "curves": [
+     {
+      "expr": "3*x/(x+1)-1.5",
+      "color": "green",
+      "label": "feuille"
+     }
+    ],
+    "points": [
+     {
+      "x": 0,
+      "y": -1.5,
+      "label": "R",
+      "color": "red"
+     },
+     {
+      "x": 1,
+      "y": 0,
+      "label": "C",
+      "color": "blue"
+     }
+    ],
+    "segments": []
+   },
+   "method": "Lire les valeurs sur la courbe, interpréter le signe, relier à photosynthèse et respiration.",
+   "mistakes": [
+    "Dire que la plante respire seulement la nuit."
+   ],
+   "source": "Exercice original, style Probatoire",
+   "parts": [
+    {
+     "id": "1re-svt-d-ene-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quelle quantité de CO₂ la feuille rejette-t-elle à l'obscurité ? (valeur absolue, unités arbitraires)",
+     "answer": 1.5,
+     "tolerance": 0.1,
+     "explanation": "À l'obscurité, la courbe passe par le point (0 ; −1,5) : la feuille rejette 1,5 unité de CO₂, produit de la respiration."
+    },
+    {
+     "id": "1re-svt-d-ene-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Pour quelle valeur de la lumière la photosynthèse compense-t-elle exactement la respiration ?",
+     "answer": 1,
+     "tolerance": 0.1,
+     "explanation": "Le point de compensation est l'abscisse où la courbe coupe l'axe horizontal : la valeur nette est nulle. Ici, la lumière vaut 1."
+    },
+    {
+     "id": "1re-svt-d-ene-06-c",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Que se passe-t-il pour une lumière égale à 4 ?",
+     "choices": [
+      "La feuille absorbe du CO₂ en net",
+      "La feuille rejette du CO₂ en net",
+      "La feuille ne respire plus",
+      "La photosynthèse est nulle"
+     ],
+     "answer": 0,
+     "explanation": "Pour 4, la courbe est au-dessus de 0 : la feuille absorbe du CO₂ en net. La photosynthèse est plus intense que la respiration."
+    },
+    {
+     "id": "1re-svt-d-ene-06-d",
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explique pourquoi la feuille rejette du CO₂ à l'obscurité et pourquoi elle continue de respirer à la lumière.",
+     "model": "À l'obscurité, la photosynthèse est impossible faute de lumière, mais les cellules continuent de respirer pour produire de l'ATP : elles consomment de l'O₂ et rejettent du CO₂. À la lumière, la respiration continue aussi ; mais la photosynthèse, plus intense, absorbe plus de CO₂ que la respiration n'en rejette quand la lumière dépasse le point de compensation.",
+     "rubric": [
+      "La respiration a lieu à l'obscurité et fournit l'ATP (1 point).",
+      "À la lumière, les deux processus coexistent ; le bilan dépend de leur intensité relative (1 point)."
+     ],
+     "explanation": "Sans lumière, la photosynthèse s'arrête mais les cellules ont toujours besoin d'énergie."
+    }
+   ]
+  },
+  {
+   "id": "1re-svt-d-ene-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-svt-d-energie",
+   "prompt": "Où se déroulent le cycle de Krebs et la chaîne respiratoire ?",
+   "choices": [
+    "Dans la mitochondrie",
+    "Dans le noyau",
+    "Dans le chloroplaste",
+    "Dans la paroi"
+   ],
+   "answer": 0,
+   "explanation": "Ces étapes de la respiration ont lieu dans la mitochondrie.",
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-ene-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-svt-d-energie",
+   "prompt": "Quelle équation décrit la photosynthèse ?",
+   "choices": [
+    "C₆H₁₂O₆ + 6 O₂ → 6 CO₂ + 6 H₂O",
+    "6 CO₂ + 6 H₂O → C₆H₁₂O₆ + 6 O₂",
+    "C₆H₁₂O₆ → 2 C₂H₆O + 2 CO₂",
+    "C₆H₁₂O₆ → 2 C₃H₆O₃"
+   ],
+   "answer": 1,
+   "explanation": "La photosynthèse fabrique du glucose et libère du dioxygène.",
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-ene-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-svt-d-energie",
+   "prompt": "Quelle est la molécule qui fournit l'énergie utilisable directement par la cellule ?",
+   "choices": [
+    "L'amidon",
+    "La chlorophylle",
+    "L'ATP",
+    "L'ADN"
+   ],
+   "answer": 2,
+   "explanation": "L'ATP est la molécule énergétique utilisée par la cellule.",
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-ene-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-svt-d-energie",
+   "prompt": "Une fermentation se distingue d'une respiration car elle :",
+   "choices": [
+    "consomme du dioxygène",
+    "se déroule dans le chloroplaste",
+    "donne toujours du CO₂ et de l'eau",
+    "se fait sans dioxygène et donne peu d'ATP"
+   ],
+   "answer": 3,
+   "explanation": "La fermentation se fait sans O₂ et libère seulement 2 ATP par glucose.",
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-ene-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-svt-d-energie",
+   "prompt": "Quelle masse molaire a le CO₂ (C = 12, O = 16) ?",
+   "choices": [
+    "44 g/mol",
+    "28 g/mol",
+    "32 g/mol",
+    "12 g/mol"
+   ],
+   "answer": 0,
+   "explanation": "12 + 2 × 16 = 44 g/mol.",
+   "source": "Exercice original, style Probatoire"
+  }
+ ]
+}

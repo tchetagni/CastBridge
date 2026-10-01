@@ -1,0 +1,652 @@
+{
+ "chapter": "2nde-maths-c-ch-trigo",
+ "lessons": [
+  {
+   "id": "2nde-maths-c-trigo",
+   "title": "Trigonométrie et transformations du plan",
+   "minutes": 45,
+   "programRef": "2nde C — Trigonométrie (cercle trigonométrique, angles orientés de base), translations et homothéties (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale conforme au programme de seconde ; à relire par un enseignant",
+   "objectives": [
+    "Passer des degrés aux radians et inversement.",
+    "Utiliser le cercle trigonométrique, les valeurs remarquables et les angles associés.",
+    "Déterminer la mesure principale d'un angle orienté.",
+    "Construire et calculer les images par une translation ou une homothétie."
+   ],
+   "prerequisites": [
+    "2nde-maths-c-vecteurs"
+   ],
+   "exercises": [
+    "2nde-maths-c-tri-01",
+    "2nde-maths-c-tri-02",
+    "2nde-maths-c-tri-03",
+    "2nde-maths-c-tri-04",
+    "2nde-maths-c-tri-05",
+    "2nde-maths-c-tri-06"
+   ],
+   "selfCheck": [
+    "2nde-maths-c-tri-q1",
+    "2nde-maths-c-tri-q2",
+    "2nde-maths-c-tri-q3",
+    "2nde-maths-c-tri-q4",
+    "2nde-maths-c-tri-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Radians et degrés",
+     "md": "Le **radian** est une unité d'angle : π rad = 180°, donc $x\\text{ rad} = \\frac{180}{\\pi}x$ degrés. Quelques correspondances : 30° = π/6, 45° = π/4, 60° = π/3, 90° = π/2. Sur un cercle de rayon r, un angle de θ radians intercepte un arc de longueur $r\\theta$."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Cercle trigonométrique",
+     "md": "C'est le cercle de centre O et de rayon 1, orienté dans le sens direct (contraire des aiguilles d'une montre). À tout réel x correspond un point M du cercle. Son **abscisse** est cos x, son **ordonnée** est sin x, et $\\tan x = \\frac{\\sin x}{\\cos x}$ (si cos x ≠ 0)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 280,
+      "items": [
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 140,
+        "x2": 340,
+        "y2": 140,
+        "color": "grey",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 260,
+        "x2": 200,
+        "y2": 20,
+        "color": "grey",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 140,
+        "r": 100,
+        "stroke": "blue",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 140,
+        "x2": 250,
+        "y2": 53.4,
+        "color": "red",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 53.4,
+        "x2": 250,
+        "y2": 140,
+        "color": "green",
+        "width": 3,
+        "dash": true
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 53.4,
+        "x2": 200,
+        "y2": 53.4,
+        "color": "orange",
+        "width": 3,
+        "dash": true
+       },
+       {
+        "t": "angle",
+        "x": 200,
+        "y": 140,
+        "from": 0,
+        "to": 60,
+        "r": 30,
+        "color": "red"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 162,
+        "text": "cos x",
+        "size": 16,
+        "color": "green",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 168,
+        "y": 58,
+        "text": "sin x",
+        "size": 16,
+        "color": "orange",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 268,
+        "y": 44,
+        "text": "M",
+        "size": 18,
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Le point M du cercle trigonométrique associé à l'angle x : cos x est son abscisse et sin x son ordonnée.",
+     "alt": "Un cercle centré à l'origine d'un repère. Un rayon rouge va de l'origine à un point M situé dans le quart supérieur droit. Un trait vert pointillé vertical donne l'abscisse cos x, un trait orange horizontal donne l'ordonnée sin x. Un petit arc montre l'angle x."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Relations fondamentales",
+     "md": "Pour tout réel x : $\\cos^2 x + \\sin^2 x = 1$ ; $-1 \\leq \\cos x \\leq 1$ ; $-1 \\leq \\sin x \\leq 1$ ; $\\cos(x + 2\\pi) = \\cos x$ et $\\sin(x + 2\\pi) = \\sin x$. Le signe de cos et de sin dépend du quadrant où se trouve M."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Valeurs remarquables",
+     "md": "- x = 0 : cos 1, sin 0.\n- x = π/6 : cos $\\frac{\\sqrt{3}}{2}$, sin $\\frac{1}{2}$.\n- x = π/4 : cos $\\frac{\\sqrt{2}}{2}$, sin $\\frac{\\sqrt{2}}{2}$.\n- x = π/3 : cos $\\frac{1}{2}$, sin $\\frac{\\sqrt{3}}{2}$.\n- x = π/2 : cos 0, sin 1."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Angles associés",
+     "md": "Symétries du cercle trigonométrique :",
+     "tex": "\\cos(-x) = \\cos x \\quad \\sin(-x) = -\\sin x \\quad \\cos(\\pi - x) = -\\cos x \\quad \\sin(\\pi - x) = \\sin x"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Autres angles associés",
+     "md": "$\\cos(\\pi + x) = -\\cos x$ et $\\sin(\\pi + x) = -\\sin x$ ; $\\cos\\left(\\frac{\\pi}{2} - x\\right) = \\sin x$ et $\\sin\\left(\\frac{\\pi}{2} - x\\right) = \\cos x$. Pour les retrouver, on place M et son symétrique sur le cercle."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Angles orientés de base",
+     "md": "L'angle orienté $(\\vec{u}, \\vec{v})$ est mesuré **à 2π près** (sens direct positif). Sa **mesure principale** est celle qui appartient à $]-\\pi ; \\pi]$. Relation de Chasles : $(\\vec{u}, \\vec{v}) + (\\vec{v}, \\vec{w}) = (\\vec{u}, \\vec{w})$ à 2π près."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Translation et homothétie",
+     "md": "- **Translation** de vecteur $\\vec{u}$ : M' est l'image de M si $\\vec{MM'} = \\vec{u}$. Coordonnées : x' = x + a, y' = y + b pour $\\vec{u}(a ; b)$.\n- **Homothétie** de centre Ω et de rapport k (k ≠ 0) : M' vérifie $\\vec{\\Omega M'} = k\\vec{\\Omega M}$. Si Ω = O : x' = kx et y' = ky."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Effets des transformations",
+     "md": "- La translation conserve longueurs, angles, parallélisme, aires.\n- L'homothétie de rapport k conserve l'alignement, le parallélisme et les angles ; elle multiplie les **longueurs par |k|** et les **aires par k²**. L'image d'une droite est une droite qui lui est parallèle.\n- k = −1 : symétrie de centre Ω."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 260,
+      "items": [
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 210,
+        "x2": 220,
+        "y2": 170,
+        "color": "grey",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 210,
+        "x2": 180,
+        "y2": 110,
+        "color": "grey",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "poly",
+        "pts": [
+         90,
+         190,
+         130,
+         190,
+         110,
+         160
+        ],
+        "fill": "lightblue",
+        "stroke": "blue",
+        "width": 2
+       },
+       {
+        "t": "poly",
+        "pts": [
+         140,
+         170,
+         220,
+         170,
+         180,
+         110
+        ],
+        "fill": "lightorange",
+        "stroke": "orange",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 28,
+        "y": 228,
+        "text": "O",
+        "size": 18,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 215,
+        "text": "A",
+        "size": 16,
+        "color": "blue",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 135,
+        "y": 195,
+        "text": "A'",
+        "size": 16,
+        "color": "orange",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 60,
+        "text": "k = 2",
+        "size": 20,
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Homothétie de centre O et de rapport 2 : le triangle orange est l'image du triangle bleu ; ses côtés sont deux fois plus longs.",
+     "alt": "Un petit triangle bleu et un triangle orange deux fois plus grand, avec des droites pointillées partant du point O qui passent par les sommets correspondants. Le rapport est k = 2."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : conversion et angle associé",
+     "statement": "Convertis 135° en radians, puis calcule $\\cos\\frac{2\\pi}{3}$ et $\\sin\\frac{2\\pi}{3}$.",
+     "steps": [
+      {
+       "md": "On utilise π rad = 180° :",
+       "tex": "135° = 135 \\times \\frac{\\pi}{180} = \\frac{3\\pi}{4}"
+      },
+      {
+       "md": "Pour $\\frac{2\\pi}{3} = \\pi - \\frac{\\pi}{3}$ :",
+       "tex": "\\cos\\left(\\pi - \\frac{\\pi}{3}\\right) = -\\cos\\frac{\\pi}{3} = -\\frac{1}{2}"
+      },
+      {
+       "md": "De même :",
+       "tex": "\\sin\\left(\\pi - \\frac{\\pi}{3}\\right) = \\sin\\frac{\\pi}{3} = \\frac{\\sqrt{3}}{2}"
+      }
+     ],
+     "answer": "135° = 3π/4 rad ; $\\cos\\frac{2\\pi}{3} = -\\frac{1}{2}$ ; $\\sin\\frac{2\\pi}{3} = \\frac{\\sqrt{3}}{2}$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : retrouver cos et tan",
+     "statement": "Soit x dans $\\left[0 ; \\frac{\\pi}{2}\\right]$ avec $\\sin x = \\frac{3}{5}$. Calcule cos x et tan x.",
+     "steps": [
+      {
+       "md": "Relation fondamentale :",
+       "tex": "\\cos^2 x = 1 - \\frac{9}{25} = \\frac{16}{25}"
+      },
+      {
+       "md": "Donc cos x = ± 4/5. Comme x est dans le premier quadrant, cos x ≥ 0 : cos x = 4/5."
+      },
+      {
+       "md": "Enfin :",
+       "tex": "\\tan x = \\frac{3/5}{4/5} = \\frac{3}{4}"
+      }
+     ],
+     "answer": "$\\cos x = \\frac{4}{5}$ et $\\tan x = \\frac{3}{4}$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : images par translation et homothétie",
+     "statement": "Dans un repère, M(3 ; 4) a pour image M' par la translation de vecteur $\\vec{u}(2 ; -1)$. N(3 ; −1) a pour image N' par l'homothétie de centre O et de rapport −2. Calcule M' et N'.",
+     "steps": [
+      {
+       "md": "Translation :",
+       "tex": "x' = 3 + 2 = 5 \\quad y' = 4 + (-1) = 3"
+      },
+      {
+       "md": "Homothétie de centre O et de rapport −2 :",
+       "tex": "x' = -2 \\times 3 = -6 \\quad y' = -2 \\times (-1) = 2"
+      },
+      {
+       "md": "Contrôle : ON' = 2 ON en longueur, et N' est de l'autre côté de O par rapport à N (rapport négatif)."
+      }
+     ],
+     "answer": "$M'(5 ; 3)$ et $N'(-6 ; 2)$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 4 : mesure principale",
+     "statement": "Donne la mesure principale de $\\frac{17\\pi}{4}$ et de $-\\frac{11\\pi}{3}$.",
+     "steps": [
+      {
+       "md": "On retire des multiples de 2π (= 8π/4) :",
+       "tex": "\\frac{17\\pi}{4} - 4\\pi = \\frac{17\\pi - 16\\pi}{4} = \\frac{\\pi}{4}"
+      },
+      {
+       "md": "On ajoute 4π (= 12π/3) :",
+       "tex": "-\\frac{11\\pi}{3} + 4\\pi = \\frac{\\pi}{3}"
+      },
+      {
+       "md": "Les deux résultats sont dans $]-\\pi ; \\pi]$."
+      }
+     ],
+     "answer": "$\\frac{\\pi}{4}$ et $\\frac{\\pi}{3}$."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre cos et sin dans le tableau des valeurs remarquables.\n- Oublier le signe : dans le 2e quadrant cos < 0 mais sin > 0.\n- Écrire $\\cos^2 x = \\cos(x^2)$ : $\\cos^2 x$ signifie $(\\cos x)^2$.\n- Calculer avec la calculatrice en degrés alors que l'énoncé est en radians.\n- Croire que les aires sont multipliées par k (et non k²) dans une homothétie."
+    },
+    {
+     "type": "exercise",
+     "ref": "2nde-maths-c-tri-01"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Dans le même esprit, la rotation sera étudiée plus tard ; elle conserve elle aussi longueurs, angles et aires.",
+      "Une mesure de l'angle orienté est définie « à 2π près » : deux mesures qui diffèrent d'un multiple de 2π représentent le même angle."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Programme exact à vérifier : certains programmes de seconde C n'introduisent les angles orientés qu'en première.",
+    "La rotation et la symétrie axiale sont omises ici : à compléter si elles figurent au programme.",
+    "Notation de l'homothétie (h(Ω, k) ou h_{Ω,k}) variable selon les manuels."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "2nde-maths-c-tri-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Un angle mesure 225°. Écris-le sous la forme $k\\pi$ radians et donne k (sous forme décimale).",
+   "answer": 1.25,
+   "tolerance": 0.001,
+   "explanation": "225 × π/180 = 5π/4, soit k = 1,25.",
+   "method": "π rad = 180°.",
+   "mistakes": [
+    "Multiplier par 180/π au lieu de π/180."
+   ],
+   "source": "Exercice original, style devoir de 2nde",
+   "lesson": "2nde-maths-c-trigo",
+   "chapter": "2nde-maths-c-ch-trigo"
+  },
+  {
+   "id": "2nde-maths-c-tri-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quelle est la valeur de $\\sin\\frac{5\\pi}{6}$ ?",
+   "choices": [
+    "$-\\frac{1}{2}$",
+    "$\\frac{\\sqrt{3}}{2}$",
+    "$\\frac{1}{2}$",
+    "$-\\frac{\\sqrt{3}}{2}$"
+   ],
+   "answer": 2,
+   "explanation": "$\\frac{5\\pi}{6} = \\pi - \\frac{\\pi}{6}$ donc $\\sin\\frac{5\\pi}{6} = \\sin\\frac{\\pi}{6} = \\frac{1}{2}$.",
+   "method": "Écrire l'angle sous la forme π − x avec x remarquable.",
+   "mistakes": [
+    "Prendre le signe négatif : dans le 2e quadrant, sin reste positif."
+   ],
+   "source": "Exercice original, style devoir de 2nde",
+   "lesson": "2nde-maths-c-trigo",
+   "chapter": "2nde-maths-c-ch-trigo"
+  },
+  {
+   "id": "2nde-maths-c-tri-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "L'homothétie h de centre O et de rapport −3 transforme A(2 ; −1) en A'. Calcule l'ordonnée de A'.",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "x' = −3 × 2 = −6 et y' = −3 × (−1) = 3. A'(−6 ; 3).",
+   "method": "Multiplier chaque coordonnée par k quand le centre est l'origine.",
+   "mistakes": [
+    "Oublier que le produit de deux nombres négatifs est positif."
+   ],
+   "source": "Exercice original, style devoir de 2nde",
+   "lesson": "2nde-maths-c-trigo",
+   "chapter": "2nde-maths-c-ch-trigo"
+  },
+  {
+   "id": "2nde-maths-c-tri-04",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Associe chaque valeur trigonométrique à son résultat.",
+   "pairs": [
+    [
+     "$\\cos\\frac{\\pi}{3}$",
+     "$\\frac{1}{2}$"
+    ],
+    [
+     "$\\sin\\frac{\\pi}{4}$",
+     "$\\frac{\\sqrt{2}}{2}$"
+    ],
+    [
+     "$\\tan\\frac{\\pi}{4}$",
+     "1"
+    ],
+    [
+     "$\\cos\\frac{\\pi}{6}$",
+     "$\\frac{\\sqrt{3}}{2}$"
+    ]
+   ],
+   "explanation": "cos(π/3) = 1/2 ; sin(π/4) = √2/2 ; tan(π/4) = sin/cos = 1 (sin et cos sont égaux) ; cos(π/6) = √3/2.",
+   "method": "Se souvenir de la construction : cos et sin de π/6 et π/3 échangent leurs valeurs.",
+   "mistakes": [
+    "Échanger cos(π/3) et cos(π/6)."
+   ],
+   "source": "Exercice original, style devoir de 2nde",
+   "lesson": "2nde-maths-c-trigo",
+   "chapter": "2nde-maths-c-ch-trigo"
+  },
+  {
+   "id": "2nde-maths-c-tri-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Un triangle a une aire de 12 cm². Quelle est l'aire (en cm²) de son image par une homothétie de rapport −2 ?",
+   "answer": 48,
+   "tolerance": 0,
+   "unit": "cm²",
+   "explanation": "Les aires sont multipliées par k² = 4 (le signe de k disparaît) : 12 × 4 = 48 cm².",
+   "method": "Aire × k².",
+   "mistakes": [
+    "Multiplier par −2 ou par 2."
+   ],
+   "source": "Exercice original, style devoir de 2nde",
+   "lesson": "2nde-maths-c-trigo",
+   "chapter": "2nde-maths-c-ch-trigo"
+  },
+  {
+   "id": "2nde-maths-c-tri-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Soit x un réel de $\\left]\\frac{\\pi}{2} ; \\pi\\right[$ tel que $\\cos x = -\\frac{3}{5}$. Soit aussi le point M(3 ; −2) et l'homothétie h de centre Ω(1 ; 0) et de rapport 2.",
+   "method": "Relation cos² + sin² = 1 avec signe selon le quadrant ; pour l'homothétie, passer par les vecteurs ΩM et ΩM'.",
+   "mistakes": [
+    "Appliquer x' = 2x sans tenir compte du centre Ω ≠ O."
+   ],
+   "source": "Exercice original, style devoir de 2nde",
+   "parts": [
+    {
+     "id": "2nde-maths-c-tri-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule sin x.",
+     "answer": 0.8,
+     "tolerance": 0.001,
+     "explanation": "sin² x = 1 − 9/25 = 16/25. Dans le 2e quadrant, sin x > 0 : sin x = 4/5 = 0,8."
+    },
+    {
+     "id": "2nde-maths-c-tri-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule tan x (arrondi à 0,001).",
+     "answer": -1.333,
+     "tolerance": 0.001,
+     "explanation": "tan x = sin x / cos x = (4/5)/(−3/5) = −4/3 ≈ −1,333."
+    },
+    {
+     "id": "2nde-maths-c-tri-06-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule cos(π − x).",
+     "answer": 0.6,
+     "tolerance": 0.001,
+     "explanation": "cos(π − x) = −cos x = 3/5 = 0,6."
+    },
+    {
+     "id": "2nde-maths-c-tri-06-d",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "L'image de M par h est M'. Calcule son abscisse.",
+     "answer": 5,
+     "tolerance": 0,
+     "explanation": "ΩM(2 ; −2) donc ΩM' = 2ΩM = (4 ; −4). Alors x' = 1 + 4 = 5 et y' = 0 − 4 = −4."
+    },
+    {
+     "id": "2nde-maths-c-tri-06-e",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule l'ordonnée de M'.",
+     "answer": -4,
+     "tolerance": 0,
+     "explanation": "On a ΩM'(4 ; −4), donc y' = 0 + (−4) = −4. M'(5 ; −4)."
+    }
+   ],
+   "lesson": "2nde-maths-c-trigo",
+   "chapter": "2nde-maths-c-ch-trigo"
+  },
+  {
+   "id": "2nde-maths-c-tri-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "π/6 radians valent, en degrés :",
+   "choices": [
+    "60°",
+    "45°",
+    "30°",
+    "15°"
+   ],
+   "answer": 2,
+   "explanation": "π rad = 180°, donc π/6 = 180/6 = 30°.",
+   "lesson": "2nde-maths-c-trigo",
+   "chapter": "2nde-maths-c-ch-trigo"
+  },
+  {
+   "id": "2nde-maths-c-tri-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "Parmi ces valeurs, laquelle ne peut pas être cos x ?",
+   "choices": [
+    "−1",
+    "0",
+    "0,9",
+    "1,2"
+   ],
+   "answer": 3,
+   "explanation": "Un cosinus est toujours compris entre −1 et 1.",
+   "lesson": "2nde-maths-c-trigo",
+   "chapter": "2nde-maths-c-ch-trigo"
+  },
+  {
+   "id": "2nde-maths-c-tri-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "$\\cos\\left(-\\frac{\\pi}{3}\\right)$ vaut :",
+   "choices": [
+    "$\\frac{1}{2}$",
+    "$-\\frac{1}{2}$",
+    "$\\frac{\\sqrt{3}}{2}$",
+    "$-\\frac{\\sqrt{3}}{2}$"
+   ],
+   "answer": 0,
+   "explanation": "Le cosinus est pair : cos(−x) = cos x, donc cos(−π/3) = cos(π/3) = 1/2.",
+   "lesson": "2nde-maths-c-trigo",
+   "chapter": "2nde-maths-c-ch-trigo"
+  },
+  {
+   "id": "2nde-maths-c-tri-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "Une homothétie de rapport −2 multiplie les longueurs par :",
+   "choices": [
+    "−2",
+    "2",
+    "4",
+    "1/2"
+   ],
+   "answer": 1,
+   "explanation": "Les longueurs sont multipliées par |k| = 2.",
+   "lesson": "2nde-maths-c-trigo",
+   "chapter": "2nde-maths-c-ch-trigo"
+  },
+  {
+   "id": "2nde-maths-c-tri-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "L'image de A(1 ; 1) par la translation de vecteur $\\vec{u}(-2 ; 3)$ est :",
+   "choices": [
+    "(3 ; −2)",
+    "(−2 ; 3)",
+    "(−1 ; 4)",
+    "(−1 ; 2)"
+   ],
+   "answer": 2,
+   "explanation": "On ajoute les coordonnées du vecteur : (1 − 2 ; 1 + 3) = (−1 ; 4).",
+   "lesson": "2nde-maths-c-trigo",
+   "chapter": "2nde-maths-c-ch-trigo"
+  }
+ ]
+}

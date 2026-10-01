@@ -1,0 +1,425 @@
+{
+ "chapter": "2nde-histoire-geo-ecm-ch-population",
+ "lessons": [
+  {
+   "id": "2nde-histoire-geo-ecm-population",
+   "title": "Population et ressources : croissance démographique, urbanisation, agriculture",
+   "minutes": 40,
+   "programRef": "2nde — Géographie : population, villes et agriculture du Cameroun (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale, brouillon IA ; à relire par un enseignant",
+   "objectives": [
+    "Calculer une croissance naturelle, une densité et un taux d'urbanisation.",
+    "Expliquer l'urbanisation et ses effets, avec Yaoundé et Douala.",
+    "Distinguer cultures vivrières et cultures de rente et les situer.",
+    "Lire un graphique démographique et le commenter."
+   ],
+   "prerequisites": [
+    "2nde-histoire-geo-ecm-methodes"
+   ],
+   "exercises": [
+    "2nde-histoire-geo-ecm-pop-01",
+    "2nde-histoire-geo-ecm-pop-02",
+    "2nde-histoire-geo-ecm-pop-03",
+    "2nde-histoire-geo-ecm-pop-04",
+    "2nde-histoire-geo-ecm-pop-05",
+    "2nde-histoire-geo-ecm-pop-06"
+   ],
+   "selfCheck": [
+    "2nde-histoire-geo-ecm-pop-q1",
+    "2nde-histoire-geo-ecm-pop-q2",
+    "2nde-histoire-geo-ecm-pop-q3",
+    "2nde-histoire-geo-ecm-pop-q4",
+    "2nde-histoire-geo-ecm-pop-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Croissance démographique",
+     "md": "La **natalité** est le nombre de naissances pour 1 000 habitants, la **mortalité** le nombre de décès pour 1 000 habitants. La **croissance naturelle** est leur différence : natalité − mortalité. Avec le **solde migratoire** (arrivées − départs), elle donne l'évolution totale. On l'exprime en ‰ (pour mille) ou en % (1 % = 10 ‰)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Densité de population",
+     "md": "La **densité** mesure le peuplement : nombre d'habitants divisé par la superficie, en habitants par km².",
+     "tex": "\\text{densité} = \\frac{\\text{population}}{\\text{superficie}}"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Urbanisation",
+     "md": "L'**urbanisation** est la croissance de la population des villes. Le **taux d'urbanisation** est la part des citadins dans la population totale : (population urbaine ÷ population totale) × 100. Elle vient de l'**exode rural** (départs des campagnes vers les villes) et de la croissance naturelle."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Yaoundé et Douala",
+     "md": "- **Yaoundé** est la capitale politique : présidence, ministères, administrations.\n- **Douala** est la capitale économique : grand port sur le Wouri, industries, commerce, banques.\nCes grandes villes offrent emplois, écoles et services, mais font face à des problèmes de logement, d'eau, de transports, d'assainissement et d'embouteillages."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "bars": [
+       {
+        "label": "1980",
+        "value": 25,
+        "color": "lightblue"
+       },
+       {
+        "label": "2000",
+        "value": 40,
+        "color": "blue"
+       },
+       {
+        "label": "2020",
+        "value": 55,
+        "color": "purple"
+       }
+      ],
+      "w": 380,
+      "h": 240,
+      "unit": "% de citadins"
+     },
+     "caption": "Taux d'urbanisation d'un pays FICTIF : 25 % en 1980, 40 % en 2000, 55 % en 2020 (valeurs inventées pour l'exercice).",
+     "alt": "Diagramme en trois barres croissantes : 25 % en 1980, 40 % en 2000 et 55 % en 2020, pour un pays imaginaire."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "L'agriculture",
+     "md": "- Les **cultures vivrières** nourrissent d'abord les habitants : manioc, plantain, maïs, mil, sorgho, arachide, igname.\n- Les **cultures de rente** sont vendues, souvent à l'exportation : cacao, café, coton, banane, hévéa, palmier à huile.\nLe cacao est surtout cultivé dans le Sud et le Centre, le café dans l'Ouest et le Littoral, le coton dans le Nord."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : calculer et commenter",
+     "md": "1. Identifier la **formule** (croissance naturelle, densité, taux).\n2. Écrire le calcul avec les **unités** (‰, %, hab/km²).\n3. Vérifier la vraisemblance du résultat.\n4. Rédiger une phrase : « Dans cette ville fictive, la densité atteint … hab/km² »."
+    },
+    {
+     "type": "exercise",
+     "ref": "2nde-histoire-geo-ecm-pop-01"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : croissance naturelle (valeurs fictives)",
+     "statement": "Un pays imaginaire a une natalité de 38 ‰ et une mortalité de 9 ‰. Quelle est sa croissance naturelle, en ‰ puis en % ?",
+     "steps": [
+      {
+       "md": "Croissance naturelle = natalité − mortalité :",
+       "tex": "38 - 9 = 29 \\text{ ‰}"
+      },
+      {
+       "md": "Conversion : 1 % = 10 ‰, donc :",
+       "tex": "29 \\text{ ‰} = 2{,}9 \\text{ \\%}"
+      },
+      {
+       "md": "Interprétation : pour 1 000 habitants, 29 personnes en plus chaque année en raison des naissances moins les décès."
+      }
+     ],
+     "answer": "**29 ‰**, soit **2,9 %**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : densité et taux d'urbanisation (valeurs fictives)",
+     "statement": "Une région fictive de 400 km² compte 120 000 habitants ; un pays fictif de 15 millions d'habitants compte 6 millions de citadins. Calcule la densité puis le taux d'urbanisation.",
+     "steps": [
+      {
+       "md": "Densité :",
+       "tex": "\\frac{120\\,000}{400} = 300 \\text{ hab/km}^2"
+      },
+      {
+       "md": "Taux d'urbanisation :",
+       "tex": "\\frac{6}{15} \\times 100 = 40 \\text{ \\%}"
+      },
+      {
+       "md": "Phrase : « La région est densément peuplée (300 hab/km²) et 40 % des habitants du pays sont des citadins. »"
+      }
+     ],
+     "answer": "**300 hab/km²** et **40 %**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre ‰ (pour mille) et % (pour cent) : 29 ‰ = 2,9 %.\n- Diviser la superficie par la population au lieu de l'inverse.\n- Penser que **croissance naturelle** = croissance totale : il faut aussi tenir compte des migrations.\n- Réciter des statistiques réelles non vérifiées : mieux vaut un calcul clair avec des données données.\n- Confondre culture de **rente** et culture **vivrière**."
+    },
+    {
+     "type": "exercise",
+     "ref": "2nde-histoire-geo-ecm-pop-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Les marchés de Douala, Yaoundé ou Bafoussam relient campagnes et villes : ils vendent les produits vivriers.",
+      "L'agriculture camerounaise emploie une grande part des habitants : pour des données officielles, consulter l'Institut national de la statistique."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Aucune statistique réelle n'est donnée : tous les chiffres des exemples et exercices sont FICTIFS. Les chiffres officiels (recensements, taux) sont à ajouter par un enseignant à partir de sources datées.",
+    "La répartition régionale des cultures (cacao, café, coton, banane, hévéa, palmier) est donnée en termes généraux : à préciser avec le manuel officiel.",
+    "Le vocabulaire (taux d'accroissement, solde migratoire, taux d'urbanisation) et les formules doivent suivre le programme officiel."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "2nde-histoire-geo-ecm-pop-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-histoire-geo-ecm-population",
+   "prompt": "Un pays fictif a une natalité de 35 ‰ et une mortalité de 10 ‰. Quelle est sa croissance naturelle, en ‰ ?",
+   "answer": 25,
+   "tolerance": 0,
+   "unit": "‰",
+   "explanation": "35 − 10 = 25 ‰.",
+   "method": "Croissance naturelle = natalité − mortalité.",
+   "mistakes": [
+    "Additionner natalité et mortalité."
+   ],
+   "source": "Exercice original, style devoir de Seconde"
+  },
+  {
+   "id": "2nde-histoire-geo-ecm-pop-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-histoire-geo-ecm-population",
+   "prompt": "Une ville fictive de 1 200 km² compte 600 000 habitants. Calcule sa densité, en hab/km².",
+   "answer": 500,
+   "tolerance": 0,
+   "unit": "hab/km²",
+   "explanation": "600 000 ÷ 1 200 = 500 hab/km².",
+   "method": "Densité = population ÷ superficie.",
+   "mistakes": [
+    "Diviser 1 200 par 600 000."
+   ],
+   "source": "Exercice original, style devoir de Seconde"
+  },
+  {
+   "id": "2nde-histoire-geo-ecm-pop-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-histoire-geo-ecm-population",
+   "prompt": "Quelle ville est la capitale économique du Cameroun, avec un grand port ?",
+   "choices": [
+    "Douala",
+    "Yaoundé",
+    "Garoua",
+    "Bamenda"
+   ],
+   "answer": 0,
+   "explanation": "Douala, sur le Wouri, est la capitale économique et possède le principal port du pays. Yaoundé est la capitale politique.",
+   "method": "Associer ville et fonction.",
+   "mistakes": [
+    "Dire que Yaoundé est la capitale économique."
+   ],
+   "source": "Exercice original, style devoir de Seconde"
+  },
+  {
+   "id": "2nde-histoire-geo-ecm-pop-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "2nde-histoire-geo-ecm-population",
+   "prompt": "Dans un pays fictif de 20 millions d'habitants, 9 millions vivent en ville. Quel est le taux d'urbanisation, en % ?",
+   "answer": 45,
+   "tolerance": 0,
+   "unit": "%",
+   "explanation": "9 ÷ 20 = 0,45, soit 45 %.",
+   "method": "Taux = (urbains ÷ total) × 100.",
+   "mistakes": [
+    "Diviser 20 par 9."
+   ],
+   "source": "Exercice original, style devoir de Seconde"
+  },
+  {
+   "id": "2nde-histoire-geo-ecm-pop-05",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "2nde-histoire-geo-ecm-population",
+   "prompt": "Associe chaque culture à sa catégorie.",
+   "pairs": [
+    [
+     "Manioc",
+     "Nourrit d'abord les familles"
+    ],
+    [
+     "Cacao",
+     "Vendu à l'exportation"
+    ],
+    [
+     "Mil",
+     "Céréale vivrière du Nord"
+    ],
+    [
+     "Coton",
+     "Culture de rente du Nord"
+    ]
+   ],
+   "explanation": "Manioc et mil nourrissent surtout les familles ; cacao et coton sont vendus, souvent à l'exportation. Le choix précis dépend des régions.",
+   "method": "Se demander : est-ce d'abord pour manger ou pour vendre ?",
+   "mistakes": [
+    "Croire qu'une culture de rente ne se mange jamais."
+   ],
+   "source": "Exercice original, style devoir de Seconde",
+   "review": true,
+   "reviewNote": "Classement général : nuancer selon les régions et les usages."
+  },
+  {
+   "id": "2nde-histoire-geo-ecm-pop-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "2nde-histoire-geo-ecm-population",
+   "prompt": "Une ville fictive comptait 200 000 habitants en 1990 et 800 000 en 2020 (données inventées pour l'exercice).",
+   "parts": [
+    {
+     "id": "2nde-histoire-geo-ecm-pop-06-a",
+     "difficulty": 2,
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quelle est l'augmentation de population, en habitants ?",
+     "explanation": "800 000 − 200 000 = 600 000 habitants.",
+     "answer": 600000,
+     "tolerance": 0,
+     "unit": "hab"
+    },
+    {
+     "id": "2nde-histoire-geo-ecm-pop-06-b",
+     "difficulty": 2,
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Par combien la population a-t-elle été multipliée ?",
+     "explanation": "800 000 ÷ 200 000 = 4.",
+     "answer": 4,
+     "tolerance": 0
+    },
+    {
+     "id": "2nde-histoire-geo-ecm-pop-06-c",
+     "difficulty": 2,
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quel est le pourcentage d'augmentation ?",
+     "explanation": "(800 000 − 200 000) ÷ 200 000 = 3, soit 300 %.",
+     "answer": 300,
+     "tolerance": 0,
+     "unit": "%"
+    },
+    {
+     "id": "2nde-histoire-geo-ecm-pop-06-d",
+     "difficulty": 2,
+     "kind": "open",
+     "points": 3,
+     "prompt": "Cite deux causes et deux problèmes d'une croissance urbaine aussi rapide.",
+     "explanation": "Causes : l'exode rural (les jeunes viennent chercher un emploi, une école) et une forte natalité. Problèmes : manque de logements, de transports et d'eau potable, quartiers précaires, embouteillages, déchets.",
+     "rubric": [
+      "Deux causes plausibles (exode rural, natalité…).",
+      "Deux problèmes (logement, eau, transport, déchets…).",
+      "Phrases complètes reliées par des connecteurs.",
+      "Aucun chiffre réel inventé."
+     ],
+     "model": "Causes : l'exode rural (les jeunes viennent chercher un emploi, une école) et une forte natalité. Problèmes : manque de logements, de transports et d'eau potable, quartiers précaires, embouteillages, déchets."
+    }
+   ],
+   "explanation": "Corrigé détaillé question par question ci-dessous.",
+   "method": "Calculer la variation, le rapport, le pourcentage, puis rédiger.",
+   "mistakes": [
+    "Donner 4 % au lieu de 300 %."
+   ],
+   "source": "Exercice original, style devoir de Seconde"
+  },
+  {
+   "id": "2nde-histoire-geo-ecm-pop-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-histoire-geo-ecm-population",
+   "prompt": "La croissance naturelle se calcule par :",
+   "choices": [
+    "natalité − mortalité",
+    "natalité + mortalité",
+    "natalité × mortalité",
+    "mortalité − natalité"
+   ],
+   "answer": 0,
+   "explanation": "Croissance naturelle = natalité moins mortalité."
+  },
+  {
+   "id": "2nde-histoire-geo-ecm-pop-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-histoire-geo-ecm-population",
+   "prompt": "29 ‰ équivaut à :",
+   "choices": [
+    "2,9 %",
+    "29 %",
+    "0,29 %",
+    "290 %"
+   ],
+   "answer": 0,
+   "explanation": "1 % = 10 ‰ donc 29 ‰ = 2,9 %."
+  },
+  {
+   "id": "2nde-histoire-geo-ecm-pop-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-histoire-geo-ecm-population",
+   "prompt": "Une culture de rente est :",
+   "choices": [
+    "vendue, souvent exportée",
+    "uniquement pour les animaux",
+    "interdite",
+    "cultivée seulement au Nord"
+   ],
+   "answer": 0,
+   "explanation": "Les cultures de rente sont destinées à la vente, souvent à l'exportation."
+  },
+  {
+   "id": "2nde-histoire-geo-ecm-pop-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-histoire-geo-ecm-population",
+   "prompt": "La capitale politique du Cameroun est :",
+   "choices": [
+    "Yaoundé",
+    "Douala",
+    "Maroua",
+    "Limbé"
+   ],
+   "answer": 0,
+   "explanation": "Yaoundé abrite les institutions politiques."
+  },
+  {
+   "id": "2nde-histoire-geo-ecm-pop-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-histoire-geo-ecm-population",
+   "prompt": "Le taux d'urbanisation mesure :",
+   "choices": [
+    "la part des citadins dans la population",
+    "le nombre de villes",
+    "la superficie des villes",
+    "le nombre de routes"
+   ],
+   "answer": 0,
+   "explanation": "C'est le pourcentage de la population qui vit en ville."
+  }
+ ]
+}

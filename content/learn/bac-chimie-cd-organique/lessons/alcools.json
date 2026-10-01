@@ -1,0 +1,587 @@
+{
+ "chapter": "bac-chimie-cd-organique-ch-alcools",
+ "lessons": [
+  {
+   "id": "bac-chimie-cd-organique-alcools",
+   "title": "Les alcools : classes, oxydation ménagée, déshydratation",
+   "minutes": 40,
+   "programRef": "Tle C/D — Chimie organique : alcools, classes, oxydation ménagée, déshydratation (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Nommer un alcool et déterminer sa classe.",
+    "Prévoir le produit de l'oxydation ménagée selon la classe.",
+    "Écrire et équilibrer les équations d'oxydoréduction et de déshydratation.",
+    "Faire un calcul de quantité de matière et de volume gazeux."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "bac-chimie-cd-organique-alc-01",
+    "bac-chimie-cd-organique-alc-02",
+    "bac-chimie-cd-organique-alc-03",
+    "bac-chimie-cd-organique-alc-04",
+    "bac-chimie-cd-organique-alc-05",
+    "bac-chimie-cd-organique-alc-06"
+   ],
+   "selfCheck": [
+    "bac-chimie-cd-organique-alc-q1",
+    "bac-chimie-cd-organique-alc-q2",
+    "bac-chimie-cd-organique-alc-q3",
+    "bac-chimie-cd-organique-alc-q4",
+    "bac-chimie-cd-organique-alc-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Alcools : définition et nomenclature",
+     "md": "Un **alcool** possède le groupe hydroxyle −OH fixé sur un carbone tétragonal (saturé). Les alcools saturés ont pour formule $C_nH_{2n+2}O$.\n**Nom** : on remplace le « e » de l'alcane par « ol » et on indique la position de −OH par le plus petit nombre possible : CH₃CH₂CH₂OH propan-1-ol ; CH₃CHOHCH₃ propan-2-ol ; (CH₃)₃COH 2-méthylpropan-2-ol."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Classes d'alcools",
+     "md": "On compte les atomes de carbone liés au carbone fonctionnel (celui qui porte −OH) :\n- **primaire** : lié à 1 seul carbone (ou aucun, méthanol) ;\n- **secondaire** : lié à 2 carbones ;\n- **tertiaire** : lié à 3 carbones.\nExemples : butan-1-ol (I), butan-2-ol (II), 2-méthylpropan-2-ol (III). La classe détermine le résultat de l'oxydation."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Isomérie",
+     "md": "Pour C₄H₁₀O, il existe **quatre alcools** isomères : butan-1-ol, butan-2-ol, 2-méthylpropan-1-ol (primaires, secondaire, primaire) et 2-méthylpropan-2-ol (tertiaire). Ils ont la même formule brute mais des propriétés différentes ; les éthers-oxydes C₄H₁₀O sont d'autres isomères, hors alcools."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Oxydation ménagée",
+     "md": "Un oxydant (ion dichromate $Cr_2O_7^{2-}$ en milieu acide, orange → $Cr^{3+}$ vert ; ion permanganate $MnO_4^-$, violet → $Mn^{2+}$ presque incolore) transforme **sans casser la chaîne carbonée** :\n- alcool **primaire** → **aldéhyde**, puis (oxydant en excès) **acide carboxylique** ;\n- alcool **secondaire** → **cétone** ;\n- alcool **tertiaire** : **pas d'oxydation ménagée**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 220,
+      "items": [
+       {
+        "t": "rect",
+        "x": 6,
+        "y": 10,
+        "w": 124,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 68.0,
+        "y": 35,
+        "text": "Alcool primaire",
+        "size": 13,
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 132,
+        "y1": 30,
+        "x2": 164,
+        "y2": 30,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 166,
+        "y": 10,
+        "w": 96,
+        "h": 40,
+        "fill": "lightgreen",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 214.0,
+        "y": 35,
+        "text": "Aldéhyde",
+        "size": 13,
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 264,
+        "y1": 30,
+        "x2": 296,
+        "y2": 30,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 298,
+        "y": 10,
+        "w": 116,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 356.0,
+        "y": 35,
+        "text": "Acide carboxylique",
+        "size": 13,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 6,
+        "y": 80,
+        "w": 124,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 68.0,
+        "y": 105,
+        "text": "Alcool secondaire",
+        "size": 13,
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 132,
+        "y1": 100,
+        "x2": 164,
+        "y2": 100,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 166,
+        "y": 80,
+        "w": 96,
+        "h": 40,
+        "fill": "lightgreen",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 214.0,
+        "y": 105,
+        "text": "Cétone",
+        "size": 13,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 6,
+        "y": 150,
+        "w": 124,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 68.0,
+        "y": 175,
+        "text": "Alcool tertiaire",
+        "size": 13,
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 132,
+        "y1": 170,
+        "x2": 164,
+        "y2": 170,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 166,
+        "y": 150,
+        "w": 248,
+        "h": 40,
+        "fill": "lightgrey",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 290.0,
+        "y": 175,
+        "text": "pas d'oxydation ménagée",
+        "size": 13,
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Résultat de l'oxydation ménagée selon la classe de l'alcool.",
+     "alt": "Trois lignes : alcool primaire, flèche, aldéhyde, flèche, acide carboxylique ; alcool secondaire, flèche, cétone ; alcool tertiaire, flèche, pas d'oxydation ménagée."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Équations d'oxydoréduction",
+     "md": "Écrire les deux demi-équations, équilibrer les atomes (H⁺ et H₂O) puis les charges (e⁻), multiplier pour égaliser les électrons, additionner. Éthanol → éthanal :",
+     "tex": "\\text{C}_{2}\\text{H}_{5}\\text{OH} \\to \\text{CH}_{3}\\text{CHO} + 2\\,\\text{H}^{+} + 2\\,\\text{e}^{-} \\qquad \\text{Cr}_{2}\\text{O}_{7}^{2-} + 14\\,\\text{H}^{+} + 6\\,\\text{e}^{-} \\to 2\\,\\text{Cr}^{3+} + 7\\,\\text{H}_{2}\\text{O}"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Bilan : éthanol et dichromate",
+     "md": "Avec **défaut** d'oxydant, on obtient l'éthanal :",
+     "tex": "3\\,\\text{C}_{2}\\text{H}_{5}\\text{OH} + \\text{Cr}_{2}\\text{O}_{7}^{2-} + 8\\,\\text{H}^{+} \\to 3\\,\\text{CH}_{3}\\text{CHO} + 2\\,\\text{Cr}^{3+} + 7\\,\\text{H}_{2}\\text{O}"
+    },
+    {
+     "type": "formula",
+     "tex": "3\\,\\text{C}_{2}\\text{H}_{5}\\text{OH} + 2\\,\\text{Cr}_{2}\\text{O}_{7}^{2-} + 16\\,\\text{H}^{+} \\to 3\\,\\text{CH}_{3}\\text{COOH} + 4\\,\\text{Cr}^{3+} + 11\\,\\text{H}_{2}\\text{O}",
+     "caption": "Avec un excès de dichromate, l'éthanol est oxydé jusqu'à l'acide éthanoïque."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Déshydratation",
+     "md": "Chauffé avec un catalyseur acide (H₂SO₄ concentré, alumine) :\n- **intramoléculaire** (température élevée, ≈ 170 °C pour l'éthanol) → **alcène** + eau ;\n- **intermoléculaire** (≈ 140 °C) → **éther-oxyde** + eau.\nPour un alcool dissymétrique, l'alcène majoritaire est le plus substitué (règle de Zaïtsev).",
+     "tex": "\\text{C}_{2}\\text{H}_{5}\\text{OH} \\to \\text{CH}_{2}\\text{CH}_{2} + \\text{H}_{2}\\text{O} \\qquad 2\\,\\text{C}_{2}\\text{H}_{5}\\text{OH} \\to \\text{C}_{2}\\text{H}_{5}\\text{OC}_{2}\\text{H}_{5} + \\text{H}_{2}\\text{O}"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : classe et produit d'oxydation",
+     "statement": "On oxyde le butan-2-ol par une solution acide de permanganate de potassium en défaut. Donne la classe de l'alcool, le produit organique et le bilan avec le propan-2-ol (même classe) pour illustrer.",
+     "steps": [
+      {
+       "md": "Dans CH₃CH₂CH(OH)CH₃, le carbone fonctionnel est lié à 2 carbones : alcool **secondaire**."
+      },
+      {
+       "md": "Oxydation ménagée d'un alcool secondaire : on obtient une **cétone**, ici la butanone CH₃CH₂COCH₃ (les atomes de carbone sont conservés)."
+      },
+      {
+       "md": "Pour le propan-2-ol, le bilan (équilibré en atomes et en charges) est :",
+       "tex": "5\\,\\text{CH}_{3}\\text{CHOHCH}_{3} + 2\\,\\text{MnO}_{4}^{-} + 6\\,\\text{H}^{+} \\to 5\\,\\text{CH}_{3}\\text{COCH}_{3} + 2\\,\\text{Mn}^{2+} + 8\\,\\text{H}_{2}\\text{O}"
+      }
+     ],
+     "answer": "**Alcool secondaire → butanone** ; pas d'oxydation supplémentaire car la cétone ne s'oxyde pas par oxydation ménagée."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : volume de dihydrogène",
+     "statement": "De l'éthanol (M = 46 g/mol) réagit avec le sodium en excès. Quel volume de dihydrogène (V_m = 24 L/mol) obtient-on à partir de 4,6 g d'éthanol ?",
+     "steps": [
+      {
+       "md": "Équation (équilibrée) :",
+       "tex": "2\\,\\text{C}_{2}\\text{H}_{5}\\text{OH} + 2\\,\\text{Na} \\to 2\\,\\text{C}_{2}\\text{H}_{5}\\text{O}^{-} + 2\\,\\text{Na}^{+} + \\text{H}_{2}"
+      },
+      {
+       "md": "Quantité d'éthanol :",
+       "tex": "n = \\dfrac{4{,}6}{46} = 0{,}10\\ \\text{mol}"
+      },
+      {
+       "md": "2 mol d'alcool donnent 1 mol de H₂ :",
+       "tex": "n(\\text{H}_2) = \\dfrac{0{,}10}{2} = 0{,}050\\ \\text{mol} \\quad \\Rightarrow \\quad V = 0{,}050 \\times 24 = 1{,}2\\ \\text{L}"
+      }
+     ],
+     "answer": "**V(H₂) = 1,2 L**."
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-chimie-cd-organique-alc-01"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Compter les carbones de la chaîne au lieu des carbones **liés au carbone fonctionnel** pour la classe.\n- Dire qu'un alcool tertiaire donne une cétone : il ne s'oxyde pas par oxydation ménagée.\n- Oublier que l'oxydant en excès pousse l'aldéhyde jusqu'à l'acide ; en défaut, on isole l'aldéhyde.\n- Mal équilibrer H⁺ et H₂O (vérifier toujours atomes et charges).\n- Confondre oxydation ménagée (chaîne conservée) et combustion (chaîne détruite)."
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-chimie-cd-organique-alc-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-chimie-cd-organique-alc-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-chimie-cd-organique-alc-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-chimie-cd-organique-alc-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-chimie-cd-organique-alc-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le tube éthylotest utilisait l'oxydation de l'éthanol par le dichromate (changement orange → vert) : application de la réaction vue ici.",
+      "Les alcools courants : méthanol (toxique), éthanol (boissons, désinfectant, carburant), propan-2-ol (désinfectant)."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Tous les bilans (oxydoréduction avec Cr₂O₇²⁻ et MnO₄⁻, déshydratation, réaction avec Na) ont été vérifiés par équilibrage des atomes et des charges avec un script Python.",
+    "Règle de Zaïtsev et déshydratation intermoléculaire : vérifier qu'elles figurent au programme de la série D.",
+    "Écriture des formules : semi-développées ; la formule topologique n'est pas utilisée ici. V_m = 24 L/mol (conditions usuelles à 20 °C, à confirmer)."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "prompt": "Dans quelle classe est le 2-méthylpropan-2-ol (CH₃)₃C−OH ?",
+   "points": 1,
+   "choices": [
+    "Alcool tertiaire",
+    "Alcool primaire",
+    "Alcool secondaire",
+    "Ce n'est pas un alcool"
+   ],
+   "answer": 0,
+   "explanation": "Le carbone fonctionnel est lié à trois carbones (les trois CH₃) : alcool tertiaire.",
+   "method": "Compter les carbones voisins du carbone portant −OH.",
+   "mistakes": [
+    "Compter les carbones de la chaîne principale."
+   ],
+   "id": "bac-chimie-cd-organique-alc-01",
+   "lesson": "bac-chimie-cd-organique-alcools",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "prompt": "Combien d'alcools (de formule C₄H₁₀O) existe-t-il, stéréoisomères non comptés ?",
+   "points": 1,
+   "answer": 4,
+   "tolerance": 0,
+   "explanation": "Butan-1-ol, butan-2-ol, 2-méthylpropan-1-ol, 2-méthylpropan-2-ol : 4 alcools (les éthers-oxydes sont d'autres isomères).",
+   "method": "Lister selon la chaîne (linéaire ou ramifiée) et la position de −OH.",
+   "mistakes": [
+    "Oublier les isomères ramifiés."
+   ],
+   "id": "bac-chimie-cd-organique-alc-02",
+   "lesson": "bac-chimie-cd-organique-alcools",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "prompt": "Calcule la quantité de matière contenue dans 12,0 g de propan-1-ol C₃H₈O (M(C) = 12 ; M(H) = 1 ; M(O) = 16 g/mol), en mol.",
+   "points": 1,
+   "answer": 0.2,
+   "tolerance": 0.002,
+   "unit": "mol",
+   "explanation": "M = 3×12 + 8×1 + 16 = 60 g/mol ; n = m/M = 12,0/60 = 0,200 mol.",
+   "method": "n = m/M.",
+   "mistakes": [
+    "Utiliser M = 58 en comptant mal les hydrogènes."
+   ],
+   "id": "bac-chimie-cd-organique-alc-03",
+   "lesson": "bac-chimie-cd-organique-alcools",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "prompt": "Associe chaque alcool à son comportement vis-à-vis d'un excès d'oxydant en milieu acide.",
+   "points": 2,
+   "pairs": [
+    [
+     "Butan-1-ol",
+     "Acide butanoïque"
+    ],
+    [
+     "Butan-2-ol",
+     "Butanone"
+    ],
+    [
+     "2-méthylpropan-2-ol",
+     "Aucune oxydation ménagée"
+    ],
+    [
+     "Éthanol",
+     "Acide éthanoïque"
+    ]
+   ],
+   "explanation": "Primaire + oxydant en excès → acide ; secondaire → cétone ; tertiaire → rien ; l'éthanol, primaire, donne l'acide éthanoïque.",
+   "method": "Classe → produit.",
+   "mistakes": [
+    "Donner un aldéhyde avec un oxydant en excès."
+   ],
+   "id": "bac-chimie-cd-organique-alc-04",
+   "lesson": "bac-chimie-cd-organique-alcools",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "prompt": "On déshydrate 0,50 mol de propan-2-ol en propène avec un rendement de 80 %. Quel volume de propène obtient-on (V_m = 24 L/mol), en L ?",
+   "points": 2,
+   "answer": 9.6,
+   "tolerance": 0.1,
+   "unit": "L",
+   "explanation": "CH₃CHOHCH₃ → CH₃CH=CH₂ + H₂O : 1 mol d'alcool donne 1 mol d'alcène. n(propène) = 0,50 × 0,80 = 0,40 mol ; V = 0,40 × 24 = 9,6 L.",
+   "method": "Stœchiométrie 1 : 1, puis rendement, puis V = n V_m.",
+   "mistakes": [
+    "Oublier le rendement (12 L)."
+   ],
+   "id": "bac-chimie-cd-organique-alc-05",
+   "lesson": "bac-chimie-cd-organique-alcools",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Un alcool saturé A a pour formule brute CₙH₂ₙ₊₂O et pour masse molaire 74 g/mol. M(C) = 12 ; M(H) = 1 ; M(O) = 16 g/mol. L'oxydation ménagée de A par le dichromate de potassium acide donne une cétone B ; la déshydratation de A donne surtout le but-2-ène.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Détermine n (M = 14 n + 18).",
+     "points": 1,
+     "answer": 4,
+     "tolerance": 0,
+     "explanation": "14 n + 18 = 74 donne n = 4 : A est un butanol.",
+     "id": "bac-chimie-cd-organique-alc-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule le pourcentage massique d'oxygène dans A, en %.",
+     "points": 1,
+     "answer": 21.6,
+     "tolerance": 0.1,
+     "unit": "%",
+     "explanation": "16/74 = 0,216, soit 21,6 %.",
+     "id": "bac-chimie-cd-organique-alc-06-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quel est l'alcool A ?",
+     "points": 1,
+     "choices": [
+      "Butan-2-ol",
+      "Butan-1-ol",
+      "2-méthylpropan-2-ol",
+      "2-méthylpropan-1-ol"
+     ],
+     "answer": 0,
+     "explanation": "Une cétone ne vient que d'un alcool secondaire : parmi les butanols, seul le butan-2-ol est secondaire ; il donne la butanone.",
+     "id": "bac-chimie-cd-organique-alc-06-c"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "On fait réagir 3,7 g de A avec un excès de sodium. Calcule le volume de dihydrogène obtenu (V_m = 24 L/mol), en L.",
+     "points": 2,
+     "answer": 0.6,
+     "tolerance": 0.01,
+     "unit": "L",
+     "explanation": "n(A) = 3,7/74 = 0,050 mol ; 2 A + 2 Na → 2 A⁻ + 2 Na⁺ + H₂ ; n(H₂) = 0,025 mol ; V = 0,025 × 24 = 0,60 L.",
+     "id": "bac-chimie-cd-organique-alc-06-d"
+    }
+   ],
+   "method": "Formule générale → n ; classe → identification ; stœchiométrie 2 : 1 pour H₂.",
+   "mistakes": [
+    "Oublier de diviser n(alcool) par 2."
+   ],
+   "id": "bac-chimie-cd-organique-alc-06",
+   "lesson": "bac-chimie-cd-organique-alcools",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "Le groupe caractéristique des alcools est :",
+   "points": 1,
+   "choices": [
+    "−OH lié à un carbone saturé",
+    "C=O",
+    "−COOH",
+    "−NH₂"
+   ],
+   "answer": 0,
+   "explanation": "−OH sur C tétragonal ; C=O est le groupe carbonyle, −COOH l'acide, −NH₂ l'amine.",
+   "id": "bac-chimie-cd-organique-alc-q1",
+   "lesson": "bac-chimie-cd-organique-alcools"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "Un alcool secondaire s'oxyde (oxydation ménagée) en :",
+   "points": 1,
+   "choices": [
+    "une cétone",
+    "un aldéhyde",
+    "un acide carboxylique",
+    "un alcène"
+   ],
+   "answer": 0,
+   "explanation": "Le carbone fonctionnel ne porte qu'un H : on obtient C=O avec deux carbones, une cétone.",
+   "id": "bac-chimie-cd-organique-alc-q2",
+   "lesson": "bac-chimie-cd-organique-alcools"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "Un alcool tertiaire placé dans une solution acide de dichromate :",
+   "points": 1,
+   "choices": [
+    "ne subit pas d'oxydation ménagée",
+    "donne un aldéhyde",
+    "donne une cétone",
+    "donne un acide"
+   ],
+   "answer": 0,
+   "explanation": "Le carbone fonctionnel n'a pas d'hydrogène : pas d'oxydation ménagée.",
+   "id": "bac-chimie-cd-organique-alc-q3",
+   "lesson": "bac-chimie-cd-organique-alcools"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "La déshydratation intramoléculaire d'un alcool donne :",
+   "points": 1,
+   "choices": [
+    "un alcène",
+    "un éther-oxyde",
+    "un aldéhyde",
+    "un ester"
+   ],
+   "answer": 0,
+   "explanation": "Perte d'une molécule d'eau sur deux carbones voisins : alcène.",
+   "id": "bac-chimie-cd-organique-alc-q4",
+   "lesson": "bac-chimie-cd-organique-alcools"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "Dans l'ion dichromate en milieu acide, la couleur passe de l'orange à :",
+   "points": 1,
+   "choices": [
+    "vert (Cr³⁺)",
+    "incolore",
+    "violet",
+    "bleu"
+   ],
+   "answer": 0,
+   "explanation": "Cr₂O₇²⁻ (orange) est réduit en Cr³⁺ (vert).",
+   "id": "bac-chimie-cd-organique-alc-q5",
+   "lesson": "bac-chimie-cd-organique-alcools"
+  }
+ ]
+}

@@ -1,0 +1,260 @@
+{
+ "chapter": "1re-economie-ch-monnaie",
+ "lessons": [],
+ "exercises": [
+  {
+   "id": "1re-economie-blanc-1",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "1re-economie-agents",
+   "prompt": "Exercice 1 — Connaissances et petit calcul (4 points).",
+   "method": "Réponses courtes.",
+   "mistakes": [
+    "Confondre bien d'équipement et bien intermédiaire."
+   ],
+   "source": "Exercice original, style devoir d'économie de Première",
+   "parts": [
+    {
+     "id": "1re-economie-blanc-1-a",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Un camion acheté par une entreprise de transport est :",
+     "choices": [
+      "un bien d'équipement",
+      "un bien de consommation finale",
+      "un bien intermédiaire",
+      "une ressource naturelle"
+     ],
+     "answer": 0,
+     "explanation": "Le camion est durable et sert à produire des services de transport : c'est un bien d'équipement."
+    },
+    {
+     "id": "1re-economie-blanc-1-b",
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "Dans le circuit simple, les ménages reçoivent des revenus des entreprises en échange de leur travail.",
+     "answer": true,
+     "explanation": "Vrai : les salaires et autres revenus sont versés par les entreprises en contrepartie du travail et du capital fournis."
+    },
+    {
+     "id": "1re-economie-blanc-1-c",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle fonction de la monnaie permet d'acheter aujourd'hui et de payer plus tard ou de garder du pouvoir d'achat ?",
+     "choices": [
+      "La réserve de valeur",
+      "L'unité de compte",
+      "Le troc",
+      "La production"
+     ],
+     "answer": 0,
+     "explanation": "La réserve de valeur permet de conserver du pouvoir d'achat dans le temps."
+    },
+    {
+     "id": "1re-economie-blanc-1-d",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Des ménages reçoivent 2 000 millions de FCFA et consomment 1 700 millions. Quel est le taux d'épargne ? (en %)",
+     "answer": 15,
+     "tolerance": 0,
+     "unit": "%",
+     "explanation": "S = 300 millions ; 300 ÷ 2 000 × 100 = 15 %."
+    }
+   ]
+  },
+  {
+   "id": "1re-economie-blanc-2",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "1re-economie-production",
+   "prompt": "Exercice 2 — Production et coûts (6 points). Une petite entreprise de jus de fruits de Douala (données fictives) a des coûts fixes de 400 000 FCFA par mois. Chaque bouteille coûte 150 FCFA en fruits, sucre et emballage et se vend 250 FCFA. Elle produit et vend 6 000 bouteilles par mois.",
+   "method": "CT = CF + CV ; profit = RT − CT ; seuil = CF ÷ (p − cv).",
+   "mistakes": [
+    "Oublier les coûts fixes."
+   ],
+   "source": "Exercice original, style devoir d'économie de Première",
+   "parts": [
+    {
+     "id": "1re-economie-blanc-2-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le coût total mensuel. (en FCFA)",
+     "answer": 1300000,
+     "tolerance": 0,
+     "unit": "FCFA",
+     "explanation": "CV = 150 × 6 000 = 900 000. CT = 400 000 + 900 000 = 1 300 000 FCFA."
+    },
+    {
+     "id": "1re-economie-blanc-2-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la recette totale. (en FCFA)",
+     "answer": 1500000,
+     "tolerance": 0,
+     "unit": "FCFA",
+     "explanation": "RT = 250 × 6 000 = 1 500 000 FCFA."
+    },
+    {
+     "id": "1re-economie-blanc-2-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le profit mensuel. (en FCFA)",
+     "answer": 200000,
+     "tolerance": 0,
+     "unit": "FCFA",
+     "explanation": "1 500 000 − 1 300 000 = 200 000 FCFA."
+    },
+    {
+     "id": "1re-economie-blanc-2-d",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le seuil de rentabilité. (en bouteilles)",
+     "answer": 4000,
+     "tolerance": 0,
+     "explanation": "Chaque bouteille apporte 250 − 150 = 100 FCFA. Seuil = 400 000 ÷ 100 = 4 000 bouteilles."
+    },
+    {
+     "id": "1re-economie-blanc-2-e",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quel serait le profit avec 8 000 bouteilles ? (en FCFA)",
+     "answer": 400000,
+     "tolerance": 0,
+     "unit": "FCFA",
+     "explanation": "RT = 2 000 000 ; CT = 400 000 + 1 200 000 = 1 600 000 ; profit = 400 000 FCFA."
+    },
+    {
+     "id": "1re-economie-blanc-2-f",
+     "kind": "open",
+     "points": 1,
+     "prompt": "Pourquoi le profit augmente-t-il plus vite que la production ?",
+     "model": "Les coûts fixes (400 000 FCFA) ne changent pas quand on produit plus : chaque bouteille supplémentaire rapporte 100 FCFA de plus que son coût variable, donc le profit augmente de 100 FCFA par bouteille une fois le seuil dépassé.",
+     "rubric": [
+      "Les coûts fixes restent constants et chaque unité en plus ajoute 100 FCFA de marge (1 point)."
+     ],
+     "explanation": "Pense aux coûts fixes."
+    }
+   ]
+  },
+  {
+   "id": "1re-economie-blanc-3",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "1re-economie-marche",
+   "prompt": "Exercice 3 — Marché (5 points). Sur un marché fictif, la demande est Qd = 800 − 2p et l'offre Qs = 3p − 200 (p en FCFA, Q en kg).",
+   "method": "Qd = Qs puis comparaison.",
+   "mistakes": [
+    "Confondre excédent et pénurie."
+   ],
+   "source": "Exercice original, style devoir d'économie de Première",
+   "parts": [
+    {
+     "id": "1re-economie-blanc-3-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le prix d'équilibre. (en FCFA)",
+     "answer": 200,
+     "tolerance": 0,
+     "unit": "FCFA",
+     "explanation": "800 − 2p = 3p − 200 donne 1 000 = 5p, donc p = 200."
+    },
+    {
+     "id": "1re-economie-blanc-3-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la quantité d'équilibre. (en kg)",
+     "answer": 400,
+     "tolerance": 0,
+     "unit": "kg",
+     "explanation": "Qd = 800 − 2 × 200 = 400 kg (Qs = 600 − 200 = 400)."
+    },
+    {
+     "id": "1re-economie-blanc-3-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Au prix de 100 FCFA, de combien la demande dépasse-t-elle l'offre ? (en kg)",
+     "answer": 500,
+     "tolerance": 0,
+     "unit": "kg",
+     "explanation": "Qd = 800 − 200 = 600 ; Qs = 300 − 200 = 100 ; pénurie de 500 kg."
+    },
+    {
+     "id": "1re-economie-blanc-3-d",
+     "kind": "open",
+     "points": 2,
+     "prompt": "Que se passe-t-il au prix de 300 FCFA ? Comment le marché réagit-il ?",
+     "model": "À 300 FCFA, Qd = 800 − 600 = 200 kg et Qs = 900 − 200 = 700 kg : l'offre dépasse la demande de 500 kg, c'est un excédent. Les vendeurs, qui ne parviennent pas à tout vendre, baissent leurs prix, et le prix revient vers l'équilibre de 200 FCFA.",
+     "rubric": [
+      "Calcul de Qd = 200 et Qs = 700, excédent de 500 kg (1 point).",
+      "Réaction : baisse du prix vers l'équilibre (1 point)."
+     ],
+     "explanation": "Calcule Qd et Qs à 300 F."
+    }
+   ]
+  },
+  {
+   "id": "1re-economie-blanc-4",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "1re-economie-monnaie",
+   "prompt": "Exercice 4 — Monnaie et inflation (5 points). Données fictives.",
+   "method": "Taux = (final − départ) ÷ départ ; capital composé = C × (1 + t) puissance n.",
+   "mistakes": [
+    "Diviser par la valeur finale."
+   ],
+   "source": "Exercice original, style devoir d'économie de Première",
+   "parts": [
+    {
+     "id": "1re-economie-blanc-4-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Un indice des prix passe de 125 à 130. Calcule le taux d'inflation. (en %)",
+     "answer": 4,
+     "tolerance": 0,
+     "unit": "%",
+     "explanation": "(130 − 125) ÷ 125 × 100 = 4 %."
+    },
+    {
+     "id": "1re-economie-blanc-4-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "On place 800 000 FCFA à 5 % par an en intérêts composés pendant 2 ans. Quel est le capital final ? (en FCFA)",
+     "answer": 882000,
+     "tolerance": 0,
+     "unit": "FCFA",
+     "explanation": "800 000 × 1,05² = 800 000 × 1,1025 = 882 000 FCFA."
+    },
+    {
+     "id": "1re-economie-blanc-4-c",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle institution émet le FCFA utilisé au Cameroun ?",
+     "choices": [
+      "La BEAC",
+      "Une tontine",
+      "Une banque commerciale",
+      "Le marché de Mokolo"
+     ],
+     "answer": 0,
+     "explanation": "La BEAC est la banque centrale de la zone de l'Afrique centrale."
+    },
+    {
+     "id": "1re-economie-blanc-4-d",
+     "kind": "open",
+     "points": 2,
+     "prompt": "Compare tontine et microfinance comme moyens d'épargner et d'emprunter.",
+     "model": "La tontine est simple, repose sur la confiance et ne coûte pas d'intérêts, mais le montant et la date du versement sont limités par le groupe et elle ne rapporte rien. La microfinance propose des dépôts et de petits crédits individuels, avec des règles et des intérêts, ce qui donne plus de souplesse mais des frais.",
+     "rubric": [
+      "Avantage et limite de la tontine (1 point).",
+      "Avantage et limite de la microfinance (1 point)."
+     ],
+     "explanation": "Un avantage et une limite pour chacune."
+    }
+   ]
+  }
+ ]
+}

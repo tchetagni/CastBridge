@@ -1,0 +1,613 @@
+{
+ "chapter": "2nde-francais-ch-textes",
+ "lessons": [
+  {
+   "id": "2nde-francais-textes",
+   "title": "Le texte narratif et le texte argumentatif",
+   "minutes": 35,
+   "programRef": "2nde — Types de textes : le récit et l'argumentation (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; textes écrits pour CastBridge ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître les types de textes.",
+    "Repérer les étapes d'un récit, le narrateur et la focalisation.",
+    "Identifier thèse, arguments, exemples, connecteurs et procédés d'un texte argumentatif."
+   ],
+   "prerequisites": [
+    "2nde-francais-lecture"
+   ],
+   "exercises": [
+    "2nde-francais-txt-1",
+    "2nde-francais-txt-2",
+    "2nde-francais-txt-3",
+    "2nde-francais-txt-4",
+    "2nde-francais-txt-5",
+    "2nde-francais-txt-6"
+   ],
+   "selfCheck": [
+    "2nde-francais-txt-q1",
+    "2nde-francais-txt-q2",
+    "2nde-francais-txt-q3",
+    "2nde-francais-txt-q4",
+    "2nde-francais-txt-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Ce que tu sauras faire",
+     "md": "- Reconnaître un texte narratif et un texte argumentatif et en repérer les procédés.\n- Identifier les étapes du schéma narratif, le narrateur et la focalisation.\n- Repérer la thèse, les arguments, les exemples et les connecteurs d'un texte argumentatif."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les types de textes",
+     "md": "- **Narratif** : il raconte une suite d'événements.\n- **Descriptif** : il décrit un lieu, une personne, un objet.\n- **Explicatif** : il fait comprendre un fait ou un phénomène.\n- **Argumentatif** : il défend une idée pour convaincre ou persuader.\n- **Injonctif** : il donne des ordres ou des consignes.\nUn même texte peut en mélanger plusieurs ; on repère le type dominant."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Le schéma narratif",
+     "md": "Un récit suit en général cinq étapes : **situation initiale** (lieu, personnages, état de départ), **élément perturbateur** (ce qui change tout), **péripéties** (actions qui s'enchaînent), **dénouement** (la résolution), **situation finale** (nouvel équilibre). Les étapes ne sont pas toujours dans cet ordre (retour en arrière)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Le schéma narratif en cinq étapes (schéma simplifié).",
+     "alt": "Cinq rectangles jaunes superposés, reliés par des flèches vers le bas : situation initiale, élément perturbateur, péripéties, dénouement, situation finale. À droite de chacun, une courte note explique son rôle.",
+     "figure": {
+      "kind": "shapes",
+      "w": 430,
+      "h": 320,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 10,
+        "w": 190,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "radius": 6,
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 115,
+        "y": 34,
+        "text": "Situation initiale",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 225,
+        "y": 34,
+        "text": "lieu et personnages",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 115,
+        "y1": 48,
+        "x2": 115,
+        "y2": 72,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 72,
+        "w": 190,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "radius": 6,
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 115,
+        "y": 96,
+        "text": "Élément perturbateur",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 225,
+        "y": 96,
+        "text": "ce qui change tout",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 115,
+        "y1": 110,
+        "x2": 115,
+        "y2": 134,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 134,
+        "w": 190,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "radius": 6,
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 115,
+        "y": 158,
+        "text": "Péripéties",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 225,
+        "y": 158,
+        "text": "actions enchaînées",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 115,
+        "y1": 172,
+        "x2": 115,
+        "y2": 196,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 196,
+        "w": 190,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "radius": 6,
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 115,
+        "y": 220,
+        "text": "Dénouement",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 225,
+        "y": 220,
+        "text": "la résolution",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 115,
+        "y1": 234,
+        "x2": 115,
+        "y2": 258,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 258,
+        "w": 190,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "radius": 6,
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 115,
+        "y": 282,
+        "text": "Situation finale",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 225,
+        "y": 282,
+        "text": "nouvel équilibre",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start",
+        "bold": false
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Narrateur et point de vue",
+     "md": "- Le **narrateur** est celui qui raconte : personnage (« je ») ou extérieur à l'histoire (« il »).\n- **Focalisation zéro** (narrateur omniscient) : il sait tout.\n- **Focalisation interne** : on voit par les yeux d'un personnage et on connaît ses pensées.\n- **Focalisation externe** : on ne voit que ce qu'un observateur verrait.\nTemps du récit : passé simple (actions), imparfait (décors), présent de narration (vivacité)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Le texte argumentatif",
+     "md": "Il comporte une **thèse** (l'idée défendue), des **arguments** (raisons qui la soutiennent) illustrés par des **exemples**. On **convainc** en s'adressant à la raison (logique, faits) et on **persuade** en touchant les sentiments. Une **thèse adverse** peut être évoquée puis réfutée (« certes… mais »)."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Connecteurs logiques",
+     "md": "- **Addition** : *et, de plus, ensuite, enfin*.\n- **Cause** : *car, parce que, puisque*.\n- **Conséquence** : *donc, ainsi, par conséquent*.\n- **Opposition / concession** : *mais, cependant, pourtant, certes… mais*.\n- **Illustration** : *par exemple, ainsi*.\nIls organisent l'argumentation et rendent le raisonnement visible."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Procédés de l'argumentation",
+     "md": "Les procédés qui renforcent un argument : **exemples** et faits précis, **question rhétorique** (une question dont la réponse est évidente), **comparaison**, **ironie** (dire le contraire de ce que l'on pense), **modalisateurs** (*il faut, sans doute, je pense*), **interpellation du lecteur** (*vous, nous*)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : les étapes d'un récit",
+     "statement": "Texte original écrit pour l'exercice : « Chaque matin, Junior vendait des beignets devant le lycée. Un jour, il perdit sa recette : le petit cahier avait disparu. Il fouilla son sac, interrogea ses voisins, refit le chemin jusqu'au marché. Enfin une vendeuse lui rendit le cahier, tombé sous un étal. Le lendemain, les beignets de Junior sentaient bon comme avant, et il rangea la recette dans une boîte fermée. » Identifie les cinq étapes.",
+     "steps": [
+      {
+       "md": "**Situation initiale** : « Chaque matin, Junior vendait des beignets devant le lycée » (imparfait, habitude). **Élément perturbateur** : « il perdit sa recette »."
+      },
+      {
+       "md": "**Péripéties** : il fouille son sac, interroge ses voisins, refait le chemin (verbes d'action qui s'enchaînent)."
+      },
+      {
+       "md": "**Dénouement** : la vendeuse rend le cahier. **Situation finale** : « Le lendemain… il rangea la recette dans une boîte fermée » : un équilibre retrouvé, avec une leçon."
+      }
+     ],
+     "answer": "Les cinq étapes se repèrent par les changements de temps et d'action."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : analyser une argumentation",
+     "statement": "Texte original écrit pour l'exercice : « Il faut planter des arbres dans la cour du lycée. D'abord, leur ombre protège les élèves du soleil à la récréation. Ensuite, leurs feuilles rafraîchissent l'air : par exemple, on se sent mieux sous un manguier que sur le sol nu. Certes, l'entretien demande du travail ; mais les élèves peuvent s'en charger à tour de rôle. Voilà pourquoi je demande à la direction de lancer ce projet. » Relève la thèse, deux arguments, un exemple et la concession.",
+     "steps": [
+      {
+       "md": "**Thèse** : « Il faut planter des arbres dans la cour du lycée. » (modalisateur « il faut »)."
+      },
+      {
+       "md": "**Arguments** : « leur ombre protège les élèves du soleil » ; « leurs feuilles rafraîchissent l'air » ; **exemple** : « on se sent mieux sous un manguier »."
+      },
+      {
+       "md": "**Concession** : « Certes, l'entretien demande du travail ; mais les élèves peuvent s'en charger » : l'objection est reconnue puis réfutée."
+      }
+     ],
+     "answer": "Thèse, deux arguments, un exemple et une concession (« certes… mais »)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre **narrateur** et **auteur** : le narrateur est une voix du texte.\n- Confondre **thèse** (idée défendue) et **argument** (raison) ou **exemple** (cas précis).\n- Prendre un argument pour un simple fait raconté.\n- Oublier que « certes… mais » est une **concession** et non une contradiction.\n- Négliger les connecteurs, qui montrent le plan du texte."
+    },
+    {
+     "type": "exercise",
+     "ref": "2nde-francais-txt-1"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Les contes et les récits oraux d'Afrique centrale suivent souvent le schéma narratif et se terminent par une leçon, ce qui rapproche le conte du texte argumentatif.",
+      "Les textes de cette fiche sont ORIGINAUX, écrits pour l'exercice."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Le vocabulaire (focalisation zéro/interne/externe, « convaincre » et « persuader ») suit un usage courant : à harmoniser avec les manuels du programme camerounais.",
+    "Le schéma narratif en cinq étapes est une convention scolaire ; certains manuels en utilisent une version différente.",
+    "Les thèmes d'argumentation (arbres, sacs plastiques, sport) sont fictifs ; aucune donnée chiffrée n'est utilisée."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "2nde-francais-txt-1",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 3,
+   "lesson": "2nde-francais-textes",
+   "prompt": "Associe chaque étape du schéma narratif à son rôle.",
+   "pairs": [
+    [
+     "Situation initiale",
+     "Présente le lieu, les personnages et l'état de départ"
+    ],
+    [
+     "Élément perturbateur",
+     "Rompt l'équilibre et lance l'action"
+    ],
+    [
+     "Péripéties",
+     "Actions qui s'enchaînent"
+    ],
+    [
+     "Dénouement",
+     "Résout le problème"
+    ],
+    [
+     "Situation finale",
+     "Nouvel équilibre"
+    ]
+   ],
+   "explanation": "Le récit part d'un équilibre (situation initiale), est déclenché par l'élément perturbateur, se développe par les péripéties, se résout au dénouement et s'achève sur un nouvel équilibre.",
+   "method": "Replace chaque étape dans l'ordre.",
+   "mistakes": [
+    "Confondre élément perturbateur et dénouement."
+   ],
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-francais-txt-2",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-francais-textes",
+   "prompt": "« Elle sentait la peur lui serrer la gorge. » Quelle est la focalisation ?",
+   "choices": [
+    "Externe",
+    "Interne",
+    "Zéro",
+    "Aucune"
+   ],
+   "answer": 1,
+   "explanation": "Le texte donne accès aux sensations du personnage : focalisation interne. En focalisation externe, on ne décrirait que ce qui est visible.",
+   "method": "Qui voit ? qui ressent ?",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-francais-txt-3",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-francais-textes",
+   "prompt": "Vrai ou faux : dans un texte argumentatif, un exemple sert à illustrer un argument.",
+   "answer": true,
+   "explanation": "Vrai. L'argument est une raison générale ; l'exemple est un cas précis qui la rend concrète. Dans le texte des arbres, « on se sent mieux sous un manguier » illustre l'argument sur la fraîcheur.",
+   "mistakes": [
+    "Confondre exemple et argument."
+   ],
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-francais-txt-4",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "2nde-francais-textes",
+   "prompt": "Dans « Certes, l'entretien demande du travail ; mais les élèves peuvent s'en charger », quel est le rôle de « certes… mais » ?",
+   "choices": [
+    "Il ajoute un argument supplémentaire",
+    "Il donne un exemple",
+    "Il exprime la cause",
+    "Il reconnaît une objection puis la réfute (concession)"
+   ],
+   "answer": 3,
+   "explanation": "« Certes » accorde un point à l'adversaire, « mais » ramène à la thèse : c'est une concession suivie d'une réfutation.",
+   "method": "Cherche ce que l'auteur accorde puis ce qu'il maintient.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-francais-txt-5",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 4,
+   "lesson": "2nde-francais-textes",
+   "prompt": "Texte original écrit pour l'exercice : « Je pense que le sport devrait être obligatoire au lycée. Il donne de l'énergie : un élève qui court chaque semaine se sent mieux. Il apprend aussi le travail d'équipe, par exemple dans un match de football. N'est-ce pas ce que l'école doit enseigner ? » Relève la thèse, deux arguments, l'exemple et un procédé.",
+   "model": "**Thèse** : le sport devrait être obligatoire au lycée. **Arguments** : il donne de l'énergie ; il apprend le travail d'équipe. **Exemple** : le match de football. **Procédé** : la **question rhétorique** « N'est-ce pas ce que l'école doit enseigner ? », qui invite le lecteur à approuver.",
+   "rubric": [
+    "Thèse correcte (1 point).",
+    "Deux arguments (1 point).",
+    "Exemple relevé (1 point).",
+    "Un procédé nommé (question rhétorique, modalisateur « je pense »…) (1 point)."
+   ],
+   "explanation": "Distinguer thèse, arguments, exemples, procédés.",
+   "method": "Commence par la thèse, puis cherche les raisons.",
+   "mistakes": [
+    "Prendre l'exemple (le match) pour un argument."
+   ],
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-francais-txt-6",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "2nde-francais-textes",
+   "prompt": "Texte original écrit pour l'exercice : « Les sacs en plastique devraient être remplacés par des paniers. Premièrement, un sac jeté dans la rue bouche les caniveaux. De plus, un panier dure des années, alors qu'un sac se déchire en un jour. On objectera que les sacs sont gratuits ; pourtant, leur nettoyage coûte cher à la commune. Remplaçons-les donc dès maintenant ! »",
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quel est le type de ce texte ?",
+     "explanation": "Le texte défend une thèse avec des arguments et des connecteurs : il est argumentatif (l'impératif final renforce l'appel).",
+     "id": "2nde-francais-txt-6-a",
+     "choices": [
+      "Un texte narratif",
+      "Un texte descriptif",
+      "Un texte argumentatif",
+      "Un texte injonctif seulement"
+     ],
+     "answer": 2
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Relève la thèse et les deux arguments.",
+     "model": "Thèse : les sacs en plastique devraient être remplacés par des paniers. Arguments : le sac jeté bouche les caniveaux ; le panier dure des années alors que le sac se déchire en un jour.",
+     "rubric": [
+      "Thèse (1 point).",
+      "Deux arguments (1 point)."
+     ],
+     "explanation": "La thèse est annoncée dès la première phrase.",
+     "id": "2nde-francais-txt-6-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Quelle objection l'auteur évoque-t-il et comment la réfute-t-il ? Quel connecteur l'introduit ?",
+     "model": "Objection : les sacs sont gratuits. Réfutation : leur nettoyage coûte cher à la commune. Le connecteur d'opposition est « pourtant ».",
+     "rubric": [
+      "Objection et réfutation (1 point).",
+      "Connecteur « pourtant » (1 point)."
+     ],
+     "explanation": "Évoquer la thèse adverse puis la réfuter rend l'argumentation plus solide.",
+     "id": "2nde-francais-txt-6-c"
+    },
+    {
+     "kind": "open",
+     "points": 1,
+     "prompt": "Quel procédé final cherche à entraîner le lecteur ?",
+     "model": "L'impératif exclamatif « Remplaçons-les donc dès maintenant ! » (appel à l'action, avec « nous »).",
+     "rubric": [
+      "Procédé exact avec citation (1 point)."
+     ],
+     "explanation": "La phrase finale invite à agir ensemble.",
+     "id": "2nde-francais-txt-6-d"
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "method": "Identifie la thèse, les arguments, l'objection, les connecteurs.",
+   "mistakes": [
+    "Confondre argument et exemple."
+   ],
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-francais-txt-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-francais-textes",
+   "prompt": "L'élément perturbateur d'un récit :",
+   "choices": [
+    "conclut le récit",
+    "décrit le décor",
+    "rompt l'équilibre de départ",
+    "présente tous les personnages"
+   ],
+   "answer": 2,
+   "explanation": "C'est ce qui lance l'action.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-francais-txt-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-francais-textes",
+   "prompt": "Dans un récit en focalisation interne :",
+   "choices": [
+    "on connaît les pensées d'un personnage",
+    "le narrateur sait tout",
+    "on ne voit que l'extérieur",
+    "il n'y a aucun narrateur"
+   ],
+   "answer": 0,
+   "explanation": "La focalisation interne adopte le point de vue d'un personnage.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-francais-txt-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-francais-textes",
+   "prompt": "La thèse d'un texte argumentatif est :",
+   "choices": [
+    "une anecdote",
+    "une description",
+    "l'idée que l'auteur défend",
+    "la dernière phrase obligatoirement"
+   ],
+   "answer": 2,
+   "explanation": "Tout l'argumentaire sert la thèse.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-francais-txt-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-francais-textes",
+   "prompt": "Quel connecteur exprime la conséquence ?",
+   "choices": [
+    "Donc",
+    "Pourtant",
+    "Car",
+    "Mais"
+   ],
+   "answer": 0,
+   "explanation": "« Donc » introduit une conséquence ; « car » une cause ; « pourtant » et « mais » une opposition.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-francais-txt-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-francais-textes",
+   "prompt": "Une question rhétorique est :",
+   "choices": [
+    "une question sans réponse possible",
+    "une question sur la rhétorique",
+    "une question dont la réponse est évidente",
+    "une question posée au narrateur"
+   ],
+   "answer": 2,
+   "explanation": "Elle invite le lecteur à approuver.",
+   "source": "Exercice original, style devoir de 2nde"
+  }
+ ]
+}

@@ -1,0 +1,645 @@
+{
+ "chapter": "2nde-maths-c-ch-stats",
+ "lessons": [
+  {
+   "id": "2nde-maths-c-stats",
+   "title": "Statistiques descriptives",
+   "minutes": 40,
+   "programRef": "2nde C — Séries statistiques : moyenne, médiane, quartiles, écart-type (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale conforme au programme de seconde ; à relire par un enseignant",
+   "objectives": [
+    "Calculer effectifs, fréquences, moyenne et médiane.",
+    "Déterminer les quartiles et l'étendue d'une série.",
+    "Calculer la variance et l'écart-type.",
+    "Interpréter une série (centre et dispersion) à l'aide d'un diagramme."
+   ],
+   "prerequisites": [
+    "2nde-maths-c-fonctions"
+   ],
+   "exercises": [
+    "2nde-maths-c-sta-01",
+    "2nde-maths-c-sta-02",
+    "2nde-maths-c-sta-03",
+    "2nde-maths-c-sta-04",
+    "2nde-maths-c-sta-05",
+    "2nde-maths-c-sta-06"
+   ],
+   "selfCheck": [
+    "2nde-maths-c-sta-q1",
+    "2nde-maths-c-sta-q2",
+    "2nde-maths-c-sta-q3",
+    "2nde-maths-c-sta-q4",
+    "2nde-maths-c-sta-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Vocabulaire",
+     "md": "Une **population** est formée d'**individus** ; on étudie un **caractère**, qualitatif (couleur, ville) ou quantitatif (note, taille). L'**effectif** $n_i$ d'une valeur est le nombre d'individus qui la prennent ; l'**effectif total** est N. La **fréquence** est $f_i = \\frac{n_i}{N}$ (souvent en %). Pour un caractère continu, on regroupe les valeurs en **classes**."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Moyenne",
+     "md": "Pour des valeurs $x_i$ d'effectifs $n_i$ (pour des classes, $x_i$ est le **centre** de la classe) :",
+     "tex": "\\overline{x} = \\frac{n_1 x_1 + n_2 x_2 + \\ldots + n_p x_p}{N}"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Médiane",
+     "md": "La **médiane** partage la série ordonnée en deux groupes de même effectif. Si N est impair, c'est la valeur du milieu (rang $\\frac{N+1}{2}$). Si N est pair, c'est la moyenne des deux valeurs centrales. Elle est peu sensible aux valeurs extrêmes, contrairement à la moyenne."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Quartiles",
+     "md": "Convention retenue ici (à confirmer par l'enseignant) : $Q_1$ est la plus petite valeur de la série ordonnée telle qu'**au moins 25 %** des valeurs lui sont inférieures ou égales (rang N/4, arrondi à l'entier supérieur) ; $Q_3$ est celle pour **75 %** (rang 3N/4, arrondi à l'entier supérieur). L'**écart interquartile** est $Q_3 - Q_1$ ; l'**étendue** est max − min."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Variance et écart-type",
+     "md": "La variance mesure la dispersion autour de la moyenne ; l'écart-type en est la racine carrée :",
+     "tex": "V = \\frac{1}{N}\\sum n_i x_i^2 - \\overline{x}^2 \\qquad \\sigma = \\sqrt{V}"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Effet d'un changement affine",
+     "md": "Si on remplace chaque valeur x par ax + b : la moyenne devient $a\\overline{x} + b$ et l'écart-type devient $|a|\\sigma$. Ajouter la même quantité à toutes les valeurs **ne change pas** l'écart-type ; la multiplier par a le multiplie par |a|."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "unit": "élèves",
+      "bars": [
+       {
+        "label": "6",
+        "value": 3,
+        "color": "lightblue"
+       },
+       {
+        "label": "8",
+        "value": 5,
+        "color": "blue"
+       },
+       {
+        "label": "10",
+        "value": 8,
+        "color": "blue"
+       },
+       {
+        "label": "12",
+        "value": 6,
+        "color": "blue"
+       },
+       {
+        "label": "14",
+        "value": 3,
+        "color": "lightblue"
+       }
+      ]
+     },
+     "caption": "Notes d'une classe de 25 élèves (données fictives) : la valeur 10 est la plus fréquente (8 élèves).",
+     "alt": "Diagramme en barres à cinq barres : la note 6 pour 3 élèves, 8 pour 5 élèves, 10 pour 8 élèves, 12 pour 6 élèves et 14 pour 3 élèves."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Choisir et lire une représentation",
+     "md": "- **Diagramme en barres** : caractère qualitatif ou quantitatif discret.\n- **Histogramme** : classes de même amplitude ; la hauteur est proportionnelle à l'effectif.\n- **Boîte à moustaches** : résume min, Q1, médiane, Q3, max.\nCommenter une série : valeur centrale (moyenne, médiane) **et** dispersion (écart-type, écart interquartile)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : moyenne, médiane, quartiles",
+     "statement": "Les temps (en minutes) de huit trajets entre deux quartiers de Yaoundé (données fictives) sont : 4 ; 7 ; 7 ; 9 ; 10 ; 12 ; 13 ; 15. Calcule moyenne, médiane, Q1, Q3 et étendue.",
+     "steps": [
+      {
+       "md": "Moyenne :",
+       "tex": "\\overline{x} = \\frac{4 + 7 + 7 + 9 + 10 + 12 + 13 + 15}{8} = \\frac{77}{8} = 9{,}625"
+      },
+      {
+       "md": "N = 8 est pair : la médiane est la moyenne des 4e et 5e valeurs, soit (9 + 10)/2 = 9,5."
+      },
+      {
+       "md": "Rang de Q1 : 8/4 = 2, donc Q1 = 7. Rang de Q3 : 3 × 8/4 = 6, donc Q3 = 12."
+      },
+      {
+       "md": "Étendue : 15 − 4 = 11 ; écart interquartile : 12 − 7 = 5."
+      }
+     ],
+     "answer": "Moyenne 9,625 ; médiane 9,5 ; Q1 = 7 ; Q3 = 12 ; étendue 11.",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 220,
+      "items": [
+       {
+        "t": "line",
+        "x1": 118,
+        "y1": 120,
+        "x2": 184,
+        "y2": 120,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 294,
+        "y1": 120,
+        "x2": 360,
+        "y2": 120,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 118,
+        "y1": 105,
+        "x2": 118,
+        "y2": 135,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 360,
+        "y1": 105,
+        "x2": 360,
+        "y2": 135,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "rect",
+        "x": 184,
+        "y": 90,
+        "w": 110,
+        "h": 60,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 239,
+        "y1": 90,
+        "x2": 239,
+        "y2": 150,
+        "color": "red",
+        "width": 4
+       },
+       {
+        "t": "text",
+        "x": 184,
+        "y": 72,
+        "text": "Q1",
+        "size": 16,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 239,
+        "y": 72,
+        "text": "méd.",
+        "size": 16,
+        "bold": true,
+        "color": "red"
+       },
+       {
+        "t": "text",
+        "x": 294,
+        "y": 72,
+        "text": "Q3",
+        "size": 16,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 118,
+        "y": 175,
+        "text": "4",
+        "size": 16
+       },
+       {
+        "t": "text",
+        "x": 184,
+        "y": 175,
+        "text": "7",
+        "size": 16
+       },
+       {
+        "t": "text",
+        "x": 239,
+        "y": 175,
+        "text": "9,5",
+        "size": 16
+       },
+       {
+        "t": "text",
+        "x": 294,
+        "y": 175,
+        "text": "12",
+        "size": 16
+       },
+       {
+        "t": "text",
+        "x": 360,
+        "y": 175,
+        "text": "15",
+        "size": 16
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : moyenne et écart-type avec effectifs",
+     "statement": "Notes d'une classe (données fictives) : 6 (3 élèves), 8 (5), 10 (8), 12 (6), 14 (3). Calcule la moyenne et l'écart-type.",
+     "steps": [
+      {
+       "md": "N = 25. Somme des produits : 18 + 40 + 80 + 72 + 42 = 252, donc",
+       "tex": "\\overline{x} = \\frac{252}{25} = 10{,}08"
+      },
+      {
+       "md": "Somme des $n_i x_i^2$ : 108 + 320 + 800 + 864 + 588 = 2 680, donc",
+       "tex": "V = \\frac{2680}{25} - 10{,}08^2 = 107{,}2 - 101{,}6064 = 5{,}5936"
+      },
+      {
+       "md": "Écart-type :",
+       "tex": "\\sigma = \\sqrt{5{,}5936} \\approx 2{,}37"
+      }
+     ],
+     "answer": "Moyenne 10,08 ; écart-type ≈ 2,37.",
+     "figure": {
+      "kind": "bars",
+      "unit": "élèves",
+      "bars": [
+       {
+        "label": "6",
+        "value": 3,
+        "color": "lightblue"
+       },
+       {
+        "label": "8",
+        "value": 5,
+        "color": "blue"
+       },
+       {
+        "label": "10",
+        "value": 8,
+        "color": "blue"
+       },
+       {
+        "label": "12",
+        "value": 6,
+        "color": "blue"
+       },
+       {
+        "label": "14",
+        "value": 3,
+        "color": "lightblue"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : fréquences et classes",
+     "statement": "Dans une série de 25 notes regroupées en classes [0 ; 10[ (10 élèves) et [10 ; 20[ (15 élèves), calcule les fréquences et la moyenne approchée avec les centres 5 et 15.",
+     "steps": [
+      {
+       "md": "Fréquences :",
+       "tex": "f_1 = \\frac{10}{25} = 40\\,\\% \\qquad f_2 = \\frac{15}{25} = 60\\,\\%"
+      },
+      {
+       "md": "Moyenne approchée (centres des classes) :",
+       "tex": "\\overline{x} \\approx \\frac{10 \\times 5 + 15 \\times 15}{25} = \\frac{275}{25} = 11"
+      }
+     ],
+     "answer": "Fréquences 40 % et 60 % ; moyenne approchée **11**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Calculer la médiane sans ordonner la série.\n- Oublier de diviser par l'effectif **total** N (et non par le nombre de valeurs différentes).\n- Utiliser la borne inférieure d'une classe au lieu de son centre.\n- Oublier de retirer $\\overline{x}^2$ dans la variance, ou de prendre la racine pour l'écart-type.\n- Confondre effectif et fréquence ; additionner des pourcentages qui ne totalisent pas 100 %."
+    },
+    {
+     "type": "exercise",
+     "ref": "2nde-maths-c-sta-01"
+    },
+    {
+     "type": "more",
+     "items": [
+      "La moyenne approchée par les centres de classes n'est qu'une estimation : la vraie moyenne peut être un peu différente.",
+      "Plusieurs conventions existent pour les quartiers : calculatrice et manuels peuvent donner des valeurs légèrement différentes ; suis la règle de ton enseignant."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "La définition des quartiles varie selon les manuels et les calculatrices (rang N/4 arrondi par excès ici) : à aligner sur la méthode enseignée.",
+    "Vérifier si l'écart-type et les classes sont au programme de seconde C ou seulement de première.",
+    "Toutes les données sont fictives."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "2nde-maths-c-sta-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Calcule la moyenne des notes 12, 15, 9, 14 et 10.",
+   "answer": 12,
+   "tolerance": 0,
+   "explanation": "(12 + 15 + 9 + 14 + 10)/5 = 60/5 = 12.",
+   "method": "Somme des valeurs divisée par leur nombre.",
+   "mistakes": [
+    "Diviser par 4 au lieu de 5."
+   ],
+   "source": "Exercice original, style devoir de 2nde",
+   "lesson": "2nde-maths-c-stats",
+   "chapter": "2nde-maths-c-ch-stats"
+  },
+  {
+   "id": "2nde-maths-c-sta-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quelle est la médiane de la série 3 ; 9 ; 5 ; 7 ?",
+   "choices": [
+    "7",
+    "5",
+    "8",
+    "6"
+   ],
+   "answer": 3,
+   "explanation": "On ordonne : 3 ; 5 ; 7 ; 9. N = 4 est pair : médiane = (5 + 7)/2 = 6.",
+   "method": "Ordonner, puis prendre la valeur centrale (ou la moyenne des deux).",
+   "mistakes": [
+    "Prendre la 3e valeur de la série non ordonnée (5 ou 7).",
+    "Prendre la moyenne des valeurs extrêmes (3 + 9)/2 sans ordonner : cela ne marche pas en général."
+   ],
+   "source": "Exercice original, style devoir de 2nde",
+   "lesson": "2nde-maths-c-stats",
+   "chapter": "2nde-maths-c-ch-stats"
+  },
+  {
+   "id": "2nde-maths-c-sta-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Dans un groupe de 40 élèves, 12 ont obtenu moins de 8. Quelle est la fréquence de ce groupe, en pourcentage ?",
+   "answer": 30,
+   "tolerance": 0,
+   "unit": "%",
+   "explanation": "12/40 = 0,30 = 30 %.",
+   "method": "Fréquence = effectif ÷ effectif total.",
+   "mistakes": [
+    "Calculer 40/12."
+   ],
+   "source": "Exercice original, style devoir de 2nde",
+   "lesson": "2nde-maths-c-stats",
+   "chapter": "2nde-maths-c-ch-stats"
+  },
+  {
+   "id": "2nde-maths-c-sta-04",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Vrai ou faux : si on ajoute 2 points à toutes les notes d'une classe, l'écart-type ne change pas.",
+   "answer": true,
+   "explanation": "Remplacer x par x + 2 est un changement affine avec a = 1 : la moyenne augmente de 2 mais les écarts à la moyenne restent identiques, donc σ est inchangé.",
+   "method": "σ(ax + b) = |a|σ(x).",
+   "mistakes": [
+    "Croire que l'écart-type augmente aussi de 2."
+   ],
+   "source": "Exercice original, style devoir de 2nde",
+   "lesson": "2nde-maths-c-stats",
+   "chapter": "2nde-maths-c-ch-stats"
+  },
+  {
+   "id": "2nde-maths-c-sta-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Calcule l'écart-type de la série 1 ; 3 ; 5 ; 7 (arrondi à 0,01).",
+   "answer": 2.24,
+   "tolerance": 0.01,
+   "explanation": "Moyenne : 16/4 = 4. Variance : (9 + 1 + 1 + 9)/4 = 5. Écart-type : √5 ≈ 2,24.",
+   "method": "Moyenne, moyenne des carrés des écarts, racine.",
+   "mistakes": [
+    "Oublier la racine carrée (réponse 5)."
+   ],
+   "source": "Exercice original, style devoir de 2nde",
+   "lesson": "2nde-maths-c-stats",
+   "chapter": "2nde-maths-c-ch-stats"
+  },
+  {
+   "id": "2nde-maths-c-sta-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Les notes de 25 élèves à un devoir (données fictives) sont regroupées ainsi : [0 ; 5[ : 2 élèves ; [5 ; 10[ : 8 élèves ; [10 ; 15[ : 12 élèves ; [15 ; 20[ : 3 élèves.",
+   "method": "Utiliser les centres des classes et les effectifs cumulés.",
+   "mistakes": [
+    "Utiliser la borne inférieure de chaque classe comme valeur."
+   ],
+   "source": "Exercice original, style devoir de 2nde",
+   "parts": [
+    {
+     "id": "2nde-maths-c-sta-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la moyenne approchée avec les centres de classes.",
+     "answer": 10.7,
+     "tolerance": 0.001,
+     "explanation": "Centres : 2,5 ; 7,5 ; 12,5 ; 17,5. Somme : 2 × 2,5 + 8 × 7,5 + 12 × 12,5 + 3 × 17,5 = 5 + 60 + 150 + 52,5 = 267,5. Moyenne : 267,5/25 = 10,7."
+    },
+    {
+     "id": "2nde-maths-c-sta-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quel est le pourcentage d'élèves qui ont au moins 10 ?",
+     "answer": 60,
+     "tolerance": 0,
+     "unit": "%",
+     "explanation": "12 + 3 = 15 élèves sur 25 : 15/25 = 60 %."
+    },
+    {
+     "id": "2nde-maths-c-sta-06-c",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Dans quelle classe se trouve la médiane ?",
+     "choices": [
+      "[10 ; 15[",
+      "[5 ; 10[",
+      "[15 ; 20[",
+      "[0 ; 5["
+     ],
+     "answer": 0,
+     "explanation": "N = 25 : la médiane est la 13e valeur. Effectifs cumulés : 2, puis 10, puis 22. La 13e valeur est dans la 3e classe, [10 ; 15[."
+    },
+    {
+     "id": "2nde-maths-c-sta-06-d",
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Calcule l'écart-type approché (arrondi à 0,01).",
+     "answer": 3.97,
+     "tolerance": 0.01,
+     "explanation": "$\\sum n_i x_i^2 = 2 \\times 6{,}25 + 8 \\times 56{,}25 + 12 \\times 156{,}25 + 3 \\times 306{,}25 = 12{,}5 + 450 + 1875 + 918{,}75 = 3256{,}25$. V = 3256,25/25 − 10,7² = 130,25 − 114,49 = 15,76 ; σ = √15,76 ≈ 3,97."
+    }
+   ],
+   "lesson": "2nde-maths-c-stats",
+   "chapter": "2nde-maths-c-ch-stats"
+  },
+  {
+   "id": "2nde-maths-c-sta-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "La moyenne de la série 2 ; 4 ; 6 est :",
+   "choices": [
+    "3",
+    "6",
+    "12",
+    "4"
+   ],
+   "answer": 3,
+   "explanation": "(2 + 4 + 6)/3 = 12/3 = 4.",
+   "lesson": "2nde-maths-c-stats",
+   "chapter": "2nde-maths-c-ch-stats"
+  },
+  {
+   "id": "2nde-maths-c-sta-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "L'étendue de la série 3 ; 8 ; 5 ; 12 ; 9 est :",
+   "choices": [
+    "9",
+    "12",
+    "3",
+    "37"
+   ],
+   "answer": 0,
+   "explanation": "Étendue = maximum − minimum = 12 − 3 = 9.",
+   "lesson": "2nde-maths-c-stats",
+   "chapter": "2nde-maths-c-ch-stats"
+  },
+  {
+   "id": "2nde-maths-c-sta-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "Si l'effectif total est 50 et qu'une valeur a pour effectif 10, sa fréquence est :",
+   "choices": [
+    "5 %",
+    "20 %",
+    "10 %",
+    "40 %"
+   ],
+   "answer": 1,
+   "explanation": "10/50 = 0,2 = 20 %.",
+   "lesson": "2nde-maths-c-stats",
+   "chapter": "2nde-maths-c-ch-stats"
+  },
+  {
+   "id": "2nde-maths-c-sta-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "L'écart-type d'une série dont tous les termes sont égaux vaut :",
+   "choices": [
+    "1",
+    "la moyenne",
+    "0",
+    "la valeur commune au carré"
+   ],
+   "answer": 2,
+   "explanation": "Aucune dispersion : chaque valeur est égale à la moyenne, tous les écarts sont nuls.",
+   "lesson": "2nde-maths-c-stats",
+   "chapter": "2nde-maths-c-ch-stats"
+  },
+  {
+   "id": "2nde-maths-c-sta-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "Pour une série à effectif total impair, la médiane est :",
+   "choices": [
+    "la moyenne des deux valeurs extrêmes",
+    "la valeur la plus fréquente",
+    "toujours égale à la moyenne",
+    "la valeur du milieu de la série ordonnée"
+   ],
+   "answer": 3,
+   "explanation": "N impair : une valeur occupe le rang (N + 1)/2 et partage la série en deux groupes égaux.",
+   "lesson": "2nde-maths-c-stats",
+   "chapter": "2nde-maths-c-ch-stats"
+  },
+  {
+   "id": "2nde-maths-c-blanc-ex4",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Exercice 4 — Statistiques (4 points). Les temps d'attente (en minutes) de huit clients à un guichet d'une agence de Douala (données fictives) sont : 5 ; 7 ; 7 ; 8 ; 10 ; 12 ; 14 ; 17.",
+   "source": "Exercice original, style devoir de 2nde C",
+   "parts": [
+    {
+     "id": "2nde-maths-c-blanc-ex4-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la moyenne.",
+     "answer": 10,
+     "tolerance": 0,
+     "unit": "min",
+     "explanation": "(5 + 7 + 7 + 8 + 10 + 12 + 14 + 17)/8 = 80/8 = 10."
+    },
+    {
+     "id": "2nde-maths-c-blanc-ex4-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la médiane.",
+     "answer": 9,
+     "tolerance": 0,
+     "unit": "min",
+     "explanation": "N = 8 : moyenne des 4e et 5e valeurs : (8 + 10)/2 = 9."
+    },
+    {
+     "id": "2nde-maths-c-blanc-ex4-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule l'écart interquartile $Q_3 - Q_1$ (quartiles par la règle du rang N/4 et 3N/4 arrondis par excès).",
+     "answer": 5,
+     "tolerance": 0,
+     "unit": "min",
+     "explanation": "Q1 = 2e valeur = 7 ; Q3 = 6e valeur = 12. Écart interquartile : 5."
+    },
+    {
+     "id": "2nde-maths-c-blanc-ex4-d",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule l'écart-type (arrondi à 0,01).",
+     "answer": 3.81,
+     "tolerance": 0.01,
+     "unit": "min",
+     "explanation": "Écarts à la moyenne : −5 ; −3 ; −3 ; −2 ; 0 ; 2 ; 4 ; 7. Carrés : 25 + 9 + 9 + 4 + 0 + 4 + 16 + 49 = 116. V = 116/8 = 14,5 ; σ = √14,5 ≈ 3,81."
+    }
+   ],
+   "lesson": "2nde-maths-c-stats",
+   "chapter": "2nde-maths-c-ch-stats"
+  }
+ ]
+}

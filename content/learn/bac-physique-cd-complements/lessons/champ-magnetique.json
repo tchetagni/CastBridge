@@ -1,0 +1,557 @@
+{
+ "chapter": "bac-physique-cd-complements-ch-champ-magnetique",
+ "lessons": [
+  {
+   "id": "bac-physique-cd-complements-champ-magnetique",
+   "title": "Champ magnétique, force de Laplace et particule chargée",
+   "minutes": 40,
+   "programRef": "Tle C/D — Champ magnétique ; forces de Laplace et de Lorentz ; mouvement d'une particule chargée dans B uniforme (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Définir le champ magnétique et calculer celui d'un solénoïde.",
+    "Calculer une force de Laplace (norme, direction, sens).",
+    "Établir le mouvement circulaire d'une particule chargée dans B et calculer R et T.",
+    "Exploiter un spectromètre de masse."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "bac-physique-cd-complements-mag-01",
+    "bac-physique-cd-complements-mag-02",
+    "bac-physique-cd-complements-mag-03",
+    "bac-physique-cd-complements-mag-04",
+    "bac-physique-cd-complements-mag-05",
+    "bac-physique-cd-complements-mag-06"
+   ],
+   "selfCheck": [
+    "bac-physique-cd-complements-mag-q1",
+    "bac-physique-cd-complements-mag-q2",
+    "bac-physique-cd-complements-mag-q3",
+    "bac-physique-cd-complements-mag-q4",
+    "bac-physique-cd-complements-mag-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Champ magnétique",
+     "md": "Un aimant ou un courant créent un **champ magnétique** $\\vec{B}$, grandeur vectorielle mesurée en **tesla (T)** avec un teslamètre.\n- Les lignes de champ sortent par le pôle nord d'un aimant et entrent par son pôle sud (à l'extérieur).\n- Ordres de grandeur : champ terrestre $\\approx 10^{-5}$ T ; aimant courant $\\approx 10^{-2}$ à $10^{-1}$ T."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Champ d'un solénoïde long",
+     "md": "À l'intérieur d'un solénoïde long (longueur L, N spires, courant I), le champ est **uniforme**, parallèle à l'axe :",
+     "tex": "B = \\mu_0 \\dfrac{N}{L} I \\qquad \\mu_0 = 4\\pi \\times 10^{-7}\\ \\text{T·m·A}^{-1}"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Force de Laplace",
+     "md": "Un conducteur rectiligne de longueur L, parcouru par un courant I et placé dans un champ B, subit une force $\\vec{F}$ :\n- direction : perpendiculaire au conducteur et au champ ; sens : trièdre direct (conducteur orienté par I, $\\vec{B}$, $\\vec{F}$), règle de la main droite ;\n- norme : $F = I\\,L\\,B\\,\\sin\\alpha$, α étant l'angle entre le conducteur et $\\vec{B}$.\nApplications : haut-parleur, moteur à courant continu, rails de Laplace."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Force de Lorentz",
+     "md": "Une particule de charge q et de vitesse $\\vec{v}$ dans un champ $\\vec{B}$ subit la force :",
+     "tex": "\\vec{F} = q\\,\\vec{v} \\times \\vec{B} \\qquad F = |q|\\,v\\,B\\,\\sin\\alpha"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Conséquences",
+     "md": "La force de Lorentz est toujours **perpendiculaire à la vitesse** : sa puissance est nulle, elle ne travaille pas. Donc l'énergie cinétique et la **norme de la vitesse restent constantes** ; seule la direction de $\\vec{v}$ change. Le poids d'un électron ou d'un proton est négligeable devant cette force."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Mouvement dans un champ uniforme",
+     "md": "Si $\\vec{v}$ est **perpendiculaire** à $\\vec{B}$, le mouvement est **circulaire uniforme** dans le plan perpendiculaire à $\\vec{B}$ :",
+     "tex": "R = \\dfrac{m\\,v}{|q|\\,B} \\qquad T = \\dfrac{2\\pi m}{|q|\\,B} \\qquad \\omega = \\dfrac{|q|\\,B}{m}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 360,
+      "h": 260,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 340,
+        "h": 240,
+        "fill": "lightyellow",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 45,
+        "text": "×",
+        "size": 18,
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 32,
+        "text": "×",
+        "size": 18,
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 45,
+        "text": "×",
+        "size": 18,
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 130,
+        "text": "×",
+        "size": 18,
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 325,
+        "y": 130,
+        "text": "×",
+        "size": 18,
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 220,
+        "text": "×",
+        "size": 18,
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 232,
+        "text": "×",
+        "size": 18,
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 232,
+        "text": "×",
+        "size": 18,
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 320,
+        "y": 220,
+        "text": "×",
+        "size": 18,
+        "color": "grey"
+       },
+       {
+        "t": "circle",
+        "cx": 180,
+        "cy": 130,
+        "r": 70,
+        "fill": null,
+        "stroke": "blue",
+        "width": 3
+       },
+       {
+        "t": "circle",
+        "cx": 250,
+        "cy": 130,
+        "r": 6,
+        "fill": "red",
+        "stroke": "red"
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 130,
+        "x2": 250,
+        "y2": 75,
+        "color": "green",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 268,
+        "y": 88,
+        "text": "v",
+        "size": 16,
+        "color": "green",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 244,
+        "y1": 130,
+        "x2": 200,
+        "y2": 130,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 222,
+        "y": 120,
+        "text": "F",
+        "size": 16,
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 150,
+        "text": "centre",
+        "size": 14,
+        "color": "blue"
+       }
+      ]
+     },
+     "caption": "Charge positive dans un champ magnétique uniforme perpendiculaire à la feuille et entrant (croix grises). La force F, perpendiculaire à v, pointe vers le centre : le mouvement est circulaire.",
+     "alt": "Une trajectoire circulaire bleue au milieu de croix grises représentant le champ entrant. Au point de droite, une flèche verte v vers le haut et une flèche rouge F dirigée vers le centre du cercle."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode",
+     "md": "1. Faire un schéma : $\\vec{v}$, $\\vec{B}$, signe de q ; trouver le sens de $\\vec{F}$.\n2. Appliquer la 2e loi de Newton : $m\\vec{a} = q\\vec{v}\\times\\vec{B}$ ; en projection normale $m v^2/R = |q| v B$.\n3. En déduire R, puis $T = 2\\pi R / v$ (T ne dépend pas de v).\n4. Vérifier les unités (T, m/s, kg, C) et l'ordre de grandeur."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : rayon de la trajectoire d'un électron",
+     "statement": "Un électron ($m = 9{,}1 \\times 10^{-31}$ kg, $e = 1{,}6 \\times 10^{-19}$ C) entre perpendiculairement à $\\vec{B}$ ($B = 1{,}0 \\times 10^{-3}$ T) avec $v = 2{,}0 \\times 10^6$ m/s. Calcule le rayon de sa trajectoire.",
+     "steps": [
+      {
+       "md": "Le poids est négligeable ; seule agit la force de Lorentz, perpendiculaire à $\\vec{v}$ : mouvement circulaire uniforme."
+      },
+      {
+       "md": "La 2e loi de Newton projetée sur la normale donne :",
+       "tex": "\\dfrac{m v^2}{R} = e\\,v\\,B \\Rightarrow R = \\dfrac{m v}{e B}"
+      },
+      {
+       "md": "Application numérique :",
+       "tex": "R = \\dfrac{9{,}1\\times10^{-31} \\times 2{,}0\\times10^{6}}{1{,}6\\times10^{-19} \\times 1{,}0\\times10^{-3}} \\approx 1{,}1\\ \\text{cm}"
+      }
+     ],
+     "answer": "**R ≈ 1,1 cm**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : force de Laplace",
+     "statement": "Une tige de cuivre de longueur utile 10 cm, parcourue par I = 5,0 A, est placée dans un champ uniforme B = 0,20 T. Calcule la force quand la tige est perpendiculaire à $\\vec{B}$, puis quand elle fait 30° avec $\\vec{B}$.",
+     "steps": [
+      {
+       "md": "Tige perpendiculaire : α = 90°, sin α = 1 :",
+       "tex": "F = 5{,}0 \\times 0{,}10 \\times 0{,}20 \\times 1 = 0{,}10\\ \\text{N}"
+      },
+      {
+       "md": "Tige à 30° : sin 30° = 0,5 :",
+       "tex": "F = 0{,}10 \\times 0{,}5 = 0{,}050\\ \\text{N}"
+      },
+      {
+       "md": "La force est maximale quand la tige est perpendiculaire au champ et nulle quand elle lui est parallèle."
+      }
+     ],
+     "answer": "**F = 0,10 N** (perpendiculaire) ; **F = 0,050 N** (à 30°)."
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-physique-cd-complements-mag-01"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier de convertir : cm en m, mT en T, µA en A.\n- Utiliser la formule du rayon quand $\\vec{v}$ n'est pas perpendiculaire à $\\vec{B}$ (seule la composante perpendiculaire tourne ; le mouvement est alors hélicoïdal).\n- Croire que le champ magnétique accélère la particule : il courbe la trajectoire sans changer la vitesse.\n- Oublier que le sens de $\\vec{F}$ est inversé pour une charge négative."
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-physique-cd-complements-mag-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-physique-cd-complements-mag-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-physique-cd-complements-mag-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-physique-cd-complements-mag-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-physique-cd-complements-mag-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le spectromètre de masse et le cyclotron utilisent ces relations : on sépare des ions de masses différentes par leurs rayons de trajectoire.",
+      "Pour le sens des forces, s'entraîner avec la règle de la main droite (pouce, index, majeur)."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Le sens des forces suppose la convention du trièdre direct ; vérifier la formulation enseignée (main droite, bonhomme d'Ampère, tire-bouchon).",
+    "Constantes arrondies annoncées : e = 1,6×10⁻¹⁹ C, m(e) = 9,1×10⁻³¹ kg, m(p) = 1,67×10⁻²⁷ kg, u = 1,66×10⁻²⁷ kg, µ₀ = 4π×10⁻⁷ SI. Vérifier celles admises à l'examen.",
+    "Mouvement hélicoïdal et rails de Laplace en équilibre : seulement évoqués ; vérifier s'ils sont exigibles pour la série D."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "prompt": "Un solénoïde long comporte N = 500 spires sur une longueur L = 0,25 m et est parcouru par I = 2,0 A. Calcule la valeur du champ B en son centre, en mT (µ₀ = 4π × 10⁻⁷ SI).",
+   "points": 1,
+   "answer": 5.03,
+   "tolerance": 0.02,
+   "unit": "mT",
+   "explanation": "B = µ₀ N I / L = 4π×10⁻⁷ × 500 × 2,0 / 0,25 ≈ 0,00503 T, soit ≈ 5,03 mT.",
+   "method": "B = µ₀ (N/L) I ; convertir en mT à la fin.",
+   "mistakes": [
+    "Oublier de diviser par L.",
+    "Utiliser L en cm."
+   ],
+   "id": "bac-physique-cd-complements-mag-01",
+   "lesson": "bac-physique-cd-complements-champ-magnetique",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "prompt": "Une particule chargée entre dans un champ magnétique uniforme avec une vitesse perpendiculaire à $\\vec{B}$. Quelle est sa trajectoire ?",
+   "points": 1,
+   "choices": [
+    "Un cercle parcouru à vitesse de norme constante",
+    "Une droite parcourue à vitesse croissante",
+    "Une parabole",
+    "Une hélice de pas constant"
+   ],
+   "answer": 0,
+   "explanation": "La force de Lorentz est perpendiculaire à la vitesse et de norme constante : l'accélération est normale et le mouvement circulaire uniforme. L'hélice apparaît seulement si $\\vec{v}$ a une composante parallèle à $\\vec{B}$.",
+   "method": "Force ⟂ vitesse ⇒ mouvement circulaire uniforme.",
+   "mistakes": [
+    "Confondre avec le champ électrique, qui donne une parabole."
+   ],
+   "id": "bac-physique-cd-complements-mag-02",
+   "lesson": "bac-physique-cd-complements-champ-magnetique",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "prompt": "Un conducteur de longueur utile 0,15 m, parcouru par I = 8,0 A, est perpendiculaire à un champ B = 0,40 T. Calcule la force de Laplace, en N.",
+   "points": 1,
+   "answer": 0.48,
+   "tolerance": 0.005,
+   "unit": "N",
+   "explanation": "F = I L B sin 90° = 8,0 × 0,15 × 0,40 = 0,48 N.",
+   "method": "F = I L B sin α avec α = 90°.",
+   "mistakes": [
+    "Oublier sin α ou prendre α = 0."
+   ],
+   "id": "bac-physique-cd-complements-mag-03",
+   "lesson": "bac-physique-cd-complements-champ-magnetique",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "prompt": "Un proton ($m = 1{,}67 \\times 10^{-27}$ kg, $q = 1{,}6 \\times 10^{-19}$ C) de vitesse $3{,}0 \\times 10^{6}$ m/s entre perpendiculairement dans un champ B = 0,50 T. Calcule le rayon de sa trajectoire, en cm.",
+   "points": 2,
+   "answer": 6.3,
+   "tolerance": 0.1,
+   "unit": "cm",
+   "explanation": "R = m v /(e B) = 1,67×10⁻²⁷ × 3,0×10⁶ /(1,6×10⁻¹⁹ × 0,50) ≈ 0,0626 m, soit ≈ 6,3 cm.",
+   "method": "R = m v /(|q| B).",
+   "mistakes": [
+    "Mettre v² dans la formule.",
+    "Oublier de passer de m à cm."
+   ],
+   "id": "bac-physique-cd-complements-mag-04",
+   "lesson": "bac-physique-cd-complements-champ-magnetique",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "prompt": "Un électron décrit un cercle dans un champ uniforme B = 2,0 × 10⁻³ T. Calcule sa période de révolution, en ns (m = 9,1 × 10⁻³¹ kg ; e = 1,6 × 10⁻¹⁹ C).",
+   "points": 2,
+   "answer": 17.9,
+   "tolerance": 0.1,
+   "unit": "ns",
+   "explanation": "T = 2π m /(e B) = 2π × 9,1×10⁻³¹ /(1,6×10⁻¹⁹ × 2,0×10⁻³) ≈ 17,9 ns. Elle ne dépend pas de la vitesse.",
+   "method": "T = 2π m /(|q| B), indépendante de v.",
+   "mistakes": [
+    "Utiliser T = 2πR/v avec une vitesse inventée."
+   ],
+   "id": "bac-physique-cd-complements-mag-05",
+   "lesson": "bac-physique-cd-complements-champ-magnetique",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Un spectromètre de masse envoie des ions Ne⁺ (charge e) dans un champ uniforme B = 0,20 T, perpendiculaire à leur vitesse, après accélération depuis le repos par une tension U = 1000 V. On donne m(²⁰Ne) = 20 u et m(²²Ne) = 22 u, avec u = 1,66 × 10⁻²⁷ kg ; e = 1,6 × 10⁻¹⁹ C.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Calcule la vitesse de l'ion ²⁰Ne⁺ à la sortie de l'accélérateur, en km/s (e U = ½ m v²).",
+     "points": 1.5,
+     "answer": 98.0,
+     "tolerance": 2,
+     "unit": "km/s",
+     "explanation": "v = √(2 e U / m) = √(2 × 1,6×10⁻¹⁹ × 1000 / 3,32×10⁻²⁶) ≈ 98 km/s.",
+     "id": "bac-physique-cd-complements-mag-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Dans la zone de champ, quelle est la nature du mouvement ?",
+     "points": 1,
+     "choices": [
+      "Circulaire uniforme, de rayon R = m v / (e B)",
+      "Rectiligne uniforme",
+      "Rectiligne uniformément accéléré",
+      "Parabolique"
+     ],
+     "answer": 0,
+     "explanation": "La force de Lorentz est perpendiculaire à $\\vec{v}$ : mouvement circulaire uniforme.",
+     "id": "bac-physique-cd-complements-mag-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule le rayon R₂₀ de la trajectoire de ²⁰Ne⁺, en cm.",
+     "points": 1.5,
+     "answer": 10.2,
+     "tolerance": 0.1,
+     "unit": "cm",
+     "explanation": "R = m v/(e B) ≈ 10,2 cm.",
+     "id": "bac-physique-cd-complements-mag-06-c"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule la distance entre les deux points d'impact de ²⁰Ne⁺ et ²²Ne⁺ sur le détecteur (diamètres des demi-cercles), en cm.",
+     "points": 2,
+     "answer": 1.0,
+     "tolerance": 0.2,
+     "unit": "cm",
+     "explanation": "R = (1/B) √(2 m U / e) ; R₂₂ ≈ 10,7 cm. Les impacts sont aux distances 2R₂₀ et 2R₂₂ de l'entrée : écart = 2 (R₂₂ − R₂₀) ≈ 1,0 cm.",
+     "id": "bac-physique-cd-complements-mag-06-d"
+    }
+   ],
+   "method": "Énergie cinétique à l'accélération, puis rayon dans le champ magnétique ; R varie en √m.",
+   "mistakes": [
+    "Prendre R au lieu de 2R pour la distance à l'entrée.",
+    "Oublier de convertir u en kg."
+   ],
+   "id": "bac-physique-cd-complements-mag-06",
+   "lesson": "bac-physique-cd-complements-champ-magnetique",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "Dans le SI, le champ magnétique s'exprime en :",
+   "points": 1,
+   "choices": [
+    "tesla (T)",
+    "weber (Wb)",
+    "henry (H)",
+    "ampère (A)"
+   ],
+   "answer": 0,
+   "explanation": "Le tesla est l'unité du champ magnétique ; le weber mesure le flux, le henry l'inductance.",
+   "id": "bac-physique-cd-complements-mag-q1",
+   "lesson": "bac-physique-cd-complements-champ-magnetique"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "La force de Lorentz sur une particule en mouvement dans un champ B :",
+   "points": 1,
+   "choices": [
+    "est perpendiculaire à la vitesse",
+    "est parallèle à la vitesse",
+    "accélère la particule dans le sens du mouvement",
+    "est toujours nulle"
+   ],
+   "answer": 0,
+   "explanation": "F = q v × B est orthogonale à v : elle ne travaille pas.",
+   "id": "bac-physique-cd-complements-mag-q2",
+   "lesson": "bac-physique-cd-complements-champ-magnetique"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "Si on double la vitesse (v ⟂ B), le rayon de la trajectoire :",
+   "points": 1,
+   "choices": [
+    "double",
+    "est divisé par deux",
+    "reste identique",
+    "est multiplié par quatre"
+   ],
+   "answer": 0,
+   "explanation": "R = m v /(|q| B) est proportionnel à v.",
+   "id": "bac-physique-cd-complements-mag-q3",
+   "lesson": "bac-physique-cd-complements-champ-magnetique"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "Si on double la vitesse (v ⟂ B), la période de révolution :",
+   "points": 1,
+   "choices": [
+    "reste identique",
+    "double",
+    "est divisée par deux",
+    "est multipliée par quatre"
+   ],
+   "answer": 0,
+   "explanation": "T = 2π m /(|q| B) ne dépend pas de v.",
+   "id": "bac-physique-cd-complements-mag-q4",
+   "lesson": "bac-physique-cd-complements-champ-magnetique"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "La force de Laplace sur un fil de longueur L, courant I, perpendiculaire à B vaut :",
+   "points": 1,
+   "choices": [
+    "I L B",
+    "I B / L",
+    "I L / B",
+    "L B / I"
+   ],
+   "answer": 0,
+   "explanation": "F = I L B sin 90° = I L B.",
+   "id": "bac-physique-cd-complements-mag-q5",
+   "lesson": "bac-physique-cd-complements-champ-magnetique"
+  }
+ ]
+}

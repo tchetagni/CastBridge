@@ -1,0 +1,563 @@
+{
+ "chapter": "bac-chimie-cd-organique-ch-polymeres",
+ "lessons": [
+  {
+   "id": "bac-chimie-cd-organique-polymeres",
+   "title": "Polymères (addition, condensation) et piles électrochimiques",
+   "minutes": 45,
+   "programRef": "Tle C/D — Polymères : polyaddition, polycondensation ; piles électrochimiques (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer polyaddition et polycondensation et écrire les équations simples.",
+    "Calculer un degré de polymérisation et une masse de polymère.",
+    "Décrire la pile Daniell (pôles, réactions, f.é.m.).",
+    "Relier quantité d'électricité et quantité de matière."
+   ],
+   "prerequisites": [
+    "bac-chimie-cd-organique-esters"
+   ],
+   "exercises": [
+    "bac-chimie-cd-organique-pol-01",
+    "bac-chimie-cd-organique-pol-02",
+    "bac-chimie-cd-organique-pol-03",
+    "bac-chimie-cd-organique-pol-04",
+    "bac-chimie-cd-organique-pol-05",
+    "bac-chimie-cd-organique-pol-06"
+   ],
+   "selfCheck": [
+    "bac-chimie-cd-organique-pol-q1",
+    "bac-chimie-cd-organique-pol-q2",
+    "bac-chimie-cd-organique-pol-q3",
+    "bac-chimie-cd-organique-pol-q4",
+    "bac-chimie-cd-organique-pol-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Polymères",
+     "md": "Un **polymère** est une macromolécule formée par l'enchaînement de très nombreux **motifs** identiques, issus de petites molécules, les **monomères**. Le **degré de polymérisation** n est le nombre de motifs : $M_{polymère} = n \\times M_{motif}$. Exemples : polyéthylène (PE), PVC, polystyrène, nylon, PET."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Polyaddition",
+     "md": "Des monomères portant une double liaison C=C s'additionnent **sans perte de matière** ; le motif a la même formule brute que le monomère. Ainsi, pour l'éthène (→ polyéthylène) et le chloroéthène (→ PVC) :",
+     "tex": "n\\,\\text{CH}_2{=}\\text{CH}_2 \\to \\left(\\text{CH}_2{-}\\text{CH}_2\\right)_n \\qquad n\\,\\text{CH}_2{=}\\text{CHCl} \\to \\left(\\text{CH}_2{-}\\text{CHCl}\\right)_n"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Polycondensation",
+     "md": "Des monomères portant **deux groupes fonctionnels** réagissent en éliminant une petite molécule (H₂O, HCl) à chaque liaison. **Nylon 6-6** (polyamide) : diamine + diacide ; **PET** (polyester) : diacide + diol. Première étape (dimère) du nylon :",
+     "tex": "\\text{H}_{2}\\text{N(CH}_{2}\\text{)}_{6}\\text{NH}_{2} + \\text{HOOC(CH}_{2}\\text{)}_{4}\\text{COOH} \\to \\text{H}_{2}\\text{N(CH}_{2}\\text{)}_{6}\\text{NHCO(CH}_{2}\\text{)}_{4}\\text{COOH} + \\text{H}_{2}\\text{O}"
+    },
+    {
+     "type": "formula",
+     "tex": "\\text{C}_{8}\\text{H}_{6}\\text{O}_{4} + \\text{C}_{2}\\text{H}_{6}\\text{O}_{2} \\to \\text{C}_{10}\\text{H}_{10}\\text{O}_{5} + \\text{H}_{2}\\text{O}",
+     "caption": "PET : acide téréphtalique + éthane-1,2-diol → premier ester + eau (la suite de la chaîne se forme de la même façon)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Calculs sur les polymères",
+     "md": "- Polyaddition : masse de polymère = masse de monomère consommée (× rendement).\n- Polycondensation : $M_{motif} = M_{diamine} + M_{diacide} - 2\\times 18$ pour le nylon 6-6 ; l'eau libérée est à retrancher.\n- Thermoplastiques (ramollissent à la chaleur, recyclables) et thermodurcissables (non fusibles). Les déchets plastiques posent un problème environnemental."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Pile électrochimique",
+     "md": "Une **pile** transforme de l'énergie chimique en énergie électrique grâce à une réaction d'oxydoréduction dont les réactifs sont séparés. **Pile Daniell** : lame de zinc dans Zn²⁺ et lame de cuivre dans Cu²⁺, reliées par un **pont salin**. Notation : − Zn | Zn²⁺ ‖ Cu²⁺ | Cu +.\n- Zinc : pôle **−**, **oxydation** (anode).\n- Cuivre : pôle **+**, **réduction** (cathode).\nLes électrons circulent de Zn vers Cu à l'extérieur.",
+     "tex": "\\text{Zn} \\to \\text{Zn}^{2+} + 2\\,\\text{e}^{-} \\qquad \\text{Cu}^{2+} + 2\\,\\text{e}^{-} \\to \\text{Cu}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 250,
+      "items": [
+       {
+        "t": "line",
+        "x1": 98,
+        "y1": 70,
+        "x2": 98,
+        "y2": 34,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 98,
+        "y1": 34,
+        "x2": 328,
+        "y2": 34,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 328,
+        "y1": 34,
+        "x2": 328,
+        "y2": 70,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 170,
+        "y1": 34,
+        "x2": 240,
+        "y2": 34,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 205,
+        "y": 22,
+        "text": "e⁻",
+        "size": 15,
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 30,
+        "y": 110,
+        "w": 130,
+        "h": 110,
+        "fill": "lightblue",
+        "stroke": "blue"
+       },
+       {
+        "t": "rect",
+        "x": 260,
+        "y": 110,
+        "w": 130,
+        "h": 110,
+        "fill": "lightblue",
+        "stroke": "blue"
+       },
+       {
+        "t": "rect",
+        "x": 90,
+        "y": 70,
+        "w": 16,
+        "h": 120,
+        "fill": "lightgrey",
+        "stroke": "grey"
+       },
+       {
+        "t": "rect",
+        "x": 320,
+        "y": 70,
+        "w": 16,
+        "h": 120,
+        "fill": "lightorange",
+        "stroke": "brown"
+       },
+       {
+        "t": "rect",
+        "x": 140,
+        "y": 150,
+        "w": 140,
+        "h": 18,
+        "fill": "lightyellow",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 163,
+        "text": "pont salin",
+        "size": 12
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 62,
+        "text": "−",
+        "size": 20,
+        "color": "blue",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 352,
+        "y": 62,
+        "text": "+",
+        "size": 20,
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 95,
+        "y": 242,
+        "text": "Zn | Zn²⁺",
+        "size": 14,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 325,
+        "y": 242,
+        "text": "Cu | Cu²⁺",
+        "size": 14,
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Pile Daniell : les électrons circulent dans le fil du zinc (pôle −) vers le cuivre (pôle +). Le pont salin ferme le circuit par le déplacement des ions.",
+     "alt": "Deux béchers bleus reliés par un pont salin jaune. À gauche une lame de zinc grise, à droite une lame de cuivre orangée, reliées par un fil ; une flèche rouge e moins va de la gauche vers la droite."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Bilan, f.é.m. et quantité d'électricité",
+     "md": "Bilan de la pile et grandeurs électriques (F = 96 500 C/mol ; potentiels standard usuels $E^\\circ(Zn^{2+}/Zn) = -0{,}76$ V, $E^\\circ(Cu^{2+}/Cu) = +0{,}34$ V) :",
+     "tex": "\\text{Zn} + \\text{Cu}^{2+} \\to \\text{Zn}^{2+} + \\text{Cu} \\qquad E = E^\\circ_+ - E^\\circ_- = 1{,}10\\ \\text{V} \\qquad Q = I\\,\\Delta t = n(e^-)\\,F"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode",
+     "md": "1. Polymères : repérer l'addition (C=C) ou la condensation (2 groupes) ; M(polymère) = n × M(motif).\n2. Piles : le réducteur du couple de plus faible E° est le pôle −.\n3. Relier Q = I Δt à n(e⁻) = Q/F, puis à la quantité de métal consommé grâce à la demi-équation (Zn : 2 e⁻ par atome).\n4. Convertir : durée en s, masse en g."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : degré de polymérisation",
+     "statement": "Un échantillon de polyéthylène a une masse molaire de 28 000 g/mol. M(C) = 12 ; M(H) = 1 g/mol. Calcule le degré de polymérisation et nomme le monomère.",
+     "steps": [
+      {
+       "md": "Monomère : l'éthène CH₂=CH₂, de masse molaire 2×12 + 4×1 = 28 g/mol (motif −CH₂−CH₂−, même formule)."
+      },
+      {
+       "md": "Degré de polymérisation :",
+       "tex": "n = \\dfrac{M_{polymère}}{M_{motif}} = \\dfrac{28\\,000}{28} = 1000"
+      }
+     ],
+     "answer": "**n = 1000 motifs** (monomère : éthène)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : consommation d'une électrode de zinc",
+     "statement": "Une pile Daniell débite 0,10 A pendant 2,0 h. Quelle masse de zinc est oxydée ? (F = 96 500 C/mol ; M(Zn) = 65,4 g/mol)",
+     "steps": [
+      {
+       "md": "Quantité d'électricité :",
+       "tex": "Q = I\\,\\Delta t = 0{,}10 \\times 2{,}0 \\times 3600 = 720\\ \\text{C}"
+      },
+      {
+       "md": "Quantité d'électrons, puis de zinc (2 e⁻ par atome Zn oxydé) :",
+       "tex": "n(e^-) = \\dfrac{720}{96\\,500} \\approx 7{,}46\\times10^{-3}\\ \\text{mol} \\quad \\Rightarrow \\quad n(\\text{Zn}) = \\dfrac{n(e^-)}{2}"
+      },
+      {
+       "md": "Masse :",
+       "tex": "m = n(\\text{Zn}) \\times M \\approx 0{,}24\\ \\text{g}"
+      }
+     ],
+     "answer": "**m ≈ 0,24 g de zinc**."
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-chimie-cd-organique-pol-01"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Inverser les pôles : l'oxydation (perte d'électrons) se fait toujours à l'**anode**, pôle **−** dans une pile.\n- Oublier le facteur 2 (Zn²⁺ : deux électrons par atome).\n- Garder la durée en heures dans Q = I Δt (il faut des secondes).\n- Dans une polycondensation, oublier l'eau libérée : la masse du polymère est inférieure à celle des monomères.\n- Confondre polymère (très grand n) et simple dimère."
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-chimie-cd-organique-pol-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-chimie-cd-organique-pol-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-chimie-cd-organique-pol-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-chimie-cd-organique-pol-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-chimie-cd-organique-pol-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Les piles salines et alcalines de nos lampes et radios utilisent le même principe que la pile Daniell, avec d'autres couples.",
+      "Le recyclage des bouteilles en PET et la réduction des sacs plastiques sont des enjeux à Douala, Yaoundé ou Bamenda comme ailleurs.",
+      "Équilibres chimiques : la fiche « Esters » présente K, le rendement et le déplacement d'équilibre."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Choix éditorial : cette fiche regroupe polymères et piles ; l'électrolyse n'est pas traitée et les équilibres chimiques sont couverts dans la fiche « Esters » (K, rendement). À confirmer avec le programme pour la série D.",
+    "E°(Zn²⁺/Zn) = −0,76 V ; E°(Cu²⁺/Cu) = +0,34 V ; F = 96 500 C/mol ; M(Zn) = 65,4 g/mol ; M(Cu) = 63,5 g/mol : valeurs usuelles arrondies à confirmer avec la table du manuel.",
+    "Équation de fonctionnement et bilans vérifiés (atomes, charges) par script Python ; le dimère de nylon et de PET est écrit pour éviter la notation en n ; l'écriture « −CH₂−CH₂− » dans les formules LaTeX est simplifiée."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "prompt": "Le chloroéthène CH₂=CHCl donne le PVC par :",
+   "points": 1,
+   "choices": [
+    "polyaddition",
+    "polycondensation",
+    "estérification",
+    "saponification"
+   ],
+   "answer": 0,
+   "explanation": "Le monomère possède une double liaison C=C : polyaddition, sans élimination de molécule.",
+   "method": "C=C → polyaddition ; deux groupes fonctionnels → polycondensation.",
+   "mistakes": [
+    "Confondre avec la polycondensation."
+   ],
+   "id": "bac-chimie-cd-organique-pol-01",
+   "lesson": "bac-chimie-cd-organique-polymeres",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "prompt": "Un échantillon de PVC a une masse molaire de 125 000 g/mol. Le motif −CH₂−CHCl− a pour masse molaire 62,5 g/mol (M(Cl) = 35,5). Calcule le degré de polymérisation.",
+   "points": 1,
+   "answer": 2000.0,
+   "tolerance": 0,
+   "explanation": "n = 125 000/62,5 = 2000 motifs.",
+   "method": "n = M(polymère)/M(motif).",
+   "mistakes": [
+    "Diviser par la masse du monomère sans vérifier qu'elle égale celle du motif."
+   ],
+   "id": "bac-chimie-cd-organique-pol-02",
+   "lesson": "bac-chimie-cd-organique-polymeres",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "prompt": "À la lame de zinc d'une pile Daniell, il se produit :",
+   "points": 1,
+   "choices": [
+    "l'oxydation du zinc en ions Zn²⁺ ; c'est le pôle −",
+    "la réduction des ions Zn²⁺ ; c'est le pôle +",
+    "l'oxydation du cuivre ; c'est le pôle −",
+    "la réduction du cuivre ; c'est le pôle +"
+   ],
+   "answer": 0,
+   "explanation": "Zn a le plus faible potentiel : il cède des électrons (Zn → Zn²⁺ + 2 e⁻) : oxydation, pôle négatif.",
+   "method": "Oxydation = anode = pôle − dans une pile.",
+   "mistakes": [
+    "Associer l'anode au pôle +."
+   ],
+   "id": "bac-chimie-cd-organique-pol-03",
+   "lesson": "bac-chimie-cd-organique-polymeres",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "prompt": "On fait réagir 11,6 kg d'hexane-1,6-diamine (M = 116 g/mol) avec la quantité stœchiométrique d'acide hexanedioïque (M = 146 g/mol) pour obtenir du nylon 6-6 (motif de masse molaire 226 g/mol). Calcule la masse de nylon formée, en kg (réaction totale).",
+   "points": 2,
+   "answer": 22.6,
+   "tolerance": 0.05,
+   "unit": "kg",
+   "explanation": "n(diamine) = 11 600/116 = 100 mol → 100 motifs ; m = 100 × 226 = 22 600 g = 22,6 kg. Vérification : 11,6 + 14,6 − 3,6 (eau libérée) = 22,6 kg.",
+   "method": "M(motif) = M(diamine) + M(diacide) − 36.",
+   "mistakes": [
+    "Additionner les masses des monomères (26,2 kg) sans retrancher l'eau."
+   ],
+   "id": "bac-chimie-cd-organique-pol-04",
+   "lesson": "bac-chimie-cd-organique-polymeres",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "prompt": "Une pile Daniell débite 50 mA pendant 6,0 h. Calcule la masse de zinc oxydée, en g (F = 96 500 C/mol ; M(Zn) = 65,4 g/mol).",
+   "points": 2,
+   "answer": 0.37,
+   "tolerance": 0.01,
+   "unit": "g",
+   "explanation": "Q = 0,050 × 6,0 × 3600 = 1080 C ; n(e⁻) = 1080/96 500 ≈ 1,12×10⁻² mol ; n(Zn) = n(e⁻)/2 ≈ 5,6×10⁻³ mol ; m ≈ 0,37 g.",
+   "method": "Q = I Δt ; n(Zn) = Q/(2F).",
+   "mistakes": [
+    "Oublier le facteur 2.",
+    "Garder Δt en heures."
+   ],
+   "id": "bac-chimie-cd-organique-pol-05",
+   "lesson": "bac-chimie-cd-organique-polymeres",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Une pile Daniell est constituée d'une lame de zinc plongeant dans une solution de sulfate de zinc et d'une lame de cuivre dans une solution de sulfate de cuivre(II), reliées par un pont salin. On donne E°(Zn²⁺/Zn) = −0,76 V ; E°(Cu²⁺/Cu) = +0,34 V ; F = 96 500 C/mol ; M(Cu) = 63,5 g/mol.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quelle est l'équation de fonctionnement de la pile ?",
+     "points": 1,
+     "choices": [
+      "Zn + Cu²⁺ → Zn²⁺ + Cu",
+      "Zn²⁺ + Cu → Zn + Cu²⁺",
+      "Zn + Cu → Zn²⁺ + Cu²⁺",
+      "Zn²⁺ + Cu²⁺ → Zn + Cu"
+     ],
+     "answer": 0,
+     "explanation": "Le zinc (réducteur du couple de plus faible E°) est oxydé ; les ions Cu²⁺ sont réduits ; atomes et charges sont conservés.",
+     "id": "bac-chimie-cd-organique-pol-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule la f.é.m. standard de la pile, en V.",
+     "points": 1,
+     "answer": 1.1,
+     "tolerance": 0.01,
+     "unit": "V",
+     "explanation": "E = E°(Cu²⁺/Cu) − E°(Zn²⁺/Zn) = 0,34 − (−0,76) = 1,10 V.",
+     "id": "bac-chimie-cd-organique-pol-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Pendant le fonctionnement, 0,0100 mol de zinc est oxydée. Quelle masse de cuivre se dépose, en g ?",
+     "points": 1.5,
+     "answer": 0.635,
+     "tolerance": 0.005,
+     "unit": "g",
+     "explanation": "Coefficients 1 : 1 : n(Cu) = 0,0100 mol ; m = 0,0100 × 63,5 = 0,635 g.",
+     "id": "bac-chimie-cd-organique-pol-06-c"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule la quantité d'électricité qui a traversé le circuit, en C.",
+     "points": 1,
+     "answer": 1930.0,
+     "tolerance": 5,
+     "unit": "C",
+     "explanation": "n(e⁻) = 2 × 0,0100 = 0,0200 mol ; Q = n F = 0,0200 × 96 500 = 1930 C.",
+     "id": "bac-chimie-cd-organique-pol-06-d"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Le courant est constant, I = 0,10 A. Pendant combien de temps la pile a-t-elle débité, en heures ?",
+     "points": 1,
+     "answer": 5.36,
+     "tolerance": 0.02,
+     "unit": "h",
+     "explanation": "Δt = Q/I = 1930/0,10 = 19 300 s ≈ 5,36 h.",
+     "id": "bac-chimie-cd-organique-pol-06-e"
+    }
+   ],
+   "method": "Équation, E° (+ moins −), stœchiométrie, Q = n(e⁻) F, Δt = Q/I.",
+   "mistakes": [
+    "Oublier de multiplier n(Zn) par 2 pour les électrons.",
+    "Oublier de passer de secondes à heures."
+   ],
+   "id": "bac-chimie-cd-organique-pol-06",
+   "lesson": "bac-chimie-cd-organique-polymeres",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "Un polymère est formé par :",
+   "points": 1,
+   "choices": [
+    "l'enchaînement d'un très grand nombre de motifs",
+    "deux molécules seulement",
+    "un ion et un électron",
+    "une seule liaison simple"
+   ],
+   "answer": 0,
+   "explanation": "Macromolécule de n motifs, n très grand.",
+   "id": "bac-chimie-cd-organique-pol-q1",
+   "lesson": "bac-chimie-cd-organique-polymeres"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "La polycondensation s'accompagne de :",
+   "points": 1,
+   "choices": [
+    "l'élimination d'une petite molécule (eau, HCl)",
+    "aucune perte de matière",
+    "la formation d'un alcène",
+    "la dissolution d'un métal"
+   ],
+   "answer": 0,
+   "explanation": "Chaque liaison formée libère H₂O (ou HCl).",
+   "id": "bac-chimie-cd-organique-pol-q2",
+   "lesson": "bac-chimie-cd-organique-polymeres"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "Dans une pile, l'anode est :",
+   "points": 1,
+   "choices": [
+    "l'électrode où se produit l'oxydation",
+    "l'électrode où se produit la réduction",
+    "toujours le pôle +",
+    "le pont salin"
+   ],
+   "answer": 0,
+   "explanation": "Anode = oxydation ; dans une pile, c'est le pôle −.",
+   "id": "bac-chimie-cd-organique-pol-q3",
+   "lesson": "bac-chimie-cd-organique-polymeres"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "La relation entre la quantité d'électricité, l'intensité et la durée est :",
+   "points": 1,
+   "choices": [
+    "Q = I Δt",
+    "Q = I / Δt",
+    "Q = Δt / I",
+    "Q = I² Δt"
+   ],
+   "answer": 0,
+   "explanation": "Q en coulombs si I en ampères et Δt en secondes.",
+   "id": "bac-chimie-cd-organique-pol-q4",
+   "lesson": "bac-chimie-cd-organique-polymeres"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "La constante de Faraday F vaut environ :",
+   "points": 1,
+   "choices": [
+    "96 500 C/mol",
+    "9,65 C/mol",
+    "6,02×10²³ C/mol",
+    "1,6×10⁻¹⁹ C/mol"
+   ],
+   "answer": 0,
+   "explanation": "F est la charge d'une mole d'électrons : N_A × e ≈ 96 500 C/mol.",
+   "id": "bac-chimie-cd-organique-pol-q5",
+   "lesson": "bac-chimie-cd-organique-polymeres"
+  }
+ ]
+}

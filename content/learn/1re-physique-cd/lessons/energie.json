@@ -1,0 +1,493 @@
+{
+ "chapter": "1re-physique-cd-ch-energie",
+ "lessons": [
+  {
+   "id": "1re-physique-cd-energie",
+   "chapter": "1re-physique-cd-ch-energie",
+   "title": "Travail, puissance et énergie mécanique",
+   "minutes": 45,
+   "programRef": "1re C/D — Travail, puissance, énergie cinétique et potentielle (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale d'après le programme de 1re C et D ; à relire par un enseignant",
+   "objectives": [
+    "Calculer le travail d'une force constante et la puissance d'une force ou d'un appareil.",
+    "Calculer des énergies cinétique et potentielle de pesanteur.",
+    "Appliquer le théorème de l'énergie cinétique et la conservation (ou la variation) de l'énergie mécanique."
+   ],
+   "prerequisites": [
+    "1re-physique-cd-dynamique"
+   ],
+   "exercises": [
+    "1re-physique-cd-en-01",
+    "1re-physique-cd-en-02",
+    "1re-physique-cd-en-03",
+    "1re-physique-cd-en-04",
+    "1re-physique-cd-en-05",
+    "1re-physique-cd-en-06"
+   ],
+   "selfCheck": [
+    "1re-physique-cd-en-q1",
+    "1re-physique-cd-en-q2",
+    "1re-physique-cd-en-q3",
+    "1re-physique-cd-en-q4",
+    "1re-physique-cd-en-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Ce que tu sauras faire",
+     "md": "- Calculer un travail et une puissance.\n- Calculer $E_c$, $E_{pp}$ et $E_m$.\n- Utiliser le théorème de l'énergie cinétique ou la conservation de l'énergie mécanique."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Travail d'une force constante",
+     "md": "Pour une force constante $\\vec F$ dont le point d'application se déplace en ligne droite de A à B :\n$W = F \\times AB \\times \\cos\\theta$ (en joules, J), où $\\theta$ est l'angle entre $\\vec F$ et le déplacement.\n- $W > 0$ : travail **moteur** (θ < 90°) ;\n- $W < 0$ : travail **résistant** (θ > 90°) ;\n- $W = 0$ si la force est perpendiculaire au déplacement."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Travail du poids et d'un frottement",
+     "md": "- Poids : $W = mg\\,(z_A - z_B)$, positif à la descente, négatif à la montée ; il ne dépend pas du chemin suivi (z est l'altitude, axe vers le haut).\n- Frottement d'intensité constante $f$ sur une distance $d$ : $W = -f\\,d$ (résistant).\n- Réaction normale du support : $W = 0$ (perpendiculaire au déplacement)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Puissance",
+     "md": "- Puissance moyenne : $P = \\frac{W}{\\Delta t}$ en watts (W) ; 1 W = 1 J/s.\n- Force constante dans le sens du mouvement à vitesse $v$ : $P = F\\,v$.\n- Énergie électrique consommée : $E = P\\,\\Delta t$ ; 1 kWh = 3,6 × 10⁶ J (c'est l'unité utilisée sur les factures d'électricité)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Énergies cinétique et potentielle",
+     "md": "- Énergie cinétique : $E_c = \\frac{1}{2}\\,m\\,v^2$ (J, avec $m$ en kg et $v$ en m/s).\n- Énergie potentielle de pesanteur : $E_{pp} = m\\,g\\,z$, l'altitude $z$ étant comptée à partir d'un niveau de référence choisi (où $E_{pp} = 0$).\n- Énergie mécanique : $E_m = E_c + E_{pp}$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Théorème de l'énergie cinétique et énergie mécanique",
+     "md": "- **Théorème de l'énergie cinétique** : $\\Delta E_c = E_c(B) - E_c(A) = \\sum W_{AB}(\\vec F)$ (somme des travaux de toutes les forces).\n- Si seul le poids travaille (les autres forces ne travaillent pas), **$E_m$ se conserve**.\n- Avec des frottements, $\\Delta E_m = W(\\vec f) < 0$ : l'énergie mécanique diminue (elle est dissipée en chaleur)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 390,
+      "h": 260,
+      "items": [
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 20,
+        "x2": 150,
+        "y2": 242,
+        "color": "grey",
+        "width": 1,
+        "dash": true
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 38,
+        "r": 8,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 43,
+        "text": "h = 20 m",
+        "size": 13,
+        "color": "ink",
+        "anchor": "end"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 43,
+        "text": "Ec = 0 J ; Epp = 400 J",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 138,
+        "r": 8,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 143,
+        "text": "h = 10 m",
+        "size": 13,
+        "color": "ink",
+        "anchor": "end"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 143,
+        "text": "Ec = 200 J ; Epp = 200 J",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 230,
+        "r": 8,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 235,
+        "text": "h = 0 m",
+        "size": 13,
+        "color": "ink",
+        "anchor": "end"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 235,
+        "text": "Ec = 400 J ; Epp = 0 J",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 244,
+        "x2": 370,
+        "y2": 244,
+        "color": "ink",
+        "width": 2
+       }
+      ]
+     },
+     "caption": "Chute d'une balle de 2 kg lâchée de 20 m (g = 10 N/kg) : l'énergie potentielle se transforme en énergie cinétique, la somme (400 J) reste constante.",
+     "alt": "Une balle représentée à trois hauteurs le long d'une verticale : à 20 m elle a 0 J d'énergie cinétique et 400 J d'énergie potentielle, à 10 m 200 J et 200 J, au sol 400 J et 0 J."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : choisir le bon outil",
+     "md": "- Une question sur la **vitesse** ou la **hauteur** entre deux positions : énergie (théorème de l'énergie cinétique ou conservation de $E_m$), sans passer par le temps.\n- Une question sur le **temps** ou l'accélération : 2e loi de Newton.\n- Toujours : choisir le système, faire le bilan des forces et dire lesquelles travaillent."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : jet vertical",
+     "statement": "Une pierre de 0,5 kg est lancée verticalement vers le haut à 12 m/s (g = 10 N/kg, frottements de l'air négligés). Calcule la hauteur maximale atteinte.",
+     "steps": [
+      {
+       "md": "Seul le poids travaille : l'énergie mécanique se conserve entre le lancement (z = 0) et le sommet (v = 0) :",
+       "tex": "\\frac{1}{2}mv_0^2 + 0 = 0 + mgh"
+      },
+      {
+       "md": "La masse se simplifie :",
+       "tex": "h = \\frac{v_0^2}{2g} = \\frac{12^2}{2 \\times 10} = 7{,}2\\ \\text{m}"
+      }
+     ],
+     "answer": "**h = 7,2 m.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : freinage d'une voiture",
+     "statement": "Une voiture de 1 000 kg roulant à 20 m/s s'arrête sur 40 m sur route horizontale. Calcule la valeur de la force de freinage supposée constante.",
+     "steps": [
+      {
+       "md": "Variation d'énergie cinétique :",
+       "tex": "\\Delta E_c = 0 - \\frac{1}{2} \\times 1000 \\times 20^2 = -200\\,000\\ \\text{J}"
+      },
+      {
+       "md": "Seule la force de freinage travaille (poids et réaction : travail nul), avec $W = -f \\times d$. Théorème de l'énergie cinétique :",
+       "tex": "-f \\times 40 = -200\\,000"
+      },
+      {
+       "md": "Donc :",
+       "tex": "f = 5\\,000\\ \\text{N}"
+      }
+     ],
+     "answer": "**f = 5 000 N.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier le $\\cos\\theta$ dans $W = Fd\\cos\\theta$ ; confondre l'angle de la force avec l'angle de la pente.\n- Écrire $E_c = mv^2/2$ avec $v$ en km/h : toujours en m/s.\n- Oublier que le travail d'un frottement est **négatif**.\n- Dire que l'énergie mécanique se conserve alors qu'il y a des frottements.\n- Confondre watt (puissance) et watt-heure ou joule (énergie)."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-physique-cd-en-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-physique-cd-en-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-physique-cd-en-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Un appareil de 1 200 W qui fonctionne 2 h consomme 2,4 kWh : c'est ce que mesure le compteur d'électricité.",
+      "Le théorème de l'énergie cinétique reste valable même avec des frottements : il suffit d'inclure leur travail dans la somme."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier si l'énergie potentielle élastique (ressort) est au programme de 1re C/D : elle n'est pas traitée ici.",
+    "Vérifier si le travail est défini par le produit scalaire W = F·AB (notation vectorielle) dans le programme officiel.",
+    "Tarif d'électricité : valeur fictive (100 FCFA/kWh), à ne pas confondre avec les tarifs réels."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "1re-physique-cd-en-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-energie",
+   "prompt": "Une force de 50 N fait un angle de 60° avec le déplacement de son point d'application, de 12 m. Calcule son travail (en J).",
+   "answer": 300,
+   "tolerance": 0.01,
+   "unit": "J",
+   "explanation": "$W = Fd\\cos\\theta = 50 \\times 12 \\times 0{,}5 = 300$ J.",
+   "method": "$W = Fd\\cos\\theta$ ; $\\cos 60\\degree = 0{,}5$.",
+   "mistakes": [
+    "Oublier le cosinus (600 J)."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-physique-cd-en-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-energie",
+   "prompt": "Calcule l'énergie cinétique d'un véhicule de 800 kg roulant à 15 m/s (en J).",
+   "answer": 90000,
+   "tolerance": 0,
+   "unit": "J",
+   "explanation": "$E_c = \\frac{1}{2}mv^2 = 0{,}5 \\times 800 \\times 225 = 90\\,000$ J.",
+   "method": "$E_c = \\frac{1}{2}mv^2$, v en m/s.",
+   "mistakes": [
+    "Oublier de mettre v au carré (6 000 J)."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-physique-cd-en-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-energie",
+   "prompt": "Un ouvrier monte un sac de 30 kg d'une hauteur de 2 m en 5 s à vitesse constante (g = 10 N/kg). Calcule la puissance moyenne de la force qu'il exerce (en W).",
+   "answer": 120,
+   "tolerance": 0,
+   "unit": "W",
+   "explanation": "Le travail à fournir est $mgh = 30 \\times 10 \\times 2 = 600$ J ; $P = \\frac{600}{5} = 120$ W.",
+   "method": "$P = W/\\Delta t$ avec $W = mgh$.",
+   "mistakes": [
+    "Oublier de diviser par la durée (600 W)."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-physique-cd-en-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "1re-physique-cd-energie",
+   "prompt": "Un enfant de 30 kg part du repos en haut d'un toboggan de hauteur 2,5 m. Les frottements sont négligés (g = 10 N/kg). Calcule sa vitesse au pied du toboggan (m/s, arrondie au centième).",
+   "answer": 7.07,
+   "tolerance": 0.01,
+   "unit": "m/s",
+   "explanation": "Seul le poids travaille : $\\frac{1}{2}mv^2 = mgh$, donc $v = \\sqrt{2gh} = \\sqrt{50} \\approx 7{,}07$ m/s. La masse n'intervient pas.",
+   "method": "Conservation de l'énergie mécanique.",
+   "mistakes": [
+    "Garder la masse dans la formule alors qu'elle se simplifie."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-physique-cd-en-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "1re-physique-cd-energie",
+   "prompt": "Un fer à repasser de 1 200 W fonctionne 2 h par jour pendant 30 jours. Avec un tarif fictif de 100 FCFA le kWh, calcule le coût de l'électricité consommée (en FCFA).",
+   "answer": 7200,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "$E = 1{,}2\\ \\text{kW} \\times 60\\ \\text{h} = 72$ kWh ; coût = $72 \\times 100 = 7\\,200$ FCFA.",
+   "method": "$E = P\\Delta t$ avec P en kW et t en h.",
+   "mistakes": [
+    "Garder la puissance en watts et trouver 72 000."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-physique-cd-en-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "1re-physique-cd-energie",
+   "prompt": "Un solide de 2 kg, lâché sans vitesse en haut d'un plan incliné de 30° et de longueur 5 m, glisse avec une force de frottement constante de 4 N (g = 10 N/kg).",
+   "method": "Hauteur, travaux des forces qui travaillent, théorème de l'énergie cinétique.",
+   "mistakes": [
+    "Compter le travail de la réaction normale.",
+    "Donner un signe positif au travail de frottement."
+   ],
+   "source": "Exercice original, style Probatoire C/D",
+   "parts": [
+    {
+     "id": "1re-physique-cd-en-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la hauteur du point de départ au-dessus du bas du plan (en m).",
+     "answer": 2.5,
+     "tolerance": 0,
+     "unit": "m",
+     "explanation": "$h = L\\sin 30\\degree = 5 \\times 0{,}5 = 2{,}5$ m."
+    },
+    {
+     "id": "1re-physique-cd-en-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le travail du poids pendant la descente (en J).",
+     "answer": 50,
+     "tolerance": 0,
+     "unit": "J",
+     "explanation": "$W(\\vec P) = mgh = 2 \\times 10 \\times 2{,}5 = 50$ J."
+    },
+    {
+     "id": "1re-physique-cd-en-06-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le travail de la force de frottement (en J, signe compris).",
+     "answer": -20,
+     "tolerance": 0,
+     "unit": "J",
+     "explanation": "$W(\\vec f) = -f \\times L = -4 \\times 5 = -20$ J (travail résistant)."
+    },
+    {
+     "id": "1re-physique-cd-en-06-d",
+     "kind": "numeric",
+     "points": 3,
+     "prompt": "Par le théorème de l'énergie cinétique, calcule la vitesse au bas du plan (m/s, arrondie au centième).",
+     "answer": 5.48,
+     "tolerance": 0.01,
+     "unit": "m/s",
+     "explanation": "La réaction normale ne travaille pas : $\\frac{1}{2}mv^2 = 50 - 20 = 30$ J, donc $v^2 = 30$ et $v \\approx 5{,}48$ m/s."
+    }
+   ]
+  },
+  {
+   "id": "1re-physique-cd-en-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-energie",
+   "prompt": "Le travail d'une force perpendiculaire au déplacement est :",
+   "choices": [
+    "nul",
+    "positif",
+    "négatif",
+    "égal à $F \\times d$"
+   ],
+   "answer": 0,
+   "explanation": "$\\cos 90\\degree = 0$ donc $W = 0$ : c'est le cas de la réaction normale d'un support horizontal."
+  },
+  {
+   "id": "1re-physique-cd-en-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-energie",
+   "prompt": "Une masse de 4 kg se déplace à 3 m/s. Son énergie cinétique vaut :",
+   "choices": [
+    "12 J",
+    "18 J",
+    "36 J",
+    "6 J"
+   ],
+   "answer": 1,
+   "explanation": "$\\frac{1}{2} \\times 4 \\times 9 = 18$ J."
+  },
+  {
+   "id": "1re-physique-cd-en-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-energie",
+   "prompt": "L'énergie mécanique d'un solide qui n'est soumis qu'à son poids :",
+   "choices": [
+    "augmente toujours",
+    "diminue toujours",
+    "se conserve",
+    "est nulle"
+   ],
+   "answer": 2,
+   "explanation": "Dans ce cas, $E_c$ et $E_{pp}$ varient mais leur somme est constante."
+  },
+  {
+   "id": "1re-physique-cd-en-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-energie",
+   "prompt": "Une puissance de 500 W pendant 10 s représente une énergie de :",
+   "choices": [
+    "50 J",
+    "5 J",
+    "510 J",
+    "5 000 J"
+   ],
+   "answer": 3,
+   "explanation": "$E = P\\Delta t = 500 \\times 10 = 5\\,000$ J."
+  },
+  {
+   "id": "1re-physique-cd-en-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-energie",
+   "prompt": "Le travail du poids d'un solide qui monte d'une hauteur h est :",
+   "choices": [
+    "$-mgh$",
+    "$+mgh$",
+    "0",
+    "$mg/h$"
+   ],
+   "answer": 0,
+   "explanation": "À la montée, le poids s'oppose au déplacement : travail résistant, $-mgh$."
+  }
+ ]
+}

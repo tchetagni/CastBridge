@@ -1,0 +1,809 @@
+{
+ "chapter": "tle-svt-d-ch-geologie",
+ "lessons": [
+  {
+   "id": "tle-svt-d-geologie",
+   "title": "Géologie : datation, évolution, phénomènes géologiques et ressources",
+   "minutes": 40,
+   "programRef": "Tle D — Géologie (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale, brouillon IA ; à relire par un enseignant",
+   "objectives": [
+    "Appliquer les principes de la datation relative.",
+    "Calculer un âge avec la demi-vie.",
+    "Décrire les grands phénomènes de la tectonique.",
+    "Citer des familles de roches et des ressources du Cameroun."
+   ],
+   "exercises": [
+    "tle-svt-d-geologie-01",
+    "tle-svt-d-geologie-02",
+    "tle-svt-d-geologie-03",
+    "tle-svt-d-geologie-04",
+    "tle-svt-d-geologie-05",
+    "tle-svt-d-geologie-06"
+   ],
+   "selfCheck": [
+    "tle-svt-d-geo-q1",
+    "tle-svt-d-geo-q2",
+    "tle-svt-d-geo-q3",
+    "tle-svt-d-geo-q4",
+    "tle-svt-d-geo-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Objectifs",
+     "md": "Dater des roches et des événements (méthodes relative et absolue) ; calculer un âge avec la demi-vie ; décrire les grands phénomènes liés à la tectonique des plaques ; connaître les principaux types de roches et quelques ressources du Cameroun."
+    },
+    {
+     "type": "heading",
+     "text": "1. Datation relative"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Principes de la datation relative",
+     "md": "- **Superposition** : dans une série non déformée, une couche est **plus récente** que celle qu'elle recouvre.\n- **Recoupement** : une structure (faille, filon, intrusion) est **postérieure** aux roches qu'elle coupe.\n- **Continuité** : une couche a le même âge sur toute son étendue.\n- **Fossiles stratigraphiques** : fossiles d'espèces qui ont vécu peu de temps et sur une grande étendue : ils permettent de dater et de corréler les couches."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "rect",
+        "x": 50,
+        "y": 160,
+        "w": 300,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 50,
+        "y": 120,
+        "w": 300,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 50,
+        "y": 80,
+        "w": 300,
+        "h": 40,
+        "fill": "lightgreen",
+        "stroke": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 190,
+        "y": 120,
+        "w": 26,
+        "h": 80,
+        "fill": "grey",
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 186,
+        "text": "couche A",
+        "size": 13
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 146,
+        "text": "couche B",
+        "size": 13
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 106,
+        "text": "couche C",
+        "size": 13
+       },
+       {
+        "t": "text",
+        "x": 203,
+        "y": 222,
+        "text": "D",
+        "size": 14,
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 146,
+        "text": "filon D",
+        "size": 13
+       }
+      ]
+     },
+     "caption": "Coupe géologique simple : trois couches A, B, C et un filon D.",
+     "alt": "Trois couches horizontales superposées : A en bas, B au milieu, C en haut. Un filon gris vertical traverse A et B et s'arrête à la base de C."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : ordre chronologique",
+     "statement": "Sur la coupe : A en bas, B au milieu, C en haut ; le filon D traverse A et B mais ne traverse pas C. Classe A, B, C et D du plus ancien au plus récent.",
+     "steps": [
+      {
+       "md": "Superposition (série non déformée) : A est plus ancienne que B, elle-même plus ancienne que C."
+      },
+      {
+       "md": "Recoupement : D traverse A et B donc D est **postérieur** à A et B."
+      },
+      {
+       "md": "D ne traverse pas C : C s'est déposée **après** D."
+      }
+     ],
+     "answer": "Ordre : **A, puis B, puis D, puis C**."
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-svt-d-geologie-01"
+    },
+    {
+     "type": "heading",
+     "text": "2. Datation absolue"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Radioactivité et demi-vie",
+     "md": "Un isotope radioactif se désintègre au hasard, mais à une vitesse **caractéristique**. La **demi-vie T** est la durée au bout de laquelle la moitié des noyaux radioactifs d'un échantillon s'est désintégrée ; elle ne dépend ni de la quantité ni des conditions chimiques. Après n demi-vies, il reste $\\frac{1}{2^n}$ de l'isotope initial."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Loi de décroissance et âge",
+     "md": "N est la quantité restante, $N_0$ la quantité initiale, t l'âge :",
+     "tex": "N = N_0 \\left(\\frac{1}{2}\\right)^{t/T} \\quad \\Rightarrow \\quad t = T \\times \\frac{\\ln(N_0/N)}{\\ln 2}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "unit": "%",
+      "w": 420,
+      "h": 240,
+      "bars": [
+       {
+        "label": "0",
+        "value": 100,
+        "color": "blue"
+       },
+       {
+        "label": "1 T",
+        "value": 50,
+        "color": "blue"
+       },
+       {
+        "label": "2 T",
+        "value": 25,
+        "color": "blue"
+       },
+       {
+        "label": "3 T",
+        "value": 12.5,
+        "color": "blue"
+       },
+       {
+        "label": "4 T",
+        "value": 6.25,
+        "color": "blue"
+       }
+      ]
+     },
+     "caption": "Proportion restante de l'isotope radioactif après 0, 1, 2, 3 et 4 demi-vies (T = demi-vie).",
+     "alt": "Cinq barres qui diminuent de moitié à chaque demi-vie : 100 %, 50 %, 25 %, 12,5 % et 6,25 %."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : calcul d'un âge",
+     "statement": "Fictif : l'isotope X a une demi-vie de 8 000 ans. Un échantillon contient aujourd'hui 12,5 % de la quantité initiale de X. Quel âge a-t-il ? Même question avec 20 %.",
+     "steps": [
+      {
+       "md": "12,5 % = 1/8 = (1/2)³ : trois demi-vies se sont écoulées.",
+       "tex": "t = 3 \\times 8000 = 24000 \\text{ ans}"
+      },
+      {
+       "md": "Pour 20 % : N/N₀ = 0,2 donc N₀/N = 5 :",
+       "tex": "t = 8000 \\times \\frac{\\ln 5}{\\ln 2} \\approx 18\\,575 \\text{ ans}"
+      }
+     ],
+     "answer": "**24 000 ans** pour 12,5 % ; environ **18 600 ans** pour 20 % (vérifié par calcul)."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Limites",
+     "md": "Chaque isotope convient à une **plage d'âges** : après 8 à 10 demi-vies, il reste trop peu de noyaux pour mesurer. Le choix de l'isotope dépend de l'âge attendu de l'échantillon. Les demi-vies réelles sont données dans l'énoncé ou le manuel : ici nous utilisons des valeurs **fictives**."
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-svt-d-geologie-02"
+    },
+    {
+     "type": "heading",
+     "text": "3. Tectonique, roches et ressources"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Plaques et phénomènes",
+     "md": "La **lithosphère** est découpée en plaques rigides qui bougent sur l'asthénosphère. Aux limites en **divergence** (dorsales, rifts comme le rift est-africain), de nouveau matériau se forme ; aux limites en **convergence** (subduction ou collision), on trouve séismes, volcans et montagnes ; aux limites en **coulissage**, séismes. Séismes et volcans sont **concentrés** près des limites de plaques ; certains volcans se trouvent loin d'elles (volcans de « points chauds »)."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Trois familles de roches",
+     "md": "- **Magmatiques** : refroidissement d'un magma (basalte en surface, granite en profondeur).\n- **Sédimentaires** : accumulation et durcissement de sédiments (grès, calcaire) ; elles contiennent des **fossiles**.\n- **Métamorphiques** : roches transformées à l'état solide par la pression et la température (gneiss, marbre)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Quelques ressources du Cameroun (à vérifier)",
+     "md": "Le Cameroun compte notamment : du **pétrole** et du gaz (bassin côtier, région de Limbé et de Douala), de la **bauxite** (Adamaoua), du **minerai de fer** (Sud-Est), de l'**or** (Est), du **calcaire** (pour le ciment, notamment au Nord) et un important potentiel **hydroélectrique** (fleuve Sanaga). Le **mont Cameroun** est un volcan actif de la ligne volcanique du Cameroun."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Dater une couche d'une série **renversée** par superposition sans vérifier la déformation.\n- Dire que la demi-vie dépend de la masse de l'échantillon.\n- Croire qu'après **deux** demi-vies il ne reste plus rien : il reste 1/4.\n- Confondre âge relatif (« plus ancien que ») et âge absolu (« 24 000 ans »)."
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-svt-d-geologie-03"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Évolution : les fossiles montrent que les espèces changent au cours du temps ; les parentés entre espèces actuelles et fossiles s'expliquent par l'évolution, dont la sélection naturelle (Darwin, 1859) est un mécanisme majeur.",
+      "Un récit de catastrophe naturelle ne se résume pas à un chiffre : le Cameroun a connu des catastrophes volcaniques et gazeuses (lacs de cratère) qui font l'objet d'une surveillance scientifique."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Les demi-vies sont fictives ; les valeurs réelles (carbone 14, uranium-plomb, potassium-argon) doivent être celles du manuel.",
+    "Ressources du Cameroun : aucune donnée chiffrée ; localisations à vérifier par un enseignant ou une source officielle.",
+    "Le volet « évolution biologique » (sélection naturelle, fossiles de transition, hominisation) est à vérifier par rapport au programme de Tle D et n'est que survolé ici."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "tle-svt-d-geologie-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-geologie",
+   "prompt": "Dans une série sédimentaire non déformée, la couche la plus ancienne est :",
+   "choices": [
+    "Celle du bas",
+    "Celle du haut",
+    "Celle du milieu",
+    "On ne peut pas savoir"
+   ],
+   "answer": 0,
+   "explanation": "D'après le principe de superposition, chaque couche est déposée sur les plus anciennes.",
+   "method": "Principe de superposition.",
+   "mistakes": [
+    "Confondre avec la couche la plus épaisse."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-svt-d-geologie-02",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "lesson": "tle-svt-d-geologie",
+   "prompt": "Associe chaque type de limite de plaques à son exemple.",
+   "pairs": [
+    [
+     "Divergence",
+     "Rift est-africain"
+    ],
+    [
+     "Convergence avec subduction",
+     "Plaque océanique plongeant sous une autre"
+    ],
+    [
+     "Coulissage",
+     "Plaques qui glissent l'une contre l'autre"
+    ],
+    [
+     "Point chaud",
+     "Volcan loin d'une limite de plaques"
+    ]
+   ],
+   "explanation": "Une divergence crée de la lithosphère (rift, dorsale) ; une subduction fait plonger une plaque ; un coulissage est un glissement latéral ; un point chaud est une source de magma indépendante des limites.",
+   "method": "Relier chaque contexte à son mouvement.",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-svt-d-geologie-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-geologie",
+   "prompt": "La demi-vie d'un isotope radioactif augmente quand on a plus d'atomes au départ.",
+   "answer": false,
+   "explanation": "La demi-vie est une constante de l'isotope ; elle ne dépend pas de la quantité de noyaux.",
+   "method": "Demi-vie = propriété de l'isotope.",
+   "mistakes": [
+    "Penser qu'une grosse masse met plus de temps à perdre la moitié de ses noyaux."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-svt-d-geologie-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 1,
+   "points": 2,
+   "lesson": "tle-svt-d-geologie",
+   "prompt": "Fictif : un isotope a une demi-vie de 8 000 ans. Quel pourcentage de l'isotope initial reste-t-il après 24 000 ans ?",
+   "answer": 12.5,
+   "tolerance": 0.01,
+   "unit": "%",
+   "explanation": "24 000 ÷ 8 000 = 3 demi-vies : 100 → 50 → 25 → 12,5 %.",
+   "method": "Nombre de demi-vies = t ÷ T ; diviser par 2 à chaque demi-vie.",
+   "mistakes": [
+    "Diviser par 3 au lieu de diviser trois fois par 2."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-svt-d-geologie-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "tle-svt-d-geologie",
+   "prompt": "Même isotope (T = 8 000 ans). Un échantillon contient 20 % de la quantité initiale. Quel est son âge, arrondi à la centaine d'années près ?",
+   "answer": 18600,
+   "tolerance": 50,
+   "unit": "ans",
+   "explanation": "t = 8 000 × ln 5 ÷ ln 2 ≈ 8 000 × 2,3219 ≈ 18 575 ans, soit environ 18 600 ans.",
+   "method": "t = T × ln(N₀/N) ÷ ln 2.",
+   "mistakes": [
+    "Répondre 16 000 (deux demi-vies) : après deux demi-vies il reste 25 %, pas 20 %."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-svt-d-geologie-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "tle-svt-d-geologie",
+   "prompt": "Fictif : dans une coupe, une coulée de lave L repose sur une couche sédimentaire S1 qui contient un fossile F ; elle est elle-même recouverte par une couche S2. L'étude de la lave L montre qu'il reste 25 % de son isotope radioactif X d'origine. La demi-vie de X est de 2,0 millions d'années (valeur fictive).",
+   "parts": [
+    {
+     "id": "tle-svt-d-geologie-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Combien de demi-vies se sont écoulées depuis la formation de la lave ?",
+     "answer": 2,
+     "tolerance": 0,
+     "explanation": "Il reste 25 % = 1/4 = (1/2)² : deux demi-vies."
+    },
+    {
+     "id": "tle-svt-d-geologie-06-b",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Quel est l'âge de la lave, en millions d'années ?",
+     "answer": 4,
+     "tolerance": 0.05,
+     "unit": "millions d'années",
+     "explanation": "2 demi-vies × 2,0 millions d'années = 4,0 millions d'années."
+    },
+    {
+     "id": "tle-svt-d-geologie-06-c",
+     "kind": "mcq",
+     "points": 1.5,
+     "prompt": "Que peut-on affirmer sur les couches S1 et S2 ?",
+     "choices": [
+      "S1 et S2 ont exactement 4,0 millions d'années",
+      "S1 est plus ancienne que 4,0 millions d'années, S2 est plus récente",
+      "S1 est plus récente que la lave",
+      "S2 est plus ancienne que S1"
+     ],
+     "answer": 1,
+     "explanation": "La lave repose sur S1 (S1 plus ancienne) et est recouverte par S2 (S2 plus récente) : superposition."
+    },
+    {
+     "id": "tle-svt-d-geologie-06-d",
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explique pourquoi le fossile F peut servir de fossile stratigraphique pour dater d'autres couches.",
+     "model": "Si l'espèce de F a vécu pendant une courte période et sur une vaste zone géographique, la présence de F dans une couche indique que celle-ci date de cette période. On peut alors dater et comparer des couches éloignées qui contiennent F.",
+     "rubric": [
+      "Courte durée d'existence de l'espèce",
+      "Grande extension géographique",
+      "Corrélation de couches éloignées"
+     ],
+     "explanation": "Un bon fossile stratigraphique est de courte durée de vie et très répandu."
+    }
+   ],
+   "method": "Calculer le nombre de demi-vies, puis combiner datation absolue et relative.",
+   "mistakes": [
+    "Dire que S1 a le même âge que la lave."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-svt-d-geo-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-geologie",
+   "prompt": "Un filon qui traverse deux couches est :",
+   "choices": [
+    "plus ancien que ces couches",
+    "du même âge",
+    "plus récent que ces couches",
+    "impossible à situer"
+   ],
+   "answer": 2,
+   "explanation": "Principe de recoupement."
+  },
+  {
+   "id": "tle-svt-d-geo-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-geologie",
+   "prompt": "Après 2 demi-vies, il reste :",
+   "choices": [
+    "1/2",
+    "1/3",
+    "aucun noyau",
+    "1/4 de l'isotope initial"
+   ],
+   "answer": 3,
+   "explanation": "(1/2)² = 1/4."
+  },
+  {
+   "id": "tle-svt-d-geo-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-geologie",
+   "prompt": "Un granite est une roche :",
+   "choices": [
+    "magmatique",
+    "sédimentaire",
+    "métamorphique",
+    "organique"
+   ],
+   "answer": 0,
+   "explanation": "Il résulte du refroidissement lent d'un magma."
+  },
+  {
+   "id": "tle-svt-d-geo-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-geologie",
+   "prompt": "Une limite de plaques où deux plaques s'écartent est :",
+   "choices": [
+    "une subduction",
+    "une divergence",
+    "un coulissage",
+    "un point chaud"
+   ],
+   "answer": 1,
+   "explanation": "Les dorsales et les rifts sont des divergences."
+  },
+  {
+   "id": "tle-svt-d-geo-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-geologie",
+   "prompt": "Un fossile stratigraphique est caractérisé par :",
+   "choices": [
+    "une longue durée de vie et une répartition locale",
+    "une grande taille",
+    "une courte durée de vie et une large répartition",
+    "une origine végétale uniquement"
+   ],
+   "answer": 2,
+   "explanation": "Il permet des datations précises et des corrélations."
+  },
+  {
+   "id": "tle-svt-d-blanc-ex1",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 1,
+   "lesson": "tle-svt-d-glycemie",
+   "prompt": "Exercice 1 — Restitution des connaissances. Réponds aux trois questions.",
+   "parts": [
+    {
+     "id": "tle-svt-d-blanc-ex1-a",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle hormone abaisse la glycémie ?",
+     "choices": [
+      "Le glucagon",
+      "L'adrénaline",
+      "La LH",
+      "L'insuline"
+     ],
+     "answer": 3,
+     "explanation": "L'insuline, sécrétée par les cellules β des îlots de Langerhans, est la seule hormone hypoglycémiante."
+    },
+    {
+     "id": "tle-svt-d-blanc-ex1-b",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "La pilule œstroprogestative empêche l'ovulation parce qu'elle :",
+     "choices": [
+      "exerce un rétrocontrôle négatif sur la sécrétion de FSH et de LH",
+      "détruit les spermatozoïdes",
+      "empêche la fécondation dans le vagin",
+      "stimule le pic de LH"
+     ],
+     "answer": 0,
+     "explanation": "Les hormones de la pilule freinent l'hypophyse : pas de maturation folliculaire, pas de pic de LH."
+    },
+    {
+     "id": "tle-svt-d-blanc-ex1-c",
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "Une couche traversée par un filon est plus récente que le filon.",
+     "answer": false,
+     "explanation": "Faux : le filon recoupe la couche, il est donc postérieur ; la couche est plus ancienne."
+    }
+   ],
+   "method": "Restitution : une notion par thème.",
+   "mistakes": [
+    "Confondre recoupement et superposition."
+   ],
+   "source": "Exercice original, style Bac D"
+  },
+  {
+   "id": "tle-svt-d-blanc-ex2",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "tle-svt-d-neuro",
+   "prompt": "Exercice 2 — Neurophysiologie (données fictives). On stimule un nerf isolé de grenouille avec des chocs d'intensité croissante et on enregistre l'amplitude du potentiel d'action (PA) : 0,5 V et 1,0 V : aucun PA ; 2 V : PA de 100 mV ; 4 V : PA de 100 mV ; 8 V : PA de 100 mV. Deux électrodes réceptrices, distantes de 15 cm, enregistrent le PA avec un décalage de 3,0 ms.",
+   "parts": [
+    {
+     "id": "tle-svt-d-blanc-ex2-a",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Que montrent ces résultats ?",
+     "choices": [
+      "L'amplitude du PA augmente avec l'intensité",
+      "Un seuil entre 1 et 2 V et l'amplitude constante (loi du tout ou rien)",
+      "Le PA n'existe jamais",
+      "Le seuil est de 8 V"
+     ],
+     "answer": 1,
+     "explanation": "Aucun PA à 1 V, un PA à 2 V : le seuil est entre 1 et 2 V. Au-dessus, l'amplitude reste de 100 mV : tout ou rien."
+    },
+    {
+     "id": "tle-svt-d-blanc-ex2-b",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule la vitesse de conduction (en m/s).",
+     "answer": 50,
+     "tolerance": 0.5,
+     "unit": "m/s",
+     "explanation": "v = 0,15 m ÷ 0,0030 s = 50 m/s."
+    },
+    {
+     "id": "tle-svt-d-blanc-ex2-c",
+     "kind": "open",
+     "points": 1.5,
+     "prompt": "Une substance bloque les récepteurs de l'acétylcholine sur le muscle. Explique pourquoi le muscle ne se contracte plus alors que le nerf conduit toujours.",
+     "model": "Le PA arrive à la terminaison et l'acétylcholine est libérée, mais elle ne peut pas se fixer sur les récepteurs bloqués : aucun signal n'est créé dans la fibre musculaire, donc pas de contraction. Le blocage est synaptique.",
+     "rubric": [
+      "Libération normale du neuromédiateur",
+      "Récepteurs bloqués",
+      "Pas de signal postsynaptique : blocage à la synapse"
+     ],
+     "explanation": "On localise le blocage à la synapse neuromusculaire."
+    }
+   ],
+   "method": "Interpréter les enregistrements, calculer, puis expliquer un blocage.",
+   "mistakes": [
+    "Utiliser 15 cm sans conversion en mètres."
+   ],
+   "source": "Exercice original, style Bac D"
+  },
+  {
+   "id": "tle-svt-d-blanc-ex3",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "tle-svt-d-genetique",
+   "prompt": "Exercice 3 — Génétique humaine. Un père de groupe sanguin A (génotype AO), Rhésus positif (Dd), et une mère de groupe B (génotype BO), Rhésus négatif (dd), attendent un enfant. Les deux gènes sont indépendants.",
+   "parts": [
+    {
+     "id": "tle-svt-d-blanc-ex3-a",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quels phénotypes ABO peut avoir l'enfant ?",
+     "choices": [
+      "Seulement AB",
+      "Seulement A ou B",
+      "A, B, AB ou O",
+      "Seulement O"
+     ],
+     "answer": 2,
+     "explanation": "Gamètes du père : A ou O ; de la mère : B ou O. Combinaisons AB, AO (A), BO (B) et OO (O)."
+    },
+    {
+     "id": "tle-svt-d-blanc-ex3-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Probabilité (en %) que l'enfant soit de groupe O ?",
+     "answer": 25,
+     "tolerance": 0,
+     "unit": "%",
+     "explanation": "Seule la combinaison OO : 1/4 = 25 %."
+    },
+    {
+     "id": "tle-svt-d-blanc-ex3-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Probabilité (en %) que l'enfant soit Rhésus négatif ?",
+     "answer": 50,
+     "tolerance": 0,
+     "unit": "%",
+     "explanation": "Père Dd × mère dd : l'enfant est Dd ou dd avec une probabilité 1/2 chacun : Rh− avec 50 %."
+    },
+    {
+     "id": "tle-svt-d-blanc-ex3-d",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Probabilité (en %, arrondie au dixième) que l'enfant soit à la fois de groupe O et Rhésus négatif ?",
+     "answer": 12.5,
+     "tolerance": 0.1,
+     "unit": "%",
+     "explanation": "Gènes indépendants : 1/4 × 1/2 = 1/8 = 12,5 %."
+    },
+    {
+     "id": "tle-svt-d-blanc-ex3-e",
+     "kind": "open",
+     "points": 1,
+     "prompt": "Si l'enfant est Rh+, pourquoi un suivi médical est-il important pour la mère ?",
+     "model": "La mère est Rh− : après l'accouchement d'un enfant Rh+, elle peut fabriquer des anticorps anti-Rh+. Lors d'une grossesse suivante avec un enfant Rh+, ils peuvent traverser le placenta et attaquer ses globules rouges. Un suivi et un traitement préventif existent.",
+     "rubric": [
+      "Mère Rh−, enfant Rh+",
+      "Anticorps fabriqués après la première grossesse",
+      "Risque pour une grossesse suivante, suivi médical"
+     ],
+     "explanation": "Le suivi médical permet de prévenir l'immunisation Rhésus."
+    }
+   ],
+   "method": "Énumérer les gamètes, puis multiplier les probabilités de gènes indépendants.",
+   "mistakes": [
+    "Additionner au lieu de multiplier pour deux caractères indépendants."
+   ],
+   "source": "Exercice original, style Bac D"
+  },
+  {
+   "id": "tle-svt-d-blanc-ex4",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "tle-svt-d-immuno",
+   "prompt": "Exercice 4 — Immunologie (données fictives). Vingt souris du lot 1, vaccinées avec une anatoxine X, et vingt souris du lot 2, non vaccinées, reçoivent la toxine X correspondante. 18 souris du lot 1 survivent et aucune du lot 2. Le sérum d'une souris du lot 1 est injecté à vingt souris du lot 3, non vaccinées : 17 survivent à la toxine X.",
+   "parts": [
+    {
+     "id": "tle-svt-d-blanc-ex4-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quel est le pourcentage de survie dans le lot 1 ?",
+     "answer": 90,
+     "tolerance": 0,
+     "unit": "%",
+     "explanation": "18 ÷ 20 = 0,90, soit 90 %."
+    },
+    {
+     "id": "tle-svt-d-blanc-ex4-b",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Que montre le résultat du lot 3 ?",
+     "choices": [
+      "L'immunité ne dépend d'aucune molécule",
+      "Le sérum contient la toxine",
+      "Le lot 3 a été vacciné",
+      "Le sérum contient des anticorps protecteurs : immunité humorale"
+     ],
+     "answer": 3,
+     "explanation": "Le sérum d'animaux vaccinés protège des animaux non vaccinés : il contient des anticorps anti-toxine."
+    },
+    {
+     "id": "tle-svt-d-blanc-ex4-c",
+     "kind": "open",
+     "points": 2,
+     "prompt": "Compare la protection du lot 1 (vaccin) à celle du lot 3 (sérum) en durée et en rapidité.",
+     "model": "Le vaccin du lot 1 stimule la production d'anticorps et de cellules mémoire : protection longue mais qui met du temps à s'installer. Le sérum du lot 3 apporte des anticorps déjà prêts : protection immédiate mais de courte durée, car l'organisme ne les fabrique pas lui-même.",
+     "rubric": [
+      "Vaccin : durable, lent à s'installer, mémoire",
+      "Sérum : immédiat, temporaire, anticorps prêts"
+     ],
+     "explanation": "Vaccin et sérum se distinguent par la mémoire immunitaire et la durée de protection."
+    }
+   ],
+   "method": "Calculer des taux de survie, puis interpréter le transfert de sérum.",
+   "mistakes": [
+    "Confondre vaccin et sérum."
+   ],
+   "source": "Exercice original, style Bac D"
+  },
+  {
+   "id": "tle-svt-d-blanc-ex5",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "tle-svt-d-geologie",
+   "prompt": "Exercice 5 — Datation (données fictives). Une roche R contient encore 12,5 % de son isotope radioactif Y d'origine ; la demi-vie de Y vaut 5 millions d'années. Un filon F recoupe R. Une couche sédimentaire S recouvre R mais n'est pas traversée par F.",
+   "parts": [
+    {
+     "id": "tle-svt-d-blanc-ex5-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Combien de demi-vies se sont écoulées depuis la formation de R ?",
+     "answer": 3,
+     "tolerance": 0,
+     "explanation": "12,5 % = 1/8 = (1/2)³ : trois demi-vies."
+    },
+    {
+     "id": "tle-svt-d-blanc-ex5-b",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Quel est l'âge de R en millions d'années ?",
+     "answer": 15,
+     "tolerance": 0.1,
+     "unit": "millions d'années",
+     "explanation": "3 × 5 = 15 millions d'années."
+    },
+    {
+     "id": "tle-svt-d-blanc-ex5-c",
+     "kind": "mcq",
+     "points": 1.5,
+     "prompt": "Que peut-on dire de F par rapport à R et S ?",
+     "choices": [
+      "F est postérieur à R et antérieur à S",
+      "F est antérieur à R et postérieur à S",
+      "F a exactement 15 millions d'années",
+      "F est antérieur à R et à S"
+     ],
+     "answer": 0,
+     "explanation": "F recoupe R : il est plus récent que R. S recouvre la structure sans être coupée : elle est postérieure à F."
+    }
+   ],
+   "method": "Calcul d'âge puis datation relative.",
+   "mistakes": [
+    "Dater F à 15 millions d'années alors qu'il est plus récent que R."
+   ],
+   "source": "Exercice original, style Bac D"
+  }
+ ]
+}

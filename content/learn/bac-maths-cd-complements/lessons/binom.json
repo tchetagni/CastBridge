@@ -1,0 +1,438 @@
+{
+ "chapter": "bac-maths-cd-complements-ch-binom",
+ "lessons": [
+  {
+   "id": "bac-maths-cd-complements-binomiale",
+   "title": "Loi binomiale : probabilités, espérance np, variance npq",
+   "minutes": 35,
+   "programRef": "Tle C/D — Loi binomiale, schéma de Bernoulli (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître et justifier un schéma de Bernoulli.",
+    "Calculer $P(X = k)$, $P(X \\geq 1)$ et des probabilités cumulées.",
+    "Utiliser $E(X) = np$ et $V(X) = npq$.",
+    "Déterminer un nombre minimal d'épreuves avec le logarithme."
+   ],
+   "exercises": [
+    "bac-maths-cd-complements-bin-01",
+    "bac-maths-cd-complements-bin-02",
+    "bac-maths-cd-complements-bin-03",
+    "bac-maths-cd-complements-bin-04",
+    "bac-maths-cd-complements-bin-05",
+    "bac-maths-cd-complements-bin-06"
+   ],
+   "selfCheck": [
+    "bac-maths-cd-complements-bin-q1",
+    "bac-maths-cd-complements-bin-q2",
+    "bac-maths-cd-complements-bin-q3",
+    "bac-maths-cd-complements-bin-q4",
+    "bac-maths-cd-complements-bin-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Dans cette fiche",
+     "md": "Reconnaître une loi binomiale, calculer $P(X = k)$, $P(X \\geq 1)$, l'espérance $np$ et la variance $npq$, et résoudre un problème d'effectif minimal."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Épreuve et schéma de Bernoulli",
+     "md": "Une **épreuve de Bernoulli** a deux issues : succès (probabilité p) et échec (probabilité $q = 1 - p$).\nUn **schéma de Bernoulli** répète n fois cette épreuve de façon **identique et indépendante**. X, le nombre de succès, suit la **loi binomiale** de paramètres n et p, notée $B(n\\,;\\,p)$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Loi binomiale",
+     "md": "Pour $k = 0, 1, \\ldots, n$ :\n$P(X = k) = C_n^k \\, p^k \\, q^{n-k}$.\nLa somme des $P(X = k)$ vaut 1. Une probabilité du type « au moins un succès » se calcule par le contraire :\n$P(X \\geq 1) = 1 - P(X = 0) = 1 - q^n$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Espérance, variance, écart type",
+     "md": "Si X suit $B(n\\,;\\,p)$ :\n- $E(X) = np$ ;\n- $V(X) = npq = np(1-p)$ ;\n- $\\sigma(X) = \\sqrt{npq}$.\nL'espérance est le nombre moyen de succès attendu sur n répétitions."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : justifier qu'on a une loi binomiale",
+     "md": "Dans la rédaction, dire :\n1. on répète n fois la même épreuve, avec **deux issues** (succès / échec) ;\n2. les répétitions sont **indépendantes** (tirages avec remise, ou population très grande) ;\n3. p est la même à chaque épreuve.\nConclure : « X suit la loi binomiale $B(n\\,;\\,p)$ »."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "unit": "%",
+      "w": 400,
+      "h": 240,
+      "bars": [
+       {
+        "label": "0",
+        "value": 7.8,
+        "color": "lightblue"
+       },
+       {
+        "label": "1",
+        "value": 25.9,
+        "color": "lightblue"
+       },
+       {
+        "label": "2",
+        "value": 34.6,
+        "color": "blue"
+       },
+       {
+        "label": "3",
+        "value": 23.0,
+        "color": "lightblue"
+       },
+       {
+        "label": "4",
+        "value": 7.7,
+        "color": "lightblue"
+       },
+       {
+        "label": "5",
+        "value": 1.0,
+        "color": "lightblue"
+       }
+      ]
+     },
+     "caption": "Loi binomiale $B(5\\,;\\,0{,}4)$ : probabilités de 0 à 5 succès, en pourcentage ; le maximum est atteint en k = 2, voisin de $np = 2$.",
+     "alt": "Diagramme en barres de la loi binomiale B(5 ; 0,4) : environ 7,8 pour k=0, 25,9 pour k=1, 34,6 pour k=2, 23,0 pour k=3, 7,7 pour k=4 et 1,0 pour k=5."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : QCM répondu au hasard",
+     "statement": "Un élève répond au hasard aux 6 questions d'un QCM ; chaque question a 4 choix dont un seul est correct. X est le nombre de bonnes réponses. Calcule $P(X = 2)$ et $P(X \\geq 1)$.",
+     "steps": [
+      {
+       "md": "Six épreuves identiques et indépendantes, succès avec $p = \\frac{1}{4}$ : X suit $B(6\\,;\\,\\frac{1}{4})$."
+      },
+      {
+       "md": "Probabilité de 2 bonnes réponses :",
+       "tex": "P(X = 2) = C_6^2 \\left(\\frac{1}{4}\\right)^2 \\left(\\frac{3}{4}\\right)^4 = 15 \\times \\frac{81}{4096} = \\frac{1215}{4096} \\approx 0{,}297"
+      },
+      {
+       "md": "Au moins une bonne réponse (contraire de « aucune ») :",
+       "tex": "P(X \\geq 1) = 1 - \\left(\\frac{3}{4}\\right)^6 = 1 - \\frac{729}{4096} \\approx 0{,}822"
+      }
+     ],
+     "answer": "**P(X = 2) ≈ 0,297** et **P(X ≥ 1) ≈ 0,822**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : contrôle de qualité",
+     "statement": "Dans un grand lot fictif de panneaux solaires, 5 % sont défectueux. On en prélève 10 au hasard (on assimile à des tirages indépendants). Y est le nombre de panneaux défectueux. Donne la loi de Y, E(Y), V(Y), P(Y = 0) et P(Y ≤ 1).",
+     "steps": [
+      {
+       "md": "Y suit $B(10\\,;\\,0{,}05)$. Espérance et variance :",
+       "tex": "E(Y) = 10 \\times 0{,}05 = 0{,}5 \\qquad V(Y) = 10 \\times 0{,}05 \\times 0{,}95 = 0{,}475"
+      },
+      {
+       "md": "Aucun défectueux :",
+       "tex": "P(Y = 0) = 0{,}95^{10} \\approx 0{,}599"
+      },
+      {
+       "md": "$P(Y \\leq 1) = P(Y = 0) + P(Y = 1)$ avec $P(Y = 1) = 10 \\times 0{,}05 \\times 0{,}95^9 \\approx 0{,}315$.",
+       "tex": "P(Y \\leq 1) \\approx 0{,}599 + 0{,}315 = 0{,}914"
+      }
+     ],
+     "answer": "**E(Y) = 0,5 ; V(Y) = 0,475 ; P(Y = 0) ≈ 0,599 ; P(Y ≤ 1) ≈ 0,914.**"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : plus petit n tel que $P(X \\geq 1) \\geq s$",
+     "md": "$1 - q^n \\geq s \\Leftrightarrow q^n \\leq 1 - s$. On prend le logarithme népérien : $n \\ln q \\leq \\ln(1-s)$ ; comme $\\ln q < 0$, **on change le sens** : $n \\geq \\frac{\\ln(1-s)}{\\ln q}$. On prend le plus petit entier qui convient."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Appliquer la loi binomiale à des tirages **sans remise** dans une petite urne (les épreuves ne sont plus indépendantes).\n- Oublier le coefficient $C_n^k$.\n- Écrire $P(X \\geq 1) = 1 - P(X = 1)$ au lieu de $1 - P(X = 0)$.\n- Ne pas changer le sens de l'inégalité en divisant par $\\ln q < 0$.\n- Confondre $npq$ (variance) et $\\sqrt{npq}$ (écart type)."
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-maths-cd-complements-bin-01"
+    },
+    {
+     "type": "text",
+     "md": "**Vérifier par Python** : avec math.comb, la somme des $C_n^k p^k q^{n-k}$ pour k de 0 à n vaut 1, et la somme des $k \\times P(X = k)$ redonne $np$. C'est ainsi que les valeurs de cette fiche ont été contrôlées."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Pour n grand, la loi binomiale se lit avec un tableur ou une calculatrice : cette fiche suppose des calculs à la main ou à la calculatrice non programmable.",
+      "La loi binomiale est modélisée par un schéma de Bernoulli ; l'exigence du programme sur la démonstration de $E(X) = np$ est à vérifier sur le texte officiel."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier si la loi binomiale est au programme de Tle D, de Tle C ou des deux au Cameroun ; la fiche suppose les deux.",
+    "L'usage du logarithme pour l'effectif minimal suppose le chapitre ln déjà vu (voir le pack bac-maths)."
+   ],
+   "prerequisites": [
+    "bac-maths-cd-complements-proba"
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "bac-maths-cd-complements-bin-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-binomiale",
+   "prompt": "X suit $B(4\\,;\\,0{,}5)$. Calcule $P(X = 2)$.",
+   "answer": 0.375,
+   "tolerance": 0.0001,
+   "explanation": "$P(X = 2) = C_4^2 \\times 0{,}5^2 \\times 0{,}5^2 = 6 \\times 0{,}0625 = 0{,}375$.",
+   "method": "$P(X = k) = C_n^k p^k q^{n-k}$.",
+   "mistakes": [
+    "Oublier $C_4^2 = 6$ et répondre 0,0625."
+   ],
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "id": "bac-maths-cd-complements-bin-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-binomiale",
+   "prompt": "X suit $B(20\\,;\\,0{,}3)$. Calcule $E(X)$.",
+   "answer": 6,
+   "tolerance": 0.0001,
+   "explanation": "$E(X) = np = 20 \\times 0{,}3 = 6$.",
+   "method": "$E(X) = np$.",
+   "mistakes": [
+    "Calculer $20 \\times 0{,}7 = 14$."
+   ],
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "id": "bac-maths-cd-complements-bin-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-binomiale",
+   "prompt": "X suit $B(10\\,;\\,0{,}2)$. Calcule $V(X)$.",
+   "answer": 1.6,
+   "tolerance": 0.0001,
+   "explanation": "$V(X) = npq = 10 \\times 0{,}2 \\times 0{,}8 = 1{,}6$.",
+   "method": "$V(X) = npq$.",
+   "mistakes": [
+    "Répondre $np = 2$ (c'est l'espérance).",
+    "Répondre $\\sqrt{1{,}6}$ (c'est l'écart type)."
+   ],
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "id": "bac-maths-cd-complements-bin-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "bac-maths-cd-complements-binomiale",
+   "prompt": "Chaque jour, un vendeur du marché Mokolo a une probabilité 0,2 de vendre toute sa marchandise ; les jours sont indépendants. Quel est le plus petit nombre n de jours pour que la probabilité de « vendre tout au moins un jour » dépasse 0,99 ?",
+   "answer": 21,
+   "tolerance": 0,
+   "explanation": "$P(X \\geq 1) = 1 - 0{,}8^n \\geq 0{,}99 \\Leftrightarrow 0{,}8^n \\leq 0{,}01 \\Leftrightarrow n \\geq \\frac{\\ln 0{,}01}{\\ln 0{,}8} \\approx 20{,}64$. Le plus petit entier est **21** (pour n = 20, $1 - 0{,}8^{20} \\approx 0{,}988 < 0{,}99$).",
+   "method": "Passer au contraire, puis ln en changeant le sens de l'inégalité.",
+   "mistakes": [
+    "Répondre 20 en arrondissant 20,64 à l'entier le plus proche.",
+    "Garder le sens de l'inégalité et obtenir $n \\leq 20{,}64$."
+   ],
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "id": "bac-maths-cd-complements-bin-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "bac-maths-cd-complements-binomiale",
+   "prompt": "X suit $B(5\\,;\\,0{,}4)$. Calcule $P(X \\geq 2)$, arrondi à 0,001.",
+   "answer": 0.663,
+   "tolerance": 0.001,
+   "explanation": "$P(X \\geq 2) = 1 - P(X = 0) - P(X = 1) = 1 - 0{,}6^5 - 5 \\times 0{,}4 \\times 0{,}6^4 = 1 - 0{,}07776 - 0{,}2592 = 0{,}66304$.",
+   "method": "Passer au contraire : $P(X \\geq 2) = 1 - P(X \\leq 1)$.",
+   "mistakes": [
+    "Calculer $1 - P(X = 1)$ seulement.",
+    "Oublier le coefficient 5 dans $P(X = 1)$."
+   ],
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "id": "bac-maths-cd-complements-bin-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "bac-maths-cd-complements-binomiale",
+   "prompt": "Un atelier de Garoua teste 8 lampes solaires. Chaque lampe est défectueuse avec la probabilité 0,1, indépendamment des autres (données fictives). X est le nombre de lampes défectueuses parmi les 8.",
+   "parts": [
+    {
+     "id": "bac-maths-cd-complements-bin-06-a",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle est la loi de X ?",
+     "explanation": "Huit épreuves identiques et indépendantes, le succès « lampe défectueuse » ayant la probabilité 0,1 : $B(8\\,;\\,0{,}1)$.",
+     "choices": [
+      "Binomiale de paramètres n = 8 et p = 0,9",
+      "Binomiale de paramètres n = 10 et p = 0,8",
+      "Géométrique de raison 0,1",
+      "Binomiale de paramètres n = 8 et p = 0,1"
+     ],
+     "answer": 3
+    },
+    {
+     "id": "bac-maths-cd-complements-bin-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule $P(X = 0)$, arrondi à 0,001.",
+     "explanation": "$P(X = 0) = 0{,}9^8 \\approx 0{,}4305$.",
+     "answer": 0.43,
+     "tolerance": 0.001
+    },
+    {
+     "id": "bac-maths-cd-complements-bin-06-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la probabilité qu'au moins une lampe soit défectueuse (arrondi à 0,001).",
+     "explanation": "$P(X \\geq 1) = 1 - 0{,}9^8 \\approx 0{,}5695$.",
+     "answer": 0.57,
+     "tolerance": 0.001
+    },
+    {
+     "id": "bac-maths-cd-complements-bin-06-d",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule $P(X = 2)$, arrondi à 0,001.",
+     "explanation": "$P(X = 2) = C_8^2 \\times 0{,}1^2 \\times 0{,}9^6 = 28 \\times 0{,}01 \\times 0{,}531441 \\approx 0{,}1488$.",
+     "answer": 0.149,
+     "tolerance": 0.001
+    },
+    {
+     "id": "bac-maths-cd-complements-bin-06-e",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule l'espérance de X.",
+     "explanation": "$E(X) = 8 \\times 0{,}1 = 0{,}8$.",
+     "answer": 0.8,
+     "tolerance": 0.0001
+    },
+    {
+     "id": "bac-maths-cd-complements-bin-06-f",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la variance de X.",
+     "explanation": "$V(X) = 8 \\times 0{,}1 \\times 0{,}9 = 0{,}72$.",
+     "answer": 0.72,
+     "tolerance": 0.0001
+    }
+   ],
+   "method": "Reconnaître $B(8\\,;\\,0{,}1)$, puis appliquer $C_n^k p^k q^{n-k}$, le contraire et $np$, $npq$.",
+   "mistakes": [
+    "Écrire $P(X \\geq 1) = P(X = 1)$.",
+    "Oublier $C_8^2 = 28$."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-cd-complements-bin-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-binomiale",
+   "prompt": "Quelle condition n'est PAS nécessaire pour une loi binomiale ?",
+   "choices": [
+    "Que les épreuves soient indépendantes",
+    "Que p soit égal à 0,5",
+    "Que chaque épreuve ait deux issues",
+    "Que la probabilité de succès soit la même à chaque épreuve"
+   ],
+   "answer": 1,
+   "explanation": "Une loi binomiale existe pour toute valeur de p entre 0 et 1 ; p = 0,5 n'est qu'un cas particulier.",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-cd-complements-bin-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-binomiale",
+   "prompt": "Si X suit $B(12\\,;\\,0{,}25)$, alors $E(X)$ vaut :",
+   "choices": [
+    "0,25",
+    "12",
+    "3",
+    "9"
+   ],
+   "answer": 2,
+   "explanation": "$E(X) = np = 12 \\times 0{,}25 = 3$.",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-cd-complements-bin-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-binomiale",
+   "prompt": "Si X suit $B(3\\,;\\,0{,}5)$, alors $P(X = 0)$ vaut :",
+   "choices": [
+    "0,5",
+    "0,25",
+    "0,375",
+    "0,125"
+   ],
+   "answer": 3,
+   "explanation": "$P(X = 0) = 0{,}5^3 = 0{,}125$.",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-cd-complements-bin-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-binomiale",
+   "prompt": "La probabilité d'« au moins un succès » dans un schéma de Bernoulli de paramètres n et p vaut :",
+   "choices": [
+    "$1 - (1-p)^n$",
+    "$(1-p)^n$",
+    "$np$",
+    "$1 - p^n$"
+   ],
+   "answer": 0,
+   "explanation": "Le contraire de « au moins un succès » est « aucun succès », de probabilité $(1-p)^n$.",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-cd-complements-bin-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-binomiale",
+   "prompt": "Pour $B(n\\,;\\,p)$, la variance vaut :",
+   "choices": [
+    "$np$",
+    "$np(1-p)$",
+    "$n(1-p)$",
+    "$\\sqrt{np(1-p)}$"
+   ],
+   "answer": 1,
+   "explanation": "$V(X) = npq = np(1-p)$ ; $\\sqrt{npq}$ est l'écart type.",
+   "source": "Exercice original, style Bac"
+  }
+ ]
+}

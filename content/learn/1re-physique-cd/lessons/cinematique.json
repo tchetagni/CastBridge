@@ -1,0 +1,539 @@
+{
+ "chapter": "1re-physique-cd-ch-cinematique",
+ "lessons": [
+  {
+   "id": "1re-physique-cd-cinematique",
+   "chapter": "1re-physique-cd-ch-cinematique",
+   "title": "Cinématique du point : mouvements rectilignes et circulaire uniforme",
+   "minutes": 40,
+   "programRef": "1re C/D — Mécanique : cinématique du point (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale d'après le programme de 1re C et D ; à relire par un enseignant",
+   "objectives": [
+    "Décrire un mouvement avec un repère, des vecteurs vitesse et accélération.",
+    "Écrire et utiliser les équations du MRU et du MRUV.",
+    "Étudier un mouvement circulaire uniforme (période, vitesse angulaire, accélération centripète)."
+   ],
+   "exercises": [
+    "1re-physique-cd-cin-01",
+    "1re-physique-cd-cin-02",
+    "1re-physique-cd-cin-03",
+    "1re-physique-cd-cin-04",
+    "1re-physique-cd-cin-05",
+    "1re-physique-cd-cin-06"
+   ],
+   "selfCheck": [
+    "1re-physique-cd-cin-q1",
+    "1re-physique-cd-cin-q2",
+    "1re-physique-cd-cin-q3",
+    "1re-physique-cd-cin-q4",
+    "1re-physique-cd-cin-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Ce que tu sauras faire",
+     "md": "- Décrire un mouvement avec un repère, des vecteurs vitesse et accélération.\n- Utiliser les équations du MRU et du MRUV.\n- Étudier un mouvement circulaire uniforme."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Repère, vitesse, accélération",
+     "md": "Le mouvement d'un point M se décrit dans un **repère** (origine O, axes) à l'aide d'une horloge (origine des dates $t = 0$).\n- Vecteur vitesse : $\\vec{v} = \\frac{d\\vec{OM}}{dt}$ (tangent à la trajectoire, sens du mouvement).\n- Vecteur accélération : $\\vec{a} = \\frac{d\\vec{v}}{dt}$.\n- Vitesse moyenne : $v_m = \\frac{\\Delta x}{\\Delta t}$ (en m/s dans le Système International)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Mouvement rectiligne uniforme (MRU)",
+     "md": "La vitesse est constante : $a = 0$. Sur un axe Ox :\n- $v = \\text{constante}$ ;\n- $x(t) = x_0 + v\\,t$, où $x_0$ est l'abscisse à $t = 0$.\nLa vitesse algébrique est négative si le mobile va dans le sens contraire de l'axe."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Mouvement rectiligne uniformément varié (MRUV)",
+     "md": "L'accélération $a$ est constante sur l'axe Ox :\n- $v(t) = v_0 + a\\,t$ ;\n- $x(t) = x_0 + v_0\\,t + \\frac{1}{2}\\,a\\,t^2$ ;\n- sans le temps : $v^2 - v_0^2 = 2\\,a\\,(x - x_0)$.\nSi $a$ et $v$ ont le même signe, le mouvement est accéléré ; sinon il est retardé (freinage)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Mouvement circulaire uniforme",
+     "md": "Un point décrit un cercle de rayon $R$ avec une vitesse de valeur constante $v$ :\n- vitesse angulaire $\\omega = \\frac{2\\pi}{T}$ (en rad/s), période $T$ en s, fréquence $f = \\frac{1}{T}$ ;\n- $v = R\\,\\omega$ ;\n- le vecteur accélération est **centripète** (dirigé vers le centre) et $a = \\frac{v^2}{R} = R\\,\\omega^2$.\nLa valeur de $v$ est constante mais la direction de $\\vec v$ change : il y a bien une accélération."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 300,
+      "h": 250,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 130,
+        "cy": 125,
+        "r": 75,
+        "stroke": "grey",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 130,
+        "cy": 125,
+        "r": 3,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "ink"
+       },
+       {
+        "t": "text",
+        "x": 116,
+        "y": 145,
+        "text": "O",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "circle",
+        "cx": 178.2,
+        "cy": 67.5,
+        "r": 5,
+        "stroke": "red",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 192.2,
+        "y": 81.5,
+        "text": "M",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 178.2,
+        "y1": 67.5,
+        "x2": 136.1,
+        "y2": 32.2,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 116.2,
+        "y": 15.5,
+        "text": "v",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 178.2,
+        "y1": 67.5,
+        "x2": 149.3,
+        "y2": 102.0,
+        "color": "green",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 153.2,
+        "y": 122.5,
+        "text": "a",
+        "size": 16,
+        "color": "green",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 125,
+        "x2": 178.2,
+        "y2": 67.5,
+        "color": "grey",
+        "width": 1,
+        "dash": true
+       }
+      ]
+     },
+     "caption": "Mouvement circulaire uniforme : la vitesse (bleu) est tangente au cercle, l'accélération (vert) est dirigée vers le centre O.",
+     "alt": "Un cercle de centre O. Un point M sur le cercle porte une flèche bleue v tangente au cercle et une flèche verte a dirigée vers le centre."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : traiter un problème de mouvement",
+     "md": "1. Choisir l'axe, l'origine O et l'origine des dates.\n2. Repérer la nature du mouvement (a = 0 ? a constante ? cercle ?) et écrire les conditions initiales ($x_0$, $v_0$).\n3. Écrire l'équation horaire adaptée, convertir toutes les données en unités SI (km/h → m/s : on divise par 3,6).\n4. Résoudre, puis vérifier l'ordre de grandeur et le signe du résultat."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "w": 400,
+      "h": 260,
+      "xmin": 0,
+      "xmax": 12,
+      "ymin": 0,
+      "ymax": 20,
+      "grid": 4,
+      "xlabel": "t (s)",
+      "ylabel": "v (m/s)",
+      "curves": [],
+      "points": [],
+      "segments": [
+       {
+        "x1": 0,
+        "y1": 0,
+        "x2": 4,
+        "y2": 16,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 4,
+        "y1": 16,
+        "x2": 8,
+        "y2": 16,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 8,
+        "y1": 16,
+        "x2": 12,
+        "y2": 0,
+        "color": "blue",
+        "dash": false
+       }
+      ]
+     },
+     "caption": "Graphe v(t) d'un mobile : il accélère pendant 4 s, roule à vitesse constante 4 s, puis freine pendant 4 s. La distance parcourue est l'aire sous la courbe.",
+     "alt": "Graphique vitesse en fonction du temps : une droite montant de 0 à 16 m/s en 4 s, un palier à 16 m/s jusqu'à 8 s, puis une droite descendant jusqu'à 0 à 12 s."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : démarrage puis freinage",
+     "statement": "Une moto part du repos avec une accélération constante de 4 m/s² pendant 4 s. Calcule sa vitesse et la distance parcourue. Ensuite, roulant à 20 m/s, elle freine à accélération constante et s'arrête sur 50 m : calcule cette accélération et la durée du freinage.",
+     "steps": [
+      {
+       "md": "**Démarrage** ($v_0 = 0$, $a = 4$ m/s²) :",
+       "tex": "v = a\\,t = 4 \\times 4 = 16\\ \\text{m/s}"
+      },
+      {
+       "md": "Distance parcourue en 4 s :",
+       "tex": "d = \\frac{1}{2}\\,a\\,t^2 = \\frac{1}{2} \\times 4 \\times 16 = 32\\ \\text{m}"
+      },
+      {
+       "md": "**Freinage** : $v = 0$ à l'arrêt, $v_0 = 20$ m/s, $d = 50$ m. On utilise $v^2 - v_0^2 = 2ad$ :",
+       "tex": "a = \\frac{0 - 20^2}{2 \\times 50} = -4\\ \\text{m/s}^2"
+      },
+      {
+       "md": "Durée : $v = v_0 + at = 0$ donc",
+       "tex": "t = \\frac{-v_0}{a} = \\frac{-20}{-4} = 5\\ \\text{s}"
+      }
+     ],
+     "answer": "**v = 16 m/s, d = 32 m ; a = −4 m/s² (freinage), durée 5 s.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : une roue qui tourne",
+     "statement": "Une roue de rayon R = 0,30 m fait 120 tours par minute à vitesse constante. Calcule la période, la vitesse angulaire, la vitesse d'un point de sa jante et son accélération.",
+     "steps": [
+      {
+       "md": "120 tours en 60 s : 2 tours par seconde, donc la fréquence est 2 Hz et la période :",
+       "tex": "T = \\frac{1}{f} = 0{,}5\\ \\text{s}"
+      },
+      {
+       "md": "Vitesse angulaire :",
+       "tex": "\\omega = \\frac{2\\pi}{T} = 4\\pi \\approx 12{,}57\\ \\text{rad/s}"
+      },
+      {
+       "md": "Vitesse d'un point de la jante :",
+       "tex": "v = R\\,\\omega = 0{,}30 \\times 12{,}57 \\approx 3{,}77\\ \\text{m/s}"
+      },
+      {
+       "md": "Accélération centripète :",
+       "tex": "a = R\\,\\omega^2 = 0{,}30 \\times 12{,}57^2 \\approx 47{,}4\\ \\text{m/s}^2"
+      }
+     ],
+     "answer": "**T = 0,5 s ; ω ≈ 12,57 rad/s ; v ≈ 3,77 m/s ; a ≈ 47,4 m/s².**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier de convertir : 72 km/h = 20 m/s (et non 72).\n- Écrire $x = v t$ alors que le mobile part de $x_0 \\neq 0$.\n- Utiliser les formules du MRUV quand l'accélération n'est pas constante.\n- Dire qu'un mouvement circulaire uniforme a une accélération nulle : la direction de $\\vec v$ change, donc $\\vec a \\neq \\vec 0$.\n- Confondre tours par minute et rad/s : $1\\ \\text{tr/min} = \\frac{2\\pi}{60}$ rad/s."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-physique-cd-cin-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-physique-cd-cin-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-physique-cd-cin-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Deux mobiles se rencontrent quand leurs abscisses sont égales : on écrit $x_A(t) = x_B(t)$ et on résout l'équation.",
+      "En physique, on distingue la vitesse (vecteur) de sa valeur (la « vitesse » du compteur d'un véhicule). Les compteurs affichent des km/h : 1 m/s = 3,6 km/h."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier si la dérivation des vecteurs (vitesse, accélération) est présentée dès la 1re C/D ou seulement en Tle, et si l'accélération en repère de Frenet (a tangentielle, a normale) est au programme.",
+    "Conventions : accélération notée a ou $\\vec a$ ; vitesse angulaire notée ω ; période T."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "1re-physique-cd-cin-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-cinematique",
+   "prompt": "Un véhicule roule à 72 km/h. Exprime sa vitesse en m/s.",
+   "answer": 20,
+   "tolerance": 0,
+   "unit": "m/s",
+   "explanation": "72 km/h = 72 000 m en 3 600 s, soit $72 \\div 3{,}6 = 20$ m/s.",
+   "method": "km/h → m/s : diviser par 3,6.",
+   "mistakes": [
+    "Garder 72 en changeant seulement l'unité.",
+    "Multiplier par 3,6 au lieu de diviser."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-physique-cd-cin-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-cinematique",
+   "prompt": "Un cycliste suit un MRU d'équation $x(t) = 5 + 4t$ (x en m, t en s). Quelle est sa position à $t = 7$ s ?",
+   "answer": 33,
+   "tolerance": 0,
+   "unit": "m",
+   "explanation": "$x(7) = 5 + 4 \\times 7 = 33$ m.",
+   "method": "Remplacer t dans l'équation horaire.",
+   "mistakes": [
+    "Oublier la position initiale 5 m (on trouve 28 m)."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-physique-cd-cin-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-cinematique",
+   "prompt": "Une voiture part du repos avec une accélération constante de 3 m/s². Quelle distance parcourt-elle en 6 s ?",
+   "answer": 54,
+   "tolerance": 0,
+   "unit": "m",
+   "explanation": "$d = \\frac{1}{2}at^2 = \\frac{1}{2} \\times 3 \\times 36 = 54$ m.",
+   "method": "$x = \\frac{1}{2}at^2$ quand $v_0 = 0$ et $x_0 = 0$.",
+   "mistakes": [
+    "Calculer $a \\times t^2 = 108$ en oubliant le facteur 1/2."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-physique-cd-cin-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "1re-physique-cd-cinematique",
+   "prompt": "Une moto roule à 15 m/s et freine avec une accélération constante de −3 m/s². Quelle distance parcourt-elle avant de s'arrêter ?",
+   "answer": 37.5,
+   "tolerance": 0.01,
+   "unit": "m",
+   "explanation": "$v^2 - v_0^2 = 2ad$ avec $v = 0$ : $d = \\frac{-v_0^2}{2a} = \\frac{-225}{-6} = 37{,}5$ m.",
+   "method": "Quand le temps n'est pas demandé, utiliser $v^2 - v_0^2 = 2ad$.",
+   "mistakes": [
+    "Garder $a = +3$ et trouver une distance négative."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-physique-cd-cin-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "1re-physique-cd-cinematique",
+   "prompt": "Un manège forain tourne à vitesse constante : sa période est de 8 s. Un siège est à 4 m de l'axe. Calcule l'accélération centripète du siège (en m/s², arrondie au centième).",
+   "answer": 2.47,
+   "tolerance": 0.01,
+   "unit": "m/s²",
+   "explanation": "$\\omega = \\frac{2\\pi}{8} \\approx 0{,}785$ rad/s, puis $a = R\\omega^2 = 4 \\times 0{,}785^2 \\approx 2{,}47$ m/s².",
+   "method": "$\\omega = 2\\pi/T$ puis $a = R\\omega^2$.",
+   "mistakes": [
+    "Utiliser $\\omega = 8$ ou $\\omega = 1/T$ sans le facteur $2\\pi$."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-physique-cd-cin-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "1re-physique-cd-cinematique",
+   "prompt": "Un camion roule à la vitesse constante de 10 m/s sur une route droite, sur un axe Ox. À t = 0, le camion est à l'abscisse 50 m et une voiture, arrêtée à l'origine O, démarre avec une accélération constante de 1 m/s² dans le même sens.",
+   "method": "Écrire les deux équations horaires dans le même repère, les égaler, résoudre en gardant la racine positive.",
+   "mistakes": [
+    "Garder la racine négative du trinôme.",
+    "Oublier la position initiale du camion."
+   ],
+   "source": "Exercice original, style Probatoire C/D",
+   "parts": [
+    {
+     "id": "1re-physique-cd-cin-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Écris l'équation horaire du camion et calcule sa position à t = 10 s (en m).",
+     "answer": 150,
+     "tolerance": 0,
+     "unit": "m",
+     "explanation": "Le camion est en MRU : $x_C(t) = 50 + 10t$, donc $x_C(10) = 150$ m."
+    },
+    {
+     "id": "1re-physique-cd-cin-06-b",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle est l'équation horaire de la voiture ?",
+     "choices": [
+      "$x_V(t) = 0{,}5\\,t^2$",
+      "$x_V(t) = t^2$",
+      "$x_V(t) = 0{,}5\\,t$",
+      "$x_V(t) = 50 + 0{,}5\\,t^2$"
+     ],
+     "answer": 0,
+     "explanation": "Départ du repos en O : $x_V = \\frac{1}{2}at^2 = 0{,}5\\,t^2$."
+    },
+    {
+     "id": "1re-physique-cd-cin-06-c",
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "À quel instant la voiture rattrape-t-elle le camion ? (en s, arrondi au centième). Indication : résoudre $0{,}5t^2 = 50 + 10t$.",
+     "answer": 24.14,
+     "tolerance": 0.01,
+     "unit": "s",
+     "explanation": "$t^2 - 20t - 100 = 0$ ; $\\Delta = 400 + 400 = 800$ ; la racine positive est $t = 10 + \\sqrt{200} \\approx 24{,}14$ s (l'autre racine est négative)."
+    },
+    {
+     "id": "1re-physique-cd-cin-06-d",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quelle est alors la vitesse de la voiture, en km/h (arrondie à l'unité) ?",
+     "answer": 87,
+     "tolerance": 1,
+     "unit": "km/h",
+     "explanation": "$v = at \\approx 24{,}14$ m/s, soit $24{,}14 \\times 3{,}6 \\approx 86{,}9$ km/h, soit 87 km/h."
+    }
+   ]
+  },
+  {
+   "id": "1re-physique-cd-cin-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-cinematique",
+   "prompt": "Le vecteur accélération d'un mouvement circulaire uniforme est :",
+   "choices": [
+    "nul",
+    "tangent au cercle",
+    "dirigé vers l'extérieur du cercle",
+    "dirigé vers le centre du cercle"
+   ],
+   "answer": 3,
+   "explanation": "La direction de la vitesse change : l'accélération est centripète, de valeur $v^2/R$."
+  },
+  {
+   "id": "1re-physique-cd-cin-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-cinematique",
+   "prompt": "Dans un MRU :",
+   "choices": [
+    "l'accélération est nulle",
+    "la vitesse croît linéairement",
+    "la distance parcourue est proportionnelle à $t^2$",
+    "la vitesse est nulle"
+   ],
+   "answer": 0,
+   "explanation": "Vitesse constante signifie accélération nulle ; $x = x_0 + vt$ est une fonction affine du temps."
+  },
+  {
+   "id": "1re-physique-cd-cin-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-cinematique",
+   "prompt": "Quelle relation relie vitesses, accélération et distance dans un MRUV ?",
+   "choices": [
+    "$v^2 + v_0^2 = 2a\\,(x - x_0)$",
+    "$v^2 - v_0^2 = 2a\\,(x - x_0)$",
+    "$v - v_0 = 2a\\,(x - x_0)$",
+    "$v^2 - v_0^2 = a\\,(x - x_0)$"
+   ],
+   "answer": 1,
+   "explanation": "On obtient cette relation en éliminant le temps entre $v = v_0 + at$ et l'équation horaire."
+  },
+  {
+   "id": "1re-physique-cd-cin-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-cinematique",
+   "prompt": "Une vitesse de 90 km/h vaut :",
+   "choices": [
+    "90 m/s",
+    "324 m/s",
+    "25 m/s",
+    "15 m/s"
+   ],
+   "answer": 2,
+   "explanation": "$90 \\div 3{,}6 = 25$ m/s."
+  },
+  {
+   "id": "1re-physique-cd-cin-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-cinematique",
+   "prompt": "Un point décrit un cercle avec la période T. Sa vitesse angulaire est :",
+   "choices": [
+    "$\\omega = \\frac{T}{2\\pi}$",
+    "$\\omega = 2\\pi T$",
+    "$\\omega = \\frac{\\pi}{T}$",
+    "$\\omega = \\frac{2\\pi}{T}$"
+   ],
+   "answer": 3,
+   "explanation": "En une période, le rayon balaie un angle de $2\\pi$ rad."
+  }
+ ]
+}

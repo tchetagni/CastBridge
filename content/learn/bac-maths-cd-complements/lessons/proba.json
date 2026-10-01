@@ -1,0 +1,561 @@
+{
+ "chapter": "bac-maths-cd-complements-ch-proba",
+ "lessons": [
+  {
+   "id": "bac-maths-cd-complements-proba",
+   "title": "Dénombrement et probabilités : conditionnelles, indépendance, variable aléatoire",
+   "minutes": 35,
+   "programRef": "Tle C/D — Dénombrement, probabilités, variables aléatoires (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Choisir entre arrangements, combinaisons et tirages avec remise.",
+    "Utiliser un arbre pondéré, la formule des probabilités totales et les probabilités conditionnelles.",
+    "Tester l'indépendance de deux événements.",
+    "Établir la loi d'une variable aléatoire et calculer espérance et variance."
+   ],
+   "exercises": [
+    "bac-maths-cd-complements-pro-01",
+    "bac-maths-cd-complements-pro-02",
+    "bac-maths-cd-complements-pro-03",
+    "bac-maths-cd-complements-pro-04",
+    "bac-maths-cd-complements-pro-05",
+    "bac-maths-cd-complements-pro-06"
+   ],
+   "selfCheck": [
+    "bac-maths-cd-complements-pro-q1",
+    "bac-maths-cd-complements-pro-q2",
+    "bac-maths-cd-complements-pro-q3",
+    "bac-maths-cd-complements-pro-q4",
+    "bac-maths-cd-complements-pro-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Dans cette fiche",
+     "md": "Dénombrer avec arrangements et combinaisons ; calculer des probabilités (formule des probabilités totales, conditionnelles) ; reconnaître l'indépendance ; étudier une variable aléatoire (loi, espérance, variance)."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Dénombrement",
+     "md": "Pour p éléments choisis parmi n :\n- **tirages successifs avec remise** : $n^p$ ;\n- **tirages successifs sans remise** (ordre compté) : arrangements $A_n^p = \\frac{n!}{(n-p)!}$ ;\n- **tirage simultané** (ordre ignoré) : combinaisons $C_n^p = \\frac{n!}{p!\\,(n-p)!}$.\nLes permutations de n objets : $n!$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Probabilités : règles de base",
+     "md": "Pour des événements A et B d'un univers fini :\n- $P(\\overline{A}) = 1 - P(A)$ ;\n- $P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$ ;\n- en situation d'équiprobabilité : $P(A) = \\frac{\\text{nombre de cas favorables}}{\\text{nombre de cas possibles}}$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Probabilité conditionnelle et probabilités totales",
+     "md": "Si $P(A) \\neq 0$ : $P_A(B) = \\frac{P(A \\cap B)}{P(A)}$, donc $P(A \\cap B) = P(A) \\times P_A(B)$.\nSi A et $\\overline{A}$ partitionnent l'univers :\n$P(B) = P(A) P_A(B) + P(\\overline{A}) P_{\\overline{A}}(B)$.\nOn les lit sur un **arbre pondéré** : on multiplie le long d'une branche, on additionne entre branches."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Indépendance",
+     "md": "A et B sont **indépendants** si $P(A \\cap B) = P(A) \\times P(B)$, c'est-à-dire si $P_A(B) = P(B)$.\nAttention : indépendants ≠ incompatibles. Deux événements incompatibles de probabilités non nulles ne sont **jamais** indépendants, car $P(A \\cap B) = 0$."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Variable aléatoire discrète",
+     "md": "X prend les valeurs $x_1, \\ldots, x_k$ avec les probabilités $p_i = P(X = x_i)$, de somme 1.\n- Espérance : $E(X) = \\sum p_i x_i$.\n- Variance : $V(X) = E(X^2) - (E(X))^2$, avec $E(X^2) = \\sum p_i x_i^2$.\n- Écart type : $\\sigma(X) = \\sqrt{V(X)}$.\nPour $Y = aX + b$ : $E(Y) = aE(X) + b$ et $V(Y) = a^2 V(X)$."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 230,
+      "items": [
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 115,
+        "x2": 150,
+        "y2": 60,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 115,
+        "x2": 150,
+        "y2": 170,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 78,
+        "text": "0,6",
+        "size": 14,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 160,
+        "text": "0,4",
+        "size": 14,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 60,
+        "text": "A",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 175,
+        "text": "B",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 175,
+        "y1": 55,
+        "x2": 300,
+        "y2": 25,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 175,
+        "y1": 62,
+        "x2": 300,
+        "y2": 85,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 175,
+        "y1": 170,
+        "x2": 300,
+        "y2": 145,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 175,
+        "y1": 178,
+        "x2": 300,
+        "y2": 205,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 225,
+        "y": 28,
+        "text": "0,05",
+        "size": 14,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 225,
+        "y": 93,
+        "text": "0,95",
+        "size": 14,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 225,
+        "y": 142,
+        "text": "0,10",
+        "size": 14,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 225,
+        "y": 208,
+        "text": "0,90",
+        "size": 14,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 335,
+        "y": 25,
+        "text": "abîmée",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 335,
+        "y": 88,
+        "text": "saine",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 335,
+        "y": 148,
+        "text": "abîmée",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 335,
+        "y": 208,
+        "text": "saine",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Arbre pondéré de l'exemple 2 : A et B désignent les deux fournisseurs ; la somme des probabilités sortant d'un nœud vaut 1.",
+     "alt": "Arbre de probabilités à deux niveaux : de la racine partent deux branches A (0,6) et B (0,4). De A partent abîmée (0,05) et saine (0,95), de B partent abîmée (0,10) et saine (0,90)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : tirage simultané",
+     "statement": "Dans une classe de 30 élèves (18 filles, 12 garçons), on choisit au hasard un comité de 4 élèves. Quelle est la probabilité qu'il comporte exactement 2 filles ?",
+     "steps": [
+      {
+       "md": "Nombre de comités possibles : $C_{30}^4$.",
+       "tex": "C_{30}^4 = 27\\,405"
+      },
+      {
+       "md": "Comités favorables : 2 filles parmi 18 et 2 garçons parmi 12.",
+       "tex": "C_{18}^2 \\times C_{12}^2 = 153 \\times 66 = 10\\,098"
+      },
+      {
+       "md": "Les comités sont équiprobables, donc :",
+       "tex": "p = \\frac{10\\,098}{27\\,405} \\approx 0{,}3685"
+      }
+     ],
+     "answer": "**p ≈ 0,369** (soit environ 36,9 %)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : probabilités totales et formule de Bayes",
+     "statement": "Sur un marché de Douala, 60 % des mangues viennent du fournisseur A, 40 % du fournisseur B. 5 % des mangues de A et 10 % de celles de B sont abîmées (données fictives). On prend une mangue au hasard. Calcule P(abîmée), puis la probabilité qu'une mangue abîmée vienne de A.",
+     "steps": [
+      {
+       "md": "Formule des probabilités totales, lue sur l'arbre :",
+       "tex": "P(M) = 0{,}6 \\times 0{,}05 + 0{,}4 \\times 0{,}10 = 0{,}03 + 0{,}04 = 0{,}07"
+      },
+      {
+       "md": "Probabilité conditionnelle (on « remonte » l'arbre) :",
+       "tex": "P_M(A) = \\frac{P(A \\cap M)}{P(M)} = \\frac{0{,}03}{0{,}07} = \\frac{3}{7} \\approx 0{,}43"
+      }
+     ],
+     "answer": "**P(abîmée) = 0,07** et **P(A sachant abîmée) = 3/7 ≈ 0,43**."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : choisir le bon modèle",
+     "md": "1. Ordre important ? Oui : arrangements (ou $n^p$ avec remise). Non : combinaisons.\n2. « Au moins un » : passer au contraire (« aucun ») et faire $1 - P(\\ldots)$.\n3. Épreuve en plusieurs étapes : arbre pondéré.\n4. Variable aléatoire : dresser d'abord le tableau de la loi, vérifier que la somme vaut 1, puis calculer E et V."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre $A_n^p$ et $C_n^p$ : l'ordre compte-t-il ?\n- Additionner au lieu de multiplier le long d'une branche de l'arbre.\n- Croire que $P_A(B) = P_B(A)$.\n- Confondre incompatibles et indépendants.\n- Oublier le carré dans $V(X) = E(X^2) - E(X)^2$ ou obtenir une variance négative."
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-maths-cd-complements-pro-01"
+    },
+    {
+     "type": "text",
+     "md": "**Vérifier par Python** : le module math donne comb(30, 4) = 27405 et perm(8, 3) = 336 ; une boucle sur la loi donne E et V. Les exercices de cette fiche ont été recalculés ainsi."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Une variance se calcule aussi par $V(X) = \\sum p_i (x_i - E(X))^2$ ; les deux formules donnent le même résultat.",
+      "En Tle C et D, le dénombrement et les probabilités peuvent apparaître dans un exercice de Bac ; l'étendue exacte (probabilités conditionnelles, loi binomiale) est à vérifier sur le texte officiel."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "La formule de Bayes est présentée sans nom officiel : vérifier si le programme de Tle C/D l'exige.",
+    "Notation des combinaisons ($C_n^p$ ou notation française) et de la probabilité conditionnelle ($P_A(B)$) : harmoniser avec le manuel utilisé."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "bac-maths-cd-complements-pro-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-proba",
+   "prompt": "Combien de comités de 3 personnes peut-on former avec 10 élèves ? (calcule $C_{10}^3$)",
+   "answer": 120,
+   "tolerance": 0,
+   "explanation": "$C_{10}^3 = \\frac{10 \\times 9 \\times 8}{3 \\times 2 \\times 1} = 120$.",
+   "method": "Ordre ignoré : combinaisons.",
+   "mistakes": [
+    "Calculer $A_{10}^3 = 720$ en comptant l'ordre."
+   ],
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "id": "bac-maths-cd-complements-pro-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-proba",
+   "prompt": "Huit coureurs participent à une course. Combien de podiums (premier, deuxième, troisième) sont possibles, sans ex æquo ?",
+   "answer": 336,
+   "tolerance": 0,
+   "explanation": "L'ordre compte : $A_8^3 = 8 \\times 7 \\times 6 = 336$.",
+   "method": "Arrangements : ordre compté, sans répétition.",
+   "mistakes": [
+    "Utiliser $C_8^3 = 56$ en oubliant l'ordre.",
+    "Calculer $8^3 = 512$ (avec répétition)."
+   ],
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "id": "bac-maths-cd-complements-pro-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-proba",
+   "prompt": "On a $P(A) = 0{,}5$, $P(B) = 0{,}4$ et $P(A \\cap B) = 0{,}2$. Les événements A et B sont indépendants.",
+   "answer": true,
+   "explanation": "$P(A) \\times P(B) = 0{,}5 \\times 0{,}4 = 0{,}2 = P(A \\cap B)$ : ils sont indépendants.",
+   "method": "Comparer $P(A \\cap B)$ au produit $P(A)P(B)$.",
+   "mistakes": [
+    "Conclure à l'indépendance parce que $P(A \\cap B) \\neq 0$, ou à la dépendance pour la même raison."
+   ],
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "id": "bac-maths-cd-complements-pro-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "bac-maths-cd-complements-proba",
+   "prompt": "Une machine M1 fabrique 70 % des sachets de café d'une usine fictive, dont 3 % sont défectueux ; M2 fabrique les 30 % restants, dont 8 % sont défectueux. Un sachet défectueux est choisi : quelle est la probabilité qu'il vienne de M2 ? (arrondis à 0,001)",
+   "answer": 0.533,
+   "tolerance": 0.001,
+   "explanation": "$P(D) = 0{,}7 \\times 0{,}03 + 0{,}3 \\times 0{,}08 = 0{,}045$. Puis $P_D(M2) = \\frac{0{,}3 \\times 0{,}08}{0{,}045} = \\frac{0{,}024}{0{,}045} \\approx 0{,}533$.",
+   "method": "Probabilités totales au dénominateur, puis formule conditionnelle.",
+   "mistakes": [
+    "Répondre 0,08 (probabilité de défaut sachant M2) au lieu de la probabilité de M2 sachant défaut.",
+    "Répondre 0,024 sans diviser par P(D)."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-cd-complements-pro-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "bac-maths-cd-complements-proba",
+   "prompt": "A et B sont indépendants avec $P(A) = 0{,}3$ et $P(A \\cup B) = 0{,}65$. Calcule $P(B)$.",
+   "answer": 0.5,
+   "tolerance": 0.0001,
+   "explanation": "Indépendance : $P(A \\cup B) = P(A) + P(B) - P(A)P(B) = 0{,}3 + 0{,}7\\,P(B)$. Donc $0{,}7\\,P(B) = 0{,}35$ et $P(B) = 0{,}5$.",
+   "method": "Remplacer $P(A \\cap B)$ par $P(A)P(B)$ puis résoudre l'équation en P(B).",
+   "mistakes": [
+    "Écrire $P(B) = 0{,}65 - 0{,}3 = 0{,}35$ (cela suppose A et B incompatibles)."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-cd-complements-pro-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "bac-maths-cd-complements-proba",
+   "prompt": "À la kermesse d'un lycée de Yaoundé, on joue ainsi : une urne contient 3 boules rouges et 2 boules vertes. Le joueur paie 1 500 FCFA, tire simultanément 2 boules et reçoit 1 000 FCFA par boule rouge tirée. On note X le nombre de boules rouges tirées et G le gain algébrique du joueur (en FCFA).",
+   "parts": [
+    {
+     "id": "bac-maths-cd-complements-pro-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule $P(X = 2)$.",
+     "explanation": "Cas favorables : $C_3^2 = 3$ ; cas possibles : $C_5^2 = 10$. Donc $P(X = 2) = 0{,}3$.",
+     "answer": 0.3,
+     "tolerance": 0.001
+    },
+    {
+     "id": "bac-maths-cd-complements-pro-06-b",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule l'espérance $E(X)$.",
+     "explanation": "Loi : $P(X=0) = \\frac{1}{10}$, $P(X=1) = \\frac{3 \\times 2}{10} = 0{,}6$, $P(X=2) = 0{,}3$ (somme 1). $E(X) = 0{,}6 + 2 \\times 0{,}3 = 1{,}2$.",
+     "answer": 1.2,
+     "tolerance": 0.001
+    },
+    {
+     "id": "bac-maths-cd-complements-pro-06-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule la variance $V(X)$.",
+     "explanation": "$E(X^2) = 0{,}6 + 4 \\times 0{,}3 = 1{,}8$ et $V(X) = 1{,}8 - 1{,}2^2 = 0{,}36$.",
+     "answer": 0.36,
+     "tolerance": 0.001
+    },
+    {
+     "id": "bac-maths-cd-complements-pro-06-d",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "On a $G = 1\\,000X - 1\\,500$. Calcule $E(G)$ en FCFA.",
+     "explanation": "$E(G) = 1\\,000 \\times 1{,}2 - 1\\,500 = -300$ FCFA.",
+     "answer": -300,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "bac-maths-cd-complements-pro-06-e",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Que signifie ce résultat pour le joueur ?",
+     "explanation": "Une espérance de gain négative signifie qu'à long terme le joueur perd en moyenne 300 FCFA par partie ; il peut gagner certaines parties.",
+     "choices": [
+      "En moyenne, il gagne 300 FCFA par partie",
+      "Il perd 300 FCFA à chaque partie",
+      "Le jeu est équitable",
+      "En moyenne, il perd 300 FCFA par partie : le jeu lui est défavorable"
+     ],
+     "answer": 3
+    }
+   ],
+   "method": "Tableau de la loi de X, puis $E(X)$, $E(X^2)$, $V(X)$ ; linéarité de l'espérance pour G.",
+   "mistakes": [
+    "Calculer $V(X)$ sans soustraire $E(X)^2$.",
+    "Oublier la mise de 1 500 FCFA dans le gain algébrique."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-cd-complements-pro-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-proba",
+   "prompt": "Que vaut $C_5^2$ ?",
+   "choices": [
+    "20",
+    "10",
+    "25",
+    "5"
+   ],
+   "answer": 1,
+   "explanation": "$C_5^2 = \\frac{5 \\times 4}{2} = 10$.",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-cd-complements-pro-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-proba",
+   "prompt": "Si $P(A) = 0{,}35$, alors $P(\\overline{A})$ vaut :",
+   "choices": [
+    "0,35",
+    "0,5",
+    "0,65",
+    "1,35"
+   ],
+   "answer": 2,
+   "explanation": "$P(\\overline{A}) = 1 - 0{,}35 = 0{,}65$.",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-cd-complements-pro-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-proba",
+   "prompt": "Quelle formule est correcte pour $P(A \\cap B)$ lorsque $P(A) \\neq 0$ ?",
+   "choices": [
+    "$P(A) + P_A(B)$",
+    "$P_A(B) \\div P(A)$",
+    "$P(A) - P(B)$",
+    "$P(A) \\times P_A(B)$"
+   ],
+   "answer": 3,
+   "explanation": "C'est la formule des probabilités composées : $P(A \\cap B) = P(A) \\times P_A(B)$.",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-cd-complements-pro-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-proba",
+   "prompt": "X prend les valeurs 0 et 10 avec les probabilités 0,4 et 0,6. Que vaut $E(X)$ ?",
+   "choices": [
+    "6",
+    "5",
+    "4",
+    "10"
+   ],
+   "answer": 0,
+   "explanation": "$E(X) = 0 \\times 0{,}4 + 10 \\times 0{,}6 = 6$.",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-cd-complements-pro-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-proba",
+   "prompt": "La variance de X se calcule par :",
+   "choices": [
+    "$(E(X))^2 - E(X^2)$",
+    "$E(X^2) - (E(X))^2$",
+    "$E(X^2) + (E(X))^2$",
+    "$E(X^2) - E(X)$"
+   ],
+   "answer": 1,
+   "explanation": "$V(X) = E(X^2) - (E(X))^2$ ; elle est toujours positive ou nulle.",
+   "source": "Exercice original, style Bac"
+  }
+ ]
+}

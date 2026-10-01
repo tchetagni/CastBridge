@@ -1,0 +1,417 @@
+{
+ "chapter": "bac-maths-a-ch-stats",
+ "lessons": [
+  {
+   "id": "bac-maths-a-stats",
+   "title": "Statistiques à une et deux variables, ajustement affine",
+   "minutes": 40,
+   "programRef": "Tle A — Statistiques : paramètres d'une série, séries à deux variables, droite de régression, corrélation (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Calculer moyenne, variance, écart-type et médiane d'une série.",
+    "Représenter un nuage de points et calculer la covariance.",
+    "Déterminer la droite de régression de y en x et l'utiliser pour une prévision.",
+    "Interpréter le coefficient de corrélation linéaire."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Paramètres d'une série à une variable",
+     "md": "Pour n valeurs $x_1,\\dots,x_n$ :\n- **moyenne** $\\bar{x}=\\frac{x_1+\\dots+x_n}{n}$ ;\n- **variance** $V(x)=\\frac{x_1^2+\\dots+x_n^2}{n}-\\bar{x}^2$ ;\n- **écart-type** $\\sigma_x=\\sqrt{V(x)}$ ;\n- **médiane** : valeur qui partage la série ordonnée en deux groupes de même effectif."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Covariance et corrélation",
+     "md": "Pour une série $(x_i\\,;\\,y_i)$ de n couples :\n- **covariance** $\\mathrm{cov}(x,y)=\\frac{\\sum x_iy_i}{n}-\\bar{x}\\,\\bar{y}$ ;\n- **coefficient de corrélation** $r=\\frac{\\mathrm{cov}(x,y)}{\\sigma_x\\sigma_y}$, toujours compris entre −1 et 1."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Droite de régression de y en x",
+     "md": "C'est la droite $y=ax+b$ qui ajuste au mieux le nuage (méthode des moindres carrés) :\n- $a=\\frac{\\mathrm{cov}(x,y)}{V(x)}$ ;\n- $b=\\bar{y}-a\\,\\bar{x}$.\nElle passe toujours par le **point moyen** $G(\\bar{x}\\,;\\,\\bar{y})$."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Interpréter r",
+     "md": "- $|r|$ proche de 1 : points presque alignés, ajustement affine pertinent ; r > 0 : y augmente avec x ; r < 0 : y diminue quand x augmente.\n- $|r|$ proche de 0 : pas de lien affine.\n- Une prévision n'est fiable que **près** des valeurs observées. Une corrélation ne prouve pas une relation de cause à effet."
+    },
+    {
+     "type": "text",
+     "md": "**Avec du code.** En Python, statistics.mean, statistics.pvariance et statistics.pstdev donnent moyenne, variance et écart-type (formules avec division par n) ; statistics.linear_regression(x, y) donne la pente a et l'ordonnée b ; statistics.correlation(x, y) donne r. Un tableur fait la même chose."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : une variable",
+     "statement": "Dix notes (fictives) : 8, 10, 10, 12, 13, 14, 15, 15, 15, 18. Calcule la moyenne, la variance, l'écart-type et la médiane.",
+     "steps": [
+      {
+       "md": "La somme vaut 130, donc la moyenne est 13. La somme des carrés vaut 64 + 100 + 100 + 144 + 169 + 196 + 225 + 225 + 225 + 324 = 1 772."
+      },
+      {
+       "md": "Variance et écart-type :",
+       "tex": "V=\\frac{1772}{10}-13^2=177{,}2-169=8{,}2 \\quad;\\quad \\sigma=\\sqrt{8{,}2}\\approx2{,}86"
+      },
+      {
+       "md": "n = 10 est pair : la médiane est la moyenne des 5e et 6e valeurs, soit (13 + 14) ÷ 2 = 13,5."
+      }
+     ],
+     "answer": "Moyenne 13 ; variance 8,2 ; écart-type ≈ 2,86 ; médiane 13,5."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : droite de régression",
+     "statement": "Série fictive : x = 2, 4, 6, 8 et y = 5, 9, 10, 16. Détermine la droite de régression de y en x, le coefficient r et prévois y pour x = 10.",
+     "steps": [
+      {
+       "md": "$\\bar{x}=5$, $\\bar{y}=10$, $V(x)=5$. Covariance : $\\frac{(-3)(-5)+(-1)(-1)+1\\times0+3\\times6}{4}=\\frac{34}{4}=8{,}5$."
+      },
+      {
+       "md": "Pente et ordonnée :",
+       "tex": "a=\\frac{8{,}5}{5}=1{,}7 \\quad;\\quad b=10-1{,}7\\times5=1{,}5"
+      },
+      {
+       "md": "Droite : $y=1{,}7x+1{,}5$. Avec $\\sigma_y\\approx3{,}937$ et $\\sigma_x\\approx2{,}236$ : r ≈ 0,966 (forte corrélation positive). Prévision : $1{,}7\\times10+1{,}5=18{,}5$."
+      }
+     ],
+     "answer": "**y = 1,7x + 1,5** ; r ≈ 0,966 ; prévision pour x = 10 : **18,5**.",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 10,
+      "ymin": 0,
+      "ymax": 20,
+      "grid": 1,
+      "xlabel": "x",
+      "ylabel": "y",
+      "curves": [
+       {
+        "expr": "1.7*x+1.5",
+        "color": "blue",
+        "label": "droite"
+       }
+      ],
+      "points": [
+       {
+        "x": 2,
+        "y": 5,
+        "label": "A",
+        "color": "red"
+       },
+       {
+        "x": 4,
+        "y": 9,
+        "label": "B",
+        "color": "red"
+       },
+       {
+        "x": 6,
+        "y": 10,
+        "label": "C",
+        "color": "red"
+       },
+       {
+        "x": 8,
+        "y": 16,
+        "label": "D",
+        "color": "red"
+       },
+       {
+        "x": 5,
+        "y": 10,
+        "label": "G",
+        "color": "green"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier la racine carrée : l'écart-type est $\\sqrt{V}$, pas V.\n- Confondre la droite de y en x ($a=\\frac{\\mathrm{cov}}{V(x)}$) et celle de x en y ($\\frac{\\mathrm{cov}}{V(y)}$).\n- Médiane : ne pas ordonner la série avant de la chercher.\n- Interpréter un r élevé comme une preuve de cause ; extrapoler très loin des données."
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-maths-a-sta-01"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Les formules de ce cours divisent par n (écart-type de la population). Certains logiciels divisent par n − 1 : les résultats diffèrent légèrement.",
+      "Toutes les séries de la fiche sont fictives et ne représentent pas des mesures réelles."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier au programme de Tle A : méthode de Mayer (deux points moyens) ou moindres carrés ? Seuls les moindres carrés sont traités ici.",
+    "Quartiles : plusieurs conventions existent ; non traités.",
+    "La formule du coefficient de corrélation et la précision des arrondis (3 décimales) à confirmer."
+   ],
+   "exercises": [
+    "bac-maths-a-sta-01",
+    "bac-maths-a-sta-02",
+    "bac-maths-a-sta-03",
+    "bac-maths-a-sta-04",
+    "bac-maths-a-sta-05",
+    "bac-maths-a-sta-06"
+   ],
+   "selfCheck": [
+    "bac-maths-a-sta-q1",
+    "bac-maths-a-sta-q2",
+    "bac-maths-a-sta-q3",
+    "bac-maths-a-sta-q4",
+    "bac-maths-a-sta-q5"
+   ],
+   "prerequisites": [
+    "bac-maths-a-suites-finance"
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "bac-maths-a-sta-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Calcule la moyenne de la série 4, 6, 8, 10, 12.",
+   "answer": 8,
+   "tolerance": 0,
+   "explanation": "$\\frac{4+6+8+10+12}{5}=\\frac{40}{5}=8$.",
+   "method": "Somme ÷ effectif.",
+   "mistakes": [
+    "Diviser par 4 au lieu de 5."
+   ],
+   "lesson": "bac-maths-a-stats",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-sta-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Calcule la variance de la série 4, 6, 8, 10, 12.",
+   "answer": 8,
+   "tolerance": 0,
+   "explanation": "Moyenne 8. Somme des carrés : 16 + 36 + 64 + 100 + 144 = 360. $V=\\frac{360}{5}-8^2=72-64=8$.",
+   "method": "$V=$ moyenne des carrés − carré de la moyenne.",
+   "mistakes": [
+    "Oublier de soustraire le carré de la moyenne."
+   ],
+   "lesson": "bac-maths-a-stats",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-sta-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Un coefficient de corrélation r = 0,97 signifie que :",
+   "choices": [
+    "les points sont presque alignés sur une droite croissante",
+    "les points sont presque alignés sur une droite décroissante",
+    "il n'y a aucun lien entre les deux variables",
+    "97 % des points sont sur la droite"
+   ],
+   "answer": 0,
+   "explanation": "r proche de 1 : forte corrélation linéaire positive. Le signe + indique que y augmente avec x.",
+   "method": "Regarder le signe puis la valeur absolue de r.",
+   "mistakes": [
+    "Lire r comme un pourcentage de points sur la droite."
+   ],
+   "lesson": "bac-maths-a-stats",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-sta-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Série fictive : x = 1, 2, 3, 4, 5, 6 et y = 12, 15, 19, 21, 26, 28. Calcule la pente a de la droite de régression de y en x (arrondie au millième).",
+   "answer": 3.286,
+   "tolerance": 0.001,
+   "explanation": "$\\bar{x}=3{,}5$, $V(x)=\\frac{35}{12}\\approx2{,}9167$, $\\bar{y}=\\frac{121}{6}\\approx20{,}1667$ ; $\\mathrm{cov}(x,y)\\approx9{,}5833$. Donc $a=\\frac{9{,}5833}{2{,}9167}\\approx3{,}286$.",
+   "method": "$a=\\mathrm{cov}(x,y)/V(x)$ ; ou statistics.linear_regression en Python.",
+   "mistakes": [
+    "Diviser par l'écart-type au lieu de la variance."
+   ],
+   "lesson": "bac-maths-a-stats",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-sta-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Avec la même série, la droite est $y\\approx3{,}2857x+8{,}6667$. Quelle valeur de y prévoit-on pour x = 7 (arrondie au centième) ?",
+   "answer": 31.67,
+   "tolerance": 0.01,
+   "explanation": "$3{,}2857\\times7+8{,}6667=23+8{,}6667\\approx31{,}67$.",
+   "method": "Remplacer x dans l'équation de la droite.",
+   "mistakes": [
+    "Arrondir la pente à 3 avant de calculer."
+   ],
+   "lesson": "bac-maths-a-stats",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-sta-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Une boutique de Garoua note, pendant 6 mois, sa dépense de publicité x (en milliers de FCFA) et ses ventes y (en centaines d'articles). Données fictives : x = 1, 2, 3, 4, 5, 6 ; y = 12, 15, 19, 21, 26, 28.",
+   "parts": [
+    {
+     "id": "bac-maths-a-sta-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la moyenne $\\bar{y}$ des ventes, arrondie au centième.",
+     "explanation": "$\\bar{y}=\\frac{12+15+19+21+26+28}{6}=\\frac{121}{6}\\approx20{,}17$.",
+     "answer": 20.17,
+     "tolerance": 0.01
+    },
+    {
+     "id": "bac-maths-a-sta-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le coefficient de corrélation r, arrondi au millième.",
+     "explanation": "$r=\\frac{\\mathrm{cov}(x,y)}{\\sigma_x\\sigma_y}\\approx\\frac{9{,}5833}{1{,}7078\\times5{,}6397}\\approx0{,}995$ : points presque alignés.",
+     "answer": 0.995,
+     "tolerance": 0.001
+    },
+    {
+     "id": "bac-maths-a-sta-06-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Donne la pente a de la droite de régression de y en x (au millième).",
+     "explanation": "$a=\\frac{9{,}5833}{2{,}9167}\\approx3{,}286$.",
+     "answer": 3.286,
+     "tolerance": 0.001
+    },
+    {
+     "id": "bac-maths-a-sta-06-d",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Donne l'ordonnée à l'origine b (au millième).",
+     "explanation": "$b=\\bar{y}-a\\bar{x}=20{,}1667-3{,}2857\\times3{,}5\\approx8{,}667$.",
+     "answer": 8.667,
+     "tolerance": 0.001
+    },
+    {
+     "id": "bac-maths-a-sta-06-e",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Prévois les ventes (en centaines d'articles) pour une dépense x = 8, au centième.",
+     "explanation": "$3{,}2857\\times8+8{,}6667\\approx34{,}95$. Prévision à prendre avec prudence : x = 8 sort de l'intervalle observé.",
+     "answer": 34.95,
+     "tolerance": 0.01
+    }
+   ],
+   "method": "Calculer moyennes, covariance et variance, puis a et b ; conclure avec r.",
+   "mistakes": [
+    "Utiliser des moyennes trop arrondies : garder 4 décimales dans les calculs intermédiaires."
+   ],
+   "lesson": "bac-maths-a-stats",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-sta-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "L'écart-type d'une série s'obtient par :",
+   "choices": [
+    "la racine carrée de la variance",
+    "le carré de la variance",
+    "la moyenne des carrés",
+    "la moitié de la variance"
+   ],
+   "answer": 0,
+   "explanation": "$\\sigma=\\sqrt{V}$.",
+   "lesson": "bac-maths-a-stats",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-sta-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "La droite de régression de y en x passe par :",
+   "choices": [
+    "le point moyen $G(\\bar{x}\\,;\\,\\bar{y})$",
+    "l'origine du repère",
+    "le premier point du nuage",
+    "le point $(\\sigma_x\\,;\\,\\sigma_y)$"
+   ],
+   "answer": 0,
+   "explanation": "Puisque $b=\\bar{y}-a\\bar{x}$, la droite passe par le point moyen.",
+   "lesson": "bac-maths-a-stats",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-sta-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Un coefficient r = −0,9 indique :",
+   "choices": [
+    "une forte corrélation négative",
+    "une forte corrélation positive",
+    "une corrélation nulle",
+    "une erreur de calcul"
+   ],
+   "answer": 0,
+   "explanation": "Proche de −1 : points presque alignés, y diminue quand x augmente.",
+   "lesson": "bac-maths-a-stats",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-sta-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "La médiane de 3, 5, 9, 11, 20 est :",
+   "choices": [
+    "9",
+    "5",
+    "11",
+    "9,6"
+   ],
+   "answer": 0,
+   "explanation": "5 valeurs ordonnées : la médiane est la 3e, soit 9 (9,6 est la moyenne).",
+   "lesson": "bac-maths-a-stats",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-sta-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quelle valeur de r est impossible ?",
+   "choices": [
+    "1,2",
+    "−1",
+    "0",
+    "0,5"
+   ],
+   "answer": 0,
+   "explanation": "Un coefficient de corrélation est toujours compris entre −1 et 1.",
+   "lesson": "bac-maths-a-stats",
+   "source": "Exercice original, style Bac A"
+  }
+ ]
+}

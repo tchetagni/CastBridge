@@ -1,0 +1,311 @@
+{
+ "chapter": "bac-chimie-cd-organique-ch-alcools",
+ "lessons": [],
+ "exercises": [
+  {
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Un alcool B de formule C₄H₁₀O, de chaîne carbonée linéaire, est oxydé par une solution acide de permanganate de potassium en un composé qui donne un précipité jaune avec la DNPH mais ne réagit pas avec la liqueur de Fehling. M(C) = 12 ; M(H) = 1 ; M(O) = 16 g/mol.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quelle est la classe de l'alcool B ?",
+     "points": 1,
+     "choices": [
+      "Alcool secondaire",
+      "Alcool primaire",
+      "Alcool tertiaire",
+      "Alcool aromatique"
+     ],
+     "answer": 0,
+     "explanation": "Le produit est une cétone (DNPH positive, Fehling négatif) : B est secondaire ; chaîne linéaire : butan-2-ol.",
+     "id": "bac-chimie-cd-organique-blanc-1-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule la quantité de matière de B dans 3,7 g d'alcool, en mol.",
+     "points": 1,
+     "answer": 0.05,
+     "tolerance": 0.001,
+     "unit": "mol",
+     "explanation": "M = 74 g/mol ; n = 3,7/74 = 0,050 mol.",
+     "id": "bac-chimie-cd-organique-blanc-1-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Équation : 5 B + 2 MnO₄⁻ + 6 H⁺ → 5 cétone + 2 Mn²⁺ + 8 H₂O. Quel volume de solution de permanganate à 0,20 mol/L oxyde les 0,050 mol de B, en mL ?",
+     "points": 1.5,
+     "answer": 100.0,
+     "tolerance": 1,
+     "unit": "mL",
+     "explanation": "n(MnO₄⁻) = 0,050 × 2/5 = 0,020 mol ; V = 0,020/0,20 = 0,100 L = 100 mL.",
+     "id": "bac-chimie-cd-organique-blanc-1-c"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "La déshydratation intramoléculaire de B donne majoritairement :",
+     "points": 0.5,
+     "choices": [
+      "le but-2-ène",
+      "le but-1-ène",
+      "un éther-oxyde",
+      "la butanone"
+     ],
+     "answer": 0,
+     "explanation": "Règle de Zaïtsev : l'alcène le plus substitué (but-2-ène) est majoritaire.",
+     "id": "bac-chimie-cd-organique-blanc-1-d"
+    }
+   ],
+   "method": "Tests → famille ; classe ; stœchiométrie 5 : 2.",
+   "mistakes": [
+    "Retourner le rapport 2/5."
+   ],
+   "id": "bac-chimie-cd-organique-blanc-1",
+   "lesson": "bac-chimie-cd-organique-alcools",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Pour contrôler l'acidité d'un vinaigre (données fictives), on le dilue 5 fois. On dose 10,0 mL de vinaigre dilué par de la soude à 0,10 mol/L ; l'équivalence est atteinte pour V_E = 14,0 mL. M(CH₃COOH) = 60 g/mol.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "L'acide éthanoïque dans l'eau est :",
+     "points": 1,
+     "choices": [
+      "un acide faible : CH₃COOH + H₂O ⇌ CH₃COO⁻ + H₃O⁺",
+      "un acide fort totalement dissocié",
+      "une base faible",
+      "un ester"
+     ],
+     "answer": 0,
+     "explanation": "Son pKa vaut environ 4,8 ; la dissociation est partielle.",
+     "id": "bac-chimie-cd-organique-blanc-2-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule la concentration du vinaigre dilué, en mol/L.",
+     "points": 1,
+     "answer": 0.14,
+     "tolerance": 0.005,
+     "unit": "mol/L",
+     "explanation": "c_d = c_B V_E / V_A = 0,10 × 14,0/10,0 = 0,14 mol/L.",
+     "id": "bac-chimie-cd-organique-blanc-2-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule la concentration du vinaigre initial, en mol/L.",
+     "points": 1,
+     "answer": 0.7,
+     "tolerance": 0.01,
+     "unit": "mol/L",
+     "explanation": "c = 5 × 0,14 = 0,70 mol/L.",
+     "id": "bac-chimie-cd-organique-blanc-2-c"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule sa concentration massique, en g/L.",
+     "points": 1,
+     "answer": 42.0,
+     "tolerance": 0.5,
+     "unit": "g/L",
+     "explanation": "c_m = 0,70 × 60 = 42 g/L.",
+     "id": "bac-chimie-cd-organique-blanc-2-d"
+    }
+   ],
+   "method": "Équivalence 1 pour 1, dilution, M.",
+   "mistakes": [
+    "Oublier le facteur de dilution."
+   ],
+   "id": "bac-chimie-cd-organique-blanc-2",
+   "lesson": "bac-chimie-cd-organique-carbonyles",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "On mélange 0,80 mol d'acide propanoïque et 0,80 mol d'éthanol avec un peu d'acide sulfurique concentré et on chauffe à reflux jusqu'à l'équilibre (K = 4).",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quel est le nom de l'ester formé ?",
+     "points": 0.5,
+     "choices": [
+      "Propanoate d'éthyle",
+      "Éthanoate de propyle",
+      "Propanoate de méthyle",
+      "Éthanoate d'éthyle"
+     ],
+     "answer": 0,
+     "explanation": "Acide propanoïque (propanoate) et éthanol (éthyle).",
+     "id": "bac-chimie-cd-organique-blanc-3-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule la quantité d'ester à l'équilibre, en mol.",
+     "points": 1.5,
+     "answer": 0.53,
+     "tolerance": 0.01,
+     "unit": "mol",
+     "explanation": "x²/(0,80 − x)² = 4 donne x/(0,80 − x) = 2 ; x = 1,6/3 ≈ 0,53 mol.",
+     "id": "bac-chimie-cd-organique-blanc-3-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "On refait l'expérience avec 0,80 mol d'acide et 2,4 mol d'éthanol. Calcule le rendement par rapport à l'acide, en %.",
+     "points": 1.5,
+     "answer": 90.0,
+     "tolerance": 1,
+     "unit": "%",
+     "explanation": "x² = 4 (0,80 − x)(2,4 − x) donne 3x² − 12,8x + 7,68 = 0 ; x ≈ 0,722 mol ; rendement ≈ 90 %.",
+     "id": "bac-chimie-cd-organique-blanc-3-c"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quel effet a l'ajout de l'acide sulfurique ?",
+     "points": 0.5,
+     "choices": [
+      "Il accélère la réaction sans changer le rendement final",
+      "Il augmente le rendement",
+      "Il rend la réaction totale",
+      "Il diminue la constante K"
+     ],
+     "answer": 0,
+     "explanation": "Un catalyseur modifie la vitesse, pas l'état d'équilibre.",
+     "id": "bac-chimie-cd-organique-blanc-3-d"
+    }
+   ],
+   "method": "Tableau d'avancement et K.",
+   "mistakes": [
+    "Croire que le catalyseur augmente le rendement."
+   ],
+   "id": "bac-chimie-cd-organique-blanc-3",
+   "lesson": "bac-chimie-cd-organique-esters",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "L'éthylamine C₂H₅NH₂ est une base faible (pKa du couple C₂H₅NH₃⁺/C₂H₅NH₂ = 10,7, valeur usuelle). Par ailleurs, on prépare le dipeptide Ala-Gly à partir d'alanine (M = 89 g/mol) et de glycine (M = 75 g/mol) ; M(H₂O) = 18 g/mol.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Calcule le pH d'une solution d'éthylamine à 0,020 mol/L (base faible peu dissociée).",
+     "points": 1.5,
+     "answer": 11.5,
+     "tolerance": 0.05,
+     "explanation": "pH = 7 + ½ (10,7 + log 0,020) = 7 + ½ (10,7 − 1,70) ≈ 11,5.",
+     "id": "bac-chimie-cd-organique-blanc-4-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "La liaison formée entre les deux acides aminés est :",
+     "points": 0.5,
+     "choices": [
+      "une liaison peptidique (amide)",
+      "une liaison ester",
+      "une liaison ionique",
+      "une liaison métallique"
+     ],
+     "answer": 0,
+     "explanation": "COOH + NH₂ → CO−NH + H₂O.",
+     "id": "bac-chimie-cd-organique-blanc-4-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule la masse molaire de Ala-Gly, en g/mol.",
+     "points": 1,
+     "answer": 146,
+     "tolerance": 0,
+     "unit": "g/mol",
+     "explanation": "M = 89 + 75 − 18 = 146 g/mol.",
+     "id": "bac-chimie-cd-organique-blanc-4-c"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "On part de 0,10 mol de chaque acide aminé ; le rendement est de 70 %. Quelle masse de dipeptide obtient-on, en g ?",
+     "points": 1,
+     "answer": 10.22,
+     "tolerance": 0.05,
+     "unit": "g",
+     "explanation": "m = 0,70 × 0,10 × 146 = 10,22 g.",
+     "id": "bac-chimie-cd-organique-blanc-4-d"
+    }
+   ],
+   "method": "pH base faible ; M(peptide) = Σ M − 18.",
+   "mistakes": [
+    "Utiliser la formule d'un acide faible."
+   ],
+   "id": "bac-chimie-cd-organique-blanc-4",
+   "lesson": "bac-chimie-cd-organique-amines",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Un échantillon de polyéthylène (monomère : éthène C₂H₄, M = 28 g/mol) a une masse molaire de 84 000 g/mol. D'autre part, une pile Daniell (Zn | Zn²⁺ ‖ Cu²⁺ | Cu) débite un courant constant de 0,20 A pendant 30 min. F = 96 500 C/mol ; M(Zn) = 65,4 g/mol.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Le polyéthylène est obtenu par :",
+     "points": 0.5,
+     "choices": [
+      "polyaddition de l'éthène",
+      "polycondensation d'un diol et d'un diacide",
+      "estérification",
+      "saponification"
+     ],
+     "answer": 0,
+     "explanation": "La double liaison C=C de l'éthène s'ouvre : polyaddition.",
+     "id": "bac-chimie-cd-organique-blanc-5-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule le degré de polymérisation.",
+     "points": 1,
+     "answer": 3000.0,
+     "tolerance": 0,
+     "explanation": "n = 84 000/28 = 3000.",
+     "id": "bac-chimie-cd-organique-blanc-5-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule la masse de zinc oxydée pendant ce fonctionnement, en g.",
+     "points": 1.5,
+     "answer": 0.12,
+     "tolerance": 0.01,
+     "unit": "g",
+     "explanation": "Q = 0,20 × 1800 = 360 C ; n(e⁻) = 360/96 500 ≈ 3,73×10⁻³ mol ; n(Zn) = n(e⁻)/2 ≈ 1,87×10⁻³ mol ; m ≈ 0,12 g.",
+     "id": "bac-chimie-cd-organique-blanc-5-c"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quel est le pôle négatif de la pile ?",
+     "points": 1,
+     "choices": [
+      "L'électrode de zinc, siège de l'oxydation",
+      "L'électrode de cuivre, siège de la réduction",
+      "Le pont salin",
+      "L'électrode de cuivre, siège de l'oxydation"
+     ],
+     "answer": 0,
+     "explanation": "Zn → Zn²⁺ + 2 e⁻ : oxydation (anode), pôle −.",
+     "id": "bac-chimie-cd-organique-blanc-5-d"
+    }
+   ],
+   "method": "n = M(polymère)/M(motif) ; Q = I Δt ; n(Zn) = Q/(2F).",
+   "mistakes": [
+    "Garder 30 min sans convertir en s."
+   ],
+   "id": "bac-chimie-cd-organique-blanc-5",
+   "lesson": "bac-chimie-cd-organique-polymeres",
+   "source": "Exercice original, style Bac C/D"
+  }
+ ]
+}

@@ -1,0 +1,288 @@
+{
+ "chapter": "bac-physique-cd-complements-ch-champ-magnetique",
+ "lessons": [],
+ "exercises": [
+  {
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Des protons (m = 1,67×10⁻²⁷ kg ; e = 1,6×10⁻¹⁹ C), initialement au repos, sont accélérés par une tension U = 2000 V puis entrent perpendiculairement dans un champ magnétique uniforme B = 0,10 T.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Calcule leur vitesse à l'entrée du champ, en km/s.",
+     "points": 1,
+     "answer": 619.0,
+     "tolerance": 5,
+     "unit": "km/s",
+     "explanation": "e U = ½ m v² donne v = √(2eU/m) ≈ 619 km/s.",
+     "id": "bac-physique-cd-complements-blanc-1-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule le rayon de leur trajectoire circulaire, en cm.",
+     "points": 1.5,
+     "answer": 6.5,
+     "tolerance": 0.2,
+     "unit": "cm",
+     "explanation": "R = m v /(e B) ≈ 6,5 cm.",
+     "id": "bac-physique-cd-complements-blanc-1-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule la période de révolution, en ns.",
+     "points": 1,
+     "answer": 656.0,
+     "tolerance": 2,
+     "unit": "ns",
+     "explanation": "T = 2π m /(e B) ≈ 656 ns.",
+     "id": "bac-physique-cd-complements-blanc-1-c"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "On quadruple la tension U. Le rayon R est :",
+     "points": 0.5,
+     "choices": [
+      "multiplié par 2",
+      "multiplié par 4",
+      "inchangé",
+      "divisé par 2"
+     ],
+     "answer": 0,
+     "explanation": "R = (1/B)√(2mU/e) varie comme √U : √4 = 2.",
+     "id": "bac-physique-cd-complements-blanc-1-d"
+    }
+   ],
+   "method": "Énergie cinétique, puis R = mv/(eB).",
+   "mistakes": [
+    "Oublier de convertir.",
+    "Prendre R proportionnel à U."
+   ],
+   "id": "bac-physique-cd-complements-blanc-1",
+   "lesson": "bac-physique-cd-complements-champ-magnetique",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Une bobine de N = 400 spires, de section S = 25 cm² et de résistance totale 20 Ω, est fermée sur elle-même. Son axe est parallèle à un champ magnétique dont la valeur passe uniformément de 0 à 0,20 T en 0,050 s.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Calcule la variation de flux à travers la bobine, en Wb.",
+     "points": 1,
+     "answer": 0.2,
+     "tolerance": 0.005,
+     "unit": "Wb",
+     "explanation": "ΔΦ = N S ΔB = 400 × 25×10⁻⁴ × 0,20 = 0,20 Wb.",
+     "id": "bac-physique-cd-complements-blanc-2-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule la valeur de la f.é.m. moyenne induite, en V.",
+     "points": 1,
+     "answer": 4.0,
+     "tolerance": 0.05,
+     "unit": "V",
+     "explanation": "|e| = ΔΦ/Δt = 0,20/0,050 = 4,0 V.",
+     "id": "bac-physique-cd-complements-blanc-2-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule l'intensité moyenne du courant induit, en A.",
+     "points": 1,
+     "answer": 0.2,
+     "tolerance": 0.005,
+     "unit": "A",
+     "explanation": "I = e/R = 4,0/20 = 0,20 A.",
+     "id": "bac-physique-cd-complements-blanc-2-c"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "D'après la loi de Lenz, le champ créé par le courant induit à l'intérieur de la bobine :",
+     "points": 1,
+     "choices": [
+      "est de sens opposé au champ extérieur, qui augmente",
+      "est de même sens que le champ extérieur",
+      "est nul",
+      "est perpendiculaire au champ extérieur"
+     ],
+     "answer": 0,
+     "explanation": "Le courant induit s'oppose à l'augmentation du flux : son champ propre est opposé à B.",
+     "id": "bac-physique-cd-complements-blanc-2-d"
+    }
+   ],
+   "method": "ΔΦ = N S ΔB, e = ΔΦ/Δt, I = e/R, puis Lenz.",
+   "mistakes": [
+    "Oublier N.",
+    "S en cm²."
+   ],
+   "id": "bac-physique-cd-complements-blanc-2",
+   "lesson": "bac-physique-cd-complements-induction",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Un circuit série est formé d'un résistor R = 20 Ω, d'une bobine idéale L = 0,10 H et d'un condensateur C = 2,5 µF, alimenté par un générateur de tension sinusoïdale de valeur efficace U = 2,0 V et de fréquence variable.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Calcule la fréquence de résonance d'intensité, en Hz.",
+     "points": 1,
+     "answer": 318.0,
+     "tolerance": 1,
+     "unit": "Hz",
+     "explanation": "f₀ = 1/(2π√(LC)) = 1/(2π√(2,5×10⁻⁷)) ≈ 318 Hz.",
+     "id": "bac-physique-cd-complements-blanc-3-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule le facteur de qualité Q.",
+     "points": 1,
+     "answer": 10.0,
+     "tolerance": 0.05,
+     "explanation": "Q = (1/R)√(L/C) = √(4,0×10⁴)/20 = 200/20 = 10.",
+     "id": "bac-physique-cd-complements-blanc-3-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule la tension efficace aux bornes du condensateur à la résonance, en V.",
+     "points": 1,
+     "answer": 20.0,
+     "tolerance": 0.2,
+     "unit": "V",
+     "explanation": "U_C = Q U = 10 × 2,0 = 20 V.",
+     "id": "bac-physique-cd-complements-blanc-3-c"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule l'impédance du circuit à f = 400 Hz, en Ω.",
+     "points": 1,
+     "answer": 94.0,
+     "tolerance": 1,
+     "unit": "Ω",
+     "explanation": "ω = 2π × 400 ≈ 2513 rad/s ; Lω ≈ 251,3 Ω ; 1/(Cω) ≈ 159,2 Ω ; Z = √(20² + 92,1²) ≈ 94 Ω.",
+     "id": "bac-physique-cd-complements-blanc-3-d"
+    }
+   ],
+   "method": "f₀, Q, U_C = Q U, impédance.",
+   "mistakes": [
+    "Oublier de convertir µF en F."
+   ],
+   "id": "bac-physique-cd-complements-blanc-3",
+   "lesson": "bac-physique-cd-complements-rlc",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Dans un dispositif de fentes de Young, les fentes sont distantes de a = 0,40 mm et l'écran est à D = 1,0 m. On mesure un interfrange i = 1,2 mm. Cette lumière éclaire ensuite une cathode dont le travail d'extraction est W₀ = 2,1 eV (valeur fictive). On donne h = 6,63×10⁻³⁴ J·s ; c = 3,00×10⁸ m/s ; 1 eV = 1,6×10⁻¹⁹ J.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Déduis la longueur d'onde de la lumière, en nm (i = λD/a).",
+     "points": 1.5,
+     "answer": 480.0,
+     "tolerance": 2,
+     "unit": "nm",
+     "explanation": "λ = i a / D = 1,2×10⁻³ × 0,40×10⁻³ / 1,0 = 4,8×10⁻⁷ m = 480 nm.",
+     "id": "bac-physique-cd-complements-blanc-4-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule l'énergie d'un photon, en eV.",
+     "points": 1,
+     "answer": 2.59,
+     "tolerance": 0.03,
+     "unit": "eV",
+     "explanation": "E = hc/λ = 6,63×10⁻³⁴ × 3,00×10⁸ / 4,8×10⁻⁷ ≈ 4,14×10⁻¹⁹ J ≈ 2,59 eV.",
+     "id": "bac-physique-cd-complements-blanc-4-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule l'énergie cinétique maximale des électrons émis, en eV.",
+     "points": 1,
+     "answer": 0.49,
+     "tolerance": 0.03,
+     "unit": "eV",
+     "explanation": "E_c,max = 2,59 − 2,1 ≈ 0,49 eV.",
+     "id": "bac-physique-cd-complements-blanc-4-c"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Si on réduit la largeur des fentes sans changer a, l'interfrange i :",
+     "points": 0.5,
+     "choices": [
+      "reste inchangé (i = λD/a)",
+      "double",
+      "est divisé par deux",
+      "devient nul"
+     ],
+     "answer": 0,
+     "explanation": "La formule i = λD/a ne dépend pas de la largeur des fentes, seulement de leur écartement.",
+     "id": "bac-physique-cd-complements-blanc-4-d"
+    }
+   ],
+   "method": "i = λD/a, E = hc/λ, E_c = E − W₀.",
+   "mistakes": [
+    "Confondre a et la largeur d'une fente."
+   ],
+   "id": "bac-physique-cd-complements-blanc-4",
+   "lesson": "bac-physique-cd-complements-ondes",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Un satellite fictif décrit une orbite circulaire à l'altitude h = 1000 km autour de la Terre (G = 6,67×10⁻¹¹ SI ; M = 5,97×10²⁴ kg ; R = 6,38×10⁶ m).",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Calcule sa vitesse, en km/s.",
+     "points": 1.5,
+     "answer": 7.35,
+     "tolerance": 0.02,
+     "unit": "km/s",
+     "explanation": "r = 7,38×10⁶ m ; v = √(GM/r) ≈ 7,35 km/s.",
+     "id": "bac-physique-cd-complements-blanc-5-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule sa période, en minutes.",
+     "points": 1.5,
+     "answer": 105.2,
+     "tolerance": 0.3,
+     "unit": "min",
+     "explanation": "T = 2πr/v ≈ 6313 s ≈ 105,2 min.",
+     "id": "bac-physique-cd-complements-blanc-5-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Si on place un second satellite à une altitude plus élevée, sa période est :",
+     "points": 1,
+     "choices": [
+      "plus grande",
+      "plus petite",
+      "identique",
+      "nulle"
+     ],
+     "answer": 0,
+     "explanation": "T = 2π√(r³/GM) croît avec r.",
+     "id": "bac-physique-cd-complements-blanc-5-c"
+    }
+   ],
+   "method": "r = R + h, v = √(GM/r), T = 2πr/v.",
+   "mistakes": [
+    "Oublier R."
+   ],
+   "id": "bac-physique-cd-complements-blanc-5",
+   "lesson": "bac-physique-cd-complements-gravitation",
+   "source": "Exercice original, style Bac C/D"
+  }
+ ]
+}

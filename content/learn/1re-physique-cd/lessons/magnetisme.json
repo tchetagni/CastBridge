@@ -1,0 +1,587 @@
+{
+ "chapter": "1re-physique-cd-ch-magnetisme",
+ "lessons": [
+  {
+   "id": "1re-physique-cd-magnetisme",
+   "chapter": "1re-physique-cd-ch-magnetisme",
+   "title": "Champ magnétique et force de Laplace (niveau introductif)",
+   "minutes": 40,
+   "programRef": "1re C/D — Champ magnétique, force de Laplace (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale d'après le programme de 1re C et D ; à relire par un enseignant",
+   "objectives": [
+    "Décrire un champ magnétique (aimant, fil, solénoïde) : direction, sens, valeur en tesla.",
+    "Calculer le champ d'un fil rectiligne et d'un solénoïde.",
+    "Déterminer la direction, le sens et la valeur de la force de Laplace sur un conducteur parcouru par un courant."
+   ],
+   "prerequisites": [
+    "1re-physique-cd-dynamique"
+   ],
+   "exercises": [
+    "1re-physique-cd-ma-01",
+    "1re-physique-cd-ma-02",
+    "1re-physique-cd-ma-03",
+    "1re-physique-cd-ma-04",
+    "1re-physique-cd-ma-05",
+    "1re-physique-cd-ma-06"
+   ],
+   "selfCheck": [
+    "1re-physique-cd-ma-q1",
+    "1re-physique-cd-ma-q2",
+    "1re-physique-cd-ma-q3",
+    "1re-physique-cd-ma-q4",
+    "1re-physique-cd-ma-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Ce que tu sauras faire",
+     "md": "- Représenter un champ magnétique et le calculer dans deux cas simples.\n- Déterminer la force de Laplace (direction, sens, valeur).\n- Résoudre un équilibre de conducteur dans un champ magnétique."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Champ magnétique",
+     "md": "Un aimant ou un courant crée dans l'espace un **champ magnétique** $\\vec B$, grandeur vectorielle mesurée en **tesla** (T) avec un teslamètre.\n- Une petite aiguille aimantée s'oriente selon $\\vec B$ : son pôle nord indique le sens du champ.\n- Les **lignes de champ** sortent du pôle nord d'un aimant et rentrent par son pôle sud (à l'extérieur de l'aimant).\n- Un champ est **uniforme** si $\\vec B$ est le même en tout point (entre les branches d'un aimant en U, par exemple)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Champ créé par un courant",
+     "md": "Avec la perméabilité du vide $\\mu_0 = 4\\pi \\times 10^{-7}$ T·m/A :\n- **fil rectiligne très long**, à la distance $d$ : $B = \\frac{\\mu_0\\,I}{2\\pi\\,d} = \\frac{2 \\times 10^{-7}\\,I}{d}$ ;\n- **solénoïde** long de $N$ spires et de longueur $L$, au centre : $B = \\mu_0\\,\\frac{N}{L}\\,I$.\nLe sens de $\\vec B$ se trouve avec la règle de la main droite (ou du tire-bouchon) : le pouce suit le courant, les doigts enroulés indiquent le sens du champ."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Force de Laplace",
+     "md": "Un conducteur rectiligne de longueur $L$, parcouru par un courant $I$ dans un champ magnétique uniforme $\\vec B$, subit la force :\n$F = I\\,L\\,B\\,\\sin\\alpha$,\noù $\\alpha$ est l'angle entre le conducteur (sens du courant) et $\\vec B$.\n- $F$ est **maximale** quand le conducteur est perpendiculaire à $\\vec B$ ($\\sin\\alpha = 1$) ;\n- $F$ est **nulle** quand il est parallèle à $\\vec B$.\nUnités : $F$ en N, $I$ en A, $L$ en m, $B$ en T."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Direction et sens de la force de Laplace",
+     "md": "La force $\\vec F$ est perpendiculaire à la fois au conducteur et à $\\vec B$. Pour le sens, on utilise la **règle des trois doigts de la main droite** : le pouce suit le sens du courant, l'index le sens de $\\vec B$ ; le majeur indique alors le sens de $\\vec F$ (le triplet courant, champ, force forme un trièdre direct). Inverser le courant (ou le champ) inverse la force."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 300,
+      "h": 228,
+      "items": [
+       {
+        "t": "text",
+        "x": 45,
+        "y": 45,
+        "text": "×",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 45,
+        "y": 95,
+        "text": "×",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 45,
+        "y": 150,
+        "text": "×",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 45,
+        "y": 200,
+        "text": "×",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 45,
+        "text": "×",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 95,
+        "text": "×",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 150,
+        "text": "×",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 200,
+        "text": "×",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 195,
+        "y": 45,
+        "text": "×",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 195,
+        "y": 95,
+        "text": "×",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 195,
+        "y": 150,
+        "text": "×",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 195,
+        "y": 200,
+        "text": "×",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 255,
+        "y": 45,
+        "text": "×",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 255,
+        "y": 95,
+        "text": "×",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 255,
+        "y": 150,
+        "text": "×",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 255,
+        "y": 200,
+        "text": "×",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 122,
+        "x2": 240,
+        "y2": 122,
+        "color": "ink",
+        "width": 5
+       },
+       {
+        "t": "line",
+        "x1": 205,
+        "y1": 122,
+        "x2": 242,
+        "y2": 122,
+        "color": "ink",
+        "width": 5,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 268,
+        "y": 127,
+        "text": "I",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 122,
+        "x2": 150,
+        "y2": 56,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 168,
+        "y": 72,
+        "text": "F",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 222,
+        "text": "B entrant (×)",
+        "size": 13,
+        "color": "blue",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Vue de dessus : un conducteur horizontal parcouru par un courant I vers la droite, dans un champ B entrant dans le plan de la feuille (croix bleues). La force de Laplace F est dirigée vers le haut de la feuille.",
+     "alt": "Un trait horizontal avec une flèche vers la droite (courant I), entouré de croix bleues qui symbolisent un champ magnétique entrant. Une flèche rouge F part du fil vers le haut, perpendiculaire au fil."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : problème avec la force de Laplace",
+     "md": "1. Faire un schéma : conducteur, sens de $I$, direction de $\\vec B$.\n2. Déterminer la direction et le sens de $\\vec F$ (règle des trois doigts).\n3. Calculer $F = ILB\\sin\\alpha$ (unités SI).\n4. Si le conducteur est en équilibre, faire le bilan de toutes les forces (poids, tension...) et écrire que leur somme est nulle."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : valeur de la force",
+     "statement": "Un conducteur de longueur utile 10 cm est parcouru par un courant de 5 A dans un champ uniforme de 0,2 T. Calcule la force quand il est perpendiculaire au champ, puis quand il fait 30° avec le champ.",
+     "steps": [
+      {
+       "md": "Conversion : $L = 0{,}10$ m. Perpendiculaire ($\\sin 90\\degree = 1$) :",
+       "tex": "F = ILB = 5 \\times 0{,}10 \\times 0{,}2 = 0{,}10\\ \\text{N}"
+      },
+      {
+       "md": "Avec $\\alpha = 30\\degree$ ($\\sin 30\\degree = 0{,}5$) :",
+       "tex": "F = ILB\\sin 30\\degree = 0{,}10 \\times 0{,}5 = 0{,}05\\ \\text{N}"
+      }
+     ],
+     "answer": "**F = 0,10 N (perpendiculaire) puis F = 0,05 N (à 30°).**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : deux champs",
+     "statement": "(a) Un solénoïde de 500 spires et de longueur 25 cm est parcouru par 2 A : calcule B au centre. (b) Calcule le champ d'un fil rectiligne parcouru par 10 A à 5 cm.",
+     "steps": [
+      {
+       "md": "(a) Nombre de spires par mètre : $n = 500 \\div 0{,}25 = 2\\,000$ spires/m, donc :",
+       "tex": "B = \\mu_0 n I = 4\\pi \\times 10^{-7} \\times 2000 \\times 2 \\approx 5{,}03 \\times 10^{-3}\\ \\text{T}"
+      },
+      {
+       "md": "(b) Fil rectiligne :",
+       "tex": "B = \\frac{2 \\times 10^{-7} \\times 10}{0{,}05} = 4 \\times 10^{-5}\\ \\text{T} = 40\\ \\mu\\text{T}"
+      }
+     ],
+     "answer": "**(a) B ≈ 5,03 mT ; (b) B = 40 µT** (de l'ordre du champ magnétique terrestre)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Ne pas convertir cm en m, ou mT en T.\n- Oublier le $\\sin\\alpha$ : la force est nulle si le conducteur est parallèle au champ.\n- Confondre le sens de $\\vec F$ avec celui de $\\vec B$ : la force est perpendiculaire au champ, pas dans sa direction.\n- Utiliser la main gauche ou mélanger les doigts : suivre la règle choisie en classe et vérifier qu'inverser $I$ inverse $F$.\n- Compter N spires au lieu de N/L spires par mètre."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-physique-cd-ma-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-physique-cd-ma-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-physique-cd-ma-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le moteur à courant continu repose sur la force de Laplace : un cadre parcouru par un courant, placé dans le champ d'un aimant, tourne.",
+      "Le champ magnétique terrestre vaut quelques dizaines de µT : c'est lui qui oriente l'aiguille d'une boussole."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Le champ magnétique et la force de Laplace sont-ils au programme de 1re C/D ou plutôt de Tle C/D ? Fiche rédigée au niveau introductif à la 1re ; si le chapitre relève de la Tle, la déplacer ou la remplacer par l'optique des lentilles minces.",
+    "Règle de la main droite pour la force de Laplace : plusieurs conventions existent (trois doigts de la main droite ou de la main gauche, observateur d'Ampère). Aligner avec la convention enseignée en classe.",
+    "Le champ du fil infini et du solénoïde (avec μ0) est peut-être hors programme de 1re : à vérifier.",
+    "L'induction électromagnétique, la force de Lorentz et les particules chargées ne sont pas traitées."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "1re-physique-cd-ma-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-magnetisme",
+   "prompt": "Un conducteur de longueur 15 cm, parcouru par 4 A, est perpendiculaire à un champ de 0,25 T. Calcule la force de Laplace (en N).",
+   "answer": 0.15,
+   "tolerance": 0.001,
+   "unit": "N",
+   "explanation": "$F = ILB = 4 \\times 0{,}15 \\times 0{,}25 = 0{,}15$ N.",
+   "method": "$F = ILB\\sin\\alpha$ avec $\\sin\\alpha = 1$.",
+   "mistakes": [
+    "Laisser L = 15 (en cm)."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-physique-cd-ma-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-magnetisme",
+   "prompt": "Un solénoïde de 1 000 spires, de longueur 50 cm, est parcouru par 1,5 A. Calcule le champ au centre (en mT, arrondi au centième).",
+   "answer": 3.77,
+   "tolerance": 0.01,
+   "unit": "mT",
+   "explanation": "$n = 1000 \\div 0{,}5 = 2000$ spires/m ; $B = 4\\pi \\times 10^{-7} \\times 2000 \\times 1{,}5 \\approx 3{,}77 \\times 10^{-3}$ T, soit 3,77 mT.",
+   "method": "$B = \\mu_0 (N/L) I$.",
+   "mistakes": [
+    "Utiliser N au lieu de N/L."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-physique-cd-ma-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-magnetisme",
+   "prompt": "Vrai ou faux : un conducteur parcouru par un courant et parallèle au champ magnétique subit une force de Laplace nulle.",
+   "answer": true,
+   "explanation": "Vrai : l'angle α entre le conducteur et $\\vec B$ vaut 0, donc $\\sin\\alpha = 0$ et $F = 0$.",
+   "mistakes": [
+    "Croire que la force est maximale quand le fil est parallèle au champ."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-physique-cd-ma-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "1re-physique-cd-magnetisme",
+   "prompt": "Un conducteur de 20 cm, parcouru par 6 A, fait un angle de 30° avec un champ de 0,5 T. Calcule la force de Laplace (en N).",
+   "answer": 0.3,
+   "tolerance": 0.001,
+   "unit": "N",
+   "explanation": "$F = ILB\\sin 30\\degree = 6 \\times 0{,}2 \\times 0{,}5 \\times 0{,}5 = 0{,}30$ N.",
+   "method": "Penser à $\\sin\\alpha$.",
+   "mistakes": [
+    "Oublier le facteur 0,5 et trouver 0,6 N."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-physique-cd-ma-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "1re-physique-cd-magnetisme",
+   "prompt": "Un long fil rectiligne parcouru par 20 A crée un champ à 4 cm de lui. Calcule sa valeur (en µT).",
+   "answer": 100,
+   "tolerance": 0.01,
+   "unit": "µT",
+   "explanation": "$B = \\frac{2 \\times 10^{-7} \\times 20}{0{,}04} = 10^{-4}$ T = 100 µT.",
+   "method": "$B = 2 \\times 10^{-7} I/d$.",
+   "mistakes": [
+    "Utiliser d en cm (4 au lieu de 0,04)."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-physique-cd-ma-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "1re-physique-cd-magnetisme",
+   "prompt": "Une tige de cuivre horizontale, de masse 10 g et de longueur utile 10 cm, est suspendue par deux fils fins verticaux au repos. Elle est parcourue par un courant de 3 A. Un champ magnétique uniforme vertical de 0,2 T règne dans la région. À l'équilibre, les fils forment un angle θ avec la verticale (g = 10 N/kg).",
+   "method": "Équilibre de la tige : les trois forces (poids, tension des fils, Laplace) donnent $\\tan\\theta = F/P$.",
+   "mistakes": [
+    "Utiliser $\\sin\\theta$ au lieu de $\\tan\\theta$.",
+    "Oublier de convertir 10 g en kg."
+   ],
+   "source": "Exercice original, style Probatoire C/D",
+   "parts": [
+    {
+     "id": "1re-physique-cd-ma-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la valeur de la force de Laplace (en N).",
+     "answer": 0.06,
+     "tolerance": 0.001,
+     "unit": "N",
+     "explanation": "La tige est perpendiculaire au champ vertical : $F = ILB = 3 \\times 0{,}10 \\times 0{,}2 = 0{,}06$ N, force horizontale."
+    },
+    {
+     "id": "1re-physique-cd-ma-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le poids de la tige (en N).",
+     "answer": 0.1,
+     "tolerance": 0.0001,
+     "unit": "N",
+     "explanation": "$P = mg = 0{,}010 \\times 10 = 0{,}10$ N."
+    },
+    {
+     "id": "1re-physique-cd-ma-06-c",
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "À l'équilibre, $\\tan\\theta = F/P$. Calcule θ (en degrés, arrondi à l'unité).",
+     "answer": 31,
+     "tolerance": 0.5,
+     "unit": "°",
+     "explanation": "$\\tan\\theta = \\frac{0{,}06}{0{,}10} = 0{,}6$ donc $\\theta = \\arctan 0{,}6 \\approx 31\\degree$."
+    },
+    {
+     "id": "1re-physique-cd-ma-06-d",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "On inverse le sens du courant. Que devient la tige ?",
+     "choices": [
+      "Elle s'écarte de la verticale du côté opposé, du même angle",
+      "Elle revient à la verticale",
+      "Elle s'écarte du même côté, mais d'un angle plus grand",
+      "Elle tourne sur elle-même sans se déplacer"
+     ],
+     "answer": 0,
+     "explanation": "La force de Laplace change de sens mais garde la même valeur : la tige est déviée symétriquement."
+    }
+   ]
+  },
+  {
+   "id": "1re-physique-cd-ma-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-magnetisme",
+   "prompt": "L'unité du champ magnétique dans le Système International est :",
+   "choices": [
+    "le weber par ampère",
+    "le henry (H)",
+    "le gauss par mètre",
+    "le tesla (T)"
+   ],
+   "answer": 3,
+   "explanation": "Le champ magnétique se mesure en tesla ; 1 mT = 10⁻³ T."
+  },
+  {
+   "id": "1re-physique-cd-ma-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-magnetisme",
+   "prompt": "À l'extérieur d'un aimant, les lignes de champ vont :",
+   "choices": [
+    "du pôle nord vers le pôle sud",
+    "du pôle sud vers le pôle nord",
+    "parallèlement à l'aimant sans le quitter",
+    "du centre vers l'extérieur dans toutes les directions"
+   ],
+   "answer": 0,
+   "explanation": "À l'extérieur, les lignes de champ sortent par le pôle nord et rentrent par le pôle sud."
+  },
+  {
+   "id": "1re-physique-cd-ma-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-magnetisme",
+   "prompt": "La force de Laplace est maximale quand :",
+   "choices": [
+    "le conducteur est parallèle au champ",
+    "le conducteur est perpendiculaire au champ",
+    "l'intensité est nulle",
+    "le champ est nul"
+   ],
+   "answer": 1,
+   "explanation": "$F = ILB\\sin\\alpha$ est maximale pour $\\sin\\alpha = 1$, soit $\\alpha = 90\\degree$."
+  },
+  {
+   "id": "1re-physique-cd-ma-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-magnetisme",
+   "prompt": "Un conducteur de 20 cm, parcouru par 5 A, est perpendiculaire à un champ de 0,1 T. La force de Laplace vaut :",
+   "choices": [
+    "0,01 N",
+    "1 N",
+    "0,1 N",
+    "10 N"
+   ],
+   "answer": 2,
+   "explanation": "$F = 5 \\times 0{,}2 \\times 0{,}1 = 0{,}1$ N."
+  },
+  {
+   "id": "1re-physique-cd-ma-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-magnetisme",
+   "prompt": "Si l'on double l'intensité du courant dans un conducteur placé dans un champ uniforme, la force de Laplace :",
+   "choices": [
+    "est divisée par 2",
+    "est multipliée par 4",
+    "ne change pas",
+    "est doublée"
+   ],
+   "answer": 3,
+   "explanation": "$F$ est proportionnelle à $I$."
+  }
+ ]
+}

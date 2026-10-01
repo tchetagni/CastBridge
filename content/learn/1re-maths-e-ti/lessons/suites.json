@@ -1,0 +1,469 @@
+{
+ "chapter": "1re-maths-e-ti-ch-suites",
+ "lessons": [
+  {
+   "id": "1re-maths-e-ti-suites-interets",
+   "title": "Suites arithmétiques, géométriques et intérêts",
+   "minutes": 35,
+   "programRef": "1re E/TI — Suites, intérêts (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître une suite arithmétique ou géométrique.",
+    "Calculer un terme et une somme de termes.",
+    "Distinguer intérêts simples et composés.",
+    "Modéliser une épargne ou une dépréciation."
+   ],
+   "prerequisites": [
+    "1re-maths-e-ti-fonctions"
+   ],
+   "exercises": [
+    "1re-maths-e-ti-sui-01",
+    "1re-maths-e-ti-sui-02",
+    "1re-maths-e-ti-sui-03",
+    "1re-maths-e-ti-sui-04",
+    "1re-maths-e-ti-sui-05",
+    "1re-maths-e-ti-sui-06"
+   ],
+   "selfCheck": [
+    "1re-maths-e-ti-sui-q1",
+    "1re-maths-e-ti-sui-q2",
+    "1re-maths-e-ti-sui-q3",
+    "1re-maths-e-ti-sui-q4",
+    "1re-maths-e-ti-sui-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Suite arithmétique",
+     "md": "Une suite $(u_n)$ est **arithmétique** de raison $r$ si on passe d'un terme au suivant en **ajoutant** toujours $r$ : $u_{n+1} = u_n + r$. Alors $u_n = u_0 + nr$ (ou $u_n = u_p + (n - p)r$). Exemple : un salaire qui augmente de 15 000 FCFA chaque année."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Suite géométrique",
+     "md": "Une suite $(v_n)$ est **géométrique** de raison $q$ si on **multiplie** toujours par $q$ : $v_{n+1} = q\\,v_n$. Alors $v_n = v_0\\,q^n$. Exemple : une somme placée à intérêts composés (q > 1) ou une machine qui se déprécie (q < 1)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Sommes de termes",
+     "md": "Pour $n + 1$ termes consécutifs $u_0, u_1, \\ldots, u_n$ :\n- arithmétique : $S = (n + 1) \\times \\frac{u_0 + u_n}{2}$ ;\n- géométrique de raison $q \\neq 1$ : $S = u_0 \\times \\frac{1 - q^{n+1}}{1 - q}$.\nCompte bien le nombre de termes : de $u_0$ à $u_9$, il y a 10 termes."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Pourcentages et coefficient multiplicateur",
+     "md": "Augmenter de $t\\,\\%$ revient à multiplier par $1 + \\frac{t}{100}$ ; diminuer de $t\\,\\%$, par $1 - \\frac{t}{100}$. Des hausses (ou baisses) successives de même taux forment une **suite géométrique**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Intérêts simples et intérêts composés",
+     "md": "- **Intérêts simples** : chaque année, les intérêts sont calculés sur le capital de départ $C_0$ : $C_n = C_0(1 + nt)$ ; suite **arithmétique**.\n- **Intérêts composés** : les intérêts s'ajoutent au capital et produisent eux-mêmes des intérêts : $C_n = C_0(1 + t)^n$ ; suite **géométrique**.\nAvec le temps, les intérêts composés deviennent nettement plus avantageux."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 420,
+      "h": 260,
+      "unit": "FCFA",
+      "bars": [
+       {
+        "label": "An 0",
+        "value": 100000,
+        "color": "lightblue"
+       },
+       {
+        "label": "An 1",
+        "value": 110000,
+        "color": "blue"
+       },
+       {
+        "label": "An 2",
+        "value": 121000,
+        "color": "blue"
+       },
+       {
+        "label": "An 3",
+        "value": 133100,
+        "color": "blue"
+       },
+       {
+        "label": "An 4",
+        "value": 146410,
+        "color": "orange"
+       }
+      ]
+     },
+     "caption": "Capital de 100 000 FCFA placé à 10 % par an à intérêts composés : le gain augmente chaque année (la hausse de la 4e année est plus forte que celle de la 1re).",
+     "alt": "Histogramme de cinq barres : An 0 : 100 000 ; An 1 : 110 000 ; An 2 : 121 000 ; An 3 : 133 100 ; An 4 : 146 410 FCFA, la dernière en orange."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : intérêts composés",
+     "statement": "Une somme de 1 000 000 FCFA est placée à 5 % par an à intérêts composés. Quel est le capital au bout de 3 ans ?",
+     "steps": [
+      {
+       "md": "Chaque année, on multiplie par $1 + 0{,}05 = 1{,}05$."
+      },
+      {
+       "md": "Le capital est une suite géométrique de raison 1,05."
+      },
+      {
+       "md": "Au bout de 3 ans :",
+       "tex": "C_3 = 1\\,000\\,000 \\times 1{,}05^3 = 1\\,157\\,625\\ \\text{FCFA}"
+      }
+     ],
+     "answer": "**1 157 625 FCFA**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : suite arithmétique et somme",
+     "statement": "Le salaire annuel d'un technicien est de 120 000 FCFA par mois la première année, puis augmente de 15 000 FCFA chaque année. Quel est son salaire mensuel la 11e année ? Quelle est la somme des salaires mensuels des années 1 à 11 ?",
+     "steps": [
+      {
+       "md": "Suite arithmétique : $u_0 = 120\\,000$ (année 1) et $r = 15\\,000$. La 11e année correspond à $n = 10$."
+      },
+      {
+       "md": "$u_{10} = 120\\,000 + 10 \\times 15\\,000$.",
+       "tex": "u_{10} = 270\\,000\\ \\text{FCFA}"
+      },
+      {
+       "md": "Somme de 11 termes :",
+       "tex": "S = 11 \\times \\frac{120\\,000 + 270\\,000}{2} = 2\\,145\\,000\\ \\text{FCFA}"
+      }
+     ],
+     "answer": "Salaire de la 11e année : **270 000 FCFA** ; somme des 11 salaires mensuels : **2 145 000 FCFA**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre raison arithmétique (on **ajoute**) et géométrique (on **multiplie**).\n- Utiliser $u_0 + 10r$ pour le 10e terme (c'est le 11e) : l'indice et le rang diffèrent d'une unité.\n- Dans $C_0(1 + t)^n$, oublier de convertir le taux : 5 % se note 0,05.\n- Mal compter les termes d'une somme.\n- Arrondir trop tôt : conserver toutes les décimales jusqu'au résultat final."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-e-ti-sui-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-e-ti-sui-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Applications : intérêts d'une épargne ou d'une tontine, remboursement d'un prêt, dépréciation d'un matériel, croissance d'une population ou de la production d'une usine.",
+      "Pour trouver au bout de combien d'années un capital double, essaie plusieurs valeurs de n avec la calculatrice : $1{,}07^{10} \\approx 1{,}97$ et $1{,}07^{11} \\approx 2{,}10$, donc 11 ans à 7 %."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier si le programme E/TI prévoit les suites avec logarithmes (ici non : on procède par essais avec la calculatrice).",
+    "La somme des salaires mensuels est un exemple volontairement simple ; adapter si l'enseignant préfère des salaires annuels.",
+    "Les taux et montants sont fictifs."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "1re-maths-e-ti-sui-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Un loyer de 120 000 FCFA augmente de 15 000 FCFA chaque année (suite arithmétique, $u_0 = 120\\,000$). Calcule $u_{10}$.",
+   "answer": 270000,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "$u_{10} = u_0 + 10r = 120\\,000 + 150\\,000 = 270\\,000$.",
+   "method": "$u_n = u_0 + nr$.",
+   "mistakes": [
+    "Oublier le rang $n = 10$."
+   ],
+   "lesson": "1re-maths-e-ti-suites-interets",
+   "source": "Exercice original, style devoir de Première E/TI"
+  },
+  {
+   "id": "1re-maths-e-ti-sui-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "$(v_n)$ est géométrique de premier terme $v_0 = 2000$ et de raison 1,05. Calcule $v_3$ (arrondi au centième).",
+   "answer": 2315.25,
+   "tolerance": 0.01,
+   "explanation": "$v_3 = 2000 \\times 1{,}05^3 = 2000 \\times 1{,}157625 = 2315{,}25$.",
+   "method": "$v_n = v_0 q^n$.",
+   "mistakes": [
+    "Calculer $2000 \\times 1{,}05 \\times 3$."
+   ],
+   "lesson": "1re-maths-e-ti-suites-interets",
+   "source": "Exercice original, style devoir de Première E/TI"
+  },
+  {
+   "id": "1re-maths-e-ti-sui-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Calcule $S = u_0 + u_1 + \\ldots + u_9$ pour la suite arithmétique de premier terme $u_0 = 4$ et de raison 2.",
+   "answer": 130,
+   "tolerance": 0,
+   "explanation": "$u_9 = 4 + 18 = 22$ ; $S = 10 \\times \\frac{4 + 22}{2} = 130$.",
+   "method": "Nombre de termes × (premier + dernier) ÷ 2.",
+   "mistakes": [
+    "Compter 9 termes au lieu de 10."
+   ],
+   "lesson": "1re-maths-e-ti-suites-interets",
+   "source": "Exercice original, style devoir de Première E/TI"
+  },
+  {
+   "id": "1re-maths-e-ti-sui-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "On place 200 000 FCFA à 6 % par an pendant 5 ans. Quelle est la différence (en FCFA, arrondie à l'unité) entre le capital obtenu à intérêts composés et celui obtenu à intérêts simples ?",
+   "answer": 7645,
+   "tolerance": 1,
+   "unit": "FCFA",
+   "explanation": "Simples : $200\\,000 \\times (1 + 5 \\times 0{,}06) = 260\\,000$. Composés : $200\\,000 \\times 1{,}06^5 \\approx 267\\,645{,}12$. Différence $\\approx 7\\,645$ FCFA.",
+   "method": "Calculer les deux capitaux puis les comparer.",
+   "mistakes": [
+    "Utiliser 1,6 au lieu de 1,06."
+   ],
+   "lesson": "1re-maths-e-ti-suites-interets",
+   "source": "Exercice original, style devoir de Première E/TI"
+  },
+  {
+   "id": "1re-maths-e-ti-sui-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "Une machine achetée 5 000 000 FCFA perd 12 % de sa valeur chaque année. Quelle est sa valeur au bout de 4 ans (arrondie à l'unité, en FCFA) ?",
+   "answer": 2998477,
+   "tolerance": 1,
+   "unit": "FCFA",
+   "explanation": "Coefficient $1 - 0{,}12 = 0{,}88$ ; $5\\,000\\,000 \\times 0{,}88^4 \\approx 2\\,998\\,477$ FCFA.",
+   "method": "Baisse de 12 % = multiplier par 0,88.",
+   "mistakes": [
+    "Soustraire $4 \\times 12\\,\\%$ du prix initial."
+   ],
+   "lesson": "1re-maths-e-ti-suites-interets",
+   "source": "Exercice original, style devoir de Première E/TI"
+  },
+  {
+   "id": "1re-maths-e-ti-sui-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Un artisan de Garoua achète une machine 5 000 000 FCFA. Pour préparer son remplacement, il épargne chaque mois : 10 000 FCFA le premier mois, puis 2 000 FCFA de plus chaque mois (versements $u_1 = 10\\,000$, $u_2 = 12\\,000$, ...).",
+   "method": "Reconnaître la nature de chaque suite, puis appliquer la bonne formule.",
+   "mistakes": [
+    "Utiliser une formule arithmétique pour la dépréciation."
+   ],
+   "parts": [
+    {
+     "id": "1re-maths-e-ti-sui-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quel est le montant du 12e versement (en FCFA) ?",
+     "answer": 32000,
+     "tolerance": 0,
+     "unit": "FCFA",
+     "explanation": "Suite arithmétique de raison 2 000 : $u_{12} = 10\\,000 + 11 \\times 2\\,000 = 32\\,000$."
+    },
+    {
+     "id": "1re-maths-e-ti-sui-06-b",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Quelle somme totale a-t-il versée au bout de 12 mois (en FCFA) ?",
+     "answer": 252000,
+     "tolerance": 0,
+     "unit": "FCFA",
+     "explanation": "$S = 12 \\times \\frac{10\\,000 + 32\\,000}{2} = 252\\,000$ FCFA."
+    },
+    {
+     "id": "1re-maths-e-ti-sui-06-c",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "La valeur de la machine baisse de 12 % par an. Quelle est la nature de la suite des valeurs annuelles ?",
+     "choices": [
+      "Géométrique de raison 0,88",
+      "Arithmétique de raison −0,12",
+      "Géométrique de raison 1,12",
+      "Arithmétique de raison 0,88"
+     ],
+     "answer": 0,
+     "explanation": "Chaque année, la valeur est multipliée par 0,88 : suite **géométrique** de raison 0,88."
+    },
+    {
+     "id": "1re-maths-e-ti-sui-06-d",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Quelle est la valeur de la machine après 2 ans (en FCFA) ?",
+     "answer": 3872000,
+     "tolerance": 0,
+     "unit": "FCFA",
+     "explanation": "$5\\,000\\,000 \\times 0{,}88^2 = 3\\,872\\,000$ FCFA."
+    }
+   ],
+   "lesson": "1re-maths-e-ti-suites-interets",
+   "source": "Exercice original, style devoir de Première E/TI"
+  },
+  {
+   "id": "1re-maths-e-ti-sui-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Une suite arithmétique a pour raison 3 et $u_0 = 5$. Que vaut $u_4$ ?",
+   "choices": [
+    "17",
+    "12",
+    "15",
+    "20"
+   ],
+   "answer": 0,
+   "explanation": "$u_4 = 5 + 4 \\times 3 = 17$.",
+   "lesson": "1re-maths-e-ti-suites-interets",
+   "source": "Exercice original, style devoir de Première E/TI"
+  },
+  {
+   "id": "1re-maths-e-ti-sui-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Une suite géométrique a pour raison 2 et $v_0 = 3$. Que vaut $v_3$ ?",
+   "choices": [
+    "24",
+    "9",
+    "18",
+    "12"
+   ],
+   "answer": 0,
+   "explanation": "$v_3 = 3 \\times 2^3 = 24$.",
+   "lesson": "1re-maths-e-ti-suites-interets",
+   "source": "Exercice original, style devoir de Première E/TI"
+  },
+  {
+   "id": "1re-maths-e-ti-sui-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Augmenter une somme de 8 % revient à la multiplier par :",
+   "choices": [
+    "1,08",
+    "0,08",
+    "0,92",
+    "8"
+   ],
+   "answer": 0,
+   "explanation": "$1 + 0{,}08 = 1{,}08$.",
+   "lesson": "1re-maths-e-ti-suites-interets",
+   "source": "Exercice original, style devoir de Première E/TI"
+  },
+  {
+   "id": "1re-maths-e-ti-sui-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Les intérêts composés correspondent à une suite :",
+   "choices": [
+    "géométrique",
+    "arithmétique",
+    "constante",
+    "périodique"
+   ],
+   "answer": 0,
+   "explanation": "On multiplie le capital par $1 + t$ chaque année.",
+   "lesson": "1re-maths-e-ti-suites-interets",
+   "source": "Exercice original, style devoir de Première E/TI"
+  },
+  {
+   "id": "1re-maths-e-ti-sui-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Combien de termes y a-t-il de $u_0$ à $u_{10}$ ?",
+   "choices": [
+    "11",
+    "10",
+    "9",
+    "12"
+   ],
+   "answer": 0,
+   "explanation": "De 0 à 10 inclus, il y a 11 termes.",
+   "lesson": "1re-maths-e-ti-suites-interets",
+   "source": "Exercice original, style devoir de Première E/TI"
+  },
+  {
+   "id": "1re-maths-e-ti-blanc-ex2",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "**Exercice 2.** Un commerçant de Yaoundé place 400 000 FCFA à 5 % par an à intérêts composés. On note $C_n$ le capital au bout de n années.",
+   "method": "Reconnaître une suite géométrique et appliquer $C_n = C_0 q^n$.",
+   "mistakes": [
+    "Confondre intérêts simples et composés."
+   ],
+   "parts": [
+    {
+     "id": "1re-maths-e-ti-blanc-ex2-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule $C_1$ (en FCFA).",
+     "answer": 420000,
+     "tolerance": 0,
+     "unit": "FCFA",
+     "explanation": "$C_1 = 400\\,000 \\times 1{,}05 = 420\\,000$."
+    },
+    {
+     "id": "1re-maths-e-ti-blanc-ex2-b",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle est la nature de la suite $(C_n)$ ?",
+     "choices": [
+      "Géométrique de raison 1,05",
+      "Arithmétique de raison 20 000",
+      "Géométrique de raison 0,05",
+      "Arithmétique de raison 1,05"
+     ],
+     "answer": 0,
+     "explanation": "Chaque année, on multiplie par 1,05 : suite géométrique de raison 1,05."
+    },
+    {
+     "id": "1re-maths-e-ti-blanc-ex2-c",
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Calcule $C_3$ (en FCFA, arrondi à l'unité).",
+     "answer": 463050,
+     "tolerance": 1,
+     "unit": "FCFA",
+     "explanation": "$400\\,000 \\times 1{,}05^3 = 463\\,050$ FCFA."
+    },
+    {
+     "id": "1re-maths-e-ti-blanc-ex2-d",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quel serait le capital au bout de 3 ans à intérêts simples (en FCFA) ?",
+     "answer": 460000,
+     "tolerance": 0,
+     "unit": "FCFA",
+     "explanation": "$400\\,000 \\times (1 + 3 \\times 0{,}05) = 460\\,000$ FCFA."
+    }
+   ],
+   "lesson": "1re-maths-e-ti-suites-interets",
+   "source": "Exercice original, style devoir de Première E/TI"
+  }
+ ]
+}

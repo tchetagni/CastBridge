@@ -1,0 +1,446 @@
+{
+ "chapter": "1re-maths-cd-ch-denombrement",
+ "lessons": [
+  {
+   "id": "1re-maths-cd-denombrement",
+   "title": "Dénombrement, probabilités et statistiques",
+   "minutes": 45,
+   "programRef": "1re C/D — Dénombrement, probabilités, statistiques (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale d'après le programme habituel de Première ; à relire par un enseignant",
+   "objectives": [
+    "Dénombrer avec arrangements et combinaisons.",
+    "Calculer des probabilités, dont conditionnelles.",
+    "Calculer moyenne, variance, écart-type, médiane."
+   ],
+   "prerequisites": [
+    "1re-maths-cd-suites"
+   ],
+   "exercises": [
+    "1re-maths-cd-dp-01",
+    "1re-maths-cd-dp-02",
+    "1re-maths-cd-dp-03",
+    "1re-maths-cd-dp-04",
+    "1re-maths-cd-dp-05",
+    "1re-maths-cd-dp-06"
+   ],
+   "selfCheck": [
+    "1re-maths-cd-dp-q1",
+    "1re-maths-cd-dp-q2",
+    "1re-maths-cd-dp-q3",
+    "1re-maths-cd-dp-q4",
+    "1re-maths-cd-dp-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier si la probabilité conditionnelle, l'indépendance et la variable aléatoire sont au programme de Première C/D.",
+    "Convention de la variance (division par N) à confirmer ; données statistiques toutes fictives."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Ce que tu sauras faire",
+     "md": "- Dénombrer avec arrangements, permutations et combinaisons.\n- Calculer des probabilités en situation d'équiprobabilité.\n- Utiliser probabilité conditionnelle, arbres et indépendance.\n- Calculer moyenne, variance, écart-type et médiane."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Dénombrement",
+     "md": "- **Principe multiplicatif** : n choix puis p choix donnent $n \\times p$ possibilités.\n- **Permutations** de n objets : $n! = n \\times (n - 1) \\times \\ldots \\times 1$.\n- **Arrangements** (p objets parmi n, **ordre important**) : $A_n^p = \\frac{n!}{(n - p)!}$.\n- **Combinaisons** (p objets parmi n, **ordre sans importance**) : $C_n^p = \\frac{n!}{p!\\,(n - p)!}$, avec $C_n^p = C_n^{n-p}$."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Arrangement ou combinaison ?",
+     "md": "Se demander : « si je change l'ordre, obtient-on un autre résultat ? ». Oui : arrangement (bureau avec président, secrétaire, trésorier). Non : combinaison (comité, main de cartes, tirage simultané). Pour « au moins un », on passe souvent par le **contraire** : total moins cas sans l'élément cherché."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Probabilités",
+     "md": "En équiprobabilité : $P(A) = \\frac{\\text{nombre de cas favorables}}{\\text{nombre de cas possibles}}$.\n- $P(\\overline{A}) = 1 - P(A)$.\n- $P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$.\n- $0 \\leq P(A) \\leq 1$ et la somme des probabilités des issues vaut 1."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Probabilité conditionnelle",
+     "md": "Si $P(B) \\neq 0$ : $P(A \\mid B) = \\frac{P(A \\cap B)}{P(B)}$, d'où $P(A \\cap B) = P(B) \\times P(A \\mid B)$.\nFormule des probabilités totales : $P(A) = P(A \\cap B) + P(A \\cap \\overline{B})$.\n**A et B indépendants** : $P(A \\cap B) = P(A) \\times P(B)$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Statistiques à une variable",
+     "md": "Pour des valeurs $x_i$ d'effectifs $n_i$ et d'effectif total N :\n- moyenne $\\bar{x} = \\frac{\\sum n_i x_i}{N}$ ;\n- variance $V = \\frac{\\sum n_i x_i^2}{N} - \\bar{x}^2$ ;\n- écart-type $\\sigma = \\sqrt{V}$.\nLa **médiane** partage la série ordonnée en deux moitiés d'effectifs égaux."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "unit": "élèves",
+      "bars": [
+       {
+        "label": "8",
+        "value": 1,
+        "color": "lightblue"
+       },
+       {
+        "label": "10",
+        "value": 2,
+        "color": "blue"
+       },
+       {
+        "label": "12",
+        "value": 1,
+        "color": "lightblue"
+       },
+       {
+        "label": "15",
+        "value": 1,
+        "color": "lightblue"
+       }
+      ]
+     },
+     "caption": "Notes de 5 élèves (données fictives) : 8, 10, 10, 12, 15. La valeur 10 apparaît deux fois.",
+     "alt": "Diagramme en barres : la note 10 a une barre de hauteur 2 ; les notes 8, 12 et 15 ont une barre de hauteur 1."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : dénombrement",
+     "statement": "Un club de 8 élèves doit choisir 3 personnes. Combien de comités de 3 ? Combien de bureaux (président, secrétaire, trésorier) ?",
+     "steps": [
+      {
+       "md": "Un comité : l'ordre n'a pas d'importance, c'est une combinaison :",
+       "tex": "C_8^3 = \\frac{8 \\times 7 \\times 6}{3 \\times 2 \\times 1} = 56"
+      },
+      {
+       "md": "Un bureau : l'ordre compte (les postes sont distincts), c'est un arrangement :",
+       "tex": "A_8^3 = 8 \\times 7 \\times 6 = 336"
+      }
+     ],
+     "answer": "56 comités et 336 bureaux (on retrouve $A_8^3 = 3! \\times C_8^3 = 6 \\times 56$)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : tirage simultané",
+     "statement": "Une urne contient 5 boules rouges et 3 noires. On tire simultanément 2 boules. Calcule P(« deux rouges ») et P(« une de chaque couleur »).",
+     "steps": [
+      {
+       "md": "Nombre de tirages possibles :",
+       "tex": "C_8^2 = 28"
+      },
+      {
+       "md": "Deux rouges : $C_5^2 = 10$ tirages, donc $P = \\frac{10}{28} = \\frac{5}{14}$."
+      },
+      {
+       "md": "Une rouge et une noire : $5 \\times 3 = 15$ tirages, donc $P = \\frac{15}{28}$. Contrôle : deux noires donnent $C_3^2 = 3$ tirages et $10 + 15 + 3 = 28$."
+      }
+     ],
+     "answer": "$P(\\text{deux rouges}) = \\frac{5}{14}$ et $P(\\text{une de chaque}) = \\frac{15}{28}$."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-cd-dp-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-cd-dp-02"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : probabilité conditionnelle",
+     "statement": "Dans un lycée fictif, 60 % des élèves sont des filles ; 20 % des filles et 30 % des garçons font du football. On choisit un élève au hasard. Calcule P(foot), puis la probabilité que ce soit une fille sachant qu'il fait du football.",
+     "steps": [
+      {
+       "md": "Fille et football : $P(F \\cap S) = 0{,}6 \\times 0{,}2 = 0{,}12$. Garçon et football : $0{,}4 \\times 0{,}3 = 0{,}12$. Probabilités totales :",
+       "tex": "P(S) = 0{,}12 + 0{,}12 = 0{,}24"
+      },
+      {
+       "md": "Probabilité conditionnelle :",
+       "tex": "P(F \\mid S) = \\frac{P(F \\cap S)}{P(S)} = \\frac{0{,}12}{0{,}24} = 0{,}5"
+      }
+     ],
+     "answer": "$P(S) = 0{,}24$ et $P(F \\mid S) = 0{,}5$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 4 : statistiques",
+     "statement": "Calcule moyenne, médiane, variance et écart-type de la série 8, 10, 10, 12, 15 (notes fictives).",
+     "steps": [
+      {
+       "md": "Moyenne : $\\frac{8 + 10 + 10 + 12 + 15}{5} = \\frac{55}{5} = 11$. Médiane : valeur centrale de la série ordonnée, soit 10. Variance :",
+       "tex": "V = \\frac{64 + 100 + 100 + 144 + 225}{5} - 11^2 = \\frac{633}{5} - 121 = 5{,}6"
+      },
+      {
+       "md": "Écart-type : $\\sigma = \\sqrt{5{,}6} \\approx 2{,}37$."
+      }
+     ],
+     "answer": "Moyenne 11, médiane 10, variance 5,6, écart-type ≈ 2,37."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-cd-dp-03"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Pièges fréquents",
+     "md": "- Confondre arrangement et combinaison : $A_n^p = p! \\times C_n^p$.\n- Additionner des probabilités d'événements non incompatibles sans retrancher $P(A \\cap B)$.\n- Confondre $P(A \\mid B)$ et $P(B \\mid A)$.\n- Écrire $\\sigma^2 = \\frac{\\sum n_i x_i^2}{N} - \\bar{x}$ en oubliant de mettre la moyenne au carré.\n- Prendre « incompatibles » pour « indépendants »."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-cd-dp-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-cd-dp-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-cd-dp-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Variable aléatoire, espérance, loi binomiale : peut figurer au programme de Première C/D ou plutôt de Terminale. À vérifier sur le texte officiel.",
+      "Les statistiques à deux variables (ajustement affine) sont parfois abordées en Première : non traitées ici."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "1re-maths-cd-dp-01",
+   "kind": "numeric",
+   "points": 1,
+   "prompt": "Calcule $C_6^2$.",
+   "answer": 15,
+   "tolerance": 0,
+   "explanation": "$C_6^2 = \\frac{6 \\times 5}{2 \\times 1} = 15$.",
+   "tier": "application",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "method": "$C_n^p = \\frac{n!}{p!(n - p)!}$.",
+   "mistakes": [
+    "Donner $A_6^2 = 30$ en oubliant de diviser par 2!."
+   ],
+   "lesson": "1re-maths-cd-denombrement"
+  },
+  {
+   "id": "1re-maths-cd-dp-02",
+   "kind": "numeric",
+   "points": 1,
+   "prompt": "Calcule la variance de la série 2, 4, 6 (valeur arrondie à 0,01).",
+   "answer": 2.67,
+   "tolerance": 0.01,
+   "explanation": "Moyenne 4. $V = \\frac{4 + 16 + 36}{3} - 16 = \\frac{56}{3} - 16 = \\frac{8}{3} \\approx 2{,}67$. On peut aussi calculer $\\frac{(−2)^2 + 0^2 + 2^2}{3}$.",
+   "tier": "application",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "method": "$V = \\frac{\\sum x_i^2}{N} - \\bar{x}^2$.",
+   "mistakes": [
+    "Diviser par N − 1 : ce n'est pas la convention de ces fiches."
+   ],
+   "lesson": "1re-maths-cd-denombrement"
+  },
+  {
+   "id": "1re-maths-cd-dp-03",
+   "kind": "truefalse",
+   "points": 1,
+   "prompt": "Pour deux événements A et B quelconques, $P(A \\cup B) = P(A) + P(B)$.",
+   "answer": false,
+   "explanation": "Il faut retrancher $P(A \\cap B)$ : $P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$. L'égalité n'est vraie que si A et B sont incompatibles.",
+   "tier": "application",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "method": "Compter une seule fois l'intersection.",
+   "mistakes": [
+    "Oublier l'intersection."
+   ],
+   "lesson": "1re-maths-cd-denombrement"
+  },
+  {
+   "id": "1re-maths-cd-dp-04",
+   "kind": "numeric",
+   "points": 2,
+   "prompt": "Un comité de 4 personnes est choisi parmi 5 hommes et 4 femmes. Combien de comités comptent au moins une femme ?",
+   "answer": 121,
+   "tolerance": 0,
+   "explanation": "Total : $C_9^4 = 126$. Sans femme (4 hommes) : $C_5^4 = 5$. Avec au moins une femme : $126 - 5 = 121$.",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "source": "Exercice original, style Probatoire",
+   "method": "Passer par l'événement contraire.",
+   "mistakes": [
+    "Compter 4 × C(8,3) : cela compte plusieurs fois les comités avec plusieurs femmes."
+   ],
+   "lesson": "1re-maths-cd-denombrement"
+  },
+  {
+   "id": "1re-maths-cd-dp-05",
+   "kind": "mcq",
+   "points": 2,
+   "prompt": "On a $P(A \\cap B) = 0{,}12$ et $P(B) = 0{,}3$. Que vaut $P(A \\mid B)$ ?",
+   "choices": [
+    "0,036",
+    "0,12",
+    "2,5",
+    "0,4"
+   ],
+   "answer": 3,
+   "explanation": "$P(A \\mid B) = \\frac{P(A \\cap B)}{P(B)} = \\frac{0{,}12}{0{,}3} = 0{,}4$.",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "source": "Exercice original, style Probatoire",
+   "method": "Divisions par la probabilité de l'événement conditionnant.",
+   "mistakes": [
+    "Multiplier au lieu de diviser (0,036).",
+    "Inverser le quotient (2,5)."
+   ],
+   "lesson": "1re-maths-cd-denombrement"
+  },
+  {
+   "id": "1re-maths-cd-dp-06",
+   "kind": "problem",
+   "prompt": "Une urne contient 4 boules blanches et 6 boules noires indiscernables au toucher. On tire simultanément 3 boules.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Combien de tirages possibles y a-t-il ?",
+     "answer": 120,
+     "tolerance": 0,
+     "explanation": "$C_{10}^3 = \\frac{10 \\times 9 \\times 8}{6} = 120$.",
+     "id": "1re-maths-cd-dp-06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Combien de tirages donnent trois boules noires ?",
+     "answer": 20,
+     "tolerance": 0,
+     "explanation": "$C_6^3 = 20$.",
+     "id": "1re-maths-cd-dp-06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule P(« trois boules noires ») (valeur arrondie à 0,001).",
+     "answer": 0.167,
+     "tolerance": 0.001,
+     "explanation": "$P = \\frac{20}{120} = \\frac{1}{6} \\approx 0{,}167$.",
+     "id": "1re-maths-cd-dp-06-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule P(« au moins une boule blanche ») (valeur arrondie à 0,001).",
+     "answer": 0.833,
+     "tolerance": 0.001,
+     "explanation": "C'est l'événement contraire de « trois noires » : $1 - \\frac{1}{6} = \\frac{5}{6} \\approx 0{,}833$.",
+     "id": "1re-maths-cd-dp-06-d"
+    }
+   ],
+   "tier": "examen",
+   "difficulty": 2,
+   "source": "Exercice original, style Probatoire",
+   "method": "Compter les cas avec des combinaisons, puis passer par l'événement contraire.",
+   "mistakes": [
+    "Utiliser des arrangements pour un tirage simultané.",
+    "Calculer $\\frac{4}{10}$ pour « au moins une blanche »."
+   ],
+   "lesson": "1re-maths-cd-denombrement"
+  },
+  {
+   "id": "1re-maths-cd-dp-q1",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Que vaut $5!$ ?",
+   "choices": [
+    "25",
+    "60",
+    "120",
+    "24"
+   ],
+   "answer": 2,
+   "explanation": "$5! = 5 \\times 4 \\times 3 \\times 2 \\times 1 = 120$.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "lesson": "1re-maths-cd-denombrement"
+  },
+  {
+   "id": "1re-maths-cd-dp-q2",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Que vaut $A_4^2$ ?",
+   "choices": [
+    "12",
+    "6",
+    "8",
+    "16"
+   ],
+   "answer": 0,
+   "explanation": "$A_4^2 = 4 \\times 3 = 12$.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "lesson": "1re-maths-cd-denombrement"
+  },
+  {
+   "id": "1re-maths-cd-dp-q3",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Si $P(A) = 0{,}35$, que vaut $P(\\overline{A})$ ?",
+   "choices": [
+    "0,35",
+    "1,35",
+    "0,65",
+    "0,5"
+   ],
+   "answer": 2,
+   "explanation": "$P(\\overline{A}) = 1 - 0{,}35 = 0{,}65$.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "lesson": "1re-maths-cd-denombrement"
+  },
+  {
+   "id": "1re-maths-cd-dp-q4",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "A et B sont indépendants si :",
+   "choices": [
+    "$P(A \\cap B) = 0$",
+    "$P(A \\cap B) = P(A) \\times P(B)$",
+    "$P(A \\cup B) = P(A) + P(B)$",
+    "$P(A \\mid B) = P(B \\mid A)$"
+   ],
+   "answer": 1,
+   "explanation": "C'est la définition de l'indépendance.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "lesson": "1re-maths-cd-denombrement"
+  },
+  {
+   "id": "1re-maths-cd-dp-q5",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "L'écart-type est :",
+   "choices": [
+    "le carré de la moyenne",
+    "la différence entre max et min",
+    "la moitié de la variance",
+    "la racine carrée de la variance"
+   ],
+   "answer": 3,
+   "explanation": "Par définition, $\\sigma = \\sqrt{V}$.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "lesson": "1re-maths-cd-denombrement"
+  }
+ ]
+}

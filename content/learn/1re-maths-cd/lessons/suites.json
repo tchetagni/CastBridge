@@ -1,0 +1,452 @@
+{
+ "chapter": "1re-maths-cd-ch-suites",
+ "lessons": [
+  {
+   "id": "1re-maths-cd-suites",
+   "title": "Suites arithmétiques et géométriques",
+   "minutes": 40,
+   "programRef": "1re C/D — Analyse : suites numériques, suites arithmétiques et géométriques (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale d'après le programme habituel de Première ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître et exprimer une suite arithmétique ou géométrique.",
+    "Calculer des sommes de termes consécutifs.",
+    "Étudier le sens de variation.",
+    "Utiliser une suite auxiliaire."
+   ],
+   "prerequisites": [
+    "1re-maths-cd-derivation"
+   ],
+   "exercises": [
+    "1re-maths-cd-sn-01",
+    "1re-maths-cd-sn-02",
+    "1re-maths-cd-sn-03",
+    "1re-maths-cd-sn-04",
+    "1re-maths-cd-sn-05",
+    "1re-maths-cd-sn-06"
+   ],
+   "selfCheck": [
+    "1re-maths-cd-sn-q1",
+    "1re-maths-cd-sn-q2",
+    "1re-maths-cd-sn-q3",
+    "1re-maths-cd-sn-q4",
+    "1re-maths-cd-sn-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier si les limites de suites et le raisonnement par récurrence sont au programme de Première C/D (probablement Terminale).",
+    "La suite auxiliaire pour $u_{n+1} = au_n + b$ dépasse peut-être le programme : à confirmer."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Ce que tu sauras faire",
+     "md": "- Reconnaître une suite arithmétique ou géométrique et donner son terme général.\n- Calculer des sommes de termes consécutifs.\n- Étudier le sens de variation d'une suite.\n- Utiliser une suite auxiliaire pour une suite définie par récurrence."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Suite arithmétique",
+     "md": "$(u_n)$ est **arithmétique** de raison r si $u_{n+1} = u_n + r$ pour tout n. Alors $u_n = u_p + (n - p) r$ (en particulier $u_n = u_0 + nr$).\nSomme de termes consécutifs : $S = (\\text{nombre de termes}) \\times \\frac{\\text{premier} + \\text{dernier}}{2}$. Ainsi $1 + 2 + \\ldots + n = \\frac{n(n + 1)}{2}$."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Suite géométrique",
+     "md": "$(v_n)$ est **géométrique** de raison q si $v_{n+1} = q\\, v_n$ pour tout n. Alors $v_n = v_p\\, q^{n - p}$ (en particulier $v_n = v_0 q^n$).\nSi q ≠ 1, la somme de N termes consécutifs vaut $(\\text{premier terme}) \\times \\frac{1 - q^N}{1 - q}$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Sens de variation",
+     "md": "Pour étudier $(u_n)$ :\n- on étudie le signe de $u_{n+1} - u_n$ (positif : croissante, négatif : décroissante) ;\n- si tous les termes sont strictement positifs, on peut comparer $\\frac{u_{n+1}}{u_n}$ à 1.\nSuite arithmétique : croissante si r > 0. Suite géométrique de premier terme positif : croissante si q > 1, décroissante si 0 < q < 1."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Suite auxiliaire",
+     "md": "Pour $u_{n+1} = a u_n + b$ (avec a ≠ 1) : on cherche le réel L tel que $L = aL + b$, puis on pose $v_n = u_n - L$. La suite $(v_n)$ est géométrique de raison a. On en déduit $v_n$ puis $u_n = v_n + L$."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "unit": "FCFA",
+      "bars": [
+       {
+        "label": "n=0",
+        "value": 100000,
+        "color": "lightblue"
+       },
+       {
+        "label": "n=1",
+        "value": 110000,
+        "color": "lightblue"
+       },
+       {
+        "label": "n=2",
+        "value": 121000,
+        "color": "blue"
+       },
+       {
+        "label": "n=3",
+        "value": 133100,
+        "color": "blue"
+       },
+       {
+        "label": "n=4",
+        "value": 146410,
+        "color": "purple"
+       }
+      ]
+     },
+     "caption": "Un capital de 100 000 FCFA placé à 10 % par an : les termes forment une suite géométrique de raison 1,1.",
+     "alt": "Cinq barres de hauteurs croissantes : 100 000, 110 000, 121 000, 133 100 et 146 410 FCFA pour n de 0 à 4."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : suite arithmétique",
+     "statement": "$(u_n)$ est arithmétique avec $u_3 = 11$ et $u_8 = 26$. Détermine r et $u_0$, puis calcule $u_0 + u_1 + \\ldots + u_{20}$.",
+     "steps": [
+      {
+       "md": "De $u_8 = u_3 + 5r$ on tire $26 = 11 + 5r$, donc r = 3, puis :",
+       "tex": "u_0 = u_3 - 3r = 11 - 9 = 2 \\quad \\text{et} \\quad u_{20} = 2 + 20 \\times 3 = 62"
+      },
+      {
+       "md": "La somme comporte 21 termes :",
+       "tex": "S = 21 \\times \\frac{2 + 62}{2} = 21 \\times 32 = 672"
+      }
+     ],
+     "answer": "r = 3, $u_0 = 2$ et S = 672."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : suite géométrique",
+     "statement": "$(v_n)$ est géométrique avec $v_2 = 12$ et $v_5 = 96$. Détermine q et $v_0$, puis la somme $v_0 + \\ldots + v_9$.",
+     "steps": [
+      {
+       "md": "$v_5 = v_2 \\times q^3$ donne $q^3 = \\frac{96}{12} = 8$, donc q = 2, puis :",
+       "tex": "v_0 = \\frac{v_2}{q^2} = \\frac{12}{4} = 3"
+      },
+      {
+       "md": "La somme comporte 10 termes :",
+       "tex": "S = 3 \\times \\frac{1 - 2^{10}}{1 - 2} = 3 \\times 1023 = 3069"
+      }
+     ],
+     "answer": "q = 2, $v_0 = 3$ et S = 3069."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-cd-sn-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-cd-sn-02"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : suite auxiliaire",
+     "statement": "Soit $u_0 = 4$ et $u_{n+1} = 2u_n - 3$. On pose $v_n = u_n - 3$. Exprime $u_n$ en fonction de n.",
+     "steps": [
+      {
+       "md": "On calcule $v_{n+1}$ :",
+       "tex": "v_{n+1} = 2u_n - 3 - 3 = 2(u_n - 3) = 2 v_n"
+      },
+      {
+       "md": "$(v_n)$ est géométrique de raison 2 et de premier terme $v_0 = 4 - 3 = 1$, donc $v_n = 2^n$."
+      },
+      {
+       "md": "Par suite :",
+       "tex": "u_n = 3 + 2^n"
+      }
+     ],
+     "answer": "$u_n = 3 + 2^n$ (contrôle : $u_1 = 2 \\times 4 - 3 = 5 = 3 + 2$)."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-cd-sn-03"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : sens de variation par la différence",
+     "md": "1. Calculer $u_{n+1} - u_n$ en réduisant au même dénominateur si besoin.\n2. Étudier son signe pour tout n entier : il peut ne devenir constant qu'à partir d'un certain rang.\n3. Conclure : « croissante à partir du rang $n_0$ ». Un exemple : $u_n = n^2 - 4n$ donne $u_{n+1} - u_n = 2n - 3$, positif seulement pour $n \\geq 2$."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Pièges fréquents",
+     "md": "- Compter les termes d'une somme : de $u_0$ à $u_{20}$, il y en a 21 et non 20.\n- Confondre « raison 0,04 » et « raison 1,04 » pour une augmentation de 4 %.\n- Écrire $u_n = u_0 q^{n-1}$ quand le premier terme est $u_0$.\n- Affirmer qu'une suite est croissante parce que les premiers termes augmentent."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-cd-sn-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-cd-sn-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-cd-sn-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Intérêts composés et tontines : une épargne qui augmente de t % par an est multipliée par $1 + \\frac{t}{100}$ chaque année.",
+      "Raisonnement par récurrence et limites de suites : probablement hors programme de Première, à vérifier sur le texte officiel."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "1re-maths-cd-sn-01",
+   "kind": "numeric",
+   "points": 1,
+   "prompt": "$(u_n)$ est arithmétique de premier terme $u_0 = 7$ et de raison −2. Calcule $u_{15}$.",
+   "answer": -23,
+   "tolerance": 0,
+   "explanation": "$u_{15} = u_0 + 15r = 7 + 15 \\times (-2) = -23$.",
+   "tier": "application",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "method": "$u_n = u_0 + nr$.",
+   "mistakes": [
+    "Utiliser 14 au lieu de 15 facteurs de la raison."
+   ],
+   "lesson": "1re-maths-cd-suites"
+  },
+  {
+   "id": "1re-maths-cd-sn-02",
+   "kind": "numeric",
+   "points": 1,
+   "prompt": "$(v_n)$ est géométrique de premier terme $v_0 = 2$ et de raison 3. Calcule $v_4$.",
+   "answer": 162,
+   "tolerance": 0,
+   "explanation": "$v_4 = 2 \\times 3^4 = 2 \\times 81 = 162$.",
+   "tier": "application",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "method": "$v_n = v_0 q^n$.",
+   "mistakes": [
+    "Calculer $6^4$ en multipliant d'abord 2 par 3."
+   ],
+   "lesson": "1re-maths-cd-suites"
+  },
+  {
+   "id": "1re-maths-cd-sn-03",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Laquelle de ces suites est géométrique ?",
+   "choices": [
+    "$u_n = 5 \\times 4^n$",
+    "$u_n = 5 + 4n$",
+    "$u_n = 4 + 5^n$",
+    "$u_n = n^2$"
+   ],
+   "answer": 0,
+   "explanation": "$5 \\times 4^n$ vérifie $u_{n+1} = 4u_n$. La suite $5 + 4n$ est arithmétique ; pour $4 + 5^n$ (termes 5, 9, 29) les quotients $\\frac{9}{5}$ et $\\frac{29}{9}$ diffèrent ; pour $n^2$, aussi.",
+   "tier": "application",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "method": "Tester le quotient de deux termes consécutifs.",
+   "mistakes": [
+    "Reconnaître une puissance et conclure sans vérifier la forme $v_0 q^n$."
+   ],
+   "lesson": "1re-maths-cd-suites"
+  },
+  {
+   "id": "1re-maths-cd-sn-04",
+   "kind": "numeric",
+   "points": 2,
+   "prompt": "Dans une tontine de Garoua, un membre verse 5 000 FCFA le premier mois, puis 1 000 FCFA de plus chaque mois pendant 12 mois. Quel total (en FCFA) a-t-il versé ?",
+   "answer": 126000,
+   "tolerance": 0,
+   "explanation": "Les versements forment une suite arithmétique de premier terme 5 000, de raison 1 000, de 12 termes. Le dernier vaut $5\\,000 + 11 \\times 1\\,000 = 16\\,000$. Total : $12 \\times \\frac{5\\,000 + 16\\,000}{2} = 126\\,000$ FCFA. (Exemple fictif.)",
+   "unit": "FCFA",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "source": "Exercice original, style Probatoire",
+   "method": "Dernier terme, puis somme.",
+   "mistakes": [
+    "Prendre 12 000 comme dernier versement (oubli du décalage de 11 rangs)."
+   ],
+   "lesson": "1re-maths-cd-suites"
+  },
+  {
+   "id": "1re-maths-cd-sn-05",
+   "kind": "mcq",
+   "points": 2,
+   "prompt": "Soit $u_n = n^2 - 4n$ pour $n \\geq 0$. Que peut-on dire de $(u_n)$ ?",
+   "choices": [
+    "Elle est croissante dès le rang 0",
+    "Elle est croissante à partir du rang 2",
+    "Elle est décroissante pour tout n",
+    "Elle est croissante à partir du rang 1"
+   ],
+   "answer": 1,
+   "explanation": "$u_{n+1} - u_n = 2n - 3$, négatif pour n = 0 et n = 1, positif dès n = 2. Les termes valent 0, −3, −4, −3, 0, 5… : $u_2 < u_3 < u_4 < \\ldots$ mais $u_1 > u_2$.",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "source": "Exercice original, style Probatoire",
+   "method": "Signe de $u_{n+1} - u_n$.",
+   "mistakes": [
+    "Conclure d'après les deux premiers termes."
+   ],
+   "lesson": "1re-maths-cd-suites"
+  },
+  {
+   "id": "1re-maths-cd-sn-06",
+   "kind": "problem",
+   "prompt": "Mballa place 200 000 FCFA à intérêts composés au taux de 5 % par an. On note $C_n$ le capital au bout de n années, avec $C_0 = 200\\,000$.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule $C_1$ (en FCFA).",
+     "answer": 210000,
+     "tolerance": 0,
+     "explanation": "$C_1 = 1{,}05 \\times 200\\,000 = 210\\,000$ FCFA.",
+     "unit": "FCFA",
+     "id": "1re-maths-cd-sn-06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle est la nature de $(C_n)$ ?",
+     "choices": [
+      "Arithmétique de raison 10 000",
+      "Géométrique de raison 1,05",
+      "Géométrique de raison 0,05",
+      "Arithmétique de raison 1,05"
+     ],
+     "answer": 1,
+     "explanation": "Chaque année le capital est multiplié par 1,05 : $C_{n+1} = 1{,}05\\, C_n$.",
+     "id": "1re-maths-cd-sn-06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule $C_3$ (en FCFA, valeur exacte).",
+     "answer": 231525,
+     "tolerance": 0,
+     "explanation": "$C_3 = 200\\,000 \\times 1{,}05^3 = 200\\,000 \\times 1{,}157625 = 231\\,525$ FCFA.",
+     "unit": "FCFA",
+     "id": "1re-maths-cd-sn-06-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Au bout de combien d'années entières le capital dépasse-t-il pour la première fois 250 000 FCFA ?",
+     "answer": 5,
+     "tolerance": 0,
+     "explanation": "$C_4 = 200\\,000 \\times 1{,}05^4 \\approx 243\\,101$ (< 250 000) et $C_5 \\approx 255\\,256$ (> 250 000). La suite étant croissante, la réponse est 5 ans.",
+     "unit": "années",
+     "id": "1re-maths-cd-sn-06-d"
+    }
+   ],
+   "tier": "examen",
+   "difficulty": 2,
+   "source": "Exercice original, style Probatoire",
+   "method": "Reconnaître une suite géométrique de raison 1 + t/100 et tester les valeurs de n à la calculatrice.",
+   "mistakes": [
+    "Utiliser la raison 0,05 au lieu de 1,05.",
+    "Additionner 5 % de 200 000 chaque année (intérêts simples)."
+   ],
+   "lesson": "1re-maths-cd-suites"
+  },
+  {
+   "id": "1re-maths-cd-sn-q1",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Une suite arithmétique a $u_0 = 3$ et r = 5. Que vaut $u_2$ ?",
+   "choices": [
+    "13",
+    "30",
+    "28",
+    "8"
+   ],
+   "answer": 0,
+   "explanation": "$u_2 = 3 + 2 \\times 5 = 13$.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "lesson": "1re-maths-cd-suites"
+  },
+  {
+   "id": "1re-maths-cd-sn-q2",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Pour une suite géométrique de raison 2 et de premier terme 1, la somme des 4 premiers termes vaut :",
+   "choices": [
+    "16",
+    "8",
+    "15",
+    "31"
+   ],
+   "answer": 2,
+   "explanation": "$1 + 2 + 4 + 8 = 15 = \\frac{1 - 2^4}{1 - 2}$.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "lesson": "1re-maths-cd-suites"
+  },
+  {
+   "id": "1re-maths-cd-sn-q3",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Une suite géométrique de premier terme positif et de raison 0,5 est :",
+   "choices": [
+    "décroissante",
+    "croissante",
+    "constante",
+    "arithmétique"
+   ],
+   "answer": 0,
+   "explanation": "Chaque terme est la moitié du précédent : la suite décroît vers 0.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "lesson": "1re-maths-cd-suites"
+  },
+  {
+   "id": "1re-maths-cd-sn-q4",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Combien de termes compte la somme $u_5 + u_6 + \\ldots + u_{12}$ ?",
+   "choices": [
+    "7",
+    "12",
+    "6",
+    "8"
+   ],
+   "answer": 3,
+   "explanation": "On compte $12 - 5 + 1 = 8$ termes.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "lesson": "1re-maths-cd-suites"
+  },
+  {
+   "id": "1re-maths-cd-sn-q5",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Une augmentation de 8 % correspond à la multiplication par :",
+   "choices": [
+    "0,08",
+    "1,08",
+    "1,8",
+    "8"
+   ],
+   "answer": 1,
+   "explanation": "$1 + \\frac{8}{100} = 1{,}08$.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "lesson": "1re-maths-cd-suites"
+  }
+ ]
+}

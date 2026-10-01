@@ -1,0 +1,515 @@
+{
+ "chapter": "2nde-maths-a-ch-stats",
+ "lessons": [
+  {
+   "id": "2nde-maths-a-stats",
+   "title": "Statistiques descriptives",
+   "minutes": 35,
+   "programRef": "2nde A — Statistiques descriptives : effectifs, fréquences, moyenne, médiane (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale conforme au programme de seconde ; à relire par un enseignant",
+   "objectives": [
+    "Dresser un tableau d'effectifs et de fréquences.",
+    "Calculer moyenne, mode, médiane et étendue.",
+    "Déterminer les quartiles d'une petite série.",
+    "Lire un diagramme en barres ou circulaire."
+   ],
+   "prerequisites": [
+    "2nde-maths-a-calcul"
+   ],
+   "exercises": [
+    "2nde-maths-a-sta-01",
+    "2nde-maths-a-sta-02",
+    "2nde-maths-a-sta-03",
+    "2nde-maths-a-sta-04",
+    "2nde-maths-a-sta-05",
+    "2nde-maths-a-sta-06"
+   ],
+   "selfCheck": [
+    "2nde-maths-a-sta-q1",
+    "2nde-maths-a-sta-q2",
+    "2nde-maths-a-sta-q3",
+    "2nde-maths-a-sta-q4",
+    "2nde-maths-a-sta-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Vocabulaire",
+     "md": "Une **série statistique** est l'ensemble des valeurs d'un **caractère** observé sur une **population**. L'**effectif** d'une valeur est le nombre de fois où elle apparaît ; l'**effectif total** est N. La **fréquence** d'une valeur est son effectif divisé par N, souvent donnée en pourcentage."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Moyenne",
+     "md": "La moyenne est la somme des valeurs divisée par leur nombre. Avec des effectifs $n_i$ pour les valeurs $x_i$ (moyenne pondérée) :",
+     "tex": "\\overline{x} = \\frac{n_1 x_1 + n_2 x_2 + \\ldots + n_p x_p}{N}"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Mode et étendue",
+     "md": "- Le **mode** est la valeur qui a le plus grand effectif (il peut y en avoir plusieurs).\n- L'**étendue** est la différence entre la plus grande et la plus petite valeur : elle mesure la dispersion."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Médiane",
+     "md": "On range les valeurs dans l'ordre croissant. La **médiane** partage la série en deux parties de même effectif : si N est impair, c'est la valeur du milieu ; si N est pair, c'est la moyenne des deux valeurs du milieu."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Quartiles",
+     "md": "Convention utilisée ici (à confirmer par l'enseignant) : $Q_1$ est la valeur dont le rang est N ÷ 4 arrondi à l'entier supérieur, $Q_3$ celle dont le rang est 3N ÷ 4 arrondi à l'entier supérieur. Il y a ainsi environ un quart des valeurs en dessous de $Q_1$ et un quart au-dessus de $Q_3$."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Représentations",
+     "md": "- **Diagramme en barres** : une barre par valeur, hauteur proportionnelle à l'effectif.\n- **Diagramme circulaire** : l'angle d'un secteur vaut fréquence × 360° (25 % donne 90°).\n- Toujours indiquer le titre, les unités et la légende."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "unit": "élèves",
+      "bars": [
+       {
+        "label": "Marche",
+        "value": 12,
+        "color": "green"
+       },
+       {
+        "label": "Moto-taxi",
+        "value": 9,
+        "color": "orange"
+       },
+       {
+        "label": "Bus",
+        "value": 6,
+        "color": "blue"
+       },
+       {
+        "label": "Voiture",
+        "value": 3,
+        "color": "purple"
+       }
+      ]
+     },
+     "caption": "Moyen de transport de 30 élèves pour venir au lycée (données fictives) : la marche est le mode.",
+     "alt": "Diagramme en barres : marche 12 élèves, moto-taxi 9, bus 6 et voiture 3."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : tableau d'effectifs",
+     "statement": "Notes de 20 élèves : 8 (2 élèves), 10 (5), 12 (6), 14 (4), 16 (3). Calcule la moyenne, le mode, la médiane et l'étendue.",
+     "steps": [
+      {
+       "md": "Moyenne : on multiplie chaque note par son effectif.",
+       "tex": "\\overline{x} = \\frac{16 + 50 + 72 + 56 + 48}{20} = \\frac{242}{20} = 12{,}1"
+      },
+      {
+       "md": "Mode : la note 12, qui a le plus grand effectif (6)."
+      },
+      {
+       "md": "Médiane : N = 20, on prend la moyenne des 10e et 11e valeurs. Effectifs cumulés : 2, 7, 13. Les 10e et 11e valeurs valent 12, donc la médiane est 12."
+      },
+      {
+       "md": "Étendue : 16 − 8 = 8."
+      }
+     ],
+     "answer": "Moyenne 12,1 ; mode 12 ; médiane 12 ; étendue 8."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : fréquences et diagramme circulaire",
+     "statement": "Dans le diagramme en barres ci-dessus (30 élèves), quelle est la fréquence de la marche et l'angle du secteur correspondant ?",
+     "steps": [
+      {
+       "md": "Fréquence :",
+       "tex": "\\frac{12}{30} = 0{,}4 = 40\\,\\%"
+      },
+      {
+       "md": "Angle du secteur d'un diagramme circulaire :",
+       "tex": "0{,}4 \\times 360° = 144°"
+      },
+      {
+       "md": "Contrôle : les quatre fréquences (40 %, 30 %, 20 %, 10 %) font bien 100 %."
+      }
+     ],
+     "answer": "Fréquence **40 %** ; angle **144°**.",
+     "figure": {
+      "kind": "bars",
+      "unit": "élèves",
+      "bars": [
+       {
+        "label": "Marche",
+        "value": 12,
+        "color": "green"
+       },
+       {
+        "label": "Moto-taxi",
+        "value": 9,
+        "color": "orange"
+       },
+       {
+        "label": "Bus",
+        "value": 6,
+        "color": "blue"
+       },
+       {
+        "label": "Voiture",
+        "value": 3,
+        "color": "purple"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : médiane et quartiles",
+     "statement": "Les âges (en années) de huit joueurs d'un club (données fictives) sont : 3 ; 5 ; 6 ; 8 ; 9 ; 11 ; 12 ; 14. Calcule la moyenne, la médiane, Q1 et Q3.",
+     "steps": [
+      {
+       "md": "Moyenne :",
+       "tex": "\\frac{3 + 5 + 6 + 8 + 9 + 11 + 12 + 14}{8} = \\frac{68}{8} = 8{,}5"
+      },
+      {
+       "md": "Médiane : N = 8 est pair ; on fait la moyenne des 4e et 5e valeurs : (8 + 9)/2 = 8,5."
+      },
+      {
+       "md": "Q1 : rang 8/4 = 2, donc Q1 = 5. Q3 : rang 3 × 8/4 = 6, donc Q3 = 11."
+      }
+     ],
+     "answer": "Moyenne 8,5 ; médiane 8,5 ; Q1 = 5 ; Q3 = 11."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Chercher la médiane sans avoir rangé les valeurs dans l'ordre.\n- Diviser la somme par le nombre de valeurs **différentes** au lieu de l'effectif total.\n- Confondre mode (valeur la plus fréquente) et moyenne.\n- Croire que la moyenne est toujours l'une des valeurs de la série.\n- Oublier de multiplier chaque valeur par son effectif."
+    },
+    {
+     "type": "exercise",
+     "ref": "2nde-maths-a-sta-01"
+    },
+    {
+     "type": "more",
+     "items": [
+      "La moyenne est sensible aux valeurs extrêmes (un très grand salaire la fait monter), alors que la médiane l'est peu : c'est pourquoi on donne souvent les deux.",
+      "Pour regrouper des valeurs en classes, on utilise le centre de chaque classe dans le calcul de la moyenne."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Les quartiles (convention du rang) et l'écart-type sont à confirmer pour la série A.",
+    "Toutes les données sont fictives."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "2nde-maths-a-sta-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Calcule la moyenne des notes 7, 9, 12, 8 et 14.",
+   "answer": 10,
+   "tolerance": 0,
+   "explanation": "(7 + 9 + 12 + 8 + 14)/5 = 50/5 = 10.",
+   "method": "Somme des valeurs ÷ nombre de valeurs.",
+   "mistakes": [
+    "Diviser par 4."
+   ],
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-stats",
+   "chapter": "2nde-maths-a-ch-stats"
+  },
+  {
+   "id": "2nde-maths-a-sta-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quelle est la médiane de la série 7 ; 3 ; 10 ; 5 ; 8 ?",
+   "choices": [
+    "5",
+    "7",
+    "8",
+    "6,6"
+   ],
+   "answer": 1,
+   "explanation": "On range : 3 ; 5 ; 7 ; 8 ; 10. N = 5 est impair : la médiane est la 3e valeur, 7. (6,6 est la moyenne.)",
+   "method": "Ranger puis prendre la valeur du milieu.",
+   "mistakes": [
+    "Prendre la 3e valeur sans ranger (10).",
+    "Donner la moyenne 6,6."
+   ],
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-stats",
+   "chapter": "2nde-maths-a-ch-stats"
+  },
+  {
+   "id": "2nde-maths-a-sta-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Dans un groupe de 60 élèves, 15 viennent à pied. Quelle est la fréquence de ce groupe, en pourcentage ?",
+   "answer": 25,
+   "tolerance": 0,
+   "unit": "%",
+   "explanation": "15/60 = 0,25 = 25 %.",
+   "method": "Fréquence = effectif ÷ effectif total.",
+   "mistakes": [
+    "Calculer 60/15 = 4."
+   ],
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-stats",
+   "chapter": "2nde-maths-a-ch-stats"
+  },
+  {
+   "id": "2nde-maths-a-sta-04",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Vrai ou faux : la moyenne d'une série est toujours l'une des valeurs de cette série.",
+   "answer": false,
+   "explanation": "Contre-exemple : la série 2 ; 3 a pour moyenne 2,5, qui n'est pas dans la série. La moyenne est un nombre « d'équilibre », pas forcément une valeur observée.",
+   "method": "Chercher un contre-exemple simple.",
+   "mistakes": [
+    "Confondre la moyenne avec le mode."
+   ],
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-stats",
+   "chapter": "2nde-maths-a-ch-stats"
+  },
+  {
+   "id": "2nde-maths-a-sta-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Une série a pour valeurs : 8 (effectif 2), 10 (effectif 4), 12 (effectif 3) et 16 (effectif 1). Calcule la moyenne.",
+   "answer": 10.8,
+   "tolerance": 0.001,
+   "explanation": "N = 10. Somme : 2 × 8 + 4 × 10 + 3 × 12 + 16 = 16 + 40 + 36 + 16 = 108. Moyenne : 108/10 = 10,8.",
+   "method": "Moyenne pondérée : somme des (valeur × effectif) ÷ N.",
+   "mistakes": [
+    "Diviser par 4 (le nombre de valeurs différentes)."
+   ],
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-stats",
+   "chapter": "2nde-maths-a-ch-stats"
+  },
+  {
+   "id": "2nde-maths-a-sta-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Un commerçant du marché de Mokolo (données fictives) note le nombre de sacs vendus pendant 10 jours : 12 ; 15 ; 9 ; 20 ; 15 ; 18 ; 10 ; 15 ; 16 ; 10.",
+   "method": "Ranger la série avant de chercher médiane et quartiles.",
+   "mistakes": [
+    "Calculer la médiane sans ranger les valeurs."
+   ],
+   "source": "Exercice original, style devoir de 2nde A",
+   "parts": [
+    {
+     "id": "2nde-maths-a-sta-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la moyenne.",
+     "answer": 14,
+     "tolerance": 0,
+     "explanation": "La somme vaut 140 ; 140/10 = 14 sacs par jour."
+    },
+    {
+     "id": "2nde-maths-a-sta-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la médiane.",
+     "answer": 15,
+     "tolerance": 0,
+     "explanation": "On range : 9 ; 10 ; 10 ; 12 ; 15 ; 15 ; 15 ; 16 ; 18 ; 20. N = 10 : moyenne des 5e et 6e valeurs, (15 + 15)/2 = 15."
+    },
+    {
+     "id": "2nde-maths-a-sta-06-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quel est le mode ?",
+     "answer": 15,
+     "tolerance": 0,
+     "explanation": "La valeur 15 apparaît 3 fois : c'est le mode."
+    },
+    {
+     "id": "2nde-maths-a-sta-06-d",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule l'étendue.",
+     "answer": 11,
+     "tolerance": 0,
+     "explanation": "20 − 9 = 11."
+    },
+    {
+     "id": "2nde-maths-a-sta-06-e",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle phrase est exacte ?",
+     "choices": [
+      "Au moins la moitié des jours, il a vendu au moins 15 sacs",
+      "Il a vendu exactement 14 sacs chaque jour",
+      "Il n'a jamais vendu moins de 12 sacs",
+      "La moyenne est la valeur la plus fréquente"
+     ],
+     "answer": 0,
+     "explanation": "La médiane est 15 : la moitié des jours au moins ont 15 sacs ou plus (les jours à 15, 16, 18, 20 : 6 jours sur 10). Les autres phrases sont fausses (il a vendu 9 et 10 sacs certains jours ; le mode est 15, la moyenne 14)."
+    }
+   ],
+   "lesson": "2nde-maths-a-stats",
+   "chapter": "2nde-maths-a-ch-stats"
+  },
+  {
+   "id": "2nde-maths-a-sta-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "La moyenne de 2 ; 4 ; 6 est :",
+   "choices": [
+    "3",
+    "4",
+    "6",
+    "12"
+   ],
+   "answer": 1,
+   "explanation": "(2 + 4 + 6)/3 = 12/3 = 4.",
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-stats",
+   "chapter": "2nde-maths-a-ch-stats"
+  },
+  {
+   "id": "2nde-maths-a-sta-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "Le mode de la série 3 ; 5 ; 5 ; 7 ; 5 est :",
+   "choices": [
+    "3",
+    "7",
+    "5",
+    "25"
+   ],
+   "answer": 2,
+   "explanation": "La valeur 5 apparaît trois fois : c'est la plus fréquente.",
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-stats",
+   "chapter": "2nde-maths-a-ch-stats"
+  },
+  {
+   "id": "2nde-maths-a-sta-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "L'étendue de la série 3 ; 8 ; 5 ; 12 ; 9 est :",
+   "choices": [
+    "12",
+    "3",
+    "37",
+    "9"
+   ],
+   "answer": 3,
+   "explanation": "12 − 3 = 9.",
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-stats",
+   "chapter": "2nde-maths-a-ch-stats"
+  },
+  {
+   "id": "2nde-maths-a-sta-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "Dans un diagramme circulaire, un secteur de fréquence 25 % a pour angle :",
+   "choices": [
+    "90°",
+    "25°",
+    "180°",
+    "45°"
+   ],
+   "answer": 0,
+   "explanation": "25 % de 360° = 90°.",
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-stats",
+   "chapter": "2nde-maths-a-ch-stats"
+  },
+  {
+   "id": "2nde-maths-a-sta-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "prompt": "Si l'effectif total est 50 et qu'une valeur a pour effectif 10, sa fréquence est :",
+   "choices": [
+    "5 %",
+    "20 %",
+    "10 %",
+    "40 %"
+   ],
+   "answer": 1,
+   "explanation": "10/50 = 0,2 = 20 %.",
+   "source": "Exercice original, style devoir de 2nde A",
+   "lesson": "2nde-maths-a-stats",
+   "chapter": "2nde-maths-a-ch-stats"
+  },
+  {
+   "id": "2nde-maths-a-blanc-ex4",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Exercice 4 — Statistiques (4 points). Notes de huit élèves (données fictives) : 6 ; 8 ; 8 ; 10 ; 12 ; 12 ; 12 ; 16.",
+   "source": "Exercice original, style devoir de 2nde A",
+   "parts": [
+    {
+     "id": "2nde-maths-a-blanc-ex4-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la moyenne.",
+     "answer": 10.5,
+     "tolerance": 0,
+     "explanation": "(6 + 8 + 8 + 10 + 12 + 12 + 12 + 16)/8 = 84/8 = 10,5."
+    },
+    {
+     "id": "2nde-maths-a-blanc-ex4-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la médiane.",
+     "answer": 11,
+     "tolerance": 0,
+     "explanation": "N = 8 : moyenne des 4e et 5e valeurs, (10 + 12)/2 = 11."
+    },
+    {
+     "id": "2nde-maths-a-blanc-ex4-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quel est le mode ?",
+     "answer": 12,
+     "tolerance": 0,
+     "explanation": "La note 12 apparaît 3 fois : c'est le mode."
+    },
+    {
+     "id": "2nde-maths-a-blanc-ex4-d",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule l'étendue.",
+     "answer": 10,
+     "tolerance": 0,
+     "explanation": "16 − 6 = 10."
+    }
+   ],
+   "lesson": "2nde-maths-a-stats",
+   "chapter": "2nde-maths-a-ch-stats"
+  }
+ ]
+}

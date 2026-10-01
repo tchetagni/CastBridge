@@ -1,0 +1,534 @@
+{
+ "chapter": "2nde-svt-ch-cellule",
+ "lessons": [
+  {
+   "id": "2nde-svt-cellule",
+   "title": "La cellule : structure, organites et mitose",
+   "minutes": 35,
+   "programRef": "2nde — La cellule, unité du vivant ; la division cellulaire (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Décrire une cellule animale et une cellule végétale et nommer leurs organites.",
+    "Calculer une taille réelle à partir d'un grossissement.",
+    "Décrire la mitose en grandes lignes et en donner le rôle."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "2nde-svt-cel-1",
+    "2nde-svt-cel-2",
+    "2nde-svt-cel-3",
+    "2nde-svt-cel-4",
+    "2nde-svt-cel-5",
+    "2nde-svt-cel-6"
+   ],
+   "selfCheck": [
+    "2nde-svt-cel-q1",
+    "2nde-svt-cel-q2",
+    "2nde-svt-cel-q3",
+    "2nde-svt-cel-q4",
+    "2nde-svt-cel-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Ce que tu sauras faire",
+     "md": "- Décrire une cellule et nommer ses organites, en distinguant cellule animale et cellule végétale.\n- Calculer une taille réelle à partir d'un grossissement.\n- Expliquer la mitose en grandes lignes et son rôle."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La cellule, unité du vivant",
+     "md": "Tous les êtres vivants sont formés d'une ou de plusieurs **cellules**. La cellule est la plus petite unité capable de vivre : elle se nourrit, produit de l'énergie, se reproduit. Elle est trop petite pour l'œil nu : on l'observe au **microscope**. Son unité de mesure usuelle est le micromètre : 1 mm = 1 000 µm."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les organites d'une cellule animale",
+     "md": "- **Membrane plasmique** : enveloppe très fine qui sépare la cellule du milieu et contrôle les échanges.\n- **Cytoplasme** : milieu liquide où baignent les organites.\n- **Noyau** : contient l'ADN, support de l'information génétique ; il commande la cellule.\n- **Mitochondries** : libèrent l'énergie à partir des nutriments et du dioxygène (respiration cellulaire)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Schéma simplifié d'une cellule animale (schéma d'illustration, sans échelle).",
+     "alt": "Un grand disque jaune clair représente la cellule. Un disque bleu clair à l'intérieur est le noyau, deux petits disques orange sont des mitochondries. Quatre étiquettes à droite désignent la membrane, le cytoplasme, le noyau et la mitochondrie.",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 260,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 140,
+        "cy": 130,
+        "r": 110,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 120,
+        "cy": 115,
+        "r": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 172,
+        "r": 10,
+        "fill": "orange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 80,
+        "cy": 190,
+        "r": 10,
+        "fill": "orange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 44,
+        "text": "Membrane",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 284,
+        "y1": 40,
+        "x2": 220,
+        "y2": 54,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 94,
+        "text": "Cytoplasme",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 284,
+        "y1": 90,
+        "x2": 190,
+        "y2": 100,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 144,
+        "text": "Noyau",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 284,
+        "y1": 140,
+        "x2": 152,
+        "y2": 120,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 194,
+        "text": "Mitochondrie",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start",
+        "bold": false
+       },
+       {
+        "t": "line",
+        "x1": 284,
+        "y1": 190,
+        "x2": 211,
+        "y2": 174,
+        "color": "ink",
+        "width": 2
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Cellule végétale : trois éléments en plus",
+     "md": "Une cellule végétale possède, en plus des organites précédents :\n- une **paroi** rigide (cellulose) autour de la membrane ;\n- des **chloroplastes**, verts, où se fait la photosynthèse (production de matière organique à la lumière) ;\n- souvent une grande **vacuole**, réserve d'eau et de substances dissoutes."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Bactéries : un autre type de cellule",
+     "md": "Une bactérie est une cellule **sans noyau** : son ADN est libre dans le cytoplasme (cellule dite procaryote). Les cellules animales et végétales, elles, ont un vrai noyau (cellules eucaryotes). Les bactéries sont plus petites que la plupart des cellules animales ou végétales."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : retrouver la taille réelle",
+     "md": "Le grossissement G est le rapport entre la taille de l'image et la taille réelle : **G = taille de l'image ÷ taille réelle**. Donc **taille réelle = taille de l'image ÷ G**.\n1. Mesure l'image et convertis dans une seule unité.\n2. Divise par G.\n3. Convertis le résultat en µm si besoin (1 mm = 1 000 µm).\nLe grossissement total du microscope est le produit de celui de l'oculaire par celui de l'objectif."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : taille réelle d'une cellule",
+     "statement": "Sur un dessin d'observation au grossissement ×400, une cellule d'épiderme d'oignon mesure 48 mm de long. Quelle est sa longueur réelle en µm ?",
+     "steps": [
+      {
+       "md": "On utilise taille réelle = taille de l'image ÷ G."
+      },
+      {
+       "md": "Calcul de la taille réelle :",
+       "tex": "\\frac{48\\ \\text{mm}}{400} = 0{,}12\\ \\text{mm}"
+      },
+      {
+       "md": "On convertit : 0,12 mm = 0,12 × 1 000 = 120 µm."
+      }
+     ],
+     "answer": "La cellule mesure **120 µm** (0,12 mm)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "La mitose : une cellule en donne deux",
+     "md": "La **mitose** est la division d'une cellule en deux cellules filles identiques. Avant, pendant l'**interphase**, l'ADN est copié : chaque chromosome devient formé de deux chromatides identiques. Puis :\n1. **Prophase** : les chromosomes se condensent, l'enveloppe du noyau disparaît.\n2. **Métaphase** : ils s'alignent au milieu de la cellule.\n3. **Anaphase** : les deux chromatides de chaque chromosome se séparent et migrent vers les pôles.\n4. **Télophase** : deux noyaux se forment, la cellule se divise."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Rôle de la mitose",
+     "md": "La mitose assure la **croissance** (plus de cellules), le **renouvellement** des cellules (peau, sang) et la **réparation** (cicatrisation). Les cellules filles ont le même nombre de chromosomes que la cellule mère : chez l'être humain, 46 dans chaque cellule du corps (hors cellules reproductrices)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : compter les cellules",
+     "statement": "Une cellule se divise par mitose toutes les heures dans des conditions idéales (donnée fictive pour l'exercice). Combien de cellules y a-t-il au bout de 5 divisions, en partant d'une seule cellule ? Combien de chromosomes chaque cellule humaine contient-elle ?",
+     "steps": [
+      {
+       "md": "À chaque division, le nombre de cellules double : 1, 2, 4, 8, 16, 32."
+      },
+      {
+       "md": "Après 5 divisions :",
+       "tex": "2^5 = 32"
+      },
+      {
+       "md": "Chaque cellule fille reçoit une copie complète de l'information : si la cellule mère humaine a 46 chromosomes, chaque cellule fille en a aussi 46."
+      }
+     ],
+     "answer": "**32 cellules**, chacune à 46 chromosomes."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Dire que la cellule animale a une paroi ou des chloroplastes : ils sont propres à la cellule végétale.\n- Confondre grossissement et taille : une image de 48 mm n'est pas la taille réelle.\n- Oublier de convertir mm en µm.\n- Croire que la mitose divise par deux le nombre de chromosomes : il reste le même dans les cellules filles.\n- Confondre noyau (information génétique) et mitochondrie (énergie)."
+    },
+    {
+     "type": "exercise",
+     "ref": "2nde-svt-cel-1"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Au Cameroun comme ailleurs, c'est l'observation au microscope de fines tranches de végétaux (épiderme d'oignon, par exemple) ou d'un frottis de cellules de la joue qui permet de voir cellules et noyaux en classe.",
+      "Les cellules de la peau se renouvellent par mitose : c'est ce qui permet à une plaie de se refermer."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Niveau de détail attendu sur les organites (réticulum, appareil de Golgi, ribosomes) et sur les phases de la mitose : à confirmer sur le programme officiel de 2nde.",
+    "Le programme officiel peut traiter la mitose en détail (schémas à légender) ou seulement son principe : adapter le niveau.",
+    "Seul le nombre de chromosomes humain (46) est cité ; aucune taille de cellule réelle n'est donnée, les valeurs des exercices sont des exemples."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "2nde-svt-cel-1",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 3,
+   "lesson": "2nde-svt-cellule",
+   "prompt": "Associe chaque organite à son rôle.",
+   "pairs": [
+    [
+     "Noyau",
+     "Contient l'ADN et commande la cellule"
+    ],
+    [
+     "Mitochondrie",
+     "Libère l'énergie à partir des nutriments"
+    ],
+    [
+     "Chloroplaste",
+     "Réalise la photosynthèse"
+    ],
+    [
+     "Membrane plasmique",
+     "Contrôle les échanges avec l'extérieur"
+    ],
+    [
+     "Paroi",
+     "Enveloppe rigide de la cellule végétale"
+    ]
+   ],
+   "explanation": "Le noyau porte l'information génétique. La mitochondrie est la « centrale d'énergie ». Le chloroplaste capte la lumière pour fabriquer de la matière organique. La membrane règle ce qui entre et sort. La paroi, rigide, n'existe que chez les végétaux (et les bactéries, sous une autre forme).",
+   "method": "Relier chaque nom d'organite à sa fonction principale.",
+   "mistakes": [
+    "Attribuer la photosynthèse à la mitochondrie."
+   ],
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-cel-2",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "lesson": "2nde-svt-cellule",
+   "prompt": "Au grossissement ×200, une cellule apparaît longue de 30 mm sur la photographie. Quelle est sa longueur réelle, en µm ?",
+   "answer": 150,
+   "tolerance": 0,
+   "unit": "µm",
+   "explanation": "Taille réelle = 30 mm ÷ 200 = 0,15 mm = 150 µm.",
+   "method": "Taille réelle = taille de l'image ÷ G, puis conversion mm → µm.",
+   "mistakes": [
+    "Multiplier par 200 au lieu de diviser.",
+    "Répondre 0,15 sans convertir en µm."
+   ],
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-cel-3",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-svt-cellule",
+   "prompt": "Vrai ou faux : une cellule de la peau humaine possède des chloroplastes.",
+   "answer": false,
+   "explanation": "Faux. Les chloroplastes n'existent que dans les cellules végétales (feuilles, tiges vertes) et chez certains organismes unicellulaires. Une cellule animale n'a ni chloroplaste ni paroi.",
+   "mistakes": [
+    "Penser que toutes les cellules vivantes font la photosynthèse."
+   ],
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-cel-4",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "2nde-svt-cellule",
+   "prompt": "On compare un fragment de feuille verte et une cellule de la joue observés au microscope. Quel critère permet à coup sûr d'identifier la cellule végétale ?",
+   "choices": [
+    "La présence d'un noyau",
+    "La présence de chloroplastes, d'une paroi et d'une grande vacuole",
+    "La présence d'une membrane plasmique",
+    "La présence d'un cytoplasme"
+   ],
+   "answer": 1,
+   "explanation": "Noyau, membrane et cytoplasme existent dans les deux types de cellules : ils ne permettent pas de les distinguer. Paroi, chloroplastes et grande vacuole sont propres à la cellule végétale.",
+   "method": "Cherche ce que l'une a en plus de l'autre.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-cel-5",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 4,
+   "lesson": "2nde-svt-cellule",
+   "prompt": "Une plaie à la jambe se referme en quelques jours. Explique, en 4 à 6 lignes, le rôle de la mitose dans ce phénomène. Utilise les mots : cellules filles, chromosomes, identiques.",
+   "model": "Pour réparer la plaie, les cellules de la peau voisines se divisent par **mitose**. Avant la division, l'ADN est copié : chaque chromosome est formé de deux chromatides identiques, qui se séparent ensuite. Chaque cellule mère donne donc deux **cellules filles identiques**, avec le même nombre de **chromosomes** (46 chez l'être humain). Ces nouvelles cellules comblent la blessure : la mitose permet la réparation des tissus.",
+   "rubric": [
+    "Citer la mitose comme mécanisme de réparation (1 point).",
+    "Expliquer la copie de l'ADN avant la division ou la séparation des chromatides (1 point).",
+    "Préciser que les cellules filles sont identiques et gardent le même nombre de chromosomes (1 point).",
+    "Rédaction cohérente, vocabulaire exact (1 point)."
+   ],
+   "explanation": "La mitose produit des cellules identiques à la cellule mère ; en multipliant les cellules, elle permet croissance, renouvellement et réparation.",
+   "method": "Pense : pourquoi faire plus de cellules, et comment elles restent identiques ?",
+   "mistakes": [
+    "Dire que les cellules filles ont 23 chromosomes (ce sont les cellules reproductrices qui en ont 23)."
+   ],
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-cel-6",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "2nde-svt-cellule",
+   "prompt": "Un élève prépare deux lames de microscope : la lame 1 est un fragment d'épiderme d'oignon, la lame 2 est un frottis de cellules de l'intérieur de la joue. Il observe au grossissement ×400. Il remarque, sur la lame 1 seulement, une enveloppe rigide autour de chaque cellule. Sur les deux lames, il voit un noyau coloré.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quel nom porte l'enveloppe rigide observée sur la lame 1 ?",
+     "explanation": "La paroi est une enveloppe rigide autour de la membrane, propre aux cellules végétales ; la membrane plasmique est fine, souple et présente chez tous les types de cellules.",
+     "id": "2nde-svt-cel-6-a",
+     "choices": [
+      "La membrane plasmique",
+      "La vacuole",
+      "La paroi",
+      "Le cytoplasme"
+     ],
+     "answer": 2
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Une cellule de la lame 2 mesure 9 mm sur le dessin de l'élève. Calcule sa taille réelle en µm.",
+     "answer": 22.5,
+     "tolerance": 0.1,
+     "unit": "µm",
+     "explanation": "Taille réelle = 9 mm ÷ 400 = 0,0225 mm, soit 22,5 µm.",
+     "id": "2nde-svt-cel-6-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Donne le rôle du noyau et explique pourquoi les deux types de cellules en possèdent un.",
+     "model": "Le noyau contient l'ADN, support de l'information génétique : il commande le fonctionnement de la cellule et transmet l'information lors de la division. Cellules animales et végétales sont toutes deux des cellules à noyau (eucaryotes), donc elles en ont un.",
+     "rubric": [
+      "Rôle : contient l'ADN et commande la cellule (1 point).",
+      "Justification : cellules animales et végétales ont un vrai noyau (1 point)."
+     ],
+     "explanation": "Le noyau est présent chez tous les eucaryotes ; seules les bactéries n'en ont pas.",
+     "id": "2nde-svt-cel-6-c"
+    },
+    {
+     "kind": "open",
+     "points": 1,
+     "prompt": "Cite deux différences entre la cellule de la lame 1 et celle de la lame 2.",
+     "model": "La cellule de l'oignon a une paroi et une grande vacuole ; la cellule de la joue n'en a pas. (Les chloroplastes ne sont pas visibles dans l'épiderme d'oignon, non vert.)",
+     "rubric": [
+      "Deux différences exactes parmi paroi, vacuole, chloroplastes (1 point)."
+     ],
+     "explanation": "Les chloroplastes sont absents des cellules d'épiderme d'oignon, qui ne sont pas vertes ; la paroi et la vacuole suffisent.",
+     "id": "2nde-svt-cel-6-d"
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "method": "Lis le document, repère ce qui est propre à chaque cellule, puis réponds en citant les organites.",
+   "mistakes": [
+    "Oublier de convertir mm en µm."
+   ],
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-cel-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-svt-cellule",
+   "prompt": "Quel organite contient l'ADN ?",
+   "choices": [
+    "Le noyau",
+    "La mitochondrie",
+    "La vacuole",
+    "La paroi"
+   ],
+   "answer": 0,
+   "explanation": "Le noyau renferme l'ADN. Les mitochondries produisent de l'énergie.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-cel-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-svt-cellule",
+   "prompt": "Quel élément n'existe pas dans une cellule animale ?",
+   "choices": [
+    "Le noyau",
+    "La mitochondrie",
+    "Le chloroplaste",
+    "La membrane plasmique"
+   ],
+   "answer": 2,
+   "explanation": "Chloroplastes, paroi et grande vacuole sont propres à la cellule végétale.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-cel-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-svt-cellule",
+   "prompt": "Quelle formule donne la taille réelle d'un objet observé ?",
+   "choices": [
+    "Taille de l'image ÷ grossissement",
+    "Taille de l'image × grossissement",
+    "Grossissement ÷ taille de l'image",
+    "Taille de l'image − grossissement"
+   ],
+   "answer": 0,
+   "explanation": "G = image ÷ réel, donc réel = image ÷ G.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-cel-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-svt-cellule",
+   "prompt": "Après une mitose, la cellule mère donne :",
+   "choices": [
+    "Quatre cellules filles différentes",
+    "Deux cellules à moitié moins de chromosomes",
+    "Deux cellules filles identiques entre elles et à la cellule mère",
+    "Une cellule plus grande"
+   ],
+   "answer": 2,
+   "explanation": "La mitose conserve le nombre de chromosomes et l'information génétique.",
+   "source": "Exercice original, style devoir de 2nde"
+  },
+  {
+   "id": "2nde-svt-cel-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-svt-cellule",
+   "prompt": "Dans quelle phase de la mitose les deux chromatides de chaque chromosome se séparent-elles ?",
+   "choices": [
+    "L'anaphase",
+    "La prophase",
+    "La métaphase",
+    "L'interphase"
+   ],
+   "answer": 0,
+   "explanation": "En anaphase, les chromatides se séparent et migrent vers les pôles opposés de la cellule.",
+   "source": "Exercice original, style devoir de 2nde"
+  }
+ ]
+}

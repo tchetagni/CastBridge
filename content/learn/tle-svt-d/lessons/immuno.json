@@ -1,0 +1,562 @@
+{
+ "chapter": "tle-svt-d-ch-immuno",
+ "lessons": [
+  {
+   "id": "tle-svt-d-immuno",
+   "title": "Immunologie : défenses de l'organisme, vaccins, sérums, VIH/sida",
+   "minutes": 40,
+   "programRef": "Tle D — Immunologie (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale, brouillon IA ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer immunité non spécifique et spécifique.",
+    "Expliquer les réponses humorale et cellulaire et la mémoire immunitaire.",
+    "Comparer vaccin et sérum.",
+    "Décrire l'action du VIH, les modes de transmission et la prévention."
+   ],
+   "exercises": [
+    "tle-svt-d-immuno-01",
+    "tle-svt-d-immuno-02",
+    "tle-svt-d-immuno-03",
+    "tle-svt-d-immuno-04",
+    "tle-svt-d-immuno-05",
+    "tle-svt-d-immuno-06"
+   ],
+   "selfCheck": [
+    "tle-svt-d-imm-q1",
+    "tle-svt-d-imm-q2",
+    "tle-svt-d-imm-q3",
+    "tle-svt-d-imm-q4",
+    "tle-svt-d-imm-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Objectifs",
+     "md": "Distinguer les défenses non spécifiques et spécifiques ; expliquer la réponse humorale et la réponse cellulaire ; comprendre le principe d'un vaccin et d'un sérum ; décrire l'action du VIH et les moyens de prévention."
+    },
+    {
+     "type": "heading",
+     "text": "1. Le soi, le non-soi et les premières défenses"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Soi, non-soi, antigène",
+     "md": "Chaque organisme porte des molécules qui lui sont propres : c'est le **soi**. Tout ce qui est reconnu comme étranger (microbe, cellule greffée, toxine) est du **non-soi**. Une molécule du non-soi qui déclenche une réponse immunitaire est un **antigène**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les barrières et la réaction inflammatoire",
+     "md": "Première ligne : peau, muqueuses, larmes, salive, mucus, acidité de l'estomac. Si le microbe passe, la **réaction inflammatoire** (rougeur, chaleur, gonflement, douleur) rassemble des cellules au point d'entrée. Les **phagocytes** (macrophages, polynucléaires) englobent et digèrent les microbes : c'est la **phagocytose**. Cette défense est **non spécifique** : la même contre tous les microbes."
+    },
+    {
+     "type": "heading",
+     "text": "2. L'immunité spécifique"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Caractéristiques",
+     "md": "La réponse spécifique vise **un antigène précis** ; elle est plus lente (plusieurs jours) et possède une **mémoire**. Elle est assurée par les **lymphocytes**, nés dans la moelle osseuse : les **LB** (qui mûrissent dans la moelle osseuse) et les **LT** (qui mûrissent dans le thymus). Chaque lymphocyte ne reconnaît qu'un seul antigène."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Réponse humorale",
+     "md": "Un LB reconnaît son antigène, puis, aidé par les LT4, se multiplie (**sélection clonale**) et se transforme en **plasmocytes** qui sécrètent des **anticorps**. Les anticorps se fixent sur l'antigène correspondant et forment un **complexe immun** ensuite éliminé par les phagocytes. Une partie des LB devient des **cellules mémoire**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Réponse cellulaire",
+     "md": "Contre les cellules infectées par un virus ou les cellules cancéreuses, des **LT cytotoxiques** (LTc) reconnaissent la cellule cible et la détruisent. Les **LT4**, ou lymphocytes auxiliaires, coordonnent les deux réponses en sécrétant des messagers chimiques (les **interleukines**)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 260,
+      "items": [
+       {
+        "t": "line",
+        "x1": 50,
+        "y1": 210,
+        "x2": 385,
+        "y2": 210,
+        "color": "ink",
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 50,
+        "y1": 210,
+        "x2": 50,
+        "y2": 30,
+        "color": "ink",
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 62,
+        "y": 26,
+        "text": "Taux d'anticorps",
+        "size": 13,
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 380,
+        "y": 232,
+        "text": "Temps",
+        "size": 13,
+        "anchor": "end"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         70,
+         208,
+         110,
+         204,
+         140,
+         170,
+         170,
+         150,
+         205,
+         172,
+         235,
+         204
+        ],
+        "closed": false,
+        "stroke": "blue",
+        "width": 3
+       },
+       {
+        "t": "poly",
+        "pts": [
+         245,
+         204,
+         262,
+         110,
+         290,
+         62,
+         325,
+         90,
+         375,
+         160
+        ],
+        "closed": false,
+        "stroke": "red",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 70,
+        "y1": 214,
+        "x2": 70,
+        "y2": 226,
+        "color": "blue",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 246,
+        "text": "1er contact",
+        "size": 12
+       },
+       {
+        "t": "line",
+        "x1": 245,
+        "y1": 214,
+        "x2": 245,
+        "y2": 226,
+        "color": "red",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 245,
+        "y": 246,
+        "text": "2e contact",
+        "size": 12
+       },
+       {
+        "t": "text",
+        "x": 175,
+        "y": 132,
+        "text": "primaire",
+        "size": 12,
+        "color": "blue"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 58,
+        "text": "secondaire",
+        "size": 12,
+        "color": "red"
+       }
+      ]
+     },
+     "caption": "Taux d'anticorps (schéma qualitatif) après un premier puis un deuxième contact avec le même antigène.",
+     "alt": "Deux courbes. La bleue, après le premier contact, monte lentement et reste modérée. La rouge, après le deuxième contact, monte très vite à un niveau beaucoup plus élevé."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Réponses primaire et secondaire",
+     "md": "**Premier contact** : réponse primaire, tardive (une à deux semaines), faible. **Second contact** avec le même antigène : réponse secondaire, rapide, plus intense et plus durable grâce aux cellules mémoire. C'est la base de la vaccination."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : lire une expérience",
+     "statement": "Fictif : on injecte l'antigène A à une souris. Le taux d'anticorps anti-A est faible au 5e jour, maximal (2 unités) au 14e jour. Au 40e jour, on réinjecte A : le taux atteint 30 unités dès le 4e jour. Interprète.",
+     "steps": [
+      {
+       "md": "Premier contact : réponse **primaire** (lente et faible) car il faut sélectionner et multiplier les lymphocytes spécifiques."
+      },
+      {
+       "md": "Deuxième contact : réponse **secondaire**, rapide et forte, car des **cellules mémoire** spécifiques de A existent déjà."
+      },
+      {
+       "md": "Facteur d'amplification entre les deux maxima :",
+       "tex": "\\frac{30}{2} = 15"
+      }
+     ],
+     "answer": "La mémoire immunitaire explique une réponse environ 15 fois plus forte et bien plus rapide."
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-svt-d-immuno-01"
+    },
+    {
+     "type": "heading",
+     "text": "3. Vaccins et sérums"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Vaccin ou sérum ?",
+     "md": "**Vaccin** : on injecte l'antigène (microbe tué ou atténué, toxine inactivée, fragment) : l'organisme fabrique lui-même anticorps et cellules mémoire. Protection **lente à s'installer mais durable** ; usage **préventif**. **Sérum** : on injecte des anticorps déjà prêts : protection **immédiate mais temporaire** ; usage **curatif** (ex. sérum antitétanique, sérum antivenimeux)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : choisir la bonne intervention",
+     "statement": "Un enfant non vacciné se blesse avec un clou rouillé (risque de tétanos). Un autre enfant doit simplement être protégé pour l'avenir. Que faire pour chacun ?",
+     "steps": [
+      {
+       "md": "Enfant blessé : il faut une protection **immédiate** ; on utilise un **sérum** (anticorps antitétaniques) et, souvent, on commence aussi la vaccination."
+      },
+      {
+       "md": "Enfant à protéger pour l'avenir : un **vaccin** ; il crée des cellules mémoire et protège durablement."
+      },
+      {
+       "md": "Les anticorps du sérum disparaissent en quelques semaines, d'où l'intérêt du vaccin pour la protection longue."
+      }
+     ],
+     "answer": "Sérum = secours rapide mais court ; vaccin = protection durable, préparée à l'avance."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre vaccin (antigène) et sérum (anticorps).\n- Dire que les anticorps sont des cellules : ce sont des **protéines** ; les plasmocytes sont les cellules qui les fabriquent.\n- Croire que les antibiotiques agissent sur les virus : ils agissent sur les **bactéries**.\n- Confondre séropositivité et sida."
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-svt-d-immuno-02"
+    },
+    {
+     "type": "heading",
+     "text": "4. Le VIH et le sida"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "VIH, séropositivité, sida",
+     "md": "Le **VIH** (virus de l'immunodéficience humaine) infecte surtout les **LT4**, chefs d'orchestre de l'immunité, et les détruit peu à peu. Une personne **séropositive** possède des anticorps anti-VIH ; elle peut rester sans symptôme pendant des années. Le **sida** (syndrome d'immunodéficience acquise) est le stade avancé : l'immunité est si affaiblie que des **maladies opportunistes** apparaissent."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Transmission et prévention",
+     "md": "**Transmis par** : rapports sexuels non protégés, sang contaminé (seringues, objets coupants partagés), de la mère à l'enfant (grossesse, accouchement, allaitement). **Pas transmis par** : poignée de main, baiser, toilettes, couverts, piqûre de moustique. **Prévention** : préservatif, matériel à usage unique, dépistage, suivi médical des femmes enceintes séropositives."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Test et traitement",
+     "md": "Le test de dépistage recherche les anticorps anti-VIH (ou le virus) ; juste après la contamination, le test peut être négatif (**fenêtre sérologique**, de quelques semaines) : on refait le test. Les **antirétroviraux** freinent la multiplication du virus et permettent de vivre longtemps, mais **ne guérissent pas** ; il n'existe pas de vaccin disponible. Le dépistage et le traitement relèvent d'un centre de santé : se faire conseiller par des professionnels."
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-svt-d-immuno-03"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Les cellules mémoire expliquent que certaines maladies (comme la varicelle) ne se prennent généralement qu'une fois.",
+      "Les groupes sanguins ABO sont liés à des antigènes des globules rouges : voir la fiche de génétique humaine."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Contenu de santé : faits volontairement limités aux notions solides ; à relire par un enseignant de SVT ou un professionnel de santé.",
+    "Vérifier le niveau de détail attendu (CMH, cytokines, types de LT) dans le programme officiel de Tle D.",
+    "Les protocoles de vaccination et de traitement évoluent : aucun calendrier vaccinal ni schéma de traitement n'est donné ici volontairement."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "tle-svt-d-immuno-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-immuno",
+   "prompt": "Quelle cellule sécrète les anticorps ?",
+   "choices": [
+    "Le plasmocyte",
+    "Le macrophage",
+    "Le LT cytotoxique",
+    "Le globule rouge"
+   ],
+   "answer": 0,
+   "explanation": "Les plasmocytes sont des LB différenciés, spécialisés dans la sécrétion d'anticorps.",
+   "method": "Anticorps = produit des plasmocytes.",
+   "mistakes": [
+    "Citer le macrophage : il phagocyte mais ne fabrique pas d'anticorps."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-svt-d-immuno-02",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "lesson": "tle-svt-d-immuno",
+   "prompt": "Associe chaque cellule ou molécule à son rôle.",
+   "pairs": [
+    [
+     "Macrophage",
+     "Phagocytose des microbes"
+    ],
+    [
+     "Plasmocyte",
+     "Sécrétion d'anticorps"
+    ],
+    [
+     "LT cytotoxique",
+     "Destruction des cellules infectées"
+    ],
+    [
+     "LT4",
+     "Coordination des réponses"
+    ]
+   ],
+   "explanation": "Le macrophage phagocyte (immunité non spécifique) ; le plasmocyte produit les anticorps (réponse humorale) ; le LTc détruit les cellules infectées (réponse cellulaire) ; le LT4 sécrète des interleukines qui coordonnent.",
+   "method": "Relier chaque cellule à sa réponse.",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-svt-d-immuno-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-immuno",
+   "prompt": "Un sérum procure une protection immédiate mais de courte durée.",
+   "answer": true,
+   "explanation": "Les anticorps injectés agissent tout de suite mais ne sont pas renouvelés par l'organisme : ils disparaissent en quelques semaines.",
+   "method": "Sérum = anticorps prêts = immédiat et temporaire.",
+   "mistakes": [
+    "Confondre avec le vaccin, dont la protection est durable."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-svt-d-immuno-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "tle-svt-d-immuno",
+   "prompt": "Fictif : le taux d'anticorps maximal est de 4 unités après un premier contact et de 100 unités après le second. Par quel facteur la réponse a-t-elle été multipliée ?",
+   "answer": 25,
+   "tolerance": 0,
+   "explanation": "100 ÷ 4 = 25. La mémoire immunitaire rend la réponse secondaire beaucoup plus intense.",
+   "method": "Diviser le second maximum par le premier.",
+   "mistakes": [
+    "Calculer la différence (96) au lieu du rapport."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-svt-d-immuno-05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "tle-svt-d-immuno",
+   "prompt": "Pourquoi le VIH affaiblit-il toute la défense immunitaire spécifique ?",
+   "choices": [
+    "Il détruit les globules rouges",
+    "Il détruit les LT4 qui coordonnent les réponses humorale et cellulaire",
+    "Il fabrique des anticorps inutiles",
+    "Il empêche la peau de jouer son rôle de barrière"
+   ],
+   "answer": 1,
+   "explanation": "Sans LT4, les LB et les LTc ne sont plus correctement activés : les deux réponses spécifiques s'effondrent.",
+   "method": "Relier la cible du virus à son rôle central.",
+   "mistakes": [
+    "Penser que le virus attaque les globules rouges."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-svt-d-immuno-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "tle-svt-d-immuno",
+   "prompt": "Fictif : une expérience porte sur deux lots de souris. Lot 1 : on injecte l'antigène X au jour 0, puis X de nouveau au jour 30. Lot 2 : on injecte l'antigène X au jour 30 seulement. Les taux d'anticorps anti-X maximaux mesurés dans les 10 jours suivant l'injection du jour 30 sont de 80 unités (lot 1) et de 6 unités (lot 2).",
+   "parts": [
+    {
+     "id": "tle-svt-d-immuno-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Par quel facteur le taux maximal du lot 1 dépasse-t-il celui du lot 2 (arrondi à l'unité) ?",
+     "answer": 13,
+     "tolerance": 0.5,
+     "explanation": "80 ÷ 6 ≈ 13,3, soit environ 13."
+    },
+    {
+     "id": "tle-svt-d-immuno-06-b",
+     "kind": "mcq",
+     "points": 1.5,
+     "prompt": "Quelle explication est correcte ?",
+     "choices": [
+      "Le lot 1 possède plus de globules rouges",
+      "Le lot 2 a reçu un sérum",
+      "Le lot 1 possède des cellules mémoire spécifiques de X issues du premier contact",
+      "Le lot 1 a reçu des antibiotiques"
+     ],
+     "answer": 2,
+     "explanation": "Seul le lot 1 a déjà rencontré X : il a gardé des cellules mémoire qui réagissent vite et fort."
+    },
+    {
+     "id": "tle-svt-d-immuno-06-c",
+     "kind": "open",
+     "points": 2.5,
+     "prompt": "Ce résultat justifie le principe de la vaccination : explique-le en quatre phrases.",
+     "model": "Un vaccin injecte un antigène sans danger : c'est le premier contact. L'organisme fabrique des cellules mémoire spécifiques. Lors d'une vraie infection par le même microbe, la réponse secondaire est rapide et intense. Le microbe est éliminé avant de provoquer la maladie.",
+     "rubric": [
+      "Premier contact avec un antigène non dangereux",
+      "Formation de cellules mémoire",
+      "Réponse secondaire rapide et forte",
+      "Conclusion : protection préventive"
+     ],
+     "explanation": "Le raisonnement doit relier antigène inoffensif, mémoire immunitaire et rapidité de la réponse secondaire."
+    }
+   ],
+   "method": "Identifier le premier et le second contact, comparer les réponses, puis conclure sur la mémoire.",
+   "mistakes": [
+    "Confondre vaccin et sérum dans la conclusion."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-svt-d-imm-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-immuno",
+   "prompt": "Un antigène est :",
+   "choices": [
+    "un anticorps",
+    "un globule rouge",
+    "un médicament",
+    "une molécule du non-soi qui déclenche une réponse immunitaire"
+   ],
+   "answer": 3,
+   "explanation": "Les antigènes sont reconnus comme étrangers par les lymphocytes."
+  },
+  {
+   "id": "tle-svt-d-imm-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-immuno",
+   "prompt": "La phagocytose est :",
+   "choices": [
+    "l'englobement et la digestion d'un microbe par un phagocyte",
+    "la fabrication d'anticorps",
+    "la division d'un virus",
+    "la formation d'un caillot"
+   ],
+   "answer": 0,
+   "explanation": "Les macrophages et polynucléaires phagocytent."
+  },
+  {
+   "id": "tle-svt-d-imm-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-immuno",
+   "prompt": "La mémoire immunitaire est surtout assurée par :",
+   "choices": [
+    "les globules rouges",
+    "des lymphocytes mémoire",
+    "les plaquettes",
+    "le sérum"
+   ],
+   "answer": 1,
+   "explanation": "Après un premier contact, des lymphocytes mémoire subsistent."
+  },
+  {
+   "id": "tle-svt-d-imm-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-immuno",
+   "prompt": "Le VIH infecte principalement :",
+   "choices": [
+    "les globules rouges",
+    "les neurones",
+    "les lymphocytes T4",
+    "les cellules de la peau"
+   ],
+   "answer": 2,
+   "explanation": "Il détruit progressivement les LT4."
+  },
+  {
+   "id": "tle-svt-d-imm-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-immuno",
+   "prompt": "Quel geste ne transmet pas le VIH ?",
+   "choices": [
+    "Utiliser une seringue déjà utilisée",
+    "Un rapport non protégé",
+    "La transmission de la mère à l'enfant",
+    "Partager un repas"
+   ],
+   "answer": 3,
+   "explanation": "Le VIH ne se transmet pas par les couverts ni par les contacts de la vie courante."
+  }
+ ]
+}

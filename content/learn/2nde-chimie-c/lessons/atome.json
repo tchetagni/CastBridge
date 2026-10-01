@@ -1,0 +1,566 @@
+{
+ "chapter": "2nde-chimie-c-ch-atome",
+ "lessons": [
+  {
+   "id": "2nde-chimie-c-atome",
+   "title": "Atome, classification périodique, ions et liaisons",
+   "minutes": 40,
+   "programRef": "2nde C — Structure de l'atome, classification (Z ≤ 18), ions, liaisons (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Décrire la constitution d'un atome (Z, A, N).",
+    "Établir la structure électronique d'un atome (Z ≤ 18).",
+    "Placer un élément dans la classification et prévoir l'ion qu'il forme.",
+    "Distinguer liaison covalente et liaison ionique."
+   ],
+   "prerequisites": [
+    "2nde-chimie-c-melanges"
+   ],
+   "exercises": [
+    "2nde-chimie-c-atm-01",
+    "2nde-chimie-c-atm-02",
+    "2nde-chimie-c-atm-03",
+    "2nde-chimie-c-atm-04",
+    "2nde-chimie-c-atm-05",
+    "2nde-chimie-c-atm-06"
+   ],
+   "selfCheck": [
+    "2nde-chimie-c-atm-q1",
+    "2nde-chimie-c-atm-q2",
+    "2nde-chimie-c-atm-q3",
+    "2nde-chimie-c-atm-q4",
+    "2nde-chimie-c-atm-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Constitution de l'atome",
+     "md": "Un atome comprend un **noyau** (protons chargés +, neutrons neutres : les **nucléons**) et un **cortège d'électrons** (charge −) qui l'entourent. L'atome est neutre : électrons = protons.\n- **Z** : numéro atomique (nombre de protons) ;\n- **A** : nombre de nucléons (protons + neutrons) ;\n- nombre de neutrons : $N = A - Z$."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Structure électronique (Z ≤ 18)",
+     "md": "Les électrons se répartissent en **couches** : K (2 électrons au plus), L (8 au plus), puis M. On remplit dans l'ordre K, L, M. Notation : $(K)^2(L)^8(M)^1$ pour le sodium (Z = 11).\nLes électrons de la **dernière couche** (couche externe) déterminent les propriétés chimiques de l'élément."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 240,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 120,
+        "r": 105,
+        "stroke": "grey",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 120,
+        "r": 75,
+        "stroke": "grey",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 120,
+        "r": 45,
+        "stroke": "grey",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 120,
+        "r": 22,
+        "fill": "lightorange",
+        "stroke": "orange",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 125,
+        "text": "11 p",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "circle",
+        "cx": 105.0,
+        "cy": 120.0,
+        "r": 5,
+        "fill": "blue",
+        "stroke": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 195.0,
+        "cy": 120.0,
+        "r": 5,
+        "fill": "blue",
+        "stroke": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 150.0,
+        "cy": 45.0,
+        "r": 5,
+        "fill": "blue",
+        "stroke": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 97.0,
+        "cy": 67.0,
+        "r": 5,
+        "fill": "blue",
+        "stroke": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 75.0,
+        "cy": 120.0,
+        "r": 5,
+        "fill": "blue",
+        "stroke": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 97.0,
+        "cy": 173.0,
+        "r": 5,
+        "fill": "blue",
+        "stroke": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 150.0,
+        "cy": 195.0,
+        "r": 5,
+        "fill": "blue",
+        "stroke": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 203.0,
+        "cy": 173.0,
+        "r": 5,
+        "fill": "blue",
+        "stroke": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 225.0,
+        "cy": 120.0,
+        "r": 5,
+        "fill": "blue",
+        "stroke": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 203.0,
+        "cy": 67.0,
+        "r": 5,
+        "fill": "blue",
+        "stroke": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 15,
+        "r": 5,
+        "fill": "red",
+        "stroke": "red"
+       },
+       {
+        "t": "text",
+        "x": 285,
+        "y": 60,
+        "text": "Couche M : 1 e⁻",
+        "size": 14,
+        "color": "red",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 285,
+        "y": 120,
+        "text": "Couche L : 8 e⁻",
+        "size": 14,
+        "color": "blue",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 285,
+        "y": 180,
+        "text": "Couche K : 2 e⁻",
+        "size": 14,
+        "color": "blue",
+        "anchor": "start"
+       }
+      ]
+     },
+     "caption": "Atome de sodium (Z = 11) : noyau de 11 protons ; 2 électrons sur K, 8 sur L, 1 sur M (en rouge, l'électron externe).",
+     "alt": "Un noyau central entouré de trois cercles concentriques portant respectivement 2, 8 et 1 électrons."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Classification périodique (Z ≤ 18)",
+     "md": "Les éléments sont rangés par Z croissant. Chaque **ligne** (période) correspond à une couche externe : la 1re ligne remplit K (H, He), la 2e remplit L (Li à Ne), la 3e remplit M (Na à Ar). Les éléments d'une **même colonne** ont le même nombre d'électrons externes, donc des propriétés voisines : alcalins (Li, Na), halogènes (F, Cl), gaz nobles (He, Ne, Ar)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Ions et règles du duet et de l'octet",
+     "md": "Les **gaz nobles** (He, Ne, Ar) sont très stables : couche externe à 2 électrons (**duet**) ou 8 (**octet**). Les autres atomes évoluent pour leur ressembler :\n- ils **perdent** des électrons → **cations** (Na⁺, Mg²⁺, Al³⁺) ;\n- ils **gagnent** des électrons → **anions** (Cl⁻, O²⁻, S²⁻).\nLe noyau ne change pas : seul le nombre d'électrons varie."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Liaisons",
+     "md": "**Liaison covalente** : deux atomes mettent en commun un **doublet** d'électrons (formule de Lewis). Exemples : $H_2$ (1 liaison), $H_2O$ (2), $NH_3$ (3), $CH_4$ (4), $CO_2$ (2 liaisons doubles).\n**Liaison ionique** : attraction entre ions de charges opposées (le cristal de chlorure de sodium NaCl : $Na^+$ et $Cl^-$). Le cristal est neutre."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : du magnésium à son ion",
+     "statement": "Le magnésium a pour numéro atomique Z = 12. Écris sa structure électronique, puis celle de l'ion stable qu'il forme.",
+     "steps": [
+      {
+       "md": "Atome neutre : 12 électrons.",
+       "tex": "(K)^2(L)^8(M)^2"
+      },
+      {
+       "md": "Il a 2 électrons externes : il les perd pour retrouver la structure du néon, couche L pleine. Il devient l'ion **Mg²⁺** de structure $(K)^2(L)^8$ (12 protons, 10 électrons)."
+      }
+     ],
+     "answer": "Mg : $(K)^2(L)^8(M)^2$ ; ion **Mg²⁺**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : chlore et liaison",
+     "statement": "Le chlore a pour numéro atomique Z = 17. Détermine son ion stable puis la liaison dans la molécule HCl.",
+     "steps": [
+      {
+       "md": "Structure du chlore :",
+       "tex": "(K)^2(L)^8(M)^7"
+      },
+      {
+       "md": "Il lui manque 1 électron pour atteindre l'octet : il gagne 1 électron et forme l'ion **Cl⁻**. Dans HCl, l'atome H (duet, 1 électron externe) et Cl (octet, 7 électrons externes) partagent **un doublet** : une liaison covalente."
+      }
+     ],
+     "answer": "Ion **Cl⁻** ; HCl possède **1 liaison covalente**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : composition d'un atome",
+     "statement": "Un atome de sodium a pour numéro atomique Z = 11 et pour nombre de nucléons A = 23. Donne le nombre de protons, de neutrons et d'électrons.",
+     "steps": [
+      {
+       "md": "Z = 11 : le noyau contient 11 protons ; l'atome étant neutre, il a aussi 11 électrons."
+      },
+      {
+       "md": "Nombre de neutrons :",
+       "tex": "N = A - Z = 23 - 11 = 12"
+      }
+     ],
+     "answer": "**11 protons, 12 neutrons, 11 électrons.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre Z (protons) et A (nucléons).\n- Remplir la couche L avant la couche K, ou mettre plus de 2 électrons dans K.\n- Dire qu'un ion s'obtient en changeant le nombre de protons : c'est le nombre d'électrons qui change.\n- Oublier que la charge d'un cation est positive (électrons perdus).\n- Confondre couches occupées (numéro de la ligne) et électrons externes (numéro de la colonne)."
+    },
+    {
+     "type": "exercise",
+     "ref": "2nde-chimie-c-atm-01"
+    },
+    {
+     "type": "more",
+     "items": [
+      "La masse d'un atome est presque entièrement concentrée dans son noyau : un proton est environ 1 800 fois plus lourd qu'un électron.",
+      "Le sel de cuisine (NaCl) est un cristal ionique : il se dissout dans l'eau en libérant des ions $Na^+$ et $Cl^-$."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Remplissage des couches pour Z ≤ 18 : on utilise la règle simple K=2, L=8, M jusqu'à 8 ; le programme peut utiliser la notation 1s²2s²2p⁶… ou les couches K, L, M : à vérifier.",
+    "Numérotation des colonnes de la classification (1 à 18 ou chiffres romains) : à aligner sur le tableau utilisé en classe.",
+    "Les liaisons ioniques et la formule de Lewis sont-elles exigibles en Seconde C ? À vérifier sur le texte officiel.",
+    "Rapport de masse proton/électron (≈ 1 800) : valeur arrondie, à re-vérifier."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "2nde-chimie-c-atm-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-chimie-c-atome",
+   "prompt": "Un atome de chlore a pour nombre de masse A = 35 et pour numéro atomique Z = 17. Combien de neutrons contient son noyau ?",
+   "answer": 18,
+   "tolerance": 0,
+   "explanation": "$N = A - Z = 35 - 17 = 18$ neutrons.",
+   "method": "Nombre de neutrons N = A − Z.",
+   "mistakes": [
+    "Répondre 17 (le nombre de protons) ou 35."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-chimie-c-atm-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-chimie-c-atome",
+   "prompt": "Quelle est la structure électronique de l'oxygène (Z = 8) ?",
+   "choices": [
+    "$(K)^2(L)^6$",
+    "$(K)^2(L)^8$",
+    "$(K)^8(L)^2$",
+    "$(K)^2(L)^4$"
+   ],
+   "answer": 0,
+   "explanation": "L'atome neutre possède 8 électrons : 2 sur la couche K (pleine), puis les 6 restants sur la couche L.",
+   "method": "On remplit K (2 électrons max), puis L (8 max), puis M.",
+   "mistakes": [
+    "Oublier que la couche K ne contient que 2 électrons."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-chimie-c-atm-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-chimie-c-atome",
+   "prompt": "L'atome d'aluminium (Z = 13) a pour structure $(K)^2(L)^8(M)^3$. Quel ion forme-t-il pour obtenir une couche externe saturée ?",
+   "choices": [
+    "$Al^{3-}$",
+    "$Al^{+}$",
+    "$Al^{3+}$",
+    "$Al^{5+}$"
+   ],
+   "answer": 2,
+   "explanation": "En perdant ses 3 électrons de la couche M, l'aluminium prend la structure du néon $(K)^2(L)^8$. Il perd 3 électrons : c'est le cation $Al^{3+}$.",
+   "method": "Perdre les électrons externes si ≤ 3, en gagner si ≥ 5 pour obtenir 8 (ou 2).",
+   "mistakes": [
+    "Écrire $Al^{3-}$ : on a perdu des électrons, la charge est positive."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-chimie-c-atm-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "2nde-chimie-c-atome",
+   "prompt": "Dans la molécule de dioxyde de carbone $CO_2$ (O=C=O), combien y a-t-il de doublets liants au total ?",
+   "answer": 4,
+   "tolerance": 0,
+   "explanation": "Le carbone forme deux liaisons doubles, une avec chaque oxygène. Chaque liaison double compte 2 doublets liants : $2 \\times 2 = 4$ doublets liants.",
+   "method": "Compter les doublets partagés entre atomes : liaison simple = 1, double = 2.",
+   "mistakes": [
+    "Compter 2 (le nombre de liaisons) au lieu du nombre de doublets."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-chimie-c-atm-05",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "2nde-chimie-c-atome",
+   "prompt": "Associe chaque atome au nombre de ses électrons externes (couche externe).",
+   "pairs": [
+    [
+     "Sodium (Z = 11)",
+     "1 électron externe"
+    ],
+    [
+     "Magnésium (Z = 12)",
+     "2 électrons externes"
+    ],
+    [
+     "Chlore (Z = 17)",
+     "7 électrons externes"
+    ],
+    [
+     "Néon (Z = 10)",
+     "8 électrons externes"
+    ]
+   ],
+   "explanation": "Na : $(K)^2(L)^8(M)^1$ ; Mg : $(K)^2(L)^8(M)^2$ ; Cl : $(K)^2(L)^8(M)^7$ ; Ne : $(K)^2(L)^8$ (couche L externe pleine : 8 électrons).",
+   "method": "Écrire la structure électronique puis lire la dernière couche.",
+   "mistakes": [
+    "Compter tous les électrons au lieu de ceux de la dernière couche."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-chimie-c-atm-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "2nde-chimie-c-atome",
+   "prompt": "Le soufre a pour numéro atomique Z = 16. On s'intéresse à sa structure électronique, à l'ion qu'il forme et à quelques composés.",
+   "parts": [
+    {
+     "id": "2nde-chimie-c-atm-06-a",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle est la structure électronique du soufre S (Z = 16) ?",
+     "choices": [
+      "$(K)^2(L)^6(M)^8$",
+      "$(K)^2(L)^8(M)^8$",
+      "$(K)^2(L)^{10}(M)^4$",
+      "$(K)^2(L)^8(M)^6$"
+     ],
+     "answer": 3,
+     "explanation": "16 électrons : 2 (K) + 8 (L) + 6 (M). La couche M contient donc 6 électrons externes."
+    },
+    {
+     "id": "2nde-chimie-c-atm-06-b",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quel ion monoatomique le soufre forme-t-il ?",
+     "choices": [
+      "$S^{2+}$",
+      "$S^{6-}$",
+      "$S^{-}$",
+      "$S^{2-}$"
+     ],
+     "answer": 3,
+     "explanation": "Avec 6 électrons externes, il lui en manque 2 pour en avoir 8 : il gagne 2 électrons et devient $S^{2-}$ (structure de l'argon)."
+    },
+    {
+     "id": "2nde-chimie-c-atm-06-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Combien d'atomes d'hydrogène un atome de soufre peut-il lier dans la molécule $H_2S$ ? Justifie : S a 6 électrons externes et H en cherche 2 (duet).",
+     "answer": 2,
+     "tolerance": 0,
+     "explanation": "S a besoin de 2 électrons de plus pour avoir un octet ; chaque H en apporte un par une liaison covalente : S lie 2 atomes H, d'où la formule $H_2S$."
+    },
+    {
+     "id": "2nde-chimie-c-atm-06-d",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle est la formule du composé ionique formé par les ions $Mg^{2+}$ et $Cl^{-}$ ?",
+     "choices": [
+      "$MgCl_2$",
+      "$MgCl$",
+      "$Mg_2Cl$",
+      "$Mg_2Cl_2$"
+     ],
+     "answer": 0,
+     "explanation": "Un cristal ionique est électriquement neutre : une charge $2+$ est compensée par deux charges $1-$, soit $MgCl_2$."
+    }
+   ],
+   "method": "Remplir les couches K, L, M ; viser l'octet (ou le duet pour H).",
+   "mistakes": [
+    "Confondre nombre de couches et nombre d'électrons externes."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-chimie-c-atm-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-chimie-c-atome",
+   "prompt": "Un atome est électriquement neutre car :",
+   "choices": [
+    "il n'a pas de charge à l'intérieur",
+    "il n'a que des neutrons",
+    "il a autant de neutrons que d'électrons",
+    "il a autant d'électrons que de protons"
+   ],
+   "answer": 3,
+   "explanation": "Z protons (charge +) compensent Z électrons (charge −)."
+  },
+  {
+   "id": "2nde-chimie-c-atm-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-chimie-c-atome",
+   "prompt": "Le numéro atomique Z représente :",
+   "choices": [
+    "le nombre de neutrons",
+    "le nombre de protons",
+    "le nombre de nucléons",
+    "le nombre de couches"
+   ],
+   "answer": 1,
+   "explanation": "Z est le nombre de protons du noyau (et d'électrons de l'atome neutre)."
+  },
+  {
+   "id": "2nde-chimie-c-atm-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-chimie-c-atome",
+   "prompt": "Combien d'électrons la couche L peut-elle contenir au maximum ?",
+   "choices": [
+    "2",
+    "18",
+    "6",
+    "8"
+   ],
+   "answer": 3,
+   "explanation": "Pour les éléments Z ≤ 18, la couche K contient au plus 2 électrons et la couche L au plus 8."
+  },
+  {
+   "id": "2nde-chimie-c-atm-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-chimie-c-atome",
+   "prompt": "Un ion chlorure Cl⁻ a :",
+   "choices": [
+    "un électron de plus que l'atome Cl",
+    "un proton de moins",
+    "un électron de moins",
+    "un neutron de plus"
+   ],
+   "answer": 0,
+   "explanation": "Il a gagné un électron : charge globale négative."
+  },
+  {
+   "id": "2nde-chimie-c-atm-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-chimie-c-atome",
+   "prompt": "Dans une liaison covalente :",
+   "choices": [
+    "un atome cède un proton",
+    "un atome cède tous ses électrons",
+    "deux ions de même charge se repoussent",
+    "deux atomes mettent en commun un doublet d'électrons"
+   ],
+   "answer": 3,
+   "explanation": "La liaison covalente est un doublet d'électrons partagé entre deux atomes."
+  }
+ ]
+}

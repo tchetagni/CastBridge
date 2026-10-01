@@ -1,0 +1,495 @@
+{
+ "chapter": "bac-maths-c-specifique-ch-coniques",
+ "lessons": [
+  {
+   "id": "bac-maths-c-specifique-coniques",
+   "title": "Coniques : ellipse, hyperbole, parabole",
+   "minutes": 40,
+   "programRef": "Tle C — Coniques : équations réduites, foyers, excentricité (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître une conique d'après son équation réduite.",
+    "Calculer foyers, sommets, excentricité, asymptotes et directrice.",
+    "Utiliser les propriétés bifocales et la relation foyer-directrice.",
+    "Déterminer l'intersection d'une conique et d'une droite."
+   ],
+   "exercises": [
+    "bac-maths-c-specifique-con-01",
+    "bac-maths-c-specifique-con-02",
+    "bac-maths-c-specifique-con-03",
+    "bac-maths-c-specifique-con-04",
+    "bac-maths-c-specifique-con-05",
+    "bac-maths-c-specifique-con-06"
+   ],
+   "selfCheck": [
+    "bac-maths-c-specifique-con-q1",
+    "bac-maths-c-specifique-con-q2",
+    "bac-maths-c-specifique-con-q3",
+    "bac-maths-c-specifique-con-q4",
+    "bac-maths-c-specifique-con-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Dans cette fiche",
+     "md": "Reconnaître une ellipse, une hyperbole ou une parabole d'après son équation réduite, déterminer sommets, foyers, excentricité, asymptotes et directrice, et résoudre des problèmes simples d'intersection."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Ellipse : $\\frac{x^2}{a^2} + \\frac{y^2}{b^2} = 1$ avec $a > b > 0$",
+     "md": "- Demi-distance focale : $c = \\sqrt{a^2 - b^2}$ ; foyers $F(c, 0)$ et $F'(-c, 0)$.\n- Sommets : $(\\pm a, 0)$ et $(0, \\pm b)$.\n- Excentricité : $e = \\frac{c}{a}$, avec $0 \\leq e < 1$.\n- Propriété bifocale : $MF + MF' = 2a$ pour tout point M de l'ellipse."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Hyperbole : $\\frac{x^2}{a^2} - \\frac{y^2}{b^2} = 1$",
+     "md": "- $c = \\sqrt{a^2 + b^2}$ ; foyers $(\\pm c, 0)$ ; sommets $(\\pm a, 0)$.\n- Excentricité $e = \\frac{c}{a} > 1$.\n- **Asymptotes** : $y = \\pm\\frac{b}{a}x$.\n- Propriété bifocale : $|MF - MF'| = 2a$."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Parabole : $y^2 = 2px$ avec $p > 0$",
+     "md": "- Foyer $F\\left(\\frac{p}{2}, 0\\right)$ ; **directrice** $D : x = -\\frac{p}{2}$ ; sommet à l'origine ; axe focal l'axe des abscisses.\n- Propriété : $MF = d(M, D)$ pour tout point M de la parabole (excentricité $e = 1$)."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Définition par foyer et directrice",
+     "md": "Une conique est l'ensemble des points M tels que $\\frac{MF}{d(M, D)} = e$, où F est le foyer, D la directrice et e l'excentricité : ellipse si $e < 1$, parabole si $e = 1$, hyperbole si $e > 1$. Pour changer de centre (conique de centre $\\Omega(x_0, y_0)$), on remplace x par $x - x_0$ et y par $y - y_0$."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": -6,
+      "xmax": 6,
+      "ymin": -4,
+      "ymax": 4,
+      "grid": 1,
+      "xlabel": "x",
+      "ylabel": "y",
+      "w": 400,
+      "h": 280,
+      "curves": [
+       {
+        "expr": "3*sqrt(1-x^2/25)",
+        "color": "blue",
+        "from": -5,
+        "to": 5
+       },
+       {
+        "expr": "-3*sqrt(1-x^2/25)",
+        "color": "blue",
+        "from": -5,
+        "to": 5
+       }
+      ],
+      "points": [
+       {
+        "x": 4,
+        "y": 0,
+        "label": "F",
+        "color": "red"
+       },
+       {
+        "x": -4,
+        "y": 0,
+        "label": "F'",
+        "color": "red"
+       }
+      ],
+      "segments": []
+     },
+     "caption": "Ellipse $\\frac{x^2}{25} + \\frac{y^2}{9} = 1$ : $a = 5$, $b = 3$, $c = 4$ ; les foyers F(4 ; 0) et F'(−4 ; 0) sont en rouge.",
+     "alt": "Une ellipse bleue allongée horizontalement, de demi-grand axe 5 et de demi-petit axe 3, avec deux foyers rouges sur l'axe des abscisses en x = 4 et x = −4."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": -7,
+      "xmax": 7,
+      "ymin": -9,
+      "ymax": 9,
+      "grid": 2,
+      "xlabel": "x",
+      "ylabel": "y",
+      "w": 400,
+      "h": 300,
+      "curves": [
+       {
+        "expr": "4/3*sqrt(x^2-9)",
+        "color": "blue",
+        "from": 3,
+        "to": 7
+       },
+       {
+        "expr": "-4/3*sqrt(x^2-9)",
+        "color": "blue",
+        "from": 3,
+        "to": 7
+       },
+       {
+        "expr": "4/3*sqrt(x^2-9)",
+        "color": "blue",
+        "from": -7,
+        "to": -3
+       },
+       {
+        "expr": "-4/3*sqrt(x^2-9)",
+        "color": "blue",
+        "from": -7,
+        "to": -3
+       },
+       {
+        "expr": "4*x/3",
+        "color": "grey"
+       },
+       {
+        "expr": "-4*x/3",
+        "color": "grey"
+       }
+      ],
+      "points": [
+       {
+        "x": 5,
+        "y": 0,
+        "label": "F",
+        "color": "red"
+       },
+       {
+        "x": -5,
+        "y": 0,
+        "label": "F'",
+        "color": "red"
+       }
+      ],
+      "segments": []
+     },
+     "caption": "Hyperbole $\\frac{x^2}{9} - \\frac{y^2}{16} = 1$ : $a = 3$, $b = 4$, $c = 5$ ; asymptotes $y = \\pm\\frac{4}{3}x$ en gris.",
+     "alt": "Deux branches bleues d'hyperbole, l'une à droite de x = 3 et l'autre à gauche de x = −3, s'écartant le long de deux droites grises asymptotes de pentes 4/3 et −4/3. Les foyers rouges sont en (5 ; 0) et (−5 ; 0)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : ellipse",
+     "statement": "Pour $\\frac{x^2}{25} + \\frac{y^2}{9} = 1$, détermine sommets, foyers et excentricité.",
+     "steps": [
+      {
+       "md": "$a^2 = 25$, $b^2 = 9$ avec $a > b$ : l'axe focal est (Ox). Sommets : $(\\pm 5, 0)$ et $(0, \\pm 3)$.",
+       "tex": "c = \\sqrt{25 - 9} = 4"
+      },
+      {
+       "md": "Foyers $F(4, 0)$ et $F'(-4, 0)$. Excentricité :",
+       "tex": "e = \\frac{c}{a} = \\frac{4}{5} = 0{,}8"
+      },
+      {
+       "md": "Contrôle : le point $M\\left(4, \\frac{9}{5}\\right)$ est sur l'ellipse ($\\frac{16}{25} + \\frac{81}{25 \\times 9} = 1$) et $MF = \\frac{9}{5}$, $MF' = \\frac{41}{5}$, de somme $10 = 2a$."
+      }
+     ],
+     "answer": "**Sommets $(\\pm 5, 0)$, $(0, \\pm 3)$ ; foyers $(\\pm 4, 0)$ ; $e = 0{,}8$.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : hyperbole et parabole",
+     "statement": "1) Pour $\\frac{x^2}{9} - \\frac{y^2}{16} = 1$, donne foyers, excentricité, asymptotes. 2) Pour $y^2 = 8x$, donne foyer et directrice.",
+     "steps": [
+      {
+       "md": "1) $a = 3$, $b = 4$, $c = \\sqrt{9 + 16} = 5$ : foyers $(\\pm 5, 0)$, $e = \\frac{5}{3}$, asymptotes $y = \\pm\\frac{4}{3}x$.",
+       "tex": "c = 5 \\qquad e = \\frac{5}{3}"
+      },
+      {
+       "md": "2) $2p = 8$ donc $p = 4$ : foyer $F(2, 0)$, directrice $x = -2$."
+      },
+      {
+       "md": "Contrôle : $M(2, 4)$ vérifie $16 = 8 \\times 2$ ; $MF = 4$ et la distance de M à la directrice vaut $2 + 2 = 4$."
+      }
+     ],
+     "answer": "**Hyperbole : $F(\\pm 5, 0)$, $e = \\frac{5}{3}$, $y = \\pm\\frac{4}{3}x$. Parabole : $F(2, 0)$, $D : x = -2$.**"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : identifier la conique",
+     "md": "1. Ramener l'équation à $\\frac{x^2}{A} + \\frac{y^2}{B} = 1$ (diviser par le second membre).\n2. A et B positifs : **ellipse** ; A > 0 et B < 0 : **hyperbole** ; équation $y^2 = kx$ : **parabole**.\n3. Lire $a^2$ et $b^2$ puis calculer c.\n4. Si l'équation contient des termes en x ou y non carrés, **compléter le carré** pour retrouver le centre."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre $c^2 = a^2 - b^2$ (ellipse) et $c^2 = a^2 + b^2$ (hyperbole).\n- Prendre $a$ pour le plus petit des deux dénominateurs : dans une ellipse horizontale, $a^2$ est le **plus grand** ($a > b$).\n- Écrire $y^2 = 2px$ avec foyer $(p, 0)$ au lieu de $\\left(\\frac{p}{2}, 0\\right)$.\n- Oublier que les foyers sont sur l'axe contenant les sommets d'abscisse $\\pm a$.\n- Donner des asymptotes $y = \\pm\\frac{a}{b}x$ au lieu de $\\pm\\frac{b}{a}x$."
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-maths-c-specifique-con-01"
+    },
+    {
+     "type": "text",
+     "md": "**Vérifier par Python** : on trace les points (x, y) solutions avec matplotlib ou on vérifie numériquement la propriété bifocale : pour l'ellipse $\\frac{x^2}{25} + \\frac{y^2}{9} = 1$, la somme math.hypot(x - 4, y) + math.hypot(x + 4, y) vaut 10 pour tout point de la courbe."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Les coniques en Tle C se limitent en général aux équations réduites et aux premières propriétés ; l'étude de tangentes, de paramétrisations et de l'équation polaire est à vérifier sur le texte officiel.",
+      "Les orbites des planètes sont des ellipses dont le Soleil occupe un foyer : c'est une illustration classique du rôle des foyers."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Le programme de Tle C inclut-il les coniques dans leur forme générale (centre déplacé, équation polaire) ou seulement les équations réduites ? À confirmer.",
+    "Notations de la demi-distance focale (c) et de l'excentricité (e) : harmoniser avec le manuel utilisé."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "bac-maths-c-specifique-con-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-c-specifique-coniques",
+   "prompt": "Pour l'ellipse $\\frac{x^2}{16} + \\frac{y^2}{7} = 1$, calcule c (abscisse positive d'un foyer).",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "$a^2 = 16$, $b^2 = 7$ : $c^2 = 16 - 7 = 9$ et $c = 3$.",
+   "method": "$c^2 = a^2 - b^2$ pour l'ellipse.",
+   "mistakes": [
+    "Calculer $16 + 7 = 23$ comme pour une hyperbole."
+   ],
+   "source": "Exercice original, style Bac C"
+  },
+  {
+   "id": "bac-maths-c-specifique-con-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-c-specifique-coniques",
+   "prompt": "Calcule l'excentricité de l'ellipse $\\frac{x^2}{25} + \\frac{y^2}{9} = 1$.",
+   "answer": 0.8,
+   "tolerance": 0.0001,
+   "explanation": "$c = \\sqrt{25 - 9} = 4$ et $e = \\frac{c}{a} = \\frac{4}{5} = 0{,}8$.",
+   "method": "$e = c/a$ avec $a = 5$.",
+   "mistakes": [
+    "Diviser c par b."
+   ],
+   "source": "Exercice original, style Bac C"
+  },
+  {
+   "id": "bac-maths-c-specifique-con-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-c-specifique-coniques",
+   "prompt": "Quel est le foyer de la parabole d'équation $y^2 = 12x$ ?",
+   "choices": [
+    "$(3, 0)$",
+    "$(6, 0)$",
+    "$(12, 0)$",
+    "$(0, 3)$"
+   ],
+   "answer": 0,
+   "explanation": "$2p = 12$ donc $p = 6$ ; le foyer est $\\left(\\frac{p}{2}, 0\\right) = (3, 0)$.",
+   "method": "$y^2 = 2px$ : foyer $(p/2, 0)$.",
+   "mistakes": [
+    "Prendre $p = 12$ ou $p = 6$ comme abscisse du foyer."
+   ],
+   "source": "Exercice original, style Bac C"
+  },
+  {
+   "id": "bac-maths-c-specifique-con-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "bac-maths-c-specifique-coniques",
+   "prompt": "Calcule l'excentricité de l'hyperbole $\\frac{x^2}{16} - \\frac{y^2}{9} = 1$.",
+   "answer": 1.25,
+   "tolerance": 0.0001,
+   "explanation": "$a = 4$, $b = 3$ : $c = \\sqrt{16 + 9} = 5$ et $e = \\frac{5}{4} = 1{,}25 > 1$.",
+   "method": "$c^2 = a^2 + b^2$ pour l'hyperbole.",
+   "mistakes": [
+    "Utiliser $c^2 = a^2 - b^2$ et trouver $\\frac{\\sqrt{7}}{4} < 1$."
+   ],
+   "source": "Exercice original, style Bac C"
+  },
+  {
+   "id": "bac-maths-c-specifique-con-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "bac-maths-c-specifique-coniques",
+   "prompt": "Une ellipse d'équation $\\frac{x^2}{a^2} + \\frac{y^2}{b^2} = 1$ (a > b > 0) a pour foyers $(\\pm 3, 0)$ et pour sommet $(5, 0)$. Détermine b.",
+   "answer": 4,
+   "tolerance": 0,
+   "explanation": "$a = 5$ et $c = 3$ donc $b^2 = a^2 - c^2 = 25 - 9 = 16$ et $b = 4$.",
+   "method": "$b^2 = a^2 - c^2$.",
+   "mistakes": [
+    "Prendre $b = 5 - 3 = 2$."
+   ],
+   "source": "Exercice original, style Bac C"
+  },
+  {
+   "id": "bac-maths-c-specifique-con-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "bac-maths-c-specifique-coniques",
+   "prompt": "Dans un repère orthonormé, on considère la courbe $(E)$ d'équation $4x^2 + 9y^2 = 36$.",
+   "parts": [
+    {
+     "id": "bac-maths-c-specifique-con-06-a",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Cette équation s'écrit sous la forme réduite :",
+     "explanation": "On divise par 36 : $\\frac{4x^2}{36} + \\frac{9y^2}{36} = \\frac{x^2}{9} + \\frac{y^2}{4} = 1$. Donc $a = 3$ et $b = 2$.",
+     "choices": [
+      "$\\frac{x^2}{4} + \\frac{y^2}{9} = 1$ : une ellipse",
+      "$\\frac{x^2}{9} + \\frac{y^2}{4} = 1$ : une ellipse",
+      "$\\frac{x^2}{9} - \\frac{y^2}{4} = 1$ : une hyperbole",
+      "$\\frac{x^2}{36} + \\frac{y^2}{36} = 1$ : un cercle"
+     ],
+     "answer": 1
+    },
+    {
+     "id": "bac-maths-c-specifique-con-06-b",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule c (arrondi à 0,001).",
+     "explanation": "$c^2 = 9 - 4 = 5$ donc $c = \\sqrt{5} \\approx 2{,}236$.",
+     "answer": 2.236,
+     "tolerance": 0.001
+    },
+    {
+     "id": "bac-maths-c-specifique-con-06-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule l'excentricité (arrondie à 0,001).",
+     "explanation": "$e = \\frac{\\sqrt{5}}{3} \\approx 0{,}745$.",
+     "answer": 0.745,
+     "tolerance": 0.001
+    },
+    {
+     "id": "bac-maths-c-specifique-con-06-d",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Pour le point $M(0, 2)$ de $(E)$, calcule $MF + MF'$ où F et F' sont les foyers.",
+     "explanation": "$MF = MF' = \\sqrt{5 + 4} = 3$ donc $MF + MF' = 6 = 2a$.",
+     "answer": 6,
+     "tolerance": 0
+    },
+    {
+     "id": "bac-maths-c-specifique-con-06-e",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "La droite $y = x$ coupe $(E)$ en deux points. Donne l'abscisse positive du premier, arrondie à 0,001.",
+     "explanation": "En remplaçant : $4x^2 + 9x^2 = 36$, $x^2 = \\frac{36}{13}$, $x = \\frac{6}{\\sqrt{13}} \\approx 1{,}664$.",
+     "answer": 1.664,
+     "tolerance": 0.001
+    }
+   ],
+   "method": "Forme réduite, $c^2 = a^2 - b^2$, propriété bifocale, intersection avec une droite.",
+   "mistakes": [
+    "Prendre $a = 2$ et $b = 3$.",
+    "Oublier de diviser par 36 pour la forme réduite."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-c-specifique-con-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-c-specifique-coniques",
+   "prompt": "L'équation $\\frac{x^2}{9} - \\frac{y^2}{4} = 1$ est celle :",
+   "choices": [
+    "d'une ellipse",
+    "d'une parabole",
+    "d'un cercle",
+    "d'une hyperbole"
+   ],
+   "answer": 3,
+   "explanation": "Le signe moins entre les deux termes caractérise l'hyperbole.",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-c-specifique-con-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-c-specifique-coniques",
+   "prompt": "Pour une ellipse, l'excentricité vérifie :",
+   "choices": [
+    "$0 \\leq e < 1$",
+    "$e > 1$",
+    "$e = 1$",
+    "$e < 0$"
+   ],
+   "answer": 0,
+   "explanation": "$c < a$ donc $\\frac{c}{a} < 1$.",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-c-specifique-con-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-c-specifique-coniques",
+   "prompt": "La directrice de la parabole $y^2 = 8x$ est :",
+   "choices": [
+    "$x = 2$",
+    "$x = -2$",
+    "$x = -4$",
+    "$y = -2$"
+   ],
+   "answer": 1,
+   "explanation": "$p = 4$ : la directrice est $x = -\\frac{p}{2} = -2$.",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-c-specifique-con-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-c-specifique-coniques",
+   "prompt": "Les asymptotes de $\\frac{x^2}{4} - \\frac{y^2}{9} = 1$ sont :",
+   "choices": [
+    "$y = \\pm\\frac{2}{3}x$",
+    "$y = \\pm\\frac{9}{4}x$",
+    "$y = \\pm\\frac{3}{2}x$",
+    "$y = \\pm x$"
+   ],
+   "answer": 2,
+   "explanation": "$a = 2$ et $b = 3$ : pentes $\\pm\\frac{b}{a} = \\pm\\frac{3}{2}$.",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-c-specifique-con-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "bac-maths-c-specifique-coniques",
+   "prompt": "Pour l'ellipse, la somme $MF + MF'$ vaut :",
+   "choices": [
+    "$2c$",
+    "$a + b$",
+    "$2b$",
+    "$2a$"
+   ],
+   "answer": 3,
+   "explanation": "C'est la propriété bifocale : $MF + MF' = 2a$.",
+   "source": "Exercice original, style Bac"
+  }
+ ]
+}

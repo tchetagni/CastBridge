@@ -1,0 +1,241 @@
+{
+ "chapter": "2nde-physique-c-ch-optique",
+ "lessons": [],
+ "exercises": [
+  {
+   "id": "2nde-physique-c-blanc-ex1",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "2nde-physique-c-mouvement",
+   "prompt": "Exercice 1 : une moto roule en ligne droite à 54 km/h (vitesse constante). Le motard freine avec une décélération constante de 3 m/s² jusqu'à l'arrêt.",
+   "parts": [
+    {
+     "id": "2nde-physique-c-blanc-ex1-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Convertis 54 km/h en m/s.",
+     "answer": 15,
+     "tolerance": 0,
+     "unit": "m/s",
+     "explanation": "$54 \\div 3{,}6 = 15$ m/s."
+    },
+    {
+     "id": "2nde-physique-c-blanc-ex1-b",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule la durée du freinage (en s).",
+     "answer": 5,
+     "tolerance": 0.01,
+     "unit": "s",
+     "explanation": "$v = v_0 + a t = 0 \\Rightarrow t = \\frac{15}{3} = 5$ s."
+    },
+    {
+     "id": "2nde-physique-c-blanc-ex1-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule la distance parcourue pendant le freinage (en m).",
+     "answer": 37.5,
+     "tolerance": 0.1,
+     "unit": "m",
+     "explanation": "$d = \\frac{v_0^2}{2|a|} = \\frac{225}{6} = 37{,}5$ m."
+    },
+    {
+     "id": "2nde-physique-c-blanc-ex1-d",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Si la vitesse initiale était doublée (30 m/s), la distance de freinage serait :",
+     "choices": [
+      "multipliée par 2",
+      "inchangée",
+      "divisée par 2",
+      "multipliée par 4"
+     ],
+     "answer": 3,
+     "explanation": "d est proportionnelle à $v_0^2$ : doubler $v_0$ multiplie d par 4 (150 m au lieu de 37,5 m)."
+    }
+   ],
+   "method": "Convertir, puis utiliser $v = v_0 + a t$ et $v^2 - v_0^2 = 2 a d$.",
+   "mistakes": [
+    "Oublier la conversion en m/s."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-physique-c-blanc-ex2",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "2nde-physique-c-forces",
+   "prompt": "Exercice 2 : un lustre de masse 4 kg est suspendu au plafond par un câble vertical (g = 10 N/kg sur Terre).",
+   "parts": [
+    {
+     "id": "2nde-physique-c-blanc-ex2-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le poids du lustre (en N).",
+     "answer": 40,
+     "tolerance": 0,
+     "unit": "N",
+     "explanation": "$P = m g = 4 \\times 10 = 40$ N."
+    },
+    {
+     "id": "2nde-physique-c-blanc-ex2-b",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Le lustre est immobile. Quelle est la tension du câble (en N) ? Justifie avec le principe d'inertie.",
+     "answer": 40,
+     "tolerance": 0,
+     "unit": "N",
+     "explanation": "Le lustre est à l'équilibre : $\\vec{P} + \\vec{T} = \\vec{0}$. Les deux forces ont même direction (verticale), sens opposés et même intensité : $T = P = 40$ N."
+    },
+    {
+     "id": "2nde-physique-c-blanc-ex2-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quel serait son poids sur la Lune (g = 1,6 N/kg), en N ?",
+     "answer": 6.4,
+     "tolerance": 0.05,
+     "unit": "N",
+     "explanation": "$P = 4 \\times 1{,}6 = 6{,}4$ N."
+    },
+    {
+     "id": "2nde-physique-c-blanc-ex2-d",
+     "kind": "truefalse",
+     "points": 0.5,
+     "prompt": "La masse du lustre est plus petite sur la Lune que sur Terre.",
+     "answer": false,
+     "explanation": "Faux : la masse ne dépend pas du lieu ; seul le poids change."
+    }
+   ],
+   "method": "Bilan des forces, ΣF = 0, puis P = m g.",
+   "mistakes": [
+    "Dire que la masse change avec le lieu."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-physique-c-blanc-ex3",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "2nde-physique-c-electricite",
+   "prompt": "Exercice 3 : un générateur de tension 18 V alimente deux résistors en série : $R_1 = 30$ Ω et $R_2 = 60$ Ω.",
+   "parts": [
+    {
+     "id": "2nde-physique-c-blanc-ex3-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la résistance équivalente (en Ω).",
+     "answer": 90,
+     "tolerance": 0,
+     "unit": "Ω",
+     "explanation": "$30 + 60 = 90$ Ω."
+    },
+    {
+     "id": "2nde-physique-c-blanc-ex3-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule l'intensité du courant (en A).",
+     "answer": 0.2,
+     "tolerance": 0.002,
+     "unit": "A",
+     "explanation": "$I = \\frac{18}{90} = 0{,}2$ A."
+    },
+    {
+     "id": "2nde-physique-c-blanc-ex3-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la tension aux bornes de $R_1$ (en V).",
+     "answer": 6,
+     "tolerance": 0.05,
+     "unit": "V",
+     "explanation": "$U_1 = R_1 I = 30 \\times 0{,}2 = 6$ V (et $U_2 = 12$ V ; $6 + 12 = 18$ V)."
+    },
+    {
+     "id": "2nde-physique-c-blanc-ex3-d",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule la puissance dissipée dans $R_2$ (en W).",
+     "answer": 2.4,
+     "tolerance": 0.02,
+     "unit": "W",
+     "explanation": "$U_2 = 60 \\times 0{,}2 = 12$ V ; $P_2 = U_2 I = 12 \\times 0{,}2 = 2{,}4$ W (ou $R_2 I^2 = 60 \\times 0{,}04$)."
+    },
+    {
+     "id": "2nde-physique-c-blanc-ex3-e",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Le circuit fonctionne 3 h. Quelle énergie le générateur fournit-il (en Wh) ?",
+     "answer": 10.8,
+     "tolerance": 0.05,
+     "unit": "Wh",
+     "explanation": "$P = E I = 18 \\times 0{,}2 = 3{,}6$ W ; $E = P t = 3{,}6 \\times 3 = 10{,}8$ Wh."
+    }
+   ],
+   "method": "Résistance équivalente, loi d'Ohm, puissance, énergie.",
+   "mistakes": [
+    "Oublier de convertir les durées ou les unités."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-physique-c-blanc-ex4",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "2nde-physique-c-optique",
+   "prompt": "Exercice 4 : un rayon passe de l'air (n = 1,00) au verre (n = 1,50) avec un angle d'incidence de 30°. Par ailleurs, une lentille convergente de distance focale 15 cm donne l'image d'un objet situé à 45 cm devant elle.",
+   "parts": [
+    {
+     "id": "2nde-physique-c-blanc-ex4-a",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule l'angle de réfraction (en degrés, arrondi à 0,1°).",
+     "answer": 19.5,
+     "tolerance": 0.1,
+     "unit": "°",
+     "explanation": "$\\sin r = \\frac{\\sin 30°}{1{,}5} = \\frac{0{,}5}{1{,}5} = 0{,}3333$, donc $r \\approx 19{,}5°$."
+    },
+    {
+     "id": "2nde-physique-c-blanc-ex4-b",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule la position de l'image (OA′ en cm).",
+     "answer": 22.5,
+     "tolerance": 0.1,
+     "unit": "cm",
+     "explanation": "$\\frac{1}{OA'} = \\frac{1}{15} - \\frac{1}{45} = \\frac{2}{45}$, donc $OA' = 22{,}5$ cm."
+    },
+    {
+     "id": "2nde-physique-c-blanc-ex4-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le grandissement γ.",
+     "answer": -0.5,
+     "tolerance": 0.01,
+     "explanation": "$\\gamma = \\frac{22{,}5}{-45} = -0{,}5$."
+    },
+    {
+     "id": "2nde-physique-c-blanc-ex4-d",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Que peut-on dire de l'image ?",
+     "choices": [
+      "virtuelle, droite et agrandie",
+      "réelle, renversée et réduite",
+      "réelle, droite et agrandie",
+      "virtuelle, renversée et réduite"
+     ],
+     "answer": 1,
+     "explanation": "OA′ > 0 : image réelle ; γ < 0 : renversée ; |γ| < 1 : réduite."
+    }
+   ],
+   "method": "Loi de Snell-Descartes, relation de conjugaison, grandissement.",
+   "mistakes": [
+    "Appliquer la division à l'angle plutôt qu'à son sinus."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  }
+ ]
+}

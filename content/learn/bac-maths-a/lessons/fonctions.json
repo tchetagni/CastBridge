@@ -1,0 +1,417 @@
+{
+ "chapter": "bac-maths-a-ch-fonctions",
+ "lessons": [
+  {
+   "id": "bac-maths-a-fonctions",
+   "title": "Fonctions, limites, dérivation et étude de fonction",
+   "minutes": 35,
+   "programRef": "Tle A — Analyse : limites, dérivation, étude de fonctions polynômes et rationnelles simples (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Déterminer le domaine de définition d'une fonction polynôme ou rationnelle.",
+    "Calculer des limites en l'infini et en un point, et en déduire les asymptotes.",
+    "Dériver une fonction polynôme ou rationnelle simple et dresser un tableau de variation.",
+    "Rédiger une étude de fonction complète avec tangente et courbe."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Domaine de définition",
+     "md": "Le **domaine** de f est l'ensemble des réels x pour lesquels f(x) existe.\n- Un polynôme est défini sur $\\mathbb{R}$.\n- Un quotient n'est pas défini là où le dénominateur est nul : $\\frac{2x+1}{x-1}$ est défini pour tout réel x ≠ 1."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Limites en l'infini",
+     "md": "- Un **polynôme** a, en $+\\infty$ ou $-\\infty$, la même limite que son terme de plus haut degré : $\\lim_{x\\to+\\infty}(x^3-6x^2+1)=\\lim x^3=+\\infty$.\n- Une **fraction rationnelle** a la même limite que le quotient des termes de plus haut degré : $\\lim_{x\\to+\\infty}\\frac{2x+1}{x-1}=\\lim\\frac{2x}{x}=2$.\n- $\\frac{1}{x}$ tend vers 0 quand x tend vers $\\pm\\infty$."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Asymptotes",
+     "md": "- Si $\\lim_{x\\to\\pm\\infty} f(x)=L$, la droite $y=L$ est **asymptote horizontale**.\n- Si f(x) tend vers $\\pm\\infty$ quand x tend vers un réel a, la droite $x=a$ est **asymptote verticale**.\n- Pour une limite en un point où le dénominateur s'annule, on étudie le **signe** du dénominateur de chaque côté (limite à gauche, à droite)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Dérivées à connaître",
+     "md": "- $(x^n)'=n\\,x^{n-1}$ ; $(k)'=0$ ; $(kx)'=k$.\n- $(u+v)'=u'+v'$ ; $(ku)'=ku'$.\n- $(uv)'=u'v+uv'$.\n- $\\left(\\frac{u}{v}\\right)'=\\frac{u'v-uv'}{v^2}$.\nTangente en a : $y=f'(a)(x-a)+f(a)$."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : étudier une fonction",
+     "md": "1. Domaine de définition.\n2. Limites aux bornes du domaine ; asymptotes.\n3. Dérivée f′ ; factoriser pour étudier son signe.\n4. Si f′ > 0, f est croissante ; si f′ < 0, f est décroissante. Tableau de variation avec les valeurs aux extrema.\n5. Points particuliers, tangente demandée, tracé de la courbe."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : limites et asymptotes d'une fraction",
+     "statement": "Soit $g(x)=\\frac{2x+1}{x-1}$. Détermine le domaine, les limites aux bornes et les asymptotes.",
+     "steps": [
+      {
+       "md": "Le dénominateur s'annule pour x = 1. Domaine : tous les réels sauf 1."
+      },
+      {
+       "md": "En $\\pm\\infty$, on garde les termes de plus haut degré :",
+       "tex": "\\lim_{x\\to\\pm\\infty} g(x)=\\lim\\frac{2x}{x}=2"
+      },
+      {
+       "md": "En 1 le numérateur tend vers 3. Pour x > 1, x − 1 > 0 et tend vers 0 : g tend vers $+\\infty$. Pour x < 1, x − 1 < 0 : g tend vers $-\\infty$."
+      }
+     ],
+     "answer": "**Asymptote horizontale y = 2** et **asymptote verticale x = 1**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : étude complète d'un polynôme",
+     "statement": "Étudie les variations de $f(x)=x^3-6x^2+9x+1$ sur $[0\\,;\\,4]$.",
+     "steps": [
+      {
+       "md": "On dérive puis on factorise :",
+       "tex": "f'(x)=3x^2-12x+9=3(x-1)(x-3)"
+      },
+      {
+       "md": "f′ s'annule en 1 et 3. Elle est positive sur [0 ; 1[, négative sur ]1 ; 3[, positive sur ]3 ; 4]. Donc f croît, décroît puis croît."
+      },
+      {
+       "md": "Valeurs : f(0) = 1, f(1) = 1 − 6 + 9 + 1 = 5, f(3) = 27 − 54 + 27 + 1 = 1, f(4) = 64 − 96 + 36 + 1 = 5."
+      }
+     ],
+     "answer": "Maximum local 5 en x = 1, minimum local 1 en x = 3 ; f(4) = 5.",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 4.2,
+      "ymin": 0,
+      "ymax": 8,
+      "grid": 1,
+      "xlabel": "x",
+      "ylabel": "y",
+      "curves": [
+       {
+        "expr": "x^3-6*x^2+9*x+1",
+        "color": "blue",
+        "label": "f"
+       }
+      ],
+      "points": [
+       {
+        "x": 1,
+        "y": 5,
+        "label": "max",
+        "color": "red"
+       },
+       {
+        "x": 3,
+        "y": 1,
+        "label": "min",
+        "color": "green"
+       }
+      ]
+     }
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 4.2,
+      "ymin": 0,
+      "ymax": 8,
+      "grid": 1,
+      "xlabel": "x",
+      "ylabel": "y",
+      "curves": [
+       {
+        "expr": "x^3-6*x^2+9*x+1",
+        "color": "blue",
+        "label": "f"
+       },
+       {
+        "expr": "5",
+        "color": "grey",
+        "label": "y = 5"
+       }
+      ]
+     },
+     "caption": "Courbe de f(x) = x³ − 6x² + 9x + 1 : elle monte jusqu'à 5, descend jusqu'à 1, puis remonte.",
+     "alt": "Courbe bleue en forme de S : croissante de (0 ; 1) à (1 ; 5), décroissante jusqu'à (3 ; 1), puis croissante. Une droite grise horizontale marque la hauteur 5."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Écrire la limite d'un quotient en simplifiant n'importe quel terme : seul le terme de plus haut degré compte en l'infini.\n- Oublier de factoriser f′ : le signe d'un trinôme non factorisé est difficile à lire.\n- Confondre f(a) (ordonnée du point) et f′(a) (pente de la tangente).\n- Dire « f′ = 0 donc il y a un extremum » : il faut que f′ **change de signe**."
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-maths-a-fon-01"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Les fonctions polynômes et rationnelles simples sont le cœur de l'analyse en série A ; les fonctions ln et exp, vues à la fiche suivante, utilisent les mêmes méthodes.",
+      "En économie, la dérivée d'un coût ou d'un bénéfice donne le coût marginal ou le bénéfice marginal."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Niveau et contenu exacts de l'analyse en Tle A (limites, dérivées de quotients) à vérifier sur le texte officiel.",
+    "Les asymptotes obliques sont volontairement laissées de côté : à ajouter si le programme les exige.",
+    "Le vocabulaire (« nombre dérivé », « tableau de variations ») peut différer légèrement selon les manuels."
+   ],
+   "exercises": [
+    "bac-maths-a-fon-01",
+    "bac-maths-a-fon-02",
+    "bac-maths-a-fon-03",
+    "bac-maths-a-fon-04",
+    "bac-maths-a-fon-05",
+    "bac-maths-a-fon-06"
+   ],
+   "selfCheck": [
+    "bac-maths-a-fon-q1",
+    "bac-maths-a-fon-q2",
+    "bac-maths-a-fon-q3",
+    "bac-maths-a-fon-q4",
+    "bac-maths-a-fon-q5"
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "bac-maths-a-fon-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Soit $f(x)=x^2-4x+1$. Calcule le nombre dérivé $f'(3)$.",
+   "answer": 2,
+   "tolerance": 0,
+   "explanation": "$f'(x)=2x-4$, donc $f'(3)=6-4=2$.",
+   "method": "Dériver terme à $x^n$ : $(x^n)'=nx^{n-1}$.",
+   "mistakes": [
+    "Calculer f(3) = −2 au lieu de f′(3)."
+   ],
+   "lesson": "bac-maths-a-fonctions",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-fon-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quelle est la limite en $+\\infty$ de $\\frac{3x^2-x+1}{x^2+5}$ ?",
+   "choices": [
+    "3",
+    "0",
+    "$+\\infty$",
+    "$\\frac{1}{5}$"
+   ],
+   "answer": 0,
+   "explanation": "Les termes de plus haut degré donnent $\\frac{3x^2}{x^2}=3$.",
+   "method": "Quotient des termes de plus haut degré.",
+   "mistakes": [
+    "Répondre $+\\infty$ parce que le numérateur « grandit » : le dénominateur grandit aussi."
+   ],
+   "lesson": "bac-maths-a-fonctions",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-fon-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Vrai ou faux : la droite d'équation $x=2$ est asymptote verticale à la courbe de $f(x)=\\frac{1}{x-2}$.",
+   "answer": true,
+   "explanation": "Vrai. Quand x tend vers 2, x − 2 tend vers 0 : $\\frac{1}{x-2}$ tend vers $+\\infty$ (à droite) ou $-\\infty$ (à gauche).",
+   "lesson": "bac-maths-a-fonctions",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-fon-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Soit $f(x)=x^3-2x$. La tangente à la courbe au point d'abscisse 1 a pour équation $y=ax+b$. Calcule b.",
+   "answer": -2,
+   "tolerance": 0,
+   "explanation": "$f'(x)=3x^2-2$ donc $f'(1)=1$ ; $f(1)=-1$. Tangente : $y=1\\times(x-1)+(-1)=x-2$. Donc b = −2.",
+   "method": "$y=f'(a)(x-a)+f(a)$.",
+   "mistakes": [
+    "Oublier de développer : $y=x-1-1=x-2$, et non $x-1$."
+   ],
+   "lesson": "bac-maths-a-fonctions",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-fon-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Soit $h(x)=x^3-3x$ sur $[-2\\,;\\,2]$. Calcule la valeur du maximum local de h.",
+   "answer": 2,
+   "tolerance": 0,
+   "explanation": "$h'(x)=3x^2-3=3(x-1)(x+1)$. h′ est positive avant −1, négative entre −1 et 1, positive après 1 : le maximum local est atteint en x = −1 et vaut $h(-1)=-1+3=2$.",
+   "method": "Signe de h′, puis valeur de h au point où h′ passe de + à −.",
+   "mistakes": [
+    "Donner h(1) = −2, qui est le minimum local."
+   ],
+   "lesson": "bac-maths-a-fonctions",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-fon-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Une coopérative de Bafoussam suit son bénéfice en fonction de la production x (en centaines de kg, 0 ≤ x ≤ 5) par $f(x)=-x^3+6x^2-9x+4$ (milliers de FCFA ; données fictives). On rappelle que $f(x)=-(x-1)^2(x-4)$.",
+   "parts": [
+    {
+     "id": "bac-maths-a-fon-06-a",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle est l'expression de $f'(x)$ ?",
+     "explanation": "$f'(x)=-3x^2+12x-9$ : on dérive chaque terme.",
+     "choices": [
+      "$-3x^2+12x-9$",
+      "$-3x^2+6x-9$",
+      "$-x^2+12x-9$",
+      "$3x^2-12x+9$"
+     ],
+     "answer": 0
+    },
+    {
+     "id": "bac-maths-a-fon-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "En quelle valeur de x ∈ [0 ; 5] le bénéfice a-t-il son maximum local (celui avec x > 1) ?",
+     "explanation": "$f'(x)=-3(x-1)(x-3)$ : f′ est négative avant 1, positive entre 1 et 3, négative après 3. Le maximum local est en x = 3.",
+     "answer": 3,
+     "tolerance": 0
+    },
+    {
+     "id": "bac-maths-a-fon-06-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule la valeur de ce maximum local, en milliers de FCFA.",
+     "explanation": "$f(3)=-27+54-27+4=4$.",
+     "answer": 4,
+     "tolerance": 0,
+     "unit": "milliers de FCFA"
+    },
+    {
+     "id": "bac-maths-a-fon-06-d",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Hormis x = 1, pour quelle valeur de x le bénéfice est-il nul ?",
+     "explanation": "$f(x)=-(x-1)^2(x-4)=0$ pour x = 1 ou x = 4. L'autre solution est 4 (vérification : $f(4)=-64+96-36+4=0$).",
+     "answer": 4,
+     "tolerance": 0
+    }
+   ],
+   "method": "Dériver, factoriser f′, lire son signe, calculer les valeurs aux extrema.",
+   "mistakes": [
+    "Oublier que le signe de f′ change : le maximum n'est pas en x = 1 mais en x = 3."
+   ],
+   "lesson": "bac-maths-a-fonctions",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-fon-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quel est le domaine de définition de $\\frac{5}{x+3}$ ?",
+   "choices": [
+    "Tous les réels sauf −3",
+    "Tous les réels sauf 3",
+    "$\\mathbb{R}$",
+    "$]-3\\,;\\,+\\infty[$"
+   ],
+   "answer": 0,
+   "explanation": "Le dénominateur x + 3 s'annule pour x = −3 : ce réel est exclu.",
+   "lesson": "bac-maths-a-fonctions",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-fon-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "La dérivée de $x^4-2x$ est :",
+   "choices": [
+    "$4x^3-2$",
+    "$4x^3-2x$",
+    "$x^3-2$",
+    "$4x^4-2$"
+   ],
+   "answer": 0,
+   "explanation": "$(x^4)'=4x^3$ et $(2x)'=2$.",
+   "lesson": "bac-maths-a-fonctions",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-fon-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Si f′(x) > 0 sur un intervalle, alors f est :",
+   "choices": [
+    "croissante sur cet intervalle",
+    "décroissante sur cet intervalle",
+    "constante sur cet intervalle",
+    "négative sur cet intervalle"
+   ],
+   "answer": 0,
+   "explanation": "Une dérivée positive signifie une fonction croissante.",
+   "lesson": "bac-maths-a-fonctions",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-fon-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "$\\lim_{x\\to+\\infty}(x^2-5x+7)$ vaut :",
+   "choices": [
+    "$+\\infty$",
+    "$-\\infty$",
+    "7",
+    "$0$"
+   ],
+   "answer": 0,
+   "explanation": "Le terme de plus haut degré est x², qui tend vers $+\\infty$.",
+   "lesson": "bac-maths-a-fonctions",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-fon-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "La courbe de $\\frac{2x+1}{x-1}$ admet pour asymptote horizontale la droite :",
+   "choices": [
+    "$y=2$",
+    "$y=1$",
+    "$y=-1$",
+    "$x=2$"
+   ],
+   "answer": 0,
+   "explanation": "La limite en l'infini est 2 : asymptote $y=2$.",
+   "lesson": "bac-maths-a-fonctions",
+   "source": "Exercice original, style Bac A"
+  }
+ ]
+}

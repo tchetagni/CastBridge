@@ -1,0 +1,498 @@
+{
+ "chapter": "1re-maths-cd-ch-limites",
+ "lessons": [
+  {
+   "id": "1re-maths-cd-limites",
+   "title": "Limites, asymptotes et continuité",
+   "minutes": 40,
+   "programRef": "1re C/D — Analyse : limites, asymptotes, continuité (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale d'après le programme habituel de Première ; à relire par un enseignant",
+   "objectives": [
+    "Calculer des limites et lever les formes indéterminées.",
+    "Déterminer les asymptotes d'une courbe.",
+    "Étudier la continuité d'une fonction.",
+    "Utiliser le TVI."
+   ],
+   "prerequisites": [
+    "1re-maths-cd-second-degre"
+   ],
+   "exercises": [
+    "1re-maths-cd-lc-01",
+    "1re-maths-cd-lc-02",
+    "1re-maths-cd-lc-03",
+    "1re-maths-cd-lc-04",
+    "1re-maths-cd-lc-05",
+    "1re-maths-cd-lc-06"
+   ],
+   "selfCheck": [
+    "1re-maths-cd-lc-q1",
+    "1re-maths-cd-lc-q2",
+    "1re-maths-cd-lc-q3",
+    "1re-maths-cd-lc-q4",
+    "1re-maths-cd-lc-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier si la limite de composées, le théorème des gendarmes et le TVI sont au programme de Première C/D ou seulement de Terminale.",
+    "Les limites de sin x / x et des fonctions ln/exp relèvent probablement de la Terminale : non traitées ici."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Ce que tu sauras faire",
+     "md": "- Calculer des limites en un point et à l'infini, lever une forme indéterminée.\n- Déterminer les asymptotes d'une courbe (verticale, horizontale, oblique).\n- Étudier la continuité d'une fonction en un point.\n- Utiliser le théorème des valeurs intermédiaires."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Limites usuelles",
+     "md": "- $\\lim_{x \\to +\\infty} x^n = +\\infty$ ; $\\lim_{x \\to \\pm\\infty} \\frac{1}{x^n} = 0$ (n ≥ 1) ; $\\lim_{x \\to +\\infty} \\sqrt{x} = +\\infty$.\n- $\\lim_{x \\to 0^+} \\frac{1}{x} = +\\infty$ et $\\lim_{x \\to 0^-} \\frac{1}{x} = -\\infty$.\n- En $\\pm\\infty$, un polynôme a la même limite que son terme de plus haut degré, et une fonction rationnelle a la même limite que le quotient de ses termes de plus haut degré."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Formes indéterminées",
+     "md": "Les quatre formes à lever : $+\\infty - \\infty$, $0 \\times \\infty$, $\\frac{\\infty}{\\infty}$ et $\\frac{0}{0}$.\n- Polynômes et fractions en ±∞ : factoriser le terme dominant.\n- $\\frac{0}{0}$ avec un polynôme : factoriser et simplifier par $(x - a)$.\n- Avec des racines carrées : multiplier par la **quantité conjuguée**."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Asymptotes",
+     "md": "- $\\lim_{x \\to a} f(x) = \\pm\\infty$ : la droite $x = a$ est **asymptote verticale**.\n- $\\lim_{x \\to \\pm\\infty} f(x) = L$ : la droite $y = L$ est **asymptote horizontale**.\n- $\\lim_{x \\to \\pm\\infty} [f(x) - (ax + b)] = 0$ (avec a ≠ 0) : la droite $y = ax + b$ est **asymptote oblique**. Le signe de $f(x) - (ax + b)$ donne la position relative."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Continuité",
+     "md": "$f$ est **continue en a** si $\\lim_{x \\to a} f(x) = f(a)$. Les polynômes, fractions rationnelles (sur leur ensemble de définition), $\\sqrt{x}$, sin et cos sont continues sur leur domaine. Pour une fonction définie par morceaux, on compare limite à gauche, limite à droite et $f(a)$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Théorème des valeurs intermédiaires (TVI)",
+     "md": "Si f est continue sur $[a ; b]$ et si $f(a)$ et $f(b)$ sont de signes contraires, l'équation $f(x) = 0$ a **au moins une solution** dans $[a ; b]$. Si de plus f est **strictement monotone** sur $[a ; b]$, cette solution est **unique**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": -4,
+      "xmax": 6,
+      "ymin": -10,
+      "ymax": 12,
+      "grid": 2,
+      "xlabel": "x",
+      "ylabel": "y",
+      "curves": [
+       {
+        "expr": "(x^2+x+1)/(x-1)",
+        "color": "blue",
+        "label": "Cf",
+        "from": -4,
+        "to": 0.7
+       },
+       {
+        "expr": "(x^2+x+1)/(x-1)",
+        "color": "blue",
+        "from": 1.35,
+        "to": 6
+       },
+       {
+        "expr": "x+2",
+        "color": "grey",
+        "label": "y = x + 2"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 1,
+        "y1": -10,
+        "x2": 1,
+        "y2": 12,
+        "color": "red",
+        "dash": true
+       }
+      ],
+      "points": [
+       {
+        "x": 0,
+        "y": -1,
+        "label": "(0 ; -1)",
+        "color": "green"
+       }
+      ]
+     },
+     "caption": "Courbe de $f(x) = \\frac{x^2 + x + 1}{x - 1}$ : asymptote verticale $x = 1$ (rouge, pointillés) et asymptote oblique $y = x + 2$ (grise).",
+     "alt": "Courbe en deux branches : l'une à gauche de la droite verticale x = 1 qui descend vers moins l'infini, l'autre à droite qui descend depuis plus l'infini et s'approche de la droite oblique y = x + 2."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : limite à l'infini",
+     "statement": "Calcule $\\lim_{x \\to +\\infty} \\frac{2x^2 - 3x + 1}{x^2 + 5}$ et interprète.",
+     "steps": [
+      {
+       "md": "Forme indéterminée ∞/∞ : on met $x^2$ en facteur :",
+       "tex": "\\frac{2x^2 - 3x + 1}{x^2 + 5} = \\frac{x^2\\left(2 - \\frac{3}{x} + \\frac{1}{x^2}\\right)}{x^2\\left(1 + \\frac{5}{x^2}\\right)} = \\frac{2 - \\frac{3}{x} + \\frac{1}{x^2}}{1 + \\frac{5}{x^2}}"
+      },
+      {
+       "md": "Quand x tend vers +∞, $\\frac{3}{x}$, $\\frac{1}{x^2}$ et $\\frac{5}{x^2}$ tendent vers 0 : le quotient tend vers $\\frac{2}{1} = 2$."
+      },
+      {
+       "md": "La courbe admet donc la droite d'équation $y = 2$ pour asymptote horizontale en +∞."
+      }
+     ],
+     "answer": "$\\lim_{x \\to +\\infty} f(x) = 2$ ; asymptote horizontale $y = 2$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : deux formes 0/0",
+     "statement": "Calcule $\\lim_{x \\to 2} \\frac{x^2 - 4}{x - 2}$ et $\\lim_{x \\to 0} \\frac{\\sqrt{x + 1} - 1}{x}$.",
+     "steps": [
+      {
+       "md": "Première limite : on factorise ($x \\neq 2$) :",
+       "tex": "\\frac{x^2 - 4}{x - 2} = \\frac{(x - 2)(x + 2)}{x - 2} = x + 2 \\to 4"
+      },
+      {
+       "md": "Seconde limite : on multiplie par la quantité conjuguée $\\sqrt{x + 1} + 1$ :",
+       "tex": "\\frac{\\sqrt{x + 1} - 1}{x} = \\frac{(x + 1) - 1}{x(\\sqrt{x + 1} + 1)} = \\frac{1}{\\sqrt{x + 1} + 1}"
+      },
+      {
+       "md": "Quand x tend vers 0, le dénominateur tend vers 2, donc la seconde limite vaut $\\frac{1}{2}$."
+      }
+     ],
+     "answer": "Les limites valent **4** et **$\\frac{1}{2}$**."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-cd-lc-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-cd-lc-02"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : asymptotes d'une fraction",
+     "statement": "Soit $f(x) = \\frac{x^2 + x + 1}{x - 1}$. Étudie les asymptotes de sa courbe.",
+     "steps": [
+      {
+       "md": "On écrit f sous la forme $ax + b + \\frac{c}{x - 1}$ (division euclidienne) :",
+       "tex": "f(x) = x + 2 + \\frac{3}{x - 1}"
+      },
+      {
+       "md": "Quand x tend vers $1^+$, le numérateur tend vers 3 > 0 et le dénominateur vers $0^+$ : $f(x) \\to +\\infty$ ; à gauche, $f(x) \\to -\\infty$. Donc $x = 1$ est asymptote verticale."
+      },
+      {
+       "md": "$f(x) - (x + 2) = \\frac{3}{x - 1} \\to 0$ en ±∞ : la droite $y = x + 2$ est asymptote oblique. La courbe est au-dessus pour x > 1 et en dessous pour x < 1."
+      }
+     ],
+     "answer": "Asymptotes : $x = 1$ (verticale) et $y = x + 2$ (oblique)."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-cd-lc-03"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : encadrer une solution par le TVI",
+     "md": "1. Vérifier que f est continue (polynôme, fraction sur son domaine…).\n2. Calculer $f(a)$ et $f(b)$ et constater un changement de signe.\n3. Pour l'unicité, montrer que f est strictement monotone (signe de $f'$).\n4. Pour un encadrement, calculer f en des points intermédiaires (dichotomie, calculatrice)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 4 : TVI",
+     "statement": "Montre que $x^3 + x - 1 = 0$ a une unique solution α dans $[0 ; 1]$.",
+     "steps": [
+      {
+       "md": "On pose $f(x) = x^3 + x - 1$, continue sur $\\mathbb{R}$. Alors :",
+       "tex": "f(0) = -1 < 0 \\quad \\text{et} \\quad f(1) = 1 > 0"
+      },
+      {
+       "md": "D'après le TVI, il existe α dans $[0 ; 1]$ tel que $f(\\alpha) = 0$. De plus :",
+       "tex": "f'(x) = 3x^2 + 1 > 0"
+      },
+      {
+       "md": "f est strictement croissante sur $\\mathbb{R}$, donc la solution est unique."
+      }
+     ],
+     "answer": "L'équation a **une unique solution α dans $[0 ; 1]$**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Pièges fréquents",
+     "md": "- Dire qu'une forme indéterminée « vaut 0 » ou « vaut 1 » sans la lever.\n- Oublier de distinguer limite à gauche et à droite en un point où le dénominateur change de signe.\n- Confondre la limite de f en a et la valeur f(a) : la continuité exige qu'elles soient égales.\n- Appliquer le TVI sans vérifier la continuité, ou affirmer l'unicité sans monotonie."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-cd-lc-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-cd-lc-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-cd-lc-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Limites remarquables vues au programme : $\\lim_{x \\to 0} \\frac{\\sin x}{x} = 1$ (admise en Première).",
+      "Le théorème des gendarmes et les limites de composées peuvent être au programme : à vérifier sur le texte officiel."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "1re-maths-cd-lc-01",
+   "kind": "numeric",
+   "points": 1,
+   "prompt": "Calcule $\\lim_{x \\to +\\infty} \\frac{3x^2 + x}{x^2 - 1}$.",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "Les termes de plus haut degré donnent $\\frac{3x^2}{x^2} = 3$. Plus précisément, on met $x^2$ en facteur au numérateur et au dénominateur : la limite est 3.",
+   "tier": "application",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "method": "Factoriser le terme dominant.",
+   "mistakes": [
+    "Répondre +∞ en s'arrêtant à ∞/∞ sans lever l'indétermination."
+   ],
+   "lesson": "1re-maths-cd-limites"
+  },
+  {
+   "id": "1re-maths-cd-lc-02",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Quelle est la limite de $x^3 - 5x^2 + 1$ quand x tend vers −∞ ?",
+   "choices": [
+    "$-\\infty$",
+    "$+\\infty$",
+    "1",
+    "0"
+   ],
+   "answer": 0,
+   "explanation": "En −∞, le polynôme se comporte comme $x^3$, qui tend vers −∞ (cube d'un très grand nombre négatif).",
+   "tier": "application",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "method": "Terme de plus haut degré.",
+   "mistakes": [
+    "Oublier le signe : $(-\\infty)^3 = -\\infty$."
+   ],
+   "lesson": "1re-maths-cd-limites"
+  },
+  {
+   "id": "1re-maths-cd-lc-03",
+   "kind": "truefalse",
+   "points": 1,
+   "prompt": "Si $\\lim_{x \\to +\\infty} f(x) = 3$, la droite d'équation $y = 3$ est asymptote horizontale à la courbe de f.",
+   "answer": true,
+   "explanation": "C'est la définition de l'asymptote horizontale en +∞.",
+   "tier": "application",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "method": "Définition d'une asymptote horizontale.",
+   "mistakes": [
+    "Confondre avec asymptote verticale, qui provient d'une limite infinie en un réel a."
+   ],
+   "lesson": "1re-maths-cd-limites"
+  },
+  {
+   "id": "1re-maths-cd-lc-04",
+   "kind": "numeric",
+   "points": 2,
+   "prompt": "Calcule $\\lim_{x \\to 3} \\frac{x^2 - 9}{x - 3}$.",
+   "answer": 6,
+   "tolerance": 0,
+   "explanation": "Pour $x \\neq 3$, $\\frac{x^2 - 9}{x - 3} = x + 3$, qui tend vers 6.",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "source": "Exercice original, style Probatoire",
+   "method": "Factoriser par $(x - a)$ et simplifier.",
+   "mistakes": [
+    "Remplacer x par 3 et écrire « 0/0 = 0 »."
+   ],
+   "lesson": "1re-maths-cd-limites"
+  },
+  {
+   "id": "1re-maths-cd-lc-05",
+   "kind": "mcq",
+   "points": 2,
+   "prompt": "Quelle est la limite de $\\sqrt{x^2 + 1} - x$ quand x tend vers +∞ ?",
+   "choices": [
+    "$+\\infty$",
+    "1",
+    "$\\frac{1}{2}$",
+    "0"
+   ],
+   "answer": 3,
+   "explanation": "Forme $\\infty - \\infty$ : on multiplie par la quantité conjuguée. $\\sqrt{x^2 + 1} - x = \\frac{1}{\\sqrt{x^2 + 1} + x}$, dont le dénominateur tend vers +∞ : la limite est 0.",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "source": "Exercice original, style Probatoire",
+   "method": "Quantité conjuguée.",
+   "mistakes": [
+    "Écrire $\\sqrt{x^2 + 1} \\approx x$ puis conclure à +∞."
+   ],
+   "lesson": "1re-maths-cd-limites"
+  },
+  {
+   "id": "1re-maths-cd-lc-06",
+   "kind": "problem",
+   "prompt": "Soit $f(x) = \\frac{x^2 - 3x + 4}{x - 1}$ définie pour $x \\neq 1$ et $g$ définie par $g(x) = \\frac{x^2 - 4}{x - 2}$ si $x \\neq 2$ et $g(2) = a$.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle est la limite de f en $1^+$ ?",
+     "choices": [
+      "$-\\infty$",
+      "0",
+      "2",
+      "$+\\infty$"
+     ],
+     "answer": 3,
+     "explanation": "Le numérateur tend vers $1 - 3 + 4 = 2 > 0$ et le dénominateur vers $0^+$ : $f(x) \\to +\\infty$.",
+     "id": "1re-maths-cd-lc-06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1.5,
+     "prompt": "On a $f(x) = x - 2 + \\frac{2}{x - 1}$. Quelle est l'asymptote oblique de la courbe de f ?",
+     "choices": [
+      "$y = x - 2$",
+      "$y = x + 2$",
+      "$y = x - 1$",
+      "$y = 2$"
+     ],
+     "answer": 0,
+     "explanation": "$f(x) - (x - 2) = \\frac{2}{x - 1} \\to 0$ en ±∞ : l'asymptote oblique est $y = x - 2$.",
+     "id": "1re-maths-cd-lc-06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule $f(3)$.",
+     "answer": 2,
+     "tolerance": 0,
+     "explanation": "$f(3) = \\frac{9 - 9 + 4}{2} = 2$. On peut aussi vérifier : $3 - 2 + \\frac{2}{2} = 2$.",
+     "id": "1re-maths-cd-lc-06-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Pour quelle valeur de a la fonction g est-elle continue en 2 ?",
+     "answer": 4,
+     "tolerance": 0,
+     "explanation": "Pour $x \\neq 2$, $g(x) = x + 2 \\to 4$ quand x tend vers 2. La continuité exige $a = g(2) = 4$.",
+     "id": "1re-maths-cd-lc-06-d"
+    }
+   ],
+   "tier": "examen",
+   "difficulty": 2,
+   "source": "Exercice original, style Probatoire",
+   "method": "Écrire f sous la forme ax + b + c/(x − 1), étudier les limites, puis comparer limite et valeur pour la continuité.",
+   "mistakes": [
+    "Oublier d'étudier le signe du dénominateur en $1^-$ et $1^+$.",
+    "Prendre a = 0 par défaut pour « prolonger » g."
+   ],
+   "lesson": "1re-maths-cd-limites"
+  },
+  {
+   "id": "1re-maths-cd-lc-q1",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Que vaut $\\lim_{x \\to +\\infty} \\frac{1}{x^2}$ ?",
+   "choices": [
+    "$+\\infty$",
+    "1",
+    "0",
+    "$-\\infty$"
+   ],
+   "answer": 2,
+   "explanation": "Un nombre très grand a un inverse très proche de 0.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "lesson": "1re-maths-cd-limites"
+  },
+  {
+   "id": "1re-maths-cd-lc-q2",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Quelle est l'asymptote verticale de $f(x) = \\frac{1}{x - 4}$ ?",
+   "choices": [
+    "$x = 4$",
+    "$x = -4$",
+    "$y = 4$",
+    "$y = 0$"
+   ],
+   "answer": 0,
+   "explanation": "Le dénominateur s'annule en 4 et $f(x)$ tend vers ±∞ en 4. (La droite $y = 0$ est l'asymptote horizontale.)",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "lesson": "1re-maths-cd-limites"
+  },
+  {
+   "id": "1re-maths-cd-lc-q3",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "$\\lim_{x \\to -\\infty} (2x^2 - x)$ vaut :",
+   "choices": [
+    "$-\\infty$",
+    "0",
+    "$+\\infty$",
+    "2"
+   ],
+   "answer": 2,
+   "explanation": "Terme dominant $2x^2$, positif même pour x négatif : la limite est +∞.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "lesson": "1re-maths-cd-limites"
+  },
+  {
+   "id": "1re-maths-cd-lc-q4",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "$f$ est continue en a si :",
+   "choices": [
+    "$f(a) = 0$",
+    "$\\lim_{x \\to a} f(x) = f(a)$",
+    "$f'(a)$ existe toujours",
+    "$\\lim_{x \\to a} f(x) = +\\infty$"
+   ],
+   "answer": 1,
+   "explanation": "C'est la définition de la continuité en a.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "lesson": "1re-maths-cd-limites"
+  },
+  {
+   "id": "1re-maths-cd-lc-q5",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Pour utiliser le TVI sur $[a ; b]$ avec $f(x) = 0$, on vérifie que f est continue et que :",
+   "choices": [
+    "$f(a) = f(b)$",
+    "$f$ est dérivable en a",
+    "$f(a) > 0$ et $f(b) > 0$",
+    "$f(a)$ et $f(b)$ sont de signes contraires"
+   ],
+   "answer": 3,
+   "explanation": "Le TVI s'applique lorsque 0 est compris entre f(a) et f(b), donc quand les signes sont contraires.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire",
+   "lesson": "1re-maths-cd-limites"
+  }
+ ]
+}

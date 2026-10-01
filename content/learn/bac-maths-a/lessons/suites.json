@@ -1,0 +1,377 @@
+{
+ "chapter": "bac-maths-a-ch-suites",
+ "lessons": [
+  {
+   "id": "bac-maths-a-suites-finance",
+   "title": "Suites arithmétiques et géométriques, intérêts et annuités",
+   "minutes": 40,
+   "programRef": "Tle A — Suites arithmétiques et géométriques ; intérêts simples et composés ; annuités (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître une suite arithmétique ou géométrique et calculer un terme et une somme.",
+    "Calculer une valeur acquise à intérêts simples ou composés, en FCFA.",
+    "Calculer la valeur acquise d'une suite d'annuités constantes.",
+    "Calculer l'annuité constante d'un remboursement d'emprunt."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Suite arithmétique",
+     "md": "$(u_n)$ est **arithmétique** de raison r si $u_{n+1}=u_n+r$ pour tout n. Alors :\n- $u_n=u_0+nr$ ;\n- somme de termes consécutifs = (nombre de termes) × (premier terme + dernier terme) ÷ 2."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Suite géométrique",
+     "md": "$(v_n)$ est **géométrique** de raison q si $v_{n+1}=q\\,v_n$ pour tout n. Alors :\n- $v_n=v_0\\,q^n$ ;\n- si q ≠ 1, somme des N premiers termes $=v_0\\times\\frac{q^N-1}{q-1}$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Intérêts simples et composés",
+     "md": "On place un capital $C_0$ au taux annuel t (par exemple t = 0,05 pour 5 %).\n- **Intérêts simples** : les intérêts sont calculés chaque année sur $C_0$ : $C_n=C_0(1+nt)$ (suite arithmétique).\n- **Intérêts composés** : les intérêts s'ajoutent au capital : $C_n=C_0(1+t)^n$ (suite géométrique de raison 1 + t)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Annuités constantes",
+     "md": "Taux annuel t, n versements d'une même annuité a, faits à la **fin** de chaque année :\n- **valeur acquise** juste après le dernier versement : $A=a\\times\\frac{(1+t)^n-1}{t}$ ;\n- **remboursement** d'un emprunt C en n annuités constantes : $a=\\frac{C\\,t}{1-(1+t)^{-n}}$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : intérêts simples et composés",
+     "statement": "Awa place 800 000 FCFA à 5 % par an pendant 4 ans. Calcule le capital final à intérêts simples, puis à intérêts composés.",
+     "steps": [
+      {
+       "md": "Intérêts simples : chaque année 5 % de 800 000 = 40 000 FCFA, donc :",
+       "tex": "C_4=800\\,000\\times(1+4\\times0{,}05)=960\\,000"
+      },
+      {
+       "md": "Intérêts composés : on multiplie par 1,05 chaque année :",
+       "tex": "C_4=800\\,000\\times1{,}05^4=972\\,405"
+      }
+     ],
+     "answer": "**960 000 FCFA** à intérêts simples ; **972 405 FCFA** à intérêts composés."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : épargne par annuités",
+     "statement": "Chaque année, à la fin de l'année, Paul verse 100 000 FCFA sur un compte à 6 %, pendant 5 ans. Quelle somme possède-t-il après le dernier versement ?",
+     "steps": [
+      {
+       "md": "On applique la formule avec a = 100 000, t = 0,06, n = 5 :",
+       "tex": "A=100\\,000\\times\\frac{1{,}06^5-1}{0{,}06}"
+      },
+      {
+       "md": "$1{,}06^5\\approx1{,}338226$, donc $\\frac{1{,}06^5-1}{0{,}06}\\approx5{,}637093$ et A ≈ 563 709 FCFA. Il a versé 500 000 FCFA : les intérêts rapportent environ 63 709 FCFA."
+      }
+     ],
+     "answer": "**≈ 563 709 FCFA** après le dernier versement."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "unit": "FCFA",
+      "bars": [
+       {
+        "label": "Intérêts simples",
+        "value": 700000,
+        "color": "orange"
+       },
+       {
+        "label": "Intérêts composés",
+        "value": 740122,
+        "color": "blue"
+       }
+      ]
+     },
+     "caption": "Capital de 500 000 FCFA placé 10 ans à 4 % : les intérêts composés rapportent plus que les intérêts simples.",
+     "alt": "Deux barres : intérêts simples, 700 000 FCFA, en orange ; intérêts composés, environ 740 122 FCFA, en bleu."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Prendre « augmenter de 5 % » pour « ajouter 0,05 » : c'est **multiplier par 1,05**.\n- Mélanger taux en pourcentage et taux décimal : 5 % = 0,05 dans les formules.\n- Mal compter les termes d'une somme : de $u_0$ à $u_{10}$ il y a **11** termes.\n- Confondre « valeur acquise » (ce qu'on obtient à la fin) et « somme versée » (ce qu'on a déboursé)."
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-maths-a-sui-01"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Une tontine où chaque membre verse une somme fixe à chaque tour ressemble à une suite arithmétique de versements ; une épargne à intérêts composés est une suite géométrique.",
+      "Les chiffres de ces exercices sont fictifs ; les taux réels dépendent de l'établissement financier."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier sur le texte officiel si les annuités (valeur acquise et amortissement) sont au programme de Tle A et avec quelle notation.",
+    "Convention retenue : versements à la fin de chaque période ; certains manuels prennent le début de période.",
+    "Les arrondis : au franc près en général ; à confirmer."
+   ],
+   "exercises": [
+    "bac-maths-a-sui-01",
+    "bac-maths-a-sui-02",
+    "bac-maths-a-sui-03",
+    "bac-maths-a-sui-04",
+    "bac-maths-a-sui-05",
+    "bac-maths-a-sui-06"
+   ],
+   "selfCheck": [
+    "bac-maths-a-sui-q1",
+    "bac-maths-a-sui-q2",
+    "bac-maths-a-sui-q3",
+    "bac-maths-a-sui-q4",
+    "bac-maths-a-sui-q5"
+   ],
+   "prerequisites": [
+    "bac-maths-a-ln-exp"
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "bac-maths-a-sui-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Une élève économise 2 000 FCFA la première semaine, puis 500 FCFA de plus chaque semaine que la précédente. Combien économise-t-elle la 10e semaine ?",
+   "answer": 6500,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "Suite arithmétique de premier terme $u_1=2000$ et de raison 500 : $u_{10}=u_1+9\\times500=2000+4500=6500$ FCFA.",
+   "method": "Du terme 1 au terme 10, il y a 9 écarts.",
+   "mistakes": [
+    "Utiliser 10 × 500 au lieu de 9 × 500."
+   ],
+   "lesson": "bac-maths-a-suites-finance",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-sui-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "$(v_n)$ est géométrique avec $v_0=3$ et $q=2$. Calcule $v_6$.",
+   "answer": 192,
+   "tolerance": 0,
+   "explanation": "$v_6=3\\times2^6=3\\times64=192$.",
+   "method": "$v_n=v_0q^n$.",
+   "mistakes": [
+    "Calculer $(3\\times2)^6$."
+   ],
+   "lesson": "bac-maths-a-suites-finance",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-sui-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "On place 200 000 FCFA à 3 % par an à intérêts composés pendant 2 ans. Quel est le capital final ?",
+   "answer": 212180,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "$200\\,000\\times1{,}03^2=200\\,000\\times1{,}0609=212\\,180$ FCFA.",
+   "method": "Multiplier par 1,03 à chaque année.",
+   "mistakes": [
+    "Calculer 200 000 × 1,06 = 212 000 (intérêts simples)."
+   ],
+   "lesson": "bac-maths-a-suites-finance",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-sui-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Calcule la somme $3+5+7+\\dots+41$ (suite arithmétique de raison 2).",
+   "answer": 440,
+   "tolerance": 0,
+   "explanation": "Nombre de termes : $\\frac{41-3}{2}+1=20$. Somme $=20\\times\\frac{3+41}{2}=20\\times22=440$.",
+   "method": "Compter les termes avant d'appliquer la formule.",
+   "mistakes": [
+    "Trouver 19 termes en oubliant d'ajouter 1."
+   ],
+   "lesson": "bac-maths-a-suites-finance",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-sui-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Chaque année, à la fin de l'année, on verse 50 000 FCFA à 5 % pendant 4 ans. Quelle est la valeur acquise juste après le dernier versement (au franc près) ?",
+   "answer": 215506,
+   "tolerance": 1,
+   "unit": "FCFA",
+   "explanation": "$A=50\\,000\\times\\frac{1{,}05^4-1}{0{,}05}=50\\,000\\times4{,}310125=215\\,506{,}25$, soit environ 215 506 FCFA.",
+   "method": "$A=a\\frac{(1+t)^n-1}{t}$.",
+   "mistakes": [
+    "Calculer 4 × 50 000 = 200 000 sans intérêts."
+   ],
+   "lesson": "bac-maths-a-suites-finance",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-sui-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Mme Fotso emprunte 1 000 000 FCFA au taux annuel de 6 % (donnée fictive) et le rembourse en 4 annuités constantes, la première un an après l'emprunt. On note a l'annuité.",
+   "parts": [
+    {
+     "id": "bac-maths-a-sui-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quel est le montant des intérêts de la première année ?",
+     "explanation": "$1\\,000\\,000\\times0{,}06=60\\,000$ FCFA.",
+     "answer": 60000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "bac-maths-a-sui-06-b",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule l'annuité a, arrondie au franc.",
+     "explanation": "$a=\\frac{1\\,000\\,000\\times0{,}06}{1-1{,}06^{-4}}\\approx288\\,591{,}49$, soit 288 591 FCFA.",
+     "answer": 288591,
+     "tolerance": 1,
+     "unit": "FCFA"
+    },
+    {
+     "id": "bac-maths-a-sui-06-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Avec a = 288 591 FCFA, quel est le coût total du crédit (somme remboursée moins somme empruntée) ?",
+     "explanation": "$4\\times288\\,591=1\\,154\\,364$ et $1\\,154\\,364-1\\,000\\,000=154\\,364$ FCFA.",
+     "answer": 154364,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "bac-maths-a-sui-06-d",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle est la nature de la suite $C_n=1\\,000\\,000\\times1{,}06^n$ (capital dû si on ne remboursait rien) ?",
+     "explanation": "Chaque année on multiplie par 1,06 : suite géométrique de raison 1,06.",
+     "choices": [
+      "Géométrique de raison 1,06",
+      "Arithmétique de raison 60 000",
+      "Géométrique de raison 0,06",
+      "Arithmétique de raison 1,06"
+     ],
+     "answer": 0
+    }
+   ],
+   "method": "Appliquer la formule de l'annuité constante, puis calculer le total remboursé.",
+   "mistakes": [
+    "Oublier que le taux se met sous forme décimale : 0,06 et non 6."
+   ],
+   "lesson": "bac-maths-a-suites-finance",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-sui-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Une suite arithmétique de premier terme 4 et de raison 3 a pour terme $u_5$ (premier terme $u_0$) :",
+   "choices": [
+    "19",
+    "15",
+    "12",
+    "$4\\times3^5$"
+   ],
+   "answer": 0,
+   "explanation": "$u_5=4+5\\times3=19$.",
+   "lesson": "bac-maths-a-suites-finance",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-sui-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Augmenter un capital de 8 % revient à le multiplier par :",
+   "choices": [
+    "1,08",
+    "0,08",
+    "8",
+    "0,92"
+   ],
+   "answer": 0,
+   "explanation": "100 % + 8 % = 108 % = 1,08.",
+   "lesson": "bac-maths-a-suites-finance",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-sui-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Un capital de 100 000 FCFA à 10 % composés pendant 2 ans devient :",
+   "choices": [
+    "121 000 FCFA",
+    "120 000 FCFA",
+    "110 000 FCFA",
+    "100 200 FCFA"
+   ],
+   "answer": 0,
+   "explanation": "$100\\,000\\times1{,}1^2=121\\,000$ ; les intérêts simples auraient donné 120 000.",
+   "lesson": "bac-maths-a-suites-finance",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-sui-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Une suite géométrique de raison 3 et de premier terme 2 : le terme $v_3$ vaut :",
+   "choices": [
+    "54",
+    "18",
+    "27",
+    "24"
+   ],
+   "answer": 0,
+   "explanation": "$v_3=2\\times3^3=54$.",
+   "lesson": "bac-maths-a-suites-finance",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-sui-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "La somme $1+2+3+\\dots+100$ vaut :",
+   "choices": [
+    "5 050",
+    "5 000",
+    "10 100",
+    "5 150"
+   ],
+   "answer": 0,
+   "explanation": "$100\\times\\frac{1+100}{2}=5\\,050$.",
+   "lesson": "bac-maths-a-suites-finance",
+   "source": "Exercice original, style Bac A"
+  }
+ ]
+}

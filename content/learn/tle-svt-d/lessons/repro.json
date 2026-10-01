@@ -1,0 +1,457 @@
+{
+ "chapter": "tle-svt-d-ch-repro",
+ "lessons": [
+  {
+   "id": "tle-svt-d-repro",
+   "title": "Reproduction humaine et régulation hormonale",
+   "minutes": 40,
+   "programRef": "Tle D — Reproduction humaine (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale, brouillon IA ; à relire par un enseignant",
+   "objectives": [
+    "Décrire gamètes, fécondation et grossesse.",
+    "Expliquer le cycle féminin et sa régulation hormonale.",
+    "Décrire la régulation chez l'homme.",
+    "Expliquer les principes de la contraception."
+   ],
+   "exercises": [
+    "tle-svt-d-repro-01",
+    "tle-svt-d-repro-02",
+    "tle-svt-d-repro-03",
+    "tle-svt-d-repro-04",
+    "tle-svt-d-repro-05",
+    "tle-svt-d-repro-06"
+   ],
+   "selfCheck": [
+    "tle-svt-d-rep-q1",
+    "tle-svt-d-rep-q2",
+    "tle-svt-d-rep-q3",
+    "tle-svt-d-rep-q4",
+    "tle-svt-d-rep-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Objectifs",
+     "md": "Décrire les organes et les gamètes ; expliquer le cycle ovarien et utérin et sa régulation hormonale ; décrire la régulation chez l'homme ; expliquer la grossesse et les principes de la contraception."
+    },
+    {
+     "type": "heading",
+     "text": "1. Organes et gamètes"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Chez l'homme et chez la femme",
+     "md": "**Homme** : les testicules fabriquent les spermatozoïdes (dans les tubes séminifères) et la **testostérone** ; les voies génitales (épididyme, canal déférent) les conduisent. **Femme** : les ovaires libèrent un ovocyte et fabriquent les **œstrogènes** et la **progestérone** ; la trompe est le lieu habituel de la **fécondation** ; l'utérus accueille l'embryon."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Les gamètes",
+     "md": "Le spermatozoïde est une petite cellule mobile (23 chromosomes) ; l'ovocyte est une grosse cellule immobile (23 chromosomes). La fécondation, fusion des deux gamètes, donne l'**œuf** (46 chromosomes). La production de spermatozoïdes est continue à partir de la puberté ; celle d'ovocytes mûrs est **cyclique**."
+    },
+    {
+     "type": "heading",
+     "text": "2. Le cycle chez la femme"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Cycle ovarien et cycle utérin",
+     "md": "Le cycle dure en moyenne **28 jours** (il varie d'une femme à l'autre). Le jour 1 est le premier jour des règles. **Phase folliculaire** : un follicule grandit dans l'ovaire. **Ovulation** : libération de l'ovocyte, environ **14 jours avant les règles suivantes**. **Phase lutéale** : le follicule vide devient le **corps jaune**. Dans l'utérus, l'**endomètre** s'épaissit puis, si aucun embryon ne s'implante, est éliminé : ce sont les **règles**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 28,
+      "ymin": 0,
+      "ymax": 1.4,
+      "grid": 7,
+      "xlabel": "jours du cycle",
+      "ylabel": "taux (schéma)",
+      "w": 420,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "0.25+0.75*exp((x-13)*(13-x)/3)+0.4*exp((x-21)*(21-x)/20)",
+        "color": "blue",
+        "label": "œstrogènes"
+       },
+       {
+        "expr": "exp((x-21)*(21-x)/12)",
+        "color": "red",
+        "label": "progestérone"
+       }
+      ],
+      "points": [
+       {
+        "x": 14,
+        "y": 0,
+        "label": "ovulation",
+        "color": "green"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 14,
+        "y1": 0,
+        "x2": 14,
+        "y2": 1.4,
+        "color": "green",
+        "dash": true
+       }
+      ]
+     },
+     "caption": "Variation schématique des taux d'œstrogènes et de progestérone au cours d'un cycle de 28 jours (valeurs relatives).",
+     "alt": "Deux courbes sur 28 jours. Les œstrogènes montent vers un pic autour du jour 13, retombent, puis remontent un peu. La progestérone est basse jusqu'à l'ovulation, culmine vers le jour 21 puis redescend."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Régulation hormonale",
+     "md": "L'**hypothalamus** commande l'**hypophyse**, qui sécrète **FSH** (croissance des follicules) et **LH**. Les follicules produisent des **œstrogènes**. Un taux élevé d'œstrogènes en fin de phase folliculaire déclenche le **pic de LH** (rétrocontrôle positif) qui provoque l'**ovulation**. Le corps jaune sécrète **progestérone** (et œstrogènes) qui freinent FSH et LH (rétrocontrôle négatif)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : date d'ovulation",
+     "statement": "Fictif : le cycle de Rosine dure 32 jours. À quel jour l'ovulation a-t-elle lieu approximativement ? Que se passe-t-il si aucun embryon ne s'implante ?",
+     "steps": [
+      {
+       "md": "L'ovulation a lieu environ 14 jours avant les règles suivantes, soit au jour :",
+       "tex": "32 - 14 = 18"
+      },
+      {
+       "md": "Sans embryon, le corps jaune dégénère : les taux de progestérone et d'œstrogènes chutent."
+      },
+      {
+       "md": "L'endomètre n'est plus entretenu : il est éliminé (règles) et le cycle recommence."
+      }
+     ],
+     "answer": "Ovulation vers le **jour 18**, puis chute hormonale et règles."
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-svt-d-repro-01"
+    },
+    {
+     "type": "heading",
+     "text": "3. Chez l'homme, grossesse et contraception"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Régulation chez l'homme",
+     "md": "L'hypophyse sécrète **LH** (qui stimule la production de **testostérone** par les cellules interstitielles du testicule) et **FSH** (qui soutient la spermatogenèse). La testostérone exerce un **rétrocontrôle négatif** sur l'hypothalamus et l'hypophyse : le taux d'hormones est ainsi maintenu à peu près constant."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Fécondation, nidation, grossesse",
+     "md": "La fécondation a lieu dans la trompe. L'œuf se divise, descend vers l'utérus et s'y fixe environ une semaine après la fécondation : c'est la **nidation**. L'embryon sécrète l'hormone **hCG**, qui maintient le corps jaune : les taux de progestérone restent élevés, **pas de règles**. Les tests de grossesse détectent l'hCG. Le **placenta** assure les échanges entre mère et fœtus."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Contraception : principes",
+     "md": "- **Pilule œstroprogestative** : hormones de synthèse qui maintiennent des taux freinant FSH et LH : **pas d'ovulation**.\n- **Stérilet** (dispositif intra-utérin) : empêche l'implantation ou la fécondation.\n- **Préservatif** : barrière ; **seul** moyen qui protège aussi des infections sexuellement transmissibles (dont le VIH).\n- Les méthodes dites naturelles (calcul de la période fertile) sont **peu fiables**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : expliquer la pilule",
+     "statement": "Pourquoi une femme qui prend la pilule ne peut-elle pas ovuler ?",
+     "steps": [
+      {
+       "md": "La pilule apporte en continu des hormones qui agissent comme les œstrogènes et la progestérone naturelles."
+      },
+      {
+       "md": "Ces taux hormonaux exercent un **rétrocontrôle négatif** sur l'hypothalamus et l'hypophyse : FSH et LH restent faibles."
+      },
+      {
+       "md": "Sans croissance du follicule ni pic de LH, il n'y a **pas d'ovulation** : aucun ovocyte à féconder."
+      }
+     ],
+     "answer": "La pilule bloque l'ovulation par rétrocontrôle négatif sur FSH et LH."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que l'ovulation a toujours lieu le 14e jour : elle a lieu environ **14 jours avant les règles suivantes**.\n- Confondre l'ovulation (libération de l'ovocyte) et les règles (élimination de l'endomètre).\n- Dire que la pilule protège du VIH : seul le **préservatif** protège.\n- Confondre FSH/LH (hypophyse) et œstrogènes/progestérone (ovaire)."
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-svt-d-repro-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-svt-d-repro-03"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Pour le choix d'une contraception, un médecin ou un centre de santé conseille chacun selon sa situation ; ce cours ne remplace pas un avis médical.",
+      "Les durées exactes (survie de l'ovocyte, des spermatozoïdes) varient et ne doivent pas servir de méthode contraceptive."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Ovulation « 14 jours avant les règles suivantes » : convention courante, à confronter à celle du manuel.",
+    "Vérifier le niveau de détail attendu (rétrocontrôles, ovogenèse, spermatogenèse, PMA) dans le programme officiel de Tle D.",
+    "Contenu sensible (sexualité, santé) : ton neutre et factuel, à faire relire ; ne pas présenter la contraception naturelle comme fiable."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "tle-svt-d-repro-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-repro",
+   "prompt": "Où a lieu habituellement la fécondation ?",
+   "choices": [
+    "Dans la trompe",
+    "Dans le vagin",
+    "Dans l'endomètre",
+    "Dans le testicule"
+   ],
+   "answer": 0,
+   "explanation": "L'ovocyte libéré est capté par la trompe, où il rencontre les spermatozoïdes.",
+   "method": "Suivre le trajet de l'ovocyte.",
+   "mistakes": [
+    "Penser que la fécondation a lieu dans l'utérus."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-svt-d-repro-02",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "lesson": "tle-svt-d-repro",
+   "prompt": "Associe chaque hormone à son lieu de production.",
+   "pairs": [
+    [
+     "FSH",
+     "Hypophyse"
+    ],
+    [
+     "Œstrogènes",
+     "Follicule ovarien"
+    ],
+    [
+     "Progestérone",
+     "Corps jaune"
+    ],
+    [
+     "Testostérone",
+     "Testicule"
+    ]
+   ],
+   "explanation": "FSH et LH viennent de l'hypophyse ; les œstrogènes sont produits par le follicule ; la progestérone par le corps jaune ; la testostérone par le testicule.",
+   "method": "Hormone de commande (hypophyse) / hormone sexuelle (gonade).",
+   "mistakes": [
+    "Attribuer la FSH à l'ovaire."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-svt-d-repro-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-repro",
+   "prompt": "La pilule contraceptive protège aussi contre l'infection par le VIH.",
+   "answer": false,
+   "explanation": "Faux : la pilule agit sur l'ovulation, elle ne forme aucune barrière contre les virus. Seul le préservatif protège des IST.",
+   "method": "Distinguer contraception et protection contre les IST.",
+   "mistakes": [
+    "Penser qu'un contraceptif hormonal protège du VIH."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-svt-d-repro-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 1,
+   "points": 2,
+   "lesson": "tle-svt-d-repro",
+   "prompt": "Fictif : le cycle d'une femme dure 35 jours. En supposant que l'ovulation survient 14 jours avant les règles suivantes, à quel jour du cycle a-t-elle lieu ?",
+   "answer": 21,
+   "tolerance": 0,
+   "explanation": "35 − 14 = 21 : l'ovulation a lieu vers le jour 21.",
+   "method": "Ovulation = durée du cycle − 14.",
+   "mistakes": [
+    "Répondre 14 sans tenir compte de la durée du cycle."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-svt-d-repro-05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "tle-svt-d-repro",
+   "prompt": "Quel événement hormonal déclenche l'ovulation ?",
+   "choices": [
+    "Un pic de progestérone",
+    "Un pic de LH",
+    "Une chute de FSH",
+    "Un pic de testostérone"
+   ],
+   "answer": 1,
+   "explanation": "Un taux élevé d'œstrogènes en fin de phase folliculaire provoque, par rétrocontrôle positif, un pic de LH qui déclenche l'ovulation.",
+   "method": "Retrouver l'enchaînement œstrogènes, puis LH, puis ovulation.",
+   "mistakes": [
+    "Citer la progestérone, qui est élevée après l'ovulation."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-svt-d-repro-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "tle-svt-d-repro",
+   "prompt": "Fictif : chez une guenon, on mesure le taux sanguin de FSH (en unités arbitraires). Avant toute intervention : 10 u. Après ablation des ovaires : 40 u. Puis, après injection continue d'une dose modérée d'œstrogènes à l'animal sans ovaires : 12 u.",
+   "parts": [
+    {
+     "id": "tle-svt-d-repro-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Par quel facteur le taux de FSH est-il multiplié après l'ablation des ovaires ?",
+     "answer": 4,
+     "tolerance": 0,
+     "explanation": "40 ÷ 10 = 4."
+    },
+    {
+     "id": "tle-svt-d-repro-06-b",
+     "kind": "mcq",
+     "points": 1.5,
+     "prompt": "Quelle conclusion tire-t-on de ces résultats ?",
+     "choices": [
+      "Les ovaires stimulent directement la sécrétion de FSH",
+      "Les œstrogènes sont produits par l'hypophyse",
+      "Les ovaires exercent un rétrocontrôle négatif sur la sécrétion de FSH, par les œstrogènes",
+      "La FSH est produite par les ovaires"
+     ],
+     "answer": 2,
+     "explanation": "L'ablation des ovaires fait monter la FSH : ils la freinaient. L'injection d'œstrogènes la ramène presque à la normale : ce sont les œstrogènes qui exercent le freinage."
+    },
+    {
+     "id": "tle-svt-d-repro-06-c",
+     "kind": "open",
+     "points": 2.5,
+     "prompt": "En t'appuyant sur ces résultats, explique le principe d'une pilule œstroprogestative.",
+     "model": "Les hormones de la pilule jouent le même rôle que les hormones ovariennes : elles freinent l'hypophyse. FSH et LH restent faibles, les follicules ne mûrissent pas et le pic de LH n'a pas lieu. Il n'y a donc pas d'ovulation.",
+     "rubric": [
+      "Hormones de synthèse = rôle des hormones ovariennes",
+      "Rétrocontrôle négatif sur FSH et LH",
+      "Pas de maturation folliculaire, pas de pic de LH, pas d'ovulation"
+     ],
+     "explanation": "Le raisonnement transpose l'expérience (œstrogènes qui freinent la FSH) au principe de la pilule."
+    }
+   ],
+   "method": "Comparer les trois situations deux à deux pour identifier le rôle de l'organe puis de l'hormone.",
+   "mistakes": [
+    "Conclure que les œstrogènes stimulent la FSH."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-svt-d-rep-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-repro",
+   "prompt": "Quel jour commence un cycle menstruel ?",
+   "choices": [
+    "Le jour de l'ovulation",
+    "Le 14e jour",
+    "Le dernier jour des règles",
+    "Le premier jour des règles"
+   ],
+   "answer": 3,
+   "explanation": "Le jour 1 est le premier jour des règles."
+  },
+  {
+   "id": "tle-svt-d-rep-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-repro",
+   "prompt": "Le corps jaune sécrète surtout :",
+   "choices": [
+    "la progestérone",
+    "la FSH",
+    "la testostérone",
+    "l'insuline"
+   ],
+   "answer": 0,
+   "explanation": "Il se forme après l'ovulation à partir du follicule vide."
+  },
+  {
+   "id": "tle-svt-d-rep-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-repro",
+   "prompt": "L'hormone détectée par un test de grossesse est :",
+   "choices": [
+    "la LH",
+    "l'hCG",
+    "la testostérone",
+    "la FSH seule"
+   ],
+   "answer": 1,
+   "explanation": "L'hCG est produite par l'embryon puis le placenta."
+  },
+  {
+   "id": "tle-svt-d-rep-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-repro",
+   "prompt": "La testostérone exerce sur l'hypophyse :",
+   "choices": [
+    "un rétrocontrôle positif sans effet",
+    "aucun effet",
+    "un rétrocontrôle négatif",
+    "un effet de fabrication de FSH"
+   ],
+   "answer": 2,
+   "explanation": "Un taux élevé de testostérone freine la sécrétion de LH."
+  },
+  {
+   "id": "tle-svt-d-rep-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-repro",
+   "prompt": "Quel moyen protège à la fois d'une grossesse et du VIH ?",
+   "choices": [
+    "La pilule",
+    "Le calcul de la période fertile",
+    "Le stérilet seul",
+    "Le préservatif"
+   ],
+   "answer": 3,
+   "explanation": "Le préservatif forme une barrière contre les spermatozoïdes et contre les agents infectieux."
+  }
+ ]
+}

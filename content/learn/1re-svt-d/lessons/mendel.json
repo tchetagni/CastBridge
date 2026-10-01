@@ -1,0 +1,758 @@
+{
+ "chapter": "1re-svt-d-ch-mendel",
+ "lessons": [
+  {
+   "id": "1re-svt-d-mendel",
+   "title": "Génétique mendélienne : monohybridisme et dihybridisme",
+   "minutes": 40,
+   "programRef": "1re D — Génétique mendélienne (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Employer le vocabulaire de la génétique.",
+    "Construire un échiquier pour un croisement.",
+    "Interpréter les résultats d'un monohybridisme et d'un dihybridisme.",
+    "Utiliser le croisement test et un arbre généalogique."
+   ],
+   "prerequisites": [
+    "1re-svt-d-mitose"
+   ],
+   "exercises": [
+    "1re-svt-d-men-01",
+    "1re-svt-d-men-02",
+    "1re-svt-d-men-03",
+    "1re-svt-d-men-04",
+    "1re-svt-d-men-05",
+    "1re-svt-d-men-06"
+   ],
+   "selfCheck": [
+    "1re-svt-d-men-q1",
+    "1re-svt-d-men-q2",
+    "1re-svt-d-men-q3",
+    "1re-svt-d-men-q4",
+    "1re-svt-d-men-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Vocabulaire de la génétique",
+     "md": "- **Allèles** : versions différentes d'un même gène.\n- **Homozygote** (JJ, jj) : deux allèles identiques ; **hétérozygote** (Jj) : deux allèles différents.\n- Allèle **dominant** : s'exprime même à l'état hétérozygote ; **récessif** : ne s'exprime que s'il est en double exemplaire.\n- **Génotype** : les allèles ; **phénotype** : le caractère observé.\n- **Lignée pure** : individus homozygotes. **F1**, **F2** : 1re et 2e générations."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Monohybridisme : un seul caractère",
+     "md": "On croise deux lignées pures qui diffèrent par **un** caractère (JJ × jj) :\n- **F1** : tous Jj, tous de phénotype dominant (**uniformité**) ;\n- **F2** (Jj × Jj) : **3/4** de phénotype dominant, **1/4** de phénotype récessif ; génotypes 1/4 JJ, 1/2 Jj, 1/4 jj.\nLes deux allèles d'un individu se **séparent** (disjonction) lors de la formation des gamètes."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : l'échiquier de croisement",
+     "md": "1. Écrire les génotypes des parents.\n2. Écrire les **gamètes** de chaque parent (un allèle par gène, jamais deux allèles du même gène).\n3. Dresser l'**échiquier** : gamètes d'un parent en lignes, de l'autre en colonnes ; chaque case = un génotype.\n4. Compter les génotypes puis les phénotypes ; donner les proportions.\nLes gamètes sont supposés équiprobables."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Le croisement test (test-cross)",
+     "md": "Pour connaître le génotype d'un individu de phénotype dominant, on le croise avec un individu **homozygote récessif** (jj) :\n- tous les descendants dominants : l'individu testé est **homozygote** JJ ;\n- moitié dominants, moitié récessifs : il est **hétérozygote** Jj.\nLe parent jj ne donne que des gamètes j : les descendants révèlent les gamètes de l'autre parent."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Dihybridisme : deux caractères indépendants",
+     "md": "Si les deux gènes sont sur **deux paires de chromosomes différentes**, ils se transmettent indépendamment. Une F1 double hétérozygote JjRr donne **4 types de gamètes** JR, Jr, jR, jr à 1/4 chacun.\nEn F2 : **9/16** (dominant, dominant), **3/16**, **3/16** et **1/16** (récessif, récessif) : c'est la proportion **9 : 3 : 3 : 1**.\nEn croisement test de la F1 : **1 : 1 : 1 : 1**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 360,
+      "h": 210,
+      "items": [
+       {
+        "t": "text",
+        "x": 105.0,
+        "y": 28,
+        "text": "JR",
+        "size": 15,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 175.0,
+        "y": 28,
+        "text": "Jr",
+        "size": 15,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 245.0,
+        "y": 28,
+        "text": "jR",
+        "size": 15,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 315.0,
+        "y": 28,
+        "text": "jr",
+        "size": 15,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 35.0,
+        "y": 65.0,
+        "text": "JR",
+        "size": 15,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 35.0,
+        "y": 105.0,
+        "text": "Jr",
+        "size": 15,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 35.0,
+        "y": 145.0,
+        "text": "jR",
+        "size": 15,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 35.0,
+        "y": 185.0,
+        "text": "jr",
+        "size": 15,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 70,
+        "y": 40,
+        "w": 70,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 105.0,
+        "y": 65.0,
+        "text": "JJRR",
+        "size": 14,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 140,
+        "y": 40,
+        "w": 70,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 175.0,
+        "y": 65.0,
+        "text": "JJRr",
+        "size": 14,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210,
+        "y": 40,
+        "w": 70,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 245.0,
+        "y": 65.0,
+        "text": "JjRR",
+        "size": 14,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 40,
+        "w": 70,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 315.0,
+        "y": 65.0,
+        "text": "JjRr",
+        "size": 14,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 70,
+        "y": 80,
+        "w": 70,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 105.0,
+        "y": 105.0,
+        "text": "JJRr",
+        "size": 14,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 140,
+        "y": 80,
+        "w": 70,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 175.0,
+        "y": 105.0,
+        "text": "JJrr",
+        "size": 14,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210,
+        "y": 80,
+        "w": 70,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 245.0,
+        "y": 105.0,
+        "text": "JjRr",
+        "size": 14,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 80,
+        "w": 70,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 315.0,
+        "y": 105.0,
+        "text": "Jjrr",
+        "size": 14,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 70,
+        "y": 120,
+        "w": 70,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 105.0,
+        "y": 145.0,
+        "text": "JjRR",
+        "size": 14,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 140,
+        "y": 120,
+        "w": 70,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 175.0,
+        "y": 145.0,
+        "text": "JjRr",
+        "size": 14,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210,
+        "y": 120,
+        "w": 70,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 245.0,
+        "y": 145.0,
+        "text": "jjRR",
+        "size": 14,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 120,
+        "w": 70,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 315.0,
+        "y": 145.0,
+        "text": "jjRr",
+        "size": 14,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 70,
+        "y": 160,
+        "w": 70,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 105.0,
+        "y": 185.0,
+        "text": "JjRr",
+        "size": 14,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 140,
+        "y": 160,
+        "w": 70,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 175.0,
+        "y": 185.0,
+        "text": "Jjrr",
+        "size": 14,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210,
+        "y": 160,
+        "w": 70,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 245.0,
+        "y": 185.0,
+        "text": "jjRr",
+        "size": 14,
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 160,
+        "w": 70,
+        "h": 40,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "green"
+       },
+       {
+        "t": "text",
+        "x": 315.0,
+        "y": 185.0,
+        "text": "jjrr",
+        "size": 14,
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Échiquier de la F2 d'un dihybridisme (JjRr × JjRr) : 16 cases. Couleurs : jaune clair = jaune-lisse (9), orange = jaune-ridé (3), vert clair = vert-lisse (3), vert foncé = vert-ridé (1).",
+     "alt": "Tableau de 4 lignes et 4 colonnes. Les entêtes sont les gamètes JR, Jr, jR, jr. Chaque case contient un génotype de F2. Les cases sont colorées selon quatre phénotypes dans les proportions 9, 3, 3 et 1."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : raisonner sur un arbre généalogique",
+     "md": "Pour savoir si un caractère est dominant ou récessif :\n- deux parents **porteurs du caractère** qui ont un enfant **sans** ce caractère : le caractère est **dominant** ;\n- deux parents **sans** le caractère qui ont un enfant **avec** : le caractère est **récessif**.\nOn déduit alors les génotypes, puis on calcule les risques avec un échiquier."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-svt-d-men-01"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : monohybridisme",
+     "statement": "Chez le pois, la graine jaune (J) domine la graine verte (j). On croise deux lignées pures, jaune et verte, puis on croise les plantes de F1 entre elles. Donne les résultats de F1 et de F2 pour 800 plantes de F2.",
+     "steps": [
+      {
+       "md": "Parents JJ × jj : gamètes J et j. F1 : toutes Jj, de phénotype jaune."
+      },
+      {
+       "md": "F1 × F1 : gamètes J et j de chaque côté, échiquier : JJ, Jj, jJ, jj, soit 3 cases jaunes (JJ, Jj, Jj) pour 1 verte (jj)."
+      },
+      {
+       "md": "Pour 800 plantes en F2 :",
+       "tex": "\\frac{3}{4} \\times 800 = 600 \\text{ jaunes et } \\frac{1}{4} \\times 800 = 200 \\text{ vertes}"
+      }
+     ],
+     "answer": "F1 : 100 % jaunes ; F2 : **600 jaunes et 200 vertes** (proportion 3 : 1)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : dihybridisme",
+     "statement": "On croise des pois jaune-lisse (J, R dominants) de lignée pure avec des pois vert-ridé. Les deux gènes sont indépendants. Donne la F1, les gamètes de F1 et la F2 pour 1 600 plantes.",
+     "steps": [
+      {
+       "md": "Parents JJRR × jjrr : F1 toutes JjRr, jaune-lisse. Ses gamètes : JR, Jr, jR, jr (1/4 chacun)."
+      },
+      {
+       "md": "L'échiquier à 16 cases donne : 9 jaune-lisse, 3 jaune-ridé, 3 vert-lisse, 1 vert-ridé."
+      },
+      {
+       "md": "Pour 1 600 plantes (un seizième = 100) :",
+       "tex": "900 - 300 - 300 - 100"
+      }
+     ],
+     "answer": "F2 : **900 jaune-lisse, 300 jaune-ridé, 300 vert-lisse, 100 vert-ridé**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Écrire des gamètes à deux allèles du même gène (Jj) : un gamète ne porte **qu'un** allèle de chaque gène.\n- Penser que le caractère dominant est « le plus fréquent » : dominant ne veut pas dire majoritaire dans la population.\n- Utiliser 9 : 3 : 3 : 1 sans vérifier que la F1 est **double hétérozygote** et que les gènes sont indépendants.\n- Oublier que Jj a le même phénotype que JJ.\n- Appliquer exactement les proportions à de petits effectifs : ce sont des valeurs théoriques."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-svt-d-men-05"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Les proportions réelles s'écartent un peu des valeurs théoriques ; l'écart diminue quand l'effectif augmente.",
+      "Si les deux gènes sont sur le **même** chromosome (gènes liés), les résultats ne sont plus 9 : 3 : 3 : 1 ; le crossing-over explique les gamètes recombinés.",
+      "Maladies liées au chromosome X (hémophilie, daltonisme) : l'hérédité diffère selon le sexe."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Codominance, dominance incomplète, gènes liés et hérédité liée au sexe : au programme de 1re D ou de Tle ? À vérifier.",
+    "Noms des « lois de Mendel » et numérotation : conventions à confirmer avec l'enseignant.",
+    "Notation des allèles (J/j, R/r, A/S) : adapter à celle des manuels utilisés en classe."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "1re-svt-d-men-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-svt-d-mendel",
+   "prompt": "Un individu hétérozygote pour un gène à deux allèles A et a a pour génotype :",
+   "choices": [
+    "AA (deux allèles dominants)",
+    "Aa (deux allèles différents)",
+    "aa (deux allèles récessifs)",
+    "A (un seul allèle)"
+   ],
+   "answer": 1,
+   "explanation": "Hétérozygote = deux allèles différents : Aa. AA et aa sont homozygotes.",
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-men-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-svt-d-mendel",
+   "prompt": "On croise deux individus Aa. Quel pourcentage de leurs descendants est aa ? (réponse en %)",
+   "answer": 25,
+   "tolerance": 0,
+   "unit": "%",
+   "explanation": "Gamètes A et a de chaque côté : échiquier AA, Aa, Aa, aa. Une case sur quatre est aa, soit 25 %.",
+   "method": "Un échiquier 2 × 2 : 1/4 aa.",
+   "mistakes": [
+    "Répondre 50 % : c'est la proportion des hétérozygotes."
+   ],
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-men-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-svt-d-mendel",
+   "prompt": "Un individu de phénotype dominant est forcément homozygote.",
+   "answer": false,
+   "explanation": "Faux : un individu Aa est hétérozygote et a pourtant le phénotype dominant. Le croisement test permet de distinguer AA de Aa.",
+   "mistakes": [
+    "Confondre phénotype et génotype."
+   ],
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-men-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "1re-svt-d-mendel",
+   "prompt": "Dans la F2 d'un dihybridisme avec gènes indépendants (JjRr × JjRr), on obtient 1 600 plantes. Combien de plantes sont vert-ridé (double récessif) ?",
+   "answer": 100,
+   "tolerance": 0,
+   "explanation": "Le double récessif représente 1/16 de la F2 : 1 600 ÷ 16 = 100 plantes.",
+   "method": "Proportion 1/16 appliquée à l'effectif.",
+   "mistakes": [
+    "Utiliser 1/4 au lieu de 1/16.",
+    "Répondre 300 (c'est le nombre de vert-lisse)."
+   ],
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-men-05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "1re-svt-d-mendel",
+   "prompt": "On croise une drosophile à ailes longues (dominant, L) avec une drosophile à ailes vestigiales (récessif, l) : la descendance compte 52 individus à ailes longues et 48 à ailes vestigiales. Quel est le génotype du parent à ailes longues ?",
+   "choices": [
+    "LL (homozygote)",
+    "ll",
+    "On ne peut pas savoir",
+    "Ll (hétérozygote)"
+   ],
+   "answer": 3,
+   "explanation": "Le parent à ailes vestigiales est ll et ne donne que des gamètes l. La moitié environ de descendants vestigiaux (ll) prouve que l'autre parent donne des gamètes l : il est hétérozygote Ll. Avec LL, tous les descendants auraient les ailes longues.",
+   "mistakes": [
+    "Conclure LL parce que le phénotype est dominant."
+   ],
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-men-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "1re-svt-d-mendel",
+   "prompt": "La drépanocytose est due à un allèle S de l'hémoglobine, l'allèle normal étant A. Deux parents en bonne santé ont un enfant atteint de drépanocytose (génotype SS). On étudie la transmission de cette maladie, de transmission autosomique.",
+   "method": "Déduire dominance et génotypes de l'arbre, puis échiquier.",
+   "mistakes": [
+    "Confondre « sain » et « non porteur » : AS est sain mais porteur."
+   ],
+   "source": "Exercice original, style Probatoire",
+   "parts": [
+    {
+     "id": "1re-svt-d-men-06-a",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Que peut-on dire de l'allèle S ?",
+     "choices": [
+      "Il est récessif",
+      "Il est dominant",
+      "Il est lié au sexe",
+      "On ne peut rien dire"
+     ],
+     "answer": 0,
+     "explanation": "Deux parents sains ont un enfant malade : l'allèle responsable de la maladie était présent mais ne s'exprimait pas chez les parents. Il est donc récessif."
+    },
+    {
+     "id": "1re-svt-d-men-06-b",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quel est le génotype des deux parents ?",
+     "choices": [
+      "Tous les deux AS",
+      "Tous les deux AA",
+      "L'un AA, l'autre SS",
+      "Tous les deux SS"
+     ],
+     "answer": 0,
+     "explanation": "L'enfant SS a reçu un allèle S de chaque parent ; les parents sont sains donc ils ont aussi l'allèle A : ils sont AS."
+    },
+    {
+     "id": "1re-svt-d-men-06-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quel est le risque (en %) que le prochain enfant du couple soit atteint ?",
+     "answer": 25,
+     "tolerance": 0,
+     "unit": "%",
+     "explanation": "Échiquier AS × AS : AA, AS, SA, SS. Une case sur quatre est SS : risque de 25 %."
+    },
+    {
+     "id": "1re-svt-d-men-06-d",
+     "kind": "open",
+     "points": 2,
+     "prompt": "Dresse l'échiquier du croisement AS × AS et donne la proportion d'enfants sains non porteurs de l'allèle S.",
+     "model": "Gamètes des parents : A et S pour chacun. Échiquier : AA, AS, SA, SS. Génotypes : 1/4 AA, 1/2 AS, 1/4 SS. Enfants sains non porteurs : AA, soit 1/4 (25 %).",
+     "rubric": [
+      "Gamètes A et S pour chaque parent, échiquier à 4 cases (1 point).",
+      "Proportions 1/4, 1/2, 1/4 et conclusion : 25 % d'enfants AA (1 point)."
+     ],
+     "explanation": "Un échiquier 2 × 2 permet de visualiser la répartition."
+    }
+   ]
+  },
+  {
+   "id": "1re-svt-d-men-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-svt-d-mendel",
+   "prompt": "Quelle proportion de phénotypes dominants obtient-on en F2 d'un monohybridisme ?",
+   "choices": [
+    "3/4",
+    "1/2",
+    "1/4",
+    "9/16"
+   ],
+   "answer": 0,
+   "explanation": "F2 : 3/4 de phénotype dominant et 1/4 de phénotype récessif.",
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-men-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-svt-d-mendel",
+   "prompt": "Combien de types de gamètes produit un individu AaBb (gènes indépendants) ?",
+   "choices": [
+    "2",
+    "4",
+    "8",
+    "16"
+   ],
+   "answer": 1,
+   "explanation": "Quatre gamètes : AB, Ab, aB, ab.",
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-men-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-svt-d-mendel",
+   "prompt": "Un croisement test (test-cross) utilise :",
+   "choices": [
+    "un parent hétérozygote",
+    "deux lignées pures dominantes",
+    "un parent homozygote récessif",
+    "un individu de F2 au hasard"
+   ],
+   "answer": 2,
+   "explanation": "On croise l'individu à tester avec un homozygote récessif.",
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-men-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-svt-d-mendel",
+   "prompt": "La F2 d'un dihybridisme présente les proportions :",
+   "choices": [
+    "9 : 3 : 3 : 1",
+    "3 : 1",
+    "1 : 1 : 1 : 1",
+    "1 : 2 : 1"
+   ],
+   "answer": 0,
+   "explanation": "9/16, 3/16, 3/16, 1/16 pour deux gènes indépendants.",
+   "source": "Exercice original, style Probatoire"
+  },
+  {
+   "id": "1re-svt-d-men-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-svt-d-mendel",
+   "prompt": "Le génotype d'un individu homozygote récessif pour le gène R est :",
+   "choices": [
+    "Rr (allèles différents)",
+    "RR (deux allèles dominants)",
+    "R (un seul allèle)",
+    "rr (deux allèles récessifs)"
+   ],
+   "answer": 3,
+   "explanation": "Homozygote récessif : deux allèles récessifs identiques, rr.",
+   "source": "Exercice original, style Probatoire"
+  }
+ ]
+}

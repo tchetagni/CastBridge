@@ -1,0 +1,446 @@
+{
+ "chapter": "bac-physique-cd-complements-ch-rlc",
+ "lessons": [
+  {
+   "id": "bac-physique-cd-complements-rlc",
+   "title": "Circuits RLC série : oscillations et résonance",
+   "minutes": 45,
+   "programRef": "Tle C/D — Oscillations électriques libres et amorties ; régime sinusoïdal forcé ; résonance (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Établir et exploiter la période propre d'un circuit LC et la conservation de l'énergie.",
+    "Reconnaître les régimes d'un circuit RLC libre.",
+    "Calculer impédance, intensité et phase en régime forcé.",
+    "Déterminer fréquence de résonance, facteur de qualité et bande passante."
+   ],
+   "prerequisites": [
+    "bac-physique-cd-complements-induction"
+   ],
+   "exercises": [
+    "bac-physique-cd-complements-rlc-01",
+    "bac-physique-cd-complements-rlc-02",
+    "bac-physique-cd-complements-rlc-03",
+    "bac-physique-cd-complements-rlc-04",
+    "bac-physique-cd-complements-rlc-05",
+    "bac-physique-cd-complements-rlc-06"
+   ],
+   "selfCheck": [
+    "bac-physique-cd-complements-rlc-q1",
+    "bac-physique-cd-complements-rlc-q2",
+    "bac-physique-cd-complements-rlc-q3",
+    "bac-physique-cd-complements-rlc-q4",
+    "bac-physique-cd-complements-rlc-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Oscillations libres du circuit LC",
+     "md": "Un condensateur chargé (C) se décharge dans une bobine idéale (L). La loi des mailles donne $L\\,q'' + q/C = 0$, donc une oscillation sinusoïdale :",
+     "tex": "q(t) = Q_m\\cos(\\omega_0 t + \\varphi) \\qquad \\omega_0 = \\dfrac{1}{\\sqrt{LC}} \\qquad T_0 = 2\\pi\\sqrt{LC}"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Énergie dans le circuit LC",
+     "md": "L'énergie totale $E = \\dfrac{q^2}{2C} + \\dfrac{1}{2} L i^2$ est **constante** : elle passe de la forme électrique (condensateur chargé, i = 0) à la forme magnétique (bobine, q = 0) puis revient. Valeur : $E = Q_m^2 / (2C)$. C'est l'analogue du pendule élastique (q ↔ x, L ↔ m, 1/C ↔ k)."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Oscillations libres amorties (RLC)",
+     "md": "Avec une résistance R, l'énergie diminue par effet Joule : $dE/dt = -R\\,i^2$. Trois régimes selon R :\n- **pseudo-périodique** (R faible) : oscillations d'amplitude décroissante, pseudo-période voisine de T₀ ;\n- **critique** : R = 2√(L/C), retour le plus rapide sans oscillation ;\n- **apériodique** (R grand) : retour lent sans oscillation."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Régime sinusoïdal forcé",
+     "md": "Un générateur impose $u(t) = U_m\\cos(\\omega t)$ à un circuit RLC série. Après le régime transitoire, $i(t) = I_m\\cos(\\omega t - \\varphi)$ avec ω imposée. L'**impédance** Z et la phase de u par rapport à i valent :",
+     "tex": "Z = \\sqrt{R^2 + \\left(L\\omega - \\dfrac{1}{C\\omega}\\right)^2} \\qquad \\tan\\varphi = \\dfrac{L\\omega - \\frac{1}{C\\omega}}{R} \\qquad I_m = \\dfrac{U_m}{Z}"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Résonance d'intensité",
+     "md": "L'intensité efficace est maximale quand $L\\omega = 1/(C\\omega)$, c'est-à-dire pour la **fréquence propre** :",
+     "tex": "f = f_0 = \\dfrac{1}{2\\pi\\sqrt{LC}} \\quad\\Rightarrow\\quad Z = R,\\ \\ I_0 = \\dfrac{U}{R},\\ \\ \\varphi = 0"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Facteur de qualité, bande passante, puissance",
+     "md": "À la résonance, $U_C = U_L = Q\\,U$ (surtension si Q > 1) ; la bande passante à −3 dB (I ≥ I₀/√2) et la puissance moyenne valent :",
+     "tex": "Q = \\dfrac{L\\omega_0}{R} = \\dfrac{1}{R}\\sqrt{\\dfrac{L}{C}} \\qquad \\Delta f = \\dfrac{f_0}{Q} \\qquad P = U\\,I\\cos\\varphi = R\\,I^2"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0.3,
+      "xmax": 2,
+      "ymin": 0,
+      "ymax": 1.1,
+      "grid": 0.5,
+      "xlabel": "f / f₀",
+      "ylabel": "I / I max",
+      "curves": [
+       {
+        "expr": "1/sqrt(1+4*(x-1/x)^2)",
+        "color": "orange",
+        "label": "Q = 2 (peu sélectif)"
+       },
+       {
+        "expr": "1/sqrt(1+100*(x-1/x)^2)",
+        "color": "purple",
+        "label": "Q = 10 (sélectif)"
+       }
+      ],
+      "points": [
+       {
+        "x": 1,
+        "y": 1,
+        "label": "résonance",
+        "color": "red"
+       }
+      ]
+     },
+     "caption": "Courbes de résonance d'intensité (I/I max en fonction de f/f₀). Plus Q est grand, plus le pic est étroit et le circuit sélectif.",
+     "alt": "Deux courbes en cloche centrées sur f sur f0 égal à 1, de hauteur 1 : une courbe orange large pour Q égal à 2 et une courbe violette beaucoup plus étroite pour Q égal à 10."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode",
+     "md": "1. Reconnaître le régime : libre (pas de générateur) ou forcé.\n2. Libre : T₀ = 2π√(LC), énergie E = Q²/(2C).\n3. Forcé : calculer Lω et 1/(Cω), puis Z, I = U/Z, tan φ.\n4. Résonance : f = f₀, Z = R, φ = 0 ; Q = (1/R)√(L/C), Δf = f₀/Q.\n5. Contrôler les unités : H, F, Ω, s, Hz (µF = 10⁻⁶ F)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : oscillations libres",
+     "statement": "Un condensateur de capacité C = 10 µF est relié à une bobine idéale L = 0,10 H. Calcule la période propre et la fréquence propre.",
+     "steps": [
+      {
+       "md": "Formule de la période propre :",
+       "tex": "T_0 = 2\\pi\\sqrt{LC} = 2\\pi\\sqrt{0{,}10 \\times 10\\times10^{-6}} = 2\\pi\\sqrt{10^{-6}}"
+      },
+      {
+       "md": "Donc :",
+       "tex": "T_0 = 2\\pi\\times10^{-3} \\approx 6{,}28\\ \\text{ms} \\qquad f_0 = \\dfrac{1}{T_0} \\approx 159\\ \\text{Hz}"
+      }
+     ],
+     "answer": "**T₀ ≈ 6,28 ms et f₀ ≈ 159 Hz**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : régime forcé",
+     "statement": "Un circuit série R = 50 Ω, L = 0,10 H, C = 10 µF est alimenté sous U = 10 V efficaces à f = 200 Hz. Calcule Z, l'intensité efficace et le déphasage φ.",
+     "steps": [
+      {
+       "md": "ω = 2π × 200 ≈ 1257 rad/s. Réactances :",
+       "tex": "L\\omega \\approx 125{,}7\\ \\Omega \\qquad \\dfrac{1}{C\\omega} \\approx 79{,}6\\ \\Omega"
+      },
+      {
+       "md": "Impédance :",
+       "tex": "Z = \\sqrt{50^2 + (46{,}1)^2} \\approx 68{,}0\\ \\Omega"
+      },
+      {
+       "md": "Intensité et phase :",
+       "tex": "I = \\dfrac{10}{68{,}0} \\approx 0{,}147\\ \\text{A}\\qquad \\tan\\varphi = \\dfrac{46{,}1}{50} \\Rightarrow \\varphi \\approx 43°"
+      }
+     ],
+     "answer": "**Z ≈ 68,0 Ω ; I ≈ 0,15 A ; φ ≈ 43°** (circuit inductif car f > f₀ ≈ 159 Hz)."
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-physique-cd-complements-rlc-01"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Mélanger µF et F (un facteur 10⁶ !) ou mH et H.\n- Oublier que Z n'est pas la somme R + Lω + 1/(Cω) : les réactances se retranchent.\n- Confondre valeurs maximales et efficaces (U = Um/√2).\n- Croire que la résonance se produit à f₀ pour U_C maximale : c'est vrai pour l'intensité ; pour U_C, le maximum est légèrement décalé si Q est faible.\n- Écrire Q = R/(Lω₀) (inverse)."
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-physique-cd-complements-rlc-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-physique-cd-complements-rlc-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-physique-cd-complements-rlc-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-physique-cd-complements-rlc-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-physique-cd-complements-rlc-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Une radio « s'accorde » en réglant C pour que f₀ soit égale à la fréquence de la station : c'est la résonance appliquée à la sélection.",
+      "La condition φ = 0 à la résonance est utile pour repérer f₀ à l'oscilloscope (courbes de u et de i en phase)."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Convention de déphasage : ici φ = phase de u par rapport à i (tan φ = (Lω − 1/Cω)/R) ; certains manuels camerounais prennent φ = phase de i par rapport à u : harmoniser.",
+    "Les formules T₀, Z, f₀, Q = (1/R)√(L/C), Δf = f₀/Q, ont été vérifiées numériquement (balayage de fréquence et intégration de l'équation LC). Construction de Fresnel non traitée : à ajouter si exigée.",
+    "La largeur de bande Δf = f₀/Q est exacte pour le circuit RLC série (= R/(2πL)) ; vérifier si le programme la demande."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "prompt": "Une bobine idéale de 50 mH est associée à un condensateur de 2,0 µF. Calcule la fréquence propre f₀ du circuit LC, en Hz.",
+   "points": 1,
+   "answer": 503.0,
+   "tolerance": 1,
+   "unit": "Hz",
+   "explanation": "f₀ = 1/(2π√(LC)) = 1/(2π√(50×10⁻³ × 2,0×10⁻⁶)) = 1/(2π × 3,16×10⁻⁴) ≈ 503 Hz.",
+   "method": "f₀ = 1/(2π√(LC)) ; mH et µF en unités SI.",
+   "mistakes": [
+    "Oublier la racine ou le 2π.",
+    "Garder µF au lieu de F."
+   ],
+   "id": "bac-physique-cd-complements-rlc-01",
+   "lesson": "bac-physique-cd-complements-rlc",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "prompt": "Dans un circuit LC idéal, à l'instant où la charge du condensateur est maximale :",
+   "points": 1,
+   "choices": [
+    "le courant est nul et toute l'énergie est électrique",
+    "le courant est maximal et toute l'énergie est magnétique",
+    "le courant est nul et l'énergie est nulle",
+    "l'énergie est moitié électrique, moitié magnétique"
+   ],
+   "answer": 0,
+   "explanation": "q maximale ⇒ i = dq/dt = 0 : l'énergie magnétique ½ L i² est nulle et l'énergie totale est celle du condensateur.",
+   "method": "E = q²/2C + ½ L i² est constante.",
+   "mistakes": [
+    "Confondre avec l'instant où q = 0."
+   ],
+   "id": "bac-physique-cd-complements-rlc-02",
+   "lesson": "bac-physique-cd-complements-rlc",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "prompt": "Un condensateur de 5,0 µF est chargé sous 10 V puis relié à une bobine idéale. Calcule l'énergie totale du circuit, en mJ.",
+   "points": 1,
+   "answer": 0.25,
+   "tolerance": 0.005,
+   "unit": "mJ",
+   "explanation": "E = ½ C U² = 0,5 × 5,0×10⁻⁶ × 100 = 2,5×10⁻⁴ J = 0,25 mJ, conservée au cours des oscillations.",
+   "method": "E = ½ C Um² (énergie initiale).",
+   "mistakes": [
+    "Oublier le carré de U.",
+    "Oublier le ½."
+   ],
+   "id": "bac-physique-cd-complements-rlc-03",
+   "lesson": "bac-physique-cd-complements-rlc",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "prompt": "Un circuit série comporte R = 30 Ω, L = 0,20 H, C = 100 µF. Calcule son impédance à f = 50 Hz, en Ω.",
+   "points": 2,
+   "answer": 43.1,
+   "tolerance": 0.2,
+   "unit": "Ω",
+   "explanation": "ω = 2π × 50 ≈ 314,2 rad/s ; Lω ≈ 62,8 Ω ; 1/(Cω) ≈ 31,8 Ω ; Z = √(30² + (62,8 − 31,8)²) ≈ 43,1 Ω.",
+   "method": "Z = √(R² + (Lω − 1/Cω)²).",
+   "mistakes": [
+    "Additionner Lω et 1/(Cω).",
+    "Oublier le 2π dans ω."
+   ],
+   "id": "bac-physique-cd-complements-rlc-04",
+   "lesson": "bac-physique-cd-complements-rlc",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "prompt": "Un circuit RLC série a R = 25 Ω, L = 80 mH, C = 1,0 µF. Calcule son facteur de qualité Q = (1/R)√(L/C).",
+   "points": 2,
+   "answer": 11.3,
+   "tolerance": 0.1,
+   "explanation": "√(L/C) = √(0,080/1,0×10⁻⁶) ≈ 282,8 Ω ; Q = 282,8/25 ≈ 11,3.",
+   "method": "Q = (1/R)√(L/C) (sans unité).",
+   "mistakes": [
+    "Mettre R au numérateur."
+   ],
+   "id": "bac-physique-cd-complements-rlc-05",
+   "lesson": "bac-physique-cd-complements-rlc",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Un circuit série est formé d'un résistor R = 40 Ω, d'une bobine idéale L = 0,20 H et d'un condensateur C = 5,0 µF. Un générateur basse fréquence impose une tension sinusoïdale de valeur efficace U = 6,0 V et de fréquence réglable.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "À la résonance d'intensité, le déphasage entre u et i est :",
+     "points": 1,
+     "choices": [
+      "nul (u et i en phase)",
+      "égal à π/2",
+      "égal à −π/2",
+      "égal à π"
+     ],
+     "answer": 0,
+     "explanation": "À la résonance, Lω = 1/(Cω), donc tan φ = 0 et φ = 0.",
+     "id": "bac-physique-cd-complements-rlc-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule la fréquence de résonance, en Hz.",
+     "points": 1,
+     "answer": 159.2,
+     "tolerance": 0.2,
+     "unit": "Hz",
+     "explanation": "f₀ = 1/(2π√(LC)) = 1/(2π × 10⁻³) ≈ 159,2 Hz.",
+     "id": "bac-physique-cd-complements-rlc-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule l'intensité efficace à la résonance, en mA.",
+     "points": 1,
+     "answer": 150.0,
+     "tolerance": 1,
+     "unit": "mA",
+     "explanation": "Z = R donc I = U/R = 6,0/40 = 0,15 A = 150 mA.",
+     "id": "bac-physique-cd-complements-rlc-06-c"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule le facteur de qualité Q.",
+     "points": 1,
+     "answer": 5.0,
+     "tolerance": 0.05,
+     "explanation": "Q = (1/R)√(L/C) = √(4,0×10⁴)/40 = 200/40 = 5,0.",
+     "id": "bac-physique-cd-complements-rlc-06-d"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule la tension efficace aux bornes du condensateur à la résonance, en V.",
+     "points": 1,
+     "answer": 30.0,
+     "tolerance": 0.5,
+     "unit": "V",
+     "explanation": "U_C = Q U = 5,0 × 6,0 = 30 V : c'est une surtension (plus grande que U).",
+     "id": "bac-physique-cd-complements-rlc-06-e"
+    }
+   ],
+   "method": "f₀, puis I = U/R, Q, et U_C = Q U à la résonance.",
+   "mistakes": [
+    "Prendre U_C = U à la résonance.",
+    "Oublier de convertir µF en F."
+   ],
+   "id": "bac-physique-cd-complements-rlc-06",
+   "lesson": "bac-physique-cd-complements-rlc",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "La période propre d'un circuit LC est :",
+   "points": 1,
+   "choices": [
+    "$T_0 = 2\\pi\\sqrt{LC}$",
+    "$T_0 = \\sqrt{LC}/2\\pi$",
+    "$T_0 = 2\\pi/\\sqrt{LC}$",
+    "$T_0 = 2\\pi LC$"
+   ],
+   "answer": 0,
+   "explanation": "T₀ = 2π√(LC) (comme T = 2π√(m/k) pour le ressort).",
+   "id": "bac-physique-cd-complements-rlc-q1",
+   "lesson": "bac-physique-cd-complements-rlc"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "Dans un circuit RLC libre, l'énergie totale :",
+   "points": 1,
+   "choices": [
+    "décroît par effet Joule",
+    "est constante",
+    "croît avec le temps",
+    "est nulle"
+   ],
+   "answer": 0,
+   "explanation": "dE/dt = −R i² ≤ 0.",
+   "id": "bac-physique-cd-complements-rlc-q2",
+   "lesson": "bac-physique-cd-complements-rlc"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "Un circuit RLC série en résonance d'intensité a une impédance égale à :",
+   "points": 1,
+   "choices": [
+    "R",
+    "√(L/C)",
+    "Lω",
+    "0"
+   ],
+   "answer": 0,
+   "explanation": "À la résonance, Lω = 1/(Cω) : Z = R.",
+   "id": "bac-physique-cd-complements-rlc-q3",
+   "lesson": "bac-physique-cd-complements-rlc"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "Quand Q augmente, le pic de résonance :",
+   "points": 1,
+   "choices": [
+    "devient plus étroit",
+    "devient plus large",
+    "se déplace vers 0",
+    "disparaît"
+   ],
+   "answer": 0,
+   "explanation": "Δf = f₀/Q diminue : le circuit est plus sélectif.",
+   "id": "bac-physique-cd-complements-rlc-q4",
+   "lesson": "bac-physique-cd-complements-rlc"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "À la résonance, la puissance moyenne consommée par le circuit est :",
+   "points": 1,
+   "choices": [
+    "P = R I²",
+    "P = 0",
+    "P = L I²",
+    "P = U I sin φ"
+   ],
+   "answer": 0,
+   "explanation": "P = U I cos φ avec cos φ = 1, soit R I² (seul le résistor dissipe).",
+   "id": "bac-physique-cd-complements-rlc-q5",
+   "lesson": "bac-physique-cd-complements-rlc"
+  }
+ ]
+}

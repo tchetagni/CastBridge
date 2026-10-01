@@ -1,0 +1,82 @@
+{
+ "format": 1,
+ "id": "tle-physique-e-ti",
+ "version": 1,
+ "title": "Physique appliquée — Terminale E et TI",
+ "description": "Fiches de physique appliquée pour les séries techniques E et TI : régime sinusoïdal, transformateurs et machines, mécanique, thermodynamique de base. Exemples résolus, exercices corrigés et épreuve blanche.",
+ "lang": "fr",
+ "cursus": "secondaire",
+ "level": "Tle",
+ "subject": "physics",
+ "series": [
+  "E",
+  "TI"
+ ],
+ "programRef": "Programmes de physique et de physique appliquée des classes de Terminale E et TI (MINESEC) — programme exact incertain, à vérifier sur le texte officiel",
+ "authors": [
+  "CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"
+ ],
+ "status": "draft",
+ "updatedAt": "2026-10-01",
+ "chapters": [
+  {
+   "id": "tle-physique-e-ti-ch-electricite",
+   "title": "Électricité : régime sinusoïdal, impédance, puissance active",
+   "order": 1,
+   "programRef": "Tle E/TI — Électricité : grandeurs sinusoïdales, circuit RLC série, puissances (à vérifier sur le texte officiel)"
+  },
+  {
+   "id": "tle-physique-e-ti-ch-machines",
+   "title": "Transformateurs et machines : rapport de transformation, rendement, pertes",
+   "order": 2,
+   "programRef": "Tle E/TI — Transformateur monophasé, moteurs, bilan de puissance et rendement (à vérifier sur le texte officiel)"
+  },
+  {
+   "id": "tle-physique-e-ti-ch-mecanique",
+   "title": "Mécanique : cinématique, dynamique, moments, énergie et puissance",
+   "order": 3,
+   "programRef": "Tle E/TI — Mécanique du point et du solide : mouvements, équilibre, énergie, puissance (à vérifier sur le texte officiel)"
+  },
+  {
+   "id": "tle-physique-e-ti-ch-thermo",
+   "title": "Thermodynamique de base : chaleur, calorimétrie, changements d'état",
+   "order": 4,
+   "programRef": "Tle E/TI — Chaleur, calorimétrie, changements d'état (à vérifier sur le texte officiel)"
+  }
+ ],
+ "mockExams": [
+  {
+   "id": "tle-physique-e-ti-blanc-1",
+   "title": "Épreuve blanche de physique appliquée — Tle E/TI",
+   "minutes": 150,
+   "outOf": 20,
+   "instructions": "Durée : 2 h 30. Quatre exercices indépendants, tous obligatoires. Calculatrice autorisée ; les données sont fictives. Durée, barème et structure sont indicatifs : le format officiel des séries E et TI est à vérifier.",
+   "sections": [
+    {
+     "title": "Exercice 1 — Régime sinusoïdal (5 points)",
+     "exercises": [
+      "tle-physique-e-ti-blanc-ex1"
+     ]
+    },
+    {
+     "title": "Exercice 2 — Transformateur (5 points)",
+     "exercises": [
+      "tle-physique-e-ti-blanc-ex2"
+     ]
+    },
+    {
+     "title": "Exercice 3 — Mécanique (5 points)",
+     "exercises": [
+      "tle-physique-e-ti-blanc-ex3"
+     ]
+    },
+    {
+     "title": "Exercice 4 — Calorimétrie (5 points)",
+     "exercises": [
+      "tle-physique-e-ti-blanc-ex4"
+     ]
+    }
+   ]
+  }
+ ]
+}

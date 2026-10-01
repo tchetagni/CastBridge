@@ -1,0 +1,456 @@
+{
+ "chapter": "bac-maths-cd-complements-ch-stats",
+ "lessons": [
+  {
+   "id": "bac-maths-cd-complements-stats",
+   "title": "Statistiques à deux variables : ajustement affine et corrélation",
+   "minutes": 35,
+   "programRef": "Tle C/D — Séries statistiques à deux variables, ajustement affine, corrélation (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Calculer le point moyen, les variances, la covariance.",
+    "Déterminer la droite de régression de y en x par la méthode des moindres carrés.",
+    "Calculer et interpréter le coefficient de corrélation linéaire.",
+    "Faire une prévision et en discuter la fiabilité."
+   ],
+   "exercises": [
+    "bac-maths-cd-complements-sta-01",
+    "bac-maths-cd-complements-sta-02",
+    "bac-maths-cd-complements-sta-03",
+    "bac-maths-cd-complements-sta-04",
+    "bac-maths-cd-complements-sta-05",
+    "bac-maths-cd-complements-sta-06"
+   ],
+   "selfCheck": [
+    "bac-maths-cd-complements-sta-q1",
+    "bac-maths-cd-complements-sta-q2",
+    "bac-maths-cd-complements-sta-q3",
+    "bac-maths-cd-complements-sta-q4",
+    "bac-maths-cd-complements-sta-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Dans cette fiche",
+     "md": "Représenter un nuage de points, calculer point moyen, covariance, variances, droite de régression de y en x et coefficient de corrélation, puis faire une prévision en discutant sa fiabilité."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Série statistique à deux variables",
+     "md": "On observe n couples $(x_i, y_i)$. Le **nuage de points** les représente ; le **point moyen** est $G(\\overline{x}, \\overline{y})$ avec $\\overline{x} = \\frac{1}{n}\\sum x_i$ et $\\overline{y} = \\frac{1}{n}\\sum y_i$.\nVariances : $V(x) = \\frac{1}{n}\\sum x_i^2 - \\overline{x}^2$ et de même pour $V(y)$. Écarts types : $\\sigma_x = \\sqrt{V(x)}$, $\\sigma_y = \\sqrt{V(y)}$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Covariance",
+     "md": "$\\text{Cov}(x, y) = \\frac{1}{n}\\sum x_i y_i - \\overline{x}\\,\\overline{y}$.\nLe signe de la covariance indique le sens de la liaison : positive si y tend à croître avec x, négative sinon. Remarque : $\\text{Cov}(x, x) = V(x)$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Droite de régression de y en x (moindres carrés)",
+     "md": "C'est la droite $y = ax + b$ qui rend minimale la somme des carrés des écarts verticaux entre les points du nuage et la droite :\n$a = \\frac{\\text{Cov}(x, y)}{V(x)}$ et $b = \\overline{y} - a\\overline{x}$.\nElle passe toujours par le point moyen G."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Coefficient de corrélation linéaire",
+     "md": "$r = \\frac{\\text{Cov}(x, y)}{\\sigma_x \\sigma_y}$, avec $-1 \\leq r \\leq 1$.\nPlus $|r|$ est proche de 1, plus le nuage est proche d'une droite : un ajustement affine est alors raisonnable. $r > 0$ (resp. $r < 0$) : la droite est croissante (resp. décroissante). Un $r$ proche de 0 indique **l'absence de liaison linéaire**, pas d'indépendance."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 6,
+      "ymin": 0,
+      "ymax": 11,
+      "grid": 1,
+      "xlabel": "x",
+      "ylabel": "y",
+      "w": 400,
+      "h": 280,
+      "curves": [
+       {
+        "expr": "1.7*x+0.9",
+        "color": "blue",
+        "label": "y = 1,7x + 0,9"
+       }
+      ],
+      "points": [
+       {
+        "x": 1,
+        "y": 3,
+        "color": "red"
+       },
+       {
+        "x": 2,
+        "y": 4,
+        "color": "red"
+       },
+       {
+        "x": 3,
+        "y": 6,
+        "color": "red"
+       },
+       {
+        "x": 4,
+        "y": 7,
+        "color": "red"
+       },
+       {
+        "x": 5,
+        "y": 10,
+        "color": "red"
+       },
+       {
+        "x": 3,
+        "y": 6,
+        "label": "G",
+        "color": "green"
+       }
+      ],
+      "segments": []
+     },
+     "caption": "Nuage de l'exemple 1 (points rouges), point moyen G(3 ; 6) en vert et droite de régression $y = 1{,}7x + 0{,}9$ en bleu.",
+     "alt": "Cinq points rouges presque alignés montent de gauche à droite. Une droite bleue croissante passe près de tous les points et par le point vert G de coordonnées (3 ; 6)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : calculs complets",
+     "statement": "Pour la série (1 ; 3), (2 ; 4), (3 ; 6), (4 ; 7), (5 ; 10) (données fictives), détermine G, la droite de régression de y en x et r.",
+     "steps": [
+      {
+       "md": "Moyennes : $\\overline{x} = \\frac{15}{5} = 3$ et $\\overline{y} = \\frac{30}{5} = 6$. Variances : $\\frac{55}{5} - 9 = 2$ pour x et $\\frac{210}{5} - 36 = 6$ pour y.",
+       "tex": "G(3,\\ 6)"
+      },
+      {
+       "md": "$\\sum x_i y_i = 3 + 8 + 18 + 28 + 50 = 107$, donc $\\text{Cov}(x, y) = \\frac{107}{5} - 18 = 3{,}4$.",
+       "tex": "a = \\frac{3{,}4}{2} = 1{,}7 \\qquad b = 6 - 1{,}7 \\times 3 = 0{,}9"
+      },
+      {
+       "md": "Corrélation :",
+       "tex": "r = \\frac{3{,}4}{\\sqrt{2} \\times \\sqrt{6}} \\approx 0{,}981"
+      }
+     ],
+     "answer": "**y = 1,7x + 0,9** et **r ≈ 0,981** : liaison linéaire très forte."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : prévision",
+     "statement": "Avec la droite de l'exemple 1, estime y pour x = 6, puis la valeur de x pour laquelle y = 15. Commente.",
+     "steps": [
+      {
+       "md": "Pour $x = 6$ :",
+       "tex": "y = 1{,}7 \\times 6 + 0{,}9 = 11{,}1"
+      },
+      {
+       "md": "Pour $y = 15$ : $1{,}7x + 0{,}9 = 15$, donc $x = \\frac{14{,}1}{1{,}7} \\approx 8{,}29$. Attention : cette équation donne x en fonction de y **par inversion**, ce n'est pas la droite de régression de x en y."
+      },
+      {
+       "md": "Commentaire : x = 6 est proche des données (interpolation, assez fiable) ; x = 8,29 est loin du nuage (extrapolation, à interpréter avec prudence)."
+      }
+     ],
+     "answer": "**x = 6 donne y ≈ 11,1 ; y = 15 correspond à x ≈ 8,29** (estimation à prendre avec prudence)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : calculer à la main sans se tromper",
+     "md": "1. Dresser un tableau avec les colonnes $x_i$, $y_i$, $x_i^2$, $y_i^2$, $x_i y_i$ et leurs sommes.\n2. Calculer $\\overline{x}$, $\\overline{y}$, $V(x)$, $V(y)$, $\\text{Cov}(x, y)$ (garder les valeurs exactes jusqu'au bout).\n3. En déduire a, b, r.\n4. Vérifier que $G$ est sur la droite et que $|r| \\leq 1$."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Diviser par n − 1 au lieu de n (les formules de cette fiche utilisent n).\n- Confondre la droite de y en x et celle de x en y : elles sont différentes sauf si $|r| = 1$.\n- Arrondir trop tôt : on perd de la précision sur r.\n- Conclure à une **causalité** à partir d'un r proche de 1 : la corrélation n'est pas une cause.\n- Prévoir loin de l'intervalle des données sans prudence."
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-maths-cd-complements-sta-01"
+    },
+    {
+     "type": "text",
+     "md": "**Vérifier par Python** : avec le module statistics, linear_regression(x, y) donne la pente et l'ordonnée à l'origine, et correlation(x, y) donne r (Python 3.10 ou plus). On peut aussi programmer les sommes pour contrôler les calculs à la main."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Les points d'un nuage où l'on a des doutes (valeur aberrante) peuvent fortement modifier r ; on les examine avant de conclure.",
+      "Un ajustement non affine (exponentiel : on pose $z = \\ln y$ puis régression de z en x) est parfois proposé ; son statut au programme est à vérifier sur le texte officiel."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Selon le programme camerounais, la droite peut être définie par la méthode de Mayer (deux sous-nuages) ; la fiche présente les moindres carrés, comme la consigne : à vérifier.",
+    "Convention des variances : division par n (population). Les seuils de |r| pour valider un ajustement varient selon les manuels : aucun seuil n'est imposé ici."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "bac-maths-cd-complements-sta-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-stats",
+   "prompt": "Calcule la moyenne de x pour les valeurs 2 ; 4 ; 6 ; 8 ; 10.",
+   "answer": 6,
+   "tolerance": 0,
+   "explanation": "$\\overline{x} = \\frac{2 + 4 + 6 + 8 + 10}{5} = \\frac{30}{5} = 6$.",
+   "method": "Somme divisée par l'effectif.",
+   "mistakes": [
+    "Diviser par 4 au lieu de 5."
+   ],
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "id": "bac-maths-cd-complements-sta-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-stats",
+   "prompt": "On a $\\text{Cov}(x, y) = 6$ et $V(x) = 4$. Quelle est la pente a de la droite de régression de y en x ?",
+   "answer": 1.5,
+   "tolerance": 0.0001,
+   "explanation": "$a = \\frac{\\text{Cov}(x, y)}{V(x)} = \\frac{6}{4} = 1{,}5$.",
+   "method": "$a = \\text{Cov}(x, y) / V(x)$.",
+   "mistakes": [
+    "Diviser par $V(y)$ au lieu de $V(x)$."
+   ],
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "id": "bac-maths-cd-complements-sta-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-stats",
+   "prompt": "Un coefficient de corrélation $r = -0{,}95$ signifie :",
+   "choices": [
+    "une faible liaison linéaire",
+    "une forte liaison linéaire, y diminuant quand x augmente",
+    "une forte liaison linéaire, y augmentant avec x",
+    "que x est la cause de la diminution de y"
+   ],
+   "answer": 1,
+   "explanation": "Le signe négatif donne le sens (décroissant) ; la valeur absolue proche de 1 indique une forte liaison linéaire. Corrélation n'est pas causalité.",
+   "method": "Signe = sens ; valeur absolue = force de la liaison.",
+   "mistakes": [
+    "Croire qu'une corrélation négative est « mauvaise »."
+   ],
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "id": "bac-maths-cd-complements-sta-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "bac-maths-cd-complements-stats",
+   "prompt": "On a $\\overline{x} = 5$, $\\overline{y} = 12$ et la droite de régression de y en x a pour pente $a = 2$. Quelle valeur de y prévoit-on pour $x = 8$ ?",
+   "answer": 18,
+   "tolerance": 0,
+   "explanation": "$b = \\overline{y} - a\\overline{x} = 12 - 10 = 2$ ; $y = 2x + 2$ donne $y(8) = 18$. (On peut aussi écrire $y - 12 = 2(x - 5)$.)",
+   "method": "La droite passe par le point moyen G.",
+   "mistakes": [
+    "Oublier de calculer b et répondre $2 \\times 8 = 16$."
+   ],
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "id": "bac-maths-cd-complements-sta-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "bac-maths-cd-complements-stats",
+   "prompt": "Pour la série (1 ; 2), (2 ; 3), (3 ; 5), (4 ; 6), calcule r, arrondi à 0,001.",
+   "answer": 0.99,
+   "tolerance": 0.001,
+   "explanation": "$\\overline{x} = 2{,}5$, $\\overline{y} = 4$ ; $V(x) = 1{,}25$ ; $V(y) = 2{,}5$ ; $\\text{Cov} = \\frac{47}{4} - 10 = 1{,}75$. $r = \\frac{1{,}75}{\\sqrt{1{,}25 \\times 2{,}5}} \\approx 0{,}990$.",
+   "method": "Calculer moyennes, variances, covariance, puis r.",
+   "mistakes": [
+    "Oublier d'extraire la racine carrée au dénominateur.",
+    "Prendre $\\sum y_i^2$ sans diviser par n."
+   ],
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "id": "bac-maths-cd-complements-sta-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "bac-maths-cd-complements-stats",
+   "prompt": "Dans un lycée de Bamenda, on relève pour 8 élèves (données fictives) le nombre x d'heures de révision par semaine et la note y sur 20 :\nx : 2 ; 4 ; 5 ; 6 ; 8 ; 9 ; 10 ; 12.\ny : 7 ; 9 ; 10 ; 12 ; 13 ; 15 ; 14 ; 17.",
+   "parts": [
+    {
+     "id": "bac-maths-cd-complements-sta-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule $\\overline{x}$.",
+     "explanation": "$\\overline{x} = \\frac{56}{8} = 7$.",
+     "answer": 7,
+     "tolerance": 0
+    },
+    {
+     "id": "bac-maths-cd-complements-sta-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule $\\overline{y}$.",
+     "explanation": "$\\overline{y} = \\frac{97}{8} = 12{,}125$.",
+     "answer": 12.125,
+     "tolerance": 0.001
+    },
+    {
+     "id": "bac-maths-cd-complements-sta-06-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule $\\text{Cov}(x, y)$.",
+     "explanation": "$\\sum x_i y_i = 14 + 36 + 50 + 72 + 104 + 135 + 140 + 204 = 755$ ; $\\frac{755}{8} - 7 \\times 12{,}125 = 94{,}375 - 84{,}875 = 9{,}5$.",
+     "answer": 9.5,
+     "tolerance": 0.001
+    },
+    {
+     "id": "bac-maths-cd-complements-sta-06-d",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Sachant que $V(x) = 9{,}75$, calcule la pente a de la droite de régression de y en x (arrondi à 0,001).",
+     "explanation": "$a = \\frac{9{,}5}{9{,}75} \\approx 0{,}974$.",
+     "answer": 0.974,
+     "tolerance": 0.001
+    },
+    {
+     "id": "bac-maths-cd-complements-sta-06-e",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule b (arrondi à 0,01) avec $a \\approx 0{,}9744$.",
+     "explanation": "$b = 12{,}125 - 0{,}9744 \\times 7 \\approx 5{,}30$.",
+     "answer": 5.3,
+     "tolerance": 0.01
+    },
+    {
+     "id": "bac-maths-cd-complements-sta-06-f",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Sachant que $V(y) \\approx 9{,}609$, calcule r (arrondi à 0,001).",
+     "explanation": "$r = \\frac{9{,}5}{\\sqrt{9{,}75 \\times 9{,}609}} \\approx 0{,}981$.",
+     "answer": 0.981,
+     "tolerance": 0.001
+    },
+    {
+     "id": "bac-maths-cd-complements-sta-06-g",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Estime la note d'un élève qui révise 11 heures par semaine (arrondi à 0,1).",
+     "explanation": "$y = 0{,}9744 \\times 11 + 5{,}304 \\approx 16{,}02$, soit environ 16,0.",
+     "answer": 16.0,
+     "tolerance": 0.1
+    }
+   ],
+   "method": "Moyennes, covariance, pente $a = \\text{Cov}/V(x)$, ordonnée $b = \\overline{y} - a\\overline{x}$, puis r.",
+   "mistakes": [
+    "Oublier de soustraire $\\overline{x}\\,\\overline{y}$ dans la covariance.",
+    "Arrondir a trop tôt avant de calculer b."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-cd-complements-sta-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-stats",
+   "prompt": "Le point moyen G du nuage a pour coordonnées :",
+   "choices": [
+    "$(\\overline{x}, \\overline{y})$",
+    "$(\\sigma_x, \\sigma_y)$",
+    "$(V(x), V(y))$",
+    "$(\\text{Cov}, r)$"
+   ],
+   "answer": 0,
+   "explanation": "Le point moyen a pour coordonnées les moyennes de x et de y.",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-cd-complements-sta-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-stats",
+   "prompt": "La droite de régression de y en x passe par :",
+   "choices": [
+    "l'origine du repère",
+    "le point moyen G",
+    "le premier point du nuage",
+    "le point $(\\sigma_x, \\sigma_y)$"
+   ],
+   "answer": 1,
+   "explanation": "Comme $b = \\overline{y} - a\\overline{x}$, on a $\\overline{y} = a\\overline{x} + b$ : G est sur la droite.",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-cd-complements-sta-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-stats",
+   "prompt": "Quelle valeur de r est impossible ?",
+   "choices": [
+    "−0,9",
+    "0",
+    "1,2",
+    "1"
+   ],
+   "answer": 2,
+   "explanation": "Un coefficient de corrélation est toujours compris entre −1 et 1.",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-cd-complements-sta-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-stats",
+   "prompt": "Que dire d'un nuage dont le coefficient r vaut 0,02 ?",
+   "choices": [
+    "il y a une forte liaison affine",
+    "les variables sont toujours indépendantes",
+    "la pente est égale à 0,02",
+    "il n'y a pas de liaison affine marquée"
+   ],
+   "answer": 3,
+   "explanation": "Un r proche de 0 indique l'absence de liaison affine marquée, pas nécessairement l'indépendance.",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-cd-complements-sta-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "bac-maths-cd-complements-stats",
+   "prompt": "La pente de la droite de régression de y en x est :",
+   "choices": [
+    "$\\frac{\\text{Cov}(x, y)}{V(x)}$",
+    "$\\frac{\\text{Cov}(x, y)}{V(y)}$",
+    "$\\text{Cov}(x, y) \\times V(x)$",
+    "$\\frac{V(x)}{\\text{Cov}(x, y)}$"
+   ],
+   "answer": 0,
+   "explanation": "La pente est le quotient de la covariance par la variance de la variable explicative x.",
+   "source": "Exercice original, style Bac"
+  }
+ ]
+}

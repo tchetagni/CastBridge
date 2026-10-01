@@ -1,0 +1,468 @@
+{
+ "chapter": "bac-physique-cd-complements-ch-ondes",
+ "lessons": [
+  {
+   "id": "bac-physique-cd-complements-ondes",
+   "title": "Ondes mécaniques et lumineuses : diffraction, interférences, photons",
+   "minutes": 45,
+   "programRef": "Tle C/D — Ondes mécaniques progressives ; lumière : diffraction, interférences ; effet photoélectrique (introduction) (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Relier célérité, période, fréquence et longueur d'onde ; calculer un retard.",
+    "Utiliser la diffraction et les interférences pour déterminer une longueur d'onde.",
+    "Calculer l'énergie d'un photon et exploiter l'effet photoélectrique.",
+    "Convertir correctement nm, eV, mm."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "bac-physique-cd-complements-ond-01",
+    "bac-physique-cd-complements-ond-02",
+    "bac-physique-cd-complements-ond-03",
+    "bac-physique-cd-complements-ond-04",
+    "bac-physique-cd-complements-ond-05",
+    "bac-physique-cd-complements-ond-06"
+   ],
+   "selfCheck": [
+    "bac-physique-cd-complements-ond-q1",
+    "bac-physique-cd-complements-ond-q2",
+    "bac-physique-cd-complements-ond-q3",
+    "bac-physique-cd-complements-ond-q4",
+    "bac-physique-cd-complements-ond-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Onde mécanique progressive",
+     "md": "Une **onde mécanique** est la propagation d'une perturbation dans un milieu matériel, avec transport d'**énergie** mais sans transport de matière. Elle est **transversale** (perturbation ⟂ propagation : corde) ou **longitudinale** (même direction : son). La **célérité** v dépend du milieu (son dans l'air ≈ 340 m/s à 20 °C)."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Périodicité et retard",
+     "md": "Une onde périodique de période T (fréquence f = 1/T) a une **longueur d'onde** λ, distance parcourue pendant une période. Un point M à la distance x de la source reproduit son mouvement avec un **retard** τ = x/v :",
+     "tex": "\\lambda = v\\,T = \\dfrac{v}{f} \\qquad y_M(t) = y_S\\left(t - \\dfrac{x}{v}\\right)"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 3,
+      "ymin": -1.4,
+      "ymax": 1.4,
+      "grid": 0.5,
+      "xlabel": "x (m)",
+      "ylabel": "y",
+      "curves": [
+       {
+        "expr": "sin(2*pi*x)",
+        "color": "blue",
+        "label": "onde à t donné"
+       }
+      ],
+      "points": [
+       {
+        "x": 0.25,
+        "y": 1,
+        "label": "A",
+        "color": "red"
+       },
+       {
+        "x": 1.25,
+        "y": 1,
+        "label": "B",
+        "color": "red"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 0.25,
+        "y1": 1.2,
+        "x2": 1.25,
+        "y2": 1.2,
+        "color": "red",
+        "dash": false
+       }
+      ]
+     },
+     "caption": "Aspect d'une onde sinusoïdale sur une corde à un instant donné : deux crêtes consécutives A et B sont distantes d'une longueur d'onde (ici 1,0 m).",
+     "alt": "Une sinusoïde bleue avec trois périodes. Deux crêtes consécutives marquées A et B sont reliées par un segment rouge horizontal qui représente une longueur d'onde."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Interférences et diffraction",
+     "md": "- **Diffraction** : une onde de longueur λ qui traverse une ouverture de largeur a comparable à λ ou plus petite s'étale ; l'écart angulaire est $\\theta \\approx \\lambda / a$ (rad).\n- **Interférences** de deux sources cohérentes : au point M, avec la différence de marche δ = d₂ − d₁, on a des interférences **constructives** si δ = kλ et **destructives** si δ = (k + ½)λ (k entier)."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Nature ondulatoire de la lumière",
+     "md": "Une lumière monochromatique de fréquence ν a, dans le vide, la longueur d'onde λ = c/ν (c = 3,00×10⁸ m/s ; domaine visible : environ 400 à 800 nm). Dans un milieu d'indice n : v = c/n et λ = λ_vide/n, mais la fréquence ne change pas. Diffraction sur une fente (largeur a, écran à D) : largeur de la tache centrale $L = 2\\lambda D/a$. Fentes de Young (écartement a) : **interfrange** $i = \\lambda D/a$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Aspect corpusculaire : effet photoélectrique",
+     "md": "La lumière échange l'énergie par **photons** : $E = h\\nu = hc/\\lambda$. Un métal n'émet des électrons que si le photon apporte plus que le **travail d'extraction** W₀ :",
+     "tex": "E_{c,max} = h\\nu - W_0 \\qquad \\nu_0 = \\dfrac{W_0}{h} \\qquad \\lambda_0 = \\dfrac{hc}{W_0}"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Constantes utilisées (valeurs usuelles arrondies)",
+     "md": "h = 6,63×10⁻³⁴ J·s ; c = 3,00×10⁸ m/s ; 1 eV = 1,6×10⁻¹⁹ J ; m(e) = 9,1×10⁻³¹ kg. L'intensité lumineuse règle le **nombre** de photons (donc le courant), pas l'énergie de chacun : sous le seuil, augmenter l'intensité n'arrache aucun électron."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode",
+     "md": "1. Identifier le type d'onde et noter v, f, λ avec les bonnes unités (nm = 10⁻⁹ m).\n2. Propagation : λ = v/f ; retard = distance / v.\n3. Interférences : calculer δ puis δ/λ (entier : constructif ; demi-entier : destructif).\n4. Lumière-matière : E photon en J puis en eV (÷ 1,6×10⁻¹⁹), comparer à W₀."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : le tonnerre",
+     "statement": "Dans un orage, on perçoit le tonnerre 6,0 s après l'éclair. La célérité du son est 340 m/s ; celle de la lumière est 3,00×10⁸ m/s. À quelle distance a eu lieu la décharge ?",
+     "steps": [
+      {
+       "md": "Le retard de la lumière (≈ 7×10⁻⁶ s sur 2 km) est négligeable devant 6 s : le décalage mesuré est le temps de trajet du son."
+      },
+      {
+       "md": "Distance :",
+       "tex": "d = v\\,\\Delta t = 340 \\times 6{,}0 = 2040\\ \\text{m}"
+      }
+     ],
+     "answer": "**d ≈ 2040 m, soit environ 2 km**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : diffraction d'un laser par une fente",
+     "statement": "Un laser (λ = 633 nm) éclaire une fente de largeur a = 0,10 mm ; l'écran est à D = 2,0 m. Calcule l'écart angulaire et la largeur de la tache centrale.",
+     "steps": [
+      {
+       "md": "Écart angulaire :",
+       "tex": "\\theta = \\dfrac{\\lambda}{a} = \\dfrac{633\\times10^{-9}}{0{,}10\\times10^{-3}} = 6{,}33\\times10^{-3}\\ \\text{rad}"
+      },
+      {
+       "md": "Largeur de la tache centrale :",
+       "tex": "L = \\dfrac{2\\lambda D}{a} = \\dfrac{2 \\times 633\\times10^{-9} \\times 2{,}0}{0{,}10\\times10^{-3}} \\approx 2{,}5\\ \\text{cm}"
+      }
+     ],
+     "answer": "**θ ≈ 6,33×10⁻³ rad ; L ≈ 2,5 cm**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : effet photoélectrique",
+     "statement": "Le travail d'extraction d'un métal est W₀ = 2,3 eV (ordre de grandeur de celui du sodium). On l'éclaire à λ = 400 nm. Y a-t-il émission ? Quelle est l'énergie cinétique maximale ? Quel est le seuil λ₀ ?",
+     "steps": [
+      {
+       "md": "Énergie du photon :",
+       "tex": "E = \\dfrac{hc}{\\lambda} = \\dfrac{6{,}63\\times10^{-34} \\times 3{,}00\\times10^{8}}{400\\times10^{-9}} \\approx 4{,}97\\times10^{-19}\\ \\text{J} \\approx 3{,}11\\ \\text{eV}"
+      },
+      {
+       "md": "E > W₀ : il y a émission. Énergie cinétique maximale :",
+       "tex": "E_{c,max} = 3{,}11 - 2{,}3 \\approx 0{,}81\\ \\text{eV}"
+      },
+      {
+       "md": "Seuil :",
+       "tex": "\\lambda_0 = \\dfrac{hc}{W_0} = \\dfrac{6{,}63\\times10^{-34}\\times3{,}00\\times10^{8}}{2{,}3\\times1{,}6\\times10^{-19}} \\approx 540\\ \\text{nm}"
+      }
+     ],
+     "answer": "**Émission : E_c,max ≈ 0,81 eV ; λ₀ ≈ 540 nm** (un photon de longueur d'onde supérieure à λ₀ n'arrache rien)."
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-physique-cd-complements-ond-01"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre vitesse de la matière et célérité de l'onde : la corde monte et descend, l'onde avance.\n- Oublier que la fréquence est fixée par la source et ne change pas d'un milieu à l'autre.\n- Confondre a (largeur de fente) et a (écart des fentes de Young) : relire le montage.\n- Ne pas convertir eV en J, nm en m.\n- Croire qu'une lumière très intense peut compenser une fréquence trop basse : le seuil ne dépend pas de l'intensité."
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-physique-cd-complements-ond-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-physique-cd-complements-ond-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-physique-cd-complements-ond-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-physique-cd-complements-ond-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-physique-cd-complements-ond-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Les interférences sonores expliquent les « zones de silence » entre deux haut-parleurs ; la diffraction explique qu'on entende derrière un mur ouvert.",
+      "L'effet photoélectrique est à la base des cellules photovoltaïques et des capteurs de lumière."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Niveau introductif pour l'effet photoélectrique et la dualité : vérifier si l'équation d'Einstein et la tension d'arrêt sont au programme (nous ne traitons pas la tension d'arrêt).",
+    "Valeurs arrondies annoncées : h = 6,63×10⁻³⁴ J·s ; c = 3,00×10⁸ m/s ; 1 eV = 1,6×10⁻¹⁹ J ; son dans l'air ≈ 340 m/s ; W₀ = 2,3 eV est un ordre de grandeur (cathode de type sodium, valeur à confirmer sur la table du manuel).",
+    "Ondes stationnaires (cordes, tuyaux) et effet Doppler ne sont pas traités : vérifier leur présence au programme de Tle C/D."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "prompt": "Sur une corde, une onde sinusoïdale a pour fréquence 5,0 Hz et pour longueur d'onde 0,40 m. Calcule sa célérité, en m/s.",
+   "points": 1,
+   "answer": 2.0,
+   "tolerance": 0.01,
+   "unit": "m/s",
+   "explanation": "v = λ f = 0,40 × 5,0 = 2,0 m/s.",
+   "method": "v = λ f = λ/T.",
+   "mistakes": [
+    "Calculer λ/f."
+   ],
+   "id": "bac-physique-cd-complements-ond-01",
+   "lesson": "bac-physique-cd-complements-ondes",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "prompt": "On éclaire une fente avec une lumière de longueur d'onde fixée. Pour que la diffraction soit plus marquée, il faut :",
+   "points": 1,
+   "choices": [
+    "diminuer la largeur de la fente",
+    "augmenter la largeur de la fente",
+    "augmenter l'intensité du laser",
+    "diminuer la distance à l'écran sans changer la fente"
+   ],
+   "answer": 0,
+   "explanation": "θ ≈ λ/a : plus a est petit, plus l'étalement est grand. L'intensité ne change pas la forme de la figure ; la distance D modifie la taille sur l'écran mais pas l'angle.",
+   "method": "θ ≈ λ/a.",
+   "mistakes": [
+    "Penser que une fente plus large étale davantage."
+   ],
+   "id": "bac-physique-cd-complements-ond-02",
+   "lesson": "bac-physique-cd-complements-ondes",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "prompt": "Calcule l'énergie d'un photon de longueur d'onde 500 nm, en eV (h = 6,63×10⁻³⁴ J·s ; c = 3,00×10⁸ m/s ; 1 eV = 1,6×10⁻¹⁹ J).",
+   "points": 1,
+   "answer": 2.49,
+   "tolerance": 0.02,
+   "unit": "eV",
+   "explanation": "E = hc/λ = 6,63×10⁻³⁴ × 3,00×10⁸ / (500×10⁻⁹) ≈ 3,98×10⁻¹⁹ J ≈ 2,49 eV.",
+   "method": "E = hc/λ en J, puis ÷ 1,6×10⁻¹⁹.",
+   "mistakes": [
+    "Oublier de convertir nm en m.",
+    "Ne pas convertir en eV."
+   ],
+   "id": "bac-physique-cd-complements-ond-03",
+   "lesson": "bac-physique-cd-complements-ondes",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "prompt": "Dans un dispositif de Young, λ = 600 nm, la distance entre les fentes est a = 0,50 mm et l'écran est à D = 1,5 m. Calcule l'interfrange, en mm.",
+   "points": 2,
+   "answer": 1.8,
+   "tolerance": 0.02,
+   "unit": "mm",
+   "explanation": "i = λ D / a = 600×10⁻⁹ × 1,5 / (0,50×10⁻³) = 1,8×10⁻³ m = 1,8 mm.",
+   "method": "i = λ D / a.",
+   "mistakes": [
+    "Utiliser a en m sans convertir mm.",
+    "Inverser D et a."
+   ],
+   "id": "bac-physique-cd-complements-ond-04",
+   "lesson": "bac-physique-cd-complements-ondes",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "prompt": "Deux sources synchrones à la surface de l'eau émettent des ondes de longueur d'onde 2,0 cm. Un point M est à 13,0 cm de S₁ et à 9,0 cm de S₂. Calcule δ/λ, où δ est la valeur absolue de la différence de marche. Conclus (entier : amplitude maximale).",
+   "points": 2,
+   "answer": 2.0,
+   "tolerance": 0,
+   "explanation": "δ = 13,0 − 9,0 = 4,0 cm et δ/λ = 4,0/2,0 = 2 : entier, donc interférence constructive (amplitude maximale en M).",
+   "method": "Calculer δ puis δ/λ.",
+   "mistakes": [
+    "Comparer δ à λ/2 au lieu de λ."
+   ],
+   "id": "bac-physique-cd-complements-ond-05",
+   "lesson": "bac-physique-cd-complements-ondes",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Une cellule photoélectrique a une cathode dont le travail d'extraction est W₀ = 2,3 eV. On donne h = 6,63×10⁻³⁴ J·s ; c = 3,00×10⁸ m/s ; 1 eV = 1,6×10⁻¹⁹ J ; m(e) = 9,1×10⁻³¹ kg.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Calcule la longueur d'onde seuil λ₀, en nm.",
+     "points": 1.5,
+     "answer": 540.0,
+     "tolerance": 2,
+     "unit": "nm",
+     "explanation": "λ₀ = hc/W₀ = 6,63×10⁻³⁴ × 3,00×10⁸ /(2,3 × 1,6×10⁻¹⁹) ≈ 540 nm.",
+     "id": "bac-physique-cd-complements-ond-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "La cathode est éclairée à λ = 400 nm. Calcule l'énergie d'un photon, en eV.",
+     "points": 1,
+     "answer": 3.11,
+     "tolerance": 0.02,
+     "unit": "eV",
+     "explanation": "E = hc/λ ≈ 3,11 eV.",
+     "id": "bac-physique-cd-complements-ond-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule l'énergie cinétique maximale des électrons émis, en eV.",
+     "points": 1,
+     "answer": 0.81,
+     "tolerance": 0.02,
+     "unit": "eV",
+     "explanation": "E_c,max = 3,11 − 2,3 ≈ 0,81 eV.",
+     "id": "bac-physique-cd-complements-ond-06-c"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule la vitesse maximale correspondante, en km/s.",
+     "points": 1,
+     "answer": 533.0,
+     "tolerance": 10,
+     "unit": "km/s",
+     "explanation": "v = √(2 E_c / m) = √(2 × 0,81 × 1,6×10⁻¹⁹ / 9,1×10⁻³¹) ≈ 533 km/s.",
+     "id": "bac-physique-cd-complements-ond-06-d"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "On double l'intensité de la lumière à 400 nm. Que se passe-t-il ?",
+     "points": 0.5,
+     "choices": [
+      "Le nombre d'électrons émis double environ ; E_c,max est inchangée",
+      "E_c,max double",
+      "L'émission s'arrête",
+      "Le seuil λ₀ double"
+     ],
+     "answer": 0,
+     "explanation": "L'intensité règle le nombre de photons, donc le nombre d'électrons ; l'énergie par photon et E_c,max ne dépendent que de la fréquence.",
+     "id": "bac-physique-cd-complements-ond-06-e"
+    }
+   ],
+   "method": "λ₀ = hc/W₀ ; E = hc/λ ; E_c = E − W₀ ; v = √(2E_c/m).",
+   "mistakes": [
+    "Oublier de convertir eV en J pour la vitesse.",
+    "Croire que E_c,max dépend de l'intensité."
+   ],
+   "id": "bac-physique-cd-complements-ond-06",
+   "lesson": "bac-physique-cd-complements-ondes",
+   "source": "Exercice original, style Bac C/D"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "Une onde mécanique progressive transporte :",
+   "points": 1,
+   "choices": [
+    "de l'énergie sans transport de matière",
+    "de la matière et de l'énergie",
+    "de la matière seulement",
+    "ni matière ni énergie"
+   ],
+   "answer": 0,
+   "explanation": "La perturbation se propage, les points du milieu oscillent autour de leur position.",
+   "id": "bac-physique-cd-complements-ond-q1",
+   "lesson": "bac-physique-cd-complements-ondes"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "La longueur d'onde est liée à la célérité et à la période par :",
+   "points": 1,
+   "choices": [
+    "λ = v T",
+    "λ = v / T",
+    "λ = T / v",
+    "λ = v + T"
+   ],
+   "answer": 0,
+   "explanation": "λ est la distance parcourue pendant une période.",
+   "id": "bac-physique-cd-complements-ond-q2",
+   "lesson": "bac-physique-cd-complements-ondes"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "Deux ondes sont en interférence constructive si la différence de marche vaut :",
+   "points": 1,
+   "choices": [
+    "kλ (k entier)",
+    "(k + ½)λ",
+    "λ/4",
+    "un nombre quelconque"
+   ],
+   "answer": 0,
+   "explanation": "δ = kλ : les ondes arrivent en phase.",
+   "id": "bac-physique-cd-complements-ond-q3",
+   "lesson": "bac-physique-cd-complements-ondes"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "Lors de la traversée d'un milieu d'indice n, la fréquence d'une lumière :",
+   "points": 1,
+   "choices": [
+    "reste inchangée",
+    "est multipliée par n",
+    "est divisée par n",
+    "devient nulle"
+   ],
+   "answer": 0,
+   "explanation": "La fréquence est fixée par la source ; λ et v changent.",
+   "id": "bac-physique-cd-complements-ond-q4",
+   "lesson": "bac-physique-cd-complements-ondes"
+  },
+  {
+   "kind": "mcq",
+   "tier": "autoeval",
+   "prompt": "L'énergie d'un photon de fréquence ν vaut :",
+   "points": 1,
+   "choices": [
+    "h ν",
+    "h / ν",
+    "ν / h",
+    "h c ν"
+   ],
+   "answer": 0,
+   "explanation": "E = h ν = h c / λ.",
+   "id": "bac-physique-cd-complements-ond-q5",
+   "lesson": "bac-physique-cd-complements-ondes"
+  }
+ ]
+}

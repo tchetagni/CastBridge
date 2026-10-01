@@ -1,0 +1,649 @@
+{
+ "chapter": "2nde-physique-c-ch-optique",
+ "lessons": [
+  {
+   "id": "2nde-physique-c-optique",
+   "title": "Optique géométrique : réflexion, réfraction, lentilles",
+   "minutes": 40,
+   "programRef": "2nde C — Optique géométrique : réflexion, réfraction, lentilles minces (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Énoncer et appliquer les lois de la réflexion et de la réfraction (Snell-Descartes).",
+    "Reconnaître une lentille convergente et calculer sa vergence.",
+    "Construire l'image d'un objet par une lentille mince.",
+    "Utiliser la relation de conjugaison et le grandissement."
+   ],
+   "prerequisites": [
+    "2nde-physique-c-grandeurs"
+   ],
+   "exercises": [
+    "2nde-physique-c-opt-01",
+    "2nde-physique-c-opt-02",
+    "2nde-physique-c-opt-03",
+    "2nde-physique-c-opt-04",
+    "2nde-physique-c-opt-05",
+    "2nde-physique-c-opt-06"
+   ],
+   "selfCheck": [
+    "2nde-physique-c-opt-q1",
+    "2nde-physique-c-opt-q2",
+    "2nde-physique-c-opt-q3",
+    "2nde-physique-c-opt-q4",
+    "2nde-physique-c-opt-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Propagation de la lumière",
+     "md": "Dans un milieu **transparent et homogène**, la lumière se propage **en ligne droite** : on la représente par des **rayons**. Dans le vide, sa vitesse est $c \\approx 3 \\times 10^{8}$ m/s. Dans un milieu d'**indice** n, la vitesse est $v = c/n$ avec $n \\geq 1$ (air : $n \\approx 1$ ; eau : $n \\approx 1{,}33$ ; verre courant : $n \\approx 1{,}5$)."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Réflexion",
+     "md": "Le rayon incident, la normale et le rayon réfléchi sont dans un même plan (**plan d'incidence**). Les angles se mesurent par rapport à la **normale** à la surface : $r = i$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Réfraction : lois de Snell-Descartes",
+     "md": "Le rayon réfracté reste dans le plan d'incidence et :\n$n_1 \\sin i_1 = n_2 \\sin i_2$\nSi $n_2 > n_1$, le rayon se **rapproche** de la normale. Si $n_1 > n_2$, il s'en **écarte** ; au-delà d'un **angle limite** ($\\sin i_{\\text{lim}} = n_2/n_1$), il y a **réflexion totale**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 220,
+      "items": [
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 110,
+        "x2": 380,
+        "y2": 110,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 20,
+        "x2": 200,
+        "y2": 200,
+        "color": "grey",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 60,
+        "x2": 200,
+        "y2": 110,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 110,
+        "x2": 340,
+        "y2": 60,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 110,
+        "x2": 256,
+        "y2": 180,
+        "color": "green",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "angle",
+        "x": 200,
+        "y": 110,
+        "from": 90,
+        "to": 160,
+        "r": 40,
+        "label": "i",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 50,
+        "text": "incident",
+        "size": 14,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 44,
+        "text": "réfléchi",
+        "size": 14,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 196,
+        "text": "réfracté",
+        "size": 14,
+        "color": "green",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 98,
+        "text": "air",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 135,
+        "text": "verre",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Un rayon incident (bleu) arrive sur une surface : une partie est réfléchie (rouge), l'autre est réfractée (vert).",
+     "alt": "Une surface horizontale avec une normale en pointillés, un rayon incident, un rayon réfléchi symétrique et un rayon réfracté plus proche de la normale."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Lentilles minces",
+     "md": "Une lentille **convergente** (bords minces) fait converger un faisceau parallèle en son **foyer image** F′ ; une lentille **divergente** (bords épais) l'écarte. Le **centre optique** O est le point de l'axe où le rayon n'est pas dévié.\nDistance focale : $f' = OF'$ (m). Vergence : $C = \\frac{1}{f'}$ en dioptries (δ)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Construire l'image d'un objet",
+     "md": "Trois rayons particuliers issus de B :\n1. parallèle à l'axe : il émerge **en passant par F′** ;\n2. passant par O : il **n'est pas dévié** ;\n3. passant par le foyer objet F : il émerge **parallèle à l'axe**.\nL'image B′ est à l'intersection des rayons émergents ; A′ est sur l'axe, sous B′."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 180,
+      "items": [
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 100,
+        "x2": 380,
+        "y2": 100,
+        "color": "grey",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 30,
+        "x2": 200,
+        "y2": 170,
+        "color": "ink",
+        "width": 3,
+        "arrow": "both"
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 100,
+        "x2": 60,
+        "y2": 60,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 305,
+        "y1": 100,
+        "x2": 305,
+        "y2": 130,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 60,
+        "x2": 200,
+        "y2": 60,
+        "color": "green",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 60,
+        "x2": 305,
+        "y2": 130,
+        "color": "green",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 60,
+        "x2": 305,
+        "y2": 130,
+        "color": "orange",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 140,
+        "cy": 100,
+        "r": 4,
+        "fill": "ink",
+        "stroke": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 260,
+        "cy": 100,
+        "r": 4,
+        "fill": "ink",
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 118,
+        "text": "A",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 50,
+        "text": "B",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 140,
+        "y": 140,
+        "text": "F",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 140,
+        "text": "F′",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 186,
+        "y": 118,
+        "text": "O",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 305,
+        "y": 90,
+        "text": "A′",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 305,
+        "y": 150,
+        "text": "B′",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Lentille convergente : objet AB au-delà de 2f′, image A′B′ réelle, renversée et réduite (rayon vert : parallèle à l'axe ; orange : par le centre O).",
+     "alt": "Une lentille verticale avec un objet à gauche, deux rayons issus de son sommet B, et une image renversée plus petite à droite de la lentille."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Relation de conjugaison et grandissement",
+     "md": "Avec des grandeurs **algébriques** (sens positif = sens de la lumière, donc OA < 0 pour un objet devant la lentille) :\n$\\frac{1}{OA'} - \\frac{1}{OA} = \\frac{1}{f'}$ et $\\gamma = \\frac{OA'}{OA} = \\frac{A'B'}{AB}$.\n$\\gamma < 0$ : image renversée ; $|\\gamma| > 1$ : image agrandie. OA′ > 0 : image réelle ; OA′ < 0 : image virtuelle."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : réfraction air-verre",
+     "statement": "Un rayon passe de l'air (n = 1) au verre (n = 1,5) avec un angle d'incidence de 45°. Calcule l'angle de réfraction.",
+     "steps": [
+      {
+       "md": "On applique la loi de Snell-Descartes :",
+       "tex": "\\sin r = \\frac{1 \\times \\sin 45°}{1{,}5} \\approx \\frac{0{,}7071}{1{,}5} \\approx 0{,}4714"
+      },
+      {
+       "md": "On en déduit $r \\approx 28{,}1°$. Comme le verre est plus réfringent, le rayon se rapproche de la normale (28° < 45°)."
+      }
+     ],
+     "answer": "**r ≈ 28,1°**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : angle limite",
+     "statement": "Quel est l'angle limite pour un rayon passant de l'eau (n = 1,33) à l'air (n = 1,00) ?",
+     "steps": [
+      {
+       "md": "À l'angle limite, le rayon réfracté rase la surface ($r = 90°$) :",
+       "tex": "1{,}33 \\sin i_{\\text{lim}} = 1{,}00 \\times \\sin 90° = 1"
+      },
+      {
+       "md": "Donc $\\sin i_{\\text{lim}} = 1/1{,}33 \\approx 0{,}752$ et $i_{\\text{lim}} \\approx 48{,}8°$. Au-delà : réflexion totale.",
+       "tex": "i_{\\text{lim}} \\approx 48{,}8°"
+      }
+     ],
+     "answer": "Angle limite **≈ 48,8°**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : image d'une lentille",
+     "statement": "Une lentille convergente de distance focale 10 cm donne l'image d'un objet de 2 cm placé à 30 cm devant elle. Où est l'image et quelle est sa taille ?",
+     "steps": [
+      {
+       "md": "Avec OA = −30 cm :",
+       "tex": "\\frac{1}{OA'} = \\frac{1}{10} - \\frac{1}{30} = \\frac{2}{30} \\Rightarrow OA' = 15\\ \\text{cm}"
+      },
+      {
+       "md": "Grandissement et taille :",
+       "tex": "\\gamma = \\frac{15}{-30} = -0{,}5 \\ ;\\ A'B' = -0{,}5 \\times 2 = -1\\ \\text{cm}"
+      }
+     ],
+     "answer": "Image **réelle** à 15 cm, **renversée**, de **1 cm**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Mesurer les angles par rapport à la surface au lieu de la normale.\n- Diviser les angles au lieu des sinus dans la loi de Snell-Descartes.\n- Oublier que OA est négative pour un objet réel devant la lentille.\n- Exprimer f′ en cm dans $C = 1/f'$ (il faut des mètres).\n- Confondre image réelle (sur écran) et image virtuelle (visible à l'œil à travers la lentille)."
+    },
+    {
+     "type": "exercise",
+     "ref": "2nde-physique-c-opt-01"
+    },
+    {
+     "type": "more",
+     "items": [
+      "La vitesse de la lumière est environ 300 000 km/s : en 1 s, elle fait plus de sept fois le tour de la Terre.",
+      "Les indices usuels (eau 1,33 ; verre 1,5) sont des valeurs approchées qui dépendent de la couleur et du matériau."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Relation de conjugaison avec grandeurs algébriques : exigible en Seconde C ? Certains programmes se limitent à la construction graphique ; à vérifier.",
+    "Indices (eau 1,33 ; verre 1,5) : valeurs usuelles arrondies ; vérifier les valeurs données par l'enseignant.",
+    "Vergence en dioptries et réflexion totale : place dans le programme de Seconde à confirmer.",
+    "Convention de signes (sens de la lumière positif) : à aligner sur celle du cours enseigné."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "2nde-physique-c-opt-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-physique-c-optique",
+   "prompt": "Un rayon lumineux arrive sur un miroir plan en faisant un angle de 30° avec la surface du miroir. Quel est l'angle de réflexion r (mesuré par rapport à la normale) en degrés ?",
+   "answer": 60,
+   "tolerance": 0,
+   "unit": "°",
+   "explanation": "L'angle d'incidence se mesure par rapport à la **normale** : $i = 90° - 30° = 60°$. Loi de la réflexion : $r = i = 60°$.",
+   "method": "Mesurer les angles par rapport à la normale, puis $r = i$.",
+   "mistakes": [
+    "Répondre 30° en mesurant l'angle par rapport au miroir."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-physique-c-opt-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-physique-c-optique",
+   "prompt": "Une lentille mince convergente a une distance focale $f' = 25$ cm. Calcule sa vergence en dioptries (δ).",
+   "answer": 4,
+   "tolerance": 0,
+   "unit": "δ",
+   "explanation": "$C = \\frac{1}{f'}$ avec $f'$ en mètres : $f' = 0{,}25$ m, donc $C = \\frac{1}{0{,}25} = 4$ δ.",
+   "method": "$C = 1/f'$ avec $f'$ en mètres.",
+   "mistakes": [
+    "Garder f' en centimètres : on obtient 0,04."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-physique-c-opt-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "2nde-physique-c-optique",
+   "prompt": "La lumière se propage dans le verre d'indice n = 1,5. Sa vitesse est $v = c/n$ avec $c = 3{,}00 \\times 10^{8}$ m/s. Calcule v en unités de $10^{8}$ m/s.",
+   "answer": 2,
+   "tolerance": 0.01,
+   "unit": "× 10⁸ m/s",
+   "explanation": "$v = \\frac{3{,}00 \\times 10^{8}}{1{,}5} = 2{,}00 \\times 10^{8}$ m/s : la lumière est plus lente dans le verre que dans le vide.",
+   "method": "$n = c / v$, donc $v = c / n$.",
+   "mistakes": [
+    "Multiplier par n au lieu de diviser."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-physique-c-opt-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "2nde-physique-c-optique",
+   "prompt": "Un rayon passe de l'air (n = 1,00) à l'eau (n = 1,33) avec un angle d'incidence de 40°. Calcule l'angle de réfraction (en degrés, arrondi à 0,1°).",
+   "answer": 28.9,
+   "tolerance": 0.1,
+   "unit": "°",
+   "explanation": "$\\sin r = \\frac{1{,}00 \\times \\sin 40°}{1{,}33} \\approx \\frac{0{,}6428}{1{,}33} \\approx 0{,}4833$, donc $r \\approx 28{,}9°$. Le rayon se rapproche de la normale.",
+   "method": "$n_1 \\sin i_1 = n_2 \\sin i_2$ puis arcsinus.",
+   "mistakes": [
+    "Calculer $r = 40° / 1{,}33$ : les angles ne se divisent pas, ce sont les sinus."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-physique-c-opt-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "2nde-physique-c-optique",
+   "prompt": "Une lentille convergente de distance focale 20 cm donne l'image d'un objet situé à 60 cm devant elle. À quelle distance de la lentille (en cm) se forme l'image ?",
+   "answer": 30,
+   "tolerance": 0.1,
+   "unit": "cm",
+   "explanation": "$\\frac{1}{OA'} = \\frac{1}{f'} + \\frac{1}{OA} = \\frac{1}{20} - \\frac{1}{60} = \\frac{2}{60}$, donc $OA' = 30$ cm (image réelle, du côté opposé à l'objet).",
+   "method": "$\\frac{1}{OA'} - \\frac{1}{OA} = \\frac{1}{f'}$ avec $OA = -60$ cm.",
+   "mistakes": [
+    "Oublier le signe négatif de OA (objet devant la lentille)."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-physique-c-opt-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "2nde-physique-c-optique",
+   "prompt": "Un objet AB de 1 cm de hauteur est placé perpendiculairement à l'axe d'une lentille mince convergente de distance focale $f' = 5$ cm, à 4 cm devant la lentille (donc $OA = -4$ cm).",
+   "parts": [
+    {
+     "id": "2nde-physique-c-opt-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la position de l'image OA′ (en cm, valeur algébrique).",
+     "answer": -20,
+     "tolerance": 0.1,
+     "unit": "cm",
+     "explanation": "$\\frac{1}{OA'} = \\frac{1}{5} - \\frac{1}{4} = -\\frac{1}{20}$, donc $OA' = -20$ cm. Le signe négatif signifie que l'image est du même côté que l'objet."
+    },
+    {
+     "id": "2nde-physique-c-opt-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le grandissement $\\gamma = \\frac{OA'}{OA}$.",
+     "answer": 5,
+     "tolerance": 0.05,
+     "explanation": "$\\gamma = \\frac{-20}{-4} = 5$."
+    },
+    {
+     "id": "2nde-physique-c-opt-06-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quelle est la taille de l'image A′B′ (en cm) ?",
+     "answer": 5,
+     "tolerance": 0.05,
+     "unit": "cm",
+     "explanation": "$A'B' = \\gamma \\times AB = 5 \\times 1 = 5$ cm. Le grandissement étant positif, l'image est droite."
+    },
+    {
+     "id": "2nde-physique-c-opt-06-d",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle est la nature de l'image ?",
+     "choices": [
+      "virtuelle, droite et agrandie",
+      "réelle, renversée et agrandie",
+      "réelle, droite et réduite",
+      "virtuelle, renversée et réduite"
+     ],
+     "answer": 0,
+     "explanation": "OA′ < 0 : image virtuelle (elle ne peut pas être projetée sur un écran). γ > 0 : droite. |γ| > 1 : agrandie. C'est le principe de la loupe : objet entre la lentille et son foyer."
+    }
+   ],
+   "method": "Relation de conjugaison, puis grandissement, puis nature de l'image.",
+   "mistakes": [
+    "Oublier de garder le signe de OA."
+   ],
+   "source": "Exercice original, style devoir de Seconde C"
+  },
+  {
+   "id": "2nde-physique-c-opt-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-physique-c-optique",
+   "prompt": "Dans un milieu transparent et homogène, la lumière se propage :",
+   "choices": [
+    "en courbe",
+    "en cercle",
+    "en ligne droite",
+    "en zigzag"
+   ],
+   "answer": 2,
+   "explanation": "Propagation rectiligne de la lumière dans un milieu homogène et transparent."
+  },
+  {
+   "id": "2nde-physique-c-opt-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-physique-c-optique",
+   "prompt": "Loi de la réflexion :",
+   "choices": [
+    "l'angle de réflexion est égal à l'angle d'incidence",
+    "l'angle de réflexion vaut le double de l'angle d'incidence",
+    "les deux angles sont complémentaires",
+    "r = 90° − i"
+   ],
+   "answer": 0,
+   "explanation": "$r = i$, les deux angles étant mesurés par rapport à la normale."
+  },
+  {
+   "id": "2nde-physique-c-opt-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-physique-c-optique",
+   "prompt": "Quelle est la loi de Snell-Descartes pour la réfraction ?",
+   "choices": [
+    "$n_1 i_1 = n_2 i_2$",
+    "$n_1 \\sin i_1 = n_2 \\sin i_2$",
+    "$n_1 \\cos i_1 = n_2 \\cos i_2$",
+    "$\\sin i_1 = \\sin i_2$ toujours"
+   ],
+   "answer": 1,
+   "explanation": "C'est la relation entre les sinus des angles et les indices des milieux."
+  },
+  {
+   "id": "2nde-physique-c-opt-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-physique-c-optique",
+   "prompt": "Un rayon qui arrive sur une lentille mince en passant par son centre optique O :",
+   "choices": [
+    "est dévié vers le foyer",
+    "n'est pas dévié",
+    "est réfléchi",
+    "est absorbé"
+   ],
+   "answer": 1,
+   "explanation": "Le rayon passant par le centre optique traverse la lentille sans déviation."
+  },
+  {
+   "id": "2nde-physique-c-opt-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "2nde-physique-c-optique",
+   "prompt": "La vergence d'une lentille de distance focale 0,5 m vaut :",
+   "choices": [
+    "0,5 δ",
+    "2 δ",
+    "5 δ",
+    "0,2 δ"
+   ],
+   "answer": 1,
+   "explanation": "$C = 1/f' = 1/0{,}5 = 2$ δ."
+  }
+ ]
+}

@@ -1,0 +1,445 @@
+{
+ "chapter": "1re-maths-a-ch-suites",
+ "lessons": [
+  {
+   "id": "1re-maths-a-suites",
+   "title": "Suites arithmétiques et géométriques",
+   "minutes": 35,
+   "programRef": "1re A — Suites numériques, applications financières (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale d'après le programme habituel de Première ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître une suite arithmétique ou géométrique.",
+    "Calculer termes et sommes.",
+    "Traduire un pourcentage en raison.",
+    "Résoudre un problème d'épargne en FCFA."
+   ],
+   "prerequisites": [
+    "1re-maths-a-fonctions"
+   ],
+   "exercises": [
+    "1re-maths-a-sg-01",
+    "1re-maths-a-sg-02",
+    "1re-maths-a-sg-03",
+    "1re-maths-a-sg-04",
+    "1re-maths-a-sg-05",
+    "1re-maths-a-sg-06"
+   ],
+   "selfCheck": [
+    "1re-maths-a-sg-q1",
+    "1re-maths-a-sg-q2",
+    "1re-maths-a-sg-q3",
+    "1re-maths-a-sg-q4",
+    "1re-maths-a-sg-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier si les suites géométriques et leurs sommes sont au programme de Première A.",
+    "Les taux et capitaux sont fictifs : aucune donnée bancaire réelle."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Ce que tu sauras faire",
+     "md": "- Reconnaître une suite arithmétique ou géométrique.\n- Calculer un terme et une somme de termes.\n- Traduire une augmentation ou une baisse en pourcentage.\n- Résoudre un problème d'épargne (intérêts composés) en FCFA."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Suite arithmétique",
+     "md": "On passe d'un terme au suivant en **ajoutant** toujours le même nombre r (la **raison**) : $u_{n+1} = u_n + r$.\nTerme général : $u_n = u_0 + n \\times r$.\nSomme de termes consécutifs : $S = (\\text{nombre de termes}) \\times \\frac{\\text{premier} + \\text{dernier}}{2}$."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Suite géométrique",
+     "md": "On passe d'un terme au suivant en **multipliant** toujours par le même nombre q (la **raison**) : $v_{n+1} = q \\times v_n$.\nTerme général : $v_n = v_0 \\times q^n$.\nSi q ≠ 1, la somme de N termes consécutifs vaut $(\\text{premier terme}) \\times \\frac{1 - q^N}{1 - q}$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Pourcentages et raison",
+     "md": "- Augmenter de t % : multiplier par $1 + \\frac{t}{100}$ (hausse de 4 % : × 1,04).\n- Diminuer de t % : multiplier par $1 - \\frac{t}{100}$ (baisse de 10 % : × 0,9).\n- Des augmentations ou baisses **successives de même taux** forment une suite géométrique ; des ajouts d'une même somme forment une suite arithmétique."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Intérêts simples et composés",
+     "md": "- **Intérêts simples** : chaque année on ajoute la même somme (arithmétique).\n- **Intérêts composés** : chaque année les intérêts sont calculés sur le capital déjà augmenté, donc le capital est multiplié par $1 + \\frac{t}{100}$ (géométrique)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "unit": "FCFA",
+      "bars": [
+       {
+        "label": "an 0",
+        "value": 600000,
+        "color": "blue"
+       },
+       {
+        "label": "an 1",
+        "value": 540000,
+        "color": "blue"
+       },
+       {
+        "label": "an 2",
+        "value": 486000,
+        "color": "blue"
+       },
+       {
+        "label": "an 3",
+        "value": 437400,
+        "color": "blue"
+       },
+       {
+        "label": "an 4",
+        "value": 393660,
+        "color": "orange"
+       }
+      ]
+     },
+     "caption": "Une moto de 600 000 FCFA perd 10 % de sa valeur chaque année (modèle fictif) : les valeurs forment une suite géométrique de raison 0,9.",
+     "alt": "Cinq barres décroissantes : 600 000, 540 000, 486 000, 437 400 et 393 660 FCFA de l'an 0 à l'an 4."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : suite arithmétique",
+     "statement": "Un employé gagne 120 000 FCFA la première année, avec une augmentation de 5 000 FCFA chaque année (exemple fictif). Quel salaire la 9e année ? Quel total en 5 ans ?",
+     "steps": [
+      {
+       "md": "Le salaire de l'année 1 est $u_0 = 120\\,000$ et la raison est 5 000. La 9e année correspond à n = 8 :",
+       "tex": "u_8 = 120\\,000 + 8 \\times 5\\,000 = 160\\,000"
+      },
+      {
+       "md": "Sur 5 ans : de $u_0$ à $u_4 = 140\\,000$, soit 5 termes :",
+       "tex": "S = 5 \\times \\frac{120\\,000 + 140\\,000}{2} = 650\\,000"
+      }
+     ],
+     "answer": "Salaire de la 9e année : 160 000 FCFA ; total sur 5 ans : 650 000 FCFA."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : intérêts composés",
+     "statement": "On place 300 000 FCFA à 4 % par an, à intérêts composés. Calcule le capital après 1, 2 puis 3 ans.",
+     "steps": [
+      {
+       "md": "La raison est $1 + \\frac{4}{100} = 1{,}04$ :",
+       "tex": "C_n = 300\\,000 \\times 1{,}04^n"
+      },
+      {
+       "md": "$C_1 = 312\\,000$ FCFA et $C_2 = 312\\,000 \\times 1{,}04 = 324\\,480$ FCFA."
+      },
+      {
+       "md": "$C_3 = 324\\,480 \\times 1{,}04 = 337\\,459{,}2$ FCFA, soit environ 337 459 FCFA."
+      }
+     ],
+     "answer": "$C_1 = 312\\,000$ ; $C_2 = 324\\,480$ ; $C_3 \\approx 337\\,459$ FCFA."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-a-sg-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-a-sg-02"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : baisse en pourcentage",
+     "statement": "Une moto neuve de 600 000 FCFA perd 10 % de sa valeur chaque année. Quelle est sa valeur après 3 ans ?",
+     "steps": [
+      {
+       "md": "Perdre 10 % revient à multiplier par 0,9 : la valeur est une suite géométrique de raison 0,9 et de premier terme 600 000 :",
+       "tex": "V_n = 600\\,000 \\times 0{,}9^n"
+      },
+      {
+       "md": "$V_3 = 600\\,000 \\times 0{,}729 = 437\\,400$ FCFA."
+      }
+     ],
+     "answer": "Valeur après 3 ans : **437 400 FCFA**."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-a-sg-03"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : quelle suite ?",
+     "md": "1. Calculer les différences $u_{n+1} - u_n$ : constantes ? suite arithmétique.\n2. Sinon calculer les quotients $\\frac{u_{n+1}}{u_n}$ : constants ? suite géométrique.\n3. Écrire le terme général, puis remplacer n.\n4. Attention au rang : si le premier terme est $u_0$, le 9e terme est $u_8$."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Pièges fréquents",
+     "md": "- Décaler le rang : de $u_0$ à $u_4$, il y a 5 termes.\n- Prendre 0,04 comme raison pour une hausse de 4 % (la raison est 1,04).\n- Additionner 4 % du capital initial chaque année : ce sont des intérêts simples.\n- Calculer $(300\\,000 \\times 1{,}04)^n$ au lieu de $300\\,000 \\times 1{,}04^n$."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-a-sg-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-a-sg-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-a-sg-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le temps de doublement d'un capital à 6 % par an est d'environ 12 ans (essai à la calculatrice : $1{,}06^{12} \\approx 2{,}01$).",
+      "Le programme de série A peut se limiter aux suites arithmétiques et à des applications financières simples : à vérifier sur le texte officiel."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "1re-maths-a-sg-01",
+   "kind": "numeric",
+   "points": 1,
+   "prompt": "$(u_n)$ est arithmétique avec $u_0 = 4$ et de raison 3. Calcule $u_{10}$.",
+   "answer": 34,
+   "tolerance": 0,
+   "explanation": "$u_{10} = 4 + 10 \\times 3 = 34$.",
+   "tier": "application",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire série A",
+   "method": "$u_n = u_0 + nr$.",
+   "mistakes": [
+    "Calculer $4 + 9 \\times 3 = 31$."
+   ],
+   "lesson": "1re-maths-a-suites"
+  },
+  {
+   "id": "1re-maths-a-sg-02",
+   "kind": "numeric",
+   "points": 1,
+   "prompt": "$(v_n)$ est géométrique avec $v_0 = 5$ et de raison 2. Calcule $v_6$.",
+   "answer": 320,
+   "tolerance": 0,
+   "explanation": "$v_6 = 5 \\times 2^6 = 5 \\times 64 = 320$.",
+   "tier": "application",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire série A",
+   "method": "$v_n = v_0 q^n$.",
+   "mistakes": [
+    "Calculer $10^6$ en multipliant 5 par 2 d'abord."
+   ],
+   "lesson": "1re-maths-a-suites"
+  },
+  {
+   "id": "1re-maths-a-sg-03",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Quelle est la nature de la suite 2, 6, 18, 54, … ?",
+   "choices": [
+    "Arithmétique de raison 4",
+    "Géométrique de raison 2",
+    "Ni arithmétique ni géométrique",
+    "Géométrique de raison 3"
+   ],
+   "answer": 3,
+   "explanation": "Les quotients $\\frac{6}{2} = \\frac{18}{6} = \\frac{54}{18} = 3$ sont constants, alors que les différences (4, 12, 36) ne le sont pas.",
+   "tier": "application",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire série A",
+   "method": "Comparer différences et quotients.",
+   "mistakes": [
+    "Calculer seulement la première différence 4."
+   ],
+   "lesson": "1re-maths-a-suites"
+  },
+  {
+   "id": "1re-maths-a-sg-04",
+   "kind": "numeric",
+   "points": 2,
+   "prompt": "Calcule la somme des 20 premiers nombres impairs : $1 + 3 + 5 + \\ldots + 39$.",
+   "answer": 400,
+   "tolerance": 0,
+   "explanation": "C'est une suite arithmétique de raison 2, de 20 termes, du premier terme 1 au dernier 39 : $S = 20 \\times \\frac{1 + 39}{2} = 400$.",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "source": "Exercice original, style Probatoire série A",
+   "method": "Nombre de termes × (premier + dernier) ÷ 2.",
+   "mistakes": [
+    "Se tromper sur le nombre de termes (19 ou 21)."
+   ],
+   "lesson": "1re-maths-a-suites"
+  },
+  {
+   "id": "1re-maths-a-sg-05",
+   "kind": "numeric",
+   "points": 2,
+   "prompt": "On place 400 000 FCFA à 5 % par an à intérêts composés. Quel est le capital, en FCFA, après 2 ans ?",
+   "answer": 441000,
+   "tolerance": 0,
+   "explanation": "$400\\,000 \\times 1{,}05^2 = 400\\,000 \\times 1{,}1025 = 441\\,000$ FCFA. (Avec des intérêts simples on aurait 440 000.)",
+   "unit": "FCFA",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "source": "Exercice original, style Probatoire série A",
+   "method": "Multiplier deux fois par 1,05.",
+   "mistakes": [
+    "Ajouter 2 × 5 % = 10 % d'un coup."
+   ],
+   "lesson": "1re-maths-a-suites"
+  },
+  {
+   "id": "1re-maths-a-sg-06",
+   "kind": "problem",
+   "prompt": "Mme Njoya place 250 000 FCFA à intérêts composés au taux de 6 % par an (exemple fictif). On note $C_n$ le capital après n années, avec $C_0 = 250\\,000$.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule $C_1$ (en FCFA).",
+     "answer": 265000,
+     "tolerance": 0,
+     "explanation": "$C_1 = 250\\,000 \\times 1{,}06 = 265\\,000$ FCFA.",
+     "unit": "FCFA",
+     "id": "1re-maths-a-sg-06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle est la nature de la suite $(C_n)$ ?",
+     "choices": [
+      "Arithmétique de raison 15 000",
+      "Géométrique de raison 1,06",
+      "Géométrique de raison 0,06",
+      "Arithmétique de raison 1,06"
+     ],
+     "answer": 1,
+     "explanation": "Chaque année, le capital est multiplié par 1,06.",
+     "id": "1re-maths-a-sg-06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule $C_3$ (en FCFA, arrondi à l'unité).",
+     "answer": 297754,
+     "tolerance": 1,
+     "explanation": "$C_3 = 250\\,000 \\times 1{,}06^3 = 250\\,000 \\times 1{,}191016 \\approx 297\\,754$ FCFA.",
+     "unit": "FCFA",
+     "id": "1re-maths-a-sg-06-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Au bout de combien d'années entières le capital dépasse-t-il 300 000 FCFA ?",
+     "answer": 4,
+     "tolerance": 0,
+     "explanation": "$C_3 \\approx 297\\,754$ (inférieur à 300 000) et $C_4 \\approx 315\\,619$ (supérieur) : il faut 4 ans.",
+     "unit": "années",
+     "id": "1re-maths-a-sg-06-d"
+    }
+   ],
+   "tier": "examen",
+   "difficulty": 2,
+   "source": "Exercice original, style Probatoire série A",
+   "method": "Reconnaître la raison 1,06, puis essayer les valeurs de n successives.",
+   "mistakes": [
+    "Utiliser la raison 0,06.",
+    "Conclure avec n = 3 sans tester C_3."
+   ],
+   "lesson": "1re-maths-a-suites"
+  },
+  {
+   "id": "1re-maths-a-sg-q1",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Dans une suite arithmétique de raison 5 et de premier terme 2 ($u_0 = 2$), que vaut $u_3$ ?",
+   "choices": [
+    "15",
+    "10",
+    "30",
+    "17"
+   ],
+   "answer": 3,
+   "explanation": "$u_3 = 2 + 3 \\times 5 = 17$.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire série A",
+   "lesson": "1re-maths-a-suites"
+  },
+  {
+   "id": "1re-maths-a-sg-q2",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Une hausse de 20 % correspond à la multiplication par :",
+   "choices": [
+    "0,2",
+    "1,2",
+    "1,02",
+    "20"
+   ],
+   "answer": 1,
+   "explanation": "$1 + \\frac{20}{100} = 1{,}2$.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire série A",
+   "lesson": "1re-maths-a-suites"
+  },
+  {
+   "id": "1re-maths-a-sg-q3",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Une baisse de 15 % correspond à la multiplication par :",
+   "choices": [
+    "0,15",
+    "1,15",
+    "0,015",
+    "0,85"
+   ],
+   "answer": 3,
+   "explanation": "$1 - \\frac{15}{100} = 0{,}85$.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire série A",
+   "lesson": "1re-maths-a-suites"
+  },
+  {
+   "id": "1re-maths-a-sg-q4",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "La suite 100, 90, 80, 70, … est :",
+   "choices": [
+    "arithmétique de raison −10",
+    "géométrique de raison 0,9",
+    "arithmétique de raison 10",
+    "géométrique de raison −10"
+   ],
+   "answer": 0,
+   "explanation": "On retranche toujours 10 : suite arithmétique de raison −10.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire série A",
+   "lesson": "1re-maths-a-suites"
+  },
+  {
+   "id": "1re-maths-a-sg-q5",
+   "kind": "mcq",
+   "points": 1,
+   "prompt": "Des intérêts composés produisent une suite :",
+   "choices": [
+    "arithmétique",
+    "constante",
+    "géométrique",
+    "décroissante toujours"
+   ],
+   "answer": 2,
+   "explanation": "Le capital est multiplié par un même nombre chaque année.",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "source": "Exercice original, style Probatoire série A",
+   "lesson": "1re-maths-a-suites"
+  }
+ ]
+}

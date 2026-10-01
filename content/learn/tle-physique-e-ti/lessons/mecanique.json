@@ -1,0 +1,540 @@
+{
+ "chapter": "tle-physique-e-ti-ch-mecanique",
+ "lessons": [
+  {
+   "id": "tle-physique-e-ti-mecanique",
+   "title": "Mécanique : cinématique, dynamique, moments, énergie et puissance",
+   "minutes": 45,
+   "programRef": "Tle E/TI — Mécanique (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale, brouillon IA ; à relire par un enseignant",
+   "objectives": [
+    "Résoudre un problème de mouvement rectiligne.",
+    "Appliquer la deuxième loi de Newton.",
+    "Appliquer l'équilibre d'un solide autour d'un axe.",
+    "Calculer travail, énergie, puissance et rendement."
+   ],
+   "exercises": [
+    "tle-physique-e-ti-mecanique-01",
+    "tle-physique-e-ti-mecanique-02",
+    "tle-physique-e-ti-mecanique-03",
+    "tle-physique-e-ti-mecanique-04",
+    "tle-physique-e-ti-mecanique-05",
+    "tle-physique-e-ti-mecanique-06"
+   ],
+   "selfCheck": [
+    "tle-physique-e-ti-mec-q1",
+    "tle-physique-e-ti-mec-q2",
+    "tle-physique-e-ti-mec-q3",
+    "tle-physique-e-ti-mec-q4",
+    "tle-physique-e-ti-mec-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Objectifs",
+     "md": "Étudier un mouvement rectiligne uniforme ou uniformément varié ; appliquer la deuxième loi de Newton ; utiliser le moment d'une force pour l'équilibre d'un solide ; calculer travail, énergie et puissance avec rendement."
+    },
+    {
+     "type": "heading",
+     "text": "1. Cinématique"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Mouvements rectilignes",
+     "md": "**MRU** (vitesse constante) : $x = x_0 + vt$. **MRUA** (accélération constante a) : $v = v_0 + at$ ; $x = x_0 + v_0 t + \\frac{1}{2}at^2$ ; $v^2 - v_0^2 = 2a(x - x_0)$. Conversion utile : **1 m/s = 3,6 km/h**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 10,
+      "ymin": 0,
+      "ymax": 24,
+      "grid": 2,
+      "xlabel": "t (s)",
+      "ylabel": "v (m/s)",
+      "w": 420,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "2*x",
+        "color": "blue",
+        "label": "v = 2t"
+       }
+      ],
+      "points": [
+       {
+        "x": 10,
+        "y": 20,
+        "label": "20 m/s",
+        "color": "red"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 10,
+        "y1": 0,
+        "x2": 10,
+        "y2": 20,
+        "color": "grey",
+        "dash": true
+       }
+      ]
+     },
+     "caption": "Vitesse d'un mobile parti du repos avec a = 2 m/s² : la droite v = 2t ; l'aire sous la courbe est la distance parcourue.",
+     "alt": "Une droite croissante passant par l'origine et atteignant 20 m/s à t = 10 s, avec un trait vertical en pointillés à t = 10 s."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : démarrage d'un véhicule",
+     "statement": "Un véhicule part du repos avec une accélération constante de 2 m/s². Calcule sa vitesse et la distance parcourue au bout de 10 s.",
+     "steps": [
+      {
+       "md": "Vitesse :",
+       "tex": "v = a t = 2 \\times 10 = 20 \\text{ m/s} \\ (72 \\text{ km/h})"
+      },
+      {
+       "md": "Distance :",
+       "tex": "x = \\frac{1}{2} a t^2 = \\frac{1}{2} \\times 2 \\times 10^2 = 100 \\text{ m}"
+      },
+      {
+       "md": "Contrôle : aire sous la droite v = 2t entre 0 et 10 s = ½ × 10 × 20 = 100 m."
+      }
+     ],
+     "answer": "v = 20 m/s ; x = 100 m."
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-physique-e-ti-mecanique-01"
+    },
+    {
+     "type": "heading",
+     "text": "2. Dynamique et équilibre"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Lois de Newton",
+     "md": "**Deuxième loi** : la somme des forces extérieures appliquées à un solide de masse m vaut $\\sum \\vec{F} = m\\vec{a}$. **Poids** : $P = mg$ avec g ≈ 9,8 N/kg (on prend parfois 10). Si $\\sum \\vec{F} = \\vec{0}$ (équilibre), le mouvement du centre d'inertie est rectiligne uniforme ou nul."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Moment d'une force",
+     "md": "Le **moment** d'une force par rapport à un axe est $M = F \\times d$ (en N·m), où d est la **distance de l'axe à la droite d'action** de la force. Il est compté positif ou négatif selon le sens de rotation qu'il tend à produire."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Équilibre d'un solide mobile autour d'un axe",
+     "md": "Un solide est en équilibre si : (1) la somme vectorielle des forces est nulle ; (2) la **somme algébrique des moments** par rapport à l'axe est nulle. Pour un levier, on écrit : **moment moteur = moment résistant**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : un levier en équilibre",
+     "statement": "Une barre AB de 2 m, de masse négligeable, peut tourner autour d'un axe O situé à 0,5 m de A. On suspend 300 N en A. Quelle force F verticale faut-il exercer en B pour garder la barre horizontale ?",
+     "steps": [
+      {
+       "md": "Les deux forces sont perpendiculaires à la barre : distances d_A = OA = 0,5 m et d_B = OB = 2 − 0,5 = 1,5 m."
+      },
+      {
+       "md": "Équilibre des moments :",
+       "tex": "300 \\times 0{,}5 = F \\times 1{,}5"
+      },
+      {
+       "md": "D'où :",
+       "tex": "F = \\frac{150}{1{,}5} = 100 \\text{ N}"
+      }
+     ],
+     "answer": "F = 100 N : le levier démultiplie l'effort (bras de levier plus long).",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 100,
+        "w": 280,
+        "h": 10,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "poly",
+        "pts": [
+         130,
+         110,
+         112,
+         142,
+         148,
+         142
+        ],
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 50,
+        "x2": 60,
+        "y2": 98,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 340,
+        "y1": 50,
+        "x2": 340,
+        "y2": 98,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 38,
+        "text": "300 N",
+        "size": 14,
+        "color": "red"
+       },
+       {
+        "t": "text",
+        "x": 340,
+        "y": 38,
+        "text": "F",
+        "size": 14,
+        "color": "blue"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 135,
+        "text": "A",
+        "size": 14
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 165,
+        "text": "O",
+        "size": 14
+       },
+       {
+        "t": "text",
+        "x": 340,
+        "y": 135,
+        "text": "B",
+        "size": 14
+       }
+      ]
+     }
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-physique-e-ti-mecanique-02"
+    },
+    {
+     "type": "heading",
+     "text": "3. Travail, énergie, puissance"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Travail et énergies",
+     "md": "Travail d'une force constante sur un déplacement d : $W = F d \\cos\\alpha$ (en J). Énergie cinétique : $E_c = \\frac{1}{2}mv^2$. Énergie potentielle de pesanteur : $E_p = mgh$.",
+     "tex": "W = F d \\cos\\alpha \\qquad \\Delta E_c = \\sum W"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Puissance et rendement",
+     "md": "**Puissance** : $P = \\frac{W}{t}$ (en W) ; pour une force de même direction que la vitesse : $P = F v$ ; en rotation : $P = C\\,\\Omega$. Le **rendement** est $\\eta = \\frac{P_{utile}}{P_{abs}}$. 1 kW·h = 3,6·10⁶ J."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : une grue sur un chantier",
+     "statement": "Une grue de chantier à Douala soulève 200 kg à 15 m de hauteur en 30 s. Calcule le travail, la puissance utile et la puissance électrique absorbée si le rendement du groupe moteur est de 70 %. (g = 9,8 N/kg)",
+     "steps": [
+      {
+       "md": "Travail du poids (à vaincre) :",
+       "tex": "W = m g h = 200 \\times 9{,}8 \\times 15 = 29\\,400 \\text{ J}"
+      },
+      {
+       "md": "Puissance utile : P_u = W ÷ t = 29400 ÷ 30 = **980 W**."
+      },
+      {
+       "md": "Puissance absorbée : P_a = P_u ÷ η = 980 ÷ 0,70 = **1400 W**."
+      }
+     ],
+     "answer": "W = 29 400 J ; P_u = 980 W ; P_a = 1400 W."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier de convertir km/h en m/s (÷ 3,6).\n- Mesurer la distance d le long de la barre alors que le bras de levier est la distance **perpendiculaire** à la force.\n- Confondre masse (kg) et poids (N).\n- Oublier que le rendement est < 1 : la puissance absorbée est **supérieure** à la puissance utile."
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-physique-e-ti-mecanique-03"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Les formules ont été recalculées par programme. Selon le manuel, on prend g = 9,8 ou g = 10 N/kg : suivre la consigne de l'énoncé.",
+      "Un moteur de puissance P qui tourne pendant t consomme l'énergie E = P t ; avec P en kW et t en h, E s'exprime en kW·h."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Programme exact incertain pour E et TI : mécanique des solides, frottement, théorème du moment cinétique, mouvement circulaire à confirmer.",
+    "Valeur de g (9,8 ou 10 N/kg) à harmoniser avec les habitudes de classe.",
+    "Les exemples (grue à Douala, treuil) sont fictifs ; données et valeurs recalculées."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "tle-physique-e-ti-mecanique-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-physique-e-ti-mecanique",
+   "prompt": "Un camion roule à 72 km/h. Exprime sa vitesse en m/s.",
+   "answer": 20,
+   "tolerance": 0,
+   "unit": "m/s",
+   "explanation": "72 ÷ 3,6 = 20 m/s.",
+   "method": "Diviser par 3,6 pour passer de km/h à m/s.",
+   "mistakes": [
+    "Multiplier par 3,6."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-physique-e-ti-mecanique-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-physique-e-ti-mecanique",
+   "prompt": "On exerce une force de 50 N perpendiculairement à une clé, à 0,4 m de l'axe de l'écrou. Quel est le moment de la force ?",
+   "answer": 20,
+   "tolerance": 0.01,
+   "unit": "N·m",
+   "explanation": "M = F × d = 50 × 0,4 = 20 N·m.",
+   "method": "M = F d.",
+   "mistakes": [
+    "Oublier de convertir cm en m."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-physique-e-ti-mecanique-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-physique-e-ti-mecanique",
+   "prompt": "Calcule l'énergie cinétique d'un véhicule de 1 000 kg roulant à 20 m/s (en joules).",
+   "answer": 200000,
+   "tolerance": 0,
+   "unit": "J",
+   "explanation": "E_c = ½ m v² = 0,5 × 1 000 × 20² = 200 000 J.",
+   "method": "E_c = ½mv².",
+   "mistakes": [
+    "Oublier le carré de la vitesse."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-physique-e-ti-mecanique-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "tle-physique-e-ti-mecanique",
+   "prompt": "Un chariot de 20 kg part du repos et glisse sans frottement le long d'un plan incliné de 30° sur 10 m. Quelle est sa vitesse en bas (en m/s, au dixième ; g = 9,8) ?",
+   "answer": 9.9,
+   "tolerance": 0.1,
+   "unit": "m/s",
+   "explanation": "a = g sin 30° = 4,9 m/s² ; v² = 2 a d = 2 × 4,9 × 10 = 98 ; v ≈ 9,9 m/s. Par l'énergie : mg h = ½mv² avec h = 10 sin 30° = 5 m donne v² = 2 g h = 98 (même résultat).",
+   "method": "Deuxième loi ou théorème de l'énergie cinétique.",
+   "mistakes": [
+    "Utiliser g au lieu de g sin α."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-physique-e-ti-mecanique-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "tle-physique-e-ti-mecanique",
+   "prompt": "Un véhicule roule à 20 m/s et freine avec une décélération constante de 5 m/s². Quelle distance parcourt-il avant de s'arrêter (en m) ?",
+   "answer": 40,
+   "tolerance": 0.1,
+   "unit": "m",
+   "explanation": "v² − v₀² = 2 a d avec v = 0 : d = v₀² ÷ (2 × 5) = 400 ÷ 10 = 40 m.",
+   "method": "v² − v₀² = 2ad.",
+   "mistakes": [
+    "Oublier le facteur 2 et trouver 80 m."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-physique-e-ti-mecanique-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "tle-physique-e-ti-mecanique",
+   "prompt": "Un treuil à tambour de rayon 0,20 m soulève une charge de 250 kg à 12 m de hauteur en 20 s. Le rendement de l'ensemble est de 75 %. (g = 9,8 N/kg.)",
+   "parts": [
+    {
+     "id": "tle-physique-e-ti-mecanique-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le travail à fournir contre le poids (en J).",
+     "answer": 29400,
+     "tolerance": 1,
+     "unit": "J",
+     "explanation": "W = m g h = 250 × 9,8 × 12 = 29 400 J."
+    },
+    {
+     "id": "tle-physique-e-ti-mecanique-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la puissance utile (en W).",
+     "answer": 1470,
+     "tolerance": 1,
+     "unit": "W",
+     "explanation": "P_u = W ÷ t = 29 400 ÷ 20 = 1 470 W."
+    },
+    {
+     "id": "tle-physique-e-ti-mecanique-06-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule la puissance électrique absorbée (en W).",
+     "answer": 1960,
+     "tolerance": 1,
+     "unit": "W",
+     "explanation": "P_a = P_u ÷ η = 1 470 ÷ 0,75 = 1 960 W."
+    },
+    {
+     "id": "tle-physique-e-ti-mecanique-06-d",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule le moment du poids de la charge par rapport à l'axe du tambour (en N·m).",
+     "answer": 490,
+     "tolerance": 0.5,
+     "unit": "N·m",
+     "explanation": "Le poids vaut 250 × 9,8 = 2 450 N et le bras de levier est le rayon 0,20 m : M = 2 450 × 0,20 = 490 N·m."
+    }
+   ],
+   "method": "Travail, puissance, rendement, puis moment par rapport à l'axe du tambour.",
+   "mistakes": [
+    "Oublier de diviser par le rendement pour la puissance absorbée."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-physique-e-ti-mec-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-physique-e-ti-mecanique",
+   "prompt": "Dans un MRUA partant du repos, la vitesse :",
+   "choices": [
+    "est constante",
+    "est proportionnelle au carré du temps",
+    "est proportionnelle au temps",
+    "diminue"
+   ],
+   "answer": 2,
+   "explanation": "v = a t."
+  },
+  {
+   "id": "tle-physique-e-ti-mec-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-physique-e-ti-mecanique",
+   "prompt": "Le moment d'une force s'exprime en :",
+   "choices": [
+    "N",
+    "J/s",
+    "kg",
+    "N·m"
+   ],
+   "answer": 3,
+   "explanation": "Moment = force × distance."
+  },
+  {
+   "id": "tle-physique-e-ti-mec-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-physique-e-ti-mecanique",
+   "prompt": "Un solide autour d'un axe est en équilibre si :",
+   "choices": [
+    "la somme algébrique des moments est nulle",
+    "la force est maximale",
+    "la vitesse est maximale",
+    "la masse est nulle"
+   ],
+   "answer": 0,
+   "explanation": "On ajoute à la condition sur les forces la condition sur les moments."
+  },
+  {
+   "id": "tle-physique-e-ti-mec-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-physique-e-ti-mecanique",
+   "prompt": "L'énergie cinétique est multipliée par combien si la vitesse double ?",
+   "choices": [
+    "2",
+    "4",
+    "8",
+    "1/2"
+   ],
+   "answer": 1,
+   "explanation": "E_c est proportionnelle à v²."
+  },
+  {
+   "id": "tle-physique-e-ti-mec-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-physique-e-ti-mecanique",
+   "prompt": "La puissance d'un moteur de rendement 80 % qui fournit 800 W utiles absorbe :",
+   "choices": [
+    "640 W",
+    "800 W",
+    "1 000 W",
+    "1 600 W"
+   ],
+   "answer": 2,
+   "explanation": "P_a = 800 ÷ 0,8 = 1 000 W."
+  }
+ ]
+}

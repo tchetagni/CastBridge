@@ -1,0 +1,566 @@
+{
+ "chapter": "tle-svt-d-ch-genetique",
+ "lessons": [
+  {
+   "id": "tle-svt-d-genetique",
+   "title": "Génétique humaine : hérédité, arbres généalogiques, groupes sanguins",
+   "minutes": 45,
+   "programRef": "Tle D — Génétique humaine (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale, brouillon IA ; à relire par un enseignant",
+   "objectives": [
+    "Utiliser le vocabulaire de la génétique.",
+    "Exploiter un arbre généalogique.",
+    "Expliquer la drépanocytose et les groupes ABO/Rhésus.",
+    "Calculer des probabilités de transmission."
+   ],
+   "exercises": [
+    "tle-svt-d-genetique-01",
+    "tle-svt-d-genetique-02",
+    "tle-svt-d-genetique-03",
+    "tle-svt-d-genetique-04",
+    "tle-svt-d-genetique-05",
+    "tle-svt-d-genetique-06"
+   ],
+   "selfCheck": [
+    "tle-svt-d-gen-q1",
+    "tle-svt-d-gen-q2",
+    "tle-svt-d-gen-q3",
+    "tle-svt-d-gen-q4",
+    "tle-svt-d-gen-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Objectifs",
+     "md": "Utiliser le vocabulaire de la génétique ; exploiter un arbre généalogique ; expliquer la drépanocytose et les groupes sanguins ABO et Rhésus ; calculer des probabilités de transmission avec un échiquier de croisement."
+    },
+    {
+     "type": "heading",
+     "text": "1. Vocabulaire et chromosomes"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Gène, allèle, génotype, phénotype",
+     "md": "Un **gène** est une portion d'ADN qui détermine un caractère ; ses différentes versions sont les **allèles**. Le **génotype** est l'ensemble des allèles d'un individu pour un gène, le **phénotype** est le caractère observable. Un individu est **homozygote** (deux allèles identiques) ou **hétérozygote** (deux allèles différents). Un allèle **dominant** s'exprime chez l'hétérozygote ; un allèle **récessif** ne s'exprime qu'à l'état homozygote."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Chromosomes humains",
+     "md": "La cellule humaine possède **46 chromosomes**, soit **23 paires** : 22 paires d'**autosomes** et une paire de **gonosomes** (XX chez la femme, XY chez l'homme). Les gamètes, formés par **méiose**, n'en ont que **23**. La fécondation rétablit 46 chromosomes. Un **caryotype** classe les chromosomes en paires ; la trisomie 21 se voit par 3 chromosomes 21 (47 au total)."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Lois de transmission",
+     "md": "Chaque parent transmet **un seul allèle** de chaque gène à son enfant, au hasard, à chaque naissance. Les naissances sont des événements **indépendants** : un couple dont le premier enfant est malade garde la même probabilité pour les suivants. Le **sexe** est déterminé par le spermatozoïde (X ou Y) : probabilité 1/2 pour chacun."
+    },
+    {
+     "type": "heading",
+     "text": "2. Les arbres généalogiques"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Lire un arbre",
+     "md": "Carré = homme, cercle = femme, symbole plein = malade. Méthode : (1) si **deux parents sains** ont un enfant malade, la maladie est **récessive** et les parents sont **hétérozygotes** ; (2) si une **fille** est malade et que son père est sain, la maladie ne peut pas être récessive liée à X : elle est **autosomique** ; (3) vérifier chaque hypothèse sur tout l'arbre."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 210,
+      "items": [
+       {
+        "t": "rect",
+        "x": 115,
+        "y": 35,
+        "w": 30,
+        "h": 30,
+        "fill": null,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 275,
+        "cy": 50,
+        "r": 16,
+        "fill": null,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 145,
+        "y1": 50,
+        "x2": 259,
+        "y2": 50,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 202,
+        "y1": 50,
+        "x2": 202,
+        "y2": 100,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 100,
+        "y1": 100,
+        "x2": 300,
+        "y2": 100,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 100,
+        "y1": 100,
+        "x2": 100,
+        "y2": 124,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 100,
+        "x2": 200,
+        "y2": 124,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 100,
+        "x2": 300,
+        "y2": 124,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 100,
+        "cy": 140,
+        "r": 16,
+        "fill": "ink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 185,
+        "y": 125,
+        "w": 30,
+        "h": 30,
+        "fill": null,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 300,
+        "cy": 140,
+        "r": 16,
+        "fill": null,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 22,
+        "text": "père sain",
+        "size": 12
+       },
+       {
+        "t": "text",
+        "x": 275,
+        "y": 22,
+        "text": "mère saine",
+        "size": 12
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 182,
+        "text": "fille malade",
+        "size": 12
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 182,
+        "text": "fils sain",
+        "size": 12
+       },
+       {
+        "t": "text",
+        "x": 320,
+        "y": 182,
+        "text": "fille saine",
+        "size": 12,
+        "anchor": "start"
+       }
+      ]
+     },
+     "caption": "Arbre généalogique d'une famille : deux parents sains, une fille malade.",
+     "alt": "Un père (carré vide) et une mère (cercle vide) ont trois enfants : une fille malade (cercle plein), un fils sain (carré vide) et une fille saine (cercle vide)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : déduire le mode de transmission",
+     "statement": "D'après l'arbre ci-dessus, deux parents sains ont une fille malade. Que peut-on déduire sur l'allèle responsable ? Écris les génotypes (allèles A et a).",
+     "steps": [
+      {
+       "md": "Deux parents sains ont un enfant malade : l'allèle de la maladie était présent mais **masqué** chez les parents. Il est donc **récessif** (a)."
+      },
+      {
+       "md": "Une fille malade a reçu a de chacun de ses parents ; son père, sain, ne porte pas la maladie sur le X : le gène est **autosomique**."
+      },
+      {
+       "md": "Génotypes : fille malade aa ; père et mère **Aa** (hétérozygotes, porteurs sains)."
+      }
+     ],
+     "answer": "Maladie **autosomique récessive** ; les deux parents sont Aa et la fille est aa."
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-svt-d-genetique-01"
+    },
+    {
+     "type": "heading",
+     "text": "3. Drépanocytose et groupes sanguins"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "La drépanocytose",
+     "md": "Maladie héréditaire **autosomique récessive** de l'hémoglobine. Allèle normal : A (HbA) ; allèle muté : S (HbS), qui change un acide aminé de la chaîne bêta de l'hémoglobine. **AA** : sain ; **AS** : **porteur sain** (hétérozygote) ; **SS** : malade, avec des globules rouges déformés en faucille qui bouchent les petits vaisseaux. Chez les porteurs AS, on observe une certaine résistance au paludisme."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Groupes sanguins ABO et Rhésus",
+     "md": "Système ABO : trois allèles **A**, **B** (codominants) et **O** (récessif). Phénotypes : **A** (AA ou AO), **B** (BB ou BO), **AB**, **O** (OO). Système Rhésus : **Rh+** (allèle dominant D) et **Rh−** (dd). Les deux systèmes sont indépendants. Transfusion : le sang donné ne doit pas porter d'antigène que le receveur n'a pas (il aurait des anticorps contre lui)."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Compatibilité Rhésus",
+     "md": "Une femme Rh− qui attend un enfant Rh+ peut fabriquer des anticorps anti-Rh+ lors de l'accouchement. Ils peuvent poser problème lors d'une grossesse ultérieure. Un suivi médical et un traitement préventif existent : toute femme enceinte doit connaître son groupe sanguin."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : croisement et probabilités",
+     "statement": "Un père AS et une mère AS attendent un enfant. Calcule la probabilité que l'enfant soit SS, puis la probabilité qu'il soit non malade.",
+     "steps": [
+      {
+       "md": "Échiquier : gamètes A ou S (1/2 chacun) pour chaque parent. Les 4 cases AA, AS, SA, SS sont équiprobables."
+      },
+      {
+       "md": "Probabilités des génotypes :",
+       "tex": "P(AA)=\\frac{1}{4},\\ P(AS)=\\frac{1}{2},\\ P(SS)=\\frac{1}{4}"
+      },
+      {
+       "md": "Non malade = AA ou AS : 1/4 + 1/2 = **3/4**. Pour deux enfants successifs, la probabilité que les deux soient SS est 1/4 × 1/4 = 1/16 (événements indépendants)."
+      }
+     ],
+     "answer": "P(SS) = 1/4 = 25 % ; P(non malade) = 3/4 = 75 %."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que le porteur sain AS est malade ou, à l'inverse, qu'il ne transmet jamais l'allèle S.\n- Penser que « un enfant sur quatre est malade » signifie que, sur quatre enfants, un exactement l'est : c'est une probabilité **à chaque naissance**.\n- Oublier que A et B sont **codominants** (génotype AB).\n- Mélanger autosomes et gonosomes."
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-svt-d-genetique-02"
+    },
+    {
+     "type": "heading",
+     "text": "4. Un cas lié au chromosome X"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Maladie récessive liée à X",
+     "md": "Certaines maladies (hémophilie, daltonisme) sont portées par le chromosome X. Un **garçon** (XY) n'a qu'un X : un seul allèle récessif suffit à le rendre malade. Une **fille** (XX) est malade seulement si elle a **deux** X porteurs. Un père malade transmet son X à **toutes** ses filles et jamais à ses fils. Une mère **porteuse** (X^H X^h) a une chance sur deux de transmettre X^h."
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-svt-d-genetique-03"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Calculer des probabilités : « et » (enfants successifs) se traduit par un produit ; « ou » par une somme pour des événements incompatibles.",
+      "Les calculs de ce chapitre peuvent se vérifier avec un petit programme qui énumère les gamètes : c'est la méthode utilisée pour contrôler les réponses de cette fiche."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier si la transmission liée à X et les probabilités conditionnelles (Sandrine) sont au programme de Tle D.",
+    "Les calculs ont été vérifiés par énumération en Python ; conventions de notation (A/S, X^H) à harmoniser avec le manuel utilisé.",
+    "Contenu sensible (santé, famille) : formulations à relire par un enseignant."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "tle-svt-d-genetique-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-genetique",
+   "prompt": "Deux parents sains ont un enfant atteint d'une maladie autosomique. Que peut-on affirmer ?",
+   "choices": [
+    "L'allèle de la maladie est récessif et les parents sont hétérozygotes",
+    "L'allèle de la maladie est dominant",
+    "Les parents sont homozygotes sains",
+    "La maladie est forcément liée à Y"
+   ],
+   "answer": 0,
+   "explanation": "Si l'allèle était dominant, un parent porteur serait malade. Les parents sains portent donc l'allèle récessif sans l'exprimer : ils sont hétérozygotes.",
+   "method": "Parents sains + enfant malade = récessif.",
+   "mistakes": [
+    "Conclure à un allèle dominant."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-svt-d-genetique-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-genetique",
+   "prompt": "Un couple AS × AS a un enfant. Quelle est la probabilité (en pourcentage) qu'il soit drépanocytaire (SS) ?",
+   "answer": 25,
+   "tolerance": 0,
+   "unit": "%",
+   "explanation": "L'échiquier donne 1 case SS sur 4 : 1/4 = 25 %.",
+   "method": "Échiquier de croisement : 4 cases équiprobables.",
+   "mistakes": [
+    "Répondre 50 % en comptant tous les porteurs."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-svt-d-genetique-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-genetique",
+   "prompt": "Quels enfants peut-on obtenir d'un père de génotype AO et d'une mère de génotype BO ?",
+   "choices": [
+    "Seulement AB",
+    "AB, AO, BO et OO",
+    "Seulement A et B",
+    "Seulement O"
+   ],
+   "answer": 1,
+   "explanation": "Gamètes du père : A ou O ; de la mère : B ou O. Les combinaisons sont AB, AO, BO et OO, chacune avec une probabilité 1/4 (phénotypes AB, A, B et O).",
+   "method": "Énumérer les gamètes puis faire l'échiquier.",
+   "mistakes": [
+    "Oublier que les deux parents hétérozygotes peuvent transmettre O."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-svt-d-genetique-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "tle-svt-d-genetique",
+   "prompt": "Un couple AS × AS aura deux enfants. Quelle est la probabilité que les deux soient drépanocytaires ? (Réponds sous forme décimale.)",
+   "answer": 0.0625,
+   "tolerance": 0.001,
+   "explanation": "Chaque enfant a une probabilité 1/4 d'être SS et les naissances sont indépendantes : 1/4 × 1/4 = 1/16 = 0,0625.",
+   "method": "Événements indépendants : produit des probabilités.",
+   "mistakes": [
+    "Additionner 1/4 + 1/4 = 1/2."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-svt-d-genetique-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "tle-svt-d-genetique",
+   "prompt": "Même couple AS × AS, deux enfants. Quelle est la probabilité qu'au moins un des deux soit drépanocytaire ? (Réponds sous forme décimale.)",
+   "answer": 0.4375,
+   "tolerance": 0.001,
+   "explanation": "On passe par le contraire : aucun enfant malade = (3/4)² = 9/16. Donc au moins un malade = 1 − 9/16 = 7/16 = 0,4375.",
+   "method": "« Au moins un » = 1 − « aucun ».",
+   "mistakes": [
+    "Calculer 2 × 1/4 = 0,5 : on compterait deux fois le cas où les deux sont malades."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-svt-d-genetique-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "tle-svt-d-genetique",
+   "prompt": "Dans la famille de Sandrine, la drépanocytose touche son frère cadet Éric (SS). Leurs parents, Paul et Marie, ne sont pas malades. Sandrine n'est pas malade et attend un enfant avec Hervé, qui est un porteur sain AS. On ne connaît pas le génotype de Sandrine.",
+   "parts": [
+    {
+     "id": "tle-svt-d-genetique-06-a",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quels sont les génotypes de Paul et Marie ?",
+     "choices": [
+      "Tous deux AA",
+      "Tous deux SS",
+      "Tous deux AS",
+      "Paul AA et Marie SS"
+     ],
+     "answer": 2,
+     "explanation": "Éric (SS) a reçu un S de chaque parent. Paul et Marie ne sont pas malades : ils sont AS."
+    },
+    {
+     "id": "tle-svt-d-genetique-06-b",
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Sandrine est saine. Quelle est la probabilité (en %, arrondie à l'unité) qu'elle soit AS ? Aide : parmi les enfants AA, AS, SS d'un couple AS × AS, on exclut SS.",
+     "answer": 67,
+     "tolerance": 0.6,
+     "unit": "%",
+     "explanation": "Probabilités AA 1/4, AS 1/2, SS 1/4. Sachant « non SS » : P(AS) = (1/2) ÷ (3/4) = 2/3 ≈ 67 %."
+    },
+    {
+     "id": "tle-svt-d-genetique-06-c",
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Calcule la probabilité que l'enfant de Sandrine et d'Hervé soit SS (en %, arrondie au dixième). Deux événements : Sandrine est AS (2/3), puis l'enfant reçoit S de chacun.",
+     "answer": 16.7,
+     "tolerance": 0.1,
+     "unit": "%",
+     "explanation": "Si Sandrine est AS, la probabilité de SS est 1/4. P = 2/3 × 1/4 = 1/6 ≈ 16,7 %. Si elle est AA, l'enfant ne peut pas être SS."
+    },
+    {
+     "id": "tle-svt-d-genetique-06-d",
+     "kind": "open",
+     "points": 1.5,
+     "prompt": "Pourquoi un conseil génétique est-il utile pour ce couple ?",
+     "model": "Hervé est porteur sain et Sandrine a 2 chances sur 3 d'être porteuse : l'enfant a un risque de drépanocytose, supérieur à zéro. Un dépistage (électrophorèse de l'hémoglobine) permet de connaître le génotype de Sandrine et d'organiser le suivi médical de la grossesse et de l'enfant.",
+     "rubric": [
+      "Risque non nul identifié",
+      "Intérêt du dépistage du génotype",
+      "Suivi médical, sans jugement ni décision à la place du couple"
+     ],
+     "explanation": "Le conseil génétique informe sur les risques et le suivi ; la décision appartient au couple."
+    }
+   ],
+   "method": "Établir les génotypes à partir de l'arbre, puis enchaîner les probabilités conditionnelles.",
+   "mistakes": [
+    "Oublier de retirer SS parmi les possibilités pour Sandrine, qui est saine."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-svt-d-gen-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-genetique",
+   "prompt": "Combien de chromosomes possède une cellule humaine normale (hors gamètes) ?",
+   "choices": [
+    "23",
+    "44",
+    "48",
+    "46"
+   ],
+   "answer": 3,
+   "explanation": "46 chromosomes, soit 23 paires."
+  },
+  {
+   "id": "tle-svt-d-gen-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-genetique",
+   "prompt": "Un individu hétérozygote pour un gène possède :",
+   "choices": [
+    "deux allèles différents",
+    "deux allèles identiques",
+    "un seul allèle",
+    "trois allèles"
+   ],
+   "answer": 0,
+   "explanation": "Hétéro = différents."
+  },
+  {
+   "id": "tle-svt-d-gen-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-genetique",
+   "prompt": "Une personne AS pour l'hémoglobine est :",
+   "choices": [
+    "un drépanocytaire",
+    "un porteur sain",
+    "un individu sans hémoglobine",
+    "toujours atteint de paludisme"
+   ],
+   "answer": 1,
+   "explanation": "AS est hétérozygote, sans symptômes de drépanocytose en général."
+  },
+  {
+   "id": "tle-svt-d-gen-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-genetique",
+   "prompt": "Quel génotype donne le groupe sanguin O ?",
+   "choices": [
+    "AO",
+    "BO",
+    "OO",
+    "AB"
+   ],
+   "answer": 2,
+   "explanation": "L'allèle O est récessif : seul OO donne O."
+  },
+  {
+   "id": "tle-svt-d-gen-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-genetique",
+   "prompt": "La probabilité d'avoir une fille à chaque naissance est :",
+   "choices": [
+    "1/4",
+    "1/3",
+    "2/3",
+    "1/2"
+   ],
+   "answer": 3,
+   "explanation": "Le spermatozoïde porte X ou Y avec la même probabilité."
+  }
+ ]
+}

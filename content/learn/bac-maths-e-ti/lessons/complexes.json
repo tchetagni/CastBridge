@@ -1,0 +1,461 @@
+{
+ "chapter": "bac-maths-e-ti-ch-complexes",
+ "lessons": [
+  {
+   "id": "bac-maths-e-ti-complexes",
+   "title": "Nombres complexes appliqués : impédances et vecteurs de Fresnel",
+   "minutes": 40,
+   "programRef": "Tle E/TI — Nombres complexes : formes algébrique et trigonométrique ; applications à l'électricité (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Calculer avec les nombres complexes (forme algébrique, conjugué, module, argument).",
+    "Passer de la forme algébrique à la forme trigonométrique.",
+    "Calculer l'impédance complexe d'un dipôle série et en déduire module et déphasage.",
+    "Additionner des grandeurs sinusoïdales avec la représentation de Fresnel."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Forme algébrique",
+     "md": "Un nombre complexe s'écrit $z=a+ib$ avec $i^2=-1$ ; a est la partie réelle, b la partie imaginaire. Le **conjugué** est $\\bar{z}=a-ib$ et le **module** est $|z|=\\sqrt{a^2+b^2}$ ; on a $z\\bar{z}=a^2+b^2=|z|^2$.\nEn électricité, on note **j** au lieu de i (pour ne pas confondre avec l'intensité i), avec $j^2=-1$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Forme trigonométrique",
+     "md": "Pour z ≠ 0 de module r et d'argument θ : $z=r(\\cos\\theta+i\\sin\\theta)$ avec $a=r\\cos\\theta$ et $b=r\\sin\\theta$.\n- $|z_1z_2|=|z_1||z_2|$ et $\\text{arg}\\,(z_1z_2)=\\text{arg}\\, z_1+\\text{arg}\\, z_2$.\n- $\\left|\\frac{z_1}{z_2}\\right|=\\frac{|z_1|}{|z_2|}$ et $\\text{arg}\\,\\frac{z_1}{z_2}=\\text{arg}\\, z_1-\\text{arg}\\, z_2$.\nPour une division en forme algébrique, on multiplie par le conjugué du dénominateur."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Impédances complexes",
+     "md": "Pour une pulsation ω (en rad/s), avec $\\omega=2\\pi f$ :\n- résistance R : $Z_R=R$ ;\n- bobine d'inductance L (en henrys) : $Z_L=jL\\omega$ ;\n- condensateur de capacité C (en farads) : $Z_C=\\frac{1}{jC\\omega}=-\\frac{j}{C\\omega}$.\nEn **série**, les impédances s'ajoutent. Pour un circuit RLC série : $Z=R+j\\left(L\\omega-\\frac{1}{C\\omega}\\right)$."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Module, déphasage, loi d'Ohm",
+     "md": "Pour $Z=R+jX$ :\n- le **module** $|Z|=\\sqrt{R^2+X^2}$ (en ohms) relie les valeurs efficaces : $U=|Z|\\,I$ ;\n- l'**argument** φ de Z, avec $\\tan\\varphi=\\frac{X}{R}$ (R > 0), est l'avance de phase de la tension sur l'intensité ;\n- X > 0 : circuit inductif ; X < 0 : circuit capacitif."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Représentation de Fresnel",
+     "md": "Une tension $u(t)=U_m\\cos(\\omega t+\\varphi)$ est représentée par un vecteur de longueur $U_m$ faisant l'angle φ avec l'axe de référence (ou par le complexe $U_m(\\cos\\varphi+j\\sin\\varphi)$).\nPour **ajouter** des grandeurs de même pulsation : on additionne les vecteurs (ou les complexes) ; le module et l'argument de la somme donnent l'amplitude et la phase de la grandeur résultante."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : division de complexes",
+     "statement": "Écris $\\frac{3+4i}{1-2i}$ sous forme algébrique.",
+     "steps": [
+      {
+       "md": "On multiplie numérateur et dénominateur par le conjugué du dénominateur, $1+2i$ :",
+       "tex": "\\frac{(3+4i)(1+2i)}{(1-2i)(1+2i)}"
+      },
+      {
+       "md": "Numérateur : $3+6i+4i+8i^2=3+10i-8=-5+10i$. Dénominateur : $1^2+2^2=5$."
+      }
+     ],
+     "answer": "$\\frac{3+4i}{1-2i}=\\frac{-5+10i}{5}=-1+2i$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : impédance d'une bobine réelle",
+     "statement": "Une bobine de résistance R = 30 Ω et d'inductance L = 0,1 H est alimentée à f = 50 Hz. Calcule son impédance, son module et son déphasage.",
+     "steps": [
+      {
+       "md": "$\\omega=2\\pi f=100\\pi\\approx314{,}16$ rad/s, donc $L\\omega\\approx31{,}42$ Ω et $Z=30+j\\,31{,}42$ Ω."
+      },
+      {
+       "md": "Module : $|Z|=\\sqrt{30^2+31{,}42^2}\\approx43{,}44$ Ω. Argument : $\\tan\\varphi=\\frac{31{,}42}{30}\\approx1{,}047$, donc $\\varphi\\approx46{,}3^\\circ$."
+      }
+     ],
+     "answer": "$|Z|\\approx43{,}4$ Ω ; la tension est en **avance** d'environ 46° sur l'intensité (circuit inductif)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : somme de deux tensions",
+     "statement": "On donne $u_1(t)=3\\cos(\\omega t)$ et $u_2(t)=4\\cos(\\omega t+90^\\circ)$ (en V). Détermine l'amplitude et la phase de $u=u_1+u_2$.",
+     "steps": [
+      {
+       "md": "Les complexes associés sont 3 et 4j. La somme est $3+4j$."
+      },
+      {
+       "md": "Module : $\\sqrt{3^2+4^2}=5$. Argument : $\\tan\\varphi=\\frac{4}{3}$, donc $\\varphi\\approx53{,}1^\\circ$."
+      }
+     ],
+     "answer": "$u(t)\\approx5\\cos(\\omega t+53{,}1^\\circ)$ : amplitude **5 V**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 360,
+      "h": 280,
+      "items": [
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 220,
+        "x2": 180,
+        "y2": 220,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 180,
+        "y1": 220,
+        "x2": 180,
+        "y2": 60,
+        "color": "green",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 220,
+        "x2": 180,
+        "y2": 60,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 245,
+        "text": "3 V",
+        "size": 14,
+        "color": "blue"
+       },
+       {
+        "t": "text",
+        "x": 195,
+        "y": 145,
+        "text": "4 V",
+        "size": 14,
+        "color": "green",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 120,
+        "text": "5 V",
+        "size": 14,
+        "color": "red",
+        "anchor": "end"
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 208,
+        "text": "φ ≈ 53°",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     },
+     "caption": "Fresnel : les vecteurs de 3 V et de 4 V, perpendiculaires, ont pour somme un vecteur de 5 V.",
+     "alt": "Triangle rectangle : un vecteur bleu horizontal de 3 V vers la droite, un vecteur vert vertical de 4 V vers le haut, et le vecteur résultant rouge de 5 V depuis l'origine, avec un angle d'environ 53 degrés."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Additionner les **modules** (3 + 4 = 7) au lieu des vecteurs : seule la somme vectorielle est correcte (ici 5).\n- Oublier le signe moins de l'impédance d'un condensateur : $Z_C=-\\frac{j}{C\\omega}$.\n- Utiliser f au lieu de ω = 2πf dans $L\\omega$ ou $C\\omega$.\n- Pour l'argument, ne pas tenir compte du quadrant : si la partie réelle est négative, arctan seul donne un mauvais angle."
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-maths-e-ti-cpl-01"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Les résultats de la loi d'Ohm en alternatif concernent les valeurs efficaces (ou maximales) selon le contexte : indiquer toujours laquelle.",
+      "Les valeurs des composants (R, L, C) sont fictives."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "À faire valider par un enseignant de physique appliquée : conventions j et i, signe du déphasage (tension en avance sur l'intensité pour une bobine), valeurs efficaces ou maximales.",
+    "Vérifier si la forme exponentielle $re^{i\\theta}$ est au programme de E/TI : non utilisée ici.",
+    "Le programme de TI peut limiter les complexes à l'électricité de base : dosage à confirmer."
+   ],
+   "exercises": [
+    "bac-maths-e-ti-cpl-01",
+    "bac-maths-e-ti-cpl-02",
+    "bac-maths-e-ti-cpl-03",
+    "bac-maths-e-ti-cpl-04",
+    "bac-maths-e-ti-cpl-05",
+    "bac-maths-e-ti-cpl-06"
+   ],
+   "selfCheck": [
+    "bac-maths-e-ti-cpl-q1",
+    "bac-maths-e-ti-cpl-q2",
+    "bac-maths-e-ti-cpl-q3",
+    "bac-maths-e-ti-cpl-q4",
+    "bac-maths-e-ti-cpl-q5"
+   ],
+   "prerequisites": [
+    "bac-maths-e-ti-exp-ln"
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "bac-maths-e-ti-cpl-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Calcule le module de $z=5-12i$.",
+   "answer": 13,
+   "tolerance": 0,
+   "explanation": "$|z|=\\sqrt{25+144}=\\sqrt{169}=13$.",
+   "method": "$|a+ib|=\\sqrt{a^2+b^2}$.",
+   "mistakes": [
+    "Calculer 5 + 12 = 17."
+   ],
+   "lesson": "bac-maths-e-ti-complexes",
+   "source": "Exercice original, style Terminale E/TI"
+  },
+  {
+   "id": "bac-maths-e-ti-cpl-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Calcule la partie imaginaire de $(2+3i)(1-i)$.",
+   "answer": 1,
+   "tolerance": 0,
+   "explanation": "$(2+3i)(1-i)=2-2i+3i-3i^2=2+i+3=5+i$. La partie imaginaire est 1.",
+   "method": "Développer en utilisant $i^2=-1$.",
+   "mistakes": [
+    "Oublier que $-3i^2=+3$."
+   ],
+   "lesson": "bac-maths-e-ti-complexes",
+   "source": "Exercice original, style Terminale E/TI"
+  },
+  {
+   "id": "bac-maths-e-ti-cpl-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quelle est l'impédance complexe d'une bobine idéale d'inductance L, à la pulsation ω ?",
+   "choices": [
+    "$jL\\omega$",
+    "$\\frac{1}{jL\\omega}$",
+    "$L\\omega$ réel",
+    "$-jL\\omega$"
+   ],
+   "answer": 0,
+   "explanation": "$Z_L=jL\\omega$ ; c'est le condensateur qui a $Z_C=\\frac{1}{jC\\omega}$.",
+   "method": "À retenir : bobine → jLω ; condensateur → 1/(jCω).",
+   "mistakes": [
+    "Inverser les rôles de la bobine et du condensateur."
+   ],
+   "lesson": "bac-maths-e-ti-complexes",
+   "source": "Exercice original, style Terminale E/TI"
+  },
+  {
+   "id": "bac-maths-e-ti-cpl-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Un dipôle série a pour impédance $Z=40+30j$ (en Ω). Calcule son module.",
+   "answer": 50,
+   "tolerance": 0,
+   "unit": "Ω",
+   "explanation": "$|Z|=\\sqrt{40^2+30^2}=\\sqrt{2500}=50$ Ω.",
+   "method": "$|Z|=\\sqrt{R^2+X^2}$.",
+   "mistakes": [
+    "Additionner 40 + 30 = 70."
+   ],
+   "lesson": "bac-maths-e-ti-complexes",
+   "source": "Exercice original, style Terminale E/TI"
+  },
+  {
+   "id": "bac-maths-e-ti-cpl-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Deux tensions de même pulsation : $u_1=6\\cos(\\omega t)$ et $u_2=8\\cos(\\omega t+90^\\circ)$ (en V). Quelle est l'amplitude de $u_1+u_2$ ?",
+   "answer": 10,
+   "tolerance": 0,
+   "unit": "V",
+   "explanation": "Complexes 6 et 8j : somme $6+8j$, module $\\sqrt{36+64}=10$ V.",
+   "method": "Somme vectorielle (Fresnel).",
+   "mistakes": [
+    "Répondre 14 en additionnant les amplitudes."
+   ],
+   "lesson": "bac-maths-e-ti-complexes",
+   "source": "Exercice original, style Terminale E/TI"
+  },
+  {
+   "id": "bac-maths-e-ti-cpl-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Un circuit RLC série comprend R = 60 Ω, L = 0,5 H et C = 200 µF. Il fonctionne à la pulsation ω = 200 rad/s (valeurs fictives).",
+   "parts": [
+    {
+     "id": "bac-maths-e-ti-cpl-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule $L\\omega$ (en Ω).",
+     "explanation": "$0{,}5\\times200=100$ Ω.",
+     "answer": 100,
+     "tolerance": 0,
+     "unit": "Ω"
+    },
+    {
+     "id": "bac-maths-e-ti-cpl-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule $\\frac{1}{C\\omega}$ (en Ω).",
+     "explanation": "$C\\omega=200\\times10^{-6}\\times200=0{,}04$ S, donc $\\frac{1}{C\\omega}=25$ Ω.",
+     "answer": 25,
+     "tolerance": 0,
+     "unit": "Ω"
+    },
+    {
+     "id": "bac-maths-e-ti-cpl-06-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le module $|Z|$ (au centième).",
+     "explanation": "$Z=60+j(100-25)=60+75j$ et $|Z|=\\sqrt{3600+5625}=\\sqrt{9225}\\approx96{,}05$ Ω.",
+     "answer": 96.05,
+     "tolerance": 0.01,
+     "unit": "Ω"
+    },
+    {
+     "id": "bac-maths-e-ti-cpl-06-d",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le déphasage φ en degrés (au centième).",
+     "explanation": "$\\tan\\varphi=\\frac{75}{60}=1{,}25$, donc $\\varphi\\approx51{,}34^\\circ$ (circuit inductif, partie réelle positive).",
+     "answer": 51.34,
+     "tolerance": 0.01,
+     "unit": "°"
+    },
+    {
+     "id": "bac-maths-e-ti-cpl-06-e",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "La tension efficace est U = 120 V. Calcule l'intensité efficace $I=\\frac{U}{|Z|}$ (au millième).",
+     "explanation": "$I=\\frac{120}{96{,}0469}\\approx1{,}249$ A.",
+     "answer": 1.249,
+     "tolerance": 0.001,
+     "unit": "A"
+    }
+   ],
+   "method": "Réactances, impédance complexe, module et argument, loi d'Ohm en valeurs efficaces.",
+   "mistakes": [
+    "Utiliser C = 200 sans convertir les microfarads en farads."
+   ],
+   "lesson": "bac-maths-e-ti-complexes",
+   "source": "Exercice original, style Terminale E/TI"
+  },
+  {
+   "id": "bac-maths-e-ti-cpl-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Le conjugué de $2-3i$ est :",
+   "choices": [
+    "$2+3i$",
+    "$-2+3i$",
+    "$-2-3i$",
+    "$3-2i$"
+   ],
+   "answer": 0,
+   "explanation": "On change le signe de la partie imaginaire.",
+   "lesson": "bac-maths-e-ti-complexes",
+   "source": "Exercice original, style Terminale E/TI"
+  },
+  {
+   "id": "bac-maths-e-ti-cpl-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Le module de $1+i$ est :",
+   "choices": [
+    "$\\sqrt{2}$",
+    "2",
+    "1",
+    "0"
+   ],
+   "answer": 0,
+   "explanation": "$\\sqrt{1^2+1^2}=\\sqrt{2}$.",
+   "lesson": "bac-maths-e-ti-complexes",
+   "source": "Exercice original, style Terminale E/TI"
+  },
+  {
+   "id": "bac-maths-e-ti-cpl-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "L'impédance d'un condensateur de capacité C est :",
+   "choices": [
+    "$\\frac{1}{jC\\omega}$",
+    "$jC\\omega$",
+    "$C\\omega$",
+    "$\\frac{j}{C\\omega}$"
+   ],
+   "answer": 0,
+   "explanation": "$Z_C=\\frac{1}{jC\\omega}=-\\frac{j}{C\\omega}$ ; le facteur j est au dénominateur.",
+   "lesson": "bac-maths-e-ti-complexes",
+   "source": "Exercice original, style Terminale E/TI"
+  },
+  {
+   "id": "bac-maths-e-ti-cpl-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Pour un produit de nombres complexes, l'argument du produit est :",
+   "choices": [
+    "la somme des arguments",
+    "le produit des arguments",
+    "la différence des arguments",
+    "le module du produit"
+   ],
+   "answer": 0,
+   "explanation": "$\\text{arg}\\,(z_1z_2)=\\text{arg}\\, z_1+\\text{arg}\\, z_2$.",
+   "lesson": "bac-maths-e-ti-complexes",
+   "source": "Exercice original, style Terminale E/TI"
+  },
+  {
+   "id": "bac-maths-e-ti-cpl-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "La somme des vecteurs de Fresnel de 3 V et de 4 V perpendiculaires a pour longueur :",
+   "choices": [
+    "5 V",
+    "7 V",
+    "1 V",
+    "12 V"
+   ],
+   "answer": 0,
+   "explanation": "Théorème de Pythagore : $\\sqrt{9+16}=5$.",
+   "lesson": "bac-maths-e-ti-complexes",
+   "source": "Exercice original, style Terminale E/TI"
+  }
+ ]
+}

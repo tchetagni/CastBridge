@@ -1,0 +1,84 @@
+{
+ "format": 1,
+ "id": "1re-english",
+ "version": 1,
+ "title": "Anglais — Probatoire",
+ "description": "Fiches d'anglais pour francophones : temps, passif et conditionnels, discours rapporté et relatives, techniques de lecture, expression écrite ; exercices corrigés et épreuve blanche.",
+ "lang": "fr",
+ "cursus": "secondaire",
+ "level": "1re",
+ "subject": "english",
+ "exam": "PROBATOIRE",
+ "series": [
+  "A",
+  "C",
+  "D"
+ ],
+ "programRef": "Programme officiel d'anglais des classes de Première (MINESEC) — à vérifier sur le texte officiel",
+ "authors": [
+  "CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"
+ ],
+ "status": "draft",
+ "updatedAt": "2026-10-01",
+ "chapters": [
+  {
+   "id": "1re-english-tenses",
+   "title": "Révision des temps",
+   "order": 1,
+   "programRef": "1re — Simple past, present perfect, past perfect (à vérifier sur le texte officiel)"
+  },
+  {
+   "id": "1re-english-voice-conditionals",
+   "title": "Voix passive, conditionnels et souhaits",
+   "order": 2,
+   "programRef": "1re — Passive voice, conditionals 0 to 3, wish and if only (à vérifier sur le texte officiel)"
+  },
+  {
+   "id": "1re-english-reported-relative",
+   "title": "Discours rapporté et propositions relatives",
+   "order": 3,
+   "programRef": "1re — Reported speech, relative clauses (à vérifier sur le texte officiel)"
+  },
+  {
+   "id": "1re-english-reading",
+   "title": "Compréhension de texte",
+   "order": 4,
+   "programRef": "1re — Skimming, scanning, inference, vocabulaire en contexte (à vérifier sur le texte officiel)"
+  },
+  {
+   "id": "1re-english-writing",
+   "title": "Expression écrite",
+   "order": 5,
+   "programRef": "1re — Lettre formelle, essai argumentatif, résumé (à vérifier sur le texte officiel)"
+  }
+ ],
+ "mockExams": [
+  {
+   "id": "1re-english-eb1",
+   "title": "Épreuve blanche d'anglais — Probatoire",
+   "minutes": 120,
+   "outOf": 20,
+   "instructions": "Lisez le texte (écrit pour l'exercice), puis traitez : compréhension (8 points), langue (6 points), expression écrite (6 points). Le format, la durée et le barème officiels de l'épreuve sont à vérifier sur les textes officiels. Consignes en français, réponses en anglais.",
+   "sections": [
+    {
+     "title": "Part A: Reading comprehension (8 points)",
+     "exercises": [
+      "1re-english-blanc-reading"
+     ]
+    },
+    {
+     "title": "Part B: Language (6 points)",
+     "exercises": [
+      "1re-english-blanc-language"
+     ]
+    },
+    {
+     "title": "Part C: Writing (6 points)",
+     "exercises": [
+      "1re-english-blanc-writing"
+     ]
+    }
+   ]
+  }
+ ]
+}

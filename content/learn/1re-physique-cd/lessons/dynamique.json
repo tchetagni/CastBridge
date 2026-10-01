@@ -1,0 +1,498 @@
+{
+ "chapter": "1re-physique-cd-ch-dynamique",
+ "lessons": [
+  {
+   "id": "1re-physique-cd-dynamique",
+   "chapter": "1re-physique-cd-ch-dynamique",
+   "title": "Dynamique du point : lois de Newton, forces de contact, plan incliné",
+   "minutes": 45,
+   "programRef": "1re C/D — Mécanique : dynamique du point matériel (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale d'après le programme de 1re C et D ; à relire par un enseignant",
+   "objectives": [
+    "Énoncer les trois lois de Newton et les utiliser.",
+    "Faire le bilan des forces d'un solide et choisir un repère.",
+    "Étudier le mouvement d'un solide sur un plan horizontal ou incliné, avec ou sans frottement."
+   ],
+   "prerequisites": [
+    "1re-physique-cd-cinematique"
+   ],
+   "exercises": [
+    "1re-physique-cd-dyn-01",
+    "1re-physique-cd-dyn-02",
+    "1re-physique-cd-dyn-03",
+    "1re-physique-cd-dyn-04",
+    "1re-physique-cd-dyn-05",
+    "1re-physique-cd-dyn-06"
+   ],
+   "selfCheck": [
+    "1re-physique-cd-dyn-q1",
+    "1re-physique-cd-dyn-q2",
+    "1re-physique-cd-dyn-q3",
+    "1re-physique-cd-dyn-q4",
+    "1re-physique-cd-dyn-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Ce que tu sauras faire",
+     "md": "- Énoncer les lois de Newton.\n- Faire un bilan des forces et projeter la 2e loi.\n- Étudier un solide sur un plan horizontal ou incliné, avec ou sans frottement."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Les trois lois de Newton",
+     "md": "Dans un référentiel **galiléen** (par exemple un référentiel terrestre pour les mouvements de courte durée) :\n- **1re loi (inertie)** : si $\\sum \\vec F = \\vec 0$, le centre d'inertie est au repos ou en MRU ; réciproquement.\n- **2e loi** : $\\sum \\vec F = m\\,\\vec a$ ($F$ en N, $m$ en kg, $a$ en m/s²).\n- **3e loi (action-réaction)** : $\\vec F_{A/B} = -\\vec F_{B/A}$."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Poids et réaction du support",
+     "md": "- **Poids** : $\\vec P = m\\,\\vec g$, vertical vers le bas, appliqué au centre de gravité. Sa valeur est $P = mg$ avec $g \\approx 10$ N/kg (9,8 N/kg plus précisément ; la valeur sera annoncée dans l'énoncé).\n- **Réaction du support** $\\vec R$ : force de contact, somme de la composante normale $\\vec R_N$ (perpendiculaire au support) et de la composante tangentielle, la force de **frottement** $\\vec f$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Frottement de glissement",
+     "md": "Quand le solide glisse sur le support, la force de frottement est opposée au mouvement et sa valeur est :\n$f = \\mu\\,R_N$,\noù $\\mu$ est le coefficient de frottement (sans unité), qui dépend des surfaces en contact.\nSans frottement (surface parfaitement lisse), $\\vec R = \\vec R_N$."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : appliquer la 2e loi",
+     "md": "1. Définir le **système** et le référentiel galiléen.\n2. Faire le **bilan** des forces extérieures et les représenter sur un schéma.\n3. Écrire $\\sum \\vec F = m\\vec a$ et la **projeter** sur des axes (un parallèle au mouvement, un perpendiculaire).\n4. Résoudre : l'axe perpendiculaire donne $R_N$, l'axe du mouvement donne $a$."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 320,
+      "h": 225,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         30,
+         195,
+         285,
+         195,
+         285,
+         47.775681356645435
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightgrey"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         136.7,
+         133.4,
+         178.3,
+         109.4,
+         163.3,
+         83.4,
+         121.7,
+         107.4
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "circle",
+        "cx": 150.0,
+        "cy": 108.4,
+        "r": 3,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 150.0,
+        "y1": 108.4,
+        "x2": 150.0,
+        "y2": 170.4,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 164.0,
+        "y": 173.4,
+        "text": "P",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 150.0,
+        "y1": 108.4,
+        "x2": 124.0,
+        "y2": 63.4,
+        "color": "green",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 108.0,
+        "y": 59.4,
+        "text": "R",
+        "size": 16,
+        "color": "green",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 150.0,
+        "y1": 108.4,
+        "x2": 186.4,
+        "y2": 87.4,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 200.4,
+        "y": 81.4,
+        "text": "f",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 82,
+        "y": 187,
+        "text": "α",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Solide sur un plan incliné d'angle α : le poids P (rouge), la réaction normale R (vert) et le frottement f (bleu, vers le haut de la pente quand le solide descend).",
+     "alt": "Un plan incliné en forme de triangle, avec un bloc posé sur la pente. Trois flèches partent du bloc : le poids vertical vers le bas, la réaction perpendiculaire à la pente, le frottement le long de la pente vers le haut."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Plan incliné (angle α avec l'horizontale)",
+     "md": "Pour un solide qui descend la pente :\n- perpendiculairement à la pente : $R_N = mg\\cos\\alpha$ ;\n- le long de la pente, sans frottement : $a = g\\sin\\alpha$ ;\n- avec frottement : $a = g\\,(\\sin\\alpha - \\mu\\cos\\alpha)$.\nLa masse n'intervient pas dans $a$. Si $\\sin\\alpha \\leq \\mu\\cos\\alpha$, le solide ne glisse pas depuis le repos."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : caisse tirée sur le sol",
+     "statement": "Une caisse de masse 20 kg est tirée horizontalement par une force constante de valeur 100 N. Le frottement est une force constante de valeur 40 N. Calcule l'accélération puis la vitesse après 5 s (départ du repos).",
+     "steps": [
+      {
+       "md": "Bilan : poids et réaction normale se compensent (pas de mouvement vertical). Projection sur l'axe horizontal :",
+       "tex": "F - f = m\\,a"
+      },
+      {
+       "md": "Donc :",
+       "tex": "a = \\frac{100 - 40}{20} = 3\\ \\text{m/s}^2"
+      },
+      {
+       "md": "Mouvement uniformément accéléré, départ du repos :",
+       "tex": "v = a\\,t = 3 \\times 5 = 15\\ \\text{m/s}"
+      }
+     ],
+     "answer": "**a = 3 m/s² et v = 15 m/s après 5 s.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : glissade sans frottement",
+     "statement": "Un solide de masse 5 kg est lâché sans vitesse sur un plan incliné de 30° sans frottement (g = 10 N/kg). Calcule la réaction du plan, l'accélération, puis la vitesse et la distance parcourue après 2 s.",
+     "steps": [
+      {
+       "md": "Projection perpendiculaire à la pente (pas de mouvement) :",
+       "tex": "R = mg\\cos 30\\degree = 5 \\times 10 \\times 0{,}866 \\approx 43{,}3\\ \\text{N}"
+      },
+      {
+       "md": "Projection le long de la pente :",
+       "tex": "a = g\\sin 30\\degree = 10 \\times 0{,}5 = 5\\ \\text{m/s}^2"
+      },
+      {
+       "md": "Après 2 s (départ du repos) :",
+       "tex": "v = at = 10\\ \\text{m/s} \\quad ; \\quad d = \\frac{1}{2}at^2 = 10\\ \\text{m}"
+      }
+     ],
+     "answer": "**R ≈ 43,3 N ; a = 5 m/s² ; v = 10 m/s et d = 10 m.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que $R = mg$ sur un plan incliné : $R_N = mg\\cos\\alpha$.\n- Oublier une force dans le bilan (le poids !) ou en inventer une « force de mouvement ».\n- Dire que sans force il n'y a pas de mouvement : sans force résultante, le mouvement est rectiligne uniforme.\n- Confondre masse (kg) et poids (N).\n- Placer $\\sin$ et $\\cos$ à l'envers : seul l'angle avec l'horizontale compte, $\\sin\\alpha$ pour la composante le long de la pente."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-physique-cd-dyn-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-physique-cd-dyn-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-physique-cd-dyn-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le poids d'un objet dépend du lieu (g varie légèrement), pas sa masse.",
+      "Dans un ascenseur qui accélère vers le haut, la réaction du plancher sur une personne est plus grande que son poids : c'est la sensation d'« être plus lourd »."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier la notation du frottement dans le programme officiel : coefficient μ avec f = μ R_N, ou angle de frottement φ avec tan φ = f / R_N.",
+    "Vérifier si la quantité de mouvement (p = m v) et la forme ΣF = dp/dt sont au programme de 1re C/D ; elles ne sont pas traitées ici.",
+    "g = 10 N/kg annoncé dans les énoncés ; certains manuels utilisent 9,8 N/kg."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "1re-physique-cd-dyn-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-dynamique",
+   "prompt": "Calcule le poids d'une personne de masse 60 kg (g = 10 N/kg).",
+   "answer": 600,
+   "tolerance": 0,
+   "unit": "N",
+   "explanation": "$P = mg = 60 \\times 10 = 600$ N.",
+   "method": "$P = mg$.",
+   "mistakes": [
+    "Écrire que le poids est 60 kg : le poids est une force, en newtons."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-physique-cd-dyn-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-dynamique",
+   "prompt": "Un chariot de masse 40 kg est tiré par une force horizontale de 200 N ; une force de frottement de 80 N s'y oppose. Calcule son accélération (m/s²).",
+   "answer": 3,
+   "tolerance": 0,
+   "unit": "m/s²",
+   "explanation": "$F - f = ma$ donc $a = \\frac{200 - 80}{40} = 3$ m/s².",
+   "method": "Projeter la 2e loi sur l'axe du mouvement.",
+   "mistakes": [
+    "Oublier le frottement et trouver 5 m/s²."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-physique-cd-dyn-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-dynamique",
+   "prompt": "Vrai ou faux : un solide en mouvement rectiligne uniforme n'est soumis à aucune force.",
+   "answer": false,
+   "explanation": "Faux. Il peut être soumis à des forces dont la somme est nulle (par exemple, traction et frottement égaux). La 1re loi dit que $\\sum \\vec F = \\vec 0$, pas qu'il n'y a pas de forces.",
+   "mistakes": [
+    "Confondre « aucune force » et « forces qui se compensent »."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-physique-cd-dyn-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "1re-physique-cd-dynamique",
+   "prompt": "Un solide de 5 kg glisse sur un plan incliné de 30° ; le coefficient de frottement est μ = 0,2 ; g = 10 N/kg. Calcule son accélération (m/s², arrondie au centième).",
+   "answer": 3.27,
+   "tolerance": 0.01,
+   "unit": "m/s²",
+   "explanation": "$a = g(\\sin\\alpha - \\mu\\cos\\alpha) = 10 \\times (0{,}5 - 0{,}2 \\times 0{,}866) \\approx 3{,}27$ m/s².",
+   "method": "$a = g(\\sin\\alpha - \\mu\\cos\\alpha)$.",
+   "mistakes": [
+    "Oublier le frottement (5 m/s²)."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-physique-cd-dyn-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "1re-physique-cd-dynamique",
+   "prompt": "Une personne de masse 70 kg est debout dans un ascenseur qui monte en accélérant à 1,5 m/s² (g = 10 N/kg). Calcule la réaction du plancher (en N).",
+   "answer": 805,
+   "tolerance": 0,
+   "unit": "N",
+   "explanation": "Axe vertical vers le haut : $R - mg = ma$ donc $R = m(g + a) = 70 \\times 11{,}5 = 805$ N, supérieure au poids (700 N).",
+   "method": "Projeter la 2e loi sur la verticale orientée dans le sens de l'accélération.",
+   "mistakes": [
+    "Écrire $R = mg = 700$ N en oubliant que l'ascenseur accélère."
+   ],
+   "source": "Exercice original, style Probatoire C/D"
+  },
+  {
+   "id": "1re-physique-cd-dyn-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "1re-physique-cd-dynamique",
+   "prompt": "Une luge de masse 20 kg est tirée sur un sol horizontal par une corde faisant un angle de 30° au-dessus de l'horizontale ; la tension de la corde vaut 100 N. Le coefficient de frottement est μ = 0,2 ; g = 10 N/kg. La luge part du repos.",
+   "method": "Bilan des forces (P, R_N, f, T), projection verticale pour R_N, puis horizontale pour a.",
+   "mistakes": [
+    "Prendre $R_N = mg$ alors que la corde soulève en partie la luge.",
+    "Oublier la composante horizontale $T\\cos 30\\degree$."
+   ],
+   "source": "Exercice original, style Probatoire C/D",
+   "parts": [
+    {
+     "id": "1re-physique-cd-dyn-06-a",
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Projette la 2e loi sur la verticale et calcule la réaction normale $R_N$ (en N).",
+     "answer": 150,
+     "tolerance": 0,
+     "unit": "N",
+     "explanation": "Verticalement : $R_N + T\\sin 30\\degree - mg = 0$, donc $R_N = 200 - 100 \\times 0{,}5 = 150$ N."
+    },
+    {
+     "id": "1re-physique-cd-dyn-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la valeur de la force de frottement (en N).",
+     "answer": 30,
+     "tolerance": 0,
+     "unit": "N",
+     "explanation": "$f = \\mu R_N = 0{,}2 \\times 150 = 30$ N."
+    },
+    {
+     "id": "1re-physique-cd-dyn-06-c",
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Calcule l'accélération de la luge (m/s², arrondie au centième).",
+     "answer": 2.83,
+     "tolerance": 0.01,
+     "unit": "m/s²",
+     "explanation": "Horizontalement : $T\\cos 30\\degree - f = ma$, donc $a = \\frac{86{,}6 - 30}{20} \\approx 2{,}83$ m/s²."
+    },
+    {
+     "id": "1re-physique-cd-dyn-06-d",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quelle est sa vitesse après 4 s (m/s, arrondie au centième) ?",
+     "answer": 11.32,
+     "tolerance": 0.02,
+     "unit": "m/s",
+     "explanation": "$v = at \\approx 2{,}83 \\times 4 \\approx 11{,}32$ m/s."
+    }
+   ]
+  },
+  {
+   "id": "1re-physique-cd-dyn-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-dynamique",
+   "prompt": "La 2e loi de Newton s'écrit :",
+   "choices": [
+    "$\\sum \\vec F = m\\,\\vec a$",
+    "$\\sum \\vec F = m\\,\\vec v$",
+    "$\\sum \\vec F = \\vec a / m$",
+    "$\\sum \\vec F = m\\,\\vec g$"
+   ],
+   "answer": 0,
+   "explanation": "La somme des forces extérieures est égale à la masse fois le vecteur accélération."
+  },
+  {
+   "id": "1re-physique-cd-dyn-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-dynamique",
+   "prompt": "Un solide glisse sur un plan horizontal. La force de frottement est :",
+   "choices": [
+    "dans le sens du mouvement",
+    "opposée au mouvement, de valeur $\\mu R_N$",
+    "verticale vers le bas",
+    "toujours égale au poids"
+   ],
+   "answer": 1,
+   "explanation": "Le frottement s'oppose au glissement ; en glissement, $f = \\mu R_N$."
+  },
+  {
+   "id": "1re-physique-cd-dyn-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-dynamique",
+   "prompt": "Sur un plan incliné sans frottement, l'accélération d'un solide qui descend est :",
+   "choices": [
+    "$g\\cos\\alpha$",
+    "$g$",
+    "$g\\sin\\alpha$",
+    "$g\\tan\\alpha$"
+   ],
+   "answer": 2,
+   "explanation": "La composante du poids le long de la pente est $mg\\sin\\alpha$."
+  },
+  {
+   "id": "1re-physique-cd-dyn-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-dynamique",
+   "prompt": "Un solide de masse 3 kg a une accélération de 4 m/s². La résultante des forces vaut :",
+   "choices": [
+    "0,75 N",
+    "7 N",
+    "1,33 N",
+    "12 N"
+   ],
+   "answer": 3,
+   "explanation": "$F = ma = 3 \\times 4 = 12$ N."
+  },
+  {
+   "id": "1re-physique-cd-dyn-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "1re-physique-cd-dynamique",
+   "prompt": "La 3e loi de Newton dit que si A exerce une force sur B, alors :",
+   "choices": [
+    "B exerce sur A une force opposée de même valeur",
+    "B n'exerce aucune force sur A",
+    "B exerce sur A une force de même sens",
+    "B exerce une force plus petite"
+   ],
+   "answer": 0,
+   "explanation": "Les forces d'interaction réciproques sont opposées et de même valeur ; elles s'exercent sur deux corps différents."
+  }
+ ]
+}

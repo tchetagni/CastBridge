@@ -1,0 +1,433 @@
+{
+ "chapter": "tle-svt-d-ch-glycemie",
+ "lessons": [
+  {
+   "id": "tle-svt-d-glycemie",
+   "title": "Régulation de la glycémie et équilibre du milieu intérieur",
+   "minutes": 35,
+   "programRef": "Tle D — Régulation de la glycémie (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale, brouillon IA ; à relire par un enseignant",
+   "objectives": [
+    "Définir le milieu intérieur et la glycémie.",
+    "Expliquer la régulation par l'insuline et le glucagon.",
+    "Distinguer diabète de type 1 et de type 2.",
+    "Citer des régulations de la température et de l'eau."
+   ],
+   "exercises": [
+    "tle-svt-d-glycemie-01",
+    "tle-svt-d-glycemie-02",
+    "tle-svt-d-glycemie-03",
+    "tle-svt-d-glycemie-04",
+    "tle-svt-d-glycemie-05",
+    "tle-svt-d-glycemie-06"
+   ],
+   "selfCheck": [
+    "tle-svt-d-gly-q1",
+    "tle-svt-d-gly-q2",
+    "tle-svt-d-gly-q3",
+    "tle-svt-d-gly-q4",
+    "tle-svt-d-gly-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Objectifs",
+     "md": "Définir la glycémie et le milieu intérieur ; expliquer la régulation de la glycémie par l'insuline et le glucagon ; distinguer les deux grands types de diabète ; décrire quelques régulations de l'équilibre du milieu intérieur."
+    },
+    {
+     "type": "heading",
+     "text": "1. Milieu intérieur et glycémie"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Milieu intérieur et homéostasie",
+     "md": "Le **milieu intérieur** est le liquide qui baigne les cellules (sang, lymphe, liquide interstitiel). Ses caractéristiques (température, pH, concentration en glucose, eau…) restent presque constantes : c'est l'**homéostasie** (notion développée par Claude Bernard). Des **capteurs**, un **centre de commande** et des **effecteurs** corrigent les écarts."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La glycémie",
+     "md": "La **glycémie** est la concentration de glucose dans le sang. À jeun, elle est d'environ **1 g/L** (autour de 5,5 mmol/L) et reste dans une zone étroite. Le glucose est le carburant des cellules (le cerveau en dépend beaucoup) : une glycémie trop basse (**hypoglycémie**) ou trop élevée (**hyperglycémie**) est dangereuse."
+    },
+    {
+     "type": "heading",
+     "text": "2. Régulation par l'insuline et le glucagon"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les hormones pancréatiques",
+     "md": "Dans le pancréas, les **îlots de Langerhans** contiennent des cellules **β** qui sécrètent l'**insuline** (hormone **hypoglycémiante**) et des cellules **α** qui sécrètent le **glucagon** (hormone **hyperglycémiante**). L'adrénaline, sécrétée en cas de stress ou d'effort, est aussi hyperglycémiante."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Mode d'action",
+     "md": "**Après un repas**, la glycémie monte : l'insuline est sécrétée ; elle favorise l'entrée du glucose dans les cellules et son **stockage** (en **glycogène** dans le foie et les muscles, en graisses dans le tissu adipeux). **À jeun ou à l'effort**, la glycémie baisse : le glucagon agit sur le foie, qui transforme le glycogène en glucose et le libère dans le sang."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 4,
+      "ymin": 0,
+      "ymax": 2.5,
+      "grid": 1,
+      "xlabel": "heures après un repas sucré (schéma)",
+      "ylabel": "g/L",
+      "w": 420,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "0.9+0.5*exp((x-1)*(1-x)/0.8)",
+        "color": "blue",
+        "label": "personne en bonne santé"
+       },
+       {
+        "expr": "1.4+0.9*exp((x-1.5)*(1.5-x)/1.5)",
+        "color": "red",
+        "label": "personne diabétique"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 0,
+        "y1": 1.26,
+        "x2": 4,
+        "y2": 1.26,
+        "color": "grey",
+        "dash": true
+       }
+      ]
+     },
+     "caption": "Évolution schématique de la glycémie après un repas sucré : personne en bonne santé et personne diabétique ; la ligne grise marque 1,26 g/L.",
+     "alt": "Deux courbes sur quatre heures. La courbe bleue part d'environ 1 g/L, monte modérément puis revient vite à 1 g/L. La courbe rouge part au-dessus de 1,26 g/L, monte beaucoup plus haut et redescend très lentement."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Un système de rétrocontrôle",
+     "md": "La régulation est un **rétrocontrôle négatif** : la glycémie qui monte déclenche l'insuline, qui la fait baisser, ce qui arrête la sécrétion d'insuline. Inversement, une baisse déclenche le glucagon. Pour interpréter une expérience : (1) repérer ce qui varie, (2) la conséquence sur la glycémie, (3) en déduire le rôle de l'organe ou de l'hormone."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : expérience de pancréatectomie",
+     "statement": "Fictif : chez un chien, l'ablation du pancréas fait passer la glycémie de 1,0 g/L à 3,0 g/L, avec du glucose dans les urines. Une injection d'insuline ramène la glycémie à 1,1 g/L. Que conclure ?",
+     "steps": [
+      {
+       "md": "Sans pancréas, la glycémie est multipliée par 3 : le pancréas **empêche** l'hyperglycémie."
+      },
+      {
+       "md": "L'injection d'insuline rétablit la glycémie : le pancréas agit par l'**insuline**, hormone hypoglycémiante."
+      },
+      {
+       "md": "Le glucose dans les urines (**glycosurie**) apparaît quand la glycémie dépasse le seuil de réabsorption du rein."
+      }
+     ],
+     "answer": "Le pancréas régule la glycémie par l'insuline, hypoglycémiante."
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-svt-d-glycemie-01"
+    },
+    {
+     "type": "heading",
+     "text": "3. Diabète et autres équilibres"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Les deux grands types de diabète",
+     "md": "Diabète **de type 1** : les cellules β sont détruites, l'insuline manque ; le traitement repose sur l'insuline. Diabète **de type 2** : l'insuline existe mais les cellules y répondent mal ; il est favorisé par le surpoids, la sédentarité et l'hérédité, et se prévient en partie par l'alimentation et l'activité physique. Un diabète se diagnostique à partir de plusieurs mesures de glycémie à jeun (seuil usuel : 1,26 g/L)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Autres régulations",
+     "md": "**Température** : vers 37 °C ; chaleur : transpiration et dilatation des vaisseaux de la peau ; froid : frissons et contraction de ces vaisseaux ; centre : l'**hypothalamus**. **Eau** : l'hormone antidiurétique (**ADH**) agit sur le rein et limite les pertes d'eau en cas de déshydratation. **Pression artérielle**, **pH** et autres constantes sont aussi régulés."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : exprimer une glycémie en mmol/L",
+     "statement": "Le seuil de diagnostic du diabète est de 1,26 g/L à jeun. Convertis-le en mmol/L, sachant que la masse molaire du glucose est 180 g/mol.",
+     "steps": [
+      {
+       "md": "Quantité de matière pour 1,26 g de glucose :",
+       "tex": "n = \\frac{1{,}26}{180} = 0{,}0070 \\text{ mol}"
+      },
+      {
+       "md": "Pour 1 L : 0,0070 mol = 7,0 mmol."
+      }
+     ],
+     "answer": "1,26 g/L correspond à **7,0 mmol/L**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre **insuline** (baisse la glycémie) et **glucagon** (la fait monter).\n- Confondre glycémie (dans le sang) et glycosurie (dans l'urine).\n- Dire que le diabète est « trop de sucre mangé » : c'est un trouble de la régulation.\n- Penser que le diabète de type 2 se soigne toujours seulement avec de l'insuline."
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-svt-d-glycemie-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-svt-d-glycemie-03"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Un malaise avec sueurs et faiblesse chez un diabétique traité peut être une hypoglycémie : il faut alors un apport de sucre et un avis médical.",
+      "Banting et Best ont isolé l'insuline en 1921 ; avant, le diabète de type 1 était mortel à court terme."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Seuils (1 g/L, 1,26 g/L) : valeurs usuelles ; à comparer avec celles du manuel.",
+    "Vérifier si le glucagon, l'adrénaline, l'ADH et la thermorégulation sont au programme de Tle D.",
+    "Contenu de santé : ne pas utiliser pour s'auto-diagnostiquer ; relecture conseillée par un enseignant ou un professionnel de santé."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "tle-svt-d-glycemie-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-glycemie",
+   "prompt": "Quelle hormone est hypoglycémiante ?",
+   "choices": [
+    "L'insuline",
+    "Le glucagon",
+    "L'adrénaline",
+    "L'ADH"
+   ],
+   "answer": 0,
+   "explanation": "L'insuline fait baisser la glycémie en favorisant l'entrée et le stockage du glucose.",
+   "method": "Hypo = baisse.",
+   "mistakes": [
+    "Citer le glucagon, qui fait monter la glycémie."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-svt-d-glycemie-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-glycemie",
+   "prompt": "Les cellules qui sécrètent l'insuline sont :",
+   "choices": [
+    "les cellules α des îlots de Langerhans",
+    "les cellules β des îlots de Langerhans",
+    "les cellules du foie",
+    "les cellules du cerveau"
+   ],
+   "answer": 1,
+   "explanation": "Les cellules β du pancréas endocrine sécrètent l'insuline ; les cellules α, le glucagon.",
+   "method": "Pancréas endocrine : α glucagon, β insuline.",
+   "mistakes": [
+    "Inverser α et β."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-svt-d-glycemie-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-glycemie",
+   "prompt": "Le foie peut libérer du glucose dans le sang à partir de son glycogène.",
+   "answer": true,
+   "explanation": "Sous l'action du glucagon, le foie transforme son glycogène en glucose et le libère dans le sang.",
+   "method": "Foie = réserve de glycogène.",
+   "mistakes": [
+    "Croire que seul l'intestin apporte du glucose au sang."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-svt-d-glycemie-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 1,
+   "points": 2,
+   "lesson": "tle-svt-d-glycemie",
+   "prompt": "Fictif : un adulte a 5 L de sang. Sa glycémie passe de 1,0 g/L à 1,6 g/L après un repas. Quelle masse supplémentaire de glucose circule dans son sang (en grammes) ? (On néglige le glucose hors du sang.)",
+   "answer": 3,
+   "tolerance": 0.05,
+   "unit": "g",
+   "explanation": "(1,6 − 1,0) × 5 = 3 g.",
+   "method": "Variation de concentration × volume.",
+   "mistakes": [
+    "Multiplier 1,6 par 5 (= 8 g) au lieu de la variation."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-svt-d-glycemie-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "tle-svt-d-glycemie",
+   "prompt": "La glycémie d'une personne à jeun est de 0,9 g/L. Convertis-la en mmol/L (masse molaire du glucose : 180 g/mol), arrondie au dixième.",
+   "answer": 5.0,
+   "tolerance": 0.05,
+   "unit": "mmol/L",
+   "explanation": "0,9 ÷ 180 = 0,0050 mol/L = 5,0 mmol/L.",
+   "method": "mmol/L = (g/L ÷ M) × 1000.",
+   "mistakes": [
+    "Oublier le facteur 1000 et répondre 0,005."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-svt-d-glycemie-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "tle-svt-d-glycemie",
+   "prompt": "Fictif : on étudie la glycémie d'un homme (Alain) et d'une femme (Béatrice) après l'ingestion de 75 g de glucose. Avant l'ingestion : Alain 0,9 g/L ; Béatrice 1,4 g/L. Une heure après : Alain 1,4 g/L ; Béatrice 2,3 g/L. Quatre heures après : Alain 0,9 g/L ; Béatrice 1,9 g/L. Le médecin dose aussi l'insuline : très basse chez Béatrice à tous les moments.",
+   "parts": [
+    {
+     "id": "tle-svt-d-glycemie-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "De combien la glycémie d'Alain a-t-elle augmenté en une heure (en g/L) ?",
+     "answer": 0.5,
+     "tolerance": 0.01,
+     "unit": "g/L",
+     "explanation": "1,4 − 0,9 = 0,5 g/L."
+    },
+    {
+     "id": "tle-svt-d-glycemie-06-b",
+     "kind": "mcq",
+     "points": 1.5,
+     "prompt": "Que montre l'évolution de la glycémie d'Alain ?",
+     "choices": [
+      "Un diabète : la glycémie reste élevée",
+      "Une hypoglycémie permanente",
+      "La régulation fonctionne : retour à la valeur initiale",
+      "Aucune régulation"
+     ],
+     "answer": 2,
+     "explanation": "Après le pic, la glycémie revient à 0,9 g/L en quatre heures : la régulation est efficace."
+    },
+    {
+     "id": "tle-svt-d-glycemie-06-c",
+     "kind": "open",
+     "points": 2.5,
+     "prompt": "Compare avec Béatrice et propose une explication (type de diabète probable) en utilisant le dosage d'insuline.",
+     "model": "Béatrice a une glycémie élevée à jeun, supérieure à 1,26 g/L, et qui ne revient pas à la normale après le pic. Son insuline est très basse, ce qui indique un manque d'insuline, donc une cause de type 1 (destruction des cellules β). Le diagnostic réel revient au médecin.",
+     "rubric": [
+      "Glycémie élevée et retour impossible",
+      "Insuline basse : défaut de sécrétion",
+      "Hypothèse prudente : diabète de type 1"
+     ],
+     "explanation": "On relie l'absence de retour à la normale à l'insuline basse ; le diagnostic réel est médical."
+    }
+   ],
+   "method": "Calculer les variations, comparer deux profils, relier aux hormones.",
+   "mistakes": [
+    "Conclure à un diabète à partir d'une seule mesure."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "tle-svt-d-gly-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-glycemie",
+   "prompt": "La glycémie à jeun normale est d'environ :",
+   "choices": [
+    "10 g/L",
+    "0,01 g/L",
+    "100 g/L",
+    "1 g/L"
+   ],
+   "answer": 3,
+   "explanation": "Environ 1 g/L (autour de 5,5 mmol/L)."
+  },
+  {
+   "id": "tle-svt-d-gly-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-glycemie",
+   "prompt": "Le glucagon est sécrété par :",
+   "choices": [
+    "les cellules α du pancréas",
+    "les cellules β du pancréas",
+    "le foie",
+    "le rein"
+   ],
+   "answer": 0,
+   "explanation": "Il est hyperglycémiant."
+  },
+  {
+   "id": "tle-svt-d-gly-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-glycemie",
+   "prompt": "Après un repas riche en glucides, on observe :",
+   "choices": [
+    "une sécrétion de glucagon uniquement",
+    "une sécrétion d'insuline",
+    "aucune sécrétion",
+    "une sécrétion d'ADH"
+   ],
+   "answer": 1,
+   "explanation": "L'insuline abaisse la glycémie."
+  },
+  {
+   "id": "tle-svt-d-gly-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-glycemie",
+   "prompt": "Dans le diabète de type 1 :",
+   "choices": [
+    "les reins fabriquent trop de glucose",
+    "le foie ne fabrique plus de glycogène du tout",
+    "les cellules β sont détruites",
+    "le glucagon est toujours absent"
+   ],
+   "answer": 2,
+   "explanation": "Il y a un manque d'insuline."
+  },
+  {
+   "id": "tle-svt-d-gly-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-svt-d-glycemie",
+   "prompt": "L'homéostasie désigne :",
+   "choices": [
+    "la division cellulaire",
+    "la digestion",
+    "la respiration cellulaire",
+    "le maintien relativement constant du milieu intérieur"
+   ],
+   "answer": 3,
+   "explanation": "Les constantes du milieu intérieur sont maintenues par des régulations."
+  }
+ ]
+}

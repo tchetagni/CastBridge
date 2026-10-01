@@ -1,0 +1,497 @@
+{
+ "chapter": "bac-maths-c-specifique-ch-simil",
+ "lessons": [
+  {
+   "id": "bac-maths-c-specifique-simil",
+   "title": "Similitudes planes directes : écriture complexe et éléments caractéristiques",
+   "minutes": 40,
+   "programRef": "Tle C — Transformations du plan : similitudes planes directes, écriture complexe (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître translation, rotation, homothétie et similitude directe par son écriture complexe.",
+    "Déterminer rapport, angle et centre d'une similitude.",
+    "Déterminer une similitude à partir de deux points et de leurs images.",
+    "Utiliser l'effet d'une similitude sur distances, angles et aires."
+   ],
+   "exercises": [
+    "bac-maths-c-specifique-sim-01",
+    "bac-maths-c-specifique-sim-02",
+    "bac-maths-c-specifique-sim-03",
+    "bac-maths-c-specifique-sim-04",
+    "bac-maths-c-specifique-sim-05",
+    "bac-maths-c-specifique-sim-06"
+   ],
+   "selfCheck": [
+    "bac-maths-c-specifique-sim-q1",
+    "bac-maths-c-specifique-sim-q2",
+    "bac-maths-c-specifique-sim-q3",
+    "bac-maths-c-specifique-sim-q4",
+    "bac-maths-c-specifique-sim-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Dans cette fiche",
+     "md": "Écrire une similitude plane directe sous la forme $z' = az + b$, en déterminer les éléments caractéristiques (rapport, angle, centre) et l'utiliser sur des distances, angles et aires ; reconnaître translation, rotation, homothétie."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Similitude plane directe",
+     "md": "Dans le plan complexe, une **similitude directe** est une transformation $z \\to z' = az + b$ avec $a \\in \\mathbb{C}^*$ et $b \\in \\mathbb{C}$.\nCas particuliers :\n- $a = 1$ : **translation** de vecteur d'affixe b ;\n- $a$ réel $\\neq 1$ : **homothétie** de rapport a ;\n- $|a| = 1$, $a \\neq 1$ : **rotation** d'angle $\\text{arg } a$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Éléments caractéristiques",
+     "md": "Si $a \\neq 1$, la similitude a un **unique point fixe**, le centre $\\Omega$ d'affixe $\\omega = \\frac{b}{1 - a}$ (solution de $\\omega = a\\omega + b$). Alors :\n- le **rapport** est $k = |a|$ ;\n- l'**angle** est $\\theta = \\text{arg } a$ (modulo $2\\pi$) ;\n- on a $z' - \\omega = a(z - \\omega)$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Effet sur les figures",
+     "md": "Une similitude directe de rapport k :\n- multiplie les **distances** par k : $A'B' = k \\times AB$ ;\n- conserve les **angles orientés** ;\n- multiplie les **aires** par $k^2$ ;\n- conserve le barycentre, l'alignement et le parallélisme ;\n- sa réciproque est $z = \\frac{z' - b}{a}$, de rapport $\\frac{1}{|a|}$."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : trouver s à partir de deux points",
+     "md": "Si $s(A) = A'$ et $s(B) = B'$ :\n1. $a = \\frac{z_{B'} - z_{A'}}{z_B - z_A}$ (quotient des vecteurs $\\overrightarrow{A'B'}$ et $\\overrightarrow{AB}$) ;\n2. $b = z_{A'} - a z_A$ ;\n3. $|a|$ = rapport, $\\text{arg } a$ = angle ; centre $\\omega = \\frac{b}{1 - a}$ si $a \\neq 1$.\n**Vérifier** : s(B) = B'."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 320,
+      "h": 230,
+      "items": [
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 190,
+        "x2": 300,
+        "y2": 190,
+        "color": "grey",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 215,
+        "x2": 150,
+        "y2": 15,
+        "color": "grey",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 190,
+        "x2": 150,
+        "y2": 140,
+        "color": "blue",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 40,
+        "x2": 100,
+        "y2": 140,
+        "color": "red",
+        "width": 3
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 190,
+        "r": 4,
+        "stroke": "ink",
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 140,
+        "r": 4,
+        "stroke": "ink",
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 40,
+        "r": 4,
+        "stroke": "ink",
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 100,
+        "cy": 140,
+        "r": 4,
+        "stroke": "ink",
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 214,
+        "y": 206,
+        "text": "A",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 168,
+        "y": 134,
+        "text": "B",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 216,
+        "y": 38,
+        "text": "A'",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 134,
+        "text": "B'",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "La similitude de l'exemple 2 envoie A(1) sur A'(1 + 3i) et B(i) sur B'(−1 + i) : le segment [AB] devient [A'B'] deux fois plus long, tourné d'un angle droit.",
+     "alt": "Repère orthonormé avec deux segments : le segment bleu AB de A(1 ; 0) à B(0 ; 1) et le segment rouge A'B' de A'(1 ; 3) à B'(−1 ; 1). Le segment rouge est plus long et tourné d'un quart de tour."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : éléments caractéristiques",
+     "statement": "Détermine les éléments caractéristiques de $s : z' = (1 + i)z + 2 - i$.",
+     "steps": [
+      {
+       "md": "$a = 1 + i$ ; $|a| = \\sqrt{2}$ et $\\text{arg } a = \\frac{\\pi}{4}$ car $a = \\sqrt{2}\\left(\\cos\\frac{\\pi}{4} + i\\sin\\frac{\\pi}{4}\\right)$.",
+       "tex": "k = \\sqrt{2} \\qquad \\theta = \\frac{\\pi}{4}"
+      },
+      {
+       "md": "Centre : $\\omega = \\frac{2 - i}{1 - (1 + i)} = \\frac{2 - i}{-i} = (2 - i) \\times i = 1 + 2i$.",
+       "tex": "\\Omega(1 + 2i)"
+      },
+      {
+       "md": "Contrôle : $(1 + i)(1 + 2i) + 2 - i = 1 + 2i + i - 2 + 2 - i = 1 + 2i$ : le centre est bien invariant."
+      }
+     ],
+     "answer": "**Similitude directe de centre $\\Omega(1 + 2i)$, de rapport $\\sqrt{2}$ et d'angle $\\frac{\\pi}{4}$.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : s définie par deux points",
+     "statement": "Trouve la similitude directe s telle que $s(1) = 1 + 3i$ et $s(i) = -1 + i$.",
+     "steps": [
+      {
+       "md": "$a = \\frac{(-1 + i) - (1 + 3i)}{i - 1} = \\frac{-2 - 2i}{-1 + i}$. On multiplie par le conjugué $-1 - i$ : numérateur $(−2 − 2i)(−1 − i) = 2 + 4i - 2 = 4i$, dénominateur 2.",
+       "tex": "a = 2i"
+      },
+      {
+       "md": "$b = z_{A'} - a z_A = 1 + 3i - 2i \\times 1 = 1 + i$.",
+       "tex": "z' = 2iz + 1 + i"
+      },
+      {
+       "md": "Vérification : $2i \\times i + 1 + i = -2 + 1 + i = -1 + i$. Rapport 2, angle $\\frac{\\pi}{2}$, centre $\\omega = \\frac{1 + i}{1 - 2i} = \\frac{-1 + 3i}{5}$."
+      }
+     ],
+     "answer": "**$z' = 2iz + 1 + i$** : rapport 2, angle $\\frac{\\pi}{2}$."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier de vérifier que $a \\neq 1$ avant de calculer le centre $\\frac{b}{1-a}$ (si $a = 1$, c'est une translation, sans point fixe sauf $b = 0$).\n- Confondre rapport $|a|$ et angle $\\text{arg } a$.\n- Calculer $a = \\frac{z_B - z_A}{z_{B'} - z_{A'}}$ (quotient à l'envers).\n- Multiplier les aires par k au lieu de $k^2$.\n- Se tromper de signe en simplifiant $\\frac{b}{1-a}$ quand $1 - a$ est imaginaire pur."
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-maths-c-specifique-sim-01"
+    },
+    {
+     "type": "text",
+     "md": "**Vérifier par Python** : avec les nombres complexes de Python (1j pour i), on contrôle que f(z) = a\\*z + b renvoie bien l'image attendue, que abs(a) donne le rapport, que cmath.phase(a) donne l'angle en radians et que b/(1 - a) est invariant."
+    },
+    {
+     "type": "more",
+     "items": [
+      "On peut aussi définir une similitude par son centre, son rapport et son angle : $z' - \\omega = k e^{i\\theta}(z - \\omega)$. Les similitudes indirectes ($z' = a\\bar{z} + b$) sont réservées à des programmes plus larges : à vérifier.",
+      "Deux similitudes directes se composent par $a'a$ et $a'b + b'$ ; leur composée est une similitude directe de rapport $|a||a'|$."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Les similitudes indirectes et la décomposition d'une similitude en homothétie puis rotation sont-elles exigibles en Tle C ? À confirmer ; la fiche ne traite que les similitudes directes.",
+    "Les pré-requis (nombres complexes : module, argument, forme trigonométrique) sont dans le pack bac-maths ; vérifier la cohérence des notations."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "bac-maths-c-specifique-sim-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-c-specifique-simil",
+   "prompt": "Quel est le rapport de la similitude $z' = (3 + 4i)z + 1$ ?",
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "$|3 + 4i| = \\sqrt{9 + 16} = 5$.",
+   "method": "Rapport = module de a.",
+   "mistakes": [
+    "Répondre 7 (somme des parties).",
+    "Répondre 25 (carré du module)."
+   ],
+   "source": "Exercice original, style Bac C"
+  },
+  {
+   "id": "bac-maths-c-specifique-sim-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-c-specifique-simil",
+   "prompt": "Quel est l'angle de la similitude $z' = (1 - i)z$ ?",
+   "choices": [
+    "$-\\frac{\\pi}{4}$",
+    "$\\frac{\\pi}{4}$",
+    "$-\\frac{\\pi}{2}$",
+    "$\\frac{3\\pi}{4}$"
+   ],
+   "answer": 0,
+   "explanation": "$1 - i = \\sqrt{2}\\left(\\cos\\left(-\\frac{\\pi}{4}\\right) + i\\sin\\left(-\\frac{\\pi}{4}\\right)\\right)$ : l'argument est $-\\frac{\\pi}{4}$.",
+   "method": "Mettre a sous forme trigonométrique.",
+   "mistakes": [
+    "Oublier le signe moins de la partie imaginaire."
+   ],
+   "source": "Exercice original, style Bac C"
+  },
+  {
+   "id": "bac-maths-c-specifique-sim-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-c-specifique-simil",
+   "prompt": "Détermine l'affixe du centre de la similitude $z' = 3z - 4$.",
+   "answer": 2,
+   "tolerance": 0,
+   "explanation": "$\\omega = 3\\omega - 4$ donne $2\\omega = 4$, soit $\\omega = 2$ (formule $\\frac{b}{1 - a} = \\frac{-4}{-2} = 2$).",
+   "method": "Point fixe : $\\omega = \\frac{b}{1-a}$.",
+   "mistakes": [
+    "Calculer $\\frac{-4}{3}$ ou $\\frac{4}{1-3}$ avec une erreur de signe."
+   ],
+   "source": "Exercice original, style Bac C"
+  },
+  {
+   "id": "bac-maths-c-specifique-sim-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "bac-maths-c-specifique-simil",
+   "prompt": "Soit $s : z' = (1 + i)z + 2i$ et M d'affixe $1 - i$. Calcule $|z'|$ où $z'$ est l'affixe de $s(M)$ (arrondi à 0,001).",
+   "answer": 2.828,
+   "tolerance": 0.001,
+   "explanation": "$z' = (1 + i)(1 - i) + 2i = 2 + 2i$ et $|z'| = 2\\sqrt{2} \\approx 2{,}828$.",
+   "method": "Calculer z' puis son module.",
+   "mistakes": [
+    "Écrire $(1 + i)(1 - i) = 1 - i^2 = 0$ en se trompant sur $i^2 = -1$."
+   ],
+   "source": "Exercice original, style Bac C"
+  },
+  {
+   "id": "bac-maths-c-specifique-sim-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "bac-maths-c-specifique-simil",
+   "prompt": "s est la similitude directe telle que $s(0) = 1$ et $s(1) = 2 + i$. Calcule $|a|$ pour $s(z) = az + b$ (arrondi à 0,001).",
+   "answer": 1.414,
+   "tolerance": 0.001,
+   "explanation": "$b = s(0) = 1$ et $a + b = 2 + i$, donc $a = 1 + i$ et $|a| = \\sqrt{2} \\approx 1{,}414$.",
+   "method": "s(0) donne b ; s(1) donne a + b.",
+   "mistakes": [
+    "Oublier de soustraire b pour trouver a."
+   ],
+   "source": "Exercice original, style Bac C"
+  },
+  {
+   "id": "bac-maths-c-specifique-sim-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "bac-maths-c-specifique-simil",
+   "prompt": "Dans le plan complexe muni d'un repère orthonormé direct, on considère la transformation s d'écriture complexe $z' = (1 - i)z + 2i$.",
+   "parts": [
+    {
+     "id": "bac-maths-c-specifique-sim-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le rapport de s (arrondi à 0,001).",
+     "explanation": "$|1 - i| = \\sqrt{2} \\approx 1{,}414$.",
+     "answer": 1.414,
+     "tolerance": 0.001
+    },
+    {
+     "id": "bac-maths-c-specifique-sim-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Donne l'angle de s en degrés.",
+     "explanation": "$\\text{arg}(1 - i) = -\\frac{\\pi}{4}$, soit −45°.",
+     "answer": -45,
+     "tolerance": 0.5,
+     "unit": "°"
+    },
+    {
+     "id": "bac-maths-c-specifique-sim-06-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Détermine l'affixe du centre Ω de s.",
+     "explanation": "$\\omega = \\frac{2i}{1 - (1 - i)} = \\frac{2i}{i} = 2$ : $\\Omega(2)$.",
+     "answer": 2,
+     "tolerance": 0
+    },
+    {
+     "id": "bac-maths-c-specifique-sim-06-d",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Soit A d'affixe $2 + 2i$. Calcule la distance $\\Omega A'$, où A' = s(A) (arrondi à 0,001).",
+     "explanation": "$z_{A'} = (1 - i)(2 + 2i) + 2i = 4 + 2i$, donc $\\Omega A' = |2 + 2i| = 2\\sqrt{2} \\approx 2{,}828$ (c'est $\\sqrt{2} \\times \\Omega A$, avec $\\Omega A = |2i| = 2$).",
+     "answer": 2.828,
+     "tolerance": 0.001
+    },
+    {
+     "id": "bac-maths-c-specifique-sim-06-e",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Un triangle d'aire 3 a pour image par s un triangle d'aire :",
+     "explanation": "Le rapport est $\\sqrt{2}$ : les aires sont multipliées par $(\\sqrt{2})^2 = 2$, d'où 6.",
+     "answer": 6,
+     "tolerance": 0
+    }
+   ],
+   "method": "Éléments caractéristiques par $a$ et $\\frac{b}{1-a}$ ; effets d'une similitude sur distances et aires.",
+   "mistakes": [
+    "Multiplier l'aire par $\\sqrt{2}$ au lieu de 2.",
+    "Prendre $\\text{arg}(1 - i) = +\\frac{\\pi}{4}$."
+   ],
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-c-specifique-sim-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-c-specifique-simil",
+   "prompt": "Une similitude plane directe s'écrit :",
+   "choices": [
+    "$z' = az + b$ avec $a \\neq 0$",
+    "$z' = a\\bar{z} + b$ avec $a \\neq 0$",
+    "$z' = az^2 + b$",
+    "$z' = a + bz$ avec $b = 0$"
+   ],
+   "answer": 0,
+   "explanation": "Les similitudes directes ont l'écriture complexe $z' = az + b$ ; l'écriture avec $\\bar{z}$ est celle des similitudes indirectes.",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-c-specifique-sim-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-c-specifique-simil",
+   "prompt": "Le rapport de $z' = (2 - 2i)z + 1$ vaut :",
+   "choices": [
+    "$2$",
+    "$2\\sqrt{2}$",
+    "$4$",
+    "$\\sqrt{2}$"
+   ],
+   "answer": 1,
+   "explanation": "$|2 - 2i| = \\sqrt{4 + 4} = 2\\sqrt{2}$.",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-c-specifique-sim-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-c-specifique-simil",
+   "prompt": "Si $a = 1$ et $b \\neq 0$, la transformation $z' = z + b$ est :",
+   "choices": [
+    "une rotation",
+    "une homothétie de rapport b",
+    "une translation",
+    "une symétrie"
+   ],
+   "answer": 2,
+   "explanation": "$a = 1$ : aucun point fixe, c'est la translation de vecteur d'affixe b.",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-c-specifique-sim-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "bac-maths-c-specifique-simil",
+   "prompt": "Une similitude de rapport 3 multiplie les aires par :",
+   "choices": [
+    "3",
+    "6",
+    "$\\sqrt{3}$",
+    "9"
+   ],
+   "answer": 3,
+   "explanation": "Les aires sont multipliées par le carré du rapport : $3^2 = 9$.",
+   "source": "Exercice original, style Bac"
+  },
+  {
+   "id": "bac-maths-c-specifique-sim-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "bac-maths-c-specifique-simil",
+   "prompt": "Pour $a \\neq 1$, le centre de $z' = az + b$ a pour affixe :",
+   "choices": [
+    "$\\frac{b}{1 - a}$",
+    "$\\frac{b}{a - 1}$",
+    "$\\frac{1 - a}{b}$",
+    "$b - a$"
+   ],
+   "answer": 0,
+   "explanation": "Le centre vérifie $\\omega = a\\omega + b$, donc $\\omega = \\frac{b}{1 - a}$.",
+   "source": "Exercice original, style Bac"
+  }
+ ]
+}

@@ -1,0 +1,570 @@
+{
+ "chapter": "1re-maths-e-ti-ch-trigo",
+ "lessons": [
+  {
+   "id": "1re-maths-e-ti-trigonometrie",
+   "title": "Trigonométrie : radian, sinus, cosinus et applications",
+   "minutes": 40,
+   "programRef": "1re E/TI — Trigonométrie (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Convertir degrés et radians.",
+    "Utiliser le cercle trigonométrique et les valeurs remarquables.",
+    "Résoudre des équations trigonométriques simples.",
+    "Appliquer la trigonométrie à un plan incliné et à une tension alternative."
+   ],
+   "prerequisites": [
+    "1re-maths-e-ti-fonctions"
+   ],
+   "exercises": [
+    "1re-maths-e-ti-tri-01",
+    "1re-maths-e-ti-tri-02",
+    "1re-maths-e-ti-tri-03",
+    "1re-maths-e-ti-tri-04",
+    "1re-maths-e-ti-tri-05",
+    "1re-maths-e-ti-tri-06"
+   ],
+   "selfCheck": [
+    "1re-maths-e-ti-tri-q1",
+    "1re-maths-e-ti-tri-q2",
+    "1re-maths-e-ti-tri-q3",
+    "1re-maths-e-ti-tri-q4",
+    "1re-maths-e-ti-tri-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le radian",
+     "md": "Le **radian** est une unité d'angle : $\\pi$ rad $= 180°$. Pour convertir, on utilise la proportionnalité : $x$ degrés $= x \\times \\frac{\\pi}{180}$ radians. Ainsi $30° = \\frac{\\pi}{6}$, $45° = \\frac{\\pi}{4}$, $60° = \\frac{\\pi}{3}$, $90° = \\frac{\\pi}{2}$ rad."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Cercle trigonométrique, sinus et cosinus",
+     "md": "Sur le cercle de rayon 1, le point M associé à l'angle $x$ a pour coordonnées $(\\cos x\\,;\\,\\sin x)$. On a donc :",
+     "tex": "\\cos^2 x + \\sin^2 x = 1 \\quad \\text{et} \\quad \\tan x = \\frac{\\sin x}{\\cos x}"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Valeurs remarquables",
+     "md": "- 0 : $\\sin = 0$ ; $\\cos = 1$.\n- $\\frac{\\pi}{6}$ (30°) : $\\sin = \\frac{1}{2}$ ; $\\cos = \\frac{\\sqrt{3}}{2}$.\n- $\\frac{\\pi}{4}$ (45°) : $\\sin = \\cos = \\frac{\\sqrt{2}}{2}$.\n- $\\frac{\\pi}{3}$ (60°) : $\\sin = \\frac{\\sqrt{3}}{2}$ ; $\\cos = \\frac{1}{2}$.\n- $\\frac{\\pi}{2}$ (90°) : $\\sin = 1$ ; $\\cos = 0$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Triangle rectangle et symétries",
+     "md": "Dans un triangle rectangle d'angle aigu $\\alpha$ : $\\sin\\alpha = \\frac{\\text{opposé}}{\\text{hypoténuse}}$ ; $\\cos\\alpha = \\frac{\\text{adjacent}}{\\text{hypoténuse}}$ ; $\\tan\\alpha = \\frac{\\text{opposé}}{\\text{adjacent}}$. Symétries : $\\cos(-x) = \\cos x$ ; $\\sin(-x) = -\\sin x$ ; $\\sin(\\pi - x) = \\sin x$ ; $\\cos(\\pi - x) = -\\cos x$."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 250,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         40,
+         200,
+         340,
+         200,
+         340,
+         60
+        ],
+        "fill": "lightyellow",
+        "stroke": "ink"
+       },
+       {
+        "t": "angle",
+        "x": 40,
+        "y": 200,
+        "from": 0,
+        "to": 25,
+        "r": 40,
+        "label": "α",
+        "color": "red"
+       },
+       {
+        "t": "angle",
+        "x": 340,
+        "y": 200,
+        "from": 90,
+        "to": 180,
+        "r": 16,
+        "right": true,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 228,
+        "text": "côté adjacent",
+        "size": 14
+       },
+       {
+        "t": "text",
+        "x": 352,
+        "y": 135,
+        "text": "côté opposé",
+        "size": 14,
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 112,
+        "text": "hypoténuse",
+        "size": 14,
+        "color": "blue"
+       }
+      ]
+     },
+     "caption": "Triangle rectangle : sinus, cosinus et tangente de l'angle α.",
+     "alt": "Triangle rectangle avec un angle α en bas à gauche, un angle droit en bas à droite. Le côté horizontal est le côté adjacent, le côté vertical le côté opposé, le côté oblique l'hypoténuse."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 6.6,
+      "ymin": -1.4,
+      "ymax": 1.4,
+      "grid": 1,
+      "xlabel": "x (rad)",
+      "ylabel": "y",
+      "w": 420,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "sin(x)",
+        "color": "blue",
+        "label": "sin x"
+       },
+       {
+        "expr": "cos(x)",
+        "color": "orange",
+        "label": "cos x"
+       }
+      ],
+      "points": [
+       {
+        "x": 1.5708,
+        "y": 1,
+        "label": "π/2",
+        "color": "red"
+       },
+       {
+        "x": 3.1416,
+        "y": 0,
+        "label": "π",
+        "color": "green"
+       },
+       {
+        "x": 6.2832,
+        "y": 0,
+        "label": "2π",
+        "color": "green"
+       }
+      ]
+     },
+     "caption": "Courbes de sin x (bleu) et cos x (orange) sur [0 ; 2π] : valeurs entre −1 et 1, période 2π.",
+     "alt": "Deux courbes périodiques : sinus en bleu partant de 0, atteignant 1 en π/2, revenant à 0 en π ; cosinus en orange partant de 1. Points marqués π/2, π et 2π."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Résoudre une équation trigonométrique",
+     "md": "- $\\cos x = \\cos a$ équivaut à $x = a + 2k\\pi$ ou $x = -a + 2k\\pi$ ($k$ entier).\n- $\\sin x = \\sin a$ équivaut à $x = a + 2k\\pi$ ou $x = \\pi - a + 2k\\pi$.\nSur un intervalle donné, on garde les valeurs de $k$ qui conviennent."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Grandeurs sinusoïdales",
+     "md": "Une tension ou un courant alternatif s'écrit $u(t) = U_m \\sin(\\omega t)$. L'**amplitude** est $U_m$, la **pulsation** $\\omega$ (rad/s), la **période** $T = \\frac{2\\pi}{\\omega}$ (s) et la **fréquence** $f = \\frac{1}{T}$ (Hz)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : conversion et valeur exacte",
+     "statement": "Convertis 150° en radians et donne $\\sin 150°$.",
+     "steps": [
+      {
+       "md": "$150° = 150 \\times \\frac{\\pi}{180}$ rad :",
+       "tex": "\\frac{150\\pi}{180} = \\frac{5\\pi}{6}"
+      },
+      {
+       "md": "On écrit $150° = 180° - 30°$ donc $\\sin 150° = \\sin(180° - 30°) = \\sin 30° = \\frac{1}{2}$."
+      }
+     ],
+     "answer": "$150° = \\frac{5\\pi}{6}$ rad et $\\sin 150° = \\frac{1}{2}$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : tension alternative",
+     "statement": "La tension du réseau est modélisée par $u(t) = 311 \\sin(100\\pi t)$ (en V, t en s). Quelle est sa fréquence ? Que vaut u pour t = 0,0025 s ?",
+     "steps": [
+      {
+       "md": "Pulsation $\\omega = 100\\pi$ rad/s :",
+       "tex": "T = \\frac{2\\pi}{100\\pi} = 0{,}02\\ \\text{s} \\quad \\text{donc} \\quad f = \\frac{1}{0{,}02} = 50\\ \\text{Hz}"
+      },
+      {
+       "md": "À t = 0,0025 s : l'angle est $100\\pi \\times 0{,}0025 = \\frac{\\pi}{4}$ rad.",
+       "tex": "u = 311 \\times \\sin\\frac{\\pi}{4} = 311 \\times \\frac{\\sqrt{2}}{2} \\approx 219{,}9\\ \\text{V}"
+      }
+     ],
+     "answer": "**f = 50 Hz** et **u(0,0025) ≈ 219,9 V**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Calculer avec la calculatrice en degrés alors que l'angle est en radians (et inversement) : toujours vérifier le mode.\n- Oublier $2k\\pi$ dans la solution générale d'une équation.\n- Confondre $\\sin$ et $\\cos$ dans les valeurs remarquables (30° et 60°).\n- Croire que $\\sin(a + b) = \\sin a + \\sin b$ : c'est faux.\n- Écrire $T = \\omega / 2\\pi$ au lieu de $2\\pi / \\omega$."
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-e-ti-tri-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "1re-maths-e-ti-tri-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Applications : composantes d'une force sur un plan incliné, courant alternatif (alimentation d'un moteur, tension du secteur), mesure d'une hauteur par un angle (topographie).",
+      "Les nombres complexes d'introduction (représentation des tensions) seront vus plus tard, ou dans un autre chapitre selon le programme."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Choix du contenu : la trigonométrie est présentée à la place des nombres complexes d'introduction, qui semblent moins plausibles au niveau Première E/TI ; à confirmer avec le programme officiel (les séries E et TI peuvent aussi inclure les vecteurs ou la géométrie analytique).",
+    "Formules d'addition, $\\cos(a + b)$, non traitées : à ajouter si elles figurent au programme.",
+    "Convention de la tension du secteur : l'exemple utilise 311 V ou 170 V comme valeurs d'amplitude fictives ; à adapter selon la pratique de la classe.",
+    "Vérifier les notations utilisées (angle en degrés ou en grades) et l'usage de la calculatrice."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "1re-maths-e-ti-tri-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Convertis 60° en radians (valeur décimale arrondie au millième).",
+   "answer": 1.047,
+   "tolerance": 0.001,
+   "unit": "rad",
+   "explanation": "$60° = 60 \\times \\frac{\\pi}{180} = \\frac{\\pi}{3} \\approx 1{,}047$ rad.",
+   "method": "Multiplier par $\\pi/180$.",
+   "mistakes": [
+    "Multiplier par $180/\\pi$."
+   ],
+   "lesson": "1re-maths-e-ti-trigonometrie",
+   "source": "Exercice original, style devoir de Première E/TI"
+  },
+  {
+   "id": "1re-maths-e-ti-tri-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quelle est la valeur exacte de $\\sin 30°$ ?",
+   "choices": [
+    "$\\frac{1}{2}$",
+    "$\\frac{\\sqrt{3}}{2}$",
+    "$\\frac{\\sqrt{2}}{2}$",
+    "1"
+   ],
+   "answer": 0,
+   "explanation": "$\\sin 30° = \\frac{1}{2}$. Moyen mnémotechnique : 30° est le petit angle, son sinus est petit.",
+   "method": "Tableau des valeurs remarquables.",
+   "mistakes": [
+    "Inverser avec $\\cos 30°$."
+   ],
+   "lesson": "1re-maths-e-ti-trigonometrie",
+   "source": "Exercice original, style devoir de Première E/TI"
+  },
+  {
+   "id": "1re-maths-e-ti-tri-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Un plan incliné fait un angle de 30° avec l'horizontale. Un chariot a un poids de 500 N. Calcule la composante du poids parallèle au plan : $P \\sin\\alpha$ (en N).",
+   "answer": 250,
+   "tolerance": 0.1,
+   "unit": "N",
+   "explanation": "$500 \\times \\sin 30° = 500 \\times 0{,}5 = 250$ N.",
+   "method": "Composante parallèle $= P \\sin \\alpha$.",
+   "mistakes": [
+    "Utiliser $\\cos$ au lieu de $\\sin$."
+   ],
+   "lesson": "1re-maths-e-ti-trigonometrie",
+   "source": "Exercice original, style devoir de Première E/TI"
+  },
+  {
+   "id": "1re-maths-e-ti-tri-04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "Quelles sont les solutions de $\\sin x = \\frac{1}{2}$ dans $[0 ; 2\\pi]$ ?",
+   "choices": [
+    "$\\frac{\\pi}{6}$ et $\\frac{5\\pi}{6}$",
+    "$\\frac{\\pi}{6}$ et $\\frac{7\\pi}{6}$",
+    "$\\frac{\\pi}{3}$ et $\\frac{2\\pi}{3}$",
+    "$\\frac{\\pi}{6}$ seulement"
+   ],
+   "answer": 0,
+   "explanation": "$\\sin x = \\sin\\frac{\\pi}{6}$ donne $x = \\frac{\\pi}{6}$ ou $x = \\pi - \\frac{\\pi}{6} = \\frac{5\\pi}{6}$ (les autres valeurs sortent de l'intervalle).",
+   "method": "$\\sin x = \\sin a \\Leftrightarrow x = a$ ou $x = \\pi - a$ (modulo $2\\pi$).",
+   "mistakes": [
+    "Oublier la deuxième solution."
+   ],
+   "lesson": "1re-maths-e-ti-trigonometrie",
+   "source": "Exercice original, style devoir de Première E/TI"
+  },
+  {
+   "id": "1re-maths-e-ti-tri-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "Un courant est modélisé par $i(t) = 5 \\sin(200\\pi t)$ (A). Quelle est sa fréquence (en Hz) ?",
+   "answer": 100,
+   "tolerance": 0,
+   "unit": "Hz",
+   "explanation": "$T = \\frac{2\\pi}{200\\pi} = 0{,}01$ s donc $f = \\frac{1}{T} = 100$ Hz.",
+   "method": "$f = \\omega / 2\\pi$.",
+   "mistakes": [
+    "Donner la période au lieu de la fréquence."
+   ],
+   "lesson": "1re-maths-e-ti-trigonometrie",
+   "source": "Exercice original, style devoir de Première E/TI"
+  },
+  {
+   "id": "1re-maths-e-ti-tri-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Deux applications de la trigonométrie. **A.** Un chariot de poids P = 800 N est posé sur un plan incliné d'un angle α = 25° avec l'horizontale. **B.** Une tension alternative est modélisée par $u(t) = 170 \\sin(100\\pi t)$ (V, t en s). Les calculs se font en arrondissant au dixième.",
+   "method": "Choisir sin ou cos selon le côté du triangle ; utiliser $T = 2\\pi/\\omega$.",
+   "mistakes": [
+    "Calculatrice en mauvais mode (degrés / radians)."
+   ],
+   "parts": [
+    {
+     "id": "1re-maths-e-ti-tri-06-a",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule la composante parallèle au plan $P\\sin\\alpha$ (en N, arrondie au dixième).",
+     "answer": 338.1,
+     "tolerance": 0.1,
+     "unit": "N",
+     "explanation": "$800 \\times \\sin 25° \\approx 800 \\times 0{,}4226 = 338{,}1$ N."
+    },
+    {
+     "id": "1re-maths-e-ti-tri-06-b",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule la composante perpendiculaire $P\\cos\\alpha$ (en N, arrondie au dixième).",
+     "answer": 725,
+     "tolerance": 0.2,
+     "unit": "N",
+     "explanation": "$800 \\times \\cos 25° \\approx 800 \\times 0{,}9063 = 725{,}0$ N."
+    },
+    {
+     "id": "1re-maths-e-ti-tri-06-c",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle relation vérifient les deux composantes ?",
+     "choices": [
+      "La somme de leurs carrés vaut $P^2$",
+      "Leur somme vaut $P$",
+      "Leur produit vaut $P$",
+      "Elles sont égales"
+     ],
+     "answer": 0,
+     "explanation": "$(P\\sin\\alpha)^2 + (P\\cos\\alpha)^2 = P^2(\\sin^2\\alpha + \\cos^2\\alpha) = P^2$ : la somme des carrés vaut le carré du poids."
+    },
+    {
+     "id": "1re-maths-e-ti-tri-06-d",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la fréquence de la tension (en Hz).",
+     "answer": 50,
+     "tolerance": 0,
+     "unit": "Hz",
+     "explanation": "$T = \\frac{2\\pi}{100\\pi} = 0{,}02$ s donc $f = 50$ Hz."
+    },
+    {
+     "id": "1re-maths-e-ti-tri-06-e",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule u pour t = 0,0025 s (en V, arrondi au dixième).",
+     "answer": 120.2,
+     "tolerance": 0.1,
+     "unit": "V",
+     "explanation": "$100\\pi \\times 0{,}0025 = \\frac{\\pi}{4}$ ; $u = 170 \\times \\frac{\\sqrt{2}}{2} \\approx 120{,}2$ V."
+    }
+   ],
+   "lesson": "1re-maths-e-ti-trigonometrie",
+   "source": "Exercice original, style devoir de Première E/TI"
+  },
+  {
+   "id": "1re-maths-e-ti-tri-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Combien vaut $\\pi$ radians en degrés ?",
+   "choices": [
+    "180°",
+    "90°",
+    "360°",
+    "57°"
+   ],
+   "answer": 0,
+   "explanation": "$\\pi$ rad $= 180°$.",
+   "lesson": "1re-maths-e-ti-trigonometrie",
+   "source": "Exercice original, style devoir de Première E/TI"
+  },
+  {
+   "id": "1re-maths-e-ti-tri-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quelle est la valeur de $\\cos 60°$ ?",
+   "choices": [
+    "$\\frac{1}{2}$",
+    "$\\frac{\\sqrt{3}}{2}$",
+    "1",
+    "0"
+   ],
+   "answer": 0,
+   "explanation": "$\\cos 60° = \\frac{1}{2}$.",
+   "lesson": "1re-maths-e-ti-trigonometrie",
+   "source": "Exercice original, style devoir de Première E/TI"
+  },
+  {
+   "id": "1re-maths-e-ti-tri-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quelle égalité est toujours vraie ?",
+   "choices": [
+    "$\\cos^2 x + \\sin^2 x = 1$",
+    "$\\cos x + \\sin x = 1$",
+    "$\\cos x = \\sin x$",
+    "$\\cos^2 x - \\sin^2 x = 1$"
+   ],
+   "answer": 0,
+   "explanation": "C'est la relation fondamentale de la trigonométrie.",
+   "lesson": "1re-maths-e-ti-trigonometrie",
+   "source": "Exercice original, style devoir de Première E/TI"
+  },
+  {
+   "id": "1re-maths-e-ti-tri-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "La période de $\\sin(\\omega t)$ est :",
+   "choices": [
+    "$\\frac{2\\pi}{\\omega}$",
+    "$\\omega$",
+    "$2\\pi\\omega$",
+    "$\\frac{\\omega}{2\\pi}$"
+   ],
+   "answer": 0,
+   "explanation": "$T = \\frac{2\\pi}{\\omega}$.",
+   "lesson": "1re-maths-e-ti-trigonometrie",
+   "source": "Exercice original, style devoir de Première E/TI"
+  },
+  {
+   "id": "1re-maths-e-ti-tri-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Dans un triangle rectangle, $\\sin\\alpha$ est égal à :",
+   "choices": [
+    "opposé ÷ hypoténuse",
+    "adjacent ÷ hypoténuse",
+    "opposé ÷ adjacent",
+    "hypoténuse ÷ opposé"
+   ],
+   "answer": 0,
+   "explanation": "Sinus = opposé sur hypoténuse.",
+   "lesson": "1re-maths-e-ti-trigonometrie",
+   "source": "Exercice original, style devoir de Première E/TI"
+  },
+  {
+   "id": "1re-maths-e-ti-blanc-ex4",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "**Exercice 4.** La tension d'une alimentation est modélisée par $u(t) = 12 \\sin(100\\pi t)$ (en V, t en s).",
+   "method": "Utiliser $T = 2\\pi/\\omega$ et $f = 1/T$.",
+   "mistakes": [
+    "Calculatrice en degrés."
+   ],
+   "parts": [
+    {
+     "id": "1re-maths-e-ti-blanc-ex4-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la période (en s).",
+     "answer": 0.02,
+     "tolerance": 0.0001,
+     "unit": "s",
+     "explanation": "$T = \\frac{2\\pi}{100\\pi} = 0{,}02$ s."
+    },
+    {
+     "id": "1re-maths-e-ti-blanc-ex4-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la fréquence (en Hz).",
+     "answer": 50,
+     "tolerance": 0,
+     "unit": "Hz",
+     "explanation": "$f = \\frac{1}{0{,}02} = 50$ Hz."
+    },
+    {
+     "id": "1re-maths-e-ti-blanc-ex4-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la tension à l'instant t = 0,005 s (en V, arrondie au dixième).",
+     "answer": 12,
+     "tolerance": 0.1,
+     "unit": "V",
+     "explanation": "$100\\pi \\times 0{,}005 = \\frac{\\pi}{2}$ donc $u = 12 \\times 1 = 12$ V."
+    },
+    {
+     "id": "1re-maths-e-ti-blanc-ex4-d",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle est la valeur maximale de la tension ?",
+     "choices": [
+      "12 V",
+      "24 V",
+      "6 V",
+      "50 V"
+     ],
+     "answer": 0,
+     "explanation": "Le sinus varie entre −1 et 1 : $u_{\\max} = 12$ V."
+    }
+   ],
+   "lesson": "1re-maths-e-ti-trigonometrie",
+   "source": "Exercice original, style devoir de Première E/TI"
+  }
+ ]
+}

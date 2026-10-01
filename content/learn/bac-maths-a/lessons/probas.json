@@ -1,0 +1,570 @@
+{
+ "chapter": "bac-maths-a-ch-probas",
+ "lessons": [
+  {
+   "id": "bac-maths-a-probas",
+   "title": "Dénombrement, probabilités, loi et espérance",
+   "minutes": 40,
+   "programRef": "Tle A — Dénombrement, probabilités sur un univers fini, variable aléatoire, espérance (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Dénombrer avec le principe multiplicatif, les arrangements et les combinaisons.",
+    "Calculer une probabilité par équiprobabilité, avec événement contraire et réunion.",
+    "Établir la loi d'une variable aléatoire.",
+    "Calculer et interpréter une espérance."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Principe de dénombrement",
+     "md": "- **Principe multiplicatif** : si un choix se fait en p façons puis un second en q façons, il y a $p\\times q$ choix au total.\n- **Factorielle** : $n!=n\\times(n-1)\\times\\dots\\times1$ ; c'est le nombre de façons de ranger n objets distincts (0! = 1).\n- **Arrangements** (ordre compte) : $A_n^p=n(n-1)\\dots(n-p+1)$.\n- **Combinaisons** (ordre sans importance) : $C_n^p=\\frac{n!}{p!\\,(n-p)!}$."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Quand utiliser quoi ?",
+     "md": "Se demander : l'**ordre** compte-t-il ?\n- Podium, code, classement : l'ordre compte → arrangement ou factorielle.\n- Comité, main de cartes, tirage simultané : l'ordre ne compte pas → combinaison.\nPropriétés utiles : $C_n^p=C_n^{n-p}$ ; $C_n^0=1$ ; $C_n^1=n$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Probabilités",
+     "md": "Dans un univers Ω fini où tous les résultats sont équiprobables : $P(A)=\\frac{\\text{nombre de cas favorables}}{\\text{nombre de cas possibles}}$.\n- $0\\leq P(A)\\leq1$ ; $P(\\overline{A})=1-P(A)$.\n- $P(A\\cup B)=P(A)+P(B)-P(A\\cap B)$ (si A et B sont incompatibles, le dernier terme est nul)."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Variable aléatoire et espérance",
+     "md": "Une **variable aléatoire** X associe un nombre à chaque issue. Sa **loi** donne les valeurs $x_i$ et leurs probabilités $p_i$, dont la somme vaut 1.\n- **Espérance** : $E(X)=x_1p_1+x_2p_2+\\dots+x_np_n$ : valeur moyenne obtenue si l'on répète l'expérience un grand nombre de fois.\n- Pour un jeu, E(X) > 0 : favorable au joueur ; E(X) = 0 : équitable ; E(X) < 0 : défavorable."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : tirage simultané",
+     "statement": "Un comité de 3 élèves est choisi parmi 10 (4 filles et 6 garçons). Quelle est la probabilité qu'il comprenne exactement 2 filles ?",
+     "steps": [
+      {
+       "md": "Cas possibles : l'ordre ne compte pas, donc $C_{10}^3=120$ comités."
+      },
+      {
+       "md": "Cas favorables : 2 filles parmi 4 puis 1 garçon parmi 6 :",
+       "tex": "C_4^2\\times C_6^1=6\\times6=36"
+      },
+      {
+       "md": "Probabilité :",
+       "tex": "P=\\frac{36}{120}=0{,}3"
+      }
+     ],
+     "answer": "**P = 0,3**, soit 30 %."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : loi et espérance",
+     "statement": "À une kermesse, un jeu coûte 500 FCFA. On gagne 1 000 FCFA avec la probabilité 0,15, 5 000 FCFA avec la probabilité 0,05 et rien sinon (jeu fictif). Soit X le gain net. Calcule E(X).",
+     "steps": [
+      {
+       "md": "Gain net = lot − mise. Valeurs : −500 (rien, probabilité 1 − 0,15 − 0,05 = 0,8), 500 (probabilité 0,15) et 4 500 (probabilité 0,05)."
+      },
+      {
+       "md": "Espérance :",
+       "tex": "E(X)=-500\\times0{,}8+500\\times0{,}15+4500\\times0{,}05=-400+75+225=-100"
+      }
+     ],
+     "answer": "**E(X) = −100 FCFA** : en moyenne, le joueur perd 100 FCFA par partie ; le jeu est défavorable."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "unit": "probabilité",
+      "bars": [
+       {
+        "label": "Gain −500",
+        "value": 0.8,
+        "color": "red"
+       },
+       {
+        "label": "Gain 500",
+        "value": 0.15,
+        "color": "orange"
+       },
+       {
+        "label": "Gain 4500",
+        "value": 0.05,
+        "color": "green"
+       }
+      ]
+     },
+     "caption": "Loi du gain net X (en FCFA) : le plus probable est de perdre sa mise.",
+     "alt": "Trois barres : gain −500 avec la probabilité 0,8 (rouge), gain 500 avec 0,15 (orange), gain 4 500 avec 0,05 (vert)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre arrangement et combinaison : se demander si l'ordre compte.\n- Compter des cas qui ne sont pas équiprobables : l'équiprobabilité doit être justifiée.\n- Oublier de vérifier que la somme des probabilités de la loi vaut 1.\n- Dans l'espérance d'un jeu, oublier de soustraire la mise (gain brut au lieu de gain net)."
+    },
+    {
+     "type": "exercise",
+     "ref": "bac-maths-a-pro-01"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Les calculatrices ont des touches nCr et nPr pour $C_n^p$ et $A_n^p$ ; en Python : math.comb(n, p) et math.perm(n, p).",
+      "Dans ces exercices, les jeux, les urnes et les résultats sont inventés pour s'entraîner."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier au programme de Tle A : probabilité conditionnelle, indépendance, loi binomiale ? Non traitées ici.",
+    "Notations $A_n^p$ et $C_n^p$ : certains manuels écrivent C(n, p) ; à harmoniser.",
+    "Variance et écart-type d'une variable aléatoire : à ajouter si elles sont au programme."
+   ],
+   "exercises": [
+    "bac-maths-a-pro-01",
+    "bac-maths-a-pro-02",
+    "bac-maths-a-pro-03",
+    "bac-maths-a-pro-04",
+    "bac-maths-a-pro-05",
+    "bac-maths-a-pro-06"
+   ],
+   "selfCheck": [
+    "bac-maths-a-pro-q1",
+    "bac-maths-a-pro-q2",
+    "bac-maths-a-pro-q3",
+    "bac-maths-a-pro-q4",
+    "bac-maths-a-pro-q5"
+   ],
+   "prerequisites": [
+    "bac-maths-a-stats"
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "bac-maths-a-pro-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Calcule $C_5^2$.",
+   "answer": 10,
+   "tolerance": 0,
+   "explanation": "$C_5^2=\\frac{5\\times4}{2\\times1}=10$.",
+   "method": "$C_n^p=\\frac{n!}{p!(n-p)!}$.",
+   "mistakes": [
+    "Calculer $A_5^2=20$ (l'ordre ne compte pas ici)."
+   ],
+   "lesson": "bac-maths-a-probas",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-pro-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "De combien de façons peut-on ranger 4 livres distincts sur une étagère ?",
+   "answer": 24,
+   "tolerance": 0,
+   "explanation": "$4!=4\\times3\\times2\\times1=24$.",
+   "method": "Rangement de n objets distincts : n!.",
+   "mistakes": [
+    "Calculer $4^4=256$ en autorisant de répéter un livre."
+   ],
+   "lesson": "bac-maths-a-probas",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-pro-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "On a P(A) = 0,5, P(B) = 0,3 et P(A ∩ B) = 0,1. Que vaut P(A ∪ B) ?",
+   "choices": [
+    "0,7",
+    "0,8",
+    "0,9",
+    "0,15"
+   ],
+   "answer": 0,
+   "explanation": "$P(A\\cup B)=0{,}5+0{,}3-0{,}1=0{,}7$.",
+   "method": "Formule de la réunion.",
+   "mistakes": [
+    "Oublier de retrancher P(A ∩ B) et trouver 0,8."
+   ],
+   "lesson": "bac-maths-a-probas",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-pro-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Huit candidats se présentent à un concours ; on désigne un 1er, un 2e et un 3e. Combien de podiums différents ?",
+   "answer": 336,
+   "tolerance": 0,
+   "explanation": "L'ordre compte : $A_8^3=8\\times7\\times6=336$.",
+   "method": "Ordre important : arrangement.",
+   "mistakes": [
+    "Utiliser $C_8^3=56$, qui ignore l'ordre."
+   ],
+   "lesson": "bac-maths-a-probas",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-pro-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "La variable X prend les valeurs 0, 1 et 2 avec les probabilités 0,2 ; 0,5 et 0,3. Calcule E(X).",
+   "answer": 1.1,
+   "tolerance": 0,
+   "explanation": "$E(X)=0\\times0{,}2+1\\times0{,}5+2\\times0{,}3=0{,}5+0{,}6=1{,}1$.",
+   "method": "Somme des (valeur × probabilité).",
+   "mistakes": [
+    "Faire la moyenne simple (0 + 1 + 2) ÷ 3 = 1."
+   ],
+   "lesson": "bac-maths-a-probas",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-pro-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Une urne contient 10 boules indiscernables au toucher : 5 rouges, 3 vertes et 2 jaunes. On tire simultanément 3 boules. Soit Y le nombre de boules rouges obtenues.",
+   "parts": [
+    {
+     "id": "bac-maths-a-pro-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Combien de tirages possibles y a-t-il ?",
+     "explanation": "$C_{10}^3=\\frac{10\\times9\\times8}{6}=120$.",
+     "answer": 120,
+     "tolerance": 0
+    },
+    {
+     "id": "bac-maths-a-pro-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Combien de tirages ne comportent que des boules rouges ?",
+     "explanation": "$C_5^3=10$.",
+     "answer": 10,
+     "tolerance": 0
+    },
+    {
+     "id": "bac-maths-a-pro-06-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule la probabilité d'obtenir exactement 2 boules rouges (au millième).",
+     "explanation": "$\\frac{C_5^2\\times C_5^1}{120}=\\frac{10\\times5}{120}=\\frac{50}{120}\\approx0{,}417$.",
+     "answer": 0.417,
+     "tolerance": 0.001
+    },
+    {
+     "id": "bac-maths-a-pro-06-d",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Établis la loi de Y (probabilités 10/120, 50/120, 50/120, 10/120 pour 0, 1, 2, 3 rouges) et calcule E(Y).",
+     "explanation": "$E(Y)=\\frac{0\\times10+1\\times50+2\\times50+3\\times10}{120}=\\frac{180}{120}=1{,}5$. Les probabilités ont pour somme $\\frac{120}{120}=1$.",
+     "answer": 1.5,
+     "tolerance": 0
+    }
+   ],
+   "method": "Dénombrer avec des combinaisons, puis diviser par le nombre total de tirages.",
+   "mistakes": [
+    "Utiliser des arrangements alors que le tirage est simultané."
+   ],
+   "lesson": "bac-maths-a-probas",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-pro-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Un code à 3 chiffres (0 à 9, répétition permise) : le nombre de codes est :",
+   "choices": [
+    "1 000",
+    "720",
+    "30",
+    "120"
+   ],
+   "answer": 0,
+   "explanation": "$10\\times10\\times10=1\\,000$.",
+   "lesson": "bac-maths-a-probas",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-pro-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "$C_6^2$ vaut :",
+   "choices": [
+    "15",
+    "30",
+    "12",
+    "36"
+   ],
+   "answer": 0,
+   "explanation": "$\\frac{6\\times5}{2}=15$.",
+   "lesson": "bac-maths-a-probas",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-pro-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Si P(A) = 0,35 alors P(contraire de A) vaut :",
+   "choices": [
+    "0,65",
+    "0,35",
+    "−0,35",
+    "1,35"
+   ],
+   "answer": 0,
+   "explanation": "$1-0{,}35=0{,}65$.",
+   "lesson": "bac-maths-a-probas",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-pro-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Un dé équilibré à 6 faces est lancé. La probabilité d'obtenir un nombre pair est :",
+   "choices": [
+    "$\\frac{1}{2}$",
+    "$\\frac{1}{6}$",
+    "$\\frac{1}{3}$",
+    "$\\frac{2}{3}$"
+   ],
+   "answer": 0,
+   "explanation": "3 faces paires sur 6 : $\\frac{3}{6}=\\frac{1}{2}$.",
+   "lesson": "bac-maths-a-probas",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-pro-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Un jeu a pour espérance de gain E(X) = −50 FCFA. Ce jeu est :",
+   "choices": [
+    "défavorable au joueur",
+    "favorable au joueur",
+    "équitable",
+    "impossible"
+   ],
+   "answer": 0,
+   "explanation": "Une espérance négative : le joueur perd en moyenne 50 FCFA par partie.",
+   "lesson": "bac-maths-a-probas",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-blanc-ex1",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Exercice 1 (5 points). Un commerçant de Douala place 600 000 FCFA à 4 % par an, à intérêts composés (données fictives). On note $C_n$ le capital au bout de n années.",
+   "parts": [
+    {
+     "id": "bac-maths-a-blanc-ex1-a",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle est la nature de la suite $(C_n)$ ?",
+     "explanation": "Chaque année on multiplie par 1,04 : suite géométrique de raison 1,04.",
+     "choices": [
+      "Géométrique de raison 1,04",
+      "Arithmétique de raison 24 000",
+      "Géométrique de raison 0,04",
+      "Arithmétique de raison 1,04"
+     ],
+     "answer": 0
+    },
+    {
+     "id": "bac-maths-a-blanc-ex1-b",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule $C_3$ au franc près.",
+     "explanation": "$C_3=600\\,000\\times1{,}04^3=674\\,918{,}4$, soit 674 918 FCFA.",
+     "answer": 674918,
+     "tolerance": 1,
+     "unit": "FCFA"
+    },
+    {
+     "id": "bac-maths-a-blanc-ex1-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Au bout de combien d'années entières le capital dépasse-t-il 800 000 FCFA ?",
+     "explanation": "$1{,}04^n>\\frac{4}{3}\\Leftrightarrow n>\\frac{\\ln(4/3)}{\\ln1{,}04}\\approx7{,}33$ : n = 8.",
+     "answer": 8,
+     "tolerance": 0,
+     "unit": "années"
+    },
+    {
+     "id": "bac-maths-a-blanc-ex1-d",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "S'il verse 100 000 FCFA à la fin de chacune de 3 années, à 4 %, quelle est la valeur acquise après le 3e versement ?",
+     "explanation": "$100\\,000\\times\\frac{1{,}04^3-1}{0{,}04}=312\\,160$ FCFA.",
+     "answer": 312160,
+     "tolerance": 0,
+     "unit": "FCFA"
+    }
+   ],
+   "lesson": "bac-maths-a-probas",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-blanc-ex2",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Exercice 2 (5 points). Un comité de 3 personnes est choisi au hasard parmi 12 élèves : 7 filles et 5 garçons. Soit X le nombre de filles du comité.",
+   "parts": [
+    {
+     "id": "bac-maths-a-blanc-ex2-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Combien de comités peut-on former ?",
+     "explanation": "$C_{12}^3=220$.",
+     "answer": 220,
+     "tolerance": 0
+    },
+    {
+     "id": "bac-maths-a-blanc-ex2-b",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule la probabilité que le comité ne compte que des filles (au millième).",
+     "explanation": "$\\frac{C_7^3}{220}=\\frac{35}{220}\\approx0{,}159$.",
+     "answer": 0.159,
+     "tolerance": 0.001
+    },
+    {
+     "id": "bac-maths-a-blanc-ex2-c",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule E(X). On donne P(X = k) = 10/220, 70/220, 105/220, 35/220 pour k = 0, 1, 2, 3.",
+     "explanation": "$E(X)=\\frac{0\\times10+1\\times70+2\\times105+3\\times35}{220}=\\frac{385}{220}=1{,}75$.",
+     "answer": 1.75,
+     "tolerance": 0
+    },
+    {
+     "id": "bac-maths-a-blanc-ex2-d",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la probabilité qu'il y ait au moins une fille (au millième).",
+     "explanation": "Événement contraire : aucune fille, $P=\\frac{10}{220}$. Donc $1-\\frac{10}{220}=\\frac{210}{220}\\approx0{,}955$.",
+     "answer": 0.955,
+     "tolerance": 0.001
+    }
+   ],
+   "lesson": "bac-maths-a-probas",
+   "source": "Exercice original, style Bac A"
+  },
+  {
+   "id": "bac-maths-a-blanc-pb",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "prompt": "Problème (10 points). Soit f la fonction définie sur $\\mathbb{R}$ privé de −1 (c'est-à-dire pour x ≠ −1) par $f(x)=\\frac{2x-4}{x+1}$.",
+   "parts": [
+    {
+     "id": "bac-maths-a-blanc-pb-a",
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle est l'équation de l'asymptote verticale de la courbe de f ?",
+     "explanation": "Le dénominateur s'annule en −1, tandis que le numérateur vaut −6 ≠ 0 : asymptote verticale x = −1.",
+     "choices": [
+      "$x=-1$",
+      "$x=2$",
+      "$y=-1$",
+      "$y=2$"
+     ],
+     "answer": 0
+    },
+    {
+     "id": "bac-maths-a-blanc-pb-b",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Calcule la limite de f en $+\\infty$.",
+     "explanation": "$\\lim\\frac{2x}{x}=2$ : asymptote horizontale y = 2.",
+     "answer": 2,
+     "tolerance": 0
+    },
+    {
+     "id": "bac-maths-a-blanc-pb-c",
+     "kind": "mcq",
+     "points": 1.5,
+     "prompt": "Que vaut la limite de f(x) quand x tend vers −1 par valeurs supérieures (x > −1) ?",
+     "explanation": "Numérateur → −6 ; dénominateur x + 1 → 0 par valeurs positives : le quotient tend vers −∞.",
+     "choices": [
+      "$-\\infty$",
+      "$+\\infty$",
+      "0",
+      "−6"
+     ],
+     "answer": 0
+    },
+    {
+     "id": "bac-maths-a-blanc-pb-d",
+     "kind": "mcq",
+     "points": 1.5,
+     "prompt": "Quelle est l'expression de f′(x) ?",
+     "explanation": "$f'(x)=\\frac{2(x+1)-(2x-4)\\times1}{(x+1)^2}=\\frac{6}{(x+1)^2}$.",
+     "choices": [
+      "$\\frac{6}{(x+1)^2}$",
+      "$\\frac{-6}{(x+1)^2}$",
+      "$\\frac{2}{x+1}$",
+      "$\\frac{4x-2}{(x+1)^2}$"
+     ],
+     "answer": 0
+    },
+    {
+     "id": "bac-maths-a-blanc-pb-e",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "La tangente à la courbe au point d'abscisse 0 coupe l'axe des abscisses en un point. Donne son abscisse (au millième).",
+     "explanation": "$f(0)=-4$ et $f'(0)=6$ : tangente $y=6x-4$, qui coupe l'axe des x pour $x=\\frac{4}{6}\\approx0{,}667$.",
+     "answer": 0.667,
+     "tolerance": 0.001
+    },
+    {
+     "id": "bac-maths-a-blanc-pb-f",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Pour quelle valeur de x la courbe coupe-t-elle l'axe des abscisses ?",
+     "explanation": "$f(x)=0\\Leftrightarrow2x-4=0\\Leftrightarrow x=2$.",
+     "answer": 2,
+     "tolerance": 0
+    },
+    {
+     "id": "bac-maths-a-blanc-pb-g",
+     "kind": "numeric",
+     "points": 1.5,
+     "prompt": "Pour quelle valeur de x a-t-on f(x) = 1 ?",
+     "explanation": "$\\frac{2x-4}{x+1}=1\\Leftrightarrow2x-4=x+1\\Leftrightarrow x=5$ (5 ≠ −1 : valeur acceptable).",
+     "answer": 5,
+     "tolerance": 0
+    }
+   ],
+   "lesson": "bac-maths-a-probas",
+   "source": "Exercice original, style Bac A"
+  }
+ ]
+}
