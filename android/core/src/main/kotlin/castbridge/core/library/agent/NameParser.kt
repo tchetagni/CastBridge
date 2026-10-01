@@ -55,6 +55,10 @@ data class Parsed(
  * 100 % local, deterministic, no network. See docs/LIBRARY-AGENT.md for the rules.
  */
 object NameParser {
+    /** Word boundary that also works around accented letters on the JVM and on Android (ICU does not accept the (?U) flag). */
+    private const val UB = "(?:(?<=[\\p{L}\\p{N}_])(?![\\p{L}\\p{N}_])|(?<![\\p{L}\\p{N}_])(?=[\\p{L}\\p{N}_]))"
+    private fun ur(p: String) = Regex(p.replace("\\b", UB), RegexOption.IGNORE_CASE)
+
     private val VIDEO_EXT = setOf("mp4", "m4v", "mkv", "webm", "avi", "mov", "ts", "m2ts", "mts", "mpg", "mpeg", "wmv", "flv", "3gp", "ogv", "vob", "divx", "rmvb")
     private val AUDIO_EXT = setOf("mp3", "m4a", "aac", "flac", "ogg", "opus", "wav", "wma", "ac3", "mka", "amr")
     private val IMAGE_EXT = setOf("jpg", "jpeg", "png", "webp", "heic", "heif", "gif", "bmp")
@@ -148,8 +152,8 @@ object NameParser {
     private val RX_PERCENT = Regex("%[0-9A-Fa-f]{2}")
     private val RX_COPY_PREFIX = Regex("^(?:copie|copy)\\s+(?:de|of)\\s+", RegexOption.IGNORE_CASE)
     private val RX_COPY_SUFFIX = Regex("(?:\\s*[-–]?\\s*\\((?:copie|copy)(?:\\s*\\d+)?\\)|\\s+[-–]\\s+(?:copie|copy)(?:\\s*\\(?\\d+\\)?)?|\\s*\\(\\d{1,2}\\)|\\s+copy(?:\\s*\\d+)?|\\s+copie(?:\\s*\\d+)?)$", RegexOption.IGNORE_CASE)
-    private val RX_WWW = Regex("(?iU)(?:https?://)?www\\.[a-z0-9-]+(?:\\.[a-z0-9-]+)*\\.[a-z]{2,}")
-    private val RX_DOMAIN = Regex("(?iU)\\b[a-z0-9][a-z0-9-]{1,}\\.(?:com|net|org|info|biz|cm|cc|ws)\\b")
+    private val RX_WWW = ur("(?:https?://)?www\\.[a-z0-9-]+(?:\\.[a-z0-9-]+)*\\.[a-z]{2,}")
+    private val RX_DOMAIN = ur("\\b[a-z0-9][a-z0-9-]{1,}\\.(?:com|net|org|info|biz|cm|cc|ws)\\b")
     private val SITES = listOf(
         "torrent9", "wawacity", "zone-telechargement", "zone telechargement", "yggtorrent", "ygg", "yts", "rarbg", "1337x", "eztv", "nyaa", "cpasbien",
         "o2tvseries", "netnaija", "naijaprey", "waploaded", "tfpdl", "mkvcage", "mkvking", "9jarocks", "toxicwap", "fzmovies", "tvseries", "coolmoviezone",
@@ -159,13 +163,13 @@ object NameParser {
         "telecharger", "telechargement", "downloadhub", "filmesonlinegratis", "pahe", "psarips", "psa", "tgx", "evo", "ntb", "mkvcinemas", "bolly4u",
     )
     private val SITE_ALT = SITES.joinToString("|") { Regex.escape(it) }
-    private val RX_SITE_PREFIX = Regex("(?iU)^\\s*(?:$SITE_ALT)(?:\\.[a-z]{2,4})?\\s*[-–|:_]+\\s*")
-    private val RX_SITE_SUFFIX = Regex("(?iU)\\s*[-–|:_]+\\s*(?:$SITE_ALT)(?:\\.[a-z]{2,4})?\\s*$")
-    private val RX_SITE_BRACKET = Regex("(?iU)[\\[({]\\s*(?:$SITE_ALT)[^\\])}]*[\\])}]")
+    private val RX_SITE_PREFIX = ur("^\\s*(?:$SITE_ALT)(?:\\.[a-z]{2,4})?\\s*[-–|:_]+\\s*")
+    private val RX_SITE_SUFFIX = ur("\\s*[-–|:_]+\\s*(?:$SITE_ALT)(?:\\.[a-z]{2,4})?\\s*$")
+    private val RX_SITE_BRACKET = ur("[\\[({]\\s*(?:$SITE_ALT)[^\\])}]*[\\])}]")
     private val RX_EMPTY_BRACKET = Regex("[\\[({]\\s*[\\])}]")
 
-    private val JUNK_PHRASE = Regex(
-        "(?iU)^(?:official\\s+(?:music\\s+)?(?:video|audio|lyric\\s+video|visualizer|clip)|clip\\s+officiel|vid[eé]o\\s+officielle|audio\\s+officiel(?:le)?|" +
+    private val JUNK_PHRASE = ur(
+        "^(?:official\\s+(?:music\\s+)?(?:video|audio|lyric\\s+video|visualizer|clip)|clip\\s+officiel|vid[eé]o\\s+officielle|audio\\s+officiel(?:le)?|" +
             "lyrics?(?:\\s+video)?|paroles|lyric\\s+video|music\\s+video|full\\s+(?:video|hd|movie|film)|hd|hq|4k|uhd|1080p|720p|480p|explicit|audio|video|vid[eé]o|" +
             "mv|m/v|visualizer|new|nouveau|nouveaut[eé]|exclusive|exclusivit[eé]|free\\s+download|download|t[eé]l[eé]charger|youtube|" +
             "\\d{2,3}\\s*kbps|\\d{3}k|clip|clip\\s+hd|son\\s+officiel|multiple\\s+subtitles?|multi[- ]?subs?|eng\\s*subs?|sub(?:s|titles?)?)$"
@@ -215,12 +219,12 @@ object NameParser {
     // ------------------------------------------------------------------ tags
 
     private val RX_INITIALS = Regex("(?<![\\p{L}\\p{N}])(?:\\p{L}\\.){2,}")
-    private val RX_H26X = Regex("(?iU)\\b([hx])[ ._]?(26[45])\\b")
-    private val RX_AUDIO_CH = Regex("(?iU)\\b(dd|ddp|dd\\+|aac|ac3|eac3|dts|flac|opus|mp3|truehd|atmos)[ ._+-]?([257])[ .]([01])\\b")
-    private val RX_RES_TOKEN = Regex("(?iU)^(\\d{3,4})[pi]$")
-    private val RX_DIMS = Regex("(?iU)^(\\d{3,4})x(\\d{3,4})$")
+    private val RX_H26X = ur("\\b([hx])[ ._]?(26[45])\\b")
+    private val RX_AUDIO_CH = ur("\\b(dd|ddp|dd\\+|aac|ac3|eac3|dts|flac|opus|mp3|truehd|atmos)[ ._+-]?([257])[ .]([01])\\b")
+    private val RX_RES_TOKEN = ur("^(\\d{3,4})[pi]$")
+    private val RX_DIMS = ur("^(\\d{3,4})x(\\d{3,4})$")
     private val RX_YEAR = Regex("^(19\\d\\d|20\\d\\d)$")
-    private val RX_KBPS = Regex("(?iU)^\\d{2,3}\\s*kbps$|^\\d{3}k$|^mp3-?\\d{3}$")
+    private val RX_KBPS = ur("^\\d{2,3}\\s*kbps$|^\\d{3}k$|^mp3-?\\d{3}$")
 
     private val RES_TAGS = setOf("4k", "8k", "uhd", "fhd", "qhd", "hd", "hq", "sd", "hdr", "hdr10", "hdr10+", "dv", "dolby", "vision", "sdr", "10bit", "8bit", "10bits", "hi10p", "hi10")
     private val SOURCE_TAGS = setOf("bluray", "blu-ray", "bdrip", "brrip", "bdremux", "remux", "web-dl", "webdl", "webrip", "web", "hdtv", "pdtv", "dvdrip", "dvdscr", "dvd", "hdrip", "hdcam", "hdts", "cam", "camrip", "ts", "tc", "telesync", "r5", "vhsrip", "hddvd", "amzn", "nf", "dsnp", "hmax", "hulu", "atvp", "dl", "rip", "bd", "webhd", "hdlight", "light", "screener", "scr")
@@ -305,11 +309,11 @@ object NameParser {
 
     private class Marker(val range: IntRange, val season: Int?, val episode: Int?, val episodeEnd: Int?, val rule: String)
 
-    private val RX_SXE = Regex("(?iU)\\bs(\\d{1,2})\\s?e(\\d{1,3})(?:\\s?(?:-|e|-e|&|et)\\s?e?(\\d{1,3}))?\\b")
-    private val RX_SAISON_EP = Regex("(?iU)\\b(?:saison|season)\\s*(\\d{1,2})\\s*[,-]?\\s*(?:episode|épisode|ep|e)\\s*\\.?\\s*(\\d{1,3})\\b")
-    private val RX_NXM = Regex("(?iU)\\b(\\d{1,2})x(\\d{2,3})\\b")
-    private val RX_EP_ONLY = Regex("(?iU)\\b(?:episode|épisode|ep)\\s*\\.?\\s*(\\d{1,4})\\b|\\be(\\d{2,4})\\b")
-    private val RX_SAISON_ONLY = Regex("(?iU)\\b(?:saison|season)\\s*(\\d{1,2})\\b|\\bs(\\d{1,2})\\b(?!\\s?e\\d)")
+    private val RX_SXE = ur("\\bs(\\d{1,2})\\s?e(\\d{1,3})(?:\\s?(?:-|e|-e|&|et)\\s?e?(\\d{1,3}))?\\b")
+    private val RX_SAISON_EP = ur("\\b(?:saison|season)\\s*(\\d{1,2})\\s*[,-]?\\s*(?:episode|épisode|ep|e)\\s*\\.?\\s*(\\d{1,3})\\b")
+    private val RX_NXM = ur("\\b(\\d{1,2})x(\\d{2,3})\\b")
+    private val RX_EP_ONLY = ur("\\b(?:episode|épisode|ep)\\s*\\.?\\s*(\\d{1,4})\\b|\\be(\\d{2,4})\\b")
+    private val RX_SAISON_ONLY = ur("\\b(?:saison|season)\\s*(\\d{1,2})\\b|\\bs(\\d{1,2})\\b(?!\\s?e\\d)")
     private val RX_ANIME = Regex("^(.+?)\\s+-\\s+(\\d{2,4})(?:v\\d)?(?=\\s|$)")
 
     private fun findMarker(s: String, hasGroupPrefix: Boolean, yearAfter: (Int) -> Boolean): Marker? {
@@ -339,21 +343,21 @@ object NameParser {
 
     // ------------------------------------------------------------------ course / clip / language hints
 
-    private val COURSE_STRONG = Regex("(?iU)\\b(?:cours|course|tuto|tutoriel|tutorial|tutorials|le[cç]on|lesson|formation|masterclass|bootcamp|udemy|coursera|openclassrooms|khan\\s*academy|apprendre|learn|learning|enseignement)\\b")
-    private val COURSE_WEAK = Regex("(?iU)\\b(?:chapitre|chapter|td|tp|lecture|exercices?|correction|corrig[eé]|examen|concours|bac|bepc|probatoire|terminale|seconde|premi[eè]re|licence|cm[12]|s[eé]quence|r[eé]vision|revision)\\b")
+    private val COURSE_STRONG = ur("\\b(?:cours|course|tuto|tutoriel|tutorial|tutorials|le[cç]on|lesson|formation|masterclass|bootcamp|udemy|coursera|openclassrooms|khan\\s*academy|apprendre|learn|learning|enseignement)\\b")
+    private val COURSE_WEAK = ur("\\b(?:chapitre|chapter|td|tp|lecture|exercices?|correction|corrig[eé]|examen|concours|bac|bepc|probatoire|terminale|seconde|premi[eè]re|licence|cm[12]|s[eé]quence|r[eé]vision|revision)\\b")
     private val SUBJECTS = listOf(
-        Regex("(?iU)\\bmath(?:s|[eé]matiques?)?\\b") to "Mathématiques",
-        Regex("(?iU)\\b(?:physique|chimie|physics|chemistry)\\b") to "Physique-Chimie",
-        Regex("(?iU)\\b(?:svt|biologie|biology|anatomie)\\b") to "SVT",
-        Regex("(?iU)\\b(?:histoire|g[eé]ographie|geography|history|histoire-g[eé]o)\\b") to "Histoire-Géographie",
-        Regex("(?iU)\\b(?:fran[cç]ais|grammaire|conjugaison|litt[eé]rature)\\b") to "Français",
-        Regex("(?iU)\\b(?:anglais|english\\s+course|english\\s+lesson)\\b") to "Anglais",
-        Regex("(?iU)\\b(?:philosophie|philo)\\b") to "Philosophie",
-        Regex("(?iU)\\b(?:informatique|python|java|javascript|excel|programmation|programming|html|css|sql|linux|r[eé]seaux?)\\b") to "Informatique",
-        Regex("(?iU)\\b(?:[eé]conomie|comptabilit[eé]|gestion|droit|marketing)\\b") to "Économie",
+        ur("\\bmath(?:s|[eé]matiques?)?\\b") to "Mathématiques",
+        ur("\\b(?:physique|chimie|physics|chemistry)\\b") to "Physique-Chimie",
+        ur("\\b(?:svt|biologie|biology|anatomie)\\b") to "SVT",
+        ur("\\b(?:histoire|g[eé]ographie|geography|history|histoire-g[eé]o)\\b") to "Histoire-Géographie",
+        ur("\\b(?:fran[cç]ais|grammaire|conjugaison|litt[eé]rature)\\b") to "Français",
+        ur("\\b(?:anglais|english\\s+course|english\\s+lesson)\\b") to "Anglais",
+        ur("\\b(?:philosophie|philo)\\b") to "Philosophie",
+        ur("\\b(?:informatique|python|java|javascript|excel|programmation|programming|html|css|sql|linux|r[eé]seaux?)\\b") to "Informatique",
+        ur("\\b(?:[eé]conomie|comptabilit[eé]|gestion|droit|marketing)\\b") to "Économie",
     )
-    private val PERSONAL_WORDS = Regex("(?iU)\\b(?:mariage|anniversaire|bapt[eê]me|f[eê]te|fun[eé]railles|deuil|naissance|d[oô]t|communion|vacances|voyage|birthday|wedding)\\b")
-    private val CLIP_WORDS = Regex("(?iU)(?:clip\\s+officiel|official\\s+(?:music\\s+)?video|vid[eé]o\\s+officielle|lyric\\s+video|\\blyrics?\\b|\\bofficial\\s+audio\\b|\\bm/?v\\b|music\\s+video|visualizer|audio\\s+officiel)")
+    private val PERSONAL_WORDS = ur("\\b(?:mariage|anniversaire|bapt[eê]me|f[eê]te|fun[eé]railles|deuil|naissance|d[oô]t|communion|vacances|voyage|birthday|wedding)\\b")
+    private val CLIP_WORDS = ur("(?:clip\\s+officiel|official\\s+(?:music\\s+)?video|vid[eé]o\\s+officielle|lyric\\s+video|\\blyrics?\\b|\\bofficial\\s+audio\\b|\\bm/?v\\b|music\\s+video|visualizer|audio\\s+officiel)")
     private val FR_WORDS = setOf("le", "la", "les", "des", "du", "de", "et", "un", "une", "saison", "épisode", "episode", "vf", "vostfr", "french", "francais", "français", "truefrench", "vff", "vfq", "pour", "dans", "sur", "avec", "mon", "ma", "mes", "cours", "chapitre", "leçon", "au", "aux", "est", "qui", "que", "ce", "cette", "nous", "vous")
     private val EN_WORDS = setOf("the", "and", "of", "season", "to", "in", "for", "with", "my", "you", "me", "is", "lesson", "chapter", "english", "vo", "eng", "from", "love")
 
@@ -419,7 +423,7 @@ object NameParser {
         val text = normalizeSeparators(stripped)
         val lang = nameLang(text)
         val subLangCode = if (media == Media.SUBTITLE) subtitleLang(text) else null
-        val (textNoLang, subLang) = if (subLangCode != null) text.replace(Regex("(?iU)\\s(?:" + Regex.escape(subLangCode.first) + ")$"), "") to subLangCode.second else text to null
+        val (textNoLang, subLang) = if (subLangCode != null) text.replace(ur("\\s(?:" + Regex.escape(subLangCode.first) + ")$"), "") to subLangCode.second else text to null
 
         // ---- gather tokens and tags (resolution, language version) over the whole text
         val allTokens = textNoLang.split(' ').filter { it.isNotEmpty() }
@@ -580,7 +584,7 @@ object NameParser {
         var season: Int? = null
         var title: String? = null
         for (p in parts.asReversed()) {
-            val sm = Regex("(?iU)^(?:saison|season|s)\\s*0*(\\d{1,2})$").find(p.trim())
+            val sm = ur("^(?:saison|season|s)\\s*0*(\\d{1,2})$").find(p.trim())
             if (sm != null && season == null) { season = sm.groupValues[1].toInt(); continue }
             if (title == null && p.trim().isNotEmpty() && !p.equals("Séries", true) && !p.equals("Series", true) && !p.equals("Downloads", true) && !p.equals("Download", true)) { title = Text.titleCaseIfNeeded(tidy(normalizeSeparators(stripJunk(p).first)), nameLang(p)) }
         }
@@ -590,7 +594,7 @@ object NameParser {
     private fun splitSegments(s: String): List<String> = s.split(Regex("\\s+-\\s+|\\s*[–—]\\s*")).map { it.trim() }.filter { it.isNotEmpty() }
 
     private val RX_TRACK = Regex("^(\\d{1,3})\\s*[-.)]*\\s+(?=\\S)")
-    private val RX_FEAT = Regex("(?iU)\\b(?:feat|ft|featuring)\\.?\\s+")
+    private val RX_FEAT = ur("\\b(?:feat|ft|featuring)\\.?\\s+")
 
     private fun musicParse(text: String, ext: String, lang: String, clipHint: Boolean, copy: Boolean, junk: Boolean, kind: Kind, folder: String): Parsed {
         var toks = text.split(' ').filter { it.isNotEmpty() }

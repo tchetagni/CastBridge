@@ -87,4 +87,4 @@ data class ItemInfo(val file: FileRef, val parsed: Parsed, val proposal: Proposa
 
 data class Stats(val files: Int, val wellNamed: Int, val toRename: Int, val unknown: Int, val duplicateGroups: Int, val duplicateBytes: Long, val aiUsed: Int)
 
-data class Analysis(val snapshot: LibrarySnapshot, val items: List<ItemInfo>, val plan: Plan, val insights: List<Insight>, val stats: Stats)
+data class Analysis(val snapshot: LibrarySnapshot, val items: List<ItemInfo>, val plan: Plan, val insights: List<Insight>, val stats: Stats, val habits: Habits = Habits.NONE)

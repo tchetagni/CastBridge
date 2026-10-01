@@ -59,8 +59,11 @@ fun LibraryAssistantDialog(client: TvClient?, onDismiss: () -> Unit) {
     val title = when (m.step) {
         Step.TRASH -> "Corbeille CastBridge"; Step.HISTORY -> "Historique"; Step.SETTINGS -> "Réglages de l'assistant"; else -> "Ranger ma bibliothèque"
     }
-    Dialog(onDismissRequest = onDismiss, properties = DialogProperties(usePlatformDefaultWidth = false)) {
-        Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
+    Dialog(onDismissRequest = onDismiss, properties = DialogProperties(usePlatformDefaultWidth = false, decorFitsSystemWindows = true)) {
+        // A full-screen Dialog is laid out for the whole display but its window starts below the status bar: the bottom would be
+        // cut by that height (the bottom buttons of the plan disappeared). Keep that height free at the bottom.
+        val statusBar = remember { ctx.resources.getIdentifier("status_bar_height", "dimen", "android").let { id -> if (id > 0) ctx.resources.getDimensionPixelSize(id) / ctx.resources.displayMetrics.density else 24f } }
+        Surface(Modifier.fillMaxSize().padding(bottom = statusBar.dp), color = MaterialTheme.colorScheme.background) {
             Column(Modifier.fillMaxSize()) {
                 TopAppBar(
                     title = { Text(title) },
@@ -76,6 +79,7 @@ fun LibraryAssistantDialog(client: TvClient?, onDismiss: () -> Unit) {
                         }
                     },
                     colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.surface))
+                Box(Modifier.weight(1f).fillMaxWidth()) {
                 when (m.step) {
                     Step.INTRO -> Intro(m, client != null) { picker.launch(null) }
                     Step.ANALYZING -> Working("Analyse en cours", m.progress.message.ifEmpty { phaseText(m.progress) }, m.progress.fraction, "Annuler") { m.cancelWork() }
@@ -85,6 +89,7 @@ fun LibraryAssistantDialog(client: TvClient?, onDismiss: () -> Unit) {
                     Step.TRASH -> BinView(m)
                     Step.HISTORY -> HistoryView(m)
                     Step.SETTINGS -> SettingsView(m)
+                }
                 }
             }
         }
@@ -180,8 +185,8 @@ private fun PlanView(m: AssistantModel) {
     val nSel = m.selected.size
     val trashSel = m.selectedTrash
 
-    Column(Modifier.fillMaxSize()) {
-        LazyColumn(Modifier.weight(1f), contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+    Box(Modifier.fillMaxSize()) {
+        LazyColumn(Modifier.fillMaxSize(), contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 190.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
             item {
                 Card(Modifier.fillMaxWidth(), colors = CardDefaults.cardColors(containerColor = cs.secondaryContainer)) {
                     Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
@@ -217,8 +222,12 @@ private fun PlanView(m: AssistantModel) {
                 }
             }
         }
-        Surface(tonalElevation = 3.dp) {
-            Column(Modifier.fillMaxWidth().padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+        Surface(Modifier.align(Alignment.BottomCenter).fillMaxWidth(), tonalElevation = 3.dp) {
+            Column(Modifier.fillMaxWidth().navigationBarsPadding().padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                // circumstantial: a long copy to the USB key while the TV is usually being watched
+                val hour = remember { java.time.LocalTime.now().hour }
+                if (plan.moves.any { it.id in m.selected } && a.habits.isBusy(hour))
+                    Text("La TV est souvent utilisée à cette heure : les déplacements vers la clé peuvent être longs. Vous pouvez les lancer plus tard.", style = MaterialTheme.typography.bodySmall, color = cs.primary)
                 if (trashSel.isNotEmpty()) Text("${trashSel.size} fichier(s) iront dans la corbeille (${size(trashSel.sumOf { it.bytes })}). Vous devrez confirmer.", style = MaterialTheme.typography.bodySmall)
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     OutlinedButton({ m.step = Step.INTRO }, Modifier.heightIn(min = 52.dp)) { Text("Fermer") }

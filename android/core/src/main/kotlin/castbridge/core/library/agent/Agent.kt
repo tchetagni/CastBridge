@@ -114,7 +114,7 @@ class LibraryAgent(
         val stats = Stats(files.size, files.size - renames - infos.count { it.parsed.kind == Kind.UNKNOWN }, renames, infos.count { it.parsed.kind == Kind.UNKNOWN },
             dupExtras.size, dupExtras.sumOf { it.bytes }, aiUsed)
         progress(Progress(Phase.DONE))
-        return Analysis(snapshot, infos, plan, insights(snapshot, plan, groups), stats)
+        return Analysis(snapshot, infos, plan, insights(snapshot, plan, groups), stats, habits)
     }
 
     private val aiKeys = HashSet<String>()

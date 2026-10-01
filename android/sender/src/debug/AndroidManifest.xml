@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application>
+        <!-- DEBUG BUILDS ONLY (docs/LIBRARY-AGENT.md): opens the library assistant on a given TV address, for emulator
+             screenshots and demos (extras "base" = http://host:port and "pin"). Not part of the release APK. -->
+        <activity android:name=".agent.AssistantDemoActivity" android:exported="true" android:theme="@android:style/Theme.Material.NoActionBar" />
+    </application>
+</manifest>

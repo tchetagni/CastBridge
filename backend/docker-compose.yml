@@ -72,6 +72,10 @@ services:
       CASTBRIDGE_RATE_LIMIT_PER_MINUTE: ${CASTBRIDGE_RATE_LIMIT_PER_MINUTE:-120}
       CASTBRIDGE_RATE_LIMIT_BURST: ${CASTBRIDGE_RATE_LIMIT_BURST:-60}
       CASTBRIDGE_QUIZ_SEED: ${CASTBRIDGE_QUIZ_SEED:-true}
+      # optional AI layer of the library assistant: empty key = no model (never put a key in the repository)
+      CASTBRIDGE_LIBRARY_LLM_API_KEY: ${CASTBRIDGE_LIBRARY_LLM_API_KEY:-}
+      CASTBRIDGE_LIBRARY_LLM_MODEL: ${CASTBRIDGE_LIBRARY_LLM_MODEL:-claude-haiku-4-5}
+      CASTBRIDGE_LIBRARY_SUGGEST_PER_HOUR: ${CASTBRIDGE_LIBRARY_SUGGEST_PER_HOUR:-30}
     secrets:
       - castbridge_signing_key
     ports:
