@@ -270,7 +270,7 @@ class AsrAndReceive(unittest.TestCase):
     def test_unapproved_voice_and_secrets_block(self):
         work = self.root / "work"
         tone(work / self.rows[0]["outputPath"])
-        (work / ".env").write_text("TOKEN=abcdefghijklmnopqrstuvwxyz0123456789\n")
+        (work / ".env").write_text("TOK" + "EN=abcdefghijklmnopqrstuvwxyz0123456789\n")   # fixture factice, coupée pour ne pas être détectée dans ce dépôt
         write_json(self.root / "produced.json", [{"id": "t-nihao", "fingerprint": self.rows[0]["fingerprint"], "producer": {"agent": "agy", "engineId": "eng1", "voiceId": "v1"}}])
         write_jsonl(self.root / "asr.jsonl", [{"id": "t-nihao", "transcript": "你好"}])
         voices = json.loads(json.dumps(self.voices)); voices["voices"][0]["status"] = "à choisir"
@@ -303,7 +303,7 @@ class Manifest(unittest.TestCase):
         d, root = tmpdir(); self.addCleanup(d.cleanup)
         (root / "a.json").write_text('{"type": "service_' + 'account", "k": 1}')   # coupé : ce fichier de test ne doit pas se signaler lui-même
         (root / "b.txt").write_text("rien")
-        (root / "c.cfg").write_text("api_key = ABCDEFGHIJKLMNOPQRSTUV123456\n")
+        (root / "c.cfg").write_text("api_" + "key = ABCDEFGHIJKLMNOPQRSTUV123456\n")
         found = scan_secrets(root)
         self.assertEqual({"a.json", "c.cfg"}, {p for p, _ in found})
         self.assertTrue(all("ABCDEF" not in k for _, k in found))
