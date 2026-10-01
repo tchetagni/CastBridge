@@ -158,7 +158,7 @@ class DownloadTest {
         val missing = ResumableDownload("nope.bin", { base }, "123456", { 0 }, sink(), sleep = { }).run { }
         assertEquals(ResumableDownload.State.Failed("Fichier introuvable sur la TV"), missing)
         val badPin = ResumableDownload("b.bin", { base }, "000000", { 0 }, sink(), sleep = { }).run { }
-        assertEquals(ResumableDownload.State.Failed("PIN refusé"), badPin)
+        assertEquals(ResumableDownload.State.Failed("Code de la TV incorrect."), badPin)
         assertFailsWith<TvClient.HttpError> { tv.openRange("../etc/passwd", 0) }
     }
 }
