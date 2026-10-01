@@ -48,3 +48,9 @@ Encodage minimal d'une touche : `08 01 12 <len> "<code>"` envoyé dans une trame
   avec détection de version/échec et repli sur une autre stratégie.
 - Ne jamais envoyer de commande à un appareil inconnu : l'utilisateur choisit la TV, un test réversible (volume +/−) demande
   confirmation visuelle avant d'enregistrer la stratégie comme « fonctionne ».
+
+## Utilisation par CastBridge-TV : relais Bluetooth → boucle locale (2026-10-01)
+- La TV elle-même se connecte à `ws://127.0.0.1:8125` (vérifié : poignée de main 101 depuis la TV) ; le téléphone n'a donc besoin ni du Wi-Fi ni de l'adresse IP : `téléphone --Bluetooth--> CastBridge-TV --boucle locale--> service`. Implémentation : `core/.../remote/vendor/` (`VendorProto`, `WebSocketFrames`, `VendorBridge`, `VendorRelay`), branchée dans `RemoteHub` (voir `docs/REMOTE.md`).
+- Encodage d'une touche : `08 01 12 <len> "<code décimal>"` (ex. volume + = `08 01 12 02 32 34`), trame binaire masquée. Le client répond aux `ping`, n'impose pas la valeur `Sec-WebSocket-Accept` (dialogue de boucle locale) et lit la trame JSON d'information (`status` 500 sans erreur).
+- Seuls les types de touche (`type` 1) sont émis ; les codes viennent de la liste blanche `RemoteKey` (jamais POWER 26, SLEEP 223, WAKEUP 224, SOFT_SLEEP 276). Pas d'événement « relâchement » connu : un appui maintenu renvoie une touche à chaque répétition (limitée à 30/s).
+- **Sécurité** : aucune authentification sur ce service, accessible depuis tout le réseau local (toutes interfaces). Risque pour l'owner, hors de portée de CastBridge ; le relais n'ouvre rien de plus. Aucun autre type d'événement n'a été confirmé dans cette session.
