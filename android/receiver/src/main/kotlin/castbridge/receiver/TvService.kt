@@ -398,6 +398,9 @@ class TvService : Service(), Device {
     private var captureHooked = false
     private fun hookCapture() { if (!captureHooked) { captureHooked = true; ScreenCapture.install(application) } }
 
+    /** From the activation screen: permissions were just granted. The owner channel always starts; the rest only if the core runs (a locked TV has none of it). */
+    fun onActivationPermissions() { startOwnerChannel(); if (started) onPermissionsReady() }
+
     fun onPermissionsReady() {
         hookCapture()
         startOwnerChannel()

@@ -126,14 +126,18 @@ class ActivationActivity : Activity() {
     private val btTick = object : Runnable { override fun run() { btLine.text = "Bluetooth d'activation : " + (TvService.running?.ownerStatus() ?: "service non démarré"); h.postDelayed(this, 2_000) } }
     override fun onResume() {
         super.onResume(); h.post(poll); h.post(btTick)
-        // the owner's phone pushes the activation by Bluetooth: on recent Android that needs the permission, asked here because a locked TV asks nothing else
-        if (android.os.Build.VERSION.SDK_INT >= 31 && checkSelfPermission(android.Manifest.permission.BLUETOOTH_CONNECT) != android.content.pm.PackageManager.PERMISSION_GRANTED)
-            runCatching { requestPermissions(arrayOf(android.Manifest.permission.BLUETOOTH_CONNECT), 77) }
-        else if (!askedVisible) { askedVisible = true; makeVisible() }
+        // Bluetooth permissions: the lock screen comes BEFORE the player screen that normally asks for them, and without BLUETOOTH_ADVERTISE the TV opens none of its
+        // Bluetooth services (pairing, remote control, activation). Asked here, then the services are (re)started.
+        val wanted = buildList {
+            if (android.os.Build.VERSION.SDK_INT >= 31) { add(android.Manifest.permission.BLUETOOTH_CONNECT); add(android.Manifest.permission.BLUETOOTH_ADVERTISE) }
+            if (android.os.Build.VERSION.SDK_INT >= 33) add(android.Manifest.permission.POST_NOTIFICATIONS)
+        }.filter { checkSelfPermission(it) != android.content.pm.PackageManager.PERMISSION_GRANTED }
+        if (wanted.isNotEmpty()) runCatching { requestPermissions(wanted.toTypedArray(), 77) }
+        else { TvService.running?.onActivationPermissions(); if (!askedVisible) { askedVisible = true; makeVisible() } }
     }
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == 77) { TvService.running?.startOwnerChannel(); if (!askedVisible) { askedVisible = true; makeVisible() } }
+        if (requestCode == 77) { TvService.running?.onActivationPermissions(); if (!askedVisible) { askedVisible = true; makeVisible() } }
     }
     override fun onPause() { super.onPause(); h.removeCallbacks(poll); h.removeCallbacks(btTick) }
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean =

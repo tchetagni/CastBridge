@@ -142,7 +142,35 @@ object TvLinkManager {
     /** The user pressed « Réessayer » / came back from the Bluetooth settings. */
     fun retryNow() { wake.trySend(Trigger.USER) }
 
-    fun setForeground(on: Boolean) { foreground = on; if (on) { start(); poke() } }
+    fun setForeground(on: Boolean) { foreground = on; if (on) { start(); poke(); recoverKnownTv() } }
+
+    @Volatile private var recovering = false
+    /**
+     * Reinstalled phone app, TV already paired: the phone forgot its TVs, but Android still keeps the Bluetooth bond and the TV still trusts this phone's address.
+     * So, with no TV saved, each paired device that is (or may be) a CastBridge-TV is asked for a HELLO WITHOUT the owner window: a TV that knows this phone answers
+     * with a fresh token and is adopted at once; one that does not (it was reset too) is left alone and « Ajouter ma TV » stays the way. Runs in the background.
+     */
+    fun recoverKnownTv() {
+        if (!::app.isInitialized || recovering || saved.list().isNotEmpty()) return
+        recovering = true
+        scope.launch {
+            try {
+                if (!castbridge.owner.TvBluetooth.permitted(app)) return@launch
+                val link = PhoneLink(AndroidBtTransport(app), linkEnv::probe, { Build.VERSION.SDK_INT >= 29 })
+                for (c in castbridge.owner.TvBluetooth.pairedTvs(app)) {
+                    if (saved.list().isNotEmpty()) break
+                    val tv = SavedTv(TrustRegistry.norm(c.address), c.name.ifBlank { "Ma TV" }, addedAt = System.currentTimeMillis())
+                    val r = runCatching { link.connect(tv, requestTrust = false) }.getOrNull()
+                    Log.i(TAG, "reprise de ${c.name}: ${r?.javaClass?.simpleName}")
+                    if (r is PhoneLink.Result.Connected) {
+                        saved.upsert(r.session.tv, makeDefault = true)
+                        LinkJobService.schedulePeriodic(app); driver.adopt(r.session); publish(driver.step(Trigger.USER)); poke()
+                        break
+                    }
+                }
+            } finally { recovering = false }
+        }
+    }
 
     @Synchronized fun start(ctx: Context? = null) {
         ctx?.let { init(it) }
