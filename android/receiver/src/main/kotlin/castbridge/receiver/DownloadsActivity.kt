@@ -252,8 +252,8 @@ class DownloadsActivity : Activity() {
         if (v is TextView) v.setPadding(dp(16), dp(10), dp(16), dp(10))
     }
 
-    private fun button(label: String, onClick: () -> Unit) = Button(this).apply {
-        text = label; isAllCaps = false; setOnClickListener { onClick() }
+    private fun button(label: String, onClick: () -> Unit) = TvStyle.styleButton(Button(this)).apply {
+        text = label; setOnClickListener { onClick() }
         layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply { marginEnd = dp(12) }
     }
 

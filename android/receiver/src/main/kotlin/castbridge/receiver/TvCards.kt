@@ -104,6 +104,17 @@ object TvStyle {
             addState(intArrayOf(), rounded(ctx, fill, radiusDp))
         }
 
+    /** A charte button (surface-high fill, ring on focus, scale 1.04) for the classic android.widget.Button of the secondary screens. */
+    fun styleButton(b: android.widget.Button) = b.apply {
+        isAllCaps = false; typeface = TvFonts.bold; setTextColor(TEXT); textSize = Type.BUTTON
+        background = StateListDrawable().apply {
+            addState(intArrayOf(android.R.attr.state_focused), rounded(context, CARD_FOCUS, R_MD, RING, T.FOCUS_RING_WIDTH_DP))
+            addState(intArrayOf(), rounded(context, CARD, R_MD, OUTLINE, 1))
+        }
+        setPadding(dp(context, 20), dp(context, 10), dp(context, 20), dp(context, 10)); stateListAnimator = null
+        focusZoom(this)
+    }
+
     /** Scale 1.04 + lift when a focusable view gets the D-pad focus (GPU property animations only, 120 ms, standard curve). */
     fun focusZoom(v: View, scale: Float = T.FOCUS_SCALE, onFocus: (Boolean) -> Unit = {}) {
         v.setOnFocusChangeListener { view, has ->

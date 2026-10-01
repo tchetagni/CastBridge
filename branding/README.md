@@ -11,7 +11,7 @@ Dossier complet de la charte graphique CastBridge (écosystème TV + smartphone)
 - `guide/CastBridge-charte-graphique.pdf` - guide PDF de la charte (11 pages).
 - `mockups/index.html` - maquettes clés TV (1920 x 1080) et mobile (360 x 800).
 - `export/` - exports PNG et formats Android.
-- `tools/` - scripts reproductibles (`build_guide.py`, `gen_android_icons.py`).
+- `tools/` - scripts reproductibles (`svg2vd.py`, `gen_app_assets.py`, `gen_tokens.py`, `subset_fonts.py`, `gen_android_icons.py`) ; le guide PDF se régénère avec `tools/build-branding-guide` (racine du dépôt).
 
 ## Exports Android
 

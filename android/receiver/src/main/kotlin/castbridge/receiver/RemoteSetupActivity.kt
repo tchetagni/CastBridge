@@ -41,7 +41,7 @@ class RemoteSetupActivity : Activity() {
                 "2. Sélectionnez « CastBridge Télécommande » dans la liste des services.\n" +
                 "3. Activez-le et confirmez : Android affiche un avertissement général sur les services d'accessibilité.\n" +
                 "4. Revenez ici avec Retour : l'état ci-dessus passe à « actif », et le téléphone l'indique aussi.").apply { setPadding(0, dp(8), 0, dp(12)) })
-        val row = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL; setPadding(0, dp(4), 0, dp(12)) }
+        val row = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL; setPadding(dp(6), dp(6), 0, dp(12)) }
         open = button("Ouvrir les réglages d'accessibilité") { openSettings() }
         row.addView(open)
         row.addView(button("Fermer") { finish() })
@@ -78,9 +78,8 @@ class RemoteSetupActivity : Activity() {
         state.text = "Cette TV n'a pas d'écran de réglages d'accessibilité accessible : le mode « toute la TV » n'y est pas possible."
     }
 
-    private fun button(label: String, onClick: () -> Unit) = Button(this).apply {
-        text = label; isAllCaps = false; setOnClickListener { onClick() }
-        setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f)
+    private fun button(label: String, onClick: () -> Unit) = TvStyle.styleButton(Button(this)).apply {
+        text = label; setOnClickListener { onClick() }
         layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply { marginEnd = dp(12) }
     }
 
