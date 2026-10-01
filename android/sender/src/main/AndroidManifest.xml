@@ -108,6 +108,9 @@
         <service android:name=".agent.ProactiveJob" android:exported="false" android:permission="android.permission.BIND_JOB_SERVICE" />
         <!-- Reports of the parental control pulled from the TV over Bluetooth (docs/PARENTAL.md); runs only on a designated phone -->
         <service android:name=".ParentalSyncJob" android:exported="false" android:permission="android.permission.BIND_JOB_SERVICE" />
+        <!-- Deferred orders (docs/ORDRES.md): the phone as messenger, background only, no screen -->
+        <service android:name=".OrdersSyncJob" android:exported="false" android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service android:name=".OrdersDeliverJob" android:exported="false" android:permission="android.permission.BIND_JOB_SERVICE" />
         <!-- Lots (docs/LOTS.md): periodic sync with the server, deferred delivery to the TV, woken by the TV's Bluetooth link (system broadcast only) -->
         <service android:name=".LotsSyncJob" android:exported="false" android:permission="android.permission.BIND_JOB_SERVICE" />
         <service android:name=".LotsDeliverJob" android:exported="false" android:permission="android.permission.BIND_JOB_SERVICE" />

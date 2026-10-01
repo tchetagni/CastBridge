@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/layout :: head('Ordres')}"></head>
+<body>
+<header th:replace="~{admin/layout :: nav}"></header>
+<main>
+    <div th:replace="~{admin/layout :: flash}"></div>
+    <h1>Ordres différés</h1>
+    <p class="muted small">Les ordres sont signés par le serveur, portés par les téléphones jusqu'aux TV (souvent hors ligne) et appliqués par la TV après vérification. Liste fermée d'actions :
+        aucune ne peut exécuter de code, lire ou supprimer les données de l'utilisateur. Une suspension ramène seulement la TV à l'état verrouillé.</p>
+    <p class="flash err" th:unless="${on}">Service désactivé (CASTBRIDGE_ORDERS_ENABLED et CASTBRIDGE_ORDERS_KEY_FILE).</p>
+
+    <section class="card">
+        <h2>Nouvel ordre</h2>
+        <form method="post" th:action="@{/admin/orders}">
+            <label>Cible
+                <select name="targetKind">
+                    <option value="device">Une TV (code d'appareil)</option>
+                    <option value="license">Une licence</option>
+                    <option value="group">Un groupe</option>
+                    <option value="any">Toutes les TV</option>
+                </select>
+            </label>
+            <label>Code / identifiant <input type="text" name="targetValue" maxlength="64" placeholder="ABCD-EFGH-JKMN-PQRS ou lic-0001"></label>
+            <label>Action
+                <select name="action"><option th:each="a : ${actions}" th:value="${a}" th:text="${a}"></option></select>
+            </label>
+            <label>Paramètres (un par ligne : nom=valeur)
+                <textarea name="params" rows="3" maxlength="2000" placeholder="license=lic-0001"></textarea>
+            </label>
+            <label>Priorité <input type="number" name="priority" value="0" min="-100" max="100"></label>
+            <label>Validité (heures, 1 à 8784) <input type="number" name="hours" value="720" min="1" max="8784"></label>
+            <label><input type="checkbox" name="hold" value="true"> Retenir (à publier ensuite, par priorité)</label>
+            <button type="submit">Créer</button>
+        </form>
+        <form method="post" th:action="@{/admin/orders/release}"><button type="submit">Publier les ordres retenus</button></form>
+        <form method="post" th:action="@{/admin/orders/verify}"><button type="submit" class="link">Vérifier le journal d'audit</button></form>
+    </section>
+
+    <section class="card">
+        <h2>Suivi</h2>
+        <table class="compact">
+            <tr><th>N°</th><th>État</th><th>Action</th><th>Cible</th><th>Clé · séquence</th><th>Expire</th><th>TV</th><th></th></tr>
+            <tr th:each="o : ${orders}">
+                <td th:text="${o.id}"></td>
+                <td><span class="badge" th:text="${o.state}"></span></td>
+                <td><span th:text="${o.action}"></span><br><span class="muted small" th:text="${o.params}"></span></td>
+                <td th:text="${o.targetKind} + (${o.targetValue} != null ? ' ' + ${o.targetValue} : '')"></td>
+                <td class="muted small" th:text="${o.kid} != null ? ${o.kid} + ' · ' + ${o.seq} : '—'"></td>
+                <td class="muted small" th:text="${o.expiresAt}"></td>
+                <td>
+                    <div th:each="d : ${o.deliveries}"><span class="muted small" th:text="${d.tv}"></span> <span class="badge" th:text="${d.state} + (${d.reason} != null and ${d.reason} != 'APPLIED' ? ' ' + ${d.reason} : '')"></span></div>
+                    <span class="muted small" th:if="${o.deliveries.isEmpty()}">aucune remise</span>
+                </td>
+                <td><form method="post" th:action="@{/admin/orders/{id}/cancel(id=${o.id})}" th:if="${o.state == 'QUEUED' or o.state == 'RELEASED'}"><button type="submit" class="link">Annuler</button></form></td>
+            </tr>
+        </table>
+    </section>
+</main>
+</body>
+</html>

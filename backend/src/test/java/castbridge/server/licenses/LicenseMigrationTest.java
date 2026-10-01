@@ -69,7 +69,8 @@ class LicenseMigrationTest extends LicenseTestBase {
         assertThat(db.queryForObject("select count(*) from lot", Integer.class)).isEqualTo(lots);
         // after the documented history clean-up the migrations apply again cleanly
         db.update("delete from flyway_schema_history where version in ('50','51','52')");
-        assertThat(flyway(ds, "latest").migrate().migrationsExecuted).isEqualTo(3);
+        // V60 (deferred orders) is already applied: V50-V52 come back "out of order", which is exactly this documented recovery
+        assertThat(Flyway.configure().dataSource(ds).locations("classpath:db/migration").outOfOrder(true).load().migrate().migrationsExecuted).isEqualTo(3);
     }
 
     @Test
