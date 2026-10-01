@@ -45,21 +45,41 @@ data class Suggestion(
     val confidence: Double = 0.5,
 )
 
-data class SuggestResponse(val model: String, val available: Boolean, val suggestions: List<Suggestion>)
+/** [costUsd] is the server's estimate for this request (null: unknown or local); [promptVersion] and [rejected] (answers the server refused) are for the history screen. */
+data class SuggestResponse(val model: String, val available: Boolean, val suggestions: List<Suggestion>, val costUsd: Double? = null, val promptVersion: String = "", val rejected: Int = 0)
 
-/** The wording of the separate consent for the AI layer: what leaves the phone, in plain French. Changing it raises [VERSION]. */
+/**
+ * The wording of the separate consent for the AI layer: what leaves the phone, in plain French. FOR REVIEW by Esaie / a lawyer (docs/LIBRARY-AGENT.md § 12)
+ * before the AI layer is switched on. Changing any word raises [VERSION], which asks every user again.
+ */
 object AiConsent {
     const val TAG = "library-ai-v1"
-    const val VERSION = "2026-10"
+    const val VERSION = "2026-10-b"
     const val TITLE = "Aide de l'intelligence artificielle (facultatif)"
-    const val WHAT_LEAVES = "Pour les noms que les règles ne comprennent pas, l'assistant peut envoyer au serveur CastBridge : " +
-        "le nom du fichier déjà nettoyé (par exemple « prison break s01e04 »), son extension (mkv, mp3…), sa durée arrondie à 5 minutes " +
-        "et la langue de l'application. Un modèle d'IA du serveur propose alors un titre, une saison, un épisode."
-    const val WHAT_STAYS = "Ne quitte jamais le téléphone : le contenu des fichiers, leurs dossiers et chemins, leur taille et leurs dates, " +
-        "vos vidéos personnelles (WhatsApp, appareil photo), vos photos et documents, vos corrections, et tout ce qui est protégé par le contrôle parental. " +
-        "Aucun identifiant de l'appareil n'est envoyé dans la requête ; le serveur ne garde pas les noms."
-    const val CHOICE = "Vous pouvez l'activer et le désactiver quand vous voulez. Désactivé, l'assistant fonctionne entièrement sur le téléphone, sans réseau."
-    val paragraphs get() = listOf(WHAT_LEAVES, WHAT_STAYS, CHOICE)
+    const val WHAT_LEAVES = "Pour les seuls fichiers que les règles de l'application ne comprennent pas, l'assistant peut envoyer des informations au serveur CastBridge, " +
+        "qui les transmet à un service d'intelligence artificielle pour proposer un titre, une saison, un épisode. Voici la liste complète de ce qui part, pour chaque fichier concerné :"
+    /** One line per piece of information sent. Nothing else leaves the phone. */
+    val LEAVES_LIST = listOf(
+        "le nom du fichier, déjà nettoyé : sans lien Internet, sans adresse e-mail et sans suite de 6 chiffres ou plus (par exemple « prison break s01e04 »), 120 caractères au plus ;",
+        "son extension (mkv, mp4, mp3…) ;",
+        "un type supposé par l'application (série, film, musique, clip, cours) quand elle en a un ;",
+        "sa durée, arrondie à 5 minutes, quand elle est connue ;",
+        "son numéro dans la liste envoyée (0, 1, 2…), sans autre sens.",
+    )
+    const val LEAVES_ONCE = "Une fois par envoi : la langue de l'application (français ou anglais) et la mention de votre accord (« library-ai-v1 »). " +
+        "Comme toute connexion Internet, l'envoi laisse aussi au serveur l'adresse IP du téléphone et l'heure, et le serveur reconnaît l'appareil par son jeton (déjà utilisé pour les mises à jour) afin de refuser les appareils bloqués et de limiter le nombre de demandes. Au plus 100 noms par analyse."
+    const val THIRD_PARTY = "Le service d'intelligence artificielle est un fournisseur tiers choisi par l'administrateur de CastBridge. CastBridge n'enregistre ni ne journalise les noms envoyés ; " +
+        "le fournisseur peut appliquer ses propres règles de conservation, indiquées dans la documentation de mise en service."
+    val NEVER_LIST = listOf(
+        "le contenu de vos fichiers ;", "leurs dossiers, chemins, tailles et dates ;", "vos vidéos et photos personnelles (WhatsApp, appareil photo, captures) et vos documents ;",
+        "tout ce que le contrôle parental protège, et rien du tout quand un profil enfant est actif ;", "vos corrections et vos habitudes de visionnage ;", "votre nom, vos contacts, votre numéro, un identifiant publicitaire.",
+    )
+    const val WHAT_STAYS = "Ne quitte jamais le téléphone : " // completed by NEVER_LIST in [paragraphs]
+    const val CHOICE = "Vous pouvez l'activer et le désactiver quand vous voulez, et voir la liste exacte de ce qui serait envoyé avant chaque analyse. " +
+        "Désactivé, l'assistant fonctionne entièrement sur le téléphone, sans réseau."
+    val paragraphs get() = listOf(WHAT_LEAVES, LEAVES_LIST.joinToString("\n") { "• $it" }, LEAVES_ONCE, THIRD_PARTY, WHAT_STAYS + "\n" + NEVER_LIST.joinToString("\n") { "• $it" }, CHOICE)
+    /** The whole text as one string (for the review and for a test that no wording is dropped). */
+    fun fullText(): String = paragraphs.joinToString("\n\n")
 }
 
 /** The local "model": the rules engine behind the same interface. Nothing leaves the phone. */
@@ -105,7 +125,8 @@ class ServerNamingModel(
     internal fun parse(body: String, n: Int): SuggestResponse {
         val m = try { JsonLite.obj(body) } catch (e: Exception) { throw ModelUnavailable("Réponse illisible du serveur") }
         val list = (m["suggestions"] as? List<Any?>).orEmpty().mapNotNull { (it as? Map<String, Any?>)?.let { o -> AiApply.sanitize(o, n, currentYear) } }
-        return SuggestResponse(m.str("model") ?: "server", m["available"] as? Boolean ?: true, list)
+        val usage = m["usage"] as? Map<String, Any?>
+        return SuggestResponse(m.str("model") ?: "server", m["available"] as? Boolean ?: true, list, (usage?.get("estimatedCostUsd") as? Number)?.toDouble(), m.str("promptVersion").orEmpty(), m.int("rejected") ?: 0)
     }
 }
 
