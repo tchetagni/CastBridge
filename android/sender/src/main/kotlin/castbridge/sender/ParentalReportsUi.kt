@@ -183,7 +183,7 @@ internal fun DataSection(env: Env, onChanged: () -> Unit) {
 
     PCard {
         H("Conservation")
-        Picker("Garder les données", Retention.CHOICES.map { "$it jours" }, Retention.CHOICES.indexOf(ledger.retention.days).coerceAtLeast(0)) { ParentalData.setRetention(ctx, Retention.CHOICES[it]) }
+        Picker("Garder les données", castbridge.core.parental.tab.Retention.CHOICES.map { "$it jours" }, castbridge.core.parental.tab.Retention.CHOICES.indexOf(ledger.retention.days).coerceAtLeast(0)) { ParentalData.setRetention(ctx, castbridge.core.parental.tab.Retention.CHOICES[it]) }
         Sub("$events événement(s) et $facts jour(s) gardés sur ce téléphone. Au-delà de la durée choisie ou de ${ledger.retention.maxEvents} événements, les plus anciens sont supprimés automatiquement.")
     }
     PCard {
