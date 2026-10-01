@@ -1,7 +1,7 @@
 {
   "format": 1,
   "id": "bepc-pct",
-  "version": 1,
+  "version": 2,
   "title": "Physique-Chimie-Technologie — BEPC",
   "description": "Fiches « l'essentiel » (électricité, forces, optique, chimie), exemples résolus, exercices type BEPC corrigés et épreuve blanche.",
   "lang": "fr",
@@ -10,22 +10,124 @@
   "subject": "pct",
   "exam": "BEPC",
   "programRef": "Programme officiel de Physique-Chimie-Technologie de la classe de 3e (MINESEC) — à vérifier sur le texte officiel",
-  "authors": ["CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"],
+  "authors": [
+    "CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"
+  ],
   "status": "draft",
-  "updatedAt": "2026-09-30",
+  "updatedAt": "2026-10-01",
   "chapters": [
-    {"id": "bepc-pct-elec", "title": "Électricité : circuits, loi d'Ohm, puissance et énergie", "order": 1, "programRef": "3e — Électricité : circuits, loi d'Ohm, puissance et énergie électriques (à vérifier sur le texte officiel)"},
-    {"id": "bepc-pct-meca", "title": "Poids, masse et forces", "order": 2, "programRef": "3e — Mécanique : forces, poids et masse (à vérifier sur le texte officiel)"},
-    {"id": "bepc-pct-optique", "title": "Optique : réflexion et lentilles convergentes", "order": 3, "programRef": "3e — Optique : réflexion de la lumière, lentilles (à vérifier sur le texte officiel)"},
-    {"id": "bepc-pct-chimie", "title": "Atomes, ions, solutions et pH", "order": 4, "programRef": "3e — Chimie : atomes et ions, solutions aqueuses, pH, réactions acide-base (à vérifier sur le texte officiel)"}
+    {
+      "id": "bepc-pct-elec",
+      "title": "Électricité : circuits, loi d'Ohm, puissance et énergie",
+      "order": 1,
+      "programRef": "3e — Électricité : circuits, loi d'Ohm, puissance et énergie électriques (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "bepc-pct-meca",
+      "title": "Poids, masse et forces",
+      "order": 2,
+      "programRef": "3e — Mécanique : forces, poids et masse (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "bepc-pct-optique",
+      "title": "Optique : réflexion et lentilles convergentes",
+      "order": 3,
+      "programRef": "3e — Optique : réflexion de la lumière, lentilles (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "bepc-pct-chimie",
+      "title": "Atomes, ions, solutions et pH",
+      "order": 4,
+      "programRef": "3e — Chimie : atomes et ions, solutions aqueuses, pH, réactions acide-base (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "bepc-pct-elec2",
+      "title": "Électricité : effet Joule, installation domestique et consommation",
+      "order": 5,
+      "programRef": "3e — Électricité : effet thermique du courant, courant alternatif, sécurité, consommation (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "bepc-pct-meca2",
+      "title": "Mécanique : travail, énergie, pression et leviers",
+      "order": 6,
+      "programRef": "3e — Mécanique : travail, énergie, pression, poussée d'Archimède, leviers (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "bepc-pct-optique2",
+      "title": "Optique : dispersion de la lumière",
+      "order": 7,
+      "programRef": "3e — Optique : dispersion de la lumière blanche, spectre (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "bepc-pct-chimie2",
+      "title": "Chimie : réactions, mole, métaux et hydrocarbures",
+      "order": 8,
+      "programRef": "3e — Chimie : réactions chimiques, quantité de matière, métaux, hydrocarbures (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "bepc-pct-env",
+      "title": "Technologie et environnement : énergies",
+      "order": 9,
+      "programRef": "3e — Technologie et éducation environnementale : énergies renouvelables (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "bepc-pct-epreuve-blanche",
+      "title": "Épreuve blanche n° 2",
+      "order": 10,
+      "programRef": "3e — Épreuve blanche de PCT, type BEPC"
+    }
   ],
   "mockExams": [
-    {"id": "bepc-pct-epreuve-1", "title": "Épreuve blanche de PCT — BEPC", "minutes": 120,
-     "instructions": "Épreuve notée sur 20 points. Durée indicative : 2 heures (durée officielle à vérifier sur les textes officiels). Calculatrice non programmable autorisée si le règlement le permet. Donne chaque résultat avec son unité. On prendra g = 10 N/kg sur la Terre.",
-     "outOf": 20,
-     "sections": [
-       {"title": "Partie A — Chimie (7 points)", "exercises": ["bepc-pct-mock-chimie"]},
-       {"title": "Partie B — Physique (13 points)", "exercises": ["bepc-pct-mock-elec", "bepc-pct-mock-meca", "bepc-pct-mock-optique"]}
-     ]}
+    {
+      "id": "bepc-pct-epreuve-1",
+      "title": "Épreuve blanche de PCT — BEPC",
+      "minutes": 120,
+      "instructions": "Épreuve notée sur 20 points. Durée indicative : 2 heures (durée officielle à vérifier sur les textes officiels). Calculatrice non programmable autorisée si le règlement le permet. Donne chaque résultat avec son unité. On prendra g = 10 N/kg sur la Terre.",
+      "outOf": 20,
+      "sections": [
+        {
+          "title": "Partie A — Chimie (7 points)",
+          "exercises": [
+            "bepc-pct-mock-chimie"
+          ]
+        },
+        {
+          "title": "Partie B — Physique (13 points)",
+          "exercises": [
+            "bepc-pct-mock-elec",
+            "bepc-pct-mock-meca",
+            "bepc-pct-mock-optique"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bepc-pct-epreuve-2",
+      "title": "Épreuve blanche n° 2 de PCT — BEPC",
+      "minutes": 120,
+      "instructions": "Épreuve notée sur 20 points. Durée indicative : 2 heures (durée officielle à vérifier). Calculatrice non programmable autorisée si le règlement le permet. Donne chaque résultat avec son unité. On prendra g = 10 N/kg.",
+      "outOf": 20,
+      "sections": [
+        {
+          "title": "Partie A — Chimie (7 points)",
+          "exercises": [
+            "bepc-pct-epreuve-blanche-01"
+          ]
+        },
+        {
+          "title": "Partie B — Physique (9 points)",
+          "exercises": [
+            "bepc-pct-epreuve-blanche-02",
+            "bepc-pct-epreuve-blanche-03"
+          ]
+        },
+        {
+          "title": "Partie C — Lumière et énergie (4 points)",
+          "exercises": [
+            "bepc-pct-epreuve-blanche-04"
+          ]
+        }
+      ]
+    }
   ]
 }

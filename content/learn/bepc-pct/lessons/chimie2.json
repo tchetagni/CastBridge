@@ -1,0 +1,1723 @@
+{
+ "chapter": "bepc-pct-chimie2",
+ "lessons": [
+  {
+   "id": "bepc-pct-reactions",
+   "title": "Réactions chimiques et équations-bilans",
+   "minutes": 30,
+   "programRef": "3e — Chimie : réaction chimique, conservation de la masse, équation-bilan (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer transformation physique et réaction chimique.",
+    "Écrire et équilibrer une équation-bilan simple.",
+    "Appliquer la conservation de la masse."
+   ],
+   "prerequisites": [
+    "bepc-pct-acidebase"
+   ],
+   "exercises": [
+    "bepc-pct-reactions-01",
+    "bepc-pct-reactions-02",
+    "bepc-pct-reactions-03",
+    "bepc-pct-reactions-04",
+    "bepc-pct-reactions-05",
+    "bepc-pct-reactions-06"
+   ],
+   "selfCheck": [
+    "bepc-pct-reactions-q1",
+    "bepc-pct-reactions-q2",
+    "bepc-pct-reactions-q3",
+    "bepc-pct-reactions-q4",
+    "bepc-pct-reactions-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Réaction chimique",
+     "md": "Dans une **réaction chimique**, des substances (les **réactifs**) disparaissent et de nouvelles substances (les **produits**) apparaissent. On l'écrit : réactifs → produits. Exemple : le dihydrogène réagit avec le dioxygène pour donner de l'eau. Fondre de la glace est seulement un changement d'état : l'eau reste de l'eau."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Conservation de la masse et des atomes",
+     "md": "Au cours d'une réaction, les atomes ne disparaissent pas et ne se créent pas : ils se réarrangent. Le **nombre d'atomes de chaque élément** est donc le même avant et après, et la **masse totale se conserve** : masse des réactifs consommés = masse des produits formés (loi de Lavoisier)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Équilibrer une équation-bilan",
+     "md": "1. Écris les formules des réactifs et des produits.\n2. Compte les atomes de chaque élément de chaque côté.\n3. Ajuste les **coefficients** devant les formules (jamais les indices dans une formule) jusqu'à égalité.\n4. Vérifie en recomptant. Exemples : $2\\text{H}_2 + \\text{O}_2 \\to 2\\text{H}_2\\text{O}$ ; $\\text{CH}_4 + 2\\text{O}_2 \\to \\text{CO}_2 + 2\\text{H}_2\\text{O}$."
+    },
+    {
+     "type": "illustration",
+     "caption": "Une équation équilibrée a le même nombre d'atomes de chaque côté.",
+     "alt": "L'équation 2 H2 + O2 donne 2 H2O avec 4 atomes d'hydrogène et 2 d'oxygène de chaque côté.",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 200,
+      "items": [
+       {
+        "t": "text",
+        "x": 220,
+        "y": 28,
+        "text": "2 H₂ + O₂ → 2 H₂O",
+        "size": 22,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 55,
+        "w": 190,
+        "h": 80,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 55,
+        "w": 190,
+        "h": 80,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 115,
+        "y": 85,
+        "text": "Avant : 4 H",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 115,
+        "y": 115,
+        "text": "2 O",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 325,
+        "y": 85,
+        "text": "Après : 4 H",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 325,
+        "y": 115,
+        "text": "2 O",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 175,
+        "text": "même nombre d'atomes de chaque côté",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : équilibrer",
+     "statement": "Équilibre : Fe + O₂ → Fe₂O₃.",
+     "steps": [
+      {
+       "md": "À droite, il y a 2 Fe et 3 O. Pour avoir un nombre pair d'atomes d'oxygène, on met 2 Fe₂O₃ : 4 Fe et 6 O, donc 3 O₂ à gauche."
+      },
+      {
+       "md": "Il faut alors 4 Fe à gauche."
+      },
+      {
+       "md": "Vérification : 4 Fe et 6 O de chaque côté."
+      }
+     ],
+     "answer": "**4 Fe + 3 O₂ → 2 Fe₂O₃**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : conservation de la masse",
+     "statement": "4,8 g de magnésium réagissent avec 3,2 g de dioxygène pour former de l'oxyde de magnésium. Quelle masse d'oxyde obtient-on ?",
+     "steps": [
+      {
+       "md": "Équation : 2 Mg + O₂ → 2 MgO."
+      },
+      {
+       "md": "Masse conservée :",
+       "tex": "m_{\\text{MgO}} = 4{,}8 + 3{,}2 = 8{,}0 \\text{ g}"
+      }
+     ],
+     "answer": "**8,0 g d'oxyde de magnésium**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Changer un indice pour équilibrer (écrire H₂O₂ au lieu de H₂O) : on ne modifie que les **coefficients**.\n- Croire que la masse « disparaît » quand un gaz est produit : le gaz a une masse.\n- Confondre réactifs et produits, ou oublier le dioxygène de l'air dans une combustion."
+    }
+   ],
+   "reviewNotes": [
+    "Les formules (H₂O, CO₂, MgO, Fe₂O₃…) sont des formules classiques ; vérifier la notation exigée (indices en bas).",
+    "Aucune expérience dangereuse n'est proposée : les calculs de masse sont présentés comme des exercices numériques."
+   ]
+  },
+  {
+   "id": "bepc-pct-mole",
+   "title": "Quantité de matière, mole et masse molaire",
+   "minutes": 30,
+   "programRef": "3e — Chimie : quantité de matière, mole, masse molaire, concentration molaire (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Définir la mole et la masse molaire.",
+    "Calculer une quantité de matière à partir d'une masse.",
+    "Calculer une concentration molaire."
+   ],
+   "prerequisites": [
+    "bepc-pct-reactions"
+   ],
+   "exercises": [
+    "bepc-pct-mole-01",
+    "bepc-pct-mole-02",
+    "bepc-pct-mole-03",
+    "bepc-pct-mole-04",
+    "bepc-pct-mole-05",
+    "bepc-pct-mole-06"
+   ],
+   "selfCheck": [
+    "bepc-pct-mole-q1",
+    "bepc-pct-mole-q2",
+    "bepc-pct-mole-q3",
+    "bepc-pct-mole-q4",
+    "bepc-pct-mole-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La mole",
+     "md": "Les atomes et les molécules sont trop petits pour être comptés un par un. On les compte « par paquets » : une **mole** est un paquet de $6{,}02 \\times 10^{23}$ entités (nombre d'Avogadro). La **quantité de matière** $n$ s'exprime en moles (mol)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Masse molaire",
+     "md": "La **masse molaire** $M$ est la masse d'une mole d'entités, en g/mol. On l'obtient en additionnant les masses molaires atomiques. Exemples : $M(\\text{H}_2\\text{O}) = 2 \\times 1 + 16 = 18$ g/mol ; $M(\\text{CO}_2) = 12 + 2 \\times 16 = 44$ g/mol ; $M(\\text{NaCl}) = 23 + 35{,}5 = 58{,}5$ g/mol.",
+     "tex": "n = \\frac{m}{M}"
+    },
+    {
+     "type": "illustration",
+     "caption": "Le triangle des relations entre m, n et M.",
+     "alt": "Un triangle avec m en haut et n et M en bas.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 190,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         210,
+         20,
+         60,
+         170,
+         360,
+         170
+        ],
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 105,
+        "x2": 300,
+        "y2": 105,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 105,
+        "x2": 210,
+        "y2": 170,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 80,
+        "text": "m",
+        "size": 24,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 150,
+        "text": "n",
+        "size": 24,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 150,
+        "text": "M",
+        "size": 24,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 60,
+        "text": "m = n × M",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 60,
+        "text": "n = m / M",
+        "size": 16,
+        "color": "blue",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Concentration molaire",
+     "md": "Quand on dissout une quantité de matière $n$ dans un volume $V$ de solution, la **concentration molaire** est $C = \\frac{n}{V}$ en **mol/L** ($V$ en litres). On la relie à la concentration massique par $C_m = C \\times M$ (en g/L).",
+     "tex": "C = \\frac{n}{V} \\qquad C_m = C \\times M"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : de la masse aux moles",
+     "statement": "Quelle est la quantité de matière dans 36 g d'eau ?",
+     "steps": [
+      {
+       "md": "Masse molaire :",
+       "tex": "M = 18 \\text{ g/mol}"
+      },
+      {
+       "md": "Quantité de matière :",
+       "tex": "n = \\frac{36}{18} = 2 \\text{ mol}"
+      }
+     ],
+     "answer": "**n = 2 mol**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : concentration molaire",
+     "statement": "On dissout 11,7 g de sel (NaCl) dans de l'eau pour obtenir 0,5 L de solution. Calcule la concentration molaire.",
+     "steps": [
+      {
+       "md": "Quantité de sel :",
+       "tex": "n = \\frac{11{,}7}{58{,}5} = 0{,}2 \\text{ mol}"
+      },
+      {
+       "md": "Concentration :",
+       "tex": "C = \\frac{0{,}2}{0{,}5} = 0{,}4 \\text{ mol/L}"
+      }
+     ],
+     "answer": "**C = 0,4 mol/L**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Utiliser un volume en mL dans $C = n / V$ : convertis en litres (250 mL = 0,25 L).\n- Confondre masse (g) et quantité de matière (mol).\n- Oublier un indice en calculant M : dans H₂O il y a **2** atomes d'hydrogène."
+    }
+   ],
+   "reviewNotes": [
+    "Doute important : la mole et la concentration molaire sont peut-être traitées en seconde et non en 3e selon le programme en vigueur ; fiche à retirer ou garder selon avis de l'enseignant.",
+    "Masses molaires atomiques arrondies : H = 1 ; C = 12 ; N = 14 ; O = 16 ; Na = 23 ; Cl = 35,5 ; Fe = 56 ; Mg = 24.",
+    "N_A ≈ 6,02 × 10²³ par mole."
+   ]
+  },
+  {
+   "id": "bepc-pct-metaux-corrosion",
+   "title": "Métaux, alliages et corrosion",
+   "minutes": 25,
+   "programRef": "3e — Chimie : métaux usuels, action de l'air et de l'eau, corrosion, protection (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Citer des propriétés des métaux et des alliages courants.",
+    "Expliquer la corrosion du fer et les moyens de s'en protéger.",
+    "Écrire l'équation de la rouille et calculer des masses."
+   ],
+   "prerequisites": [
+    "bepc-pct-reactions"
+   ],
+   "exercises": [
+    "bepc-pct-metaux-corrosion-01",
+    "bepc-pct-metaux-corrosion-02",
+    "bepc-pct-metaux-corrosion-03",
+    "bepc-pct-metaux-corrosion-04",
+    "bepc-pct-metaux-corrosion-05",
+    "bepc-pct-metaux-corrosion-06"
+   ],
+   "selfCheck": [
+    "bepc-pct-metaux-corrosion-q1",
+    "bepc-pct-metaux-corrosion-q2",
+    "bepc-pct-metaux-corrosion-q3",
+    "bepc-pct-metaux-corrosion-q4",
+    "bepc-pct-metaux-corrosion-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les métaux et les alliages",
+     "md": "Les métaux usuels (fer, cuivre, aluminium, zinc) sont brillants, bons conducteurs de la chaleur et du courant, et souvent malléables. Un **alliage** est un mélange de métaux ou de métal et d'autres éléments : l'**acier** (fer et un peu de carbone), le **laiton** (cuivre et zinc), le **bronze** (cuivre et étain)."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "La corrosion du fer",
+     "md": "Le fer exposé à l'air humide se couvre de **rouille** brun-rouge, c'est la **corrosion**. Il faut à la fois du **dioxygène** (air) et de l'**eau** (humidité). Équation : $4\\text{Fe} + 3\\text{O}_2 \\to 2\\text{Fe}_2\\text{O}_3$ (oxyde de fer III). La rouille est friable : elle s'effrite et le fer s'use. L'aluminium, lui, se couvre d'une fine couche d'oxyde qui le protège."
+    },
+    {
+     "type": "illustration",
+     "caption": "Quatre tubes avec un clou de fer : la rouille demande de l'eau et du dioxygène.",
+     "alt": "Quatre tubes à essai contenant chacun un clou : eau et air, air sec, eau bouillie sous huile, eau salée.",
+     "figure": {
+      "kind": "shapes",
+      "w": 460,
+      "h": 230,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 120,
+        "w": 90,
+        "h": 90,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 120,
+        "w": 90,
+        "h": 90,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 240,
+        "y": 120,
+        "w": 90,
+        "h": 90,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 350,
+        "y": 120,
+        "w": 90,
+        "h": 90,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 65,
+        "y": 100,
+        "text": "Tube 1",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 175,
+        "y": 100,
+        "text": "Tube 2",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 285,
+        "y": 100,
+        "text": "Tube 3",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 395,
+        "y": 100,
+        "text": "Tube 4",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 65,
+        "y": 160,
+        "text": "eau",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 65,
+        "y": 185,
+        "text": "air",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 175,
+        "y": 170,
+        "text": "air sec",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 285,
+        "y": 160,
+        "text": "eau bouillie",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 285,
+        "y": 185,
+        "text": "+ huile",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 395,
+        "y": 170,
+        "text": "eau salée",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 65,
+        "y": 35,
+        "text": "rouille",
+        "size": 14,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 175,
+        "y": 35,
+        "text": "pas de rouille",
+        "size": 14,
+        "color": "green",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 285,
+        "y": 35,
+        "text": "pas de rouille",
+        "size": 14,
+        "color": "green",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 395,
+        "y": 35,
+        "text": "rouille +",
+        "size": 14,
+        "color": "red",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Se protéger de la rouille",
+     "md": "On isole le fer de l'air et de l'eau : **peinture**, **graissage** (chaîne de vélo), **galvanisation** (dépôt de zinc : tôles de toiture), ou on utilise un alliage résistant : l'**acier inoxydable**. L'eau salée et l'humidité de la côte accélèrent la corrosion."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : lire une expérience",
+     "statement": "Un clou de fer rouille dans le tube 1 (eau + air), mais pas dans le tube 2 (air sec) ni dans le tube 3 (eau bouillie sous une couche d'huile). Que conclut-on ?",
+     "steps": [
+      {
+       "md": "Tube 2 : pas d'eau, pas de rouille."
+      },
+      {
+       "md": "Tube 3 : l'eau bouillie ne contient plus de dioxygène dissous et l'huile empêche l'air d'entrer : pas de rouille."
+      }
+     ],
+     "answer": "**La rouille nécessite à la fois de l'eau et du dioxygène.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : masse de rouille",
+     "statement": "Quelle masse d'oxyde de fer Fe₂O₃ obtient-on avec 5,6 g de fer ? (Fe = 56 g/mol ; O = 16 g/mol)",
+     "steps": [
+      {
+       "md": "Quantité de fer :",
+       "tex": "n(\\text{Fe}) = \\frac{5{,}6}{56} = 0{,}1 \\text{ mol}"
+      },
+      {
+       "md": "4 Fe donnent 2 Fe₂O₃ donc :",
+       "tex": "n(\\text{Fe}_2\\text{O}_3) = \\frac{0{,}1}{2} = 0{,}05 \\text{ mol}"
+      },
+      {
+       "md": "M(Fe₂O₃) = 160 g/mol :",
+       "tex": "m = 0{,}05 \\times 160 = 8 \\text{ g}"
+      }
+     ],
+     "answer": "**8 g de rouille**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que tous les métaux rouillent : seul le fer (et l'acier) donne la rouille.\n- Oublier que le fer a besoin d'eau **et** de dioxygène : un des deux seuls ne suffit pas.\n- Penser que la peinture arrête la rouille déjà formée : elle protège seulement si la surface est propre."
+    }
+   ],
+   "reviewNotes": [
+    "Compositions d'alliages : acier (fer + un peu de carbone), laiton (cuivre + zinc), bronze (cuivre + étain) : faits classiques.",
+    "Expérience des 4 tubes : à réaliser avec la supervision du professeur, sans produits dangereux."
+   ]
+  },
+  {
+   "id": "bepc-pct-hydrocarbures",
+   "title": "Hydrocarbures et combustions",
+   "minutes": 30,
+   "programRef": "3e — Chimie : hydrocarbures, alcanes, combustions complète et incomplète (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître un hydrocarbure et écrire la formule d'un alcane.",
+    "Écrire l'équation de combustion complète d'un alcane.",
+    "Citer les dangers de la combustion incomplète."
+   ],
+   "prerequisites": [
+    "bepc-pct-reactions"
+   ],
+   "exercises": [
+    "bepc-pct-hydrocarbures-01",
+    "bepc-pct-hydrocarbures-02",
+    "bepc-pct-hydrocarbures-03",
+    "bepc-pct-hydrocarbures-04",
+    "bepc-pct-hydrocarbures-05",
+    "bepc-pct-hydrocarbures-06"
+   ],
+   "selfCheck": [
+    "bepc-pct-hydrocarbures-q1",
+    "bepc-pct-hydrocarbures-q2",
+    "bepc-pct-hydrocarbures-q3",
+    "bepc-pct-hydrocarbures-q4",
+    "bepc-pct-hydrocarbures-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les hydrocarbures",
+     "md": "Un **hydrocarbure** est un composé qui ne contient que du **carbone** (C) et de l'**hydrogène** (H). Les **alcanes** ont pour formule générale $\\text{C}_n\\text{H}_{2n+2}$ : méthane CH₄ ($n=1$), éthane C₂H₆, propane C₃H₈, butane C₄H₁₀. Le gaz des bouteilles domestiques est surtout du propane et du butane ; l'essence et le gasoil viennent du pétrole."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Combustion complète",
+     "md": "Une combustion demande un **combustible**, un **comburant** (le dioxygène de l'air) et une **énergie d'activation** (étincelle, flamme). Quand le dioxygène est en quantité suffisante, la combustion est **complète** : on obtient du **dioxyde de carbone** et de l'**eau**. Exemples : $\\text{CH}_4 + 2\\text{O}_2 \\to \\text{CO}_2 + 2\\text{H}_2\\text{O}$ ; $\\text{C}_3\\text{H}_8 + 5\\text{O}_2 \\to 3\\text{CO}_2 + 4\\text{H}_2\\text{O}$."
+    },
+    {
+     "type": "illustration",
+     "caption": "La combustion complète d'un alcane donne du dioxyde de carbone et de l'eau.",
+     "alt": "Un hydrocarbure et du dioxygène donnent du CO2 et de l'eau.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 200,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 70,
+        "cy": 100,
+        "r": 30,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 106,
+        "text": "C₃H₈",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 150,
+        "text": "combustible",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "circle",
+        "cx": 70,
+        "cy": 40,
+        "r": 20,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 46,
+        "text": "O₂",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 100,
+        "x2": 190,
+        "y2": 100,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 85,
+        "text": "flamme",
+        "size": 14,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "circle",
+        "cx": 260,
+        "cy": 60,
+        "r": 25,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 66,
+        "text": "CO₂",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 260,
+        "cy": 140,
+        "r": 25,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 146,
+        "text": "H₂O",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 360,
+        "y": 106,
+        "text": "produits",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Combustion incomplète et danger",
+     "md": "Quand l'air manque (pièce fermée, cuisinière mal réglée, braséro dans une chambre), la combustion est **incomplète** : il se forme de la suie (carbone) et du **monoxyde de carbone CO**, un gaz **incolore, inodore et très toxique**. On cuisine toujours dans un local **bien aéré**. La combustion produit aussi du CO₂, gaz à effet de serre."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : formule d'un alcane",
+     "statement": "Donne la formule de l'alcane à 6 atomes de carbone.",
+     "steps": [
+      {
+       "md": "Formule générale : CₙH₂ₙ₊₂ avec n = 6."
+      },
+      {
+       "md": "Nombre d'hydrogènes :",
+       "tex": "2 \\times 6 + 2 = 14"
+      }
+     ],
+     "answer": "**C₆H₁₄**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : combustion du propane",
+     "statement": "On brûle 44 g de propane (M = 44 g/mol) dans assez de dioxygène. Quelle masse de dioxyde de carbone se forme ? (M(CO₂) = 44 g/mol)",
+     "steps": [
+      {
+       "md": "Quantité de propane :",
+       "tex": "n = \\frac{44}{44} = 1 \\text{ mol}"
+      },
+      {
+       "md": "C₃H₈ + 5 O₂ → 3 CO₂ + 4 H₂O : 1 mol donne 3 mol de CO₂.",
+       "tex": "m = 3 \\times 44 = 132 \\text{ g}"
+      }
+     ],
+     "answer": "**132 g de dioxyde de carbone**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier que les produits de la combustion complète sont CO₂ **et** H₂O.\n- Dire que le monoxyde de carbone se sent à l'odeur : il est inodore.\n- Ne pas vérifier l'équilibrage : compte d'abord les C, puis les H, puis les O."
+    }
+   ],
+   "reviewNotes": [
+    "Doute : formule générale des alcanes CnH2n+2 et masses molaires (M(CH4) = 16 ; M(C3H8) = 44 ; M(C4H10) = 58 g/mol).",
+    "Aucune expérience : le gaz domestique est utilisé seulement comme exemple d'application."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quelle équation est correctement équilibrée ?",
+   "choices": [
+    "2H₂ + O₂ → 2H₂O",
+    "H₂ + O₂ → H₂O",
+    "2H₂ + 2O₂ → 2H₂O",
+    "H₂ + 2O₂ → 2H₂O"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il faut 4 H et 2 O de chaque côté : 2 H₂ + O₂ → 2 H₂O.",
+   "id": "bepc-pct-reactions-01",
+   "tier": "application",
+   "lesson": "bepc-pct-reactions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "12 g de carbone brûlent avec 32 g de dioxygène pour former du dioxyde de carbone. Quelle masse de dioxyde de carbone se forme (en g) ?",
+   "answer": 44,
+   "unit": "g",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Conservation de la masse : 12 + 32 = 44 g.",
+   "id": "bepc-pct-reactions-02",
+   "tier": "application",
+   "lesson": "bepc-pct-reactions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : au cours d'une réaction chimique, le nombre d'atomes de chaque élément se conserve.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les atomes se réarrangent mais ne disparaissent pas : c'est la base de l'équation-bilan.",
+   "id": "bepc-pct-reactions-03",
+   "tier": "application",
+   "lesson": "bepc-pct-reactions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Équilibre : C₃H₈ + ? O₂ → 3 CO₂ + 4 H₂O. Quel est le coefficient du dioxygène ?",
+   "answer": 5,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "À droite : 3 × 2 + 4 × 1 = 10 atomes d'oxygène, donc 5 O₂ à gauche.",
+   "id": "bepc-pct-reactions-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-pct-reactions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est l'équation-bilan de la formation de la rouille (oxyde de fer III) ?",
+   "choices": [
+    "Fe + O₂ → FeO₂",
+    "2Fe + 3O₂ → Fe₂O₃",
+    "4Fe + 3O₂ → 2Fe₂O₃",
+    "4Fe + 2O₂ → 2Fe₂O₃"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "4 Fe et 6 O de chaque côté : 4 Fe + 3 O₂ → 2 Fe₂O₃.",
+   "id": "bepc-pct-reactions-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-pct-reactions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Lors d'une réaction entre le magnésium et le dioxygène, on forme de l'oxyde de magnésium. Les masses sont dans le rapport : 3 g de magnésium pour 2 g de dioxygène.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quelle est l'équation-bilan ?",
+     "choices": [
+      "Mg + O₂ → MgO₂",
+      "2Mg + O₂ → 2MgO",
+      "Mg + 2O₂ → MgO",
+      "2Mg + 2O₂ → MgO"
+     ],
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "2 Mg et 2 O de chaque côté.",
+     "id": "bepc-pct-reactions-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle masse d'oxyde se forme à partir de 2,4 g de magnésium et 1,6 g de dioxygène (en g) ?",
+     "answer": 4,
+     "unit": "g",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "2,4 + 1,6 = 4,0 g (le rapport 3/2 est respecté).",
+     "id": "bepc-pct-reactions-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle masse de dioxygène faut-il pour consommer 6 g de magnésium (en g) ?",
+     "answer": 4,
+     "unit": "g",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Le rapport 3 g Mg pour 2 g O₂ donne 6 g Mg pour 4 g O₂.",
+     "id": "bepc-pct-reactions-06-c"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle masse d'oxyde obtient-on alors (en g) ?",
+     "answer": 10,
+     "unit": "g",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "6 + 4 = 10 g.",
+     "id": "bepc-pct-reactions-06-d"
+    }
+   ],
+   "difficulty": 2,
+   "id": "bepc-pct-reactions-06",
+   "tier": "examen",
+   "lesson": "bepc-pct-reactions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment appelle-t-on les substances qui disparaissent au cours d'une réaction ?",
+   "choices": [
+    "Les produits",
+    "Les catalyseurs",
+    "Les coefficients",
+    "Les réactifs"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les réactifs sont consommés et les produits sont formés.",
+   "id": "bepc-pct-reactions-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-reactions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans 2 H₂O, que représente le chiffre 2 devant H₂O ?",
+   "choices": [
+    "Un indice : 2 atomes d'oxygène",
+    "Une charge électrique",
+    "Un coefficient : 2 molécules d'eau",
+    "Une masse"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le coefficient indique le nombre de molécules.",
+   "id": "bepc-pct-reactions-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-reactions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Fondre un glaçon est :",
+   "choices": [
+    "Une réaction chimique",
+    "Un changement d'état physique",
+    "Une combustion",
+    "Une électrolyse"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'eau reste de l'eau (H₂O) : aucune nouvelle substance.",
+   "id": "bepc-pct-reactions-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-reactions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle loi dit que la masse totale se conserve au cours d'une réaction ?",
+   "choices": [
+    "La loi de Lavoisier",
+    "La loi d'Ohm",
+    "La loi de la réflexion",
+    "La loi d'Archimède"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La conservation de la masse est attribuée à Lavoisier.",
+   "id": "bepc-pct-reactions-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-reactions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien d'atomes d'hydrogène y a-t-il dans 3 H₂O ?",
+   "choices": [
+    "3",
+    "2",
+    "6",
+    "9"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "3 × 2 = 6 atomes d'hydrogène.",
+   "id": "bepc-pct-reactions-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-reactions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule la quantité de matière dans 88 g de dioxyde de carbone CO₂ (M = 44 g/mol), en mol.",
+   "answer": 2,
+   "unit": "mol",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "n = m / M = 88 / 44 = 2 mol.",
+   "id": "bepc-pct-mole-01",
+   "tier": "application",
+   "lesson": "bepc-pct-mole",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quelle masse d'eau (M = 18 g/mol) correspond à 0,5 mol ? (en g)",
+   "answer": 9,
+   "unit": "g",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "m = n × M = 0,5 × 18 = 9 g.",
+   "id": "bepc-pct-mole-02",
+   "tier": "application",
+   "lesson": "bepc-pct-mole",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la masse molaire du chlorure de sodium NaCl (Na = 23 g/mol, Cl = 35,5 g/mol) ?",
+   "choices": [
+    "58,5 g/mol",
+    "12,5 g/mol",
+    "28,75 g/mol",
+    "117 g/mol"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "M = 23 + 35,5 = 58,5 g/mol.",
+   "id": "bepc-pct-mole-03",
+   "tier": "application",
+   "lesson": "bepc-pct-mole",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "On dissout 4 g d'hydroxyde de sodium NaOH (M = 40 g/mol) pour obtenir 250 mL de solution. Calcule la concentration molaire (en mol/L).",
+   "answer": 0.4,
+   "tolerance": 0.001,
+   "unit": "mol/L",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "n = 4 / 40 = 0,1 mol ; V = 0,25 L ; C = 0,1 / 0,25 = 0,4 mol/L.",
+   "id": "bepc-pct-mole-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-pct-mole",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quelle masse de sel NaCl (M = 58,5 g/mol) faut-il dissoudre pour obtenir 2 L de solution à 0,1 mol/L ? (en g)",
+   "answer": 11.7,
+   "tolerance": 0.01,
+   "unit": "g",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "n = C × V = 0,1 × 2 = 0,2 mol ; m = 0,2 × 58,5 = 11,7 g.",
+   "id": "bepc-pct-mole-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-pct-mole",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Tchonang dissout 5,85 g de sel de cuisine (NaCl) dans de l'eau pour obtenir 250 mL de solution. M(NaCl) = 58,5 g/mol.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Calcule la quantité de matière de sel (en mol).",
+     "answer": 0.1,
+     "tolerance": 0.001,
+     "unit": "mol",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "n = 5,85 / 58,5 = 0,1 mol.",
+     "id": "bepc-pct-mole-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule la concentration molaire (en mol/L).",
+     "answer": 0.4,
+     "tolerance": 0.001,
+     "unit": "mol/L",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "C = 0,1 / 0,25 = 0,4 mol/L.",
+     "id": "bepc-pct-mole-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule la concentration massique (en g/L).",
+     "answer": 23.4,
+     "tolerance": 0.01,
+     "unit": "g/L",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "Cm = m / V = 5,85 / 0,25 = 23,4 g/L (ou C × M = 0,4 × 58,5).",
+     "id": "bepc-pct-mole-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "method": "Passe d'abord de la masse à la quantité de matière, puis divise par le volume en litres.",
+   "id": "bepc-pct-mole-06",
+   "tier": "examen",
+   "lesson": "bepc-pct-mole",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est l'unité de la quantité de matière ?",
+   "choices": [
+    "Le gramme",
+    "La mole",
+    "Le litre",
+    "Le pascal"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La quantité de matière s'exprime en moles (mol).",
+   "id": "bepc-pct-mole-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-mole",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle masse a une mole de fer (M = 56 g/mol) ?",
+   "choices": [
+    "1 g",
+    "6,02 g",
+    "560 g",
+    "56 g"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Par définition de la masse molaire : 56 g pour 1 mol.",
+   "id": "bepc-pct-mole-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-mole",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la masse molaire de H₂O ?",
+   "choices": [
+    "10 g/mol",
+    "17 g/mol",
+    "3 g/mol",
+    "18 g/mol"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "2 × 1 + 16 = 18 g/mol.",
+   "id": "bepc-pct-mole-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-mole",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une solution contient 0,25 mol de soluté dans 0,5 L. Quelle est sa concentration ?",
+   "choices": [
+    "0,125 mol/L",
+    "2 mol/L",
+    "5 mol/L",
+    "0,5 mol/L"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C = n / V = 0,25 / 0,5 = 0,5 mol/L.",
+   "id": "bepc-pct-mole-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-mole",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien d'entités contient environ une mole ?",
+   "choices": [
+    "6,02 × 10²³",
+    "6,02 × 10³",
+    "1 000",
+    "6,02 × 10⁻²³"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est le nombre d'Avogadro.",
+   "id": "bepc-pct-mole-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-mole",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelles conditions faut-il pour que le fer rouille ?",
+   "choices": [
+    "De l'eau seulement, sans air",
+    "De l'eau et du dioxygène",
+    "Du dioxygène seulement, sans humidité",
+    "De l'huile et du froid"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le fer rouille en présence d'eau et de dioxygène.",
+   "id": "bepc-pct-metaux-corrosion-01",
+   "tier": "application",
+   "lesson": "bepc-pct-metaux-corrosion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : l'aluminium rouille exactement comme le fer.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'aluminium se couvre d'une couche mince d'oxyde qui le protège ; la rouille est propre au fer.",
+   "id": "bepc-pct-metaux-corrosion-02",
+   "tier": "application",
+   "lesson": "bepc-pct-metaux-corrosion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque moyen de protection à son exemple.",
+   "pairs": [
+    [
+     "Peinture",
+     "Portail en fer"
+    ],
+    [
+     "Galvanisation",
+     "Tôle de toiture"
+    ],
+    [
+     "Graissage",
+     "Chaîne de vélo"
+    ],
+    [
+     "Acier inoxydable",
+     "Couverts de table"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 1,
+   "explanation": "La peinture et le graissage isolent le fer ; la galvanisation dépose du zinc ; l'inox est un alliage résistant à la corrosion.",
+   "id": "bepc-pct-metaux-corrosion-03",
+   "tier": "application",
+   "lesson": "bepc-pct-metaux-corrosion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quelle masse de rouille Fe₂O₃ se forme à partir de 11,2 g de fer ? (Fe = 56 g/mol, Fe₂O₃ = 160 g/mol), en g.",
+   "answer": 16,
+   "unit": "g",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "n(Fe) = 11,2 / 56 = 0,2 mol ; n(Fe₂O₃) = 0,1 mol ; m = 0,1 × 160 = 16 g.",
+   "id": "bepc-pct-metaux-corrosion-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-pct-metaux-corrosion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un clou est plongé dans de l'eau bouillie, recouverte d'une couche d'huile. Pourquoi ne rouille-t-il pas ?",
+   "choices": [
+    "Il n'y a pas d'eau",
+    "Il n'y a pas de dioxygène dissous ni d'air au contact",
+    "L'huile attire le fer",
+    "L'eau chaude est un gaz"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "L'ébullition chasse l'air dissous et l'huile empêche l'air de se redissoudre.",
+   "id": "bepc-pct-metaux-corrosion-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-pct-metaux-corrosion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Amina place quatre clous en fer : (1) dans de l'eau du robinet ; (2) dans un tube fermé contenant de l'air sec ; (3) dans de l'eau salée ; (4) dans de l'eau bouillie recouverte d'huile. Elle observe au bout de dix jours.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quels clous rouillent ?",
+     "choices": [
+      "Les clous 2 et 4",
+      "Les clous 1 et 3",
+      "Seulement le clou 2",
+      "Aucun"
+     ],
+     "answer": 1,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "Les clous 1 et 3 ont de l'eau et de l'air ; le sel accélère la rouille.",
+     "id": "bepc-pct-metaux-corrosion-06-a"
+    },
+    {
+     "kind": "truefalse",
+     "prompt": "Le clou 2 rouille parce qu'il est au contact de l'air.",
+     "answer": false,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "L'air sec ne contient pas d'eau : le fer ne rouille pas.",
+     "id": "bepc-pct-metaux-corrosion-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle masse d'oxyde de fer obtient-on avec 5,6 g de fer qui rouille complètement ? (en g)",
+     "answer": 8,
+     "unit": "g",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "5,6 / 56 = 0,1 mol Fe donne 0,05 mol Fe₂O₃ de 160 g/mol : 8 g.",
+     "id": "bepc-pct-metaux-corrosion-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "bepc-pct-metaux-corrosion-06",
+   "tier": "examen",
+   "lesson": "bepc-pct-metaux-corrosion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment s'appelle le mélange de fer et d'un peu de carbone ?",
+   "choices": [
+    "Le laiton",
+    "Le bronze",
+    "Le zinc",
+    "L'acier"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'acier est un alliage fer-carbone.",
+   "id": "bepc-pct-metaux-corrosion-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-metaux-corrosion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le produit de la corrosion du fer ?",
+   "choices": [
+    "Le sel",
+    "Le sucre",
+    "Le dihydrogène",
+    "La rouille (oxyde de fer)"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La rouille est de l'oxyde de fer III Fe₂O₃.",
+   "id": "bepc-pct-metaux-corrosion-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-metaux-corrosion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pourquoi galvanise-t-on les tôles de toiture ?",
+   "choices": [
+    "Le zinc protège le fer de l'eau et de l'air",
+    "Pour les rendre plus lourdes",
+    "Pour les rendre plus chaudes",
+    "Pour qu'elles rouillent plus vite"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le revêtement de zinc isole le fer.",
+   "id": "bepc-pct-metaux-corrosion-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-metaux-corrosion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est l'alliage de cuivre et de zinc ?",
+   "choices": [
+    "Le laiton",
+    "L'acier",
+    "L'aluminium",
+    "Le fer-blanc"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le laiton est cuivre + zinc.",
+   "id": "bepc-pct-metaux-corrosion-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-metaux-corrosion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel environnement accélère la rouille ?",
+   "choices": [
+    "Un air sec",
+    "Un clou sous huile",
+    "Un tube sans air",
+    "Un air humide et salé"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'humidité et le sel favorisent la corrosion.",
+   "id": "bepc-pct-metaux-corrosion-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-metaux-corrosion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Combien d'atomes d'hydrogène contient l'alcane à 5 atomes de carbone ?",
+   "answer": 12,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C₅H₁₂ : 2 × 5 + 2 = 12.",
+   "id": "bepc-pct-hydrocarbures-01",
+   "tier": "application",
+   "lesson": "bepc-pct-hydrocarbures",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quels sont les produits de la combustion complète d'un hydrocarbure ?",
+   "choices": [
+    "Du monoxyde de carbone et du carbone",
+    "Du dihydrogène et de l'azote",
+    "De la rouille",
+    "Du dioxyde de carbone et de l'eau"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Combustion complète : CO₂ + H₂O.",
+   "id": "bepc-pct-hydrocarbures-02",
+   "tier": "application",
+   "lesson": "bepc-pct-hydrocarbures",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : la combustion incomplète peut produire du monoxyde de carbone, un gaz toxique.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le CO se forme quand le dioxygène manque et il est dangereux.",
+   "id": "bepc-pct-hydrocarbures-03",
+   "tier": "application",
+   "lesson": "bepc-pct-hydrocarbures",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Équilibre : 2 C₂H₆ + ? O₂ → 4 CO₂ + 6 H₂O. Quel est le coefficient du dioxygène ?",
+   "answer": 7,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "À droite : 4 × 2 + 6 = 14 atomes d'oxygène, donc 7 O₂.",
+   "id": "bepc-pct-hydrocarbures-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-pct-hydrocarbures",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quelle masse de dioxyde de carbone (M = 44 g/mol) obtient-on en brûlant complètement 16 g de méthane (M = 16 g/mol) ? (en g)",
+   "answer": 44,
+   "unit": "g",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "n(CH₄) = 1 mol ; 1 mol de CO₂ se forme ; m = 44 g.",
+   "id": "bepc-pct-hydrocarbures-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-pct-hydrocarbures",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "À Yaoundé, on utilise une bouteille de butane C₄H₁₀ (M = 58 g/mol) pour cuisiner. L'équation est : 2 C₄H₁₀ + 13 O₂ → 8 CO₂ + 10 H₂O.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle quantité de butane représente 116 g (en mol) ?",
+     "answer": 2,
+     "unit": "mol",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "116 / 58 = 2 mol.",
+     "id": "bepc-pct-hydrocarbures-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle masse de CO₂ (M = 44 g/mol) est formée ? (en g)",
+     "answer": 352,
+     "unit": "g",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "2 mol de butane donnent 8 mol de CO₂ : 8 × 44 = 352 g.",
+     "id": "bepc-pct-hydrocarbures-06-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Pourquoi faut-il aérer la cuisine ?",
+     "choices": [
+      "Pour éviter la formation de monoxyde de carbone toxique",
+      "Pour augmenter la masse de gaz",
+      "Pour fabriquer du butane",
+      "Pour que le gaz soit plus froid"
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Une combustion incomplète en milieu fermé produit du CO.",
+     "id": "bepc-pct-hydrocarbures-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "bepc-pct-hydrocarbures-06",
+   "tier": "examen",
+   "lesson": "bepc-pct-hydrocarbures",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quels éléments contient un hydrocarbure ?",
+   "choices": [
+    "Carbone et oxygène uniquement",
+    "Hydrogène et oxygène uniquement",
+    "Carbone et hydrogène uniquement",
+    "Fer et carbone"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Hydro-carbure : H et C.",
+   "id": "bepc-pct-hydrocarbures-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-hydrocarbures",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la formule du méthane ?",
+   "choices": [
+    "CH₄",
+    "CO₂",
+    "C₂H₆",
+    "H₂O"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le méthane est l'alcane à un seul atome de carbone.",
+   "id": "bepc-pct-hydrocarbures-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-hydrocarbures",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le rôle du dioxygène dans une combustion ?",
+   "choices": [
+    "Il est le combustible",
+    "Il est le comburant",
+    "Il est un produit",
+    "Il refroidit la flamme"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le comburant permet à la combustion de se faire.",
+   "id": "bepc-pct-hydrocarbures-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-hydrocarbures",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle propriété du monoxyde de carbone le rend si dangereux ?",
+   "choices": [
+    "Il est vert et acide",
+    "Il est inodore et toxique",
+    "Il est solide",
+    "Il a une forte odeur"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On ne le remarque pas et il empêche le sang de transporter le dioxygène.",
+   "id": "bepc-pct-hydrocarbures-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-hydrocarbures",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la formule de l'alcane à 3 atomes de carbone ?",
+   "choices": [
+    "C₃H₆",
+    "C₃H₁₀",
+    "C₃H₈",
+    "C₂H₈"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C₃H₈ : 2 × 3 + 2 = 8 hydrogènes.",
+   "id": "bepc-pct-hydrocarbures-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-hydrocarbures",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

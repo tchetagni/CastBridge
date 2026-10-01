@@ -1,0 +1,429 @@
+{
+ "chapter": "bepc-pct-optique2",
+ "lessons": [
+  {
+   "id": "bepc-pct-dispersion",
+   "title": "Dispersion de la lumière blanche et couleurs",
+   "minutes": 20,
+   "programRef": "3e — Optique : dispersion de la lumière blanche, spectre, couleurs (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Décrire la décomposition de la lumière blanche par un prisme.",
+    "Expliquer la formation d'un arc-en-ciel.",
+    "Distinguer lumière blanche et lumière monochromatique."
+   ],
+   "prerequisites": [
+    "bepc-pct-optique"
+   ],
+   "exercises": [
+    "bepc-pct-dispersion-01",
+    "bepc-pct-dispersion-02",
+    "bepc-pct-dispersion-03",
+    "bepc-pct-dispersion-04",
+    "bepc-pct-dispersion-05",
+    "bepc-pct-dispersion-06"
+   ],
+   "selfCheck": [
+    "bepc-pct-dispersion-q1",
+    "bepc-pct-dispersion-q2",
+    "bepc-pct-dispersion-q3",
+    "bepc-pct-dispersion-q4",
+    "bepc-pct-dispersion-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La dispersion",
+     "md": "La lumière blanche (celle du Soleil) est un mélange de lumières colorées. Quand elle traverse un **prisme** en verre, elle est **décomposée** en un ensemble de couleurs étalées : c'est le **spectre** de la lumière blanche. Cette séparation des couleurs s'appelle la **dispersion**."
+    },
+    {
+     "type": "illustration",
+     "caption": "Un prisme sépare la lumière blanche en couleurs.",
+     "alt": "Un rayon de lumière blanche entre dans un prisme et ressort en un éventail de couleurs, du violet en haut au rouge en bas.",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 240,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         150,
+         190,
+         210,
+         80,
+         270,
+         190
+        ],
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 150,
+        "x2": 175,
+        "y2": 135,
+        "color": "grey",
+        "width": 4,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 120,
+        "text": "lumière blanche",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 235,
+        "y1": 135,
+        "x2": 420,
+        "y2": 80,
+        "color": "purple",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 238,
+        "y1": 140,
+        "x2": 420,
+        "y2": 105,
+        "color": "blue",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 240,
+        "y1": 145,
+        "x2": 420,
+        "y2": 130,
+        "color": "green",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 242,
+        "y1": 150,
+        "x2": 420,
+        "y2": 155,
+        "color": "yellow",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 244,
+        "y1": 155,
+        "x2": 420,
+        "y2": 180,
+        "color": "orange",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 246,
+        "y1": 160,
+        "x2": 420,
+        "y2": 205,
+        "color": "red",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 390,
+        "y": 66,
+        "text": "violet",
+        "size": 14,
+        "color": "purple",
+        "anchor": "end"
+       },
+       {
+        "t": "text",
+        "x": 390,
+        "y": 224,
+        "text": "rouge",
+        "size": 14,
+        "color": "red",
+        "anchor": "end"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 215,
+        "text": "prisme",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Le spectre",
+     "md": "Les couleurs du spectre, dans l'ordre : **rouge, orange, jaune, vert, bleu, indigo, violet**. Le rouge est la couleur la moins déviée par le prisme, le violet la plus déviée. Une lumière qui ne contient qu'une seule couleur (celle d'un laser par exemple) est dite **monochromatique** : un prisme ne la décompose pas."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Arc-en-ciel et recomposition",
+     "md": "- L'**arc-en-ciel** apparaît quand le Soleil éclaire des gouttes d'eau (après la pluie) : chaque goutte joue le rôle de prisme. L'observateur tourne le dos au Soleil.\n- En réunissant les couleurs du spectre (disque de Newton qui tourne vite, lentille), on **recompose** de la lumière blanche.\n- Un **filtre** coloré ne laisse passer que certaines couleurs : un filtre rouge sur de la lumière blanche donne une lumière rouge."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode : raisonner sur les couleurs",
+     "md": "1. Identifie la lumière de départ (blanche ou monochromatique).\n2. Un prisme sépare seulement un mélange de couleurs.\n3. Un filtre ne peut que **retirer** des couleurs, jamais en créer."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : laser et prisme",
+     "statement": "Un faisceau de laser rouge traverse un prisme. Que voit-on sur l'écran ?",
+     "steps": [
+      {
+       "md": "Un laser émet une lumière monochromatique (une seule couleur)."
+      },
+      {
+       "md": "Le prisme dévie ce faisceau mais ne le décompose pas."
+      }
+     ],
+     "answer": "**Un seul point rouge, légèrement dévié ; pas de spectre.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : le filtre",
+     "statement": "On éclaire un filtre bleu avec de la lumière blanche, puis on place derrière un filtre rouge. Que voit-on ?",
+     "steps": [
+      {
+       "md": "Le filtre bleu ne laisse passer que du bleu."
+      },
+      {
+       "md": "Le filtre rouge ne laisse passer que du rouge : il arrête le bleu."
+      }
+     ],
+     "answer": "**Il ne reste (presque) plus de lumière : l'écran est sombre.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que le prisme « colore » la lumière : il ne fait que séparer les couleurs déjà présentes.\n- Penser que le blanc n'est pas une lumière : la lumière blanche contient toutes les couleurs du spectre.\n- Ne regarder jamais le Soleil directement, même à travers un prisme ou une loupe."
+    }
+   ],
+   "reviewNotes": [
+    "Doute : le nombre de couleurs du spectre (7 par convention) ; le spectre est en réalité continu.",
+    "La vitesse de la lumière est arrondie à 300 000 km/s ; la distance Terre-Soleil à environ 150 millions de km.",
+    "Synthèse additive/soustractive et filtres : traitement simplifié, à ajuster au programme."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quelle couleur est la plus déviée par un prisme ?",
+   "choices": [
+    "Le violet",
+    "Le rouge",
+    "Le jaune",
+    "Le vert"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Dans le spectre, le violet est à l'extrémité la plus déviée et le rouge à l'autre.",
+   "id": "bepc-pct-dispersion-01",
+   "tier": "application",
+   "lesson": "bepc-pct-dispersion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : une lumière monochromatique est décomposée par un prisme en plusieurs couleurs.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Une lumière monochromatique ne contient qu'une seule couleur : le prisme ne peut pas la séparer.",
+   "id": "bepc-pct-dispersion-02",
+   "tier": "application",
+   "lesson": "bepc-pct-dispersion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque objet ou phénomène à son rôle.",
+   "pairs": [
+    [
+     "Prisme",
+     "Décompose la lumière blanche"
+    ],
+    [
+     "Arc-en-ciel",
+     "Gouttes d'eau éclairées par le Soleil"
+    ],
+    [
+     "Laser",
+     "Lumière monochromatique"
+    ],
+    [
+     "Disque de Newton",
+     "Recompose le blanc"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 1,
+   "explanation": "Le prisme disperse la lumière, les gouttes d'eau forment l'arc-en-ciel, le laser émet une seule couleur et le disque tournant mélange les couleurs.",
+   "id": "bepc-pct-dispersion-03",
+   "tier": "application",
+   "lesson": "bepc-pct-dispersion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "La lumière du Soleil met environ 500 s pour atteindre la Terre. Sa vitesse est d'environ 300 000 km/s. Quelle est la distance Terre-Soleil (en millions de km) ?",
+   "answer": 150,
+   "tolerance": 1,
+   "unit": "millions de km",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "d = v × t = 300 000 × 500 = 150 000 000 km, soit environ 150 millions de km.",
+   "id": "bepc-pct-dispersion-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-pct-dispersion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour voir un arc-en-ciel après une averse, où doit se placer l'observateur ?",
+   "choices": [
+    "Face au Soleil, loin des gouttes",
+    "Sous un toit, sans voir le ciel",
+    "Le dos tourné au Soleil, face aux gouttes d'eau",
+    "Les yeux fermés"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Les rayons du Soleil entrent dans les gouttes et sont renvoyés vers l'observateur qui a le Soleil dans son dos.",
+   "id": "bepc-pct-dispersion-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-pct-dispersion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Explique comment se forme un arc-en-ciel et pourquoi on y voit plusieurs couleurs.",
+   "model": "Après la pluie, de nombreuses gouttes d'eau restent en suspension. La lumière blanche du Soleil entre dans une goutte, elle y est déviée et décomposée comme dans un prisme : le rouge est moins dévié que le violet. Les couleurs sont renvoyées vers l'observateur placé dos au Soleil, qui voit chaque couleur sous un angle légèrement différent : il voit l'arc coloré.",
+   "rubric": [
+    "Lumière blanche du Soleil + gouttes d'eau",
+    "Dispersion (décomposition en couleurs) dans les gouttes",
+    "Rouge moins déviée que violet",
+    "Observateur dos au Soleil"
+   ],
+   "points": 4,
+   "difficulty": 2,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "bepc-pct-dispersion-06",
+   "tier": "examen",
+   "lesson": "bepc-pct-dispersion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que contient la lumière blanche ?",
+   "choices": [
+    "Une seule couleur : le blanc",
+    "Uniquement du rouge et du bleu",
+    "Aucune couleur",
+    "Un mélange de toutes les couleurs du spectre"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La lumière blanche est un mélange que le prisme peut séparer.",
+   "id": "bepc-pct-dispersion-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-dispersion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans quel ordre se suivent les couleurs du spectre ?",
+   "choices": [
+    "Violet, rouge, vert, jaune",
+    "Vert, rouge, bleu, jaune",
+    "Jaune, rouge, orange, bleu",
+    "Rouge, orange, jaune, vert, bleu, indigo, violet"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est l'ordre classique de l'arc-en-ciel, du rouge au violet.",
+   "id": "bepc-pct-dispersion-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-dispersion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un filtre vert éclairé en lumière blanche donne :",
+   "choices": [
+    "Une lumière blanche",
+    "Une lumière verte",
+    "Une lumière rouge",
+    "Une lumière noire"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le filtre ne laisse passer que le vert.",
+   "id": "bepc-pct-dispersion-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-dispersion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel dispositif permet de recomposer de la lumière blanche ?",
+   "choices": [
+    "Un prisme éteint",
+    "Un miroir plan seul",
+    "Un disque de Newton en rotation rapide",
+    "Un résistor"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Quand les couleurs défilent très vite, l'œil perçoit leur mélange : du blanc.",
+   "id": "bepc-pct-dispersion-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-dispersion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qu'est-ce qu'un spectre ?",
+   "choices": [
+    "Une sorte de miroir",
+    "Un instrument pour mesurer le poids",
+    "Un fil de cuivre",
+    "L'ensemble des couleurs obtenues après dispersion"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le spectre est l'ensemble des couleurs étalées par le prisme.",
+   "id": "bepc-pct-dispersion-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-pct-dispersion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

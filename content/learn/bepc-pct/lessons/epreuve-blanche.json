@@ -1,0 +1,233 @@
+{
+ "chapter": "bepc-pct-epreuve-blanche",
+ "lessons": [],
+ "exercises": [
+  {
+   "kind": "problem",
+   "prompt": "Partie chimie. Lors d'une démonstration faite par le professeur, 2,8 g de limaille de fer réagissent avec de l'acide chlorhydrique selon l'équation : Fe + 2 HCl → FeCl₂ + H₂. Masses molaires : Fe = 56 g/mol ; H = 1 g/mol ; Cl = 35,5 g/mol ; FeCl₂ = 127 g/mol. Le fer est en défaut.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Calcule la quantité de matière de fer (en mol).",
+     "answer": 0.05,
+     "tolerance": 0.001,
+     "unit": "mol",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "n = 2,8 / 56 = 0,05 mol.",
+     "id": "bepc-pct-epreuve-blanche-01-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle quantité d'acide chlorhydrique est consommée (en mol) ?",
+     "answer": 0.1,
+     "tolerance": 0.001,
+     "unit": "mol",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "L'équation montre 2 HCl pour 1 Fe : n(HCl) = 2 × 0,05 = 0,1 mol.",
+     "id": "bepc-pct-epreuve-blanche-01-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "L'acide utilisé a une concentration de 0,5 mol/L. Quel volume faut-il (en mL) ?",
+     "answer": 200,
+     "tolerance": 1,
+     "unit": "mL",
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "V = n / C = 0,1 / 0,5 = 0,2 L = 200 mL.",
+     "id": "bepc-pct-epreuve-blanche-01-c"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle masse de dihydrogène H₂ (M = 2 g/mol) se forme (en g) ?",
+     "answer": 0.1,
+     "tolerance": 0.01,
+     "unit": "g",
+     "points": 1.5,
+     "difficulty": 1,
+     "explanation": "n(H₂) = n(Fe) = 0,05 mol ; m = 0,05 × 2 = 0,1 g.",
+     "id": "bepc-pct-epreuve-blanche-01-d"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle masse de chlorure de fer II FeCl₂ se forme (en g) ?",
+     "answer": 6.35,
+     "tolerance": 0.01,
+     "unit": "g",
+     "points": 1.5,
+     "difficulty": 1,
+     "explanation": "n(FeCl₂) = 0,05 mol ; m = 0,05 × 127 = 6,35 g.",
+     "id": "bepc-pct-epreuve-blanche-01-e"
+    }
+   ],
+   "difficulty": 2,
+   "id": "bepc-pct-epreuve-blanche-01",
+   "tier": "examen",
+   "lesson": "bepc-pct-mole",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Partie électricité. Un chauffe-eau électrique porte les indications « 220 V ; 2 200 W ». On le branche sous 220 V.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Calcule l'intensité du courant qui le traverse (en A).",
+     "answer": 10,
+     "unit": "A",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "I = P / U = 2 200 / 220 = 10 A.",
+     "id": "bepc-pct-epreuve-blanche-02-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule la résistance de l'élément chauffant (en Ω).",
+     "answer": 22,
+     "unit": "Ω",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "R = U / I = 220 / 10 = 22 Ω.",
+     "id": "bepc-pct-epreuve-blanche-02-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Il fonctionne 1,5 h. Quelle énergie consomme-t-il (en kWh) ?",
+     "answer": 3.3,
+     "tolerance": 0.01,
+     "unit": "kWh",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "E = 2,2 kW × 1,5 h = 3,3 kWh.",
+     "id": "bepc-pct-epreuve-blanche-02-c"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Le kWh est facturé 80 FCFA (prix fictif). Quel est le coût (en FCFA) ?",
+     "answer": 264,
+     "tolerance": 1,
+     "unit": "FCFA",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "3,3 × 80 = 264 FCFA.",
+     "id": "bepc-pct-epreuve-blanche-02-d"
+    }
+   ],
+   "difficulty": 2,
+   "id": "bepc-pct-epreuve-blanche-02",
+   "tier": "examen",
+   "lesson": "bepc-pct-domestique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Partie mécanique. Un bloc métallique de masse 4 kg a un volume de 500 cm³. On prend g = 10 N/kg et la masse volumique de l'eau est 1 000 kg/m³.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Calcule le poids du bloc (en N).",
+     "answer": 40,
+     "unit": "N",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "P = 4 × 10 = 40 N.",
+     "id": "bepc-pct-epreuve-blanche-03-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Le bloc est entièrement plongé dans l'eau. Calcule la poussée d'Archimède (en N).",
+     "answer": 5,
+     "unit": "N",
+     "points": 1.5,
+     "difficulty": 1,
+     "explanation": "500 cm³ = 0,0005 m³ ; Π = 1 000 × 0,0005 × 10 = 5 N.",
+     "id": "bepc-pct-epreuve-blanche-03-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quel poids apparent indique un dynamomètre dans l'eau (en N) ?",
+     "answer": 35,
+     "unit": "N",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "40 − 5 = 35 N.",
+     "id": "bepc-pct-epreuve-blanche-03-c"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Posé sur une table par une face de 0,01 m², quelle pression exerce-t-il (en Pa) ?",
+     "answer": 4000,
+     "unit": "Pa",
+     "points": 1.5,
+     "difficulty": 1,
+     "explanation": "p = 40 / 0,01 = 4 000 Pa.",
+     "id": "bepc-pct-epreuve-blanche-03-d"
+    }
+   ],
+   "difficulty": 2,
+   "id": "bepc-pct-epreuve-blanche-03",
+   "tier": "examen",
+   "lesson": "bepc-pct-pression-archimede",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Partie lumière et énergie.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quelle couleur du spectre de la lumière blanche est la plus déviée par un prisme ?",
+     "choices": [
+      "Le rouge",
+      "Le jaune",
+      "Le violet",
+      "L'orange"
+     ],
+     "answer": 2,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Le violet est le plus dévié, le rouge le moins.",
+     "id": "bepc-pct-epreuve-blanche-04-a"
+    },
+    {
+     "kind": "truefalse",
+     "prompt": "Un faisceau de laser rouge est décomposé par un prisme en sept couleurs.",
+     "answer": false,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Une lumière monochromatique ne contient qu'une couleur.",
+     "id": "bepc-pct-epreuve-blanche-04-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Un panneau solaire de 200 W produit l'équivalent de 5 h de pleine puissance par jour. Quelle énergie par jour (en kWh) ?",
+     "answer": 1,
+     "tolerance": 0.01,
+     "unit": "kWh",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "200 × 5 = 1 000 Wh = 1 kWh.",
+     "id": "bepc-pct-epreuve-blanche-04-c"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Ce panneau reçoit 1 000 J d'énergie lumineuse et fournit 180 J d'énergie électrique. Quel est son rendement (en %) ?",
+     "answer": 18,
+     "tolerance": 0.1,
+     "unit": "%",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "η = 180 / 1 000 = 18 %.",
+     "id": "bepc-pct-epreuve-blanche-04-d"
+    }
+   ],
+   "difficulty": 2,
+   "id": "bepc-pct-epreuve-blanche-04",
+   "tier": "examen",
+   "lesson": "bepc-pct-energies-renouvelables",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}
