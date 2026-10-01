@@ -637,7 +637,13 @@ class TvService : Service(), Device {
     }
 
     fun updateStorageStatus() {
-        runCatching { bg.execute { val line = runCatching { server?.storageLine() }.getOrNull(); if (line != null) setStatus("0-storage", line) } }
+        runCatching { bg.execute {
+            val line = runCatching { server?.storageLine() }.getOrNull(); if (line != null) setStatus("0-storage", line)
+            // The drive's own identity (maker, model, serial, negotiated USB speed) and what limits it, on the TV's status screen.
+            val usb = runCatching { registry.volumes().firstOrNull { it.kind == VolumeKind.REMOVABLE }?.usb }.getOrNull()
+            setStatus("0-usbkey", usb?.let { "Clé USB : " + it.details().joinToString(" · ") { (k, v) -> "$k : $v" } })
+            setStatus("0-usbwarn", usb?.warnings()?.joinToString("\n")?.ifBlank { null })
+        } }
     }
 
     private val storageTick = object : Runnable {

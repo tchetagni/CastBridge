@@ -719,7 +719,8 @@ class ReceiverServer(
                 "\"removable\":${v.removable},\"writable\":${v.writable},\"present\":true,\"free\":${v.free},\"total\":${v.total}," +
                 "\"used\":$used,\"quota\":${quotaOf(v, used)},\"writeBps\":${v.writeBps}," +
                 "\"maxFileBytes\":${if (v.maxFileBytes == Long.MAX_VALUE) -1 else v.maxFileBytes}," +
-                "\"warnings\":${strs(warningsOf(v, dups))},\"formatAdvice\":${formatAdvice(v)?.let(::q) ?: "null"}}"
+                "\"warnings\":${strs(warningsOf(v, dups) + (v.usb?.warnings().orEmpty()))},\"formatAdvice\":${formatAdvice(v)?.let(::q) ?: "null"}," +
+                "\"usb\":${usbJson(v.usb)}}"
         }
         val absent = volumes.missingVolumes().joinToString(",") { v ->
             "{\"id\":${q(v.id)},\"label\":${q(v.label)},\"kind\":${q(v.kind.name.lowercase())},\"fs\":${q(v.fs.label)},\"present\":false," +
@@ -729,6 +730,13 @@ class ReceiverServer(
     }
 
     private fun strs(l: List<String>) = l.joinToString(",", "[", "]") { q(it) }
+
+    /** What the drive says about itself (serial in full: this API is behind the PIN / trusted-phone token). */
+    private fun usbJson(u: UsbKeyInfo?): String = if (u == null) "null" else
+        "{\"vendorId\":${q(u.vendorId)},\"productId\":${q(u.productId)},\"manufacturer\":${u.manufacturer?.let(::q) ?: "null"},\"product\":${u.product?.let(::q) ?: "null"}," +
+            "\"serial\":${u.serial?.let(::q) ?: "null"},\"speedMbps\":${u.speedMbps},\"speed\":${q(u.speedLabel)},\"controller\":${u.controller?.let(::q) ?: "null"}," +
+            "\"usbVersion\":${u.usbVersion?.let(::q) ?: "null"},\"maxPower\":${u.maxPowerMa?.let(::q) ?: "null"},\"sharesBusWithWifi\":${u.sharesBusWithWifi}," +
+            "\"sharesBusWith\":${strs(u.sharesBusWith)},\"info\":${q(u.info())},\"details\":${u.details().joinToString(",", "[", "]") { (k, v) -> "{\"k\":${q(k)},\"v\":${q(v)}}" }}}"
 
     private fun warningsOf(v: StorageVolume, dups: Int): List<String> = buildList {
         if (!v.writable) add("Non inscriptible" + (v.note?.let { " ($it)" } ?: "") + " : la clé est ignorée pour les envois.")

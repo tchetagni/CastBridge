@@ -128,14 +128,10 @@
             android:foregroundServiceType="connectedDevice" />
         <service android:name=".ServerService" android:exported="false"
             android:foregroundServiceType="dataSync" />
-        <!-- The phone's own media player: "Ouvrir avec" / "Partager" from the Gallery, Files, WhatsApp, Telegram, the browser. -->
-        <activity android:name=".player.PlayerActivity" android:exported="true"
-            android:label="CastBridge Lecteur"
-            android:launchMode="singleTask" android:taskAffinity="castbridge.sender.player"
-            android:supportsPictureInPicture="true" android:resizeableActivity="true"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboardHidden|uiMode|density"
-            android:theme="@android:style/Theme.Material.NoActionBar.Fullscreen">
-            <!-- local files (content:// and file://), by MIME type -->
+        <!-- « Ouvrir avec » on a local video, audio or image: copy or move to the TV in the background, or play here. -->
+        <activity android:name=".OpenWithActivity" android:exported="true" android:label="CastBridge"
+            android:launchMode="standard" android:excludeFromRecents="true" android:taskAffinity=""
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -150,6 +146,15 @@
                 <data android:mimeType="application/vnd.apple.mpegurl" />
                 <data android:mimeType="application/dash+xml" />
             </intent-filter>
+        </activity>
+        <!-- The phone's own media player: "Ouvrir avec" / "Partager" from the Gallery, Files, WhatsApp, Telegram, the browser. -->
+        <activity android:name=".player.PlayerActivity" android:exported="true"
+            android:label="CastBridge Lecteur"
+            android:launchMode="singleTask" android:taskAffinity="castbridge.sender.player"
+            android:supportsPictureInPicture="true" android:resizeableActivity="true"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboardHidden|uiMode|density"
+            android:theme="@android:style/Theme.Material.NoActionBar.Fullscreen">
+            <!-- local files « Ouvrir avec » now go through .OpenWithActivity (copy / move to the TV, or play here) -->
             <!-- web media announced with their type (browser downloads, "open with") -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

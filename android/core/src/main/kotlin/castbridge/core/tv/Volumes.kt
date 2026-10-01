@@ -42,6 +42,8 @@ data class StorageVolume(
     /** Measured sequential write speed (bytes/s, fsync included), 0 = not measured. */
     val writeBps: Long = 0,
     val note: String? = null,
+    /** Who made the drive, the USB speed negotiated, whether it shares its bus with the TV's Wi-Fi (null = unknown / not USB). */
+    val usb: UsbKeyInfo? = null,
 ) {
     /** The internal volume is never limited by what we detect (the detection is only meaningful for removable media). */
     val maxFileBytes: Long get() = if (kind == VolumeKind.INTERNAL) Long.MAX_VALUE else fs.maxFileBytes

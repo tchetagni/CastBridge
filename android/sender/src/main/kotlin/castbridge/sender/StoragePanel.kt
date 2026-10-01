@@ -16,6 +16,8 @@ import org.json.JSONObject
 data class TvVolume(
     val id: String, val label: String, val kind: String, val fs: String, val present: Boolean, val writable: Boolean,
     val free: Long, val writeBps: Long, val warnings: List<String>, val advice: String?,
+    /** Maker, model, serial, USB speed... of the drive as the TV reads them (label to value). */
+    val usbDetails: List<Pair<String, String>> = emptyList(),
 )
 
 data class TvStorage(val target: String, val volumes: List<TvVolume>, val moveJson: JSONObject?, val warnings: List<String>)
@@ -29,7 +31,8 @@ object TvStorageParser {
             val w = v.optJSONArray("warnings")
             TvVolume(v.getString("id"), v.optString("label"), v.optString("kind"), v.optString("fs"), v.optBoolean("present", true),
                 v.optBoolean("writable", true), v.optLong("free", -1), v.optLong("writeBps", 0),
-                (0 until (w?.length() ?: 0)).map { w!!.getString(it) }, if (v.isNull("formatAdvice")) null else v.optString("formatAdvice"))
+                (0 until (w?.length() ?: 0)).map { w!!.getString(it) }, if (v.isNull("formatAdvice")) null else v.optString("formatAdvice"),
+                v.optJSONObject("usb")?.optJSONArray("details")?.let { d -> (0 until d.length()).map { j -> d.getJSONObject(j).let { it.optString("k") to it.optString("v") } } }.orEmpty())
         }
         val ws = o.optJSONArray("warnings")
         return TvStorage(o.optString("target", "auto"), volumes, o.optJSONObject("move"), (0 until (ws?.length() ?: 0)).map { ws!!.getString(it) })
@@ -91,6 +94,9 @@ fun StoragePanel(client: TvClient) {
         val speed = if (v.writeBps > 0) ", écriture ~${v.writeBps / 1_000_000} Mo/s" else ""
         Text("${v.label}${if (v.fs != "?" && v.fs.isNotEmpty()) " (${v.fs})" else ""} : " +
             if (!v.present) "retirée" else if (!v.writable) "lecture seule" else "$free$speed", style = MaterialTheme.typography.bodyMedium)
+        if (v.usbDetails.isNotEmpty()) Column(Modifier.padding(start = 8.dp, top = 2.dp, bottom = 2.dp)) {
+            v.usbDetails.forEach { (k, d) -> Text("$k : $d", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant) }
+        }
         v.warnings.forEach { Text("• $it", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error) }
         v.advice?.let { Text(it, style = MaterialTheme.typography.bodySmall) }
     }

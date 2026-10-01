@@ -11,6 +11,8 @@ import android.util.Log
 import castbridge.core.tv.Fs
 import castbridge.core.tv.FsInfo
 import castbridge.core.tv.StorageVolume
+import castbridge.core.tv.UsbKeyInfo
+import castbridge.core.tv.UsbSysfs
 import castbridge.core.tv.StoreEntry
 import castbridge.core.tv.VolumeKind
 import castbridge.core.tv.VolumeProvider
@@ -73,7 +75,7 @@ class AndroidVolumeProvider(private val ctx: Context, private val prefs: TvPrefs
                 probes[id] = p
             }
             out += StorageVolume(id, label(base), dir, VolumeKind.REMOVABLE, FsInfo.detect(mounts, base.absolutePath),
-                dir.usableSpace, dir.totalSpace, true, p.writable && dir.canWrite(), p.bps, p.error)
+                dir.usableSpace, dir.totalSpace, true, p.writable && dir.canWrite(), p.bps, p.error, usbOf(mounts, base))
         }
         // A drive that went away is forgotten: on return it is probed again.
         probes.keys.filter { it !in seen }.forEach { probes.remove(it) }
@@ -81,6 +83,13 @@ class AndroidVolumeProvider(private val ctx: Context, private val prefs: TvPrefs
         scanSaf()?.let { out += it }
         return out
     }
+
+    /** Maker, serial, negotiated USB speed and bus sharing of the drive mounted for [base] (null when unreadable or not USB). */
+    private fun usbOf(mounts: List<FsInfo.Mount>, base: File): UsbKeyInfo? = runCatching {
+        val m = mounts.firstOrNull { it.device.startsWith("/dev/block") && it.point.endsWith("/" + base.name) } ?: return null
+        val (major, minor) = UsbSysfs.majorMinor(m.device) ?: return null
+        UsbSysfs().infoForBlock(major, minor)
+    }.getOrNull()
 
     private fun scanSaf(): StorageVolume? {
         val tree = prefs.getString("saf_tree")?.let(Uri::parse)
