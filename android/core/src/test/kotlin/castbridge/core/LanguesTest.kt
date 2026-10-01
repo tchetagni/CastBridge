@@ -151,11 +151,11 @@ class LanguesTest {
         for (c in cells) { assertTrue(c.mediaKb > 0, "${c.lang} ${c.level}"); assertTrue(budget.mediaLots(c) >= 1) }
     }
     @Test fun budgetCheckFlagsOversizeLotsAndOverrun() {
-        val ok = budget.check(listOf(lot("langues", "zh-a1-salut-fr", 2_000_000), lot("langues-media", "zh-a1-salut-fr", 90_000_000), lot("learn", "cm2", 9_999_999_999)))
+        val ok = budget.check(listOf(lot("langues", "zh-a1-salut-fr", 2_000_000), lot("langues-media", "zh-a1-salut", 90_000_000), lot("learn", "cm2", 9_999_999_999)))
         assertEquals(emptyList(), ok.errors); assertEquals(92_000_000L, ok.totalBytes)   // « learn » belongs to the other 3 GB
-        val bad = budget.check(listOf(lot("langues", "zh-a1-salut-fr", 4_000_000), lot("langues-media", "zh-a1-salut-fr", 120_000_000)))
+        val bad = budget.check(listOf(lot("langues", "zh-a1-salut-fr", 4_000_000), lot("langues-media", "zh-a1-salut", 120_000_000)))
         assertEquals(2, bad.errors.size)
-        val over = budget.check((1..11).map { lot("langues-media", "it-b1-t$it-fr".take(32), 100_000_000) })   // 1.1 GB of Italian > its 10 % share (614 MB)
+        val over = budget.check((1..11).map { lot("langues-media", "it-b1-t$it", 100_000_000) })   // 1.1 GB of Italian > its 10 % share (614 MB)
         assertTrue(over.errors.any { it.startsWith("it :") })
     }
 
@@ -163,16 +163,24 @@ class LanguesTest {
     @Test fun textLotsFollowTheLearnerAndTheTvBudget() {
         val l = LearnerLang(Lang.ZH, Lang.FR, LangLevel.A1)
         val cat = listOf(lot("langues", "zh-a1-salut-fr", 900_000), lot("langues", "zh-a2-voyage-fr", 800_000), lot("langues", "zh-a0-pinyin-fr", 500_000),
-            lot("langues", "zh-a1-salut-en", 100_000), lot("langues", "ja-a1-salut-fr", 100_000), lot("langues", "zh-c1-presse-fr", 2_900_000), lot("langues-media", "zh-a1-salut-fr", 80_000_000), lot("learn", "cm2", 1))
+            lot("langues", "zh-a1-salut-en", 100_000), lot("langues", "ja-a1-salut-fr", 100_000), lot("langues", "zh-c1-presse-fr", 2_900_000), lot("langues-media", "zh-a1-salut", 80_000_000), lot("learn", "cm2", 1))
         val p = LangPlanner.textForTv(l, cat, 2_500_000)
         assertEquals(listOf("zh-a1-salut-fr", "zh-a0-pinyin-fr", "zh-a2-voyage-fr"), p.selected.map { it.id.scope })   // current level, previous before next? rank: a1=0, a0=1, a2=2
         assertEquals(1, p.skipped.size); assertEquals("zh-c1-presse-fr", p.skipped[0].first.id.scope)
         assertEquals(LangPlanner.textForTv(l, cat.reversed(), 2_500_000), p)   // deterministic
     }
     @Test fun mediaIsPlayableOnlyWithItsTextTwin() {
-        val t = LotId("langues", "zh-a1-salut-fr"); val m1 = LotId("langues-media", "zh-a1-salut-fr"); val m2 = LotId("langues-media", "zh-a2-voyage-fr")
+        val t = LotId("langues", "zh-a1-salut-fr"); val m1 = LotId("langues-media", "zh-a1-salut"); val m2 = LotId("langues-media", "zh-a2-voyage")
         assertEquals(setOf(m1), LangPlanner.playableMedia(setOf(t), setOf(m1, m2)))
-        val plan = LangPlanner.mediaFor(LearnerLang(Lang.ZH, Lang.FR, LangLevel.A1), listOf(lot("langues-media", "zh-a1-salut-fr", 80_000_000), lot("langues-media", "zh-a2-voyage-fr", 60_000_000)), 100_000_000)
-        assertEquals(listOf("zh-a1-salut-fr"), plan.selected.map { it.id.scope })
+        val plan = LangPlanner.mediaFor(LearnerLang(Lang.ZH, Lang.FR, LangLevel.A1), listOf(lot("langues-media", "zh-a1-salut", 80_000_000), lot("langues-media", "zh-a2-voyage", 60_000_000)), 100_000_000)
+        assertEquals(listOf("zh-a1-salut"), plan.selected.map { it.id.scope })
+    }
+    @Test fun oneMediaLotServesBothStartLanguages() {
+        val media = lot("langues-media", "zh-a1-salut", 80_000_000)
+        for (src in listOf(Lang.FR, Lang.EN)) assertEquals(0, LangPlanner.rank(LearnerLang(Lang.ZH, src, LangLevel.A1), media.id))
+        assertEquals(LangLots.MediaParts(Lang.ZH, LangLevel.A1, "salut"), LangLots.parseMedia("zh-a1-salut"))
+        assertEquals("zh-a1-salut", LangLots.mediaId(LangLots.parse("zh-a1-salut-en")!!).scope)
+        assertEquals(setOf(media.id), LangPlanner.playableMedia(setOf(LotId("langues", "zh-a1-salut-en")), setOf(media.id)))   // the English text twin is enough
+        assertNull(LangLots.parseMedia("zh-a1-salut-fr")); assertEquals(Lang.ZH, LangLots.targetOf(media.id)); assertNull(LangLots.targetOf(LotId("quiz", "zh-a1-salut")))
     }
 }

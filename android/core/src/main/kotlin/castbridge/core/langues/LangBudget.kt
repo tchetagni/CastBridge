@@ -16,7 +16,7 @@ class LangBudget(root: Map<String, Any?>) {
     private val langPct = pct(root.map("languageWeightsPercent")!!)
     val transversalPct = root.int("transversalPercent")!!
     val reservePct = root.int("reservePercent")!!
-    private val levelPct = root.map("levelWeightsPercent")!!.mapValues { pct(it.value as Map<String, Any?>) }
+    @Suppress("UNCHECKED_CAST") private val levelPct = root.map("levelWeightsPercent")!!.mapValues { pct(it.value as Map<String, Any?>) }
     private val profile = root.map("profileOf")!!.mapValues { it.value as String }
     private val textKb = pct(root.map("textKbPerLanguageLevel")!!)
     val mediaSplit = pct(root.map("mediaSplitPercent")!!)
@@ -57,10 +57,10 @@ class LangBudget(root: Map<String, Any?>) {
         val e = ArrayList<String>(problems())
         val per = HashMap<Lang, Long>()
         for (m in lots) {
-            val parts = LangLots.parse(m.id.scope)?.takeIf { LangLots.isLanguage(m.id) } ?: continue
+            val target = LangLots.targetOf(m.id) ?: continue
             val cap = if (LangLots.isMedia(m.id)) mediaLotMax else textLotMax
             if (m.bytes > cap) e += "lot ${m.id.feature}:${m.id.scope} : ${m.bytes} octets > plafond $cap"
-            per.merge(parts.target, m.bytes, Long::plus)
+            per.merge(target, m.bytes, Long::plus)
         }
         for ((l, b) in per) if (b > languageKb(l) * 1024) e += "${l.code} : ${b / 1048576} Mo > part de ${languageKb(l) / 1024} Mo"
         val total = per.values.sum()
@@ -78,12 +78,16 @@ data class LearnerLang(val target: Lang, val source: Lang, val level: LangLevel)
 object LangPlanner {
     data class Plan(val selected: List<LotMeta>, val skipped: List<Pair<LotMeta, String>>, val usedBytes: Long)
 
-    /** Priority of a lot for a learner: 0 = current level, then next level, previous level, +2, −1 (closest first); null = not theirs (other target/source). */
+    /** Priority of a lot for a learner: 0 = current level, then previous level (1), next (2), … closest first; null = not theirs (other target, or other start language for a text lot). */
     fun rank(l: LearnerLang, id: LotId): Int? {
-        val p = LangLots.parse(id.scope) ?: return null
-        if (p.target != l.target || p.source != l.source) return null
-        val d = p.level.ordinal - l.level.ordinal
-        return if (d >= 0) d * 2 else -d * 2 - 1   // 0, next=2, previous=1, +2=4, −2=3 …
+        val (target, level) = when (id.feature) {
+            LangLots.FEATURE -> LangLots.parse(id.scope)?.takeIf { it.source == l.source }?.let { it.target to it.level }
+            LangLots.MEDIA_FEATURE -> LangLots.parseMedia(id.scope)?.let { it.target to it.level }
+            else -> null
+        } ?: return null
+        if (target != l.target) return null
+        val d = level.ordinal - l.level.ordinal
+        return if (d >= 0) d * 2 else -d * 2 - 1   // 0, previous=1, next=2, −2=3, +2=4 …
     }
 
     /** Text lots for the TV: [budgetBytes] is what is left of the 10 MB (not per lot). Media lots are NOT planned here, they are copied on request. */
@@ -99,7 +103,9 @@ object LangPlanner {
         return Plan(sel, skip, used)
     }
 
-    /** A media lot is playable on the TV only when its text twin is installed there too (the text lot says which media it references). */
-    fun playableMedia(installedText: Set<LotId>, installedMedia: Set<LotId>): Set<LotId> =
-        installedMedia.filter { LangLots.parse(it.scope)?.let { p -> LangLots.textId(p) in installedText } == true }.toSet()
+    /** A media lot is playable on the TV only when a text lot of the same (target, level, theme) is installed there too: the text lot says which media it references. */
+    fun playableMedia(installedText: Set<LotId>, installedMedia: Set<LotId>): Set<LotId> {
+        val twins = installedText.mapNotNull { LangLots.parse(it.scope)?.let { p -> LangLots.mediaScope(p) } }.toSet()
+        return installedMedia.filter { it.feature == LangLots.MEDIA_FEATURE && it.scope in twins }.toSet()
+    }
 }

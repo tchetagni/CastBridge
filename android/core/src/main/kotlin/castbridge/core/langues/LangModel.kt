@@ -66,8 +66,25 @@ object LangLots {
         return if (theme.matches(p[2]) && t != s) Parts(t, l, p[2], s) else null
     }
 
+    /** The media twin is shared by every start language: the audio of a Chinese dialogue is the same for a French or an English learner. Its scope has no start-language suffix. */
+    data class MediaParts(val target: Lang, val level: LangLevel, val theme: String) {
+        val scope get() = "${target.code}-${level.key}-$theme"
+    }
+
+    fun mediaScope(p: Parts) = MediaParts(p.target, p.level, p.theme).scope
+
+    fun parseMedia(scope: String): MediaParts? {
+        val p = scope.split('-')
+        if (p.size != 3) return null
+        val t = Lang.of(p[0]) ?: return null; val l = LangLevel.of(p[1]) ?: return null
+        return if (theme.matches(p[2])) MediaParts(t, l, p[2]) else null
+    }
+
     fun textId(parts: Parts) = LotId(FEATURE, parts.scope)
-    fun mediaId(parts: Parts) = LotId(MEDIA_FEATURE, parts.scope)
+    fun mediaId(parts: Parts) = LotId(MEDIA_FEATURE, mediaScope(parts))
     fun isMedia(id: LotId) = id.feature == MEDIA_FEATURE
-    fun isLanguage(id: LotId) = (id.feature == FEATURE || id.feature == MEDIA_FEATURE) && parse(id.scope) != null
+
+    /** Target language of a language lot (text or media), or null when the id is not one of ours. */
+    fun targetOf(id: LotId): Lang? = when (id.feature) { FEATURE -> parse(id.scope)?.target; MEDIA_FEATURE -> parseMedia(id.scope)?.target; else -> null }
+    fun isLanguage(id: LotId) = targetOf(id) != null
 }
