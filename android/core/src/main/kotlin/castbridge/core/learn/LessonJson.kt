@@ -71,7 +71,7 @@ object LessonJson {
         )
     }
 
-    private fun block(m: Map<String, Any?>, w: String): Block {
+    internal fun block(m: Map<String, Any?>, w: String): Block {
         val rv = m.b("review") ?: false
         return when (val t = m.req("type", w)) {
             "heading" -> Block.Heading(m.req("text", w))

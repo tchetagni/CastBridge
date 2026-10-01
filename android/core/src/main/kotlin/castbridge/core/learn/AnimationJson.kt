@@ -75,6 +75,7 @@ object AnimationJson {
                         vals += p to (Palette.color(cs)?.toLong()?.and(0xFFFFFFFFL)?.toDouble() ?: throw ParseError("$aw0 : couleur « $cs » inconnue")) }
                 }
                 "draw" -> vals += Prop.DRAW to (a.d("p") ?: 1.0).also { if (it !in 0.0..1.0) throw ParseError("$aw0 : p hors 0..1") }
+                "wipe" -> vals += Prop.WIPE to (a.d("p") ?: 1.0).also { if (it !in 0.0..1.0) throw ParseError("$aw0 : p hors 0..1") }
                 "type" -> vals += Prop.TYPED to (a.d("p") ?: 1.0).also { if (it !in 0.0..1.0) throw ParseError("$aw0 : p hors 0..1") }
                 "count" -> vals += Prop.VALUE to need("v")
                 else -> throw ParseError("$aw0 : opération inconnue « $op »")
@@ -96,7 +97,9 @@ object AnimationJson {
             val bb = AnimGeom.bbox(ops)
             val piv = if (own.size == 2) doubleArrayOf(own[0], own[1]) else gp ?: doubleArrayOf((bb[0] + bb[2]) / 2, (bb[1] + bb[3]) / 2)
             val alpha0 = mm.d("alpha") ?: 1.0; val draw0 = mm.d("draw") ?: 1.0; val typed0 = mm.d("typed") ?: 1.0; val v0 = mm.d("v") ?: 0.0
-            for ((nm, v) in listOf("alpha" to alpha0, "draw" to draw0, "typed" to typed0)) if (v !in 0.0..1.0) throw ParseError("$w élément ${ids[k]} : $nm hors 0..1")
+            val wipe0 = mm.d("wipe") ?: 1.0; val dir = mm.s("dir") ?: "right"
+            if (dir !in listOf("right", "left", "up", "down")) throw ParseError("$w élément ${ids[k]} : dir inconnu « $dir »")
+            for ((nm, v) in listOf("alpha" to alpha0, "draw" to draw0, "typed" to typed0, "wipe" to wipe0)) if (v !in 0.0..1.0) throw ParseError("$w élément ${ids[k]} : $nm hors 0..1")
             val tracks = arrayOfNulls<Track>(Prop.values().size)
             for (p in Prop.values()) {
                 val list = segs[k].filter { it.prop == p }.sortedBy { it.t0 }
@@ -105,14 +108,14 @@ object AnimationJson {
                     throw ParseError("$w élément ${ids[k]} : deux actions ${p.name.lowercase()} se chevauchent (à ${list[i].t0} s)")
                 val init = when (p) {
                     Prop.TX, Prop.TY, Prop.ROT -> 0.0; Prop.VALUE -> v0
-                    Prop.SCALE -> 1.0; Prop.ALPHA -> alpha0; Prop.DRAW -> draw0; Prop.TYPED -> typed0
+                    Prop.SCALE -> 1.0; Prop.ALPHA -> alpha0; Prop.DRAW -> draw0; Prop.TYPED -> typed0; Prop.WIPE -> wipe0
                     Prop.FILL -> baseColor(ops, true) ?: throw ParseError("$w élément ${ids[k]} : color fill sans remplissage")
                     Prop.STROKE -> baseColor(ops, false) ?: throw ParseError("$w élément ${ids[k]} : color stroke sans trait")
                 }
                 tracks[p.ordinal] = Track(p, init, DoubleArray(list.size) { list[it].t0 }, DoubleArray(list.size) { list[it].t1 },
                     DoubleArray(list.size) { list[it].to }, Array(list.size) { list[it].ease })
             }
-            elements += AnimElement(ids[k], groupOf[k], shape, ops, piv[0], piv[1], alpha0, draw0, typed0, v0, (mm.d("dec") ?: 0.0).toInt().coerceIn(0, 4), tracks)
+            elements += AnimElement(ids[k], groupOf[k], shape, ops, piv[0], piv[1], alpha0, draw0, typed0, v0, (mm.d("dec") ?: 0.0).toInt().coerceIn(0, 4), tracks, wipe0, dir)
         }
 
         val stops = m.l("steps").mapIndexed { n, o ->

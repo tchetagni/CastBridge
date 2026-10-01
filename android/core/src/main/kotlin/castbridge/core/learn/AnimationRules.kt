@@ -100,6 +100,8 @@ object AnimationLint {
     fun times(a: AnimatedFigure, samples: Int = 16): List<Double> {
         val ts = sortedSetOf(0.0, a.duration)
         for (s in a.stops) ts += s.at
+        // step mode: what the learner reads is the frame at each pause; labels crossing during a move (a swap) are not a fault
+        if (a.stepMode) return ts.toList()
         val bounds = ts.toList()
         for (i in 1 until bounds.size) ts += (bounds[i - 1] + bounds[i]) / 2
         for (k in 0..samples) ts += a.duration * k / samples

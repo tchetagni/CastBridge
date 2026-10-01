@@ -27,7 +27,7 @@ enum class Ease(val key: String) {
 }
 
 /** Animated property of an element. Colors are ARGB ints stored as exact doubles. */
-enum class Prop { TX, TY, SCALE, ROT, ALPHA, FILL, STROKE, DRAW, TYPED, VALUE;
+enum class Prop { TX, TY, SCALE, ROT, ALPHA, FILL, STROKE, DRAW, TYPED, VALUE, WIPE;
     val isColor get() = this == FILL || this == STROKE
 }
 
@@ -76,6 +76,8 @@ data class AnimStop(val at: Double, val say: String)
 class AnimElement(
     val id: String, val group: String?, val shape: Shape, val ops: List<Op>, val pivotX: Double, val pivotY: Double,
     val alpha0: Double, val draw0: Double, val typed0: Double, val value0: Double, val dec: Int, val tracks: Array<Track?>,
+    /** Wipe: share of the element revealed (a clip growing in direction [wipeDir]: right | left | up | down); 1 = all. */
+    val wipe0: Double = 1.0, val wipeDir: String = "right",
 ) {
     /** x0, y0, x1, y1 of the base drawing. */
     val bbox: DoubleArray = AnimGeom.bbox(ops)
@@ -122,8 +124,12 @@ class AnimatedFigure(
         val draw = num(Prop.DRAW, el.draw0).coerceIn(0.0, 1.0); val typed = num(Prop.TYPED, el.typed0).coerceIn(0.0, 1.0)
         val value = num(Prop.VALUE, el.value0)
         val fillOv = el.track(Prop.FILL)?.colorAt(t); val strokeOv = el.track(Prop.STROKE)?.colorAt(t)
+        val wipe = if (rot != 0.0) 1.0 else num(Prop.WIPE, el.wipe0).coerceIn(0.0, 1.0)
+        if (wipe <= 0.0) return
         val xf = if (s == 1.0 && rot == 0.0 && tx == 0.0 && ty == 0.0) null else Xf(el.pivotX, el.pivotY, tx, ty, s, rot)
         val drawing = draw < 1.0 - 1e-9
+        val clipped = wipe < 1.0 - 1e-9
+        if (clipped) out += wipeClip(el, wipe, xf)
         for ((i, op) in el.ops.withIndex()) {
             if (drawing) {
                 val fl = el.flats?.get(i)
@@ -137,6 +143,21 @@ class AnimatedFigure(
             val o = place(op, xf, fillOv, strokeOv, el, value, typed, alpha)
             if (!(o is Op.Text && o.text.isEmpty())) out += o
         }
+        if (clipped) out += Op.Unclip
+    }
+
+    private fun wipeClip(el: AnimElement, wipe: Double, xf: Xf?): Op.Clip {
+        val b = el.bbox; val pad = 4.0
+        val x0 = b[0] - pad; val y0 = b[1] - pad; val x1 = b[2] + pad; val y1 = b[3] + pad
+        val cx0: Double; val cy0: Double; val cx1: Double; val cy1: Double
+        when (el.wipeDir) {
+            "left" -> { cx0 = x1 - (x1 - x0) * wipe; cy0 = y0; cx1 = x1; cy1 = y1 }
+            "up" -> { cx0 = x0; cy0 = y1 - (y1 - y0) * wipe; cx1 = x1; cy1 = y1 }
+            "down" -> { cx0 = x0; cy0 = y0; cx1 = x1; cy1 = y0 + (y1 - y0) * wipe }
+            else -> { cx0 = x0; cy0 = y0; cx1 = x0 + (x1 - x0) * wipe; cy1 = y1 }
+        }
+        val ax = xf?.x(cx0, cy0) ?: cx0; val ay = xf?.y(cx0, cy0) ?: cy0; val bx = xf?.x(cx1, cy1) ?: cx1; val by = xf?.y(cx1, cy1) ?: cy1
+        return Op.Clip(ax, ay, bx - ax, by - ay)
     }
 
     private fun strokeColor(op: Op, ov: Int?): Int? = when (op) {

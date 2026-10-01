@@ -73,6 +73,18 @@ class LearnAnimationTest {
         assertEquals(20.0, d[0].r, 1e-9); assertEquals(0.0, d[0].cy, 1e-9); assertEquals(200.0, d[1].cy, 1e-9)
     }
 
+
+    @Test fun wipeRevealsWithAClip() {
+        val a = parse("""{"items":[{"id":"b","t":"rect","x":100,"y":50,"w":40,"h":100,"fill":"red","wipe":0,"dir":"up"}],"do":[{"at":0,"d":1,"op":"wipe","on":"b","ease":"linear"}]}""")
+        assertTrue(a.frameAt(0.0).ops.isEmpty(), "nothing revealed yet")
+        val ops = a.frameAt(0.5).ops
+        assertTrue(ops.first() is Op.Clip && ops.last() === Op.Unclip && ops[1] is Op.Rect, "clip, rect, unclip")
+        val c = ops.first() as Op.Clip   // bottom half of the padded box (4 px margin)
+        assertEquals(46.0 + 108.0 / 2, c.y, 1e-9); assertEquals(54.0, c.h, 1e-9)
+        assertEquals(listOf(ops[1]), a.frameAt(1.0).ops, "fully revealed: no clip")
+        assertFailsWith<LessonJson.ParseError> { parse("""{"items":[{"t":"rect","x":0,"y":0,"w":1,"h":1,"dir":"diagonal"}],"do":[]}""") }
+    }
+
     @Test fun easingsAreMonotonicWithExactEnds() {
         for (e in Ease.values()) {
             assertEquals(0.0, e.at(0.0), 1e-12, e.key); assertEquals(1.0, e.at(1.0), 1e-12, e.key)
