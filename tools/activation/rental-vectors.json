@@ -1,0 +1,1057 @@
+{
+  "format": "castbridge-rental-vectors-v1",
+  "warning": "CLÉS, APPAREILS ET SECRET DE TEST dérivés de textes publics : ne protègent rien. Voir docs/RENTAL-LOTS.md § 8.",
+  "master": "80831ae0b94302f30b4af422a5cb3779df4017f83820d8dd9ee609bafa90ea64",
+  "keys": [
+    {
+      "name": "desk",
+      "seed": "282562d9a2f66647a16e498fad69a8ee6ecdf4877988c39aa2cb3684c1fc84e5",
+      "scopes": ["COMMAND_OPEN_ALL", "COMMAND_SUPPORT", "COMMAND_UNLOCK", "ISSUE_PRODUCTION", "ISSUE_TRIAL", "ISSUE_UNLIMITED", "POLICY", "REACTIVATE", "REGISTRY", "REVOKE", "TRANSFER"]
+    },
+    {
+      "name": "server",
+      "seed": "ced7caf1bbc488963ca2a19872cffd226fa544dd77a025d6b02f1faa1e957fdb",
+      "scopes": ["ISSUE_PRODUCTION", "REACTIVATE", "REGISTRY"]
+    },
+    {
+      "name": "noprod",
+      "seed": "1e9edc07e23a5f68c0d5393760c9b2b926a1f8ac5d53c45183ffad7ae36312a9",
+      "scopes": ["COMMAND_SUPPORT"]
+    }
+  ],
+  "devices": [
+    {
+      "name": "tvA",
+      "raw": {
+        "flashSerial": "FLASHSERIAL-R1",
+        "flashCid": "cid-r1",
+        "ethernetMac": "AA:BB:CC:00:22:01",
+        "wifiMac": "10:20:30:40:60:01",
+        "wifiSysfsPath": "/sys/devices/platform/soc/ffe03000.sd/mmc_host/mmc1/mmc1:0001/net/wlan0",
+        "systemSerial": "SYSR0001",
+        "bluetoothAddress": "11:22:33:44:66:01"
+      }
+    },
+    {
+      "name": "tvB",
+      "raw": {
+        "flashSerial": "FLASHSERIAL-R2",
+        "flashCid": "cid-r2",
+        "ethernetMac": "AA:BB:CC:00:22:02",
+        "wifiMac": "10:20:30:40:60:02",
+        "wifiSysfsPath": "/sys/devices/platform/soc/ffe03000.sd/mmc_host/mmc1/mmc1:0001/net/wlan0",
+        "systemSerial": "SYSR0002",
+        "bluetoothAddress": "11:22:33:44:66:02"
+      }
+    }
+  ],
+  "cases": [
+    {
+      "id": "build-rental-30d",
+      "type": "build-activation",
+      "signer": "desk",
+      "request": {
+        "device": "tvA",
+        "license": "lic-loc-1",
+        "issuedAt": 1800000000000,
+        "windowHours": 48,
+        "nonce": "00112233445566778899aabbccddeeff",
+        "rentals": [
+          {
+            "product": "loc-cm2",
+            "bundles": ["classe-cm2"],
+            "startsAt": 1800000000000,
+            "period": 1800000000000,
+            "days": 30,
+            "graceMs": 0,
+            "usage": 0,
+            "concurrent": 0
+          }
+        ],
+        "rights": []
+      },
+      "expect": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWU3YTM3Mzc0ODA1Y2VlMzIKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTgwMDAwMDAwMDAwMApleHBpcmVzQXQ9MTgwMDE3MjgwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8OWRjNzk0OGM0ODc0NDgwZWIzNzJkMWFjZTM1MDdkM2QKZmFjdG9yPUVUSEVSTkVUfDQwNGUzNTcyYzk5YzRiNGFlMzYzNGEyNDNkZTk0MGI2CmZhY3Rvcj1XSUZJfGNlZWNjOGIzMzI4NmVhMjJjYmU3N2JjYzBiZTMwMzE3CmZhY3Rvcj1TWVNURU1fU0VSSUFMfGUwZTJjMGFlNTg4M2U1ZDU5NTZhNjY5OWNkNWU4ZTg1CmZhY3Rvcj1CTFVFVE9PVEh8YmJjMzI5ZTJhMWUzOGZiOWMxY2JlMDYzMjY1MGI0ZmEKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtbG9jLTEKc2VhdD05MzA4OTAyNzQxODQ1MzA1CnJpZ2h0PXJlbnRhbHxsb2MtY20yfGNsYXNzZS1jbTJ8MTgwMDAwMDAwMDAwMHwxODAwMDAwMDAwMDAwfDMwfDB8MHwwfEJMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMOjhGbzliaU82MWlZZGZ4aGJRbWdyRS14d2pFNFMxQjJ3U09lazExT0l4QzBjakI0R1pKelp1REFOZE81eXl5TS1KT1dLeldVaXJ4c0tFYy1OO0JMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtXSUZJOndwWjA0Q2ZaODZLMGx2SktPdjZDcmVCcVdXUmlMUVF0TXFlaXFmUEVPNUw5aGlWRWdFelJvX2tzYUtVdlhMeHNJZFRkZURab1hUU1dlODNVO0JMVUVUT09USCtFVEhFUk5FVCtTWVNURU1fU0VSSUFMK1dJRkk6TmVSVmNVWGZwNk5SMkgtcW9HOEtqa2pPTXRTUEx4cTdySkVBWGJZazlvanRWekxkSTZjRGwxN2QxdUJ0WVctaERGTnVDazFuQmJTeWR2V0Y7QkxVRVRPT1RIK0ZMQVNIK1NZU1RFTV9TRVJJQUwrV0lGSTpUdEJCODlTWDIyZGcyNk41d3B1VEVySFVEUElIUVBrSTZ3MzNseERXckM4bl9VTEtDRHQ3NEZjeEoya1A2X2VsWjY5WkVORU9DSWRpc3h0aTtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMK1dJRkk6eENWblNRcHFXbVh5UEtEaHhuS0JtTmd4ZThyRzliQjNXUE16Sk03VXp0NzkyZnlCSnNQVUhYRUhwV0Izb0p1WFVSTklqV3Y5SURyakxMQVM.GQl2Q/ut6ynQH3JYTwyFf7ALxuXS4gAgHYV3o/LGANK4KmTtg99JNast1XchkktX7xBN8F1Z5XONeB/pnjD4Dw=="
+      }
+    },
+    {
+      "id": "build-rental-grace-usage-cap",
+      "type": "build-activation",
+      "signer": "desk",
+      "request": {
+        "device": "tvA",
+        "license": "lic-loc-1",
+        "issuedAt": 1800000000000,
+        "windowHours": 48,
+        "nonce": "00112233445566778899aabbccddeeff",
+        "rentals": [
+          {
+            "product": "loc-cm2",
+            "bundles": ["classe-cm2"],
+            "startsAt": 1800000000000,
+            "period": 1800000000000,
+            "days": 30,
+            "graceMs": 172800000,
+            "usage": 600,
+            "concurrent": 2
+          }
+        ],
+        "rights": []
+      },
+      "expect": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWU3YTM3Mzc0ODA1Y2VlMzIKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTgwMDAwMDAwMDAwMApleHBpcmVzQXQ9MTgwMDE3MjgwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8OWRjNzk0OGM0ODc0NDgwZWIzNzJkMWFjZTM1MDdkM2QKZmFjdG9yPUVUSEVSTkVUfDQwNGUzNTcyYzk5YzRiNGFlMzYzNGEyNDNkZTk0MGI2CmZhY3Rvcj1XSUZJfGNlZWNjOGIzMzI4NmVhMjJjYmU3N2JjYzBiZTMwMzE3CmZhY3Rvcj1TWVNURU1fU0VSSUFMfGUwZTJjMGFlNTg4M2U1ZDU5NTZhNjY5OWNkNWU4ZTg1CmZhY3Rvcj1CTFVFVE9PVEh8YmJjMzI5ZTJhMWUzOGZiOWMxY2JlMDYzMjY1MGI0ZmEKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtbG9jLTEKc2VhdD05MzA4OTAyNzQxODQ1MzA1CnJpZ2h0PXJlbnRhbHxsb2MtY20yfGNsYXNzZS1jbTJ8MTgwMDAwMDAwMDAwMHwxODAwMDAwMDAwMDAwfDMwfDE3MjgwMDAwMHw2MDB8MnxCTFVFVE9PVEgrRVRIRVJORVQrRkxBU0grU1lTVEVNX1NFUklBTDo4Rm85YmlPNjFpWWRmeGhiUW1nckUteHdqRTRTMUIyd1NPZWsxMU9JeEMwY2pCNEdaSnpadURBTmRPNXl5eU0tSk9XS3pXVWlyeHNLRWMtTjtCTFVFVE9PVEgrRVRIRVJORVQrRkxBU0grV0lGSTp3cFowNENmWjg2SzBsdkpLT3Y2Q3JlQnFXV1JpTFFRdE1xZWlxZlBFTzVMOWhpVkVnRXpSb19rc2FLVXZYTHhzSWRUZGVEWm9YVFNXZTgzVTtCTFVFVE9PVEgrRVRIRVJORVQrU1lTVEVNX1NFUklBTCtXSUZJOk5lUlZjVVhmcDZOUjJILXFvRzhLamtqT010U1BMeHE3ckpFQVhiWWs5b2p0VnpMZEk2Y0RsMTdkMXVCdFlXLWhERk51Q2sxbkJiU3lkdldGO0JMVUVUT09USCtGTEFTSCtTWVNURU1fU0VSSUFMK1dJRkk6VHRCQjg5U1gyMmRnMjZONXdwdVRFckhVRFBJSFFQa0k2dzMzbHhEV3JDOG5fVUxLQ0R0NzRGY3hKMmtQNl9lbFo2OVpFTkVPQ0lkaXN4dGk7RVRIRVJORVQrRkxBU0grU1lTVEVNX1NFUklBTCtXSUZJOnhDVm5TUXBxV21YeVBLRGh4bktCbU5neGU4ckc5YkIzV1BNekpNN1V6dDc5MmZ5QkpzUFVIWEVIcFdCM29KdVhVUk5Jald2OUlEcmpMTEFT.cK1LKWNi/jQKbeVtZqYW72HPlq2N/VHGoyrlpoQ/ADspN9rPUnbk/FB/HG489qsErB2blBXF7p96brU7C/3ACQ=="
+      }
+    },
+    {
+      "id": "build-rental-with-purchase",
+      "type": "build-activation",
+      "signer": "desk",
+      "request": {
+        "device": "tvA",
+        "license": "lic-loc-1",
+        "issuedAt": 1800000000000,
+        "windowHours": 48,
+        "nonce": "00112233445566778899aabbccddeeff",
+        "rentals": [
+          {
+            "product": "loc-cm2",
+            "bundles": ["classe-cm2"],
+            "startsAt": 1800000000000,
+            "period": 1800000000000,
+            "days": 30,
+            "graceMs": 0,
+            "usage": 0,
+            "concurrent": 0
+          }
+        ],
+        "rights": ["purchase|p-classe-cm2|classe-cm2|1799136000000"]
+      },
+      "expect": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWU3YTM3Mzc0ODA1Y2VlMzIKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTgwMDAwMDAwMDAwMApleHBpcmVzQXQ9MTgwMDE3MjgwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8OWRjNzk0OGM0ODc0NDgwZWIzNzJkMWFjZTM1MDdkM2QKZmFjdG9yPUVUSEVSTkVUfDQwNGUzNTcyYzk5YzRiNGFlMzYzNGEyNDNkZTk0MGI2CmZhY3Rvcj1XSUZJfGNlZWNjOGIzMzI4NmVhMjJjYmU3N2JjYzBiZTMwMzE3CmZhY3Rvcj1TWVNURU1fU0VSSUFMfGUwZTJjMGFlNTg4M2U1ZDU5NTZhNjY5OWNkNWU4ZTg1CmZhY3Rvcj1CTFVFVE9PVEh8YmJjMzI5ZTJhMWUzOGZiOWMxY2JlMDYzMjY1MGI0ZmEKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtbG9jLTEKc2VhdD05MzA4OTAyNzQxODQ1MzA1CnJpZ2h0PXB1cmNoYXNlfHAtY2xhc3NlLWNtMnxjbGFzc2UtY20yfDE3OTkxMzYwMDAwMDAKcmlnaHQ9cmVudGFsfGxvYy1jbTJ8Y2xhc3NlLWNtMnwxODAwMDAwMDAwMDAwfDE4MDAwMDAwMDAwMDB8MzB8MHwwfDB8QkxVRVRPT1RIK0VUSEVSTkVUK0ZMQVNIK1NZU1RFTV9TRVJJQUw6OEZvOWJpTzYxaVlkZnhoYlFtZ3JFLXh3akU0UzFCMndTT2VrMTFPSXhDMGNqQjRHWkp6WnVEQU5kTzV5eXlNLUpPV0t6V1VpcnhzS0VjLU47QkxVRVRPT1RIK0VUSEVSTkVUK0ZMQVNIK1dJRkk6d3BaMDRDZlo4NkswbHZKS092NkNyZUJxV1dSaUxRUXRNcWVpcWZQRU81TDloaVZFZ0V6Um9fa3NhS1V2WEx4c0lkVGRlRFpvWFRTV2U4M1U7QkxVRVRPT1RIK0VUSEVSTkVUK1NZU1RFTV9TRVJJQUwrV0lGSTpOZVJWY1VYZnA2TlIySC1xb0c4S2prak9NdFNQTHhxN3JKRUFYYllrOW9qdFZ6TGRJNmNEbDE3ZDF1QnRZVy1oREZOdUNrMW5CYlN5ZHZXRjtCTFVFVE9PVEgrRkxBU0grU1lTVEVNX1NFUklBTCtXSUZJOlR0QkI4OVNYMjJkZzI2TjV3cHVURXJIVURQSUhRUGtJNnczM2x4RFdyQzhuX1VMS0NEdDc0RmN4SjJrUDZfZWxaNjlaRU5FT0NJZGlzeHRpO0VUSEVSTkVUK0ZMQVNIK1NZU1RFTV9TRVJJQUwrV0lGSTp4Q1ZuU1FwcVdtWHlQS0RoeG5LQm1OZ3hlOHJHOWJCM1dQTXpKTTdVenQ3OTJmeUJKc1BVSFhFSHBXQjNvSnVYVVJOSWpXdjlJRHJqTExBUw.7bAIuRv/ifWrouSACgdvpEtb3QPH9lw/KMmRgM0SJ3BeGW/S1s05bUJulsIusedmai0/zwjhucwAZ5QxwkQZDQ=="
+      }
+    },
+    {
+      "id": "build-rental-renewal",
+      "type": "build-activation",
+      "signer": "desk",
+      "request": {
+        "device": "tvA",
+        "license": "lic-loc-1",
+        "issuedAt": 1800000000000,
+        "windowHours": 48,
+        "nonce": "00112233445566778899aabbccddeeff",
+        "rentals": [
+          {
+            "product": "loc-cm2",
+            "bundles": ["classe-cm2"],
+            "startsAt": 1801728000000,
+            "period": 1800000000000,
+            "days": 30,
+            "graceMs": 0,
+            "usage": 0,
+            "concurrent": 0
+          }
+        ],
+        "rights": []
+      },
+      "expect": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWU3YTM3Mzc0ODA1Y2VlMzIKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTgwMDAwMDAwMDAwMApleHBpcmVzQXQ9MTgwMDE3MjgwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8OWRjNzk0OGM0ODc0NDgwZWIzNzJkMWFjZTM1MDdkM2QKZmFjdG9yPUVUSEVSTkVUfDQwNGUzNTcyYzk5YzRiNGFlMzYzNGEyNDNkZTk0MGI2CmZhY3Rvcj1XSUZJfGNlZWNjOGIzMzI4NmVhMjJjYmU3N2JjYzBiZTMwMzE3CmZhY3Rvcj1TWVNURU1fU0VSSUFMfGUwZTJjMGFlNTg4M2U1ZDU5NTZhNjY5OWNkNWU4ZTg1CmZhY3Rvcj1CTFVFVE9PVEh8YmJjMzI5ZTJhMWUzOGZiOWMxY2JlMDYzMjY1MGI0ZmEKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtbG9jLTEKc2VhdD05MzA4OTAyNzQxODQ1MzA1CnJpZ2h0PXJlbnRhbHxsb2MtY20yfGNsYXNzZS1jbTJ8MTgwMTcyODAwMDAwMHwxODAwMDAwMDAwMDAwfDMwfDB8MHwwfEJMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMOjhGbzliaU82MWlZZGZ4aGJRbWdyRS14d2pFNFMxQjJ3U09lazExT0l4QzBjakI0R1pKelp1REFOZE81eXl5TS1KT1dLeldVaXJ4c0tFYy1OO0JMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtXSUZJOndwWjA0Q2ZaODZLMGx2SktPdjZDcmVCcVdXUmlMUVF0TXFlaXFmUEVPNUw5aGlWRWdFelJvX2tzYUtVdlhMeHNJZFRkZURab1hUU1dlODNVO0JMVUVUT09USCtFVEhFUk5FVCtTWVNURU1fU0VSSUFMK1dJRkk6TmVSVmNVWGZwNk5SMkgtcW9HOEtqa2pPTXRTUEx4cTdySkVBWGJZazlvanRWekxkSTZjRGwxN2QxdUJ0WVctaERGTnVDazFuQmJTeWR2V0Y7QkxVRVRPT1RIK0ZMQVNIK1NZU1RFTV9TRVJJQUwrV0lGSTpUdEJCODlTWDIyZGcyNk41d3B1VEVySFVEUElIUVBrSTZ3MzNseERXckM4bl9VTEtDRHQ3NEZjeEoya1A2X2VsWjY5WkVORU9DSWRpc3h0aTtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMK1dJRkk6eENWblNRcHFXbVh5UEtEaHhuS0JtTmd4ZThyRzliQjNXUE16Sk03VXp0NzkyZnlCSnNQVUhYRUhwV0Izb0p1WFVSTklqV3Y5SURyakxMQVM.d3GAhsy5+yXlq4ykobvYCXXecTy6t6i9amfF1/0AiD3qsNrsqIWbl7i2CVYKM5tDx4s3EV5bK/ixE1pkl+8OBA=="
+      }
+    },
+    {
+      "id": "build-two-rentals-one-activation",
+      "type": "build-activation",
+      "signer": "desk",
+      "request": {
+        "device": "tvA",
+        "license": "lic-loc-1",
+        "issuedAt": 1800000000000,
+        "windowHours": 48,
+        "nonce": "00112233445566778899aabbccddeeff",
+        "rentals": [
+          {
+            "product": "loc-a",
+            "bundles": ["classe-cm2"],
+            "startsAt": 1800000000000,
+            "period": 1800000000000,
+            "days": 30,
+            "graceMs": 0,
+            "usage": 0,
+            "concurrent": 0
+          },
+          {
+            "product": "loc-b",
+            "bundles": ["quiz-cm2"],
+            "startsAt": 1800000000000,
+            "period": 1800000000000,
+            "days": 90,
+            "graceMs": 0,
+            "usage": 0,
+            "concurrent": 0
+          }
+        ],
+        "rights": []
+      },
+      "expect": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWU3YTM3Mzc0ODA1Y2VlMzIKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTgwMDAwMDAwMDAwMApleHBpcmVzQXQ9MTgwMDE3MjgwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8OWRjNzk0OGM0ODc0NDgwZWIzNzJkMWFjZTM1MDdkM2QKZmFjdG9yPUVUSEVSTkVUfDQwNGUzNTcyYzk5YzRiNGFlMzYzNGEyNDNkZTk0MGI2CmZhY3Rvcj1XSUZJfGNlZWNjOGIzMzI4NmVhMjJjYmU3N2JjYzBiZTMwMzE3CmZhY3Rvcj1TWVNURU1fU0VSSUFMfGUwZTJjMGFlNTg4M2U1ZDU5NTZhNjY5OWNkNWU4ZTg1CmZhY3Rvcj1CTFVFVE9PVEh8YmJjMzI5ZTJhMWUzOGZiOWMxY2JlMDYzMjY1MGI0ZmEKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtbG9jLTEKc2VhdD05MzA4OTAyNzQxODQ1MzA1CnJpZ2h0PXJlbnRhbHxsb2MtYXxjbGFzc2UtY20yfDE4MDAwMDAwMDAwMDB8MTgwMDAwMDAwMDAwMHwzMHwwfDB8MHxCTFVFVE9PVEgrRVRIRVJORVQrRkxBU0grU1lTVEVNX1NFUklBTDpndnZ2WlJvR0ctS1JiazRYSFRmdUJMR242c01XaG5xTTk5R29vN2NWSHpLams3WUtJMkFOeU11ZFNubTZfYlQwT2Q2TV92WVFpMXVrdVJTeDtCTFVFVE9PVEgrRVRIRVJORVQrRkxBU0grV0lGSTpoazgxZ3gySjEzcjRaYldhei04ZHc2VVdhWVZ3TnBORDVaU3ZFVGd2cFh6SkJJdzJ0QTBSTWZKMVZxQ0RwRm5LSDFDWWd6cmhrTDNwWVhmbjtCTFVFVE9PVEgrRVRIRVJORVQrU1lTVEVNX1NFUklBTCtXSUZJOlN4cnU4VFNjWXdwN0h3eEF1TWRFQUtOSWV3ZnhHaUpKcDktcmJyOG1vU1hZT2ppcEIzR2JHZ2dpMmNjQkxKdmo2WWRZa3NyRk9Ob0dKTnc3O0JMVUVUT09USCtGTEFTSCtTWVNURU1fU0VSSUFMK1dJRkk6VVZwOUpFWFpDVUhIRnBPekR1dHcwSzZEUGt6SC12UkdhY3BMV0pidGdKeGtIM0V1aEpMWWJfczd4NDFueC1rQmp3NnNUV2RFakJfZm0zaEM7RVRIRVJORVQrRkxBU0grU1lTVEVNX1NFUklBTCtXSUZJOlRjRXVsc01Sc2pMMXpWS3dNMF9qQ2QxU1JMX1hIYURGanlCdUZkTC1EWUpMa1R1eFNMajZwWGk2RzcwbHVmbWZwM3pUWHZCLTVNTnd1ZHNyCnJpZ2h0PXJlbnRhbHxsb2MtYnxxdWl6LWNtMnwxODAwMDAwMDAwMDAwfDE4MDAwMDAwMDAwMDB8OTB8MHwwfDB8QkxVRVRPT1RIK0VUSEVSTkVUK0ZMQVNIK1NZU1RFTV9TRVJJQUw6SERNQ3JHRDQ0OFNpcW1YUnFzN1VqaGE1aVpOYlBFZkZ0Vm5LY0hmcEIwTWo4clN3d19LcEQtbGxGUDlHWXdlOE9tY0NtemZLdlBmTFIwMUU7QkxVRVRPT1RIK0VUSEVSTkVUK0ZMQVNIK1dJRkk6S0dvbVE3ZXVIdVM4MnpOVlB6Uk0tUXppMTlxNHNRSGVvc3Q1YXdnc1N5Uy04ck5mUmUwdEphcFY1aHZHbV9wOFJxbGdzb1k5ejRUOENobnM7QkxVRVRPT1RIK0VUSEVSTkVUK1NZU1RFTV9TRVJJQUwrV0lGSTpLM1VpY0dWcmRKRFVRSkJobGZjU0psWHgycWlTeUs5ajI5TlNrQ1RHQ2MxTzFXM2FvSUplZkZzM2RMNnI4X3ZyUHJ0ZlRBandSbTlwTVRCYTtCTFVFVE9PVEgrRkxBU0grU1lTVEVNX1NFUklBTCtXSUZJOk1waU9RLVplMlVBS3JKMU43UnJsVUdpZGxKWGN2TDNQQTRDb0JiNzRZdXlaRV9sN3N6Q2NwVkRCRDdPZmtJZlRwYi1obGFhMDBIWUFPNnJ2O0VUSEVSTkVUK0ZMQVNIK1NZU1RFTV9TRVJJQUwrV0lGSTpsYjlDdkt6Rm81WVJJSE50bHhXcERORFFRX2lISk8yV2lNNlVybFFlWEIyRWRQbzItWDB0SlBDcklPbFA2LVYtdHVEUE5xaGlNc1pqRm83Nw.JdqpSteCFwfqnYT1YeYdKhjpn9RkQ3kqVrbfmOc6six1sZqv5kYxaj0Zw/a5ug7GO7ssM65rThmyygJWTTIaDw=="
+      }
+    },
+    {
+      "id": "build-refuse-367-days",
+      "type": "build-activation",
+      "signer": "desk",
+      "request": {
+        "device": "tvA",
+        "license": "lic-loc-1",
+        "issuedAt": 1800000000000,
+        "windowHours": 48,
+        "nonce": "00112233445566778899aabbccddeeff",
+        "rentals": [
+          {
+            "product": "loc-cm2",
+            "bundles": ["classe-cm2"],
+            "startsAt": 1800000000000,
+            "period": 1800000000000,
+            "days": 367,
+            "graceMs": 0,
+            "usage": 0,
+            "concurrent": 0
+          }
+        ],
+        "rights": []
+      },
+      "expect": {
+        "refused": true
+      }
+    },
+    {
+      "id": "build-refuse-0-days",
+      "type": "build-activation",
+      "signer": "desk",
+      "request": {
+        "device": "tvA",
+        "license": "lic-loc-1",
+        "issuedAt": 1800000000000,
+        "windowHours": 48,
+        "nonce": "00112233445566778899aabbccddeeff",
+        "rentals": [
+          {
+            "product": "loc-cm2",
+            "bundles": ["classe-cm2"],
+            "startsAt": 1800000000000,
+            "period": 1800000000000,
+            "days": 0,
+            "graceMs": 0,
+            "usage": 0,
+            "concurrent": 0
+          }
+        ],
+        "rights": []
+      },
+      "expect": {
+        "refused": true
+      }
+    },
+    {
+      "id": "build-refuse-grace-31-days",
+      "type": "build-activation",
+      "signer": "desk",
+      "request": {
+        "device": "tvA",
+        "license": "lic-loc-1",
+        "issuedAt": 1800000000000,
+        "windowHours": 48,
+        "nonce": "00112233445566778899aabbccddeeff",
+        "rentals": [
+          {
+            "product": "loc-cm2",
+            "bundles": ["classe-cm2"],
+            "startsAt": 1800000000000,
+            "period": 1800000000000,
+            "days": 30,
+            "graceMs": 2678400000,
+            "usage": 0,
+            "concurrent": 0
+          }
+        ],
+        "rights": []
+      },
+      "expect": {
+        "refused": true
+      }
+    },
+    {
+      "id": "build-refuse-concurrent-21",
+      "type": "build-activation",
+      "signer": "desk",
+      "request": {
+        "device": "tvA",
+        "license": "lic-loc-1",
+        "issuedAt": 1800000000000,
+        "windowHours": 48,
+        "nonce": "00112233445566778899aabbccddeeff",
+        "rentals": [
+          {
+            "product": "loc-cm2",
+            "bundles": ["classe-cm2"],
+            "startsAt": 1800000000000,
+            "period": 1800000000000,
+            "days": 30,
+            "graceMs": 0,
+            "usage": 0,
+            "concurrent": 21
+          }
+        ],
+        "rights": []
+      },
+      "expect": {
+        "refused": true
+      }
+    },
+    {
+      "id": "build-refuse-period-after-start",
+      "type": "build-activation",
+      "signer": "desk",
+      "request": {
+        "device": "tvA",
+        "license": "lic-loc-1",
+        "issuedAt": 1800000000000,
+        "windowHours": 48,
+        "nonce": "00112233445566778899aabbccddeeff",
+        "rentals": [
+          {
+            "product": "loc-cm2",
+            "bundles": ["classe-cm2"],
+            "startsAt": 1800000000000,
+            "period": 1800086400000,
+            "days": 30,
+            "graceMs": 0,
+            "usage": 0,
+            "concurrent": 0
+          }
+        ],
+        "rights": []
+      },
+      "expect": {
+        "refused": true
+      }
+    },
+    {
+      "id": "build-refuse-key-without-production-scope",
+      "type": "build-activation",
+      "signer": "noprod",
+      "request": {
+        "device": "tvA",
+        "license": "lic-loc-1",
+        "issuedAt": 1800000000000,
+        "windowHours": 48,
+        "nonce": "00112233445566778899aabbccddeeff",
+        "rentals": [
+          {
+            "product": "loc-cm2",
+            "bundles": ["classe-cm2"],
+            "startsAt": 1800000000000,
+            "period": 1800000000000,
+            "days": 30,
+            "graceMs": 0,
+            "usage": 0,
+            "concurrent": 0
+          }
+        ],
+        "rights": []
+      },
+      "expect": {
+        "refused": true
+      }
+    },
+    {
+      "id": "state-day-1-active",
+      "type": "rental-state",
+      "device": "tvA",
+      "tokens": ["cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWU3YTM3Mzc0ODA1Y2VlMzIKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTgwMDAwMDAwMDAwMApleHBpcmVzQXQ9MTgwMDE3MjgwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8OWRjNzk0OGM0ODc0NDgwZWIzNzJkMWFjZTM1MDdkM2QKZmFjdG9yPUVUSEVSTkVUfDQwNGUzNTcyYzk5YzRiNGFlMzYzNGEyNDNkZTk0MGI2CmZhY3Rvcj1XSUZJfGNlZWNjOGIzMzI4NmVhMjJjYmU3N2JjYzBiZTMwMzE3CmZhY3Rvcj1TWVNURU1fU0VSSUFMfGUwZTJjMGFlNTg4M2U1ZDU5NTZhNjY5OWNkNWU4ZTg1CmZhY3Rvcj1CTFVFVE9PVEh8YmJjMzI5ZTJhMWUzOGZiOWMxY2JlMDYzMjY1MGI0ZmEKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtbG9jLTEKc2VhdD05MzA4OTAyNzQxODQ1MzA1CnJpZ2h0PXJlbnRhbHxsb2MtY20yfGNsYXNzZS1jbTJ8MTgwMDAwMDAwMDAwMHwxODAwMDAwMDAwMDAwfDMwfDB8MHwwfEJMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMOjhGbzliaU82MWlZZGZ4aGJRbWdyRS14d2pFNFMxQjJ3U09lazExT0l4QzBjakI0R1pKelp1REFOZE81eXl5TS1KT1dLeldVaXJ4c0tFYy1OO0JMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtXSUZJOndwWjA0Q2ZaODZLMGx2SktPdjZDcmVCcVdXUmlMUVF0TXFlaXFmUEVPNUw5aGlWRWdFelJvX2tzYUtVdlhMeHNJZFRkZURab1hUU1dlODNVO0JMVUVUT09USCtFVEhFUk5FVCtTWVNURU1fU0VSSUFMK1dJRkk6TmVSVmNVWGZwNk5SMkgtcW9HOEtqa2pPTXRTUEx4cTdySkVBWGJZazlvanRWekxkSTZjRGwxN2QxdUJ0WVctaERGTnVDazFuQmJTeWR2V0Y7QkxVRVRPT1RIK0ZMQVNIK1NZU1RFTV9TRVJJQUwrV0lGSTpUdEJCODlTWDIyZGcyNk41d3B1VEVySFVEUElIUVBrSTZ3MzNseERXckM4bl9VTEtDRHQ3NEZjeEoya1A2X2VsWjY5WkVORU9DSWRpc3h0aTtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMK1dJRkk6eENWblNRcHFXbVh5UEtEaHhuS0JtTmd4ZThyRzliQjNXUE16Sk03VXp0NzkyZnlCSnNQVUhYRUhwV0Izb0p1WFVSTklqV3Y5SURyakxMQVM.GQl2Q/ut6ynQH3JYTwyFf7ALxuXS4gAgHYV3o/LGANK4KmTtg99JNast1XchkktX7xBN8F1Z5XONeB/pnjD4Dw=="],
+      "wallMs": 1800086400000,
+      "clock": {
+        "lastSeen": 0,
+        "floor": 0
+      },
+      "usedMinutes": {},
+      "expired": {},
+      "expect": [
+        {
+          "key": "loc-cm2@1800000000000",
+          "state": "ACTIVE",
+          "reason": null,
+          "doubt": null,
+          "remainingMs": 2505600000,
+          "remainingUsageMinutes": null,
+          "warning": "NONE",
+          "message": "Il vous reste 29 jours"
+        }
+      ]
+    },
+    {
+      "id": "state-7-days-left-warning",
+      "type": "rental-state",
+      "device": "tvA",
+      "tokens": ["cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWU3YTM3Mzc0ODA1Y2VlMzIKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTgwMDAwMDAwMDAwMApleHBpcmVzQXQ9MTgwMDE3MjgwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8OWRjNzk0OGM0ODc0NDgwZWIzNzJkMWFjZTM1MDdkM2QKZmFjdG9yPUVUSEVSTkVUfDQwNGUzNTcyYzk5YzRiNGFlMzYzNGEyNDNkZTk0MGI2CmZhY3Rvcj1XSUZJfGNlZWNjOGIzMzI4NmVhMjJjYmU3N2JjYzBiZTMwMzE3CmZhY3Rvcj1TWVNURU1fU0VSSUFMfGUwZTJjMGFlNTg4M2U1ZDU5NTZhNjY5OWNkNWU4ZTg1CmZhY3Rvcj1CTFVFVE9PVEh8YmJjMzI5ZTJhMWUzOGZiOWMxY2JlMDYzMjY1MGI0ZmEKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtbG9jLTEKc2VhdD05MzA4OTAyNzQxODQ1MzA1CnJpZ2h0PXJlbnRhbHxsb2MtY20yfGNsYXNzZS1jbTJ8MTgwMDAwMDAwMDAwMHwxODAwMDAwMDAwMDAwfDMwfDB8MHwwfEJMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMOjhGbzliaU82MWlZZGZ4aGJRbWdyRS14d2pFNFMxQjJ3U09lazExT0l4QzBjakI0R1pKelp1REFOZE81eXl5TS1KT1dLeldVaXJ4c0tFYy1OO0JMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtXSUZJOndwWjA0Q2ZaODZLMGx2SktPdjZDcmVCcVdXUmlMUVF0TXFlaXFmUEVPNUw5aGlWRWdFelJvX2tzYUtVdlhMeHNJZFRkZURab1hUU1dlODNVO0JMVUVUT09USCtFVEhFUk5FVCtTWVNURU1fU0VSSUFMK1dJRkk6TmVSVmNVWGZwNk5SMkgtcW9HOEtqa2pPTXRTUEx4cTdySkVBWGJZazlvanRWekxkSTZjRGwxN2QxdUJ0WVctaERGTnVDazFuQmJTeWR2V0Y7QkxVRVRPT1RIK0ZMQVNIK1NZU1RFTV9TRVJJQUwrV0lGSTpUdEJCODlTWDIyZGcyNk41d3B1VEVySFVEUElIUVBrSTZ3MzNseERXckM4bl9VTEtDRHQ3NEZjeEoya1A2X2VsWjY5WkVORU9DSWRpc3h0aTtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMK1dJRkk6eENWblNRcHFXbVh5UEtEaHhuS0JtTmd4ZThyRzliQjNXUE16Sk03VXp0NzkyZnlCSnNQVUhYRUhwV0Izb0p1WFVSTklqV3Y5SURyakxMQVM.GQl2Q/ut6ynQH3JYTwyFf7ALxuXS4gAgHYV3o/LGANK4KmTtg99JNast1XchkktX7xBN8F1Z5XONeB/pnjD4Dw=="],
+      "wallMs": 1801987200000,
+      "clock": {
+        "lastSeen": 0,
+        "floor": 0
+      },
+      "usedMinutes": {},
+      "expired": {},
+      "expect": [
+        {
+          "key": "loc-cm2@1800000000000",
+          "state": "ACTIVE",
+          "reason": null,
+          "doubt": null,
+          "remainingMs": 604800000,
+          "remainingUsageMinutes": null,
+          "warning": "DAYS_7",
+          "message": "Il vous reste 7 jours"
+        }
+      ]
+    },
+    {
+      "id": "state-24h-left-warning",
+      "type": "rental-state",
+      "device": "tvA",
+      "tokens": ["cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWU3YTM3Mzc0ODA1Y2VlMzIKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTgwMDAwMDAwMDAwMApleHBpcmVzQXQ9MTgwMDE3MjgwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8OWRjNzk0OGM0ODc0NDgwZWIzNzJkMWFjZTM1MDdkM2QKZmFjdG9yPUVUSEVSTkVUfDQwNGUzNTcyYzk5YzRiNGFlMzYzNGEyNDNkZTk0MGI2CmZhY3Rvcj1XSUZJfGNlZWNjOGIzMzI4NmVhMjJjYmU3N2JjYzBiZTMwMzE3CmZhY3Rvcj1TWVNURU1fU0VSSUFMfGUwZTJjMGFlNTg4M2U1ZDU5NTZhNjY5OWNkNWU4ZTg1CmZhY3Rvcj1CTFVFVE9PVEh8YmJjMzI5ZTJhMWUzOGZiOWMxY2JlMDYzMjY1MGI0ZmEKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtbG9jLTEKc2VhdD05MzA4OTAyNzQxODQ1MzA1CnJpZ2h0PXJlbnRhbHxsb2MtY20yfGNsYXNzZS1jbTJ8MTgwMDAwMDAwMDAwMHwxODAwMDAwMDAwMDAwfDMwfDB8MHwwfEJMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMOjhGbzliaU82MWlZZGZ4aGJRbWdyRS14d2pFNFMxQjJ3U09lazExT0l4QzBjakI0R1pKelp1REFOZE81eXl5TS1KT1dLeldVaXJ4c0tFYy1OO0JMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtXSUZJOndwWjA0Q2ZaODZLMGx2SktPdjZDcmVCcVdXUmlMUVF0TXFlaXFmUEVPNUw5aGlWRWdFelJvX2tzYUtVdlhMeHNJZFRkZURab1hUU1dlODNVO0JMVUVUT09USCtFVEhFUk5FVCtTWVNURU1fU0VSSUFMK1dJRkk6TmVSVmNVWGZwNk5SMkgtcW9HOEtqa2pPTXRTUEx4cTdySkVBWGJZazlvanRWekxkSTZjRGwxN2QxdUJ0WVctaERGTnVDazFuQmJTeWR2V0Y7QkxVRVRPT1RIK0ZMQVNIK1NZU1RFTV9TRVJJQUwrV0lGSTpUdEJCODlTWDIyZGcyNk41d3B1VEVySFVEUElIUVBrSTZ3MzNseERXckM4bl9VTEtDRHQ3NEZjeEoya1A2X2VsWjY5WkVORU9DSWRpc3h0aTtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMK1dJRkk6eENWblNRcHFXbVh5UEtEaHhuS0JtTmd4ZThyRzliQjNXUE16Sk03VXp0NzkyZnlCSnNQVUhYRUhwV0Izb0p1WFVSTklqV3Y5SURyakxMQVM.GQl2Q/ut6ynQH3JYTwyFf7ALxuXS4gAgHYV3o/LGANK4KmTtg99JNast1XchkktX7xBN8F1Z5XONeB/pnjD4Dw=="],
+      "wallMs": 1802505600000,
+      "clock": {
+        "lastSeen": 0,
+        "floor": 0
+      },
+      "usedMinutes": {},
+      "expired": {},
+      "expect": [
+        {
+          "key": "loc-cm2@1800000000000",
+          "state": "ACTIVE",
+          "reason": null,
+          "doubt": null,
+          "remainingMs": 86400000,
+          "remainingUsageMinutes": null,
+          "warning": "HOURS_24",
+          "message": "Il vous reste 1 jour"
+        }
+      ]
+    },
+    {
+      "id": "state-1h-left-warning",
+      "type": "rental-state",
+      "device": "tvA",
+      "tokens": ["cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWU3YTM3Mzc0ODA1Y2VlMzIKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTgwMDAwMDAwMDAwMApleHBpcmVzQXQ9MTgwMDE3MjgwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8OWRjNzk0OGM0ODc0NDgwZWIzNzJkMWFjZTM1MDdkM2QKZmFjdG9yPUVUSEVSTkVUfDQwNGUzNTcyYzk5YzRiNGFlMzYzNGEyNDNkZTk0MGI2CmZhY3Rvcj1XSUZJfGNlZWNjOGIzMzI4NmVhMjJjYmU3N2JjYzBiZTMwMzE3CmZhY3Rvcj1TWVNURU1fU0VSSUFMfGUwZTJjMGFlNTg4M2U1ZDU5NTZhNjY5OWNkNWU4ZTg1CmZhY3Rvcj1CTFVFVE9PVEh8YmJjMzI5ZTJhMWUzOGZiOWMxY2JlMDYzMjY1MGI0ZmEKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtbG9jLTEKc2VhdD05MzA4OTAyNzQxODQ1MzA1CnJpZ2h0PXJlbnRhbHxsb2MtY20yfGNsYXNzZS1jbTJ8MTgwMDAwMDAwMDAwMHwxODAwMDAwMDAwMDAwfDMwfDB8MHwwfEJMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMOjhGbzliaU82MWlZZGZ4aGJRbWdyRS14d2pFNFMxQjJ3U09lazExT0l4QzBjakI0R1pKelp1REFOZE81eXl5TS1KT1dLeldVaXJ4c0tFYy1OO0JMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtXSUZJOndwWjA0Q2ZaODZLMGx2SktPdjZDcmVCcVdXUmlMUVF0TXFlaXFmUEVPNUw5aGlWRWdFelJvX2tzYUtVdlhMeHNJZFRkZURab1hUU1dlODNVO0JMVUVUT09USCtFVEhFUk5FVCtTWVNURU1fU0VSSUFMK1dJRkk6TmVSVmNVWGZwNk5SMkgtcW9HOEtqa2pPTXRTUEx4cTdySkVBWGJZazlvanRWekxkSTZjRGwxN2QxdUJ0WVctaERGTnVDazFuQmJTeWR2V0Y7QkxVRVRPT1RIK0ZMQVNIK1NZU1RFTV9TRVJJQUwrV0lGSTpUdEJCODlTWDIyZGcyNk41d3B1VEVySFVEUElIUVBrSTZ3MzNseERXckM4bl9VTEtDRHQ3NEZjeEoya1A2X2VsWjY5WkVORU9DSWRpc3h0aTtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMK1dJRkk6eENWblNRcHFXbVh5UEtEaHhuS0JtTmd4ZThyRzliQjNXUE16Sk03VXp0NzkyZnlCSnNQVUhYRUhwV0Izb0p1WFVSTklqV3Y5SURyakxMQVM.GQl2Q/ut6ynQH3JYTwyFf7ALxuXS4gAgHYV3o/LGANK4KmTtg99JNast1XchkktX7xBN8F1Z5XONeB/pnjD4Dw=="],
+      "wallMs": 1802588400000,
+      "clock": {
+        "lastSeen": 0,
+        "floor": 0
+      },
+      "usedMinutes": {},
+      "expired": {},
+      "expect": [
+        {
+          "key": "loc-cm2@1800000000000",
+          "state": "ACTIVE",
+          "reason": null,
+          "doubt": null,
+          "remainingMs": 3600000,
+          "remainingUsageMinutes": null,
+          "warning": "HOUR_1",
+          "message": "Il vous reste 1 h"
+        }
+      ]
+    },
+    {
+      "id": "state-last-millisecond-active",
+      "type": "rental-state",
+      "device": "tvA",
+      "tokens": ["cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWU3YTM3Mzc0ODA1Y2VlMzIKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTgwMDAwMDAwMDAwMApleHBpcmVzQXQ9MTgwMDE3MjgwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8OWRjNzk0OGM0ODc0NDgwZWIzNzJkMWFjZTM1MDdkM2QKZmFjdG9yPUVUSEVSTkVUfDQwNGUzNTcyYzk5YzRiNGFlMzYzNGEyNDNkZTk0MGI2CmZhY3Rvcj1XSUZJfGNlZWNjOGIzMzI4NmVhMjJjYmU3N2JjYzBiZTMwMzE3CmZhY3Rvcj1TWVNURU1fU0VSSUFMfGUwZTJjMGFlNTg4M2U1ZDU5NTZhNjY5OWNkNWU4ZTg1CmZhY3Rvcj1CTFVFVE9PVEh8YmJjMzI5ZTJhMWUzOGZiOWMxY2JlMDYzMjY1MGI0ZmEKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtbG9jLTEKc2VhdD05MzA4OTAyNzQxODQ1MzA1CnJpZ2h0PXJlbnRhbHxsb2MtY20yfGNsYXNzZS1jbTJ8MTgwMDAwMDAwMDAwMHwxODAwMDAwMDAwMDAwfDMwfDB8MHwwfEJMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMOjhGbzliaU82MWlZZGZ4aGJRbWdyRS14d2pFNFMxQjJ3U09lazExT0l4QzBjakI0R1pKelp1REFOZE81eXl5TS1KT1dLeldVaXJ4c0tFYy1OO0JMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtXSUZJOndwWjA0Q2ZaODZLMGx2SktPdjZDcmVCcVdXUmlMUVF0TXFlaXFmUEVPNUw5aGlWRWdFelJvX2tzYUtVdlhMeHNJZFRkZURab1hUU1dlODNVO0JMVUVUT09USCtFVEhFUk5FVCtTWVNURU1fU0VSSUFMK1dJRkk6TmVSVmNVWGZwNk5SMkgtcW9HOEtqa2pPTXRTUEx4cTdySkVBWGJZazlvanRWekxkSTZjRGwxN2QxdUJ0WVctaERGTnVDazFuQmJTeWR2V0Y7QkxVRVRPT1RIK0ZMQVNIK1NZU1RFTV9TRVJJQUwrV0lGSTpUdEJCODlTWDIyZGcyNk41d3B1VEVySFVEUElIUVBrSTZ3MzNseERXckM4bl9VTEtDRHQ3NEZjeEoya1A2X2VsWjY5WkVORU9DSWRpc3h0aTtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMK1dJRkk6eENWblNRcHFXbVh5UEtEaHhuS0JtTmd4ZThyRzliQjNXUE16Sk03VXp0NzkyZnlCSnNQVUhYRUhwV0Izb0p1WFVSTklqV3Y5SURyakxMQVM.GQl2Q/ut6ynQH3JYTwyFf7ALxuXS4gAgHYV3o/LGANK4KmTtg99JNast1XchkktX7xBN8F1Z5XONeB/pnjD4Dw=="],
+      "wallMs": 1802591999999,
+      "clock": {
+        "lastSeen": 0,
+        "floor": 0
+      },
+      "usedMinutes": {},
+      "expired": {},
+      "expect": [
+        {
+          "key": "loc-cm2@1800000000000",
+          "state": "ACTIVE",
+          "reason": null,
+          "doubt": null,
+          "remainingMs": 1,
+          "remainingUsageMinutes": null,
+          "warning": "HOUR_1",
+          "message": "Il vous reste 1 min"
+        }
+      ]
+    },
+    {
+      "id": "state-exact-end-expired",
+      "type": "rental-state",
+      "device": "tvA",
+      "tokens": ["cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWU3YTM3Mzc0ODA1Y2VlMzIKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTgwMDAwMDAwMDAwMApleHBpcmVzQXQ9MTgwMDE3MjgwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8OWRjNzk0OGM0ODc0NDgwZWIzNzJkMWFjZTM1MDdkM2QKZmFjdG9yPUVUSEVSTkVUfDQwNGUzNTcyYzk5YzRiNGFlMzYzNGEyNDNkZTk0MGI2CmZhY3Rvcj1XSUZJfGNlZWNjOGIzMzI4NmVhMjJjYmU3N2JjYzBiZTMwMzE3CmZhY3Rvcj1TWVNURU1fU0VSSUFMfGUwZTJjMGFlNTg4M2U1ZDU5NTZhNjY5OWNkNWU4ZTg1CmZhY3Rvcj1CTFVFVE9PVEh8YmJjMzI5ZTJhMWUzOGZiOWMxY2JlMDYzMjY1MGI0ZmEKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtbG9jLTEKc2VhdD05MzA4OTAyNzQxODQ1MzA1CnJpZ2h0PXJlbnRhbHxsb2MtY20yfGNsYXNzZS1jbTJ8MTgwMDAwMDAwMDAwMHwxODAwMDAwMDAwMDAwfDMwfDB8MHwwfEJMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMOjhGbzliaU82MWlZZGZ4aGJRbWdyRS14d2pFNFMxQjJ3U09lazExT0l4QzBjakI0R1pKelp1REFOZE81eXl5TS1KT1dLeldVaXJ4c0tFYy1OO0JMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtXSUZJOndwWjA0Q2ZaODZLMGx2SktPdjZDcmVCcVdXUmlMUVF0TXFlaXFmUEVPNUw5aGlWRWdFelJvX2tzYUtVdlhMeHNJZFRkZURab1hUU1dlODNVO0JMVUVUT09USCtFVEhFUk5FVCtTWVNURU1fU0VSSUFMK1dJRkk6TmVSVmNVWGZwNk5SMkgtcW9HOEtqa2pPTXRTUEx4cTdySkVBWGJZazlvanRWekxkSTZjRGwxN2QxdUJ0WVctaERGTnVDazFuQmJTeWR2V0Y7QkxVRVRPT1RIK0ZMQVNIK1NZU1RFTV9TRVJJQUwrV0lGSTpUdEJCODlTWDIyZGcyNk41d3B1VEVySFVEUElIUVBrSTZ3MzNseERXckM4bl9VTEtDRHQ3NEZjeEoya1A2X2VsWjY5WkVORU9DSWRpc3h0aTtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMK1dJRkk6eENWblNRcHFXbVh5UEtEaHhuS0JtTmd4ZThyRzliQjNXUE16Sk03VXp0NzkyZnlCSnNQVUhYRUhwV0Izb0p1WFVSTklqV3Y5SURyakxMQVM.GQl2Q/ut6ynQH3JYTwyFf7ALxuXS4gAgHYV3o/LGANK4KmTtg99JNast1XchkktX7xBN8F1Z5XONeB/pnjD4Dw=="],
+      "wallMs": 1802592000000,
+      "clock": {
+        "lastSeen": 0,
+        "floor": 0
+      },
+      "usedMinutes": {},
+      "expired": {},
+      "expect": [
+        {
+          "key": "loc-cm2@1800000000000",
+          "state": "EXPIRED",
+          "reason": "DATE",
+          "doubt": null,
+          "remainingMs": null,
+          "remainingUsageMinutes": null,
+          "warning": "NONE",
+          "message": "Location terminée : ce contenu n'est plus disponible. Reprendre la location ?"
+        }
+      ]
+    },
+    {
+      "id": "state-grace-usable",
+      "type": "rental-state",
+      "device": "tvA",
+      "tokens": ["cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWU3YTM3Mzc0ODA1Y2VlMzIKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTgwMDAwMDAwMDAwMApleHBpcmVzQXQ9MTgwMDE3MjgwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8OWRjNzk0OGM0ODc0NDgwZWIzNzJkMWFjZTM1MDdkM2QKZmFjdG9yPUVUSEVSTkVUfDQwNGUzNTcyYzk5YzRiNGFlMzYzNGEyNDNkZTk0MGI2CmZhY3Rvcj1XSUZJfGNlZWNjOGIzMzI4NmVhMjJjYmU3N2JjYzBiZTMwMzE3CmZhY3Rvcj1TWVNURU1fU0VSSUFMfGUwZTJjMGFlNTg4M2U1ZDU5NTZhNjY5OWNkNWU4ZTg1CmZhY3Rvcj1CTFVFVE9PVEh8YmJjMzI5ZTJhMWUzOGZiOWMxY2JlMDYzMjY1MGI0ZmEKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtbG9jLTEKc2VhdD05MzA4OTAyNzQxODQ1MzA1CnJpZ2h0PXJlbnRhbHxsb2MtY20yfGNsYXNzZS1jbTJ8MTgwMDAwMDAwMDAwMHwxODAwMDAwMDAwMDAwfDEwfDE3MjgwMDAwMHwwfDB8QkxVRVRPT1RIK0VUSEVSTkVUK0ZMQVNIK1NZU1RFTV9TRVJJQUw6OEZvOWJpTzYxaVlkZnhoYlFtZ3JFLXh3akU0UzFCMndTT2VrMTFPSXhDMGNqQjRHWkp6WnVEQU5kTzV5eXlNLUpPV0t6V1VpcnhzS0VjLU47QkxVRVRPT1RIK0VUSEVSTkVUK0ZMQVNIK1dJRkk6d3BaMDRDZlo4NkswbHZKS092NkNyZUJxV1dSaUxRUXRNcWVpcWZQRU81TDloaVZFZ0V6Um9fa3NhS1V2WEx4c0lkVGRlRFpvWFRTV2U4M1U7QkxVRVRPT1RIK0VUSEVSTkVUK1NZU1RFTV9TRVJJQUwrV0lGSTpOZVJWY1VYZnA2TlIySC1xb0c4S2prak9NdFNQTHhxN3JKRUFYYllrOW9qdFZ6TGRJNmNEbDE3ZDF1QnRZVy1oREZOdUNrMW5CYlN5ZHZXRjtCTFVFVE9PVEgrRkxBU0grU1lTVEVNX1NFUklBTCtXSUZJOlR0QkI4OVNYMjJkZzI2TjV3cHVURXJIVURQSUhRUGtJNnczM2x4RFdyQzhuX1VMS0NEdDc0RmN4SjJrUDZfZWxaNjlaRU5FT0NJZGlzeHRpO0VUSEVSTkVUK0ZMQVNIK1NZU1RFTV9TRVJJQUwrV0lGSTp4Q1ZuU1FwcVdtWHlQS0RoeG5LQm1OZ3hlOHJHOWJCM1dQTXpKTTdVenQ3OTJmeUJKc1BVSFhFSHBXQjNvSnVYVVJOSWpXdjlJRHJqTExBUw.m71qYpcXMTzfbwDpOjoPq2XoUjpl8NwZVTAQcYVK/1TvrnpOydrGMVf5IWaV6zQurwLrHDhBM3zxuBPhtSxSDg=="],
+      "wallMs": 1800950400000,
+      "clock": {
+        "lastSeen": 0,
+        "floor": 0
+      },
+      "usedMinutes": {},
+      "expired": {},
+      "expect": [
+        {
+          "key": "loc-cm2@1800000000000",
+          "state": "GRACE",
+          "reason": null,
+          "doubt": null,
+          "remainingMs": 86400000,
+          "remainingUsageMinutes": null,
+          "warning": "HOURS_24",
+          "message": "Location terminée : reconnectez le téléphone pour la renouveler (1 jour de tolérance)"
+        }
+      ]
+    },
+    {
+      "id": "state-grace-over",
+      "type": "rental-state",
+      "device": "tvA",
+      "tokens": ["cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWU3YTM3Mzc0ODA1Y2VlMzIKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTgwMDAwMDAwMDAwMApleHBpcmVzQXQ9MTgwMDE3MjgwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8OWRjNzk0OGM0ODc0NDgwZWIzNzJkMWFjZTM1MDdkM2QKZmFjdG9yPUVUSEVSTkVUfDQwNGUzNTcyYzk5YzRiNGFlMzYzNGEyNDNkZTk0MGI2CmZhY3Rvcj1XSUZJfGNlZWNjOGIzMzI4NmVhMjJjYmU3N2JjYzBiZTMwMzE3CmZhY3Rvcj1TWVNURU1fU0VSSUFMfGUwZTJjMGFlNTg4M2U1ZDU5NTZhNjY5OWNkNWU4ZTg1CmZhY3Rvcj1CTFVFVE9PVEh8YmJjMzI5ZTJhMWUzOGZiOWMxY2JlMDYzMjY1MGI0ZmEKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtbG9jLTEKc2VhdD05MzA4OTAyNzQxODQ1MzA1CnJpZ2h0PXJlbnRhbHxsb2MtY20yfGNsYXNzZS1jbTJ8MTgwMDAwMDAwMDAwMHwxODAwMDAwMDAwMDAwfDEwfDE3MjgwMDAwMHwwfDB8QkxVRVRPT1RIK0VUSEVSTkVUK0ZMQVNIK1NZU1RFTV9TRVJJQUw6OEZvOWJpTzYxaVlkZnhoYlFtZ3JFLXh3akU0UzFCMndTT2VrMTFPSXhDMGNqQjRHWkp6WnVEQU5kTzV5eXlNLUpPV0t6V1VpcnhzS0VjLU47QkxVRVRPT1RIK0VUSEVSTkVUK0ZMQVNIK1dJRkk6d3BaMDRDZlo4NkswbHZKS092NkNyZUJxV1dSaUxRUXRNcWVpcWZQRU81TDloaVZFZ0V6Um9fa3NhS1V2WEx4c0lkVGRlRFpvWFRTV2U4M1U7QkxVRVRPT1RIK0VUSEVSTkVUK1NZU1RFTV9TRVJJQUwrV0lGSTpOZVJWY1VYZnA2TlIySC1xb0c4S2prak9NdFNQTHhxN3JKRUFYYllrOW9qdFZ6TGRJNmNEbDE3ZDF1QnRZVy1oREZOdUNrMW5CYlN5ZHZXRjtCTFVFVE9PVEgrRkxBU0grU1lTVEVNX1NFUklBTCtXSUZJOlR0QkI4OVNYMjJkZzI2TjV3cHVURXJIVURQSUhRUGtJNnczM2x4RFdyQzhuX1VMS0NEdDc0RmN4SjJrUDZfZWxaNjlaRU5FT0NJZGlzeHRpO0VUSEVSTkVUK0ZMQVNIK1NZU1RFTV9TRVJJQUwrV0lGSTp4Q1ZuU1FwcVdtWHlQS0RoeG5LQm1OZ3hlOHJHOWJCM1dQTXpKTTdVenQ3OTJmeUJKc1BVSFhFSHBXQjNvSnVYVVJOSWpXdjlJRHJqTExBUw.m71qYpcXMTzfbwDpOjoPq2XoUjpl8NwZVTAQcYVK/1TvrnpOydrGMVf5IWaV6zQurwLrHDhBM3zxuBPhtSxSDg=="],
+      "wallMs": 1801036800000,
+      "clock": {
+        "lastSeen": 0,
+        "floor": 0
+      },
+      "usedMinutes": {},
+      "expired": {},
+      "expect": [
+        {
+          "key": "loc-cm2@1800000000000",
+          "state": "EXPIRED",
+          "reason": "DATE",
+          "doubt": null,
+          "remainingMs": null,
+          "remainingUsageMinutes": null,
+          "warning": "NONE",
+          "message": "Location terminée : ce contenu n'est plus disponible. Reprendre la location ?"
+        }
+      ]
+    },
+    {
+      "id": "state-clock-behind-suspended",
+      "type": "rental-state",
+      "device": "tvA",
+      "tokens": ["cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWU3YTM3Mzc0ODA1Y2VlMzIKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTgwMDAwMDAwMDAwMApleHBpcmVzQXQ9MTgwMDE3MjgwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8OWRjNzk0OGM0ODc0NDgwZWIzNzJkMWFjZTM1MDdkM2QKZmFjdG9yPUVUSEVSTkVUfDQwNGUzNTcyYzk5YzRiNGFlMzYzNGEyNDNkZTk0MGI2CmZhY3Rvcj1XSUZJfGNlZWNjOGIzMzI4NmVhMjJjYmU3N2JjYzBiZTMwMzE3CmZhY3Rvcj1TWVNURU1fU0VSSUFMfGUwZTJjMGFlNTg4M2U1ZDU5NTZhNjY5OWNkNWU4ZTg1CmZhY3Rvcj1CTFVFVE9PVEh8YmJjMzI5ZTJhMWUzOGZiOWMxY2JlMDYzMjY1MGI0ZmEKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtbG9jLTEKc2VhdD05MzA4OTAyNzQxODQ1MzA1CnJpZ2h0PXJlbnRhbHxsb2MtY20yfGNsYXNzZS1jbTJ8MTgwMDAwMDAwMDAwMHwxODAwMDAwMDAwMDAwfDMwfDB8MHwwfEJMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMOjhGbzliaU82MWlZZGZ4aGJRbWdyRS14d2pFNFMxQjJ3U09lazExT0l4QzBjakI0R1pKelp1REFOZE81eXl5TS1KT1dLeldVaXJ4c0tFYy1OO0JMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtXSUZJOndwWjA0Q2ZaODZLMGx2SktPdjZDcmVCcVdXUmlMUVF0TXFlaXFmUEVPNUw5aGlWRWdFelJvX2tzYUtVdlhMeHNJZFRkZURab1hUU1dlODNVO0JMVUVUT09USCtFVEhFUk5FVCtTWVNURU1fU0VSSUFMK1dJRkk6TmVSVmNVWGZwNk5SMkgtcW9HOEtqa2pPTXRTUEx4cTdySkVBWGJZazlvanRWekxkSTZjRGwxN2QxdUJ0WVctaERGTnVDazFuQmJTeWR2V0Y7QkxVRVRPT1RIK0ZMQVNIK1NZU1RFTV9TRVJJQUwrV0lGSTpUdEJCODlTWDIyZGcyNk41d3B1VEVySFVEUElIUVBrSTZ3MzNseERXckM4bl9VTEtDRHQ3NEZjeEoya1A2X2VsWjY5WkVORU9DSWRpc3h0aTtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMK1dJRkk6eENWblNRcHFXbVh5UEtEaHhuS0JtTmd4ZThyRzliQjNXUE16Sk03VXp0NzkyZnlCSnNQVUhYRUhwV0Izb0p1WFVSTklqV3Y5SURyakxMQVM.GQl2Q/ut6ynQH3JYTwyFf7ALxuXS4gAgHYV3o/LGANK4KmTtg99JNast1XchkktX7xBN8F1Z5XONeB/pnjD4Dw=="],
+      "wallMs": 1800172800000,
+      "clock": {
+        "lastSeen": 1801728000000,
+        "floor": 0
+      },
+      "usedMinutes": {},
+      "expired": {},
+      "expect": [
+        {
+          "key": "loc-cm2@1800000000000",
+          "state": "SUSPENDED",
+          "reason": null,
+          "doubt": "BEHIND",
+          "remainingMs": null,
+          "remainingUsageMinutes": null,
+          "warning": "NONE",
+          "message": "Vérifiez l'heure de la TV : la location est suspendue tant que l'heure n'est pas juste (rien n'est supprimé). L'heure semble en retard."
+        }
+      ]
+    },
+    {
+      "id": "state-clock-behind-but-already-proven-ended",
+      "type": "rental-state",
+      "device": "tvA",
+      "tokens": ["cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWU3YTM3Mzc0ODA1Y2VlMzIKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTgwMDAwMDAwMDAwMApleHBpcmVzQXQ9MTgwMDE3MjgwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8OWRjNzk0OGM0ODc0NDgwZWIzNzJkMWFjZTM1MDdkM2QKZmFjdG9yPUVUSEVSTkVUfDQwNGUzNTcyYzk5YzRiNGFlMzYzNGEyNDNkZTk0MGI2CmZhY3Rvcj1XSUZJfGNlZWNjOGIzMzI4NmVhMjJjYmU3N2JjYzBiZTMwMzE3CmZhY3Rvcj1TWVNURU1fU0VSSUFMfGUwZTJjMGFlNTg4M2U1ZDU5NTZhNjY5OWNkNWU4ZTg1CmZhY3Rvcj1CTFVFVE9PVEh8YmJjMzI5ZTJhMWUzOGZiOWMxY2JlMDYzMjY1MGI0ZmEKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtbG9jLTEKc2VhdD05MzA4OTAyNzQxODQ1MzA1CnJpZ2h0PXJlbnRhbHxsb2MtY20yfGNsYXNzZS1jbTJ8MTgwMDAwMDAwMDAwMHwxODAwMDAwMDAwMDAwfDMwfDB8MHwwfEJMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMOjhGbzliaU82MWlZZGZ4aGJRbWdyRS14d2pFNFMxQjJ3U09lazExT0l4QzBjakI0R1pKelp1REFOZE81eXl5TS1KT1dLeldVaXJ4c0tFYy1OO0JMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtXSUZJOndwWjA0Q2ZaODZLMGx2SktPdjZDcmVCcVdXUmlMUVF0TXFlaXFmUEVPNUw5aGlWRWdFelJvX2tzYUtVdlhMeHNJZFRkZURab1hUU1dlODNVO0JMVUVUT09USCtFVEhFUk5FVCtTWVNURU1fU0VSSUFMK1dJRkk6TmVSVmNVWGZwNk5SMkgtcW9HOEtqa2pPTXRTUEx4cTdySkVBWGJZazlvanRWekxkSTZjRGwxN2QxdUJ0WVctaERGTnVDazFuQmJTeWR2V0Y7QkxVRVRPT1RIK0ZMQVNIK1NZU1RFTV9TRVJJQUwrV0lGSTpUdEJCODlTWDIyZGcyNk41d3B1VEVySFVEUElIUVBrSTZ3MzNseERXckM4bl9VTEtDRHQ3NEZjeEoya1A2X2VsWjY5WkVORU9DSWRpc3h0aTtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMK1dJRkk6eENWblNRcHFXbVh5UEtEaHhuS0JtTmd4ZThyRzliQjNXUE16Sk03VXp0NzkyZnlCSnNQVUhYRUhwV0Izb0p1WFVSTklqV3Y5SURyakxMQVM.GQl2Q/ut6ynQH3JYTwyFf7ALxuXS4gAgHYV3o/LGANK4KmTtg99JNast1XchkktX7xBN8F1Z5XONeB/pnjD4Dw=="],
+      "wallMs": 1800172800000,
+      "clock": {
+        "lastSeen": 1803456000000,
+        "floor": 0
+      },
+      "usedMinutes": {},
+      "expired": {},
+      "expect": [
+        {
+          "key": "loc-cm2@1800000000000",
+          "state": "EXPIRED",
+          "reason": "DATE",
+          "doubt": "BEHIND",
+          "remainingMs": null,
+          "remainingUsageMinutes": null,
+          "warning": "NONE",
+          "message": "Location terminée : ce contenu n'est plus disponible. Reprendre la location ?"
+        }
+      ]
+    },
+    {
+      "id": "state-clock-far-ahead-suspended",
+      "type": "rental-state",
+      "device": "tvA",
+      "tokens": ["cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWU3YTM3Mzc0ODA1Y2VlMzIKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTgwMDAwMDAwMDAwMApleHBpcmVzQXQ9MTgwMDE3MjgwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8OWRjNzk0OGM0ODc0NDgwZWIzNzJkMWFjZTM1MDdkM2QKZmFjdG9yPUVUSEVSTkVUfDQwNGUzNTcyYzk5YzRiNGFlMzYzNGEyNDNkZTk0MGI2CmZhY3Rvcj1XSUZJfGNlZWNjOGIzMzI4NmVhMjJjYmU3N2JjYzBiZTMwMzE3CmZhY3Rvcj1TWVNURU1fU0VSSUFMfGUwZTJjMGFlNTg4M2U1ZDU5NTZhNjY5OWNkNWU4ZTg1CmZhY3Rvcj1CTFVFVE9PVEh8YmJjMzI5ZTJhMWUzOGZiOWMxY2JlMDYzMjY1MGI0ZmEKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtbG9jLTEKc2VhdD05MzA4OTAyNzQxODQ1MzA1CnJpZ2h0PXJlbnRhbHxsb2MtY20yfGNsYXNzZS1jbTJ8MTgwMDAwMDAwMDAwMHwxODAwMDAwMDAwMDAwfDMwfDB8MHwwfEJMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMOjhGbzliaU82MWlZZGZ4aGJRbWdyRS14d2pFNFMxQjJ3U09lazExT0l4QzBjakI0R1pKelp1REFOZE81eXl5TS1KT1dLeldVaXJ4c0tFYy1OO0JMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtXSUZJOndwWjA0Q2ZaODZLMGx2SktPdjZDcmVCcVdXUmlMUVF0TXFlaXFmUEVPNUw5aGlWRWdFelJvX2tzYUtVdlhMeHNJZFRkZURab1hUU1dlODNVO0JMVUVUT09USCtFVEhFUk5FVCtTWVNURU1fU0VSSUFMK1dJRkk6TmVSVmNVWGZwNk5SMkgtcW9HOEtqa2pPTXRTUEx4cTdySkVBWGJZazlvanRWekxkSTZjRGwxN2QxdUJ0WVctaERGTnVDazFuQmJTeWR2V0Y7QkxVRVRPT1RIK0ZMQVNIK1NZU1RFTV9TRVJJQUwrV0lGSTpUdEJCODlTWDIyZGcyNk41d3B1VEVySFVEUElIUVBrSTZ3MzNseERXckM4bl9VTEtDRHQ3NEZjeEoya1A2X2VsWjY5WkVORU9DSWRpc3h0aTtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMK1dJRkk6eENWblNRcHFXbVh5UEtEaHhuS0JtTmd4ZThyRzliQjNXUE16Sk03VXp0NzkyZnlCSnNQVUhYRUhwV0Izb0p1WFVSTklqV3Y5SURyakxMQVM.GQl2Q/ut6ynQH3JYTwyFf7ALxuXS4gAgHYV3o/LGANK4KmTtg99JNast1XchkktX7xBN8F1Z5XONeB/pnjD4Dw=="],
+      "wallMs": 1817280000000,
+      "clock": {
+        "lastSeen": 1800000000000,
+        "floor": 0
+      },
+      "usedMinutes": {},
+      "expired": {},
+      "expect": [
+        {
+          "key": "loc-cm2@1800000000000",
+          "state": "SUSPENDED",
+          "reason": null,
+          "doubt": "AHEAD",
+          "remainingMs": null,
+          "remainingUsageMinutes": null,
+          "warning": "NONE",
+          "message": "Vérifiez l'heure de la TV : la location est suspendue tant que l'heure n'est pas juste (rien n'est supprimé). L'heure semble très en avance."
+        }
+      ]
+    },
+    {
+      "id": "state-floor-from-signed-message-proves-time",
+      "type": "rental-state",
+      "device": "tvA",
+      "tokens": ["cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWU3YTM3Mzc0ODA1Y2VlMzIKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTgwMDAwMDAwMDAwMApleHBpcmVzQXQ9MTgwMDE3MjgwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8OWRjNzk0OGM0ODc0NDgwZWIzNzJkMWFjZTM1MDdkM2QKZmFjdG9yPUVUSEVSTkVUfDQwNGUzNTcyYzk5YzRiNGFlMzYzNGEyNDNkZTk0MGI2CmZhY3Rvcj1XSUZJfGNlZWNjOGIzMzI4NmVhMjJjYmU3N2JjYzBiZTMwMzE3CmZhY3Rvcj1TWVNURU1fU0VSSUFMfGUwZTJjMGFlNTg4M2U1ZDU5NTZhNjY5OWNkNWU4ZTg1CmZhY3Rvcj1CTFVFVE9PVEh8YmJjMzI5ZTJhMWUzOGZiOWMxY2JlMDYzMjY1MGI0ZmEKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtbG9jLTEKc2VhdD05MzA4OTAyNzQxODQ1MzA1CnJpZ2h0PXJlbnRhbHxsb2MtY20yfGNsYXNzZS1jbTJ8MTgwMDAwMDAwMDAwMHwxODAwMDAwMDAwMDAwfDMwfDB8MHwwfEJMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMOjhGbzliaU82MWlZZGZ4aGJRbWdyRS14d2pFNFMxQjJ3U09lazExT0l4QzBjakI0R1pKelp1REFOZE81eXl5TS1KT1dLeldVaXJ4c0tFYy1OO0JMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtXSUZJOndwWjA0Q2ZaODZLMGx2SktPdjZDcmVCcVdXUmlMUVF0TXFlaXFmUEVPNUw5aGlWRWdFelJvX2tzYUtVdlhMeHNJZFRkZURab1hUU1dlODNVO0JMVUVUT09USCtFVEhFUk5FVCtTWVNURU1fU0VSSUFMK1dJRkk6TmVSVmNVWGZwNk5SMkgtcW9HOEtqa2pPTXRTUEx4cTdySkVBWGJZazlvanRWekxkSTZjRGwxN2QxdUJ0WVctaERGTnVDazFuQmJTeWR2V0Y7QkxVRVRPT1RIK0ZMQVNIK1NZU1RFTV9TRVJJQUwrV0lGSTpUdEJCODlTWDIyZGcyNk41d3B1VEVySFVEUElIUVBrSTZ3MzNseERXckM4bl9VTEtDRHQ3NEZjeEoya1A2X2VsWjY5WkVORU9DSWRpc3h0aTtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMK1dJRkk6eENWblNRcHFXbVh5UEtEaHhuS0JtTmd4ZThyRzliQjNXUE16Sk03VXp0NzkyZnlCSnNQVUhYRUhwV0Izb0p1WFVSTklqV3Y5SURyakxMQVM.GQl2Q/ut6ynQH3JYTwyFf7ALxuXS4gAgHYV3o/LGANK4KmTtg99JNast1XchkktX7xBN8F1Z5XONeB/pnjD4Dw=="],
+      "wallMs": 1800172800000,
+      "clock": {
+        "lastSeen": 0,
+        "floor": 1802678400000
+      },
+      "usedMinutes": {},
+      "expired": {},
+      "expect": [
+        {
+          "key": "loc-cm2@1800000000000",
+          "state": "EXPIRED",
+          "reason": "DATE",
+          "doubt": "BEHIND",
+          "remainingMs": null,
+          "remainingUsageMinutes": null,
+          "warning": "NONE",
+          "message": "Location terminée : ce contenu n'est plus disponible. Reprendre la location ?"
+        }
+      ]
+    },
+    {
+      "id": "state-usage-ceiling-reached",
+      "type": "rental-state",
+      "device": "tvA",
+      "tokens": ["cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWU3YTM3Mzc0ODA1Y2VlMzIKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTgwMDAwMDAwMDAwMApleHBpcmVzQXQ9MTgwMDE3MjgwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8OWRjNzk0OGM0ODc0NDgwZWIzNzJkMWFjZTM1MDdkM2QKZmFjdG9yPUVUSEVSTkVUfDQwNGUzNTcyYzk5YzRiNGFlMzYzNGEyNDNkZTk0MGI2CmZhY3Rvcj1XSUZJfGNlZWNjOGIzMzI4NmVhMjJjYmU3N2JjYzBiZTMwMzE3CmZhY3Rvcj1TWVNURU1fU0VSSUFMfGUwZTJjMGFlNTg4M2U1ZDU5NTZhNjY5OWNkNWU4ZTg1CmZhY3Rvcj1CTFVFVE9PVEh8YmJjMzI5ZTJhMWUzOGZiOWMxY2JlMDYzMjY1MGI0ZmEKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtbG9jLTEKc2VhdD05MzA4OTAyNzQxODQ1MzA1CnJpZ2h0PXJlbnRhbHxsb2MtY20yfGNsYXNzZS1jbTJ8MTgwMDAwMDAwMDAwMHwxODAwMDAwMDAwMDAwfDMwfDB8MTIwfDB8QkxVRVRPT1RIK0VUSEVSTkVUK0ZMQVNIK1NZU1RFTV9TRVJJQUw6OEZvOWJpTzYxaVlkZnhoYlFtZ3JFLXh3akU0UzFCMndTT2VrMTFPSXhDMGNqQjRHWkp6WnVEQU5kTzV5eXlNLUpPV0t6V1VpcnhzS0VjLU47QkxVRVRPT1RIK0VUSEVSTkVUK0ZMQVNIK1dJRkk6d3BaMDRDZlo4NkswbHZKS092NkNyZUJxV1dSaUxRUXRNcWVpcWZQRU81TDloaVZFZ0V6Um9fa3NhS1V2WEx4c0lkVGRlRFpvWFRTV2U4M1U7QkxVRVRPT1RIK0VUSEVSTkVUK1NZU1RFTV9TRVJJQUwrV0lGSTpOZVJWY1VYZnA2TlIySC1xb0c4S2prak9NdFNQTHhxN3JKRUFYYllrOW9qdFZ6TGRJNmNEbDE3ZDF1QnRZVy1oREZOdUNrMW5CYlN5ZHZXRjtCTFVFVE9PVEgrRkxBU0grU1lTVEVNX1NFUklBTCtXSUZJOlR0QkI4OVNYMjJkZzI2TjV3cHVURXJIVURQSUhRUGtJNnczM2x4RFdyQzhuX1VMS0NEdDc0RmN4SjJrUDZfZWxaNjlaRU5FT0NJZGlzeHRpO0VUSEVSTkVUK0ZMQVNIK1NZU1RFTV9TRVJJQUwrV0lGSTp4Q1ZuU1FwcVdtWHlQS0RoeG5LQm1OZ3hlOHJHOWJCM1dQTXpKTTdVenQ3OTJmeUJKc1BVSFhFSHBXQjNvSnVYVVJOSWpXdjlJRHJqTExBUw.S19+y8MHIqroMLIThEjDGOVbNxAgtCSRNxzjjx59hl/PYEdHnPNhi0xW9y8BpMep5LQXACkQFzaK/Szw1TsUBg=="],
+      "wallMs": 1800086400000,
+      "clock": {
+        "lastSeen": 0,
+        "floor": 0
+      },
+      "usedMinutes": {
+        "loc-cm2@1800000000000": 120
+      },
+      "expired": {},
+      "expect": [
+        {
+          "key": "loc-cm2@1800000000000",
+          "state": "EXPIRED",
+          "reason": "USAGE",
+          "doubt": null,
+          "remainingMs": null,
+          "remainingUsageMinutes": 0,
+          "warning": "NONE",
+          "message": "Location terminée : ce contenu n'est plus disponible. Reprendre la location ?"
+        }
+      ]
+    },
+    {
+      "id": "state-usage-ceiling-reached-clock-behind",
+      "type": "rental-state",
+      "device": "tvA",
+      "tokens": ["cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWU3YTM3Mzc0ODA1Y2VlMzIKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTgwMDAwMDAwMDAwMApleHBpcmVzQXQ9MTgwMDE3MjgwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8OWRjNzk0OGM0ODc0NDgwZWIzNzJkMWFjZTM1MDdkM2QKZmFjdG9yPUVUSEVSTkVUfDQwNGUzNTcyYzk5YzRiNGFlMzYzNGEyNDNkZTk0MGI2CmZhY3Rvcj1XSUZJfGNlZWNjOGIzMzI4NmVhMjJjYmU3N2JjYzBiZTMwMzE3CmZhY3Rvcj1TWVNURU1fU0VSSUFMfGUwZTJjMGFlNTg4M2U1ZDU5NTZhNjY5OWNkNWU4ZTg1CmZhY3Rvcj1CTFVFVE9PVEh8YmJjMzI5ZTJhMWUzOGZiOWMxY2JlMDYzMjY1MGI0ZmEKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtbG9jLTEKc2VhdD05MzA4OTAyNzQxODQ1MzA1CnJpZ2h0PXJlbnRhbHxsb2MtY20yfGNsYXNzZS1jbTJ8MTgwMDAwMDAwMDAwMHwxODAwMDAwMDAwMDAwfDMwfDB8MTIwfDB8QkxVRVRPT1RIK0VUSEVSTkVUK0ZMQVNIK1NZU1RFTV9TRVJJQUw6OEZvOWJpTzYxaVlkZnhoYlFtZ3JFLXh3akU0UzFCMndTT2VrMTFPSXhDMGNqQjRHWkp6WnVEQU5kTzV5eXlNLUpPV0t6V1VpcnhzS0VjLU47QkxVRVRPT1RIK0VUSEVSTkVUK0ZMQVNIK1dJRkk6d3BaMDRDZlo4NkswbHZKS092NkNyZUJxV1dSaUxRUXRNcWVpcWZQRU81TDloaVZFZ0V6Um9fa3NhS1V2WEx4c0lkVGRlRFpvWFRTV2U4M1U7QkxVRVRPT1RIK0VUSEVSTkVUK1NZU1RFTV9TRVJJQUwrV0lGSTpOZVJWY1VYZnA2TlIySC1xb0c4S2prak9NdFNQTHhxN3JKRUFYYllrOW9qdFZ6TGRJNmNEbDE3ZDF1QnRZVy1oREZOdUNrMW5CYlN5ZHZXRjtCTFVFVE9PVEgrRkxBU0grU1lTVEVNX1NFUklBTCtXSUZJOlR0QkI4OVNYMjJkZzI2TjV3cHVURXJIVURQSUhRUGtJNnczM2x4RFdyQzhuX1VMS0NEdDc0RmN4SjJrUDZfZWxaNjlaRU5FT0NJZGlzeHRpO0VUSEVSTkVUK0ZMQVNIK1NZU1RFTV9TRVJJQUwrV0lGSTp4Q1ZuU1FwcVdtWHlQS0RoeG5LQm1OZ3hlOHJHOWJCM1dQTXpKTTdVenQ3OTJmeUJKc1BVSFhFSHBXQjNvSnVYVVJOSWpXdjlJRHJqTExBUw.S19+y8MHIqroMLIThEjDGOVbNxAgtCSRNxzjjx59hl/PYEdHnPNhi0xW9y8BpMep5LQXACkQFzaK/Szw1TsUBg=="],
+      "wallMs": 1799136000000,
+      "clock": {
+        "lastSeen": 1800086400000,
+        "floor": 0
+      },
+      "usedMinutes": {
+        "loc-cm2@1800000000000": 120
+      },
+      "expired": {},
+      "expect": [
+        {
+          "key": "loc-cm2@1800000000000",
+          "state": "EXPIRED",
+          "reason": "USAGE",
+          "doubt": "BEHIND",
+          "remainingMs": null,
+          "remainingUsageMinutes": 0,
+          "warning": "NONE",
+          "message": "Location terminée : ce contenu n'est plus disponible. Reprendre la location ?"
+        }
+      ]
+    },
+    {
+      "id": "state-usage-5h-left-warning",
+      "type": "rental-state",
+      "device": "tvA",
+      "tokens": ["cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWU3YTM3Mzc0ODA1Y2VlMzIKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTgwMDAwMDAwMDAwMApleHBpcmVzQXQ9MTgwMDE3MjgwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8OWRjNzk0OGM0ODc0NDgwZWIzNzJkMWFjZTM1MDdkM2QKZmFjdG9yPUVUSEVSTkVUfDQwNGUzNTcyYzk5YzRiNGFlMzYzNGEyNDNkZTk0MGI2CmZhY3Rvcj1XSUZJfGNlZWNjOGIzMzI4NmVhMjJjYmU3N2JjYzBiZTMwMzE3CmZhY3Rvcj1TWVNURU1fU0VSSUFMfGUwZTJjMGFlNTg4M2U1ZDU5NTZhNjY5OWNkNWU4ZTg1CmZhY3Rvcj1CTFVFVE9PVEh8YmJjMzI5ZTJhMWUzOGZiOWMxY2JlMDYzMjY1MGI0ZmEKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtbG9jLTEKc2VhdD05MzA4OTAyNzQxODQ1MzA1CnJpZ2h0PXJlbnRhbHxsb2MtY20yfGNsYXNzZS1jbTJ8MTgwMDAwMDAwMDAwMHwxODAwMDAwMDAwMDAwfDMwfDB8MTAwMHwwfEJMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMOjhGbzliaU82MWlZZGZ4aGJRbWdyRS14d2pFNFMxQjJ3U09lazExT0l4QzBjakI0R1pKelp1REFOZE81eXl5TS1KT1dLeldVaXJ4c0tFYy1OO0JMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtXSUZJOndwWjA0Q2ZaODZLMGx2SktPdjZDcmVCcVdXUmlMUVF0TXFlaXFmUEVPNUw5aGlWRWdFelJvX2tzYUtVdlhMeHNJZFRkZURab1hUU1dlODNVO0JMVUVUT09USCtFVEhFUk5FVCtTWVNURU1fU0VSSUFMK1dJRkk6TmVSVmNVWGZwNk5SMkgtcW9HOEtqa2pPTXRTUEx4cTdySkVBWGJZazlvanRWekxkSTZjRGwxN2QxdUJ0WVctaERGTnVDazFuQmJTeWR2V0Y7QkxVRVRPT1RIK0ZMQVNIK1NZU1RFTV9TRVJJQUwrV0lGSTpUdEJCODlTWDIyZGcyNk41d3B1VEVySFVEUElIUVBrSTZ3MzNseERXckM4bl9VTEtDRHQ3NEZjeEoya1A2X2VsWjY5WkVORU9DSWRpc3h0aTtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMK1dJRkk6eENWblNRcHFXbVh5UEtEaHhuS0JtTmd4ZThyRzliQjNXUE16Sk03VXp0NzkyZnlCSnNQVUhYRUhwV0Izb0p1WFVSTklqV3Y5SURyakxMQVM.RhNEhp0ZGq1YPP8BuyBAKjhIjV5cn6zx5yBLDr3rG7B4Gc8DvBKVtJMWCoBwhd0r8Wg3dBo95K6ZzMWu8zUPDQ=="],
+      "wallMs": 1800086400000,
+      "clock": {
+        "lastSeen": 0,
+        "floor": 0
+      },
+      "usedMinutes": {
+        "loc-cm2@1800000000000": 700
+      },
+      "expired": {},
+      "expect": [
+        {
+          "key": "loc-cm2@1800000000000",
+          "state": "ACTIVE",
+          "reason": null,
+          "doubt": null,
+          "remainingMs": 2505600000,
+          "remainingUsageMinutes": 300,
+          "warning": "HOURS_24",
+          "message": "Il vous reste 29 jours (ou 5 h d'utilisation)"
+        }
+      ]
+    },
+    {
+      "id": "state-usage-left-warning",
+      "type": "rental-state",
+      "device": "tvA",
+      "tokens": ["cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWU3YTM3Mzc0ODA1Y2VlMzIKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTgwMDAwMDAwMDAwMApleHBpcmVzQXQ9MTgwMDE3MjgwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8OWRjNzk0OGM0ODc0NDgwZWIzNzJkMWFjZTM1MDdkM2QKZmFjdG9yPUVUSEVSTkVUfDQwNGUzNTcyYzk5YzRiNGFlMzYzNGEyNDNkZTk0MGI2CmZhY3Rvcj1XSUZJfGNlZWNjOGIzMzI4NmVhMjJjYmU3N2JjYzBiZTMwMzE3CmZhY3Rvcj1TWVNURU1fU0VSSUFMfGUwZTJjMGFlNTg4M2U1ZDU5NTZhNjY5OWNkNWU4ZTg1CmZhY3Rvcj1CTFVFVE9PVEh8YmJjMzI5ZTJhMWUzOGZiOWMxY2JlMDYzMjY1MGI0ZmEKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtbG9jLTEKc2VhdD05MzA4OTAyNzQxODQ1MzA1CnJpZ2h0PXJlbnRhbHxsb2MtY20yfGNsYXNzZS1jbTJ8MTgwMDAwMDAwMDAwMHwxODAwMDAwMDAwMDAwfDMwfDB8MTIwfDB8QkxVRVRPT1RIK0VUSEVSTkVUK0ZMQVNIK1NZU1RFTV9TRVJJQUw6OEZvOWJpTzYxaVlkZnhoYlFtZ3JFLXh3akU0UzFCMndTT2VrMTFPSXhDMGNqQjRHWkp6WnVEQU5kTzV5eXlNLUpPV0t6V1VpcnhzS0VjLU47QkxVRVRPT1RIK0VUSEVSTkVUK0ZMQVNIK1dJRkk6d3BaMDRDZlo4NkswbHZKS092NkNyZUJxV1dSaUxRUXRNcWVpcWZQRU81TDloaVZFZ0V6Um9fa3NhS1V2WEx4c0lkVGRlRFpvWFRTV2U4M1U7QkxVRVRPT1RIK0VUSEVSTkVUK1NZU1RFTV9TRVJJQUwrV0lGSTpOZVJWY1VYZnA2TlIySC1xb0c4S2prak9NdFNQTHhxN3JKRUFYYllrOW9qdFZ6TGRJNmNEbDE3ZDF1QnRZVy1oREZOdUNrMW5CYlN5ZHZXRjtCTFVFVE9PVEgrRkxBU0grU1lTVEVNX1NFUklBTCtXSUZJOlR0QkI4OVNYMjJkZzI2TjV3cHVURXJIVURQSUhRUGtJNnczM2x4RFdyQzhuX1VMS0NEdDc0RmN4SjJrUDZfZWxaNjlaRU5FT0NJZGlzeHRpO0VUSEVSTkVUK0ZMQVNIK1NZU1RFTV9TRVJJQUwrV0lGSTp4Q1ZuU1FwcVdtWHlQS0RoeG5LQm1OZ3hlOHJHOWJCM1dQTXpKTTdVenQ3OTJmeUJKc1BVSFhFSHBXQjNvSnVYVVJOSWpXdjlJRHJqTExBUw.S19+y8MHIqroMLIThEjDGOVbNxAgtCSRNxzjjx59hl/PYEdHnPNhi0xW9y8BpMep5LQXACkQFzaK/Szw1TsUBg=="],
+      "wallMs": 1800086400000,
+      "clock": {
+        "lastSeen": 0,
+        "floor": 0
+      },
+      "usedMinutes": {
+        "loc-cm2@1800000000000": 100
+      },
+      "expired": {},
+      "expect": [
+        {
+          "key": "loc-cm2@1800000000000",
+          "state": "ACTIVE",
+          "reason": null,
+          "doubt": null,
+          "remainingMs": 2505600000,
+          "remainingUsageMinutes": 20,
+          "warning": "HOUR_1",
+          "message": "Il vous reste 29 jours (ou 20 min d'utilisation)"
+        }
+      ]
+    },
+    {
+      "id": "state-renewal-extends-same-rental",
+      "type": "rental-state",
+      "device": "tvA",
+      "tokens": ["cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWU3YTM3Mzc0ODA1Y2VlMzIKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTgwMDAwMDAwMDAwMApleHBpcmVzQXQ9MTgwMDE3MjgwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8OWRjNzk0OGM0ODc0NDgwZWIzNzJkMWFjZTM1MDdkM2QKZmFjdG9yPUVUSEVSTkVUfDQwNGUzNTcyYzk5YzRiNGFlMzYzNGEyNDNkZTk0MGI2CmZhY3Rvcj1XSUZJfGNlZWNjOGIzMzI4NmVhMjJjYmU3N2JjYzBiZTMwMzE3CmZhY3Rvcj1TWVNURU1fU0VSSUFMfGUwZTJjMGFlNTg4M2U1ZDU5NTZhNjY5OWNkNWU4ZTg1CmZhY3Rvcj1CTFVFVE9PVEh8YmJjMzI5ZTJhMWUzOGZiOWMxY2JlMDYzMjY1MGI0ZmEKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtbG9jLTEKc2VhdD05MzA4OTAyNzQxODQ1MzA1CnJpZ2h0PXJlbnRhbHxsb2MtY20yfGNsYXNzZS1jbTJ8MTgwMDAwMDAwMDAwMHwxODAwMDAwMDAwMDAwfDMwfDB8MHwwfEJMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMOjhGbzliaU82MWlZZGZ4aGJRbWdyRS14d2pFNFMxQjJ3U09lazExT0l4QzBjakI0R1pKelp1REFOZE81eXl5TS1KT1dLeldVaXJ4c0tFYy1OO0JMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtXSUZJOndwWjA0Q2ZaODZLMGx2SktPdjZDcmVCcVdXUmlMUVF0TXFlaXFmUEVPNUw5aGlWRWdFelJvX2tzYUtVdlhMeHNJZFRkZURab1hUU1dlODNVO0JMVUVUT09USCtFVEhFUk5FVCtTWVNURU1fU0VSSUFMK1dJRkk6TmVSVmNVWGZwNk5SMkgtcW9HOEtqa2pPTXRTUEx4cTdySkVBWGJZazlvanRWekxkSTZjRGwxN2QxdUJ0WVctaERGTnVDazFuQmJTeWR2V0Y7QkxVRVRPT1RIK0ZMQVNIK1NZU1RFTV9TRVJJQUwrV0lGSTpUdEJCODlTWDIyZGcyNk41d3B1VEVySFVEUElIUVBrSTZ3MzNseERXckM4bl9VTEtDRHQ3NEZjeEoya1A2X2VsWjY5WkVORU9DSWRpc3h0aTtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMK1dJRkk6eENWblNRcHFXbVh5UEtEaHhuS0JtTmd4ZThyRzliQjNXUE16Sk03VXp0NzkyZnlCSnNQVUhYRUhwV0Izb0p1WFVSTklqV3Y5SURyakxMQVM.GQl2Q/ut6ynQH3JYTwyFf7ALxuXS4gAgHYV3o/LGANK4KmTtg99JNast1XchkktX7xBN8F1Z5XONeB/pnjD4Dw==", "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWU3YTM3Mzc0ODA1Y2VlMzIKc2VxPTE4MDE3MjgwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMTcyODAwMDAwMApub3RCZWZvcmU9MTgwMTcyODAwMDAwMApleHBpcmVzQXQ9MTgwMTkwMDgwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8OWRjNzk0OGM0ODc0NDgwZWIzNzJkMWFjZTM1MDdkM2QKZmFjdG9yPUVUSEVSTkVUfDQwNGUzNTcyYzk5YzRiNGFlMzYzNGEyNDNkZTk0MGI2CmZhY3Rvcj1XSUZJfGNlZWNjOGIzMzI4NmVhMjJjYmU3N2JjYzBiZTMwMzE3CmZhY3Rvcj1TWVNURU1fU0VSSUFMfGUwZTJjMGFlNTg4M2U1ZDU5NTZhNjY5OWNkNWU4ZTg1CmZhY3Rvcj1CTFVFVE9PVEh8YmJjMzI5ZTJhMWUzOGZiOWMxY2JlMDYzMjY1MGI0ZmEKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtbG9jLTEKc2VhdD05MzA4OTAyNzQxODQ1MzA1CnJpZ2h0PXJlbnRhbHxsb2MtY20yfGNsYXNzZS1jbTJ8MTgwMTcyODAwMDAwMHwxODAwMDAwMDAwMDAwfDMwfDB8MHwwfEJMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMOjhGbzliaU82MWlZZGZ4aGJRbWdyRS14d2pFNFMxQjJ3U09lazExT0l4QzBjakI0R1pKelp1REFOZE81eXl5TS1KT1dLeldVaXJ4c0tFYy1OO0JMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtXSUZJOndwWjA0Q2ZaODZLMGx2SktPdjZDcmVCcVdXUmlMUVF0TXFlaXFmUEVPNUw5aGlWRWdFelJvX2tzYUtVdlhMeHNJZFRkZURab1hUU1dlODNVO0JMVUVUT09USCtFVEhFUk5FVCtTWVNURU1fU0VSSUFMK1dJRkk6TmVSVmNVWGZwNk5SMkgtcW9HOEtqa2pPTXRTUEx4cTdySkVBWGJZazlvanRWekxkSTZjRGwxN2QxdUJ0WVctaERGTnVDazFuQmJTeWR2V0Y7QkxVRVRPT1RIK0ZMQVNIK1NZU1RFTV9TRVJJQUwrV0lGSTpUdEJCODlTWDIyZGcyNk41d3B1VEVySFVEUElIUVBrSTZ3MzNseERXckM4bl9VTEtDRHQ3NEZjeEoya1A2X2VsWjY5WkVORU9DSWRpc3h0aTtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMK1dJRkk6eENWblNRcHFXbVh5UEtEaHhuS0JtTmd4ZThyRzliQjNXUE16Sk03VXp0NzkyZnlCSnNQVUhYRUhwV0Izb0p1WFVSTklqV3Y5SURyakxMQVM.RE3eGeaXdGSJ121UDItR2u+Dj7uF4b9FnRZGYuhp/nJGpON7+JNO8YmflwvRBUmRnSwQe04BJFEixpACE/qsDQ=="],
+      "wallMs": 1803456000000,
+      "clock": {
+        "lastSeen": 0,
+        "floor": 1801728000000
+      },
+      "usedMinutes": {},
+      "expired": {},
+      "expect": [
+        {
+          "key": "loc-cm2@1800000000000",
+          "state": "ACTIVE",
+          "reason": null,
+          "doubt": null,
+          "remainingMs": 1728000000,
+          "remainingUsageMinutes": null,
+          "warning": "NONE",
+          "message": "Il vous reste 20 jours"
+        }
+      ]
+    },
+    {
+      "id": "state-same-token-twice-no-duplicate",
+      "type": "rental-state",
+      "device": "tvA",
+      "tokens": ["cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWU3YTM3Mzc0ODA1Y2VlMzIKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTgwMDAwMDAwMDAwMApleHBpcmVzQXQ9MTgwMDE3MjgwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8OWRjNzk0OGM0ODc0NDgwZWIzNzJkMWFjZTM1MDdkM2QKZmFjdG9yPUVUSEVSTkVUfDQwNGUzNTcyYzk5YzRiNGFlMzYzNGEyNDNkZTk0MGI2CmZhY3Rvcj1XSUZJfGNlZWNjOGIzMzI4NmVhMjJjYmU3N2JjYzBiZTMwMzE3CmZhY3Rvcj1TWVNURU1fU0VSSUFMfGUwZTJjMGFlNTg4M2U1ZDU5NTZhNjY5OWNkNWU4ZTg1CmZhY3Rvcj1CTFVFVE9PVEh8YmJjMzI5ZTJhMWUzOGZiOWMxY2JlMDYzMjY1MGI0ZmEKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtbG9jLTEKc2VhdD05MzA4OTAyNzQxODQ1MzA1CnJpZ2h0PXJlbnRhbHxsb2MtY20yfGNsYXNzZS1jbTJ8MTgwMDAwMDAwMDAwMHwxODAwMDAwMDAwMDAwfDMwfDB8MHwwfEJMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMOjhGbzliaU82MWlZZGZ4aGJRbWdyRS14d2pFNFMxQjJ3U09lazExT0l4QzBjakI0R1pKelp1REFOZE81eXl5TS1KT1dLeldVaXJ4c0tFYy1OO0JMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtXSUZJOndwWjA0Q2ZaODZLMGx2SktPdjZDcmVCcVdXUmlMUVF0TXFlaXFmUEVPNUw5aGlWRWdFelJvX2tzYUtVdlhMeHNJZFRkZURab1hUU1dlODNVO0JMVUVUT09USCtFVEhFUk5FVCtTWVNURU1fU0VSSUFMK1dJRkk6TmVSVmNVWGZwNk5SMkgtcW9HOEtqa2pPTXRTUEx4cTdySkVBWGJZazlvanRWekxkSTZjRGwxN2QxdUJ0WVctaERGTnVDazFuQmJTeWR2V0Y7QkxVRVRPT1RIK0ZMQVNIK1NZU1RFTV9TRVJJQUwrV0lGSTpUdEJCODlTWDIyZGcyNk41d3B1VEVySFVEUElIUVBrSTZ3MzNseERXckM4bl9VTEtDRHQ3NEZjeEoya1A2X2VsWjY5WkVORU9DSWRpc3h0aTtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMK1dJRkk6eENWblNRcHFXbVh5UEtEaHhuS0JtTmd4ZThyRzliQjNXUE16Sk03VXp0NzkyZnlCSnNQVUhYRUhwV0Izb0p1WFVSTklqV3Y5SURyakxMQVM.GQl2Q/ut6ynQH3JYTwyFf7ALxuXS4gAgHYV3o/LGANK4KmTtg99JNast1XchkktX7xBN8F1Z5XONeB/pnjD4Dw==", "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWU3YTM3Mzc0ODA1Y2VlMzIKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTgwMDAwMDAwMDAwMApleHBpcmVzQXQ9MTgwMDE3MjgwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8OWRjNzk0OGM0ODc0NDgwZWIzNzJkMWFjZTM1MDdkM2QKZmFjdG9yPUVUSEVSTkVUfDQwNGUzNTcyYzk5YzRiNGFlMzYzNGEyNDNkZTk0MGI2CmZhY3Rvcj1XSUZJfGNlZWNjOGIzMzI4NmVhMjJjYmU3N2JjYzBiZTMwMzE3CmZhY3Rvcj1TWVNURU1fU0VSSUFMfGUwZTJjMGFlNTg4M2U1ZDU5NTZhNjY5OWNkNWU4ZTg1CmZhY3Rvcj1CTFVFVE9PVEh8YmJjMzI5ZTJhMWUzOGZiOWMxY2JlMDYzMjY1MGI0ZmEKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtbG9jLTEKc2VhdD05MzA4OTAyNzQxODQ1MzA1CnJpZ2h0PXJlbnRhbHxsb2MtY20yfGNsYXNzZS1jbTJ8MTgwMDAwMDAwMDAwMHwxODAwMDAwMDAwMDAwfDMwfDB8MHwwfEJMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMOjhGbzliaU82MWlZZGZ4aGJRbWdyRS14d2pFNFMxQjJ3U09lazExT0l4QzBjakI0R1pKelp1REFOZE81eXl5TS1KT1dLeldVaXJ4c0tFYy1OO0JMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtXSUZJOndwWjA0Q2ZaODZLMGx2SktPdjZDcmVCcVdXUmlMUVF0TXFlaXFmUEVPNUw5aGlWRWdFelJvX2tzYUtVdlhMeHNJZFRkZURab1hUU1dlODNVO0JMVUVUT09USCtFVEhFUk5FVCtTWVNURU1fU0VSSUFMK1dJRkk6TmVSVmNVWGZwNk5SMkgtcW9HOEtqa2pPTXRTUEx4cTdySkVBWGJZazlvanRWekxkSTZjRGwxN2QxdUJ0WVctaERGTnVDazFuQmJTeWR2V0Y7QkxVRVRPT1RIK0ZMQVNIK1NZU1RFTV9TRVJJQUwrV0lGSTpUdEJCODlTWDIyZGcyNk41d3B1VEVySFVEUElIUVBrSTZ3MzNseERXckM4bl9VTEtDRHQ3NEZjeEoya1A2X2VsWjY5WkVORU9DSWRpc3h0aTtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMK1dJRkk6eENWblNRcHFXbVh5UEtEaHhuS0JtTmd4ZThyRzliQjNXUE16Sk03VXp0NzkyZnlCSnNQVUhYRUhwV0Izb0p1WFVSTklqV3Y5SURyakxMQVM.GQl2Q/ut6ynQH3JYTwyFf7ALxuXS4gAgHYV3o/LGANK4KmTtg99JNast1XchkktX7xBN8F1Z5XONeB/pnjD4Dw=="],
+      "wallMs": 1800086400000,
+      "clock": {
+        "lastSeen": 0,
+        "floor": 0
+      },
+      "usedMinutes": {},
+      "expired": {},
+      "expect": [
+        {
+          "key": "loc-cm2@1800000000000",
+          "state": "ACTIVE",
+          "reason": null,
+          "doubt": null,
+          "remainingMs": 2505600000,
+          "remainingUsageMinutes": null,
+          "warning": "NONE",
+          "message": "Il vous reste 29 jours"
+        }
+      ]
+    },
+    {
+      "id": "state-late-renewal-ignored",
+      "type": "rental-state",
+      "device": "tvA",
+      "tokens": ["cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWU3YTM3Mzc0ODA1Y2VlMzIKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTgwMDAwMDAwMDAwMApleHBpcmVzQXQ9MTgwMDE3MjgwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8OWRjNzk0OGM0ODc0NDgwZWIzNzJkMWFjZTM1MDdkM2QKZmFjdG9yPUVUSEVSTkVUfDQwNGUzNTcyYzk5YzRiNGFlMzYzNGEyNDNkZTk0MGI2CmZhY3Rvcj1XSUZJfGNlZWNjOGIzMzI4NmVhMjJjYmU3N2JjYzBiZTMwMzE3CmZhY3Rvcj1TWVNURU1fU0VSSUFMfGUwZTJjMGFlNTg4M2U1ZDU5NTZhNjY5OWNkNWU4ZTg1CmZhY3Rvcj1CTFVFVE9PVEh8YmJjMzI5ZTJhMWUzOGZiOWMxY2JlMDYzMjY1MGI0ZmEKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtbG9jLTEKc2VhdD05MzA4OTAyNzQxODQ1MzA1CnJpZ2h0PXJlbnRhbHxsb2MtY20yfGNsYXNzZS1jbTJ8MTgwMDAwMDAwMDAwMHwxODAwMDAwMDAwMDAwfDMwfDB8MHwwfEJMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMOjhGbzliaU82MWlZZGZ4aGJRbWdyRS14d2pFNFMxQjJ3U09lazExT0l4QzBjakI0R1pKelp1REFOZE81eXl5TS1KT1dLeldVaXJ4c0tFYy1OO0JMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtXSUZJOndwWjA0Q2ZaODZLMGx2SktPdjZDcmVCcVdXUmlMUVF0TXFlaXFmUEVPNUw5aGlWRWdFelJvX2tzYUtVdlhMeHNJZFRkZURab1hUU1dlODNVO0JMVUVUT09USCtFVEhFUk5FVCtTWVNURU1fU0VSSUFMK1dJRkk6TmVSVmNVWGZwNk5SMkgtcW9HOEtqa2pPTXRTUEx4cTdySkVBWGJZazlvanRWekxkSTZjRGwxN2QxdUJ0WVctaERGTnVDazFuQmJTeWR2V0Y7QkxVRVRPT1RIK0ZMQVNIK1NZU1RFTV9TRVJJQUwrV0lGSTpUdEJCODlTWDIyZGcyNk41d3B1VEVySFVEUElIUVBrSTZ3MzNseERXckM4bl9VTEtDRHQ3NEZjeEoya1A2X2VsWjY5WkVORU9DSWRpc3h0aTtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMK1dJRkk6eENWblNRcHFXbVh5UEtEaHhuS0JtTmd4ZThyRzliQjNXUE16Sk03VXp0NzkyZnlCSnNQVUhYRUhwV0Izb0p1WFVSTklqV3Y5SURyakxMQVM.GQl2Q/ut6ynQH3JYTwyFf7ALxuXS4gAgHYV3o/LGANK4KmTtg99JNast1XchkktX7xBN8F1Z5XONeB/pnjD4Dw==", "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWU3YTM3Mzc0ODA1Y2VlMzIKc2VxPTE4MDMwMjQwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMzAyNDAwMDAwMApub3RCZWZvcmU9MTgwMzAyNDAwMDAwMApleHBpcmVzQXQ9MTgwMzE5NjgwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8OWRjNzk0OGM0ODc0NDgwZWIzNzJkMWFjZTM1MDdkM2QKZmFjdG9yPUVUSEVSTkVUfDQwNGUzNTcyYzk5YzRiNGFlMzYzNGEyNDNkZTk0MGI2CmZhY3Rvcj1XSUZJfGNlZWNjOGIzMzI4NmVhMjJjYmU3N2JjYzBiZTMwMzE3CmZhY3Rvcj1TWVNURU1fU0VSSUFMfGUwZTJjMGFlNTg4M2U1ZDU5NTZhNjY5OWNkNWU4ZTg1CmZhY3Rvcj1CTFVFVE9PVEh8YmJjMzI5ZTJhMWUzOGZiOWMxY2JlMDYzMjY1MGI0ZmEKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtbG9jLTEKc2VhdD05MzA4OTAyNzQxODQ1MzA1CnJpZ2h0PXJlbnRhbHxsb2MtY20yfGNsYXNzZS1jbTJ8MTgwMzAyNDAwMDAwMHwxODAwMDAwMDAwMDAwfDMwfDB8MHwwfEJMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMOjhGbzliaU82MWlZZGZ4aGJRbWdyRS14d2pFNFMxQjJ3U09lazExT0l4QzBjakI0R1pKelp1REFOZE81eXl5TS1KT1dLeldVaXJ4c0tFYy1OO0JMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtXSUZJOndwWjA0Q2ZaODZLMGx2SktPdjZDcmVCcVdXUmlMUVF0TXFlaXFmUEVPNUw5aGlWRWdFelJvX2tzYUtVdlhMeHNJZFRkZURab1hUU1dlODNVO0JMVUVUT09USCtFVEhFUk5FVCtTWVNURU1fU0VSSUFMK1dJRkk6TmVSVmNVWGZwNk5SMkgtcW9HOEtqa2pPTXRTUEx4cTdySkVBWGJZazlvanRWekxkSTZjRGwxN2QxdUJ0WVctaERGTnVDazFuQmJTeWR2V0Y7QkxVRVRPT1RIK0ZMQVNIK1NZU1RFTV9TRVJJQUwrV0lGSTpUdEJCODlTWDIyZGcyNk41d3B1VEVySFVEUElIUVBrSTZ3MzNseERXckM4bl9VTEtDRHQ3NEZjeEoya1A2X2VsWjY5WkVORU9DSWRpc3h0aTtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMK1dJRkk6eENWblNRcHFXbVh5UEtEaHhuS0JtTmd4ZThyRzliQjNXUE16Sk03VXp0NzkyZnlCSnNQVUhYRUhwV0Izb0p1WFVSTklqV3Y5SURyakxMQVM.AMqC2tpvahx4RQoqRrD8U+HP8MtszBv6QFaUVieWYh7j5Tj2b+FLuaDtStQRYG4dGHu76qksSqAiMWWIoHBaBQ=="],
+      "wallMs": 1803110400000,
+      "clock": {
+        "lastSeen": 0,
+        "floor": 1803024000000
+      },
+      "usedMinutes": {},
+      "expired": {},
+      "expect": [
+        {
+          "key": "loc-cm2@1800000000000",
+          "state": "EXPIRED",
+          "reason": "DATE",
+          "doubt": null,
+          "remainingMs": null,
+          "remainingUsageMinutes": null,
+          "warning": "NONE",
+          "message": "Location terminée : ce contenu n'est plus disponible. Reprendre la location ?"
+        }
+      ]
+    },
+    {
+      "id": "state-post-dated-not-started",
+      "type": "rental-state",
+      "device": "tvA",
+      "tokens": ["cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWU3YTM3Mzc0ODA1Y2VlMzIKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTgwMDAwMDAwMDAwMApleHBpcmVzQXQ9MTgwMDE3MjgwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8OWRjNzk0OGM0ODc0NDgwZWIzNzJkMWFjZTM1MDdkM2QKZmFjdG9yPUVUSEVSTkVUfDQwNGUzNTcyYzk5YzRiNGFlMzYzNGEyNDNkZTk0MGI2CmZhY3Rvcj1XSUZJfGNlZWNjOGIzMzI4NmVhMjJjYmU3N2JjYzBiZTMwMzE3CmZhY3Rvcj1TWVNURU1fU0VSSUFMfGUwZTJjMGFlNTg4M2U1ZDU5NTZhNjY5OWNkNWU4ZTg1CmZhY3Rvcj1CTFVFVE9PVEh8YmJjMzI5ZTJhMWUzOGZiOWMxY2JlMDYzMjY1MGI0ZmEKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtbG9jLTEKc2VhdD05MzA4OTAyNzQxODQ1MzA1CnJpZ2h0PXJlbnRhbHxsb2MtY20yfGNsYXNzZS1jbTJ8MTgwMDQzMjAwMDAwMHwxODAwNDMyMDAwMDAwfDEwfDB8MHwwfEJMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMOkdNQlRTb1pxdW9tWnlqSHNnQ1JIaG42VE02VEprbE1lOUVLU0JWUDdfWjVlZUJyZ2d1Q1JaNEFGUE5VTFBpN0g3dTdfcU44WTI1OFpqYUZiO0JMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtXSUZJOmx0cTlsTzRfdllJbVVncUNPTE9JbXEtYnc1N01oZTNiWnJuVjBCbkV6Y2hYVjZWYnVEQTZsTkZ4VHFYR2phZUJUTkpjaFdKeFlkSmRhRUpVO0JMVUVUT09USCtFVEhFUk5FVCtTWVNURU1fU0VSSUFMK1dJRkk6LVh5ZHZKdm5TcWw2R1RtcjQyS0xPUENhc0dZdjhUZXd4Q3d2dUJSNS1pZ3ppNXhtVE9UeEZzY3UtN1VrcmdnTEtwbTlFcGtoa0o4MXhiT2c7QkxVRVRPT1RIK0ZMQVNIK1NZU1RFTV9TRVJJQUwrV0lGSTpkMm1COU1manVXbzVfbU1pZGJHYXFmUlRXZmlrdWRHR0tSV0c1djdtVmRXNEVMTW1iSEpsZld0MXdPVkt3c2dzNDhoZlpUNWk0VDY2ajA5eDtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMK1dJRkk6Ql9LQk1vUDBVclNTOVVrUEJ2aHVTdzRNOEcyVTN4VUZHQlZ6d2dQZGdlemttaHV0cHlCRTMxWF9tWW51Z3AwQ0E5X3ctQWphbjNzYU9lVHM.5acYwO7tCpGDjVvYojOS8qP4zITa7rCWZM+tocqnRo0XKuRWfnAL5B28EOKUiIKDZhrJTYQjNjWn5uJziiiMAA=="],
+      "wallMs": 1800086400000,
+      "clock": {
+        "lastSeen": 0,
+        "floor": 0
+      },
+      "usedMinutes": {},
+      "expired": {},
+      "expect": [
+        {
+          "key": "loc-cm2@1800432000000",
+          "state": "NOT_STARTED",
+          "reason": null,
+          "doubt": null,
+          "remainingMs": null,
+          "remainingUsageMinutes": null,
+          "warning": "NONE",
+          "message": "Location pas encore commencée"
+        }
+      ]
+    },
+    {
+      "id": "state-already-swept-stays-expired",
+      "type": "rental-state",
+      "device": "tvA",
+      "tokens": ["cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWU3YTM3Mzc0ODA1Y2VlMzIKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTgwMDAwMDAwMDAwMApleHBpcmVzQXQ9MTgwMDE3MjgwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8OWRjNzk0OGM0ODc0NDgwZWIzNzJkMWFjZTM1MDdkM2QKZmFjdG9yPUVUSEVSTkVUfDQwNGUzNTcyYzk5YzRiNGFlMzYzNGEyNDNkZTk0MGI2CmZhY3Rvcj1XSUZJfGNlZWNjOGIzMzI4NmVhMjJjYmU3N2JjYzBiZTMwMzE3CmZhY3Rvcj1TWVNURU1fU0VSSUFMfGUwZTJjMGFlNTg4M2U1ZDU5NTZhNjY5OWNkNWU4ZTg1CmZhY3Rvcj1CTFVFVE9PVEh8YmJjMzI5ZTJhMWUzOGZiOWMxY2JlMDYzMjY1MGI0ZmEKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtbG9jLTEKc2VhdD05MzA4OTAyNzQxODQ1MzA1CnJpZ2h0PXJlbnRhbHxsb2MtY20yfGNsYXNzZS1jbTJ8MTgwMDAwMDAwMDAwMHwxODAwMDAwMDAwMDAwfDMwfDB8MHwwfEJMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMOjhGbzliaU82MWlZZGZ4aGJRbWdyRS14d2pFNFMxQjJ3U09lazExT0l4QzBjakI0R1pKelp1REFOZE81eXl5TS1KT1dLeldVaXJ4c0tFYy1OO0JMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtXSUZJOndwWjA0Q2ZaODZLMGx2SktPdjZDcmVCcVdXUmlMUVF0TXFlaXFmUEVPNUw5aGlWRWdFelJvX2tzYUtVdlhMeHNJZFRkZURab1hUU1dlODNVO0JMVUVUT09USCtFVEhFUk5FVCtTWVNURU1fU0VSSUFMK1dJRkk6TmVSVmNVWGZwNk5SMkgtcW9HOEtqa2pPTXRTUEx4cTdySkVBWGJZazlvanRWekxkSTZjRGwxN2QxdUJ0WVctaERGTnVDazFuQmJTeWR2V0Y7QkxVRVRPT1RIK0ZMQVNIK1NZU1RFTV9TRVJJQUwrV0lGSTpUdEJCODlTWDIyZGcyNk41d3B1VEVySFVEUElIUVBrSTZ3MzNseERXckM4bl9VTEtDRHQ3NEZjeEoya1A2X2VsWjY5WkVORU9DSWRpc3h0aTtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMK1dJRkk6eENWblNRcHFXbVh5UEtEaHhuS0JtTmd4ZThyRzliQjNXUE16Sk03VXp0NzkyZnlCSnNQVUhYRUhwV0Izb0p1WFVSTklqV3Y5SURyakxMQVM.GQl2Q/ut6ynQH3JYTwyFf7ALxuXS4gAgHYV3o/LGANK4KmTtg99JNast1XchkktX7xBN8F1Z5XONeB/pnjD4Dw=="],
+      "wallMs": 1800086400000,
+      "clock": {
+        "lastSeen": 0,
+        "floor": 0
+      },
+      "usedMinutes": {},
+      "expired": {
+        "loc-cm2@1800000000000": "USAGE"
+      },
+      "expect": [
+        {
+          "key": "loc-cm2@1800000000000",
+          "state": "EXPIRED",
+          "reason": "USAGE",
+          "doubt": null,
+          "remainingMs": null,
+          "remainingUsageMinutes": null,
+          "warning": "NONE",
+          "message": "Location terminée : ce contenu n'est plus disponible. Reprendre la location ?"
+        }
+      ]
+    },
+    {
+      "id": "state-simultaneous-limit-oldest-first",
+      "type": "rental-state",
+      "device": "tvA",
+      "tokens": ["cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWU3YTM3Mzc0ODA1Y2VlMzIKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTgwMDAwMDAwMDAwMApleHBpcmVzQXQ9MTgwMDE3MjgwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8OWRjNzk0OGM0ODc0NDgwZWIzNzJkMWFjZTM1MDdkM2QKZmFjdG9yPUVUSEVSTkVUfDQwNGUzNTcyYzk5YzRiNGFlMzYzNGEyNDNkZTk0MGI2CmZhY3Rvcj1XSUZJfGNlZWNjOGIzMzI4NmVhMjJjYmU3N2JjYzBiZTMwMzE3CmZhY3Rvcj1TWVNURU1fU0VSSUFMfGUwZTJjMGFlNTg4M2U1ZDU5NTZhNjY5OWNkNWU4ZTg1CmZhY3Rvcj1CTFVFVE9PVEh8YmJjMzI5ZTJhMWUzOGZiOWMxY2JlMDYzMjY1MGI0ZmEKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtbG9jLTEKc2VhdD05MzA4OTAyNzQxODQ1MzA1CnJpZ2h0PXJlbnRhbHxsb2MtYXxjbGFzc2UtY20yfDE4MDAwMDAwMDAwMDB8MTgwMDAwMDAwMDAwMHwzMHwwfDB8MXxCTFVFVE9PVEgrRVRIRVJORVQrRkxBU0grU1lTVEVNX1NFUklBTDpndnZ2WlJvR0ctS1JiazRYSFRmdUJMR242c01XaG5xTTk5R29vN2NWSHpLams3WUtJMkFOeU11ZFNubTZfYlQwT2Q2TV92WVFpMXVrdVJTeDtCTFVFVE9PVEgrRVRIRVJORVQrRkxBU0grV0lGSTpoazgxZ3gySjEzcjRaYldhei04ZHc2VVdhWVZ3TnBORDVaU3ZFVGd2cFh6SkJJdzJ0QTBSTWZKMVZxQ0RwRm5LSDFDWWd6cmhrTDNwWVhmbjtCTFVFVE9PVEgrRVRIRVJORVQrU1lTVEVNX1NFUklBTCtXSUZJOlN4cnU4VFNjWXdwN0h3eEF1TWRFQUtOSWV3ZnhHaUpKcDktcmJyOG1vU1hZT2ppcEIzR2JHZ2dpMmNjQkxKdmo2WWRZa3NyRk9Ob0dKTnc3O0JMVUVUT09USCtGTEFTSCtTWVNURU1fU0VSSUFMK1dJRkk6VVZwOUpFWFpDVUhIRnBPekR1dHcwSzZEUGt6SC12UkdhY3BMV0pidGdKeGtIM0V1aEpMWWJfczd4NDFueC1rQmp3NnNUV2RFakJfZm0zaEM7RVRIRVJORVQrRkxBU0grU1lTVEVNX1NFUklBTCtXSUZJOlRjRXVsc01Sc2pMMXpWS3dNMF9qQ2QxU1JMX1hIYURGanlCdUZkTC1EWUpMa1R1eFNMajZwWGk2RzcwbHVmbWZwM3pUWHZCLTVNTnd1ZHNyCnJpZ2h0PXJlbnRhbHxsb2MtYnxjbGFzc2UtY20yfDE4MDAwODY0MDAwMDB8MTgwMDA4NjQwMDAwMHwzMHwwfDB8MXxCTFVFVE9PVEgrRVRIRVJORVQrRkxBU0grU1lTVEVNX1NFUklBTDpUZ1MwWnlZUzdKUDAxSlhjV2Q5ekVDdUNDeVE5b211U05SUVRNdlZSd1N5dS1TbElnemhZV05WYm1LSW8tTHI4Y3lPRVNmeXJRQlNWTVBiOTtCTFVFVE9PVEgrRVRIRVJORVQrRkxBU0grV0lGSTpudmVjU2p6Q2E5ZXhueF9ZWU1ycXcxRXpib2NvTWdPR2lwcTBPYVM4c2hkVTVhYjVueTdidmtsNWV1b2RldGw4WUUtdVNSQ3YyWUxGR2pvYztCTFVFVE9PVEgrRVRIRVJORVQrU1lTVEVNX1NFUklBTCtXSUZJOkRPVTFhdUdLZ3B4RzRHaGU0bW5GRDVWTDBEYnVHZEJMbEFBOGdmQXBZci15bnNaSHhoeEdtZk84clM0TXQ0MG9LblZtT0RPWndFRjRkMXFEO0JMVUVUT09USCtGTEFTSCtTWVNURU1fU0VSSUFMK1dJRkk6ODdiZnB5aEcxTjloN1VOYlRyQ0dfbGNJYjdkLXYyRkZxa2tPdDhOZFI5aWlYZjNBeDZMNXVtTXRrTTRoNklLMnZaWGNLY0VGdVBLVkpDY0w7RVRIRVJORVQrRkxBU0grU1lTVEVNX1NFUklBTCtXSUZJOnRtczEwZzVYUjh1em1wNktIXzE3blgyRlR3VWQwM2N1dXNCdUJZLU5GaWJpaGUxV2k0Vkk3WTdSY2tYNlM1eEdJWXdZZkJaRC1hMXJRS0xK.agC8Ph7n8/FmPBWThM0T6SU3IwQxZveOHH1xqVnqaz5iwkaNfDB5CmR96LAQy1glQtZJROL0JjorsPP1OBe+DA=="],
+      "wallMs": 1800172800000,
+      "clock": {
+        "lastSeen": 0,
+        "floor": 0
+      },
+      "usedMinutes": {},
+      "expired": {},
+      "expect": [
+        {
+          "key": "loc-a@1800000000000",
+          "state": "ACTIVE",
+          "reason": null,
+          "doubt": null,
+          "remainingMs": 2419200000,
+          "remainingUsageMinutes": null,
+          "warning": "NONE",
+          "message": "Il vous reste 28 jours"
+        },
+        {
+          "key": "loc-b@1800086400000",
+          "state": "OVER_LIMIT",
+          "reason": null,
+          "doubt": null,
+          "remainingMs": null,
+          "remainingUsageMinutes": null,
+          "warning": "NONE",
+          "message": "Trop de locations en même temps : « loc-b » reprendra quand une autre sera terminée"
+        }
+      ]
+    },
+    {
+      "id": "old-device-ignores-unknown-right",
+      "type": "old-device",
+      "device": "tvA",
+      "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWU3YTM3Mzc0ODA1Y2VlMzIKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTgwMDAwMDAwMDAwMApleHBpcmVzQXQ9MTgwMDE3MjgwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8OWRjNzk0OGM0ODc0NDgwZWIzNzJkMWFjZTM1MDdkM2QKZmFjdG9yPUVUSEVSTkVUfDQwNGUzNTcyYzk5YzRiNGFlMzYzNGEyNDNkZTk0MGI2CmZhY3Rvcj1XSUZJfGNlZWNjOGIzMzI4NmVhMjJjYmU3N2JjYzBiZTMwMzE3CmZhY3Rvcj1TWVNURU1fU0VSSUFMfGUwZTJjMGFlNTg4M2U1ZDU5NTZhNjY5OWNkNWU4ZTg1CmZhY3Rvcj1CTFVFVE9PVEh8YmJjMzI5ZTJhMWUzOGZiOWMxY2JlMDYzMjY1MGI0ZmEKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtbG9jLTEKc2VhdD05MzA4OTAyNzQxODQ1MzA1CnJpZ2h0PWhvbG9ncmFtfHByb2R8YSxifDF8MgpyaWdodD1wdXJjaGFzZXxwLWNsYXNzZS1jbTJ8Y2xhc3NlLWNtMnwxNzk5MTM2MDAwMDAw.KJJSZPp/JN1VATYs57ELYOjjGU9gZzRv1cpdVh5zNBzQRUZC1cuD3pcJ9Y4LsGEf4yXQ61yTEWCsoRyDAZwwAg==",
+      "nowMs": 1800000000000,
+      "expect": {
+        "granted": ["classe-cm2"]
+      }
+    },
+    {
+      "id": "rental-line-grants-nothing-without-rental-evaluation",
+      "type": "old-device",
+      "device": "tvA",
+      "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWU3YTM3Mzc0ODA1Y2VlMzIKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTgwMDAwMDAwMDAwMApleHBpcmVzQXQ9MTgwMDE3MjgwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8OWRjNzk0OGM0ODc0NDgwZWIzNzJkMWFjZTM1MDdkM2QKZmFjdG9yPUVUSEVSTkVUfDQwNGUzNTcyYzk5YzRiNGFlMzYzNGEyNDNkZTk0MGI2CmZhY3Rvcj1XSUZJfGNlZWNjOGIzMzI4NmVhMjJjYmU3N2JjYzBiZTMwMzE3CmZhY3Rvcj1TWVNURU1fU0VSSUFMfGUwZTJjMGFlNTg4M2U1ZDU5NTZhNjY5OWNkNWU4ZTg1CmZhY3Rvcj1CTFVFVE9PVEh8YmJjMzI5ZTJhMWUzOGZiOWMxY2JlMDYzMjY1MGI0ZmEKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtbG9jLTEKc2VhdD05MzA4OTAyNzQxODQ1MzA1CnJpZ2h0PXJlbnRhbHxsb2MtY20yfGNsYXNzZS1jbTJ8MTgwMDAwMDAwMDAwMHwxODAwMDAwMDAwMDAwfDMwfDB8MHwwfEJMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMOjhGbzliaU82MWlZZGZ4aGJRbWdyRS14d2pFNFMxQjJ3U09lazExT0l4QzBjakI0R1pKelp1REFOZE81eXl5TS1KT1dLeldVaXJ4c0tFYy1OO0JMVUVUT09USCtFVEhFUk5FVCtGTEFTSCtXSUZJOndwWjA0Q2ZaODZLMGx2SktPdjZDcmVCcVdXUmlMUVF0TXFlaXFmUEVPNUw5aGlWRWdFelJvX2tzYUtVdlhMeHNJZFRkZURab1hUU1dlODNVO0JMVUVUT09USCtFVEhFUk5FVCtTWVNURU1fU0VSSUFMK1dJRkk6TmVSVmNVWGZwNk5SMkgtcW9HOEtqa2pPTXRTUEx4cTdySkVBWGJZazlvanRWekxkSTZjRGwxN2QxdUJ0WVctaERGTnVDazFuQmJTeWR2V0Y7QkxVRVRPT1RIK0ZMQVNIK1NZU1RFTV9TRVJJQUwrV0lGSTpUdEJCODlTWDIyZGcyNk41d3B1VEVySFVEUElIUVBrSTZ3MzNseERXckM4bl9VTEtDRHQ3NEZjeEoya1A2X2VsWjY5WkVORU9DSWRpc3h0aTtFVEhFUk5FVCtGTEFTSCtTWVNURU1fU0VSSUFMK1dJRkk6eENWblNRcHFXbVh5UEtEaHhuS0JtTmd4ZThyRzliQjNXUE16Sk03VXp0NzkyZnlCSnNQVUhYRUhwV0Izb0p1WFVSTklqV3Y5SURyakxMQVM.GQl2Q/ut6ynQH3JYTwyFf7ALxuXS4gAgHYV3o/LGANK4KmTtg99JNast1XchkktX7xBN8F1Z5XONeB/pnjD4Dw==",
+      "nowMs": 1800086400000,
+      "expect": {
+        "granted": []
+      }
+    },
+    {
+      "id": "policy-reserved-lot-rentable",
+      "type": "lot-policy",
+      "lot": {
+        "feature": "learn",
+        "scope": "cm2",
+        "edition": "full",
+        "title": "x"
+      },
+      "free": ["langues:fr-a0"],
+      "reserved": ["learn:cm2", "quiz:cm2"],
+      "expect": {
+        "refused": false
+      }
+    },
+    {
+      "id": "policy-free-lot-refused",
+      "type": "lot-policy",
+      "lot": {
+        "feature": "langues",
+        "scope": "fr-a0",
+        "edition": "full",
+        "title": "x"
+      },
+      "free": ["langues:fr-a0"],
+      "reserved": ["learn:cm2", "quiz:cm2"],
+      "expect": {
+        "refused": true
+      }
+    },
+    {
+      "id": "policy-unknown-family-refused",
+      "type": "lot-policy",
+      "lot": {
+        "feature": "learn",
+        "scope": "inconnu",
+        "edition": "full",
+        "title": "x"
+      },
+      "free": ["langues:fr-a0"],
+      "reserved": ["learn:cm2", "quiz:cm2"],
+      "expect": {
+        "refused": true
+      }
+    },
+    {
+      "id": "policy-trial-lot-refused",
+      "type": "lot-policy",
+      "lot": {
+        "feature": "learn",
+        "scope": "cm2",
+        "edition": "trial",
+        "title": "x"
+      },
+      "free": ["langues:fr-a0"],
+      "reserved": ["learn:cm2", "quiz:cm2"],
+      "expect": {
+        "refused": true
+      }
+    },
+    {
+      "id": "box-opens-on-its-tv-only",
+      "type": "box",
+      "request": {
+        "product": "loc-cm2",
+        "bundles": ["classe-cm2"],
+        "startsAt": 1800000000000,
+        "period": 1800000000000,
+        "days": 30,
+        "graceMs": 0,
+        "usage": 0,
+        "concurrent": 0,
+        "device": "tvA",
+        "otherDevice": "tvB",
+        "license": "lic-loc-1"
+      },
+      "expect": {
+        "box": "BLUETOOTH+ETHERNET+FLASH+SYSTEM_SERIAL:8Fo9biO61iYdfxhbQmgrE-xwjE4S1B2wSOek11OIxC0cjB4GZJzZuDANdO5yyyM-JOWKzWUirxsKEc-N;BLUETOOTH+ETHERNET+FLASH+WIFI:wpZ04CfZ86K0lvJKOv6CreBqWWRiLQQtMqeiqfPEO5L9hiVEgEzRo_ksaKUvXLxsIdTdeDZoXTSWe83U;BLUETOOTH+ETHERNET+SYSTEM_SERIAL+WIFI:NeRVcUXfp6NR2H-qoG8KjkjOMtSPLxq7rJEAXbYk9ojtVzLdI6cDl17d1uBtYW-hDFNuCk1nBbSydvWF;BLUETOOTH+FLASH+SYSTEM_SERIAL+WIFI:TtBB89SX22dg26N5wpuTErHUDPIHQPkI6w33lxDWrC8n_ULKCDt74FcxJ2kP6_elZ69ZENEOCIdisxti;ETHERNET+FLASH+SYSTEM_SERIAL+WIFI:xCVnSQpqWmXyPKDhxnKBmNgxe8rG9bB3WPMzJM7Uzt792fyBJsPUHXEHpWB3oJuXURNIjWv9IDrjLLAS",
+        "keyFingerprint": "10c06299fdfc0038"
+      }
+    },
+    {
+      "id": "seal-lot-file",
+      "type": "seal",
+      "request": {
+        "device": "tvA",
+        "license": "lic-loc-1",
+        "product": "loc-cm2",
+        "period": 1800000000000,
+        "feature": "learn",
+        "scope": "cm2",
+        "version": 3,
+        "plainHex": "6361737462726964676520686f7273206c6f7421"
+      },
+      "expect": {
+        "sealedHex": "23b6e8aa6e547b4bdc99fde1366e8bb374e4becfd221e709708a749a23ac8920c657461218ff49cecdb857be49faca1a",
+        "keyFingerprint": "10c06299fdfc0038"
+      }
+    }
+  ]
+}

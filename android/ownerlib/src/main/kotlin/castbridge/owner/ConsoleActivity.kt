@@ -25,6 +25,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import castbridge.core.lots.Right
+import castbridge.core.lots.RentalKeys
 import castbridge.core.owner.*
 import java.time.LocalDate
 import java.time.ZoneOffset
@@ -122,6 +123,7 @@ open class ConsoleActivity : ComponentActivity() {
         var input by remember { mutableStateOf("") }; var production by remember { mutableStateOf(false) }
         var permanent by remember { mutableStateOf(false) }; var license by remember { mutableStateOf("") }
         var purchase by remember { mutableStateOf("") }; var subscription by remember { mutableStateOf("") }
+        var rental by remember { mutableStateOf("") }
         var openProduct by remember { mutableStateOf("") }; var openDays by remember { mutableStateOf("30") }
         var token by remember { mutableStateOf<String?>(null) }; var fileContent by remember { mutableStateOf<String?>(null) }
         var error by remember { mutableStateOf<String?>(null) }; var info by remember { mutableStateOf<String?>(null) }
@@ -167,6 +169,7 @@ open class ConsoleActivity : ComponentActivity() {
                 OutlinedTextField(license, { license = it }, label = { Text("Identifiant de licence") }, singleLine = true, modifier = Modifier.fillMaxWidth())
                 OutlinedTextField(purchase, { purchase = it }, label = { Text("Achat à la carte : PRODUIT:BOUQUET,BOUQUET") }, modifier = Modifier.fillMaxWidth())
                 OutlinedTextField(subscription, { subscription = it }, label = { Text("Abonnement : PRODUIT:BOUQUET:AAAA-MM-JJ") }, modifier = Modifier.fillMaxWidth())
+                OutlinedTextField(rental, { rental = it }, label = { Text("Location : PRODUIT=BOUQUET,BOUQUET:JOURS[:MINUTES_D_USAGE_MAX] (un lot libre n'est jamais loué)") }, modifier = Modifier.fillMaxWidth())
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     OutlinedTextField(openProduct, { openProduct = it }, label = { Text("« Tout ouvert » : produit") }, singleLine = true, modifier = Modifier.weight(1f))
                     OutlinedTextField(openDays, { openDays = it.filter(Char::isDigit).take(2) }, label = { Text("Jours (≤ 30)") }, singleLine = true, modifier = Modifier.width(110.dp))
@@ -186,6 +189,9 @@ open class ConsoleActivity : ComponentActivity() {
                                 val end = runCatching { LocalDate.parse(it[2].trim()).atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli() }.getOrNull() ?: throw IssueException("Date d'abonnement invalide")
                                 rights += Right.Subscription(it[0].trim(), it[1].split(',').map(String::trim).filter(String::isNotEmpty), start, end, 7 * day, false) } }
                             if (permanent) rights += Right.Purchase("licence-permanente", listOf(ActivationPolicy.ALL_BUNDLE), now)      // never ends: needs the ISSUE_UNLIMITED scope on this key
+                            rental.lines().filter { it.isNotBlank() }.forEach { l ->
+                                rights += RentalIssuing.right(RightsSyntax.rental(l.trim()), now, license.trim(), SeatIds.of(license.trim(), full.third), full.third, RentalKeys.masterFrom(signer))
+                            }
                             if (openProduct.isNotBlank()) rights += Right.OpenAll(openProduct.trim(), start, start + (openDays.toIntOrNull() ?: throw IssueException("« Tout ouvert » : nombre de jours")) * day)
                         }
                         val kind = if (production) ActivationKind.PRODUCTION else ActivationKind.TRIAL

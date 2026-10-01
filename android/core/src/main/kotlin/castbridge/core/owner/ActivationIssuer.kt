@@ -1,6 +1,7 @@
 package castbridge.core.owner
 
 import castbridge.core.lots.Right
+import castbridge.core.lots.RentalLines
 import castbridge.core.lots.LotId
 import castbridge.core.update.Ed25519
 import java.security.KeyFactory
@@ -108,6 +109,8 @@ class ActivationIssuer(private val signer: Signer, private val scopes: Set<KeySc
         need(Activation.ID.matches(r.productId), "Identifiant de produit invalide : ${r.productId}")
         need(r.bundleIds.isNotEmpty() && r.bundleIds.all { Activation.ID.matches(it) }, "Bouquet invalide dans le droit ${r.productId}")
         when (r) {
+            is Right.Unknown -> throw IssueException("Droit inconnu : à ne pas émettre")
+            is Right.Rental -> { need(r.bundleIds.isNotEmpty(), "Location sans bouquet"); RentalLines.bounds(r)?.let { throw IssueException("Location : $it") } }
             is Right.Purchase -> {
                 need(r.grantedAt > 0, "Date d'achat invalide")
                 if (ActivationPolicy.isPermanent(r)) need(KeyScope.ISSUE_UNLIMITED in scopes, "Cette clé ne peut pas délivrer de licence permanente")

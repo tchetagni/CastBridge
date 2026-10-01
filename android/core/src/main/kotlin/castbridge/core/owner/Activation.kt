@@ -1,6 +1,9 @@
 package castbridge.core.owner
 
 import castbridge.core.lots.Access
+import castbridge.core.lots.RentalLines
+import castbridge.core.lots.RentalPolicy
+import castbridge.core.lots.RentalStatus
 import castbridge.core.lots.Right
 import castbridge.core.lots.Verdict
 import castbridge.core.lots.SubState
@@ -49,6 +52,8 @@ data class Activation(
             is Right.Purchase -> "purchase|${r.productId}|${r.bundleIds.sorted().joinToString(",")}|${r.grantedAt}"
             is Right.Subscription -> "subscription|${r.productId}|${r.bundleIds.sorted().joinToString(",")}|${r.startsAt}|${r.endsAt}|${r.graceMs}|${if (r.autoRenew) 1 else 0}"
             is Right.OpenAll -> "openall|${r.productId}|${r.startsAt}|${r.endsAt}"
+            is Right.Rental -> RentalLines.line(r)
+            is Right.Unknown -> r.raw
         }
 
         fun parseRight(line: String): Right {
@@ -58,7 +63,8 @@ data class Activation(
                 "purchase" -> { require(f.size == 4 && ID.matches(f[1])); Right.Purchase(f[1], ids(f[2]), f[3].toLong()) }
                 "subscription" -> { require(f.size == 7 && ID.matches(f[1])); Right.Subscription(f[1], ids(f[2]), f[3].toLong(), f[4].toLong(), f[5].toLong(), f[6] == "1") }
                 "openall" -> { require(f.size == 4 && ID.matches(f[1])); Right.OpenAll(f[1], f[2].toLong(), f[3].toLong()) }
-                else -> error("right")
+                RentalLines.KIND -> RentalLines.parse(f)
+                else -> RentalLines.unknown(line)
             }
         }
 
@@ -133,6 +139,7 @@ class ActivationVerifier(private val keys: KeyRing, private val maxWindowMs: Lon
         if (a.rights.any(ActivationPolicy::isPermanent) && !key.allows(KeyScope.ISSUE_UNLIMITED)) return no(Rejection.KEY_NOT_ALLOWED, "Cette clé ne peut pas délivrer de licence permanente")
         if (a.kind == ActivationKind.TRIAL && a.rights.isNotEmpty()) return no(Rejection.BAD_RIGHTS, "Une clé d'essai ne porte aucun droit")
         if (a.rights.filterIsInstance<Right.OpenAll>().any { it.endsAt - it.startsAt > MAX_OPEN_ALL_MS || it.endsAt <= it.startsAt }) return no(Rejection.BAD_RIGHTS, "« Tout ouvert » : 30 jours au plus")
+        a.rights.filterIsInstance<Right.Rental>().firstNotNullOfOrNull { RentalLines.bounds(it) }?.let { return no(Rejection.BAD_RIGHTS, "Location : $it") }
         if (a.subject != expect) return no(Rejection.WRONG_SUBJECT, "Cette activation est celle d'un autre type d'appareil")
         if (a.notAfter - a.notBefore > maxWindowMs) return no(Rejection.WINDOW_TOO_LONG, "Fenêtre d'installation trop longue (48 h au plus)")
         if (!DeviceIdentity.matches(a.factors, a.k, device))
@@ -160,7 +167,7 @@ object TvGate {
      * Rights add up (trial floor + purchases + valid subscription + owner grants); an expired grant simply stops counting: the TV falls back
      * to its acquired rights, nothing is deleted.
      */
-    fun evaluate(activations: List<Activation>, grants: List<OwnerGrant>, nowMs: Long): TvAccess {
+    fun evaluate(activations: List<Activation>, grants: List<OwnerGrant>, nowMs: Long, rentals: List<RentalStatus> = emptyList()): TvAccess {
         val live = grants.filter { it.untilMs > nowMs && it.power != Power.SUPPORT }
         if (activations.isEmpty() && live.isEmpty()) return TvAccess(false, Access.TRIAL_ONLY.copy(message = "Aucune clé installée : aucun contenu ouvert"), null, "Aucune clé installée")
         val rights = activations.flatMap { it.rights }
@@ -180,7 +187,10 @@ object TvGate {
             activations.any { it.kind == ActivationKind.PRODUCTION } || live.isNotEmpty() -> "Version complète"
             else -> "Version d'essai"
         }
-        return TvAccess(true, Access(Verdict.OK, purchased, bundles, subs, "", extraLots), openAll, label)
+        // rentals are evaluated by the RentalLedger (clock rules, usage ceiling); with none given (an old caller) a rental line grants NOTHING
+        val access = RentalPolicy.mergeAccess(Access(Verdict.OK, purchased, bundles, subs, "", extraLots), rentals)
+        val rentedLabel = if (access.rented.isNotEmpty() && access.purchased.isEmpty() && bundles.isEmpty() && openAll == null) "Location en cours" else label
+        return TvAccess(true, access, openAll, rentedLabel)
     }
 }
 
