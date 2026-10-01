@@ -15,20 +15,22 @@ import castbridge.core.remote.RemoteKey
 
 /**
  * « Télécommande » of CastBridge TV on the phone (docs/REMOTE.md). A screen of its own so that the phone's volume buttons can
- * drive the TV while it is open, and so the Quick Settings tile can open it directly. The link to the TV lives while the
- * screen is visible (RemoteController); leaving it closes the link (no battery or Bluetooth kept busy in the background).
+ * drive the TV while it is open, and so the Quick Settings tile can open it directly. The link to the TV lives in RemoteController; leaving the screen keeps it
+ * in RemoteService (notification with volume/play keys, phone volume buttons) unless « Garder la télécommande en arrière-plan » is off.
  */
 class RemoteActivity : ComponentActivity() {
     private val prefs by lazy { RemotePrefs(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (prefs.background) RemoteService.start(this)
         setContent { CastTheme { Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) { RemoteScreen(onClose = ::finish) } } }
     }
 
     override fun onStop() {
         super.onStop()
-        if (!isChangingConfigurations) RemoteController.disconnect()
+        // with the background option the link stays up in RemoteService (notification + phone volume buttons)
+        if (!isChangingConfigurations && !(prefs.background && RemoteService.running)) RemoteController.disconnect()
     }
 
     private fun volumeKey(code: Int): RemoteKey? = when (code) {

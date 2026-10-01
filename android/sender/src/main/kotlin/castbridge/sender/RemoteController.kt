@@ -60,6 +60,8 @@ class RemotePrefs(ctx: Context) {
     var volumeKeys: Boolean get() = sp.getBoolean("volkeys", true); set(v) { sp.edit().putBoolean("volkeys", v).apply() }
     var haptics: Boolean get() = sp.getBoolean("haptics", true); set(v) { sp.edit().putBoolean("haptics", v).apply() }
     var wholeTv: Boolean get() = sp.getBoolean("whole", false); set(v) { sp.edit().putBoolean("whole", v).apply() }
+    /** Keep the remote (notification, phone volume buttons) working when the app is not in front (RemoteService). On by default. */
+    var background: Boolean get() = sp.getBoolean("background", true); set(v) { sp.edit().putBoolean("background", v).apply() }
 }
 
 /**
@@ -108,6 +110,9 @@ object RemoteController {
     fun text(value: String, mode: TextMode = TextMode.INSERT) { session?.text(value, mode) }
     fun global(g: RemoteGlobal) { session?.global(g) }
     fun setup() { session?.queue?.offer("system/setup", emptyMap()) }
+
+    /** A session exists (connected or retrying): the background service keeps it alive. */
+    val hasSession: Boolean get() = session != null
 
     val connected: Boolean get() = session != null && _status.value.link == RemoteSession.Link.CONNECTED
 
