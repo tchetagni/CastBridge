@@ -2,6 +2,11 @@ package castbridge.core.tv
 
 data class TvFile(val name: String, val size: Long, val received: Long, val complete: Boolean)
 
+/** Never copy what the TV already holds: the same name, complete, with exactly the same size. A same-named file of another size is a DIFFERENT file (not skipped, not overwritten blindly). */
+object TvDedupe {
+    fun alreadyThere(f: TvFile?, size: Long): Boolean = f != null && f.complete && size > 0 && f.size == size
+}
+
 /** Parsed GET /api/info. */
 data class TvInfo(
     val files: List<TvFile>, val free: Long, val used: Long, val quota: Long,

@@ -12,6 +12,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.isActive
@@ -83,6 +84,9 @@ object TransferQueue {
         val uri = Uri.parse(item.uri)
         val base = session.base
         val viaBt = base == null
+        // never copy the same file twice: same name, complete, same size already on the TV
+        val there = base?.let { b -> withContext(Dispatchers.IO) { runCatching { castbridge.core.tv.TvDedupe.alreadyThere(castbridge.core.tv.TvInfo.parse(castbridge.core.tv.TvClient(b, session.credential).info()).file(item.name), item.size) }.getOrDefault(false) } } ?: false
+        if (there) { model.finish(item.id, true, "Déjà sur la TV : non recopié"); publish(); return }
         val ok = runCatching {
             if (viaBt) BtUploadService.start(app, uri, item.name, session.tv.address, session.credential)
             else UploadService.start(app, uri, item.name, session.tv.mdns ?: session.tv.name, base!!.removePrefix("http://"), session.credential,
