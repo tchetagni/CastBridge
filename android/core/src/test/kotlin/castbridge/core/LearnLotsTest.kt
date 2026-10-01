@@ -243,7 +243,7 @@ class LearnLotsTest {
     @Test fun learnCodeNeverTouchesTheNetwork() {
         val base = File(content, "../../android/core/src/main/kotlin/castbridge/core")
         val bad = Regex("""java\.net|javax\.net|HttpURLConnection|HttpClient|okhttp|\bSocket\b|URL\(""")
-        for (dir in listOf("learn", "lots")) for (f in File(base, dir).walkTopDown().filter { it.extension == "kt" }) {
+        for (dir in listOf("learn", "lots")) for (f in File(base, dir).walkTopDown().filter { it.extension == "kt" && it.name !in setOf("LotSync.kt", "LotPush.kt") }) {   // phone side only: LotSync downloads from the server, LotPush sends to the TV (the TV never downloads)
             f.readLines().forEachIndexed { n, l -> if (!l.trim().startsWith("*") && !l.trim().startsWith("//") && bad.containsMatchIn(l)) fail("${f.name}:${n + 1} uses the network: $l") }
         }
     }

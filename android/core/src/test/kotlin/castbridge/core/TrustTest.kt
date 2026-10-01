@@ -31,7 +31,7 @@ class TrustTest {
         val t = r.issueToken(PHONE)!!
         assertTrue(Regex("^cbk_[0-9a-f]{64}$").matches(t.token))
         assertEquals(PHONE, r.verifyToken(t.token))
-        assertNull(r.verifyToken(t.token.dropLast(1) + "0"), "altered token")
+        assertNull(r.verifyToken(t.token.dropLast(1) + (if (t.token.last() == '0') "1" else "0")), "altered token")   // really different from the original (1 token in 16 ends with 0)
         assertNull(r.verifyToken("123456"), "the PIN is not a token")
         assertNull(r.verifyToken(null))
         assertTrue(r.revoke(PHONE))
