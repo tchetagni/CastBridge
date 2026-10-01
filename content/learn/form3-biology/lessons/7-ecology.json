@@ -1,0 +1,559 @@
+{
+ "chapter": "form3-biology-ecology",
+ "lessons": [
+  {
+   "id": "form3-biology-ecology",
+   "title": "Ecosystems, food webs and the environment",
+   "minutes": 30,
+   "programRef": "Form 3 Biology — Ecosystems, food webs and the environment (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define ecosystem terms and construct food chains and webs.",
+    "Describe energy flow and sampling with quadrats and estimate a population.",
+    "Describe human effects on the environment and conservation."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form3-biology-ecology-e01",
+    "form3-biology-ecology-e02",
+    "form3-biology-ecology-e03",
+    "form3-biology-ecology-e04",
+    "form3-biology-ecology-e05",
+    "form3-biology-ecology-e06"
+   ],
+   "selfCheck": [
+    "form3-biology-ecology-q1",
+    "form3-biology-ecology-q2",
+    "form3-biology-ecology-q3",
+    "form3-biology-ecology-q4",
+    "form3-biology-ecology-q5"
+   ],
+   "reviewNotes": [
+    "The 'one tenth' energy transfer is an approximate textbook figure. Protected areas named (Korup, Waza, Mount Cameroon) are real but wording must be checked. Nitrogen cycle appears only in outline.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Ecosystem terms",
+     "md": "A **habitat** is where an organism lives; a **population** is all the organisms of one species in a habitat; a **community** is all the populations together; an **ecosystem** is the community plus its non-living environment (soil, water, light, temperature). **Producers** (green plants) make food; **consumers** eat; **decomposers** (bacteria, fungi) break down dead matter and return nutrients to the soil. **Herbivores** are primary consumers; **carnivores** are secondary or tertiary consumers."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 250,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 205,
+        "w": 100,
+        "h": 32,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 70.0,
+        "y": 226,
+        "text": "grass",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 205,
+        "w": 100,
+        "h": 32,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 226,
+        "text": "maize",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 145,
+        "w": 110,
+        "h": 32,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 75.0,
+        "y": 166,
+        "text": "grasshopper",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 145,
+        "w": 100,
+        "h": 32,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 166,
+        "text": "rat",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 85,
+        "w": 110,
+        "h": 32,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightorange",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 75.0,
+        "y": 106,
+        "text": "frog",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 85,
+        "w": 100,
+        "h": 32,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightorange",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 106,
+        "text": "snake",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 320,
+        "y": 22,
+        "w": 100,
+        "h": 32,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 370.0,
+        "y": 43,
+        "text": "hawk",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 70,
+        "y1": 203,
+        "x2": 70,
+        "y2": 179,
+        "color": "ink",
+        "width": 1.8,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 203,
+        "x2": 210,
+        "y2": 179,
+        "color": "ink",
+        "width": 1.8,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 112,
+        "y1": 203,
+        "x2": 178,
+        "y2": 179,
+        "color": "ink",
+        "width": 1.8,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 75,
+        "y1": 143,
+        "x2": 75,
+        "y2": 119,
+        "color": "ink",
+        "width": 1.8,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 132,
+        "y1": 101,
+        "x2": 158,
+        "y2": 101,
+        "color": "ink",
+        "width": 1.8,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 143,
+        "x2": 210,
+        "y2": 119,
+        "color": "ink",
+        "width": 1.8,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 262,
+        "y1": 92,
+        "x2": 328,
+        "y2": 58,
+        "color": "ink",
+        "width": 1.8,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 285,
+        "y": 228,
+        "text": "arrow = 'is eaten by'",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A food web: arrows show the direction of energy flow.",
+     "alt": "A web: grass feeds grasshopper and rat, maize feeds rat, grasshopper is eaten by frog, frog and rat are eaten by snake, snake is eaten by hawk."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Energy flow",
+     "md": "Energy enters ecosystems as **sunlight** captured by producers. At each step in a food chain only a small part of the energy (roughly **one tenth**) passes to the next level; most is used in respiration and lost as **heat**, or is in parts that are not eaten. So food chains are **short** and the **numbers or mass** of organisms usually fall at each level (**pyramid of numbers or biomass**)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Sampling with quadrats",
+     "md": "A **quadrat** is a square frame (often 1 m × 1 m) placed **at random** many times in an area. Count the organisms in each, find the **mean** per quadrat and estimate the total: **population ≈ mean per quadrat × (total area ÷ quadrat area)**. More quadrats give a more reliable estimate. Example: counts 3, 5, 4, 6, 2, 4, 5, 3 in 1 m² quadrats give a mean of 4 per m²; in 400 m² the estimate is 1600."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "People and the environment",
+     "md": "**Deforestation**, bush burning, overfishing, pollution and urban growth destroy habitats and reduce biodiversity. **Conservation**: protected areas (for example Korup rainforest, Waza savannah and the Mount Cameroon region), tree planting, controlled hunting and fishing, sustainable farming, waste management and education. **Nitrogen cycle**: decomposers make ammonia, **nitrifying bacteria** make nitrates for plants; **legumes** (beans, groundnuts) have **nitrogen-fixing bacteria** in their root nodules and improve the soil."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Arrows in food chains point towards the **consumer**, not the food.\n- A food chain always starts with a **producer**.\n- Quadrats must be placed **at random**; throwing them where plants look thickest gives a biased estimate."
+    },
+    {
+     "type": "example",
+     "title": "Population estimate",
+     "statement": "Eight 1 m² quadrats give plant counts of 3, 5, 4, 6, 2, 4, 5 and 3. Estimate the number of plants in a field of 400 m².",
+     "steps": [
+      "Mean = (3 + 5 + 4 + 6 + 2 + 4 + 5 + 3) ÷ 8 = 32 ÷ 8 = 4 per m².",
+      "Estimate = 4 × 400 = 1600 plants."
+     ],
+     "answer": "About 1600 plants"
+    },
+    {
+     "type": "example",
+     "title": "Effect on the food web",
+     "statement": "In the web, all the frogs die from a disease. Predict two effects.",
+     "steps": [
+      "Grasshoppers are no longer eaten by frogs, so their number rises.",
+      "Snakes have less food and turn to rats more, or their number falls."
+     ],
+     "answer": "More grasshoppers; less food for snakes."
+    },
+    {
+     "type": "exercise",
+     "ref": "form3-biology-ecology-e01"
+    }
+   ],
+   "chapter": "form3-biology-ecology"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form3-biology-ecology-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-biology-ecology",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In a food chain, the producer is always a:",
+   "choices": [
+    "carnivore",
+    "green plant",
+    "decomposer",
+    "herbivore"
+   ],
+   "answer": 1,
+   "explanation": "It makes food by photosynthesis.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-biology-ecology"
+  },
+  {
+   "id": "form3-biology-ecology-e02",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "form3-biology-ecology",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each term with its meaning.",
+   "pairs": [
+    [
+     "habitat",
+     "where an organism lives"
+    ],
+    [
+     "decomposer",
+     "breaks down dead matter"
+    ],
+    [
+     "population",
+     "all the organisms of one species in an area"
+    ],
+    [
+     "ecosystem",
+     "community and non-living environment"
+    ]
+   ],
+   "explanation": "Standard definitions.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form3-biology-ecology"
+  },
+  {
+   "id": "form3-biology-ecology-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "form3-biology-ecology",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Most of the energy at one level of a food chain passes to the next level.",
+   "answer": false,
+   "explanation": "Only about one tenth does.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-biology-ecology"
+  },
+  {
+   "id": "form3-biology-ecology-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form3-biology-ecology",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Five 1 m² quadrats contain 6, 4, 5, 7 and 3 plants. Estimate the number in 200 m².",
+   "answer": 1000,
+   "tolerance": 0,
+   "explanation": "Mean = 25 ÷ 5 = 5 per m²; 5 × 200 = 1000.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form3-biology-ecology"
+  },
+  {
+   "id": "form3-biology-ecology-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form3-biology-ecology",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain why quadrats should be placed at random.",
+   "model": "Random placement avoids bias, so the sample represents the whole area and the estimate of population is fair.",
+   "rubric": [
+    "1 mark: avoids bias",
+    "1 mark: representative sample"
+   ],
+   "explanation": "Random placement avoids bias, so the sample represents the whole area and the estimate of population is fair.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-biology-ecology"
+  },
+  {
+   "id": "form3-biology-ecology-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form3-biology-ecology",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Food chain: algae → tadpole → fish → heron.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The tertiary consumer is:",
+     "choices": [
+      "algae",
+      "heron",
+      "fish",
+      "tadpole"
+     ],
+     "answer": 1,
+     "explanation": "Primary tadpole, secondary fish, tertiary heron.",
+     "id": "form3-biology-ecology-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Most of the energy lost between the levels leaves as:",
+     "choices": [
+      "sound",
+      "food",
+      "heat",
+      "light"
+     ],
+     "answer": 2,
+     "explanation": "From respiration.",
+     "id": "form3-biology-ecology-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Suggest why there are fewer herons than tadpoles in the pond.",
+     "model": "Only about one tenth of the energy passes up each level, so less energy is available at the top and fewer large animals can be supported.",
+     "rubric": [
+      "1 mark: energy lost at each level",
+      "1 mark: fewer organisms at the top"
+     ],
+     "explanation": "Only about one tenth of the energy passes up each level, so less energy is available at the top and fewer large animals can be supported.",
+     "id": "form3-biology-ecology-e06-c"
+    }
+   ],
+   "chapter": "form3-biology-ecology"
+  },
+  {
+   "id": "form3-biology-ecology-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-ecology",
+   "prompt": "Organisms that break down dead plants and animals are:",
+   "choices": [
+    "decomposers",
+    "producers",
+    "predators",
+    "herbivores"
+   ],
+   "answer": 0,
+   "explanation": "Bacteria and fungi.",
+   "chapter": "form3-biology-ecology"
+  },
+  {
+   "id": "form3-biology-ecology-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-ecology",
+   "prompt": "The source of energy for most food chains is:",
+   "choices": [
+    "the soil",
+    "the Sun",
+    "the wind",
+    "the rain"
+   ],
+   "answer": 1,
+   "explanation": "Captured by producers.",
+   "chapter": "form3-biology-ecology"
+  },
+  {
+   "id": "form3-biology-ecology-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-ecology",
+   "prompt": "Bacteria in root nodules of beans:",
+   "choices": [
+    "fix nitrogen",
+    "digest starch",
+    "pollinate flowers",
+    "make chlorophyll"
+   ],
+   "answer": 0,
+   "explanation": "They improve soil fertility.",
+   "chapter": "form3-biology-ecology"
+  },
+  {
+   "id": "form3-biology-ecology-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-ecology",
+   "prompt": "An organism that eats only plants is a:",
+   "choices": [
+    "herbivore",
+    "decomposer",
+    "carnivore",
+    "omnivore"
+   ],
+   "answer": 0,
+   "explanation": "Primary consumer.",
+   "chapter": "form3-biology-ecology"
+  },
+  {
+   "id": "form3-biology-ecology-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-ecology",
+   "prompt": "Which activity protects biodiversity?",
+   "choices": [
+    "overfishing",
+    "burning forests",
+    "creating protected areas",
+    "dumping waste"
+   ],
+   "answer": 2,
+   "explanation": "Conservation.",
+   "chapter": "form3-biology-ecology"
+  }
+ ]
+}

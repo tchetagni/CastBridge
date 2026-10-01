@@ -1,0 +1,921 @@
+{
+ "chapter": "class3-science-environment",
+ "lessons": [
+  {
+   "id": "class3-science-soil",
+   "title": "Soil",
+   "minutes": 12,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level II (Class 3) — Elementary Science; to be checked against the official texts",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Name kinds of soil.",
+    "Say why soil is important."
+   ],
+   "prerequisites": [
+    "class3-science-magnets"
+   ],
+   "exercises": [
+    "class3-science-environment-e01",
+    "class3-science-environment-e02",
+    "class3-science-environment-e03",
+    "class3-science-environment-e04",
+    "class3-science-environment-e05",
+    "class3-science-environment-e06"
+   ],
+   "selfCheck": [
+    "class3-science-soil-q1",
+    "class3-science-soil-q2",
+    "class3-science-soil-q3",
+    "class3-science-soil-q4",
+    "class3-science-soil-q5"
+   ],
+   "reviewNotes": [
+    "Soil types are textbook-level; the remark about volcanic soils near Mount Cameroon is a common geography fact; check wording.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Soil",
+     "md": "**Soil** is the top layer of the ground. It is made of tiny pieces of rock, **humus** (rotted plants and animals), water and air. Plants grow in soil and take water from it."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 106,
+      "items": [
+       {
+        "t": "rect",
+        "x": 8.0,
+        "y": 8,
+        "w": 120.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 68.0,
+        "y": 36.3,
+        "text": "sandy",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 136.0,
+        "y": 8,
+        "w": 120.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 196.0,
+        "y": 36.3,
+        "text": "clay",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 264.0,
+        "y": 8,
+        "w": 120.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 324.0,
+        "y": 36.3,
+        "text": "loam",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Kinds of soil.",
+     "alt": "Three boxes: sandy, clay, loam."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Kinds of soil",
+     "md": "**Sandy soil** has big grains, drains water quickly. **Clay soil** has tiny grains, holds water and gets sticky. **Loam** is a mix with much humus; it is good for growing crops. In much of Cameroon, red and dark volcanic soils are good for farming (for example near Mount Cameroon)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Soil is not just dirt; it is full of living things such as earthworms.\n- Heavy rain can wash soil away (erosion).\n- Planting trees and grass holds the soil."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Which soil drains water fastest?",
+     "steps": [
+      "The grains are big.",
+      "Sandy soil."
+     ],
+     "answer": "Sandy soil",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 106,
+      "items": [
+       {
+        "t": "rect",
+        "x": 8.0,
+        "y": 8,
+        "w": 120.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 68.0,
+        "y": 34.2,
+        "text": "sand: drains fast",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 136.0,
+        "y": 8,
+        "w": 120.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 196.0,
+        "y": 34.2,
+        "text": "clay: holds water",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 264.0,
+        "y": 8,
+        "w": 120.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 324.0,
+        "y": 34.2,
+        "text": "loam: best for crops",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "How can we stop rain from washing soil away?",
+     "steps": [
+      "Plant trees and grass.",
+      "Roots hold the soil."
+     ],
+     "answer": "Plant trees and grass"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class3-science-environment"
+  },
+  {
+   "id": "class3-science-environment-care",
+   "title": "Caring for the environment",
+   "minutes": 12,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level II (Class 3) — Elementary Science; to be checked against the official texts",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Say why we protect forests, water and air.",
+    "Say what each person can do."
+   ],
+   "prerequisites": [
+    "class3-science-soil"
+   ],
+   "exercises": [
+    "class3-science-environment-e07",
+    "class3-science-environment-e08",
+    "class3-science-environment-e09",
+    "class3-science-environment-e10",
+    "class3-science-environment-e11",
+    "class3-science-environment-e12"
+   ],
+   "selfCheck": [
+    "class3-science-environment-care-q1",
+    "class3-science-environment-care-q2",
+    "class3-science-environment-care-q3",
+    "class3-science-environment-care-q4",
+    "class3-science-environment-care-q5"
+   ],
+   "reviewNotes": [
+    "Environmental advice is general; check local rules and what recycling exists.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Our environment",
+     "md": "Our **environment** is the land, water, air, plants and animals around us. People need a clean environment to stay healthy. Forests give wood, food and medicine plants, shelter for animals, and help to keep the air clean."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 120,
+      "items": [
+       {
+        "t": "rect",
+        "x": 8.0,
+        "y": 8,
+        "w": 184.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 34.9,
+        "text": "problem: litter",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 8,
+        "w": 184.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 292.0,
+        "y": 34.9,
+        "text": "problem: cutting trees",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 8.0,
+        "y": 60,
+        "w": 184.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 86.9,
+        "text": "action: plant trees",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 60,
+        "w": 184.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "pink",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 292.0,
+        "y": 86.9,
+        "text": "action: use bins",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Problems and actions.",
+     "alt": "Four boxes with problems and actions."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Problems and solutions",
+     "md": "**Problems**: litter, burning plastic, cutting too many trees, dirty rivers, soil erosion. **What we can do**: put rubbish in a bin, plant trees, save water, reuse and recycle where possible, take care of school gardens."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Burning plastic makes harmful smoke.\n- Cutting a tree needs a new tree to be planted.\n- Small actions by everybody make a big difference."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Name two things you can do to look after your school.",
+     "steps": [
+      "Put litter in a bin.",
+      "Plant a tree or flowers."
+     ],
+     "answer": "Use bins and plant trees",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 106,
+      "items": [
+       {
+        "t": "rect",
+        "x": 8.0,
+        "y": 8,
+        "w": 88.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 52.0,
+        "y": 34.55,
+        "text": "use bins",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 104.0,
+        "y": 8,
+        "w": 88.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 148.0,
+        "y": 34.55,
+        "text": "plant trees",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 8,
+        "w": 88.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 244.0,
+        "y": 34.55,
+        "text": "save water",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 296.0,
+        "y": 8,
+        "w": 88.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "pink",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 340.0,
+        "y": 34.55,
+        "text": "reuse",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Why should we not throw rubbish in a river?",
+     "steps": [
+      "It makes the water dirty.",
+      "Fish and people are harmed."
+     ],
+     "answer": "It makes the water dirty"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class3-science-environment"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "class3-science-environment-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class3-science-soil",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which soil is best for growing crops?",
+   "choices": [
+    "pure sand",
+    "gravel",
+    "pure clay",
+    "loam"
+   ],
+   "answer": 3,
+   "explanation": "Loam.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class3-science-environment"
+  },
+  {
+   "id": "class3-science-environment-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class3-science-soil",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Humus is made of...",
+   "choices": [
+    "plastic",
+    "metal",
+    "stones",
+    "rotted plants and animals"
+   ],
+   "answer": 3,
+   "explanation": "Rotted matter.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class3-science-environment"
+  },
+  {
+   "id": "class3-science-environment-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "class3-science-soil",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Plants take water from soil.",
+   "answer": true,
+   "explanation": "Yes.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class3-science-environment"
+  },
+  {
+   "id": "class3-science-environment-e04",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "class3-science-soil",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match the soil with a property.",
+   "pairs": [
+    [
+     "sandy",
+     "drains fast"
+    ],
+    [
+     "clay",
+     "holds water"
+    ],
+    [
+     "loam",
+     "rich in humus"
+    ]
+   ],
+   "explanation": "Properties.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "class3-science-environment"
+  },
+  {
+   "id": "class3-science-environment-e05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "class3-science-soil",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Washing away of soil by rain is called...",
+   "choices": [
+    "evaporation",
+    "melting",
+    "growth",
+    "erosion"
+   ],
+   "answer": 3,
+   "explanation": "Erosion.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class3-science-environment"
+  },
+  {
+   "id": "class3-science-environment-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class3-science-soil",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A farmer has 3 plots: sandy, clay and loam. She grows beans on the plot that holds water well and drains well.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which plot is best?",
+     "choices": [
+      "none",
+      "loam",
+      "clay",
+      "sandy"
+     ],
+     "answer": 1,
+     "explanation": "Loam.",
+     "id": "class3-science-environment-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What can she plant to stop erosion on a slope?",
+     "choices": [
+      "nothing",
+      "plastic bags",
+      "stones only",
+      "trees or grass"
+     ],
+     "answer": 3,
+     "explanation": "Plants hold soil.",
+     "id": "class3-science-environment-e06-b"
+    }
+   ],
+   "chapter": "class3-science-environment"
+  },
+  {
+   "id": "class3-science-soil-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-science-soil",
+   "prompt": "Class 3 science soil: the best soil for crops is...",
+   "choices": [
+    "clay only",
+    "gravel",
+    "loam",
+    "sand only"
+   ],
+   "answer": 2,
+   "explanation": "Loam.",
+   "chapter": "class3-science-environment"
+  },
+  {
+   "id": "class3-science-soil-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-science-soil",
+   "prompt": "Class 3 science soil: soil that holds water and is sticky is...",
+   "choices": [
+    "gravel",
+    "sand",
+    "clay",
+    "loam"
+   ],
+   "answer": 2,
+   "explanation": "Clay.",
+   "chapter": "class3-science-environment"
+  },
+  {
+   "id": "class3-science-soil-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-science-soil",
+   "prompt": "Humus comes from...",
+   "choices": [
+    "rotted plants and animals",
+    "plastic",
+    "paint",
+    "rocks only"
+   ],
+   "answer": 0,
+   "explanation": "Humus.",
+   "chapter": "class3-science-environment"
+  },
+  {
+   "id": "class3-science-soil-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-science-soil",
+   "prompt": "Erosion is...",
+   "choices": [
+    "washing away of soil",
+    "growing of soil",
+    "melting",
+    "making rain"
+   ],
+   "answer": 0,
+   "explanation": "Erosion.",
+   "chapter": "class3-science-environment"
+  },
+  {
+   "id": "class3-science-soil-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-science-soil",
+   "prompt": "Which holds soil together?",
+   "choices": [
+    "plastic",
+    "roots of plants",
+    "wind",
+    "noise"
+   ],
+   "answer": 1,
+   "explanation": "Roots.",
+   "chapter": "class3-science-environment"
+  },
+  {
+   "id": "class3-science-environment-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class3-science-environment-care",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A good thing to do for the environment is to...",
+   "choices": [
+    "throw litter",
+    "waste water",
+    "plant trees",
+    "burn plastic"
+   ],
+   "answer": 2,
+   "explanation": "Plant trees.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class3-science-environment"
+  },
+  {
+   "id": "class3-science-environment-e08",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "class3-science-environment-care",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Burning plastic is safe.",
+   "answer": false,
+   "explanation": "It makes harmful smoke.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class3-science-environment"
+  },
+  {
+   "id": "class3-science-environment-e09",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class3-science-environment-care",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Forests give...",
+   "choices": [
+    "wood and shelter for animals",
+    "plastic",
+    "metal only",
+    "only noise"
+   ],
+   "answer": 0,
+   "explanation": "Forests.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class3-science-environment"
+  },
+  {
+   "id": "class3-science-environment-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "class3-science-environment-care",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which is a problem for the environment?",
+   "choices": [
+    "a clean river",
+    "litter",
+    "a tree",
+    "a bin"
+   ],
+   "answer": 1,
+   "explanation": "Litter.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class3-science-environment"
+  },
+  {
+   "id": "class3-science-environment-e11",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "class3-science-environment-care",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match the problem with a good action.",
+   "pairs": [
+    [
+     "litter",
+     "use a bin"
+    ],
+    [
+     "cut trees",
+     "plant new trees"
+    ]
+   ],
+   "explanation": "Actions.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "class3-science-environment"
+  },
+  {
+   "id": "class3-science-environment-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class3-science-environment-care",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A school club plants 5 trees each month.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many trees after 4 months?",
+     "answer": 20,
+     "tolerance": 0,
+     "explanation": "5 × 4 = 20.",
+     "id": "class3-science-environment-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "If 2 trees do not grow, how many survive? (20 − 2)",
+     "answer": 18,
+     "tolerance": 0,
+     "explanation": "18.",
+     "id": "class3-science-environment-e12-b"
+    }
+   ],
+   "chapter": "class3-science-environment"
+  },
+  {
+   "id": "class3-science-environment-care-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-science-environment-care",
+   "prompt": "Class 3 science environment: we can help by...",
+   "choices": [
+    "throwing litter",
+    "wasting water",
+    "using a bin",
+    "burning plastic"
+   ],
+   "answer": 2,
+   "explanation": "Bin.",
+   "chapter": "class3-science-environment"
+  },
+  {
+   "id": "class3-science-environment-care-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-science-environment-care",
+   "prompt": "Class 3 science environment: forests help to...",
+   "choices": [
+    "make noise",
+    "dirty rivers",
+    "keep the air clean",
+    "melt ice"
+   ],
+   "answer": 2,
+   "explanation": "Air.",
+   "chapter": "class3-science-environment"
+  },
+  {
+   "id": "class3-science-environment-care-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-science-environment-care",
+   "prompt": "Burning plastic...",
+   "choices": [
+    "makes harmful smoke",
+    "is good for plants",
+    "makes rain",
+    "is safe"
+   ],
+   "answer": 0,
+   "explanation": "Harmful.",
+   "chapter": "class3-science-environment"
+  },
+  {
+   "id": "class3-science-environment-care-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-science-environment-care",
+   "prompt": "Which is a good habit?",
+   "choices": [
+    "saving water",
+    "spilling oil",
+    "littering",
+    "wasting water"
+   ],
+   "answer": 0,
+   "explanation": "Save.",
+   "chapter": "class3-science-environment"
+  },
+  {
+   "id": "class3-science-environment-care-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class3-science-environment-care",
+   "prompt": "The environment means...",
+   "choices": [
+    "only our house",
+    "the land, water, air, plants and animals around us",
+    "only a bin",
+    "only the sky"
+   ],
+   "answer": 1,
+   "explanation": "Around us.",
+   "chapter": "class3-science-environment"
+  }
+ ]
+}

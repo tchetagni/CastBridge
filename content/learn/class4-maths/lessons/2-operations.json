@@ -1,0 +1,2775 @@
+{
+ "chapter": "class4-maths-operations",
+ "lessons": [
+  {
+   "id": "class4-maths-add-subtract",
+   "title": "Adding and subtracting large numbers",
+   "minutes": 25,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level II (Class 4) — Mathematics; to be checked against the official syllabus",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Add numbers with carrying.",
+    "Subtract numbers with borrowing (exchanging).",
+    "Check an answer by using the opposite operation."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "class4-maths-operations-e01",
+    "class4-maths-operations-e02",
+    "class4-maths-operations-e03",
+    "class4-maths-operations-e04",
+    "class4-maths-operations-e05",
+    "class4-maths-operations-e06"
+   ],
+   "selfCheck": [
+    "class4-maths-add-subtract-q1",
+    "class4-maths-add-subtract-q2",
+    "class4-maths-add-subtract-q3",
+    "class4-maths-add-subtract-q4",
+    "class4-maths-add-subtract-q5"
+   ],
+   "reviewNotes": [
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Adding",
+     "md": "Write the numbers under each other so that units are under units. Add from the **right**. If a column makes **10 or more**, write the units and **carry** the tens to the next column. Example: 6 + 9 = 15: write 5 and carry 1."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 160,
+      "items": [
+       {
+        "t": "rect",
+        "x": 80.0,
+        "y": 10,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 29.0,
+        "text": "Th",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 140.0,
+        "y": 10,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 170.0,
+        "y": 29.0,
+        "text": "H",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 10,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 230.0,
+        "y": 29.0,
+        "text": "T",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 260.0,
+        "y": 10,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 290.0,
+        "y": 29.0,
+        "text": "U",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 80.0,
+        "y": 38,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 140.0,
+        "y": 38,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 170.0,
+        "y": 57.0,
+        "text": "1",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 38,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 230.0,
+        "y": 57.0,
+        "text": "1",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 260.0,
+        "y": 38,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 80.0,
+        "y": 66,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 85.0,
+        "text": "4",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 140.0,
+        "y": 66,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 170.0,
+        "y": 85.0,
+        "text": "2",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 66,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 230.0,
+        "y": 85.0,
+        "text": "5",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 260.0,
+        "y": 66,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 290.0,
+        "y": 85.0,
+        "text": "6",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 80.0,
+        "y": 94,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 113.0,
+        "text": "+ 3",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 140.0,
+        "y": 94,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 170.0,
+        "y": 113.0,
+        "text": "8",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 94,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 230.0,
+        "y": 113.0,
+        "text": "7",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 260.0,
+        "y": 94,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 290.0,
+        "y": 113.0,
+        "text": "9",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 80.0,
+        "y": 122,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 141.0,
+        "text": "8",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 140.0,
+        "y": 122,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 170.0,
+        "y": 141.0,
+        "text": "1",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 122,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 230.0,
+        "y": 141.0,
+        "text": "3",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 260.0,
+        "y": 122,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 290.0,
+        "y": 141.0,
+        "text": "5",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "4,256 + 3,879 = 8,135 with carrying.",
+     "alt": "A column addition table: 4,256 plus 3,879 with the carried ones above, giving 8,135."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Subtracting",
+     "md": "Subtract from the **right**. If the top digit is smaller, **exchange**: take 1 from the next column on the left and add 10 to the top digit. **Check**: the answer plus the number you took away must give back the first number."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Not lining up the digits: 245 + 3,600 is not 3,845 if the 5 is under the 6.\n- Subtracting the smaller digit from the bigger digit in each column, whichever is on top.\n- Forgetting the carried 1.\n- Not checking the answer."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "A shop in Douala sold 4,256 pens in May and 3,879 pens in June. How many pens in all?",
+     "steps": [
+      "Add the units: 6 + 9 = 15. Write 5, carry 1.",
+      "Tens: 5 + 7 + 1 = 13. Write 3, carry 1. Hundreds: 2 + 8 + 1 = 11. Write 1, carry 1. Thousands: 4 + 3 + 1 = 8."
+     ],
+     "answer": "4,256 + 3,879 = 8,135 pens.",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 160,
+      "items": [
+       {
+        "t": "rect",
+        "x": 80.0,
+        "y": 10,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 29.0,
+        "text": "Th",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 140.0,
+        "y": 10,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 170.0,
+        "y": 29.0,
+        "text": "H",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 10,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 230.0,
+        "y": 29.0,
+        "text": "T",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 260.0,
+        "y": 10,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 290.0,
+        "y": 29.0,
+        "text": "U",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 80.0,
+        "y": 38,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 140.0,
+        "y": 38,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 170.0,
+        "y": 57.0,
+        "text": "1",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 38,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 230.0,
+        "y": 57.0,
+        "text": "1",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 260.0,
+        "y": 38,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 80.0,
+        "y": 66,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 85.0,
+        "text": "4",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 140.0,
+        "y": 66,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 170.0,
+        "y": 85.0,
+        "text": "2",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 66,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 230.0,
+        "y": 85.0,
+        "text": "5",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 260.0,
+        "y": 66,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 290.0,
+        "y": 85.0,
+        "text": "6",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 80.0,
+        "y": 94,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 113.0,
+        "text": "+ 3",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 140.0,
+        "y": 94,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 170.0,
+        "y": 113.0,
+        "text": "8",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 94,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 230.0,
+        "y": 113.0,
+        "text": "7",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 260.0,
+        "y": 94,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 290.0,
+        "y": 113.0,
+        "text": "9",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 80.0,
+        "y": 122,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 141.0,
+        "text": "8",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 140.0,
+        "y": 122,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 170.0,
+        "y": 141.0,
+        "text": "1",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 122,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 230.0,
+        "y": 141.0,
+        "text": "3",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 260.0,
+        "y": 122,
+        "w": 60,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 290.0,
+        "y": 141.0,
+        "text": "5",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Work out 4,256 − 3,879 and check.",
+     "steps": [
+      "Units: 6 − 9 cannot be done. Exchange: 16 − 9 = 7. Tens: 4 − 7 cannot: 14 − 7 = 7. Hundreds: 1 − 8: 11 − 8 = 3. Thousands: 3 − 3 = 0.",
+      "Check: 377 + 3,879 = 4,256. Correct."
+     ],
+     "answer": "377"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-multiplication",
+   "title": "Multiplication",
+   "minutes": 30,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level II (Class 4) — Mathematics; to be checked against the official syllabus",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Multiply by a 1-digit number.",
+    "Multiply by a 2-digit number.",
+    "Use multiplication tables and estimate answers."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "class4-maths-operations-e07",
+    "class4-maths-operations-e08",
+    "class4-maths-operations-e09",
+    "class4-maths-operations-e10",
+    "class4-maths-operations-e11",
+    "class4-maths-operations-e12"
+   ],
+   "selfCheck": [
+    "class4-maths-multiplication-q1",
+    "class4-maths-multiplication-q2",
+    "class4-maths-multiplication-q3",
+    "class4-maths-multiplication-q4",
+    "class4-maths-multiplication-q5"
+   ],
+   "reviewNotes": [
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Multiplication",
+     "md": "Multiplication is **repeated addition**: 4 × 6 = 6 + 6 + 6 + 6 = 24. The order does not change the answer: 4 × 6 = 6 × 4. Learn the tables up to 12 × 12. Multiplying by **10** moves each digit one place left (add a zero): 45 × 10 = 450. Multiplying by **100** adds two zeros."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Long multiplication",
+     "md": "To work out 52 × 14: multiply 52 by the **units** (4): 208. Then multiply 52 by the **tens** (10): 520. **Add** the two lines: 208 + 520 = 728. For a 1-digit number such as 347 × 6, multiply each digit by 6 from the right and carry."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 176,
+      "items": [
+       {
+        "t": "rect",
+        "x": 95.0,
+        "y": 10,
+        "w": 90,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "rect",
+        "x": 185.0,
+        "y": 10,
+        "w": 60,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 215.0,
+        "y": 28.0,
+        "text": "T",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 245.0,
+        "y": 10,
+        "w": 60,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 275.0,
+        "y": 28.0,
+        "text": "U",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 95.0,
+        "y": 36,
+        "w": 90,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 185.0,
+        "y": 36,
+        "w": 60,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 215.0,
+        "y": 54.0,
+        "text": "5",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 245.0,
+        "y": 36,
+        "w": 60,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 275.0,
+        "y": 54.0,
+        "text": "2",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 95.0,
+        "y": 62,
+        "w": 90,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 140.0,
+        "y": 80.0,
+        "text": "x",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 185.0,
+        "y": 62,
+        "w": 60,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 215.0,
+        "y": 80.0,
+        "text": "1",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 245.0,
+        "y": 62,
+        "w": 60,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 275.0,
+        "y": 80.0,
+        "text": "4",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 95.0,
+        "y": 88,
+        "w": 90,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 140.0,
+        "y": 106.0,
+        "text": "2 0 8",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 185.0,
+        "y": 88,
+        "w": 60,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 245.0,
+        "y": 88,
+        "w": 60,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 95.0,
+        "y": 114,
+        "w": 90,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 140.0,
+        "y": 132.0,
+        "text": "5 2 0",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 185.0,
+        "y": 114,
+        "w": 60,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "rect",
+        "x": 245.0,
+        "y": 114,
+        "w": 60,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "rect",
+        "x": 95.0,
+        "y": 140,
+        "w": 90,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 140.0,
+        "y": 158.0,
+        "text": "7 2 8",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 185.0,
+        "y": 140,
+        "w": 60,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 245.0,
+        "y": 140,
+        "w": 60,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       }
+      ]
+     },
+     "caption": "52 × 14 = 208 + 520 = 728.",
+     "alt": "A long multiplication layout for 52 times 14 with partial products 208 and 520 and total 728."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Forgetting the zero when multiplying by the tens digit.\n- Forgetting to add the carried number.\n- Using the wrong table: 7 × 8 is 56, not 54.\n- **Estimate** first: 52 × 14 is about 50 × 10 = 500, so 728 is sensible but 72 is not."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "A bunch of plantains costs 350 FCFA. How much do 6 bunches cost?",
+     "steps": [
+      "Multiply 350 × 6. 6 × 0 = 0; 6 × 5 = 30: write 0, carry 3; 6 × 3 = 18, plus 3 = 21.",
+      "The answer is 2,100."
+     ],
+     "answer": "2,100 FCFA"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "A school hall has 14 rows of 52 chairs. How many chairs in all?",
+     "steps": [
+      "52 × 4 = 208 (units line).",
+      "52 × 10 = 520 (tens line). Add: 208 + 520 = 728."
+     ],
+     "answer": "728 chairs",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 176,
+      "items": [
+       {
+        "t": "rect",
+        "x": 95.0,
+        "y": 10,
+        "w": 90,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "rect",
+        "x": 185.0,
+        "y": 10,
+        "w": 60,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 215.0,
+        "y": 28.0,
+        "text": "T",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 245.0,
+        "y": 10,
+        "w": 60,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 275.0,
+        "y": 28.0,
+        "text": "U",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 95.0,
+        "y": 36,
+        "w": 90,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 185.0,
+        "y": 36,
+        "w": 60,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 215.0,
+        "y": 54.0,
+        "text": "5",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 245.0,
+        "y": 36,
+        "w": 60,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 275.0,
+        "y": 54.0,
+        "text": "2",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 95.0,
+        "y": 62,
+        "w": 90,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 140.0,
+        "y": 80.0,
+        "text": "x",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 185.0,
+        "y": 62,
+        "w": 60,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 215.0,
+        "y": 80.0,
+        "text": "1",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 245.0,
+        "y": 62,
+        "w": 60,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 275.0,
+        "y": 80.0,
+        "text": "4",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 95.0,
+        "y": 88,
+        "w": 90,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 140.0,
+        "y": 106.0,
+        "text": "2 0 8",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 185.0,
+        "y": 88,
+        "w": 60,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 245.0,
+        "y": 88,
+        "w": 60,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 95.0,
+        "y": 114,
+        "w": 90,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 140.0,
+        "y": 132.0,
+        "text": "5 2 0",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 185.0,
+        "y": 114,
+        "w": 60,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "rect",
+        "x": 245.0,
+        "y": 114,
+        "w": 60,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "rect",
+        "x": 95.0,
+        "y": 140,
+        "w": 90,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 140.0,
+        "y": 158.0,
+        "text": "7 2 8",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 185.0,
+        "y": 140,
+        "w": 60,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 245.0,
+        "y": 140,
+        "w": 60,
+        "h": 26,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       }
+      ]
+     }
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-division",
+   "title": "Division with remainders",
+   "minutes": 30,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level II (Class 4) — Mathematics; to be checked against the official syllabus",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Divide by a 1-digit number.",
+    "Say what the quotient and the remainder are.",
+    "Check a division by multiplying."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "class4-maths-operations-e13",
+    "class4-maths-operations-e14",
+    "class4-maths-operations-e15",
+    "class4-maths-operations-e16",
+    "class4-maths-operations-e17",
+    "class4-maths-operations-e18"
+   ],
+   "selfCheck": [
+    "class4-maths-division-q1",
+    "class4-maths-division-q2",
+    "class4-maths-division-q3",
+    "class4-maths-division-q4",
+    "class4-maths-division-q5"
+   ],
+   "reviewNotes": [
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Division",
+     "md": "Division means **sharing equally** or **grouping**. 24 ÷ 4 = 6 because 4 × 6 = 24. When things cannot be shared exactly, some are **left over**: the **remainder**. 395 ÷ 4 = 98 remainder 3, because 4 × 98 = 392 and 395 − 392 = 3."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 110,
+      "items": [
+       {
+        "t": "rect",
+        "x": 11,
+        "y": 14,
+        "w": 90,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 56.0,
+        "y": 40,
+        "text": "Dividend",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 56.0,
+        "y": 62,
+        "text": "395",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 107,
+        "y": 14,
+        "w": 90,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 152.0,
+        "y": 40,
+        "text": "Divisor",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 152.0,
+        "y": 62,
+        "text": "4",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 203,
+        "y": 14,
+        "w": 90,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 248.0,
+        "y": 40,
+        "text": "Quotient",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 248.0,
+        "y": 62,
+        "text": "98",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 299,
+        "y": 14,
+        "w": 90,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 344.0,
+        "y": 40,
+        "text": "Remainder",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 344.0,
+        "y": 62,
+        "text": "3",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "The parts of a division: 395 ÷ 4 = 98 remainder 3.",
+     "alt": "Four boxes named dividend 395, divisor 4, quotient 98, remainder 3."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Short division",
+     "md": "Divide the digits from the **left**. Example 395 ÷ 4: 3 ÷ 4 = 0, so take 39 ÷ 4 = 9 remainder 3. Bring down the 5: 35 ÷ 4 = 8 remainder 3. Quotient 98, remainder 3. **Check:** quotient × divisor + remainder = dividend: 98 × 4 + 3 = 395."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- A remainder must always be **smaller than the divisor**.\n- Forgetting a zero in the quotient: 612 ÷ 6 = 102, not 12.\n- Dividing the wrong way round: 4 ÷ 395 is not the same as 395 ÷ 4.\n- Forgetting the remainder in word problems."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Share 395 oranges equally among 4 stalls in Buea. How many does each get and how many are left?",
+     "steps": [
+      "395 ÷ 4: 39 ÷ 4 = 9 rem 3; then 35 ÷ 4 = 8 rem 3.",
+      "Each stall gets 98 oranges. 3 oranges are left."
+     ],
+     "answer": "98 each, remainder 3.",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 110,
+      "items": [
+       {
+        "t": "rect",
+        "x": 11,
+        "y": 14,
+        "w": 90,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 56.0,
+        "y": 40,
+        "text": "Dividend",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 56.0,
+        "y": 62,
+        "text": "395",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 107,
+        "y": 14,
+        "w": 90,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 152.0,
+        "y": 40,
+        "text": "Divisor",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 152.0,
+        "y": 62,
+        "text": "4",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 203,
+        "y": 14,
+        "w": 90,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 248.0,
+        "y": 40,
+        "text": "Quotient",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 248.0,
+        "y": 62,
+        "text": "98",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 299,
+        "y": 14,
+        "w": 90,
+        "h": 62,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 344.0,
+        "y": 40,
+        "text": "Remainder",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 344.0,
+        "y": 62,
+        "text": "3",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Work out 612 ÷ 6 and check.",
+     "steps": [
+      "6 ÷ 6 = 1; 1 ÷ 6 = 0 (write 0); bring down 2: 12 ÷ 6 = 2. The answer is 102.",
+      "Check: 102 × 6 = 612."
+     ],
+     "answer": "102"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-word-problems",
+   "title": "Solving word problems with the four operations",
+   "minutes": 30,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level II (Class 4) — Mathematics; to be checked against the official syllabus",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Read a problem and choose the right operation.",
+    "Solve problems with more than one step.",
+    "Check that the answer makes sense."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "class4-maths-operations-e19",
+    "class4-maths-operations-e20",
+    "class4-maths-operations-e21",
+    "class4-maths-operations-e22",
+    "class4-maths-operations-e23",
+    "class4-maths-operations-e24"
+   ],
+   "selfCheck": [
+    "class4-maths-word-problems-q1",
+    "class4-maths-word-problems-q2",
+    "class4-maths-word-problems-q3",
+    "class4-maths-word-problems-q4",
+    "class4-maths-word-problems-q5"
+   ],
+   "reviewNotes": [
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Steps",
+     "md": "1. **Read** the problem two times.\n2. Underline the numbers and say what you must find.\n3. Choose the operation: **add** to join, **subtract** to find the difference or what is left, **multiply** for equal groups, **divide** to share or group.\n4. **Work out** the answer, write the unit (FCFA, kg...), and **check** it."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 184,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 8,
+        "w": 360,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 30.0,
+        "text": "Read the problem again",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 50,
+        "w": 360,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 72.0,
+        "text": "Find what you must work out",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 92,
+        "w": 360,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 114.0,
+        "text": "Choose + − × or ÷",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 134,
+        "w": 360,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 156.0,
+        "text": "Work it out and check",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Four steps to solve a word problem.",
+     "alt": "Four stacked boxes with the steps: read the problem again, find what you must work out, choose the operation, work it out and check."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Key words",
+     "md": "**Altogether, total, sum, more** often mean add. **Left, difference, change, how many more** often mean subtract. **Each, every, times, groups of** often mean multiply. **Share, equal parts, per** often mean divide. Be careful: always think about the story, not only the key word."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using only the key word without thinking.\n- Doing only the first step of a two-step problem.\n- Forgetting the unit.\n- Not checking: if 5 pens cost 1,000 FCFA, one pen cannot cost 5,000 FCFA."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Mama Ngo buys 3 bags of rice at 1,200 FCFA each and 2 bottles of oil at 450 FCFA each. How much does she spend?",
+     "steps": [
+      "Rice: 3 × 1,200 = 3,600 FCFA. Oil: 2 × 450 = 900 FCFA.",
+      "Total: 3,600 + 900 = 4,500 FCFA."
+     ],
+     "answer": "4,500 FCFA"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "She pays with 5,000 FCFA. How much change does she get?",
+     "steps": [
+      "Change = money given − cost.",
+      "5,000 − 4,500 = 500."
+     ],
+     "answer": "500 FCFA"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class4-maths-operations"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "class4-maths-operations-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class4-maths-add-subtract",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Work out 5,347 + 2,684.",
+   "answer": 8031,
+   "tolerance": 0,
+   "explanation": "Add column by column with carrying: 8,031.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-operations-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class4-maths-add-subtract",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Work out 9,000 − 2,468.",
+   "answer": 6532,
+   "tolerance": 0,
+   "explanation": "Exchange across the zeros: 6,532.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-operations-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class4-maths-add-subtract",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which sum has the answer 10,000?",
+   "choices": [
+    "6,500 + 3,500",
+    "5,000 + 4,000",
+    "7,500 + 2,000",
+    "6,500 + 3,000"
+   ],
+   "answer": 0,
+   "explanation": "6,500 + 3,500 = 10,000.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-operations-e04",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class4-maths-add-subtract",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "If 8,135 − 3,879 = 4,256, then 4,256 + 3,879 = 8,135.",
+   "answer": true,
+   "explanation": "Addition and subtraction undo each other.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-operations-e05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class4-maths-add-subtract",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A number plus 2,345 is 6,000. What is the number?",
+   "answer": 3655,
+   "tolerance": 0,
+   "explanation": "6,000 − 2,345 = 3,655.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-operations-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class4-maths-add-subtract",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A farmer in Bamenda harvested 12,450 kg of maize in one season and 9,875 kg in the next.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many kg in the two seasons together?",
+     "answer": 22325,
+     "tolerance": 0,
+     "explanation": "12,450 + 9,875 = 22,325.",
+     "id": "class4-maths-operations-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many kg more in the first season than in the second?",
+     "answer": 2575,
+     "tolerance": 0,
+     "explanation": "12,450 − 9,875 = 2,575.",
+     "id": "class4-maths-operations-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "He sold 15,000 kg of the total. How many kg are left?",
+     "answer": 7325,
+     "tolerance": 0,
+     "explanation": "22,325 − 15,000 = 7,325.",
+     "id": "class4-maths-operations-e06-c"
+    }
+   ],
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-add-subtract-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-add-subtract",
+   "prompt": "Class 4 Maths (Adding and subtracting large numbers) – Work out 3,456 + 1,234.",
+   "choices": [
+    "4,690",
+    "4,680",
+    "4,580",
+    "4,790"
+   ],
+   "answer": 0,
+   "explanation": "Add each column.",
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-add-subtract-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-add-subtract",
+   "prompt": "Class 4 Maths (Adding and subtracting large numbers) – Work out 7,000 − 1,500.",
+   "choices": [
+    "8,500",
+    "5,500",
+    "5,000",
+    "6,500"
+   ],
+   "answer": 1,
+   "explanation": "7,000 − 1,500 = 5,500.",
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-add-subtract-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-add-subtract",
+   "prompt": "Class 4 Maths (Adding and subtracting large numbers) – What is 99,999 − 1?",
+   "choices": [
+    "99,998",
+    "99,990",
+    "100,000",
+    "98,999"
+   ],
+   "answer": 0,
+   "explanation": "One less.",
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-add-subtract-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-add-subtract",
+   "prompt": "Class 4 Maths (Adding and subtracting large numbers) – To check 5,000 − 2,300 = 2,700 we do...",
+   "choices": [
+    "5,000 − 2,700 + 2,300",
+    "5,000 + 2,300",
+    "2,700 − 2,300",
+    "2,700 + 2,300"
+   ],
+   "answer": 3,
+   "explanation": "Adding back gives 5,000.",
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-add-subtract-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-add-subtract",
+   "prompt": "Class 4 Maths (Adding and subtracting large numbers) – When a column adds up to 14, we write...",
+   "choices": [
+    "1 and carry 4",
+    "0 and carry 14",
+    "14 in the column",
+    "4 and carry 1"
+   ],
+   "answer": 3,
+   "explanation": "Units go in the column; tens are carried.",
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-operations-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class4-maths-multiplication",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Work out 347 × 6.",
+   "answer": 2082,
+   "tolerance": 0,
+   "explanation": "300×6=1800, 40×6=240, 7×6=42; total 2,082.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-operations-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class4-maths-multiplication",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Work out 45 × 10.",
+   "answer": 450,
+   "tolerance": 0,
+   "explanation": "Add one zero.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-operations-e09",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class4-maths-multiplication",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which is the best estimate of 49 × 11?",
+   "choices": [
+    "100",
+    "500",
+    "50",
+    "5,000"
+   ],
+   "answer": 1,
+   "explanation": "About 50 × 10 = 500.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-operations-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class4-maths-multiplication",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Work out 238 × 21.",
+   "answer": 4998,
+   "tolerance": 0,
+   "explanation": "238 × 1 = 238; 238 × 20 = 4,760; total 4,998.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-operations-e11",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class4-maths-multiplication",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "6 × 9 gives the same answer as 9 × 6.",
+   "answer": true,
+   "explanation": "Order does not matter in multiplication.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-operations-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class4-maths-multiplication",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A trader in Kumba buys 24 boxes of soap. Each box holds 36 bars.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many bars in all?",
+     "answer": 864,
+     "tolerance": 0,
+     "explanation": "24 × 36 = 864.",
+     "id": "class4-maths-operations-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Each bar costs 150 FCFA. What is the cost of 6 bars?",
+     "answer": 900,
+     "tolerance": 0,
+     "explanation": "6 × 150 = 900.",
+     "unit": "FCFA",
+     "id": "class4-maths-operations-e12-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "Which estimate is closest to 24 × 36?",
+     "choices": [
+      "about 300",
+      "about 80",
+      "about 8,000",
+      "about 800"
+     ],
+     "answer": 3,
+     "explanation": "20 × 40 = 800.",
+     "id": "class4-maths-operations-e12-c"
+    }
+   ],
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-multiplication-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-multiplication",
+   "prompt": "Class 4 Maths (Multiplication) – What is 8 × 7?",
+   "choices": [
+    "56",
+    "64",
+    "54",
+    "48"
+   ],
+   "answer": 0,
+   "explanation": "Learn the 7 times table.",
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-multiplication-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-multiplication",
+   "prompt": "Class 4 Maths (Multiplication) – What is 300 × 10?",
+   "choices": [
+    "30,000",
+    "30",
+    "3,000",
+    "300"
+   ],
+   "answer": 2,
+   "explanation": "Add one zero.",
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-multiplication-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-multiplication",
+   "prompt": "Class 4 Maths (Multiplication) – In 25 × 12, the first partial product (25 × 2) is...",
+   "choices": [
+    "25",
+    "250",
+    "300",
+    "50"
+   ],
+   "answer": 3,
+   "explanation": "25 × 2 = 50.",
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-multiplication-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-multiplication",
+   "prompt": "Class 4 Maths (Multiplication) – Multiplication is repeated...",
+   "choices": [
+    "subtraction",
+    "rounding",
+    "addition",
+    "sharing"
+   ],
+   "answer": 2,
+   "explanation": "6 × 4 = 6 + 6 + 6 + 6.",
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-multiplication-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-multiplication",
+   "prompt": "Class 4 Maths (Multiplication) – An estimate of 98 × 5 is about...",
+   "choices": [
+    "50",
+    "5,000",
+    "95",
+    "500"
+   ],
+   "answer": 3,
+   "explanation": "100 × 5 = 500.",
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-operations-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class4-maths-division",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Work out 456 ÷ 6.",
+   "answer": 76,
+   "tolerance": 0,
+   "explanation": "6 × 76 = 456.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-operations-e14",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class4-maths-division",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What is the remainder when 47 is divided by 5?",
+   "answer": 2,
+   "tolerance": 0,
+   "explanation": "5 × 9 = 45, 47 − 45 = 2.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-operations-e15",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class4-maths-division",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which is true for 83 ÷ 9?",
+   "choices": [
+    "8 remainder 11",
+    "10",
+    "9 remainder 2",
+    "9 remainder 11"
+   ],
+   "answer": 2,
+   "explanation": "9 × 9 = 81, 83 − 81 = 2.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-operations-e16",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class4-maths-division",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In 100 ÷ 7 = 14 remainder 2, the remainder 2 is smaller than 7.",
+   "answer": true,
+   "explanation": "98 + 2 = 100 and 2 < 7.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-operations-e17",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class4-maths-division",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Work out 2,408 ÷ 8.",
+   "answer": 301,
+   "tolerance": 0,
+   "explanation": "8 × 301 = 2,408.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-operations-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class4-maths-division",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A school in Garoua has 365 pupils. Each classroom takes 40 pupils.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many full classrooms can be filled?",
+     "answer": 9,
+     "tolerance": 0,
+     "explanation": "40 × 9 = 360.",
+     "id": "class4-maths-operations-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many pupils are left over?",
+     "answer": 5,
+     "tolerance": 0,
+     "explanation": "365 − 360 = 5.",
+     "id": "class4-maths-operations-e18-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "How many classrooms are needed in all?",
+     "answer": 10,
+     "tolerance": 0,
+     "explanation": "The 5 left-over pupils need one more classroom: 10.",
+     "id": "class4-maths-operations-e18-c"
+    }
+   ],
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-division-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-division",
+   "prompt": "Class 4 Maths (Division with remainders) – What is 72 ÷ 8?",
+   "choices": [
+    "7",
+    "10",
+    "8",
+    "9"
+   ],
+   "answer": 3,
+   "explanation": "8 × 9 = 72.",
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-division-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-division",
+   "prompt": "Class 4 Maths (Division with remainders) – The remainder of 25 ÷ 4 is...",
+   "choices": [
+    "1",
+    "0",
+    "4",
+    "6"
+   ],
+   "answer": 0,
+   "explanation": "4 × 6 = 24.",
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-division-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-division",
+   "prompt": "Class 4 Maths (Division with remainders) – We check 98 × 4 + 3 = 395 to check a...",
+   "choices": [
+    "rounding",
+    "pattern",
+    "division",
+    "addition"
+   ],
+   "answer": 2,
+   "explanation": "Quotient × divisor + remainder = dividend.",
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-division-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-division",
+   "prompt": "Class 4 Maths (Division with remainders) – What is 600 ÷ 6?",
+   "choices": [
+    "100",
+    "60",
+    "10",
+    "1,000"
+   ],
+   "answer": 0,
+   "explanation": "6 hundreds ÷ 6 = 1 hundred.",
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-division-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-division",
+   "prompt": "Class 4 Maths (Division with remainders) – Which remainder is impossible when dividing by 5?",
+   "choices": [
+    "4",
+    "0",
+    "5",
+    "3"
+   ],
+   "answer": 2,
+   "explanation": "A remainder is smaller than the divisor.",
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-operations-e19",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class4-maths-word-problems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A bus carries 48 passengers. How many passengers can 7 buses carry?",
+   "answer": 336,
+   "tolerance": 0,
+   "unit": "passengers",
+   "explanation": "48 × 7 = 336.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-operations-e20",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class4-maths-word-problems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A rope of 250 m is cut into pieces of 5 m. How many pieces?",
+   "answer": 50,
+   "tolerance": 0,
+   "explanation": "250 ÷ 5 = 50.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-operations-e21",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class4-maths-word-problems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Ada had 3,500 FCFA and spent 1,250 FCFA. Which sum finds what is left?",
+   "choices": [
+    "3,500 + 1,250",
+    "3,500 × 1,250",
+    "3,500 − 1,250",
+    "3,500 ÷ 1,250"
+   ],
+   "answer": 2,
+   "explanation": "Left over means subtract.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-operations-e22",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class4-maths-word-problems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A farmer packs 360 eggs in trays of 30. Each tray sells for 1,500 FCFA. How much money for all the trays?",
+   "answer": 18000,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "360 ÷ 30 = 12 trays; 12 × 1,500 = 18,000.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-operations-e23",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class4-maths-word-problems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A word problem with 'how many more' is usually solved by subtraction.",
+   "answer": true,
+   "explanation": "Find the difference between two amounts.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-operations-e24",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class4-maths-word-problems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A school in Bali buys 25 desks at 12,500 FCFA each and 4 boards at 18,000 FCFA each.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Cost of the desks?",
+     "answer": 312500,
+     "tolerance": 0,
+     "explanation": "25 × 12,500 = 312,500.",
+     "unit": "FCFA",
+     "id": "class4-maths-operations-e24-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Cost of the boards?",
+     "answer": 72000,
+     "tolerance": 0,
+     "explanation": "4 × 18,000 = 72,000.",
+     "unit": "FCFA",
+     "id": "class4-maths-operations-e24-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Total cost?",
+     "answer": 384500,
+     "tolerance": 0,
+     "explanation": "312,500 + 72,000 = 384,500.",
+     "unit": "FCFA",
+     "id": "class4-maths-operations-e24-c"
+    }
+   ],
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-word-problems-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-word-problems",
+   "prompt": "Class 4 Maths (Solving word problems with the four operat) – Total cost of 4 pens at 250 FCFA each is...",
+   "choices": [
+    "62 FCFA",
+    "246 FCFA",
+    "1,000 FCFA",
+    "254 FCFA"
+   ],
+   "answer": 2,
+   "explanation": "4 × 250 = 1,000.",
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-word-problems-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-word-problems",
+   "prompt": "Class 4 Maths (Solving word problems with the four operat) – To share 84 mangoes among 7 children, we...",
+   "choices": [
+    "multiply 84 by 7",
+    "add 84 and 7",
+    "divide 84 by 7",
+    "subtract 7 from 84"
+   ],
+   "answer": 2,
+   "explanation": "Sharing means divide.",
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-word-problems-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-word-problems",
+   "prompt": "Class 4 Maths (Solving word problems with the four operat) – Change from 2,000 FCFA after spending 1,350 FCFA is...",
+   "choices": [
+    "3,350 FCFA",
+    "550 FCFA",
+    "750 FCFA",
+    "650 FCFA"
+   ],
+   "answer": 3,
+   "explanation": "2,000 − 1,350 = 650.",
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-word-problems-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-word-problems",
+   "prompt": "Class 4 Maths (Solving word problems with the four operat) – The first thing to do when solving a problem is...",
+   "choices": [
+    "read it carefully",
+    "guess",
+    "multiply",
+    "add all numbers"
+   ],
+   "answer": 0,
+   "explanation": "Read, then choose the operation.",
+   "chapter": "class4-maths-operations"
+  },
+  {
+   "id": "class4-maths-word-problems-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-word-problems",
+   "prompt": "Class 4 Maths (Solving word problems with the four operat) – A two-step problem needs...",
+   "choices": [
+    "no working",
+    "two operations",
+    "only one number",
+    "no units"
+   ],
+   "answer": 1,
+   "explanation": "Do one step, then the next.",
+   "chapter": "class4-maths-operations"
+  }
+ ]
+}

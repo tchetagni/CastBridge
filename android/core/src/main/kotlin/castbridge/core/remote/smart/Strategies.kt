@@ -291,7 +291,7 @@ class PhilipsStrategy(tv: TvTarget, private val port: Int = 1925, log: (String) 
 // ------------------------------------------------------------------------------------------------------------------------
 // Vizio SmartCast (HTTPS, port 7345 then 9000, self-signed certificate, pairing by on-screen PIN). EXPERIMENTAL.
 // ------------------------------------------------------------------------------------------------------------------------
-class VizioStrategy(tv: TvTarget, private val secrets: SecretStore, private val ports: List<Int> = listOf(7345, 9000), log: (String) -> Unit = {}) : BaseStrategy(tv, log), Pairable {
+class VizioStrategy(tv: TvTarget, private val secrets: SecretStore, private val ports: List<Int> = listOf(7345, 9000), private val scheme: String = "https", log: (String) -> Unit = {}) : BaseStrategy(tv, log), Pairable {
     override val id = StrategyIds.VIZIO
     override val label = "Vizio SmartCast"
     override val status = StrategyStatus.EXPERIMENTAL
@@ -307,7 +307,7 @@ class VizioStrategy(tv: TvTarget, private val secrets: SecretStore, private val 
     override fun applicable(fp: TvFingerprint) = fp.vendor == Vendor.VIZIO || fp.vendor == Vendor.UNKNOWN && fp.openPorts != null && ports.any { it in fp.openPorts } || StrategyIds.VIZIO in fp.candidates
     override fun probe() = ProbeResult(ports.any { tcpOpen(it) }, "ports ${ports.joinToString("/")}")
 
-    private fun url(path: String) = "https://${tv.host}:$port$path"
+    private fun url(path: String) = "$scheme://${tv.host}:$port$path"
     private fun put(path: String, body: String, auth: String? = null) =
         http("PUT", url(path), body, buildMap { put("Content-Type", "application/json"); if (auth != null) put("AUTH", auth) }, trust = true)
 

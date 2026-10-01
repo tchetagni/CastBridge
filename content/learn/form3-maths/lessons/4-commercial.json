@@ -1,0 +1,918 @@
+{
+ "chapter": "form3-maths-commercial",
+ "lessons": [
+  {
+   "id": "form3-maths-commercial-arithmetic",
+   "title": "VAT, compound interest, hire purchase and exchange",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 3 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Calculate VAT and prices with and without VAT",
+    "Calculate compound interest and compare with simple interest",
+    "Compare cash price and hire purchase",
+    "Convert between currencies using an exchange rate"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form3-maths-commercial-e01",
+    "form3-maths-commercial-e02",
+    "form3-maths-commercial-e03",
+    "form3-maths-commercial-e04",
+    "form3-maths-commercial-e05",
+    "form3-maths-commercial-e06"
+   ],
+   "selfCheck": [
+    "form3-maths-commercial-arithmetic-q1",
+    "form3-maths-commercial-arithmetic-q2",
+    "form3-maths-commercial-arithmetic-q3",
+    "form3-maths-commercial-arithmetic-q4",
+    "form3-maths-commercial-arithmetic-q5"
+   ],
+   "reviewNotes": [
+    "The Cameroon VAT rate of 19.25% and the fixed 655.957 FCFA per euro rate are widely published but must be re-checked at release; rates and tax rules change. Salary, income-tax and customs calculations are not included.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "VAT",
+     "md": "**Value Added Tax (VAT)** is a percentage added to the price of goods and services. In Cameroon the standard rate is commonly given as 19.25% (check the current rate). Price with VAT = price without VAT × 1.1925. A price of 20 000 FCFA has VAT 20 000 × 0.1925 = 3 850 FCFA, total 23 850 FCFA. To find the price **before** VAT from a price including VAT, **divide** by 1.1925: 47 700 ÷ 1.1925 = 40 000 FCFA."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Compound interest",
+     "md": "With compound interest, the interest of each year is added to the money and earns interest the next year. After n years at R% per year:",
+     "tex": "A = P \\left(1 + \\frac{R}{100}\\right)^n"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 140,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 95,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 57.5,
+        "y": 30.0,
+        "text": "Year",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 105,
+        "y": 10,
+        "w": 95,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 152.5,
+        "y": 30.0,
+        "text": "Start",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 200,
+        "y": 10,
+        "w": 95,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 247.5,
+        "y": 30.0,
+        "text": "Interest",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 295,
+        "y": 10,
+        "w": 95,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 342.5,
+        "y": 30.0,
+        "text": "End",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 40,
+        "w": 95,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 57.5,
+        "y": 60.0,
+        "text": "1",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 105,
+        "y": 40,
+        "w": 95,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 152.5,
+        "y": 60.0,
+        "text": "500 000",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 200,
+        "y": 40,
+        "w": 95,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 247.5,
+        "y": 60.0,
+        "text": "25 000",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 295,
+        "y": 40,
+        "w": 95,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 342.5,
+        "y": 60.0,
+        "text": "525 000",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 70,
+        "w": 95,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 57.5,
+        "y": 90.0,
+        "text": "2",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 105,
+        "y": 70,
+        "w": 95,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 152.5,
+        "y": 90.0,
+        "text": "525 000",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 200,
+        "y": 70,
+        "w": 95,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 247.5,
+        "y": 90.0,
+        "text": "26 250",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 295,
+        "y": 70,
+        "w": 95,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 342.5,
+        "y": 90.0,
+        "text": "551 250",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 100,
+        "w": 95,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 57.5,
+        "y": 120.0,
+        "text": "3",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 105,
+        "y": 100,
+        "w": 95,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 152.5,
+        "y": 120.0,
+        "text": "551 250",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 200,
+        "y": 100,
+        "w": 95,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 247.5,
+        "y": 120.0,
+        "text": "27 562.5",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 295,
+        "y": 100,
+        "w": 95,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 342.5,
+        "y": 120.0,
+        "text": "578 812.5",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Compound interest on 500 000 FCFA at 5% for three years.",
+     "alt": "A table with the year, the starting amount, the interest and the end amount for three years."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Example and comparison",
+     "md": "500 000 FCFA at 5% for 3 years: 500 000 × 1.05³ = 578 812.5 FCFA. The compound interest is 78 812.5 FCFA. Simple interest would be 500 000 × 5 × 3 ÷ 100 = 75 000 FCFA, so compound interest earns 3 812.5 FCFA more."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Hire purchase and exchange",
+     "md": "**Hire purchase** means paying a deposit and then regular instalments: total = deposit + number of instalments × amount. Compare with the cash price to see the extra cost. For **exchange**, multiply by the rate to change into the other currency, divide to change back. The CFA franc is linked to the euro at 1 euro = 655.957 FCFA."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Removing VAT by subtracting 19.25% of the total instead of dividing by 1.1925.\n- Using the simple-interest formula when 'compound' is asked.\n- Multiplying when you should divide in an exchange problem: check whether the answer should be larger or smaller."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: VAT",
+     "statement": "A generator costs 40 000 FCFA before VAT. Find the selling price with VAT at 19.25%. A phone is sold at 47 700 FCFA including VAT: find the price before VAT.",
+     "steps": [
+      "VAT = 40 000 × 0.1925 = 7 700; price = 47 700 FCFA.",
+      "Price before VAT = 47 700 ÷ 1.1925 = 40 000 FCFA.",
+      "The two examples are inverses of each other."
+     ],
+     "answer": "**47 700 FCFA; 40 000 FCFA.**"
+    },
+    {
+     "type": "example",
+     "title": "Example 2: compound interest",
+     "statement": "A farmer in Bafoussam deposits 500 000 FCFA at 5% compound interest per year. How much after 3 years? How does this compare with simple interest?",
+     "steps": [
+      "Year 1: 500 000 × 1.05 = 525 000; year 2: 551 250; year 3: 578 812.5 FCFA.",
+      "Compound interest = 78 812.5 FCFA; simple interest = 75 000 FCFA.",
+      "Compound earns 3 812.5 FCFA more."
+     ],
+     "answer": "**578 812.5 FCFA; 3 812.5 FCFA more than simple interest.**",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 140,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 95,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 57.5,
+        "y": 30.0,
+        "text": "Year",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 105,
+        "y": 10,
+        "w": 95,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 152.5,
+        "y": 30.0,
+        "text": "Start",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 200,
+        "y": 10,
+        "w": 95,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 247.5,
+        "y": 30.0,
+        "text": "Interest",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 295,
+        "y": 10,
+        "w": 95,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 342.5,
+        "y": 30.0,
+        "text": "End",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 40,
+        "w": 95,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 57.5,
+        "y": 60.0,
+        "text": "1",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 105,
+        "y": 40,
+        "w": 95,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 152.5,
+        "y": 60.0,
+        "text": "500 000",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 200,
+        "y": 40,
+        "w": 95,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 247.5,
+        "y": 60.0,
+        "text": "25 000",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 295,
+        "y": 40,
+        "w": 95,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 342.5,
+        "y": 60.0,
+        "text": "525 000",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 70,
+        "w": 95,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 57.5,
+        "y": 90.0,
+        "text": "2",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 105,
+        "y": 70,
+        "w": 95,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 152.5,
+        "y": 90.0,
+        "text": "525 000",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 200,
+        "y": 70,
+        "w": 95,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 247.5,
+        "y": 90.0,
+        "text": "26 250",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 295,
+        "y": 70,
+        "w": 95,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 342.5,
+        "y": 90.0,
+        "text": "551 250",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 100,
+        "w": 95,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 57.5,
+        "y": 120.0,
+        "text": "3",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 105,
+        "y": 100,
+        "w": 95,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 152.5,
+        "y": 120.0,
+        "text": "551 250",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 200,
+        "y": 100,
+        "w": 95,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 247.5,
+        "y": 120.0,
+        "text": "27 562.5",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 295,
+        "y": 100,
+        "w": 95,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 342.5,
+        "y": 120.0,
+        "text": "578 812.5",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     }
+    }
+   ],
+   "chapter": "form3-maths-commercial"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form3-maths-commercial-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-maths-commercial-arithmetic",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A bag of cement costs 6 000 FCFA before VAT. Find the VAT at 19.25% (FCFA).",
+   "answer": 1155,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "6 000 × 0.1925 = 1 155.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form3-maths-commercial"
+  },
+  {
+   "id": "form3-maths-commercial-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-maths-commercial-arithmetic",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find the amount after 2 years if 200 000 FCFA is invested at 10% compound interest per year (FCFA).",
+   "answer": 242000,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "200 000 × 1.1² = 242 000.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form3-maths-commercial"
+  },
+  {
+   "id": "form3-maths-commercial-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-maths-commercial-arithmetic",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "To find the price before VAT from a price including VAT at 19.25% we:",
+   "choices": [
+    "multiply by 1.1925",
+    "subtract 19.25",
+    "multiply by 0.8075",
+    "divide by 1.1925"
+   ],
+   "answer": 3,
+   "explanation": "Reverse the multiplication.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-maths-commercial"
+  },
+  {
+   "id": "form3-maths-commercial-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form3-maths-commercial-arithmetic",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A television has a cash price of 120 000 FCFA. Hire purchase: deposit 30 000 FCFA plus 6 monthly payments of 17 500 FCFA. How much extra does hire purchase cost (FCFA)?",
+   "answer": 15000,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "30 000 + 6 × 17 500 = 135 000; 135 000 − 120 000 = 15 000.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-maths-commercial"
+  },
+  {
+   "id": "form3-maths-commercial-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form3-maths-commercial-arithmetic",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Explain, using the first two years of a 5% investment, why compound interest grows faster than simple interest.",
+   "model": "With compound interest the first year's interest (5% of the capital) is added to the capital, so the second year's interest is 5% of a larger amount. With simple interest it is always 5% of the original capital.",
+   "rubric": "1 mark for the idea of adding interest, 1 mark for a larger base, 1 mark for the comparison.",
+   "explanation": "With compound interest the first year's interest (5% of the capital) is added to the capital, so the second year's interest is 5% of a larger amount. With simple interest it is always 5% of the original capital.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-maths-commercial"
+  },
+  {
+   "id": "form3-maths-commercial-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form3-maths-commercial-arithmetic",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A traveller in Douala exchanges money. Use 1 euro = 655.957 FCFA.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "How many FCFA for 100 euros (to the nearest FCFA)?",
+     "answer": 65596,
+     "tolerance": 1,
+     "explanation": "100 × 655.957 = 65 595.7.",
+     "unit": "FCFA",
+     "id": "form3-maths-commercial-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "How many euros for 100 000 FCFA (to 2 d.p.)?",
+     "answer": 152.45,
+     "tolerance": 0.01,
+     "explanation": "100 000 ÷ 655.957 = 152.449.",
+     "unit": "euros",
+     "id": "form3-maths-commercial-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "When changing FCFA into euros the number should get:",
+     "choices": [
+      "become zero",
+      "smaller",
+      "larger",
+      "stay the same"
+     ],
+     "answer": 1,
+     "explanation": "One euro is worth many francs.",
+     "id": "form3-maths-commercial-e06-c"
+    }
+   ],
+   "chapter": "form3-maths-commercial"
+  },
+  {
+   "id": "form3-maths-commercial-arithmetic-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-commercial-arithmetic",
+   "prompt": "VAT is a tax added to:",
+   "choices": [
+    "salaries only",
+    "exports only",
+    "the price of goods and services",
+    "bank loans only"
+   ],
+   "answer": 2,
+   "explanation": "Definition.",
+   "chapter": "form3-maths-commercial"
+  },
+  {
+   "id": "form3-maths-commercial-arithmetic-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-commercial-arithmetic",
+   "prompt": "Compound interest is calculated on:",
+   "choices": [
+    "the original amount plus earlier interest",
+    "the time only",
+    "the original amount only",
+    "the interest only"
+   ],
+   "answer": 0,
+   "explanation": "Interest on interest.",
+   "chapter": "form3-maths-commercial"
+  },
+  {
+   "id": "form3-maths-commercial-arithmetic-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-commercial-arithmetic",
+   "prompt": "A total price after 20% VAT on 1 000 FCFA is:",
+   "choices": [
+    "800 FCFA",
+    "1 020 FCFA",
+    "1 200 FCFA",
+    "1 002 FCFA"
+   ],
+   "answer": 2,
+   "explanation": "1 000 × 1.2.",
+   "chapter": "form3-maths-commercial"
+  },
+  {
+   "id": "form3-maths-commercial-arithmetic-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-commercial-arithmetic",
+   "prompt": "A deposit is:",
+   "choices": [
+    "the interest",
+    "the final payment",
+    "an initial payment",
+    "the tax"
+   ],
+   "answer": 2,
+   "explanation": "Part of hire purchase.",
+   "chapter": "form3-maths-commercial"
+  },
+  {
+   "id": "form3-maths-commercial-arithmetic-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-commercial-arithmetic",
+   "prompt": "An exchange rate tells us:",
+   "choices": [
+    "the discount",
+    "the VAT rate",
+    "the interest rate",
+    "the value of one currency in another"
+   ],
+   "answer": 3,
+   "explanation": "Definition.",
+   "chapter": "form3-maths-commercial"
+  }
+ ]
+}

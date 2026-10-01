@@ -142,12 +142,14 @@ class WsClient private constructor(private val sock: Socket, private val input: 
     /** Next text/binary message; null on timeout (the link stays open). Throws [IOException] when the peer closed or the link broke. */
     fun read(timeoutMs: Int): WsMessage? {
         sock.soTimeout = timeoutMs
-        var opcode = 0; val acc = ByteArrayOutputStream()
+        var opcode = 0; val acc = ByteArrayOutputStream(); var partial = false
         try {
             while (true) {
+                partial = acc.size() > 0
                 val b0 = input.read(); if (b0 < 0) throw IOException("connexion fermée")
-                val b1 = input.read(); if (b1 < 0) throw IOException("connexion fermée")
+                partial = true
                 sock.soTimeout = 5000                      // a frame that has started must finish
+                val b1 = input.read(); if (b1 < 0) throw IOException("connexion fermée")
                 val fin = b0 and 0x80 != 0; val op = b0 and 0x0F; val masked = b1 and 0x80 != 0
                 var len = (b1 and 0x7F).toLong()
                 if (len == 126L) len = (exact(2).fold(0L) { a, x -> (a shl 8) or (x.toLong() and 0xFF) })
@@ -169,7 +171,7 @@ class WsClient private constructor(private val sock: Socket, private val input: 
                 sock.soTimeout = timeoutMs
             }
         } catch (e: java.net.SocketTimeoutException) {
-            if (acc.size() > 0) { close(); throw IOException("trame incomplète") }
+            if (partial) { close(); throw IOException("trame incomplète") }
             return null
         } catch (e: IOException) { close(); throw e }
     }

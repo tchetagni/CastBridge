@@ -105,9 +105,10 @@ private fun Modifier.remoteKey(k: RemoteKey, pressed: MutableState<Boolean>? = n
 
 @Composable
 private fun RemoteKeyButton(k: RemoteKey, icon: ImageVector?, modifier: Modifier = Modifier, text: String? = null, size: Int = 56, accent: Boolean = false) {
-    // Over Bluetooth, a key no route can carry right now is hidden (the space stays, so the layout does not jump).
+    // A key no active route can carry is hidden (the space stays, so the layout does not jump): over Bluetooth, or with the smart remote's strategy.
     val avail = availableKeys.value
-    if (avail != null && k !in avail) { Spacer(modifier.size(size.dp)); return }
+    val available = SmartRemote.available.collectAsState().value
+    if ((avail != null && k !in avail) || (available != null && k !in available)) { Spacer(modifier.size(size.dp)); return }
     val pressed = remember { mutableStateOf(false) }
     val cs = MaterialTheme.colorScheme
     Box(
@@ -276,6 +277,9 @@ fun RemoteScreen(onClose: () -> Unit) {
     val st by RemoteController.tvState.collectAsState()
     val notice by RemoteController.notice.collectAsState()
     val rtt by RemoteController.lastRtt.collectAsState()
+    val smartKeys by SmartRemote.available.collectAsState()
+    val smartUi by SmartRemote.ui.collectAsState()
+    LaunchedEffect(Unit) { SmartRemote.resume(ctx) }
 
     LaunchedEffect(link, tv?.pinKey) { tv?.let { pins.get(it.pinKey) }.orEmpty().let { p -> if (TvAuth.isToken(p) && p != pin) pin = p } }
     LaunchedEffect(status.link) { if (status.link == RemoteSession.Link.BAD_PIN && TvAuth.isToken(pin)) TvLinkManager.poke() }
@@ -303,7 +307,8 @@ fun RemoteScreen(onClose: () -> Unit) {
                 },
                 navigationIcon = { IconButton(onClose) { Icon(Icons.AutoMirrored.Filled.ArrowBack, "Fermer") } },
                 actions = {
-                    LinkBadge(status, rtt)
+                    if (smartKeys != null) Text(smartUi.activeLabel ?: "Ma TV", style = MaterialTheme.typography.labelSmall, maxLines = 1, modifier = Modifier.padding(end = 4.dp))
+                    else LinkBadge(status, rtt)
                     IconButton({ chooser = true }) { Icon(Icons.Filled.Tv, "Choisir la TV") }
                     IconButton({ menu = true }) { Icon(Icons.Filled.MoreVert, "Options") }
                     DropdownMenu(menu, { menu = false }) {
@@ -316,6 +321,7 @@ fun RemoteScreen(onClose: () -> Unit) {
                         DropdownMenuItem(text = { Text("Vibrer à chaque touche") }, onClick = { haptics = !haptics; prefs.haptics = haptics },
                             trailingIcon = { Checkbox(haptics, null) })
                         DropdownMenuItem(text = { Text("Ma TV · voies Bluetooth…") }, onClick = { menu = false; routes = true })
+                        DropdownMenuItem(text = { Text("Ma TV : autres marques, stratégies, test…") }, onClick = { menu = false; MyTvActivity.open(ctx) })
                         DropdownMenuItem(text = { Text("Aide « toute la TV » sur la TV") }, onClick = { menu = false; RemoteController.setup() })
                     }
                 },
@@ -325,12 +331,12 @@ fun RemoteScreen(onClose: () -> Unit) {
     ) { padding ->
         Column(Modifier.padding(padding).fillMaxSize().verticalScroll(rememberScrollState()).padding(horizontal = 16.dp, vertical = 8.dp),
             horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            if (tv != null && !TvAuth.isUsable(pin) || status.link == RemoteSession.Link.BAD_PIN && !TvAuth.isToken(pin)) {
+            if (smartKeys == null && (tv != null && !TvAuth.isUsable(pin) || status.link == RemoteSession.Link.BAD_PIN && !TvAuth.isToken(pin))) {
                 Text(if (status.link == RemoteSession.Link.BAD_PIN) (status.message ?: "Code refusé") else "Saisissez le code affiché sur la TV",
                     color = if (status.link == RemoteSession.Link.BAD_PIN) cs.error else cs.onSurface)
                 PinField(pins, tv?.pinKey, pin, { pin = it }, Modifier.fillMaxWidth())
             }
-            if (status.link == RemoteSession.Link.OFFLINE && tv != null && TvAuth.isUsable(pin))
+            if (smartKeys == null && status.link == RemoteSession.Link.OFFLINE && tv != null && TvAuth.isUsable(pin))
                 Text(status.message ?: "TV injoignable", color = cs.error, style = MaterialTheme.typography.bodySmall, textAlign = TextAlign.Center)
             // A refusal from the TV (e.g. "no CastBridge screen in front"), shown for 6 s.
             notice?.let { (at, m) ->
@@ -365,7 +371,10 @@ fun RemoteScreen(onClose: () -> Unit) {
             }
             BoxWithConstraints(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
                 val side = minOf(maxWidth.value * 0.82f, 320f).toInt()
-                when (pad) {
+                val need = when (pad) { Pad.KEYS, Pad.TOUCH -> RemoteKey.DPAD_UP; Pad.DIGITS -> RemoteKey.NUM_1 }
+                if (smartKeys != null && need !in smartKeys!!) Text("Ce pavé n'existe pas avec « ${smartUi.activeLabel ?: "cette stratégie"} » (voir Ma TV).",
+                    color = cs.onSurfaceVariant, textAlign = TextAlign.Center, modifier = Modifier.padding(24.dp))
+                else when (pad) {
                     Pad.KEYS -> DPad(side)
                     Pad.TOUCH -> TouchPad(Modifier.size(minOf(maxWidth.value, 360f).dp, side.dp))
                     Pad.DIGITS -> DigitPad()

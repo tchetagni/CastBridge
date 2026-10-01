@@ -1,0 +1,945 @@
+{
+ "chapter": "class1-science-world-around",
+ "lessons": [
+  {
+   "id": "class1-science-weather",
+   "title": "Weather",
+   "minutes": 12,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level I (Class 1) — Elementary Science; to be checked against the official texts",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Name kinds of weather.",
+    "Say what to wear for each."
+   ],
+   "prerequisites": [
+    "class1-science-water"
+   ],
+   "exercises": [
+    "class1-science-world-around-e01",
+    "class1-science-world-around-e02",
+    "class1-science-world-around-e03",
+    "class1-science-world-around-e04",
+    "class1-science-world-around-e05",
+    "class1-science-world-around-e06"
+   ],
+   "selfCheck": [
+    "class1-science-weather-q1",
+    "class1-science-weather-q2",
+    "class1-science-weather-q3",
+    "class1-science-weather-q4",
+    "class1-science-weather-q5"
+   ],
+   "reviewNotes": [
+    "Weather terms only; seasons (rainy/dry) come in Class 2.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Weather",
+     "md": "Weather tells us how it is outside. It can be **sunny**, **rainy**, **cloudy** or **windy**. It can be hot or cold."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 120,
+      "items": [
+       {
+        "t": "rect",
+        "x": 8.0,
+        "y": 8,
+        "w": 184.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 35.6,
+        "text": "sunny: hat",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 8,
+        "w": 184.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 292.0,
+        "y": 35.6,
+        "text": "rainy: umbrella",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 8.0,
+        "y": 60,
+        "w": 184.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 87.6,
+        "text": "cloudy",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 60,
+        "w": 184.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "pink",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 292.0,
+        "y": 87.6,
+        "text": "windy",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Weather words.",
+     "alt": "Four boxes with sunny, rainy, cloudy and windy."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "What to wear",
+     "md": "In the sun wear a hat. In the rain take an umbrella or a raincoat. In cold weather wear a sweater. Drink water when it is hot."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Do not stand under a tree in a storm.\n- Do not look at the sun directly.\n- Weather changes from day to day."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "It is raining. What can you take?",
+     "steps": [
+      "An umbrella keeps off rain.",
+      "Take an umbrella."
+     ],
+     "answer": "An umbrella",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 106,
+      "items": [
+       {
+        "t": "rect",
+        "x": 8.0,
+        "y": 8,
+        "w": 88.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 52.0,
+        "y": 35.6,
+        "text": "sunny",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 104.0,
+        "y": 8,
+        "w": 88.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 148.0,
+        "y": 35.6,
+        "text": "rainy",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 8,
+        "w": 88.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 244.0,
+        "y": 35.6,
+        "text": "cloudy",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 296.0,
+        "y": 8,
+        "w": 88.0,
+        "h": 44,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "pink",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 340.0,
+        "y": 35.6,
+        "text": "windy",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "What weather has a bright sun?",
+     "steps": [
+      "The sun shines.",
+      "It is sunny."
+     ],
+     "answer": "Sunny"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class1-science-world-around"
+  },
+  {
+   "id": "class1-science-day-night-sun",
+   "title": "Day, night and the Sun",
+   "minutes": 12,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level I (Class 1) — Elementary Science; to be checked against the official texts",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Tell day from night.",
+    "Say that the Sun gives us light and heat."
+   ],
+   "prerequisites": [
+    "class1-science-weather"
+   ],
+   "exercises": [
+    "class1-science-world-around-e07",
+    "class1-science-world-around-e08",
+    "class1-science-world-around-e09",
+    "class1-science-world-around-e10",
+    "class1-science-world-around-e11",
+    "class1-science-world-around-e12"
+   ],
+   "selfCheck": [
+    "class1-science-day-night-sun-q1",
+    "class1-science-day-night-sun-q2",
+    "class1-science-day-night-sun-q3",
+    "class1-science-day-night-sun-q4",
+    "class1-science-day-night-sun-q5"
+   ],
+   "reviewNotes": [
+    "Only simple facts: the Sun is a star, but Class 1 text does not need that.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Day and night",
+     "md": "In the **day** it is light because of the **Sun**. At **night** it is dark. We see the **moon** and **stars** in the night sky."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 170,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 70,
+        "cy": 60,
+        "r": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 115,
+        "text": "day: the Sun",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 170,
+        "y": 20,
+        "w": 200,
+        "h": 120,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 50,
+        "r": 14,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "white"
+       },
+       {
+        "t": "circle",
+        "cx": 260,
+        "cy": 80,
+        "r": 4,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 310,
+        "cy": 45,
+        "r": 4,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 340,
+        "cy": 100,
+        "r": 4,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 155,
+        "text": "night: moon and stars",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Day and night.",
+     "alt": "A yellow sun for day and a dark blue sky with moon and stars for night."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "The Sun",
+     "md": "The Sun gives us **light** and **heat**. It helps plants grow. We must never look straight at the Sun. It can hurt our eyes."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Never look straight at the Sun.\n- The Sun is far away.\n- The moon does not make its own light."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "When do we see the stars?",
+     "steps": [
+      "Stars shine in the night sky.",
+      "At night."
+     ],
+     "answer": "At night",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 170,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 70,
+        "cy": 60,
+        "r": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 115,
+        "text": "day: the Sun",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 170,
+        "y": 20,
+        "w": 200,
+        "h": 120,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 50,
+        "r": 14,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "white"
+       },
+       {
+        "t": "circle",
+        "cx": 260,
+        "cy": 80,
+        "r": 4,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 310,
+        "cy": 45,
+        "r": 4,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 340,
+        "cy": 100,
+        "r": 4,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 155,
+        "text": "night: moon and stars",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "What gives us light in the day?",
+     "steps": [
+      "Light comes from the Sun.",
+      "The Sun."
+     ],
+     "answer": "The Sun"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class1-science-world-around"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "class1-science-world-around-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class1-science-weather",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In the rain we use an...",
+   "choices": [
+    "umbrella",
+    "hat only",
+    "fan",
+    "ice"
+   ],
+   "answer": 0,
+   "explanation": "Umbrella.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class1-science-world-around"
+  },
+  {
+   "id": "class1-science-world-around-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class1-science-weather",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The sun is shining. The weather is...",
+   "choices": [
+    "cloudy",
+    "windy",
+    "rainy",
+    "sunny"
+   ],
+   "answer": 3,
+   "explanation": "Sunny.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class1-science-world-around"
+  },
+  {
+   "id": "class1-science-world-around-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "class1-science-weather",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Clouds can bring rain.",
+   "answer": true,
+   "explanation": "Often.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class1-science-world-around"
+  },
+  {
+   "id": "class1-science-world-around-e04",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "class1-science-weather",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match the weather with what we wear or use.",
+   "pairs": [
+    [
+     "sunny",
+     "hat"
+    ],
+    [
+     "rainy",
+     "umbrella"
+    ],
+    [
+     "cold",
+     "sweater"
+    ]
+   ],
+   "explanation": "Choose.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "class1-science-world-around"
+  },
+  {
+   "id": "class1-science-world-around-e05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "class1-science-weather",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "When it is very hot, we should...",
+   "choices": [
+    "wear a coat",
+    "drink water",
+    "stay in the sun",
+    "run all day"
+   ],
+   "answer": 1,
+   "explanation": "Drink water.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class1-science-world-around"
+  },
+  {
+   "id": "class1-science-world-around-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class1-science-weather",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Pupils make a weather chart for 5 days: 2 sunny days, 2 rainy days, 1 cloudy day.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many sunny days?",
+     "answer": 2,
+     "tolerance": 0,
+     "explanation": "2.",
+     "id": "class1-science-world-around-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many days were NOT rainy? (5 − 2)",
+     "answer": 3,
+     "tolerance": 0,
+     "explanation": "3.",
+     "id": "class1-science-world-around-e06-b"
+    }
+   ],
+   "chapter": "class1-science-world-around"
+  },
+  {
+   "id": "class1-science-weather-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class1-science-weather",
+   "prompt": "Class 1 science weather: when it rains we may use...",
+   "choices": [
+    "an umbrella",
+    "ice cream",
+    "a fan",
+    "a drum"
+   ],
+   "answer": 0,
+   "explanation": "Umbrella.",
+   "chapter": "class1-science-world-around"
+  },
+  {
+   "id": "class1-science-weather-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class1-science-weather",
+   "prompt": "Class 1 science weather: a day with a bright sun is...",
+   "choices": [
+    "sunny",
+    "rainy",
+    "windy",
+    "cloudy"
+   ],
+   "answer": 0,
+   "explanation": "Sunny.",
+   "chapter": "class1-science-world-around"
+  },
+  {
+   "id": "class1-science-weather-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class1-science-weather",
+   "prompt": "Many clouds in the sky means it is...",
+   "choices": [
+    "night",
+    "sunny",
+    "cloudy",
+    "dry"
+   ],
+   "answer": 2,
+   "explanation": "Cloudy.",
+   "chapter": "class1-science-world-around"
+  },
+  {
+   "id": "class1-science-weather-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class1-science-weather",
+   "prompt": "Strong air moving is called...",
+   "choices": [
+    "wind",
+    "sun",
+    "moon",
+    "rain"
+   ],
+   "answer": 0,
+   "explanation": "Wind.",
+   "chapter": "class1-science-world-around"
+  },
+  {
+   "id": "class1-science-weather-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class1-science-weather",
+   "prompt": "In hot weather we should...",
+   "choices": [
+    "wear a thick coat",
+    "run in the sun",
+    "stay without water",
+    "drink water"
+   ],
+   "answer": 3,
+   "explanation": "Drink.",
+   "chapter": "class1-science-world-around"
+  },
+  {
+   "id": "class1-science-world-around-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class1-science-day-night-sun",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What gives us light in the day?",
+   "choices": [
+    "a star at night",
+    "a lamp only",
+    "the Sun",
+    "the rain"
+   ],
+   "answer": 2,
+   "explanation": "The Sun.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class1-science-world-around"
+  },
+  {
+   "id": "class1-science-world-around-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class1-science-day-night-sun",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "When do we see the moon best?",
+   "choices": [
+    "at noon",
+    "in a cave only",
+    "at night",
+    "at breakfast"
+   ],
+   "answer": 2,
+   "explanation": "Night.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class1-science-world-around"
+  },
+  {
+   "id": "class1-science-world-around-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "class1-science-day-night-sun",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "We should look straight at the Sun.",
+   "answer": false,
+   "explanation": "Never; it can hurt our eyes.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class1-science-world-around"
+  },
+  {
+   "id": "class1-science-world-around-e10",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "class1-science-day-night-sun",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match.",
+   "pairs": [
+    [
+     "day",
+     "the Sun shines"
+    ],
+    [
+     "night",
+     "we see stars"
+    ]
+   ],
+   "explanation": "Think of the sky.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "class1-science-world-around"
+  },
+  {
+   "id": "class1-science-world-around-e11",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "class1-science-day-night-sun",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The Sun gives us light and...",
+   "choices": [
+    "noise",
+    "water only",
+    "cold",
+    "heat"
+   ],
+   "answer": 3,
+   "explanation": "Heat.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class1-science-world-around"
+  },
+  {
+   "id": "class1-science-world-around-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class1-science-day-night-sun",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Neba plays outside at noon and goes to bed at night.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Is it light or dark at noon?",
+     "choices": [
+      "rainy always",
+      "dark",
+      "cold only",
+      "light"
+     ],
+     "answer": 3,
+     "explanation": "Light.",
+     "id": "class1-science-world-around-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What can he see in the sky at night?",
+     "choices": [
+      "nothing ever",
+      "the Sun",
+      "a rainbow",
+      "the moon and stars"
+     ],
+     "answer": 3,
+     "explanation": "Moon and stars.",
+     "id": "class1-science-world-around-e12-b"
+    }
+   ],
+   "chapter": "class1-science-world-around"
+  },
+  {
+   "id": "class1-science-day-night-sun-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class1-science-day-night-sun",
+   "prompt": "Class 1 science Sun: the Sun gives us...",
+   "choices": [
+    "only water",
+    "only sound",
+    "only cold",
+    "light and heat"
+   ],
+   "answer": 3,
+   "explanation": "Light and heat.",
+   "chapter": "class1-science-world-around"
+  },
+  {
+   "id": "class1-science-day-night-sun-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class1-science-day-night-sun",
+   "prompt": "Class 1 science night: what can we see in the night sky?",
+   "choices": [
+    "a rainbow",
+    "a school",
+    "stars",
+    "the Sun"
+   ],
+   "answer": 2,
+   "explanation": "Stars.",
+   "chapter": "class1-science-world-around"
+  },
+  {
+   "id": "class1-science-day-night-sun-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class1-science-day-night-sun",
+   "prompt": "It is dark at...",
+   "choices": [
+    "noon",
+    "morning always",
+    "night",
+    "midday"
+   ],
+   "answer": 2,
+   "explanation": "Night.",
+   "chapter": "class1-science-world-around"
+  },
+  {
+   "id": "class1-science-day-night-sun-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class1-science-day-night-sun",
+   "prompt": "Should we look at the Sun?",
+   "choices": [
+    "only at noon",
+    "yes, a long time",
+    "yes, with no hat",
+    "no, never straight at it"
+   ],
+   "answer": 3,
+   "explanation": "Never.",
+   "chapter": "class1-science-world-around"
+  },
+  {
+   "id": "class1-science-day-night-sun-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class1-science-day-night-sun",
+   "prompt": "Plants need the Sun to...",
+   "choices": [
+    "walk",
+    "grow well",
+    "fly",
+    "sing"
+   ],
+   "answer": 1,
+   "explanation": "Grow.",
+   "chapter": "class1-science-world-around"
+  }
+ ]
+}

@@ -65,11 +65,23 @@ tasks.register<JavaExec>("checkLearnContent") {
     args(listOf("check", learnContent.absolutePath) + ((project.findProperty("packs") as String?)?.split(",") ?: emptyList()))
 }
 
+// ---- Skill graph (docs/CONTENT-ARCHITECTURE.md): content/graph/*.json ----
+tasks.register<JavaExec>("checkContentGraph") {
+    group = "castbridge"
+    description = "Validates the curriculum skill graph (content/graph) and the content that names a skill"
+    dependsOn(tasks.named("compileKotlin"))
+    classpath = learnToolClasspath
+    mainClass.set("castbridge.core.curriculum.GraphTool")
+    args(listOf("check", rootProject.projectDir.parentFile.resolve("content").absolutePath) + (if (project.hasProperty("requireContent")) listOf("--require-content") else emptyList()))
+}
+
 // UTF-8 file names in tests, as on Android (CI/containers often have no locale set)
 tasks.test {
     environment("LC_ALL", "C.UTF-8")
     // « Apprendre »: the tests validate every pack source of the repository (docs/LEARN.md)
     systemProperty("learn.content", learnContent.absolutePath)
+    // Skill graph + scopes (content/graph): the tests validate them
+    systemProperty("graph.content", rootProject.projectDir.parentFile.resolve("content").absolutePath)
     // Charte graphique: the tests read branding/design-tokens.json (contrasts, generated Kotlin in sync)
     systemProperty("branding.dir", rootProject.projectDir.parentFile.resolve("branding").absolutePath)
     inputs.dir(rootProject.projectDir.parentFile.resolve("branding")).withPropertyName("branding").optional()

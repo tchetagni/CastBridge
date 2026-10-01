@@ -1,0 +1,1779 @@
+{
+ "chapter": "class5-maths-measures",
+ "lessons": [
+  {
+   "id": "class5-maths-conversions",
+   "title": "Measures: converting units",
+   "minutes": 30,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level III (Class 5) — Mathematics; to be checked against the official syllabus",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Convert between units of length, mass, capacity and time.",
+    "Use decimals in measures.",
+    "Solve problems with measures."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "class5-maths-measures-e01",
+    "class5-maths-measures-e02",
+    "class5-maths-measures-e03",
+    "class5-maths-measures-e04",
+    "class5-maths-measures-e05",
+    "class5-maths-measures-e06"
+   ],
+   "selfCheck": [
+    "class5-maths-conversions-q1",
+    "class5-maths-conversions-q2",
+    "class5-maths-conversions-q3",
+    "class5-maths-conversions-q4",
+    "class5-maths-conversions-q5"
+   ],
+   "reviewNotes": [
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Conversion table",
+     "md": "Learn the links between the units: **length**: 1 km = 1,000 m, 1 m = 100 cm, 1 cm = 10 mm. **Mass**: 1 t = 1,000 kg, 1 kg = 1,000 g. **Capacity**: 1 l = 1,000 ml. **Time**: 1 h = 60 min, 1 min = 60 s. A decimal can help: 3 km 500 m = 3.5 km."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 160,
+      "items": [
+       {
+        "t": "rect",
+        "x": 30.0,
+        "y": 10,
+        "w": 90,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 75.0,
+        "y": 29.0,
+        "text": "Quantity",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 120.0,
+        "y": 10,
+        "w": 250,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 245.0,
+        "y": 29.0,
+        "text": "Conversion",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 30.0,
+        "y": 38,
+        "w": 90,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 75.0,
+        "y": 57.0,
+        "text": "Length",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 120.0,
+        "y": 38,
+        "w": 250,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 245.0,
+        "y": 57.0,
+        "text": "1 km = 1,000 m; 1 m = 100 cm",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 30.0,
+        "y": 66,
+        "w": 90,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 75.0,
+        "y": 85.0,
+        "text": "Mass",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 120.0,
+        "y": 66,
+        "w": 250,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 245.0,
+        "y": 85.0,
+        "text": "1 kg = 1,000 g; 1 t = 1,000 kg",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 30.0,
+        "y": 94,
+        "w": 90,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 75.0,
+        "y": 113.0,
+        "text": "Capacity",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 120.0,
+        "y": 94,
+        "w": 250,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 245.0,
+        "y": 113.0,
+        "text": "1 l = 1,000 ml",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 30.0,
+        "y": 122,
+        "w": 90,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 75.0,
+        "y": 141.0,
+        "text": "Time",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 120.0,
+        "y": 122,
+        "w": 250,
+        "h": 28,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 245.0,
+        "y": 141.0,
+        "text": "1 h = 60 min; 1 min = 60 s",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Conversion table for length, mass, capacity and time.",
+     "alt": "A table with four rows: length km m cm, mass t kg g, capacity litre and ml, time hour minute and second, with their conversion values."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Which way?",
+     "md": "**Big unit to small unit: multiply** (3.5 km = 3.5 × 1,000 = 3,500 m). **Small unit to big unit: divide** (450 g = 450 ÷ 1,000 = 0.45 kg). For time use 60: 2 h 15 min = 2 × 60 + 15 = 135 min."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using 100 for time: there are 60 minutes in an hour.\n- Multiplying instead of dividing.\n- Adding measures in different units without converting.\n- Using the wrong unit in the answer (km instead of m)."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "A farmer has 2.5 kg of beans and buys 750 g more. How many kg in all?",
+     "steps": [
+      "Convert 750 g to kg: 750 ÷ 1,000 = 0.75 kg.",
+      "2.5 + 0.75 = 3.25 kg."
+     ],
+     "answer": "3.25 kg"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "How many minutes in 2 hours 15 minutes?",
+     "steps": [
+      "2 hours = 2 × 60 = 120 minutes.",
+      "120 + 15 = 135 minutes."
+     ],
+     "answer": "135 minutes"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-area",
+   "title": "Area of rectangles, triangles and compound shapes",
+   "minutes": 35,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level III (Class 5) — Mathematics; to be checked against the official syllabus",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Use the formulae for the area of a rectangle, a square and a triangle.",
+    "Find the area of a compound shape by adding or subtracting.",
+    "Choose the right unit (cm², m²)."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "class5-maths-measures-e07",
+    "class5-maths-measures-e08",
+    "class5-maths-measures-e09",
+    "class5-maths-measures-e10",
+    "class5-maths-measures-e11",
+    "class5-maths-measures-e12"
+   ],
+   "selfCheck": [
+    "class5-maths-area-q1",
+    "class5-maths-area-q2",
+    "class5-maths-area-q3",
+    "class5-maths-area-q4",
+    "class5-maths-area-q5"
+   ],
+   "reviewNotes": [
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Formulae",
+     "md": "**Rectangle**: area = length × width. **Square**: area = side × side. **Triangle**: area = ½ × base × height, where the **height is at right angles to the base**. **Parallelogram**: area = base × height."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 170,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         60,
+         130,
+         220,
+         130,
+         160,
+         40
+        ],
+        "stroke": "ink",
+        "width": 3,
+        "closed": true,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "line",
+        "x1": 160,
+        "y1": 40,
+        "x2": 160,
+        "y2": 130,
+        "color": "red",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "text",
+        "x": 140,
+        "y": 150,
+        "text": "base 10 cm",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 168,
+        "y": 90,
+        "text": "height 6 cm",
+        "size": 13,
+        "anchor": "start",
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 100,
+        "text": "Area = ½ × 10 × 6",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "A triangle with base 10 cm and height 6 cm.",
+     "alt": "A triangle with the base marked 10 centimetres and a dashed red line showing the height 6 centimetres. The area is a half of 10 times 6."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Compound shapes",
+     "md": "To find the area of an L-shape, **split** it into rectangles and **add** the areas, or take a big rectangle and **subtract** the missing part. Write the unit: cm² or m². A triangle is half of a rectangle with the same base and height."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using the slanting side instead of the perpendicular height for a triangle.\n- Forgetting the ½.\n- Writing m instead of m² for area.\n- Mixing units: change cm to m before multiplying."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Find the area of a triangle with base 10 cm and height 6 cm.",
+     "steps": [
+      "Area = ½ × base × height.",
+      "½ × 10 × 6 = 30."
+     ],
+     "answer": "30 cm²",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 170,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         60,
+         130,
+         220,
+         130,
+         160,
+         40
+        ],
+        "stroke": "ink",
+        "width": 3,
+        "closed": true,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "line",
+        "x1": 160,
+        "y1": 40,
+        "x2": 160,
+        "y2": 130,
+        "color": "red",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "text",
+        "x": 140,
+        "y": 150,
+        "text": "base 10 cm",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 168,
+        "y": 90,
+        "text": "height 6 cm",
+        "size": 13,
+        "anchor": "start",
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 100,
+        "text": "Area = ½ × 10 × 6",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "A rectangular plot measures 20 m by 12 m. A corner piece 6 m by 5 m is cut out. Find the area that is left.",
+     "steps": [
+      "Whole rectangle: 20 × 12 = 240 m². Cut-out: 6 × 5 = 30 m².",
+      "240 − 30 = 210 m²."
+     ],
+     "answer": "210 m²"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-volume",
+   "title": "Volume and capacity of cuboids",
+   "minutes": 30,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level III (Class 5) — Mathematics; to be checked against the official syllabus",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Say what volume is and use cm³ and m³.",
+    "Find the volume of a cuboid and a cube.",
+    "Link volume and capacity (1,000 cm³ = 1 litre)."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "class5-maths-measures-e13",
+    "class5-maths-measures-e14",
+    "class5-maths-measures-e15",
+    "class5-maths-measures-e16",
+    "class5-maths-measures-e17",
+    "class5-maths-measures-e18"
+   ],
+   "selfCheck": [
+    "class5-maths-volume-q1",
+    "class5-maths-volume-q2",
+    "class5-maths-volume-q3",
+    "class5-maths-volume-q4",
+    "class5-maths-volume-q5"
+   ],
+   "reviewNotes": [
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Volume",
+     "md": "**Volume** is the amount of space a solid takes up. We measure it in **cubic units**: cm³ and m³. A cube of side 1 cm has a volume of 1 cm³. For a **cuboid**: volume = length × width × height. For a **cube** of side $s$: volume = $s \\times s \\times s$."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 175,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         60,
+         70,
+         100,
+         30,
+         240,
+         30,
+         200,
+         70
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         200,
+         70,
+         240,
+         30,
+         240,
+         100,
+         200,
+         140
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightorange"
+       },
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 70,
+        "w": 140,
+        "h": 70,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 148,
+        "text": "length 8 cm",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 100,
+        "text": "height 4 cm",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 268,
+        "y": 40,
+        "text": "width 5 cm",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 160,
+        "text": "V = 8 × 5 × 4",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "A cuboid 8 cm long, 5 cm wide and 4 cm high.",
+     "alt": "A box drawn in 3-D with the length 8 cm, the width 5 cm and the height 4 cm marked. The volume is 8 times 5 times 4."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Capacity",
+     "md": "**1,000 cm³ = 1 litre** and 1 cm³ = 1 ml. So a tank of volume 20,000 cm³ holds 20 litres. A container of 1 m³ holds 1,000 litres. Volume is about the **space**, capacity is about how much a container **holds**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Adding the three sides instead of multiplying.\n- Writing the volume in cm² (that is for area).\n- Mixing units: if the sides are in cm the volume is in cm³.\n- Forgetting that 1 litre is 1,000 cm³, not 100."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Find the volume of a box 8 cm long, 5 cm wide and 4 cm high.",
+     "steps": [
+      "Volume = length × width × height.",
+      "8 × 5 × 4 = 160."
+     ],
+     "answer": "160 cm³",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 175,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         60,
+         70,
+         100,
+         30,
+         240,
+         30,
+         200,
+         70
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         200,
+         70,
+         240,
+         30,
+         240,
+         100,
+         200,
+         140
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightorange"
+       },
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 70,
+        "w": 140,
+        "h": 70,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 148,
+        "text": "length 8 cm",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 100,
+        "text": "height 4 cm",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 268,
+        "y": 40,
+        "text": "width 5 cm",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 160,
+        "text": "V = 8 × 5 × 4",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "A tank is 50 cm long, 40 cm wide and 30 cm high. How many litres of water does it hold when full?",
+     "steps": [
+      "Volume = 50 × 40 × 30 = 60,000 cm³.",
+      "1,000 cm³ = 1 litre, so 60,000 ÷ 1,000 = 60 litres."
+     ],
+     "answer": "60 litres"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-triangles-angles",
+   "title": "Angles and triangles",
+   "minutes": 30,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level III (Class 5) — Mathematics; to be checked against the official syllabus",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Measure and estimate angles.",
+    "Name triangles by their sides and angles.",
+    "Use the fact that the angles of a triangle add up to 180°."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "class5-maths-measures-e19",
+    "class5-maths-measures-e20",
+    "class5-maths-measures-e21",
+    "class5-maths-measures-e22",
+    "class5-maths-measures-e23",
+    "class5-maths-measures-e24"
+   ],
+   "selfCheck": [
+    "class5-maths-triangles-angles-q1",
+    "class5-maths-triangles-angles-q2",
+    "class5-maths-triangles-angles-q3",
+    "class5-maths-triangles-angles-q4",
+    "class5-maths-triangles-angles-q5"
+   ],
+   "reviewNotes": [
+    "Constructing angles with a protractor is not covered (needs a physical protractor and a teacher).",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Triangles",
+     "md": "By **sides**: an **equilateral** triangle has 3 equal sides; an **isosceles** triangle has 2 equal sides; a **scalene** triangle has no equal sides. By **angles**: a **right-angled** triangle has one angle of 90°; an **acute-angled** triangle has all angles less than 90°; an **obtuse-angled** triangle has one angle more than 90°."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 195,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         60,
+         150,
+         300,
+         150,
+         180,
+         30
+        ],
+        "stroke": "ink",
+        "width": 3,
+        "closed": true,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 140,
+        "text": "50°",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 255,
+        "y": 140,
+        "text": "60°",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 70,
+        "text": "70°",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 175,
+        "text": "50° + 60° + 70° = 180°",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "The angles of a triangle add up to 180°.",
+     "alt": "A triangle with angles 50, 60 and 70 degrees. Under it is written 50 plus 60 plus 70 equals 180 degrees."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Angle sum",
+     "md": "The three angles of **any** triangle add up to **180°**. If two angles are 50° and 60°, the third is 180° − 50° − 60° = 70°. Angles on a straight line add up to 180°, and angles all round a point add up to 360°. In an isosceles triangle the two angles at the base are equal."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using 360° for the angles of a triangle: that is for a full turn (and for a four-sided shape).\n- Subtracting only one angle from 180°.\n- Reading the wrong scale on a protractor (check if the angle is acute or obtuse)."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Two angles of a triangle are 50° and 60°. Find the third.",
+     "steps": [
+      "Add the two angles: 50 + 60 = 110.",
+      "Subtract from 180: 180 − 110 = 70."
+     ],
+     "answer": "70°",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 195,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         60,
+         150,
+         300,
+         150,
+         180,
+         30
+        ],
+        "stroke": "ink",
+        "width": 3,
+        "closed": true,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 140,
+        "text": "50°",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 255,
+        "y": 140,
+        "text": "60°",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 70,
+        "text": "70°",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 175,
+        "text": "50° + 60° + 70° = 180°",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "An isosceles triangle has a top angle of 40°. Find the two equal base angles.",
+     "steps": [
+      "Angles left for the base: 180 − 40 = 140.",
+      "The base angles are equal: 140 ÷ 2 = 70."
+     ],
+     "answer": "70° each"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class5-maths-measures"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "class5-maths-measures-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class5-maths-conversions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Change 3.5 km into metres.",
+   "answer": 3500,
+   "tolerance": 0,
+   "unit": "m",
+   "explanation": "3.5 × 1,000.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-measures-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class5-maths-conversions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Change 450 g into kg.",
+   "answer": 0.45,
+   "tolerance": 0.001,
+   "unit": "kg",
+   "explanation": "450 ÷ 1,000.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-measures-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class5-maths-conversions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which is the biggest?",
+   "choices": [
+    "1,999 m",
+    "2 km",
+    "1,500 m",
+    "900 m"
+   ],
+   "answer": 1,
+   "explanation": "2 km = 2,000 m.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-measures-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class5-maths-conversions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A tank of 20 litres is filled with bottles of 250 ml. How many bottles are needed?",
+   "answer": 80,
+   "tolerance": 0,
+   "explanation": "20 l = 20,000 ml; 20,000 ÷ 250 = 80.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-measures-e05",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class5-maths-conversions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "3 hours 30 minutes is 210 minutes.",
+   "answer": true,
+   "explanation": "3 × 60 + 30 = 210.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-measures-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class5-maths-conversions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A lorry carries 3.5 tonnes of cocoa from Kumba to Douala. It unloads 1,250 kg at a first store.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many kg did the lorry carry at first?",
+     "answer": 3500,
+     "tolerance": 0,
+     "explanation": "3.5 × 1,000 = 3,500 kg.",
+     "unit": "kg",
+     "id": "class5-maths-measures-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many kg are left?",
+     "answer": 2250,
+     "tolerance": 0,
+     "explanation": "3,500 − 1,250 = 2,250.",
+     "unit": "kg",
+     "id": "class5-maths-measures-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "How many tonnes is that?",
+     "answer": 2.25,
+     "tolerance": 0.001,
+     "explanation": "2,250 ÷ 1,000 = 2.25.",
+     "unit": "t",
+     "id": "class5-maths-measures-e06-c"
+    }
+   ],
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-conversions-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-conversions",
+   "prompt": "Class 5 Maths (Measures) – 1 tonne is...",
+   "choices": [
+    "1,000 kg",
+    "10 kg",
+    "10,000 kg",
+    "100 kg"
+   ],
+   "answer": 0,
+   "explanation": "Tonne = 1,000 kg.",
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-conversions-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-conversions",
+   "prompt": "Class 5 Maths (Measures) – How many ml in 3 litres?",
+   "choices": [
+    "30",
+    "3,000",
+    "300",
+    "30,000"
+   ],
+   "answer": 1,
+   "explanation": "3 × 1,000.",
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-conversions-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-conversions",
+   "prompt": "Class 5 Maths (Measures) – 2 h 30 min in minutes is...",
+   "choices": [
+    "230",
+    "150",
+    "90",
+    "130"
+   ],
+   "answer": 1,
+   "explanation": "120 + 30.",
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-conversions-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-conversions",
+   "prompt": "Class 5 Maths (Measures) – 750 m in km is...",
+   "choices": [
+    "7.5 km",
+    "0.075 km",
+    "0.75 km",
+    "75 km"
+   ],
+   "answer": 2,
+   "explanation": "750 ÷ 1,000.",
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-conversions-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-conversions",
+   "prompt": "Class 5 Maths (Measures) – To change a big unit to a small unit we...",
+   "choices": [
+    "multiply",
+    "add",
+    "divide",
+    "subtract"
+   ],
+   "answer": 0,
+   "explanation": "More small units fit in a big unit.",
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-measures-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class5-maths-area",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Area of a rectangle 9 m by 4 m.",
+   "answer": 36,
+   "tolerance": 0,
+   "unit": "m²",
+   "explanation": "9 × 4.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-measures-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class5-maths-area",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Area of a triangle: base 8 cm, height 5 cm.",
+   "answer": 20,
+   "tolerance": 0,
+   "unit": "cm²",
+   "explanation": "½ × 8 × 5 = 20.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-measures-e09",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class5-maths-area",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The area of a square of side 7 cm is...",
+   "choices": [
+    "14 cm²",
+    "49 cm²",
+    "28 cm",
+    "49 cm"
+   ],
+   "answer": 1,
+   "explanation": "7 × 7 = 49.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-measures-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class5-maths-area",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A parallelogram has base 12 cm and height 5 cm. Area?",
+   "answer": 60,
+   "tolerance": 0,
+   "unit": "cm²",
+   "explanation": "12 × 5.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-measures-e11",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class5-maths-area",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A triangle with the same base and height as a rectangle has half its area.",
+   "answer": true,
+   "explanation": "That is why we use ½.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-measures-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class5-maths-area",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A school in Bamenda has a rectangular playground 30 m by 20 m. A triangular flower bed with base 8 m and height 5 m is in one corner.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Area of the playground?",
+     "answer": 600,
+     "tolerance": 0,
+     "explanation": "30 × 20 = 600.",
+     "unit": "m²",
+     "id": "class5-maths-measures-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Area of the flower bed?",
+     "answer": 20,
+     "tolerance": 0,
+     "explanation": "½ × 8 × 5 = 20.",
+     "unit": "m²",
+     "id": "class5-maths-measures-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Area left for playing?",
+     "answer": 580,
+     "tolerance": 0,
+     "explanation": "600 − 20 = 580.",
+     "unit": "m²",
+     "id": "class5-maths-measures-e12-c"
+    }
+   ],
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-area-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-area",
+   "prompt": "Class 5 Maths (Area of rectangles, triangles and compound) – Area of a triangle is...",
+   "choices": [
+    "½ × base × height",
+    "base + height",
+    "2 × base × height",
+    "base × height"
+   ],
+   "answer": 0,
+   "explanation": "Half of a rectangle.",
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-area-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-area",
+   "prompt": "Class 5 Maths (Area of rectangles, triangles and compound) – Area of a 6 m by 3 m rectangle is...",
+   "choices": [
+    "18 m",
+    "24 m²",
+    "9 m²",
+    "18 m²"
+   ],
+   "answer": 3,
+   "explanation": "6 × 3.",
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-area-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-area",
+   "prompt": "Class 5 Maths (Area of rectangles, triangles and compound) – The height of a triangle is measured...",
+   "choices": [
+    "round the shape",
+    "in litres",
+    "along the slanting side",
+    "at right angles to the base"
+   ],
+   "answer": 3,
+   "explanation": "Perpendicular height.",
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-area-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-area",
+   "prompt": "Class 5 Maths (Area of rectangles, triangles and compound) – Area is measured in...",
+   "choices": [
+    "degrees",
+    "square units",
+    "cubic units",
+    "litres"
+   ],
+   "answer": 1,
+   "explanation": "cm², m².",
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-area-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-area",
+   "prompt": "Class 5 Maths (Area of rectangles, triangles and compound) – A rectangle has area 48 cm² and width 6 cm. Its length is...",
+   "choices": [
+    "288 cm",
+    "9 cm",
+    "42 cm",
+    "8 cm"
+   ],
+   "answer": 3,
+   "explanation": "48 ÷ 6.",
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-measures-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class5-maths-volume",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Volume of a cube with side 3 cm.",
+   "answer": 27,
+   "tolerance": 0,
+   "unit": "cm³",
+   "explanation": "3 × 3 × 3.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-measures-e14",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class5-maths-volume",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Volume of a cuboid 10 cm × 4 cm × 2 cm.",
+   "answer": 80,
+   "tolerance": 0,
+   "unit": "cm³",
+   "explanation": "10 × 4 × 2.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-measures-e15",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class5-maths-volume",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which unit is used for volume?",
+   "choices": [
+    "cm",
+    "cm³",
+    "kg",
+    "cm²"
+   ],
+   "answer": 1,
+   "explanation": "Cubic units.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-measures-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class5-maths-volume",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A tank has a volume of 5,000 cm³. How many litres is that?",
+   "answer": 5,
+   "tolerance": 0,
+   "unit": "l",
+   "explanation": "5,000 ÷ 1,000.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-measures-e17",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class5-maths-volume",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A cube with side 2 cm has a volume of 8 cm³.",
+   "answer": true,
+   "explanation": "2 × 2 × 2 = 8.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-measures-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class5-maths-volume",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A water tank in a house in Buea is a cuboid 100 cm long, 50 cm wide and 60 cm high.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Volume of the tank?",
+     "answer": 300000,
+     "tolerance": 0,
+     "explanation": "100 × 50 × 60 = 300,000.",
+     "unit": "cm³",
+     "id": "class5-maths-measures-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many litres can it hold?",
+     "answer": 300,
+     "tolerance": 0,
+     "explanation": "300,000 ÷ 1,000.",
+     "unit": "litres",
+     "id": "class5-maths-measures-e18-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "The tank is filled with 20-litre buckets. How many full buckets fill it?",
+     "answer": 15,
+     "tolerance": 0,
+     "explanation": "300 ÷ 20 = 15.",
+     "id": "class5-maths-measures-e18-c"
+    }
+   ],
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-volume-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-volume",
+   "prompt": "Class 5 Maths (Volume and capacity of cuboids) – The volume of a cuboid is...",
+   "choices": [
+    "base × height",
+    "2 × (length + width)",
+    "length + width + height",
+    "length × width × height"
+   ],
+   "answer": 3,
+   "explanation": "Multiply the three sides.",
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-volume-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-volume",
+   "prompt": "Class 5 Maths (Volume and capacity of cuboids) – 1 litre is equal to...",
+   "choices": [
+    "10 cm³",
+    "1,000 cm³",
+    "1 cm³",
+    "100 cm³"
+   ],
+   "answer": 1,
+   "explanation": "1,000 cm³ = 1 l.",
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-volume-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-volume",
+   "prompt": "Class 5 Maths (Volume and capacity of cuboids) – A cube with side 5 cm has volume...",
+   "choices": [
+    "25 cm³",
+    "625 cm³",
+    "15 cm³",
+    "125 cm³"
+   ],
+   "answer": 3,
+   "explanation": "5 × 5 × 5.",
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-volume-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-volume",
+   "prompt": "Class 5 Maths (Volume and capacity of cuboids) – Which is a unit of volume?",
+   "choices": [
+    "kg",
+    "m³",
+    "m",
+    "m²"
+   ],
+   "answer": 1,
+   "explanation": "Cubic metre.",
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-volume-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-volume",
+   "prompt": "Class 5 Maths (Volume and capacity of cuboids) – A box of volume 2,000 cm³ holds...",
+   "choices": [
+    "20 litres",
+    "200 litres",
+    "2 litres",
+    "0.2 litres"
+   ],
+   "answer": 2,
+   "explanation": "2,000 ÷ 1,000.",
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-measures-e19",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class5-maths-triangles-angles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A triangle has angles 90° and 35°. Find the third angle.",
+   "answer": 55,
+   "tolerance": 0,
+   "unit": "°",
+   "explanation": "180 − 90 − 35 = 55.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-measures-e20",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class5-maths-triangles-angles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A triangle with 3 equal sides is...",
+   "choices": [
+    "isosceles",
+    "scalene",
+    "right-angled",
+    "equilateral"
+   ],
+   "answer": 3,
+   "explanation": "Equi = equal.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-measures-e21",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class5-maths-triangles-angles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The angles of a triangle add up to how many degrees?",
+   "answer": 180,
+   "tolerance": 0,
+   "unit": "°",
+   "explanation": "Always 180°.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-measures-e22",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class5-maths-triangles-angles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Each angle of an equilateral triangle is how many degrees?",
+   "answer": 60,
+   "tolerance": 0,
+   "unit": "°",
+   "explanation": "180 ÷ 3.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-measures-e23",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class5-maths-triangles-angles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A triangle can have two right angles.",
+   "answer": false,
+   "explanation": "90 + 90 = 180, leaving 0° for the third.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-measures-e24",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class5-maths-triangles-angles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Neba draws a triangle with angles 45°, 45° and a third angle.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the third angle.",
+     "answer": 90,
+     "tolerance": 0,
+     "explanation": "180 − 45 − 45 = 90.",
+     "unit": "°",
+     "id": "class5-maths-measures-e24-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What kind of triangle is it by its angles?",
+     "choices": [
+      "right-angled",
+      "acute-angled",
+      "obtuse-angled",
+      "straight"
+     ],
+     "answer": 0,
+     "explanation": "One angle is 90°.",
+     "id": "class5-maths-measures-e24-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "What kind of triangle is it by its sides?",
+     "choices": [
+      "scalene",
+      "isosceles",
+      "square",
+      "equilateral"
+     ],
+     "answer": 1,
+     "explanation": "Two angles are equal, so two sides are equal.",
+     "id": "class5-maths-measures-e24-c"
+    }
+   ],
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-triangles-angles-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-triangles-angles",
+   "prompt": "Class 5 Maths (Angles and triangles) – The sum of the angles in a triangle is...",
+   "choices": [
+    "90°",
+    "360°",
+    "180°",
+    "100°"
+   ],
+   "answer": 2,
+   "explanation": "Always 180°.",
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-triangles-angles-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-triangles-angles",
+   "prompt": "Class 5 Maths (Angles and triangles) – Angles 60°, 60° and 60° belong to a(n)...",
+   "choices": [
+    "right-angled triangle",
+    "scalene triangle",
+    "equilateral triangle",
+    "obtuse triangle"
+   ],
+   "answer": 2,
+   "explanation": "All equal.",
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-triangles-angles-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-triangles-angles",
+   "prompt": "Class 5 Maths (Angles and triangles) – A triangle with an angle of 120° is...",
+   "choices": [
+    "right-angled",
+    "obtuse-angled",
+    "acute-angled",
+    "equilateral"
+   ],
+   "answer": 1,
+   "explanation": "More than 90°.",
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-triangles-angles-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-triangles-angles",
+   "prompt": "Class 5 Maths (Angles and triangles) – Two angles are 30° and 70°. The third is...",
+   "choices": [
+    "60°",
+    "70°",
+    "100°",
+    "80°"
+   ],
+   "answer": 3,
+   "explanation": "180 − 100 = 80.",
+   "chapter": "class5-maths-measures"
+  },
+  {
+   "id": "class5-maths-triangles-angles-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class5-maths-triangles-angles",
+   "prompt": "Class 5 Maths (Angles and triangles) – Angles round a point add up to...",
+   "choices": [
+    "90°",
+    "180°",
+    "720°",
+    "360°"
+   ],
+   "answer": 3,
+   "explanation": "A full turn.",
+   "chapter": "class5-maths-measures"
+  }
+ ]
+}

@@ -1,0 +1,371 @@
+{
+ "chapter": "form1-maths-data",
+ "lessons": [
+  {
+   "id": "form1-maths-data-handling",
+   "title": "Collecting and presenting data; mean, median, mode",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 1 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Collect data with a tally chart and a frequency table",
+    "Draw and read a bar chart",
+    "Calculate the mean, median, mode and range",
+    "Choose the best average for a situation"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form1-maths-data-e01",
+    "form1-maths-data-e02",
+    "form1-maths-data-e03",
+    "form1-maths-data-e04",
+    "form1-maths-data-e05",
+    "form1-maths-data-e06"
+   ],
+   "selfCheck": [
+    "form1-maths-data-handling-q1",
+    "form1-maths-data-handling-q2",
+    "form1-maths-data-handling-q3",
+    "form1-maths-data-handling-q4",
+    "form1-maths-data-handling-q5"
+   ],
+   "reviewNotes": [
+    "Pie charts and grouped data are left for Form 2; the tallest bar (7) must have headroom — check the figure.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Data and frequency",
+     "md": "**Data** are pieces of information collected by counting or measuring. A **tally chart** counts with strokes (groups of five: ||||). The **frequency** of a value is the number of times it occurs. A **frequency table** lists each value with its frequency. A **bar chart** shows each value as a bar with equal width and gaps; the height shows the frequency."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Averages",
+     "md": "The **mean** is the total divided by the number of values. The **median** is the middle value when the data are in order (for an even number take the middle two and average them). The **mode** is the most frequent value. The **range** is the largest value minus the smallest.",
+     "tex": "\\text{mean} = \\frac{\\text{sum of all values}}{\\text{number of values}}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 260,
+      "bars": [
+       {
+        "label": "2",
+        "value": 1,
+        "color": "blue"
+       },
+       {
+        "label": "3",
+        "value": 7,
+        "color": "blue"
+       },
+       {
+        "label": "4",
+        "value": 5,
+        "color": "blue"
+       },
+       {
+        "label": "5",
+        "value": 5,
+        "color": "blue"
+       },
+       {
+        "label": "6",
+        "value": 2,
+        "color": "blue"
+       }
+      ],
+      "unit": "families"
+     },
+     "caption": "Bar chart of the number of people per household in 20 families.",
+     "alt": "A bar chart: 1 family with 2 people, 7 with 3, 5 with 4, 5 with 5 and 2 with 6."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Which average?",
+     "md": "Use the **mean** when values are similar; it uses all values but is pulled by very large or small ones. Use the **median** when there are extreme values (house prices, salaries). Use the **mode** for the most popular choice, such as the most common shoe size sold."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Finding the median without ordering the data first.\n- Calling the frequency 'the mode': the mode is the **value** with the highest frequency.\n- Dividing the sum by the number of **different** values instead of the number of values."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: frequency table",
+     "statement": "20 families in a street in Douala were asked how many people live in their home: 3, 5, 4, 3, 6, 3, 5, 4, 3, 5, 4, 2, 3, 5, 6, 4, 3, 4, 5, 3. Find the mode, median and mean.",
+     "steps": [
+      "Frequencies: 2 → 1, 3 → 7, 4 → 5, 5 → 5, 6 → 2. Mode = 3 (most frequent).",
+      "In order, the 10th and 11th values are both 4, so the median = 4.",
+      "Sum = 80 and 80 ÷ 20 = 4. Range = 6 − 2 = 4."
+     ],
+     "answer": "**Mode 3, median 4, mean 4, range 4.**",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 260,
+      "bars": [
+       {
+        "label": "2",
+        "value": 1,
+        "color": "blue"
+       },
+       {
+        "label": "3",
+        "value": 7,
+        "color": "blue"
+       },
+       {
+        "label": "4",
+        "value": 5,
+        "color": "blue"
+       },
+       {
+        "label": "5",
+        "value": 5,
+        "color": "blue"
+       },
+       {
+        "label": "6",
+        "value": 2,
+        "color": "blue"
+       }
+      ],
+      "unit": "families"
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2: choosing the average",
+     "statement": "The monthly earnings (FCFA) of five workers are 40 000, 45 000, 50 000, 55 000 and 360 000. Find the mean and the median. Which describes a typical worker better?",
+     "steps": [
+      "Mean = (40 000 + 45 000 + 50 000 + 55 000 + 360 000) ÷ 5 = 550 000 ÷ 5 = 110 000.",
+      "Median = the middle value = 50 000.",
+      "One very high value pulls the mean up, so the median is better here."
+     ],
+     "answer": "**Mean 110 000 FCFA, median 50 000 FCFA; the median is more typical.**"
+    }
+   ],
+   "chapter": "form1-maths-data"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form1-maths-data-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form1-maths-data-handling",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find the mean of 4, 8, 6, 10, 7.",
+   "answer": 7,
+   "tolerance": 0,
+   "explanation": "35 ÷ 5 = 7.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form1-maths-data"
+  },
+  {
+   "id": "form1-maths-data-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form1-maths-data-handling",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find the median of 3, 9, 4, 7, 5.",
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "Order: 3, 4, 5, 7, 9; the middle is 5.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form1-maths-data"
+  },
+  {
+   "id": "form1-maths-data-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form1-maths-data-handling",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The mode of 2, 3, 3, 4, 3, 5, 5 is:",
+   "choices": [
+    "5",
+    "3",
+    "3.57",
+    "4"
+   ],
+   "answer": 1,
+   "explanation": "3 appears three times.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form1-maths-data"
+  },
+  {
+   "id": "form1-maths-data-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form1-maths-data-handling",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The marks of 6 pupils are 12, 15, 11, 15, 14, 13. Find the mean mark.",
+   "answer": 13.333,
+   "tolerance": 0.01,
+   "explanation": "80 ÷ 6 = 13.33.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form1-maths-data"
+  },
+  {
+   "id": "form1-maths-data-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form1-maths-data-handling",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Five houses at a quarter in Limbe sell for 8, 9, 9, 10 and 80 million FCFA. Which average is better to describe the usual price and why?",
+   "model": "The median (9 million), because the 80 million is unusually high and pulls the mean up to 23.2 million.",
+   "rubric": "1 mark for the median, 1 mark for the reason, 1 mark for correct values.",
+   "explanation": "The median (9 million), because the 80 million is unusually high and pulls the mean up to 23.2 million.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form1-maths-data"
+  },
+  {
+   "id": "form1-maths-data-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form1-maths-data-handling",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A shop in Bafoussam recorded the number of bags of cement sold each day for 7 days: 8, 12, 9, 12, 15, 10, 12.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the mode.",
+     "answer": 12,
+     "tolerance": 0,
+     "explanation": "12 appears three times.",
+     "id": "form1-maths-data-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the median.",
+     "answer": 12,
+     "tolerance": 0,
+     "explanation": "Ordered: 8, 9, 10, 12, 12, 12, 15; the middle (4th) is 12.",
+     "id": "form1-maths-data-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the mean (2 d.p.).",
+     "answer": 11.14,
+     "tolerance": 0.01,
+     "explanation": "78 ÷ 7 = 11.14.",
+     "id": "form1-maths-data-e06-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the range.",
+     "answer": 7,
+     "tolerance": 0,
+     "explanation": "15 − 8 = 7.",
+     "id": "form1-maths-data-e06-d"
+    }
+   ],
+   "chapter": "form1-maths-data"
+  },
+  {
+   "id": "form1-maths-data-handling-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-data-handling",
+   "prompt": "The range of 3, 8, 5, 12, 6 is:",
+   "choices": [
+    "12",
+    "34",
+    "9",
+    "3"
+   ],
+   "answer": 2,
+   "explanation": "12 − 3.",
+   "chapter": "form1-maths-data"
+  },
+  {
+   "id": "form1-maths-data-handling-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-data-handling",
+   "prompt": "The mean is found by:",
+   "choices": [
+    "adding all values and dividing by how many there are",
+    "subtracting",
+    "picking the middle",
+    "choosing the most frequent"
+   ],
+   "answer": 0,
+   "explanation": "Definition.",
+   "chapter": "form1-maths-data"
+  },
+  {
+   "id": "form1-maths-data-handling-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-data-handling",
+   "prompt": "The median of 2, 4, 6, 8 is:",
+   "choices": [
+    "20",
+    "4",
+    "5",
+    "6"
+   ],
+   "answer": 2,
+   "explanation": "Average of 4 and 6.",
+   "chapter": "form1-maths-data"
+  },
+  {
+   "id": "form1-maths-data-handling-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-data-handling",
+   "prompt": "A tally mark group of five looks like:",
+   "choices": [
+    "five separate strokes",
+    "one long stroke",
+    "a circle",
+    "four strokes crossed by a fifth"
+   ],
+   "answer": 3,
+   "explanation": "Groups of five.",
+   "chapter": "form1-maths-data"
+  },
+  {
+   "id": "form1-maths-data-handling-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form1-maths-data-handling",
+   "prompt": "In a bar chart, the bars should have:",
+   "choices": [
+    "equal width and gaps",
+    "different widths",
+    "touching bars of unequal width",
+    "no labels"
+   ],
+   "answer": 0,
+   "explanation": "Standard bar chart.",
+   "chapter": "form1-maths-data"
+  }
+ ]
+}

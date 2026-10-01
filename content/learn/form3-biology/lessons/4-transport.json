@@ -1,0 +1,885 @@
+{
+ "chapter": "form3-biology-transport",
+ "lessons": [
+  {
+   "id": "form3-biology-diffusion-osmosis",
+   "title": "Diffusion, osmosis and active transport",
+   "minutes": 30,
+   "programRef": "Form 3 Biology — Diffusion, osmosis, blood and circulation (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define diffusion, osmosis and active transport and give examples.",
+    "Explain the effect of surface area to volume ratio and the factors affecting diffusion.",
+    "Interpret a potato osmosis experiment and its effect on plant and animal cells."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form3-biology-transport-e01",
+    "form3-biology-transport-e02",
+    "form3-biology-transport-e03",
+    "form3-biology-transport-e04",
+    "form3-biology-transport-e05",
+    "form3-biology-transport-e06"
+   ],
+   "selfCheck": [
+    "form3-biology-diffusion-osmosis-q1",
+    "form3-biology-diffusion-osmosis-q2",
+    "form3-biology-diffusion-osmosis-q3",
+    "form3-biology-diffusion-osmosis-q4",
+    "form3-biology-diffusion-osmosis-q5"
+   ],
+   "reviewNotes": [
+    "Water potential is introduced in simple terms ('dilute' and 'concentrated'); check whether the term is needed at Form 3. The potato results are a model data set, not measured values.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Diffusion",
+     "md": "**Diffusion** is the **net movement of particles from a region of higher concentration to a region of lower concentration**, down a concentration gradient, because of their random movement. No energy from the cell is needed. Examples: oxygen from the alveoli into the blood; carbon dioxide into a leaf; digested food into the blood. Diffusion is faster with a **steeper gradient**, a **larger surface area**, a **higher temperature** and a **shorter distance**."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Surface area to volume ratio",
+     "md": "Small objects have a large surface area compared with their volume. For a cube of side s: surface area = 6s², volume = s³, ratio = 6 ÷ s. A 1 cm cube has a ratio of **6**, a 2 cm cube **3**. Single-celled organisms can get all the oxygen they need by diffusion, but large organisms have a small ratio and need **special exchange surfaces** (lungs, villi) and **transport systems**."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Osmosis and active transport",
+     "md": "**Osmosis** is the **net movement of water molecules from a dilute solution (high water potential) to a more concentrated solution (low water potential) through a partially permeable membrane**. A plant cell in pure water takes in water and becomes **turgid** (firm, supported by the cell wall); in a strong solution it loses water, becomes **flaccid** and may be **plasmolysed**. An animal cell in pure water **bursts**; in strong solution it **shrinks**. **Active transport** moves substances **against** a concentration gradient and **needs energy from respiration**: root hair cells take up mineral ions this way."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 0.8,
+      "ymin": -15,
+      "ymax": 15,
+      "grid": 0.2,
+      "w": 420,
+      "h": 260,
+      "curves": [],
+      "points": [
+       {
+        "x": 0.0,
+        "y": 12.0,
+        "label": null,
+        "color": "red"
+       },
+       {
+        "x": 0.2,
+        "y": 6.0,
+        "label": null,
+        "color": "red"
+       },
+       {
+        "x": 0.4,
+        "y": 0.0,
+        "label": null,
+        "color": "red"
+       },
+       {
+        "x": 0.6,
+        "y": -6.0,
+        "label": null,
+        "color": "red"
+       },
+       {
+        "x": 0.8,
+        "y": -12.0,
+        "label": null,
+        "color": "red"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 0.0,
+        "y1": 12.0,
+        "x2": 0.2,
+        "y2": 6.0,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 0.2,
+        "y1": 6.0,
+        "x2": 0.4,
+        "y2": 0.0,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 0.4,
+        "y1": 0.0,
+        "x2": 0.6,
+        "y2": -6.0,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 0.6,
+        "y1": -6.0,
+        "x2": 0.8,
+        "y2": -12.0,
+        "color": "blue",
+        "dash": false
+       }
+      ],
+      "xlabel": "sugar (mol/dm³)",
+      "ylabel": "mass change (%)"
+     },
+     "caption": "Percentage change in mass of potato strips in sugar solutions of different concentration.",
+     "alt": "A graph with sugar concentration on the x-axis and percentage change in mass on the y-axis: a falling line from plus 12 percent at zero to minus 12 percent at 0.8 mol per dm cubed, crossing zero at 0.4."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Osmosis is about **water** moving, not the sugar or salt.\n- Water moves from the **dilute** to the **concentrated** solution.\n- Diffusion needs no energy; **active transport** does.\n- The line crosses zero where the solution has the same concentration as the potato cell sap (here 0.4 mol/dm³)."
+    },
+    {
+     "type": "example",
+     "title": "Percentage change in mass",
+     "statement": "A potato strip of mass 5.0 g has a mass of 5.6 g after 30 minutes in pure water. Find the percentage change.",
+     "steps": [
+      "Change = 5.6 − 5.0 = 0.6 g.",
+      "0.6 ÷ 5.0 × 100 = +12 %: it gained water."
+     ],
+     "answer": "+12 %"
+    },
+    {
+     "type": "example",
+     "title": "Find the concentration of the cell sap",
+     "statement": "Using the graph, estimate the concentration of the potato cell sap and explain.",
+     "steps": [
+      "The mass does not change where the line crosses zero, at 0.4 mol/dm³.",
+      "There is no net movement of water, so the solution and the cell sap have equal concentration."
+     ],
+     "answer": "About 0.4 mol/dm³"
+    },
+    {
+     "type": "exercise",
+     "ref": "form3-biology-transport-e01"
+    }
+   ],
+   "chapter": "form3-biology-transport"
+  },
+  {
+   "id": "form3-biology-blood-circulation",
+   "title": "Blood and the circulatory system",
+   "minutes": 30,
+   "programRef": "Form 3 Biology — Diffusion, osmosis, blood and circulation (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe the components of blood and their functions.",
+    "Describe the structure of the heart and the double circulation.",
+    "Compare arteries, veins and capillaries and calculate heart output."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form3-biology-transport-e07",
+    "form3-biology-transport-e08",
+    "form3-biology-transport-e09",
+    "form3-biology-transport-e10",
+    "form3-biology-transport-e11",
+    "form3-biology-transport-e12"
+   ],
+   "selfCheck": [
+    "form3-biology-blood-circulation-q1",
+    "form3-biology-blood-circulation-q2",
+    "form3-biology-blood-circulation-q3",
+    "form3-biology-blood-circulation-q4",
+    "form3-biology-blood-circulation-q5"
+   ],
+   "reviewNotes": [
+    "Heart diagram simplified; stroke volume 70 mL and heart rates are typical textbook values used for calculation only. Health advice conservative and to be reviewed by a health worker.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Blood",
+     "md": "**Red blood cells** carry oxygen as **oxyhaemoglobin**. **White blood cells** defend the body: some **engulf** germs (phagocytes), others make **antibodies** (lymphocytes). **Platelets** help the blood to **clot**. **Plasma** carries digested food, carbon dioxide, urea, hormones and heat. A clot over a wound keeps germs out and stops bleeding."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 218,
+      "items": [
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 70,
+        "w": 95,
+        "h": 45,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 177,
+        "y": 97,
+        "text": "right atrium",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 70,
+        "w": 95,
+        "h": 45,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 277,
+        "y": 97,
+        "text": "left atrium",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 120,
+        "w": 95,
+        "h": 45,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 177,
+        "y": 147,
+        "text": "right ventricle",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 120,
+        "w": 95,
+        "h": 45,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 277,
+        "y": 147,
+        "text": "left ventricle",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 90,
+        "x2": 128,
+        "y2": 90,
+        "color": "blue",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 75,
+        "y": 82,
+        "text": "from body",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 128,
+        "y1": 150,
+        "x2": 70,
+        "y2": 190,
+        "color": "blue",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 68,
+        "y": 205,
+        "text": "to lungs",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 190,
+        "x2": 280,
+        "y2": 168,
+        "color": "red",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 325,
+        "y": 205,
+        "text": "from lungs",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 118,
+        "x2": 395,
+        "y2": 100,
+        "color": "red",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 375,
+        "y": 130,
+        "text": "to body",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 20,
+        "text": "blue: low oxygen   orange: high oxygen",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "The heart in outline: the right side pumps blood to the lungs, the left side to the body.",
+     "alt": "A heart with four chambers: right atrium and right ventricle in blue, left atrium and left ventricle in orange; arrows for blood from the body to the right atrium, from the right ventricle to the lungs, from the lungs to the left atrium and from the left ventricle to the body."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "The heart and double circulation",
+     "md": "The heart is a **muscular pump** with four chambers: two **atria** (receive blood) and two **ventricles** (pump blood out); **valves** stop backflow. The **right side** receives low-oxygen blood from the body (vena cava) and sends it to the **lungs** (pulmonary artery). The **left side** receives oxygenated blood from the lungs and pumps it to the **body** (aorta); its wall is **thicker** because it pumps further. Blood passes through the heart **twice** in each complete circuit: a **double circulation**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Blood vessels",
+     "md": "**Arteries**: carry blood **away** from the heart; thick, muscular, elastic walls for high pressure; a **pulse** can be felt. **Veins**: carry blood **to** the heart; thinner walls, wide space, **valves**. **Capillaries**: tiny, walls one cell thick, where substances are exchanged between blood and cells. A healthy lifestyle (exercise, no smoking, a balanced diet) reduces the risk of heart disease."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Not all arteries carry oxygenated blood: the pulmonary artery carries low-oxygen blood to the lungs.\n- Veins have valves; arteries do not (except at the heart exits).\n- The left of the diagram is the person's right side."
+    },
+    {
+     "type": "example",
+     "title": "Cardiac output",
+     "statement": "The heart pumps 70 mL of blood with each beat and beats 72 times per minute. Find the volume pumped per minute in mL and in litres.",
+     "steps": [
+      "70 × 72 = 5040 mL per minute.",
+      "5040 ÷ 1000 = 5.04 litres per minute."
+     ],
+     "answer": "5040 mL (about 5 litres) per minute"
+    },
+    {
+     "type": "example",
+     "title": "Why is the left ventricle thicker?",
+     "statement": "Explain why the left ventricle has a thicker wall than the right.",
+     "steps": [
+      "The left ventricle pumps blood all round the body, a long way against resistance.",
+      "The right ventricle pumps only to the nearby lungs."
+     ],
+     "answer": "It must produce higher pressure to reach the whole body."
+    },
+    {
+     "type": "exercise",
+     "ref": "form3-biology-transport-e07"
+    }
+   ],
+   "chapter": "form3-biology-transport"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form3-biology-transport-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-biology-diffusion-osmosis",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Diffusion is the net movement of particles from a region of:",
+   "choices": [
+    "large to small",
+    "low to high concentration",
+    "high to low concentration",
+    "cold to hot"
+   ],
+   "answer": 2,
+   "explanation": "Down a concentration gradient.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-biology-transport"
+  },
+  {
+   "id": "form3-biology-transport-e02",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "form3-biology-diffusion-osmosis",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each term with its meaning.",
+   "pairs": [
+    [
+     "osmosis",
+     "movement of water across a partially permeable membrane"
+    ],
+    [
+     "active transport",
+     "movement against a gradient using energy"
+    ],
+    [
+     "turgid",
+     "a plant cell full of water"
+    ],
+    [
+     "plasmolysis",
+     "membrane pulling away from the cell wall"
+    ]
+   ],
+   "explanation": "Standard definitions.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form3-biology-transport"
+  },
+  {
+   "id": "form3-biology-transport-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-biology-diffusion-osmosis",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the surface area to volume ratio of a cube of side 3 cm.",
+   "answer": 2,
+   "tolerance": 0,
+   "explanation": "SA = 54; V = 27; 54 ÷ 27 = 2.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-biology-transport"
+  },
+  {
+   "id": "form3-biology-transport-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form3-biology-diffusion-osmosis",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A potato strip drops from 4.0 g to 3.6 g in strong salt solution. Find the percentage change in mass.",
+   "answer": -10,
+   "tolerance": 0.1,
+   "unit": "%",
+   "explanation": "(3.6 − 4.0) ÷ 4.0 × 100 = −10 %.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form3-biology-transport"
+  },
+  {
+   "id": "form3-biology-transport-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form3-biology-diffusion-osmosis",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain why red blood cells burst if placed in pure water but plant cells do not.",
+   "model": "Water enters by osmosis. An animal cell has no cell wall, so the membrane bursts; a plant cell has a strong cell wall which stops it bursting, so it becomes turgid.",
+   "rubric": [
+    "1 mark: water enters by osmosis",
+    "1 mark: animal cell has no wall / plant cell wall resists"
+   ],
+   "explanation": "Water enters by osmosis. An animal cell has no cell wall, so the membrane bursts; a plant cell has a strong cell wall which stops it bursting, so it becomes turgid.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-biology-transport"
+  },
+  {
+   "id": "form3-biology-transport-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form3-biology-diffusion-osmosis",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Equal strips of potato are placed in sugar solutions of 0.0, 0.2, 0.4, 0.6 and 0.8 mol/dm³. Mass changes: +12 %, +6 %, 0 %, −6 %, −12 %.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "In which solution is there no net movement of water?",
+     "choices": [
+      "0.4 mol/dm³",
+      "0.0 mol/dm³",
+      "0.8 mol/dm³",
+      "0.2 mol/dm³"
+     ],
+     "answer": 0,
+     "explanation": "No change in mass.",
+     "id": "form3-biology-transport-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The strip in 0.8 mol/dm³ became:",
+     "choices": [
+      "harder",
+      "larger",
+      "flaccid",
+      "turgid"
+     ],
+     "answer": 2,
+     "explanation": "It lost water.",
+     "id": "form3-biology-transport-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Name one way to make the results reliable.",
+     "model": "Use several strips for each solution and average the results; dry each strip the same way before weighing; keep the temperature and times the same.",
+     "rubric": [
+      "1 mark for a sensible control or repeat"
+     ],
+     "explanation": "Use several strips for each solution and average the results; dry each strip the same way before weighing; keep the temperature and times the same.",
+     "id": "form3-biology-transport-e06-c"
+    }
+   ],
+   "chapter": "form3-biology-transport"
+  },
+  {
+   "id": "form3-biology-diffusion-osmosis-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-diffusion-osmosis",
+   "prompt": "Water moves in osmosis through a:",
+   "choices": [
+    "metal plate",
+    "waterproof sheet",
+    "solid wall",
+    "partially permeable membrane"
+   ],
+   "answer": 3,
+   "explanation": "Allows water through but not some solutes.",
+   "chapter": "form3-biology-transport"
+  },
+  {
+   "id": "form3-biology-diffusion-osmosis-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-diffusion-osmosis",
+   "prompt": "An animal cell placed in pure water will:",
+   "choices": [
+    "shrink",
+    "swell and may burst",
+    "stay the same",
+    "photosynthesise"
+   ],
+   "answer": 1,
+   "explanation": "No cell wall.",
+   "chapter": "form3-biology-transport"
+  },
+  {
+   "id": "form3-biology-diffusion-osmosis-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-diffusion-osmosis",
+   "prompt": "Which of these is needed for active transport but not for diffusion?",
+   "choices": [
+    "energy from respiration",
+    "a cell wall",
+    "a steep concentration gradient",
+    "light"
+   ],
+   "answer": 0,
+   "explanation": "Moves against the gradient.",
+   "chapter": "form3-biology-transport"
+  },
+  {
+   "id": "form3-biology-diffusion-osmosis-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-diffusion-osmosis",
+   "prompt": "Which increases the rate of diffusion?",
+   "choices": [
+    "a steeper concentration gradient",
+    "a smaller surface area",
+    "a lower temperature",
+    "a thicker membrane"
+   ],
+   "answer": 0,
+   "explanation": "Bigger gradient.",
+   "chapter": "form3-biology-transport"
+  },
+  {
+   "id": "form3-biology-diffusion-osmosis-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-diffusion-osmosis",
+   "prompt": "A turgid plant cell is:",
+   "choices": [
+    "without a wall",
+    "limp and shrunken",
+    "dead",
+    "firm and full of water"
+   ],
+   "answer": 3,
+   "explanation": "It supports the plant.",
+   "chapter": "form3-biology-transport"
+  },
+  {
+   "id": "form3-biology-transport-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-biology-blood-circulation",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which blood cells carry oxygen?",
+   "choices": [
+    "red blood cells",
+    "white blood cells",
+    "plasma",
+    "platelets"
+   ],
+   "answer": 0,
+   "explanation": "They contain haemoglobin.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-biology-transport"
+  },
+  {
+   "id": "form3-biology-transport-e08",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "form3-biology-blood-circulation",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each vessel with a feature.",
+   "pairs": [
+    [
+     "artery",
+     "thick elastic wall, high pressure"
+    ],
+    [
+     "vein",
+     "valves to prevent backflow"
+    ],
+    [
+     "capillary",
+     "wall one cell thick"
+    ],
+    [
+     "aorta",
+     "carries oxygenated blood from the left ventricle"
+    ]
+   ],
+   "explanation": "Standard features.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form3-biology-transport"
+  },
+  {
+   "id": "form3-biology-transport-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "form3-biology-blood-circulation",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The pulmonary artery carries oxygenated blood.",
+   "answer": false,
+   "explanation": "It carries blood from the heart to the lungs, low in oxygen.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-biology-transport"
+  },
+  {
+   "id": "form3-biology-transport-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form3-biology-blood-circulation",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A heart beats 80 times per minute and pumps 60 mL each beat. Find the volume pumped per minute in mL.",
+   "answer": 4800,
+   "tolerance": 0,
+   "unit": "mL",
+   "explanation": "80 × 60 = 4800 mL.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form3-biology-transport"
+  },
+  {
+   "id": "form3-biology-transport-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form3-biology-blood-circulation",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Describe two ways in which a capillary is adapted for exchange of substances.",
+   "model": "Its wall is only one cell thick so the diffusion distance is short; it is very narrow and has a large total surface area close to every cell; it has small gaps in the wall.",
+   "rubric": [
+    "1 mark each, maximum 2"
+   ],
+   "explanation": "Its wall is only one cell thick so the diffusion distance is short; it is very narrow and has a large total surface area close to every cell; it has small gaps in the wall.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-biology-transport"
+  },
+  {
+   "id": "form3-biology-transport-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form3-biology-blood-circulation",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A student counts a pulse of 18 beats in 15 seconds at rest and 33 beats in 15 seconds after running.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Resting pulse rate per minute.",
+     "answer": 72,
+     "tolerance": 0,
+     "explanation": "18 × 4 = 72.",
+     "id": "form3-biology-transport-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Pulse rate after exercise per minute.",
+     "answer": 132,
+     "tolerance": 0,
+     "explanation": "33 × 4 = 132.",
+     "id": "form3-biology-transport-e12-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explain why the pulse rate increases during exercise.",
+     "model": "The muscles need more oxygen and glucose for respiration and carbon dioxide must be removed faster, so the heart beats faster to deliver more blood.",
+     "rubric": [
+      "1 mark: muscles need more oxygen/glucose",
+      "1 mark: heart beats faster to supply it"
+     ],
+     "explanation": "The muscles need more oxygen and glucose for respiration and carbon dioxide must be removed faster, so the heart beats faster to deliver more blood.",
+     "id": "form3-biology-transport-e12-c"
+    }
+   ],
+   "chapter": "form3-biology-transport"
+  },
+  {
+   "id": "form3-biology-blood-circulation-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-blood-circulation",
+   "prompt": "A clot that seals a wound forms with the help of:",
+   "choices": [
+    "limewater",
+    "red blood cells",
+    "platelets",
+    "digestive enzymes"
+   ],
+   "answer": 2,
+   "explanation": "They help seal wounds.",
+   "chapter": "form3-biology-transport"
+  },
+  {
+   "id": "form3-biology-blood-circulation-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-blood-circulation",
+   "prompt": "The purpose of the valves found in veins is to:",
+   "choices": [
+    "prevent backflow of blood",
+    "increase pressure",
+    "carry oxygen",
+    "make blood"
+   ],
+   "answer": 0,
+   "explanation": "Keep blood moving one way.",
+   "chapter": "form3-biology-transport"
+  },
+  {
+   "id": "form3-biology-blood-circulation-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-blood-circulation",
+   "prompt": "Which chamber pumps blood to the whole body?",
+   "choices": [
+    "right ventricle",
+    "right atrium",
+    "left atrium",
+    "left ventricle"
+   ],
+   "answer": 3,
+   "explanation": "Thick muscular wall.",
+   "chapter": "form3-biology-transport"
+  },
+  {
+   "id": "form3-biology-blood-circulation-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-blood-circulation",
+   "prompt": "Substances are exchanged between blood and body cells in the:",
+   "choices": [
+    "capillaries",
+    "arteries",
+    "valves",
+    "veins"
+   ],
+   "answer": 0,
+   "explanation": "Thin walls.",
+   "chapter": "form3-biology-transport"
+  },
+  {
+   "id": "form3-biology-blood-circulation-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-biology-blood-circulation",
+   "prompt": "Plasma is the:",
+   "choices": [
+    "clot",
+    "red part of the blood",
+    "liquid part of the blood",
+    "valve of the heart"
+   ],
+   "answer": 2,
+   "explanation": "Carries dissolved substances.",
+   "chapter": "form3-biology-transport"
+  }
+ ]
+}

@@ -1,0 +1,950 @@
+{
+ "chapter": "gceal-physics-ch-electric",
+ "lessons": [
+  {
+   "id": "gceal-physics-efield",
+   "title": "Electric fields and potential",
+   "minutes": 35,
+   "programRef": "GCE Advanced Level Physics — electric fields and capacitors (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Use Coulomb's law and define electric field strength E = F/q and electric potential V",
+    "Use E = V/d for a uniform field and the potential V = Q/(4πε₀r) of a point charge",
+    "Analyse the motion of a charged particle accelerated or deflected in an electric field"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-physics-ch-electric-e01",
+    "gceal-physics-ch-electric-e02",
+    "gceal-physics-ch-electric-e03",
+    "gceal-physics-ch-electric-e04",
+    "gceal-physics-ch-electric-e05",
+    "gceal-physics-ch-electric-e06"
+   ],
+   "selfCheck": [
+    "gceal-physics-efield-q1",
+    "gceal-physics-efield-q2",
+    "gceal-physics-efield-q3",
+    "gceal-physics-efield-q4",
+    "gceal-physics-efield-q5"
+   ],
+   "reviewNotes": [
+    "Constants used: e = 1.60 × 10⁻¹⁹ C; h = 6.63 × 10⁻³⁴ J s; c = 3.00 × 10⁸ m/s; mₑ = 9.11 × 10⁻³¹ kg; ε₀ = 8.85 × 10⁻¹² F/m; μ₀ = 4π × 10⁻⁷ H/m.",
+    "Whether the syllabus requires gravitational–electric analogies and E = −dV/dx is unclear.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Field and potential",
+     "md": "**Coulomb's law**: F = Q₁Q₂/(4πε₀r²) for two point charges (1/4πε₀ = 8.99 × 10⁹ N m² C⁻² using ε₀ = 8.85 × 10⁻¹² F m⁻¹); like charges repel, unlike attract.\n\n**Electric field strength** E = F/q (N C⁻¹ = V m⁻¹), the force per unit positive charge; for a point charge **E = Q/(4πε₀r²)**. **Potential** V = work per unit positive charge brought from infinity: **V = Q/(4πε₀r)** (J C⁻¹ = V)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Uniform field and moving charges",
+     "md": "Between parallel plates separated by d with pd V: **E = V/d** (uniform). A charge q accelerated through a pd V gains kinetic energy **½mv² = qV**.\n\nIn the field the force is F = qE and a = qE/m: a charge entering at right angles to the field follows a **parabola** (like a projectile: constant velocity along the plates, constant acceleration across them).",
+     "tex": "E=\\frac{Q}{4\\pi\\varepsilon_0 r^{2}}\\qquad V=\\frac{Q}{4\\pi\\varepsilon_0 r}\\qquad E=\\frac{V}{d}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 230,
+      "items": [
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 40,
+        "w": 240,
+        "h": 8,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 170,
+        "w": 240,
+        "h": 8,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 48,
+        "text": "+",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 182,
+        "text": "−",
+        "size": 20,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 110,
+        "text": "E = V / d",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 100,
+        "y1": 52,
+        "x2": 100,
+        "y2": 164,
+        "color": "grey",
+        "width": 1,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 160,
+        "y1": 52,
+        "x2": 160,
+        "y2": 164,
+        "color": "grey",
+        "width": 1,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 220,
+        "y1": 52,
+        "x2": 220,
+        "y2": 164,
+        "color": "grey",
+        "width": 1,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 270,
+        "y1": 52,
+        "x2": 270,
+        "y2": 164,
+        "color": "grey",
+        "width": 1,
+        "arrow": "end"
+       },
+       {
+        "t": "path",
+        "d": "M 70 110 Q 180 110 285 70",
+        "stroke": "red",
+        "width": 3
+       },
+       {
+        "t": "circle",
+        "cx": 70,
+        "cy": 110,
+        "r": 6,
+        "stroke": "red",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 78,
+        "y": 134,
+        "text": "electron",
+        "size": 12,
+        "anchor": "start",
+        "color": "red"
+       },
+       {
+        "t": "line",
+        "x1": 330,
+        "y1": 48,
+        "x2": 330,
+        "y2": 170,
+        "color": "purple",
+        "width": 1,
+        "arrow": "both"
+       },
+       {
+        "t": "text",
+        "x": 342,
+        "y": 150,
+        "text": "d",
+        "size": 13,
+        "anchor": "start",
+        "color": "purple"
+       }
+      ]
+     },
+     "caption": "Uniform field between parallel plates; an electron entering horizontally follows a parabola towards the positive plate.",
+     "alt": "Two horizontal charged plates with vertical field lines and a red curved path of an electron bending toward the positive plate."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Field lines and equipotentials",
+     "md": "Field lines show the direction of the force on a positive charge: from + to −, closer together where the field is stronger, and they cross equipotentials at right angles. Field strength is minus the potential gradient: **E = −dV/dx**. No work is done moving a charge along an equipotential."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Treating E as a scalar: it is a vector (add fields from several charges as vectors); V is a scalar (add with signs).\n- Using r as the distance in cm: use metres.\n- Forgetting that the force on an electron is opposite to the field direction.\n- Gravity is usually negligible for electrons and ions: do not include it."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Electron gun",
+     "statement": "An electron is accelerated from rest through a pd of 2.0 kV. Find its final speed (e = 1.60 × 10⁻¹⁹ C, mₑ = 9.11 × 10⁻³¹ kg).",
+     "steps": [
+      "Energy gained: ½mv² = eV = 1.60 × 10⁻¹⁹ × 2000 = 3.2 × 10⁻¹⁶ J.",
+      "v = √(2eV/m) = √(2 × 3.2 × 10⁻¹⁶ ÷ 9.11 × 10⁻³¹) = 2.65 × 10⁷ m/s (about 9 % of c: relativistic effects are small)."
+     ],
+     "answer": "v = 2.65 × 10⁷ m/s"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Point charge and plates",
+     "statement": "(a) Find E and V at 0.10 m from a point charge of 2.0 nC. (b) Find E between plates 4.0 cm apart with 800 V across them, and the force on an electron there.",
+     "steps": [
+      "(a) E = 8.99 × 10⁹ × 2.0 × 10⁻⁹ ÷ 0.10² = 1.8 × 10³ V/m; V = 8.99 × 10⁹ × 2.0 × 10⁻⁹ ÷ 0.10 = 1.8 × 10² V.",
+      "(b) E = V/d = 800/0.040 = 2.0 × 10⁴ V/m.",
+      "F = eE = 1.60 × 10⁻¹⁹ × 2.0 × 10⁴ = 3.2 × 10⁻¹⁵ N (weight of the electron is only 9 × 10⁻³⁰ N)."
+     ],
+     "answer": "(a) 1.8 × 10³ V/m and 180 V; (b) 2.0 × 10⁴ V/m, 3.2 × 10⁻¹⁵ N"
+    }
+   ],
+   "chapter": "gceal-physics-ch-electric"
+  },
+  {
+   "id": "gceal-physics-capacitors",
+   "title": "Capacitors and the RC circuit",
+   "minutes": 35,
+   "programRef": "GCE Advanced Level Physics — electric fields and capacitors (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define capacitance and use C = Q/V, the parallel-plate formula and the energy stored W = ½CV²",
+    "Combine capacitors in series and parallel",
+    "Analyse the charging and discharging of a capacitor through a resistor using the time constant RC"
+   ],
+   "prerequisites": [
+    "gceal-physics-efield"
+   ],
+   "exercises": [
+    "gceal-physics-ch-electric-e07",
+    "gceal-physics-ch-electric-e08",
+    "gceal-physics-ch-electric-e09",
+    "gceal-physics-ch-electric-e10",
+    "gceal-physics-ch-electric-e11",
+    "gceal-physics-ch-electric-e12"
+   ],
+   "selfCheck": [
+    "gceal-physics-capacitors-q1",
+    "gceal-physics-capacitors-q2",
+    "gceal-physics-capacitors-q3",
+    "gceal-physics-capacitors-q4",
+    "gceal-physics-capacitors-q5"
+   ],
+   "reviewNotes": [
+    "Constants used: e = 1.60 × 10⁻¹⁹ C; h = 6.63 × 10⁻³⁴ J s; c = 3.00 × 10⁸ m/s; mₑ = 9.11 × 10⁻³¹ kg; ε₀ = 8.85 × 10⁻¹² F/m; μ₀ = 4π × 10⁻⁷ H/m.",
+    "The charging formula and half-time t½ = 0.693RC are stated without proof; whether the board requires the derivation by integration is unknown.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Capacitance and energy",
+     "md": "A **capacitor** stores charge. **Capacitance C = Q/V** (farad, F = C V⁻¹). For two parallel plates of area A separated by d in air: **C = ε₀A/d** (ε₀ = 8.85 × 10⁻¹² F m⁻¹); a dielectric of relative permittivity ε_r multiplies C by ε_r.\n\nThe energy stored is the area under the V–Q graph: **W = ½QV = ½CV² = Q²/2C**."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Combinations and the RC circuit",
+     "md": "Parallel: **C = C₁ + C₂ + …** (same V). Series: **1/C = 1/C₁ + 1/C₂ + …** (same Q).\n\nDischarge through a resistor R: **Q = Q₀e^(−t/RC)**, and V and I decay in the same way. The **time constant τ = RC** (seconds) is the time for Q to fall to 1/e ≈ 37 % of Q₀. Time to fall to half: t½ = 0.693 RC. Charging: Q = Q₀(1 − e^(−t/RC)).",
+     "tex": "C=\\frac{Q}{V}\\quad W=\\frac{1}{2}CV^{2}\\quad Q=Q_0e^{-t/RC}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 15,
+      "ymin": 0,
+      "ymax": 10,
+      "grid": 5,
+      "w": 380,
+      "h": 250,
+      "curves": [
+       {
+        "expr": "9*exp(-x/4.7)",
+        "color": "blue",
+        "label": "V"
+       }
+      ],
+      "points": [
+       {
+        "x": 4.7,
+        "y": 3.310914970542981,
+        "label": "τ = RC",
+        "color": "red"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 4.7,
+        "y1": 0,
+        "x2": 4.7,
+        "y2": 3.310914970542981,
+        "color": "red",
+        "dash": true
+       }
+      ],
+      "xlabel": "t / s",
+      "ylabel": "V / V"
+     },
+     "caption": "Discharge of a capacitor: V = V₀e^(−t/RC) with τ = RC = 4.7 s; at t = τ the pd has fallen to 1/e of its initial value.",
+     "alt": "An exponentially decaying curve starting at 9 volts and falling to about 3.3 volts at 4.7 seconds."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Method for RC problems",
+     "md": "1. Compute τ = RC with R in ohms and C in farads (μF = 10⁻⁶ F).\n2. Use V = V₀e^(−t/τ) for discharge; to find a time, take natural logs: t = τ ln(V₀/V).\n3. A graph of ln V against t is a straight line with gradient −1/RC.\n4. The initial current is I₀ = V₀/R."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Forgetting the units: μF must be converted to farads before multiplying by ohms.\n- Using the series formula for parallel capacitors (and vice versa).\n- Saying current flows through the dielectric: charge flows round the circuit and the plates charge up.\n- Using a calculator in degree mode with exponentials (not needed) or confusing ln and log."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Charge and energy",
+     "statement": "A 100 μF capacitor is charged to 12 V. Find the charge and the energy stored.",
+     "steps": [
+      "Q = CV = 100 × 10⁻⁶ × 12 = 1.2 × 10⁻³ C.",
+      "W = ½CV² = ½ × 100 × 10⁻⁶ × 144 = 7.2 × 10⁻³ J (7.2 mJ)."
+     ],
+     "answer": "Q = 1.2 mC; W = 7.2 mJ"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Discharge",
+     "statement": "A 470 μF capacitor charged to 9.0 V discharges through a 10 kΩ resistor. Find the time constant, the pd after 10 s, and the time for the pd to fall to 3.0 V.",
+     "steps": [
+      "τ = RC = 10 × 10³ × 470 × 10⁻⁶ = 4.7 s.",
+      "V = 9.0e^(−10/4.7) = 9.0 × 0.119 = 1.07 V.",
+      "3.0 = 9.0e^(−t/4.7) gives t = 4.7 ln 3 = 4.7 × 1.099 = 5.2 s."
+     ],
+     "answer": "τ = 4.7 s; V(10 s) = 1.07 V; t = 5.2 s"
+    }
+   ],
+   "chapter": "gceal-physics-ch-electric"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceal-physics-ch-electric-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-physics-efield",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Find the force between charges 3.0 μC and 5.0 μC separated by 0.30 m in air (N, 2 s.f.).",
+   "answer": 1.5,
+   "tolerance": 0.03,
+   "unit": "N",
+   "explanation": "F = 8.99 × 10⁹ × 3.0 × 10⁻⁶ × 5.0 × 10⁻⁶ ÷ 0.30² = 1.5 N.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-physics-ch-electric"
+  },
+  {
+   "id": "gceal-physics-ch-electric-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-physics-efield",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Two plates 2.0 cm apart have a pd of 500 V. Find the field strength (V/m).",
+   "answer": 25000.0,
+   "tolerance": 50,
+   "unit": "V/m",
+   "explanation": "E = V/d = 500/0.020 = 2.5 × 10⁴ V/m.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-physics-ch-electric"
+  },
+  {
+   "id": "gceal-physics-ch-electric-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-physics-efield",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "True or false: the electric potential is a vector quantity.",
+   "answer": false,
+   "explanation": "Potential is a scalar (energy per unit charge); field strength is the vector.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-physics-ch-electric"
+  },
+  {
+   "id": "gceal-physics-ch-electric-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-physics-efield",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A proton (m = 1.67 × 10⁻²⁷ kg) is accelerated from rest through 1000 V. Find its speed (10⁵ m/s, 3 s.f.).",
+   "answer": 4.38,
+   "tolerance": 0.03,
+   "unit": "× 10⁵ m/s",
+   "explanation": "v = √(2eV/m) = √(2 × 1.60 × 10⁻¹⁹ × 1000 ÷ 1.67 × 10⁻²⁷) = 4.38 × 10⁵ m/s.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-physics-ch-electric"
+  },
+  {
+   "id": "gceal-physics-ch-electric-e05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-physics-efield",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "The distance from a point charge is doubled. The field strength becomes",
+   "choices": [
+    "one eighth",
+    "double",
+    "one quarter",
+    "half"
+   ],
+   "answer": 2,
+   "explanation": "E ∝ 1/r², so (1/2)² = 1/4.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-physics-ch-electric"
+  },
+  {
+   "id": "gceal-physics-ch-electric-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-physics-efield",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "An electron enters midway between two horizontal plates, 5.0 cm long and 2.0 cm apart, at 2.0 × 10⁷ m/s parallel to the plates. The pd between the plates is 300 V. (e = 1.60 × 10⁻¹⁹ C, mₑ = 9.11 × 10⁻³¹ kg; ignore gravity.)",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Field strength between the plates (10⁴ V/m).",
+     "answer": 1.5,
+     "tolerance": 0.01,
+     "explanation": "E = V/d = 300/0.020 = 1.5 × 10⁴ V/m.",
+     "unit": "× 10⁴ V/m",
+     "id": "gceal-physics-ch-electric-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Acceleration of the electron (10¹⁵ m/s², 3 s.f.).",
+     "answer": 2.63,
+     "tolerance": 0.02,
+     "explanation": "a = eE/m = 1.60 × 10⁻¹⁹ × 1.5 × 10⁴ ÷ 9.11 × 10⁻³¹ = 2.63 × 10¹⁵ m/s².",
+     "unit": "× 10¹⁵ m/s²",
+     "id": "gceal-physics-ch-electric-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Time between the plates (ns).",
+     "answer": 2.5,
+     "tolerance": 0.01,
+     "explanation": "t = L/v = 0.050/2.0 × 10⁷ = 2.5 × 10⁻⁹ s = 2.5 ns.",
+     "unit": "ns",
+     "id": "gceal-physics-ch-electric-e06-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Deflection on leaving the plates (mm, 2 s.f.).",
+     "answer": 8.2,
+     "tolerance": 0.2,
+     "explanation": "y = ½at² = 0.5 × 2.63 × 10¹⁵ × (2.5 × 10⁻⁹)² = 8.2 × 10⁻³ m = 8.2 mm (less than 10 mm, so it does not hit a plate).",
+     "unit": "mm",
+     "id": "gceal-physics-ch-electric-e06-d"
+    }
+   ],
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 230,
+    "items": [
+     {
+      "t": "rect",
+      "x": 60,
+      "y": 40,
+      "w": 240,
+      "h": 8,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightorange"
+     },
+     {
+      "t": "rect",
+      "x": 60,
+      "y": 170,
+      "w": 240,
+      "h": 8,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightblue"
+     },
+     {
+      "t": "text",
+      "x": 40,
+      "y": 48,
+      "text": "+",
+      "size": 18,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 40,
+      "y": 182,
+      "text": "−",
+      "size": 20,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 330,
+      "y": 110,
+      "text": "E = V / d",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "line",
+      "x1": 100,
+      "y1": 52,
+      "x2": 100,
+      "y2": 164,
+      "color": "grey",
+      "width": 1,
+      "arrow": "end"
+     },
+     {
+      "t": "line",
+      "x1": 160,
+      "y1": 52,
+      "x2": 160,
+      "y2": 164,
+      "color": "grey",
+      "width": 1,
+      "arrow": "end"
+     },
+     {
+      "t": "line",
+      "x1": 220,
+      "y1": 52,
+      "x2": 220,
+      "y2": 164,
+      "color": "grey",
+      "width": 1,
+      "arrow": "end"
+     },
+     {
+      "t": "line",
+      "x1": 270,
+      "y1": 52,
+      "x2": 270,
+      "y2": 164,
+      "color": "grey",
+      "width": 1,
+      "arrow": "end"
+     },
+     {
+      "t": "path",
+      "d": "M 70 110 Q 180 110 285 70",
+      "stroke": "red",
+      "width": 3
+     },
+     {
+      "t": "circle",
+      "cx": 70,
+      "cy": 110,
+      "r": 6,
+      "stroke": "red",
+      "width": 2,
+      "fill": "red"
+     },
+     {
+      "t": "text",
+      "x": 78,
+      "y": 134,
+      "text": "electron",
+      "size": 12,
+      "anchor": "start",
+      "color": "red"
+     },
+     {
+      "t": "line",
+      "x1": 330,
+      "y1": 48,
+      "x2": 330,
+      "y2": 170,
+      "color": "purple",
+      "width": 1,
+      "arrow": "both"
+     },
+     {
+      "t": "text",
+      "x": 342,
+      "y": 150,
+      "text": "d",
+      "size": 13,
+      "anchor": "start",
+      "color": "purple"
+     }
+    ]
+   },
+   "chapter": "gceal-physics-ch-electric"
+  },
+  {
+   "id": "gceal-physics-efield-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-efield",
+   "prompt": "The SI unit of electric field strength can be written as",
+   "choices": [
+    "N C",
+    "V m⁻¹",
+    "V m",
+    "J C"
+   ],
+   "answer": 1,
+   "explanation": "E = V/d, equal to N C⁻¹.",
+   "chapter": "gceal-physics-ch-electric"
+  },
+  {
+   "id": "gceal-physics-efield-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-efield",
+   "prompt": "An electron moves in a uniform field directed upward. The force on it is",
+   "choices": [
+    "sideways",
+    "zero",
+    "downward",
+    "upward"
+   ],
+   "answer": 2,
+   "explanation": "The electron is negative: force opposite to E.",
+   "chapter": "gceal-physics-ch-electric"
+  },
+  {
+   "id": "gceal-physics-efield-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-efield",
+   "prompt": "Work done moving a charge along an equipotential surface is",
+   "choices": [
+    "negative",
+    "maximum",
+    "equal to qE",
+    "zero"
+   ],
+   "answer": 3,
+   "explanation": "There is no potential difference along an equipotential.",
+   "chapter": "gceal-physics-ch-electric"
+  },
+  {
+   "id": "gceal-physics-efield-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-efield",
+   "prompt": "An α-particle (charge +2e) is accelerated through 1.0 kV. Its kinetic energy is",
+   "choices": [
+    "2.0 keV",
+    "4.0 keV",
+    "1.0 keV",
+    "0.5 keV"
+   ],
+   "answer": 0,
+   "explanation": "KE = qV = 2e × 1000 V = 2000 eV.",
+   "chapter": "gceal-physics-ch-electric"
+  },
+  {
+   "id": "gceal-physics-efield-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-efield",
+   "prompt": "Field lines are closest together where",
+   "choices": [
+    "the field is strongest",
+    "the potential is zero",
+    "the field is zero",
+    "the charge is smallest"
+   ],
+   "answer": 0,
+   "explanation": "Density of lines represents the field strength.",
+   "chapter": "gceal-physics-ch-electric"
+  },
+  {
+   "id": "gceal-physics-ch-electric-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-physics-capacitors",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Find the charge on a 220 μF capacitor charged to 6.0 V (mC).",
+   "answer": 1.32,
+   "tolerance": 0.005,
+   "unit": "mC",
+   "explanation": "Q = CV = 220 × 10⁻⁶ × 6.0 = 1.32 × 10⁻³ C = 1.32 mC.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-physics-ch-electric"
+  },
+  {
+   "id": "gceal-physics-ch-electric-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-physics-capacitors",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Find the combined capacitance of 2.0 μF and 3.0 μF in series (μF).",
+   "answer": 1.2000000000000002,
+   "tolerance": 0.005,
+   "unit": "μF",
+   "explanation": "1/C = 1/2.0 + 1/3.0 = 5/6, so C = 1.2 μF.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-physics-ch-electric"
+  },
+  {
+   "id": "gceal-physics-ch-electric-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-physics-capacitors",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "True or false: capacitors in parallel have a total capacitance equal to the sum of the capacitances.",
+   "answer": true,
+   "explanation": "The plates areas effectively add: C = C₁ + C₂.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-physics-ch-electric"
+  },
+  {
+   "id": "gceal-physics-ch-electric-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-physics-capacitors",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A parallel-plate capacitor in air has plates of area 1.0 × 10⁻² m² separated by 1.0 mm. Find C (pF, 3 s.f.; ε₀ = 8.85 × 10⁻¹² F/m).",
+   "answer": 88.5,
+   "tolerance": 0.2,
+   "unit": "pF",
+   "explanation": "C = ε₀A/d = 8.85 × 10⁻¹² × 1.0 × 10⁻² ÷ 1.0 × 10⁻³ = 8.85 × 10⁻¹¹ F = 88.5 pF.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-physics-ch-electric"
+  },
+  {
+   "id": "gceal-physics-ch-electric-e11",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-physics-capacitors",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A capacitor discharges through a resistor with time constant 2.0 s. What fraction of the initial charge remains after 4.0 s (3 s.f.)?",
+   "answer": 0.135,
+   "tolerance": 0.002,
+   "explanation": "Q/Q₀ = e^(−t/τ) = e^(−2) = 0.135.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-physics-ch-electric"
+  },
+  {
+   "id": "gceal-physics-ch-electric-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-physics-capacitors",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "The flash of a camera uses a 1000 μF capacitor charged to 300 V. It discharges in about 2.0 ms.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Charge stored (C).",
+     "answer": 0.3,
+     "tolerance": 0.001,
+     "explanation": "Q = CV = 1000 × 10⁻⁶ × 300 = 0.30 C.",
+     "unit": "C",
+     "id": "gceal-physics-ch-electric-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Energy stored (J).",
+     "answer": 45.0,
+     "tolerance": 0.1,
+     "explanation": "W = ½CV² = ½ × 1000 × 10⁻⁶ × 300² = 45 J.",
+     "unit": "J",
+     "id": "gceal-physics-ch-electric-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Average power during the flash (kW).",
+     "answer": 22.5,
+     "tolerance": 0.05,
+     "explanation": "P = W/t = 45/0.0020 = 22 500 W = 22.5 kW.",
+     "unit": "kW",
+     "id": "gceal-physics-ch-electric-e12-c"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The capacitor is a good power source for a flash because it",
+     "choices": [
+      "can release its energy in a very short time",
+      "has no resistance",
+      "stores more energy than a battery",
+      "creates energy"
+     ],
+     "answer": 0,
+     "explanation": "A battery stores far more energy but releases it slowly; a capacitor can discharge quickly.",
+     "id": "gceal-physics-ch-electric-e12-d"
+    }
+   ],
+   "chapter": "gceal-physics-ch-electric"
+  },
+  {
+   "id": "gceal-physics-capacitors-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-capacitors",
+   "prompt": "The unit farad is equal to",
+   "choices": [
+    "V C⁻¹",
+    "C V⁻¹",
+    "A s V",
+    "J C"
+   ],
+   "answer": 1,
+   "explanation": "C = Q/V.",
+   "chapter": "gceal-physics-ch-electric"
+  },
+  {
+   "id": "gceal-physics-capacitors-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-capacitors",
+   "prompt": "The time constant of a circuit with R = 20 kΩ and C = 50 μF is",
+   "choices": [
+    "10 s",
+    "0.1 s",
+    "1000 s",
+    "1.0 s"
+   ],
+   "answer": 3,
+   "explanation": "RC = 20 000 × 50 × 10⁻⁶ = 1.0 s.",
+   "chapter": "gceal-physics-ch-electric"
+  },
+  {
+   "id": "gceal-physics-capacitors-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-capacitors",
+   "prompt": "If the charge on a capacitor is doubled, the stored energy (same C) is",
+   "choices": [
+    "doubled",
+    "halved",
+    "quadrupled",
+    "unchanged"
+   ],
+   "answer": 2,
+   "explanation": "W = Q²/2C.",
+   "chapter": "gceal-physics-ch-electric"
+  },
+  {
+   "id": "gceal-physics-capacitors-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-capacitors",
+   "prompt": "A graph of ln V against t for a discharging capacitor has gradient",
+   "choices": [
+    "−1/RC",
+    "+RC",
+    "−RC",
+    "−V₀"
+   ],
+   "answer": 0,
+   "explanation": "ln V = ln V₀ − t/RC.",
+   "chapter": "gceal-physics-ch-electric"
+  },
+  {
+   "id": "gceal-physics-capacitors-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-capacitors",
+   "prompt": "Two capacitors C and C in series have total capacitance",
+   "choices": [
+    "C",
+    "C²",
+    "C/2",
+    "2C"
+   ],
+   "answer": 2,
+   "explanation": "1/C_total = 2/C.",
+   "chapter": "gceal-physics-ch-electric"
+  },
+  {
+   "id": "gceal-physics-ch-electric-m01",
+   "kind": "mcq",
+   "tier": "examen",
+   "lesson": "gceal-physics-capacitors",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A 220 μF capacitor is charged to 9.0 V. The energy stored is",
+   "choices": [
+    "2.0 mJ",
+    "1.98 mJ",
+    "8.9 mJ",
+    "17.8 mJ"
+   ],
+   "answer": 2,
+   "explanation": "W = ½CV² = ½ × 220 × 10⁻⁶ × 81 = 8.9 × 10⁻³ J.",
+   "difficulty": 3,
+   "points": 2,
+   "chapter": "gceal-physics-ch-electric"
+  }
+ ]
+}

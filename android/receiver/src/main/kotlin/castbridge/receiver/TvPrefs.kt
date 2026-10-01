@@ -21,11 +21,14 @@ class TvPrefs(ctx: Context) {
         evictPlayed = getBool("evict_played", false),
         target = getString("storage_target", "auto") ?: "auto",
         minFreeAfterTransfer = getLong("min_free_after", 1L shl 30),
+        heavyOnUsb = getBool("heavy_on_usb", true),
+        heavyDriveId = getString("heavy_drive", "") ?: "",
     )
 
     fun saveProfile(p: TvProfile) {
         putLong("quota_bytes", p.quotaBytes); putBool("delete_after_play", p.deleteAfterPlay); putBool("evict_played", p.evictPlayed)
         putString("storage_target", p.target); putLong("min_free_after", p.minFreeAfterTransfer)
+        putBool("heavy_on_usb", p.heavyOnUsb); putString("heavy_drive", p.heavyDriveId)
     }
 
     fun getString(key: String, def: String? = null): String? = sp.getString(key, def)

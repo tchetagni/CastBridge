@@ -1,0 +1,2637 @@
+{
+ "chapter": "class1-maths-add-sub",
+ "lessons": [
+  {
+   "id": "class1-maths-add-to-10",
+   "title": "Adding up to 10",
+   "minutes": 12,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level I (Class 1) — Mathematics; to be checked against the official texts",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Add two small numbers.",
+    "Use pictures and fingers to add."
+   ],
+   "prerequisites": [
+    "class1-maths-counting-1-10"
+   ],
+   "exercises": [
+    "class1-maths-add-sub-e01",
+    "class1-maths-add-sub-e02",
+    "class1-maths-add-sub-e03",
+    "class1-maths-add-sub-e04",
+    "class1-maths-add-sub-e05",
+    "class1-maths-add-sub-e06"
+   ],
+   "selfCheck": [
+    "class1-maths-add-to-10-q1",
+    "class1-maths-add-to-10-q2",
+    "class1-maths-add-to-10-q3",
+    "class1-maths-add-to-10-q4",
+    "class1-maths-add-to-10-q5"
+   ],
+   "reviewNotes": [
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Adding",
+     "md": "To **add** means to put together. 3 and 2 make 5. We write 3 + 2 = 5. The sign + means plus. The sign = means the same as."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 340,
+      "h": 130,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 20,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 42,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 64,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 86,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 52,
+        "text": "+",
+        "size": 30,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 190,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 212,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 234,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       }
+      ]
+     },
+     "caption": "4 and 3 more make 7.",
+     "alt": "Four orange circles, a plus sign and three blue circles."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Count on",
+     "md": "Start with the bigger number. Count on the smaller number. For 6 + 2: say six, then seven, eight. The answer is 8."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Do not count the first number again.\n- Adding makes a bigger number.\n- 0 added to a number does not change it."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "3 + 2 = ?",
+     "steps": [
+      "Draw 3 balls and 2 more balls.",
+      "Count all: 5."
+     ],
+     "answer": "5",
+     "figure": {
+      "kind": "shapes",
+      "w": 340,
+      "h": 130,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 20,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 42,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 64,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 52,
+        "text": "+",
+        "size": 30,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 190,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 212,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "6 + 3 = ?",
+     "steps": [
+      "Start at 6.",
+      "Count on 3: seven, eight, nine. The answer is 9."
+     ],
+     "answer": "9",
+     "figure": {
+      "kind": "shapes",
+      "w": 340,
+      "h": 130,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 20,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 42,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 64,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 86,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 108,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 20,
+        "cy": 64,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 52,
+        "text": "+",
+        "size": 30,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 190,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 212,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 234,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       }
+      ]
+     }
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-sub-to-10",
+   "title": "Taking away up to 10",
+   "minutes": 12,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level I (Class 1) — Mathematics; to be checked against the official texts",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Take away from a small number.",
+    "Use pictures to take away."
+   ],
+   "prerequisites": [
+    "class1-maths-add-to-10"
+   ],
+   "exercises": [
+    "class1-maths-add-sub-e07",
+    "class1-maths-add-sub-e08",
+    "class1-maths-add-sub-e09",
+    "class1-maths-add-sub-e10",
+    "class1-maths-add-sub-e11",
+    "class1-maths-add-sub-e12"
+   ],
+   "selfCheck": [
+    "class1-maths-sub-to-10-q1",
+    "class1-maths-sub-to-10-q2",
+    "class1-maths-sub-to-10-q3",
+    "class1-maths-sub-to-10-q4",
+    "class1-maths-sub-to-10-q5"
+   ],
+   "reviewNotes": [
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Taking away",
+     "md": "To **take away** is to make less. 5 take away 2 is 3. We write 5 − 2 = 3. The sign − means minus."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "count",
+      "n": 5,
+      "shape": "star",
+      "color": "yellow",
+      "perRow": 5,
+      "w": 300,
+      "h": 79
+     },
+     "caption": "5 stars. If you take away 2 stars, 3 stars are left.",
+     "alt": "Five yellow stars in a row."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Count back",
+     "md": "Start at the big number. Count back the small number. For 7 − 2: say seven, then six, five. The answer is 5."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Taking away makes a smaller number.\n- Do not count the number you start at.\n- 4 − 0 is still 4."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "6 − 2 = ?",
+     "steps": [
+      "There are 6 balls. Take away 2.",
+      "Four balls are left."
+     ],
+     "answer": "4",
+     "figure": {
+      "kind": "count",
+      "n": 6,
+      "shape": "circle",
+      "color": "orange",
+      "perRow": 6,
+      "w": 300,
+      "h": 79
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "9 − 4 = ?",
+     "steps": [
+      "Start at 9.",
+      "Count back 4: eight, seven, six, five. The answer is 5."
+     ],
+     "answer": "5"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-to-20",
+   "title": "Adding up to 20",
+   "minutes": 12,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level I (Class 1) — Mathematics; to be checked against the official texts",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Add numbers with answers up to 20.",
+    "Make ten first."
+   ],
+   "prerequisites": [
+    "class1-maths-add-to-10"
+   ],
+   "exercises": [
+    "class1-maths-add-sub-e13",
+    "class1-maths-add-sub-e14",
+    "class1-maths-add-sub-e15",
+    "class1-maths-add-sub-e16",
+    "class1-maths-add-sub-e17",
+    "class1-maths-add-sub-e18"
+   ],
+   "selfCheck": [
+    "class1-maths-add-to-20-q1",
+    "class1-maths-add-to-20-q2",
+    "class1-maths-add-to-20-q3",
+    "class1-maths-add-to-20-q4",
+    "class1-maths-add-to-20-q5"
+   ],
+   "reviewNotes": [
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Make ten",
+     "md": "To add 8 + 5, first make 10. 8 needs 2 more to be 10. Take 2 from the 5. Then 10 + 3 = 13."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 340,
+      "h": 130,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 20,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 42,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 64,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 86,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 108,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 20,
+        "cy": 64,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 42,
+        "cy": 64,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 64,
+        "cy": 64,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 52,
+        "text": "+",
+        "size": 30,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 190,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 212,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 234,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 256,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 278,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       }
+      ]
+     },
+     "caption": "8 and 5 make 13.",
+     "alt": "Eight orange circles, a plus sign and five blue circles."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Steps",
+     "md": "1. Look at the big number. 2. How many make it 10? 3. Take that from the other number. 4. Add what is left to ten."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Count carefully when you go past 10.\n- 9 + 4 is 13, not 12.\n- Check with fingers or small stones."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "9 + 4 = ?",
+     "steps": [
+      "9 needs 1 more to make 10.",
+      "Take 1 from 4. 10 + 3 = 13."
+     ],
+     "answer": "13",
+     "figure": {
+      "kind": "shapes",
+      "w": 340,
+      "h": 130,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 20,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 42,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 64,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 86,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 108,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 20,
+        "cy": 64,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 42,
+        "cy": 64,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 64,
+        "cy": 64,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 86,
+        "cy": 64,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 52,
+        "text": "+",
+        "size": 30,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 190,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 212,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 234,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 256,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "7 + 6 = ?",
+     "steps": [
+      "7 needs 3 more to make 10.",
+      "Take 3 from 6. 10 + 3 = 13."
+     ],
+     "answer": "13",
+     "figure": {
+      "kind": "shapes",
+      "w": 340,
+      "h": 130,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 20,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 42,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 64,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 86,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 108,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 20,
+        "cy": 64,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 42,
+        "cy": 64,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 52,
+        "text": "+",
+        "size": 30,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 190,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 212,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 234,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 256,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 278,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 190,
+        "cy": 64,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       }
+      ]
+     }
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-sub-to-20",
+   "title": "Taking away up to 20",
+   "minutes": 12,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level I (Class 1) — Mathematics; to be checked against the official texts",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Take away from numbers up to 20.",
+    "Check by adding."
+   ],
+   "prerequisites": [
+    "class1-maths-add-to-20",
+    "class1-maths-sub-to-10"
+   ],
+   "exercises": [
+    "class1-maths-add-sub-e19",
+    "class1-maths-add-sub-e20",
+    "class1-maths-add-sub-e21",
+    "class1-maths-add-sub-e22",
+    "class1-maths-add-sub-e23",
+    "class1-maths-add-sub-e24"
+   ],
+   "selfCheck": [
+    "class1-maths-sub-to-20-q1",
+    "class1-maths-sub-to-20-q2",
+    "class1-maths-sub-to-20-q3",
+    "class1-maths-sub-to-20-q4",
+    "class1-maths-sub-to-20-q5"
+   ],
+   "reviewNotes": [
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Take away from teens",
+     "md": "To take away from 15, count back. 15 − 3: say fourteen, thirteen, twelve. The answer is 12."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 110,
+      "items": [
+       {
+        "t": "line",
+        "x1": 14,
+        "y1": 60,
+        "x2": 386,
+        "y2": 60,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 24.0,
+        "y1": 54,
+        "x2": 24.0,
+        "y2": 66,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 24.0,
+        "y": 86,
+        "text": "10",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 59.2,
+        "y1": 54,
+        "x2": 59.2,
+        "y2": 66,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 59.2,
+        "y": 86,
+        "text": "11",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 94.4,
+        "y1": 54,
+        "x2": 94.4,
+        "y2": 66,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 94.4,
+        "y": 86,
+        "text": "12",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 129.6,
+        "y1": 54,
+        "x2": 129.6,
+        "y2": 66,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 129.6,
+        "y": 86,
+        "text": "13",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 164.8,
+        "y1": 54,
+        "x2": 164.8,
+        "y2": 66,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 164.8,
+        "y": 86,
+        "text": "14",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200.0,
+        "y1": 54,
+        "x2": 200.0,
+        "y2": 66,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 86,
+        "text": "15",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 235.2,
+        "y1": 54,
+        "x2": 235.2,
+        "y2": 66,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 235.2,
+        "y": 86,
+        "text": "16",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 270.4,
+        "y1": 54,
+        "x2": 270.4,
+        "y2": 66,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 270.4,
+        "y": 86,
+        "text": "17",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 305.6,
+        "y1": 54,
+        "x2": 305.6,
+        "y2": 66,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 305.6,
+        "y": 86,
+        "text": "18",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 340.8,
+        "y1": 54,
+        "x2": 340.8,
+        "y2": 66,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 340.8,
+        "y": 86,
+        "text": "19",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 376.0,
+        "y1": 54,
+        "x2": 376.0,
+        "y2": 66,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 376.0,
+        "y": 86,
+        "text": "20",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 270.4,
+        "cy": 40,
+        "r": 7,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       }
+      ]
+     },
+     "caption": "A number line from 10 to 20. The red dot is on 17.",
+     "alt": "A number line with ticks from 10 to 20 and a red dot at 17."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Check by adding",
+     "md": "Add the answer and the small number. 12 + 3 = 15. So 15 − 3 = 12 is right."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Do not forget to count back past 10.\n- 13 − 4 is 9.\n- Use the number line if you need it."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "14 − 3 = ?",
+     "steps": [
+      "Start at 14.",
+      "Count back 3: thirteen, twelve, eleven. The answer is 11."
+     ],
+     "answer": "11",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 110,
+      "items": [
+       {
+        "t": "line",
+        "x1": 14,
+        "y1": 60,
+        "x2": 386,
+        "y2": 60,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 24.0,
+        "y1": 54,
+        "x2": 24.0,
+        "y2": 66,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 24.0,
+        "y": 86,
+        "text": "10",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 59.2,
+        "y1": 54,
+        "x2": 59.2,
+        "y2": 66,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 59.2,
+        "y": 86,
+        "text": "11",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 94.4,
+        "y1": 54,
+        "x2": 94.4,
+        "y2": 66,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 94.4,
+        "y": 86,
+        "text": "12",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 129.6,
+        "y1": 54,
+        "x2": 129.6,
+        "y2": 66,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 129.6,
+        "y": 86,
+        "text": "13",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 164.8,
+        "y1": 54,
+        "x2": 164.8,
+        "y2": 66,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 164.8,
+        "y": 86,
+        "text": "14",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200.0,
+        "y1": 54,
+        "x2": 200.0,
+        "y2": 66,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 86,
+        "text": "15",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 235.2,
+        "y1": 54,
+        "x2": 235.2,
+        "y2": 66,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 235.2,
+        "y": 86,
+        "text": "16",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 270.4,
+        "y1": 54,
+        "x2": 270.4,
+        "y2": 66,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 270.4,
+        "y": 86,
+        "text": "17",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 305.6,
+        "y1": 54,
+        "x2": 305.6,
+        "y2": 66,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 305.6,
+        "y": 86,
+        "text": "18",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 340.8,
+        "y1": 54,
+        "x2": 340.8,
+        "y2": 66,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 340.8,
+        "y": 86,
+        "text": "19",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 376.0,
+        "y1": 54,
+        "x2": 376.0,
+        "y2": 66,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 376.0,
+        "y": 86,
+        "text": "20",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 164.8,
+        "cy": 40,
+        "r": 7,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "13 − 5 = ?",
+     "steps": [
+      "Take 3 first to reach 10.",
+      "Then take 2 more from 10. The answer is 8."
+     ],
+     "answer": "8"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-story-sums",
+   "title": "Story sums with adding and taking away",
+   "minutes": 12,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level I (Class 1) — Mathematics; to be checked against the official texts",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Choose add or take away for a story.",
+    "Solve small story sums."
+   ],
+   "prerequisites": [
+    "class1-maths-add-to-20",
+    "class1-maths-sub-to-20"
+   ],
+   "exercises": [
+    "class1-maths-add-sub-e25",
+    "class1-maths-add-sub-e26",
+    "class1-maths-add-sub-e27",
+    "class1-maths-add-sub-e28",
+    "class1-maths-add-sub-e29",
+    "class1-maths-add-sub-e30"
+   ],
+   "selfCheck": [
+    "class1-maths-story-sums-q1",
+    "class1-maths-story-sums-q2",
+    "class1-maths-story-sums-q3",
+    "class1-maths-story-sums-q4",
+    "class1-maths-story-sums-q5"
+   ],
+   "reviewNotes": [
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "How to solve a story",
+     "md": "1. Read the story. 2. Is something added (more)? Or taken away (less)? 3. Do the sum. 4. Say the answer in a sentence."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 340,
+      "h": 130,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 20,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 42,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 64,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 86,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 108,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 52,
+        "text": "+",
+        "size": 30,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 190,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 212,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 234,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 256,
+        "cy": 40,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       }
+      ]
+     },
+     "caption": "5 pencils and 4 more.",
+     "alt": "Five orange circles plus four blue circles."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Clue words",
+     "md": "Words like **in all**, **together**, **more** tell us to add. Words like **left**, **give away**, **eat** tell us to take away."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Do not add when the story says *left*.\n- Read the whole story first.\n- Say the answer with its thing: 8 mangoes."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Bih has 5 pencils. Tanko gives her 4 more. How many pencils has Bih now?",
+     "steps": [
+      "More means add.",
+      "5 + 4 = 9."
+     ],
+     "answer": "9 pencils"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "A boy has 12 marbles. He gives 5 away. How many are left?",
+     "steps": [
+      "Give away means take away.",
+      "12 − 5 = 7."
+     ],
+     "answer": "7 marbles"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class1-maths-add-sub"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "class1-maths-add-sub-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class1-maths-add-to-10",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "4 + 3 = ?",
+   "answer": 7,
+   "tolerance": 0,
+   "explanation": "4 + 3 = 7.",
+   "difficulty": 1,
+   "points": 1,
+   "figure": {
+    "kind": "shapes",
+    "w": 340,
+    "h": 130,
+    "items": [
+     {
+      "t": "circle",
+      "cx": 20,
+      "cy": 40,
+      "r": 9,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "circle",
+      "cx": 42,
+      "cy": 40,
+      "r": 9,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "circle",
+      "cx": 64,
+      "cy": 40,
+      "r": 9,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "circle",
+      "cx": 86,
+      "cy": 40,
+      "r": 9,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "text",
+      "x": 150,
+      "y": 52,
+      "text": "+",
+      "size": 30,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "circle",
+      "cx": 190,
+      "cy": 40,
+      "r": 9,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     },
+     {
+      "t": "circle",
+      "cx": 212,
+      "cy": 40,
+      "r": 9,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     },
+     {
+      "t": "circle",
+      "cx": 234,
+      "cy": 40,
+      "r": 9,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     }
+    ]
+   },
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-sub-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class1-maths-add-to-10",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "5 + 4 = ?",
+   "answer": 9,
+   "tolerance": 0,
+   "explanation": "5 + 4 = 9.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-sub-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class1-maths-add-to-10",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "6 + 2 = ?",
+   "answer": 8,
+   "tolerance": 0,
+   "explanation": "6 + 2 = 8.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-sub-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class1-maths-add-to-10",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "7 + 3 = ?",
+   "answer": 10,
+   "tolerance": 0,
+   "explanation": "7 + 3 = 10.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-sub-e05",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class1-maths-add-to-10",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "5 + 0 = 5",
+   "answer": true,
+   "explanation": "Adding 0 does not change the number.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-sub-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class1-maths-add-to-10",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Ngwa has some mangoes.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "She has 4 mangoes. Her brother gives her 5 more. How many now?",
+     "answer": 9,
+     "tolerance": 0,
+     "explanation": "4 + 5 = 9.",
+     "id": "class1-maths-add-sub-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Then she gets 1 more. How many mangoes in all?",
+     "answer": 10,
+     "tolerance": 0,
+     "explanation": "9 + 1 = 10.",
+     "id": "class1-maths-add-sub-e06-b"
+    }
+   ],
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-to-10-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class1-maths-add-to-10",
+   "prompt": "Class 1 maths: 2 + 6 equals...",
+   "choices": [
+    "9",
+    "4",
+    "7",
+    "8"
+   ],
+   "answer": 3,
+   "explanation": "2 + 6 = 8.",
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-to-10-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class1-maths-add-to-10",
+   "prompt": "Class 1 maths: 5 + 5 equals...",
+   "choices": [
+    "9",
+    "5",
+    "55",
+    "10"
+   ],
+   "answer": 3,
+   "explanation": "Five and five make ten.",
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-to-10-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class1-maths-add-to-10",
+   "prompt": "3 + 4 equals...",
+   "choices": [
+    "6",
+    "7",
+    "1",
+    "8"
+   ],
+   "answer": 1,
+   "explanation": "3 + 4 = 7.",
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-to-10-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class1-maths-add-to-10",
+   "prompt": "The sign + means...",
+   "choices": [
+    "minus",
+    "plus (add)",
+    "take away",
+    "equal"
+   ],
+   "answer": 1,
+   "explanation": "+ means to add.",
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-to-10-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class1-maths-add-to-10",
+   "prompt": "8 + 0 equals...",
+   "choices": [
+    "80",
+    "8",
+    "0",
+    "9"
+   ],
+   "answer": 1,
+   "explanation": "Adding zero changes nothing.",
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-sub-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class1-maths-sub-to-10",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "8 − 3 = ?",
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "8 − 3 = 5.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-sub-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class1-maths-sub-to-10",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "10 − 4 = ?",
+   "answer": 6,
+   "tolerance": 0,
+   "explanation": "10 − 4 = 6.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-sub-e09",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class1-maths-sub-to-10",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "7 − 7 = ?",
+   "answer": 0,
+   "tolerance": 0,
+   "explanation": "Take all away: 0 left.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-sub-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "class1-maths-sub-to-10",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which sum has the answer 4?",
+   "choices": [
+    "9 − 9",
+    "5 − 5",
+    "9 − 4",
+    "9 − 5"
+   ],
+   "answer": 3,
+   "explanation": "9 − 5 = 4.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-sub-e11",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class1-maths-sub-to-10",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "5 − 3 is more than 5.",
+   "answer": false,
+   "explanation": "Taking away makes it smaller.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-sub-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class1-maths-sub-to-10",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A mama has 10 bananas at the market.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "She sells 3 bananas. How many are left?",
+     "answer": 7,
+     "tolerance": 0,
+     "explanation": "10 − 3 = 7.",
+     "id": "class1-maths-add-sub-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "She sells 4 more. How many are left now?",
+     "answer": 3,
+     "tolerance": 0,
+     "explanation": "7 − 4 = 3.",
+     "id": "class1-maths-add-sub-e12-b"
+    }
+   ],
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-sub-to-10-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class1-maths-sub-to-10",
+   "prompt": "Class 1 maths: 9 − 2 equals...",
+   "choices": [
+    "11",
+    "7",
+    "8",
+    "6"
+   ],
+   "answer": 1,
+   "explanation": "9 − 2 = 7.",
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-sub-to-10-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class1-maths-sub-to-10",
+   "prompt": "Class 1 maths: 6 − 6 equals...",
+   "choices": [
+    "0",
+    "1",
+    "12",
+    "6"
+   ],
+   "answer": 0,
+   "explanation": "Nothing is left.",
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-sub-to-10-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class1-maths-sub-to-10",
+   "prompt": "The sign − means...",
+   "choices": [
+    "times",
+    "add",
+    "equal",
+    "take away (minus)"
+   ],
+   "answer": 3,
+   "explanation": "− means minus.",
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-sub-to-10-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class1-maths-sub-to-10",
+   "prompt": "10 − 5 equals...",
+   "choices": [
+    "50",
+    "10",
+    "15",
+    "5"
+   ],
+   "answer": 3,
+   "explanation": "10 − 5 = 5.",
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-sub-to-10-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class1-maths-sub-to-10",
+   "prompt": "If you take away from a number, the answer is...",
+   "choices": [
+    "twenty",
+    "bigger",
+    "smaller",
+    "the same always"
+   ],
+   "answer": 2,
+   "explanation": "Less is left.",
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-sub-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class1-maths-add-to-20",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "8 + 5 = ?",
+   "answer": 13,
+   "tolerance": 0,
+   "explanation": "8 + 2 = 10, then 3 more: 13.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-sub-e14",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class1-maths-add-to-20",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "9 + 9 = ?",
+   "answer": 18,
+   "tolerance": 0,
+   "explanation": "9 + 9 = 18.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-sub-e15",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class1-maths-add-to-20",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "10 + 7 = ?",
+   "answer": 17,
+   "tolerance": 0,
+   "explanation": "Ten and seven is 17.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-sub-e16",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "class1-maths-add-to-20",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which is the same as 6 + 7?",
+   "choices": [
+    "12",
+    "14",
+    "13",
+    "67"
+   ],
+   "answer": 2,
+   "explanation": "6 + 7 = 13.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-sub-e17",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class1-maths-add-to-20",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "11 + 4 = ?",
+   "answer": 15,
+   "tolerance": 0,
+   "explanation": "11 + 4 = 15.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-sub-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class1-maths-add-to-20",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Neba has 9 oranges and 8 mangoes.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many fruits has he in all?",
+     "answer": 17,
+     "tolerance": 0,
+     "explanation": "9 + 8 = 17.",
+     "id": "class1-maths-add-sub-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "He eats 2 oranges. How many fruits now? (17 − 2)",
+     "answer": 15,
+     "tolerance": 0,
+     "explanation": "17 − 2 = 15.",
+     "id": "class1-maths-add-sub-e18-b"
+    }
+   ],
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-to-20-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class1-maths-add-to-20",
+   "prompt": "Class 1 maths: 6 + 8 equals...",
+   "choices": [
+    "15",
+    "13",
+    "14",
+    "68"
+   ],
+   "answer": 2,
+   "explanation": "6 + 8 = 14.",
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-to-20-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class1-maths-add-to-20",
+   "prompt": "Class 1 maths: 10 + 10 equals...",
+   "choices": [
+    "11",
+    "10",
+    "20",
+    "100"
+   ],
+   "answer": 2,
+   "explanation": "Ten and ten make twenty.",
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-to-20-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class1-maths-add-to-20",
+   "prompt": "What is 7 + 7?",
+   "choices": [
+    "77",
+    "14",
+    "15",
+    "13"
+   ],
+   "answer": 1,
+   "explanation": "Doubles: 7 + 7 = 14.",
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-to-20-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class1-maths-add-to-20",
+   "prompt": "To add 9 + 3, first make ten with...",
+   "choices": [
+    "9 and 0",
+    "3 and 3",
+    "9 and 9",
+    "9 and 1"
+   ],
+   "answer": 3,
+   "explanation": "9 and 1 make ten.",
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-to-20-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class1-maths-add-to-20",
+   "prompt": "12 + 3 equals...",
+   "choices": [
+    "16",
+    "123",
+    "15",
+    "14"
+   ],
+   "answer": 2,
+   "explanation": "12 + 3 = 15.",
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-sub-e19",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class1-maths-sub-to-20",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "15 − 4 = ?",
+   "answer": 11,
+   "tolerance": 0,
+   "explanation": "15 − 4 = 11.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-sub-e20",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class1-maths-sub-to-20",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "18 − 8 = ?",
+   "answer": 10,
+   "tolerance": 0,
+   "explanation": "18 − 8 = 10.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-sub-e21",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class1-maths-sub-to-20",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "20 − 5 = ?",
+   "answer": 15,
+   "tolerance": 0,
+   "explanation": "20 − 5 = 15.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-sub-e22",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class1-maths-sub-to-20",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "13 − 6 = ?",
+   "answer": 7,
+   "tolerance": 0,
+   "explanation": "13 − 3 = 10, then 3 more: 7.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-sub-e23",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class1-maths-sub-to-20",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "16 − 6 = 10",
+   "answer": true,
+   "explanation": "16 − 6 = 10.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-sub-e24",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class1-maths-sub-to-20",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A shop has 20 notebooks.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "It sells 6 notebooks. How many are left?",
+     "answer": 14,
+     "tolerance": 0,
+     "explanation": "20 − 6 = 14.",
+     "id": "class1-maths-add-sub-e24-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Then it sells 4 more. How many are left?",
+     "answer": 10,
+     "tolerance": 0,
+     "explanation": "14 − 4 = 10.",
+     "id": "class1-maths-add-sub-e24-b"
+    }
+   ],
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-sub-to-20-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class1-maths-sub-to-20",
+   "prompt": "Class 1 maths: 17 − 3 equals...",
+   "choices": [
+    "20",
+    "14",
+    "13",
+    "15"
+   ],
+   "answer": 1,
+   "explanation": "17 − 3 = 14.",
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-sub-to-20-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class1-maths-sub-to-20",
+   "prompt": "Class 1 maths: 12 − 2 equals...",
+   "choices": [
+    "10",
+    "9",
+    "14",
+    "12"
+   ],
+   "answer": 0,
+   "explanation": "12 − 2 = 10.",
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-sub-to-20-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class1-maths-sub-to-20",
+   "prompt": "What is 19 − 9?",
+   "choices": [
+    "9",
+    "10",
+    "28",
+    "0"
+   ],
+   "answer": 1,
+   "explanation": "19 − 9 = 10.",
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-sub-to-20-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class1-maths-sub-to-20",
+   "prompt": "To check 15 − 4 = 11 we can add...",
+   "choices": [
+    "11 − 4",
+    "4 − 11",
+    "15 + 4",
+    "11 + 4"
+   ],
+   "answer": 3,
+   "explanation": "11 + 4 = 15.",
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-sub-to-20-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class1-maths-sub-to-20",
+   "prompt": "16 − 1 equals...",
+   "choices": [
+    "15",
+    "16",
+    "17",
+    "6"
+   ],
+   "answer": 0,
+   "explanation": "One less than 16 is 15.",
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-sub-e25",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class1-maths-story-sums",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "There are 6 birds on a tree. 3 more birds come. How many birds in all?",
+   "answer": 9,
+   "tolerance": 0,
+   "explanation": "6 + 3 = 9.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-sub-e26",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class1-maths-story-sums",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Mama has 10 eggs. She uses 4 eggs. How many are left?",
+   "answer": 6,
+   "tolerance": 0,
+   "explanation": "10 − 4 = 6.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-sub-e27",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class1-maths-story-sums",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Ada has 8 sweets and eats 2. Which sum do we do?",
+   "choices": [
+    "8 − 2",
+    "8 + 8",
+    "2 − 8",
+    "8 + 2"
+   ],
+   "answer": 0,
+   "explanation": "Eat means take away.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-sub-e28",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class1-maths-story-sums",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A bus has 11 children. 6 more children get in. How many children now?",
+   "answer": 17,
+   "tolerance": 0,
+   "explanation": "11 + 6 = 17.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-sub-e29",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class1-maths-story-sums",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A basket has 18 plantains. A woman sells 9. How many are left?",
+   "answer": 9,
+   "tolerance": 0,
+   "explanation": "18 − 9 = 9.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-add-sub-e30",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class1-maths-story-sums",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "At school, Class 1 has 15 desks.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "3 new desks are brought in. How many desks now?",
+     "answer": 18,
+     "tolerance": 0,
+     "explanation": "15 + 3 = 18.",
+     "id": "class1-maths-add-sub-e30-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "2 old desks are taken out. How many desks are left?",
+     "answer": 16,
+     "tolerance": 0,
+     "explanation": "18 − 2 = 16.",
+     "id": "class1-maths-add-sub-e30-b"
+    }
+   ],
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-story-sums-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class1-maths-story-sums",
+   "prompt": "Class 1 maths story sums: the words 'in all' tell us to...",
+   "choices": [
+    "take away",
+    "draw",
+    "add",
+    "count to ten"
+   ],
+   "answer": 2,
+   "explanation": "In all means put together.",
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-story-sums-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class1-maths-story-sums",
+   "prompt": "The word 'left' in a story tells us to...",
+   "choices": [
+    "take away",
+    "skip",
+    "double",
+    "add"
+   ],
+   "answer": 0,
+   "explanation": "How many left means take away.",
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-story-sums-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class1-maths-story-sums",
+   "prompt": "Kofi has 7 balls and gets 2 more. How many?",
+   "choices": [
+    "9",
+    "10",
+    "72",
+    "5"
+   ],
+   "answer": 0,
+   "explanation": "7 + 2 = 9.",
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-story-sums-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class1-maths-story-sums",
+   "prompt": "A girl has 9 stars and gives away 3. How many left?",
+   "choices": [
+    "12",
+    "7",
+    "3",
+    "6"
+   ],
+   "answer": 3,
+   "explanation": "9 − 3 = 6.",
+   "chapter": "class1-maths-add-sub"
+  },
+  {
+   "id": "class1-maths-story-sums-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class1-maths-story-sums",
+   "prompt": "After you do the sum, you should...",
+   "choices": [
+    "say the answer in a sentence",
+    "forget it",
+    "add 10",
+    "not check"
+   ],
+   "answer": 0,
+   "explanation": "Say the answer with its thing.",
+   "chapter": "class1-maths-add-sub"
+  }
+ ]
+}

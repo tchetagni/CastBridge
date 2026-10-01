@@ -14,6 +14,7 @@ import castbridge.core.tv.StorageVolume
 import castbridge.core.tv.UsbKeyInfo
 import castbridge.core.tv.UsbSysfs
 import castbridge.core.tv.StoreEntry
+import castbridge.core.tv.UsbLayout
 import castbridge.core.tv.VolumeKind
 import castbridge.core.tv.VolumeProvider
 import castbridge.core.tv.VolumeRegistry
@@ -62,20 +63,27 @@ class AndroidVolumeProvider(private val ctx: Context, private val prefs: TvPrefs
             val removable = runCatching { Environment.isExternalStorageRemovable(base) }.getOrDefault(false)
             val mounted = runCatching { Environment.getExternalStorageState(base) == Environment.MEDIA_MOUNTED }.getOrDefault(false)
             if (!removable || !mounted) continue
-            val dir = File(base, "videos")
-            if (!(dir.isDirectory || dir.mkdirs())) continue
+            val appDir = File(base, "videos")
+            // Heavy data in <clé>/Download/CastBridge/Bibliotheque (survives the uninstall), unless the user turned it off or the drive refuses it.
+            val heavy = if (prefs.getBool("heavy_on_usb", true)) UsbLayout.driveRootOf(base)?.let(UsbLayout::rootOf)?.takeIf { UsbLayout.ensure(it) } else null
+            val heavyLib = heavy?.let(UsbLayout::libraryOf)
             val id = volumeId(base)
             seen += id
             var p = probes[id]
             // Speed test only off the main thread (a slow drive would freeze the TV UI), once per mount unless asked again.
             val canMeasure = Looper.myLooper() != Looper.getMainLooper()
-            if (p == null || (remeasure && canMeasure) || (p.writable && p.bps <= 0 && canMeasure)) {
-                val r = WriteProbe.run(dir, speedBytes = if (canMeasure) PROBE_BYTES else 0)
-                p = Probe(r.writable, if (canMeasure) r.bytesPerSec else 0, r.error)
-                probes[id] = p
+            fun probe(d: File): Probe { val r = WriteProbe.run(d, speedBytes = if (canMeasure) PROBE_BYTES else 0); return Probe(r.writable, if (canMeasure) r.bytesPerSec else 0, r.error) }
+            var dir = heavyLib ?: appDir
+            if (p == null || (remeasure && canMeasure) || (p.writable && p.bps <= 0 && canMeasure)) { p = probe(dir); probes[id] = p }
+            // The shared Download folder refuses writes on some Android versions: fall back to the app's own folder on the drive.
+            if (heavyLib != null && !p.writable) {
+                dir = appDir
+                if (!(dir.isDirectory || dir.mkdirs())) continue
+                p = probe(dir); probes[id] = p
             }
             out += StorageVolume(id, label(base), dir, VolumeKind.REMOVABLE, FsInfo.detect(mounts, base.absolutePath),
-                dir.usableSpace, dir.totalSpace, true, p.writable && dir.canWrite(), p.bps, p.error, usbOf(mounts, base))
+                dir.usableSpace, dir.totalSpace, true, p.writable && dir.canWrite(), p.bps, p.error,
+                heavyRoot = if (dir == heavyLib) heavy else null, usb = usbOf(mounts, base))
         }
         // A drive that went away is forgotten: on return it is probed again.
         probes.keys.filter { it !in seen }.forEach { probes.remove(it) }

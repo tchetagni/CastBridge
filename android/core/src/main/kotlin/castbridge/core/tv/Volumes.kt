@@ -44,6 +44,8 @@ data class StorageVolume(
     val note: String? = null,
     /** Who made the drive, the USB speed negotiated, whether it shares its bus with the TV's Wi-Fi (null = unknown / not USB). */
     val usb: UsbKeyInfo? = null,
+    /** `<clé>/Download/CastBridge/` when [dir] lives there (data that outlives the app), else null (app-private folder). */
+    val heavyRoot: File? = null,
 ) {
     /** The internal volume is never limited by what we detect (the detection is only meaningful for removable media). */
     val maxFileBytes: Long get() = if (kind == VolumeKind.INTERNAL) Long.MAX_VALUE else fs.maxFileBytes

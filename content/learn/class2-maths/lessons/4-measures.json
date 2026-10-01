@@ -1,0 +1,2590 @@
+{
+ "chapter": "class2-maths-measures",
+ "lessons": [
+  {
+   "id": "class2-maths-length-cm-m",
+   "title": "Length in centimetres and metres",
+   "minutes": 12,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level I (Class 2) — Mathematics; to be checked against the official texts",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Measure with a ruler in cm.",
+    "Know that 100 cm make 1 m."
+   ],
+   "prerequisites": [
+    "class2-maths-numbers-1000"
+   ],
+   "exercises": [
+    "class2-maths-measures-e01",
+    "class2-maths-measures-e02",
+    "class2-maths-measures-e03",
+    "class2-maths-measures-e04",
+    "class2-maths-measures-e05",
+    "class2-maths-measures-e06"
+   ],
+   "selfCheck": [
+    "class2-maths-length-cm-m-q1",
+    "class2-maths-length-cm-m-q2",
+    "class2-maths-length-cm-m-q3",
+    "class2-maths-length-cm-m-q4",
+    "class2-maths-length-cm-m-q5"
+   ],
+   "reviewNotes": [
+    "Range of numbers, methods (e.g. regrouping layout) and the classes where ×/÷ and fractions start are to be checked against the official syllabus.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Units of length",
+     "md": "We measure short things in **centimetres** (cm). We measure longer things in **metres** (m). 100 cm make 1 m."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 110,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 40,
+        "w": 370.0,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "line",
+        "x1": 10.0,
+        "y1": 40,
+        "x2": 10.0,
+        "y2": 58,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 10.0,
+        "y": 94,
+        "text": "0",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 47.0,
+        "y1": 40,
+        "x2": 47.0,
+        "y2": 58,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 47.0,
+        "y": 94,
+        "text": "1",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 84.0,
+        "y1": 40,
+        "x2": 84.0,
+        "y2": 58,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 84.0,
+        "y": 94,
+        "text": "2",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 121.0,
+        "y1": 40,
+        "x2": 121.0,
+        "y2": 58,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 121.0,
+        "y": 94,
+        "text": "3",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 158.0,
+        "y1": 40,
+        "x2": 158.0,
+        "y2": 58,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 158.0,
+        "y": 94,
+        "text": "4",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 195.0,
+        "y1": 40,
+        "x2": 195.0,
+        "y2": 58,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 195.0,
+        "y": 94,
+        "text": "5",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 232.0,
+        "y1": 40,
+        "x2": 232.0,
+        "y2": 58,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 232.0,
+        "y": 94,
+        "text": "6",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 269.0,
+        "y1": 40,
+        "x2": 269.0,
+        "y2": 58,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 269.0,
+        "y": 94,
+        "text": "7",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 306.0,
+        "y1": 40,
+        "x2": 306.0,
+        "y2": 58,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 306.0,
+        "y": 94,
+        "text": "8",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 343.0,
+        "y1": 40,
+        "x2": 343.0,
+        "y2": 58,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 343.0,
+        "y": 94,
+        "text": "9",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 380.0,
+        "y1": 40,
+        "x2": 380.0,
+        "y2": 58,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 380.0,
+        "y": 94,
+        "text": "10",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 8,
+        "w": 222.0,
+        "h": 22,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange",
+        "radius": 5
+       }
+      ]
+     },
+     "caption": "A pencil of 6 cm.",
+     "alt": "A ruler from 0 to 10 with an orange bar of length 6."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Measure",
+     "md": "Put the zero of the ruler at one end. Read the number at the other end. Say the unit. For a classroom or a road we use metres."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Start at 0 on the ruler.\n- Do not mix cm and m.\n- A door is about 2 m high, not 2 cm."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "A ribbon is from 0 to 7 on the ruler. How long is it?",
+     "steps": [
+      "It starts at 0.",
+      "It ends at 7. It is 7 cm."
+     ],
+     "answer": "7 cm",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 110,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 40,
+        "w": 370.0,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "line",
+        "x1": 10.0,
+        "y1": 40,
+        "x2": 10.0,
+        "y2": 58,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 10.0,
+        "y": 94,
+        "text": "0",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 47.0,
+        "y1": 40,
+        "x2": 47.0,
+        "y2": 58,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 47.0,
+        "y": 94,
+        "text": "1",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 84.0,
+        "y1": 40,
+        "x2": 84.0,
+        "y2": 58,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 84.0,
+        "y": 94,
+        "text": "2",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 121.0,
+        "y1": 40,
+        "x2": 121.0,
+        "y2": 58,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 121.0,
+        "y": 94,
+        "text": "3",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 158.0,
+        "y1": 40,
+        "x2": 158.0,
+        "y2": 58,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 158.0,
+        "y": 94,
+        "text": "4",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 195.0,
+        "y1": 40,
+        "x2": 195.0,
+        "y2": 58,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 195.0,
+        "y": 94,
+        "text": "5",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 232.0,
+        "y1": 40,
+        "x2": 232.0,
+        "y2": 58,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 232.0,
+        "y": 94,
+        "text": "6",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 269.0,
+        "y1": 40,
+        "x2": 269.0,
+        "y2": 58,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 269.0,
+        "y": 94,
+        "text": "7",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 306.0,
+        "y1": 40,
+        "x2": 306.0,
+        "y2": 58,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 306.0,
+        "y": 94,
+        "text": "8",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 343.0,
+        "y1": 40,
+        "x2": 343.0,
+        "y2": 58,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 343.0,
+        "y": 94,
+        "text": "9",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 380.0,
+        "y1": 40,
+        "x2": 380.0,
+        "y2": 58,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 380.0,
+        "y": 94,
+        "text": "10",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 8,
+        "w": 259.0,
+        "h": 22,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange",
+        "radius": 5
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "A rope is 2 m long. How many cm?",
+     "steps": [
+      "1 m is 100 cm.",
+      "2 × 100 = 200 cm."
+     ],
+     "answer": "200 cm"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-money-fcfa",
+   "title": "FCFA money and change",
+   "minutes": 12,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level I (Class 2) — Mathematics; to be checked against the official texts",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Add and subtract amounts of FCFA.",
+    "Work out change."
+   ],
+   "prerequisites": [
+    "class2-maths-add-regroup"
+   ],
+   "exercises": [
+    "class2-maths-measures-e07",
+    "class2-maths-measures-e08",
+    "class2-maths-measures-e09",
+    "class2-maths-measures-e10",
+    "class2-maths-measures-e11",
+    "class2-maths-measures-e12"
+   ],
+   "selfCheck": [
+    "class2-maths-money-fcfa-q1",
+    "class2-maths-money-fcfa-q2",
+    "class2-maths-money-fcfa-q3",
+    "class2-maths-money-fcfa-q4",
+    "class2-maths-money-fcfa-q5"
+   ],
+   "reviewNotes": [
+    "Prices are made up and small; check which coin values are in common use.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Money",
+     "md": "In Cameroon we pay in **FCFA**. Coins: 5, 10, 25, 50, 100, 500. Notes: 1000, 2000, 5000, 10 000. We add prices to find the cost."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 106,
+      "items": [
+       {
+        "t": "rect",
+        "x": 8.0,
+        "y": 8,
+        "w": 88.0,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 52.0,
+        "y": 32.9,
+        "text": "25",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 104.0,
+        "y": 8,
+        "w": 88.0,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 148.0,
+        "y": 32.9,
+        "text": "50",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 8,
+        "w": 88.0,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 244.0,
+        "y": 32.9,
+        "text": "100",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 296.0,
+        "y": 8,
+        "w": 88.0,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 340.0,
+        "y": 32.9,
+        "text": "500",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "FCFA coins.",
+     "alt": "Four boxes with FCFA coin values 25, 50, 100 and 500."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Change",
+     "md": "**Change** is what the seller gives back. Change = money paid − cost. You pay 500 FCFA for something that costs 350 FCFA. 500 − 350 = 150. Change is 150 FCFA."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Write FCFA after the number.\n- Add all the prices first.\n- Change is paid minus cost, not cost minus paid."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "A pen costs 150 FCFA. A notebook costs 200 FCFA. How much for both?",
+     "steps": [
+      "Add 150 and 200.",
+      "150 + 200 = 350."
+     ],
+     "answer": "350 FCFA"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "You pay 500 FCFA for bread that costs 350 FCFA. What is your change?",
+     "steps": [
+      "Change is 500 − 350.",
+      "500 − 350 = 150."
+     ],
+     "answer": "150 FCFA"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-time-half-quarter",
+   "title": "Telling the time: half past and quarter past",
+   "minutes": 12,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level I (Class 2) — Mathematics; to be checked against the official texts",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Read half past, quarter past and quarter to.",
+    "Tell the time to 5 minutes."
+   ],
+   "prerequisites": [
+    "class2-maths-length-cm-m"
+   ],
+   "exercises": [
+    "class2-maths-measures-e13",
+    "class2-maths-measures-e14",
+    "class2-maths-measures-e15",
+    "class2-maths-measures-e16",
+    "class2-maths-measures-e17",
+    "class2-maths-measures-e18"
+   ],
+   "selfCheck": [
+    "class2-maths-time-half-quarter-q1",
+    "class2-maths-time-half-quarter-q2",
+    "class2-maths-time-half-quarter-q3",
+    "class2-maths-time-half-quarter-q4",
+    "class2-maths-time-half-quarter-q5"
+   ],
+   "reviewNotes": [
+    "Digital notation (7:30) introduced lightly.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Parts of an hour",
+     "md": "An hour has 60 minutes. **Half past**: the long hand is on 6 (30 minutes). **Quarter past**: long hand on 3 (15 minutes). **Quarter to**: long hand on 9 (45 minutes)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 200,
+      "h": 200,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 100,
+        "cy": 100,
+        "r": 80,
+        "stroke": "ink",
+        "width": 3,
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 131.5,
+        "y": 50.44039956158037,
+        "text": "1",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 154.55960043841964,
+        "y": 73.5,
+        "text": "2",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 163.0,
+        "y": 105.0,
+        "text": "3",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 154.55960043841964,
+        "y": 136.5,
+        "text": "4",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 131.5,
+        "y": 159.55960043841964,
+        "text": "5",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 168.0,
+        "text": "6",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 68.50000000000001,
+        "y": 159.55960043841964,
+        "text": "7",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 45.440399561580364,
+        "y": 136.5,
+        "text": "8",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 37.0,
+        "y": 105.00000000000001,
+        "text": "9",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 45.44039956158037,
+        "y": 73.5,
+        "text": "10",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 68.49999999999997,
+        "y": 50.440399561580385,
+        "text": "11",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 99.99999999999999,
+        "y": 42.0,
+        "text": "12",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 100,
+        "y1": 100,
+        "x2": 63.29481860101541,
+        "y2": 90.1648762861042,
+        "color": "red",
+        "width": 5
+       },
+       {
+        "t": "line",
+        "x1": 100,
+        "y1": 100,
+        "x2": 100.0,
+        "y2": 160.0,
+        "color": "blue",
+        "width": 3
+       },
+       {
+        "t": "circle",
+        "cx": 100,
+        "cy": 100,
+        "r": 4,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "ink"
+       }
+      ]
+     },
+     "caption": "Half past 9 (9:30).",
+     "alt": "A clock face with the short hand between 9 and 10 and the long hand on 6."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Read the clock",
+     "md": "Look at the short hand for the hour. Look at the long hand for the minutes. Each number is 5 minutes: 3 is 15 minutes, 6 is 30."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- At half past 4, the short hand is between 4 and 5.\n- Quarter to 5 is 4:45.\n- Do not mix the hands."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "The long hand is on 6. The short hand is just after 4. What time is it?",
+     "steps": [
+      "Long hand on 6 is 30 minutes.",
+      "It is half past 4, or 4:30."
+     ],
+     "answer": "Half past 4",
+     "figure": {
+      "kind": "shapes",
+      "w": 200,
+      "h": 200,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 100,
+        "cy": 100,
+        "r": 80,
+        "stroke": "ink",
+        "width": 3,
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 131.5,
+        "y": 50.44039956158037,
+        "text": "1",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 154.55960043841964,
+        "y": 73.5,
+        "text": "2",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 163.0,
+        "y": 105.0,
+        "text": "3",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 154.55960043841964,
+        "y": 136.5,
+        "text": "4",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 131.5,
+        "y": 159.55960043841964,
+        "text": "5",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 168.0,
+        "text": "6",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 68.50000000000001,
+        "y": 159.55960043841964,
+        "text": "7",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 45.440399561580364,
+        "y": 136.5,
+        "text": "8",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 37.0,
+        "y": 105.00000000000001,
+        "text": "9",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 45.44039956158037,
+        "y": 73.5,
+        "text": "10",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 68.49999999999997,
+        "y": 50.440399561580385,
+        "text": "11",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 99.99999999999999,
+        "y": 42.0,
+        "text": "12",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 100,
+        "y1": 100,
+        "x2": 126.87005768508881,
+        "y2": 126.8700576850888,
+        "color": "red",
+        "width": 5
+       },
+       {
+        "t": "line",
+        "x1": 100,
+        "y1": 100,
+        "x2": 100.0,
+        "y2": 160.0,
+        "color": "blue",
+        "width": 3
+       },
+       {
+        "t": "circle",
+        "cx": 100,
+        "cy": 100,
+        "r": 4,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Long hand on 3, short hand just after 7. What time?",
+     "steps": [
+      "Long hand on 3 is 15 minutes.",
+      "Quarter past 7, or 7:15."
+     ],
+     "answer": "Quarter past 7",
+     "figure": {
+      "kind": "shapes",
+      "w": 200,
+      "h": 200,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 100,
+        "cy": 100,
+        "r": 80,
+        "stroke": "ink",
+        "width": 3,
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 131.5,
+        "y": 50.44039956158037,
+        "text": "1",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 154.55960043841964,
+        "y": 73.5,
+        "text": "2",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 163.0,
+        "y": 105.0,
+        "text": "3",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 154.55960043841964,
+        "y": 136.5,
+        "text": "4",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 131.5,
+        "y": 159.55960043841964,
+        "text": "5",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 168.0,
+        "text": "6",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 68.50000000000001,
+        "y": 159.55960043841964,
+        "text": "7",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 45.440399561580364,
+        "y": 136.5,
+        "text": "8",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 37.0,
+        "y": 105.00000000000001,
+        "text": "9",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 45.44039956158037,
+        "y": 73.5,
+        "text": "10",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 68.49999999999997,
+        "y": 50.440399561580385,
+        "text": "11",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 99.99999999999999,
+        "y": 42.0,
+        "text": "12",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 100,
+        "y1": 100,
+        "x2": 76.86706569766861,
+        "y2": 130.14742693106695,
+        "color": "red",
+        "width": 5
+       },
+       {
+        "t": "line",
+        "x1": 100,
+        "y1": 100,
+        "x2": 160.0,
+        "y2": 100.0,
+        "color": "blue",
+        "width": 3
+       },
+       {
+        "t": "circle",
+        "cx": 100,
+        "cy": 100,
+        "r": 4,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "ink"
+       }
+      ]
+     }
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-shapes-2d-3d",
+   "title": "Flat shapes and solid shapes",
+   "minutes": 12,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level I (Class 2) — Mathematics; to be checked against the official texts",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Name flat and solid shapes.",
+    "Count sides, corners and faces."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "class2-maths-measures-e19",
+    "class2-maths-measures-e20",
+    "class2-maths-measures-e21",
+    "class2-maths-measures-e22",
+    "class2-maths-measures-e23",
+    "class2-maths-measures-e24"
+   ],
+   "selfCheck": [
+    "class2-maths-shapes-2d-3d-q1",
+    "class2-maths-shapes-2d-3d-q2",
+    "class2-maths-shapes-2d-3d-q3",
+    "class2-maths-shapes-2d-3d-q4",
+    "class2-maths-shapes-2d-3d-q5"
+   ],
+   "reviewNotes": [
+    "Naming of solids and number of faces are standard.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Flat shapes",
+     "md": "A **triangle** has 3 sides and 3 corners. A **square** has 4 equal sides. A **rectangle** has 4 sides: opposite sides are equal. A **circle** is round."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 130,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 25,
+        "w": 60,
+        "h": 60,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 50,
+        "y": 110,
+        "text": "cube",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 55,
+        "r": 32,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 110,
+        "text": "ball",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 220,
+        "y": 25,
+        "w": 50,
+        "h": 60,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 10
+       },
+       {
+        "t": "text",
+        "x": 245,
+        "y": 110,
+        "text": "cylinder",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "poly",
+        "pts": [
+         325,
+         85,
+         385,
+         85,
+         355,
+         20
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "pink"
+       },
+       {
+        "t": "text",
+        "x": 355,
+        "y": 110,
+        "text": "cone",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Four solid shapes (drawn flat).",
+     "alt": "A cube, a ball, a cylinder and a cone with labels."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Solid shapes",
+     "md": "A **cube** has 6 faces, like a dice. A **ball** (sphere) is round. A **cylinder** is like a tin. A **cone** has a point, like a party hat."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- A square is a special rectangle, but we call it a square.\n- A cube is solid, a square is flat.\n- A cube has 6 faces, not 4."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "How many corners has a rectangle?",
+     "steps": [
+      "A rectangle has 4 sides.",
+      "It has 4 corners."
+     ],
+     "answer": "4 corners"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "A tin of milk is shaped like which solid?",
+     "steps": [
+      "It has two flat round ends.",
+      "That is a cylinder."
+     ],
+     "answer": "A cylinder"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class2-maths-measures"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "class2-maths-measures-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class2-maths-length-cm-m",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which unit is best for a room?",
+   "choices": [
+    "centimetres",
+    "kilograms",
+    "litres",
+    "metres"
+   ],
+   "answer": 3,
+   "explanation": "Rooms are measured in metres.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-measures-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class2-maths-length-cm-m",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "3 m is how many cm?",
+   "answer": 300,
+   "tolerance": 0,
+   "unit": "cm",
+   "explanation": "3 × 100.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-measures-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class2-maths-length-cm-m",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which is longer?",
+   "choices": [
+    "50 cm",
+    "20 cm",
+    "1 m",
+    "99 cm"
+   ],
+   "answer": 2,
+   "explanation": "1 m = 100 cm.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-measures-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class2-maths-length-cm-m",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A table is 120 cm long. A bench is 150 cm long. How much longer is the bench?",
+   "answer": 30,
+   "tolerance": 0,
+   "unit": "cm",
+   "explanation": "150 − 120 = 30.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-measures-e05",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class2-maths-length-cm-m",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "100 cm make 1 m.",
+   "answer": true,
+   "explanation": "True.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-measures-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class2-maths-length-cm-m",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A tailor in Bamenda has 5 m of cloth.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "She uses 2 m for a dress. How many metres are left?",
+     "answer": 3,
+     "tolerance": 0,
+     "explanation": "5 − 2 = 3.",
+     "unit": "m",
+     "id": "class2-maths-measures-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many cm is that? (3 m)",
+     "answer": 300,
+     "tolerance": 0,
+     "explanation": "300 cm.",
+     "unit": "cm",
+     "id": "class2-maths-measures-e06-b"
+    }
+   ],
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-length-cm-m-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-length-cm-m",
+   "prompt": "Class 2 maths length: 1 metre is...",
+   "choices": [
+    "50 cm",
+    "10 cm",
+    "100 cm",
+    "1000 cm"
+   ],
+   "answer": 2,
+   "explanation": "100 cm.",
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-length-cm-m-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-length-cm-m",
+   "prompt": "Class 2 maths length: which unit for a pencil?",
+   "choices": [
+    "m",
+    "FCFA",
+    "cm",
+    "litre"
+   ],
+   "answer": 2,
+   "explanation": "cm.",
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-length-cm-m-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-length-cm-m",
+   "prompt": "2 m equals...",
+   "choices": [
+    "2 cm",
+    "20 cm",
+    "2000 cm",
+    "200 cm"
+   ],
+   "answer": 3,
+   "explanation": "200 cm.",
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-length-cm-m-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-length-cm-m",
+   "prompt": "Which is the longest?",
+   "choices": [
+    "30 cm",
+    "1 m",
+    "5 cm",
+    "80 cm"
+   ],
+   "answer": 1,
+   "explanation": "1 m.",
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-length-cm-m-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-length-cm-m",
+   "prompt": "To measure we start the ruler at...",
+   "choices": [
+    "ten",
+    "five",
+    "the end",
+    "zero"
+   ],
+   "answer": 3,
+   "explanation": "0.",
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-measures-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class2-maths-money-fcfa",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A sweet costs 25 FCFA. How much for 4 sweets?",
+   "answer": 100,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "4 × 25 = 100.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-measures-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class2-maths-money-fcfa",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A mango costs 50 FCFA. How much for 6 mangoes?",
+   "answer": 300,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "6 × 50 = 300.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-measures-e09",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class2-maths-money-fcfa",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "You pay 200 FCFA for a 150 FCFA book. What is your change?",
+   "answer": 50,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "200 − 150 = 50.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-measures-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class2-maths-money-fcfa",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Eggs cost 100 FCFA each. How much for 7 eggs?",
+   "answer": 700,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "7 × 100.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-measures-e11",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "class2-maths-money-fcfa",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which is more money?",
+   "choices": [
+    "250 FCFA",
+    "500 FCFA",
+    "100 FCFA",
+    "1000 FCFA"
+   ],
+   "answer": 3,
+   "explanation": "1000 is the most.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-measures-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class2-maths-money-fcfa",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Bih buys at a shop in Yaoundé: a ruler for 150 FCFA and a pencil for 75 FCFA. She pays with a 500 FCFA coin.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How much is the total?",
+     "answer": 225,
+     "tolerance": 0,
+     "explanation": "150 + 75 = 225.",
+     "unit": "FCFA",
+     "id": "class2-maths-measures-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "What is her change?",
+     "answer": 275,
+     "tolerance": 0,
+     "explanation": "500 − 225 = 275.",
+     "unit": "FCFA",
+     "id": "class2-maths-measures-e12-b"
+    }
+   ],
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-money-fcfa-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-money-fcfa",
+   "prompt": "Class 2 maths money: change is...",
+   "choices": [
+    "the price",
+    "a note",
+    "the shop",
+    "money given back"
+   ],
+   "answer": 3,
+   "explanation": "Change.",
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-money-fcfa-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-money-fcfa",
+   "prompt": "Class 2 maths money: 2 pens at 100 FCFA each cost...",
+   "choices": [
+    "300 FCFA",
+    "20 FCFA",
+    "200 FCFA",
+    "102 FCFA"
+   ],
+   "answer": 2,
+   "explanation": "200.",
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-money-fcfa-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-money-fcfa",
+   "prompt": "You pay 100 FCFA for a 60 FCFA sweet. Change?",
+   "choices": [
+    "60 FCFA",
+    "50 FCFA",
+    "160 FCFA",
+    "40 FCFA"
+   ],
+   "answer": 3,
+   "explanation": "40.",
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-money-fcfa-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-money-fcfa",
+   "prompt": "Which is the biggest amount?",
+   "choices": [
+    "1000 FCFA",
+    "500 FCFA",
+    "5000 FCFA",
+    "50 FCFA"
+   ],
+   "answer": 2,
+   "explanation": "5000.",
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-money-fcfa-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-money-fcfa",
+   "prompt": "Two items cost 300 and 200 FCFA. Together:",
+   "choices": [
+    "100 FCFA",
+    "50 FCFA",
+    "500 FCFA",
+    "5000 FCFA"
+   ],
+   "answer": 2,
+   "explanation": "500.",
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-measures-e13",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class2-maths-time-half-quarter",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What time does the clock show?",
+   "choices": [
+    "2 o'clock",
+    "half past 2",
+    "half past 3",
+    "quarter past 2"
+   ],
+   "answer": 1,
+   "explanation": "Long hand on 6.",
+   "difficulty": 1,
+   "points": 1,
+   "figure": {
+    "kind": "shapes",
+    "w": 200,
+    "h": 200,
+    "items": [
+     {
+      "t": "circle",
+      "cx": 100,
+      "cy": 100,
+      "r": 80,
+      "stroke": "ink",
+      "width": 3,
+      "fill": "white"
+     },
+     {
+      "t": "text",
+      "x": 131.5,
+      "y": 50.44039956158037,
+      "text": "1",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 154.55960043841964,
+      "y": 73.5,
+      "text": "2",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 163.0,
+      "y": 105.0,
+      "text": "3",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 154.55960043841964,
+      "y": 136.5,
+      "text": "4",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 131.5,
+      "y": 159.55960043841964,
+      "text": "5",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 100.0,
+      "y": 168.0,
+      "text": "6",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 68.50000000000001,
+      "y": 159.55960043841964,
+      "text": "7",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 45.440399561580364,
+      "y": 136.5,
+      "text": "8",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 37.0,
+      "y": 105.00000000000001,
+      "text": "9",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 45.44039956158037,
+      "y": 73.5,
+      "text": "10",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 68.49999999999997,
+      "y": 50.440399561580385,
+      "text": "11",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 99.99999999999999,
+      "y": 42.0,
+      "text": "12",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "line",
+      "x1": 100,
+      "y1": 100,
+      "x2": 136.7051813989846,
+      "y2": 90.16487628610422,
+      "color": "red",
+      "width": 5
+     },
+     {
+      "t": "line",
+      "x1": 100,
+      "y1": 100,
+      "x2": 100.0,
+      "y2": 160.0,
+      "color": "blue",
+      "width": 3
+     },
+     {
+      "t": "circle",
+      "cx": 100,
+      "cy": 100,
+      "r": 4,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "ink"
+     }
+    ]
+   },
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-measures-e14",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class2-maths-time-half-quarter",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What time does the clock show?",
+   "choices": [
+    "half past 5",
+    "quarter past 5",
+    "5 o'clock",
+    "quarter to 5"
+   ],
+   "answer": 1,
+   "explanation": "Long hand on 3.",
+   "difficulty": 1,
+   "points": 1,
+   "figure": {
+    "kind": "shapes",
+    "w": 200,
+    "h": 200,
+    "items": [
+     {
+      "t": "circle",
+      "cx": 100,
+      "cy": 100,
+      "r": 80,
+      "stroke": "ink",
+      "width": 3,
+      "fill": "white"
+     },
+     {
+      "t": "text",
+      "x": 131.5,
+      "y": 50.44039956158037,
+      "text": "1",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 154.55960043841964,
+      "y": 73.5,
+      "text": "2",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 163.0,
+      "y": 105.0,
+      "text": "3",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 154.55960043841964,
+      "y": 136.5,
+      "text": "4",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 131.5,
+      "y": 159.55960043841964,
+      "text": "5",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 100.0,
+      "y": 168.0,
+      "text": "6",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 68.50000000000001,
+      "y": 159.55960043841964,
+      "text": "7",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 45.440399561580364,
+      "y": 136.5,
+      "text": "8",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 37.0,
+      "y": 105.00000000000001,
+      "text": "9",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 45.44039956158037,
+      "y": 73.5,
+      "text": "10",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 68.49999999999997,
+      "y": 50.440399561580385,
+      "text": "11",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 99.99999999999999,
+      "y": 42.0,
+      "text": "12",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "line",
+      "x1": 100,
+      "y1": 100,
+      "x2": 114.54197042987342,
+      "y2": 135.10742223542888,
+      "color": "red",
+      "width": 5
+     },
+     {
+      "t": "line",
+      "x1": 100,
+      "y1": 100,
+      "x2": 160.0,
+      "y2": 100.0,
+      "color": "blue",
+      "width": 3
+     },
+     {
+      "t": "circle",
+      "cx": 100,
+      "cy": 100,
+      "r": 4,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "ink"
+     }
+    ]
+   },
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-measures-e15",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class2-maths-time-half-quarter",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many minutes are in half an hour?",
+   "answer": 30,
+   "tolerance": 0,
+   "unit": "minutes",
+   "explanation": "30.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-measures-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class2-maths-time-half-quarter",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many minutes are in a quarter of an hour?",
+   "answer": 15,
+   "tolerance": 0,
+   "unit": "minutes",
+   "explanation": "60 ÷ 4 = 15.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-measures-e17",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "class2-maths-time-half-quarter",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Quarter to 8 is the same as...",
+   "choices": [
+    "7:15",
+    "8:45",
+    "7:45",
+    "8:15"
+   ],
+   "answer": 2,
+   "explanation": "45 minutes past 7.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-measures-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class2-maths-time-half-quarter",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "School in Kumba starts at 7:30 (half past 7) and break is at 10:00 (10 o'clock).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many minutes are there from 7:30 to 8:30?",
+     "answer": 60,
+     "tolerance": 0,
+     "explanation": "One hour is 60 minutes.",
+     "unit": "minutes",
+     "id": "class2-maths-measures-e18-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "At 10 o'clock where is the long hand?",
+     "choices": [
+      "on 6",
+      "on 3",
+      "on 9",
+      "on 12"
+     ],
+     "answer": 3,
+     "explanation": "O'clock means 12.",
+     "id": "class2-maths-measures-e18-b"
+    }
+   ],
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-time-half-quarter-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-time-half-quarter",
+   "prompt": "Class 2 maths time: half past means the long hand is on...",
+   "choices": [
+    "9",
+    "12",
+    "3",
+    "6"
+   ],
+   "answer": 3,
+   "explanation": "6.",
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-time-half-quarter-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-time-half-quarter",
+   "prompt": "Class 2 maths time: how many minutes in one hour?",
+   "choices": [
+    "30",
+    "100",
+    "24",
+    "60"
+   ],
+   "answer": 3,
+   "explanation": "60.",
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-time-half-quarter-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-time-half-quarter",
+   "prompt": "Quarter past 3 is...",
+   "choices": [
+    "4:15",
+    "3:45",
+    "3:15",
+    "3:30"
+   ],
+   "answer": 2,
+   "explanation": "3:15.",
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-time-half-quarter-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-time-half-quarter",
+   "prompt": "When the long hand is on 9 it is quarter...",
+   "choices": [
+    "to the next hour",
+    "o'clock",
+    "past",
+    "half"
+   ],
+   "answer": 0,
+   "explanation": "Quarter to.",
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-time-half-quarter-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-time-half-quarter",
+   "prompt": "How many minutes between 3 and 6 on the clock face?",
+   "choices": [
+    "30",
+    "60",
+    "15",
+    "5"
+   ],
+   "answer": 2,
+   "explanation": "3 to 6 is 15 minutes.",
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-measures-e19",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class2-maths-shapes-2d-3d",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many faces has a cube?",
+   "answer": 6,
+   "tolerance": 0,
+   "explanation": "6.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-measures-e20",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class2-maths-shapes-2d-3d",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which shape is like a ball?",
+   "choices": [
+    "square",
+    "cube",
+    "sphere",
+    "cone"
+   ],
+   "answer": 2,
+   "explanation": "Sphere.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-measures-e21",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class2-maths-shapes-2d-3d",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many sides have 2 triangles together?",
+   "answer": 6,
+   "tolerance": 0,
+   "explanation": "3 + 3 = 6.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-measures-e22",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "class2-maths-shapes-2d-3d",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match the object with its shape.",
+   "pairs": [
+    [
+     "a dice",
+     "cube"
+    ],
+    [
+     "a football",
+     "sphere"
+    ],
+    [
+     "a milk tin",
+     "cylinder"
+    ],
+    [
+     "a party hat",
+     "cone"
+    ]
+   ],
+   "explanation": "Think of each object.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-measures-e23",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class2-maths-shapes-2d-3d",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A square has 4 equal sides.",
+   "answer": true,
+   "explanation": "True.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-measures-e24",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class2-maths-shapes-2d-3d",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Tabi draws shapes.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "She draws 3 squares. How many corners in all? (3 × 4)",
+     "answer": 12,
+     "tolerance": 0,
+     "explanation": "12.",
+     "id": "class2-maths-measures-e24-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "She draws 2 rectangles and 1 triangle. How many sides in all? (4 + 4 + 3)",
+     "answer": 11,
+     "tolerance": 0,
+     "explanation": "4 + 4 + 3 = 11.",
+     "id": "class2-maths-measures-e24-b"
+    }
+   ],
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-shapes-2d-3d-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-shapes-2d-3d",
+   "prompt": "Class 2 maths shapes: how many sides has a triangle?",
+   "choices": [
+    "4",
+    "0",
+    "3",
+    "5"
+   ],
+   "answer": 2,
+   "explanation": "3.",
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-shapes-2d-3d-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-shapes-2d-3d",
+   "prompt": "Class 2 maths shapes: a dice is a...",
+   "choices": [
+    "circle",
+    "cone",
+    "cube",
+    "ball"
+   ],
+   "answer": 2,
+   "explanation": "Cube.",
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-shapes-2d-3d-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-shapes-2d-3d",
+   "prompt": "A solid shape with a point and a round base is a...",
+   "choices": [
+    "cone",
+    "cylinder",
+    "sphere",
+    "cube"
+   ],
+   "answer": 0,
+   "explanation": "Cone.",
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-shapes-2d-3d-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-shapes-2d-3d",
+   "prompt": "A rectangle has how many corners?",
+   "choices": [
+    "2",
+    "3",
+    "4",
+    "6"
+   ],
+   "answer": 2,
+   "explanation": "4.",
+   "chapter": "class2-maths-measures"
+  },
+  {
+   "id": "class2-maths-shapes-2d-3d-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class2-maths-shapes-2d-3d",
+   "prompt": "A football is a...",
+   "choices": [
+    "cone",
+    "sphere",
+    "cube",
+    "rectangle"
+   ],
+   "answer": 1,
+   "explanation": "Sphere.",
+   "chapter": "class2-maths-measures"
+  }
+ ]
+}

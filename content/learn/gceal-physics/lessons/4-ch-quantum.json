@@ -1,0 +1,968 @@
+{
+ "chapter": "gceal-physics-ch-quantum",
+ "lessons": [
+  {
+   "id": "gceal-physics-photoelectric",
+   "title": "The photoelectric effect",
+   "minutes": 35,
+   "programRef": "GCE Advanced Level Physics — quantum physics (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe the observations of the photoelectric effect and explain why the wave model fails",
+    "Use Einstein's equation hf = φ + K_max, the threshold frequency and the stopping potential",
+    "Determine the Planck constant from a graph of stopping potential against frequency"
+   ],
+   "prerequisites": [
+    "gceal-physics-emwaves"
+   ],
+   "exercises": [
+    "gceal-physics-ch-quantum-e01",
+    "gceal-physics-ch-quantum-e02",
+    "gceal-physics-ch-quantum-e03",
+    "gceal-physics-ch-quantum-e04",
+    "gceal-physics-ch-quantum-e05",
+    "gceal-physics-ch-quantum-e06"
+   ],
+   "selfCheck": [
+    "gceal-physics-photoelectric-q1",
+    "gceal-physics-photoelectric-q2",
+    "gceal-physics-photoelectric-q3",
+    "gceal-physics-photoelectric-q4",
+    "gceal-physics-photoelectric-q5"
+   ],
+   "reviewNotes": [
+    "Constants used: e = 1.60 × 10⁻¹⁹ C; h = 6.63 × 10⁻³⁴ J s; c = 3.00 × 10⁸ m/s; mₑ = 9.11 × 10⁻³¹ kg; ε₀ = 8.85 × 10⁻¹² F/m; μ₀ = 4π × 10⁻⁷ H/m.",
+    "φ for sodium varies with sources (about 2.3 eV); state the value in class.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Observations",
+     "md": "When light or ultraviolet radiation falls on a clean metal surface, electrons may be emitted (**photoelectrons**). Observations:\n\n- No emission below a **threshold frequency** f₀ whatever the intensity.\n- Above f₀ emission is instantaneous, even at very low intensity.\n- The maximum kinetic energy of the electrons depends on the frequency, not on the intensity.\n- The number emitted per second is proportional to the intensity."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Einstein's photon model",
+     "md": "Light consists of **photons**, each of energy **E = hf** (h = 6.63 × 10⁻³⁴ J s). One photon gives all its energy to one electron. Part (the **work function** φ) is needed to escape the metal; the rest is kinetic energy:\n\n**hf = φ + K_max**, with φ = hf₀. The **stopping potential** V_s satisfies eV_s = K_max.",
+     "tex": "hf=\\varphi+K_{\\max}\\qquad \\varphi=hf_0\\qquad eV_s=K_{\\max}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 12,
+      "ymin": 0,
+      "ymax": 3,
+      "grid": 3,
+      "w": 380,
+      "h": 240,
+      "curves": [],
+      "points": [
+       {
+        "x": 5.55,
+        "y": 0,
+        "label": "f₀",
+        "color": "red"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 0,
+        "y1": 0,
+        "x2": 5.55,
+        "y2": 0,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 5.55,
+        "y1": 0,
+        "x2": 12,
+        "y2": 2.67271875,
+        "color": "blue",
+        "dash": false
+       }
+      ],
+      "xlabel": "f / 10¹⁴ Hz",
+      "ylabel": "K max / eV"
+     },
+     "caption": "Maximum kinetic energy of photoelectrons against frequency (sodium, φ = 2.3 eV): zero below f₀, then a straight line of gradient h.",
+     "alt": "A graph that is flat at zero up to the threshold frequency near 5.5 times 10 to the 14 hertz and then rises in a straight line."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Why the wave model fails",
+     "md": "A wave model predicts that a stronger beam should give electrons more energy, that any frequency should work given enough time, and that there would be a delay while energy builds up. None of this is observed. The photon model explains the threshold, the instant emission and the dependence on frequency.\n\n1 electronvolt (eV) = 1.60 × 10⁻¹⁹ J: the energy gained by an electron through 1 V."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Thinking a brighter beam below the threshold frequency can release electrons: it cannot.\n- Mixing eV and joules in hf = φ + K: convert consistently.\n- Reading the intercept of the V_s–f graph as φ: the y-intercept is −φ/e, the x-intercept is f₀, the gradient is h/e.\n- Saying intensity affects the maximum kinetic energy: it affects only the number of electrons."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Sodium",
+     "statement": "Sodium has a work function of 2.3 eV (a textbook value). Find the threshold frequency and then K_max and the stopping potential for ultraviolet light of wavelength 300 nm.",
+     "steps": [
+      "φ = 2.3 × 1.60 × 10⁻¹⁹ = 3.68 × 10⁻¹⁹ J; f₀ = φ/h = 3.68 × 10⁻¹⁹ ÷ 6.63 × 10⁻³⁴ = 5.55 × 10¹⁴ Hz.",
+      "Photon energy: E = hc/λ = 6.63 × 10⁻³⁴ × 3.00 × 10⁸ ÷ 3.00 × 10⁻⁷ = 6.63 × 10⁻¹⁹ J = 4.14 eV.",
+      "K_max = 4.14 − 2.3 = 1.84 eV, so V_s = 1.84 V."
+     ],
+     "answer": "f₀ = 5.55 × 10¹⁴ Hz; K_max = 1.84 eV; V_s = 1.84 V"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Planck constant from data",
+     "statement": "A student finds V_s = 1.01 V at f = 8.0 × 10¹⁴ Hz and V_s = 2.26 V at f = 11.0 × 10¹⁴ Hz. Estimate h.",
+     "steps": [
+      "Since eV_s = hf − φ, the gradient of V_s against f is h/e.",
+      "Gradient = (2.26 − 1.01)/(11.0 − 8.0) × 10⁻¹⁴ = 4.17 × 10⁻¹⁵ V s.",
+      "h = gradient × e = 4.17 × 10⁻¹⁵ × 1.60 × 10⁻¹⁹ = 6.7 × 10⁻³⁴ J s."
+     ],
+     "answer": "h ≈ 6.7 × 10⁻³⁴ J s (accepted value 6.63 × 10⁻³⁴)"
+    }
+   ],
+   "chapter": "gceal-physics-ch-quantum"
+  },
+  {
+   "id": "gceal-physics-duality",
+   "title": "Wave–particle duality and line spectra",
+   "minutes": 35,
+   "programRef": "GCE Advanced Level Physics — quantum physics (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Use the de Broglie relation λ = h/p and describe electron diffraction as evidence for matter waves",
+    "Explain line spectra using energy levels and use hf = E₂ − E₁ with the hydrogen levels E_n = −13.6/n² eV",
+    "Distinguish emission and absorption spectra and describe their uses"
+   ],
+   "prerequisites": [
+    "gceal-physics-photoelectric"
+   ],
+   "exercises": [
+    "gceal-physics-ch-quantum-e07",
+    "gceal-physics-ch-quantum-e08",
+    "gceal-physics-ch-quantum-e09",
+    "gceal-physics-ch-quantum-e10",
+    "gceal-physics-ch-quantum-e11",
+    "gceal-physics-ch-quantum-e12"
+   ],
+   "selfCheck": [
+    "gceal-physics-duality-q1",
+    "gceal-physics-duality-q2",
+    "gceal-physics-duality-q3",
+    "gceal-physics-duality-q4",
+    "gceal-physics-duality-q5"
+   ],
+   "reviewNotes": [
+    "Constants used: e = 1.60 × 10⁻¹⁹ C; h = 6.63 × 10⁻³⁴ J s; c = 3.00 × 10⁸ m/s; mₑ = 9.11 × 10⁻³¹ kg; ε₀ = 8.85 × 10⁻¹² F/m; μ₀ = 4π × 10⁻⁷ H/m.",
+    "Ionisation energy and level formula are given for hydrogen only. Lasers (stimulated emission) and X-ray spectra are not covered; check the syllabus.",
+    "The calculated 658 nm differs from the measured 656 nm because of rounding of constants.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Matter waves",
+     "md": "Particles show wave behaviour: the **de Broglie wavelength** of a particle of momentum p = mv is **λ = h/p**. The diffraction of electrons by a thin crystal or graphite shows rings like those of X-rays: this is evidence for the wave nature of matter.\n\nFor an electron accelerated from rest through V volts: p = √(2m_eeV), so λ = h/√(2m_eeV). For everyday objects λ is far too small to observe."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Energy levels",
+     "md": "In an atom the electrons occupy discrete **energy levels**. In hydrogen the energy of level n is **E_n = −13.6/n² eV** (n = 1 is the ground state; ionisation energy 13.6 eV).\n\nWhen an electron falls from a higher level to a lower one, one photon is emitted: **hf = E_upper − E_lower**, so λ = hc/ΔE. Absorption of a photon of exactly this energy raises the electron to the higher level.",
+     "tex": "\\lambda=\\frac{h}{p}\\qquad E_n=-\\frac{13.6}{n^{2}}\\ \\text{eV}\\qquad hf=E_2-E_1"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 30.0,
+        "x2": 280,
+        "y2": 30.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 34.0,
+        "text": "n = ∞  0",
+        "size": 12,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 41.39,
+        "x2": 280,
+        "y2": 41.39,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 45.39,
+        "text": "n = 4  −0.85",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 50.248888888888885,
+        "x2": 280,
+        "y2": 50.248888888888885,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 54.248888888888885,
+        "text": "n = 3  −1.51",
+        "size": 12,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 75.56,
+        "x2": 280,
+        "y2": 75.56,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 79.56,
+        "text": "n = 2  −3.40",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 212.24,
+        "x2": 280,
+        "y2": 212.24,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 216.24,
+        "text": "n = 1  −13.6",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 50.248888888888885,
+        "x2": 150,
+        "y2": 73.56,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 142,
+        "y": 110,
+        "text": "656 nm",
+        "size": 12,
+        "anchor": "end",
+        "color": "red"
+       },
+       {
+        "t": "line",
+        "x1": 230,
+        "y1": 75.56,
+        "x2": 230,
+        "y2": 210.24,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 222,
+        "y": 150,
+        "text": "122 nm",
+        "size": 12,
+        "anchor": "end",
+        "color": "blue"
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 16,
+        "text": "E / eV (hydrogen)",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Energy levels of hydrogen and two transitions.",
+     "alt": "A ladder of horizontal energy levels from n = 1 at −13.6 electron-volts to n = infinity at zero with two downward arrows labelled 656 nm and 122 nm."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Spectra",
+     "md": "A hot low-pressure gas emits an **emission line spectrum**: bright lines of definite wavelengths, characteristic of the element. White light passing through a cool gas gives an **absorption spectrum** (dark lines at the same wavelengths). Line spectra prove that atomic energy levels are discrete and are used to identify elements (for example in stars). A continuous spectrum comes from hot solids."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Taking E_n as positive: bound-state energies are negative.\n- Using ΔE in eV in λ = hc/ΔE without converting to joules.\n- Saying electrons are 'either waves or particles': both models are needed.\n- Thinking the photon energy depends on which level the electron starts from alone: it depends on the difference between two levels."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Electron wavelength",
+     "statement": "Find the de Broglie wavelength of an electron accelerated from rest through 100 V.",
+     "steps": [
+      "p = √(2meV) = √(2 × 9.11 × 10⁻³¹ × 1.60 × 10⁻¹⁹ × 100) = 5.40 × 10⁻²⁴ kg m/s.",
+      "λ = h/p = 6.63 × 10⁻³⁴ ÷ 5.40 × 10⁻²⁴ = 1.23 × 10⁻¹⁰ m, about the size of an atom, so crystals diffract it."
+     ],
+     "answer": "λ = 1.23 × 10⁻¹⁰ m"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Hydrogen line",
+     "statement": "An electron in hydrogen falls from n = 3 to n = 2. Find the photon energy and wavelength.",
+     "steps": [
+      "E₃ = −13.6/9 = −1.51 eV; E₂ = −13.6/4 = −3.40 eV; ΔE = 1.89 eV = 3.02 × 10⁻¹⁹ J.",
+      "λ = hc/ΔE = 6.63 × 10⁻³⁴ × 3.00 × 10⁸ ÷ 3.02 × 10⁻¹⁹ = 6.58 × 10⁻⁷ m = 658 nm (red; the measured line is 656 nm)."
+     ],
+     "answer": "ΔE = 1.89 eV; λ ≈ 658 nm (red)"
+    }
+   ],
+   "chapter": "gceal-physics-ch-quantum"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceal-physics-ch-quantum-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-physics-photoelectric",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Find the energy of a photon of frequency 6.0 × 10¹⁴ Hz (10⁻¹⁹ J, 3 s.f.).",
+   "answer": 3.98,
+   "tolerance": 0.02,
+   "unit": "× 10⁻¹⁹ J",
+   "explanation": "E = hf = 6.63 × 10⁻³⁴ × 6.0 × 10¹⁴ = 3.98 × 10⁻¹⁹ J.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-physics-ch-quantum"
+  },
+  {
+   "id": "gceal-physics-ch-quantum-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-physics-photoelectric",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Convert 3.2 × 10⁻¹⁹ J into electronvolts.",
+   "answer": 2.0,
+   "tolerance": 0.01,
+   "unit": "eV",
+   "explanation": "E = 3.2 × 10⁻¹⁹ ÷ 1.60 × 10⁻¹⁹ = 2.0 eV.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-physics-ch-quantum"
+  },
+  {
+   "id": "gceal-physics-ch-quantum-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-physics-photoelectric",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "True or false: increasing the intensity of light below the threshold frequency eventually causes electron emission.",
+   "answer": false,
+   "explanation": "Each photon is too weak; more photons do not help because electrons absorb one photon at a time.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-physics-ch-quantum"
+  },
+  {
+   "id": "gceal-physics-ch-quantum-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-physics-photoelectric",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A metal has work function 4.0 eV. Find the threshold wavelength (nm, 3 s.f.).",
+   "answer": 311.0,
+   "tolerance": 1,
+   "unit": "nm",
+   "explanation": "λ₀ = hc/φ = 6.63 × 10⁻³⁴ × 3.00 × 10⁸ ÷ (4.0 × 1.60 × 10⁻¹⁹) = 3.11 × 10⁻⁷ m = 311 nm.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-physics-ch-quantum"
+  },
+  {
+   "id": "gceal-physics-ch-quantum-e05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-physics-photoelectric",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Light of photon energy 5.0 eV falls on a metal of work function 2.0 eV. Find the stopping potential (V).",
+   "answer": 3.0,
+   "tolerance": 0.01,
+   "unit": "V",
+   "explanation": "K_max = 5.0 − 2.0 = 3.0 eV, so V_s = 3.0 V.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-physics-ch-quantum"
+  },
+  {
+   "id": "gceal-physics-ch-quantum-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-physics-photoelectric",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Ultraviolet light of wavelength 300 nm falls on a sodium surface (φ = 2.3 eV). h = 6.63 × 10⁻³⁴ J s, c = 3.00 × 10⁸ m/s, e = 1.60 × 10⁻¹⁹ C, mₑ = 9.11 × 10⁻³¹ kg.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Energy of each photon (eV, 3 s.f.).",
+     "answer": 4.14,
+     "tolerance": 0.02,
+     "explanation": "E = hc/λ = 6.63 × 10⁻¹⁹ J = 4.14 eV.",
+     "unit": "eV",
+     "id": "gceal-physics-ch-quantum-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Maximum kinetic energy of the photoelectrons (eV, 3 s.f.).",
+     "answer": 1.84,
+     "tolerance": 0.02,
+     "explanation": "K_max = 4.14 − 2.3 = 1.84 eV.",
+     "unit": "eV",
+     "id": "gceal-physics-ch-quantum-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Their maximum speed (10⁵ m/s, 2 s.f.).",
+     "answer": 8.0,
+     "tolerance": 0.1,
+     "explanation": "v = √(2K/m) = √(2 × 1.84 × 1.60 × 10⁻¹⁹ ÷ 9.11 × 10⁻³¹) = 8.0 × 10⁵ m/s.",
+     "unit": "× 10⁵ m/s",
+     "id": "gceal-physics-ch-quantum-e06-c"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "If the intensity of the ultraviolet light is doubled, the maximum kinetic energy",
+     "choices": [
+      "halves",
+      "falls to zero",
+      "stays the same, while the number of electrons emitted per second doubles",
+      "doubles"
+     ],
+     "answer": 2,
+     "explanation": "K_max depends on the photon energy (frequency), not the intensity.",
+     "id": "gceal-physics-ch-quantum-e06-d"
+    }
+   ],
+   "chapter": "gceal-physics-ch-quantum"
+  },
+  {
+   "id": "gceal-physics-photoelectric-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-photoelectric",
+   "prompt": "The work function of a metal is",
+   "choices": [
+    "the minimum energy needed to remove an electron from the surface",
+    "the energy of the photon",
+    "the maximum kinetic energy",
+    "the charge of an electron"
+   ],
+   "answer": 0,
+   "explanation": "It is the energy needed to escape the metal.",
+   "chapter": "gceal-physics-ch-quantum"
+  },
+  {
+   "id": "gceal-physics-photoelectric-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-photoelectric",
+   "prompt": "Which graph is a straight line for the photoelectric effect?",
+   "choices": [
+    "K_max against frequency",
+    "K_max against time",
+    "current against wavelength",
+    "K_max against intensity"
+   ],
+   "answer": 0,
+   "explanation": "K_max = hf − φ.",
+   "chapter": "gceal-physics-ch-quantum"
+  },
+  {
+   "id": "gceal-physics-photoelectric-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-photoelectric",
+   "prompt": "The gradient of a graph of stopping potential against frequency is",
+   "choices": [
+    "h/e",
+    "h",
+    "e/h",
+    "φ"
+   ],
+   "answer": 0,
+   "explanation": "V_s = (h/e)f − φ/e.",
+   "chapter": "gceal-physics-ch-quantum"
+  },
+  {
+   "id": "gceal-physics-photoelectric-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-photoelectric",
+   "prompt": "1 eV is equal to",
+   "choices": [
+    "1.60 × 10⁻¹⁹ V",
+    "1.60 × 10⁻¹⁹ J",
+    "9.11 × 10⁻³¹ J",
+    "6.63 × 10⁻³⁴ J"
+   ],
+   "answer": 1,
+   "explanation": "The energy gained by an electron through 1 V.",
+   "chapter": "gceal-physics-ch-quantum"
+  },
+  {
+   "id": "gceal-physics-photoelectric-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-photoelectric",
+   "prompt": "The photon theory explains instantaneous emission because",
+   "choices": [
+    "one photon gives all its energy to one electron",
+    "the metal is heated",
+    "the wave is very strong",
+    "electrons absorb energy slowly"
+   ],
+   "answer": 0,
+   "explanation": "There is no build-up time.",
+   "chapter": "gceal-physics-ch-quantum"
+  },
+  {
+   "id": "gceal-physics-ch-quantum-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-physics-duality",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A 0.145 kg ball moves at 40 m/s. Find its de Broglie wavelength in units of 10⁻³⁴ m (3 s.f.).",
+   "answer": 1.14,
+   "tolerance": 0.01,
+   "unit": "× 10⁻³⁴ m",
+   "explanation": "p = 0.145 × 40 = 5.8 kg m/s; λ = 6.63 × 10⁻³⁴ ÷ 5.8 = 1.14 × 10⁻³⁴ m.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-physics-ch-quantum"
+  },
+  {
+   "id": "gceal-physics-ch-quantum-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-physics-duality",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Find the energy of the n = 2 level of hydrogen (eV).",
+   "answer": -3.4,
+   "tolerance": 0.005,
+   "unit": "eV",
+   "explanation": "E₂ = −13.6/4 = −3.40 eV.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-physics-ch-quantum"
+  },
+  {
+   "id": "gceal-physics-ch-quantum-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-physics-duality",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "True or false: the electrons in a hydrogen atom can have any energy.",
+   "answer": false,
+   "explanation": "Only discrete energy levels are allowed (−13.6/n² eV).",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-physics-ch-quantum"
+  },
+  {
+   "id": "gceal-physics-ch-quantum-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-physics-duality",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Find the wavelength (nm) of the photon emitted when hydrogen falls from n = 2 to n = 1.",
+   "answer": 122.0,
+   "tolerance": 1,
+   "unit": "nm",
+   "explanation": "ΔE = 10.2 eV = 1.63 × 10⁻¹⁸ J; λ = hc/ΔE = 1.22 × 10⁻⁷ m = 122 nm (ultraviolet).",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-physics-ch-quantum"
+  },
+  {
+   "id": "gceal-physics-ch-quantum-e11",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-physics-duality",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A line in an absorption spectrum of a star shows that",
+   "choices": [
+    "a cool gas in the star's atmosphere absorbs light of that wavelength",
+    "the star has no light",
+    "the star is hot",
+    "the star is moving"
+   ],
+   "answer": 0,
+   "explanation": "Dark lines mark photon energies matching transitions in the intervening gas.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-physics-ch-quantum"
+  },
+  {
+   "id": "gceal-physics-ch-quantum-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-physics-duality",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Use h = 6.63 × 10⁻³⁴ J s, c = 3.00 × 10⁸ m/s, e = 1.60 × 10⁻¹⁹ C, mₑ = 9.11 × 10⁻³¹ kg. Hydrogen energy levels are E_n = −13.6/n² eV.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Energy released (eV, 3 s.f.) when an electron falls from n = 3 to n = 1.",
+     "answer": 12.1,
+     "tolerance": 0.02,
+     "explanation": "ΔE = −1.51 − (−13.6) = 12.1 eV.",
+     "unit": "eV",
+     "id": "gceal-physics-ch-quantum-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Wavelength of that photon (nm, 3 s.f.).",
+     "answer": 103.0,
+     "tolerance": 1,
+     "explanation": "λ = hc/ΔE = 6.63 × 10⁻³⁴ × 3.00 × 10⁸ ÷ (12.09 × 1.60 × 10⁻¹⁹) = 1.03 × 10⁻⁷ m = 103 nm.",
+     "unit": "nm",
+     "id": "gceal-physics-ch-quantum-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Electron wavelength (10⁻¹⁰ m, 3 s.f.) for electrons accelerated through 100 V.",
+     "answer": 1.23,
+     "tolerance": 0.01,
+     "explanation": "λ = h/√(2meV) = 1.23 × 10⁻¹⁰ m.",
+     "unit": "× 10⁻¹⁰ m",
+     "id": "gceal-physics-ch-quantum-e12-c"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Electron diffraction is observed because the electron wavelength is",
+     "choices": [
+      "much larger than atoms",
+      "equal to that of visible light",
+      "comparable with the spacing of atoms in a crystal",
+      "zero"
+     ],
+     "answer": 2,
+     "explanation": "Diffraction needs λ of the same order as the gap spacing.",
+     "id": "gceal-physics-ch-quantum-e12-d"
+    }
+   ],
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 240,
+    "items": [
+     {
+      "t": "line",
+      "x1": 80,
+      "y1": 30.0,
+      "x2": 280,
+      "y2": 30.0,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "text",
+      "x": 70,
+      "y": 34.0,
+      "text": "n = ∞  0",
+      "size": 12,
+      "anchor": "end",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 80,
+      "y1": 41.39,
+      "x2": 280,
+      "y2": 41.39,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "text",
+      "x": 290,
+      "y": 45.39,
+      "text": "n = 4  −0.85",
+      "size": 12,
+      "anchor": "start",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 80,
+      "y1": 50.248888888888885,
+      "x2": 280,
+      "y2": 50.248888888888885,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "text",
+      "x": 70,
+      "y": 54.248888888888885,
+      "text": "n = 3  −1.51",
+      "size": 12,
+      "anchor": "end",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 80,
+      "y1": 75.56,
+      "x2": 280,
+      "y2": 75.56,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "text",
+      "x": 290,
+      "y": 79.56,
+      "text": "n = 2  −3.40",
+      "size": 12,
+      "anchor": "start",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 80,
+      "y1": 212.24,
+      "x2": 280,
+      "y2": 212.24,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "text",
+      "x": 290,
+      "y": 216.24,
+      "text": "n = 1  −13.6",
+      "size": 12,
+      "anchor": "start",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 150,
+      "y1": 50.248888888888885,
+      "x2": 150,
+      "y2": 73.56,
+      "color": "red",
+      "width": 3,
+      "arrow": "end"
+     },
+     {
+      "t": "text",
+      "x": 142,
+      "y": 110,
+      "text": "656 nm",
+      "size": 12,
+      "anchor": "end",
+      "color": "red"
+     },
+     {
+      "t": "line",
+      "x1": 230,
+      "y1": 75.56,
+      "x2": 230,
+      "y2": 210.24,
+      "color": "blue",
+      "width": 3,
+      "arrow": "end"
+     },
+     {
+      "t": "text",
+      "x": 222,
+      "y": 150,
+      "text": "122 nm",
+      "size": 12,
+      "anchor": "end",
+      "color": "blue"
+     },
+     {
+      "t": "text",
+      "x": 40,
+      "y": 16,
+      "text": "E / eV (hydrogen)",
+      "size": 12,
+      "anchor": "start",
+      "color": "ink"
+     }
+    ]
+   },
+   "chapter": "gceal-physics-ch-quantum"
+  },
+  {
+   "id": "gceal-physics-duality-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-duality",
+   "prompt": "The de Broglie wavelength of a particle is",
+   "choices": [
+    "h/E",
+    "h/p",
+    "hp",
+    "p/h"
+   ],
+   "answer": 1,
+   "explanation": "λ = h/p.",
+   "chapter": "gceal-physics-ch-quantum"
+  },
+  {
+   "id": "gceal-physics-duality-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-duality",
+   "prompt": "In hydrogen, the energy of the ground state is",
+   "choices": [
+    "0 eV",
+    "−3.40 eV",
+    "+13.6 eV",
+    "−13.6 eV"
+   ],
+   "answer": 3,
+   "explanation": "E₁ = −13.6/1² eV.",
+   "chapter": "gceal-physics-ch-quantum"
+  },
+  {
+   "id": "gceal-physics-duality-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-duality",
+   "prompt": "The photon emitted when an electron falls between two levels has energy",
+   "choices": [
+    "equal to the difference between the levels",
+    "zero",
+    "equal to the upper level",
+    "equal to the lower level"
+   ],
+   "answer": 0,
+   "explanation": "hf = E₂ − E₁.",
+   "chapter": "gceal-physics-ch-quantum"
+  },
+  {
+   "id": "gceal-physics-duality-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-duality",
+   "prompt": "A continuous spectrum is produced by",
+   "choices": [
+    "a hot solid",
+    "a hot low-pressure gas",
+    "a discharge tube",
+    "a cool gas"
+   ],
+   "answer": 0,
+   "explanation": "Closely spaced energies in solids give all wavelengths.",
+   "chapter": "gceal-physics-ch-quantum"
+  },
+  {
+   "id": "gceal-physics-duality-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-duality",
+   "prompt": "Electron diffraction provides evidence that electrons",
+   "choices": [
+    "are charged",
+    "behave as waves",
+    "are smaller than atoms",
+    "have mass"
+   ],
+   "answer": 1,
+   "explanation": "Diffraction is a wave property.",
+   "chapter": "gceal-physics-ch-quantum"
+  },
+  {
+   "id": "gceal-physics-ch-quantum-m01",
+   "kind": "mcq",
+   "tier": "examen",
+   "lesson": "gceal-physics-photoelectric",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Photons of energy 3.0 eV fall on a metal of work function 2.0 eV. The stopping potential is",
+   "choices": [
+    "2.0 V",
+    "1.0 V",
+    "5.0 V",
+    "3.0 V"
+   ],
+   "answer": 1,
+   "explanation": "K_max = 3.0 − 2.0 = 1.0 eV, so V_s = 1.0 V.",
+   "difficulty": 3,
+   "points": 2,
+   "chapter": "gceal-physics-ch-quantum"
+  }
+ ]
+}

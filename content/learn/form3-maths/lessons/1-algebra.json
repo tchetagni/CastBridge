@@ -1,0 +1,2640 @@
+{
+ "chapter": "form3-maths-algebra",
+ "lessons": [
+  {
+   "id": "form3-maths-factorisation",
+   "title": "Factorisation",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 3 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Factorise by grouping",
+    "Factorise a difference of two squares",
+    "Factorise quadratic trinomials of the form x² + bx + c and ax² + bx + c",
+    "Use factorisation to simplify and calculate"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form3-maths-algebra-e01",
+    "form3-maths-algebra-e02",
+    "form3-maths-algebra-e03",
+    "form3-maths-algebra-e04",
+    "form3-maths-algebra-e05",
+    "form3-maths-algebra-e06"
+   ],
+   "selfCheck": [
+    "form3-maths-factorisation-q1",
+    "form3-maths-factorisation-q2",
+    "form3-maths-factorisation-q3",
+    "form3-maths-factorisation-q4",
+    "form3-maths-factorisation-q5"
+   ],
+   "reviewNotes": [
+    "The completing the square method and the quadratic formula are Form 4 content.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Grouping and difference of squares",
+     "md": "**Grouping**: factorise pairs of terms, then the common bracket. 2x + 2y + ax + ay = 2(x + y) + a(x + y) = (2 + a)(x + y). **Difference of two squares**: $a^2 - b^2 = (a - b)(a + b)$, for example $x^2 - 49 = (x - 7)(x + 7)$ and $9y^2 - 4 = (3y - 2)(3y + 2)$."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Trinomials x² + bx + c",
+     "md": "Find two numbers that **multiply to c** and **add to b**. For $x^2 + 7x + 12$: 3 × 4 = 12 and 3 + 4 = 7, so $(x + 3)(x + 4)$. For $x^2 - 5x - 14$: −7 × 2 = −14 and −7 + 2 = −5, so $(x - 7)(x + 2)$. If c is negative the numbers have different signs."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 220,
+      "items": [
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 30,
+        "w": 150,
+        "h": 150,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 30,
+        "w": 60,
+        "h": 60,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 110,
+        "text": "x²",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 65,
+        "text": "7²",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 135,
+        "y": 22,
+        "text": "x",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 222,
+        "y": 110,
+        "text": "x",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 205,
+        "text": "x² − 49 = (x − 7)(x + 7)",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A square x by x with a 7 by 7 corner removed: x² − 49.",
+     "alt": "A big square with a smaller square cut from the top-right corner."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Trinomials ax² + bx + c",
+     "md": "Multiply a × c, find two numbers that multiply to ac and add to b, split the middle term and group. For $2x^2 + 5x + 3$: ac = 6, the numbers are 2 and 3, so $2x^2 + 2x + 3x + 3 = 2x(x + 1) + 3(x + 1) = (2x + 3)(x + 1)$."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Writing $x^2 + 49 = (x + 7)(x + 7)$: a **sum** of squares does not factorise this way, and $(x+7)^2 = x^2 + 14x + 49$.\n- Forgetting to take out a common factor first: $2x^2 - 8 = 2(x - 2)(x + 2)$.\n- Not checking by expanding the answer."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: difference of two squares",
+     "statement": "A square plot of side 20 m has a square corner of side 7 m taken for a path. Find the remaining area by factorising x² − 49 with x = 20.",
+     "steps": [
+      "Remaining area = x² − 7² = (x − 7)(x + 7).",
+      "With x = 20: 13 × 27 = 351.",
+      "Check: 400 − 49 = 351 m²."
+     ],
+     "answer": "**(x − 7)(x + 7); 351 m²**",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 220,
+      "items": [
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 30,
+        "w": 150,
+        "h": 150,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 30,
+        "w": 60,
+        "h": 60,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 110,
+        "text": "x²",
+        "size": 18,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 65,
+        "text": "7²",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 135,
+        "y": 22,
+        "text": "x",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 222,
+        "y": 110,
+        "text": "x",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 205,
+        "text": "x² − 49 = (x − 7)(x + 7)",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2: trinomials",
+     "statement": "Factorise (a) x² + 7x + 12, (b) x² − 5x − 14, (c) 2x² + 5x + 3.",
+     "steps": [
+      "(a) 3 × 4 = 12 and 3 + 4 = 7: (x + 3)(x + 4).",
+      "(b) −7 × 2 = −14 and −7 + 2 = −5: (x − 7)(x + 2).",
+      "(c) ac = 6; 2 and 3 add to 5: 2x² + 2x + 3x + 3 = 2x(x + 1) + 3(x + 1) = (2x + 3)(x + 1)."
+     ],
+     "answer": "**(x + 3)(x + 4); (x − 7)(x + 2); (2x + 3)(x + 1)**"
+    }
+   ],
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-simultaneous-equations",
+   "title": "Simultaneous equations",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 3 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Solve two linear equations by elimination",
+    "Solve by substitution",
+    "Solve by drawing the graphs",
+    "Form simultaneous equations from word problems"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form3-maths-algebra-e07",
+    "form3-maths-algebra-e08",
+    "form3-maths-algebra-e09",
+    "form3-maths-algebra-e10",
+    "form3-maths-algebra-e11",
+    "form3-maths-algebra-e12"
+   ],
+   "selfCheck": [
+    "form3-maths-simultaneous-equations-q1",
+    "form3-maths-simultaneous-equations-q2",
+    "form3-maths-simultaneous-equations-q3",
+    "form3-maths-simultaneous-equations-q4",
+    "form3-maths-simultaneous-equations-q5"
+   ],
+   "reviewNotes": [
+    "Simultaneous equations with one quadratic equation are left for Form 4.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "What are simultaneous equations?",
+     "md": "Two equations with two unknowns, such as x + y = 10 and x − y = 4, are solved **simultaneously** when we find the pair of values (x, y) that makes both true. Graphically the solution is the point where the two straight lines **cross**."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Elimination",
+     "md": "Make the coefficients of one letter equal (multiply an equation if needed). If the signs are different, **add** the equations; if they are the same, **subtract**. Solve for the remaining letter, then substitute back. x + y = 10 and x − y = 4: add to get 2x = 14, so x = 7 and y = 3."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 12,
+      "ymin": -5,
+      "ymax": 12,
+      "grid": 1,
+      "w": 400,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "10-x",
+        "color": "blue",
+        "label": "x + y = 10"
+       },
+       {
+        "expr": "x-4",
+        "color": "red",
+        "label": "x − y = 4"
+       }
+      ],
+      "points": [
+       {
+        "x": 7,
+        "y": 3,
+        "label": "(7, 3)",
+        "color": "green"
+       }
+      ],
+      "segments": [],
+      "xlabel": "x",
+      "ylabel": "y"
+     },
+     "caption": "The lines x + y = 10 and x − y = 4 cross at (7, 3).",
+     "alt": "A graph with two straight lines crossing at the point (7, 3)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Substitution",
+     "md": "Make one letter the subject of one equation and replace it in the other. For 2x + 3y = 12 and 3x − y = 7: from the second y = 3x − 7. Then 2x + 3(3x − 7) = 12, so 11x = 33 and x = 3, y = 2. Always **check in both original equations**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Adding when the signs are the same (you must subtract to eliminate).\n- Multiplying only one side of an equation by a number.\n- Finding x but forgetting to find y, or checking in only one equation."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: elimination and graph",
+     "statement": "Solve x + y = 10 and x − y = 4.",
+     "steps": [
+      "Add the equations: 2x = 14, so x = 7.",
+      "Substitute in x + y = 10: y = 3.",
+      "Check in the second: 7 − 3 = 4. The graphs cross at (7, 3)."
+     ],
+     "answer": "**x = 7, y = 3**",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 12,
+      "ymin": -5,
+      "ymax": 12,
+      "grid": 1,
+      "w": 400,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "10-x",
+        "color": "blue",
+        "label": "x + y = 10"
+       },
+       {
+        "expr": "x-4",
+        "color": "red",
+        "label": "x − y = 4"
+       }
+      ],
+      "points": [
+       {
+        "x": 7,
+        "y": 3,
+        "label": "(7, 3)",
+        "color": "green"
+       }
+      ],
+      "segments": [],
+      "xlabel": "x",
+      "ylabel": "y"
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2: a shopping problem",
+     "statement": "Two pens and three books cost 2 900 FCFA. Four pens and one book cost 2 300 FCFA. Find the price of a pen and of a book.",
+     "steps": [
+      "Let a pen cost p and a book b: 2p + 3b = 2 900 and 4p + b = 2 300.",
+      "From the second, b = 2 300 − 4p. So 2p + 6 900 − 12p = 2 900, giving −10p = −4 000 and p = 400.",
+      "b = 2 300 − 1 600 = 700. Check: 800 + 2 100 = 2 900."
+     ],
+     "answer": "**Pen 400 FCFA, book 700 FCFA.**"
+    }
+   ],
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-inequality-regions",
+   "title": "Compound inequalities and regions on a graph",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 3 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Solve compound inequalities",
+    "Draw boundary lines for inequalities in x and y",
+    "Shade the region that satisfies several inequalities",
+    "Use integer points in a region to solve problems"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form3-maths-algebra-e13",
+    "form3-maths-algebra-e14",
+    "form3-maths-algebra-e15",
+    "form3-maths-algebra-e16",
+    "form3-maths-algebra-e17",
+    "form3-maths-algebra-e18"
+   ],
+   "selfCheck": [
+    "form3-maths-inequality-regions-q1",
+    "form3-maths-inequality-regions-q2",
+    "form3-maths-inequality-regions-q3",
+    "form3-maths-inequality-regions-q4",
+    "form3-maths-inequality-regions-q5"
+   ],
+   "reviewNotes": [
+    "Linear programming (maximising profit) is not included.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Compound inequalities",
+     "md": "Solve all parts at once: $-3 < 2x + 1 \\leq 9$. Subtract 1 from every part: $-4 < 2x \\leq 8$. Divide every part by 2: $-2 < x \\leq 4$. The integers that satisfy it are −1, 0, 1, 2, 3, 4. Reverse **both** signs if you divide by a negative number."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Regions",
+     "md": "To show $y \\leq 2x + 1$ on a graph: draw the **boundary line** y = 2x + 1 (a **solid** line for ≤ or ≥, a **dashed** line for < or >). Pick a **test point** such as (0, 0): if it satisfies the inequality, shade that side; if not, shade the other side."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 380,
+      "h": 300,
+      "items": [
+       {
+        "t": "line",
+        "x1": 28.0,
+        "y1": 266.0,
+        "x2": 352.0,
+        "y2": 266.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 34.0,
+        "y1": 272.0,
+        "x2": 34.0,
+        "y2": 28.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 34.0,
+        "y1": 263.0,
+        "x2": 34.0,
+        "y2": 269.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 34.0,
+        "y": 283.0,
+        "text": "0",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 78.57142857142857,
+        "y1": 263.0,
+        "x2": 78.57142857142857,
+        "y2": 269.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 78.57142857142857,
+        "y": 283.0,
+        "text": "1",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 123.14285714285714,
+        "y1": 263.0,
+        "x2": 123.14285714285714,
+        "y2": 269.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 123.14285714285714,
+        "y": 283.0,
+        "text": "2",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 167.71428571428572,
+        "y1": 263.0,
+        "x2": 167.71428571428572,
+        "y2": 269.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 167.71428571428572,
+        "y": 283.0,
+        "text": "3",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 212.28571428571428,
+        "y1": 263.0,
+        "x2": 212.28571428571428,
+        "y2": 269.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 212.28571428571428,
+        "y": 283.0,
+        "text": "4",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 256.8571428571429,
+        "y1": 263.0,
+        "x2": 256.8571428571429,
+        "y2": 269.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 256.8571428571429,
+        "y": 283.0,
+        "text": "5",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 301.42857142857144,
+        "y1": 263.0,
+        "x2": 301.42857142857144,
+        "y2": 269.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 301.42857142857144,
+        "y": 283.0,
+        "text": "6",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 346.0,
+        "y1": 263.0,
+        "x2": 346.0,
+        "y2": 269.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 346.0,
+        "y": 283.0,
+        "text": "7",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 266.0,
+        "x2": 37.0,
+        "y2": 266.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 270.0,
+        "text": "0",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 232.85714285714286,
+        "x2": 37.0,
+        "y2": 232.85714285714286,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 236.85714285714286,
+        "text": "1",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 199.71428571428572,
+        "x2": 37.0,
+        "y2": 199.71428571428572,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 203.71428571428572,
+        "text": "2",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 166.57142857142856,
+        "x2": 37.0,
+        "y2": 166.57142857142856,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 170.57142857142856,
+        "text": "3",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 133.42857142857142,
+        "x2": 37.0,
+        "y2": 133.42857142857142,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 137.42857142857142,
+        "text": "4",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 100.28571428571428,
+        "x2": 37.0,
+        "y2": 100.28571428571428,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 104.28571428571428,
+        "text": "5",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 67.14285714285714,
+        "x2": 37.0,
+        "y2": 67.14285714285714,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 71.14285714285714,
+        "text": "6",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 34.0,
+        "x2": 37.0,
+        "y2": 34.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 38.0,
+        "text": "7",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         78.6,
+         232.9,
+         256.9,
+         232.9,
+         78.6,
+         100.3
+        ],
+        "stroke": "blue",
+        "width": 2,
+        "closed": true,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 227.88571428571427,
+        "y": 153.31428571428572,
+        "text": "x + y = 6",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 78.57142857142857,
+        "cy": 232.85714285714286,
+        "r": 3,
+        "stroke": "red",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 123.14285714285714,
+        "cy": 199.71428571428572,
+        "r": 3,
+        "stroke": "red",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 167.71428571428572,
+        "cy": 199.71428571428572,
+        "r": 3,
+        "stroke": "red",
+        "width": 2,
+        "fill": "red"
+       }
+      ]
+     },
+     "caption": "The triangle x ≥ 1, y ≥ 1, x + y ≤ 6 with a few integer points.",
+     "alt": "A shaded triangle with vertices (1, 1), (5, 1) and (1, 5) on a grid."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Several inequalities",
+     "md": "The solution of a **set** of inequalities is the part of the plane that satisfies all of them: shade (or leave unshaded) consistently and mark the **common region**. A point on a solid boundary is included. In problems, only **whole-number points** may make sense (you cannot buy half a sack)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Dashed vs solid lines swapped.\n- Not testing a point: guessing which side to shade.\n- Counting a point on a dashed boundary as part of the region."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: compound inequality",
+     "statement": "Solve −3 < 2x + 1 ≤ 9 and list the integer solutions.",
+     "steps": [
+      "Subtract 1 from each part: −4 < 2x ≤ 8.",
+      "Divide each part by 2: −2 < x ≤ 4.",
+      "Integers: −1, 0, 1, 2, 3, 4, so 6 integers."
+     ],
+     "answer": "**−2 < x ≤ 4; six integers.**"
+    },
+    {
+     "type": "example",
+     "title": "Example 2: a region",
+     "statement": "A trader can carry at most 6 sacks in total, with at least 1 sack of maize (x) and at least 1 sack of beans (y). List the conditions and find how many whole-number combinations are possible.",
+     "steps": [
+      "Conditions: x ≥ 1, y ≥ 1 and x + y ≤ 6. The region is a triangle with vertices (1, 1), (5, 1), (1, 5).",
+      "Count the whole-number points by x: x = 1 gives 5, x = 2 gives 4, x = 3 gives 3, x = 4 gives 2, x = 5 gives 1.",
+      "Total = 5 + 4 + 3 + 2 + 1 = 15 combinations."
+     ],
+     "answer": "**15 combinations.**",
+     "figure": {
+      "kind": "shapes",
+      "w": 380,
+      "h": 300,
+      "items": [
+       {
+        "t": "line",
+        "x1": 28.0,
+        "y1": 266.0,
+        "x2": 352.0,
+        "y2": 266.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 34.0,
+        "y1": 272.0,
+        "x2": 34.0,
+        "y2": 28.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 34.0,
+        "y1": 263.0,
+        "x2": 34.0,
+        "y2": 269.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 34.0,
+        "y": 283.0,
+        "text": "0",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 78.57142857142857,
+        "y1": 263.0,
+        "x2": 78.57142857142857,
+        "y2": 269.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 78.57142857142857,
+        "y": 283.0,
+        "text": "1",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 123.14285714285714,
+        "y1": 263.0,
+        "x2": 123.14285714285714,
+        "y2": 269.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 123.14285714285714,
+        "y": 283.0,
+        "text": "2",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 167.71428571428572,
+        "y1": 263.0,
+        "x2": 167.71428571428572,
+        "y2": 269.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 167.71428571428572,
+        "y": 283.0,
+        "text": "3",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 212.28571428571428,
+        "y1": 263.0,
+        "x2": 212.28571428571428,
+        "y2": 269.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 212.28571428571428,
+        "y": 283.0,
+        "text": "4",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 256.8571428571429,
+        "y1": 263.0,
+        "x2": 256.8571428571429,
+        "y2": 269.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 256.8571428571429,
+        "y": 283.0,
+        "text": "5",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 301.42857142857144,
+        "y1": 263.0,
+        "x2": 301.42857142857144,
+        "y2": 269.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 301.42857142857144,
+        "y": 283.0,
+        "text": "6",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 346.0,
+        "y1": 263.0,
+        "x2": 346.0,
+        "y2": 269.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 346.0,
+        "y": 283.0,
+        "text": "7",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 266.0,
+        "x2": 37.0,
+        "y2": 266.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 270.0,
+        "text": "0",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 232.85714285714286,
+        "x2": 37.0,
+        "y2": 232.85714285714286,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 236.85714285714286,
+        "text": "1",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 199.71428571428572,
+        "x2": 37.0,
+        "y2": 199.71428571428572,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 203.71428571428572,
+        "text": "2",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 166.57142857142856,
+        "x2": 37.0,
+        "y2": 166.57142857142856,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 170.57142857142856,
+        "text": "3",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 133.42857142857142,
+        "x2": 37.0,
+        "y2": 133.42857142857142,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 137.42857142857142,
+        "text": "4",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 100.28571428571428,
+        "x2": 37.0,
+        "y2": 100.28571428571428,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 104.28571428571428,
+        "text": "5",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 67.14285714285714,
+        "x2": 37.0,
+        "y2": 67.14285714285714,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 71.14285714285714,
+        "text": "6",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 34.0,
+        "x2": 37.0,
+        "y2": 34.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 38.0,
+        "text": "7",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         78.6,
+         232.9,
+         256.9,
+         232.9,
+         78.6,
+         100.3
+        ],
+        "stroke": "blue",
+        "width": 2,
+        "closed": true,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 227.88571428571427,
+        "y": 153.31428571428572,
+        "text": "x + y = 6",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 78.57142857142857,
+        "cy": 232.85714285714286,
+        "r": 3,
+        "stroke": "red",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 123.14285714285714,
+        "cy": 199.71428571428572,
+        "r": 3,
+        "stroke": "red",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 167.71428571428572,
+        "cy": 199.71428571428572,
+        "r": 3,
+        "stroke": "red",
+        "width": 2,
+        "fill": "red"
+       }
+      ]
+     }
+    }
+   ],
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-quadratic-graphs",
+   "title": "Graphs of quadratic functions",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Mathematics programme, Form 3 (MINESEC) — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Complete a table of values and plot y = ax² + bx + c",
+    "Describe the shape, axis of symmetry, turning point and roots",
+    "Read solutions of equations from the graph",
+    "Use a quadratic graph to solve a problem"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form3-maths-algebra-e19",
+    "form3-maths-algebra-e20",
+    "form3-maths-algebra-e21",
+    "form3-maths-algebra-e22",
+    "form3-maths-algebra-e23",
+    "form3-maths-algebra-e24"
+   ],
+   "selfCheck": [
+    "form3-maths-quadratic-graphs-q1",
+    "form3-maths-quadratic-graphs-q2",
+    "form3-maths-quadratic-graphs-q3",
+    "form3-maths-quadratic-graphs-q4",
+    "form3-maths-quadratic-graphs-q5"
+   ],
+   "reviewNotes": [
+    "Solving by formula and completing the square is Form 4; here only graphical and factorised roots appear.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Quadratic graphs",
+     "md": "A function $y = ax^2 + bx + c$ (a not 0) has a smooth U-shaped curve called a **parabola**. If a > 0 it opens upwards with a **minimum** turning point; if a < 0 it opens downwards with a **maximum**. It is **symmetrical** about a vertical line through the turning point."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Drawing",
+     "md": "Make a table of values with whole numbers of x, plot the points, and join them with a **smooth curve** (not with a ruler). For y = x² − 4x + 3: x = −1, 0, 1, 2, 3, 4, 5 give y = 8, 3, 0, −1, 0, 3, 8. The curve cuts the x-axis at x = 1 and x = 3 (the **roots**) and its minimum point is (2, −1)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": -1.5,
+      "xmax": 5.5,
+      "ymin": -2,
+      "ymax": 9,
+      "grid": 1,
+      "w": 400,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "x^2-4*x+3",
+        "color": "blue",
+        "label": "y = x² − 4x + 3"
+       }
+      ],
+      "points": [
+       {
+        "x": 1,
+        "y": 0,
+        "label": "1",
+        "color": "red"
+       },
+       {
+        "x": 3,
+        "y": 0,
+        "label": "3",
+        "color": "red"
+       },
+       {
+        "x": 2,
+        "y": -1,
+        "label": "min (2, −1)",
+        "color": "green"
+       }
+      ],
+      "segments": [],
+      "xlabel": "x",
+      "ylabel": "y"
+     },
+     "caption": "The parabola y = x² − 4x + 3 with roots 1 and 3 and minimum (2, −1).",
+     "alt": "A U-shaped curve crossing the x-axis at 1 and 3 with its lowest point at (2, −1)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Reading the graph",
+     "md": "The solutions of x² − 4x + 3 = 0 are the x-values where the curve meets the x-axis (y = 0). To solve x² − 4x + 3 = 3, draw the line y = 3 and read where it meets the curve: x = 0 and x = 4. The axis of symmetry is halfway between the roots: x = 2."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Joining points with straight segments.\n- A pointed bottom: the curve must be smooth and round.\n- Mis-calculating negative squares: (−1)² = 1, so y = 1 + 4 + 3 = 8 at x = −1."
+    },
+    {
+     "type": "example",
+     "title": "Example 1: table and roots",
+     "statement": "For y = x² − 4x + 3 find the roots, the turning point and the axis of symmetry from the graph.",
+     "steps": [
+      "The curve crosses the x-axis at 1 and 3: roots 1 and 3.",
+      "The lowest point is (2, −1): a minimum.",
+      "The axis of symmetry is x = 2, halfway between 1 and 3."
+     ],
+     "answer": "**Roots 1 and 3; minimum (2, −1); axis x = 2.**",
+     "figure": {
+      "kind": "plot",
+      "xmin": -1.5,
+      "xmax": 5.5,
+      "ymin": -2,
+      "ymax": 9,
+      "grid": 1,
+      "w": 400,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "x^2-4*x+3",
+        "color": "blue",
+        "label": "y = x² − 4x + 3"
+       }
+      ],
+      "points": [
+       {
+        "x": 1,
+        "y": 0,
+        "label": "1",
+        "color": "red"
+       },
+       {
+        "x": 3,
+        "y": 0,
+        "label": "3",
+        "color": "red"
+       },
+       {
+        "x": 2,
+        "y": -1,
+        "label": "min (2, −1)",
+        "color": "green"
+       }
+      ],
+      "segments": [],
+      "xlabel": "x",
+      "ylabel": "y"
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2: a thrown ball",
+     "statement": "A ball thrown from the ground at Limbe beach has height h = 6t − t² metres after t seconds. Find the maximum height and when it lands.",
+     "steps": [
+      "Table for t = 0 to 6: h = 0, 5, 8, 9, 8, 5, 0.",
+      "The highest point is at t = 3 s with h = 9 m.",
+      "It lands when h = 0 again, at t = 6 s."
+     ],
+     "answer": "**Maximum 9 m at 3 s; lands after 6 s.**",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 7,
+      "ymin": -1,
+      "ymax": 11,
+      "grid": 1,
+      "w": 400,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "6*x-x^2",
+        "color": "blue",
+        "label": "h = 6t − t²"
+       }
+      ],
+      "points": [
+       {
+        "x": 3,
+        "y": 9,
+        "label": "max",
+        "color": "green"
+       }
+      ],
+      "segments": [],
+      "xlabel": "t (s)",
+      "ylabel": "h (m)"
+     }
+    }
+   ],
+   "chapter": "form3-maths-algebra"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form3-maths-algebra-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-maths-factorisation",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Factorise x² − 25.",
+   "choices": [
+    "x(x − 25)",
+    "(x − 5)²",
+    "(x − 5)(x + 5)",
+    "(x + 5)²"
+   ],
+   "answer": 2,
+   "explanation": "Difference of two squares.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-algebra-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-maths-factorisation",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Factorise x² + 5x + 6.",
+   "choices": [
+    "(x + 5)(x + 1)",
+    "(x + 2)(x + 3)",
+    "(x − 2)(x − 3)",
+    "(x + 1)(x + 6)"
+   ],
+   "answer": 1,
+   "explanation": "2 × 3 = 6 and 2 + 3 = 5.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-algebra-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-maths-factorisation",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Evaluate 52² − 48² by factorising (answer).",
+   "answer": 400,
+   "tolerance": 0,
+   "explanation": "(52 − 48)(52 + 48) = 4 × 100 = 400.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-algebra-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "form3-maths-factorisation",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Factorise 3x² + 10x + 8.",
+   "choices": [
+    "(3x + 2)(x + 4)",
+    "(x + 4)(x + 2)",
+    "(3x + 8)(x + 1)",
+    "(3x + 4)(x + 2)"
+   ],
+   "answer": 3,
+   "explanation": "ac = 24; 4 and 6 add to 10: 3x² + 4x + 6x + 8 = x(3x + 4) + 2(3x + 4).",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-algebra-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form3-maths-factorisation",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Factorise 2x² − 18 completely and explain the order of your steps.",
+   "model": "First take out the common factor 2: 2(x² − 9). Then x² − 9 is a difference of two squares: 2(x − 3)(x + 3).",
+   "rubric": "1 mark for taking out 2, 1 mark for recognising the difference of squares, 1 mark for the final answer.",
+   "explanation": "First take out the common factor 2: 2(x² − 9). Then x² − 9 is a difference of two squares: 2(x − 3)(x + 3).",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-algebra-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form3-maths-factorisation",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A rectangular piece of land at Bafoussam has area x² + 9x + 20 m².",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Factorise the area expression.",
+     "choices": [
+      "(x − 4)(x − 5)",
+      "(x + 2)(x + 10)",
+      "(x + 1)(x + 20)",
+      "(x + 4)(x + 5)"
+     ],
+     "answer": 3,
+     "explanation": "4 × 5 = 20 and 4 + 5 = 9.",
+     "id": "form3-maths-algebra-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "When x = 6 the width is x + 4 m. Find the length x + 5 (m).",
+     "answer": 11,
+     "tolerance": 0,
+     "explanation": "6 + 5 = 11.",
+     "unit": "m",
+     "id": "form3-maths-algebra-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the area when x = 6 (m²).",
+     "answer": 110,
+     "tolerance": 0,
+     "explanation": "10 × 11 = 110, and 36 + 54 + 20 = 110.",
+     "unit": "m²",
+     "id": "form3-maths-algebra-e06-c"
+    }
+   ],
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-factorisation-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-factorisation",
+   "prompt": "x² − 9 factorises as:",
+   "choices": [
+    "x(x − 9)",
+    "(x − 3)(x + 3)",
+    "(x − 3)²",
+    "(x − 9)(x + 1)"
+   ],
+   "answer": 1,
+   "explanation": "Difference of two squares.",
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-factorisation-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-factorisation",
+   "prompt": "x² + 6x + 8 equals:",
+   "choices": [
+    "(x + 3)(x + 5)",
+    "(x − 2)(x − 4)",
+    "(x + 1)(x + 8)",
+    "(x + 2)(x + 4)"
+   ],
+   "answer": 3,
+   "explanation": "2 × 4 = 8; 2 + 4 = 6.",
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-factorisation-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-factorisation",
+   "prompt": "The first step in factorising 5x² − 20 is to:",
+   "choices": [
+    "divide by x",
+    "add 20",
+    "take out the common factor 5",
+    "square it"
+   ],
+   "answer": 2,
+   "explanation": "5(x² − 4).",
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-factorisation-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-factorisation",
+   "prompt": "x² − 4x + 4 factorises as:",
+   "choices": [
+    "(x + 2)²",
+    "(x − 2)²",
+    "(x − 2)(x + 2)",
+    "(x − 4)(x − 1)"
+   ],
+   "answer": 1,
+   "explanation": "−2 × −2 = 4 and −2 + −2 = −4.",
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-factorisation-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-factorisation",
+   "prompt": "After factorising a trinomial, we check by:",
+   "choices": [
+    "expand the brackets",
+    "dividing by x",
+    "taking a square root",
+    "adding the terms"
+   ],
+   "answer": 0,
+   "explanation": "The expansion must give the original.",
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-algebra-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-maths-simultaneous-equations",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Solve x + y = 9 and x − y = 3: find x.",
+   "answer": 6,
+   "tolerance": 0,
+   "explanation": "Add: 2x = 12, x = 6.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-algebra-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-maths-simultaneous-equations",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Solve 2x + y = 11 and x + y = 7: find y.",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "Subtract: x = 4, so y = 3.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-algebra-e09",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-maths-simultaneous-equations",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The solution of y = x + 1 and y = 3 − x is:",
+   "choices": [
+    "(1, 2)",
+    "(1, 1)",
+    "(2, 1)",
+    "(2, 3)"
+   ],
+   "answer": 0,
+   "explanation": "x + 1 = 3 − x gives x = 1 and y = 2.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-algebra-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form3-maths-simultaneous-equations",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Solve 3x + 2y = 16 and 5x − 2y = 8: find x.",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "Add: 8x = 24, x = 3; then y = 3.5.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-algebra-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form3-maths-simultaneous-equations",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Solve 2x + 3y = 12 and 3x − y = 7 by substitution, showing the check.",
+   "model": "y = 3x − 7. Then 2x + 9x − 21 = 12 gives 11x = 33, so x = 3 and y = 2. Check: 6 + 6 = 12 and 9 − 2 = 7.",
+   "rubric": "1 mark for y = 3x − 7, 1 mark for x = 3, 1 mark for y = 2 and the check.",
+   "explanation": "y = 3x − 7. Then 2x + 9x − 21 = 12 gives 11x = 33, so x = 3 and y = 2. Check: 6 + 6 = 12 and 9 − 2 = 7.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-algebra-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form3-maths-simultaneous-equations",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "At a market in Bafoussam, 3 bags of cassava and 2 bags of maize cost 21 000 FCFA; 1 bag of cassava and 4 bags of maize cost 17 000 FCFA.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which pair of equations is correct (c = cassava, m = maize)?",
+     "choices": [
+      "3c + 2m = 21 000 and c + 4m = 17 000",
+      "3c + 2m = 17 000 and c + 4m = 21 000",
+      "2c + 3m = 21 000 and 4c + m = 17 000",
+      "3c + 4m = 21 000 and c + 2m = 17 000"
+     ],
+     "answer": 0,
+     "explanation": "Read each purchase carefully.",
+     "id": "form3-maths-algebra-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the price of a bag of maize (FCFA).",
+     "answer": 3000,
+     "tolerance": 0,
+     "explanation": "c = 17 000 − 4m; 51 000 − 12m + 2m = 21 000, so m = 3 000.",
+     "unit": "FCFA",
+     "id": "form3-maths-algebra-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the price of a bag of cassava (FCFA).",
+     "answer": 5000,
+     "tolerance": 0,
+     "explanation": "c = 17 000 − 12 000 = 5 000.",
+     "unit": "FCFA",
+     "id": "form3-maths-algebra-e12-c"
+    }
+   ],
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-simultaneous-equations-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-simultaneous-equations",
+   "prompt": "In elimination, if the signs of a letter are different we:",
+   "choices": [
+    "subtract them",
+    "square them",
+    "add the equations",
+    "divide them"
+   ],
+   "answer": 2,
+   "explanation": "Opposite signs cancel when added.",
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-simultaneous-equations-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-simultaneous-equations",
+   "prompt": "The solution of simultaneous equations is:",
+   "choices": [
+    "the origin",
+    "the y-intercept",
+    "the gradient",
+    "the point where the lines cross"
+   ],
+   "answer": 3,
+   "explanation": "Both equations hold there.",
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-simultaneous-equations-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-simultaneous-equations",
+   "prompt": "Solve x + y = 5, x − y = 1:",
+   "choices": [
+    "x = 2, y = 3",
+    "x = 4, y = 1",
+    "x = 6, y = −1",
+    "x = 3, y = 2"
+   ],
+   "answer": 3,
+   "explanation": "Add: 2x = 6.",
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-simultaneous-equations-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-simultaneous-equations",
+   "prompt": "After finding x we must:",
+   "choices": [
+    "square x",
+    "divide by y",
+    "find y and check in both equations",
+    "stop"
+   ],
+   "answer": 2,
+   "explanation": "A pair of values is needed.",
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-simultaneous-equations-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-simultaneous-equations",
+   "prompt": "Parallel lines give:",
+   "choices": [
+    "two solutions",
+    "no solution",
+    "one solution",
+    "infinitely many solutions always"
+   ],
+   "answer": 1,
+   "explanation": "They never meet.",
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-algebra-e13",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-maths-inequality-regions",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Solve 1 < x + 3 < 6:",
+   "choices": [
+    "−2 < x < 6",
+    "4 < x < 9",
+    "−2 < x < 3",
+    "1 < x < 3"
+   ],
+   "answer": 2,
+   "explanation": "Subtract 3 from every part.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-algebra-e14",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-maths-inequality-regions",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "How many integers satisfy −1 ≤ x < 4?",
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "−1, 0, 1, 2, 3.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-algebra-e15",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-maths-inequality-regions",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The inequality y > 2x is drawn with a:",
+   "choices": [
+    "no boundary line",
+    "solid boundary line",
+    "dashed boundary line",
+    "curved boundary line"
+   ],
+   "answer": 2,
+   "explanation": "Strict inequalities use a dashed line.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-algebra-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form3-maths-inequality-regions",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Solve 3 ≤ 2x − 1 < 11 and give the largest integer solution.",
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "4 ≤ 2x < 12, so 2 ≤ x < 6; the largest integer is 5.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-algebra-e17",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form3-maths-inequality-regions",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Explain how to decide which side of the line y = x to shade for y < x.",
+   "model": "Draw y = x as a dashed line. Test a point not on it, such as (1, 0): 0 < 1 is true, so shade the side containing (1, 0), below the line.",
+   "rubric": "1 mark for the dashed line, 1 mark for the test point, 1 mark for the correct side.",
+   "explanation": "Draw y = x as a dashed line. Test a point not on it, such as (1, 0): 0 < 1 is true, so shade the side containing (1, 0), below the line.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-algebra-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form3-maths-inequality-regions",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A hall in Buea can hold at most 6 tables. The organiser needs at least 1 round table (x) and at least 1 square table (y).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which inequality describes the limit on tables?",
+     "choices": [
+      "x + y ≤ 6",
+      "x + y ≥ 6",
+      "x − y ≤ 6",
+      "xy ≤ 6"
+     ],
+     "answer": 0,
+     "explanation": "At most 6 tables in total.",
+     "id": "form3-maths-algebra-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "How many combinations use exactly 6 tables?",
+     "answer": 5,
+     "tolerance": 0,
+     "explanation": "x + y = 6 with x, y ≥ 1: x = 1 to 5.",
+     "id": "form3-maths-algebra-e18-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "How many combinations use 6 tables or fewer (with the minimum of one of each)?",
+     "answer": 15,
+     "tolerance": 0,
+     "explanation": "5 + 4 + 3 + 2 + 1 = 15.",
+     "id": "form3-maths-algebra-e18-c"
+    }
+   ],
+   "figure": {
+    "kind": "shapes",
+    "w": 380,
+    "h": 300,
+    "items": [
+     {
+      "t": "line",
+      "x1": 28.0,
+      "y1": 266.0,
+      "x2": 352.0,
+      "y2": 266.0,
+      "color": "ink",
+      "width": 1.5,
+      "arrow": "end"
+     },
+     {
+      "t": "line",
+      "x1": 34.0,
+      "y1": 272.0,
+      "x2": 34.0,
+      "y2": 28.0,
+      "color": "ink",
+      "width": 1.5,
+      "arrow": "end"
+     },
+     {
+      "t": "line",
+      "x1": 34.0,
+      "y1": 263.0,
+      "x2": 34.0,
+      "y2": 269.0,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 34.0,
+      "y": 283.0,
+      "text": "0",
+      "size": 11,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 78.57142857142857,
+      "y1": 263.0,
+      "x2": 78.57142857142857,
+      "y2": 269.0,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 78.57142857142857,
+      "y": 283.0,
+      "text": "1",
+      "size": 11,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 123.14285714285714,
+      "y1": 263.0,
+      "x2": 123.14285714285714,
+      "y2": 269.0,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 123.14285714285714,
+      "y": 283.0,
+      "text": "2",
+      "size": 11,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 167.71428571428572,
+      "y1": 263.0,
+      "x2": 167.71428571428572,
+      "y2": 269.0,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 167.71428571428572,
+      "y": 283.0,
+      "text": "3",
+      "size": 11,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 212.28571428571428,
+      "y1": 263.0,
+      "x2": 212.28571428571428,
+      "y2": 269.0,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 212.28571428571428,
+      "y": 283.0,
+      "text": "4",
+      "size": 11,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 256.8571428571429,
+      "y1": 263.0,
+      "x2": 256.8571428571429,
+      "y2": 269.0,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 256.8571428571429,
+      "y": 283.0,
+      "text": "5",
+      "size": 11,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 301.42857142857144,
+      "y1": 263.0,
+      "x2": 301.42857142857144,
+      "y2": 269.0,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 301.42857142857144,
+      "y": 283.0,
+      "text": "6",
+      "size": 11,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 346.0,
+      "y1": 263.0,
+      "x2": 346.0,
+      "y2": 269.0,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 346.0,
+      "y": 283.0,
+      "text": "7",
+      "size": 11,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 31.0,
+      "y1": 266.0,
+      "x2": 37.0,
+      "y2": 266.0,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 26.0,
+      "y": 270.0,
+      "text": "0",
+      "size": 11,
+      "anchor": "end",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 31.0,
+      "y1": 232.85714285714286,
+      "x2": 37.0,
+      "y2": 232.85714285714286,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 26.0,
+      "y": 236.85714285714286,
+      "text": "1",
+      "size": 11,
+      "anchor": "end",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 31.0,
+      "y1": 199.71428571428572,
+      "x2": 37.0,
+      "y2": 199.71428571428572,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 26.0,
+      "y": 203.71428571428572,
+      "text": "2",
+      "size": 11,
+      "anchor": "end",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 31.0,
+      "y1": 166.57142857142856,
+      "x2": 37.0,
+      "y2": 166.57142857142856,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 26.0,
+      "y": 170.57142857142856,
+      "text": "3",
+      "size": 11,
+      "anchor": "end",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 31.0,
+      "y1": 133.42857142857142,
+      "x2": 37.0,
+      "y2": 133.42857142857142,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 26.0,
+      "y": 137.42857142857142,
+      "text": "4",
+      "size": 11,
+      "anchor": "end",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 31.0,
+      "y1": 100.28571428571428,
+      "x2": 37.0,
+      "y2": 100.28571428571428,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 26.0,
+      "y": 104.28571428571428,
+      "text": "5",
+      "size": 11,
+      "anchor": "end",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 31.0,
+      "y1": 67.14285714285714,
+      "x2": 37.0,
+      "y2": 67.14285714285714,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 26.0,
+      "y": 71.14285714285714,
+      "text": "6",
+      "size": 11,
+      "anchor": "end",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 31.0,
+      "y1": 34.0,
+      "x2": 37.0,
+      "y2": 34.0,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 26.0,
+      "y": 38.0,
+      "text": "7",
+      "size": 11,
+      "anchor": "end",
+      "color": "ink"
+     },
+     {
+      "t": "poly",
+      "pts": [
+       78.6,
+       232.9,
+       256.9,
+       232.9,
+       78.6,
+       100.3
+      ],
+      "stroke": "blue",
+      "width": 2,
+      "closed": true,
+      "fill": "lightblue"
+     },
+     {
+      "t": "text",
+      "x": 227.88571428571427,
+      "y": 153.31428571428572,
+      "text": "x + y = 6",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "circle",
+      "cx": 78.57142857142857,
+      "cy": 232.85714285714286,
+      "r": 3,
+      "stroke": "red",
+      "width": 2,
+      "fill": "red"
+     },
+     {
+      "t": "circle",
+      "cx": 123.14285714285714,
+      "cy": 199.71428571428572,
+      "r": 3,
+      "stroke": "red",
+      "width": 2,
+      "fill": "red"
+     },
+     {
+      "t": "circle",
+      "cx": 167.71428571428572,
+      "cy": 199.71428571428572,
+      "r": 3,
+      "stroke": "red",
+      "width": 2,
+      "fill": "red"
+     }
+    ]
+   },
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-inequality-regions-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-inequality-regions",
+   "prompt": "On an inequality region graph, a solid boundary line is used for:",
+   "choices": [
+    "< and >",
+    "≤ and ≥",
+    "no inequalities",
+    "= only"
+   ],
+   "answer": 1,
+   "explanation": "The points on the line are included.",
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-inequality-regions-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-inequality-regions",
+   "prompt": "Solve 2 < 3x ≤ 12:",
+   "choices": [
+    "2 < x ≤ 12",
+    "0 < x ≤ 4",
+    "2/3 < x ≤ 4",
+    "6 < x ≤ 36"
+   ],
+   "answer": 2,
+   "explanation": "Divide every part by 3.",
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-inequality-regions-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-inequality-regions",
+   "prompt": "To decide which side to shade we use:",
+   "choices": [
+    "the y-intercept only",
+    "the gradient only",
+    "a ruler only",
+    "a test point"
+   ],
+   "answer": 3,
+   "explanation": "Test a point that is not on the line.",
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-inequality-regions-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-inequality-regions",
+   "prompt": "The integers in −2 ≤ x < 1 are:",
+   "choices": [
+    "−2, −1, 0",
+    "−2, −1, 0, 1",
+    "−1, 0",
+    "−3, −2, −1, 0"
+   ],
+   "answer": 0,
+   "explanation": "1 is excluded.",
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-inequality-regions-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-inequality-regions",
+   "prompt": "The region for a set of inequalities is:",
+   "choices": [
+    "where none is true",
+    "where all are true",
+    "where any is true",
+    "the origin only"
+   ],
+   "answer": 1,
+   "explanation": "Common region.",
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-algebra-e19",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-maths-quadratic-graphs",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Find y when x = −2 in y = x² − 4x + 3.",
+   "answer": 15,
+   "tolerance": 0,
+   "explanation": "4 + 8 + 3 = 15.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-algebra-e20",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-maths-quadratic-graphs",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The curve y = x² + 1 has a:",
+   "choices": [
+    "straight section",
+    "minimum turning point",
+    "maximum turning point",
+    "no turning point"
+   ],
+   "answer": 1,
+   "explanation": "a = 1 is positive.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-algebra-e21",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-maths-quadratic-graphs",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "The roots of a curve are 2 and 8. Find the x-coordinate of the axis of symmetry.",
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "Halfway: (2 + 8) ÷ 2 = 5.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-algebra-e22",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form3-maths-quadratic-graphs",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "For y = 6x − x², find y when x = 4.",
+   "answer": 8,
+   "tolerance": 0,
+   "explanation": "24 − 16 = 8.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-algebra-e23",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form3-maths-quadratic-graphs",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "Explain how to use the graph of y = x² − 4x + 3 to solve x² − 4x + 3 = 3.",
+   "model": "Draw the horizontal line y = 3 and read the x-coordinates where it cuts the curve: x = 0 and x = 4.",
+   "rubric": "1 mark for the line y = 3, 1 mark for reading the intersections, 1 mark for the two values.",
+   "explanation": "Draw the horizontal line y = 3 and read the x-coordinates where it cuts the curve: x = 0 and x = 4.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-algebra-e24",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form3-maths-quadratic-graphs",
+   "source": "Original exercise written for CastBridge, in the style of the Cameroon secondary curriculum",
+   "prompt": "A footballer at Yaoundé kicks a ball that follows h = 6t − t² (h metres, t seconds).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the height at t = 2 s (m).",
+     "answer": 8,
+     "tolerance": 0,
+     "explanation": "12 − 4 = 8.",
+     "unit": "m",
+     "id": "form3-maths-algebra-e24-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the maximum height (m).",
+     "answer": 9,
+     "tolerance": 0,
+     "explanation": "At t = 3: 18 − 9 = 9.",
+     "unit": "m",
+     "id": "form3-maths-algebra-e24-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "For how many seconds is the ball in the air?",
+     "answer": 6,
+     "tolerance": 0,
+     "explanation": "h = 0 at t = 0 and t = 6.",
+     "unit": "s",
+     "id": "form3-maths-algebra-e24-c"
+    }
+   ],
+   "figure": {
+    "kind": "plot",
+    "xmin": 0,
+    "xmax": 7,
+    "ymin": -1,
+    "ymax": 11,
+    "grid": 1,
+    "w": 400,
+    "h": 260,
+    "curves": [
+     {
+      "expr": "6*x-x^2",
+      "color": "blue",
+      "label": "h = 6t − t²"
+     }
+    ],
+    "points": [
+     {
+      "x": 3,
+      "y": 9,
+      "label": "max",
+      "color": "green"
+     }
+    ],
+    "segments": [],
+    "xlabel": "t (s)",
+    "ylabel": "h (m)"
+   },
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-quadratic-graphs-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-quadratic-graphs",
+   "prompt": "The graph of y = x² has the shape of:",
+   "choices": [
+    "a circle",
+    "a straight line",
+    "a triangle",
+    "a parabola"
+   ],
+   "answer": 3,
+   "explanation": "U-shaped curve.",
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-quadratic-graphs-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-quadratic-graphs",
+   "prompt": "A quadratic with a < 0 has:",
+   "choices": [
+    "no turning point",
+    "two turning points",
+    "a minimum point",
+    "a maximum point"
+   ],
+   "answer": 3,
+   "explanation": "Opens downwards.",
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-quadratic-graphs-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-quadratic-graphs",
+   "prompt": "The roots of a quadratic graph are where it crosses:",
+   "choices": [
+    "the x-axis",
+    "the y-axis",
+    "the line y = x",
+    "the origin only"
+   ],
+   "answer": 0,
+   "explanation": "y = 0.",
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-quadratic-graphs-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-quadratic-graphs",
+   "prompt": "The axis of symmetry of y = x² − 4x + 3 is:",
+   "choices": [
+    "x = 2",
+    "x = 3",
+    "x = 1",
+    "y = 2"
+   ],
+   "answer": 0,
+   "explanation": "Halfway between 1 and 3.",
+   "chapter": "form3-maths-algebra"
+  },
+  {
+   "id": "form3-maths-quadratic-graphs-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-maths-quadratic-graphs",
+   "prompt": "Points on a quadratic graph are joined with:",
+   "choices": [
+    "a smooth curve",
+    "arrows",
+    "dashes",
+    "straight lines"
+   ],
+   "answer": 0,
+   "explanation": "Smooth curve.",
+   "chapter": "form3-maths-algebra"
+  }
+ ]
+}

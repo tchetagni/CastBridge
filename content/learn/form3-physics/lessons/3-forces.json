@@ -1,0 +1,1149 @@
+{
+ "chapter": "form3-physics-forces",
+ "lessons": [
+  {
+   "id": "form3-physics-forces-hooke",
+   "title": "Forces, weight, friction and Hooke's law",
+   "minutes": 25,
+   "programRef": "Form 3 Physics — Forces, Hooke's law, Newton's laws, moments (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Find the resultant of forces acting in a straight line.",
+    "Use W = mg and describe friction.",
+    "State and use Hooke's law."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form3-physics-forces-e01",
+    "form3-physics-forces-e02",
+    "form3-physics-forces-e03",
+    "form3-physics-forces-e04",
+    "form3-physics-forces-e05",
+    "form3-physics-forces-e06"
+   ],
+   "selfCheck": [
+    "form3-physics-forces-hooke-q1",
+    "form3-physics-forces-hooke-q2",
+    "form3-physics-forces-hooke-q3",
+    "form3-physics-forces-hooke-q4",
+    "form3-physics-forces-hooke-q5"
+   ],
+   "reviewNotes": [
+    "Spring constant units given in N/cm and N/m: check the form used locally.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Forces",
+     "md": "A **force** is a push or a pull, a vector measured in **newtons (N)**. The **resultant** of forces in a line: add forces in the same direction and subtract opposite ones: 10 N to the right and 4 N to the left give **6 N to the right**. **Weight** W = m × g is the gravitational force on a mass (g = 10 N/kg). **Friction** opposes motion and acts along the surfaces; it is larger on rough surfaces."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 12,
+      "ymin": 0,
+      "ymax": 20,
+      "grid": 2,
+      "w": 420,
+      "h": 260,
+      "curves": [],
+      "points": [
+       {
+        "x": 8,
+        "y": 16,
+        "label": "limit",
+        "color": "red"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 0,
+        "y1": 0,
+        "x2": 8,
+        "y2": 16,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 8,
+        "y1": 16,
+        "x2": 12,
+        "y2": 19,
+        "color": "red",
+        "dash": false
+       }
+      ],
+      "xlabel": "extension (cm)",
+      "ylabel": "force (N)"
+     },
+     "caption": "Extension of a spring against force: straight line up to the elastic limit.",
+     "alt": "A graph of force against extension: a straight line from the origin to 16 N at 8 cm, then a flatter curve beyond the limit."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Hooke's law",
+     "md": "Within the **elastic limit**, the **extension of a spring is proportional to the force**: **F = k × x**, where k is the **spring constant** (N/cm or N/m). The graph is a straight line through the origin; its gradient is k. Beyond the **elastic limit** the spring does not return to its original length."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Extension is the **increase** in length, not the total length: extension = new length − natural length.\n- Hooke's law does not work beyond the elastic limit.\n- Weight is a force in N; mass is in kg."
+    },
+    {
+     "type": "example",
+     "title": "Spring constant",
+     "statement": "A spring stretches by 4.0 cm when a force of 8.0 N is applied. Find k, and the extension for 10 N (within the limit).",
+     "steps": [
+      "k = F ÷ x = 8.0 ÷ 4.0 = 2.0 N/cm.",
+      "x = F ÷ k = 10 ÷ 2.0 = 5.0 cm."
+     ],
+     "answer": "k = 2.0 N/cm; extension 5.0 cm"
+    },
+    {
+     "type": "example",
+     "title": "Resultant force",
+     "statement": "A cart is pushed forward with 120 N while friction pulls back with 45 N. Find the resultant force.",
+     "steps": [
+      "The forces are in opposite directions: subtract.",
+      "120 − 45 = 75 N forward."
+     ],
+     "answer": "75 N forward"
+    },
+    {
+     "type": "exercise",
+     "ref": "form3-physics-forces-e01"
+    }
+   ],
+   "chapter": "form3-physics-forces"
+  },
+  {
+   "id": "form3-physics-newton-laws",
+   "title": "Newton's laws of motion",
+   "minutes": 25,
+   "programRef": "Form 3 Physics — Forces, Hooke's law, Newton's laws, moments (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "State Newton's three laws of motion.",
+    "Use F = ma to find force, mass or acceleration.",
+    "Explain inertia and action-reaction pairs in everyday situations."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form3-physics-forces-e07",
+    "form3-physics-forces-e08",
+    "form3-physics-forces-e09",
+    "form3-physics-forces-e10",
+    "form3-physics-forces-e11",
+    "form3-physics-forces-e12"
+   ],
+   "selfCheck": [
+    "form3-physics-newton-laws-q1",
+    "form3-physics-newton-laws-q2",
+    "form3-physics-newton-laws-q3",
+    "form3-physics-newton-laws-q4",
+    "form3-physics-newton-laws-q5"
+   ],
+   "reviewNotes": [
+    "Newton's laws are stated in a simplified student form; check the wording used by the syllabus.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "The three laws",
+     "md": "**First law**: an object stays at rest, or moves at constant velocity in a straight line, **unless an unbalanced force acts** on it. This property is **inertia**.\n\n**Second law**: the resultant force produces an acceleration in its own direction: **F = m × a**.\n\n**Third law**: if body A exerts a force on B, then B exerts an **equal and opposite force** on A. The two forces act on **different bodies**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 215,
+      "items": [
+       {
+        "t": "rect",
+        "x": 140,
+        "y": 80,
+        "w": 140,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "circle",
+        "cx": 170,
+        "cy": 135,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "grey"
+       },
+       {
+        "t": "circle",
+        "cx": 250,
+        "cy": 135,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "grey"
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 105,
+        "x2": 138,
+        "y2": 105,
+        "color": "blue",
+        "width": 3,
+        "arrow": "start"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 90,
+        "text": "friction 800 N",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 282,
+        "y1": 105,
+        "x2": 380,
+        "y2": 105,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 92,
+        "text": "engine 3000 N",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 148,
+        "x2": 210,
+        "y2": 200,
+        "color": "green",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 196,
+        "text": "weight",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 78,
+        "x2": 210,
+        "y2": 30,
+        "color": "purple",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 40,
+        "text": "reaction of road",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Forces on a car: the resultant forward force makes it accelerate.",
+     "alt": "A car with arrows: engine force 3000 N forward, friction 800 N backward, weight downward and reaction of the road upward."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Using F = ma",
+     "md": "**F = ma** with F in newtons, m in kilograms and a in m/s². Then a = F ÷ m and m = F ÷ a. **F is the resultant (net) force**: add up all the forces along the line of motion first. **1 N** is the force that gives a mass of 1 kg an acceleration of 1 m/s²."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Use the **resultant** force, not just the engine force; friction must be subtracted.\n- The two forces of the third law act on **different objects**, so they do not cancel each other.\n- An object in motion does not need a continuing force to keep moving at constant velocity."
+    },
+    {
+     "type": "example",
+     "title": "Acceleration of a car",
+     "statement": "A car of mass 1000 kg has an engine force of 3000 N and a friction force of 800 N. Find its acceleration and its speed after 5 s from rest.",
+     "steps": [
+      "Resultant = 3000 − 800 = 2200 N; a = 2200 ÷ 1000 = 2.2 m/s².",
+      "v = u + at = 0 + 2.2 × 5 = 11 m/s."
+     ],
+     "answer": "a = 2.2 m/s²; v = 11 m/s"
+    },
+    {
+     "type": "example",
+     "title": "Inertia in a bus",
+     "statement": "Passengers lurch forward when a bus brakes suddenly. Explain, using Newton's first law.",
+     "steps": [
+      "Passengers were moving with the bus, and no force acts on them to stop.",
+      "The bus slows but their bodies tend to keep moving forward: inertia."
+     ],
+     "answer": "Their inertia keeps them moving forward when the bus stops."
+    },
+    {
+     "type": "exercise",
+     "ref": "form3-physics-forces-e07"
+    }
+   ],
+   "chapter": "form3-physics-forces"
+  },
+  {
+   "id": "form3-physics-moments",
+   "title": "Moments and equilibrium",
+   "minutes": 25,
+   "programRef": "Form 3 Physics — Forces, Hooke's law, Newton's laws, moments (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define the moment of a force and calculate it.",
+    "State and use the principle of moments.",
+    "State the conditions for equilibrium."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form3-physics-forces-e13",
+    "form3-physics-forces-e14",
+    "form3-physics-forces-e15",
+    "form3-physics-forces-e16",
+    "form3-physics-forces-e17",
+    "form3-physics-forces-e18"
+   ],
+   "selfCheck": [
+    "form3-physics-moments-q1",
+    "form3-physics-moments-q2",
+    "form3-physics-moments-q3",
+    "form3-physics-moments-q4",
+    "form3-physics-moments-q5"
+   ],
+   "reviewNotes": [
+    "N m (moment) and J (energy) have the same base units but are different quantities: stated in text only if the syllabus requires it.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Moment of a force",
+     "md": "The **moment** of a force about a pivot is its turning effect: **moment = force × perpendicular distance from the pivot**, unit **newton metre (N m)**. A longer spanner or a door handle far from the hinges needs a smaller force for the same moment. Moments can be **clockwise** or **anticlockwise**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 205,
+      "items": [
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 120,
+        "x2": 400,
+        "y2": 120,
+        "color": "brown",
+        "width": 6
+       },
+       {
+        "t": "poly",
+        "pts": [
+         220,
+         120,
+         205,
+         150,
+         235,
+         150
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "grey"
+       },
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 70,
+        "x2": 120,
+        "y2": 116,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 62,
+        "text": "40 N",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 270,
+        "y1": 70,
+        "x2": 270,
+        "y2": 116,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 62,
+        "text": "F = ?",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 175,
+        "x2": 218,
+        "y2": 175,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "both"
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 192,
+        "text": "0.50 m",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 222,
+        "y1": 175,
+        "x2": 270,
+        "y2": 175,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "both"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 192,
+        "text": "0.25 m",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 168,
+        "text": "pivot",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A balanced beam: 40 N at 0.50 m on the left and an unknown force F at 0.25 m on the right.",
+     "alt": "A beam resting on a pivot with a 40 N weight 0.50 m to the left and a force F 0.25 m to the right."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Principle of moments and equilibrium",
+     "md": "For a body in **equilibrium** (balanced): **sum of clockwise moments = sum of anticlockwise moments** about any pivot, and **total upward force = total downward force**. The **centre of gravity** is the point where the whole weight seems to act; a uniform rod's is at its middle."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Use the **perpendicular** distance from the pivot to the line of the force, not the length of the beam.\n- Remember the pivot supports the beam: its upward reaction equals all the downward forces.\n- Convert cm to m before multiplying to get N m."
+    },
+    {
+     "type": "example",
+     "title": "Balanced beam",
+     "statement": "On a beam balanced at its pivot, a 40 N weight is 0.50 m to the left and a force F is 0.25 m to the right. Find F and the force on the pivot (beam weight ignored).",
+     "steps": [
+      "Anticlockwise = 40 × 0.50 = 20 N m. At balance 0.25 × F = 20, so F = 80 N.",
+      "Reaction at the pivot = 40 + 80 = 120 N upward."
+     ],
+     "answer": "F = 80 N; pivot force 120 N"
+    },
+    {
+     "type": "example",
+     "title": "Crowbar",
+     "statement": "A crowbar of effort arm 1.2 m and load arm 0.3 m is used. An effort of 60 N is applied. What load can it just lift?",
+     "steps": [
+      "Effort moment = 60 × 1.2 = 72 N m.",
+      "Load × 0.3 = 72, so load = 240 N."
+     ],
+     "answer": "240 N"
+    },
+    {
+     "type": "exercise",
+     "ref": "form3-physics-forces-e13"
+    }
+   ],
+   "chapter": "form3-physics-forces"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form3-physics-forces-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-physics-forces-hooke",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the weight of a 12 kg bag of cement. (g = 10 N/kg)",
+   "answer": 120,
+   "tolerance": 0,
+   "unit": "N",
+   "explanation": "12 × 10 = 120 N.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-physics-forces"
+  },
+  {
+   "id": "form3-physics-forces-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-physics-forces-hooke",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A spring constant is 5 N/cm. Find the extension when a force of 15 N is applied.",
+   "answer": 3,
+   "tolerance": 0,
+   "unit": "cm",
+   "explanation": "x = F ÷ k = 15 ÷ 5 = 3 cm.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-physics-forces"
+  },
+  {
+   "id": "form3-physics-forces-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-physics-forces-hooke",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A force of 30 N to the east and one of 50 N to the west act on a box. The resultant is:",
+   "choices": [
+    "80 N west",
+    "20 N west",
+    "20 N east",
+    "80 N east"
+   ],
+   "answer": 1,
+   "explanation": "50 − 30 = 20 N in the direction of the larger force.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-physics-forces"
+  },
+  {
+   "id": "form3-physics-forces-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form3-physics-forces-hooke",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A spring of natural length 10 cm extends 2 cm for each 1 N. What is its length under 4 N? (in cm)",
+   "answer": 18,
+   "tolerance": 0,
+   "unit": "cm",
+   "explanation": "extension = 4 × 2 = 8 cm; length = 10 + 8 = 18 cm.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form3-physics-forces"
+  },
+  {
+   "id": "form3-physics-forces-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form3-physics-forces-hooke",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A student loads a spring with weights and records its extension each time. How can she show that the spring obeys Hooke's law?",
+   "model": "Plot a graph of extension against force. A straight line through the origin shows that extension is proportional to force within the elastic limit.",
+   "rubric": [
+    "1 mark: graph of extension against force",
+    "1 mark: straight line through the origin"
+   ],
+   "explanation": "Plot a graph of extension against force. A straight line through the origin shows that extension is proportional to force within the elastic limit.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-physics-forces"
+  },
+  {
+   "id": "form3-physics-forces-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form3-physics-forces-hooke",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A spring stretches by 6 cm under a load of 12 N. Within the elastic limit:",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the spring constant (N/cm).",
+     "answer": 2,
+     "tolerance": 0,
+     "explanation": "12 ÷ 6 = 2 N/cm.",
+     "unit": "N/cm",
+     "id": "form3-physics-forces-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the extension under a load of 20 N (cm).",
+     "answer": 10,
+     "tolerance": 0,
+     "explanation": "20 ÷ 2 = 10 cm.",
+     "unit": "cm",
+     "id": "form3-physics-forces-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the load that would give an extension of 7.5 cm (N).",
+     "answer": 15,
+     "tolerance": 0,
+     "explanation": "2 × 7.5 = 15 N.",
+     "unit": "N",
+     "id": "form3-physics-forces-e06-c"
+    }
+   ],
+   "chapter": "form3-physics-forces"
+  },
+  {
+   "id": "form3-physics-forces-hooke-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-forces-hooke",
+   "prompt": "Hooke's law states that extension is:",
+   "choices": [
+    "constant",
+    "equal to the mass",
+    "proportional to the force",
+    "inversely proportional to force"
+   ],
+   "answer": 2,
+   "explanation": "Within the elastic limit.",
+   "chapter": "form3-physics-forces"
+  },
+  {
+   "id": "form3-physics-forces-hooke-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-forces-hooke",
+   "prompt": "The weight of a 3 kg object (g = 10 N/kg) is:",
+   "choices": [
+    "30 N",
+    "3 N",
+    "300 N",
+    "0.3 N"
+   ],
+   "answer": 0,
+   "explanation": "W = mg.",
+   "chapter": "form3-physics-forces"
+  },
+  {
+   "id": "form3-physics-forces-hooke-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-forces-hooke",
+   "prompt": "The resultant of 8 N and 3 N in opposite directions is:",
+   "choices": [
+    "5 N",
+    "2.7 N",
+    "11 N",
+    "24 N"
+   ],
+   "answer": 0,
+   "explanation": "Subtract.",
+   "chapter": "form3-physics-forces"
+  },
+  {
+   "id": "form3-physics-forces-hooke-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-forces-hooke",
+   "prompt": "The force of friction between two surfaces points:",
+   "choices": [
+    "downwards only",
+    "upwards only",
+    "against the motion",
+    "along the motion"
+   ],
+   "answer": 2,
+   "explanation": "It opposes sliding.",
+   "chapter": "form3-physics-forces"
+  },
+  {
+   "id": "form3-physics-forces-hooke-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-forces-hooke",
+   "prompt": "Beyond the elastic limit a spring:",
+   "choices": [
+    "does not return to its original length",
+    "snaps always",
+    "becomes lighter",
+    "gains charge"
+   ],
+   "answer": 0,
+   "explanation": "Permanent stretch.",
+   "chapter": "form3-physics-forces"
+  },
+  {
+   "id": "form3-physics-forces-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-physics-newton-laws",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A force of 200 N acts on a 50 kg trolley. Find its acceleration in m/s².",
+   "answer": 4,
+   "tolerance": 0,
+   "unit": "m/s²",
+   "explanation": "a = F ÷ m = 200 ÷ 50 = 4 m/s².",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-physics-forces"
+  },
+  {
+   "id": "form3-physics-forces-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-physics-newton-laws",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What resultant force gives a 1500 kg car an acceleration of 2 m/s²?",
+   "answer": 3000,
+   "tolerance": 0,
+   "unit": "N",
+   "explanation": "F = ma = 1500 × 2 = 3000 N.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-physics-forces"
+  },
+  {
+   "id": "form3-physics-forces-e09",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-physics-newton-laws",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Seat belts are used in cars because of:",
+   "choices": [
+    "magnetism",
+    "weight only",
+    "friction only",
+    "inertia"
+   ],
+   "answer": 3,
+   "explanation": "Passengers continue moving forward when the car stops suddenly.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-physics-forces"
+  },
+  {
+   "id": "form3-physics-forces-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form3-physics-newton-laws",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A resultant force of 60 N gives an object an acceleration of 3 m/s². Find its mass in kg.",
+   "answer": 20,
+   "tolerance": 0,
+   "unit": "kg",
+   "explanation": "m = F ÷ a = 60 ÷ 3 = 20 kg.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form3-physics-forces"
+  },
+  {
+   "id": "form3-physics-forces-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form3-physics-newton-laws",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A boy pushes a wall with a force of 50 N. State the force that the wall exerts on him and explain why neither force cancels the other.",
+   "model": "The wall pushes back with 50 N in the opposite direction (third law). The two forces act on different objects (the wall and the boy) so they cannot cancel.",
+   "rubric": [
+    "1 mark: 50 N opposite",
+    "1 mark: act on different bodies"
+   ],
+   "explanation": "The wall pushes back with 50 N in the opposite direction (third law). The two forces act on different objects (the wall and the boy) so they cannot cancel.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-physics-forces"
+  },
+  {
+   "id": "form3-physics-forces-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form3-physics-newton-laws",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A motorbike and rider have a mass of 250 kg. The engine force is 900 N and the resistive forces total 400 N.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Resultant force (N).",
+     "answer": 500,
+     "tolerance": 0,
+     "explanation": "900 − 400 = 500 N.",
+     "unit": "N",
+     "id": "form3-physics-forces-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Acceleration (m/s²).",
+     "answer": 2,
+     "tolerance": 0,
+     "explanation": "500 ÷ 250 = 2 m/s².",
+     "unit": "m/s²",
+     "id": "form3-physics-forces-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Speed after 6 s from rest (m/s).",
+     "answer": 12,
+     "tolerance": 0,
+     "explanation": "v = 2 × 6 = 12 m/s.",
+     "unit": "m/s",
+     "id": "form3-physics-forces-e12-c"
+    }
+   ],
+   "chapter": "form3-physics-forces"
+  },
+  {
+   "id": "form3-physics-newton-laws-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-newton-laws",
+   "prompt": "Newton's second law is written:",
+   "choices": [
+    "F = a ÷ m",
+    "F = m ÷ a",
+    "F = m + a",
+    "F = ma"
+   ],
+   "answer": 3,
+   "explanation": "Resultant force equals mass times acceleration.",
+   "chapter": "form3-physics-forces"
+  },
+  {
+   "id": "form3-physics-newton-laws-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-newton-laws",
+   "prompt": "Inertia is the tendency of a body to:",
+   "choices": [
+    "float",
+    "fall faster",
+    "resist a change in its motion",
+    "melt"
+   ],
+   "answer": 2,
+   "explanation": "First law.",
+   "chapter": "form3-physics-forces"
+  },
+  {
+   "id": "form3-physics-newton-laws-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-newton-laws",
+   "prompt": "An object moving at constant velocity has a resultant force of:",
+   "choices": [
+    "negative",
+    "equal to its weight",
+    "zero",
+    "very large"
+   ],
+   "answer": 2,
+   "explanation": "No acceleration means no resultant force.",
+   "chapter": "form3-physics-forces"
+  },
+  {
+   "id": "form3-physics-newton-laws-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-newton-laws",
+   "prompt": "The unit of force is the newton, equal to:",
+   "choices": [
+    "1 kg",
+    "1 kg/m",
+    "1 m/s",
+    "1 kg m/s²"
+   ],
+   "answer": 3,
+   "explanation": "F = ma.",
+   "chapter": "form3-physics-forces"
+  },
+  {
+   "id": "form3-physics-newton-laws-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-newton-laws",
+   "prompt": "The action and reaction forces act on:",
+   "choices": [
+    "the same body",
+    "different bodies",
+    "no body",
+    "the ground only"
+   ],
+   "answer": 1,
+   "explanation": "Third law.",
+   "chapter": "form3-physics-forces"
+  },
+  {
+   "id": "form3-physics-forces-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-physics-moments",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the moment of a 25 N force acting at a perpendicular distance of 0.40 m from a pivot (N m).",
+   "answer": 10,
+   "tolerance": 0,
+   "unit": "N m",
+   "explanation": "25 × 0.40 = 10 N m.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-physics-forces"
+  },
+  {
+   "id": "form3-physics-forces-e14",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form3-physics-moments",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A 30 N child sits 1.5 m from the pivot of a seesaw. How far from the pivot must a 45 N child sit on the other side to balance it? (m)",
+   "answer": 1.0,
+   "tolerance": 0.01,
+   "unit": "m",
+   "explanation": "30 × 1.5 = 45; d = 45 ÷ 45 = 1.0 m.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-physics-forces"
+  },
+  {
+   "id": "form3-physics-forces-e15",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form3-physics-moments",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "To loosen a tight nut more easily you should:",
+   "choices": [
+    "use a longer spanner",
+    "use a shorter spanner",
+    "heat the spanner",
+    "use a lighter spanner"
+   ],
+   "answer": 0,
+   "explanation": "A longer arm gives a larger moment for the same force.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form3-physics-forces"
+  },
+  {
+   "id": "form3-physics-forces-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form3-physics-moments",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A uniform metre rule balances on a pivot at its 50 cm mark with a 2 N weight at the 20 cm mark. A weight W is hung at the 80 cm mark. Find W (N).",
+   "answer": 2,
+   "tolerance": 0.01,
+   "unit": "N",
+   "explanation": "Both are 30 cm from the pivot; equal moments mean W = 2 N.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form3-physics-forces"
+  },
+  {
+   "id": "form3-physics-forces-e17",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form3-physics-moments",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "State the two conditions for a body to be in equilibrium.",
+   "model": "The total upward force equals the total downward force, and the clockwise moments equal the anticlockwise moments about any point.",
+   "rubric": [
+    "1 mark: forces balance",
+    "1 mark: moments balance"
+   ],
+   "explanation": "The total upward force equals the total downward force, and the clockwise moments equal the anticlockwise moments about any point.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form3-physics-forces"
+  },
+  {
+   "id": "form3-physics-forces-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form3-physics-moments",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A uniform plank of weight 200 N and length 4.0 m rests on a support at its middle. A child of weight 300 N sits 1.5 m to the left of the support. Where should an adult of weight 450 N sit on the right to balance the plank?",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Moment of the child about the support (N m).",
+     "answer": 450,
+     "tolerance": 0,
+     "explanation": "300 × 1.5 = 450 N m.",
+     "unit": "N m",
+     "id": "form3-physics-forces-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Distance of the adult from the support (m).",
+     "answer": 1.0,
+     "tolerance": 0.01,
+     "explanation": "450 ÷ 450 = 1.0 m.",
+     "unit": "m",
+     "id": "form3-physics-forces-e18-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Upward force of the support (N). Weights: plank 200, child 300, adult 450.",
+     "answer": 950,
+     "tolerance": 0,
+     "explanation": "200 + 300 + 450 = 950 N.",
+     "unit": "N",
+     "id": "form3-physics-forces-e18-c"
+    }
+   ],
+   "chapter": "form3-physics-forces"
+  },
+  {
+   "id": "form3-physics-moments-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-moments",
+   "prompt": "The moment of a force is:",
+   "choices": [
+    "mass × speed",
+    "force + distance",
+    "force × perpendicular distance",
+    "force ÷ distance"
+   ],
+   "answer": 2,
+   "explanation": "Turning effect.",
+   "chapter": "form3-physics-forces"
+  },
+  {
+   "id": "form3-physics-moments-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-moments",
+   "prompt": "The unit of moment is the:",
+   "choices": [
+    "metre",
+    "newton metre",
+    "newton",
+    "joule per second"
+   ],
+   "answer": 1,
+   "explanation": "N m.",
+   "chapter": "form3-physics-forces"
+  },
+  {
+   "id": "form3-physics-moments-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-moments",
+   "prompt": "At equilibrium the clockwise moments are:",
+   "choices": [
+    "smaller",
+    "zero",
+    "larger",
+    "equal to the anticlockwise moments"
+   ],
+   "answer": 3,
+   "explanation": "Principle of moments.",
+   "chapter": "form3-physics-forces"
+  },
+  {
+   "id": "form3-physics-moments-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-moments",
+   "prompt": "The centre of gravity of a uniform rod is at its:",
+   "choices": [
+    "end",
+    "quarter point",
+    "pivot only",
+    "middle"
+   ],
+   "answer": 3,
+   "explanation": "Symmetry.",
+   "chapter": "form3-physics-forces"
+  },
+  {
+   "id": "form3-physics-moments-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form3-physics-moments",
+   "prompt": "A door is easier to open when pushed:",
+   "choices": [
+    "at the hinges",
+    "from behind",
+    "near the hinges",
+    "far from the hinges"
+   ],
+   "answer": 3,
+   "explanation": "Larger distance, larger moment.",
+   "chapter": "form3-physics-forces"
+  }
+ ]
+}

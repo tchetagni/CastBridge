@@ -1,0 +1,1906 @@
+{
+ "chapter": "class4-maths-fractions",
+ "lessons": [
+  {
+   "id": "class4-maths-fractions-intro",
+   "title": "Fractions and equivalent fractions",
+   "minutes": 30,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level II (Class 4) — Mathematics; to be checked against the official syllabus",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Name a fraction from a picture.",
+    "Find equivalent fractions.",
+    "Compare fractions with the same denominator or the same numerator."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "class4-maths-fractions-e01",
+    "class4-maths-fractions-e02",
+    "class4-maths-fractions-e03",
+    "class4-maths-fractions-e04",
+    "class4-maths-fractions-e05",
+    "class4-maths-fractions-e06"
+   ],
+   "selfCheck": [
+    "class4-maths-fractions-intro-q1",
+    "class4-maths-fractions-intro-q2",
+    "class4-maths-fractions-intro-q3",
+    "class4-maths-fractions-intro-q4",
+    "class4-maths-fractions-intro-q5"
+   ],
+   "reviewNotes": [
+    "Fraction notation uses simple LaTeX \\frac; some teachers write fractions as a/b. Pupils meet halves, quarters and tenths first.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Fractions",
+     "md": "A **fraction** shows equal parts of a whole. The **denominator** (bottom number) tells how many equal parts the whole is cut into. The **numerator** (top number) tells how many parts we take. $\\frac{3}{4}$ means 3 out of 4 equal parts."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 180,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20.0,
+        "y": 10,
+        "w": 120.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 140.0,
+        "y": 10,
+        "w": 120.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 274,
+        "y": 28.0,
+        "text": "1/2",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 20.0,
+        "y": 50,
+        "w": 60.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 80.0,
+        "y": 50,
+        "w": 60.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 140.0,
+        "y": 50,
+        "w": 60.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 50,
+        "w": 60.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 274,
+        "y": 68.0,
+        "text": "1/4",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 20.0,
+        "y": 90,
+        "w": 60.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 80.0,
+        "y": 90,
+        "w": 60.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 140.0,
+        "y": 90,
+        "w": 60.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 90,
+        "w": 60.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 274,
+        "y": 108.0,
+        "text": "3/4",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 20.0,
+        "y": 130,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 50.0,
+        "y": 130,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 80.0,
+        "y": 130,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 110.0,
+        "y": 130,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 140.0,
+        "y": 130,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 170.0,
+        "y": 130,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 130,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 230.0,
+        "y": 130,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 274,
+        "y": 148.0,
+        "text": "2/8 = 1/4",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Fraction bars: 1/2, 1/4, 3/4 and 2/8.",
+     "alt": "Four bars. The first has 1 of 2 parts coloured, the second 1 of 4, the third 3 of 4 and the fourth 2 of 8, equal to one quarter."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Equivalent fractions",
+     "md": "Fractions that show the **same amount** are **equivalent**: $\\frac{1}{2} = \\frac{2}{4} = \\frac{4}{8}$. To make an equivalent fraction, **multiply** (or divide) the numerator and the denominator by the **same number**. With the same denominator, the bigger numerator is the bigger fraction: $\\frac{3}{8} > \\frac{2}{8}$."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- The parts must be **equal**: a rectangle cut in 3 unequal parts does not show thirds.\n- Thinking that a bigger denominator means a bigger fraction: $\\frac{1}{8}$ is smaller than $\\frac{1}{4}$.\n- Changing only the top or only the bottom number when finding an equivalent fraction."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Write the fraction of a cake that is eaten when 3 of 8 equal slices are eaten.",
+     "steps": [
+      "The cake has 8 equal parts: the denominator is 8.",
+      "3 parts are eaten: the numerator is 3."
+     ],
+     "answer": "3/8 of the cake.",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 104,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20.0,
+        "y": 10,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 50.0,
+        "y": 10,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 80.0,
+        "y": 10,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 110.0,
+        "y": 10,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 140.0,
+        "y": 10,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 170.0,
+        "y": 10,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 10,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 230.0,
+        "y": 10,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 274,
+        "y": 28.0,
+        "text": "3/8",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Find a fraction equivalent to 2/3 with denominator 12.",
+     "steps": [
+      "3 × 4 = 12, so multiply the top and the bottom by 4.",
+      "2 × 4 = 8, so the fraction is 8/12."
+     ],
+     "answer": "8/12"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class4-maths-fractions"
+  },
+  {
+   "id": "class4-maths-fractions-add",
+   "title": "Adding and subtracting fractions",
+   "minutes": 25,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level II (Class 4) — Mathematics; to be checked against the official syllabus",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Add fractions with the same denominator.",
+    "Subtract fractions with the same denominator.",
+    "Find a fraction of a number."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "class4-maths-fractions-e07",
+    "class4-maths-fractions-e08",
+    "class4-maths-fractions-e09",
+    "class4-maths-fractions-e10",
+    "class4-maths-fractions-e11",
+    "class4-maths-fractions-e12"
+   ],
+   "selfCheck": [
+    "class4-maths-fractions-add-q1",
+    "class4-maths-fractions-add-q2",
+    "class4-maths-fractions-add-q3",
+    "class4-maths-fractions-add-q4",
+    "class4-maths-fractions-add-q5"
+   ],
+   "reviewNotes": [
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Same denominator",
+     "md": "When the denominators are the **same**, add or subtract the **numerators** and keep the denominator: $\\frac{2}{8} + \\frac{3}{8} = \\frac{5}{8}$ and $\\frac{7}{9} - \\frac{4}{9} = \\frac{3}{9}$. Do **not** add the denominators!"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 140,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20.0,
+        "y": 10,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "rect",
+        "x": 50.0,
+        "y": 10,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "rect",
+        "x": 80.0,
+        "y": 10,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 110.0,
+        "y": 10,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 140.0,
+        "y": 10,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 170.0,
+        "y": 10,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 10,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 230.0,
+        "y": 10,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 274,
+        "y": 28.0,
+        "text": "2/8",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 20.0,
+        "y": 50,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "rect",
+        "x": 50.0,
+        "y": 50,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "rect",
+        "x": 80.0,
+        "y": 50,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "rect",
+        "x": 110.0,
+        "y": 50,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 140.0,
+        "y": 50,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 170.0,
+        "y": 50,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 50,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 230.0,
+        "y": 50,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 274,
+        "y": 68.0,
+        "text": "+ 3/8",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 20.0,
+        "y": 90,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "rect",
+        "x": 50.0,
+        "y": 90,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "rect",
+        "x": 80.0,
+        "y": 90,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "rect",
+        "x": 110.0,
+        "y": 90,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "rect",
+        "x": 140.0,
+        "y": 90,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "rect",
+        "x": 170.0,
+        "y": 90,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 90,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 230.0,
+        "y": 90,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 274,
+        "y": 108.0,
+        "text": "= 5/8",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "2/8 + 3/8 = 5/8.",
+     "alt": "Three bars on eighths: 2 parts shaded, then 3 parts shaded, then 5 parts shaded."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "A fraction of a number",
+     "md": "To find $\\frac{1}{4}$ of 20, divide by the denominator: 20 ÷ 4 = 5. To find $\\frac{3}{4}$ of 20, find $\\frac{1}{4}$ and multiply by the numerator: 5 × 3 = 15. A whole is $\\frac{4}{4}$, so $1 - \\frac{1}{4} = \\frac{3}{4}$."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Adding the denominators: $\\frac{1}{5} + \\frac{2}{5}$ is $\\frac{3}{5}$, not $\\frac{3}{10}$.\n- Dividing by the numerator instead of the denominator.\n- Forgetting that the sum can be more than one whole."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Ada eats 2/8 of a cake and Neba eats 3/8. What fraction did they eat together and what is left?",
+     "steps": [
+      "Add: 2/8 + 3/8 = 5/8.",
+      "A whole is 8/8, so the rest is 8/8 − 5/8 = 3/8."
+     ],
+     "answer": "5/8 eaten; 3/8 left.",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 140,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20.0,
+        "y": 10,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "rect",
+        "x": 50.0,
+        "y": 10,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "rect",
+        "x": 80.0,
+        "y": 10,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 110.0,
+        "y": 10,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 140.0,
+        "y": 10,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 170.0,
+        "y": 10,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 10,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 230.0,
+        "y": 10,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 274,
+        "y": 28.0,
+        "text": "2/8",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 20.0,
+        "y": 50,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "rect",
+        "x": 50.0,
+        "y": 50,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "rect",
+        "x": 80.0,
+        "y": 50,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "rect",
+        "x": 110.0,
+        "y": 50,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 140.0,
+        "y": 50,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 170.0,
+        "y": 50,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 50,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 230.0,
+        "y": 50,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 274,
+        "y": 68.0,
+        "text": "+ 3/8",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 20.0,
+        "y": 90,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "rect",
+        "x": 50.0,
+        "y": 90,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "rect",
+        "x": 80.0,
+        "y": 90,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "rect",
+        "x": 110.0,
+        "y": 90,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "rect",
+        "x": 140.0,
+        "y": 90,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "rect",
+        "x": 170.0,
+        "y": 90,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 200.0,
+        "y": 90,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 230.0,
+        "y": 90,
+        "w": 30.0,
+        "h": 26,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "text",
+        "x": 274,
+        "y": 108.0,
+        "text": "= 5/8",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "A farmer has 24 goats. 3/4 of them are female. How many are female?",
+     "steps": [
+      "1/4 of 24 = 24 ÷ 4 = 6.",
+      "3/4 of 24 = 6 × 3 = 18."
+     ],
+     "answer": "18 goats"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class4-maths-fractions"
+  },
+  {
+   "id": "class4-maths-decimals",
+   "title": "Introduction to decimals: tenths and hundredths",
+   "minutes": 30,
+   "programRef": "MINEDUB primary school curriculum (English-speaking subsystem), Level II (Class 4) — Mathematics; to be checked against the official syllabus",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Link tenths and hundredths with decimals.",
+    "Read, write and compare decimals with one or two places.",
+    "Add and subtract simple decimals (money)."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "class4-maths-fractions-e13",
+    "class4-maths-fractions-e14",
+    "class4-maths-fractions-e15",
+    "class4-maths-fractions-e16",
+    "class4-maths-fractions-e17",
+    "class4-maths-fractions-e18"
+   ],
+   "selfCheck": [
+    "class4-maths-decimals-q1",
+    "class4-maths-decimals-q2",
+    "class4-maths-decimals-q3",
+    "class4-maths-decimals-q4",
+    "class4-maths-decimals-q5"
+   ],
+   "reviewNotes": [
+    "Decimals are only introduced (one and two places); the link with money (2.50) is a simple analogy, check how the school presents it.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Decimals",
+     "md": "A **decimal point** separates the whole part from the part that is smaller than 1. The first digit after the point is **tenths**, the second is **hundredths**. So $0.3 = \\frac{3}{10}$ and $0.25 = \\frac{25}{100}$. In 4.6 there are 4 wholes and 6 tenths."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 110,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 20,
+        "w": 200,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 20,
+        "w": 20,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 20,
+        "w": 20,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 20,
+        "w": 20,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "rect",
+        "x": 80,
+        "y": 20,
+        "w": 20,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 100,
+        "y": 20,
+        "w": 20,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 20,
+        "w": 20,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 140,
+        "y": 20,
+        "w": 20,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 20,
+        "w": 20,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 180,
+        "y": 20,
+        "w": 20,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 200,
+        "y": 20,
+        "w": 20,
+        "h": 30,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "paper"
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 20,
+        "w": 200,
+        "h": 30,
+        "stroke": "ink",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 40,
+        "text": "3 tenths = 0.3",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 80,
+        "text": "0     0.1   0.2   0.3   ...   1",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "3 tenths of a strip is 0.3.",
+     "alt": "A strip cut into ten equal parts with three parts coloured; the label says 3 tenths equals 0.3."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Comparing and adding",
+     "md": "To compare, look at the whole part first, then tenths, then hundredths: 2.5 > 2.35 because 5 tenths > 3 tenths. To add or subtract, **line up the decimal points**: 2.5 + 1.75 = 4.25. Add a zero to help: 2.50 + 1.75. Money works the same: 2.50 means two and a half units."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Thinking that 0.35 is bigger than 0.5 because 35 > 5. Compare **tenths first**: 0.5 = 0.50 > 0.35.\n- Not lining up the decimal points when adding.\n- Reading 0.05 as five tenths: it is five hundredths."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Write 7/10 and 45/100 as decimals.",
+     "steps": [
+      "7 tenths is written 0.7.",
+      "45 hundredths is written 0.45."
+     ],
+     "answer": "0.7 and 0.45"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Work out 2.5 + 1.75.",
+     "steps": [
+      "Write 2.50 and 1.75 with the points under each other.",
+      "Add: 0 + 5 = 5; 5 + 7 = 12 (write 2, carry 1); 2 + 1 + 1 = 4. Answer 4.25."
+     ],
+     "answer": "4.25"
+    }
+   ],
+   "readAloud": true,
+   "chapter": "class4-maths-fractions"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "class4-maths-fractions-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class4-maths-fractions-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which fraction means 5 of 6 equal parts?",
+   "choices": [
+    "5/5",
+    "5/6",
+    "1/6",
+    "6/5"
+   ],
+   "answer": 1,
+   "explanation": "Numerator 5, denominator 6.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-fractions"
+  },
+  {
+   "id": "class4-maths-fractions-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class4-maths-fractions-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Complete: 1/2 = __/10.",
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "Multiply top and bottom by 5.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-fractions"
+  },
+  {
+   "id": "class4-maths-fractions-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class4-maths-fractions-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which fraction is the biggest?",
+   "choices": [
+    "5/8",
+    "2/8",
+    "3/8",
+    "1/8"
+   ],
+   "answer": 0,
+   "explanation": "Same denominator: the biggest numerator wins.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-fractions"
+  },
+  {
+   "id": "class4-maths-fractions-e04",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class4-maths-fractions-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "1/3 is bigger than 1/2.",
+   "answer": false,
+   "explanation": "Thirds are smaller parts than halves, so 1/3 is smaller than 1/2.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-fractions"
+  },
+  {
+   "id": "class4-maths-fractions-e05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class4-maths-fractions-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Complete: 3/4 = __/20.",
+   "answer": 15,
+   "tolerance": 0,
+   "explanation": "4 × 5 = 20, so 3 × 5 = 15.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-fractions"
+  },
+  {
+   "id": "class4-maths-fractions-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class4-maths-fractions-intro",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A baker in Yaoundé cuts a loaf into 8 equal pieces. He sells 3 and gives away 1.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What fraction was sold?",
+     "choices": [
+      "3/5",
+      "5/8",
+      "3/8",
+      "8/3"
+     ],
+     "answer": 2,
+     "explanation": "3 out of 8.",
+     "id": "class4-maths-fractions-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What fraction is left?",
+     "choices": [
+      "4/8",
+      "2/8",
+      "5/8",
+      "3/8"
+     ],
+     "answer": 0,
+     "explanation": "8 − 3 − 1 = 4 pieces.",
+     "id": "class4-maths-fractions-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "Which fraction is the same as the fraction left?",
+     "choices": [
+      "1/4",
+      "3/4",
+      "1/8",
+      "1/2"
+     ],
+     "answer": 3,
+     "explanation": "4/8 = 1/2.",
+     "id": "class4-maths-fractions-e06-c"
+    }
+   ],
+   "chapter": "class4-maths-fractions"
+  },
+  {
+   "id": "class4-maths-fractions-intro-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-fractions-intro",
+   "prompt": "Class 4 Maths (Fractions and equivalent fractions) – In 3/5 the denominator is...",
+   "choices": [
+    "2",
+    "3",
+    "5",
+    "8"
+   ],
+   "answer": 2,
+   "explanation": "The bottom number.",
+   "chapter": "class4-maths-fractions"
+  },
+  {
+   "id": "class4-maths-fractions-intro-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-fractions-intro",
+   "prompt": "Class 4 Maths (Fractions and equivalent fractions) – Which is equivalent to 1/2?",
+   "choices": [
+    "4/8",
+    "2/8",
+    "1/4",
+    "3/8"
+   ],
+   "answer": 0,
+   "explanation": "Multiply top and bottom by 4.",
+   "chapter": "class4-maths-fractions"
+  },
+  {
+   "id": "class4-maths-fractions-intro-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-fractions-intro",
+   "prompt": "Class 4 Maths (Fractions and equivalent fractions) – Which fraction of a circle is shaded when 1 of 4 equal parts is shaded?",
+   "choices": [
+    "1/3",
+    "1/4",
+    "2/4",
+    "4/1"
+   ],
+   "answer": 1,
+   "explanation": "One part out of four.",
+   "chapter": "class4-maths-fractions"
+  },
+  {
+   "id": "class4-maths-fractions-intro-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-fractions-intro",
+   "prompt": "Class 4 Maths (Fractions and equivalent fractions) – Which is smaller: 1/8 or 1/4?",
+   "choices": [
+    "1/8",
+    "1/4",
+    "they are equal",
+    "3/4"
+   ],
+   "answer": 0,
+   "explanation": "Eighths are smaller parts.",
+   "chapter": "class4-maths-fractions"
+  },
+  {
+   "id": "class4-maths-fractions-intro-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-fractions-intro",
+   "prompt": "Class 4 Maths (Fractions and equivalent fractions) – 2/6 is equivalent to...",
+   "choices": [
+    "3/2",
+    "1/3",
+    "1/2",
+    "2/3"
+   ],
+   "answer": 1,
+   "explanation": "Divide top and bottom by 2.",
+   "chapter": "class4-maths-fractions"
+  },
+  {
+   "id": "class4-maths-fractions-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class4-maths-fractions-add",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Work out 3/7 + 2/7.",
+   "choices": [
+    "5/7",
+    "5/14",
+    "1/7",
+    "6/7"
+   ],
+   "answer": 0,
+   "explanation": "3 + 2 = 5, denominator stays 7.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-fractions"
+  },
+  {
+   "id": "class4-maths-fractions-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class4-maths-fractions-add",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find 1/5 of 40.",
+   "answer": 8,
+   "tolerance": 0,
+   "explanation": "40 ÷ 5 = 8.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-fractions"
+  },
+  {
+   "id": "class4-maths-fractions-e09",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class4-maths-fractions-add",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Work out 7/9 − 4/9.",
+   "choices": [
+    "3/9",
+    "3/0",
+    "11/9",
+    "3/18"
+   ],
+   "answer": 0,
+   "explanation": "7 − 4 = 3.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-fractions"
+  },
+  {
+   "id": "class4-maths-fractions-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class4-maths-fractions-add",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find 3/5 of 35.",
+   "answer": 21,
+   "tolerance": 0,
+   "explanation": "35 ÷ 5 = 7; 7 × 3 = 21.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-fractions"
+  },
+  {
+   "id": "class4-maths-fractions-e11",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class4-maths-fractions-add",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "2/6 + 3/6 = 5/12.",
+   "answer": false,
+   "explanation": "Keep the denominator: 5/6.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-fractions"
+  },
+  {
+   "id": "class4-maths-fractions-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class4-maths-fractions-add",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A tank holds 60 litres of water. On Monday 1/3 was used and on Tuesday 1/6 was used (the whole tank is 6/6).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many litres is 1/6 of 60?",
+     "answer": 10,
+     "tolerance": 0,
+     "explanation": "60 ÷ 6 = 10.",
+     "unit": "litres",
+     "id": "class4-maths-fractions-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many litres is 1/3 of 60?",
+     "answer": 20,
+     "tolerance": 0,
+     "explanation": "60 ÷ 3 = 20.",
+     "unit": "litres",
+     "id": "class4-maths-fractions-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "How many litres were used in all?",
+     "answer": 30,
+     "tolerance": 0,
+     "explanation": "20 + 10 = 30.",
+     "unit": "litres",
+     "id": "class4-maths-fractions-e12-c"
+    }
+   ],
+   "chapter": "class4-maths-fractions"
+  },
+  {
+   "id": "class4-maths-fractions-add-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-fractions-add",
+   "prompt": "Class 4 Maths (Adding and subtracting fractions) – 5/10 + 3/10 =",
+   "choices": [
+    "2/10",
+    "15/10",
+    "8/10",
+    "8/20"
+   ],
+   "answer": 2,
+   "explanation": "Add numerators.",
+   "chapter": "class4-maths-fractions"
+  },
+  {
+   "id": "class4-maths-fractions-add-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-fractions-add",
+   "prompt": "Class 4 Maths (Adding and subtracting fractions) – 1/4 of 28 is...",
+   "choices": [
+    "24",
+    "14",
+    "7",
+    "4"
+   ],
+   "answer": 2,
+   "explanation": "28 ÷ 4 = 7.",
+   "chapter": "class4-maths-fractions"
+  },
+  {
+   "id": "class4-maths-fractions-add-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-fractions-add",
+   "prompt": "Class 4 Maths (Adding and subtracting fractions) – 1 − 2/5 =",
+   "choices": [
+    "2/5",
+    "3/5",
+    "1/5",
+    "4/5"
+   ],
+   "answer": 1,
+   "explanation": "5/5 − 2/5 = 3/5.",
+   "chapter": "class4-maths-fractions"
+  },
+  {
+   "id": "class4-maths-fractions-add-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-fractions-add",
+   "prompt": "Class 4 Maths (Adding and subtracting fractions) – To add fractions with the same denominator we...",
+   "choices": [
+    "add the numerators",
+    "subtract",
+    "multiply the numerators",
+    "add the denominators"
+   ],
+   "answer": 0,
+   "explanation": "The denominator stays the same.",
+   "chapter": "class4-maths-fractions"
+  },
+  {
+   "id": "class4-maths-fractions-add-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-fractions-add",
+   "prompt": "Class 4 Maths (Adding and subtracting fractions) – 3/4 of 12 is...",
+   "choices": [
+    "3",
+    "16",
+    "9",
+    "4"
+   ],
+   "answer": 2,
+   "explanation": "12 ÷ 4 = 3, 3 × 3 = 9.",
+   "chapter": "class4-maths-fractions"
+  },
+  {
+   "id": "class4-maths-fractions-e13",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class4-maths-decimals",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which decimal is the same as 3/10?",
+   "choices": [
+    "30",
+    "0.3",
+    "0.03",
+    "3.10"
+   ],
+   "answer": 1,
+   "explanation": "3 tenths.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-fractions"
+  },
+  {
+   "id": "class4-maths-fractions-e14",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "class4-maths-decimals",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Work out 3.4 + 2.5.",
+   "answer": 5.9,
+   "tolerance": 0.001,
+   "explanation": "3.4 + 2.5 = 5.9.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-fractions"
+  },
+  {
+   "id": "class4-maths-fractions-e15",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "class4-maths-decimals",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which decimal is the biggest?",
+   "choices": [
+    "0.17",
+    "0.07",
+    "0.7",
+    "0.27"
+   ],
+   "answer": 2,
+   "explanation": "0.7 = 0.70 is more than 0.27.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-fractions"
+  },
+  {
+   "id": "class4-maths-fractions-e16",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "class4-maths-decimals",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "0.5 is the same as 5/10 and 1/2.",
+   "answer": true,
+   "explanation": "5/10 = 1/2 = 0.5.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-fractions"
+  },
+  {
+   "id": "class4-maths-fractions-e17",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "class4-maths-decimals",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Work out 5.00 − 1.75.",
+   "answer": 3.25,
+   "tolerance": 0.001,
+   "explanation": "5.00 − 1.75 = 3.25.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "class4-maths-fractions"
+  },
+  {
+   "id": "class4-maths-fractions-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "class4-maths-decimals",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A tailor in Limbe has a piece of cloth 2.5 m long and another piece 0.75 m long.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "What is the total length in metres?",
+     "answer": 3.25,
+     "tolerance": 0.001,
+     "explanation": "2.50 + 0.75 = 3.25.",
+     "unit": "m",
+     "id": "class4-maths-fractions-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "What is the total length in centimetres?",
+     "answer": 325,
+     "tolerance": 0,
+     "explanation": "3.25 × 100 = 325.",
+     "unit": "cm",
+     "id": "class4-maths-fractions-e18-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "Which piece is longer?",
+     "choices": [
+      "they are equal",
+      "we cannot tell",
+      "the 2.5 m piece",
+      "the 0.75 m piece"
+     ],
+     "answer": 2,
+     "explanation": "2.5 > 0.75.",
+     "id": "class4-maths-fractions-e18-c"
+    }
+   ],
+   "chapter": "class4-maths-fractions"
+  },
+  {
+   "id": "class4-maths-decimals-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-decimals",
+   "prompt": "Class 4 Maths (Introduction to decimals) – 0.6 means...",
+   "choices": [
+    "60 tenths",
+    "6 units",
+    "6 hundredths",
+    "6 tenths"
+   ],
+   "answer": 3,
+   "explanation": "First digit after the point is tenths.",
+   "chapter": "class4-maths-fractions"
+  },
+  {
+   "id": "class4-maths-decimals-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-decimals",
+   "prompt": "Class 4 Maths (Introduction to decimals) – 1.5 + 1.5 =",
+   "choices": [
+    "1.10",
+    "2.5",
+    "3.0",
+    "3.5"
+   ],
+   "answer": 2,
+   "explanation": "Add tenths and wholes.",
+   "chapter": "class4-maths-fractions"
+  },
+  {
+   "id": "class4-maths-decimals-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-decimals",
+   "prompt": "Class 4 Maths (Introduction to decimals) – Which is smaller than 0.5?",
+   "choices": [
+    "0.55",
+    "0.05",
+    "0.9",
+    "0.6"
+   ],
+   "answer": 1,
+   "explanation": "0.05 is only 5 hundredths.",
+   "chapter": "class4-maths-fractions"
+  },
+  {
+   "id": "class4-maths-decimals-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-decimals",
+   "prompt": "Class 4 Maths (Introduction to decimals) – 0.25 is the same as...",
+   "choices": [
+    "25/10",
+    "5/2",
+    "2/5",
+    "25/100"
+   ],
+   "answer": 3,
+   "explanation": "Two decimal places means hundredths.",
+   "chapter": "class4-maths-fractions"
+  },
+  {
+   "id": "class4-maths-decimals-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "class4-maths-decimals",
+   "prompt": "Class 4 Maths (Introduction to decimals) – The decimal point separates the...",
+   "choices": [
+    "whole part from the fraction part",
+    "units from tens",
+    "money from time",
+    "tenths from hundredths"
+   ],
+   "answer": 0,
+   "explanation": "Digits on the right are smaller than one.",
+   "chapter": "class4-maths-fractions"
+  }
+ ]
+}

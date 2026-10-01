@@ -1,0 +1,190 @@
+import sys, os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from p13_kit import *
+from p13_fig import *
+
+p = newpack("class2-social-studies", "Social Studies — Class 2", "Class 2", "histoire-geo",
+    "Class 2 Social Studies: families, school and community, work and trades, markets and money, transport, Cameroon's symbols, the ten regions, food crops, celebrations and helping others.",
+    REF % "Level I (Class 2) — Social Studies", wanted="social-studies")
+R = p.programRef
+NOTE = "Only simple, neutral and well-established facts are used; to be reviewed by a primary teacher against the official syllabus."
+REGS = [("Adamawa", "Ngaoundéré"), ("Centre", "Yaoundé"), ("East", "Bertoua"), ("Far North", "Maroua"), ("Littoral", "Douala"),
+        ("North", "Garoua"), ("North-West", "Bamenda"), ("West", "Bafoussam"), ("South", "Ebolowa"), ("South-West", "Buea")]
+assert len(REGS) == 10
+def C(n, shape="circle", color="orange", per=5, w=300, h=120): return count(n, shape, color, per, w, h)
+flag = shapes([RECT(40, 20, 60, 100, fill="green"), RECT(100, 20, 60, 100, fill="red"), RECT(160, 20, 60, 100, fill="yellow"), POLY([130, 50, 135, 66, 152, 66, 138, 76, 143, 92, 130, 82, 117, 92, 122, 76, 108, 66, 125, 66], fill="yellow"), T(130, 140, "flag of Cameroon", 13, bold=True)], 260, 155)
+
+ch = p.chapter("family-school", "Family, school and community", R)
+lesson(ch, "families-roles", "Families and what each person does", ["Describe different kinds of families.", "Say how each person helps at home."],
+  [("definition", "Families", "Families are of many kinds. Some are **large** with grandparents, aunts and cousins in the same compound. Some are **small**. In all families people **care** for one another and **share** the work."),
+   ("retenir", "Roles and duties", "Parents or guardians earn money, cook and care for the children. Children go to school, help at home and respect older people. Grandparents tell stories and give advice. Everybody has **rights** (to be cared for, to go to school) and **duties** (to help, to respect)."),
+   ("pieges", "Common mistakes", "- Do not think that only one kind of family is right.\n- Chores are not only for girls or only for boys.\n- Duties and rights go together.")],
+  [("Example 1", "Name two duties of a child at home.", ["Children can help with chores.", "They can sweep and fetch water, and they must respect older people."], "Help with chores and respect elders", cards(["rights: care, school", "duties: help, respect"], 2, 400, ch=44, size=16)),
+   ("Example 2", "A family has 2 adults, 3 children and 1 grandmother. How many people?", ["Add the adults and the children.", "2 + 3 + 1 = 6."], "6 people", None)],
+  (cards(["care", "share work", "respect", "help each other"], 2, 400, ch=44, size=16), "What families do.", "Four boxes: care, share work, respect, help each other."),
+  [("m", "A duty of a child is to...", "help at home", ["fight", "waste food", "stay silent always"], "Help."), ("t", "Chores are only for girls.", False, "Everybody helps."), ("m", "A right of a child is to...", "go to school", ["do no homework", "hit others", "stay out all night"], "Right.")],
+  [("n", "In a compound live 3 adults, 5 children and 2 grandparents. How many people?", 10, "3 + 5 + 2 = 10."), ("x", "Match the person with a role.", [("grandparent", "tells stories"), ("parent", "cares for children"), ("child", "helps and learns")], "Roles.")],
+  ("p", "Nkem's family has 7 people. 2 are adults and the rest are children.", [("n", "How many children? (7 − 2)", 5, "5."), ("m", "How can the children help?", "by doing chores and respecting elders", ["by breaking rules", "by hiding", "by fighting"], "Help.")]),
+  [("Class 2 social studies families: all families should...", "care for each other", ["fight", "ignore children", "stay silent"], "Care."),
+   ("Class 2 social studies families: a duty of a child is to...", "respect elders", ["break plates", "waste food", "shout"], "Respect."),
+   ("Who tells stories and gives advice?", "grandparents", ["only strangers", "no one", "only teachers"], "Grandparents."),
+   ("A right of a child is...", "to go to school", ["to do no work ever", "to hit others", "to live alone"], "Right."),
+   ("Housework is...", "for all family members", ["only for girls", "only for boys", "only for adults"], "All.")],
+  [NOTE])
+
+lesson(ch, "school-community", "School life and rules", ["Name school staff and their jobs.", "Explain why we need school rules."],
+  [("definition", "School community", "The school community has **pupils**, **teachers**, the **head teacher**, the **secretary**, the **cleaner** and **parents**. Each person has a job. Together they make the school a good place."),
+   ("retenir", "Rules", "School rules keep us **safe** and **fair**. Be on time. Wear the school uniform. Respect teachers and friends. Do not fight, steal or tell lies. Keep the school clean. Ask for help when you need it."),
+   ("pieges", "Common mistakes", "- Do not damage school things.\n- Do not bully anyone. Tell a teacher if someone is bullied.\n- Rules are the same for everyone.")],
+  [("Example 1", "Who leads the school?", ["Every school has one leader.", "The head teacher."], "The head teacher", cards(["head teacher", "teachers", "pupils", "parents"], 4, 400, ch=44, size=13)),
+   ("Example 2", "Why do we have school rules?", ["Rules keep order.", "They keep everybody safe and fair."], "To keep everyone safe and fair", None)],
+  (cards(["be on time", "respect others", "keep school clean", "no fighting"], 2, 400, ch=44, size=15), "Some school rules.", "Four boxes with school rules."),
+  [("m", "A school rule is to...", "respect others", ["fight", "shout", "steal"], "Respect."), ("m", "Who leads the school?", "the head teacher", ["a pupil", "the cook", "a visitor"], "Head teacher."), ("t", "Bullying is wrong.", True, "Yes.")],
+  [("m", "A pupil is being teased. What should you do?", "tell a teacher", ["join in", "laugh", "do nothing"], "Tell."), ("n", "A school has 6 teachers, 1 head teacher and 2 cleaners. How many staff? (6 + 1 + 2)", 9, "9.")],
+  ("p", "A class has 24 pupils. 3 are late.", [("n", "How many pupils are on time? (24 − 3)", 21, "21."), ("m", "Why is being on time a good rule?", "we do not miss lessons", ["we get tired", "we sleep", "we fight"], "On time.")]),
+  [("Class 2 social studies school: school rules help to keep us...", "safe and fair", ["lost", "late", "angry"], "Safe."),
+   ("Class 2 social studies school: if someone is bullied we should...", "tell a teacher", ["join in", "laugh", "hide"], "Tell."),
+   ("The leader of a school is the...", "head teacher", ["driver", "trader", "farmer"], "Head."),
+   ("A pupil should...", "respect teachers and friends", ["fight", "steal", "tease"], "Respect."),
+   ("The school community includes...", "pupils, teachers and parents", ["only pupils", "only the cook", "only the head"], "Everyone.")],
+  [NOTE], prereq=["class2-social-studies-families-roles"])
+
+lesson(ch, "community-helpers", "Our community and the people who serve it", ["Name community services and who runs them.", "Say how we can help our community."],
+  [("definition", "Community", "A **community** is a group of people who live in the same place. A community has **services**: a **school**, a **health centre**, a **market**, a **water point** and **roads**. People such as teachers, nurses, traders, police officers and the village chief or the mayor serve the community."),
+   ("retenir", "Helping", "We can help the community by keeping it **clean**, caring for water points, **respecting** others, taking part in community work and obeying the law. Many communities clean the roads or build a bridge together."),
+   ("pieges", "Common mistakes", "- A community belongs to everyone, so we must care for it.\n- Do not damage public things like benches or taps.\n- Small acts of help are valuable.")],
+  [("Example 1", "Name two services in a community.", ["Think of places that help everybody.", "A school and a health centre."], "School and health centre", cards(["school", "health centre", "market", "water point"], 4, 400, ch=44, size=13)),
+   ("Example 2", "How can pupils help keep the community clean?", ["Use bins.", "Join a clean-up and sweep."], "Use bins and join clean-ups", None)],
+  (cards(["school", "health centre", "market", "road"], 4, 400, ch=44, size=14), "Services in a community.", "Four boxes with school, health centre, market, road."),
+  [("m", "A community is...", "people living in the same place", ["one house", "one animal", "a country far away"], "Community."), ("m", "A way to help the community is to...", "keep it clean", ["break benches", "waste water", "spoil roads"], "Clean."), ("t", "Public things belong to everyone.", True, "Yes.")],
+  [("x", "Match the service with its use.", [("health centre", "care for the ill"), ("school", "learning"), ("water point", "clean water")], "Uses."), ("n", "Pupils clean the road for 3 days, 2 hours each day. How many hours in all? (3 × 2)", 6, "6 hours.")],
+  ("p", "A village has 1 school, 2 water points, 1 health centre and 1 market.", [("n", "How many services in all?", 5, "1 + 2 + 1 + 1 = 5."), ("m", "How can the people look after the water points?", "keep them clean and repair them", ["leave them dirty", "break them", "stop using them"], "Care.")]),
+  [("Class 2 social studies community: a service in the community is a...", "health centre", ["toy", "cloud", "storm"], "Health centre."),
+   ("Class 2 social studies community: we can help by...", "joining community work", ["ignoring it", "littering", "breaking taps"], "Help."),
+   ("A community is...", "a group of people living in a place", ["only animals", "only houses", "a book"], "Community."),
+   ("Who looks after the sick in a community?", "nurses and doctors", ["traders", "drivers", "builders"], "Health workers."),
+   ("Public things should be...", "taken care of", ["damaged", "dirtied", "sold"], "Care.")],
+  [NOTE], prereq=["class2-social-studies-school-community"])
+
+ch = p.chapter("work-money-transport", "Work, markets and transport", R)
+lesson(ch, "work-trades", "Work people do", ["Name jobs and trades.", "Say what some workers make or give."],
+  [("definition", "Jobs", "People work to earn money and to serve others. **Farmers** grow food. **Fishermen** catch fish. **Traders** buy and sell. **Tailors** sew clothes. **Carpenters** make furniture from wood. **Builders** build houses. **Mechanics** repair vehicles. **Teachers** and **nurses** give services."),
+   ("retenir", "Why work matters", "Work gives food, houses and clothes, and it helps the country. All honest work is **important**. People learn skills at school or by apprenticeship."),
+   ("pieges", "Common mistakes", "- Do not look down on any honest work.\n- Children should not do dangerous or heavy work: they should go to school.\n- Both women and men can do any job.")],
+  [("Example 1", "Who makes a chair from wood?", ["Wood work needs a skill.", "A carpenter."], "A carpenter", cards(["farmer: food", "tailor: clothes", "carpenter: chairs", "mechanic: repairs"], 2, 400, ch=44, size=14)),
+   ("Example 2", "Who repairs a broken motorbike?", ["It is a repair job.", "A mechanic."], "A mechanic", None)],
+  (cards(["farmer", "tailor", "carpenter", "mechanic", "trader", "nurse"], 3, 400, ch=44, size=15), "Some jobs.", "Six boxes with jobs."),
+  [("m", "Who grows food?", "a farmer", ["a tailor", "a nurse", "a mechanic"], "Farmer."), ("m", "Who sews clothes?", "a tailor", ["a carpenter", "a farmer", "a driver"], "Tailor."), ("t", "All honest work is important.", True, "Yes.")],
+  [("x", "Match the worker with what they make or do.", [("carpenter", "furniture"), ("tailor", "clothes"), ("mechanic", "repairs")], "Jobs."), ("n", "A tailor sews 3 shirts a day. How many in 5 days? (3 × 5)", 15, "15.")],
+  ("p", "A carpenter in Bafoussam makes 4 tables and 6 chairs this week.", [("n", "How many pieces of furniture? (4 + 6)", 10, "10."), ("m", "Which skill does he need?", "working with wood", ["sewing", "driving", "cooking only"], "Wood.")]),
+  [("Class 2 social studies work: a person who makes chairs is a...", "carpenter", ["tailor", "nurse", "driver"], "Carpenter."),
+   ("Class 2 social studies work: a person who repairs vehicles is a...", "mechanic", ["farmer", "teacher", "baker"], "Mechanic."),
+   ("Work is important because it...", "gives us things we need", ["wastes time", "breaks things", "makes noise"], "Needs."),
+   ("A farmer...", "grows food", ["sews clothes", "repairs cars", "builds boats"], "Food."),
+   ("Children should...", "go to school", ["do dangerous work", "work all day", "stay at home always"], "School.")],
+  ["Statement about children's work is general, to be checked."], prereq=["class2-social-studies-community-helpers"])
+
+lesson(ch, "markets-money", "Markets and money", ["Say why people use money and go to markets.", "Work out simple prices and change in FCFA."],
+  [("definition", "Market", "A **market** is a place where people **buy and sell**. Sellers (traders) bring goods such as food, cloth and tools. Buyers pay with **money**. In Cameroon we use **FCFA**."),
+   ("retenir", "Money", "We use money to **buy** things we need. We can **save** some money for later. **Change** is the money given back when we pay more than the price. Market days are busy in many towns, for example weekly markets in villages."),
+   ("pieges", "Common mistakes", "- Count your change.\n- Save some money; do not spend everything.\n- Be honest when buying and selling.")],
+  [("Example 1", "A pineapple costs 300 FCFA. You pay 500 FCFA. How much change?", ["Subtract the price from what you paid.", "500 − 300 = 200."], "200 FCFA", cards(["buy", "sell", "pay", "change"], 4, 400, ch=44, size=15)),
+   ("Example 2", "A trader sells 4 oranges at 50 FCFA each. How much money does she get?", ["4 × 50.", "= 200."], "200 FCFA", None)],
+  (cards(["25", "50", "100", "500", "1000"], 5, 400, ch=44, size=16), "Some FCFA money.", "Five boxes: 25, 50, 100, 500 and 1000 FCFA."),
+  [("n", "A banana costs 25 FCFA. How much for 4 bananas?", 100, "4 × 25 = 100.", "FCFA"), ("n", "A book costs 350 FCFA. You pay 500 FCFA. Change?", 150, "500 − 350.", "FCFA"), ("m", "A market is a place to...", "buy and sell", ["sleep", "swim", "study"], "Market.")],
+  [("n", "Ada has 1 000 FCFA and spends 650 FCFA. How much does she save? (1 000 − 650)", 350, "350.", "FCFA"), ("t", "We should always save some money.", True, "Good habit.")],
+  ("p", "At the market in Kumba, Mama buys 2 kg of rice at 600 FCFA per kg and a bar of soap at 200 FCFA. She pays 2 000 FCFA.", [("n", "How much does the rice cost?", 1200, "2 × 600.", "FCFA"), ("n", "How much is her change? (2 000 − 1 200 − 200)", 600, "600.", "FCFA")]),
+  [("Class 2 social studies money: money in Cameroon is the...", "FCFA", ["dollar", "pound", "yen"], "FCFA."),
+   ("Class 2 social studies money: change is...", "money given back", ["the price", "a market", "a coin only"], "Change."),
+   ("A seller is also called a...", "trader", ["buyer", "pupil", "driver"], "Trader."),
+   ("If you have 500 FCFA and buy sweets for 200 FCFA, you have left...", "300 FCFA", ["700 FCFA", "200 FCFA", "100 FCFA"], "300."),
+   ("A good habit is to...", "save some money", ["spend everything", "throw money", "lose it"], "Save.")],
+  ["Prices are invented."], prereq=["class2-social-studies-work-trades"])
+
+lesson(ch, "transport-roads", "Transport and road safety", ["Name ways of travelling on land, water and by air.", "Follow road safety rules."],
+  [("definition", "Transport", "**Transport** takes people and goods from place to place. On **land**: bicycles, motorbikes, cars, buses, lorries and trains. On **water**: canoes, boats and ferries. By **air**: aeroplanes. Roads, railways and ports help transport."),
+   ("retenir", "Road safety", "Walk on the side of the road. Cross where it is safe, **look left and right**. Use the **pavement** and **zebra crossing** if there is one. Passengers should wear seat belts. Motorbike riders and passengers should wear **helmets**."),
+   ("pieges", "Common mistakes", "- Do not run across the road.\n- Do not play near the road.\n- Do not get on an overloaded vehicle.")],
+  [("Example 1", "Name a form of water transport.", ["Think of things that float.", "A canoe or boat."], "A canoe", cards(["land: bus", "water: canoe", "air: aeroplane"], 3, 400, ch=44, size=14)),
+   ("Example 2", "What do you do before crossing a road?", ["Stop at the side.", "Look left and look right."], "Look left and right", None)],
+  (cards(["bus", "motorbike", "canoe", "aeroplane"], 4, 400, ch=44, size=14), "Ways to travel.", "Four boxes with bus, motorbike, canoe, aeroplane."),
+  [("m", "Which goes on water?", "a canoe", ["a bus", "a bicycle", "a lorry"], "Canoe."), ("m", "A motorbike rider should wear a...", "helmet", ["scarf only", "cap", "nothing"], "Helmet."), ("t", "We should run across the road.", False, "Never.")],
+  [("x", "Match the transport with where it travels.", [("aeroplane", "air"), ("boat", "water"), ("bus", "land")], "Places."), ("n", "A bus carries 30 passengers. 12 get off. How many are left? (30 − 12)", 18, "18.")],
+  ("p", "A bus leaves Bamenda with 40 passengers. At Bafoussam 15 get off and 8 get on.", [("n", "How many passengers after Bafoussam? (40 − 15 + 8)", 33, "33."), ("m", "A good rule for passengers is to...", "wear seat belts when available", ["stand on the roof", "hang from the door", "fight"], "Safety.")]),
+  [("Class 2 social studies transport: an aeroplane travels...", "by air", ["on water", "on railways", "underground"], "Air."),
+   ("Class 2 social studies road safety: before we cross we...", "look left and right", ["close our eyes", "run", "shout"], "Look."),
+   ("A canoe is a means of...", "water transport", ["air transport", "land transport only", "space transport"], "Water."),
+   ("Helmets protect...", "the head", ["the feet", "the hands", "the nose only"], "Head."),
+   ("Roads help to...", "carry people and goods", ["stop trade", "block rain", "make noise"], "Transport.")],
+  [NOTE], prereq=["class2-social-studies-markets-money"])
+
+ch = p.chapter("cameroon", "Our country Cameroon", R)
+lesson(ch, "symbols", "Symbols of Cameroon", ["Name the symbols of Cameroon.", "Show respect for them."],
+  [("definition", "Symbols", "Our country has **symbols**. The **flag** has three stripes of green, red and yellow, with a yellow star on the red stripe. The **motto** is **Peace, Work, Fatherland**. The **national anthem** is **O Cameroon, Cradle of Our Forefathers** (in English)."),
+   ("retenir", "National Day", "**National Day** is on **20 May**. On that day people march and celebrate in towns and villages. Pupils may take part in the parade. We stand and respect the flag and the anthem."),
+   ("pieges", "Common mistakes", "- The flag has a yellow star, on the red stripe.\n- The motto has three words: Peace, Work, Fatherland.\n- Stand still when the anthem is played.")],
+  [("Example 1", "What are the three colours of the flag?", ["Look at the flag from left to right.", "Green, red and yellow."], "Green, red, yellow", flag),
+   ("Example 2", "On which date is the National Day?", ["It is in the month of May.", "20 May."], "20 May", None)],
+  (flag, "The flag of Cameroon.", "A flag with green, red and yellow stripes and a yellow star on the red stripe."),
+  [("m", "The motto of Cameroon is...", "Peace, Work, Fatherland", ["Unity, Freedom, Land", "Hope, Joy, Light", "Learn, Play, Rest"], "The motto."), ("m", "National Day is on...", "20 May", ["1 January", "11 February", "25 December"], "20 May."), ("n", "How many colours does the flag have?", 3, "Green, red, yellow.")],
+  [("t", "The star on the flag is yellow.", True, "Yes."), ("m", "When the anthem is played, we...", "stand still and show respect", ["run", "laugh", "play games"], "Respect.")],
+  ("p", "A school in Buea practises for the 20 May parade.", [("m", "What colour is the star on the flag?", "yellow", ["red", "green", "blue"], "Yellow."), ("n", "Pupils march in 5 rows of 6 pupils. How many pupils march? (5 × 6)", 30, "30.")]),
+  [("Class 2 social studies symbols: the colours of the flag are...", "green, red and yellow", ["blue and white", "black and red", "green and blue"], "Three colours."),
+   ("Class 2 social studies symbols: our motto is...", "Peace, Work, Fatherland", ["Hope, Love, Light", "Learn, Rest, Play", "Eat, Drink, Sleep"], "Motto."),
+   ("National Day is on...", "20 May", ["1 June", "1 September", "10 October"], "20 May."),
+   ("At the national anthem we...", "stand and show respect", ["talk", "run", "play"], "Respect."),
+   ("The star is on the...", "red stripe", ["green stripe", "yellow stripe", "edge only"], "Red stripe.")],
+  ["National Day 20 May, the motto (English: Peace, Work, Fatherland), and the English anthem title are well-known; check the exact wording with an official source. Colour meanings are intentionally left out."], prereq=["class2-social-studies-transport-roads"])
+
+lesson(ch, "ten-regions", "The ten regions of Cameroon", ["Say that Cameroon has ten regions.", "Name some regions and their capitals."],
+  [("definition", "Regions", "Cameroon is divided into **ten regions**. Each region has a **capital town**. The capital of the country is Yaoundé, which is also the capital of the Centre Region."),
+   ("retenir", "Some regions", "Littoral: Douala. Centre: Yaoundé. West: Bafoussam. North-West: Bamenda. South-West: Buea. South: Ebolowa. East: Bertoua. Adamawa: Ngaoundéré. North: Garoua. Far North: Maroua."),
+   ("pieges", "Common mistakes", "- Do not mix up Buea (South-West) and Bamenda (North-West).\n- Douala is the biggest city, but Yaoundé is the capital.\n- There are ten regions, not nine or eleven.")],
+  [("Example 1", "What is the capital of the North-West Region?", ["Look at the list.", "Bamenda."], "Bamenda", cards([r + ": " + c for r, c in REGS[:6]], 2, 400, ch=36, size=12)),
+   ("Example 2", "How many regions has Cameroon?", ["Count the regions in the list.", "Ten."], "10", None)],
+  (cards([r + ": " + c for r, c in REGS], 2, 400, ch=36, size=12), "The ten regions and their capitals.", "Ten boxes with each region and its capital."),
+  [("n", "How many regions does Cameroon have?", 10, "Ten."), ("m", "The capital of the Littoral Region is...", "Douala", ["Garoua", "Buea", "Bertoua"], "Douala."), ("m", "The capital of the South-West Region is...", "Buea", ["Bamenda", "Bafoussam", "Ebolowa"], "Buea.")],
+  [("x", "Match the region with its capital.", [("West", "Bafoussam"), ("East", "Bertoua"), ("North", "Garoua"), ("Far North", "Maroua")], "Capitals."), ("t", "Douala is the capital of Cameroon.", False, "Yaoundé is.")],
+  ("p", "A pupil from Bamenda writes to a friend in Buea.", [("m", "In which region does the pupil live?", "North-West", ["South-West", "West", "Littoral"], "Bamenda."), ("m", "In which region does the friend live?", "South-West", ["North-West", "West", "Littoral"], "Buea.")]),
+  [("Class 2 social studies regions: how many regions has Cameroon?", "ten", ["five", "eight", "twelve"], "Ten."),
+   ("Class 2 social studies regions: the capital of the West Region is...", "Bafoussam", ["Bamenda", "Buea", "Bertoua"], "Bafoussam."),
+   ("The capital of the Far North is...", "Maroua", ["Garoua", "Bertoua", "Ebolowa"], "Maroua."),
+   ("The capital of the country is...", "Yaoundé", ["Douala", "Buea", "Limbe"], "Yaoundé."),
+   ("The capital of the East Region is...", "Bertoua", ["Garoua", "Maroua", "Ebolowa"], "Bertoua.")],
+  ["Regions and regional capitals are standard facts; check against the textbook."], prereq=["class2-social-studies-symbols"])
+
+lesson(ch, "crops-food", "Crops and food of Cameroon", ["Name food crops and cash crops.", "Say where some crops grow."],
+  [("definition", "Food crops", "**Food crops** feed families: **cassava**, **maize**, **plantain**, **yams**, **cocoyams**, **beans**, **groundnuts** and **rice**. People also eat fish, meat, eggs and many fruits like mangoes, pawpaw and oranges."),
+   ("retenir", "Cash crops", "**Cash crops** are grown to sell. In Cameroon they include **cocoa**, **coffee**, **bananas**, **cotton**, **oil palm** and **rubber**. Cocoa and coffee are grown in the forest and highland areas. Cotton is grown mainly in the north."),
+   ("pieges", "Common mistakes", "- Some crops are both food and cash crops.\n- Not all crops grow in every region.\n- Farmers need rain, soil and care.")],
+  [("Example 1", "Is cassava a food crop or a cash crop here?", ["Cassava feeds families.", "It is a food crop."], "A food crop", cards(["food: cassava", "food: maize", "cash: cocoa", "cash: cotton"], 2, 400, ch=44, size=16)),
+   ("Example 2", "Name a crop that is grown to sell.", ["Think of crops sold abroad.", "Cocoa."], "Cocoa", None)],
+  (cards(["cassava", "maize", "cocoa", "coffee", "cotton", "banana"], 3, 400, ch=44, size=15), "Some crops of Cameroon.", "Six boxes with cassava, maize, cocoa, coffee, cotton, banana."),
+  [("m", "Which is a cash crop?", "cocoa", ["a pencil", "a stone", "a bus"], "Cocoa is sold."), ("m", "Which is a food crop?", "cassava", ["cotton", "rubber", "cocoa only"], "Cassava."), ("t", "Cotton is grown mainly in the north.", True, "Yes.")],
+  [("x", "Match the crop with its kind.", [("maize", "food crop"), ("cocoa", "cash crop")], "Kinds."), ("n", "A farmer has 3 fields of cassava and 2 fields of maize. How many fields? (3 + 2)", 5, "5.")],
+  ("p", "A farmer near Mbalmayo grows cocoa and plantain.", [("m", "Which is the cash crop?", "cocoa", ["plantain", "none", "both are only for eating"], "Cocoa."), ("m", "Which feeds the family?", "plantain", ["cocoa only", "rubber", "cotton"], "Plantain.")]),
+  [("Class 2 social studies crops: a crop grown to sell is a...", "cash crop", ["food crop only", "toy", "tool"], "Cash crop."),
+   ("Class 2 social studies crops: which is a food crop?", "maize", ["cotton", "rubber", "coffee only"], "Maize."),
+   ("Cocoa is a...", "cash crop", ["metal", "animal", "rock"], "Cash crop."),
+   ("Which crop is grown mainly in the north?", "cotton", ["cocoa", "banana", "rubber"], "Cotton."),
+   ("Farmers need...", "rain and soil", ["plastic", "noise", "paint"], "Rain.")],
+  ["Where crops grow is stated in general terms. Check with the textbook for the main regions."], prereq=["class2-social-studies-ten-regions"])
+
+lesson(ch, "celebrations-helping", "Celebrations, respect and helping others", ["Name some celebrations and say how we respect each other.", "Say how we can help people in need."],
+  [("definition", "Celebrations", "Families and communities have celebrations: **birthdays**, **weddings**, **harvest festivals**, **Christmas**, **Eid**, **National Day** and **Youth Day**. People wear nice clothes, share food, sing and dance. Cameroon has many cultures, and we respect them all."),
+   ("retenir", "Helping others", "We can **help** people who are old, ill, poor or new in our school. Share food, give your seat, carry a bag, and be a friend. Helping makes the community stronger. Say thank you for help."),
+   ("pieges", "Common mistakes", "- Do not laugh at other people's culture or clothes.\n- Do not take part in anything that is unsafe.\n- Help with care: ask a trusted adult if the help is big.")],
+  [("Example 1", "How can you help an old person who is carrying a heavy bag?", ["Offer to carry it.", "Say: May I help you, please?"], "Offer to carry the bag", cards(["share", "help", "give your seat", "be a friend"], 4, 400, ch=44, size=13)),
+   ("Example 2", "A new girl comes to your class. What do you do?", ["She does not know anybody.", "Greet her and play with her."], "Greet her and be friendly", None)],
+  (cards(["respect all cultures", "share food", "help the old", "welcome new friends"], 2, 400, ch=44, size=14), "Respect and help.", "Four boxes about respect and help."),
+  [("m", "A good way to help is to...", "share with others", ["take everything", "hide", "tease"], "Share."), ("t", "We should respect other people's cultures.", True, "Yes."), ("m", "A new pupil is alone. You should...", "welcome her", ["ignore her", "laugh at her", "push her"], "Welcome.")],
+  [("m", "An old man cannot cross the road alone. You should...", "tell an adult or help carefully", ["laugh", "run past", "do nothing"], "Help safely."), ("x", "Match the helper with an action.", [("a pupil", "shares a pencil"), ("a neighbour", "helps carry water")], "Actions.")],
+  ("p", "Ada shares 12 sweets equally among herself and 3 friends.", [("n", "How many children share? (Ada and 3 friends)", 4, "1 + 3 = 4."), ("n", "How many sweets does each get? (12 ÷ 4)", 3, "3.")]),
+  [("Class 2 social studies helping: a way to help others is to...", "share", ["fight", "hide", "tease"], "Share."),
+   ("Class 2 social studies culture: we should...", "respect all cultures", ["laugh at others", "ignore others", "fight"], "Respect."),
+   ("When a new pupil comes we should...", "welcome her", ["push her", "laugh", "hide"], "Welcome."),
+   ("Helping makes the community...", "stronger", ["weaker", "angrier", "smaller"], "Stronger."),
+   ("Which is a celebration?", "a wedding", ["a flood", "a fight", "a loss"], "Wedding.")],
+  ["List of celebrations is inclusive and not exhaustive; check with the school's context."], prereq=["class2-social-studies-crops-food"])
+
+p.write()

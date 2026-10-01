@@ -1,0 +1,1270 @@
+{
+ "chapter": "lower6-chemistry-ch-bonding",
+ "lessons": [
+  {
+   "id": "lower6-chemistry-bonding",
+   "title": "Ionic, covalent and metallic bonding; intermolecular forces",
+   "minutes": 35,
+   "programRef": "GCE Advanced Level Chemistry — chemical bonding (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe ionic, covalent (including dative) and metallic bonding and the properties that follow from them",
+    "Use electronegativity to predict bond polarity",
+    "Explain London forces, permanent dipole forces and hydrogen bonding and their effect on boiling points"
+   ],
+   "prerequisites": [
+    "lower6-chemistry-periodicity"
+   ],
+   "exercises": [
+    "lower6-chemistry-ch-bonding-e01",
+    "lower6-chemistry-ch-bonding-e02",
+    "lower6-chemistry-ch-bonding-e03",
+    "lower6-chemistry-ch-bonding-e04",
+    "lower6-chemistry-ch-bonding-e05",
+    "lower6-chemistry-ch-bonding-e06"
+   ],
+   "selfCheck": [
+    "lower6-chemistry-bonding-q1",
+    "lower6-chemistry-bonding-q2",
+    "lower6-chemistry-bonding-q3",
+    "lower6-chemistry-bonding-q4",
+    "lower6-chemistry-bonding-q5"
+   ],
+   "reviewNotes": [
+    "Pauling electronegativities and boiling points are textbook values; check the board's data sheet.",
+    "Lattice energy is only used qualitatively here; Born–Haber cycles are not included (check the syllabus).",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Types of bonding",
+     "md": "**Ionic bond**: electrostatic attraction between oppositely charged ions in a giant lattice (metal + non-metal). High melting point; conducts only when molten or dissolved; brittle.\n\n**Covalent bond**: a shared pair of electrons between non-metal atoms. A **dative (coordinate) covalent bond** is one where both electrons come from the same atom (NH₄⁺, H₃O⁺). **Metallic bond**: attraction between positive ions and a sea of delocalised electrons; conducts and is malleable."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Polarity and intermolecular forces",
+     "md": "Electronegativity differences make bonds **polar** (δ⁺ and δ⁻ charges). A molecule with polar bonds is polar only if the bond dipoles do not cancel (symmetry).\n\n- **London (dispersion) forces**: between all molecules; increase with the number of electrons (size).\n- **Permanent dipole–dipole forces**: between polar molecules.\n- **Hydrogen bonds**: strong dipole interaction between H bonded to N, O or F and a lone pair on N, O or F of a neighbouring molecule (H₂O, NH₃, HF)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 90,
+        "cy": 130,
+        "r": 17,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "pink"
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 135,
+        "text": "O",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 55,
+        "cy": 175,
+        "r": 10,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 55,
+        "y": 179,
+        "text": "H",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 130,
+        "cy": 100,
+        "r": 10,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 104,
+        "text": "H",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 90,
+        "y1": 130,
+        "x2": 58,
+        "y2": 168,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 98,
+        "y1": 120,
+        "x2": 126,
+        "y2": 106,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 270,
+        "cy": 80,
+        "r": 17,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "pink"
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 85,
+        "text": "O",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 310,
+        "cy": 115,
+        "r": 10,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 119,
+        "text": "H",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 240,
+        "cy": 40,
+        "r": 10,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 44,
+        "text": "H",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 270,
+        "y1": 80,
+        "x2": 303,
+        "y2": 108,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 262,
+        "y1": 70,
+        "x2": 245,
+        "y2": 48,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 140,
+        "y1": 96,
+        "x2": 253,
+        "y2": 78,
+        "color": "red",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 70,
+        "text": "hydrogen bond",
+        "size": 12,
+        "anchor": "middle",
+        "color": "red"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 215,
+        "text": "δ⁻ on O, δ⁺ on H",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Hydrogen bond (dashed) between two water molecules.",
+     "alt": "Two water molecules, each with an oxygen and two hydrogen atoms, joined by a dashed red hydrogen bond between a hydrogen and the oxygen of the other."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Explaining a boiling point",
+     "md": "1. State the structure (giant, or simple molecular).\n2. Name the force that must be overcome: ionic/metallic/covalent bonds in giant structures; intermolecular forces in simple molecules.\n3. Compare the **strength** of these forces: more electrons mean stronger London forces; hydrogen bonds are stronger than ordinary dipole forces.\n\nNever say covalent bonds break when a simple molecular substance boils."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Saying molten ionic compounds conduct because of electrons: they conduct by moving ions.\n- Calling a hydrogen bond a 'bond' within the molecule: it is an intermolecular force between molecules.\n- Forgetting that graphite conducts (delocalised electrons between layers) while diamond does not.\n- Thinking H₂O has a high boiling point because its O–H bonds are strong: the O–H bonds do not break."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Ionic bonding",
+     "statement": "Describe the bonding in magnesium chloride and deduce its formula.",
+     "steps": [
+      "Magnesium (2,8,2) loses two electrons to form Mg²⁺ (2,8).",
+      "Each chlorine (2,8,7) gains one electron to form Cl⁻ (2,8,8), so two chlorine atoms are needed.",
+      "The ions attract in a giant lattice: formula MgCl₂ (charges balance: 2+ and 2 × 1−)."
+     ],
+     "answer": "MgCl₂: Mg²⁺ and two Cl⁻ in a giant ionic lattice"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Boiling points of hydrides",
+     "statement": "The boiling points of H₂O, H₂S, H₂Se and H₂Te are about +100, −60, −41 and −2 °C. Explain why water breaks the trend.",
+     "steps": [
+      "From H₂S to H₂Te the boiling point rises because the molecules have more electrons, so London forces strengthen.",
+      "Water has hydrogen bonds (O–H···O) as O is highly electronegative and has lone pairs: these are much stronger than the forces in H₂S.",
+      "More energy is needed to separate the molecules, so water boils at 100 °C instead of near −80 °C (extrapolated)."
+     ],
+     "answer": "Hydrogen bonding in water"
+    }
+   ],
+   "chapter": "lower6-chemistry-ch-bonding"
+  },
+  {
+   "id": "lower6-chemistry-shapes",
+   "title": "Shapes of molecules and ions (VSEPR)",
+   "minutes": 35,
+   "programRef": "GCE Advanced Level Chemistry — chemical bonding (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Use the VSEPR theory to predict the shapes and bond angles of molecules and ions with up to six electron pairs",
+    "Explain the effect of lone pairs on bond angles",
+    "Decide whether a molecule is polar from its shape and bond polarity"
+   ],
+   "prerequisites": [
+    "lower6-chemistry-bonding"
+   ],
+   "exercises": [
+    "lower6-chemistry-ch-bonding-e07",
+    "lower6-chemistry-ch-bonding-e08",
+    "lower6-chemistry-ch-bonding-e09",
+    "lower6-chemistry-ch-bonding-e10",
+    "lower6-chemistry-ch-bonding-e11",
+    "lower6-chemistry-ch-bonding-e12"
+   ],
+   "selfCheck": [
+    "lower6-chemistry-shapes-q1",
+    "lower6-chemistry-shapes-q2",
+    "lower6-chemistry-shapes-q3",
+    "lower6-chemistry-shapes-q4",
+    "lower6-chemistry-shapes-q5"
+   ],
+   "reviewNotes": [
+    "Hybridisation (sp, sp², sp³) and σ/π bonds are not covered in this lesson; check the syllabus.",
+    "The tetrahedral drawing is a flat sketch and does not show the 3D wedges.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "VSEPR theory",
+     "md": "In the **valence shell electron pair repulsion** theory, the pairs of electrons in the outer shell of the central atom repel each other and take positions as far apart as possible. The shape depends on the number of bonding pairs and lone pairs.\n\nLone pairs repel more strongly than bonding pairs: **lone pair–lone pair > lone pair–bonding pair > bonding pair–bonding pair**, so they squeeze the bond angles."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Shapes to know",
+     "md": "- 2 pairs (0 lone): **linear**, 180° (BeCl₂, CO₂).\n- 3 pairs: **trigonal planar**, 120° (BF₃, CO₃²⁻); with 1 lone pair: **bent** (SO₂, about 119°).\n- 4 pairs: **tetrahedral**, 109.5° (CH₄, NH₄⁺); 1 lone pair: **trigonal pyramidal**, about 107° (NH₃); 2 lone pairs: **bent**, about 104.5° (H₂O).\n- 5 pairs: **trigonal bipyramidal** (PCl₅, 90° and 120°).\n- 6 pairs: **octahedral**, 90° (SF₆)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 250,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 60,
+        "cy": 70,
+        "r": 13,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 75,
+        "text": "C",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 20,
+        "cy": 70,
+        "r": 10,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "pink"
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 74,
+        "text": "O",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 100,
+        "cy": 70,
+        "r": 10,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "pink"
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 74,
+        "text": "O",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 70,
+        "x2": 47,
+        "y2": 70,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 73,
+        "y1": 70,
+        "x2": 90,
+        "y2": 70,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 108,
+        "text": "linear 180°",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 210,
+        "cy": 60,
+        "r": 13,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 65,
+        "text": "B",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 60,
+        "x2": 210.0,
+        "y2": 28.500000000000004,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 210,
+        "cy": 15,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 19,
+        "text": "F",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 60,
+        "x2": 237.3,
+        "y2": 75.4,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 249,
+        "cy": 82,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "text",
+        "x": 249,
+        "y": 86,
+        "text": "F",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 60,
+        "x2": 182.7,
+        "y2": 75.4,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 171,
+        "cy": 82,
+        "r": 9,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "text",
+        "x": 171,
+        "y": 86,
+        "text": "F",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 125,
+        "text": "trigonal planar 120°",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 330,
+        "cy": 60,
+        "r": 13,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 65,
+        "text": "C",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 330,
+        "y1": 60,
+        "x2": 330.0,
+        "y2": 26.400000000000006,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 330,
+        "cy": 12,
+        "r": 8,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 16,
+        "text": "H",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 330,
+        "y1": 60,
+        "x2": 300.6,
+        "y2": 72.6,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 288,
+        "cy": 78,
+        "r": 8,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 288,
+        "y": 82,
+        "text": "H",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 330,
+        "y1": 60,
+        "x2": 359.4,
+        "y2": 72.6,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 372,
+        "cy": 78,
+        "r": 8,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 372,
+        "y": 82,
+        "text": "H",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 330,
+        "y1": 60,
+        "x2": 330.0,
+        "y2": 96.4,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 330,
+        "cy": 112,
+        "r": 8,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 116,
+        "text": "H",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 142,
+        "text": "tetrahedral 109.5°",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 90,
+        "cy": 190,
+        "r": 13,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "pink"
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 195,
+        "text": "O",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 90,
+        "y1": 190,
+        "x2": 60,
+        "y2": 220,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 52,
+        "cy": 226,
+        "r": 8,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 52,
+        "y": 230,
+        "text": "H",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 90,
+        "y1": 190,
+        "x2": 120,
+        "y2": 220,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 128,
+        "cy": 226,
+        "r": 8,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 128,
+        "y": 230,
+        "text": "H",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 168,
+        "text": "..",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 215,
+        "text": "bent 104.5° (2 lone pairs)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Shapes of CO₂ (linear), BF₃ (trigonal planar), CH₄ (tetrahedral) and H₂O (bent).",
+     "alt": "Four molecular models: a linear molecule, a planar triangle with three outer atoms, a tetrahedral molecule and a bent water molecule."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Method",
+     "md": "1. Count the outer electrons of the central atom and add or subtract for the charge of an ion.\n2. Each bonded atom shares one electron (a double bond counts as one **region** of electron density).\n3. Divide by two to find the number of electron pairs and subtract the bonding pairs to obtain the lone pairs.\n4. Name the shape from the number of bonding pairs and lone pairs. A molecule is polar only if the bond dipoles do not cancel."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Giving the shape of the electron-pair arrangement instead of the molecule: NH₃ has four pairs (tetrahedral arrangement) but its shape is trigonal pyramidal.\n- Forgetting that a double bond counts as one region.\n- Assuming every molecule with polar bonds is polar: CO₂ and CCl₄ are non-polar.\n- Quoting 109.5° for NH₃ and H₂O."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Ammonia",
+     "statement": "Predict the shape and bond angle of NH₃.",
+     "steps": [
+      "N has 5 outer electrons, and three are shared with H: 3 bonding pairs and (5 − 3) = 2 electrons = 1 lone pair.",
+      "Four pairs, so a tetrahedral arrangement, but only three bonded atoms: trigonal pyramidal.",
+      "The lone pair repels more strongly, so the angle is about 107°, below 109.5°."
+     ],
+     "answer": "Trigonal pyramidal, about 107°"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Sulfur dioxide and carbon tetrachloride",
+     "statement": "Predict the shape of SO₂ and say whether CCl₄ is polar.",
+     "steps": [
+      "SO₂: S has 6 outer electrons; two double bonds use 4 and leave 1 lone pair: three regions, so bent, about 119°.",
+      "CCl₄: four bonding pairs, no lone pairs: tetrahedral. Each C–Cl bond is polar, but the dipoles cancel by symmetry.",
+      "So CCl₄ is a non-polar molecule."
+     ],
+     "answer": "SO₂ is bent (about 119°); CCl₄ is non-polar"
+    }
+   ],
+   "chapter": "lower6-chemistry-ch-bonding"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "lower6-chemistry-ch-bonding-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-chemistry-bonding",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Which type of bonding holds the atoms together in a solid metal?",
+   "choices": [
+    "metallic bonding",
+    "covalent bonding between molecules",
+    "hydrogen bonding",
+    "ionic bonding"
+   ],
+   "answer": 0,
+   "explanation": "Positive ions are attracted to delocalised electrons.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-chemistry-ch-bonding"
+  },
+  {
+   "id": "lower6-chemistry-ch-bonding-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-chemistry-bonding",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Electronegativity (Pauling): H 2.1, Cl 3.0. Find the electronegativity difference in HCl.",
+   "answer": 0.9,
+   "tolerance": 0.01,
+   "explanation": "3.0 − 2.1 = 0.9, so the H–Cl bond is polar covalent (δ⁺ on H, δ⁻ on Cl).",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-chemistry-ch-bonding"
+  },
+  {
+   "id": "lower6-chemistry-ch-bonding-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-chemistry-bonding",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "True or false: solid sodium chloride conducts electricity because it has delocalised electrons.",
+   "answer": false,
+   "explanation": "The ions are fixed in the lattice and there are no free electrons; NaCl conducts only when molten or dissolved.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-chemistry-ch-bonding"
+  },
+  {
+   "id": "lower6-chemistry-ch-bonding-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-chemistry-bonding",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Which substance has hydrogen bonding between its molecules?",
+   "choices": [
+    "NH₃",
+    "CO₂",
+    "HCl",
+    "CH₄"
+   ],
+   "answer": 0,
+   "explanation": "N is bonded to H and has a lone pair: hydrogen bonds form. HCl has only dipole forces (Cl is too large).",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-chemistry-ch-bonding"
+  },
+  {
+   "id": "lower6-chemistry-ch-bonding-e05",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "lower6-chemistry-bonding",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Match each substance with the strongest force broken when it melts.",
+   "pairs": [
+    [
+     "NaCl",
+     "ionic bonds in the lattice"
+    ],
+    [
+     "Ice",
+     "hydrogen bonds"
+    ],
+    [
+     "Iodine, I₂",
+     "London forces"
+    ],
+    [
+     "Copper",
+     "metallic bonds"
+    ]
+   ],
+   "explanation": "NaCl: ionic; ice: hydrogen bonds between H₂O; iodine: London forces; copper: metallic bonds.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-chemistry-ch-bonding"
+  },
+  {
+   "id": "lower6-chemistry-ch-bonding-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-chemistry-bonding",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "The boiling points of the Group 17 hydrides are HF +20 °C, HCl −85 °C, HBr −67 °C, HI −35 °C.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which hydride has the strongest intermolecular forces?",
+     "choices": [
+      "HF",
+      "HI",
+      "HCl",
+      "HBr"
+     ],
+     "answer": 0,
+     "explanation": "HF has the highest boiling point.",
+     "id": "lower6-chemistry-ch-bonding-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "This is explained by",
+     "choices": [
+      "stronger H–F covalent bonds breaking on boiling",
+      "ionic bonding in HF",
+      "more electrons in HF",
+      "hydrogen bonding in HF"
+     ],
+     "answer": 3,
+     "explanation": "H is bonded to the very electronegative F: hydrogen bonds form between molecules.",
+     "id": "lower6-chemistry-ch-bonding-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explain why the boiling point rises from HCl to HI.",
+     "model": "The molecules have more electrons from HCl to HI, so the London (dispersion) forces between them increase and more energy is needed to separate the molecules.",
+     "rubric": "1 mark: London forces; 1 mark: more electrons / larger molecules.",
+     "explanation": "The molecules have more electrons from HCl to HI, so the London (dispersion) forces between them increase and more energy is needed to separate the molecules.",
+     "id": "lower6-chemistry-ch-bonding-e06-c"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "When HF boils, the H–F covalent bonds break.",
+     "answer": false,
+     "explanation": "Only the intermolecular forces (hydrogen bonds) are overcome; the molecules remain intact.",
+     "id": "lower6-chemistry-ch-bonding-e06-d"
+    }
+   ],
+   "chapter": "lower6-chemistry-ch-bonding"
+  },
+  {
+   "id": "lower6-chemistry-bonding-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-bonding",
+   "prompt": "A dative covalent bond is one where",
+   "choices": [
+    "the atoms are metals",
+    "electrons are transferred",
+    "both shared electrons come from the same atom",
+    "there is no sharing"
+   ],
+   "answer": 2,
+   "explanation": "As in NH₄⁺ (N lone pair donated to H⁺).",
+   "chapter": "lower6-chemistry-ch-bonding"
+  },
+  {
+   "id": "lower6-chemistry-bonding-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-bonding",
+   "prompt": "Diamond does not conduct electricity because",
+   "choices": [
+    "it is ionic",
+    "it is a gas",
+    "it has no electrons",
+    "all its outer electrons are used in localised covalent bonds"
+   ],
+   "answer": 3,
+   "explanation": "No delocalised electrons are available.",
+   "chapter": "lower6-chemistry-ch-bonding"
+  },
+  {
+   "id": "lower6-chemistry-bonding-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-bonding",
+   "prompt": "London forces are present in",
+   "choices": [
+    "only ionic compounds",
+    "only metals",
+    "all molecules",
+    "only polar molecules"
+   ],
+   "answer": 2,
+   "explanation": "Temporary dipoles occur in every atom or molecule.",
+   "chapter": "lower6-chemistry-ch-bonding"
+  },
+  {
+   "id": "lower6-chemistry-bonding-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-bonding",
+   "prompt": "Which is most likely to dissolve in water?",
+   "choices": [
+    "iodine",
+    "ethanol (CH₃CH₂OH)",
+    "hexane",
+    "octane"
+   ],
+   "answer": 1,
+   "explanation": "Ethanol forms hydrogen bonds with water.",
+   "chapter": "lower6-chemistry-ch-bonding"
+  },
+  {
+   "id": "lower6-chemistry-bonding-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-bonding",
+   "prompt": "The ionic compound with the highest lattice energy among NaCl, MgO and KBr is likely",
+   "choices": [
+    "KBr",
+    "all equal",
+    "NaCl",
+    "MgO"
+   ],
+   "answer": 3,
+   "explanation": "2+ and 2− small ions attract much more strongly than 1+ and 1−.",
+   "chapter": "lower6-chemistry-ch-bonding"
+  },
+  {
+   "id": "lower6-chemistry-ch-bonding-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-chemistry-shapes",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "What is the shape of the CH₄ molecule?",
+   "choices": [
+    "square planar",
+    "linear",
+    "tetrahedral",
+    "trigonal pyramidal"
+   ],
+   "answer": 2,
+   "explanation": "Four bonding pairs and no lone pairs.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-chemistry-ch-bonding"
+  },
+  {
+   "id": "lower6-chemistry-ch-bonding-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-chemistry-shapes",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "What is the H–C–H bond angle in methane (degrees)?",
+   "answer": 109.5,
+   "tolerance": 0.1,
+   "unit": "°",
+   "explanation": "Four equal regions of electron density: 109.5°.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-chemistry-ch-bonding"
+  },
+  {
+   "id": "lower6-chemistry-ch-bonding-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-chemistry-shapes",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "True or false: the water molecule is linear.",
+   "answer": false,
+   "explanation": "It is bent (104.5°) because the oxygen has two lone pairs.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-chemistry-ch-bonding"
+  },
+  {
+   "id": "lower6-chemistry-ch-bonding-e10",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "lower6-chemistry-shapes",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Match each species to its shape.",
+   "pairs": [
+    [
+     "CO₂",
+     "linear"
+    ],
+    [
+     "BF₃",
+     "trigonal planar"
+    ],
+    [
+     "NH₄⁺",
+     "tetrahedral"
+    ],
+    [
+     "H₂O",
+     "bent (V-shaped)"
+    ]
+   ],
+   "explanation": "CO₂ has two regions, BF₃ three, NH₄⁺ four bonding pairs, H₂O two bonding and two lone pairs.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-chemistry-ch-bonding"
+  },
+  {
+   "id": "lower6-chemistry-ch-bonding-e11",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-chemistry-shapes",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Why is the H–O–H angle in water (104.5°) smaller than the tetrahedral angle?",
+   "choices": [
+    "the O–H bonds are ionic",
+    "hydrogen is small",
+    "the two lone pairs repel the bonding pairs more strongly",
+    "oxygen has only 6 electrons"
+   ],
+   "answer": 2,
+   "explanation": "Lone pairs occupy more space and push the bonds together.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-chemistry-ch-bonding"
+  },
+  {
+   "id": "lower6-chemistry-ch-bonding-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-chemistry-shapes",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Consider the molecules BF₃, NH₃, PCl₅ and SF₆.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which has a trigonal pyramidal shape?",
+     "choices": [
+      "SF₆",
+      "BF₃",
+      "PCl₅",
+      "NH₃"
+     ],
+     "answer": 3,
+     "explanation": "NH₃ has three bonding pairs and one lone pair.",
+     "id": "lower6-chemistry-ch-bonding-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which has bond angles of 90° only?",
+     "choices": [
+      "NH₃",
+      "BF₃",
+      "SF₆",
+      "PCl₅"
+     ],
+     "answer": 2,
+     "explanation": "Octahedral: all F–S–F angles are 90° (or 180°).",
+     "id": "lower6-chemistry-ch-bonding-e12-b"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "BF₃ is a polar molecule.",
+     "answer": false,
+     "explanation": "The three polar B–F bonds are arranged symmetrically (120°) so the dipoles cancel.",
+     "id": "lower6-chemistry-ch-bonding-e12-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "State and explain the shape of PCl₅.",
+     "model": "Trigonal bipyramidal: five bonding pairs and no lone pairs around P; the pairs are as far apart as possible with angles of 90° and 120°.",
+     "rubric": "1 mark: trigonal bipyramidal; 1 mark: five bonding pairs, no lone pairs, repulsion argument.",
+     "explanation": "Trigonal bipyramidal: five bonding pairs and no lone pairs around P; the pairs are as far apart as possible with angles of 90° and 120°.",
+     "id": "lower6-chemistry-ch-bonding-e12-d"
+    }
+   ],
+   "chapter": "lower6-chemistry-ch-bonding"
+  },
+  {
+   "id": "lower6-chemistry-shapes-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-shapes",
+   "prompt": "SF₆ has the shape",
+   "choices": [
+    "trigonal bipyramidal",
+    "octahedral",
+    "tetrahedral",
+    "square planar"
+   ],
+   "answer": 1,
+   "explanation": "Six bonding pairs, no lone pairs.",
+   "chapter": "lower6-chemistry-ch-bonding"
+  },
+  {
+   "id": "lower6-chemistry-shapes-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-shapes",
+   "prompt": "Which molecule is polar?",
+   "choices": [
+    "BF₃",
+    "NH₃",
+    "CCl₄",
+    "CO₂"
+   ],
+   "answer": 1,
+   "explanation": "The dipoles do not cancel because of the pyramidal shape and lone pair.",
+   "chapter": "lower6-chemistry-ch-bonding"
+  },
+  {
+   "id": "lower6-chemistry-shapes-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-shapes",
+   "prompt": "The bond angle in BF₃ is",
+   "choices": [
+    "90°",
+    "109.5°",
+    "180°",
+    "120°"
+   ],
+   "answer": 3,
+   "explanation": "Three regions: trigonal planar.",
+   "chapter": "lower6-chemistry-ch-bonding"
+  },
+  {
+   "id": "lower6-chemistry-shapes-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-shapes",
+   "prompt": "How many lone pairs are on the central atom of NH₃?",
+   "choices": [
+    "0",
+    "2",
+    "1",
+    "3"
+   ],
+   "answer": 2,
+   "explanation": "N has 5 outer electrons: 3 in bonds, 2 as one lone pair.",
+   "chapter": "lower6-chemistry-ch-bonding"
+  },
+  {
+   "id": "lower6-chemistry-shapes-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-shapes",
+   "prompt": "The order of repulsion between electron pairs is",
+   "choices": [
+    "lone–lone > lone–bonding > bonding–bonding",
+    "all equal",
+    "lone–bonding > lone–lone",
+    "bonding–bonding > lone–bonding"
+   ],
+   "answer": 0,
+   "explanation": "Lone pairs are closer to the nucleus and spread more.",
+   "chapter": "lower6-chemistry-ch-bonding"
+  }
+ ]
+}

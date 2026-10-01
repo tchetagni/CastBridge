@@ -1,0 +1,1617 @@
+{
+ "chapter": "lower6-chemistry-ch-energetics",
+ "lessons": [
+  {
+   "id": "lower6-chemistry-enthalpy",
+   "title": "Enthalpy changes and calorimetry",
+   "minutes": 35,
+   "programRef": "GCE Advanced Level Chemistry — energetics, kinetics and chemical equilibrium (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define exothermic and endothermic reactions and standard enthalpy changes of reaction, formation, combustion and neutralisation",
+    "Draw and interpret enthalpy profile diagrams including the activation energy",
+    "Use q = mcΔT to calculate enthalpy changes from experimental data"
+   ],
+   "prerequisites": [
+    "lower6-chemistry-mole"
+   ],
+   "exercises": [
+    "lower6-chemistry-ch-energetics-e01",
+    "lower6-chemistry-ch-energetics-e02",
+    "lower6-chemistry-ch-energetics-e03",
+    "lower6-chemistry-ch-energetics-e04",
+    "lower6-chemistry-ch-energetics-e05",
+    "lower6-chemistry-ch-energetics-e06"
+   ],
+   "selfCheck": [
+    "lower6-chemistry-enthalpy-q1",
+    "lower6-chemistry-enthalpy-q2",
+    "lower6-chemistry-enthalpy-q3",
+    "lower6-chemistry-enthalpy-q4",
+    "lower6-chemistry-enthalpy-q5"
+   ],
+   "reviewNotes": [
+    "Data used: Ar values rounded as in common school tables (H 1.0, C 12.0, N 14.0, O 16.0, Na 23.0, Mg 24.0, Al 27.0, S 32.0, Cl 35.5, K 39.0, Ca 40.0, Fe 56.0, Cu 63.5, Zn 65.0); molar volume of a gas 24.0 dm³ at room temperature and pressure (25 °C, 1 atm), 22.4 dm³ at stp; R = 8.31 J mol⁻¹ K⁻¹; N_A = 6.02 × 10²³ mol⁻¹.",
+    "Standard pressure: 100 kPa (IUPAC) vs 1 atm; check which the board uses.",
+    "Data-book values quoted (ethanol −1367, methanol −726 kJ mol⁻¹) are textbook values; check them.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Enthalpy change",
+     "md": "The **enthalpy change** ΔH is the heat exchanged with the surroundings at constant pressure. **Exothermic**: heat released, temperature of surroundings rises, ΔH negative. **Endothermic**: heat absorbed, ΔH positive.\n\nStandard conditions: 298 K (25 °C) and 100 kPa (1 atm is often used), substances in their standard states; the unit is kJ mol⁻¹."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Standard enthalpy changes",
+     "md": "- **ΔH_f°** (formation): one mole of a compound formed from its elements in their standard states; ΔH_f° of an element is zero.\n- **ΔH_c°** (combustion): one mole of a substance burnt completely in oxygen.\n- **ΔH_neut°** (neutralisation): one mole of water formed from an acid and an alkali (about −57 kJ mol⁻¹ for strong acid and strong base).\n- **ΔH_r°**: for the reaction as written, with the molar quantities in the equation."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 260,
+      "items": [
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 20,
+        "x2": 60,
+        "y2": 230,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 230,
+        "x2": 400,
+        "y2": 230,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 34,
+        "y": 24,
+        "text": "Enthalpy",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 400,
+        "y": 250,
+        "text": "progress of reaction",
+        "size": 12,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 75,
+        "y1": 120,
+        "x2": 150,
+        "y2": 120,
+        "color": "blue",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 310,
+        "y1": 190,
+        "x2": 385,
+        "y2": 190,
+        "color": "blue",
+        "width": 3
+       },
+       {
+        "t": "path",
+        "d": "M 150 120 C 200 120 200 50 230 50 C 260 50 270 190 310 190",
+        "stroke": "red",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 112,
+        "y": 142,
+        "text": "reactants",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 348,
+        "y": 212,
+        "text": "products",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 230,
+        "y1": 120,
+        "x2": 230,
+        "y2": 52,
+        "color": "green",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 236,
+        "y": 90,
+        "text": "Ea",
+        "size": 13,
+        "anchor": "start",
+        "color": "green"
+       },
+       {
+        "t": "line",
+        "x1": 385,
+        "y1": 120,
+        "x2": 385,
+        "y2": 190,
+        "color": "purple",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 380,
+        "y": 159,
+        "text": "ΔH",
+        "size": 13,
+        "anchor": "end",
+        "color": "purple"
+       }
+      ]
+     },
+     "caption": "Enthalpy profile of an exothermic reaction: Ea is the activation energy and ΔH is negative.",
+     "alt": "A curve rising from the reactants line to a peak and falling to a lower products line, with arrows for activation energy and enthalpy change."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Calorimetry",
+     "md": "Heat absorbed by the water (or solution): **q = mcΔT** with m in g, c = 4.18 J g⁻¹ K⁻¹ and ΔT in K. Then **ΔH = −q/n** (in J mol⁻¹, convert to kJ), the sign being negative if the temperature rises.\n\nExperimental values are often less exothermic than data-book values because of **heat losses** and incomplete combustion; a lid, lagging and stirring reduce errors.",
+     "tex": "q=mc\\Delta T\\qquad \\Delta H=-\\frac{q}{n}"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Forgetting to convert q from joules to kilojoules before dividing by n.\n- Giving ΔH a positive sign when the temperature rises (exothermic = negative).\n- Using the mass of the reagents instead of the mass of **solution** (water) in q = mcΔT.\n- Mixing up the activation energy (the barrier) and ΔH (the overall energy change)."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Neutralisation",
+     "statement": "50.0 cm³ of 1.00 mol dm⁻³ HCl and 50.0 cm³ of 1.00 mol dm⁻³ NaOH are mixed in a polystyrene cup: the temperature rises by 6.8 K. Find ΔH_neut (assume density 1.00 g cm⁻³, c = 4.18 J g⁻¹ K⁻¹).",
+     "steps": [
+      "Mass of solution = 100 g; q = 100 × 4.18 × 6.8 = 2842 J = 2.84 kJ.",
+      "n(water) = 1.00 × 0.0500 = 0.0500 mol (equal amounts, no excess).",
+      "ΔH = −2.84/0.0500 = −56.8 kJ mol⁻¹."
+     ],
+     "answer": "ΔH = −56.8 kJ mol⁻¹"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Burning ethanol",
+     "statement": "0.46 g of ethanol (M = 46.0) is burnt and heats 200 g of water by 13.0 K. Estimate ΔH_c and comment.",
+     "steps": [
+      "q = 200 × 4.18 × 13.0 = 10 868 J = 10.9 kJ; n = 0.46/46.0 = 0.0100 mol.",
+      "ΔH = −10.9/0.0100 = −1087 kJ mol⁻¹.",
+      "The data-book value is about −1367 kJ mol⁻¹: the experiment is less exothermic because of heat lost to the surroundings and incomplete combustion."
+     ],
+     "answer": "−1087 kJ mol⁻¹ (heat losses explain the difference)"
+    }
+   ],
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-hess",
+   "title": "Hess's law and bond enthalpies",
+   "minutes": 35,
+   "programRef": "GCE Advanced Level Chemistry — energetics, kinetics and chemical equilibrium (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "State Hess's law and use enthalpy cycles with enthalpies of formation and combustion",
+    "Define bond enthalpy and use mean bond enthalpies to estimate ΔH of gaseous reactions",
+    "Explain why bond-enthalpy values are only estimates"
+   ],
+   "prerequisites": [
+    "lower6-chemistry-enthalpy"
+   ],
+   "exercises": [
+    "lower6-chemistry-ch-energetics-e07",
+    "lower6-chemistry-ch-energetics-e08",
+    "lower6-chemistry-ch-energetics-e09",
+    "lower6-chemistry-ch-energetics-e10",
+    "lower6-chemistry-ch-energetics-e11",
+    "lower6-chemistry-ch-energetics-e12"
+   ],
+   "selfCheck": [
+    "lower6-chemistry-hess-q1",
+    "lower6-chemistry-hess-q2",
+    "lower6-chemistry-hess-q3",
+    "lower6-chemistry-hess-q4",
+    "lower6-chemistry-hess-q5"
+   ],
+   "reviewNotes": [
+    "Mean bond enthalpies and ΔH_c/ΔH_f values are standard textbook values (to be checked against the board's data booklet).",
+    "Born–Haber cycles and lattice enthalpies are not covered.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Hess's law",
+     "md": "**Hess's law**: the total enthalpy change of a reaction is the same whichever route is taken, provided the initial and final states are the same (a consequence of the conservation of energy). It is used to find enthalpy changes that cannot be measured directly."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Using enthalpies of formation and combustion",
+     "md": "- **ΔH_r = ΣΔH_f(products) − ΣΔH_f(reactants)** (formation route: via the elements).\n- **ΔH_r = ΣΔH_c(reactants) − ΣΔH_c(products)** (combustion route: via the oxidation products).\n\nMultiply each ΔH by the coefficient in the equation and take care with the signs.",
+     "tex": "\\Delta H_r=\\sum\\Delta H_f(\\text{products})-\\sum\\Delta H_f(\\text{reactants})"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 245,
+      "items": [
+       {
+        "t": "text",
+        "x": 210,
+        "y": 22,
+        "text": "C(s) + 2H₂(g) + 2O₂(g)",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 205,
+        "text": "CH₄(g) + 2O₂(g)",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 205,
+        "text": "CO₂(g) + 2H₂O(l)",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 170,
+        "y1": 34,
+        "x2": 90,
+        "y2": 186,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 100,
+        "text": "ΔH_f(CH₄)",
+        "size": 12,
+        "anchor": "end",
+        "color": "blue"
+       },
+       {
+        "t": "line",
+        "x1": 90,
+        "y1": 205,
+        "x2": 255,
+        "y2": 205,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 172,
+        "y": 232,
+        "text": "ΔH_c(CH₄)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "red"
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 34,
+        "x2": 340,
+        "y2": 186,
+        "color": "green",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 100,
+        "text": "ΔH_c(C) + 2ΔH_c(H₂)",
+        "size": 12,
+        "anchor": "start",
+        "color": "green"
+       }
+      ]
+     },
+     "caption": "Enthalpy cycle for the formation of methane from combustion data.",
+     "alt": "A triangular cycle with the elements at the top, methane and oxygen at the lower left, carbon dioxide and water at the lower right, joined by labelled arrows."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Bond enthalpies",
+     "md": "The **bond enthalpy** is the energy needed to break one mole of a covalent bond in the gaseous state (kJ mol⁻¹); **mean** bond enthalpies are averaged over several compounds. Breaking bonds is endothermic, making bonds is exothermic:\n\n**ΔH ≈ Σ(bonds broken) − Σ(bonds made)**. Typical values (kJ mol⁻¹): C–H 413, C–C 347, C=C 614, O=O 498, C=O (in CO₂) 805, O–H 464, H–H 436, Cl–Cl 243, H–Cl 432.",
+     "tex": "\\Delta H\\approx\\sum E(\\text{broken})-\\sum E(\\text{formed})"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Reversing the sign of the sum 'broken − formed'.\n- Using mean bond enthalpies for liquids: they apply to gaseous species (and give only estimates).\n- Forgetting the coefficient (4 C–H bonds in CH₄, 2 O=O).\n- Using ΔH_f of an element (zero) incorrectly, or ΔH_f of H₂O(l) when the water formed is a gas."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Enthalpy of formation from combustion data",
+     "statement": "Use ΔH_c: C(s) = −393.5, H₂(g) = −285.8, CH₄(g) = −890.3 kJ mol⁻¹ to find ΔH_f of methane: C(s) + 2H₂(g) → CH₄(g).",
+     "steps": [
+      "Combustion route: ΔH_f = ΣΔH_c(reactants) − ΣΔH_c(products).",
+      "= [−393.5 + 2(−285.8)] − (−890.3) = −965.1 + 890.3.",
+      "= −74.8 kJ mol⁻¹."
+     ],
+     "answer": "ΔH_f(CH₄) = −74.8 kJ mol⁻¹"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Using bond enthalpies",
+     "statement": "Estimate ΔH for CH₄ + 2O₂ → CO₂ + 2H₂O (all gases) using mean bond enthalpies (C–H 413, O=O 498, C=O 805, O–H 464 kJ mol⁻¹).",
+     "steps": [
+      "Bonds broken: 4 C–H + 2 O=O = 4(413) + 2(498) = 1652 + 996 = 2648 kJ.",
+      "Bonds made: 2 C=O + 4 O–H = 2(805) + 4(464) = 1610 + 1856 = 3466 kJ.",
+      "ΔH = 2648 − 3466 = −818 kJ mol⁻¹ (the measured value for gaseous water is about −802 kJ)."
+     ],
+     "answer": "ΔH ≈ −818 kJ mol⁻¹"
+    }
+   ],
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-kinetics",
+   "title": "Rates of reaction and rate equations",
+   "minutes": 40,
+   "programRef": "GCE Advanced Level Chemistry — energetics, kinetics and chemical equilibrium (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Explain rates of reaction using collision theory and the Maxwell–Boltzmann distribution",
+    "Explain the effects of concentration, temperature, surface area and catalysts",
+    "Use initial-rate data to find orders, write the rate equation and calculate the rate constant"
+   ],
+   "prerequisites": [
+    "lower6-chemistry-enthalpy"
+   ],
+   "exercises": [
+    "lower6-chemistry-ch-energetics-e13",
+    "lower6-chemistry-ch-energetics-e14",
+    "lower6-chemistry-ch-energetics-e15",
+    "lower6-chemistry-ch-energetics-e16",
+    "lower6-chemistry-ch-energetics-e17",
+    "lower6-chemistry-ch-energetics-e18"
+   ],
+   "selfCheck": [
+    "lower6-chemistry-kinetics-q1",
+    "lower6-chemistry-kinetics-q2",
+    "lower6-chemistry-kinetics-q3",
+    "lower6-chemistry-kinetics-q4",
+    "lower6-chemistry-kinetics-q5"
+   ],
+   "reviewNotes": [
+    "Arrhenius equation and half-life of first-order reactions may be tested only qualitatively at this level.",
+    "The curve 'T₂' is drawn with equal area; units on the axes are arbitrary.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Rate and collision theory",
+     "md": "The **rate of reaction** is the change in concentration of a reactant or product per unit time (mol dm⁻³ s⁻¹). For a reaction to occur particles must **collide** with energy at least the **activation energy** E_a and with the correct orientation.\n\nIncreasing the concentration (or pressure of a gas, or surface area of a solid) increases the frequency of collisions. Increasing the temperature raises the fraction of molecules with E ≥ E_a (the area under the Maxwell–Boltzmann curve beyond E_a) and also the collision frequency, but the first effect dominates."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Catalysts",
+     "md": "A **catalyst** increases the rate by providing an alternative reaction route of **lower activation energy**; it is not used up and does not change ΔH or the equilibrium position. **Heterogeneous** catalysts (e.g. iron in the Haber process, a solid with gaseous reactants) work at their surface; **homogeneous** catalysts are in the same phase as the reactants. Enzymes are biological catalysts."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 8,
+      "ymin": 0,
+      "ymax": 0.4,
+      "grid": 2,
+      "w": 400,
+      "h": 250,
+      "curves": [
+       {
+        "expr": "x*exp(-x)",
+        "color": "blue",
+        "label": "T₁ (lower)"
+       },
+       {
+        "expr": "x*exp(-x/1.6)/2.56",
+        "color": "red",
+        "label": "T₂ (higher)"
+       }
+      ],
+      "points": [],
+      "segments": [
+       {
+        "x1": 3.5,
+        "y1": 0,
+        "x2": 3.5,
+        "y2": 0.4,
+        "color": "green",
+        "dash": true,
+        "label": "Ea"
+       }
+      ],
+      "xlabel": "energy",
+      "ylabel": "fraction of molecules"
+     },
+     "caption": "Maxwell–Boltzmann distributions at two temperatures: the shaded fraction beyond E_a is larger at the higher temperature.",
+     "alt": "Two skewed curves of fraction of molecules against energy, the higher-temperature curve lower and flatter, with a vertical line marking the activation energy."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Rate equation",
+     "md": "For a reaction A + B → products, **rate = k[A]^m[B]^n**: m and n are the **orders** (found by experiment, not from the equation), k is the **rate constant** (its units depend on the overall order). **Initial rates**: doubling [A] and doubling the rate means first order in A; a four-fold change in rate means second order.\n\nFor a **first-order** reaction the half-life is constant: **t½ = 0.693/k**. The rate constant increases with temperature: k = A e^(−E_a/RT).",
+     "tex": "\\text{rate}=k[A]^{m}[B]^{n}\\qquad t_{1/2}=\\frac{\\ln 2}{k}"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Reading the orders from the coefficients of the balanced equation.\n- Saying a catalyst changes ΔH or gives a higher yield at equilibrium.\n- Saying that a higher temperature works because 'molecules collide more': the main effect is the larger fraction with E ≥ E_a.\n- Forgetting the units of k (mol⁻¹ dm³ s⁻¹ for second order overall)."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Orders from initial rates",
+     "statement": "For A + B → C the initial rates were: [A] 0.10, [B] 0.10 → 2.0 × 10⁻³; [A] 0.20, [B] 0.10 → 4.0 × 10⁻³; [A] 0.10, [B] 0.20 → 8.0 × 10⁻³ (mol dm⁻³, mol dm⁻³ s⁻¹). Find the rate equation and k.",
+     "steps": [
+      "Doubling [A] doubles the rate: first order in A. Doubling [B] multiplies the rate by 4: second order in B.",
+      "Rate = k[A][B]².",
+      "k = rate/([A][B]²) = 2.0 × 10⁻³ ÷ (0.10 × 0.10²) = 2.0 dm⁶ mol⁻² s⁻¹."
+     ],
+     "answer": "rate = k[A][B]², k = 2.0 dm⁶ mol⁻² s⁻¹"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Effect of temperature",
+     "statement": "A reaction has E_a = 50 kJ mol⁻¹. By what factor does the rate constant increase when the temperature is raised from 300 K to 310 K? (R = 8.31)",
+     "steps": [
+      "ln(k₂/k₁) = (E_a/R)(1/T₁ − 1/T₂) = (50 000/8.31)(1/300 − 1/310).",
+      "1/300 − 1/310 = 1.075 × 10⁻⁴, so ln(k₂/k₁) = 6017 × 1.075 × 10⁻⁴ = 0.647.",
+      "k₂/k₁ = e^0.647 = 1.91: the rate roughly doubles for a 10 K rise."
+     ],
+     "answer": "k increases by a factor of about 1.9"
+    }
+   ],
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-equilibrium",
+   "title": "Chemical equilibrium and the equilibrium constant Kc",
+   "minutes": 40,
+   "programRef": "GCE Advanced Level Chemistry — energetics, kinetics and chemical equilibrium (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe dynamic equilibrium and write expressions for Kc with units",
+    "Calculate Kc and equilibrium concentrations from experimental data (including the quadratic case)",
+    "Predict the effect of changing concentration, pressure, temperature and a catalyst using Le Chatelier's principle"
+   ],
+   "prerequisites": [
+    "lower6-chemistry-kinetics"
+   ],
+   "exercises": [
+    "lower6-chemistry-ch-energetics-e19",
+    "lower6-chemistry-ch-energetics-e20",
+    "lower6-chemistry-ch-energetics-e21",
+    "lower6-chemistry-ch-energetics-e22",
+    "lower6-chemistry-ch-energetics-e23",
+    "lower6-chemistry-ch-energetics-e24"
+   ],
+   "selfCheck": [
+    "lower6-chemistry-equilibrium-q1",
+    "lower6-chemistry-equilibrium-q2",
+    "lower6-chemistry-equilibrium-q3",
+    "lower6-chemistry-equilibrium-q4",
+    "lower6-chemistry-equilibrium-q5"
+   ],
+   "reviewNotes": [
+    "K_c values for the esterification (4.0) and N₂O₄ (0.20) are illustrative for practice, not data-book values.",
+    "K_p and equilibria with solubility products are in the Upper Sixth pack.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Dynamic equilibrium",
+     "md": "A reversible reaction reaches **dynamic equilibrium** in a closed system when the rate of the forward reaction equals the rate of the reverse reaction: the concentrations stay constant but both reactions continue.\n\nFor aA + bB ⇌ cC + dD at constant temperature: **K_c = [C]^c[D]^d / ([A]^a[B]^b)** (equilibrium concentrations in mol dm⁻³). Its units follow from the expression. K_c is large (≫ 1) if products dominate, small if reactants dominate. Pure solids and liquids are omitted."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Le Chatelier's principle",
+     "md": "If a system at equilibrium is disturbed, it shifts to **oppose** the change:\n\n- **Add reactant** (or remove product): shifts right (K_c unchanged).\n- **Increase pressure**: shifts to the side with fewer gas molecules (K_c unchanged).\n- **Increase temperature**: shifts in the endothermic direction, and **K_c changes** (decreases for an exothermic forward reaction).\n- **Catalyst**: no shift; equilibrium is reached faster."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 10,
+      "ymin": 0,
+      "ymax": 1.8,
+      "grid": 2,
+      "w": 400,
+      "h": 250,
+      "curves": [
+       {
+        "expr": "1.56*(1-exp(-x/1.5))",
+        "color": "red",
+        "label": "[HI]"
+       },
+       {
+        "expr": "1-0.78*(1-exp(-x/1.5))",
+        "color": "blue",
+        "label": "[H₂] = [I₂]"
+       }
+      ],
+      "points": [],
+      "segments": [],
+      "xlabel": "time",
+      "ylabel": "concentration / mol dm⁻³"
+     },
+     "caption": "Approach to equilibrium for H₂ + I₂ ⇌ 2HI: the concentrations become constant.",
+     "alt": "Two curves: the concentration of HI rising to 1.56 and that of hydrogen and iodine falling to 0.22 and then both levelling off."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Method for Kc calculations (ICE table)",
+     "md": "1. Write the equation and the K_c expression.\n2. Make a table: **I**nitial, **C**hange (use x with the coefficients), **E**quilibrium amounts.\n3. If the volume is the same on both sides, moles can be used directly (V cancels); otherwise divide by V to get concentrations.\n4. Substitute into K_c; solve (a quadratic may arise: use the formula and reject the impossible root)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using initial concentrations instead of equilibrium concentrations in K_c.\n- Including solids or liquids (such as water as solvent) in the expression.\n- Saying a catalyst increases the yield: it does not change K_c or the position.\n- Saying K_c changes when concentration or pressure changes: only temperature changes K_c."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Calculating Kc",
+     "statement": "1.00 mol of H₂ and 1.00 mol of I₂ react in a 1.00 dm³ flask: H₂ + I₂ ⇌ 2HI. At equilibrium 1.56 mol of HI is present. Find K_c.",
+     "steps": [
+      "HI formed = 1.56 mol, so H₂ and I₂ each used = 0.78 mol; equilibrium H₂ = I₂ = 1.00 − 0.78 = 0.22 mol dm⁻³.",
+      "K_c = [HI]²/([H₂][I₂]) = 1.56²/(0.22 × 0.22) = 2.434/0.0484 = 50.",
+      "There are equal moles on both sides, so K_c has no units."
+     ],
+     "answer": "K_c ≈ 50 (no units)"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Equilibrium concentrations",
+     "statement": "N₂O₄(g) ⇌ 2NO₂(g) has K_c = 0.20 mol dm⁻³ at a certain temperature. Initially [N₂O₄] = 0.500 mol dm⁻³. Find the equilibrium concentrations.",
+     "steps": [
+      "Let x mol dm⁻³ of N₂O₄ react: [N₂O₄] = 0.500 − x, [NO₂] = 2x.",
+      "0.20 = (2x)²/(0.500 − x), so 4x² + 0.20x − 0.100 = 0 and x = [−0.20 + √(0.04 + 1.60)]/8 = 0.135.",
+      "[NO₂] = 0.270 mol dm⁻³ and [N₂O₄] = 0.365 mol dm⁻³."
+     ],
+     "answer": "[NO₂] = 0.270; [N₂O₄] = 0.365 mol dm⁻³"
+    }
+   ],
+   "chapter": "lower6-chemistry-ch-energetics"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "lower6-chemistry-ch-energetics-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-chemistry-enthalpy",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "200 g of water is heated by 15 K. Calculate q in kJ (3 s.f.; c = 4.18 J g⁻¹ K⁻¹).",
+   "answer": 12.5,
+   "tolerance": 0.05,
+   "unit": "kJ",
+   "explanation": "q = 200 × 4.18 × 15 = 12 540 J = 12.5 kJ.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-ch-energetics-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-chemistry-enthalpy",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "For an exothermic reaction, the products have",
+   "choices": [
+    "a higher activation energy",
+    "more enthalpy than the reactants",
+    "less enthalpy than the reactants",
+    "the same enthalpy as the reactants"
+   ],
+   "answer": 2,
+   "explanation": "Heat is released: ΔH is negative.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-ch-energetics-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-chemistry-enthalpy",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "True or false: the standard enthalpy of formation of oxygen gas, O₂(g), is zero.",
+   "answer": true,
+   "explanation": "Elements in their standard states have ΔH_f° = 0 by definition.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-ch-energetics-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-chemistry-enthalpy",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "In an experiment, 0.0200 mol of a solid dissolves in 100 g of water and the temperature falls by 3.0 K. Calculate ΔH_solution in kJ mol⁻¹ (3 s.f.).",
+   "answer": 62.7,
+   "tolerance": 0.2,
+   "unit": "kJ/mol",
+   "explanation": "q = 100 × 4.18 × 3.0 = 1254 J = 1.254 kJ; ΔH = +1.254/0.0200 = +62.7 kJ mol⁻¹ (endothermic: the temperature fell).",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-ch-energetics-e05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-chemistry-enthalpy",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "A catalyst increases the rate of reaction by",
+   "choices": [
+    "changing the products",
+    "increasing ΔH",
+    "providing a route with a lower activation energy",
+    "increasing the temperature"
+   ],
+   "answer": 2,
+   "explanation": "ΔH is unchanged; the activation energy is lowered.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-ch-energetics-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-chemistry-enthalpy",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "In an experiment, 0.50 g of methanol (M = 32.0) is burnt in a spirit burner and heats 150 g of water from 20.0 °C to 34.5 °C.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Temperature rise (K).",
+     "answer": 14.5,
+     "tolerance": 0.01,
+     "explanation": "34.5 − 20.0 = 14.5 K.",
+     "unit": "K",
+     "id": "lower6-chemistry-ch-energetics-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Heat absorbed by the water (kJ, 3 s.f.).",
+     "answer": 9.09,
+     "tolerance": 0.02,
+     "explanation": "q = 150 × 4.18 × 14.5 = 9091 J = 9.09 kJ.",
+     "unit": "kJ",
+     "id": "lower6-chemistry-ch-energetics-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Enthalpy of combustion of methanol from these data (kJ mol⁻¹, 3 s.f.).",
+     "answer": -582.0,
+     "tolerance": 2,
+     "explanation": "n = 0.50/32.0 = 0.01563 mol; ΔH = −9.09/0.01563 = −582 kJ mol⁻¹.",
+     "unit": "kJ/mol",
+     "id": "lower6-chemistry-ch-energetics-e06-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "The data-book value is about −726 kJ mol⁻¹. Suggest two reasons for the difference.",
+     "model": "Heat is lost to the surroundings (the apparatus, the air) and the combustion may be incomplete (soot); some methanol may evaporate; the water is not insulated.",
+     "rubric": "1 mark each for any two valid reasons: heat loss, incomplete combustion, evaporation, no lid, etc.",
+     "explanation": "Heat is lost to the surroundings (the apparatus, the air) and the combustion may be incomplete (soot); some methanol may evaporate; the water is not insulated.",
+     "id": "lower6-chemistry-ch-energetics-e06-d"
+    }
+   ],
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-enthalpy-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-enthalpy",
+   "prompt": "Which sign has ΔH for an endothermic reaction?",
+   "choices": [
+    "zero",
+    "it depends on the catalyst",
+    "negative",
+    "positive"
+   ],
+   "answer": 3,
+   "explanation": "Heat is absorbed from the surroundings.",
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-enthalpy-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-enthalpy",
+   "prompt": "The standard enthalpy of combustion is defined for",
+   "choices": [
+    "burning in air only",
+    "one gram of fuel",
+    "one mole of oxygen",
+    "one mole of substance burnt completely in oxygen"
+   ],
+   "answer": 3,
+   "explanation": "The amount in the definition is 1 mol of the fuel.",
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-enthalpy-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-enthalpy",
+   "prompt": "The temperature of the surroundings rises. The reaction is",
+   "choices": [
+    "exothermic",
+    "at equilibrium",
+    "endothermic",
+    "a catalyst"
+   ],
+   "answer": 0,
+   "explanation": "Heat flows to the surroundings.",
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-enthalpy-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-enthalpy",
+   "prompt": "The activation energy is",
+   "choices": [
+    "the minimum energy colliding particles need to react",
+    "ΔH",
+    "the energy released by the reaction",
+    "the energy of the products"
+   ],
+   "answer": 0,
+   "explanation": "It is the barrier on the enthalpy profile.",
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-enthalpy-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-enthalpy",
+   "prompt": "To reduce errors in a neutralisation experiment you should",
+   "choices": [
+    "use less acid",
+    "heat the solution",
+    "use a lid and lagging and stir",
+    "use a metal beaker open to the air"
+   ],
+   "answer": 2,
+   "explanation": "These reduce heat loss.",
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-ch-energetics-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-chemistry-hess",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Calculate ΔH for H₂ + Cl₂ → 2HCl from the bond enthalpies H–H 436, Cl–Cl 243, H–Cl 432 kJ mol⁻¹ (kJ).",
+   "answer": -185,
+   "tolerance": 0.5,
+   "unit": "kJ",
+   "explanation": "Broken: 436 + 243 = 679; made: 2 × 432 = 864; ΔH = 679 − 864 = −185 kJ.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-ch-energetics-e08",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-chemistry-hess",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "True or false: ΔH_f° of liquid water is exactly the enthalpy change for the combustion of hydrogen gas, H₂(g) + ½O₂(g) → H₂O(l).",
+   "answer": true,
+   "explanation": "Both describe the same reaction (formation of 1 mol H₂O(l) from its elements).",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-ch-energetics-e09",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-chemistry-hess",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Hess's law is a consequence of",
+   "choices": [
+    "conservation of mass only",
+    "conservation of energy",
+    "the law of equilibrium",
+    "Le Chatelier's principle"
+   ],
+   "answer": 1,
+   "explanation": "The total energy change cannot depend on the route.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-ch-energetics-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-chemistry-hess",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Use ΔH_f° (kJ mol⁻¹): C₂H₅OH(l) −277.7, CO₂(g) −393.5, H₂O(l) −285.8 to find ΔH_c of ethanol (kJ mol⁻¹, 4 s.f.).",
+   "answer": -1366.7,
+   "tolerance": 0.2,
+   "unit": "kJ/mol",
+   "explanation": "C₂H₅OH + 3O₂ → 2CO₂ + 3H₂O: ΔH = 2(−393.5) + 3(−285.8) − (−277.7) = −1366.7 kJ mol⁻¹.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-ch-energetics-e11",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-chemistry-hess",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "A reaction breaks bonds totalling 2000 kJ and forms bonds totalling 2350 kJ. Find ΔH (kJ).",
+   "answer": -350,
+   "tolerance": 0.5,
+   "unit": "kJ",
+   "explanation": "ΔH = broken − made = 2000 − 2350 = −350 kJ (exothermic).",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-ch-energetics-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-chemistry-hess",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Use ΔH_c (kJ mol⁻¹): C(s) −393.5; H₂(g) −285.8; CH₄(g) −890.3.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "ΔH for C(s) + 2H₂(g) → CH₄(g) (kJ mol⁻¹, 3 s.f.).",
+     "answer": -74.8,
+     "tolerance": 0.1,
+     "explanation": "ΔH = −393.5 + 2(−285.8) − (−890.3) = −74.8 kJ mol⁻¹.",
+     "unit": "kJ/mol",
+     "id": "lower6-chemistry-ch-energetics-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "This value is",
+     "choices": [
+      "the enthalpy of combustion of methane",
+      "the bond enthalpy of C–H",
+      "positive",
+      "the standard enthalpy of formation of methane"
+     ],
+     "answer": 3,
+     "explanation": "It forms 1 mol of CH₄ from its elements in standard states.",
+     "id": "lower6-chemistry-ch-energetics-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "The mean C–H bond enthalpy is 413 kJ mol⁻¹. Find the energy needed to break all the C–H bonds in 1 mol of CH₄ (kJ).",
+     "answer": 1652,
+     "tolerance": 0.5,
+     "explanation": "CH₄ has four C–H bonds: 4 × 413 = 1652 kJ.",
+     "unit": "kJ",
+     "id": "lower6-chemistry-ch-energetics-e12-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Why do bond-enthalpy calculations give only approximate values?",
+     "model": "Bond enthalpies are averages over many compounds, so the actual bond energies in a particular molecule differ; the data apply to gaseous species only.",
+     "rubric": "1 mark: mean/average values; 1 mark: gaseous states / differences in environment.",
+     "explanation": "Bond enthalpies are averages over many compounds, so the actual bond energies in a particular molecule differ; the data apply to gaseous species only.",
+     "id": "lower6-chemistry-ch-energetics-e12-d"
+    }
+   ],
+   "figure": {
+    "kind": "shapes",
+    "w": 440,
+    "h": 245,
+    "items": [
+     {
+      "t": "text",
+      "x": 210,
+      "y": 22,
+      "text": "C(s) + 2H₂(g) + 2O₂(g)",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 70,
+      "y": 205,
+      "text": "CH₄(g) + 2O₂(g)",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 350,
+      "y": 205,
+      "text": "CO₂(g) + 2H₂O(l)",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "line",
+      "x1": 170,
+      "y1": 34,
+      "x2": 90,
+      "y2": 186,
+      "color": "blue",
+      "width": 3,
+      "arrow": "end"
+     },
+     {
+      "t": "text",
+      "x": 110,
+      "y": 100,
+      "text": "ΔH_f(CH₄)",
+      "size": 12,
+      "anchor": "end",
+      "color": "blue"
+     },
+     {
+      "t": "line",
+      "x1": 90,
+      "y1": 205,
+      "x2": 255,
+      "y2": 205,
+      "color": "red",
+      "width": 3,
+      "arrow": "end"
+     },
+     {
+      "t": "text",
+      "x": 172,
+      "y": 232,
+      "text": "ΔH_c(CH₄)",
+      "size": 12,
+      "anchor": "middle",
+      "color": "red"
+     },
+     {
+      "t": "line",
+      "x1": 250,
+      "y1": 34,
+      "x2": 340,
+      "y2": 186,
+      "color": "green",
+      "width": 3,
+      "arrow": "end"
+     },
+     {
+      "t": "text",
+      "x": 310,
+      "y": 100,
+      "text": "ΔH_c(C) + 2ΔH_c(H₂)",
+      "size": 12,
+      "anchor": "start",
+      "color": "green"
+     }
+    ]
+   },
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-hess-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-hess",
+   "prompt": "ΔH_f° of an element in its standard state is",
+   "choices": [
+    "negative",
+    "positive",
+    "zero",
+    "equal to ΔH_c"
+   ],
+   "answer": 2,
+   "explanation": "By definition.",
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-hess-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-hess",
+   "prompt": "Bond breaking is",
+   "choices": [
+    "endothermic",
+    "exothermic",
+    "neither",
+    "always zero"
+   ],
+   "answer": 0,
+   "explanation": "Energy must be supplied.",
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-hess-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-hess",
+   "prompt": "Hess's law allows us to find ΔH values that",
+   "choices": [
+    "are always positive",
+    "cannot be measured directly",
+    "are zero",
+    "depend on the route"
+   ],
+   "answer": 1,
+   "explanation": "Using known values and a cycle.",
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-hess-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-hess",
+   "prompt": "If the reverse of a reaction is considered, ΔH",
+   "choices": [
+    "becomes zero",
+    "doubles",
+    "changes sign",
+    "stays the same"
+   ],
+   "answer": 2,
+   "explanation": "ΔH(reverse) = −ΔH(forward).",
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-hess-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-hess",
+   "prompt": "If an equation is multiplied by 2, ΔH is",
+   "choices": [
+    "halved",
+    "multiplied by 2",
+    "negated",
+    "unchanged"
+   ],
+   "answer": 1,
+   "explanation": "ΔH is for the amounts in the equation.",
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-ch-energetics-e13",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-chemistry-kinetics",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Which change does NOT increase the rate of a reaction between a metal and acid?",
+   "choices": [
+    "diluting the acid with water",
+    "using powdered metal instead of lumps",
+    "increasing the temperature",
+    "using a more concentrated acid"
+   ],
+   "answer": 0,
+   "explanation": "Dilution lowers the concentration and so the collision frequency.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-ch-energetics-e14",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-chemistry-kinetics",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "A first-order reaction has k = 0.0231 s⁻¹. Find the half-life (s, 3 s.f.).",
+   "answer": 30.0,
+   "tolerance": 0.1,
+   "unit": "s",
+   "explanation": "t½ = 0.693/0.0231 = 30.0 s.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-ch-energetics-e15",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-chemistry-kinetics",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "True or false: a catalyst changes the enthalpy change ΔH of a reaction.",
+   "answer": false,
+   "explanation": "A catalyst lowers E_a for both directions but ΔH is unchanged.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-ch-energetics-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-chemistry-kinetics",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "The rate of a reaction is first order in A. The initial rate is 4.0 × 10⁻⁴ mol dm⁻³ s⁻¹ when [A] = 0.20 mol dm⁻³. Find k (s⁻¹).",
+   "answer": 2.0,
+   "tolerance": 0.01,
+   "unit": "× 10⁻³ s⁻¹",
+   "explanation": "k = rate/[A] = 4.0 × 10⁻⁴/0.20 = 2.0 × 10⁻³ s⁻¹, i.e. 2.0 in units of 10⁻³ s⁻¹.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-ch-energetics-e17",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-chemistry-kinetics",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Doubling the concentration of A changes the initial rate of a reaction from 1.0 to 4.0 units. Find the order with respect to A.",
+   "answer": 2,
+   "tolerance": 0,
+   "explanation": "Rate ∝ [A]² gives a four-fold increase when [A] doubles: second order.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-ch-energetics-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-chemistry-kinetics",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Rate measurements for 2NO + O₂ → 2NO₂ at constant temperature (concentrations in mol dm⁻³): [NO] 0.010, [O₂] 0.010: rate 2.5 × 10⁻⁶; [NO] 0.020, [O₂] 0.010: 1.0 × 10⁻⁵; [NO] 0.020, [O₂] 0.020: 2.0 × 10⁻⁵.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Order with respect to NO.",
+     "answer": 2,
+     "tolerance": 0,
+     "explanation": "Doubling [NO] (second row/first) gives 4 times the rate: second order.",
+     "id": "lower6-chemistry-ch-energetics-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Order with respect to O₂.",
+     "answer": 1,
+     "tolerance": 0,
+     "explanation": "Doubling [O₂] (third/second) doubles the rate: first order.",
+     "id": "lower6-chemistry-ch-energetics-e18-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Value of k (mol⁻² dm⁶ s⁻¹; answer in units of 1, to 3 s.f.) using the first experiment.",
+     "answer": 2.5,
+     "tolerance": 0.02,
+     "explanation": "k = rate/([NO]²[O₂]) = 2.5 × 10⁻⁶ ÷ (1.0 × 10⁻⁴ × 0.010) = 2.50 mol⁻² dm⁶ s⁻¹.",
+     "unit": "dm⁶ mol⁻² s⁻¹",
+     "id": "lower6-chemistry-ch-energetics-e18-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explain why the rate equation cannot be written from the balanced equation alone.",
+     "model": "The orders are determined by experiment; they depend on the mechanism (slow step), not on the coefficients of the overall equation.",
+     "rubric": "1 mark: orders determined experimentally; 1 mark: depend on the mechanism / rate-determining step.",
+     "explanation": "The orders are determined by experiment; they depend on the mechanism (slow step), not on the coefficients of the overall equation.",
+     "id": "lower6-chemistry-ch-energetics-e18-d"
+    }
+   ],
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-kinetics-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-kinetics",
+   "prompt": "According to collision theory a reaction occurs when particles collide with",
+   "choices": [
+    "any energy",
+    "no orientation needed",
+    "energy ≥ E_a and the correct orientation",
+    "energy < E_a"
+   ],
+   "answer": 2,
+   "explanation": "Both conditions are needed.",
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-kinetics-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-kinetics",
+   "prompt": "Raising the temperature increases the rate mainly because",
+   "choices": [
+    "more molecules have energy ≥ E_a",
+    "ΔH becomes more negative",
+    "the activation energy decreases",
+    "the catalyst is formed"
+   ],
+   "answer": 0,
+   "explanation": "The high-energy tail of the distribution grows.",
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-kinetics-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-kinetics",
+   "prompt": "The units of the rate constant for a first-order reaction are",
+   "choices": [
+    "dm³ mol⁻¹ s⁻¹",
+    "mol⁻² dm⁶ s⁻¹",
+    "s⁻¹",
+    "mol dm⁻³ s⁻¹"
+   ],
+   "answer": 2,
+   "explanation": "rate = k[A]: k = (mol dm⁻³ s⁻¹)/(mol dm⁻³).",
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-kinetics-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-kinetics",
+   "prompt": "A heterogeneous catalyst is",
+   "choices": [
+    "in a different phase from the reactants",
+    "in the same phase",
+    "always a liquid",
+    "used up in the reaction"
+   ],
+   "answer": 0,
+   "explanation": "e.g. solid iron with gaseous reactants.",
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-kinetics-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-kinetics",
+   "prompt": "Which does a catalyst NOT change?",
+   "choices": [
+    "the position of equilibrium",
+    "the route (mechanism)",
+    "the rate",
+    "the activation energy"
+   ],
+   "answer": 0,
+   "explanation": "It speeds forward and reverse reactions equally.",
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-ch-energetics-e19",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-chemistry-equilibrium",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "The K_c expression for N₂ + 3H₂ ⇌ 2NH₃ is",
+   "choices": [
+    "[NH₃]²/([N₂][H₂]³)",
+    "[NH₃]/([N₂][H₂])",
+    "[NH₃]²/([N₂][H₂])",
+    "[N₂][H₂]³/[NH₃]²"
+   ],
+   "answer": 0,
+   "explanation": "Products over reactants, each raised to its coefficient.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-ch-energetics-e20",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-chemistry-equilibrium",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "At equilibrium [SO₂] = 0.20, [O₂] = 0.10 and [SO₃] = 0.40 mol dm⁻³ for 2SO₂ + O₂ ⇌ 2SO₃. Find K_c (mol⁻¹ dm³).",
+   "answer": 40.0,
+   "tolerance": 0.2,
+   "unit": "dm³/mol",
+   "explanation": "K_c = 0.40²/(0.20² × 0.10) = 0.16/0.0040 = 40 mol⁻¹ dm³.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-ch-energetics-e21",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-chemistry-equilibrium",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "True or false: adding a catalyst to a system at equilibrium shifts the equilibrium position to the right.",
+   "answer": false,
+   "explanation": "A catalyst speeds up both directions equally, so no shift occurs.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-ch-energetics-e22",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-chemistry-equilibrium",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "For N₂ + 3H₂ ⇌ 2NH₃ (ΔH = −92 kJ mol⁻¹), the yield of ammonia is increased by",
+   "choices": [
+    "removing the catalyst",
+    "removing nitrogen",
+    "increasing the temperature",
+    "increasing the pressure"
+   ],
+   "answer": 3,
+   "explanation": "There are fewer gas molecules on the right (2 against 4), so a higher pressure shifts the equilibrium to the right.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-ch-energetics-e23",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-chemistry-equilibrium",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Ethanoic acid + ethanol ⇌ ethyl ethanoate + water has K_c = 4.0. Starting from 1.0 mol of each (any volume), find the moles of ester at equilibrium (3 s.f.).",
+   "answer": 0.667,
+   "tolerance": 0.003,
+   "unit": "mol",
+   "explanation": "x²/(1 − x)² = 4 gives x/(1 − x) = 2, so x = 2/3 = 0.667 mol (the volume cancels).",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-ch-energetics-e24",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-chemistry-equilibrium",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Ethanoic acid reacts with ethanol: CH₃COOH + C₂H₅OH ⇌ CH₃COOC₂H₅ + H₂O, K_c = 4.0 at the temperature used. 1.0 mol of each reactant is mixed.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The K_c expression is",
+     "choices": [
+      "[ester][water]/([acid][ethanol])",
+      "[water]²/[ester]",
+      "[acid][ethanol]/([ester][water])",
+      "[ester]/[acid]"
+     ],
+     "answer": 0,
+     "explanation": "Products over reactants.",
+     "id": "lower6-chemistry-ch-energetics-e24-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Moles of ester at equilibrium (3 s.f.).",
+     "answer": 0.667,
+     "tolerance": 0.003,
+     "explanation": "x²/(1 − x)² = 4 so x = 0.667 mol.",
+     "unit": "mol",
+     "id": "lower6-chemistry-ch-energetics-e24-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Percentage of the acid converted to ester (%, 3 s.f.).",
+     "answer": 66.7,
+     "tolerance": 0.2,
+     "explanation": "0.667/1.0 × 100 = 66.7 %.",
+     "unit": "%",
+     "id": "lower6-chemistry-ch-energetics-e24-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "A further 1.0 mol of ethanol is added to the original mixture (2.0 mol of ethanol and 1.0 mol of acid in total). Find the new moles of ester at equilibrium (3 s.f.).",
+     "answer": 0.845,
+     "tolerance": 0.005,
+     "explanation": "x²/((1 − x)(2 − x)) = 4 gives 3x² − 12x + 8 = 0, x = (12 − √48)/6 = 0.845 mol: Le Chatelier — more ester.",
+     "unit": "mol",
+     "id": "lower6-chemistry-ch-energetics-e24-d"
+    }
+   ],
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-equilibrium-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-equilibrium",
+   "prompt": "At equilibrium",
+   "choices": [
+    "there is no reverse reaction",
+    "the concentrations of reactants and products are equal",
+    "the reaction has stopped",
+    "the forward and reverse rates are equal"
+   ],
+   "answer": 3,
+   "explanation": "It is a dynamic equilibrium.",
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-equilibrium-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-equilibrium",
+   "prompt": "Only a change in which quantity changes the value of K_c?",
+   "choices": [
+    "adding a catalyst",
+    "temperature",
+    "pressure",
+    "concentration of a reactant"
+   ],
+   "answer": 1,
+   "explanation": "K_c depends on temperature only.",
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-equilibrium-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-equilibrium",
+   "prompt": "The forward reaction is exothermic. Raising the temperature",
+   "choices": [
+    "has no effect",
+    "shifts the position left and decreases K_c",
+    "increases K_c only",
+    "shifts right and increases K_c"
+   ],
+   "answer": 1,
+   "explanation": "Equilibrium moves in the endothermic (reverse) direction.",
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-equilibrium-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-equilibrium",
+   "prompt": "In H₂ + I₂ ⇌ 2HI, increasing the pressure",
+   "choices": [
+    "has no effect on the position",
+    "shifts right",
+    "changes K_c",
+    "shifts left"
+   ],
+   "answer": 0,
+   "explanation": "The number of gas moles is the same on both sides.",
+   "chapter": "lower6-chemistry-ch-energetics"
+  },
+  {
+   "id": "lower6-chemistry-equilibrium-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-equilibrium",
+   "prompt": "For solids in a heterogeneous equilibrium, the K_c expression",
+   "choices": [
+    "does not include them",
+    "includes their mass",
+    "includes them as 1 mol dm⁻³",
+    "is not valid"
+   ],
+   "answer": 0,
+   "explanation": "Their concentration is constant.",
+   "chapter": "lower6-chemistry-ch-energetics"
+  }
+ ]
+}

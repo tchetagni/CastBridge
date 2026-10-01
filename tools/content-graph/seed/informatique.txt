@@ -1,0 +1,38 @@
+# slug | level | years | fr | en | prereqs | minutes | tags
+device-basics|N0|y2|Découvrir le téléphone, la TV et l'ordinateur|Discover phones, TVs and computers||20|numerique
+keyboard-touch|N0|y3|Écran tactile, clavier et souris|Touchscreen, keyboard and mouse|device-basics|20|numerique
+safe-use|N0|y3|Un usage sûr : données personnelles, inconnus en ligne|Safe use: personal data and strangers online|device-basics|25|numerique,securite
+sequence-instructions|N0|y3|Suivre et donner des instructions pas à pas|Following and giving step-by-step instructions||20|algorithmique
+files-folders|N1|y4|Fichiers et dossiers|Files and folders|keyboard-touch|25|numerique
+text-processing|N1|y5|Traitement de texte|Word processing|files-folders|30|bureautique
+internet-search|N1|y5|Chercher et vérifier une information en ligne|Searching and checking information online|safe-use,files-folders|30|numerique,fiabilite
+algorithms-1|N1|y5|Algorithmes : séquences, boucles, conditions|Algorithms: sequences, loops, conditions|sequence-instructions|30|algorithmique
+spreadsheet|N1|y7|Tableur : formules et graphiques|Spreadsheets: formulas and charts|text-processing,math.mean|35|bureautique
+blocks-programming|N1|y7|Programmer avec des blocs (Scratch)|Block programming (Scratch)|algorithms-1|35|programmation
+email-collab|N1|y7|Courriel, messagerie et travail collaboratif|Email, messaging and collaboration|internet-search|30|numerique
+hardware-os|N1|y8|Matériel, système d'exploitation, réseaux|Hardware, operating systems and networks|files-folders|35|systeme
+python-basics|N1|y9|Python : variables, conditions, boucles|Python: variables, conditions, loops|blocks-programming,math.alg-letters|40|programmation
+data-representation|N1|y9|Représenter l'information : binaire, texte, images|Data representation: binary, text, images|hardware-os,math.powers|40|systeme
+networks-internet|N1|y10|Réseaux et Internet : protocoles, web|Networks and the Internet: protocols and the web|hardware-os,email-collab|40|reseaux
+python-functions|N1|y10|Python : fonctions, listes, fichiers|Python: functions, lists, files|python-basics|40|programmation
+digital-citizenship|N1|y10|Citoyenneté numérique : droit, éthique, désinformation|Digital citizenship: law, ethics, misinformation|internet-search,networks-internet|35|securite,ecm
+databases-1|N1|y11|Bases de données et SQL de base|Databases and basic SQL|spreadsheet,python-functions|45|donnees
+web-dev|N1|y11|Pages web : HTML, CSS|Web pages: HTML and CSS|networks-internet,text-processing|40|web
+data-structures|N1|y12|Structures de données : piles, files, arbres|Data structures: stacks, queues, trees|python-functions|50|programmation
+algorithms-2|N1|y12|Algorithmes de tri et de recherche, complexité|Sorting and searching algorithms, complexity|python-functions,math.seq|50|algorithmique
+security-crypto|N1|y12|Sécurité et cryptographie de base|Security and basic cryptography|data-representation,digital-citizenship|45|securite
+oop|N1|y13|Programmation orientée objet|Object-oriented programming|data-structures|50|programmation
+bac-info|N1|y13|Informatique du Bac / A Level Computing|Baccalauréat / A Level computing|algorithms-2,databases-1,oop|60|examen
+systems-uni|N1|y14|Systèmes, architecture et réseaux de première année|First-year systems, architecture and networks|bac-info|55|superieur
+# N2
+n2-algo-contest|N2|y9|Problèmes d'algorithmique de concours|Contest algorithm problems|python-basics,algorithms-1|45|concours,algorithmique
+n2-decomposition|N2|y10|Décomposer et résoudre des problèmes de programmation complexes|Decomposing and solving complex programming problems|python-functions,n2-algo-contest|50|concours,programmation
+n2-data-structures-contest|N2|y12|Structures de données et complexité en concours|Data structures and complexity in contests|data-structures,algorithms-2,n2-decomposition|60|concours,algorithmique
+n2-systems-security|N2|y12|Sécurité des systèmes : menaces, analyse, défense|Systems security: threats, analysis and defence|security-crypto,networks-internet|55|concours,securite
+n2-bac-info-excellence|N2|y13|Informatique du Bac niveau meilleurs candidats|Top-candidate Baccalauréat computing|bac-info,n2-data-structures-contest|65|concours
+n2-project-dev|N2|y13|Concevoir, tester et documenter un projet logiciel|Designing, testing and documenting a software project|oop,n2-decomposition|60|concours,projet
+# N3
+n3-algorithms-adv|N3|y13|Programmation dynamique, graphes, algorithmes gloutons|Dynamic programming, graphs and greedy algorithms|n2-data-structures-contest|70|olympiade
+n3-theory-computation|N3|y14|Calculabilité, langages et automates (initiation)|Computability, languages and automata (intro)|n2-bac-info-excellence,math.n2-linalg|70|international
+n3-ml-intro|N3|y15|Apprendre à partir de données : initiation à l'IA et ses limites|Learning from data: intro to AI and its limits|n2-project-dev,math.stats-inf|70|international,ia
+n3-systems-arch|N3|y14|Systèmes d'exploitation et architecture des machines|Operating systems and machine architecture|systems-uni,n2-systems-security|70|international,systeme

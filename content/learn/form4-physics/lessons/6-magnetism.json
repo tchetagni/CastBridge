@@ -1,0 +1,691 @@
+{
+ "chapter": "form4-physics-magnetism",
+ "lessons": [
+  {
+   "id": "form4-physics-electromagnetism",
+   "title": "Electromagnetism, motors and transformers",
+   "minutes": 35,
+   "programRef": "Form 4 Physics — Magnetic effect of a current, motor effect, induction, transformers (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe the magnetic field of a current-carrying wire and solenoid and use of electromagnets.",
+    "Describe the motor effect and Fleming's left-hand rule.",
+    "Describe electromagnetic induction and use the transformer equation."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form4-physics-magnetism-e01",
+    "form4-physics-magnetism-e02",
+    "form4-physics-magnetism-e03",
+    "form4-physics-magnetism-e04",
+    "form4-physics-magnetism-e05",
+    "form4-physics-magnetism-e06"
+   ],
+   "selfCheck": [
+    "form4-physics-electromagnetism-q1",
+    "form4-physics-electromagnetism-q2",
+    "form4-physics-electromagnetism-q3",
+    "form4-physics-electromagnetism-q4",
+    "form4-physics-electromagnetism-q5"
+   ],
+   "reviewNotes": [
+    "Right-hand grip rule and Fleming's left-hand rule are standard; check which hand rules the syllabus expects (conventional current assumed).",
+    "Transformers are treated as ideal.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Magnetic effect of a current",
+     "md": "A **current in a wire produces a magnetic field** in circles around the wire (right-hand grip rule: thumb along the current, fingers show the field). A **coil (solenoid)** gives a field like a bar magnet. An **electromagnet** has a soft-iron core in a coil: it is stronger with **more turns**, a **larger current** and an **iron core**, and it can be switched off. Uses: cranes lifting scrap iron, electric bells, relays, loudspeakers."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 210,
+      "items": [
+       {
+        "t": "rect",
+        "x": 50,
+        "y": 50,
+        "w": 60,
+        "h": 120,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 118,
+        "text": "N",
+        "size": 18,
+        "anchor": "middle",
+        "color": "white",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 330,
+        "y": 50,
+        "w": 60,
+        "h": 120,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "text",
+        "x": 360,
+        "y": 118,
+        "text": "S",
+        "size": 18,
+        "anchor": "middle",
+        "color": "white",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 115,
+        "y1": 80,
+        "x2": 325,
+        "y2": 80,
+        "color": "grey",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 115,
+        "y1": 110,
+        "x2": 325,
+        "y2": 110,
+        "color": "grey",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 115,
+        "y1": 140,
+        "x2": 325,
+        "y2": 140,
+        "color": "grey",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "circle",
+        "cx": 220,
+        "cy": 110,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "white"
+       },
+       {
+        "t": "circle",
+        "cx": 220,
+        "cy": 110,
+        "r": 3,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 220,
+        "y1": 95,
+        "x2": 220,
+        "y2": 30,
+        "color": "green",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 232,
+        "y": 42,
+        "text": "force",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 232,
+        "y": 128,
+        "text": "current out of the page",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 195,
+        "text": "magnetic field from N to S",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A wire carrying a current across a magnetic field feels a force (here upwards).",
+     "alt": "A magnet with N on the left and S on the right, field arrows pointing to the right, and a wire with current out of the page with a green force arrow pointing up."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "The motor effect",
+     "md": "A **current-carrying wire in a magnetic field experiences a force**, at right angles to both. **Fleming's left-hand rule**: **first finger = Field** (N to S), **seCond finger = Current**, **thuMb = Motion** (force). The force is larger for a bigger current, a stronger field or a longer wire. A **d.c. motor** has a coil in a field, a **commutator** that reverses the current every half turn and **brushes**, so the coil keeps turning."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Electromagnetic induction",
+     "md": "A **voltage (e.m.f.) is induced** when a magnet moves into or out of a coil, or when a wire cuts magnetic field lines: it is larger for a **faster** movement, a **stronger** magnet and **more turns**. No movement gives no e.m.f. A **generator (dynamo)** turns a coil in a field and gives **alternating current**. A **transformer** has two coils on an iron core: **Vs ÷ Vp = Ns ÷ Np**. A **step-up** transformer has Ns > Np; **step-down** Ns < Np. Transformers only work with **a.c.**"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 215,
+      "items": [
+       {
+        "t": "rect",
+        "x": 100,
+        "y": 40,
+        "w": 240,
+        "h": 160,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey"
+       },
+       {
+        "t": "rect",
+        "x": 140,
+        "y": 80,
+        "w": 160,
+        "h": 80,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "white"
+       },
+       {
+        "t": "line",
+        "x1": 100,
+        "y1": 60,
+        "x2": 140,
+        "y2": 65,
+        "color": "red",
+        "width": 2.5
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 60,
+        "x2": 340,
+        "y2": 65,
+        "color": "blue",
+        "width": 2.5
+       },
+       {
+        "t": "line",
+        "x1": 100,
+        "y1": 70,
+        "x2": 140,
+        "y2": 75,
+        "color": "red",
+        "width": 2.5
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 70,
+        "x2": 340,
+        "y2": 75,
+        "color": "blue",
+        "width": 2.5
+       },
+       {
+        "t": "line",
+        "x1": 100,
+        "y1": 80,
+        "x2": 140,
+        "y2": 85,
+        "color": "red",
+        "width": 2.5
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 80,
+        "x2": 340,
+        "y2": 85,
+        "color": "blue",
+        "width": 2.5
+       },
+       {
+        "t": "line",
+        "x1": 100,
+        "y1": 90,
+        "x2": 140,
+        "y2": 95,
+        "color": "red",
+        "width": 2.5
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 90,
+        "x2": 340,
+        "y2": 95,
+        "color": "blue",
+        "width": 2.5
+       },
+       {
+        "t": "line",
+        "x1": 100,
+        "y1": 100,
+        "x2": 140,
+        "y2": 105,
+        "color": "red",
+        "width": 2.5
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 100,
+        "x2": 340,
+        "y2": 105,
+        "color": "blue",
+        "width": 2.5
+       },
+       {
+        "t": "line",
+        "x1": 100,
+        "y1": 110,
+        "x2": 140,
+        "y2": 115,
+        "color": "red",
+        "width": 2.5
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 110,
+        "x2": 340,
+        "y2": 115,
+        "color": "blue",
+        "width": 2.5
+       },
+       {
+        "t": "line",
+        "x1": 100,
+        "y1": 120,
+        "x2": 140,
+        "y2": 125,
+        "color": "red",
+        "width": 2.5
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 120,
+        "x2": 340,
+        "y2": 125,
+        "color": "blue",
+        "width": 2.5
+       },
+       {
+        "t": "line",
+        "x1": 100,
+        "y1": 130,
+        "x2": 140,
+        "y2": 135,
+        "color": "red",
+        "width": 2.5
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 130,
+        "x2": 340,
+        "y2": 135,
+        "color": "blue",
+        "width": 2.5
+       },
+       {
+        "t": "line",
+        "x1": 100,
+        "y1": 100,
+        "x2": 40,
+        "y2": 100,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 36,
+        "y": 104,
+        "text": "Np",
+        "size": 12,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 340,
+        "y1": 100,
+        "x2": 400,
+        "y2": 100,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 404,
+        "y": 104,
+        "text": "Ns",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 22,
+        "text": "iron core",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 125,
+        "text": "alternating magnetic field",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 130,
+        "text": "primary",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 380,
+        "y": 130,
+        "text": "secondary",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A transformer: two coils on a laminated iron core.",
+     "alt": "A rectangular iron core with a primary coil of Np turns on the left limb and a secondary coil of Ns turns on the right limb."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- A transformer does not work on d.c.: a changing field is needed.\n- It cannot increase power: for an ideal transformer Vp Ip = Vs Is, so a higher voltage means a lower current.\n- The thumb in Fleming's left-hand rule shows the **force**, not the current."
+    },
+    {
+     "type": "example",
+     "title": "Step-down transformer",
+     "statement": "A transformer has 500 turns on the primary and 50 turns on the secondary. The primary is connected to 220 V a.c. Find the secondary voltage.",
+     "steps": [
+      "Vs ÷ Vp = Ns ÷ Np, so Vs = 220 × 50 ÷ 500.",
+      "= 22 V."
+     ],
+     "answer": "22 V"
+    },
+    {
+     "type": "example",
+     "title": "Current in the primary",
+     "statement": "The secondary of that ideal transformer supplies 2 A at 22 V. Find the current in the primary.",
+     "steps": [
+      "Power out = 22 × 2 = 44 W; ideal: power in = 44 W.",
+      "Ip = 44 ÷ 220 = 0.2 A."
+     ],
+     "answer": "0.2 A"
+    },
+    {
+     "type": "exercise",
+     "ref": "form4-physics-magnetism-e01"
+    }
+   ],
+   "chapter": "form4-physics-magnetism"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form4-physics-magnetism-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form4-physics-electromagnetism",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which change makes an electromagnet stronger?",
+   "choices": [
+    "more turns of wire",
+    "removing the iron core",
+    "a shorter wire",
+    "a smaller current"
+   ],
+   "answer": 0,
+   "explanation": "More turns, more current and an iron core all strengthen it.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-physics-magnetism"
+  },
+  {
+   "id": "form4-physics-magnetism-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form4-physics-electromagnetism",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In Fleming's left-hand rule the thumb shows the direction of:",
+   "choices": [
+    "the current",
+    "the field",
+    "the voltage",
+    "the force (motion)"
+   ],
+   "answer": 3,
+   "explanation": "ThuMb = Motion.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-physics-magnetism"
+  },
+  {
+   "id": "form4-physics-magnetism-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-physics-electromagnetism",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A transformer has 100 turns on the primary and 1000 turns on the secondary. The primary voltage is 12 V a.c. Find the secondary voltage in V.",
+   "answer": 120,
+   "tolerance": 0,
+   "unit": "V",
+   "explanation": "Vs = 12 × 1000 ÷ 100 = 120 V.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-physics-magnetism"
+  },
+  {
+   "id": "form4-physics-magnetism-e04",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "form4-physics-electromagnetism",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A transformer can step up the voltage of a battery (d.c.).",
+   "answer": false,
+   "explanation": "It needs a changing (a.c.) supply.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form4-physics-magnetism"
+  },
+  {
+   "id": "form4-physics-magnetism-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form4-physics-electromagnetism",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Describe how an e.m.f. can be induced in a coil using a bar magnet and state three ways to increase it.",
+   "model": "Push the magnet in and out of the coil: a voltage is induced while it moves. It is increased by moving the magnet faster, using a stronger magnet, or using a coil with more turns.",
+   "rubric": [
+    "1 mark: moving magnet and coil",
+    "2 marks: any two ways to increase it"
+   ],
+   "explanation": "Push the magnet in and out of the coil: a voltage is induced while it moves. It is increased by moving the magnet faster, using a stronger magnet, or using a coil with more turns.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-physics-magnetism"
+  },
+  {
+   "id": "form4-physics-magnetism-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form4-physics-electromagnetism",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A transformer in a phone charger changes 220 V a.c. to 11 V a.c. The primary coil has 2000 turns.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Number of turns on the secondary coil.",
+     "answer": 100,
+     "tolerance": 0,
+     "explanation": "Ns = Np × Vs ÷ Vp = 2000 × 11 ÷ 220 = 100.",
+     "id": "form4-physics-magnetism-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "This is a:",
+     "choices": [
+      "dynamo",
+      "d.c. motor",
+      "step-up transformer",
+      "step-down transformer"
+     ],
+     "answer": 3,
+     "explanation": "Voltage is reduced.",
+     "id": "form4-physics-magnetism-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "If the secondary current is 1 A (ideal), find the primary current in A.",
+     "answer": 0.05,
+     "tolerance": 0.001,
+     "explanation": "Power out = 11 W; Ip = 11 ÷ 220 = 0.05 A.",
+     "unit": "A",
+     "id": "form4-physics-magnetism-e06-c"
+    }
+   ],
+   "chapter": "form4-physics-magnetism"
+  },
+  {
+   "id": "form4-physics-electromagnetism-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-electromagnetism",
+   "prompt": "A current in a straight wire produces:",
+   "choices": [
+    "light only",
+    "no effect",
+    "a gravitational field",
+    "a magnetic field around it"
+   ],
+   "answer": 3,
+   "explanation": "Oersted's discovery.",
+   "chapter": "form4-physics-magnetism"
+  },
+  {
+   "id": "form4-physics-electromagnetism-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-electromagnetism",
+   "prompt": "A device that changes the size of an a.c. voltage is a:",
+   "choices": [
+    "switch",
+    "dynamo",
+    "fuse",
+    "transformer"
+   ],
+   "answer": 3,
+   "explanation": "Two coils on an iron core.",
+   "chapter": "form4-physics-magnetism"
+  },
+  {
+   "id": "form4-physics-electromagnetism-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-electromagnetism",
+   "prompt": "The commutator in a d.c. motor:",
+   "choices": [
+    "cools the coil",
+    "makes light",
+    "stores charge",
+    "reverses the current every half turn"
+   ],
+   "answer": 3,
+   "explanation": "It keeps the turning force in one direction.",
+   "chapter": "form4-physics-magnetism"
+  },
+  {
+   "id": "form4-physics-electromagnetism-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-electromagnetism",
+   "prompt": "The transformer equation is:",
+   "choices": [
+    "Vs ÷ Vp = Np ÷ Ns",
+    "Vs ÷ Vp = Ns ÷ Np",
+    "Vs × Vp = Ns × Np",
+    "Vs + Vp = Ns + Np"
+   ],
+   "answer": 1,
+   "explanation": "Voltage ratio equals turns ratio.",
+   "chapter": "form4-physics-magnetism"
+  },
+  {
+   "id": "form4-physics-electromagnetism-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-physics-electromagnetism",
+   "prompt": "An e.m.f. is induced in a coil when:",
+   "choices": [
+    "a magnet moves in or out of it",
+    "it is switched off",
+    "a magnet is at rest in it",
+    "the coil is cold"
+   ],
+   "answer": 0,
+   "explanation": "A changing field is needed.",
+   "chapter": "form4-physics-magnetism"
+  }
+ ]
+}

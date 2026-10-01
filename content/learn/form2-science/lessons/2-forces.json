@@ -1,0 +1,746 @@
+{
+ "chapter": "form2-science-forces",
+ "lessons": [
+  {
+   "id": "form2-science-forces",
+   "title": "Forces, friction and weight",
+   "minutes": 25,
+   "programRef": "Form 2 Basic Science — Forces, friction, weight and speed (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "State what forces do and measure them in newtons.",
+    "Describe friction, its advantages and disadvantages.",
+    "Distinguish mass from weight and use W = m × g with g = 10 N/kg."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form2-science-forces-e01",
+    "form2-science-forces-e02",
+    "form2-science-forces-e03",
+    "form2-science-forces-e04",
+    "form2-science-forces-e05",
+    "form2-science-forces-e06"
+   ],
+   "selfCheck": [
+    "form2-science-forces-q1",
+    "form2-science-forces-q2",
+    "form2-science-forces-q3",
+    "form2-science-forces-q4",
+    "form2-science-forces-q5"
+   ],
+   "reviewNotes": [
+    "g = 10 N/kg is used for simplicity (9.8 is more exact); the Moon value 1.6 N/kg is the textbook figure.",
+    "The 'reaction of the table' (normal force) may be beyond the Form 2 syllabus.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Force",
+     "md": "A **force** is a push or a pull. Its unit is the **newton (N)**, measured with a **spring balance (newton meter)**. A force can start or stop motion, change speed or direction, or change the shape of an object. **Balanced forces** do not change the motion of an object; **unbalanced forces** do."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 240,
+      "items": [
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 100,
+        "w": 100,
+        "h": 60,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "line",
+        "x1": 100,
+        "y1": 190,
+        "x2": 300,
+        "y2": 190,
+        "color": "brown",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 130,
+        "x2": 148,
+        "y2": 130,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 118,
+        "text": "push",
+        "size": 12,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 330,
+        "y1": 130,
+        "x2": 252,
+        "y2": 130,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 335,
+        "y": 118,
+        "text": "friction",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 162,
+        "x2": 200,
+        "y2": 230,
+        "color": "green",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 226,
+        "text": "weight",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 98,
+        "x2": 200,
+        "y2": 40,
+        "color": "purple",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 52,
+        "text": "reaction of table",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Forces on a box pushed along a table.",
+     "alt": "A box with arrows: push to the right, friction to the left, weight downward and the reaction of the table upward."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Friction",
+     "md": "**Friction** is a force that opposes motion between surfaces in contact. It is useful for walking, braking and gripping tyres. It is harmful when it wears parts and makes heat. It is **reduced** by oil, grease, polishing, wheels and ball bearings; it is **increased** by rough surfaces and treaded tyres."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Mass and weight",
+     "md": "**Mass** is the amount of matter in an object: kg, the same everywhere. **Weight** is the pull of gravity on it: newtons, and it changes with place (on the Moon about one sixth of that on Earth).\n\n**W = m × g**, with **g = 10 N/kg** on Earth (used in this course)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Mass is not weight: a 60 kg student has a mass of 60 kg and a weight of 600 N.\n- A balance measures mass; a spring balance measures weight (force).\n- Friction does not always slow things: without it you could not walk."
+    },
+    {
+     "type": "example",
+     "title": "Weight of a student",
+     "statement": "A student has a mass of 60 kg. Find her weight on Earth (g = 10 N/kg).",
+     "steps": [
+      "W = m × g.",
+      "W = 60 × 10 = 600 N."
+     ],
+     "answer": "600 N"
+    },
+    {
+     "type": "example",
+     "title": "Find the mass",
+     "statement": "A sack of cassava has a weight of 450 N. Find its mass (g = 10 N/kg).",
+     "steps": [
+      "m = W ÷ g.",
+      "m = 450 ÷ 10 = 45 kg."
+     ],
+     "answer": "45 kg"
+    },
+    {
+     "type": "exercise",
+     "ref": "form2-science-forces-e01"
+    }
+   ],
+   "chapter": "form2-science-forces"
+  },
+  {
+   "id": "form2-science-speed",
+   "title": "Speed and distance-time graphs",
+   "minutes": 25,
+   "programRef": "Form 2 Basic Science — Forces, friction, weight and speed (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Calculate speed, distance and time.",
+    "Convert between km/h and m/s.",
+    "Read a distance-time graph."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form2-science-forces-e07",
+    "form2-science-forces-e08",
+    "form2-science-forces-e09",
+    "form2-science-forces-e10",
+    "form2-science-forces-e11",
+    "form2-science-forces-e12"
+   ],
+   "selfCheck": [
+    "form2-science-speed-q1",
+    "form2-science-speed-q2",
+    "form2-science-speed-q3",
+    "form2-science-speed-q4",
+    "form2-science-speed-q5"
+   ],
+   "reviewNotes": [
+    "Journey numbers are illustrative, not real timetables.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Speed",
+     "md": "**Speed = distance ÷ time**, so **distance = speed × time** and **time = distance ÷ speed**. Units: m/s or km/h. **Average speed = total distance ÷ total time**. To change units: **km/h ÷ 3.6 = m/s** and m/s × 3.6 = km/h."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 4,
+      "ymin": 0,
+      "ymax": 200,
+      "grid": 1,
+      "w": 420,
+      "h": 260,
+      "curves": [],
+      "points": [],
+      "segments": [
+       {
+        "x1": 0,
+        "y1": 0,
+        "x2": 2,
+        "y2": 100,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 2,
+        "y1": 100,
+        "x2": 2.5,
+        "y2": 100,
+        "color": "red",
+        "dash": false
+       },
+       {
+        "x1": 2.5,
+        "y1": 100,
+        "x2": 4,
+        "y2": 200,
+        "color": "blue",
+        "dash": false
+       }
+      ],
+      "xlabel": "time (h)",
+      "ylabel": "distance (km)"
+     },
+     "caption": "Distance-time graph of a bus journey (illustrative numbers).",
+     "alt": "A graph with time in hours on the x-axis and distance in km on the y-axis: a rising line to 100 km at 2 h, a flat part until 2.5 h and a rising line to 200 km at 4 h."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Reading the graph",
+     "md": "On a **distance-time graph** the **slope** is the speed. A **straight rising line** means constant speed; a **steeper line** means faster; a **horizontal line** means stopped. In the graph above: 0 to 2 h: 100 km in 2 h = 50 km/h; 2 to 2.5 h: stopped; 2.5 to 4 h: 100 km in 1.5 h ≈ 66.7 km/h."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Use matching units: do not divide km by seconds without converting.\n- A flat line on a distance-time graph means the object is **stopped**, not moving at constant speed.\n- Average speed is total distance ÷ total time, **not** the average of two speeds when times differ."
+    },
+    {
+     "type": "example",
+     "title": "Average speed",
+     "statement": "In the journey of the graph the bus travels 200 km in 4 h including the stop. Find the average speed.",
+     "steps": [
+      "Average speed = total distance ÷ total time.",
+      "200 ÷ 4 = 50 km/h."
+     ],
+     "answer": "50 km/h"
+    },
+    {
+     "type": "example",
+     "title": "Change units",
+     "statement": "A motorbike travels at 72 km/h. Express this in m/s.",
+     "steps": [
+      "Divide by 3.6.",
+      "72 ÷ 3.6 = 20 m/s."
+     ],
+     "answer": "20 m/s"
+    },
+    {
+     "type": "exercise",
+     "ref": "form2-science-forces-e07"
+    }
+   ],
+   "chapter": "form2-science-forces"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form2-science-forces-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form2-science-forces",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The unit of force is the:",
+   "choices": [
+    "metre",
+    "newton",
+    "kilogram",
+    "joule"
+   ],
+   "answer": 1,
+   "explanation": "Force is in N.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-science-forces"
+  },
+  {
+   "id": "form2-science-forces-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form2-science-forces",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the weight of a 25 kg bag of rice (g = 10 N/kg).",
+   "answer": 250,
+   "tolerance": 0,
+   "unit": "N",
+   "explanation": "25 × 10 = 250 N.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-science-forces"
+  },
+  {
+   "id": "form2-science-forces-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form2-science-forces",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which of these REDUCES friction?",
+   "choices": [
+    "pressing harder",
+    "oil on moving parts",
+    "a treaded tyre",
+    "a rough surface"
+   ],
+   "answer": 1,
+   "explanation": "Oil makes surfaces slide.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-science-forces"
+  },
+  {
+   "id": "form2-science-forces-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form2-science-forces",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A box has weight 120 N. What is its mass? (g = 10 N/kg)",
+   "answer": 12,
+   "tolerance": 0,
+   "unit": "kg",
+   "explanation": "120 ÷ 10 = 12 kg.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form2-science-forces"
+  },
+  {
+   "id": "form2-science-forces-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form2-science-forces",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Give two ways in which friction is useful and one way in which it is a nuisance.",
+   "model": "Useful: it lets us walk without slipping and it lets brakes stop a vehicle. Nuisance: it wears out machine parts and makes them hot.",
+   "rubric": [
+    "1 mark each useful use",
+    "1 mark for a harmful effect"
+   ],
+   "explanation": "Useful: it lets us walk without slipping and it lets brakes stop a vehicle. Nuisance: it wears out machine parts and makes them hot.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form2-science-forces"
+  },
+  {
+   "id": "form2-science-forces-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form2-science-forces",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An astronaut has a mass of 70 kg. Use g = 10 N/kg on Earth and about 1.6 N/kg on the Moon.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Weight on Earth in N.",
+     "answer": 700,
+     "tolerance": 0,
+     "explanation": "70 × 10 = 700 N.",
+     "unit": "N",
+     "id": "form2-science-forces-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Weight on the Moon in N.",
+     "answer": 112,
+     "tolerance": 0.5,
+     "explanation": "70 × 1.6 = 112 N.",
+     "unit": "N",
+     "id": "form2-science-forces-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "His mass on the Moon is:",
+     "choices": [
+      "11.2 kg",
+      "0 kg",
+      "112 kg",
+      "70 kg"
+     ],
+     "answer": 3,
+     "explanation": "Mass does not change.",
+     "id": "form2-science-forces-e06-c"
+    }
+   ],
+   "chapter": "form2-science-forces"
+  },
+  {
+   "id": "form2-science-forces-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-science-forces",
+   "prompt": "Weight is measured with a:",
+   "choices": [
+    "thermometer",
+    "stopwatch",
+    "spring balance",
+    "measuring cylinder"
+   ],
+   "answer": 2,
+   "explanation": "Weight is a force.",
+   "chapter": "form2-science-forces"
+  },
+  {
+   "id": "form2-science-forces-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-science-forces",
+   "prompt": "Mass is measured in:",
+   "choices": [
+    "newtons",
+    "joules",
+    "kilograms",
+    "watts"
+   ],
+   "answer": 2,
+   "explanation": "Mass is in kg.",
+   "chapter": "form2-science-forces"
+  },
+  {
+   "id": "form2-science-forces-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-science-forces",
+   "prompt": "Friction acts:",
+   "choices": [
+    "only in liquids",
+    "in the direction of motion",
+    "against the direction of motion",
+    "upwards only"
+   ],
+   "answer": 2,
+   "explanation": "It opposes motion.",
+   "chapter": "form2-science-forces"
+  },
+  {
+   "id": "form2-science-forces-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-science-forces",
+   "prompt": "If g = 10 N/kg, the weight of 5 kg is:",
+   "choices": [
+    "0.5 N",
+    "5 N",
+    "15 N",
+    "50 N"
+   ],
+   "answer": 3,
+   "explanation": "5 × 10.",
+   "chapter": "form2-science-forces"
+  },
+  {
+   "id": "form2-science-forces-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-science-forces",
+   "prompt": "Balanced forces on a moving car mean its speed:",
+   "choices": [
+    "stays the same",
+    "increases",
+    "decreases",
+    "becomes zero"
+   ],
+   "answer": 0,
+   "explanation": "No resultant force.",
+   "chapter": "form2-science-forces"
+  },
+  {
+   "id": "form2-science-forces-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form2-science-speed",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A runner covers 400 m in 50 s. Find her speed in m/s.",
+   "answer": 8,
+   "tolerance": 0,
+   "unit": "m/s",
+   "explanation": "400 ÷ 50 = 8 m/s.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-science-forces"
+  },
+  {
+   "id": "form2-science-forces-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form2-science-speed",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A car travels at 60 km/h for 3 hours. How far does it go?",
+   "answer": 180,
+   "tolerance": 0,
+   "unit": "km",
+   "explanation": "60 × 3 = 180 km.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-science-forces"
+  },
+  {
+   "id": "form2-science-forces-e09",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form2-science-speed",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A taxi travels 150 km at 50 km/h. How long does the journey take?",
+   "answer": 3,
+   "tolerance": 0,
+   "unit": "h",
+   "explanation": "150 ÷ 50 = 3 h.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form2-science-forces"
+  },
+  {
+   "id": "form2-science-forces-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "form2-science-speed",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A horizontal line on a distance-time graph means the object is:",
+   "choices": [
+    "moving fast",
+    "moving backwards",
+    "at rest",
+    "accelerating"
+   ],
+   "answer": 2,
+   "explanation": "Distance does not change.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form2-science-forces"
+  },
+  {
+   "id": "form2-science-forces-e11",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form2-science-speed",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Convert 90 km/h to m/s.",
+   "answer": 25,
+   "tolerance": 0,
+   "unit": "m/s",
+   "explanation": "90 ÷ 3.6 = 25 m/s.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form2-science-forces"
+  },
+  {
+   "id": "form2-science-forces-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form2-science-speed",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A bus leaves a town and travels 120 km in 2 h, rests for 30 minutes, then travels 60 km in 1.5 h.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Speed in the first part (km/h).",
+     "answer": 60,
+     "tolerance": 0,
+     "explanation": "120 ÷ 2 = 60 km/h.",
+     "unit": "km/h",
+     "id": "form2-science-forces-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Total distance (km).",
+     "answer": 180,
+     "tolerance": 0,
+     "explanation": "120 + 60 = 180 km.",
+     "unit": "km",
+     "id": "form2-science-forces-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Average speed for the whole journey including the rest (km/h). Total time is 4 h.",
+     "answer": 45,
+     "tolerance": 0,
+     "explanation": "180 ÷ 4 = 45 km/h.",
+     "unit": "km/h",
+     "id": "form2-science-forces-e12-c"
+    }
+   ],
+   "chapter": "form2-science-forces"
+  },
+  {
+   "id": "form2-science-speed-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-science-speed",
+   "prompt": "Speed is calculated as:",
+   "choices": [
+    "distance × time",
+    "distance ÷ time",
+    "time ÷ distance",
+    "distance + time"
+   ],
+   "answer": 1,
+   "explanation": "Speed = distance/time.",
+   "chapter": "form2-science-forces"
+  },
+  {
+   "id": "form2-science-speed-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-science-speed",
+   "prompt": "The slope of a distance-time graph gives the:",
+   "choices": [
+    "mass",
+    "volume",
+    "weight",
+    "speed"
+   ],
+   "answer": 3,
+   "explanation": "Gradient = speed.",
+   "chapter": "form2-science-forces"
+  },
+  {
+   "id": "form2-science-speed-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-science-speed",
+   "prompt": "A speed of 36 km/h equals:",
+   "choices": [
+    "3.6 m/s",
+    "10 m/s",
+    "100 m/s",
+    "36 m/s"
+   ],
+   "answer": 1,
+   "explanation": "36 ÷ 3.6 = 10.",
+   "chapter": "form2-science-forces"
+  },
+  {
+   "id": "form2-science-speed-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-science-speed",
+   "prompt": "A car goes 200 km in 4 h. Its average speed is:",
+   "choices": [
+    "50 km/h",
+    "20 km/h",
+    "4 km/h",
+    "800 km/h"
+   ],
+   "answer": 0,
+   "explanation": "200 ÷ 4.",
+   "chapter": "form2-science-forces"
+  },
+  {
+   "id": "form2-science-speed-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form2-science-speed",
+   "prompt": "Distance travelled equals:",
+   "choices": [
+    "speed − time",
+    "time ÷ speed",
+    "speed × time",
+    "speed ÷ time"
+   ],
+   "answer": 2,
+   "explanation": "Rearrange speed = distance/time.",
+   "chapter": "form2-science-forces"
+  }
+ ]
+}

@@ -1,0 +1,1353 @@
+{
+ "chapter": "lower6-physics-ch-electricity",
+ "lessons": [
+  {
+   "id": "lower6-physics-resistance",
+   "title": "Current, potential difference, resistance and resistivity",
+   "minutes": 30,
+   "programRef": "GCE Advanced Level Physics — current electricity (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define current, potential difference, resistance and resistivity and use I = Q/t, V = W/Q, R = V/I, R = ρL/A, P = IV",
+    "Describe the I–V characteristics of a metallic conductor, a filament lamp and a diode",
+    "Use I = nAvq to relate current to the drift velocity of charge carriers"
+   ],
+   "prerequisites": [
+    "lower6-physics-energy"
+   ],
+   "exercises": [
+    "lower6-physics-ch-electricity-e01",
+    "lower6-physics-ch-electricity-e02",
+    "lower6-physics-ch-electricity-e03",
+    "lower6-physics-ch-electricity-e04",
+    "lower6-physics-ch-electricity-e05",
+    "lower6-physics-ch-electricity-e06"
+   ],
+   "selfCheck": [
+    "lower6-physics-resistance-q1",
+    "lower6-physics-resistance-q2",
+    "lower6-physics-resistance-q3",
+    "lower6-physics-resistance-q4",
+    "lower6-physics-resistance-q5"
+   ],
+   "reviewNotes": [
+    "Mains voltage in Cameroon is taken as 220 V for the examples (to be checked); no tariff is stated.",
+    "Resistivity values for copper and nichrome and n for copper are textbook values; check the board's data sheet.",
+    "The threshold of silicon diodes (about 0.6 V) is a typical value.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Basic definitions",
+     "md": "**Current** I = Q/t (ampere, A = C s⁻¹). **Potential difference** V = W/Q (volt, V = J C⁻¹): energy transferred per unit charge between two points. **Resistance** R = V/I (ohm, Ω = V A⁻¹).\n\n**Ohm's law**: for a metallic conductor at constant temperature, I ∝ V. **Power**: P = IV = I²R = V²/R. Energy W = IVt."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Resistivity and drift velocity",
+     "md": "For a uniform wire: **R = ρL/A**, where ρ is the **resistivity** (Ω m), a property of the material at a given temperature (copper ≈ 1.7 × 10⁻⁸ Ω m).\n\nCharge carriers drift slowly: **I = nAvq**, where n is the number of free charge carriers per unit volume (m⁻³), A the cross-sectional area, v the mean drift velocity and q the charge on each carrier (e = 1.6 × 10⁻¹⁹ C for electrons).",
+     "tex": "R=\\frac{\\rho L}{A}\\qquad I=nAvq\\qquad P=IV=I^{2}R"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": -4,
+      "xmax": 4,
+      "ymin": -3,
+      "ymax": 3,
+      "grid": 2,
+      "w": 400,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "0.3*x",
+        "color": "blue",
+        "label": "resistor"
+       },
+       {
+        "expr": "2*x/(1+abs(x))",
+        "color": "red",
+        "label": "lamp"
+       },
+       {
+        "expr": "0.01*(exp(2.2*x)-1)",
+        "color": "green",
+        "label": "diode"
+       }
+      ],
+      "points": [],
+      "segments": [],
+      "xlabel": "V",
+      "ylabel": "I"
+     },
+     "caption": "I–V characteristics: ohmic resistor (straight line), filament lamp (flattening) and diode (one direction).",
+     "alt": "Three curves on I–V axes: a straight line, an S-shaped curve flattening at high values and a curve that rises steeply only for positive voltage."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "I–V characteristics",
+     "md": "- **Metallic conductor (constant temperature)**: straight line through the origin (ohmic).\n- **Filament lamp**: the curve flattens as I increases; resistance rises with temperature because the lattice ions vibrate more and impede the electrons.\n- **Diode**: conducts in one direction (forward) once the threshold voltage (about 0.6 V for silicon) is reached; almost no current in reverse."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using the diameter instead of the radius in A = πr².\n- Forgetting to convert mm to m (0.50 mm = 0.50 × 10⁻³ m).\n- Saying 'a filament lamp does not obey V = IR': V = IR is the **definition** of resistance and always holds; only Ohm's law (constant R) fails.\n- Thinking electrons travel at the speed of the signal: the drift speed is a fraction of a millimetre per second."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Resistance of a wire",
+     "statement": "A copper wire is 3.0 m long and has diameter 0.50 mm (ρ = 1.7 × 10⁻⁸ Ω m). Find its resistance.",
+     "steps": [
+      "Radius = 0.25 × 10⁻³ m, so A = π(0.25 × 10⁻³)² = 1.96 × 10⁻⁷ m².",
+      "R = ρL/A = 1.7 × 10⁻⁸ × 3.0 ÷ 1.96 × 10⁻⁷ = 0.26 Ω."
+     ],
+     "answer": "R = 0.26 Ω"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Drift velocity",
+     "statement": "A current of 2.0 A flows in a copper wire of cross-section 1.0 × 10⁻⁶ m². Copper has 8.5 × 10²⁸ free electrons per m³. Find the drift speed.",
+     "steps": [
+      "I = nAvq, so v = I/(nAq).",
+      "v = 2.0 ÷ (8.5 × 10²⁸ × 1.0 × 10⁻⁶ × 1.6 × 10⁻¹⁹) = 1.47 × 10⁻⁴ m/s, about 0.15 mm/s."
+     ],
+     "answer": "v = 1.5 × 10⁻⁴ m/s"
+    }
+   ],
+   "chapter": "lower6-physics-ch-electricity"
+  },
+  {
+   "id": "lower6-physics-circuits",
+   "title": "DC circuits, Kirchhoff's laws and internal resistance",
+   "minutes": 35,
+   "programRef": "GCE Advanced Level Physics — current electricity (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Combine resistors in series and parallel and apply Kirchhoff's two laws",
+    "Define emf and internal resistance and use E = V + Ir = I(R + r)",
+    "Determine E and r from a graph of terminal pd against current"
+   ],
+   "prerequisites": [
+    "lower6-physics-resistance"
+   ],
+   "exercises": [
+    "lower6-physics-ch-electricity-e07",
+    "lower6-physics-ch-electricity-e08",
+    "lower6-physics-ch-electricity-e09",
+    "lower6-physics-ch-electricity-e10",
+    "lower6-physics-ch-electricity-e11",
+    "lower6-physics-ch-electricity-e12"
+   ],
+   "selfCheck": [
+    "lower6-physics-circuits-q1",
+    "lower6-physics-circuits-q2",
+    "lower6-physics-circuits-q3",
+    "lower6-physics-circuits-q4",
+    "lower6-physics-circuits-q5"
+   ],
+   "reviewNotes": [
+    "Second law is stated in the 'sum of emfs = sum of IR' form; sign conventions are not developed.",
+    "The maximum-power-transfer theorem is not included.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Resistors in series and parallel",
+     "md": "Series: **R = R₁ + R₂ + …** (same current, voltages add). Parallel: **1/R = 1/R₁ + 1/R₂ + …** (same voltage, currents add; the total is smaller than the smallest resistor).\n\n**Kirchhoff's first law**: the sum of currents entering a junction equals the sum leaving (conservation of charge). **Second law**: around a closed loop, the sum of emfs equals the sum of the potential drops IR (conservation of energy).",
+     "tex": "R_s=R_1+R_2\\qquad \\frac{1}{R_p}=\\frac{1}{R_1}+\\frac{1}{R_2}"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "emf and internal resistance",
+     "md": "The **emf** E of a source is the energy transferred to each coulomb of charge in the source (J C⁻¹), equal to the terminal pd when no current flows. A real source has **internal resistance** r, so with a current I the **terminal pd** is **V = E − Ir** (the term Ir is the 'lost volts').\n\nFor an external resistance R: E = I(R + r). Power delivered to the external circuit = IV; power wasted inside the source = I²r."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "line",
+        "x1": 60.0,
+        "y1": 50,
+        "x2": 130,
+        "y2": 50,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 42,
+        "w": 40,
+        "h": 16,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 28,
+        "text": "4 Ω",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 170,
+        "y1": 50,
+        "x2": 300,
+        "y2": 50,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 50.0,
+        "x2": 60,
+        "y2": 114.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 46,
+        "y1": 116.0,
+        "x2": 74,
+        "y2": 116.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 52,
+        "y1": 124.0,
+        "x2": 68,
+        "y2": 124.0,
+        "color": "ink",
+        "width": 5
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 125.0,
+        "text": "12 V",
+        "size": 13,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 126.0,
+        "x2": 60,
+        "y2": 190,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 60.0,
+        "y1": 190,
+        "x2": 300,
+        "y2": 190,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 50.0,
+        "x2": 200,
+        "y2": 100.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 192,
+        "y": 100.0,
+        "w": 16,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 125.0,
+        "text": "6 Ω",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 140.0,
+        "x2": 200,
+        "y2": 190,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 50.0,
+        "x2": 300,
+        "y2": 100.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 292,
+        "y": 100.0,
+        "w": 16,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 125.0,
+        "text": "3 Ω",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 140.0,
+        "x2": 300,
+        "y2": 190,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 50,
+        "r": 3.5,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 190,
+        "r": 3.5,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "ink"
+       }
+      ]
+     },
+     "caption": "A 12 V cell, a 4 Ω resistor in series with 6 Ω and 3 Ω resistors in parallel.",
+     "alt": "A circuit diagram with a cell on the left, a resistor on the top wire and two resistors in parallel branches on the right."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Method for circuits",
+     "md": "1. Simplify parallel groups, then series, to find the total resistance (including r).\n2. Find the main current I = E/(R_total).\n3. Work back: pd across a parallel group = I × R_group, then the current in each branch = V/R.\n4. Check: the currents at a junction add up and Σ IR = E around the loop."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Forgetting the internal resistance when finding the current.\n- Adding resistors in parallel with the series formula (or taking 1/R instead of R).\n- Assuming the terminal pd equals E while the cell is delivering current.\n- Voltage and current meters: an ideal ammeter is in series (low resistance), an ideal voltmeter in parallel (very high resistance)."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Series–parallel circuit",
+     "statement": "A 12 V battery of negligible internal resistance supplies a 4 Ω resistor in series with a 6 Ω resistor in parallel with a 3 Ω resistor. Find the main current and the current in each parallel resistor.",
+     "steps": [
+      "Parallel: 6 × 3 ÷ (6 + 3) = 2 Ω. Total R = 4 + 2 = 6 Ω.",
+      "Main current I = 12/6 = 2.0 A; pd across the parallel group = 2.0 × 2 = 4.0 V.",
+      "Currents: 4.0/6 = 0.67 A and 4.0/3 = 1.33 A (sum = 2.0 A ✓)."
+     ],
+     "answer": "I = 2.0 A; 0.67 A and 1.33 A in the 6 Ω and 3 Ω resistors"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — A real battery",
+     "statement": "A battery of emf 12.0 V and internal resistance 0.50 Ω is connected to a 5.5 Ω resistor. Find the current, the terminal pd and the lost volts.",
+     "steps": [
+      "I = E/(R + r) = 12.0/(5.5 + 0.50) = 2.0 A.",
+      "Terminal pd V = IR = 2.0 × 5.5 = 11.0 V.",
+      "Lost volts = Ir = 2.0 × 0.50 = 1.0 V (E = V + Ir: 12.0 = 11.0 + 1.0 ✓)."
+     ],
+     "answer": "I = 2.0 A, V = 11.0 V, lost volts = 1.0 V"
+    }
+   ],
+   "chapter": "lower6-physics-ch-electricity"
+  },
+  {
+   "id": "lower6-physics-divider",
+   "title": "Potential dividers and the potentiometer",
+   "minutes": 30,
+   "programRef": "GCE Advanced Level Physics — current electricity (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Use the potential-divider formula V_out = V·R₂/(R₁ + R₂) and explain the effect of loading",
+    "Describe how an LDR or thermistor in a divider makes a sensor circuit",
+    "Use a potentiometer to compare emfs and to measure an internal resistance"
+   ],
+   "prerequisites": [
+    "lower6-physics-circuits"
+   ],
+   "exercises": [
+    "lower6-physics-ch-electricity-e13",
+    "lower6-physics-ch-electricity-e14",
+    "lower6-physics-ch-electricity-e15",
+    "lower6-physics-ch-electricity-e16",
+    "lower6-physics-ch-electricity-e17",
+    "lower6-physics-ch-electricity-e18"
+   ],
+   "selfCheck": [
+    "lower6-physics-divider-q1",
+    "lower6-physics-divider-q2",
+    "lower6-physics-divider-q3",
+    "lower6-physics-divider-q4",
+    "lower6-physics-divider-q5"
+   ],
+   "reviewNotes": [
+    "The ideal-meter assumptions are used throughout.",
+    "The galvanometer is shown with the symbol G; whether the board expects a protective resistor is not stated.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Potential divider",
+     "md": "Two resistors R₁ and R₂ in series across a supply V share it in proportion to their resistances: the pd across R₂ is **V_out = V × R₂/(R₁ + R₂)**.\n\nA **load** connected across R₂ is in parallel with it, reducing the effective R₂ and so V_out. A load of high resistance compared with R₂ has little effect.",
+     "tex": "V_{out}=V\\,\\frac{R_2}{R_1+R_2}"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Sensor circuits",
+     "md": "A **light-dependent resistor (LDR)** has a resistance that falls as the light intensity rises; a **thermistor (NTC)** has a resistance that falls as the temperature rises. Placed in a divider with a fixed resistor, they make the output voltage change with light or temperature (for example to switch on a security light at night)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 250,
+      "items": [
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 150,
+        "x2": 340,
+        "y2": 150,
+        "color": "ink",
+        "width": 5
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 172,
+        "text": "A",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 340,
+        "y": 172,
+        "text": "B",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 150.0,
+        "x2": 60,
+        "y2": 220,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 60.0,
+        "y1": 220,
+        "x2": 194.0,
+        "y2": 220,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 196.0,
+        "y1": 206,
+        "x2": 196.0,
+        "y2": 234,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 204.0,
+        "y1": 212,
+        "x2": 204.0,
+        "y2": 228,
+        "color": "ink",
+        "width": 5
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 252,
+        "text": "driver cell",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 206.0,
+        "y1": 220,
+        "x2": 340,
+        "y2": 220,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 340,
+        "y1": 220.0,
+        "x2": 340,
+        "y2": 150,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 150.0,
+        "x2": 60,
+        "y2": 70,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 60.0,
+        "y1": 70,
+        "x2": 99.0,
+        "y2": 70,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 101.0,
+        "y1": 56,
+        "x2": 101.0,
+        "y2": 84,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 109.0,
+        "y1": 62,
+        "x2": 109.0,
+        "y2": 78,
+        "color": "ink",
+        "width": 5
+       },
+       {
+        "t": "text",
+        "x": 105.0,
+        "y": 48,
+        "text": "E",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 111.0,
+        "y1": 70,
+        "x2": 159.5,
+        "y2": 70,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 172.5,
+        "cy": 70,
+        "r": 13,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 172.5,
+        "y": 75,
+        "text": "G",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 185.5,
+        "y1": 70,
+        "x2": 210,
+        "y2": 70,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 70,
+        "x2": 210,
+        "y2": 145,
+        "color": "red",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 228,
+        "y": 108,
+        "text": "jockey",
+        "size": 12,
+        "anchor": "start",
+        "color": "red"
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 188,
+        "x2": 210,
+        "y2": 188,
+        "color": "blue",
+        "width": 2,
+        "arrow": "both"
+       },
+       {
+        "t": "text",
+        "x": 135,
+        "y": 204,
+        "text": "l",
+        "size": 14,
+        "anchor": "middle",
+        "color": "blue"
+       }
+      ]
+     },
+     "caption": "A potentiometer: a test cell and galvanometer are connected from A to the jockey touching the wire AB.",
+     "alt": "A long resistance wire AB with a driver cell below it and a test cell with galvanometer connected from end A to a sliding jockey on the wire."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "The potentiometer",
+     "md": "A uniform resistance wire AB is connected to a driver cell, so the pd along the wire is proportional to length. A cell of emf E₁ is connected through a galvanometer to a jockey; at the **balance (null) point** no current flows in the cell, so the pd across length l₁ equals E₁.\n\nComparing emfs: **E₁/E₂ = l₁/l₂**. Internal resistance: with a resistor R across the cell the balance length falls to l₂: **r = R(l₁ − l₂)/l₂**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Forgetting that a voltmeter or load in parallel lowers the output of a divider.\n- Using the length of the wire in cm in one place and m in another (ratios are fine in the same unit).\n- Believing that the potentiometer draws current at balance: it does not, which is why it measures the true emf.\n- The driver cell must have a larger emf than the cells being measured."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Dividers",
+     "statement": "A 9.0 V supply is connected across a 6.0 kΩ and a 3.0 kΩ resistor in series. Find the pd across the 3.0 kΩ resistor, and then when a 3.0 kΩ load is connected across it.",
+     "steps": [
+      "V_out = 9.0 × 3.0/(6.0 + 3.0) = 3.0 V.",
+      "With the load, the 3.0 kΩ in parallel with 3.0 kΩ is 1.5 kΩ.",
+      "V_out = 9.0 × 1.5/(6.0 + 1.5) = 1.8 V (loading lowers the output)."
+     ],
+     "answer": "3.0 V unloaded; 1.8 V loaded"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Potentiometer",
+     "statement": "A potentiometer wire is 1.000 m long. A standard cell of 1.50 V balances at 75.0 cm. A test cell balances at 62.5 cm, and at 50.0 cm when a 4.0 Ω resistor is connected across it. Find its emf and internal resistance.",
+     "steps": [
+      "E₁ = 1.50 × 62.5/75.0 = 1.25 V.",
+      "With R across the cell: r = R(l₁ − l₂)/l₂ = 4.0 × (62.5 − 50.0)/50.0 = 1.0 Ω."
+     ],
+     "answer": "E = 1.25 V, r = 1.0 Ω"
+    }
+   ],
+   "chapter": "lower6-physics-ch-electricity"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "lower6-physics-ch-electricity-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-physics-resistance",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A current of 0.50 A flows for 2.0 minutes. How much charge passes (C)?",
+   "answer": 60.0,
+   "tolerance": 0.1,
+   "unit": "C",
+   "explanation": "Q = It = 0.50 × 120 = 60 C.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-physics-ch-electricity"
+  },
+  {
+   "id": "lower6-physics-ch-electricity-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-physics-resistance",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A 2.2 kW kettle runs on 220 V. Find the current (A).",
+   "answer": 10.0,
+   "tolerance": 0.05,
+   "unit": "A",
+   "explanation": "I = P/V = 2200/220 = 10 A.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-physics-ch-electricity"
+  },
+  {
+   "id": "lower6-physics-ch-electricity-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-physics-resistance",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "True or false: a filament lamp obeys Ohm's law.",
+   "answer": false,
+   "explanation": "Its resistance increases with temperature, so I is not proportional to V (although V = IR still defines R at each point).",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-physics-ch-electricity"
+  },
+  {
+   "id": "lower6-physics-ch-electricity-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-physics-resistance",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A resistor of resistance 22 Ω carries 10 A. Find the energy dissipated in 30 minutes (kW h, 3 s.f.).",
+   "answer": 1.1,
+   "tolerance": 0.01,
+   "unit": "kW h",
+   "explanation": "P = I²R = 2200 W = 2.2 kW; energy = 2.2 × 0.5 h = 1.10 kW h.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-physics-ch-electricity"
+  },
+  {
+   "id": "lower6-physics-ch-electricity-e05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-physics-resistance",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A wire of resistance 4.0 Ω is stretched to twice its length (same volume). Find the new resistance (Ω).",
+   "answer": 16.0,
+   "tolerance": 0.1,
+   "unit": "Ω",
+   "explanation": "L doubles and A halves, so R = ρL/A is multiplied by 4: 16 Ω.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-physics-ch-electricity"
+  },
+  {
+   "id": "lower6-physics-ch-electricity-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-physics-resistance",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A heating element is made from nichrome wire of resistivity 1.1 × 10⁻⁶ Ω m, length 1.5 m and cross-sectional area 2.0 × 10⁻⁷ m². It is connected to a 220 V supply.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the resistance of the wire (Ω, 3 s.f.).",
+     "answer": 8.25,
+     "tolerance": 0.05,
+     "explanation": "R = ρL/A = 1.1 × 10⁻⁶ × 1.5 ÷ 2.0 × 10⁻⁷ = 8.25 Ω.",
+     "unit": "Ω",
+     "id": "lower6-physics-ch-electricity-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the current (A, 3 s.f.).",
+     "answer": 26.7,
+     "tolerance": 0.1,
+     "explanation": "I = V/R = 220/8.25 = 26.7 A.",
+     "unit": "A",
+     "id": "lower6-physics-ch-electricity-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the power dissipated (kW, 3 s.f.).",
+     "answer": 5.87,
+     "tolerance": 0.05,
+     "explanation": "P = V²/R = 48400/8.25 = 5.87 kW.",
+     "unit": "kW",
+     "id": "lower6-physics-ch-electricity-e06-c"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "If the wire is replaced by one of half the length, the power",
+     "choices": [
+      "stays the same",
+      "doubles",
+      "quadruples",
+      "halves"
+     ],
+     "answer": 1,
+     "explanation": "R halves, so P = V²/R doubles.",
+     "id": "lower6-physics-ch-electricity-e06-d"
+    }
+   ],
+   "chapter": "lower6-physics-ch-electricity"
+  },
+  {
+   "id": "lower6-physics-resistance-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-resistance",
+   "prompt": "The unit of resistivity is",
+   "choices": [
+    "Ω m²",
+    "Ω m",
+    "Ω m⁻¹",
+    "Ω"
+   ],
+   "answer": 1,
+   "explanation": "ρ = RA/L.",
+   "chapter": "lower6-physics-ch-electricity"
+  },
+  {
+   "id": "lower6-physics-resistance-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-resistance",
+   "prompt": "One volt equals",
+   "choices": [
+    "one coulomb per joule",
+    "one ampere per ohm",
+    "one joule per coulomb",
+    "one watt per second"
+   ],
+   "answer": 2,
+   "explanation": "V = W/Q.",
+   "chapter": "lower6-physics-ch-electricity"
+  },
+  {
+   "id": "lower6-physics-resistance-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-resistance",
+   "prompt": "Which component has an I–V graph that is not symmetric about the origin?",
+   "choices": [
+    "a metal wire",
+    "filament lamp",
+    "diode",
+    "resistor"
+   ],
+   "answer": 2,
+   "explanation": "A diode conducts in one direction only.",
+   "chapter": "lower6-physics-ch-electricity"
+  },
+  {
+   "id": "lower6-physics-resistance-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-resistance",
+   "prompt": "When the temperature of a metal conductor increases, its resistance",
+   "choices": [
+    "becomes zero",
+    "is unchanged",
+    "increases",
+    "decreases"
+   ],
+   "answer": 2,
+   "explanation": "Lattice vibrations increase and impede electron flow more.",
+   "chapter": "lower6-physics-ch-electricity"
+  },
+  {
+   "id": "lower6-physics-resistance-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-resistance",
+   "prompt": "A 60 W bulb works on 220 V. The current is about",
+   "choices": [
+    "3.7 A",
+    "13 A",
+    "0.0045 A",
+    "0.27 A"
+   ],
+   "answer": 3,
+   "explanation": "I = P/V = 60/220 = 0.27 A.",
+   "chapter": "lower6-physics-ch-electricity"
+  },
+  {
+   "id": "lower6-physics-ch-electricity-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-physics-circuits",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Find the resistance of 10 Ω and 15 Ω in parallel (Ω).",
+   "answer": 6.0,
+   "tolerance": 0.05,
+   "unit": "Ω",
+   "explanation": "10 × 15 ÷ 25 = 6.0 Ω.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-physics-ch-electricity"
+  },
+  {
+   "id": "lower6-physics-ch-electricity-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-physics-circuits",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A 6.0 V cell of internal resistance 1.0 Ω drives 2.0 A through a resistor. Find the terminal pd (V).",
+   "answer": 4.0,
+   "tolerance": 0.05,
+   "unit": "V",
+   "explanation": "V = E − Ir = 6.0 − 2.0 × 1.0 = 4.0 V.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-physics-ch-electricity"
+  },
+  {
+   "id": "lower6-physics-ch-electricity-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-physics-circuits",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "True or false: three 6 Ω resistors in parallel have a total resistance of 18 Ω.",
+   "answer": false,
+   "explanation": "In parallel: 1/R = 3/6 so R = 2 Ω. (Series would give 18 Ω.)",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-physics-ch-electricity"
+  },
+  {
+   "id": "lower6-physics-ch-electricity-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-physics-circuits",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "In the circuit of Example 1, find the total power supplied by the 12 V battery (W).",
+   "answer": 24.0,
+   "tolerance": 0.1,
+   "unit": "W",
+   "explanation": "P = EI = 12 × 2.0 = 24 W.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-physics-ch-electricity"
+  },
+  {
+   "id": "lower6-physics-ch-electricity-e11",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-physics-circuits",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A cell has emf 1.5 V and the terminal pd falls to 1.2 V when it supplies 0.60 A. Find its internal resistance (Ω).",
+   "answer": 0.5,
+   "tolerance": 0.005,
+   "unit": "Ω",
+   "explanation": "r = (E − V)/I = 0.30/0.60 = 0.50 Ω.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-physics-ch-electricity"
+  },
+  {
+   "id": "lower6-physics-ch-electricity-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-physics-circuits",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A battery of emf 9.0 V and internal resistance 1.0 Ω is connected to a 4.0 Ω resistor in parallel with a 12 Ω resistor.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Total external resistance (Ω).",
+     "answer": 3.0,
+     "tolerance": 0.05,
+     "explanation": "4 × 12 ÷ 16 = 3.0 Ω.",
+     "unit": "Ω",
+     "id": "lower6-physics-ch-electricity-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Current supplied by the battery (A).",
+     "answer": 2.25,
+     "tolerance": 0.005,
+     "explanation": "I = E/(R + r) = 9.0/4.0 = 2.25 A.",
+     "unit": "A",
+     "id": "lower6-physics-ch-electricity-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Terminal pd (V).",
+     "answer": 6.75,
+     "tolerance": 0.01,
+     "explanation": "V = IR = 2.25 × 3.0 = 6.75 V.",
+     "unit": "V",
+     "id": "lower6-physics-ch-electricity-e12-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Current in the 4.0 Ω resistor (A, 3 s.f.).",
+     "answer": 1.69,
+     "tolerance": 0.01,
+     "explanation": "I = V/R = 6.75/4.0 = 1.69 A.",
+     "unit": "A",
+     "id": "lower6-physics-ch-electricity-e12-d"
+    }
+   ],
+   "chapter": "lower6-physics-ch-electricity"
+  },
+  {
+   "id": "lower6-physics-circuits-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-circuits",
+   "prompt": "Which is the correct expression for terminal pd of a cell that delivers a current?",
+   "choices": [
+    "V = Ir",
+    "V = E/Ir",
+    "V = E + Ir",
+    "V = E − Ir"
+   ],
+   "answer": 3,
+   "explanation": "Part of the emf is 'lost' across the internal resistance.",
+   "chapter": "lower6-physics-ch-electricity"
+  },
+  {
+   "id": "lower6-physics-circuits-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-circuits",
+   "prompt": "Kirchhoff's first law expresses conservation of",
+   "choices": [
+    "momentum",
+    "charge",
+    "energy",
+    "mass"
+   ],
+   "answer": 1,
+   "explanation": "Charge entering a junction equals charge leaving.",
+   "chapter": "lower6-physics-ch-electricity"
+  },
+  {
+   "id": "lower6-physics-circuits-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-circuits",
+   "prompt": "Two identical resistors of 8 Ω in parallel have a resistance of",
+   "choices": [
+    "2 Ω",
+    "8 Ω",
+    "4 Ω",
+    "16 Ω"
+   ],
+   "answer": 2,
+   "explanation": "R/2 for two equal resistors.",
+   "chapter": "lower6-physics-ch-electricity"
+  },
+  {
+   "id": "lower6-physics-circuits-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-circuits",
+   "prompt": "An ideal voltmeter has",
+   "choices": [
+    "a resistance of 1 Ω",
+    "zero resistance",
+    "resistance equal to the circuit",
+    "infinite resistance"
+   ],
+   "answer": 3,
+   "explanation": "It must not draw current from the circuit.",
+   "chapter": "lower6-physics-ch-electricity"
+  },
+  {
+   "id": "lower6-physics-circuits-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-circuits",
+   "prompt": "A graph of terminal pd V against current I for a cell has a gradient of",
+   "choices": [
+    "−E",
+    "−r",
+    "+r",
+    "+E"
+   ],
+   "answer": 1,
+   "explanation": "V = E − Ir: intercept E, gradient −r.",
+   "chapter": "lower6-physics-ch-electricity"
+  },
+  {
+   "id": "lower6-physics-ch-electricity-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-physics-divider",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A 12 V supply is across 8.0 kΩ and 4.0 kΩ in series. Find the pd across the 4.0 kΩ resistor (V).",
+   "answer": 4.0,
+   "tolerance": 0.05,
+   "unit": "V",
+   "explanation": "V = 12 × 4.0/12.0 = 4.0 V.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-physics-ch-electricity"
+  },
+  {
+   "id": "lower6-physics-ch-electricity-e14",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-physics-divider",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A cell balances at 40.0 cm on a potentiometer wire. A 1.50 V standard cell balances at 60.0 cm. Find the emf of the first cell (V).",
+   "answer": 1.0,
+   "tolerance": 0.01,
+   "unit": "V",
+   "explanation": "E = 1.50 × 40.0/60.0 = 1.00 V.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-physics-ch-electricity"
+  },
+  {
+   "id": "lower6-physics-ch-electricity-e15",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-physics-divider",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "True or false: at the balance point of a potentiometer, current flows through the cell being tested.",
+   "answer": false,
+   "explanation": "At balance the galvanometer reads zero, so no current flows in the cell: it measures the true emf.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-physics-ch-electricity"
+  },
+  {
+   "id": "lower6-physics-ch-electricity-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-physics-divider",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "In a light-sensing divider, an LDR (100 kΩ in the dark, 1.0 kΩ in bright light) is connected in series with a 10 kΩ resistor across 9.0 V. Find the pd across the 10 kΩ resistor in bright light (V, 3 s.f.).",
+   "answer": 8.18,
+   "tolerance": 0.02,
+   "unit": "V",
+   "explanation": "V = 9.0 × 10/(1.0 + 10) = 8.18 V (in the dark it would be only 0.818 V).",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-physics-ch-electricity"
+  },
+  {
+   "id": "lower6-physics-ch-electricity-e17",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-physics-divider",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A cell of emf 1.25 V gives a balance length of 62.5 cm. With a 4.0 Ω resistor across it the balance length is 50.0 cm. Find the internal resistance (Ω).",
+   "answer": 1.0,
+   "tolerance": 0.01,
+   "unit": "Ω",
+   "explanation": "r = R(l₁ − l₂)/l₂ = 4.0 × 12.5/50.0 = 1.0 Ω.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-physics-ch-electricity"
+  },
+  {
+   "id": "lower6-physics-ch-electricity-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-physics-divider",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A thermistor-based fire alarm uses a divider: a 5.0 V supply, a fixed 2.0 kΩ resistor and a thermistor in series. The output is taken across the fixed resistor.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "The thermistor resistance falls from 8.0 kΩ (cool) to 2.0 kΩ (hot). Output pd when cool (V).",
+     "answer": 1.0,
+     "tolerance": 0.01,
+     "explanation": "V = 5.0 × 2.0/10.0 = 1.0 V.",
+     "unit": "V",
+     "id": "lower6-physics-ch-electricity-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Output pd when hot (V).",
+     "answer": 2.5,
+     "tolerance": 0.01,
+     "explanation": "V = 5.0 × 2.0/4.0 = 2.5 V.",
+     "unit": "V",
+     "id": "lower6-physics-ch-electricity-e18-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The output pd rises as the temperature rises because",
+     "choices": [
+      "the current decreases",
+      "the thermistor's resistance falls so it takes a smaller share of the supply",
+      "the fixed resistor's resistance rises",
+      "the supply voltage increases"
+     ],
+     "answer": 1,
+     "explanation": "The thermistor's share falls, so the fixed resistor's share rises.",
+     "id": "lower6-physics-ch-electricity-e18-c"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "The alarm circuit would work equally if the output were taken across the thermistor.",
+     "answer": false,
+     "explanation": "Then the output would fall as the temperature rises (the thermistor's share decreases), so the logic would be reversed.",
+     "id": "lower6-physics-ch-electricity-e18-d"
+    }
+   ],
+   "chapter": "lower6-physics-ch-electricity"
+  },
+  {
+   "id": "lower6-physics-divider-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-divider",
+   "prompt": "The balance (null) point of a potentiometer is where",
+   "choices": [
+    "no current flows through the galvanometer",
+    "the wire is hottest",
+    "the voltage is zero everywhere",
+    "the driver cell is disconnected"
+   ],
+   "answer": 0,
+   "explanation": "The unknown pd equals the wire's pd over length l.",
+   "chapter": "lower6-physics-ch-electricity"
+  },
+  {
+   "id": "lower6-physics-divider-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-divider",
+   "prompt": "Two equal resistors in series across 10 V. The pd across each is",
+   "choices": [
+    "2.5 V",
+    "5 V",
+    "20 V",
+    "10 V"
+   ],
+   "answer": 1,
+   "explanation": "They share equally.",
+   "chapter": "lower6-physics-ch-electricity"
+  },
+  {
+   "id": "lower6-physics-divider-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-divider",
+   "prompt": "A load in parallel with R₂ in a divider makes V_out",
+   "choices": [
+    "decrease",
+    "equal V",
+    "increase",
+    "stay the same"
+   ],
+   "answer": 0,
+   "explanation": "The effective R₂ falls.",
+   "chapter": "lower6-physics-ch-electricity"
+  },
+  {
+   "id": "lower6-physics-divider-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-divider",
+   "prompt": "The resistance of an LDR",
+   "choices": [
+    "falls as light increases",
+    "is constant",
+    "rises as light increases",
+    "is zero in dark"
+   ],
+   "answer": 0,
+   "explanation": "More light frees more charge carriers.",
+   "chapter": "lower6-physics-ch-electricity"
+  },
+  {
+   "id": "lower6-physics-divider-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-divider",
+   "prompt": "In a potentiometer experiment, the driver cell must have",
+   "choices": [
+    "the same emf exactly",
+    "no internal resistance at all",
+    "a larger emf than the cell being tested",
+    "a smaller emf"
+   ],
+   "answer": 2,
+   "explanation": "Otherwise no balance point can be found on the wire.",
+   "chapter": "lower6-physics-ch-electricity"
+  }
+ ]
+}

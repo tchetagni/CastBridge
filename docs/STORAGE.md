@@ -155,3 +155,45 @@ nettoyage des orphelins par volume ; PIN sur toutes les routes nouvelles ; aucun
 **Compromis retenus** : le SAF sans lecture pendant l'envoi (§3) ; le quota explicite réservé à l'interne ; la cible explicite ne se replie **pas** silencieusement (l'utilisateur a choisi) ; une clé au système de fichiers inconnu n'est pas
 écartée mais déclassée pour les gros fichiers ; les `.part` d'une clé absente survivent 7 jours en mémoire de l'app seulement (la liste des `.part` d'un volume absent est en RAM : si l'app redémarre pendant que la clé est absente, un
 nouvel envoi du même nom démarre ailleurs et le `.part` de la clé sera listé comme doublon au retour, `duplicate:true`, supprimable avec `/api/delete?volume=`).
+
+## 9. Données lourdes sur la clé : `Download/CastBridge/` (branche `claude/usb-data`)
+
+**Pourquoi.** Le dossier `Android/data/castbridge.receiver/` d'une clé est effacé par Android à la désinstallation. `Download/` est un dossier public : les
+contenus lourds y survivent. Mesuré sur la TV de référence (Android 14) : l'app peut créer et écrire dans `/storage/<id>/Download/` sans permission. Autres Android (10, 11, 13) : non
+vérifié ; **repli automatique** sur le dossier de l'app sur la clé si l'écriture est refusée (`AndroidVolumeProvider`, test d'écriture réel).
+
+**Disposition** (`UsbLayout`) : `<clé>/Download/CastBridge/` avec `Bibliotheque/` (vidéos et médias reçus : c'est le dossier de la bibliothèque), `Telechargements/` (réservé aria2),
+`Medias/` (futurs lots multimédias lourds, hors budget 10 Mo des lots de données), `index/` (`castbridge-store.json`, `settings.json`).
+La livraison différée de lots (≤ 10 Mo) reste en mémoire interne (choix volontaire : petit, secret éventuel, et la clé peut être absente).
+
+**Politique** (`HeavyStorage.decide`, réglage « Contenus lourds sur la clé USB », oui par défaut) : clé inscriptible présente → la clé (celle choisie, sinon la plus vide) ; sinon mémoire interne
+avec l'avertissement « Aucune clé USB… mémoire interne, qui est petite » ; clé lecture seule ou pleine jamais choisie ; clé lente ou FAT32 : utilisée avec avertissement (FAT32 : 4 Go max, comme §2).
+`POST /api/storage?heavyOnUsb=true|false&heavyDrive=<idDeClé|vide>` ; `GET /api/storage` → bloc additif `heavy` {`enabled`, `where` (`usb`/`internal`), `drive`, `label`, `root` (`Download/CastBridge`, jamais un chemin absolu),
+`free`, `writeBps`, `warnings`, `readopt`}. L'écran « Données » du téléphone (agent `lots-framework`) peut afficher « Contenus lourds : clé USB … » à partir de ce bloc.
+
+**Réadoption** (`UsbReadopt`, `TvService.readopt()`) : au démarrage et à chaque insertion, analyse de `Download/CastBridge/` **uniquement** (profondeur 6, 20 000 entrées, 5 s au plus), jamais le reste de la clé.
+Résultat : fichiers, `.part` reprenables (retrouvés par le registre, repris par le téléphone), doublons (signalés, jamais supprimés), entrées ignorées (liens symboliques, noms invalides, trop profond, exécutables/APK : jamais ouverts ni installés).
+L'index `index/castbridge-store.json` (version de format, id de la clé, date, nombre de fichiers) est écrit de façon atomique (fichier temporaire + `fsync` + renommage) ; absent, trop gros (> 256 Ko), illisible ou d'une version inconnue → reconstruit depuis les fichiers.
+Une date d'avant 2020 (TV sans horloge) n'est pas retenue. La bibliothèque et les dossiers virtuels se relisent depuis les fichiers ; les vignettes sont un cache régénérable.
+
+**Sauvegarde des réglages** (`SafeSettings`, optionnelle, `index/settings.json`) : liste blanche `language, storageProfile, quotaMb, tiles, heavyOnUsb`. Tout autre champ est refusé à l'écriture, et les mots PIN, jeton, SSH, parental, téléphones de confiance, rapports,
+appairage, clé, code, mot de passe sont refusés même s'ils entraient dans la liste (test `noSecretCanBeWrittenToTheDrive`). À la lecture le fichier est filtré de la même façon (taille limitée à 16 Ko) ; il n'est pas appliqué automatiquement.
+
+**Migration** (`UsbMigration`) : « Déplacer les contenus vers la clé » et « Rapatrier » = même moteur dans les deux sens. Copie vers `<nom>.part` (reprise à la taille du `.part`, `fsync`), vérification complète (taille **et** SHA-256) avant le renommage final,
+**jamais** de suppression de la source sans `deleteSources = true` (la confirmation de l'utilisateur), jamais d'écrasement d'un fichier différent (conflit signalé), noms adaptés exFAT/FAT, fichier trop gros pour FAT32 refusé avant la copie, clé retirée = arrêt sans perte.
+Une coupure à n'importe quelle étape (copie, vérification, renommage, suppression) laisse la source intacte et la relance termine (tests `interruptionAtEveryStepLosesNothingAndResumes`).
+**Reste à brancher** : l'écran/la route qui l'appelle avec la confirmation (le moteur et ses tests sont prêts). Les fichiers déjà dans `Android/data/…/videos` de la clé ne sont plus listés quand « clé USB » est activé : ils sont à migrer (mêmes dossiers source/destination) ou à copier à la main.
+
+**Sécurité.** La clé est un support non fiable : rien n'est exécuté ; chaque nom et chemin lu est validé (`UsbPaths` : pas de `..`, ni chemin absolu, ni `\`, caractères interdits, 255 octets, profondeur 8, sortie de la racine par lien symbolique refusée) ; index et réglages lus ont une taille maximale ; rien n'est lu hors de `Download/CastBridge/`.
+
+**Limites connues.** Clé « sale » (exFAT non démonté proprement) : le test d'écriture la classe en lecture seule ou en erreur, l'utilisateur doit la réparer sur un ordinateur. L'horodatage de la TV peut être faux : on ne s'en sert pas pour décider. Clé lente (~1,4 Mo/s mesuré) : écriture en tâche de fond, avertissement. aria2 écrit toujours dans `.cb-downloads` sous `Bibliotheque/` (non déplacé vers `Telechargements/`).
+
+### Protocole de test manuel (TV + clé)
+1. Brancher la clé, ouvrir CastBridge-TV ; `GET /api/storage` → `heavy.where = "usb"`, `heavy.warnings` cohérents (clé lente : avertissement attendu).
+2. Depuis le téléphone, envoyer une vidéo. Sur un ordinateur (ou `adb shell ls /storage/<id>/Download/CastBridge/Bibliotheque/`) : le fichier est là, `index/castbridge-store.json` existe.
+3. Couper l'envoi (retirer la clé en cours d'écriture) : un `.part` reste ; remettre la clé : l'envoi reprend, pas de doublon.
+4. **Désinstaller CastBridge-TV**. Vérifier que `Download/CastBridge/` est toujours sur la clé.
+5. Réinstaller, relancer : `heavy.readopt` indique les fichiers retrouvés ; la vidéo réapparaît dans la bibliothèque (vignette régénérée).
+6. Retirer puis réinsérer la clé : la TV annonce le retrait, la lecture s'arrête ; au retour, nouvelle réadoption.
+7. Régler « Contenus lourds sur la clé USB » sur non : l'envoi suivant va en mémoire interne ; vérifier le repli sans clé (message « Aucune clé USB »).
+8. Si l'écriture dans `Download/` est refusée (autre Android) : la clé reste utilisée dans `Android/data/…` (`heavy.root = null`) : le noter.

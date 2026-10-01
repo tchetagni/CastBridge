@@ -1,0 +1,1831 @@
+{
+ "chapter": "gceal-physics-ch-thermo",
+ "lessons": [
+  {
+   "id": "gceal-physics-thermo",
+   "title": "The first law of thermodynamics and heat engines",
+   "minutes": 35,
+   "programRef": "GCE Advanced Level Physics — thermodynamics, cosmology, semiconductors (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "State the first law Q = ΔU + W and calculate work done by a gas W = pΔV",
+    "Describe isothermal, isobaric, isochoric and adiabatic changes of an ideal gas",
+    "Explain the efficiency of a heat engine and the Carnot limit η = 1 − T_c/T_h"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-physics-ch-thermo-e01",
+    "gceal-physics-ch-thermo-e02",
+    "gceal-physics-ch-thermo-e03",
+    "gceal-physics-ch-thermo-e04",
+    "gceal-physics-ch-thermo-e05",
+    "gceal-physics-ch-thermo-e06"
+   ],
+   "selfCheck": [
+    "gceal-physics-thermo-q1",
+    "gceal-physics-thermo-q2",
+    "gceal-physics-thermo-q3",
+    "gceal-physics-thermo-q4",
+    "gceal-physics-thermo-q5"
+   ],
+   "reviewNotes": [
+    "Convention: W is the work done BY the gas (Q = ΔU + W); some boards use ΔU = Q + W (work done ON the gas) — check the board's convention.",
+    "Carnot efficiency, entropy and γ are probably beyond the core syllabus; flagged for the teacher.",
+    "R = 8.31 J mol⁻¹ K⁻¹.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "First law",
+     "md": "The **first law of thermodynamics** (conservation of energy): **Q = ΔU + W**, where Q is the heat supplied to the gas, ΔU the increase in its internal energy and W the work done **by** the gas. For a gas at constant pressure, **W = pΔV**; in general W is the area under the p–V graph.\n\nFor an ideal monatomic gas ΔU = (3/2)nRΔT (internal energy depends on T only)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Four special changes",
+     "md": "- **Isothermal** (T constant): ΔU = 0, so Q = W; W = nRT ln(V₂/V₁); pV = constant.\n- **Isobaric** (p constant): W = pΔV; Q = (5/2)nRΔT for a monatomic gas.\n- **Isochoric** (V constant): W = 0, so Q = ΔU = (3/2)nRΔT.\n- **Adiabatic** (Q = 0): ΔU = −W; pV^γ = constant with γ = 5/3 for a monatomic gas; the gas cools when it expands.",
+     "tex": "Q=\\Delta U+W\\qquad W=p\\Delta V\\qquad pV^{\\gamma}=\\text{constant}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 1,
+      "xmax": 6,
+      "ymin": 0,
+      "ymax": 20,
+      "grid": 1,
+      "w": 380,
+      "h": 250,
+      "curves": [
+       {
+        "expr": "12/x",
+        "color": "blue",
+        "label": "isothermal"
+       },
+       {
+        "expr": "6*(2/x)^1.667",
+        "color": "red",
+        "label": "adiabatic"
+       }
+      ],
+      "points": [
+       {
+        "x": 2,
+        "y": 6,
+        "label": "start",
+        "color": "ink"
+       }
+      ],
+      "segments": [],
+      "xlabel": "V",
+      "ylabel": "p"
+     },
+     "caption": "p–V graph: an isothermal curve (pV constant) and a steeper adiabatic curve from the same starting point.",
+     "alt": "Two curves of pressure against volume starting at the same point, the adiabatic one falling more steeply than the isothermal one."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Heat engines",
+     "md": "A **heat engine** takes heat Q_h from a hot reservoir, does work W and rejects heat Q_c to a cold reservoir: **η = W/Q_h = 1 − Q_c/Q_h**. No engine can convert all the heat to work (**second law**). The maximum (Carnot) efficiency for reservoirs at absolute temperatures T_h and T_c is **η = 1 − T_c/T_h**; real engines are less efficient."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Mixing the sign conventions: here W is work done **by** the gas (positive when the gas expands).\n- Using °C in the Carnot efficiency: use kelvin.\n- Thinking the temperature stays constant in an adiabatic change.\n- Forgetting to convert dm³ or cm³ to m³ in W = pΔV."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Expansion at constant pressure",
+     "statement": "A gas at 2.0 × 10⁵ Pa expands from 3.0 × 10⁻³ m³ to 5.0 × 10⁻³ m³ while absorbing 1200 J of heat. Find the work done and the change in internal energy.",
+     "steps": [
+      "W = pΔV = 2.0 × 10⁵ × (5.0 − 3.0) × 10⁻³ = 400 J.",
+      "ΔU = Q − W = 1200 − 400 = 800 J (the internal energy increases, so the gas gets hotter)."
+     ],
+     "answer": "W = 400 J; ΔU = 800 J"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Heating one mole",
+     "statement": "One mole of monatomic gas is heated by 100 K, (a) at constant volume and (b) at constant pressure (R = 8.31 J mol⁻¹ K⁻¹). Find Q in each case and the work in (b).",
+     "steps": [
+      "(a) Q = ΔU = (3/2)RΔT = 1.5 × 8.31 × 100 = 1250 J (1246.5).",
+      "(b) W = pΔV = RΔT = 831 J; ΔU is the same, 1246.5 J.",
+      "Q = ΔU + W = 1246.5 + 831 = 2077.5 J: more heat is needed at constant pressure."
+     ],
+     "answer": "(a) 1.25 kJ; (b) 2.08 kJ with W = 831 J"
+    }
+   ],
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-cosmos",
+   "title": "Stars, redshift and the expanding Universe (to be checked against the syllabus)",
+   "minutes": 30,
+   "programRef": "GCE Advanced Level Physics — thermodynamics, cosmology, semiconductors (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Use the inverse-square law for stellar flux and the Stefan–Boltzmann and Wien laws",
+    "Explain redshift, use z = Δλ/λ ≈ v/c and state Hubble's law v = H₀d",
+    "Describe the evidence for the Big Bang and the expanding Universe"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-physics-ch-thermo-e07",
+    "gceal-physics-ch-thermo-e08",
+    "gceal-physics-ch-thermo-e09",
+    "gceal-physics-ch-thermo-e10",
+    "gceal-physics-ch-thermo-e11",
+    "gceal-physics-ch-thermo-e12"
+   ],
+   "selfCheck": [
+    "gceal-physics-cosmos-q1",
+    "gceal-physics-cosmos-q2",
+    "gceal-physics-cosmos-q3",
+    "gceal-physics-cosmos-q4",
+    "gceal-physics-cosmos-q5"
+   ],
+   "reviewNotes": [
+    "THIS LESSON MAY NOT BE ON THE CAMEROON GCE ADVANCED LEVEL SYLLABUS: it is included as optional enrichment and must be checked by a teacher.",
+    "H₀ ≈ 70 km s⁻¹ Mpc⁻¹ and L_Sun = 3.8 × 10²⁶ W are rounded values. The Hubble plot points are illustrative, not real data.",
+    "Black holes and dark matter are not covered.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Stars as black bodies",
+     "md": "A star of luminosity (power output) L at distance d gives a flux (intensity) **F = L/4πd²** (inverse-square law). A hot body radiates a spectrum with a peak wavelength given by **Wien's law: λ_max T = 2.90 × 10⁻³ m K**; the total power radiated by a star of radius R and surface temperature T is **L = 4πR²σT⁴** (Stefan–Boltzmann; σ = 5.67 × 10⁻⁸ W m⁻² K⁻⁴)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Redshift and Hubble's law",
+     "md": "Light from receding sources is shifted to longer wavelengths (**Doppler redshift**): z = Δλ/λ ≈ v/c for v ≪ c. Distant galaxies show redshifts proportional to their distance: **Hubble's law v = H₀d** with H₀ ≈ 70 km s⁻¹ Mpc⁻¹ (1 Mpc ≈ 3.09 × 10¹⁹ km). This means that space itself is expanding.\n\nThe quantity 1/H₀ gives an estimate of the age of the Universe (about 1.4 × 10¹⁰ years).",
+     "tex": "F=\\frac{L}{4\\pi d^{2}}\\quad L=4\\pi R^{2}\\sigma T^{4}\\quad v=H_0d"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 100,
+      "ymin": 0,
+      "ymax": 8000,
+      "grid": 20,
+      "w": 400,
+      "h": 250,
+      "curves": [
+       {
+        "expr": "70*x",
+        "color": "blue"
+       }
+      ],
+      "points": [
+       {
+        "x": 20,
+        "y": 1500,
+        "label": null,
+        "color": "red"
+       },
+       {
+        "x": 40,
+        "y": 2700,
+        "label": null,
+        "color": "red"
+       },
+       {
+        "x": 60,
+        "y": 4300,
+        "label": null,
+        "color": "red"
+       },
+       {
+        "x": 80,
+        "y": 5500,
+        "label": null,
+        "color": "red"
+       },
+       {
+        "x": 100,
+        "y": 7100,
+        "label": null,
+        "color": "red"
+       }
+      ],
+      "segments": [],
+      "xlabel": "distance / Mpc",
+      "ylabel": "v / km s⁻¹"
+     },
+     "caption": "Hubble's law: recession velocity against distance for galaxies (illustrative points, line v = 70d).",
+     "alt": "A scatter of points close to a straight line through the origin showing velocity increasing with distance."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Evidence for the Big Bang",
+     "md": "The Universe began in a hot, dense state about 14 billion years ago and has been expanding and cooling. Evidence: (1) the **redshift of galaxies**; (2) the **cosmic microwave background** radiation, a nearly uniform glow at about 2.7 K; (3) the observed proportions of hydrogen and helium. Values such as H₀ are still being refined and different methods give slightly different values."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Forgetting to convert km and Mpc to a common unit when finding the age (1/H₀).\n- Using °C for the temperature in Wien's or Stefan–Boltzmann law: use kelvin.\n- Thinking galaxies move away from a centre: every observer sees others receding.\n- Assuming the redshift is caused by the light being 'tired': it is due to the expansion of space."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — The Sun",
+     "statement": "The Sun's luminosity is 3.8 × 10²⁶ W. (a) Find the flux at the Earth (1.5 × 10¹¹ m). (b) The peak wavelength of sunlight is about 500 nm: find the surface temperature, then the radius of the Sun.",
+     "steps": [
+      "(a) F = L/4πd² = 3.8 × 10²⁶ ÷ (4π × (1.5 × 10¹¹)²) = 1.34 × 10³ W m⁻².",
+      "(b) T = 2.90 × 10⁻³ ÷ 5.0 × 10⁻⁷ = 5800 K.",
+      "R = √(L/(4πσT⁴)) = √(3.8 × 10²⁶ ÷ (4π × 5.67 × 10⁻⁸ × 5800⁴)) = 6.9 × 10⁸ m."
+     ],
+     "answer": "1.34 × 10³ W/m²; 5800 K; 6.9 × 10⁸ m"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — A distant galaxy",
+     "statement": "A galaxy's light has Δλ/λ = 0.010. Find its recession speed and its distance (c = 3.00 × 10⁵ km/s, H₀ = 70 km s⁻¹ Mpc⁻¹).",
+     "steps": [
+      "v = zc = 0.010 × 3.00 × 10⁵ = 3.0 × 10³ km/s.",
+      "d = v/H₀ = 3000/70 = 43 Mpc."
+     ],
+     "answer": "v = 3.0 × 10³ km/s; d ≈ 43 Mpc"
+    }
+   ],
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-electronics",
+   "title": "Semiconductors, diodes and operational amplifiers",
+   "minutes": 35,
+   "programRef": "GCE Advanced Level Physics — thermodynamics, cosmology, semiconductors (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe intrinsic and extrinsic (n-type, p-type) semiconductors and the action of a p–n junction diode, including the LED",
+    "Use the ideal op-amp rules for inverting and non-inverting amplifiers",
+    "Describe a transistor or logic gate as a switch (qualitative)"
+   ],
+   "prerequisites": [
+    "gceal-physics-ac"
+   ],
+   "exercises": [
+    "gceal-physics-ch-thermo-e13",
+    "gceal-physics-ch-thermo-e14",
+    "gceal-physics-ch-thermo-e15",
+    "gceal-physics-ch-thermo-e16",
+    "gceal-physics-ch-thermo-e17",
+    "gceal-physics-ch-thermo-e18"
+   ],
+   "selfCheck": [
+    "gceal-physics-electronics-q1",
+    "gceal-physics-electronics-q2",
+    "gceal-physics-electronics-q3",
+    "gceal-physics-electronics-q4",
+    "gceal-physics-electronics-q5"
+   ],
+   "reviewNotes": [
+    "Transistor and logic-gate content is only qualitative and may be examined differently; band theory is simplified.",
+    "Op-amp lessons may be outside the board's syllabus at this level: check.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Semiconductors and the diode",
+     "md": "In a **semiconductor** (silicon, germanium) the resistance falls as the temperature rises, because more charge carriers are released. **Doping** adds impurities: **n-type** (extra electrons, e.g. phosphorus) and **p-type** (extra 'holes', e.g. boron).\n\nA **p–n junction** has a **depletion layer**. Forward-biased (p to +), it conducts above about 0.6 V (silicon); reverse-biased it conducts almost nothing. Applications: rectifiers; **light-emitting diodes** emit photons of energy about equal to the band gap (E = hc/λ)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "The ideal operational amplifier",
+     "md": "An **op-amp** has two inputs (− inverting, + non-inverting) and one output. Ideal properties: infinite open-loop gain, infinite input resistance, zero output resistance. With negative feedback the two inputs are at the **same potential**, and no current enters the inputs.\n\n**Inverting amplifier**: V_out = −(R_f/R_in)V_in. **Non-inverting amplifier**: V_out = (1 + R_f/R₁)V_in. The output cannot exceed the supply rails: it **saturates**.",
+     "tex": "V_{out}=-\\frac{R_f}{R_{in}}V_{in}\\qquad V_{out}=\\left(1+\\frac{R_f}{R_1}\\right)V_{in}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 230,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         170,
+         80,
+         170,
+         180,
+         280,
+         130
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true
+       },
+       {
+        "t": "text",
+        "x": 182,
+        "y": 108,
+        "text": "−",
+        "size": 18,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 182,
+        "y": 160,
+        "text": "+",
+        "size": 16,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 40.0,
+        "y1": 100,
+        "x2": 85.0,
+        "y2": 100,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 85.0,
+        "y": 92,
+        "w": 40,
+        "h": 16,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 105.0,
+        "y": 78,
+        "text": "R_in",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 125.0,
+        "y1": 100,
+        "x2": 170,
+        "y2": 100,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 170.0,
+        "y1": 160,
+        "x2": 130,
+        "y2": 160,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 160.0,
+        "x2": 130,
+        "y2": 190,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 115,
+        "y1": 190,
+        "x2": 145,
+        "y2": 190,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 122,
+        "y1": 197,
+        "x2": 138,
+        "y2": 197,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 280.0,
+        "y1": 130,
+        "x2": 360,
+        "y2": 130,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 320,
+        "y1": 130.0,
+        "x2": 320,
+        "y2": 50,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 320.0,
+        "y1": 50,
+        "x2": 237.5,
+        "y2": 50,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 197.5,
+        "y": 42,
+        "w": 40,
+        "h": 16,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 217.5,
+        "y": 28,
+        "text": "R_f",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 197.5,
+        "y1": 50,
+        "x2": 115,
+        "y2": 50,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 115,
+        "y1": 50.0,
+        "x2": 115,
+        "y2": 100,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 115,
+        "cy": 100,
+        "r": 3.5,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 320,
+        "cy": 130,
+        "r": 3.5,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "ink"
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 90,
+        "text": "V_in",
+        "size": 13,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 365,
+        "y": 134,
+        "text": "V_out",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "An inverting op-amp amplifier: V_out = −(R_f/R_in)V_in.",
+     "alt": "A triangular amplifier symbol with an input resistor to the inverting input, a feedback resistor from the output back to that input, and the non-inverting input earthed."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Switching circuits",
+     "md": "A **transistor** (npn) acts as a switch: when the base–emitter voltage exceeds about 0.6 V the collector–emitter path conducts and a relay, lamp or buzzer in the collector circuit can be switched on. A potential divider with an LDR or thermistor can supply the base voltage (light- or temperature-operated switch). **Logic gates** (AND, OR, NOT, NAND, NOR) process digital signals (0 or 1); NOT gives the opposite of its input."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Forgetting the series resistor for an LED: without it the current is too high.\n- Using the inverting formula without the minus sign.\n- Ignoring saturation: the output can never be larger than the supply voltage.\n- Thinking current flows into an ideal op-amp input."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — An LED",
+     "statement": "A red LED emits light of wavelength 650 nm. Estimate the energy gap. The LED needs 2.0 V and 20 mA from a 5.0 V supply: find the series resistor.",
+     "steps": [
+      "E = hc/λ = 6.63 × 10⁻³⁴ × 3.00 × 10⁸ ÷ 6.50 × 10⁻⁷ = 3.06 × 10⁻¹⁹ J = 1.91 eV.",
+      "The resistor takes 5.0 − 2.0 = 3.0 V at 0.020 A: R = 3.0/0.020 = 150 Ω."
+     ],
+     "answer": "E ≈ 1.9 eV; R = 150 Ω"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Amplifiers",
+     "statement": "An inverting amplifier has R_in = 10 kΩ and R_f = 100 kΩ. Find V_out for V_in = +0.30 V. What would a non-inverting amplifier with R₁ = 10 kΩ and R_f = 90 kΩ give for the same input?",
+     "steps": [
+      "Inverting: V_out = −(100/10) × 0.30 = −3.0 V.",
+      "Non-inverting: gain = 1 + 90/10 = 10, so V_out = 10 × 0.30 = 3.0 V."
+     ],
+     "answer": "−3.0 V (inverting); +3.0 V (non-inverting)"
+    }
+   ],
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-practical",
+   "title": "Practical skills and data analysis",
+   "minutes": 35,
+   "programRef": "GCE Advanced Level Physics — thermodynamics, cosmology, semiconductors (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Plan an investigation: identify independent, dependent and control variables, choose apparatus and reduce uncertainty",
+    "Linearise relationships (y = mx + c) and find physical quantities from gradients and intercepts, with uncertainties",
+    "Evaluate an experiment: sources of error and improvements"
+   ],
+   "prerequisites": [
+    "gceal-physics-radioactivity"
+   ],
+   "exercises": [
+    "gceal-physics-ch-thermo-e19",
+    "gceal-physics-ch-thermo-e20",
+    "gceal-physics-ch-thermo-e21",
+    "gceal-physics-ch-thermo-e22",
+    "gceal-physics-ch-thermo-e23",
+    "gceal-physics-ch-thermo-e24"
+   ],
+   "selfCheck": [
+    "gceal-physics-practical-q1",
+    "gceal-physics-practical-q2",
+    "gceal-physics-practical-q3",
+    "gceal-physics-practical-q4",
+    "gceal-physics-practical-q5"
+   ],
+   "reviewNotes": [
+    "The graphs shown use generated data with t½ = 20 min exactly; real data would scatter.",
+    "The board's practical assessment (continuous assessment, practical examination) format is not described; check.",
+    "Instrument precision values are typical (micrometer 0.01 mm, vernier 0.1 mm).",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Planning",
+     "md": "In a good investigation you state the **independent variable** (changed), the **dependent variable** (measured) and the **control variables** (kept constant). Plan to take a **range** of at least five values, repeat readings, choose instruments of suitable precision (micrometer 0.01 mm for wire diameter, vernier caliper 0.1 mm or better, stopwatch for **many** oscillations to reduce reaction-time error), and include a safety consideration."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Linearising a relationship",
+     "md": "Rearrange the equation into **y = mx + c** so that a straight-line graph gives the unknown from the gradient m or intercept c:\n\n- T = 2π√(l/g) → plot **T² against l**: gradient = 4π²/g.\n- N = N₀e^(−λt) → plot **ln N against t**: gradient = −λ.\n- y = kxⁿ → plot **lg y against lg x**: gradient = n, intercept = lg k.\n- V = E − Ir → plot V against I: intercept E, gradient −r."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 4,
+      "ymin": 5,
+      "ymax": 7,
+      "grid": 1,
+      "w": 380,
+      "h": 240,
+      "curves": [],
+      "points": [
+       {
+        "x": 0.0,
+        "y": 6.684611727667927,
+        "label": null,
+        "color": "blue"
+       },
+       {
+        "x": 1.0,
+        "y": 6.338038137387954,
+        "label": null,
+        "color": "blue"
+       },
+       {
+        "x": 2.0,
+        "y": 5.991464547107982,
+        "label": null,
+        "color": "blue"
+       },
+       {
+        "x": 3.0,
+        "y": 5.644890956828009,
+        "label": null,
+        "color": "blue"
+       },
+       {
+        "x": 4.0,
+        "y": 5.298317366548036,
+        "label": null,
+        "color": "blue"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 0,
+        "y1": 6.684611727667927,
+        "x2": 4,
+        "y2": 5.298317366548036,
+        "color": "red",
+        "dash": false
+       }
+      ],
+      "xlabel": "t / 10 min",
+      "ylabel": "ln A"
+     },
+     "caption": "Linearised decay data: ln A against t gives a straight line of gradient −λ.",
+     "alt": "Five points on a downward sloping straight line of the natural logarithm of count rate against time."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Graphs and uncertainty",
+     "md": "Choose scales that fill more than half the graph, label axes with quantities **and units**, plot points accurately, draw a best-fit line with points balanced above and below. Find the gradient using a **large triangle** on the line (not data points). The uncertainty in the gradient comes from the steepest and shallowest acceptable lines: Δm = ½(m_max − m_min). Use percentage uncertainties to decide which measurement limits accuracy."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Calculating the gradient from two data points that are close together.\n- Forgetting units on axis labels or in the gradient.\n- Calling an unavoidable random scatter a 'human error': name the specific source (for example, reaction time when starting the stopwatch).\n- Changing more than one variable at a time."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — g from a pendulum",
+     "statement": "A student measures the period T for lengths l = 0.20 to 1.00 m and plots T² against l. T² = 0.81 s² at 0.20 m and 4.04 s² at 1.00 m (two points on the best-fit line). Find g.",
+     "steps": [
+      "Gradient = (4.04 − 0.81)/(1.00 − 0.20) = 4.04 s² m⁻¹.",
+      "T² = (4π²/g) l, so g = 4π²/gradient = 39.48/4.04 = 9.77 m s⁻²."
+     ],
+     "answer": "g = 9.8 m s⁻² (to 2 s.f.)"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Half-life by a straight line",
+     "statement": "Corrected count rates fall from 800 to 200 counts/min in 40 min. A graph of ln A against t has a gradient of −0.0347 min⁻¹ . Find the half-life.",
+     "steps": [
+      "ln A = ln A₀ − λt, so the gradient is −λ and λ = 0.0347 min⁻¹.",
+      "t½ = ln 2/λ = 0.693/0.0347 = 20.0 min (check: 800 → 400 → 200 in two half-lives of 20 min)."
+     ],
+     "answer": "t½ = 20 min"
+    }
+   ],
+   "chapter": "gceal-physics-ch-thermo"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceal-physics-ch-thermo-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-physics-thermo",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A gas expands at a constant pressure of 1.5 × 10⁵ Pa by 4.0 × 10⁻³ m³. Find the work done by the gas (J).",
+   "answer": 600.0,
+   "tolerance": 1,
+   "unit": "J",
+   "explanation": "W = pΔV = 1.5 × 10⁵ × 4.0 × 10⁻³ = 600 J.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-ch-thermo-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-physics-thermo",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "An engine takes 800 J from the hot reservoir and rejects 500 J. Find the efficiency (%).",
+   "answer": 37.5,
+   "tolerance": 0.1,
+   "unit": "%",
+   "explanation": "W = 300 J; η = 300/800 = 0.375 = 37.5 %.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-ch-thermo-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-physics-thermo",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "True or false: in an isothermal expansion of an ideal gas, the heat supplied equals the work done by the gas.",
+   "answer": true,
+   "explanation": "ΔU = 0 as T is constant, so Q = W.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-ch-thermo-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-physics-thermo",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Find the maximum (Carnot) efficiency of an engine working between 600 K and 300 K (%).",
+   "answer": 50.0,
+   "tolerance": 0.1,
+   "unit": "%",
+   "explanation": "η = 1 − 300/600 = 0.50 = 50 %.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-ch-thermo-e05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-physics-thermo",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "One mole of an ideal gas at 300 K expands isothermally to twice its volume. Find the work done by the gas (J, 3 s.f.; R = 8.31).",
+   "answer": 1730.0,
+   "tolerance": 5,
+   "unit": "J",
+   "explanation": "W = nRT ln(V₂/V₁) = 8.31 × 300 × ln 2 = 1730 J.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-ch-thermo-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-physics-thermo",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "An ideal monatomic gas (n = 1.00 mol, R = 8.31 J mol⁻¹ K⁻¹) is heated at constant pressure from 300 K to 400 K.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Increase in internal energy (J, 4 s.f.).",
+     "answer": 1246.5,
+     "tolerance": 1,
+     "explanation": "ΔU = (3/2)RΔT = 1.5 × 8.31 × 100 = 1246.5 J.",
+     "unit": "J",
+     "id": "gceal-physics-ch-thermo-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Work done by the gas (J).",
+     "answer": 831.0,
+     "tolerance": 1,
+     "explanation": "pΔV = nRΔT = 8.31 × 100 = 831 J.",
+     "unit": "J",
+     "id": "gceal-physics-ch-thermo-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Heat supplied (J, 4 s.f.).",
+     "answer": 2077.5,
+     "tolerance": 1,
+     "explanation": "Q = ΔU + W = 1246.5 + 831 = 2077.5 J.",
+     "unit": "J",
+     "id": "gceal-physics-ch-thermo-e06-c"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "This needs more heat than heating at constant volume because",
+     "choices": [
+      "the gas has more molecules",
+      "the gas gets hotter",
+      "the pressure falls",
+      "some of the heat goes into work done by the expanding gas"
+     ],
+     "answer": 3,
+     "explanation": "At constant volume W = 0 so all of Q goes into ΔU.",
+     "id": "gceal-physics-ch-thermo-e06-d"
+    }
+   ],
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-thermo-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-thermo",
+   "prompt": "In an adiabatic expansion of an ideal gas, the temperature",
+   "choices": [
+    "falls",
+    "stays constant",
+    "is undefined",
+    "rises"
+   ],
+   "answer": 0,
+   "explanation": "Q = 0 and the gas does work, so ΔU < 0.",
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-thermo-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-thermo",
+   "prompt": "The first law of thermodynamics is a statement of",
+   "choices": [
+    "conservation of energy",
+    "the second law",
+    "conservation of charge",
+    "conservation of momentum"
+   ],
+   "answer": 0,
+   "explanation": "Q = ΔU + W.",
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-thermo-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-thermo",
+   "prompt": "The work done by a gas is represented by",
+   "choices": [
+    "the gradient of the p–V graph",
+    "the area under the p–V graph",
+    "the temperature",
+    "the pressure alone"
+   ],
+   "answer": 1,
+   "explanation": "W = ∫p dV.",
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-thermo-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-thermo",
+   "prompt": "An engine's efficiency of 100 % is",
+   "choices": [
+    "possible at high temperatures",
+    "impossible according to the second law",
+    "possible if there is no friction",
+    "common"
+   ],
+   "answer": 1,
+   "explanation": "Some heat must be rejected to a cold reservoir.",
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-thermo-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-thermo",
+   "prompt": "In an isochoric change, W =",
+   "choices": [
+    "pΔV",
+    "Q",
+    "0",
+    "nRT"
+   ],
+   "answer": 2,
+   "explanation": "ΔV = 0.",
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-ch-thermo-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-physics-cosmos",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A star has luminosity 4.0 × 10²⁷ W. Find the flux at 1.0 × 10¹⁸ m (10⁻¹⁰ W m⁻², 2 s.f.).",
+   "answer": 3.2,
+   "tolerance": 0.05,
+   "unit": "× 10⁻¹⁰ W/m²",
+   "explanation": "F = L/4πd² = 4.0 × 10²⁷ ÷ (4π × 10³⁶) = 3.2 × 10⁻¹⁰ W m⁻².",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-ch-thermo-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-physics-cosmos",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A star's peak wavelength is 290 nm. Find its surface temperature (K).",
+   "answer": 10000.0,
+   "tolerance": 5,
+   "unit": "K",
+   "explanation": "T = 2.90 × 10⁻³ ÷ 2.9 × 10⁻⁷ = 10 000 K.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-ch-thermo-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-physics-cosmos",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "True or false: the Hubble law says that more distant galaxies recede faster.",
+   "answer": true,
+   "explanation": "v = H₀d: speed is proportional to distance.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-ch-thermo-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-physics-cosmos",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A galaxy recedes at 14 000 km/s. Find its distance (Mpc; H₀ = 70 km s⁻¹ Mpc⁻¹).",
+   "answer": 200.0,
+   "tolerance": 0.5,
+   "unit": "Mpc",
+   "explanation": "d = v/H₀ = 14 000/70 = 200 Mpc.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-ch-thermo-e11",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-physics-cosmos",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Estimate the age of the Universe 1/H₀ in 10⁹ years (H₀ = 70 km s⁻¹ Mpc⁻¹; 1 Mpc = 3.09 × 10¹⁹ km; 1 yr = 3.16 × 10⁷ s).",
+   "answer": 14.0,
+   "tolerance": 0.1,
+   "unit": "× 10⁹ years",
+   "explanation": "1/H₀ = 3.09 × 10¹⁹ ÷ 70 = 4.41 × 10¹⁷ s = 1.40 × 10¹⁰ years = 14.0 × 10⁹ years.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-ch-thermo-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-physics-cosmos",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "The spectral line of hydrogen of rest wavelength 656.3 nm is observed at 662.9 nm in the light from a distant galaxy (c = 3.00 × 10⁵ km/s, H₀ = 70 km s⁻¹ Mpc⁻¹).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Redshift z = Δλ/λ (3 s.f.).",
+     "answer": 0.0101,
+     "tolerance": 0.0002,
+     "explanation": "z = 6.6/656.3 = 0.0101.",
+     "id": "gceal-physics-ch-thermo-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Recession speed (km/s, 3 s.f.).",
+     "answer": 3020.0,
+     "tolerance": 15,
+     "explanation": "v = zc = 0.01006 × 3.00 × 10⁵ = 3.02 × 10³ km/s.",
+     "unit": "km/s",
+     "id": "gceal-physics-ch-thermo-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Distance of the galaxy (Mpc, 2 s.f.).",
+     "answer": 43.0,
+     "tolerance": 0.5,
+     "explanation": "d = v/H₀ = 3017/70 = 43 Mpc.",
+     "unit": "Mpc",
+     "id": "gceal-physics-ch-thermo-e12-c"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "A redshift means the galaxy is",
+     "choices": [
+      "at rest",
+      "hotter than the Sun",
+      "moving away from us",
+      "moving towards us"
+     ],
+     "answer": 2,
+     "explanation": "Wavelengths are stretched.",
+     "id": "gceal-physics-ch-thermo-e12-d"
+    }
+   ],
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-cosmos-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-cosmos",
+   "prompt": "Wien's law relates",
+   "choices": [
+    "peak wavelength to temperature",
+    "speed to distance",
+    "flux to distance",
+    "mass to luminosity"
+   ],
+   "answer": 0,
+   "explanation": "λ_max T = constant.",
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-cosmos-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-cosmos",
+   "prompt": "The cosmic microwave background is evidence for",
+   "choices": [
+    "the Moon's formation",
+    "the Big Bang",
+    "dark matter only",
+    "black holes"
+   ],
+   "answer": 1,
+   "explanation": "It is the cooled radiation from the early hot Universe.",
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-cosmos-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-cosmos",
+   "prompt": "If the distance to a star doubles, the flux received",
+   "choices": [
+    "falls to one quarter",
+    "doubles",
+    "is unchanged",
+    "halves"
+   ],
+   "answer": 0,
+   "explanation": "F ∝ 1/d².",
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-cosmos-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-cosmos",
+   "prompt": "The redshift of a galaxy is caused by",
+   "choices": [
+    "its mass only",
+    "the Earth's motion only",
+    "its high temperature",
+    "its recession (expansion of space)"
+   ],
+   "answer": 3,
+   "explanation": "The wavelengths are stretched as space expands.",
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-cosmos-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-cosmos",
+   "prompt": "Doubling the radius of a star at constant temperature multiplies its luminosity by",
+   "choices": [
+    "4",
+    "16",
+    "2",
+    "8"
+   ],
+   "answer": 0,
+   "explanation": "L ∝ R².",
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-ch-thermo-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-physics-electronics",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Find the voltage gain of an inverting amplifier with R_in = 5.0 kΩ and R_f = 50 kΩ.",
+   "answer": -10.0,
+   "tolerance": 0.01,
+   "explanation": "Gain = −R_f/R_in = −50/5.0 = −10.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-ch-thermo-e14",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-physics-electronics",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "In n-type silicon, the majority charge carriers are",
+   "choices": [
+    "protons",
+    "neutrons",
+    "holes",
+    "electrons"
+   ],
+   "answer": 3,
+   "explanation": "Doping with phosphorus adds free electrons.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-ch-thermo-e15",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-physics-electronics",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "True or false: a silicon diode conducts well when forward biased by more than about 0.6 V.",
+   "answer": true,
+   "explanation": "Above the threshold voltage the forward current rises steeply.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-ch-thermo-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-physics-electronics",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A non-inverting amplifier has R₁ = 2.0 kΩ and R_f = 18 kΩ. For V_in = 0.40 V find V_out (V), ignoring saturation.",
+   "answer": 4.0,
+   "tolerance": 0.02,
+   "unit": "V",
+   "explanation": "Gain = 1 + 18/2.0 = 10; V_out = 4.0 V.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-ch-thermo-e17",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-physics-electronics",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "An op-amp inverting amplifier of gain −8 is supplied with ±9 V and V_in = 2.0 V. What is the output (V)?",
+   "answer": -9.0,
+   "tolerance": 0.5,
+   "unit": "V",
+   "explanation": "The ideal output −16 V exceeds the supply, so the amplifier saturates near −9 V (a little less in practice).",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-ch-thermo-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-physics-electronics",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "An inverting amplifier uses R_in = 10 kΩ and R_f = 47 kΩ with a ±12 V supply. A sensor gives V_in = 0.50 V.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Voltage gain.",
+     "answer": -4.7,
+     "tolerance": 0.01,
+     "explanation": "Gain = −R_f/R_in = −47/10 = −4.7.",
+     "id": "gceal-physics-ch-thermo-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Output voltage (V).",
+     "answer": -2.35,
+     "tolerance": 0.01,
+     "explanation": "V_out = −4.7 × 0.50 = −2.35 V.",
+     "unit": "V",
+     "id": "gceal-physics-ch-thermo-e18-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Input voltage at which the output just saturates at −12 V (V, 3 s.f.).",
+     "answer": 2.55,
+     "tolerance": 0.02,
+     "explanation": "V_in = 12/4.7 = 2.55 V.",
+     "unit": "V",
+     "id": "gceal-physics-ch-thermo-e18-c"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The point of the inverting input of an ideal op-amp with negative feedback is at",
+     "choices": [
+      "twice the output voltage",
+      "infinite potential",
+      "the supply voltage",
+      "virtually the same potential as the non-inverting input (earth here)"
+     ],
+     "answer": 3,
+     "explanation": "Because the gain is very large, the input voltage difference is almost zero (a virtual earth).",
+     "id": "gceal-physics-ch-thermo-e18-d"
+    }
+   ],
+   "figure": {
+    "kind": "shapes",
+    "w": 420,
+    "h": 230,
+    "items": [
+     {
+      "t": "poly",
+      "pts": [
+       170,
+       80,
+       170,
+       180,
+       280,
+       130
+      ],
+      "stroke": "ink",
+      "width": 2,
+      "closed": true
+     },
+     {
+      "t": "text",
+      "x": 182,
+      "y": 108,
+      "text": "−",
+      "size": 18,
+      "anchor": "start",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 182,
+      "y": 160,
+      "text": "+",
+      "size": 16,
+      "anchor": "start",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "line",
+      "x1": 40.0,
+      "y1": 100,
+      "x2": 85.0,
+      "y2": 100,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "rect",
+      "x": 85.0,
+      "y": 92,
+      "w": 40,
+      "h": 16,
+      "stroke": "ink",
+      "width": 2
+     },
+     {
+      "t": "text",
+      "x": 105.0,
+      "y": 78,
+      "text": "R_in",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 125.0,
+      "y1": 100,
+      "x2": 170,
+      "y2": 100,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 170.0,
+      "y1": 160,
+      "x2": 130,
+      "y2": 160,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 130,
+      "y1": 160.0,
+      "x2": 130,
+      "y2": 190,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 115,
+      "y1": 190,
+      "x2": 145,
+      "y2": 190,
+      "color": "ink",
+      "width": 3
+     },
+     {
+      "t": "line",
+      "x1": 122,
+      "y1": 197,
+      "x2": 138,
+      "y2": 197,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 280.0,
+      "y1": 130,
+      "x2": 360,
+      "y2": 130,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 320,
+      "y1": 130.0,
+      "x2": 320,
+      "y2": 50,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 320.0,
+      "y1": 50,
+      "x2": 237.5,
+      "y2": 50,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "rect",
+      "x": 197.5,
+      "y": 42,
+      "w": 40,
+      "h": 16,
+      "stroke": "ink",
+      "width": 2
+     },
+     {
+      "t": "text",
+      "x": 217.5,
+      "y": 28,
+      "text": "R_f",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 197.5,
+      "y1": 50,
+      "x2": 115,
+      "y2": 50,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "line",
+      "x1": 115,
+      "y1": 50.0,
+      "x2": 115,
+      "y2": 100,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "circle",
+      "cx": 115,
+      "cy": 100,
+      "r": 3.5,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "ink"
+     },
+     {
+      "t": "circle",
+      "cx": 320,
+      "cy": 130,
+      "r": 3.5,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "ink"
+     },
+     {
+      "t": "text",
+      "x": 30,
+      "y": 90,
+      "text": "V_in",
+      "size": 13,
+      "anchor": "end",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 365,
+      "y": 134,
+      "text": "V_out",
+      "size": 13,
+      "anchor": "start",
+      "color": "ink"
+     }
+    ]
+   },
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-electronics-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-electronics",
+   "prompt": "Doping silicon with boron produces",
+   "choices": [
+    "p-type material",
+    "n-type material",
+    "an insulator",
+    "a superconductor"
+   ],
+   "answer": 0,
+   "explanation": "Boron has one fewer valence electron: holes.",
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-electronics-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-electronics",
+   "prompt": "In an op-amp amplifier saturation means",
+   "choices": [
+    "the input current is large",
+    "the output is limited by the supply voltage",
+    "the gain is zero",
+    "the circuit oscillates"
+   ],
+   "answer": 1,
+   "explanation": "The output cannot exceed the rails.",
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-electronics-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-electronics",
+   "prompt": "The resistance of a semiconductor as the temperature rises",
+   "choices": [
+    "increases",
+    "decreases",
+    "is zero",
+    "is constant"
+   ],
+   "answer": 1,
+   "explanation": "More carriers are excited.",
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-electronics-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-electronics",
+   "prompt": "A reverse-biased p–n junction",
+   "choices": [
+    "emits light",
+    "has no depletion layer",
+    "conducts a large current",
+    "conducts almost no current"
+   ],
+   "answer": 3,
+   "explanation": "The depletion layer widens.",
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-electronics-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-electronics",
+   "prompt": "A NOT gate with an input of 1 gives an output of",
+   "choices": [
+    "2",
+    "1",
+    "undefined",
+    "0"
+   ],
+   "answer": 3,
+   "explanation": "NOT inverts the signal.",
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-ch-thermo-e19",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-physics-practical",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "The gradient of a graph of T² against l for a pendulum is 3.95 s² m⁻¹. Find g (m s⁻², 3 s.f.).",
+   "answer": 9.99,
+   "tolerance": 0.03,
+   "unit": "m/s²",
+   "explanation": "g = 4π²/gradient = 39.48/3.95 = 9.99 m s⁻².",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-ch-thermo-e20",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-physics-practical",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "To find the Young modulus of a wire by a graph of extension against load, the gradient of that graph is",
+   "choices": [
+    "E/A",
+    "L/(AE)",
+    "AE/L",
+    "LAE"
+   ],
+   "answer": 1,
+   "explanation": "x = (L/AE)F.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-ch-thermo-e21",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-physics-practical",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "True or false: it is better to time 20 oscillations than 1 oscillation of a pendulum.",
+   "answer": true,
+   "explanation": "The reaction-time error is then shared over 20 periods, so the percentage uncertainty in T is much smaller.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-ch-thermo-e22",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-physics-practical",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A graph of lg y against lg x for y = kxⁿ has a gradient 1.5. If x is doubled, by what factor does y increase (3 s.f.)?",
+   "answer": 2.83,
+   "tolerance": 0.02,
+   "explanation": "y ∝ x^1.5 so doubling x multiplies y by 2^1.5 = 2.83.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-ch-thermo-e23",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-physics-practical",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "The steepest and shallowest acceptable lines for a graph have gradients 4.20 and 3.80 (units s² m⁻¹). Find the uncertainty in the gradient.",
+   "answer": 0.2,
+   "tolerance": 0.005,
+   "unit": "s²/m",
+   "explanation": "Δm = ½(4.20 − 3.80) = 0.20 s² m⁻¹.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-ch-thermo-e24",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-physics-practical",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "In a radioactivity experiment, corrected count rates A (counts/min) were taken every 10 min. A graph of ln A against t is a straight line (see figure).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "The gradient of the line (min⁻¹, 3 s.f.). Take the line from t = 0 (ln A = 6.685) to t = 40 min (ln A = 5.298).",
+     "answer": -0.0347,
+     "tolerance": 0.0003,
+     "explanation": "Gradient = (5.298 − 6.685)/40 = −0.0347 min⁻¹.",
+     "unit": "min⁻¹",
+     "id": "gceal-physics-ch-thermo-e24-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "The decay constant λ (min⁻¹, 3 s.f.).",
+     "answer": 0.0347,
+     "tolerance": 0.0003,
+     "explanation": "λ = −gradient = 0.0347 min⁻¹.",
+     "unit": "min⁻¹",
+     "id": "gceal-physics-ch-thermo-e24-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "The half-life (min, 3 s.f.).",
+     "answer": 20.0,
+     "tolerance": 0.2,
+     "explanation": "t½ = ln 2/λ = 0.693/0.0347 = 20.0 min.",
+     "unit": "min",
+     "id": "gceal-physics-ch-thermo-e24-c"
+    }
+   ],
+   "figure": {
+    "kind": "plot",
+    "xmin": 0,
+    "xmax": 4,
+    "ymin": 5,
+    "ymax": 7,
+    "grid": 1,
+    "w": 380,
+    "h": 240,
+    "curves": [],
+    "points": [
+     {
+      "x": 0.0,
+      "y": 6.684611727667927,
+      "label": null,
+      "color": "blue"
+     },
+     {
+      "x": 1.0,
+      "y": 6.338038137387954,
+      "label": null,
+      "color": "blue"
+     },
+     {
+      "x": 2.0,
+      "y": 5.991464547107982,
+      "label": null,
+      "color": "blue"
+     },
+     {
+      "x": 3.0,
+      "y": 5.644890956828009,
+      "label": null,
+      "color": "blue"
+     },
+     {
+      "x": 4.0,
+      "y": 5.298317366548036,
+      "label": null,
+      "color": "blue"
+     }
+    ],
+    "segments": [
+     {
+      "x1": 0,
+      "y1": 6.684611727667927,
+      "x2": 4,
+      "y2": 5.298317366548036,
+      "color": "red",
+      "dash": false
+     }
+    ],
+    "xlabel": "t / 10 min",
+    "ylabel": "ln A"
+   },
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-practical-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-practical",
+   "prompt": "To reduce the percentage uncertainty in a period measurement you should",
+   "choices": [
+    "use a longer string",
+    "use heavier bob",
+    "time only one swing",
+    "time many oscillations"
+   ],
+   "answer": 3,
+   "explanation": "Fixed reaction time errors become a smaller percentage of the total.",
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-practical-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-practical",
+   "prompt": "A straight line through the origin on a graph of F against x shows that",
+   "choices": [
+    "the experiment is wrong",
+    "F is inversely proportional to x",
+    "F = x",
+    "F is proportional to x"
+   ],
+   "answer": 3,
+   "explanation": "y = mx with c = 0.",
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-practical-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-practical",
+   "prompt": "The best way to find a gradient on a graph is to use",
+   "choices": [
+    "a large triangle on the best-fit line",
+    "two adjacent data points",
+    "the largest data point only",
+    "the origin and any point"
+   ],
+   "answer": 0,
+   "explanation": "Large triangles reduce the percentage uncertainty.",
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-practical-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-practical",
+   "prompt": "A control variable is",
+   "choices": [
+    "kept constant during the experiment",
+    "the final result",
+    "the quantity changed",
+    "the quantity measured"
+   ],
+   "answer": 0,
+   "explanation": "Only the independent variable should change.",
+   "chapter": "gceal-physics-ch-thermo"
+  },
+  {
+   "id": "gceal-physics-practical-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-practical",
+   "prompt": "A micrometer screw gauge usually reads to",
+   "choices": [
+    "0.5 mm",
+    "1 mm",
+    "0.01 mm",
+    "0.1 cm"
+   ],
+   "answer": 2,
+   "explanation": "It is used for the diameter of thin wires.",
+   "chapter": "gceal-physics-ch-thermo"
+  }
+ ]
+}
