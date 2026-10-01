@@ -104,7 +104,7 @@ def shells(z):
     return out
 
 
-@both(FR2 + EN_O, "ch-neutrons", cap=100, cat="Atome")
+@both(FR2 + EN_O, "ch-neutrons", cap=600, cat="Atome", diffs=(1, 2))
 def neutrons(rng, d, lang):
     sym, nf, ne, z, a = rng.choice(ELEMENTS)
     ask = rng.choice(["n", "e", "p"])
@@ -122,7 +122,7 @@ def neutrons(rng, d, lang):
                  src=S(lang), cat=cat(lang, "Atome · 2nde", "Atomic structure"))
 
 
-@both(FR2 + EN_O, "ch-electron-shells", cap=100, cat="Atome")
+@both(FR2 + EN_O, "ch-electron-shells", cap=600, cat="Atome", diffs=(2, 3))
 def electron_shells(rng, d, lang):
     sym, nf, ne, z, a = rng.choice(SMALL)
     sh = shells(z)
@@ -143,7 +143,7 @@ def electron_shells(rng, d, lang):
                  src=S(lang), cat=cat(lang, "Atome · 2nde", "Atomic structure"))
 
 
-@both(FR2 + EN_O, "ch-valence", cap=60, cat="Atome")
+@both(FR2 + EN_O, "ch-valence", cap=600, cat="Atome", diffs=(2, 3))
 def valence(rng, d, lang):
     sym, nf, ne, z, a = rng.choice([e for e in SMALL if e[3] > 2])
     v = shells(z)[-1]
@@ -155,7 +155,7 @@ def valence(rng, d, lang):
 ION = [("Na", 11, 1), ("Mg", 12, 2), ("Al", 13, 3), ("K", 19, 1), ("Ca", 20, 2), ("Cl", 17, -1), ("O", 8, -2), ("F", 9, -1), ("S", 16, -2), ("Li", 3, 1), ("N", 7, -3), ("Be", 4, 2)]
 
 
-@both(FR2 + EN_O, "ch-ion-electrons", cap=60, cat="Atome")
+@both(FR2 + EN_O, "ch-ion-electrons", cap=600, cat="Atome", diffs=(2, 3))
 def ion_electrons(rng, d, lang):
     sym, z, q = rng.choice(ION)
     n = z - q
@@ -167,7 +167,7 @@ def ion_electrons(rng, d, lang):
 
 
 # ---------------------------------------------------------------------------------------------- quantité de matière
-@both(FR2 + FR1 + EN_O + EN_A, "ch-molar-mass", cap=200, cat="Quantité de matière")
+@both(FR2 + FR1 + EN_O + EN_A, "ch-molar-mass", cap=600, cat="Quantité de matière", diffs=(2, 3))
 def molar_mass(rng, d, lang):
     c = rng.choice(COMP)
     M = mass(c[0])
@@ -176,7 +176,7 @@ def molar_mass(rng, d, lang):
                  N(lang, M, 1), [N(lang, w, 1) for w in wr], T(lang, "On additionne les masses molaires atomiques de tous les atomes de la formule.", "Add the relative atomic masses of every atom in the formula."), src=S(lang), cat=cat(lang, "Quantité de matière", "Mole calculations"))
 
 
-@both(FR2 + FR1 + EN_O + EN_A, "ch-mole-from-mass", cap=240, cat="Quantité de matière")
+@both(FR2 + FR1 + EN_O + EN_A, "ch-mole-from-mass", cap=600, cat="Quantité de matière", diffs=(3, 4))
 def mole_from_mass(rng, d, lang):
     c = rng.choice(COMP)
     M = mass(c[0])
@@ -190,7 +190,7 @@ def mole_from_mass(rng, d, lang):
                  N(lang, m, 2), [N(lang, w, 2) for w in (n / M, M / n, m * 2, m / 2, m + M, M)], "m = n × M.", src=S(lang), cat=cat(lang, "Quantité de matière", "Mole calculations"))
 
 
-@both(FR2 + FR1 + EN_O + EN_A, "ch-concentration", cap=240, cat="Solutions")
+@both(FR2 + FR1 + EN_O + EN_A, "ch-concentration", cap=600, cat="Solutions", diffs=(3,))
 def concentration(rng, d, lang):
     n, V = rng.choice([0.1, 0.2, 0.25, 0.5, 1, 2, 0.05]), rng.choice([0.1, 0.2, 0.25, 0.5, 1, 2, 5])
     C = n / V
@@ -205,7 +205,7 @@ def concentration(rng, d, lang):
                  N(lang, V, 3), [N(lang, w, 3) for w in (n * C, C / n, V * 10, V / 10, n + C)], "V = n/C.", src=S(lang), cat=cat(lang, "Solutions", "Solutions"))
 
 
-@both(FR2 + FR1 + EN_O + EN_A, "ch-dilution", cap=200, cat="Solutions")
+@both(FR2 + FR1 + EN_O + EN_A, "ch-dilution", cap=600, cat="Solutions", diffs=(3, 4))
 def dilution(rng, d, lang):
     C1, V1, f = rng.choice([1, 2, 0.5, 5, 10, 0.2]), rng.choice([10, 20, 25, 50, 100]), rng.choice([2, 4, 5, 10, 20])
     V2 = V1 * f
@@ -217,7 +217,7 @@ def dilution(rng, d, lang):
                  N(lang, V1), [N(lang, w, 3) for w in (V2 - V1, V2 * f, V1 * f / 2, V1 / 2, V2 / C1)], "C₁V₁ = C₂V₂ : V₁ = C₂V₂/C₁.", src=S(lang), cat=cat(lang, "Solutions", "Solutions"))
 
 
-@both(FR2 + FR1 + EN_O + EN_A, "ch-gas-volume", cap=160, cat="Quantité de matière")
+@both(FR2 + FR1 + EN_O + EN_A, "ch-gas-volume", cap=600, cat="Quantité de matière", diffs=(3,))
 def gas_volume(rng, d, lang):
     n = rng.choice([0.1, 0.25, 0.5, 1, 2, 3, 0.05])
     Vm = 24
@@ -226,7 +226,7 @@ def gas_volume(rng, d, lang):
                  N(lang, V, 2), [N(lang, w, 2) for w in (n / Vm, Vm / n, V * 10, V / 10, n * 22.4)], "V = n × Vm.", src=S(lang), cat=cat(lang, "Quantité de matière", "Mole calculations"))
 
 
-@both(EN_O + EN_A, "ch-percent-mass", cap=160, cat="Mole calculations")
+@both(EN_O + EN_A, "ch-percent-mass", cap=600, cat="Mole calculations", diffs=(3, 4))
 def percent_mass(rng, d, lang):
     c = rng.choice(COMP)
     el = rng.choice(sorted(parse(c[0])))
@@ -237,7 +237,7 @@ def percent_mass(rng, d, lang):
                  "% by mass = (atoms × Ar ÷ Mr) × 100.", src=SRC_EN, cat="Mole calculations")
 
 
-@both(EN_A + EN_O, "ch-empirical", cap=80, cat="Mole calculations")
+@both(EN_A + EN_O, "ch-empirical", cap=600, cat="Mole calculations", diffs=(4,))
 def empirical(rng, d, lang):
     ratios = [(1, 2), (1, 3), (1, 4), (2, 5), (2, 3), (3, 8), (1, 1), (2, 6)]
     # CxHy given masses: choose the empirical formula (c, h) coprime
@@ -283,7 +283,7 @@ def show(side):
     return " + ".join((str(k) if k > 1 else "") + sub(f) for k, f in side)
 
 
-@both(FR2 + FR1 + EN_O + EN_A, "ch-balance", cap=120, cat="Équations chimiques")
+@both(FR2 + FR1 + EN_O + EN_A, "ch-balance", cap=600, cat="Équations chimiques", diffs=(3, 4))
 def balance(rng, d, lang):
     eq, _ = rng.choice(REACTIONS)
     L, R = split_eq(eq)
@@ -305,7 +305,7 @@ STO = [("2H2 + O2 -> 2H2O", "H2", "H2O"), ("CaCO3 -> CaO + CO2", "CaCO3", "CaO")
        ("2Na + 2H2O -> 2NaOH + H2", "Na", "NaOH"), ("4Al + 3O2 -> 2Al2O3", "Al", "Al2O3"), ("2KOH + H2SO4 -> K2SO4 + 2H2O", "KOH", "K2SO4")]
 
 
-@both(FR1 + FRT + EN_A, "ch-stoichiometry", cap=240, cat="Stœchiométrie")
+@both(FR1 + FRT + EN_A, "ch-stoichiometry", cap=600, cat="Stœchiométrie", diffs=(4, 5))
 def stoichiometry(rng, d, lang):
     eq, a, b = rng.choice(STO)
     L, R = split_eq(eq)
@@ -323,7 +323,7 @@ def stoichiometry(rng, d, lang):
 
 
 # ---------------------------------------------------------------------------------------------- acides, bases
-@both(FR1 + FRT + EN_A + EN_O, "ch-ph-strong-acid", cap=160, cat="Acides et bases")
+@both(FR1 + FRT + EN_A + EN_O, "ch-ph-strong-acid", cap=600, cat="Acides et bases", diffs=(3,))
 def ph_strong_acid(rng, d, lang):
     k = rng.randint(1, 6)
     c = 10 ** -k
@@ -334,7 +334,7 @@ def ph_strong_acid(rng, d, lang):
                  f"10{sup(-k)}", [f"10{sup(-(14 - k))}", f"10{sup(k)}", f"{k}×10{sup(-1)}", f"10{sup(-(k + 1))}", f"{k}"], "[H₃O⁺] = 10⁻ᵖᴴ." if lang == "fr" else "[H⁺] = 10⁻ᵖᴴ.", src=S(lang), cat=cat(lang, "Acides et bases", "Acids and bases"))
 
 
-@both(FR1 + FRT + EN_A + EN_O, "ch-ph-strong-base", cap=100, cat="Acides et bases")
+@both(FR1 + FRT + EN_A + EN_O, "ch-ph-strong-base", cap=600, cat="Acides et bases", diffs=(3, 4))
 def ph_strong_base(rng, d, lang):
     k = rng.randint(1, 5)
     ph = 14 - k
@@ -342,7 +342,7 @@ def ph_strong_base(rng, d, lang):
                  str(ph), [str(w) for w in (k, 14 + k, 7 + k, k + 1, 7 - k if 7 - k != ph else 0) if w != ph], "[OH⁻] = 10⁻ᵏ donc pOH = k et pH = 14 − k à 25 °C." if lang == "fr" else "pOH = k, so pH = 14 − k at 25 °C.", src=S(lang), cat=cat(lang, "Acides et bases", "Acids and bases"))
 
 
-@both(FRT + EN_A, "ch-henderson", cap=100, cat="Acides et bases")
+@both(FRT + EN_A, "ch-henderson", cap=600, cat="Acides et bases", diffs=(5,))
 def henderson(rng, d, lang):
     pka = rng.choice([3.75, 4.2, 4.76, 4.8, 9.25, 10.3, 2.5])
     ratio = rng.choice([10, 100, 0.1, 0.01, 1])
@@ -352,7 +352,7 @@ def henderson(rng, d, lang):
                  "pH = pKa + log([A⁻]/[HA]).", src=S(lang), cat=cat(lang, "Acides et bases · Tle", "Acids and bases"), diff=4)
 
 
-@both(FRT + EN_A, "ch-equilibrium-kc", cap=140, cat="Équilibres")
+@both(FRT + EN_A, "ch-equilibrium-kc", cap=600, cat="Équilibres", diffs=(4,))
 def equilibrium_kc(rng, d, lang):
     a, b, c, e = rng.choice([0.1, 0.2, 0.5, 1, 2]), rng.choice([0.1, 0.2, 0.5, 1, 2]), rng.choice([0.1, 0.2, 0.4, 0.5, 1, 2, 4]), rng.choice([0.1, 0.2, 0.4, 0.5, 1, 2, 4])
     Kc = c * e / (a * b)
@@ -375,7 +375,7 @@ def solve_ox(formula, el, known):
     return -s // atoms[el]
 
 
-@both(FRT + EN_A, "ch-oxidation-number", cap=80, cat="Oxydoréduction")
+@both(FRT + EN_A, "ch-oxidation-number", cap=600, cat="Oxydoréduction", diffs=(4,))
 def oxidation_number(rng, d, lang):
     f, el, n, known = rng.choice(OXI)
     assert solve_ox(f, el, known) == n
@@ -388,7 +388,7 @@ def oxidation_number(rng, d, lang):
 POT = {"Mg": ("Mg²⁺/Mg", -2.37), "Al": ("Al³⁺/Al", -1.66), "Zn": ("Zn²⁺/Zn", -0.76), "Fe": ("Fe²⁺/Fe", -0.44), "Ni": ("Ni²⁺/Ni", -0.25), "Pb": ("Pb²⁺/Pb", -0.13), "Cu": ("Cu²⁺/Cu", 0.34), "Ag": ("Ag⁺/Ag", 0.80)}
 
 
-@both(FRT + EN_A, "ch-cell-emf", cap=80, cat="Électrochimie")
+@both(FRT + EN_A, "ch-cell-emf", cap=600, cat="Électrochimie", diffs=(4,))
 def cell_emf(rng, d, lang):
     a, b = rng.sample(sorted(POT), 2)
     ea, eb = POT[a][1], POT[b][1]
@@ -399,7 +399,7 @@ def cell_emf(rng, d, lang):
                  N(lang, emf, 2), [N(lang, w, 2) for w in wr if w > 0], T(lang, "E = E°(pôle +) − E°(pôle −) = différence des potentiels standard.", "E = E°(positive electrode) − E°(negative electrode)."), src=S(lang), cat=cat(lang, "Électrochimie · Tle", "Electrochemistry"), diff=3)
 
 
-@both(FRT + EN_A, "ch-faraday", cap=120, cat="Électrochimie")
+@both(FRT + EN_A, "ch-faraday", cap=600, cat="Électrochimie", diffs=(5,))
 def faraday(rng, d, lang):
     el = rng.choice([("Cu", 2), ("Ag", 1), ("Zn", 2), ("Al", 3)])
     sym, z = el
@@ -420,7 +420,7 @@ def cf(c, h, o=0):
     return "C" + (sub(str(c)) if c > 1 else "") + "H" + (sub(str(h)) if h > 1 else "") + ("O" if o else "")
 
 
-@both(FR1 + FRT + EN_O + EN_A, "ch-alkane-formula", cap=80, cat="Chimie organique")
+@both(FR1 + FRT + EN_O + EN_A, "ch-alkane-formula", cap=600, cat="Chimie organique", diffs=(2, 3))
 def alkane_formula(rng, d, lang):
     n = rng.randint(1, 10)
     right = cf(n, 2 * n + 2)
@@ -431,7 +431,7 @@ def alkane_formula(rng, d, lang):
                  right, wr, T(lang, "Les alcanes ont pour formule générale CₙH₂ₙ₊₂.", "Alkanes have the general formula CₙH₂ₙ₊₂."), src=S(lang), cat=cat(lang, "Chimie organique", "Organic chemistry"))
 
 
-@both(FR1 + FRT + EN_O + EN_A, "ch-alkane-name", cap=60, cat="Chimie organique")
+@both(FR1 + FRT + EN_O + EN_A, "ch-alkane-name", cap=600, cat="Chimie organique", diffs=(1, 2))
 def alkane_name(rng, d, lang):
     n = rng.randint(1, 10)
     names = ALK if lang == "fr" else ALK_EN
@@ -440,7 +440,7 @@ def alkane_name(rng, d, lang):
                  T(lang, "Méthane, éthane, propane, butane, pentane, hexane, heptane, octane, nonane, décane pour 1 à 10 carbones.", "Methane, ethane, propane, butane, pentane, hexane, heptane, octane, nonane, decane for 1 to 10 carbons."), src=S(lang), cat=cat(lang, "Chimie organique", "Organic chemistry"))
 
 
-@both(FR1 + FRT + EN_A, "ch-alkane-mass", cap=80, cat="Chimie organique")
+@both(FR1 + FRT + EN_A, "ch-alkane-mass", cap=600, cat="Chimie organique", diffs=(3,))
 def alkane_mass(rng, d, lang):
     n = rng.randint(1, 10)
     M = 12 * n + 2 * n + 2
@@ -448,7 +448,7 @@ def alkane_mass(rng, d, lang):
                  str(M), [str(w) for w in (14 * n, 12 * n + 2 * n, M + 2, M - 2, 12 * n + n)], "M = 14n + 2 pour CₙH₂ₙ₊₂." if lang == "fr" else "M = 14n + 2 for CₙH₂ₙ₊₂.", src=S(lang), cat=cat(lang, "Chimie organique", "Organic chemistry"))
 
 
-@both(FR1 + FRT + EN_O + EN_A, "ch-combustion", cap=80, cat="Chimie organique")
+@both(FR1 + FRT + EN_O + EN_A, "ch-combustion", cap=600, cat="Chimie organique", diffs=(3, 4))
 def combustion(rng, d, lang):
     n = rng.randint(1, 8)
     o2 = Fraction(3 * n + 1, 2)

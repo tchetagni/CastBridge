@@ -36,7 +36,7 @@ def near_bin(rng, n, w):
     return out
 
 
-@both(FR2 + FR1 + EN_O, "inf-dec-to-bin", cap=240, cat="Représentation des nombres")
+@both(FR2 + FR1 + EN_O, "inf-dec-to-bin", cap=600, cat="Représentation des nombres", diffs=(1, 2))
 def dec_to_bin(rng, d, lang):
     n = rng.randint(5, 250)
     w = max(4, n.bit_length())
@@ -45,7 +45,7 @@ def dec_to_bin(rng, d, lang):
                  src=S(lang), cat=cat(lang, "Représentation des nombres", "Data representation"))
 
 
-@both(FR2 + FR1 + EN_O, "inf-bin-to-dec", cap=240, cat="Représentation des nombres")
+@both(FR2 + FR1 + EN_O, "inf-bin-to-dec", cap=600, cat="Représentation des nombres", diffs=(1, 2))
 def bin_to_dec(rng, d, lang):
     n = rng.randint(5, 250)
     b = bits(n)
@@ -54,7 +54,7 @@ def bin_to_dec(rng, d, lang):
                  src=S(lang), cat=cat(lang, "Représentation des nombres", "Data representation"))
 
 
-@both(FR1 + FRT + EN_A, "inf-hex", cap=240, cat="Représentation des nombres")
+@both(FR1 + FRT + EN_A, "inf-hex", cap=600, cat="Représentation des nombres", diffs=(3,))
 def hexa(rng, d, lang):
     n = rng.randint(16, 4095)
     h = format(n, "X")
@@ -64,7 +64,7 @@ def hexa(rng, d, lang):
     return Draft(T(lang, f"Quelle est la valeur décimale de 0x{h} (hexadécimal) ?", f"What is the denary value of the hexadecimal number {h}?"), str(n), [str(n + k) for k in (1, -1, 16, -16, 256, 10)], T(lang, "Chaque chiffre est multiplié par une puissance de 16.", "Each digit is multiplied by a power of 16."), src=S(lang), cat=cat(lang, "Représentation des nombres", "Data representation"))
 
 
-@both(FR1 + EN_A + EN_O, "inf-bin-add", cap=200, cat="Représentation des nombres")
+@both(FR1 + EN_A + EN_O, "inf-bin-add", cap=600, cat="Représentation des nombres", diffs=(3, 4))
 def bin_add(rng, d, lang):
     a, b = rng.randint(3, 120), rng.randint(3, 120)
     s = a + b
@@ -75,7 +75,7 @@ def bin_add(rng, d, lang):
                  src=S(lang), cat=cat(lang, "Représentation des nombres", "Data representation"), diff=3)
 
 
-@both(FR1 + FRT + EN_A, "inf-twos-complement", cap=160, cat="Représentation des nombres")
+@both(FR1 + FRT + EN_A, "inf-twos-complement", cap=600, cat="Représentation des nombres", diffs=(4, 5))
 def twos(rng, d, lang):
     n = rng.randint(1, 120)
     w = 8
@@ -87,7 +87,7 @@ def twos(rng, d, lang):
                  src=S(lang), cat=cat(lang, "Représentation des nombres", "Data representation"), diff=4)
 
 
-@both(FR2 + EN_O, "inf-units", cap=160, cat="Unités")
+@both(FR2 + EN_O, "inf-units", cap=600, cat="Unités", diffs=(1, 2))
 def units(rng, d, lang):
     k = rng.choice([2, 3, 4, 5, 8, 10, 16, 32, 64])
     typ = rng.choice(["ko-o", "mo-ko", "o-bits", "go-mo"])
@@ -103,7 +103,7 @@ def units(rng, d, lang):
                  src=S(lang), cat=cat(lang, "Unités", "Units"))
 
 
-@both(FR2 + FR1 + EN_ALL, "inf-download", cap=200, cat="Réseaux")
+@both(FR2 + FR1 + EN_ALL, "inf-download", cap=600, cat="Réseaux", diffs=(3,))
 def download(rng, d, lang):
     size, rate = rng.choice([10, 20, 50, 100, 200, 500, 1000]), rng.choice([1, 2, 4, 5, 8, 10, 20, 50])
     t = size * 8 / rate
@@ -111,7 +111,7 @@ def download(rng, d, lang):
                  N(lang, t, 2), [N(lang, w, 2) for w in (size / rate, size * rate, size * 8 * rate, size / (rate * 8), t * 2, t / 2)], "temps = taille en bits ÷ débit." if lang == "fr" else "time = size in bits ÷ rate.", src=S(lang), cat=cat(lang, "Réseaux", "Networks"))
 
 
-@both(FR1 + FRT + EN_A, "inf-image-size", cap=160, cat="Représentation des données")
+@both(FR1 + FRT + EN_A, "inf-image-size", cap=600, cat="Représentation des données", diffs=(4,))
 def image_size(rng, d, lang):
     w, h, depth = rng.choice([(100, 100), (640, 480), (800, 600), (1024, 768), (200, 50), (1920, 1080), (32, 32), (64, 64)]), None, None
     (w, h), depth = w if isinstance(w, tuple) else (w, h), rng.choice([1, 8, 16, 24])
@@ -121,7 +121,7 @@ def image_size(rng, d, lang):
                  "taille = largeur × hauteur × profondeur de couleur ÷ 8." if lang == "fr" else "size = width × height × colour depth ÷ 8.", src=S(lang), cat=cat(lang, "Représentation des données", "Data representation"), diff=3)
 
 
-@both(FRT + EN_A, "inf-sound-size", cap=100, cat="Représentation des données")
+@both(FRT + EN_A, "inf-sound-size", cap=600, cat="Représentation des données", diffs=(5,))
 def sound_size(rng, d, lang):
     fs, bd, ch, t = rng.choice([8000, 11025, 22050, 44100]), rng.choice([8, 16]), rng.choice([1, 2]), rng.choice([2, 5, 10, 30, 60])
     size = fs * bd * ch * t / 8
@@ -129,7 +129,7 @@ def sound_size(rng, d, lang):
                  str(int(size)), [str(int(x)) for x in (size * 8, size / 8, fs * bd * t, size / ch if ch == 2 else size * 2, size * 2 if ch == 1 else size * 4)], "fréquence × résolution × voies × durée ÷ 8." if lang == "fr" else "rate × resolution × channels × time ÷ 8.", src=S(lang), cat=cat(lang, "Représentation des données", "Data representation"), diff=4)
 
 
-@both(FR1 + FRT + EN_ALL, "inf-logic-eval", cap=240, cat="Logique")
+@both(FR1 + FRT + EN_ALL, "inf-logic-eval", cap=600, cat="Logique", diffs=(3,))
 def logic_eval(rng, d, lang):
     forms = [("A ET B", lambda a, b, c: a & b, "A AND B", 2), ("A OU B", lambda a, b, c: a | b, "A OR B", 2), ("NON A OU B", lambda a, b, c: (1 - a) | b, "NOT A OR B", 2),
              ("A OU NON B", lambda a, b, c: a | (1 - b), "A OR NOT B", 2), ("(A ET B) OU C", lambda a, b, c: (a & b) | c, "(A AND B) OR C", 3), ("A ET (B OU C)", lambda a, b, c: a & (b | c), "A AND (B OR C)", 3),
@@ -145,7 +145,7 @@ def logic_eval(rng, d, lang):
                  T(lang, "On évalue l'expression pour chaque combinaison des variables (le programme a énuméré toutes les lignes).", "Evaluate the expression for every combination of the inputs."), src=S(lang), cat=cat(lang, "Logique", "Logic"), diff=3)
 
 
-@both(FR2 + FR1 + EN_O, "inf-ascii", cap=80, cat="Représentation des données")
+@both(FR2 + FR1 + EN_O, "inf-ascii", cap=600, cat="Représentation des données", diffs=(2,))
 def ascii_(rng, d, lang):
     ch = rng.choice("BCDEFGHIJKLMNOPQRSTUVWXYZbcdefghijklmnopqrstuvwxyz123456789")
     code = ord(ch)
@@ -153,9 +153,9 @@ def ascii_(rng, d, lang):
                  T(lang, "Les lettres et les chiffres sont codés dans l'ordre.", "Letters and digits are coded in order."), src=S(lang), cat=cat(lang, "Représentation des données", "Data representation"))
 
 
-@both(FR1 + FRT + EN_ALL, "inf-caesar", cap=200, cat="Algorithmique")
+@both(FR1 + FRT + EN_ALL, "inf-caesar", cap=600, cat="Algorithmique", diffs=(3,))
 def caesar(rng, d, lang):
-    word = rng.choice(["CAMEROUN", "YAOUNDE", "DOUALA", "ECOLE", "LYCEE", "BAC", "MATHS", "RESEAU", "CODE", "SERVEUR", "PYTHON", "BINAIRE", "LOGICIEL", "DONNEES", "ALGORITHME"])
+    word = rng.choice(["CAMEROUN", "BAMENDA", "DOUALA", "ECOLE", "LYCEE", "BAC", "MATHS", "RESEAU", "CODE", "SERVEUR", "PYTHON", "BINAIRE", "LOGICIEL", "DONNEES", "ALGORITHME"])
     k = rng.randint(1, 9)
     enc = "".join(chr((ord(c) - 65 + k) % 26 + 65) for c in word)
     dec = "".join(chr((ord(c) - 65 - k) % 26 + 65) for c in enc)
@@ -195,7 +195,7 @@ def run_loop(kind, a, b, k):
     raise ValueError(kind)
 
 
-@both(FR1 + FRT + EN_ALL, "inf-trace-loop", cap=300, cat="Algorithmique")
+@both(FR1 + FRT + EN_ALL, "inf-trace-loop", cap=600, cat="Algorithmique", diffs=(3, 4))
 def trace_loop(rng, d, lang):
     kind = rng.choice(["sum", "count", "evenodd", "while"])
     a, b, k = rng.randint(1, 4), rng.randint(5, 14), rng.randint(2, 5)
@@ -219,7 +219,7 @@ def trace_loop(rng, d, lang):
     return Draft(txt, str(v), [str(w) for w in wr if w != v and w >= 0], T(lang, "On exécute l'algorithme pas à pas (ici : le programme a été exécuté pour calculer la réponse).", "Trace the algorithm step by step."), src=S(lang), cat=cat(lang, "Algorithmique", "Algorithms"), diff=3)
 
 
-@both(FR1 + FRT + EN_A, "inf-binary-search", cap=60, cat="Algorithmique")
+@both(FR1 + FRT + EN_A, "inf-binary-search", cap=600, cat="Algorithmique", diffs=(4,))
 def binary_search(rng, d, lang):
     n = rng.choice([8, 16, 32, 64, 100, 128, 256, 500, 1000, 1024, 5000, 1000000])
     worst = math.floor(math.log2(n)) + 1
@@ -228,7 +228,7 @@ def binary_search(rng, d, lang):
                  "Chaque étape divise la liste par deux : ⌊log₂ n⌋ + 1." if lang == "fr" else "Each step halves the list: ⌊log₂ n⌋ + 1.", src=S(lang), cat=cat(lang, "Algorithmique", "Algorithms"), diff=4)
 
 
-@both(FR1 + FRT + EN_A, "inf-nested-loops", cap=100, cat="Algorithmique")
+@both(FR1 + FRT + EN_A, "inf-nested-loops", cap=600, cat="Algorithmique", diffs=(3,))
 def nested_loops(rng, d, lang):
     n, m = rng.randint(3, 12), rng.randint(2, 9)
     c = 0
@@ -241,7 +241,7 @@ def nested_loops(rng, d, lang):
                  "n × m exécutions." if lang == "fr" else "The inner body runs n × m times.", src=S(lang), cat=cat(lang, "Algorithmique", "Algorithms"))
 
 
-@both(FRT + EN_A, "inf-ipv4-hosts", cap=60, cat="Réseaux")
+@both(FRT + EN_A, "inf-ipv4-hosts", cap=600, cat="Réseaux", diffs=(5,))
 def ipv4_hosts(rng, d, lang):
     p = rng.choice([8, 16, 20, 22, 24, 25, 26, 27, 28, 29, 30])
     hosts = 2 ** (32 - p) - 2
@@ -249,7 +249,7 @@ def ipv4_hosts(rng, d, lang):
                  [str(w) for w in (hosts + 2, hosts + 1, 2 ** (32 - p) * 2, 2 ** (32 - p) - 1 if hosts + 1 != 2 ** (32 - p) - 1 else hosts - 3, hosts // 2, 2 ** p - 2)], "2^(32 − p) − 2 adresses." if lang == "fr" else "2^(32 − p) − 2 usable addresses.", src=S(lang), cat=cat(lang, "Réseaux · Tle", "Networks"), diff=4)
 
 
-@both(FRT + EN_A, "inf-mask-dotted", cap=30, cat="Réseaux")
+@both(FRT + EN_A, "inf-mask-dotted", cap=600, cat="Réseaux", diffs=(4,))
 def mask_dotted(rng, d, lang):
     p = rng.choice([8, 16, 24, 25, 26, 27, 28, 20, 22, 30])
     m = (0xFFFFFFFF << (32 - p)) & 0xFFFFFFFF
@@ -262,7 +262,7 @@ def mask_dotted(rng, d, lang):
     return Draft(T(lang, f"Quel est le masque de sous-réseau en notation décimale pointée pour /{p} ?", f"What is the subnet mask in dotted decimal notation for /{p}?"), dotted, wr, "Les p premiers bits sont à 1, les autres à 0." if lang == "fr" else "The first p bits are 1, the rest 0.", src=S(lang), cat=cat(lang, "Réseaux · Tle", "Networks"), diff=4)
 
 
-@both(FRT + EN_A, "inf-sql-aggregate", cap=160, cat="Bases de données")
+@both(FRT + EN_A, "inf-sql-aggregate", cap=600, cat="Bases de données", diffs=(3, 4))
 def sql_aggregate(rng, d, lang):
     names = ["Ali", "Brice", "Carine", "Doris", "Eric", "Fanta", "Gaston", "Hawa"]
     rows = [(names[i], rng.randint(6, 19)) for i in range(rng.randint(5, 8))]
@@ -288,7 +288,7 @@ def sql_aggregate(rng, d, lang):
                  T(lang, "On applique la clause WHERE puis la fonction d'agrégation.", "Apply the WHERE clause first, then the aggregate function."), src=S(lang), cat=cat(lang, "Bases de données · Tle", "Databases"), diff=3)
 
 
-@both(FRT + EN_A, "inf-python-expr", cap=200, cat="Programmation")
+@both(FRT + EN_A, "inf-python-expr", cap=600, cat="Programmation", diffs=(3,))
 def python_expr(rng, d, lang):
     a, b = rng.randint(7, 60), rng.randint(2, 9)
     exprs = [f"{a} // {b}", f"{a} % {b}", f"{a} // {b} + {a} % {b}", f"{b} ** 3", f"{a} % {b} == 0", f"len('{rng.choice(['cameroun', 'yaounde', 'douala', 'python', 'reseau'])}')",

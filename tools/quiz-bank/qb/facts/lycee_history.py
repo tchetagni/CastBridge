@@ -50,7 +50,7 @@ for lang, make, subject in (("fr", lycee.fr, "hist"), ("en", lycee.en, "hist")):
     wording = ("En quelle année a eu lieu {e} ?", "Lequel de ces événements a eu lieu en {y} ?") if lang == "fr" else ("In which year did {e} take place?", "Which of these events took place in {y}?")
     for region in (CM, AF, W):
         sub = [r for r in rows if r[4] == region]
-        date_questions(make, subject, "hist-" + region.lower(), sub, "ly-hist-fr" if lang == "fr" else "ly-hist-en", "Histoire" if lang == "fr" else "History", lang, wording)
+        date_questions(make, subject, "hist", sub, "ly-hist-fr" if lang == "fr" else "ly-hist-en", "Histoire" if lang == "fr" else "History", lang, wording)
 
 # ---------------------------------------------------------------------------------------------- personnages et notions
 PEOPLE_FR = [

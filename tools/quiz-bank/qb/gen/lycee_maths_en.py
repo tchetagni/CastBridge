@@ -34,7 +34,7 @@ def lin(a, b):
 
 
 # ================================================================================================ O Level
-@reg([O5], "en-m-indices", SO, "Indices and standard form")
+@reg([O5], "en-m-indices", SO, "Indices and standard form", diffs=(1, 2))
 def indices(rng, d, src):
     a, m, n = rng.choice([2, 3, 5, 10]), rng.randint(2, 7), rng.randint(2, 7)
     kind = rng.choice(["mul", "div", "pow"])
@@ -49,7 +49,7 @@ def indices(rng, d, src):
     return Draft(f"Write {t} in the form {a}ⁿ. What is n?", str(r), [str(w) for w in wr if w != r and w > 0], "Laws of indices: aᵐ×aⁿ = aᵐ⁺ⁿ, aᵐ÷aⁿ = aᵐ⁻ⁿ, (aᵐ)ⁿ = aᵐⁿ.", src=src)
 
 
-@reg([O5], "en-m-standard-form", SO, "Indices and standard form")
+@reg([O5], "en-m-standard-form", SO, "Indices and standard form", diffs=(1, 2))
 def standard_form(rng, d, src):
     m = rng.choice([1.5, 2.4, 3.6, 4.2, 5, 6.7, 7.8, 8.1, 9.2])
     e = rng.choice([-5, -4, -3, 3, 4, 5, 6, 7])
@@ -63,7 +63,7 @@ def standard_form(rng, d, src):
     return Draft(f"Write {dec} in standard form.", right, wr, "Standard form is A × 10ⁿ with 1 ≤ A < 10.", src=src)
 
 
-@reg([O5], "en-m-quadratic-factor", SO, "Algebra")
+@reg([O5], "en-m-quadratic-factor", SO, "Algebra", diffs=(3,))
 def quad_factor(rng, d, src):
     a, b = rng.randint(-8, 8), rng.randint(-8, 8)
     if a == b:
@@ -74,7 +74,7 @@ def quad_factor(rng, d, src):
                  f"Find two numbers with sum {num(s)} and product {num(p)}: {num(a)} and {num(b)}.", src=src)
 
 
-@reg([O5], "en-m-simultaneous", SO, "Algebra")
+@reg([O5], "en-m-simultaneous", SO, "Algebra", diffs=(3,))
 def simultaneous(rng, d, src):
     x, y = rng.randint(-5, 8), rng.randint(-5, 8)
     a, b, c, e = rng.randint(1, 5), rng.randint(1, 5), rng.randint(1, 5), rng.randint(-5, -1)
@@ -87,7 +87,7 @@ def simultaneous(rng, d, src):
                  f"Solving gives x = {num(x)} and y = {num(y)}.", src=src, diff=3)
 
 
-@reg([O5], "en-m-percent-profit", SO, "Arithmetic")
+@reg([O5], "en-m-percent-profit", SO, "Arithmetic", diffs=(1, 2))
 def percent_profit(rng, d, src):
     cp, pct = rng.choice([200, 400, 500, 800, 1000, 2500]), rng.choice([5, 10, 12, 15, 20, 25, 30, 40])
     sp = cp * (100 + pct) // 100 if cp * (100 + pct) % 100 == 0 else None
@@ -97,7 +97,7 @@ def percent_profit(rng, d, src):
                  "Percentage profit = profit ÷ cost price × 100 %.", src=src)
 
 
-@reg([O5], "en-m-compound-interest", SO, "Arithmetic")
+@reg([O5], "en-m-compound-interest", SO, "Arithmetic", diffs=(3,))
 def compound_interest(rng, d, src):
     P, r, n = rng.choice([1000, 2000, 5000, 10000, 20000]), rng.choice([5, 10, 20]), rng.choice([2, 3])
     amount = P * (1 + r / 100) ** n
@@ -106,7 +106,7 @@ def compound_interest(rng, d, src):
                  f"A = P(1 + r/100)ⁿ = {P} × {E(1 + r / 100)}{sup(n)}.", src=src, diff=3)
 
 
-@reg([O5], "en-m-mean-median-mode", SO, "Statistics")
+@reg([O5], "en-m-mean-median-mode", SO, "Statistics", diffs=(1, 2))
 def mean_median(rng, d, src):
     n = rng.choice([5, 7, 9])
     data = [rng.randint(2, 20) for _ in range(n)]
@@ -124,7 +124,7 @@ def mean_median(rng, d, src):
     return Draft(f"Find the {kind} of the numbers {', '.join(map(str, data))}.", ans, wr, {"median": "Order the data: the median is the middle value.", "range": "Range = largest − smallest.", "mean": "Mean = sum ÷ number of values."}[kind], src=src)
 
 
-@reg([O5], "en-m-probability-bag", SO, "Probability")
+@reg([O5], "en-m-probability-bag", SO, "Probability", diffs=(1, 2))
 def prob_bag(rng, d, src):
     r, b, g = rng.randint(2, 9), rng.randint(2, 9), rng.randint(1, 8)
     tot = r + b + g
@@ -133,7 +133,7 @@ def prob_bag(rng, d, src):
                  f"P(red) = {r}/{tot}" + (f" = {num(p)}." if p.denominator != tot else "."), src=src)
 
 
-@reg([O5], "en-m-sets", SO, "Sets")
+@reg([O5], "en-m-sets", SO, "Sets", diffs=(2,))
 def sets(rng, d, src):
     a, b, both, neither = rng.randint(8, 30), rng.randint(8, 30), rng.randint(1, 7), rng.randint(0, 8)
     total = a + b - both + neither
@@ -141,7 +141,7 @@ def sets(rng, d, src):
                  "n(A ∪ B) = n(A) + n(B) − n(A ∩ B); add those who study neither.", src=src)
 
 
-@reg([O5], "en-m-cylinder", SO, "Mensuration")
+@reg([O5], "en-m-cylinder", SO, "Mensuration", diffs=(2, 3))
 def cylinder(rng, d, src):
     r, h = rng.choice([1, 2, 3, 5, 7, 10]), rng.choice([2, 4, 5, 10, 14])
     v = 22 / 7 * r * r * h
@@ -150,7 +150,7 @@ def cylinder(rng, d, src):
                  "Volume = πr²h.", src=src)
 
 
-@reg([O5], "en-m-pythag-trig", SO, "Trigonometry")
+@reg([O5], "en-m-pythag-trig", SO, "Trigonometry", diffs=(2, 3))
 def pythag_trig(rng, d, src):
     u, v, w = rng.choice([(3, 4, 5), (5, 12, 13), (8, 15, 17), (6, 8, 10), (7, 24, 25)])
     f = rng.choice(["sin", "cos", "tan"])
@@ -160,7 +160,7 @@ def pythag_trig(rng, d, src):
                  "SOH-CAH-TOA: sin = opp/hyp, cos = adj/hyp, tan = opp/adj.", src=src)
 
 
-@reg([O5], "en-m-direct-variation", SO, "Variation")
+@reg([O5], "en-m-direct-variation", SO, "Variation", diffs=(2,))
 def variation(rng, d, src):
     k, x0, x1 = rng.choice([2, 3, 4, 5, 6, 8]), rng.choice([2, 3, 4, 5]), rng.choice([6, 7, 8, 9, 10])
     y0 = k * x0
@@ -169,7 +169,7 @@ def variation(rng, d, src):
                  f"y = kx with k = {y0}/{x0} = {k}.", src=src)
 
 
-@reg([O5], "en-m-linear-gradient", SO, "Coordinate geometry")
+@reg([O5], "en-m-linear-gradient", SO, "Coordinate geometry", diffs=(2, 3))
 def gradient(rng, d, src):
     xa, ya = rng.randint(-5, 5), rng.randint(-5, 5)
     dx, dy = nz(rng, -5, 5), rng.randint(-8, 8)
@@ -178,7 +178,7 @@ def gradient(rng, d, src):
                  "Gradient = (y₂ − y₁)/(x₂ − x₁).", src=src)
 
 
-@reg([O5], "en-m-bearings-angles", SO, "Geometry")
+@reg([O5], "en-m-bearings-angles", SO, "Geometry", diffs=(2, 3))
 def polygon_angles(rng, d, src):
     n = rng.choice([5, 6, 8, 9, 10, 12])
     s = (n - 2) * 180
@@ -191,7 +191,7 @@ def polygon_angles(rng, d, src):
                  "Interior angle = (n − 2) × 180° ÷ n.", src=src)
 
 
-@reg([O5], "en-m-matrix-det", SO, "Matrices")
+@reg([O5], "en-m-matrix-det", SO, "Matrices", diffs=(3,))
 def matrix_det(rng, d, src):
     a, b, c, e = (rng.randint(-5, 7) for _ in range(4))
     det = a * e - b * c
@@ -199,7 +199,7 @@ def matrix_det(rng, d, src):
                  "det = ad − bc.", src=src)
 
 
-@reg([O5], "en-m-log-basic", SO, "Logarithms")
+@reg([O5], "en-m-log-basic", SO, "Logarithms", diffs=(3,))
 def log_basic(rng, d, src):
     a, n = rng.choice([2, 3, 4, 5, 10]), rng.randint(2, 5)
     v = a ** n
@@ -207,7 +207,7 @@ def log_basic(rng, d, src):
 
 
 # ================================================================================================ A Level
-@reg([A6, A12], "en-m-differentiate", SA, "Differentiation")
+@reg([A6, A12], "en-m-differentiate", SA, "Differentiation", diffs=(2, 3))
 def differentiate(rng, d, src):
     deg = rng.choice([2, 3, 4])
     co = [nz(rng, -6, 7)] + [rng.randint(-8, 8) for _ in range(deg)]
@@ -222,7 +222,7 @@ def differentiate(rng, d, src):
     return Draft(f"Differentiate f(x) = {poly(co)} with respect to x.", poly(dc), wrongs, "Differentiate term by term: d/dx(axⁿ) = naxⁿ⁻¹.", src=src)
 
 
-@reg([A6, A12], "en-m-gradient-at-point", SA, "Differentiation")
+@reg([A6, A12], "en-m-gradient-at-point", SA, "Differentiation", diffs=(2, 3))
 def gradient_at(rng, d, src):
     deg = rng.choice([2, 3])
     co = [nz(rng, -4, 4)] + [rng.randint(-6, 6) for _ in range(deg)]
@@ -231,7 +231,7 @@ def gradient_at(rng, d, src):
     return Draft(f"Find the gradient of the curve y = {poly(co)} at x = {num(x0)}.", num(v), ints(rng, v, 5) + [num(ev(co, x0))], f"dy/dx = {poly(dpoly(co))}; substitute x = {num(x0)}.", src=src)
 
 
-@reg([A6, A12], "en-m-stationary", SA, "Differentiation")
+@reg([A6, A12], "en-m-stationary", SA, "Differentiation", diffs=(3, 4))
 def stationary(rng, d, src):
     a, h, k = nz(rng, -3, 3), rng.randint(-5, 5), rng.randint(-8, 8)
     b, c = -2 * a * h, a * h * h + k
@@ -240,13 +240,13 @@ def stationary(rng, d, src):
                  f"dy/dx = {poly([2 * a, b])} = 0 gives x = {num(h)}, and y = {num(k)}. It is a {kind}.", src=src, diff=3)
 
 
-@reg([A6, A12], "en-m-integrate-definite", SA, "Integration")
+@reg([A6, A12], "en-m-integrate-definite", SA, "Integration", diffs=(3, 4))
 def integrate_definite(rng, d, src):
     a, b, c = nz(rng, 1, 5), rng.randint(-4, 6), rng.randint(0, 3)
     lo, hi = rng.randint(0, 2), rng.randint(3, 5)
     F = lambda x: Fraction(a, 3) * x ** 3 + Fraction(b, 2) * x ** 2 + c * x
     v = F(hi) - F(lo)
-    n = 20000
+    n = 400
     f = lambda x: a * x * x + b * x + c
     simpson = sum(((1 if i in (0, n) else (4 if i % 2 else 2)) * f(lo + (hi - lo) * i / n)) for i in range(n + 1)) * (hi - lo) / (3 * n)
     assert abs(simpson - float(v)) < 1e-6
@@ -254,7 +254,7 @@ def integrate_definite(rng, d, src):
     return Draft(f"Evaluate the definite integral of ({poly([a, b, c])}) dx from x = {lo} to x = {hi}.", num(v), [num(w) for w in alt], "Integrate, then F(upper) − F(lower).", src=src, diff=4)
 
 
-@reg([A6, A12], "en-m-binomial-coefficient", SA, "Binomial expansion")
+@reg([A6, A12], "en-m-binomial-coefficient", SA, "Binomial expansion", diffs=(3, 4))
 def binomial_coeff(rng, d, src):
     n, a = rng.randint(4, 8), rng.randint(1, 4)
     r = rng.randint(1, n - 1)
@@ -263,7 +263,7 @@ def binomial_coeff(rng, d, src):
                  f"The term is C({n},{r})({a}x){sup(r)} so the coefficient is {math.comb(n, r)} × {a}{sup(r)}.", src=src, diff=3)
 
 
-@reg([A6, A12], "en-m-gp-infinity", SA, "Sequences and series")
+@reg([A6, A12], "en-m-gp-infinity", SA, "Sequences and series", diffs=(3,))
 def gp_infinity(rng, d, src):
     a, r = rng.choice([2, 3, 4, 5, 6, 8, 10, 12, 20]), rng.choice([Fraction(1, 2), Fraction(1, 3), Fraction(1, 4), Fraction(2, 3), Fraction(3, 4), Fraction(1, 5)])
     s = a / (1 - r)
@@ -271,7 +271,7 @@ def gp_infinity(rng, d, src):
                  "S∞ = a/(1 − r) for |r| < 1.", src=src)
 
 
-@reg([A6, A12], "en-m-ap-sum", SA, "Sequences and series")
+@reg([A6, A12], "en-m-ap-sum", SA, "Sequences and series", diffs=(3,))
 def ap_sum(rng, d, src):
     a, dd, n = rng.randint(-5, 15), nz(rng, -4, 7), rng.randint(8, 30)
     s = n * (2 * a + (n - 1) * dd) // 2
@@ -280,7 +280,7 @@ def ap_sum(rng, d, src):
                  "Sₙ = n/2 [2a + (n − 1)d].", src=src, diff=3)
 
 
-@reg([A6, A12], "en-m-discriminant-k", SA, "Quadratics")
+@reg([A6, A12], "en-m-discriminant-k", SA, "Quadratics", diffs=(4,))
 def discriminant_k(rng, d, src):
     k = rng.choice([2, 3, 4, 5, 6, 8, 9, 10])
     # x² + b x + c = 0 has equal roots when b² = 4c ; ask for c given b
@@ -289,7 +289,7 @@ def discriminant_k(rng, d, src):
     return Draft(f"Find the value of c for which x² + {b}x + c = 0 has equal roots.", str(c), [str(w) for w in (b, 2 * c, k, c + 1, 4 * c, b * b)], "Equal roots need b² − 4ac = 0: " + f"{b * b} − 4c = 0.", src=src, diff=3)
 
 
-@reg([A6, A12], "en-m-remainder-theorem", SA, "Polynomials")
+@reg([A6, A12], "en-m-remainder-theorem", SA, "Polynomials", diffs=(3, 4))
 def remainder_theorem(rng, d, src):
     co = [1] + [rng.randint(-6, 6) for _ in range(3)]
     a = rng.randint(-3, 4)
@@ -299,7 +299,7 @@ def remainder_theorem(rng, d, src):
     return Draft(f"What is the remainder when {f} is divided by ({root})?", num(r), ints(rng, r, 5) + [num(ev(co, -a))], "Remainder theorem: the remainder is f(a).", src=src, diff=3)
 
 
-@reg([A6, A12], "en-m-log-laws", SA, "Logarithms")
+@reg([A6, A12], "en-m-log-laws", SA, "Logarithms", diffs=(4,))
 def log_laws(rng, d, src):
     a, b = rng.choice([2, 3, 5]), rng.choice([2, 3, 5])
     m, n = rng.randint(1, 4), rng.randint(1, 4)
@@ -313,7 +313,7 @@ def log_laws(rng, d, src):
     return Draft(f"Given log {a} = x and log {b} = y, how can log {v} be written in terms of x and y?", right, wr, "log(aᵐbⁿ) = m log a + n log b.", src=src, diff=3)
 
 
-@reg([A6, A12], "en-m-trig-identity", SA, "Trigonometry")
+@reg([A6, A12], "en-m-trig-identity", SA, "Trigonometry", diffs=(3,))
 def trig_identity(rng, d, src):
     u, v, w = rng.choice([(3, 4, 5), (5, 12, 13), (8, 15, 17), (7, 24, 25)])
     if rng.random() < 0.5:
@@ -323,7 +323,7 @@ def trig_identity(rng, d, src):
     return Draft(f"θ is acute and {which} θ = {u}/{w}. What is {'cos' if which == 'sin' else 'sin'} θ?", f"{v}/{w}", [f"{u}/{w}", f"{w - u}/{w}", f"{v}/{u}", f"{v * v}/{w * w}", f"{w - v}/{w}"], "Use sin²θ + cos²θ = 1; the value is positive for an acute angle.", src=src)
 
 
-@reg([A12], "en-m-complex-modulus", SA, "Complex numbers")
+@reg([A12], "en-m-complex-modulus", SA, "Complex numbers", diffs=(3,))
 def complex_modulus(rng, d, src):
     u, v, w = rng.choice([(3, 4, 5), (5, 12, 13), (8, 15, 17), (6, 8, 10), (7, 24, 25)])
     su, sv = rng.choice([1, -1]), rng.choice([1, -1])
@@ -331,7 +331,7 @@ def complex_modulus(rng, d, src):
     return Draft(f"What is the modulus of the complex number z = {z}?", str(w), [str(x) for x in (u + v, abs(u - v), u * v, w * w, w + 1)], "|z| = √(a² + b²).", src=src)
 
 
-@reg([A12], "en-m-complex-multiply", SA, "Complex numbers")
+@reg([A12], "en-m-complex-multiply", SA, "Complex numbers", diffs=(4,))
 def complex_multiply(rng, d, src):
     a, b, c, e = (rng.randint(-5, 6) for _ in range(4))
     z = complex(a, b) * complex(c, e)
@@ -341,7 +341,7 @@ def complex_multiply(rng, d, src):
     return Draft(f"Simplify ({zt(a, b)})({zt(c, e)}).", zt(re, im), [zt(a * c + b * e, a * e - b * c), zt(a * c, b * e), zt(a * c - b * e, a * e - b * c), zt(re, -im), zt(a + c, b + e)], "Expand and use i² = −1.", src=src, diff=3)
 
 
-@reg([A6, A12], "en-m-poisson-zero", SA, "Probability and statistics")
+@reg([A6, A12], "en-m-poisson-zero", SA, "Probability and statistics", diffs=(4,))
 def poisson_zero(rng, d, src):
     lam = rng.choice([1, 2, 3, 0.5, 1.5, 4])
     p = math.exp(-lam)
@@ -349,7 +349,7 @@ def poisson_zero(rng, d, src):
                  "P(X = 0) = e^(−λ).", src=src, diff=3)
 
 
-@reg([A6, A12], "en-m-binomial-prob", SA, "Probability and statistics")
+@reg([A6, A12], "en-m-binomial-prob", SA, "Probability and statistics", diffs=(4, 5))
 def binomial_prob(rng, d, src):
     n, k = rng.choice([4, 5, 6, 8, 10]), None
     k = rng.randint(1, n - 1)
@@ -360,7 +360,7 @@ def binomial_prob(rng, d, src):
                  "P(X = k) = C(n, k) pᵏ (1 − p)ⁿ⁻ᵏ.", src=src, diff=4)
 
 
-@reg([A6, A12], "en-m-vector-dot", SA, "Vectors")
+@reg([A6, A12], "en-m-vector-dot", SA, "Vectors", diffs=(3,))
 def vector_dot(rng, d, src):
     a, b, c = (rng.randint(-5, 6) for _ in range(3))
     x, y, z = (rng.randint(-5, 6) for _ in range(3))

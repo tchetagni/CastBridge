@@ -29,7 +29,7 @@ def numdiff(f, x, h=1e-6):
 
 
 # ================================================================================================ 2nde
-@gen(C2, "m2-eq2-factored", cap=220, cat="Algèbre · séries A, C, D, E, TI")
+@gen(C2, "m2-eq2-factored", cap=600, cat="Algèbre · séries A, C, D, E, TI", diffs=(2, 3))
 def eq2_factored(rng, d):
     a, b = rng.randint(-9, 9), rng.randint(-9, 9)
     if a == b:
@@ -46,7 +46,7 @@ def eq2_factored(rng, d):
                  f"On cherche deux nombres de somme {num(s)} et de produit {num(p)} : {num(a)} et {num(b)} ; on vérifie en remplaçant x.", src=S2)
 
 
-@gen(C2, "m2-discriminant", cap=260, cat="Algèbre · séries A, C, D, E, TI")
+@gen(C2, "m2-discriminant", cap=600, cat="Algèbre · séries A, C, D, E, TI", diffs=(2, 3))
 def discriminant(rng, d):
     a, b, c = nz(rng, -6, 6), rng.randint(-9, 9), rng.randint(-9, 9)
     delta = b * b - 4 * a * c
@@ -55,7 +55,7 @@ def discriminant(rng, d):
                  f"Δ = b² − 4ac = ({num(b)})² − 4×({num(a)})×({num(c)}) = {num(delta)}.", src=S2)
 
 
-@gen(C2, "m2-roots-count", cap=200, cat="Algèbre · séries A, C, D, E, TI")
+@gen(C2, "m2-roots-count", cap=600, cat="Algèbre · séries A, C, D, E, TI", diffs=(2, 3))
 def roots_count(rng, d):
     a, b, c = nz(rng, -5, 5), rng.randint(-8, 8), rng.randint(-8, 8)
     delta = b * b - 4 * a * c
@@ -65,7 +65,7 @@ def roots_count(rng, d):
                  f"Δ = {num(delta)} : " + ("Δ < 0, pas de racine réelle." if n == 0 else "Δ = 0, racine double." if n == 1 else "Δ > 0, deux racines."), src=S2)
 
 
-@gen(C2, "m2-ineq1", cap=240, cat="Inéquations · séries A, C, D, E, TI")
+@gen(C2, "m2-ineq1", cap=600, cat="Inéquations · séries A, C, D, E, TI", diffs=(1, 2))
 def ineq1(rng, d):
     a, k = nz(rng, -7, 7), rng.randint(-8, 8)
     b = rng.randint(-9, 9)
@@ -81,7 +81,7 @@ def ineq1(rng, d):
                  f"On isole x : {num(a)}x < {num(c - b)}" + (" ; on divise par un nombre négatif, le sens s'inverse." if a < 0 else "."), src=S2)
 
 
-@gen(C2, "m2-abs-eq", cap=200, cat="Calcul dans R · séries A, C, D, E, TI")
+@gen(C2, "m2-abs-eq", cap=600, cat="Calcul dans R · séries A, C, D, E, TI", diffs=(2, 3))
 def abs_eq(rng, d):
     a, r = rng.randint(-8, 8), rng.randint(1, 9)
     sol = sorted((a - r, a + r))
@@ -93,7 +93,7 @@ def abs_eq(rng, d):
                  f"|{inner}| = {r} équivaut à {inner} = {r} ou {inner} = −{r}.", src=S2)
 
 
-@gen(C2, "m2-abs-ineq", cap=200, cat="Calcul dans R · séries A, C, D, E, TI")
+@gen(C2, "m2-abs-ineq", cap=600, cat="Calcul dans R · séries A, C, D, E, TI", diffs=(3, 4))
 def abs_ineq(rng, d):
     a, r = rng.randint(-6, 6), rng.randint(1, 8)
     inner = f"x {'−' if a > 0 else '+'} {abs(a)}" if a else "x"
@@ -106,7 +106,7 @@ def abs_ineq(rng, d):
                  f"|x − {num(a)}| ≤ {r} signifie que x est à une distance au plus {r} de {num(a)} : {right}.", src=S2)
 
 
-@gen(C2, "m2-interval-inter", cap=180, cat="Ensembles et intervalles · séries A, C, D, E, TI")
+@gen(C2, "m2-interval-inter", cap=600, cat="Ensembles et intervalles · séries A, C, D, E, TI", diffs=(2, 3))
 def interval_inter(rng, d):
     a = rng.randint(-8, 3)
     b = a + rng.randint(3, 9)
@@ -121,7 +121,7 @@ def interval_inter(rng, d):
                  f"On garde les nombres présents dans les deux intervalles : de {num(c)} à {num(b)}, avec les crochets de la borne la plus restrictive.", src=S2)
 
 
-@gen(C2, "m2-vector-coords", cap=220, cat="Géométrie analytique · séries A, C, D, E, TI")
+@gen(C2, "m2-vector-coords", cap=600, cat="Géométrie analytique · séries A, C, D, E, TI", diffs=(1, 2))
 def vector_coords(rng, d):
     xa, ya, xb, yb = (rng.randint(-8, 8) for _ in range(4))
     if (xa, ya) == (xb, yb):
@@ -132,7 +132,7 @@ def vector_coords(rng, d):
                  "Les coordonnées de AB sont (xB − xA ; yB − yA).", src=S2)
 
 
-@gen(C2, "m2-midpoint", cap=220, cat="Géométrie analytique · séries A, C, D, E, TI")
+@gen(C2, "m2-midpoint", cap=600, cat="Géométrie analytique · séries A, C, D, E, TI", diffs=(1, 2))
 def midpoint(rng, d):
     xa, ya = rng.randint(-8, 8), rng.randint(-8, 8)
     mx, my = rng.randint(-6, 6), rng.randint(-6, 6)
@@ -142,7 +142,7 @@ def midpoint(rng, d):
                  "I a pour coordonnées ((xA + xB)/2 ; (yA + yB)/2).", src=S2)
 
 
-@gen(C2, "m2-distance", cap=200, cat="Géométrie analytique · séries A, C, D, E, TI")
+@gen(C2, "m2-distance", cap=600, cat="Géométrie analytique · séries A, C, D, E, TI", diffs=(2, 3))
 def distance(rng, d):
     u, v, w = rng.choice(PYTH)
     k = rng.choice([1, 1, 2])
@@ -155,7 +155,7 @@ def distance(rng, d):
                  f"AB = √(({num(xb - xa)})² + ({num(yb - ya)})²) = √{num(u * u + v * v)} = {num(w)}.", src=S2)
 
 
-@gen(C2, "m2-slope", cap=220, cat="Droites · séries A, C, D, E, TI")
+@gen(C2, "m2-slope", cap=600, cat="Droites · séries A, C, D, E, TI", diffs=(2, 3))
 def slope(rng, d):
     xa, ya = rng.randint(-6, 6), rng.randint(-6, 6)
     dx, dy = nz(rng, -6, 6), rng.randint(-9, 9)
@@ -166,7 +166,7 @@ def slope(rng, d):
                  f"m = (yB − yA)/(xB − xA) = {num(dy)}/{num(dx)} = {num(m)}.", src=S2)
 
 
-@gen(C2, "m2-line-equation", cap=220, cat="Droites · séries A, C, D, E, TI")
+@gen(C2, "m2-line-equation", cap=600, cat="Droites · séries A, C, D, E, TI", diffs=(3, 4))
 def line_equation(rng, d):
     m, p = nz(rng, -5, 5), rng.randint(-8, 8)
     x1, x2 = rng.randint(-4, 0), rng.randint(1, 5)
@@ -177,7 +177,7 @@ def line_equation(rng, d):
                  f"m = ({num(y2)} − ({num(y1)}))/({num(x2)} − ({num(x1)})) = {num(m)}, puis p = {num(y1)} − {num(m)}×({num(x1)}) = {num(p)}.", src=S2)
 
 
-@gen(C2, "m2-parallel-line", cap=160, cat="Droites · séries A, C, D, E, TI")
+@gen(C2, "m2-parallel-line", cap=600, cat="Droites · séries A, C, D, E, TI", diffs=(3, 4))
 def parallel_line(rng, d):
     m, p = nz(rng, -5, 5), rng.randint(-6, 6)
     x0, y0 = rng.randint(-5, 5), rng.randint(-5, 5)
@@ -189,7 +189,7 @@ def parallel_line(rng, d):
                  f"Deux droites parallèles ont le même coefficient directeur {num(m)} ; on calcule p = {num(y0)} − {num(m)}×({num(x0)}) = {num(q)}.", src=S2)
 
 
-@gen(C2, "m2-function-value", cap=240, cat="Fonctions · séries A, C, D, E, TI")
+@gen(C2, "m2-function-value", cap=600, cat="Fonctions · séries A, C, D, E, TI", diffs=(1, 2))
 def function_value(rng, d):
     a, b, c = nz(rng, -4, 4), rng.randint(-6, 6), rng.randint(-8, 8)
     x0 = rng.randint(-4, 5)
@@ -198,7 +198,7 @@ def function_value(rng, d):
                  ints(rng, v, 4) + [num(a * x0 * x0 - b * x0 + c), num(a * x0 + b * x0 + c)], f"On remplace x par {num(x0)} : f({num(x0)}) = {num(v)}.", src=S2)
 
 
-@gen(C2, "m2-domain", cap=140, cat="Fonctions · séries A, C, D, E, TI")
+@gen(C2, "m2-domain", cap=600, cat="Fonctions · séries A, C, D, E, TI", diffs=(3, 4))
 def domain(rng, d):
     a = rng.randint(-8, 8)
     inner = f"x {'−' if a > 0 else '+'} {abs(a)}" if a else "x"
@@ -211,7 +211,7 @@ def domain(rng, d):
                  f"Il faut {inner} ≥ 0, soit x ≥ {num(a)}.", src=S2)
 
 
-@gen(C2, "m2-percent-chain", cap=200, cat="Pourcentages · séries A, C, D, E, TI")
+@gen(C2, "m2-percent-chain", cap=600, cat="Pourcentages · séries A, C, D, E, TI", diffs=(3, 4))
 def percent_chain(rng, d):
     p, q = rng.choice([10, 20, 25, 30, 40, 50]), rng.choice([10, 20, 25, 30, 40, 50])
     up = rng.random() < 0.5
@@ -229,7 +229,7 @@ def percent_chain(rng, d):
                  f"Les coefficients multiplicateurs se multiplient : {fr(float(f), 4)} soit {s}.", src=S2)
 
 
-@gen(C2, "m2-set-card", cap=150, cat="Ensembles et intervalles · séries A, C, D, E, TI")
+@gen(C2, "m2-set-card", cap=600, cat="Ensembles et intervalles · séries A, C, D, E, TI", diffs=(1, 2))
 def set_card(rng, d):
     a, b, both = rng.randint(10, 40), rng.randint(10, 40), rng.randint(1, 9)
     union = a + b - both
@@ -237,7 +237,7 @@ def set_card(rng, d):
                  [num(a + b), num(a + b + both), num(a + b - 2 * both), num(max(a, b))], f"|A ∪ B| = |A| + |B| − |A ∩ B| = {a} + {b} − {both} = {union}.", src=S2)
 
 
-@gen(C2, "m2-trig-sin-from-cos", cap=120, cat="Trigonométrie · séries C, D, E, TI")
+@gen(C2, "m2-trig-sin-from-cos", cap=600, cat="Trigonométrie · séries C, D, E, TI", diffs=(3, 4))
 def sin_from_cos(rng, d):
     u, v, w = rng.choice(PYTH[:5])
     if rng.random() < 0.5:
@@ -251,7 +251,7 @@ def sin_from_cos(rng, d):
                  f"cos²x + sin²x = 1 donne {want}² x = 1 − ({u}/{w})² = {v * v}/{w * w}, et {want} x > 0 car x est aigu : {v}/{w}.", src=S2)
 
 
-@gen(C2, "m2-square-poly-factor", cap=160, cat="Algèbre · séries A, C, D, E, TI")
+@gen(C2, "m2-square-poly-factor", cap=600, cat="Algèbre · séries A, C, D, E, TI", diffs=(2, 3))
 def factor_remarkable(rng, d):
     a, b = rng.randint(2, 9), rng.randint(2, 9)
     kind = rng.choice(["plus", "minus", "diff"])
@@ -265,7 +265,7 @@ def factor_remarkable(rng, d):
 
 
 # ================================================================================================ 1re
-@gen(C1, "m1-sum-product", cap=220, cat="Second degré · séries C, D, E, TI")
+@gen(C1, "m1-sum-product", cap=600, cat="Second degré · séries C, D, E, TI", diffs=(3, 4))
 def sum_product(rng, d):
     x1, x2 = rng.randint(-9, 9), rng.randint(-9, 9)
     a = nz(rng, 1, 4)
@@ -280,7 +280,7 @@ def sum_product(rng, d):
                  f"Pour ax² + bx + c = 0 : S = −b/a = {num(val) if ask == 'somme' else num(x1 + x2)} et P = c/a = {num(x1 * x2)}.", src=S1)
 
 
-@gen(C1, "m1-parabola-extremum", cap=240, cat="Second degré · séries C, D, E, TI")
+@gen(C1, "m1-parabola-extremum", cap=600, cat="Second degré · séries C, D, E, TI", diffs=(3, 4))
 def parabola_extremum(rng, d):
     a, h, k = nz(rng, -4, 4), rng.randint(-6, 6), rng.randint(-9, 9)
     b, c = -2 * a * h, a * h * h + k
@@ -294,7 +294,7 @@ def parabola_extremum(rng, d):
                  f"Le sommet a pour abscisse −b/(2a) = {num(h)} et pour ordonnée f({num(h)}) = {num(k)}.", src=S1)
 
 
-@gen(C1, "m1-tangent", cap=260, cat="Dérivation · séries C, D, E, TI")
+@gen(C1, "m1-tangent", cap=600, cat="Dérivation · séries C, D, E, TI", diffs=(4, 5))
 def tangent(rng, d):
     deg = rng.choice([2, 3])
     co = [nz(rng, -3, 3)] + [rng.randint(-5, 5) for _ in range(deg)]
@@ -308,7 +308,7 @@ def tangent(rng, d):
                  f"f'({num(x0)}) = {num(m)} et f({num(x0)}) = {num(y0)} ; y = f'(a)(x − a) + f(a) = {lin(m, p)}.", src=S1)
 
 
-@gen(C1, "m1-critical-point", cap=220, cat="Dérivation · séries C, D, E, TI")
+@gen(C1, "m1-critical-point", cap=600, cat="Dérivation · séries C, D, E, TI", diffs=(4, 5))
 def critical_point(rng, d):
     k = rng.randint(1, 7)
     a = nz(rng, 1, 3)
@@ -321,7 +321,7 @@ def critical_point(rng, d):
                  f"f'(x) = {poly(dpoly(co))} = {num(3 * a)}(x² − {k * k}) : elle s'annule en ±{k}.", src=S1)
 
 
-@gen(C1, "m1-seq-arith-find-r", cap=220, cat="Suites · séries C, D, E, TI")
+@gen(C1, "m1-seq-arith-find-r", cap=600, cat="Suites · séries C, D, E, TI", diffs=(2, 3))
 def seq_find_r(rng, d):
     r, u0 = nz(rng, -6, 8), rng.randint(-10, 15)
     p, q = rng.randint(0, 4), rng.randint(6, 12)
@@ -331,7 +331,7 @@ def seq_find_r(rng, d):
                  f"Entre les rangs {p} et {q} on ajoute {q - p} fois la raison : r = ({num(uq)} − ({num(up)}))/{q - p} = {num(r)}.", src=S1)
 
 
-@gen(C1, "m1-seq-geo-term", cap=220, cat="Suites · séries C, D, E, TI")
+@gen(C1, "m1-seq-geo-term", cap=600, cat="Suites · séries C, D, E, TI", diffs=(2, 3))
 def seq_geo_term(rng, d):
     u0, q, n = rng.choice([1, 2, 3, 5, -1, -2]), rng.choice([2, 3, -2, 5]), rng.randint(3, 6)
     v = u0 * q ** n
@@ -340,7 +340,7 @@ def seq_geo_term(rng, d):
                  f"uₙ = u₀ × qⁿ = {num(u0)} × ({num(q)}){sup(n)} = {num(v)}.", src=S1)
 
 
-@gen(C1, "m1-seq-arith-sum", cap=200, cat="Suites · séries C, D, E, TI")
+@gen(C1, "m1-seq-arith-sum", cap=600, cat="Suites · séries C, D, E, TI", diffs=(3, 4))
 def seq_arith_sum(rng, d):
     u1, r, n = rng.randint(-5, 12), nz(rng, -4, 6), rng.randint(6, 20)
     s = sum(u1 + i * r for i in range(n))
@@ -350,7 +350,7 @@ def seq_arith_sum(rng, d):
                  f"S = n(u₁ + uₙ)/2 avec uₙ = {num(u1 + (n - 1) * r)} : S = {num(s)}.", src=S1)
 
 
-@gen(C1, "m1-trig-exact", cap=120, cat="Trigonométrie · séries C, D, E, TI")
+@gen(C1, "m1-trig-exact", cap=600, cat="Trigonométrie · séries C, D, E, TI", diffs=(2, 3))
 def trig_exact(rng, d):
     table = [("cos", "π/3", "1/2", math.cos(math.pi / 3)), ("sin", "π/6", "1/2", math.sin(math.pi / 6)), ("cos", "π/6", "√3/2", math.cos(math.pi / 6)),
              ("sin", "π/3", "√3/2", math.sin(math.pi / 3)), ("cos", "π/4", "√2/2", math.cos(math.pi / 4)), ("sin", "π/4", "√2/2", math.sin(math.pi / 4)),
@@ -366,7 +366,7 @@ def trig_exact(rng, d):
     return Draft(f"Quelle est la valeur exacte de {f}({ang}) ?", txt, wr[:5], "Valeur remarquable du cercle trigonométrique.", src=S1, diff=2 if ang in ("π/2", "π", "π/3", "π/6", "π/4") else 3)
 
 
-@gen(C1, "m1-dot-orthogonal", cap=220, cat="Produit scalaire · séries C, D, E, TI")
+@gen(C1, "m1-dot-orthogonal", cap=600, cat="Produit scalaire · séries C, D, E, TI", diffs=(3, 4))
 def dot_orth(rng, d):
     a, b, c = nz(rng, -6, 6), nz(rng, -6, 6), nz(rng, -6, 6)
     # u(a, b), v(c, k) orthogonal -> a c + b k = 0 ; choose k integer
@@ -383,7 +383,7 @@ def dot_orth(rng, d):
                  f"u·v = {num(a)}×{num(x)} + {num(b)}×k = 0, donc k = {num(k)}.", src=S1)
 
 
-@gen(C1, "m1-dot-value", cap=220, cat="Produit scalaire · séries C, D, E, TI")
+@gen(C1, "m1-dot-value", cap=600, cat="Produit scalaire · séries C, D, E, TI", diffs=(1, 2))
 def dot_value(rng, d):
     a, b, c, e = (rng.randint(-7, 7) for _ in range(4))
     v = a * c + b * e
@@ -392,7 +392,7 @@ def dot_value(rng, d):
                  f"u·v = xx' + yy' = {num(a)}×({num(c)}) + {num(b)}×({num(e)}) = {num(v)}.", src=S1)
 
 
-@gen(C1, "m1-circle-center", cap=200, cat="Géométrie analytique · séries C, D, E, TI")
+@gen(C1, "m1-circle-center", cap=600, cat="Géométrie analytique · séries C, D, E, TI", diffs=(3, 4))
 def circle_center(rng, d):
     a, b, r = rng.randint(-6, 6), rng.randint(-6, 6), rng.randint(1, 9)
     c = a * a + b * b - r * r
@@ -406,7 +406,7 @@ def circle_center(rng, d):
                  f"(x − {num(a)})² + (y − {num(b)})² = {r * r}, donc R = {r}.", src=S1)
 
 
-@gen(C1, "m1-proba-union", cap=200, cat="Probabilités · séries C, D, E, TI")
+@gen(C1, "m1-proba-union", cap=600, cat="Probabilités · séries C, D, E, TI", diffs=(2, 3))
 def proba_union(rng, d):
     pa, pb, pab = rng.choice([30, 40, 50, 60, 70]), rng.choice([20, 30, 40, 50]), rng.choice([5, 10, 15, 20])
     if pab > min(pa, pb) or pa + pb - pab > 100:
@@ -417,7 +417,7 @@ def proba_union(rng, d):
                  f"P(A ∪ B) = P(A) + P(B) − P(A ∩ B) = {pa} + {pb} − {pab} = {u} %.", src=S1)
 
 
-@gen(C1, "m1-stat-variance", cap=200, cat="Statistiques · séries C, D, E, TI")
+@gen(C1, "m1-stat-variance", cap=600, cat="Statistiques · séries C, D, E, TI", diffs=(3, 4))
 def stat_variance(rng, d):
     m, d1, d2 = rng.randint(5, 20), rng.randint(1, 5), rng.randint(1, 5)
     if d1 == d2:
@@ -432,7 +432,7 @@ def stat_variance(rng, d):
                  f"La moyenne est {m} ; V = moyenne des carrés des écarts = ({d1 * d1}+{d1 * d1}+{d2 * d2}+{d2 * d2})/4 = {txt(var)}.", src=S1)
 
 
-@gen(C1, "m1-limit-removable", cap=160, cat="Limites · séries C, D, E, TI")
+@gen(C1, "m1-limit-removable", cap=600, cat="Limites · séries C, D, E, TI", diffs=(4, 5))
 def limit_removable(rng, d):
     a, k = rng.randint(1, 7), nz(rng, 1, 4)
     sa = rng.choice([1, -1])
@@ -448,7 +448,7 @@ def limit_removable(rng, d):
 
 
 # ================================================================================================ Tle
-@gen(CT, "mt-ln-express", cap=240, cat="Logarithme · séries C, D, E")
+@gen(CT, "mt-ln-express", cap=600, cat="Logarithme · séries C, D, E", diffs=(3, 4))
 def ln_express(rng, d):
     i, j, k, l = rng.randint(0, 4), rng.randint(0, 4), rng.randint(0, 3), rng.randint(0, 3)
     if (i, j) == (0, 0) or (i, j) == (k, l):
@@ -490,7 +490,7 @@ def ln_express(rng, d):
                  f"ln(2ⁿ3ᵐ) = n ln 2 + m ln 3 et ln(p/q) = ln p − ln q : on obtient {right}.", src=ST)
 
 
-@gen(CT, "mt-ln-equation", cap=200, cat="Logarithme · séries C, D, E")
+@gen(CT, "mt-ln-equation", cap=600, cat="Logarithme · séries C, D, E", diffs=(4, 5))
 def ln_equation(rng, d):
     a = rng.randint(1, 5)
     p = rng.randint(a + 1, a + 7)
@@ -502,7 +502,7 @@ def ln_equation(rng, d):
                  f"Domaine : x > {a}. L'équation devient x(x − {a}) = {b}, d'où x = {p} ou x = {num(a - p)} ; seule {p} est dans le domaine.", src=ST)
 
 
-@gen(CT, "mt-ln-ineq", cap=160, cat="Logarithme · séries C, D, E")
+@gen(CT, "mt-ln-ineq", cap=600, cat="Logarithme · séries C, D, E", diffs=(4, 5))
 def ln_ineq(rng, d):
     a, b = rng.randint(-5, 5), rng.randint(1, 9)
     inner = f"x {'−' if a > 0 else '+'} {abs(a)}" if a else "x"
@@ -513,7 +513,7 @@ def ln_ineq(rng, d):
                  f"Il faut {inner} > 0 (x > {num(a)}) et {inner} < {b} (x < {num(a + b)}) : la fonction ln est strictement croissante.", src=ST)
 
 
-@gen(CT, "mt-exp-ineq", cap=160, cat="Exponentielle · séries C, D, E")
+@gen(CT, "mt-exp-ineq", cap=600, cat="Exponentielle · séries C, D, E", diffs=(3, 4))
 def exp_ineq(rng, d):
     a, b, c = nz(rng, -4, 5), rng.randint(-6, 6), rng.randint(-6, 8)
     k = Fraction(c - b, a)
@@ -524,7 +524,7 @@ def exp_ineq(rng, d):
                  f"L'exponentielle est strictement croissante : {lin(a, b)} > {num(c)}, soit {right} ({'on divise par un négatif : le sens change' if a < 0 else 'on divise par un positif'}).", src=ST)
 
 
-@gen(CT, "mt-limit-ref", cap=60, cat="Limites · séries C, D, E")
+@gen(CT, "mt-limit-ref", cap=600, cat="Limites · séries C, D, E", diffs=(2, 3))
 def limit_ref(rng, d):
     rows = [("lim_{x→+∞} eˣ/x", "+∞", lambda x: math.exp(x) / x, 1e18), ("lim_{x→+∞} x·e⁻ˣ", "0", lambda x: x * math.exp(-x), 0),
             ("lim_{x→+∞} (ln x)/x", "0", lambda x: math.log(x) / x, 0), ("lim_{x→0⁺} x·ln x", "0", lambda x: x * math.log(x), 0),
@@ -546,7 +546,7 @@ def limit_ref(rng, d):
     return Draft(f"Quelle est la limite de {lim_expr} quand x tend vers {lim_var} ?", r, pool, "Limite de référence (croissances comparées ou limite usuelle).", src=ST, diff=3)
 
 
-@gen(CT, "mt-primitive-uu", cap=140, cat="Intégration · séries C, D, E")
+@gen(CT, "mt-primitive-uu", cap=600, cat="Intégration · séries C, D, E", diffs=(3, 4))
 def primitive_uu(rng, d):
     k, b = nz(rng, -5, 6), rng.randint(1, 8)
     right = f"{num(k)}ln|x + {b}|" if abs(k) != 1 else (f"ln|x + {b}|" if k == 1 else f"{MINUS}ln|x + {b}|")
@@ -558,13 +558,13 @@ def primitive_uu(rng, d):
                  "Une primitive de 1/(x + b) est ln|x + b| ; on multiplie par la constante.", src=ST)
 
 
-@gen(CT, "mt-integral-exp", cap=120, cat="Intégration · séries C, D, E")
+@gen(CT, "mt-integral-exp", cap=600, cat="Intégration · séries C, D, E", diffs=(4, 5))
 def integral_exp(rng, d):
     k = rng.choice([2, 3, 4, 5, -1, -2, -3])
     c = rng.choice([1, 2, 3, 5])
     # integral from 0 to 1 of c e^{kx} dx = c (e^k - 1)/k
     v = c * (math.exp(k) - 1) / k
-    n = 20000
+    n = 1000
     simpson = sum(((1 if i in (0, n) else (4 if i % 2 else 2)) * c * math.exp(k * i / n)) for i in range(n + 1)) / (3 * n)
     assert abs(simpson - v) < 1e-6
     def form(cc, kk, add=-1):
@@ -579,7 +579,7 @@ def integral_exp(rng, d):
                  f"Une primitive de {c if c != 1 else ''}e^({ks}x) est {c if c != 1 else ''}e^({ks}x)/{ks} ; on calcule F(1) − F(0).", src=ST)
 
 
-@gen(CT, "mt-complex-roots", cap=200, cat="Nombres complexes · séries C, D, E")
+@gen(CT, "mt-complex-roots", cap=600, cat="Nombres complexes · séries C, D, E", diffs=(3, 4))
 def complex_roots(rng, d):
     a, b = rng.randint(-6, 6), rng.randint(1, 7)
     # z^2 - 2a z + a^2 + b^2 = 0, roots a ± ib
@@ -592,7 +592,7 @@ def complex_roots(rng, d):
                  right, wr, f"Δ = {num(s * s - 4 * p)} = ({2 * b}i)² ; z = ({num(s)} ± {2 * b}i)/2 = {right}.", src=ST)
 
 
-@gen(CT, "mt-complex-arg", cap=40, cat="Nombres complexes · séries C, D, E")
+@gen(CT, "mt-complex-arg", cap=600, cat="Nombres complexes · séries C, D, E", diffs=(3, 4))
 def complex_arg(rng, d):
     rows = [("1 + i", "π/4"), ("1 − i", "−π/4"), ("−1 + i", "3π/4"), ("−1 − i", "−3π/4"), ("i", "π/2"), ("−i", "−π/2"), ("−1", "π"), ("1", "0"),
             ("1 + i√3", "π/3"), ("√3 + i", "π/6"), ("−1 + i√3", "2π/3"), ("√3 − i", "−π/6"), ("1 − i√3", "−π/3"), ("−√3 + i", "5π/6"), ("2 + 2i", "π/4"), ("3i", "π/2"), ("−4", "π"), ("5 − 5i", "−π/4")]
@@ -608,7 +608,7 @@ def complex_arg(rng, d):
     return Draft(f"Quel est un argument (dans ]−π ; π]) du nombre complexe z = {txt} ?", arg, near[:5], "On compare partie réelle et partie imaginaire : tan θ = Im/Re en tenant compte du quadrant.", src=ST, diff=3)
 
 
-@gen(CT, "mt-moivre", cap=40, cat="Nombres complexes · séries C, D, E")
+@gen(CT, "mt-moivre", cap=600, cat="Nombres complexes · séries C, D, E", diffs=(4, 5))
 def moivre(rng, d):
     n = rng.randint(2, 8)
     v = (1 + 1j) ** n
@@ -625,7 +625,7 @@ def moivre(rng, d):
                  f"On calcule de proche en proche (1 + i)² = 2i ; ou en polaire : (√2)ⁿ(cos(nπ/4) + i sin(nπ/4)) = {zt(re, im)}.", src=ST)
 
 
-@gen(CT, "mt-diff-eq", cap=200, cat="Équations différentielles · séries C, D, E")
+@gen(CT, "mt-diff-eq", cap=600, cat="Équations différentielles · séries C, D, E", diffs=(3, 4))
 def diff_eq(rng, d):
     k, y0 = nz(rng, -4, 5), nz(rng, -5, 6)
     f = lambda x: y0 * math.exp(k * x)
@@ -637,7 +637,7 @@ def diff_eq(rng, d):
                  f"Les solutions de y' = ky sont y = Ce^(kx) ; la condition y(0) = {num(y0)} donne C = {num(y0)}.", src=ST)
 
 
-@gen(CT, "mt-binomial-half", cap=120, cat="Probabilités · séries C, D, E")
+@gen(CT, "mt-binomial-half", cap=600, cat="Probabilités · séries C, D, E", diffs=(3, 4))
 def binomial_half(rng, d):
     n = rng.randint(4, 10)
     k = rng.randint(0, n)
@@ -647,7 +647,7 @@ def binomial_half(rng, d):
                  f"P(X = k) = C({n},{k}) (1/2)ᵏ (1/2)ⁿ⁻ᵏ = {math.comb(n, k)}/{2 ** n}" + (f" = {num(v)}." if v.denominator != 2 ** n else "."), src=ST)
 
 
-@gen(CT, "mt-total-probability", cap=200, cat="Probabilités · séries C, D, E")
+@gen(CT, "mt-total-probability", cap=600, cat="Probabilités · séries C, D, E", diffs=(4, 5))
 def total_probability(rng, d):
     pa = rng.choice([20, 30, 40, 50, 60, 70])
     p1, p2 = rng.choice([10, 20, 30, 40, 50, 60, 80]), rng.choice([5, 10, 20, 30, 40, 50])
@@ -658,7 +658,7 @@ def total_probability(rng, d):
                  f"Formule des probabilités totales : P(B) = P(A)P(B|A) + P(non A)P(B|non A) = {pa/100}×{p1/100} + {(100 - pa)/100}×{p2/100}.".replace(".", ","), src=ST)
 
 
-@gen(CT, "mt-modular-power", cap=220, cat="Arithmétique · séries C, E")
+@gen(CT, "mt-modular-power", cap=600, cat="Arithmétique · séries C, E", diffs=(4, 5))
 def modular_power(rng, d):
     m, a, n = rng.choice([5, 7, 9, 11, 13]), rng.randint(2, 12), rng.randint(10, 60)
     if a % m == 0:
@@ -670,7 +670,7 @@ def modular_power(rng, d):
                  f"On utilise les congruences modulo {m} : les puissances de {a} se répètent ; {a}^{n} ≡ {r} (mod {m}).", src=ST)
 
 
-@gen(CT, "mt-modular-inverse", cap=160, cat="Arithmétique · séries C, E")
+@gen(CT, "mt-modular-inverse", cap=600, cat="Arithmétique · séries C, E", diffs=(4, 5))
 def modular_inverse(rng, d):
     m = rng.choice([7, 9, 11, 13, 15, 17, 19, 23, 26])
     a = rng.randint(2, m - 1)

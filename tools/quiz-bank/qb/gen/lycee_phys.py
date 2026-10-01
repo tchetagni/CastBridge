@@ -29,7 +29,7 @@ def rd(x, dec):
 
 
 # ================================================================================================ mécanique
-@both(FR2 + EN_O, "ph-speed", cap=240, cat="Mécanique")
+@both(FR2 + EN_O, "ph-speed", cap=600, cat="Mécanique", diffs=(1, 2))
 def speed(rng, d, lang):
     v, t = rng.choice([2, 3, 4, 5, 6, 8, 10, 12, 15, 20, 25]), rng.choice([2, 3, 4, 5, 6, 8, 10, 15, 20, 30])
     dist = v * t
@@ -48,7 +48,7 @@ def speed(rng, d, lang):
     return Draft(text, N(lang, right), [N(lang, w, 2) for w in wr], T(lang, "v = d/t, donc d = v·t et t = d/v.", "Use v = d/t, hence d = v·t and t = d/v."), src=S(lang), cat=cat(lang, "Mécanique · 2nde", "Mechanics"))
 
 
-@both(FR2 + EN_O, "ph-kmh-ms", cap=160, cat="Mécanique")
+@both(FR2 + EN_O, "ph-kmh-ms", cap=600, cat="Mécanique", diffs=(1, 2))
 def kmh_ms(rng, d, lang):
     ms = rng.choice([5, 10, 15, 20, 25, 30, 40])
     kmh = ms * 3.6
@@ -62,7 +62,7 @@ def kmh_ms(rng, d, lang):
                  T(lang, "On divise par 3,6.", "Divide by 3.6."), src=S(lang), cat=cat(lang, "Mécanique · 2nde", "Mechanics"))
 
 
-@both(FR2 + FR1, "ph-weight", cap=200, cat="Mécanique")
+@both(FR2 + FR1, "ph-weight", cap=600, cat="Mécanique", diffs=(1, 2))
 def weight(rng, d, lang):
     m, g = rng.choice([2, 5, 8, 10, 12, 20, 25, 40, 60, 75]), rng.choice([10, 9.8, 1.6, 3.7, 24.8])
     names = {10: "sur Terre (g = 10 N/kg)", 9.8: "sur Terre (g = 9,8 N/kg)", 1.6: "sur la Lune (g = 1,6 N/kg)", 3.7: "sur Mars (g = 3,7 N/kg)", 24.8: "sur Jupiter (g = 24,8 N/kg)"}
@@ -72,7 +72,7 @@ def weight(rng, d, lang):
                  f"P = m × g = {m} × {N('fr', g)} = {N('fr', P, 2)} N.", src=S("fr"), cat="Mécanique · 2nde, 1re")
 
 
-@both(FR2, "ph-density", cap=200, cat="Mécanique")
+@both(FR2, "ph-density", cap=600, cat="Mécanique", diffs=(2,))
 def density(rng, d, lang):
     m, v = rng.choice([100, 200, 250, 300, 400, 500, 800, 1000]), rng.choice([10, 20, 25, 40, 50, 100, 125, 200])
     rho = m / v
@@ -80,7 +80,7 @@ def density(rng, d, lang):
                  [N("fr", v / m, 3), N("fr", m * v, 0), N("fr", rho * 10, 3), N("fr", rho / 10, 3), N("fr", m + v, 0)], "ρ = m/V.", src=S("fr"), cat="Mécanique · 2nde")
 
 
-@both(EN_O, "ph-pressure", cap=200, cat="Mechanics")
+@both(EN_O, "ph-pressure", cap=600, cat="Mechanics", diffs=(2,))
 def pressure(rng, d, lang):
     F, A = rng.choice([100, 200, 400, 500, 600, 800, 1000]), rng.choice([0.1, 0.2, 0.25, 0.5, 2, 4, 5])
     p = F / A
@@ -88,7 +88,7 @@ def pressure(rng, d, lang):
                  [N("en", F * A, 2), N("en", A / F, 4), N("en", p * 10, 2), N("en", p / 10, 2), N("en", F + A, 2)], "Pressure = force ÷ area.", src=SRC_EN, cat="Mechanics")
 
 
-@both(EN_O, "ph-moments", cap=160, cat="Mechanics")
+@both(EN_O, "ph-moments", cap=600, cat="Mechanics", diffs=(3,))
 def moments(rng, d, lang):
     F, x = rng.choice([5, 10, 12, 20, 25, 30, 40]), rng.choice([0.2, 0.4, 0.5, 0.8, 1.2, 1.5, 2])
     # balanced beam: F1 x1 = F2 x2
@@ -99,7 +99,7 @@ def moments(rng, d, lang):
                  "Principle of moments: clockwise moment = anticlockwise moment, so F₁x₁ = F₂x₂.", src=SRC_EN, cat="Mechanics")
 
 
-@both(FR1 + EN_A, "ph-suvat-v", cap=240, cat="Mécanique")
+@both(FR1 + FRT + EN_A, "ph-suvat-v", cap=600, cat="Mécanique", diffs=(2, 3))
 def suvat_v(rng, d, lang):
     u, a, t = rng.randint(0, 20), rng.choice([1, 2, 3, 4, 5, 0.5, 2.5]), rng.randint(2, 12)
     v = u + a * t
@@ -109,7 +109,7 @@ def suvat_v(rng, d, lang):
                  N(lang, v, 2), [N(lang, w, 2) for w in wr], "v = u + a t.", src=S(lang), cat=cat(lang, "Cinématique · 1re", "Kinematics"))
 
 
-@both(FR1 + EN_A, "ph-suvat-s", cap=240, cat="Mécanique")
+@both(FR1 + FRT + EN_A, "ph-suvat-s", cap=600, cat="Mécanique", diffs=(3, 4))
 def suvat_s(rng, d, lang):
     u, a, t = rng.randint(0, 15), rng.choice([2, 4, 6, 1, 3]), rng.randint(2, 10)
     s = u * t + a * t * t / 2
@@ -120,7 +120,7 @@ def suvat_s(rng, d, lang):
                  N(lang, s, 2), [N(lang, w, 2) for w in wr], "s = ut + ½at².", src=S(lang), cat=cat(lang, "Cinématique · 1re", "Kinematics"))
 
 
-@both(FR1 + EN_A, "ph-suvat-brake", cap=200, cat="Mécanique")
+@both(FR1 + EN_A, "ph-suvat-brake", cap=600, cat="Mécanique", diffs=(3, 4))
 def suvat_brake(rng, d, lang):
     v, s = rng.choice([10, 15, 20, 25, 30]), rng.choice([20, 25, 40, 50, 75, 100])
     a = v * v / (2 * s)
@@ -130,7 +130,7 @@ def suvat_brake(rng, d, lang):
                  "v² = u² + 2as avec v = 0 : a = u²/(2s)." if lang == "fr" else "Use v² = u² + 2as with final speed 0: a = u²/(2s).", src=S(lang), cat=cat(lang, "Cinématique · 1re", "Kinematics"))
 
 
-@both(FR1 + EN_A, "ph-free-fall-speed", cap=120, cat="Mécanique")
+@both(FR1 + FRT + EN_A, "ph-free-fall-speed", cap=600, cat="Mécanique", diffs=(3,))
 def free_fall_speed(rng, d, lang):
     h = rng.choice([5, 20, 45, 80, 125, 180, 245, 320])
     v = int(math.sqrt(2 * 10 * h))
@@ -141,7 +141,7 @@ def free_fall_speed(rng, d, lang):
                  T(lang, "v = √(2gh) : conservation de l'énergie mécanique.", "v = √(2gh) from conservation of energy."), src=S(lang), cat=cat(lang, "Énergie · 1re", "Energy"))
 
 
-@both(FR1 + EN_A, "ph-work", cap=240, cat="Énergie")
+@both(FR1 + FRT + EN_A, "ph-work", cap=600, cat="Énergie", diffs=(3, 4))
 def work(rng, d, lang):
     F, dd, ang = rng.choice([10, 20, 30, 50, 100, 150, 200]), rng.choice([2, 3, 5, 10, 15, 20]), rng.choice([0, 60, 90, 180])
     cos = {0: 1, 60: 0.5, 90: 0, 180: -1}[ang]
@@ -153,7 +153,7 @@ def work(rng, d, lang):
                  N(lang, W, 1), [N(lang, w, 1) for w in wr], "W = F·d·cos α.", src=S(lang), cat=cat(lang, "Énergie · 1re", "Energy"))
 
 
-@both(FR1 + EN_A + EN_O, "ph-kinetic", cap=220, cat="Énergie")
+@both(FR1 + FRT + EN_A + EN_O, "ph-kinetic", cap=600, cat="Énergie", diffs=(2, 3))
 def kinetic(rng, d, lang):
     m, v = rng.choice([0.5, 1, 2, 4, 5, 10, 20, 50, 1000]), rng.choice([2, 4, 5, 10, 15, 20, 30])
     ek = m * v * v / 2
@@ -162,7 +162,7 @@ def kinetic(rng, d, lang):
                  N(lang, ek, 2), [N(lang, w, 2) for w in wr], "Ec = ½ m v².", src=S(lang), cat=cat(lang, "Énergie", "Energy"))
 
 
-@both(FR1 + EN_A + EN_O, "ph-power-work", cap=200, cat="Énergie")
+@both(FR1 + FRT + EN_A + EN_O, "ph-power-work", cap=600, cat="Énergie", diffs=(3,))
 def power_work(rng, d, lang):
     m, h, t = rng.choice([20, 50, 60, 100, 200]), rng.choice([2, 3, 5, 10, 20]), rng.choice([2, 4, 5, 10, 20])
     P = m * 10 * h / t
@@ -172,7 +172,7 @@ def power_work(rng, d, lang):
                  T(lang, "P = W/t avec W = m g h.", "Power = work done ÷ time, with work = m g h."), src=S(lang), cat=cat(lang, "Énergie", "Energy"))
 
 
-@both(EN_O + EN_A, "ph-efficiency", cap=200, cat="Energy")
+@both(EN_O + EN_A, "ph-efficiency", cap=600, cat="Energy", diffs=(2, 3))
 def efficiency(rng, d, lang):
     inp, eff = rng.choice([200, 400, 500, 800, 1000, 2000]), rng.choice([20, 25, 40, 50, 60, 75, 80])
     out = inp * eff / 100
@@ -180,7 +180,7 @@ def efficiency(rng, d, lang):
                  [f"{100 - eff} %", f"{N('en', inp / out * 100, 1)} %" if inp != out else "125 %", f"{N('en', out, 1)} %", f"{eff * 2 if eff < 50 else eff // 2} %"], "Efficiency = useful energy out ÷ energy in × 100 %.", src=SRC_EN, cat="Energy")
 
 
-@both(FR1 + EN_A, "ph-momentum", cap=200, cat="Mécanique")
+@both(FR1 + FRT + EN_A, "ph-momentum", cap=600, cat="Mécanique", diffs=(4,))
 def momentum(rng, d, lang):
     m1, v1, m2 = rng.choice([1, 2, 3, 4, 5]), rng.choice([2, 3, 4, 6, 8, 10]), rng.choice([1, 2, 3, 4, 5])
     p = m1 * v1
@@ -192,7 +192,7 @@ def momentum(rng, d, lang):
                  T(lang, "Conservation de la quantité de mouvement : m₁v₁ = (m₁ + m₂)v.", "Conservation of momentum: m₁v₁ = (m₁ + m₂)v."), src=S(lang), cat=cat(lang, "Mécanique · 1re", "Mechanics"))
 
 
-@both(FR1 + EN_A, "ph-hooke", cap=160, cat="Mécanique")
+@both(FR1 + EN_A, "ph-hooke", cap=600, cat="Mécanique", diffs=(2, 3))
 def hooke(rng, d, lang):
     k, x = rng.choice([20, 40, 50, 80, 100, 200, 500]), rng.choice([0.01, 0.02, 0.05, 0.1, 0.15, 0.2])
     F = k * x
@@ -206,7 +206,7 @@ def hooke(rng, d, lang):
                  T(lang, "F = k·x avec x en mètres.", "F = kx with the extension in metres."), src=S(lang), cat=cat(lang, "Mécanique · 1re", "Mechanics"))
 
 
-@both(FR1, "ph-incline", cap=100, cat="Mécanique")
+@both(FR1, "ph-incline", cap=600, cat="Mécanique", diffs=(3,))
 def incline(rng, d, lang):
     m, ang = rng.choice([2, 4, 5, 10, 20, 50]), rng.choice([30, 90])
     s = {30: 0.5, 90: 1.0}[ang]
@@ -218,7 +218,7 @@ def incline(rng, d, lang):
 
 
 # ================================================================================================ électricité
-@both(FR2 + EN_O, "ph-resistors", cap=240, cat="Électricité")
+@both(FR2 + EN_O, "ph-resistors", cap=600, cat="Électricité", diffs=(2, 3))
 def resistors(rng, d, lang):
     r1, r2 = rng.choice([10, 20, 30, 40, 60, 100, 120, 200]), rng.choice([10, 20, 30, 40, 60, 100, 120, 200])
     series = rng.random() < 0.5
@@ -235,7 +235,7 @@ def resistors(rng, d, lang):
                  src=S(lang), cat=cat(lang, "Électricité · 2nde", "Electricity"))
 
 
-@both(FR2 + FR1 + EN_O, "ph-ohm", cap=240, cat="Électricité")
+@both(FR2 + FR1 + EN_O, "ph-ohm", cap=600, cat="Électricité", diffs=(1, 2))
 def ohm(rng, d, lang):
     R, I = rng.choice([5, 10, 20, 22, 47, 50, 100, 220, 470]), rng.choice([0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1, 2])
     U = R * I
@@ -250,7 +250,7 @@ def ohm(rng, d, lang):
                  N(lang, R), [N(lang, w, 3) for w in (U * I, I / U, R * 10, R / 10, U + I)], "R = U/I.", src=S(lang), cat=cat(lang, "Électricité", "Electricity"))
 
 
-@both(FR2 + EN_O, "ph-energy-cost", cap=240, cat="Électricité")
+@both(FR2 + EN_O, "ph-energy-cost", cap=600, cat="Électricité", diffs=(2, 3))
 def energy_cost(rng, d, lang):
     P, h, tariff = rng.choice([40, 60, 100, 500, 1000, 1500, 2000]), rng.choice([2, 4, 5, 8, 10, 12, 24]), rng.choice([50, 60, 75, 100])
     kwh = P * h / 1000
@@ -262,7 +262,7 @@ def energy_cost(rng, d, lang):
                  [N("en", w, 2) for w in (P * h * tariff / 100, kwh, P * h * tariff, cost * 10, cost / 10)], f"Energy = power × time = {N('en', kwh, 3)} kWh, then multiply by the price.", src=SRC_EN, cat="Electricity")
 
 
-@both(FR1 + EN_O + EN_A, "ph-joule", cap=200, cat="Électricité")
+@both(FR1 + FRT + EN_O + EN_A, "ph-joule", cap=600, cat="Électricité", diffs=(3, 4))
 def joule(rng, d, lang):
     R, I, t = rng.choice([5, 10, 20, 50, 100]), rng.choice([0.5, 1, 2, 3, 5]), rng.choice([10, 30, 60, 120, 600])
     P = R * I * I
@@ -275,7 +275,7 @@ def joule(rng, d, lang):
                  N(lang, Q, 2), [N(lang, w, 2) for w in (R * I * t, P, Q * 2, Q / t * 2, R * t)], "W = R·I²·t.", src=S(lang), cat=cat(lang, "Électricité", "Electricity"))
 
 
-@both(FR1 + EN_A, "ph-emf", cap=200, cat="Électricité")
+@both(FR1 + FRT + EN_A, "ph-emf", cap=600, cat="Électricité", diffs=(4,))
 def emf(rng, d, lang):
     E_, r, R = rng.choice([6, 9, 12, 24]), rng.choice([0.5, 1, 2]), rng.choice([2, 4, 5, 10, 11.5])
     I = E_ / (R + r)
@@ -286,7 +286,7 @@ def emf(rng, d, lang):
                  T(lang, "Loi de Pouillet : I = E/(R + r).", "I = E/(R + r)."), src=S(lang), cat=cat(lang, "Électricité · 1re", "Electricity"))
 
 
-@both(FR1 + EN_A, "ph-capacitor", cap=200, cat="Électricité")
+@both(FR1 + FRT + EN_A, "ph-capacitor", cap=600, cat="Électricité", diffs=(3, 4))
 def capacitor(rng, d, lang):
     C, V = rng.choice([1, 2, 4.7, 10, 47, 100, 220]), rng.choice([3, 5, 6, 9, 12, 24])
     Q = C * V
@@ -298,7 +298,7 @@ def capacitor(rng, d, lang):
                  N(lang, energy, 2), [N(lang, w, 2) for w in (C * V, C * V * V, energy * 2, energy / 2, 0.5 * C * V)], "E = ½·C·V².", src=S(lang), cat=cat(lang, "Électricité", "Electricity"))
 
 
-@both(FR1 + EN_A, "ph-laplace", cap=160, cat="Électromagnétisme")
+@both(FR1 + FRT + EN_A, "ph-laplace", cap=600, cat="Électromagnétisme", diffs=(4,))
 def laplace(rng, d, lang):
     B, I, L, ang = rng.choice([0.05, 0.1, 0.2, 0.5, 1]), rng.choice([1, 2, 4, 5, 10]), rng.choice([0.1, 0.2, 0.5, 1]), rng.choice([90, 30])
     s = 1 if ang == 90 else 0.5
@@ -309,7 +309,7 @@ def laplace(rng, d, lang):
 
 
 # ================================================================================================ optique, ondes
-@both(FR2 + FR1 + EN_A, "ph-lens", cap=240, cat="Optique")
+@both(FR2 + FR1 + FRT + EN_A, "ph-lens", cap=600, cat="Optique", diffs=(4,))
 def lens(rng, d, lang):
     f, p = rng.choice([5, 10, 12, 15, 20, 25, 30]), rng.choice([20, 30, 40, 45, 60, 75, 90])
     if p <= f:
@@ -322,7 +322,7 @@ def lens(rng, d, lang):
                  src=S(lang), cat=cat(lang, "Optique", "Optics"))
 
 
-@both(FR2 + EN_A, "ph-refraction", cap=60, cat="Optique")
+@both(FR2 + FRT + EN_A, "ph-refraction", cap=600, cat="Optique", diffs=(4,))
 def refraction(rng, d, lang):
     rows = [(45, 30, "√2", math.sqrt(2)), (60, 30, "√3", math.sqrt(3)), (30, 30, "1", 1.0), (90, 45, "√2", math.sqrt(2)), (90, 30, "2", 2.0), (60, 45, "√3/√2", math.sqrt(3) / math.sqrt(2))]
     i, r, ans, val = rng.choice(rows)
@@ -333,7 +333,7 @@ def refraction(rng, d, lang):
                  ans, pool, T(lang, "Loi de Snell-Descartes : sin i = n sin r.", "Snell's law: sin i = n sin r."), src=S(lang), cat=cat(lang, "Optique", "Optics"), diff=3)
 
 
-@both(FR2 + EN_O, "ph-wave-speed", cap=200, cat="Ondes")
+@both(FR2 + FRT + EN_O, "ph-wave-speed", cap=600, cat="Ondes", diffs=(2,))
 def wave_speed(rng, d, lang):
     f, lam = rng.choice([2, 5, 10, 50, 100, 200, 440, 500]), rng.choice([0.1, 0.2, 0.5, 1, 2, 5])
     v = f * lam
@@ -341,7 +341,7 @@ def wave_speed(rng, d, lang):
                  N(lang, v, 2), [N(lang, w, 2) for w in (f / lam, lam / f, v * 10, v / 10, f + lam)], "v = f × λ.", src=S(lang), cat=cat(lang, "Ondes", "Waves"))
 
 
-@both(FRT + EN_A, "ph-young", cap=160, cat="Optique ondulatoire")
+@both(FRT + EN_A, "ph-young", cap=600, cat="Optique ondulatoire", diffs=(4, 5))
 def young(rng, d, lang):
     lam, D, a = rng.choice([500, 600, 650, 550, 400]), rng.choice([1, 1.5, 2, 2.5, 3]), rng.choice([0.2, 0.5, 1, 2])
     i = lam * 1e-9 * D / (a * 1e-3)
@@ -351,7 +351,7 @@ def young(rng, d, lang):
                  N(lang, mm, 3), [N(lang, w, 3) for w in (mm * 10, mm / 10, lam * D / a / 1e6 * 2, a * D / (lam * 1e-6), mm * 2)], "i = λD/a.", src=S(lang), cat=cat(lang, "Optique ondulatoire · Tle", "Wave optics"))
 
 
-@both(FRT + EN_A, "ph-photon", cap=140, cat="Physique moderne")
+@both(FRT + EN_A, "ph-photon", cap=600, cat="Physique moderne", diffs=(4,))
 def photon(rng, d, lang):
     lam = rng.choice([400, 500, 600, 620, 700, 310, 248])
     E_eV = 1240 / lam                    # hc = 1240 eV·nm (rounded)
@@ -359,7 +359,7 @@ def photon(rng, d, lang):
                  N(lang, E_eV, 2), [N(lang, w, 2) for w in (E_eV * 1.6, lam / 1240, 1240 * lam / 1000, E_eV / 2, E_eV * 10)], "E = hc/λ.", src=S(lang), cat=cat(lang, "Physique moderne · Tle", "Modern physics"))
 
 
-@both(EN_A, "ph-photoelectric", cap=120, cat="Modern physics")
+@both(EN_A, "ph-photoelectric", cap=600, cat="Modern physics", diffs=(3, 4))
 def photoelectric(rng, d, lang):
     hf, phi = rng.choice([4.0, 4.5, 5.0, 6.0, 3.5, 5.5]), rng.choice([2.0, 2.3, 2.5, 3.0, 1.9])
     if hf <= phi:
@@ -370,7 +370,7 @@ def photoelectric(rng, d, lang):
 
 
 # ================================================================================================ mécanique Tle, nucléaire
-@both(FRT + EN_A, "ph-projectile", cap=160, cat="Mécanique")
+@both(FRT + EN_A, "ph-projectile", cap=600, cat="Mécanique", diffs=(4, 5))
 def projectile(rng, d, lang):
     v0, ang = rng.choice([10, 20, 30, 40]), rng.choice([30, 45, 60])
     sin2 = {30: Fraction(3, 4) ** 0 * Fraction(0), 45: 1, 60: 0}
@@ -391,7 +391,7 @@ def projectile(rng, d, lang):
                  "H = (v₀ sin α)²/(2g)." if lang == "fr" else "H = (v₀ sin α)²/(2g).", src=S(lang), cat=cat(lang, "Mécanique · Tle", "Mechanics"))
 
 
-@both(FRT + EN_A, "ph-nuclear-decay", cap=80, cat="Physique nucléaire")
+@both(FRT + EN_A, "ph-nuclear-decay", cap=600, cat="Physique nucléaire", diffs=(3, 4))
 def nuclear_decay(rng, d, lang):
     nuclides = {("uranium", "U"): (238, 92), ("radium", "Ra"): (226, 88), ("polonium", "Po"): (210, 84), ("radon", "Rn"): (222, 86), ("thorium", "Th"): (232, 90), ("plutonium", "Pu"): (239, 94)}
     (name, sym), (A, Z) = rng.choice(list(nuclides.items()))
@@ -412,7 +412,7 @@ def nuclear_decay(rng, d, lang):
                  src=S(lang), cat=cat(lang, "Physique nucléaire · Tle", "Nuclear physics"))
 
 
-@both(FRT + EN_A, "ph-mass-defect", cap=120, cat="Physique nucléaire")
+@both(FRT + EN_A, "ph-mass-defect", cap=600, cat="Physique nucléaire", diffs=(4,))
 def mass_defect(rng, d, lang):
     dm = rng.choice([0.01, 0.02, 0.03, 0.05, 0.1, 0.2, 0.0304, 0.1])
     E_ = dm * 931.5
@@ -420,7 +420,7 @@ def mass_defect(rng, d, lang):
                  N(lang, E_, 2), [N(lang, w, 2) for w in (dm / 931.5, dm * 931.5 * 1000, dm * 9315, E_ / 2, dm + 931.5)], "E = Δm c² ; 1 u·c² = 931,5 MeV." if lang == "fr" else "E = Δm c², with 1 u·c² = 931.5 MeV.", src=S(lang), cat=cat(lang, "Physique nucléaire · Tle", "Nuclear physics"))
 
 
-@both(FRT + EN_A, "ph-lc-frequency", cap=100, cat="Électricité")
+@both(FRT + EN_A, "ph-lc-frequency", cap=600, cat="Électricité", diffs=(5,))
 def lc_frequency(rng, d, lang):
     L_mH, C_uF = rng.choice([(100, 10), (10, 10), (1, 1), (250, 10), (40, 25), (10, 1), (25, 4)])
     f = 1 / (2 * math.pi * math.sqrt(L_mH * 1e-3 * C_uF * 1e-6))
@@ -429,7 +429,7 @@ def lc_frequency(rng, d, lang):
                  "f₀ = 1/(2π√(LC))." , src=S(lang), cat=cat(lang, "Électricité · Tle", "Electricity"))
 
 
-@both(FR1 + EN_A, "ph-spring-period", cap=120, cat="Mécanique")
+@both(FR1 + EN_A, "ph-spring-period", cap=600, cat="Mécanique", diffs=(4,))
 def spring_period(rng, d, lang):
     m, k = rng.choice([(0.25, 25), (1, 100), (0.1, 10), (0.4, 40), (0.5, 50), (1, 4), (2, 8), (0.01, 1)])
     T_ = 2 * math.pi * math.sqrt(m / k)
@@ -439,7 +439,7 @@ def spring_period(rng, d, lang):
 
 
 # ================================================================================================ chaleur, gaz
-@both(FR1 + EN_O + EN_A, "ph-heat", cap=240, cat="Thermique")
+@both(FR1 + FRT + EN_O + EN_A, "ph-heat", cap=600, cat="Thermique", diffs=(2, 3))
 def heat(rng, d, lang):
     m, dT = rng.choice([0.1, 0.2, 0.5, 1, 2, 5]), rng.choice([5, 10, 20, 30, 50, 80])
     c = 4200
@@ -448,7 +448,7 @@ def heat(rng, d, lang):
                  f"{N(lang, Q, 0)} J", [f"{N(lang, w, 0)} J" for w in (m * dT, Q / 1000, Q * 10, m * c, c * dT / m)], "Q = m·c·ΔT.", src=S(lang), cat=cat(lang, "Thermique", "Thermal physics"))
 
 
-@both(FR1 + EN_A, "ph-latent", cap=120, cat="Thermique")
+@both(FR1 + EN_A, "ph-latent", cap=600, cat="Thermique", diffs=(3,))
 def latent(rng, d, lang):
     m = rng.choice([0.1, 0.2, 0.5, 1, 2])
     L = 334000
@@ -457,7 +457,7 @@ def latent(rng, d, lang):
                  f"{N(lang, Q, 1)} kJ", [f"{N(lang, w, 1)} kJ" for w in (Q * 1000, Q / 1000, Q * 4.2, m * 4.2 * 100, Q / 2)], "Q = m·L.", src=S(lang), cat=cat(lang, "Thermique", "Thermal physics"))
 
 
-@both(FR1 + EN_A, "ph-boyle", cap=200, cat="Thermique")
+@both(FR1 + FRT + EN_A, "ph-boyle", cap=600, cat="Thermique", diffs=(3, 4))
 def boyle(rng, d, lang):
     p1, v1, v2 = rng.choice([1, 2, 3, 4, 5]), rng.choice([2, 4, 6, 8, 10, 12]), rng.choice([1, 2, 3, 4, 5, 6])
     p2 = Fraction(p1 * v1, v2)
@@ -465,7 +465,7 @@ def boyle(rng, d, lang):
                  N(lang, float(p2), 3), [N(lang, float(w), 3) for w in (Fraction(p1 * v2, v1), p1 + v1 - v2, Fraction(v1, v2), p1 * v1 * v2, p2 * 2)], "Loi de Boyle-Mariotte : P₁V₁ = P₂V₂." if lang == "fr" else "Boyle's law: P₁V₁ = P₂V₂.", src=S(lang), cat=cat(lang, "Thermique", "Thermal physics"))
 
 
-@both(FR1 + EN_A, "ph-ideal-gas", cap=160, cat="Thermique")
+@both(FR1 + FRT + EN_A, "ph-ideal-gas", cap=600, cat="Thermique", diffs=(4,))
 def ideal_gas(rng, d, lang):
     n, Tk, V = rng.choice([1, 2, 0.5, 0.1]), rng.choice([273, 300, 350, 400, 500]), rng.choice([10, 20, 25, 50])
     p = n * 8.31 * Tk / (V / 1000)
@@ -473,7 +473,7 @@ def ideal_gas(rng, d, lang):
                  N(lang, p / 1000, 1), [N(lang, w / 1000, 1) for w in (p, p / 1000 * 1000 * 1000, n * Tk * V, p * 2, p / 2)], "PV = nRT, avec V en m³." if lang == "fr" else "PV = nRT with V in m³.", src=S(lang), cat=cat(lang, "Thermique", "Thermal physics"))
 
 
-@both(EN_A, "ph-decay-halflife", cap=160, cat="Nuclear physics")
+@both(EN_A, "ph-decay-halflife", cap=600, cat="Nuclear physics", diffs=(3, 4))
 def halflife(rng, d, lang):
     N0, n = rng.choice([800, 1000, 1600, 2000, 4000]), rng.randint(1, 5)
     th = rng.choice([2, 3, 5, 10, 12])

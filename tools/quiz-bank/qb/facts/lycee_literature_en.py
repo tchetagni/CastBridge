@@ -1,7 +1,7 @@
 """Literature in English (GCE O / A Level), English language notions, and ECM (éducation à la citoyenneté et à la morale, francophone).
 Facts written by the assistant, all `review`. Set-text lists change from year to year: only authors and works that are widely taught are used."""
 from .. import lycee
-from ..facts_engine import fq, pick, source
+from ..facts_engine import FACTS, fq, pick, source
 from .lycee_common import put_levels
 
 source("ly-lit-en", "Literature in English, GCE Ordinary and Advanced Level", "programme scolaire", "Compare with the GCE Board literature syllabus and the current list of set texts; check publication years.")
@@ -106,7 +106,10 @@ LANG = [
 ]
 put_levels(lycee.en, "lang", "lang-notions", LANG, "ly-lang-en", "English Language", "WORLD")
 ANGL = [(lvl_fr, q, r, w, e, d) for (lvl_en, q, r, w, e, d), lvl_fr in zip(LANG, [{"f5": "2nde", "l6": "1re", "u6": "tle"}[x[0]] for x in LANG])]
+_before = len(FACTS)
 put_levels(lycee.fr, "angl", "angl-notions", ANGL, "ly-lang-en", "Anglais", "WORLD")
+for _entry in FACTS[_before:]:                                            # English questions inside the francophone literature course
+    _entry[2].lang = "en"
 
 # ---------------------------------------------------------------------------------------------- ECM
 ECM = [

@@ -22,15 +22,25 @@ def regularised(base):
     return base + ("d" if base.endswith("e") else "ed")
 
 
+def english(fn):
+    """The English questions of a francophone course (French + English share one course): each carries lang 'en'."""
+    def wrapped(rng, d):
+        r = fn(rng, d)
+        if r is not None:
+            r.lang = "en"
+        return r
+    return wrapped
+
+
 def reg(tpl, cap, cat, diffs=(1, 2, 3, 4, 5)):
     def deco(fn):
         for c in COURSES:
-            gen(c, tpl, cap=cap, cat=cat, diffs=diffs, source=SRC)(fn)
+            gen(c, tpl, cap=cap, cat=cat, diffs=diffs, source=SRC)(english(fn))
         return fn
     return deco
 
 
-@reg("en-irregular-past", 80, "Verbs")
+@reg("en-irregular-past", 80, "Verbs", diffs=(2, 3))
 def irregular_past(rng, d):
     base, past, pp = rng.choice(IRREGULAR)
     if base == "be":
@@ -40,7 +50,7 @@ def irregular_past(rng, d):
     return Draft(f"What is the past simple of the verb 'to {base}'?", past, wr, f"{base} - {past} - {pp}.", src=SRC)
 
 
-@reg("en-irregular-participle", 80, "Verbs")
+@reg("en-irregular-participle", 80, "Verbs", diffs=(3, 4))
 def irregular_participle(rng, d):
     base, past, pp = rng.choice(IRREGULAR)
     if base == "be" or past == pp:
@@ -50,7 +60,7 @@ def irregular_participle(rng, d):
     return Draft(f"What is the past participle of the verb 'to {base}'?", pp, wr, f"{base} - {past} - {pp}.", src=SRC)
 
 
-@reg("en-present-perfect", 400, "Tenses", diffs=(2, 3, 4))
+@reg("en-present-perfect", 400, "Tenses", diffs=(3, 4))
 def present_perfect(rng, d):
     base, past, pp = rng.choice([v for v in IRREGULAR if v[0] in TRANSITIVE])
     subj, aux = rng.choice([("I", "have"), ("She", "has"), ("They", "have"), ("My brother", "has"), ("We", "have"), ("The students", "have"), ("He", "has"), ("My parents", "have")])
@@ -63,7 +73,7 @@ def present_perfect(rng, d):
     return Draft(f"{text} Which form completes the sentence correctly?", right, wr, f"The present perfect is have/has + past participle ({pp}).", src=SRC)
 
 
-@reg("en-past-simple-sentence", 400, "Tenses", diffs=(1, 2, 3))
+@reg("en-past-simple-sentence", 400, "Tenses", diffs=(1, 2))
 def past_simple_sentence(rng, d):
     base, past, pp = rng.choice([v for v in IRREGULAR if v[0] in TRANSITIVE])
     subj = rng.choice(["I", "She", "They", "My uncle", "We", "The teacher", "He", "The children"])
@@ -72,7 +82,7 @@ def past_simple_sentence(rng, d):
     return Draft(f"{subj} ___ it {marker} (to {base}). Which form completes the sentence?", past, wr, f"With {marker} we use the past simple: {past}.", src=SRC)
 
 
-@reg("en-comparative", 150, "Adjectives", diffs=(1, 2, 3))
+@reg("en-comparative", 150, "Adjectives", diffs=(1, 2))
 def comparative(rng, d):
     adj = [("good", "better", "best"), ("bad", "worse", "worst"), ("little", "less", "least"), ("much", "more", "most"), ("big", "bigger", "biggest"), ("happy", "happier", "happiest"),
            ("easy", "easier", "easiest"), ("hot", "hotter", "hottest"), ("beautiful", "more beautiful", "most beautiful"), ("expensive", "more expensive", "most expensive"), ("thin", "thinner", "thinnest"),
@@ -90,7 +100,7 @@ PLURALS = [("child", "children"), ("man", "men"), ("woman", "women"), ("foot", "
            ("potato", "potatoes"), ("tomato", "tomatoes"), ("analysis", "analyses"), ("crisis", "crises"), ("phenomenon", "phenomena"), ("criterion", "criteria"), ("bus", "buses"), ("hero", "heroes"), ("thief", "thieves"), ("half", "halves")]
 
 
-@reg("en-plural", 80, "Nouns", diffs=(1, 2, 3))
+@reg("en-plural", 80, "Nouns", diffs=(2, 3))
 def plural(rng, d):
     s, p = rng.choice(PLURALS)
     wr = [s + "s", s + "es", s + "ies", p + "s", s[:-1] + "ves" if s[-1] in "fe" else s + "en"]
@@ -106,7 +116,7 @@ PREP = [("I wake up ___ 6 o'clock.", "at", ["on", "in", "by", "to"]), ("We have 
         ("We swam ___ the river to reach the other side.", "across", ["along", "between", "among", "beside"]), ("I congratulate you ___ your success.", "on", ["for", "at", "in", "about"]), ("She apologised ___ being late.", "for", ["of", "about", "at", "to"]), ("He was accused ___ stealing.", "of", ["for", "with", "about", "to"])]
 
 
-@reg("en-prepositions", 60, "Prepositions", diffs=(1, 2, 3))
+@reg("en-prepositions", 60, "Prepositions", diffs=(2, 3))
 def prepositions(rng, d):
     s, r, w = rng.choice(PREP)
     return Draft(f"{s} Which word completes the sentence?", r, w, f"The correct preposition here is '{r}'.", src=SRC)
@@ -120,7 +130,7 @@ COND = [("If it rains tomorrow, we ___ at home.", "will stay", ["would stay", "s
         ("Unless you hurry, you ___ the bus.", "will miss", ["would miss", "missed", "have missed", "miss not"], "Unless = if not; first conditional.")]
 
 
-@reg("en-conditionals", 30, "Conditionals", diffs=(3, 4, 5))
+@reg("en-conditionals", 30, "Conditionals", diffs=(4,))
 def conditionals(rng, d):
     s, r, w, e = rng.choice(COND)
     return Draft(f"{s} Which form completes the sentence?", r, w, e, src=SRC)
@@ -135,17 +145,17 @@ REPORTED = [("She said, 'I am tired.'", "She said that she was tired.", ["She sa
             ("He said, 'I saw her yesterday.'", "He said that he had seen her the day before.", ["He said that he saw her yesterday.", "He said that he sees her the day before.", "He said that I had seen her yesterday.", "He said he has seen her the day before."])]
 
 
-@reg("en-reported-speech", 30, "Reported speech", diffs=(3, 4, 5))
+@reg("en-reported-speech", 30, "Reported speech", diffs=(4, 5))
 def reported(rng, d):
     s, r, w = rng.choice(REPORTED)
     return Draft(f"{s} Which sentence reports this correctly?", r, w, "In reported speech the tense moves back and time/place words change.", src=SRC)
 
 
-@reg("en-articles", 60, "Articles", diffs=(1, 2, 3))
+@reg("en-articles", 60, "Articles", diffs=(1, 2))
 def articles(rng, d):
     items = [("She is ___ honest girl.", "an", ["a", "the", "no article"]), ("He plays ___ guitar very well.", "the", ["a", "an", "no article"]), ("I need ___ umbrella.", "an", ["a", "the", "no article"]),
              ("___ sun rises in the east.", "The", ["A", "An", "No article"]), ("My sister is ___ university student.", "a", ["an", "the", "no article"]), ("She goes to ___ school every day (as a pupil).", "no article", ["a", "an", "the"]),
              ("We ate ___ orange and ___ apple.", "an / an", ["a / a", "an / a", "the / an"]), ("He wants to be ___ engineer.", "an", ["a", "the", "no article"]), ("___ Nile is a long river.", "The", ["A", "An", "No article"]),
              ("Cameroon is ___ African country.", "an", ["a", "the", "no article"])]
     s, r, w = rng.choice(items)
-    return Draft(f"{s} Which answer fills the gap correctly?", r, w, "Use 'an' before a vowel sound, 'a' before a consonant sound, 'the' for something specific.", src=SRC)
+    return Draft(f"Fill the gap: {s} Which answer is correct?", r, w, "Use 'an' before a vowel sound, 'a' before a consonant sound, 'the' for something specific.", src=SRC)

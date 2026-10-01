@@ -146,5 +146,67 @@ class Repository(unittest.TestCase):
                 self.assertIn(q["source"][1:q["source"].index("]")], facts_engine.SOURCES)
 
 
+class Lycee(unittest.TestCase):
+    """Lycée / GCE scope (qb/lycee.py, qb/gen/lycee_*.py, qb/facts/lycee_*.py)."""
+
+    @classmethod
+    def setUpClass(cls):
+        quizbank.load_generators()
+        cls.mine = sorted(k for k, c in core.COURSES.items() if c["prefix"].startswith("ly-"))
+
+    def test_courses_are_secondary_with_a_subject_field_and_the_right_language(self):
+        self.assertGreater(len(self.mine), 50)
+        for k in self.mine:
+            c = core.COURSES[k]
+            self.assertEqual("secondary", c["track"], k)
+            self.assertTrue(c["field"], k)
+            self.assertIn(c["level"], ("2nde", "1re", "Tle", "Form 5", "Lower Sixth", "Upper Sixth"), k)
+            english = c["level"] in ("Form 5", "Lower Sixth", "Upper Sixth")
+            self.assertEqual("en" if english else "fr", c.get("lang", "fr"), k)
+            self.assertIn(c["field"], ("droit", "economie", "mathematiques", "physique", "geographie", "litterature", "histoire", "informatique", "chimie", "biologie", "philosophie"), k)   # QuizCatalog fields
+        triples = [(c["track"], c["level"], c["field"]) for k, c in core.COURSES.items()]
+        self.assertEqual(len(triples), len(set(triples)))                           # one pack set per (track, level, field): no question in two packs
+
+    def test_generators_self_check_are_deterministic_and_pass_the_quality_control(self):
+        sample = {"2nde-maths", "tle-maths", "1re-phys", "u6-chem", "f5-cs", "2nde-svt", "l6-econ", "f5-geo", "u6-lit"}
+        a, fails = core.run_generators(only=sample)
+        b, _ = core.run_generators(only=sample)
+        self.assertEqual([], fails)
+        self.assertEqual([q["id"] for q in a], [q["id"] for q in b])
+        self.assertEqual({}, {i: e for i, e in list(qc.check_bank(a)["errors"].items())[:5]})
+
+    def test_the_lycee_bank_is_review_only_and_balanced(self):
+        qs, kept, res, fails = quizbank.prepare()
+        mine = [q for q in kept if q["id"].startswith("ly-")]
+        self.assertGreater(len(mine), 30000)
+        self.assertEqual({"review"}, {q["status"] for q in mine})                 # nothing is presented as approved
+        self.assertEqual([], [p for p in res["bank"] if any(p.startswith(k + " ") for k in self.mine)])   # template shares, answer positions
+        for q in mine:
+            if q["verif"] == "fact":
+                self.assertIn(q["source"][1:q["source"].index("]")], __import__("qb.facts_engine", fromlist=["SOURCES"]).SOURCES)
+        english = {"Form 5", "Lower Sixth", "Upper Sixth"}
+        self.assertTrue(all(q["lang"] == "en" for q in mine if q["level"] in english))
+        self.assertTrue(any(q["lang"] == "en" and q["level"] == "2nde" for q in mine))      # the English class of the francophone lycée
+        self.assertTrue(all(q["lang"] == "fr" for q in mine if q["level"] in ("2nde", "1re", "Tle") and q["field"] != "litterature"))
+
+    def test_chemistry_helpers(self):
+        from qb.gen import lycee_chem as ch
+        self.assertEqual({"Ca": 1, "O": 2, "H": 2}, ch.parse("Ca(OH)2"))
+        self.assertEqual(18, ch.mass("H2O"))
+        self.assertEqual(100, ch.mass("CaCO3"))
+        self.assertEqual({"C": 2, "H": 4, "O": 2}, ch.parse("CH3COOH"))
+        for eq, _ in ch.REACTIONS:                                                  # every equation of the tables is balanced atom by atom
+            left, right = ch.split_eq(eq)
+            self.assertEqual(ch.count(left), ch.count(right), eq)
+
+    def test_english_imperatives_become_questions_and_notes_move_in_front(self):
+        from qb.gen.lycee_common import questionize
+        self.assertEqual("What is the median of 1, 2, 3?", questionize("Find the median of 1, 2, 3."))
+        self.assertEqual("What are the solutions of x² = 4?", questionize("Solve x² = 4."))
+        d = core.Draft("Quelle est la pression ? (R = 8,31 J/(mol·K))", "1", ["2", "3", "4"], "expl")
+        from qb.gen.lycee_common import tidy
+        self.assertEqual("R = 8,31 J/(mol·K). Quelle est la pression ?", tidy(d).text)
+
+
 if __name__ == "__main__":
     unittest.main()
