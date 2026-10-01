@@ -420,9 +420,10 @@ object NameParser {
      * [durationMs] (0 = unknown) only breaks ties (a 4-minute video with "Artist - Title" is a clip, not a film).
      */
     fun parse(fileName: String, folder: String = "", durationMs: Long = 0, currentYear: Int = java.time.LocalDate.now().year): Parsed {
-        val (stem0, ext) = splitExt(fileName)
+        val (stem00, ext) = splitExt(fileName)
         val media = mediaOf(ext)
-        personal(stem0, media, ext)?.let { return it.copy(stem = stem0) }
+        personal(stem00, media, ext)?.let { return it.copy(stem = stem00) }
+        val (stem0, subSuffix) = if (media == Media.SUBTITLE) SubtitleTags.peel(stem00) else stem00 to null
 
         val (stripped0, junk0, copy) = stripJunk(stem0)
         val stripped = if (media == Media.AUDIO && stripped0.contains('_') && !stripped0.contains(' ') && stripped0.count { it == '-' } == 1) stripped0.replace("-", " - ") else stripped0
@@ -438,7 +439,7 @@ object NameParser {
                 Parsed(media, kind, ext, title = t, confidence = 0.6, rule = "file." + kind.name.lowercase(), copy = copy, hadJunk = junk, stem = t, nameLang = nameLang(t))
             }
             Media.IMAGE, Media.DOC, Media.OTHER -> lightParse(stripped, media, ext, folder, junk, copy)
-            else -> mediaParse(stripped, media, ext, folder, durationMs, currentYear, hasGroupPrefix, clipHint, junk, copy, stem0, rawTags)
+            else -> mediaParse(stripped, media, ext, folder, durationMs, currentYear, hasGroupPrefix, clipHint, junk, copy, stem0, rawTags, subSuffix)
         }
     }
 
@@ -471,13 +472,17 @@ object NameParser {
     private fun dropCloseHead(s: String) = s.trimStart().trimStart(']', ')', '}', ' ')
 
     private fun mediaParse(stripped: String, media: Media, ext: String, folder: String, durationMs: Long, currentYear: Int,
-                           hasGroupPrefix: Boolean, clipHint: Boolean, junk0: Boolean, copy: Boolean, rawStem: String, rawTags: Pair<Int?, Audio?>): Parsed {
+                           hasGroupPrefix: Boolean, clipHint: Boolean, junk0: Boolean, copy: Boolean, rawStem: String, rawTags: Pair<Int?, Audio?>, subSuffix: String? = null): Parsed {
         var junk = junk0
         val text = normalizeSeparators(stripped).let { t -> if (!t.contains(' ') && t.count { it == '-' } >= 2) t.replace('-', ' ') else t }
         val lang0 = nameLang(text)
         var lang = lang0
-        val subLangCode = if (media == Media.SUBTITLE) subtitleLang(text) else null
-        val (textNoLang, subLang) = if (subLangCode != null) text.replace(ur("\\s(?:" + Regex.escape(subLangCode.first) + ")$"), "") to subLangCode.second else text to null
+        val subLangCode = if (media == Media.SUBTITLE && subSuffix == null) subtitleLang(text) else null
+        val (textNoLang, subLang) = when {
+            subSuffix != null -> text to subSuffix
+            subLangCode != null -> text.replace(ur("\\s(?:" + Regex.escape(subLangCode.first) + ")$"), "") to subLangCode.second
+            else -> text to null
+        }
 
         // ---- gather tokens and tags (resolution, language version) over the whole text
         val allTokens = textNoLang.split(' ').filter { it.isNotEmpty() }

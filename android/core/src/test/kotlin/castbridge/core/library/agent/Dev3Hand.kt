@@ -7,7 +7,7 @@ package castbridge.core.library.agent
  */
 object Dev3Hand {
     internal fun nfd(s: String) = java.text.Normalizer.normalize(s, java.text.Normalizer.Form.NFD)
-    internal fun ext(input: String) = input.substringAfterLast('.')
+    internal fun ext(input: String) = input.substringAfterLast('.').lowercase()
 
     /** A series episode. [epTitle] and [tag] ("[VOSTFR]") are part of the expected file name. */
     internal fun ser(cat: String, input: String, title: String, sn: Int?, ep: Int?, epEnd: Int? = null, epTitle: String? = null, tag: String = "", folderIn: String = "", lang: String = "fr"): GCase {
@@ -79,7 +79,7 @@ object Dev3Hand {
         ser("ep-bare", "Prison Break - 04 - Cut Off.mkv", "Prison Break", 2, 4, epTitle = "Cut Off", folderIn = "Prison Break/Saison 2"),
         // anime : numérotation absolue
         unk("ep-anime", "One Piece - 1045.mkv"),
-        ser("ep-anime", "[SubsPlease] Spy x Family - 12 (1080p) [A1B2C3D4].mkv", "Spy X Family", null, 12),
+        ser("ep-anime", "[SubsPlease] Spy x Family - 12 (1080p) [A1B2C3D4].mkv", "Spy x Family", null, 12),
         ser("ep-anime", "[Erai-raws] Jujutsu Kaisen - 47 [1080p][Multiple Subtitle].mkv", "Jujutsu Kaisen", null, 47),
         ser("ep-anime", "[Anime Land] Blue Lock - 05 [720p].mkv", "Blue Lock", null, 5),
         ser("ep-anime", "[HorribleSubs] Gintama - 100v2 [480p].mkv", "Gintama", null, 100),
@@ -144,7 +144,7 @@ object Dev3Hand {
         ser("lang-words", "المسلسل الحلقة 6.mkv", "المسلسل", null, 6),
         ser("lang-words", "权力的游戏 第2季第6集.mkv", "权力的游戏", 2, 6),
         ser("lang-words", "权力的游戏 第2季 第6集.mkv", "权力的游戏", 2, 6),
-        ser("lang-words", "Attack on Titan 第2期 第6話.mkv", "Attack On Titan", 2, 6),
+        ser("lang-words", "Attack on Titan 第2期 第6話.mkv", "Attack on Titan", 2, 6),
         ser("lang-words", "進撃の巨人 第2期 第6話.mkv", "進撃の巨人", 2, 6),
         ser("lang-words", "오징어 게임 시즌 2 6화.mkv", "오징어 게임", 2, 6),
         ser("lang-words", "Les Revenants Saison 2 Épisode 6.mkv", "Les Revenants", 2, 6),
@@ -235,16 +235,16 @@ object Dev3Hand {
         ser("noise-africa", "Blood Sisters S01E02 (Waploaded.com).mp4", "Blood Sisters", 1, 2),
         ser("noise-africa", "Waploaded.com - Blood Sisters S01E02.mp4", "Blood Sisters", 1, 2),
         ser("noise-africa", "Blood Sisters S01E02 - NetNaija.mp4", "Blood Sisters", 1, 2),
-        mov("noise-africa", "[NetNaija.com] King of Boys (2018).mp4", "King Of Boys", 2018),
-        mov("noise-africa", "King.of.Boys.2018.720p.WEB-DL.x264.[9jaRocks.Com].mkv", "King Of Boys", 2018),
+        mov("noise-africa", "[NetNaija.com] King of Boys (2018).mp4", "King of Boys", 2018),
+        mov("noise-africa", "King.of.Boys.2018.720p.WEB-DL.x264.[9jaRocks.Com].mkv", "King of Boys", 2018),
         mov("noise-africa", "TFPDL.Lionheart.2018.720p.WEB.mkv", "Lionheart", 2018),
         // WhatsApp / Telegram : pas un film, pas une série
-        other("noise-chat", "VID-20240315-WA0012.mp4", "Vidéo WhatsApp – 2024-03-15 (12).mp4", "Famille", Kind.PERSONAL),
-        other("noise-chat", "IMG-20240315-WA0012.jpg", "Photo WhatsApp – 2024-03-15 (12).jpg", "Famille", Kind.PHOTO),
+        other("noise-chat", "VID-20240402-WA0044.mp4", "Vidéo WhatsApp – 2024-04-02 (44).mp4", "Famille", Kind.PERSONAL),
+        other("noise-chat", "IMG-20240402-WA0044.jpg", "Photo WhatsApp – 2024-04-02 (44).jpg", "Famille", Kind.PHOTO),
         other("noise-chat", "AUD-20240315-WA0003.opus", "Audio WhatsApp – 2024-03-15 (3).opus", "Famille", Kind.PERSONAL),
         other("noise-chat", "PTT-20240315-WA0003.opus", "Audio WhatsApp – 2024-03-15 (3).opus", "Famille", Kind.PERSONAL),
-        other("noise-chat", "WhatsApp Video 2024-03-15 at 14.22.11.mp4", "Vidéo WhatsApp – 2024-03-15 14h22.mp4", "Famille", Kind.PERSONAL),
-        other("noise-chat", "WhatsApp Video 2024-03-15 at 14.22.11 (1).mp4", "Vidéo WhatsApp – 2024-03-15 14h22.mp4", "Famille", Kind.PERSONAL),
+        other("noise-chat", "WhatsApp Video 2024-04-02 at 08.05.09.mp4", "Vidéo WhatsApp – 2024-04-02 08h05.mp4", "Famille", Kind.PERSONAL),
+        other("noise-chat", "WhatsApp Video 2024-04-02 at 08.05.09 (1).mp4", "Vidéo WhatsApp – 2024-04-02 08h05.mp4", "Famille", Kind.PERSONAL),
         other("noise-chat", "video_2024-03-15_14-22-11.mp4", "Vidéo Telegram – 2024-03-15 14h22.mp4", "Famille", Kind.PERSONAL),
         ser("noise-chat", "@NollyMovies Blood Sisters S01E02.mp4", "Blood Sisters", 1, 2),
         ser("noise-chat", "Blood Sisters S01E02 @NollyMovies.mp4", "Blood Sisters", 1, 2),
@@ -304,7 +304,7 @@ object Dev3Hand {
         other("course", "01. Introduction.mp4", "01. Introduction.mp4", "Cours", Kind.COURSE, folderIn = "Cours de Python"),
         other("course", "Section 1 - Lecture 2 - Variables.mp4", "Section 1 – Lecture 2 – Variables.mp4", "Cours", Kind.COURSE),
         other("course", "Module 3 - Les fonctions.mp4", "Module 3 – Les fonctions.mp4", "Cours/Informatique", Kind.COURSE, folderIn = "Formation Python"),
-        other("course", "Chapitre 4 : Les limites.mp4", "Chapitre 4 – Les limites.mp4", "Cours/Mathématiques", Kind.COURSE, folderIn = "Cours de Maths"),
+        other("course", "Chapitre 9 : Les dérivées.mp4", "Chapitre 9 – Les dérivées.mp4", "Cours/Mathématiques", Kind.COURSE, folderIn = "Cours de Maths"),
         other("course", "Leçon 5 - Les fractions.mp4", "Leçon 5 – Les fractions.mp4", "Cours/Mathématiques", Kind.COURSE),
         other("course", "Lesson 5 - Fractions.mp4", "Lesson 5 – Fractions.mp4", "Cours", Kind.COURSE),
         // ---------------------------------------------------------------- séparateurs, casse, Unicode

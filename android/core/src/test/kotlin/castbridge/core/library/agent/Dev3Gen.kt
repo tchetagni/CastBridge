@@ -151,7 +151,7 @@ class Dev3Gen(seed: Long, private val pools: Pools) {
     }
 
     fun camel(): GCase {
-        val title = pick(pools.series)
+        val title = pick(pools.series.filter { t -> t.split(' ').all { w -> w[0].isUpperCase() } })   // a glued title cannot give back its small words ("by", "of")
         val sn = r.nextInt(1, 10); val ep = r.nextInt(1, 25)
         val glued = title.split(' ').joinToString("") { w -> w.replaceFirstChar { it.uppercase() } }
         val sep = pick(listOf("", ".", "_"))

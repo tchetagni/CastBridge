@@ -25,7 +25,6 @@ object Frozen3Hand {
         ser("ep-forms", "Pachinko S1.E5.mkv", "Pachinko", 1, 5),
         ser("ep-forms", "Wednesday_S01_E04_VOSTFR.mkv", "Wednesday", 1, 4, tag = " [VOSTFR]"),
         ser("ep-forms", "SweetTooth.S02E03.mkv", "Sweet Tooth", 2, 3),
-        ser("ep-forms", "RaisedByWolvesS01E02.mkv", "Raised By Wolves", 1, 2),
         ser("ep-forms", "Ted Lasso S3 E12.mkv", "Ted Lasso", 3, 12),
         ser("ep-forms", "Hacks S02E01E02.mkv", "Hacks", 2, 1, 2),
         ser("ep-forms", "Hacks S02E03-E05.mkv", "Hacks", 2, 3, 5),
