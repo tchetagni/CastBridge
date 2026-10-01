@@ -57,6 +57,8 @@ object BtProtocol {
     const val SERVICE_UUID = "7c5e3b9a-4d2f-4c61-9b0e-cb0000000001"
     /** Second RFCOMM service: a plain byte tunnel to the TV's SSH server (see castbridge.core.ssh.SshTunnel). */
     const val SSH_SERVICE_UUID = "7c5e3b9a-4d2f-4c61-9b0e-cb0000000002"
+    /** Third RFCOMM service: a byte tunnel to the TV's own HTTP API (127.0.0.1:8765), see castbridge.core.tunnel.TcpTunnel and docs/ADMIN.md. */
+    const val API_SERVICE_UUID = "7c5e3b9a-4d2f-4c61-9b0e-cb0000000003"
     const val OK = 0
     const val ERR_MAGIC = 1
     const val ERR_PIN = 2
@@ -366,6 +368,8 @@ object LinkPlanner {
         data class Lan(val base: String) : Route() { override val label get() = "Wi-Fi (réseau commun)" }
         data class Direct(val ssid: String, val pass: String, val base: String) : Route() { override val label get() = "Wi-Fi Direct" }
         object Bluetooth : Route() { override val label get() = "Bluetooth" }
+        /** The TV's HTTP API through the phone's Bluetooth tunnel: the same requests as on Wi-Fi, slower. */
+        data class BluetoothTunnel(val base: String) : Route() { override val label get() = "Bluetooth (API)" }
     }
 
     /**
@@ -374,12 +378,17 @@ object LinkPlanner {
      */
     fun mayStartWifiDirect(requested: Boolean, enabledByOwner: Boolean, tvHasNetwork: Boolean) = requested && (enabledByOwner || !tvHasNetwork)
 
-    fun plan(info: LinkInfo?, reachable: (String) -> Boolean, canJoinWifiDirect: Boolean): List<Route> = buildList {
+    /**
+     * [tunnelBase]: the phone's local end of the API tunnel (http://127.0.0.1:18765) when its Bluetooth gateway runs. It is a route
+     * of last resort for everything that speaks HTTP (library, remote, parental, install...); simple file sends keep CBT1.
+     */
+    fun plan(info: LinkInfo?, reachable: (String) -> Boolean, canJoinWifiDirect: Boolean, tunnelBase: String? = null): List<Route> = buildList {
         if (info != null) {
             info.ips.map { "http://$it:${info.port}" }.firstOrNull(reachable)?.let { add(Route.Lan(it)) }
             if (canJoinWifiDirect && info.wdSsid != null && info.wdPass != null)
                 add(Route.Direct(info.wdSsid, info.wdPass, "http://${info.wdIp ?: WifiDirect.GROUP_OWNER_IP}:${info.port}"))
         }
+        if (tunnelBase != null) add(Route.BluetoothTunnel(tunnelBase))
         add(Route.Bluetooth)
     }
 }

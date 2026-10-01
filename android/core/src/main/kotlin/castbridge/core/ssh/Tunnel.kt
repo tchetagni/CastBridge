@@ -6,7 +6,6 @@ import java.io.OutputStream
 import java.net.InetSocketAddress
 import java.net.Socket
 import java.util.concurrent.ConcurrentHashMap
-import java.util.concurrent.Semaphore
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicLong
 
@@ -67,6 +66,29 @@ class ByteRelay(
  */
 class PeerRegistry {
     private val byPort = ConcurrentHashMap<Int, String>()
+    /** Stable virtual address per tunnelled device (240.77.x.y: reserved space, never routed) for servers that only look at an address. */
+    private val virtualByPeer = ConcurrentHashMap<String, String>()
+    private val peerByVirtual = ConcurrentHashMap<String, String>()
+
+    /**
+     * The address a server should see for a connection arriving through the tunnel from [remote] (loopback, registered port), or
+     * null when it is not a tunnelled one. NanoHTTPD turns every loopback address into "127.0.0.1", so the identity travels as a
+     * distinct, non-loopback address and [clientKey] maps it back to "bt:<address>".
+     */
+    fun virtualAddress(remote: InetSocketAddress): java.net.InetAddress? {
+        if (remote.address?.isLoopbackAddress != true) return null
+        val peer = byPort[remote.port] ?: return null
+        val ip = synchronized(virtualByPeer) {
+            virtualByPeer.getOrPut(peer) {
+                val n = virtualByPeer.size + 1
+                "240.77.${(n shr 8) and 0xff}.${n and 0xff}".also { peerByVirtual[it] = peer }
+            }
+        }
+        return java.net.InetAddress.getByAddress(ip.split('.').map { it.toInt().toByte() }.toByteArray())
+    }
+
+    /** Same as [clientKey] for a server that only knows the client's address text. */
+    fun keyOfAddress(ip: String?): String = if (ip == null) "?" else peerByVirtual[ip] ?: ip
 
     fun register(localPort: Int, peer: String) { byPort[localPort] = peer }
     fun unregister(localPort: Int) { byPort.remove(localPort) }
@@ -84,50 +106,35 @@ class PeerRegistry {
 
 /**
  * TV side of "SSH over Bluetooth": each accepted Bluetooth link is joined to a fresh TCP connection to the local SSH server
- * (127.0.0.1:[sshPort]). At most [maxConnections] at once (more are closed at once). Nothing is bypassed: the SSH server
- * still demands an authorised key, applies its lockout (per Bluetooth device, thanks to [peers]) and its timeouts.
+ * (127.0.0.1:[sshPort]) by a [castbridge.core.tunnel.TcpTunnel] (no handshake: the link carries the raw SSH bytes, so any
+ * plain RFCOMM client works). At most [maxConnections] at once. Nothing is bypassed: the SSH server still demands an authorised
+ * key, applies its lockout (per Bluetooth device, thanks to [peers]) and its timeouts.
  */
 class SshTunnel(
-    private val peers: PeerRegistry,
-    private val sshPort: Int,
-    private val maxConnections: Int = 2,
-    private val bufferBytes: Int = 32 * 1024,
-    private val connectTimeoutMs: Int = 3000,
+    peers: PeerRegistry,
+    sshPort: Int,
+    maxConnections: Int = 2,
+    bufferBytes: Int = 32 * 1024,
+    connectTimeoutMs: Int = 3000,
+    /** One line per refusal / end of link (no keys, no PIN). */
+    log: (String) -> Unit = {},
+    /** A link silent this long is closed (sshd's own idle limit is 15 min, so this only frees links whose phone vanished). */
+    idleMs: () -> Long = { 16 * 60_000L },
 ) {
     data class Active(val peer: String, val name: String, val since: Long)
 
-    private val slots = Semaphore(maxConnections)
-    private val active = ConcurrentHashMap<Int, Active>()
+    private val tunnel = castbridge.core.tunnel.TcpTunnel("ssh", peers, sshPort, maxConnections, bufferBytes, connectTimeoutMs,
+        idleMs = idleMs, handshake = false, targetDownMessage = "le serveur SSH de la TV n'écoute pas (SSH désactivé sur la TV ?)", log = log)
 
-    fun active(): List<Active> = active.values.sortedBy { it.since }
+    /** Last failure, in French (null after a link that worked). */
+    val lastError get() = tunnel.lastError
+
+    fun active(): List<Active> = tunnel.active().map { Active(it.peer, it.name, it.since) }
 
     /**
      * Serves one Bluetooth link until it ends (blocking). [peer] identifies the device (its Bluetooth address).
      * Returns false if refused (too many connections, SSH server not listening); [close] is always called.
      */
-    fun serve(peer: String, name: String, input: InputStream, output: OutputStream, close: () -> Unit, onChange: () -> Unit = {}): Boolean {
-        if (!slots.tryAcquire()) { runCatching(close); return false }
-        val sock = Socket()
-        var port = -1
-        try {
-            // Bind first, register, then connect: the server can never see this connection before it is attributed.
-            sock.bind(InetSocketAddress("127.0.0.1", 0))
-            port = sock.localPort
-            peers.register(port, "bt:$peer")
-            sock.connect(InetSocketAddress("127.0.0.1", sshPort), connectTimeoutMs)
-            sock.tcpNoDelay = true
-            active[port] = Active(peer, name, System.currentTimeMillis())
-            runCatching(onChange)
-            val r = ByteRelay(input, output, sock.getInputStream(), sock.getOutputStream(), close, { sock.close() }, bufferBytes, "bt-ssh").start()
-            r.join()
-            return true
-        } catch (e: IOException) {
-            return false
-        } finally {
-            runCatching(close); runCatching { sock.close() }
-            if (port >= 0) { peers.unregister(port); active.remove(port) }
-            slots.release()
-            runCatching(onChange)
-        }
-    }
+    fun serve(peer: String, name: String, input: InputStream, output: OutputStream, close: () -> Unit, onChange: () -> Unit = {}): Boolean =
+        tunnel.serve(peer, name, input, output, close, onChange).served
 }

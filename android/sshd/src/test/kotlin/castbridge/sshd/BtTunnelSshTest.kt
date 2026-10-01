@@ -51,6 +51,7 @@ class BtTunnelSshTest {
         val a = device("AA:AA:AA:AA:AA:01")
         login(a, kp).use { s ->
             s.auth().verify(5, TimeUnit.SECONDS)
+            assertEquals(1, server.policy.openSessions, "a session through the tunnel counts for the TV's SSH badge (status 4-ssh-n)")
             val out = ByteArrayOutputStream()
             val ch = s.createExecChannel("head -c 200000 /dev/zero | wc -c"); ch.setOut(out); ch.open().verify(5, TimeUnit.SECONDS)
             ch.waitFor(EnumSet.of(ClientChannelEvent.CLOSED), 10_000)
@@ -58,6 +59,7 @@ class BtTunnelSshTest {
             assertEquals(1, tunnel.active().size)
         }
         Thread.sleep(300)
+        assertEquals(0, server.policy.openSessions)
         assertEquals(0, tunnel.active().size, "closing the SSH session frees the tunnel slot")
         assertEquals(0, server.peers.size())
     }
@@ -81,5 +83,24 @@ class BtTunnelSshTest {
             assertEquals(2, results.count { it.startsWith("SSH") }, results.toString())
             assertEquals(1, results.count { it == "EOF" }, results.toString())
         } finally { socks.forEach { it.close() } }
+    }
+}
+
+class BtTunnelSshFailureTest {
+    @Test fun sshServerOffIsExplainedAndNothingIsLeft() {
+        val log = java.util.concurrent.CopyOnWriteArrayList<String>()
+        val free = ServerSocket(0).use { it.localPort }
+        val peers = castbridge.core.ssh.PeerRegistry()
+        val tunnel = SshTunnel(peers, free, maxConnections = 1, log = { log += it })
+        repeat(3) {       // never a stuck slot, however many times it fails
+            val s = ServerSocket(0)
+            thread(isDaemon = true) { val c = s.accept(); tunnel.serve("AA:BB", "x", c.getInputStream(), c.getOutputStream(), { c.close() }) }
+            Socket("127.0.0.1", s.localPort).use { assertEquals(-1, it.getInputStream().read()) }
+            s.close()
+        }
+        Thread.sleep(200)
+        assertTrue(log.any { "refused" in it && "SSH" in it }, log.toString())
+        assertTrue(tunnel.lastError!!.contains("SSH"))
+        assertEquals(0, tunnel.active().size); assertEquals(0, peers.size())
     }
 }
