@@ -1,0 +1,1227 @@
+{
+ "chapter": "gceal-maths-statistics",
+ "lessons": [
+  {
+   "id": "gceal-maths-poisson",
+   "title": "Discrete random variables and the Poisson distribution",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Statistics (Upper Sixth part; to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Calculate $E(X)$ and $\\text{Var}(X)$ of a discrete random variable",
+    "Use the Poisson distribution",
+    "Model rare events in time or space"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-maths-statistics-e01",
+    "gceal-maths-statistics-e02",
+    "gceal-maths-statistics-e03",
+    "gceal-maths-statistics-e04",
+    "gceal-maths-statistics-e05",
+    "gceal-maths-statistics-e06"
+   ],
+   "selfCheck": [
+    "gceal-maths-poisson-q1",
+    "gceal-maths-poisson-q2",
+    "gceal-maths-poisson-q3",
+    "gceal-maths-poisson-q4",
+    "gceal-maths-poisson-q5"
+   ],
+   "reviewNotes": [
+    "Poisson approximation to the binomial and sum of independent Poissons only briefly mentioned.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Discrete random variable",
+     "md": "A discrete random variable $X$ with probabilities $p_i$ ($\\sum p_i=1$): $E(X)=\\sum x\\,p$, $E(X^2)=\\sum x^2p$ and $\\text{Var}(X)=E(X^2)-[E(X)]^2$. Also $E(aX+b)=aE(X)+b$ and $\\text{Var}(aX+b)=a^2\\text{Var}(X)$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Poisson distribution",
+     "md": "$X\\sim\\text{Po}(\\lambda)$ models the number of events in a fixed interval when events occur singly, independently, at a constant average rate. $P(X=r)=\\frac{e^{-\\lambda}\\lambda^r}{r!}$ for $r=0,1,2,s'$ Mean $=$ variance $=\\lambda$. Over a longer interval multiply $\\lambda$ (e.g. 2 hours: $2\\lambda$)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Method",
+     "md": "1. Identify $\\lambda$ for the interval asked. 2. Use $P(X=r)$ directly for exact values; for 'at least' use the complement: $P(X\\geq k)=1-P(X\\leq k-1)$. 3. State the answer to 3 or 4 decimal places."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "Forgetting to rescale $\\lambda$ when the interval changes. $P(X\\geq1)=1-P(X=0)$, not $1-P(X=1)$. The Poisson model fails if events cluster or happen simultaneously."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "$X$ takes values 1, 2, 3, 4 with probabilities 0.1, 0.3, 0.4, 0.2. Find $E(X)$ and $\\text{Var}(X)$.",
+     "steps": [
+      "$E(X)=0.1+0.6+1.2+0.8=2.7$.",
+      "$E(X^2)=0.1+1.2+3.6+3.2=8.1$; $\\text{Var}=8.1-2.7^2=8.1-7.29=0.81$."
+     ],
+     "answer": "$E(X)=2.7$, $\\text{Var}(X)=0.81$"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Calls to a call centre arrive at an average of 2.5 per minute ($\\text{Po}(2.5)$). Find $P(X=0)$ and $P(X\\geq2)$.",
+     "steps": [
+      "$P(0)=e^{-2.5}=0.0821$.",
+      "$P(X\\geq2)=1-P(0)-P(1)=1-e^{-2.5}(1+2.5)=1-0.2873=0.7127$."
+     ],
+     "answer": "0.0821 and 0.7127",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "bars": [
+       {
+        "label": "0",
+        "value": 5.0,
+        "color": "blue"
+       },
+       {
+        "label": "1",
+        "value": 14.9,
+        "color": "blue"
+       },
+       {
+        "label": "2",
+        "value": 22.4,
+        "color": "blue"
+       },
+       {
+        "label": "3",
+        "value": 22.4,
+        "color": "blue"
+       },
+       {
+        "label": "4",
+        "value": 16.8,
+        "color": "blue"
+       },
+       {
+        "label": "5",
+        "value": 10.1,
+        "color": "blue"
+       },
+       {
+        "label": "6",
+        "value": 5.0,
+        "color": "blue"
+       },
+       {
+        "label": "7",
+        "value": 2.2,
+        "color": "blue"
+       },
+       {
+        "label": "8",
+        "value": 0.8,
+        "color": "blue"
+       }
+      ],
+      "unit": "%"
+     }
+    }
+   ],
+   "chapter": "gceal-maths-statistics"
+  },
+  {
+   "id": "gceal-maths-hypothesis-testing",
+   "title": "Hypothesis testing",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Statistics (Upper Sixth part; to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "State null and alternative hypotheses",
+    "Carry out one-tailed and two-tailed tests for a binomial proportion and a normal mean",
+    "Interpret the conclusion in context"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-maths-statistics-e07",
+    "gceal-maths-statistics-e08",
+    "gceal-maths-statistics-e09",
+    "gceal-maths-statistics-e10",
+    "gceal-maths-statistics-e11",
+    "gceal-maths-statistics-e12"
+   ],
+   "selfCheck": [
+    "gceal-maths-hypothesis-testing-q1",
+    "gceal-maths-hypothesis-testing-q2",
+    "gceal-maths-hypothesis-testing-q3",
+    "gceal-maths-hypothesis-testing-q4",
+    "gceal-maths-hypothesis-testing-q5"
+   ],
+   "reviewNotes": [
+    "Test for a Poisson mean and tests with unknown variance (t-test) not included.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Hypotheses and significance",
+     "md": "The **null hypothesis** $H_0$ is the claim being tested (e.g. $p=0.5$ or $\\mu=50$); the **alternative** $H_1$ says $p>0.5$ (one-tailed), $p<0.5$ (one-tailed) or $p\\neq0.5$ (two-tailed). The **significance level** $\\alpha$ (often 5%) is the probability of rejecting $H_0$ when it is true (a Type I error)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Binomial test",
+     "md": "Assume $H_0$ and compute the probability of the observed result or more extreme under $B(n,p_0)$. If this probability is less than $\\alpha$ (halve $\\alpha$ for two-tailed), reject $H_0$. The **critical region** is the set of values leading to rejection."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Test for a normal mean",
+     "md": "For a sample of size $n$ from a normal population with known $\\sigma$, under $H_0$ the sample mean is $N\\left(\\mu_0,\\frac{\\sigma^2}{n}\\right)$. Test statistic $z=\\frac{\\bar x-\\mu_0}{\\sigma/\\sqrt n}$. Critical values: 5% one-tailed $\\pm1.645$; 5% two-tailed $\\pm1.96$."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "Failing to reject $H_0$ does NOT prove $H_0$ true: there is insufficient evidence against it. Write conclusions in context (e.g. 'there is evidence that the mean mass is less than 50 kg'). Do not divide by $\\sigma^2$ or forget $\\sqrt n$."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "A coin is tossed 12 times and shows 10 heads. Test at 5% whether it is biased towards heads.",
+     "steps": [
+      "$H_0:p=0.5$, $H_1:p>0.5$. Under $H_0$, $X\\sim B(12,0.5)$.",
+      "$P(X\\geq10)=\\frac{66+12+1}{4096}=0.0193<0.05$: reject $H_0$; there is evidence of bias towards heads."
+     ],
+     "answer": "Reject $H_0$ (p = 0.0193)"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Bags of maize flour are labelled 50 kg with $\\sigma=2$ kg. A sample of 25 has mean 49.2 kg. Test at 5% whether the mean is less than 50 kg.",
+     "steps": [
+      "$H_0:\\mu=50$, $H_1:\\mu<50$. $z=\\frac{49.2-50}{2/\\sqrt{25}}=\\frac{-0.8}{0.4}=-2$.",
+      "$-2<-1.645$ (critical value): reject $H_0$; equivalently $P(Z<-2)=0.0228<0.05$."
+     ],
+     "answer": "Reject $H_0$: evidence the mean is below 50 kg",
+     "figure": {
+      "kind": "plot",
+      "xmin": -3.5,
+      "xmax": 3.5,
+      "ymin": -0.1,
+      "ymax": 1.15,
+      "grid": 1,
+      "w": 400,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "exp(-x^2/2)",
+        "color": "blue"
+       }
+      ],
+      "points": [
+       {
+        "x": -2,
+        "y": 0.1353,
+        "label": "z = -2",
+        "color": "green"
+       }
+      ],
+      "segments": [
+       {
+        "x1": -1.645,
+        "y1": 0,
+        "x2": -1.645,
+        "y2": 0.2585,
+        "color": "red",
+        "dash": true,
+        "label": "critical z = -1.645"
+       }
+      ],
+      "xlabel": "z"
+     }
+    }
+   ],
+   "chapter": "gceal-maths-statistics"
+  },
+  {
+   "id": "gceal-maths-regression",
+   "title": "Correlation and regression",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Statistics (Upper Sixth part; to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Calculate and interpret the product moment correlation coefficient $r$",
+    "Find the least-squares regression line $y=a+bx$",
+    "Use the line for prediction and comment on its reliability"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-maths-statistics-e13",
+    "gceal-maths-statistics-e14",
+    "gceal-maths-statistics-e15",
+    "gceal-maths-statistics-e16",
+    "gceal-maths-statistics-e17",
+    "gceal-maths-statistics-e18"
+   ],
+   "selfCheck": [
+    "gceal-maths-regression-q1",
+    "gceal-maths-regression-q2",
+    "gceal-maths-regression-q3",
+    "gceal-maths-regression-q4",
+    "gceal-maths-regression-q5"
+   ],
+   "reviewNotes": [
+    "Spearman's rank correlation and the regression of $x$ on $y$ are not included.",
+    "Scatter diagram line points are plotted by hand from the computed regression line.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Summary statistics and $r$",
+     "md": "$S_{xx}=\\sum(x-\\bar x)^2$, $S_{yy}=\\sum(y-\\bar y)^2$, $S_{xy}=\\sum(x-\\bar x)(y-\\bar y)$. The correlation coefficient $r=\\frac{S_{xy}}{\\sqrt{S_{xx}S_{yy}}}$ satisfies $-1\\leq r\\leq1$: near $+1$ strong positive, near $-1$ strong negative, near 0 no linear correlation."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Regression line of $y$ on $x$",
+     "md": "$y=a+bx$ with gradient $b=\\frac{S_{xy}}{S_{xx}}$ and intercept $a=\\bar y-b\\bar x$. The line passes through $(\\bar x,\\bar y)$ and minimises the sum of squares of the vertical distances to the points. Use it to predict $y$ from $x$ (not $x$ from $y$)."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Interpretation",
+     "md": "Interpolation (predicting inside the range of the data) is reasonably reliable if $r$ is close to $\\pm1$; extrapolation (outside the range) is not. Correlation does not imply causation: two variables may both depend on a third one."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "Using the line of $y$ on $x$ to estimate $x$. Interpreting $r=0$ as 'no relationship' (there could be a non-linear one). Quoting $r$ with a value greater than 1 in magnitude means a calculation error."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "For $x=1,2,3,4,5$ and $y=2,4,5,4,5$ find $r$ and the regression line.",
+     "steps": [
+      "$\\bar x=3$, $\\bar y=4$; $S_{xx}=10$, $S_{yy}=6$, $S_{xy}=(-2)(-2)+0+0+0+(2)(1)=6$.",
+      "$r=\\frac{6}{\\sqrt{60}}=0.775$; $b=\\frac{6}{10}=0.6$, $a=4-0.6\\times3=2.2$."
+     ],
+     "answer": "$r\\approx0.775$; $y=2.2+0.6x$"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "A shop records advertising spend $x$ (thousand FCFA) and sales $y$ (units): $(10,25),(20,38),(30,50),(40,66),(50,76)$. Find the regression line and predict sales at $x=35$.",
+     "steps": [
+      "$\\bar x=30$, $\\bar y=51$, $S_{xx}=1000$, $S_{xy}=1300$: $b=1.3$, $a=51-39=12$.",
+      "$y=12+1.3x$; at $x=35$: $12+45.5=57.5$."
+     ],
+     "answer": "$y=12+1.3x$; about 57.5 units",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "line",
+        "x1": 28.0,
+        "y1": 206.0,
+        "x2": 372.0,
+        "y2": 206.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 34.0,
+        "y1": 212.0,
+        "x2": 34.0,
+        "y2": 28.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 89.33333333333334,
+        "y1": 203.0,
+        "x2": 89.33333333333334,
+        "y2": 209.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 89.33333333333334,
+        "y": 223.0,
+        "text": "10",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200.0,
+        "y1": 203.0,
+        "x2": 200.0,
+        "y2": 209.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 223.0,
+        "text": "30",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 310.6666666666667,
+        "y1": 203.0,
+        "x2": 310.6666666666667,
+        "y2": 209.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.6666666666667,
+        "y": 223.0,
+        "text": "50",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 158.22222222222223,
+        "x2": 37.0,
+        "y2": 158.22222222222223,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 162.22222222222223,
+        "text": "25",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 110.44444444444444,
+        "x2": 37.0,
+        "y2": 110.44444444444444,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 114.44444444444444,
+        "text": "50",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 31.0,
+        "y1": 62.66666666666666,
+        "x2": 37.0,
+        "y2": 62.66666666666666,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 26.0,
+        "y": 66.66666666666666,
+        "text": "75",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 61.66666666666667,
+        "y1": 170.64444444444445,
+        "x2": 338.3333333333333,
+        "y2": 46.42222222222222,
+        "color": "orange",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 89.33333333333334,
+        "cy": 158.22222222222223,
+        "r": 4,
+        "stroke": "blue",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 144.66666666666669,
+        "cy": 133.3777777777778,
+        "r": 4,
+        "stroke": "blue",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 200.0,
+        "cy": 110.44444444444444,
+        "r": 4,
+        "stroke": "blue",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 255.33333333333334,
+        "cy": 79.86666666666666,
+        "r": 4,
+        "stroke": "blue",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 310.6666666666667,
+        "cy": 60.75555555555556,
+        "r": 4,
+        "stroke": "blue",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "text",
+        "x": 310.6666666666667,
+        "y": 194.53333333333333,
+        "text": "advertising (thousand FCFA)",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 244.26666666666668,
+        "y": 43.55555555555554,
+        "text": "sales (units)",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     }
+    }
+   ],
+   "chapter": "gceal-maths-statistics"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceal-maths-statistics-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-maths-poisson",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$X\\sim\\text{Po}(3)$. Find $P(X=2)$ (4 d.p.).",
+   "answer": 0.224,
+   "tolerance": 0.0002,
+   "explanation": "$\\frac{e^{-3}3^2}{2}=4.5e^{-3}=0.2240$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-maths-statistics"
+  },
+  {
+   "id": "gceal-maths-statistics-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-maths-poisson",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "For a Poisson distribution with $\\lambda=4$ the variance is",
+   "choices": [
+    "2",
+    "$\\sqrt4$",
+    "16",
+    "4"
+   ],
+   "answer": 3,
+   "explanation": "Mean = variance.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-statistics"
+  },
+  {
+   "id": "gceal-maths-statistics-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-maths-poisson",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "For a Poisson distribution the mean equals the variance.",
+   "answer": true,
+   "explanation": "Both equal $\\lambda$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-statistics"
+  },
+  {
+   "id": "gceal-maths-statistics-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-poisson",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$X\\sim\\text{Po}(1.2)$. $P(X=0)=$",
+   "choices": [
+    "0.8",
+    "0.3012",
+    "0.2",
+    "0.6988"
+   ],
+   "answer": 1,
+   "explanation": "$e^{-1.2}$. (0.6988 is $P(X\\geq1)$.)",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-maths-statistics"
+  },
+  {
+   "id": "gceal-maths-statistics-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-poisson",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Accidents at a busy junction in Bamenda occur at an average of 4 per month. Find the probability of exactly 2 accidents in a month, and of at least 1.",
+   "model": "$X\\sim\\text{Po}(4)$. $P(X=2)=\\frac{e^{-4}\\,4^2}{2}=8e^{-4}=0.1465$. $P(X\\geq1)=1-e^{-4}=0.9817$.",
+   "rubric": [
+    "Identifies $\\text{Po}(4)$ (1)",
+    "$P(X=2)=0.1465$ (1)",
+    "$P(X\\geq1)=0.9817$ (1)"
+   ],
+   "explanation": "$X\\sim\\text{Po}(4)$. $P(X=2)=\\frac{e^{-4}\\,4^2}{2}=8e^{-4}=0.1465$. $P(X\\geq1)=1-e^{-4}=0.9817$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-maths-statistics"
+  },
+  {
+   "id": "gceal-maths-statistics-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-maths-poisson",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Emergencies arrive at a clinic in Limbe at an average rate of 3 per hour, modelled by a Poisson distribution.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the probability that there are no emergencies in a given hour (4 d.p.).",
+     "answer": 0.0498,
+     "tolerance": 0.00020000100000000572,
+     "explanation": "$e^{-3}=0.0498$.",
+     "id": "gceal-maths-statistics-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find $P(X\\geq3)$ in an hour (4 d.p.).",
+     "answer": 0.5768,
+     "tolerance": 0.0003,
+     "explanation": "$1-e^{-3}(1+3+4.5)=1-0.4232=0.5768$.",
+     "id": "gceal-maths-statistics-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "What is the mean number of emergencies in 2 hours?",
+     "answer": 6,
+     "tolerance": 0,
+     "explanation": "$\\lambda$ doubles for a doubled interval.",
+     "id": "gceal-maths-statistics-e06-c"
+    }
+   ],
+   "chapter": "gceal-maths-statistics"
+  },
+  {
+   "id": "gceal-maths-poisson-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-poisson",
+   "prompt": "$E(X)$ is computed as",
+   "choices": [
+    "$\\sum x^2$",
+    "$\\frac{\\sum x}{n}$ only",
+    "$\\sum xp$",
+    "$\\sum p$"
+   ],
+   "answer": 2,
+   "explanation": "Weighted mean.",
+   "chapter": "gceal-maths-statistics"
+  },
+  {
+   "id": "gceal-maths-poisson-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-poisson",
+   "prompt": "$\\text{Var}(X)=$",
+   "choices": [
+    "$E(X)^2-E(X^2)$",
+    "$E(X^2)-[E(X)]^2$",
+    "$\\sum p$",
+    "$E(X)$"
+   ],
+   "answer": 1,
+   "explanation": "Standard formula.",
+   "chapter": "gceal-maths-statistics"
+  },
+  {
+   "id": "gceal-maths-poisson-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-poisson",
+   "prompt": "$\\text{Var}(2X+3)=$",
+   "choices": [
+    "$4\\text{Var}(X)$",
+    "$4\\text{Var}(X)+3$",
+    "$2\\text{Var}(X)$",
+    "$2\\text{Var}(X)+3$"
+   ],
+   "answer": 0,
+   "explanation": "$a^2$, constant dropped.",
+   "chapter": "gceal-maths-statistics"
+  },
+  {
+   "id": "gceal-maths-poisson-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-poisson",
+   "prompt": "Poisson $\\lambda$ for 3 minutes when the rate is 2 per minute is",
+   "choices": [
+    "$\\frac{2}{3}$",
+    "3",
+    "6",
+    "2"
+   ],
+   "answer": 2,
+   "explanation": "Scale.",
+   "chapter": "gceal-maths-statistics"
+  },
+  {
+   "id": "gceal-maths-poisson-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-poisson",
+   "prompt": "$P(X\\geq1)$ for a Poisson equals",
+   "choices": [
+    "$1-P(X=0)$",
+    "$P(X=1)$",
+    "$1-P(X=1)$",
+    "$P(X=0)$"
+   ],
+   "answer": 0,
+   "explanation": "Complement.",
+   "chapter": "gceal-maths-statistics"
+  },
+  {
+   "id": "gceal-maths-statistics-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-maths-hypothesis-testing",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Sample mean 52, $\\mu_0=50$, $\\sigma=6$, $n=36$. Find the test statistic $z$.",
+   "answer": 2,
+   "tolerance": 0,
+   "explanation": "$\\frac{52-50}{6/6}=2$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-maths-statistics"
+  },
+  {
+   "id": "gceal-maths-statistics-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-maths-hypothesis-testing",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "We reject $H_0$ when",
+   "choices": [
+    "the sample mean equals $\\mu_0$",
+    "the probability of the observed result under $H_0$ is less than $\\alpha$",
+    "the probability is greater than $\\alpha$",
+    "$H_1$ is false"
+   ],
+   "answer": 1,
+   "explanation": "Decision rule.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-statistics"
+  },
+  {
+   "id": "gceal-maths-statistics-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-maths-hypothesis-testing",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "If we do not reject $H_0$ then we have proved $H_0$ is true.",
+   "answer": false,
+   "explanation": "It only means there is insufficient evidence against it.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-statistics"
+  },
+  {
+   "id": "gceal-maths-statistics-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-hypothesis-testing",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$X\\sim B(10,0.5)$. $P(X\\geq8)=0.0547$. At 5% (one-tailed) the conclusion is",
+   "choices": [
+    "accept $H_1$ proved",
+    "do not reject $H_0$",
+    "reject $H_0$",
+    "the test is invalid"
+   ],
+   "answer": 1,
+   "explanation": "$0.0547>0.05$. ($45+10+1=56$; $56/1024=0.0547$.)",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-maths-statistics"
+  },
+  {
+   "id": "gceal-maths-statistics-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-hypothesis-testing",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain what a Type I error is, in the context of a 5% significance test of a new fertiliser.",
+   "model": "A Type I error is rejecting the null hypothesis ('the fertiliser has no effect') when it is actually true, i.e. concluding the fertiliser works when it does not. At a 5% significance level the probability of this error is 5%.",
+   "rubric": [
+    "Defines rejecting a true $H_0$ (1)",
+    "Links to the context (1)",
+    "States probability 5% (1)"
+   ],
+   "explanation": "A Type I error is rejecting the null hypothesis ('the fertiliser has no effect') when it is actually true, i.e. concluding the fertiliser works when it does not. At a 5% significance level the probability of this error is 5%.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-maths-statistics"
+  },
+  {
+   "id": "gceal-maths-statistics-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-maths-hypothesis-testing",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A seed supplier claims that 80% of its seeds germinate. A farmer in Kumba plants 15 seeds and 9 germinate. She tests at the 5% level whether the true proportion is lower than 80%, with $H_0:p=0.8$, $H_1:p<0.8$, and $X\\sim B(15,0.8)$ under $H_0$.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find $P(X\\leq9)$ (4 d.p.).",
+     "answer": 0.0611,
+     "tolerance": 0.0004,
+     "explanation": "$P(X\\leq9)=0.0611$.",
+     "id": "gceal-maths-statistics-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "The conclusion is",
+     "choices": [
+      "accept that exactly 80% germinate",
+      "reject $H_0$: all seeds fail",
+      "do not reject $H_0$: insufficient evidence that fewer than 80% germinate",
+      "reject $H_0$: the supplier is wrong"
+     ],
+     "answer": 2,
+     "explanation": "$0.0611>0.05$.",
+     "id": "gceal-maths-statistics-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the largest value $c$ such that $P(X\\leq c)<0.05$ (the critical region is $X\\leq c$).",
+     "answer": 8,
+     "tolerance": 0,
+     "explanation": "$P(X\\leq8)=0.0181<0.05$ but $P(X\\leq9)=0.0611>0.05$.",
+     "id": "gceal-maths-statistics-e12-c"
+    }
+   ],
+   "chapter": "gceal-maths-statistics"
+  },
+  {
+   "id": "gceal-maths-hypothesis-testing-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-hypothesis-testing",
+   "prompt": "$H_0$ is called the",
+   "choices": [
+    "null hypothesis",
+    "critical value",
+    "alternative hypothesis",
+    "sample"
+   ],
+   "answer": 0,
+   "explanation": "Definition.",
+   "chapter": "gceal-maths-statistics"
+  },
+  {
+   "id": "gceal-maths-hypothesis-testing-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-hypothesis-testing",
+   "prompt": "A two-tailed test at 5% uses critical values",
+   "choices": [
+    "$\\pm1.645$",
+    "$\\pm1$",
+    "$\\pm2.58$",
+    "$\\pm1.96$"
+   ],
+   "answer": 3,
+   "explanation": "2.5% each tail.",
+   "chapter": "gceal-maths-statistics"
+  },
+  {
+   "id": "gceal-maths-hypothesis-testing-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-hypothesis-testing",
+   "prompt": "The probability of a Type I error equals",
+   "choices": [
+    "the significance level",
+    "$\\frac{1}{2}$",
+    "the p-value of $H_1$",
+    "zero"
+   ],
+   "answer": 0,
+   "explanation": "Definition.",
+   "chapter": "gceal-maths-statistics"
+  },
+  {
+   "id": "gceal-maths-hypothesis-testing-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-hypothesis-testing",
+   "prompt": "The distribution of $\\bar X$ under $H_0$ is",
+   "choices": [
+    "$N(0,1)$",
+    "$N\\left(\\mu_0,\\frac{\\sigma^2}{n}\\right)$",
+    "$N(\\mu_0,n\\sigma^2)$",
+    "$N(\\mu_0,\\sigma^2)$"
+   ],
+   "answer": 1,
+   "explanation": "Standard error $\\frac{\\sigma}{\\sqrt n}$.",
+   "chapter": "gceal-maths-statistics"
+  },
+  {
+   "id": "gceal-maths-hypothesis-testing-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-hypothesis-testing",
+   "prompt": "$H_1:p\\neq0.5$ is",
+   "choices": [
+    "one-tailed (upper)",
+    "a null hypothesis",
+    "one-tailed (lower)",
+    "two-tailed"
+   ],
+   "answer": 3,
+   "explanation": "Both directions.",
+   "chapter": "gceal-maths-statistics"
+  },
+  {
+   "id": "gceal-maths-statistics-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-maths-regression",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$S_{xy}=1300$ and $S_{xx}=1000$. Find the gradient $b$ of the regression line.",
+   "answer": 1.3,
+   "tolerance": 0.001,
+   "explanation": "$b=\\frac{1300}{1000}$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-maths-statistics"
+  },
+  {
+   "id": "gceal-maths-statistics-e14",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-maths-regression",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The correlation coefficient $r$ always lies between",
+   "choices": [
+    "$0$ and 100",
+    "$-1$ and $1$",
+    "$-10$ and $10$",
+    "$0$ and $1$"
+   ],
+   "answer": 1,
+   "explanation": "Property.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-statistics"
+  },
+  {
+   "id": "gceal-maths-statistics-e15",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-maths-regression",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A high correlation between two variables proves one causes the other.",
+   "answer": false,
+   "explanation": "Correlation does not imply causation.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-maths-statistics"
+  },
+  {
+   "id": "gceal-maths-statistics-e16",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-regression",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$r=-0.92$ indicates",
+   "choices": [
+    "no correlation",
+    "strong positive correlation",
+    "strong negative linear correlation",
+    "weak positive correlation"
+   ],
+   "answer": 2,
+   "explanation": "Close to $-1$.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-maths-statistics"
+  },
+  {
+   "id": "gceal-maths-statistics-e17",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceal-maths-regression",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In $y=12+1.3x$ ($x$ = advertising in thousand FCFA, $y$ = sales in units) interpret the gradient and say whether predicting sales at $x=200$ is reliable.",
+   "model": "The gradient 1.3 means that each extra thousand FCFA spent on advertising is associated with about 1.3 more units sold. $x=200$ lies far outside the data range (10 to 50): this is extrapolation, so the prediction is unreliable.",
+   "rubric": [
+    "Interprets gradient in context (1)",
+    "Identifies extrapolation (1)",
+    "Concludes unreliable (1)"
+   ],
+   "explanation": "The gradient 1.3 means that each extra thousand FCFA spent on advertising is associated with about 1.3 more units sold. $x=200$ lies far outside the data range (10 to 50): this is extrapolation, so the prediction is unreliable.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-maths-statistics"
+  },
+  {
+   "id": "gceal-maths-statistics-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-maths-regression",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Using the data of Example 2: advertising $x=10,20,30,40,50$; sales $y=25,38,50,66,76$ with $S_{xx}=1000$, $S_{xy}=1300$, $S_{yy}=1696$.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find $r$ (4 d.p.).",
+     "answer": 0.9982,
+     "tolerance": 0.0003,
+     "explanation": "$r=\\frac{1300}{\\sqrt{1000\\times1696}}=0.9982$.",
+     "id": "gceal-maths-statistics-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Predict the sales when $x=35$.",
+     "answer": 57.5,
+     "tolerance": 0.01,
+     "explanation": "$12+1.3\\times35$.",
+     "id": "gceal-maths-statistics-e18-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Using the line to predict sales when $x=200$ is",
+     "choices": [
+      "reliable because the line is straight",
+      "reliable because $r$ is close to 1",
+      "impossible",
+      "unreliable because it is extrapolation"
+     ],
+     "answer": 3,
+     "explanation": "Outside the data range.",
+     "id": "gceal-maths-statistics-e18-c"
+    }
+   ],
+   "chapter": "gceal-maths-statistics"
+  },
+  {
+   "id": "gceal-maths-regression-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-regression",
+   "prompt": "The regression line passes through",
+   "choices": [
+    "$(S_{xx},S_{yy})$",
+    "the first point",
+    "$(0,0)$",
+    "$(\\bar x,\\bar y)$"
+   ],
+   "answer": 3,
+   "explanation": "Property.",
+   "chapter": "gceal-maths-statistics"
+  },
+  {
+   "id": "gceal-maths-regression-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-regression",
+   "prompt": "$b=$",
+   "choices": [
+    "$\\frac{S_{xy}}{S_{xx}}$",
+    "$S_{xy}S_{xx}$",
+    "$\\frac{S_{xx}}{S_{xy}}$",
+    "$\\frac{S_{xy}}{S_{yy}}$"
+   ],
+   "answer": 0,
+   "explanation": "Least squares.",
+   "chapter": "gceal-maths-statistics"
+  },
+  {
+   "id": "gceal-maths-regression-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-regression",
+   "prompt": "Predicting inside the range of the data is called",
+   "choices": [
+    "interpolation",
+    "regression",
+    "correlation",
+    "extrapolation"
+   ],
+   "answer": 0,
+   "explanation": "Definition.",
+   "chapter": "gceal-maths-statistics"
+  },
+  {
+   "id": "gceal-maths-regression-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-regression",
+   "prompt": "If $r=0$ then",
+   "choices": [
+    "there is no relationship of any kind",
+    "there is no linear correlation",
+    "the line is vertical",
+    "$b=1$"
+   ],
+   "answer": 1,
+   "explanation": "Only linear.",
+   "chapter": "gceal-maths-statistics"
+  },
+  {
+   "id": "gceal-maths-regression-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-maths-regression",
+   "prompt": "The intercept is found by $a=$",
+   "choices": [
+    "$\\bar y-b\\bar x$",
+    "$\\bar x-b\\bar y$",
+    "$b\\bar x$",
+    "$\\bar y+b\\bar x$"
+   ],
+   "answer": 0,
+   "explanation": "Line through the means.",
+   "chapter": "gceal-maths-statistics"
+  },
+  {
+   "id": "gceal-maths-statistics-m01",
+   "kind": "numeric",
+   "tier": "examen",
+   "lesson": "gceal-maths-poisson",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$X\\sim\\text{Po}(2)$. Find $P(X=1)$ (4 d.p.).",
+   "answer": 0.2707,
+   "tolerance": 0.0003000010000000225,
+   "explanation": "$e^{-2}\\times2=0.2707$.",
+   "difficulty": 3,
+   "points": 2,
+   "chapter": "gceal-maths-statistics"
+  },
+  {
+   "id": "gceal-maths-statistics-m02",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-maths-poisson",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Sacks of cassava flour in Bafoussam are labelled 25 kg and have $\\sigma=1.5$ kg. A sample of 36 sacks has mean 24.6 kg. Test at the 5% level whether the mean is below 25 kg: $H_0:\\mu=25$, $H_1:\\mu<25$.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the test statistic $z$.",
+     "answer": -1.6,
+     "tolerance": 0.01,
+     "explanation": "$z=\\frac{24.6-25}{1.5/\\sqrt{36}}=\\frac{-0.4}{0.25}=-1.6$.",
+     "id": "gceal-maths-statistics-m02-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "The conclusion at 5% is",
+     "choices": [
+      "do not reject $H_0$: insufficient evidence that the mean is below 25 kg",
+      "reject $H_0$: the mean is below 25 kg",
+      "reject $H_0$ because $z<0$",
+      "accept that $\\mu=24.6$"
+     ],
+     "answer": 0,
+     "explanation": "$-1.6>-1.645$ (critical value), equivalently $P(Z<-1.6)=0.0548>0.05$.",
+     "id": "gceal-maths-statistics-m02-b"
+    }
+   ],
+   "chapter": "gceal-maths-statistics"
+  }
+ ]
+}

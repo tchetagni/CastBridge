@@ -1,0 +1,479 @@
+{
+ "chapter": "gceal-further-maths-complex-geometry",
+ "lessons": [
+  {
+   "id": "gceal-further-maths-complex-loci",
+   "title": "Roots of complex numbers and loci",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Further Mathematics syllabus (Upper Sixth part; scope to be checked against the official text)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Find $n$th roots of complex numbers and roots of unity",
+    "Sketch loci such as $|z-a|=r$ and $\\text{arg}\\,(z-a)=\\theta$",
+    "Find the Cartesian equation of a locus"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-further-maths-complex-geometry-e01",
+    "gceal-further-maths-complex-geometry-e02",
+    "gceal-further-maths-complex-geometry-e03",
+    "gceal-further-maths-complex-geometry-e04",
+    "gceal-further-maths-complex-geometry-e05",
+    "gceal-further-maths-complex-geometry-e06"
+   ],
+   "selfCheck": [
+    "gceal-further-maths-complex-loci-q1",
+    "gceal-further-maths-complex-loci-q2",
+    "gceal-further-maths-complex-loci-q3",
+    "gceal-further-maths-complex-loci-q4",
+    "gceal-further-maths-complex-loci-q5"
+   ],
+   "reviewNotes": [
+    "Whether this topic is on the Cameroon GCE Board Further Mathematics syllabus is to be confirmed: it is standard A-Level Further Maths content.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "$n$th roots",
+     "md": "To solve $z^n=w$ write $w=r(\\cos\\theta+i\\sin\\theta)$ (and $\\theta+2\\pi k$). Then $z=r^{1/n}\\left[\\cos\\frac{\\theta+2\\pi k}{n}+i\\sin\\frac{\\theta+2\\pi k}{n}\\right]$ for $k=0,1,s',n-1$. The $n$ roots lie on a circle of radius $r^{1/n}$, equally spaced at angles $\\frac{2\\pi}{n}$, forming a regular polygon. The $n$th roots of unity sum to 0."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Standard loci",
+     "md": "$|z-a|=r$: circle, centre $a$, radius $r$. $|z-a|=|z-b|$: perpendicular bisector of the line joining $a$ and $b$. $\\text{arg}\\,(z-a)=\\theta$: a half-line from $a$ at angle $\\theta$ (not including $a$). $|z-a|<r$: inside the circle."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Cartesian equation",
+     "md": "Write $z=x+iy$ and use $|z-a|^2=(x-a_1)^2+(y-a_2)^2$. For $|z-a|=k|z-b|$ with $k\\neq1$ you get a circle: square both sides and complete the square."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "Giving fewer than $n$ roots. Using $\\text{arg}\\, z=\\frac{\\theta}{n}$ only and forgetting the $2\\pi k$ terms. In $|z-a|$ remember that $a$ is the CENTRE: $|z+1-2i|=3$ has centre $-1+2i$."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Find the cube roots of 8.",
+     "steps": [
+      "$8=8(\\cos0+i\\sin0)$ so $z=2\\left[\\cos\\frac{2\\pi k}{3}+i\\sin\\frac{2\\pi k}{3}\\right]$.",
+      "$k=0$: $2$. $k=1$: $2\\left(-\\frac{1}{2}+\\frac{\\sqrt3}{2}i\\right)=-1+i\\sqrt3$. $k=2$: $-1-i\\sqrt3$."
+     ],
+     "answer": "$2,\\;-1+i\\sqrt3,\\;-1-i\\sqrt3$",
+     "figure": {
+      "kind": "shapes",
+      "w": 308,
+      "h": 308,
+      "items": [
+       {
+        "t": "line",
+        "x1": 28.0,
+        "y1": 154.0,
+        "x2": 280.0,
+        "y2": 154.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 154.0,
+        "y1": 280.0,
+        "x2": 154.0,
+        "y2": 28.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 74.0,
+        "y1": 151.0,
+        "x2": 74.0,
+        "y2": 157.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 74.0,
+        "y": 171.0,
+        "text": "−2",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 234.0,
+        "y1": 151.0,
+        "x2": 234.0,
+        "y2": 157.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 234.0,
+        "y": 171.0,
+        "text": "2",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 151.0,
+        "y1": 234.0,
+        "x2": 157.0,
+        "y2": 234.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 146.0,
+        "y": 238.0,
+        "text": "−2",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 151.0,
+        "y1": 74.0,
+        "x2": 157.0,
+        "y2": 74.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 146.0,
+        "y": 78.0,
+        "text": "2",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 154.0,
+        "cy": 154.0,
+        "r": 80.0,
+        "stroke": "grey",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 234.0,
+        "cy": 154.0,
+        "r": 4,
+        "stroke": "red",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 114.00000000000001,
+        "cy": 84.71796769724492,
+        "r": 4,
+        "stroke": "red",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 113.99999999999996,
+        "cy": 223.28203230275508,
+        "r": 4,
+        "stroke": "red",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 258.0,
+        "y": 140.0,
+        "text": "2",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 90.0,
+        "y": 76.0,
+        "text": "−1 + i√3",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 90.0,
+        "y": 238.0,
+        "text": "−1 − i√3",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Describe the locus $|z-1-2i|=3$.",
+     "steps": [
+      "Write as $|z-(1+2i)|=3$: the distance from $z$ to $1+2i$ is 3.",
+      "A circle with centre $(1,2)$ and radius 3: $(x-1)^2+(y-2)^2=9$."
+     ],
+     "answer": "Circle, centre $(1,2)$, radius 3"
+    }
+   ],
+   "chapter": "gceal-further-maths-complex-geometry"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceal-further-maths-complex-geometry-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-further-maths-complex-loci",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the modulus of each fifth root of 32.",
+   "answer": 2,
+   "tolerance": 0,
+   "explanation": "$|z|=32^{1/5}=2$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-further-maths-complex-geometry"
+  },
+  {
+   "id": "gceal-further-maths-complex-geometry-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-further-maths-complex-loci",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The sum of the $n$th roots of unity ($n\\geq2$) is",
+   "choices": [
+    "0",
+    "$-1$",
+    "1",
+    "$n$"
+   ],
+   "answer": 0,
+   "explanation": "Roots are symmetric about the origin.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-further-maths-complex-geometry"
+  },
+  {
+   "id": "gceal-further-maths-complex-geometry-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-further-maths-complex-loci",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$|z-3|=|z+3|$ describes the imaginary axis.",
+   "answer": true,
+   "explanation": "Points equidistant from $3$ and $-3$ lie on the perpendicular bisector $x=0$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-further-maths-complex-geometry"
+  },
+  {
+   "id": "gceal-further-maths-complex-geometry-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-further-maths-complex-loci",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The locus $|z-2|=|z|$ is",
+   "choices": [
+    "the line $x=2$",
+    "the line $y=1$",
+    "the line $x=1$",
+    "the circle $|z|=1$"
+   ],
+   "answer": 2,
+   "explanation": "Perpendicular bisector of $0$ and $2$.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-further-maths-complex-geometry"
+  },
+  {
+   "id": "gceal-further-maths-complex-geometry-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceal-further-maths-complex-loci",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the Cartesian equation of the locus $|z-3|=2|z|$ and describe it.",
+   "model": "$(x-3)^2+y^2=4(x^2+y^2)$. So $x^2-6x+9+y^2=4x^2+4y^2$, i.e. $3x^2+6x+3y^2=9$, $x^2+2x+y^2=3$, $(x+1)^2+y^2=4$. A circle with centre $(-1,0)$ and radius 2.",
+   "rubric": [
+    "Squares the moduli (1)",
+    "Simplifies (1)",
+    "Circle centre $(-1,0)$ radius 2 (1)"
+   ],
+   "explanation": "$(x-3)^2+y^2=4(x^2+y^2)$. So $x^2-6x+9+y^2=4x^2+4y^2$, i.e. $3x^2+6x+3y^2=9$, $x^2+2x+y^2=3$, $(x+1)^2+y^2=4$. A circle with centre $(-1,0)$ and radius 2.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-further-maths-complex-geometry"
+  },
+  {
+   "id": "gceal-further-maths-complex-geometry-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-further-maths-complex-loci",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Consider the equation $z^4=16$.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many roots does it have?",
+     "answer": 4,
+     "tolerance": 0,
+     "explanation": "A polynomial of degree 4 has 4 roots: $2,2i,-2,-2i$.",
+     "id": "gceal-further-maths-complex-geometry-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the modulus of each root.",
+     "answer": 2,
+     "tolerance": 0,
+     "explanation": "$16^{1/4}=2$.",
+     "id": "gceal-further-maths-complex-geometry-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the sum of the roots.",
+     "answer": 0,
+     "tolerance": 0,
+     "explanation": "$2+2i-2-2i=0$.",
+     "id": "gceal-further-maths-complex-geometry-e06-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the product of the roots.",
+     "answer": -16,
+     "tolerance": 0,
+     "explanation": "$2\\cdot2i\\cdot(-2)\\cdot(-2i)=-16$, which equals the constant term of $z^4-16$.",
+     "id": "gceal-further-maths-complex-geometry-e06-d"
+    }
+   ],
+   "chapter": "gceal-further-maths-complex-geometry"
+  },
+  {
+   "id": "gceal-further-maths-complex-loci-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-further-maths-complex-loci",
+   "prompt": "$z^5=1$ has",
+   "choices": [
+    "5 roots",
+    "1 root",
+    "infinitely many roots",
+    "4 roots"
+   ],
+   "answer": 0,
+   "explanation": "Degree 5.",
+   "chapter": "gceal-further-maths-complex-geometry"
+  },
+  {
+   "id": "gceal-further-maths-complex-loci-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-further-maths-complex-loci",
+   "prompt": "$|z-a|=r$ is",
+   "choices": [
+    "a point",
+    "a circle",
+    "a line",
+    "a parabola"
+   ],
+   "answer": 1,
+   "explanation": "Fixed distance.",
+   "chapter": "gceal-further-maths-complex-geometry"
+  },
+  {
+   "id": "gceal-further-maths-complex-loci-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-further-maths-complex-loci",
+   "prompt": "The roots of $z^n=w$ are spaced by angle",
+   "choices": [
+    "$\\frac{2\\pi}{n}$",
+    "$\\frac{\\pi}{2}$",
+    "$2\\pi n$",
+    "$\\frac{\\pi}{n}$"
+   ],
+   "answer": 0,
+   "explanation": "Equal spacing.",
+   "chapter": "gceal-further-maths-complex-geometry"
+  },
+  {
+   "id": "gceal-further-maths-complex-loci-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-further-maths-complex-loci",
+   "prompt": "The locus $\\text{arg}\\,(z-1)=\\frac\\pi4$ is",
+   "choices": [
+    "a half-line from $1$",
+    "a full line",
+    "a circle",
+    "a segment"
+   ],
+   "answer": 0,
+   "explanation": "Fixed argument.",
+   "chapter": "gceal-further-maths-complex-geometry"
+  },
+  {
+   "id": "gceal-further-maths-complex-loci-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-further-maths-complex-loci",
+   "prompt": "The centre of $|z+1-2i|=3$ is",
+   "choices": [
+    "$-1-2i$",
+    "$1-2i$",
+    "$1+2i$",
+    "$-1+2i$"
+   ],
+   "answer": 3,
+   "explanation": "$z-(-1+2i)$.",
+   "chapter": "gceal-further-maths-complex-geometry"
+  },
+  {
+   "id": "gceal-further-maths-complex-geometry-m01",
+   "kind": "numeric",
+   "tier": "examen",
+   "lesson": "gceal-further-maths-complex-loci",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the imaginary part of $(1+i)^{10}$.",
+   "answer": 32,
+   "tolerance": 0,
+   "explanation": "$(\\sqrt2)^{10}\\left(\\cos\\frac{10\\pi}{4}+i\\sin\\frac{10\\pi}{4}\\right)=32\\left(\\cos\\frac{5\\pi}{2}+i\\sin\\frac{5\\pi}{2}\\right)=32i$.",
+   "difficulty": 3,
+   "points": 2,
+   "chapter": "gceal-further-maths-complex-geometry"
+  }
+ ]
+}

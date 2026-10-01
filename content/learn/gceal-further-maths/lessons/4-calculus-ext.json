@@ -1,0 +1,1408 @@
+{
+ "chapter": "gceal-further-maths-calculus-ext",
+ "lessons": [
+  {
+   "id": "gceal-further-maths-differential-equations-2",
+   "title": "Second-order linear differential equations",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Further Mathematics syllabus (Upper Sixth part; scope to be checked against the official text)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Solve $ay''+by'+cy=0$ using the auxiliary equation",
+    "Find particular integrals for simple right-hand sides",
+    "Apply initial conditions"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-further-maths-calculus-ext-e01",
+    "gceal-further-maths-calculus-ext-e02",
+    "gceal-further-maths-calculus-ext-e03",
+    "gceal-further-maths-calculus-ext-e04",
+    "gceal-further-maths-calculus-ext-e05",
+    "gceal-further-maths-calculus-ext-e06"
+   ],
+   "selfCheck": [
+    "gceal-further-maths-differential-equations-2-q1",
+    "gceal-further-maths-differential-equations-2-q2",
+    "gceal-further-maths-differential-equations-2-q3",
+    "gceal-further-maths-differential-equations-2-q4",
+    "gceal-further-maths-differential-equations-2-q5"
+   ],
+   "reviewNotes": [
+    "Whether this topic is on the Cameroon GCE Board Further Mathematics syllabus is to be confirmed: it is standard A-Level Further Maths content.",
+    "Resonance cases and systems of equations not included.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Homogeneous equation",
+     "md": "$ay''+by'+cy=0$ has auxiliary equation $am^2+bm+c=0$. Distinct real roots $m_1,m_2$: $y=Ae^{m_1x}+Be^{m_2x}$. Repeated root $m$: $y=(A+Bx)e^{mx}$. Complex roots $p\\pm qi$: $y=e^{px}(A\\cos qx+B\\sin qx)$. $A$ and $B$ are arbitrary constants."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Non-homogeneous equation",
+     "md": "$ay''+by'+cy=f(x)$: general solution = complementary function (the solution of the homogeneous equation) + particular integral (PI). Try a PI of the same form as $f(x)$: constant for a constant, $px+q$ for a linear $f$, $pe^{kx}$ for $e^{kx}$, $p\\cos kx+q\\sin kx$ for trig. If the trial is already in the complementary function multiply by $x$."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 1.5,
+      "ymin": -5,
+      "ymax": 95,
+      "grid": 1,
+      "w": 400,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "exp(3x)-exp(x)",
+        "color": "blue"
+       }
+      ],
+      "points": [
+       {
+        "x": 1,
+        "y": 17.367255094728623,
+        "label": "(1, 17.4)",
+        "color": "red"
+       }
+      ],
+      "segments": [],
+      "xlabel": "x"
+     },
+     "caption": "The solution $y=e^{3x}-e^x$ of $y''-4y'+3y=0$ with $y(0)=0$, $y'(0)=2$ grows rapidly.",
+     "alt": "Curve starting at the origin with gradient 2 and rising steeply to about 17.4 at x=1."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Initial conditions",
+     "md": "Two conditions (for example $y(0)$ and $y'(0)$) fix $A$ and $B$. Differentiate the general solution, substitute $x=0$ into both $y$ and $y'$, and solve the two equations."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "Applying the conditions to the complementary function before adding the PI. Forgetting the factor $x$ for repeated roots. Solving $y'=\\ldots$ conditions with the wrong derivative of $e^{mx}$ (it is $me^{mx}$)."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Solve $y''-5y'+6y=0$ with $y(0)=1$, $y'(0)=0$.",
+     "steps": [
+      "Auxiliary: $m^2-5m+6=0$, $m=2,3$: $y=Ae^{2x}+Be^{3x}$.",
+      "$y(0)=A+B=1$; $y'(0)=2A+3B=0$. So $B=-2$, $A=3$."
+     ],
+     "answer": "$y=3e^{2x}-2e^{3x}$"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Solve $y''+4y=0$ and $y''-3y'+2y=4$.",
+     "steps": [
+      "$m^2+4=0$, $m=\\pm2i$: $y=A\\cos2x+B\\sin2x$.",
+      "For the second: $m=1,2$, complementary function $Ae^x+Be^{2x}$. Try the PI $y=c$: $2c=4$, $c=2$. General solution $y=Ae^x+Be^{2x}+2$."
+     ],
+     "answer": "$y=A\\cos2x+B\\sin2x$; $y=Ae^x+Be^{2x}+2$"
+    }
+   ],
+   "chapter": "gceal-further-maths-calculus-ext"
+  },
+  {
+   "id": "gceal-further-maths-calculus-extensions",
+   "title": "Inverse trigonometric integrals and volumes of revolution",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Further Mathematics syllabus (Upper Sixth part; scope to be checked against the official text)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Differentiate $\\text{arcsin}\\, x$ and $\\text{arctan}\\, x$",
+    "Integrate expressions giving $\\text{arcsin}\\,$ and $\\text{arctan}\\,$",
+    "Find volumes of revolution about the x-axis"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-further-maths-calculus-ext-e07",
+    "gceal-further-maths-calculus-ext-e08",
+    "gceal-further-maths-calculus-ext-e09",
+    "gceal-further-maths-calculus-ext-e10",
+    "gceal-further-maths-calculus-ext-e11",
+    "gceal-further-maths-calculus-ext-e12"
+   ],
+   "selfCheck": [
+    "gceal-further-maths-calculus-extensions-q1",
+    "gceal-further-maths-calculus-extensions-q2",
+    "gceal-further-maths-calculus-extensions-q3",
+    "gceal-further-maths-calculus-extensions-q4",
+    "gceal-further-maths-calculus-extensions-q5"
+   ],
+   "reviewNotes": [
+    "Whether this topic is on the Cameroon GCE Board Further Mathematics syllabus is to be confirmed: it is standard A-Level Further Maths content.",
+    "Volumes of revolution may be treated in Pure Mathematics in the Cameroon syllabus; kept here for completeness. Arc length and surface area are not covered.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Derivatives",
+     "md": "$\\frac{d}{dx}\\text{arcsin}\\, x=\\frac{1}{\\sqrt{1-x^2}}$ for $|x|<1$ and $\\frac{d}{dx}\\text{arctan}\\, x=\\frac{1}{1+x^2}$. With a constant $a>0$: $\\frac{d}{dx}\\text{arctan}\\,\\frac xa=\\frac{a}{a^2+x^2}$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Standard integrals",
+     "md": "$\\int\\frac{dx}{\\sqrt{a^2-x^2}}=\\text{arcsin}\\,\\frac xa+C$ and $\\int\\frac{dx}{a^2+x^2}=\\frac1a\\text{arctan}\\,\\frac xa+C$. For a quadratic denominator complete the square first: $x^2+2x+2=(x+1)^2+1$, so $\\int\\frac{dx}{x^2+2x+2}=\\text{arctan}\\,(x+1)+C$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Volume of revolution",
+     "md": "Rotating the curve $y=f(x)$ between $x=a$ and $x=b$ through $360\\degree$ about the x-axis gives volume $V=\\pi\\int_a^by^2\\,dx$. (Think of thin discs of area $\\pi y^2$.)"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "Forgetting the factor $\\frac1a$ in the arctan integral. Using $\\text{arcsin}\\,$ for $\\frac{1}{a^2+x^2}$ (it is arctan) or the reverse. Forgetting to square $y$ in the volume formula and to include $\\pi$. Angles from arcsin/arctan are in radians."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Evaluate $\\int_0^1\\frac{1}{x^2+2x+2}dx$.",
+     "steps": [
+      "$x^2+2x+2=(x+1)^2+1$: the integral is $[\\text{arctan}\\,(x+1)]_0^1$.",
+      "$=\\text{arctan}\\,2-\\text{arctan}\\,1=1.1071-0.7854=0.3218$."
+     ],
+     "answer": "$\\text{arctan}\\,2-\\frac\\pi4\\approx0.322$"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "The curve $y=\\sqrt x$ for $0\\leq x\\leq4$ is rotated about the x-axis. Find the volume.",
+     "steps": [
+      "$V=\\pi\\int_0^4(\\sqrt x)^2dx=\\pi\\int_0^4x\\,dx$.",
+      "$=\\pi\\left[\\frac{x^2}{2}\\right]_0^4=8\\pi$."
+     ],
+     "answer": "$8\\pi\\approx25.1$ cubic units",
+     "figure": {
+      "kind": "shapes",
+      "w": 272,
+      "h": 292,
+      "items": [
+       {
+        "t": "line",
+        "x1": 28.0,
+        "y1": 146.0,
+        "x2": 244.0,
+        "y2": 146.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 54.0,
+        "y1": 264.0,
+        "x2": 54.0,
+        "y2": 28.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 94.0,
+        "y1": 143.0,
+        "x2": 94.0,
+        "y2": 149.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 94.0,
+        "y": 163.0,
+        "text": "1",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 134.0,
+        "y1": 143.0,
+        "x2": 134.0,
+        "y2": 149.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 134.0,
+        "y": 163.0,
+        "text": "2",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 174.0,
+        "y1": 143.0,
+        "x2": 174.0,
+        "y2": 149.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 174.0,
+        "y": 163.0,
+        "text": "3",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 214.0,
+        "y1": 143.0,
+        "x2": 214.0,
+        "y2": 149.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 214.0,
+        "y": 163.0,
+        "text": "4",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 51.0,
+        "y1": 226.0,
+        "x2": 57.0,
+        "y2": 226.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 46.0,
+        "y": 230.0,
+        "text": "−2",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 51.0,
+        "y1": 65.99999999999997,
+        "x2": 57.0,
+        "y2": 65.99999999999997,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 46.0,
+        "y": 69.99999999999997,
+        "text": "2",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         54.0,
+         146.0,
+         56.7,
+         135.7,
+         59.3,
+         131.4,
+         62.0,
+         128.1,
+         64.7,
+         125.3,
+         67.3,
+         122.9,
+         70.0,
+         120.7,
+         72.7,
+         118.7,
+         75.3,
+         116.8,
+         78.0,
+         115.0,
+         80.7,
+         113.3,
+         83.3,
+         111.7,
+         86.0,
+         110.2,
+         88.7,
+         108.8,
+         91.3,
+         107.4,
+         94.0,
+         106.0,
+         96.7,
+         104.7,
+         99.3,
+         103.4,
+         102.0,
+         102.2,
+         104.7,
+         101.0,
+         107.3,
+         99.8,
+         110.0,
+         98.7,
+         112.7,
+         97.6,
+         115.3,
+         96.5,
+         118.0,
+         95.4,
+         120.7,
+         94.4,
+         123.3,
+         93.3,
+         126.0,
+         92.3,
+         128.7,
+         91.3,
+         131.3,
+         90.4,
+         134.0,
+         89.4,
+         136.7,
+         88.5,
+         139.3,
+         87.6,
+         142.0,
+         86.7,
+         144.7,
+         85.8,
+         147.3,
+         84.9,
+         150.0,
+         84.0,
+         152.7,
+         83.2,
+         155.3,
+         82.3,
+         158.0,
+         81.5,
+         160.7,
+         80.7,
+         163.3,
+         79.9,
+         166.0,
+         79.1,
+         168.7,
+         78.3,
+         171.3,
+         77.5,
+         174.0,
+         76.7,
+         176.7,
+         76.0,
+         179.3,
+         75.2,
+         182.0,
+         74.4,
+         184.7,
+         73.7,
+         187.3,
+         73.0,
+         190.0,
+         72.2,
+         192.7,
+         71.5,
+         195.3,
+         70.8,
+         198.0,
+         70.1,
+         200.7,
+         69.4,
+         203.3,
+         68.7,
+         206.0,
+         68.0,
+         208.7,
+         67.3,
+         211.3,
+         66.7,
+         214.0,
+         66.0
+        ],
+        "stroke": "blue",
+        "width": 2.5,
+        "closed": false
+       },
+       {
+        "t": "poly",
+        "pts": [
+         54.0,
+         146.0,
+         56.7,
+         156.3,
+         59.3,
+         160.6,
+         62.0,
+         163.9,
+         64.7,
+         166.7,
+         67.3,
+         169.1,
+         70.0,
+         171.3,
+         72.7,
+         173.3,
+         75.3,
+         175.2,
+         78.0,
+         177.0,
+         80.7,
+         178.7,
+         83.3,
+         180.3,
+         86.0,
+         181.8,
+         88.7,
+         183.2,
+         91.3,
+         184.6,
+         94.0,
+         186.0,
+         96.7,
+         187.3,
+         99.3,
+         188.6,
+         102.0,
+         189.8,
+         104.7,
+         191.0,
+         107.3,
+         192.2,
+         110.0,
+         193.3,
+         112.7,
+         194.4,
+         115.3,
+         195.5,
+         118.0,
+         196.6,
+         120.7,
+         197.6,
+         123.3,
+         198.7,
+         126.0,
+         199.7,
+         128.7,
+         200.7,
+         131.3,
+         201.6,
+         134.0,
+         202.6,
+         136.7,
+         203.5,
+         139.3,
+         204.4,
+         142.0,
+         205.3,
+         144.7,
+         206.2,
+         147.3,
+         207.1,
+         150.0,
+         208.0,
+         152.7,
+         208.8,
+         155.3,
+         209.7,
+         158.0,
+         210.5,
+         160.7,
+         211.3,
+         163.3,
+         212.1,
+         166.0,
+         212.9,
+         168.7,
+         213.7,
+         171.3,
+         214.5,
+         174.0,
+         215.3,
+         176.7,
+         216.0,
+         179.3,
+         216.8,
+         182.0,
+         217.6,
+         184.7,
+         218.3,
+         187.3,
+         219.0,
+         190.0,
+         219.8,
+         192.7,
+         220.5,
+         195.3,
+         221.2,
+         198.0,
+         221.9,
+         200.7,
+         222.6,
+         203.3,
+         223.3,
+         206.0,
+         224.0,
+         208.7,
+         224.7,
+         211.3,
+         225.3,
+         214.0,
+         226.0
+        ],
+        "stroke": "blue",
+        "width": 1,
+        "closed": false
+       },
+       {
+        "t": "line",
+        "x1": 214.0,
+        "y1": 226.0,
+        "x2": 214.0,
+        "y2": 65.99999999999997,
+        "color": "orange",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 134.0,
+        "y": 134.0,
+        "text": "y = √x rotated about the x-axis",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     }
+    }
+   ],
+   "chapter": "gceal-further-maths-calculus-ext"
+  },
+  {
+   "id": "gceal-further-maths-series-further",
+   "title": "Further series and limits",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Further Mathematics syllabus (Upper Sixth part; scope to be checked against the official text)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Expand $(1+x)^n$ for rational $n$",
+    "Find series of products and quotients such as $\\tan x$",
+    "Evaluate limits using series"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-further-maths-calculus-ext-e13",
+    "gceal-further-maths-calculus-ext-e14",
+    "gceal-further-maths-calculus-ext-e15",
+    "gceal-further-maths-calculus-ext-e16",
+    "gceal-further-maths-calculus-ext-e17",
+    "gceal-further-maths-calculus-ext-e18"
+   ],
+   "selfCheck": [
+    "gceal-further-maths-series-further-q1",
+    "gceal-further-maths-series-further-q2",
+    "gceal-further-maths-series-further-q3",
+    "gceal-further-maths-series-further-q4",
+    "gceal-further-maths-series-further-q5"
+   ],
+   "reviewNotes": [
+    "Whether this topic is on the Cameroon GCE Board Further Mathematics syllabus is to be confirmed: it is standard A-Level Further Maths content.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Binomial series",
+     "md": "For any rational $n$ and $|x|<1$: $(1+x)^n=1+nx+\\frac{n(n-1)}{2!}x^2+\\frac{n(n-1)(n-2)}{3!}x^3+\\cdots$. Example: $\\sqrt{1+x}=1+\\frac x2-\\frac{x^2}{8}+\\frac{x^3}{16}-\\cdots$ and $\\frac{1}{1+x}=1-x+x^2-\\cdots$. For $(a+bx)^n$ factor out $a^n$ first."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Products, quotients, composites",
+     "md": "Multiply or divide the standard series ($e^x$, $\\sin x$, $\\cos x$, $\\ln(1+x)$) and keep terms up to the required power. For $\\tan x=\\frac{\\sin x}{\\cos x}$: $\\left(x-\\frac{x^3}{6}\\right)\\left(1+\\frac{x^2}{2}+\\cdots\\right)=x+\\frac{x^3}{3}+\\cdots$"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Limits",
+     "md": "To find $\\lim_{x\\to0}\\frac{f(x)}{g(x)}$ when both $\\to0$, expand numerator and denominator in series and divide by the lowest power of $x$. Example: $\\frac{e^x-1-x}{x^2}=\\frac{\\frac{x^2}{2}+\\frac{x^3}{6}+\\cdots}{x^2}\\to\\frac{1}{2}$."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "Using the binomial series outside $|x|<1$ (for example for $(1+x)^{1/2}$ at $x=3$). Dropping a term of the lower order that does not cancel. Mixing degrees and radians: the series for $\\sin x$ need radians."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Expand $\\sqrt{1+x}$ to $x^3$ and estimate $\\sqrt{1.02}$.",
+     "steps": [
+      "$n=\\frac{1}{2}$: $1+\\frac x2+\\frac{\\frac{1}{2}\\left(-\\frac{1}{2}\\right)}{2}x^2+\\frac{\\frac{1}{2}\\left(-\\frac{1}{2}\\right)\\left(-\\frac{3}{2}\\right)}{6}x^3=1+\\frac x2-\\frac{x^2}{8}+\\frac{x^3}{16}$.",
+      "With $x=0.02$: $1+0.01-0.00005=1.00995$ (true value 1.009950)."
+     ],
+     "answer": "$1+\\frac x2-\\frac{x^2}{8}+\\frac{x^3}{16}$; $\\sqrt{1.02}\\approx1.00995$"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Find $\\lim_{x\\to0}\\frac{\\sin x-x}{x^3}$.",
+     "steps": [
+      "$\\sin x-x=-\\frac{x^3}{6}+\\frac{x^5}{120}-\\cdots$",
+      "Divide by $x^3$: $-\\frac{1}{6}+\\frac{x^2}{120}-\\cdots\\to-\\frac{1}{6}$."
+     ],
+     "answer": "$-\\frac{1}{6}$",
+     "figure": {
+      "kind": "plot",
+      "xmin": -1.2,
+      "xmax": 1.2,
+      "ymin": -3,
+      "ymax": 3,
+      "grid": 1,
+      "w": 400,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "sin(x)/cos(x)",
+        "color": "blue",
+        "label": "tan x"
+       },
+       {
+        "expr": "x+x^3/3",
+        "color": "orange",
+        "label": "x + x³/3"
+       }
+      ],
+      "points": [],
+      "segments": [],
+      "xlabel": "x"
+     }
+    }
+   ],
+   "chapter": "gceal-further-maths-calculus-ext"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceal-further-maths-calculus-ext-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-further-maths-differential-equations-2",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$y''-y=0$ with $y(0)=2$, $y'(0)=0$. Find $y(1)$ (4 d.p.).",
+   "answer": 3.0862,
+   "tolerance": 0.0003,
+   "explanation": "$y=Ae^x+Be^{-x}$: $A+B=2$, $A-B=0$, so $y=e^x+e^{-x}=2\\text{cosh}\\, x$; $y(1)=3.0862$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-further-maths-calculus-ext"
+  },
+  {
+   "id": "gceal-further-maths-calculus-ext-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-further-maths-differential-equations-2",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The solution of $y''+6y'+9y=0$ has the form",
+   "choices": [
+    "$Ae^{3x}+Be^{-3x}$",
+    "$e^{-3x}(A\\cos3x+B\\sin3x)$",
+    "$(A+Bx)e^{-3x}$",
+    "$Ae^{-3x}$"
+   ],
+   "answer": 2,
+   "explanation": "$m^2+6m+9=(m+3)^2$: repeated root $-3$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-further-maths-calculus-ext"
+  },
+  {
+   "id": "gceal-further-maths-calculus-ext-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-further-maths-differential-equations-2",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$y''=-\\omega^2y$ has solutions $A\\cos\\omega x+B\\sin\\omega x$.",
+   "answer": true,
+   "explanation": "Auxiliary equation $m^2=-\\omega^2$, $m=\\pm i\\omega$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-further-maths-calculus-ext"
+  },
+  {
+   "id": "gceal-further-maths-calculus-ext-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-further-maths-differential-equations-2",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$y''-4y'+13y=0$ has general solution",
+   "choices": [
+    "$e^{2x}(A\\cos3x+B\\sin3x)$",
+    "$Ae^{2x}+Be^{3x}$",
+    "$e^{3x}(A\\cos2x+B\\sin2x)$",
+    "$(A+Bx)e^{2x}$"
+   ],
+   "answer": 0,
+   "explanation": "$m=2\\pm3i$.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-further-maths-calculus-ext"
+  },
+  {
+   "id": "gceal-further-maths-calculus-ext-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceal-further-maths-differential-equations-2",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the general solution of $y''+2y'-3y=6$.",
+   "model": "Auxiliary $m^2+2m-3=0$: $m=1,-3$, complementary function $Ae^x+Be^{-3x}$. Try $y=c$: $-3c=6$, $c=-2$. General solution $y=Ae^x+Be^{-3x}-2$.",
+   "rubric": [
+    "Complementary function (1)",
+    "Particular integral $-2$ (1)",
+    "General solution (1)"
+   ],
+   "explanation": "Auxiliary $m^2+2m-3=0$: $m=1,-3$, complementary function $Ae^x+Be^{-3x}$. Try $y=c$: $-3c=6$, $c=-2$. General solution $y=Ae^x+Be^{-3x}-2$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-further-maths-calculus-ext"
+  },
+  {
+   "id": "gceal-further-maths-calculus-ext-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-further-maths-differential-equations-2",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Solve $y''-4y'+3y=0$ with $y(0)=0$ and $y'(0)=2$.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The auxiliary equation has roots",
+     "choices": [
+      "$2\\pm i$",
+      "$-1$ and $-3$",
+      "1 and 3",
+      "2 and 2"
+     ],
+     "answer": 2,
+     "explanation": "$m^2-4m+3=(m-1)(m-3)$.",
+     "id": "gceal-further-maths-calculus-ext-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "The solution is $y=Ae^x+Be^{3x}$. Find $A$.",
+     "answer": -1,
+     "tolerance": 0,
+     "explanation": "$A+B=0$ and $A+3B=2$ give $B=1$, $A=-1$.",
+     "id": "gceal-further-maths-calculus-ext-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find $y(1)$ (3 d.p.).",
+     "answer": 17.367,
+     "tolerance": 0.01,
+     "explanation": "$y=e^{3x}-e^x$; $y(1)=e^3-e=17.367$.",
+     "id": "gceal-further-maths-calculus-ext-e06-c"
+    }
+   ],
+   "figure": {
+    "kind": "plot",
+    "xmin": 0,
+    "xmax": 1.5,
+    "ymin": -5,
+    "ymax": 95,
+    "grid": 1,
+    "w": 400,
+    "h": 260,
+    "curves": [
+     {
+      "expr": "exp(3x)-exp(x)",
+      "color": "blue"
+     }
+    ],
+    "points": [
+     {
+      "x": 1,
+      "y": 17.367255094728623,
+      "label": "(1, 17.4)",
+      "color": "red"
+     }
+    ],
+    "segments": [],
+    "xlabel": "x"
+   },
+   "chapter": "gceal-further-maths-calculus-ext"
+  },
+  {
+   "id": "gceal-further-maths-differential-equations-2-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-further-maths-differential-equations-2",
+   "prompt": "The auxiliary equation of $y''-3y'+2y=0$ is",
+   "choices": [
+    "$m^2+3m+2=0$",
+    "$m^3=2$",
+    "$m-3=0$",
+    "$m^2-3m+2=0$"
+   ],
+   "answer": 3,
+   "explanation": "Replace $y''\\to m^2$, $y'\\to m$.",
+   "chapter": "gceal-further-maths-calculus-ext"
+  },
+  {
+   "id": "gceal-further-maths-differential-equations-2-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-further-maths-differential-equations-2",
+   "prompt": "Complex roots $p\\pm qi$ give",
+   "choices": [
+    "$e^{px}(A\\cos qx+B\\sin qx)$",
+    "$A\\cos px$",
+    "$(A+Bx)e^{px}$",
+    "$Ae^{px}+Be^{qx}$"
+   ],
+   "answer": 0,
+   "explanation": "Standard.",
+   "chapter": "gceal-further-maths-calculus-ext"
+  },
+  {
+   "id": "gceal-further-maths-differential-equations-2-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-further-maths-differential-equations-2",
+   "prompt": "General solution of a non-homogeneous equation is",
+   "choices": [
+    "product of the two",
+    "particular integral only",
+    "complementary function + particular integral",
+    "complementary function only"
+   ],
+   "answer": 2,
+   "explanation": "Superposition.",
+   "chapter": "gceal-further-maths-calculus-ext"
+  },
+  {
+   "id": "gceal-further-maths-differential-equations-2-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-further-maths-differential-equations-2",
+   "prompt": "How many constants does the general solution of a second-order equation contain?",
+   "choices": [
+    "2",
+    "3",
+    "1",
+    "0"
+   ],
+   "answer": 0,
+   "explanation": "Two integrations.",
+   "chapter": "gceal-further-maths-calculus-ext"
+  },
+  {
+   "id": "gceal-further-maths-differential-equations-2-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-further-maths-differential-equations-2",
+   "prompt": "Trial PI for $f(x)=5$ is",
+   "choices": [
+    "$y=ce^x$",
+    "$y=c\\cos x$",
+    "$y=c$",
+    "$y=cx$"
+   ],
+   "answer": 2,
+   "explanation": "Same form.",
+   "chapter": "gceal-further-maths-calculus-ext"
+  },
+  {
+   "id": "gceal-further-maths-calculus-ext-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-further-maths-calculus-extensions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Evaluate $\\int_0^2\\frac{dx}{4+x^2}$ (4 d.p.).",
+   "answer": 0.3927,
+   "tolerance": 0.0003000010000000225,
+   "explanation": "$\\frac{1}{2}\\left[\\text{arctan}\\,\\frac x2\\right]_0^2=\\frac{1}{2}\\cdot\\frac\\pi4=\\frac\\pi8=0.3927$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-further-maths-calculus-ext"
+  },
+  {
+   "id": "gceal-further-maths-calculus-ext-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-further-maths-calculus-extensions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$\\frac{d}{dx}\\text{arctan}\\,2x=$",
+   "choices": [
+    "$\\frac{1}{1+4x^2}$",
+    "$\\frac{2}{1+4x^2}$",
+    "$\\frac{2}{1+2x^2}$",
+    "$\\frac{1}{1+2x}$"
+   ],
+   "answer": 1,
+   "explanation": "Chain rule.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-further-maths-calculus-ext"
+  },
+  {
+   "id": "gceal-further-maths-calculus-ext-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-further-maths-calculus-extensions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$\\int\\frac{dx}{1+x^2}=\\ln(1+x^2)+C$.",
+   "answer": false,
+   "explanation": "It is $\\text{arctan}\\, x+C$ ($\\ln(1+x^2)$ comes from $\\int\\frac{2x}{1+x^2}dx$).",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-further-maths-calculus-ext"
+  },
+  {
+   "id": "gceal-further-maths-calculus-ext-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-further-maths-calculus-extensions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$\\int\\frac{dx}{\\sqrt{9-x^2}}=$",
+   "choices": [
+    "$\\frac{1}{3}\\text{arcsin}\\,\\frac x3+C$",
+    "$3\\text{arcsin}\\, x+C$",
+    "$\\text{arctan}\\,\\frac x3+C$",
+    "$\\text{arcsin}\\,\\frac x3+C$"
+   ],
+   "answer": 3,
+   "explanation": "$a=3$.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-further-maths-calculus-ext"
+  },
+  {
+   "id": "gceal-further-maths-calculus-ext-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceal-further-maths-calculus-extensions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find $\\int_0^1\\frac{dx}{x^2+2x+2}$ exactly.",
+   "model": "Complete the square: $(x+1)^2+1$. $\\int=\\left[\\text{arctan}\\,(x+1)\\right]_0^1=\\text{arctan}\\,2-\\text{arctan}\\,1=\\text{arctan}\\,2-\\frac\\pi4\\approx0.322$.",
+   "rubric": [
+    "Completes the square (1)",
+    "Antiderivative arctan (1)",
+    "Limits applied (1)"
+   ],
+   "explanation": "Complete the square: $(x+1)^2+1$. $\\int=\\left[\\text{arctan}\\,(x+1)\\right]_0^1=\\text{arctan}\\,2-\\text{arctan}\\,1=\\text{arctan}\\,2-\\frac\\pi4\\approx0.322$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-further-maths-calculus-ext"
+  },
+  {
+   "id": "gceal-further-maths-calculus-ext-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-further-maths-calculus-extensions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Answer the following.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Evaluate $\\int_0^{\\sqrt3}\\frac{dx}{1+x^2}$ (4 d.p.).",
+     "answer": 1.0472,
+     "tolerance": 0.0002,
+     "explanation": "$\\text{arctan}\\,\\sqrt3=\\frac\\pi3=1.0472$.",
+     "id": "gceal-further-maths-calculus-ext-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Evaluate $\\int_0^1\\frac{dx}{\\sqrt{4-x^2}}$ (4 d.p.).",
+     "answer": 0.5236,
+     "tolerance": 0.000400001000000067,
+     "explanation": "$\\text{arcsin}\\,\\frac{1}{2}=\\frac\\pi6=0.5236$.",
+     "id": "gceal-further-maths-calculus-ext-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "The curve $y=x^2$ for $0\\leq x\\leq1$ is rotated about the x-axis. Find the volume (3 d.p.).",
+     "answer": 0.628,
+     "tolerance": 0.001,
+     "explanation": "$V=\\pi\\int_0^1x^4dx=\\frac\\pi5=0.628$.",
+     "id": "gceal-further-maths-calculus-ext-e12-c"
+    }
+   ],
+   "chapter": "gceal-further-maths-calculus-ext"
+  },
+  {
+   "id": "gceal-further-maths-calculus-extensions-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-further-maths-calculus-extensions",
+   "prompt": "$\\int\\frac{dx}{1+x^2}=$",
+   "choices": [
+    "$\\text{arctan}\\, x+C$",
+    "$\\frac{1}{x}+C$",
+    "$\\text{arcsin}\\, x+C$",
+    "$\\ln(1+x^2)+C$"
+   ],
+   "answer": 0,
+   "explanation": "Standard.",
+   "chapter": "gceal-further-maths-calculus-ext"
+  },
+  {
+   "id": "gceal-further-maths-calculus-extensions-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-further-maths-calculus-extensions",
+   "prompt": "$\\text{arctan}\\,1=$",
+   "choices": [
+    "$1$",
+    "$\\frac\\pi2$",
+    "$\\frac\\pi4$",
+    "$\\frac\\pi3$"
+   ],
+   "answer": 2,
+   "explanation": "$\\tan\\frac\\pi4=1$.",
+   "chapter": "gceal-further-maths-calculus-ext"
+  },
+  {
+   "id": "gceal-further-maths-calculus-extensions-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-further-maths-calculus-extensions",
+   "prompt": "The volume of revolution about the x-axis is",
+   "choices": [
+    "$\\pi\\int y^2dx$",
+    "$\\pi\\int y\\,dx$",
+    "$2\\pi\\int y\\,dx$",
+    "$\\int y^2dx$"
+   ],
+   "answer": 0,
+   "explanation": "Discs.",
+   "chapter": "gceal-further-maths-calculus-ext"
+  },
+  {
+   "id": "gceal-further-maths-calculus-extensions-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-further-maths-calculus-extensions",
+   "prompt": "$\\frac{d}{dx}\\text{arcsin}\\, x=$",
+   "choices": [
+    "$\\sqrt{1-x^2}$",
+    "$\\frac{1}{\\sqrt{1-x^2}}$",
+    "$\\frac{1}{1+x^2}$",
+    "$-\\frac{1}{\\sqrt{1-x^2}}$"
+   ],
+   "answer": 1,
+   "explanation": "Standard.",
+   "chapter": "gceal-further-maths-calculus-ext"
+  },
+  {
+   "id": "gceal-further-maths-calculus-extensions-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-further-maths-calculus-extensions",
+   "prompt": "$\\int\\frac{dx}{x^2+16}=$",
+   "choices": [
+    "$\\text{arctan}\\,\\frac x4+C$",
+    "$\\frac{1}{4}\\text{arctan}\\,\\frac x4+C$",
+    "$4\\text{arctan}\\,\\frac x4+C$",
+    "$\\frac1{16}\\text{arctan}\\, x+C$"
+   ],
+   "answer": 1,
+   "explanation": "$\\frac1a$ factor with $a=4$.",
+   "chapter": "gceal-further-maths-calculus-ext"
+  },
+  {
+   "id": "gceal-further-maths-calculus-ext-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-further-maths-series-further",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the coefficient of $x^3$ in the expansion of $\\sqrt{1+x}$.",
+   "answer": 0.0625,
+   "tolerance": 0.0005000010000000005,
+   "explanation": "$\\frac{\\frac{1}{2}\\left(-\\frac{1}{2}\\right)\\left(-\\frac{3}{2}\\right)}{6}=\\frac{1}{16}=0.0625$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-further-maths-calculus-ext"
+  },
+  {
+   "id": "gceal-further-maths-calculus-ext-e14",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-further-maths-series-further",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$\\frac{1}{1+x}=$",
+   "choices": [
+    "$1-x+x^2-x^3+\\cdots$",
+    "$1+x+x^2+x^3+\\cdots$",
+    "$1-x-x^2-\\cdots$",
+    "$1-\\frac x2+\\cdots$"
+   ],
+   "answer": 0,
+   "explanation": "$n=-1$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-further-maths-calculus-ext"
+  },
+  {
+   "id": "gceal-further-maths-calculus-ext-e15",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-further-maths-series-further",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The series for $\\frac{1}{1-x}$, $1+x+x^2+\\cdots$, is valid for $|x|<1$.",
+   "answer": true,
+   "explanation": "Geometric series.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-further-maths-calculus-ext"
+  },
+  {
+   "id": "gceal-further-maths-calculus-ext-e16",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-further-maths-series-further",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$\\lim_{x\\to0}\\frac{1-\\cos x}{x^2}=$",
+   "choices": [
+    "$\\frac{1}{2}$",
+    "$0$",
+    "$\\infty$",
+    "$1$"
+   ],
+   "answer": 0,
+   "explanation": "$1-\\cos x=\\frac{x^2}{2}-\\cdots$.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-further-maths-calculus-ext"
+  },
+  {
+   "id": "gceal-further-maths-calculus-ext-e17",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceal-further-maths-series-further",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Use series to find $\\lim_{x\\to0}\\frac{e^x-1-x}{x^2}$.",
+   "model": "$e^x-1-x=\\frac{x^2}{2}+\\frac{x^3}{6}+\\cdots$. Dividing by $x^2$ gives $\\frac{1}{2}+\\frac x6+\\cdots$, which tends to $\\frac{1}{2}$.",
+   "rubric": [
+    "Series of $e^x$ (1)",
+    "Divides by $x^2$ (1)",
+    "Limit $\\frac{1}{2}$ (1)"
+   ],
+   "explanation": "$e^x-1-x=\\frac{x^2}{2}+\\frac{x^3}{6}+\\cdots$. Dividing by $x^2$ gives $\\frac{1}{2}+\\frac x6+\\cdots$, which tends to $\\frac{1}{2}$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-further-maths-calculus-ext"
+  },
+  {
+   "id": "gceal-further-maths-calculus-ext-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-further-maths-series-further",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Consider $e^x\\ln(1+x)$.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the coefficient of $x^2$ in its series.",
+     "answer": 0.5,
+     "tolerance": 0.001,
+     "explanation": "$\\left(1+x+\\frac{x^2}{2}\\right)\\left(x-\\frac{x^2}{2}+\\frac{x^3}{3}\\right)$: $x^2$ terms: $-\\frac{1}{2}+1=\\frac{1}{2}$.",
+     "id": "gceal-further-maths-calculus-ext-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the coefficient of $x^3$ (4 d.p.).",
+     "answer": 0.3333,
+     "tolerance": 0.0003,
+     "explanation": "$x^3$ terms: $\\frac{1}{3}-\\frac{1}{2}+\\frac{1}{2}=\\frac{1}{3}$.",
+     "id": "gceal-further-maths-calculus-ext-e18-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find $\\lim_{x\\to0}\\frac{e^x\\ln(1+x)-x}{x^2}$.",
+     "answer": 0.5,
+     "tolerance": 0.001,
+     "explanation": "The numerator is $\\frac{x^2}{2}+\\frac{x^3}{3}+\\cdots$.",
+     "id": "gceal-further-maths-calculus-ext-e18-c"
+    }
+   ],
+   "chapter": "gceal-further-maths-calculus-ext"
+  },
+  {
+   "id": "gceal-further-maths-series-further-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-further-maths-series-further",
+   "prompt": "$\\tan x=$",
+   "choices": [
+    "$x-\\frac{x^3}{3}+\\cdots$",
+    "$x+\\frac{x^3}{3}+\\cdots$",
+    "$1+x^2+\\cdots$",
+    "$x+\\frac{x^2}{2}+\\cdots$"
+   ],
+   "answer": 1,
+   "explanation": "$\\frac{\\sin x}{\\cos x}$.",
+   "chapter": "gceal-further-maths-calculus-ext"
+  },
+  {
+   "id": "gceal-further-maths-series-further-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-further-maths-series-further",
+   "prompt": "$(1+x)^{-2}=$",
+   "choices": [
+    "$1-2x+x^2$",
+    "$1-x+x^2$",
+    "$1-2x+3x^2-\\cdots$",
+    "$1+2x+3x^2$"
+   ],
+   "answer": 2,
+   "explanation": "$n=-2$: $\\frac{(-2)(-3)}{2}=3$.",
+   "chapter": "gceal-further-maths-calculus-ext"
+  },
+  {
+   "id": "gceal-further-maths-series-further-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-further-maths-series-further",
+   "prompt": "The binomial series for rational $n$ is valid when",
+   "choices": [
+    "all $x$",
+    "$|x|<1$",
+    "$x=0$ only",
+    "$x>1$"
+   ],
+   "answer": 1,
+   "explanation": "Convergence.",
+   "chapter": "gceal-further-maths-calculus-ext"
+  },
+  {
+   "id": "gceal-further-maths-series-further-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-further-maths-series-further",
+   "prompt": "To evaluate $0/0$ limits with series we",
+   "choices": [
+    "set $x=0$ at once",
+    "differentiate once",
+    "multiply by $x$",
+    "divide by the lowest power of $x$"
+   ],
+   "answer": 3,
+   "explanation": "Method.",
+   "chapter": "gceal-further-maths-calculus-ext"
+  },
+  {
+   "id": "gceal-further-maths-series-further-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-further-maths-series-further",
+   "prompt": "$\\sqrt{1+x}\\approx$ for small $x$",
+   "choices": [
+    "$1+\\frac x2$",
+    "$1+x$",
+    "$1+2x$",
+    "$x$"
+   ],
+   "answer": 0,
+   "explanation": "First two terms.",
+   "chapter": "gceal-further-maths-calculus-ext"
+  },
+  {
+   "id": "gceal-further-maths-calculus-ext-m01",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-further-maths-differential-equations-2",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Solve $y''+6y'+9y=0$ with $y(0)=1$ and $y'(0)=0$.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "The general solution has the form",
+     "choices": [
+      "$Ae^{-3x}+B$",
+      "$e^{-3x}(A\\cos3x+B\\sin3x)$",
+      "$Ae^{3x}+Be^{-3x}$",
+      "$(A+Bx)e^{-3x}$"
+     ],
+     "answer": 3,
+     "explanation": "Repeated root $m=-3$ from $(m+3)^2=0$.",
+     "id": "gceal-further-maths-calculus-ext-m01-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find $y(1)$ (4 d.p.).",
+     "answer": 0.1991,
+     "tolerance": 0.0003,
+     "explanation": "$A=1$; $y'(0)=B-3A=0$ gives $B=3$; $y=(1+3x)e^{-3x}$ and $y(1)=4e^{-3}=0.1991$.",
+     "id": "gceal-further-maths-calculus-ext-m01-b"
+    }
+   ],
+   "chapter": "gceal-further-maths-calculus-ext"
+  }
+ ]
+}

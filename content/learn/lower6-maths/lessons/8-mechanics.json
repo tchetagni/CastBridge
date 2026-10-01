@@ -1,0 +1,941 @@
+{
+ "chapter": "lower6-maths-mechanics",
+ "lessons": [
+  {
+   "id": "lower6-maths-kinematics",
+   "title": "Motion in a straight line (constant acceleration)",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Mechanics (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Use the five constant-acceleration (suvat) equations",
+    "Read distance and acceleration from velocity–time graphs",
+    "Use calculus for variable motion"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-maths-mechanics-e01",
+    "lower6-maths-mechanics-e02",
+    "lower6-maths-mechanics-e03",
+    "lower6-maths-mechanics-e04",
+    "lower6-maths-mechanics-e05",
+    "lower6-maths-mechanics-e06"
+   ],
+   "selfCheck": [
+    "lower6-maths-kinematics-q1",
+    "lower6-maths-kinematics-q2",
+    "lower6-maths-kinematics-q3",
+    "lower6-maths-kinematics-q4",
+    "lower6-maths-kinematics-q5"
+   ],
+   "reviewNotes": [
+    "g=10 m/s² used throughout (state which value the syllabus expects: 9.8 or 10).",
+    "Projectiles are in the Upper Sixth pack.",
+    "Check how the Cameroon GCE Board splits Mechanics and Statistics between Lower and Upper Sixth (or separate papers): this placement is an assumption.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Constant acceleration",
+     "md": "With initial velocity $u$, final velocity $v$, acceleration $a$, time $t$, displacement $s$: $v=u+at$; $s=ut+\\frac{1}{2}at^2$; $v^2=u^2+2as$; $s=\\frac{(u+v)}{2}t$. Units: m, m/s, m/s², s. Falling or thrown objects: $a=g=10$ m/s² (we use 10; some books use 9.8)."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Graphs",
+     "md": "On a velocity–time graph the **gradient** is the acceleration and the **area** under the graph is the distance travelled (displacement if signed). On a displacement–time graph the gradient is the velocity."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Calculus link",
+     "md": "For variable acceleration: velocity $v=\\frac{ds}{dt}$ and acceleration $a=\\frac{dv}{dt}=\\frac{d^2s}{dt^2}$. Conversely $v=\\int a\\,dt$ and $s=\\int v\\,dt$ (with initial conditions to fix $C$)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Method",
+     "md": "1. List $s,u,v,a,t$ with signs (choose a positive direction). 2. Choose the equation that contains the unknown and three known quantities. 3. Solve, then check the sign and units. For an object thrown up, $v=0$ at the top."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "A car accelerates uniformly from 5 m/s to 20 m/s in 6 s. Find the acceleration and the distance covered.",
+     "steps": [
+      "$a=\\frac{v-u}{t}=\\frac{20-5}{6}=2.5$ m/s².",
+      "$s=\\frac{u+v}{2}t=\\frac{25}{2}\\times6=75$ m."
+     ],
+     "answer": "$a=2.5$ m/s²; $s=75$ m"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "A ball is thrown upwards at 20 m/s ($g=10$ m/s²). Find the greatest height and the total time in the air.",
+     "steps": [
+      "Up is positive, $a=-10$. At the top $v=0$: $0=400-20s$, so $s=20$ m.",
+      "Time to the top: $0=20-10t$, so $t=2$ s; the fall takes the same time."
+     ],
+     "answer": "Height 20 m; total time 4 s",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "line",
+        "x1": 28.0,
+        "y1": 181.42857142857142,
+        "x2": 372.0,
+        "y2": 181.42857142857142,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 52.971428571428575,
+        "y1": 212.0,
+        "x2": 52.971428571428575,
+        "y2": 28.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 147.82857142857142,
+        "y1": 178.42857142857142,
+        "x2": 147.82857142857142,
+        "y2": 184.42857142857142,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 147.82857142857142,
+        "y": 198.42857142857142,
+        "text": "10",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 337.54285714285714,
+        "y1": 178.42857142857142,
+        "x2": 337.54285714285714,
+        "y2": 184.42857142857142,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 337.54285714285714,
+        "y": 198.42857142857142,
+        "text": "30",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 49.971428571428575,
+        "y1": 58.571428571428584,
+        "x2": 55.971428571428575,
+        "y2": 58.571428571428584,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 44.971428571428575,
+        "y": 62.571428571428584,
+        "text": "15",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         53.0,
+         181.4,
+         147.8,
+         58.6,
+         337.5,
+         58.6,
+         337.5,
+         181.4
+        ],
+        "stroke": "blue",
+        "width": 2,
+        "closed": true,
+        "fill": "yellow"
+       },
+       {
+        "t": "text",
+        "x": 242.68571428571428,
+        "y": 132.28571428571428,
+        "text": "area = distance",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 90.91428571428571,
+        "y": 87.23809523809524,
+        "text": "gradient = a",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 242.68571428571428,
+        "y": 46.28571428571428,
+        "text": "15",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     }
+    }
+   ],
+   "chapter": "lower6-maths-mechanics"
+  },
+  {
+   "id": "lower6-maths-forces",
+   "title": "Forces and Newton's laws",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Mechanics (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Apply $F=ma$ to a particle",
+    "Resolve forces; use weight, normal reaction and friction",
+    "Solve connected-particle and lift problems"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-maths-mechanics-e07",
+    "lower6-maths-mechanics-e08",
+    "lower6-maths-mechanics-e09",
+    "lower6-maths-mechanics-e10",
+    "lower6-maths-mechanics-e11",
+    "lower6-maths-mechanics-e12"
+   ],
+   "selfCheck": [
+    "lower6-maths-forces-q1",
+    "lower6-maths-forces-q2",
+    "lower6-maths-forces-q3",
+    "lower6-maths-forces-q4",
+    "lower6-maths-forces-q5"
+   ],
+   "reviewNotes": [
+    "Moments and equilibrium of rigid bodies are in the Upper Sixth pack.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Newton's laws",
+     "md": "1st: a particle stays at rest or moves at constant velocity unless a resultant force acts. 2nd: resultant force $F=ma$ (newtons, kg, m/s²). 3rd: every action has an equal and opposite reaction. Weight $W=mg$ (with $g=10$ m/s²)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Friction",
+     "md": "On a rough surface friction $F\\leq\\mu R$ where $R$ is the normal reaction and $\\mu$ the coefficient of friction. When the particle is about to slip, or is sliding, $F=\\mu R$ (limiting friction). Friction opposes motion (or the tendency to move)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Method",
+     "md": "1. Draw a force diagram. 2. Choose the direction of motion as positive and resolve in two perpendicular directions. 3. Write $F_{net}=ma$ for each particle. For connected particles over a pulley the tension is the same on both sides and both have the same acceleration. 4. Solve. On a smooth slope of angle $\\alpha$ the acceleration down the slope is $g\\sin\\alpha$."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Mixing mass and weight: weight is a force in N.\n- On a slope the normal reaction is $mg\\cos\\alpha$, not $mg$.\n- Writing $F=\\mu R$ when the particle is not at the point of slipping (then $F<\\mu R$).\n- In a lift, $R\\neq mg$ unless the acceleration is zero."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "A 1200 kg car has an engine force of 3000 N and resistance 600 N. Find its acceleration.",
+     "steps": [
+      "Resultant force $=3000-600=2400$ N.",
+      "$a=\\frac{F}{m}=\\frac{2400}{1200}$."
+     ],
+     "answer": "$a=2$ m/s²"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "A 5 kg block on a rough horizontal table ($\\mu=0.4$) is pulled by a horizontal force of 30 N. Find its acceleration ($g=10$).",
+     "steps": [
+      "Vertically $R=mg=50$ N, so friction $F=\\mu R=0.4\\times50=20$ N.",
+      "Horizontally $30-20=5a$, so $a=2$ m/s²."
+     ],
+     "answer": "$a=2$ m/s²",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 100,
+        "w": 80,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 130,
+        "text": "5 kg",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 240,
+        "y1": 125,
+        "x2": 330,
+        "y2": 125,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 335,
+        "y": 118,
+        "text": "30 N",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 160,
+        "y1": 125,
+        "x2": 100,
+        "y2": 125,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 130,
+        "text": "friction 20 N",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 100,
+        "x2": 200,
+        "y2": 30,
+        "color": "green",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 40,
+        "text": "R = 50 N",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 150,
+        "x2": 200,
+        "y2": 215,
+        "color": "orange",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 212,
+        "text": "W = 50 N",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 100,
+        "y1": 150,
+        "x2": 340,
+        "y2": 150,
+        "color": "ink",
+        "width": 1
+       }
+      ]
+     }
+    }
+   ],
+   "chapter": "lower6-maths-mechanics"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "lower6-maths-mechanics-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-maths-kinematics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A particle has $u=4$ m/s and $a=2$ m/s². Find its displacement after 5 s (m).",
+   "answer": 45,
+   "tolerance": 0,
+   "unit": "m",
+   "explanation": "$s=ut+\\frac{1}{2}at^2=20+25$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-maths-mechanics"
+  },
+  {
+   "id": "lower6-maths-mechanics-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-maths-kinematics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A train starts from rest with $a=0.5$ m/s². How long to reach 15 m/s?",
+   "choices": [
+    "15 s",
+    "30 s",
+    "7.5 s",
+    "60 s"
+   ],
+   "answer": 1,
+   "explanation": "$t=\\frac{v-u}{a}=\\frac{15}{0.5}$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-maths-mechanics"
+  },
+  {
+   "id": "lower6-maths-mechanics-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-maths-kinematics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "On a velocity–time graph the gradient gives the acceleration.",
+   "answer": true,
+   "explanation": "Gradient $=\\frac{\\Delta v}{\\Delta t}=a$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-maths-mechanics"
+  },
+  {
+   "id": "lower6-maths-mechanics-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-maths-kinematics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A van brakes from 30 m/s with deceleration 5 m/s². The stopping distance is",
+   "choices": [
+    "45 m",
+    "90 m",
+    "6 m",
+    "180 m"
+   ],
+   "answer": 1,
+   "explanation": "$0=900-10s$, so $s=90$.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-maths-mechanics"
+  },
+  {
+   "id": "lower6-maths-mechanics-e05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-maths-kinematics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A particle moves so that $s=t^3-6t^2+9t$ metres. Find its velocity (m/s) at $t=2$ s.",
+   "answer": -3,
+   "tolerance": 0,
+   "unit": "m/s",
+   "explanation": "$v=\\frac{ds}{dt}=3t^2-12t+9=12-24+9=-3$ (it is moving backwards). Also $a=6t-12=0$ at $t=2$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-maths-mechanics"
+  },
+  {
+   "id": "lower6-maths-mechanics-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-maths-kinematics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A motorbike leaves a junction in Garoua from rest and accelerates uniformly at 1.5 m/s² for 10 s, then travels at constant speed for a further 20 s.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find its speed after 10 s (m/s).",
+     "answer": 15,
+     "tolerance": 0,
+     "explanation": "$v=at=1.5\\times10$.",
+     "id": "lower6-maths-mechanics-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the distance covered while accelerating (m).",
+     "answer": 75,
+     "tolerance": 0,
+     "explanation": "$s=\\frac{1}{2}at^2=\\frac{1}{2}\\times1.5\\times100$.",
+     "id": "lower6-maths-mechanics-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the total distance in the 30 s (m).",
+     "answer": 375,
+     "tolerance": 0,
+     "explanation": "$75+15\\times20=375$ m (the area of the trapezium on the graph).",
+     "id": "lower6-maths-mechanics-e06-c"
+    }
+   ],
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 240,
+    "items": [
+     {
+      "t": "line",
+      "x1": 28.0,
+      "y1": 181.42857142857142,
+      "x2": 372.0,
+      "y2": 181.42857142857142,
+      "color": "ink",
+      "width": 1.5,
+      "arrow": "end"
+     },
+     {
+      "t": "line",
+      "x1": 52.971428571428575,
+      "y1": 212.0,
+      "x2": 52.971428571428575,
+      "y2": 28.0,
+      "color": "ink",
+      "width": 1.5,
+      "arrow": "end"
+     },
+     {
+      "t": "line",
+      "x1": 147.82857142857142,
+      "y1": 178.42857142857142,
+      "x2": 147.82857142857142,
+      "y2": 184.42857142857142,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 147.82857142857142,
+      "y": 198.42857142857142,
+      "text": "10",
+      "size": 11,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 337.54285714285714,
+      "y1": 178.42857142857142,
+      "x2": 337.54285714285714,
+      "y2": 184.42857142857142,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 337.54285714285714,
+      "y": 198.42857142857142,
+      "text": "30",
+      "size": 11,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 49.971428571428575,
+      "y1": 58.571428571428584,
+      "x2": 55.971428571428575,
+      "y2": 58.571428571428584,
+      "color": "ink",
+      "width": 1
+     },
+     {
+      "t": "text",
+      "x": 44.971428571428575,
+      "y": 62.571428571428584,
+      "text": "15",
+      "size": 11,
+      "anchor": "end",
+      "color": "ink"
+     },
+     {
+      "t": "poly",
+      "pts": [
+       53.0,
+       181.4,
+       147.8,
+       58.6,
+       337.5,
+       58.6,
+       337.5,
+       181.4
+      ],
+      "stroke": "blue",
+      "width": 2,
+      "closed": true,
+      "fill": "yellow"
+     },
+     {
+      "t": "text",
+      "x": 242.68571428571428,
+      "y": 132.28571428571428,
+      "text": "area = distance",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 90.91428571428571,
+      "y": 87.23809523809524,
+      "text": "gradient = a",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 242.68571428571428,
+      "y": 46.28571428571428,
+      "text": "15",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     }
+    ]
+   },
+   "chapter": "lower6-maths-mechanics"
+  },
+  {
+   "id": "lower6-maths-kinematics-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-kinematics",
+   "prompt": "The unit of acceleration is",
+   "choices": [
+    "m/s²",
+    "s²",
+    "m/s",
+    "m"
+   ],
+   "answer": 0,
+   "explanation": "Change in velocity per second.",
+   "chapter": "lower6-maths-mechanics"
+  },
+  {
+   "id": "lower6-maths-kinematics-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-kinematics",
+   "prompt": "$v=u+at$ with $u=2$, $a=3$, $t=4$ gives $v=$",
+   "choices": [
+    "$10$",
+    "$9$",
+    "$24$",
+    "$14$"
+   ],
+   "answer": 3,
+   "explanation": "$2+12$.",
+   "chapter": "lower6-maths-mechanics"
+  },
+  {
+   "id": "lower6-maths-kinematics-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-kinematics",
+   "prompt": "The area under a velocity–time graph gives",
+   "choices": [
+    "distance travelled",
+    "acceleration",
+    "speed",
+    "time"
+   ],
+   "answer": 0,
+   "explanation": "$\\int v\\,dt$.",
+   "chapter": "lower6-maths-mechanics"
+  },
+  {
+   "id": "lower6-maths-kinematics-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-kinematics",
+   "prompt": "At the highest point of a ball thrown upwards, the velocity is",
+   "choices": [
+    "maximum",
+    "$0$",
+    "$u$",
+    "$g$"
+   ],
+   "answer": 1,
+   "explanation": "It changes direction.",
+   "chapter": "lower6-maths-mechanics"
+  },
+  {
+   "id": "lower6-maths-kinematics-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-kinematics",
+   "prompt": "If $s=5t^2$, the acceleration is",
+   "choices": [
+    "$10t$ m/s²",
+    "$10$ m/s²",
+    "$0$",
+    "$5$ m/s²"
+   ],
+   "answer": 1,
+   "explanation": "$v=10t$, $a=10$.",
+   "chapter": "lower6-maths-mechanics"
+  },
+  {
+   "id": "lower6-maths-mechanics-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-maths-forces",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the weight in N of a 70 kg person ($g=10$).",
+   "answer": 700,
+   "tolerance": 0,
+   "unit": "N",
+   "explanation": "$W=mg=70\\times10$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-maths-mechanics"
+  },
+  {
+   "id": "lower6-maths-mechanics-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-maths-forces",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A force of 24 N is the net force on an 8 kg mass. Its acceleration is",
+   "choices": [
+    "3 m/s²",
+    "192 m/s²",
+    "0.33 m/s²",
+    "32 m/s²"
+   ],
+   "answer": 0,
+   "explanation": "$a=\\frac{F}{m}=\\frac{24}{8}$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-maths-mechanics"
+  },
+  {
+   "id": "lower6-maths-mechanics-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-maths-forces",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Friction always equals $\\mu R$.",
+   "answer": false,
+   "explanation": "Only when the particle is moving or about to move; otherwise $F\\leq\\mu R$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-maths-mechanics"
+  },
+  {
+   "id": "lower6-maths-mechanics-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-maths-forces",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A 10 kg block slides down a smooth slope inclined at $30\\degree$. Its acceleration is ($g=10$)",
+   "choices": [
+    "10 m/s²",
+    "5 m/s²",
+    "50 m/s²",
+    "8.66 m/s²"
+   ],
+   "answer": 1,
+   "explanation": "$a=g\\sin30\\degree=10\\times0.5$.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-maths-mechanics"
+  },
+  {
+   "id": "lower6-maths-mechanics-e11",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-maths-forces",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Masses 3 kg and 5 kg hang on either side of a smooth pulley, connected by a light string. Find the tension in N ($g=10$).",
+   "answer": 37.5,
+   "tolerance": 0,
+   "unit": "N",
+   "explanation": "Acceleration $=\\frac{(5-3)g}{8}=2.5$ m/s². For the 3 kg mass: $T-30=3\\times2.5$, so $T=37.5$ N.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-maths-mechanics"
+  },
+  {
+   "id": "lower6-maths-mechanics-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-maths-forces",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A 60 kg woman stands on the floor of a lift in a Douala office tower ($g=10$ m/s²). Let $R$ be the reaction of the floor on her.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "The lift accelerates upwards at 1.5 m/s². Find $R$ (N).",
+     "answer": 690,
+     "tolerance": 0,
+     "explanation": "$R-600=60\\times1.5$, so $R=690$.",
+     "id": "lower6-maths-mechanics-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "The lift accelerates downwards at 2 m/s². Find $R$ (N).",
+     "answer": 480,
+     "tolerance": 0,
+     "explanation": "$600-R=60\\times2$, so $R=480$.",
+     "id": "lower6-maths-mechanics-e12-b"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "When the lift moves at constant speed, $R=600$ N.",
+     "answer": true,
+     "explanation": "No acceleration, so $R=mg$.",
+     "id": "lower6-maths-mechanics-e12-c"
+    }
+   ],
+   "chapter": "lower6-maths-mechanics"
+  },
+  {
+   "id": "lower6-maths-forces-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-forces",
+   "prompt": "Newton's second law is",
+   "choices": [
+    "$F=mv$",
+    "$F=a/m$",
+    "$F=ma$",
+    "$F=m/a$"
+   ],
+   "answer": 2,
+   "explanation": "Resultant force.",
+   "chapter": "lower6-maths-mechanics"
+  },
+  {
+   "id": "lower6-maths-forces-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-forces",
+   "prompt": "The weight of 5 kg ($g=10$) is",
+   "choices": [
+    "50 N",
+    "5 N",
+    "50 kg",
+    "0.5 N"
+   ],
+   "answer": 0,
+   "explanation": "$mg$.",
+   "chapter": "lower6-maths-mechanics"
+  },
+  {
+   "id": "lower6-maths-forces-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-forces",
+   "prompt": "A particle at constant velocity has resultant force",
+   "choices": [
+    "equal to its weight",
+    "constant and non-zero",
+    "zero",
+    "infinite"
+   ],
+   "answer": 2,
+   "explanation": "Newton's first law.",
+   "chapter": "lower6-maths-mechanics"
+  },
+  {
+   "id": "lower6-maths-forces-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-forces",
+   "prompt": "The unit of force is the",
+   "choices": [
+    "newton",
+    "pascal",
+    "watt",
+    "joule"
+   ],
+   "answer": 0,
+   "explanation": "$1\\text{ N}=1\\text{ kg m/s}^2$.",
+   "chapter": "lower6-maths-mechanics"
+  },
+  {
+   "id": "lower6-maths-forces-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-forces",
+   "prompt": "On a horizontal surface, $R$ for a block of mass $m$ at rest is",
+   "choices": [
+    "$0$",
+    "$\\mu mg$",
+    "$mg$",
+    "$\\frac{mg}{2}$"
+   ],
+   "answer": 2,
+   "explanation": "Vertical equilibrium.",
+   "chapter": "lower6-maths-mechanics"
+  }
+ ]
+}

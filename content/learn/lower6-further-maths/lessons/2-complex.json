@@ -1,0 +1,913 @@
+{
+ "chapter": "lower6-further-maths-complex",
+ "lessons": [
+  {
+   "id": "lower6-further-maths-complex-algebra",
+   "title": "Complex numbers: algebra and polynomial equations",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Further Mathematics syllabus (Lower Sixth part; scope to be checked against the official text)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Calculate with complex numbers and find square roots",
+    "Use conjugate pairs for polynomials with real coefficients",
+    "Solve cubic equations with a complex root"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-further-maths-complex-e01",
+    "lower6-further-maths-complex-e02",
+    "lower6-further-maths-complex-e03",
+    "lower6-further-maths-complex-e04",
+    "lower6-further-maths-complex-e05",
+    "lower6-further-maths-complex-e06"
+   ],
+   "selfCheck": [
+    "lower6-further-maths-complex-algebra-q1",
+    "lower6-further-maths-complex-algebra-q2",
+    "lower6-further-maths-complex-algebra-q3",
+    "lower6-further-maths-complex-algebra-q4",
+    "lower6-further-maths-complex-algebra-q5"
+   ],
+   "reviewNotes": [
+    "Whether this topic is on the Cameroon GCE Board Further Mathematics syllabus (and in which year) is to be confirmed: it is standard A-Level Further Maths content.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Review",
+     "md": "$z=a+bi$, $i^2=-1$, $\\bar z=a-bi$, $|z|=\\sqrt{a^2+b^2}$, $z\\bar z=|z|^2$. Division: multiply top and bottom by the conjugate of the denominator. Also $|z_1z_2|=|z_1||z_2|$ and $\\overline{z_1z_2}=\\bar z_1\\bar z_2$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Conjugate root theorem",
+     "md": "If a polynomial has REAL coefficients and $a+bi$ is a root then so is $a-bi$. Hence a real cubic has either three real roots or one real root and a conjugate pair; a real quartic can have two conjugate pairs. The quadratic with roots $a\\pm bi$ is $z^2-2az+(a^2+b^2)=0$."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Square root of a complex number",
+     "md": "To find $\\sqrt{x+yi}$ let it equal $a+bi$: then $a^2-b^2=x$ and $2ab=y$. Solve; there are two roots, one the negative of the other."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "Forgetting the conjugate root when the coefficients are real. Giving only one square root. Writing $\\sqrt{-4}=\\pm2i$ without checking which values the equation needs."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "$1+i$ is a root of $z^3-4z^2+6z-4=0$. Find all the roots.",
+     "steps": [
+      "Coefficients are real, so $1-i$ is also a root. The quadratic factor is $z^2-2z+2$ (sum 2, product 2).",
+      "Divide: $z^3-4z^2+6z-4=(z-2)(z^2-2z+2)$. The third root is $z=2$."
+     ],
+     "answer": "$z=2,\\;1+i,\\;1-i$",
+     "figure": {
+      "kind": "shapes",
+      "w": 268,
+      "h": 308,
+      "items": [
+       {
+        "t": "line",
+        "x1": 28.0,
+        "y1": 154.0,
+        "x2": 240.0,
+        "y2": 154.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 74.0,
+        "y1": 280.0,
+        "x2": 74.0,
+        "y2": 28.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 114.0,
+        "y1": 151.0,
+        "x2": 114.0,
+        "y2": 157.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 114.0,
+        "y": 171.0,
+        "text": "1",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 154.0,
+        "y1": 151.0,
+        "x2": 154.0,
+        "y2": 157.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 154.0,
+        "y": 171.0,
+        "text": "2",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 194.0,
+        "y1": 151.0,
+        "x2": 194.0,
+        "y2": 157.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 194.0,
+        "y": 171.0,
+        "text": "3",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 71.0,
+        "y1": 234.0,
+        "x2": 77.0,
+        "y2": 234.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 66.0,
+        "y": 238.0,
+        "text": "−2",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 71.0,
+        "y1": 74.0,
+        "x2": 77.0,
+        "y2": 74.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 66.0,
+        "y": 78.0,
+        "text": "2",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 154.0,
+        "cy": 154.0,
+        "r": 4,
+        "stroke": "red",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 154.0,
+        "y": 144.0,
+        "text": "2",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 114.0,
+        "cy": 114.0,
+        "r": 4,
+        "stroke": "red",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 122.0,
+        "y": 106.0,
+        "text": "1 + i",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 114.0,
+        "cy": 194.0,
+        "r": 4,
+        "stroke": "red",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 122.0,
+        "y": 210.0,
+        "text": "1 − i",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Find the square roots of $3+4i$.",
+     "steps": [
+      "Let $(a+bi)^2=3+4i$: $a^2-b^2=3$ and $2ab=4$ so $b=\\frac2a$.",
+      "$a^2-\\frac{4}{a^2}=3$ gives $a^4-3a^2-4=0$, $(a^2-4)(a^2+1)=0$, $a=\\pm2$, $b=\\pm1$."
+     ],
+     "answer": "$\\pm(2+i)$"
+    }
+   ],
+   "chapter": "lower6-further-maths-complex"
+  },
+  {
+   "id": "lower6-further-maths-complex-polar",
+   "title": "Modulus–argument form and De Moivre's theorem",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Further Mathematics syllabus (Lower Sixth part; scope to be checked against the official text)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Write complex numbers in modulus–argument form",
+    "Multiply and divide in polar form",
+    "Use De Moivre's theorem for powers and trigonometric identities"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-further-maths-complex-e07",
+    "lower6-further-maths-complex-e08",
+    "lower6-further-maths-complex-e09",
+    "lower6-further-maths-complex-e10",
+    "lower6-further-maths-complex-e11",
+    "lower6-further-maths-complex-e12"
+   ],
+   "selfCheck": [
+    "lower6-further-maths-complex-polar-q1",
+    "lower6-further-maths-complex-polar-q2",
+    "lower6-further-maths-complex-polar-q3",
+    "lower6-further-maths-complex-polar-q4",
+    "lower6-further-maths-complex-polar-q5"
+   ],
+   "reviewNotes": [
+    "Whether this topic is on the Cameroon GCE Board Further Mathematics syllabus (and in which year) is to be confirmed: it is standard A-Level Further Maths content.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Polar form",
+     "md": "$z=r(\\cos\\theta+i\\sin\\theta)$ with $r=|z|$ and $\\theta=\\text{arg}\\, z$, $-\\pi<\\theta\\leq\\pi$ (principal argument). Find $\\theta$ from $\\tan\\theta=\\frac ba$, checking the quadrant on the Argand diagram."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Products and quotients",
+     "md": "$|z_1z_2|=|z_1||z_2|$ and $\\text{arg}\\,(z_1z_2)=\\text{arg}\\, z_1+\\text{arg}\\, z_2$; $\\left|\\frac{z_1}{z_2}\\right|=\\frac{|z_1|}{|z_2|}$ and $\\text{arg}\\,\\frac{z_1}{z_2}=\\text{arg}\\, z_1-\\text{arg}\\, z_2$ (mod $2\\pi$). Multiplying by $z$ scales by $|z|$ and rotates by $\\text{arg}\\, z$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "De Moivre's theorem",
+     "md": "For any integer $n$: $[r(\\cos\\theta+i\\sin\\theta)]^n=r^n(\\cos n\\theta+i\\sin n\\theta)$. Compact notation: $e^{i\\theta}=\\cos\\theta+i\\sin\\theta$. It gives $(\\cos\\theta+i\\sin\\theta)^3=\\cos3\\theta+i\\sin3\\theta$, from which multiple-angle identities follow by comparing real and imaginary parts."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "A calculator gives $\\text{arctan}\\,\\frac ba$ only in the first or fourth quadrant: $-1+i$ has argument $\\frac{3\\pi}{4}$, not $-\\frac{\\pi}{4}$. Adding arguments may exceed $\\pi$: subtract $2\\pi$ to return to the principal range."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Write $1+i\\sqrt3$ in polar form and find $(1+i\\sqrt3)^6$.",
+     "steps": [
+      "$r=\\sqrt{1+3}=2$, $\\tan\\theta=\\sqrt3$ in the first quadrant: $\\theta=\\frac\\pi3$.",
+      "$(1+i\\sqrt3)^6=2^6(\\cos2\\pi+i\\sin2\\pi)=64$."
+     ],
+     "answer": "$2\\left(\\cos\\frac\\pi3+i\\sin\\frac\\pi3\\right)$; the sixth power is 64",
+     "figure": {
+      "kind": "shapes",
+      "w": 268,
+      "h": 268,
+      "items": [
+       {
+        "t": "line",
+        "x1": 28.0,
+        "y1": 184.0,
+        "x2": 240.0,
+        "y2": 184.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 84.0,
+        "y1": 240.0,
+        "x2": 84.0,
+        "y2": 28.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 134.0,
+        "y1": 181.0,
+        "x2": 134.0,
+        "y2": 187.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 134.0,
+        "y": 201.0,
+        "text": "1",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 184.0,
+        "y1": 181.0,
+        "x2": 184.0,
+        "y2": 187.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 184.0,
+        "y": 201.0,
+        "text": "2",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 81.0,
+        "y1": 134.0,
+        "x2": 87.0,
+        "y2": 134.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 76.0,
+        "y": 138.0,
+        "text": "1",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 81.0,
+        "y1": 84.0,
+        "x2": 87.0,
+        "y2": 84.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 76.0,
+        "y": 88.0,
+        "text": "2",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 84.0,
+        "y1": 184.0,
+        "x2": 134.0,
+        "y2": 97.39745962155615,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "circle",
+        "cx": 134.0,
+        "cy": 97.39745962155615,
+        "r": 4,
+        "stroke": "red",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 144.0,
+        "y": 91.39745962155615,
+        "text": "1 + i√3",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 84.0,
+        "y1": 184.0,
+        "x2": 134.0,
+        "y2": 184.0,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 111.5,
+        "y": 178.0,
+        "text": "θ = π/3",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 99.0,
+        "y": 123.99999999999999,
+        "text": "r = 2",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "$z_1=2\\left(\\cos\\frac\\pi6+i\\sin\\frac\\pi6\\right)$, $z_2=3\\left(\\cos\\frac\\pi3+i\\sin\\frac\\pi3\\right)$. Find $z_1z_2$.",
+     "steps": [
+      "Multiply moduli: $2\\times3=6$. Add arguments: $\\frac\\pi6+\\frac\\pi3=\\frac\\pi2$.",
+      "$z_1z_2=6\\left(\\cos\\frac\\pi2+i\\sin\\frac\\pi2\\right)=6i$."
+     ],
+     "answer": "$6i$"
+    }
+   ],
+   "chapter": "lower6-further-maths-complex"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "lower6-further-maths-complex-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-further-maths-complex-algebra",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the real part of $(2+3i)(4-i)$.",
+   "answer": 11,
+   "tolerance": 0,
+   "explanation": "$8-2i+12i-3i^2=11+10i$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-further-maths-complex"
+  },
+  {
+   "id": "lower6-further-maths-complex-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-further-maths-complex-algebra",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$|z_1z_2|$ equals",
+   "choices": [
+    "$|z_1|\\,/\\,|z_2|$",
+    "$|z_1||z_2|$",
+    "$|z_1|+|z_2|$",
+    "$|z_1|^2$"
+   ],
+   "answer": 1,
+   "explanation": "Property of modulus.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-further-maths-complex"
+  },
+  {
+   "id": "lower6-further-maths-complex-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-further-maths-complex-algebra",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$|z_1z_2|=|z_1||z_2|$ for all complex numbers.",
+   "answer": true,
+   "explanation": "The modulus is multiplicative.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-further-maths-complex"
+  },
+  {
+   "id": "lower6-further-maths-complex-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-further-maths-complex-algebra",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$(1+i)^4=$",
+   "choices": [
+    "$-4i$",
+    "$4$",
+    "$4i$",
+    "$-4$"
+   ],
+   "answer": 3,
+   "explanation": "$(1+i)^2=2i$; $(2i)^2=-4$.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-further-maths-complex"
+  },
+  {
+   "id": "lower6-further-maths-complex-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "lower6-further-maths-complex-algebra",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A quadratic $z^2+pz+q=0$ with real $p,q$ has $2-i$ as a root. Find $p$ and $q$.",
+   "model": "The other root is $2+i$. Sum $=4=-p$, so $p=-4$. Product $=(2-i)(2+i)=5=q$. The equation is $z^2-4z+5=0$.",
+   "rubric": [
+    "States the conjugate root (1)",
+    "$p=-4$ (1)",
+    "$q=5$ (1)"
+   ],
+   "explanation": "The other root is $2+i$. Sum $=4=-p$, so $p=-4$. Product $=(2-i)(2+i)=5=q$. The equation is $z^2-4z+5=0$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-further-maths-complex"
+  },
+  {
+   "id": "lower6-further-maths-complex-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-further-maths-complex-algebra",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$f(z)=z^3-5z^2+11z-15$.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find $f(3)$.",
+     "answer": 0,
+     "tolerance": 0,
+     "explanation": "$27-45+33-15=0$.",
+     "id": "lower6-further-maths-complex-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "The other two roots are",
+     "choices": [
+      "$2\\pm i$",
+      "$1\\pm i$",
+      "$1\\pm2i$",
+      "$-1\\pm2i$"
+     ],
+     "answer": 2,
+     "explanation": "$f(z)=(z-3)(z^2-2z+5)$ and $z=1\\pm\\sqrt{-4}$.",
+     "id": "lower6-further-maths-complex-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the modulus of one complex root (3 d.p.).",
+     "answer": 2.236,
+     "tolerance": 0.001,
+     "explanation": "$|1+2i|=\\sqrt5=2.236$.",
+     "id": "lower6-further-maths-complex-e06-c"
+    }
+   ],
+   "chapter": "lower6-further-maths-complex"
+  },
+  {
+   "id": "lower6-further-maths-complex-algebra-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-further-maths-complex-algebra",
+   "prompt": "The conjugate of $3-2i$ is",
+   "choices": [
+    "$3+2i$",
+    "$2-3i$",
+    "$-3+2i$",
+    "$-3-2i$"
+   ],
+   "answer": 0,
+   "explanation": "Change the sign of the imaginary part.",
+   "chapter": "lower6-further-maths-complex"
+  },
+  {
+   "id": "lower6-further-maths-complex-algebra-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-further-maths-complex-algebra",
+   "prompt": "The product of the roots $a\\pm bi$ is",
+   "choices": [
+    "$2b$",
+    "$a^2+b^2$",
+    "$2a$",
+    "$a^2-b^2$"
+   ],
+   "answer": 1,
+   "explanation": "$z\\bar z$.",
+   "chapter": "lower6-further-maths-complex"
+  },
+  {
+   "id": "lower6-further-maths-complex-algebra-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-further-maths-complex-algebra",
+   "prompt": "A real cubic has",
+   "choices": [
+    "exactly two real roots",
+    "no roots",
+    "at least one real root",
+    "no real roots"
+   ],
+   "answer": 2,
+   "explanation": "Complex roots come in pairs.",
+   "chapter": "lower6-further-maths-complex"
+  },
+  {
+   "id": "lower6-further-maths-complex-algebra-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-further-maths-complex-algebra",
+   "prompt": "$i^4=$",
+   "choices": [
+    "$1$",
+    "$-i$",
+    "$-1$",
+    "$i$"
+   ],
+   "answer": 0,
+   "explanation": "$(i^2)^2$.",
+   "chapter": "lower6-further-maths-complex"
+  },
+  {
+   "id": "lower6-further-maths-complex-algebra-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-further-maths-complex-algebra",
+   "prompt": "$\\frac{1}{1+i}=$",
+   "choices": [
+    "$\\frac{1-i}{2}$",
+    "$\\frac{1}{2}$",
+    "$1-i$",
+    "$\\frac{1+i}{2}$"
+   ],
+   "answer": 0,
+   "explanation": "Multiply by the conjugate.",
+   "chapter": "lower6-further-maths-complex"
+  },
+  {
+   "id": "lower6-further-maths-complex-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-further-maths-complex-polar",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find $|(3+4i)(5-12i)|$.",
+   "answer": 65,
+   "tolerance": 0,
+   "explanation": "$5\\times13$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-further-maths-complex"
+  },
+  {
+   "id": "lower6-further-maths-complex-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-further-maths-complex-polar",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The principal argument of $-1+i$ is",
+   "choices": [
+    "$\\frac\\pi4$",
+    "$\\frac{3\\pi}{4}$",
+    "$-\\frac{3\\pi}{4}$",
+    "$-\\frac\\pi4$"
+   ],
+   "answer": 1,
+   "explanation": "Second quadrant.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-further-maths-complex"
+  },
+  {
+   "id": "lower6-further-maths-complex-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-further-maths-complex-polar",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$\\text{arg}\\,(z_1z_2)=\\text{arg}\\, z_1+\\text{arg}\\, z_2$ (mod $2\\pi$).",
+   "answer": true,
+   "explanation": "Arguments add on multiplication.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-further-maths-complex"
+  },
+  {
+   "id": "lower6-further-maths-complex-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-further-maths-complex-polar",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$(\\cos\\theta+i\\sin\\theta)^3=$",
+   "choices": [
+    "$\\cos3\\theta+i\\sin3\\theta$",
+    "$\\cos^3\\theta+i\\sin^3\\theta$",
+    "$3\\cos\\theta+3i\\sin\\theta$",
+    "$\\cos\\theta^3+i\\sin\\theta^3$"
+   ],
+   "answer": 0,
+   "explanation": "De Moivre.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-further-maths-complex"
+  },
+  {
+   "id": "lower6-further-maths-complex-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "lower6-further-maths-complex-polar",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Use De Moivre's theorem to show that $\\cos3\\theta=4\\cos^3\\theta-3\\cos\\theta$.",
+   "model": "$(\\cos\\theta+i\\sin\\theta)^3=\\cos^3\\theta+3i\\cos^2\\theta\\sin\\theta-3\\cos\\theta\\sin^2\\theta-i\\sin^3\\theta$. The real part is $\\cos^3\\theta-3\\cos\\theta\\sin^2\\theta=\\cos^3\\theta-3\\cos\\theta(1-\\cos^2\\theta)=4\\cos^3\\theta-3\\cos\\theta$. By De Moivre it also equals $\\cos3\\theta$.",
+   "rubric": [
+    "Binomial expansion (1)",
+    "Real part (1)",
+    "Uses $\\sin^2=1-\\cos^2$ (1)"
+   ],
+   "explanation": "$(\\cos\\theta+i\\sin\\theta)^3=\\cos^3\\theta+3i\\cos^2\\theta\\sin\\theta-3\\cos\\theta\\sin^2\\theta-i\\sin^3\\theta$. The real part is $\\cos^3\\theta-3\\cos\\theta\\sin^2\\theta=\\cos^3\\theta-3\\cos\\theta(1-\\cos^2\\theta)=4\\cos^3\\theta-3\\cos\\theta$. By De Moivre it also equals $\\cos3\\theta$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-further-maths-complex"
+  },
+  {
+   "id": "lower6-further-maths-complex-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-further-maths-complex-polar",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Let $z=1-i$.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find $|z|$ (4 d.p.).",
+     "answer": 1.4142,
+     "tolerance": 0.0002,
+     "explanation": "$\\sqrt{1+1}=\\sqrt2$.",
+     "id": "lower6-further-maths-complex-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find $\\text{arg}\\, z$ in radians (4 d.p.).",
+     "answer": -0.7854,
+     "tolerance": 0.00040000099999995596,
+     "explanation": "Fourth quadrant: $-\\frac\\pi4$.",
+     "id": "lower6-further-maths-complex-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find $z^8$.",
+     "answer": 16,
+     "tolerance": 0,
+     "explanation": "$(\\sqrt2)^8\\left(\\cos(-2\\pi)+i\\sin(-2\\pi)\\right)=16$.",
+     "id": "lower6-further-maths-complex-e12-c"
+    }
+   ],
+   "chapter": "lower6-further-maths-complex"
+  },
+  {
+   "id": "lower6-further-maths-complex-polar-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-further-maths-complex-polar",
+   "prompt": "$|z|$ for $z=-3+4i$ is",
+   "choices": [
+    "$7$",
+    "$-5$",
+    "$1$",
+    "$5$"
+   ],
+   "answer": 3,
+   "explanation": "$\\sqrt{9+16}$.",
+   "chapter": "lower6-further-maths-complex"
+  },
+  {
+   "id": "lower6-further-maths-complex-polar-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-further-maths-complex-polar",
+   "prompt": "$e^{i\\pi}=$",
+   "choices": [
+    "$i$",
+    "$1$",
+    "$-i$",
+    "$-1$"
+   ],
+   "answer": 3,
+   "explanation": "$\\cos\\pi+i\\sin\\pi$.",
+   "chapter": "lower6-further-maths-complex"
+  },
+  {
+   "id": "lower6-further-maths-complex-polar-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-further-maths-complex-polar",
+   "prompt": "$\\text{arg}\\,(z^n)=$",
+   "choices": [
+    "$\\frac{\\text{arg}\\, z}{n}$",
+    "$\\text{arg}\\, z$",
+    "$n\\text{arg}\\, z$ (mod $2\\pi$)",
+    "$(\\text{arg}\\, z)^n$"
+   ],
+   "answer": 2,
+   "explanation": "De Moivre.",
+   "chapter": "lower6-further-maths-complex"
+  },
+  {
+   "id": "lower6-further-maths-complex-polar-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-further-maths-complex-polar",
+   "prompt": "$\\text{arg}\\,\\frac{z_1}{z_2}=$",
+   "choices": [
+    "$\\frac{\\text{arg}\\, z_1}{\\text{arg}\\, z_2}$",
+    "$\\text{arg}\\, z_1-\\text{arg}\\, z_2$",
+    "$\\text{arg}\\, z_1\\text{arg}\\, z_2$",
+    "$\\text{arg}\\, z_1+\\text{arg}\\, z_2$"
+   ],
+   "answer": 1,
+   "explanation": "Subtract.",
+   "chapter": "lower6-further-maths-complex"
+  },
+  {
+   "id": "lower6-further-maths-complex-polar-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-further-maths-complex-polar",
+   "prompt": "$i$ in polar form has modulus and argument",
+   "choices": [
+    "$\\frac\\pi2$ and 1",
+    "0 and $\\frac\\pi2$",
+    "1 and $\\frac\\pi2$",
+    "1 and 0"
+   ],
+   "answer": 2,
+   "explanation": "On the positive imaginary axis.",
+   "chapter": "lower6-further-maths-complex"
+  }
+ ]
+}

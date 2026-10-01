@@ -1,0 +1,1016 @@
+{
+ "chapter": "lower6-maths-coordinate",
+ "lessons": [
+  {
+   "id": "lower6-maths-lines",
+   "title": "Straight lines",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Pure Mathematics (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Find gradient, midpoint and distance",
+    "Write the equation of a line in different forms",
+    "Use parallel and perpendicular conditions"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-maths-coordinate-e01",
+    "lower6-maths-coordinate-e02",
+    "lower6-maths-coordinate-e03",
+    "lower6-maths-coordinate-e04",
+    "lower6-maths-coordinate-e05",
+    "lower6-maths-coordinate-e06"
+   ],
+   "selfCheck": [
+    "lower6-maths-lines-q1",
+    "lower6-maths-lines-q2",
+    "lower6-maths-lines-q3",
+    "lower6-maths-lines-q4",
+    "lower6-maths-lines-q5"
+   ],
+   "reviewNotes": [
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Gradient, midpoint, distance",
+     "md": "For $A(x_1,y_1)$ and $B(x_2,y_2)$: gradient $m=\\frac{y_2-y_1}{x_2-x_1}$; midpoint $\\left(\\frac{x_1+x_2}{2},\\frac{y_1+y_2}{2}\\right)$; length $AB=\\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Equation of a line",
+     "md": "Gradient form $y=mx+c$; through $(x_1,y_1)$ with gradient $m$: $y-y_1=m(x-x_1)$; through two points: use $m$ first; general form $ax+by+c=0$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Parallel and perpendicular",
+     "md": "Parallel lines have equal gradients. Perpendicular lines satisfy $m_1m_2=-1$, i.e. $m_2=-\\frac{1}{m_1}$. The perpendicular bisector of $AB$ passes through the midpoint of $AB$ with gradient $-\\frac{1}{m_{AB}}$."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "Subtract the coordinates in the SAME order in numerator and denominator. The gradient of $ax+by+c=0$ is $-\\frac{a}{b}$. Vertical lines ($x=k$) have no gradient."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "$A(2,1)$, $B(8,5)$. Find the gradient of $AB$, its midpoint and its length.",
+     "steps": [
+      "$m=\\frac{5-1}{8-2}=\\frac{4}{6}=\\frac{2}{3}$.",
+      "Midpoint $\\left(\\frac{2+8}{2},\\frac{1+5}{2}\\right)=(5,3)$.",
+      "$AB=\\sqrt{6^2+4^2}=\\sqrt{52}=2\\sqrt{13}$."
+     ],
+     "answer": "$m=\\frac{2}{3}$; $M(5,3)$; $AB=2\\sqrt{13}$",
+     "figure": {
+      "kind": "shapes",
+      "w": 368,
+      "h": 308,
+      "items": [
+       {
+        "t": "line",
+        "x1": 28.0,
+        "y1": 244.0,
+        "x2": 340.0,
+        "y2": 244.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 64.0,
+        "y1": 280.0,
+        "x2": 64.0,
+        "y2": 28.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 124.0,
+        "y1": 241.0,
+        "x2": 124.0,
+        "y2": 247.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 124.0,
+        "y": 261.0,
+        "text": "2",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 184.0,
+        "y1": 241.0,
+        "x2": 184.0,
+        "y2": 247.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 184.0,
+        "y": 261.0,
+        "text": "4",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 244.0,
+        "y1": 241.0,
+        "x2": 244.0,
+        "y2": 247.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 244.0,
+        "y": 261.0,
+        "text": "6",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 304.0,
+        "y1": 241.0,
+        "x2": 304.0,
+        "y2": 247.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 304.0,
+        "y": 261.0,
+        "text": "8",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 61.0,
+        "y1": 184.0,
+        "x2": 67.0,
+        "y2": 184.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 56.0,
+        "y": 188.0,
+        "text": "2",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 61.0,
+        "y1": 124.0,
+        "x2": 67.0,
+        "y2": 124.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 56.0,
+        "y": 128.0,
+        "text": "4",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 61.0,
+        "y1": 64.0,
+        "x2": 67.0,
+        "y2": 64.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 56.0,
+        "y": 68.0,
+        "text": "6",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 124.0,
+        "y1": 214.0,
+        "x2": 304.0,
+        "y2": 94.0,
+        "color": "blue",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 124.0,
+        "cy": 214.0,
+        "r": 4,
+        "stroke": "red",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 118.0,
+        "y": 204.0,
+        "text": "A(2, 1)",
+        "size": 12,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 304.0,
+        "cy": 94.0,
+        "r": 4,
+        "stroke": "red",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 304.0,
+        "y": 84.0,
+        "text": "B(8, 5)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 214.0,
+        "cy": 154.0,
+        "r": 4,
+        "stroke": "green",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "text",
+        "x": 222.0,
+        "y": 174.0,
+        "text": "M(5, 3)",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Find the line through $(3,-2)$ perpendicular to $2x+3y=6$.",
+     "steps": [
+      "$3y=-2x+6$ so the gradient is $-\\frac{2}{3}$; the perpendicular gradient is $\\frac{3}{2}$.",
+      "$y+2=\\frac{3}{2}(x-3)$, so $2y+4=3x-9$.",
+      "Rearrange: $3x-2y-13=0$. Check $(3,-2)$: $9+4-13=0$."
+     ],
+     "answer": "$3x-2y-13=0$"
+    }
+   ],
+   "chapter": "lower6-maths-coordinate"
+  },
+  {
+   "id": "lower6-maths-circles",
+   "title": "Circles",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Pure Mathematics (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Write and interpret the equation of a circle",
+    "Find centre and radius by completing the square",
+    "Find tangents and line–circle intersections"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-maths-coordinate-e07",
+    "lower6-maths-coordinate-e08",
+    "lower6-maths-coordinate-e09",
+    "lower6-maths-coordinate-e10",
+    "lower6-maths-coordinate-e11",
+    "lower6-maths-coordinate-e12"
+   ],
+   "selfCheck": [
+    "lower6-maths-circles-q1",
+    "lower6-maths-circles-q2",
+    "lower6-maths-circles-q3",
+    "lower6-maths-circles-q4",
+    "lower6-maths-circles-q5"
+   ],
+   "reviewNotes": [
+    "Figure drawn to equal scale on both axes.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Equation of a circle",
+     "md": "Centre $(a,b)$, radius $r$: $(x-a)^2+(y-b)^2=r^2$. Expanded form: $x^2+y^2+2gx+2fy+c=0$ with centre $(-g,-f)$ and radius $\\sqrt{g^2+f^2-c}$."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Tangent at a point",
+     "md": "The tangent at a point $P$ on a circle is perpendicular to the radius $CP$. 1. Find the gradient of $CP$. 2. The tangent gradient is the negative reciprocal. 3. Use $y-y_1=m(x-x_1)$ through $P$."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Line meets circle",
+     "md": "Substitute the line's equation into the circle's equation to get a quadratic: $\\Delta>0$ two intersection points, $\\Delta=0$ tangent, $\\Delta<0$ no intersection. A point is inside, on or outside the circle if its distance to the centre is less than, equal to or greater than $r$."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Watch out",
+     "md": "The right side of $(x-a)^2+(y-b)^2=r^2$ is $r^2$, not $r$. Signs flip: $(x+1)^2$ means the centre has $x$-coordinate $-1$."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Find the centre and radius of $x^2+y^2-6x+4y-12=0$.",
+     "steps": [
+      "Complete the squares: $(x-3)^2-9+(y+2)^2-4-12=0$.",
+      "$(x-3)^2+(y+2)^2=25$."
+     ],
+     "answer": "Centre $(3,-2)$, radius 5"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Show $P(7,1)$ is on that circle, and find the tangent at $P$.",
+     "steps": [
+      "$(7-3)^2+(1+2)^2=16+9=25$, so $P$ is on the circle.",
+      "Gradient of $CP=\\frac{1-(-2)}{7-3}=\\frac{3}{4}$; tangent gradient $-\\frac{4}{3}$.",
+      "$y-1=-\\frac{4}{3}(x-7)$, so $3y-3=-4x+28$ and $4x+3y-31=0$."
+     ],
+     "answer": "$4x+3y-31=0$",
+     "figure": {
+      "kind": "shapes",
+      "w": 306,
+      "h": 289,
+      "items": [
+       {
+        "t": "line",
+        "x1": 28.0,
+        "y1": 119.0,
+        "x2": 278.0,
+        "y2": 119.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 102.0,
+        "y1": 261.0,
+        "x2": 102.0,
+        "y2": 28.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 68.0,
+        "y1": 116.0,
+        "x2": 68.0,
+        "y2": 122.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 68.0,
+        "y": 136.0,
+        "text": "−2",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 136.0,
+        "y1": 116.0,
+        "x2": 136.0,
+        "y2": 122.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 136.0,
+        "y": 136.0,
+        "text": "2",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 204.0,
+        "y1": 116.0,
+        "x2": 204.0,
+        "y2": 122.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 204.0,
+        "y": 136.0,
+        "text": "6",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 272.0,
+        "y1": 116.0,
+        "x2": 272.0,
+        "y2": 122.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 272.0,
+        "y": 136.0,
+        "text": "10",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 99.0,
+        "y1": 221.0,
+        "x2": 105.0,
+        "y2": 221.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 94.0,
+        "y": 225.0,
+        "text": "−6",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 99.0,
+        "y1": 153.0,
+        "x2": 105.0,
+        "y2": 153.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 94.0,
+        "y": 157.0,
+        "text": "−2",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 99.0,
+        "y1": 85.0,
+        "x2": 105.0,
+        "y2": 85.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 94.0,
+        "y": 89.0,
+        "text": "2",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 99.0,
+        "y1": 51.0,
+        "x2": 105.0,
+        "y2": 51.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 94.0,
+        "y": 55.0,
+        "text": "4",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 153.0,
+        "cy": 153.0,
+        "r": 85.0,
+        "stroke": "blue",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 153.0,
+        "cy": 153.0,
+        "r": 4,
+        "stroke": "red",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 145.0,
+        "y": 171.0,
+        "text": "C(3, −2)",
+        "size": 12,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 221.0,
+        "cy": 102.0,
+        "r": 4,
+        "stroke": "green",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "text",
+        "x": 229.0,
+        "y": 94.0,
+        "text": "P(7, 1)",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 153.0,
+        "y1": 153.0,
+        "x2": 221.0,
+        "y2": 102.0,
+        "color": "red",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 178.5,
+        "y1": 45.33333333333334,
+        "x2": 263.5,
+        "y2": 158.66666666666669,
+        "color": "orange",
+        "width": 2
+       }
+      ]
+     }
+    }
+   ],
+   "chapter": "lower6-maths-coordinate"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "lower6-maths-coordinate-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-maths-lines",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the distance between $(1,2)$ and $(7,10)$.",
+   "answer": 10,
+   "tolerance": 0,
+   "explanation": "$\\sqrt{36+64}=10$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-maths-coordinate"
+  },
+  {
+   "id": "lower6-maths-coordinate-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-maths-lines",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The gradient of $4x-2y=7$ is",
+   "choices": [
+    "$-2$",
+    "$2$",
+    "$4$",
+    "$\\frac{1}{2}$"
+   ],
+   "answer": 1,
+   "explanation": "$y=2x-\\frac{7}{2}$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-maths-coordinate"
+  },
+  {
+   "id": "lower6-maths-coordinate-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-maths-lines",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The lines $y=2x+1$ and $y=-\\frac{x}{2}+3$ are perpendicular.",
+   "answer": true,
+   "explanation": "$2\\times\\left(-\\frac{1}{2}\\right)=-1$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-maths-coordinate"
+  },
+  {
+   "id": "lower6-maths-coordinate-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-maths-lines",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which line is parallel to $3x+y=5$ and passes through $(0,0)$?",
+   "choices": [
+    "$y=\\frac{x}{3}$",
+    "$y=-\\frac{x}{3}$",
+    "$y=3x$",
+    "$y=-3x$"
+   ],
+   "answer": 3,
+   "explanation": "Gradient $-3$ through the origin.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-maths-coordinate"
+  },
+  {
+   "id": "lower6-maths-coordinate-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "lower6-maths-lines",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$P(0,0)$, $Q(4,0)$ and $R(2,3)$ are the vertices of a triangle. Show it is isosceles and find its area.",
+   "model": "$PR=\\sqrt{4+9}=\\sqrt{13}$ and $QR=\\sqrt{4+9}=\\sqrt{13}$, so $PR=QR$ (isosceles). Base $PQ=4$, height 3, area $=\\frac{1}{2}\\times4\\times3=6$.",
+   "rubric": [
+    "Computes both lengths (1)",
+    "States isosceles (1)",
+    "Area 6 (1)"
+   ],
+   "explanation": "$PR=\\sqrt{4+9}=\\sqrt{13}$ and $QR=\\sqrt{4+9}=\\sqrt{13}$, so $PR=QR$ (isosceles). Base $PQ=4$, height 3, area $=\\frac{1}{2}\\times4\\times3=6$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-maths-coordinate"
+  },
+  {
+   "id": "lower6-maths-coordinate-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-maths-lines",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$A(-1,2)$ and $B(5,5)$ are two points.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the gradient of $AB$.",
+     "answer": 0.5,
+     "tolerance": 0.001,
+     "explanation": "$\\frac{5-2}{5+1}=\\frac{1}{2}$.",
+     "id": "lower6-maths-coordinate-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 3,
+     "prompt": "The perpendicular bisector of $AB$ meets the x-axis at $(k,0)$. Find $k$.",
+     "answer": 3.75,
+     "tolerance": 0.001,
+     "explanation": "Midpoint $(2,3.5)$; gradient $-2$: $y-3.5=-2(x-2)$, i.e. $y=-2x+7.5$. Set $y=0$: $x=3.75$. Check: equal distances from $A$ and $B$.",
+     "id": "lower6-maths-coordinate-e06-b"
+    }
+   ],
+   "chapter": "lower6-maths-coordinate"
+  },
+  {
+   "id": "lower6-maths-lines-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-lines",
+   "prompt": "Midpoint of $(2,4)$ and $(6,10)$ is",
+   "choices": [
+    "$(4,7)$",
+    "$(4,6)$",
+    "$(8,14)$",
+    "$(2,3)$"
+   ],
+   "answer": 0,
+   "explanation": "Average each coordinate.",
+   "chapter": "lower6-maths-coordinate"
+  },
+  {
+   "id": "lower6-maths-lines-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-lines",
+   "prompt": "Gradient of the line through $(1,1)$ and $(3,7)$ is",
+   "choices": [
+    "$-3$",
+    "$2$",
+    "$\\frac{1}{3}$",
+    "$3$"
+   ],
+   "answer": 3,
+   "explanation": "$\\frac{6}{2}$.",
+   "chapter": "lower6-maths-coordinate"
+  },
+  {
+   "id": "lower6-maths-lines-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-lines",
+   "prompt": "A line perpendicular to gradient $\\frac{2}{5}$ has gradient",
+   "choices": [
+    "$-\\frac{2}{5}$",
+    "$-\\frac{5}{2}$",
+    "$\\frac{2}{5}$",
+    "$\\frac{5}{2}$"
+   ],
+   "answer": 1,
+   "explanation": "Negative reciprocal.",
+   "chapter": "lower6-maths-coordinate"
+  },
+  {
+   "id": "lower6-maths-lines-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-lines",
+   "prompt": "The line through $(0,3)$ with gradient $-2$ is",
+   "choices": [
+    "$y=2x+3$",
+    "$y=-2x+3$",
+    "$y=-2x-3$",
+    "$y=3x-2$"
+   ],
+   "answer": 1,
+   "explanation": "$c=3$.",
+   "chapter": "lower6-maths-coordinate"
+  },
+  {
+   "id": "lower6-maths-lines-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-lines",
+   "prompt": "The distance from the origin to $(5,12)$ is",
+   "choices": [
+    "$13$",
+    "$7$",
+    "$\\sqrt{17}$",
+    "$17$"
+   ],
+   "answer": 0,
+   "explanation": "$\\sqrt{25+144}$.",
+   "chapter": "lower6-maths-coordinate"
+  },
+  {
+   "id": "lower6-maths-coordinate-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-maths-circles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the radius of $x^2+y^2+2x-4y-4=0$.",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "$(x+1)^2+(y-2)^2=4+1+4=9$, so $r=3$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-maths-coordinate"
+  },
+  {
+   "id": "lower6-maths-coordinate-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-maths-circles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The circle with centre $(2,-1)$ and radius 3 has equation",
+   "choices": [
+    "$(x-2)^2+(y-1)^2=9$",
+    "$(x-2)^2+(y+1)^2=3$",
+    "$(x-2)^2+(y+1)^2=9$",
+    "$(x+2)^2+(y-1)^2=9$"
+   ],
+   "answer": 2,
+   "explanation": "Centre signs flip; the right side is $r^2$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-maths-coordinate"
+  },
+  {
+   "id": "lower6-maths-coordinate-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-maths-circles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The point $(3,4)$ is inside the circle $x^2+y^2=20$.",
+   "answer": false,
+   "explanation": "$3^2+4^2=25>20$: the point is outside.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-maths-coordinate"
+  },
+  {
+   "id": "lower6-maths-coordinate-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-maths-circles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The line $y=x$ meets $x^2+y^2=8$ at",
+   "choices": [
+    "$(4,4)$ and $(-4,-4)$",
+    "$(\\sqrt8,\\sqrt8)$ only",
+    "$(2,2)$ only",
+    "$(2,2)$ and $(-2,-2)$"
+   ],
+   "answer": 3,
+   "explanation": "$2x^2=8$ gives $x=\\pm2$.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-maths-coordinate"
+  },
+  {
+   "id": "lower6-maths-coordinate-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "lower6-maths-circles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the equation of the circle that has the line segment from $A(1,2)$ to $B(7,10)$ as a diameter.",
+   "model": "Centre = midpoint $(4,6)$. Diameter $AB=\\sqrt{36+64}=10$, so $r=5$. Equation $(x-4)^2+(y-6)^2=25$.",
+   "rubric": [
+    "Midpoint as centre (1)",
+    "Radius 5 (1)",
+    "Correct equation (1)"
+   ],
+   "explanation": "Centre = midpoint $(4,6)$. Diameter $AB=\\sqrt{36+64}=10$, so $r=5$. Equation $(x-4)^2+(y-6)^2=25$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-maths-coordinate"
+  },
+  {
+   "id": "lower6-maths-coordinate-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-maths-circles",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A circle has equation $x^2+y^2-4x-2y-20=0$.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find its radius.",
+     "answer": 5,
+     "tolerance": 0,
+     "explanation": "$(x-2)^2+(y-1)^2=25$; centre $(2,1)$, $r=5$.",
+     "id": "lower6-maths-coordinate-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 3,
+     "prompt": "The point $(5,5)$ lies on the circle. The tangent there meets the x-axis at $(k,0)$. Find $k$ (2 d.p.).",
+     "answer": 11.67,
+     "tolerance": 0.01,
+     "explanation": "Radius gradient $\\frac{5-1}{5-2}=\\frac{4}{3}$, tangent gradient $-\\frac{3}{4}$: $y-5=-\\frac{3}{4}(x-5)$, i.e. $3x+4y-35=0$. At $y=0$: $x=\\frac{35}{3}\\approx11.67$.",
+     "id": "lower6-maths-coordinate-e12-b"
+    }
+   ],
+   "chapter": "lower6-maths-coordinate"
+  },
+  {
+   "id": "lower6-maths-circles-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-circles",
+   "prompt": "The centre of $(x-1)^2+(y+4)^2=9$ is",
+   "choices": [
+    "$(1,-4)$",
+    "$(-1,4)$",
+    "$(1,4)$",
+    "$(-1,-4)$"
+   ],
+   "answer": 0,
+   "explanation": "Signs flip.",
+   "chapter": "lower6-maths-coordinate"
+  },
+  {
+   "id": "lower6-maths-circles-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-circles",
+   "prompt": "The radius of $x^2+y^2=49$ is",
+   "choices": [
+    "$\\sqrt7$",
+    "$49$",
+    "$7$",
+    "$\\frac{49}{2}$"
+   ],
+   "answer": 2,
+   "explanation": "$r^2=49$.",
+   "chapter": "lower6-maths-coordinate"
+  },
+  {
+   "id": "lower6-maths-circles-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-circles",
+   "prompt": "A tangent to a circle is ... to the radius at the point of contact",
+   "choices": [
+    "parallel",
+    "perpendicular",
+    "equal",
+    "at $45\\degree$"
+   ],
+   "answer": 1,
+   "explanation": "Circle theorem.",
+   "chapter": "lower6-maths-coordinate"
+  },
+  {
+   "id": "lower6-maths-circles-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-circles",
+   "prompt": "A line meets a circle in 2 points when the discriminant is",
+   "choices": [
+    "$>0$",
+    "$<0$",
+    "$=0$",
+    "negative"
+   ],
+   "answer": 0,
+   "explanation": "Two real roots.",
+   "chapter": "lower6-maths-coordinate"
+  },
+  {
+   "id": "lower6-maths-circles-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-circles",
+   "prompt": "Distance from $(0,0)$ to centre $(3,4)$ is",
+   "choices": [
+    "$1$",
+    "$25$",
+    "$5$",
+    "$7$"
+   ],
+   "answer": 2,
+   "explanation": "$\\sqrt{9+16}$.",
+   "chapter": "lower6-maths-coordinate"
+  }
+ ]
+}

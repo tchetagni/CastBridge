@@ -1,0 +1,508 @@
+{
+ "chapter": "lower6-maths-vectors",
+ "lessons": [
+  {
+   "id": "lower6-maths-vectors-2d",
+   "title": "Vectors: position, magnitude and scalar product",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Pure Mathematics (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Add, subtract and scale vectors",
+    "Find magnitudes, unit vectors and position vectors",
+    "Use the scalar product to find angles"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-maths-vectors-e01",
+    "lower6-maths-vectors-e02",
+    "lower6-maths-vectors-e03",
+    "lower6-maths-vectors-e04",
+    "lower6-maths-vectors-e05",
+    "lower6-maths-vectors-e06"
+   ],
+   "selfCheck": [
+    "lower6-maths-vectors-2d-q1",
+    "lower6-maths-vectors-2d-q2",
+    "lower6-maths-vectors-2d-q3",
+    "lower6-maths-vectors-2d-q4",
+    "lower6-maths-vectors-2d-q5"
+   ],
+   "reviewNotes": [
+    "Three-dimensional vectors are treated in the Upper Sixth pack.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Vectors",
+     "md": "A vector has magnitude and direction. In component form $\\vec{a}=x\\text{i}+y\\text{j}$, written here as the pair $(x,y)$. Magnitude $|\\vec a|=\\sqrt{x^2+y^2}$; a unit vector is $\\frac{\\vec a}{|\\vec a|}$. The position vector of $A$ is $\\vec{OA}$ and $\\vec{AB}=\\vec{OB}-\\vec{OA}$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Parallel and collinear",
+     "md": "$\\vec a$ and $\\vec b$ are parallel if $\\vec a=\\lambda\\vec b$. Points $A,B,C$ are collinear if $\\vec{AB}$ is parallel to $\\vec{BC}$. A point $P$ dividing $AB$ in the ratio $m:n$ has $\\vec{OP}=\\frac{n\\vec{OA}+m\\vec{OB}}{m+n}$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Scalar (dot) product",
+     "md": "$\\vec a\\cdot\\vec b=x_1x_2+y_1y_2=|\\vec a||\\vec b|\\cos\\theta$, where $\\theta$ is the angle between them. Hence $\\cos\\theta=\\frac{\\vec a\\cdot\\vec b}{|\\vec a||\\vec b|}$. Vectors are perpendicular iff $\\vec a\\cdot\\vec b=0$."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "The scalar product is a NUMBER, not a vector. $\\vec{AB}=\\vec{OB}-\\vec{OA}$ (end minus start). The magnitude of $\\vec{AB}$ is a length, never negative."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "$A(1,2)$ and $B(4,6)$. Find $\\vec{AB}$, its length and a unit vector in its direction.",
+     "steps": [
+      "$\\vec{AB}=(4-1,6-2)=(3,4)$.",
+      "$|\\vec{AB}|=\\sqrt{9+16}=5$.",
+      "Unit vector $\\frac{1}{5}(3,4)=(0.6,0.8)$."
+     ],
+     "answer": "$\\vec{AB}=(3,4)$, length 5, unit vector $(0.6,0.8)$",
+     "figure": {
+      "kind": "shapes",
+      "w": 320,
+      "h": 320,
+      "items": [
+       {
+        "t": "line",
+        "x1": 28.0,
+        "y1": 258.0,
+        "x2": 292.0,
+        "y2": 258.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 62.0,
+        "y1": 292.0,
+        "x2": 62.0,
+        "y2": 28.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 118.0,
+        "y1": 255.0,
+        "x2": 118.0,
+        "y2": 261.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 118.0,
+        "y": 275.0,
+        "text": "2",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 174.0,
+        "y1": 255.0,
+        "x2": 174.0,
+        "y2": 261.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 174.0,
+        "y": 275.0,
+        "text": "4",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 230.0,
+        "y1": 255.0,
+        "x2": 230.0,
+        "y2": 261.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 230.0,
+        "y": 275.0,
+        "text": "6",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 59.0,
+        "y1": 202.0,
+        "x2": 65.0,
+        "y2": 202.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 54.0,
+        "y": 206.0,
+        "text": "2",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 59.0,
+        "y1": 146.0,
+        "x2": 65.0,
+        "y2": 146.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 54.0,
+        "y": 150.0,
+        "text": "4",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 59.0,
+        "y1": 90.0,
+        "x2": 65.0,
+        "y2": 90.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 54.0,
+        "y": 94.0,
+        "text": "6",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 62.0,
+        "y1": 258.0,
+        "x2": 90.0,
+        "y2": 202.0,
+        "color": "grey",
+        "width": 2,
+        "dash": true,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 62.0,
+        "y1": 258.0,
+        "x2": 174.0,
+        "y2": 90.0,
+        "color": "grey",
+        "width": 2,
+        "dash": true,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 90.0,
+        "y1": 202.0,
+        "x2": 174.0,
+        "y2": 90.0,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "circle",
+        "cx": 90.0,
+        "cy": 202.0,
+        "r": 4,
+        "stroke": "red",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 78.0,
+        "y": 206.0,
+        "text": "A",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 174.0,
+        "cy": 90.0,
+        "r": 4,
+        "stroke": "red",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 186.0,
+        "y": 94.0,
+        "text": "B",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 151.60000000000002,
+        "y": 157.20000000000002,
+        "text": "AB = (3, 4)",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "$A(1,2)$, $B(7,8)$. The point $P$ lies on $AB$ with $AP:PB=2:1$. Find $P$.",
+     "steps": [
+      "$\\vec{OP}=\\frac{1\\cdot\\vec{OA}+2\\cdot\\vec{OB}}{3}=\\frac{(1,2)+(14,16)}{3}$.",
+      "$=\\frac{(15,18)}{3}=(5,6)$. Check: $\\vec{AP}=(4,4)$, $\\vec{PB}=(2,2)$, ratio 2:1."
+     ],
+     "answer": "$P(5,6)$"
+    }
+   ],
+   "chapter": "lower6-maths-vectors"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "lower6-maths-vectors-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-maths-vectors-2d",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find $|(5,12)|$.",
+   "answer": 13,
+   "tolerance": 0,
+   "explanation": "$\\sqrt{25+144}=13$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-maths-vectors"
+  },
+  {
+   "id": "lower6-maths-vectors-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-maths-vectors-2d",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "If $\\vec a=(2,-1)$ and $\\vec b=(-3,4)$, then $\\vec a+2\\vec b=$",
+   "choices": [
+    "$(-1,3)$",
+    "$(-4,7)$",
+    "$(-4,2)$",
+    "$(4,-7)$"
+   ],
+   "answer": 1,
+   "explanation": "$(2-6,-1+8)$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-maths-vectors"
+  },
+  {
+   "id": "lower6-maths-vectors-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-maths-vectors-2d",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The vectors $(2,3)$ and $(4,6)$ are parallel.",
+   "answer": true,
+   "explanation": "$(4,6)=2(2,3)$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-maths-vectors"
+  },
+  {
+   "id": "lower6-maths-vectors-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-maths-vectors-2d",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the angle between $(1,2)$ and $(3,-1)$ in degrees (1 d.p.).",
+   "answer": 81.9,
+   "tolerance": 0.1,
+   "explanation": "Dot product $3-2=1$; $|\\vec a||\\vec b|=\\sqrt5\\sqrt{10}=\\sqrt{50}$; $\\cos\\theta=\\frac{1}{\\sqrt{50}}$, $\\theta\\approx81.9\\degree$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-maths-vectors"
+  },
+  {
+   "id": "lower6-maths-vectors-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "lower6-maths-vectors-2d",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Show that $A(1,1)$, $B(3,2)$ and $C(7,4)$ are collinear.",
+   "model": "$\\vec{AB}=(2,1)$ and $\\vec{BC}=(4,2)=2\\vec{AB}$. The vectors are parallel and share the point $B$, so $A$, $B$, $C$ lie on one straight line.",
+   "rubric": [
+    "Both vectors (1)",
+    "$\\vec{BC}=2\\vec{AB}$ (1)",
+    "Conclusion with common point (1)"
+   ],
+   "explanation": "$\\vec{AB}=(2,1)$ and $\\vec{BC}=(4,2)=2\\vec{AB}$. The vectors are parallel and share the point $B$, so $A$, $B$, $C$ lie on one straight line.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-maths-vectors"
+  },
+  {
+   "id": "lower6-maths-vectors-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-maths-vectors-2d",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$O(0,0)$, $A(4,1)$ and $B(6,5)$. $OABC$ is a parallelogram.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find $|\\vec{AB}|$ (2 d.p.).",
+     "answer": 4.47,
+     "tolerance": 0.01,
+     "explanation": "$\\vec{AB}=(2,4)$, $\\sqrt{20}\\approx4.47$.",
+     "id": "lower6-maths-vectors-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "Find the coordinates of $C$.",
+     "choices": [
+      "$(10,6)$",
+      "$(4,2)$",
+      "$(2,4)$",
+      "$(-2,-4)$"
+     ],
+     "answer": 2,
+     "explanation": "$\\vec{OC}=\\vec{AB}=(2,4)$ because opposite sides are equal and parallel.",
+     "id": "lower6-maths-vectors-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the angle between $(3,4)$ and $(5,-12)$ in degrees (1 d.p.).",
+     "answer": 120.5,
+     "tolerance": 0.1,
+     "explanation": "Dot $=15-48=-33$; $\\cos\\theta=\\frac{-33}{5\\times13}=-0.5077$; $\\theta\\approx120.5\\degree$.",
+     "id": "lower6-maths-vectors-e06-c"
+    }
+   ],
+   "chapter": "lower6-maths-vectors"
+  },
+  {
+   "id": "lower6-maths-vectors-2d-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-vectors-2d",
+   "prompt": "$\\vec{AB}$ when $A(2,3)$ and $B(5,7)$ is",
+   "choices": [
+    "$(3,4)$",
+    "$(4,3)$",
+    "$(-3,-4)$",
+    "$(7,10)$"
+   ],
+   "answer": 0,
+   "explanation": "End minus start.",
+   "chapter": "lower6-maths-vectors"
+  },
+  {
+   "id": "lower6-maths-vectors-2d-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-vectors-2d",
+   "prompt": "$(1,2)\\cdot(3,4)=$",
+   "choices": [
+    "$7$",
+    "$11$",
+    "$(3,8)$",
+    "$10$"
+   ],
+   "answer": 1,
+   "explanation": "$3+8$.",
+   "chapter": "lower6-maths-vectors"
+  },
+  {
+   "id": "lower6-maths-vectors-2d-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-vectors-2d",
+   "prompt": "$(2,k)\\perp(3,4)$ when $k=$",
+   "choices": [
+    "$-1.5$",
+    "$-\\frac{2}{3}$",
+    "$1.5$",
+    "$6$"
+   ],
+   "answer": 0,
+   "explanation": "$6+4k=0$.",
+   "chapter": "lower6-maths-vectors"
+  },
+  {
+   "id": "lower6-maths-vectors-2d-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-vectors-2d",
+   "prompt": "The unit vector along $(0,5)$ is",
+   "choices": [
+    "$(1,0)$",
+    "$(0,0.2)$",
+    "$(0,1)$",
+    "$(0,5)$"
+   ],
+   "answer": 2,
+   "explanation": "Divide by 5.",
+   "chapter": "lower6-maths-vectors"
+  },
+  {
+   "id": "lower6-maths-vectors-2d-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-vectors-2d",
+   "prompt": "$|(3,-4)|$ equals",
+   "choices": [
+    "$7$",
+    "$5$",
+    "$1$",
+    "$-5$"
+   ],
+   "answer": 1,
+   "explanation": "$\\sqrt{25}$.",
+   "chapter": "lower6-maths-vectors"
+  }
+ ]
+}

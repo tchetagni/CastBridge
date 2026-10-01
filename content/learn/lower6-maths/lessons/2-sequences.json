@@ -1,0 +1,902 @@
+{
+ "chapter": "lower6-maths-sequences",
+ "lessons": [
+  {
+   "id": "lower6-maths-ap-gp",
+   "title": "Arithmetic and geometric series",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Pure Mathematics (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Use the nth term and sum formulae of an arithmetic progression",
+    "Use the nth term, finite sum and sum to infinity of a geometric progression",
+    "Model growth in context"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-maths-sequences-e01",
+    "lower6-maths-sequences-e02",
+    "lower6-maths-sequences-e03",
+    "lower6-maths-sequences-e04",
+    "lower6-maths-sequences-e05",
+    "lower6-maths-sequences-e06"
+   ],
+   "selfCheck": [
+    "lower6-maths-ap-gp-q1",
+    "lower6-maths-ap-gp-q2",
+    "lower6-maths-ap-gp-q3",
+    "lower6-maths-ap-gp-q4",
+    "lower6-maths-ap-gp-q5"
+   ],
+   "reviewNotes": [
+    "Sigma notation and recurrence relations $u_{n+1}=f(u_n)$ are not covered here.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Arithmetic progression (AP)",
+     "md": "First term $a$, common difference $d$: $u_n=a+(n-1)d$ and $S_n=\\frac{n}{2}\\big(2a+(n-1)d\\big)=\\frac{n}{2}(a+l)$ where $l$ is the last term."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Geometric progression (GP)",
+     "md": "First term $a$, common ratio $r$: $u_n=ar^{n-1}$ and $S_n=\\frac{a(1-r^n)}{1-r}$ ($r\\neq1$). If $|r|<1$ the series converges to $S_\\infty=\\frac{a}{1-r}$."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "bars": [
+       {
+        "label": "Y1",
+        "value": 800,
+        "color": "blue"
+       },
+       {
+        "label": "Y2",
+        "value": 880,
+        "color": "blue"
+       },
+       {
+        "label": "Y3",
+        "value": 968,
+        "color": "blue"
+       },
+       {
+        "label": "Y4",
+        "value": 1065,
+        "color": "blue"
+       },
+       {
+        "label": "Y5",
+        "value": 1171,
+        "color": "blue"
+       },
+       {
+        "label": "Y6",
+        "value": 1288,
+        "color": "blue"
+       }
+      ],
+      "unit": "kg"
+     },
+     "caption": "Yearly cocoa harvest growing by 10% per year: a geometric progression.",
+     "alt": "Six bars of increasing height from 800 kg to about 1288 kg."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Method",
+     "md": "Write what you know as equations in $a$ and $d$ (or $a$ and $r$), solve them, then apply the sum formula. For a GP, find $r$ by dividing a term by the previous one. Always check $|r|<1$ before using $S_\\infty$."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- The nth term uses $(n-1)$, not $n$.\n- $S_\\infty$ does NOT exist if $|r|\\geq1$.\n- Do not confuse $u_n$ (one term) with $S_n$ (sum of $n$ terms)."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "An AP has 5th term 17 and 12th term 52. Find $a$, $d$ and $S_{20}$.",
+     "steps": [
+      "$u_{12}-u_5=7d=35$, so $d=5$.",
+      "$a+4d=17$ gives $a=-3$.",
+      "$S_{20}=10\\big(2(-3)+19\\times5\\big)=10\\times89$."
+     ],
+     "answer": "$a=-3$, $d=5$, $S_{20}=890$"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "A GP begins $8,\\,12,\\,18,s'$ Find $u_6$. Then find $S_\\infty$ of $20+10+5+\\cdots$",
+     "steps": [
+      "$r=\\frac{12}{8}=1.5$ and $u_6=8\\times1.5^5=60.75$.",
+      "For $20+10+5+\\cdots$: $a=20$, $r=\\frac{1}{2}$, so $S_\\infty=\\frac{20}{1-0.5}$."
+     ],
+     "answer": "$u_6=60.75$; $S_\\infty=40$"
+    }
+   ],
+   "chapter": "lower6-maths-sequences"
+  },
+  {
+   "id": "lower6-maths-binomial",
+   "title": "The binomial theorem",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Mathematics, Pure Mathematics (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Expand $(a+b)^n$ for positive integer $n$",
+    "Find a required term or coefficient",
+    "Use the expansion to approximate powers"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-maths-sequences-e07",
+    "lower6-maths-sequences-e08",
+    "lower6-maths-sequences-e09",
+    "lower6-maths-sequences-e10",
+    "lower6-maths-sequences-e11",
+    "lower6-maths-sequences-e12"
+   ],
+   "selfCheck": [
+    "lower6-maths-binomial-q1",
+    "lower6-maths-binomial-q2",
+    "lower6-maths-binomial-q3",
+    "lower6-maths-binomial-q4",
+    "lower6-maths-binomial-q5"
+   ],
+   "reviewNotes": [
+    "Binomial series for negative or fractional $n$ is not included (check whether it belongs to Lower Sixth on the official syllabus).",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Binomial expansion",
+     "md": "$(a+b)^n=a^n+C(n,1)a^{n-1}b+C(n,2)a^{n-2}b^2+\\cdots+b^n$ where $C(n,r)=\\frac{n!}{r!(n-r)!}$. The general term is $C(n,r)\\,a^{n-r}b^r$. There are $n+1$ terms."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Pascal's triangle",
+     "md": "Each entry is the sum of the two above it, and row $n$ gives the coefficients $C(n,0),s',C(n,n)$. For small $n$ it is quick: row 4 is $1,4,6,4,1$."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Useful form",
+     "md": "$(1+x)^n=1+nx+\\frac{n(n-1)}{2!}x^2+\\frac{n(n-1)(n-2)}{3!}x^3+\\cdots$ For small $x$ the first few terms give a good approximation, e.g. $1.01^6\\approx1+0.06+0.0015$."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Apply the power to the WHOLE term: in $(1+2x)^4$ the $x^2$ term uses $2^2=4$.\n- With $(2-x)^6$ remember signs: odd powers of $-x$ are negative.\n- The coefficient is not the term: the term in $x^3$ includes $x^3$."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Expand $(1+2x)^4$.",
+     "steps": [
+      "Coefficients from row 4: $1,4,6,4,1$ and powers of $2x$: $1,\\,2x,\\,4x^2,\\,8x^3,\\,16x^4$.",
+      "Multiply: $1,\\;4\\times2=8,\\;6\\times4=24,\\;4\\times8=32,\\;16$."
+     ],
+     "answer": "$1+8x+24x^2+32x^3+16x^4$",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 250,
+      "items": [
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 30,
+        "text": "1",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 34,
+        "y": 30,
+        "text": "n=0",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 174.0,
+        "y": 68,
+        "text": "1",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 226.0,
+        "y": 68,
+        "text": "1",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 34,
+        "y": 68,
+        "text": "n=1",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 148.0,
+        "y": 106,
+        "text": "1",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 106,
+        "text": "2",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 252.0,
+        "y": 106,
+        "text": "1",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 34,
+        "y": 106,
+        "text": "n=2",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 122.0,
+        "y": 144,
+        "text": "1",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 174.0,
+        "y": 144,
+        "text": "3",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 226.0,
+        "y": 144,
+        "text": "3",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 278.0,
+        "y": 144,
+        "text": "1",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 34,
+        "y": 144,
+        "text": "n=3",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 96.0,
+        "y": 182,
+        "text": "1",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 148.0,
+        "y": 182,
+        "text": "4",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 182,
+        "text": "6",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 252.0,
+        "y": 182,
+        "text": "4",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 304.0,
+        "y": 182,
+        "text": "1",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 34,
+        "y": 182,
+        "text": "n=4",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 70.0,
+        "y": 220,
+        "text": "1",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 122.0,
+        "y": 220,
+        "text": "5",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 174.0,
+        "y": 220,
+        "text": "10",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 226.0,
+        "y": 220,
+        "text": "10",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 278.0,
+        "y": 220,
+        "text": "5",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 330.0,
+        "y": 220,
+        "text": "1",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 34,
+        "y": 220,
+        "text": "n=5",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Find the coefficient of $x^3$ in $(2-x)^6$.",
+     "steps": [
+      "General term: $C(6,r)\\,2^{6-r}(-x)^r$; take $r=3$.",
+      "$C(6,3)=20$, $2^3=8$, $(-1)^3=-1$: $20\\times8\\times(-1)$."
+     ],
+     "answer": "$-160$"
+    }
+   ],
+   "chapter": "lower6-maths-sequences"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "lower6-maths-sequences-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-maths-ap-gp",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the 15th term of $3,7,11,15,s'$",
+   "answer": 59,
+   "tolerance": 0,
+   "explanation": "$a=3$, $d=4$: $u_{15}=3+14\\times4=59$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-maths-sequences"
+  },
+  {
+   "id": "lower6-maths-sequences-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-maths-ap-gp",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The sum of $2+6+18+54+162$ is",
+   "choices": [
+    "$162$",
+    "$486$",
+    "$242$",
+    "$240$"
+   ],
+   "answer": 2,
+   "explanation": "$a=2$, $r=3$: $S_5=\\frac{2(3^5-1)}{2}=242$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-maths-sequences"
+  },
+  {
+   "id": "lower6-maths-sequences-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-maths-ap-gp",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A GP with $r=-1.5$ has a sum to infinity.",
+   "answer": false,
+   "explanation": "False: it needs $|r|<1$; here $|r|=1.5$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-maths-sequences"
+  },
+  {
+   "id": "lower6-maths-sequences-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-maths-ap-gp",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The sum to infinity of $0.3+0.03+0.003+\\cdots$ is",
+   "choices": [
+    "$\\frac{3}{10}$",
+    "$\\frac{1}{3}$",
+    "$0.33$",
+    "$3$"
+   ],
+   "answer": 1,
+   "explanation": "$a=0.3$, $r=0.1$: $\\frac{0.3}{0.9}=\\frac{1}{3}$.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-maths-sequences"
+  },
+  {
+   "id": "lower6-maths-sequences-e05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-maths-ap-gp",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A trader in Kumba saves 2000 FCFA in month 1 and 500 FCFA more each month than the month before. How many FCFA has she saved in total after 12 months?",
+   "answer": 57000,
+   "tolerance": 0,
+   "explanation": "AP: $a=2000$, $d=500$: $S_{12}=6(4000+11\\times500)=6\\times9500=57000$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-maths-sequences"
+  },
+  {
+   "id": "lower6-maths-sequences-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-maths-ap-gp",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A cocoa farmer near Mbalmayo harvests 800 kg in year 1, and each year's harvest is 10% bigger than the year before (a GP with $r=1.1$).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the harvest in year 6 (kg, nearest kg).",
+     "answer": 1288,
+     "tolerance": 1,
+     "explanation": "$800\\times1.1^5=1288.4$.",
+     "id": "lower6-maths-sequences-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 3,
+     "prompt": "Find the total harvest over the first 6 years (kg, nearest kg).",
+     "answer": 6172,
+     "tolerance": 1,
+     "explanation": "$S_6=\\frac{800(1.1^6-1)}{0.1}=6172.5$.",
+     "id": "lower6-maths-sequences-e06-b"
+    }
+   ],
+   "figure": {
+    "kind": "bars",
+    "w": 400,
+    "h": 240,
+    "bars": [
+     {
+      "label": "Y1",
+      "value": 800,
+      "color": "blue"
+     },
+     {
+      "label": "Y2",
+      "value": 880,
+      "color": "blue"
+     },
+     {
+      "label": "Y3",
+      "value": 968,
+      "color": "blue"
+     },
+     {
+      "label": "Y4",
+      "value": 1065,
+      "color": "blue"
+     },
+     {
+      "label": "Y5",
+      "value": 1171,
+      "color": "blue"
+     },
+     {
+      "label": "Y6",
+      "value": 1288,
+      "color": "blue"
+     }
+    ],
+    "unit": "kg"
+   },
+   "chapter": "lower6-maths-sequences"
+  },
+  {
+   "id": "lower6-maths-ap-gp-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-ap-gp",
+   "prompt": "The common difference of $9,5,1,-3$ is",
+   "choices": [
+    "$5$",
+    "$4$",
+    "$-3$",
+    "$-4$"
+   ],
+   "answer": 3,
+   "explanation": "Each term is 4 less.",
+   "chapter": "lower6-maths-sequences"
+  },
+  {
+   "id": "lower6-maths-ap-gp-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-ap-gp",
+   "prompt": "The sum $1+2+3+\\cdots+100$ is",
+   "choices": [
+    "$10100$",
+    "$5100$",
+    "$5050$",
+    "$5000$"
+   ],
+   "answer": 2,
+   "explanation": "$\\frac{100}{2}(1+100)$.",
+   "chapter": "lower6-maths-sequences"
+  },
+  {
+   "id": "lower6-maths-ap-gp-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-ap-gp",
+   "prompt": "In a GP $a=3$, $r=2$: the 4th term is",
+   "choices": [
+    "$48$",
+    "$9$",
+    "$12$",
+    "$24$"
+   ],
+   "answer": 3,
+   "explanation": "$3\\times2^3$.",
+   "chapter": "lower6-maths-sequences"
+  },
+  {
+   "id": "lower6-maths-ap-gp-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-ap-gp",
+   "prompt": "$S_\\infty$ for $a=6$, $r=\\frac{1}{3}$ is",
+   "choices": [
+    "$9$",
+    "$6$",
+    "$18$",
+    "$2$"
+   ],
+   "answer": 0,
+   "explanation": "$\\frac{6}{2/3}=9$.",
+   "chapter": "lower6-maths-sequences"
+  },
+  {
+   "id": "lower6-maths-ap-gp-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-ap-gp",
+   "prompt": "$4,\\,x,\\,9$ are consecutive terms of a GP with $x>0$. Then $x=$",
+   "choices": [
+    "$6$",
+    "$36$",
+    "$\\sqrt{13}$",
+    "$6.5$"
+   ],
+   "answer": 0,
+   "explanation": "$x^2=36$.",
+   "chapter": "lower6-maths-sequences"
+  },
+  {
+   "id": "lower6-maths-sequences-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-maths-binomial",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Evaluate $C(8,3)$.",
+   "answer": 56,
+   "tolerance": 0,
+   "explanation": "$\\frac{8\\times7\\times6}{3\\times2\\times1}=56$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-maths-sequences"
+  },
+  {
+   "id": "lower6-maths-sequences-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-maths-binomial",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The coefficient of $x^2$ in $(1+3x)^5$ is",
+   "choices": [
+    "$10$",
+    "$45$",
+    "$90$",
+    "$30$"
+   ],
+   "answer": 2,
+   "explanation": "$C(5,2)\\times3^2=10\\times9$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-maths-sequences"
+  },
+  {
+   "id": "lower6-maths-sequences-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-maths-binomial",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The expansion of $(a+b)^n$ has $n$ terms.",
+   "answer": false,
+   "explanation": "It has $n+1$ terms: for $n=2$ we get $a^2+2ab+b^2$, three terms.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-maths-sequences"
+  },
+  {
+   "id": "lower6-maths-sequences-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-maths-binomial",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The term independent of $x$ in $\\left(x+\\frac{1}{x}\\right)^6$ is",
+   "choices": [
+    "$15$",
+    "$1$",
+    "$6$",
+    "$20$"
+   ],
+   "answer": 3,
+   "explanation": "Need equal powers of $x$ and $\\frac1x$: $r=3$, $C(6,3)=20$.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-maths-sequences"
+  },
+  {
+   "id": "lower6-maths-sequences-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "lower6-maths-binomial",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Use the first three terms of the expansion of $(1+x)^6$ with $x=0.01$ to estimate $1.01^6$.",
+   "model": "$(1+x)^6\\approx1+6x+15x^2=1+0.06+15(0.0001)=1+0.06+0.0015=1.0615$. (The exact value is about $1.06152$.)",
+   "rubric": [
+    "Correct coefficients $1,6,15$ (1)",
+    "Substitutes $x=0.01$ (1)",
+    "Result $1.0615$ (1)"
+   ],
+   "explanation": "$(1+x)^6\\approx1+6x+15x^2=1+0.06+15(0.0001)=1+0.06+0.0015=1.0615$. (The exact value is about $1.06152$.)",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-maths-sequences"
+  },
+  {
+   "id": "lower6-maths-sequences-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-maths-binomial",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The expansion of $(1+ax)^5$ begins $1+10x+bx^2+cx^3+\\cdots$",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find $a$.",
+     "answer": 2,
+     "tolerance": 0,
+     "explanation": "The $x$ coefficient is $5a=10$.",
+     "id": "lower6-maths-sequences-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find $b$.",
+     "answer": 40,
+     "tolerance": 0,
+     "explanation": "$b=C(5,2)a^2=10\\times4$.",
+     "id": "lower6-maths-sequences-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find $c$.",
+     "answer": 80,
+     "tolerance": 0,
+     "explanation": "$c=C(5,3)a^3=10\\times8$.",
+     "id": "lower6-maths-sequences-e12-c"
+    }
+   ],
+   "chapter": "lower6-maths-sequences"
+  },
+  {
+   "id": "lower6-maths-binomial-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-binomial",
+   "prompt": "Row 5 of Pascal's triangle is",
+   "choices": [
+    "$1,5,10,5,1$",
+    "$1,5,5,5,5,1$",
+    "$1,4,6,4,1$",
+    "$1,5,10,10,5,1$"
+   ],
+   "answer": 3,
+   "explanation": "Add adjacent entries of row 4.",
+   "chapter": "lower6-maths-sequences"
+  },
+  {
+   "id": "lower6-maths-binomial-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-binomial",
+   "prompt": "$C(5,0)$ equals",
+   "choices": [
+    "$0$",
+    "$5$",
+    "$\\frac{1}{5}$",
+    "$1$"
+   ],
+   "answer": 3,
+   "explanation": "$\\frac{5!}{0!5!}$.",
+   "chapter": "lower6-maths-sequences"
+  },
+  {
+   "id": "lower6-maths-binomial-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-binomial",
+   "prompt": "The $x^2$ term of $(1+x)^7$ has coefficient",
+   "choices": [
+    "$42$",
+    "$14$",
+    "$21$",
+    "$7$"
+   ],
+   "answer": 2,
+   "explanation": "$\\frac{7\\times6}{2}$.",
+   "chapter": "lower6-maths-sequences"
+  },
+  {
+   "id": "lower6-maths-binomial-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-binomial",
+   "prompt": "The first three terms of $(1-2x)^4$ are",
+   "choices": [
+    "$1-8x+6x^2$",
+    "$1-8x+24x^2$",
+    "$1+8x+24x^2$",
+    "$1-2x+x^2$"
+   ],
+   "answer": 1,
+   "explanation": "$1,\\;4(-2x),\\;6(4x^2)$.",
+   "chapter": "lower6-maths-sequences"
+  },
+  {
+   "id": "lower6-maths-binomial-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-maths-binomial",
+   "prompt": "$(a+b)^3$ expands to",
+   "choices": [
+    "$a^3+3ab+b^3$",
+    "$a^3+3a^2b+3ab^2+b^3$",
+    "$a^3+b^3$",
+    "$a^3+a^2b+ab^2+b^3$"
+   ],
+   "answer": 1,
+   "explanation": "Coefficients $1,3,3,1$.",
+   "chapter": "lower6-maths-sequences"
+  }
+ ]
+}

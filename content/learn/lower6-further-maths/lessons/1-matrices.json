@@ -1,0 +1,1063 @@
+{
+ "chapter": "lower6-further-maths-matrices",
+ "lessons": [
+  {
+   "id": "lower6-further-maths-matrices-2x2",
+   "title": "Matrices: algebra, determinant and inverse (2×2)",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Further Mathematics syllabus (Lower Sixth part; scope to be checked against the official text)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Add, multiply and scale matrices",
+    "Find determinants and inverses of 2×2 matrices",
+    "Solve simultaneous equations with matrices"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-further-maths-matrices-e01",
+    "lower6-further-maths-matrices-e02",
+    "lower6-further-maths-matrices-e03",
+    "lower6-further-maths-matrices-e04",
+    "lower6-further-maths-matrices-e05",
+    "lower6-further-maths-matrices-e06"
+   ],
+   "selfCheck": [
+    "lower6-further-maths-matrices-2x2-q1",
+    "lower6-further-maths-matrices-2x2-q2",
+    "lower6-further-maths-matrices-2x2-q3",
+    "lower6-further-maths-matrices-2x2-q4",
+    "lower6-further-maths-matrices-2x2-q5"
+   ],
+   "reviewNotes": [
+    "Whether this topic is on the Cameroon GCE Board Further Mathematics syllabus (and in which year) is to be confirmed: it is standard A-Level Further Maths content.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Matrices",
+     "md": "A matrix is a rectangular array of numbers. Here a matrix is written row by row: [[2, 1], [3, 4]] has rows (2 1) and (3 4). Add or subtract matrices of the same size entry by entry. Multiply row of the first by column of the second: an $m\\times n$ matrix times an $n\\times p$ matrix gives $m\\times p$. Usually $AB\\neq BA$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Determinant and inverse",
+     "md": "For $A=$ [[a, b], [c, d]]: $\\text{det}\\, A=ad-bc$. If $\\text{det}\\, A\\neq0$: $A^{-1}=\\frac{1}{ad-bc}$ [[d, −b], [−c, a]]. If $\\text{det}\\, A=0$ the matrix is **singular** (no inverse). $AA^{-1}=A^{-1}A=I$ (identity) and $(AB)^{-1}=B^{-1}A^{-1}$; $\\text{det}\\,(AB)=\\text{det}\\, A\\,\\text{det}\\, B$."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Simultaneous equations",
+     "md": "Write the system as $A\\vec{x}=\\vec{b}$. If $\\text{det}\\, A\\neq0$ then $\\vec{x}=A^{-1}\\vec{b}$ (multiply on the LEFT). If $\\text{det}\\, A=0$ there is no unique solution (none or infinitely many)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Multiplying entry by entry: that is NOT matrix multiplication.\n- $(AB)^{-1}=B^{-1}A^{-1}$: the order reverses.\n- In the inverse, swap $a$ and $d$ and CHANGE the signs of $b$ and $c$, then divide by the determinant."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "$A=$ [[2, 1], [3, 4]] and $B=$ [[1, 0], [−1, 2]]. Find $AB$ and $BA$.",
+     "steps": [
+      "$AB$: row 1 of $A$ with columns of $B$: $2(1)+1(-1)=1$ and $2(0)+1(2)=2$. Row 2: $3(1)+4(-1)=-1$ and $3(0)+4(2)=8$. So $AB=$ [[1, 2], [−1, 8]].",
+      "$BA$: $1(2)+0(3)=2$, $1(1)+0(4)=1$; $-1(2)+2(3)=4$, $-1(1)+2(4)=7$. So $BA=$ [[2, 1], [4, 7]], different from $AB$."
+     ],
+     "answer": "$AB=$ [[1, 2], [−1, 8]]; $BA=$ [[2, 1], [4, 7]]",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 110,
+      "items": [
+       {
+        "t": "line",
+        "x1": 29.0,
+        "y1": 27.0,
+        "x2": 29.0,
+        "y2": 83.4,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 29.0,
+        "y1": 27.0,
+        "x2": 35.0,
+        "y2": 27.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 29.0,
+        "y1": 83.4,
+        "x2": 35.0,
+        "y2": 83.4,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 105.0,
+        "y1": 27.0,
+        "x2": 105.0,
+        "y2": 83.4,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 105.0,
+        "y1": 27.0,
+        "x2": 99.0,
+        "y2": 27.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 105.0,
+        "y1": 83.4,
+        "x2": 99.0,
+        "y2": 83.4,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 50,
+        "y": 50,
+        "text": "2",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 84,
+        "y": 50,
+        "text": "1",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 50,
+        "y": 74,
+        "text": "3",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 84,
+        "y": 74,
+        "text": "4",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 140,
+        "y": 50,
+        "text": "×",
+        "size": 20,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 159.0,
+        "y1": 27.0,
+        "x2": 159.0,
+        "y2": 83.4,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 159.0,
+        "y1": 27.0,
+        "x2": 165.0,
+        "y2": 27.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 159.0,
+        "y1": 83.4,
+        "x2": 165.0,
+        "y2": 83.4,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 235.0,
+        "y1": 27.0,
+        "x2": 235.0,
+        "y2": 83.4,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 235.0,
+        "y1": 27.0,
+        "x2": 229.0,
+        "y2": 27.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 235.0,
+        "y1": 83.4,
+        "x2": 229.0,
+        "y2": 83.4,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 50,
+        "text": "1",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 214,
+        "y": 50,
+        "text": "0",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 74,
+        "text": "−1",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 214,
+        "y": 74,
+        "text": "2",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 262,
+        "y": 50,
+        "text": "=",
+        "size": 20,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 279.0,
+        "y1": 27.0,
+        "x2": 279.0,
+        "y2": 83.4,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 279.0,
+        "y1": 27.0,
+        "x2": 285.0,
+        "y2": 27.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 279.0,
+        "y1": 83.4,
+        "x2": 285.0,
+        "y2": 83.4,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 355.0,
+        "y1": 27.0,
+        "x2": 355.0,
+        "y2": 83.4,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 355.0,
+        "y1": 27.0,
+        "x2": 349.0,
+        "y2": 27.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 355.0,
+        "y1": 83.4,
+        "x2": 349.0,
+        "y2": 83.4,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 50,
+        "text": "1",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 334,
+        "y": 50,
+        "text": "2",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 74,
+        "text": "−1",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 334,
+        "y": 74,
+        "text": "8",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Find $A^{-1}$ for $A=$ [[2, 1], [3, 4]] and solve $2x+y=5$, $3x+4y=10$.",
+     "steps": [
+      "$\\text{det}\\, A=8-3=5$, so $A^{-1}=\\frac{1}{5}$ [[4, −1], [−3, 2]].",
+      "$\\vec{x}=A^{-1}$ (5, 10) $=\\frac{1}{5}$ (20−10, −15+20) $=$ (2, 1). Check: $2(2)+1=5$, $3(2)+4(1)=10$."
+     ],
+     "answer": "$x=2$, $y=1$"
+    }
+   ],
+   "chapter": "lower6-further-maths-matrices"
+  },
+  {
+   "id": "lower6-further-maths-transformations",
+   "title": "Linear transformations",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Further Mathematics syllabus (Lower Sixth part; scope to be checked against the official text)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Find the matrix of a transformation from the images of $(1,0)$ and $(0,1)$",
+    "Use rotation, reflection, enlargement and shear matrices",
+    "Use the determinant as the area scale factor and combine transformations"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-further-maths-matrices-e07",
+    "lower6-further-maths-matrices-e08",
+    "lower6-further-maths-matrices-e09",
+    "lower6-further-maths-matrices-e10",
+    "lower6-further-maths-matrices-e11",
+    "lower6-further-maths-matrices-e12"
+   ],
+   "selfCheck": [
+    "lower6-further-maths-transformations-q1",
+    "lower6-further-maths-transformations-q2",
+    "lower6-further-maths-transformations-q3",
+    "lower6-further-maths-transformations-q4",
+    "lower6-further-maths-transformations-q5"
+   ],
+   "reviewNotes": [
+    "Whether this topic is on the Cameroon GCE Board Further Mathematics syllabus (and in which year) is to be confirmed: it is standard A-Level Further Maths content.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Matrix of a transformation",
+     "md": "The matrix [[a, b], [c, d]] maps the point $(x,y)$ to $(ax+by,\\;cx+dy)$. Its FIRST column is the image of $(1,0)$ and its SECOND column the image of $(0,1)$. So you can write the matrix straight from the images of the unit vectors."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Standard matrices",
+     "md": "Rotation through $\\theta$ anticlockwise about the origin: [[cos θ, −sin θ], [sin θ, cos θ]]. Reflection in the x-axis [[1, 0], [0, −1]]; in the y-axis [[−1, 0], [0, 1]]; in $y=x$ [[0, 1], [1, 0]]. Enlargement scale factor $k$ centre $O$: [[k, 0], [0, k]]. Shear (x-direction, factor $s$): [[1, s], [0, 1]]."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Area and composition",
+     "md": "Area of image $=|\\text{det}\\, M|\\times$ area of object. A negative determinant means the orientation is reversed (a reflection). 'Transformation $B$ followed by $A$' has matrix $AB$ (the first transformation is on the RIGHT). Invariant points satisfy $M\\vec{x}=\\vec{x}$."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "Writing the images as rows instead of columns. Reversing the order of composition. Forgetting the modulus in the area factor."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Find the image of $(3,1)$ under a rotation of $90\\degree$ anticlockwise about $O$.",
+     "steps": [
+      "$(1,0)\\to(0,1)$ and $(0,1)\\to(-1,0)$, so the matrix is [[0, −1], [1, 0]].",
+      "Image of $(3,1)$: $(0\\cdot3-1\\cdot1,\\;1\\cdot3+0\\cdot1)=(-1,3)$."
+     ],
+     "answer": "$(-1,3)$"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "$M=$ [[2, 1], [1, 1]]. Find the images of the corners of the unit square and the area scale factor.",
+     "steps": [
+      "Images: $(1,0)\\to(2,1)$, $(0,1)\\to(1,1)$, $(1,1)\\to(3,2)$, $O\\to O$.",
+      "$\\text{det}\\, M=2\\times1-1\\times1=1$, so the area stays 1 (the parallelogram on the diagram)."
+     ],
+     "answer": "Area scale factor 1",
+     "figure": {
+      "kind": "shapes",
+      "w": 308,
+      "h": 248,
+      "items": [
+       {
+        "t": "line",
+        "x1": 28.0,
+        "y1": 184.0,
+        "x2": 280.0,
+        "y2": 184.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 64.0,
+        "y1": 220.0,
+        "x2": 64.0,
+        "y2": 28.0,
+        "color": "ink",
+        "width": 1.5,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 124.0,
+        "y1": 181.0,
+        "x2": 124.0,
+        "y2": 187.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 124.0,
+        "y": 201.0,
+        "text": "1",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 184.0,
+        "y1": 181.0,
+        "x2": 184.0,
+        "y2": 187.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 184.0,
+        "y": 201.0,
+        "text": "2",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 244.0,
+        "y1": 181.0,
+        "x2": 244.0,
+        "y2": 187.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 244.0,
+        "y": 201.0,
+        "text": "3",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 61.0,
+        "y1": 124.0,
+        "x2": 67.0,
+        "y2": 124.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 56.0,
+        "y": 128.0,
+        "text": "1",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 61.0,
+        "y1": 64.0,
+        "x2": 67.0,
+        "y2": 64.0,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 56.0,
+        "y": 68.0,
+        "text": "2",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         64.0,
+         184.0,
+         124.0,
+         184.0,
+         124.0,
+         124.0,
+         64.0,
+         124.0
+        ],
+        "stroke": "orange",
+        "width": 2,
+        "closed": true,
+        "fill": "yellow"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         64.0,
+         184.0,
+         184.0,
+         124.0,
+         244.0,
+         64.0,
+         124.0,
+         124.0
+        ],
+        "stroke": "blue",
+        "width": 2,
+        "closed": true
+       },
+       {
+        "t": "text",
+        "x": 94.0,
+        "y": 160.0,
+        "text": "unit square",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 202.0,
+        "y": 157.0,
+        "text": "image",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     }
+    }
+   ],
+   "chapter": "lower6-further-maths-matrices"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "lower6-further-maths-matrices-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-further-maths-matrices-2x2",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find $\\text{det}\\,$ [[3, 2], [1, 4]].",
+   "answer": 10,
+   "tolerance": 0,
+   "explanation": "$3\\times4-2\\times1=10$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-further-maths-matrices"
+  },
+  {
+   "id": "lower6-further-maths-matrices-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-further-maths-matrices-2x2",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$(AB)^{-1}$ equals",
+   "choices": [
+    "$B^{-1}A^{-1}$",
+    "$\\frac{1}{AB}$ entrywise",
+    "$A^{-1}B^{-1}$",
+    "$A^{-1}+B^{-1}$"
+   ],
+   "answer": 0,
+   "explanation": "Reverse order.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-further-maths-matrices"
+  },
+  {
+   "id": "lower6-further-maths-matrices-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-further-maths-matrices-2x2",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$AB=BA$ for all $2\\times2$ matrices.",
+   "answer": false,
+   "explanation": "Example 1: $AB\\neq BA$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-further-maths-matrices"
+  },
+  {
+   "id": "lower6-further-maths-matrices-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-further-maths-matrices-2x2",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "[[k, 2], [3, k+1]] is singular when",
+   "choices": [
+    "$k=6$",
+    "$k=2$ or $k=-3$",
+    "$k=3$ or $k=-2$",
+    "$k=2$ only"
+   ],
+   "answer": 1,
+   "explanation": "$k(k+1)-6=0$: $(k-2)(k+3)=0$.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-further-maths-matrices"
+  },
+  {
+   "id": "lower6-further-maths-matrices-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "lower6-further-maths-matrices-2x2",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "For $A=$ [[2, 1], [3, 4]] and $B=$ [[1, 0], [−1, 2]] verify that $\\text{det}\\,(AB)=\\text{det}\\, A\\,\\text{det}\\, B$.",
+   "model": "$\\text{det}\\, A=5$, $\\text{det}\\, B=2$, so the product is 10. $AB=$ [[1, 2], [−1, 8]] and $\\text{det}\\,(AB)=1\\times8-2\\times(-1)=10$.",
+   "rubric": [
+    "$\\text{det}\\, A$ and $\\text{det}\\, B$ (1)",
+    "$AB$ (1)",
+    "Equality shown (1)"
+   ],
+   "explanation": "$\\text{det}\\, A=5$, $\\text{det}\\, B=2$, so the product is 10. $AB=$ [[1, 2], [−1, 8]] and $\\text{det}\\,(AB)=1\\times8-2\\times(-1)=10$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-further-maths-matrices"
+  },
+  {
+   "id": "lower6-further-maths-matrices-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-further-maths-matrices-2x2",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "$M=$ [[1, 2], [3, 5]].",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find $\\text{det}\\, M$.",
+     "answer": -1,
+     "tolerance": 0,
+     "explanation": "$5-6=-1$.",
+     "id": "lower6-further-maths-matrices-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "The inverse is $M^{-1}=$ [[p, 2], [3, −1]]. Find $p$.",
+     "answer": -5,
+     "tolerance": 0,
+     "explanation": "$M^{-1}=\\frac{1}{-1}$ [[5, −2], [−3, 1]] $=$ [[−5, 2], [3, −1]].",
+     "id": "lower6-further-maths-matrices-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Solve $x+2y=4$, $3x+5y=9$. Find $x$.",
+     "answer": -2,
+     "tolerance": 0,
+     "explanation": "$\\vec{x}=M^{-1}$ (4, 9) $=$ (−20+18, 12−9) $=$ (−2, 3).",
+     "id": "lower6-further-maths-matrices-e06-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find $y$.",
+     "answer": 3,
+     "tolerance": 0,
+     "explanation": "From the same product, $y=3$. Check: $3(-2)+5(3)=9$.",
+     "id": "lower6-further-maths-matrices-e06-d"
+    }
+   ],
+   "chapter": "lower6-further-maths-matrices"
+  },
+  {
+   "id": "lower6-further-maths-matrices-2x2-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-further-maths-matrices-2x2",
+   "prompt": "The identity matrix $I$ satisfies",
+   "choices": [
+    "$AI=A^{-1}$",
+    "$AI=0$",
+    "$AI=2A$",
+    "$AI=IA=A$"
+   ],
+   "answer": 3,
+   "explanation": "Definition.",
+   "chapter": "lower6-further-maths-matrices"
+  },
+  {
+   "id": "lower6-further-maths-matrices-2x2-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-further-maths-matrices-2x2",
+   "prompt": "A matrix with $\\text{det}\\,=0$ is called",
+   "choices": [
+    "orthogonal",
+    "diagonal",
+    "singular",
+    "identity"
+   ],
+   "answer": 2,
+   "explanation": "No inverse.",
+   "chapter": "lower6-further-maths-matrices"
+  },
+  {
+   "id": "lower6-further-maths-matrices-2x2-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-further-maths-matrices-2x2",
+   "prompt": "A $2\\times3$ matrix times a $3\\times2$ matrix is",
+   "choices": [
+    "$2\\times3$",
+    "$3\\times3$",
+    "not defined",
+    "$2\\times2$"
+   ],
+   "answer": 3,
+   "explanation": "Outer sizes.",
+   "chapter": "lower6-further-maths-matrices"
+  },
+  {
+   "id": "lower6-further-maths-matrices-2x2-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-further-maths-matrices-2x2",
+   "prompt": "$\\text{det}\\,$ [[1, 2], [3, 4]] is",
+   "choices": [
+    "$-2$",
+    "$10$",
+    "$-10$",
+    "$2$"
+   ],
+   "answer": 0,
+   "explanation": "$4-6$.",
+   "chapter": "lower6-further-maths-matrices"
+  },
+  {
+   "id": "lower6-further-maths-matrices-2x2-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-further-maths-matrices-2x2",
+   "prompt": "To solve $A\\vec{x}=\\vec{b}$ compute",
+   "choices": [
+    "$A^{-1}\\vec{b}$",
+    "$A\\vec{b}$",
+    "$\\vec{b}-A$",
+    "$\\vec{b}A^{-1}$"
+   ],
+   "answer": 0,
+   "explanation": "Left multiplication.",
+   "chapter": "lower6-further-maths-matrices"
+  },
+  {
+   "id": "lower6-further-maths-matrices-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-further-maths-transformations",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "[[1, 2], [0, 1]] maps $(2,1)$ to $(x',y')$. Find $x'$.",
+   "answer": 4,
+   "tolerance": 0,
+   "explanation": "$x'=1(2)+2(1)=4$.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-further-maths-matrices"
+  },
+  {
+   "id": "lower6-further-maths-matrices-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-further-maths-transformations",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The matrix of reflection in the x-axis is",
+   "choices": [
+    "[[1, 0], [0, −1]]",
+    "[[−1, 0], [0, −1]]",
+    "[[−1, 0], [0, 1]]",
+    "[[0, 1], [1, 0]]"
+   ],
+   "answer": 0,
+   "explanation": "$(x,y)\\to(x,-y)$.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-further-maths-matrices"
+  },
+  {
+   "id": "lower6-further-maths-matrices-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-further-maths-transformations",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A matrix with determinant $-2$ doubles areas and reverses orientation.",
+   "answer": true,
+   "explanation": "$|\\text{det}\\,|=2$ and the sign is negative.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-further-maths-matrices"
+  },
+  {
+   "id": "lower6-further-maths-matrices-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-further-maths-transformations",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The unit square is mapped by [[3, 1], [2, 4]]. The area of the image is",
+   "choices": [
+    "12",
+    "10",
+    "14",
+    "5"
+   ],
+   "answer": 1,
+   "explanation": "$\\text{det}\\,=12-2=10$.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-further-maths-matrices"
+  },
+  {
+   "id": "lower6-further-maths-matrices-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "lower6-further-maths-transformations",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Show that reflection in the x-axis followed by a $90\\degree$ anticlockwise rotation about $O$ is reflection in the line $y=x$.",
+   "model": "Reflection $X=$ [[1, 0], [0, −1]]; rotation $R=$ [[0, −1], [1, 0]]. 'X then R' is $RX=$ [[0·1+(−1)·0, 0·0+(−1)(−1)], [1·1+0, 0+0]] $=$ [[0, 1], [1, 0]], which is the matrix of reflection in $y=x$.",
+   "rubric": [
+    "Both matrices (1)",
+    "Product in the right order (1)",
+    "Identifies [[0,1],[1,0]] (1)"
+   ],
+   "explanation": "Reflection $X=$ [[1, 0], [0, −1]]; rotation $R=$ [[0, −1], [1, 0]]. 'X then R' is $RX=$ [[0·1+(−1)·0, 0·0+(−1)(−1)], [1·1+0, 0+0]] $=$ [[0, 1], [1, 0]], which is the matrix of reflection in $y=x$.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-further-maths-matrices"
+  },
+  {
+   "id": "lower6-further-maths-matrices-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-further-maths-transformations",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The matrix $M=$ [[2, 1], [1, 3]] maps triangle $T$ of area 6 to triangle $T'$.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find $\\text{det}\\, M$.",
+     "answer": 5,
+     "tolerance": 0,
+     "explanation": "$6-1=5$.",
+     "id": "lower6-further-maths-matrices-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the area of $T'$.",
+     "answer": 30,
+     "tolerance": 0,
+     "explanation": "$5\\times6=30$.",
+     "id": "lower6-further-maths-matrices-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the y-coordinate of the image of $(1,1)$.",
+     "answer": 4,
+     "tolerance": 0,
+     "explanation": "$M(1,1)=(3,4)$.",
+     "id": "lower6-further-maths-matrices-e12-c"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "$M$ has an inverse.",
+     "answer": true,
+     "explanation": "$\\text{det}\\, M\\neq0$.",
+     "id": "lower6-further-maths-matrices-e12-d"
+    }
+   ],
+   "chapter": "lower6-further-maths-matrices"
+  },
+  {
+   "id": "lower6-further-maths-transformations-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-further-maths-transformations",
+   "prompt": "The first column of a transformation matrix is the image of",
+   "choices": [
+    "$(1,0)$",
+    "$(0,0)$",
+    "$(0,1)$",
+    "$(1,1)$"
+   ],
+   "answer": 0,
+   "explanation": "Unit vector.",
+   "chapter": "lower6-further-maths-matrices"
+  },
+  {
+   "id": "lower6-further-maths-transformations-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-further-maths-transformations",
+   "prompt": "Enlargement with scale factor 3 about $O$ has matrix",
+   "choices": [
+    "[[3, 3], [3, 3]]",
+    "[[1, 3], [3, 1]]",
+    "[[0, 3], [3, 0]]",
+    "[[3, 0], [0, 3]]"
+   ],
+   "answer": 3,
+   "explanation": "Diagonal.",
+   "chapter": "lower6-further-maths-matrices"
+  },
+  {
+   "id": "lower6-further-maths-transformations-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-further-maths-transformations",
+   "prompt": "A rotation matrix has determinant",
+   "choices": [
+    "0",
+    "$-1$",
+    "$\\cos\\theta$",
+    "1"
+   ],
+   "answer": 3,
+   "explanation": "Area preserved.",
+   "chapter": "lower6-further-maths-matrices"
+  },
+  {
+   "id": "lower6-further-maths-transformations-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-further-maths-transformations",
+   "prompt": "'$B$ then $A$' has matrix",
+   "choices": [
+    "$A+B$",
+    "$A^{-1}B$",
+    "$BA$",
+    "$AB$"
+   ],
+   "answer": 3,
+   "explanation": "First on the right.",
+   "chapter": "lower6-further-maths-matrices"
+  },
+  {
+   "id": "lower6-further-maths-transformations-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-further-maths-transformations",
+   "prompt": "Invariant points of $M$ satisfy",
+   "choices": [
+    "$\\text{det}\\, M=0$",
+    "$M=I$",
+    "$M\\vec{x}=\\vec{x}$",
+    "$M\\vec{x}=\\vec{0}$"
+   ],
+   "answer": 2,
+   "explanation": "Unchanged.",
+   "chapter": "lower6-further-maths-matrices"
+  }
+ ]
+}
