@@ -1,0 +1,488 @@
+{
+ "chapter": "sil-sciences-plantes-ch",
+ "lessons": [
+  {
+   "id": "sil-sciences-plantes",
+   "title": "Les plantes",
+   "minutes": 12,
+   "readAloud": true,
+   "programRef": "SIL — Éveil : les parties d'une plante, ce dont elle a besoin (reconstitué)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Nommer la racine, la tige, les feuilles et la fleur.",
+    "Dire ce dont une plante a besoin pour pousser.",
+    "Citer quelques plantes que l'on mange."
+   ],
+   "prerequisites": [
+    "sil-sciences-corps"
+   ],
+   "exercises": [
+    "sil-sciences-plantes-01",
+    "sil-sciences-plantes-02",
+    "sil-sciences-plantes-03",
+    "sil-sciences-plantes-04",
+    "sil-sciences-plantes-05",
+    "sil-sciences-plantes-06"
+   ],
+   "selfCheck": [
+    "sil-sciences-plantes-q1",
+    "sil-sciences-plantes-q2",
+    "sil-sciences-plantes-q3",
+    "sil-sciences-plantes-q4",
+    "sil-sciences-plantes-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier : « les feuilles captent la lumière » reste simplifié ; la photosynthèse n'est pas au programme de SIL.",
+    "Vérifier que le manioc se mange bien par sa racine tubérisée (c'est un fait établi) ; l'enseignant peut ajouter d'autres exemples locaux."
+   ],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "Une plante a des racines, une tige, des feuilles et parfois des fleurs. Elle a besoin d'eau et de soleil.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 360,
+      "h": 280,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 170,
+        "w": 320,
+        "h": 100,
+        "fill": "brown",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 180,
+        "y1": 170,
+        "x2": 140,
+        "y2": 245,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 180,
+        "y1": 170,
+        "x2": 180,
+        "y2": 255,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 180,
+        "y1": 170,
+        "x2": 225,
+        "y2": 245,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 180,
+        "y1": 170,
+        "x2": 180,
+        "y2": 70,
+        "color": "green",
+        "width": 8
+       },
+       {
+        "t": "poly",
+        "pts": [
+         180,
+         130,
+         120,
+         110,
+         150,
+         150
+        ],
+        "fill": "lightgreen",
+        "stroke": "green",
+        "width": 3
+       },
+       {
+        "t": "poly",
+        "pts": [
+         180,
+         115,
+         240,
+         95,
+         210,
+         135
+        ],
+        "fill": "lightgreen",
+        "stroke": "green",
+        "width": 3
+       },
+       {
+        "t": "circle",
+        "cx": 180,
+        "cy": 55,
+        "r": 20,
+        "fill": "pink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 180,
+        "cy": 55,
+        "r": 7,
+        "fill": "yellow",
+        "stroke": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 215,
+        "y": 45,
+        "text": "fleur",
+        "size": 18,
+        "anchor": "start",
+        "bold": true,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 110,
+        "text": "feuille",
+        "size": 18,
+        "anchor": "start",
+        "bold": true,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 195,
+        "y": 150,
+        "text": "tige",
+        "size": 18,
+        "anchor": "start",
+        "bold": true,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 215,
+        "text": "racines",
+        "size": 18,
+        "anchor": "start",
+        "bold": true,
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Les parties d'une plante.",
+     "alt": "Une plante dessinée avec ses racines dans la terre, sa tige verte, deux feuilles et une fleur au sommet."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les parties d'une plante",
+     "md": "- Les **racines** sont dans la terre : elles boivent l'eau.\n- La **tige** porte la plante.\n- Les **feuilles** sont vertes.\n- La **fleur** devient souvent un fruit."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Pour pousser, une plante a besoin de",
+     "md": "de l'**eau**, de la **lumière** du soleil et de la **terre** (ou d'un endroit où planter ses racines)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : arroser",
+     "statement": "Paul oublie d'arroser son haricot pendant longtemps. Que se passe-t-il ?",
+     "steps": [
+      {
+       "md": "La plante n'a plus d'eau."
+      },
+      {
+       "md": "Elle se fane."
+      }
+     ],
+     "answer": "La plante **se fane** sans eau."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : une plante qu'on mange",
+     "statement": "Le manioc est une plante. Quelle partie mange-t-on le plus souvent ?",
+     "steps": [
+      {
+       "md": "On déterre la plante."
+      },
+      {
+       "md": "On mange la grosse racine."
+      }
+     ],
+     "answer": "On mange la **racine** du manioc."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Plantes et fruits",
+     "md": "Beaucoup de fruits viennent d'une fleur : la mangue, la banane, la tomate."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer !"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-sciences-plantes-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-sciences-plantes-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-sciences-plantes-03"
+    },
+    {
+     "type": "heading",
+     "text": "Pour aller plus loin"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-sciences-plantes-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-sciences-plantes-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-sciences-plantes-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sil-sciences-plantes-01",
+   "chapter": "sil-sciences-plantes-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-sciences-plantes",
+   "prompt": "Quelle partie de la plante est dans la terre ?",
+   "choices": [
+    "les feuilles",
+    "la fleur",
+    "les racines",
+    "le fruit"
+   ],
+   "answer": 2,
+   "explanation": "Les racines sont dans la terre."
+  },
+  {
+   "id": "sil-sciences-plantes-02",
+   "chapter": "sil-sciences-plantes-ch",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-sciences-plantes",
+   "prompt": "Vrai ou faux : une plante a besoin d'eau.",
+   "answer": true,
+   "explanation": "Sans eau, la plante se fane."
+  },
+  {
+   "id": "sil-sciences-plantes-03",
+   "chapter": "sil-sciences-plantes-ch",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sil-sciences-plantes",
+   "prompt": "Associe chaque partie à son rôle.",
+   "pairs": [
+    [
+     "les racines",
+     "boire l'eau dans la terre"
+    ],
+    [
+     "la tige",
+     "porter la plante"
+    ],
+    [
+     "les feuilles",
+     "capter la lumière"
+    ],
+    [
+     "la fleur",
+     "donner un fruit"
+    ]
+   ],
+   "explanation": "Chaque partie de la plante a un rôle."
+  },
+  {
+   "id": "sil-sciences-plantes-04",
+   "chapter": "sil-sciences-plantes-ch",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sil-sciences-plantes",
+   "prompt": "Une plante a 2 feuilles. Il en pousse 3 de plus. Combien de feuilles ? ",
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "2 + 3 = 5."
+  },
+  {
+   "id": "sil-sciences-plantes-05",
+   "chapter": "sil-sciences-plantes-ch",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sil-sciences-plantes",
+   "prompt": "Quelle plante donne une racine que l'on mange ?",
+   "choices": [
+    "le manioc",
+    "la mangue",
+    "la banane",
+    "la tomate"
+   ],
+   "answer": 0,
+   "explanation": "On mange la racine du manioc."
+  },
+  {
+   "id": "sil-sciences-plantes-06",
+   "chapter": "sil-sciences-plantes-ch",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sil-sciences-plantes",
+   "prompt": "Le jardin de Marie.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Pour que ses tomates poussent, Marie doit…",
+     "choices": [
+      "les couper",
+      "les enfermer",
+      "les piétiner",
+      "les arroser"
+     ],
+     "answer": 3,
+     "explanation": "Les plantes ont besoin d'eau.",
+     "id": "sil-sciences-plantes-06-a",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Marie a 4 plants de tomate et en plante 3 autres. Combien de plants ? (4 + 3)",
+     "answer": 7,
+     "tolerance": 0,
+     "explanation": "4 + 3 = 7.",
+     "id": "sil-sciences-plantes-06-b",
+     "points": 1
+    }
+   ],
+   "explanation": "Relis chaque question avec calme."
+  },
+  {
+   "id": "sil-sciences-plantes-q1",
+   "chapter": "sil-sciences-plantes-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-sciences-plantes",
+   "prompt": "Les feuilles de la plante sont souvent…",
+   "choices": [
+    "rouges",
+    "vertes",
+    "bleues",
+    "noires"
+   ],
+   "answer": 1,
+   "explanation": "Beaucoup de feuilles sont vertes."
+  },
+  {
+   "id": "sil-sciences-plantes-q2",
+   "chapter": "sil-sciences-plantes-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-sciences-plantes",
+   "prompt": "La tige sert à…",
+   "choices": [
+    "voir",
+    "porter la plante",
+    "marcher",
+    "entendre"
+   ],
+   "answer": 1,
+   "explanation": "La tige porte la plante."
+  },
+  {
+   "id": "sil-sciences-plantes-q3",
+   "chapter": "sil-sciences-plantes-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-sciences-plantes",
+   "prompt": "De quoi une plante a-t-elle besoin ?",
+   "choices": [
+    "de bonbons",
+    "de chaussures",
+    "de sel seulement",
+    "d'eau et de lumière"
+   ],
+   "answer": 3,
+   "explanation": "Eau, lumière et terre."
+  },
+  {
+   "id": "sil-sciences-plantes-q4",
+   "chapter": "sil-sciences-plantes-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-sciences-plantes",
+   "prompt": "La mangue vient…",
+   "choices": [
+    "de l'arbre manguier",
+    "d'un poisson",
+    "d'un caillou",
+    "d'une chaise"
+   ],
+   "answer": 0,
+   "explanation": "La mangue est le fruit du manguier."
+  },
+  {
+   "id": "sil-sciences-plantes-q5",
+   "chapter": "sil-sciences-plantes-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-sciences-plantes",
+   "prompt": "Où sont les racines ?",
+   "choices": [
+    "en haut de la plante",
+    "sur la fleur",
+    "dans la terre",
+    "dans le ciel"
+   ],
+   "answer": 2,
+   "explanation": "Les racines sont dans la terre."
+  }
+ ]
+}

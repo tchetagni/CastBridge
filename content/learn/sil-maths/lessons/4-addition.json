@@ -1,0 +1,351 @@
+{
+ "chapter": "sil-maths-addition-ch",
+ "lessons": [
+  {
+   "id": "sil-maths-addition",
+   "title": "Ajouter : le signe +",
+   "minutes": 12,
+   "readAloud": true,
+   "programRef": "SIL — Calcul : additions simples, sens de l'addition (reconstitué)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Comprendre qu'ajouter, c'est en avoir plus.",
+    "Lire et écrire une addition avec + et =.",
+    "Calculer des additions dont le résultat est au plus 10 ou 20."
+   ],
+   "prerequisites": [
+    "sil-maths-nombres-10"
+   ],
+   "exercises": [
+    "sil-maths-addition-01",
+    "sil-maths-addition-02",
+    "sil-maths-addition-03",
+    "sil-maths-addition-04",
+    "sil-maths-addition-05",
+    "sil-maths-addition-06"
+   ],
+   "selfCheck": [
+    "sil-maths-addition-q1",
+    "sil-maths-addition-q2",
+    "sil-maths-addition-q3",
+    "sil-maths-addition-q4",
+    "sil-maths-addition-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que la fiche se limite aux résultats ≤ 20 et ne présente pas encore la retenue.",
+    "Figure ill. #1 : la légende est volontairement courte ; à adapter si besoin."
+   ],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "Ajouter, c'est mettre ensemble. Trois et deux, ça fait cinq.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le signe +",
+     "md": "Le signe **+** se lit « plus ». Il sert à **ajouter**.\n\nLe signe **=** se lit « égale » ou « ça fait ».\n\n**3 + 2 = 5**"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "count",
+      "n": 3,
+      "shape": "circle",
+      "color": "red",
+      "perRow": 5,
+      "w": 300,
+      "h": 100
+     },
+     "caption": "3 billes rouges.",
+     "alt": "Trois ronds rouges."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : 3 + 2",
+     "statement": "Fotso a 3 billes. Il en gagne 2. Combien en a-t-il ?",
+     "steps": [
+      {
+       "md": "Je compte 3 billes : un, deux, trois."
+      },
+      {
+       "md": "J'ajoute 2 : quatre, cinq."
+      }
+     ],
+     "answer": "**3 + 2 = 5**. Il a 5 billes."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Compter en avançant",
+     "md": "Je dis le premier nombre. Puis je compte en avançant : pour + 2, je dis deux nombres de plus.\n\nExemple : 6 + 2 → sept, huit."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : 6 + 3",
+     "statement": "Amina a 6 mangues. Elle en achète 3. Combien en a-t-elle ?",
+     "steps": [
+      {
+       "md": "Je pars de 6."
+      },
+      {
+       "md": "J'avance de 3 : sept, huit, neuf."
+      }
+     ],
+     "answer": "**6 + 3 = 9**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "count",
+      "n": 9,
+      "shape": "circle",
+      "color": "orange",
+      "perRow": 5,
+      "w": 400,
+      "h": 140
+     },
+     "caption": "6 + 3 = 9 mangues.",
+     "alt": "Neuf ronds orange sur deux lignes."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer !"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-maths-addition-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-maths-addition-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-maths-addition-03"
+    },
+    {
+     "type": "heading",
+     "text": "Pour aller plus loin"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-maths-addition-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-maths-addition-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-maths-addition-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sil-maths-addition-01",
+   "chapter": "sil-maths-addition-ch",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-addition",
+   "prompt": "2 + 1 = ?",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "2, puis trois : 2 + 1 = 3."
+  },
+  {
+   "id": "sil-maths-addition-02",
+   "chapter": "sil-maths-addition-ch",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-addition",
+   "prompt": "4 + 3 = ?",
+   "answer": 7,
+   "tolerance": 0,
+   "explanation": "4, puis cinq, six, sept : 4 + 3 = 7."
+  },
+  {
+   "id": "sil-maths-addition-03",
+   "chapter": "sil-maths-addition-ch",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sil-maths-addition",
+   "prompt": "Vrai ou faux : 5 + 1 = 6.",
+   "answer": true,
+   "explanation": "Après 5 vient 6 : c'est vrai."
+  },
+  {
+   "id": "sil-maths-addition-04",
+   "chapter": "sil-maths-addition-ch",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sil-maths-addition",
+   "prompt": "Essomba a 8 stylos. On lui en donne 2. Combien de stylos a-t-il ?",
+   "answer": 10,
+   "tolerance": 0,
+   "explanation": "8 + 2 = 10."
+  },
+  {
+   "id": "sil-maths-addition-05",
+   "chapter": "sil-maths-addition-ch",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sil-maths-addition",
+   "prompt": "Relie chaque addition à son résultat.",
+   "pairs": [
+    [
+     "2 + 2",
+     "4"
+    ],
+    [
+     "3 + 3",
+     "6"
+    ],
+    [
+     "5 + 4",
+     "9"
+    ],
+    [
+     "10 + 5",
+     "15"
+    ]
+   ],
+   "explanation": "2 + 2 = 4, 3 + 3 = 6, 5 + 4 = 9, 10 + 5 = 15."
+  },
+  {
+   "id": "sil-maths-addition-06",
+   "chapter": "sil-maths-addition-ch",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sil-maths-addition",
+   "prompt": "Au marché de Bafoussam.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Ngono achète 6 tomates, puis 4 tomates. Combien de tomates en tout ?",
+     "answer": 10,
+     "tolerance": 0,
+     "explanation": "6 + 4 = 10.",
+     "id": "sil-maths-addition-06-a",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Elle ajoute encore 5 tomates. Combien de tomates en tout maintenant ?",
+     "answer": 15,
+     "tolerance": 0,
+     "explanation": "10 + 5 = 15.",
+     "id": "sil-maths-addition-06-b",
+     "points": 1
+    }
+   ],
+   "explanation": "Relis chaque question avec calme."
+  },
+  {
+   "id": "sil-maths-addition-q1",
+   "chapter": "sil-maths-addition-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-addition",
+   "prompt": "Que veut dire le signe + ?",
+   "choices": [
+    "ajouter",
+    "enlever",
+    "comparer",
+    "couper"
+   ],
+   "answer": 0,
+   "explanation": "Le signe + sert à ajouter."
+  },
+  {
+   "id": "sil-maths-addition-q2",
+   "chapter": "sil-maths-addition-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-addition",
+   "prompt": "3 + 4 = ?",
+   "choices": [
+    "6",
+    "8",
+    "34",
+    "7"
+   ],
+   "answer": 3,
+   "explanation": "3, puis quatre, cinq, six, sept : 7."
+  },
+  {
+   "id": "sil-maths-addition-q3",
+   "chapter": "sil-maths-addition-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-addition",
+   "prompt": "Quel calcul va avec « 5 billes et 2 billes de plus » ?",
+   "choices": [
+    "5 - 2",
+    "5 + 2",
+    "2 + 2",
+    "5 + 5"
+   ],
+   "answer": 1,
+   "explanation": "« De plus » : on ajoute. 5 + 2."
+  },
+  {
+   "id": "sil-maths-addition-q4",
+   "chapter": "sil-maths-addition-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-addition",
+   "prompt": "1 + 1 = ?",
+   "choices": [
+    "1",
+    "2",
+    "11",
+    "3"
+   ],
+   "answer": 1,
+   "explanation": "Un et un font deux."
+  },
+  {
+   "id": "sil-maths-addition-q5",
+   "chapter": "sil-maths-addition-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-addition",
+   "prompt": "9 + 1 = ?",
+   "choices": [
+    "8",
+    "11",
+    "91",
+    "10"
+   ],
+   "answer": 3,
+   "explanation": "Après neuf vient dix."
+  }
+ ]
+}

@@ -1,0 +1,351 @@
+{
+ "chapter": "sil-maths-soustraction-ch",
+ "lessons": [
+  {
+   "id": "sil-maths-soustraction",
+   "title": "Enlever : le signe -",
+   "minutes": 12,
+   "readAloud": true,
+   "programRef": "SIL — Calcul : soustractions simples, sens de la soustraction (reconstitué)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Comprendre qu'enlever, c'est en avoir moins.",
+    "Lire et écrire une soustraction avec - et =.",
+    "Calculer des soustractions simples dans les nombres jusqu'à 20."
+   ],
+   "prerequisites": [
+    "sil-maths-addition"
+   ],
+   "exercises": [
+    "sil-maths-soustraction-01",
+    "sil-maths-soustraction-02",
+    "sil-maths-soustraction-03",
+    "sil-maths-soustraction-04",
+    "sil-maths-soustraction-05",
+    "sil-maths-soustraction-06"
+   ],
+   "selfCheck": [
+    "sil-maths-soustraction-q1",
+    "sil-maths-soustraction-q2",
+    "sil-maths-soustraction-q3",
+    "sil-maths-soustraction-q4",
+    "sil-maths-soustraction-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que 0 comme résultat (10 - 10) est conforme à ce que fait le programme en SIL.",
+    "Vérifier l'ordre d'introduction : addition avant soustraction."
+   ],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "Enlever, c'est en avoir moins. Cinq moins deux, ça fait trois.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le signe -",
+     "md": "Le signe **-** se lit « moins ». Il sert à **enlever**.\n\n**5 - 2 = 3**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : 5 - 2",
+     "statement": "Il y a 5 oiseaux sur un arbre. 2 s'envolent. Combien en reste-t-il ?",
+     "steps": [
+      {
+       "md": "Je pars de 5."
+      },
+      {
+       "md": "Je recule de 2 : quatre, trois."
+      }
+     ],
+     "answer": "**5 - 2 = 3**. Il reste 3 oiseaux."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "count",
+      "n": 5,
+      "shape": "triangle",
+      "color": "blue",
+      "perRow": 5,
+      "w": 400,
+      "h": 133
+     },
+     "caption": "5 oiseaux au début.",
+     "alt": "Cinq triangles bleus, qui représentent 5 oiseaux."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Compter en reculant",
+     "md": "Je dis le premier nombre. Puis je recule : pour - 2, je dis deux nombres de moins.\n\nExemple : 8 - 3 → sept, six, cinq."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : 9 - 4",
+     "statement": "Mballa a 9 mangues. Il en mange 4. Combien lui en reste-t-il ?",
+     "steps": [
+      {
+       "md": "Je pars de 9."
+      },
+      {
+       "md": "Je recule de 4 : huit, sept, six, cinq."
+      }
+     ],
+     "answer": "**9 - 4 = 5**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "count",
+      "n": 3,
+      "shape": "triangle",
+      "color": "blue",
+      "perRow": 5,
+      "w": 400,
+      "h": 133
+     },
+     "caption": "Il en reste 3.",
+     "alt": "Trois triangles bleus : ce qui reste après le départ de 2 oiseaux."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer !"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-maths-soustraction-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-maths-soustraction-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-maths-soustraction-03"
+    },
+    {
+     "type": "heading",
+     "text": "Pour aller plus loin"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-maths-soustraction-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-maths-soustraction-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-maths-soustraction-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sil-maths-soustraction-01",
+   "chapter": "sil-maths-soustraction-ch",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-soustraction",
+   "prompt": "4 - 1 = ?",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "4, puis trois : 4 - 1 = 3."
+  },
+  {
+   "id": "sil-maths-soustraction-02",
+   "chapter": "sil-maths-soustraction-ch",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-soustraction",
+   "prompt": "7 - 2 = ?",
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "7, puis six, cinq : 7 - 2 = 5."
+  },
+  {
+   "id": "sil-maths-soustraction-03",
+   "chapter": "sil-maths-soustraction-ch",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sil-maths-soustraction",
+   "prompt": "Vrai ou faux : 6 - 3 = 3.",
+   "answer": true,
+   "explanation": "6, puis cinq, quatre, trois : c'est vrai."
+  },
+  {
+   "id": "sil-maths-soustraction-04",
+   "chapter": "sil-maths-soustraction-ch",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sil-maths-soustraction",
+   "prompt": "Amina a 10 bonbons. Elle en donne 4. Combien lui en reste-t-il ?",
+   "answer": 6,
+   "tolerance": 0,
+   "explanation": "10 - 4 = 6."
+  },
+  {
+   "id": "sil-maths-soustraction-05",
+   "chapter": "sil-maths-soustraction-ch",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sil-maths-soustraction",
+   "prompt": "Relie chaque soustraction à son résultat.",
+   "pairs": [
+    [
+     "5 - 1",
+     "4"
+    ],
+    [
+     "8 - 3",
+     "5"
+    ],
+    [
+     "10 - 7",
+     "3"
+    ],
+    [
+     "12 - 2",
+     "10"
+    ]
+   ],
+   "explanation": "5 - 1 = 4, 8 - 3 = 5, 10 - 7 = 3, 12 - 2 = 10."
+  },
+  {
+   "id": "sil-maths-soustraction-06",
+   "chapter": "sil-maths-soustraction-ch",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sil-maths-soustraction",
+   "prompt": "Au marché de Douala.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Fotso a 12 oranges. Il en vend 5. Combien lui en reste-t-il ?",
+     "answer": 7,
+     "tolerance": 0,
+     "explanation": "12 - 5 = 7.",
+     "id": "sil-maths-soustraction-06-a",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Il en vend encore 3. Combien lui en reste-t-il maintenant ?",
+     "answer": 4,
+     "tolerance": 0,
+     "explanation": "7 - 3 = 4.",
+     "id": "sil-maths-soustraction-06-b",
+     "points": 1
+    }
+   ],
+   "explanation": "Relis chaque question avec calme."
+  },
+  {
+   "id": "sil-maths-soustraction-q1",
+   "chapter": "sil-maths-soustraction-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-soustraction",
+   "prompt": "Que veut dire le signe - ?",
+   "choices": [
+    "enlever",
+    "ajouter",
+    "comparer",
+    "compter"
+   ],
+   "answer": 0,
+   "explanation": "Le signe - sert à enlever."
+  },
+  {
+   "id": "sil-maths-soustraction-q2",
+   "chapter": "sil-maths-soustraction-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-soustraction",
+   "prompt": "5 - 3 = ?",
+   "choices": [
+    "8",
+    "3",
+    "2",
+    "1"
+   ],
+   "answer": 2,
+   "explanation": "5, puis quatre, trois, deux : 2."
+  },
+  {
+   "id": "sil-maths-soustraction-q3",
+   "chapter": "sil-maths-soustraction-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-soustraction",
+   "prompt": "Quel calcul va avec « 9 bonbons, j'en mange 2 » ?",
+   "choices": [
+    "9 + 2",
+    "2 - 9",
+    "9 - 2",
+    "9 + 9"
+   ],
+   "answer": 2,
+   "explanation": "« Mange » : on enlève. 9 - 2."
+  },
+  {
+   "id": "sil-maths-soustraction-q4",
+   "chapter": "sil-maths-soustraction-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-soustraction",
+   "prompt": "10 - 10 = ?",
+   "choices": [
+    "0",
+    "10",
+    "1",
+    "20"
+   ],
+   "answer": 0,
+   "explanation": "Si on enlève tout, il ne reste rien : 0."
+  },
+  {
+   "id": "sil-maths-soustraction-q5",
+   "chapter": "sil-maths-soustraction-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-soustraction",
+   "prompt": "8 - 1 = ?",
+   "choices": [
+    "9",
+    "6",
+    "81",
+    "7"
+   ],
+   "answer": 3,
+   "explanation": "Juste avant 8, il y a 7."
+  }
+ ]
+}

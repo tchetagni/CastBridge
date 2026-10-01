@@ -1,0 +1,419 @@
+{
+ "chapter": "sil-maths-formes-ch",
+ "lessons": [
+  {
+   "id": "sil-maths-formes",
+   "title": "Les formes",
+   "minutes": 10,
+   "readAloud": true,
+   "programRef": "SIL — Espace et géométrie : reconnaître et nommer carré, rond (cercle), triangle, rectangle (reconstitué)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Reconnaître le carré, le rond, le triangle et le rectangle.",
+    "Dire combien de côtés a chaque forme.",
+    "Trouver ces formes autour de soi."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "sil-maths-formes-01",
+    "sil-maths-formes-02",
+    "sil-maths-formes-03",
+    "sil-maths-formes-04",
+    "sil-maths-formes-05",
+    "sil-maths-formes-06"
+   ],
+   "selfCheck": [
+    "sil-maths-formes-q1",
+    "sil-maths-formes-q2",
+    "sil-maths-formes-q3",
+    "sil-maths-formes-q4",
+    "sil-maths-formes-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier le vocabulaire : « rond » (usage courant en SIL) ou « cercle » ; le programme peut préférer l'un ou l'autre.",
+    "La figure représente le rectangle par un dessin simple : vérifier les proportions."
+   ],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "Regarde bien : un carré, un rond, un triangle, un rectangle.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 190,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 20,
+        "w": 100,
+        "h": 100,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 150,
+        "text": "carré",
+        "size": 20
+       },
+       {
+        "t": "circle",
+        "cx": 190,
+        "cy": 70,
+        "r": 50,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 150,
+        "text": "rond",
+        "size": 20
+       },
+       {
+        "t": "poly",
+        "pts": [
+         260,
+         120,
+         310,
+         20,
+         360,
+         120
+        ],
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 150,
+        "text": "triangle",
+        "size": 20
+       },
+       {
+        "t": "rect",
+        "x": 390,
+        "y": 40,
+        "w": 80,
+        "h": 60,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 430,
+        "y": 150,
+        "text": "rectangle",
+        "size": 18
+       }
+      ]
+     },
+     "caption": "Quatre formes.",
+     "alt": "Un carré bleu, un rond jaune, un triangle vert et un rectangle orange."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les noms des formes",
+     "md": "- Le **carré** a 4 côtés pareils.\n- Le **rectangle** a 4 côtés : 2 longs et 2 courts.\n- Le **triangle** a 3 côtés.\n- Le **rond** n'a pas de côté : il est tout rond."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : le toit",
+     "statement": "Le toit d'une petite maison ressemble à une forme à 3 côtés. Quelle forme ?",
+     "steps": [
+      {
+       "md": "Je compte les côtés : un, deux, trois."
+      },
+      {
+       "md": "La forme à 3 côtés est le triangle."
+      }
+     ],
+     "answer": "C'est un **triangle**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : la roue",
+     "statement": "Une roue de vélo est toute ronde, sans côté. Quelle forme ?",
+     "steps": [
+      {
+       "md": "Je cherche une forme sans côté."
+      },
+      {
+       "md": "Elle est toute ronde."
+      }
+     ],
+     "answer": "C'est un **rond**."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Carré ou rectangle ?",
+     "md": "Le carré a ses 4 côtés **pareils**. Le rectangle a 2 côtés longs et 2 côtés courts. On trouve des rectangles sur les portes et les cahiers."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer !"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-maths-formes-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-maths-formes-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-maths-formes-03"
+    },
+    {
+     "type": "heading",
+     "text": "Pour aller plus loin"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-maths-formes-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-maths-formes-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-maths-formes-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sil-maths-formes-01",
+   "chapter": "sil-maths-formes-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-formes",
+   "prompt": "Quelle forme a 3 côtés ?",
+   "choices": [
+    "le carré",
+    "le triangle",
+    "le rond",
+    "le rectangle"
+   ],
+   "answer": 1,
+   "explanation": "Le triangle a trois côtés."
+  },
+  {
+   "id": "sil-maths-formes-02",
+   "chapter": "sil-maths-formes-ch",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-formes",
+   "prompt": "Vrai ou faux : le rond a des côtés.",
+   "answer": false,
+   "explanation": "Le rond n'a pas de côté : il est tout rond."
+  },
+  {
+   "id": "sil-maths-formes-03",
+   "chapter": "sil-maths-formes-ch",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sil-maths-formes",
+   "prompt": "Associe l'objet à sa forme.",
+   "pairs": [
+    [
+     "une roue",
+     "rond"
+    ],
+    [
+     "une porte",
+     "rectangle"
+    ],
+    [
+     "un mouchoir plié",
+     "carré"
+    ],
+    [
+     "un toit pointu",
+     "triangle"
+    ]
+   ],
+   "explanation": "Une roue est ronde, une porte est un rectangle, un mouchoir plié en carré, un toit pointu en triangle."
+  },
+  {
+   "id": "sil-maths-formes-04",
+   "chapter": "sil-maths-formes-ch",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sil-maths-formes",
+   "prompt": "Combien de côtés a un carré ?",
+   "answer": 4,
+   "tolerance": 0,
+   "explanation": "Un carré a 4 côtés pareils."
+  },
+  {
+   "id": "sil-maths-formes-05",
+   "chapter": "sil-maths-formes-ch",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sil-maths-formes",
+   "prompt": "Quelle forme a 4 côtés, dont 2 longs et 2 courts ?",
+   "choices": [
+    "le carré",
+    "le rectangle",
+    "le triangle",
+    "le rond"
+   ],
+   "answer": 1,
+   "explanation": "C'est le rectangle. Dans le carré, les 4 côtés sont pareils."
+  },
+  {
+   "id": "sil-maths-formes-06",
+   "chapter": "sil-maths-formes-ch",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sil-maths-formes",
+   "prompt": "Observe les formes de la classe.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Le tableau noir est long et plat, avec 4 côtés. Quelle forme ?",
+     "choices": [
+      "un rond",
+      "un triangle",
+      "un carré",
+      "un rectangle"
+     ],
+     "answer": 3,
+     "explanation": "Le tableau a deux grands côtés et deux petits côtés : un rectangle.",
+     "id": "sil-maths-formes-06-a",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Un triangle et un carré. Combien de côtés en tout ? (3 + 4)",
+     "answer": 7,
+     "tolerance": 0,
+     "explanation": "3 + 4 = 7 côtés.",
+     "id": "sil-maths-formes-06-b",
+     "points": 1
+    }
+   ],
+   "explanation": "Relis chaque question avec calme."
+  },
+  {
+   "id": "sil-maths-formes-q1",
+   "chapter": "sil-maths-formes-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-formes",
+   "prompt": "Quelle forme est toute ronde ?",
+   "choices": [
+    "le rond",
+    "le carré",
+    "le triangle",
+    "le rectangle"
+   ],
+   "answer": 0,
+   "explanation": "Le rond n'a pas de côté."
+  },
+  {
+   "id": "sil-maths-formes-q2",
+   "chapter": "sil-maths-formes-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-formes",
+   "prompt": "Combien de côtés a un triangle ?",
+   "choices": [
+    "4",
+    "2",
+    "3",
+    "5"
+   ],
+   "answer": 2,
+   "explanation": "Un triangle a trois côtés."
+  },
+  {
+   "id": "sil-maths-formes-q3",
+   "chapter": "sil-maths-formes-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-formes",
+   "prompt": "Une fenêtre carrée a…",
+   "choices": [
+    "3 côtés",
+    "aucun côté",
+    "4 côtés pareils",
+    "2 côtés"
+   ],
+   "answer": 2,
+   "explanation": "Le carré a 4 côtés pareils."
+  },
+  {
+   "id": "sil-maths-formes-q4",
+   "chapter": "sil-maths-formes-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-formes",
+   "prompt": "Quelle forme ressemble à une pièce de monnaie ?",
+   "choices": [
+    "le rond",
+    "le triangle",
+    "le carré",
+    "le rectangle"
+   ],
+   "answer": 0,
+   "explanation": "Une pièce est ronde."
+  },
+  {
+   "id": "sil-maths-formes-q5",
+   "chapter": "sil-maths-formes-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-maths-formes",
+   "prompt": "Lequel est un rectangle ?",
+   "choices": [
+    "la roue",
+    "le toit pointu",
+    "le ballon",
+    "la porte"
+   ],
+   "answer": 3,
+   "explanation": "La porte a 4 côtés : 2 longs et 2 courts."
+  }
+ ]
+}

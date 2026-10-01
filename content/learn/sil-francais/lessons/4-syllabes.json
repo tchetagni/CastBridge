@@ -1,0 +1,481 @@
+{
+ "chapter": "sil-francais-syllabes-ch",
+ "lessons": [
+  {
+   "id": "sil-francais-syllabes",
+   "title": "Les syllabes",
+   "minutes": 10,
+   "readAloud": true,
+   "programRef": "SIL — Sons et lettres : découper un mot en syllabes, repérer la syllabe (reconstitué)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Frapper les syllabes d'un mot.",
+    "Compter les syllabes d'un mot.",
+    "Lire à voix haute des mots découpés en syllabes."
+   ],
+   "prerequisites": [
+    "sil-francais-voyelles"
+   ],
+   "exercises": [
+    "sil-francais-syllabes-01",
+    "sil-francais-syllabes-02",
+    "sil-francais-syllabes-03",
+    "sil-francais-syllabes-04",
+    "sil-francais-syllabes-05",
+    "sil-francais-syllabes-06"
+   ],
+   "selfCheck": [
+    "sil-francais-syllabes-q1",
+    "sil-francais-syllabes-q2",
+    "sil-francais-syllabes-q3",
+    "sil-francais-syllabes-q4",
+    "sil-francais-syllabes-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier les découpages : le « e » muet final (banane, lune) ; à l'oral on dit 3 syllabes pour « banane », ce que l'enseignant précise à l'oral.",
+    "Mots choisis : à adapter à la région (mots du terroir)."
+   ],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "Je tape dans mes mains : ba, na, ne. Banane a trois syllabes.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La syllabe",
+     "md": "Une **syllabe**, c'est un petit morceau de mot que l'on dit d'un seul coup.\n\nba-na-ne : 3 syllabes."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 130,
+      "items": [
+       {
+        "t": "rect",
+        "x": 65,
+        "y": 30,
+        "w": 110,
+        "h": 70,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 3,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 120.0,
+        "y": 76,
+        "text": "ba",
+        "size": 30,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 185,
+        "y": 30,
+        "w": 110,
+        "h": 70,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 3,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 76,
+        "text": "na",
+        "size": 30,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 305,
+        "y": 30,
+        "w": 110,
+        "h": 70,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 3,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 360.0,
+        "y": 76,
+        "text": "ne",
+        "size": 30,
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Banane : 3 syllabes.",
+     "alt": "Trois cartes : ba, na, ne."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Je tape les syllabes",
+     "md": "Je dis le mot doucement. Je tape dans mes mains à chaque morceau. Je compte les frappes."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : taxi",
+     "statement": "Combien de syllabes dans « taxi » ?",
+     "steps": [
+      {
+       "md": "Je dis : ta-xi."
+      },
+      {
+       "md": "Je compte deux frappes."
+      }
+     ],
+     "answer": "**2** syllabes : ta-xi."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : manioc",
+     "statement": "Combien de syllabes dans « manioc » ?",
+     "steps": [
+      {
+       "md": "Je dis : ma-ni-oc."
+      },
+      {
+       "md": "Je compte trois frappes."
+      }
+     ],
+     "answer": "**3** syllabes : ma-ni-oc."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 130,
+      "items": [
+       {
+        "t": "rect",
+        "x": 65,
+        "y": 30,
+        "w": 110,
+        "h": 70,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 3,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 120.0,
+        "y": 76,
+        "text": "ma",
+        "size": 30,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 185,
+        "y": 30,
+        "w": 110,
+        "h": 70,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 3,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 76,
+        "text": "ni",
+        "size": 30,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 305,
+        "y": 30,
+        "w": 110,
+        "h": 70,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 3,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 360.0,
+        "y": 76,
+        "text": "oc",
+        "size": 30,
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Manioc : 3 syllabes.",
+     "alt": "Trois cartes : ma, ni, oc."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer !"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-francais-syllabes-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-francais-syllabes-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-francais-syllabes-03"
+    },
+    {
+     "type": "heading",
+     "text": "Pour aller plus loin"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-francais-syllabes-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-francais-syllabes-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-francais-syllabes-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sil-francais-syllabes-01",
+   "chapter": "sil-francais-syllabes-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-francais-syllabes",
+   "prompt": "Combien de syllabes dans « papa » ?",
+   "choices": [
+    "1",
+    "2",
+    "3",
+    "4"
+   ],
+   "answer": 1,
+   "explanation": "pa-pa : deux syllabes."
+  },
+  {
+   "id": "sil-francais-syllabes-02",
+   "chapter": "sil-francais-syllabes-ch",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-francais-syllabes",
+   "prompt": "Vrai ou faux : « banane » se découpe en ba-na-ne.",
+   "answer": true,
+   "explanation": "Trois syllabes : ba, na, ne."
+  },
+  {
+   "id": "sil-francais-syllabes-03",
+   "chapter": "sil-francais-syllabes-ch",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sil-francais-syllabes",
+   "prompt": "Associe chaque mot à son nombre de syllabes.",
+   "pairs": [
+    [
+     "riz",
+     "1 syllabe"
+    ],
+    [
+     "taxi",
+     "2 syllabes"
+    ],
+    [
+     "manioc",
+     "3 syllabes"
+    ],
+    [
+     "éléphant",
+     "3 syllabes (é-lé-phant)"
+    ]
+   ],
+   "explanation": "riz : 1, ta-xi : 2, ma-ni-oc : 3, é-lé-phant : 3. Attention : deux mots peuvent avoir le même nombre."
+  },
+  {
+   "id": "sil-francais-syllabes-04",
+   "chapter": "sil-francais-syllabes-ch",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sil-francais-syllabes",
+   "prompt": "Combien de syllabes dans « cacao » (ca-ca-o) ?",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "ca-ca-o : trois syllabes."
+  },
+  {
+   "id": "sil-francais-syllabes-05",
+   "chapter": "sil-francais-syllabes-ch",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sil-francais-syllabes",
+   "prompt": "Quel mot a 2 syllabes ?",
+   "choices": [
+    "riz",
+    "vélo",
+    "banane",
+    "cacao"
+   ],
+   "answer": 1,
+   "explanation": "vé-lo : deux syllabes. riz en a une ; banane et cacao en ont trois."
+  },
+  {
+   "id": "sil-francais-syllabes-06",
+   "chapter": "sil-francais-syllabes-ch",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sil-francais-syllabes",
+   "prompt": "Frappe les syllabes.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Combien de syllabes dans « tomate » ?",
+     "choices": [
+      "2",
+      "1",
+      "4",
+      "3"
+     ],
+     "answer": 3,
+     "explanation": "to-ma-te : trois syllabes.",
+     "id": "sil-francais-syllabes-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quel mot se découpe en « ma-man » ?",
+     "choices": [
+      "maman",
+      "papa",
+      "mama",
+      "manma"
+     ],
+     "answer": 0,
+     "explanation": "Les deux syllabes ma et man donnent maman.",
+     "id": "sil-francais-syllabes-06-b",
+     "points": 1
+    }
+   ],
+   "explanation": "Relis chaque question avec calme."
+  },
+  {
+   "id": "sil-francais-syllabes-q1",
+   "chapter": "sil-francais-syllabes-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-francais-syllabes",
+   "prompt": "Une syllabe, c'est…",
+   "choices": [
+    "une phrase",
+    "un chiffre",
+    "un morceau de mot",
+    "une image"
+   ],
+   "answer": 2,
+   "explanation": "Une syllabe est un morceau de mot."
+  },
+  {
+   "id": "sil-francais-syllabes-q2",
+   "chapter": "sil-francais-syllabes-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-francais-syllabes",
+   "prompt": "« avocat » a combien de syllabes ?",
+   "choices": [
+    "1",
+    "2",
+    "3",
+    "4"
+   ],
+   "answer": 2,
+   "explanation": "a-vo-cat : trois syllabes."
+  },
+  {
+   "id": "sil-francais-syllabes-q3",
+   "chapter": "sil-francais-syllabes-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-francais-syllabes",
+   "prompt": "Combien de syllabes dans « chat » ?",
+   "choices": [
+    "1",
+    "2",
+    "3",
+    "4"
+   ],
+   "answer": 0,
+   "explanation": "chat se dit d'un seul coup."
+  },
+  {
+   "id": "sil-francais-syllabes-q4",
+   "chapter": "sil-francais-syllabes-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-francais-syllabes",
+   "prompt": "Comment découpe-t-on « lune » ?",
+   "choices": [
+    "l-une",
+    "lun-e",
+    "lu-n-e",
+    "lu-ne"
+   ],
+   "answer": 3,
+   "explanation": "On dit lu-ne : deux syllabes."
+  },
+  {
+   "id": "sil-francais-syllabes-q5",
+   "chapter": "sil-francais-syllabes-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-francais-syllabes",
+   "prompt": "Pour trouver les syllabes, je…",
+   "choices": [
+    "ferme les yeux",
+    "tape dans mes mains",
+    "cours",
+    "dors"
+   ],
+   "answer": 1,
+   "explanation": "Je tape une fois par syllabe."
+  }
+ ]
+}

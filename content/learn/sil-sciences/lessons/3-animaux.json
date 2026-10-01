@@ -1,0 +1,476 @@
+{
+ "chapter": "sil-sciences-animaux-ch",
+ "lessons": [
+  {
+   "id": "sil-sciences-animaux",
+   "title": "Les animaux autour de nous",
+   "minutes": 12,
+   "readAloud": true,
+   "programRef": "SIL — Éveil : les animaux de la maison et les animaux sauvages (reconstitué)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Nommer des animaux de la maison et des animaux sauvages.",
+    "Dire comment un animal se déplace.",
+    "Classer des animaux."
+   ],
+   "prerequisites": [
+    "sil-sciences-corps"
+   ],
+   "exercises": [
+    "sil-sciences-animaux-01",
+    "sil-sciences-animaux-02",
+    "sil-sciences-animaux-03",
+    "sil-sciences-animaux-04",
+    "sil-sciences-animaux-05",
+    "sil-sciences-animaux-06"
+   ],
+   "selfCheck": [
+    "sil-sciences-animaux-q1",
+    "sil-sciences-animaux-q2",
+    "sil-sciences-animaux-q3",
+    "sil-sciences-animaux-q4",
+    "sil-sciences-animaux-q5"
+   ],
+   "reviewNotes": [
+    "Faits à vérifier : le pangolin est un animal sauvage de la forêt (sa chasse est réglementée) ; le chimpanzé et l'éléphant vivent dans les forêts du Cameroun.",
+    "La chèvre, la poule, le chien sont des animaux d'élevage courants."
+   ],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "La poule, la chèvre et le chien vivent près des maisons. L'éléphant et le chimpanzé vivent dans la forêt.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Deux familles d'animaux",
+     "md": "- Les animaux **de la maison** vivent avec les gens : la poule, la chèvre, le chien, le chat.\n- Les animaux **sauvages** vivent dehors, dans la nature : l'éléphant, le chimpanzé, le pangolin."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 130,
+      "items": [
+       {
+        "t": "rect",
+        "x": 35,
+        "y": 30,
+        "w": 130,
+        "h": 70,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 3,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 76,
+        "text": "poule",
+        "size": 20,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 175,
+        "y": 30,
+        "w": 130,
+        "h": 70,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 3,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 76,
+        "text": "chèvre",
+        "size": 20,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 315,
+        "y": 30,
+        "w": 130,
+        "h": 70,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 3,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 380.0,
+        "y": 76,
+        "text": "chien",
+        "size": 20,
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Des animaux de la maison.",
+     "alt": "Trois cartes : poule, chèvre, chien."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : la poule",
+     "statement": "La poule a deux pattes, des plumes et des ailes. Comment se déplace-t-elle surtout ?",
+     "steps": [
+      {
+       "md": "Elle a des pattes pour marcher."
+      },
+      {
+       "md": "Elle a des ailes, mais elle marche surtout."
+      }
+     ],
+     "answer": "Elle **marche** (elle vole très peu)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : le poisson",
+     "statement": "Où vit le poisson ? Comment se déplace-t-il ?",
+     "steps": [
+      {
+       "md": "Il vit dans l'eau, dans la rivière ou la mer."
+      },
+      {
+       "md": "Il nage avec ses nageoires."
+      }
+     ],
+     "answer": "Il **nage** dans l'eau."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 130,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 30,
+        "w": 140,
+        "h": 70,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 3,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 90.0,
+        "y": 76,
+        "text": "éléphant",
+        "size": 18,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 170,
+        "y": 30,
+        "w": 140,
+        "h": 70,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 3,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 76,
+        "text": "chimpanzé",
+        "size": 18,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 320,
+        "y": 30,
+        "w": 140,
+        "h": 70,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 3,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 390.0,
+        "y": 76,
+        "text": "pangolin",
+        "size": 18,
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Des animaux sauvages.",
+     "alt": "Trois cartes : éléphant, chimpanzé, pangolin."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Respecte les animaux",
+     "md": "On ne fait pas de mal aux animaux. On s'éloigne d'un animal inconnu et on prévient un adulte."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer !"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-sciences-animaux-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-sciences-animaux-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-sciences-animaux-03"
+    },
+    {
+     "type": "heading",
+     "text": "Pour aller plus loin"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-sciences-animaux-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-sciences-animaux-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-sciences-animaux-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sil-sciences-animaux-01",
+   "chapter": "sil-sciences-animaux-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-sciences-animaux",
+   "prompt": "Quel animal est un animal de la maison ?",
+   "choices": [
+    "l'éléphant",
+    "le chimpanzé",
+    "la poule",
+    "le pangolin"
+   ],
+   "answer": 2,
+   "explanation": "La poule vit près des maisons."
+  },
+  {
+   "id": "sil-sciences-animaux-02",
+   "chapter": "sil-sciences-animaux-ch",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-sciences-animaux",
+   "prompt": "Vrai ou faux : le poisson vit dans l'eau.",
+   "answer": true,
+   "explanation": "Le poisson vit et nage dans l'eau."
+  },
+  {
+   "id": "sil-sciences-animaux-03",
+   "chapter": "sil-sciences-animaux-ch",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sil-sciences-animaux",
+   "prompt": "Associe chaque animal à ce qui le décrit.",
+   "pairs": [
+    [
+     "la poule",
+     "a des plumes"
+    ],
+    [
+     "le poisson",
+     "nage dans l'eau"
+    ],
+    [
+     "l'éléphant",
+     "a une trompe"
+    ],
+    [
+     "le chimpanzé",
+     "grimpe aux arbres"
+    ]
+   ],
+   "explanation": "La poule a des plumes, le poisson nage, l'éléphant a une trompe et le chimpanzé grimpe aux arbres."
+  },
+  {
+   "id": "sil-sciences-animaux-04",
+   "chapter": "sil-sciences-animaux-ch",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sil-sciences-animaux",
+   "prompt": "Un chien a combien de pattes ?",
+   "answer": 4,
+   "tolerance": 0,
+   "explanation": "Un chien a quatre pattes."
+  },
+  {
+   "id": "sil-sciences-animaux-05",
+   "chapter": "sil-sciences-animaux-ch",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sil-sciences-animaux",
+   "prompt": "Quel animal nage ?",
+   "choices": [
+    "le poisson",
+    "la poule",
+    "la chèvre",
+    "le chien"
+   ],
+   "answer": 0,
+   "explanation": "Le poisson nage."
+  },
+  {
+   "id": "sil-sciences-animaux-06",
+   "chapter": "sil-sciences-animaux-ch",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sil-sciences-animaux",
+   "prompt": "Dans la cour de Fotso.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Il y a 3 poules et 2 chèvres. Combien d'animaux ? (3 + 2)",
+     "answer": 5,
+     "tolerance": 0,
+     "explanation": "3 + 2 = 5 animaux.",
+     "id": "sil-sciences-animaux-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quel animal donne des œufs ?",
+     "choices": [
+      "la chèvre",
+      "le chien",
+      "le chat",
+      "la poule"
+     ],
+     "answer": 3,
+     "explanation": "La poule pond des œufs.",
+     "id": "sil-sciences-animaux-06-b",
+     "points": 1
+    }
+   ],
+   "explanation": "Relis chaque question avec calme."
+  },
+  {
+   "id": "sil-sciences-animaux-q1",
+   "chapter": "sil-sciences-animaux-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-sciences-animaux",
+   "prompt": "Un animal sauvage vit…",
+   "choices": [
+    "dans la cuisine",
+    "dans la nature",
+    "dans le cahier",
+    "sous le lit"
+   ],
+   "answer": 1,
+   "explanation": "Les animaux sauvages vivent dehors."
+  },
+  {
+   "id": "sil-sciences-animaux-q2",
+   "chapter": "sil-sciences-animaux-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-sciences-animaux",
+   "prompt": "Quel animal a des plumes ?",
+   "choices": [
+    "la chèvre",
+    "la poule",
+    "le chien",
+    "l'éléphant"
+   ],
+   "answer": 1,
+   "explanation": "La poule a des plumes."
+  },
+  {
+   "id": "sil-sciences-animaux-q3",
+   "chapter": "sil-sciences-animaux-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-sciences-animaux",
+   "prompt": "Combien de pattes a une poule ?",
+   "choices": [
+    "4",
+    "6",
+    "0",
+    "2"
+   ],
+   "answer": 3,
+   "explanation": "Une poule a deux pattes."
+  },
+  {
+   "id": "sil-sciences-animaux-q4",
+   "chapter": "sil-sciences-animaux-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-sciences-animaux",
+   "prompt": "Quel animal est le plus grand ?",
+   "choices": [
+    "l'éléphant",
+    "la poule",
+    "le chat",
+    "le poisson"
+   ],
+   "answer": 0,
+   "explanation": "L'éléphant est le plus grand animal terrestre."
+  },
+  {
+   "id": "sil-sciences-animaux-q5",
+   "chapter": "sil-sciences-animaux-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-sciences-animaux",
+   "prompt": "Je rencontre un animal inconnu. Je…",
+   "choices": [
+    "le touche",
+    "le poursuis",
+    "m'éloigne et préviens un adulte",
+    "le mange"
+   ],
+   "answer": 2,
+   "explanation": "La sécurité d'abord : on s'éloigne et on prévient un adulte."
+  }
+ ]
+}
