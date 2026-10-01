@@ -1,0 +1,536 @@
+"""Économie du supérieur (L1, L2, L3) : micro, macro, monnaie et banque, commerce international, zone franc / CEMAC, développement.
+Faits rédigés à la main (principes, définitions, institutions, attributions d'auteurs) : aucun chiffre d'actualité, aucune date
+incertaine. Tout est en statut `review` : une relecture par un enseignant d'économie reste nécessaire."""
+from .sup_kit import *      # source, table, classify, mcq, fq, pairs, pick, cap
+from ..facts_engine import SOURCES  # noqa: F401
+import random
+
+L1, L2, L3 = "l1-eco", "l2-eco", "l3-eco"
+source("sup-eco-micro", "Microéconomie : consommateur, producteur, marchés, externalités, information, jeux", "cours de L2/L3 économie",
+       "Comparer avec un manuel de microéconomie intermédiaire (ex. Varian, Mas-Colell pour le L3, Mankiw pour l'introduction).")
+source("sup-eco-macro", "Macroéconomie : comptabilité nationale, croissance, cycles, chômage, inflation, politiques, IS-LM", "cours de L2/L3 économie",
+       "Comparer avec un manuel de macroéconomie (ex. Blanchard, Mankiw, Burda-Wyplosz) et le cours de comptabilité nationale.")
+source("sup-eco-monnaie", "Monnaie, banque et finance : fonctions, création monétaire, banque centrale, marchés, risques", "cours de L2/L3 économie",
+       "Comparer avec un manuel d'économie monétaire et bancaire et les textes de la banque centrale concernée.")
+source("sup-eco-commerce", "Commerce international et change : avantages, protectionnisme, régimes de change, balance des paiements", "cours de L2/L3 économie",
+       "Comparer avec un manuel d'économie internationale (ex. Krugman-Obstfeld) et les textes de l'OMC.")
+source("sup-eco-cemac", "Zone franc, CEMAC, institutions monétaires et financières régionales (niveau général)", "textes institutionnels",
+       "Comparer avec les sites de la BEAC, de la CEMAC et de la COBAC et avec le traité instituant la CEMAC ; ne contient volontairement ni taux ni date.")
+source("sup-eco-dev", "Développement économique : indicateurs, secteurs, dette, aide, théories", "cours de L2/L3 économie",
+       "Comparer avec un manuel d'économie du développement (ex. Todaro, Hugon) et les rapports du PNUD.")
+source("sup-eco-pensee", "Histoire de la pensée économique : écoles et auteurs", "cours de L1/L2 économie",
+       "Comparer avec un manuel d'histoire de la pensée économique (ex. Gide et Rist, Beaud et Dostaler).")
+
+
+
+def split(c_lo, c_hi, tpl, rows, *, cat, src, cut=4, region="WORLD"):
+    """Répartit des questions rédigées à la main : difficulté < cut -> c_lo, sinon c_hi (cours plus avancé)."""
+    mcq(c_lo, tpl, [r for r in rows if r[4] < cut], cat=cat, src=src, region=region)
+    mcq(c_hi, tpl.replace("eco2", "eco3"), [r for r in rows if r[4] >= cut], cat=cat, src=src, region=region)
+
+
+def split3(tpl, rows, *, cat, src, region="WORLD"):
+    """Difficulté <= 2 -> L1, 3 -> L2, >= 4 -> L3 (même sujet, cours de plus en plus avancé)."""
+    mcq(L1, tpl.replace("eco2", "eco1"), [r for r in rows if r[4] <= 2], cat=cat, src=src, region=region)
+    mcq(L2, tpl, [r for r in rows if r[4] == 3], cat=cat, src=src, region=region)
+    mcq(L3, tpl.replace("eco2", "eco3"), [r for r in rows if r[4] >= 4], cat=cat, src=src, region=region)
+
+CM = "Microéconomie"
+# =====================================================================================================================
+# L2 : MICROÉCONOMIE
+# =====================================================================================================================
+table(L2, "eco2-mic-conso", [
+    ("l'utilité marginale", "la variation d'utilité due à la consommation d'une unité supplémentaire", 2),
+    ("le taux marginal de substitution", "la quantité d'un bien cédée pour une unité de l'autre à utilité inchangée", 3),
+    ("une courbe d'indifférence", "l'ensemble des paniers de biens qui procurent au consommateur la même utilité", 2),
+    ("la contrainte budgétaire", "l'ensemble des paniers accessibles avec le revenu aux prix en vigueur", 2),
+    ("l'effet de substitution", "la variation de la demande causée par le changement des prix relatifs", 3),
+    ("l'effet de revenu", "la variation de la demande causée par le changement du pouvoir d'achat réel", 3),
+    ("un bien de Giffen", "un bien dont la demande augmente avec son prix, l'effet de revenu dominant", 4),
+    ("des biens substituts", "des biens dont la demande de l'un croît quand le prix de l'autre augmente", 2),
+    ("des biens complémentaires", "des biens consommés ensemble, la demande de l'un baissant quand le prix de l'autre monte", 3),
+    ("l'optimum du consommateur", "le panier de la contrainte budgétaire qui procure l'utilité la plus élevée", 3),
+    ("la loi de l'utilité marginale décroissante", "la baisse de l'utilité apportée par chaque unité supplémentaire consommée", 2),
+], cat="Microéconomie : consommateur", src="sup-eco-micro",
+    fwd="Comment définit-on {a} en théorie du consommateur ?", rev="Quelle notion de la théorie du consommateur est décrite ici : {b} ?")
+
+table(L2, "eco2-mic-prod", [
+    ("l'isoquante", "l'ensemble des combinaisons de facteurs qui donnent le même niveau de production", 2),
+    ("l'isocoût", "l'ensemble des combinaisons de facteurs qui coûtent le même montant", 3),
+    ("la productivité marginale du travail", "la production supplémentaire obtenue avec une unité de travail de plus", 2),
+    ("la productivité moyenne du travail", "la production divisée par la quantité de travail utilisée", 2),
+    ("le coût marginal", "l'augmentation du coût total due à la production d'une unité supplémentaire", 2),
+    ("le coût variable", "la part du coût total qui change avec le volume produit", 1),
+    ("le coût fixe", "la part du coût total indépendante du volume produit à court terme", 1),
+    ("le coût moyen", "le coût total divisé par la quantité produite", 1),
+    ("la recette marginale", "la variation de la recette totale due à la vente d'une unité de plus", 3),
+    ("le profit économique", "la recette totale moins tous les coûts, y compris les coûts d'opportunité", 3),
+    ("un coût irrécupérable", "une dépense déjà engagée qui ne peut plus être récupérée et ne doit pas guider le choix", 4),
+    ("les économies d'échelle", "la baisse du coût moyen quand la taille de la production augmente", 2),
+    ("les économies d'envergure", "la baisse du coût de produire plusieurs biens ensemble plutôt que séparément", 4),
+], cat="Microéconomie : producteur et coûts", src="sup-eco-micro",
+    fwd="Comment définit-on {a} dans la théorie du producteur ?", rev="Quelle notion de la théorie du producteur est décrite ici : {b} ?")
+
+table(L2, "eco2-mic-marche", [
+    ("le monopole", "un seul vendeur, aucun substitut proche et de fortes barrières à l'entrée", 2),
+    ("l'oligopole", "quelques grandes firmes en situation d'interdépendance stratégique", 2),
+    ("la concurrence monopolistique", "de nombreuses firmes vendant des produits différenciés avec libre entrée", 3),
+    ("le monopsone", "un seul acheteur face à de nombreux vendeurs", 3),
+    ("l'oligopsone", "quelques acheteurs seulement face à de nombreux vendeurs", 4),
+    ("le monopole bilatéral", "un vendeur unique face à un acheteur unique", 4),
+    ("le duopole", "un marché où deux firmes seulement se font face", 2),
+    ("le cartel", "un accord entre firmes pour restreindre la production et soutenir les prix", 2),
+    ("le monopole naturel", "un marché où une firme unique produit au moindre coût grâce à des coûts moyens décroissants", 4),
+], cat="Microéconomie : structures de marché", src="sup-eco-micro",
+    fwd="Quelle est la caractéristique de {a} ?", rev="Quelle structure de marché est décrite par : {b} ?")
+
+table(L2, "eco2-mic-ext", [
+    ("une externalité positive", "un effet bénéfique de l'activité d'un agent sur des tiers, sans compensation", 2),
+    ("une externalité négative", "un coût imposé à des tiers par l'activité d'un agent, sans compensation", 2),
+    ("l'internalisation d'une externalité", "sa prise en compte dans les calculs de l'agent qui la cause", 3),
+    ("une taxe pigouvienne", "une taxe égale au dommage marginal, destinée à corriger une externalité négative", 4),
+    ("un permis d'émission négociable", "un droit échangeable qui plafonne le volume total d'émissions", 3),
+    ("le passager clandestin", "l'agent qui profite d'un bien public sans participer à son financement", 2),
+    ("la sélection adverse", "une asymétrie d'information avant le contrat qui évince les offres de bonne qualité", 4),
+    ("l'aléa moral", "un comportement modifié après le contrat, que l'autre partie ne peut pas observer", 3),
+    ("la signalisation", "l'action coûteuse d'un agent informé pour révéler sa qualité aux autres", 4),
+    ("le problème principal-agent", "le conflit d'intérêts entre un mandant et un mandataire mieux informé", 4),
+    ("une ressource commune", "un bien rival mais non exclusif, exposé à la surexploitation", 3),
+    ("un bien de club", "un bien non rival dont l'accès peut être réservé à ses membres", 3),
+    ("un bien privé", "un bien à la fois rival et exclusif", 2),
+], cat="Microéconomie : externalités, biens publics, information", src="sup-eco-micro",
+    fwd="Comment définit-on {a} ?", rev="De quelle notion s'agit-il : {b} ?")
+
+table(L2, "eco2-mic-jeux", [
+    ("un équilibre de Nash", "une situation où aucun joueur n'a intérêt à changer seul de stratégie", 3),
+    ("une stratégie dominante", "une stratégie meilleure pour un joueur quelle que soit celle des autres", 3),
+    ("une stratégie dominée", "une stratégie moins bonne qu'une autre quel que soit le choix des autres", 3),
+    ("un jeu à somme nulle", "un jeu où le gain d'un joueur est exactement la perte des autres", 2),
+    ("un jeu séquentiel", "un jeu où les joueurs choisissent à tour de rôle en observant les coups précédents", 3),
+    ("un jeu simultané", "un jeu où chaque joueur choisit sans connaître le choix des autres", 2),
+    ("la forme normale d'un jeu", "sa représentation par une matrice de gains", 3),
+    ("la forme extensive d'un jeu", "sa représentation par un arbre de décision", 3),
+    ("l'induction à rebours", "la résolution d'un jeu séquentiel en partant de la dernière décision", 4),
+    ("une stratégie mixte", "le choix aléatoire entre plusieurs stratégies selon des probabilités", 4),
+    ("le dilemme du prisonnier", "un jeu où la poursuite de l'intérêt individuel mène à un résultat collectivement moins bon", 3),
+], cat="Microéconomie : théorie des jeux", src="sup-eco-micro",
+    fwd="Comment définit-on {a} en théorie des jeux ?", rev="Quel concept de théorie des jeux correspond à : {b} ?")
+
+table(L2, "eco2-pensee-aut", [
+    ("Adam Smith", "la main invisible et la division du travail comme source de richesse", 2),
+    ("David Ricardo", "la théorie de l'avantage comparatif et de la rente foncière", 3),
+    ("Thomas Malthus", "la crainte d'une population croissant plus vite que les subsistances", 3),
+    ("Jean-Baptiste Say", "la loi des débouchés selon laquelle l'offre crée sa propre demande", 3),
+    ("Karl Marx", "la théorie de la plus-value et de l'exploitation du travail par le capital", 2),
+    ("Léon Walras", "la théorie de l'équilibre général et du tâtonnement", 3),
+    ("Alfred Marshall", "l'analyse en équilibre partiel et l'offre et la demande comme ciseaux", 4),
+    ("Vilfredo Pareto", "la notion d'optimum où l'on ne peut améliorer un sort sans en détériorer un autre", 3),
+    ("John Maynard Keynes", "le rôle de la demande effective et la possibilité d'un chômage involontaire", 2),
+    ("Joseph Schumpeter", "l'innovation et la destruction créatrice comme moteurs du capitalisme", 3),
+    ("Milton Friedman", "le monétarisme et l'hypothèse du revenu permanent", 3),
+    ("Friedrich Hayek", "le rôle des prix comme transmetteurs d'information et l'ordre spontané du marché", 4),
+    ("François Quesnay", "le Tableau économique et la physiocratie", 3),
+    ("Thorstein Veblen", "la consommation ostentatoire", 4),
+], cat="Histoire de la pensée économique", src="sup-eco-pensee",
+    fwd="Quel apport est associé à {a} ?", rev="Quel économiste est associé à cet apport : {b} ?")
+
+table(L2, "eco2-pensee-mod", [
+    ("Franco Modigliani", "l'hypothèse du cycle de vie de l'épargne et de la consommation", 4),
+    ("Robert Solow", "un modèle de croissance où le progrès technique est exogène", 3),
+    ("Robert Lucas", "la critique selon laquelle les comportements changent avec la politique menée", 5),
+    ("Edward Chamberlin", "la théorie de la concurrence monopolistique", 4),
+    ("Augustin Cournot", "un modèle de duopole où les firmes choisissent leurs quantités", 4),
+    ("Joseph Bertrand", "un modèle de duopole où les firmes choisissent leurs prix", 5),
+    ("Elinor Ostrom", "l'étude de la gestion collective des ressources communes", 4),
+    ("Gary Becker", "la théorie du capital humain appliquée aux choix de formation", 4),
+    ("Amartya Sen", "l'approche du développement par les capabilités et les libertés", 4),
+    ("George Akerlof", "l'analyse du marché des « citrons » et de la sélection adverse", 4),
+    ("Michael Spence", "la théorie de la signalisation sur le marché du travail", 5),
+    ("Ronald Coase", "les coûts de transaction pour expliquer l'existence de la firme", 4),
+], cat="Histoire de la pensée économique", src="sup-eco-pensee",
+    fwd="Quel apport est associé à {a} ?", rev="Quel économiste est associé à cet apport : {b} ?")
+
+split(L2, L3, "eco2-mic-q1", [
+    ("Que traduit la convexité des courbes d'indifférence vers l'origine ?", "Une préférence pour les paniers équilibrés, avec un taux marginal de substitution décroissant", ["Des biens parfaitement substituables", "Une utilité marginale croissante pour chaque bien", "Un revenu qui augmente avec la consommation"], "La convexité signifie que le consommateur renonce à de moins en moins de l'un pour obtenir plus de l'autre.", 3),
+    ("Pourquoi, sous les hypothèses usuelles, deux courbes d'indifférence d'un même consommateur ne se coupent-elles pas ?", "Cela contredirait la transitivité et la non-satiété de ses préférences", ["Parce que les prix seraient alors égaux", "Parce que son revenu serait alors nul", "Parce que le taux marginal de substitution serait infini"], "Un point commun à deux niveaux d'utilité distincts serait contradictoire.", 4),
+    ("Dans le plan (bien 1, bien 2), quelle est la pente en valeur absolue de la droite de budget ?", "Le rapport des prix p1/p2", ["Le revenu divisé par p1", "Le rapport des utilités totales", "L'utilité marginale du bien 1"], "La droite de budget a pour équation p1·x1 + p2·x2 = R.", 3),
+    ("À l'optimum intérieur du consommateur, que vaut le taux marginal de substitution ?", "Le rapport des prix des deux biens", ["Zéro", "Le rapport des quantités consommées", "Le revenu divisé par le prix du bien 1"], "À l'optimum, la courbe d'indifférence est tangente à la droite de budget.", 3),
+    ("Quel effet a une hausse du revenu, prix inchangés, sur la droite de budget ?", "Elle se translate parallèlement vers l'extérieur", ["Elle pivote autour d'un de ses points d'intersection avec un axe", "Elle se translate parallèlement vers l'origine", "Elle devient verticale"], "Les prix relatifs, donc la pente, ne changent pas.", 2),
+    ("Que devient la droite de budget quand seul le prix du bien 1 (en abscisse) baisse ?", "Elle pivote autour de son intersection avec l'axe du bien 2", ["Elle se translate parallèlement vers l'origine", "Elle pivote autour de son intersection avec l'axe du bien 1", "Elle reste inchangée"], "L'ordonnée à l'origine R/p2 est inchangée, l'abscisse à l'origine R/p1 augmente.", 4),
+    ("Quelle forme ont les courbes d'indifférence entre deux biens parfaitement complémentaires ?", "Des angles droits (en forme de L)", ["Des droites de pente négative", "Des droites verticales parallèles", "Des cercles concentriques"], "Les biens sont consommés en proportions fixes (ex. chaussure gauche et chaussure droite).", 3),
+    ("Quelle forme ont les courbes d'indifférence entre deux biens parfaitement substituables ?", "Des droites de pente négative", ["Des angles droits", "Des courbes concaves vers l'origine", "Des droites horizontales"], "Le taux marginal de substitution est alors constant.", 3),
+    ("Si la demande d'un bien est élastique, que fait la recette totale du vendeur après une baisse du prix ?", "Elle augmente", ["Elle diminue", "Elle reste inchangée", "Elle devient nulle"], "La hausse des quantités l'emporte sur la baisse du prix unitaire.", 3),
+    ("Si la demande d'un bien est inélastique, que fait la recette totale après une hausse du prix ?", "Elle augmente", ["Elle diminue", "Elle reste inchangée", "Elle double"], "La baisse des quantités est proportionnellement plus faible que la hausse du prix.", 3),
+    ("Quel signe a l'élasticité-prix croisée entre deux biens substituts ?", "Positif", ["Négatif", "Nul", "Infini"], "La hausse du prix de l'un fait monter la demande de l'autre.", 3),
+    ("Quel signe a l'élasticité-revenu de la demande d'un bien inférieur ?", "Négatif", ["Positif et supérieur à 1", "Positif et inférieur à 1", "Toujours nul"], "La demande de ce bien baisse quand le revenu augmente.", 3),
+    ("Comment qualifie-t-on la demande d'un bien dont l'élasticité-revenu est supérieure à 1 ?", "Celle d'un bien de luxe", ["Celle d'un bien inférieur", "Celle d'un bien de Giffen", "Celle d'un bien public"], "La demande croît plus vite que le revenu.", 3),
+    ("Que caractérise le court terme dans la théorie du producteur ?", "Au moins un facteur de production est fixe", ["Aucun facteur n'est fixe, tous peuvent être ajustés", "Le prix des biens est fixe", "La production est nécessairement nulle"], "Le long terme est la période où tous les facteurs sont ajustables.", 2),
+    ("Que stipule la loi des rendements marginaux décroissants ?", "Au-delà d'un seuil, chaque unité de facteur variable ajoute moins à la production que la précédente", ["La production diminue dès la première unité de travail", "Le coût fixe baisse avec la production", "La productivité moyenne est toujours décroissante"], "Cela s'observe quand on ajoute un facteur à des facteurs fixes.", 3),
+    ("Que signifient des rendements d'échelle croissants ?", "Multiplier tous les facteurs par λ multiplie la production par plus de λ", ["Multiplier un seul facteur multiplie la production par plus de λ", "La production diminue quand on ajoute du travail", "Le coût marginal est constant"], "Il s'agit d'une propriété de long terme, tous facteurs variant dans la même proportion.", 3),
+    ("Une fonction de production Y = K^0,3 · L^0,7 présente quels rendements d'échelle ?", "Constants", ["Croissants", "Décroissants", "Nuls"], "La somme des exposants vaut 1 : doubler K et L double Y.", 4),
+    ("Une fonction de production Y = K^0,6 · L^0,6 présente quels rendements d'échelle ?", "Croissants", ["Constants", "Décroissants", "Nuls"], "La somme des exposants (1,2) dépasse 1.", 4),
+    ("Quelle est la condition de maximisation du profit d'une firme preneuse de prix ?", "Le prix est égal au coût marginal (avec un coût marginal croissant)", ["Le prix est égal au coût fixe moyen", "La recette totale est égale au coût total", "Le coût moyen est minimal quel que soit le prix"], "Produire jusqu'à ce que la recette marginale (le prix) égale le coût marginal.", 3),
+    ("Quelle est la condition de maximisation du profit d'un monopole ?", "La recette marginale est égale au coût marginal", ["Le prix est égal au coût marginal", "Le prix est égal au coût moyen minimal", "La recette moyenne est égale à zéro"], "Au monopole, le prix excède la recette marginale.", 3),
+    ("Pour un monopole face à une demande décroissante, que peut-on dire de la recette marginale par rapport au prix ?", "Elle lui est inférieure", ["Elle lui est égale", "Elle lui est supérieure", "Elle est toujours constante"], "Pour vendre une unité de plus, il doit baisser le prix sur toutes les unités.", 4),
+    ("À court terme, sous quelle condition une firme concurrentielle cesse-t-elle de produire ?", "Le prix est inférieur au minimum du coût variable moyen", ["Le prix est inférieur au coût marginal minimal", "Le prix est supérieur au coût fixe moyen", "Le profit est inférieur au profit de l'année précédente"], "En dessous, chaque unité vendue aggrave les pertes par rapport à l'arrêt.", 4),
+    ("Que devient le profit économique d'une firme en concurrence parfaite à l'équilibre de long terme avec libre entrée ?", "Il est nul", ["Il est maximal", "Il est positif et croissant", "Il est négatif"], "Les profits attirent des entrants jusqu'à leur disparition.", 3),
+    ("À court terme, quelle partie de la courbe de coût marginal constitue l'offre d'une firme concurrentielle ?", "La partie au-dessus du minimum du coût variable moyen", ["La partie au-dessous du coût fixe moyen", "La partie décroissante", "La totalité de la courbe"], "Sous ce minimum, la firme ne produit pas.", 4),
+    ("En quel point la courbe de coût marginal coupe-t-elle la courbe de coût moyen ?", "Au minimum du coût moyen", ["Au maximum du coût moyen", "À l'origine", "Au minimum du coût marginal"], "Quand le coût marginal est inférieur au coût moyen, ce dernier baisse ; quand il est supérieur, il monte.", 4),
+    ("Qu'appelle-t-on perte sèche du monopole ?", "La perte de surplus total due à une quantité produite inférieure à l'optimum", ["Les pertes comptables du monopole", "Le gain de surplus du consommateur", "Le coût fixe du monopole"], "Des échanges mutuellement avantageux n'ont pas lieu.", 4),
+    ("En quoi consiste la discrimination parfaite par les prix ?", "Faire payer à chaque consommateur le maximum qu'il est prêt à payer", ["Vendre au même prix à tous", "Vendre à perte aux plus pauvres", "Baisser le prix lorsque la quantité demandée baisse"], "Le monopole s'approprie ainsi tout le surplus du consommateur.", 4),
+    ("Quelle est la caractéristique d'un monopole naturel ?", "Des coûts moyens décroissants sur toute l'étendue de la demande", ["Un brevet détenu par l'État", "Un prix imposé par la loi", "Un grand nombre de petites firmes"], "Une seule firme produit alors au moindre coût.", 3),
+    ("Laquelle de ces caractéristiques est propre à la concurrence monopolistique ?", "Des produits différenciés avec une libre entrée sur le marché", ["Un produit homogène et un vendeur unique", "Une barrière à l'entrée absolue", "Un nombre de vendeurs limité à deux"], "Chaque firme a un pouvoir de marché limité, sans barrière à l'entrée.", 3),
+    ("Dans le modèle de Cournot, que choisissent simultanément les firmes ?", "Leurs quantités produites", ["Leurs prix", "Leur ordre de passage", "Leurs dépenses publicitaires uniquement"], "Chaque firme prend la production de l'autre comme donnée.", 4),
+    ("Dans le modèle de Bertrand avec produit homogène et coûts identiques, quel est le prix d'équilibre ?", "Le coût marginal", ["Le prix de monopole", "Le double du coût marginal", "Un prix indéterminé"], "Chaque firme a intérêt à baisser légèrement son prix jusqu'au coût marginal (paradoxe de Bertrand).", 5),
+    ("Dans le modèle de Stackelberg, qui joue en premier ?", "La firme meneuse choisit sa quantité avant la suiveuse", ["Chaque firme joue en même temps que l'autre", "La firme suiveuse impose son prix", "L'État fixe la quantité"], "La suiveuse réagit en observant le choix du leader.", 4),
+    ("Pourquoi un cartel est-il généralement instable ?", "Chaque membre a intérêt à tricher en produisant davantage", ["Parce que la loi l'interdit toujours", "Parce que le prix monte toujours", "Parce que les consommateurs refusent d'acheter"], "Le prix élevé rend rentable le non-respect des quotas, ce qui est le dilemme du prisonnier.", 4),
+    ("Dans un jeu, qu'est-ce qu'un équilibre de Nash ?", "Une combinaison de stratégies où aucun joueur ne gagne à dévier seul", ["La combinaison qui maximise la somme des gains", "La stratégie dominante d'un seul joueur", "Un accord imposé par un arbitre"], "Chaque stratégie est une meilleure réponse aux autres.", 3),
+    ("Dans le dilemme du prisonnier, quel résultat obtient-on à l'équilibre ?", "Chaque joueur trahit (stratégie dominante) et le résultat est moins bon que la coopération", ["Chaque joueur coopère toujours", "Un seul joueur gagne tout", "Il n'existe aucun équilibre"], "La trahison est dominante mais le résultat commun est inférieur à celui de la coopération.", 3),
+    ("Qu'appelle-t-on stratégie dominante ?", "Celle qui est la meilleure quel que soit le choix des autres joueurs", ["Celle qui rapporte le gain le plus élevé possible dans le jeu", "Celle choisie par la majorité des joueurs", "Celle qui impose son choix aux autres"], "Elle ne dépend pas des anticipations sur les autres.", 2),
+    ("Quelle méthode utilise-t-on pour résoudre un jeu séquentiel fini ?", "L'induction à rebours", ["Le tâtonnement walrasien", "L'élimination des stratégies mixtes", "La loi des grands nombres"], "On part de la dernière décision et on remonte l'arbre.", 4),
+    ("Dans un jeu répété un grand nombre de fois, qu'est-ce qui peut rendre la coopération soutenable ?", "La menace de représailles lors des tours futurs", ["La disparition de toute information", "L'interdiction de parler aux autres joueurs", "Le fait de jouer une seule fois"], "L'avenir pèse sur les décisions présentes.", 4),
+    ("Quel est le propre d'une externalité négative ?", "Le coût social marginal dépasse le coût privé marginal", ["Le coût privé marginal dépasse le coût social marginal", "Le prix baisse toujours", "L'agent reçoit une compensation intégrale"], "Le marché produit alors trop du bien polluant.", 3),
+    ("Que dit le théorème de Coase ?", "Avec peu de coûts de transaction, la négociation mène à une solution efficace", ["L'État doit toujours taxer les pollueurs", "La pollution est impossible à réduire par le marché", "Les droits de propriété sont inutiles"], "La répartition initiale des droits n'affecte pas l'efficacité de la solution négociée.", 4),
+    ("Quel est l'objectif d'une taxe pigouvienne ?", "Internaliser une externalité négative en alignant le coût privé sur le coût social", ["Augmenter les recettes de l'État quel que soit son effet", "Interdire la production du bien", "Subventionner le consommateur"], "Elle fait payer au pollueur le dommage qu'il cause.", 3),
+    ("Qu'est-ce qu'un bien de club ?", "Un bien non rival mais exclusif", ["Un bien rival et non exclusif", "Un bien rival et exclusif", "Un bien non rival et non exclusif"], "L'accès est réservé aux membres, mais la consommation de l'un ne prive pas l'autre.", 3),
+    ("Qu'est-ce qu'une ressource commune ?", "Un bien rival mais non exclusif", ["Un bien non rival et non exclusif", "Un bien non rival mais exclusif", "Un bien rival et exclusif"], "Exemple : un stock de poissons en haute mer.", 3),
+    ("Qu'appelle-t-on tragédie des biens communs (Hardin) ?", "La surexploitation d'une ressource en accès libre faute de coordination", ["La disparition d'un bien public pur", "L'échec d'un monopole d'État", "L'effondrement des prix agricoles"], "Chaque usager ignore le coût qu'il impose aux autres.", 3),
+    ("Quel problème pose le financement d'un bien public pur par contributions volontaires ?", "Le comportement de passager clandestin", ["L'excès de concurrence", "La rareté du travail", "La déflation"], "Chacun préfère ne pas payer en espérant que les autres paient.", 2),
+    ("Que décrit le marché des « citrons » d'Akerlof ?", "La sélection adverse : les mauvais produits chassent les bons si la qualité est inconnue", ["Un marché de fruits en concurrence parfaite", "Une taxe sur les produits agricoles", "Un monopole d'État"], "Si l'acheteur ne peut distinguer la qualité, le prix moyen fait fuir les bons vendeurs.", 4),
+    ("Un assuré, une fois couvert, prend moins de précautions. De quel problème s'agit-il ?", "De l'aléa moral", ["De la sélection adverse", "De l'effet de revenu", "Du passager clandestin"], "Le comportement change après la conclusion du contrat.", 3),
+    ("Un assureur ne distingue pas les bons risques des mauvais avant la signature du contrat. De quel problème s'agit-il ?", "De la sélection adverse", ["De l'aléa moral", "De l'effet d'éviction", "Du dumping"], "L'asymétrie d'information précède le contrat.", 3),
+    ("Dans le modèle de Spence, à quoi sert un diplôme ?", "À signaler aux employeurs la productivité d'un candidat", ["À augmenter mécaniquement sa productivité dans tous les cas", "À réduire le chômage frictionnel", "À fixer le salaire minimum"], "Le signal est coûteux, donc crédible, s'il est plus facile à obtenir pour les plus productifs.", 5),
+    ("Qu'est-ce qu'un optimum de Pareto ?", "Une situation où l'on ne peut améliorer le sort d'un agent sans détériorer celui d'un autre", ["Une situation où tous les agents ont le même revenu", "Une situation où le profit des firmes est maximal", "Une situation où l'État fixe tous les prix"], "Il s'agit d'un critère d'efficacité, non d'équité.", 3),
+    ("Que dit le premier théorème du bien-être ?", "Sous des hypothèses standard, un équilibre concurrentiel est un optimum de Pareto", ["Tout optimum de Pareto est équitable", "Le monopole est toujours efficace", "L'État doit fixer les prix"], "Les hypothèses incluent l'absence d'externalités et d'asymétries d'information.", 4),
+    ("Que dit la loi de Walras ?", "À tous prix, la valeur de la somme des excès de demande sur l'ensemble des marchés est nulle", ["L'offre crée sa propre demande", "Le prix est égal au coût marginal", "La monnaie est neutre à court terme"], "Si n−1 marchés sont équilibrés, le dernier l'est aussi.", 5),
+    ("À quoi sert la boîte d'Edgeworth ?", "Représenter l'échange de deux biens entre deux consommateurs", ["Représenter les coûts d'un monopole", "Calculer le PIB d'un pays", "Mesurer l'inflation"], "Elle sert à visualiser les allocations efficaces au sens de Pareto.", 4),
+    ("Qu'est-ce que le surplus du producteur ?", "La différence entre le prix reçu et le coût minimal auquel il accepterait de vendre", ["Le prix payé par le consommateur", "Le coût moyen de production", "La subvention reçue de l'État"], "Il se lit entre le prix de marché et la courbe d'offre.", 2),
+    ("Un prix plafond fixé en dessous du prix d'équilibre provoque en général ?", "Une pénurie", ["Un excédent d'offre", "Une hausse de la production", "Une baisse de la demande"], "À prix bas, la demande excède l'offre.", 2),
+    ("Un prix plancher fixé au-dessus du prix d'équilibre provoque en général ?", "Un excédent d'offre", ["Une pénurie", "Une hausse de la demande", "Un équilibre stable"], "À prix élevé, l'offre excède la demande.", 2),
+    ("Qui supporte la plus grande part d'une taxe sur un bien, toutes choses égales par ailleurs ?", "Le côté du marché dont l'élasticité est la plus faible", ["Le côté du marché dont l'élasticité est la plus forte", "Toujours le vendeur", "Toujours l'acheteur"], "Le côté le moins capable de réagir en modifiant ses quantités porte plus de charge.", 4),
+    ("Que mesure l'indice de Lerner d'un marché ?", "Le pouvoir de marché, par l'écart relatif entre le prix et le coût marginal", ["Le niveau de l'inflation", "Le degré d'ouverture commerciale", "Le coefficient de Gini"], "L = (P − Cm)/P ; il est nul en concurrence parfaite.", 5),
+    ("Que mesure l'indice de Herfindahl-Hirschman ?", "La concentration d'un marché, par la somme des carrés des parts de marché", ["La somme des parts de marché non élevées au carré", "L'inégalité des revenus", "Le taux de marge d'une firme"], "Plus il est élevé, plus le marché est concentré.", 4),
+    ("Qu'est-ce qu'une barrière à l'entrée ?", "Un obstacle qui empêche de nouvelles firmes de pénétrer un marché", ["Un impôt sur les bénéfices distribués", "Une subvention à l'exportation", "Une limite de crédit des ménages"], "Brevets, coûts fixes élevés ou licences en sont des exemples.", 2),
+    ("Que décrit la courbe de demande de travail d'une firme concurrentielle ?", "La productivité marginale du travail en valeur, comparée au salaire", ["Le coût moyen du capital", "La somme des salaires versés", "Le taux de chômage"], "La firme embauche tant que la valeur de la productivité marginale excède le salaire.", 4),
+    ("Que traduit une fonction d'utilité concave en revenu pour un individu ?", "Une aversion pour le risque", ["Un goût pour le risque", "Une indifférence totale au risque", "Une préférence pour le présent"], "Il préfère l'espérance certaine à la loterie de même espérance.", 4),
+    ("Que dit le critère de l'espérance d'utilité (von Neumann-Morgenstern) ?", "Un individu choisit l'option dont l'utilité moyenne pondérée par les probabilités est la plus élevée", ["Un individu choisit toujours l'option de gain monétaire maximal", "Un individu évite tout risque", "Un individu ignore les probabilités"], "Il compare des espérances d'utilité, non des espérances de gain.", 5),
+    ("Que résout, selon les marginalistes, le paradoxe de l'eau et du diamant ?", "La valeur dépend de l'utilité marginale et non de l'utilité totale", ["La valeur dépend du seul temps de travail", "La valeur dépend de la monnaie", "La valeur dépend du seul coût de transport"], "L'eau, abondante, a une utilité marginale faible.", 4),
+    ("Quel est le critère de minimisation du coût pour une firme avec deux facteurs ?", "Le taux marginal de substitution technique égale le rapport des prix des facteurs", ["Le coût fixe égale le coût variable", "Chaque facteur est employé en quantité égale à l'autre", "Le prix du produit égale le salaire"], "L'isoquante est tangente à la droite d'isocoût.", 4),
+    ("Que mesure le taux marginal de substitution technique ?", "La quantité d'un facteur cédée contre une unité de l'autre à production constante", ["Le taux de profit de la firme", "La part du travail dans le revenu national", "La productivité moyenne du capital"], "C'est la pente (en valeur absolue) de l'isoquante.", 4),
+    ("Que mesure la courbe des possibilités de production ?", "Les combinaisons maximales de biens atteignables avec les ressources et la technique données", ["Les combinaisons de biens qu'un consommateur préfère", "Les prix d'équilibre de deux marchés", "Les recettes de l'État"], "Sa pente reflète un coût d'opportunité.", 2),
+    ("Que montre l'allure concave de la frontière des possibilités de production ?", "Un coût d'opportunité croissant", ["Un coût d'opportunité constant", "Des rendements d'échelle constants", "Une baisse du chômage"], "Les facteurs sont inégalement adaptés à chaque bien.", 3),
+    ("Quelle est la forme de la courbe des possibilités de production si le coût d'opportunité est constant ?", "Une droite", ["Une courbe convexe vers l'origine", "Une courbe concave vers l'origine", "Un L"], "La pente ne varie pas.", 3),
+    ("Quel rôle doit jouer un coût irrécupérable dans la décision future d'une firme ?", "Aucun : il ne doit pas influencer le choix", ["Il doit être ajouté au coût marginal", "Il doit être divisé par la production", "Il doit remplacer le coût d'opportunité"], "Seuls les coûts et recettes à venir comptent.", 4),
+], cat="Microéconomie", src="sup-eco-micro")
+
+# =====================================================================================================================
+# L2 : MACROÉCONOMIE, MONNAIE, COMMERCE
+# =====================================================================================================================
+table(L2, "eco2-mac-cn", [
+    ("le PIB", "la somme des valeurs ajoutées, augmentée des impôts sur les produits nets de subventions", 3),
+    ("la consommation intermédiaire", "la valeur des biens et services transformés ou détruits au cours de la production", 2),
+    ("la formation brute de capital fixe", "l'acquisition par les unités productives de biens durables destinés à produire", 3),
+    ("la variation des stocks", "la différence entre les entrées et les sorties de stocks sur la période", 3),
+    ("le revenu national brut", "le PIB corrigé des revenus des facteurs reçus de l'étranger et versés à l'étranger", 4),
+    ("le revenu disponible des ménages", "leurs revenus après impôts et cotisations, augmentés des prestations reçues", 3),
+    ("l'épargne des ménages", "la part du revenu disponible qui n'est pas consommée", 2),
+    ("le déflateur du PIB", "le rapport du PIB nominal au PIB réel, qui mesure l'évolution générale des prix", 3),
+    ("le PIB réel", "le PIB évalué à prix constants, donc corrigé de l'inflation", 2),
+    ("le PIB par habitant", "le PIB divisé par la population", 1),
+    ("la consommation de capital fixe", "la dépréciation du capital fixe due à l'usure et à l'obsolescence", 3),
+    ("les exportations nettes", "la différence entre les exportations et les importations de biens et services", 2),
+], cat="Macroéconomie : comptabilité nationale", src="sup-eco-macro",
+    fwd="Comment définit-on {a} en comptabilité nationale ?", rev="Quel agrégat ou concept de comptabilité nationale est décrit ici : {b} ?")
+
+table(L2, "eco2-mac-chom", [
+    ("le chômage frictionnel", "un chômage de courte durée lié à la recherche d'un emploi et à la mobilité", 3),
+    ("le chômage structurel", "un chômage durable dû à l'inadéquation entre qualifications offertes et emplois demandés", 3),
+    ("le chômage conjoncturel", "un chômage lié aux fluctuations de l'activité, notamment en période de récession", 3),
+    ("le chômage classique", "un chômage dû à un salaire réel supérieur à celui qui équilibre le marché du travail", 4),
+    ("le chômage saisonnier", "un chômage lié aux variations de l'activité selon les saisons", 2),
+    ("le chômage technologique", "un chômage dû au remplacement de travailleurs par des machines ou des procédés nouveaux", 3),
+    ("le chômage volontaire", "la situation de personnes qui refusent les emplois proposés aux salaires en vigueur", 3),
+    ("le sous-emploi", "la situation de personnes qui travaillent moins qu'elles ne le souhaitent", 3),
+    ("le taux d'activité", "le rapport de la population active à la population en âge de travailler", 3),
+    ("le taux de chômage", "le rapport du nombre de chômeurs à la population active", 2),
+], cat="Macroéconomie : emploi et chômage", src="sup-eco-macro",
+    fwd="Comment définit-on {a} ?", rev="Quel concept relatif à l'emploi est décrit ici : {b} ?")
+
+table(L2, "eco2-mac-infl", [
+    ("l'inflation par la demande", "une hausse des prix due à une demande globale supérieure à l'offre disponible", 3),
+    ("l'inflation par les coûts", "une hausse des prix due à l'augmentation des coûts de production", 3),
+    ("l'inflation importée", "une hausse des prix due au renchérissement des produits achetés à l'étranger", 3),
+    ("la spirale prix-salaires", "l'entraînement mutuel des hausses de salaires et des hausses de prix", 3),
+    ("l'hyperinflation", "une inflation extrêmement rapide qui détruit la valeur de la monnaie", 3),
+    ("la désinflation", "un ralentissement du rythme de hausse des prix sans baisse du niveau des prix", 4),
+    ("la stagflation", "la coexistence d'une faible croissance, d'un chômage élevé et d'une inflation forte", 3),
+    ("l'inflation sous-jacente", "la mesure de l'inflation qui exclut les prix les plus volatils, comme l'énergie", 4),
+    ("l'inflation anticipée", "la hausse des prix que les agents prévoient et intègrent dans leurs décisions", 3),
+], cat="Macroéconomie : inflation", src="sup-eco-macro",
+    fwd="Comment définit-on {a} ?", rev="Quel concept d'inflation correspond à : {b} ?")
+
+table(L2, "eco2-mac-pol", [
+    ("la politique budgétaire", "l'action sur l'économie par les dépenses publiques, les impôts et le solde du budget", 2),
+    ("la politique monétaire", "l'action sur l'économie par les taux d'intérêt et la quantité de monnaie", 2),
+    ("la politique de relance", "l'action visant à stimuler la demande globale par plus de dépenses ou moins d'impôts", 2),
+    ("la politique de rigueur", "l'action visant à réduire le déficit par moins de dépenses ou plus d'impôts", 2),
+    ("la politique de change", "l'action sur la valeur de la monnaie nationale par rapport aux devises", 3),
+    ("la politique structurelle", "l'action sur les institutions et les structures de l'économie à long terme", 4),
+    ("les stabilisateurs automatiques", "les mécanismes budgétaires qui amortissent les fluctuations sans nouvelle décision", 4),
+    ("l'effet d'éviction", "la baisse de l'investissement privé causée par un emprunt public qui fait monter les taux", 4),
+    ("l'effet multiplicateur", "l'amplification d'une hausse initiale de la dépense par les revenus qu'elle engendre", 3),
+    ("l'équivalence ricardienne", "l'idée qu'un déficit n'a pas d'effet réel car les ménages anticipent les impôts futurs", 5),
+    ("la courbe de Laffer", "la relation en cloche entre le taux d'imposition et les recettes fiscales", 4),
+    ("le solde primaire", "le solde budgétaire hors charges d'intérêts de la dette", 4),
+    ("la dette publique", "le stock des engagements financiers cumulés de l'État", 2),
+    ("le déficit public", "le flux annuel d'insuffisance des recettes par rapport aux dépenses", 2),
+], cat="Macroéconomie : politiques économiques", src="sup-eco-macro",
+    fwd="Comment définit-on {a} ?", rev="Quel concept de politique économique correspond à : {b} ?")
+
+table(L2, "eco2-mon-concepts", [
+    ("la monnaie fiduciaire", "les pièces et billets, dont la valeur repose sur la confiance", 2),
+    ("la monnaie scripturale", "les soldes de comptes bancaires mobilisables par chèque, virement ou carte", 2),
+    ("la monnaie divisionnaire", "les pièces de faible valeur servant aux petits paiements", 3),
+    ("la monnaie marchandise", "un bien utilisé comme monnaie parce qu'il a une valeur propre", 3),
+    ("la base monétaire", "les billets en circulation et les réserves des banques auprès de la banque centrale", 4),
+    ("la liquidité d'un actif", "la facilité avec laquelle il se convertit en moyen de paiement sans perte", 2),
+    ("la vitesse de circulation de la monnaie", "le nombre moyen de fois qu'une unité monétaire sert à payer pendant la période", 4),
+    ("le seigneuriage", "le profit tiré de l'émission de monnaie, écart entre sa valeur faciale et son coût", 5),
+    ("le taux d'intérêt nominal", "le taux exprimé sans correction de l'inflation", 2),
+    ("le taux d'intérêt réel", "le taux nominal corrigé de l'inflation", 2),
+    ("le taux directeur", "le taux auquel la banque centrale refinance les banques et qui oriente les autres taux", 2),
+    ("les réserves obligatoires", "la part des dépôts que les banques doivent conserver auprès de la banque centrale", 3),
+    ("les opérations d'open market", "les achats et ventes de titres par la banque centrale pour agir sur la liquidité", 4),
+    ("le prêteur en dernier ressort", "le rôle de la banque centrale qui fournit des liquidités aux banques en difficulté", 3),
+], cat="Monnaie et banque", src="sup-eco-monnaie",
+    fwd="Comment définit-on {a} ?", rev="Quel concept monétaire correspond à : {b} ?")
+
+table(L2, "eco2-mon-risques", [
+    ("le risque de crédit", "la possibilité qu'un emprunteur ne rembourse pas tout ou partie de sa dette", 2),
+    ("le risque de liquidité", "la possibilité de ne pouvoir faire face aux retraits ou échéances à court terme", 3),
+    ("le risque de taux", "la possibilité de perte liée à la variation des taux d'intérêt", 3),
+    ("le risque de change", "la possibilité de perte liée à la variation du cours d'une monnaie", 3),
+    ("le risque de marché", "la possibilité de perte liée à la variation du prix des actifs financiers détenus", 3),
+    ("le risque opérationnel", "la possibilité de perte due à des défaillances de procédures, de personnes ou de systèmes", 4),
+    ("le risque systémique", "la possibilité que la défaillance d'un acteur se propage à tout le système financier", 4),
+    ("la ruée bancaire", "le retrait massif et simultané de dépôts par des épargnants qui craignent pour leur banque", 3),
+    ("la solvabilité d'une banque", "son aptitude à honorer ses dettes à long terme grâce à ses fonds propres", 4),
+], cat="Monnaie et banque : risques", src="sup-eco-monnaie",
+    fwd="Comment définit-on {a} ?", rev="Quel risque ou notion bancaire est décrit ici : {b} ?")
+
+table(L2, "eco2-com-instr", [
+    ("l'avantage absolu", "la capacité de produire un bien avec moins de ressources qu'un autre pays", 2),
+    ("l'avantage comparatif", "la capacité de produire un bien à un coût d'opportunité plus faible qu'un autre pays", 3),
+    ("le droit de douane", "une taxe prélevée sur les marchandises à leur entrée sur le territoire", 1),
+    ("le quota d'importation", "une limite quantitative fixée aux marchandises qui peuvent entrer", 2),
+    ("la subvention à l'exportation", "une aide publique qui abaisse le prix auquel les producteurs vendent à l'étranger", 3),
+    ("le dumping", "la vente à l'étranger à un prix inférieur à celui du marché d'origine ou au coût", 3),
+    ("la clause de la nation la plus favorisée", "l'obligation d'étendre à tous les membres l'avantage accordé à l'un d'eux", 4),
+    ("les termes de l'échange", "le rapport entre l'indice des prix des exportations et celui des importations", 4),
+    ("le taux de couverture", "le rapport des exportations aux importations", 3),
+    ("le protectionnisme éducateur", "la protection temporaire d'industries naissantes pour qu'elles deviennent compétitives", 4),
+    ("une barrière non tarifaire", "une mesure autre qu'un droit de douane qui gêne les importations, comme une norme", 3),
+], cat="Commerce international", src="sup-eco-commerce",
+    fwd="Comment définit-on {a} en commerce international ?", rev="Quel concept de commerce international est décrit ici : {b} ?")
+
+table(L2, "eco2-com-integ", [
+    ("une zone de libre-échange", "un espace où les droits de douane entre membres sont supprimés, chacun gardant ses tarifs externes", 3),
+    ("une union douanière", "une zone de libre-échange dotée d'un tarif extérieur commun", 3),
+    ("un marché commun", "une union douanière où le travail et le capital circulent aussi librement", 4),
+    ("une union économique et monétaire", "un marché commun doté d'une monnaie commune et de politiques coordonnées", 4),
+    ("une préférence tarifaire", "un tarif réduit accordé à certains partenaires seulement", 4),
+], cat="Commerce international : intégration régionale", src="sup-eco-commerce",
+    fwd="Comment définit-on {a} ?", rev="De quel niveau d'intégration s'agit-il : {b} ?")
+
+table(L2, "eco2-com-change", [
+    ("le taux de change nominal", "le prix d'une monnaie exprimé en unités d'une autre", 2),
+    ("le taux de change réel", "le taux nominal corrigé des écarts de prix entre pays", 4),
+    ("un régime de change fixe", "un régime où la banque centrale maintient la parité de la monnaie avec une autre ou un panier", 3),
+    ("un régime de change flottant", "un régime où le cours de la monnaie est déterminé par l'offre et la demande", 3),
+    ("le flottement administré", "un régime où le cours flotte mais la banque centrale intervient pour le guider", 4),
+    ("la dépréciation", "une baisse de la valeur d'une monnaie sur le marché des changes", 3),
+    ("la dévaluation", "une baisse décidée officiellement de la parité d'une monnaie à change fixe", 3),
+    ("la réévaluation", "une hausse décidée officiellement de la parité d'une monnaie à change fixe", 3),
+    ("l'appréciation", "une hausse de la valeur d'une monnaie sur le marché des changes", 3),
+    ("la parité de pouvoir d'achat", "la théorie selon laquelle le taux de change reflète le rapport des niveaux de prix", 4),
+], cat="Commerce international : change", src="sup-eco-commerce",
+    fwd="Comment définit-on {a} ?", rev="Quel concept de change est décrit ici : {b} ?")
+
+table(L2, "eco2-com-bp", [
+    ("la balance courante", "le solde des échanges de biens, de services, de revenus et de transferts courants", 3),
+    ("le compte financier", "les mouvements d'investissements directs, de portefeuille et d'autres placements", 4),
+    ("les réserves de change", "les actifs en devises détenus par la banque centrale", 3),
+    ("un investissement direct étranger", "une participation durable dans une entreprise étrangère pour exercer un contrôle ou une influence", 3),
+    ("la balance des services", "le solde des exportations et des importations de services, comme le transport ou le tourisme", 3),
+    ("la balance des revenus", "le solde des revenus du travail et du capital reçus de l'étranger et versés à l'étranger", 4),
+    ("la balance des transferts courants", "le solde des dons et envois de fonds sans contrepartie, notamment des migrants", 3),
+], cat="Balance des paiements", src="sup-eco-commerce",
+    fwd="Comment définit-on {a} ?", rev="Quel poste de la balance des paiements est décrit ici : {b} ?")
+
+split(L2, L3, "eco2-mac-q1", [
+    ("Quelles sont les trois optiques de calcul du PIB ?", "La production, la dépense et le revenu", ["La production, l'épargne et l'impôt", "L'offre, la demande et le prix", "Le travail, le capital et la terre"], "Les trois optiques donnent le même agrégat par construction comptable.", 3),
+    ("Dans l'optique des dépenses, comment écrit-on le PIB d'une économie ouverte ?", "C + I + G + (X − M)", ["C + S + T", "C × I × G", "C + S + G + (M − X)"], "Consommation, investissement, dépenses publiques et exportations nettes.", 2),
+    ("Quelle différence y a-t-il entre PIB nominal et PIB réel ?", "Le PIB réel est évalué à prix constants, le PIB nominal aux prix courants", ["Le PIB réel exclut les services", "Le PIB nominal exclut l'État", "Le PIB réel est exprimé en devises"], "Seul le PIB réel permet de mesurer l'évolution des quantités produites.", 2),
+    ("Comment calcule-t-on le déflateur du PIB ?", "PIB nominal divisé par PIB réel (×100)", ["PIB réel divisé par PIB nominal (×100)", "PIB nominal moins PIB réel", "PIB réel multiplié par la population"], "Il mesure l'évolution du niveau général des prix de la production.", 3),
+    ("Que comprend le produit national brut par rapport au PIB ?", "Il ajoute les revenus de facteurs reçus de l'étranger et retranche ceux versés à l'étranger", ["Il exclut les exportations", "Il inclut le travail domestique non rémunéré", "Il est toujours inférieur au PIB"], "Le PIB est territorial, le revenu national porte sur les résidents.", 4),
+    ("Laquelle de ces activités n'entre généralement pas dans le PIB mesuré ?", "Le travail domestique non rémunéré au sein du foyer", ["La production d'un service public d'éducation", "La production d'une usine exportatrice", "Les loyers de logements loués"], "La comptabilité nationale retient les activités marchandes et certaines non marchandes évaluées au coût, pas ce travail.", 3),
+    ("Que mesure la formation brute de capital fixe ?", "Les achats de biens durables destinés à la production, comme les machines", ["Les achats de biens de consommation durables des ménages", "Les achats de titres financiers", "Le seul stock de marchandises invendues"], "C'est l'investissement productif au sens de la comptabilité nationale.", 3),
+    ("Parmi ces opérations, laquelle est un investissement au sens de la comptabilité nationale ?", "L'achat d'une machine par une entreprise", ["L'achat d'actions en Bourse par un ménage", "L'achat d'un téléphone par un ménage pour son usage", "Le versement d'un salaire"], "L'achat de titres est un placement financier, non une dépense de capital.", 3),
+    ("Comment calcule-t-on le taux d'épargne des ménages ?", "Épargne divisée par revenu disponible", ["Revenu disponible divisé par épargne", "Épargne divisée par le PIB de l'État", "Consommation divisée par épargne"], "On rapporte l'épargne au revenu disponible brut.", 2),
+    ("Que décrit le circuit économique ?", "Les flux réels et monétaires entre les agents économiques", ["Les trajets des marchandises par route", "Le calendrier du budget de l'État", "Les phases du cycle des affaires"], "Il relie ménages, entreprises, administrations, institutions financières et reste du monde.", 2),
+    ("À qui doit-on le Tableau économique, première représentation du circuit ?", "À François Quesnay", ["À Adam Smith", "À Léon Walras", "À John Maynard Keynes"], "Il l'a conçu au XVIIIe siècle dans le courant physiocratique.", 3),
+    ("Quelle est la définition habituelle de la croissance économique ?", "L'augmentation soutenue, sur longue période, de la production d'une économie", ["La hausse des prix sur une année", "L'augmentation du nombre d'habitants", "La hausse du déficit public"], "On la mesure par le taux de variation du PIB réel.", 2),
+    ("Quelle différence y a-t-il entre croissance et développement ?", "Le développement ajoute des transformations structurelles et sociales à la hausse de la production", ["La croissance désigne uniquement le secteur agricole", "Le développement désigne uniquement les exportations", "Ils sont toujours strictement synonymes"], "Un pays peut croître sans que les conditions de vie de tous ne s'améliorent.", 3),
+    ("Comment appelle-t-on la phase du cycle économique où la production recule ?", "La récession", ["L'expansion", "La reprise", "La désinflation"], "On parle souvent de récession quand le recul du PIB persiste plusieurs trimestres.", 2),
+    ("Quelle est la bonne succession des phases d'un cycle classique ?", "Expansion, sommet, récession, creux", ["Creux, récession, sommet, expansion", "Sommet, expansion, creux, récession", "Récession, expansion, creux, sommet"], "Le cycle alterne montée puis baisse de l'activité autour de la tendance.", 3),
+    ("Selon le Bureau international du travail (BIT), qu'est-ce qu'un chômeur ?", "Une personne sans emploi, disponible pour travailler et en recherche active", ["Toute personne sans emploi, y compris les retraités", "Une personne qui refuse tout travail", "Un étudiant à temps plein"], "Les trois critères sont cumulatifs.", 3),
+    ("Comment calcule-t-on le taux de chômage ?", "Nombre de chômeurs divisé par la population active", ["Nombre de chômeurs divisé par la population totale", "Nombre d'inactifs divisé par la population active", "Nombre d'actifs occupés divisé par les chômeurs"], "La population active regroupe actifs occupés et chômeurs.", 2),
+    ("De quoi se compose la population active ?", "Des actifs occupés et des chômeurs", ["Des chômeurs et des retraités", "Des étudiants et des chômeurs", "Des actifs occupés et des inactifs"], "Les inactifs (étudiants, retraités, etc.) n'en font pas partie.", 2),
+    ("Que mesure le taux d'emploi ?", "La part des personnes ayant un emploi dans la population en âge de travailler", ["La part des chômeurs dans la population active", "La part des emplois publics dans l'emploi total", "Le nombre d'heures travaillées par semaine"], "Il se distingue du taux d'activité, qui inclut les chômeurs.", 3),
+    ("Qu'est-ce que le secteur informel ?", "L'ensemble des activités économiques échappant en grande partie à l'enregistrement et à la fiscalité", ["L'ensemble des services publics gratuits", "Les activités exercées uniquement la nuit", "Les seules activités agricoles de subsistance"], "Il est très présent dans de nombreuses économies en développement.", 3),
+    ("Selon Keynes, d'où vient le chômage involontaire ?", "D'une insuffisance de la demande effective", ["D'un excès de syndicats", "D'une trop forte épargne publique", "Du seul refus des chômeurs de travailler"], "L'ajustement par les salaires ne suffit pas à rétablir le plein emploi.", 3),
+    ("Selon les économistes classiques, que provoque un salaire réel supérieur à son niveau d'équilibre ?", "Un chômage dit classique", ["Un chômage frictionnel", "Une inflation par la demande", "Un excédent budgétaire"], "L'offre de travail excède alors la demande de travail.", 4),
+    ("Quelle relation la courbe de Phillips originelle (1958) établit-elle ?", "Une relation inverse entre le chômage et la variation des salaires nominaux", ["Une relation positive entre chômage et inflation", "Une relation inverse entre le PIB et la dette", "Une relation positive entre le taux d'intérêt et la production"], "Phillips l'avait observée pour le Royaume-Uni sur une longue période.", 3),
+    ("Quel phénomène des années 1970 a remis en cause la stabilité de l'arbitrage inflation-chômage ?", "La stagflation", ["La déflation", "La dévaluation", "Le plein-emploi"], "Inflation et chômage s'élevaient ensemble.", 4),
+    ("Selon Friedman et Phelps, à long terme, comment est la courbe de Phillips ?", "Verticale au niveau du taux de chômage naturel", ["Horizontale au niveau du taux d'inflation", "Toujours décroissante", "Croissante"], "Les agents ajustent leurs anticipations : on ne peut pas maintenir un chômage inférieur à son niveau naturel par l'inflation.", 4),
+    ("Que dit la relation de Fisher ?", "Le taux d'intérêt nominal est égal au taux réel plus l'inflation anticipée", ["Le taux réel est égal au taux nominal multiplié par le PIB", "L'inflation est égale au taux de croissance de la production", "Le taux nominal est toujours nul"], "Au niveau d'approximation usuel.", 4),
+    ("Que dit la loi d'Okun ?", "Il existe une relation inverse entre la croissance de la production et la variation du chômage", ["L'inflation est toujours un phénomène monétaire", "Les dépenses publiques croissent plus vite que le PIB", "La part de l'alimentation baisse avec le revenu"], "Une croissance forte tend à faire baisser le chômage.", 4),
+    ("Que dit la loi d'Engel ?", "La part du revenu consacrée à l'alimentation diminue quand le revenu augmente", ["La part de l'épargne diminue avec l'âge", "La mauvaise monnaie chasse la bonne", "Le chômage baisse quand le PIB croît"], "Observée à partir des budgets de familles.", 3),
+    ("Que dit la loi de Gresham ?", "La mauvaise monnaie chasse la bonne", ["La bonne monnaie chasse la mauvaise", "La monnaie est neutre", "L'offre crée sa propre demande"], "Quand deux monnaies circulent à un cours légal fixe, la moins bonne reste en circulation.", 4),
+    ("Que dit la théorie quantitative de la monnaie (MV = PT) ?", "À vitesse et production données, les prix varient dans la même proportion que la masse monétaire", ["Les prix ne dépendent que du salaire minimum", "La monnaie n'a aucun effet sur les prix, même à long terme", "La vitesse de circulation est égale à la production"], "Elle inspire l'idée d'une inflation liée à l'excès de monnaie.", 4),
+    ("Qu'affirmait Milton Friedman à propos de l'inflation ?", "Elle est toujours et partout un phénomène monétaire", ["Elle est toujours causée par les salaires", "Elle disparaît avec un déficit budgétaire", "Elle ne dépend jamais de la monnaie"], "Il met en cause la croissance trop rapide de la masse monétaire.", 3),
+    ("Quel est le principal effet d'une inflation non anticipée sur un débiteur à taux fixe ?", "Le poids réel de sa dette diminue", ["Le poids réel de sa dette augmente", "Sa dette devient nulle", "Son salaire réel diminue forcément"], "Il rembourse avec une monnaie qui vaut moins qu'à l'emprunt.", 4),
+    ("Que fait une politique budgétaire de relance ?", "Elle augmente les dépenses publiques ou baisse les impôts pour soutenir la demande", ["Elle augmente les taux directeurs pour freiner le crédit", "Elle réduit la masse monétaire", "Elle dévalue la monnaie"], "Elle vise à stimuler la demande globale.", 2),
+    ("Lequel est un exemple de stabilisateur automatique ?", "Les allocations de chômage qui augmentent en période de récession", ["Une loi de finances rectificative votée en urgence", "Une hausse décidée du taux directeur", "Une dévaluation décidée par le gouvernement"], "Le mécanisme joue sans nouvelle décision politique.", 3),
+    ("Que décrit l'effet d'éviction ?", "La baisse de l'investissement privé quand l'emprunt public fait monter les taux d'intérêt", ["La hausse de l'inflation importée", "La disparition d'un monopole", "L'expulsion d'un agent d'un marché"], "Plus d'emprunt public peut renchérir le crédit pour le privé.", 3),
+    ("Comment la courbe de Laffer lie-t-elle le taux d'imposition aux recettes fiscales ?", "Les recettes croissent puis décroissent quand le taux devient très élevé", ["Les recettes croissent toujours avec le taux", "Les recettes sont indépendantes du taux", "Les recettes baissent dès le premier taux positif"], "Un taux trop élevé décourage l'activité et réduit l'assiette.", 3),
+    ("Quelle est la différence entre déficit et dette publics ?", "Le déficit est un flux annuel, la dette un stock accumulé", ["Le déficit est un stock, la dette un flux annuel", "Ils sont toujours identiques", "Le déficit concerne les ménages, la dette l'État"], "La dette est la somme des déficits passés, nette des excédents.", 2),
+    ("Que mesure le solde primaire ?", "Recettes moins dépenses hors charges d'intérêts de la dette", ["Recettes moins dépenses, intérêts compris", "La dette divisée par le PIB", "L'épargne nationale"], "Il isole l'effort budgétaire indépendamment du poids de la dette passée.", 4),
+    ("Dans le modèle keynésien simple sans impôts ni importations, si la propension marginale à consommer vaut c, que vaut le multiplicateur ?", "1/(1 − c)", ["1/c", "c/(1 − c)", "(1 − c)/c"], "Chaque euro de dépense initial est dépensé en proportion c à chaque tour.", 3),
+    ("Que montre le théorème d'Haavelmo du budget équilibré ?", "Dans le modèle simple, une hausse égale des dépenses et des impôts accroît le revenu du même montant", ["Un budget équilibré ne peut jamais exister", "Les dépenses publiques réduisent toujours le revenu", "Les impôts augmentent toujours le revenu davantage que les dépenses"], "Le multiplicateur du budget équilibré vaut 1.", 5),
+    ("Quelle est l'idée de l'équivalence ricardienne (Barro) ?", "Un déficit n'accroît pas la demande : les ménages épargnent en prévision des impôts futurs", ["Les prix ne dépendent que des coûts", "Un déficit relance toujours l'activité", "La dette extérieure est toujours soutenable"], "Le mode de financement (impôt ou dette) devient indifférent.", 5),
+    ("Que peut-on dire de la soutenabilité de la dette si le taux de croissance dépasse le taux d'intérêt, avec un solde primaire nul ?", "Le ratio dette/PIB tend à baisser", ["Le ratio dette/PIB augmente nécessairement", "La dette devient nulle", "L'inflation est forcément nulle"], "Le dénominateur croît plus vite que les intérêts.", 5),
+    ("Comment s'écrit en principe la dynamique de la dette en pourcentage du PIB ?", "Elle dépend de l'écart entre le taux d'intérêt et la croissance, et du solde primaire", ["Elle dépend seulement du taux de change", "Elle dépend uniquement du taux de chômage", "Elle dépend de l'âge moyen des contribuables"], "Un écart intérêt-croissance positif alourdit le ratio, un excédent primaire l'allège.", 5),
+], cat="Macroéconomie", src="sup-eco-macro")
+
+split(L2, L3, "eco2-mon-q1", [
+    ("Quelles sont les trois fonctions classiques de la monnaie ?", "Intermédiaire des échanges, unité de compte, réserve de valeur", ["Épargne, crédit, assurance", "Production, distribution, consommation", "Impôt, dette, change"], "Ces fonctions s'appuient sur la confiance dans la monnaie.", 2),
+    ("Pourquoi la monnaie résout-elle le problème du troc ?", "Elle supprime la nécessité d'une double coïncidence des besoins", ["Elle supprime toute inflation", "Elle interdit le crédit", "Elle fixe le prix de tous les biens"], "Avec la monnaie, chacun vend contre monnaie puis achète ce dont il a besoin.", 3),
+    ("Quel est le rôle de la monnaie comme unité de compte ?", "Exprimer les prix et les dettes dans un même étalon", ["Garantir les dépôts bancaires", "Financer les entreprises", "Fixer le taux d'intérêt"], "On compare ainsi des biens différents.", 2),
+    ("Comment les banques commerciales créent-elles de la monnaie ?", "En accordant des crédits qui se traduisent par des dépôts", ["En imprimant des billets", "En prélevant des impôts", "En fixant le taux directeur"], "Un crédit crée un dépôt, donc de la monnaie scripturale.", 3),
+    ("Quelle est la fonction du multiplicateur de crédit simple ?", "Montrer qu'un dépôt peut engendrer un volume de monnaie supérieur par les crédits successifs", ["Mesurer la hausse des prix", "Calculer le taux de change", "Fixer le salaire minimum"], "Il est lié à la part des dépôts conservée en réserves.", 4),
+    ("Dans le modèle simple du multiplicateur de crédit, quelle est la valeur maximale du multiplicateur si le taux de réserves vaut r ?", "1/r", ["r", "r/(1 + r)", "(1 − r)/r"], "Chaque tour de prêts réinjecte (1 − r) des dépôts reçus.", 4),
+    ("De quoi la base monétaire est-elle composée ?", "Des billets en circulation et des réserves des banques à la banque centrale", ["Des dépôts à vue des ménages uniquement", "Des actions cotées", "Des créances de l'État sur les ménages"], "C'est la monnaie émise par la banque centrale.", 4),
+    ("Laquelle de ces missions relève d'une banque centrale ?", "Conduire la politique monétaire et émettre la monnaie légale", ["Collecter l'impôt sur les sociétés", "Octroyer les crédits de campagne aux particuliers", "Fixer les prix des produits de base"], "Elle est la banque des banques.", 2),
+    ("Que signifie « prêteur en dernier ressort » ?", "La banque centrale fournit des liquidités aux banques en difficulté pour éviter la panique", ["L'État rembourse les créanciers des entreprises", "Le dernier prêt accordé est toujours remboursé en premier", "Le FMI finance les ménages"], "Elle protège ainsi la stabilité du système financier.", 3),
+    ("Que se passe-t-il, en principe, quand la banque centrale relève son taux directeur ?", "Le crédit devient plus cher, ce qui freine la demande et l'inflation", ["Le crédit devient moins cher et la demande augmente", "La monnaie perd sa fonction de réserve", "Les prix baissent immédiatement"], "C'est le canal du taux d'intérêt de la politique monétaire.", 2),
+    ("Quelle opération d'open market injecte de la liquidité dans le système bancaire ?", "L'achat de titres par la banque centrale", ["La vente de titres par la banque centrale", "Le relèvement des réserves obligatoires", "L'augmentation du taux directeur"], "Elle paie les titres en monnaie centrale.", 4),
+    ("Quel effet a une hausse des réserves obligatoires ?", "Elle réduit la capacité de crédit des banques", ["Elle augmente la capacité de crédit des banques", "Elle augmente directement les prix", "Elle supprime le risque de crédit"], "Les banques ont moins de ressources à prêter.", 3),
+    ("Quelle est la différence essentielle entre marché monétaire et marché financier ?", "Le marché monétaire traite les capitaux à court terme, le marché financier les capitaux à long terme", ["Le marché monétaire est réservé aux particuliers", "Le marché financier ne traite que des devises", "Il n'y a aucune différence"], "Actions et obligations relèvent du marché financier.", 3),
+    ("Qu'est-ce que le marché interbancaire ?", "Le marché où les banques se prêtent des liquidités à court terme", ["Le marché où les banques vendent des actions à leurs clients", "Le marché où l'État fixe le prix de l'or", "Le marché des changes manuels"], "Il fait partie du marché monétaire.", 3),
+    ("Que représente une action ?", "Une part de capital d'une société donnant droit aux dividendes et à des droits de vote", ["Une créance remboursable à échéance avec intérêts fixes", "Un dépôt à vue", "Un billet à ordre"], "L'actionnaire est propriétaire d'une fraction de la société.", 2),
+    ("Que représente une obligation ?", "Une part d'emprunt, créance sur l'émetteur rémunérée par des intérêts", ["Une part de capital d'une société", "Un droit de vote en assemblée", "Un titre de propriété immobilière"], "Le porteur est prêteur, non propriétaire.", 2),
+    ("Que se passe-t-il sur le marché primaire ?", "Les titres nouvellement émis sont vendus pour la première fois", ["Les titres déjà émis sont échangés entre investisseurs", "Les devises sont échangées", "Les dettes sont annulées"], "Le marché secondaire est celui de la revente.", 3),
+    ("Qu'est-ce que l'intermédiation financière ?", "Le rôle des banques qui collectent l'épargne et la transforment en crédits", ["La fixation des prix agricoles", "La gestion du budget de l'État", "La collecte de l'impôt"], "Elle met en relation agents à capacité et à besoin de financement.", 3),
+    ("Qu'est-ce que la transformation d'échéances par une banque ?", "Elle finance des prêts à long terme avec des ressources à court terme", ["Elle prête exclusivement des devises", "Elle émet des chèques pour l'État", "Elle remplace les dépôts par des actions"], "Elle l'expose à un risque de liquidité.", 4),
+    ("Quel rôle joue le Comité de Bâle ?", "Élaborer des normes de supervision prudentielle des banques", ["Fixer le taux directeur mondial", "Émettre une monnaie internationale", "Arbitrer les litiges commerciaux"], "Les règles de Bâle fixent notamment des exigences de fonds propres.", 4),
+    ("Pourquoi les banques doivent-elles disposer de fonds propres suffisants ?", "Pour absorber des pertes sans mettre en danger les déposants", ["Pour payer les salaires de l'État", "Pour acheter des devises", "Pour éviter de verser des intérêts"], "C'est l'objet des ratios de solvabilité.", 3),
+    ("Que protège un système de garantie des dépôts ?", "Une partie des dépôts des clients en cas de défaillance d'une banque", ["Les actionnaires de la banque", "Les emprunts de l'État", "Les bénéfices bancaires"], "Il vise à éviter les ruées bancaires.", 3),
+    ("Quel est le principal motif de la ruée bancaire ?", "La crainte de ne pas pouvoir retirer ses dépôts", ["Une hausse du taux directeur", "Une baisse du salaire minimum", "Une hausse des exportations"], "Chacun retire pour ne pas être le dernier servi, ce qui peut provoquer la faillite.", 3),
+    ("Selon Keynes, quels sont les trois motifs de détention de monnaie ?", "Transaction, précaution et spéculation", ["Épargne, crédit et assurance", "Salaire, profit et rente", "Production, échange et consommation"], "Le motif de spéculation dépend du taux d'intérêt.", 4),
+    ("Qu'appelle-t-on trappe à liquidité ?", "Une situation où, à taux très bas, la monnaie supplémentaire est thésaurisée", ["Une panne du système de paiement", "Une fuite des capitaux vers l'étranger", "Une hausse brutale du taux directeur"], "La politique monétaire perd alors de son efficacité.", 4),
+    ("Qu'est-ce que la neutralité de la monnaie ?", "À long terme, la monnaie n'influence que les variables nominales, pas les réelles", ["La monnaie n'a aucune valeur", "La monnaie ne circule jamais", "La banque centrale ne peut émettre de monnaie"], "Elle est discutée à court terme.", 4),
+    ("Quelle est la différence entre le taux d'intérêt nominal et le taux d'intérêt réel ?", "Le taux réel est corrigé de l'inflation, le taux nominal ne l'est pas", ["Le taux nominal est fixé par l'État, le taux réel par la banque", "Le taux réel s'applique aux seules entreprises", "Il n'y a aucune différence"], "Taux réel ≈ taux nominal − inflation.", 2),
+    ("Quel type de monnaie représente la majeure partie de la masse monétaire dans une économie moderne ?", "La monnaie scripturale", ["Les pièces métalliques", "Les billets", "L'or monétaire"], "Elle est créée par le système bancaire à travers les dépôts.", 3),
+    ("Que contiennent généralement les agrégats monétaires M1, M2, M3, du plus étroit au plus large ?", "Des actifs de moins en moins liquides, M1 étant le plus liquide", ["Des actifs de plus en plus liquides", "Seulement des devises", "Seulement des dépôts à terme"], "Leur définition précise varie selon les banques centrales.", 3),
+    ("Qu'est-ce qu'un taux d'intérêt directeur ?", "Le taux auquel la banque centrale prête aux banques et qui oriente les autres taux", ["Le taux de rendement d'une obligation d'entreprise", "Le taux du livret d'épargne des ménages", "Le taux de change officiel"], "C'est le principal instrument de la politique monétaire.", 2),
+    ("Quelle différence y a-t-il entre dépréciation et dévaluation ?", "La dévaluation est une décision officielle, la dépréciation résulte du marché", ["La dépréciation est une décision officielle, la dévaluation résulte du marché", "Ce sont deux hausses de la monnaie", "La dévaluation concerne uniquement le secteur public"], "La dévaluation suppose un régime de change fixe.", 3),
+], cat="Monnaie et banque", src="sup-eco-monnaie")
+
+split(L2, L3, "eco2-com-q1", [
+    ("Quelle est l'idée centrale de l'avantage comparatif de Ricardo ?", "Chaque pays gagne à se spécialiser dans le bien où son coût d'opportunité est le plus faible", ["Un pays gagne seulement s'il produit tout moins cher que les autres", "Le commerce profite à un seul des deux pays", "Il faut interdire les importations pour s'enrichir"], "Même un pays moins efficace en tout gagne à l'échange.", 3),
+    ("Quelle différence y a-t-il entre avantage absolu (Smith) et avantage comparatif (Ricardo) ?", "L'avantage absolu compare les coûts de production, l'avantage comparatif les coûts d'opportunité", ["L'avantage absolu concerne les services, l'avantage comparatif les biens", "Ils sont identiques", "L'avantage comparatif ne concerne que le tarif douanier"], "Le second explique le commerce même sans avantage absolu.", 4),
+    ("Dans l'exemple type de Ricardo, quelles marchandises échangent l'Angleterre et le Portugal ?", "Du drap et du vin", ["De l'or et du blé", "Du pétrole et du cacao", "Du coton et du café"], "Cet exemple est l'illustration classique du gain à l'échange.", 3),
+    ("Que prédit le modèle de Heckscher-Ohlin ?", "Un pays exporte le bien intensif dans le facteur dont il est relativement abondant", ["Un pays exporte le bien qu'il produit le moins", "Les pays ne commercent que si leurs technologies diffèrent", "Le commerce est toujours intra-branche"], "Les avantages comparatifs viennent des dotations factorielles.", 4),
+    ("Quelle hypothèse distingue Heckscher-Ohlin du modèle ricardien ?", "Les technologies sont identiques et les pays diffèrent par leurs dotations en facteurs", ["Les pays ont des technologies différentes", "Un seul facteur de production existe", "Les biens sont différenciés"], "Le modèle ricardien repose sur des différences de productivité du travail.", 4),
+    ("Qu'est-ce que le paradoxe de Leontief ?", "Les exportations américaines étaient moins capitalistiques que les produits importés concurrents", ["Les États-Unis n'avaient pas de commerce extérieur", "Les importations croissent toujours plus vite que les exportations", "Les termes de l'échange sont toujours stables"], "Il a conduit à approfondir l'analyse du commerce.", 5),
+    ("Quel théorème dit qu'une hausse du prix relatif d'un bien accroît le rendement réel du facteur utilisé intensivement pour le produire ?", "Le théorème de Stolper-Samuelson", ["Le théorème de Coase", "Le théorème de Modigliani-Miller", "Le théorème de Haavelmo"], "Il met en évidence les gagnants et perdants du commerce.", 5),
+    ("Quelle observation la nouvelle théorie du commerce (Krugman) explique-t-elle ?", "Le commerce intra-branche entre pays semblables, fondé sur échelle et différenciation", ["Le commerce entre pays de revenus très différents seulement", "L'absence de commerce entre pays voisins", "Le seul commerce de matières premières"], "Elle repose sur la concurrence monopolistique et les rendements croissants.", 4),
+    ("Que décrit le cycle de vie du produit de Vernon ?", "Un produit né dans un pays avancé voit sa production se déplacer vers des pays à bas coûts", ["Le cycle des prix agricoles", "L'évolution des dépenses publiques", "La rotation des stocks d'une entreprise"], "La production se déplace au fil de la standardisation.", 4),
+    ("Quel est l'effet d'un droit de douane sur le prix intérieur d'un bien importé ?", "Il tend à l'augmenter", ["Il tend à le diminuer", "Il le rend toujours nul", "Il n'a aucun effet"], "Le droit s'ajoute au prix mondial.", 2),
+    ("Qui bénéficie d'un droit de douane dans un petit pays preneur de prix mondial ?", "Les producteurs nationaux et l'État, au détriment des consommateurs", ["Les consommateurs seuls", "Les producteurs étrangers", "Personne, le droit n'a aucun effet"], "Le surplus des consommateurs baisse plus que la somme des gains, d'où une perte sèche.", 3),
+    ("Quelle différence y a-t-il entre quota et droit de douane ?", "Le quota limite la quantité importée, le droit de douane renchérit le prix", ["Le quota est une taxe, le droit de douane une limite", "Ce sont deux types de subvention", "Le quota concerne uniquement les exportations"], "Le quota peut créer une rente pour ceux qui détiennent les licences.", 3),
+    ("Qu'est-ce que l'argument de l'industrie naissante ?", "Protéger temporairement une industrie jeune, le temps qu'elle devienne compétitive", ["Interdire toute industrie nouvelle", "Taxer toutes les exportations", "Taxer les importations à vie"], "Il est associé notamment à Friedrich List.", 4),
+    ("Qu'est-ce que la thèse de Prebisch et Singer ?", "La baisse tendancielle des termes de l'échange des produits primaires face aux produits manufacturés", ["Une hausse constante des prix des matières premières", "L'égalisation des revenus entre pays", "L'inutilité de l'industrialisation"], "Elle a servi à justifier l'industrialisation par substitution aux importations.", 5),
+    ("Qu'est-ce que l'industrialisation par substitution aux importations ?", "Produire localement ce qui était importé, derrière des protections", ["Importer toute la production industrielle", "Exporter uniquement des matières premières", "Supprimer tous les droits de douane"], "Elle fut très pratiquée dans de nombreux pays en développement.", 4),
+    ("Qu'est-ce qu'une amélioration des termes de l'échange ?", "Le prix des exportations monte par rapport à celui des importations", ["Le prix des importations monte par rapport à celui des exportations", "Le volume des exportations double", "Le taux de change se déprécie"], "Un pays peut acheter plus d'importations avec la même quantité d'exportations.", 3),
+    ("Que mesure le taux de couverture ?", "Le rapport des exportations aux importations", ["Le rapport de la dette aux exportations", "Le rapport du PIB aux importations", "Le rapport de l'épargne au PIB"], "Un taux supérieur à 100 % correspond à un excédent commercial.", 2),
+    ("Que signifie un excédent de la balance commerciale ?", "Les exportations de biens dépassent les importations de biens", ["Les importations dépassent les exportations", "L'État dégage un excédent budgétaire", "Le chômage est nul"], "Le solde est positif.", 2),
+    ("Selon la condition de Marshall-Lerner, quand une dépréciation améliore-t-elle la balance commerciale ?", "Quand la somme des élasticités-prix des exportations et des importations dépasse 1 en valeur absolue", ["Quand l'élasticité des exportations est nulle", "Quand le pays est une économie fermée", "Quand les importations sont inélastiques et les exportations aussi"], "Sinon, l'effet prix l'emporte sur l'effet volume.", 5),
+    ("Que décrit la courbe en J ?", "À court terme, une dépréciation dégrade d'abord la balance commerciale avant de l'améliorer", ["Une hausse permanente des importations", "L'évolution du taux d'intérêt après une relance", "L'effet d'un quota sur les prix"], "Les volumes s'ajustent plus lentement que les prix.", 5),
+    ("Que dit la parité de pouvoir d'achat absolue ?", "Le taux de change égalise le prix d'un même panier de biens exprimé dans la même monnaie", ["Le taux de change est égal au taux d'intérêt", "Les prix sont toujours fixes", "Le taux de change dépend uniquement du déficit"], "En pratique, elle est surtout vérifiée à long terme et approximativement.", 4),
+    ("Que décrit le syndrome hollandais ?", "La hausse de la monnaie liée à un boom d'exportations de ressources, qui pénalise l'industrie", ["Le manque de main-d'œuvre agricole", "Une dévaluation compétitive", "L'effondrement des importations"], "Le nom vient de l'expérience néerlandaise après la découverte de gaz.", 5),
+    ("Quel est le principe du trilemme de Mundell ?", "Impossible de combiner change fixe, libre circulation des capitaux et autonomie monétaire", ["Il faut choisir entre inflation, chômage et dette", "On ne peut avoir à la fois croissance, emploi et équité", "Aucun régime de change n'est possible"], "Un pays doit renoncer à l'un des trois objectifs.", 4),
+    ("Que signifie un régime de change fixe pour la banque centrale ?", "Elle doit défendre la parité par ses interventions et ses réserves", ["Elle laisse le cours se fixer librement", "Elle supprime ses réserves de change", "Elle abandonne toute politique monétaire à la monnaie étrangère par principe"], "Elle perd en général la liberté de fixer ses taux indépendamment.", 3),
+    ("Quelle fut une caractéristique du système de Bretton Woods ?", "Des changes fixes mais ajustables autour du dollar, lui-même convertible en or", ["Des changes totalement flottants", "L'abandon de toute monnaie nationale", "Une monnaie unique mondiale"], "Il fut mis en place à la fin de la Seconde Guerre mondiale avec le FMI et la Banque mondiale.", 4),
+    ("Que sont les droits de tirage spéciaux (DTS) ?", "Un avoir de réserve créé par le FMI, attribué à ses membres", ["Un impôt prélevé par l'OMC", "Une monnaie émise par la Banque mondiale", "Un fonds d'aide aux ménages"], "Leur valeur est liée à un panier de monnaies.", 4),
+    ("Quelle est la mission principale de l'OMC ?", "Superviser les règles du commerce international et régler les différends entre membres", ["Fixer les taux de change", "Octroyer des prêts aux États", "Émettre une monnaie internationale"], "Elle a succédé au GATT.", 2),
+    ("Quel est le principe de la clause de la nation la plus favorisée ?", "Un avantage commercial accordé à un membre doit être étendu à tous les autres", ["Chaque membre peut fixer ses propres droits à volonté", "L'État le plus riche fixe les règles", "Seuls les pays pauvres ont droit aux avantages"], "Elle vise à éviter la discrimination entre partenaires.", 4),
+    ("Quelle est la différence entre une zone de libre-échange et une union douanière ?", "L'union douanière ajoute un tarif extérieur commun", ["La zone de libre-échange a un tarif extérieur commun", "L'union douanière libère les capitaux mais pas les biens", "Il n'y a pas de différence"], "Dans la zone de libre-échange, chaque pays garde ses propres tarifs.", 3),
+    ("Qu'est-ce que le dumping ?", "Vendre à l'étranger à un prix inférieur à celui du marché d'origine ou aux coûts", ["Surtaxer les importations", "Interdire les exportations", "Dévaluer sa monnaie"], "L'OMC autorise des mesures antidumping sous conditions.", 3),
+    ("Que mesure la compétitivité-prix d'un pays ?", "Le niveau de ses prix comparés à ceux des concurrents, exprimés dans la même monnaie", ["Le niveau de son PIB", "Le nombre de ses exportateurs", "Son taux d'épargne"], "Elle dépend des prix et du taux de change.", 3),
+    ("Quelle est la relation entre une hausse du taux d'intérêt intérieur et le taux de change en mobilité des capitaux ?", "Elle attire des capitaux et tend à apprécier la monnaie", ["Elle déprécie toujours la monnaie", "Elle supprime toute entrée de capitaux", "Elle fixe le taux de change"], "Les placements deviennent plus rémunérateurs.", 4),
+], cat="Commerce international", src="sup-eco-commerce")
+
+# =====================================================================================================================
+# CEMAC, ZONE FRANC (niveau général : ni taux ni date incertaine)
+# =====================================================================================================================
+table(L2, "eco2-cemac-inst", [
+    ("la BEAC", "la banque centrale de la CEMAC, qui émet le franc CFA d'Afrique centrale", 2),
+    ("la BCEAO", "la banque centrale des États de l'Afrique de l'Ouest qui partagent le franc CFA ouest-africain", 3),
+    ("la COBAC", "la Commission bancaire de l'Afrique centrale, chargée de contrôler les banques de la zone", 3),
+    ("la BDEAC", "la banque de développement des États d'Afrique centrale, qui finance des projets de développement", 4),
+    ("la CEMAC", "la Communauté économique et monétaire de l'Afrique centrale", 2),
+    ("l'UEMOA", "l'Union économique et monétaire ouest-africaine", 3),
+    ("la CEEAC", "la Communauté économique des États de l'Afrique centrale", 4),
+    ("la CEDEAO", "la Communauté économique des États de l'Afrique de l'Ouest", 3),
+    ("la ZLECAf", "la zone de libre-échange continentale africaine", 3),
+    ("la BAD", "la Banque africaine de développement", 2),
+], cat="Zone franc et CEMAC", src="sup-eco-cemac", region="AF",
+    fwd="Que désigne {a} ?", rev="De quelle institution ou organisation s'agit-il : {b} ?")
+
+split3("eco2-cemac-q1", [
+    ("Quelle institution émet le franc CFA utilisé au Cameroun ?", "La Banque des États de l'Afrique centrale (BEAC)", ["La Banque centrale des États de l'Afrique de l'Ouest (BCEAO)", "La Banque de France", "La Banque mondiale"], "La BEAC est la banque centrale de la CEMAC.", 2),
+    ("Dans quelle ville se trouve le siège de la BEAC ?", "Yaoundé", ["Douala", "Libreville", "Brazzaville"], "Le siège de la BEAC est à Yaoundé.", 2),
+    ("Quelle institution émet le franc CFA en Afrique de l'Ouest ?", "La BCEAO", ["La BEAC", "La BAD", "La BDEAC"], "La BCEAO est la banque centrale de l'UEMOA.", 2),
+    ("Combien d'États compte la CEMAC ?", "Six", ["Quatre", "Huit", "Onze"], "Cameroun, Congo, Gabon, Guinée équatoriale, République centrafricaine et Tchad.", 2),
+    ("Lequel de ces pays est membre de la CEMAC ?", "Le Gabon", ["Le Sénégal", "Le Ghana", "La Côte d'Ivoire"], "Le Sénégal et la Côte d'Ivoire sont dans l'UEMOA, le Ghana a sa propre monnaie.", 2),
+    ("Lequel de ces pays n'est pas membre de la CEMAC ?", "Le Nigeria", ["Le Tchad", "La Guinée équatoriale", "La République centrafricaine"], "Le Nigeria a sa propre monnaie, le naira.", 3),
+    ("Lequel de ces pays n'est pas membre de la CEMAC ?", "Le Mali", ["Le Congo", "Le Gabon", "Le Cameroun"], "Le Mali appartient à l'UEMOA.", 3),
+    ("Quel est le rôle de la COBAC ?", "Contrôler et superviser les établissements de crédit de la zone CEMAC", ["Émettre les billets de la zone", "Fixer le taux de change du franc CFA", "Arbitrer les litiges commerciaux"], "C'est l'autorité de supervision bancaire de la zone.", 3),
+    ("Quelle est la mission principale de la BEAC ?", "Garantir la stabilité de la monnaie et mener la politique monétaire commune", ["Collecter les impôts des États membres", "Gérer les écoles de la région", "Fixer les prix des produits agricoles"], "Elle émet le franc CFA et conduit la politique monétaire commune.", 2),
+    ("Comment la parité du franc CFA est-elle caractérisée ?", "Elle est fixe par rapport à l'euro", ["Elle flotte librement chaque jour", "Elle est fixée par un vote de l'OMC", "Elle est déterminée par le prix de l'or uniquement"], "Le franc CFA est arrimé à l'euro, avec une parité fixe.", 3),
+    ("Qui apporte en principe la garantie de convertibilité du franc CFA d'Afrique centrale à parité fixe ?", "Le Trésor français", ["La Banque mondiale", "L'OMC", "Le Parlement européen"], "Cette garantie accompagne l'arrimage à l'euro.", 4),
+    ("Le franc CFA de la zone CEMAC et celui de l'UEMOA sont-ils interchangeables légalement ?", "Non, ce sont deux monnaies distinctes émises par deux banques centrales", ["Oui, ce sont deux billets de la même monnaie", "Oui, mais seulement au Cameroun", "Non, parce que l'un est en euros"], "Ils partagent un nom et un régime de parité, mais pas la circulation légale.", 4),
+    ("Quelle est la devise officielle du Cameroun ?", "Le franc CFA (franc de la Coopération financière en Afrique centrale)", ["L'euro", "Le naira", "Le dollar"], "La BEAC en assure l'émission.", 1),
+    ("Que désigne l'abréviation UEMOA ?", "Union économique et monétaire ouest-africaine", ["Union économique et monétaire d'Afrique centrale", "Union économique mondiale de l'Afrique", "Union européenne de la monnaie ouest-africaine"], "C'est l'union de plusieurs États d'Afrique de l'Ouest.", 3),
+    ("Que désigne l'abréviation CEMAC ?", "Communauté économique et monétaire de l'Afrique centrale", ["Commission économique et monétaire d'Afrique centrale", "Conférence des États du marché africain commun", "Communauté européenne des marchés d'Afrique centrale"], "Elle compte six États membres.", 2),
+    ("Que comprend la zone franc ?", "Des États africains partageant un franc CFA, ainsi que les Comores", ["Uniquement le Cameroun", "Seulement les pays francophones d'Europe", "L'ensemble des pays du continent"], "Elle réunit les zones CEMAC et UEMOA ainsi que les Comores.", 4),
+    ("Que sont les deux unions de la CEMAC ?", "L'union économique (UEAC) et l'union monétaire (UMAC)", ["L'union douanière et l'union fiscale", "L'union agricole et l'union industrielle", "L'union politique et l'union militaire"], "La CEMAC repose sur ces deux piliers.", 4),
+    ("Dans quelle ville est établi le siège de la Commission de la CEMAC ?", "Bangui", ["Yaoundé", "Libreville", "N'Djamena"], "Le siège de la Commission de la CEMAC est à Bangui.", 4),
+    ("Dans quelle ville est établi le siège de la BCEAO ?", "Dakar", ["Abidjan", "Ouagadougou", "Lomé"], "La BCEAO a son siège à Dakar.", 3),
+    ("Quel est l'objectif d'une union monétaire ?", "Partager une monnaie commune et une politique monétaire unique", ["Supprimer toute monnaie", "Fixer les mêmes impôts partout", "Abolir les frontières politiques"], "Elle suppose une banque centrale commune.", 3),
+    ("Quel est le rôle d'une banque centrale commune dans une union monétaire ?", "Conduire la politique monétaire pour l'ensemble des États membres", ["Voter les budgets nationaux", "Percevoir l'impôt", "Désigner les ministres"], "Chaque État renonce à sa politique monétaire nationale.", 3),
+    ("Quelle contrainte une monnaie commune fait-elle peser sur les États membres ?", "Ils ne peuvent plus utiliser seuls le taux de change comme variable d'ajustement", ["Ils doivent supprimer leur budget", "Ils ne peuvent plus commercer", "Ils renoncent à toute fiscalité"], "Les chocs spécifiques doivent être absorbés autrement.", 4),
+    ("Quel est le principal intérêt d'un taux de change fixe avec l'euro pour un pays de la zone ?", "La stabilité du cours avec les partenaires de la zone euro", ["Une inflation toujours plus élevée", "Une dépréciation automatique", "Le contrôle total de la politique monétaire"], "Elle facilite le commerce avec ce partenaire.", 4),
+    ("Quel est un inconvénient possible d'un taux de change fixe avec l'euro ?", "L'impossibilité de dévaluer pour retrouver de la compétitivité", ["Une hausse automatique des exportations", "La suppression de tout risque de dette", "Une inflation nulle garantie"], "Le pays ne peut plus ajuster le cours seul.", 4),
+    ("Quelle banque finance des projets de développement dans les États de la CEMAC ?", "La BDEAC", ["La COBAC", "La BCEAO", "L'OMC"], "Elle a son siège à Brazzaville.", 4),
+    ("Dans quelle ville se trouve le siège de la BDEAC ?", "Brazzaville", ["Yaoundé", "Malabo", "Bangui"], "La Banque de développement des États de l'Afrique centrale est établie à Brazzaville.", 5),
+    ("Comment appelle-t-on la Bourse de valeurs du Cameroun ?", "La Douala Stock Exchange (DSX)", ["La Bourse de Paris", "La Bourse d'Abidjan", "La Bourse de Londres"], "Elle est établie à Douala.", 3),
+    ("Que permet une zone de libre-échange continentale africaine (ZLECAf) ?", "Réduire les barrières commerciales entre pays africains membres", ["Créer une monnaie unique africaine immédiate", "Supprimer toutes les banques centrales", "Fusionner les États membres"], "Elle vise à créer un grand marché continental.", 3),
+    ("Quel est le code ISO du franc CFA d'Afrique centrale ?", "XAF", ["XOF", "EUR", "CFA"], "XOF désigne le franc CFA d'Afrique de l'Ouest.", 5),
+    ("Quel est le code ISO du franc CFA d'Afrique de l'Ouest ?", "XOF", ["XAF", "USD", "NGN"], "XAF est celui de l'Afrique centrale.", 5),
+    ("Que désigne une dévaluation du franc CFA ?", "Une baisse officielle de sa parité par rapport à la monnaie d'ancrage", ["Une hausse du taux directeur", "Une baisse du PIB", "Un abandon du franc CFA"], "La parité fixe a été modifiée à la baisse notamment en 1994.", 3),
+    ("Quel organe de la CEMAC comprend les chefs d'État des pays membres ?", "La Conférence des chefs d'État", ["La Cour de justice", "La COBAC", "Le Parlement communautaire"], "C'est l'organe suprême de la Communauté.", 4),
+    ("Quelle institution de la CEMAC exerce la fonction juridictionnelle communautaire ?", "La Cour de justice communautaire", ["La COBAC", "La BEAC", "La Banque mondiale"], "Elle a une compétence juridictionnelle propre.", 4),
+], cat="Zone franc et CEMAC", src="sup-eco-cemac", region="AF")
