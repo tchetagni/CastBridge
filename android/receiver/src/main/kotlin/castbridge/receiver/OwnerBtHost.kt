@@ -28,8 +28,12 @@ class OwnerBtHost(private val ctx: Context, private val status: (String?) -> Uni
 
     private val channel = OwnerChannelServer(
         deviceInfo = { ActivationCenter.requestText() },
-        activate = { token -> ActivationCenter.accept(Channel.MANUAL, token.toByteArray(Charsets.UTF_8)) },
+        // NOT activated here: the key is verified, placed in the field of the activation screen, and the owner confirms on the TV
+        activate = { token -> ActivationCenter.stage(token).also { if (it is ActivationResult.Accepted) showActivationScreen() } },
+        acceptedText = "Clé reçue et valide : sur la TV, appuyez sur « Valider la clé »",
     )
+
+    private fun showActivationScreen() { runCatching { ctx.startActivity(android.content.Intent(ctx, ActivationActivity::class.java).addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK)) } }
 
     @Synchronized fun start() {
         if (running) return

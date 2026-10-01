@@ -36,6 +36,13 @@ class ActivationActivity : Activity() {
     private val poll = object : Runnable {
         override fun run() {
             if (done) return
+            ActivationCenter.pending?.let { k ->
+                if (input.text.toString().trim() != k) {
+                    input.setText(k)
+                    status.setTextColor(0xFF6FE0A0.toInt()); status.text = "Clé reçue du téléphone par Bluetooth. Appuyez sur « Valider la clé » pour activer."
+                    validate.requestFocus()
+                }
+            }
             val r = Thread { val res = ActivationCenter.scanFiles(); h.post { if (res != null) show(res, "la clé USB") } }
             r.start(); h.postDelayed(this, 2_000)
         }
@@ -73,7 +80,8 @@ class ActivationActivity : Activity() {
             inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE or InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS; minLines = 2
         }
         col.addView(input, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT))
-        col.addView(Button(this).apply { text = "Valider la clé"; textSize = 20f; setOnClickListener { enter() } })
+        validate = Button(this).apply { text = "Valider la clé"; textSize = 20f; setOnClickListener { enter() } }
+        col.addView(validate)
         col.addView(Button(this).apply { text = "Chercher la clé sur la clé USB"; textSize = 20f; setOnClickListener { Thread { val r = ActivationCenter.scanFiles(); h.post { if (r != null) show(r, "la clé USB") else status.text = "Aucun fichier « activation » trouvé sur la clé USB." } }.start() } })
         col.addView(tv("Plus simple : sur le téléphone, ouvrez CastBridge > « Activer la TV », collez la clé : le téléphone trouve cette TV par Bluetooth et l'envoie.", 18f, 0xFFB8C0D6.toInt()))
         col.addView(Button(this).apply { text = "Rendre la TV visible pour le téléphone (Bluetooth)"; textSize = 20f; setOnClickListener { makeVisible() } })
@@ -82,6 +90,7 @@ class ActivationActivity : Activity() {
     }
 
     private lateinit var btLine: TextView
+    private lateinit var validate: Button
     private var askedVisible = false
     /** Makes the TV discoverable for 5 minutes (the system asks for a confirmation on the TV), so the owner's phone can find it and pair by itself. */
     private fun makeVisible() {

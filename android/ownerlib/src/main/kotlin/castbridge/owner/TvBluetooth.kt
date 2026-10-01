@@ -92,6 +92,22 @@ object TvBluetooth {
         return d.bondState == BluetoothDevice.BOND_BONDED
     }
 
+    /** The services the TV declares now, or null if it did not answer in time. */
+    private fun freshServices(ctx: Context, dev: BluetoothDevice): List<String>? {
+        val done = CountDownLatch(1); var list: List<String>? = null
+        val rx = object : BroadcastReceiver() {
+            override fun onReceive(c: Context, i: Intent) {
+                val d = i.getParcelableExtra<BluetoothDevice>(BluetoothDevice.EXTRA_DEVICE) ?: return
+                if (d.address != dev.address) return
+                list = i.getParcelableArrayExtra(BluetoothDevice.EXTRA_UUID)?.map { it.toString().lowercase() } ?: runCatching { d.uuids?.map { it.toString().lowercase() } }.getOrNull()
+                done.countDown()
+            }
+        }
+        ctx.registerReceiver(rx, IntentFilter(BluetoothDevice.ACTION_UUID))
+        try { if (dev.fetchUuidsWithSdp()) done.await(8, TimeUnit.SECONDS) } finally { runCatching { ctx.unregisterReceiver(rx) } }
+        return list
+    }
+
     /** Opens the channel to [tv] (pairing first if needed), runs [block] on it, always closes. Throws a readable message on failure. */
     fun <T> with(ctx: Context, tv: Tv, block: (OwnerChannelClient) -> T): T {
         val ad = adapter(ctx) ?: throw IllegalStateException("Bluetooth indisponible")
@@ -99,9 +115,15 @@ object TvBluetooth {
         if (!bond(ctx, tv.address)) throw IllegalStateException("Appairage non terminé : validez le code sur la TV et sur le téléphone, puis réessayez")
         val dev = ad.getRemoteDevice(tv.address)
         runCatching { ad.cancelDiscovery() }
+        // asks the TV what it offers right now (Android caches this list and can keep an old one): tells "service not started" from "link problem"
+        val offered = freshServices(ctx, dev)
+        android.util.Log.i("CbOwnerBt", "services de ${tv.name}: ${offered?.joinToString(",") { it.substringAfterLast('-') } ?: "inconnus"}")
+        if (offered != null && offered.none { it.equals(OwnerFrames.SERVICE_UUID, true) })
+            throw IllegalStateException("La TV est jointe mais n'annonce pas le canal d'activation (${offered.count { it.startsWith(CB_PREFIX, true) }} service(s) CastBridge). Ouvrez CastBridge-TV (0.14.4 ou plus) : l'écran d'activation affiche « Bluetooth d'activation : prêt ».")
         val sock = dev.createRfcommSocketToServiceRecord(UUID.fromString(OwnerFrames.SERVICE_UUID))
         try {
             try { sock.connect() } catch (e: java.io.IOException) {
+                android.util.Log.w("CbOwnerBt", "connect: ${e.message}")
                 throw IllegalStateException("Connexion impossible : ouvrez CastBridge-TV (version 0.14.2 ou plus) sur la TV, puis réessayez")
             }
             val c = OwnerChannelClient(sock.inputStream, sock.outputStream)

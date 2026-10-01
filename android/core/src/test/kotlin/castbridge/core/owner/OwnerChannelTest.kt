@@ -44,6 +44,20 @@ class OwnerChannelTest {
         l.close()
     }
 
+    @Test fun theTvCanOnlyStageTheKeyAndSaysSoWithoutActivating() {
+        val staged = ArrayList<String>(); val installed = ArrayList<String>()
+        val srv = OwnerChannelServer(
+            deviceInfo = { OwnerFrames.deviceInfo(DeviceCode.of(fp), fp) },
+            activate = { t -> receiver.receive(Channel.MANUAL, t.toByteArray(), now).also { if (it is ActivationResult.Accepted) staged += t } },
+            acceptedText = "Clé reçue : validez sur la TV")
+        val l = Link(srv); l.client.hello()
+        val token = ActivationIssuer(signer).issue(ActivationIssuer.Request(ActivationKind.TRIAL, DeviceCode.of(fp), fp, issuedAt = now, windowDays = 30)).token
+        val a = l.client.sendActivation(token)
+        assertTrue(a.ok); assertEquals("Clé reçue : validez sur la TV", a.message)
+        assertEquals(listOf(token), staged); assertTrue(installed.isEmpty(), "nothing installed by the channel: the owner confirms on the TV")
+        l.close()
+    }
+
     @Test fun aCompactKeyTypedOnThePhoneIsAcceptedToo() {
         val l = Link(server()); l.client.hello()
         val key = ActivationIssuer(signer).issueCompact(ActivationKind.TRIAL, DeviceCode.of(fp), ((now - CompactActivation.EPOCH_MS) / 86_400_000L).toInt(), 30)

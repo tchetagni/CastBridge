@@ -82,10 +82,20 @@ object ActivationCenter {
     // ---- activation channels (file, typed text): one verification path ----
     private fun receiver() = ActivationReceiver(ring, trusted, fp, Subject.TV)
 
+    /** A key pushed by the owner's phone over Bluetooth: verified (nothing installed) and kept here for the activation screen to paste in its field; the owner confirms with « Valider ». */
+    @Volatile var pending: String? = null
+    fun stage(text: String): ActivationResult {
+        if (!ready) init(app)
+        val r = receiver().receive(Channel.MANUAL, text.toByteArray(Charsets.UTF_8), now())
+        if (r is ActivationResult.Accepted) pending = text
+        return r
+    }
+
     @Synchronized fun accept(channel: Channel, payload: ByteArray): ActivationResult {
         val t = wall()
         val r = receiver().receive(channel, payload, now())
         if (r is ActivationResult.Accepted) {
+            pending = null
             installed.install(r.activation)
             clock.observe(wall(), r.activation.issuedAt); saveClock()
             val text = String(payload, Charsets.UTF_8).removePrefix("﻿").lineSequence().map { it.trim() }.firstOrNull { it.isNotEmpty() }.orEmpty()

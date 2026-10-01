@@ -82,7 +82,7 @@ class ActivateTvActivity : ComponentActivity() {
                     val a = runCatching { TvBluetooth.with(this@ActivateTvActivity, tv) { c -> c.sendActivation(k) } }
                     runOnUiThread {
                         busy = false
-                        a.onSuccess { r -> ok = r.ok; msg = if (r.ok) "TV activée. Elle se déverrouille dans quelques secondes." else "Refusée par la TV : ${r.message}"; if (r.ok) refresh() }
+                        a.onSuccess { r -> ok = r.ok; msg = if (r.ok) "Clé envoyée : ${r.message}" else "Refusée par la TV : ${r.message}"; if (r.ok) refresh() }
                          .onFailure { ok = false; msg = it.message ?: "Échec de l'envoi" }
                     }
                 }.start()

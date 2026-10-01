@@ -13,6 +13,8 @@ class OwnerChannelServer(
     private val deviceInfo: () -> String,
     private val activate: (String) -> ActivationResult,
     private val onRefusal: () -> Unit = {},
+    /** Text sent back when the token is valid (the TV may only STAGE it for the owner to confirm: then it says so). */
+    private val acceptedText: String = "Activée",
 ) {
     companion object { const val MAX_FRAMES = 12 }
 
@@ -38,7 +40,7 @@ class OwnerChannelServer(
     }
 
     private fun resultFrame(r: ActivationResult): ByteArray = when (r) {
-        is ActivationResult.Accepted -> OwnerFrames.encode(OwnerFrames.RESULT, byteArrayOf(1) + "Activée".toByteArray(Charsets.UTF_8))
+        is ActivationResult.Accepted -> OwnerFrames.encode(OwnerFrames.RESULT, byteArrayOf(1) + acceptedText.toByteArray(Charsets.UTF_8))
         is ActivationResult.Rejected -> OwnerFrames.encode(OwnerFrames.RESULT, byteArrayOf(0) + r.message.toByteArray(Charsets.UTF_8))
     }
 }
