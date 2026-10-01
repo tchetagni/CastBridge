@@ -25,7 +25,11 @@ enum class KeyScope {
     /** Sign revocation lists. */
     REVOKE,
     /** Sign licence registries (the synchronisation file of the three tools). */
-    REGISTRY;
+    REGISTRY,
+    /** Re-issue the activation of a seat that already exists (same hardware, no new seat): a key that may only reactivate cannot create seats. */
+    REACTIVATE,
+    /** Sign deferred orders (management policies, docs/agent-briefs/deferred-orders.md). The server key has it; no key gets it implicitly from another scope. */
+    POLICY;
 
     companion object {
         val ALL: Set<KeyScope> = values().toSet()
@@ -33,7 +37,7 @@ enum class KeyScope {
         fun upTo(power: Power): Set<KeyScope> = buildSet {
             add(COMMAND_SUPPORT)
             if (power.rank >= Power.UNLOCK.rank) { add(COMMAND_UNLOCK); add(ISSUE_TRIAL); add(ISSUE_PRODUCTION) }
-            if (power.rank >= Power.OPEN_ALL.rank) { add(COMMAND_OPEN_ALL); add(TRANSFER); add(REVOKE); add(REGISTRY) }
+            if (power.rank >= Power.OPEN_ALL.rank) { add(COMMAND_OPEN_ALL); add(TRANSFER); add(REVOKE); add(REGISTRY); add(REACTIVATE); add(POLICY) }
         }
         fun of(p: Power) = when (p) { Power.SUPPORT -> COMMAND_SUPPORT; Power.UNLOCK -> COMMAND_UNLOCK; Power.OPEN_ALL -> COMMAND_OPEN_ALL }
     }

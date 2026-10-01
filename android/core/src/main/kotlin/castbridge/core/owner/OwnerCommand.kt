@@ -11,54 +11,41 @@ import java.security.SecureRandom
  * maximum (30 days for « tout ouvert »). There is no secret and no hidden path in the TV: only public keys.
  */
 data class OwnerCommand(
-    val keyId: String, val power: Power, val action: String, val challenge: String, val k: Int, val factors: Map<FactorKind, String>,
+    val keyId: String, val seq: Long, val issuedAt: Long, val power: Power, val action: String, val challenge: String, val k: Int, val factors: Map<FactorKind, String>,
     val bundleIds: List<String>, val lots: List<LotId>, val days: Int, val signature: String,
 ) {
-    fun canonicalPayload(): String = payload(keyId, power, action, challenge, k, factors, bundleIds, lots, days)
+    /** The challenge IS the envelope nonce. `notBefore` = `issuedAt`; `expiresAt` = one day later (informative: a command is protected by its challenge, not by the wall clock). */
+    fun toEnvelope(): Envelope = Envelope(TYPE, keyId, seq, challenge, issuedAt, issuedAt, issuedAt + 24L * 3600 * 1000, Envelope.Target.Device(k, factors), body(power, action, bundleIds, lots, days), signature)
+    fun canonicalPayload(): String = toEnvelope().canonicalPayload()
 
-    fun encode(): String = "cbo1." + java.util.Base64.getUrlEncoder().withoutPadding().encodeToString(canonicalPayload().toByteArray(Charsets.UTF_8)) + "." + signature
+    fun encode(): String = toEnvelope().encode()
 
     companion object {
-        const val FORMAT = "castbridge-owner-command-v1"
-        private val HEX = Regex("^[0-9a-f]{16,64}$")
-        private val ID = Regex("^[a-z0-9][a-z0-9-]{0,63}$")
-        private val FP = Regex("^[0-9a-f]{32}$")
+        const val TYPE = "command"
+        private val ID = Envelope.ID
         val SUPPORT_ACTIONS = setOf("diagnostic", "reset-trial")
 
-        fun payload(keyId: String, power: Power, action: String, challenge: String, k: Int, factors: Map<FactorKind, String>,
-                    bundleIds: List<String>, lots: List<LotId>, days: Int): String = buildList {
-            add(FORMAT); add("kid=$keyId"); add("power=${power.name.lowercase()}"); add("action=$action"); add("challenge=$challenge"); add("k=$k")
-            factors.toSortedMap().forEach { (f, fp) -> add("factor=${f.name}|$fp") }
-            add("bundles=${bundleIds.sorted().joinToString(",")}")
-            add("lots=${lots.map(LotNames::key).sorted().joinToString(",")}")
-            add("days=$days")
-        }.joinToString("\n")
+        fun body(power: Power, action: String, bundleIds: List<String>, lots: List<LotId>, days: Int): List<String> =
+            listOf("power=${power.name.lowercase()}", "action=$action", "bundles=${bundleIds.sorted().joinToString(",")}", "lots=${lots.map(LotNames::key).sorted().joinToString(",")}", "days=$days")
 
-        fun decode(token: String): OwnerCommand? = runCatching {
-            val parts = token.trim().split('.')
-            require(parts.size == 3 && parts[0] == "cbo1")
-            val text = String(java.util.Base64.getUrlDecoder().decode(parts[1]), Charsets.UTF_8)
-            val lines = text.split('\n')
-            require(lines[0] == FORMAT)
-            fun field(i: Int, key: String) = lines[i].also { require(it.startsWith("$key=")) }.substringAfter('=')
-            val keyId = field(1, "kid").also { require(ID.matches(it)) }
-            val power = Power.valueOf(field(2, "power").uppercase())
-            val action = field(3, "action").also { require(it.isEmpty() || ID.matches(it)) }
-            val challenge = field(4, "challenge").also { require(HEX.matches(it)) }
-            val k = field(5, "k").toInt()
-            val rest = lines.drop(6)
-            val factors = LinkedHashMap<FactorKind, String>()
-            val factorLines = rest.takeWhile { it.startsWith("factor=") }
-            factorLines.forEach { l -> l.removePrefix("factor=").split('|').let { require(it.size == 2 && FP.matches(it[1])); factors[FactorKind.valueOf(it[0])] = it[1] } }
-            val tail = rest.drop(factorLines.size)
-            require(tail.size == 3)
-            fun list(l: String, key: String) = l.also { require(it.startsWith("$key=")) }.substringAfter('=').split(',').filter { it.isNotEmpty() }
-            val bundles = list(tail[0], "bundles").onEach { require(ID.matches(it)) }
-            val lots = list(tail[1], "lots").map { LotNames.parseKey(it) ?: error("lot") }
-            val days = tail[2].also { require(it.startsWith("days=")) }.substringAfter('=').toInt()
-            val c = OwnerCommand(keyId, power, action, challenge, k, factors, bundles, lots, days, parts[2])
-            require(c.canonicalPayload() == text)
-            c
+        /** The canonical text to sign. */
+        fun payload(keyId: String, seq: Long, issuedAt: Long, power: Power, action: String, challenge: String, k: Int, factors: Map<FactorKind, String>,
+                    bundleIds: List<String>, lots: List<LotId>, days: Int): String =
+            Envelope.payload(TYPE, keyId, seq, challenge, issuedAt, issuedAt, issuedAt + 24L * 3600 * 1000, Envelope.Target.Device(k, factors), body(power, action, bundleIds, lots, days))
+
+        fun decode(token: String): OwnerCommand? = Envelope.decode(token)?.let(::from)
+
+        fun from(e: Envelope): OwnerCommand? = runCatching {
+            require(e.type == TYPE && e.notBefore == e.issuedAt && e.expiresAt == e.issuedAt + 24L * 3600 * 1000)
+            val t = e.target as Envelope.Target.Device
+            require(e.body.size == 5)
+            fun field(i: Int, key: String) = e.body[i].also { require(it.startsWith("$key=")) }.substringAfter('=')
+            fun list(v: String) = v.split(',').filter { it.isNotEmpty() }
+            val action = field(1, "action").also { require(it.isEmpty() || ID.matches(it)) }
+            val bundles = list(field(2, "bundles")).onEach { require(ID.matches(it)) }
+            val lots = list(field(3, "lots")).map { LotNames.parseKey(it) ?: error("lot") }
+            OwnerCommand(e.keyId, e.seq, e.issuedAt, Power.valueOf(field(0, "power").uppercase()), action, e.nonce, t.k, t.factors, bundles, lots, field(4, "days").toInt(), e.signature)
+                .also { require(it.canonicalPayload() == e.canonicalPayload()) }
         }.getOrNull()
     }
 }
@@ -107,7 +94,9 @@ class ChallengeBook(private val uptimeMs: () -> Long, private val random: Secure
 
 class OwnerCommandVerifier(private val keys: KeyRing, private val challenges: ChallengeBook) {
     fun verify(token: String, device: Fingerprints, clock: TvClock, wallClockMs: Long): CommandResult {
-        val c = OwnerCommand.decode(token) ?: return no(Rejection.MALFORMED, "Commande illisible")
+        val env = Envelope.decode(token) ?: return no(Rejection.MALFORMED, "Commande illisible")
+        if (env.type != OwnerCommand.TYPE) return no(Rejection.UNKNOWN_TYPE, "Ce message n'est pas une commande")
+        val c = OwnerCommand.from(env) ?: return no(Rejection.MALFORMED, "Commande illisible")
         val key = keys.find(c.keyId) ?: return no(Rejection.UNKNOWN_KEY, "Clé inconnue de cette TV")
         if (keys.isRevoked(c.keyId)) return no(Rejection.REVOKED_KEY, "Clé révoquée")
         if (!key.verify(c.canonicalPayload(), c.signature)) return no(Rejection.BAD_SIGNATURE, "Signature invalide")

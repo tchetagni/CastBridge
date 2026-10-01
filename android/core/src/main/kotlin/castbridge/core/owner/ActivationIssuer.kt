@@ -57,6 +57,8 @@ class ActivationIssuer(private val signer: Signer, private val scopes: Set<KeySc
         val subject: Subject = Subject.TV, val rights: List<Right> = emptyList(), val license: String = Activation.TRIAL_LICENSE, val seat: String? = null,
         /** Start of the install window (default [issuedAt]) and its length in days (1 to 366). */
         val notBefore: Long = issuedAt, val windowDays: Int = 30, val nonce: String? = null, val k: Int? = null,
+        /** The key's sequence number (a persistent counter per tool is best); defaults to [issuedAt]. */
+        val seq: Long? = null,
     )
 
     /** An issued activation with every encoding the three channels need. */
@@ -79,7 +81,7 @@ class ActivationIssuer(private val signer: Signer, private val scopes: Set<KeySc
         need(r.factors.n >= 1, "Aucun facteur d'identité")
         need(r.windowDays in 1..MAX_WINDOW_DAYS, "Fenêtre d'installation hors bornes (1 à $MAX_WINDOW_DAYS jours)")
         need(r.issuedAt > 0 && r.notBefore > 0, "Date invalide")
-        need(if (r.kind == ActivationKind.TRIAL) KeyScope.ISSUE_TRIAL in scopes else KeyScope.ISSUE_PRODUCTION in scopes, "Cette clé n'a pas le droit de délivrer ce type d'activation")
+        need(if (r.kind == ActivationKind.TRIAL) KeyScope.ISSUE_TRIAL in scopes else (KeyScope.ISSUE_PRODUCTION in scopes || KeyScope.REACTIVATE in scopes), "Cette clé n'a pas le droit de délivrer ce type d'activation")
         if (r.kind == ActivationKind.TRIAL) {
             need(r.rights.isEmpty(), "Une clé d'essai ne porte aucun droit")
             need(r.license == Activation.TRIAL_LICENSE, "Une clé d'essai porte la licence « trial »")
@@ -95,7 +97,7 @@ class ActivationIssuer(private val signer: Signer, private val scopes: Set<KeySc
         val seat = r.seat ?: SeatIds.of(r.license, r.factors)
         need(Activation.HEX.matches(seat), "Identifiant de poste invalide")
         val notAfter = r.notBefore + r.windowDays * DAY
-        val unsigned = Activation(r.kind, r.subject, signer.keyId, nonce, r.issuedAt, r.notBefore, notAfter, r.license, seat, k, r.factors.byKind, r.rights, "")
+        val unsigned = Activation(r.kind, r.subject, signer.keyId, r.seq ?: r.issuedAt, nonce, r.issuedAt, r.notBefore, notAfter, r.license, seat, k, r.factors.byKind, r.rights, "")
         val sig = Base64.getEncoder().encodeToString(signer.sign(unsigned.canonicalPayload().toByteArray(Charsets.UTF_8)))
         return Issued(unsigned.copy(signature = sig))
     }
@@ -127,7 +129,7 @@ class ActivationIssuer(private val signer: Signer, private val scopes: Set<KeySc
     }
 
     /** An owner command for one TV; [challenge] is the one the TV issued over Bluetooth a moment ago. */
-    fun issueCommand(power: Power, factors: Fingerprints, challenge: String, days: Int = 0, action: String = "", bundleIds: List<String> = emptyList(), lots: List<LotId> = emptyList(), k: Int? = null): String {
+    fun issueCommand(power: Power, factors: Fingerprints, challenge: String, issuedAt: Long, days: Int = 0, action: String = "", bundleIds: List<String> = emptyList(), lots: List<LotId> = emptyList(), k: Int? = null, seq: Long = issuedAt): String {
         need(KeyScope.of(power) in scopes, "Cette clé n'a pas ce pouvoir")
         need(Regex("^[0-9a-f]{16,64}$").matches(challenge), "Défi invalide")
         need(factors.n >= 1, "Aucun facteur d'identité")
@@ -137,9 +139,10 @@ class ActivationIssuer(private val signer: Signer, private val scopes: Set<KeySc
             Power.OPEN_ALL -> need(days in 1..power.maxDays, "« Tout ouvert » : 1 à ${power.maxDays} jours")
         }
         val kk = k ?: DeviceIdentity.kFor(factors.n)
-        val payload = OwnerCommand.payload(signer.keyId, power, action, challenge, kk, factors.byKind, bundleIds, lots, days)
+        need(issuedAt > 0, "Date invalide")
+        val payload = OwnerCommand.payload(signer.keyId, seq, issuedAt, power, action, challenge, kk, factors.byKind, bundleIds, lots, days)
         val sig = Base64.getEncoder().encodeToString(signer.sign(payload.toByteArray(Charsets.UTF_8)))
-        return OwnerCommand(signer.keyId, power, action, challenge, kk, factors.byKind, bundleIds, lots, days, sig).encode()
+        return OwnerCommand(signer.keyId, seq, issuedAt, power, action, challenge, kk, factors.byKind, bundleIds, lots, days, sig).encode()
     }
 }
 

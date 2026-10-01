@@ -44,7 +44,7 @@ class LicenseEvent(val keyId: String, val text: String, val signature: String) {
         /** Every activation issued is logged (who issued what), with the seat it occupies. Needs ISSUE_TRIAL (trial) or ISSUE_PRODUCTION. */
         fun issue(s: Signer, a: Activation) =
             sign(s, base("issue", s.keyId, a.issuedAt, "license" to a.license, "seat" to a.seat, "subject" to a.subject.name.lowercase(), "kind" to a.kind.name.lowercase(),
-                "nonce" to a.nonce, "notAfter" to a.notAfter, "k" to a.k), a.factors)
+                "nonce" to a.nonce, "seq" to a.seq, "notAfter" to a.notAfter, "k" to a.k), a.factors)
 
         /** Moves a seat to other hardware. Needs TRANSFER (never the server). */
         fun transfer(s: Signer, at: Long, license: String, seat: String, newFactors: Fingerprints, k: Int = DeviceIdentity.kFor(newFactors.n), nonce: String) =
@@ -109,12 +109,14 @@ object LicenseBook {
             if (!seen.add(e.id)) continue
             val key = ring.find(e.keyId)
             val scope = when (e.type) { "license", "issue" -> if (e.fields["kind"] == "trial") KeyScope.ISSUE_TRIAL else KeyScope.ISSUE_PRODUCTION; "transfer" -> KeyScope.TRANSFER; "revoke" -> KeyScope.REVOKE; else -> null }
+            // a key that may only REACTIVATE can re-issue an existing seat, never create one (checked in the "issue" branch)
+            val reactivateOnly = e.type == "issue" && key != null && !key.allows(KeyScope.ISSUE_PRODUCTION) && key.allows(KeyScope.REACTIVATE) && e.fields["kind"] != "trial"
             when {
                 key == null -> { rejected += e.id to Rejection.UNKNOWN_KEY; continue }
                 ring.isRevoked(e.keyId) -> { rejected += e.id to Rejection.REVOKED_KEY; continue }
                 !key.verify(e.text, e.signature) -> { rejected += e.id to Rejection.BAD_SIGNATURE; continue }
                 scope == null -> { rejected += e.id to Rejection.MALFORMED; continue }
-                !key.allows(scope) -> { rejected += e.id to Rejection.KEY_NOT_ALLOWED; continue }
+                !key.allows(scope) && !reactivateOnly -> { rejected += e.id to Rejection.KEY_NOT_ALLOWED; continue }
             }
             val f = e.fields
             when (e.type) {
@@ -140,6 +142,7 @@ object LicenseBook {
                         seats["$lic|${same.seatId}"] = same.copy(lastIssuedAt = maxOf(same.lastIssuedAt, e.at), issuedBy = same.issuedBy + e.keyId)
                         continue
                     }
+                    if (reactivateOnly) { rejected += e.id to Rejection.KEY_NOT_ALLOWED; continue }      // creating a seat needs ISSUE_PRODUCTION
                     if (seats.values.count { it.license == lic } >= info.seats) warnings += "licence $lic : plus de postes que prévu (${info.seats}) : poste $seat"
                     seats[keyOf] = SeatInfo(lic, seat, subject, e.factors, k, e.at, e.at, setOf(e.keyId))
                 }
@@ -199,26 +202,26 @@ object LicenseBook {
  * on a connection). Signed by a key with REVOKE.
  */
 object RevocationNotice {
-    const val FORMAT = "castbridge-revocation-v1"
-    const val PREFIX = "cbr1"
+    const val TYPE = "revocation"
 
-    fun issue(s: Signer, at: Long, state: RevocationState): String {
-        val text = (listOf(FORMAT, "kid=${s.keyId}", "issuedAt=$at") + state.keys.sorted().map { "key=$it" } + state.seats.toSortedMap().map { "seat=${it.key}|${it.value}" }).joinToString("\n")
-        return "$PREFIX." + Base64.getUrlEncoder().withoutPadding().encodeToString(text.toByteArray(Charsets.UTF_8)) + "." + Base64.getEncoder().encodeToString(s.sign(text.toByteArray(Charsets.UTF_8)))
+    /** An envelope of type `revocation`, target any device, signed by a key with REVOKE; body = sorted `key=` lines then sorted `seat=<licence>|<poste>|<date>` lines. */
+    fun issue(s: Signer, at: Long, state: RevocationState, seq: Long = at, nonce: String = "00000000" + at.toString(16).padStart(8, '0')): String {
+        val body = state.keys.sorted().map { "key=$it" } + state.seats.toSortedMap().map { "seat=${it.key}|${it.value}" }
+        val unsigned = Envelope(TYPE, s.keyId, seq, nonce, at, at, at + 366L * 24 * 3600 * 1000, Envelope.Target.Any, body, "")
+        return unsigned.withSignature(Base64.getEncoder().encodeToString(s.sign(unsigned.canonicalPayload().toByteArray(Charsets.UTF_8)))).encode()
     }
 
-    /** The revocations of a verified notice, or null (unknown or revoked key, no REVOKE scope, bad signature, non canonical text). */
+    /** The revocations of a verified notice, or null (unknown or revoked key, no REVOKE scope, bad signature, non canonical text, other type). */
     fun verify(token: String, ring: KeyRing): RevocationState? = runCatching {
-        val p = token.trim().split('.'); require(p.size == 3 && p[0] == PREFIX)
-        val text = String(Base64.getUrlDecoder().decode(p[1]), Charsets.UTF_8)
-        val lines = text.split('\n'); require(lines[0] == FORMAT)
-        val kid = lines[1].removePrefix("kid="); require(lines[1].startsWith("kid=") && lines[2].startsWith("issuedAt="))
-        val key = ring.find(kid) ?: return null
-        if (ring.isRevoked(kid) || !key.allows(KeyScope.REVOKE) || !key.verify(text, p[2])) return null
-        val keys = lines.drop(3).filter { it.startsWith("key=") }.map { it.removePrefix("key=") }.toSet()
-        val seats = lines.drop(3).filter { it.startsWith("seat=") }.associate { l -> l.removePrefix("seat=").split('|').let { "${it[0]}|${it[1]}" to it[2].toLong() } }
-        val rebuilt = (listOf(FORMAT, "kid=$kid", lines[2]) + keys.sorted().map { "key=$it" } + seats.toSortedMap().map { "seat=${it.key}|${it.value}" }).joinToString("\n")
-        require(rebuilt == text)
+        val env = Envelope.decode(token) ?: return null
+        if (env.type != TYPE || env.target != Envelope.Target.Any) return null
+        val key = ring.find(env.keyId) ?: return null
+        if (ring.isRevoked(env.keyId) || !key.allows(KeyScope.REVOKE) || !key.verify(env.canonicalPayload(), env.signature)) return null
+        val keys = env.body.filter { it.startsWith("key=") }.map { it.removePrefix("key=") }.toSet()
+        val seats = env.body.filter { it.startsWith("seat=") }.associate { l -> l.removePrefix("seat=").split('|').let { "${it[0]}|${it[1]}" to it[2].toLong() } }
+        require(env.body.size == keys.size + seats.size)
+        val rebuilt = keys.sorted().map { "key=$it" } + seats.toSortedMap().map { "seat=${it.key}|${it.value}" }
+        require(rebuilt == env.body)
         RevocationState(keys, seats)
     }.getOrNull()
 }
