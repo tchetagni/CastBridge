@@ -262,14 +262,16 @@ class ParentalAppEngineTest {
     }
 
     @Test fun supervisionStateNeverClaimsMoreThanIsWorking() {
-        fun st(sup: Boolean = true, usage: Boolean = false, exists: Boolean = true, a11y: Boolean = false, fresh: Boolean = true) =
-            SupervisionState.compute(sup, usage, exists, a11y, fresh)
+        fun st(sup: Boolean = true, usage: Boolean = false, exists: Boolean = true, a11y: Boolean = false, fresh: Boolean = true, enforce: Boolean = true) =
+            SupervisionState.compute(sup, usage, exists, a11y, fresh, enforce)
         assertEquals(SupervisionState.OFF, st(sup = false, usage = true))
         assertEquals(SupervisionState.ACTIVE, st(usage = true))
         assertEquals(SupervisionState.ACTIVE, st(a11y = true))
         assertEquals(SupervisionState.NOT_AUTHORIZED, st())
         assertEquals(SupervisionState.UNAVAILABLE, st(exists = false))
         assertEquals(SupervisionState.NOT_AUTHORIZED, st(usage = true, fresh = false), "a dead poller is not « active »")
+        assertEquals(SupervisionState.NOT_AUTHORIZED, st(usage = true, enforce = false), "seeing without being able to stop is not protection")
+        assertEquals(SupervisionState.ACTIVE, st(a11y = true, enforce = true))
         assertEquals(SupervisionState.OFF.label, "Surveillance de toute la TV : désactivée")
         assertEquals("Surveillance de toute la TV : active", SupervisionState.ACTIVE.label)
         assertTrue(SupervisionState.NOT_AUTHORIZED.label.endsWith("non autorisée"))
@@ -301,5 +303,6 @@ class ParentalForegroundTrackerTest {
         t.feed(listOf(FgEvent("a", true, 10)))
         assertEquals("a", t.feed(listOf(FgEvent("b", true, 5))), "an event older than the last seen one is ignored")
         t.reset(); assertNull(t.current)
+        assertEquals("c", t.feed(listOf(FgEvent("c", true, 1))), "after a reset (screen off) the state is rebuilt from the events of the last hours")
     }
 }

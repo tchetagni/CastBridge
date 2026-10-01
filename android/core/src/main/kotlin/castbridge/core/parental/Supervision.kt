@@ -19,10 +19,13 @@ enum class SupervisionState(val code: String, val label: String) {
          * [supervise]: the parent asked for it. [usageGranted]: the special access « Statistiques d'utilisation » is given. [usageExists]: the TV has
          * UsageStatsManager at all. [accessibilityOn]: the CastBridge accessibility service is connected (stronger and faster signal).
          * [pollerFresh]: the TV-side loop ran recently (a killed service must not leave a stale « active »).
+         * [canEnforce]: the TV may bring the lock screen in front of another app (« Afficher par-dessus les autres apps », or the accessibility
+         * service): seeing a blocked app without being able to stop it is not protection.
          */
-        fun compute(supervise: Boolean, usageGranted: Boolean, usageExists: Boolean, accessibilityOn: Boolean, pollerFresh: Boolean = true): SupervisionState = when {
+        fun compute(supervise: Boolean, usageGranted: Boolean, usageExists: Boolean, accessibilityOn: Boolean, pollerFresh: Boolean = true, canEnforce: Boolean = true): SupervisionState = when {
             !supervise -> OFF
             !pollerFresh -> NOT_AUTHORIZED
+            (usageGranted || accessibilityOn) && !canEnforce -> NOT_AUTHORIZED
             usageGranted || accessibilityOn -> ACTIVE
             !usageExists -> UNAVAILABLE
             else -> NOT_AUTHORIZED
@@ -57,7 +60,7 @@ class ForegroundTracker {
     }
 
     /** The screen went off or the detector was paused: forget (the next poll rebuilds the state from recent events). */
-    fun reset() { current = null }
+    fun reset() { current = null; lastTs = 0 }
 }
 
 /** Something a parent wants to hear about (sent to the designated phones by [ParentalReports], never to a server). */
