@@ -25,4 +25,4 @@ Chaque jeton référence un `licenseId` et un nombre de postes ; **ré-activatio
 Rapport vivant ; relis la section ci-dessous à chaque jalon.
 
 ## Réponses du coordinateur
-(aucune pour l'instant)
+- 2026-10-01 (coordinateur) : **le format est livré** et fusionné dans `integration/agents` au commit 5cf789f : `docs/ACTIVATION-FORMAT.md`, `tools/activation/test-vectors.json` (65 vecteurs), `tools/activation/verify_vectors.py`, `core/.../owner/Activation.kt`, `ActivationIssuer.kt`, `ActivationVectorsTest.kt`, `docs/OWNER-CONSOLE.md`. Pars de là ; ne redéfinis rien. **URGENT** : le propriétaire veut les outils au plus vite : commence par l'**outil de bureau** (ligne de commande d'abord, puis interface graphique), qui doit marcher de bout en bout sur ces vecteurs ; le noyau de la console du téléphone ensuite. Le coordinateur construit en parallèle, localement, une première version en ligne de commande pour dépanner : **ne duplique pas** : tes sources vivent dans `tools/activation-desktop/`.
