@@ -1,0 +1,411 @@
+{
+ "chapter": "sil-histoire-geo-ecole-ch",
+ "lessons": [
+  {
+   "id": "sil-histoire-geo-ecole",
+   "title": "Mon école",
+   "minutes": 10,
+   "readAloud": true,
+   "programRef": "SIL — Éveil (géographie / vie sociale) : l'école, ses lieux et ses personnes (reconstitué)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Nommer les lieux de l'école : classe, cour, bureau du directeur.",
+    "Nommer les personnes de l'école.",
+    "Dire à quoi servent les objets de la classe."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "sil-histoire-geo-ecole-01",
+    "sil-histoire-geo-ecole-02",
+    "sil-histoire-geo-ecole-03",
+    "sil-histoire-geo-ecole-04",
+    "sil-histoire-geo-ecole-05",
+    "sil-histoire-geo-ecole-06"
+   ],
+   "selfCheck": [
+    "sil-histoire-geo-ecole-q1",
+    "sil-histoire-geo-ecole-q2",
+    "sil-histoire-geo-ecole-q3",
+    "sil-histoire-geo-ecole-q4",
+    "sil-histoire-geo-ecole-q5"
+   ],
+   "reviewNotes": [
+    "Vocabulaire : « maître/maîtresse » (usage courant) vs « enseignant » ; à adapter.",
+    "Exercice de comptage « bancs » : valeurs inventées (fictives)."
+   ],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "À l'école, il y a une classe, une cour, un maître ou une maîtresse, un directeur ou une directrice, et des camarades.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les personnes",
+     "md": "- Le **maître** ou la **maîtresse** enseigne.\n- Le **directeur** ou la **directrice** dirige l'école.\n- Les **élèves** apprennent."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 130,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 30,
+        "w": 140,
+        "h": 70,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 3,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 90.0,
+        "y": 76,
+        "text": "la classe",
+        "size": 18,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 170,
+        "y": 30,
+        "w": 140,
+        "h": 70,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 3,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 76,
+        "text": "la cour",
+        "size": 18,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 320,
+        "y": 30,
+        "w": 140,
+        "h": 70,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 3,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 390.0,
+        "y": 76,
+        "text": "le bureau",
+        "size": 18,
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Trois lieux de l'école.",
+     "alt": "Trois cartes : la classe, la cour, le bureau."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Dans la classe",
+     "md": "Il y a un **tableau**, des **bancs**, des **cahiers**, des **crayons**, un **cartable**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : où jouer ?",
+     "statement": "Où jouent les élèves à la récréation ?",
+     "steps": [
+      {
+       "md": "La récréation est un temps de jeu."
+      },
+      {
+       "md": "Les élèves sortent de la classe."
+      }
+     ],
+     "answer": "Ils jouent dans **la cour**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : qui m'aide ?",
+     "statement": "Je ne comprends pas un exercice. À qui je demande de l'aide ?",
+     "steps": [
+      {
+       "md": "Je lève la main."
+      },
+      {
+       "md": "Je demande à mon maître ou à ma maîtresse."
+      }
+     ],
+     "answer": "Je demande à **mon maître** ou **ma maîtresse**."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Mon matériel",
+     "md": "Je garde mon cartable propre et mes cahiers en ordre."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer !"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-histoire-geo-ecole-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-histoire-geo-ecole-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-histoire-geo-ecole-03"
+    },
+    {
+     "type": "heading",
+     "text": "Pour aller plus loin"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-histoire-geo-ecole-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-histoire-geo-ecole-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "sil-histoire-geo-ecole-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sil-histoire-geo-ecole-01",
+   "chapter": "sil-histoire-geo-ecole-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-histoire-geo-ecole",
+   "prompt": "Qui enseigne dans la classe ?",
+   "choices": [
+    "le directeur seulement",
+    "le voisin",
+    "le maître ou la maîtresse",
+    "l'élève"
+   ],
+   "answer": 2,
+   "explanation": "Le maître ou la maîtresse enseigne en classe."
+  },
+  {
+   "id": "sil-histoire-geo-ecole-02",
+   "chapter": "sil-histoire-geo-ecole-ch",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-histoire-geo-ecole",
+   "prompt": "Vrai ou faux : on joue dans la cour à la récréation.",
+   "answer": true,
+   "explanation": "La cour sert à jouer pendant la récréation."
+  },
+  {
+   "id": "sil-histoire-geo-ecole-03",
+   "chapter": "sil-histoire-geo-ecole-ch",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sil-histoire-geo-ecole",
+   "prompt": "Associe chaque objet à son usage.",
+   "pairs": [
+    [
+     "le crayon",
+     "écrire"
+    ],
+    [
+     "le cahier",
+     "garder mes devoirs"
+    ],
+    [
+     "le tableau",
+     "écrire pour tous"
+    ],
+    [
+     "le cartable",
+     "porter mes affaires"
+    ]
+   ],
+   "explanation": "Chaque objet a un rôle à l'école."
+  },
+  {
+   "id": "sil-histoire-geo-ecole-04",
+   "chapter": "sil-histoire-geo-ecole-ch",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sil-histoire-geo-ecole",
+   "prompt": "Il y a 3 bancs devant et 2 bancs derrière. Combien de bancs ? (3 + 2)",
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "3 + 2 = 5 bancs."
+  },
+  {
+   "id": "sil-histoire-geo-ecole-05",
+   "chapter": "sil-histoire-geo-ecole-ch",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sil-histoire-geo-ecole",
+   "prompt": "Qui dirige l'école ?",
+   "choices": [
+    "le directeur ou la directrice",
+    "l'élève",
+    "le tableau",
+    "le cahier"
+   ],
+   "answer": 0,
+   "explanation": "Le directeur ou la directrice dirige l'école."
+  },
+  {
+   "id": "sil-histoire-geo-ecole-06",
+   "chapter": "sil-histoire-geo-ecole-ch",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sil-histoire-geo-ecole",
+   "prompt": "La classe d'Amina.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Dans la classe, il y a 8 filles et 7 garçons. Combien d'élèves ? (8 + 7)",
+     "answer": 15,
+     "tolerance": 0,
+     "explanation": "8 + 7 = 15 élèves.",
+     "id": "sil-histoire-geo-ecole-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Pour demander la parole, je…",
+     "choices": [
+      "crie",
+      "tape",
+      "pars",
+      "lève la main"
+     ],
+     "answer": 3,
+     "explanation": "Je lève la main et j'attends.",
+     "id": "sil-histoire-geo-ecole-06-b",
+     "points": 1
+    }
+   ],
+   "explanation": "Relis chaque question avec calme."
+  },
+  {
+   "id": "sil-histoire-geo-ecole-q1",
+   "chapter": "sil-histoire-geo-ecole-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-histoire-geo-ecole",
+   "prompt": "Où apprend-on à lire ?",
+   "choices": [
+    "au marché",
+    "à l'école",
+    "sur la route",
+    "dans la rivière"
+   ],
+   "answer": 1,
+   "explanation": "On apprend à lire à l'école."
+  },
+  {
+   "id": "sil-histoire-geo-ecole-q2",
+   "chapter": "sil-histoire-geo-ecole-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-histoire-geo-ecole",
+   "prompt": "Où je range mes cahiers ?",
+   "choices": [
+    "dans la cour",
+    "dans mon cartable",
+    "sur le toit",
+    "sous la pluie"
+   ],
+   "answer": 1,
+   "explanation": "Dans mon cartable."
+  },
+  {
+   "id": "sil-histoire-geo-ecole-q3",
+   "chapter": "sil-histoire-geo-ecole-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-histoire-geo-ecole",
+   "prompt": "Je suis dans la classe. J'écoute…",
+   "choices": [
+    "le vent",
+    "la rue",
+    "le ballon",
+    "mon maître"
+   ],
+   "answer": 3,
+   "explanation": "On écoute son maître ou sa maîtresse."
+  },
+  {
+   "id": "sil-histoire-geo-ecole-q4",
+   "chapter": "sil-histoire-geo-ecole-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-histoire-geo-ecole",
+   "prompt": "À la récréation, je…",
+   "choices": [
+    "joue avec mes camarades",
+    "reste sous la table",
+    "ferme les yeux",
+    "crie en classe"
+   ],
+   "answer": 0,
+   "explanation": "On joue et on respecte les autres."
+  },
+  {
+   "id": "sil-histoire-geo-ecole-q5",
+   "chapter": "sil-histoire-geo-ecole-ch",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sil-histoire-geo-ecole",
+   "prompt": "Le directeur est…",
+   "choices": [
+    "un élève",
+    "un cahier",
+    "le chef de l'école",
+    "un banc"
+   ],
+   "answer": 2,
+   "explanation": "Il dirige l'école."
+  }
+ ]
+}
