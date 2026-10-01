@@ -72,7 +72,7 @@ fun LibraryAssistantDialog(client: TvClient?, onDismiss: () -> Unit) {
         Surface(Modifier.fillMaxSize().padding(bottom = statusBar.dp), color = MaterialTheme.colorScheme.background) {
             Column(Modifier.fillMaxSize()) {
                 TopAppBar(
-                    title = { Text(title) },
+                    title = { Text(title, maxLines = 1, overflow = TextOverflow.Ellipsis) },
                     navigationIcon = {
                         IconButton({ back(m, onDismiss) }) {
                             Icon(Icons.AutoMirrored.Filled.ArrowBack, "Retour")
@@ -201,6 +201,7 @@ private fun back(m: AssistantModel, onDismiss: () -> Unit) {
 private fun WizardSteps(current: Int) {
     val cs = MaterialTheme.colorScheme
     val names = listOf("Analyser", "Vérifier", "Appliquer")
+    val big = androidx.compose.ui.platform.LocalDensity.current.fontScale > 1.3f
     Row(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp).semantics(mergeDescendants = true) { contentDescription = "Étape $current sur 3 : ${names[current - 1]}" },
         verticalAlignment = Alignment.CenterVertically) {
         names.forEachIndexed { i, n ->
@@ -212,8 +213,9 @@ private fun WizardSteps(current: Int) {
                     else Text("$k", style = MaterialTheme.typography.labelLarge, color = if (now) cs.onPrimary else cs.onSurfaceVariant)
                 }
             }
-            Spacer(Modifier.width(6.dp))
-            Text(n, style = MaterialTheme.typography.labelLarge, fontWeight = if (now) FontWeight.Bold else FontWeight.Normal, color = if (now) cs.onSurface else cs.onSurfaceVariant)
+            // with a very large system font only the current step keeps its name (the number and the check still say where we are)
+            if (!big || now) { Spacer(Modifier.width(6.dp))
+                Text(n, style = MaterialTheme.typography.labelLarge, maxLines = 1, softWrap = false, fontWeight = if (now) FontWeight.Bold else FontWeight.Normal, color = if (now) cs.onSurface else cs.onSurfaceVariant) }
             if (k < 3) HorizontalDivider(Modifier.weight(1f).padding(horizontal = 8.dp), color = if (done) cs.secondary else cs.outlineVariant)
         }
     }

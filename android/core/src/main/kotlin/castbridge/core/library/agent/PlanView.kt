@@ -137,3 +137,18 @@ object Explain {
         Kind.ARCHIVE -> "une archive"; Kind.UNKNOWN -> "un fichier à trier"
     }
 }
+
+/**
+ * The user picked a folder that is itself called "Séries", "Films"… : the plan must not create "Séries/Séries/…" inside it. Drops a first folder segment
+ * that has the same name as the picked folder (case and accents ignored). Only touches folders of RENAME changes; ids stay the same.
+ */
+fun Plan.withoutRootSegment(rootName: String): Plan {
+    fun norm(x: String) = java.text.Normalizer.normalize(x, java.text.Normalizer.Form.NFD).replace(Regex("\\p{M}+"), "").lowercase().trim()
+    val r = norm(rootName)
+    if (r.isEmpty()) return this
+    return copy(changes = changes.map { c ->
+        val f = c.toFolder ?: return@map c
+        val first = f.substringBefore('/')
+        if (norm(first) == r) c.copy(toFolder = f.substringAfter('/', "").ifEmpty { null }) else c
+    }.filter { it.type != ChangeType.RENAME || it.toName != null || it.toFolder != null })
+}

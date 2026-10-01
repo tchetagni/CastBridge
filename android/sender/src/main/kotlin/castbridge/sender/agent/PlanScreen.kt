@@ -47,7 +47,7 @@ fun PlanScreen(m: AssistantModel) {
     var editing by remember { mutableStateOf<Change?>(null) }
     var showSent by remember { mutableStateOf(false) }
     var showAdvice by remember { mutableStateOf(false) }
-    LaunchedEffect(m.analysis) { groups.firstOrNull()?.let { open = open + it.id } }
+    LaunchedEffect(m.analysis, m.filter) { groups.firstOrNull()?.let { open = open + it.id } }
     val nSel = m.effective.size
 
     Box(Modifier.fillMaxSize()) {
@@ -111,7 +111,8 @@ fun PlanScreen(m: AssistantModel) {
                     }
                 }
                 item(key = "quick") {
-                    Row(horizontalArrangement = Arrangement.spacedBy(2.dp)) {
+                    @OptIn(ExperimentalLayoutApi::class)
+                    FlowRow(horizontalArrangement = Arrangement.spacedBy(2.dp)) {
                         TextButton({ m.selectDefault() }) { Text("Conseillés") }
                         TextButton({ m.selectAllSafe() }) { Text("Tout cocher") }
                         TextButton({ m.selectNone() }) { Text("Tout décocher") }
@@ -161,7 +162,7 @@ private fun BottomBar(m: AssistantModel, nSel: Int, a: Analysis) {
     val cs = MaterialTheme.colorScheme
     Box(Modifier.fillMaxSize()) {
         Surface(Modifier.align(Alignment.BottomCenter).fillMaxWidth(), tonalElevation = 3.dp) {
-            Column(Modifier.fillMaxWidth().navigationBarsPadding().padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+            Column(Modifier.fillMaxWidth().navigationBarsPadding().padding(start = 12.dp, end = 12.dp, top = 12.dp, bottom = 32.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                 val hour = remember { java.time.LocalTime.now().hour }
                 if (m.plan.moves.any { it.id in m.selected } && a.habits.isBusy(hour))
                     Text("La TV est souvent utilisée à cette heure : les déplacements vers la clé peuvent être longs. Vous pouvez les lancer plus tard.", style = MaterialTheme.typography.bodySmall, color = cs.primary)

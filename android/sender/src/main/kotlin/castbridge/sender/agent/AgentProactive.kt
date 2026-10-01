@@ -69,7 +69,7 @@ object AgentProactive {
         val nm = ctx.getSystemService(NotificationManager::class.java)
         nm.createNotificationChannel(NotificationChannel(CHANNEL, "Suggestions de rangement", NotificationManager.IMPORTANCE_LOW).apply {
             description = "Au plus un conseil par semaine, sans son. Désactivable dans Ranger ma bibliothèque → Réglages."
-            setShowBadge(false)
+            setShowBadge(false); setSound(null, null); enableVibration(false); enableLights(false)
         })
         val open = PendingIntent.getActivity(ctx, 0, Intent(ctx, AssistantActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
         nm.notify(NOTIF_ID, android.app.Notification.Builder(ctx, CHANNEL)

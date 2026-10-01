@@ -81,6 +81,8 @@ class DocTreeLibrary(
         return id
     }
 
+    @Synchronized private fun folderIdOrNull(path: String): String? = folderId(path)
+
     private fun child(parentId: String, name: String): DocEntry? = list(parentId).firstOrNull { it.name.equals(name, ignoreCase = true) }
 
     private fun find(loc: Loc): DocEntry? = folderId(loc.folder)?.let { f -> list(f).firstOrNull { !it.isDir && it.name.equals(loc.name, ignoreCase = true) } }
@@ -260,6 +262,25 @@ class DocTreeLibrary(
 
         /** What is in the bin (for the "Corbeille" screen): name and size. */
         fun binItems(): List<Pair<String, Long>> = trashId(create = false)?.let { b -> list(b, fresh = true).filter { !it.isDir }.map { it.name to it.size } }.orEmpty()
+
+        /**
+         * Removes folders that are EMPTY (deepest first, never the picked folder, never one with anything inside): the folders a rangement created
+         * and an undo emptied ("Séries/Narcos/Saison 01"), and the bin when nothing is left in it. Returns how many were removed.
+         */
+        fun pruneEmpty(folders: Collection<String>, includeBin: Boolean = true): Int {
+            var n = 0
+            val paths = LinkedHashSet<String>()
+            for (f in folders) { var cur = f; while (cur.isNotEmpty()) { paths += cur; cur = if ('/' in cur) cur.substringBeforeLast('/') else "" } }
+            if (includeBin) paths += TRASH_NAME
+            for (path in paths.sortedByDescending { it.count { c -> c == '/' } }) {
+                val id = synchronized(this@DocTreeLibrary) { folderIdOrNull(path) } ?: continue
+                if (list(id, fresh = true).isEmpty() && p.delete(id)) {
+                    n++
+                    synchronized(this@DocTreeLibrary) { dirCache.remove(id); folderIds.remove(path.lowercase()); val parent = folderIdOrNull(path.substringBeforeLast('/', "")); parent?.let { dirCache.remove(it) } }
+                }
+            }
+            return n
+        }
 
         /** Really deletes one item of the bin: only ever called after the user's explicit confirmation. */
         fun purge(name: String): Boolean {

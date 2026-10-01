@@ -173,6 +173,7 @@ class AssistantModel(private val ctx: Context, private val client: TvClient?, pr
     /** Shows [a]; ticks, manual names and ignored files of the user are carried over. */
     private fun publish(a: Analysis) {
         var p = a.plan
+        if (a.snapshot.origin == Origin.PHONE) phoneTree?.let { t -> p = p.withoutRootSegment(runCatching { android.provider.DocumentsContract.getTreeDocumentId(t).substringAfterLast('/').substringAfterLast(':') }.getOrDefault("")) }
         for ((id, name) in edits) (p.withEditedName(id, name, null) as? Plan.Edit.Ok)?.let { p = it.plan }
         val prev = selected
         analysis = a; plan = p
@@ -277,6 +278,8 @@ class AssistantModel(private val ctx: Context, private val client: TvClient?, pr
                 val origin = if (id?.startsWith("phone") == true) Origin.PHONE else Origin.TV
                 if (origin == Origin.PHONE && phoneTree == null) { message = "Choisissez d'abord le dossier du téléphone (Ranger ma bibliothèque → Un dossier du téléphone) : l'annulation en a besoin."; return@launch }
                 undone = Executor(opsFor(origin), AgentStore.journal, AgentStore.agentContext(origin == Origin.PHONE)).undo(id)
+                // the folders the rangement created are empty now: remove them (only empty ones, never anything else)
+                if (origin == Origin.PHONE) runCatching { saf().Ops().pruneEmpty(AgentStore.journal.entries().filter { it.runId == id && it.op == Op.MOVE_FOLDER }.mapNotNull { it.to?.folder }) }
             } catch (e: Exception) { message = describe(e) }
             refreshHistory()
         }
