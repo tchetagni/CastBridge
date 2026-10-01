@@ -37,7 +37,7 @@ STATES = ("review", "validated", "rejected", "needs-fix")
 NEXT = {"review": {"validated", "rejected", "needs-fix"}, "validated": {"review", "needs-fix", "rejected"},
         "needs-fix": {"review", "rejected"}, "rejected": {"review", "needs-fix"}}
 ALIASES = {"draft": "review", "beta": "review", "reviewed": "review", "approved": "validated", "needs_fix": "needs-fix", "needsfix": "needs-fix"}
-ID = re.compile(r"[A-Za-z0-9_.:+/-]{1,64}")
+ID = re.compile(r"[A-Za-z0-9][A-Za-z0-9_.:+-]{0,63}")
 DATE = re.compile(r"\d{4}-\d{2}-\d{2}")
 HASH = re.compile(r"[0-9a-f]{16}")
 

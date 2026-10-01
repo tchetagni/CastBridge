@@ -51,9 +51,14 @@ data class ContentReport(
             return ContentReport(id, kind, itemId, reason, cleanNote(note), hash, lotOk, lotVersion?.takeIf { it in 0..1_000_000 }, now, channel)
         }
 
-        fun parse(m: Map<String, Any?>): ContentReport? = create(ContentKind.of(m.str("kind")) ?: return null, m.str("item") ?: return null,
-            ReportReason.of(m.str("reason")) ?: return null, m.str("note"), m.str("hash"), m.str("lot"), m.int("lotVersion"),
-            m.long("at") ?: return null, Channel.of(m.str("channel")), m.str("id")?.takeIf { it.length in 8..40 && it.all { c -> c.isLetterOrDigit() || c == '-' } } ?: return null)
+        fun parse(m: Map<String, Any?>): ContentReport? {
+            val kind = ContentKind.of(m.str("kind")) ?: return null
+            val item = m.str("item") ?: return null
+            val reason = ReportReason.of(m.str("reason")) ?: return null
+            val at = m.long("at") ?: return null
+            val id = m.str("id")?.takeIf { it.length in 8..40 && it.all { c -> c.isLetterOrDigit() || c == '-' } } ?: return null
+            return create(kind, item, reason, m.str("note"), m.str("hash"), m.str("lot"), m.int("lotVersion"), at, Channel.of(m.str("channel")), id)
+        }
     }
 }
 
