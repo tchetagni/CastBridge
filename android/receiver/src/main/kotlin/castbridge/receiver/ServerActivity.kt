@@ -244,7 +244,7 @@ class ServerActivity : Activity() {
         fact("Identifiant de la TV (à chercher dans l'administration)", s.shortId ?: "pas encore enregistrée") {
             if (++hiddenTaps >= 7 && !showAdvanced) { showAdvanced = true; toast("Réglage avancé affiché"); render() }
         }
-        fact("Serveur", s.baseUrl + if (s.customServer) "  (adresse modifiée)" else "")
+        if (s.customServer) fact("Serveur personnalisé", s.baseUrl)
         fact("Dernier contact", if (s.lastContactAt > 0) date(s.lastContactAt) + (s.lastContactMessage?.let { " — $it" } ?: "")
             else s.lastContactMessage ?: if (s.needsConsent) "aucun (écran d'information à valider)" else "aucun pour l'instant")
         fact("Internet", TvService.running?.netSummary() ?: "—")
@@ -253,21 +253,21 @@ class ServerActivity : Activity() {
         action("Contacter le serveur maintenant") { toast("Contact du serveur…"); TvConnect.post { if (contact()) flush() } }
         if (showAdvanced || s.customServer) {
             action("Adresse du serveur (avancé)…") { editUrl(link) }
-            if (s.customServer) action("Revenir au serveur officiel") { TvConnect.post { state.baseUrl = ServerUrl.DEFAULT; tick() }; toast("Serveur officiel : ${ServerUrl.DEFAULT}") }
+            if (s.customServer) action("Revenir au serveur par défaut") { TvConnect.post { state.baseUrl = ServerUrl.DEFAULT; tick() }; toast("Serveur par défaut rétabli") }
         }
         action("Confidentialité (mes données)") { mode = MODE_PRIVACY; render(true) }
         action("Fermer") { finish() }
     }
 
     private fun editUrl(link: ServerLink) {
-        val input = EditText(this).apply { setText(link.state.baseUrl); inputType = InputType.TYPE_TEXT_VARIATION_URI; setSelectAllOnFocus(true) }
-        AlertDialog.Builder(this).setTitle("Adresse du serveur CastBridge").setMessage("HTTPS obligatoire. Par défaut : ${ServerUrl.DEFAULT}")
+        val input = EditText(this).apply { setText(if (link.state.customServer) link.state.baseUrl else ""); inputType = InputType.TYPE_TEXT_VARIATION_URI; setSelectAllOnFocus(true) }
+        AlertDialog.Builder(this).setTitle("Adresse du serveur CastBridge").setMessage("HTTPS obligatoire. Laissez vide pour le serveur par défaut.")
             .setView(input)
             .setPositiveButton("Enregistrer") { _, _ ->
-                val v = input.text.toString()
+                val v = input.text.toString().trim().ifEmpty { ServerUrl.DEFAULT }
                 val problem = ServerUrl.problem(v)
                 if (problem != null) toast(problem)
-                else { TvConnect.post { state.baseUrl = v; tick() }; toast("Serveur : ${ServerUrl.normalize(v)}") }
+                else { TvConnect.post { state.baseUrl = v; tick() }; toast(if (v == ServerUrl.DEFAULT) "Serveur par défaut rétabli" else "Serveur : ${ServerUrl.normalize(v)}") }
             }.setNegativeButton("Annuler", null).show()
     }
 

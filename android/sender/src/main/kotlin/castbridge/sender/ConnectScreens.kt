@@ -258,7 +258,7 @@ private fun ConnectionSection(@Suppress("UNUSED_PARAMETER") v: Int) {
     val st = PhoneConnect.state
     Title("Connexion")
     Line("Identifiant de l'appareil (pour le retrouver dans l'administration)", st.shortId ?: "pas encore enregistré")
-    Line("Serveur", st.baseUrl + if (st.customServer) " (modifié)" else "")
+    if (st.customServer) Line("Serveur personnalisé", st.baseUrl)
     Line("Dernier contact", whenText(st.lastContactAt) + (st.lastContactMessage?.let { " — $it" } ?: ""))
     if (st.blocked) Text("Appareil bloqué par l'administrateur : pas de mise à jour.", color = MaterialTheme.colorScheme.error)
     if (st.channel == "beta") Line("Canal", "bêta (choisi par l'administrateur)")
@@ -273,16 +273,16 @@ private fun AdvancedSection() {
         colors = ListItemDefaults.colors(containerColor = androidx.compose.ui.graphics.Color.Transparent))
     if (!open) return
     val st = PhoneConnect.state
-    var url by remember { mutableStateOf(st.baseUrl) }
+    var url by remember { mutableStateOf(if (st.customServer) st.baseUrl else "") }
     var msg by remember { mutableStateOf<String?>(null) }
     OutlinedTextField(url, { url = it.trim() }, Modifier.fillMaxWidth(), singleLine = true, label = { Text("Adresse du serveur (HTTPS)") })
     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         Button(onClick = {
-            msg = try { st.baseUrl = url; url = st.baseUrl; PhoneConnect.agent.post { tick() }; "Enregistré" } catch (e: IllegalArgumentException) { e.message }
+            msg = try { st.baseUrl = url.ifBlank { ServerUrl.DEFAULT }; url = if (st.customServer) st.baseUrl else ""; PhoneConnect.agent.post { tick() }; "Enregistré" } catch (e: IllegalArgumentException) { e.message }
             PhoneConnect.changed()
         }) { Text("Enregistrer") }
-        OutlinedButton(onClick = { st.baseUrl = ServerUrl.DEFAULT; url = ServerUrl.DEFAULT; msg = "Serveur officiel"; PhoneConnect.agent.post { tick() }; PhoneConnect.changed() }) {
-            Text("Serveur officiel")
+        OutlinedButton(onClick = { st.baseUrl = ServerUrl.DEFAULT; url = ""; msg = "Serveur par défaut rétabli"; PhoneConnect.agent.post { tick() }; PhoneConnect.changed() }) {
+            Text("Serveur par défaut")
         }
     }
     msg?.let { Text(it, style = MaterialTheme.typography.bodySmall) }
@@ -325,7 +325,7 @@ private fun TvServerPanel() {
     if (tv == null) { Text("Recherche de « $name » sur le réseau…", style = MaterialTheme.typography.bodySmall); return }
     fun load() = scope.launch {
         withContext(Dispatchers.IO) { runCatching { JsonLite.obj(tvCall(tv.base, pin, "GET", "/api/server")) } }
-            .onSuccess { info = it; if (url.isEmpty()) url = it["baseUrl"] as? String ?: "" }
+            .onSuccess { info = it; if (url.isEmpty() && it["customServer"] == true) url = it["baseUrl"] as? String ?: "" }
             .onFailure { msg = "La TV ne répond pas (${it.message}) : version trop ancienne ?" }
     }
     fun act(path: String, done: String) = scope.launch {
@@ -340,13 +340,13 @@ private fun TvServerPanel() {
         @Suppress("UNCHECKED_CAST") val quiz = i["quiz"] as? Map<String, Any?>
         Line("TV", "${tv.name.removePrefix("CastBridge TV ")} — version ${i["versionName"] ?: "?"}")
         Line("Identifiant de la TV", i["shortId"] as? String ?: "pas encore enregistrée")
-        Line("Serveur utilisé par la TV", "${i["baseUrl"]}" + if (i["customServer"] == true) " (modifié)" else "")
+        if (i["customServer"] == true) Line("Serveur personnalisé de la TV", "${i["baseUrl"]}")
         Line("Dernier contact", whenText((i["lastContactAt"] as? Number)?.toLong() ?: 0) + ((i["lastContactMessage"] as? String)?.let { " — $it" } ?: ""))
         if (i["needsConsent"] == true) Text("La TV attend encore la réponse à l'écran d'information (sur la TV).", style = MaterialTheme.typography.bodySmall)
         up?.let { Line("Mises à jour de la TV", (it["message"] as? String).orEmpty().ifEmpty { "—" }) }
         quiz?.let { Line("Questions du quiz", ((it["message"] as? String) ?: "—") + " · ${(it["serverQuestions"] as? Number)?.toInt() ?: 0} du serveur") }
     }
-    OutlinedTextField(url, { url = it.trim() }, Modifier.fillMaxWidth(), singleLine = true, label = { Text("Adresse du serveur pour la TV (vide = officiel)") })
+    OutlinedTextField(url, { url = it.trim() }, Modifier.fillMaxWidth(), singleLine = true, label = { Text("Adresse du serveur pour la TV (vide = serveur par défaut)") })
     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         OutlinedButton(onClick = {
             val problem = url.takeIf { it.isNotEmpty() }?.let { ServerUrl.problem(it) }

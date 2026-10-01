@@ -552,7 +552,7 @@ class ContentsScreen(a: LearnActivity, private val note: String? = null) : Learn
         note?.let { col.addView(a.st.text(it, 24f, LearnStyle.GOLD, true), col.lp(bottom = a.st.px(8))) }
         col.addView(a.st.text("Installer un pack (fichier .learn.zip) : copiez-le dans le dossier CastBridge/Packs d'une clé USB " +
             "(ou Android/data/castbridge.receiver/files/CastBridge/Packs si la TV ne lit pas la racine), ou envoyez-le depuis l'app du téléphone. " +
-            "En ligne (bridge.sti-cm.com) : bientôt. Les vidéos ne sont jamais dans les packs.", 19f, LearnStyle.MUTED), col.lp(bottom = a.st.px(10)))
+            "En ligne : bientôt. Les vidéos ne sont jamais dans les packs.", 19f, LearnStyle.MUTED), col.lp(bottom = a.st.px(10)))
         val received = LearnHub.libraryPackFiles()
         val acts = ArrayList<View>()
         acts += a.st.button("Rechercher à nouveau", "clé USB, mémoire de la TV") { lib.forget(); a.rebuild() }
