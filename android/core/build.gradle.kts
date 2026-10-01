@@ -57,3 +57,14 @@ tasks.test {
     systemProperty("quiz.dist", rootProject.projectDir.parentFile.resolve("content/quiz/dist").absolutePath)
     inputs.dir(learnContent).withPropertyName("learnContent").optional()
 }
+
+// ---- Lots (docs/LOTS.md): the starter data bundled in the TV APK counts in the TV's 10 MB budget ----
+// Runs on the built classes + resources (embedded Apprendre packs + quiz banks); fails the build above LotBudget.TV_MAX_BYTES.
+val checkStarterBudget by tasks.registering(JavaExec::class) {
+    group = "castbridge"
+    description = "Prints the size of the Learn+Quiz starter data bundled in the TV APK and fails above the 10 MB budget"
+    dependsOn(tasks.named("classes"))
+    classpath = files(sourceSets.main.get().output.classesDirs, sourceSets.main.get().output.resourcesDir, configurations.runtimeClasspath)
+    mainClass.set("castbridge.core.lots.StarterBudget")
+}
+tasks.named("check") { dependsOn(checkStarterBudget) }
