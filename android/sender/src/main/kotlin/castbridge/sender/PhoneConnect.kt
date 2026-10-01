@@ -41,6 +41,7 @@ class CastBridgeApp : Application() {
         TvLinkManager.init(this)
         runCatching { ParentalInbox.schedule(this) }          // reports of the parental control: polls only if this phone is a designated recipient
         runCatching { LotsRuntime.init(this); LotsRuntime.schedule(this) }   // « Données » (docs/LOTS.md): background sync + deferred delivery to the TV
+        runCatching { OrdersRuntime.init(this); OrdersRuntime.schedule(this) }   // ordres différés (docs/ORDRES.md): le téléphone messager, en tâche de fond
         // Light crash handler: one small file written at once, sent at the next start (POST /api/v1/devices/crash).
         val previous = Thread.getDefaultUncaughtExceptionHandler()
         Thread.setDefaultUncaughtExceptionHandler { t, e ->
