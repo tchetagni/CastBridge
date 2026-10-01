@@ -106,7 +106,7 @@ def quiz_items():
         with zipfile.ZipFile(z) as zf:
             m = json.loads(zf.read("manifest.json"))
             for q in json.loads(zf.read("questions.json"))["questions"]:
-                out[q["id"]] = {"kind": "question", "id": q["id"], "lot": "quiz/" + m["course"], "cls": q.get("level") or q["track"],
+                out[q["id"]] = {"kind": "question", "id": q["id"], "lot": "quiz/" + "/".join(x for x in (m.get("track"), m.get("level"), m.get("field")) if x), "cls": q.get("level") or q["track"],
                                 "subject": q.get("category") or "", "hash": question_hash(q), "text": q["question"][:140],
                                 "state": norm(q.get("status") or "review"), "difficulty": q.get("difficulty")}
     return out

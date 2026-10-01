@@ -23,6 +23,8 @@ public final class ContentRules {
     public static final Map<String, String> REASONS = Map.of("wrong_answer", "Réponse fausse", "ambiguous", "Question ambiguë",
             "language", "Faute de langue", "out_of_scope", "Hors programme", "difficulty", "Trop facile ou trop difficile", "other", "Autre");
     public static final Pattern ID = Pattern.compile("[A-Za-z0-9][A-Za-z0-9_.:+-]{0,63}");
+    /** Lot / pack id: "quiz/secondary/3e", "learn/cep-maths". */
+    public static final Pattern LOT = Pattern.compile("[A-Za-z0-9][A-Za-z0-9_.:+/-]{0,79}");
     public static final Pattern HASH = Pattern.compile("[0-9a-f]{16}");
     public static final int MAX_NOTE = 200;
 

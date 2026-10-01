@@ -203,7 +203,7 @@ class QuizRoom(
         if (mode == Mode.MILLIONAIRE) {
             val qs = draw(15, seed)
             val practice = play == Play.PRACTICE
-            game = QuizGame(qs, timers = if (practice) QuizGame.NO_TIMERS else gameTimers, seed = seed, practice = practice).also { it.start(t) }
+            game = QuizGame(qs, timers = if (practice) QuizGame.NO_TIMERS else gameTimers, seed = seed, practice = practice, markChannel = bank.channel).also { it.start(t) }
             duel = null
             if (candidate != null && players[candidate]?.left != false) candidate = null
         } else {
@@ -319,6 +319,7 @@ class QuizRoom(
                 if (c.questionId != questionId || c.friendId != p.id || choice !in 0..3) return Act.IGNORED
                 game?.finishPhone(choice, p.name, t); call = null; Act.OK
             }
+            "report" -> reportAct(questionId, arg)   // « Signaler une erreur »: any player, on the question on screen
             else -> {
                 val g = game ?: return Act.IGNORED
                 if (candidate != p.id) return Act.FORBIDDEN
@@ -330,9 +331,29 @@ class QuizRoom(
         r
     }
 
+    /** Where « Signaler une erreur » goes (set by the app: the queue of reports of this device); null = reports not available. */
+    @Volatile var feedback: castbridge.core.content.ContentFeedback? = null
+
+    /** The question on screen (Millionaire or Duel), or null. */
+    fun currentQuestion(): Question? = synchronized(lock) { game?.question ?: duel?.question }
+
+    /** [arg] = "reason" or "reason|short text" (reasons: castbridge.core.content.ReportReason keys). */
+    private fun reportAct(questionId: String?, arg: String?): Act {
+        val q = currentQuestion() ?: return Act.IGNORED
+        if (questionId != q.id) return Act.IGNORED
+        val fb = feedback ?: return Act.IGNORED
+        val reason = castbridge.core.content.ReportReason.of(arg?.substringBefore('|')?.trim()) ?: return Act.BAD_REQUEST
+        return when (fb.reportQuestion(q, reason, arg?.substringAfter('|', ""))) {
+            castbridge.core.content.ReportQueue.Add.INVALID -> Act.BAD_REQUEST
+            castbridge.core.content.ReportQueue.Add.RATE_LIMITED -> Act.IGNORED
+            else -> Act.OK   // accepted, or already reported (counted once)
+        }
+    }
+
     private fun candidateAct(g: QuizGame, action: String, choice: Int?, arg: String?): Boolean {
         val t = now()
         return when (action) {
+            "report" -> reportAct(g.question.id, arg) == Act.OK
             "select" -> choice != null && (g.select(choice, t) || (g.phase == QuizGame.Phase.CONFIRM && g.selected == choice))
             "cancel" -> g.cancel()
             "confirm" -> g.confirm(t).also { if (it) lockedAt = t }
@@ -478,6 +499,7 @@ class QuizRoom(
                 "difficulty" to q.difficulty,
                 "answer" to (if (closed) q.answer else null),
                 "explanation" to (if (closed) q.explanation else null),
+                "mark" to castbridge.core.content.PlayPolicy.mark(q, bank.channel),
             ),
             "answeredCount" to d.answered().size,
             "myAnswer" to me?.let { d.answerOf(it.id) ?: d.outcomes[it.id]?.choice },

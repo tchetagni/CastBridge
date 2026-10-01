@@ -40,6 +40,8 @@ class QuizGame(
     seed: Long = System.nanoTime(),
     /** « Entraînement »: a wrong answer does not end the game, every question is played, no prize (score = right answers). */
     val practice: Boolean = false,
+    /** Channel of the device: on the beta channel a question not validated yet carries a visible mark in the state (castbridge.core.content.PlayPolicy). */
+    val markChannel: castbridge.core.content.Channel? = null,
 ) {
     enum class Phase { READY, QUESTION, CONFIRM, JOKER, LOCKED, REVEALED, FINISHED }
 
@@ -213,6 +215,7 @@ class QuizGame(
                 "region" to q.region.name, "difficulty" to q.difficulty,
                 "answer" to (if (open) q.answer else null),
                 "explanation" to (if (open) q.explanation else null),
+                "mark" to markChannel?.let { castbridge.core.content.PlayPolicy.mark(q, it) },
             ),
             "selected" to selected,
             "removed" to removed.sorted(),

@@ -33,6 +33,8 @@ data class ValidationRecord(
 
     companion object {
         val ID = Regex("[A-Za-z0-9][A-Za-z0-9_.:+-]{0,63}")
+        /** Lot / pack id: "quiz/secondary/3e", "learn/cep-maths". */
+        val LOT = Regex("[A-Za-z0-9][A-Za-z0-9_.:+/-]{0,79}")
         private val DATE = Regex("\\d{4}-\\d{2}-\\d{2}")
         private val HASH = Regex("[0-9a-f]{16}")
 

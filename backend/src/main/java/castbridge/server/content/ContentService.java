@@ -87,7 +87,7 @@ public class ContentService {
         String hash = text(r, "hash");
         if (hash != null && !ContentRules.HASH.matcher(hash).matches()) return "empreinte invalide";
         String lot = text(r, "lot");
-        if (lot != null && !ContentRules.ID.matcher(lot).matches()) lot = null;
+        if (lot != null && (!ContentRules.LOT.matcher(lot).matches() || lot.contains(".."))) lot = null;
         String channel = "beta".equals(text(r, "channel")) ? "beta" : "stable";
         Integer lotVersion = r.path("lotVersion").isInt() && r.get("lotVersion").asInt() >= 0 && r.get("lotVersion").asInt() <= 1_000_000 ? r.get("lotVersion").asInt() : null;
         Instant at = r.path("at").isNumber() ? Instant.ofEpochMilli(r.get("at").asLong()) : now;

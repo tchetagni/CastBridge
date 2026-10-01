@@ -47,7 +47,7 @@ data class ContentReport(
                    now: Long, channel: Channel, id: String = UUID.randomUUID().toString()): ContentReport? {
             if (!ValidationRecord.ID.matches(itemId)) return null
             if (hash != null && !Regex("[0-9a-f]{16}").matches(hash)) return null
-            val lotOk = lot?.takeIf { ValidationRecord.ID.matches(it) }
+            val lotOk = lot?.takeIf { ValidationRecord.LOT.matches(it) && !it.contains("..") }
             return ContentReport(id, kind, itemId, reason, cleanNote(note), hash, lotOk, lotVersion?.takeIf { it in 0..1_000_000 }, now, channel)
         }
 

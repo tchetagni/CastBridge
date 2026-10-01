@@ -138,10 +138,11 @@ class Records(unittest.TestCase):
         import zipfile
         q = dict(Q, id="q1", track="secondary", level="3e", field=None, region="CM", category="Géo", difficulty=2, source="s", status="review")
         with zipfile.ZipFile(c.QUIZ_DIST / "quiz-3e-p1-v1.quiz.zip", "w") as z:
-            z.writestr("manifest.json", json.dumps({"course": "3e"}))
+            z.writestr("manifest.json", json.dumps({"course": "3e", "track": "secondary", "level": "3e", "field": None}))
             z.writestr("questions.json", json.dumps({"version": 2, "questions": [q, dict(q, id="q2")]}))
         h = c.question_hash(q)
         self.write(self.rec(id="q1", kind="question", hash=h), self.rec(id="q2", kind="question", state="needs-fix", note="ambiguë"))
+        self.assertEqual(c.quiz_items()["q1"]["lot"], "quiz/secondary/3e")             # same ids as ContentFeedback.lotOf in the apps
         c.cmd_apply(type("A", (), {"dry_run": False})())
         a = json.loads(c.APPROVALS.read_text(encoding="utf-8"))
         self.assertEqual(a["q1"]["status"], "approved")
