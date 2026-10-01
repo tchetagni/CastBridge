@@ -19,7 +19,9 @@ fun filterOfCourse(key: String): QuestionFilter? {
 }
 
 /** What the TV tells the phone about its packs (GET /api/quiz/packs/status). */
-data class TvPackStatus(val maxBytes: Long, val usedBytes: Long, val installed: List<Pair<String, Int>>, val needs: List<QuizPackManager.Need>, val thresholdGames: Int)
+data class TvPackStatus(val maxBytes: Long, val usedBytes: Long, val installed: List<Pair<String, Int>>, val needs: List<QuizPackManager.Need>, val thresholdGames: Int,
+                       /** Quiz lots installed on the TV through the lots framework (scope + version + size), for « Mes thèmes ». */
+                       val lots: List<castbridge.core.lots.LotMeta> = emptyList())
 
 /**
  * TV side of the phone relay (PIN-protected, docs/QUIZ.md): the phone downloads the packs the TV needs (it has the
@@ -35,6 +37,9 @@ class QuizPackApi(
     /** Courses to watch (the ones played here + general knowledge). */
     private val watched: () -> Collection<QuestionFilter>,
 ) : ApiExtension {
+    /** Quiz lots installed here (set by the app once the lots framework is wired): reported by [status]. */
+    var lots: QuizLotConsumer? = null
+
     override fun wantsBody(path: String) = path == "/api/quiz/packs/push"
 
     override fun handleBody(path: String, method: String, params: Map<String, String>, body: ByteArray): ApiReply? {
@@ -66,7 +71,8 @@ class QuizPackApi(
         val inst = store.installed()
         return Json.write(linkedMapOf("maxBytes" to store.maxBytes, "usedBytes" to inst.sumOf { it.file.length() }, "thresholdGames" to manager.thresholdGames,
             "installed" to inst.map { linkedMapOf("id" to it.info.id, "course" to it.info.course, "version" to it.info.version, "part" to it.info.part, "questions" to it.info.questions, "size" to it.file.length()) },
-            "needs" to manager.needs(watched()).map { linkedMapOf("course" to it.course, "freshGames" to it.freshGames) }))
+            "needs" to manager.needs(watched()).map { linkedMapOf("course" to it.course, "freshGames" to it.freshGames) },
+            "lots" to lots?.installed().orEmpty().map { linkedMapOf("scope" to it.id.scope, "version" to it.version, "bytes" to it.bytes, "sha256" to it.sha256, "title" to it.title) }))
     }
 
     private fun err(m: String) = "{\"error\":${Json.quote(m)}}"
@@ -93,7 +99,11 @@ class HttpTvPackEndpoint(private val base: String, private val pin: String?) : T
             TvPackStatus((m["maxBytes"] as? Number)?.toLong() ?: QUIZ_PACK_MAX_BYTES, (m["usedBytes"] as? Number)?.toLong() ?: 0,
                 (m["installed"] as? List<Map<String, Any?>>).orEmpty().map { (it["id"] as? String).orEmpty() to ((it["version"] as? Number)?.toInt() ?: 0) },
                 (m["needs"] as? List<Map<String, Any?>>).orEmpty().map { QuizPackManager.Need((it["course"] as? String).orEmpty(), (it["freshGames"] as? Number)?.toInt() ?: 0) },
-                (m["thresholdGames"] as? Number)?.toInt() ?: QUIZ_PACK_THRESHOLD_GAMES)
+                (m["thresholdGames"] as? Number)?.toInt() ?: QUIZ_PACK_THRESHOLD_GAMES,
+                (m["lots"] as? List<Map<String, Any?>>).orEmpty().mapNotNull { x ->
+                    castbridge.core.lots.LotMeta(castbridge.core.lots.LotId(QuizLotScopes.FEATURE, x["scope"] as? String ?: return@mapNotNull null), (x["version"] as? Number)?.toInt() ?: return@mapNotNull null,
+                        (x["bytes"] as? Number)?.toLong() ?: 0L, (x["sha256"] as? String).orEmpty(), (x["title"] as? String).orEmpty())
+                })
         }
     } catch (e: Exception) { null }
 

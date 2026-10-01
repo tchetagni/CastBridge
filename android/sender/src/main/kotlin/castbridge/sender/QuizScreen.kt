@@ -90,6 +90,12 @@ fun QuizScreen() {
         }
     }
 
+    // What CastBridge-TV holds (« Mes thèmes »): asked while the TV answers, unknown (null) otherwise: the list never waits for the network.
+    var tvLots by remember { mutableStateOf<List<castbridge.core.lots.LotMeta>?>(null) }
+    LaunchedEffect(tv?.base, pin) {
+        tvLots = if (tv == null || pin.isEmpty()) null else withContext(Dispatchers.IO) { runCatching { HttpTvPackEndpoint(tv.base, pin).status()?.lots }.getOrNull() }
+    }
+
     playing?.let { url ->
         BackHandler { playing = null }
         GamePage(url)
@@ -151,6 +157,8 @@ fun QuizScreen() {
             Icon(cbv(R.drawable.ic_cb_lecture), null); Spacer(Modifier.width(8.dp)); Text("Rejoindre la partie", fontSize = 18.sp)
         }
         if (message.isNotEmpty()) Text(message, color = MaterialTheme.colorScheme.error)
+        Spacer(Modifier.height(8.dp))
+        QuizThemesSection(tvLots)
     }
 }
 

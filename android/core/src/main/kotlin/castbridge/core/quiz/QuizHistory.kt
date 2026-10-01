@@ -82,6 +82,29 @@ class QuizHistory(val gap: Int = DEFAULT_MIN_GAP_GAMES, val maxEntriesPerCourse:
         while (c.seen.size > maxEntriesPerCourse) { val e = c.seen.entries.iterator(); e.next(); e.remove() }
     }
 
+    /**
+     * Merges what [other] (the same profile on another device) remembers into this history. Per course, a question is as recent
+     * as its most recent appearance on either device, measured in games ago on that device; the game counter becomes the
+     * larger of the two. Question ids are stable across lot updates, so a changed question keeps its slot.
+     */
+    fun mergeFrom(other: QuizHistory) {
+        if (other === this) return
+        val theirs = other.serialize().let { parse(it, gap) }       // a consistent snapshot
+        synchronized(this) {
+            for (key in theirs.courses.keys) {
+                val t = theirs.courses.getValue(key); val m = courses.getOrPut(key) { Course() }
+                val games = maxOf(m.games, t.games)
+                val ago = HashMap<String, Int>()
+                for ((id, g) in m.seen) ago[id] = m.games - g
+                for ((id, g) in t.seen) ago.merge(id, t.games - g, ::minOf)
+                val ordered = ago.entries.map { it.key to games - it.value }.sortedBy { it.second }
+                m.games = games; m.seen.clear(); ordered.forEach { (id, g) -> m.seen[id] = g }
+                prune(m)
+            }
+            dirty = true
+        }
+    }
+
     /** Serialized form, ~12-20 bytes per remembered question. */
     @Synchronized fun serialize(): String {
         val sb = StringBuilder("CBQH1\n")

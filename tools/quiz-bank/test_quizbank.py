@@ -8,7 +8,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import quizbank  # noqa: E402
-from qb import balance, core, importer, pack, qc  # noqa: E402
+from qb import balance, core, importer, lots, pack, qc  # noqa: E402
 
 
 def good(**kw):
@@ -145,6 +145,46 @@ class Repository(unittest.TestCase):
             if q["verif"] == "fact":
                 self.assertIn(q["source"][1:q["source"].index("]")], facts_engine.SOURCES)
 
+
+
+class Lots(unittest.TestCase):
+    def qs(self, n=30, region="WORLD"):
+        out = []
+        for i in range(n):
+            out.append(good(id="p2-%04d" % i, track="primary", level="CM2", field=None, region=region, question="Combien font %d + %d ?" % (i, i), choices=[str(2 * i), str(2 * i + 1), str(2 * i + 2), str(2 * i + 3)], answer=0, difficulty=1 + i % 5))
+        return out
+
+    def test_a_lot_is_built_with_catalog_and_stays_stable_until_its_content_changes(self):
+        with tempfile.TemporaryDirectory() as d:
+            out = Path(d)
+            cat, lines = lots.build_lots(self.qs(), out)
+            e = cat["lots"][0]
+            self.assertEqual(("quiz", "cm2", 1, 30), (e["feature"], e["scope"], e["version"], e["questions"]))
+            self.assertEqual(e["bytes"], (out / e["file"]).stat().st_size)
+            first = (out / e["file"]).read_bytes()
+            cat2, _ = lots.build_lots(self.qs(), out)                      # same content: same version, same bytes
+            self.assertEqual(1, cat2["lots"][0]["version"]); self.assertEqual(first, (out / cat2["lots"][0]["file"]).read_bytes())
+            changed = self.qs(); changed[3]["explanation"] = "Autre explication."
+            cat3, _ = lots.build_lots(changed, out)                        # one question edited: version bump, same ids
+            self.assertEqual(2, cat3["lots"][0]["version"])
+            self.assertEqual(["quiz-cm2-p1-v2.quiz.zip"], sorted(p.name for p in out.glob("*.quiz.zip")))
+            self.assertIn("TOTAL", lines[-1])
+
+    def test_a_lot_above_the_cap_fails_the_build(self):
+        with tempfile.TemporaryDirectory() as d:
+            with self.assertRaises(lots.LotTooBig):
+                lots.build_lots(self.qs(), Path(d), max_bytes=1000)
+
+    def test_general_knowledge_is_split_by_region(self):
+        qs = [good(id="g-%d" % i, region=r, question="Question numéro %d ?" % i, choices=["a%d" % i, "b%d" % i, "c%d" % i, "d%d" % i]) for i, r in enumerate(["CM", "CM", "AF", "WORLD"])]
+        with tempfile.TemporaryDirectory() as d:
+            cat, _ = lots.build_lots(qs, Path(d))
+            self.assertEqual({"culture-cm": 2, "culture-afrique": 1, "culture-monde": 1}, {e["scope"]: e["questions"] for e in cat["lots"]})
+
+    def test_question_hash_is_content_sensitive(self):
+        a = good(); b = good(answer=2)
+        self.assertNotEqual(lots.question_hash(a), lots.question_hash(b))
+        self.assertEqual(8, len(lots.question_hash(a)))
 
 if __name__ == "__main__":
     unittest.main()

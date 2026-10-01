@@ -39,6 +39,8 @@ data class Question(
     val updatedAt: String? = null,
     /** How the answer was checked: "computed" (the answer comes from a calculation, tested), "fact" (table of sourced facts), "import" (written then imported), null = bundled/reviewed. */
     val verif: String? = null,
+    /** The answer was computed and tested: playable before a human review where the play policy allows it (packs/lots only, see [QuizPlay]). */
+    val computedOk: Boolean = false,
 ) {
     /** Same question with its choices reordered by [rng] (the bank's answer positions do not leak into the game). */
     fun shuffled(rng: Random): Question {
@@ -60,7 +62,7 @@ data class QuestionFilter(val track: Track = Track.GENERAL, val level: String? =
  * 70 % Cameroon / 20 % Africa / 10 % World (±1 question).
  */
 class QuizBank(val all: List<Question>) {
-    val playable: List<Question> by lazy { all.filter { !it.review } }
+    val playable: List<Question> by lazy { all.filter { QuizPlay.isPlayable(it) } }
 
     fun count(filter: QuestionFilter, includeReview: Boolean = false) = poolOf(filter, includeReview).size
 
@@ -255,9 +257,9 @@ class QuizBank(val all: List<Question>) {
                     answer = m.int("answer") ?: throw Json.ParseError("question #$i: missing answer"),
                     explanation = m.str("explanation").orEmpty(),
                     source = m.str("source").orEmpty(),
-                    // `computedPlayable` (content packs): a question whose answer was computed and tested may be played before a human review
-                    review = if (computedPlayable && m.str("verif") == "computed" && status != "rejected") false
-                        else (m.bool("review") ?: false) || (status != null && status != "approved"),
+                    // `review` is the raw flag; whether a flagged question is played is decided in ONE place, QuizPlay.isPlayable
+                    review = (m.bool("review") ?: false) || (status != null && status != "approved"),
+                    computedOk = computedPlayable && m.str("verif") == "computed" && status != "rejected",
                     verif = m.str("verif"),
                     track = m.str("track")?.let { Track.of(it) ?: throw Json.ParseError("question #$i: bad track") } ?: Track.GENERAL,
                     level = m.str("level"),
@@ -268,6 +270,20 @@ class QuizBank(val all: List<Question>) {
             })
         }
     }
+}
+
+/** Release channel of the app: beta testers, or the future stable release (docs/QUIZ.md, « Politique de jeu »). */
+enum class QuizChannel { BETA, STABLE; companion object { val DEFAULT = BETA } }
+
+/**
+ * THE single place that decides whether a question may be played (docs/QUIZ.md). Today: not flagged `review`, or flagged but
+ * its answer was computed and tested ([Question.computedOk], set for packs and lots only). The owner validates quality 3 months
+ * after distribution to the beta testers: the validation tooling changes THIS function (beta: flagged questions playable with
+ * a visible « bêta : non validé » mark and a « Signaler une erreur » action; stable: blocked until validated). Nothing else
+ * in the code looks at `review` to decide what is played.
+ */
+object QuizPlay {
+    fun isPlayable(question: Question, channel: QuizChannel = QuizChannel.DEFAULT): Boolean = !question.review || question.computedOk
 }
 
 /**
