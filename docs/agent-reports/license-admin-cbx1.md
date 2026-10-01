@@ -1,4 +1,10 @@
-STATUT: EN COURS
+STATUT: TERMINÉ
+
+Résumé : le module des licences du serveur parle `cbx1` (octets identiques au cœur) et l'ancien `cba1`/`cbr1` est supprimé (rien en production).
+- Livré : `Envelope`, `EnvelopeIssuer`, `EnvelopeVerifier`, portées `REACTIVATE`/`POLICY`, `seq` par clé, événement `issue` avec `seq`, révocation `cbx1`, `server-issued.json`, `ServerIssuedActivationTest` (core), docs.
+- Tests backend : avant 130 (127 verts, 1 échec, 2 erreurs) ; après 138, 0 échec, 0 erreur (2 ignorés comme avant).
+- À faire par le coordinateur : `gradle :core:test --tests '*ServerIssuedActivationTest*'` (non exécutable ici, plugin Android hors ligne).
+- Branche `claude/license-admin-cbx1`, dernier commit : voir `git log`.
 
 Cahier : `docs/agent-briefs/license-admin-cbx1.md` · branche `claude/license-admin-cbx1` (base `origin/integration/agents`).
 Note d'environnement : `./mvnw` ne peut pas télécharger Maven ici (réseau) ; les tests sont lancés avec le `mvn` du système (même version de module, hors ligne).
