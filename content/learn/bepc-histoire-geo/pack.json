@@ -1,0 +1,67 @@
+{
+ "format": 1,
+ "id": "bepc-histoire-geo",
+ "version": 1,
+ "title": "Histoire-Géographie-ECM — BEPC",
+ "description": "Fiches « l'essentiel » (ECM, géographie du Cameroun, histoire), exemples résolus, exercices type BEPC corrigés et épreuve blanche.",
+ "lang": "fr",
+ "cursus": "secondaire",
+ "level": "3e",
+ "subject": "histoire-geo",
+ "exam": "BEPC",
+ "programRef": "Programme officiel d'Histoire, Géographie et Éducation à la citoyenneté de la classe de 3e (MINESEC) — à vérifier sur le texte officiel",
+ "authors": [
+  "CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"
+ ],
+ "status": "draft",
+ "updatedAt": "2026-10-01",
+ "chapters": [
+  {
+   "id": "bepc-histoire-geo-ch-ecm",
+   "title": "ECM : symboles, institutions, droits et devoirs",
+   "order": 1,
+   "programRef": "3e — Éducation à la citoyenneté (à vérifier sur le texte officiel)"
+  },
+  {
+   "id": "bepc-histoire-geo-ch-geo",
+   "title": "Géographie du Cameroun : régions, relief et climats",
+   "order": 2,
+   "programRef": "3e — Géographie du Cameroun (à vérifier sur le texte officiel)"
+  },
+  {
+   "id": "bepc-histoire-geo-ch-hist",
+   "title": "Histoire : de la colonisation à la réunification",
+   "order": 3,
+   "programRef": "3e — Histoire du Cameroun (à vérifier sur le texte officiel)"
+  }
+ ],
+ "mockExams": [
+  {
+   "id": "bepc-histoire-geo-epreuve-1",
+   "title": "Épreuve blanche d'Histoire-Géographie-ECM — BEPC",
+   "minutes": 120,
+   "outOf": 20,
+   "instructions": "Épreuve notée sur 20 points. Durée indicative : 2 heures (durée et format officiels à vérifier). Sujet d'entraînement original. Réponds avec des phrases courtes et précises.",
+   "sections": [
+    {
+     "title": "Partie A — Éducation à la citoyenneté (7 points)",
+     "exercises": [
+      "bepc-histoire-geo-mock-ecm"
+     ]
+    },
+    {
+     "title": "Partie B — Géographie (7 points)",
+     "exercises": [
+      "bepc-histoire-geo-mock-geo"
+     ]
+    },
+    {
+     "title": "Partie C — Histoire (6 points)",
+     "exercises": [
+      "bepc-histoire-geo-mock-hist"
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "format": 1,
+ "id": "bac-philosophie",
+ "version": 1,
+ "title": "Philosophie — Baccalauréat",
+ "description": "Méthode de la dissertation philosophique et deux notions du programme (la liberté, la conscience) : fiches, exemples résolus, exercices corrigés et épreuve blanche.",
+ "lang": "fr",
+ "cursus": "secondaire",
+ "level": "Tle",
+ "subject": "philosophie",
+ "exam": "BAC",
+ "series": [
+  "A",
+  "C",
+  "D"
+ ],
+ "programRef": "Programme officiel de philosophie de la classe de Terminale (MINESEC) — à vérifier sur le texte officiel",
+ "authors": [
+  "CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"
+ ],
+ "status": "draft",
+ "updatedAt": "2026-10-01",
+ "chapters": [
+  {
+   "id": "bac-philosophie-methode",
+   "title": "La méthode de la dissertation philosophique",
+   "order": 1,
+   "programRef": "Tle — Méthodologie de la dissertation (à vérifier sur le texte officiel)"
+  },
+  {
+   "id": "bac-philosophie-liberte",
+   "title": "La liberté",
+   "order": 2,
+   "programRef": "Tle — Notion : la liberté (à vérifier sur le texte officiel)"
+  },
+  {
+   "id": "bac-philosophie-conscience",
+   "title": "La conscience",
+   "order": 3,
+   "programRef": "Tle — Notion : la conscience (à vérifier sur le texte officiel)"
+  }
+ ],
+ "mockExams": [
+  {
+   "id": "bac-philosophie-eb1",
+   "title": "Épreuve blanche de philosophie — Baccalauréat",
+   "minutes": 120,
+   "outOf": 20,
+   "instructions": "Épreuve d'entraînement simplifiée : questions de méthode, analyse d'un sujet, puis rédaction d'une introduction. Le format, la durée et le barème officiels de l'épreuve de philosophie du Baccalauréat sont à vérifier sur les textes officiels.",
+   "sections": [
+    {
+     "title": "Partie A — Questions de méthode (6 points)",
+     "exercises": [
+      "bac-philosophie-eb1-methode"
+     ]
+    },
+    {
+     "title": "Partie B — Analyse d'un sujet et plan (6 points)",
+     "exercises": [
+      "bac-philosophie-eb1-plan"
+     ]
+    },
+    {
+     "title": "Partie C — Rédaction de l'introduction (8 points)",
+     "exercises": [
+      "bac-philosophie-eb1-intro"
+     ]
+    }
+   ]
+  }
+ ]
+}

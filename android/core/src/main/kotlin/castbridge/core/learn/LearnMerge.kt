@@ -36,6 +36,7 @@ object LearnMerge {
             for (m in sp.mocks) if (mine.mocks.none { it.pack == m.pack && it.mock == m.mock && it.at == m.at }) mine.mocks += m
             mine.mocks.sortBy { it.at }
             mine.badges += sp.badges
+            mine.badges.toSortedSet().let { sorted -> mine.badges.clear(); mine.badges += sorted }      // same order whichever side merges
             if ((sp.lastDay ?: "") > (mine.lastDay ?: "")) { mine.lastDay = sp.lastDay; mine.streak = sp.streak }
             else if (sp.lastDay == mine.lastDay) mine.streak = maxOf(mine.streak, sp.streak)
             mine.reviewsDone = maxOf(mine.reviewsDone, sp.reviewsDone)
