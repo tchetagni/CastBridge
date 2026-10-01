@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/layout :: head('Sécurité')}"></head>
+<body>
+<header th:replace="~{admin/layout :: nav}"></header>
+<main>
+    <div th:replace="~{admin/layout :: flash}"></div>
+    <h1>Sécurité des comptes</h1>
+    <nav th:replace="~{admin/lic-nav :: sub}"></nav>
+    <p class="flash err" th:if="${error}" th:text="${error}"></p>
+    <div class="cols">
+        <section class="card">
+            <h2>Ma double authentification (TOTP)</h2>
+            <p th:if="${totpOn}">Active : un code à 6 chiffres est demandé à chaque connexion.</p>
+            <div th:unless="${totpOn}">
+                <p th:if="${requireTotp}">Obligatoire pour modifier quoi que ce soit avec le rôle propriétaire.</p>
+                <p th:unless="${vault}" class="danger">Impossible : la clé de chiffrement TOTP n'est pas installée sur le serveur (voir docs/LICENSE-ADMIN.md).</p>
+                <div th:if="${enroll != null}">
+                    <p>1. Scannez ce QR code avec une application d'authentification (FreeOTP, Aegis, Google Authenticator…), ou saisissez la clé : <b class="mono" th:text="${enroll.secret}"></b></p>
+                    <img class="qr" th:if="${qr != null}" th:src="${qr}" alt="QR code TOTP">
+                    <form th:action="@{/admin/licenses/security/totp/confirm}" method="post" class="stack">
+                        <label>2. Saisissez le code affiché <input type="text" name="code" inputmode="numeric" pattern="[0-9 ]{6,7}" maxlength="7" required autocomplete="one-time-code"></label>
+                        <button type="submit">Activer</button>
+                    </form>
+                </div>
+                <form th:if="${enroll == null and vault}" th:action="@{/admin/licenses/security/totp/start}" method="post"><button type="submit">Activer la double authentification</button></form>
+            </div>
+        </section>
+        <section class="card" th:if="${!accountList.isEmpty()}">
+            <h2>Comptes et rôles</h2>
+            <p><small>Propriétaire : tout. Support : lecture et réémission d'une activation existante. Lecture seule : consultation.</small></p>
+            <div class="scroll"><table class="list">
+                <thead><tr><th>Compte</th><th>Rôle</th><th>TOTP</th><th></th></tr></thead>
+                <tbody><tr th:each="a : ${accountList}">
+                    <td th:text="${a.username}"></td>
+                    <td><form th:if="${canWrite}" th:action="@{/admin/licenses/security/accounts/{u}/role(u=${a.username})}" method="post" class="inline">
+                        <select name="role"><option th:each="r : ${roles}" th:value="${r.name()}" th:text="${r.label()}" th:selected="${a.role == r}"></option></select>
+                        <button type="submit">Changer</button></form>
+                        <span th:unless="${canWrite}" th:text="${a.role == null ? '?' : a.role.label()}"></span></td>
+                    <td th:text="${a.totpEnabled} ? 'oui' : 'non'"></td>
+                    <td><form th:if="${canWrite and a.totpEnabled}" th:action="@{/admin/licenses/security/accounts/{u}/totp-off(u=${a.username})}" method="post" class="inline">
+                        <input type="text" name="reason" placeholder="motif" required minlength="3" maxlength="500"><button type="submit" data-confirm="Retirer la double authentification de ce compte ?">Retirer le TOTP</button></form></td>
+                </tr></tbody>
+            </table></div>
+            <h3 th:if="${canWrite}">Nouveau compte</h3>
+            <form th:if="${canWrite}" th:action="@{/admin/licenses/security/accounts}" method="post" class="stack" autocomplete="off">
+                <div class="row"><label>Identifiant <input type="text" name="username" required maxlength="63" pattern="[a-zA-Z0-9][a-zA-Z0-9._@-]{2,62}"></label>
+                    <label>Mot de passe (12 caractères min.) <input type="password" name="password" required minlength="12" autocomplete="new-password"></label>
+                    <label>Rôle <select name="role"><option th:each="r : ${roles}" th:value="${r.name()}" th:text="${r.label()}" th:selected="${r.name() == 'READONLY'}"></option></select></label></div>
+                <button type="submit">Créer le compte</button>
+            </form>
+        </section>
+    </div>
+</main>
+</body>
+</html>

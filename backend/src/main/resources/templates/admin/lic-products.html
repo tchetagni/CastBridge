@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/layout :: head('Bouquets')}"></head>
+<body>
+<header th:replace="~{admin/layout :: nav}"></header>
+<main>
+    <div th:replace="~{admin/layout :: flash}"></div>
+    <h1>Catalogue de bouquets</h1>
+    <nav th:replace="~{admin/lic-nav :: sub}"></nav>
+    <p><small>Un bouquet couvre des lots et se vend à la carte (définitif) ou par abonnement. Aucun prix ici : les champs de tarif restent vides, le tarif et le paiement sont vos décisions.</small></p>
+    <div class="cols">
+        <section class="card">
+            <div class="scroll"><table class="list">
+                <thead><tr><th>Bouquet</th><th>Type</th><th>Durée</th><th>Lots</th><th>État</th></tr></thead>
+                <tbody>
+                <tr th:each="p : ${items}">
+                    <td><b th:text="${p.title}"></b><br><small class="mono" th:text="${p.productId}"></small></td>
+                    <td th:text="${p.kind == 'ABONNEMENT'} ? 'Abonnement' : 'À la carte'"></td>
+                    <td th:text="${p.durationDays == null} ? '—' : |${p.durationDays} j|"></td>
+                    <td class="wrap small" th:text="${#strings.listJoin(p.lots, ', ')}"></td>
+                    <td>
+                        <span class="badge" th:classappend="${p.active} ? 'good' : 'warn'" th:text="${p.active} ? 'actif' : 'désactivé'"></span>
+                        <form th:if="${canWrite}" th:action="@{/admin/licenses/products/{id}/active(id=${p.productId})}" method="post" class="inline">
+                            <input type="hidden" name="active" th:value="${!p.active}">
+                            <input type="text" name="reason" placeholder="motif" maxlength="500" th:required="${p.active}">
+                            <button type="submit" th:text="${p.active} ? 'Désactiver' : 'Activer'"></button>
+                        </form>
+                    </td>
+                </tr>
+                <tr th:if="${items.isEmpty()}"><td colspan="5">Aucun bouquet.</td></tr>
+                </tbody>
+            </table></div>
+        </section>
+        <section class="card" th:if="${canWrite}">
+            <h2>Nouveau bouquet</h2>
+            <form th:action="@{/admin/licenses/products}" method="post" class="stack">
+                <div class="row"><label>Identifiant <input type="text" name="productId" required maxlength="48" pattern="[a-z0-9][a-z0-9._-]{1,46}[a-z0-9]" placeholder="classe-3e"></label>
+                    <label>Type <select name="kind"><option value="A_LA_CARTE">À la carte</option><option value="ABONNEMENT">Abonnement</option></select></label>
+                    <label>Durée (jours, abonnement) <input type="number" name="durationDays" min="1" max="3660"></label></div>
+                <label>Titre <input type="text" name="title" required maxlength="160"></label>
+                <label>Lots couverts (identifiants séparés par des espaces ou virgules) <textarea name="lots" rows="3" maxlength="4000"></textarea></label>
+                <button type="submit">Créer</button>
+            </form>
+        </section>
+    </div>
+</main>
+</body>
+</html>

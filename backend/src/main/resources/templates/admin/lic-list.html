@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/layout :: head('Licences')}"></head>
+<body>
+<header th:replace="~{admin/layout :: nav}"></header>
+<main>
+    <div th:replace="~{admin/layout :: flash}"></div>
+    <h1>Licences</h1>
+    <nav th:replace="~{admin/lic-nav :: sub}"></nav>
+    <form method="get" th:action="@{/admin/licenses/list}" class="filters stack">
+        <div class="row">
+            <label>Recherche <input type="search" name="q" th:value="${f.q}" placeholder="licence, client ou code d'appareil" maxlength="80"></label>
+            <label>État
+                <select name="state">
+                    <option value="">Tous</option>
+                    <option value="ACTIVE" th:selected="${f.state == 'ACTIVE'}">Active</option>
+                    <option value="SUSPENDED" th:selected="${f.state == 'SUSPENDED'}">Suspendue</option>
+                    <option value="REVOKED" th:selected="${f.state == 'REVOKED'}">Révoquée</option>
+                    <option value="EXPIRED" th:selected="${f.state == 'EXPIRED'}">Expirée</option>
+                </select></label>
+            <label>Client
+                <select name="client"><option value="">Tous</option>
+                    <option th:each="c : ${clientList}" th:value="${c.id}" th:text="${c.name}" th:selected="${f.clientId != null and f.clientId == c.id}"></option></select></label>
+            <label>Bouquet
+                <select name="product"><option value="">Tous</option>
+                    <option th:each="p : ${products}" th:value="${p.productId}" th:text="${p.title}" th:selected="${f.productId == p.productId}"></option></select></label>
+            <label>Expire sous (jours) <input type="number" name="expiringDays" min="1" max="3650" th:value="${f.expiringDays}"></label>
+            <label>Tri
+                <select name="sort">
+                    <option value="created" th:selected="${f.sort == 'created'}">Création</option>
+                    <option value="end" th:selected="${f.sort == 'end'}">Fin</option>
+                    <option value="client" th:selected="${f.sort == 'client'}">Client</option>
+                    <option value="id" th:selected="${f.sort == 'id'}">Identifiant</option>
+                    <option value="seats" th:selected="${f.sort == 'seats'}">Postes</option>
+                </select></label>
+            <label>Ordre <select name="dir"><option value="desc" th:selected="${dir == 'desc'}">Décroissant</option><option value="asc" th:selected="${dir == 'asc'}">Croissant</option></select></label>
+        </div>
+        <div class="row">
+            <button type="submit">Filtrer</button>
+            <a class="button ghost" th:href="@{/admin/licenses/list}">Effacer</a>
+            <a class="button ghost" th:href="@{/admin/licenses/export.csv(q=${f.q},state=${f.state},client=${f.clientId},product=${f.productId},expiringDays=${f.expiringDays})}">Exporter en CSV</a>
+            <a class="button" th:if="${canWrite}" th:href="@{/admin/licenses/new}">Nouvelle licence</a>
+        </div>
+    </form>
+    <p><span th:text="${page.total}">0</span> licence(s)</p>
+    <div class="scroll">
+    <table class="list">
+        <thead><tr><th>Licence</th><th>Client</th><th>Type</th><th>État</th><th>Postes</th><th>Fin</th></tr></thead>
+        <tbody>
+        <tr th:each="l : ${page.items}">
+            <td><a class="mono" th:href="@{/admin/licenses/{id}(id=${l.licenseId})}" th:text="${l.licenseId}"></a></td>
+            <td th:text="${l.clientName}"></td>
+            <td th:text="${l.kind == 'TRIAL'} ? 'Essai' : 'Payante'"></td>
+            <td><span class="badge" th:classappend="${l.effectiveState == 'ACTIVE'} ? 'good' : (${l.effectiveState == 'GRACE' or l.effectiveState == 'SUSPENDED'} ? 'warn' : 'bad')" th:text="${l.effectiveState}"></span></td>
+            <td th:text="|${l.seatsUsed} / ${l.seatsAllowed}|"></td>
+            <td th:text="${l.endAt == null} ? 'sans fin' : ${@fmt.date(l.endAt)}"></td>
+        </tr>
+        <tr th:if="${page.items.isEmpty()}"><td colspan="6">Aucune licence.</td></tr>
+        </tbody>
+    </table>
+    </div>
+    <p>
+        <a th:if="${page.hasPrevious()}" th:href="@{/admin/licenses/list(q=${f.q},state=${f.state},client=${f.clientId},product=${f.productId},expiringDays=${f.expiringDays},sort=${f.sort},dir=${dir},page=${page.page - 1})}">← Précédent</a>
+        <span th:text="|page ${page.page + 1} / ${page.pages}|"></span>
+        <a th:if="${page.hasNext()}" th:href="@{/admin/licenses/list(q=${f.q},state=${f.state},client=${f.clientId},product=${f.productId},expiringDays=${f.expiringDays},sort=${f.sort},dir=${dir},page=${page.page + 1})}">Suivant →</a>
+    </p>
+</main>
+</body>
+</html>

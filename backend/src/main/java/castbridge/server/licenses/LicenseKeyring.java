@@ -28,6 +28,7 @@ public class LicenseKeyring {
     private final Ed25519PrivateKeyParameters key;
     private final byte[] publicKey;
 
+    @org.springframework.beans.factory.annotation.Autowired
     public LicenseKeyring(LicenseProperties props) {
         this(load(props));
     }

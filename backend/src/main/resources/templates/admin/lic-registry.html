@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/layout :: head('Registre')}"></head>
+<body>
+<header th:replace="~{admin/layout :: nav}"></header>
+<main>
+    <div th:replace="~{admin/layout :: flash}"></div>
+    <h1>Registre des licences</h1>
+    <nav th:replace="~{admin/lic-nav :: sub}"></nav>
+    <p class="flash err" th:if="${error}"><span th:text="${error}"></span><span th:each="d : ${details}"><br><span th:text="${d}"></span></span></p>
+    <p><small>Le registre est un fichier JSON signé : il synchronise le serveur avec les outils hors ligne (bureau, téléphone propriétaire). L'import est idempotent ; les conflits attendent votre décision. Le serveur ne signe jamais un transfert : il enregistre seulement ceux du registre.</small></p>
+    <div class="cols">
+        <section class="card" th:if="${canWrite}">
+            <h2>Importer</h2>
+            <form th:action="@{/admin/licenses/registry/import}" method="post" enctype="multipart/form-data" class="stack">
+                <label>Fichier de registre (.json) <input type="file" name="file" accept=".json,application/json" required></label>
+                <label class="check"><input type="checkbox" name="dryRun" checked> Simulation d'abord (ne change rien, montre le rapport)</label>
+                <button type="submit">Importer</button>
+            </form>
+        </section>
+        <section class="card" th:if="${canWrite}">
+            <h2>Exporter</h2>
+            <p th:unless="${keyLoaded}">Aucune clé de signature serveur : export impossible.</p>
+            <p th:if="${keyLoaded}"><a class="button" th:href="@{/admin/licenses/registry/export}">Télécharger le registre signé</a></p>
+        </section>
+    </div>
+    <section class="card" th:if="${report != null}">
+        <h2 th:text="${report.dryRun} ? 'Rapport de simulation (rien n\'a été modifié)' : 'Rapport de réconciliation'"></h2>
+        <p>Outil <b th:text="${report.tool}"></b> · <span th:text="${report.entries}"></span> entrée(s) :
+            <b th:text="${report.applied}"></b> appliquée(s), <b th:text="${report.duplicates}"></b> déjà connue(s), <b th:text="${report.ignored}"></b> ignorée(s),
+            <b th:text="${report.conflicts.size()}"></b> conflit(s).</p>
+        <ul th:unless="${report.conflicts.isEmpty()}"><li th:each="c : ${report.conflicts}"><span class="badge warn" th:text="${c.type}"></span> <span th:text="${c.detail}"></span></li></ul>
+    </section>
+    <section class="card">
+        <h2>Conflits à décider</h2>
+        <p th:if="${conflicts.isEmpty()}">Aucun conflit en attente.</p>
+        <div class="scroll" th:unless="${conflicts.isEmpty()}"><table class="list">
+            <thead><tr><th>Type</th><th>Licence</th><th>Détail</th><th>Décision</th></tr></thead>
+            <tbody><tr th:each="c : ${conflicts}">
+                <td><span class="badge warn" th:text="${c.type}"></span></td><td class="mono" th:text="${c.licenseId}"></td><td class="wrap" th:text="${c.detail}"></td>
+                <td th:if="${canWrite}">
+                    <form th:action="@{/admin/licenses/registry/conflicts/{id}(id=${c.id})}" method="post" class="inline">
+                        <input type="text" name="reason" placeholder="motif (obligatoire)" required minlength="3" maxlength="500">
+                        <button type="submit" name="decision" value="accept" data-confirm="Appliquer cette entrée malgré le conflit ?">Accepter</button>
+                        <button type="submit" name="decision" value="reject">Rejeter</button>
+                    </form></td>
+                <td th:unless="${canWrite}">—</td></tr></tbody>
+        </table></div>
+    </section>
+    <section class="card">
+        <h2>Derniers imports</h2>
+        <div class="scroll"><table class="list">
+            <thead><tr><th>Date</th><th>Outil</th><th>Par</th><th>Entrées</th><th>Appliquées</th><th>Doublons</th><th>Conflits</th></tr></thead>
+            <tbody><tr th:each="i : ${imports}"><td th:text="${i.imported_at}"></td><td th:text="${i.tool}"></td><td th:text="${i.imported_by}"></td><td th:text="${i.entries}"></td>
+                <td th:text="${i.applied}"></td><td th:text="${i.duplicates}"></td><td th:text="${i.conflicts}"></td></tr>
+            <tr th:if="${imports.isEmpty()}"><td colspan="7">Aucun import.</td></tr></tbody>
+        </table></div>
+    </section>
+</main>
+</body>
+</html>

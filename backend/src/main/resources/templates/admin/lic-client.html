@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/layout :: head('Client')}"></head>
+<body>
+<header th:replace="~{admin/layout :: nav}"></header>
+<main>
+    <div th:replace="~{admin/layout :: flash}"></div>
+    <p><a th:href="@{/admin/licenses/clients}">← Clients</a></p>
+    <h1 th:text="${c.name}"></h1>
+    <nav th:replace="~{admin/lic-nav :: sub}"></nav>
+    <p th:if="${c.erasedAt != null}" class="flash ok">Données personnelles effacées le <span th:text="${@fmt.date(c.erasedAt)}"></span>.</p>
+    <div class="cols">
+        <section class="card" th:if="${c.erasedAt == null and canWrite}">
+            <h2>Fiche</h2>
+            <form th:action="@{/admin/licenses/clients/{id}(id=${c.id})}" method="post" class="stack">
+                <label>Nom <input type="text" name="name" th:value="${c.name}" required maxlength="120"></label>
+                <label>Contact <input type="text" name="contact" th:value="${c.contact}" maxlength="160"></label>
+                <label>Notes <textarea name="notes" maxlength="1000" rows="3" th:text="${c.notes}"></textarea></label>
+                <button type="submit">Enregistrer</button>
+            </form>
+        </section>
+        <section class="card">
+            <h2>Licences</h2>
+            <ul><li th:each="l : ${lics}"><a class="mono" th:href="@{/admin/licenses/{id}(id=${l.licenseId})}" th:text="${l.licenseId}"></a> — <span th:text="${l.effectiveState}"></span>
+                (<span th:text="|${l.seatsUsed}/${l.seatsAllowed}|"></span> postes)</li>
+                <li th:if="${lics.isEmpty()}">Aucune.</li></ul>
+            <h3 th:if="${canWrite}">Vos droits (RGPD)</h3>
+            <p th:if="${canWrite}">
+                <a class="button ghost" th:href="@{/admin/licenses/clients/{id}/export.json(id=${c.id})}">Exporter ses données (JSON)</a>
+                <a class="button danger" th:if="${c.erasedAt == null}" th:href="@{/admin/licenses/clients/{id}/erase(id=${c.id})}">Effacer ses données…</a>
+            </p>
+        </section>
+    </div>
+</main>
+</body>
+</html>

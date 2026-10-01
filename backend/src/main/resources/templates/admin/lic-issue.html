@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/layout :: head('Émettre')}"></head>
+<body>
+<header th:replace="~{admin/layout :: nav}"></header>
+<main>
+    <div th:replace="~{admin/layout :: flash}"></div>
+    <h1>Émettre une activation</h1>
+    <nav th:replace="~{admin/lic-nav :: sub}"></nav>
+    <p class="flash err" th:if="${error}" th:text="${error}"></p>
+    <p class="flash err" th:unless="${keyLoaded}">Aucune clé de signature serveur n'est installée : l'émission est impossible (voir docs/LICENSE-ADMIN.md).</p>
+    <section class="card">
+        <p>Format : <small th:text="${format}"></small></p>
+        <form th:action="@{/admin/licenses/issue}" method="post" class="stack">
+            <div class="row">
+                <label>Licence <input type="text" name="licenseId" th:value="${licenseId}" required maxlength="40" pattern="[A-Za-z0-9][A-Za-z0-9-]{5,38}[A-Za-z0-9]" autocapitalize="characters"></label>
+                <label>Code d'appareil <input type="text" name="deviceCode" th:value="${deviceCode}" required maxlength="24" placeholder="XXXX-XXXX-XXXX-XXXX" autocapitalize="characters" autocomplete="off"></label>
+            </div>
+            <label class="check"><input type="checkbox" name="reissue"> Réémission : le poste existe déjà (ne consomme pas de poste, redonne la même activation)</label>
+            <button type="submit">Émettre</button>
+        </form>
+    </section>
+    <section class="card" th:if="${act != null}">
+        <h2 th:text="${act.reused} ? 'Activation (réémise à l\'identique)' : 'Activation émise'"></h2>
+        <p>Sorte <b th:text="${act.kind}"></b> · fin <b th:text="${act.expiresAt == null} ? 'sans fin' : ${@fmt.date(act.expiresAt)}"></b> · empreinte <span class="mono" th:text="${#strings.substring(act.fingerprint, 0, 12)}"></span></p>
+        <textarea id="act-text" class="act" readonly rows="6" th:text="${act.text}"></textarea>
+        <p>
+            <button type="button" data-copy="act-text">Copier</button>
+            <a class="button ghost" th:href="@{/admin/licenses/{id}/seats/{d}/activation(id=${act.licenseId},d=${act.deviceCode})}">Télécharger (fichier « activation » pour la clé USB)</a>
+        </p>
+        <img class="qr" th:if="${qr != null}" th:src="${qr}" alt="QR code de l'activation">
+        <p th:if="${qr == null}"><small>Activation trop longue pour un QR code : utilisez la copie ou le fichier.</small></p>
+        <p><small>Ce texte n'est enregistré nulle part (seule son empreinte l'est) : redemandez-le avec « Réémission » si besoin.</small></p>
+    </section>
+</main>
+</body>
+</html>
