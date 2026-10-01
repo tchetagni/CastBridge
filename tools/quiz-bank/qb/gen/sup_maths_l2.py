@@ -307,7 +307,7 @@ def pdy(terms):
 
 
 # ======================================================================================================== ANALYSE
-@gen(C, "l2m-improper-power", cap=50, cat="Intégrales généralisées")
+@gen(C, "l2m-improper-power", cap=30, diffs=(3, 4, 5), cat="Intégrales généralisées")
 def improper_power(rng, d):
     if rng.random() < 0.6:
         c, a = rng.randint(1, 9), rng.randint(2, 8)
@@ -332,7 +332,7 @@ def improper_power(rng, d):
                  f"Une primitive est x^({q - p}/{q}) ÷ ({q - p}/{q}) ; elle s'annule en 0, donc la valeur est {c}^({q - p}/{q}) × {q}/{q - p} = {right}.", src=SRC)
 
 
-@gen(C, "l2m-improper-converge-a", cap=40, cat="Intégrales généralisées")
+@gen(C, "l2m-improper-converge-a", cap=24, diffs=(1, 2, 3), cat="Intégrales généralisées")
 def improper_converge_a(rng, d):
     k = rng.randint(1, 9)
     kind = rng.choice(["inf", "zero", "exp"])
@@ -365,7 +365,7 @@ def improper_converge_a(rng, d):
     return Draft(text, num(right), [num(w) for w in wr], ex_, src=SRC)
 
 
-@gen(C, "l2m-improper-exp", cap=43, cat="Intégrales généralisées")
+@gen(C, "l2m-improper-exp", cap=26, diffs=(1, 2, 3, 4, 5), cat="Intégrales généralisées")
 def improper_exp(rng, d):
     if rng.random() < 0.55:
         n, a = rng.randint(0, 5), rng.choice([1, 2, 3, 4, 5, 6, 7, 8])
@@ -389,7 +389,7 @@ def improper_exp(rng, d):
                  f"Une primitive est −e^(−{a}x)/{a}, nulle en +∞ : la valeur est e^(−{a * c})/{a}.".replace("e^(−" + str(a * c) + ")", ex(-a * c)), src=SRC)
 
 
-@gen(C, "l2m-ibp-exp", cap=90, cat="Intégration")
+@gen(C, "l2m-ibp-exp", cap=54, diffs=(1, 2, 3, 4, 5), cat="Intégration")
 def ibp_exp(rng, d):
     a = nz(rng, -5, 5)
     p, q = nz(rng, -6, 6), rng.randint(-5, 5)
@@ -405,10 +405,10 @@ def ibp_exp(rng, d):
     wr = [expr(B, A), expr(F(p + q, a), F(-q, a)), expr(A, -B), expr(F(p + q, a) + F(p, a * a), B), expr(-A, B), expr(A, B + 1)]
     wr = dedup(wr, right)
     text = f"Que vaut ∫ de 0 à 1 de ({poly([p, q], 'x')})·{exx(a)} dx (intégration par parties) ?"
-    return Draft(text, right, wr, f"Primitive : e^({num(a)}x)·[({poly([p, q], 'x')})/{num(a)} − {num(p)}/{num(a * a)}] ; on évalue entre 0 et 1.", src=SRC)
+    return Draft(text, right, wr, f"Primitive : {exx(a)}·[({poly([p, q], 'x')})/{par(a)} − {par(p)}/{a * a}] ; on évalue entre 0 et 1.", src=SRC)
 
 
-@gen(C, "l2m-ibp-log", cap=80, cat="Intégration")
+@gen(C, "l2m-ibp-log", cap=48, diffs=(4, 5), cat="Intégration")
 def ibp_log(rng, d):
     n, k = rng.randint(1, 6), rng.randint(1, 6)
     b = rng.choice([2, 3, 4, 5, "e"])
@@ -432,7 +432,7 @@ def ibp_log(rng, d):
         up = str(b)
     wr = dedup(wr, right)
     return Draft(f"Que vaut ∫ de 1 à {up} de {kk}{xn}·ln x dx (intégration par parties) ?", right, wr,
-                 f"On pose u = ln x et v' = {xn} : on obtient {k}[x^{n + 1}·ln x/{n + 1} − x^{n + 1}/{(n + 1) ** 2}] évalué entre 1 et {up}.", src=SRC)
+                 f"On pose u = ln x et v' = {xn} : on obtient {k}·[x{sup(n + 1)}·ln x/{n + 1} − x{sup(n + 1)}/{(n + 1) ** 2}] évalué entre 1 et {up}.", src=SRC)
 
 
 _PI_TABLE = [   # (integrand text, upper bound text, upper bound value, (c2, c1, c0) meaning c2·π² + c1·π + c0 for the integral from 0)
@@ -457,7 +457,7 @@ def pi_val(t):
     return float(t[0]) * PI ** 2 + float(t[1]) * PI + float(t[2])
 
 
-@gen(C, "l2m-ibp-trig", cap=28, cat="Intégration")
+@gen(C, "l2m-ibp-trig", cap=17, diffs=(4, 5), cat="Intégration")
 def ibp_trig(rng, d):
     fun, ub, ubv, (c2, c1, c0) = rng.choice(_PI_TABLE)
     k = rng.randint(1, 9)
@@ -473,7 +473,7 @@ def ibp_trig(rng, d):
                  "On intègre par parties (une fois ou deux selon la puissance de x) ; le résultat est confirmé par intégration numérique.", src=SRC)
 
 
-@gen(C, "l2m-subst-poly", cap=90, cat="Intégration")
+@gen(C, "l2m-subst-poly", cap=54, diffs=(1, 2, 3, 4, 5), cat="Intégration")
 def subst_poly(rng, d):
     m, n, c, b = rng.randint(1, 3), rng.randint(2, 5), rng.randint(1, 9), rng.randint(1, 2)
     val = F((b ** (m + 1) + c) ** (n + 1) - c ** (n + 1), (m + 1) * (n + 1))
@@ -489,10 +489,10 @@ def subst_poly(rng, d):
           num(val + 1), num(F((b ** (m + 1) + c) ** (n + 1) - c ** (n + 1), (m + 1) * (n + 1) * 2))]
     xm = "x" if m == 1 else "x" + sup(m)
     return Draft(f"Que vaut ∫ de 0 à {b} de {xm}·(x{sup(m + 1)} + {c}){sup(n)} dx (changement de variable u = x{sup(m + 1)} + {c}) ?", right, wr,
-                 f"Avec u = x{sup(m + 1)} + {c}, du = {m + 1}x^{m}dx : l'intégrale vaut [u^{n + 1}/{(m + 1) * (n + 1)}] entre {c} et {b ** (m + 1) + c}.", src=SRC)
+                 f"Avec u = x{sup(m + 1)} + {c}, du = {m + 1}{xm}dx : l'intégrale vaut [u{sup(n + 1)}/{(m + 1) * (n + 1)}] entre {c} et {b ** (m + 1) + c}.", src=SRC)
 
 
-@gen(C, "l2m-subst-log", cap=70, cat="Intégration")
+@gen(C, "l2m-subst-log", cap=42, diffs=(1, 2, 3, 4, 5), cat="Intégration")
 def subst_log(rng, d):
     m, k, b, c = rng.randint(1, 3), rng.randint(1, 4), rng.randint(1, 4), rng.randint(1, 6)
     ratio = F(b ** (m + 1) + c, c)
@@ -506,16 +506,11 @@ def subst_log(rng, d):
     xm = "x" if m == 1 else "x" + sup(m)
     kk = "" if k == 1 else f"{k}"
     return Draft(f"Que vaut ∫ de 0 à {b} de {kk}{xm}/(x{sup(m + 1)} + {c}) dx ?", right, wr,
-                 f"Avec u = x{sup(m + 1)} + {c}, du = {m + 1}x^{m}dx : on obtient {num(A)}·[ln u] entre {c} et {b ** (m + 1) + c}.", src=SRC)
+                 f"Avec u = x{sup(m + 1)} + {c}, du = {m + 1}{xm}dx : on obtient {num(A)}·[ln u] entre {c} et {b ** (m + 1) + c}.", src=SRC)
 
 
 # ---- séries entières
-def _radius_cases():
-    """(text of the general term, function n -> |a_n| as Fraction (exact, n >= 1), radius as Fraction / 'inf' / 0)."""
-    return None
-
-
-@gen(C, "l2m-radius", cap=72, cat="Séries entières")
+@gen(C, "l2m-radius", cap=43, diffs=(1, 2, 3, 4, 5), cat="Séries entières")
 def radius_q(rng, d):
     a = rng.randint(2, 9)
     p = rng.randint(0, 3)
@@ -579,7 +574,7 @@ def radius_q(rng, d):
                  "On applique le critère de d'Alembert au rapport des coefficients successifs (puis la racine carrée pour les puissances x²ⁿ).", src=SRC)
 
 
-@gen(C, "l2m-series-sum", cap=52, cat="Séries entières")
+@gen(C, "l2m-series-sum", cap=31, diffs=(4, 5), cat="Séries entières")
 def series_sum(rng, d):
     q = rng.randint(2, 8)
     p = rng.randint(1, q - 1)
@@ -638,7 +633,7 @@ def _series_ref(kind, a, kmax):
     return c
 
 
-@gen(C, "l2m-maclaurin-coeff", cap=90, cat="Séries entières")
+@gen(C, "l2m-maclaurin-coeff", cap=54, diffs=(1, 2, 3, 4), cat="Séries entières")
 def maclaurin_coeff(rng, d):
     kind = rng.choice(["exp", "geo", "log", "sin", "cos", "binom", "inv2"])
     a = rng.randint(2, 6) * rng.choice([1, -1])
@@ -680,7 +675,7 @@ def maclaurin_coeff(rng, d):
 
 
 # ---- séries de Fourier
-@gen(C, "l2m-fourier-coeff", cap=80, cat="Séries de Fourier")
+@gen(C, "l2m-fourier-coeff", cap=48, diffs=(3, 4, 5), cat="Séries de Fourier")
 def fourier_coeff(rng, d):
     kind = rng.choice(["x", "x2", "abs", "x2-a0"])
     k = rng.randint(1, 6)
@@ -743,13 +738,13 @@ def fourier_coeff(rng, d):
 
 
 # ---- suites de fonctions : limite simple
-@gen(C, "l2m-fseq-pointwise", cap=38, cat="Suites de fonctions")
+@gen(C, "l2m-fseq-pointwise", cap=23, diffs=(1, 2, 3, 4, 5), cat="Suites de fonctions")
 def fseq_pointwise(rng, d):
     kind = rng.choice(["xn", "xn-ratio", "euler", "nx", "exp", "sq", "frac", "nxe"])
     N = 3000 if kind in ("xn", "xn-ratio") else 10 ** 6
     if kind == "xn":
         x = rng.choice([F(0), F(1, 2), F(1, 3), F(2, 3), F(3, 4), F(1), F(1, 5), F(4, 5), F(9, 10)])
-        text, lim = f"fₙ(x) = xⁿ sur [0 ; 1] ; quelle est la limite de fₙ({num(x)}) quand n tend vers +∞ ?", "1" if x == 1 else "0"
+        text, lim = f"Pour fₙ(x) = xⁿ sur [0 ; 1], quelle est la limite de fₙ({num(x)}) quand n tend vers +∞ ?", "1" if x == 1 else "0"
         approx = float(x ** N)
         target = float(lim)
     elif kind == "xn-ratio":
@@ -758,44 +753,44 @@ def fseq_pointwise(rng, d):
         v = x ** N
         approx = float(v / (1 + v)) if x <= 1 else float(1 / (1 + F(1) / v))
         target = float(F(lim))
-        text = f"fₙ(x) = xⁿ/(1 + xⁿ) pour x ≥ 0 ; quelle est la limite de fₙ({num(x)}) quand n tend vers +∞ ?"
+        text = f"Pour fₙ(x) = xⁿ/(1 + xⁿ) pour x ≥ 0, quelle est la limite de fₙ({num(x)}) quand n tend vers +∞ ?"
     elif kind == "euler":
         x = rng.choice([-3, -2, -1, 1, 2, 3, 4, 5])
         lim = ex(x)
         M_ = 10 ** 7
         approx = (1 + x / M_) ** M_
         target = math.exp(x)
-        text = f"fₙ(x) = (1 + x/n)ⁿ ; quelle est la limite de fₙ({x}) quand n tend vers +∞ ?"
+        text = f"Pour fₙ(x) = (1 + x/n)ⁿ, quelle est la limite de fₙ({num(x)}) quand n tend vers +∞ ?"
     elif kind == "nx":
         x = rng.choice([F(0), F(1), F(2), F(1, 2), F(3), F(1, 3), F(5), F(7, 2)])
         lim = "0" if x == 0 else "1"
         approx = float(N * x / (1 + N * x))
         target = float(lim)
-        text = f"fₙ(x) = nx/(1 + nx) pour x ≥ 0 ; quelle est la limite de fₙ({num(x)}) quand n tend vers +∞ ?"
+        text = f"Pour fₙ(x) = nx/(1 + nx) pour x ≥ 0, quelle est la limite de fₙ({num(x)}) quand n tend vers +∞ ?"
     elif kind == "exp":
         x = rng.choice([F(0), F(1), F(2), F(1, 2), F(3), F(1, 3), F(5), F(7, 2)])
         lim = "1" if x == 0 else "0"
         approx = math.exp(-N * float(x)) if x else 1.0
         target = float(lim)
-        text = f"fₙ(x) = e^(−nx) pour x ≥ 0 ; quelle est la limite de fₙ({num(x)}) quand n tend vers +∞ ?"
+        text = f"Pour fₙ(x) = e^(−nx) pour x ≥ 0, quelle est la limite de fₙ({num(x)}) quand n tend vers +∞ ?"
     elif kind == "sq":
         x = rng.choice([F(1), F(2), F(3), F(1, 2), F(5), F(3, 2), F(4), F(7, 3)])
         lim = num(x * x)
         approx = float((N * x * x + 1) / N)
         target = float(x * x)
-        text = f"fₙ(x) = (nx² + 1)/n ; quelle est la limite de fₙ({num(x)}) quand n tend vers +∞ ?"
+        text = f"Pour fₙ(x) = (nx² + 1)/n, quelle est la limite de fₙ({num(x)}) quand n tend vers +∞ ?"
     elif kind == "frac":
         x = rng.choice([F(1), F(2), F(3), F(1, 2), F(5), F(3, 2), F(4), F(7, 3)])
         lim = num(x)
         approx = float(N * x / (N + x * x))
         target = float(x)
-        text = f"fₙ(x) = nx/(n + x²) ; quelle est la limite de fₙ({num(x)}) quand n tend vers +∞ ?"
+        text = f"Pour fₙ(x) = nx/(n + x²), quelle est la limite de fₙ({num(x)}) quand n tend vers +∞ ?"
     else:
         x = rng.choice([F(0), F(1), F(2), F(1, 2), F(3), F(1, 3), F(5), F(7, 2)])
         lim = "0"
         approx = N * float(x) * math.exp(-N * float(x))
         target = 0.0
-        text = f"fₙ(x) = nx·e^(−nx) pour x ≥ 0 ; quelle est la limite de fₙ({num(x)}) quand n tend vers +∞ ?"
+        text = f"Pour fₙ(x) = nx·e^(−nx) pour x ≥ 0, quelle est la limite de fₙ({num(x)}) quand n tend vers +∞ ?"
     assert abs(approx - target) < 5e-3 * max(1.0, abs(target)), (kind, x, approx, target)
     pool = ["0", "1", "1/2", "+∞", "la suite diverge", num(x) if lim != num(x) else "2", ex(x) if isinstance(x, int) or x.denominator == 1 else "e"]
     pool += [num(x * x) if kind != "sq" else num(x)]
@@ -841,7 +836,7 @@ def _nested(terms, outer_swap, lo_inner, hi_inner, lo_out, hi_out):
     return _ups_int(total, lo_out, hi_out)
 
 
-@gen(C, "l2m-double-rect", cap=110, cat="Intégrales doubles")
+@gen(C, "l2m-double-rect", cap=66, diffs=(1, 2, 3, 4), cat="Intégrales doubles")
 def double_rect(rng, d):
     nt = 1 if d == 1 else rng.choice([2, 2, 3])
     terms = rand_terms(rng, nt, maxdeg=2, cmax=5)
@@ -866,7 +861,7 @@ def double_rect(rng, d):
                  "Les variables sont séparables dans chaque monôme : on intègre en x puis en y (théorème de Fubini).", src=SRC)
 
 
-@gen(C, "l2m-double-triangle", cap=90, cat="Intégrales doubles")
+@gen(C, "l2m-double-triangle", cap=54, diffs=(3, 4, 5), cat="Intégrales doubles")
 def double_triangle(rng, d):
     region = rng.choice(["tri1", "tri2", "tri3"])
     b = rng.randint(1, 4)
@@ -899,7 +894,7 @@ def double_triangle(rng, d):
                  "On décrit le triangle par des bornes en escalier (y entre deux fonctions de x) puis on intègre deux fois ; l'ordre inverse donne le même résultat.", src=SRC)
 
 
-@gen(C, "l2m-double-polar", cap=80, cat="Intégrales doubles")
+@gen(C, "l2m-double-polar", cap=48, diffs=(3, 4, 5), cat="Intégrales doubles")
 def double_polar(rng, d):
     kind = rng.choice([0, 1, 2, 3, 4])
     R = rng.randint(1, 4)
@@ -933,7 +928,7 @@ def double_polar(rng, d):
                  right, wr, "En polaires dA = r dr dθ : on intègre r^(k+1) pour r de 0 à R, puis on multiplie par l'angle balayé.", src=SRC)
 
 
-@gen(C, "l2m-area-between", cap=60, cat="Intégrales doubles")
+@gen(C, "l2m-area-between", cap=36, diffs=(3, 4, 5), cat="Intégrales doubles")
 def area_between(rng, d):
     kind = rng.choice(["parab-line", "powers", "lines", "under-parab"])
     if kind == "parab-line":
@@ -973,7 +968,7 @@ def _fpoly(terms):
     return lambda x, y: ev2(terms, x, y)
 
 
-@gen(C, "l2m-partial-poly", cap=100, cat="Dérivées partielles")
+@gen(C, "l2m-partial-poly", cap=60, diffs=(1, 2, 3, 4), cat="Dérivées partielles")
 def partial_poly(rng, d):
     terms = rand_terms(rng, rng.choice([2, 3, 3, 4]), maxdeg=3, cmax=5)
     terms = [(c, p, q) for c, p, q in terms if p + q <= 4]
@@ -1014,7 +1009,7 @@ def partial_poly(rng, d):
                  num(F(val)), dedup(wr, num(F(val))), expl, src=SRC)
 
 
-@gen(C, "l2m-partial-trans", cap=75, cat="Dérivées partielles")
+@gen(C, "l2m-partial-trans", cap=45, diffs=(1, 2, 3, 4, 5), cat="Dérivées partielles")
 def partial_trans(rng, d):
     kind = rng.choice(["xmey", "lnsq", "sqrt", "xmln", "exy", "quot", "xy-y"])
     h = 1e-6
@@ -1125,7 +1120,7 @@ def _pn_d(terms, i):
     return [(c * ex_[i], ex_[:i] + (ex_[i] - 1,) + ex_[i + 1:]) for c, ex_ in terms if ex_[i]]
 
 
-@gen(C, "l2m-gradient", cap=90, cat="Calcul différentiel")
+@gen(C, "l2m-gradient", cap=54, diffs=(1, 2, 3), cat="Calcul différentiel")
 def gradient_q(rng, d):
     nv = 2 if d <= 3 else rng.choice([2, 3])
     names, terms = _grad_terms(rng, nv)
@@ -1146,7 +1141,7 @@ def gradient_q(rng, d):
                  "Le gradient est le vecteur des dérivées partielles, évaluées au point.", src=SRC)
 
 
-@gen(C, "l2m-directional", cap=70, cat="Calcul différentiel")
+@gen(C, "l2m-directional", cap=42, diffs=(1, 2, 3, 4, 5), cat="Calcul différentiel")
 def directional(rng, d):
     terms = [(c, p, q) for c, p, q in rand_terms(rng, rng.choice([2, 3]), maxdeg=3, cmax=4) if p + q <= 4]
     if len(terms) < 2:
@@ -1166,7 +1161,7 @@ def directional(rng, d):
                  right, dedup([num(w) for w in wr], right), "D_u f = ∇f · u : on calcule le gradient au point puis le produit scalaire avec u (unitaire).", src=SRC)
 
 
-@gen(C, "l2m-chain-rule", cap=70, cat="Calcul différentiel")
+@gen(C, "l2m-chain-rule", cap=42, diffs=(1, 2, 3, 4, 5), cat="Calcul différentiel")
 def chain_rule(rng, d):
     terms = [(c, p, q) for c, p, q in rand_terms(rng, rng.choice([2, 3]), maxdeg=2, cmax=4) if p + q <= 3]
     if len(terms) < 2:
@@ -1181,7 +1176,6 @@ def chain_rule(rng, d):
     x0, y0 = X(t0), Y(t0)
     val = ev2(pdx(terms), x0, y0) * dX(t0) + ev2(pdy(terms), x0, y0) * dY(t0)
     g = lambda t: _fpoly(terms)(X(t), Y(t))
-    assert val == d1(lambda t: g(F(t)), F(t0), F(1, 5)) or True
     # exact check: g is a polynomial of degree <= 6 in t; use a 7-point exact derivative via Lagrange differentiation
     pts = [F(t0) + k for k in range(-3, 4)]
     vals = [g(p) for p in pts]
@@ -1207,7 +1201,7 @@ def chain_rule(rng, d):
                  right, dedup([num(F(w)) for w in wr], right), "Règle de la chaîne : (f∘γ)'(t) = ∂f/∂x·x'(t) + ∂f/∂y·y'(t), évalué en t.", src=SRC)
 
 
-@gen(C, "l2m-tangent-plane", cap=70, cat="Calcul différentiel")
+@gen(C, "l2m-tangent-plane", cap=42, diffs=(1, 2, 3, 4, 5), cat="Calcul différentiel")
 def tangent_plane(rng, d):
     terms = [(c, p, q) for c, p, q in rand_terms(rng, rng.choice([2, 3]), maxdeg=2, cmax=4) if p + q <= 3]
     if len(terms) < 2:
@@ -1227,7 +1221,7 @@ def tangent_plane(rng, d):
                  right, dedup([dec(w) for w in wr], right), "Plan tangent : f(a, b) + ∂f/∂x·(x − a) + ∂f/∂y·(y − b), évalué au point voisin (ce n'est pas la valeur exacte de f).", src=SRC)
 
 
-@gen(C, "l2m-critical-quadratic", cap=90, cat="Calcul différentiel")
+@gen(C, "l2m-critical-quadratic", cap=54, diffs=(1, 2, 3, 4, 5), cat="Calcul différentiel")
 def critical_quadratic(rng, d):
     a, b, c = nz(rng, -4, 4), nz(rng, -4, 4), rng.randint(-4, 4)
     dd, e = rng.randint(-8, 8), rng.randint(-8, 8)
@@ -1249,7 +1243,7 @@ def critical_quadratic(rng, d):
 _NATURE = ["un minimum local", "un maximum local", "un point selle (ni minimum ni maximum local)", "un point où le test de la Hessienne ne conclut pas"]
 
 
-@gen(C, "l2m-hessian-nature", cap=90, cat="Calcul différentiel")
+@gen(C, "l2m-hessian-nature", cap=54, diffs=(1, 2, 3, 4, 5), cat="Calcul différentiel")
 def hessian_nature(rng, d):
     if rng.random() < 0.55:
         al, m = rng.randint(1, 3), rng.randint(1, 3)
@@ -1292,10 +1286,10 @@ def hessian_nature(rng, d):
     assert brute == res, (terms, pt, res, brute)
     right = _NATURE[res]
     return Draft(text, right, [w for w in _NATURE if w != right],
-                 f"Hessienne : r = {hxx}, t = {hyy}, s = {hxy}, déterminant rt − s² = {detH} " + ("(positif : extremum, de signe celui de r)." if detH > 0 else "(négatif : point selle)."), src=SRC)
+                 f"Hessienne : r = {num(hxx)}, t = {num(hyy)}, s = {num(hxy)}, déterminant rt − s² = {num(detH)} " + ("(positif : extremum, de signe celui de r)." if detH > 0 else "(négatif : point selle)."), src=SRC)
 
 
-@gen(C, "l2m-lagrange", cap=70, cat="Extrema liés")
+@gen(C, "l2m-lagrange", cap=42, diffs=(4, 5), cat="Extrema liés")
 def lagrange_q(rng, d):
     kind = rng.choice(["max-xy", "min-circle", "max-lin", "min-lin-circle"])
     if kind == "max-xy":
@@ -1371,7 +1365,7 @@ def rk4(f, y0, x0, x1, n=2000):
     return y
 
 
-@gen(C, "l2m-ode1-linear", cap=80, cat="Équations différentielles")
+@gen(C, "l2m-ode1-linear", cap=48, diffs=(1, 2, 3), cat="Équations différentielles")
 def ode1_linear(rng, d):
     a = nz(rng, -5, 5)
     b, y0 = rng.randint(-8, 8), rng.randint(-6, 6)
@@ -1401,7 +1395,7 @@ def ode1_linear(rng, d):
                  f"Comme {a} > 0, le terme C·e^(−{a}t) tend vers 0 : il reste la solution constante b/a = {num(yp)}.", src=SRC)
 
 
-@gen(C, "l2m-ode1-separable", cap=60, cat="Équations différentielles")
+@gen(C, "l2m-ode1-separable", cap=36, diffs=(1, 2, 3, 4, 5), cat="Équations différentielles")
 def ode1_sep(rng, d):
     a, y0, x1 = nz(rng, -6, 6), rng.randint(1, 6), rng.randint(1, 3)
     e = F(a * x1 * x1, 2)
@@ -1427,7 +1421,7 @@ def _expterm(r, cname):
     return cname if r == 0 else cname + exx(r)
 
 
-@gen(C, "l2m-ode2-general", cap=75, cat="Équations différentielles")
+@gen(C, "l2m-ode2-general", cap=45, diffs=(1, 2, 3), cat="Équations différentielles")
 def ode2_general(rng, d):
     kind = rng.choice(["real", "real", "double", "complex"])
     if kind == "real":
@@ -1479,7 +1473,7 @@ def ode2_general(rng, d):
                  f"Équation caractéristique r² {'+' if p >= 0 else '−'} {abs(p)}r {'+' if q >= 0 else '−'} {abs(q)} = 0 : " + {"real": "deux racines réelles distinctes", "double": "une racine double", "complex": "deux racines complexes conjuguées"}[kind] + ".", src=SRC)
 
 
-@gen(C, "l2m-ode2-ic", cap=90, cat="Équations différentielles")
+@gen(C, "l2m-ode2-ic", cap=54, diffs=(1, 2, 3, 4, 5), cat="Équations différentielles")
 def ode2_ic(rng, d):
     r1, r2 = rng.sample(range(-4, 5), 2)
     r1, r2 = min(r1, r2), max(r1, r2)
@@ -1494,10 +1488,10 @@ def ode2_ic(rng, d):
     val = A if which == "A" else B
     wr = [B if which == "A" else A, F(y0) - val if False else F(v0, r2 if r2 else 1), F(v0 - r1 * y0, r1 - r2) if which == "B" else F(v0 - r2 * y0, r2 - r1), val + 1, F(y0, 2), val * 2]
     return Draft(f"La solution de {eq2_text(p, q)} avec y(0) = {num(y0)} et y'(0) = {num(v0)} s'écrit y = A·e^(r₁x) + B·e^(r₂x) avec r₁ < r₂ racines de l'équation caractéristique. Que vaut {which} ?",
-                 num(val), dedup([num(F(w)) for w in wr], num(val)), f"Les racines sont {r1} et {r2} ; les conditions initiales donnent A + B = {y0} et {r1}A + {r2}B = {v0}, d'où {which} = {num(val)}.", src=SRC)
+                 num(val), dedup([num(F(w)) for w in wr], num(val)), f"Les racines sont {num(r1)} et {num(r2)} ; les conditions initiales donnent A + B = {num(y0)} et {par(r1)}A + {par(r2)}B = {num(v0)}, d'où {which} = {num(val)}.", src=SRC)
 
 
-@gen(C, "l2m-ode2-particular", cap=80, cat="Équations différentielles")
+@gen(C, "l2m-ode2-particular", cap=48, diffs=(4, 5), cat="Équations différentielles")
 def ode2_particular(rng, d):
     p, q = rng.randint(-4, 4), nz(rng, -6, 6)
     kind = rng.choice(["const", "exp", "affine"])
@@ -1523,7 +1517,7 @@ def ode2_particular(rng, d):
         text = f"On cherche une solution particulière de {eq2_text(p, q, num(k) + exx(m) if m else num(k))} de la forme A·{exx(m) if m else '1'}. Quelle est la valeur de A ?"
         wr = [F(k, q), F(k, m * m + p * m) if m * m + p * m else F(k + 1), F(k, m + p + q) if m + p + q else F(k + 2), F(k, den) + 1, F(k * m, den) if m else F(k * 2, den), F(k, den * 2)]
         right = num(A)
-        ex_ = f"On remplace dans l'équation : A(m² + pm + q) = k avec m = {m}, soit A = {k}/{den}."
+        ex_ = f"On remplace dans l'équation : A(m² + pm + q) = k avec m = {num(m)}, soit A = {num(k)}/{num(den)}."
     else:
         alpha = F(k, q)
         beta = -p * alpha / q
@@ -1536,11 +1530,11 @@ def ode2_particular(rng, d):
             return None
         wr = [beta if which == "α" else alpha, F(k), F(k, q * q), val + 1, F(p * k, q) if which == "β" else F(k, q) * 2, F(-p * k, q * q) * 2 if which == "β" else F(k, 2 * q)]
         right = num(val)
-        ex_ = f"En identifiant : qα = {k} donc α = {num(alpha)}, et pα + qβ = 0 donc β = {num(beta)}."
+        ex_ = f"En identifiant : qα = {num(k)} donc α = {num(alpha)}, et pα + qβ = 0 donc β = {num(beta)}."
     return Draft(text, right, dedup([num(F(w)) if not isinstance(w, str) else w for w in wr], right), ex_, src=SRC)
 
 
-@gen(C, "l2m-ode-system-solution", cap=70, cat="Équations différentielles")
+@gen(C, "l2m-ode-system-solution", cap=42, diffs=(4, 5), cat="Équations différentielles")
 def ode_system_solution(rng, d):
     P = unimodular(rng, 2, 3)
     l1, l2 = rng.sample(range(-3, 4), 2)
@@ -1565,7 +1559,7 @@ def ode_system_solution(rng, d):
 _TYPES = ["nœud stable", "nœud instable", "point selle", "centre", "foyer stable", "foyer instable"]
 
 
-@gen(C, "l2m-ode-system-type", cap=70, cat="Équations différentielles")
+@gen(C, "l2m-ode-system-type", cap=42, diffs=(4, 5), cat="Équations différentielles")
 def ode_system_type(rng, d):
     kind = rng.choice(["real", "real", "complex"])
     P = unimodular(rng, 2, 3)
@@ -1592,7 +1586,7 @@ def ode_system_type(rng, d):
     wr = [t for t in _TYPES if t != want]
     wr_sel = [t for t in wr if (t.split()[0] != want.split()[0])] + [t for t in wr if t.split()[0] == want.split()[0]]
     return Draft(f"Pour le système X' = AX avec A = {Mx(A)}, quelle est la nature du point d'équilibre (0 ; 0) ?", want, wr_sel[:5],
-                 f"Trace = {tr}, déterminant = {det}, discriminant tr² − 4det = {disc} : " + got + ".", src=SRC)
+                 f"Trace = {num(tr)}, déterminant = {num(det)}, discriminant tr² − 4det = {num(disc)} : " + got + ".", src=SRC)
 
 
 # ======================================================================================================== ALGÈBRE LINÉAIRE
@@ -1611,7 +1605,7 @@ def fnear(rng, v, n=6):
     return [v + 1, v - 1, v * 2, v / 2 if v else F(3), v + 2, v - 2, v + F(1, 2)][:n]
 
 
-@gen(C, "l2m-charpoly2", cap=60, cat="Valeurs propres")
+@gen(C, "l2m-charpoly2", cap=36, diffs=(1, 2), cat="Valeurs propres")
 def charpoly2(rng, d):
     m = rmat(rng, 2)
     a, b, c, dd = m[0][0], m[0][1], m[1][0], m[1][1]
@@ -1625,7 +1619,7 @@ def charpoly2(rng, d):
                  f"Pour une matrice 2×2 : λ² − (trace)λ + déterminant = λ² − ({tr})λ + ({de}).".replace("− (-", "+ (-"), src=SRC)
 
 
-@gen(C, "l2m-charpoly3", cap=90, cat="Valeurs propres")
+@gen(C, "l2m-charpoly3", cap=54, diffs=(1, 2, 3, 4, 5), cat="Valeurs propres")
 def charpoly3(rng, d):
     m = rmat(rng, 3, -3, 3)
     tr = sum(m[i][i] for i in range(3))
@@ -1640,10 +1634,10 @@ def charpoly3(rng, d):
     cands = [(1, -tr, pairs, -de), (1, -tr, c2, de), (1, tr, c2, -de), (1, -tr, c2 + 1, -de), (1, -tr, c2, -de + 1), (1, -tr, -c2, -de), (1, -tr, c2, -(m[0][0] * m[1][1] * m[2][2]))]
     wr = dedup([poly(list(t), "λ") for t in cands], right)
     return Draft(f"Quel est le polynôme caractéristique det(λI − A) de A = {Mx(m)} ?", right, wr,
-                 f"λ³ − tr(A)λ² + (somme des mineurs principaux d'ordre 2)λ − det(A) avec tr = {tr}, somme = {c2}, det = {de}.", src=SRC)
+                 f"λ³ − tr(A)λ² + (somme des mineurs principaux d'ordre 2)λ − det(A) avec tr = {num(tr)}, somme = {num(c2)}, det = {num(de)}.", src=SRC)
 
 
-@gen(C, "l2m-matrix-power-diag", cap=90, cat="Diagonalisation")
+@gen(C, "l2m-matrix-power-diag", cap=54, diffs=(1, 2, 3, 4, 5), cat="Diagonalisation")
 def matrix_power_diag(rng, d):
     P = unimodular(rng, 2, 3 if d < 4 else 4)
     l1, l2 = rng.sample(range(-3, 4), 2)
@@ -1658,8 +1652,8 @@ def matrix_power_diag(rng, d):
     i, j = rng.randrange(2), rng.randrange(2)
     val = int(direct[i][j])
     wr = [A[i][j] ** k, k * A[i][j], int(direct[j][i]), val + A[i][j], l1 ** k + l2 ** k if i == j else val + 1, int(direct[1 - i][j])] + near_ints(rng, val, 4)
-    return Draft(f"Soit A = {Mx(A)}, diagonalisable. Quel est le coefficient de la ligne {i + 1}, colonne {j + 1} de A{sup(k)} ?", str(val), dedup([str(w) for w in wr], str(val)),
-                 f"A = PDP⁻¹ donc Aᵏ = PDᵏP⁻¹ (valeurs propres {l1} et {l2}) ; on peut aussi multiplier A par elle-même {k} fois.", src=SRC)
+    return Draft(f"Soit A = {Mx(A)}, diagonalisable. Quel est le coefficient de la ligne {i + 1}, colonne {j + 1} de A{sup(k)} ?", num(val), dedup([num(w) for w in wr], num(val)),
+                 f"A = PDP⁻¹ donc Aᵏ = PDᵏP⁻¹ (valeurs propres {num(l1)} et {num(l2)}) ; on peut aussi multiplier A par elle-même {k} fois.", src=SRC)
 
 
 _R_JORDAN = "Non : valeur propre double dont l'espace propre est de dimension 1"
@@ -1683,7 +1677,7 @@ def _diag_class(m):
     return "scalar" if rk == 0 else "jordan"
 
 
-@gen(C, "l2m-diagonalizable-reason", cap=70, cat="Diagonalisation")
+@gen(C, "l2m-diagonalizable-reason", cap=42, diffs=(1, 2, 3, 4, 5), cat="Diagonalisation")
 def diagonalizable_reason(rng, d):
     cls = rng.choice(["jordan", "distinct", "scalar", "noreal"])
     a = rng.randint(-5, 5)
@@ -1719,7 +1713,7 @@ def _eigen_matrix(rng, n, lams, steps=4):
     return A, P
 
 
-@gen(C, "l2m-eigenvector-pick", cap=70, cat="Valeurs propres")
+@gen(C, "l2m-eigenvector-pick", cap=42, diffs=(1, 2, 3), cat="Valeurs propres")
 def eigenvector_pick(rng, d):
     n = 2 if d <= 3 else rng.choice([2, 3])
     lams = rng.sample(range(-3, 5), n)
@@ -1738,7 +1732,7 @@ def eigenvector_pick(rng, d):
                  f"On vérifie A·v = λ·v : A·{right} = {V(matvec(A, right_v))} = {num(lam)}·{right}.", src=SRC)
 
 
-@gen(C, "l2m-eigen3-largest", cap=80, cat="Valeurs propres")
+@gen(C, "l2m-eigen3-largest", cap=48, diffs=(3, 4, 5), cat="Valeurs propres")
 def eigen3_largest(rng, d):
     lams = rng.sample(range(-4, 6), 3)
     A, P = _eigen_matrix(rng, 3, lams, 5)
@@ -1751,7 +1745,7 @@ def eigen3_largest(rng, d):
     others = [l for l in lams if l != mx]
     wr = [min(lams), tr, de, A[0][0], c2, max(others) + 1] + others
     return Draft(f"La matrice A = {Mx(A)} a trois valeurs propres entières distinctes. Quelle est la plus grande ?", num(mx), dedup([num(w) for w in wr], num(mx)),
-                 f"Le polynôme caractéristique se factorise : valeurs propres {sorted(lams)} (somme = trace = {tr}, produit = déterminant = {de}).", src=SRC)
+                 f"Le polynôme caractéristique se factorise : valeurs propres {', '.join(num(x) for x in sorted(lams))} (somme = trace = {num(tr)}, produit = déterminant = {num(de)}).", src=SRC)
 
 
 def _rank2_matrix(rng):
@@ -1771,7 +1765,7 @@ def _rank2_matrix(rng):
             return rows, v
 
 
-@gen(C, "l2m-kernel-member", cap=70, cat="Applications linéaires")
+@gen(C, "l2m-kernel-member", cap=42, diffs=(1, 2, 3), cat="Applications linéaires")
 def kernel_member(rng, d):
     A, v = _rank2_matrix(rng)
     t = rng.choice([1, -1, 2, -2])
@@ -1790,7 +1784,7 @@ def kernel_member(rng, d):
                  f"On calcule A·x : seul {right} donne le vecteur nul (le noyau est une droite car rang A = 2).", src=SRC)
 
 
-@gen(C, "l2m-image-member", cap=60, cat="Applications linéaires")
+@gen(C, "l2m-image-member", cap=36, diffs=(3, 4, 5), cat="Applications linéaires")
 def image_member(rng, d):
     A, v = _rank2_matrix(rng)
     x0 = [rng.randint(-3, 3) for _ in range(3)]
@@ -1811,7 +1805,7 @@ def image_member(rng, d):
                  f"{right} = A·{V(x0)} : le système Ax = b admet une solution, contrairement aux autres propositions.", src=SRC)
 
 
-@gen(C, "l2m-span-dim", cap=70, cat="Espaces vectoriels")
+@gen(C, "l2m-span-dim", cap=42, diffs=(1, 2, 3, 4, 5), cat="Espaces vectoriels")
 def span_dim(rng, d):
     dim = rng.choice([3, 4])
     k = rng.choice([3, 4])
@@ -1837,7 +1831,7 @@ def span_dim(rng, d):
                  f"On échelonne la matrice des vecteurs : il reste {rk} ligne(s) non nulle(s), donc la dimension de l'espace engendré vaut {rk}.", src=SRC)
 
 
-@gen(C, "l2m-basis-k", cap=90, cat="Espaces vectoriels")
+@gen(C, "l2m-basis-k", cap=54, diffs=(1, 2, 3, 4, 5), cat="Espaces vectoriels")
 def basis_k(rng, d):
     u = [rng.randint(-3, 3) for _ in range(3)]
     v = [rng.randint(-3, 3) for _ in range(3)]
@@ -1859,7 +1853,7 @@ def basis_k(rng, d):
                  f"Le déterminant des trois vecteurs vaut {num(alpha)}k + ({num(beta)}) ; il s'annule seulement pour k = {num(k0)}.", src=SRC)
 
 
-@gen(C, "l2m-orth-k", cap=70, cat="Espaces euclidiens")
+@gen(C, "l2m-orth-k", cap=42, diffs=(1, 2), cat="Espaces euclidiens")
 def orth_k(rng, d):
     a, b, c, dd, e = rng.randint(-5, 5), rng.randint(-5, 5), rng.randint(-5, 5), rng.randint(-5, 5), nz(rng, -5, 5)
     s = a * c + b * dd
@@ -1883,7 +1877,7 @@ def _pyth_vec(rng):
     return [e * sc for e in v], n * sc
 
 
-@gen(C, "l2m-norm-cos", cap=80, cat="Espaces euclidiens")
+@gen(C, "l2m-norm-cos", cap=48, diffs=(1, 2), cat="Espaces euclidiens")
 def norm_cos(rng, d):
     u, nu = _pyth_vec(rng)
     assert sum(x * x for x in u) == nu * nu
@@ -1901,7 +1895,7 @@ def norm_cos(rng, d):
                  f"cos θ = u·v ÷ (‖u‖‖v‖) = {dot} ÷ ({nu} × {nv}) = {num(cos)}.", src=SRC)
 
 
-@gen(C, "l2m-inner-poly", cap=60, cat="Espaces euclidiens")
+@gen(C, "l2m-inner-poly", cap=36, diffs=(1, 2, 3, 4, 5), cat="Espaces euclidiens")
 def inner_poly(rng, d):
     p = [rng.randint(-3, 3) for _ in range(3)]
     q = [rng.randint(-3, 3) for _ in range(3)]
@@ -1923,7 +1917,7 @@ def inner_poly(rng, d):
                  "On développe le produit PQ et on intègre terme à terme sur [0 ; 1] : ∫ tᵏ dt = 1/(k + 1).", src=SRC)
 
 
-@gen(C, "l2m-proj-line", cap=90, cat="Espaces euclidiens")
+@gen(C, "l2m-proj-line", cap=54, diffs=(1, 2, 3, 4, 5), cat="Espaces euclidiens")
 def proj_line(rng, d):
     n = rng.choice([2, 3])
     u = [rng.randint(-3, 3) for _ in range(n)]
@@ -1940,10 +1934,10 @@ def proj_line(rng, d):
     wr = [[vu * x for x in u], [F(vu, 1) / F(math.isqrt(uu)) * x if False else F(vu, uu) * y for y in v], [vi - pi for vi, pi in zip(v, p)], [F(uu, vu) * x for x in u], [F(vu, uu) * x + 1 for x in u]]
     right = V(p)
     return Draft(f"Quelle est la projection orthogonale du vecteur v = {V(v)} sur la droite engendrée par u = {V(u)} ?", right, dedup([V(w) for w in wr], right),
-                 f"p = (v·u ÷ u·u)·u = ({vu}/{uu})·u = {right}.", src=SRC)
+                 f"p = (v·u ÷ u·u)·u = ({num(vu)}/{uu})·u = {right}.", src=SRC)
 
 
-@gen(C, "l2m-proj-plane", cap=70, cat="Espaces euclidiens")
+@gen(C, "l2m-proj-plane", cap=42, diffs=(4, 5), cat="Espaces euclidiens")
 def proj_plane(rng, d):
     nvec = [rng.randint(-3, 3) for _ in range(3)]
     if not any(nvec):
@@ -1962,7 +1956,7 @@ def proj_plane(rng, d):
                  f"On retire à v sa composante normale : p = v − (v·n ÷ n·n)·n avec n = {V(nvec)}.", src=SRC)
 
 
-@gen(C, "l2m-inverse3-entry", cap=90, cat="Matrices")
+@gen(C, "l2m-inverse3-entry", cap=54, diffs=(4, 5), cat="Matrices")
 def inverse3_entry(rng, d):
     while True:
         m = rmat(rng, 3, -3, 3)
@@ -1985,13 +1979,13 @@ def inverse3_entry(rng, d):
         assert t == sum(F(cof(k, k), de) for k in range(3))
         wr = [F(sum(m[k][k] for k in range(3)), de), sum(F(1, m[k][k]) for k in range(3) if m[k][k]) if all(m[k][k] for k in range(3)) else t + 1, F(1, de), t + 1, F(sum(cof(k, k) for k in range(3))), t * de]
         return Draft(f"Quelle est la trace de l'inverse de A = {Mx(m)} ?", num(t), dedup([num(F(w)) for w in wr], num(t)),
-                     f"det A = {de} ; les coefficients diagonaux de A⁻¹ sont les cofacteurs diagonaux divisés par det A.", src=SRC)
+                     f"det A = {num(de)} ; les coefficients diagonaux de A⁻¹ sont les cofacteurs diagonaux divisés par det A.", src=SRC)
     wr = [F(cof(i, j), de), F(cof(j, i)), F(minor(j, i), de), F(1, m[i][j]) if m[i][j] else val + 1, val + 1, F(de * cof(j, i))]
     return Draft(f"Quel est le coefficient de la ligne {i + 1}, colonne {j + 1} de l'inverse de A = {Mx(m)} ?", num(val), dedup([num(F(w)) for w in wr], num(val)),
-                 f"det A = {de} ; A⁻¹ = (1/det A)·(matrice des cofacteurs)ᵀ : le coefficient ({i + 1},{j + 1}) est C_{j + 1}{i + 1}/det A = {num(val)}.", src=SRC)
+                 f"det A = {num(de)} ; A⁻¹ = (1/det A)·(matrice des cofacteurs)ᵀ : le coefficient ({i + 1},{j + 1}) est C{sub_digits(j + 1)}{sub_digits(i + 1)}/det A = {num(val)}.", src=SRC)
 
 
-@gen(C, "l2m-det-properties", cap=75, cat="Matrices")
+@gen(C, "l2m-det-properties", cap=45, diffs=(1, 2, 3), cat="Matrices")
 def det_properties(rng, d):
     n = rng.choice([2, 3, 4])
     dA = nz(rng, -4, 4)
@@ -2037,7 +2031,7 @@ def det_properties(rng, d):
     return Draft(text, right, dedup([num(F(w)) for w in wr], right), "On utilise les propriétés du déterminant (multilinéarité, det(AB) = det A·det B, det Aᵀ = det A) ; vérifié sur une matrice diagonale.", src=SRC)
 
 
-@gen(C, "l2m-linear-map-image", cap=60, cat="Applications linéaires")
+@gen(C, "l2m-linear-map-image", cap=36, diffs=(1, 2), cat="Applications linéaires")
 def linear_map_image(rng, d):
     M_ = [[rng.randint(-3, 3) for _ in range(3)] for _ in range(3)]
     if any(not any(r) for r in M_):
@@ -2072,7 +2066,7 @@ def zt(z):
     return dec(z) if z.denominator == 1 or _terminating(z) else num(z)
 
 
-@gen(C, "l2m-normal-std", cap=90, cat="Lois continues")
+@gen(C, "l2m-normal-std", cap=54, diffs=(1, 2, 3), cat="Lois continues")
 def normal_std(rng, d):
     kind = rng.choice(["gt", "neg", "sym", "tails", "between", "mixed"])
     z = rng.choice(_ZS)
@@ -2115,10 +2109,11 @@ def normal_std(rng, d):
         wr = [p2 - pz, pz + p2, 1 - pz - p2 if pz + p2 < 1 else pz + p2 - F(3, 2), pz * p2, p2 + pz - F(1, 2)]
     assert abs(float(val) - exact) < 2.5e-4, (kind, z, val, exact)
     right = dec(val)
+    wr = [w for w in wr if (F(w) * 10000).denominator == 1]
     return Draft(text, right, dedup([dec(F(w)) for w in wr], right), "On utilise la symétrie Φ(−z) = 1 − Φ(z) et P(a < Z < b) = Φ(b) − Φ(a).", src=SRC)
 
 
-@gen(C, "l2m-normal-general", cap=80, cat="Lois continues")
+@gen(C, "l2m-normal-general", cap=48, diffs=(1, 2, 3, 4, 5), cat="Lois continues")
 def normal_general(rng, d):
     mu, sg = rng.randint(0, 120), rng.randint(2, 20)
     k = rng.choice([F(1, 2), F(1), F(3, 2), F(2), F(5, 2), F(1, 4), F(3, 4)])
@@ -2151,13 +2146,14 @@ def normal_general(rng, d):
         wr = [pk, 2 * pk - 1, 2 * (1 - pk), 1 - pk / 2, pk - F(1, 2)]
     assert abs(float(val) - exact) < 2.5e-4
     right = dec(val)
+    wr = [w for w in wr if (F(w) * 10000).denominator == 1]
     return Draft(text, right, dedup([dec(F(w)) for w in wr], right), ex_, src=SRC)
 
 
 _CRIT = {F(90): F(1645, 1000), F(95): F(196, 100), F(99): F(2576, 1000)}
 
 
-@gen(C, "l2m-ci-mean", cap=100, cat="Statistiques inférentielles")
+@gen(C, "l2m-ci-mean", cap=60, diffs=(3, 4, 5), cat="Statistiques inférentielles")
 def ci_mean(rng, d):
     level = rng.choice([90, 95, 99])
     z = _CRIT[F(level)]
@@ -2185,7 +2181,7 @@ def ci_mean(rng, d):
                  right, dedup(wr, right), f"Marge = z·σ/√n = {dec(z)} × {sg}/{rn} ≈ {fx(h, 2)} ; intervalle = moyenne ± marge.", src=SRC)
 
 
-@gen(C, "l2m-ci-samplesize", cap=60, cat="Statistiques inférentielles")
+@gen(C, "l2m-ci-samplesize", cap=36, diffs=(4, 5), cat="Statistiques inférentielles")
 def ci_samplesize(rng, d):
     level = rng.choice([90, 95, 99])
     z = _CRIT[F(level)]
@@ -2202,7 +2198,7 @@ def ci_samplesize(rng, d):
                  str(n), dedup([str(w) for w in wr if w > 0], str(n)), f"n ≥ (zσ/e)² = ({dec(z)} × {sg} ÷ {dec(e)})² ≈ {fx(x, 2)} ; on arrondit à l'entier supérieur : {n}.", src=SRC)
 
 
-@gen(C, "l2m-estimator-variance", cap=80, cat="Estimation")
+@gen(C, "l2m-estimator-variance", cap=48, diffs=(1, 2, 3), cat="Estimation")
 def estimator_variance(rng, d):
     kind = rng.choice(["varbar", "se", "unbiased"])
     if kind == "varbar":
@@ -2237,7 +2233,7 @@ def estimator_variance(rng, d):
                  f"Moyenne = {dec(m)} ; somme des carrés des écarts = {dec(ss)} ; divisée par n − 1 = {n - 1} : {right}.", src=SRC)
 
 
-@gen(C, "l2m-estimator-weights", cap=60, cat="Estimation")
+@gen(C, "l2m-estimator-weights", cap=36, diffs=(3, 4, 5), cat="Estimation")
 def estimator_weights(rng, d):
     den = rng.choice([2, 3, 4, 5, 6, 8, 10])
     a, b = F(rng.randint(1, den), den), F(rng.randint(-1, den), den)
@@ -2263,7 +2259,7 @@ def estimator_weights(rng, d):
                  f"Var(T) = σ²(a² + b² + c²) = {s2} × {num(sum(x * x for x in w))} = {num(var)}.", src=SRC)
 
 
-@gen(C, "l2m-test-statistic", cap=80, cat="Tests")
+@gen(C, "l2m-test-statistic", cap=48, diffs=(1, 2, 3), cat="Tests")
 def test_statistic(rng, d):
     n = rng.choice([4, 9, 16, 25, 36, 49, 64, 100, 144, 225])
     sg = rng.randint(2, 20)
@@ -2282,7 +2278,7 @@ def test_statistic(rng, d):
                  f"z = ({xbar} − {mu0}) ÷ ({sg}/{rn}) = {right}.", src=SRC)
 
 
-@gen(C, "l2m-test-decision", cap=80, cat="Tests")
+@gen(C, "l2m-test-decision", cap=48, diffs=(1, 2, 3, 4, 5), cat="Tests")
 def test_decision(rng, d):
     n = rng.choice([4, 9, 16, 25, 36, 49, 64, 100])
     sg = rng.randint(2, 15)
@@ -2310,7 +2306,7 @@ def test_decision(rng, d):
                  f"z = (x̄ − μ₀)√n/σ = {zs} ; on rejette H₀ si {tail} : ici {'oui' if rej else 'non'}.", src=SRC)
 
 
-@gen(C, "l2m-density-const", cap=60, cat="Lois continues")
+@gen(C, "l2m-density-const", cap=35, diffs=(1, 2, 3), cat="Lois continues")
 def density_const(rng, d):
     kind = rng.choice(["power", "tri", "unif"])
     if kind == "power":
@@ -2336,7 +2332,7 @@ def density_const(rng, d):
     return Draft(text, num(c), dedup([num(F(w)) for w in wr], num(c)), "L'intégrale de f sur son support doit valoir 1 : cela détermine c.", src=SRC)
 
 
-@gen(C, "l2m-density-prob", cap=80, cat="Lois continues")
+@gen(C, "l2m-density-prob", cap=48, diffs=(1, 2, 3, 4, 5), cat="Lois continues")
 def density_prob(rng, d):
     k, b = rng.randint(1, 4), rng.randint(1, 6)
     s, t = sorted(rng.sample(range(0, b + 1), 2))
@@ -2352,7 +2348,7 @@ def density_prob(rng, d):
                  f"On intègre la densité : P = [x^{k + 1}/{b ** (k + 1)}] entre {s} et {t} = {num(val)}.", src=SRC)
 
 
-@gen(C, "l2m-density-moments", cap=80, cat="Lois continues")
+@gen(C, "l2m-density-moments", cap=22, diffs=(4, 5), cat="Lois continues")
 def density_moments(rng, d):
     k, b = rng.randint(0, 4), rng.randint(1, 6)
     kind = rng.choice(["E", "V"])
@@ -2380,7 +2376,7 @@ def density_moments(rng, d):
     return Draft(text, num(val), dedup([num(F(w)) for w in wr], num(val)), ex_, src=SRC)
 
 
-@gen(C, "l2m-uniform", cap=80, cat="Lois continues")
+@gen(C, "l2m-uniform", cap=48, diffs=(1, 2), cat="Lois continues")
 def uniform_q(rng, d):
     a = rng.randint(-6, 12)
     b = a + rng.randint(2, 14)
@@ -2411,7 +2407,7 @@ def uniform_q(rng, d):
     return Draft(text, num(F(val)), dedup([num(F(w)) for w in wr], num(F(val))), ex_, src=SRC)
 
 
-@gen(C, "l2m-exponential", cap=90, cat="Lois continues")
+@gen(C, "l2m-exponential", cap=54, diffs=(1, 2, 3), cat="Lois continues")
 def exponential_q(rng, d):
     lam = rng.choice([F(1), F(2), F(3), F(1, 2), F(1, 3), F(3, 2), F(1, 4), F(5), F(1, 5), F(2, 3), F(4)])
     kind = rng.choice(["E", "V", "surv", "memory", "cdf"])
@@ -2457,7 +2453,7 @@ def exponential_q(rng, d):
     return Draft(text, right, dedup([num(F(w)) for w in wr], right), ex_, src=SRC)
 
 
-@gen(C, "l2m-joint-conditional", cap=70, cat="Variables aléatoires")
+@gen(C, "l2m-joint-conditional", cap=42, diffs=(1, 2, 3), cat="Variables aléatoires")
 def joint_conditional(rng, d):
     N = rng.choice([10, 20, 20])
     cuts = sorted(rng.sample(range(1, N), 3))
@@ -2483,7 +2479,7 @@ def joint_conditional(rng, d):
                  "Marginale : somme sur l'autre variable ; conditionnelle : P(A ∩ B) ÷ P(B).", src=SRC)
 
 
-@gen(C, "l2m-joint-covariance", cap=70, cat="Variables aléatoires")
+@gen(C, "l2m-joint-covariance", cap=42, diffs=(1, 2, 3, 4, 5), cat="Variables aléatoires")
 def joint_covariance(rng, d):
     N = rng.choice([10, 20])
     cuts = sorted(rng.sample(range(1, N), 3))
@@ -2506,7 +2502,7 @@ def joint_covariance(rng, d):
                  f"E(X) = {dec(EX)}, E(Y) = {dec(EY)}, E(XY) = {dec(EXY)} ; Cov = E(XY) − E(X)E(Y) = {dec(cov)}.", src=SRC)
 
 
-@gen(C, "l2m-var-linear", cap=70, cat="Variables aléatoires")
+@gen(C, "l2m-var-linear", cap=42, diffs=(1, 2, 3), cat="Variables aléatoires")
 def var_linear(rng, d):
     vx, vy = rng.randint(1, 12), rng.randint(1, 12)
     a, b, c0 = nz(rng, -4, 4), nz(rng, -4, 4), rng.randint(-5, 5)
@@ -2526,3 +2522,428 @@ def var_linear(rng, d):
     wr = [a * vx + b * vy, a * a * vx + b * b * vy + (2 * a * b * cv if not with_cov else 0) + c0 * c0, a * a * vx - b * b * vy, (a + b) ** 2 * (vx + vy), a * a * vx + b * b * vy + a * b * cv if with_cov else a * a * vx + b * b * vy + a * b]
     return Draft(f"Avec V(X) = {vx}, V(Y) = {vy} ; {cond}. Que vaut V({aX} {bY}{cc}) ?", num(val), dedup([num(F(w)) for w in wr], num(val)),
                  f"V(aX + bY + c) = a²V(X) + b²V(Y) + 2ab·Cov(X, Y) = {a * a * vx} + {b * b * vy} + {2 * a * b * cv} = {val} (la constante c ne change pas la variance).", src=SRC)
+
+
+# ======================================================================================================== ARITHMÉTIQUE ET ALGÈBRE
+def _phi_count(n):
+    return sum(1 for k in range(1, n + 1) if math.gcd(k, n) == 1)
+
+
+def _phi_formula(n):
+    r, m, p = n, n, 2
+    while p * p <= m:
+        if m % p == 0:
+            while m % p == 0:
+                m //= p
+            r -= r // p
+        p += 1
+    if m > 1:
+        r -= r // m
+    return r
+
+
+@gen(C, "l2m-order-additive", cap=42, diffs=(1, 2, 3), cat="Groupes")
+def order_additive(rng, d):
+    n = rng.randint(6, 72)
+    a = rng.randint(1, n - 1)
+    # brute force: smallest k >= 1 with k*a = 0 mod n
+    k = 1
+    while (k * a) % n:
+        k += 1
+    assert k == n // math.gcd(a, n)
+    wr = [math.gcd(a, n), n, n - math.gcd(a, n) if n - math.gcd(a, n) != k else n + 1, a, n // a if n % a == 0 and n // a != k else n - 1, _phi_formula(n)]
+    wr = [w for w in wr if w != k]
+    return Draft(f"Quel est l'ordre de l'élément {a} dans le groupe additif (ℤ/{n}ℤ, +) ?", str(k), dedup([str(w) for w in wr], str(k)),
+                 f"L'ordre de a dans ℤ/nℤ est n/pgcd(a, n) = {n}/{math.gcd(a, n)} = {k}.", src=SRC)
+
+
+_PRIMES = [5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43]
+
+
+@gen(C, "l2m-order-multiplicative", cap=36, diffs=(3, 4, 5), cat="Groupes")
+def order_mult(rng, d):
+    p = rng.choice(_PRIMES)
+    a = rng.randint(2, p - 1)
+    k, x = 1, a % p
+    while x != 1:
+        x = (x * a) % p
+        k += 1
+    assert (p - 1) % k == 0 and pow(a, k, p) == 1 and all(pow(a, j, p) != 1 for j in range(1, k))
+    divs = [q for q in range(1, p) if (p - 1) % q == 0 and q != k]
+    wr = [str(q) for q in divs] + [str(p), str(p - 1)] + [str(w) for w in near_ints(rng, k, 4, lo=1)]
+    wr = [w for w in wr if w != str(k)]
+    return Draft(f"Quel est l'ordre de {a} dans le groupe multiplicatif (ℤ/{p}ℤ)* ?", str(k), dedup(wr, str(k))[:6],
+                 f"L'ordre divise p − 1 = {p - 1} ; la plus petite puissance de {a} congrue à 1 modulo {p} est {a}^{k}.", src=SRC)
+
+
+@gen(C, "l2m-euler-phi", cap=42, diffs=(1, 2, 3), cat="Groupes")
+def euler_phi(rng, d):
+    n = rng.randint(10, 150)
+    v = _phi_count(n)
+    assert v == _phi_formula(n)
+    wr = [n - 1, n // 2, v + 2, v - 2 if v > 2 else v + 4, n - (n // 2) + 1, _phi_count(n + 1) if _phi_count(n + 1) != v else v + 1]
+    return Draft(f"Que vaut l'indicatrice d'Euler φ({n}) (nombre d'entiers de 1 à {n} premiers avec {n}) ?", str(v), dedup([str(w) for w in wr], str(v)),
+                 f"On compte les entiers premiers avec {n} (ou on applique n·Π(1 − 1/p) sur les diviseurs premiers) : φ({n}) = {v}.", src=SRC)
+
+
+@gen(C, "l2m-elements-of-order", cap=30, diffs=(1, 2, 3, 4, 5), cat="Groupes")
+def elements_of_order(rng, d):
+    n = rng.choice([12, 18, 20, 24, 30, 36, 40, 42, 48, 60, 72, 84, 90, 96, 100, 120])
+    dv = rng.choice([x for x in range(2, n + 1) if n % x == 0])
+    cnt = sum(1 for a in range(n) if n // math.gcd(a, n) == dv)
+    assert cnt == _phi_formula(dv)
+    wr = [dv, dv - 1, n // dv, cnt + 1, _phi_formula(n), n - cnt]
+    return Draft(f"Combien d'éléments d'ordre exactement {dv} le groupe (ℤ/{n}ℤ, +) possède-t-il ?", str(cnt), dedup([str(w) for w in wr], str(cnt)),
+                 f"Les éléments d'ordre {dv} sont les générateurs de l'unique sous-groupe d'ordre {dv} : il y en a φ({dv}) = {cnt}.", src=SRC)
+
+
+@gen(C, "l2m-lagrange-order", cap=9, diffs=(1, 2), cat="Groupes")
+def lagrange_order(rng, d):
+    n = rng.choice([12, 15, 18, 20, 24, 28, 30, 36, 40, 42, 45, 48, 56, 60, 72])
+    divs = [x for x in range(1, n + 1) if n % x == 0]
+    nondivs = [x for x in range(2, n) if n % x]
+    right = rng.choice([x for x in divs if 1 < x < n])
+    wr = rng.sample(nondivs, 3)
+    for w in wr:
+        assert n % w
+    assert n % right == 0
+    return Draft(f"Un groupe fini G est d'ordre {n}. Lequel de ces nombres peut être l'ordre d'un sous-groupe de G ?", str(right), [str(w) for w in wr],
+                 f"Par le théorème de Lagrange, l'ordre d'un sous-groupe divise {n} : {right} divise {n}, pas les autres propositions.", src=SRC)
+
+
+@gen(C, "l2m-subgroup-count", cap=24, diffs=(1, 2, 3), cat="Groupes")
+def subgroup_count(rng, d):
+    n = rng.randint(6, 100)
+    subs = {frozenset((k * (n // math.gcd(a, n))) % n for k in range(math.gcd(a, n))) if False else frozenset((k * a) % n for k in range(n)) for a in range(n)}
+    divisors = sum(1 for x in range(1, n + 1) if n % x == 0)
+    assert len(subs) == divisors
+    wr = [n, divisors + 1, divisors - 1 if divisors > 2 else divisors + 2, _phi_formula(n) if _phi_formula(n) != divisors else n + 1, n // 2, divisors * 2]
+    return Draft(f"Combien de sous-groupes le groupe additif ℤ/{n}ℤ possède-t-il ?", str(divisors), dedup([str(w) for w in wr], str(divisors)),
+                 f"ℤ/nℤ a exactement un sous-groupe par diviseur de n : {n} a {divisors} diviseurs.", src=SRC)
+
+
+@gen(C, "l2m-poly-roots-mod", cap=42, diffs=(1, 2, 3, 4, 5), cat="Anneaux et polynômes")
+def poly_roots_mod(rng, d):
+    p = rng.choice([5, 7, 11, 13])
+    if rng.random() < 0.5:
+        b, c = rng.randint(0, p - 1), rng.randint(0, p - 1)
+        roots = [x for x in range(p) if (x * x + b * x + c) % p == 0]
+        disc = (b * b - 4 * c) % p
+        if disc == 0:
+            crit = 1
+        else:
+            crit = 2 if pow(disc, (p - 1) // 2, p) == 1 else 0
+        assert crit == len(roots)
+        co = [1, b, c]
+        text_poly = poly(co, "x")
+    else:
+        rs = [rng.randint(0, p - 1) for _ in range(3)]
+        co = [1]
+        for r in rs:
+            co = [(a - r * b) % p for a, b in zip(co + [0], [0] + co)]
+        assert len(co) == 4
+        roots = [x for x in range(p) if (x ** 3 + co[1] * x * x + co[2] * x + co[3]) % p == 0]
+        assert set(roots) == set(rs)
+        text_poly = poly(co, "x")
+    n = len(roots)
+    wr = [str(x) for x in range(0, 5) if x != n]
+    return Draft(f"Combien de racines distinctes le polynôme {text_poly} possède-t-il dans le corps ℤ/{p}ℤ ?", str(n), wr[:4],
+                 f"On teste les {p} éléments de ℤ/{p}ℤ : les racines sont {sorted(roots) if roots else 'inexistantes'}.".replace("[", "").replace("]", "") if roots else "Aucun des éléments de ℤ/pℤ n'annule le polynôme.", src=SRC)
+
+
+@gen(C, "l2m-ring-counts", cap=30, diffs=(1, 2, 3, 4, 5), cat="Anneaux et polynômes")
+def ring_counts(rng, d):
+    n = rng.choice([n for n in range(6, 61) if any(n % k == 0 for k in range(2, math.isqrt(n) + 1))])
+    kind = rng.choice(["units", "zerodiv", "nilp"])
+    if kind == "units":
+        val = sum(1 for a in range(n) if any((a * b) % n == 1 for b in range(n)))
+        assert val == _phi_formula(n)
+        text = f"Combien d'éléments inversibles l'anneau ℤ/{n}ℤ possède-t-il ?"
+        wr = [n - 1, n - val, val + 1, n // 2, n - val - 1]
+        ex_ = f"Les inversibles sont les classes premières avec {n} : φ({n}) = {val}."
+    elif kind == "zerodiv":
+        val = sum(1 for a in range(1, n) if any((a * b) % n == 0 for b in range(1, n)))
+        assert val == n - _phi_formula(n) - 1
+        text = f"Combien d'éléments non nuls de ℤ/{n}ℤ sont des diviseurs de zéro ?"
+        wr = [_phi_formula(n), n - _phi_formula(n), val + 1, n - 1, val - 1 if val > 1 else val + 2]
+        ex_ = f"Un élément non nul est inversible ou diviseur de zéro : {n} − 1 − φ({n}) = {val}."
+    else:
+        val = sum(1 for a in range(1, n) if any(pow(a, k, n) == 0 for k in range(1, 8)))
+        text = f"Combien d'éléments nilpotents non nuls l'anneau ℤ/{n}ℤ possède-t-il ?"
+        # second method: a is nilpotent iff every prime factor of n divides a
+        primes = [q for q in range(2, n + 1) if n % q == 0 and all(q % r for r in range(2, q))]
+        assert val == sum(1 for a in range(1, n) if all(a % q == 0 for q in primes))
+        wr = [n - _phi_formula(n) - 1, 0, val + 1, n // 2, val + 2]
+        ex_ = "a est nilpotent si et seulement si tous les facteurs premiers de n divisent a."
+    return Draft(text, str(val), dedup([str(w) for w in wr if w >= 0], str(val)), ex_, src=SRC)
+
+
+# ======================================================================================================== OPTIMISATION LINÉAIRE
+def _lp_vertices(cons):
+    """cons: list of (a, b, e) meaning a x + b y <= e, plus x >= 0, y >= 0. Returns the feasible vertices (Fractions)."""
+    lines = list(cons) + [(F(-1), F(0), F(0)), (F(0), F(-1), F(0))]
+    out = set()
+    for (a1, b1, e1), (a2, b2, e2) in combinations(lines, 2):
+        det = a1 * b2 - a2 * b1
+        if det == 0:
+            continue
+        x, y = F(e1 * b2 - e2 * b1) / det, F(a1 * e2 - a2 * e1) / det
+        if all(a * x + b * y <= e for a, b, e in lines):
+            out.add((x, y))
+    return sorted(out)
+
+
+def _lp_instance(rng):
+    x0, y0 = rng.randint(1, 8), rng.randint(1, 8)
+    while True:
+        a1, b1, a2, b2 = (rng.randint(1, 5) for _ in range(4))
+        if a1 * b2 - a2 * b1 != 0 and (a1, b1) != (a2, b2):
+            break
+    cons = [(F(a1), F(b1), F(a1 * x0 + b1 * y0)), (F(a2), F(b2), F(a2 * x0 + b2 * y0))]
+    return cons, (x0, y0)
+
+
+@gen(C, "l2m-lp-optimum", cap=54, diffs=(1, 2, 3, 4, 5), cat="Optimisation linéaire")
+def lp_optimum(rng, d):
+    cons, (x0, y0) = _lp_instance(rng)
+    c1, c2 = rng.randint(1, 6), rng.randint(1, 6)
+    verts = _lp_vertices(cons)
+    best = max(c1 * x + c2 * y for x, y in verts)
+    # second method: lattice scan with step 1/6 (the feasible region is bounded; the optimum is attained at a vertex)
+    ub = max(x for x, _ in verts), max(y for _, y in verts)
+    mx = 0
+    for i in range(int(ub[0] * 6) + 1):
+        for j in range(int(ub[1] * 6) + 1):
+            x, y = F(i, 6), F(j, 6)
+            if all(a * x + b * y <= e for a, b, e in cons):
+                mx = max(mx, c1 * x + c2 * y)
+    assert mx <= best and any(c1 * x + c2 * y == best for x, y in verts)
+    sorted_v = sorted(verts)
+    others = [c1 * x + c2 * y for x, y in verts if c1 * x + c2 * y != best]
+    wr = others + [best + 1, c1 * x0 + c2 * y0 + 1 if c1 * x0 + c2 * y0 + 1 != best else best + 2, max(c1 * x for x, _ in verts) + max(c2 * y for _, y in verts), best - 1]
+    cs = "; ".join(f"{int(a)}x + {int(b)}y ≤ {int(e)}" for a, b, e in cons)
+    right = num(best)
+    return Draft(f"Quelle est la valeur maximale de z = {c1}x + {c2}y sous les contraintes {cs}, x ≥ 0, y ≥ 0 ?", right, dedup([num(F(w)) for w in wr], right),
+                 f"On évalue z en chacun des sommets du domaine (dont ({x0} ; {y0}), intersection des deux droites) : le maximum est {right}.", src=SRC)
+
+
+@gen(C, "l2m-lp-vertex", cap=36, diffs=(1, 2, 3), cat="Optimisation linéaire")
+def lp_vertex(rng, d):
+    cons, (x0, y0) = _lp_instance(rng)
+    verts = _lp_vertices(cons)
+    assert (F(x0), F(y0)) in verts
+    (a1, b1, e1), (a2, b2, e2) = cons
+    # Cramer
+    det = a1 * b2 - a2 * b1
+    assert (F(e1 * b2 - e2 * b1) / det, F(a1 * e2 - a2 * e1) / det) == (x0, y0)
+    cs = "; ".join(f"{int(a)}x + {int(b)}y ≤ {int(e)}" for a, b, e in cons)
+    wr = [(x0 + 1, y0), (y0, x0), (x0, y0 + 1), (F(e1, a1), F(0)), (F(0), F(e2, b2)), (x0 - 1, y0 + 1)]
+    right = V((x0, y0))
+    return Draft(f"Le domaine défini par {cs}, x ≥ 0, y ≥ 0 possède un sommet à l'intersection des deux droites de contraintes. Quelles sont ses coordonnées ?", right, dedup([V(w) for w in wr], right),
+                 f"On résout le système {int(a1)}x + {int(b1)}y = {int(e1)}, {int(a2)}x + {int(b2)}y = {int(e2)} : x = {x0}, y = {y0}.", src=SRC)
+
+
+@gen(C, "l2m-lp-vertex-count", cap=24, diffs=(4, 5), cat="Optimisation linéaire")
+def lp_vertex_count(rng, d):
+    k = rng.choice([2, 3, 3])
+    cons = []
+    for _ in range(k):
+        a, b = rng.randint(1, 5), rng.randint(1, 5)
+        e = rng.randint(max(a, b) * 2, 40)
+        cons.append((F(a), F(b), F(e)))
+    verts = _lp_vertices(cons)
+    # second method: convex hull vertex count by the monotone chain algorithm
+    pts = sorted(set(verts))
+    def cross(o, a, b):
+        return (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0])
+    lower, upper = [], []
+    for pt in pts:
+        while len(lower) >= 2 and cross(lower[-2], lower[-1], pt) <= 0:
+            lower.pop()
+        lower.append(pt)
+    for pt in reversed(pts):
+        while len(upper) >= 2 and cross(upper[-2], upper[-1], pt) <= 0:
+            upper.pop()
+        upper.append(pt)
+    hull = lower[:-1] + upper[:-1]
+    n = len(verts)
+    assert len(hull) == n, (cons, verts, hull)
+    cs = "; ".join(f"{int(a)}x + {int(b)}y ≤ {int(e)}" for a, b, e in cons)
+    wr = [str(x) for x in range(2, 8) if x != n]
+    return Draft(f"Combien de sommets possède le domaine défini par {cs}, x ≥ 0, y ≥ 0 ?", str(n), wr[:4],
+                 f"On calcule les intersections des droites frontières deux à deux et on ne garde que celles qui vérifient toutes les contraintes : {n} sommets.", src=SRC)
+
+
+# ======================================================================================================== GRAPHES
+def _rand_graph(rng, n, m):
+    allp = list(combinations(range(1, n + 1), 2))
+    return sorted(rng.sample(allp, m))
+
+
+def _graph_text(edges):
+    return ", ".join(f"{a}-{b}" for a, b in edges)
+
+
+@gen(C, "l2m-graph-degree", cap=42, diffs=(1, 2), cat="Graphes")
+def graph_degree(rng, d):
+    n = rng.randint(5, 8)
+    m = rng.randint(n - 1, min(n + 5, n * (n - 1) // 2))
+    E = _rand_graph(rng, n, m)
+    adj = [[0] * n for _ in range(n)]
+    for a, b in E:
+        adj[a - 1][b - 1] = adj[b - 1][a - 1] = 1
+    deg = [sum(r) for r in adj]
+    kind = rng.choice(["deg", "max", "odd", "sum"])
+    text0 = f"Un graphe simple non orienté a pour sommets 1 à {n} et pour arêtes {_graph_text(E)}."
+    if kind == "deg":
+        v = rng.randint(1, n)
+        val = deg[v - 1]
+        assert val == sum(1 for e in E if v in e)
+        text = text0 + f" Quel est le degré du sommet {v} ?"
+        wr = [val + 1, max(val - 1, 0), len(E), n - 1, sum(1 for e in E if e[0] == v)]
+        ex_ = f"Le degré est le nombre d'arêtes incidentes au sommet {v}."
+    elif kind == "max":
+        val = max(deg)
+        text = text0 + " Quel est le degré maximal des sommets ?"
+        wr = [val + 1, val - 1, len(E), min(deg), n - 1, sorted(deg)[-2]]
+        ex_ = f"Les degrés sont {deg} : le maximum est {val}."
+    elif kind == "odd":
+        val = sum(1 for x in deg if x % 2)
+        assert val % 2 == 0
+        text = text0 + " Combien de sommets ont un degré impair ?"
+        wr = [x for x in range(0, n + 1) if x != val]
+        wr = [x for x in wr if x % 2 == 0][:2] + [x for x in wr if x % 2][:3]
+        ex_ = f"Les degrés valent {deg} ; le nombre de sommets de degré impair est toujours pair (ici {val})."
+    else:
+        val = sum(deg)
+        assert val == 2 * len(E)
+        text = text0 + " Quelle est la somme des degrés de tous les sommets ?"
+        wr = [len(E), len(E) + n, 2 * len(E) + 1, 2 * len(E) - 2, n * (n - 1) // 2, n * 2]
+        ex_ = f"Formule des poignées de mains : somme des degrés = 2 × nombre d'arêtes = 2 × {len(E)}."
+    if len(text) > 255:
+        return None
+    return Draft(text, str(val), dedup([str(w) for w in wr if w >= 0], str(val)), ex_, src=SRC)
+
+
+@gen(C, "l2m-graph-walks", cap=36, diffs=(1, 2, 3, 4, 5), cat="Graphes")
+def graph_walks(rng, d):
+    n = rng.randint(4, 5)
+    m = rng.randint(n - 1, min(n + 2, n * (n - 1) // 2))
+    E = _rand_graph(rng, n, m)
+    adj = [[0] * n for _ in range(n)]
+    for a, b in E:
+        adj[a - 1][b - 1] = adj[b - 1][a - 1] = 1
+    k = rng.choice([2, 3])
+    s, t = rng.sample(range(1, n + 1), 2) if rng.random() < 0.7 else (lambda x: (x, x))(rng.randint(1, n))
+    P = ident(n)
+    for _ in range(k):
+        P = matmul(P, adj)
+    val = int(P[s - 1][t - 1])
+    # brute force: enumerate all walks of length k
+    cnt = 0
+    def walk(u, left):
+        nonlocal cnt
+        if left == 0:
+            cnt += (u == t - 1)
+            return
+        for v in range(n):
+            if adj[u][v]:
+                walk(v, left - 1)
+    walk(s - 1, k)
+    assert cnt == val
+    wr = [val + 1, max(val - 1, 0), int(P[t - 1][s - 1]) + 1, sum(adj[s - 1]) * sum(adj[t - 1]), len(E), int(sum(sum(r) for r in P))]
+    return Draft(f"Un graphe non orienté a pour sommets 1 à {n} et pour arêtes {_graph_text(E)}. Combien de chaînes (parcours pouvant repasser par un sommet ou une arête) de longueur {k} vont du sommet {s} au sommet {t} ?",
+                 str(val), dedup([str(w) for w in wr], str(val)), f"C'est le coefficient ({s},{t}) de la matrice d'adjacence élevée à la puissance {k}, soit {val}.", src=SRC)
+
+
+@gen(C, "l2m-graph-edges", cap=36, diffs=(1, 2), cat="Graphes")
+def graph_edges(rng, d):
+    kind = rng.choice(["complete", "bip", "regular", "cycle", "tree", "complement"])
+    if kind == "complete":
+        n = rng.randint(4, 15)
+        val = len(list(combinations(range(n), 2)))
+        assert val == n * (n - 1) // 2
+        text, wr = f"Combien d'arêtes le graphe complet K{sub_digits(n)} possède-t-il ?", [n * n, n * (n - 1), n, val + n, n * (n + 1) // 2, val - 1]
+    elif kind == "bip":
+        p, q = rng.randint(2, 9), rng.randint(2, 9)
+        val = len([(a, b) for a in range(p) for b in range(q)])
+        text, wr = f"Combien d'arêtes le graphe biparti complet K{sub_digits(p)},{sub_digits(q)} possède-t-il ?", [p + q, val + p, (p + q) * (p + q - 1) // 2, val * 2, p * q - 1, p * q + q]
+    elif kind == "regular":
+        n = rng.randint(4, 14)
+        dg = rng.randint(2, min(6, n - 1))
+        if (n * dg) % 2:
+            return None
+        val = n * dg // 2
+        text, wr = f"Un graphe simple a {n} sommets, tous de degré {dg}. Combien d'arêtes possède-t-il ?", [n * dg, n + dg, val + n, val - 1, n * (n - 1) // 2, dg * (dg - 1) // 2]
+    elif kind == "cycle":
+        n = rng.randint(4, 20)
+        val = n
+        text, wr = f"Combien d'arêtes le graphe cycle C{sub_digits(n)} à {n} sommets possède-t-il ?", [n - 1, n + 1, 2 * n, n * (n - 1) // 2, n // 2]
+    elif kind == "tree":
+        n = rng.randint(5, 30)
+        val = n - 1
+        text, wr = f"Combien d'arêtes un arbre à {n} sommets possède-t-il ?", [n, n + 1, n - 2, n // 2, n * (n - 1) // 2]
+    else:
+        n = rng.randint(5, 12)
+        # complement of the cycle C_n: all pairs minus the n cycle edges
+        cyc = {tuple(sorted((i, (i + 1) % n))) for i in range(n)}
+        comp = [e for e in combinations(range(n), 2) if e not in cyc]
+        val = len(comp)
+        assert val == n * (n - 1) // 2 - n
+        text, wr = f"Quel est le nombre d'arêtes du graphe complémentaire du cycle C{sub_digits(n)} ?", [n * (n - 1) // 2, n, n * (n - 1) // 2 - n + 1, n * (n - 3), n * (n - 1) // 2 - 2 * n, n - 3]
+    return Draft(text, str(val), dedup([str(w) for w in wr if w > 0], str(val)), "On applique le décompte des arêtes (somme des degrés = 2 × nombre d'arêtes) à la famille de graphes considérée.", src=SRC)
+
+
+# ======================================================================================================== SÉRIES NUMÉRIQUES
+_SER_REASONS = {
+    "riem-conv": "Elle converge (série de Riemann d'exposant strictement supérieur à 1)",
+    "riem-div": "Elle diverge (série de Riemann d'exposant inférieur ou égal à 1)",
+    "geo-conv": "Elle converge (série géométrique de raison de module strictement inférieur à 1)",
+    "geo-div": "Elle diverge (série géométrique de raison de module supérieur ou égal à 1)",
+    "gross": "Elle diverge grossièrement (le terme général ne tend pas vers 0)",
+}
+
+
+@gen(C, "l2m-series-nature", cap=33, diffs=(1, 2, 3), cat="Séries numériques")
+def series_nature(rng, d):
+    kind = rng.choice(["riem-conv", "riem-div", "geo-conv", "geo-div", "gross"])
+    if kind == "riem-conv":
+        p = rng.choice([F(3, 2), F(2), F(3), F(5, 2), F(7, 4), F(4), F(9, 8) if False else F(5, 4)])
+        term = lambda n: n ** -float(p)
+        text = f"Que peut-on dire de la série Σ 1/n^({num(p)}) (n ≥ 1) ?" if p.denominator != 1 else f"Que peut-on dire de la série Σ 1/n{sup(int(p))} (n ≥ 1) ?"
+    elif kind == "riem-div":
+        p = rng.choice([F(1), F(1, 2), F(2, 3), F(3, 4), F(1, 3), F(4, 5)])
+        term = lambda n: n ** -float(p)
+        text = f"Que peut-on dire de la série Σ 1/n^({num(p)}) (n ≥ 1) ?" if p != 1 else "Que peut-on dire de la série harmonique Σ 1/n (n ≥ 1) ?"
+    elif kind == "geo-conv":
+        r = F(rng.randint(1, 9), rng.randint(10, 12)) * rng.choice([1, 1, -1])
+        term = lambda n: float(r) ** n
+        text = f"Que peut-on dire de la série Σ ({num(r)})ⁿ (n ≥ 0) ?"
+    elif kind == "geo-div":
+        r = rng.choice([F(1), F(-1), F(5, 4), F(3, 2), F(2), F(3), F(-2), F(-3, 2)])
+        term = lambda n: float(r) ** n
+        text = f"Que peut-on dire de la série Σ ({num(r)})ⁿ (n ≥ 0) ?"
+        if abs(r) == 1:
+            text = "Que peut-on dire de la série Σ 1ⁿ (n ≥ 0) ?" if r == 1 else "Que peut-on dire de la série Σ (−1)ⁿ (n ≥ 0) ?"
+    else:
+        a = rng.randint(1, 9)
+        term = lambda n: n / (n + a)
+        text = f"Que peut-on dire de la série Σ n/(n + {a}) (n ≥ 1) ?"
+    # numerical sanity: tail mass between 10^3 and 10^5 terms (|u_n|) small for convergent, large (or terms not -> 0) for divergent
+    if kind in ("riem-conv", "geo-conv"):
+        tail = sum(abs(term(n)) for n in range(1000, 20001))
+        assert tail < 0.6, (kind, tail)
+        if kind == "riem-conv":
+            assert p > 1
+        else:
+            assert abs(r) < 1
+    elif kind == "riem-div":
+        tail = sum(term(n) for n in range(1000, 20001))
+        assert tail > 2.5 and p <= 1, (kind, p, tail)
+    elif kind == "geo-div":
+        assert abs(r) >= 1
+    else:
+        assert abs(term(10 ** 6) - 1) < 1e-3
+    right = _SER_REASONS[kind]
+    wr = [v for k, v in _SER_REASONS.items() if k != kind]
+    return Draft(text, right, wr, "On reconnaît une série de référence (Riemann ou géométrique), ou on constate que le terme général ne tend pas vers 0.", src=SRC)
