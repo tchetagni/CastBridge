@@ -4,6 +4,11 @@ import android.annotation.SuppressLint
 import android.bluetooth.BluetoothManager
 import android.content.Context
 import castbridge.core.quiz.Json
+import castbridge.core.remote.BtRoute
+import castbridge.core.remote.LinkKind
+import castbridge.core.remote.RemotePlan
+import castbridge.core.remote.hid.HidStrategy
+import castbridge.core.remote.RouteStatus
 import castbridge.core.remote.HttpRemoteTransport
 import castbridge.core.remote.KeyAction
 import castbridge.core.remote.RemoteBt
@@ -40,6 +45,8 @@ data class RemoteTvState(
     val systemEnabled: Boolean, val systemConnected: Boolean, val volume: Int?, val muted: Boolean?, val volumeFixed: Boolean,
     /** False when the TV says the whole-TV mode cannot be switched on there (older TVs omit it: then true). */
     val systemAvailable: Boolean = true, val systemReason: String? = null,
+    /** The TV relays keys to the manufacturer's remote service (docs/REMOTE-VENDOR-CVTE.md); older TVs omit it: false. */
+    val vendorAvailable: Boolean = false,
 ) {
     companion object {
         fun parse(j: String): RemoteTvState? = runCatching {
@@ -47,7 +54,8 @@ data class RemoteTvState(
             @Suppress("UNCHECKED_CAST") val sys = o["system"] as? Map<String, Any?> ?: emptyMap()
             RemoteTvState(o["screen"] as? String, o["castbridgeFront"] == true, o["textField"] == true,
                 sys["enabled"] == true, sys["connected"] == true, (o["volume"] as? Long)?.toInt(), o["muted"] as? Boolean, o["volumeFixed"] == true,
-                sys["available"] != false, sys["reason"] as? String)
+                sys["available"] != false, sys["reason"] as? String,
+                ((o["vendor"] as? Map<*, *>)?.get("available")) == true)
         }.getOrNull()
     }
 }
@@ -63,6 +71,13 @@ class RemotePrefs(ctx: Context) {
     var volumeKeys: Boolean get() = sp.getBoolean("volkeys", true); set(v) { sp.edit().putBoolean("volkeys", v).apply() }
     var haptics: Boolean get() = sp.getBoolean("haptics", true); set(v) { sp.edit().putBoolean("haptics", v).apply() }
     var wholeTv: Boolean get() = sp.getBoolean("whole", false); set(v) { sp.edit().putBoolean("whole", v).apply() }
+    /** "Bluetooth exclusivement": the remote never uses the Wi-Fi (docs/REMOTE.md, three Bluetooth routes). */
+    var btOnly: Boolean get() = sp.getBoolean("btonly", false); set(v) { sp.edit().putBoolean("btonly", v).apply() }
+    /** Result of the user's test of a Bluetooth route (name of [BtRoute]); null = never tested. */
+    fun routeResult(r: BtRoute): RouteStatus? = sp.getString("route_${r.name}", null)?.let { n -> RouteStatus.values().firstOrNull { it.name == n } }
+    fun setRouteResult(r: BtRoute, v: RouteStatus?) { sp.edit().apply { if (v == null) remove("route_${r.name}") else putString("route_${r.name}", v.name) }.apply() }
+    /** The phone-as-keyboard route (HID) only sends keys once the user turned it on. */
+    var hidEnabled: Boolean get() = sp.getBoolean("hid", false); set(v) { sp.edit().putBoolean("hid", v).apply() }
     /** Keep the remote (notification, phone volume buttons) working when the app is not in front (RemoteService). On by default. */
     var background: Boolean get() = sp.getBoolean("background", true); set(v) { sp.edit().putBoolean("background", v).apply() }
 }
@@ -94,6 +109,7 @@ object RemoteController {
         current = key
         _tv.value = null
         val app = ctx.applicationContext
+        RemotePrefs(app).let { p -> hid.enabled = p.hidEnabled; hid.confirmed = p.routeResult(BtRoute.HID) == RouteStatus.CONFIRMED }
         val s = RemoteSession(RemoteQueue(), { open(app, tv, TvLinkManager.credentialFor(tv.pinKey) ?: pin, btFallback) }, object : RemoteSession.Listener {
             override fun status(s: RemoteSession.Status) { _status.value = s }
             override fun state(json: String) { RemoteTvState.parse(json)?.let { _tv.value = it } }
@@ -107,9 +123,24 @@ object RemoteController {
 
     @Synchronized fun disconnect() { session?.stop(); session = null; current = null; _status.value = RemoteSession.Status(RemoteSession.Link.OFFLINE, message = "Déconnectée") }
 
+    /** Reconnects with the current preferences (after "Bluetooth exclusivement" changed). */
+    @Synchronized fun restart(ctx: Context) { current?.let { (tv, pin, bt) -> session?.stop(); session = null; current = null; connect(ctx, tv, pin, bt) } }
+
+    /** Sends [k] once with an explicit [target] (route tests: SYSTEM = the relay), then puts the usual target back. */
+    fun keyVia(k: RemoteKey, target: RemoteTarget) { val s = session ?: return; val old = s.target; s.target = target; s.key(k, KeyAction.PRESS, 0); s.target = old }
+
     fun setWholeTv(on: Boolean) { session?.target = if (on) RemoteTarget.AUTO else RemoteTarget.APP }
 
-    fun key(k: RemoteKey, action: KeyAction = KeyAction.PRESS, repeat: Int = 0) { session?.key(k, action, repeat) }
+    /** Route C (phone as a Bluetooth keyboard): off until the user enabled it and a test confirmed that the TV reacts (docs/REMOTE.md). */
+    val hid = HidStrategy(BtHidRemote, hostRefused = { BtHidRemote.hostRefused })
+
+    /** Status line "Bluetooth seulement" / "Bluetooth exclusivement" when the link goes over Bluetooth, else null. */
+    fun statusLine(s: RemoteSession.Status, btOnly: Boolean): String? = if (s.link == RemoteSession.Link.CONNECTED) RemotePlan.linkMessage(s.via, btOnly) else null
+
+    fun key(k: RemoteKey, action: KeyAction = KeyAction.PRESS, repeat: Int = 0) {
+        // No link to CastBridge TV: the keyboard route, only if enabled and confirmed.
+        if (!connected && hid.enabled && hid.confirmed) hid.send(k, action) else session?.key(k, action, repeat)
+    }
     fun text(value: String, mode: TextMode = TextMode.INSERT) { session?.text(value, mode) }
     fun global(g: RemoteGlobal) { session?.global(g) }
     fun setup() { session?.queue?.offer("system/setup", emptyMap()) }
@@ -122,12 +153,14 @@ object RemoteController {
     @SuppressLint("MissingPermission")
     private fun open(ctx: Context, tv: RemoteTv, pin: String, btFallback: String?): RemoteTransport {
         var wifiError: IOException? = null
-        if (tv.host != null) {
+        val bt = tv.btAddress ?: btFallback
+        val btOnly = RemotePrefs(ctx).btOnly
+        val links = RemotePlan.links(tv.host != null, bt != null, btOnly)
+        if (LinkKind.WIFI in links && tv.host != null) {
             val t = HttpRemoteTransport(tv.host, tv.port, pin, connectTimeoutMs = 1500)
             try { t.connect(); return t } catch (e: IOException) { wifiError = e }
         }
-        val bt = tv.btAddress ?: btFallback
-        if (bt != null) {
+        if (LinkKind.BLUETOOTH in links && bt != null) {
             if (!hasBtPermission(ctx)) throw IOException("Secours Bluetooth : autorisation « Appareils à proximité » refusée")
             val adapter = ctx.getSystemService(BluetoothManager::class.java)?.adapter
             if (adapter == null || !adapter.isEnabled) throw IOException(if (wifiError != null) "TV injoignable par le Wi-Fi, et le Bluetooth du téléphone est éteint" else "Bluetooth éteint")
@@ -144,6 +177,7 @@ object RemoteController {
                 throw IOException("TV injoignable par le Wi-Fi et par le Bluetooth (CastBridge TV ouverte ? appareils appairés ?)")
             }
         }
+        if (btOnly) throw IOException("Bluetooth exclusivement : choisissez une TV appairée comme secours Bluetooth (CastBridge TV ouverte).")
         throw IOException(if (tv.host == null) "Aucune adresse pour cette TV"
             else "Télécommande indisponible : la TV ne répond pas sur le réseau (même Wi-Fi ? TV allumée ?). " +
                 "Sans réseau commun, choisissez un secours Bluetooth.")

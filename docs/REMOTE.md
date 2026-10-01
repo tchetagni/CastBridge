@@ -49,3 +49,24 @@ Liste blanche (`castbridge.core.remote.RemoteKey`) : `DPAD_UP/DOWN/LEFT/RIGHT/CE
 - les boutons de volume du téléphone pilotent la TV (session média à volume distant), sauf si « Boutons de volume du téléphone → TV » est décoché ;
 - option « Garder la télécommande en arrière-plan » (menu de la télécommande, activée par défaut). Désactivée, ou après « Arrêter », le lien est fermé en quittant l'écran.
 Limite : tant que le service tourne, les boutons de volume du téléphone ne règlent plus le volume du téléphone.
+
+## Télécommande par Bluetooth seulement (trois voies)
+
+Pour une TV dont le Wi-Fi est défaillant. L'option **« Bluetooth exclusivement »** (écran « Ma TV · voies Bluetooth », menu ⋮ de la télécommande) n'utilise que les voies ci-dessous et **jamais le Wi-Fi** ; il faut une TV appairée choisie comme secours Bluetooth.
+
+| Voie | Ce qu'elle pilote | Prérequis | Statut |
+|---|---|---|---|
+| **A · CastBridge par Bluetooth** (CBTR) | écrans de CastBridge-TV, volume, muet, touches multimédia | TV appairée, CastBridge-TV ouverte, aucune adresse IP nécessaire | existante, fiabilisée |
+| **B · Relais vers le service du fabricant** | flèches, OK, Retour, Accueil, menu, médias, volume **dans les autres applications**, sans accessibilité | TV « marque blanche » CVTE/Amlogic avec le service sur le port 8125 (`docs/REMOTE-VENDOR-CVTE.md`) | à valider sur matériel |
+| **C · Téléphone = clavier/télécommande Bluetooth** (HID) | flèches, Entrée, Échap (= Retour), chiffres, Accueil, Menu, médias, volume, CH± ; aucune app sur la TV | Android 9+, TV qui accepte un clavier Bluetooth | **désactivée par défaut** tant qu'un test ne l'a pas confirmée |
+
+- **A** : le téléphone affiche « Bluetooth seulement » (ou « Bluetooth exclusivement ») ; la liaison se rétablit seule après une coupure (`RemoteSession`) ; les touches qu'aucune voie ne peut porter sont masquées (la place reste).
+- **B** : `téléphone --Bluetooth--> CastBridge-TV --ws://127.0.0.1:8125--> service système`. `RemoteHub` choisit la voie de chaque touche (`KeyRouting`) : volume = AudioManager, puis le relais si la TV refuse (volume fixe) ; écran CastBridge au premier plan = CastBridge d'abord, le relais seulement si l'écran n'a pas pris la touche (jamais deux envois) ; CastBridge pas au premier plan = relais, puis accessibilité, puis session multimédia ; « Accueil » reste l'accueil de CastBridge sauf demande « toute la TV ». Le relais n'est joignable que par l'API de télécommande déjà authentifiée (PIN ou lien Bluetooth de confiance), limité à 30 touches/s, ne cible que `127.0.0.1`, n'encode que la liste blanche `RemoteKey` (jamais POWER/veille) et tient un journal sans secret. `GET /api/remote/state` : `"vendor":{"available":bool,"state":"ABSENT|CONNECTING|READY|ERROR"}`. Test TV : Options › « Tester le relais Bluetooth » (volume + puis −).
+- **C** : `BluetoothHidDevice` (`BtHidRemote`), descripteur clavier (rapport 1) + « Consumer Control » (rapport 2) construits et testés dans `core` (`HidRemote`) ; appui/relâchement idempotents. Si la TV refuse la connexion, l'état affiche « non pris en charge ». N'envoie rien tant que « Activer cette voie » n'est pas coché **et** que le test « Avez-vous vu le volume changer ? » n'a pas été confirmé ; utilisée seulement quand la liaison vers CastBridge-TV est absente.
+- **Diagnostic** : bouton « Copier le diagnostic » (états des trois voies, option, version ; adresses Bluetooth masquées, aucune adresse IP, aucun code).
+
+### Limites et risques
+- B dépend d'un protocole non documenté du fabricant (peut changer) ; il n'existe que sur certaines TV.
+- **Risque réseau** : ce service système n'exige **aucune authentification** sur le réseau local : toute personne sur le même Wi-Fi peut piloter la TV avec ce protocole. CastBridge ne l'expose pas (boucle locale seulement) mais ne peut pas le fermer.
+- C : beaucoup de TV ignorent un clavier Bluetooth venant d'un téléphone ; pas de texte libre (seulement les touches de la liste). Un seul téléphone/TV connecté à la fois.
+- Aucune des trois voies n'allume la TV ni ne change de source.

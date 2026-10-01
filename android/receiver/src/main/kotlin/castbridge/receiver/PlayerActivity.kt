@@ -686,6 +686,10 @@ class PlayerActivity : Activity(), TvService.Screen {
         items += "Confidentialité : mes données, statistiques d'usage…" to { ServerActivity.open(this, ServerActivity.MODE_PRIVACY) }
         items += "Connexion au serveur (identifiant de la TV)…" to { ServerActivity.open(this, ServerActivity.MODE_CONNECTION) }
         items += "Options développeur (débogage USB / Wi-Fi)" to { flash(openDevSettings()) }
+        items += "Tester le relais Bluetooth (volume + puis −)" to {
+            showDiag("Relais du service du fabricant")
+            Thread { RemoteHub.testVendorRelay { l -> main.post { appendDiag(l) } } }.start()
+        }
         items += (if (ssh?.running == true) "SSH : désactiver" else "SSH : activer (administration à distance, clés autorisées seulement)") to {
             if (ssh?.running == true) { ssh.disable(); flash("SSH désactivé") }
             else Thread { runCatching { ssh?.enable() }.onFailure { e -> main.post { flash("SSH impossible : ${e.message}") } } }.start()
