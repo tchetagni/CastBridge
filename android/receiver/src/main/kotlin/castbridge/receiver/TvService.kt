@@ -795,6 +795,7 @@ class TvService : Service(), Device {
             g.diagnose(host) { l -> lines += l; act?.let { a -> main.post { a.appendDiag(l) } } }
             ApiReply(200, "{\"host\":${ReceiverServer.q(host)},\"lines\":[" + lines.joinToString(",") { ReceiverServer.q(it) } + "]}")
         } ?: ApiReply(409, """{"error":"passerelle non démarrée"}""")
+        path == "/api/activation" && method == "GET" -> { ActivationCenter.init(this); ApiReply(200, "{\"required\":${BuildConfig.REQUIRE_ACTIVATION},\"locked\":${ActivationCenter.locked()},\"label\":${ReceiverServer.q(ActivationCenter.label())},\"code\":${ReceiverServer.q(ActivationCenter.requestText().lineSequence().first().removePrefix("code="))},\"ownerChannel\":${ownerBt != null}}") }
         path == "/api/bluetooth" && method == "GET" -> bt?.let { ApiReply(200, it.stateJson(statuses["1-bt"])) }
         path == "/api/bluetooth/discoverable" && method == "POST" -> {
             if (bt?.hasPermission() == true) bt?.start()
