@@ -1,0 +1,421 @@
+{
+ "chapter": "gceol-physics-forces",
+ "lessons": [
+  {
+   "id": "gceol-physics-newton-laws",
+   "title": "Forces, weight and Newton's laws",
+   "minutes": 30,
+   "programRef": "GCE O Level Physics — Forces: weight, friction, Newton's laws, F = ma (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define force, mass and weight and distinguish them.",
+    "State Newton's three laws of motion.",
+    "Use F = ma and W = mg (g = 10 N/kg).",
+    "Find the resultant of forces along a line and describe friction."
+   ],
+   "prerequisites": [
+    "gceol-physics-acceleration-equations"
+   ],
+   "exercises": [
+    "gceol-physics-forces-e01",
+    "gceol-physics-forces-e02",
+    "gceol-physics-forces-e03",
+    "gceol-physics-forces-e04",
+    "gceol-physics-forces-e05",
+    "gceol-physics-forces-e06"
+   ],
+   "selfCheck": [
+    "gceol-physics-newton-laws-q1",
+    "gceol-physics-newton-laws-q2",
+    "gceol-physics-newton-laws-q3",
+    "gceol-physics-newton-laws-q4",
+    "gceol-physics-newton-laws-q5"
+   ],
+   "reviewNotes": [
+    "Weight on the Moon: g about 1.6 N/kg is a commonly quoted value; check with the textbook used. Terminal velocity is treated qualitatively only.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Force, mass and weight",
+     "md": "A **force** (unit **newton, N**) can change the speed, direction or shape of an object. **Mass** (kg) is the amount of matter and does not change with place. **Weight** is the pull of gravity on a mass: $W = mg$, with **g = 10 N/kg** here (9.8 N/kg more exactly). Weight is a force."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Newton's three laws",
+     "md": "1. **First law**: an object stays at rest or moves at constant velocity unless a resultant (net) force acts on it (inertia).\n2. **Second law**: resultant force = mass × acceleration, $F = ma$.\n3. **Third law**: if A pushes B, B pushes A with an equal and opposite force. The two forces act on **different** bodies."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Weight and mass are different: a 60 kg pupil has the same mass on the Moon but a smaller weight.\n- The two forces of the third law never cancel, because they act on different objects.\n- F in F = ma is the **resultant** force, not just the engine force: subtract friction first."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Friction",
+     "md": "**Friction** is the force that opposes motion between surfaces in contact. It produces heat and wear, but we need it to walk and to brake. It is reduced by lubrication (oil, grease) and wheels, and increased by rough surfaces (tyre treads)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 110,
+        "w": 140,
+        "h": 45,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "circle",
+        "cx": 155,
+        "cy": 165,
+        "r": 15,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "grey"
+       },
+       {
+        "t": "circle",
+        "cx": 225,
+        "cy": 165,
+        "r": 15,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "grey"
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 182,
+        "x2": 360,
+        "y2": 182,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 262,
+        "y1": 132,
+        "x2": 340,
+        "y2": 132,
+        "color": "red",
+        "width": 4,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 325,
+        "y": 112,
+        "text": "3000 N",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 118,
+        "y1": 132,
+        "x2": 60,
+        "y2": 132,
+        "color": "blue",
+        "width": 4,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 75,
+        "y": 112,
+        "text": "600 N",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 90,
+        "text": "car",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Forces on an accelerating car: engine force 3000 N forwards, friction 600 N backwards.",
+     "alt": "A car with a long red arrow forwards labelled 3000 N and a shorter blue arrow backwards labelled 600 N."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — resultant force",
+     "statement": "A car of mass 1200 kg is pushed forward by an engine force of 3000 N while friction and air resistance total 600 N. Find its acceleration.",
+     "steps": [
+      "Resultant force = 3000 − 600 = 2400 N forwards.",
+      "a = F ÷ m = 2400 ÷ 1200 = 2 m/s²."
+     ],
+     "answer": "2 m/s²"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — sack lifted by a rope",
+     "statement": "A 50 kg sack of cassava is pulled upwards by a rope with an acceleration of 2 m/s² (g = 10 N/kg). Find the tension in the rope.",
+     "steps": [
+      "Weight = mg = 50 × 10 = 500 N downwards.",
+      "Resultant upward force = ma = 50 × 2 = 100 N, so T − 500 = 100.",
+      "T = 600 N."
+     ],
+     "answer": "T = 600 N"
+    }
+   ],
+   "chapter": "gceol-physics-forces"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-physics-forces-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-physics-newton-laws",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the weight of an 8 kg box (g = 10 N/kg).",
+   "answer": 80,
+   "tolerance": 0,
+   "unit": "N",
+   "explanation": "W = mg = 8 × 10 = 80 N.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-forces"
+  },
+  {
+   "id": "gceol-physics-forces-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-physics-newton-laws",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A book rests on a table. Which force is the third-law pair of the book's weight (pull of Earth on the book)?",
+   "choices": [
+    "The friction of the table",
+    "The pull of the book on the Earth",
+    "The upward push of the table on the book",
+    "The mass of the book"
+   ],
+   "answer": 1,
+   "explanation": "The pair of 'Earth pulls book' is 'book pulls Earth', acting on a different body. The table's push is a different force (it balances the weight).",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-forces"
+  },
+  {
+   "id": "gceol-physics-forces-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-physics-newton-laws",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A force of 1500 N gives a body an acceleration of 3 m/s². Find its mass.",
+   "answer": 500,
+   "tolerance": 0,
+   "unit": "kg",
+   "explanation": "m = F ÷ a = 1500 ÷ 3 = 500 kg.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-forces"
+  },
+  {
+   "id": "gceol-physics-forces-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-newton-laws",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Forces of 100 N to the right and 40 N to the left act on a 20 kg trolley. Find its acceleration.",
+   "answer": 3.0,
+   "tolerance": 0,
+   "unit": "m/s²",
+   "explanation": "Resultant = 100 − 40 = 60 N, a = 60 ÷ 20 = 3 m/s².",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-forces"
+  },
+  {
+   "id": "gceol-physics-forces-e05",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-newton-laws",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An astronaut's mass is smaller on the Moon than on Earth.",
+   "answer": false,
+   "explanation": "Mass is the amount of matter and does not change; only the weight is smaller (g is smaller on the Moon).",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-physics-forces"
+  },
+  {
+   "id": "gceol-physics-forces-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-physics-newton-laws",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A car of mass 800 kg starts from rest. The engine force is 2200 N and the total resistance is 600 N.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the resultant force.",
+     "answer": 1600,
+     "tolerance": 0,
+     "explanation": "2200 − 600 = 1600 N.",
+     "unit": "N",
+     "id": "gceol-physics-forces-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the acceleration.",
+     "answer": 2.0,
+     "tolerance": 0,
+     "explanation": "a = 1600 ÷ 800 = 2 m/s².",
+     "unit": "m/s²",
+     "id": "gceol-physics-forces-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find its speed after 5 s.",
+     "answer": 10.0,
+     "tolerance": 0,
+     "explanation": "v = at = 2 × 5 = 10 m/s.",
+     "unit": "m/s",
+     "id": "gceol-physics-forces-e06-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the distance travelled in 5 s.",
+     "answer": 25.0,
+     "tolerance": 0,
+     "explanation": "s = ½at² = ½ × 2 × 25 = 25 m.",
+     "unit": "m",
+     "id": "gceol-physics-forces-e06-d"
+    }
+   ],
+   "chapter": "gceol-physics-forces"
+  },
+  {
+   "id": "gceol-physics-newton-laws-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-newton-laws",
+   "prompt": "The unit of force is the",
+   "choices": [
+    "joule",
+    "watt",
+    "pascal",
+    "newton"
+   ],
+   "answer": 3,
+   "explanation": "Force is measured in newtons (N).",
+   "chapter": "gceol-physics-forces"
+  },
+  {
+   "id": "gceol-physics-newton-laws-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-newton-laws",
+   "prompt": "A mass of 5 kg has a weight of (g = 10 N/kg)",
+   "choices": [
+    "0.5 N",
+    "50 N",
+    "5 N",
+    "15 N"
+   ],
+   "answer": 1,
+   "explanation": "W = mg = 5 × 10 = 50 N.",
+   "chapter": "gceol-physics-forces"
+  },
+  {
+   "id": "gceol-physics-newton-laws-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-newton-laws",
+   "prompt": "A body moves at constant velocity. The resultant force on it is",
+   "choices": [
+    "equal to its mass",
+    "equal to its weight",
+    "zero",
+    "forwards"
+   ],
+   "answer": 2,
+   "explanation": "By Newton's first law, constant velocity means zero resultant force.",
+   "chapter": "gceol-physics-forces"
+  },
+  {
+   "id": "gceol-physics-newton-laws-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-newton-laws",
+   "prompt": "Newton's second law is",
+   "choices": [
+    "F = ma",
+    "F = a/m",
+    "F = mv²",
+    "F = m/a"
+   ],
+   "answer": 0,
+   "explanation": "Resultant force = mass × acceleration.",
+   "chapter": "gceol-physics-forces"
+  },
+  {
+   "id": "gceol-physics-newton-laws-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-newton-laws",
+   "prompt": "Friction",
+   "choices": [
+    "opposes the motion between surfaces",
+    "always helps motion",
+    "is the same as weight",
+    "does not exist on rough surfaces"
+   ],
+   "answer": 0,
+   "explanation": "Friction acts opposite to the (tendency of) motion.",
+   "chapter": "gceol-physics-forces"
+  },
+  {
+   "id": "gceol-physics-forces-m01",
+   "kind": "mcq",
+   "tier": "examen",
+   "lesson": "gceol-physics-newton-laws",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A body of mass 4 kg has a weight of (g = 10 N/kg)",
+   "choices": [
+    "14 N",
+    "40 N",
+    "4 N",
+    "0.4 N"
+   ],
+   "answer": 1,
+   "explanation": "W = mg = 4 × 10 = 40 N.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-forces"
+  }
+ ]
+}

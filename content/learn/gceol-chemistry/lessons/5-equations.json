@@ -1,0 +1,399 @@
+{
+ "chapter": "gceol-chemistry-equations",
+ "lessons": [
+  {
+   "id": "gceol-chemistry-formulae-equations",
+   "title": "Writing formulae and balancing equations",
+   "minutes": 30,
+   "programRef": "GCE O Level Chemistry — Formulae of compounds, word and balanced symbol equations, state symbols, ionic equations (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Write the formulae of compounds from the charges of ions.",
+    "Write and balance symbol equations including state symbols.",
+    "Write simple ionic equations for precipitation.",
+    "Check that atoms and charges balance."
+   ],
+   "prerequisites": [
+    "gceol-chemistry-ionic-covalent"
+   ],
+   "exercises": [
+    "gceol-chemistry-equations-e01",
+    "gceol-chemistry-equations-e02",
+    "gceol-chemistry-equations-e03",
+    "gceol-chemistry-equations-e04",
+    "gceol-chemistry-equations-e05",
+    "gceol-chemistry-equations-e06"
+   ],
+   "selfCheck": [
+    "gceol-chemistry-formulae-equations-q1",
+    "gceol-chemistry-formulae-equations-q2",
+    "gceol-chemistry-formulae-equations-q3",
+    "gceol-chemistry-formulae-equations-q4",
+    "gceol-chemistry-formulae-equations-q5"
+   ],
+   "reviewNotes": [
+    "The list of ion charges is the standard school set; iron has two common ions (Fe²⁺ and Fe³⁺).",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Common ions",
+     "md": "**1+**: H⁺, Na⁺, K⁺, Ag⁺, NH₄⁺. **2+**: Mg²⁺, Ca²⁺, Zn²⁺, Cu²⁺, Fe²⁺, Pb²⁺. **3+**: Al³⁺, Fe³⁺.\n**1−**: Cl⁻, Br⁻, I⁻, OH⁻, NO₃⁻. **2−**: O²⁻, S²⁻, SO₄²⁻, CO₃²⁻.\n\nCompound formula: make the total positive charge equal the total negative charge (use brackets for groups): Al³⁺ + O²⁻ → **Al₂O₃**; Ca²⁺ + OH⁻ → **Ca(OH)₂**; NH₄⁺ + SO₄²⁻ → **(NH₄)₂SO₄**."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Balancing an equation",
+     "md": "1. Write the correct formulae (never change a formula to balance).\n2. Count atoms of each element on both sides.\n3. Put **coefficients** (numbers in front) to balance, one element at a time; leave hydrogen and oxygen until last.\n4. Add **state symbols**: (s) solid, (l) liquid, (g) gas, (aq) in water solution.\n\nExample: Mg(s) + 2HCl(aq) → MgCl₂(aq) + H₂(g)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Ionic equations",
+     "md": "A precipitation reaction can be written showing only the ions that react. Silver nitrate + sodium chloride → silver chloride + sodium nitrate. Full: AgNO₃(aq) + NaCl(aq) → AgCl(s) + NaNO₃(aq). Ionic: **Ag⁺(aq) + Cl⁻(aq) → AgCl(s)**. Na⁺ and NO₃⁻ are **spectator ions** (unchanged). Charges must balance as well as atoms."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- Subscripts (small numbers) belong to the formula; coefficients are the only thing you change.\n- CO₂ ≠ CO₂² : never write charges on molecules.\n- Always check both sides at the end by counting every element."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 200,
+      "items": [
+       {
+        "t": "text",
+        "x": 200,
+        "y": 50,
+        "text": "4Fe + 3O₂ → 2Fe₂O₃",
+        "size": 20,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 100,
+        "text": "Left side",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 130,
+        "text": "Fe: 4",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 160,
+        "text": "O: 3 × 2 = 6",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 100,
+        "text": "Right side",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 130,
+        "text": "Fe: 2 × 2 = 4",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 160,
+        "text": "O: 2 × 3 = 6",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 90,
+        "x2": 200,
+        "y2": 175,
+        "color": "grey",
+        "width": 2,
+        "dash": true
+       }
+      ]
+     },
+     "caption": "Checking a balanced equation: iron and oxygen atoms are equal on both sides.",
+     "alt": "The equation 4Fe + 3O2 → 2Fe2O3 with atom counts for the left and right sides showing 4 iron and 6 oxygen on each side."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — writing a formula",
+     "statement": "Write the formula of (a) aluminium oxide and (b) calcium nitrate.",
+     "steps": [
+      "(a) Al³⁺ and O²⁻: lowest common multiple of 3 and 2 is 6: two Al³⁺ (6+) and three O²⁻ (6−) → Al₂O₃.",
+      "(b) Ca²⁺ and NO₃⁻: one Ca²⁺ needs two NO₃⁻ → Ca(NO₃)₂ (brackets round NO₃)."
+     ],
+     "answer": "Al₂O₃; Ca(NO₃)₂"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — balancing",
+     "statement": "Balance: Fe + O₂ → Fe₂O₃.",
+     "steps": [
+      "Fe₂O₃ has 2 Fe and 3 O. Make O even: 2Fe₂O₃ (4 Fe, 6 O) and 3O₂ (6 O).",
+      "Then 4 Fe on the left: 4Fe + 3O₂ → 2Fe₂O₃. Check: Fe 4 = 4; O 6 = 6."
+     ],
+     "answer": "4Fe + 3O₂ → 2Fe₂O₃"
+    }
+   ],
+   "chapter": "gceol-chemistry-equations"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-chemistry-equations-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-formulae-equations",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The formula of magnesium nitrate is",
+   "choices": [
+    "MgNO₃",
+    "Mg(NO₃)₂",
+    "Mg₂NO₃",
+    "Mg(NO₃)"
+   ],
+   "answer": 1,
+   "explanation": "Mg²⁺ with two NO₃⁻.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-equations"
+  },
+  {
+   "id": "gceol-chemistry-equations-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-chemistry-formulae-equations",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In the balanced equation 2H₂ + O₂ → 2H₂O, how many hydrogen atoms are there in total on the left?",
+   "answer": 4,
+   "tolerance": 0,
+   "explanation": "2 × 2 = 4.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-equations"
+  },
+  {
+   "id": "gceol-chemistry-equations-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-formulae-equations",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which equation is balanced?",
+   "choices": [
+    "Na + 2H₂O → NaOH + H₂",
+    "2Na + H₂O → 2NaOH + H₂",
+    "2Na + 2H₂O → 2NaOH + H₂",
+    "Na + H₂O → NaOH + H₂"
+   ],
+   "answer": 2,
+   "explanation": "Na 2 = 2; H 4 = 4; O 2 = 2.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-equations"
+  },
+  {
+   "id": "gceol-chemistry-equations-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-formulae-equations",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Balance: Al + O₂ → Al₂O₃. The coefficient of O₂ is",
+   "choices": [
+    "2",
+    "3",
+    "4",
+    "1"
+   ],
+   "answer": 1,
+   "explanation": "4Al + 3O₂ → 2Al₂O₃.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-chemistry-equations"
+  },
+  {
+   "id": "gceol-chemistry-equations-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-formulae-equations",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Write the ionic equation, with state symbols, for the reaction of aqueous barium chloride with aqueous sodium sulphate, which gives a white precipitate of barium sulphate.",
+   "model": "Ba²⁺(aq) + SO₄²⁻(aq) → BaSO₄(s)",
+   "rubric": "1 mark: correct species; 1 mark: state symbols; 1 mark: balanced charge/atoms.",
+   "explanation": "Ba²⁺(aq) + SO₄²⁻(aq) → BaSO₄(s)",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-chemistry-equations"
+  },
+  {
+   "id": "gceol-chemistry-equations-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-formulae-equations",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Methane burns in air: CH₄ + O₂ → CO₂ + H₂O.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Balanced: CH₄ + ?O₂ → CO₂ + 2H₂O. What is the coefficient of O₂?",
+     "answer": 2,
+     "tolerance": 0,
+     "explanation": "O on the right: 2 (from CO₂) + 2 (from 2H₂O) = 4, so 2O₂ on the left.",
+     "id": "gceol-chemistry-equations-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many oxygen atoms are on the left of the balanced equation?",
+     "answer": 4,
+     "tolerance": 0,
+     "explanation": "2 × 2 = 4.",
+     "id": "gceol-chemistry-equations-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What does (g) mean in a state symbol?",
+     "choices": [
+      "gas",
+      "liquid",
+      "in solution",
+      "solid"
+     ],
+     "answer": 0,
+     "explanation": "(g) means gas.",
+     "id": "gceol-chemistry-equations-e06-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Write the balanced equation with state symbols.",
+     "model": "CH₄(g) + 2O₂(g) → CO₂(g) + 2H₂O(l)",
+     "rubric": "1 mark balanced; 1 mark state symbols.",
+     "explanation": "CH₄(g) + 2O₂(g) → CO₂(g) + 2H₂O(l)",
+     "id": "gceol-chemistry-equations-e06-d"
+    }
+   ],
+   "chapter": "gceol-chemistry-equations"
+  },
+  {
+   "id": "gceol-chemistry-formulae-equations-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-formulae-equations",
+   "prompt": "To balance an equation you may change",
+   "choices": [
+    "the subscripts",
+    "the elements",
+    "the charges",
+    "the coefficients"
+   ],
+   "answer": 3,
+   "explanation": "Subscripts define the compound.",
+   "chapter": "gceol-chemistry-equations"
+  },
+  {
+   "id": "gceol-chemistry-formulae-equations-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-formulae-equations",
+   "prompt": "The formula of aluminium chloride is",
+   "choices": [
+    "AlCl₃",
+    "Al₃Cl",
+    "AlCl",
+    "AlCl₂"
+   ],
+   "answer": 0,
+   "explanation": "Al³⁺ needs three Cl⁻.",
+   "chapter": "gceol-chemistry-equations"
+  },
+  {
+   "id": "gceol-chemistry-formulae-equations-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-formulae-equations",
+   "prompt": "(aq) means",
+   "choices": [
+    "solid",
+    "gas",
+    "dissolved in water",
+    "liquid"
+   ],
+   "answer": 2,
+   "explanation": "Aqueous solution.",
+   "chapter": "gceol-chemistry-equations"
+  },
+  {
+   "id": "gceol-chemistry-formulae-equations-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-formulae-equations",
+   "prompt": "Spectator ions are",
+   "choices": [
+    "formed as gas",
+    "the only ions present",
+    "unchanged in a reaction",
+    "precipitated"
+   ],
+   "answer": 2,
+   "explanation": "They do not take part.",
+   "chapter": "gceol-chemistry-equations"
+  },
+  {
+   "id": "gceol-chemistry-formulae-equations-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-formulae-equations",
+   "prompt": "Formula of calcium hydroxide",
+   "choices": [
+    "CaOH",
+    "Ca₂OH",
+    "CaO₂H",
+    "Ca(OH)₂"
+   ],
+   "answer": 3,
+   "explanation": "One Ca²⁺ and two OH⁻.",
+   "chapter": "gceol-chemistry-equations"
+  }
+ ]
+}

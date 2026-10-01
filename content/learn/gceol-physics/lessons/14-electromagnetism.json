@@ -1,0 +1,929 @@
+{
+ "chapter": "gceol-physics-electromagnetism",
+ "lessons": [
+  {
+   "id": "gceol-physics-electromagnets-motors",
+   "title": "Magnetic effect of a current and the motor effect",
+   "minutes": 30,
+   "programRef": "GCE O Level Physics — Electromagnetism: magnetic effect of current, motor effect, induction, transformer (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe the magnetic field of a straight wire and a solenoid.",
+    "State the factors that affect the strength of an electromagnet.",
+    "Use Fleming's left-hand rule for the force on a current-carrying wire.",
+    "Describe a simple d.c. motor and uses of electromagnets."
+   ],
+   "prerequisites": [
+    "gceol-physics-magnets-fields",
+    "gceol-physics-current-pd-resistance"
+   ],
+   "exercises": [
+    "gceol-physics-electromagnetism-e01",
+    "gceol-physics-electromagnetism-e02",
+    "gceol-physics-electromagnetism-e03",
+    "gceol-physics-electromagnetism-e04",
+    "gceol-physics-electromagnetism-e05",
+    "gceol-physics-electromagnetism-e06"
+   ],
+   "selfCheck": [
+    "gceol-physics-electromagnets-motors-q1",
+    "gceol-physics-electromagnets-motors-q2",
+    "gceol-physics-electromagnets-motors-q3",
+    "gceol-physics-electromagnets-motors-q4",
+    "gceol-physics-electromagnets-motors-q5"
+   ],
+   "reviewNotes": [
+    "Rule conventions (right-hand grip rule, Fleming's left-hand rule) are standard but the hand version used in school should match the textbook.",
+    "Details of the commutator and split rings are summarised.",
+    "Which end of a solenoid is N depends on the winding direction; the figure does not show it, so the ends are only labelled as poles.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Magnetic field of a current",
+     "md": "A current in a wire produces a **magnetic field**: circles round a straight wire (**right-hand grip rule**: thumb along the current, fingers curl along the field). A **solenoid** (coil) has a field like a bar magnet. A coil with a **soft iron core** is an **electromagnet**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Electromagnet strength and uses",
+     "md": "The field is stronger with **more turns**, a **bigger current** and a **soft iron core**. Reversing the current reverses the poles. It can be switched on and off. Uses: **electric bell**, **relay**, **scrap-metal crane**, loudspeaker."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Motor effect",
+     "md": "A wire carrying a current in a magnetic field feels a **force**. **Fleming's left-hand rule**: first finger = **F**ield (N to S), second finger = **C**urrent (+ to −), thumb = **T**hrust (motion). The force is bigger with a larger current, a stronger field and a longer wire in the field. Reversing the current or the field reverses the force."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- Use the **left** hand for motors and the **right** hand for the field-direction grip rule.\n- The force is zero if the wire is parallel to the field.\n- In a d.c. motor the commutator reverses the current every half-turn so that the coil keeps turning in the same direction."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 150,
+        "x2": 280,
+        "y2": 150,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 110,
+        "x2": 130,
+        "y2": 190,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 110,
+        "x2": 150,
+        "y2": 190,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 170,
+        "y1": 110,
+        "x2": 170,
+        "y2": 190,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 190,
+        "y1": 110,
+        "x2": 190,
+        "y2": 190,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 110,
+        "x2": 210,
+        "y2": 190,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 230,
+        "y1": 110,
+        "x2": 230,
+        "y2": 190,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 110,
+        "x2": 250,
+        "y2": 190,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 210,
+        "text": "coil",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 150,
+        "x2": 120,
+        "y2": 150,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 75,
+        "y": 135,
+        "text": "current",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 150,
+        "text": "pole",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 90,
+        "text": "pole",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A solenoid (coil) carrying a current acts like a bar magnet: one end is a north pole and the other a south pole, depending on the direction of the current.",
+     "alt": "A horizontal coil drawn as vertical turns on a line, a current arrow entering from the left and the two ends labelled as poles."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — strengthening an electromagnet",
+     "statement": "A pupil makes an electromagnet with a nail, wire and a cell. Give three ways to make it stronger.",
+     "steps": [
+      "Increase the number of turns of wire round the nail.",
+      "Increase the current (more cells, or lower resistance).",
+      "Keep a soft iron core (a thick iron nail)."
+     ],
+     "answer": "More turns, more current, soft iron core"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — direction of force",
+     "statement": "A straight wire carries a current towards you (out of the page). The magnetic field is from left to right (N on the left, S on the right). State the direction of the force on the wire.",
+     "steps": [
+      "Left hand: first finger points right (field N to S); second finger points towards you (current).",
+      "The thumb, perpendicular to both, then points up the page: the wire is pushed upwards."
+     ],
+     "answer": "The force acts upwards"
+    }
+   ],
+   "chapter": "gceol-physics-electromagnetism"
+  },
+  {
+   "id": "gceol-physics-induction-transformers",
+   "title": "Electromagnetic induction and transformers",
+   "minutes": 30,
+   "programRef": "GCE O Level Physics — Electromagnetism: magnetic effect of current, motor effect, induction, transformer (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "State Faraday's observation: an e.m.f. is induced when the magnetic field through a coil changes.",
+    "Describe a simple a.c. generator.",
+    "Use Vp/Vs = Np/Ns and power balance for an ideal transformer.",
+    "Explain why electricity is transmitted at high voltage."
+   ],
+   "prerequisites": [
+    "gceol-physics-electromagnets-motors"
+   ],
+   "exercises": [
+    "gceol-physics-electromagnetism-e07",
+    "gceol-physics-electromagnetism-e08",
+    "gceol-physics-electromagnetism-e09",
+    "gceol-physics-electromagnetism-e10",
+    "gceol-physics-electromagnetism-e11",
+    "gceol-physics-electromagnetism-e12"
+   ],
+   "selfCheck": [
+    "gceol-physics-induction-transformers-q1",
+    "gceol-physics-induction-transformers-q2",
+    "gceol-physics-induction-transformers-q3",
+    "gceol-physics-induction-transformers-q4",
+    "gceol-physics-induction-transformers-q5"
+   ],
+   "reviewNotes": [
+    "Lenz's law is stated qualitatively; direction rules (Fleming's right-hand rule) depend on the textbook.",
+    "Cameroon's grid voltages are not quoted; only the general principle is given.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Electromagnetic induction",
+     "md": "When a magnet moves into or out of a coil (or the magnetic field through the coil changes), an **e.m.f. is induced** and a current flows in a complete circuit. The e.m.f. is larger with a **faster motion**, a **stronger magnet** and **more turns**. The direction opposes the change that causes it (**Lenz's law**). No motion, no e.m.f."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Generator",
+     "md": "A **generator** turns a coil in a magnetic field (or a magnet near a coil) so that an alternating e.m.f. is induced: **mechanical energy → electrical energy**. Dynamos on bicycles and hydroelectric turbines work on this principle. The output is **a.c.** (alternating): the current reverses direction regularly."
+    },
+    {
+     "type": "formula",
+     "tex": "\\frac{V_s}{V_p} = \\frac{N_s}{N_p}",
+     "caption": "ideal transformer: V_p I_p = V_s I_s"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Transformer",
+     "md": "Two coils on a soft-iron core. An **alternating** current in the **primary** coil makes a changing magnetic field that induces an e.m.f. in the **secondary** coil. A **step-up** transformer has more turns on the secondary (higher voltage); a **step-down** has fewer. It works only with a.c. and for an ideal transformer, input power = output power."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- A transformer does not work with steady d.c.: the field must keep changing.\n- A step-up transformer gives a higher voltage but a **smaller** current.\n- Power lines use high voltage so that the current is small and the heat loss $I^2R$ in the cables is small."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 50,
+        "w": 160,
+        "h": 140,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 80,
+        "w": 100,
+        "h": 80,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 70,
+        "x2": 150,
+        "y2": 70,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 88,
+        "x2": 150,
+        "y2": 88,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 106,
+        "x2": 150,
+        "y2": 106,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 124,
+        "x2": 150,
+        "y2": 124,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 142,
+        "x2": 150,
+        "y2": 142,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 160,
+        "x2": 150,
+        "y2": 160,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 70,
+        "x2": 270,
+        "y2": 70,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 88,
+        "x2": 270,
+        "y2": 88,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 106,
+        "x2": 270,
+        "y2": 106,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 125,
+        "text": "primary",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 335,
+        "y": 125,
+        "text": "secondary",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 30,
+        "text": "soft iron core",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 80,
+        "x2": 120,
+        "y2": 80,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 170,
+        "x2": 120,
+        "y2": 170,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 280,
+        "y1": 80,
+        "x2": 360,
+        "y2": 80,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 280,
+        "y1": 170,
+        "x2": 360,
+        "y2": 170,
+        "color": "ink",
+        "width": 2
+       }
+      ]
+     },
+     "caption": "A transformer: primary and secondary coils on a soft-iron core.",
+     "alt": "A rectangular iron core with many turns on the left primary side and fewer turns on the right secondary side, with wires attached."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — turns ratio",
+     "statement": "A transformer reduces 220 V to 12 V. The primary has 1100 turns. How many turns does the secondary have?",
+     "steps": [
+      "Vs/Vp = Ns/Np, so Ns = Np × Vs ÷ Vp.",
+      "Ns = 1100 × 12 ÷ 220 = 60 turns (a step-down transformer)."
+     ],
+     "answer": "60 turns"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — primary current",
+     "statement": "The 12 V secondary of an ideal transformer supplies a 2 A load. The primary is connected to 220 V. Find the primary current.",
+     "steps": [
+      "Output power = Vs Is = 12 × 2 = 24 W.",
+      "Ideal: input power = 24 W, so Ip = 24 ÷ 220 = 0.11 A."
+     ],
+     "answer": "0.11 A"
+    }
+   ],
+   "chapter": "gceol-physics-electromagnetism"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-physics-electromagnetism-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-physics-electromagnets-motors",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which of these makes an electromagnet stronger?",
+   "choices": [
+    "a copper core",
+    "a smaller current",
+    "more turns of wire",
+    "a plastic core"
+   ],
+   "answer": 2,
+   "explanation": "More turns and more current increase the field.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-electromagnetism"
+  },
+  {
+   "id": "gceol-physics-electromagnetism-e02",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-physics-electromagnets-motors",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The force on a current-carrying wire in a magnetic field is zero if the wire is parallel to the field.",
+   "answer": true,
+   "explanation": "The force acts only when the current has a component across the field.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-electromagnetism"
+  },
+  {
+   "id": "gceol-physics-electromagnetism-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-physics-electromagnets-motors",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which part of an electric bell is the electromagnet used for?",
+   "choices": [
+    "Holding the batteries",
+    "Cooling the bell",
+    "Pulling the hammer against the gong",
+    "Making the sound inside the coil"
+   ],
+   "answer": 2,
+   "explanation": "The magnet attracts the iron armature so the hammer strikes the gong.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-electromagnetism"
+  },
+  {
+   "id": "gceol-physics-electromagnetism-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-electromagnets-motors",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Soft iron, not steel, is used as the core of a relay because it",
+   "choices": [
+    "keeps its magnetism for ever",
+    "loses its magnetism when the current is switched off",
+    "is cheaper than copper",
+    "is stronger"
+   ],
+   "answer": 1,
+   "explanation": "The relay must switch off quickly.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-electromagnetism"
+  },
+  {
+   "id": "gceol-physics-electromagnetism-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-electromagnets-motors",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "State three ways to increase the speed of a simple d.c. motor.",
+   "model": "Increase the current, use a stronger magnet (magnetic field), or increase the number of turns on the coil.",
+   "rubric": "1 mark each; any three.",
+   "explanation": "Increase the current, use a stronger magnet (magnetic field), or increase the number of turns on the coil.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-physics-electromagnetism"
+  },
+  {
+   "id": "gceol-physics-electromagnetism-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-physics-electromagnets-motors",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A simple d.c. motor has a rectangular coil between two permanent magnets.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What rule gives the direction of the force on one side of the coil?",
+     "choices": [
+      "Right-hand grip rule",
+      "Ohm's law",
+      "Snell's law",
+      "Fleming's left-hand rule"
+     ],
+     "answer": 3,
+     "explanation": "Left-hand rule gives the force on a current in a magnetic field.",
+     "id": "gceol-physics-electromagnetism-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What is the purpose of the commutator?",
+     "choices": [
+      "To reverse the current in the coil every half-turn",
+      "To strengthen the magnets",
+      "To store charge",
+      "To reduce friction"
+     ],
+     "answer": 0,
+     "explanation": "Without it the coil would flip back and stop.",
+     "id": "gceol-physics-electromagnetism-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "What happens to the direction of rotation if both the current and the magnetic field are reversed?",
+     "model": "The rotation stays the same, because reversing both reverses the force twice.",
+     "rubric": "1 mark: same direction; 1 mark: two reversals cancel.",
+     "explanation": "The rotation stays the same, because reversing both reverses the force twice.",
+     "id": "gceol-physics-electromagnetism-e06-c"
+    }
+   ],
+   "chapter": "gceol-physics-electromagnetism"
+  },
+  {
+   "id": "gceol-physics-electromagnets-motors-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-electromagnets-motors",
+   "prompt": "A coil with an iron core carrying current is an",
+   "choices": [
+    "permanent magnet",
+    "resistor",
+    "electromagnet",
+    "generator"
+   ],
+   "answer": 2,
+   "explanation": "Definition.",
+   "chapter": "gceol-physics-electromagnetism"
+  },
+  {
+   "id": "gceol-physics-electromagnets-motors-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-electromagnets-motors",
+   "prompt": "Fleming's left-hand rule gives the direction of",
+   "choices": [
+    "induced current",
+    "the force on a current in a field",
+    "frequency",
+    "voltage"
+   ],
+   "answer": 1,
+   "explanation": "Motor rule.",
+   "chapter": "gceol-physics-electromagnetism"
+  },
+  {
+   "id": "gceol-physics-electromagnets-motors-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-electromagnets-motors",
+   "prompt": "Increasing the number of turns of an electromagnet",
+   "choices": [
+    "has no effect",
+    "increases its strength",
+    "reverses its poles",
+    "decreases it"
+   ],
+   "answer": 1,
+   "explanation": "More turns, stronger field.",
+   "chapter": "gceol-physics-electromagnetism"
+  },
+  {
+   "id": "gceol-physics-electromagnets-motors-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-electromagnets-motors",
+   "prompt": "A relay uses a",
+   "choices": [
+    "lamp only",
+    "transformer",
+    "large current to switch a small one",
+    "small current to switch a large current"
+   ],
+   "answer": 3,
+   "explanation": "An electromagnet closes the second circuit.",
+   "chapter": "gceol-physics-electromagnetism"
+  },
+  {
+   "id": "gceol-physics-electromagnets-motors-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-electromagnets-motors",
+   "prompt": "A d.c. motor transfers",
+   "choices": [
+    "heat to light",
+    "kinetic to electrical",
+    "chemical to sound",
+    "electrical energy to kinetic energy"
+   ],
+   "answer": 3,
+   "explanation": "Electrical to mechanical.",
+   "chapter": "gceol-physics-electromagnetism"
+  },
+  {
+   "id": "gceol-physics-electromagnetism-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-physics-induction-transformers",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A step-up transformer has 100 primary turns and 500 secondary turns and a 20 V primary. Find the secondary voltage.",
+   "answer": 100,
+   "tolerance": 0,
+   "unit": "V",
+   "explanation": "Vs = 20 × 500 ÷ 100 = 100 V.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-electromagnetism"
+  },
+  {
+   "id": "gceol-physics-electromagnetism-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-physics-induction-transformers",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A transformer will not work with",
+   "choices": [
+    "alternating current",
+    "a soft iron core",
+    "a primary coil",
+    "steady direct current"
+   ],
+   "answer": 3,
+   "explanation": "Without a changing field there is no induced e.m.f.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-electromagnetism"
+  },
+  {
+   "id": "gceol-physics-electromagnetism-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-physics-induction-transformers",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A step-up transformer increases the power available.",
+   "answer": false,
+   "explanation": "Power is not increased; the voltage rises and the current falls (ideal case: equal power).",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-electromagnetism"
+  },
+  {
+   "id": "gceol-physics-electromagnetism-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-induction-transformers",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A transformer has 1000 primary turns and 50 secondary turns, with a primary voltage of 240 V. Find the secondary voltage in volts.",
+   "answer": 12.0,
+   "tolerance": 0.01,
+   "unit": "V",
+   "explanation": "Vs = 240 × 50 ÷ 1000 = 12 V.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-electromagnetism"
+  },
+  {
+   "id": "gceol-physics-electromagnetism-e11",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-induction-transformers",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Why is electricity sent over long distances at very high voltage?",
+   "choices": [
+    "It is safer to touch",
+    "A smaller current means less heat loss in the cables",
+    "The cables are thinner",
+    "It makes current constant"
+   ],
+   "answer": 1,
+   "explanation": "For the same power P = VI, a larger V gives a smaller I, so I²R loss is smaller.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-physics-electromagnetism"
+  },
+  {
+   "id": "gceol-physics-electromagnetism-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-physics-induction-transformers",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An ideal transformer has 1200 turns on the primary and 60 turns on the secondary. The primary is connected to 240 V a.c. and the secondary supplies a 60 W lamp.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the secondary voltage.",
+     "answer": 12.0,
+     "tolerance": 0,
+     "explanation": "Vs = 240 × 60 ÷ 1200 = 12 V.",
+     "unit": "V",
+     "id": "gceol-physics-electromagnetism-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the secondary current.",
+     "answer": 5.0,
+     "tolerance": 0,
+     "explanation": "I = P ÷ V = 60 ÷ 12 = 5 A.",
+     "unit": "A",
+     "id": "gceol-physics-electromagnetism-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the primary current.",
+     "answer": 0.25,
+     "tolerance": 0,
+     "explanation": "Pin = Pout = 60 W, so Ip = 60 ÷ 240 = 0.25 A.",
+     "unit": "A",
+     "id": "gceol-physics-electromagnetism-e12-c"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Is the transformer step-up or step-down?",
+     "choices": [
+      "neither",
+      "it depends on the current",
+      "step-down",
+      "step-up"
+     ],
+     "answer": 2,
+     "explanation": "The secondary has fewer turns and a smaller voltage.",
+     "id": "gceol-physics-electromagnetism-e12-d"
+    }
+   ],
+   "chapter": "gceol-physics-electromagnetism"
+  },
+  {
+   "id": "gceol-physics-induction-transformers-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-induction-transformers",
+   "prompt": "A voltage is induced in a coil when the magnetic field through it",
+   "choices": [
+    "changes",
+    "is absent",
+    "is steady",
+    "is zero for ever"
+   ],
+   "answer": 0,
+   "explanation": "Changing field, induced e.m.f.",
+   "chapter": "gceol-physics-electromagnetism"
+  },
+  {
+   "id": "gceol-physics-induction-transformers-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-induction-transformers",
+   "prompt": "A generator converts",
+   "choices": [
+    "heat to sound",
+    "electrical to mechanical",
+    "mechanical energy to electrical energy",
+    "light to heat"
+   ],
+   "answer": 2,
+   "explanation": "Opposite of a motor.",
+   "chapter": "gceol-physics-electromagnetism"
+  },
+  {
+   "id": "gceol-physics-induction-transformers-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-induction-transformers",
+   "prompt": "A step-down transformer has",
+   "choices": [
+    "fewer turns on the secondary",
+    "no core",
+    "no primary",
+    "more turns on the secondary"
+   ],
+   "answer": 0,
+   "explanation": "Vs < Vp.",
+   "chapter": "gceol-physics-electromagnetism"
+  },
+  {
+   "id": "gceol-physics-induction-transformers-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-induction-transformers",
+   "prompt": "A transformer needs",
+   "choices": [
+    "no current",
+    "direct current only",
+    "a battery only",
+    "alternating current"
+   ],
+   "answer": 3,
+   "explanation": "To produce a changing field.",
+   "chapter": "gceol-physics-electromagnetism"
+  },
+  {
+   "id": "gceol-physics-induction-transformers-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-induction-transformers",
+   "prompt": "Power lines use high voltage to",
+   "choices": [
+    "increase current",
+    "increase cable heating",
+    "reduce power losses",
+    "reduce the frequency"
+   ],
+   "answer": 2,
+   "explanation": "Smaller current, smaller I²R loss.",
+   "chapter": "gceol-physics-electromagnetism"
+  }
+ ]
+}

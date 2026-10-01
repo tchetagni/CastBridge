@@ -1,0 +1,950 @@
+{
+ "chapter": "gceol-chemistry-mole",
+ "lessons": [
+  {
+   "id": "gceol-chemistry-moles-masses",
+   "title": "Relative masses, moles and formulae",
+   "minutes": 35,
+   "programRef": "GCE O Level Chemistry — Relative masses, the mole, reacting masses, gas volumes, concentration, titration (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Calculate relative formula mass Mr.",
+    "Convert between mass and moles with n = m/M.",
+    "Calculate percentage composition and the empirical formula.",
+    "Use the Avogadro constant to count particles."
+   ],
+   "prerequisites": [
+    "gceol-chemistry-formulae-equations"
+   ],
+   "exercises": [
+    "gceol-chemistry-mole-e01",
+    "gceol-chemistry-mole-e02",
+    "gceol-chemistry-mole-e03",
+    "gceol-chemistry-mole-e04",
+    "gceol-chemistry-mole-e05",
+    "gceol-chemistry-mole-e06"
+   ],
+   "selfCheck": [
+    "gceol-chemistry-moles-masses-q1",
+    "gceol-chemistry-moles-masses-q2",
+    "gceol-chemistry-moles-masses-q3",
+    "gceol-chemistry-moles-masses-q4",
+    "gceol-chemistry-moles-masses-q5"
+   ],
+   "reviewNotes": [
+    "Relative atomic masses used: H 1, C 12, N 14, O 16, Na 23, Mg 24, Al 27, S 32, Cl 35.5, K 39, Ca 40, Fe 56, Cu 64, Zn 65. The Avogadro constant is taken as 6.0 × 10²³ per mole (6.02 × 10²³ more exactly).",
+    "Check if the Board gives an Ar table in the exam (usually yes).",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "The mole",
+     "md": "One **mole** is the amount of substance that contains **6.0 × 10²³** particles (the Avogadro constant). The **molar mass M** (g/mol) of a substance is its Ar or Mr in grams. **Relative formula mass Mr** = sum of the Ar of all the atoms in the formula. Example: Mr(CaCO₃) = 40 + 12 + 3 × 16 = **100**."
+    },
+    {
+     "type": "formula",
+     "tex": "n = \\frac{m}{M}",
+     "caption": "n in mol, m in g, M in g/mol"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Percentage composition and empirical formula",
+     "md": "**% of an element** = (Ar × number of atoms ÷ Mr) × 100. **Empirical formula** (simplest whole-number ratio of atoms): (1) write the masses (or %); (2) divide each by Ar to get moles; (3) divide by the smallest number; (4) round to whole numbers (multiply if you get ×.5). The **molecular formula** = empirical formula × (Mr ÷ empirical mass)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- Use Ar of **atoms** for elements like O₂ only if they are atoms: Mr(O₂) = 32, not 16.\n- Brackets multiply: Mr(Ca(OH)₂) = 40 + 2 × (16 + 1) = 74.\n- Write units: mol, g, g/mol."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 180,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 80,
+        "w": 100,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 110,
+        "text": "mass (g)",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 80,
+        "w": 100,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 110,
+        "text": "moles (mol)",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 80,
+        "w": 100,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 110,
+        "text": "particles",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 95,
+        "x2": 150,
+        "y2": 95,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 115,
+        "x2": 120,
+        "y2": 115,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 95,
+        "x2": 280,
+        "y2": 95,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 280,
+        "y1": 115,
+        "x2": 250,
+        "y2": 115,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 135,
+        "y": 70,
+        "text": "÷M",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 135,
+        "y": 150,
+        "text": "×M",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 265,
+        "y": 70,
+        "text": "×6.0×10²³",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 265,
+        "y": 150,
+        "text": "÷6.0×10²³",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Mass, moles and number of particles are linked through molar mass and the Avogadro constant.",
+     "alt": "Three boxes labelled mass, moles and particles joined by arrows labelled divide by M, multiply by M, multiply and divide by the Avogadro constant."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — moles from mass",
+     "statement": "Calculate the number of moles in 25 g of calcium carbonate, CaCO₃ (Ar: Ca 40, C 12, O 16).",
+     "steps": [
+      "Mr(CaCO₃) = 40 + 12 + 3 × 16 = 100 g/mol.",
+      "n = m ÷ M = 25 ÷ 100 = 0.25 mol."
+     ],
+     "answer": "0.25 mol"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — empirical formula",
+     "statement": "A hydrocarbon contains 2.4 g of carbon and 0.4 g of hydrogen. Find its empirical formula (Ar: C 12, H 1).",
+     "steps": [
+      "Moles: C = 2.4 ÷ 12 = 0.2; H = 0.4 ÷ 1 = 0.4.",
+      "Divide by the smaller (0.2): C = 1, H = 2. The ratio is 1 : 2.",
+      "Empirical formula = CH₂."
+     ],
+     "answer": "CH₂"
+    }
+   ],
+   "chapter": "gceol-chemistry-mole"
+  },
+  {
+   "id": "gceol-chemistry-moles-reactions",
+   "title": "Reacting masses, gas volumes and solutions",
+   "minutes": 35,
+   "programRef": "GCE O Level Chemistry — Relative masses, the mole, reacting masses, gas volumes, concentration, titration (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Use mole ratios from a balanced equation to calculate reacting masses.",
+    "Use the molar gas volume 24 dm³ at room temperature and pressure.",
+    "Calculate concentration in mol/dm³ and carry out a titration calculation.",
+    "Calculate percentage yield."
+   ],
+   "prerequisites": [
+    "gceol-chemistry-moles-masses"
+   ],
+   "exercises": [
+    "gceol-chemistry-mole-e07",
+    "gceol-chemistry-mole-e08",
+    "gceol-chemistry-mole-e09",
+    "gceol-chemistry-mole-e10",
+    "gceol-chemistry-mole-e11",
+    "gceol-chemistry-mole-e12"
+   ],
+   "selfCheck": [
+    "gceol-chemistry-moles-reactions-q1",
+    "gceol-chemistry-moles-reactions-q2",
+    "gceol-chemistry-moles-reactions-q3",
+    "gceol-chemistry-moles-reactions-q4",
+    "gceol-chemistry-moles-reactions-q5"
+   ],
+   "reviewNotes": [
+    "Molar volume of a gas taken as 24 dm³ at room temperature and pressure (24 000 cm³); at 0 °C and 1 atm it is 22.4 dm³ — check which the Board uses.",
+    "Titration figures are illustrative.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Method for reacting masses",
+     "md": "1. Write the balanced equation.\n2. Convert the given mass to moles: n = m ÷ M.\n3. Use the **mole ratio** in the equation to find the moles of the wanted substance.\n4. Convert back: mass = n × M, or gas volume = n × 24 dm³ (room temperature and pressure)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Concentration and titration",
+     "md": "**Concentration** c (mol/dm³) = moles ÷ volume in dm³: $c = \\frac{n}{V}$ (V in dm³ = cm³ ÷ 1000). In a **titration** a solution of known concentration (from the **burette**) reacts exactly with a measured volume (**pipette**) of another; an indicator shows the **end point**. Use $n = cV$ and the mole ratio of the equation."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Percentage yield",
+     "md": "**Percentage yield** = (actual mass obtained ÷ theoretical mass) × 100. The yield is less than 100% because of incomplete reactions, side reactions and losses during separation."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- Convert cm³ to dm³ (÷ 1000) before using c = n/V.\n- Use the **ratio in the equation**, not 1 : 1 by habit.\n- For gases the volume ratio equals the mole ratio."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "rect",
+        "x": 185,
+        "y": 30,
+        "w": 30,
+        "h": 120,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 150,
+        "x2": 200,
+        "y2": 165,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "poly",
+        "pts": [
+         170,
+         215,
+         230,
+         215,
+         215,
+         170,
+         185,
+         170
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true
+       },
+       {
+        "t": "rect",
+        "x": 190,
+        "y": 190,
+        "w": 20,
+        "h": 25,
+        "stroke": "blue",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 20,
+        "text": "burette",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 195,
+        "text": "conical flask",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 215,
+        "text": "+ indicator",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 90,
+        "text": "acid of known",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 106,
+        "text": "concentration",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Titration: the solution in the burette is added slowly to the measured volume in the conical flask until the indicator changes colour.",
+     "alt": "A burette above a conical flask containing coloured solution, with labels."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — gas volume",
+     "statement": "Magnesium reacts with dilute hydrochloric acid: Mg + 2HCl → MgCl₂ + H₂. What volume of hydrogen is made from 4.8 g of Mg? (Mg 24; 1 mol of gas = 24 dm³.)",
+     "steps": [
+      "n(Mg) = 4.8 ÷ 24 = 0.2 mol. Ratio Mg : H₂ = 1 : 1, so n(H₂) = 0.2 mol.",
+      "Volume = 0.2 × 24 = 4.8 dm³."
+     ],
+     "answer": "4.8 dm³"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — titration",
+     "statement": "25.0 cm³ of sodium hydroxide of concentration 0.100 mol/dm³ is neutralised by 20.0 cm³ of hydrochloric acid: NaOH + HCl → NaCl + H₂O. Find the concentration of the acid.",
+     "steps": [
+      "n(NaOH) = c × V = 0.100 × 25.0/1000 = 0.00250 mol. Ratio NaOH : HCl = 1 : 1, so n(HCl) = 0.00250 mol.",
+      "c(HCl) = n ÷ V = 0.00250 ÷ (20.0/1000) = 0.125 mol/dm³."
+     ],
+     "answer": "0.125 mol/dm³"
+    }
+   ],
+   "chapter": "gceol-chemistry-mole"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-chemistry-mole-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-chemistry-moles-masses",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Calculate the Mr of calcium hydroxide, Ca(OH)₂ (Ca 40, O 16, H 1).",
+   "answer": 74,
+   "tolerance": 0,
+   "explanation": "40 + 2 × (16 + 1) = 40 + 34 = 74.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-mole"
+  },
+  {
+   "id": "gceol-chemistry-mole-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-chemistry-moles-masses",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many moles are there in 36 g of water (H₂O, Mr = 18)?",
+   "answer": 2,
+   "tolerance": 0,
+   "unit": "mol",
+   "explanation": "n = 36 ÷ 18 = 2 mol.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-mole"
+  },
+  {
+   "id": "gceol-chemistry-mole-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-moles-masses",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many particles are in 0.5 mol of any substance?",
+   "choices": [
+    "0.5",
+    "3.0 × 10²³",
+    "6.0 × 10²³",
+    "1.2 × 10²⁴"
+   ],
+   "answer": 1,
+   "explanation": "0.5 × 6.0 × 10²³ = 3.0 × 10²³.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-mole"
+  },
+  {
+   "id": "gceol-chemistry-mole-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-moles-masses",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Calculate the percentage of nitrogen in ammonium nitrate, NH₄NO₃ (N 14, H 1, O 16).",
+   "answer": 35.0,
+   "tolerance": 0.1,
+   "unit": "%",
+   "explanation": "Mr = 14 + 4 + 14 + 48 = 80; N = 28; % = 28 ÷ 80 × 100 = 35%.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-mole"
+  },
+  {
+   "id": "gceol-chemistry-mole-e05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-moles-masses",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A compound has empirical formula CH₂ and Mr = 56. Its molecular formula is",
+   "choices": [
+    "CH₂",
+    "C₂H₄",
+    "C₄H₈",
+    "C₃H₆"
+   ],
+   "answer": 2,
+   "explanation": "Mr(CH₂) = 14; 56 ÷ 14 = 4, so C₄H₈.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-chemistry-mole"
+  },
+  {
+   "id": "gceol-chemistry-mole-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-moles-masses",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An oxide of iron contains 5.6 g of iron and 2.4 g of oxygen (Ar: Fe 56, O 16).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the moles of iron atoms.",
+     "answer": 0.1,
+     "tolerance": 0.001,
+     "explanation": "5.6 ÷ 56 = 0.1 mol.",
+     "unit": "mol",
+     "id": "gceol-chemistry-mole-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the moles of oxygen atoms.",
+     "answer": 0.15,
+     "tolerance": 0.001,
+     "explanation": "2.4 ÷ 16 = 0.15 mol.",
+     "unit": "mol",
+     "id": "gceol-chemistry-mole-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What is the simplest ratio Fe : O?",
+     "choices": [
+      "3 : 2",
+      "1 : 1",
+      "1 : 2",
+      "2 : 3"
+     ],
+     "answer": 3,
+     "explanation": "0.1 : 0.15 = 1 : 1.5 = 2 : 3.",
+     "id": "gceol-chemistry-mole-e06-c"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The empirical formula is",
+     "choices": [
+      "Fe₃O₂",
+      "FeO₂",
+      "FeO",
+      "Fe₂O₃"
+     ],
+     "answer": 3,
+     "explanation": "Fe : O = 2 : 3.",
+     "id": "gceol-chemistry-mole-e06-d"
+    }
+   ],
+   "chapter": "gceol-chemistry-mole"
+  },
+  {
+   "id": "gceol-chemistry-moles-masses-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-moles-masses",
+   "prompt": "One mole of carbon-12 has a mass of",
+   "choices": [
+    "12 g",
+    "1 g",
+    "6 g",
+    "24 g"
+   ],
+   "answer": 0,
+   "explanation": "Molar mass equals Ar in grams.",
+   "chapter": "gceol-chemistry-mole"
+  },
+  {
+   "id": "gceol-chemistry-moles-masses-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-moles-masses",
+   "prompt": "n = m/M. If m = 44 g and M = 44 g/mol, n =",
+   "choices": [
+    "0.5 mol",
+    "44 mol",
+    "2 mol",
+    "1 mol"
+   ],
+   "answer": 3,
+   "explanation": "44 ÷ 44 = 1.",
+   "chapter": "gceol-chemistry-mole"
+  },
+  {
+   "id": "gceol-chemistry-moles-masses-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-moles-masses",
+   "prompt": "Mr of CO₂ (C 12, O 16) is",
+   "choices": [
+    "44",
+    "28",
+    "60",
+    "56"
+   ],
+   "answer": 0,
+   "explanation": "12 + 32 = 44.",
+   "chapter": "gceol-chemistry-mole"
+  },
+  {
+   "id": "gceol-chemistry-moles-masses-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-moles-masses",
+   "prompt": "The empirical formula shows",
+   "choices": [
+    "the real number of atoms",
+    "the state",
+    "the mass",
+    "the simplest ratio of atoms"
+   ],
+   "answer": 3,
+   "explanation": "Definition.",
+   "chapter": "gceol-chemistry-mole"
+  },
+  {
+   "id": "gceol-chemistry-moles-masses-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-moles-masses",
+   "prompt": "The Avogadro constant is about",
+   "choices": [
+    "6.0 × 10²³ per mole",
+    "1.6 × 10⁻¹⁹",
+    "6.0 × 10²³ g",
+    "3.0 × 10¹⁰"
+   ],
+   "answer": 0,
+   "explanation": "Number of particles per mole.",
+   "chapter": "gceol-chemistry-mole"
+  },
+  {
+   "id": "gceol-chemistry-mole-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-chemistry-moles-reactions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Calculate the mass of calcium oxide made by heating 1000 g of calcium carbonate: CaCO₃ → CaO + CO₂ (Ca 40, C 12, O 16).",
+   "answer": 560.0,
+   "tolerance": 0,
+   "unit": "g",
+   "explanation": "n(CaCO₃) = 1000 ÷ 100 = 10 mol = n(CaO); mass = 10 × 56 = 560 g.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-mole"
+  },
+  {
+   "id": "gceol-chemistry-mole-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-chemistry-moles-reactions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What volume of CO₂ (in dm³, at 24 dm³ per mole) is produced in the same reaction from 1000 g of CaCO₃?",
+   "answer": 240,
+   "tolerance": 0,
+   "unit": "dm³",
+   "explanation": "n(CO₂) = 10 mol; volume = 10 × 24 = 240 dm³.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-mole"
+  },
+  {
+   "id": "gceol-chemistry-mole-e09",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-moles-reactions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What is the concentration of a solution containing 0.5 mol in 250 cm³?",
+   "choices": [
+    "2 mol/dm³",
+    "0.002 mol/dm³",
+    "0.5 mol/dm³",
+    "125 mol/dm³"
+   ],
+   "answer": 0,
+   "explanation": "250 cm³ = 0.25 dm³; c = 0.5 ÷ 0.25 = 2 mol/dm³.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-mole"
+  },
+  {
+   "id": "gceol-chemistry-mole-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-moles-reactions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Zinc reacts with sulphuric acid: Zn + H₂SO₄ → ZnSO₄ + H₂. Find the volume of H₂ (dm³) from 6.5 g Zn (Zn 65).",
+   "answer": 2.4000000000000004,
+   "tolerance": 0.01,
+   "unit": "dm³",
+   "explanation": "n(Zn) = 6.5 ÷ 65 = 0.1 mol = n(H₂); V = 0.1 × 24 = 2.4 dm³.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-mole"
+  },
+  {
+   "id": "gceol-chemistry-mole-e11",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-moles-reactions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In the reaction 2Mg + O₂ → 2MgO, how many moles of O₂ react with 0.4 mol of Mg?",
+   "choices": [
+    "0.1 mol",
+    "0.4 mol",
+    "0.2 mol",
+    "0.8 mol"
+   ],
+   "answer": 2,
+   "explanation": "Ratio Mg : O₂ = 2 : 1, so 0.4 ÷ 2 = 0.2 mol.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-mole"
+  },
+  {
+   "id": "gceol-chemistry-mole-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-moles-reactions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In the Haber process nitrogen reacts with hydrogen: N₂ + 3H₂ → 2NH₃. A manufacturer starts with 28 g of nitrogen (N 14, H 1) and obtains 28 g of ammonia.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many moles of N₂ are in 28 g?",
+     "answer": 1,
+     "tolerance": 0,
+     "explanation": "Mr(N₂) = 28, so n = 28 ÷ 28 = 1 mol.",
+     "unit": "mol",
+     "id": "gceol-chemistry-mole-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many moles of NH₃ can be made at most?",
+     "answer": 2,
+     "tolerance": 0,
+     "explanation": "Ratio N₂ : NH₃ = 1 : 2, so 2 mol.",
+     "unit": "mol",
+     "id": "gceol-chemistry-mole-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "What is the theoretical mass of NH₃ in g?",
+     "answer": 34.0,
+     "tolerance": 0,
+     "explanation": "Mr(NH₃) = 14 + 3 = 17; 2 × 17 = 34 g.",
+     "unit": "g",
+     "id": "gceol-chemistry-mole-e12-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calculate the percentage yield (to the nearest whole number).",
+     "answer": 82,
+     "tolerance": 1,
+     "explanation": "28 ÷ 34 × 100 = 82%.",
+     "unit": "%",
+     "id": "gceol-chemistry-mole-e12-d"
+    }
+   ],
+   "chapter": "gceol-chemistry-mole"
+  },
+  {
+   "id": "gceol-chemistry-moles-reactions-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-moles-reactions",
+   "prompt": "Concentration is measured in",
+   "choices": [
+    "mol/dm³",
+    "dm³/mol",
+    "mol/g",
+    "g/mol"
+   ],
+   "answer": 0,
+   "explanation": "Moles per cubic decimetre.",
+   "chapter": "gceol-chemistry-mole"
+  },
+  {
+   "id": "gceol-chemistry-moles-reactions-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-moles-reactions",
+   "prompt": "1 mole of gas at room temperature and pressure has volume",
+   "choices": [
+    "1 dm³",
+    "22.4 cm³",
+    "24 dm³",
+    "100 dm³"
+   ],
+   "answer": 2,
+   "explanation": "As used in this course.",
+   "chapter": "gceol-chemistry-mole"
+  },
+  {
+   "id": "gceol-chemistry-moles-reactions-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-moles-reactions",
+   "prompt": "500 cm³ equals",
+   "choices": [
+    "50 dm³",
+    "5 dm³",
+    "0.05 dm³",
+    "0.5 dm³"
+   ],
+   "answer": 3,
+   "explanation": "Divide by 1000.",
+   "chapter": "gceol-chemistry-mole"
+  },
+  {
+   "id": "gceol-chemistry-moles-reactions-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-moles-reactions",
+   "prompt": "A burette is used to",
+   "choices": [
+    "add a solution slowly and measure its volume",
+    "heat a solution",
+    "filter",
+    "weigh"
+   ],
+   "answer": 0,
+   "explanation": "Used in titration.",
+   "chapter": "gceol-chemistry-mole"
+  },
+  {
+   "id": "gceol-chemistry-moles-reactions-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-moles-reactions",
+   "prompt": "Percentage yield is",
+   "choices": [
+    "mass ÷ Mr",
+    "theoretical ÷ actual × 100",
+    "actual yield ÷ theoretical yield × 100",
+    "actual + theoretical"
+   ],
+   "answer": 2,
+   "explanation": "Definition.",
+   "chapter": "gceol-chemistry-mole"
+  },
+  {
+   "id": "gceol-chemistry-mole-m01",
+   "kind": "mcq",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-moles-masses",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What is the relative formula mass of calcium carbonate, CaCO₃ (Ca 40, C 12, O 16)?",
+   "choices": [
+    "68",
+    "100",
+    "56",
+    "84"
+   ],
+   "answer": 1,
+   "explanation": "40 + 12 + 48 = 100.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-mole"
+  },
+  {
+   "id": "gceol-chemistry-mole-m02",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-moles-reactions",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Magnesium reacts with excess dilute hydrochloric acid: Mg + 2HCl → MgCl₂ + H₂. A pupil uses 4.8 g of magnesium (Mg 24, Cl 35.5; 1 mol of gas = 24 dm³).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calculate the moles of magnesium.",
+     "answer": 0.19999999999999998,
+     "tolerance": 0.001,
+     "explanation": "n = 4.8 ÷ 24 = 0.20 mol.",
+     "unit": "mol",
+     "id": "gceol-chemistry-mole-m02-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calculate the volume of hydrogen formed in dm³.",
+     "answer": 4.8,
+     "tolerance": 0.01,
+     "explanation": "Ratio Mg : H₂ = 1 : 1, so n(H₂) = 0.20 mol; V = 0.20 × 24 = 4.8 dm³.",
+     "unit": "dm³",
+     "id": "gceol-chemistry-mole-m02-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calculate the mass of magnesium chloride that can be formed (Mr = 95).",
+     "answer": 19.0,
+     "tolerance": 0.1,
+     "explanation": "n(MgCl₂) = 0.20 mol; mass = 0.20 × 95 = 19.0 g.",
+     "unit": "g",
+     "id": "gceol-chemistry-mole-m02-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "The pupil obtains 17.1 g of MgCl₂. Calculate the percentage yield.",
+     "answer": 90.0,
+     "tolerance": 0.5,
+     "explanation": "17.1 ÷ 19.0 × 100 = 90%.",
+     "unit": "%",
+     "id": "gceol-chemistry-mole-m02-d"
+    },
+    {
+     "kind": "open",
+     "points": 1,
+     "prompt": "Give one reason why the actual yield is less than the theoretical yield.",
+     "model": "Some product is lost during filtering and transfer, or the reaction is not complete.",
+     "rubric": "1 mark.",
+     "explanation": "Some product is lost during filtering and transfer, or the reaction is not complete.",
+     "id": "gceol-chemistry-mole-m02-e"
+    }
+   ],
+   "chapter": "gceol-chemistry-mole"
+  }
+ ]
+}

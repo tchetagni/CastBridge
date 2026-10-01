@@ -1,0 +1,429 @@
+{
+ "chapter": "gceol-physics-moments",
+ "lessons": [
+  {
+   "id": "gceol-physics-moments-equilibrium",
+   "title": "Moments, equilibrium and centre of gravity",
+   "minutes": 25,
+   "programRef": "GCE O Level Physics — Turning effect of forces, equilibrium, centre of gravity (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define the moment of a force and calculate it.",
+    "State and apply the principle of moments.",
+    "Define centre of gravity and relate it to stability.",
+    "State the conditions for equilibrium of a body."
+   ],
+   "prerequisites": [
+    "gceol-physics-newton-laws"
+   ],
+   "exercises": [
+    "gceol-physics-moments-e01",
+    "gceol-physics-moments-e02",
+    "gceol-physics-moments-e03",
+    "gceol-physics-moments-e04",
+    "gceol-physics-moments-e05",
+    "gceol-physics-moments-e06"
+   ],
+   "selfCheck": [
+    "gceol-physics-moments-equilibrium-q1",
+    "gceol-physics-moments-equilibrium-q2",
+    "gceol-physics-moments-equilibrium-q3",
+    "gceol-physics-moments-equilibrium-q4",
+    "gceol-physics-moments-equilibrium-q5"
+   ],
+   "reviewNotes": [
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Moment of a force",
+     "md": "The **moment** of a force about a point (pivot) = force × **perpendicular distance** from the pivot to the line of action of the force. Unit: **newton-metre (N m)**. A longer spanner gives a bigger moment for the same force."
+    },
+    {
+     "type": "formula",
+     "tex": "\\text{moment} = F \\times d",
+     "caption": "d is measured at 90° to the force"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Principle of moments",
+     "md": "A body is in equilibrium when (1) the **resultant force is zero** and (2) the **sum of clockwise moments = sum of anticlockwise moments** about any point.\n\nThe **centre of gravity** is the point where the whole weight of a body seems to act. A tall object with a high centre of gravity and a narrow base topples easily; a low centre of gravity and a wide base give stability."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Solving moment problems",
+     "md": "1. Choose a pivot (often the support).\n2. List each force that tries to turn **clockwise** and **anticlockwise** with its distance.\n3. Set total clockwise = total anticlockwise and solve.\n4. The weight of a uniform beam acts at its **centre**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- Use the **perpendicular** distance from the pivot, in metres (or consistently in cm).\n- Do not forget the weight of the beam itself unless the pivot is at its centre.\n- Equal forces do not balance unless the distances are equal too."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 118,
+        "w": 280,
+        "h": 10,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "grey"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         200,
+         128,
+         180,
+         170,
+         220,
+         170
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "orange"
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 60,
+        "x2": 60,
+        "y2": 114,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 45,
+        "text": "300 N",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 305,
+        "y1": 60,
+        "x2": 305,
+        "y2": 114,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 305,
+        "y": 45,
+        "text": "F",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 195,
+        "x2": 200,
+        "y2": 195,
+        "color": "ink",
+        "width": 2,
+        "arrow": "both"
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 215,
+        "text": "2 m",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 195,
+        "x2": 305,
+        "y2": 195,
+        "color": "ink",
+        "width": 2,
+        "arrow": "both"
+       },
+       {
+        "t": "text",
+        "x": 255,
+        "y": 215,
+        "text": "1.5 m",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A balanced see-saw: 300 N at 2 m from the pivot balances a force F at 1.5 m on the other side.",
+     "alt": "A horizontal plank on a triangular pivot, a 300 N force down on the left at 2 m and an unknown force F down on the right at 1.5 m."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — see-saw",
+     "statement": "A child of weight 300 N sits 2 m from the pivot of a see-saw. At what force must an older child press down at 1.5 m on the other side to balance it?",
+     "steps": [
+      "Anticlockwise moment = 300 × 2 = 600 N m.",
+      "Clockwise moment = F × 1.5.",
+      "Balance: F × 1.5 = 600, so F = 600 ÷ 1.5 = 400 N."
+     ],
+     "answer": "F = 400 N"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — uniform metre rule",
+     "statement": "A uniform metre rule of weight 2 N is pivoted at the 40 cm mark. A load W hangs from the 0 cm end and the rule balances. Find W.",
+     "steps": [
+      "The rule's weight (2 N) acts at its centre, the 50 cm mark, which is 10 cm from the pivot.",
+      "Moment of the rule = 2 × 10 = 20 N cm; moment of the load = W × 40 (the end is 40 cm from the pivot).",
+      "W × 40 = 20, so W = 0.5 N."
+     ],
+     "answer": "W = 0.5 N"
+    }
+   ],
+   "chapter": "gceol-physics-moments"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-physics-moments-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-physics-moments-equilibrium",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the moment of a 40 N force acting at 0.5 m from a pivot.",
+   "answer": 20,
+   "tolerance": 0,
+   "unit": "N m",
+   "explanation": "Moment = F × d = 40 × 0.5 = 20 N m.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-moments"
+  },
+  {
+   "id": "gceol-physics-moments-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-physics-moments-equilibrium",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A body is in equilibrium. Which statement is correct?",
+   "choices": [
+    "Resultant force and resultant moment are both zero",
+    "Clockwise moments are bigger",
+    "Only the resultant force must be zero",
+    "It must be at rest and light"
+   ],
+   "answer": 0,
+   "explanation": "Both conditions are needed for equilibrium.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-moments"
+  },
+  {
+   "id": "gceol-physics-moments-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-physics-moments-equilibrium",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A pupil pushes a door with 15 N at 0.8 m from the hinges. Find the moment about the hinges.",
+   "answer": 12,
+   "tolerance": 0,
+   "unit": "N m",
+   "explanation": "15 × 0.8 = 12 N m.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-moments"
+  },
+  {
+   "id": "gceol-physics-moments-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-moments-equilibrium",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A 20 N weight hangs 30 cm to the left of a pivot. What weight hung 20 cm to the right balances it?",
+   "answer": 30.0,
+   "tolerance": 0,
+   "unit": "N",
+   "explanation": "20 × 30 = W × 20, so W = 600 ÷ 20 = 30 N.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-moments"
+  },
+  {
+   "id": "gceol-physics-moments-e05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-moments-equilibrium",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which object is most stable?",
+   "choices": [
+    "A tall box on a small base",
+    "A narrow box standing on its corner",
+    "A tall narrow box",
+    "A wide, low box"
+   ],
+   "answer": 3,
+   "explanation": "A low centre of gravity and a wide base make an object hard to topple.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-moments"
+  },
+  {
+   "id": "gceol-physics-moments-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-physics-moments-equilibrium",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A uniform plank 3 m long, of weight 60 N, is pivoted at its centre. A child of weight 300 N sits 1 m to the left of the pivot, and a child of weight 240 N sits on the right so that the plank balances.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the moment of the 300 N child about the pivot.",
+     "answer": 300,
+     "tolerance": 0,
+     "explanation": "300 × 1 = 300 N m anticlockwise.",
+     "unit": "N m",
+     "id": "gceol-physics-moments-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the distance from the pivot at which the 240 N child sits.",
+     "answer": 1.25,
+     "tolerance": 0,
+     "explanation": "240 × d = 300, so d = 1.25 m.",
+     "unit": "m",
+     "id": "gceol-physics-moments-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the upward force from the pivot.",
+     "answer": 600,
+     "tolerance": 0,
+     "explanation": "Equilibrium: upward force = 300 + 240 + 60 = 600 N (the plank's weight acts at the pivot and has no moment).",
+     "unit": "N",
+     "id": "gceol-physics-moments-e06-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explain why the plank's own weight does not affect the moment equation.",
+     "model": "It is uniform, so its weight acts at its centre, which is the pivot; its distance from the pivot is zero, so its moment is zero.",
+     "rubric": "1 mark: weight acts at centre; 1 mark: distance zero so moment zero.",
+     "explanation": "It is uniform, so its weight acts at its centre, which is the pivot; its distance from the pivot is zero, so its moment is zero.",
+     "id": "gceol-physics-moments-e06-d"
+    }
+   ],
+   "chapter": "gceol-physics-moments"
+  },
+  {
+   "id": "gceol-physics-moments-equilibrium-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-moments-equilibrium",
+   "prompt": "The unit of moment is the",
+   "choices": [
+    "joule per second",
+    "newton-metre",
+    "pascal",
+    "newton per metre"
+   ],
+   "answer": 1,
+   "explanation": "Moment = force × distance, so N m.",
+   "chapter": "gceol-physics-moments"
+  },
+  {
+   "id": "gceol-physics-moments-equilibrium-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-moments-equilibrium",
+   "prompt": "To loosen a tight nut more easily you should",
+   "choices": [
+    "use a shorter spanner",
+    "push at the pivot",
+    "push parallel to the spanner",
+    "use a longer spanner"
+   ],
+   "answer": 3,
+   "explanation": "A greater distance gives a greater moment.",
+   "chapter": "gceol-physics-moments"
+  },
+  {
+   "id": "gceol-physics-moments-equilibrium-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-moments-equilibrium",
+   "prompt": "The weight of a uniform beam acts at its",
+   "choices": [
+    "end",
+    "top surface",
+    "centre",
+    "pivot always"
+   ],
+   "answer": 2,
+   "explanation": "The centre of gravity of a uniform beam is its centre.",
+   "chapter": "gceol-physics-moments"
+  },
+  {
+   "id": "gceol-physics-moments-equilibrium-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-moments-equilibrium",
+   "prompt": "Principle of moments: in equilibrium",
+   "choices": [
+    "distances are equal",
+    "clockwise moments = anticlockwise moments",
+    "mass is zero",
+    "forces are equal on both sides"
+   ],
+   "answer": 1,
+   "explanation": "Sum of clockwise moments = sum of anticlockwise moments.",
+   "chapter": "gceol-physics-moments"
+  },
+  {
+   "id": "gceol-physics-moments-equilibrium-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-moments-equilibrium",
+   "prompt": "A force of 10 N at 3 m from a pivot has a moment of",
+   "choices": [
+    "3.3 N m",
+    "0.3 N m",
+    "13 N m",
+    "30 N m"
+   ],
+   "answer": 3,
+   "explanation": "10 × 3 = 30 N m.",
+   "chapter": "gceol-physics-moments"
+  }
+ ]
+}

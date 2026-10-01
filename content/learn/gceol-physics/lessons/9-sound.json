@@ -1,0 +1,378 @@
+{
+ "chapter": "gceol-physics-sound",
+ "lessons": [
+  {
+   "id": "gceol-physics-sound-echo",
+   "title": "Sound: speed, echoes, pitch and loudness",
+   "minutes": 25,
+   "programRef": "GCE O Level Physics — Sound: production, speed, echoes, pitch and loudness (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Explain how sound is produced and why it needs a medium.",
+    "Use speed of sound v = d/t and echo calculations.",
+    "Relate pitch to frequency and loudness to amplitude.",
+    "Give the audible range and uses of ultrasound."
+   ],
+   "prerequisites": [
+    "gceol-physics-wave-properties"
+   ],
+   "exercises": [
+    "gceol-physics-sound-e01",
+    "gceol-physics-sound-e02",
+    "gceol-physics-sound-e03",
+    "gceol-physics-sound-e04",
+    "gceol-physics-sound-e05",
+    "gceol-physics-sound-e06"
+   ],
+   "selfCheck": [
+    "gceol-physics-sound-echo-q1",
+    "gceol-physics-sound-echo-q2",
+    "gceol-physics-sound-echo-q3",
+    "gceol-physics-sound-echo-q4",
+    "gceol-physics-sound-echo-q5"
+   ],
+   "reviewNotes": [
+    "Speed of sound used: 340 m/s in air (about 330–343 m/s depending on temperature); about 1500 m/s in sea water. Check the Board's preferred value.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Sound",
+     "md": "Sound is produced by **vibrating objects** and travels as a **longitudinal wave** through a medium (solid, liquid or gas). It cannot travel through a vacuum. In air its speed is about **340 m/s** (used here); it is faster in liquids and fastest in solids. The audible range of a normal human ear is about **20 Hz to 20 000 Hz**; above is **ultrasound**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Pitch and loudness",
+     "md": "- **Pitch** depends on the **frequency**: high frequency, high pitch.\n- **Loudness** depends on the **amplitude**: bigger amplitude, louder sound.\n\n**Echo**: sound reflected from a hard surface. The sound travels to the surface and back, so distance = speed × time ÷ 2."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Uses of ultrasound",
+     "md": "Ultrasound is used for medical scans (e.g. of a baby in the womb), for cleaning delicate objects, and for **sonar** that measures the depth of the sea or finds fish."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- In an echo calculation divide by 2: the sound makes a round trip.\n- Light travels so fast (3 × 10⁸ m/s) that, in lightning calculations, its travel time is ignored.\n- Sound cannot travel in a vacuum, unlike light."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 120,
+        "w": 20,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 320,
+        "y": 70,
+        "w": 20,
+        "h": 150,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "grey"
+       },
+       {
+        "t": "line",
+        "x1": 70,
+        "y1": 135,
+        "x2": 310,
+        "y2": 135,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 310,
+        "y1": 155,
+        "x2": 70,
+        "y2": 155,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 120,
+        "text": "sound goes",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 180,
+        "text": "echo returns",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 215,
+        "text": "distance d each way",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "An echo: the sound travels to the wall and back, a total distance of 2d.",
+     "alt": "A person on the left, a wall on the right, a blue arrow going to the wall and a red arrow returning."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — echo",
+     "statement": "A pupil shouts and hears an echo from a cliff 0.6 s later (speed of sound 340 m/s). How far is the cliff?",
+     "steps": [
+      "Total distance travelled = v × t = 340 × 0.6 = 204 m.",
+      "The cliff is half of that: 204 ÷ 2 = 102 m."
+     ],
+     "answer": "102 m"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — thunder",
+     "statement": "A thunderclap is heard 4 s after the lightning flash is seen. How far away is the storm?",
+     "steps": [
+      "The flash arrives almost instantly, so the 4 s is the travel time of the sound.",
+      "d = v × t = 340 × 4 = 1360 m."
+     ],
+     "answer": "About 1360 m (1.4 km)"
+    }
+   ],
+   "chapter": "gceol-physics-sound"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-physics-sound-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-physics-sound-echo",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the distance sound travels in 5 s in air (340 m/s).",
+   "answer": 1700,
+   "tolerance": 0,
+   "unit": "m",
+   "explanation": "d = vt = 340 × 5 = 1700 m.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-sound"
+  },
+  {
+   "id": "gceol-physics-sound-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-physics-sound-echo",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The pitch of a sound depends on its",
+   "choices": [
+    "wavelength only",
+    "speed",
+    "frequency",
+    "amplitude"
+   ],
+   "answer": 2,
+   "explanation": "Higher frequency gives higher pitch.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-sound"
+  },
+  {
+   "id": "gceol-physics-sound-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-physics-sound-echo",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Sound can travel through a vacuum.",
+   "answer": false,
+   "explanation": "Sound needs a medium of particles to carry the vibrations.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-sound"
+  },
+  {
+   "id": "gceol-physics-sound-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-sound-echo",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A ship's sonar sends a pulse and receives the echo from the sea bed after 0.4 s. If the speed of sound in sea water is 1500 m/s, find the depth.",
+   "answer": 300.0,
+   "tolerance": 0,
+   "unit": "m",
+   "explanation": "Round trip distance = 1500 × 0.4 = 600 m, depth = 600 ÷ 2 = 300 m.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-physics-sound"
+  },
+  {
+   "id": "gceol-physics-sound-e05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-sound-echo",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An oscilloscope trace of a sound shows taller waves of the same spacing. The sound is",
+   "choices": [
+    "louder, higher pitch",
+    "same loudness, lower pitch",
+    "quieter, higher pitch",
+    "louder, same pitch"
+   ],
+   "answer": 3,
+   "explanation": "Taller waves = larger amplitude (louder); same spacing = same frequency (pitch).",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-sound"
+  },
+  {
+   "id": "gceol-physics-sound-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-physics-sound-echo",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A boy stands 85 m from a tall wall and claps once (speed of sound 340 m/s). A tuning fork of frequency 440 Hz is also sounded.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the time between the clap and the echo.",
+     "answer": 0.5,
+     "tolerance": 0.001,
+     "explanation": "t = 2d ÷ v = 2 × 85 ÷ 340 = 0.5 s.",
+     "unit": "s",
+     "id": "gceol-physics-sound-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the period of the 440 Hz tuning fork in milliseconds (1 ms = 0.001 s), to 2 d.p.",
+     "answer": 2.27,
+     "tolerance": 0.01,
+     "explanation": "T = 1/440 = 0.00227 s = 2.27 ms.",
+     "unit": "ms",
+     "id": "gceol-physics-sound-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the wavelength of its sound in air (to 2 d.p.).",
+     "answer": 0.77,
+     "tolerance": 0.01,
+     "explanation": "λ = v ÷ f = 340 ÷ 440 = 0.77 m.",
+     "unit": "m",
+     "id": "gceol-physics-sound-e06-c"
+    }
+   ],
+   "chapter": "gceol-physics-sound"
+  },
+  {
+   "id": "gceol-physics-sound-echo-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-sound-echo",
+   "prompt": "The speed of sound in air is about",
+   "choices": [
+    "3 × 10⁸ m/s",
+    "34 m/s",
+    "340 m/s",
+    "3400 m/s"
+   ],
+   "answer": 2,
+   "explanation": "About 340 m/s at normal temperature.",
+   "chapter": "gceol-physics-sound"
+  },
+  {
+   "id": "gceol-physics-sound-echo-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-sound-echo",
+   "prompt": "Loudness depends on the",
+   "choices": [
+    "amplitude",
+    "period",
+    "wavelength",
+    "frequency"
+   ],
+   "answer": 0,
+   "explanation": "Larger amplitude, louder sound.",
+   "chapter": "gceol-physics-sound"
+  },
+  {
+   "id": "gceol-physics-sound-echo-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-sound-echo",
+   "prompt": "Ultrasound has a frequency",
+   "choices": [
+    "above 20 000 Hz",
+    "between 20 and 200 Hz",
+    "below 20 Hz",
+    "of exactly 1000 Hz"
+   ],
+   "answer": 0,
+   "explanation": "Above the human audible range.",
+   "chapter": "gceol-physics-sound"
+  },
+  {
+   "id": "gceol-physics-sound-echo-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-sound-echo",
+   "prompt": "Sound is a",
+   "choices": [
+    "longitudinal wave",
+    "transverse wave",
+    "light wave",
+    "radio wave"
+   ],
+   "answer": 0,
+   "explanation": "Compressions and rarefactions along the travel direction.",
+   "chapter": "gceol-physics-sound"
+  },
+  {
+   "id": "gceol-physics-sound-echo-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-sound-echo",
+   "prompt": "An echo is heard 2 s after a shout. The wall is (v = 340 m/s)",
+   "choices": [
+    "1360 m away",
+    "340 m away",
+    "170 m away",
+    "680 m away"
+   ],
+   "answer": 1,
+   "explanation": "d = 340 × 2 ÷ 2 = 340 m.",
+   "chapter": "gceol-physics-sound"
+  }
+ ]
+}

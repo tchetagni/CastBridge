@@ -1,0 +1,411 @@
+{
+ "chapter": "gceol-physics-measurement",
+ "lessons": [
+  {
+   "id": "gceol-physics-units-instruments",
+   "title": "Units, prefixes and measuring instruments",
+   "minutes": 25,
+   "programRef": "GCE O Level Physics — Measurement: SI units, instruments, density basics (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Name the SI units of length, mass, time, temperature and current.",
+    "Convert between units using prefixes (kilo, centi, milli, micro), including area and volume.",
+    "Choose and read a ruler, measuring cylinder, vernier calipers, micrometer and stopwatch.",
+    "Find the period of a pendulum accurately by timing many swings."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-physics-measurement-e01",
+    "gceol-physics-measurement-e02",
+    "gceol-physics-measurement-e03",
+    "gceol-physics-measurement-e04",
+    "gceol-physics-measurement-e05",
+    "gceol-physics-measurement-e06"
+   ],
+   "selfCheck": [
+    "gceol-physics-units-instruments-q1",
+    "gceol-physics-units-instruments-q2",
+    "gceol-physics-units-instruments-q3",
+    "gceol-physics-units-instruments-q4",
+    "gceol-physics-units-instruments-q5"
+   ],
+   "reviewNotes": [
+    "Vernier calipers and micrometer precisions (0.1 mm and 0.01 mm) are the usual school values; check which instruments the Board expects pupils to read.",
+    "Whether the syllabus requires reading a vernier scale in a written paper is to be confirmed.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Every measurement has a **number** and a **unit**. Scientists use the **SI system**. The base units we need are: length in **metre (m)**, mass in **kilogram (kg)**, time in **second (s)**, electric current in **ampere (A)** and temperature in **kelvin (K)** (in school we often use degrees Celsius, °C)."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Prefixes",
+     "md": "A prefix is a multiplier placed before a unit.\n\n- **kilo (k)** = 1000 = $10^3$\n- **centi (c)** = 1/100 = $10^{-2}$\n- **milli (m)** = 1/1000 = $10^{-3}$\n- **micro (µ)** = 1/1 000 000 = $10^{-6}$\n\nExample: 1 km = 1000 m and 1 mm = 0.001 m."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Area and volume conversions",
+     "md": "A length factor must be **squared** for area and **cubed** for volume.\n\n- 1 m = 100 cm, so 1 m² = 100 × 100 = 10 000 cm² and 1 m³ = 1 000 000 cm³.\n- 1 litre = 1000 cm³ = 0.001 m³ (so 1 cm³ = 1 millilitre).\n\nA very common mistake is to write 1 m² = 100 cm²."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 60,
+        "w": 50,
+        "h": 150,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 41,
+        "y": 130,
+        "w": 48,
+        "h": 79,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "text",
+        "x": 65,
+        "y": 45,
+        "text": "Before",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 200,
+        "y": 60,
+        "w": 50,
+        "h": 150,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 201,
+        "y": 110,
+        "w": 48,
+        "h": 99,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 225,
+        "cy": 175,
+        "r": 14,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 225,
+        "y": 45,
+        "text": "After",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 100,
+        "y1": 130,
+        "x2": 135,
+        "y2": 130,
+        "color": "ink",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 135,
+        "text": "40 cm³",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 260,
+        "y1": 110,
+        "x2": 295,
+        "y2": 110,
+        "color": "ink",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "text",
+        "x": 325,
+        "y": 115,
+        "text": "60 cm³",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Volume of an irregular stone by displacement: the water level rises from 40 cm³ to 60 cm³.",
+     "alt": "A measuring cylinder with water at 40 cm³ before and 60 cm³ after a stone is lowered in, so the stone has volume 20 cm³."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Measuring accurately",
+     "md": "- **Measuring cylinder**: read at the bottom of the curved surface (meniscus) with your eye level with it.\n- **Irregular solid**: volume = final reading − initial reading.\n- **Vernier calipers / micrometer**: for small lengths (about 0.1 mm and 0.01 mm precision); check for a zero error first.\n- **Timing**: time many events (e.g. 20 swings) and divide, which reduces the reaction-time error."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — volume of a block",
+     "statement": "A wooden block measures 5 cm by 4 cm by 3 cm. Find its volume in cm³ and in m³.",
+     "steps": [
+      "Volume = length × width × height = 5 × 4 × 3 = 60 cm³.",
+      "1 cm³ = 10⁻⁶ m³, so 60 cm³ = 60 × 10⁻⁶ m³.",
+      "60 × 10⁻⁶ = 6 × 10⁻⁵ m³."
+     ],
+     "answer": "60 cm³ = 6 × 10⁻⁵ m³"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — pendulum",
+     "statement": "A pupil in Bamenda times 20 complete swings of a pendulum and records 36 s. Find the period and the frequency.",
+     "steps": [
+      "Period T = total time ÷ number of swings = 36 ÷ 20 = 1.8 s.",
+      "Frequency f = 1 ÷ T = 1 ÷ 1.8 = 0.56 Hz (to 2 significant figures)."
+     ],
+     "answer": "T = 1.8 s, f ≈ 0.56 Hz"
+    }
+   ],
+   "chapter": "gceol-physics-measurement"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-physics-measurement-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-physics-units-instruments",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Convert 3.5 km into metres.",
+   "answer": 3500,
+   "tolerance": 0,
+   "unit": "m",
+   "explanation": "3.5 × 1000 = 3500 m.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-measurement"
+  },
+  {
+   "id": "gceol-physics-measurement-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-physics-units-instruments",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many cm³ are there in 2 litres?",
+   "choices": [
+    "2000",
+    "20 000",
+    "20",
+    "200"
+   ],
+   "answer": 0,
+   "explanation": "1 litre = 1000 cm³, so 2 litres = 2000 cm³.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-measurement"
+  },
+  {
+   "id": "gceol-physics-measurement-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-physics-units-instruments",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "1 m² is equal to 100 cm².",
+   "answer": false,
+   "explanation": "1 m² = 100 cm × 100 cm = 10 000 cm². Area conversion factors are squared.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-measurement"
+  },
+  {
+   "id": "gceol-physics-measurement-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-units-instruments",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A stone is lowered into a measuring cylinder. The water level rises from 35 cm³ to 52 cm³. Find the volume of the stone.",
+   "answer": 17,
+   "tolerance": 0,
+   "unit": "cm³",
+   "explanation": "52 − 35 = 17 cm³.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-measurement"
+  },
+  {
+   "id": "gceol-physics-measurement-e05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-units-instruments",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A pupil measures a short time of 0.4 s with a stopwatch and gets a large percentage error. What is the best improvement?",
+   "choices": [
+    "Take only one reading",
+    "Press the button harder",
+    "Use a bigger stopwatch",
+    "Time several repeats together and divide"
+   ],
+   "answer": 3,
+   "explanation": "Reaction time (about 0.2 s) is a fixed error; spreading it over many events makes its effect small.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-physics-measurement"
+  },
+  {
+   "id": "gceol-physics-measurement-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-physics-units-instruments",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In an experiment a pendulum makes 30 swings in 54 s.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the period in seconds.",
+     "answer": 1.8,
+     "tolerance": 0.01,
+     "explanation": "T = 54 ÷ 30 = 1.8 s.",
+     "unit": "s",
+     "id": "gceol-physics-measurement-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the frequency in hertz (to 2 decimal places).",
+     "answer": 0.56,
+     "tolerance": 0.01,
+     "explanation": "f = 30 ÷ 54 = 0.56 Hz.",
+     "unit": "Hz",
+     "id": "gceol-physics-measurement-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Give one reason why timing 30 swings gives a better period than timing 1 swing.",
+     "model": "The human reaction time error at the start and stop is the same size whatever the total time, so it is a much smaller fraction of 54 s than of 1.8 s.",
+     "rubric": "1 mark: reaction time / human error; 1 mark: smaller percentage error for the longer time.",
+     "explanation": "The human reaction time error at the start and stop is the same size whatever the total time, so it is a much smaller fraction of 54 s than of 1.8 s.",
+     "id": "gceol-physics-measurement-e06-c"
+    }
+   ],
+   "chapter": "gceol-physics-measurement"
+  },
+  {
+   "id": "gceol-physics-units-instruments-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-units-instruments",
+   "prompt": "Which is the SI unit of mass?",
+   "choices": [
+    "tonne",
+    "newton",
+    "gram",
+    "kilogram"
+   ],
+   "answer": 3,
+   "explanation": "The SI base unit of mass is the kilogram.",
+   "chapter": "gceol-physics-measurement"
+  },
+  {
+   "id": "gceol-physics-units-instruments-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-units-instruments",
+   "prompt": "0.002 m equals",
+   "choices": [
+    "0.2 mm",
+    "20 mm",
+    "2 mm",
+    "2 cm"
+   ],
+   "answer": 2,
+   "explanation": "0.002 m = 2 × 10⁻³ m = 2 mm.",
+   "chapter": "gceol-physics-measurement"
+  },
+  {
+   "id": "gceol-physics-units-instruments-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-units-instruments",
+   "prompt": "1 m³ equals",
+   "choices": [
+    "1 000 000 cm³",
+    "10 000 cm³",
+    "1000 cm³",
+    "100 cm³"
+   ],
+   "answer": 0,
+   "explanation": "Cube the factor: 100³ = 1 000 000.",
+   "chapter": "gceol-physics-measurement"
+  },
+  {
+   "id": "gceol-physics-units-instruments-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-units-instruments",
+   "prompt": "Where do you read a water level in a measuring cylinder?",
+   "choices": [
+    "At the top of the cylinder",
+    "At the bottom of the meniscus, with the eye level",
+    "At the glass edge",
+    "At the top of the meniscus from above"
+   ],
+   "answer": 1,
+   "explanation": "Reading at the bottom of the meniscus at eye level avoids parallax error.",
+   "chapter": "gceol-physics-measurement"
+  },
+  {
+   "id": "gceol-physics-units-instruments-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-units-instruments",
+   "prompt": "The period of a pendulum is 2 s. Its frequency is",
+   "choices": [
+    "4 Hz",
+    "0.5 Hz",
+    "0.2 Hz",
+    "2 Hz"
+   ],
+   "answer": 1,
+   "explanation": "f = 1/T = 1/2 = 0.5 Hz.",
+   "chapter": "gceol-physics-measurement"
+  }
+ ]
+}

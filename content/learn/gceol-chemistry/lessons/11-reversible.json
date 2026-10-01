@@ -1,0 +1,347 @@
+{
+ "chapter": "gceol-chemistry-reversible",
+ "lessons": [
+  {
+   "id": "gceol-chemistry-equilibrium-basics",
+   "title": "Reversible reactions and equilibrium",
+   "minutes": 30,
+   "programRef": "GCE O Level Chemistry — Reversible reactions and equilibrium (basic), Haber and contact processes (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Recognise a reversible reaction (⇌) and give examples.",
+    "Describe dynamic equilibrium in a closed system.",
+    "Predict the effect of changing temperature and pressure (Le Chatelier's principle).",
+    "Explain the conditions used in the Haber process."
+   ],
+   "prerequisites": [
+    "gceol-chemistry-rates-reaction",
+    "gceol-chemistry-energy-changes"
+   ],
+   "exercises": [
+    "gceol-chemistry-reversible-e01",
+    "gceol-chemistry-reversible-e02",
+    "gceol-chemistry-reversible-e03",
+    "gceol-chemistry-reversible-e04",
+    "gceol-chemistry-reversible-e05",
+    "gceol-chemistry-reversible-e06"
+   ],
+   "selfCheck": [
+    "gceol-chemistry-equilibrium-basics-q1",
+    "gceol-chemistry-equilibrium-basics-q2",
+    "gceol-chemistry-equilibrium-basics-q3",
+    "gceol-chemistry-equilibrium-basics-q4",
+    "gceol-chemistry-equilibrium-basics-q5"
+   ],
+   "reviewNotes": [
+    "Haber process conditions quoted as 'about 450 °C, about 200 atmospheres, iron catalyst' are typical textbook figures; actual plants vary.",
+    "Le Chatelier's principle is stated qualitatively. Equilibrium constants are not part of this lesson.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Reversible reactions",
+     "md": "A **reversible reaction** can go both ways, shown by **⇌**. Examples: hydrated copper(II) sulphate (blue) ⇌ anhydrous copper(II) sulphate (white) + water; ammonium chloride ⇌ ammonia + hydrogen chloride; N₂ + 3H₂ ⇌ 2NH₃. In a **closed system** the forward and reverse reactions eventually proceed at the **same rate**: this is **dynamic equilibrium** (the amounts stay constant but both reactions go on)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Le Chatelier's principle",
+     "md": "If a condition of a system at equilibrium is changed, the position of equilibrium shifts to **oppose** the change.\n\n- **Higher pressure** favours the side with **fewer gas molecules**.\n- **Higher temperature** favours the **endothermic** direction; lower temperature favours the exothermic direction.\n- Removing a product pulls the equilibrium towards the products.\n- A **catalyst** does not change the position of equilibrium; it only makes it reached faster."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "The Haber process",
+     "md": "N₂(g) + 3H₂(g) ⇌ 2NH₃(g); the forward reaction is **exothermic**. Four gas moles on the left, two on the right. Conditions: about **450 °C**, about **200 atmospheres**, **iron** catalyst. High pressure favours ammonia; low temperature would favour ammonia too but is too slow, so a **compromise** temperature is used. Unreacted N₂ and H₂ are recycled and ammonia is removed by cooling and liquefying."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- At equilibrium the reactions have **not stopped**; the rates are equal.\n- A catalyst does not increase the yield at equilibrium.\n- Do not say 'the reaction goes to completion' for a reversible reaction in a closed system."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 10,
+      "ymin": 0,
+      "ymax": 12,
+      "grid": 2,
+      "w": 400,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "4+6*exp(-0.5*x)",
+        "color": "blue",
+        "label": "forward"
+       },
+       {
+        "expr": "4-4*exp(-0.5*x)",
+        "color": "red",
+        "label": "reverse"
+       }
+      ],
+      "points": [],
+      "segments": [],
+      "xlabel": "time",
+      "ylabel": "rate"
+     },
+     "caption": "Rates of the forward and reverse reactions approach each other and become equal at equilibrium.",
+     "alt": "A falling blue curve and a rising red curve meeting at the same value."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — effect of pressure",
+     "statement": "How does increasing the pressure affect the yield of ammonia in N₂ + 3H₂ ⇌ 2NH₃?",
+     "steps": [
+      "Left side has 1 + 3 = 4 moles of gas, right side has 2 moles.",
+      "Higher pressure favours the side with fewer gas moles: the yield of ammonia **increases**."
+     ],
+     "answer": "Yield of ammonia increases"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — effect of temperature",
+     "statement": "The forward reaction in the Haber process is exothermic. Explain why a very high temperature would give a poor yield and why a moderate temperature of about 450 °C is chosen.",
+     "steps": [
+      "Raising the temperature shifts the equilibrium in the endothermic direction, which is the reverse reaction, so less ammonia is present at equilibrium.",
+      "But at low temperature the rate is too slow, so about 450 °C with an iron catalyst is a compromise between yield and rate."
+     ],
+     "answer": "High T lowers yield; 450 °C is a compromise"
+    }
+   ],
+   "chapter": "gceol-chemistry-reversible"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-chemistry-reversible-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-equilibrium-basics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "At equilibrium in a closed system",
+   "choices": [
+    "forward and reverse reactions have equal rates",
+    "the reactions have stopped",
+    "only the forward reaction occurs",
+    "the concentrations are zero"
+   ],
+   "answer": 0,
+   "explanation": "Dynamic equilibrium.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-reversible"
+  },
+  {
+   "id": "gceol-chemistry-reversible-e02",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-chemistry-equilibrium-basics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A catalyst increases the yield of ammonia at equilibrium.",
+   "answer": false,
+   "explanation": "It speeds up both directions equally; the equilibrium position is unchanged.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-reversible"
+  },
+  {
+   "id": "gceol-chemistry-reversible-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-chemistry-equilibrium-basics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In N₂ + 3H₂ ⇌ 2NH₃ how many moles of gas are on the left side?",
+   "answer": 4,
+   "tolerance": 0,
+   "unit": "mol",
+   "explanation": "1 + 3 = 4 moles of gas.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-reversible"
+  },
+  {
+   "id": "gceol-chemistry-reversible-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-equilibrium-basics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which condition would shift CaCO₃ ⇌ CaO + CO₂ (endothermic forward) towards CaO?",
+   "choices": [
+    "higher temperature",
+    "adding more CO₂ gas",
+    "adding a catalyst",
+    "lower temperature"
+   ],
+   "answer": 0,
+   "explanation": "Heat favours the endothermic reaction.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-reversible"
+  },
+  {
+   "id": "gceol-chemistry-reversible-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-equilibrium-basics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In the contact process 2SO₂ + O₂ ⇌ 2SO₃ (exothermic), a vanadium(V) oxide catalyst and about 450 °C are used. Explain why a catalyst is used.",
+   "model": "The catalyst speeds up the reaction so equilibrium is reached quickly at a moderate temperature; it does not change the yield.",
+   "rubric": "1 mark: increases rate; 1 mark: does not change the position of equilibrium/yield.",
+   "explanation": "The catalyst speeds up the reaction so equilibrium is reached quickly at a moderate temperature; it does not change the yield.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-chemistry-reversible"
+  },
+  {
+   "id": "gceol-chemistry-reversible-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-equilibrium-basics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Ammonium chloride is warmed gently in a test tube: NH₄Cl(s) ⇌ NH₃(g) + HCl(g). Damp red litmus and damp blue litmus papers are placed in the mouth of the tube.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which paper changes first, and to what colour?",
+     "choices": [
+      "Neither changes",
+      "Red litmus turns blue",
+      "Blue litmus turns red",
+      "Both turn white"
+     ],
+     "answer": 1,
+     "explanation": "NH₃ is lighter than HCl, diffuses faster and is alkaline.",
+     "id": "gceol-chemistry-reversible-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The white solid reforms on the cooler part of the tube. This shows that the reaction is",
+     "choices": [
+      "irreversible",
+      "a combustion",
+      "reversible",
+      "a neutralisation only"
+     ],
+     "answer": 2,
+     "explanation": "NH₃ and HCl recombine on cooling to form NH₄Cl.",
+     "id": "gceol-chemistry-reversible-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "State two examples of reversible changes in chemistry.",
+     "model": "Heating hydrated copper(II) sulphate (blue to white) and adding water to regenerate it; N₂ + 3H₂ ⇌ 2NH₃.",
+     "rubric": "1 mark each.",
+     "explanation": "Heating hydrated copper(II) sulphate (blue to white) and adding water to regenerate it; N₂ + 3H₂ ⇌ 2NH₃.",
+     "id": "gceol-chemistry-reversible-e06-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explain what is meant by dynamic equilibrium.",
+     "model": "In a closed system the forward and backward reactions continue at the same rate, so the concentrations stay constant.",
+     "rubric": "1 mark: both reactions continue; 1 mark: same rate/constant concentrations.",
+     "explanation": "In a closed system the forward and backward reactions continue at the same rate, so the concentrations stay constant.",
+     "id": "gceol-chemistry-reversible-e06-d"
+    }
+   ],
+   "chapter": "gceol-chemistry-reversible"
+  },
+  {
+   "id": "gceol-chemistry-equilibrium-basics-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-equilibrium-basics",
+   "prompt": "The symbol ⇌ means",
+   "choices": [
+    "the reaction is complete",
+    "the substance is a gas",
+    "the reaction is reversible",
+    "the reaction is slow"
+   ],
+   "answer": 2,
+   "explanation": "It can go both ways.",
+   "chapter": "gceol-chemistry-reversible"
+  },
+  {
+   "id": "gceol-chemistry-equilibrium-basics-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-equilibrium-basics",
+   "prompt": "Increasing the pressure in the Haber process",
+   "choices": [
+    "favours ammonia",
+    "favours nitrogen only",
+    "stops the reaction",
+    "has no effect"
+   ],
+   "answer": 0,
+   "explanation": "Fewer gas moles on the product side.",
+   "chapter": "gceol-chemistry-reversible"
+  },
+  {
+   "id": "gceol-chemistry-equilibrium-basics-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-equilibrium-basics",
+   "prompt": "The catalyst in the Haber process is",
+   "choices": [
+    "platinum",
+    "manganese(IV) oxide",
+    "iron",
+    "copper"
+   ],
+   "answer": 2,
+   "explanation": "Iron is used.",
+   "chapter": "gceol-chemistry-reversible"
+  },
+  {
+   "id": "gceol-chemistry-equilibrium-basics-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-equilibrium-basics",
+   "prompt": "Adding a catalyst to a reaction at equilibrium",
+   "choices": [
+    "does not change the position of equilibrium",
+    "removes the product",
+    "decreases the yield",
+    "increases the yield"
+   ],
+   "answer": 0,
+   "explanation": "It only speeds things up.",
+   "chapter": "gceol-chemistry-reversible"
+  },
+  {
+   "id": "gceol-chemistry-equilibrium-basics-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-equilibrium-basics",
+   "prompt": "Unreacted nitrogen and hydrogen in the Haber process are",
+   "choices": [
+    "thrown away",
+    "recycled",
+    "burnt",
+    "dissolved in water"
+   ],
+   "answer": 1,
+   "explanation": "They return to the reactor.",
+   "chapter": "gceol-chemistry-reversible"
+  }
+ ]
+}

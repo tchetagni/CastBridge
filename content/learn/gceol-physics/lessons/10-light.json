@@ -1,0 +1,1225 @@
+{
+ "chapter": "gceol-physics-light",
+ "lessons": [
+  {
+   "id": "gceol-physics-reflection",
+   "title": "Reflection of light and plane mirrors",
+   "minutes": 25,
+   "programRef": "GCE O Level Physics — Light: reflection, refraction, total internal reflection, lenses, dispersion (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "State that light travels in straight lines and explain shadows.",
+    "State and use the laws of reflection.",
+    "Describe the image formed by a plane mirror.",
+    "Use simple ray diagrams, periscopes and rotating mirrors."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-physics-light-e01",
+    "gceol-physics-light-e02",
+    "gceol-physics-light-e03",
+    "gceol-physics-light-e04",
+    "gceol-physics-light-e05",
+    "gceol-physics-light-e06"
+   ],
+   "selfCheck": [
+    "gceol-physics-reflection-q1",
+    "gceol-physics-reflection-q2",
+    "gceol-physics-reflection-q3",
+    "gceol-physics-reflection-q4",
+    "gceol-physics-reflection-q5"
+   ],
+   "reviewNotes": [
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Laws of reflection",
+     "md": "Light travels in straight lines (**rectilinear propagation**), which explains shadows and eclipses. When light hits a smooth surface it is **reflected**:\n\n1. The angle of incidence **i** equals the angle of reflection **r**.\n2. The incident ray, the reflected ray and the **normal** all lie in the same plane.\n\nAngles are measured from the **normal** (the line at 90° to the mirror)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Image in a plane mirror",
+     "md": "The image is **virtual** (cannot be put on a screen), **upright**, the **same size** as the object, as far **behind** the mirror as the object is in front, and **laterally inverted** (left and right swapped). A **periscope** uses two parallel mirrors at 45° to see over obstacles."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- Angles i and r are measured from the **normal**, not from the mirror surface.\n- A virtual image is not formed by real light rays meeting; it cannot be caught on a screen.\n- If a mirror turns through an angle θ, the reflected ray turns through **2θ**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 170,
+        "x2": 340,
+        "y2": 170,
+        "color": "ink",
+        "width": 4
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 170,
+        "x2": 200,
+        "y2": 40,
+        "color": "grey",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "line",
+        "x1": 90,
+        "y1": 60,
+        "x2": 200,
+        "y2": 170,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 170,
+        "x2": 310,
+        "y2": 60,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 28,
+        "text": "normal",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 165,
+        "y": 115,
+        "text": "i",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 238,
+        "y": 115,
+        "text": "r",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 200,
+        "text": "mirror",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Reflection at a plane mirror: angle of incidence i equals angle of reflection r.",
+     "alt": "A horizontal mirror with a vertical dashed normal, an incident ray from upper left and a reflected ray to upper right, with angles i and r marked."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — angle with the mirror",
+     "statement": "A ray hits a plane mirror making an angle of 35° with the mirror surface. Find the angle of incidence, the angle of reflection and the angle between the incident and reflected rays.",
+     "steps": [
+      "The normal is at 90° to the mirror, so i = 90° − 35° = 55°.",
+      "By the law of reflection r = i = 55°.",
+      "Angle between incident and reflected rays = i + r = 110°."
+     ],
+     "answer": "i = 55°, r = 55°, angle between rays 110°"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — person and image",
+     "statement": "A pupil stands 2 m in front of a plane mirror. (a) How far is the image from the mirror and from the pupil? (b) The pupil walks 0.5 m towards the mirror: how far is she then from her image?",
+     "steps": [
+      "(a) The image is 2 m behind the mirror, so it is 2 + 2 = 4 m from the pupil.",
+      "(b) The pupil is now 1.5 m from the mirror, the image is 1.5 m behind it: distance 3 m."
+     ],
+     "answer": "(a) 2 m and 4 m; (b) 3 m"
+    }
+   ],
+   "chapter": "gceol-physics-light"
+  },
+  {
+   "id": "gceol-physics-refraction",
+   "title": "Refraction, total internal reflection and dispersion",
+   "minutes": 30,
+   "programRef": "GCE O Level Physics — Light: reflection, refraction, total internal reflection, lenses, dispersion (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Explain refraction as a change of speed and direction at a boundary.",
+    "Use n = sin i / sin r and n = c/v.",
+    "State the conditions for total internal reflection and find the critical angle.",
+    "Describe dispersion of white light by a prism."
+   ],
+   "prerequisites": [
+    "gceol-physics-reflection"
+   ],
+   "exercises": [
+    "gceol-physics-light-e07",
+    "gceol-physics-light-e08",
+    "gceol-physics-light-e09",
+    "gceol-physics-light-e10",
+    "gceol-physics-light-e11",
+    "gceol-physics-light-e12"
+   ],
+   "selfCheck": [
+    "gceol-physics-refraction-q1",
+    "gceol-physics-refraction-q2",
+    "gceol-physics-refraction-q3",
+    "gceol-physics-refraction-q4",
+    "gceol-physics-refraction-q5"
+   ],
+   "reviewNotes": [
+    "Refractive indices used: glass 1.5, water 1.33 (about 4/3). Speed of light in vacuum 3 × 10⁸ m/s.",
+    "Apparent depth formula (n = real depth ÷ apparent depth) assumes viewing nearly from above; check if required.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Refraction",
+     "md": "**Refraction** is the change of direction of light when it passes from one transparent medium to another, caused by the change of speed. Going from air into glass or water (slower) the ray bends **towards the normal**; leaving, it bends **away**. The **refractive index** is $n = \\frac{\\sin i}{\\sin r} = \\frac{c}{v}$ (i in the air, r in the medium; c = speed of light in vacuum)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Total internal reflection (TIR)",
+     "md": "TIR happens when light travels from a **denser to a less dense** medium (e.g. glass to air) and the angle of incidence is **greater than the critical angle c**. Then all the light is reflected inside. $\\sin c = \\frac{1}{n}$. Used in **optical fibres**, prism periscopes and reflectors on bicycles."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Dispersion",
+     "md": "White light passing through a **prism** splits into a spectrum: **red, orange, yellow, green, blue, indigo, violet**. Red is bent least and violet most because the speed (and so the refractive index) depends on the colour. A rainbow is dispersion by raindrops."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- Calculators must be in degree mode for sine problems.\n- Light bends towards the normal when it enters a **denser** medium, not away.\n- TIR needs **both** conditions: denser to less dense, and i > c."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 130,
+        "w": 280,
+        "h": 90,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "grey"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 40,
+        "x2": 200,
+        "y2": 215,
+        "color": "grey",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "line",
+        "x1": 95,
+        "y1": 50,
+        "x2": 200,
+        "y2": 130,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 130,
+        "x2": 245,
+        "y2": 215,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 255,
+        "y": 75,
+        "text": "air",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 175,
+        "text": "glass",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 80,
+        "text": "i",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 215,
+        "y": 175,
+        "text": "r",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Refraction at an air-glass boundary: the ray bends towards the normal as it enters glass.",
+     "alt": "A glass block with a dashed vertical normal; a ray from upper left bends towards the normal inside the glass."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Snell's law",
+     "statement": "A ray in air hits glass (n = 1.5) at an angle of incidence of 45°. Find the angle of refraction.",
+     "steps": [
+      "n = sin i ÷ sin r, so sin r = sin 45° ÷ 1.5 = 0.7071 ÷ 1.5 = 0.4714.",
+      "r = sin⁻¹(0.4714) = 28.1°."
+     ],
+     "answer": "r ≈ 28.1°"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — critical angle",
+     "statement": "Find the critical angle for glass (n = 1.5) and for water (n = 1.33).",
+     "steps": [
+      "sin c = 1/n. Glass: sin c = 1/1.5 = 0.667, so c = 41.8°.",
+      "Water: sin c = 1/1.33 = 0.752, so c = 48.8°."
+     ],
+     "answer": "c(glass) ≈ 41.8°; c(water) ≈ 48.8°"
+    }
+   ],
+   "chapter": "gceol-physics-light"
+  },
+  {
+   "id": "gceol-physics-lenses",
+   "title": "Lenses, images and the eye",
+   "minutes": 30,
+   "programRef": "GCE O Level Physics — Light: reflection, refraction, total internal reflection, lenses, dispersion (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Draw ray diagrams for converging lenses.",
+    "Describe the images formed for different object positions.",
+    "Use 1/f = 1/u + 1/v and magnification m = v/u.",
+    "Describe the camera, magnifying glass and eye, and the correction of sight defects."
+   ],
+   "prerequisites": [
+    "gceol-physics-refraction"
+   ],
+   "exercises": [
+    "gceol-physics-light-e13",
+    "gceol-physics-light-e14",
+    "gceol-physics-light-e15",
+    "gceol-physics-light-e16",
+    "gceol-physics-light-e17",
+    "gceol-physics-light-e18"
+   ],
+   "selfCheck": [
+    "gceol-physics-lenses-q1",
+    "gceol-physics-lenses-q2",
+    "gceol-physics-lenses-q3",
+    "gceol-physics-lenses-q4",
+    "gceol-physics-lenses-q5"
+   ],
+   "reviewNotes": [
+    "Sign convention: 'real-is-positive' is used (u, v, f positive for real objects/images and a converging lens); virtual images have negative v. Check the convention the Board expects.",
+    "Ray-diagram scale and the exact set of instruments required should be checked against the syllabus.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Converging lens",
+     "md": "A **converging (convex) lens** bends parallel rays to meet at the **principal focus F**; the **focal length f** is the distance from the lens to F. Three rays are used: (1) a ray parallel to the axis passes through F; (2) a ray through the optical centre is not deviated; (3) a ray through F emerges parallel to the axis."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Image positions (converging lens)",
+     "md": "- Object beyond **2f**: image real, inverted, smaller (camera).\n- At **2f**: real, inverted, same size.\n- Between **f and 2f**: real, inverted, magnified (projector).\n- Closer than **f**: virtual, upright, magnified (magnifying glass)."
+    },
+    {
+     "type": "formula",
+     "tex": "\\frac{1}{f} = \\frac{1}{u} + \\frac{1}{v} \\qquad m = \\frac{v}{u} = \\frac{h_i}{h_o}",
+     "caption": "real-is-positive convention"
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "The eye",
+     "md": "The eye has a converging lens that forms a real inverted image on the **retina**. **Short sight** (myopia): distant objects blurred, corrected by a **diverging** lens. **Long sight**: near objects blurred, corrected by a **converging** lens. A **camera** is similar: lens, adjustable aperture and a film or sensor."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 20,
+        "x2": 200,
+        "y2": 220,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 120,
+        "x2": 380,
+        "y2": 120,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 142,
+        "text": "F",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 142,
+        "text": "F",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 120,
+        "x2": 60,
+        "y2": 80,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 340,
+        "y1": 120,
+        "x2": 340,
+        "y2": 160,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 80,
+        "x2": 200,
+        "y2": 80,
+        "color": "red",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 80,
+        "x2": 340,
+        "y2": 160,
+        "color": "red",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 80,
+        "x2": 200,
+        "y2": 120,
+        "color": "orange",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 120,
+        "x2": 340,
+        "y2": 160,
+        "color": "orange",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 62,
+        "text": "object",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 340,
+        "y": 185,
+        "text": "image",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Object at 2f from a converging lens: the image is real, inverted, same size, at 2f on the other side.",
+     "alt": "A converging lens with two focal points marked, an object arrow on the left and an inverted image of the same size on the right, with two construction rays."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — camera-like image",
+     "statement": "A 6 cm tall object is 40 cm from a converging lens of focal length 10 cm. Find the image distance, the magnification and the image height.",
+     "steps": [
+      "1/v = 1/f − 1/u = 1/10 − 1/40 = 3/40, so v = 40/3 = 13.3 cm.",
+      "m = v/u = 13.3 ÷ 40 = 1/3.",
+      "Image height = m × 6 = 2 cm (real, inverted, diminished)."
+     ],
+     "answer": "v ≈ 13.3 cm; m = 1/3; image 2 cm"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — projector-like image",
+     "statement": "An object is 15 cm from a converging lens of focal length 10 cm. Find v and the magnification.",
+     "steps": [
+      "1/v = 1/10 − 1/15 = 1/30, so v = 30 cm.",
+      "m = v/u = 30 ÷ 15 = 2: the image is real, inverted and twice the size of the object."
+     ],
+     "answer": "v = 30 cm; m = 2"
+    }
+   ],
+   "chapter": "gceol-physics-light"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-physics-light-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-physics-reflection",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A ray makes an angle of 40° with a plane mirror. Find the angle of reflection.",
+   "answer": 50,
+   "tolerance": 0,
+   "unit": "°",
+   "explanation": "i = 90° − 40° = 50°, so r = 50°.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-light"
+  },
+  {
+   "id": "gceol-physics-light-e02",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-physics-reflection",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The image in a plane mirror is real.",
+   "answer": false,
+   "explanation": "It is virtual: no light actually passes through the image position.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-light"
+  },
+  {
+   "id": "gceol-physics-light-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-physics-reflection",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An object is 3 m in front of a plane mirror. The distance from the object to its image is",
+   "choices": [
+    "9 m",
+    "6 m",
+    "3 m",
+    "1.5 m"
+   ],
+   "answer": 1,
+   "explanation": "The image is 3 m behind the mirror: total 6 m.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-light"
+  },
+  {
+   "id": "gceol-physics-light-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-reflection",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A plane mirror is turned through 20°. Through what angle does a fixed reflected ray turn?",
+   "answer": 40,
+   "tolerance": 0,
+   "unit": "°",
+   "explanation": "The reflected ray turns through twice the angle of the mirror: 2 × 20° = 40°.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-physics-light"
+  },
+  {
+   "id": "gceol-physics-light-e05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-reflection",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The word AMBULANCE is painted on the front of an ambulance as reversed writing so that",
+   "choices": [
+    "it is cheaper",
+    "it looks nicer",
+    "light is reflected away",
+    "drivers see it correctly in their rear-view mirror"
+   ],
+   "answer": 3,
+   "explanation": "Lateral inversion in the mirror turns it the right way round.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-light"
+  },
+  {
+   "id": "gceol-physics-light-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-physics-reflection",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A pupil of height 1.6 m stands 1.5 m in front of a vertical plane mirror in a school hall in Garoua.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How far behind the mirror is her image?",
+     "answer": 1.5,
+     "tolerance": 0,
+     "explanation": "The image is as far behind the mirror as she is in front: 1.5 m.",
+     "unit": "m",
+     "id": "gceol-physics-light-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How far is her image from her?",
+     "answer": 3.0,
+     "tolerance": 0,
+     "explanation": "1.5 + 1.5 = 3.0 m.",
+     "unit": "m",
+     "id": "gceol-physics-light-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "What is the height of the image?",
+     "answer": 1.6,
+     "tolerance": 0,
+     "explanation": "The image is the same size as the object: 1.6 m.",
+     "unit": "m",
+     "id": "gceol-physics-light-e06-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "State two characteristics of the image apart from its size.",
+     "model": "It is virtual and upright (and laterally inverted).",
+     "rubric": "1 mark each; any two of virtual, upright, laterally inverted.",
+     "explanation": "It is virtual and upright (and laterally inverted).",
+     "id": "gceol-physics-light-e06-d"
+    }
+   ],
+   "chapter": "gceol-physics-light"
+  },
+  {
+   "id": "gceol-physics-reflection-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-reflection",
+   "prompt": "The angle of reflection equals the",
+   "choices": [
+    "angle with the mirror",
+    "critical angle",
+    "angle of incidence",
+    "angle of refraction"
+   ],
+   "answer": 2,
+   "explanation": "Law of reflection.",
+   "chapter": "gceol-physics-light"
+  },
+  {
+   "id": "gceol-physics-reflection-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-reflection",
+   "prompt": "The normal is a line",
+   "choices": [
+    "parallel to the ray",
+    "at 45° to the surface",
+    "along the surface",
+    "at 90° to the surface"
+   ],
+   "answer": 3,
+   "explanation": "Angles are measured from it.",
+   "chapter": "gceol-physics-light"
+  },
+  {
+   "id": "gceol-physics-reflection-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-reflection",
+   "prompt": "An image in a plane mirror is",
+   "choices": [
+    "virtual and magnified",
+    "virtual and the same size as the object",
+    "real and diminished",
+    "real and magnified"
+   ],
+   "answer": 1,
+   "explanation": "Standard properties.",
+   "chapter": "gceol-physics-light"
+  },
+  {
+   "id": "gceol-physics-reflection-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-reflection",
+   "prompt": "A periscope uses",
+   "choices": [
+    "no mirrors",
+    "two lenses only",
+    "two plane mirrors",
+    "a prism and a bulb"
+   ],
+   "answer": 2,
+   "explanation": "Parallel mirrors at 45°.",
+   "chapter": "gceol-physics-light"
+  },
+  {
+   "id": "gceol-physics-reflection-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-reflection",
+   "prompt": "A ray hits a mirror with i = 30°. The angle between the incident and reflected rays is",
+   "choices": [
+    "60°",
+    "15°",
+    "90°",
+    "30°"
+   ],
+   "answer": 0,
+   "explanation": "i + r = 30° + 30° = 60°.",
+   "chapter": "gceol-physics-light"
+  },
+  {
+   "id": "gceol-physics-light-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-physics-refraction",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the speed of light in glass of refractive index 1.5 (c = 3 × 10⁸ m/s). Give your answer in 10⁸ m/s.",
+   "answer": 2,
+   "tolerance": 0,
+   "unit": "×10⁸ m/s",
+   "explanation": "v = c ÷ n = 3 × 10⁸ ÷ 1.5 = 2 × 10⁸ m/s.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-light"
+  },
+  {
+   "id": "gceol-physics-light-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-physics-refraction",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A ray passes from air into water. It bends",
+   "choices": [
+    "not at all",
+    "towards the normal",
+    "away from the normal",
+    "back into the air"
+   ],
+   "answer": 1,
+   "explanation": "Water is optically denser; light slows down and bends towards the normal.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-light"
+  },
+  {
+   "id": "gceol-physics-light-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-physics-refraction",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Total internal reflection can occur when light goes from air into glass.",
+   "answer": false,
+   "explanation": "TIR requires travel from a denser to a less dense medium.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-light"
+  },
+  {
+   "id": "gceol-physics-light-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-refraction",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the critical angle (in degrees) of a material of refractive index 2.",
+   "answer": 30,
+   "tolerance": 0.1,
+   "unit": "°",
+   "explanation": "sin c = 1/2 = 0.5, so c = 30°.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-physics-light"
+  },
+  {
+   "id": "gceol-physics-light-e11",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-refraction",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A swimming pool is 2.0 m deep (n = 1.33). Looking vertically down, the apparent depth is real depth ÷ n. Find the apparent depth (to 1 d.p.).",
+   "answer": 1.5,
+   "tolerance": 0.05,
+   "unit": "m",
+   "explanation": "Apparent depth = 2.0 ÷ 1.33 = 1.5 m.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-physics-light"
+  },
+  {
+   "id": "gceol-physics-light-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-physics-refraction",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A ray of light in air strikes a glass block (n = 1.5) at an angle of incidence of 30°.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the angle of refraction (to the nearest degree).",
+     "answer": 19,
+     "tolerance": 1,
+     "explanation": "sin r = sin 30° ÷ 1.5 = 0.5 ÷ 1.5 = 0.333; r = 19.5°, about 20°.",
+     "unit": "°",
+     "id": "gceol-physics-light-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the speed of light in the glass in 10⁸ m/s.",
+     "answer": 2,
+     "tolerance": 0,
+     "explanation": "v = 3 × 10⁸ ÷ 1.5 = 2 × 10⁸ m/s.",
+     "unit": "×10⁸ m/s",
+     "id": "gceol-physics-light-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the critical angle of the glass in degrees (nearest degree).",
+     "answer": 42,
+     "tolerance": 1,
+     "explanation": "sin c = 1/1.5, c = 41.8°, about 42°.",
+     "unit": "°",
+     "id": "gceol-physics-light-e12-c"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "A ray inside the glass hits the glass-air surface at 50°. What happens?",
+     "choices": [
+      "It refracts out into the air",
+      "It is absorbed",
+      "Total internal reflection, since 50° is more than 42°",
+      "It stops"
+     ],
+     "answer": 2,
+     "explanation": "i = 50° is greater than the critical angle (about 42°), so TIR occurs.",
+     "id": "gceol-physics-light-e12-d"
+    }
+   ],
+   "chapter": "gceol-physics-light"
+  },
+  {
+   "id": "gceol-physics-refraction-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-refraction",
+   "prompt": "The refractive index n equals",
+   "choices": [
+    "sin i ÷ sin r",
+    "i ÷ r",
+    "sin r ÷ sin i",
+    "v ÷ c"
+   ],
+   "answer": 0,
+   "explanation": "Snell's law with i in the air.",
+   "chapter": "gceol-physics-light"
+  },
+  {
+   "id": "gceol-physics-refraction-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-refraction",
+   "prompt": "Which colour is refracted most by a prism?",
+   "choices": [
+    "violet",
+    "green",
+    "red",
+    "yellow"
+   ],
+   "answer": 0,
+   "explanation": "Violet has the highest refractive index.",
+   "chapter": "gceol-physics-light"
+  },
+  {
+   "id": "gceol-physics-refraction-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-refraction",
+   "prompt": "TIR needs light travelling from",
+   "choices": [
+    "less dense to denser",
+    "any medium to any medium",
+    "air to water",
+    "denser to less dense medium with i > c"
+   ],
+   "answer": 3,
+   "explanation": "Both conditions are needed.",
+   "chapter": "gceol-physics-light"
+  },
+  {
+   "id": "gceol-physics-refraction-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-refraction",
+   "prompt": "n = 2. The speed of light in the material is",
+   "choices": [
+    "c/4",
+    "c",
+    "2c",
+    "c/2"
+   ],
+   "answer": 3,
+   "explanation": "v = c/n.",
+   "chapter": "gceol-physics-light"
+  },
+  {
+   "id": "gceol-physics-refraction-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-refraction",
+   "prompt": "Optical fibres work because of",
+   "choices": [
+    "reflection in a plane mirror",
+    "diffraction",
+    "total internal reflection",
+    "dispersion"
+   ],
+   "answer": 2,
+   "explanation": "Light is trapped inside the glass fibre.",
+   "chapter": "gceol-physics-light"
+  },
+  {
+   "id": "gceol-physics-light-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-physics-lenses",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A converging lens of f = 5 cm forms an image of an object 10 cm away. Find the image distance.",
+   "answer": 10,
+   "tolerance": 0,
+   "unit": "cm",
+   "explanation": "1/v = 1/5 − 1/10 = 1/10, so v = 10 cm (the object is at 2f).",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-light"
+  },
+  {
+   "id": "gceol-physics-light-e14",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-physics-lenses",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An object is placed closer to a converging lens than its focal length. The image is",
+   "choices": [
+    "real, inverted and magnified",
+    "no image",
+    "virtual, upright and magnified",
+    "real and diminished"
+   ],
+   "answer": 2,
+   "explanation": "This is how a magnifying glass works.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-light"
+  },
+  {
+   "id": "gceol-physics-light-e15",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-physics-lenses",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A person who cannot see distant objects clearly (short sight) uses a",
+   "choices": [
+    "diverging lens",
+    "plane mirror",
+    "converging lens",
+    "prism"
+   ],
+   "answer": 0,
+   "explanation": "A diverging lens corrects short sight.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-light"
+  },
+  {
+   "id": "gceol-physics-light-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-lenses",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An object is 36 cm from a converging lens of focal length 12 cm. Find the image distance.",
+   "answer": 18.0,
+   "tolerance": 0.01,
+   "unit": "cm",
+   "explanation": "1/v = 1/12 − 1/36 = 2/36, so v = 18 cm.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-physics-light"
+  },
+  {
+   "id": "gceol-physics-light-e17",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-lenses",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The image formed on the retina is real and inverted.",
+   "answer": true,
+   "explanation": "The brain interprets it as upright.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-light"
+  },
+  {
+   "id": "gceol-physics-light-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-physics-lenses",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An object of height 3 cm is placed 12 cm from a converging lens of focal length 8 cm.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the image distance.",
+     "answer": 23.999999999999996,
+     "tolerance": 0.01,
+     "explanation": "1/v = 1/8 − 1/12 = 1/24, so v = 24 cm.",
+     "unit": "cm",
+     "id": "gceol-physics-light-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the magnification.",
+     "answer": 1.9999999999999998,
+     "tolerance": 0.01,
+     "explanation": "m = v/u = 24 ÷ 12 = 2.",
+     "id": "gceol-physics-light-e18-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the height of the image in cm.",
+     "answer": 5.999999999999999,
+     "tolerance": 0.01,
+     "explanation": "Image height = m × object height = 2 × 3 = 6 cm.",
+     "unit": "cm",
+     "id": "gceol-physics-light-e18-c"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Describe the image.",
+     "choices": [
+      "virtual, upright, magnified",
+      "virtual, inverted",
+      "real, inverted, diminished",
+      "real, inverted, magnified"
+     ],
+     "answer": 3,
+     "explanation": "The object is between f and 2f, so the image is real, inverted and magnified.",
+     "id": "gceol-physics-light-e18-d"
+    }
+   ],
+   "chapter": "gceol-physics-light"
+  },
+  {
+   "id": "gceol-physics-lenses-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-lenses",
+   "prompt": "The principal focus of a converging lens is where",
+   "choices": [
+    "light is absorbed",
+    "the image is virtual",
+    "parallel rays meet",
+    "rays diverge"
+   ],
+   "answer": 2,
+   "explanation": "Definition.",
+   "chapter": "gceol-physics-light"
+  },
+  {
+   "id": "gceol-physics-lenses-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-lenses",
+   "prompt": "A camera lens forms an image that is",
+   "choices": [
+    "real and magnified",
+    "virtual and small",
+    "real, inverted and smaller",
+    "virtual and upright"
+   ],
+   "answer": 2,
+   "explanation": "Distant objects are beyond 2f.",
+   "chapter": "gceol-physics-light"
+  },
+  {
+   "id": "gceol-physics-lenses-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-lenses",
+   "prompt": "Magnification m =",
+   "choices": [
+    "f/v",
+    "u/v",
+    "v/u",
+    "u × v"
+   ],
+   "answer": 2,
+   "explanation": "Image distance ÷ object distance.",
+   "chapter": "gceol-physics-light"
+  },
+  {
+   "id": "gceol-physics-lenses-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-lenses",
+   "prompt": "Long sight is corrected by a",
+   "choices": [
+    "converging lens",
+    "plane mirror",
+    "prism",
+    "diverging lens"
+   ],
+   "answer": 0,
+   "explanation": "A converging lens adds focusing power.",
+   "chapter": "gceol-physics-light"
+  },
+  {
+   "id": "gceol-physics-lenses-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-lenses",
+   "prompt": "The image on the retina is",
+   "choices": [
+    "virtual and upright",
+    "real and inverted",
+    "real and upright",
+    "virtual and inverted"
+   ],
+   "answer": 1,
+   "explanation": "Interpreted upright by the brain.",
+   "chapter": "gceol-physics-light"
+  },
+  {
+   "id": "gceol-physics-light-m01",
+   "kind": "mcq",
+   "tier": "examen",
+   "lesson": "gceol-physics-reflection",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A ray hits a plane mirror at 30° to the mirror surface. The angle of reflection is",
+   "choices": [
+    "30°",
+    "120°",
+    "90°",
+    "60°"
+   ],
+   "answer": 3,
+   "explanation": "i = 90° − 30° = 60°, so r = 60°.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-light"
+  }
+ ]
+}

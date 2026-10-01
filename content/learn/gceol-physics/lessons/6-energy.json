@@ -1,0 +1,746 @@
+{
+ "chapter": "gceol-physics-energy",
+ "lessons": [
+  {
+   "id": "gceol-physics-work-energy-power",
+   "title": "Work, energy and power",
+   "minutes": 30,
+   "programRef": "GCE O Level Physics — Work, energy, power, machines, energy sources (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define work, energy and power with their units.",
+    "Calculate work done W = Fd, kinetic energy ½mv², potential energy mgh and power P = W/t.",
+    "Apply the conservation of energy.",
+    "Compare renewable and non-renewable energy sources."
+   ],
+   "prerequisites": [
+    "gceol-physics-newton-laws"
+   ],
+   "exercises": [
+    "gceol-physics-energy-e01",
+    "gceol-physics-energy-e02",
+    "gceol-physics-energy-e03",
+    "gceol-physics-energy-e04",
+    "gceol-physics-energy-e05",
+    "gceol-physics-energy-e06"
+   ],
+   "selfCheck": [
+    "gceol-physics-work-energy-power-q1",
+    "gceol-physics-work-energy-power-q2",
+    "gceol-physics-work-energy-power-q3",
+    "gceol-physics-work-energy-power-q4",
+    "gceol-physics-work-energy-power-q5"
+   ],
+   "reviewNotes": [
+    "Statements about Cameroon's electricity (a large share from hydroelectric dams such as those on the Sanaga) are general; no percentages given.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Work, energy, power",
+     "md": "**Work** is done when a force moves an object: $W = Fd$ (d in the direction of the force). **Energy** is the ability to do work; both are measured in **joules (J)**. **Power** is the rate of doing work: $P = \\frac{W}{t}$, in **watts (W)** (1 W = 1 J/s; 1 kW = 1000 W)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Mechanical energy",
+     "md": "- **Kinetic energy** (movement): $E_k = \\frac{1}{2}mv^2$\n- **Gravitational potential energy** (height): $E_p = mgh$ (g = 10 N/kg)\n\n**Conservation of energy**: energy is never created or destroyed; it is changed from one form to another. If friction is ignored, the total of $E_k + E_p$ stays constant."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Energy sources",
+     "md": "**Non-renewable**: coal, oil and natural gas (fossil fuels), which run out. **Renewable**: hydroelectric (water), solar, wind, biomass (wood, biogas). Much electricity in Cameroon is generated from water flowing through hydroelectric dams; solar panels are common in sunny regions. Fossil fuels release carbon dioxide when burnt."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- Work needs movement: holding a heavy bag still does no work (in physics).\n- Doubling the speed makes the kinetic energy **four** times bigger (v is squared).\n- Use the vertical height for potential energy, not the length of a slope."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 30,
+        "x2": 120,
+        "y2": 215,
+        "color": "ink",
+        "width": 1
+       },
+       {
+        "t": "circle",
+        "cx": 120,
+        "cy": 45,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 120,
+        "cy": 120,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 120,
+        "cy": 200,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 50,
+        "text": "all potential energy",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 125,
+        "text": "half PE, half KE",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 205,
+        "text": "all kinetic energy",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A ball falling: potential energy changes into kinetic energy.",
+     "alt": "A vertical line with three balls, at the top (all potential energy), half way (half and half) and at the bottom (all kinetic energy)."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — pushing a handcart",
+     "statement": "A man pushes a handcart with a force of 150 N over 40 m in 50 s. Find the work done and his power.",
+     "steps": [
+      "Work = Fd = 150 × 40 = 6000 J.",
+      "Power = W ÷ t = 6000 ÷ 50 = 120 W."
+     ],
+     "answer": "6000 J; 120 W"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — falling ball",
+     "statement": "A ball of mass 0.5 kg is dropped from a height of 20 m (g = 10 N/kg, no air resistance). Find the speed when it reaches the ground.",
+     "steps": [
+      "Potential energy at the top = mgh = 0.5 × 10 × 20 = 100 J.",
+      "At the bottom all of it is kinetic: ½mv² = 100, so 0.25 v² = 100 and v² = 400.",
+      "v = 20 m/s."
+     ],
+     "answer": "20 m/s"
+    }
+   ],
+   "chapter": "gceol-physics-energy"
+  },
+  {
+   "id": "gceol-physics-machines-efficiency",
+   "title": "Simple machines and efficiency",
+   "minutes": 25,
+   "programRef": "GCE O Level Physics — Work, energy, power, machines, energy sources (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe levers, pulleys and inclined planes.",
+    "Define mechanical advantage (MA), velocity ratio (VR) and efficiency.",
+    "Calculate efficiency from work done or from MA/VR.",
+    "Explain why no machine is 100% efficient."
+   ],
+   "prerequisites": [
+    "gceol-physics-work-energy-power",
+    "gceol-physics-moments-equilibrium"
+   ],
+   "exercises": [
+    "gceol-physics-energy-e07",
+    "gceol-physics-energy-e08",
+    "gceol-physics-energy-e09",
+    "gceol-physics-energy-e10",
+    "gceol-physics-energy-e11",
+    "gceol-physics-energy-e12"
+   ],
+   "selfCheck": [
+    "gceol-physics-machines-efficiency-q1",
+    "gceol-physics-machines-efficiency-q2",
+    "gceol-physics-machines-efficiency-q3",
+    "gceol-physics-machines-efficiency-q4",
+    "gceol-physics-machines-efficiency-q5"
+   ],
+   "reviewNotes": [
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "MA, VR and efficiency",
+     "md": "A **machine** makes work easier by changing the size or direction of a force.\n\n- **Mechanical advantage** MA = load ÷ effort (no unit).\n- **Velocity ratio** VR = distance moved by effort ÷ distance moved by load.\n- **Efficiency** = (work output ÷ work input) × 100% = (MA ÷ VR) × 100%."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Common machines",
+     "md": "- **Lever**: a rigid bar turning about a pivot (crowbar, wheelbarrow, scissors); based on moments.\n- **Pulley system**: for a frictionless system VR = number of rope sections supporting the load.\n- **Inclined plane (ramp)**: VR = length of slope ÷ vertical height.\n- A machine can multiply force but never energy."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Why efficiency is below 100%",
+     "md": "Some input energy is always wasted as heat (friction) and in lifting the moving parts of the machine. So work output < work input, MA < VR and efficiency < 100%. Oiling the moving parts improves efficiency."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         60,
+         190,
+         340,
+         190,
+         340,
+         90
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "grey"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 128,
+        "w": 36,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "line",
+        "x1": 340,
+        "y1": 190,
+        "x2": 340,
+        "y2": 90,
+        "color": "blue",
+        "width": 3,
+        "arrow": "both"
+       },
+       {
+        "t": "text",
+        "x": 375,
+        "y": 145,
+        "text": "2 m",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 215,
+        "text": "5 m (slope)",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 160,
+        "y1": 120,
+        "x2": 250,
+        "y2": 90,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 255,
+        "y": 70,
+        "text": "effort",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "An inclined plane (ramp): a crate is pushed up a 5 m slope to a height of 2 m.",
+     "alt": "A right-angled triangle ramp with a crate on the slope, an effort arrow pointing up the slope, slope length 5 m and height 2 m."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — pulley",
+     "statement": "An effort of 150 N lifts a load of 400 N using a pulley system with VR = 4. Find the MA and the efficiency.",
+     "steps": [
+      "MA = load ÷ effort = 400 ÷ 150 = 2.67.",
+      "Efficiency = MA ÷ VR × 100 = 2.67 ÷ 4 × 100 = 66.7%."
+     ],
+     "answer": "MA = 2.67; efficiency ≈ 66.7%"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — ramp",
+     "statement": "A crate of weight 500 N is pushed up a ramp 5 m long by an effort of 250 N parallel to the slope. The ramp's top is 2 m above the ground. Find the efficiency.",
+     "steps": [
+      "Work input = effort × distance along the slope = 250 × 5 = 1250 J.",
+      "Work output = load × vertical height = 500 × 2 = 1000 J.",
+      "Efficiency = 1000 ÷ 1250 × 100 = 80%."
+     ],
+     "answer": "80%"
+    }
+   ],
+   "chapter": "gceol-physics-energy"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-physics-energy-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-physics-work-energy-power",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the work done by a force of 50 N moving an object 6 m in the direction of the force.",
+   "answer": 300,
+   "tolerance": 0,
+   "unit": "J",
+   "explanation": "W = Fd = 50 × 6 = 300 J.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-energy"
+  },
+  {
+   "id": "gceol-physics-energy-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-physics-work-energy-power",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the kinetic energy of a 2 kg trolley moving at 5 m/s.",
+   "answer": 25,
+   "tolerance": 0,
+   "unit": "J",
+   "explanation": "Ek = ½mv² = ½ × 2 × 25 = 25 J.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-energy"
+  },
+  {
+   "id": "gceol-physics-energy-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-physics-work-energy-power",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The watt is the same as",
+   "choices": [
+    "one joule per metre",
+    "one joule per second",
+    "one joule",
+    "one newton per second"
+   ],
+   "answer": 1,
+   "explanation": "Power = energy ÷ time, so 1 W = 1 J/s.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-energy"
+  },
+  {
+   "id": "gceol-physics-energy-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-work-energy-power",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A pupil of mass 60 kg climbs stairs of vertical height 5 m in 20 s (g = 10 N/kg). Find the power developed.",
+   "answer": 150.0,
+   "tolerance": 0,
+   "unit": "W",
+   "explanation": "Work = mgh = 60 × 10 × 5 = 3000 J; P = 3000 ÷ 20 = 150 W.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-physics-energy"
+  },
+  {
+   "id": "gceol-physics-energy-e05",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-work-energy-power",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "If the speed of a car doubles, its kinetic energy doubles.",
+   "answer": false,
+   "explanation": "Ek = ½mv²: doubling v multiplies Ek by 2² = 4.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-physics-energy"
+  },
+  {
+   "id": "gceol-physics-energy-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-physics-work-energy-power",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A motorbike and rider have a total mass of 200 kg and travel at 15 m/s. They brake to a stop over 25 m on level ground.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the kinetic energy before braking.",
+     "answer": 22500.0,
+     "tolerance": 0,
+     "explanation": "½ × 200 × 15² = 100 × 225 = 22 500 J.",
+     "unit": "J",
+     "id": "gceol-physics-energy-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "State the work done by the braking force in stopping (J).",
+     "answer": 22500.0,
+     "tolerance": 0,
+     "explanation": "All the kinetic energy is converted into heat by the work of the brakes and friction: 22 500 J.",
+     "unit": "J",
+     "id": "gceol-physics-energy-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the average braking force.",
+     "answer": 900.0,
+     "tolerance": 0,
+     "explanation": "W = Fd, so F = 22 500 ÷ 25 = 900 N.",
+     "unit": "N",
+     "id": "gceol-physics-energy-e06-c"
+    }
+   ],
+   "chapter": "gceol-physics-energy"
+  },
+  {
+   "id": "gceol-physics-work-energy-power-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-work-energy-power",
+   "prompt": "Work is calculated by",
+   "choices": [
+    "force × distance moved",
+    "force × time",
+    "mass × speed",
+    "force ÷ distance"
+   ],
+   "answer": 0,
+   "explanation": "W = Fd.",
+   "chapter": "gceol-physics-energy"
+  },
+  {
+   "id": "gceol-physics-work-energy-power-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-work-energy-power",
+   "prompt": "One kilowatt is",
+   "choices": [
+    "1 000 000 W",
+    "1000 W",
+    "100 W",
+    "10 W"
+   ],
+   "answer": 1,
+   "explanation": "kilo = 1000.",
+   "chapter": "gceol-physics-energy"
+  },
+  {
+   "id": "gceol-physics-work-energy-power-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-work-energy-power",
+   "prompt": "Which of these is a renewable energy source?",
+   "choices": [
+    "coal",
+    "petrol",
+    "natural gas",
+    "solar energy"
+   ],
+   "answer": 3,
+   "explanation": "Sunlight is continuously supplied; fossil fuels are finite.",
+   "chapter": "gceol-physics-energy"
+  },
+  {
+   "id": "gceol-physics-work-energy-power-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-work-energy-power",
+   "prompt": "A 2 kg mass is lifted 3 m (g = 10 N/kg). Its gain in potential energy is",
+   "choices": [
+    "60 J",
+    "6 J",
+    "23 J",
+    "0.6 J"
+   ],
+   "answer": 0,
+   "explanation": "mgh = 2 × 10 × 3 = 60 J.",
+   "chapter": "gceol-physics-energy"
+  },
+  {
+   "id": "gceol-physics-work-energy-power-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-work-energy-power",
+   "prompt": "Energy cannot be created or destroyed. This is the law of",
+   "choices": [
+    "gravitation",
+    "inertia",
+    "conservation of energy",
+    "moments"
+   ],
+   "answer": 2,
+   "explanation": "Energy only changes form.",
+   "chapter": "gceol-physics-energy"
+  },
+  {
+   "id": "gceol-physics-energy-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-physics-machines-efficiency",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A load of 300 N is lifted by an effort of 100 N. Find the mechanical advantage.",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "MA = 300 ÷ 100 = 3.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-energy"
+  },
+  {
+   "id": "gceol-physics-energy-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-physics-machines-efficiency",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A machine has a work input of 500 J and a work output of 400 J. Its efficiency is",
+   "choices": [
+    "80%",
+    "100%",
+    "125%",
+    "20%"
+   ],
+   "answer": 0,
+   "explanation": "400 ÷ 500 × 100 = 80%.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-energy"
+  },
+  {
+   "id": "gceol-physics-energy-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-physics-machines-efficiency",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A machine can have an efficiency of more than 100%.",
+   "answer": false,
+   "explanation": "That would create energy; there are always wasted losses.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-energy"
+  },
+  {
+   "id": "gceol-physics-energy-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-machines-efficiency",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A machine with MA = 3 and VR = 5. Find its efficiency in %.",
+   "answer": 60,
+   "tolerance": 0,
+   "unit": "%",
+   "explanation": "3 ÷ 5 × 100 = 60%.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-energy"
+  },
+  {
+   "id": "gceol-physics-energy-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-machines-efficiency",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Give two ways to improve the efficiency of a pulley system and say why they work.",
+   "model": "Oil the pulley axles (less friction, less energy wasted as heat) and use lighter ropes and pulleys (less work needed to lift the machine's own parts).",
+   "rubric": "1 mark each way; 1 mark for linking to wasted energy.",
+   "explanation": "Oil the pulley axles (less friction, less energy wasted as heat) and use lighter ropes and pulleys (less work needed to lift the machine's own parts).",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-physics-energy"
+  },
+  {
+   "id": "gceol-physics-energy-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-physics-machines-efficiency",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A pulley system with VR = 4 is used to raise a 800 N load by 0.5 m with an effort of 250 N.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the distance moved by the effort.",
+     "answer": 2.0,
+     "tolerance": 0,
+     "explanation": "VR = 4 means the effort moves 4 times as far as the load: 0.5 × 4 = 2 m.",
+     "unit": "m",
+     "id": "gceol-physics-energy-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the work input.",
+     "answer": 500,
+     "tolerance": 0,
+     "explanation": "250 × 2 = 500 J.",
+     "unit": "J",
+     "id": "gceol-physics-energy-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the work output.",
+     "answer": 400.0,
+     "tolerance": 0,
+     "explanation": "800 × 0.5 = 400 J.",
+     "unit": "J",
+     "id": "gceol-physics-energy-e12-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the efficiency in %.",
+     "answer": 80.0,
+     "tolerance": 0,
+     "explanation": "400 ÷ 500 × 100 = 80% (also MA/VR = 3.2/4 = 0.8).",
+     "unit": "%",
+     "id": "gceol-physics-energy-e12-d"
+    }
+   ],
+   "chapter": "gceol-physics-energy"
+  },
+  {
+   "id": "gceol-physics-machines-efficiency-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-machines-efficiency",
+   "prompt": "Mechanical advantage is",
+   "choices": [
+    "load × effort",
+    "load ÷ effort",
+    "distance ÷ time",
+    "effort ÷ load"
+   ],
+   "answer": 1,
+   "explanation": "MA = load/effort.",
+   "chapter": "gceol-physics-energy"
+  },
+  {
+   "id": "gceol-physics-machines-efficiency-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-machines-efficiency",
+   "prompt": "A wheelbarrow is an example of a",
+   "choices": [
+    "lever",
+    "wedge only",
+    "screw only",
+    "pulley"
+   ],
+   "answer": 0,
+   "explanation": "It is a lever with the pivot at the wheel.",
+   "chapter": "gceol-physics-energy"
+  },
+  {
+   "id": "gceol-physics-machines-efficiency-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-machines-efficiency",
+   "prompt": "For an ideal machine, efficiency is",
+   "choices": [
+    "100%",
+    "50%",
+    "0%",
+    "200%"
+   ],
+   "answer": 0,
+   "explanation": "Ideal means no energy wasted.",
+   "chapter": "gceol-physics-energy"
+  },
+  {
+   "id": "gceol-physics-machines-efficiency-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-machines-efficiency",
+   "prompt": "VR of a ramp 4 m long and 1 m high is",
+   "choices": [
+    "3",
+    "4",
+    "0.25",
+    "5"
+   ],
+   "answer": 1,
+   "explanation": "VR = slope length ÷ height = 4 ÷ 1 = 4.",
+   "chapter": "gceol-physics-energy"
+  },
+  {
+   "id": "gceol-physics-machines-efficiency-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-machines-efficiency",
+   "prompt": "Wasted energy in a machine appears mainly as",
+   "choices": [
+    "mass",
+    "heat",
+    "force",
+    "light only"
+   ],
+   "answer": 1,
+   "explanation": "Friction converts useful energy into heat.",
+   "chapter": "gceol-physics-energy"
+  }
+ ]
+}

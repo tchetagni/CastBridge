@@ -1,0 +1,792 @@
+{
+ "chapter": "gceol-physics-matter",
+ "lessons": [
+  {
+   "id": "gceol-physics-density",
+   "title": "Density",
+   "minutes": 25,
+   "programRef": "GCE O Level Physics — Density, pressure in solids, liquids and gases (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define density and use ρ = m/V.",
+    "Convert between g/cm³ and kg/m³.",
+    "Predict whether an object floats or sinks in water.",
+    "Describe how to measure the density of a regular and an irregular solid and a liquid."
+   ],
+   "prerequisites": [
+    "gceol-physics-units-instruments"
+   ],
+   "exercises": [
+    "gceol-physics-matter-e01",
+    "gceol-physics-matter-e02",
+    "gceol-physics-matter-e03",
+    "gceol-physics-matter-e04",
+    "gceol-physics-matter-e05",
+    "gceol-physics-matter-e06"
+   ],
+   "selfCheck": [
+    "gceol-physics-density-q1",
+    "gceol-physics-density-q2",
+    "gceol-physics-density-q3",
+    "gceol-physics-density-q4",
+    "gceol-physics-density-q5"
+   ],
+   "reviewNotes": [
+    "Density values in the bar chart are rounded textbook values (ice about 920 kg/m³, iron about 7900 kg/m³); check against the school's data table.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Density",
+     "md": "**Density** is the mass per unit volume of a substance: $\\rho = \\frac{m}{V}$. Units: **kg/m³** or **g/cm³**. Water has density 1000 kg/m³ = 1 g/cm³. Hence **1 g/cm³ = 1000 kg/m³**."
+    },
+    {
+     "type": "formula",
+     "tex": "\\rho = \\frac{m}{V} \\qquad m = \\rho V \\qquad V = \\frac{m}{\\rho}",
+     "caption": "ρ = density, m = mass, V = volume"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Floating and sinking",
+     "md": "An object **floats** in a liquid if its average density is **less** than the liquid's density, and sinks if it is greater. Ships made of steel float because the hollow hull makes the average density of the ship less than that of water."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Measuring density",
+     "md": "- **Regular solid**: measure the mass with a balance, the volume from its dimensions.\n- **Irregular solid**: mass with a balance, volume by **displacement** in a measuring cylinder.\n- **Liquid**: mass of a measured volume (mass of cylinder with liquid − mass of empty cylinder)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- Always convert g/cm³ to kg/m³ (× 1000) or the reverse (÷ 1000).\n- Volume in cm³ with mass in g gives g/cm³; volume in m³ with mass in kg gives kg/m³. Do not mix them.\n- Density is not weight: a large stone and a small stone of the same material have the same density."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "bars": [
+       {
+        "label": "cork",
+        "value": 240,
+        "color": "green"
+       },
+       {
+        "label": "ice",
+        "value": 920,
+        "color": "blue"
+       },
+       {
+        "label": "water",
+        "value": 1000,
+        "color": "blue"
+       },
+       {
+        "label": "aluminium",
+        "value": 2700,
+        "color": "orange"
+       },
+       {
+        "label": "iron",
+        "value": 7900,
+        "color": "red"
+       }
+      ],
+      "unit": "kg/m³"
+     },
+     "caption": "Approximate densities of some materials (kg/m³).",
+     "alt": "A bar chart: cork 240, ice about 920, water 1000, aluminium 2700 and iron about 7900 kilograms per cubic metre."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — metal block",
+     "statement": "A metal block has mass 540 g and volume 200 cm³. Find its density in g/cm³ and in kg/m³.",
+     "steps": [
+      "ρ = m ÷ V = 540 ÷ 200 = 2.7 g/cm³.",
+      "Multiply by 1000: 2.7 × 1000 = 2700 kg/m³ (this is about the density of aluminium)."
+     ],
+     "answer": "2.7 g/cm³ = 2700 kg/m³"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — cooking oil",
+     "statement": "Assume a cooking oil has density 920 kg/m³. Find the mass of 5 litres of it.",
+     "steps": [
+      "5 litres = 5 × 0.001 m³ = 0.005 m³.",
+      "m = ρV = 920 × 0.005 = 4.6 kg."
+     ],
+     "answer": "4.6 kg"
+    }
+   ],
+   "chapter": "gceol-physics-matter"
+  },
+  {
+   "id": "gceol-physics-pressure",
+   "title": "Pressure in solids, liquids and gases",
+   "minutes": 30,
+   "programRef": "GCE O Level Physics — Density, pressure in solids, liquids and gases (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define pressure and use P = F/A.",
+    "Use P = hρg for pressure in a liquid.",
+    "Describe atmospheric pressure and the barometer.",
+    "Explain the hydraulic press and calculate forces."
+   ],
+   "prerequisites": [
+    "gceol-physics-density",
+    "gceol-physics-newton-laws"
+   ],
+   "exercises": [
+    "gceol-physics-matter-e07",
+    "gceol-physics-matter-e08",
+    "gceol-physics-matter-e09",
+    "gceol-physics-matter-e10",
+    "gceol-physics-matter-e11",
+    "gceol-physics-matter-e12"
+   ],
+   "selfCheck": [
+    "gceol-physics-pressure-q1",
+    "gceol-physics-pressure-q2",
+    "gceol-physics-pressure-q3",
+    "gceol-physics-pressure-q4",
+    "gceol-physics-pressure-q5"
+   ],
+   "reviewNotes": [
+    "Standard atmospheric pressure is about 100 000 Pa (101 kPa) or 760 mm of mercury; check which value the Board's questions assume.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Pressure",
+     "md": "**Pressure** = force acting perpendicular to a surface ÷ area. Unit: **pascal (Pa)** = 1 N/m². A small area gives a large pressure: knives are sharp, tractors have wide tyres."
+    },
+    {
+     "type": "formula",
+     "tex": "P = \\frac{F}{A}",
+     "caption": "F in N, A in m², P in Pa"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Pressure in a liquid",
+     "md": "Pressure in a liquid increases with **depth** and with **density**, and is the same in all directions at the same depth: $P = h\\rho g$ (h = depth, ρ = density, g = 10 N/kg). It does not depend on the shape of the container. Total pressure = liquid pressure + atmospheric pressure (about $10^5$ Pa)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Atmosphere and hydraulics",
+     "md": "The air has weight, so it exerts **atmospheric pressure**, measured with a **barometer** (about 760 mm of mercury at sea level). In a **hydraulic press** a liquid transmits pressure equally, so $\\frac{F_1}{A_1} = \\frac{F_2}{A_2}$: a small force on a small piston gives a large force on a large piston (garage lifts, brakes)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- Convert areas to m² before dividing: 1 cm² = 0.0001 m².\n- Liquid pressure uses the **depth**, not the total amount of water.\n- In a hydraulic press the force is multiplied but the work is not: the small piston moves much further."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 240,
+      "items": [
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 150,
+        "w": 60,
+        "h": 70,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 126,
+        "w": 60,
+        "h": 14,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "grey"
+       },
+       {
+        "t": "rect",
+        "x": 180,
+        "y": 90,
+        "w": 160,
+        "h": 130,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 180,
+        "y": 110,
+        "w": 160,
+        "h": 14,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "grey"
+       },
+       {
+        "t": "rect",
+        "x": 100,
+        "y": 175,
+        "w": 80,
+        "h": 45,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 108,
+        "text": "A1",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 80,
+        "text": "A2",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 70,
+        "y1": 40,
+        "x2": 70,
+        "y2": 120,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 28,
+        "text": "F1",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 260,
+        "y1": 190,
+        "x2": 260,
+        "y2": 130,
+        "color": "blue",
+        "width": 3,
+        "arrow": "start"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 165,
+        "text": "F2",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A hydraulic press: pressure from the small piston (area A1) is passed through the liquid to the large piston (area A2).",
+     "alt": "Two connected cylinders of different widths with pistons, a small downward force F1 on the narrow piston and a larger upward force F2 on the wide piston."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — standing pupil",
+     "statement": "A pupil of mass 60 kg stands on two shoes, each of area 150 cm². Find the pressure on the ground (g = 10 N/kg).",
+     "steps": [
+      "Force = weight = 60 × 10 = 600 N.",
+      "Area = 2 × 150 = 300 cm² = 0.03 m² (1 cm² = 10⁻⁴ m²).",
+      "P = F ÷ A = 600 ÷ 0.03 = 20 000 Pa."
+     ],
+     "answer": "20 000 Pa"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — diver",
+     "statement": "A diver in a lake is at a depth of 12 m (water density 1000 kg/m³, g = 10 N/kg, atmospheric pressure 10⁵ Pa). Find the pressure due to the water and the total pressure.",
+     "steps": [
+      "Pressure due to water = hρg = 12 × 1000 × 10 = 120 000 Pa.",
+      "Total = 120 000 + 100 000 = 220 000 Pa."
+     ],
+     "answer": "120 000 Pa; 220 000 Pa"
+    }
+   ],
+   "chapter": "gceol-physics-matter"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-physics-matter-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-physics-density",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A liquid has mass 400 g and volume 50 cm³. Find its density in g/cm³.",
+   "answer": 8,
+   "tolerance": 0,
+   "unit": "g/cm³",
+   "explanation": "ρ = 400 ÷ 50 = 8 g/cm³.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-matter"
+  },
+  {
+   "id": "gceol-physics-matter-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-physics-density",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A solid of density 800 kg/m³ is placed in water (1000 kg/m³). It will",
+   "choices": [
+    "float",
+    "dissolve",
+    "stay at the bottom",
+    "sink"
+   ],
+   "answer": 0,
+   "explanation": "Its density is less than that of water.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-matter"
+  },
+  {
+   "id": "gceol-physics-matter-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-physics-density",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the mass of water in a tank of volume 2 m³ (density 1000 kg/m³).",
+   "answer": 2000,
+   "tolerance": 0,
+   "unit": "kg",
+   "explanation": "m = ρV = 1000 × 2 = 2000 kg.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-matter"
+  },
+  {
+   "id": "gceol-physics-matter-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-density",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A concrete block 0.5 m × 0.2 m × 0.2 m has density 2400 kg/m³. Find its mass.",
+   "answer": 48.0,
+   "tolerance": 0.01,
+   "unit": "kg",
+   "explanation": "V = 0.5 × 0.2 × 0.2 = 0.02 m³; m = 2400 × 0.02 = 48 kg.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-matter"
+  },
+  {
+   "id": "gceol-physics-matter-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-density",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Describe how you would find the density of a small irregular stone using a balance and a measuring cylinder.",
+   "model": "Measure the mass m of the stone on the balance. Half-fill the measuring cylinder with water and record the volume V1. Lower the stone in (tied with thread) and record V2. Volume of stone = V2 − V1. Density = m ÷ (V2 − V1).",
+   "rubric": "1 mark: mass by balance; 1 mark: volume by displacement V2 − V1; 1 mark: ρ = m/V.",
+   "explanation": "Measure the mass m of the stone on the balance. Half-fill the measuring cylinder with water and record the volume V1. Lower the stone in (tied with thread) and record V2. Volume of stone = V2 − V1. Density = m ÷ (V2 − V1).",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-physics-matter"
+  },
+  {
+   "id": "gceol-physics-matter-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-physics-density",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A density bottle has mass 30 g when empty, 80 g when full of water and 70 g when full of another liquid. (Density of water = 1 g/cm³.)",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the mass of water in the bottle.",
+     "answer": 50,
+     "tolerance": 0,
+     "explanation": "80 − 30 = 50 g.",
+     "unit": "g",
+     "id": "gceol-physics-matter-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the volume of the bottle in cm³.",
+     "answer": 50.0,
+     "tolerance": 0,
+     "explanation": "Water density is 1 g/cm³, so V = 50 ÷ 1 = 50 cm³.",
+     "unit": "cm³",
+     "id": "gceol-physics-matter-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the density of the liquid in g/cm³.",
+     "answer": 0.8,
+     "tolerance": 0,
+     "explanation": "Mass of liquid 70 − 30 = 40 g in 50 cm³: 40 ÷ 50 = 0.8 g/cm³.",
+     "unit": "g/cm³",
+     "id": "gceol-physics-matter-e06-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Express the density of the liquid in kg/m³.",
+     "answer": 800,
+     "tolerance": 0,
+     "explanation": "0.8 × 1000 = 800 kg/m³.",
+     "unit": "kg/m³",
+     "id": "gceol-physics-matter-e06-d"
+    }
+   ],
+   "chapter": "gceol-physics-matter"
+  },
+  {
+   "id": "gceol-physics-density-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-density",
+   "prompt": "Density is",
+   "choices": [
+    "mass times volume",
+    "mass per unit volume",
+    "volume per unit mass",
+    "weight per unit area"
+   ],
+   "answer": 1,
+   "explanation": "ρ = m/V.",
+   "chapter": "gceol-physics-matter"
+  },
+  {
+   "id": "gceol-physics-density-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-density",
+   "prompt": "The density of water in kg/m³ is",
+   "choices": [
+    "1",
+    "1000",
+    "100",
+    "10"
+   ],
+   "answer": 1,
+   "explanation": "1 g/cm³ = 1000 kg/m³.",
+   "chapter": "gceol-physics-matter"
+  },
+  {
+   "id": "gceol-physics-density-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-density",
+   "prompt": "An object floats when its density is",
+   "choices": [
+    "the same as air",
+    "more than the liquid's",
+    "less than the liquid's",
+    "zero"
+   ],
+   "answer": 2,
+   "explanation": "Less dense objects float.",
+   "chapter": "gceol-physics-matter"
+  },
+  {
+   "id": "gceol-physics-density-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-density",
+   "prompt": "A body of mass 600 g has volume 200 cm³. Its density is",
+   "choices": [
+    "120 000 g/cm³",
+    "0.33 g/cm³",
+    "3 g/cm³",
+    "800 g/cm³"
+   ],
+   "answer": 2,
+   "explanation": "600 ÷ 200 = 3.",
+   "chapter": "gceol-physics-matter"
+  },
+  {
+   "id": "gceol-physics-density-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-density",
+   "prompt": "Volume of an irregular stone is found by",
+   "choices": [
+    "measuring with a ruler only",
+    "its colour",
+    "weighing it",
+    "displacement of water"
+   ],
+   "answer": 3,
+   "explanation": "Final reading − initial reading in a measuring cylinder.",
+   "chapter": "gceol-physics-matter"
+  },
+  {
+   "id": "gceol-physics-matter-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-physics-pressure",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A force of 200 N acts on an area of 0.05 m². Find the pressure.",
+   "answer": 4000,
+   "tolerance": 0,
+   "unit": "Pa",
+   "explanation": "P = 200 ÷ 0.05 = 4000 Pa.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-matter"
+  },
+  {
+   "id": "gceol-physics-matter-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-physics-pressure",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the pressure due to water at a depth of 5 m (ρ = 1000 kg/m³, g = 10 N/kg).",
+   "answer": 50000,
+   "tolerance": 0,
+   "unit": "Pa",
+   "explanation": "P = hρg = 5 × 1000 × 10 = 50 000 Pa.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-matter"
+  },
+  {
+   "id": "gceol-physics-matter-e09",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-physics-pressure",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Why does a sharp knife cut better than a blunt one for the same force?",
+   "choices": [
+    "Friction is zero",
+    "It has more mass",
+    "It has more weight",
+    "A smaller area gives a larger pressure"
+   ],
+   "answer": 3,
+   "explanation": "P = F/A: the same force on a smaller area makes a bigger pressure.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-matter"
+  },
+  {
+   "id": "gceol-physics-matter-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-pressure",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In a hydraulic press the small piston has area 10 cm² and receives a force of 50 N. The large piston has area 200 cm². Find the force on it.",
+   "answer": 1000.0,
+   "tolerance": 0,
+   "unit": "N",
+   "explanation": "Pressure is the same: 50/10 = 5 N/cm², so F2 = 5 × 200 = 1000 N.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-matter"
+  },
+  {
+   "id": "gceol-physics-matter-e11",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "gceol-physics-pressure",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The pressure at a given depth in water is larger in a wide lake than in a narrow tank.",
+   "answer": false,
+   "explanation": "Liquid pressure depends only on depth, density and g, not on the shape or width of the container.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-physics-matter"
+  },
+  {
+   "id": "gceol-physics-matter-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-physics-pressure",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A rectangular tank in Bamenda has a base of area 2 m² and holds water to a depth of 4 m (ρ = 1000 kg/m³, g = 10 N/kg).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the pressure due to the water on the base.",
+     "answer": 40000,
+     "tolerance": 0,
+     "explanation": "P = hρg = 4 × 1000 × 10 = 40 000 Pa.",
+     "unit": "Pa",
+     "id": "gceol-physics-matter-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the force of the water on the base.",
+     "answer": 80000,
+     "tolerance": 0,
+     "explanation": "F = P × A = 40 000 × 2 = 80 000 N.",
+     "unit": "N",
+     "id": "gceol-physics-matter-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the mass of the water in the tank.",
+     "answer": 8000,
+     "tolerance": 0,
+     "explanation": "V = 2 × 4 = 8 m³; m = ρV = 8000 kg.",
+     "unit": "kg",
+     "id": "gceol-physics-matter-e12-c"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "How does the weight of the water compare with the force on the base?",
+     "choices": [
+      "The force is zero",
+      "They are equal (80 000 N)",
+      "The weight is half",
+      "The weight is twice as large"
+     ],
+     "answer": 1,
+     "explanation": "W = 8000 × 10 = 80 000 N; for a tank with vertical sides the water pushes down on the base with its whole weight.",
+     "id": "gceol-physics-matter-e12-d"
+    }
+   ],
+   "chapter": "gceol-physics-matter"
+  },
+  {
+   "id": "gceol-physics-pressure-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-pressure",
+   "prompt": "The unit of pressure is the",
+   "choices": [
+    "newton",
+    "kilogram",
+    "pascal",
+    "joule"
+   ],
+   "answer": 2,
+   "explanation": "1 Pa = 1 N/m².",
+   "chapter": "gceol-physics-matter"
+  },
+  {
+   "id": "gceol-physics-pressure-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-pressure",
+   "prompt": "Liquid pressure increases with",
+   "choices": [
+    "depth",
+    "shape of container",
+    "colour of liquid",
+    "width of container"
+   ],
+   "answer": 0,
+   "explanation": "P = hρg.",
+   "chapter": "gceol-physics-matter"
+  },
+  {
+   "id": "gceol-physics-pressure-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-pressure",
+   "prompt": "A force of 50 N acts on 2 m². The pressure is",
+   "choices": [
+    "0.04 Pa",
+    "52 Pa",
+    "25 Pa",
+    "100 Pa"
+   ],
+   "answer": 2,
+   "explanation": "50 ÷ 2 = 25 Pa.",
+   "chapter": "gceol-physics-matter"
+  },
+  {
+   "id": "gceol-physics-pressure-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-pressure",
+   "prompt": "A hydraulic system works because liquids",
+   "choices": [
+    "are very light",
+    "are compressible",
+    "transmit pressure equally",
+    "have no pressure"
+   ],
+   "answer": 2,
+   "explanation": "Pressure applied to an enclosed liquid is transmitted equally.",
+   "chapter": "gceol-physics-matter"
+  },
+  {
+   "id": "gceol-physics-pressure-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-physics-pressure",
+   "prompt": "Atmospheric pressure is measured with a",
+   "choices": [
+    "barometer",
+    "thermometer",
+    "voltmeter",
+    "ammeter"
+   ],
+   "answer": 0,
+   "explanation": "A barometer measures atmospheric pressure.",
+   "chapter": "gceol-physics-matter"
+  },
+  {
+   "id": "gceol-physics-matter-m01",
+   "kind": "mcq",
+   "tier": "examen",
+   "lesson": "gceol-physics-pressure",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The pressure due to water at a depth of 3 m (ρ = 1000 kg/m³, g = 10 N/kg) is",
+   "choices": [
+    "300 Pa",
+    "33 Pa",
+    "3000 Pa",
+    "30 000 Pa"
+   ],
+   "answer": 3,
+   "explanation": "P = hρg = 3 × 1000 × 10 = 30 000 Pa.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-physics-matter"
+  }
+ ]
+}

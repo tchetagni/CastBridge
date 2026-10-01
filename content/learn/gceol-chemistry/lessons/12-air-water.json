@@ -1,0 +1,816 @@
+{
+ "chapter": "gceol-chemistry-air-water",
+ "lessons": [
+  {
+   "id": "gceol-chemistry-air-pollution",
+   "title": "Air, combustion and air pollution",
+   "minutes": 30,
+   "programRef": "GCE O Level Chemistry — Air, pollution, water, water treatment, hardness (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "State the composition of clean dry air and how oxygen is measured.",
+    "Describe the separation of air by fractional distillation of liquid air.",
+    "Name the main air pollutants, their sources and effects.",
+    "Explain rusting, the greenhouse effect and the carbon cycle in outline."
+   ],
+   "prerequisites": [
+    "gceol-chemistry-redox-reactions"
+   ],
+   "exercises": [
+    "gceol-chemistry-air-water-e01",
+    "gceol-chemistry-air-water-e02",
+    "gceol-chemistry-air-water-e03",
+    "gceol-chemistry-air-water-e04",
+    "gceol-chemistry-air-water-e05",
+    "gceol-chemistry-air-water-e06"
+   ],
+   "selfCheck": [
+    "gceol-chemistry-air-pollution-q1",
+    "gceol-chemistry-air-pollution-q2",
+    "gceol-chemistry-air-pollution-q3",
+    "gceol-chemistry-air-pollution-q4",
+    "gceol-chemistry-air-pollution-q5"
+   ],
+   "reviewNotes": [
+    "Composition of dry air quoted as about 78% N₂, 21% O₂, about 0.9% argon and about 0.04% carbon dioxide (standard rounded values; CO₂ is slowly rising).",
+    "Pollutant effects are summarised; check the exact list the Board requires.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Composition of air",
+     "md": "Clean dry air is about **78% nitrogen**, **21% oxygen**, about 0.9% **argon** (and other noble gases) and about 0.04% **carbon dioxide**, plus variable water vapour. Oxygen can be measured by passing a known volume of air over heated copper (2Cu + O₂ → 2CuO) and measuring the decrease in volume. Air is separated by **fractional distillation of liquid air**: oxygen (b.p. −183 °C), argon and nitrogen (b.p. −196 °C) boil off at different temperatures."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Air pollutants",
+     "md": "- **Carbon monoxide** (incomplete combustion of fuels in engines and charcoal fires): poisonous, it reduces the oxygen carried by blood.\n- **Sulphur dioxide** (burning fuels with sulphur): causes **acid rain**, harms lungs and buildings.\n- **Oxides of nitrogen** (hot engines): acid rain and respiratory problems.\n- **Carbon dioxide** and **methane**: greenhouse gases that trap heat and contribute to global warming.\n- **Unburnt hydrocarbons and soot** from engines and burning of bush and waste."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Rusting",
+     "md": "Iron rusts when exposed to **both oxygen (air) and water**: 4Fe + 3O₂ + 2xH₂O → 2Fe₂O₃·xH₂O (hydrated iron(III) oxide). It is quicker with salt (near the coast). Prevention: **paint, oil or grease, plastic coating, galvanising (coating with zinc)**, using stainless steel or **sacrificial protection** (a more reactive metal such as zinc or magnesium)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- Pure water alone does not rust iron; oxygen and water must both be present.\n- Carbon monoxide has no smell: never cook with charcoal in a closed room.\n- Do not confuse the greenhouse effect (a natural, useful effect) with the **enhanced** greenhouse effect caused by extra CO₂ and methane."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "bars": [
+       {
+        "label": "nitrogen",
+        "value": 78,
+        "color": "blue"
+       },
+       {
+        "label": "oxygen",
+        "value": 21,
+        "color": "green"
+       },
+       {
+        "label": "argon and others",
+        "value": 1,
+        "color": "grey"
+       }
+      ],
+      "unit": "%"
+     },
+     "caption": "Approximate composition of clean dry air (% by volume).",
+     "alt": "A bar chart: nitrogen 78 percent, oxygen 21 percent, argon and others about 1 percent."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — measuring oxygen",
+     "statement": "100 cm³ of air is passed repeatedly over heated copper until the volume stops changing. After cooling the volume is 79 cm³. Calculate the percentage of oxygen.",
+     "steps": [
+      "Oxygen reacted with copper: volume used = 100 − 79 = 21 cm³.",
+      "Percentage of oxygen = 21 ÷ 100 × 100 = 21%."
+     ],
+     "answer": "21%"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — charcoal burning",
+     "statement": "Complete burning of 12 g of carbon: C + O₂ → CO₂. Find the mass and volume (at 24 dm³/mol) of CO₂ formed. Why is burning charcoal in a closed room dangerous?",
+     "steps": [
+      "n(C) = 12 ÷ 12 = 1 mol = n(CO₂); mass = 1 × 44 = 44 g; volume = 1 × 24 = 24 dm³.",
+      "With little air the combustion is incomplete: 2C + O₂ → 2CO. Carbon monoxide is poisonous and colourless."
+     ],
+     "answer": "44 g; 24 dm³; incomplete burning makes poisonous CO"
+    }
+   ],
+   "chapter": "gceol-chemistry-air-water"
+  },
+  {
+   "id": "gceol-chemistry-water-treatment",
+   "title": "Water, treatment and hardness",
+   "minutes": 30,
+   "programRef": "GCE O Level Chemistry — Air, pollution, water, water treatment, hardness (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe tests for water.",
+    "Describe the stages of water treatment.",
+    "Explain temporary and permanent hardness and how to soften water.",
+    "Calculate the mass of scale formed from hard water."
+   ],
+   "prerequisites": [
+    "gceol-chemistry-acids-bases"
+   ],
+   "exercises": [
+    "gceol-chemistry-air-water-e07",
+    "gceol-chemistry-air-water-e08",
+    "gceol-chemistry-air-water-e09",
+    "gceol-chemistry-air-water-e10",
+    "gceol-chemistry-air-water-e11",
+    "gceol-chemistry-air-water-e12"
+   ],
+   "selfCheck": [
+    "gceol-chemistry-water-treatment-q1",
+    "gceol-chemistry-water-treatment-q2",
+    "gceol-chemistry-water-treatment-q3",
+    "gceol-chemistry-water-treatment-q4",
+    "gceol-chemistry-water-treatment-q5"
+   ],
+   "reviewNotes": [
+    "The stage list (screening, coagulation with aluminium sulphate, sedimentation, filtration, chlorination) is the standard textbook sequence; local plants may differ.",
+    "Advice on boiling or chlorinating drinking water is general public health advice; a health worker should check the wording for the intended audience.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Water and its tests",
+     "md": "Water is a good solvent and is essential for life. Tests for water: **anhydrous copper(II) sulphate** turns from white to **blue**; **cobalt chloride paper** turns from blue to **pink**. These show that water is present, not that it is pure; pure water boils at exactly 100 °C and freezes at 0 °C (normal pressure)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Water treatment",
+     "md": "1. **Screening** removes large objects.\n2. **Coagulation**: aluminium sulphate makes small particles stick together (flocs) and settle in the **sedimentation** tank.\n3. **Filtration** through sand and gravel removes remaining solids.\n4. **Chlorination**: a little chlorine kills bacteria.\n\nTo make water safe at home: **boil** it for a few minutes, or add a suitable chlorine product. This helps prevent diseases such as cholera and typhoid."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Hard water",
+     "md": "**Hard water** contains dissolved **calcium** or **magnesium** ions (from rocks such as limestone). It does not lather easily with soap and forms **scum**; it leaves **scale** in kettles and pipes. **Temporary hardness** (calcium hydrogencarbonate) is removed by **boiling**: Ca(HCO₃)₂ → CaCO₃ + H₂O + CO₂. **Permanent hardness** (calcium or magnesium sulphate) is not removed by boiling. Both can be removed by adding **washing soda** (sodium carbonate, which precipitates the calcium as CaCO₃) or by **ion exchange**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- Clear water is not always safe to drink: bacteria cannot be seen.\n- Boiling removes only **temporary** hardness.\n- Soapless detergents lather even in hard water because they do not form scum."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 90,
+        "w": 62,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 41,
+        "y": 115,
+        "text": "screen",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 86,
+        "y": 90,
+        "w": 62,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 117,
+        "y": 107,
+        "text": "alum &",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 117,
+        "y": 121,
+        "text": "settling",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 162,
+        "y": 90,
+        "w": 62,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 193,
+        "y": 115,
+        "text": "filter",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 238,
+        "y": 90,
+        "w": 62,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 269,
+        "y": 115,
+        "text": "chlorine",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 314,
+        "y": 90,
+        "w": 76,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 352,
+        "y": 107,
+        "text": "storage",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 352,
+        "y": 121,
+        "text": "and supply",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 72,
+        "y1": 110,
+        "x2": 86,
+        "y2": 110,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 148,
+        "y1": 110,
+        "x2": 162,
+        "y2": 110,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 224,
+        "y1": 110,
+        "x2": 238,
+        "y2": 110,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 110,
+        "x2": 314,
+        "y2": 110,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       }
+      ]
+     },
+     "caption": "Stages of water treatment: screening, coagulation and settling, filtration, chlorination, storage.",
+     "alt": "Five boxes joined by arrows from screening to filtration, chlorine and supply."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — removing hardness",
+     "statement": "A kettle in a region with limestone rocks forms white scale. Name the scale, give the equation and the mass of scale from 8.1 g of calcium hydrogencarbonate (Mr = 162; CaCO₃ Mr = 100).",
+     "steps": [
+      "Boiling decomposes temporary hardness: Ca(HCO₃)₂ → CaCO₃ + H₂O + CO₂. The scale is calcium carbonate.",
+      "n(Ca(HCO₃)₂) = 8.1 ÷ 162 = 0.050 mol = n(CaCO₃); mass = 0.050 × 100 = 5.0 g."
+     ],
+     "answer": "Calcium carbonate; 5.0 g"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — which treatment?",
+     "statement": "A village uses water from a stream. It is cloudy and may contain bacteria. Suggest simple steps to make it safe to drink.",
+     "steps": [
+      "Let it settle and pour through clean cloth or sand to remove cloudiness (sedimentation and filtration).",
+      "Then boil it for a few minutes (or chlorinate it) to kill bacteria."
+     ],
+     "answer": "Settle, filter, then boil or chlorinate"
+    }
+   ],
+   "chapter": "gceol-chemistry-air-water"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-chemistry-air-water-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-air-pollution",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which gas makes up most of dry air?",
+   "choices": [
+    "carbon dioxide",
+    "argon",
+    "nitrogen",
+    "oxygen"
+   ],
+   "answer": 2,
+   "explanation": "About 78%.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-air-water"
+  },
+  {
+   "id": "gceol-chemistry-air-water-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-air-pollution",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which pollutant causes acid rain?",
+   "choices": [
+    "oxygen",
+    "nitrogen",
+    "argon",
+    "sulphur dioxide"
+   ],
+   "answer": 3,
+   "explanation": "SO₂ dissolves in rain to give acids.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-air-water"
+  },
+  {
+   "id": "gceol-chemistry-air-water-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-chemistry-air-pollution",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Iron rusts in dry air with no water.",
+   "answer": false,
+   "explanation": "Both water and oxygen are needed.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-air-water"
+  },
+  {
+   "id": "gceol-chemistry-air-water-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-air-pollution",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Incomplete combustion: 2C + O₂ → 2CO. Find the mass of CO formed from 6 g of carbon (C 12, O 16).",
+   "answer": 14.0,
+   "tolerance": 0,
+   "unit": "g",
+   "explanation": "n(C) = 6 ÷ 12 = 0.5 mol = n(CO); mass = 0.5 × 28 = 14 g.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-air-water"
+  },
+  {
+   "id": "gceol-chemistry-air-water-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-air-pollution",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain how galvanising protects a corrugated iron roof from rusting.",
+   "model": "A layer of zinc coats the iron and keeps out air and water; even if scratched, zinc is more reactive than iron and corrodes first (sacrificial protection), protecting the iron.",
+   "rubric": "1 mark: zinc coating excludes air/water; 1 mark: sacrificial protection since zinc is more reactive.",
+   "explanation": "A layer of zinc coats the iron and keeps out air and water; even if scratched, zinc is more reactive than iron and corrodes first (sacrificial protection), protecting the iron.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-chemistry-air-water"
+  },
+  {
+   "id": "gceol-chemistry-air-water-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-air-pollution",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Exhaust gases from old vehicles in a busy town contain carbon monoxide, oxides of nitrogen and unburnt hydrocarbons.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which gas is poisonous because it combines with haemoglobin?",
+     "choices": [
+      "oxygen",
+      "carbon dioxide",
+      "carbon monoxide",
+      "nitrogen"
+     ],
+     "answer": 2,
+     "explanation": "CO reduces oxygen transport in blood.",
+     "id": "gceol-chemistry-air-water-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What is the main cause of the formation of oxides of nitrogen in engines?",
+     "choices": [
+      "Nitrogen is in the petrol",
+      "From rust",
+      "They come from the tyres",
+      "Nitrogen and oxygen from the air react at high temperature"
+     ],
+     "answer": 3,
+     "explanation": "Spark and heat make N₂ and O₂ combine.",
+     "id": "gceol-chemistry-air-water-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Suggest two ways of reducing air pollution from vehicles.",
+     "model": "Regular servicing; catalytic converters; using cleaner fuels; fewer older vehicles; public transport.",
+     "rubric": "1 mark each; any two.",
+     "explanation": "Regular servicing; catalytic converters; using cleaner fuels; fewer older vehicles; public transport.",
+     "id": "gceol-chemistry-air-water-e06-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explain how acid rain forms.",
+     "model": "Sulphur dioxide and oxides of nitrogen dissolve in rain water to form acids, giving rain with a low pH.",
+     "rubric": "1 mark gases; 1 mark dissolve in rain to form acids.",
+     "explanation": "Sulphur dioxide and oxides of nitrogen dissolve in rain water to form acids, giving rain with a low pH.",
+     "id": "gceol-chemistry-air-water-e06-d"
+    }
+   ],
+   "chapter": "gceol-chemistry-air-water"
+  },
+  {
+   "id": "gceol-chemistry-air-pollution-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-air-pollution",
+   "prompt": "Air contains about what percentage of oxygen?",
+   "choices": [
+    "50%",
+    "78%",
+    "1%",
+    "21%"
+   ],
+   "answer": 3,
+   "explanation": "Standard value.",
+   "chapter": "gceol-chemistry-air-water"
+  },
+  {
+   "id": "gceol-chemistry-air-pollution-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-air-pollution",
+   "prompt": "Air is separated into its gases by",
+   "choices": [
+    "filtration",
+    "chromatography",
+    "fractional distillation of liquid air",
+    "electrolysis"
+   ],
+   "answer": 2,
+   "explanation": "Different boiling points.",
+   "chapter": "gceol-chemistry-air-water"
+  },
+  {
+   "id": "gceol-chemistry-air-pollution-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-air-pollution",
+   "prompt": "Rusting needs",
+   "choices": [
+    "oxygen and water",
+    "water only",
+    "carbon dioxide only",
+    "oxygen only"
+   ],
+   "answer": 0,
+   "explanation": "Both.",
+   "chapter": "gceol-chemistry-air-water"
+  },
+  {
+   "id": "gceol-chemistry-air-pollution-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-air-pollution",
+   "prompt": "A greenhouse gas is",
+   "choices": [
+    "nitrogen",
+    "argon",
+    "carbon dioxide",
+    "oxygen"
+   ],
+   "answer": 2,
+   "explanation": "It traps heat.",
+   "chapter": "gceol-chemistry-air-water"
+  },
+  {
+   "id": "gceol-chemistry-air-pollution-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-air-pollution",
+   "prompt": "Carbon monoxide is formed by",
+   "choices": [
+    "photosynthesis",
+    "incomplete combustion",
+    "complete combustion",
+    "electrolysis"
+   ],
+   "answer": 1,
+   "explanation": "Limited oxygen supply.",
+   "chapter": "gceol-chemistry-air-water"
+  },
+  {
+   "id": "gceol-chemistry-air-water-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-water-treatment",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which test shows that a liquid contains water?",
+   "choices": [
+    "Anhydrous copper(II) sulphate turns blue",
+    "A glowing splint relights",
+    "Litmus turns red",
+    "Limewater turns milky"
+   ],
+   "answer": 0,
+   "explanation": "White CuSO₄ becomes blue hydrated CuSO₄·5H₂O.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-air-water"
+  },
+  {
+   "id": "gceol-chemistry-air-water-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-water-treatment",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What is the purpose of chlorine in water treatment?",
+   "choices": [
+    "To remove calcium ions",
+    "To make water hard",
+    "To kill bacteria",
+    "To filter solids"
+   ],
+   "answer": 2,
+   "explanation": "Chlorine is a disinfectant.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-air-water"
+  },
+  {
+   "id": "gceol-chemistry-air-water-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-chemistry-water-treatment",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Boiling removes permanent hardness.",
+   "answer": false,
+   "explanation": "Only temporary hardness (hydrogencarbonates) is removed by boiling.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-air-water"
+  },
+  {
+   "id": "gceol-chemistry-air-water-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-water-treatment",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Find the mass of calcium carbonate formed when 16.2 g of calcium hydrogencarbonate (Mr 162) decomposes (CaCO₃ Mr 100).",
+   "answer": 10.0,
+   "tolerance": 0.01,
+   "unit": "g",
+   "explanation": "n = 16.2 ÷ 162 = 0.100 mol; mass of CaCO₃ = 0.100 × 100 = 10.0 g.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-air-water"
+  },
+  {
+   "id": "gceol-chemistry-air-water-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-water-treatment",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A pupil finds that soap forms little lather but a lot of scum in the water from a borehole. Explain and suggest how to soften it.",
+   "model": "The water is hard (calcium/magnesium ions react with soap to form scum). Boiling removes temporary hardness; adding washing soda (sodium carbonate) precipitates calcium and magnesium carbonates and removes both kinds; ion exchange also works.",
+   "rubric": "1 mark: hard water/Ca²⁺ Mg²⁺; 1 mark: scum with soap; 1 mark: softening method.",
+   "explanation": "The water is hard (calcium/magnesium ions react with soap to form scum). Boiling removes temporary hardness; adding washing soda (sodium carbonate) precipitates calcium and magnesium carbonates and removes both kinds; ion exchange also works.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-chemistry-air-water"
+  },
+  {
+   "id": "gceol-chemistry-air-water-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-water-treatment",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A town's water works treats river water.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Why is aluminium sulphate added?",
+     "choices": [
+      "It adds fluoride",
+      "It softens the water",
+      "It makes tiny particles stick together and settle",
+      "It kills bacteria"
+     ],
+     "answer": 2,
+     "explanation": "Coagulation (flocculation).",
+     "id": "gceol-chemistry-air-water-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What is the purpose of the sand filter?",
+     "choices": [
+      "To remove dissolved salts",
+      "To add chlorine",
+      "To change the pH",
+      "To remove suspended solids"
+     ],
+     "answer": 3,
+     "explanation": "Filtration traps solid particles.",
+     "id": "gceol-chemistry-air-water-e12-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Why is chlorine added at the end?",
+     "model": "To kill any remaining bacteria and keep the water safe as it travels through pipes.",
+     "rubric": "1 mark: kills bacteria; 1 mark: safe supply/protection in pipes.",
+     "explanation": "To kill any remaining bacteria and keep the water safe as it travels through pipes.",
+     "id": "gceol-chemistry-air-water-e12-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Name a disease that can spread through unsafe drinking water and one way to prevent it at home.",
+     "model": "Cholera or typhoid; boil or chlorinate drinking water, store it covered and wash hands.",
+     "rubric": "1 mark each.",
+     "explanation": "Cholera or typhoid; boil or chlorinate drinking water, store it covered and wash hands.",
+     "id": "gceol-chemistry-air-water-e12-d"
+    }
+   ],
+   "chapter": "gceol-chemistry-air-water"
+  },
+  {
+   "id": "gceol-chemistry-water-treatment-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-water-treatment",
+   "prompt": "Anhydrous copper(II) sulphate turns blue when it meets",
+   "choices": [
+    "carbon dioxide",
+    "water",
+    "oxygen",
+    "nitrogen"
+   ],
+   "answer": 1,
+   "explanation": "Hydrated salt forms.",
+   "chapter": "gceol-chemistry-air-water"
+  },
+  {
+   "id": "gceol-chemistry-water-treatment-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-water-treatment",
+   "prompt": "Hard water contains",
+   "choices": [
+    "chlorine",
+    "calcium or magnesium ions",
+    "nitrogen",
+    "sodium chloride only"
+   ],
+   "answer": 1,
+   "explanation": "From dissolved rocks.",
+   "chapter": "gceol-chemistry-air-water"
+  },
+  {
+   "id": "gceol-chemistry-water-treatment-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-water-treatment",
+   "prompt": "Temporary hardness is removed by",
+   "choices": [
+    "boiling",
+    "freezing",
+    "chlorine",
+    "filtering"
+   ],
+   "answer": 0,
+   "explanation": "Ca(HCO₃)₂ decomposes.",
+   "chapter": "gceol-chemistry-air-water"
+  },
+  {
+   "id": "gceol-chemistry-water-treatment-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-water-treatment",
+   "prompt": "Washing soda is",
+   "choices": [
+    "sodium carbonate",
+    "calcium carbonate",
+    "sodium hydroxide",
+    "sodium chloride"
+   ],
+   "answer": 0,
+   "explanation": "It precipitates calcium ions.",
+   "chapter": "gceol-chemistry-air-water"
+  },
+  {
+   "id": "gceol-chemistry-water-treatment-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-water-treatment",
+   "prompt": "Chlorination kills",
+   "choices": [
+    "bacteria",
+    "sand",
+    "minerals",
+    "calcium"
+   ],
+   "answer": 0,
+   "explanation": "Disinfection.",
+   "chapter": "gceol-chemistry-air-water"
+  }
+ ]
+}

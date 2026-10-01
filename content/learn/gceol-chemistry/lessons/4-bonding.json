@@ -1,0 +1,1064 @@
+{
+ "chapter": "gceol-chemistry-bonding",
+ "lessons": [
+  {
+   "id": "gceol-chemistry-ionic-covalent",
+   "title": "Ionic and covalent bonding",
+   "minutes": 30,
+   "programRef": "GCE O Level Chemistry — Ionic, covalent and metallic bonding; structure and properties (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Explain why atoms form bonds (to obtain a full outer shell).",
+    "Describe ionic bonding as electron transfer and write the formulae of ions.",
+    "Describe covalent bonding as sharing of electrons and draw dot-and-cross diagrams in words.",
+    "Predict the type of bonding from the elements involved."
+   ],
+   "prerequisites": [
+    "gceol-chemistry-atomic-structure"
+   ],
+   "exercises": [
+    "gceol-chemistry-bonding-e01",
+    "gceol-chemistry-bonding-e02",
+    "gceol-chemistry-bonding-e03",
+    "gceol-chemistry-bonding-e04",
+    "gceol-chemistry-bonding-e05",
+    "gceol-chemistry-bonding-e06"
+   ],
+   "selfCheck": [
+    "gceol-chemistry-ionic-covalent-q1",
+    "gceol-chemistry-ionic-covalent-q2",
+    "gceol-chemistry-ionic-covalent-q3",
+    "gceol-chemistry-ionic-covalent-q4",
+    "gceol-chemistry-ionic-covalent-q5"
+   ],
+   "reviewNotes": [
+    "Dot-and-cross diagrams are described in words and symbols; hand-drawn diagrams are expected in class.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Ionic bonding",
+     "md": "A **metal** atom **loses** outer electrons to form a positive ion (cation); a **non-metal** atom **gains** electrons to form a negative ion (anion). The oppositely charged ions attract strongly (ionic bond) and form a giant lattice. Example: Na (2,8,1) loses 1 electron → Na⁺ (2,8); Cl (2,8,7) gains 1 → Cl⁻ (2,8,8). Formula **NaCl**. Magnesium oxide: Mg²⁺ and O²⁻, formula **MgO**."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Covalent bonding",
+     "md": "Two **non-metal** atoms **share** pairs of electrons so that each gets a full outer shell. A shared pair is one **covalent bond**. Examples: H₂ (1 bond), Cl₂ (1), O₂ (**double** bond, 2 pairs), N₂ (**triple** bond, 3 pairs), H₂O (2 bonds + 2 lone pairs on O), NH₃ (3 bonds), CH₄ (4 bonds), CO₂ (2 double bonds). The result is a **molecule**."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Which type of bond?",
+     "md": "- Metal + non-metal → **ionic**.\n- Non-metal + non-metal → **covalent**.\n- Metal + metal (alloys, or one metal) → **metallic**: positive ions in a 'sea' of delocalised electrons.\n\nThe charge of a metal ion in Groups I, II, III is +1, +2, +3; non-metal ions in Groups VI, VII are 2− and 1−."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- In ionic bonding electrons are **transferred**; in covalent bonding they are **shared**.\n- Count only the **outer-shell** electrons in diagrams.\n- Ionic compounds are not made of molecules: NaCl is a lattice, not 'a NaCl molecule'."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 220,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 90,
+        "cy": 110,
+        "r": 40,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 90,
+        "cy": 110,
+        "r": 4,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 105,
+        "text": "Na",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 300,
+        "cy": 110,
+        "r": 40,
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 117,
+        "text": "Cl",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 135,
+        "y1": 110,
+        "x2": 255,
+        "y2": 110,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 195,
+        "y": 95,
+        "text": "1 electron",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 190,
+        "text": "Na⁺ (2,8)",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 190,
+        "text": "Cl⁻ (2,8,8)",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Formation of sodium chloride: sodium transfers one electron to chlorine.",
+     "alt": "Two large circles for sodium and chlorine atoms with a red arrow labelled 1 electron from sodium to chlorine, and the resulting ions Na+ and Cl- below."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — magnesium oxide",
+     "statement": "Explain the formation of magnesium oxide from magnesium (2,8,2) and oxygen (2,6).",
+     "steps": [
+      "Magnesium loses its 2 outer electrons → Mg²⁺ (2,8). Oxygen gains 2 electrons → O²⁻ (2,8).",
+      "The ions have equal and opposite charges (2+ and 2−), so they combine 1 : 1: formula MgO."
+     ],
+     "answer": "Mg²⁺ and O²⁻; MgO"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — water",
+     "statement": "Describe the bonding in a molecule of water, H₂O.",
+     "steps": [
+      "Oxygen (2,6) needs 2 more electrons; each hydrogen (1) needs 1.",
+      "Oxygen shares one pair with each of two H atoms: 2 covalent bonds; two lone pairs stay on O. Each atom has a full outer shell."
+     ],
+     "answer": "Two O–H single covalent bonds"
+    }
+   ],
+   "chapter": "gceol-chemistry-bonding"
+  },
+  {
+   "id": "gceol-chemistry-structure-properties",
+   "title": "Structure and properties of substances",
+   "minutes": 30,
+   "programRef": "GCE O Level Chemistry — Ionic, covalent and metallic bonding; structure and properties (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe giant ionic, simple molecular, giant covalent and metallic structures.",
+    "Relate melting points and electrical conductivity to structure.",
+    "Explain the properties of diamond and graphite.",
+    "Predict properties of a substance from its structure."
+   ],
+   "prerequisites": [
+    "gceol-chemistry-ionic-covalent"
+   ],
+   "exercises": [
+    "gceol-chemistry-bonding-e07",
+    "gceol-chemistry-bonding-e08",
+    "gceol-chemistry-bonding-e09",
+    "gceol-chemistry-bonding-e10",
+    "gceol-chemistry-bonding-e11",
+    "gceol-chemistry-bonding-e12"
+   ],
+   "selfCheck": [
+    "gceol-chemistry-structure-properties-q1",
+    "gceol-chemistry-structure-properties-q2",
+    "gceol-chemistry-structure-properties-q3",
+    "gceol-chemistry-structure-properties-q4",
+    "gceol-chemistry-structure-properties-q5"
+   ],
+   "reviewNotes": [
+    "Melting points are described qualitatively (high/low); no specific numbers apart from NaCl being 'about 800 °C'.",
+    "Silicon(IV) oxide is mentioned as a giant covalent substance (sand).",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Four types of structure",
+     "md": "- **Giant ionic** (NaCl, MgO): high melting point, brittle, conducts **only when molten or dissolved** (ions free to move), often soluble in water.\n- **Simple molecular** (H₂O, CO₂, CH₄, I₂): **low** melting and boiling points (weak forces **between** molecules), do **not** conduct.\n- **Giant covalent** (diamond, graphite, silicon(IV) oxide): very high melting points, insoluble.\n- **Metallic**: high melting point, conduct electricity and heat, malleable and ductile."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Diamond and graphite",
+     "md": "Both are pure carbon (allotropes). **Diamond**: each C bonded to 4 others in a rigid 3-D network, **very hard**, does **not conduct**; used in cutting tools. **Graphite**: layers of carbon atoms, each bonded to 3 others; the layers slide easily (soft, a **lubricant**, used in pencils) and each atom has a free (delocalised) electron so graphite **conducts electricity** (electrodes)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Watch out",
+     "md": "- When a molecular substance melts, only the weak forces **between molecules** are overcome, not the covalent bonds inside the molecules.\n- Ionic solids do not conduct electricity (ions fixed); molten or dissolved ones do.\n- Metals conduct because of delocalised electrons, not ions."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 220,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 100,
+        "cy": 45,
+        "r": 17,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 50,
+        "text": "+",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 100,
+        "cy": 90,
+        "r": 17,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 95,
+        "text": "−",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 100,
+        "cy": 135,
+        "r": 17,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 140,
+        "text": "+",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 100,
+        "cy": 180,
+        "r": 17,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 185,
+        "text": "−",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 145,
+        "cy": 45,
+        "r": 17,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 145,
+        "y": 50,
+        "text": "−",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 145,
+        "cy": 90,
+        "r": 17,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "text",
+        "x": 145,
+        "y": 95,
+        "text": "+",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 145,
+        "cy": 135,
+        "r": 17,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 145,
+        "y": 140,
+        "text": "−",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 145,
+        "cy": 180,
+        "r": 17,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "text",
+        "x": 145,
+        "y": 185,
+        "text": "+",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 190,
+        "cy": 45,
+        "r": 17,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 50,
+        "text": "+",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 190,
+        "cy": 90,
+        "r": 17,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 95,
+        "text": "−",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 190,
+        "cy": 135,
+        "r": 17,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 140,
+        "text": "+",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 190,
+        "cy": 180,
+        "r": 17,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 185,
+        "text": "−",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 235,
+        "cy": 45,
+        "r": 17,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 235,
+        "y": 50,
+        "text": "−",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 235,
+        "cy": 90,
+        "r": 17,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "text",
+        "x": 235,
+        "y": 95,
+        "text": "+",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 235,
+        "cy": 135,
+        "r": 17,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 235,
+        "y": 140,
+        "text": "−",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 235,
+        "cy": 180,
+        "r": 17,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "text",
+        "x": 235,
+        "y": 185,
+        "text": "+",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 100,
+        "text": "Na⁺ blue",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 130,
+        "text": "Cl⁻ red",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A section of the sodium chloride lattice: positive and negative ions alternate in all directions.",
+     "alt": "A square grid of alternating blue plus and red minus circles representing sodium and chloride ions."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — which is which?",
+     "statement": "Substance A: melts at 800 °C, conducts when molten but not as a solid. Substance B: melts at −7 °C and does not conduct. Identify the structure of each.",
+     "steps": [
+      "A: high melting point and conducts only when molten (ions free to move): giant ionic.",
+      "B: very low melting point and no conduction: simple molecular."
+     ],
+     "answer": "A giant ionic; B simple molecular"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — graphite and diamond",
+     "statement": "Explain why graphite is used as a lubricant and as an electrode, while diamond is used for cutting.",
+     "steps": [
+      "Graphite has layers held by weak forces, so they slide over each other (lubricant); free electrons carry charge (electrode).",
+      "In diamond every carbon is bonded to four others in a rigid network, so it is extremely hard and cuts glass and rock."
+     ],
+     "answer": "Layers slide + free electrons; rigid network"
+    }
+   ],
+   "chapter": "gceol-chemistry-bonding"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-chemistry-bonding-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-ionic-covalent",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which compound is formed by ionic bonding?",
+   "choices": [
+    "water (H₂O)",
+    "methane (CH₄)",
+    "carbon dioxide (CO₂)",
+    "sodium chloride (NaCl)"
+   ],
+   "answer": 3,
+   "explanation": "A metal and a non-metal: electron transfer.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-bonding"
+  },
+  {
+   "id": "gceol-chemistry-bonding-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-chemistry-ionic-covalent",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many electrons are shared in the covalent bonds of a nitrogen molecule (N₂), which has a triple bond?",
+   "answer": 6,
+   "tolerance": 0,
+   "explanation": "A triple bond has 3 shared pairs = 6 shared electrons.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-bonding"
+  },
+  {
+   "id": "gceol-chemistry-bonding-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-chemistry-ionic-covalent",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Atoms in a molecule of chlorine, Cl₂, are held by an ionic bond.",
+   "answer": false,
+   "explanation": "Two non-metal atoms share a pair of electrons: a single covalent bond.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-bonding"
+  },
+  {
+   "id": "gceol-chemistry-bonding-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-ionic-covalent",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The formula of calcium chloride is",
+   "choices": [
+    "CaCl₂",
+    "Ca₂Cl",
+    "Ca₂Cl₂",
+    "CaCl"
+   ],
+   "answer": 0,
+   "explanation": "Ca²⁺ needs two Cl⁻ to balance charge.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-bonding"
+  },
+  {
+   "id": "gceol-chemistry-bonding-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-ionic-covalent",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain why sodium atoms and chlorine atoms combine to form NaCl.",
+   "model": "Sodium has one outer electron, which it loses to become Na⁺ with a full shell; chlorine has seven outer electrons and gains one to become Cl⁻ with a full shell. The oppositely charged ions attract each other strongly.",
+   "rubric": "1 mark: electron transfer Na to Cl; 1 mark: full outer shells; 1 mark: attraction between ions.",
+   "explanation": "Sodium has one outer electron, which it loses to become Na⁺ with a full shell; chlorine has seven outer electrons and gains one to become Cl⁻ with a full shell. The oppositely charged ions attract each other strongly.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-chemistry-bonding"
+  },
+  {
+   "id": "gceol-chemistry-bonding-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-ionic-covalent",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Consider these substances: sodium fluoride (NaF), hydrogen chloride (HCl), methane (CH₄) and potassium oxide (K₂O).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which two are ionic?",
+     "choices": [
+      "HCl and K₂O",
+      "NaF and CH₄",
+      "HCl and CH₄",
+      "NaF and K₂O"
+     ],
+     "answer": 3,
+     "explanation": "Both contain a Group I metal and a non-metal.",
+     "id": "gceol-chemistry-bonding-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many covalent bonds does a carbon atom form in methane?",
+     "answer": 4,
+     "tolerance": 0,
+     "explanation": "Carbon (2,4) shares four electrons, one with each H.",
+     "id": "gceol-chemistry-bonding-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Why is the formula of potassium oxide K₂O and not KO?",
+     "choices": [
+      "To make it stable by heat",
+      "Two K⁺ (1+) are needed to balance one O²⁻ (2−)",
+      "Oxygen has two atoms",
+      "Potassium has two shells"
+     ],
+     "answer": 1,
+     "explanation": "Total positive charge must equal total negative charge.",
+     "id": "gceol-chemistry-bonding-e06-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Describe, in terms of electrons, how hydrogen chloride is formed from hydrogen and chlorine atoms.",
+     "model": "Each atom needs one more electron; they share one pair of electrons, forming a single covalent bond, so H has a full shell of 2 and Cl a full shell of 8.",
+     "rubric": "1 mark: sharing a pair; 1 mark: full outer shells.",
+     "explanation": "Each atom needs one more electron; they share one pair of electrons, forming a single covalent bond, so H has a full shell of 2 and Cl a full shell of 8.",
+     "id": "gceol-chemistry-bonding-e06-d"
+    }
+   ],
+   "chapter": "gceol-chemistry-bonding"
+  },
+  {
+   "id": "gceol-chemistry-ionic-covalent-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-ionic-covalent",
+   "prompt": "In ionic bonding electrons are",
+   "choices": [
+    "transferred",
+    "created",
+    "destroyed",
+    "shared"
+   ],
+   "answer": 0,
+   "explanation": "From metal to non-metal.",
+   "chapter": "gceol-chemistry-bonding"
+  },
+  {
+   "id": "gceol-chemistry-ionic-covalent-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-ionic-covalent",
+   "prompt": "A double covalent bond has",
+   "choices": [
+    "one shared pair",
+    "two shared pairs",
+    "no shared pairs",
+    "four shared pairs"
+   ],
+   "answer": 1,
+   "explanation": "Two pairs = four electrons.",
+   "chapter": "gceol-chemistry-bonding"
+  },
+  {
+   "id": "gceol-chemistry-ionic-covalent-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-ionic-covalent",
+   "prompt": "Which formula is correct for magnesium chloride?",
+   "choices": [
+    "MgCl₃",
+    "MgCl",
+    "MgCl₂",
+    "Mg₂Cl"
+   ],
+   "answer": 2,
+   "explanation": "Mg²⁺ + 2Cl⁻.",
+   "chapter": "gceol-chemistry-bonding"
+  },
+  {
+   "id": "gceol-chemistry-ionic-covalent-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-ionic-covalent",
+   "prompt": "Metallic bonding is the attraction between",
+   "choices": [
+    "molecules",
+    "protons and neutrons",
+    "positive ions and delocalised electrons",
+    "two atoms sharing electrons"
+   ],
+   "answer": 2,
+   "explanation": "Sea of electrons.",
+   "chapter": "gceol-chemistry-bonding"
+  },
+  {
+   "id": "gceol-chemistry-ionic-covalent-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-ionic-covalent",
+   "prompt": "Carbon dioxide has",
+   "choices": [
+    "covalent bonds",
+    "metallic bonds",
+    "no bonds",
+    "ionic bonds"
+   ],
+   "answer": 0,
+   "explanation": "Two non-metals.",
+   "chapter": "gceol-chemistry-bonding"
+  },
+  {
+   "id": "gceol-chemistry-bonding-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-chemistry-structure-properties",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Why does a molecular substance such as iodine have a low melting point?",
+   "choices": [
+    "It is a metal",
+    "Covalent bonds are weak",
+    "It has ions",
+    "Only weak forces between molecules need to be overcome"
+   ],
+   "answer": 3,
+   "explanation": "The strong covalent bonds inside the molecules are not broken.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-bonding"
+  },
+  {
+   "id": "gceol-chemistry-bonding-e08",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-chemistry-structure-properties",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Solid sodium chloride conducts electricity because it contains ions.",
+   "answer": false,
+   "explanation": "The ions are fixed in the lattice and cannot move; molten or dissolved NaCl conducts.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-bonding"
+  },
+  {
+   "id": "gceol-chemistry-bonding-e09",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "gceol-chemistry-structure-properties",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match the substance with its structure.",
+   "pairs": [
+    [
+     "sodium chloride",
+     "giant ionic"
+    ],
+    [
+     "diamond",
+     "giant covalent"
+    ],
+    [
+     "carbon dioxide",
+     "simple molecular"
+    ],
+    [
+     "copper",
+     "metallic"
+    ]
+   ],
+   "explanation": "Based on the bonding in each substance.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceol-chemistry-bonding"
+  },
+  {
+   "id": "gceol-chemistry-bonding-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-structure-properties",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which substance conducts electricity as a solid?",
+   "choices": [
+    "diamond",
+    "sugar",
+    "sodium chloride",
+    "graphite"
+   ],
+   "answer": 3,
+   "explanation": "Graphite has delocalised electrons between its layers.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-bonding"
+  },
+  {
+   "id": "gceol-chemistry-bonding-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-chemistry-structure-properties",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain why metals can be hammered into shapes without breaking.",
+   "model": "Layers of positive ions can slide over each other; the delocalised electrons still hold them together, so the metal changes shape but does not shatter like an ionic solid.",
+   "rubric": "1 mark: layers slide; 1 mark: electrons keep the metallic bond.",
+   "explanation": "Layers of positive ions can slide over each other; the delocalised electrons still hold them together, so the metal changes shape but does not shatter like an ionic solid.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-chemistry-bonding"
+  },
+  {
+   "id": "gceol-chemistry-bonding-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-structure-properties",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The table shows properties: P (soluble in water, melts at 750 °C, conducts when dissolved); Q (insoluble, very hard, melts above 3000 °C, no conduction); R (gas at room temperature, no conduction); S (shiny solid, conducts when solid, malleable).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What is the structure of P?",
+     "choices": [
+      "metallic",
+      "giant ionic",
+      "simple molecular",
+      "giant covalent"
+     ],
+     "answer": 1,
+     "explanation": "Soluble, high m.p., conducts when dissolved.",
+     "id": "gceol-chemistry-bonding-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which of the following could Q be?",
+     "choices": [
+      "copper",
+      "sodium chloride",
+      "chlorine",
+      "diamond"
+     ],
+     "answer": 3,
+     "explanation": "Giant covalent with very high melting point and no conduction.",
+     "id": "gceol-chemistry-bonding-e12-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What is the structure of R?",
+     "choices": [
+      "giant covalent",
+      "metallic",
+      "simple molecular",
+      "giant ionic"
+     ],
+     "answer": 2,
+     "explanation": "Gas at room temperature: weak forces between molecules.",
+     "id": "gceol-chemistry-bonding-e12-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Why does S conduct when solid?",
+     "model": "It has delocalised electrons that are free to move and carry charge through the metal.",
+     "rubric": "1 mark: delocalised electrons; 1 mark: free to move/carry charge.",
+     "explanation": "It has delocalised electrons that are free to move and carry charge through the metal.",
+     "id": "gceol-chemistry-bonding-e12-d"
+    }
+   ],
+   "chapter": "gceol-chemistry-bonding"
+  },
+  {
+   "id": "gceol-chemistry-structure-properties-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-structure-properties",
+   "prompt": "Ionic compounds conduct electricity when",
+   "choices": [
+    "solid",
+    "always",
+    "molten or dissolved",
+    "never"
+   ],
+   "answer": 2,
+   "explanation": "Ions can move only when not fixed.",
+   "chapter": "gceol-chemistry-bonding"
+  },
+  {
+   "id": "gceol-chemistry-structure-properties-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-structure-properties",
+   "prompt": "Graphite is used in pencils because",
+   "choices": [
+    "it is very hard",
+    "it is a metal",
+    "its layers slide easily",
+    "it is an ionic compound"
+   ],
+   "answer": 2,
+   "explanation": "Weak forces between layers.",
+   "chapter": "gceol-chemistry-bonding"
+  },
+  {
+   "id": "gceol-chemistry-structure-properties-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-structure-properties",
+   "prompt": "Simple molecular substances have",
+   "choices": [
+    "delocalised electrons",
+    "very high melting points",
+    "free ions",
+    "low melting points"
+   ],
+   "answer": 3,
+   "explanation": "Weak intermolecular forces.",
+   "chapter": "gceol-chemistry-bonding"
+  },
+  {
+   "id": "gceol-chemistry-structure-properties-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-structure-properties",
+   "prompt": "Diamond does not conduct because",
+   "choices": [
+    "it has no free electrons",
+    "it contains ions",
+    "it is a metal",
+    "it is a liquid"
+   ],
+   "answer": 0,
+   "explanation": "All outer electrons are used in bonds.",
+   "chapter": "gceol-chemistry-bonding"
+  },
+  {
+   "id": "gceol-chemistry-structure-properties-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-chemistry-structure-properties",
+   "prompt": "Which is a giant covalent structure?",
+   "choices": [
+    "iodine",
+    "silicon(IV) oxide (sand)",
+    "water",
+    "carbon dioxide"
+   ],
+   "answer": 1,
+   "explanation": "A giant network of Si and O atoms.",
+   "chapter": "gceol-chemistry-bonding"
+  },
+  {
+   "id": "gceol-chemistry-bonding-m01",
+   "kind": "mcq",
+   "tier": "examen",
+   "lesson": "gceol-chemistry-ionic-covalent",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which compound contains covalent bonds only?",
+   "choices": [
+    "carbon dioxide",
+    "magnesium oxide",
+    "calcium chloride",
+    "sodium chloride"
+   ],
+   "answer": 0,
+   "explanation": "CO₂ is made of two non-metals.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-chemistry-bonding"
+  }
+ ]
+}
