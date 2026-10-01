@@ -390,7 +390,7 @@
    "lesson": "tle-svt-d-genetique",
    "prompt": "Un couple AS × AS aura deux enfants. Quelle est la probabilité que les deux soient drépanocytaires ? (Réponds sous forme décimale.)",
    "answer": 0.0625,
-   "tolerance": 0.0001,
+   "tolerance": 0.001,
    "explanation": "Chaque enfant a une probabilité 1/4 d'être SS et les naissances sont indépendantes : 1/4 × 1/4 = 1/16 = 0,0625.",
    "method": "Événements indépendants : produit des probabilités.",
    "mistakes": [
@@ -407,7 +407,7 @@
    "lesson": "tle-svt-d-genetique",
    "prompt": "Même couple AS × AS, deux enfants. Quelle est la probabilité qu'au moins un des deux soit drépanocytaire ? (Réponds sous forme décimale.)",
    "answer": 0.4375,
-   "tolerance": 0.0001,
+   "tolerance": 0.001,
    "explanation": "On passe par le contraire : aucun enfant malade = (3/4)² = 9/16. Donc au moins un malade = 1 − 9/16 = 7/16 = 0,4375.",
    "method": "« Au moins un » = 1 − « aucun ».",
    "mistakes": [
