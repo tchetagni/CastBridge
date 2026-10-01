@@ -18,3 +18,4 @@
 | activation-tools | tools/activation, bureau JVM, backend/ (routes admin), noyau console téléphone | claude/activation-tools | EN ATTENTE du format filaire de trial-edition | générateurs de jetons : bureau, téléphone propriétaire, serveur |
 | license-admin | backend/ (module licences, migrations ≥ V50, admin) | claude/license-admin | LANCÉ | gestion robuste des licences en ligne ; clé serveur : ni transfert ni « tout ouvrir » |
 | deferred-orders | core/.../policy*, backend/ (file d'ordres), protocole Bluetooth additif, tâche téléphone | claude/deferred-orders | EN ATTENTE du format filaire de trial-edition | serveur → téléphone → TV : ordres différés signés, liste blanche d'actions |
+| content-langues-w1 | castbridge-content uniquement | idem | LANCÉ | Langues vague 1 : A0–A2 des 7 langues (lots libres SA / lots réservés séparés) |
