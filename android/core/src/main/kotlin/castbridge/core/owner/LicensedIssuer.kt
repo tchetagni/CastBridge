@@ -19,7 +19,29 @@ class DeviceRequest(val code: String, val k: Int, val factors: Fingerprints) {
 class IssueSpec(
     val kind: ActivationKind, val subject: Subject = Subject.TV, val rights: List<Right> = emptyList(), val license: String = Activation.TRIAL_LICENSE,
     val windowDays: Int = 30, val notBefore: Long? = null, val issuedAt: Long? = null, val seat: String? = null, val nonce: String? = null,
+    /** Rentals to add to [rights]: their keys are derived from [rentalMaster] and the seat the registry picks (docs/RENTAL-LOTS.md). */
+    val rentals: List<RentalSpec> = emptyList(), val rentalMaster: ByteArray? = null,
+    /** Optional policy check (free lots refused): returns a French reason or null. */
+    val rentalCheck: ((RentalSpec) -> String?)? = null,
 )
+
+/**
+ * What the owner asks for a rental: `produit=bouquet1,bouquet2:JOURS[:MINUTES_D_USAGE_MAX[:TOLERANCE_JOURS[:SIMULTANEES]]]` ([RightsSyntax.rental]). [period] = the start of the rental
+ * this one renews (null = a NEW rental starting now): a renewal extends the same rental without duplicate and keeps the same key (docs/RENTAL-LOTS.md § 1).
+ */
+data class RentalSpec(val productId: String, val bundleIds: List<String>, val days: Int, val maxUsageMinutes: Int = 0, val graceDays: Int = 0, val maxConcurrent: Int = 0, val period: Long? = null)
+
+/** The ONE place a [RentalSpec] becomes a signed-ready [Right.Rental] (desk tool, owner phone console and server port all go through it). */
+object RentalIssuing {
+    /** [period] null = a new rental starting at [issuedAt]; the key is derived from [master], the licence, the seat, the product and the period, then boxed for the device. */
+    fun right(r: RentalSpec, issuedAt: Long, license: String, seat: String, device: Fingerprints, master: ByteArray): Right.Rental {
+        val period = r.period ?: issuedAt
+        if (period > issuedAt) throw IssueException("Location : la période à prolonger ne peut pas être dans le futur")
+        val key = castbridge.core.lots.RentalKeys.rentalKey(master, license, seat, r.productId, period)
+        return Right.Rental(r.productId, r.bundleIds.sorted(), issuedAt, period, r.days, r.graceDays * DAY_MS, r.maxUsageMinutes, r.maxConcurrent,
+            castbridge.core.lots.RentalKeys.makeBox(device, DeviceIdentity.kFor(device.n), key, r.productId, period))
+    }
+}
 
 /** Result of one issuing: every encoding of the token plus where the registry stands. */
 class Delivered(val issued: ActivationIssuer.Issued, val seat: String, val reused: Boolean, val seatsLeft: Int?)
@@ -40,6 +62,17 @@ object RightsSyntax {
         if (pb.size != 2 || f.size < 2) bad("Abonnement : « produit=bouquets:jours[:tolérance[:auto]] » attendu")
         val days = f[1].toLongOrNull() ?: bad("Abonnement : durée en jours invalide")
         return Right.Subscription(pb[0].trim(), pb[1].split(',').map { it.trim() }.sorted(), now, now + days * DAY_MS, (f.getOrNull(2)?.toLongOrNull() ?: 7L) * DAY_MS, f.getOrNull(3) == "auto")
+    }
+
+    /** `produit=bouquet1,bouquet2:JOURS[:MINUTES_D_USAGE_MAX[:TOLERANCE_JOURS[:SIMULTANEES]]]` : une location (1 à 366 jours, usage maximal optionnel en minutes). */
+    fun rental(s: String, period: Long? = null): RentalSpec {
+        val f = s.split(':'); val pb = f[0].split('=', limit = 2)
+        if (pb.size != 2 || pb[0].isBlank() || pb[1].isBlank() || f.size < 2 || f.size > 5) bad("Location : « produit=bouquet1,bouquet2:JOURS[:MINUTES_D_USAGE_MAX] » attendu")
+        fun n(i: Int, what: String, dflt: Int) = f.getOrNull(i)?.takeIf { it.isNotEmpty() }?.let { it.toIntOrNull() ?: bad("Location : $what invalide") } ?: dflt
+        val spec = RentalSpec(pb[0].trim(), pb[1].split(',').map { it.trim() }.filter { it.isNotEmpty() }.sorted(), n(1, "durée en jours", 0), n(2, "minutes d'usage maximales", 0), n(3, "tolérance en jours", 0), n(4, "plafond de locations simultanées", 0), period)
+        if (spec.days !in 1..castbridge.core.lots.RentalLines.MAX_DAYS) bad("Location : de 1 à ${castbridge.core.lots.RentalLines.MAX_DAYS} jours")
+        if (spec.bundleIds.isEmpty()) bad("Location : au moins un bouquet")
+        return spec
     }
 
     /** `produit:jours` (30 jours au plus, clé avec la portée « tout ouvert ») */
@@ -79,7 +112,16 @@ class LicensedIssuer(
                 is Plan.Refused -> throw IssueException(p.message)
             }
         }
-        val issued = issuer.issue(ActivationIssuer.Request(spec.kind, device.code, device.factors, issuedAt, spec.subject, spec.rights, spec.license, seat,
+        val rights = if (spec.rentals.isEmpty()) spec.rights else {
+            if (spec.kind != ActivationKind.PRODUCTION) throw IssueException("Une location demande une activation de production")
+            val master = spec.rentalMaster ?: throw IssueException("Location : secret de location absent")
+            val theSeat = seat ?: SeatIds.of(spec.license, device.factors)
+            spec.rights + spec.rentals.map { r ->
+                spec.rentalCheck?.invoke(r)?.let { throw IssueException(it) }
+                RentalIssuing.right(r, issuedAt, spec.license, theSeat, device.factors, master)
+            }
+        }
+        val issued = issuer.issue(ActivationIssuer.Request(spec.kind, device.code, device.factors, issuedAt, spec.subject, rights, spec.license, seat,
             spec.notBefore ?: issuedAt, spec.windowDays, spec.nonce, null))
         save(LicenseBook.merge(current, listOf(LicenseEvent.issue(signer, issued.activation))))
         return Delivered(issued, issued.activation.seat, reused, left)

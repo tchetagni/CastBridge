@@ -39,12 +39,18 @@ object RentalPolicy {
 
     /** What a rental request would be refused for, per lot of the bundles (empty list = every lot is rentable). Used by the issuing tools before they sign. */
     fun refusals(bundleIds: Collection<String>, bundles: BundleCatalog, catalog: Collection<LotMeta>, families: LotFamilies): List<String> {
-        val wanted = bundles.lotsOf(bundleIds)
         val unknownBundles = bundleIds.filter { bundles.find(it) == null }.map { "bouquet inconnu : $it" }
         val byId = catalog.filter { it.edition == Edition.FULL }.associateBy { it.id }
-        return unknownBundles + wanted.sortedWith(compareBy({ it.feature }, { it.scope })).mapNotNull { id ->
-            byId[id]?.let { refusal(it, families) } ?: if (byId[id] == null) families.of(id).let { f -> if (f == LotFamily.FREE) "${LotNames.key(id)} est un lot libre (CC BY-SA) : il ne peut pas être loué" else if (f == null) "${LotNames.key(id)} : famille inconnue" else null } else null
+        val lotRefusals = bundles.lotsOf(bundleIds).sortedWith(compareBy({ it.feature }, { it.scope })).mapNotNull { id ->
+            val meta = byId[id]
+            when {
+                meta != null -> refusal(meta, families)
+                families.of(id) == LotFamily.FREE -> "${LotNames.key(id)} est un lot libre (CC BY-SA) : il ne peut pas être loué"
+                families.of(id) == null -> "${LotNames.key(id)} : famille de lot inconnue, location refusée par précaution"
+                else -> null
+            }
         }
+        return unknownBundles + lotRefusals
     }
 
     /** Rentals only ADD: a lasting right is never reduced by a rental that ended, and a rental never counts for a bundle that is already owned or subscribed. */

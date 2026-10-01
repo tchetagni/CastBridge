@@ -19,6 +19,13 @@ object RentalKeys {
     private fun hex(b: ByteArray) = b.joinToString("") { "%02x".format(it) }
     private fun hkdf(ikm: ByteArray, salt: String, info: String, n: Int) = Hkdf.expand(Hkdf.extract(salt.toByteArray(), ikm), info.toByteArray(), n)
 
+    /**
+     * The default master of a tool: the hash of its own deterministic signature of a fixed public text. Only the holder of the signing key can compute it, nothing new to store or back up
+     * (it is as safe as the key itself and changes with it). A shared master between the desk, the owner phone and the server is the owner's decision (docs/RENTAL-LOTS.md § 3).
+     */
+    fun masterFrom(signer: castbridge.core.owner.Signer): ByteArray =
+        java.security.MessageDigest.getInstance("SHA-256").digest(signer.sign("castbridge-rental-master-v1".toByteArray()))
+
     /** [master] = the issuer's secret (never in the repository, never on a TV). Seat, not hardware set, so a replaced Wi-Fi module keeps the same key. */
     fun rentalKey(master: ByteArray, license: String, seat: String, productId: String, period: Long): ByteArray {
         require(master.size >= 16)

@@ -168,7 +168,12 @@ class Cli(private val env: Env) {
         val d = desk(a)
         val kind = if (a.flags.contains("production")) ActivationKind.PRODUCTION else ActivationKind.TRIAL
         val now = env.clock()
-        val spec = IssueSpec(kind, if (a.get("sujet") == "phone") Subject.PHONE else Subject.TV, rights(a, now), a.get("licence") ?: Activation.TRIAL_LICENSE, (a.get("jours") ?: "30").toInt())
+        val period = a.get("periode")?.toLongOrNull()
+        if (a.get("periode") != null && period == null) throw UsageException("--periode attend le début (ms) de la location à prolonger")
+        val rentals = a.all("location").map { RightsSyntax.rental(it, period) }
+        val check = if (rentals.isEmpty()) null else rentalCheck(a)
+        val spec = IssueSpec(kind, if (a.get("sujet") == "phone") Subject.PHONE else Subject.TV, rights(a, now), a.get("licence") ?: Activation.TRIAL_LICENSE, (a.get("jours") ?: "30").toInt(),
+            rentals = rentals, rentalMaster = if (rentals.isEmpty()) null else d.rentalMaster(), rentalCheck = check)
         val r = d.issue(device, spec)
         val dir = File(a.get("sortie") ?: "."); dir.mkdirs()
         val fileOut = File(dir, r.issued.fileName); fileOut.writeText(r.issued.fileContent)
@@ -177,8 +182,27 @@ class Cli(private val env: Env) {
         env.out.println("Valable à l'installation jusqu'au ${date(r.issued.activation.notAfter)}")
         env.out.println("Fichier pour la clé USB de la TV : ${fileOut.path}  (à copier dans Download/CastBridge/)")
         env.out.println("Jeton :"); env.out.println(r.issued.token)
+        r.issued.activation.rights.filterIsInstance<Right.Rental>().forEach { l ->
+            env.out.println("Location ${l.productId} (${l.bundleIds.joinToString(",")}) : ${l.durationDays} jour(s) à partir du ${date(l.startsAt)}, fin le ${date(l.endsAt)}" +
+                (if (l.maxUsageMinutes > 0) ", usage maximal ${l.maxUsageMinutes} min" else "") + (if (l.graceMs > 0) ", tolérance ${l.graceMs / Desk.DAY_MS} j" else "") + " ; période ${l.period}")
+        }
+        if (a.all("location").isNotEmpty() && a.get("catalogue") == null) env.out.println("ATTENTION : lots libres (CC BY-SA) NON vérifiés (--catalogue et --lots-libres absents) : un lot libre ne doit jamais être loué.")
         if (a.flags.contains("qr")) { val png = File(dir, "activation.png"); Qr.png(r.issued.token, png); env.out.println("Code QR : ${png.path}") }
         return 0
+    }
+
+    /** Refuses a rental whose bundles hold a free lot (CC BY-SA) or an unknown bundle, from the bundle catalogue (`--catalogue TRIAL-MANIFEST.json`) and the list of free lots (`--lots-libres FICHIER`, one lot « fonction:périmètre » per line). */
+    private fun rentalCheck(a: Args): ((castbridge.core.owner.RentalSpec) -> String?)? {
+        val catPath = a.get("catalogue") ?: return null
+        val catalog = castbridge.core.lots.BundleCatalog.parse(readSource(catPath))
+        val free = a.get("lots-libres")?.let { readSource(it).lines().map { l -> l.trim() }.filter { l -> l.isNotEmpty() && !l.startsWith("#") }.toSet() }
+            ?: throw UsageException("--catalogue demande aussi --lots-libres (la liste des lots libres : jamais louables)")
+        val all = catalog.bundles.flatMap { it.lots }.toSet()
+        val families = castbridge.core.lots.LotFamilies.explicit(free, all - free)
+        return { spec ->
+            val metas = catalog.lotsOf(spec.bundleIds).map { castbridge.core.lots.LotMeta(it, 1, 0, "0".repeat(64), castbridge.core.lots.LotNames.key(it)) }
+            castbridge.core.lots.RentalPolicy.refusals(spec.bundleIds, catalog, metas, families).firstOrNull()
+        }
     }
 
     private fun compact(a: Args): Int {
@@ -255,6 +279,9 @@ Commandes (français ; alias anglais : keygen key trust device license issue com
   licence ID --postes N [--transferts N]    crée une licence (un achat)
   emettre --appareil F [--production] [--licence ID] [--jours N] [--sujet tv|phone]
           [--achat produit=b1,b2] [--abonnement produit=b1:jours[:tolérance[:auto]]] [--tout-ouvert produit:jours] [--droit ligne]
+          [--location produit=b1,b2:JOURS[:MINUTES_D_USAGE_MAX[:TOLERANCE_JOURS[:SIMULTANEES]]]]   (répétable ; 1 à 366 jours ; production seulement)
+          [--periode MS]  prolonge la location commencée à cet instant (même clé, pas de doublon) au lieu d'en commencer une nouvelle
+          [--catalogue TRIAL-MANIFEST.json --lots-libres FICHIER]   refuse la location d'un lot libre (CC BY-SA)
           [--sortie DOSSIER] [--qr]       jeton, fichier « activation » (clé USB de la TV) et code QR
   cle-saisissable --code XXXX-XXXX-XXXX-XXXX --jours N [--production --ensemble N]   dernier recours : 165 caractères à taper
   commande --appareil F --pouvoir support|unlock|open_all --defi HEX [--jours N] [--action A] [--bouquets a,b] [--lots fn:scope,…]

@@ -510,13 +510,27 @@ class RentalPolicyTest {
     }
 
     @Test fun rentedLotsAreNotInTheTrialBudgetButUseTheTvBudgetAndFreeItWhenRemoved() {
-        // the trial manifest is built from the content only: nothing about rentals can enter it
-        assertTrue(RentalLines.KIND !in TrialManifest::class.java.declaredFields.map { it.name })
+        // the trial manifest and its 100 Mo check depend on the content only: an access with a rental changes neither
+        val trialLot = TrialLot("learn", "cm2-trial", "learn", "cm2", 2L shl 20, listOf(TrialFile("a", 2L shl 20)), listOf("lesson/1"), listOf("classe-cm2"))
+        val bundles = BundleCatalog(listOf(Bundle("classe-cm2", "classe", setOf("learn:cm2"))))
+        val manifest = TrialManifest(true, TrialBudget.CAP_BYTES, 2L shl 20, "inv", listOf(trialLot), listOf(TrialSub("learn/cm2/maths", "learn", 1, 10, 2L shl 20, 1L shl 30)), bundles)
+        assertEquals(emptyList(), TrialBudget.verify(manifest)); val before = TrialBudget.fingerprint(manifest)
+        val rig = RentalRig(); rig.install(rig.issue(rig.rental())); rig.wall = T0 + DAY
+        val access = RentalPolicy.mergeAccess(Access.TRIAL_ONLY, rig.status())
+        assertEquals(setOf("classe-cm2"), access.rented)
+        assertEquals(emptyList(), TrialBudget.verify(manifest)); assertEquals(before, TrialBudget.fingerprint(manifest))
+        // the plan: the rented FULL lot takes the place of its trial twin (never both), counted in the TV budget (10 Mo here: 1000 bytes)
+        val trial = LotMeta(LotId("learn", "cm2-trial"), 1, 300, "b".repeat(64), "CM2 essai", 0, Edition.TRIAL)
+        val full = LotMeta(CM2, 1, 600, "a".repeat(64), "CM2")
+        val plan = EditionPolicy.planForTv(listOf(Need(CM2, 1)), listOf(trial, full), listOf(trial), 0, access, bundles, budget = 1000)
+        assertEquals(listOf(CM2), plan.plan.wanted.map { it.id }, "the rented lot replaces the trial twin"); assertEquals(600, plan.plan.wanted.sumOf { it.bytes })
+        val noRental = EditionPolicy.planForTv(listOf(Need(CM2, 1)), listOf(trial, full), emptyList(), 0, Access.TRIAL_ONLY, bundles, budget = 1000)
+        assertEquals(listOf(trial.id), noRental.plan.wanted.map { it.id }, "without the rental the trial stays")
+        // TV budget: the rented lot counts, and its removal frees the room
         val tv = FakeTv(starter = 0, max = 1000)
-        val rented = LotMeta(CM2, 1, 600, "a".repeat(64), "CM2")
-        tv.learn.held[CM2] = rented
+        tv.learn.held[CM2] = full
         assertEquals(600, tv.store.usedBytes()); assertEquals(400, tv.store.remainingBytes())
-        val rig = RentalRig(); rig.install(rig.issue(rig.rental())); rig.ledger.markRented("loc-cm2@$T0", CM2, rented, LotFamilies.explicit(emptySet(), setOf("learn:cm2")))
+        rig.ledger.markRented("loc-cm2@$T0", CM2, full, LotFamilies.explicit(emptySet(), setOf("learn:cm2")))
         rig.wall = T0 + 31 * DAY
         rig.sweeper(TvRentedLots(tv.store)).sweep(SweepTrigger.APP_START)
         assertEquals(0, tv.store.usedBytes(), "the expired lot frees its room"); assertTrue(tv.learn.held.isEmpty())

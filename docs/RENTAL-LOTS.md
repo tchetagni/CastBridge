@@ -1,0 +1,120 @@
+# Contenus d'apprentissage en location (hors ligne), expiration et suppression autonomes
+
+> **Statut : conception + moteur testé (JVM), à valider sur le matériel.** Aucun prix, aucun prestataire de paiement, **aucun accès au serveur** ; `backend/` n'est pas touché (le correctif `cbx1` du serveur est chez un autre agent : le port Java est **spécifié** au § 10).
+> Code : `android/core/.../lots/Rental*.kt` (droit, clés, horloge, carnet, balayage, politique, vecteurs) et `owner/LicensedIssuer.kt` (`RentalSpec`, `RentalIssuing`). Outils : `tools/activation-desktop` (`emettre --location`), console du téléphone propriétaire (champ « Location »). Vecteurs : `tools/activation/rental-vectors.json`. Cadre : [TRIAL-EDITION.md](TRIAL-EDITION.md), [LOTS.md](LOTS.md), [ACTIVATION-FORMAT.md](ACTIVATION-FORMAT.md) (ce document en est l'**annexe** : le format existant n'est pas modifié).
+
+## 0. En bref
+- Un **quatrième droit**, `rental`, à côté de l'achat (définitif), de l'abonnement et de « tout ouvert » : des bouquets ouverts pendant **1 à 366 jours**, **hors ligne**, avec un **second plafond** optionnel en **minutes d'usage**.
+- **Expiration par destruction de clé** (« crypto-shredding ») : le contenu loué est chiffré par TV ; la clé de la location est **enveloppée dans le droit** ; à la fin, la TV **détruit la clé** (réécriture puis suppression) puis **efface les fichiers**. Une copie ou une restauration du fichier ne rend rien lisible.
+- **Horloge hors ligne non fiable** : le temps ne peut qu'**avancer** ; un retour en arrière **ne prolonge jamais** ; en cas de doute (heure en retard ou très en avance), la location est **suspendue visiblement** (« Vérifiez l'heure de la TV »), jamais supprimée à tort ; le **compteur d'usage** est le plafond qui ne dépend pas de l'horloge.
+- **Suppression autonome sûre** : balayage au démarrage, à l'ouverture d'Apprendre, à chaque reconnexion du téléphone, toutes les 6 h ; **ne touche que** les lots loués expirés (carnet + manifeste + dossier du coffre) ; **clé d'abord**, fichiers ensuite ; reprise après coupure à chaque étape ; journal sans donnée personnelle ; **progression conservée**.
+- **Lots libres (CC BY-SA) : jamais louables.** Un achat ou un abonnement qui couvre déjà un lot rend la location inutile (pas de double décompte, une location expirée ne retire jamais un accès acquis autrement).
+
+## 1. Le droit `rental`
+Classe `Right.Rental(productId, bundleIds, startsAt, period, durationDays, graceMs, maxUsageMinutes, maxConcurrent, box)`.
+
+| Champ | Sens | Bornes |
+|---|---|---|
+| `productId`, `bundleIds` | produit et bouquets ouverts (mêmes identifiants que l'achat) | `[a-z0-9][a-z0-9-]{0,63}`, au moins un bouquet |
+| `startsAt` | début de **cette ligne** (ms) ; la durée court **dès l'activation** (§ 5) | > 0 |
+| `period` | début du **contrat** auquel la ligne appartient ; `= startsAt` pour la première ligne, `= début d'origine` pour un **renouvellement** | `0 < period ≤ startsAt` |
+| `durationDays` | durée | **1 à 366** (hors ligne) |
+| `graceMs` | tolérance après la fin pendant laquelle le contenu reste utilisable avec « reconnectez-vous » (0 par défaut) | 0 à 30 jours |
+| `maxUsageMinutes` | plafond d'**usage** (minutes d'utilisation du contenu loué), 0 = aucun | 0 à 527 040 |
+| `maxConcurrent` | au plus N locations d'**une même licence** à la fois sur l'appareil, 0 = sans limite | 0 à 20 |
+| `box` | clé de la location enveloppée par appareil (§ 3) | `[A-Za-z0-9_;:+-]`, ≤ 4096 |
+
+### 1.1 Ligne filaire (annexe du format d'activation, § 3.3)
+Une ligne `right=` du corps d'une enveloppe `activation` (les lignes `right=` restent **triées** par octets, donc `rental|…` vient après `purchase|…` et avant `subscription|…`) :
+```
+right=rental|<produit>|<bouquet,bouquet…>|<startsAt ms>|<period ms>|<jours>|<tolérance ms>|<usage max min>|<simultanées max>|<box>
+```
+10 champs séparés par `|`, bouquets triés, entiers décimaux canoniques. **Aucune ligne existante ne change** ; **aucun vecteur existant n'est modifié** (`git diff` de `tools/activation/test-vectors.json` vide, vérifié).
+
+**Vérification** (en plus des 14 étapes existantes, juste avant `WRONG_SUBJECT`) : un droit `rental` hors bornes donne `BAD_RIGHTS` (« Location : … ») ; l'émetteur (`ActivationIssuer`) refuse les mêmes entrées avec un message en français. La clé signataire doit avoir `ISSUE_PRODUCTION` (ou `REACTIVATE`), comme pour un achat.
+
+### 1.2 Une TV qui ne connaît pas le droit
+Le **nouvel analyseur** (`Right.Unknown`) garde toute ligne `right=` d'un genre inconnu **telle quelle** (elle doit juste ressembler à une ligne : `genre|…`, sans saut de ligne), la forme canonique se reconstruit à l'identique, la signature reste valide, et le droit **ne donne rien** (jamais « tout »). Testé : activation signée portant `purchase` + `hologram|…` → acceptée, seul l'achat compte (vecteurs `old-device-ignores-unknown-right`). **De même**, un appareil qui connaît `rental` mais à qui l'on ne donne pas l'évaluation des locations (`TvGate.evaluate` sans `rentals`) n'ouvre **rien** (vecteur `rental-line-grants-nothing-without-rental-evaluation`).
+**Limite honnête** : une TV **déjà installée avec l'ancien analyseur** lève `MALFORMED` sur toute ligne de genre inconnu et **refuse l'activation entière** (elle ne donne rien non plus, mais elle refuse aussi l'achat qui serait dans le même fichier). **Recommandation d'émission** : émettre la location dans **sa propre activation** (même licence, même poste), jamais mélangée à un achat, tant que toutes les TV ne sont pas à jour.
+
+### 1.3 Renouvellement et plafond simultané
+- **Renouvellement** : une **nouvelle activation** dont la ligne porte la **même `period`** (`emettre … --periode <début ms>`). La TV fusionne les lignes de même (produit, `period`) en **un seul contrat** : fin = `max(fin précédente, startsAt) + jours`. Une ligne **identique** lue deux fois compte **une fois** (pas de doublon, pas de double prolongation). La **clé est la même** (dérivée de la `period`), donc les lots déjà livrés restent lisibles. Les plafonds d'usage **s'additionnent** si toutes les lignes en ont un, sinon il n'y en a pas ; la tolérance est la plus grande.
+- **Renouvellement tardif** : une ligne dont `startsAt` est **après** la fin (plus la tolérance) est **ignorée** : la location est finie, sa clé est détruite ou va l'être ; **« Reprendre la location »** = une **nouvelle** location (nouvelle `period`, nouvelle clé).
+- **Plafond de locations simultanées** : `maxConcurrent` (le plus petit non nul des lignes du contrat, par licence) ; les locations utilisables au-delà du plafond passent en `OVER_LIMIT` (« reprendra quand une autre sera terminée »), **les plus anciennes gardent** leur droit, **rien n'est supprimé**. La TV ne connaît que ses propres activations : le plafond « par licence » est donc appliqué **par appareil** ; le décompte **global** de la licence reste au registre de l'émetteur.
+
+## 2. Contrat, états et compte à rebours (`RentalEngine`, pur)
+États : `NOT_STARTED` (début postdaté), `ACTIVE`, `GRACE`, `SUSPENDED` (horloge douteuse), `EXPIRED`, `OVER_LIMIT`.
+Ordre des règles, pour chaque contrat (identique dans les vecteurs `state-*`) :
+1. contrat déjà balayé (pierre tombale du carnet) → `EXPIRED` ;
+2. plafond d'usage atteint → `EXPIRED` (raison `USAGE`), **quelle que soit l'horloge** ;
+3. temps retenu `≥ fin + tolérance` → `EXPIRED` (raison `DATE`) ;
+4. horloge douteuse → `SUSPENDED` ;
+5. `maintenant + 24 h < début` → `NOT_STARTED` ; `maintenant ≥ fin` → `GRACE` ; sinon `ACTIVE`.
+Puis le plafond de locations simultanées par licence.
+
+**Compte à rebours** (TV et téléphone) : « Il vous reste 12 jours » (≥ 2 jours), « 1 jour », « 5 h », « 40 min » ; si un plafond d'usage existe : « … (ou 3 h d'utilisation) ». **Avertissements** (`RentalWarning`) à **7 jours, 24 h, 1 h** avant la fin ; pour l'usage, mêmes trois niveaux à **24 h, 5 h, 1 h** d'usage restant. **Messages** : fin = « Location terminée : ce contenu n'est plus disponible. Reprendre la location ? » ; doute = « Vérifiez l'heure de la TV : la location est suspendue tant que l'heure n'est pas juste (rien n'est supprimé). »
+
+## 3. Chiffrement par TV et destruction de clé (`RentalKeys`, `RentalVault`)
+- `rentalKey = HKDF-SHA256(extract(sel="castbridge-rental-v1", ikm=master), info="key|<licence>|<poste>|<produit>|<period>", 32)`. **`master`** = secret de l'émetteur (jamais dans le dépôt, jamais sur une TV). Par défaut, un outil le dérive de **sa propre clé de signature** (`masterFrom` : SHA-256 de la signature déterministe du texte public `castbridge-rental-master-v1` : rien de nouveau à stocker ni à sauvegarder, aussi sûr que la clé). **Décision du propriétaire, non tranchée ici** : avec un secret par outil, seul l'outil émetteur peut chiffrer les lots de **ses** locations ; un secret commun (bureau, téléphone, serveur) simplifierait la livraison mais élargit la surface (§ 11).
+- Clé de lot : `lotKey = HKDF(extract("castbridge-rental-lot-v1", rentalKey), "lot|<fonction:périmètre>|<version>", 32)` ; fichier = `nonce(12) ‖ AES-256-GCM(lot)`, nonce dérivé (le résultat est **déterministe**, donc figé par les vecteurs), identifiant et version **authentifiés** : un fichier déplacé vers un autre lot ou une autre version ne s'ouvre pas.
+- **Enveloppe dans le droit** (`box`) : la clé de location est enveloppée **une fois par sous-ensemble de k facteurs** de la TV (même tolérance k parmi n que les autres lots, `LotKeys.kek`) : `NOM+NOM:<base64url>;…`, liée au produit et à la `period`. Une TV qui n'est pas la bonne ne l'ouvre pas ; un module Wi-Fi remplacé non plus ne bloque pas.
+- **Coffre** (`RentalVault`, dossier `rental/`) : `keys/<produit>_<period>.key` (clé en clair, dans le stockage privé de l'application) et `lots/<fonction>_<périmètre>/v<version>.lot` (fichiers chiffrés). **Destruction** : réécriture à zéro, **puis** aléatoire (chacune vidée sur le support), **puis** suppression. Tout chemin est **vérifié dans le coffre** (nom simple, chemin canonique sous le dossier) : un nom tordu est refusé (testé).
+- **La clé n'est ouverte qu'une fois**, à l'installation de l'activation et seulement si la location est **utilisable** ; **jamais rouverte** pour un contrat terminé : le carnet (dans le stockage privé de l'application, **pas** sur la clé USB) garde la **pierre tombale**. Relire le fichier `activation` de la clé USB ou d'une sauvegarde ne ressuscite donc rien (testé).
+
+## 4. Horloge hors ligne (`RentalEngine.judge`, `RentalLedger`)
+Le temps retenu est `max(horloge, dernier instant vu, plancher signé)` (`TvClock`) ; le **plancher** monte avec la date d'émission de tout message signé accepté (une activation prouve que le temps l'a atteinte). Le carnet **persiste** le maximum vu (`rentals.json`) : redémarrer avec une horloge fausse ne le fait pas reculer.
+- **En retard** (`horloge + 24 h < maximum vu`) : `BEHIND`. Le temps retenu **reste le maximum vu** : jamais d'allongement. La location est **suspendue** (rien n'est supprimé) ; elle est `EXPIRED` seulement si le maximum vu **prouve** déjà la fin.
+- **Très en avance** (> **45 jours** au-dessus du maximum vu en une observation, ou > 400 jours) : `AHEAD`, **suspendue**, jamais supprimée sur la foi d'une horloge douteuse. Un saut **mesuré** ne devient pas le nouveau « maximum vu » (une heure fausse ne s'imprime pas). Sortie : l'utilisateur confirme « l'heure est juste » (`confirmClockAhead`, accepté jusqu'à 400 jours, **jamais** pour une horloge en retard), ou un message signé plus récent relève le plancher.
+- **Compteur d'usage** : `recordUsage(lot, minutes)` (l'application l'appelle chaque minute pendant qu'un contenu loué est ouvert) ; il va à la location utilisable qui finit en premier et couvre le lot. La location expire à la **première** des deux limites : la date, ou l'usage maximal. Il compte **même si l'horloge est douteuse** (c'est son rôle) ; l'usage ne se remet jamais à zéro.
+- **Aucune référence** (premier lancement) : l'horloge est crue, puis le plancher de la première activation la contraint.
+
+## 5. Location non commencée : **dès l'activation** (décision recommandée)
+La durée court **dès l'activation** (`startsAt` = date d'émission), pas dès la première ouverture. **Raisons** : (1) elle est **vérifiable hors ligne** sur la seule ligne signée, sans état à protéger ; une durée « depuis la première ouverture » dépend d'un état local qu'on peut effacer ou ne jamais déclencher ; (2) c'est celle que le propriétaire peut annoncer et facturer sans ambiguïté ; (3) l'usage plafonné (`maxUsageMinutes`) couvre déjà le cas « acheté mais peu utilisé » si le propriétaire veut compter par minutes. Une location **postdatée** (début futur, jusqu'à la fin de la fenêtre d'installation) reste possible : état `NOT_STARTED`.
+
+## 6. Suppression autonome sûre (`RentalSweeper`)
+**Déclencheurs** : `APP_START`, `LEARN_SCREEN` (ouverture de l'écran Apprendre), `PHONE_RECONNECT`, `PERIODIC` (`tick()` : toutes les **6 h** quand l'application tourne ; l'application a déjà une boucle horaire pour l'horloge), `LESSON_END`.
+**Étapes** (chacune **écrite sur disque et rejouable** : une coupure reprend à la même étape) :
+1. marquer les contrats terminés (`EXPIRING`, raison, instant de fin) ;
+2. **détruire la clé** (`KEY_GONE`) — **avant** tout fichier ;
+3. pour chaque lot enregistré sous ce contrat : retirer l'entrée du magasin de lots (`TvLotStore.remove`, qui **libère sa place** dans les 10 Mo), puis effacer ses fichiers chiffrés du coffre ;
+4. `DONE` et message « Location terminée… ».
+**Garde-fous** (testés : le test échoue si le balayage touche autre chose) : ne supprime **que** (a) un lot **enregistré comme loué** par la livraison sous un contrat terminé (`markRented`, refusé pour un lot libre, un échantillon, un lot déjà couvert par un autre droit), (b) **présent dans le manifeste** des lots de la TV, (c) **pas un échantillon d'essai**, (d) et des fichiers **dans le coffre** (préfixe + nom reconnu `v<n>.lot`) ; jamais un lot acheté, libre, une photo ou un fichier de l'utilisateur placé à côté, ni la clé USB. Un lot **couvert entre-temps par un achat** n'est **pas supprimé** : il est rendu dans `keptBecauseOwned` (la livraison doit installer la copie normale) ; `release(contrat, lot)` l'enlève de la location.
+**Leçon en cours** : jamais de suppression pendant une leçon ; la suppression est **reportée** (`deferred`) jusqu'à la fin de la leçon, **plafond 15 minutes** après l'échéance ; aucune **nouvelle** leçon ne peut s'ouvrir (l'accès est déjà `EXPIRED`).
+**Journal local** (`rentals.json`, 200 lignes) : `{date, lot, raison (date|usage), étape (cle|fichiers|conserve-acquis)}` — **aucun** identifiant de licence, de poste, d'appareil, de facteur ni de personne (testé en cherchant ces valeurs dans tous les fichiers du coffre). **Progression** : le score, l'historique et les profils sont **ailleurs** et jamais touchés ; seul le contenu part (testé).
+
+## 7. Lots libres (CC BY-SA) : jamais louables
+`RentalPolicy.refusal(meta, familles)` refuse : un lot **libre**, un lot de **famille inconnue** (par précaution), un **échantillon** d'essai. Appliqué à trois endroits : l'**émission** (`--catalogue` + `--lots-libres`), l'enregistrement par la livraison (`markRented`), la sélection des lots à louer (`lotsToRent`). `LotFamilies.explicit(libres, réservés)` se construit à partir des manifestes de licences (LANGUES.md § 13). **Point à valider** : l'outil de bureau fait confiance à la liste de lots libres qu'on lui donne ; sans elle il imprime « lots libres NON vérifiés ».
+
+## 8. Interaction avec les autres droits
+- **Priorité** : achat définitif ≥ abonnement ≥ « tout ouvert » ≥ location. `RentalPolicy.mergeAccess` n'ajoute à `Access.rented` que les bouquets **non déjà** couverts par un achat ou un abonnement (aucun double décompte) ; avec `tout`, rien n'est loué. `Access.granted = achetés + abonnés + loués` : tout le code existant (`EditionPolicy.allowedFull`, `isAllowed`, `offered`…) voit les lots loués sans changement.
+- Une location **terminée** retire **uniquement** ce qu'elle apportait : testé (achat intact après la fin).
+- `EditionPolicy.reconcile(…, rentedLots)` laisse les lots loués au balayage (message propre, pas de « rétrogradation vers l'essai »).
+- **Budget d'essai** (100 Mo) : le manifeste d'essai est calculé **sur le contenu**, jamais sur les droits : un lot loué n'y entre pas. **Budget de la TV** (10 Mo) : un lot loué **compte** (c'est de la place réelle) et son retrait **libère** sa place (testé avec `TvLotStore`).
+
+## 9. Outils
+- **Bureau** : `emettre --appareil F --production --licence ID --jours 30 --location produit=bouquet1,bouquet2:JOURS[:MINUTES_D_USAGE_MAX[:TOLERANCE_JOURS[:SIMULTANEES]]]` (répétable). `--periode MS` **prolonge** la location commencée à cet instant (même clé). `--catalogue content/TRIAL-MANIFEST.json --lots-libres FICHIER` refuse un lot libre. La commande imprime début, fin, plafond et période ; elle écrit le fichier `activation` habituel.
+- **Console du téléphone propriétaire** (`:ownerlib`, `ConsoleActivity`) : champ « Location : PRODUIT=BOUQUET,BOUQUET:JOURS[:MINUTES] » (une par ligne). **Non compilé ici** (le plugin Android n'est pas résolu dans le cloud) : le champ n'appelle que `RightsSyntax.rental` et `RentalIssuing.right`, testés dans `:core`. Pas de vérification des lots libres sur le téléphone (pas de catalogue) : à brancher par le coordinateur.
+- **Vecteurs** : `tools/activation/rental-vectors.json` (≥ 40 vecteurs : octets des jetons, des enveloppes et des lots chiffrés ; **états** de l'horloge écrits à la main ; refus ; ancien appareil ; lots libres). Rejoués par `RentalVectorsTest` (cœur) et `VectorsTest` (bureau) via `castbridge.core.lots.RentalVectors`. Régénération : `CASTBRIDGE_WRITE_VECTORS=1 tools/core-harness/run.sh :core:test --tests '*RentalVectorsTest*'`.
+
+## 10. Spécification pour le port Java du serveur (`backend/…/licenses`) — à implémenter par l'agent du serveur
+1. **Analyseur** : accepter la ligne `rental` ci-dessus ; **tout genre inconnu** (`[a-z][a-z0-9-]{0,31}|…`) est conservé verbatim (jamais `MALFORMED`) ; forme canonique inchangée.
+2. **Vérification** : bornes du § 1 → `BAD_RIGHTS`.
+3. **Émission** : `RentalIssuing.right` : `period = issuedAt` (nouvelle) ou la `period` à prolonger (≤ `issuedAt`) ; `startsAt = issuedAt` ; **la clé de la clé serveur doit avoir `ISSUE_PRODUCTION` ou `REACTIVATE`** (portée existante) ; refuser tout lot libre avant de signer.
+4. **Dérivations** : HKDF-SHA256 (RFC 5869) exactement comme au § 3 (`extract(sel, ikm) = HMAC-SHA256(sel, ikm)` ; `expand(prk, info, n)` standard) ; AES-256-GCM, étiquette 128 bits ; `box` : pour chaque sous-ensemble de k facteurs (k = n−1 si n ≥ 3 sinon max(n,1)), trié par `NOM+NOM`, `kek = HKDF(extract("castbridge-kek-v1", "TYPE=empreinte\n…"), "kek", 32)`, nonce = `HKDF(extract("castbridge-rentalbox-nonce-v1", kek), "<produit>|<period>|<noms>", 12)`, AAD = `castbridge-rentalbox-v1|<produit>|<period>|<noms>` ; **les vecteurs `box-opens-on-its-tv-only` et `seal-lot-file` donnent les octets attendus**.
+5. **Registre** : un événement `issue` n'a pas besoin de nouveau champ ; le décompte global des locations simultanées d'une licence est du ressort du serveur (la TV ne l'applique que par appareil).
+6. **Rejeu** : le serveur doit passer tous les vecteurs de `rental-vectors.json` (`build-activation`, `box`, `seal`) ; les vecteurs `rental-state`, `old-device` et `lot-policy` concernent la TV.
+
+## 11. Limites honnêtes
+- **Sans serveur, une TV dont on remonte l'horloge et qu'on isole garde la location tant que le compteur d'usage ne l'a pas arrêtée.** Concrètement : le maximum vu est conservé, donc remonter l'horloge **suspend** (n'allonge pas) ; mais si on **efface les données de l'application** (le carnet : maximum vu et pierre tombale) **et** qu'on remet l'horloge à une date d'avant la fin, la TV ne peut pas savoir que la location est finie, à part le plancher que fixe l'activation elle-même (sa date d'émission). Dans ce cas **seul le plafond d'usage** (si le propriétaire en a mis un) l'arrête. **Conseil** : mettre un plafond d'usage sur les locations à valeur.
+- **La clé du coffre ne résiste pas à une TV en mode test** (racine, débogage, ADB) : qui peut lire la mémoire ou le disque avant la fin peut **copier la clé** et le lot, et en garder une copie lisible. La destruction de clé protège contre la copie **passive** des fichiers et contre la restauration, pas contre un attaquant qui a la TV en main pendant la location (limite déjà posée pour les lots chiffrés, TRIAL-EDITION § 9).
+- **Sauvegarder puis restaurer le stockage d'une clé USB ne rend pas un contenu expiré lisible** : les fichiers chiffrés restaurés n'ont plus de clé (détruite) et la clé n'est **jamais** rouverte depuis l'activation d'un contrat terminé (pierre tombale). Mais **restaurer l'application entière** (données privées comprises) à un état d'avant la fin rend la location comme elle était : sauvegarde d'application = limite non couverte hors ligne.
+- **Support flash** : l'écrasement avant suppression est « au mieux » (nivellement d'usure, copie-sur-écriture) ; c'est pourquoi la protection repose sur la **pierre tombale** et sur le fait que la clé est dérivée d'un secret de l'émetteur, pas sur la seule remise à zéro.
+- **Horloge** : une TV qui perd l'heure à chaque démarrage (pas d'horloge de secours) verra ses locations **suspendues** (« Vérifiez l'heure ») jusqu'à ce que l'heure soit remise ; c'est le prix de la règle « jamais supprimer à tort ». Une aide possible (non faite) : prendre l'heure du téléphone comme **plancher** à chaque reconnexion.
+- **Plafond simultané** : appliqué **par appareil** (§ 1.3).
+- Une TV déjà installée avec l'ancien analyseur refuse l'activation qui porte une ligne `rental` (§ 1.2).
+- **À brancher (non fait ici, relève de l'intégration Android)** : appeler `RentalLedger.observe()` au démarrage et chaque heure ; `RentalSweeper.sweep(...)`/`tick()` aux cinq déclencheurs ; `recordUsage` pendant l'usage d'un lot loué ; `TvGate.evaluate(…, rentals = ledger.status(activations))` ; lire un lot loué par `RentalVault.readLot` ; **chiffrement à la livraison** (le téléphone ou le serveur scelle le lot avec `RentalKeys.seal` pour le contrat) et enregistrement `markRented` à l'installation ; écrans (compte à rebours, avertissements 7 j/24 h/1 h, « Reprendre la location ? »). **`:sender`, `:receiver`, `:owner`, `:ownerlib` n'ont pas pu être compilés** (§ 12).
+
+## 12. Tests et vérifications
+- `RentalTest.kt` (5 groupes) : ligne filaire et canonique, ancien appareil, bornes ; durée exacte à la milliseconde, tolérance, horloge en retard / en avance / retour en arrière / confirmation / message signé, plafond d'usage (même horloge fausse), avertissements et phrases, location postdatée, persistance du maximum vu ; renouvellement sans doublon, renouvellement tardif, cumul des usages, plafond simultané ; enveloppe (bon appareil, module remplacé, autre TV, déterminisme) et fichier chiffré (lié au lot, à la version, à la clé) ; **balayage** : clé détruite **avant** les fichiers, coupure de courant à **chaque** étape (reprise), copie restaurée **inutilisable**, activation relue sans effet, carnet effacé (fin lue dans la ligne signée), **rien d'autre supprimé** (lots achetés, libres, essai, autre location, fichiers voisins, clé USB, progression), lot déjà acquis conservé, journal sans donnée personnelle, report de leçon (15 min), fin par usage, tick de 6 h ; politique (lot libre refusé, famille inconnue, échantillon), priorité achat/abonnement, location terminée sans effet sur un achat, budget TV libéré.
+- `RentalVectorsTest.kt` : le fichier committé = ce que produit le code ; les vecteurs se rejouent.
+- Avant/après : voir le rapport `docs/agent-reports/rental-lots.md` (suite complète `:core:test` et `:activation-desktop:test` via `tools/core-harness/run.sh`, le plugin Android n'étant pas résolu dans le cloud : `:sender`, `:receiver`, `:owner`, `:ownerlib` **non compilés**).

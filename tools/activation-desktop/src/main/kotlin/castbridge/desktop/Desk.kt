@@ -61,6 +61,9 @@ class Desk(private val home: File, private val signer: Signer, private val scope
     /** Issues an activation (see [LicensedIssuer]) and writes the journal line. */
     fun issue(device: DeviceRequest, spec: IssueSpec): Delivered = flow.issue(device, spec).also { log(it.issued.activation, device) }
 
+    /** The secret from which the rental keys are derived (see [castbridge.core.lots.RentalKeys.masterFrom]). */
+    fun rentalMaster(): ByteArray = castbridge.core.lots.RentalKeys.masterFrom(signer)
+
     fun createLicense(license: String, seats: Int, maxTransfersPerYear: Int = LicenseBook.DEFAULT_TRANSFERS_PER_YEAR) = flow.createLicense(license, seats, maxTransfersPerYear)
 
     /** The compact key (165 characters) for manual typing: strictly bound to the device code, no rights list. */
