@@ -200,7 +200,7 @@ Légende : ✔ traité, ◐ partiel, ✘ absent. Estimation = part des grands ch
 - **Œuvres officielles de Literature** (GCE Board) : à ajouter par un expert (droits d'auteur).
 
 ## 3. Contrôles exécutés
-- `tools/learn-authoring/check.sh` (vrai `LessonValidator`) : **OK, 0 erreur** sur les 108 packs de `content/learn`.
+- `tools/learn-authoring/check.sh` (vrai `LessonValidator`) : **OK, 0 erreur** sur les 107 packs de `content/learn`.
 - Harnais « core seul » (le plugin Android `com.android.application` est introuvable dans le cloud ; `gradle :core:test --tests 'castbridge.core.*Learn*'` n'a pas pu tourner) :
   Kotlin 2.1.0 + sources de `:core` compilés directement, `LearnContentTest` et `LearnLogicTest` exécutés par réflexion. **29/32 verts**
   (dont `answersAreConsistent`, `everyPackIsValid`, `examCoverage`, `figureTextsDoNotOverlap`, `selfChecksPlayInTheQuiz`,
