@@ -129,6 +129,7 @@ object Storage {
             }
             if (orphan && f.delete()) n++
         }
+        n += castbridge.core.xfer.PartAssembler.sweep(dir, maxAgeMs, now)    // abandoned multi-connection transfers (.cbx)
         return n
     }
 
