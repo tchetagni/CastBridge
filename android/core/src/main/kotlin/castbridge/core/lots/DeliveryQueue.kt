@@ -119,7 +119,6 @@ class DeliveryQueue(private val store: QueueStore, private val now: () -> Long =
                     if (rejection != null) cur.copy(state = DeliveryState.REFUSED, lastError = rejection.reason, priority = prio, updatedAt = t)
                     else Delivery(tv, lot, DeliveryState.PENDING, priority = prio, createdAt = t, updatedAt = t)
                 cur.state == DeliveryState.CANCELLED -> Delivery(tv, lot, DeliveryState.PENDING, priority = prio, createdAt = t, updatedAt = t)
-                tvManifest != null && cur.active && rejection != null -> cur.copy(state = DeliveryState.REFUSED, lastError = rejection.reason, priority = prio, updatedAt = t)
                 else -> cur.copy(priority = prio)
             }
         }

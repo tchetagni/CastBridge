@@ -138,6 +138,7 @@ class TvLotStore(
         val part = partFile(name)
         val cur = if (part.isFile) part.length() else 0L
         if (offset != cur || cur + bytes.size > total) return Chunk.Conflict(cur)
+        if (cur == 0L) clearRejections(id)                                // a new attempt: the old refusal is history
         inbox.mkdirs()
         if (inbox.usableSpace < total - cur + (1L shl 20)) return Chunk.Refused("espace disque insuffisant sur la TV")
         try { java.io.FileOutputStream(part, true).use { it.write(bytes) } }
@@ -218,6 +219,7 @@ class TvLotStore(
             val lot = File(receivedDir, name)
             if (!lot.isFile) return@forEach
             inbox.mkdirs()
+            clearRejections(LotNames.parseFileName(name)!!.first)
             val part = partFile(name)
             part.delete()
             if (!lot.renameTo(part)) { lot.copyTo(part, overwrite = true); lot.delete() }
