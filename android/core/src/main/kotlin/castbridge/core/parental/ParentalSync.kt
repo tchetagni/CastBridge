@@ -104,7 +104,8 @@ object ParentalSyncProtocol {
 }
 
 /** A report kept on the phone. [read] is local. */
-data class StoredReport(val id: String, val tv: String, val ts: Long, val kind: String, val body: Map<String, Any?>, val read: Boolean = false)
+/** [ts] is the TV's clock (display only); [at] is when the phone received it (what the retention uses: a TV with a wrong clock must not make reports vanish). */
+data class StoredReport(val id: String, val tv: String, val ts: Long, val kind: String, val body: Map<String, Any?>, val read: Boolean = false, val at: Long = 0)
 
 /** Where the phone keeps its reports: a private file, excluded from backups (Android), memory in tests. */
 interface InboxPersistence {
@@ -148,7 +149,7 @@ class ReportInbox(
         if (!ReportMac.verify(key, id, ts, kind, body, env["mac"] as? String)) return Outcome.REJECTED
         if (reports.any { it.id == id }) return Outcome.DUPLICATE
         val parsed = runCatching { JsonLite.obj(body) }.getOrNull() ?: return Outcome.REJECTED
-        reports += StoredReport(id, (parsed["tv"] as? String).orEmpty().take(60), ts, kind, parsed)
+        reports += StoredReport(id, (parsed["tv"] as? String).orEmpty().take(60), ts, kind, parsed, false, now())
         prune(); save()
         return Outcome.STORED
     }
@@ -160,14 +161,14 @@ class ReportInbox(
 
     private fun prune() {
         val t = now()
-        reports.removeAll { t - it.ts > maxAgeMs }
+        reports.removeAll { t - it.at > maxAgeMs }
         while (reports.size > maxReports) reports.removeAt(0)
         while (reports.size > 1 && reports.sumOf { it.body.toString().length + 100 } > MAX_CHARS) reports.removeAt(0)
     }
 
     private fun save() {
         val o = linkedMapOf("keys" to keys.map { (a, k) -> linkedMapOf("a" to a, "k" to k) },
-            "reports" to reports.map { linkedMapOf("id" to it.id, "tv" to it.tv, "ts" to it.ts, "kind" to it.kind, "read" to it.read, "body" to it.body) })
+            "reports" to reports.map { linkedMapOf("id" to it.id, "tv" to it.tv, "ts" to it.ts, "kind" to it.kind, "read" to it.read, "at" to it.at, "body" to it.body) })
         runCatching { persistence.save(JsonLite.write(o)) }
     }
 
@@ -176,7 +177,7 @@ class ReportInbox(
         val o = runCatching { persistence.load()?.let { JsonLite.obj(it) } }.getOrNull() ?: return
         for (m in (o["keys"] as? List<Map<String, Any?>>).orEmpty()) { val a = m["a"] as? String; val k = m["k"] as? String; if (a != null && k != null) keys[a] = k }
         for (m in (o["reports"] as? List<Map<String, Any?>>).orEmpty()) runCatching {
-            reports += StoredReport(m["id"] as String, m["tv"] as? String ?: "", (m["ts"] as Number).toLong(), m["kind"] as String, m["body"] as Map<String, Any?>, m["read"] as? Boolean ?: false)
+            reports += StoredReport(m["id"] as String, m["tv"] as? String ?: "", (m["ts"] as Number).toLong(), m["kind"] as String, m["body"] as Map<String, Any?>, m["read"] as? Boolean ?: false, (m["at"] as? Number)?.toLong() ?: now())
         }
     }
 
