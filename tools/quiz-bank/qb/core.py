@@ -23,10 +23,6 @@ COURSES = {
     "l1-maths":  dict(track="higher",    level="L1",  field="mathematiques", prefix="hm", label="Supérieur · L1 Mathématiques"),
 }
 
-# Scope "primaire/collège" (CP..4e, Class 1-6, Form 1-3): kept in its own module so other scopes can add theirs without conflicts.
-from .courses_pc import PC_COURSES  # noqa: E402
-COURSES.update(PC_COURSES)
-
 STATUS_REVIEW, STATUS_APPROVED = "review", "approved"
 VERIF = ("computed", "fact", "import")
 # 1 game = 15 questions (3 per difficulty level); 300 games without repeat = 4 500 questions.
@@ -154,7 +150,7 @@ def build_question(course, d, tpl, verif, source_text, region=None, category=Non
     wrongs = pick_distractors(d.text, d.right, d.wrongs, d.alt)
     if wrongs is None:
         return None
-    pos = int(sha("p|" + d.text + d.right)[:4], 16) % 4
+    pos = int(sha("p|" + c.get("salt", "") + d.text + d.right)[:4], 16) % 4      # `salt` (optional, per course) re-draws the positions: see tools/quiz-bank/lycee_caps.py
     choices = wrongs[:]
     choices.insert(pos, d.right)
     region = d.region or region or ("WORLD" if course != "general" else "CM")
@@ -163,7 +159,7 @@ def build_question(course, d, tpl, verif, source_text, region=None, category=Non
         "track": c["track"], "level": c["level"], "field": c["field"], "region": region,
         "category": d.cat or category, "difficulty": d.diff or difficulty, "question": d.text, "choices": choices,
         "answer": pos, "explanation": d.expl, "source": d.src or source_text, "status": STATUS_REVIEW, "verif": verif,
-        "lang": c.get("lang", "fr"), "tpl": tpl,
+        "lang": getattr(d, "lang", None) or c.get("lang", "fr"), "tpl": tpl,
     }
 
 
