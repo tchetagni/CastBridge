@@ -214,7 +214,8 @@ class QuizLotsTest {
             total += meta.bytes
         }
         assertEquals((catalog["totalBytes"] as Number).toLong(), total)
-        assertTrue(total < LotBudget.TV_MAX_BYTES, "all the quiz lots together fit in the TV budget ($total)")
+        // the whole catalogue lives on the PHONE (100 Mo); the TV only keeps what the LotPlanner picks within its own 10 Mo, lot by lot
+        assertTrue(total < LotBudget.PHONE_MAX_BYTES / 2, "all the quiz lots together fit in the phone budget ($total)")
         assertEquals(QuizLotScopes.specs.map { it.scope }.sorted(), lots.map { it["scope"] as String }.sorted(), "the Kotlin table and the built lots agree")
         assertFalse(c.install(LotMeta(LotId("quiz", "cm2"), 1, 1, "x", "t"), File(lotsDir(), "catalog-lots.json")))
         // the installed lots serve every course of the table
