@@ -21,3 +21,4 @@ ORDRE 1 | 2026-10-01 15:10 | A: TOUS | cahier: aucun | Protocole en place (docs/
 ORDRE 2 | 2026-10-01 15:25 | A: Castbridge-cloud | cahier: integration-2 | Fusionner usb-data, net-architect, quiz culture et lycée dans claude/integration-2.
 ORDRE 3 | 2026-10-01 15:25 | A: castbridge-content | cahier: content-export | Instantané du contenu dans castbridge-content (accords du propriétaire requis, voir le cahier).
 ORDRE 4 | 2026-10-01 15:28 | A: castbridge-content | cahier: content-phase1 | Corrections de ton rapport puis première vague de contenu N2/N4 dans castbridge-content.
+ORDRE 5 | 2026-10-01 15:54 | A: castbridge-content | cahier: content-phase2 | Vague 2 : Quiz N2/N4 puis autres classes et matières ; tu es la session permanente des contenus d'apprentissage.

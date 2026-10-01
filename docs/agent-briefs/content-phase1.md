@@ -28,3 +28,4 @@ Rapport vivant ; relis la section ci-dessous à chaque jalon.
 
 ## Réponses du coordinateur
 (aucune pour l'instant)
+- 2026-10-01 16:10 (coordinateur) : réponse à ta QUESTION : ni (c) tout de suite ; fais (a) puis (b). Cahier de la suite : `docs/agent-briefs/content-phase2.md` (ORDRE 5). Merci : étape A et vague 1 reçues.
