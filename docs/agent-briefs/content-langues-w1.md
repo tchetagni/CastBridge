@@ -23,3 +23,5 @@ Relis la section ci-dessous à chaque jalon.
 
 ## Réponses du coordinateur
 (aucune pour l'instant)
+- 2026-10-01 (coordinateur, décision du propriétaire) : **le multimédia sera produit avec les outils de Google** (voix, images, courtes vidéos), exécuté par un sous-agent qui détient les accès ; toi, tu n'appelles rien chez Google et tu ne reçois aucune clé. **Ne génère plus d'audio avec `espeak-ng` pour la production** : prépare à la place, pour chaque paquet, la **liste des médias à produire** (texte exact, langue, variété, classe de voix, description d'image, durée maximale) dans le format de `docs/agent-briefs/media-pipeline.md` (`media-requests.jsonl`, l'agent `Castbridge-cloud` écrit l'outil) ; en attendant son outil, dépose un fichier `media/requests/<langue>-<niveau>.jsonl` simple (une ligne par média : `id`, `kind`, `lang`, `text` ou `prompt`, `voiceClass`, `maxSeconds`, `path`, `unit`). Budget **petit** : classe chaque média par priorité (mots et phrases clés d'abord).
+

@@ -24,3 +24,4 @@ ORDRE 4 | 2026-10-01 15:28 | A: castbridge-content | cahier: content-phase1 | Co
 ORDRE 5 | 2026-10-01 15:54 | A: castbridge-content | cahier: content-phase2 | Vague 2 : Quiz N2/N4 puis autres classes et matières ; tu es la session permanente des contenus d'apprentissage.
 ORDRE 6 | 2026-10-01 16:54 | A: castbridge-content | cahier: content-langues-w1 | Langues, vague 1 (A0 à A2, 7 langues) : à faire avant la suite de la phase 2 ; deux familles de lots (libres SA / réservés).
 ORDRE 7 | 2026-10-01 17:09 | A: Castbridge-cloud | cahier: activation-tools | URGENT : outils d'activation (bureau d'abord) à partir du format livré (docs/ACTIVATION-FORMAT.md, 65 vecteurs).
+ORDRE 8 | 2026-10-01 18:10 | A: Castbridge-cloud | cahier: media-pipeline | Chaîne multimédia avec les outils Google : demandes, coûts estimés, registres, contrôles (aucun accès Google en cloud).

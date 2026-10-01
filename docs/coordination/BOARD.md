@@ -21,3 +21,4 @@
 | content-langues-w1 | castbridge-content uniquement | idem | LANCÉ | Langues vague 1 : A0–A2 des 7 langues (lots libres SA / lots réservés séparés) |
 | owner-cli (local) | core/.../owner/OwnerCli.kt, docs/OWNER-CLI.md | integration/agents | LIVRÉ (coordinateur) | CLI d'activation Mac/Windows/Linux, 9 tests ; le reste de activation-tools bâtit dessus |
 | naming-patterns | core/.../library/agent/NameParser*, SeriesClassifier, docs/NAMING-PATTERNS.md, content/naming | claude/naming-patterns | LANCÉ | catalogue exhaustif des expressions du moteur d'organisation ; corpus DEV-3 / GELÉ-3 |
+| media-pipeline | tools/media-pipeline, docs/MEDIA-PIPELINE.md, registry/, legal/ (gabarits) | claude/media-pipeline | LANCÉ | chaîne multimédia Google : demandes, coûts estimés, registres, contrôles ; aucun accès Google en cloud |
