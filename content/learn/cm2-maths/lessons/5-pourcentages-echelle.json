@@ -1,0 +1,462 @@
+{
+ "chapter": "cm2-maths-pourcentages-echelle",
+ "lessons": [
+  {
+   "id": "cm2-maths-pourcentages-echelle-fiche",
+   "chapter": "cm2-maths-pourcentages-echelle",
+   "title": "Pourcentages et échelle",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM2 — Proportionnalité : pourcentages, échelle (reconstitué)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Calculer un pourcentage d'une quantité (réduction, augmentation simple).",
+    "Exprimer une proportion en pourcentage.",
+    "Utiliser l'échelle d'une carte ou d'un plan."
+   ],
+   "prerequisites": [
+    "cm2-maths-proportionnalite-fiche"
+   ],
+   "exercises": [
+    "cm2-maths-pourcentages-echelle-01",
+    "cm2-maths-pourcentages-echelle-02",
+    "cm2-maths-pourcentages-echelle-03",
+    "cm2-maths-pourcentages-echelle-04",
+    "cm2-maths-pourcentages-echelle-05",
+    "cm2-maths-pourcentages-echelle-06"
+   ],
+   "selfCheck": [
+    "cm2-maths-pourcentages-echelle-q1",
+    "cm2-maths-pourcentages-echelle-q2",
+    "cm2-maths-pourcentages-echelle-q3",
+    "cm2-maths-pourcentages-echelle-q4",
+    "cm2-maths-pourcentages-echelle-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que les pourcentages et l'échelle simple figurent bien au programme du CM2 et le vocabulaire « échelle »."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Un **pourcentage** est une fraction de dénominateur 100. « 30 % » signifie « 30 sur 100 » : $\\frac{30}{100}$ = 0,30. Les pourcentages sont proportionnels : 30 % de 200, c'est 30 pour chaque 100."
+    },
+    {
+     "type": "illustration",
+     "caption": "Sur 10 cases, 3 sont colorées : 30 %.",
+     "alt": "Une barre de dix cases égales dont les trois premières sont vertes. Le texte indique 3 cases sur 10, soit 30 sur 100, soit 30 pour cent.",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 130,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 30,
+        "w": 40,
+        "h": 40,
+        "stroke": "ink",
+        "fill": "lightgreen"
+       },
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 30,
+        "w": 40,
+        "h": 40,
+        "stroke": "ink",
+        "fill": "lightgreen"
+       },
+       {
+        "t": "rect",
+        "x": 100,
+        "y": 30,
+        "w": 40,
+        "h": 40,
+        "stroke": "ink",
+        "fill": "lightgreen"
+       },
+       {
+        "t": "rect",
+        "x": 140,
+        "y": 30,
+        "w": 40,
+        "h": 40,
+        "stroke": "ink",
+        "fill": "white"
+       },
+       {
+        "t": "rect",
+        "x": 180,
+        "y": 30,
+        "w": 40,
+        "h": 40,
+        "stroke": "ink",
+        "fill": "white"
+       },
+       {
+        "t": "rect",
+        "x": 220,
+        "y": 30,
+        "w": 40,
+        "h": 40,
+        "stroke": "ink",
+        "fill": "white"
+       },
+       {
+        "t": "rect",
+        "x": 260,
+        "y": 30,
+        "w": 40,
+        "h": 40,
+        "stroke": "ink",
+        "fill": "white"
+       },
+       {
+        "t": "rect",
+        "x": 300,
+        "y": 30,
+        "w": 40,
+        "h": 40,
+        "stroke": "ink",
+        "fill": "white"
+       },
+       {
+        "t": "rect",
+        "x": 340,
+        "y": 30,
+        "w": 40,
+        "h": 40,
+        "stroke": "ink",
+        "fill": "white"
+       },
+       {
+        "t": "rect",
+        "x": 380,
+        "y": 30,
+        "w": 40,
+        "h": 40,
+        "stroke": "ink",
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 100,
+        "text": "3 cases sur 10 = 30 sur 100 = 30 %",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 20,
+        "text": "Une barre de 10 cases : 30 % sont colorées",
+        "size": 13,
+        "color": "grey",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Valeurs à connaître",
+     "md": "- 50 % = la moitié ; 25 % = le quart ; 10 % = le dixième ; 100 % = le tout.\n- Pour calculer **p %** de N : N × p ÷ 100.\n- 10 % de 4 500 : 4 500 ÷ 10 = 450."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : une réduction",
+     "statement": "Une paire de chaussures coûte 8 000 FCFA. La boutique fait 25 % de réduction. Quel est le prix à payer ?",
+     "steps": [
+      {
+       "md": "25 % = le quart : 8 000 ÷ 4 = 2 000 FCFA de réduction."
+      },
+      {
+       "md": "Prix à payer : 8 000 − 2 000 = 6 000 FCFA."
+      }
+     ],
+     "answer": "**On paie 6 000 FCFA.**"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "L'échelle d'une carte",
+     "md": "Une échelle de $\\frac{1}{50\\,000}$ signifie : **1 cm sur la carte = 50 000 cm dans la réalité**, donc 500 m.\n\nPour passer de la carte à la réalité, on multiplie ; de la réalité à la carte, on divise."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : lire une carte",
+     "statement": "Sur une carte à l'échelle 1/100 000, deux villages sont à 4,5 cm. Quelle est la distance réelle ?",
+     "steps": [
+      {
+       "md": "1 cm représente 100 000 cm = 1 km."
+      },
+      {
+       "md": "4,5 cm représentent 4,5 km."
+      }
+     ],
+     "answer": "**La distance réelle est 4,5 km.**"
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Pièges",
+     "md": "- Une réduction de 20 % se calcule sur le prix de départ, on la **retranche** ensuite.\n- Pense à convertir : 100 000 cm = 1 000 m = 1 km.\n- 100 % n'est pas « beaucoup » : c'est le tout."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-pourcentages-echelle-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-pourcentages-echelle-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-pourcentages-echelle-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-pourcentages-echelle-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-pourcentages-echelle-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-pourcentages-echelle-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Une augmentation de 10 % : on ajoute 10 % au prix de départ."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "difficulty": 1,
+   "prompt": "Calcule 50 % de 3 600.",
+   "answer": 1800,
+   "tolerance": 0,
+   "explanation": "50 % = la moitié : 3 600 ÷ 2 = 1 800.",
+   "id": "cm2-maths-pourcentages-echelle-01",
+   "chapter": "cm2-maths-pourcentages-echelle",
+   "tier": "application",
+   "lesson": "cm2-maths-pourcentages-echelle-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 1,
+   "prompt": "Calcule 10 % de 4 500.",
+   "answer": 450,
+   "tolerance": 0,
+   "explanation": "4 500 ÷ 10 = 450.",
+   "id": "cm2-maths-pourcentages-echelle-02",
+   "chapter": "cm2-maths-pourcentages-echelle",
+   "tier": "application",
+   "lesson": "cm2-maths-pourcentages-echelle-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 1,
+   "prompt": "Dans une classe de 40 élèves, 30 sont présents. Quel pourcentage d'élèves est présent ?",
+   "answer": 75,
+   "tolerance": 0,
+   "explanation": "30 sur 40 = 3 sur 4 = 75 sur 100.",
+   "unit": "%",
+   "id": "cm2-maths-pourcentages-echelle-03",
+   "chapter": "cm2-maths-pourcentages-echelle",
+   "tier": "application",
+   "lesson": "cm2-maths-pourcentages-echelle-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 2,
+   "prompt": "Calcule 20 % de 7 500 FCFA.",
+   "answer": 1500,
+   "tolerance": 0,
+   "explanation": "10 % = 750 ; 20 % = 1 500.",
+   "unit": "FCFA",
+   "id": "cm2-maths-pourcentages-echelle-04",
+   "chapter": "cm2-maths-pourcentages-echelle",
+   "tier": "approfondissement",
+   "lesson": "cm2-maths-pourcentages-echelle-fiche",
+   "points": 2,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 2,
+   "prompt": "Un plan est à l'échelle 1/200 : la salle mesure 6 m. Quelle longueur sur le plan, en cm ?",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "6 m = 600 cm ; 600 ÷ 200 = 3 cm.",
+   "unit": "cm",
+   "id": "cm2-maths-pourcentages-echelle-05",
+   "chapter": "cm2-maths-pourcentages-echelle",
+   "tier": "approfondissement",
+   "lesson": "cm2-maths-pourcentages-echelle-fiche",
+   "points": 2,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "problem",
+   "difficulty": 2,
+   "prompt": "Nkeng vend des sacs d'arachides sur le marché de Bamenda. Un sac coûte 12 000 FCFA. Pour la fête, il fait 15 % de réduction.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Calcule 10 % de 12 000 FCFA.",
+     "answer": 1200,
+     "tolerance": 0,
+     "explanation": "12 000 ÷ 10 = 1 200.",
+     "unit": "FCFA",
+     "points": 1,
+     "id": "cm2-maths-pourcentages-echelle-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule 15 % de 12 000 FCFA (10 % + 5 %).",
+     "answer": 1800,
+     "tolerance": 0,
+     "explanation": "5 % = moitié de 10 % = 600 ; 1 200 + 600 = 1 800.",
+     "unit": "FCFA",
+     "points": 1,
+     "id": "cm2-maths-pourcentages-echelle-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quel est le prix du sac après réduction ?",
+     "answer": 10200,
+     "tolerance": 0,
+     "explanation": "12 000 − 1 800 = 10 200.",
+     "unit": "FCFA",
+     "points": 1,
+     "id": "cm2-maths-pourcentages-echelle-06-c"
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "id": "cm2-maths-pourcentages-echelle-06",
+   "chapter": "cm2-maths-pourcentages-echelle",
+   "tier": "examen",
+   "lesson": "cm2-maths-pourcentages-echelle-fiche",
+   "points": 3,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "25 % d'une quantité, c'est…",
+   "choices": [
+    "la moitié",
+    "le tiers",
+    "le dixième",
+    "le quart"
+   ],
+   "answer": 3,
+   "explanation": "25 sur 100 = 1 sur 4.",
+   "id": "cm2-maths-pourcentages-echelle-q1",
+   "chapter": "cm2-maths-pourcentages-echelle",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-pourcentages-echelle-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Combien font 10 % de 600 ?",
+   "choices": [
+    "6",
+    "60",
+    "600",
+    "10"
+   ],
+   "answer": 1,
+   "explanation": "On divise par 10.",
+   "id": "cm2-maths-pourcentages-echelle-q2",
+   "chapter": "cm2-maths-pourcentages-echelle",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-pourcentages-echelle-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Sur 50 élèves, 10 sont absents. Quel pourcentage ?",
+   "choices": [
+    "10 %",
+    "50 %",
+    "5 %",
+    "20 %"
+   ],
+   "answer": 3,
+   "explanation": "10 sur 50 = 20 sur 100.",
+   "id": "cm2-maths-pourcentages-echelle-q3",
+   "chapter": "cm2-maths-pourcentages-echelle",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-pourcentages-echelle-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Échelle 1/1 000 : 1 cm sur le plan représente…",
+   "choices": [
+    "10 m",
+    "1 m",
+    "100 m",
+    "1 000 m"
+   ],
+   "answer": 0,
+   "explanation": "1 cm × 1 000 = 1 000 cm = 10 m.",
+   "id": "cm2-maths-pourcentages-echelle-q4",
+   "chapter": "cm2-maths-pourcentages-echelle",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-pourcentages-echelle-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Un article à 5 000 FCFA est réduit de 10 %. Prix à payer ?",
+   "choices": [
+    "500 FCFA",
+    "4 900 FCFA",
+    "4 500 FCFA",
+    "5 500 FCFA"
+   ],
+   "answer": 2,
+   "explanation": "10 % = 500 ; 5 000 − 500 = 4 500.",
+   "id": "cm2-maths-pourcentages-echelle-q5",
+   "chapter": "cm2-maths-pourcentages-echelle",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-pourcentages-echelle-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  }
+ ]
+}

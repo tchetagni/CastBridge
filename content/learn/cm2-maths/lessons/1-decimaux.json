@@ -1,0 +1,576 @@
+{
+ "chapter": "cm2-maths-decimaux",
+ "lessons": [
+  {
+   "id": "cm2-maths-decimaux-fiche",
+   "chapter": "cm2-maths-decimaux",
+   "title": "Les nombres décimaux",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM2 — Numération : nombres décimaux (reconstitué)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Lire, écrire et décomposer un nombre décimal.",
+    "Comparer et ranger des nombres décimaux.",
+    "Multiplier et diviser par 10, 100, 1 000 ; encadrer et arrondir."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cm2-maths-decimaux-01",
+    "cm2-maths-decimaux-02",
+    "cm2-maths-decimaux-03",
+    "cm2-maths-decimaux-04",
+    "cm2-maths-decimaux-05",
+    "cm2-maths-decimaux-06"
+   ],
+   "selfCheck": [
+    "cm2-maths-decimaux-q1",
+    "cm2-maths-decimaux-q2",
+    "cm2-maths-decimaux-q3",
+    "cm2-maths-decimaux-q4",
+    "cm2-maths-decimaux-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier la règle d'arrondi (5 et plus : on augmente) et le vocabulaire « dixième, centième, millième ».",
+    "Les nombres s'écrivent avec une virgule ; vérifier la convention d'espaces dans les grands nombres."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Un **nombre décimal** a une partie entière et une partie décimale, séparées par une virgule. Dans 45,372, le 3 est le chiffre des dixièmes, le 7 celui des centièmes et le 2 celui des millièmes."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les rangs après la virgule",
+     "md": "- 1 dixième = 0,1 (un dixième de 1)\n- 1 centième = 0,01\n- 1 millième = 0,001\n\n10 millièmes = 1 centième ; 10 centièmes = 1 dixième ; 10 dixièmes = 1 unité."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : décomposer",
+     "statement": "Décompose 45,372.",
+     "steps": [
+      {
+       "md": "La partie entière : 45 = 4 dizaines et 5 unités."
+      },
+      {
+       "md": "La partie décimale : 3 dixièmes, 7 centièmes, 2 millièmes."
+      },
+      {
+       "md": "On écrit : 45,372 = 40 + 5 + 0,3 + 0,07 + 0,002."
+      }
+     ],
+     "answer": "**45,372 = 40 + 5 + 0,3 + 0,07 + 0,002**"
+    },
+    {
+     "type": "illustration",
+     "caption": "Sur la droite graduée, le point A est en 2,3 et le point B en 2,85.",
+     "alt": "Une droite graduée de 2 à 3 en dixièmes. Un point rouge A est placé sur 2,3 ; un point bleu B est placé entre 2,8 et 2,9, en 2,85.",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 150,
+      "items": [
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 70,
+        "x2": 450,
+        "y2": 70,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 60,
+        "x2": 30,
+        "y2": 80,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 72,
+        "y1": 60,
+        "x2": 72,
+        "y2": 80,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 114,
+        "y1": 60,
+        "x2": 114,
+        "y2": 80,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 156,
+        "y1": 60,
+        "x2": 156,
+        "y2": 80,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 198,
+        "y1": 60,
+        "x2": 198,
+        "y2": 80,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 240,
+        "y1": 60,
+        "x2": 240,
+        "y2": 80,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 282,
+        "y1": 60,
+        "x2": 282,
+        "y2": 80,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 324,
+        "y1": 60,
+        "x2": 324,
+        "y2": 80,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 366,
+        "y1": 60,
+        "x2": 366,
+        "y2": 80,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 408,
+        "y1": 60,
+        "x2": 408,
+        "y2": 80,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 450,
+        "y1": 60,
+        "x2": 450,
+        "y2": 80,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 100,
+        "text": "2",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 114,
+        "y": 100,
+        "text": "2,2",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 198,
+        "y": 100,
+        "text": "2,4",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 282,
+        "y": 100,
+        "text": "2,6",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 366,
+        "y": 100,
+        "text": "2,8",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 450,
+        "y": 100,
+        "text": "3",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "circle",
+        "cx": 156,
+        "cy": 70,
+        "r": 6,
+        "stroke": "red",
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 156,
+        "y": 45,
+        "text": "A",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 387,
+        "cy": 70,
+        "r": 6,
+        "stroke": "blue",
+        "fill": "blue"
+       },
+       {
+        "t": "text",
+        "x": 387,
+        "y": 45,
+        "text": "B",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 135,
+        "text": "Entre 2 et 3, chaque intervalle fait un dixième",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Comparer deux décimaux",
+     "md": "1. On compare d'abord les parties entières.\n2. Si elles sont égales, on compare les dixièmes, puis les centièmes, etc.\n\nOn peut ajouter des zéros à droite sans changer la valeur : 4,5 = 4,50 = 4,500."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : ranger",
+     "statement": "Range dans l'ordre croissant : 3,45 ; 3,5 ; 3,045 ; 2,99.",
+     "steps": [
+      {
+       "md": "2,99 est le plus petit : sa partie entière est 2."
+      },
+      {
+       "md": "Pour les autres, partie entière 3. On écrit 3,450 ; 3,500 ; 3,045."
+      },
+      {
+       "md": "Dixièmes : 0 (3,045) < 4 (3,45) < 5 (3,5)."
+      }
+     ],
+     "answer": "**2,99 < 3,045 < 3,45 < 3,5**"
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Pièges fréquents",
+     "md": "- 3,5 est plus grand que 3,45 : il ne faut pas comparer « 5 » et « 45 » comme des entiers.\n- Multiplier par 10, 100, 1 000 : la virgule se déplace de 1, 2, 3 rangs vers la **droite** ; diviser : vers la **gauche**.\n- Arrondir 4,76 à l'unité donne 5 ; au dixième, 4,8."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-decimaux-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-decimaux-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-decimaux-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-decimaux-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-decimaux-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-decimaux-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "L'arrondi d'un prix : 2 345,5 FCFA devient 2 346 FCFA à l'unité."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Quel est le chiffre des centièmes dans 18,462 ?",
+   "choices": [
+    "4",
+    "6",
+    "2",
+    "8"
+   ],
+   "answer": 1,
+   "explanation": "Après la virgule : 4 dixièmes, 6 centièmes, 2 millièmes.",
+   "id": "cm2-maths-decimaux-01",
+   "chapter": "cm2-maths-decimaux",
+   "tier": "application",
+   "lesson": "cm2-maths-decimaux-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 1,
+   "prompt": "Calcule : 7,35 × 100",
+   "answer": 735,
+   "tolerance": 0,
+   "explanation": "On déplace la virgule de 2 rangs vers la droite : 735.",
+   "id": "cm2-maths-decimaux-02",
+   "chapter": "cm2-maths-decimaux",
+   "tier": "application",
+   "lesson": "cm2-maths-decimaux-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "truefalse",
+   "difficulty": 1,
+   "prompt": "Vrai ou faux : 0,8 est plus grand que 0,75.",
+   "answer": true,
+   "explanation": "0,8 = 0,80 et 80 centièmes > 75 centièmes.",
+   "id": "cm2-maths-decimaux-03",
+   "chapter": "cm2-maths-decimaux",
+   "tier": "application",
+   "lesson": "cm2-maths-decimaux-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 2,
+   "prompt": "Convertis 12 500 g en kg (divise par 1 000).",
+   "answer": 12.5,
+   "tolerance": 0,
+   "explanation": "On divise par 1 000 : la virgule recule de 3 rangs : 12,5 kg.",
+   "unit": "kg",
+   "id": "cm2-maths-decimaux-04",
+   "chapter": "cm2-maths-decimaux",
+   "tier": "approfondissement",
+   "lesson": "cm2-maths-decimaux-fiche",
+   "points": 2,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "open",
+   "difficulty": 2,
+   "prompt": "Range du plus petit au plus grand : 6,07 ; 6,7 ; 6,007 ; 6,17. Explique ta méthode.",
+   "model": "6,007 < 6,07 < 6,17 < 6,7",
+   "rubric": [
+    "Mettre le même nombre de décimales (6,070 ; 6,700 ; 6,007 ; 6,170).",
+    "Comparer les dixièmes puis les centièmes.",
+    "Ordre correct : 6,007 ; 6,07 ; 6,17 ; 6,7."
+   ],
+   "explanation": "On aligne les décimales : 6,007 ; 6,070 ; 6,170 ; 6,700.",
+   "id": "cm2-maths-decimaux-05",
+   "chapter": "cm2-maths-decimaux",
+   "tier": "approfondissement",
+   "lesson": "cm2-maths-decimaux-fiche",
+   "points": 2,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "problem",
+   "difficulty": 2,
+   "prompt": "Le marché de Bafoussam : trois commerçants vendent le même sac d'arachides.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Ngono le vend 8,75 kg ; Fotso 8,57 kg ; Tchoua 8,7 kg. Qui a le sac le plus lourd ?",
+     "choices": [
+      "Fotso",
+      "Tchoua",
+      "Ils pèsent pareil",
+      "Ngono"
+     ],
+     "answer": 3,
+     "explanation": "8,75 > 8,70 > 8,57.",
+     "points": 1,
+     "id": "cm2-maths-decimaux-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Arrondis la masse du sac de Fotso (8,57 kg) au dixième de kg.",
+     "answer": 8.6,
+     "tolerance": 0,
+     "explanation": "Le chiffre des centièmes est 7 (≥ 5) : on passe de 8,5 à 8,6.",
+     "unit": "kg",
+     "points": 1,
+     "id": "cm2-maths-decimaux-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Combien font 8,75 kg × 10 ? (en kg)",
+     "answer": 87.5,
+     "tolerance": 0,
+     "explanation": "La virgule se déplace d'un rang vers la droite : 87,5.",
+     "unit": "kg",
+     "points": 1,
+     "id": "cm2-maths-decimaux-06-c"
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "id": "cm2-maths-decimaux-06",
+   "chapter": "cm2-maths-decimaux",
+   "tier": "examen",
+   "lesson": "cm2-maths-decimaux-fiche",
+   "points": 3,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Dans 502,086, quel est le chiffre des millièmes ?",
+   "choices": [
+    "6",
+    "8",
+    "0",
+    "2"
+   ],
+   "answer": 0,
+   "explanation": "502,086 : 0 dixième, 8 centièmes, 6 millièmes.",
+   "id": "cm2-maths-decimaux-q1",
+   "chapter": "cm2-maths-decimaux",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-decimaux-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Quel nombre est égal à 9,40 ?",
+   "choices": [
+    "9,04",
+    "94",
+    "9,4",
+    "0,94"
+   ],
+   "answer": 2,
+   "explanation": "On peut supprimer un zéro final après la virgule : 9,40 = 9,4.",
+   "id": "cm2-maths-decimaux-q2",
+   "chapter": "cm2-maths-decimaux",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-decimaux-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 2,
+   "prompt": "Laquelle est vraie ?",
+   "choices": [
+    "12,3 > 12,31",
+    "12,30 < 12,3",
+    "12,3 < 12,30 + 0,01",
+    "12,05 > 12,5"
+   ],
+   "answer": 2,
+   "explanation": "12,30 + 0,01 = 12,31 qui est plus grand que 12,3.",
+   "id": "cm2-maths-decimaux-q3",
+   "chapter": "cm2-maths-decimaux",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-decimaux-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Quel est le résultat de 4,56 ÷ 10 ?",
+   "choices": [
+    "0,456",
+    "45,6",
+    "4,056",
+    "0,0456"
+   ],
+   "answer": 0,
+   "explanation": "Diviser par 10 : la virgule recule d'un rang vers la gauche.",
+   "id": "cm2-maths-decimaux-q4",
+   "chapter": "cm2-maths-decimaux",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-decimaux-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "L'arrondi de 7,349 au centième est…",
+   "choices": [
+    "7,34",
+    "7,3",
+    "7,4",
+    "7,35"
+   ],
+   "answer": 3,
+   "explanation": "Le chiffre des millièmes est 9 : on arrondit le centième 4 à 5.",
+   "id": "cm2-maths-decimaux-q5",
+   "chapter": "cm2-maths-decimaux",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-decimaux-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  }
+ ]
+}

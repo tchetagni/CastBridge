@@ -1,0 +1,480 @@
+{
+ "chapter": "cm2-sciences-animaux",
+ "lessons": [
+  {
+   "id": "cm2-sciences-animaux-fiche",
+   "title": "Les animaux, leur nourriture et leurs milieux de vie",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CM2 — Animaux : régimes, chaînes alimentaires et milieux de vie (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Classer des animaux selon leur régime alimentaire.",
+    "Lire et construire une chaîne alimentaire simple.",
+    "Relier un animal à son milieu de vie."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cm2-sciences-animaux-01",
+    "cm2-sciences-animaux-02",
+    "cm2-sciences-animaux-03",
+    "cm2-sciences-animaux-04",
+    "cm2-sciences-animaux-05",
+    "cm2-sciences-animaux-06"
+   ],
+   "selfCheck": [
+    "cm2-sciences-animaux-q1",
+    "cm2-sciences-animaux-q2",
+    "cm2-sciences-animaux-q3",
+    "cm2-sciences-animaux-q4",
+    "cm2-sciences-animaux-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier les régimes alimentaires (chimpanzé, poule) et le niveau de détail des chaînes alimentaires au CM2.",
+    "Les exemples d'animaux du Cameroun sont courants : à confirmer localement."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les régimes alimentaires",
+     "md": "- Les **herbivores** mangent des végétaux : éléphant, chèvre, antilope.\n- Les **carnivores** mangent d'autres animaux : léopard, crocodile.\n- Les **omnivores** mangent des végétaux et des animaux : chimpanzé, poule, être humain.\n- Le **pangolin** se nourrit surtout de fourmis et de termites."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "La chaîne alimentaire",
+     "md": "Une **chaîne alimentaire** montre qui mange qui. Elle commence par une **plante** (le producteur), mangée par un animal, lui-même mangé par un autre. La flèche signifie « est mangé par »."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 16,
+        "y": 40,
+        "w": 104,
+        "h": 48,
+        "fill": "lightgreen",
+        "stroke": "green",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 68,
+        "y": 70,
+        "text": "herbe",
+        "size": 16,
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 124,
+        "y1": 64,
+        "x2": 152,
+        "y2": 64,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 156,
+        "y": 40,
+        "w": 104,
+        "h": 48,
+        "fill": "lightorange",
+        "stroke": "orange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 208,
+        "y": 70,
+        "text": "criquet",
+        "size": 16,
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 264,
+        "y1": 64,
+        "x2": 292,
+        "y2": 64,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 296,
+        "y": 40,
+        "w": 104,
+        "h": 48,
+        "fill": "lightorange",
+        "stroke": "orange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 348,
+        "y": 70,
+        "text": "grenouille",
+        "size": 16,
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 404,
+        "y1": 64,
+        "x2": 432,
+        "y2": 64,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 436,
+        "y": 40,
+        "w": 104,
+        "h": 48,
+        "fill": "lightorange",
+        "stroke": "orange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 488,
+        "y": 70,
+        "text": "serpent",
+        "size": 16,
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 20,
+        "text": "Une chaîne alimentaire (la flèche veut dire « est mangé par »)",
+        "size": 15,
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 68,
+        "y": 112,
+        "text": "producteur",
+        "size": 14,
+        "color": "green",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Une chaîne alimentaire.",
+     "alt": "Quatre cases reliées par des flèches : herbe, criquet, grenouille, serpent. L'herbe est le producteur, au début de la chaîne."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : lire une chaîne",
+     "statement": "Dans la chaîne herbe → criquet → grenouille → serpent, qui mange le criquet ?",
+     "steps": [
+      {
+       "md": "La flèche va de la proie vers celui qui la mange."
+      },
+      {
+       "md": "Après le criquet vient la grenouille : elle mange le criquet."
+      }
+     ],
+     "answer": "**La grenouille mange le criquet.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : trouver le régime",
+     "statement": "Une chèvre broute l'herbe. Quel est son régime ?",
+     "steps": [
+      {
+       "md": "La chèvre ne mange que des végétaux."
+      },
+      {
+       "md": "Un animal qui ne mange que des végétaux est un herbivore."
+      }
+     ],
+     "answer": "**Herbivore.**"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les milieux de vie",
+     "md": "Les animaux vivent dans des **milieux** différents : la forêt (chimpanzé, éléphant de forêt), la savane (antilope), l'eau douce (poisson, crocodile), la mer et la mangrove. Leur corps est adapté à leur milieu : les poissons ont des nageoires et respirent dans l'eau."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Penser que tous les animaux sauvages mangent de la viande.\n- Mettre la flèche dans le mauvais sens : elle va de celui qui est mangé vers celui qui mange.\n- Oublier la plante au début de la chaîne."
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-sciences-animaux-01"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Quand un milieu est détruit (forêt coupée, rivière polluée), les animaux qui y vivent perdent leur nourriture et leur abri.",
+      "Le Cameroun a des parcs nationaux qui protègent la faune."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quel animal est herbivore ?",
+   "choices": [
+    "Le léopard",
+    "Le crocodile",
+    "L'éléphant",
+    "Le serpent"
+   ],
+   "answer": 2,
+   "explanation": "L'éléphant mange des plantes.",
+   "method": "Se demander : que mange-t-il ?",
+   "id": "cm2-sciences-animaux-01",
+   "chapter": "cm2-sciences-animaux",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cm2-sciences-animaux-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : la poule est omnivore.",
+   "answer": true,
+   "explanation": "La poule mange des graines et aussi des insectes : elle est omnivore.",
+   "id": "cm2-sciences-animaux-02",
+   "chapter": "cm2-sciences-animaux",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cm2-sciences-animaux-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque animal à son régime.",
+   "pairs": [
+    [
+     "Chèvre",
+     "Herbivore"
+    ],
+    [
+     "Léopard",
+     "Carnivore"
+    ],
+    [
+     "Chimpanzé",
+     "Omnivore"
+    ]
+   ],
+   "explanation": "La chèvre mange des plantes ; le léopard mange d'autres animaux ; le chimpanzé mange fruits, feuilles et parfois des animaux.",
+   "points": 2,
+   "review": true,
+   "reviewNote": "Régime du chimpanzé : simplifié en « omnivore » ; à confirmer au niveau du programme.",
+   "id": "cm2-sciences-animaux-03",
+   "chapter": "cm2-sciences-animaux",
+   "tier": "application",
+   "difficulty": 2,
+   "lesson": "cm2-sciences-animaux-fiche",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans la chaîne mil → souris → serpent, qui est le producteur ?",
+   "choices": [
+    "Le mil",
+    "La souris",
+    "Le serpent",
+    "Aucun"
+   ],
+   "answer": 0,
+   "explanation": "Le producteur est la plante : le mil.",
+   "mistakes": [
+    "Croire que le producteur est le plus gros animal."
+   ],
+   "id": "cm2-sciences-animaux-04",
+   "chapter": "cm2-sciences-animaux",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cm2-sciences-animaux-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "open",
+   "prompt": "Construis une chaîne alimentaire de trois êtres vivants, avec des flèches.",
+   "model": "Par exemple : herbe → antilope → léopard.",
+   "rubric": [
+    "Commence par une plante.",
+    "Trois êtres vivants, flèches dans le bon sens."
+   ],
+   "explanation": "Une bonne chaîne : plante → herbivore → carnivore.",
+   "points": 3,
+   "mistakes": [
+    "Mettre les flèches à l'envers."
+   ],
+   "id": "cm2-sciences-animaux-05",
+   "chapter": "cm2-sciences-animaux",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cm2-sciences-animaux-fiche",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Dans une rivière, Ibrahim observe : des algues, des petits poissons qui mangent les algues, et un grand poisson qui mange les petits. Réponds aux questions.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quel est le producteur ?",
+     "choices": [
+      "Les petits poissons",
+      "Le grand poisson",
+      "Ibrahim",
+      "Les algues"
+     ],
+     "answer": 3,
+     "explanation": "Les algues sont des végétaux : elles sont au début de la chaîne.",
+     "id": "cm2-sciences-animaux-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quelle chaîne est correcte ?",
+     "choices": [
+      "grand poisson → petits poissons → algues",
+      "algues → petits poissons → grand poisson",
+      "petits poissons → algues → grand poisson",
+      "algues → grand poisson → petits poissons"
+     ],
+     "answer": 1,
+     "explanation": "La flèche va de celui qui est mangé vers celui qui mange.",
+     "id": "cm2-sciences-animaux-06-b",
+     "points": 1
+    },
+    {
+     "kind": "truefalse",
+     "prompt": "Vrai ou faux : si les algues disparaissent, les petits poissons manquent de nourriture.",
+     "answer": true,
+     "explanation": "Ils mangent les algues : sans algues, ils manquent de nourriture.",
+     "id": "cm2-sciences-animaux-06-c",
+     "points": 1
+    }
+   ],
+   "method": "Placer le producteur en premier, puis suivre qui mange qui.",
+   "id": "cm2-sciences-animaux-06",
+   "chapter": "cm2-sciences-animaux",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cm2-sciences-animaux-fiche",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un carnivore mange…",
+   "choices": [
+    "Seulement des plantes",
+    "D'autres animaux",
+    "Des pierres",
+    "Du plastique"
+   ],
+   "answer": 1,
+   "explanation": "Carnivore : mange de la chair.",
+   "id": "cm2-sciences-animaux-q1",
+   "chapter": "cm2-sciences-animaux",
+   "tier": "autoeval",
+   "lesson": "cm2-sciences-animaux-fiche",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une chaîne alimentaire commence par…",
+   "choices": [
+    "Un carnivore",
+    "Un herbivore",
+    "Un omnivore",
+    "Une plante"
+   ],
+   "answer": 3,
+   "explanation": "Le producteur est une plante.",
+   "id": "cm2-sciences-animaux-q2",
+   "chapter": "cm2-sciences-animaux",
+   "tier": "autoeval",
+   "lesson": "cm2-sciences-animaux-fiche",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le pangolin mange surtout…",
+   "choices": [
+    "Des fourmis et des termites",
+    "De l'herbe",
+    "Des poissons",
+    "Des fruits"
+   ],
+   "answer": 0,
+   "explanation": "Il se nourrit surtout d'insectes.",
+   "id": "cm2-sciences-animaux-q3",
+   "chapter": "cm2-sciences-animaux",
+   "tier": "autoeval",
+   "lesson": "cm2-sciences-animaux-fiche",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que veut dire la flèche dans une chaîne ?",
+   "choices": [
+    "« est plus gros que »",
+    "« vit avec »",
+    "« est mangé par »",
+    "« court après »"
+   ],
+   "answer": 2,
+   "explanation": "La flèche dit qui est mangé par qui.",
+   "id": "cm2-sciences-animaux-q4",
+   "chapter": "cm2-sciences-animaux",
+   "tier": "autoeval",
+   "lesson": "cm2-sciences-animaux-fiche",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel animal vit dans l'eau ?",
+   "choices": [
+    "La chèvre",
+    "L'éléphant",
+    "La poule",
+    "Le poisson"
+   ],
+   "answer": 3,
+   "explanation": "Le poisson a des nageoires et vit dans l'eau.",
+   "id": "cm2-sciences-animaux-q5",
+   "chapter": "cm2-sciences-animaux",
+   "tier": "autoeval",
+   "lesson": "cm2-sciences-animaux-fiche",
+   "points": 1
+  }
+ ]
+}

@@ -1,0 +1,540 @@
+{
+ "chapter": "cm2-sciences-digestion",
+ "lessons": [
+  {
+   "id": "cm2-sciences-digestion-fiche",
+   "title": "La digestion et l'alimentation équilibrée",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CM2 — Corps humain : la digestion et l'alimentation (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Nommer les organes du tube digestif dans l'ordre.",
+    "Expliquer ce que devient un aliment pendant la digestion.",
+    "Classer des aliments en bâtisseurs, énergétiques et protecteurs.",
+    "Composer un repas équilibré."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cm2-sciences-digestion-01",
+    "cm2-sciences-digestion-02",
+    "cm2-sciences-digestion-03",
+    "cm2-sciences-digestion-04",
+    "cm2-sciences-digestion-05",
+    "cm2-sciences-digestion-06"
+   ],
+   "selfCheck": [
+    "cm2-sciences-digestion-q1",
+    "cm2-sciences-digestion-q2",
+    "cm2-sciences-digestion-q3",
+    "cm2-sciences-digestion-q4",
+    "cm2-sciences-digestion-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier le vocabulaire : « aliments bâtisseurs / énergétiques / protecteurs » est-il bien celui du programme ?",
+    "Les exemples d'aliments sont simples : à adapter selon les habitudes locales."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La digestion",
+     "md": "Les aliments sont trop gros pour entrer dans le sang. Pendant la **digestion**, ils sont broyés, mélangés et transformés en très petits morceaux appelés **nutriments**. Ces nutriments passent ensuite dans le sang, qui les distribue à tout le corps."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Le trajet des aliments",
+     "md": "1. **Bouche** : les dents broient, la salive humidifie.\n2. **Œsophage** : un tuyau qui descend les aliments.\n3. **Estomac** : il brasse les aliments.\n4. **Intestin grêle** : les nutriments passent dans le sang.\n5. **Gros intestin** : l'eau est récupérée, les déchets sont évacués."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 14,
+        "y": 40,
+        "w": 96,
+        "h": 56,
+        "fill": "lightorange",
+        "stroke": "orange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 62,
+        "y": 73,
+        "text": "Bouche",
+        "size": 15,
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 111,
+        "y1": 68,
+        "x2": 121,
+        "y2": 68,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 122,
+        "y": 40,
+        "w": 96,
+        "h": 56,
+        "fill": "lightorange",
+        "stroke": "orange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 73,
+        "text": "Œsophage",
+        "size": 15,
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 219,
+        "y1": 68,
+        "x2": 229,
+        "y2": 68,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 40,
+        "w": 96,
+        "h": 56,
+        "fill": "lightorange",
+        "stroke": "orange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 278,
+        "y": 73,
+        "text": "Estomac",
+        "size": 15,
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 327,
+        "y1": 68,
+        "x2": 337,
+        "y2": 68,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 338,
+        "y": 40,
+        "w": 96,
+        "h": 56,
+        "fill": "lightgreen",
+        "stroke": "orange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 386,
+        "y": 62,
+        "text": "Intestin",
+        "size": 15,
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 386,
+        "y": 82,
+        "text": "grêle",
+        "size": 15,
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 435,
+        "y1": 68,
+        "x2": 445,
+        "y2": 68,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 446,
+        "y": 40,
+        "w": 96,
+        "h": 56,
+        "fill": "lightorange",
+        "stroke": "orange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 494,
+        "y": 62,
+        "text": "Gros",
+        "size": 15,
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 494,
+        "y": 82,
+        "text": "intestin",
+        "size": 15,
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 20,
+        "text": "Le trajet des aliments",
+        "size": 16,
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 390,
+        "y": 124,
+        "text": "les nutriments passent dans le sang",
+        "size": 14,
+        "color": "green",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Le tube digestif : cinq étapes.",
+     "alt": "Cinq cases reliées par des flèches : bouche, œsophage, estomac, intestin grêle, gros intestin. Une légende précise que les nutriments passent dans le sang au niveau de l'intestin grêle."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Trois familles d'aliments",
+     "md": "- **Bâtisseurs** : ils font grandir et réparent le corps (viande, poisson, œufs, haricots).\n- **Énergétiques** : ils donnent de la force pour courir et travailler (manioc, plantain, riz, huile).\n- **Protecteurs** : ils aident le corps à se défendre (fruits, légumes, feuilles comme le ndolé)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : classer des aliments",
+     "statement": "Ngono mange du plantain, du poisson fumé et une mangue. Classe ces aliments.",
+     "steps": [
+      {
+       "md": "Le plantain est riche en féculents : il donne de l'énergie. C'est un aliment **énergétique**."
+      },
+      {
+       "md": "Le poisson aide le corps à grandir : c'est un **bâtisseur**."
+      },
+      {
+       "md": "La mangue contient des vitamines : c'est un **protecteur**."
+      }
+     ],
+     "answer": "**Plantain : énergétique. Poisson : bâtisseur. Mangue : protecteur.** Ce repas contient les trois familles."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : suivre un aliment",
+     "statement": "Un morceau de pain est avalé. Où passe-t-il avant d'être absorbé ?",
+     "steps": [
+      {
+       "md": "Il est broyé dans la **bouche**, puis descend par l'**œsophage**."
+      },
+      {
+       "md": "Il est brassé dans l'**estomac**, puis arrive dans l'**intestin grêle**."
+      }
+     ],
+     "answer": "**Bouche, œsophage, estomac, puis intestin grêle** : c'est là que les nutriments passent dans le sang."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Un repas équilibré",
+     "md": "Un bon repas contient un aliment de **chaque famille** et de l'eau. On varie les aliments d'un jour à l'autre. On mange assez, mais sans excès, et on mâche bien."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que la digestion se fait seulement dans l'estomac : elle commence dans la bouche.\n- Croire que les nutriments passent dans le sang dans l'estomac : c'est dans l'intestin grêle.\n- Croire qu'un seul aliment suffit pour être en bonne santé."
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-sciences-digestion-01"
+    },
+    {
+     "type": "more",
+     "items": [
+      "L'eau ne donne pas d'énergie, mais le corps en a besoin tous les jours.",
+      "Les fibres des légumes et des fruits aident le gros intestin à bien fonctionner."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Dans quel organe les aliments sont-ils d'abord broyés ?",
+   "choices": [
+    "L'estomac",
+    "L'œsophage",
+    "La bouche",
+    "Le gros intestin"
+   ],
+   "answer": 2,
+   "explanation": "Les dents broient les aliments dans la **bouche**, c'est le début de la digestion.",
+   "method": "Suivre le trajet dans l'ordre.",
+   "id": "cm2-sciences-digestion-01",
+   "chapter": "cm2-sciences-digestion",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cm2-sciences-digestion-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : le manioc est un aliment énergétique.",
+   "answer": true,
+   "explanation": "Le manioc est riche en féculents : il donne de l'énergie. C'est vrai.",
+   "id": "cm2-sciences-digestion-02",
+   "chapter": "cm2-sciences-digestion",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cm2-sciences-digestion-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque aliment à sa famille.",
+   "pairs": [
+    [
+     "Poisson",
+     "Bâtisseur"
+    ],
+    [
+     "Plantain",
+     "Énergétique"
+    ],
+    [
+     "Orange",
+     "Protecteur"
+    ]
+   ],
+   "explanation": "Le poisson aide à grandir (bâtisseur) ; le plantain donne de l'énergie ; l'orange apporte des vitamines (protecteur).",
+   "points": 2,
+   "id": "cm2-sciences-digestion-03",
+   "chapter": "cm2-sciences-digestion",
+   "tier": "application",
+   "difficulty": 2,
+   "lesson": "cm2-sciences-digestion-fiche",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Où les nutriments passent-ils dans le sang ?",
+   "choices": [
+    "Dans l'intestin grêle",
+    "Dans la bouche",
+    "Dans l'œsophage",
+    "Dans l'estomac"
+   ],
+   "answer": 0,
+   "explanation": "C'est l'**intestin grêle** qui laisse passer les nutriments dans le sang.",
+   "method": "Se rappeler la légende verte du schéma.",
+   "mistakes": [
+    "Répondre « estomac » parce qu'il brasse les aliments."
+   ],
+   "id": "cm2-sciences-digestion-04",
+   "chapter": "cm2-sciences-digestion",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cm2-sciences-digestion-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "open",
+   "prompt": "Écris l'ordre des organes que traverse un aliment, de la bouche jusqu'à la sortie.",
+   "model": "Bouche, œsophage, estomac, intestin grêle, gros intestin.",
+   "rubric": [
+    "Les 5 organes sont cités.",
+    "L'ordre est correct."
+   ],
+   "explanation": "L'aliment suit un seul tube, toujours dans le même ordre.",
+   "points": 3,
+   "mistakes": [
+    "Oublier l'œsophage."
+   ],
+   "id": "cm2-sciences-digestion-05",
+   "chapter": "cm2-sciences-digestion",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cm2-sciences-digestion-fiche",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Mballa prépare un repas : riz, sauce arachide au poulet et ananas. Réponds aux questions.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quel aliment est le principal énergétique ?",
+     "choices": [
+      "Le poulet",
+      "L'ananas",
+      "L'eau",
+      "Le riz"
+     ],
+     "answer": 3,
+     "explanation": "Le riz est un féculent : il donne de l'énergie.",
+     "id": "cm2-sciences-digestion-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quel aliment est un bâtisseur ?",
+     "choices": [
+      "Le riz",
+      "Le poulet",
+      "L'ananas",
+      "Le sel"
+     ],
+     "answer": 1,
+     "explanation": "Le poulet apporte des protéines qui aident à grandir.",
+     "id": "cm2-sciences-digestion-06-b",
+     "points": 1
+    },
+    {
+     "kind": "truefalse",
+     "prompt": "Vrai ou faux : ce repas contient les trois familles d'aliments.",
+     "answer": true,
+     "explanation": "Riz (énergétique), poulet (bâtisseur), ananas (protecteur) : c'est équilibré.",
+     "id": "cm2-sciences-digestion-06-c",
+     "points": 1
+    }
+   ],
+   "method": "Repérer chaque aliment, puis sa famille.",
+   "mistakes": [
+    "Oublier l'aliment protecteur (fruit ou légume)."
+   ],
+   "id": "cm2-sciences-digestion-06",
+   "chapter": "cm2-sciences-digestion",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cm2-sciences-digestion-fiche",
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les aliments nourrissent le corps grâce à…",
+   "choices": [
+    "La salive seulement",
+    "Les nutriments",
+    "Les déchets",
+    "L'air"
+   ],
+   "answer": 1,
+   "explanation": "Ce sont les nutriments, passés dans le sang, qui nourrissent le corps.",
+   "id": "cm2-sciences-digestion-q1",
+   "chapter": "cm2-sciences-digestion",
+   "tier": "autoeval",
+   "lesson": "cm2-sciences-digestion-fiche",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le rôle des aliments bâtisseurs ?",
+   "choices": [
+    "Donner uniquement de l'énergie",
+    "Remplacer l'eau",
+    "Colorer la peau",
+    "Faire grandir et réparer le corps"
+   ],
+   "answer": 3,
+   "explanation": "Les bâtisseurs servent à construire et à réparer.",
+   "id": "cm2-sciences-digestion-q2",
+   "chapter": "cm2-sciences-digestion",
+   "tier": "autoeval",
+   "lesson": "cm2-sciences-digestion-fiche",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel organe vient juste après l'estomac ?",
+   "choices": [
+    "L'intestin grêle",
+    "L'œsophage",
+    "La bouche",
+    "Le gros intestin"
+   ],
+   "answer": 0,
+   "explanation": "Après l'estomac vient l'intestin grêle, puis le gros intestin.",
+   "id": "cm2-sciences-digestion-q3",
+   "chapter": "cm2-sciences-digestion",
+   "tier": "autoeval",
+   "lesson": "cm2-sciences-digestion-fiche",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel aliment est un protecteur ?",
+   "choices": [
+    "Le manioc",
+    "L'huile",
+    "La mangue",
+    "Le poisson"
+   ],
+   "answer": 2,
+   "explanation": "Les fruits et les légumes protègent grâce à leurs vitamines.",
+   "id": "cm2-sciences-digestion-q4",
+   "chapter": "cm2-sciences-digestion",
+   "tier": "autoeval",
+   "lesson": "cm2-sciences-digestion-fiche",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qu'est-ce qu'un repas équilibré ?",
+   "choices": [
+    "Un repas très gras",
+    "Un repas avec un seul aliment",
+    "Un repas sans eau",
+    "Un repas avec des aliments de chaque famille"
+   ],
+   "answer": 3,
+   "explanation": "Un repas équilibré mélange bâtisseurs, énergétiques et protecteurs.",
+   "id": "cm2-sciences-digestion-q5",
+   "chapter": "cm2-sciences-digestion",
+   "tier": "autoeval",
+   "lesson": "cm2-sciences-digestion-fiche",
+   "points": 1
+  }
+ ]
+}

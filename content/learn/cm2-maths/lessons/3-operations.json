@@ -1,0 +1,342 @@
+{
+ "chapter": "cm2-maths-operations",
+ "lessons": [
+  {
+   "id": "cm2-maths-operations-fiche",
+   "chapter": "cm2-maths-operations",
+   "title": "Les quatre opérations",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM2 — Calcul : opérations sur les entiers et les décimaux (reconstitué)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Poser l'addition, la soustraction et la multiplication avec des décimaux.",
+    "Effectuer une division euclidienne puis une division décimale.",
+    "Vérifier un résultat et respecter l'ordre des calculs."
+   ],
+   "prerequisites": [
+    "cm2-maths-decimaux-fiche"
+   ],
+   "exercises": [
+    "cm2-maths-operations-01",
+    "cm2-maths-operations-02",
+    "cm2-maths-operations-03",
+    "cm2-maths-operations-04",
+    "cm2-maths-operations-05",
+    "cm2-maths-operations-06"
+   ],
+   "selfCheck": [
+    "cm2-maths-operations-q1",
+    "cm2-maths-operations-q2",
+    "cm2-maths-operations-q3",
+    "cm2-maths-operations-q4",
+    "cm2-maths-operations-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier la présentation de la division posée (convention d'écriture au Cameroun) et que la division décimale est au programme du CM2."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Pour **additionner** ou **soustraire** des décimaux, on aligne les virgules, on complète avec des zéros, puis on calcule comme avec des entiers. La virgule du résultat est alignée avec les autres."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : addition et soustraction",
+     "statement": "Calcule 56,4 + 7,85 puis 30 − 12,75.",
+     "steps": [
+      {
+       "md": "56,40 + 7,85 : on aligne les virgules. 40 + 85 = 125 centièmes, soit 1,25 ; on obtient 64,25."
+      },
+      {
+       "md": "30,00 − 12,75 : 3 000 − 1 275 = 1 725 centièmes, soit 17,25."
+      }
+     ],
+     "answer": "**56,4 + 7,85 = 64,25 et 30 − 12,75 = 17,25**"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Multiplier des décimaux",
+     "md": "1. On multiplie sans tenir compte des virgules.\n2. On compte les chiffres après la virgule dans les deux facteurs.\n3. On place la virgule dans le produit avec autant de chiffres décimaux.\n\n2,4 × 1,5 : 24 × 15 = 360 ; 2 chiffres décimaux ; 3,60 = 3,6."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : division",
+     "statement": "Divise 1 575 par 24 : quotient entier et reste, puis quotient décimal.",
+     "steps": [
+      {
+       "md": "1 575 = 24 × 65 + 15. Quotient 65, reste 15."
+      },
+      {
+       "md": "On continue après la virgule : 150 ÷ 24 = 6 (reste 6) ; 60 ÷ 24 = 2 (reste 12) ; 120 ÷ 24 = 5."
+      },
+      {
+       "md": "Le quotient décimal est 65,625."
+      }
+     ],
+     "answer": "**1 575 ÷ 24 = 65,625**"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Vérifier et ordre des calculs",
+     "md": "- Division euclidienne : dividende = diviseur × quotient + reste, avec reste < diviseur.\n- Dans un calcul, on fait d'abord les **parenthèses**, puis les **× et ÷**, puis les **+ et −**.\n- Exemple : 5 + 3 × 4 = 5 + 12 = 17 ; (5 + 3) × 4 = 32."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Pièges",
+     "md": "- Ne pas aligner les virgules en soustrayant est la faute la plus courante.\n- Dans une division, le reste doit rester plus petit que le diviseur.\n- 4 × 0,5 = 2 (et non 20) : multiplier par 0,5, c'est prendre la moitié."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-operations-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-operations-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-operations-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-operations-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-operations-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-operations-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Pour vérifier une multiplication, on peut l'arrondir : 3,9 × 4,1 est proche de 4 × 4 = 16."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "difficulty": 1,
+   "prompt": "Calcule : 125,6 + 38,75",
+   "answer": 164.35,
+   "tolerance": 0,
+   "explanation": "125,60 + 38,75 = 164,35.",
+   "id": "cm2-maths-operations-01",
+   "chapter": "cm2-maths-operations",
+   "tier": "application",
+   "lesson": "cm2-maths-operations-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 1,
+   "prompt": "Calcule : 50 − 18,4",
+   "answer": 31.6,
+   "tolerance": 0,
+   "explanation": "50,0 − 18,4 = 31,6.",
+   "id": "cm2-maths-operations-02",
+   "chapter": "cm2-maths-operations",
+   "tier": "application",
+   "lesson": "cm2-maths-operations-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 1,
+   "prompt": "Calcule : 3,5 × 4",
+   "answer": 14,
+   "tolerance": 0,
+   "explanation": "35 × 4 = 140 ; un chiffre décimal : 14,0 = 14.",
+   "id": "cm2-maths-operations-03",
+   "chapter": "cm2-maths-operations",
+   "tier": "application",
+   "lesson": "cm2-maths-operations-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 2,
+   "prompt": "Calcule : 2,4 × 1,5",
+   "answer": 3.6,
+   "tolerance": 0,
+   "explanation": "24 × 15 = 360 ; deux chiffres décimaux : 3,60 = 3,6.",
+   "id": "cm2-maths-operations-04",
+   "chapter": "cm2-maths-operations",
+   "tier": "approfondissement",
+   "lesson": "cm2-maths-operations-fiche",
+   "points": 2,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 2,
+   "prompt": "Calcule : 5 + 3 × 4",
+   "answer": 17,
+   "tolerance": 0,
+   "explanation": "On fait d'abord la multiplication : 3 × 4 = 12 ; puis 5 + 12 = 17.",
+   "id": "cm2-maths-operations-05",
+   "chapter": "cm2-maths-operations",
+   "tier": "approfondissement",
+   "lesson": "cm2-maths-operations-fiche",
+   "points": 2,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "problem",
+   "difficulty": 2,
+   "prompt": "Mballa achète du matériel à Ebolowa : un cahier à 450 FCFA et 6 stylos à 125 FCFA l'un. Il paie avec un billet de 2 000 FCFA.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Combien coûtent les 6 stylos ?",
+     "answer": 750,
+     "tolerance": 0,
+     "explanation": "125 × 6 = 750.",
+     "unit": "FCFA",
+     "points": 1,
+     "id": "cm2-maths-operations-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la dépense totale ?",
+     "answer": 1200,
+     "tolerance": 0,
+     "explanation": "450 + 750 = 1 200.",
+     "unit": "FCFA",
+     "points": 1,
+     "id": "cm2-maths-operations-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Combien la marchande lui rend-elle ?",
+     "answer": 800,
+     "tolerance": 0,
+     "explanation": "2 000 − 1 200 = 800.",
+     "unit": "FCFA",
+     "points": 1,
+     "id": "cm2-maths-operations-06-c"
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "id": "cm2-maths-operations-06",
+   "chapter": "cm2-maths-operations",
+   "tier": "examen",
+   "lesson": "cm2-maths-operations-fiche",
+   "points": 3,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Quel est le résultat de 7,2 − 3,85 ?",
+   "choices": [
+    "4,35",
+    "4,65",
+    "3,45",
+    "3,35"
+   ],
+   "answer": 3,
+   "explanation": "7,20 − 3,85 = 3,35.",
+   "id": "cm2-maths-operations-q1",
+   "chapter": "cm2-maths-operations",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-operations-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Dans une division euclidienne, le reste est toujours…",
+   "choices": [
+    "plus petit que le diviseur",
+    "plus grand que le quotient",
+    "égal au quotient",
+    "plus grand que le diviseur"
+   ],
+   "answer": 0,
+   "explanation": "Si le reste était ≥ au diviseur, on pourrait encore diviser.",
+   "id": "cm2-maths-operations-q2",
+   "chapter": "cm2-maths-operations",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-operations-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 2,
+   "prompt": "Combien font 0,6 × 0,3 ?",
+   "choices": [
+    "1,8",
+    "0,018",
+    "0,18",
+    "0,9"
+   ],
+   "answer": 2,
+   "explanation": "6 × 3 = 18 ; deux chiffres décimaux : 0,18.",
+   "id": "cm2-maths-operations-q3",
+   "chapter": "cm2-maths-operations",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-operations-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Combien font 36 ÷ 8 en quotient décimal ?",
+   "choices": [
+    "4,05",
+    "4,8",
+    "4,5",
+    "5"
+   ],
+   "answer": 2,
+   "explanation": "36 = 8 × 4 + 4 ; 40 ÷ 8 = 5 : 4,5.",
+   "id": "cm2-maths-operations-q4",
+   "chapter": "cm2-maths-operations",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-operations-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Quel est le résultat de (7 + 5) × 2 ?",
+   "choices": [
+    "24",
+    "17",
+    "19",
+    "22"
+   ],
+   "answer": 0,
+   "explanation": "On calcule d'abord la parenthèse : 12 × 2 = 24.",
+   "id": "cm2-maths-operations-q5",
+   "chapter": "cm2-maths-operations",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-operations-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  }
+ ]
+}

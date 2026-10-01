@@ -1,0 +1,500 @@
+{
+ "chapter": "cm2-maths-mesures",
+ "lessons": [
+  {
+   "id": "cm2-maths-mesures-fiche",
+   "chapter": "cm2-maths-mesures",
+   "title": "Mesures et conversions",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM2 — Mesures : longueurs, masses, capacités, aires (reconstitué)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Convertir des longueurs, des masses et des capacités avec un tableau.",
+    "Convertir des aires (m², ha).",
+    "Utiliser des mesures dans un calcul."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cm2-maths-mesures-01",
+    "cm2-maths-mesures-02",
+    "cm2-maths-mesures-03",
+    "cm2-maths-mesures-04",
+    "cm2-maths-mesures-05",
+    "cm2-maths-mesures-06"
+   ],
+   "selfCheck": [
+    "cm2-maths-mesures-q1",
+    "cm2-maths-mesures-q2",
+    "cm2-maths-mesures-q3",
+    "cm2-maths-mesures-q4",
+    "cm2-maths-mesures-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier les conversions d'aires et l'usage du quintal dans les programmes camerounais."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Pour **comparer** ou **calculer**, il faut des mesures dans la **même unité**. Le système métrique est décimal : chaque unité vaut 10 fois la suivante pour les longueurs, les masses et les capacités."
+    },
+    {
+     "type": "illustration",
+     "caption": "Le tableau des longueurs : km, hm, dam, m, dm, cm, mm.",
+     "alt": "Un tableau de sept cases : km, hm, dam, m, dm, cm, mm. Une phrase rappelle que 3,5 km valent 3 500 m.",
+     "figure": {
+      "kind": "shapes",
+      "w": 460,
+      "h": 140,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 30,
+        "w": 60,
+        "h": 40,
+        "stroke": "ink",
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 50,
+        "y": 56,
+        "text": "km",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 80,
+        "y": 30,
+        "w": 60,
+        "h": 40,
+        "stroke": "ink",
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 56,
+        "text": "hm",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 140,
+        "y": 30,
+        "w": 60,
+        "h": 40,
+        "stroke": "ink",
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 56,
+        "text": "dam",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 200,
+        "y": 30,
+        "w": 60,
+        "h": 40,
+        "stroke": "ink",
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 56,
+        "text": "m",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 260,
+        "y": 30,
+        "w": 60,
+        "h": 40,
+        "stroke": "ink",
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 56,
+        "text": "dm",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 320,
+        "y": 30,
+        "w": 60,
+        "h": 40,
+        "stroke": "ink",
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 56,
+        "text": "cm",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 380,
+        "y": 30,
+        "w": 60,
+        "h": 40,
+        "stroke": "ink",
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 410,
+        "y": 56,
+        "text": "mm",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 100,
+        "text": "Chaque case vaut 10 fois la suivante",
+        "size": 13,
+        "color": "grey",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 125,
+        "text": "3,5 km = 3 500 m (on décale la virgule de 3 rangs)",
+        "size": 14,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les unités",
+     "md": "- Longueurs : 1 km = 1 000 m ; 1 m = 100 cm ; 1 cm = 10 mm.\n- Masses : 1 t = 1 000 kg ; 1 quintal = 100 kg ; 1 kg = 1 000 g.\n- Capacités : 1 L = 10 dL = 100 cL = 1 000 mL.\n- Aires : 1 m² = 100 dm² ; 1 hectare (ha) = 10 000 m² ; 1 km² = 100 ha."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : convertir",
+     "statement": "Convertis 2 450 g en kg et 75 cL en L.",
+     "steps": [
+      {
+       "md": "1 kg = 1 000 g : 2 450 ÷ 1 000 = 2,45 kg."
+      },
+      {
+       "md": "1 L = 100 cL : 75 ÷ 100 = 0,75 L."
+      }
+     ],
+     "answer": "**2 450 g = 2,45 kg ; 75 cL = 0,75 L.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : un champ",
+     "statement": "Un champ de cacao fait 4 ha. Quelle est son aire en m² ?",
+     "steps": [
+      {
+       "md": "1 ha = 10 000 m²."
+      },
+      {
+       "md": "4 × 10 000 = 40 000."
+      }
+     ],
+     "answer": "**4 ha = 40 000 m².**"
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Pièges",
+     "md": "- Pour les aires, on passe d'une unité à la suivante en multipliant par **100** (pas 10).\n- Ne pas additionner des m et des cm sans convertir : 2 m + 50 cm = 250 cm = 2,5 m.\n- Une tonne vaut 1 000 kg et le quintal 100 kg."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-mesures-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-mesures-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-mesures-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-mesures-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-mesures-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-mesures-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le km² vaut 100 hectares."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "difficulty": 1,
+   "prompt": "Convertis 3,5 km en m.",
+   "answer": 3500,
+   "tolerance": 0,
+   "explanation": "3,5 × 1 000 = 3 500.",
+   "unit": "m",
+   "id": "cm2-maths-mesures-01",
+   "chapter": "cm2-maths-mesures",
+   "tier": "application",
+   "lesson": "cm2-maths-mesures-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 1,
+   "prompt": "Convertis 4 500 g en kg.",
+   "answer": 4.5,
+   "tolerance": 0,
+   "explanation": "4 500 ÷ 1 000 = 4,5.",
+   "unit": "kg",
+   "id": "cm2-maths-mesures-02",
+   "chapter": "cm2-maths-mesures",
+   "tier": "application",
+   "lesson": "cm2-maths-mesures-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 1,
+   "prompt": "Convertis 2,5 L en cL.",
+   "answer": 250,
+   "tolerance": 0,
+   "explanation": "1 L = 100 cL : 2,5 × 100 = 250.",
+   "unit": "cL",
+   "id": "cm2-maths-mesures-03",
+   "chapter": "cm2-maths-mesures",
+   "tier": "application",
+   "lesson": "cm2-maths-mesures-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 2,
+   "prompt": "Convertis 3 ha en m².",
+   "answer": 30000,
+   "tolerance": 0,
+   "explanation": "3 × 10 000 = 30 000.",
+   "unit": "m²",
+   "id": "cm2-maths-mesures-04",
+   "chapter": "cm2-maths-mesures",
+   "tier": "approfondissement",
+   "lesson": "cm2-maths-mesures-fiche",
+   "points": 2,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 2,
+   "prompt": "Ngono achète 2 m de tissu et 75 cm de ruban. Quelle longueur totale en cm ?",
+   "answer": 275,
+   "tolerance": 0,
+   "explanation": "2 m = 200 cm ; 200 + 75 = 275.",
+   "unit": "cm",
+   "id": "cm2-maths-mesures-05",
+   "chapter": "cm2-maths-mesures",
+   "tier": "approfondissement",
+   "lesson": "cm2-maths-mesures-fiche",
+   "points": 2,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "problem",
+   "difficulty": 2,
+   "prompt": "Au marché de Maroua, un commerçant vend des sacs de mil de 50 kg.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Combien de kg dans 3 sacs ?",
+     "answer": 150,
+     "tolerance": 0,
+     "explanation": "3 × 50 = 150.",
+     "unit": "kg",
+     "points": 1,
+     "id": "cm2-maths-mesures-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Convertis cette masse en quintaux (1 quintal = 100 kg).",
+     "answer": 1.5,
+     "tolerance": 0,
+     "explanation": "150 ÷ 100 = 1,5.",
+     "unit": "quintal",
+     "points": 1,
+     "id": "cm2-maths-mesures-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Il verse ces 3 sacs dans un camion qui peut porter 2 t. Quelle masse (en kg) peut-il encore charger ?",
+     "answer": 1850,
+     "tolerance": 0,
+     "explanation": "2 t = 2 000 kg ; 2 000 − 150 = 1 850.",
+     "unit": "kg",
+     "points": 2,
+     "id": "cm2-maths-mesures-06-c"
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "id": "cm2-maths-mesures-06",
+   "chapter": "cm2-maths-mesures",
+   "tier": "examen",
+   "lesson": "cm2-maths-mesures-fiche",
+   "points": 4,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "1,2 km égalent…",
+   "choices": [
+    "120 m",
+    "12 000 m",
+    "1 200 m",
+    "12 m"
+   ],
+   "answer": 2,
+   "explanation": "1,2 × 1 000 = 1 200.",
+   "id": "cm2-maths-mesures-q1",
+   "chapter": "cm2-maths-mesures",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-mesures-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Combien de grammes dans 3,5 kg ?",
+   "choices": [
+    "350 g",
+    "3 500 g",
+    "35 g",
+    "35 000 g"
+   ],
+   "answer": 1,
+   "explanation": "3,5 × 1 000 = 3 500.",
+   "id": "cm2-maths-mesures-q2",
+   "chapter": "cm2-maths-mesures",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-mesures-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "1 hectare, c'est…",
+   "choices": [
+    "100 m²",
+    "1 000 m²",
+    "100 000 m²",
+    "10 000 m²"
+   ],
+   "answer": 3,
+   "explanation": "1 ha = 1 hm² = 10 000 m².",
+   "id": "cm2-maths-mesures-q3",
+   "chapter": "cm2-maths-mesures",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-mesures-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Quelle masse vaut 1 tonne ?",
+   "choices": [
+    "100 kg",
+    "1 000 kg",
+    "10 kg",
+    "10 000 kg"
+   ],
+   "answer": 1,
+   "explanation": "1 t = 1 000 kg.",
+   "id": "cm2-maths-mesures-q4",
+   "chapter": "cm2-maths-mesures",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-mesures-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Quelle unité mesure une capacité ?",
+   "choices": [
+    "le gramme",
+    "le mètre",
+    "le mètre carré",
+    "le litre"
+   ],
+   "answer": 3,
+   "explanation": "La capacité se mesure en litres.",
+   "id": "cm2-maths-mesures-q5",
+   "chapter": "cm2-maths-mesures",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-mesures-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  }
+ ]
+}

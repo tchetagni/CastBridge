@@ -1,0 +1,415 @@
+{
+ "chapter": "cm2-maths-fractions",
+ "lessons": [
+  {
+   "id": "cm2-maths-fractions-fiche",
+   "chapter": "cm2-maths-fractions",
+   "title": "Les fractions",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM2 — Numération : fractions (reconstitué)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Lire et écrire une fraction ; placer une fraction.",
+    "Calculer une fraction d'une quantité.",
+    "Comparer et additionner des fractions de même dénominateur ; passer d'une fraction décimale à un décimal."
+   ],
+   "prerequisites": [
+    "cm2-maths-decimaux-fiche"
+   ],
+   "exercises": [
+    "cm2-maths-fractions-01",
+    "cm2-maths-fractions-02",
+    "cm2-maths-fractions-03",
+    "cm2-maths-fractions-04",
+    "cm2-maths-fractions-05",
+    "cm2-maths-fractions-06"
+   ],
+   "selfCheck": [
+    "cm2-maths-fractions-q1",
+    "cm2-maths-fractions-q2",
+    "cm2-maths-fractions-q3",
+    "cm2-maths-fractions-q4",
+    "cm2-maths-fractions-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que les fractions de dénominateurs différents (hors dixièmes, centièmes, moitié, quart) ne sont pas exigées au CM2."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Une **fraction** exprime un ou plusieurs partages égaux. Dans $\\frac{3}{4}$, le dénominateur **4** dit en combien de parts égales on partage l'unité, le numérateur **3** dit combien de parts on prend."
+    },
+    {
+     "type": "illustration",
+     "caption": "Une bande partagée en 4 parts égales : 3 sont coloriées.",
+     "alt": "Un rectangle partagé en quatre cases égales. Les trois premières cases sont orange, la dernière est blanche.",
+     "figure": {
+      "kind": "shapes",
+      "w": 360,
+      "h": 130,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 20,
+        "w": 75,
+        "h": 60,
+        "stroke": "ink",
+        "fill": "lightorange"
+       },
+       {
+        "t": "rect",
+        "x": 95,
+        "y": 20,
+        "w": 75,
+        "h": 60,
+        "stroke": "ink",
+        "fill": "lightorange"
+       },
+       {
+        "t": "rect",
+        "x": 170,
+        "y": 20,
+        "w": 75,
+        "h": 60,
+        "stroke": "ink",
+        "fill": "lightorange"
+       },
+       {
+        "t": "rect",
+        "x": 245,
+        "y": 20,
+        "w": 75,
+        "h": 60,
+        "stroke": "ink",
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 105,
+        "text": "3 parts coloriées sur 4 : trois quarts",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Fraction d'une quantité",
+     "md": "Pour prendre $\\frac{a}{b}$ d'une quantité : on divise par **b**, puis on multiplie par **a**.\n\nExemple : les $\\frac{3}{4}$ de 20 : 20 ÷ 4 = 5 ; 5 × 3 = 15."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : fraction d'une quantité",
+     "statement": "Un sac de 48 kg de riz : on en vend les $\\frac{5}{8}$. Combien de kg vend-on ?",
+     "steps": [
+      {
+       "md": "On divise par 8 : 48 ÷ 8 = 6 kg (un huitième)."
+      },
+      {
+       "md": "On multiplie par 5 : 6 × 5 = 30 kg."
+      }
+     ],
+     "answer": "**On vend 30 kg.**"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Opérations simples",
+     "md": "- Même dénominateur : on additionne les numérateurs, le dénominateur ne change pas : $\\frac{2}{7} + \\frac{3}{7} = \\frac{5}{7}$.\n- Une fraction décimale a pour dénominateur 10, 100, 1 000 : $\\frac{7}{10} = 0,7$ ; $\\frac{35}{100} = 0,35$.\n- Si numérateur = dénominateur, la fraction vaut 1. Si le numérateur est plus grand, elle vaut plus que 1."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : comparer",
+     "statement": "Compare $\\frac{3}{5}$ et $\\frac{4}{5}$, puis $\\frac{7}{10}$ et 0,65.",
+     "steps": [
+      {
+       "md": "Même dénominateur : on compare les numérateurs. 3 < 4 donc $\\frac{3}{5} < \\frac{4}{5}$."
+      },
+      {
+       "md": "$\\frac{7}{10} = 0,7$ et 0,7 > 0,65."
+      }
+     ],
+     "answer": "**$\\frac{3}{5} < \\frac{4}{5}$ et $\\frac{7}{10} > 0,65$**"
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Pièges",
+     "md": "- On n'additionne pas les dénominateurs : $\\frac{1}{4}+\\frac{1}{4}=\\frac{2}{4}$, pas $\\frac{2}{8}$.\n- Plus le dénominateur est grand, plus les parts sont petites : $\\frac{1}{8}$ est plus petit que $\\frac{1}{4}$."
+    },
+    {
+     "type": "heading",
+     "text": "À toi de jouer"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-fractions-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-fractions-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-fractions-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-fractions-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-fractions-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cm2-maths-fractions-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Une fraction peut aussi s'écrire comme une division : $\\frac{3}{4}$ = 3 ÷ 4 = 0,75."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Dans $\\frac{5}{9}$, quel est le dénominateur ?",
+   "choices": [
+    "5",
+    "9",
+    "14",
+    "4"
+   ],
+   "answer": 1,
+   "explanation": "Le dénominateur est le nombre du bas : il dit en combien de parts on partage.",
+   "id": "cm2-maths-fractions-01",
+   "chapter": "cm2-maths-fractions",
+   "tier": "application",
+   "lesson": "cm2-maths-fractions-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 1,
+   "prompt": "Calcule les $\\frac{1}{4}$ de 36.",
+   "answer": 9,
+   "tolerance": 0,
+   "explanation": "36 ÷ 4 = 9.",
+   "id": "cm2-maths-fractions-02",
+   "chapter": "cm2-maths-fractions",
+   "tier": "application",
+   "lesson": "cm2-maths-fractions-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "truefalse",
+   "difficulty": 1,
+   "prompt": "Vrai ou faux : $\\frac{3}{10} = 0,3$.",
+   "answer": true,
+   "explanation": "Trois dixièmes s'écrivent 0,3.",
+   "id": "cm2-maths-fractions-03",
+   "chapter": "cm2-maths-fractions",
+   "tier": "application",
+   "lesson": "cm2-maths-fractions-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 2,
+   "prompt": "Calcule les $\\frac{3}{5}$ de 45 mangues (nombre de mangues).",
+   "answer": 27,
+   "tolerance": 0,
+   "explanation": "45 ÷ 5 = 9 puis 9 × 3 = 27.",
+   "id": "cm2-maths-fractions-04",
+   "chapter": "cm2-maths-fractions",
+   "tier": "approfondissement",
+   "lesson": "cm2-maths-fractions-fiche",
+   "points": 2,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "matching",
+   "difficulty": 2,
+   "prompt": "Associe chaque fraction à son écriture décimale.",
+   "pairs": [
+    [
+     "$\\frac{1}{2}$",
+     "0,5"
+    ],
+    [
+     "$\\frac{1}{4}$",
+     "0,25"
+    ],
+    [
+     "$\\frac{3}{10}$",
+     "0,3"
+    ],
+    [
+     "$\\frac{7}{100}$",
+     "0,07"
+    ]
+   ],
+   "explanation": "½ = 0,5 ; ¼ = 0,25 ; 3/10 = 0,3 ; 7/100 = 0,07.",
+   "id": "cm2-maths-fractions-05",
+   "chapter": "cm2-maths-fractions",
+   "tier": "approfondissement",
+   "lesson": "cm2-maths-fractions-fiche",
+   "points": 2,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "problem",
+   "difficulty": 2,
+   "prompt": "Amina a 4 000 FCFA. Elle en dépense les $\\frac{3}{8}$ pour du plantain, puis $\\frac{1}{8}$ pour du sel et du piment.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Combien de FCFA dépense-t-elle pour le plantain ?",
+     "answer": 1500,
+     "tolerance": 0,
+     "explanation": "4 000 ÷ 8 = 500 ; 500 × 3 = 1 500.",
+     "unit": "FCFA",
+     "points": 1,
+     "id": "cm2-maths-fractions-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle fraction de son argent a-t-elle dépensée en tout ? Donne le numérateur sur 8.",
+     "answer": 4,
+     "tolerance": 0,
+     "explanation": "$\\frac{3}{8}+\\frac{1}{8}=\\frac{4}{8}$ : le numérateur est 4.",
+     "points": 1,
+     "id": "cm2-maths-fractions-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Combien de FCFA lui reste-t-il ?",
+     "answer": 2000,
+     "tolerance": 0,
+     "explanation": "4 000 − 1 500 − 500 = 2 000 : elle a dépensé la moitié.",
+     "unit": "FCFA",
+     "points": 1,
+     "id": "cm2-maths-fractions-06-c"
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "id": "cm2-maths-fractions-06",
+   "chapter": "cm2-maths-fractions",
+   "tier": "examen",
+   "lesson": "cm2-maths-fractions-fiche",
+   "points": 3,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Quelle fraction est égale à 1 ?",
+   "choices": [
+    "$\\frac{6}{6}$",
+    "$\\frac{1}{6}$",
+    "$\\frac{6}{1}$",
+    "$\\frac{0}{6}$"
+   ],
+   "answer": 0,
+   "explanation": "Quand le numérateur est égal au dénominateur, la fraction vaut 1.",
+   "id": "cm2-maths-fractions-q1",
+   "chapter": "cm2-maths-fractions",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-fractions-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Combien font $\\frac{2}{9}+\\frac{5}{9}$ ?",
+   "choices": [
+    "$\\frac{7}{18}$",
+    "$\\frac{10}{9}$",
+    "$\\frac{7}{9}$",
+    "$\\frac{3}{9}$"
+   ],
+   "answer": 2,
+   "explanation": "On additionne les numérateurs : 2 + 5 = 7 ; le dénominateur reste 9.",
+   "id": "cm2-maths-fractions-q2",
+   "chapter": "cm2-maths-fractions",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-fractions-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Quel nombre décimal est égal à $\\frac{9}{100}$ ?",
+   "choices": [
+    "0,9",
+    "0,09",
+    "9,100",
+    "0,009"
+   ],
+   "answer": 1,
+   "explanation": "Neuf centièmes : 0,09.",
+   "id": "cm2-maths-fractions-q3",
+   "chapter": "cm2-maths-fractions",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-fractions-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Laquelle est la plus grande ?",
+   "choices": [
+    "$\\frac{1}{6}$",
+    "$\\frac{3}{6}$",
+    "$\\frac{4}{6}$",
+    "$\\frac{5}{6}$"
+   ],
+   "answer": 3,
+   "explanation": "Même dénominateur : le plus grand numérateur donne la plus grande fraction.",
+   "id": "cm2-maths-fractions-q4",
+   "chapter": "cm2-maths-fractions",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-fractions-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "prompt": "Les $\\frac{2}{3}$ de 30 valent…",
+   "choices": [
+    "10",
+    "20",
+    "15",
+    "45"
+   ],
+   "answer": 1,
+   "explanation": "30 ÷ 3 = 10 puis 10 × 2 = 20.",
+   "id": "cm2-maths-fractions-q5",
+   "chapter": "cm2-maths-fractions",
+   "tier": "autoeval",
+   "lesson": "cm2-maths-fractions-fiche",
+   "points": 1,
+   "source": "Exercice original"
+  }
+ ]
+}
