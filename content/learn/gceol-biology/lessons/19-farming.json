@@ -1,0 +1,605 @@
+{
+ "chapter": "gceol-biology-farming",
+ "lessons": [
+  {
+   "id": "gceol-biology-soil",
+   "title": "Soil, fertility and farming",
+   "minutes": 30,
+   "programRef": "GCE O Level Biology — Soil; fertility; nitrogen cycle; farming methods (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe the components of soil and the types of soil particle.",
+    "Explain soil fertility, the nitrogen cycle and the role of fertilisers.",
+    "Describe good farming practices: crop rotation, mulching and fallow."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-biology-farming-e01",
+    "gceol-biology-farming-e02",
+    "gceol-biology-farming-e03",
+    "gceol-biology-farming-e04",
+    "gceol-biology-farming-e05",
+    "gceol-biology-farming-e06"
+   ],
+   "selfCheck": [
+    "gceol-biology-soil-q1",
+    "gceol-biology-soil-q2",
+    "gceol-biology-soil-q3",
+    "gceol-biology-soil-q4",
+    "gceol-biology-soil-q5"
+   ],
+   "reviewNotes": [
+    "Loam composition (45/5/25/25) is a common approximation; check the syllabus.",
+    "Nitrogen cycle is simplified (ammonia, nitrite steps omitted).",
+    "Soil sample numbers are invented for practice.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Soil",
+     "md": "Soil is a mixture of **mineral particles** (rock fragments: **sand**, silt, **clay**), **organic matter** (humus from dead plants and animals), **water**, **air** and living organisms (earthworms, bacteria, fungi). **Loam**, a mixture of sand, silt and clay with humus, is best for most crops: it holds water yet drains well and contains air."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 460,
+      "h": 240,
+      "bars": [
+       {
+        "label": "mineral particles",
+        "value": 45,
+        "color": "brown"
+       },
+       {
+        "label": "organic matter (humus)",
+        "value": 5,
+        "color": "green"
+       },
+       {
+        "label": "water",
+        "value": 25,
+        "color": "blue"
+       },
+       {
+        "label": "air",
+        "value": 25,
+        "color": "lightblue"
+       }
+      ],
+      "unit": "% by volume in a typical loam (approximate)"
+     },
+     "caption": "Composition of a typical loam (varies with the soil).",
+     "alt": "A bar chart: mineral particles about 45 percent, organic matter 5 percent, water 25 percent and air 25 percent."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Sand and clay",
+     "md": "- **Sandy soil**: large particles, drains quickly, dry, low in nutrients, easy to dig.\n- **Clay soil**: tiny particles, holds water and can become water-logged, sticky and hard to dig, rich in minerals.\n- **Humus** improves structure, holds water and releases mineral ions as it is decomposed."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Soil fertility and the nitrogen cycle",
+     "md": "Plants need **nitrates** (nitrogen), **phosphates** and **potassium**. Nitrogen gas in the air cannot be used by plants. **Nitrogen-fixing bacteria** (free in the soil, or in the **root nodules** of legumes such as beans and groundnuts) change it into nitrogen compounds; **nitrifying bacteria** make nitrates. **Decomposers** release ammonium from dead matter; **denitrifying bacteria** return some nitrogen to the air."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 126,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 40.0,
+        "w": 65.0,
+        "h": 46,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightblue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 42.5,
+        "y": 60.0,
+        "text": "Nitrogen gas",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 42.5,
+        "y": 74.0,
+        "text": "in air",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 78.0,
+        "y1": 63.0,
+        "x2": 86.0,
+        "y2": 63.0,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 89.0,
+        "y": 40.0,
+        "w": 65.0,
+        "h": 46,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgreen",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 121.5,
+        "y": 60.0,
+        "text": "Nitrogen-fixing",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 121.5,
+        "y": 74.0,
+        "text": "bacteria",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 157.0,
+        "y1": 63.0,
+        "x2": 165.0,
+        "y2": 63.0,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 168.0,
+        "y": 40.0,
+        "w": 65.0,
+        "h": 46,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightorange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 200.5,
+        "y": 60.0,
+        "text": "Nitrates",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200.5,
+        "y": 74.0,
+        "text": "in soil",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 236.0,
+        "y1": 63.0,
+        "x2": 244.0,
+        "y2": 63.0,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 247.0,
+        "y": 40.0,
+        "w": 65.0,
+        "h": 46,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightyellow",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 279.5,
+        "y": 60.0,
+        "text": "Plants take",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 279.5,
+        "y": 74.0,
+        "text": "up nitrates",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 315.0,
+        "y1": 63.0,
+        "x2": 323.0,
+        "y2": 63.0,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 326.0,
+        "y": 40.0,
+        "w": 65.0,
+        "h": 46,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgrey",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 358.5,
+        "y": 60.0,
+        "text": "Animals eat",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 358.5,
+        "y": 74.0,
+        "text": "plants",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 394.0,
+        "y1": 63.0,
+        "x2": 402.0,
+        "y2": 63.0,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 405.0,
+        "y": 40.0,
+        "w": 65.0,
+        "h": 46,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightblue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 437.5,
+        "y": 60.0,
+        "text": "Decomposers",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 437.5,
+        "y": 74.0,
+        "text": "return nitrates",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A simplified nitrogen cycle.",
+     "alt": "Six boxes: nitrogen gas in air, nitrogen-fixing bacteria, nitrates in soil, plants take up nitrates, animals eat plants, decomposers return nitrates."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Keeping soil fertile",
+     "md": "- **Manure and compost** (organic fertilisers) add humus and slowly release minerals; **chemical fertilisers** (NPK) give fast nutrients but may wash into rivers.\n- **Crop rotation** including legumes restores nitrogen.\n- **Mulching** (a layer of leaves or straw) reduces evaporation and erosion; **fallow** lets the soil recover.\n- **Contour planting and terraces** (on hills) and keeping cover reduce **erosion**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Clay soil holds the *most* water; sandy soil drains fastest.\n- Plants cannot use nitrogen gas directly; they need nitrates.\n- Chemical fertiliser is not 'bad' in itself: the problem is applying too much, which pollutes rivers."
+    },
+    {
+     "type": "example",
+     "title": "Water content of a soil sample",
+     "statement": "A 50 g sample of fresh soil is dried in an oven until its mass stays constant at 40 g. Calculate the percentage of water.",
+     "steps": [
+      "Mass of water lost = 50 − 40 = 10 g.",
+      "Percentage = 10 ÷ 50 × 100 = 20 %."
+     ],
+     "answer": "20 % water"
+    },
+    {
+     "type": "example",
+     "title": "Air in soil",
+     "statement": "100 cm³ of dry soil is poured into 100 cm³ of water. The final volume is 180 cm³. Find the volume and percentage of air in the soil.",
+     "steps": [
+      "Expected total without air: 200 cm³; observed: 180 cm³.",
+      "Air displaced by water = 200 − 180 = 20 cm³, so 20 ÷ 100 × 100 = 20 % of the soil volume."
+     ],
+     "answer": "20 cm³, 20 %"
+    },
+    {
+     "type": "exercise",
+     "ref": "gceol-biology-farming-e01"
+    }
+   ],
+   "chapter": "gceol-biology-farming"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-biology-farming-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-biology-soil",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which soil particles are the smallest?",
+   "choices": [
+    "sand",
+    "gravel",
+    "clay",
+    "stones"
+   ],
+   "answer": 2,
+   "explanation": "Clay particles are tiny.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-farming"
+  },
+  {
+   "id": "gceol-biology-farming-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-biology-soil",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A 25 g soil sample loses 5 g on drying. What is the percentage of water?",
+   "answer": 20,
+   "tolerance": 0.1,
+   "unit": "%",
+   "explanation": "5 ÷ 25 × 100 = 20 %.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-farming"
+  },
+  {
+   "id": "gceol-biology-farming-e03",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "gceol-biology-soil",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each term with its meaning.",
+   "pairs": [
+    [
+     "humus",
+     "decayed organic matter"
+    ],
+    [
+     "legume",
+     "plant with nitrogen-fixing root nodules"
+    ],
+    [
+     "mulching",
+     "covering soil with leaves or straw"
+    ],
+    [
+     "fallow",
+     "leaving land to recover"
+    ]
+   ],
+   "explanation": "Standard definitions.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceol-biology-farming"
+  },
+  {
+   "id": "gceol-biology-farming-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-soil",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which crop is useful in crop rotation to add nitrogen to the soil?",
+   "choices": [
+    "tomato",
+    "maize",
+    "groundnut",
+    "cassava"
+   ],
+   "answer": 2,
+   "explanation": "Legumes such as groundnut have nitrogen-fixing bacteria in their root nodules.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-biology-farming"
+  },
+  {
+   "id": "gceol-biology-farming-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-soil",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain two advantages of using manure instead of chemical fertiliser.",
+   "model": "Manure adds humus, improving soil structure and water holding; it releases nutrients slowly and is less likely to be washed into rivers; it is cheap and recycles waste.",
+   "rubric": [
+    "1 mark each advantage, maximum 2, with a reason"
+   ],
+   "explanation": "Manure adds humus, improving soil structure and water holding; it releases nutrients slowly and is less likely to be washed into rivers; it is cheap and recycles waste.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceol-biology-farming"
+  },
+  {
+   "id": "gceol-biology-farming-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-biology-soil",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A farmer in Bamenda has a steep field where heavy rain washes away the topsoil.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "This process is called:",
+     "choices": [
+      "transpiration",
+      "germination",
+      "fertilisation",
+      "soil erosion"
+     ],
+     "answer": 3,
+     "explanation": "Soil is washed away.",
+     "id": "gceol-biology-farming-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which practice reduces it?",
+     "choices": [
+      "burning the field",
+      "ploughing down the slope",
+      "removing all plants",
+      "planting along the contours or in terraces"
+     ],
+     "answer": 3,
+     "explanation": "They slow down the water.",
+     "id": "gceol-biology-farming-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explain why erosion reduces crop yield.",
+     "model": "Topsoil contains humus and most minerals; when it is lost the soil is less fertile and holds less water.",
+     "rubric": [
+      "1 mark: topsoil lost",
+      "1 mark: less fertile / water"
+     ],
+     "explanation": "Topsoil contains humus and most minerals; when it is lost the soil is less fertile and holds less water.",
+     "id": "gceol-biology-farming-e06-c"
+    }
+   ],
+   "chapter": "gceol-biology-farming"
+  },
+  {
+   "id": "gceol-biology-soil-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-soil",
+   "prompt": "Nitrogen-fixing bacteria live in the root nodules of:",
+   "choices": [
+    "cereals",
+    "bananas",
+    "legumes",
+    "cassava"
+   ],
+   "answer": 2,
+   "explanation": "Beans and groundnuts.",
+   "chapter": "gceol-biology-farming"
+  },
+  {
+   "id": "gceol-biology-soil-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-soil",
+   "prompt": "Humus is:",
+   "choices": [
+    "decayed organic matter",
+    "rock",
+    "sand",
+    "clay"
+   ],
+   "answer": 0,
+   "explanation": "Dead plants and animals.",
+   "chapter": "gceol-biology-farming"
+  },
+  {
+   "id": "gceol-biology-soil-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-soil",
+   "prompt": "Which soil drains fastest?",
+   "choices": [
+    "sandy soil",
+    "loam only",
+    "peat",
+    "clay soil"
+   ],
+   "answer": 0,
+   "explanation": "Large particles.",
+   "chapter": "gceol-biology-farming"
+  },
+  {
+   "id": "gceol-biology-soil-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-soil",
+   "prompt": "Mulch helps by:",
+   "choices": [
+    "reducing evaporation",
+    "removing nitrates",
+    "killing bacteria",
+    "making clay"
+   ],
+   "answer": 0,
+   "explanation": "A cover of leaves.",
+   "chapter": "gceol-biology-farming"
+  },
+  {
+   "id": "gceol-biology-soil-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-soil",
+   "prompt": "Plants absorb nitrogen mainly as:",
+   "choices": [
+    "nitrates",
+    "ammonia gas",
+    "nitric acid",
+    "nitrogen gas"
+   ],
+   "answer": 0,
+   "explanation": "Nitrate ions.",
+   "chapter": "gceol-biology-farming"
+  }
+ ]
+}

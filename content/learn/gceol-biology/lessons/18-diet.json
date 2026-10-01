@@ -1,0 +1,1191 @@
+{
+ "chapter": "gceol-biology-diet",
+ "lessons": [
+  {
+   "id": "gceol-biology-food-tests",
+   "title": "Food classes, food tests and a balanced diet",
+   "minutes": 30,
+   "programRef": "GCE O Level Biology — Food tests; balanced diet; malnutrition (to be checked against the official syllabus; for health review)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "List the food classes, their sources and functions.",
+    "Describe the tests for starch, reducing sugars, protein, fat and vitamin C.",
+    "Explain what a balanced diet is and calculate the energy in a meal."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-biology-diet-e01",
+    "gceol-biology-diet-e02",
+    "gceol-biology-diet-e03",
+    "gceol-biology-diet-e04",
+    "gceol-biology-diet-e05",
+    "gceol-biology-diet-e06"
+   ],
+   "selfCheck": [
+    "gceol-biology-food-tests-q1",
+    "gceol-biology-food-tests-q2",
+    "gceol-biology-food-tests-q3",
+    "gceol-biology-food-tests-q4",
+    "gceol-biology-food-tests-q5"
+   ],
+   "reviewNotes": [
+    "Energy values of 17 and 37 kJ/g are the common approximate textbook values; check which the syllabus uses (some use 16/17/37).",
+    "Food examples are indicative of Cameroonian diets; nutrient content varies.",
+    "HEALTH CONTENT: nutrition advice to be reviewed by a nutritionist.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Food classes, sources and uses",
+     "md": "- **Carbohydrates** (cassava, yam, plantain, maize, rice): energy.\n- **Proteins** (beans, fish, eggs, meat, groundnuts): growth and repair.\n- **Fats and oils** (palm oil, groundnut oil, butter): energy store, insulation.\n- **Vitamins** (fruits, vegetables): e.g. **C** in oranges, **A** in carrots and red palm oil, **D** from sunlight and fish.\n- **Minerals**: **calcium** (bones, teeth, milk, small fish), **iron** (red blood cells, meat, beans, green leaves).\n- **Fibre** (vegetables, whole grains): helps peristalsis. **Water**: solvent, transport."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 198,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 10,
+        "w": 223.0,
+        "h": 50,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightblue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 121.5,
+        "y": 25.0,
+        "text": "STARCH",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 121.5,
+        "y": 39.0,
+        "text": "add iodine solution",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 121.5,
+        "y": 53.0,
+        "text": "brown to blue-black",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 247.0,
+        "y": 10,
+        "w": 223.0,
+        "h": 50,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgreen",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 358.5,
+        "y": 25.0,
+        "text": "REDUCING SUGAR",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 358.5,
+        "y": 39.0,
+        "text": "Benedict's, heat",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 358.5,
+        "y": 53.0,
+        "text": "blue to green/orange/red",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 74,
+        "w": 223.0,
+        "h": 50,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightorange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 121.5,
+        "y": 89.0,
+        "text": "PROTEIN",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 121.5,
+        "y": 103.0,
+        "text": "Biuret (NaOH + CuSO₄)",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 121.5,
+        "y": 117.0,
+        "text": "blue to purple",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 247.0,
+        "y": 74,
+        "w": 223.0,
+        "h": 50,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightyellow",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 358.5,
+        "y": 89.0,
+        "text": "FAT",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 358.5,
+        "y": 103.0,
+        "text": "ethanol, then water",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 358.5,
+        "y": 117.0,
+        "text": "cloudy white emulsion",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 138,
+        "w": 223.0,
+        "h": 50,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgrey",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 121.5,
+        "y": 153.0,
+        "text": "VITAMIN C",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 121.5,
+        "y": 167.0,
+        "text": "DCPIP solution",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 121.5,
+        "y": 181.0,
+        "text": "blue to colourless",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 247.0,
+        "y": 138,
+        "w": 223.0,
+        "h": 50,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightblue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 358.5,
+        "y": 153.0,
+        "text": "WATER",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 358.5,
+        "y": 167.0,
+        "text": "cobalt chloride paper",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 358.5,
+        "y": 181.0,
+        "text": "blue to pink",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Summary of food tests and positive results.",
+     "alt": "Six boxes: iodine gives blue-black for starch; Benedict's with heat gives green to red for reducing sugar; Biuret gives purple for protein; ethanol then water gives a cloudy emulsion for fat; DCPIP is decolourised by vitamin C; cobalt chloride paper turns pink for water."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Doing the tests safely",
+     "md": "Crush or dissolve the food in water first. For **Benedict's** test, heat in a water bath (not over a flame); the colour goes blue → green → yellow → orange → **brick-red** with more sugar. **Sucrose** is not a reducing sugar. Wear eye protection with sodium hydroxide and handle hot water carefully. Use a negative control (water) to compare."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Balanced diet",
+     "md": "A **balanced diet** contains **all the food classes** (with fibre and water) in the **right amounts** for the person's age, sex, activity and condition. Growing children, pregnant and breast-feeding women need more protein, calcium and iron; people doing heavy work need more energy.\n\nFat gives about twice as much energy per gram as carbohydrate or protein."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Benedict's test does not work on starch or on sucrose until it is broken down.\n- A positive protein (Biuret) colour is purple/violet, not blue; blue means *no* protein.\n- Water is a nutrient even though it gives no energy."
+    },
+    {
+     "type": "example",
+     "title": "Energy in a meal",
+     "statement": "Use 17 kJ per g for carbohydrate and protein and 37 kJ per g for fat. A meal of rice and fish stew has 60 g carbohydrate, 20 g protein and 15 g fat. Calculate its energy.",
+     "steps": [
+      "Carbohydrate: 60 × 17 = 1020 kJ.",
+      "Protein: 20 × 17 = 340 kJ; fat: 15 × 37 = 555 kJ.",
+      "Total = 1020 + 340 + 555 = 1915 kJ."
+     ],
+     "answer": "1915 kJ"
+    },
+    {
+     "type": "example",
+     "title": "Which test?",
+     "statement": "A student mashes groundnuts on filter paper and a translucent spot remains. A second sample turns purple with Biuret. What do the results show?",
+     "steps": [
+      "The translucent grease spot shows **fat** (oil) is present.",
+      "A purple colour with Biuret shows **protein**."
+     ],
+     "answer": "Groundnuts contain fat and protein."
+    },
+    {
+     "type": "exercise",
+     "ref": "gceol-biology-diet-e01"
+    }
+   ],
+   "chapter": "gceol-biology-diet"
+  },
+  {
+   "id": "gceol-biology-deficiency",
+   "title": "Malnutrition and deficiency diseases",
+   "minutes": 25,
+   "programRef": "GCE O Level Biology — Food tests; balanced diet; malnutrition (to be checked against the official syllabus; for health review)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define malnutrition and name deficiency diseases with their causes.",
+    "Suggest foods that prevent each deficiency.",
+    "Describe the health effects of eating too much."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-biology-diet-e07",
+    "gceol-biology-diet-e08",
+    "gceol-biology-diet-e09",
+    "gceol-biology-diet-e10",
+    "gceol-biology-diet-e11",
+    "gceol-biology-diet-e12"
+   ],
+   "selfCheck": [
+    "gceol-biology-deficiency-q1",
+    "gceol-biology-deficiency-q2",
+    "gceol-biology-deficiency-q3",
+    "gceol-biology-deficiency-q4",
+    "gceol-biology-deficiency-q5"
+   ],
+   "reviewNotes": [
+    "HEALTH CONTENT: must be reviewed by a nutritionist or health worker; no medical advice is given.",
+    "Daily energy need 10 000 kJ is an invented round figure for practice.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Malnutrition",
+     "md": "**Malnutrition** is a diet that does not contain the right amounts of the food classes: too little (undernutrition and deficiency diseases) or too much (obesity). Poverty, lack of knowledge, war, drought and illness all contribute."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 162,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 10,
+        "w": 144.0,
+        "h": 64,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightorange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 82.0,
+        "y": 32.0,
+        "text": "KWASHIORKOR",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 82.0,
+        "y": 46.0,
+        "text": "protein deficiency",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 82.0,
+        "y": 60.0,
+        "text": "swollen belly, thin limbs",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 168.0,
+        "y": 10,
+        "w": 144.0,
+        "h": 64,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightyellow",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 32.0,
+        "text": "MARASMUS",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 46.0,
+        "text": "lack of energy food",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 60.0,
+        "text": "very thin, weak",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 326.0,
+        "y": 10,
+        "w": 144.0,
+        "h": 64,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightblue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 398.0,
+        "y": 32.0,
+        "text": "RICKETS",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 398.0,
+        "y": 46.0,
+        "text": "vitamin D / calcium",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 398.0,
+        "y": 60.0,
+        "text": "soft bones, bow legs",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 88,
+        "w": 144.0,
+        "h": 64,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgreen",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 82.0,
+        "y": 110.0,
+        "text": "SCURVY",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 82.0,
+        "y": 124.0,
+        "text": "vitamin C deficiency",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 82.0,
+        "y": 138.0,
+        "text": "bleeding gums, slow healing",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 168.0,
+        "y": 88,
+        "w": 144.0,
+        "h": 64,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "pink",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 110.0,
+        "text": "ANAEMIA",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 124.0,
+        "text": "iron deficiency",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 138.0,
+        "text": "pale, tired",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 326.0,
+        "y": 88,
+        "w": 144.0,
+        "h": 64,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgrey",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 398.0,
+        "y": 110.0,
+        "text": "GOITRE",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 398.0,
+        "y": 124.0,
+        "text": "iodine deficiency",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 398.0,
+        "y": 138.0,
+        "text": "swelling in the neck",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Common deficiency diseases.",
+     "alt": "Six boxes: kwashiorkor from lack of protein, marasmus from lack of energy food, rickets from lack of vitamin D or calcium, scurvy from lack of vitamin C, anaemia from lack of iron and goitre from lack of iodine."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Deficiency diseases",
+     "md": "- **Kwashiorkor**: lack of **protein**; swollen belly (fluid), thin limbs, in young children.\n- **Marasmus**: lack of all food, especially energy; extreme thinness.\n- **Rickets**: lack of **vitamin D** or calcium; soft bones and bow legs.\n- **Scurvy**: lack of **vitamin C**; bleeding gums and slow wound healing.\n- **Anaemia**: lack of **iron**; pale, tired, short of breath.\n- **Goitre**: lack of **iodine**; swelling of the neck (thyroid gland)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Prevention and excess",
+     "md": "Eat a varied diet: protein from beans, fish and eggs; fruits for vitamin C; green leaves and meat for iron; **iodised salt** for iodine; some sunlight for vitamin D. Breast milk is the best food for young babies.\n\nEating **too much** energy-rich food and too little exercise causes **obesity**, raising the risk of heart disease, high blood pressure and diabetes. Too much salt and saturated fat also harm the heart."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Kwashiorkor children may look 'fat' because of the fluid in the belly, but they are lacking protein.\n- Vitamins are needed in *tiny* amounts, but their lack causes serious disease.\n- Medical diagnosis must be done by a health worker, not by guessing from symptoms."
+    },
+    {
+     "type": "example",
+     "title": "Choose the cause",
+     "statement": "A child in a village near Maroua has a swollen belly, thin arms and legs and pale thin hair. Name the likely deficiency and two foods that would help.",
+     "steps": [
+      "Swollen belly with thin limbs is typical of kwashiorkor, caused by lack of protein.",
+      "Protein foods such as beans, eggs, fish or groundnuts, together with clinic care, help. A health worker must confirm."
+     ],
+     "answer": "Kwashiorkor; beans, eggs, fish or groundnuts"
+    },
+    {
+     "type": "example",
+     "title": "Percent of daily need",
+     "statement": "A student needs about 10 000 kJ a day. A meal gives 3 500 kJ. What percentage of the daily need does the meal supply?",
+     "steps": [
+      "3 500 ÷ 10 000 = 0.35.",
+      "0.35 × 100 = 35 %."
+     ],
+     "answer": "35 %"
+    },
+    {
+     "type": "exercise",
+     "ref": "gceol-biology-diet-e07"
+    }
+   ],
+   "chapter": "gceol-biology-diet"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-biology-diet-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-biology-food-tests",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What is the positive result of the iodine test for starch?",
+   "choices": [
+    "blue-black",
+    "brick-red",
+    "purple",
+    "colourless"
+   ],
+   "answer": 0,
+   "explanation": "Iodine turns blue-black with starch.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-diet"
+  },
+  {
+   "id": "gceol-biology-diet-e02",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "gceol-biology-food-tests",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each food with its main nutrient.",
+   "pairs": [
+    [
+     "cassava",
+     "carbohydrate"
+    ],
+    [
+     "beans",
+     "protein"
+    ],
+    [
+     "palm oil",
+     "fat"
+    ],
+    [
+     "orange",
+     "vitamin C"
+    ]
+   ],
+   "explanation": "Standard sources.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceol-biology-diet"
+  },
+  {
+   "id": "gceol-biology-diet-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-biology-food-tests",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A snack has 30 g carbohydrate and 10 g fat. Using 17 kJ/g and 37 kJ/g, how much energy is in it (kJ)?",
+   "answer": 880,
+   "tolerance": 0,
+   "unit": "kJ",
+   "explanation": "30 × 17 + 10 × 37 = 510 + 370 = 880.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-diet"
+  },
+  {
+   "id": "gceol-biology-diet-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-food-tests",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The Benedict's test for reducing sugar needs:",
+   "choices": [
+    "adding ethanol",
+    "adding iodine",
+    "heating in a water bath",
+    "cooling in ice"
+   ],
+   "answer": 2,
+   "explanation": "Benedict's solution is heated.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-biology-diet"
+  },
+  {
+   "id": "gceol-biology-diet-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-food-tests",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Describe how you would test a sample of milk for protein.",
+   "model": "Place 2 cm³ of milk in a test tube, add an equal volume of sodium hydroxide solution, then add a few drops of dilute copper sulphate solution and shake. A purple/violet colour shows protein.",
+   "rubric": [
+    "1 mark: NaOH added",
+    "1 mark: copper sulphate added",
+    "1 mark: purple = protein"
+   ],
+   "explanation": "Place 2 cm³ of milk in a test tube, add an equal volume of sodium hydroxide solution, then add a few drops of dilute copper sulphate solution and shake. A purple/violet colour shows protein.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-biology-diet"
+  },
+  {
+   "id": "gceol-biology-diet-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-biology-food-tests",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A student tests three foods. Food X turns blue-black with iodine; food Y turns Benedict's solution brick-red after heating; food Z turns DCPIP colourless.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Food X contains:",
+     "choices": [
+      "protein",
+      "fat",
+      "starch",
+      "reducing sugar"
+     ],
+     "answer": 2,
+     "explanation": "Blue-black with iodine.",
+     "id": "gceol-biology-diet-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Food Y contains:",
+     "choices": [
+      "reducing sugar",
+      "protein",
+      "vitamin C",
+      "starch"
+     ],
+     "answer": 0,
+     "explanation": "Brick-red with Benedict's.",
+     "id": "gceol-biology-diet-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Food Z contains:",
+     "choices": [
+      "fat",
+      "starch",
+      "vitamin C",
+      "water only"
+     ],
+     "answer": 2,
+     "explanation": "Vitamin C decolourises DCPIP.",
+     "id": "gceol-biology-diet-e06-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Why is a control test with water included?",
+     "model": "To show that the reagent alone does not give the colour and to compare results.",
+     "rubric": [
+      "1 mark for the idea of a comparison"
+     ],
+     "explanation": "To show that the reagent alone does not give the colour and to compare results.",
+     "id": "gceol-biology-diet-e06-d"
+    }
+   ],
+   "chapter": "gceol-biology-diet"
+  },
+  {
+   "id": "gceol-biology-food-tests-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-food-tests",
+   "prompt": "Which food class is the main source of energy?",
+   "choices": [
+    "vitamins",
+    "minerals",
+    "water",
+    "carbohydrates"
+   ],
+   "answer": 3,
+   "explanation": "Carbohydrates.",
+   "chapter": "gceol-biology-diet"
+  },
+  {
+   "id": "gceol-biology-food-tests-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-food-tests",
+   "prompt": "Iron is needed for:",
+   "choices": [
+    "red blood cells",
+    "bones",
+    "sight in the dark",
+    "digesting fats"
+   ],
+   "answer": 0,
+   "explanation": "Haemoglobin.",
+   "chapter": "gceol-biology-diet"
+  },
+  {
+   "id": "gceol-biology-food-tests-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-food-tests",
+   "prompt": "Fibre helps:",
+   "choices": [
+    "clotting",
+    "making blood",
+    "growth of bones",
+    "movement of food through the gut"
+   ],
+   "answer": 3,
+   "explanation": "Peristalsis.",
+   "chapter": "gceol-biology-diet"
+  },
+  {
+   "id": "gceol-biology-food-tests-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-food-tests",
+   "prompt": "Fats give:",
+   "choices": [
+    "less energy",
+    "more energy per gram than carbohydrates",
+    "no energy",
+    "the same as water"
+   ],
+   "answer": 1,
+   "explanation": "About double.",
+   "chapter": "gceol-biology-diet"
+  },
+  {
+   "id": "gceol-biology-food-tests-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-food-tests",
+   "prompt": "Brick-red with Benedict's means:",
+   "choices": [
+    "a lot of reducing sugar",
+    "protein",
+    "no sugar",
+    "starch"
+   ],
+   "answer": 0,
+   "explanation": "More sugar gives redder colour.",
+   "chapter": "gceol-biology-diet"
+  },
+  {
+   "id": "gceol-biology-diet-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-biology-deficiency",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which deficiency causes bleeding gums?",
+   "choices": [
+    "iron",
+    "iodine",
+    "vitamin D",
+    "vitamin C"
+   ],
+   "answer": 3,
+   "explanation": "Scurvy is caused by lack of vitamin C.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-diet"
+  },
+  {
+   "id": "gceol-biology-diet-e08",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "gceol-biology-deficiency",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each disease with its deficiency.",
+   "pairs": [
+    [
+     "rickets",
+     "vitamin D or calcium"
+    ],
+    [
+     "anaemia",
+     "iron"
+    ],
+    [
+     "goitre",
+     "iodine"
+    ],
+    [
+     "kwashiorkor",
+     "protein"
+    ]
+   ],
+   "explanation": "Standard causes.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceol-biology-diet"
+  },
+  {
+   "id": "gceol-biology-diet-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-biology-deficiency",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Obesity can be caused by eating more energy than the body uses.",
+   "answer": true,
+   "explanation": "The extra energy is stored as fat.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-diet"
+  },
+  {
+   "id": "gceol-biology-diet-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-deficiency",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A meal supplies 2 500 kJ and the daily need is 10 000 kJ. What percentage is that?",
+   "answer": 25,
+   "tolerance": 0.1,
+   "unit": "%",
+   "explanation": "2500 ÷ 10000 × 100 = 25 %.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-biology-diet"
+  },
+  {
+   "id": "gceol-biology-diet-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-deficiency",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain why iodised salt is recommended in some regions.",
+   "model": "Iodine is needed to make the hormone of the thyroid gland; lack of iodine causes goitre. Adding iodine to salt gives people a regular small supply.",
+   "rubric": [
+    "1 mark: iodine needed for thyroid hormone",
+    "1 mark: prevents goitre",
+    "1 mark: salt is eaten by everyone"
+   ],
+   "explanation": "Iodine is needed to make the hormone of the thyroid gland; lack of iodine causes goitre. Adding iodine to salt gives people a regular small supply.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-biology-diet"
+  },
+  {
+   "id": "gceol-biology-diet-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-biology-deficiency",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A school health club in Kumba lists meals eaten by children.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "A meal of only cassava and palm oil lacks mainly:",
+     "choices": [
+      "protein",
+      "fat",
+      "energy",
+      "carbohydrate"
+     ],
+     "answer": 0,
+     "explanation": "Cassava has little protein.",
+     "id": "gceol-biology-diet-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Adding which food would best fix this?",
+     "choices": [
+      "sugar",
+      "beans or fish",
+      "more cassava",
+      "more oil"
+     ],
+     "answer": 1,
+     "explanation": "They are protein-rich.",
+     "id": "gceol-biology-diet-e12-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Suggest two health problems of eating too much fatty food.",
+     "model": "Obesity and heart disease (also high blood pressure).",
+     "rubric": [
+      "1 mark each, maximum 2"
+     ],
+     "explanation": "Obesity and heart disease (also high blood pressure).",
+     "id": "gceol-biology-diet-e12-c"
+    }
+   ],
+   "chapter": "gceol-biology-diet"
+  },
+  {
+   "id": "gceol-biology-deficiency-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-deficiency",
+   "prompt": "Anaemia is caused by lack of:",
+   "choices": [
+    "iron",
+    "calcium",
+    "iodine",
+    "vitamin C"
+   ],
+   "answer": 0,
+   "explanation": "Iron.",
+   "chapter": "gceol-biology-diet"
+  },
+  {
+   "id": "gceol-biology-deficiency-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-deficiency",
+   "prompt": "Rickets affects the:",
+   "choices": [
+    "skin only",
+    "eyes",
+    "bones",
+    "kidneys"
+   ],
+   "answer": 2,
+   "explanation": "Soft bones.",
+   "chapter": "gceol-biology-diet"
+  },
+  {
+   "id": "gceol-biology-deficiency-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-deficiency",
+   "prompt": "Goitre is a swelling of the:",
+   "choices": [
+    "belly",
+    "knee",
+    "neck (thyroid)",
+    "gum"
+   ],
+   "answer": 2,
+   "explanation": "Iodine.",
+   "chapter": "gceol-biology-diet"
+  },
+  {
+   "id": "gceol-biology-deficiency-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-deficiency",
+   "prompt": "A good source of vitamin C is:",
+   "choices": [
+    "palm oil",
+    "rice",
+    "salt",
+    "oranges"
+   ],
+   "answer": 3,
+   "explanation": "Citrus fruit.",
+   "chapter": "gceol-biology-diet"
+  },
+  {
+   "id": "gceol-biology-deficiency-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-deficiency",
+   "prompt": "Marasmus is due to:",
+   "choices": [
+    "lack of food overall",
+    "too much food",
+    "too much water",
+    "too much sleep"
+   ],
+   "answer": 0,
+   "explanation": "Energy deficiency.",
+   "chapter": "gceol-biology-diet"
+  },
+  {
+   "id": "gceol-biology-diet-m01",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-biology-food-tests",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Question 3 — Nutrition (5 marks). A plate of rice, beans and fish stew contains 40 g carbohydrate, 25 g protein and 10 g fat. Use 17 kJ per g for carbohydrate and protein and 37 kJ per g for fat.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "A sample of the stew turns purple with Biuret reagent. This shows that it contains:",
+     "choices": [
+      "reducing sugar",
+      "fat",
+      "protein",
+      "starch"
+     ],
+     "answer": 2,
+     "explanation": "Biuret gives a purple colour with protein.",
+     "id": "gceol-biology-diet-m01-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Calculate the total energy in the plate, in kJ.",
+     "answer": 1475,
+     "tolerance": 0,
+     "explanation": "40 × 17 = 680; 25 × 17 = 425; 10 × 37 = 370; total = 1475 kJ (1 mark for the working, 1 for the answer).",
+     "unit": "kJ",
+     "id": "gceol-biology-diet-m01-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explain what is meant by a balanced diet.",
+     "model": "A diet that contains all the food classes (carbohydrate, protein, fat, vitamins, minerals, fibre and water) in the correct proportions for the person's age, sex and activity.",
+     "rubric": [
+      "1 mark: all food classes (with fibre and water)",
+      "1 mark: in the right amounts for the person"
+     ],
+     "explanation": "A diet that contains all the food classes (carbohydrate, protein, fat, vitamins, minerals, fibre and water) in the correct proportions for the person's age, sex and activity.",
+     "id": "gceol-biology-diet-m01-c"
+    }
+   ],
+   "chapter": "gceol-biology-diet"
+  }
+ ]
+}

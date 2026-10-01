@@ -1,0 +1,345 @@
+{
+ "chapter": "form4-biology-respiration",
+ "lessons": [
+  {
+   "id": "form4-biology-respiration",
+   "title": "Respiration and breathing",
+   "minutes": 30,
+   "programRef": "Form 4 Biology — Respiration and gas exchange (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define respiration and write its word equation.",
+    "Compare aerobic and anaerobic respiration.",
+    "Describe breathing in and out."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form4-biology-respiration-e01",
+    "form4-biology-respiration-e02",
+    "form4-biology-respiration-e03",
+    "form4-biology-respiration-e04",
+    "form4-biology-respiration-e05",
+    "form4-biology-respiration-e06"
+   ],
+   "selfCheck": [
+    "form4-biology-respiration-q1",
+    "form4-biology-respiration-q2",
+    "form4-biology-respiration-q3",
+    "form4-biology-respiration-q4",
+    "form4-biology-respiration-q5"
+   ],
+   "reviewNotes": [
+    "Percentages of gases are approximate.",
+    "Introductory level; Form 5 pack adds the chemical equation and oxygen debt.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Respiration",
+     "md": "**Respiration** is the release of energy from food in living cells. Every living cell respires all the time. It is *not* the same as **breathing**, which is how air gets in and out of the lungs. **Aerobic respiration** uses oxygen and takes place in the mitochondria."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Without oxygen",
+     "md": "**Anaerobic respiration** releases a small amount of energy without oxygen. In **muscles** during hard exercise glucose becomes **lactic acid** (which causes tiredness and cramp). In **yeast** glucose becomes **alcohol (ethanol)** and **carbon dioxide**: this is **fermentation**, used for bread, palm wine and beer."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 420,
+      "h": 230,
+      "bars": [
+       {
+        "label": "O₂ in",
+        "value": 21,
+        "color": "blue"
+       },
+       {
+        "label": "O₂ out",
+        "value": 16,
+        "color": "lightblue"
+       },
+       {
+        "label": "CO₂ in",
+        "value": 0.04,
+        "color": "red"
+       },
+       {
+        "label": "CO₂ out",
+        "value": 4,
+        "color": "orange"
+       }
+      ],
+      "unit": "% of the air (approximate)"
+     },
+     "caption": "Inhaled and exhaled air (approximate).",
+     "alt": "A bar chart: oxygen is about 21 percent in and 16 percent out; carbon dioxide is about 0.04 percent in and 4 percent out."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Breathing",
+     "md": "**Breathing in**: the ribs move up and out, the **diaphragm** flattens, the chest gets bigger and air rushes in. **Breathing out**: the ribs move down, the diaphragm rises, the chest gets smaller and air is pushed out. Gas exchange happens in the tiny air sacs of the lungs (**alveoli**), which have thin walls and many capillaries."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Breathing and respiration are different things.\n- Plants respire day and night.\n- Limewater turns *milky* with carbon dioxide; it does not test oxygen."
+    },
+    {
+     "type": "example",
+     "title": "Breaths in a minute",
+     "statement": "A boy takes 15 breaths each minute and each breath moves 500 cm³ of air. How much air does he breathe in one minute?",
+     "steps": [
+      "Volume per minute = 500 × 15.",
+      "500 × 15 = 7500 cm³."
+     ],
+     "answer": "7500 cm³"
+    },
+    {
+     "type": "example",
+     "title": "After a race",
+     "statement": "A girl is breathing fast after running. Explain why.",
+     "steps": [
+      "Her muscles used oxygen quickly and made some lactic acid.",
+      "She needs extra oxygen to break down the lactic acid and to supply the muscles."
+     ],
+     "answer": "To get more oxygen for the muscles and remove lactic acid."
+    },
+    {
+     "type": "exercise",
+     "ref": "form4-biology-respiration-e01"
+    }
+   ],
+   "chapter": "form4-biology-respiration"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form4-biology-respiration-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form4-biology-respiration",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which gas is used in aerobic respiration?",
+   "choices": [
+    "methane",
+    "carbon dioxide",
+    "nitrogen",
+    "oxygen"
+   ],
+   "answer": 3,
+   "explanation": "Oxygen.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-biology-respiration"
+  },
+  {
+   "id": "form4-biology-respiration-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-biology-respiration",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A girl takes 18 breaths per minute, each of 400 cm³. What is the volume of air breathed per minute?",
+   "answer": 7200,
+   "tolerance": 0,
+   "unit": "cm³",
+   "explanation": "18 × 400 = 7200 cm³.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-biology-respiration"
+  },
+  {
+   "id": "form4-biology-respiration-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "form4-biology-respiration",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Respiration is the same as breathing.",
+   "answer": false,
+   "explanation": "Breathing moves air; respiration releases energy in cells.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-biology-respiration"
+  },
+  {
+   "id": "form4-biology-respiration-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "form4-biology-respiration",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Yeast makes carbon dioxide and:",
+   "choices": [
+    "lactic acid",
+    "oxygen",
+    "glucose",
+    "alcohol"
+   ],
+   "answer": 3,
+   "explanation": "Fermentation.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form4-biology-respiration"
+  },
+  {
+   "id": "form4-biology-respiration-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form4-biology-respiration",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Give the word equation for aerobic respiration.",
+   "model": "Glucose + oxygen → carbon dioxide + water + energy.",
+   "rubric": [
+    "1 mark: reactants",
+    "1 mark: products and energy"
+   ],
+   "explanation": "Glucose + oxygen → carbon dioxide + water + energy.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-biology-respiration"
+  },
+  {
+   "id": "form4-biology-respiration-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form4-biology-respiration",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A student bubbles exhaled air and normal air through two tubes of limewater.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which tube turns milky first?",
+     "choices": [
+      "both at once",
+      "the one with exhaled air",
+      "the one with normal air",
+      "neither"
+     ],
+     "answer": 1,
+     "explanation": "Exhaled air has more carbon dioxide.",
+     "id": "form4-biology-respiration-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The gas that turns limewater milky is:",
+     "choices": [
+      "oxygen",
+      "carbon dioxide",
+      "hydrogen",
+      "nitrogen"
+     ],
+     "answer": 1,
+     "explanation": "Test for CO₂.",
+     "id": "form4-biology-respiration-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Where does the extra carbon dioxide in exhaled air come from?",
+     "model": "From respiration in the body cells.",
+     "rubric": [
+      "1 mark for respiration in cells"
+     ],
+     "explanation": "From respiration in the body cells.",
+     "id": "form4-biology-respiration-e06-c"
+    }
+   ],
+   "chapter": "form4-biology-respiration"
+  },
+  {
+   "id": "form4-biology-respiration-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-biology-respiration",
+   "prompt": "Respiration occurs in:",
+   "choices": [
+    "leaves only",
+    "lungs only",
+    "plants only",
+    "all living cells"
+   ],
+   "answer": 3,
+   "explanation": "Every cell respires.",
+   "chapter": "form4-biology-respiration"
+  },
+  {
+   "id": "form4-biology-respiration-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-biology-respiration",
+   "prompt": "Lactic acid is made in:",
+   "choices": [
+    "leaves",
+    "bones",
+    "muscles",
+    "yeast"
+   ],
+   "answer": 2,
+   "explanation": "Anaerobic respiration.",
+   "chapter": "form4-biology-respiration"
+  },
+  {
+   "id": "form4-biology-respiration-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-biology-respiration",
+   "prompt": "Breathing in makes the chest:",
+   "choices": [
+    "hot",
+    "smaller",
+    "flat",
+    "bigger"
+   ],
+   "answer": 3,
+   "explanation": "More space.",
+   "chapter": "form4-biology-respiration"
+  },
+  {
+   "id": "form4-biology-respiration-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-biology-respiration",
+   "prompt": "The test for carbon dioxide uses:",
+   "choices": [
+    "iodine",
+    "limewater",
+    "litmus",
+    "Benedict's"
+   ],
+   "answer": 1,
+   "explanation": "Limewater turns milky.",
+   "chapter": "form4-biology-respiration"
+  },
+  {
+   "id": "form4-biology-respiration-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-biology-respiration",
+   "prompt": "Aerobic respiration releases:",
+   "choices": [
+    "only heat",
+    "no energy",
+    "only light",
+    "energy"
+   ],
+   "answer": 3,
+   "explanation": "Energy.",
+   "chapter": "form4-biology-respiration"
+  }
+ ]
+}

@@ -1,0 +1,1056 @@
+{
+ "chapter": "gceol-biology-circulation",
+ "lessons": [
+  {
+   "id": "gceol-biology-heart",
+   "title": "The heart and blood circulation",
+   "minutes": 30,
+   "programRef": "GCE O Level Biology — Transport in humans: heart, blood vessels, blood (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe the structure of the heart and the path of blood through it.",
+    "Compare arteries, veins and capillaries.",
+    "Explain double circulation and calculate pulse or cardiac output."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-biology-circulation-e01",
+    "gceol-biology-circulation-e02",
+    "gceol-biology-circulation-e03",
+    "gceol-biology-circulation-e04",
+    "gceol-biology-circulation-e05",
+    "gceol-biology-circulation-e06"
+   ],
+   "selfCheck": [
+    "gceol-biology-heart-q1",
+    "gceol-biology-heart-q2",
+    "gceol-biology-heart-q3",
+    "gceol-biology-heart-q4",
+    "gceol-biology-heart-q5"
+   ],
+   "reviewNotes": [
+    "Heart diagram is schematic; valves drawn as dashed lines. Check whether the syllabus asks for the names tricuspid/bicuspid.",
+    "Health advice is general and must be reviewed by a health worker.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Double circulation",
+     "md": "Blood passes through the heart **twice** on each complete circuit of the body: the **pulmonary circulation** (heart to lungs and back) and the **systemic circulation** (heart to body and back). This keeps oxygenated and deoxygenated blood separate and allows high pressure to the body."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 285,
+      "items": [
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 80,
+        "w": 90,
+        "h": 60,
+        "stroke": "blue",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 10
+       },
+       {
+        "t": "rect",
+        "x": 250,
+        "y": 80,
+        "w": 90,
+        "h": 60,
+        "stroke": "red",
+        "width": 2,
+        "fill": "pink",
+        "radius": 10
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 148,
+        "w": 90,
+        "h": 80,
+        "stroke": "blue",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 10
+       },
+       {
+        "t": "rect",
+        "x": 250,
+        "y": 148,
+        "w": 90,
+        "h": 80,
+        "stroke": "red",
+        "width": 3,
+        "fill": "pink",
+        "radius": 10
+       },
+       {
+        "t": "text",
+        "x": 195,
+        "y": 114,
+        "text": "right atrium",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 295,
+        "y": 114,
+        "text": "left atrium",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 195,
+        "y": 192,
+        "text": "right ventricle",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 295,
+        "y": 192,
+        "text": "left ventricle",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 180,
+        "y1": 25,
+        "x2": 180,
+        "y2": 78,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 172,
+        "y": 20,
+        "text": "vena cava",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 172,
+        "y": 34,
+        "text": "from body",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 310,
+        "y1": 25,
+        "x2": 310,
+        "y2": 78,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 318,
+        "y": 20,
+        "text": "pulmonary vein",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 318,
+        "y": 34,
+        "text": "from lungs",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 180,
+        "y1": 230,
+        "x2": 180,
+        "y2": 262,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 172,
+        "y": 262,
+        "text": "pulmonary artery",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 172,
+        "y": 276,
+        "text": "to lungs",
+        "size": 11,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 310,
+        "y1": 230,
+        "x2": 310,
+        "y2": 262,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 318,
+        "y": 262,
+        "text": "aorta",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 318,
+        "y": 276,
+        "text": "to body",
+        "size": 11,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 160,
+        "y1": 144,
+        "x2": 230,
+        "y2": 144,
+        "color": "grey",
+        "width": 3,
+        "dash": true
+       },
+       {
+        "t": "line",
+        "x1": 260,
+        "y1": 144,
+        "x2": 330,
+        "y2": 144,
+        "color": "grey",
+        "width": 3,
+        "dash": true
+       },
+       {
+        "t": "text",
+        "x": 245,
+        "y": 144,
+        "text": "valves",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Schematic heart (the right side of the body is on the left of the page).",
+     "alt": "Four chambers: blue right atrium and right ventricle on the left, pink left atrium and left ventricle on the right, with the vena cava and pulmonary vein entering the top and the pulmonary artery and aorta leaving the bottom."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Path of blood",
+     "md": "Body → **vena cava** → right atrium → (tricuspid valve) → right ventricle → **pulmonary artery** → lungs → **pulmonary vein** → left atrium → (bicuspid valve) → left ventricle → **aorta** → body.\n\nThe **left ventricle** has the thickest wall because it pumps blood to the whole body. **Valves** stop backflow. The heart muscle is supplied by the **coronary arteries**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Blood vessels",
+     "md": "- **Arteries**: carry blood away from the heart; thick, muscular, elastic walls; narrow lumen; blood at high pressure; pulse felt.\n- **Veins**: carry blood to the heart; thin walls; wide lumen; **valves**; low pressure.\n- **Capillaries**: walls one cell thick, very narrow; exchange of materials between blood and cells.\n\nPulmonary vessels are the exception: the pulmonary artery carries deoxygenated blood, the pulmonary vein oxygenated blood."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Heart health (flag for health review)",
+     "md": "Risk factors for coronary heart disease include smoking, a diet rich in saturated fat and salt, lack of exercise and stress. Regular exercise, a balanced diet and not smoking lower the risk. Anyone with chest pain should seek medical help."
+    },
+    {
+     "type": "example",
+     "title": "Cardiac output",
+     "statement": "A resting heart pumps 70 cm³ of blood per beat and beats 72 times per minute. Calculate the volume pumped per minute (cardiac output).",
+     "steps": [
+      "Cardiac output = stroke volume × heart rate.",
+      "70 × 72 = 5040 cm³ per minute (about 5 litres)."
+     ],
+     "answer": "5040 cm³ per minute"
+    },
+    {
+     "type": "example",
+     "title": "Following a blood cell",
+     "statement": "Trace a red blood cell from the left ventricle to a muscle in the leg and back to the heart.",
+     "steps": [
+      "Left ventricle → aorta → arteries → capillaries in the leg muscle (oxygen is released).",
+      "Deoxygenated blood → veins → vena cava → right atrium."
+     ],
+     "answer": "Left ventricle → aorta → artery → muscle capillary → vein → vena cava → right atrium."
+    },
+    {
+     "type": "exercise",
+     "ref": "gceol-biology-circulation-e01"
+    }
+   ],
+   "chapter": "gceol-biology-circulation"
+  },
+  {
+   "id": "gceol-biology-blood",
+   "title": "Blood: composition and functions",
+   "minutes": 25,
+   "programRef": "GCE O Level Biology — Transport in humans: heart, blood vessels, blood (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Name the components of blood and state the function of each.",
+    "Explain how red cells, white cells and platelets are adapted to their roles.",
+    "Describe how blood clotting and antibodies protect the body."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-biology-circulation-e07",
+    "gceol-biology-circulation-e08",
+    "gceol-biology-circulation-e09",
+    "gceol-biology-circulation-e10",
+    "gceol-biology-circulation-e11",
+    "gceol-biology-circulation-e12"
+   ],
+   "selfCheck": [
+    "gceol-biology-blood-q1",
+    "gceol-biology-blood-q2",
+    "gceol-biology-blood-q3",
+    "gceol-biology-blood-q4",
+    "gceol-biology-blood-q5"
+   ],
+   "reviewNotes": [
+    "Percentage of plasma (about 55 %) and water in plasma (about 90 %) are commonly quoted textbook values - check.",
+    "Vaccination wording is conservative and must be reviewed by a health worker.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Components of blood",
+     "md": "Blood is a tissue made of **plasma** (about 55 % of the volume) and **blood cells**. Plasma is a pale yellow liquid, mostly water, that carries dissolved glucose, amino acids, mineral ions, hormones, urea, plasma proteins and carbon dioxide (as hydrogencarbonate ions), and distributes heat."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 500,
+      "h": 185,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 60,
+        "cy": 90,
+        "r": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 60,
+        "cy": 90,
+        "r": 12,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "pink"
+       },
+       {
+        "t": "circle",
+        "cx": 190,
+        "cy": 90,
+        "r": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         170,
+         80,
+         190,
+         70,
+         210,
+         85,
+         200,
+         105,
+         175,
+         100
+        ],
+        "stroke": "ink",
+        "width": 1,
+        "closed": true,
+        "fill": "purple"
+       },
+       {
+        "t": "circle",
+        "cx": 320,
+        "cy": 90,
+        "r": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "circle",
+        "cx": 322,
+        "cy": 90,
+        "r": 20,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "purple"
+       },
+       {
+        "t": "circle",
+        "cx": 420,
+        "cy": 90,
+        "r": 6,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 436,
+        "cy": 100,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 408,
+        "cy": 104,
+        "r": 5,
+        "stroke": "ink",
+        "width": 1,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 150,
+        "text": "red blood cell",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 166,
+        "text": "no nucleus",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 150,
+        "text": "phagocyte",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 166,
+        "text": "lobed nucleus",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 320,
+        "y": 150,
+        "text": "lymphocyte",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 320,
+        "y": 166,
+        "text": "large round nucleus",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 425,
+        "y": 150,
+        "text": "platelets",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 425,
+        "y": 166,
+        "text": "fragments",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "The cells of the blood.",
+     "alt": "Four drawings: a red blood cell with a pale centre and no nucleus, a phagocyte with a lobed nucleus, a lymphocyte with a large round nucleus and some small platelets."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Cells and their jobs",
+     "md": "- **Red blood cells**: biconcave discs without a nucleus, full of **haemoglobin**. In the lungs haemoglobin combines with oxygen to form **oxyhaemoglobin**; in the tissues it releases it.\n- **White blood cells**: **phagocytes** engulf and digest microbes (phagocytosis); **lymphocytes** make **antibodies**.\n- **Platelets**: fragments of cells that help the blood **clot**, sealing a wound."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Defence",
+     "md": "Antibodies are made by lymphocytes in response to **antigens** (molecules on microbes). Each antibody fits one antigen, sticks microbes together or marks them for destruction. After an infection, some lymphocytes remain as **memory cells** that respond fast if the same microbe returns: this is the basis of **immunity**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Red blood cells have *no nucleus*; white cells do.\n- Haemoglobin is in the red cells, not in the plasma.\n- Platelets are cell fragments, not full cells.\n- Blood is not always 'blue' inside the body: deoxygenated blood is dark red."
+    },
+    {
+     "type": "example",
+     "title": "Percentage plasma",
+     "statement": "A 10 cm³ sample of blood is spun in a centrifuge and 5.5 cm³ of clear yellow liquid separates from the cells. Calculate the percentage of plasma.",
+     "steps": [
+      "Plasma volume ÷ total volume = 5.5 ÷ 10.",
+      "5.5 ÷ 10 × 100 = 55 %."
+     ],
+     "answer": "55 % plasma"
+    },
+    {
+     "type": "example",
+     "title": "A cut on the knee",
+     "statement": "A boy falls in Buea and cuts his knee. Describe how the blood protects him.",
+     "steps": [
+      "Platelets help form a clot of fibres that seals the wound and stops bleeding.",
+      "Phagocytes engulf microbes that enter; lymphocytes make specific antibodies against them."
+     ],
+     "answer": "Clotting stops blood loss and microbes entering; white cells destroy microbes that get in."
+    },
+    {
+     "type": "exercise",
+     "ref": "gceol-biology-circulation-e07"
+    }
+   ],
+   "chapter": "gceol-biology-circulation"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-biology-circulation-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-biology-heart",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which vessel carries blood from the heart to the lungs?",
+   "choices": [
+    "pulmonary vein",
+    "aorta",
+    "pulmonary artery",
+    "vena cava"
+   ],
+   "answer": 2,
+   "explanation": "The pulmonary artery carries deoxygenated blood to the lungs.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-circulation"
+  },
+  {
+   "id": "gceol-biology-circulation-e02",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "gceol-biology-heart",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each blood vessel with a feature.",
+   "pairs": [
+    [
+     "artery",
+     "thick muscular wall"
+    ],
+    [
+     "vein",
+     "valves"
+    ],
+    [
+     "capillary",
+     "wall one cell thick"
+    ],
+    [
+     "aorta",
+     "leaves the left ventricle"
+    ]
+   ],
+   "explanation": "Standard features.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceol-biology-circulation"
+  },
+  {
+   "id": "gceol-biology-circulation-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-biology-heart",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Stroke volume is 60 cm³ and heart rate is 75 beats per minute. Calculate cardiac output in cm³ per minute.",
+   "answer": 4500,
+   "tolerance": 0,
+   "unit": "cm³/min",
+   "explanation": "60 × 75 = 4500 cm³ per minute.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-circulation"
+  },
+  {
+   "id": "gceol-biology-circulation-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-heart",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The left ventricle has a thicker wall than the right ventricle because it:",
+   "choices": [
+    "pumps blood only to the lungs",
+    "receives blood from the body",
+    "pumps blood around the whole body at higher pressure",
+    "contains valves"
+   ],
+   "answer": 2,
+   "explanation": "It must overcome the resistance of the systemic circuit.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-biology-circulation"
+  },
+  {
+   "id": "gceol-biology-circulation-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-heart",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain how the structure of a vein makes it suited to its function.",
+   "model": "Veins have valves that prevent backflow, since blood is at low pressure; they have wide lumen so blood flows easily; thin walls because the pressure is low. Muscles squeezing the veins push blood on towards the heart.",
+   "rubric": [
+    "1 mark: valves prevent backflow",
+    "1 mark: wide lumen / low pressure",
+    "1 mark: link to returning blood to heart"
+   ],
+   "explanation": "Veins have valves that prevent backflow, since blood is at low pressure; they have wide lumen so blood flows easily; thin walls because the pressure is low. Muscles squeezing the veins push blood on towards the heart.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-biology-circulation"
+  },
+  {
+   "id": "gceol-biology-circulation-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-biology-heart",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A student studies the heart of a mammal.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Blood in the right atrium is:",
+     "choices": [
+      "oxygenated",
+      "deoxygenated",
+      "free of carbon dioxide",
+      "full of oxygen"
+     ],
+     "answer": 1,
+     "explanation": "Blood from the body returns by the vena cava deoxygenated.",
+     "id": "gceol-biology-circulation-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The valve between the left atrium and ventricle is the:",
+     "choices": [
+      "bicuspid valve",
+      "semilunar valve of the pulmonary artery",
+      "tricuspid valve",
+      "coronary valve"
+     ],
+     "answer": 0,
+     "explanation": "The left atrioventricular valve has two flaps.",
+     "id": "gceol-biology-circulation-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explain why blood must pass through the heart twice in one circuit of the body.",
+     "model": "After passing through the lungs the blood loses pressure, so it returns to the heart to be pumped again at high pressure round the body; it also keeps oxygenated and deoxygenated blood separate.",
+     "rubric": [
+      "1 mark: pressure restored",
+      "1 mark: keeps blood types separate"
+     ],
+     "explanation": "After passing through the lungs the blood loses pressure, so it returns to the heart to be pumped again at high pressure round the body; it also keeps oxygenated and deoxygenated blood separate.",
+     "id": "gceol-biology-circulation-e06-c"
+    }
+   ],
+   "chapter": "gceol-biology-circulation"
+  },
+  {
+   "id": "gceol-biology-heart-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-heart",
+   "prompt": "Blood is pumped to the body through the:",
+   "choices": [
+    "vena cava",
+    "aorta",
+    "coronary vein",
+    "pulmonary vein"
+   ],
+   "answer": 1,
+   "explanation": "The aorta leaves the left ventricle.",
+   "chapter": "gceol-biology-circulation"
+  },
+  {
+   "id": "gceol-biology-heart-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-heart",
+   "prompt": "Veins have valves to:",
+   "choices": [
+    "carry oxygen",
+    "make blood red",
+    "increase pressure",
+    "stop backflow of blood"
+   ],
+   "answer": 3,
+   "explanation": "Valves keep blood moving in one direction.",
+   "chapter": "gceol-biology-circulation"
+  },
+  {
+   "id": "gceol-biology-heart-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-heart",
+   "prompt": "Exchange of materials between blood and cells takes place in:",
+   "choices": [
+    "the aorta",
+    "capillaries",
+    "arteries",
+    "veins"
+   ],
+   "answer": 1,
+   "explanation": "Capillary walls are one cell thick.",
+   "chapter": "gceol-biology-circulation"
+  },
+  {
+   "id": "gceol-biology-heart-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-heart",
+   "prompt": "The coronary arteries supply:",
+   "choices": [
+    "the kidneys",
+    "the lungs",
+    "the brain",
+    "the heart muscle"
+   ],
+   "answer": 3,
+   "explanation": "They bring oxygen to the heart muscle.",
+   "chapter": "gceol-biology-circulation"
+  },
+  {
+   "id": "gceol-biology-heart-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-heart",
+   "prompt": "Blood in the pulmonary vein is:",
+   "choices": [
+    "full of urea",
+    "mostly plasma only",
+    "oxygenated",
+    "deoxygenated"
+   ],
+   "answer": 2,
+   "explanation": "It comes from the lungs.",
+   "chapter": "gceol-biology-circulation"
+  },
+  {
+   "id": "gceol-biology-circulation-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-biology-blood",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which part of the blood carries oxygen?",
+   "choices": [
+    "phagocytes",
+    "plasma",
+    "red blood cells",
+    "platelets"
+   ],
+   "answer": 2,
+   "explanation": "Haemoglobin in red cells carries oxygen.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-circulation"
+  },
+  {
+   "id": "gceol-biology-circulation-e08",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "gceol-biology-blood",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each blood component with its function.",
+   "pairs": [
+    [
+     "red blood cell",
+     "carries oxygen"
+    ],
+    [
+     "phagocyte",
+     "engulfs microbes"
+    ],
+    [
+     "lymphocyte",
+     "makes antibodies"
+    ],
+    [
+     "platelet",
+     "helps clotting"
+    ]
+   ],
+   "explanation": "Standard functions.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceol-biology-circulation"
+  },
+  {
+   "id": "gceol-biology-circulation-e09",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-biology-blood",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A 20 cm³ sample of blood contains 11 cm³ of plasma. What percentage is plasma?",
+   "answer": 55,
+   "tolerance": 0.1,
+   "unit": "%",
+   "explanation": "11 ÷ 20 × 100 = 55 %.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-circulation"
+  },
+  {
+   "id": "gceol-biology-circulation-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-blood",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Why is a red blood cell biconcave and without a nucleus?",
+   "choices": [
+    "to digest microbes",
+    "to make antibodies",
+    "to clot blood",
+    "to have a large surface area and more room for haemoglobin"
+   ],
+   "answer": 3,
+   "explanation": "The shape gives a large surface area; no nucleus leaves room for haemoglobin.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-biology-circulation"
+  },
+  {
+   "id": "gceol-biology-circulation-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-blood",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain how vaccination gives immunity.",
+   "model": "A vaccine contains a weakened or dead microbe or its antigens. The lymphocytes make antibodies and memory cells. If the real microbe enters later, memory cells respond quickly with a large amount of antibodies, so the person does not become ill.",
+   "rubric": [
+    "1 mark: vaccine contains harmless antigens",
+    "1 mark: antibodies and memory cells made",
+    "1 mark: fast response on later infection"
+   ],
+   "explanation": "A vaccine contains a weakened or dead microbe or its antigens. The lymphocytes make antibodies and memory cells. If the real microbe enters later, memory cells respond quickly with a large amount of antibodies, so the person does not become ill.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-biology-circulation"
+  },
+  {
+   "id": "gceol-biology-circulation-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-biology-blood",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A pale sample of blood from a person in Maroua is examined under a microscope.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "Mature red blood cells contain a nucleus.",
+     "answer": false,
+     "explanation": "They lose the nucleus.",
+     "id": "gceol-biology-circulation-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "A cell that ingests a bacterium is a:",
+     "choices": [
+      "red blood cell",
+      "platelet",
+      "plasma cell",
+      "phagocyte"
+     ],
+     "answer": 3,
+     "explanation": "Phagocytes engulf microbes.",
+     "id": "gceol-biology-circulation-e12-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Name two substances transported by plasma.",
+     "model": "Any two of: glucose, amino acids, urea, carbon dioxide, hormones, mineral ions, heat.",
+     "rubric": [
+      "1 mark each, maximum 2"
+     ],
+     "explanation": "Any two of: glucose, amino acids, urea, carbon dioxide, hormones, mineral ions, heat.",
+     "id": "gceol-biology-circulation-e12-c"
+    }
+   ],
+   "chapter": "gceol-biology-circulation"
+  },
+  {
+   "id": "gceol-biology-blood-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-blood",
+   "prompt": "Plasma is mostly:",
+   "choices": [
+    "haemoglobin",
+    "water",
+    "platelets",
+    "red cells"
+   ],
+   "answer": 1,
+   "explanation": "Plasma is about 90 % water.",
+   "chapter": "gceol-biology-circulation"
+  },
+  {
+   "id": "gceol-biology-blood-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-blood",
+   "prompt": "Haemoglobin combines with oxygen to form:",
+   "choices": [
+    "glycogen",
+    "oxyhaemoglobin",
+    "fibrinogen",
+    "antibody"
+   ],
+   "answer": 1,
+   "explanation": "Oxyhaemoglobin in the lungs.",
+   "chapter": "gceol-biology-circulation"
+  },
+  {
+   "id": "gceol-biology-blood-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-blood",
+   "prompt": "Cells that make antibodies are:",
+   "choices": [
+    "lymphocytes",
+    "phagocytes",
+    "red blood cells",
+    "platelets"
+   ],
+   "answer": 0,
+   "explanation": "Lymphocytes make antibodies.",
+   "chapter": "gceol-biology-circulation"
+  },
+  {
+   "id": "gceol-biology-blood-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-blood",
+   "prompt": "Platelets are involved in:",
+   "choices": [
+    "transport of oxygen",
+    "making antibodies",
+    "clotting",
+    "phagocytosis"
+   ],
+   "answer": 2,
+   "explanation": "They help the blood clot.",
+   "chapter": "gceol-biology-circulation"
+  },
+  {
+   "id": "gceol-biology-blood-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-blood",
+   "prompt": "Memory cells give:",
+   "choices": [
+    "a higher body temperature",
+    "faster response when the same microbe returns",
+    "more red cells",
+    "a clotting factor"
+   ],
+   "answer": 1,
+   "explanation": "They provide immunity.",
+   "chapter": "gceol-biology-circulation"
+  }
+ ]
+}

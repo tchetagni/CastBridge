@@ -1,0 +1,1121 @@
+{
+ "chapter": "gceol-biology-health",
+ "lessons": [
+  {
+   "id": "gceol-biology-malaria",
+   "title": "Pathogens and malaria",
+   "minutes": 30,
+   "programRef": "GCE O Level Biology — Diseases and their control: malaria, cholera, typhoid, tuberculosis; immunity and vaccination (to be checked against the official syllabus; for health review)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define a pathogen and name the main types with an example of each.",
+    "Describe the life cycle, symptoms, prevention and treatment of malaria.",
+    "Explain what a vector is."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-biology-health-e01",
+    "gceol-biology-health-e02",
+    "gceol-biology-health-e03",
+    "gceol-biology-health-e04",
+    "gceol-biology-health-e05",
+    "gceol-biology-health-e06"
+   ],
+   "selfCheck": [
+    "gceol-biology-malaria-q1",
+    "gceol-biology-malaria-q2",
+    "gceol-biology-malaria-q3",
+    "gceol-biology-malaria-q4",
+    "gceol-biology-malaria-q5"
+   ],
+   "reviewNotes": [
+    "HEALTH CONTENT: review by a health worker, and check current national malaria guidance (nets, preventive treatments).",
+    "Other vectors (tsetse fly, sleeping sickness) not covered.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Disease and pathogens",
+     "md": "A **disease** is a disorder of the body or mind. An **infectious disease** is caused by a **pathogen** that passes from one host to another.\n\n- **Bacteria**: cholera, typhoid, tuberculosis.\n- **Viruses**: HIV, influenza, measles.\n- **Protoctists** (single-celled): malaria (*Plasmodium*).\n- **Fungi**: ringworm, athlete's foot.\n\nA **vector** is an organism that carries a pathogen from one host to another."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Malaria",
+     "md": "**Malaria** is caused by *Plasmodium* and carried by the **female *Anopheles* mosquito**. The parasite infects the liver and the **red blood cells**, which burst at intervals.\n\n**Symptoms**: high fever, shivering, sweating, headache, tiredness, anaemia. Severe malaria, especially in young children and pregnant women, can be fatal."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 126,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 40.0,
+        "w": 101.5,
+        "h": 46,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightblue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 60.75,
+        "y": 60.0,
+        "text": "Infected person",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 60.75,
+        "y": 74.0,
+        "text": "parasites in blood",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 114.5,
+        "y1": 63.0,
+        "x2": 126.5,
+        "y2": 63.0,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 129.5,
+        "y": 40.0,
+        "w": 101.5,
+        "h": 46,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgreen",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 180.25,
+        "y": 60.0,
+        "text": "Female Anopheles",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 180.25,
+        "y": 74.0,
+        "text": "bites, takes blood",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 234.0,
+        "y1": 63.0,
+        "x2": 246.0,
+        "y2": 63.0,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 249.0,
+        "y": 40.0,
+        "w": 101.5,
+        "h": 46,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightorange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 299.75,
+        "y": 60.0,
+        "text": "Parasite grows",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 299.75,
+        "y": 74.0,
+        "text": "in the mosquito",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 353.5,
+        "y1": 63.0,
+        "x2": 365.5,
+        "y2": 63.0,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 368.5,
+        "y": 40.0,
+        "w": 101.5,
+        "h": 46,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightyellow",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 419.25,
+        "y": 60.0,
+        "text": "Mosquito bites",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 419.25,
+        "y": 74.0,
+        "text": "a new person",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Transmission of malaria.",
+     "alt": "Four boxes with arrows: an infected person with parasites in the blood, a female Anopheles that bites and takes blood, the parasite growing in the mosquito, the mosquito biting a new person."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Preventing malaria",
+     "md": "- Sleep under an **insecticide-treated mosquito net**.\n- Remove or cover **stagnant water** (tins, tyres, blocked gutters) where mosquitoes lay eggs; clear bushes around houses.\n- Use screens on windows and repellents; indoor spraying where recommended.\n- Preventive medicine for pregnant women and young children as advised by health services."
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Treatment (flag for health review)",
+     "md": "Anyone with fever should go to a health centre for a **test**. Treatment uses **antimalarial drugs** prescribed by a health worker, and the whole course must be taken. Antibiotics do not work against malaria because the parasite is not a bacterium."
+    },
+    {
+     "type": "example",
+     "title": "Find the vector",
+     "statement": "A family lives near a swamp in Douala. Several children have fever and shivering. Name the pathogen, the vector and one prevention method.",
+     "steps": [
+      "The disease is malaria; the pathogen is *Plasmodium*.",
+      "The vector is the female *Anopheles* mosquito; they should sleep under treated nets and drain stagnant water."
+     ],
+     "answer": "Plasmodium; Anopheles; mosquito nets"
+    },
+    {
+     "type": "example",
+     "title": "Why drain puddles?",
+     "statement": "Explain why clearing stagnant water reduces malaria cases.",
+     "steps": [
+      "Mosquito eggs, larvae and pupae live in still water.",
+      "Without breeding sites fewer mosquitoes survive, so fewer people are bitten and the parasite is passed on less."
+     ],
+     "answer": "It removes mosquito breeding sites."
+    },
+    {
+     "type": "exercise",
+     "ref": "gceol-biology-health-e01"
+    }
+   ],
+   "chapter": "gceol-biology-health"
+  },
+  {
+   "id": "gceol-biology-infections",
+   "title": "Cholera, typhoid, tuberculosis and immunity",
+   "minutes": 30,
+   "programRef": "GCE O Level Biology — Diseases and their control: malaria, cholera, typhoid, tuberculosis; immunity and vaccination (to be checked against the official syllabus; for health review)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe the cause, spread, symptoms and prevention of cholera, typhoid and tuberculosis.",
+    "Explain how the body defends itself against pathogens.",
+    "Explain vaccination and why antibiotics must be used carefully."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-biology-health-e07",
+    "gceol-biology-health-e08",
+    "gceol-biology-health-e09",
+    "gceol-biology-health-e10",
+    "gceol-biology-health-e11",
+    "gceol-biology-health-e12"
+   ],
+   "selfCheck": [
+    "gceol-biology-infections-q1",
+    "gceol-biology-infections-q2",
+    "gceol-biology-infections-q3",
+    "gceol-biology-infections-q4",
+    "gceol-biology-infections-q5"
+   ],
+   "reviewNotes": [
+    "HEALTH CONTENT: all disease facts, prevention and treatment statements must be reviewed by a health worker; vaccination schedules (BCG, cholera, typhoid) must be checked against Cameroon's Expanded Programme on Immunisation.",
+    "Antibody graph is illustrative only.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Water-borne diseases",
+     "md": "**Cholera** (the bacterium *Vibrio cholerae*) and **typhoid** (*Salmonella* Typhi) spread by **contaminated water and food**, usually where sewage mixes with drinking water.\n\n- **Cholera**: sudden watery diarrhoea and vomiting that can cause fatal **dehydration**. Treatment: **oral rehydration solution** (clean water with salts and sugar) and medical care.\n- **Typhoid**: prolonged fever, headache, stomach pain."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Tuberculosis (TB)",
+     "md": "**TB** (*Mycobacterium tuberculosis*) infects the lungs. It spreads through **droplets** when an infected person coughs or sneezes. Symptoms: a cough lasting weeks, weight loss, night sweats, tiredness. It is treated by a **long course of several antibiotics** under a health worker's supervision. The **BCG vaccine** protects young children. Poor ventilation and overcrowding help it spread."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 330,
+      "h": 204,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 10,
+        "w": 310.0,
+        "h": 52,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightblue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 165.0,
+        "y": 26.0,
+        "text": "CHOLERA",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 165.0,
+        "y": 40.0,
+        "text": "Vibrio cholerae (bacterium)",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 165.0,
+        "y": 54.0,
+        "text": "dirty water and food",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 76,
+        "w": 310.0,
+        "h": 52,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgreen",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 165.0,
+        "y": 92.0,
+        "text": "TYPHOID",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 165.0,
+        "y": 106.0,
+        "text": "Salmonella Typhi (bacterium)",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 165.0,
+        "y": 120.0,
+        "text": "dirty water and food",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 142,
+        "w": 310.0,
+        "h": 52,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightorange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 165.0,
+        "y": 158.0,
+        "text": "TUBERCULOSIS",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 165.0,
+        "y": 172.0,
+        "text": "Mycobacterium (bacterium)",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 165.0,
+        "y": 186.0,
+        "text": "droplets in the air",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Three bacterial diseases.",
+     "alt": "Three boxes: cholera and typhoid caused by bacteria in dirty water and food, and tuberculosis caused by a bacterium spread by droplets in the air."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Prevention of water-borne disease",
+     "md": "Drink **treated or boiled** water; build **latrines** away from wells; wash hands with soap after the toilet and before eating; cover food and keep flies away; wash fruit and vegetables; vaccines exist for cholera and typhoid in some situations. Good sanitation is the most effective protection."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Defence and vaccination",
+     "md": "The body's barriers: **skin**, **mucus and cilia**, **stomach acid**, and **tears**. Inside, **phagocytes** engulf microbes and **lymphocytes** make **antibodies**. A **vaccine** contains dead, weakened or part of a pathogen; the body makes antibodies and **memory cells** without getting ill. If the real pathogen arrives, the **second response is faster and stronger**.\n\n**Antibiotics** kill bacteria, not viruses; misuse leads to resistance."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 250,
+      "items": [
+       {
+        "t": "line",
+        "x1": 70,
+        "y1": 200,
+        "x2": 420,
+        "y2": 200,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 70,
+        "y1": 200,
+        "x2": 70,
+        "y2": 20,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 70,
+        "y1": 200,
+        "x2": 70,
+        "y2": 205,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 219,
+        "text": "0",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 180,
+        "y1": 200,
+        "x2": 180,
+        "y2": 205,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 219,
+        "text": "10",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 290,
+        "y1": 200,
+        "x2": 290,
+        "y2": 205,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 219,
+        "text": "20",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 400,
+        "y1": 200,
+        "x2": 400,
+        "y2": 205,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 400,
+        "y": 219,
+        "text": "30",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 245.0,
+        "y": 238,
+        "text": "days after exposure",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 64,
+        "y": 12,
+        "text": "antibody level",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         70,
+         200.0,
+         125,
+         196.6,
+         180,
+         179.6,
+         235,
+         157.5,
+         312,
+         174.5,
+         400,
+         189.8
+        ],
+        "stroke": "blue",
+        "width": 2.5,
+        "closed": false
+       },
+       {
+        "t": "poly",
+        "pts": [
+         70,
+         200.0,
+         92,
+         186.4,
+         114,
+         123.5,
+         147,
+         47.0,
+         202,
+         98.0,
+         290,
+         149.0,
+         400,
+         174.5
+        ],
+        "stroke": "red",
+        "width": 2.5,
+        "closed": false
+       },
+       {
+        "t": "text",
+        "x": 312,
+        "y": 162.5,
+        "text": "first infection",
+        "size": 11,
+        "anchor": "start",
+        "color": "blue"
+       },
+       {
+        "t": "text",
+        "x": 157,
+        "y": 47.0,
+        "text": "second exposure",
+        "size": 11,
+        "anchor": "start",
+        "color": "red"
+       }
+      ]
+     },
+     "caption": "Antibody level after first and second exposure (illustrative).",
+     "alt": "A graph: the blue curve of the first infection rises slowly to a low peak; the red curve of a second exposure rises faster to a much higher peak."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Antibiotics do not work on viruses (colds, flu, HIV, measles).\n- Vaccination does not cure an existing illness; it prepares the body beforehand.\n- Boiling is for killing pathogens in water; filtering alone may not remove them."
+    },
+    {
+     "type": "example",
+     "title": "Rainy-season outbreak",
+     "statement": "After floods in a town, many people have watery diarrhoea. Name a likely disease, how it spread and what to give.",
+     "steps": [
+      "Cholera is likely; sewage mixed with drinking water.",
+      "Give oral rehydration solution and take the patient to a health centre; stress clean water and handwashing."
+     ],
+     "answer": "Cholera from contaminated water; oral rehydration and medical care"
+    },
+    {
+     "type": "example",
+     "title": "Reading the antibody graph",
+     "statement": "Using the graph above: what is the peak antibody level for the first infection and the second exposure, and how many times higher is the second peak?",
+     "steps": [
+      "First peak is 25 units; second peak is 90 units.",
+      "90 ÷ 25 = 3.6 times higher."
+     ],
+     "answer": "25 and 90, so 3.6 times higher"
+    },
+    {
+     "type": "exercise",
+     "ref": "gceol-biology-health-e07"
+    }
+   ],
+   "chapter": "gceol-biology-health"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-biology-health-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-biology-malaria",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Malaria is transmitted by:",
+   "choices": [
+    "male mosquitoes",
+    "contaminated water",
+    "houseflies",
+    "female Anopheles mosquito"
+   ],
+   "answer": 3,
+   "explanation": "Only the female Anopheles feeds on blood and transmits it.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-health"
+  },
+  {
+   "id": "gceol-biology-health-e02",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "gceol-biology-malaria",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each disease with its pathogen type.",
+   "pairs": [
+    [
+     "malaria",
+     "protoctist"
+    ],
+    [
+     "cholera",
+     "bacterium"
+    ],
+    [
+     "HIV",
+     "virus"
+    ],
+    [
+     "ringworm",
+     "fungus"
+    ]
+   ],
+   "explanation": "Standard pathogen types.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceol-biology-health"
+  },
+  {
+   "id": "gceol-biology-health-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-biology-malaria",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Antibiotics are the correct treatment for malaria.",
+   "answer": false,
+   "explanation": "Malaria is caused by a protoctist and needs antimalarial drugs.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-health"
+  },
+  {
+   "id": "gceol-biology-health-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-malaria",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A vector is:",
+   "choices": [
+    "a type of virus",
+    "an organism that carries a pathogen",
+    "a drug",
+    "a vaccine"
+   ],
+   "answer": 1,
+   "explanation": "Definition.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-biology-health"
+  },
+  {
+   "id": "gceol-biology-health-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-malaria",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Describe three ways of controlling malaria in a village.",
+   "model": "Sleep under treated mosquito nets; drain stagnant water to remove breeding sites; use window screens and repellents; seek early testing and treatment at a health centre.",
+   "rubric": [
+    "1 mark each, maximum 3"
+   ],
+   "explanation": "Sleep under treated mosquito nets; drain stagnant water to remove breeding sites; use window screens and repellents; seek early testing and treatment at a health centre.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-biology-health"
+  },
+  {
+   "id": "gceol-biology-health-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-biology-malaria",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In a town, cases of malaria rise after the rains.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "A likely reason is:",
+     "choices": [
+      "more vaccines",
+      "colder weather kills parasites",
+      "fewer mosquitoes",
+      "more stagnant water for mosquito breeding"
+     ],
+     "answer": 3,
+     "explanation": "Rain creates puddles.",
+     "id": "gceol-biology-health-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The parasite lives in the person's:",
+     "choices": [
+      "red blood cells",
+      "kidneys only",
+      "bones",
+      "skin only"
+     ],
+     "answer": 0,
+     "explanation": "Plasmodium infects red cells.",
+     "id": "gceol-biology-health-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Why should a child with fever be taken to a health centre quickly?",
+     "model": "Malaria can become severe in children; a test shows the cause and early treatment prevents complications.",
+     "rubric": [
+      "1 mark: risk of severe malaria",
+      "1 mark: test and early treatment"
+     ],
+     "explanation": "Malaria can become severe in children; a test shows the cause and early treatment prevents complications.",
+     "id": "gceol-biology-health-e06-c"
+    }
+   ],
+   "chapter": "gceol-biology-health"
+  },
+  {
+   "id": "gceol-biology-malaria-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-malaria",
+   "prompt": "Plasmodium belongs to the:",
+   "choices": [
+    "protoctists",
+    "viruses",
+    "bacteria",
+    "fungi"
+   ],
+   "answer": 0,
+   "explanation": "Single-celled with nucleus.",
+   "chapter": "gceol-biology-health"
+  },
+  {
+   "id": "gceol-biology-malaria-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-malaria",
+   "prompt": "Where do the young stages of a mosquito develop?",
+   "choices": [
+    "in tree bark",
+    "in still water",
+    "inside bones",
+    "on dry ground"
+   ],
+   "answer": 1,
+   "explanation": "Eggs, larvae and pupae live in water.",
+   "chapter": "gceol-biology-health"
+  },
+  {
+   "id": "gceol-biology-malaria-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-malaria",
+   "prompt": "Which is a symptom of malaria?",
+   "choices": [
+    "hair loss",
+    "broken bones",
+    "poor eyesight",
+    "fever and shivering"
+   ],
+   "answer": 3,
+   "explanation": "Fever.",
+   "chapter": "gceol-biology-health"
+  },
+  {
+   "id": "gceol-biology-malaria-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-malaria",
+   "prompt": "A treated bed net:",
+   "choices": [
+    "kills the parasite in the body",
+    "is a vaccine",
+    "protects against mosquito bites",
+    "cures malaria"
+   ],
+   "answer": 2,
+   "explanation": "Prevention.",
+   "chapter": "gceol-biology-health"
+  },
+  {
+   "id": "gceol-biology-malaria-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-malaria",
+   "prompt": "The vector of malaria is the:",
+   "choices": [
+    "tsetse fly",
+    "housefly",
+    "cockroach",
+    "female Anopheles"
+   ],
+   "answer": 3,
+   "explanation": "Female Anopheles.",
+   "chapter": "gceol-biology-health"
+  },
+  {
+   "id": "gceol-biology-health-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-biology-infections",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Cholera is spread mainly by:",
+   "choices": [
+    "droplets from coughing",
+    "blood transfusion only",
+    "mosquito bites",
+    "contaminated water"
+   ],
+   "answer": 3,
+   "explanation": "It is a water-borne disease.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-health"
+  },
+  {
+   "id": "gceol-biology-health-e08",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "gceol-biology-infections",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match the disease to a prevention method.",
+   "pairs": [
+    [
+     "cholera",
+     "clean drinking water"
+    ],
+    [
+     "TB",
+     "BCG vaccination of children"
+    ],
+    [
+     "typhoid",
+     "washing hands with soap"
+    ],
+    [
+     "malaria",
+     "sleeping under a net"
+    ]
+   ],
+   "explanation": "Standard prevention methods.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceol-biology-health"
+  },
+  {
+   "id": "gceol-biology-health-e09",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-biology-infections",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A first antibody peak is 25 units and the second peak is 90 units. How many times higher is the second peak?",
+   "answer": 3.6,
+   "tolerance": 0.01,
+   "explanation": "90 ÷ 25 = 3.6.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-health"
+  },
+  {
+   "id": "gceol-biology-health-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-infections",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Why is a vaccine given before infection?",
+   "choices": [
+    "it produces memory cells that respond quickly to the real pathogen",
+    "it kills all the microbes in the blood",
+    "it replaces antibiotics",
+    "it makes the skin thicker"
+   ],
+   "answer": 0,
+   "explanation": "Immunity needs antibodies and memory cells before infection.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-biology-health"
+  },
+  {
+   "id": "gceol-biology-health-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-infections",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain why antibiotics should not be used to treat a cold.",
+   "model": "A cold is caused by a virus; antibiotics only kill bacteria, so they do not help, and unnecessary use can lead to antibiotic-resistant bacteria.",
+   "rubric": [
+    "1 mark: cold is viral",
+    "1 mark: antibiotics work on bacteria only",
+    "1 mark: resistance risk"
+   ],
+   "explanation": "A cold is caused by a virus; antibiotics only kill bacteria, so they do not help, and unnecessary use can lead to antibiotic-resistant bacteria.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-biology-health"
+  },
+  {
+   "id": "gceol-biology-health-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-biology-infections",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A school in Maroua reports typhoid among students sharing a well.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which is the most likely source?",
+     "choices": [
+      "air from the classroom",
+      "well water contaminated by sewage",
+      "chalk dust",
+      "mosquitoes"
+     ],
+     "answer": 1,
+     "explanation": "Typhoid is water- and food-borne.",
+     "id": "gceol-biology-health-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which measure is best to stop the spread?",
+     "choices": [
+      "closing windows",
+      "boiling or treating drinking water and washing hands",
+      "sleeping longer",
+      "using perfumes"
+     ],
+     "answer": 1,
+     "explanation": "Break the route of transmission.",
+     "id": "gceol-biology-health-e12-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Suggest two measures the school could take.",
+     "model": "Build and use latrines away from the well; supply treated water; handwashing stations with soap; health education.",
+     "rubric": [
+      "1 mark each, maximum 2"
+     ],
+     "explanation": "Build and use latrines away from the well; supply treated water; handwashing stations with soap; health education.",
+     "id": "gceol-biology-health-e12-c"
+    }
+   ],
+   "chapter": "gceol-biology-health"
+  },
+  {
+   "id": "gceol-biology-infections-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-infections",
+   "prompt": "TB mainly affects the:",
+   "choices": [
+    "lungs",
+    "skin",
+    "kidneys",
+    "bones only"
+   ],
+   "answer": 0,
+   "explanation": "Lungs.",
+   "chapter": "gceol-biology-health"
+  },
+  {
+   "id": "gceol-biology-infections-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-infections",
+   "prompt": "Which does NOT help prevent water-borne disease?",
+   "choices": [
+    "boiling water",
+    "latrines",
+    "handwashing",
+    "drinking from streams without treatment"
+   ],
+   "answer": 3,
+   "explanation": "Untreated water spreads disease.",
+   "chapter": "gceol-biology-health"
+  },
+  {
+   "id": "gceol-biology-infections-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-infections",
+   "prompt": "Antibodies are made by:",
+   "choices": [
+    "lymphocytes",
+    "kidneys",
+    "platelets",
+    "red blood cells"
+   ],
+   "answer": 0,
+   "explanation": "Lymphocytes.",
+   "chapter": "gceol-biology-health"
+  },
+  {
+   "id": "gceol-biology-infections-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-infections",
+   "prompt": "A vaccine contains:",
+   "choices": [
+    "antibodies only",
+    "weakened or dead pathogens or their antigens",
+    "antibiotics",
+    "vitamins"
+   ],
+   "answer": 1,
+   "explanation": "To trigger immunity.",
+   "chapter": "gceol-biology-health"
+  },
+  {
+   "id": "gceol-biology-infections-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-infections",
+   "prompt": "Oral rehydration solution is used to treat:",
+   "choices": [
+    "broken bones",
+    "TB",
+    "dehydration caused by diarrhoea",
+    "malaria"
+   ],
+   "answer": 2,
+   "explanation": "ORS replaces water and salts.",
+   "chapter": "gceol-biology-health"
+  }
+ ]
+}

@@ -1,0 +1,788 @@
+{
+ "chapter": "gceol-biology-practical",
+ "lessons": [
+  {
+   "id": "gceol-biology-drawing",
+   "title": "Biological drawing, units and magnification",
+   "minutes": 25,
+   "programRef": "GCE O Level Biology — Practical skills: drawing, measurement, tables, graphs, planning (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "State the rules for making a good biological drawing.",
+    "Convert between mm and µm and use a scale bar.",
+    "Calculate magnification and actual size."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-biology-practical-e01",
+    "gceol-biology-practical-e02",
+    "gceol-biology-practical-e03",
+    "gceol-biology-practical-e04",
+    "gceol-biology-practical-e05",
+    "gceol-biology-practical-e06"
+   ],
+   "selfCheck": [
+    "gceol-biology-drawing-q1",
+    "gceol-biology-drawing-q2",
+    "gceol-biology-drawing-q3",
+    "gceol-biology-drawing-q4",
+    "gceol-biology-drawing-q5"
+   ],
+   "reviewNotes": [
+    "Check the practical-paper conventions (e.g. title placement) expected by the GCE Board.",
+    "Cell drawing is schematic.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Rules for a good drawing",
+     "md": "1. Use a sharp **HB pencil** and a clean eraser; draw on plain paper.\n2. Make the drawing **large**, using more than half of the space.\n3. Draw with **clear, continuous lines**; no shading, no colouring (unless asked), no sketching.\n4. Show only what you can see; keep **proportions** correct.\n5. **Label** with ruled straight lines that touch the structure and never cross; write labels in pencil, horizontally.\n6. Give a **title** and state the **magnification** or add a **scale bar**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 225,
+      "items": [
+       {
+        "t": "rect",
+        "x": 70,
+        "y": 20,
+        "w": 200,
+        "h": 120,
+        "stroke": "green",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 40
+       },
+       {
+        "t": "circle",
+        "cx": 160,
+        "cy": 80,
+        "r": 18,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "line",
+        "x1": 240,
+        "y1": 60,
+        "x2": 330,
+        "y2": 30,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 334,
+        "y": 34,
+        "text": "cell wall",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 80,
+        "x2": 330,
+        "y2": 80,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 334,
+        "y": 84,
+        "text": "nucleus",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 120,
+        "x2": 330,
+        "y2": 130,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 334,
+        "y": 134,
+        "text": "cytoplasm",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 170,
+        "text": "Fig. 1: a plant cell (×400)",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 75,
+        "y1": 195,
+        "x2": 175,
+        "y2": 195,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 212,
+        "text": "scale bar 10 µm",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A labelled drawing with title and scale bar (schematic).",
+     "alt": "A green rounded cell with a yellow nucleus; three leader lines labelled cell wall, nucleus and cytoplasm; a title Fig. 1 a plant cell and a scale bar of 10 micrometres."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Magnification",
+     "md": "**Magnification = size of the image ÷ actual size** (measure in the same units).\n\nActual size = image size ÷ magnification. Image size = actual size × magnification.\n\nUnits: **1 mm = 1000 µm** (micrometres); 1 cm = 10 mm. A magnification has no units (×400)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Do not mix units: convert both lengths to the same unit first.\n- Do not draw cells with thick double lines or shade them.\n- Label lines must never cross each other or end with arrows.\n- Do not copy the textbook; draw what *you* see."
+    },
+    {
+     "type": "example",
+     "title": "Calculating magnification",
+     "statement": "A drawing of a cell is 36 mm long. The real cell is 0.09 mm long. Calculate the magnification.",
+     "steps": [
+      "Same units: both in mm.",
+      "Magnification = 36 ÷ 0.09 = 400."
+     ],
+     "answer": "×400"
+    },
+    {
+     "type": "example",
+     "title": "Actual size",
+     "statement": "A cell in a photograph measures 24 mm and the magnification is ×600. Find the actual size in µm.",
+     "steps": [
+      "Actual size = 24 ÷ 600 = 0.04 mm.",
+      "Convert: 0.04 × 1000 = 40 µm."
+     ],
+     "answer": "40 µm"
+    },
+    {
+     "type": "exercise",
+     "ref": "gceol-biology-practical-e01"
+    }
+   ],
+   "chapter": "gceol-biology-practical"
+  },
+  {
+   "id": "gceol-biology-experiments",
+   "title": "Planning experiments, tables and graphs",
+   "minutes": 30,
+   "programRef": "GCE O Level Biology — Practical skills: drawing, measurement, tables, graphs, planning (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Identify independent, dependent and controlled variables.",
+    "Record results in a table and draw and read a graph.",
+    "Plan a fair test and evaluate it."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-biology-practical-e07",
+    "gceol-biology-practical-e08",
+    "gceol-biology-practical-e09",
+    "gceol-biology-practical-e10",
+    "gceol-biology-practical-e11",
+    "gceol-biology-practical-e12"
+   ],
+   "selfCheck": [
+    "gceol-biology-experiments-q1",
+    "gceol-biology-experiments-q2",
+    "gceol-biology-experiments-q3",
+    "gceol-biology-experiments-q4",
+    "gceol-biology-experiments-q5"
+   ],
+   "reviewNotes": [
+    "Check the format of Paper/practical questions in the GCE O Level Biology syllabus (Cameroon GCE Board).",
+    "The data in the examples are invented.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Variables",
+     "md": "In an experiment you change one factor and measure another.\n\n- **Independent variable**: the one you change on purpose.\n- **Dependent variable**: the one you measure.\n- **Controlled variables**: everything else, kept the same so the test is **fair**.\n\nA **control** experiment lacks the factor being tested, to show that it is the factor that causes the result."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Tables and graphs",
+     "md": "**Table**: the independent variable in the first column, with **headings and units**; repeat the measurements and calculate the **mean**.\n\n**Graph**: independent variable on the **x-axis**, dependent on the **y-axis**; label both axes with units; choose an even scale that uses most of the paper; plot points as small crosses; draw a smooth curve or **line of best fit**; give a title."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 6,
+      "ymin": 0,
+      "ymax": 12,
+      "grid": 1,
+      "w": 420,
+      "h": 260,
+      "curves": [],
+      "points": [
+       {
+        "x": 1,
+        "y": 2.0,
+        "label": null,
+        "color": "red"
+       },
+       {
+        "x": 2,
+        "y": 4.2,
+        "label": null,
+        "color": "red"
+       },
+       {
+        "x": 3,
+        "y": 5.9,
+        "label": null,
+        "color": "red"
+       },
+       {
+        "x": 4,
+        "y": 8.1,
+        "label": null,
+        "color": "red"
+       },
+       {
+        "x": 5,
+        "y": 10.0,
+        "label": null,
+        "color": "red"
+       }
+      ],
+      "segments": [
+       {
+        "x1": 0,
+        "y1": 0,
+        "x2": 6,
+        "y2": 12,
+        "color": "blue",
+        "dash": true,
+        "label": "line of best fit"
+       }
+      ],
+      "xlabel": "time (min)",
+      "ylabel": "bubbles of gas (cumulative)"
+     },
+     "caption": "Cumulative volume of gas against time (illustrative).",
+     "alt": "A graph of five red points that lie close to a straight line from the origin rising about 2 units per minute."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Writing a plan",
+     "md": "State: the **aim**; the **apparatus**; the **method** step by step (what to change, measure and keep constant, how many repeats); what to **record**; how to **process** the results (mean, rate, graph); **safety** precautions. Evaluate: **reliability** (repeat and agree), **anomalous results**, sources of error, improvements."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Changing two factors at once makes the test unfair.\n- Forgetting units on table headings and graph axes.\n- Joining points dot-to-dot instead of drawing a best-fit line when the points are scattered.\n- Taking a conclusion that the data do not support."
+    },
+    {
+     "type": "example",
+     "title": "Calculate a rate from a graph",
+     "statement": "On the graph, gas production is 2.0 bubbles at 1 min and 10.0 bubbles at 5 min. Calculate the average rate.",
+     "steps": [
+      "Change in gas = 10.0 − 2.0 = 8.0 bubbles.",
+      "Change in time = 5 − 1 = 4 min; rate = 8 ÷ 4 = 2 bubbles per minute."
+     ],
+     "answer": "2 bubbles per minute"
+    },
+    {
+     "type": "example",
+     "title": "Name the variables",
+     "statement": "A student investigates how temperature affects the rate of bubbling of yeast in sugar solution. Name the independent, dependent and two controlled variables.",
+     "steps": [
+      "Independent: temperature of the solution.",
+      "Dependent: number of bubbles per minute; controlled: mass of yeast, volume and concentration of sugar solution, time."
+     ],
+     "answer": "Independent: temperature; dependent: bubbles per minute; controlled: yeast mass and sugar concentration"
+    },
+    {
+     "type": "exercise",
+     "ref": "gceol-biology-practical-e07"
+    }
+   ],
+   "chapter": "gceol-biology-practical"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-biology-practical-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-biology-drawing",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which is a rule for biological drawings?",
+   "choices": [
+    "cross label lines over each other",
+    "use a blunt pencil",
+    "use clear continuous lines and no shading",
+    "colour in the drawing"
+   ],
+   "answer": 2,
+   "explanation": "Clean lines and no shading.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-practical"
+  },
+  {
+   "id": "gceol-biology-practical-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-biology-drawing",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A drawing measures 60 mm and the real object is 0.2 mm. What is the magnification?",
+   "answer": 300,
+   "tolerance": 0,
+   "explanation": "60 ÷ 0.2 = 300.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-practical"
+  },
+  {
+   "id": "gceol-biology-practical-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-biology-drawing",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Convert 0.05 mm to µm.",
+   "answer": 50,
+   "tolerance": 0,
+   "unit": "µm",
+   "explanation": "0.05 × 1000 = 50 µm.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-practical"
+  },
+  {
+   "id": "gceol-biology-practical-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-drawing",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Magnification is calculated as:",
+   "choices": [
+    "image size ÷ actual size",
+    "image size × actual size",
+    "actual size ÷ image size",
+    "image size − actual size"
+   ],
+   "answer": 0,
+   "explanation": "Definition.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-biology-practical"
+  },
+  {
+   "id": "gceol-biology-practical-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-drawing",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "List four rules for a good biological drawing.",
+   "model": "Use a sharp pencil; draw large with clear continuous lines; no shading or colour; label with ruled lines that do not cross; add a title and magnification.",
+   "rubric": [
+    "1 mark each, maximum 4"
+   ],
+   "explanation": "Use a sharp pencil; draw large with clear continuous lines; no shading or colour; label with ruled lines that do not cross; add a title and magnification.",
+   "difficulty": 2,
+   "points": 4,
+   "chapter": "gceol-biology-practical"
+  },
+  {
+   "id": "gceol-biology-practical-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-biology-drawing",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A student draws a root hair cell. The drawing is 45 mm long and the magnification is ×150.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Actual length of the cell in mm.",
+     "answer": 0.3,
+     "tolerance": 0.001,
+     "explanation": "45 ÷ 150 = 0.3 mm.",
+     "unit": "mm",
+     "id": "gceol-biology-practical-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Actual length in µm.",
+     "answer": 300,
+     "tolerance": 0.1,
+     "explanation": "0.3 × 1000 = 300 µm.",
+     "unit": "µm",
+     "id": "gceol-biology-practical-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "State two things the student must add to the drawing.",
+     "model": "A title (and magnification) and labels with ruled lines.",
+     "rubric": [
+      "1 mark each, maximum 2"
+     ],
+     "explanation": "A title (and magnification) and labels with ruled lines.",
+     "id": "gceol-biology-practical-e06-c"
+    }
+   ],
+   "chapter": "gceol-biology-practical"
+  },
+  {
+   "id": "gceol-biology-drawing-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-drawing",
+   "prompt": "1 mm equals:",
+   "choices": [
+    "10 000 µm",
+    "100 µm",
+    "1000 µm",
+    "10 µm"
+   ],
+   "answer": 2,
+   "explanation": "Conversion.",
+   "chapter": "gceol-biology-practical"
+  },
+  {
+   "id": "gceol-biology-drawing-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-drawing",
+   "prompt": "Label lines should:",
+   "choices": [
+    "cross each other",
+    "be curved",
+    "be ruled and not cross",
+    "have arrows"
+   ],
+   "answer": 2,
+   "explanation": "Neat labelling.",
+   "chapter": "gceol-biology-practical"
+  },
+  {
+   "id": "gceol-biology-drawing-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-drawing",
+   "prompt": "Magnification has:",
+   "choices": [
+    "units of mm",
+    "units of µm",
+    "units of cm²",
+    "no units"
+   ],
+   "answer": 3,
+   "explanation": "It is a ratio.",
+   "chapter": "gceol-biology-practical"
+  },
+  {
+   "id": "gceol-biology-drawing-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-drawing",
+   "prompt": "Which pencil is best for drawing?",
+   "choices": [
+    "blunt 6B",
+    "coloured",
+    "sharp HB",
+    "pen"
+   ],
+   "answer": 2,
+   "explanation": "Sharp HB.",
+   "chapter": "gceol-biology-practical"
+  },
+  {
+   "id": "gceol-biology-drawing-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-drawing",
+   "prompt": "A scale bar:",
+   "choices": [
+    "shows real length on the drawing",
+    "gives the title",
+    "shows the colour",
+    "replaces labels"
+   ],
+   "answer": 0,
+   "explanation": "It indicates scale.",
+   "chapter": "gceol-biology-practical"
+  },
+  {
+   "id": "gceol-biology-practical-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-biology-experiments",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The variable that you change on purpose is the:",
+   "choices": [
+    "controlled variable",
+    "independent variable",
+    "control",
+    "dependent variable"
+   ],
+   "answer": 1,
+   "explanation": "Definition.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-practical"
+  },
+  {
+   "id": "gceol-biology-practical-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-biology-experiments",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A plant grows from 4 cm to 14 cm in 5 days. What is the mean growth rate in cm per day?",
+   "answer": 2,
+   "tolerance": 0,
+   "unit": "cm/day",
+   "explanation": "(14 − 4) ÷ 5 = 2.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-practical"
+  },
+  {
+   "id": "gceol-biology-practical-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-biology-experiments",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The dependent variable is placed on the x-axis.",
+   "answer": false,
+   "explanation": "The independent variable is on the x-axis.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-practical"
+  },
+  {
+   "id": "gceol-biology-practical-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-experiments",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Why are experiments repeated?",
+   "choices": [
+    "to save time",
+    "to improve reliability and spot anomalies",
+    "to make it unfair",
+    "to change the aim"
+   ],
+   "answer": 1,
+   "explanation": "Repeats help check results.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-biology-practical"
+  },
+  {
+   "id": "gceol-biology-practical-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-experiments",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Plan an investigation into the effect of light intensity on the rate of photosynthesis in pondweed.",
+   "model": "Place pondweed in water with sodium hydrogencarbonate at different distances from a lamp (independent variable: distance); count the bubbles of oxygen per minute (dependent); keep temperature, plant size and time the same; repeat three times and find the mean; plot a graph; wear safety precautions with the lamp near water.",
+   "rubric": [
+    "1 mark: independent variable stated",
+    "1 mark: dependent variable and measurement",
+    "1 mark: controlled variables",
+    "1 mark: repeats and mean"
+   ],
+   "explanation": "Place pondweed in water with sodium hydrogencarbonate at different distances from a lamp (independent variable: distance); count the bubbles of oxygen per minute (dependent); keep temperature, plant size and time the same; repeat three times and find the mean; plot a graph; wear safety precautions with the lamp near water.",
+   "difficulty": 2,
+   "points": 4,
+   "chapter": "gceol-biology-practical"
+  },
+  {
+   "id": "gceol-biology-practical-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-biology-experiments",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A table shows the percentage of seeds germinating at different temperatures: 10 °C: 5 %; 20 °C: 60 %; 30 °C: 90 %; 40 °C: 30 %.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The independent variable is:",
+     "choices": [
+      "temperature",
+      "number of seeds",
+      "type of seed",
+      "percentage germination"
+     ],
+     "answer": 0,
+     "explanation": "Temperature is changed.",
+     "id": "gceol-biology-practical-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The temperature with the highest germination is:",
+     "choices": [
+      "10 °C",
+      "20 °C",
+      "30 °C",
+      "40 °C"
+     ],
+     "answer": 2,
+     "explanation": "90 % is the highest.",
+     "id": "gceol-biology-practical-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "By how much does germination fall from 30 °C to 40 °C (percentage points)?",
+     "answer": 60,
+     "tolerance": 0,
+     "explanation": "90 − 30 = 60.",
+     "id": "gceol-biology-practical-e12-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Suggest an explanation for the low germination at 40 °C.",
+     "model": "High temperature may denature the enzymes of the seed so germination is poor.",
+     "rubric": [
+      "1 mark: enzymes denature / seeds damaged"
+     ],
+     "explanation": "High temperature may denature the enzymes of the seed so germination is poor.",
+     "id": "gceol-biology-practical-e12-d"
+    }
+   ],
+   "chapter": "gceol-biology-practical"
+  },
+  {
+   "id": "gceol-biology-experiments-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-experiments",
+   "prompt": "A fair test changes:",
+   "choices": [
+    "all factors",
+    "one factor at a time",
+    "two factors",
+    "no factor"
+   ],
+   "answer": 1,
+   "explanation": "Only one variable.",
+   "chapter": "gceol-biology-practical"
+  },
+  {
+   "id": "gceol-biology-experiments-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-experiments",
+   "prompt": "Axes of a graph should have:",
+   "choices": [
+    "labels with units",
+    "no labels",
+    "only a title",
+    "decorations"
+   ],
+   "answer": 0,
+   "explanation": "Always label.",
+   "chapter": "gceol-biology-practical"
+  },
+  {
+   "id": "gceol-biology-experiments-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-experiments",
+   "prompt": "The control experiment:",
+   "choices": [
+    "is optional",
+    "uses less time",
+    "tests two factors",
+    "lacks the factor being tested"
+   ],
+   "answer": 3,
+   "explanation": "It shows the factor causes the result.",
+   "chapter": "gceol-biology-practical"
+  },
+  {
+   "id": "gceol-biology-experiments-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-experiments",
+   "prompt": "The mean of 4, 6 and 8 is:",
+   "choices": [
+    "18",
+    "8",
+    "6",
+    "4"
+   ],
+   "answer": 2,
+   "explanation": "(4 + 6 + 8) ÷ 3 = 6.",
+   "chapter": "gceol-biology-practical"
+  },
+  {
+   "id": "gceol-biology-experiments-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-experiments",
+   "prompt": "An anomalous result is one that:",
+   "choices": [
+    "is the largest",
+    "does not fit the pattern",
+    "is the mean",
+    "is always correct"
+   ],
+   "answer": 1,
+   "explanation": "Check it and maybe repeat.",
+   "chapter": "gceol-biology-practical"
+  }
+ ]
+}

@@ -1,0 +1,1620 @@
+{
+ "chapter": "gceol-biology-coordination",
+ "lessons": [
+  {
+   "id": "gceol-biology-nervous",
+   "title": "The nervous system and reflex actions",
+   "minutes": 25,
+   "programRef": "GCE O Level Biology — Nervous system, sense organs, hormones, tropisms (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Name the parts of the nervous system and the three types of neurone.",
+    "Describe the path of a reflex arc.",
+    "Distinguish a reflex action from a voluntary action."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-biology-coordination-e01",
+    "gceol-biology-coordination-e02",
+    "gceol-biology-coordination-e03",
+    "gceol-biology-coordination-e04",
+    "gceol-biology-coordination-e05",
+    "gceol-biology-coordination-e06"
+   ],
+   "selfCheck": [
+    "gceol-biology-nervous-q1",
+    "gceol-biology-nervous-q2",
+    "gceol-biology-nervous-q3",
+    "gceol-biology-nervous-q4",
+    "gceol-biology-nervous-q5"
+   ],
+   "reviewNotes": [
+    "Parts of the brain are given at textbook level only; check the syllabus depth.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "The nervous system",
+     "md": "The **central nervous system (CNS)** is the **brain** and **spinal cord**. **Nerves** carry electrical impulses between the CNS and the rest of the body. **Receptors** detect stimuli; **effectors** (muscles and glands) carry out the response.\n\nThree types of **neurone**: **sensory** (receptor to CNS), **relay** (inside the CNS) and **motor** (CNS to effector). The gap between two neurones is a **synapse**, crossed by chemical transmitter."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Reflex action",
+     "md": "A **reflex action** is a fast, automatic response to a stimulus that does not need thought. It protects the body (pulling the hand from a hot pot, blinking, the pupil narrowing). The path it follows is the **reflex arc**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 300,
+      "h": 342,
+      "items": [
+       {
+        "t": "rect",
+        "x": 50,
+        "y": 10,
+        "w": 200,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightblue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 24.0,
+        "text": "Stimulus",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 38.0,
+        "text": "(hot object)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 150.0,
+        "y1": 47,
+        "x2": 150.0,
+        "y2": 55,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 50,
+        "y": 58,
+        "w": 200,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgreen",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 72.0,
+        "text": "Receptor",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 86.0,
+        "text": "(skin)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 150.0,
+        "y1": 95,
+        "x2": 150.0,
+        "y2": 103,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 50,
+        "y": 106,
+        "w": 200,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightorange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 120.0,
+        "text": "Sensory",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 134.0,
+        "text": "neurone",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 150.0,
+        "y1": 143,
+        "x2": 150.0,
+        "y2": 151,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 50,
+        "y": 154,
+        "w": 200,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightyellow",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 168.0,
+        "text": "Relay neurone",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 182.0,
+        "text": "(spinal cord)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 150.0,
+        "y1": 191,
+        "x2": 150.0,
+        "y2": 199,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 50,
+        "y": 202,
+        "w": 200,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgrey",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 216.0,
+        "text": "Motor",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 230.0,
+        "text": "neurone",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 150.0,
+        "y1": 239,
+        "x2": 150.0,
+        "y2": 247,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 50,
+        "y": 250,
+        "w": 200,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightblue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 264.0,
+        "text": "Effector",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 278.0,
+        "text": "(arm muscle)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 150.0,
+        "y1": 287,
+        "x2": 150.0,
+        "y2": 295,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 50,
+        "y": 298,
+        "w": 200,
+        "h": 34,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgreen",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 312.0,
+        "text": "Response",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 326.0,
+        "text": "(hand pulled away)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "The reflex arc, step by step.",
+     "alt": "A vertical flow of seven boxes: stimulus, receptor, sensory neurone, relay neurone in the spinal cord, motor neurone, effector muscle and response."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Reflex versus voluntary action",
+     "md": "- **Reflex**: automatic, very fast, involves the spinal cord (or brainstem), not learned.\n- **Voluntary**: you decide; the brain is involved; slower; can be learned (writing, walking, kicking a ball).\n\nThe brain's **cerebrum** controls thought and voluntary action; the **cerebellum** controls balance and coordination; the **medulla** controls breathing and heart rate."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- A reflex is quick because there are few neurones and no decision, *not* because impulses are faster.\n- Sensory neurones carry impulses *to* the CNS; motor neurones carry them *away*.\n- The effector is the muscle or gland, not the nerve."
+    },
+    {
+     "type": "example",
+     "title": "Name the path",
+     "statement": "Describe the reflex arc when a person in Buea touches a very hot cooking pot.",
+     "steps": [
+      "Receptors in the skin detect the heat and send impulses along a sensory neurone to the spinal cord.",
+      "A relay neurone passes the impulse to a motor neurone, which carries it to the arm muscle (effector); the muscle contracts and the hand is pulled away."
+     ],
+     "answer": "Receptor, sensory neurone, relay neurone, motor neurone, effector."
+    },
+    {
+     "type": "example",
+     "title": "Reflex or voluntary?",
+     "statement": "Classify: (a) blinking when dust enters the eye, (b) writing a letter, (c) saliva when smelling frying plantain.",
+     "steps": [
+      "(a) automatic and protective: reflex.",
+      "(b) a decision of the brain: voluntary.",
+      "(c) automatic, not thought out: reflex."
+     ],
+     "answer": "(a) reflex, (b) voluntary, (c) reflex."
+    },
+    {
+     "type": "exercise",
+     "ref": "gceol-biology-coordination-e01"
+    }
+   ],
+   "chapter": "gceol-biology-coordination"
+  },
+  {
+   "id": "gceol-biology-senses",
+   "title": "Sense organs: the eye and the ear",
+   "minutes": 30,
+   "programRef": "GCE O Level Biology — Nervous system, sense organs, hormones, tropisms (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Label the main parts of the eye and state their functions.",
+    "Explain the pupil reflex and accommodation.",
+    "Describe the main parts of the ear and how we hear and balance."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-biology-coordination-e07",
+    "gceol-biology-coordination-e08",
+    "gceol-biology-coordination-e09",
+    "gceol-biology-coordination-e10",
+    "gceol-biology-coordination-e11",
+    "gceol-biology-coordination-e12"
+   ],
+   "selfCheck": [
+    "gceol-biology-senses-q1",
+    "gceol-biology-senses-q2",
+    "gceol-biology-senses-q3",
+    "gceol-biology-senses-q4",
+    "gceol-biology-senses-q5"
+   ],
+   "reviewNotes": [
+    "Eye and ear diagrams are schematic (not to scale).",
+    "Hearing-protection comment must be reviewed by a health worker.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "The eye",
+     "md": "- **Cornea**: transparent front; refracts (bends) light.\n- **Iris**: coloured muscle that controls the size of the **pupil**.\n- **Lens**: changes shape to focus light on the retina.\n- **Retina**: contains light receptors: **rods** (dim light) and **cones** (colour, bright light).\n- **Optic nerve**: carries impulses to the brain.\n- **Ciliary muscles** and **suspensory ligaments** hold and change the lens."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 500,
+      "h": 215,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 110,
+        "r": 80,
+        "stroke": "ink",
+        "width": 3,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "path",
+        "d": "M 250 48 A 80 80 0 0 1 250 172",
+        "stroke": "red",
+        "width": 5
+       },
+       {
+        "t": "poly",
+        "pts": [
+         135,
+         110,
+         145,
+         85,
+         155,
+         110,
+         145,
+         135
+        ],
+        "stroke": "blue",
+        "width": 2,
+        "closed": true,
+        "fill": "lightblue"
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 50,
+        "x2": 150,
+        "y2": 88,
+        "color": "brown",
+        "width": 5
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 132,
+        "x2": 150,
+        "y2": 170,
+        "color": "brown",
+        "width": 5
+       },
+       {
+        "t": "rect",
+        "x": 278,
+        "y": 104,
+        "w": 50,
+        "h": 12,
+        "stroke": "orange",
+        "width": 1,
+        "fill": "orange"
+       },
+       {
+        "t": "line",
+        "x1": 122,
+        "y1": 110,
+        "x2": 60,
+        "y2": 110,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 56,
+        "y": 114,
+        "text": "cornea",
+        "size": 12,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 60,
+        "x2": 120,
+        "y2": 28,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 116,
+        "y": 28,
+        "text": "iris",
+        "size": 12,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 90,
+        "x2": 100,
+        "y2": 60,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 96,
+        "y": 64,
+        "text": "lens",
+        "size": 12,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 268,
+        "y1": 150,
+        "x2": 330,
+        "y2": 190,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 334,
+        "y": 194,
+        "text": "retina",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 325,
+        "y1": 110,
+        "x2": 400,
+        "y2": 110,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 404,
+        "y": 114,
+        "text": "optic nerve",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Section through the eye (schematic).",
+     "alt": "A round eyeball with a transparent cornea at the front, a lens behind the pupil, the iris above and below the pupil, a red retina on the back wall and an optic nerve leaving the back."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Pupil reflex and accommodation",
+     "md": "**Pupil reflex**: in bright light the circular muscles of the iris contract and the pupil gets smaller (protects the retina); in dim light the radial muscles contract and the pupil widens.\n\n**Accommodation** (focusing):\n- **Near object**: ciliary muscles contract, ligaments slacken, lens becomes thicker and more curved.\n- **Distant object**: ciliary muscles relax, ligaments are taut, lens is thin."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "The ear",
+     "md": "Sound waves are collected by the **pinna** and travel along the ear canal to the **eardrum**, which vibrates. Three small bones (**ossicles**) pass and increase the vibrations to the **cochlea**, where receptor cells send impulses along the **auditory nerve** to the brain. The **semicircular canals** detect head movement for **balance**. The **Eustachian tube** equalises air pressure."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- The *retina*, not the lens, contains the light receptors.\n- A *thick* lens focuses *near* objects.\n- The cochlea is for hearing; the semicircular canals are for balance.\n- Do not push objects into the ear; loud noise can damage hearing (health review)."
+    },
+    {
+     "type": "example",
+     "title": "Bright light",
+     "statement": "You walk out of a dark room into the sun at noon in Douala. Describe what happens to your pupils and why.",
+     "steps": [
+      "Bright light is the stimulus; receptors in the retina send impulses to the brain and then to the iris.",
+      "The circular muscles of the iris contract, making the pupil smaller, so less light reaches the retina."
+     ],
+     "answer": "The pupils narrow to protect the retina."
+    },
+    {
+     "type": "example",
+     "title": "Reading a book",
+     "statement": "You look from the blackboard to your notebook. How does the lens change?",
+     "steps": [
+      "The notebook is a near object.",
+      "The ciliary muscles contract and the suspensory ligaments slacken, so the lens becomes thicker and bends light more to focus it on the retina."
+     ],
+     "answer": "The lens becomes thicker (more curved)."
+    },
+    {
+     "type": "exercise",
+     "ref": "gceol-biology-coordination-e07"
+    }
+   ],
+   "chapter": "gceol-biology-coordination"
+  },
+  {
+   "id": "gceol-biology-hormones",
+   "title": "Hormones and plant responses",
+   "minutes": 25,
+   "programRef": "GCE O Level Biology — Nervous system, sense organs, hormones, tropisms (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define a hormone and compare nervous and hormonal control.",
+    "Name important hormones and their effects.",
+    "Explain phototropism and gravitropism using auxins."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-biology-coordination-e13",
+    "gceol-biology-coordination-e14",
+    "gceol-biology-coordination-e15",
+    "gceol-biology-coordination-e16",
+    "gceol-biology-coordination-e17",
+    "gceol-biology-coordination-e18"
+   ],
+   "selfCheck": [
+    "gceol-biology-hormones-q1",
+    "gceol-biology-hormones-q2",
+    "gceol-biology-hormones-q3",
+    "gceol-biology-hormones-q4",
+    "gceol-biology-hormones-q5"
+   ],
+   "reviewNotes": [
+    "Auxin explanation is the standard simplified one (shaded-side elongation).",
+    "Check syllabus scope for gibberellins etc.; not included.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Hormones",
+     "md": "A **hormone** is a chemical substance made in an **endocrine gland** and carried by the **blood** to **target organs**, where it changes their activity. Examples: **insulin** and glucagon (pancreas), **adrenaline** (adrenal glands), **ADH** (pituitary), **testosterone** (testes), **oestrogen** and progesterone (ovaries)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Nerves compared with hormones",
+     "md": "- **Nerves**: electrical impulses along neurones; very fast; short-lasting effect; to a precise place.\n- **Hormones**: chemicals in the blood; slower; longer-lasting effect; may act on several organs.\n\n**Adrenaline** prepares the body for 'fight or flight': the heart beats faster, breathing increases, pupils widen and the liver releases glucose."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 300,
+      "h": 154,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 10,
+        "w": 280.0,
+        "h": 60,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightblue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 30.0,
+        "text": "NERVES",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 44.0,
+        "text": "impulses along neurones",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 58.0,
+        "text": "fast, short effect",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 84,
+        "w": 280.0,
+        "h": 60,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgreen",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 104.0,
+        "text": "HORMONES",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 118.0,
+        "text": "chemicals in blood",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 150.0,
+        "y": 132.0,
+        "text": "slower, longer effect",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Nerves and hormones compared.",
+     "alt": "Two boxes: nerves with fast electrical impulses and a short effect; hormones with chemicals in the blood, slower and longer lasting."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Plant responses (tropisms)",
+     "md": "A **tropism** is a growth response of a plant to a directional stimulus. Plant hormones called **auxins**, made at the shoot tip, control it.\n\n- **Phototropism**: shoots grow towards light. Auxin moves to the shaded side, making cells there elongate more, so the shoot bends towards the light.\n- **Gravitropism**: roots grow downwards (positive); shoots grow upwards (negative)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 230,
+      "items": [
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 190,
+        "x2": 80,
+        "y2": 90,
+        "color": "green",
+        "width": 6
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 215,
+        "text": "no light",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 190,
+        "x2": 250,
+        "y2": 140,
+        "color": "green",
+        "width": 6
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 140,
+        "x2": 280,
+        "y2": 100,
+        "color": "green",
+        "width": 6
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 215,
+        "text": "light from the right",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 400,
+        "y1": 60,
+        "x2": 340,
+        "y2": 60,
+        "color": "orange",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 400,
+        "y1": 80,
+        "x2": 340,
+        "y2": 80,
+        "color": "orange",
+        "width": 3,
+        "arrow": "end"
+       }
+      ]
+     },
+     "caption": "A shoot grows towards the light.",
+     "alt": "A straight shoot in no light and a second shoot that bends to the right towards arrows representing light coming from the right."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Hormones do *not* travel in nerves; they travel in the *blood*.\n- Auxin makes cells on the *shaded* side grow *longer*; it does not make the lit side shrink.\n- Plants have no nerves or glands; their hormones move from cell to cell."
+    },
+    {
+     "type": "example",
+     "title": "Fight or flight",
+     "statement": "A boy meets a barking dog and his heart pounds. Name the hormone and two effects.",
+     "steps": [
+      "The adrenal glands release adrenaline into the blood.",
+      "Heart rate and breathing rate increase; the liver releases glucose for energy."
+     ],
+     "answer": "Adrenaline; faster heart rate and more glucose in the blood."
+    },
+    {
+     "type": "example",
+     "title": "Seedling on a window",
+     "statement": "A maize seedling on a window sill in Limbe leans towards the window. Explain.",
+     "steps": [
+      "Light from one side is the stimulus (phototropism).",
+      "Auxin collects on the shaded side, cells there elongate faster, so the stem bends towards the light."
+     ],
+     "answer": "Unequal auxin distribution causes bending towards the light."
+    },
+    {
+     "type": "exercise",
+     "ref": "gceol-biology-coordination-e13"
+    }
+   ],
+   "chapter": "gceol-biology-coordination"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-biology-coordination-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-biology-nervous",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which neurone carries impulses from the receptor to the spinal cord?",
+   "choices": [
+    "motor neurone",
+    "sensory neurone",
+    "effector",
+    "relay neurone"
+   ],
+   "answer": 1,
+   "explanation": "Sensory neurones go into the CNS.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-coordination"
+  },
+  {
+   "id": "gceol-biology-coordination-e02",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "gceol-biology-nervous",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match the part to its function.",
+   "pairs": [
+    [
+     "cerebrum",
+     "voluntary action and thinking"
+    ],
+    [
+     "cerebellum",
+     "balance"
+    ],
+    [
+     "medulla",
+     "controls breathing rate"
+    ],
+    [
+     "motor neurone",
+     "carries impulse to a muscle"
+    ]
+   ],
+   "explanation": "Standard functions.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceol-biology-coordination"
+  },
+  {
+   "id": "gceol-biology-coordination-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-biology-nervous",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A reflex action needs a decision by the cerebrum.",
+   "answer": false,
+   "explanation": "Reflexes are automatic and do not need the cerebrum.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-coordination"
+  },
+  {
+   "id": "gceol-biology-coordination-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-nervous",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The effector in the reflex of pulling a hand from a flame is the:",
+   "choices": [
+    "skin",
+    "arm muscle",
+    "spinal cord",
+    "sensory neurone"
+   ],
+   "answer": 1,
+   "explanation": "The muscle carries out the response.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-biology-coordination"
+  },
+  {
+   "id": "gceol-biology-coordination-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-nervous",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain why a reflex action protects the body.",
+   "model": "It is very fast and automatic: few neurones are involved and no thinking is needed, so the body moves away from danger before damage becomes severe.",
+   "rubric": [
+    "1 mark: fast/automatic",
+    "1 mark: few neurones/no thought",
+    "1 mark: protects from harm"
+   ],
+   "explanation": "It is very fast and automatic: few neurones are involved and no thinking is needed, so the body moves away from danger before damage becomes severe.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-biology-coordination"
+  },
+  {
+   "id": "gceol-biology-coordination-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-biology-nervous",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A doctor taps below a patient's knee and the leg jerks forward.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The leg movement is a:",
+     "choices": [
+      "reflex action",
+      "hormone response",
+      "voluntary action",
+      "growth movement"
+     ],
+     "answer": 0,
+     "explanation": "It is automatic.",
+     "id": "gceol-biology-coordination-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The effector is:",
+     "choices": [
+      "the brain",
+      "the sensory neurone",
+      "the thigh muscle",
+      "the knee skin"
+     ],
+     "answer": 2,
+     "explanation": "The thigh muscle contracts.",
+     "id": "gceol-biology-coordination-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Describe the path of the impulse.",
+     "model": "Receptor in the tendon, sensory neurone, spinal cord (relay neurone), motor neurone, effector muscle.",
+     "rubric": [
+      "1 mark: receptor and sensory neurone",
+      "1 mark: spinal cord and motor neurone to effector"
+     ],
+     "explanation": "Receptor in the tendon, sensory neurone, spinal cord (relay neurone), motor neurone, effector muscle.",
+     "id": "gceol-biology-coordination-e06-c"
+    }
+   ],
+   "chapter": "gceol-biology-coordination"
+  },
+  {
+   "id": "gceol-biology-nervous-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-nervous",
+   "prompt": "The CNS consists of:",
+   "choices": [
+    "nerves and muscles",
+    "brain and heart",
+    "spinal cord and glands",
+    "brain and spinal cord"
+   ],
+   "answer": 3,
+   "explanation": "CNS = brain + spinal cord.",
+   "chapter": "gceol-biology-coordination"
+  },
+  {
+   "id": "gceol-biology-nervous-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-nervous",
+   "prompt": "A synapse is:",
+   "choices": [
+    "a type of muscle",
+    "a gap between two neurones",
+    "a sense organ",
+    "a hormone"
+   ],
+   "answer": 1,
+   "explanation": "Chemical transmitters cross it.",
+   "chapter": "gceol-biology-coordination"
+  },
+  {
+   "id": "gceol-biology-nervous-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-nervous",
+   "prompt": "Which is a reflex?",
+   "choices": [
+    "playing football",
+    "blinking in bright light",
+    "singing",
+    "reading"
+   ],
+   "answer": 1,
+   "explanation": "Automatic response.",
+   "chapter": "gceol-biology-coordination"
+  },
+  {
+   "id": "gceol-biology-nervous-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-nervous",
+   "prompt": "Which part controls balance?",
+   "choices": [
+    "cerebellum",
+    "medulla",
+    "cerebrum",
+    "pancreas"
+   ],
+   "answer": 0,
+   "explanation": "Cerebellum.",
+   "chapter": "gceol-biology-coordination"
+  },
+  {
+   "id": "gceol-biology-nervous-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-nervous",
+   "prompt": "Muscles and glands are:",
+   "choices": [
+    "receptors",
+    "stimuli",
+    "relay neurones",
+    "effectors"
+   ],
+   "answer": 3,
+   "explanation": "They carry out the response.",
+   "chapter": "gceol-biology-coordination"
+  },
+  {
+   "id": "gceol-biology-coordination-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-biology-senses",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which part of the eye contains rods and cones?",
+   "choices": [
+    "cornea",
+    "lens",
+    "retina",
+    "iris"
+   ],
+   "answer": 2,
+   "explanation": "The retina holds the light receptors.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-coordination"
+  },
+  {
+   "id": "gceol-biology-coordination-e08",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "gceol-biology-senses",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each part to its function.",
+   "pairs": [
+    [
+     "iris",
+     "controls pupil size"
+    ],
+    [
+     "optic nerve",
+     "carries impulses to the brain"
+    ],
+    [
+     "cochlea",
+     "converts vibrations into impulses"
+    ],
+    [
+     "semicircular canals",
+     "detect head movement"
+    ]
+   ],
+   "explanation": "Each part is matched to its job.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceol-biology-coordination"
+  },
+  {
+   "id": "gceol-biology-coordination-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-biology-senses",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "To look at a distant object the lens becomes thicker.",
+   "answer": false,
+   "explanation": "A distant object needs a thin lens.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-coordination"
+  },
+  {
+   "id": "gceol-biology-coordination-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-senses",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In bright light the pupil:",
+   "choices": [
+    "stays the same",
+    "gets larger",
+    "turns red",
+    "gets smaller"
+   ],
+   "answer": 3,
+   "explanation": "The circular muscles of the iris contract.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-biology-coordination"
+  },
+  {
+   "id": "gceol-biology-coordination-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-senses",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Describe how sound is transmitted from the air to the brain.",
+   "model": "The pinna collects sound; the eardrum vibrates; the ossicles pass the vibrations to the cochlea; receptor cells in the cochlea send impulses along the auditory nerve to the brain.",
+   "rubric": [
+    "1 mark: eardrum vibrates",
+    "1 mark: ossicles/cochlea",
+    "1 mark: impulses along auditory nerve"
+   ],
+   "explanation": "The pinna collects sound; the eardrum vibrates; the ossicles pass the vibrations to the cochlea; receptor cells in the cochlea send impulses along the auditory nerve to the brain.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-biology-coordination"
+  },
+  {
+   "id": "gceol-biology-coordination-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-biology-senses",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A boy at a football match in Bamenda looks at the ball and then at his watch.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which muscles change the shape of the lens?",
+     "choices": [
+      "optic muscles",
+      "iris muscles",
+      "eyelid muscles",
+      "ciliary muscles"
+     ],
+     "answer": 3,
+     "explanation": "Ciliary muscles act on the suspensory ligaments.",
+     "id": "gceol-biology-coordination-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "When he looks at his watch the lens:",
+     "choices": [
+      "moves backwards",
+      "becomes thicker",
+      "becomes thinner",
+      "stops working"
+     ],
+     "answer": 1,
+     "explanation": "A near object needs a thicker lens.",
+     "id": "gceol-biology-coordination-e12-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Why do cones work only in bright light?",
+     "model": "Cones are less sensitive than rods and need more light; rods work in dim light.",
+     "rubric": [
+      "1 mark: cones need bright light",
+      "1 mark: rods are more sensitive"
+     ],
+     "explanation": "Cones are less sensitive than rods and need more light; rods work in dim light.",
+     "id": "gceol-biology-coordination-e12-c"
+    }
+   ],
+   "chapter": "gceol-biology-coordination"
+  },
+  {
+   "id": "gceol-biology-senses-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-senses",
+   "prompt": "The transparent part at the front of the eye is the:",
+   "choices": [
+    "lens",
+    "cornea",
+    "iris",
+    "retina"
+   ],
+   "answer": 1,
+   "explanation": "Cornea.",
+   "chapter": "gceol-biology-coordination"
+  },
+  {
+   "id": "gceol-biology-senses-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-senses",
+   "prompt": "The structure that detects sound vibrations is the:",
+   "choices": [
+    "cochlea",
+    "pinna",
+    "eardrum",
+    "lens"
+   ],
+   "answer": 0,
+   "explanation": "Cochlea.",
+   "chapter": "gceol-biology-coordination"
+  },
+  {
+   "id": "gceol-biology-senses-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-senses",
+   "prompt": "Rods work best in:",
+   "choices": [
+    "dim light",
+    "bright light",
+    "colour",
+    "darkness only"
+   ],
+   "answer": 0,
+   "explanation": "Rods are sensitive.",
+   "chapter": "gceol-biology-coordination"
+  },
+  {
+   "id": "gceol-biology-senses-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-senses",
+   "prompt": "The eardrum:",
+   "choices": [
+    "detects balance",
+    "vibrates when sound arrives",
+    "controls light",
+    "makes sound"
+   ],
+   "answer": 1,
+   "explanation": "It vibrates.",
+   "chapter": "gceol-biology-coordination"
+  },
+  {
+   "id": "gceol-biology-senses-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-senses",
+   "prompt": "A thick lens is used to see:",
+   "choices": [
+    "near objects",
+    "distant objects",
+    "dark objects",
+    "colours"
+   ],
+   "answer": 0,
+   "explanation": "Near objects.",
+   "chapter": "gceol-biology-coordination"
+  },
+  {
+   "id": "gceol-biology-coordination-e13",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-biology-hormones",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A hormone is carried from a gland to its target organ by the:",
+   "choices": [
+    "nerves",
+    "blood",
+    "bones",
+    "xylem"
+   ],
+   "answer": 1,
+   "explanation": "Hormones travel in the blood.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-coordination"
+  },
+  {
+   "id": "gceol-biology-coordination-e14",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "gceol-biology-hormones",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match the gland to its hormone.",
+   "pairs": [
+    [
+     "pancreas",
+     "insulin"
+    ],
+    [
+     "pituitary",
+     "ADH"
+    ],
+    [
+     "ovary",
+     "oestrogen"
+    ],
+    [
+     "testis",
+     "testosterone"
+    ]
+   ],
+   "explanation": "Standard gland-hormone pairs.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceol-biology-coordination"
+  },
+  {
+   "id": "gceol-biology-coordination-e15",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-biology-hormones",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Auxin accumulates on the lit side of a shoot.",
+   "answer": false,
+   "explanation": "It accumulates on the shaded side.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-biology-coordination"
+  },
+  {
+   "id": "gceol-biology-coordination-e16",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-hormones",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which is an effect of adrenaline?",
+   "choices": [
+    "faster heart rate",
+    "slower breathing",
+    "lower blood glucose",
+    "narrower airways"
+   ],
+   "answer": 0,
+   "explanation": "Adrenaline increases heart rate.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "gceol-biology-coordination"
+  },
+  {
+   "id": "gceol-biology-coordination-e17",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-biology-hormones",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Give three differences between nervous and hormonal control.",
+   "model": "Nerves use electrical impulses, hormones use chemicals in the blood; nervous effects are fast and short-lived, hormonal effects slower and longer-lasting; nerves act on a precise target, hormones may affect many organs.",
+   "rubric": [
+    "1 mark each, maximum 3"
+   ],
+   "explanation": "Nerves use electrical impulses, hormones use chemicals in the blood; nervous effects are fast and short-lived, hormonal effects slower and longer-lasting; nerves act on a precise target, hormones may affect many organs.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-biology-coordination"
+  },
+  {
+   "id": "gceol-biology-coordination-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-biology-hormones",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Seedlings are grown in three conditions: A in the dark, B with light from one side, C with light from above.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Seedling B will:",
+     "choices": [
+      "not grow",
+      "bend away from the light",
+      "grow downwards",
+      "bend towards the light"
+     ],
+     "answer": 3,
+     "explanation": "Phototropism.",
+     "id": "gceol-biology-coordination-e18-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Seedling C will grow:",
+     "choices": [
+      "sideways",
+      "straight upwards",
+      "downwards",
+      "in a spiral"
+     ],
+     "answer": 1,
+     "explanation": "Equal light on all sides means equal auxin.",
+     "id": "gceol-biology-coordination-e18-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explain the result for B using auxin.",
+     "model": "Auxin moves to the shaded side, where cells elongate more, so the shoot bends towards the light.",
+     "rubric": [
+      "1 mark: auxin on the shaded side",
+      "1 mark: cells there grow faster so shoot bends"
+     ],
+     "explanation": "Auxin moves to the shaded side, where cells elongate more, so the shoot bends towards the light.",
+     "id": "gceol-biology-coordination-e18-c"
+    }
+   ],
+   "chapter": "gceol-biology-coordination"
+  },
+  {
+   "id": "gceol-biology-hormones-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-hormones",
+   "prompt": "The plant hormone for growth responses is:",
+   "choices": [
+    "adrenaline",
+    "insulin",
+    "ADH",
+    "auxin"
+   ],
+   "answer": 3,
+   "explanation": "Auxin.",
+   "chapter": "gceol-biology-coordination"
+  },
+  {
+   "id": "gceol-biology-hormones-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-hormones",
+   "prompt": "Roots grow:",
+   "choices": [
+    "towards light",
+    "towards gravity",
+    "against gravity",
+    "randomly"
+   ],
+   "answer": 1,
+   "explanation": "Positive gravitropism.",
+   "chapter": "gceol-biology-coordination"
+  },
+  {
+   "id": "gceol-biology-hormones-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-hormones",
+   "prompt": "Hormones are made in:",
+   "choices": [
+    "nerves",
+    "xylem",
+    "muscles",
+    "endocrine glands"
+   ],
+   "answer": 3,
+   "explanation": "Endocrine glands.",
+   "chapter": "gceol-biology-coordination"
+  },
+  {
+   "id": "gceol-biology-hormones-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-hormones",
+   "prompt": "Which control is fastest?",
+   "choices": [
+    "nervous",
+    "auxin",
+    "digestive",
+    "hormonal"
+   ],
+   "answer": 0,
+   "explanation": "Nerve impulses are fast.",
+   "chapter": "gceol-biology-coordination"
+  },
+  {
+   "id": "gceol-biology-hormones-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-biology-hormones",
+   "prompt": "A tropism is:",
+   "choices": [
+    "a hormone",
+    "a nerve",
+    "a growth response to a stimulus from one direction",
+    "a movement of the whole animal"
+   ],
+   "answer": 2,
+   "explanation": "Definition.",
+   "chapter": "gceol-biology-coordination"
+  },
+  {
+   "id": "gceol-biology-coordination-m01",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-biology-nervous",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Question 2 — Coordination (5 marks). A girl in Limbe touches a hot cooking pot and pulls her hand away at once.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which neurone carries the impulse from the skin receptor to the spinal cord?",
+     "choices": [
+      "motor neurone",
+      "effector neurone",
+      "relay neurone",
+      "sensory neurone"
+     ],
+     "answer": 3,
+     "explanation": "Sensory neurones carry impulses from receptors to the CNS.",
+     "id": "gceol-biology-coordination-m01-a"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "True or false: the response needs a decision by the cerebrum before the hand moves.",
+     "answer": false,
+     "explanation": "A reflex action is automatic; the brain is informed afterwards.",
+     "id": "gceol-biology-coordination-m01-b"
+    },
+    {
+     "kind": "open",
+     "points": 3,
+     "prompt": "Describe the pathway of the impulse in this reflex arc, from stimulus to response.",
+     "model": "The heat stimulates receptors in the skin; impulses pass along a sensory neurone to the spinal cord; a relay neurone passes them to a motor neurone; the motor neurone carries them to the arm muscle (effector), which contracts and pulls the hand away.",
+     "rubric": [
+      "1 mark: receptor in the skin / sensory neurone to spinal cord",
+      "1 mark: relay neurone in the spinal cord",
+      "1 mark: motor neurone to muscle which contracts"
+     ],
+     "explanation": "The heat stimulates receptors in the skin; impulses pass along a sensory neurone to the spinal cord; a relay neurone passes them to a motor neurone; the motor neurone carries them to the arm muscle (effector), which contracts and pulls the hand away.",
+     "id": "gceol-biology-coordination-m01-c"
+    }
+   ],
+   "chapter": "gceol-biology-coordination"
+  }
+ ]
+}

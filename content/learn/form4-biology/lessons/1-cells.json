@@ -1,0 +1,984 @@
+{
+ "chapter": "form4-biology-cells",
+ "lessons": [
+  {
+   "id": "form4-biology-microscope",
+   "title": "Using the light microscope",
+   "minutes": 20,
+   "programRef": "Form 4 Biology — Cells, microscope, tissues (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Name the main parts of a light microscope.",
+    "Calculate total magnification.",
+    "Describe how to prepare and focus a slide."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form4-biology-cells-e01",
+    "form4-biology-cells-e02",
+    "form4-biology-cells-e03",
+    "form4-biology-cells-e04",
+    "form4-biology-cells-e05",
+    "form4-biology-cells-e06"
+   ],
+   "selfCheck": [
+    "form4-biology-microscope-q1",
+    "form4-biology-microscope-q2",
+    "form4-biology-microscope-q3",
+    "form4-biology-microscope-q4",
+    "form4-biology-microscope-q5"
+   ],
+   "reviewNotes": [
+    "Parts and procedure are standard; check whether the syllabus asks for the iris diaphragm and condenser.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "The light microscope",
+     "md": "A **microscope** lets us see things that are too small for the eye. Light passes through a thin specimen on the **stage**. The **objective lens** makes a first image and the **eyepiece lens** makes it bigger. A **mirror or lamp** gives light. The **focusing knobs** move the lens to make the image sharp."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 460,
+      "h": 230,
+      "items": [
+       {
+        "t": "rect",
+        "x": 210,
+        "y": 200,
+        "w": 120,
+        "h": 14,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey"
+       },
+       {
+        "t": "line",
+        "x1": 280,
+        "y1": 200,
+        "x2": 280,
+        "y2": 70,
+        "color": "grey",
+        "width": 10
+       },
+       {
+        "t": "circle",
+        "cx": 260,
+        "cy": 60,
+        "r": 20,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey"
+       },
+       {
+        "t": "line",
+        "x1": 240,
+        "y1": 50,
+        "x2": 190,
+        "y2": 120,
+        "color": "ink",
+        "width": 12
+       },
+       {
+        "t": "rect",
+        "x": 185,
+        "y": 130,
+        "w": 40,
+        "h": 6,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightblue"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 150,
+        "w": 130,
+        "h": 6,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey"
+       },
+       {
+        "t": "line",
+        "x1": 205,
+        "y1": 136,
+        "x2": 205,
+        "y2": 148,
+        "color": "blue",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 40,
+        "x2": 330,
+        "y2": 20,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 334,
+        "y": 24,
+        "text": "eyepiece lens",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 215,
+        "y1": 100,
+        "x2": 330,
+        "y2": 70,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 334,
+        "y": 74,
+        "text": "body tube",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 205,
+        "y1": 134,
+        "x2": 50,
+        "y2": 110,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 54,
+        "y": 114,
+        "text": "objective lens",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 215,
+        "y1": 153,
+        "x2": 50,
+        "y2": 160,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 54,
+        "y": 164,
+        "text": "stage",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 206,
+        "x2": 50,
+        "y2": 205,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 54,
+        "y": 209,
+        "text": "mirror or lamp",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 280,
+        "y1": 120,
+        "x2": 330,
+        "y2": 120,
+        "color": "ink",
+        "width": 1.2
+       },
+       {
+        "t": "text",
+        "x": 334,
+        "y": 124,
+        "text": "focusing knob",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A light microscope (schematic).",
+     "alt": "A simple drawing of a microscope with eyepiece lens, body tube, objective lens, stage, mirror or lamp and focusing knob labelled."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Total magnification",
+     "md": "**Total magnification = eyepiece magnification × objective magnification.**\n\nExample: eyepiece ×10 and objective ×40 gives ×400.\n\nStart with the **lowest power** objective; find the specimen; then change to a stronger lens and use the fine focus only."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Never use the coarse focus with a high-power lens: you can break the slide.\n- A specimen must be **thin** so that light passes through it.\n- Do not add the two magnifications; **multiply** them."
+    },
+    {
+     "type": "example",
+     "title": "Total magnification",
+     "statement": "A student uses an eyepiece lens of ×10 and an objective lens of ×40. Find the total magnification.",
+     "steps": [
+      "Multiply: 10 × 40.",
+      "10 × 40 = 400."
+     ],
+     "answer": "×400"
+    },
+    {
+     "type": "example",
+     "title": "Which lens first?",
+     "statement": "You have objectives of ×4, ×10 and ×40. Which should you use first, and why?",
+     "steps": [
+      "The ×4 lens has the widest field of view and is furthest from the slide.",
+      "It is easiest to find the specimen with it, then switch to a stronger lens."
+     ],
+     "answer": "The ×4 lens, then ×10, then ×40."
+    },
+    {
+     "type": "exercise",
+     "ref": "form4-biology-cells-e01"
+    }
+   ],
+   "chapter": "form4-biology-cells"
+  },
+  {
+   "id": "form4-biology-cell-types",
+   "title": "Plant and animal cells",
+   "minutes": 20,
+   "programRef": "Form 4 Biology — Cells, microscope, tissues (to be checked)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Name the parts of a cell and give their jobs.",
+    "List the differences between plant and animal cells.",
+    "Explain what tissues, organs and systems are."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form4-biology-cells-e07",
+    "form4-biology-cells-e08",
+    "form4-biology-cells-e09",
+    "form4-biology-cells-e10",
+    "form4-biology-cells-e11",
+    "form4-biology-cells-e12"
+   ],
+   "selfCheck": [
+    "form4-biology-cell-types-q1",
+    "form4-biology-cell-types-q2",
+    "form4-biology-cell-types-q3",
+    "form4-biology-cell-types-q4",
+    "form4-biology-cell-types-q5"
+   ],
+   "reviewNotes": [
+    "Level: introductory; check whether Form 4 syllabus includes cell specialisation examples.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Parts of a cell",
+     "md": "- **Cell membrane**: controls what goes in and out.\n- **Cytoplasm**: where chemical reactions happen.\n- **Nucleus**: controls the cell and holds the genes.\n- **Mitochondria**: release energy (respiration).\n\nPlant cells also have a **cell wall** (support), **chloroplasts** (photosynthesis) and a large **vacuole** (cell sap)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 138,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 10,
+        "w": 144.0,
+        "h": 52,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgreen",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 82.0,
+        "y": 33.0,
+        "text": "Cell wall",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 82.0,
+        "y": 47.0,
+        "text": "only in plants",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 168.0,
+        "y": 10,
+        "w": 144.0,
+        "h": 52,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgreen",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 33.0,
+        "text": "Chloroplasts",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 47.0,
+        "text": "only in plants",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 326.0,
+        "y": 10,
+        "w": 144.0,
+        "h": 52,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightgreen",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 398.0,
+        "y": 33.0,
+        "text": "Large vacuole",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 398.0,
+        "y": 47.0,
+        "text": "plants",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 76,
+        "w": 144.0,
+        "h": 52,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightblue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 82.0,
+        "y": 99.0,
+        "text": "Nucleus",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 82.0,
+        "y": 113.0,
+        "text": "both",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 168.0,
+        "y": 76,
+        "w": 144.0,
+        "h": 52,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightblue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 99.0,
+        "text": "Cell membrane",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 113.0,
+        "text": "both",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 326.0,
+        "y": 76,
+        "w": 144.0,
+        "h": 52,
+        "stroke": "ink",
+        "width": 1.5,
+        "fill": "lightblue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 398.0,
+        "y": 99.0,
+        "text": "Cytoplasm",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 398.0,
+        "y": 113.0,
+        "text": "both",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Cell parts found in plants and in both.",
+     "alt": "Six boxes: cell wall, chloroplasts and large vacuole in green for plants only; nucleus, cell membrane and cytoplasm in blue for both."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Levels of organisation",
+     "md": "Cells of the same kind form a **tissue** (muscle tissue). Different tissues form an **organ** (the heart). Organs that work together form an **organ system** (the circulatory system). Many systems make up an **organism**.\n\nSome cells are specialised: a **red blood cell** carries oxygen; a **root hair cell** absorbs water; a **nerve cell** carries messages."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Animal cells do not have a cell wall or chloroplasts.\n- The cell wall is not the same as the cell membrane.\n- A tissue is a group of *similar cells*; an organ contains *several tissues*."
+    },
+    {
+     "type": "example",
+     "title": "Plant or animal?",
+     "statement": "A cell has a nucleus, a cell wall and chloroplasts. What kind of cell is it, and what is the job of the chloroplasts?",
+     "steps": [
+      "A cell wall and chloroplasts are found only in plant cells.",
+      "Chloroplasts contain chlorophyll and carry out photosynthesis."
+     ],
+     "answer": "A plant cell; chloroplasts make food by photosynthesis."
+    },
+    {
+     "type": "example",
+     "title": "Order the levels",
+     "statement": "Arrange: organ, cell, organism, tissue, system.",
+     "steps": [
+      "Smallest to largest: cell, then tissue, then organ.",
+      "Then system and finally the whole organism."
+     ],
+     "answer": "cell, tissue, organ, system, organism"
+    },
+    {
+     "type": "exercise",
+     "ref": "form4-biology-cells-e07"
+    }
+   ],
+   "chapter": "form4-biology-cells"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form4-biology-cells-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form4-biology-microscope",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which part of the microscope holds the slide?",
+   "choices": [
+    "eyepiece",
+    "body tube",
+    "mirror",
+    "stage"
+   ],
+   "answer": 3,
+   "explanation": "The slide sits on the stage.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-biology-cells"
+  },
+  {
+   "id": "form4-biology-cells-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-biology-microscope",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An eyepiece of ×10 is used with an objective of ×20. What is the total magnification?",
+   "answer": 200,
+   "tolerance": 0,
+   "explanation": "10 × 20 = 200.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-biology-cells"
+  },
+  {
+   "id": "form4-biology-cells-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "form4-biology-microscope",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "You should always start with the highest power objective.",
+   "answer": false,
+   "explanation": "Start with the lowest power.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-biology-cells"
+  },
+  {
+   "id": "form4-biology-cells-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "form4-biology-microscope",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Why must a specimen be very thin?",
+   "choices": [
+    "so it is cheaper",
+    "so it does not move",
+    "so that light can pass through it",
+    "so it looks bigger"
+   ],
+   "answer": 2,
+   "explanation": "A thick specimen blocks the light.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form4-biology-cells"
+  },
+  {
+   "id": "form4-biology-cells-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form4-biology-microscope",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Describe how to focus a slide.",
+   "model": "Place the slide on the stage; select the lowest power objective; look from the side and lower the lens close to the slide; look through the eyepiece and focus slowly upwards with the coarse knob, then use the fine knob; change to a higher power and refocus only with the fine knob.",
+   "rubric": [
+    "1 mark: lowest power first",
+    "1 mark: focus slowly",
+    "1 mark: fine focus at high power"
+   ],
+   "explanation": "Place the slide on the stage; select the lowest power objective; look from the side and lower the lens close to the slide; look through the eyepiece and focus slowly upwards with the coarse knob, then use the fine knob; change to a higher power and refocus only with the fine knob.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-biology-cells"
+  },
+  {
+   "id": "form4-biology-cells-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form4-biology-microscope",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A student looks at onion skin with an eyepiece of ×10 and an objective of ×40.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Total magnification.",
+     "answer": 400,
+     "tolerance": 0,
+     "explanation": "10 × 40 = 400.",
+     "id": "form4-biology-cells-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which two things show that the cells are plant cells?",
+     "choices": [
+      "red colour",
+      "a nucleus and cytoplasm",
+      "a tail and cilia",
+      "cell walls and a large vacuole"
+     ],
+     "answer": 3,
+     "explanation": "Cell walls and a large vacuole are plant features.",
+     "id": "form4-biology-cells-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Why does the student use a thin piece of onion skin?",
+     "model": "Light must pass through it for the cells to be seen.",
+     "rubric": [
+      "1 mark for light passing through"
+     ],
+     "explanation": "Light must pass through it for the cells to be seen.",
+     "id": "form4-biology-cells-e06-c"
+    }
+   ],
+   "chapter": "form4-biology-cells"
+  },
+  {
+   "id": "form4-biology-microscope-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-biology-microscope",
+   "prompt": "Total magnification is found by:",
+   "choices": [
+    "multiplying eyepiece and objective",
+    "subtracting them",
+    "adding them",
+    "dividing them"
+   ],
+   "answer": 0,
+   "explanation": "Multiply.",
+   "chapter": "form4-biology-cells"
+  },
+  {
+   "id": "form4-biology-microscope-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-biology-microscope",
+   "prompt": "The part that holds the specimen is the:",
+   "choices": [
+    "stage",
+    "mirror",
+    "tube",
+    "eyepiece"
+   ],
+   "answer": 0,
+   "explanation": "Stage.",
+   "chapter": "form4-biology-cells"
+  },
+  {
+   "id": "form4-biology-microscope-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-biology-microscope",
+   "prompt": "The first objective lens used is the:",
+   "choices": [
+    "none",
+    "lowest power",
+    "highest power",
+    "oil lens"
+   ],
+   "answer": 1,
+   "explanation": "Start low.",
+   "chapter": "form4-biology-cells"
+  },
+  {
+   "id": "form4-biology-microscope-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-biology-microscope",
+   "prompt": "The lens nearest the eye is the:",
+   "choices": [
+    "stage",
+    "mirror",
+    "eyepiece",
+    "objective"
+   ],
+   "answer": 2,
+   "explanation": "Eyepiece.",
+   "chapter": "form4-biology-cells"
+  },
+  {
+   "id": "form4-biology-microscope-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-biology-microscope",
+   "prompt": "A microscope is used to:",
+   "choices": [
+    "weigh objects",
+    "see the stars",
+    "cut tissue",
+    "see very small things"
+   ],
+   "answer": 3,
+   "explanation": "Magnification.",
+   "chapter": "form4-biology-cells"
+  },
+  {
+   "id": "form4-biology-cells-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form4-biology-cell-types",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which part controls the activities of the cell?",
+   "choices": [
+    "vacuole",
+    "nucleus",
+    "cell wall",
+    "cytoplasm"
+   ],
+   "answer": 1,
+   "explanation": "The nucleus is the control centre.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-biology-cells"
+  },
+  {
+   "id": "form4-biology-cells-e08",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "form4-biology-cell-types",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match the part with its job.",
+   "pairs": [
+    [
+     "mitochondrion",
+     "releases energy"
+    ],
+    [
+     "cell wall",
+     "gives support to a plant cell"
+    ],
+    [
+     "chloroplast",
+     "carries out photosynthesis"
+    ],
+    [
+     "cell membrane",
+     "controls what enters the cell"
+    ]
+   ],
+   "explanation": "Standard functions.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form4-biology-cells"
+  },
+  {
+   "id": "form4-biology-cells-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "form4-biology-cell-types",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Animal cells have chloroplasts.",
+   "answer": false,
+   "explanation": "Only plant cells have chloroplasts.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-biology-cells"
+  },
+  {
+   "id": "form4-biology-cells-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "form4-biology-cell-types",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A group of similar cells that do the same job is a:",
+   "choices": [
+    "tissue",
+    "nucleus",
+    "organ",
+    "system"
+   ],
+   "answer": 0,
+   "explanation": "Definition.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "form4-biology-cells"
+  },
+  {
+   "id": "form4-biology-cells-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form4-biology-cell-types",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "State three differences between a plant cell and an animal cell.",
+   "model": "Plant cells have a cell wall, chloroplasts and a large permanent vacuole; animal cells do not.",
+   "rubric": [
+    "1 mark each, maximum 3"
+   ],
+   "explanation": "Plant cells have a cell wall, chloroplasts and a large permanent vacuole; animal cells do not.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-biology-cells"
+  },
+  {
+   "id": "form4-biology-cells-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form4-biology-cell-types",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A root hair cell has a long thin extension.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Its job is to absorb:",
+     "choices": [
+      "oxygen only",
+      "sugar",
+      "water and mineral salts",
+      "light"
+     ],
+     "answer": 2,
+     "explanation": "Root hairs absorb water and mineral ions.",
+     "id": "form4-biology-cells-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Why is the long extension useful?",
+     "choices": [
+      "it stores starch",
+      "it gives a large surface area",
+      "it carries messages",
+      "it makes food"
+     ],
+     "answer": 1,
+     "explanation": "A large surface area increases absorption.",
+     "id": "form4-biology-cells-e12-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Name one other specialised cell and its job.",
+     "model": "A red blood cell carries oxygen (or a nerve cell carries impulses).",
+     "rubric": [
+      "1 mark for a correct cell and job"
+     ],
+     "explanation": "A red blood cell carries oxygen (or a nerve cell carries impulses).",
+     "id": "form4-biology-cells-e12-c"
+    }
+   ],
+   "chapter": "form4-biology-cells"
+  },
+  {
+   "id": "form4-biology-cell-types-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-biology-cell-types",
+   "prompt": "Chloroplasts are found in:",
+   "choices": [
+    "plant cells",
+    "red blood cells",
+    "bacteria only",
+    "animal cells only"
+   ],
+   "answer": 0,
+   "explanation": "Plants.",
+   "chapter": "form4-biology-cells"
+  },
+  {
+   "id": "form4-biology-cell-types-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-biology-cell-types",
+   "prompt": "Mitochondria are the site of:",
+   "choices": [
+    "excretion",
+    "respiration",
+    "digestion",
+    "photosynthesis"
+   ],
+   "answer": 1,
+   "explanation": "Energy release.",
+   "chapter": "form4-biology-cells"
+  },
+  {
+   "id": "form4-biology-cell-types-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-biology-cell-types",
+   "prompt": "The heart is an example of an:",
+   "choices": [
+    "organ",
+    "tissue",
+    "cell",
+    "system"
+   ],
+   "answer": 0,
+   "explanation": "Organ.",
+   "chapter": "form4-biology-cells"
+  },
+  {
+   "id": "form4-biology-cell-types-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-biology-cell-types",
+   "prompt": "A red blood cell is specialised to:",
+   "choices": [
+    "make food",
+    "carry oxygen",
+    "send messages",
+    "absorb water"
+   ],
+   "answer": 1,
+   "explanation": "Oxygen transport.",
+   "chapter": "form4-biology-cells"
+  },
+  {
+   "id": "form4-biology-cell-types-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-biology-cell-types",
+   "prompt": "The cell wall is made of:",
+   "choices": [
+    "glucose",
+    "protein",
+    "cellulose",
+    "fat"
+   ],
+   "answer": 2,
+   "explanation": "Plant cell walls.",
+   "chapter": "form4-biology-cells"
+  }
+ ]
+}
