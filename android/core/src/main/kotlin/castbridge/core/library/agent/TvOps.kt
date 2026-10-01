@@ -83,11 +83,12 @@ class TvLibraryOps(private val client: TvClient, private val sleep: (Long) -> Un
 
     override fun volumes() = TvSnapshot.volumes(client)
 
-    override fun stat(loc: Loc): Stat? = rows().firstOrNull { it.volume == loc.volume && it.name.equals(loc.name, ignoreCase = true) }?.let { Stat(it.size) }
+    // volume "" = wherever the TV stored it (a file renamed at upload time is journaled before its volume is known)
+    override fun stat(loc: Loc): Stat? = rows().firstOrNull { (loc.volume.isEmpty() || it.volume == loc.volume) && it.name.equals(loc.name, ignoreCase = true) }?.let { Stat(it.size) }
 
     override fun nameTaken(loc: Loc): Boolean = rows().any { it.name.equals(loc.name, ignoreCase = true) }
 
-    override fun isPlaying(loc: Loc): Boolean = rows().any { it.name == loc.name && it.volume == loc.volume && it.playing }
+    override fun isPlaying(loc: Loc): Boolean = rows().any { it.name == loc.name && (loc.volume.isEmpty() || it.volume == loc.volume) && it.playing }
 
     override fun mkdirs(volume: String, folder: String): OpResult = OpResult.Fail("la bibliothèque de la TV n'a pas de dossiers")
     override fun moveToFolder(loc: Loc, folder: String): OpResult = OpResult.Fail("la bibliothèque de la TV n'a pas de dossiers")

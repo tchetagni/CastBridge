@@ -99,6 +99,7 @@ fun TvLibraryDialog(client: TvClient, onDismiss: () -> Unit, onDownload: ((TvLib
     var renameFor by remember { mutableStateOf<TvLibItem?>(null) }
     var deleteFor by remember { mutableStateOf<TvLibItem?>(null) }
     var reload by remember { mutableIntStateOf(0) }
+    var showAssistant by remember { mutableStateOf(false) }       // « Ranger ma bibliothèque » (castbridge.sender.agent)
     val scope = rememberCoroutineScope()
 
     LaunchedEffect(client, reload) {
@@ -122,8 +123,12 @@ fun TvLibraryDialog(client: TvClient, onDismiss: () -> Unit, onDownload: ((TvLib
             Column {
                 TopAppBar(title = { Text("Bibliothèque de la TV") },
                     navigationIcon = { IconButton(onDismiss) { Icon(Icons.Filled.ArrowBack, "Retour") } },
-                    actions = { IconButton({ reload++ }) { Icon(Icons.Filled.Refresh, "Actualiser") } },
+                    actions = {
+                        IconButton({ showAssistant = true }) { Icon(Icons.Filled.AutoAwesome, "Ranger ma bibliothèque (Assistant)") }
+                        IconButton({ reload++ }) { Icon(Icons.Filled.Refresh, "Actualiser") }
+                    },
                     colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.surface))
+                castbridge.sender.agent.AssistantBanner(client) { showAssistant = true }
                 msg?.let { Text(it, Modifier.padding(horizontal = 16.dp, vertical = 6.dp), style = MaterialTheme.typography.bodySmall) }
                 error?.let { Text("TV injoignable : $it", Modifier.padding(16.dp), color = MaterialTheme.colorScheme.error) }
                 val list = items
@@ -142,6 +147,7 @@ fun TvLibraryDialog(client: TvClient, onDismiss: () -> Unit, onDownload: ((TvLib
                 }
             }
         }
+        if (showAssistant) castbridge.sender.agent.LibraryAssistantDialog(client) { showAssistant = false; reload++ }
         resumeFor?.let { i ->
             AlertDialog(onDismissRequest = { resumeFor = null }, title = { Text(i.title) },
                 confirmButton = { TextButton({ resumeFor = null; play(i, i.resumeMs) }) { Text("Reprendre à ${LibraryLogic.clock(i.resumeMs)}") } },
