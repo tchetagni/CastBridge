@@ -691,7 +691,8 @@
     "$-\\frac{1}{x^{2}}$"
    ],
    "answer": 3,
-   "explanation": "$(x^{-1})'=-x^{-2}$."
+   "explanation": "$(x^{-1})'=-x^{-2}$.",
+   "review": true
   },
   {
    "id": "sup-l1-analyse-derivation-q2",
@@ -707,7 +708,8 @@
     "nulle"
    ],
    "answer": 0,
-   "explanation": "Signe de la dérivée = sens de variation."
+   "explanation": "Signe de la dérivée = sens de variation.",
+   "review": true
   },
   {
    "id": "sup-l1-analyse-derivation-q3",
@@ -723,7 +725,8 @@
     "$e^{3}$"
    ],
    "answer": 2,
-   "explanation": "$(e^{u})'=u'e^{u}$ avec $u=3x$."
+   "explanation": "$(e^{u})'=u'e^{u}$ avec $u=3x$.",
+   "review": true
   },
   {
    "id": "sup-l1-analyse-derivation-q4",
@@ -739,7 +742,8 @@
     "la dérivée du coût total"
    ],
    "answer": 3,
-   "explanation": "$C_m=C'$ ; le coût moyen est $C/q$."
+   "explanation": "$C_m=C'$ ; le coût moyen est $C/q$.",
+   "review": true
   },
   {
    "id": "sup-l1-analyse-derivation-q5",
@@ -755,7 +759,8 @@
     "$y=f(a)x$"
    ],
    "answer": 1,
-   "explanation": "La pente est $f'(a)$ et la droite passe par $(a\\,;f(a))$."
+   "explanation": "La pente est $f'(a)$ et la droite passe par $(a\\,;f(a))$.",
+   "review": true
   },
   {
    "id": "sup-l1-analyse-dl-ordre2-01",
@@ -811,7 +816,7 @@
    "explanation": "$x=0{,}05$ : $0{,}05-\\frac{0{,}0025}{2}=0{,}04875$.",
    "source": "Exercice original",
    "answer": 0.04875,
-   "tolerance": 1e-05
+   "tolerance": 0.0005
   },
   {
    "id": "sup-l1-analyse-dl-ordre2-05",
@@ -901,7 +906,8 @@
     "$1-x$"
    ],
    "answer": 0,
-   "explanation": "Série géométrique : $1+x+x^{2}+…$"
+   "explanation": "Série géométrique : $1+x+x^{2}+…$",
+   "review": true
   },
   {
    "id": "sup-l1-analyse-dl-ordre2-q2",
@@ -917,7 +923,8 @@
     "$1+x+\\frac{x^{2}}{2}$"
    ],
    "answer": 3,
-   "explanation": "$f(0)=f'(0)=f''(0)=1$ : $1+x+\\frac{x^{2}}{2}$."
+   "explanation": "$f(0)=f'(0)=f''(0)=1$ : $1+x+\\frac{x^{2}}{2}$.",
+   "review": true
   },
   {
    "id": "sup-l1-analyse-dl-ordre2-q3",
@@ -933,7 +940,8 @@
     "$\\frac{f'(0)}{2}$"
    ],
    "answer": 1,
-   "explanation": "On divise la dérivée seconde par $2!=2$."
+   "explanation": "On divise la dérivée seconde par $2!=2$.",
+   "review": true
   },
   {
    "id": "sup-l1-analyse-dl-ordre2-q4",
@@ -949,7 +957,8 @@
     "$x-x^{2}$"
    ],
    "answer": 1,
-   "explanation": "$\\ln(1)=0$, $f'(0)=1$, $f''(0)=-1$."
+   "explanation": "$\\ln(1)=0$, $f'(0)=1$, $f''(0)=-1$.",
+   "review": true
   },
   {
    "id": "sup-l1-analyse-dl-ordre2-q5",
@@ -965,7 +974,8 @@
     "pour $x$ proche de 0"
    ],
    "answer": 3,
-   "explanation": "L'erreur est négligeable devant $x^{2}$ seulement près de 0."
+   "explanation": "L'erreur est négligeable devant $x^{2}$ seulement près de 0.",
+   "review": true
   },
   {
    "id": "sup-l1-analyse-integrales-edo-01",
@@ -1113,7 +1123,8 @@
     "$\\frac{x^{2}}{2}$"
    ],
    "answer": 1,
-   "explanation": "$(\\ln x)'=\\frac{1}{x}$."
+   "explanation": "$(\\ln x)'=\\frac{1}{x}$.",
+   "review": true
   },
   {
    "id": "sup-l1-analyse-integrales-edo-q2",
@@ -1129,7 +1140,8 @@
     "$y=Cx^{3}$"
    ],
    "answer": 2,
-   "explanation": "Cas $b=0$, $a=3$."
+   "explanation": "Cas $b=0$, $a=3$.",
+   "review": true
   },
   {
    "id": "sup-l1-analyse-integrales-edo-q3",
@@ -1145,7 +1157,8 @@
     "$F(b)$ seulement"
    ],
    "answer": 0,
-   "explanation": "Avec $F$ primitive de $f$."
+   "explanation": "Avec $F$ primitive de $f$.",
+   "review": true
   },
   {
    "id": "sup-l1-analyse-integrales-edo-q4",
@@ -1161,7 +1174,8 @@
     "$\\int uv'=u'v-uv'$"
    ],
    "answer": 2,
-   "explanation": "Elle découle de $(uv)'=u'v+uv'$."
+   "explanation": "Elle découle de $(uv)'=u'v+uv'$.",
+   "review": true
   },
   {
    "id": "sup-l1-analyse-integrales-edo-q5",
@@ -1177,7 +1191,8 @@
     "$-ab$"
    ],
    "answer": 0,
-   "explanation": "$0=ay+b$ ⇒ $y=-\\frac{b}{a}$."
+   "explanation": "$0=ay+b$ ⇒ $y=-\\frac{b}{a}$.",
+   "review": true
   }
  ]
 }

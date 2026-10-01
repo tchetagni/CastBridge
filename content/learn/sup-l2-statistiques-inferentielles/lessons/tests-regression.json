@@ -254,35 +254,26 @@
       "kind": "bars",
       "w": 420,
       "h": 260,
-      "unit": "effectif",
       "bars": [
        {
         "label": "Obs. mobile/ville",
         "value": 60,
-        "color": [
-         "blue"
-        ]
+        "color": "blue"
        },
        {
         "label": "Théo. mobile/ville",
         "value": 45,
-        "color": [
-         "orange"
-        ]
+        "color": "orange"
        },
        {
         "label": "Obs. mobile/campagne",
         "value": 30,
-        "color": [
-         "blue"
-        ]
+        "color": "blue"
        },
        {
         "label": "Théo. mobile/campagne",
         "value": 45,
-        "color": [
-         "orange"
-        ]
+        "color": "orange"
        }
       ]
      },
@@ -457,7 +448,7 @@
      "prompt": "Calculer la statistique $z$.",
      "explanation": "$z=\\frac{11{,}2-12}{0{,}5}=-1{,}6$.",
      "kind": "numeric",
-     "answer": -1.6000000000000014,
+     "answer": -1.6,
      "tolerance": 0.001
     },
     {
@@ -480,7 +471,7 @@
      "prompt": "Si l'on avait obtenu $\\bar{x}=10{,}9$ h, quelle serait la valeur de $z$ ?",
      "explanation": "$z=\\frac{10{,}9-12}{0{,}5}=-2{,}2$ ; $|z|>1{,}96$ : on rejetterait $H_{0}$.",
      "kind": "numeric",
-     "answer": -2.1999999999999993,
+     "answer": -2.2,
      "tolerance": 0.001
     }
    ]
@@ -499,7 +490,8 @@
     "rejeter $H_{0}$ alors qu'elle est vraie"
    ],
    "answer": 3,
-   "explanation": "Son risque est $α$."
+   "explanation": "Son risque est $α$.",
+   "review": true
   },
   {
    "id": "sup-l2-statistiques-inferentielles-tests-hypotheses-q2",
@@ -515,7 +507,8 @@
     "0 %"
    ],
    "answer": 0,
-   "explanation": "Valeur de convention (1 % et 10 % aussi utilisées)."
+   "explanation": "Valeur de convention (1 % et 10 % aussi utilisées).",
+   "review": true
   },
   {
    "id": "sup-l2-statistiques-inferentielles-tests-hypotheses-q3",
@@ -531,7 +524,8 @@
     "$n$ seulement"
    ],
    "answer": 2,
-   "explanation": "On se place sous $H_{0}$."
+   "explanation": "On se place sous $H_{0}$.",
+   "review": true
   },
   {
    "id": "sup-l2-statistiques-inferentielles-tests-hypotheses-q4",
@@ -547,7 +541,8 @@
     "$|z|>1{,}96$"
    ],
    "answer": 3,
-   "explanation": "Deux régions de rejet de 2,5 % chacune."
+   "explanation": "Deux régions de rejet de 2,5 % chacune.",
+   "review": true
   },
   {
    "id": "sup-l2-statistiques-inferentielles-tests-hypotheses-q5",
@@ -563,7 +558,8 @@
     "d'augmenter $n$"
    ],
    "answer": 1,
-   "explanation": "Compromis entre les deux risques à $n$ fixé."
+   "explanation": "Compromis entre les deux risques à $n$ fixé.",
+   "review": true
   },
   {
    "id": "sup-l2-statistiques-inferentielles-khi2-regression-01",
@@ -705,7 +701,8 @@
     "l'effectif observé"
    ],
    "answer": 2,
-   "explanation": "Sous l'hypothèse d'indépendance."
+   "explanation": "Sous l'hypothèse d'indépendance.",
+   "review": true
   },
   {
    "id": "sup-l2-statistiques-inferentielles-khi2-regression-q2",
@@ -721,7 +718,8 @@
     "on augmente $α$"
    ],
    "answer": 0,
-   "explanation": "Les écarts aux effectifs théoriques sont trop grands."
+   "explanation": "Les écarts aux effectifs théoriques sont trop grands.",
+   "review": true
   },
   {
    "id": "sup-l2-statistiques-inferentielles-khi2-regression-q3",
@@ -737,7 +735,8 @@
     "la part de variabilité de $y$ expliquée par la droite"
    ],
    "answer": 3,
-   "explanation": "$R^{2}=r^{2}$."
+   "explanation": "$R^{2}=r^{2}$.",
+   "review": true
   },
   {
    "id": "sup-l2-statistiques-inferentielles-khi2-regression-q4",
@@ -753,7 +752,8 @@
     "$R^{2}$"
    ],
    "answer": 1,
-   "explanation": "Propriété de la droite qui passe par le point moyen."
+   "explanation": "Propriété de la droite qui passe par le point moyen.",
+   "review": true
   },
   {
    "id": "sup-l2-statistiques-inferentielles-khi2-regression-q5",
@@ -769,7 +769,8 @@
     "que $R^{2}=0$"
    ],
    "answer": 1,
-   "explanation": "Corrélation n'est pas causalité."
+   "explanation": "Corrélation n'est pas causalité.",
+   "review": true
   }
  ]
 }

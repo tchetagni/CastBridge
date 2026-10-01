@@ -473,28 +473,21 @@
       "kind": "bars",
       "w": 400,
       "h": 240,
-      "unit": "parts",
       "bars": [
        {
         "label": "Ciment",
         "value": 1,
-        "color": [
-         "grey"
-        ]
+        "color": "grey"
        },
        {
         "label": "Sable",
         "value": 2,
-        "color": [
-         "orange"
-        ]
+        "color": "orange"
        },
        {
         "label": "Gravier",
         "value": 4,
-        "color": [
-         "brown"
-        ]
+        "color": "brown"
        }
       ]
      },
@@ -672,7 +665,7 @@
      "prompt": "Volume de la dalle (m³).",
      "explanation": "$4 \\times 3 \\times 0{,}10 = 1,2$ m³.",
      "kind": "numeric",
-     "answer": 1.2000000000000002,
+     "answer": 1.2,
      "tolerance": 0.001,
      "unit": "m³"
     },
@@ -682,7 +675,7 @@
      "prompt": "Volume du poteau (m³, arrondi au millième).",
      "explanation": "$r = 0{,}20$ m ; $V = 3{,}14 \\times 0{,}2^2 \\times 2{,}5 = 0,314$ m³.",
      "kind": "numeric",
-     "answer": 0.31400000000000006,
+     "answer": 0.314,
      "tolerance": 0.001,
      "unit": "m³"
     },
@@ -692,7 +685,7 @@
      "prompt": "Volume total de béton (m³, arrondi au millième).",
      "explanation": "$1,2 + 0,314 = 1,514$ m³.",
      "kind": "numeric",
-     "answer": 1.5140000000000002,
+     "answer": 1.514,
      "tolerance": 0.001,
      "unit": "m³"
     },
@@ -702,7 +695,7 @@
      "prompt": "Masse de la dalle seule (kg).",
      "explanation": "$2\\,400 \\times 1,2 = 2 880$ kg.",
      "kind": "numeric",
-     "answer": 2880.0000000000005,
+     "answer": 2880.0,
      "tolerance": 0,
      "unit": "kg"
     }
@@ -882,7 +875,7 @@
      "prompt": "Volume d'un poteau (m³, arrondi au millième).",
      "explanation": "$3{,}14 \\times 0{,}15^2 \\times 3 = 0,212$ m³.",
      "kind": "numeric",
-     "answer": 0.21195000000000003,
+     "answer": 0.21195,
      "tolerance": 0.001,
      "unit": "m³"
     },

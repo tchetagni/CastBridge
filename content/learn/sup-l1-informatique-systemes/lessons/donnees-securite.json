@@ -404,39 +404,30 @@
       "kind": "bars",
       "w": 400,
       "h": 240,
-      "unit": "nombre de chiffres de 62^n",
       "bars": [
        {
         "label": "6 car.",
         "value": 11,
-        "color": [
-         "blue"
-        ]
+        "color": "blue"
        },
        {
         "label": "8 car.",
         "value": 15,
-        "color": [
-         "blue"
-        ]
+        "color": "blue"
        },
        {
         "label": "10 car.",
         "value": 18,
-        "color": [
-         "blue"
-        ]
+        "color": "blue"
        },
        {
         "label": "12 car.",
         "value": 22,
-        "color": [
-         "blue"
-        ]
+        "color": "blue"
        }
       ]
      },
-     "caption": "Nombre de chiffres du nombre de mots de passe possibles (62 symboles) selon la longueur.",
+     "caption": "Nombre de chiffres du nombre de mots de passe possibles (62 symboles) selon la longueur. (unité : nombre de chiffres de 62^n)",
      "alt": "Quatre barres croissantes : environ 11 chiffres pour 6 caractères, 15 pour 8, 18 pour 10 et 22 pour 12."
     },
     {
@@ -649,7 +640,8 @@
     "DROP"
    ],
    "answer": 1,
-   "explanation": "SELECT interroge ; les autres modifient."
+   "explanation": "SELECT interroge ; les autres modifient.",
+   "review": true
   },
   {
    "id": "sup-l1-informatique-systemes-bases-de-donnees-q2",
@@ -665,7 +657,8 @@
     "filtrer les lignes"
    ],
    "answer": 3,
-   "explanation": "ORDER BY trie."
+   "explanation": "ORDER BY trie.",
+   "review": true
   },
   {
    "id": "sup-l1-informatique-systemes-bases-de-donnees-q3",
@@ -681,7 +674,8 @@
     "le nom des colonnes"
    ],
    "answer": 0,
-   "explanation": "Agrégat de comptage."
+   "explanation": "Agrégat de comptage.",
+   "review": true
   },
   {
    "id": "sup-l1-informatique-systemes-bases-de-donnees-q4",
@@ -697,7 +691,8 @@
     "dans les deux tables à la fois"
    ],
    "answer": 2,
-   "explanation": "La commande contient l'identifiant du client."
+   "explanation": "La commande contient l'identifiant du client.",
+   "review": true
   },
   {
    "id": "sup-l1-informatique-systemes-bases-de-donnees-q5",
@@ -713,7 +708,8 @@
     "un identifiant unique"
    ],
    "answer": 3,
-   "explanation": "Il faut une valeur unique par ligne."
+   "explanation": "Il faut une valeur unique par ligne.",
+   "review": true
   },
   {
    "id": "sup-l1-informatique-systemes-securite-01",
@@ -865,7 +861,8 @@
     "chiffrer le disque"
    ],
    "answer": 2,
-   "explanation": "Message trompeur imitant un organisme."
+   "explanation": "Message trompeur imitant un organisme.",
+   "review": true
   },
   {
    "id": "sup-l1-informatique-systemes-securite-q2",
@@ -881,7 +878,8 @@
     "un mot de passe seulement"
    ],
    "answer": 0,
-   "explanation": "La clé publique chiffre, la privée déchiffre."
+   "explanation": "La clé publique chiffre, la privée déchiffre.",
+   "review": true
   },
   {
    "id": "sup-l1-informatique-systemes-securite-q3",
@@ -897,7 +895,8 @@
     "plusieurs preuves d'identité de natures différentes"
    ],
    "answer": 3,
-   "explanation": "Par exemple mot de passe + code reçu."
+   "explanation": "Par exemple mot de passe + code reçu.",
+   "review": true
   },
   {
    "id": "sup-l1-informatique-systemes-securite-q4",
@@ -913,7 +912,8 @@
     "interdire les mises à jour"
    ],
    "answer": 1,
-   "explanation": "Limite les dégâts en cas de compromission."
+   "explanation": "Limite les dégâts en cas de compromission.",
+   "review": true
   },
   {
    "id": "sup-l1-informatique-systemes-securite-q5",
@@ -929,7 +929,8 @@
     "augmenter le stockage"
    ],
    "answer": 1,
-   "explanation": "Toute modification change l'empreinte."
+   "explanation": "Toute modification change l'empreinte.",
+   "review": true
   }
  ]
 }

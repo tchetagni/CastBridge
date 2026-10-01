@@ -67,46 +67,35 @@
       "kind": "bars",
       "w": 400,
       "h": 250,
-      "unit": "effectif (classes en milliers de FCFA)",
       "bars": [
        {
         "label": "2-4",
         "value": 6,
-        "color": [
-         "blue"
-        ]
+        "color": "blue"
        },
        {
         "label": "4-6",
         "value": 14,
-        "color": [
-         "blue"
-        ]
+        "color": "blue"
        },
        {
         "label": "6-8",
         "value": 17,
-        "color": [
-         "blue"
-        ]
+        "color": "blue"
        },
        {
         "label": "8-10",
         "value": 9,
-        "color": [
-         "blue"
-        ]
+        "color": "blue"
        },
        {
         "label": "10-12",
         "value": 4,
-        "color": [
-         "blue"
-        ]
+        "color": "blue"
        }
       ]
      },
-     "caption": "Histogramme des salaires journaliers (classes en milliers de FCFA), amplitudes égales.",
+     "caption": "Histogramme des salaires journaliers (classes en milliers de FCFA), amplitudes égales. (unité : effectif (classes en milliers de FCFA))",
      "alt": "Cinq barres : 6 vendeurs de 2 à 4 mille FCFA, 14 de 4 à 6, 17 de 6 à 8, 9 de 8 à 10 et 4 de 10 à 12."
     },
     {
@@ -124,7 +113,7 @@
        "md": "Effectifs cumulés croissants : 4, 13, 25, 33, 38, 40."
       }
      ],
-     "answer": "**Exemple : 25 ménages sur 40 ont au plus 2 enfants, soit 62 %,**"
+     "answer": "**Exemple : 25 ménages sur 40 ont au plus 2 enfants, soit 62 %.**"
     },
     {
      "type": "example",
@@ -250,53 +239,40 @@
       "kind": "bars",
       "w": 420,
       "h": 250,
-      "unit": "valeur (série de 9 valeurs)",
       "bars": [
        {
         "label": "Min",
         "value": 12,
-        "color": [
-         "grey"
-        ]
+        "color": "grey"
        },
        {
         "label": "Q1",
         "value": 15,
-        "color": [
-         "blue"
-        ]
+        "color": "blue"
        },
        {
         "label": "Médiane",
         "value": 20,
-        "color": [
-         "green"
-        ]
+        "color": "green"
        },
        {
         "label": "Moyenne",
         "value": 22.0,
-        "color": [
-         "orange"
-        ]
+        "color": "orange"
        },
        {
         "label": "Q3",
         "value": 25,
-        "color": [
-         "blue"
-        ]
+        "color": "blue"
        },
        {
         "label": "Max",
         "value": 40,
-        "color": [
-         "grey"
-        ]
+        "color": "grey"
        }
       ]
      },
-     "caption": "Résumé de position de la série 12, 15, 15, 18, 20, 22, 25, 31, 40.",
+     "caption": "Résumé de position de la série 12, 15, 15, 18, 20, 22, 25, 31, 40. (unité : valeur (série de 9 valeurs))",
      "alt": "Barres pour le minimum 12, Q1 15, la médiane 20, la moyenne 22,0, Q3 25 et le maximum 40."
     },
     {
@@ -440,26 +416,21 @@
       "kind": "bars",
       "w": 320,
       "h": 220,
-      "unit": "écart-type (moyenne 14 pour les deux)",
       "bars": [
        {
         "label": "Série A",
         "value": 2.8284271247461903,
-        "color": [
-         "blue"
-        ]
+        "color": "blue"
        },
        {
         "label": "Série B",
         "value": 6.2289646009589745,
-        "color": [
-         "orange"
-        ]
+        "color": "orange"
        }
       ]
      },
-     "caption": "Deux séries de même moyenne (14) mais de dispersions différentes.",
-     "alt": "Deux barres : écart-type de la série A environ 2,83 et de la série B environ 6,23,"
+     "caption": "Deux séries de même moyenne (14) mais de dispersions différentes. (unité : écart-type (moyenne 14 pour les deux))",
+     "alt": "Deux barres : écart-type de la série A environ 2,83 et de la série B environ 6,23."
     },
     {
      "type": "example",
@@ -602,7 +573,7 @@
    "prompt": "Le prix d'un article passe de 2 500 FCFA (base 100) à 2 750 FCFA. Quel est l'indice ?",
    "explanation": "$\\frac{2750}{2500}×100=110$.",
    "source": "Exercice original",
-   "answer": 110.00000000000001,
+   "answer": 110.0,
    "tolerance": 0.001
   },
   {
@@ -624,7 +595,7 @@
      "prompt": "Calculer la fréquence (en %) des machines ayant exactement 2 pannes.",
      "explanation": "$\\frac{8}{30}≈26{,}67$ %.",
      "kind": "numeric",
-     "answer": 26.666666666666668,
+     "answer": 26.666666667,
      "tolerance": 0.01,
      "unit": "%"
     },
@@ -678,7 +649,8 @@
     "0,48"
    ],
    "answer": 1,
-   "explanation": "$\\frac{12}{48}=0{,}25$."
+   "explanation": "$\\frac{12}{48}=0{,}25$.",
+   "review": true
   },
   {
    "id": "sup-l1-statistiques-descriptives-series-tableaux-q2",
@@ -694,7 +666,8 @@
     "nominal"
    ],
    "answer": 1,
-   "explanation": "Il peut prendre toute valeur d'un intervalle (en théorie)."
+   "explanation": "Il peut prendre toute valeur d'un intervalle (en théorie).",
+   "review": true
   },
   {
    "id": "sup-l1-statistiques-descriptives-series-tableaux-q3",
@@ -710,7 +683,8 @@
     "25 %"
    ],
    "answer": 3,
-   "explanation": "$\\frac{125-100}{100}=25$ %."
+   "explanation": "$\\frac{125-100}{100}=25$ %.",
+   "review": true
   },
   {
    "id": "sup-l1-statistiques-descriptives-series-tableaux-q4",
@@ -726,7 +700,8 @@
     "à la fréquence cumulée"
    ],
    "answer": 0,
-   "explanation": "L'aire est proportionnelle à l'effectif ; l'amplitude est constante."
+   "explanation": "L'aire est proportionnelle à l'effectif ; l'amplitude est constante.",
+   "review": true
   },
   {
    "id": "sup-l1-statistiques-descriptives-series-tableaux-q5",
@@ -742,7 +717,8 @@
     "le mode"
    ],
    "answer": 2,
-   "explanation": "Tous les individus sont comptés."
+   "explanation": "Tous les individus sont comptés.",
+   "review": true
   },
   {
    "id": "sup-l1-statistiques-descriptives-position-quantiles-01",
@@ -836,7 +812,7 @@
      "prompt": "Calculer la moyenne.",
      "explanation": "Somme $=720$ ; $\\frac{720}{7}≈102{,}86$.",
      "kind": "numeric",
-     "answer": 102.85714285714286,
+     "answer": 102.857142857,
      "tolerance": 0.01,
      "unit": "milliers de FCFA"
     },
@@ -890,7 +866,8 @@
     "le mode"
    ],
    "answer": 2,
-   "explanation": "Rang $\\frac{N}{2}$ et $\\frac{N}{2}+1$."
+   "explanation": "Rang $\\frac{N}{2}$ et $\\frac{N}{2}+1$.",
+   "review": true
   },
   {
    "id": "sup-l1-statistiques-descriptives-position-quantiles-q2",
@@ -906,7 +883,8 @@
     "la plus grande valeur"
    ],
    "answer": 0,
-   "explanation": "Effectif maximal."
+   "explanation": "Effectif maximal.",
+   "review": true
   },
   {
    "id": "sup-l1-statistiques-descriptives-position-quantiles-q3",
@@ -922,7 +900,8 @@
     "le nombre de valeurs"
    ],
    "answer": 2,
-   "explanation": "La médiane est robuste."
+   "explanation": "La médiane est robuste.",
+   "review": true
   },
   {
    "id": "sup-l1-statistiques-descriptives-position-quantiles-q4",
@@ -938,7 +917,8 @@
     "$\\frac{Q_{3}}{Q_{1}}$"
    ],
    "answer": 0,
-   "explanation": "Il mesure la dispersion de la moitié centrale des données."
+   "explanation": "Il mesure la dispersion de la moitié centrale des données.",
+   "review": true
   },
   {
    "id": "sup-l1-statistiques-descriptives-position-quantiles-q5",
@@ -954,7 +934,8 @@
     "le centre de chaque classe"
    ],
    "answer": 3,
-   "explanation": "Approximation usuelle."
+   "explanation": "Approximation usuelle.",
+   "review": true
   },
   {
    "id": "sup-l1-statistiques-descriptives-dispersion-01",
@@ -966,7 +947,7 @@
    "prompt": "Série : 2, 4, 6. Calculer sa variance (division par $N$).",
    "explanation": "Moyenne 4 ; $\\frac{4+0+4}{3}=\\frac{8}{3}≈2{,}67$.",
    "source": "Exercice original",
-   "answer": 2.6666666666666665,
+   "answer": 2.666666667,
    "tolerance": 0.01
   },
   {
@@ -1071,7 +1052,7 @@
      "prompt": "Donner l'écart-type (arrondi au centième).",
      "explanation": "$\\sqrt{4{,}8}≈2{,}19$.",
      "kind": "numeric",
-     "answer": 2.1908902300206643,
+     "answer": 2.19089023,
      "tolerance": 0.01
     }
    ]
@@ -1084,13 +1065,14 @@
    "lesson": "sup-l1-statistiques-descriptives-dispersion",
    "prompt": "La formule de König–Huygens est :",
    "choices": [
-    "$V=\\bar{x}^{2}-\\overline{x^{2}}$",
-    "$V=\\overline{x^{2}}-\\bar{x}^{2}$",
-    "$V=\\overline{x^{2}}+\\bar{x}^{2}$",
-    "$V=\\sqrt{\\overline{x^{2}}}$"
+    "Carré de la moyenne moins moyenne des carrés",
+    "Moyenne des carrés moins carré de la moyenne",
+    "Moyenne des carrés plus carré de la moyenne",
+    "Racine carrée de la moyenne des carrés"
    ],
    "answer": 1,
-   "explanation": "Moyenne des carrés moins carré de la moyenne."
+   "explanation": "Moyenne des carrés moins carré de la moyenne.",
+   "review": true
   },
   {
    "id": "sup-l1-statistiques-descriptives-dispersion-q2",
@@ -1106,7 +1088,8 @@
     "FCFA au carré"
    ],
    "answer": 3,
-   "explanation": "L'écart-type revient à l'unité d'origine."
+   "explanation": "L'écart-type revient à l'unité d'origine.",
+   "review": true
   },
   {
    "id": "sup-l1-statistiques-descriptives-dispersion-q3",
@@ -1122,7 +1105,8 @@
     "$\\sigma_{x}$"
    ],
    "answer": 0,
-   "explanation": "$|a|\\sigma_{x}$ avec $a=3$."
+   "explanation": "$|a|\\sigma_{x}$ avec $a=3$.",
+   "review": true
   },
   {
    "id": "sup-l1-statistiques-descriptives-dispersion-q4",
@@ -1138,7 +1122,8 @@
     "une erreur de calcul"
    ],
    "answer": 2,
-   "explanation": "$CV=\\frac{\\sigma}{\\bar{x}}$."
+   "explanation": "$CV=\\frac{\\sigma}{\\bar{x}}$.",
+   "review": true
   },
   {
    "id": "sup-l1-statistiques-descriptives-dispersion-q5",
@@ -1154,7 +1139,8 @@
     "Non, c'est une moyenne de carrés"
    ],
    "answer": 3,
-   "explanation": "$V≥0$."
+   "explanation": "$V≥0$.",
+   "review": true
   }
  ]
 }

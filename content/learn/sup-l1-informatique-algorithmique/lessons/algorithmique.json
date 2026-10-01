@@ -725,39 +725,30 @@
       "kind": "bars",
       "w": 400,
       "h": 250,
-      "unit": "opérations pour n = 8",
       "bars": [
        {
         "label": "log n",
         "value": 3.0,
-        "color": [
-         "green"
-        ]
+        "color": "green"
        },
        {
         "label": "n",
         "value": 8,
-        "color": [
-         "blue"
-        ]
+        "color": "blue"
        },
        {
         "label": "n log n",
         "value": 24.0,
-        "color": [
-         "orange"
-        ]
+        "color": "orange"
        },
        {
         "label": "n²",
         "value": 64,
-        "color": [
-         "red"
-        ]
+        "color": "red"
        }
       ]
      },
-     "caption": "Nombre d'opérations pour $n=8$ selon l'ordre de grandeur : 3, 8, 24 et 64.",
+     "caption": "Nombre d'opérations pour $n=8$ selon l'ordre de grandeur : 3, 8, 24 et 64. (unité : opérations pour n = 8)",
      "alt": "Quatre barres croissantes : logarithmique 3, linéaire 8, n log n 24, quadratique 64."
     },
     {
@@ -981,7 +972,8 @@
     "comparer x et x + 1"
    ],
    "answer": 0,
-   "explanation": "Affectation : on remplace x par x + 1."
+   "explanation": "Affectation : on remplace x par x + 1.",
+   "review": true
   },
   {
    "id": "sup-l1-informatique-algorithmique-algo-bases-q2",
@@ -997,7 +989,8 @@
     "jamais"
    ],
    "answer": 2,
-   "explanation": "Si la condition est fausse d'emblée, le corps n'est jamais exécuté."
+   "explanation": "Si la condition est fausse d'emblée, le corps n'est jamais exécuté.",
+   "review": true
   },
   {
    "id": "sup-l1-informatique-algorithmique-algo-bases-q3",
@@ -1013,7 +1006,8 @@
     "0"
    ],
    "answer": 3,
-   "explanation": "0 est l'élément neutre de l'addition."
+   "explanation": "0 est l'élément neutre de l'addition.",
+   "review": true
   },
   {
    "id": "sup-l1-informatique-algorithmique-algo-bases-q4",
@@ -1029,7 +1023,8 @@
     "3 fois"
    ],
    "answer": 1,
-   "explanation": "Valeurs 3, 4, 5, 6, 7."
+   "explanation": "Valeurs 3, 4, 5, 6, 7.",
+   "review": true
   },
   {
    "id": "sup-l1-informatique-algorithmique-algo-bases-q5",
@@ -1045,7 +1040,8 @@
     "mesurer le temps"
    ],
    "answer": 2,
-   "explanation": "Outil de compréhension et de test."
+   "explanation": "Outil de compréhension et de test.",
+   "review": true
   },
   {
    "id": "sup-l1-informatique-algorithmique-tableaux-01",
@@ -1184,7 +1180,8 @@
     "$n^{2}$"
    ],
    "answer": 2,
-   "explanation": "On peut devoir examiner toutes les cases."
+   "explanation": "On peut devoir examiner toutes les cases.",
+   "review": true
   },
   {
    "id": "sup-l1-informatique-algorithmique-tableaux-q2",
@@ -1200,7 +1197,8 @@
     "0"
    ],
    "answer": 0,
-   "explanation": "Les indices vont de 1 à $n$."
+   "explanation": "Les indices vont de 1 à $n$.",
+   "review": true
   },
   {
    "id": "sup-l1-informatique-algorithmique-tableaux-q3",
@@ -1216,7 +1214,8 @@
     "0"
    ],
    "answer": 3,
-   "explanation": "0 est neutre pour l'addition."
+   "explanation": "0 est neutre pour l'addition.",
+   "review": true
   },
   {
    "id": "sup-l1-informatique-algorithmique-tableaux-q4",
@@ -1232,7 +1231,8 @@
     "le maximum"
    ],
    "answer": 1,
-   "explanation": "Moyenne arithmétique."
+   "explanation": "Moyenne arithmétique.",
+   "review": true
   },
   {
    "id": "sup-l1-informatique-algorithmique-tableaux-q5",
@@ -1248,7 +1248,8 @@
     "un tri automatique"
    ],
    "answer": 1,
-   "explanation": "Cette case n'existe pas."
+   "explanation": "Cette case n'existe pas.",
+   "review": true
   },
   {
    "id": "sup-l1-informatique-algorithmique-complexite-tris-01",
@@ -1392,7 +1393,8 @@
     "100 000 comparaisons"
    ],
    "answer": 2,
-   "explanation": "$\\log_{2}1000≈10$."
+   "explanation": "$\\log_{2}1000≈10$.",
+   "review": true
   },
   {
    "id": "sup-l1-informatique-algorithmique-complexite-tris-q2",
@@ -1408,7 +1410,8 @@
     "le plus petit des éléments restants à sa place"
    ],
    "answer": 3,
-   "explanation": "Après le tour $k$, les $k$ premières cases sont définitives."
+   "explanation": "Après le tour $k$, les $k$ premières cases sont définitives.",
+   "review": true
   },
   {
    "id": "sup-l1-informatique-algorithmique-complexite-tris-q3",
@@ -1424,7 +1427,8 @@
     "1 000 000"
    ],
    "answer": 1,
-   "explanation": "$n^{2}=10\\,000$."
+   "explanation": "$n^{2}=10\\,000$.",
+   "review": true
   },
   {
    "id": "sup-l1-informatique-algorithmique-complexite-tris-q4",
@@ -1440,7 +1444,8 @@
     "la quantité d'écran utilisée"
    ],
    "answer": 2,
-   "explanation": "Ordre de grandeur du coût."
+   "explanation": "Ordre de grandeur du coût.",
+   "review": true
   },
   {
    "id": "sup-l1-informatique-algorithmique-complexite-tris-q5",
@@ -1456,7 +1461,8 @@
     "un tirage au sort"
    ],
    "answer": 0,
-   "explanation": "On insère chaque élément à sa place parmi les précédents."
+   "explanation": "On insère chaque élément à sa place parmi les précédents.",
+   "review": true
   }
  ]
 }

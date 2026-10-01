@@ -60,53 +60,40 @@
       "kind": "bars",
       "w": 400,
       "h": 240,
-      "unit": "valeur",
       "bars": [
        {
         "label": "u0",
         "value": 100.0,
-        "color": [
-         "blue"
-        ]
+        "color": "blue"
        },
        {
         "label": "u1",
         "value": 110.0,
-        "color": [
-         "blue"
-        ]
+        "color": "blue"
        },
        {
         "label": "u2",
         "value": 121.0,
-        "color": [
-         "blue"
-        ]
+        "color": "blue"
        },
        {
         "label": "u3",
         "value": 133.1,
-        "color": [
-         "blue"
-        ]
+        "color": "blue"
        },
        {
         "label": "u4",
         "value": 146.4,
-        "color": [
-         "blue"
-        ]
+        "color": "blue"
        },
        {
         "label": "u5",
         "value": 161.1,
-        "color": [
-         "blue"
-        ]
+        "color": "blue"
        }
       ]
      },
-     "caption": "Premiers termes de la suite géométrique u₀ = 100, q = 1,1.",
+     "caption": "Premiers termes de la suite géométrique u₀ = 100, q = 1,1. (unité : valeur)",
      "alt": "Diagramme en barres de six termes : 100 ; 110 ; 121 ; 133,1 ; 146,4 ; 161,1. Chaque barre est 1,1 fois la précédente."
     },
     {
@@ -526,8 +513,8 @@
      "prompt": "Valeur de la machine après 3 ans (FCFA).",
      "explanation": "$q = 0{,}9$ ; $2\\,000\\,000 \\times 0{,}9^3 = 1 458 000$ FCFA.",
      "kind": "numeric",
-     "answer": 1458000.0000000002,
-     "tolerance": 0,
+     "answer": 1458000.0,
+     "tolerance": 0.0006,
      "unit": "FCFA"
     }
    ]
@@ -710,7 +697,7 @@
      "prompt": "Probabilité qu'aucune ne soit défectueuse (arrondie au millième).",
      "explanation": "$C_8^3 / C_{12}^3 = 56/220 \\approx 0,255$.",
      "kind": "numeric",
-     "answer": 0.2545454545454545,
+     "answer": 0.254545455,
      "tolerance": 0.001
     },
     {
@@ -719,7 +706,7 @@
      "prompt": "Probabilité qu'exactement une soit défectueuse (arrondie au millième).",
      "explanation": "1 défectueuse parmi 4 et 2 bonnes parmi 8 : $4 \\times C_8^2 = 4 \\times 28 = 112$ ; $112/220 \\approx 0,509$.",
      "kind": "numeric",
-     "answer": 0.509090909090909,
+     "answer": 0.509090909,
      "tolerance": 0.001
     },
     {
@@ -728,7 +715,7 @@
      "prompt": "Probabilité d'avoir au moins une ampoule défectueuse (arrondie au millième).",
      "explanation": "Événement contraire de « aucune » : $1 - 0,255 \\approx 0,745$.",
      "kind": "numeric",
-     "answer": 0.7454545454545455,
+     "answer": 0.745454545,
      "tolerance": 0.001
     }
    ]

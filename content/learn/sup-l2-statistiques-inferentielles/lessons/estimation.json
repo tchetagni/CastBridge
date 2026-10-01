@@ -67,46 +67,35 @@
       "kind": "bars",
       "w": 400,
       "h": 250,
-      "unit": "erreur standard (σ = 12)",
       "bars": [
        {
         "label": "n=4",
         "value": 6.0,
-        "color": [
-         "blue"
-        ]
+        "color": "blue"
        },
        {
         "label": "n=9",
         "value": 4.0,
-        "color": [
-         "blue"
-        ]
+        "color": "blue"
        },
        {
         "label": "n=16",
         "value": 3.0,
-        "color": [
-         "blue"
-        ]
+        "color": "blue"
        },
        {
         "label": "n=36",
         "value": 2.0,
-        "color": [
-         "blue"
-        ]
+        "color": "blue"
        },
        {
         "label": "n=100",
         "value": 1.2,
-        "color": [
-         "blue"
-        ]
+        "color": "blue"
        }
       ]
      },
-     "caption": "L'erreur standard $σ/\\sqrt{n}$ diminue quand la taille $n$ augmente (σ = 12).",
+     "caption": "L'erreur standard $σ/\\sqrt{n}$ diminue quand la taille $n$ augmente (σ = 12). (unité : erreur standard (σ = 12))",
      "alt": "Cinq barres décroissantes : 6 pour n=4, 4 pour n=9, 3 pour n=16, 2 pour n=36 et 1,2 pour n=100."
     },
     {
@@ -478,7 +467,7 @@
    "prompt": "Calculer la variance corrigée de 4, 6, 8, 10 (arrondie au centième).",
    "explanation": "Moyenne 7 ; carrés des écarts : $9+1+1+9=20$ ; $\\frac{20}{3}≈6{,}67$.",
    "source": "Exercice original",
-   "answer": 6.666666666666667,
+   "answer": 6.666666667,
    "tolerance": 0.01
   },
   {
@@ -533,7 +522,7 @@
      "prompt": "Estimer l'erreur standard de cette proportion (arrondi au millième).",
      "explanation": "$\\sqrt{\\frac{0{,}3×0{,}7}{60}}≈0{,}059$.",
      "kind": "numeric",
-     "answer": 0.05916079783099616,
+     "answer": 0.059160798,
      "tolerance": 0.001
     },
     {
@@ -566,7 +555,8 @@
     "$\\frac{n}{k}$"
    ],
    "answer": 1,
-   "explanation": "Fréquence observée."
+   "explanation": "Fréquence observée.",
+   "review": true
   },
   {
    "id": "sup-l2-statistiques-inferentielles-echantillonnage-q2",
@@ -582,7 +572,8 @@
     "$nμ$"
    ],
    "answer": 1,
-   "explanation": "$\\bar{X}$ est un estimateur sans biais de $μ$."
+   "explanation": "$\\bar{X}$ est un estimateur sans biais de $μ$.",
+   "review": true
   },
   {
    "id": "sup-l2-statistiques-inferentielles-echantillonnage-q3",
@@ -598,7 +589,8 @@
     "$\\frac{σ}{\\sqrt{n}}$"
    ],
    "answer": 3,
-   "explanation": "Erreur standard."
+   "explanation": "Erreur standard.",
+   "review": true
   },
   {
    "id": "sup-l2-statistiques-inferentielles-echantillonnage-q4",
@@ -614,7 +606,8 @@
     "on prend les 10 premiers"
    ],
    "answer": 0,
-   "explanation": "Condition d'aléa."
+   "explanation": "Condition d'aléa.",
+   "review": true
   },
   {
    "id": "sup-l2-statistiques-inferentielles-echantillonnage-q5",
@@ -630,7 +623,8 @@
     "toujours égale à $μ$"
    ],
    "answer": 2,
-   "explanation": "Quelle que soit la population (variance finie)."
+   "explanation": "Quelle que soit la population (variance finie).",
+   "review": true
   },
   {
    "id": "sup-l2-statistiques-inferentielles-intervalles-confiance-01",
@@ -685,7 +679,7 @@
    "prompt": "Sur 400 interrogés, 120 sont favorables. Calculer la marge d'erreur à 95 % de la proportion (arrondie à $10^{-4}$).",
    "explanation": "$1{,}96×\\sqrt{\\frac{0{,}3×0{,}7}{400}}≈0{,}0449$.",
    "source": "Exercice original",
-   "answer": 0.044909241810567234,
+   "answer": 0.044909242,
    "tolerance": 0.0002
   },
   {
@@ -772,7 +766,8 @@
     "un $z$ plus grand"
    ],
    "answer": 2,
-   "explanation": "Erreur standard $\\frac{σ}{\\sqrt{n}}$ plus petite."
+   "explanation": "Erreur standard $\\frac{σ}{\\sqrt{n}}$ plus petite.",
+   "review": true
   },
   {
    "id": "sup-l2-statistiques-inferentielles-intervalles-confiance-q2",
@@ -788,7 +783,8 @@
     "1"
    ],
    "answer": 0,
-   "explanation": "Pour le niveau 95 % (bilatéral)."
+   "explanation": "Pour le niveau 95 % (bilatéral).",
+   "review": true
   },
   {
    "id": "sup-l2-statistiques-inferentielles-intervalles-confiance-q3",
@@ -804,7 +800,8 @@
     "au dixième"
    ],
    "answer": 2,
-   "explanation": "Pour garantir la marge d'erreur voulue."
+   "explanation": "Pour garantir la marge d'erreur voulue.",
+   "review": true
   },
   {
    "id": "sup-l2-statistiques-inferentielles-intervalles-confiance-q4",
@@ -820,7 +817,8 @@
     "la loi exponentielle"
    ],
    "answer": 0,
-   "explanation": "Valeur $t$ au lieu de $z$."
+   "explanation": "Valeur $t$ au lieu de $z$.",
+   "review": true
   },
   {
    "id": "sup-l2-statistiques-inferentielles-intervalles-confiance-q5",
@@ -836,7 +834,8 @@
     "$\\hat{p}$"
    ],
    "answer": 3,
-   "explanation": "On construit autour de la valeur observée."
+   "explanation": "On construit autour de la valeur observée.",
+   "review": true
   }
  ]
 }
