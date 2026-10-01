@@ -1,0 +1,1371 @@
+{
+ "chapter": "ms-maths-quantites-ch",
+ "lessons": [
+  {
+   "id": "ms-maths-plus-moins-autant",
+   "title": "Plus, moins, autant",
+   "minutes": 8,
+   "readAloud": true,
+   "programRef": "Programme de l'éducation maternelle, moyenne section (MINEDUB) — reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant de maternelle",
+   "objectives": [
+    "Comparer deux collections.",
+    "Dire « il y en a plus », « moins » ou « autant »."
+   ],
+   "prerequisites": [
+    "ms-maths-un-a-cinq"
+   ],
+   "exercises": [
+    "ms-maths-plus-moins-autant-01",
+    "ms-maths-plus-moins-autant-02",
+    "ms-maths-plus-moins-autant-03",
+    "ms-maths-plus-moins-autant-04"
+   ],
+   "selfCheck": [],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "Où y en a-t-il le plus ?",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "text",
+     "md": "**Plus**, **moins**, **autant** : on compare deux groupes."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 190,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 30,
+        "cy": 50,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 64,
+        "cy": 50,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 98,
+        "cy": 50,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 132,
+        "cy": 50,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 166,
+        "cy": 50,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 30,
+        "cy": 120,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 64,
+        "cy": 120,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 98,
+        "cy": 120,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       }
+      ]
+     },
+     "caption": "5 et 3",
+     "alt": "Une ligne de 5 points orange au-dessus d'une ligne de 3 points bleus."
+    },
+    {
+     "type": "audio",
+     "text": "En haut, il y a plus de points. En bas, il y en a moins.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 190,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 30,
+        "cy": 50,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 64,
+        "cy": 50,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 98,
+        "cy": 50,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 132,
+        "cy": 50,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 30,
+        "cy": 120,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 64,
+        "cy": 120,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 98,
+        "cy": 120,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 132,
+        "cy": 120,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       }
+      ]
+     },
+     "caption": "4 et 4",
+     "alt": "Deux lignes de 4 points chacune."
+    },
+    {
+     "type": "audio",
+     "text": "Il y a autant de points en haut et en bas.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "example",
+     "title": "Qui en a le plus ?",
+     "statement": "Ngono a 5 mangues. Amina en a 3. Qui en a le plus ?",
+     "steps": [
+      {
+       "md": "On met les mangues en deux lignes."
+      },
+      {
+       "md": "On les relie une par une."
+      },
+      {
+       "md": "Ngono a des mangues en trop."
+      }
+     ],
+     "answer": "**Ngono** en a plus.",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 190,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 30,
+        "cy": 50,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 64,
+        "cy": 50,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 98,
+        "cy": 50,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 132,
+        "cy": 50,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 166,
+        "cy": 50,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 30,
+        "cy": 120,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 64,
+        "cy": 120,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 98,
+        "cy": 120,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       }
+      ]
+     }
+    },
+    {
+     "type": "audio",
+     "text": "Ngono en a plus qu'Amina !",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "exercise",
+     "ref": "ms-maths-plus-moins-autant-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ms-maths-plus-moins-autant-03"
+    }
+   ],
+   "reviewNotes": [
+    "Moyenne section : on vise souvent 5-6 comme quantité sûre et 10 comme suite orale ; à ajuster selon la classe.",
+    "Exercices réduits à 4 ; prénoms camerounais volontaires dans les énoncés."
+   ]
+  },
+  {
+   "id": "ms-maths-ajouter-enlever",
+   "title": "J'ajoute, j'enlève",
+   "minutes": 9,
+   "readAloud": true,
+   "programRef": "Programme de l'éducation maternelle, moyenne section (MINEDUB) — reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant de maternelle",
+   "objectives": [
+    "Ajouter un ou deux objets à un petit groupe.",
+    "Enlever un ou deux objets."
+   ],
+   "prerequisites": [
+    "ms-maths-plus-moins-autant"
+   ],
+   "exercises": [
+    "ms-maths-ajouter-enlever-01",
+    "ms-maths-ajouter-enlever-02",
+    "ms-maths-ajouter-enlever-03",
+    "ms-maths-ajouter-enlever-04",
+    "ms-maths-ajouter-enlever-05"
+   ],
+   "selfCheck": [],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "Je pose des billes, j'en ajoute, j'en enlève.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "text",
+     "md": "**Ajouter**, c'est en avoir plus. **Enlever**, c'est en avoir moins."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 150,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 30,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 60,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 80,
+        "text": "+",
+        "size": 40,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       }
+      ]
+     },
+     "caption": "2 et encore 1",
+     "alt": "Deux points orange, un signe plus, un point bleu."
+    },
+    {
+     "type": "audio",
+     "text": "Deux et encore un : on compte trois.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 150,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 30,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 60,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 90,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 30,
+        "cy": 90,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 80,
+        "text": "−",
+        "size": 40,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       }
+      ]
+     },
+     "caption": "4, on en enlève 1",
+     "alt": "Quatre points orange, un signe moins, un point bleu."
+    },
+    {
+     "type": "audio",
+     "text": "Quatre, on en enlève un : il en reste trois.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "example",
+     "title": "Les bananes",
+     "statement": "Marie a 3 bananes. On lui en donne 2. Combien en a-t-elle ?",
+     "steps": [
+      {
+       "md": "Elle a 3 bananes."
+      },
+      {
+       "md": "On en ajoute 2 : quatre, cinq."
+      },
+      {
+       "md": "Elle en a maintenant 5."
+      }
+     ],
+     "answer": "Marie a **5** bananes.",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 150,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 30,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 60,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 90,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 80,
+        "text": "+",
+        "size": 40,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 230,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       }
+      ]
+     }
+    },
+    {
+     "type": "audio",
+     "text": "Trois bananes et deux bananes : cinq bananes !",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "example",
+     "title": "Les arachides",
+     "statement": "Paul a 5 arachides. Il en mange 2. Combien en reste-t-il ?",
+     "steps": [
+      {
+       "md": "Il en avait 5."
+      },
+      {
+       "md": "On en enlève 2."
+      },
+      {
+       "md": "Il en reste 3."
+      }
+     ],
+     "answer": "Il reste **3** arachides.",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 150,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 30,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 60,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 90,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 30,
+        "cy": 90,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 60,
+        "cy": 90,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 80,
+        "text": "−",
+        "size": 40,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 230,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       }
+      ]
+     }
+    },
+    {
+     "type": "exercise",
+     "ref": "ms-maths-ajouter-enlever-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ms-maths-ajouter-enlever-03"
+    }
+   ],
+   "reviewNotes": [
+    "Moyenne section : on vise souvent 5-6 comme quantité sûre et 10 comme suite orale ; à ajuster selon la classe.",
+    "Calculs sur de petites collections manipulées ; pas d'écriture d'opération en MS."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ms-maths-plus-moins-autant-01",
+   "chapter": "ms-maths-quantites-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-maths-plus-moins-autant",
+   "prompt": "Où y a-t-il le plus de points ?",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 190,
+    "items": [
+     {
+      "t": "circle",
+      "cx": 30,
+      "cy": 50,
+      "r": 12,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "circle",
+      "cx": 64,
+      "cy": 50,
+      "r": 12,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "circle",
+      "cx": 98,
+      "cy": 50,
+      "r": 12,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "circle",
+      "cx": 132,
+      "cy": 50,
+      "r": 12,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "circle",
+      "cx": 166,
+      "cy": 50,
+      "r": 12,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "circle",
+      "cx": 30,
+      "cy": 120,
+      "r": 12,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     },
+     {
+      "t": "circle",
+      "cx": 64,
+      "cy": 120,
+      "r": 12,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     },
+     {
+      "t": "circle",
+      "cx": 98,
+      "cy": 120,
+      "r": 12,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     }
+    ]
+   },
+   "choices": [
+    "En haut",
+    "Autant",
+    "En bas"
+   ],
+   "answer": 0,
+   "explanation": "5 points en haut, 3 en bas.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-maths-plus-moins-autant-02",
+   "chapter": "ms-maths-quantites-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-maths-plus-moins-autant",
+   "prompt": "Où y a-t-il le moins de points ?",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 190,
+    "items": [
+     {
+      "t": "circle",
+      "cx": 30,
+      "cy": 50,
+      "r": 12,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "circle",
+      "cx": 64,
+      "cy": 50,
+      "r": 12,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "circle",
+      "cx": 98,
+      "cy": 50,
+      "r": 12,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "circle",
+      "cx": 132,
+      "cy": 50,
+      "r": 12,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "circle",
+      "cx": 30,
+      "cy": 120,
+      "r": 12,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     },
+     {
+      "t": "circle",
+      "cx": 64,
+      "cy": 120,
+      "r": 12,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     }
+    ]
+   },
+   "choices": [
+    "Autant",
+    "En haut",
+    "En bas"
+   ],
+   "answer": 2,
+   "explanation": "2 points en bas, 4 en haut.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-maths-plus-moins-autant-03",
+   "chapter": "ms-maths-quantites-ch",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-maths-plus-moins-autant",
+   "prompt": "Il y a autant de points en haut et en bas.",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 190,
+    "items": [
+     {
+      "t": "circle",
+      "cx": 30,
+      "cy": 50,
+      "r": 12,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "circle",
+      "cx": 64,
+      "cy": 50,
+      "r": 12,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "circle",
+      "cx": 98,
+      "cy": 50,
+      "r": 12,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "circle",
+      "cx": 132,
+      "cy": 50,
+      "r": 12,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "circle",
+      "cx": 30,
+      "cy": 120,
+      "r": 12,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     },
+     {
+      "t": "circle",
+      "cx": 64,
+      "cy": 120,
+      "r": 12,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     },
+     {
+      "t": "circle",
+      "cx": 98,
+      "cy": 120,
+      "r": 12,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     },
+     {
+      "t": "circle",
+      "cx": 132,
+      "cy": 120,
+      "r": 12,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     }
+    ]
+   },
+   "answer": true,
+   "explanation": "4 et 4 : **autant**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-maths-plus-moins-autant-04",
+   "chapter": "ms-maths-quantites-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "ms-maths-plus-moins-autant",
+   "prompt": "Mballa a 6 billes, Fotso en a 6. Qui en a le plus ?",
+   "choices": [
+    "Fotso",
+    "Mballa",
+    "Personne : ils en ont autant"
+   ],
+   "answer": 2,
+   "explanation": "6 et 6 : **autant**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-maths-ajouter-enlever-01",
+   "chapter": "ms-maths-quantites-ch",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-maths-ajouter-enlever",
+   "prompt": "Il y a 2 ronds. On en ajoute 1. Combien y en a-t-il ?",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 150,
+    "items": [
+     {
+      "t": "circle",
+      "cx": 30,
+      "cy": 60,
+      "r": 11,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "circle",
+      "cx": 60,
+      "cy": 60,
+      "r": 11,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "text",
+      "x": 150,
+      "y": 80,
+      "text": "+",
+      "size": 40,
+      "color": "ink",
+      "bold": true,
+      "anchor": "middle"
+     },
+     {
+      "t": "circle",
+      "cx": 200,
+      "cy": 60,
+      "r": 11,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     }
+    ]
+   },
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "2 et 1 : **3**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-maths-ajouter-enlever-02",
+   "chapter": "ms-maths-quantites-ch",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-maths-ajouter-enlever",
+   "prompt": "Il y a 3 étoiles. On en ajoute 2. Combien ?",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 150,
+    "items": [
+     {
+      "t": "circle",
+      "cx": 30,
+      "cy": 60,
+      "r": 11,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "circle",
+      "cx": 60,
+      "cy": 60,
+      "r": 11,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "circle",
+      "cx": 90,
+      "cy": 60,
+      "r": 11,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "text",
+      "x": 150,
+      "y": 80,
+      "text": "+",
+      "size": 40,
+      "color": "ink",
+      "bold": true,
+      "anchor": "middle"
+     },
+     {
+      "t": "circle",
+      "cx": 200,
+      "cy": 60,
+      "r": 11,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     },
+     {
+      "t": "circle",
+      "cx": 230,
+      "cy": 60,
+      "r": 11,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     }
+    ]
+   },
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "3 et 2 : **5**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-maths-ajouter-enlever-03",
+   "chapter": "ms-maths-quantites-ch",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-maths-ajouter-enlever",
+   "prompt": "Il y a 4 cœurs. On en enlève 1. Combien en reste-t-il ?",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 150,
+    "items": [
+     {
+      "t": "circle",
+      "cx": 30,
+      "cy": 60,
+      "r": 11,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "circle",
+      "cx": 60,
+      "cy": 60,
+      "r": 11,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "circle",
+      "cx": 90,
+      "cy": 60,
+      "r": 11,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "circle",
+      "cx": 30,
+      "cy": 90,
+      "r": 11,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "text",
+      "x": 150,
+      "y": 80,
+      "text": "−",
+      "size": 40,
+      "color": "ink",
+      "bold": true,
+      "anchor": "middle"
+     },
+     {
+      "t": "circle",
+      "cx": 200,
+      "cy": 60,
+      "r": 11,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     }
+    ]
+   },
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "4 moins 1 : **3**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-maths-ajouter-enlever-04",
+   "chapter": "ms-maths-quantites-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-maths-ajouter-enlever",
+   "prompt": "Il y a 5 gâteaux. On en mange 2. Combien reste-t-il de gâteaux ?",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 150,
+    "items": [
+     {
+      "t": "circle",
+      "cx": 30,
+      "cy": 60,
+      "r": 11,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "circle",
+      "cx": 60,
+      "cy": 60,
+      "r": 11,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "circle",
+      "cx": 90,
+      "cy": 60,
+      "r": 11,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "circle",
+      "cx": 30,
+      "cy": 90,
+      "r": 11,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "circle",
+      "cx": 60,
+      "cy": 90,
+      "r": 11,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "text",
+      "x": 150,
+      "y": 80,
+      "text": "−",
+      "size": 40,
+      "color": "ink",
+      "bold": true,
+      "anchor": "middle"
+     },
+     {
+      "t": "circle",
+      "cx": 200,
+      "cy": 60,
+      "r": 11,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     },
+     {
+      "t": "circle",
+      "cx": 230,
+      "cy": 60,
+      "r": 11,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     }
+    ]
+   },
+   "choices": [
+    "3",
+    "2",
+    "4"
+   ],
+   "answer": 0,
+   "explanation": "5, on en enlève 2 : **3**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-maths-ajouter-enlever-05",
+   "chapter": "ms-maths-quantites-ch",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "ms-maths-ajouter-enlever",
+   "prompt": "Fotso a 3 billes et en gagne 3. Combien en a-t-il ?",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 150,
+    "items": [
+     {
+      "t": "circle",
+      "cx": 30,
+      "cy": 60,
+      "r": 11,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "circle",
+      "cx": 60,
+      "cy": 60,
+      "r": 11,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "circle",
+      "cx": 90,
+      "cy": 60,
+      "r": 11,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "text",
+      "x": 150,
+      "y": 80,
+      "text": "+",
+      "size": 40,
+      "color": "ink",
+      "bold": true,
+      "anchor": "middle"
+     },
+     {
+      "t": "circle",
+      "cx": 200,
+      "cy": 60,
+      "r": 11,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     },
+     {
+      "t": "circle",
+      "cx": 230,
+      "cy": 60,
+      "r": 11,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     },
+     {
+      "t": "circle",
+      "cx": 260,
+      "cy": 60,
+      "r": 11,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     }
+    ]
+   },
+   "choices": [
+    "6",
+    "7",
+    "5"
+   ],
+   "answer": 0,
+   "explanation": "3 et 3 : **6**.",
+   "source": "Exercice original"
+  }
+ ]
+}

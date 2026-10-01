@@ -1,0 +1,340 @@
+{
+ "chapter": "ms-francais-oral-ch",
+ "lessons": [
+  {
+   "id": "ms-francais-phrases",
+   "title": "Je dis une phrase",
+   "minutes": 7,
+   "readAloud": true,
+   "programRef": "Programme de l'éducation maternelle, moyenne section (MINEDUB) — reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant de maternelle",
+   "objectives": [
+    "Dire une phrase complète.",
+    "Reconnaître une phrase dans le bon ordre."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "ms-francais-phrases-01",
+    "ms-francais-phrases-02",
+    "ms-francais-phrases-03",
+    "ms-francais-phrases-04",
+    "ms-francais-phrases-05"
+   ],
+   "selfCheck": [],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "Pour parler, on fait des phrases.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "text",
+     "md": "**La poule mange du maïs.** Voilà une phrase. On comprend tout."
+    },
+    {
+     "type": "audio",
+     "text": "La poule mange du maïs.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "text",
+     "md": "Si les mots sont mélangés, on ne comprend plus : *maïs poule la du mange*."
+    },
+    {
+     "type": "audio",
+     "text": "Maïs, poule, la, du, mange : ça ne veut rien dire !",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "example",
+     "title": "Quelle phrase est juste ?",
+     "statement": "Choisis la phrase qui se comprend : « Le chat dort. » ou « Dort le le chat. »",
+     "steps": [
+      {
+       "md": "On écoute les deux phrases."
+      },
+      {
+       "md": "La première se comprend bien."
+      },
+      {
+       "md": "La seconde a les mots dans le désordre."
+      }
+     ],
+     "answer": "**Le chat dort.**"
+    },
+    {
+     "type": "audio",
+     "text": "Le chat dort. Voilà une phrase !",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "exercise",
+     "ref": "ms-francais-phrases-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ms-francais-phrases-03"
+    }
+   ],
+   "reviewNotes": [
+    "Moyenne section : fiches courtes à accompagner à l'oral ; la lecture de mots n'est pas exigée."
+   ]
+  },
+  {
+   "id": "ms-francais-histoire",
+   "title": "J'écoute une histoire",
+   "minutes": 9,
+   "readAloud": true,
+   "programRef": "Programme de l'éducation maternelle, moyenne section (MINEDUB) — reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant de maternelle",
+   "objectives": [
+    "Écouter une petite histoire.",
+    "Répondre à des questions sur qui, où, quoi."
+   ],
+   "prerequisites": [
+    "ms-francais-phrases"
+   ],
+   "exercises": [
+    "ms-francais-histoire-01",
+    "ms-francais-histoire-02",
+    "ms-francais-histoire-03",
+    "ms-francais-histoire-04",
+    "ms-francais-histoire-05"
+   ],
+   "selfCheck": [],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "Écoute bien l'histoire de la petite tortue.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "text",
+     "md": "**Tchoua la petite tortue** veut aller à la rivière. Elle marche, doucement, doucement."
+    },
+    {
+     "type": "audio",
+     "text": "Tchoua la petite tortue veut aller à la rivière. Elle marche, doucement, doucement.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "text",
+     "md": "En chemin, elle rencontre **un oiseau**. L'oiseau dit : « Je t'aide ! » Il lui montre le bon chemin."
+    },
+    {
+     "type": "audio",
+     "text": "En chemin, elle rencontre un oiseau. L'oiseau dit : Je t'aide ! Il lui montre le bon chemin.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "text",
+     "md": "Tchoua arrive à la rivière. Elle boit et elle dit : **« Merci, petit oiseau ! »**"
+    },
+    {
+     "type": "audio",
+     "text": "Tchoua arrive à la rivière. Elle boit et elle dit : Merci, petit oiseau !",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "example",
+     "title": "Qui est Tchoua ?",
+     "statement": "Qui est Tchoua dans l'histoire ?",
+     "steps": [
+      {
+       "md": "On se rappelle l'histoire."
+      },
+      {
+       "md": "Tchoua marche doucement."
+      },
+      {
+       "md": "C'est une petite tortue."
+      }
+     ],
+     "answer": "Tchoua est une **petite tortue**."
+    },
+    {
+     "type": "exercise",
+     "ref": "ms-francais-histoire-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ms-francais-histoire-03"
+    }
+   ],
+   "reviewNotes": [
+    "Histoire originale ; à lire à voix haute avec pauses. Vérifier que le vocabulaire convient à la classe."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ms-francais-phrases-01",
+   "chapter": "ms-francais-oral-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-francais-phrases",
+   "prompt": "Quelle phrase est juste ?",
+   "choices": [
+    "Boit Paul eau de.",
+    "Paul boit de l'eau.",
+    "Eau l' boit de Paul."
+   ],
+   "answer": 1,
+   "explanation": "Les mots sont dans le bon ordre : **Paul boit de l'eau.**",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-francais-phrases-02",
+   "chapter": "ms-francais-oral-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-francais-phrases",
+   "prompt": "Quelle phrase est juste ?",
+   "choices": [
+    "Maman cuisine la la.",
+    "Cuisine la la maman.",
+    "La maman cuisine."
+   ],
+   "answer": 2,
+   "explanation": "**La maman cuisine.**",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-francais-phrases-03",
+   "chapter": "ms-francais-oral-ch",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-francais-phrases",
+   "prompt": "« Le chien court. » est une phrase.",
+   "answer": true,
+   "explanation": "Oui, on comprend : **le chien court**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-francais-phrases-04",
+   "chapter": "ms-francais-oral-ch",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-francais-phrases",
+   "prompt": "« Court le chien le. » est une phrase.",
+   "answer": false,
+   "explanation": "Non : les mots sont dans le désordre.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-francais-phrases-05",
+   "chapter": "ms-francais-oral-ch",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "ms-francais-phrases",
+   "prompt": "Que fait la poule dans la comptine de la fiche ?",
+   "choices": [
+    "Elle nage",
+    "Elle mange du maïs",
+    "Elle vole très haut"
+   ],
+   "answer": 1,
+   "explanation": "La poule **mange du maïs**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-francais-histoire-01",
+   "chapter": "ms-francais-oral-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-francais-histoire",
+   "prompt": "Où veut aller Tchoua ?",
+   "choices": [
+    "À l'école",
+    "Au marché",
+    "À la rivière"
+   ],
+   "answer": 2,
+   "explanation": "Elle veut aller à la **rivière**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-francais-histoire-02",
+   "chapter": "ms-francais-oral-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-francais-histoire",
+   "prompt": "Qui aide Tchoua ?",
+   "choices": [
+    "Un oiseau",
+    "Un chat",
+    "Un éléphant"
+   ],
+   "answer": 0,
+   "explanation": "C'est **un oiseau**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-francais-histoire-03",
+   "chapter": "ms-francais-oral-ch",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-francais-histoire",
+   "prompt": "Tchoua court très vite.",
+   "answer": false,
+   "explanation": "Non : elle marche **doucement**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-francais-histoire-04",
+   "chapter": "ms-francais-oral-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-francais-histoire",
+   "prompt": "Que dit Tchoua à la fin ?",
+   "choices": [
+    "Merci",
+    "J'ai faim",
+    "Au revoir"
+   ],
+   "answer": 0,
+   "explanation": "Elle dit **merci** à l'oiseau.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-francais-histoire-05",
+   "chapter": "ms-francais-oral-ch",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "ms-francais-histoire",
+   "prompt": "Pourquoi Tchoua dit-elle merci ?",
+   "choices": [
+    "L'oiseau l'a aidée",
+    "Elle a trouvé un gâteau",
+    "Elle a perdu son chemin"
+   ],
+   "answer": 0,
+   "explanation": "L'oiseau lui a montré le bon chemin.",
+   "source": "Exercice original"
+  }
+ ]
+}

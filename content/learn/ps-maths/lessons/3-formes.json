@@ -1,0 +1,334 @@
+{
+ "chapter": "ps-maths-formes-ch",
+ "lessons": [
+  {
+   "id": "ps-maths-rond-carre-triangle",
+   "title": "Rond, carré, triangle",
+   "minutes": 8,
+   "readAloud": true,
+   "programRef": "Programme de l'éducation maternelle, petite section (MINEDUB) — reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant de maternelle",
+   "objectives": [
+    "Nommer le rond, le carré et le triangle.",
+    "Retrouver ces formes dans des objets."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "ps-maths-rond-carre-triangle-01",
+    "ps-maths-rond-carre-triangle-02",
+    "ps-maths-rond-carre-triangle-03",
+    "ps-maths-rond-carre-triangle-04",
+    "ps-maths-rond-carre-triangle-05"
+   ],
+   "selfCheck": [],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "Voici trois formes : le rond, le carré et le triangle.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 250,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 110,
+        "r": 80,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 225,
+        "text": "rond",
+        "size": 30,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Le rond",
+     "alt": "Un grand rond rouge."
+    },
+    {
+     "type": "audio",
+     "text": "Le rond roule comme une roue.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 250,
+      "items": [
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 40,
+        "w": 160,
+        "h": 160,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 232,
+        "text": "carré",
+        "size": 30,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Le carré",
+     "alt": "Un grand carré bleu."
+    },
+    {
+     "type": "audio",
+     "text": "Le carré a quatre côtés pareils.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 250,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         200,
+         30,
+         300,
+         200,
+         100,
+         200
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 232,
+        "text": "triangle",
+        "size": 30,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Le triangle",
+     "alt": "Un grand triangle vert."
+    },
+    {
+     "type": "audio",
+     "text": "Le triangle a trois pointes.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "example",
+     "title": "Quelle forme ?",
+     "statement": "Une assiette est ronde. Quelle forme est-ce ?",
+     "steps": [
+      {
+       "md": "On regarde le contour de l'assiette."
+      },
+      {
+       "md": "Il n'a pas de coin : il est tout rond."
+      }
+     ],
+     "answer": "C'est un **rond**."
+    },
+    {
+     "type": "audio",
+     "text": "L'assiette a la forme d'un rond !",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Cherche des formes dans la classe : une porte, une roue, un toit."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "ps-maths-rond-carre-triangle-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ps-maths-rond-carre-triangle-03"
+    }
+   ],
+   "reviewNotes": [
+    "Appariement avec symboles ● ■ ▲ : vérifier l'affichage sur la TV."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ps-maths-rond-carre-triangle-01",
+   "chapter": "ps-maths-formes-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ps-maths-rond-carre-triangle",
+   "prompt": "Quelle est cette forme ?",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 180,
+    "items": [
+     {
+      "t": "circle",
+      "cx": 200,
+      "cy": 90,
+      "r": 70,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     }
+    ]
+   },
+   "choices": [
+    "Un triangle",
+    "Un rond",
+    "Un carré"
+   ],
+   "answer": 1,
+   "explanation": "C'est un **rond**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ps-maths-rond-carre-triangle-02",
+   "chapter": "ps-maths-formes-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ps-maths-rond-carre-triangle",
+   "prompt": "Quelle est cette forme ?",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 180,
+    "items": [
+     {
+      "t": "poly",
+      "pts": [
+       200,
+       20,
+       290,
+       160,
+       110,
+       160
+      ],
+      "stroke": "ink",
+      "width": 2,
+      "fill": "green"
+     }
+    ]
+   },
+   "choices": [
+    "Un carré",
+    "Un rond",
+    "Un triangle"
+   ],
+   "answer": 2,
+   "explanation": "Il a trois pointes : c'est un **triangle**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ps-maths-rond-carre-triangle-03",
+   "chapter": "ps-maths-formes-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ps-maths-rond-carre-triangle",
+   "prompt": "Quelle est cette forme ?",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 180,
+    "items": [
+     {
+      "t": "rect",
+      "x": 130,
+      "y": 20,
+      "w": 140,
+      "h": 140,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     }
+    ]
+   },
+   "choices": [
+    "Un triangle",
+    "Un rond",
+    "Un carré"
+   ],
+   "answer": 2,
+   "explanation": "Il a quatre côtés pareils : c'est un **carré**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ps-maths-rond-carre-triangle-04",
+   "chapter": "ps-maths-formes-ch",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ps-maths-rond-carre-triangle",
+   "prompt": "Une roue de vélo a la forme d'un rond.",
+   "answer": true,
+   "explanation": "Oui, une roue est **ronde**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ps-maths-rond-carre-triangle-05",
+   "chapter": "ps-maths-formes-ch",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "ps-maths-rond-carre-triangle",
+   "prompt": "Relie chaque forme à son nom.",
+   "pairs": [
+    [
+     "●",
+     "rond"
+    ],
+    [
+     "■",
+     "carré"
+    ],
+    [
+     "▲",
+     "triangle"
+    ]
+   ],
+   "explanation": "● est un rond, ■ un carré, ▲ un triangle.",
+   "source": "Exercice original"
+  }
+ ]
+}

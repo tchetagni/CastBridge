@@ -1,0 +1,392 @@
+{
+ "chapter": "gs-francais-sons-ch",
+ "lessons": [
+  {
+   "id": "gs-francais-syllabes",
+   "title": "Les syllabes",
+   "minutes": 8,
+   "readAloud": true,
+   "programRef": "Programme de l'éducation maternelle, grande section (MINEDUB) — reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant de maternelle",
+   "objectives": [
+    "Compter les syllabes d'un mot, jusqu'à 4.",
+    "Trouver un mot qui a le même nombre de syllabes."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gs-francais-syllabes-01",
+    "gs-francais-syllabes-02",
+    "gs-francais-syllabes-03",
+    "gs-francais-syllabes-04",
+    "gs-francais-syllabes-05"
+   ],
+   "selfCheck": [],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "On frappe les syllabes des mots.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "text",
+     "md": "**riz** : 1. **mou - ton** : 2. **ba - na - ne** : 3. **é - lé - phant** : 3. **ca - ma - ra - de** : 4."
+    },
+    {
+     "type": "audio",
+     "text": "Riz, une syllabe. Mou, ton : deux. Ba, na, ne : trois. É, lé, phant : trois. Ca, ma, ra, de : quatre.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 180,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 100,
+        "cy": 80,
+        "r": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 80,
+        "r": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 300,
+        "cy": 80,
+        "r": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 150,
+        "text": "ba - na - ne",
+        "size": 30,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "ba - na - ne",
+     "alt": "Trois ronds bleus, un par syllabe de banane."
+    },
+    {
+     "type": "audio",
+     "text": "Un rond par syllabe : trois ronds pour banane.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "example",
+     "title": "Combien de syllabes ?",
+     "statement": "Frappe le mot « camarade ».",
+     "steps": [
+      {
+       "md": "On dit : ca - ma - ra - de."
+      },
+      {
+       "md": "On frappe quatre fois."
+      }
+     ],
+     "answer": "**4** syllabes."
+    },
+    {
+     "type": "audio",
+     "text": "Ca, ma, ra, de. Quatre syllabes !",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "exercise",
+     "ref": "gs-francais-syllabes-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "gs-francais-syllabes-03"
+    }
+   ],
+   "reviewNotes": [
+    "Découpage oral conventionnel (le « e » final n'est pas toujours compté) ; à confronter à la pratique de la classe."
+   ]
+  },
+  {
+   "id": "gs-francais-rimes-sons",
+   "title": "Rimes et sons du début",
+   "minutes": 9,
+   "readAloud": true,
+   "programRef": "Programme de l'éducation maternelle, grande section (MINEDUB) — reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant de maternelle",
+   "objectives": [
+    "Trouver des mots qui riment.",
+    "Trouver des mots qui commencent par le même son."
+   ],
+   "prerequisites": [
+    "gs-francais-syllabes"
+   ],
+   "exercises": [
+    "gs-francais-rimes-sons-01",
+    "gs-francais-rimes-sons-02",
+    "gs-francais-rimes-sons-03",
+    "gs-francais-rimes-sons-04",
+    "gs-francais-rimes-sons-05"
+   ],
+   "selfCheck": [],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "On écoute la fin et le début des mots.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "text",
+     "md": "**Rime** : même son à la fin. *souris* et *riz* riment. *chapeau* et *bateau* riment."
+    },
+    {
+     "type": "audio",
+     "text": "Souris, riz. Chapeau, bateau. Ça rime !",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "text",
+     "md": "**Début** : même son au début. *mangue*, *maison* et *marché* commencent par « ma »."
+    },
+    {
+     "type": "audio",
+     "text": "Mangue, maison, marché : ils commencent par ma.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "example",
+     "title": "Même début",
+     "statement": "Quel mot commence comme « banane » : ballon ou tomate ?",
+     "steps": [
+      {
+       "md": "On dit banane : ba."
+      },
+      {
+       "md": "Ballon commence aussi par ba."
+      },
+      {
+       "md": "Tomate commence par to."
+      }
+     ],
+     "answer": "**Ballon**."
+    },
+    {
+     "type": "audio",
+     "text": "Banane, ballon : ba, ba !",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "exercise",
+     "ref": "gs-francais-rimes-sons-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "gs-francais-rimes-sons-03"
+    }
+   ],
+   "reviewNotes": [
+    "Rimes et sons à l'oral ; « souris/riz » : rime pauvre mais acceptée en GS. À vérifier."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gs-francais-syllabes-01",
+   "chapter": "gs-francais-sons-ch",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "gs-francais-syllabes",
+   "prompt": "Combien de syllabes dans « mouton » ? (mou - ton)",
+   "answer": 2,
+   "tolerance": 0,
+   "explanation": "**2** syllabes.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "gs-francais-syllabes-02",
+   "chapter": "gs-francais-sons-ch",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "gs-francais-syllabes",
+   "prompt": "Combien de syllabes dans « tomate » ? (to - ma - te)",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "**3** syllabes.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "gs-francais-syllabes-03",
+   "chapter": "gs-francais-sons-ch",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "gs-francais-syllabes",
+   "prompt": "Combien de syllabes dans « éléphant » ? (é - lé - phant)",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "**3** syllabes.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "gs-francais-syllabes-04",
+   "chapter": "gs-francais-sons-ch",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "gs-francais-syllabes",
+   "prompt": "Combien de syllabes dans « camarade » ? (ca - ma - ra - de)",
+   "answer": 4,
+   "tolerance": 0,
+   "explanation": "**4** syllabes.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "gs-francais-syllabes-05",
+   "chapter": "gs-francais-sons-ch",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "gs-francais-syllabes",
+   "prompt": "Relie le mot à son nombre de syllabes.",
+   "pairs": [
+    [
+     "riz",
+     "1"
+    ],
+    [
+     "mouton",
+     "2"
+    ],
+    [
+     "banane",
+     "3"
+    ],
+    [
+     "camarade",
+     "4"
+    ]
+   ],
+   "explanation": "Riz 1, mouton 2, banane 3, camarade 4.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "gs-francais-rimes-sons-01",
+   "chapter": "gs-francais-sons-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "gs-francais-rimes-sons",
+   "prompt": "Quel mot rime avec « chapeau » ?",
+   "choices": [
+    "Maison",
+    "Bateau",
+    "Banane"
+   ],
+   "answer": 1,
+   "explanation": "Chapeau, **bateau**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "gs-francais-rimes-sons-02",
+   "chapter": "gs-francais-sons-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "gs-francais-rimes-sons",
+   "prompt": "Quel mot commence comme « mangue » ?",
+   "choices": [
+    "Maison",
+    "Tomate",
+    "Poule"
+   ],
+   "answer": 0,
+   "explanation": "Mangue, **ma**ison : « ma ».",
+   "source": "Exercice original"
+  },
+  {
+   "id": "gs-francais-rimes-sons-03",
+   "chapter": "gs-francais-sons-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "gs-francais-rimes-sons",
+   "prompt": "Quel mot rime avec « souris » ?",
+   "choices": [
+    "Mouton",
+    "Riz",
+    "Lune"
+   ],
+   "answer": 1,
+   "explanation": "Souris, **riz**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "gs-francais-rimes-sons-04",
+   "chapter": "gs-francais-sons-ch",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "gs-francais-rimes-sons",
+   "prompt": "« Tomate » commence comme « tortue ».",
+   "answer": true,
+   "explanation": "Oui : « to » au début des deux mots.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "gs-francais-rimes-sons-05",
+   "chapter": "gs-francais-sons-ch",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "gs-francais-rimes-sons",
+   "prompt": "Relie les mots qui riment.",
+   "pairs": [
+    [
+     "lune",
+     "prune"
+    ],
+    [
+     "bateau",
+     "chapeau"
+    ],
+    [
+     "souris",
+     "riz"
+    ]
+   ],
+   "explanation": "Lune-prune, bateau-chapeau, souris-riz.",
+   "source": "Exercice original"
+  }
+ ]
+}

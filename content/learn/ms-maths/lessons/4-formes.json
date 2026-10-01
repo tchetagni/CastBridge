@@ -1,0 +1,633 @@
+{
+ "chapter": "ms-maths-formes-ch",
+ "lessons": [
+  {
+   "id": "ms-maths-formes",
+   "title": "Rond, carré, triangle, rectangle",
+   "minutes": 9,
+   "readAloud": true,
+   "programRef": "Programme de l'éducation maternelle, moyenne section (MINEDUB) — reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant de maternelle",
+   "objectives": [
+    "Nommer quatre formes.",
+    "Compter les côtés et les coins."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "ms-maths-formes-01",
+    "ms-maths-formes-02",
+    "ms-maths-formes-03",
+    "ms-maths-formes-04",
+    "ms-maths-formes-05"
+   ],
+   "selfCheck": [],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "Quatre formes : rond, carré, triangle et rectangle.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 220,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 60,
+        "cy": 100,
+        "r": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 60,
+        "w": 80,
+        "h": 80,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         270,
+         55,
+         310,
+         140,
+         230,
+         140
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "rect",
+        "x": 330,
+        "y": 60,
+        "w": 56,
+        "h": 80,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 190,
+        "text": "rond",
+        "size": 20,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 190,
+        "text": "carré",
+        "size": 20,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 190,
+        "text": "triangle",
+        "size": 18,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 358,
+        "y": 190,
+        "text": "rectangle",
+        "size": 16,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Les quatre formes",
+     "alt": "Un rond rouge, un carré bleu, un triangle vert, un rectangle orange."
+    },
+    {
+     "type": "audio",
+     "text": "Rond, carré, triangle, rectangle.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "text",
+     "md": "Le **triangle** a 3 côtés. Le **carré** a 4 côtés pareils. Le **rectangle** a 4 côtés : 2 longs et 2 courts. Le **rond** n'a pas de coin."
+    },
+    {
+     "type": "example",
+     "title": "Combien de côtés ?",
+     "statement": "Le triangle a combien de côtés ?",
+     "steps": [
+      {
+       "md": "On suit le contour avec le doigt."
+      },
+      {
+       "md": "Un côté, deux côtés, trois côtés."
+      }
+     ],
+     "answer": "Le triangle a **3** côtés.",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 200,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         200,
+         20,
+         290,
+         180,
+         110,
+         180
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       }
+      ]
+     }
+    },
+    {
+     "type": "audio",
+     "text": "Un, deux, trois. Trois côtés !",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Cherche un rectangle dans la classe : une porte, un cahier."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "ms-maths-formes-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ms-maths-formes-03"
+    }
+   ],
+   "reviewNotes": [
+    "Appariements avec des noms d'objets : à lire à voix haute ; porte = rectangle (en général)."
+   ]
+  },
+  {
+   "id": "ms-maths-repere",
+   "title": "Où est-ce ? Dessus, dessous, devant, derrière",
+   "minutes": 8,
+   "readAloud": true,
+   "programRef": "Programme de l'éducation maternelle, moyenne section (MINEDUB) — reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant de maternelle",
+   "objectives": [
+    "Dire où se trouve un objet : dessus, dessous, devant, derrière.",
+    "Placer un objet selon une consigne."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "ms-maths-repere-01",
+    "ms-maths-repere-02",
+    "ms-maths-repere-03",
+    "ms-maths-repere-04"
+   ],
+   "selfCheck": [],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "Où est la balle ?",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 100,
+        "w": 160,
+        "h": 20,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "brown"
+       },
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 120,
+        "w": 10,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "brown"
+       },
+       {
+        "t": "rect",
+        "x": 260,
+        "y": 120,
+        "w": 10,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "brown"
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 78,
+        "r": 22,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 150,
+        "r": 22,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 85,
+        "text": "dessus",
+        "size": 22,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 160,
+        "text": "dessous",
+        "size": 22,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Dessus et dessous",
+     "alt": "Une table brune. Une balle rouge est sur la table, une balle bleue est sous la table."
+    },
+    {
+     "type": "audio",
+     "text": "La balle rouge est sur la table : elle est dessus. La balle bleue est dessous.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "text",
+     "md": "**Dessus** : sur. **Dessous** : sous. **Devant** : en face de moi. **Derrière** : de l'autre côté."
+    },
+    {
+     "type": "example",
+     "title": "Où est la balle bleue ?",
+     "statement": "Dans l'image, où est la balle bleue ?",
+     "steps": [
+      {
+       "md": "On regarde la table."
+      },
+      {
+       "md": "La balle bleue est sous la table."
+      }
+     ],
+     "answer": "Elle est **dessous**."
+    },
+    {
+     "type": "audio",
+     "text": "La balle bleue est dessous !",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "exercise",
+     "ref": "ms-maths-repere-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ms-maths-repere-03"
+    }
+   ],
+   "reviewNotes": [
+    "Exercices réduits à 4 ; consigne à faire aussi en situation réelle (en motricité)."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ms-maths-formes-01",
+   "chapter": "ms-maths-formes-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-maths-formes",
+   "prompt": "Quelle est cette forme ?",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 180,
+    "items": [
+     {
+      "t": "rect",
+      "x": 100,
+      "y": 40,
+      "w": 200,
+      "h": 100,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     }
+    ]
+   },
+   "choices": [
+    "Un rond",
+    "Un rectangle",
+    "Un carré"
+   ],
+   "answer": 1,
+   "explanation": "Deux côtés longs et deux courts : **rectangle**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-maths-formes-02",
+   "chapter": "ms-maths-formes-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-maths-formes",
+   "prompt": "Quelle est cette forme ?",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 180,
+    "items": [
+     {
+      "t": "rect",
+      "x": 140,
+      "y": 20,
+      "w": 120,
+      "h": 120,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     }
+    ]
+   },
+   "choices": [
+    "Un triangle",
+    "Un carré",
+    "Un rectangle"
+   ],
+   "answer": 1,
+   "explanation": "Quatre côtés pareils : **carré**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-maths-formes-03",
+   "chapter": "ms-maths-formes-ch",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-maths-formes",
+   "prompt": "Combien de côtés a un triangle ?",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "Un triangle a **3** côtés.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-maths-formes-04",
+   "chapter": "ms-maths-formes-ch",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-maths-formes",
+   "prompt": "Combien de côtés a un carré ?",
+   "answer": 4,
+   "tolerance": 0,
+   "explanation": "Un carré a **4** côtés.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-maths-formes-05",
+   "chapter": "ms-maths-formes-ch",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "ms-maths-formes",
+   "prompt": "Relie l'objet à sa forme.",
+   "pairs": [
+    [
+     "une roue",
+     "rond"
+    ],
+    [
+     "une fenêtre carrée",
+     "carré"
+    ],
+    [
+     "un toit pointu (vu de face)",
+     "triangle"
+    ],
+    [
+     "une porte",
+     "rectangle"
+    ]
+   ],
+   "explanation": "Roue : rond ; fenêtre carrée : carré ; toit vu de face : triangle ; porte : rectangle.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-maths-repere-01",
+   "chapter": "ms-maths-formes-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-maths-repere",
+   "prompt": "Où est la balle rouge ?",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 170,
+    "items": [
+     {
+      "t": "rect",
+      "x": 120,
+      "y": 90,
+      "w": 160,
+      "h": 20,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "brown"
+     },
+     {
+      "t": "rect",
+      "x": 130,
+      "y": 110,
+      "w": 10,
+      "h": 40,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "brown"
+     },
+     {
+      "t": "rect",
+      "x": 260,
+      "y": 110,
+      "w": 10,
+      "h": 40,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "brown"
+     },
+     {
+      "t": "circle",
+      "cx": 200,
+      "cy": 68,
+      "r": 22,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "red"
+     }
+    ]
+   },
+   "choices": [
+    "Dessous",
+    "Derrière",
+    "Dessus"
+   ],
+   "answer": 2,
+   "explanation": "Elle est sur la table : **dessus**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-maths-repere-02",
+   "chapter": "ms-maths-formes-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-maths-repere",
+   "prompt": "Où est la balle bleue ?",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 170,
+    "items": [
+     {
+      "t": "rect",
+      "x": 120,
+      "y": 60,
+      "w": 160,
+      "h": 20,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "brown"
+     },
+     {
+      "t": "rect",
+      "x": 130,
+      "y": 80,
+      "w": 10,
+      "h": 60,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "brown"
+     },
+     {
+      "t": "rect",
+      "x": 260,
+      "y": 80,
+      "w": 10,
+      "h": 60,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "brown"
+     },
+     {
+      "t": "circle",
+      "cx": 200,
+      "cy": 112,
+      "r": 22,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     }
+    ]
+   },
+   "choices": [
+    "Dessous",
+    "À côté",
+    "Dessus"
+   ],
+   "answer": 0,
+   "explanation": "Elle est sous la table : **dessous**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-maths-repere-03",
+   "chapter": "ms-maths-formes-ch",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-maths-repere",
+   "prompt": "Quand je suis sous la table, je suis dessus.",
+   "answer": false,
+   "explanation": "Non : sous la table, on est **dessous**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-maths-repere-04",
+   "chapter": "ms-maths-formes-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "ms-maths-repere",
+   "prompt": "Le chat est caché de l'autre côté de l'arbre. Où est-il ?",
+   "choices": [
+    "Devant l'arbre",
+    "Sur l'arbre",
+    "Derrière l'arbre"
+   ],
+   "answer": 2,
+   "explanation": "De l'autre côté : **derrière**.",
+   "source": "Exercice original"
+  }
+ ]
+}

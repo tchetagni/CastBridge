@@ -1,0 +1,813 @@
+{
+ "chapter": "gs-maths-geometrie-ch",
+ "lessons": [
+  {
+   "id": "gs-maths-formes",
+   "title": "Les formes et leurs côtés",
+   "minutes": 9,
+   "readAloud": true,
+   "programRef": "Programme de l'éducation maternelle, grande section (MINEDUB) — reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant de maternelle",
+   "objectives": [
+    "Nommer rond, carré, rectangle, triangle.",
+    "Dire combien de côtés a une forme."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gs-maths-formes-01",
+    "gs-maths-formes-02",
+    "gs-maths-formes-03",
+    "gs-maths-formes-04",
+    "gs-maths-formes-05"
+   ],
+   "selfCheck": [],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "Les formes ont des côtés et des coins.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 230,
+      "items": [
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 40,
+        "w": 130,
+        "h": 130,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "rect",
+        "x": 210,
+        "y": 60,
+        "w": 160,
+        "h": 90,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 200,
+        "text": "carré : 4 côtés",
+        "size": 18,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 200,
+        "text": "rectangle : 4 côtés",
+        "size": 18,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Carré et rectangle",
+     "alt": "Un carré bleu et un rectangle orange, avec leurs noms."
+    },
+    {
+     "type": "audio",
+     "text": "Le carré et le rectangle ont quatre côtés.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 230,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         100,
+         30,
+         190,
+         170,
+         10,
+         170
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "circle",
+        "cx": 300,
+        "cy": 100,
+        "r": 70,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 205,
+        "text": "triangle : 3 côtés",
+        "size": 17,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 205,
+        "text": "rond : pas de côté",
+        "size": 17,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Triangle et rond",
+     "alt": "Un triangle vert et un rond rouge, avec leurs noms."
+    },
+    {
+     "type": "audio",
+     "text": "Le triangle a trois côtés. Le rond n'a pas de côté.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "example",
+     "title": "Combien de côtés ?",
+     "statement": "Combien de côtés a un rectangle ?",
+     "steps": [
+      {
+       "md": "On suit le contour avec le doigt."
+      },
+      {
+       "md": "Deux côtés longs et deux côtés courts."
+      },
+      {
+       "md": "En tout : quatre côtés."
+      }
+     ],
+     "answer": "Un rectangle a **4** côtés."
+    },
+    {
+     "type": "audio",
+     "text": "Un rectangle a quatre côtés.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "exercise",
+     "ref": "gs-maths-formes-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "gs-maths-formes-03"
+    }
+   ],
+   "reviewNotes": [
+    "Symboles ● ■ ▲ ▬ : vérifier l'affichage sur la TV."
+   ]
+  },
+  {
+   "id": "gs-maths-gauche-droite",
+   "title": "Se repérer : gauche, droite, entre",
+   "minutes": 9,
+   "readAloud": true,
+   "programRef": "Programme de l'éducation maternelle, grande section (MINEDUB) — reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant de maternelle",
+   "objectives": [
+    "Dire gauche ou droite.",
+    "Dire où est un objet par rapport à un autre."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gs-maths-gauche-droite-01",
+    "gs-maths-gauche-droite-02",
+    "gs-maths-gauche-droite-03",
+    "gs-maths-gauche-droite-04"
+   ],
+   "selfCheck": [],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "Gauche ou droite ?",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 210,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 80,
+        "cy": 100,
+        "r": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 100,
+        "r": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 320,
+        "cy": 100,
+        "r": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 180,
+        "text": "gauche",
+        "size": 22,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 180,
+        "text": "milieu",
+        "size": 22,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 320,
+        "y": 180,
+        "text": "droite",
+        "size": 22,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "De gauche à droite",
+     "alt": "Un rond rouge à gauche, un bleu au milieu, un vert à droite."
+    },
+    {
+     "type": "audio",
+     "text": "Le rond rouge est à gauche, le vert est à droite, le bleu est entre les deux.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "text",
+     "md": "On lit de **gauche** à **droite**. **Entre** : au milieu de deux choses."
+    },
+    {
+     "type": "example",
+     "title": "Où est le rond vert ?",
+     "statement": "Où est le rond vert ?",
+     "steps": [
+      {
+       "md": "On regarde la ligne de gauche à droite."
+      },
+      {
+       "md": "Le vert est le dernier : il est à droite."
+      }
+     ],
+     "answer": "À **droite**."
+    },
+    {
+     "type": "audio",
+     "text": "Le rond vert est à droite.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "exercise",
+     "ref": "gs-maths-gauche-droite-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "gs-maths-gauche-droite-03"
+    }
+   ],
+   "reviewNotes": [
+    "Exercices réduits à 4 ; le repère gauche/droite dépend du point de vue : l'adulte doit le préciser.",
+    "Question sur le cœur : à vérifier (simplification)."
+   ]
+  },
+  {
+   "id": "gs-maths-mesures",
+   "title": "Long, court, lourd, léger",
+   "minutes": 8,
+   "readAloud": true,
+   "programRef": "Programme de l'éducation maternelle, grande section (MINEDUB) — reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant de maternelle",
+   "objectives": [
+    "Comparer des longueurs.",
+    "Comparer des poids avec les mains."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gs-maths-mesures-01",
+    "gs-maths-mesures-02",
+    "gs-maths-mesures-03",
+    "gs-maths-mesures-04"
+   ],
+   "selfCheck": [],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "On compare les objets.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 230,
+      "items": [
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 40,
+        "w": 320,
+        "h": 22,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 90,
+        "w": 200,
+        "h": 22,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 140,
+        "w": 100,
+        "h": 22,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "green"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 200,
+        "text": "du plus long au plus court",
+        "size": 22,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Trois bandes",
+     "alt": "Une longue bande bleue, une bande orange moyenne et une courte bande verte."
+    },
+    {
+     "type": "audio",
+     "text": "La bande bleue est la plus longue. La verte est la plus courte.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "text",
+     "md": "Une pierre est **lourde**. Une plume est **légère**. On les compare dans les mains."
+    },
+    {
+     "type": "example",
+     "title": "Lourd ou léger ?",
+     "statement": "Un sac de riz et une plume : lequel est le plus lourd ?",
+     "steps": [
+      {
+       "md": "On imagine le sac de riz dans la main."
+      },
+      {
+       "md": "On imagine la plume."
+      },
+      {
+       "md": "Le sac est plus lourd."
+      }
+     ],
+     "answer": "Le **sac de riz** est plus lourd."
+    },
+    {
+     "type": "audio",
+     "text": "Le sac de riz est plus lourd que la plume !",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "exercise",
+     "ref": "gs-maths-mesures-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "gs-maths-mesures-03"
+    }
+   ],
+   "reviewNotes": [
+    "Exercices réduits à 4 ; comparaisons usuelles, sans unité de mesure (non demandée en maternelle)."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gs-maths-formes-01",
+   "chapter": "gs-maths-geometrie-ch",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "gs-maths-formes",
+   "prompt": "Combien de côtés a un triangle ?",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "**3** côtés.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "gs-maths-formes-02",
+   "chapter": "gs-maths-geometrie-ch",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "gs-maths-formes",
+   "prompt": "Combien de côtés a un carré ?",
+   "answer": 4,
+   "tolerance": 0,
+   "explanation": "**4** côtés.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "gs-maths-formes-03",
+   "chapter": "gs-maths-geometrie-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "gs-maths-formes",
+   "prompt": "Quelle forme a 3 côtés ?",
+   "choices": [
+    "Le triangle",
+    "Le carré",
+    "Le rond"
+   ],
+   "answer": 0,
+   "explanation": "Le **triangle**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "gs-maths-formes-04",
+   "chapter": "gs-maths-geometrie-ch",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "gs-maths-formes",
+   "prompt": "Un rond a des côtés droits.",
+   "answer": false,
+   "explanation": "Non : le rond est **arrondi**, sans côté droit.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "gs-maths-formes-05",
+   "chapter": "gs-maths-geometrie-ch",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "gs-maths-formes",
+   "prompt": "Relie la forme à son nom.",
+   "pairs": [
+    [
+     "●",
+     "rond"
+    ],
+    [
+     "■",
+     "carré"
+    ],
+    [
+     "▲",
+     "triangle"
+    ],
+    [
+     "▬",
+     "rectangle"
+    ]
+   ],
+   "explanation": "● rond, ■ carré, ▲ triangle, ▬ rectangle.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "gs-maths-gauche-droite-01",
+   "chapter": "gs-maths-geometrie-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "gs-maths-gauche-droite",
+   "prompt": "Où est le rond rouge ?",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 170,
+    "items": [
+     {
+      "t": "circle",
+      "cx": 80,
+      "cy": 80,
+      "r": 40,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "red"
+     },
+     {
+      "t": "circle",
+      "cx": 200,
+      "cy": 80,
+      "r": 40,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     },
+     {
+      "t": "circle",
+      "cx": 320,
+      "cy": 80,
+      "r": 40,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "green"
+     }
+    ]
+   },
+   "choices": [
+    "À droite",
+    "Entre les deux",
+    "À gauche"
+   ],
+   "answer": 2,
+   "explanation": "Il est tout à gauche.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "gs-maths-gauche-droite-02",
+   "chapter": "gs-maths-geometrie-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "gs-maths-gauche-droite",
+   "prompt": "Où est le rond bleu ?",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 170,
+    "items": [
+     {
+      "t": "circle",
+      "cx": 80,
+      "cy": 80,
+      "r": 40,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "red"
+     },
+     {
+      "t": "circle",
+      "cx": 200,
+      "cy": 80,
+      "r": 40,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     },
+     {
+      "t": "circle",
+      "cx": 320,
+      "cy": 80,
+      "r": 40,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "green"
+     }
+    ]
+   },
+   "choices": [
+    "À gauche",
+    "Entre les deux",
+    "À droite"
+   ],
+   "answer": 1,
+   "explanation": "Le bleu est au milieu : **entre** le rouge et le vert.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "gs-maths-gauche-droite-03",
+   "chapter": "gs-maths-geometrie-ch",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "gs-maths-gauche-droite",
+   "prompt": "Ma main droite est du côté du cœur.",
+   "answer": false,
+   "explanation": "Non : le cœur est plutôt côté **gauche**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "gs-maths-gauche-droite-04",
+   "chapter": "gs-maths-geometrie-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "gs-maths-gauche-droite",
+   "prompt": "Je lis un livre. Je commence par quel côté ?",
+   "choices": [
+    "Par la droite",
+    "Par la gauche",
+    "Par le milieu"
+   ],
+   "answer": 1,
+   "explanation": "On lit de gauche à droite.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "gs-maths-mesures-01",
+   "chapter": "gs-maths-geometrie-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "gs-maths-mesures",
+   "prompt": "Quelle bande est la plus longue ?",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 180,
+    "items": [
+     {
+      "t": "rect",
+      "x": 40,
+      "y": 30,
+      "w": 300,
+      "h": 22,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     },
+     {
+      "t": "rect",
+      "x": 40,
+      "y": 80,
+      "w": 200,
+      "h": 22,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "rect",
+      "x": 40,
+      "y": 130,
+      "w": 100,
+      "h": 22,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "green"
+     }
+    ]
+   },
+   "choices": [
+    "La bleue",
+    "La verte",
+    "L'orange"
+   ],
+   "answer": 0,
+   "explanation": "La bande **bleue** est la plus longue.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "gs-maths-mesures-02",
+   "chapter": "gs-maths-geometrie-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "gs-maths-mesures",
+   "prompt": "Quelle bande est la plus courte ?",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 180,
+    "items": [
+     {
+      "t": "rect",
+      "x": 40,
+      "y": 30,
+      "w": 300,
+      "h": 22,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     },
+     {
+      "t": "rect",
+      "x": 40,
+      "y": 80,
+      "w": 200,
+      "h": 22,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "rect",
+      "x": 40,
+      "y": 130,
+      "w": 100,
+      "h": 22,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "green"
+     }
+    ]
+   },
+   "choices": [
+    "La verte",
+    "L'orange",
+    "La bleue"
+   ],
+   "answer": 0,
+   "explanation": "La **verte** est la plus courte.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "gs-maths-mesures-03",
+   "chapter": "gs-maths-geometrie-ch",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "gs-maths-mesures",
+   "prompt": "Une plume est plus lourde qu'une pierre.",
+   "answer": false,
+   "explanation": "Non : une plume est **légère**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "gs-maths-mesures-04",
+   "chapter": "gs-maths-geometrie-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "gs-maths-mesures",
+   "prompt": "Qu'est-ce qui est le plus lourd ?",
+   "choices": [
+    "Une feuille",
+    "Une plume",
+    "Une grosse pierre"
+   ],
+   "answer": 2,
+   "explanation": "Une grosse pierre est lourde.",
+   "source": "Exercice original"
+  }
+ ]
+}

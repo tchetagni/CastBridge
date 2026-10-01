@@ -1,0 +1,149 @@
+{
+ "chapter": "ps-decouverte-sante-ch",
+ "lessons": [
+  {
+   "id": "ps-decouverte-mains",
+   "title": "Je me lave les mains",
+   "minutes": 7,
+   "readAloud": true,
+   "programRef": "Programme de l'éducation maternelle, petite section (MINEDUB) — découverte du monde, reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant de maternelle",
+   "objectives": [
+    "Dire quand on se lave les mains.",
+    "Dire avec quoi on les lave."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "ps-decouverte-mains-01",
+    "ps-decouverte-mains-02",
+    "ps-decouverte-mains-03",
+    "ps-decouverte-mains-04"
+   ],
+   "selfCheck": [],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "Se laver les mains, c'est important.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "text",
+     "md": "On se lave les mains **avant de manger**, **après les toilettes** et **quand elles sont sales**."
+    },
+    {
+     "type": "audio",
+     "text": "Avant de manger, après les toilettes, et quand mes mains sont sales.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "text",
+     "md": "On se lave avec de l'**eau propre** et du **savon**. On frotte bien, puis on rince et on sèche."
+    },
+    {
+     "type": "audio",
+     "text": "Eau propre et savon. On frotte, on rince, on sèche.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "example",
+     "title": "Quand se laver ?",
+     "statement": "Faut-il se laver les mains avant de manger ?",
+     "steps": [
+      {
+       "md": "Les mains touchent beaucoup de choses."
+      },
+      {
+       "md": "Elles peuvent avoir des microbes."
+      },
+      {
+       "md": "Oui, on se les lave."
+      }
+     ],
+     "answer": "**Oui**, avant de manger."
+    },
+    {
+     "type": "audio",
+     "text": "Oui, on se lave les mains avant de manger !",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "exercise",
+     "ref": "ps-decouverte-mains-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ps-decouverte-mains-03"
+    }
+   ],
+   "reviewNotes": [
+    "Hygiène des mains : à faire relire par un agent de santé ; l'eau doit être propre (potable ou traitée)."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ps-decouverte-mains-01",
+   "chapter": "ps-decouverte-sante-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ps-decouverte-mains",
+   "prompt": "Quand se lave-t-on les mains ?",
+   "choices": [
+    "Avant de manger",
+    "Quand on dort",
+    "Jamais"
+   ],
+   "answer": 0,
+   "explanation": "On se lave les mains **avant de manger**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ps-decouverte-mains-02",
+   "chapter": "ps-decouverte-sante-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ps-decouverte-mains",
+   "prompt": "Avec quoi se lave-t-on les mains ?",
+   "choices": [
+    "De la peinture",
+    "Du sable",
+    "De l'eau et du savon"
+   ],
+   "answer": 2,
+   "explanation": "Avec de l'**eau** et du **savon**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ps-decouverte-mains-03",
+   "chapter": "ps-decouverte-sante-ch",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ps-decouverte-mains",
+   "prompt": "Après les toilettes, on se lave les mains.",
+   "answer": true,
+   "explanation": "Oui, toujours.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ps-decouverte-mains-04",
+   "chapter": "ps-decouverte-sante-ch",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ps-decouverte-mains",
+   "prompt": "On peut manger avec des mains très sales.",
+   "answer": false,
+   "explanation": "Non : on se lave d'abord les mains.",
+   "source": "Exercice original"
+  }
+ ]
+}

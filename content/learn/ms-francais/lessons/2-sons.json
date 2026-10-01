@@ -1,0 +1,336 @@
+{
+ "chapter": "ms-francais-sons-ch",
+ "lessons": [
+  {
+   "id": "ms-francais-syllabes",
+   "title": "Les syllabes : je frappe dans mes mains",
+   "minutes": 8,
+   "readAloud": true,
+   "programRef": "Programme de l'éducation maternelle, moyenne section (MINEDUB) — reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant de maternelle",
+   "objectives": [
+    "Découper un mot en syllabes en frappant.",
+    "Compter les syllabes d'un mot."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "ms-francais-syllabes-01",
+    "ms-francais-syllabes-02",
+    "ms-francais-syllabes-03",
+    "ms-francais-syllabes-04",
+    "ms-francais-syllabes-05"
+   ],
+   "selfCheck": [],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "Les mots se coupent en petits morceaux : les syllabes.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "text",
+     "md": "**ba - na - ne** : on frappe trois fois. **chat** : on frappe une fois."
+    },
+    {
+     "type": "audio",
+     "text": "Ba, na, ne. Trois frappes. Chat. Une frappe.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "text",
+     "md": "**man - gue** : deux frappes. **é - lé - phant** : trois frappes."
+    },
+    {
+     "type": "audio",
+     "text": "Man, gue. Deux frappes. É, lé, phant. Trois frappes.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "example",
+     "title": "Combien de syllabes ?",
+     "statement": "Frappe le mot « tomate ».",
+     "steps": [
+      {
+       "md": "On dit : to - ma - te."
+      },
+      {
+       "md": "On frappe trois fois."
+      }
+     ],
+     "answer": "**3** syllabes."
+    },
+    {
+     "type": "audio",
+     "text": "To, ma, te. Trois syllabes !",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "exercise",
+     "ref": "ms-francais-syllabes-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ms-francais-syllabes-03"
+    }
+   ],
+   "reviewNotes": [
+    "Découpage oral des mots (« mangue » en 2, « papaye » en 3) : les conventions de découpage peuvent varier selon la prononciation."
+   ]
+  },
+  {
+   "id": "ms-francais-rimes",
+   "title": "Les mots qui riment",
+   "minutes": 8,
+   "readAloud": true,
+   "programRef": "Programme de l'éducation maternelle, moyenne section (MINEDUB) — reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant de maternelle",
+   "objectives": [
+    "Écouter la fin des mots.",
+    "Trouver deux mots qui riment."
+   ],
+   "prerequisites": [
+    "ms-francais-syllabes"
+   ],
+   "exercises": [
+    "ms-francais-rimes-01",
+    "ms-francais-rimes-02",
+    "ms-francais-rimes-03",
+    "ms-francais-rimes-04",
+    "ms-francais-rimes-05"
+   ],
+   "selfCheck": [],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "Certains mots finissent par le même son : ils riment.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "text",
+     "md": "**chat** et **rat** riment : on entend « a » à la fin."
+    },
+    {
+     "type": "audio",
+     "text": "Chat, rat. On entend la même fin.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "text",
+     "md": "**bateau** et **gâteau** riment : on entend « o » à la fin. **lune** et **prune** riment aussi."
+    },
+    {
+     "type": "audio",
+     "text": "Bateau, gâteau. Lune, prune. Ils riment !",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "example",
+     "title": "Qui rime avec chat ?",
+     "statement": "Quel mot rime avec chat : rat ou lune ?",
+     "steps": [
+      {
+       "md": "On dit chat, rat : la fin est pareille."
+      },
+      {
+       "md": "On dit chat, lune : la fin est différente."
+      }
+     ],
+     "answer": "**Rat** rime avec chat."
+    },
+    {
+     "type": "audio",
+     "text": "Chat, rat : ça rime !",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "exercise",
+     "ref": "ms-francais-rimes-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ms-francais-rimes-03"
+    }
+   ],
+   "reviewNotes": [
+    "Rimes à l'oral : l'appariement fait lire des mots, à lire à voix haute."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ms-francais-syllabes-01",
+   "chapter": "ms-francais-sons-ch",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-francais-syllabes",
+   "prompt": "Combien de syllabes dans « chat » ?",
+   "answer": 1,
+   "tolerance": 0,
+   "explanation": "Chat : **1** frappe.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-francais-syllabes-02",
+   "chapter": "ms-francais-sons-ch",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-francais-syllabes",
+   "prompt": "Combien de syllabes dans « mangue » ? (man - gue)",
+   "answer": 2,
+   "tolerance": 0,
+   "explanation": "Man - gue : **2** syllabes.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-francais-syllabes-03",
+   "chapter": "ms-francais-sons-ch",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-francais-syllabes",
+   "prompt": "Combien de syllabes dans « banane » ? (ba - na - ne)",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "Ba - na - ne : **3** syllabes.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-francais-syllabes-04",
+   "chapter": "ms-francais-sons-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-francais-syllabes",
+   "prompt": "Quel mot a 2 syllabes ?",
+   "choices": [
+    "Papillon",
+    "Ballon",
+    "Chat"
+   ],
+   "answer": 1,
+   "explanation": "Bal - lon : **2** syllabes. Chat en a 1 ; pa - pi - llon en a 3.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-francais-syllabes-05",
+   "chapter": "ms-francais-sons-ch",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "ms-francais-syllabes",
+   "prompt": "Quel mot a 3 syllabes ?",
+   "choices": [
+    "Riz",
+    "Papaye",
+    "Poisson"
+   ],
+   "answer": 1,
+   "explanation": "Pa - pa - ye : **3** syllabes. Riz en a 1 ; pois - son en a 2.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-francais-rimes-01",
+   "chapter": "ms-francais-sons-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-francais-rimes",
+   "prompt": "Quel mot rime avec « bateau » ?",
+   "choices": [
+    "Chat",
+    "Lune",
+    "Gâteau"
+   ],
+   "answer": 2,
+   "explanation": "Bateau, **gâteau**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-francais-rimes-02",
+   "chapter": "ms-francais-sons-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-francais-rimes",
+   "prompt": "Quel mot rime avec « lune » ?",
+   "choices": [
+    "Bateau",
+    "Prune",
+    "Rat"
+   ],
+   "answer": 1,
+   "explanation": "Lune, **prune**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-francais-rimes-03",
+   "chapter": "ms-francais-sons-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-francais-rimes",
+   "prompt": "Quel mot rime avec « chat » ?",
+   "choices": [
+    "Rat",
+    "Gâteau",
+    "Prune"
+   ],
+   "answer": 0,
+   "explanation": "Chat, **rat**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-francais-rimes-04",
+   "chapter": "ms-francais-sons-ch",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "ms-francais-rimes",
+   "prompt": "« Maison » rime avec « ballon ».",
+   "answer": true,
+   "explanation": "Oui : on entend « on » à la fin.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ms-francais-rimes-05",
+   "chapter": "ms-francais-sons-ch",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "ms-francais-rimes",
+   "prompt": "Relie les mots qui riment.",
+   "pairs": [
+    [
+     "chat",
+     "rat"
+    ],
+    [
+     "bateau",
+     "gâteau"
+    ],
+    [
+     "lune",
+     "prune"
+    ]
+   ],
+   "explanation": "Chat-rat, bateau-gâteau, lune-prune.",
+   "source": "Exercice original"
+  }
+ ]
+}

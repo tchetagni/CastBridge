@@ -1,0 +1,829 @@
+{
+ "chapter": "gs-maths-calcul-ch",
+ "lessons": [
+  {
+   "id": "gs-maths-decomposer",
+   "title": "Décomposer un nombre",
+   "minutes": 9,
+   "readAloud": true,
+   "programRef": "Programme de l'éducation maternelle, grande section (MINEDUB) — reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant de maternelle",
+   "objectives": [
+    "Partager un nombre en deux groupes.",
+    "Retrouver le groupe qui manque."
+   ],
+   "prerequisites": [
+    "gs-maths-dix"
+   ],
+   "exercises": [
+    "gs-maths-decomposer-01",
+    "gs-maths-decomposer-02",
+    "gs-maths-decomposer-03",
+    "gs-maths-decomposer-04",
+    "gs-maths-decomposer-05"
+   ],
+   "selfCheck": [],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "On peut partager un nombre en deux groupes.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "text",
+     "md": "5, c'est **2** et **3**. 5, c'est aussi **4** et **1**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 150,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 30,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 60,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 80,
+        "text": "+",
+        "size": 40,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 230,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 260,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       }
+      ]
+     },
+     "caption": "5 = 2 et 3",
+     "alt": "Deux points orange et trois points bleus."
+    },
+    {
+     "type": "audio",
+     "text": "Cinq, c'est deux et trois.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 150,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 30,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 60,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 90,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 30,
+        "cy": 90,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 80,
+        "text": "+",
+        "size": 40,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       }
+      ]
+     },
+     "caption": "5 = 4 et 1",
+     "alt": "Quatre points orange et un point bleu."
+    },
+    {
+     "type": "audio",
+     "text": "Cinq, c'est aussi quatre et un.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "example",
+     "title": "Combien manque-t-il ?",
+     "statement": "J'ai 5 billes en tout. J'en vois 3. Combien sont cachées ?",
+     "steps": [
+      {
+       "md": "On part de 5."
+      },
+      {
+       "md": "On en voit 3."
+      },
+      {
+       "md": "5 est 3 et 2 : il en manque 2."
+      }
+     ],
+     "answer": "**2** billes sont cachées.",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 150,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 30,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 60,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 90,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 80,
+        "text": "+",
+        "size": 40,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 230,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       }
+      ]
+     }
+    },
+    {
+     "type": "audio",
+     "text": "Trois et deux : cinq !",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "exercise",
+     "ref": "gs-maths-decomposer-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "gs-maths-decomposer-03"
+    }
+   ],
+   "reviewNotes": [
+    "Grande section : la suite orale va souvent jusqu'à 30 ; les quantités sûres jusqu'à 10 voire 20. À ajuster selon la classe."
+   ]
+  },
+  {
+   "id": "gs-maths-problemes",
+   "title": "Petits problèmes : j'ajoute, j'enlève",
+   "minutes": 10,
+   "readAloud": true,
+   "programRef": "Programme de l'éducation maternelle, grande section (MINEDUB) — reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant de maternelle",
+   "objectives": [
+    "Résoudre un petit problème d'ajout.",
+    "Résoudre un petit problème de retrait."
+   ],
+   "prerequisites": [
+    "gs-maths-decomposer"
+   ],
+   "exercises": [
+    "gs-maths-problemes-01",
+    "gs-maths-problemes-02",
+    "gs-maths-problemes-03",
+    "gs-maths-problemes-04",
+    "gs-maths-problemes-05"
+   ],
+   "selfCheck": [],
+   "blocks": [
+    {
+     "type": "audio",
+     "text": "On résout de petits problèmes avec des objets.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "example",
+     "title": "Les mangues de Ngono",
+     "statement": "Ngono a 4 mangues. Elle en achète 3. Combien en a-t-elle ?",
+     "steps": [
+      {
+       "md": "Elle a 4 mangues."
+      },
+      {
+       "md": "Elle en ajoute 3."
+      },
+      {
+       "md": "4 et 3 font 7."
+      }
+     ],
+     "answer": "Ngono a **7** mangues.",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 150,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 30,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 60,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 90,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 30,
+        "cy": 90,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 80,
+        "text": "+",
+        "size": 40,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 230,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 260,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       }
+      ]
+     }
+    },
+    {
+     "type": "audio",
+     "text": "Quatre et trois : sept mangues !",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "example",
+     "title": "Les billes de Tchoua",
+     "statement": "Tchoua a 8 billes. Il en perd 3. Combien lui en reste-t-il ?",
+     "steps": [
+      {
+       "md": "Il avait 8 billes."
+      },
+      {
+       "md": "Il en perd 3 : on les enlève."
+      },
+      {
+       "md": "Il en reste 5."
+      }
+     ],
+     "answer": "Il reste **5** billes.",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 150,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 30,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 60,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 90,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 30,
+        "cy": 90,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "circle",
+        "cx": 60,
+        "cy": 90,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 80,
+        "text": "−",
+        "size": 40,
+        "color": "ink",
+        "bold": true,
+        "anchor": "middle"
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 230,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       },
+       {
+        "t": "circle",
+        "cx": 260,
+        "cy": 60,
+        "r": 11,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "blue"
+       }
+      ]
+     }
+    },
+    {
+     "type": "audio",
+     "text": "Huit moins trois : il en reste cinq.",
+     "lang": "fr-FR"
+    },
+    {
+     "type": "text",
+     "md": "**Ajouter** : on en a plus. **Enlever** : on en a moins. On peut dessiner ou prendre des jetons."
+    },
+    {
+     "type": "exercise",
+     "ref": "gs-maths-problemes-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "gs-maths-problemes-03"
+    }
+   ],
+   "reviewNotes": [
+    "Grande section : la suite orale va souvent jusqu'à 30 ; les quantités sûres jusqu'à 10 voire 20. À ajuster selon la classe.",
+    "L'écriture des opérations n'est montrée qu'à titre d'aide ; l'enfant manipule et dessine."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gs-maths-decomposer-01",
+   "chapter": "gs-maths-calcul-ch",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "gs-maths-decomposer",
+   "prompt": "5 = 2 et ... Complète.",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 150,
+    "items": [
+     {
+      "t": "circle",
+      "cx": 30,
+      "cy": 60,
+      "r": 11,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "circle",
+      "cx": 60,
+      "cy": 60,
+      "r": 11,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "text",
+      "x": 150,
+      "y": 80,
+      "text": "+",
+      "size": 40,
+      "color": "ink",
+      "bold": true,
+      "anchor": "middle"
+     },
+     {
+      "t": "circle",
+      "cx": 200,
+      "cy": 60,
+      "r": 11,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     },
+     {
+      "t": "circle",
+      "cx": 230,
+      "cy": 60,
+      "r": 11,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     },
+     {
+      "t": "circle",
+      "cx": 260,
+      "cy": 60,
+      "r": 11,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     }
+    ]
+   },
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "5 = 2 et **3**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "gs-maths-decomposer-02",
+   "chapter": "gs-maths-calcul-ch",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "gs-maths-decomposer",
+   "prompt": "4 = 1 et ... Complète.",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "4 = 1 et **3**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "gs-maths-decomposer-03",
+   "chapter": "gs-maths-calcul-ch",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "gs-maths-decomposer",
+   "prompt": "6 = 3 et ... Complète.",
+   "figure": {
+    "kind": "count",
+    "n": 6,
+    "shape": "circle",
+    "color": "orange",
+    "perRow": 3
+   },
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "6 = 3 et **3**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "gs-maths-decomposer-04",
+   "chapter": "gs-maths-calcul-ch",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "gs-maths-decomposer",
+   "prompt": "Avec quels deux groupes fait-on 5 ?",
+   "choices": [
+    "2 et 2",
+    "4 et 4",
+    "2 et 3"
+   ],
+   "answer": 2,
+   "explanation": "2 et 3 font 5.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "gs-maths-decomposer-05",
+   "chapter": "gs-maths-calcul-ch",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "gs-maths-decomposer",
+   "prompt": "10 = 5 et ... Complète.",
+   "figure": {
+    "kind": "count",
+    "n": 10,
+    "shape": "star",
+    "color": "yellow",
+    "perRow": 5
+   },
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "10 = 5 et **5** : les deux mains.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "gs-maths-problemes-01",
+   "chapter": "gs-maths-calcul-ch",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "gs-maths-problemes",
+   "prompt": "Il y a 3 ronds. On en ajoute 2. Combien ?",
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 150,
+    "items": [
+     {
+      "t": "circle",
+      "cx": 30,
+      "cy": 60,
+      "r": 11,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "circle",
+      "cx": 60,
+      "cy": 60,
+      "r": 11,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "circle",
+      "cx": 90,
+      "cy": 60,
+      "r": 11,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "text",
+      "x": 150,
+      "y": 80,
+      "text": "+",
+      "size": 40,
+      "color": "ink",
+      "bold": true,
+      "anchor": "middle"
+     },
+     {
+      "t": "circle",
+      "cx": 200,
+      "cy": 60,
+      "r": 11,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     },
+     {
+      "t": "circle",
+      "cx": 230,
+      "cy": 60,
+      "r": 11,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "blue"
+     }
+    ]
+   },
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "3 + 2 = **5**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "gs-maths-problemes-02",
+   "chapter": "gs-maths-calcul-ch",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "gs-maths-problemes",
+   "prompt": "Il y a 5 poules. Il en arrive 4. Combien ?",
+   "answer": 9,
+   "tolerance": 0,
+   "explanation": "5 + 4 = **9**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "gs-maths-problemes-03",
+   "chapter": "gs-maths-calcul-ch",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "gs-maths-problemes",
+   "prompt": "Amina a 6 arachides. Elle en mange 2. Combien en reste-t-il ?",
+   "answer": 4,
+   "tolerance": 0,
+   "explanation": "6 − 2 = **4**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "gs-maths-problemes-04",
+   "chapter": "gs-maths-calcul-ch",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "gs-maths-problemes",
+   "prompt": "Essomba a 9 billes. Il en donne 4. Combien lui en reste-t-il ?",
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "9 − 4 = **5**.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "gs-maths-problemes-05",
+   "chapter": "gs-maths-calcul-ch",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "gs-maths-problemes",
+   "prompt": "Il y avait 7 oiseaux. 3 s'envolent. Combien en reste-t-il ?",
+   "choices": [
+    "10",
+    "4",
+    "3"
+   ],
+   "answer": 1,
+   "explanation": "7 − 3 = **4**.",
+   "source": "Exercice original"
+  }
+ ]
+}
