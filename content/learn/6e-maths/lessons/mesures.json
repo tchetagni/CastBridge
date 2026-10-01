@@ -1,0 +1,1223 @@
+{
+ "chapter": "6e-maths-mesures",
+ "lessons": [
+  {
+   "id": "6e-maths-perimetre-aire",
+   "title": "Périmètres et aires des figures usuelles",
+   "minutes": 30,
+   "programRef": "6e — Périmètres et aires : carré, rectangle, triangle, cercle (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Calculer le périmètre d'un polygone et d'un cercle.",
+    "Calculer l'aire d'un carré, d'un rectangle et d'un triangle."
+   ],
+   "prerequisites": [
+    "6e-maths-triangles-quadrilateres",
+    "6e-maths-cercle"
+   ],
+   "exercises": [
+    "6e-maths-perimetre-aire-01",
+    "6e-maths-perimetre-aire-02",
+    "6e-maths-perimetre-aire-03",
+    "6e-maths-perimetre-aire-04",
+    "6e-maths-perimetre-aire-05",
+    "6e-maths-perimetre-aire-06"
+   ],
+   "selfCheck": [
+    "6e-maths-perimetre-aire-q1",
+    "6e-maths-perimetre-aire-q2",
+    "6e-maths-perimetre-aire-q3",
+    "6e-maths-perimetre-aire-q4",
+    "6e-maths-perimetre-aire-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Périmètres",
+     "md": "Le **périmètre** est la longueur du contour. Carré de côté c : $P = 4 \\times c$. Rectangle de longueur L et largeur l : $P = 2 \\times (L + l)$. Cercle de rayon r : $P = 2 \\times \\pi \\times r$ avec $\\pi \\approx 3{,}14$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Aires",
+     "md": "L'**aire** mesure la surface. Carré : $A = c \\times c$. Rectangle : $A = L \\times l$. Triangle de base b et de hauteur h : $A = \\frac{b \\times h}{2}$. Les aires s'expriment en unités carrées : cm², m²."
+    },
+    {
+     "type": "illustration",
+     "caption": "Aire d'un rectangle et d'un triangle (avec sa hauteur).",
+     "alt": "Un rectangle de 12 cm sur 8 cm et un triangle de base 10 cm et de hauteur 6 cm.",
+     "figure": {
+      "kind": "shapes",
+      "w": 460,
+      "h": 180,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 40,
+        "w": 160,
+        "h": 90,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 30,
+        "text": "L = 12 cm",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 195,
+        "y": 90,
+        "text": "l = 8",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 160,
+        "text": "A = 12 × 8 = 96 cm²",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         260,
+         130,
+         400,
+         130,
+         300,
+         40
+        ],
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 40,
+        "x2": 300,
+        "y2": 130,
+        "color": "red",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "rect",
+        "x": 300,
+        "y": 120,
+        "w": 10,
+        "h": 10,
+        "stroke": "red",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 152,
+        "text": "b = 10 cm",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 285,
+        "y": 85,
+        "text": "h",
+        "size": 14,
+        "color": "red",
+        "anchor": "end"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 172,
+        "text": "A = 10 × 6 ÷ 2 = 30 cm²",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : champ rectangulaire",
+     "statement": "Un champ rectangulaire mesure 40 m de long et 25 m de large. Calcule son périmètre et son aire.",
+     "steps": [
+      {
+       "md": "Périmètre :",
+       "tex": "P = 2 \\times (40 + 25) = 2 \\times 65 = 130"
+      },
+      {
+       "md": "Aire :",
+       "tex": "A = 40 \\times 25 = 1\\,000"
+      }
+     ],
+     "answer": "**Périmètre 130 m ; aire 1 000 m²**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : cercle",
+     "statement": "Calcule le périmètre d'un cercle de rayon 5 cm (π ≈ 3,14).",
+     "steps": [
+      {
+       "md": "On applique la formule :",
+       "tex": "P = 2 \\times 3{,}14 \\times 5"
+      },
+      {
+       "md": "2 × 3,14 = 6,28 ; 6,28 × 5 = 31,4."
+      }
+     ],
+     "answer": "**P ≈ 31,4 cm**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre périmètre (en cm) et aire (en cm²).\n- Oublier la division par 2 pour l'aire d'un triangle.\n- Prendre un côté oblique comme hauteur du triangle : la hauteur est perpendiculaire à la base."
+    }
+   ],
+   "reviewNotes": [
+    "Le périmètre du cercle ($2\\pi r$) et l'aire du triangle sont vérifiés pour la 6e ; l'aire du disque est volontairement laissée à la classe suivante.",
+    "Valeur de π prise égale à 3,14 : vérifier la convention du programme."
+   ]
+  },
+  {
+   "id": "6e-maths-unites-mesure",
+   "title": "Unités de mesure : longueur, masse, capacité, durée, FCFA",
+   "minutes": 30,
+   "programRef": "6e — Grandeurs et mesures : longueurs, masses, capacités, durées, monnaie (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Convertir des longueurs, masses et capacités.",
+    "Calculer avec des durées (h, min, s) et des sommes en FCFA."
+   ],
+   "prerequisites": [
+    "6e-maths-grands-nombres"
+   ],
+   "exercises": [
+    "6e-maths-unites-mesure-01",
+    "6e-maths-unites-mesure-02",
+    "6e-maths-unites-mesure-03",
+    "6e-maths-unites-mesure-04",
+    "6e-maths-unites-mesure-05",
+    "6e-maths-unites-mesure-06"
+   ],
+   "selfCheck": [
+    "6e-maths-unites-mesure-q1",
+    "6e-maths-unites-mesure-q2",
+    "6e-maths-unites-mesure-q3",
+    "6e-maths-unites-mesure-q4",
+    "6e-maths-unites-mesure-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Tableau des longueurs",
+     "md": "Chaque unité est 10 fois plus grande que celle de droite : km, hm, dam, m, dm, cm, mm. Pour passer d'une unité à la suivante vers la droite, on multiplie par 10. Exemples : 1 km = 1 000 m ; 1 m = 100 cm ; 1 cm = 10 mm."
+    },
+    {
+     "type": "illustration",
+     "caption": "Tableau de conversion des longueurs.",
+     "alt": "Sept colonnes : km, hm, dam, m, dm, cm, mm.",
+     "figure": {
+      "kind": "shapes",
+      "w": 460,
+      "h": 125,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 30,
+        "w": 60,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 80,
+        "y": 30,
+        "w": 60,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 140,
+        "y": 30,
+        "w": 60,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 200,
+        "y": 30,
+        "w": 60,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 260,
+        "y": 30,
+        "w": 60,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 320,
+        "y": 30,
+        "w": 60,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 380,
+        "y": 30,
+        "w": 60,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 50,
+        "y": 56,
+        "text": "km",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 56,
+        "text": "hm",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 56,
+        "text": "dam",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 56,
+        "text": "m",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 56,
+        "text": "dm",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 56,
+        "text": "cm",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 410,
+        "y": 56,
+        "text": "mm",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 95,
+        "text": "× 10 à chaque colonne vers la droite",
+        "size": 14,
+        "color": "blue",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Masses, capacités, durées",
+     "md": "- Masse : 1 kg = 1 000 g ; 1 t = 1 000 kg.\n- Capacité : 1 L = 100 cL = 1 000 mL.\n- Durée : 1 h = 60 min ; 1 min = 60 s. (Attention : 60, pas 100 !)\n- Monnaie : on additionne les FCFA comme des nombres entiers."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : conversions",
+     "statement": "Convertis 3,5 km en mètres et 2 500 g en kilogrammes.",
+     "steps": [
+      {
+       "md": "3,5 km × 1 000 = 3 500 m."
+      },
+      {
+       "md": "2 500 g ÷ 1 000 = 2,5 kg."
+      }
+     ],
+     "answer": "**3 500 m et 2,5 kg**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : durées",
+     "statement": "Un trajet commence à 7 h 45 min et dure 1 h 50 min. À quelle heure arrive-t-on ?",
+     "steps": [
+      {
+       "md": "7 h 45 min + 1 h = 8 h 45 min."
+      },
+      {
+       "md": "8 h 45 min + 50 min = 8 h 95 min = 9 h 35 min (on retire 60 min et on ajoute 1 h)."
+      }
+     ],
+     "answer": "**Arrivée à 9 h 35 min**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Calculer les durées comme des décimaux : 1 h 50 min n'est pas 1,50 h (c'est environ 1,83 h).\n- Convertir dans le mauvais sens : pour passer de km à m, le nombre grandit.\n- Mélanger des unités différentes dans un même calcul : on convertit d'abord."
+    }
+   ],
+   "reviewNotes": [
+    "La conversion des unités d'aire/volume est traitée dans les fiches périmètre-aire et volumes.",
+    "Les billets et pièces cités (500, 1 000, 2 000, 5 000, 10 000 FCFA) sont à vérifier par rapport aux coupures en circulation."
+   ]
+  },
+  {
+   "id": "6e-maths-volumes",
+   "title": "Volumes : cube et pavé droit",
+   "minutes": 25,
+   "programRef": "6e — Volumes : cube, pavé droit, unités de volume et de capacité (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Calculer le volume d'un cube et d'un pavé droit.",
+    "Convertir cm³, dm³, m³ et litres."
+   ],
+   "prerequisites": [
+    "6e-maths-perimetre-aire",
+    "6e-maths-unites-mesure"
+   ],
+   "exercises": [
+    "6e-maths-volumes-01",
+    "6e-maths-volumes-02",
+    "6e-maths-volumes-03",
+    "6e-maths-volumes-04",
+    "6e-maths-volumes-05",
+    "6e-maths-volumes-06"
+   ],
+   "selfCheck": [
+    "6e-maths-volumes-q1",
+    "6e-maths-volumes-q2",
+    "6e-maths-volumes-q3",
+    "6e-maths-volumes-q4",
+    "6e-maths-volumes-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Formules",
+     "md": "Pavé droit de longueur L, largeur l et hauteur h : $V = L \\times l \\times h$. Cube d'arête a : $V = a \\times a \\times a = a^3$. Le volume s'exprime en cm³, dm³ ou m³."
+    },
+    {
+     "type": "illustration",
+     "caption": "Un pavé droit de 5 cm sur 4 cm sur 3 cm.",
+     "alt": "Un pavé droit en perspective avec ses dimensions et son volume 60 cm³.",
+     "figure": {
+      "kind": "shapes",
+      "w": 470,
+      "h": 200,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         60,
+         150,
+         220,
+         150,
+         220,
+         70,
+         60,
+         70
+        ],
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "poly",
+        "pts": [
+         60,
+         70,
+         220,
+         70,
+         280,
+         30,
+         120,
+         30
+        ],
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "poly",
+        "pts": [
+         220,
+         70,
+         280,
+         30,
+         280,
+         110,
+         220,
+         150
+        ],
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 140,
+        "y": 175,
+        "text": "L = 5 cm",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 148,
+        "text": "l = 4 cm",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 36,
+        "y": 112,
+        "text": "h = 3",
+        "size": 14,
+        "color": "ink",
+        "anchor": "end"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 80,
+        "text": "V = 5 × 4 × 3",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 100,
+        "text": "= 60 cm³",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Volumes et capacités",
+     "md": "1 dm³ = 1 L ; 1 m³ = 1 000 dm³ = 1 000 L ; 1 dm³ = 1 000 cm³. Chaque unité de volume est **1 000 fois** plus grande que la suivante."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : aquarium",
+     "statement": "Un aquarium de 50 cm de long, 30 cm de large et 40 cm de haut. Quel est son volume en cm³ puis en litres ?",
+     "steps": [
+      {
+       "md": "Volume :",
+       "tex": "V = 50 \\times 30 \\times 40 = 60\\,000"
+      },
+      {
+       "md": "60 000 cm³ = 60 dm³ (on divise par 1 000) = 60 L."
+      }
+     ],
+     "answer": "**60 000 cm³, soit 60 L**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : cube",
+     "statement": "Calcule le volume d'un cube de 3 dm d'arête.",
+     "steps": [
+      {
+       "md": "Formule :",
+       "tex": "V = 3 \\times 3 \\times 3"
+      },
+      {
+       "md": "3 × 3 = 9 ; 9 × 3 = 27."
+      }
+     ],
+     "answer": "**27 dm³ = 27 L**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre $a^3$ (a × a × a) avec $3a$.\n- Oublier que 1 m³ = 1 000 L, et non 100 L.\n- Multiplier des dimensions exprimées dans des unités différentes : on convertit d'abord."
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier si le programme de 6e inclut le volume du cylindre ou du prisme (ici repoussé à la 5e)."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Quel est le périmètre d'un carré de côté 9 cm (cm) ?",
+   "answer": 36,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "4 × 9 = 36.",
+   "id": "6e-maths-perimetre-aire-01",
+   "tier": "application",
+   "lesson": "6e-maths-perimetre-aire",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quelle est l'aire d'un rectangle de 15 cm sur 6 cm (cm²) ?",
+   "answer": 90,
+   "unit": "cm²",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "15 × 6 = 90.",
+   "id": "6e-maths-perimetre-aire-02",
+   "tier": "application",
+   "lesson": "6e-maths-perimetre-aire",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quelle est l'aire d'un triangle de base 8 cm et de hauteur 5 cm (cm²) ?",
+   "answer": 20,
+   "unit": "cm²",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "8 × 5 ÷ 2 = 20.",
+   "id": "6e-maths-perimetre-aire-03",
+   "tier": "application",
+   "lesson": "6e-maths-perimetre-aire",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un rectangle a une aire de 84 m² et une largeur de 7 m. Quelle est sa longueur (m) ?",
+   "answer": 12,
+   "unit": "m",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "84 ÷ 7 = 12.",
+   "id": "6e-maths-perimetre-aire-04",
+   "tier": "approfondissement",
+   "lesson": "6e-maths-perimetre-aire",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule le périmètre d'un cercle de diamètre 20 cm (π ≈ 3,14).",
+   "answer": 62.8,
+   "tolerance": 0.01,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "P = π × d = 3,14 × 20 = 62,8 cm.",
+   "id": "6e-maths-perimetre-aire-05",
+   "tier": "approfondissement",
+   "lesson": "6e-maths-perimetre-aire",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Mballa veut clôturer et carreler une cour rectangulaire de 18 m sur 12 m.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle longueur de clôture faut-il (m) ?",
+     "answer": 60,
+     "unit": "m",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "2 × (18 + 12) = 60 m.",
+     "id": "6e-maths-perimetre-aire-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est l'aire de la cour (m²) ?",
+     "answer": 216,
+     "unit": "m²",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "18 × 12 = 216 m².",
+     "id": "6e-maths-perimetre-aire-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Le carrelage coûte 3 000 FCFA le m². Quel est le coût total (FCFA) ?",
+     "answer": 648000,
+     "unit": "FCFA",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "216 × 3 000 = 648 000 FCFA.",
+     "id": "6e-maths-perimetre-aire-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "6e-maths-perimetre-aire-06",
+   "tier": "examen",
+   "lesson": "6e-maths-perimetre-aire",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est l'unité d'une aire ?",
+   "choices": [
+    "Le mètre carré",
+    "Le mètre",
+    "Le litre",
+    "Le kilogramme"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Une aire s'exprime en unités carrées.",
+   "id": "6e-maths-perimetre-aire-q1",
+   "tier": "autoeval",
+   "lesson": "6e-maths-perimetre-aire",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'aire d'un carré de côté 7 m est",
+   "choices": [
+    "28 m²",
+    "14 m²",
+    "49 m",
+    "49 m²"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "7 × 7 = 49 m².",
+   "id": "6e-maths-perimetre-aire-q2",
+   "tier": "autoeval",
+   "lesson": "6e-maths-perimetre-aire",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le périmètre d'un rectangle de 10 cm sur 4 cm ?",
+   "choices": [
+    "40 cm",
+    "28 cm",
+    "14 cm",
+    "56 cm"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "2 × (10 + 4) = 28 cm.",
+   "id": "6e-maths-perimetre-aire-q3",
+   "tier": "autoeval",
+   "lesson": "6e-maths-perimetre-aire",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un triangle de base 6 cm et de hauteur 4 cm a une aire de",
+   "choices": [
+    "12 cm²",
+    "24 cm²",
+    "10 cm²",
+    "6 cm²"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "6 × 4 ÷ 2 = 12.",
+   "id": "6e-maths-perimetre-aire-q4",
+   "tier": "autoeval",
+   "lesson": "6e-maths-perimetre-aire",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le périmètre d'un cercle de rayon r s'écrit",
+   "choices": [
+    "π × r",
+    "π × r × r",
+    "4 × r",
+    "2 × π × r"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "P = 2πr.",
+   "id": "6e-maths-perimetre-aire-q5",
+   "tier": "autoeval",
+   "lesson": "6e-maths-perimetre-aire",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Convertis 4,2 m en cm.",
+   "answer": 420,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "4,2 × 100 = 420 cm.",
+   "id": "6e-maths-unites-mesure-01",
+   "tier": "application",
+   "lesson": "6e-maths-unites-mesure",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Convertis 3 kg en g.",
+   "answer": 3000,
+   "unit": "g",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "3 × 1 000 = 3 000 g.",
+   "id": "6e-maths-unites-mesure-02",
+   "tier": "application",
+   "lesson": "6e-maths-unites-mesure",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Convertis 2 h en minutes.",
+   "answer": 120,
+   "unit": "min",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "2 × 60 = 120 min.",
+   "id": "6e-maths-unites-mesure-03",
+   "tier": "application",
+   "lesson": "6e-maths-unites-mesure",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un sac contient 25 kg de maïs. Combien de sacs faut-il pour 1 t de maïs ?",
+   "answer": 40,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "1 t = 1 000 kg ; 1 000 ÷ 25 = 40.",
+   "id": "6e-maths-unites-mesure-04",
+   "tier": "approfondissement",
+   "lesson": "6e-maths-unites-mesure",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Une bouteille contient 1,5 L. Combien de mL cela fait-il ?",
+   "answer": 1500,
+   "unit": "mL",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "1,5 × 1 000 = 1 500 mL.",
+   "id": "6e-maths-unites-mesure-05",
+   "tier": "approfondissement",
+   "lesson": "6e-maths-unites-mesure",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Amina part de chez elle à 6 h 40 min. Elle marche 25 min jusqu'à l'arrêt, puis voyage 1 h 15 min en car.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Elle arrive à l'arrêt à 7 h 05 min. Combien de minutes après 6 h cela fait-il ?",
+     "answer": 65,
+     "unit": "min",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "6 h 40 + 25 min = 7 h 05, soit 65 min après 6 h.",
+     "id": "6e-maths-unites-mesure-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Combien de minutes dure l'ensemble du trajet (marche et car) ?",
+     "answer": 100,
+     "unit": "min",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "25 + 75 = 100 min.",
+     "id": "6e-maths-unites-mesure-06-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "À quelle heure arrive-t-elle ?",
+     "choices": [
+      "8 h 20 min",
+      "8 h 05 min",
+      "7 h 55 min",
+      "8 h 40 min"
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "6 h 40 + 1 h 40 min = 8 h 20 min.",
+     "id": "6e-maths-unites-mesure-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "6e-maths-unites-mesure-06",
+   "tier": "examen",
+   "lesson": "6e-maths-unites-mesure",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien de mètres dans 2,5 km ?",
+   "choices": [
+    "250 m",
+    "25 m",
+    "25 000 m",
+    "2 500 m"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "2,5 × 1 000 = 2 500.",
+   "id": "6e-maths-unites-mesure-q1",
+   "tier": "autoeval",
+   "lesson": "6e-maths-unites-mesure",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "1 L est égal à",
+   "choices": [
+    "10 mL",
+    "100 mL",
+    "10 000 mL",
+    "1 000 mL"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1 L = 1 000 mL.",
+   "id": "6e-maths-unites-mesure-q2",
+   "tier": "autoeval",
+   "lesson": "6e-maths-unites-mesure",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien de secondes dans 3 minutes ?",
+   "choices": [
+    "300 s",
+    "180 s",
+    "60 s",
+    "30 s"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "3 × 60 = 180.",
+   "id": "6e-maths-unites-mesure-q3",
+   "tier": "autoeval",
+   "lesson": "6e-maths-unites-mesure",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle somme est égale à 3 000 FCFA ?",
+   "choices": [
+    "Deux billets de 1 000 et une pièce de 500",
+    "Un billet de 5 000 moins 1 000",
+    "Trois pièces de 500",
+    "Deux billets de 1 000 et deux pièces de 500"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "2 × 1 000 + 2 × 500 = 3 000 FCFA.",
+   "id": "6e-maths-unites-mesure-q4",
+   "tier": "autoeval",
+   "lesson": "6e-maths-unites-mesure",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle masse est la plus grande ?",
+   "choices": [
+    "1 100 g",
+    "1,2 kg",
+    "900 g",
+    "1 000 g"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1,2 kg = 1 200 g.",
+   "id": "6e-maths-unites-mesure-q5",
+   "tier": "autoeval",
+   "lesson": "6e-maths-unites-mesure",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Volume d'un cube de 4 cm d'arête (cm³) ?",
+   "answer": 64,
+   "unit": "cm³",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "4 × 4 × 4 = 64.",
+   "id": "6e-maths-volumes-01",
+   "tier": "application",
+   "lesson": "6e-maths-volumes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Volume d'un pavé de 6 cm sur 5 cm sur 2 cm (cm³) ?",
+   "answer": 60,
+   "unit": "cm³",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "6 × 5 × 2 = 60.",
+   "id": "6e-maths-volumes-02",
+   "tier": "application",
+   "lesson": "6e-maths-volumes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Combien de litres dans 8 dm³ ?",
+   "answer": 8,
+   "unit": "L",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1 dm³ = 1 L.",
+   "id": "6e-maths-volumes-03",
+   "tier": "application",
+   "lesson": "6e-maths-volumes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un réservoir a pour volume 2 m³. Combien de litres d'eau contient-il quand il est plein ?",
+   "answer": 2000,
+   "unit": "L",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "2 × 1 000 = 2 000 L.",
+   "id": "6e-maths-volumes-04",
+   "tier": "approfondissement",
+   "lesson": "6e-maths-volumes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un pavé de volume 120 cm³ a pour base un rectangle de 10 cm sur 4 cm. Quelle est sa hauteur (cm) ?",
+   "answer": 3,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "h = 120 ÷ (10 × 4) = 3 cm.",
+   "id": "6e-maths-volumes-05",
+   "tier": "approfondissement",
+   "lesson": "6e-maths-volumes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Un bac à eau a la forme d'un pavé droit de 80 cm de long, 50 cm de large et 60 cm de haut.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quel est son volume (cm³) ?",
+     "answer": 240000,
+     "unit": "cm³",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "80 × 50 × 60 = 240 000 cm³.",
+     "id": "6e-maths-volumes-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est sa capacité en litres ?",
+     "answer": 240,
+     "unit": "L",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "240 000 cm³ = 240 dm³ = 240 L.",
+     "id": "6e-maths-volumes-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "On y verse un seau de 12 L. Combien de seaux faut-il pour le remplir ?",
+     "answer": 20,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "240 ÷ 12 = 20.",
+     "id": "6e-maths-volumes-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "6e-maths-volumes-06",
+   "tier": "examen",
+   "lesson": "6e-maths-volumes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est l'unité de volume ?",
+   "choices": [
+    "Le mètre cube",
+    "Le mètre carré",
+    "Le mètre",
+    "Le degré"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un volume s'exprime en unités cubes.",
+   "id": "6e-maths-volumes-q1",
+   "tier": "autoeval",
+   "lesson": "6e-maths-volumes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un cube d'arête 2 m a un volume de",
+   "choices": [
+    "8 m³",
+    "6 m³",
+    "4 m³",
+    "16 m³"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "2 × 2 × 2 = 8.",
+   "id": "6e-maths-volumes-q2",
+   "tier": "autoeval",
+   "lesson": "6e-maths-volumes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "1 dm³ correspond à",
+   "choices": [
+    "1 L",
+    "10 L",
+    "0,1 L",
+    "100 L"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un litre est un décimètre cube.",
+   "id": "6e-maths-volumes-q3",
+   "tier": "autoeval",
+   "lesson": "6e-maths-volumes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien de cm³ dans 1 dm³ ?",
+   "choices": [
+    "10",
+    "100",
+    "1 000",
+    "10 000"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Chaque unité de volume vaut 1 000 fois la suivante.",
+   "id": "6e-maths-volumes-q4",
+   "tier": "autoeval",
+   "lesson": "6e-maths-volumes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un pavé de 10 cm, 10 cm et 10 cm a un volume de",
+   "choices": [
+    "100 cm³",
+    "30 cm³",
+    "1 000 cm³",
+    "10 000 cm³"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "10 × 10 × 10 = 1 000.",
+   "id": "6e-maths-volumes-q5",
+   "tier": "autoeval",
+   "lesson": "6e-maths-volumes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

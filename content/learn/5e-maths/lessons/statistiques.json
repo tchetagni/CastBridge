@@ -1,0 +1,623 @@
+{
+ "chapter": "5e-maths-statistiques",
+ "lessons": [
+  {
+   "id": "5e-maths-frequences-diagrammes",
+   "title": "Effectifs, fréquences et diagrammes",
+   "minutes": 25,
+   "programRef": "5e — Statistiques : effectif, fréquence, diagrammes (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Calculer des fréquences et les exprimer en pourcentage.",
+    "Lire et construire un diagramme en barres ou circulaire à partir d'un tableau."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "5e-maths-frequences-diagrammes-01",
+    "5e-maths-frequences-diagrammes-02",
+    "5e-maths-frequences-diagrammes-03",
+    "5e-maths-frequences-diagrammes-04",
+    "5e-maths-frequences-diagrammes-05",
+    "5e-maths-frequences-diagrammes-06"
+   ],
+   "selfCheck": [
+    "5e-maths-frequences-diagrammes-q1",
+    "5e-maths-frequences-diagrammes-q2",
+    "5e-maths-frequences-diagrammes-q3",
+    "5e-maths-frequences-diagrammes-q4",
+    "5e-maths-frequences-diagrammes-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Fréquence",
+     "md": "La **fréquence** d'une valeur est $\\frac{\\text{effectif de la valeur}}{\\text{effectif total}}$. On l'exprime souvent en pourcentage ; la somme des fréquences vaut 1 (ou 100 %). Pour un diagramme circulaire, l'angle d'un secteur est : fréquence × 360°."
+    },
+    {
+     "type": "illustration",
+     "caption": "Fruit préféré de 20 élèves.",
+     "alt": "Diagramme en barres : mangue 6, banane 9, orange 3, ananas 2 élèves.",
+     "figure": {
+      "kind": "bars",
+      "w": 420,
+      "h": 240,
+      "bars": [
+       {
+        "label": "Mangue",
+        "value": 6,
+        "color": "orange"
+       },
+       {
+        "label": "Banane",
+        "value": 9,
+        "color": "yellow"
+       },
+       {
+        "label": "Orange",
+        "value": 3,
+        "color": "green"
+       },
+       {
+        "label": "Ananas",
+        "value": 2,
+        "color": "brown"
+       }
+      ],
+      "unit": "élèves"
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : fréquences",
+     "statement": "Dans le diagramme, calcule la fréquence en pourcentage de chaque fruit (total 20).",
+     "steps": [
+      {
+       "md": "Mangue : 6/20 = 0,30 = 30 % ; banane : 9/20 = 0,45 = 45 %."
+      },
+      {
+       "md": "Orange : 3/20 = 15 % ; ananas : 2/20 = 10 %."
+      }
+     ],
+     "answer": "**30 % ; 45 % ; 15 % ; 10 %** (total 100 %)"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : angle d'un secteur",
+     "statement": "Quel angle donne le secteur « banane » dans un diagramme circulaire ?",
+     "steps": [
+      {
+       "md": "La fréquence est 9/20 = 0,45."
+      },
+      {
+       "md": "Angle : 0,45 × 360 = 162°."
+      }
+     ],
+     "answer": "**162°**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Diviser par un autre nombre que l'effectif total.\n- Oublier de vérifier que la somme des fréquences fait 100 %.\n- Confondre effectif (nombre) et fréquence (proportion)."
+    }
+   ],
+   "reviewNotes": [
+    "Le diagramme circulaire est cité mais non dessiné ici (angles = fréquence × 360°) ; vérifier le programme."
+   ]
+  },
+  {
+   "id": "5e-maths-moyenne-mediane",
+   "title": "Moyenne, médiane et étendue",
+   "minutes": 30,
+   "programRef": "5e — Statistiques : moyenne, médiane, étendue (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Calculer une moyenne simple ou pondérée.",
+    "Déterminer la médiane et l'étendue d'une série."
+   ],
+   "prerequisites": [
+    "5e-maths-frequences-diagrammes"
+   ],
+   "exercises": [
+    "5e-maths-moyenne-mediane-01",
+    "5e-maths-moyenne-mediane-02",
+    "5e-maths-moyenne-mediane-03",
+    "5e-maths-moyenne-mediane-04",
+    "5e-maths-moyenne-mediane-05",
+    "5e-maths-moyenne-mediane-06"
+   ],
+   "selfCheck": [
+    "5e-maths-moyenne-mediane-q1",
+    "5e-maths-moyenne-mediane-q2",
+    "5e-maths-moyenne-mediane-q3",
+    "5e-maths-moyenne-mediane-q4",
+    "5e-maths-moyenne-mediane-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Moyenne et étendue",
+     "md": "**Moyenne** = (somme des valeurs) ÷ (nombre de valeurs). **Moyenne pondérée** : on multiplie chaque valeur par son effectif, on additionne, puis on divise par l'effectif total. **Étendue** = plus grande valeur − plus petite valeur."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Médiane",
+     "md": "La **médiane** partage une série ordonnée en deux groupes de même effectif. Série de nombre **impair** de valeurs : c'est la valeur du milieu. Nombre **pair** : c'est la moitié de la somme des deux valeurs du milieu."
+    },
+    {
+     "type": "illustration",
+     "caption": "Cinq notes sur 20 : moyenne 12, médiane 12, étendue 8.",
+     "alt": "Diagramme en barres de cinq notes : 8, 12, 14, 10, 16.",
+     "figure": {
+      "kind": "bars",
+      "w": 460,
+      "h": 240,
+      "bars": [
+       {
+        "label": "Contrôle 1",
+        "value": 8,
+        "color": "blue"
+       },
+       {
+        "label": "Contrôle 2",
+        "value": 12,
+        "color": "blue"
+       },
+       {
+        "label": "Contrôle 3",
+        "value": 14,
+        "color": "blue"
+       },
+       {
+        "label": "Contrôle 4",
+        "value": 10,
+        "color": "blue"
+       },
+       {
+        "label": "Contrôle 5",
+        "value": 16,
+        "color": "blue"
+       }
+      ],
+      "unit": "note /20"
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : moyenne",
+     "statement": "Calcule la moyenne des notes 8, 12, 14, 10 et 16, leur médiane et leur étendue.",
+     "steps": [
+      {
+       "md": "Somme : 8 + 12 + 14 + 10 + 16 = 60 ; 60 ÷ 5 = 12."
+      },
+      {
+       "md": "Rangées : 8 ; 10 ; 12 ; 14 ; 16. La médiane est 12 ; l'étendue est 16 − 8 = 8."
+      }
+     ],
+     "answer": "**Moyenne 12 ; médiane 12 ; étendue 8**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : moyenne pondérée",
+     "statement": "Notes : 10 (2 élèves), 12 (3 élèves), 15 (5 élèves). Quelle est la moyenne de la classe ?",
+     "steps": [
+      {
+       "md": "On calcule :",
+       "tex": "2 \\times 10 + 3 \\times 12 + 5 \\times 15 = 20 + 36 + 75 = 131"
+      },
+      {
+       "md": "131 ÷ 10 = 13,1."
+      }
+     ],
+     "answer": "**13,1**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier de ranger les valeurs avant de chercher la médiane.\n- Diviser par le nombre de valeurs différentes au lieu de l'effectif total (moyenne pondérée).\n- Confondre moyenne et médiane : elles peuvent être différentes."
+    }
+   ],
+   "reviewNotes": [
+    "La médiane peut être au programme de 4e plutôt que 5e ; vérifier."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Sur 25 élèves, 5 aiment le football. Quelle est la fréquence en % ?",
+   "answer": 20,
+   "unit": "%",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "5/25 = 0,2 = 20 %.",
+   "id": "5e-maths-frequences-diagrammes-01",
+   "tier": "application",
+   "lesson": "5e-maths-frequences-diagrammes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Les effectifs sont 8, 12 et 20. Quel est l'effectif total ?",
+   "answer": 40,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "8 + 12 + 20 = 40.",
+   "id": "5e-maths-frequences-diagrammes-02",
+   "tier": "application",
+   "lesson": "5e-maths-frequences-diagrammes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Une fréquence est 0,35. Quel pourcentage cela fait-il ?",
+   "answer": 35,
+   "unit": "%",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "0,35 = 35 %.",
+   "id": "5e-maths-frequences-diagrammes-03",
+   "tier": "application",
+   "lesson": "5e-maths-frequences-diagrammes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quel angle (°) correspond à une fréquence de 25 % dans un diagramme circulaire ?",
+   "answer": 90,
+   "unit": "°",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "0,25 × 360 = 90.",
+   "id": "5e-maths-frequences-diagrammes-04",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-frequences-diagrammes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les fréquences de trois valeurs sont 30 %, 45 % et x. Que vaut x ?",
+   "choices": [
+    "15 %",
+    "75 %",
+    "25 %",
+    "35 %"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "100 − 75 = 25.",
+   "id": "5e-maths-frequences-diagrammes-05",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-frequences-diagrammes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Un quartier compte 200 familles. Eau : 90 puits, 70 robinets, 40 forages.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle fréquence (en %) pour les puits ?",
+     "answer": 45,
+     "unit": "%",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "90/200 = 0,45.",
+     "id": "5e-maths-frequences-diagrammes-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle fréquence (en %) pour les forages ?",
+     "answer": 20,
+     "unit": "%",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "40/200 = 0,20.",
+     "id": "5e-maths-frequences-diagrammes-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quel angle (°) pour le secteur « robinets » ?",
+     "answer": 126,
+     "unit": "°",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "70/200 = 0,35 ; 0,35 × 360 = 126.",
+     "id": "5e-maths-frequences-diagrammes-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-maths-frequences-diagrammes-06",
+   "tier": "examen",
+   "lesson": "5e-maths-frequences-diagrammes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La somme des fréquences d'une série est égale à",
+   "choices": [
+    "1",
+    "0",
+    "100 effectifs",
+    "l'effectif total"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ou 100 % : on additionne toutes les parts.",
+   "id": "5e-maths-frequences-diagrammes-q1",
+   "tier": "autoeval",
+   "lesson": "5e-maths-frequences-diagrammes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une valeur apparaît 12 fois sur 48. Sa fréquence est",
+   "choices": [
+    "25 %",
+    "12 %",
+    "4 %",
+    "48 %"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "12/48 = 1/4.",
+   "id": "5e-maths-frequences-diagrammes-q2",
+   "tier": "autoeval",
+   "lesson": "5e-maths-frequences-diagrammes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'angle d'un secteur de fréquence 50 % est",
+   "choices": [
+    "90°",
+    "50°",
+    "360°",
+    "180°"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "0,5 × 360 = 180.",
+   "id": "5e-maths-frequences-diagrammes-q3",
+   "tier": "autoeval",
+   "lesson": "5e-maths-frequences-diagrammes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans un diagramme en barres, la barre la plus haute représente",
+   "choices": [
+    "la valeur de plus petit effectif",
+    "la moyenne",
+    "la valeur de plus grand effectif",
+    "l'effectif total"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Hauteur proportionnelle à l'effectif.",
+   "id": "5e-maths-frequences-diagrammes-q4",
+   "tier": "autoeval",
+   "lesson": "5e-maths-frequences-diagrammes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La fréquence se calcule avec",
+   "choices": [
+    "effectif ÷ effectif total",
+    "effectif × effectif total",
+    "effectif total − effectif",
+    "effectif + 100"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Définition.",
+   "id": "5e-maths-frequences-diagrammes-q5",
+   "tier": "autoeval",
+   "lesson": "5e-maths-frequences-diagrammes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Moyenne de 6, 9 et 12 ?",
+   "answer": 9,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "27 ÷ 3 = 9.",
+   "id": "5e-maths-moyenne-mediane-01",
+   "tier": "application",
+   "lesson": "5e-maths-moyenne-mediane",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Étendue de la série 7 ; 15 ; 3 ; 11 ?",
+   "answer": 12,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "15 − 3 = 12.",
+   "id": "5e-maths-moyenne-mediane-02",
+   "tier": "application",
+   "lesson": "5e-maths-moyenne-mediane",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Médiane de 7 ; 9 ; 12 ; 15 ; 18 ?",
+   "answer": 12,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La valeur du milieu (3e sur 5).",
+   "id": "5e-maths-moyenne-mediane-03",
+   "tier": "application",
+   "lesson": "5e-maths-moyenne-mediane",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Médiane de 4 ; 6 ; 8 ; 10 ?",
+   "answer": 7,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "(6 + 8) ÷ 2 = 7.",
+   "id": "5e-maths-moyenne-mediane-04",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-moyenne-mediane",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "La moyenne de 4 notes est 11. Trois notes sont 9, 12 et 13. Quelle est la quatrième ?",
+   "answer": 10,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Somme totale : 44 ; 44 − 34 = 10.",
+   "id": "5e-maths-moyenne-mediane-05",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-moyenne-mediane",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Amina a obtenu ces notes en maths : 9 ; 14 ; 11 ; 16 ; 10.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est sa moyenne ?",
+     "answer": 12,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "(9 + 14 + 11 + 16 + 10) = 60 ; 60 ÷ 5 = 12.",
+     "id": "5e-maths-moyenne-mediane-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la médiane ?",
+     "answer": 11,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Rangées : 9 ; 10 ; 11 ; 14 ; 16 : la médiane est 11.",
+     "id": "5e-maths-moyenne-mediane-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle note doit-elle obtenir au prochain contrôle pour que la moyenne des 6 notes soit 13 ?",
+     "answer": 18,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "6 × 13 = 78 ; 78 − 60 = 18.",
+     "id": "5e-maths-moyenne-mediane-06-c"
+    }
+   ],
+   "difficulty": 3,
+   "id": "5e-maths-moyenne-mediane-06",
+   "tier": "examen",
+   "lesson": "5e-maths-moyenne-mediane",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La moyenne de 10 ; 14 ; 18 est",
+   "choices": [
+    "12",
+    "14",
+    "18",
+    "42"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "42 ÷ 3 = 14.",
+   "id": "5e-maths-moyenne-mediane-q1",
+   "tier": "autoeval",
+   "lesson": "5e-maths-moyenne-mediane",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour trouver une médiane, il faut d'abord",
+   "choices": [
+    "ranger les valeurs",
+    "calculer la moyenne",
+    "additionner les effectifs",
+    "tracer un cercle"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ranger dans l'ordre croissant.",
+   "id": "5e-maths-moyenne-mediane-q2",
+   "tier": "autoeval",
+   "lesson": "5e-maths-moyenne-mediane",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'étendue de 2 ; 9 ; 5 est",
+   "choices": [
+    "9",
+    "2",
+    "7",
+    "16"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "9 − 2 = 7.",
+   "id": "5e-maths-moyenne-mediane-q3",
+   "tier": "autoeval",
+   "lesson": "5e-maths-moyenne-mediane",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La médiane de 3 ; 5 ; 8 ; 20 ; 100 est",
+   "choices": [
+    "27,2",
+    "20",
+    "8",
+    "5"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La valeur du milieu est 8 (la moyenne serait 27,2).",
+   "id": "5e-maths-moyenne-mediane-q4",
+   "tier": "autoeval",
+   "lesson": "5e-maths-moyenne-mediane",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle moyenne obtient-on avec 12 (effectif 1) et 18 (effectif 3) ?",
+   "choices": [
+    "16,5",
+    "15",
+    "14",
+    "18"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "(12 + 3 × 18) ÷ 4 = 66 ÷ 4 = 16,5.",
+   "id": "5e-maths-moyenne-mediane-q5",
+   "tier": "autoeval",
+   "lesson": "5e-maths-moyenne-mediane",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

@@ -1,0 +1,860 @@
+{
+ "chapter": "6e-maths-operations",
+ "lessons": [
+  {
+   "id": "6e-maths-division-priorites",
+   "title": "Division euclidienne et priorités des opérations",
+   "minutes": 25,
+   "programRef": "6e — Opérations : division euclidienne, priorités opératoires, parenthèses (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Effectuer une division euclidienne et écrire a = b × q + r.",
+    "Calculer une expression en respectant les priorités des opérations."
+   ],
+   "prerequisites": [
+    "6e-maths-grands-nombres"
+   ],
+   "exercises": [
+    "6e-maths-division-priorites-01",
+    "6e-maths-division-priorites-02",
+    "6e-maths-division-priorites-03",
+    "6e-maths-division-priorites-04",
+    "6e-maths-division-priorites-05",
+    "6e-maths-division-priorites-06"
+   ],
+   "selfCheck": [
+    "6e-maths-division-priorites-q1",
+    "6e-maths-division-priorites-q2",
+    "6e-maths-division-priorites-q3",
+    "6e-maths-division-priorites-q4",
+    "6e-maths-division-priorites-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Division euclidienne",
+     "md": "Diviser **a** par **b** (b ≠ 0), c'est trouver le quotient entier **q** et le reste **r** tels que $a = b \\times q + r$ avec $r < b$."
+    },
+    {
+     "type": "illustration",
+     "caption": "Division euclidienne de 47 par 6.",
+     "alt": "Schéma de la division euclidienne de 47 par 6 : quotient 7, reste 5.",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 130,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 40,
+        "w": 360,
+        "h": 50,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 220,
+        "y1": 40,
+        "x2": 220,
+        "y2": 90,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 72,
+        "text": "a = 47",
+        "size": 22,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 72,
+        "text": "b = 6",
+        "size": 22,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 110,
+        "text": "47 = 6 × 7 + 5",
+        "size": 18,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 25,
+        "text": "q = 7 ; r = 5",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Priorités des opérations",
+     "md": "1. On calcule d'abord ce qui est entre **parenthèses**.\n2. Puis les **multiplications et divisions**, de gauche à droite.\n3. Enfin les **additions et soustractions**, de gauche à droite."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : division euclidienne",
+     "statement": "Effectue la division euclidienne de 259 par 12.",
+     "steps": [
+      {
+       "md": "12 × 20 = 240, il reste 259 − 240 = 19. 12 × 1 = 12, il reste 19 − 12 = 7."
+      },
+      {
+       "md": "Le quotient est 20 + 1 = 21 et le reste 7 :",
+       "tex": "259 = 12 \\times 21 + 7"
+      }
+     ],
+     "answer": "**q = 21 et r = 7**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : priorités",
+     "statement": "Calcule A = 5 + 3 × 4 et B = (5 + 3) × 4.",
+     "steps": [
+      {
+       "md": "Dans A, la multiplication passe d'abord : 3 × 4 = 12, puis 5 + 12 = 17."
+      },
+      {
+       "md": "Dans B, on calcule la parenthèse : 5 + 3 = 8, puis 8 × 4 = 32."
+      }
+     ],
+     "answer": "**A = 17 et B = 32**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Calculer de gauche à droite sans respecter les priorités : 5 + 3 × 4 n'est pas 32.\n- Un reste supérieur ou égal au diviseur : si r ≥ b, le quotient est trop petit.\n- Oublier de vérifier avec $b \\times q + r = a$."
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier si la distributivité est introduite en 6e ou seulement en 5e."
+   ]
+  },
+  {
+   "id": "6e-maths-multiples-diviseurs",
+   "title": "Multiples, diviseurs et critères de divisibilité",
+   "minutes": 25,
+   "programRef": "6e — Multiples et diviseurs, critères de divisibilité par 2, 3, 5, 9, 10 (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître les multiples et les diviseurs d'un nombre.",
+    "Utiliser les critères de divisibilité par 2, 3, 5, 9 et 10."
+   ],
+   "prerequisites": [
+    "6e-maths-division-priorites"
+   ],
+   "exercises": [
+    "6e-maths-multiples-diviseurs-01",
+    "6e-maths-multiples-diviseurs-02",
+    "6e-maths-multiples-diviseurs-03",
+    "6e-maths-multiples-diviseurs-04",
+    "6e-maths-multiples-diviseurs-05",
+    "6e-maths-multiples-diviseurs-06"
+   ],
+   "selfCheck": [
+    "6e-maths-multiples-diviseurs-q1",
+    "6e-maths-multiples-diviseurs-q2",
+    "6e-maths-multiples-diviseurs-q3",
+    "6e-maths-multiples-diviseurs-q4",
+    "6e-maths-multiples-diviseurs-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Multiple et diviseur",
+     "md": "Si $a = b \\times k$ avec $k$ entier, alors $a$ est un **multiple** de $b$ et $b$ est un **diviseur** de $a$. Exemple : $24 = 6 \\times 4$, donc 24 est un multiple de 6 et 6 divise 24."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Critères de divisibilité",
+     "md": "- Par **2** : le dernier chiffre est 0, 2, 4, 6 ou 8.\n- Par **5** : le dernier chiffre est 0 ou 5.\n- Par **10** : le dernier chiffre est 0.\n- Par **3** : la somme des chiffres est un multiple de 3.\n- Par **9** : la somme des chiffres est un multiple de 9."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les multiples de 3 parmi les dix premiers entiers.",
+     "alt": "Dix cases numérotées de 1 à 10 ; les cases 3, 6 et 9 sont colorées.",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 130,
+      "items": [
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 50,
+        "w": 40,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 50,
+        "w": 40,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 100,
+        "y": 50,
+        "w": 40,
+        "h": 40,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 140,
+        "y": 50,
+        "w": 40,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 180,
+        "y": 50,
+        "w": 40,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 220,
+        "y": 50,
+        "w": 40,
+        "h": 40,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 260,
+        "y": 50,
+        "w": 40,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 300,
+        "y": 50,
+        "w": 40,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 340,
+        "y": 50,
+        "w": 40,
+        "h": 40,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 380,
+        "y": 50,
+        "w": 40,
+        "h": 40,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 76,
+        "text": "1",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 76,
+        "text": "2",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 76,
+        "text": "3",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 76,
+        "text": "4",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 76,
+        "text": "5",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 76,
+        "text": "6",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 76,
+        "text": "7",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 320,
+        "y": 76,
+        "text": "8",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 360,
+        "y": 76,
+        "text": "9",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 400,
+        "y": 76,
+        "text": "10",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 25,
+        "text": "Multiples de 3 de 1 à 10 (en vert)",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 115,
+        "text": "3 ; 6 ; 9",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : tous les diviseurs",
+     "statement": "Trouve tous les diviseurs de 30.",
+     "steps": [
+      {
+       "md": "On cherche les produits égaux à 30 : 1 × 30, 2 × 15, 3 × 10, 5 × 6."
+      },
+      {
+       "md": "On les range dans l'ordre croissant."
+      }
+     ],
+     "answer": "**1, 2, 3, 5, 6, 10, 15, 30**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : critères",
+     "statement": "4 572 est-il divisible par 3 ? par 9 ? par 5 ?",
+     "steps": [
+      {
+       "md": "Somme des chiffres : 4 + 5 + 7 + 2 = 18. 18 est un multiple de 3 et de 9."
+      },
+      {
+       "md": "Le dernier chiffre est 2, ni 0 ni 5."
+      }
+     ],
+     "answer": "**4 572 est divisible par 3 et par 9, pas par 5.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre multiple et diviseur : 6 est un diviseur de 24, 24 est un multiple de 6.\n- Oublier 1 et le nombre lui-même dans la liste des diviseurs.\n- Croire qu'un nombre est divisible par 9 parce qu'il est divisible par 3 : 12 est divisible par 3 mais pas par 9."
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier si le critère de divisibilité par 4 ou 11 est au programme de 6e (non traité ici).",
+    "La notion de nombre premier est abordée brièvement ; vérifier si elle est exigible en 6e."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le reste de la division euclidienne de 47 par 5 ?",
+   "choices": [
+    "9",
+    "7",
+    "2",
+    "0"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "47 = 5 × 9 + 2, et 2 < 5.",
+   "method": "Chercher le plus grand multiple de 5 inférieur ou égal à 47 : 45.",
+   "id": "6e-maths-division-priorites-01",
+   "tier": "application",
+   "lesson": "6e-maths-division-priorites",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule 18 − 2 × 5.",
+   "answer": 8,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Priorité à la multiplication : 2 × 5 = 10 puis 18 − 10 = 8.",
+   "id": "6e-maths-division-priorites-02",
+   "tier": "application",
+   "lesson": "6e-maths-division-priorites",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule (18 − 2) × 5.",
+   "answer": 80,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Parenthèse : 18 − 2 = 16 ; puis 16 × 5 = 80.",
+   "id": "6e-maths-division-priorites-03",
+   "tier": "application",
+   "lesson": "6e-maths-division-priorites",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quel est le quotient de la division euclidienne de 1 000 par 36 ?",
+   "answer": 27,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "36 × 27 = 972 et 36 × 28 = 1 008 > 1 000. Le quotient est 27 (reste 28).",
+   "id": "6e-maths-division-priorites-04",
+   "tier": "approfondissement",
+   "lesson": "6e-maths-division-priorites",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule 24 ÷ 4 + 3 × (10 − 6).",
+   "answer": 18,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "24 ÷ 4 = 6 ; 10 − 6 = 4, 3 × 4 = 12 ; 6 + 12 = 18.",
+   "method": "Parenthèses, puis × et ÷, puis + et −.",
+   "id": "6e-maths-division-priorites-05",
+   "tier": "approfondissement",
+   "lesson": "6e-maths-division-priorites",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Une coopérative veut ranger 250 œufs dans des alvéoles de 30 œufs.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Combien d'alvéoles complètes obtient-on ?",
+     "answer": 8,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "250 = 30 × 8 + 10. Le quotient est 8.",
+     "id": "6e-maths-division-priorites-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Combien d'œufs restent-ils ?",
+     "answer": 10,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Le reste de la division est 10.",
+     "id": "6e-maths-division-priorites-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Combien d'alvéoles faut-il au minimum pour ranger tous les œufs ?",
+     "answer": 9,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Les 10 œufs restants demandent une alvéole de plus : 8 + 1 = 9.",
+     "id": "6e-maths-division-priorites-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "6e-maths-division-priorites-06",
+   "tier": "examen",
+   "lesson": "6e-maths-division-priorites",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle écriture traduit la division euclidienne de 83 par 9 ?",
+   "choices": [
+    "83 = 9 × 8 + 11",
+    "83 = 9 × 10 − 7",
+    "83 = 9 × 9 + 11",
+    "83 = 9 × 9 + 2"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "9 × 9 = 81 et 83 − 81 = 2 avec 2 < 9.",
+   "id": "6e-maths-division-priorites-q1",
+   "tier": "autoeval",
+   "lesson": "6e-maths-division-priorites",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien vaut 7 + 2 × 6 ?",
+   "choices": [
+    "19",
+    "54",
+    "13",
+    "27"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "2 × 6 = 12 puis 7 + 12 = 19.",
+   "id": "6e-maths-division-priorites-q2",
+   "tier": "autoeval",
+   "lesson": "6e-maths-division-priorites",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien vaut 40 − (12 + 8) ÷ 4 ?",
+   "choices": [
+    "5",
+    "35",
+    "2",
+    "37"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "(12 + 8) = 20 ; 20 ÷ 4 = 5 ; 40 − 5 = 35.",
+   "id": "6e-maths-division-priorites-q3",
+   "tier": "autoeval",
+   "lesson": "6e-maths-division-priorites",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le reste d'une division par 7 peut être",
+   "choices": [
+    "7",
+    "8",
+    "6",
+    "10"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le reste est toujours strictement inférieur au diviseur : 0 à 6.",
+   "id": "6e-maths-division-priorites-q4",
+   "tier": "autoeval",
+   "lesson": "6e-maths-division-priorites",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans 100 = 8 × 12 + 4, quel est le quotient ?",
+   "choices": [
+    "8",
+    "12",
+    "4",
+    "100"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le quotient est le facteur q dans a = b × q + r : ici 12.",
+   "id": "6e-maths-division-priorites-q5",
+   "tier": "autoeval",
+   "lesson": "6e-maths-division-priorites",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Lequel de ces nombres est un multiple de 7 ?",
+   "choices": [
+    "27",
+    "47",
+    "75",
+    "63"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "63 = 7 × 9.",
+   "id": "6e-maths-multiples-diviseurs-01",
+   "tier": "application",
+   "lesson": "6e-maths-multiples-diviseurs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : 1 250 est divisible par 5.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le dernier chiffre est 0, donc divisible par 5 (et par 10).",
+   "id": "6e-maths-multiples-diviseurs-02",
+   "tier": "application",
+   "lesson": "6e-maths-multiples-diviseurs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Combien 20 a-t-il de diviseurs ?",
+   "answer": 6,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les diviseurs de 20 : 1, 2, 4, 5, 10, 20.",
+   "method": "Chercher les produits égaux à 20.",
+   "id": "6e-maths-multiples-diviseurs-03",
+   "tier": "application",
+   "lesson": "6e-maths-multiples-diviseurs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel chiffre faut-il écrire à la place de * pour que 45* soit divisible par 3 et par 5 ?",
+   "choices": [
+    "2",
+    "5",
+    "0",
+    "9"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Divisible par 5 : * = 0 ou 5. Divisible par 3 : 4 + 5 + * multiple de 3 ; 9 + 0 = 9 convient, 9 + 5 = 14 ne convient pas.",
+   "id": "6e-maths-multiples-diviseurs-04",
+   "tier": "approfondissement",
+   "lesson": "6e-maths-multiples-diviseurs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quel est le plus petit multiple de 6 supérieur à 100 ?",
+   "answer": 102,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "6 × 17 = 102 et 6 × 16 = 96 < 100.",
+   "id": "6e-maths-multiples-diviseurs-05",
+   "tier": "approfondissement",
+   "lesson": "6e-maths-multiples-diviseurs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Mballa a 72 mangues. Il veut les répartir en tas égaux, sans en garder.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Peut-il faire des tas de 9 mangues ?",
+     "choices": [
+      "Oui, 7 tas",
+      "Non",
+      "Oui, 9 tas",
+      "Oui, 8 tas"
+     ],
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "72 = 9 × 8.",
+     "id": "6e-maths-multiples-diviseurs-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Combien y a-t-il de façons de faire des tas égaux (en comptant un seul tas de 72 et 72 tas de 1) ?",
+     "answer": 12,
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "Diviseurs de 72 : 1, 2, 3, 4, 6, 8, 9, 12, 18, 24, 36, 72, soit 12.",
+     "id": "6e-maths-multiples-diviseurs-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "6e-maths-multiples-diviseurs-06",
+   "tier": "examen",
+   "lesson": "6e-maths-multiples-diviseurs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel nombre est divisible par 9 ?",
+   "choices": [
+    "731",
+    "725",
+    "729",
+    "728"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "7 + 2 + 9 = 18, multiple de 9.",
+   "id": "6e-maths-multiples-diviseurs-q1",
+   "tier": "autoeval",
+   "lesson": "6e-maths-multiples-diviseurs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel nombre est divisible par 2 mais pas par 3 ?",
+   "choices": [
+    "1 002",
+    "1 004",
+    "1 005",
+    "1 001"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1 + 0 + 0 + 4 = 5 : pas multiple de 3 ; dernier chiffre 4 : pair.",
+   "id": "6e-maths-multiples-diviseurs-q2",
+   "tier": "autoeval",
+   "lesson": "6e-maths-multiples-diviseurs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le plus petit multiple non nul de 12 ?",
+   "choices": [
+    "0",
+    "1",
+    "24",
+    "12"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le plus petit multiple non nul d'un nombre est ce nombre lui-même.",
+   "id": "6e-maths-multiples-diviseurs-q3",
+   "tier": "autoeval",
+   "lesson": "6e-maths-multiples-diviseurs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel nombre est un diviseur de 45 ?",
+   "choices": [
+    "15",
+    "4",
+    "12",
+    "30"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "45 = 15 × 3.",
+   "id": "6e-maths-multiples-diviseurs-q4",
+   "tier": "autoeval",
+   "lesson": "6e-maths-multiples-diviseurs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un nombre divisible par 10 se termine par",
+   "choices": [
+    "0",
+    "5",
+    "10",
+    "un chiffre pair"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Seuls les nombres terminés par 0 sont divisibles par 10.",
+   "id": "6e-maths-multiples-diviseurs-q5",
+   "tier": "autoeval",
+   "lesson": "6e-maths-multiples-diviseurs",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

@@ -1,0 +1,800 @@
+{
+ "chapter": "5e-maths-mesures",
+ "lessons": [
+  {
+   "id": "5e-maths-aires-5e",
+   "title": "Aires : parallélogramme, trapèze et disque",
+   "minutes": 30,
+   "programRef": "5e — Aires : parallélogramme, trapèze, disque ; circonférence (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Calculer l'aire d'un parallélogramme, d'un trapèze et d'un disque.",
+    "Calculer la circonférence d'un cercle."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "5e-maths-aires-5e-01",
+    "5e-maths-aires-5e-02",
+    "5e-maths-aires-5e-03",
+    "5e-maths-aires-5e-04",
+    "5e-maths-aires-5e-05",
+    "5e-maths-aires-5e-06"
+   ],
+   "selfCheck": [
+    "5e-maths-aires-5e-q1",
+    "5e-maths-aires-5e-q2",
+    "5e-maths-aires-5e-q3",
+    "5e-maths-aires-5e-q4",
+    "5e-maths-aires-5e-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Formules d'aire",
+     "md": "Parallélogramme de base b et de hauteur h : $A = b \\times h$. Trapèze de grande base B, petite base b et hauteur h : $A = \\frac{(B + b) \\times h}{2}$. Disque de rayon r : $A = \\pi \\times r^2$ ; circonférence : $C = 2 \\times \\pi \\times r$ ($\\pi \\approx 3{,}14$)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Un parallélogramme (A = 8 × 5 = 40 cm²) et un trapèze (A = (10 + 6) × 4 ÷ 2 = 32 cm²).",
+     "alt": "Un parallélogramme de base 8 et hauteur 5, un trapèze de bases 10 et 6 et de hauteur 4.",
+     "figure": {
+      "kind": "shapes",
+      "w": 460,
+      "h": 190,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         20,
+         130,
+         150,
+         130,
+         190,
+         50,
+         60,
+         50
+        ],
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 50,
+        "x2": 60,
+        "y2": 130,
+        "color": "red",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 150,
+        "text": "b = 8 cm",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 48,
+        "y": 95,
+        "text": "h = 5",
+        "size": 14,
+        "color": "red",
+        "anchor": "end"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         250,
+         130,
+         440,
+         130,
+         400,
+         50,
+         290,
+         50
+        ],
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 290,
+        "y1": 50,
+        "x2": 290,
+        "y2": 130,
+        "color": "red",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "text",
+        "x": 345,
+        "y": 150,
+        "text": "B = 10 cm",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 345,
+        "y": 40,
+        "text": "b = 6 cm",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 278,
+        "y": 95,
+        "text": "h = 4",
+        "size": 14,
+        "color": "red",
+        "anchor": "end"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : trapèze",
+     "statement": "Un champ en forme de trapèze a pour bases 40 m et 24 m et pour hauteur 15 m. Quelle est son aire ?",
+     "steps": [
+      {
+       "md": "On applique la formule :",
+       "tex": "A = \\frac{(40 + 24) \\times 15}{2}"
+      },
+      {
+       "md": "40 + 24 = 64 ; 64 × 15 = 960 ; 960 ÷ 2 = 480."
+      }
+     ],
+     "answer": "**480 m²**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : disque",
+     "statement": "Calcule l'aire d'un disque de rayon 5 cm (π ≈ 3,14).",
+     "steps": [
+      {
+       "md": "On applique la formule :",
+       "tex": "A = 3{,}14 \\times 5^2"
+      },
+      {
+       "md": "5² = 25 ; 3,14 × 25 = 78,5."
+      }
+     ],
+     "answer": "**A ≈ 78,5 cm²**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Utiliser un côté oblique comme hauteur : la hauteur est perpendiculaire aux bases.\n- Oublier le carré du rayon : $\\pi r^2$ n'est pas $\\pi \\times 2r$.\n- Confondre aire du disque ($\\pi r^2$, en cm²) et longueur du cercle ($2\\pi r$, en cm)."
+    }
+   ],
+   "reviewNotes": [
+    "Valeur de π prise à 3,14 ; vérifier la convention du programme.",
+    "L'aire du trapèze est parfois vue en 4e ; vérifier."
+   ]
+  },
+  {
+   "id": "5e-maths-prisme-cylindre",
+   "title": "Prisme droit et cylindre : aires et volumes",
+   "minutes": 30,
+   "programRef": "5e — Solides : prisme droit, cylindre de révolution : aires et volumes (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Calculer le volume d'un prisme droit et d'un cylindre.",
+    "Calculer l'aire latérale d'un prisme droit."
+   ],
+   "prerequisites": [
+    "5e-maths-aires-5e"
+   ],
+   "exercises": [
+    "5e-maths-prisme-cylindre-01",
+    "5e-maths-prisme-cylindre-02",
+    "5e-maths-prisme-cylindre-03",
+    "5e-maths-prisme-cylindre-04",
+    "5e-maths-prisme-cylindre-05",
+    "5e-maths-prisme-cylindre-06"
+   ],
+   "selfCheck": [
+    "5e-maths-prisme-cylindre-q1",
+    "5e-maths-prisme-cylindre-q2",
+    "5e-maths-prisme-cylindre-q3",
+    "5e-maths-prisme-cylindre-q4",
+    "5e-maths-prisme-cylindre-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Volumes",
+     "md": "Prisme droit : $V = \\text{aire de la base} \\times \\text{hauteur}$. Cylindre de rayon r et de hauteur h : $V = \\pi \\times r^2 \\times h$. Aire latérale d'un prisme droit : $\\text{périmètre de la base} \\times h$."
+    },
+    {
+     "type": "illustration",
+     "caption": "Un prisme droit à base triangulaire et un cylindre.",
+     "alt": "Un prisme droit dont la base est un triangle, et un cylindre avec son disque supérieur.",
+     "figure": {
+      "kind": "shapes",
+      "w": 460,
+      "h": 210,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         40,
+         150,
+         140,
+         150,
+         40,
+         80
+        ],
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "poly",
+        "pts": [
+         40,
+         150,
+         140,
+         150,
+         180,
+         120,
+         80,
+         120
+        ],
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "poly",
+        "pts": [
+         40,
+         80,
+         80,
+         50,
+         180,
+         120,
+         140,
+         150
+        ],
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 180,
+        "text": "prisme droit",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 198,
+        "text": "V = aire base × h",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "path",
+        "d": "M 300 60 A 60 18 0 1 0 420 60 A 60 18 0 1 0 300 60 Z",
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 60,
+        "x2": 300,
+        "y2": 150,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 420,
+        "y1": 60,
+        "x2": 420,
+        "y2": 150,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "path",
+        "d": "M 300 150 A 60 18 0 0 0 420 150",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 360,
+        "y": 60,
+        "text": "r",
+        "size": 14,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 360,
+        "y": 198,
+        "text": "cylindre : V = π r² h",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : prisme",
+     "statement": "Un prisme droit a pour base un triangle rectangle de côtés de l'angle droit 3 cm et 4 cm, et pour hauteur 10 cm. Quel est son volume ?",
+     "steps": [
+      {
+       "md": "Aire de la base : 3 × 4 ÷ 2 = 6 cm²."
+      },
+      {
+       "md": "Volume : 6 × 10 = 60 cm³."
+      }
+     ],
+     "answer": "**V = 60 cm³**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : cylindre",
+     "statement": "Une citerne cylindrique a un rayon de 1 m et une hauteur de 3 m. Quel est son volume en m³ puis en litres (π ≈ 3,14) ?",
+     "steps": [
+      {
+       "md": "Volume :",
+       "tex": "V = 3{,}14 \\times 1^2 \\times 3 = 9{,}42"
+      },
+      {
+       "md": "1 m³ = 1 000 L donc 9,42 m³ = 9 420 L."
+      }
+     ],
+     "answer": "**9,42 m³ = 9 420 L**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Prendre le diamètre à la place du rayon dans $\\pi r^2 h$.\n- Oublier de multiplier l'aire de la base par la hauteur.\n- Mélanger les unités : convertir toutes les dimensions dans la même unité avant de calculer."
+    }
+   ],
+   "reviewNotes": [
+    "Le cylindre est parfois seulement étudié en 4e ; vérifier le programme de 5e.",
+    "Valeur de π à 3,14."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Aire d'un parallélogramme de base 12 cm et de hauteur 7 cm (cm²) ?",
+   "answer": 84,
+   "unit": "cm²",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "12 × 7 = 84.",
+   "id": "5e-maths-aires-5e-01",
+   "tier": "application",
+   "lesson": "5e-maths-aires-5e",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Aire d'un trapèze de bases 9 cm et 5 cm et de hauteur 6 cm (cm²) ?",
+   "answer": 42,
+   "unit": "cm²",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "(9 + 5) × 6 ÷ 2 = 42.",
+   "id": "5e-maths-aires-5e-02",
+   "tier": "application",
+   "lesson": "5e-maths-aires-5e",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Circonférence d'un cercle de rayon 10 cm (π ≈ 3,14) (cm) ?",
+   "answer": 62.8,
+   "tolerance": 0.01,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "2 × 3,14 × 10 = 62,8.",
+   "id": "5e-maths-aires-5e-03",
+   "tier": "application",
+   "lesson": "5e-maths-aires-5e",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Aire d'un disque de rayon 3 m (π ≈ 3,14) (m²) ?",
+   "answer": 28.26,
+   "tolerance": 0.01,
+   "unit": "m²",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "3,14 × 9 = 28,26.",
+   "id": "5e-maths-aires-5e-04",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-aires-5e",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un parallélogramme a pour aire 90 cm² et pour base 15 cm. Quelle est sa hauteur (cm) ?",
+   "answer": 6,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "h = 90 ÷ 15 = 6.",
+   "id": "5e-maths-aires-5e-05",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-aires-5e",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Une place publique est un disque de rayon 20 m ; un parking voisin est un trapèze de bases 50 m et 30 m, de hauteur 20 m.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est l'aire de la place (π ≈ 3,14) (m²) ?",
+     "answer": 1256,
+     "tolerance": 0.5,
+     "unit": "m²",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "3,14 × 400 = 1 256.",
+     "id": "5e-maths-aires-5e-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est l'aire du parking (m²) ?",
+     "answer": 800,
+     "unit": "m²",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "(50 + 30) × 20 ÷ 2 = 800.",
+     "id": "5e-maths-aires-5e-06-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Lequel est le plus grand ?",
+     "choices": [
+      "Le parking",
+      "La place",
+      "Ils ont la même aire",
+      "On ne peut pas comparer"
+     ],
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "1 256 > 800.",
+     "id": "5e-maths-aires-5e-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-maths-aires-5e-06",
+   "tier": "examen",
+   "lesson": "5e-maths-aires-5e",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'aire d'un parallélogramme est",
+   "choices": [
+    "côté × côté",
+    "base × hauteur",
+    "(base × hauteur) ÷ 2",
+    "base + hauteur"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "A = b × h.",
+   "id": "5e-maths-aires-5e-q1",
+   "tier": "autoeval",
+   "lesson": "5e-maths-aires-5e",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'aire d'un disque de rayon r est",
+   "choices": [
+    "2 × π × r",
+    "π × r × r",
+    "π × r",
+    "4 × r"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "A = πr².",
+   "id": "5e-maths-aires-5e-q2",
+   "tier": "autoeval",
+   "lesson": "5e-maths-aires-5e",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour un trapèze de bases 8 et 4 et de hauteur 3, l'aire est",
+   "choices": [
+    "36",
+    "15",
+    "12",
+    "18"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "(8 + 4) × 3 ÷ 2 = 18.",
+   "id": "5e-maths-aires-5e-q3",
+   "tier": "autoeval",
+   "lesson": "5e-maths-aires-5e",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La circonférence d'un cercle de diamètre d vaut",
+   "choices": [
+    "π × d²",
+    "d ÷ π",
+    "2 × d",
+    "π × d"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C = π d = 2π r.",
+   "id": "5e-maths-aires-5e-q4",
+   "tier": "autoeval",
+   "lesson": "5e-maths-aires-5e",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une aire s'exprime en",
+   "choices": [
+    "m",
+    "m³",
+    "m²",
+    "L"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Unité carrée.",
+   "id": "5e-maths-aires-5e-q5",
+   "tier": "autoeval",
+   "lesson": "5e-maths-aires-5e",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Volume d'un prisme de base 15 cm² et de hauteur 8 cm (cm³) ?",
+   "answer": 120,
+   "unit": "cm³",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "15 × 8 = 120.",
+   "id": "5e-maths-prisme-cylindre-01",
+   "tier": "application",
+   "lesson": "5e-maths-prisme-cylindre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Volume d'un cylindre de rayon 5 cm et de hauteur 10 cm (π ≈ 3,14) (cm³) ?",
+   "answer": 785,
+   "tolerance": 0.5,
+   "unit": "cm³",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "3,14 × 25 × 10 = 785.",
+   "id": "5e-maths-prisme-cylindre-02",
+   "tier": "application",
+   "lesson": "5e-maths-prisme-cylindre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Aire latérale d'un prisme de hauteur 10 cm dont la base a un périmètre de 12 cm (cm²) ?",
+   "answer": 120,
+   "unit": "cm²",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "12 × 10 = 120.",
+   "id": "5e-maths-prisme-cylindre-03",
+   "tier": "application",
+   "lesson": "5e-maths-prisme-cylindre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un cylindre de rayon 2 cm et de hauteur 7 cm (π ≈ 3,14) : volume (cm³) ?",
+   "answer": 87.92,
+   "tolerance": 0.01,
+   "unit": "cm³",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "3,14 × 4 × 7 = 87,92.",
+   "id": "5e-maths-prisme-cylindre-04",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-prisme-cylindre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un prisme a pour volume 150 cm³ et pour hauteur 6 cm. Quelle est l'aire de sa base (cm²) ?",
+   "answer": 25,
+   "unit": "cm²",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "150 ÷ 6 = 25.",
+   "id": "5e-maths-prisme-cylindre-05",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-prisme-cylindre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Un réservoir cylindrique a un rayon de 0,5 m et une hauteur de 2 m (π ≈ 3,14).",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est l'aire de sa base (m²) ?",
+     "answer": 0.785,
+     "tolerance": 0.001,
+     "unit": "m²",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "3,14 × 0,5² = 3,14 × 0,25 = 0,785.",
+     "id": "5e-maths-prisme-cylindre-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quel est son volume (m³) ?",
+     "answer": 1.57,
+     "tolerance": 0.001,
+     "unit": "m³",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "0,785 × 2 = 1,57.",
+     "id": "5e-maths-prisme-cylindre-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Combien de litres peut-il contenir ?",
+     "answer": 1570,
+     "unit": "L",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "1,57 m³ = 1 570 L.",
+     "id": "5e-maths-prisme-cylindre-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-maths-prisme-cylindre-06",
+   "tier": "examen",
+   "lesson": "5e-maths-prisme-cylindre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le volume d'un prisme droit est",
+   "choices": [
+    "périmètre de la base × hauteur",
+    "aire de la base × hauteur",
+    "aire de la base + hauteur",
+    "hauteur ÷ aire"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "V = B × h.",
+   "id": "5e-maths-prisme-cylindre-q1",
+   "tier": "autoeval",
+   "lesson": "5e-maths-prisme-cylindre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le volume d'un cylindre de rayon r et de hauteur h est",
+   "choices": [
+    "π r² h",
+    "2 π r h",
+    "π r h",
+    "r² h"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "V = πr²h.",
+   "id": "5e-maths-prisme-cylindre-q2",
+   "tier": "autoeval",
+   "lesson": "5e-maths-prisme-cylindre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un prisme droit de base 20 cm² et de hauteur 3 cm a pour volume",
+   "choices": [
+    "60 cm³",
+    "23 cm³",
+    "6,67 cm³",
+    "60 cm²"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "20 × 3 = 60.",
+   "id": "5e-maths-prisme-cylindre-q3",
+   "tier": "autoeval",
+   "lesson": "5e-maths-prisme-cylindre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "1 m³ correspond à",
+   "choices": [
+    "100 L",
+    "10 L",
+    "10 000 L",
+    "1 000 L"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "1 m³ = 1 000 dm³ = 1 000 L.",
+   "id": "5e-maths-prisme-cylindre-q4",
+   "tier": "autoeval",
+   "lesson": "5e-maths-prisme-cylindre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans la formule du cylindre, r désigne",
+   "choices": [
+    "le rayon de la base",
+    "le diamètre",
+    "la hauteur",
+    "la circonférence"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "r est le rayon.",
+   "id": "5e-maths-prisme-cylindre-q5",
+   "tier": "autoeval",
+   "lesson": "5e-maths-prisme-cylindre",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

@@ -1,0 +1,331 @@
+{
+ "chapter": "6e-maths-donnees",
+ "lessons": [
+  {
+   "id": "6e-maths-tableaux-diagrammes",
+   "title": "Tableaux d'effectifs et diagrammes en barres",
+   "minutes": 25,
+   "programRef": "6e — Organisation de données : tableaux, diagrammes en bâtons/barres (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Lire et construire un tableau d'effectifs.",
+    "Lire un diagramme en barres et répondre à des questions."
+   ],
+   "prerequisites": [
+    "6e-maths-fractions-operations"
+   ],
+   "exercises": [
+    "6e-maths-tableaux-diagrammes-01",
+    "6e-maths-tableaux-diagrammes-02",
+    "6e-maths-tableaux-diagrammes-03",
+    "6e-maths-tableaux-diagrammes-04",
+    "6e-maths-tableaux-diagrammes-05",
+    "6e-maths-tableaux-diagrammes-06"
+   ],
+   "selfCheck": [
+    "6e-maths-tableaux-diagrammes-q1",
+    "6e-maths-tableaux-diagrammes-q2",
+    "6e-maths-tableaux-diagrammes-q3",
+    "6e-maths-tableaux-diagrammes-q4",
+    "6e-maths-tableaux-diagrammes-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Effectif et tableau",
+     "md": "L'**effectif** d'une valeur est le nombre de fois où elle apparaît. Un **tableau d'effectifs** range les valeurs et leurs effectifs. L'**effectif total** est la somme de tous les effectifs."
+    },
+    {
+     "type": "illustration",
+     "caption": "Moyen de transport utilisé par 40 élèves pour venir au collège.",
+     "alt": "Diagramme en barres : à pied 12, vélo 5, moto 8, bus 15.",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "bars": [
+       {
+        "label": "À pied",
+        "value": 12,
+        "color": "blue"
+       },
+       {
+        "label": "Vélo",
+        "value": 5,
+        "color": "orange"
+       },
+       {
+        "label": "Moto",
+        "value": 8,
+        "color": "green"
+       },
+       {
+        "label": "Bus",
+        "value": 15,
+        "color": "purple"
+       }
+      ],
+      "unit": "élèves"
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Lire un diagramme en barres",
+     "md": "1. Lire les titres et l'unité de l'axe vertical.\n2. Repérer la hauteur de chaque barre.\n3. Comparer, ajouter pour trouver l'effectif total, calculer une fraction : effectif de la valeur ÷ effectif total."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : effectif total",
+     "statement": "Dans le diagramme, combien d'élèves ont été interrogés ?",
+     "steps": [
+      {
+       "md": "On additionne les effectifs : 12 + 5 + 8 + 15."
+      },
+      {
+       "md": "12 + 5 = 17 ; 17 + 8 = 25 ; 25 + 15 = 40."
+      }
+     ],
+     "answer": "**40 élèves**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : fraction",
+     "statement": "Quelle fraction des élèves vient en bus ?",
+     "steps": [
+      {
+       "md": "Effectif du bus : 15 ; effectif total : 40."
+      },
+      {
+       "md": "On écrit la fraction et on simplifie par 5 :",
+       "tex": "\\frac{15}{40} = \\frac{3}{8}"
+      }
+     ],
+     "answer": "**3/8 des élèves**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Lire la mauvaise échelle : vérifier à quoi correspond chaque graduation.\n- Oublier une catégorie en additionnant : l'effectif total doit être la somme de TOUTES les barres.\n- Confondre la valeur la plus grande (la plus haute barre) avec la plus petite."
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier si le programme de 6e demande aussi le diagramme circulaire (non traité ici)."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Dans un tableau, les effectifs sont 7, 12, 9 et 4. Quel est l'effectif total ?",
+   "answer": 32,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "7 + 12 = 19 ; 19 + 9 = 28 ; 28 + 4 = 32.",
+   "id": "6e-maths-tableaux-diagrammes-01",
+   "tier": "application",
+   "lesson": "6e-maths-tableaux-diagrammes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans le diagramme du cours, quel moyen de transport est le plus utilisé ?",
+   "choices": [
+    "Le bus",
+    "À pied",
+    "La moto",
+    "Le vélo"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La barre la plus haute est celle du bus (15).",
+   "id": "6e-maths-tableaux-diagrammes-02",
+   "tier": "application",
+   "lesson": "6e-maths-tableaux-diagrammes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Combien d'élèves viennent à vélo ou à moto ?",
+   "answer": 13,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "5 + 8 = 13.",
+   "id": "6e-maths-tableaux-diagrammes-03",
+   "tier": "application",
+   "lesson": "6e-maths-tableaux-diagrammes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Sur 40 élèves, 8 viennent à moto. Quelle fraction cela fait-il en pourcentage (%) ?",
+   "answer": 20,
+   "unit": "%",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "8/40 = 1/5 = 20 %.",
+   "id": "6e-maths-tableaux-diagrammes-04",
+   "tier": "approfondissement",
+   "lesson": "6e-maths-tableaux-diagrammes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un marchand note le nombre de sacs vendus du lundi au samedi : 14, 9, 11, 9, 16, 21. Quel est l'effectif total (nombre de sacs vendus) ?",
+   "choices": [
+    "80",
+    "70",
+    "81",
+    "84"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "14 + 9 + 11 + 9 + 16 + 21 = 80.",
+   "id": "6e-maths-tableaux-diagrammes-05",
+   "tier": "approfondissement",
+   "lesson": "6e-maths-tableaux-diagrammes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Dans une classe de 30 élèves, on a relevé le fruit préféré : mangue 9, banane 6, orange 8, ananas 7.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Vérifie : quelle est la somme des effectifs ?",
+     "answer": 30,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "9 + 6 + 8 + 7 = 30.",
+     "id": "6e-maths-tableaux-diagrammes-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quel fruit est le moins choisi ?",
+     "choices": [
+      "La mangue",
+      "L'orange",
+      "L'ananas",
+      "La banane"
+     ],
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Effectif le plus petit : 6.",
+     "id": "6e-maths-tableaux-diagrammes-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle fraction des élèves préfère la mangue ? Donne le pourcentage (%).",
+     "answer": 30,
+     "unit": "%",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "9/30 = 3/10 = 30 %.",
+     "id": "6e-maths-tableaux-diagrammes-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "6e-maths-tableaux-diagrammes-06",
+   "tier": "examen",
+   "lesson": "6e-maths-tableaux-diagrammes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'effectif total d'une série est",
+   "choices": [
+    "la somme de tous les effectifs",
+    "le plus grand effectif",
+    "le nombre de valeurs différentes",
+    "la moyenne des effectifs"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il compte tous les individus.",
+   "id": "6e-maths-tableaux-diagrammes-q1",
+   "tier": "autoeval",
+   "lesson": "6e-maths-tableaux-diagrammes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans un diagramme en barres, la hauteur d'une barre représente",
+   "choices": [
+    "le nom de la valeur",
+    "l'effectif de la valeur",
+    "le total",
+    "la largeur du graphique"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Plus la barre est haute, plus l'effectif est grand.",
+   "id": "6e-maths-tableaux-diagrammes-q2",
+   "tier": "autoeval",
+   "lesson": "6e-maths-tableaux-diagrammes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les effectifs d'une enquête sont 6, 6, 8 : le total est",
+   "choices": [
+    "14",
+    "18",
+    "24",
+    "20"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "6 + 6 + 8 = 20.",
+   "id": "6e-maths-tableaux-diagrammes-q3",
+   "tier": "autoeval",
+   "lesson": "6e-maths-tableaux-diagrammes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Sur 50 personnes, 10 ont répondu « oui ». Quelle fraction ?",
+   "choices": [
+    "1/10",
+    "2/5",
+    "1/5",
+    "1/50"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "10/50 = 1/5.",
+   "id": "6e-maths-tableaux-diagrammes-q4",
+   "tier": "autoeval",
+   "lesson": "6e-maths-tableaux-diagrammes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour comparer des effectifs, il est utile de",
+   "choices": [
+    "les additionner à chaque fois",
+    "ne regarder que le premier",
+    "tracer un diagramme en barres",
+    "les arrondir à zéro"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un diagramme rend la comparaison visuelle.",
+   "id": "6e-maths-tableaux-diagrammes-q5",
+   "tier": "autoeval",
+   "lesson": "6e-maths-tableaux-diagrammes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

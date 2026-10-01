@@ -1,0 +1,1383 @@
+{
+ "chapter": "5e-maths-relatifs",
+ "lessons": [
+  {
+   "id": "5e-maths-relatifs-comparaison",
+   "title": "Nombres relatifs : droite graduée, opposé et comparaison",
+   "minutes": 25,
+   "programRef": "5e — Nombres relatifs : positifs et négatifs, droite graduée, opposé, comparaison (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Lire et placer un nombre relatif sur une droite graduée.",
+    "Donner l'opposé d'un nombre, comparer et ranger des nombres relatifs."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "5e-maths-relatifs-comparaison-01",
+    "5e-maths-relatifs-comparaison-02",
+    "5e-maths-relatifs-comparaison-03",
+    "5e-maths-relatifs-comparaison-04",
+    "5e-maths-relatifs-comparaison-05",
+    "5e-maths-relatifs-comparaison-06"
+   ],
+   "selfCheck": [
+    "5e-maths-relatifs-comparaison-q1",
+    "5e-maths-relatifs-comparaison-q2",
+    "5e-maths-relatifs-comparaison-q3",
+    "5e-maths-relatifs-comparaison-q4",
+    "5e-maths-relatifs-comparaison-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Nombres relatifs",
+     "md": "Les nombres **positifs** (+3, +2,5…) et **négatifs** (−3, −2,5…) sont des **nombres relatifs**. 0 est à la fois positif et négatif. Sur une droite graduée, les nombres négatifs sont à gauche de 0, les positifs à droite."
+    },
+    {
+     "type": "illustration",
+     "caption": "Droite graduée de −5 à 5 : A est le point d'abscisse −3, B celui d'abscisse 2.",
+     "alt": "Droite graduée de moins cinq à cinq avec un point A en moins trois et un point B en deux.",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 110,
+      "items": [
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 70,
+        "x2": 420,
+        "y2": 70,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 63,
+        "x2": 40,
+        "y2": 77,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 40,
+        "y": 98,
+        "text": "−5",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 76,
+        "y1": 63,
+        "x2": 76,
+        "y2": 77,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 76,
+        "y": 98,
+        "text": "−4",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 112,
+        "y1": 63,
+        "x2": 112,
+        "y2": 77,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 112,
+        "y": 98,
+        "text": "−3",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 148,
+        "y1": 63,
+        "x2": 148,
+        "y2": 77,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 148,
+        "y": 98,
+        "text": "−2",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 184,
+        "y1": 63,
+        "x2": 184,
+        "y2": 77,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 184,
+        "y": 98,
+        "text": "−1",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 220,
+        "y1": 63,
+        "x2": 220,
+        "y2": 77,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 98,
+        "text": "0",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 256,
+        "y1": 63,
+        "x2": 256,
+        "y2": 77,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 256,
+        "y": 98,
+        "text": "1",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 292,
+        "y1": 63,
+        "x2": 292,
+        "y2": 77,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 292,
+        "y": 98,
+        "text": "2",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 328,
+        "y1": 63,
+        "x2": 328,
+        "y2": 77,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 328,
+        "y": 98,
+        "text": "3",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 364,
+        "y1": 63,
+        "x2": 364,
+        "y2": 77,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 364,
+        "y": 98,
+        "text": "4",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 400,
+        "y1": 63,
+        "x2": 400,
+        "y2": 77,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 400,
+        "y": 98,
+        "text": "5",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "circle",
+        "cx": 112,
+        "cy": 70,
+        "r": 6,
+        "fill": "red",
+        "stroke": "red",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 112,
+        "y": 50,
+        "text": "A",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 292,
+        "cy": 70,
+        "r": 6,
+        "fill": "blue",
+        "stroke": "blue",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 292,
+        "y": 50,
+        "text": "B",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Opposé et comparaison",
+     "md": "- Deux nombres sont **opposés** s'ils sont à la même distance de 0 et de signes contraires : −4 et +4. L'opposé de 0 est 0.\n- Entre deux nombres, le plus petit est celui qui est le plus à gauche sur la droite graduée.\n- Tout négatif est plus petit que tout positif ; entre deux négatifs, le plus petit est celui qui a la plus grande distance à zéro : −8 < −3."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : ranger",
+     "statement": "Range dans l'ordre croissant : +4 ; −7 ; 0 ; −2 ; +1.",
+     "steps": [
+      {
+       "md": "Les négatifs d'abord : −7 est plus petit que −2 (7 est plus loin de 0 que 2)."
+      },
+      {
+       "md": "Puis 0, puis les positifs : +1 < +4."
+      }
+     ],
+     "answer": "**−7 < −2 < 0 < +1 < +4**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : contexte",
+     "statement": "Un thermomètre indique 4 °C le matin et −3 °C la nuit dans une ville de montagne. Quelle température est la plus basse ?",
+     "steps": [
+      {
+       "md": "On compare 4 et −3 : un nombre négatif est plus petit qu'un positif."
+      },
+      {
+       "md": "Donc −3 < 4."
+      }
+     ],
+     "answer": "**−3 °C est la température la plus basse.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que −8 > −3 parce que 8 > 3 : pour les négatifs, c'est l'inverse.\n- Oublier le signe : l'opposé de −5 est +5, pas −5.\n- Placer −2 à droite de 0 sur la droite graduée."
+    }
+   ],
+   "reviewNotes": [
+    "La valeur absolue (« distance à zéro ») est présentée simplement ; vérifier si la notation $|x|$ est exigée en 5e.",
+    "Températures négatives : exemples généraux, à adapter au contexte local si besoin."
+   ]
+  },
+  {
+   "id": "5e-maths-relatifs-addition",
+   "title": "Additionner et soustraire des nombres relatifs",
+   "minutes": 30,
+   "programRef": "5e — Nombres relatifs : addition et soustraction (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Additionner deux nombres relatifs.",
+    "Soustraire un relatif en ajoutant son opposé et calculer une somme algébrique."
+   ],
+   "prerequisites": [
+    "5e-maths-relatifs-comparaison"
+   ],
+   "exercises": [
+    "5e-maths-relatifs-addition-01",
+    "5e-maths-relatifs-addition-02",
+    "5e-maths-relatifs-addition-03",
+    "5e-maths-relatifs-addition-04",
+    "5e-maths-relatifs-addition-05",
+    "5e-maths-relatifs-addition-06"
+   ],
+   "selfCheck": [
+    "5e-maths-relatifs-addition-q1",
+    "5e-maths-relatifs-addition-q2",
+    "5e-maths-relatifs-addition-q3",
+    "5e-maths-relatifs-addition-q4",
+    "5e-maths-relatifs-addition-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Addition",
+     "md": "- **Même signe** : on additionne les distances à zéro et on garde le signe. $(-7) + (-5) = -12$.\n- **Signes contraires** : on soustrait la plus petite distance à zéro de la plus grande et on prend le signe de celui qui est le plus loin de 0. $(+9) + (-13) = -4$.\n- Deux opposés ont pour somme 0."
+    },
+    {
+     "type": "illustration",
+     "caption": "Ajouter −4 à +2 : on recule de 4 unités et on arrive en −2.",
+     "alt": "Droite graduée de −4 à 4 avec une flèche de deux vers moins deux.",
+     "figure": {
+      "kind": "shapes",
+      "w": 460,
+      "h": 130,
+      "items": [
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 70,
+        "x2": 430,
+        "y2": 70,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 70,
+        "y1": 62,
+        "x2": 70,
+        "y2": 78,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 62,
+        "x2": 110,
+        "y2": 78,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 62,
+        "x2": 150,
+        "y2": 78,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 190,
+        "y1": 62,
+        "x2": 190,
+        "y2": 78,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 230,
+        "y1": 62,
+        "x2": 230,
+        "y2": 78,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 270,
+        "y1": 62,
+        "x2": 270,
+        "y2": 78,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 310,
+        "y1": 62,
+        "x2": 310,
+        "y2": 78,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 350,
+        "y1": 62,
+        "x2": 350,
+        "y2": 78,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 390,
+        "y1": 62,
+        "x2": 390,
+        "y2": 78,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 98,
+        "text": "−5",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 98,
+        "text": "−4",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 98,
+        "text": "−3",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 98,
+        "text": "−2",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 98,
+        "text": "−1",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 98,
+        "text": "0",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 98,
+        "text": "1",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 98,
+        "text": "2",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 390,
+        "y": 98,
+        "text": "3",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 310,
+        "y1": 45,
+        "x2": 150,
+        "y2": 45,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 30,
+        "text": "−4",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 28,
+        "text": "départ : +2",
+        "size": 14,
+        "color": "blue",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Soustraction = ajouter l'opposé",
+     "md": "Soustraire un nombre, c'est ajouter son opposé : $a - b = a + (-b)$. Exemples : $5 - (-3) = 5 + 3 = 8$ ; $(-4) - (+6) = (-4) + (-6) = -10$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : addition",
+     "statement": "Calcule (−8) + (+5) et (−3) + (−6).",
+     "steps": [
+      {
+       "md": "Signes contraires : 8 − 5 = 3, et −8 est plus loin de 0 : résultat −3."
+      },
+      {
+       "md": "Même signe : 3 + 6 = 9, signe − : résultat −9."
+      }
+     ],
+     "answer": "**−3 et −9**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : soustraction",
+     "statement": "Calcule 7 − (−4) puis (−2) − (−9).",
+     "steps": [
+      {
+       "md": "7 − (−4) = 7 + 4 = 11."
+      },
+      {
+       "md": "(−2) − (−9) = (−2) + 9 = 7."
+      }
+     ],
+     "answer": "**11 et 7**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Écrire (−7) + (−5) = −2 : même signe, on additionne les distances (7 + 5 = 12).\n- Croire que 5 − (−3) = 2 : soustraire un négatif revient à ajouter son opposé positif.\n- Oublier le signe du résultat quand les signes sont contraires."
+    }
+   ],
+   "reviewNotes": [
+    "La multiplication et la division des relatifs sont habituellement vues en 4e : non traitées ici (à vérifier selon le programme)."
+   ]
+  },
+  {
+   "id": "5e-maths-reperage-plan",
+   "title": "Repérage dans le plan : abscisse et ordonnée",
+   "minutes": 25,
+   "programRef": "5e — Repérage dans le plan : repère orthogonal, abscisse, ordonnée (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Lire les coordonnées d'un point dans un repère.",
+    "Placer un point de coordonnées données."
+   ],
+   "prerequisites": [
+    "5e-maths-relatifs-comparaison"
+   ],
+   "exercises": [
+    "5e-maths-reperage-plan-01",
+    "5e-maths-reperage-plan-02",
+    "5e-maths-reperage-plan-03",
+    "5e-maths-reperage-plan-04",
+    "5e-maths-reperage-plan-05",
+    "5e-maths-reperage-plan-06"
+   ],
+   "selfCheck": [
+    "5e-maths-reperage-plan-q1",
+    "5e-maths-reperage-plan-q2",
+    "5e-maths-reperage-plan-q3",
+    "5e-maths-reperage-plan-q4",
+    "5e-maths-reperage-plan-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Coordonnées",
+     "md": "Un repère du plan est formé de deux droites graduées perpendiculaires qui se coupent en l'origine O. Un point M a pour coordonnées $(x\\,;\\,y)$ : **x** est l'abscisse (axe horizontal), **y** l'ordonnée (axe vertical)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Points A(2 ; 3), B(−3 ; 1), C(−2 ; −2) et D(3 ; −1).",
+     "alt": "Un repère avec quatre points A, B, C, D placés dans les quatre quadrants.",
+     "figure": {
+      "kind": "plot",
+      "xmin": -4,
+      "xmax": 4,
+      "ymin": -4,
+      "ymax": 4,
+      "grid": 1,
+      "w": 360,
+      "h": 360,
+      "curves": [],
+      "points": [
+       {
+        "x": 2,
+        "y": 3,
+        "label": "A",
+        "color": "red"
+       },
+       {
+        "x": -3,
+        "y": 1,
+        "label": "B",
+        "color": "blue"
+       },
+       {
+        "x": -2,
+        "y": -2,
+        "label": "C",
+        "color": "green"
+       },
+       {
+        "x": 3,
+        "y": -1,
+        "label": "D",
+        "color": "purple"
+       }
+      ],
+      "segments": []
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Lire et placer",
+     "md": "1. On part de l'origine, on lit l'abscisse sur l'axe horizontal (droite : +, gauche : −).\n2. On monte ou on descend de l'ordonnée (haut : +, bas : −).\nL'abscisse s'écrit toujours en premier."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : lire",
+     "statement": "Donne les coordonnées de B sur la figure.",
+     "steps": [
+      {
+       "md": "B est à gauche de l'axe vertical, à 3 unités : abscisse −3."
+      },
+      {
+       "md": "B est à 1 unité au-dessus de l'axe horizontal : ordonnée 1."
+      }
+     ],
+     "answer": "**B(−3 ; 1)**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : placer",
+     "statement": "Où se trouve le point E(−1 ; 4) ?",
+     "steps": [
+      {
+       "md": "On va de 1 unité vers la gauche depuis O."
+      },
+      {
+       "md": "Puis on monte de 4 unités."
+      }
+     ],
+     "answer": "**E est à 1 unité à gauche et 4 unités en haut de l'origine.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Inverser abscisse et ordonnée : (3 ; 1) n'est pas (1 ; 3).\n- Oublier le signe moins de l'abscisse.\n- Compter à partir d'un autre point que l'origine."
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier si le programme exige les quadrants nommés ou seulement les coordonnées."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Quel est l'opposé de −9 ?",
+   "answer": 9,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'opposé de −9 est +9.",
+   "id": "5e-maths-relatifs-comparaison-01",
+   "tier": "application",
+   "lesson": "5e-maths-relatifs-comparaison",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel nombre est le plus petit ?",
+   "choices": [
+    "−2",
+    "−6",
+    "0",
+    "+3"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "−6 est le plus à gauche : −6 < −2 < 0 < +3.",
+   "id": "5e-maths-relatifs-comparaison-02",
+   "tier": "application",
+   "lesson": "5e-maths-relatifs-comparaison",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle inégalité est vraie ?",
+   "choices": [
+    "−7 > −4",
+    "−4 < −7",
+    "−7 < −4",
+    "−1 > 0"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Entre deux négatifs, celui qui est le plus loin de 0 est le plus petit.",
+   "id": "5e-maths-relatifs-comparaison-03",
+   "tier": "application",
+   "lesson": "5e-maths-relatifs-comparaison",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Range dans l'ordre décroissant : −1,5 ; 1 ; −3 ; 0,5.",
+   "choices": [
+    "−3 ; −1,5 ; 0,5 ; 1",
+    "1 ; 0,5 ; −3 ; −1,5",
+    "1 ; 0,5 ; −1,5 ; −3",
+    "0,5 ; 1 ; −1,5 ; −3"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Du plus grand au plus petit : 1 > 0,5 > −1,5 > −3.",
+   "id": "5e-maths-relatifs-comparaison-04",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-relatifs-comparaison",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quel est le nombre situé au milieu de −6 et 2 sur la droite graduée ?",
+   "answer": -2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Le milieu est (−6 + 2) ÷ 2 = −2 : on est à 4 unités de chaque côté.",
+   "id": "5e-maths-relatifs-comparaison-05",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-relatifs-comparaison",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Voici les soldes de quatre comptes (en FCFA) : Amina +12 000 ; Boris −3 500 ; Carine −8 000 ; Dieudonné 0.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quel compte est le plus à découvert (solde le plus petit) ?",
+     "choices": [
+      "Boris",
+      "Amina",
+      "Carine",
+      "Dieudonné"
+     ],
+     "answer": 2,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "−8 000 < −3 500 < 0 < 12 000.",
+     "id": "5e-maths-relatifs-comparaison-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quel est le solde opposé à celui de Boris (FCFA) ?",
+     "answer": 3500,
+     "unit": "FCFA",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "L'opposé de −3 500 est +3 500.",
+     "id": "5e-maths-relatifs-comparaison-06-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quel est l'ordre croissant des soldes ?",
+     "choices": [
+      "Amina, Dieudonné, Boris, Carine",
+      "Boris, Carine, Dieudonné, Amina",
+      "Carine, Boris, Dieudonné, Amina",
+      "Carine, Boris, Amina, Dieudonné"
+     ],
+     "answer": 2,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "−8 000 < −3 500 < 0 < 12 000.",
+     "id": "5e-maths-relatifs-comparaison-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-maths-relatifs-comparaison-06",
+   "tier": "examen",
+   "lesson": "5e-maths-relatifs-comparaison",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est l'opposé de +12 ?",
+   "choices": [
+    "+12",
+    "−12",
+    "1/12",
+    "0"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On change le signe : −12.",
+   "id": "5e-maths-relatifs-comparaison-q1",
+   "tier": "autoeval",
+   "lesson": "5e-maths-relatifs-comparaison",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le plus grand : −10 ; −1 ; −5 ; −20 ?",
+   "choices": [
+    "−20",
+    "−1",
+    "−10",
+    "−5"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le plus proche de 0 parmi les négatifs est le plus grand.",
+   "id": "5e-maths-relatifs-comparaison-q2",
+   "tier": "autoeval",
+   "lesson": "5e-maths-relatifs-comparaison",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Où se trouve −3 sur la droite graduée par rapport à 0 ?",
+   "choices": [
+    "À droite de 0, à 3 unités",
+    "À gauche de 0, à 6 unités",
+    "À gauche de 0, à 3 unités",
+    "Sur 0"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les négatifs sont à gauche.",
+   "id": "5e-maths-relatifs-comparaison-q3",
+   "tier": "autoeval",
+   "lesson": "5e-maths-relatifs-comparaison",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Laquelle de ces comparaisons est fausse ?",
+   "choices": [
+    "0 < −2",
+    "−2 < 0",
+    "−5 < −2",
+    "3 > −3"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "0 est plus grand que −2, donc 0 < −2 est faux.",
+   "id": "5e-maths-relatifs-comparaison-q4",
+   "tier": "autoeval",
+   "lesson": "5e-maths-relatifs-comparaison",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la distance à zéro de −7 ?",
+   "choices": [
+    "7",
+    "−7",
+    "0",
+    "14"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La distance est toujours positive : 7.",
+   "id": "5e-maths-relatifs-comparaison-q5",
+   "tier": "autoeval",
+   "lesson": "5e-maths-relatifs-comparaison",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule (−7) + (−5).",
+   "answer": -12,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Même signe : 7 + 5 = 12, signe − : −12.",
+   "id": "5e-maths-relatifs-addition-01",
+   "tier": "application",
+   "lesson": "5e-maths-relatifs-addition",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule (+9) + (−13).",
+   "answer": -4,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Signes contraires : 13 − 9 = 4 ; −13 est plus loin de 0 : −4.",
+   "id": "5e-maths-relatifs-addition-02",
+   "tier": "application",
+   "lesson": "5e-maths-relatifs-addition",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule 5 − (−3).",
+   "answer": 8,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "5 − (−3) = 5 + 3 = 8.",
+   "id": "5e-maths-relatifs-addition-03",
+   "tier": "application",
+   "lesson": "5e-maths-relatifs-addition",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule (−4) − (+6) + (−2).",
+   "answer": -12,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "(−4) − 6 = −10 ; −10 + (−2) = −12.",
+   "id": "5e-maths-relatifs-addition-04",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-relatifs-addition",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule −3,5 + 8,2.",
+   "answer": 4.7,
+   "tolerance": 0.001,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "8,2 − 3,5 = 4,7 (le plus grand en valeur absolue est positif).",
+   "id": "5e-maths-relatifs-addition-05",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-relatifs-addition",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "La température était de −3 °C à 5 h du matin. Elle monte de 11 °C jusqu'à midi, puis baisse de 4 °C en fin d'après-midi.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle température à midi (°C) ?",
+     "answer": 8,
+     "unit": "°C",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "−3 + 11 = 8.",
+     "id": "5e-maths-relatifs-addition-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle température en fin d'après-midi (°C) ?",
+     "answer": 4,
+     "unit": "°C",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "8 − 4 = 4.",
+     "id": "5e-maths-relatifs-addition-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quel est l'écart total entre la température la plus basse (−3) et la plus haute (8) (°C) ?",
+     "answer": 11,
+     "unit": "°C",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "8 − (−3) = 11.",
+     "id": "5e-maths-relatifs-addition-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-maths-relatifs-addition-06",
+   "tier": "examen",
+   "lesson": "5e-maths-relatifs-addition",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que vaut (−6) + (+6) ?",
+   "choices": [
+    "−12",
+    "12",
+    "0",
+    "−6"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Deux nombres opposés ont une somme nulle.",
+   "id": "5e-maths-relatifs-addition-q1",
+   "tier": "autoeval",
+   "lesson": "5e-maths-relatifs-addition",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que vaut (−2) + (−9) ?",
+   "choices": [
+    "−11",
+    "−7",
+    "7",
+    "11"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Même signe : on additionne 2 + 9 = 11, on garde −.",
+   "id": "5e-maths-relatifs-addition-q2",
+   "tier": "autoeval",
+   "lesson": "5e-maths-relatifs-addition",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que vaut 10 − (−2) ?",
+   "choices": [
+    "8",
+    "−12",
+    "−8",
+    "12"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "10 − (−2) = 10 + 2.",
+   "id": "5e-maths-relatifs-addition-q3",
+   "tier": "autoeval",
+   "lesson": "5e-maths-relatifs-addition",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que vaut (−15) + 20 ?",
+   "choices": [
+    "5",
+    "−35",
+    "−5",
+    "35"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "20 − 15 = 5, le plus grand est positif.",
+   "id": "5e-maths-relatifs-addition-q4",
+   "tier": "autoeval",
+   "lesson": "5e-maths-relatifs-addition",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Soustraire (−4), c'est",
+   "choices": [
+    "ajouter −4",
+    "retrancher 4 puis changer le signe du résultat",
+    "multiplier par −4",
+    "ajouter +4"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Soustraire un nombre = ajouter son opposé.",
+   "id": "5e-maths-relatifs-addition-q5",
+   "tier": "autoeval",
+   "lesson": "5e-maths-relatifs-addition",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quelle est l'abscisse de D(3 ; −1) ?",
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'abscisse est le premier nombre.",
+   "id": "5e-maths-reperage-plan-01",
+   "tier": "application",
+   "lesson": "5e-maths-reperage-plan",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quelle est l'ordonnée de C(−2 ; −2) ?",
+   "answer": -2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'ordonnée est le deuxième nombre.",
+   "id": "5e-maths-reperage-plan-02",
+   "tier": "application",
+   "lesson": "5e-maths-reperage-plan",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelles sont les coordonnées de l'origine ?",
+   "choices": [
+    "(1 ; 1)",
+    "(0 ; 1)",
+    "(1 ; 0)",
+    "(0 ; 0)"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'origine O a pour abscisse 0 et ordonnée 0.",
+   "id": "5e-maths-reperage-plan-03",
+   "tier": "application",
+   "lesson": "5e-maths-reperage-plan",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le point M a pour coordonnées (−5 ; 2). Il se trouve",
+   "choices": [
+    "à gauche de l'axe vertical et au-dessus de l'axe horizontal",
+    "à droite de l'axe vertical et au-dessus",
+    "à gauche et en dessous",
+    "sur l'axe horizontal"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Abscisse négative : gauche ; ordonnée positive : haut.",
+   "id": "5e-maths-reperage-plan-04",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-reperage-plan",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "A(2 ; 3) et A' est son symétrique par rapport à l'axe horizontal. Quelle est l'ordonnée de A' ?",
+   "answer": -3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Le symétrique par rapport à l'axe horizontal garde l'abscisse et change le signe de l'ordonnée : A'(2 ; −3).",
+   "id": "5e-maths-reperage-plan-05",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-reperage-plan",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Dans un repère, on place P(1 ; 1), Q(5 ; 1) et R(5 ; 4).",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la longueur PQ en unités (même ordonnée) ?",
+     "answer": 4,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "5 − 1 = 4.",
+     "id": "5e-maths-reperage-plan-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la longueur QR en unités (même abscisse) ?",
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "4 − 1 = 3.",
+     "id": "5e-maths-reperage-plan-06-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quelle est la nature du triangle PQR ?",
+     "choices": [
+      "Isocèle en Q",
+      "Rectangle en Q",
+      "Équilatéral",
+      "Rectangle en P"
+     ],
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "[PQ] est horizontal et [QR] vertical : angle droit en Q.",
+     "id": "5e-maths-reperage-plan-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-maths-reperage-plan-06",
+   "tier": "examen",
+   "lesson": "5e-maths-reperage-plan",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans le couple (x ; y), x s'appelle",
+   "choices": [
+    "l'ordonnée",
+    "l'origine",
+    "l'abscisse",
+    "le rayon"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "x : abscisse, y : ordonnée.",
+   "id": "5e-maths-reperage-plan-q1",
+   "tier": "autoeval",
+   "lesson": "5e-maths-reperage-plan",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un point d'abscisse 0 est situé",
+   "choices": [
+    "sur l'axe horizontal",
+    "sur l'axe vertical",
+    "à l'origine uniquement",
+    "à droite de l'axe vertical"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Si x = 0, le point est sur l'axe des ordonnées.",
+   "id": "5e-maths-reperage-plan-q2",
+   "tier": "autoeval",
+   "lesson": "5e-maths-reperage-plan",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelles coordonnées a un point situé 3 unités à gauche et 2 en bas de l'origine ?",
+   "choices": [
+    "(−3 ; −2)",
+    "(3 ; 2)",
+    "(−2 ; −3)",
+    "(−3 ; 2)"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Gauche : −3 ; bas : −2.",
+   "id": "5e-maths-reperage-plan-q3",
+   "tier": "autoeval",
+   "lesson": "5e-maths-reperage-plan",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le point (4 ; 0) est situé",
+   "choices": [
+    "sur l'axe vertical",
+    "à l'origine",
+    "au-dessus de l'axe horizontal",
+    "sur l'axe horizontal"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ordonnée 0 : sur l'axe horizontal.",
+   "id": "5e-maths-reperage-plan-q4",
+   "tier": "autoeval",
+   "lesson": "5e-maths-reperage-plan",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel couple est différent de (2 ; 5) ?",
+   "choices": [
+    "(5 ; 2)",
+    "(2 ; 5)",
+    "(+2 ; +5)",
+    "(2,0 ; 5,0)"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'ordre des coordonnées compte.",
+   "id": "5e-maths-reperage-plan-q5",
+   "tier": "autoeval",
+   "lesson": "5e-maths-reperage-plan",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

@@ -1,0 +1,2314 @@
+{
+ "chapter": "6e-maths-geometrie",
+ "lessons": [
+  {
+   "id": "6e-maths-droites-segments",
+   "title": "Points, droites, demi-droites et segments",
+   "minutes": 25,
+   "programRef": "6e — Géométrie : point, droite, demi-droite, segment, milieu, parallèles, perpendiculaires (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer droite, demi-droite et segment et utiliser leurs notations.",
+    "Reconnaître des droites parallèles et perpendiculaires, trouver le milieu d'un segment."
+   ],
+   "prerequisites": [
+    "6e-maths-decimaux"
+   ],
+   "exercises": [
+    "6e-maths-droites-segments-01",
+    "6e-maths-droites-segments-02",
+    "6e-maths-droites-segments-03",
+    "6e-maths-droites-segments-04",
+    "6e-maths-droites-segments-05",
+    "6e-maths-droites-segments-06"
+   ],
+   "selfCheck": [
+    "6e-maths-droites-segments-q1",
+    "6e-maths-droites-segments-q2",
+    "6e-maths-droites-segments-q3",
+    "6e-maths-droites-segments-q4",
+    "6e-maths-droites-segments-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Droite, demi-droite, segment",
+     "md": "- La **droite** (AB) passe par A et B et ne s'arrête jamais.\n- La **demi-droite** [AB) commence en A, passe par B et continue.\n- Le **segment** [AB] est la partie de droite comprise entre A et B ; sa longueur se note AB."
+    },
+    {
+     "type": "illustration",
+     "caption": "La droite (AB), la demi-droite [AB) et le segment [AB].",
+     "alt": "Trois tracés : une droite sans fin, une demi-droite qui part de A, un segment limité par A et B.",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 190,
+      "items": [
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 40,
+        "x2": 420,
+        "y2": 40,
+        "color": "ink",
+        "width": 2,
+        "arrow": "both"
+       },
+       {
+        "t": "circle",
+        "cx": 140,
+        "cy": 40,
+        "r": 4,
+        "fill": "ink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 300,
+        "cy": 40,
+        "r": 4,
+        "fill": "ink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 140,
+        "y": 20,
+        "text": "A",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 20,
+        "text": "B",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 390,
+        "y": 62,
+        "text": "(AB)",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 140,
+        "y1": 100,
+        "x2": 420,
+        "y2": 100,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "circle",
+        "cx": 140,
+        "cy": 100,
+        "r": 4,
+        "fill": "ink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 300,
+        "cy": 100,
+        "r": 4,
+        "fill": "ink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 140,
+        "y": 80,
+        "text": "A",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 80,
+        "text": "B",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 390,
+        "y": 122,
+        "text": "[AB)",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 140,
+        "y1": 160,
+        "x2": 300,
+        "y2": 160,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "circle",
+        "cx": 140,
+        "cy": 160,
+        "r": 4,
+        "fill": "ink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 300,
+        "cy": 160,
+        "r": 4,
+        "fill": "ink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 140,
+        "y": 140,
+        "text": "A",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 140,
+        "text": "B",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 182,
+        "text": "[AB]",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Parallèles, perpendiculaires, milieu",
+     "md": "- Deux droites **parallèles** ne se coupent jamais : on écrit $(d) \\parallel (d')$.\n- Deux droites **perpendiculaires** se coupent en formant un angle droit : $(d) \\perp (d')$.\n- Le **milieu** I de [AB] est le point de [AB] tel que AI = IB, donc $AI = \\frac{AB}{2}$."
+    },
+    {
+     "type": "illustration",
+     "caption": "À gauche, deux droites parallèles ; à droite, deux droites perpendiculaires.",
+     "alt": "Deux droites horizontales parallèles, et deux droites qui se coupent à angle droit.",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 150,
+      "items": [
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 40,
+        "x2": 200,
+        "y2": 40,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 100,
+        "x2": 200,
+        "y2": 100,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 25,
+        "text": "(d)",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 125,
+        "text": "(d')",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 280,
+        "y1": 20,
+        "x2": 280,
+        "y2": 130,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 240,
+        "y1": 90,
+        "x2": 420,
+        "y2": 90,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 80,
+        "w": 10,
+        "h": 10,
+        "stroke": "red",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 30,
+        "text": "(d1)",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 400,
+        "y": 75,
+        "text": "(d2)",
+        "size": 16,
+        "color": "blue",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : milieu",
+     "statement": "Le segment [AB] mesure 9 cm et I est son milieu. Calcule AI.",
+     "steps": [
+      {
+       "md": "I est le milieu : AI = IB."
+      },
+      {
+       "md": "Donc AI est la moitié de AB :",
+       "tex": "AI = 9 \\div 2 = 4{,}5"
+      }
+     ],
+     "answer": "**AI = 4,5 cm**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : notation",
+     "statement": "Écris avec des symboles : « le segment d'extrémités R et S » et « la demi-droite d'origine R passant par S ».",
+     "steps": [
+      {
+       "md": "Un segment se note avec des crochets fermés des deux côtés : [RS]."
+      },
+      {
+       "md": "Une demi-droite se note avec un crochet à l'origine et une parenthèse de l'autre côté : [RS)."
+      }
+     ],
+     "answer": "**[RS] et [RS)**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre (AB) et [AB] : l'une est illimitée, l'autre est limitée par A et B.\n- Placer le milieu « à peu près » : il faut mesurer, ou construire exactement.\n- Croire que deux droites qui ne se coupent pas sur la feuille sont parallèles : les droites se prolongent !"
+    }
+   ],
+   "reviewNotes": [
+    "Les notations (AB), [AB], [AB) doivent être comparées à celles des manuels officiels."
+   ]
+  },
+  {
+   "id": "6e-maths-angles",
+   "title": "Angles : mesure et types",
+   "minutes": 25,
+   "programRef": "6e — Angles : mesure, types, bissectrice (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Mesurer un angle avec le rapporteur et le nommer.",
+    "Classer un angle : aigu, droit, obtus, plat ; reconnaître la bissectrice."
+   ],
+   "prerequisites": [
+    "6e-maths-droites-segments"
+   ],
+   "exercises": [
+    "6e-maths-angles-01",
+    "6e-maths-angles-02",
+    "6e-maths-angles-03",
+    "6e-maths-angles-04",
+    "6e-maths-angles-05",
+    "6e-maths-angles-06"
+   ],
+   "selfCheck": [
+    "6e-maths-angles-q1",
+    "6e-maths-angles-q2",
+    "6e-maths-angles-q3",
+    "6e-maths-angles-q4",
+    "6e-maths-angles-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Angle et mesure",
+     "md": "Un angle est formé par deux demi-droites de même origine, le **sommet**. On le nomme avec trois lettres (le sommet au milieu) : $\\widehat{ABC}$. Sa mesure se lit au **rapporteur**, en degrés (°)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les types d'angles : aigu, droit, obtus et plat.",
+     "alt": "Quatre angles : un angle aigu, un angle droit, un angle obtus et un angle plat.",
+     "figure": {
+      "kind": "shapes",
+      "w": 460,
+      "h": 160,
+      "items": [
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 110,
+        "x2": 110.0,
+        "y2": 110.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 110,
+        "x2": 93.6,
+        "y2": 65.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "angle",
+        "x": 40,
+        "y": 110,
+        "from": 0,
+        "to": 40,
+        "r": 28,
+        "color": "red"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 140,
+        "text": "aigu",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 170,
+        "y1": 110,
+        "x2": 240.0,
+        "y2": 110.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 170,
+        "y1": 110,
+        "x2": 170.0,
+        "y2": 40.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "angle",
+        "x": 170,
+        "y": 110,
+        "from": 0,
+        "to": 90,
+        "r": 28,
+        "color": "red",
+        "right": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 140,
+        "text": "droit",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 290,
+        "y1": 110,
+        "x2": 360.0,
+        "y2": 110.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 290,
+        "y1": 110,
+        "x2": 240.5,
+        "y2": 60.5,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "angle",
+        "x": 290,
+        "y": 110,
+        "from": 0,
+        "to": 135,
+        "r": 28,
+        "color": "red"
+       },
+       {
+        "t": "text",
+        "x": 320,
+        "y": 140,
+        "text": "obtus",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 380,
+        "y1": 110,
+        "x2": 450,
+        "y2": 110,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 415,
+        "y": 140,
+        "text": "plat",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Types d'angles",
+     "md": "- **Aigu** : entre 0° et 90°.\n- **Droit** : 90°.\n- **Obtus** : entre 90° et 180°.\n- **Plat** : 180°.\nLa **bissectrice** d'un angle le partage en deux angles égaux."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : classer",
+     "statement": "Classe les angles de 35°, 90°, 128° et 180°.",
+     "steps": [
+      {
+       "md": "35° est entre 0° et 90° : aigu."
+      },
+      {
+       "md": "90° est droit, 128° est entre 90° et 180° : obtus, 180° est plat."
+      }
+     ],
+     "answer": "**35° aigu ; 90° droit ; 128° obtus ; 180° plat**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : bissectrice",
+     "statement": "L'angle $\\widehat{xOy}$ mesure 70°. Quelle est la mesure de chaque angle formé par sa bissectrice ?",
+     "steps": [
+      {
+       "md": "La bissectrice partage l'angle en deux angles égaux."
+      },
+      {
+       "md": "On divise par 2 :",
+       "tex": "70 \\div 2 = 35"
+      }
+     ],
+     "answer": "**35° chacun**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Lire la mauvaise graduation du rapporteur : on part du 0 sur l'un des côtés de l'angle.\n- Croire qu'un angle est « plus grand » parce que ses côtés sont dessinés plus longs : seule l'ouverture compte.\n- Placer le sommet au bord du rapporteur au lieu de le faire coïncider avec son centre."
+    }
+   ],
+   "reviewNotes": [
+    "Les angles complémentaires et supplémentaires peuvent être au programme de 6e ou 5e : inclus ici à titre d'extension."
+   ]
+  },
+  {
+   "id": "6e-maths-triangles-quadrilateres",
+   "title": "Triangles et quadrilatères usuels",
+   "minutes": 30,
+   "programRef": "6e — Figures usuelles : triangles et quadrilatères (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître et nommer les triangles particuliers (isocèle, équilatéral, rectangle).",
+    "Reconnaître le carré, le rectangle, le losange, le parallélogramme et le trapèze et citer leurs propriétés."
+   ],
+   "prerequisites": [
+    "6e-maths-angles"
+   ],
+   "exercises": [
+    "6e-maths-triangles-quadrilateres-01",
+    "6e-maths-triangles-quadrilateres-02",
+    "6e-maths-triangles-quadrilateres-03",
+    "6e-maths-triangles-quadrilateres-04",
+    "6e-maths-triangles-quadrilateres-05",
+    "6e-maths-triangles-quadrilateres-06"
+   ],
+   "selfCheck": [
+    "6e-maths-triangles-quadrilateres-q1",
+    "6e-maths-triangles-quadrilateres-q2",
+    "6e-maths-triangles-quadrilateres-q3",
+    "6e-maths-triangles-quadrilateres-q4",
+    "6e-maths-triangles-quadrilateres-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Triangles particuliers",
+     "md": "- **Isocèle** : deux côtés de même longueur.\n- **Équilatéral** : trois côtés de même longueur.\n- **Rectangle** : un angle droit.\nUn triangle équilatéral est aussi isocèle."
+    },
+    {
+     "type": "illustration",
+     "caption": "Trois triangles particuliers.",
+     "alt": "Un triangle isocèle, un triangle équilatéral et un triangle rectangle.",
+     "figure": {
+      "kind": "shapes",
+      "w": 460,
+      "h": 150,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         30,
+         110,
+         130,
+         110,
+         80,
+         30
+        ],
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 135,
+        "text": "isocèle",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         170,
+         110,
+         270,
+         110,
+         220,
+         24
+        ],
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 135,
+        "text": "équilatéral",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         320,
+         110,
+         430,
+         110,
+         320,
+         30
+        ],
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 320,
+        "y": 100,
+        "w": 10,
+        "h": 10,
+        "stroke": "red",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 375,
+        "y": 135,
+        "text": "rectangle",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Quadrilatères usuels",
+     "md": "- **Carré** : 4 côtés égaux, 4 angles droits.\n- **Rectangle** : 4 angles droits, côtés opposés égaux.\n- **Losange** : 4 côtés égaux.\n- **Parallélogramme** : côtés opposés parallèles (et égaux).\n- **Trapèze** : au moins une paire de côtés parallèles."
+    },
+    {
+     "type": "illustration",
+     "caption": "Quatre quadrilatères usuels.",
+     "alt": "Un carré, un rectangle, un losange et un parallélogramme.",
+     "figure": {
+      "kind": "shapes",
+      "w": 460,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 15,
+        "y": 25,
+        "w": 70,
+        "h": 70,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 50,
+        "y": 125,
+        "text": "carré",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 105,
+        "y": 35,
+        "w": 100,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 155,
+        "y": 125,
+        "text": "rectangle",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         270,
+         20,
+         310,
+         60,
+         270,
+         100,
+         230,
+         60
+        ],
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 125,
+        "text": "losange",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         330,
+         100,
+         420,
+         100,
+         450,
+         40,
+         360,
+         40
+        ],
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 390,
+        "y": 125,
+        "text": "parallélogramme",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : nature d'un triangle",
+     "statement": "Un triangle ABC a pour côtés AB = 5 cm, AC = 5 cm et BC = 7 cm. Quelle est sa nature ?",
+     "steps": [
+      {
+       "md": "Deux côtés ont la même longueur : AB = AC = 5 cm."
+      },
+      {
+       "md": "Le troisième est différent : ce n'est pas un triangle équilatéral."
+      }
+     ],
+     "answer": "**ABC est un triangle isocèle en A.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : reconnaître",
+     "statement": "Un quadrilatère a ses quatre côtés égaux et un angle droit. Quelle est sa nature ?",
+     "steps": [
+      {
+       "md": "Quatre côtés égaux : c'est un losange."
+      },
+      {
+       "md": "Avec un angle droit, tous les angles sont droits : c'est un carré."
+      }
+     ],
+     "answer": "**C'est un carré.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier qu'un carré est aussi un rectangle et un losange.\n- Appeler « rectangle » tout quadrilatère allongé : il faut 4 angles droits.\n- Croire que le trapèze doit avoir deux côtés parallèles et deux non parallèles exactement : un parallélogramme est aussi un trapèze selon la définition « au moins »."
+    }
+   ],
+   "reviewNotes": [
+    "Les propriétés des diagonales du parallélogramme et du losange sont souvent vues en 5e ; ici seulement les côtés et angles."
+   ]
+  },
+  {
+   "id": "6e-maths-cercle",
+   "title": "Le cercle : rayon, diamètre et corde",
+   "minutes": 20,
+   "programRef": "6e — Cercle : centre, rayon, diamètre, corde, arc, disque (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Utiliser le vocabulaire du cercle : centre, rayon, diamètre, corde, arc.",
+    "Utiliser la relation entre rayon et diamètre et tracer un cercle au compas."
+   ],
+   "prerequisites": [
+    "6e-maths-droites-segments"
+   ],
+   "exercises": [
+    "6e-maths-cercle-01",
+    "6e-maths-cercle-02",
+    "6e-maths-cercle-03",
+    "6e-maths-cercle-04",
+    "6e-maths-cercle-05",
+    "6e-maths-cercle-06"
+   ],
+   "selfCheck": [
+    "6e-maths-cercle-q1",
+    "6e-maths-cercle-q2",
+    "6e-maths-cercle-q3",
+    "6e-maths-cercle-q4",
+    "6e-maths-cercle-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Cercle et disque",
+     "md": "Le **cercle** de centre O et de rayon r est l'ensemble des points situés à la distance r de O. Le **disque** est le cercle avec son intérieur. Un **rayon** relie le centre à un point du cercle ; un **diamètre** passe par le centre ; une **corde** relie deux points du cercle."
+    },
+    {
+     "type": "illustration",
+     "caption": "Un cercle, son centre, un diamètre (en deux rayons) et une corde.",
+     "alt": "Un cercle avec un diamètre horizontal dessiné en deux rayons et une corde oblique.",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 220,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 110,
+        "r": 90,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 110,
+        "r": 3,
+        "fill": "ink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 110,
+        "x2": 290,
+        "y2": 110,
+        "color": "red",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 110,
+        "x2": 200,
+        "y2": 110,
+        "color": "blue",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 135,
+        "y1": 175,
+        "x2": 270,
+        "y2": 55,
+        "color": "green",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 128,
+        "text": "O",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 98,
+        "text": "rayon",
+        "size": 14,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 98,
+        "text": "rayon",
+        "size": 14,
+        "color": "blue",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 150,
+        "text": "corde",
+        "size": 14,
+        "color": "green",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 215,
+        "text": "diamètre = 2 rayons",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Rayon et diamètre",
+     "md": "$d = 2 \\times r$ et $r = \\frac{d}{2}$. Le diamètre est la plus longue corde du cercle. Pour tracer un cercle de rayon 3 cm, on écarte les pointes du compas de 3 cm."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : rayon et diamètre",
+     "statement": "Un cercle a un diamètre de 9 cm. Quel est son rayon ?",
+     "steps": [
+      {
+       "md": "Le rayon est la moitié du diamètre."
+      },
+      {
+       "md": "On calcule :",
+       "tex": "r = 9 \\div 2 = 4{,}5"
+      }
+     ],
+     "answer": "**r = 4,5 cm**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : position d'un point",
+     "statement": "Un cercle de centre O a un rayon de 5 cm. Où se trouve un point M tel que OM = 7 cm ?",
+     "steps": [
+      {
+       "md": "On compare OM au rayon : 7 > 5."
+      },
+      {
+       "md": "Un point à une distance supérieure au rayon est à l'extérieur du cercle."
+      }
+     ],
+     "answer": "**M est à l'extérieur du cercle.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre rayon et diamètre : le diamètre vaut deux rayons.\n- Croire que toute corde passe par le centre : seul le diamètre le fait.\n- Dire que le centre est un point du cercle : il est à l'intérieur, à la distance r de tous les points du cercle."
+    }
+   ],
+   "reviewNotes": [
+    "Rien de particulièrement douteux ; vérifier le vocabulaire « disque » / « cercle » dans les manuels officiels."
+   ]
+  },
+  {
+   "id": "6e-maths-symetrie-axiale",
+   "title": "Symétrie axiale",
+   "minutes": 25,
+   "programRef": "6e — Symétrie axiale : symétrique d'un point, d'une figure, axes de symétrie (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Construire le symétrique d'un point, d'un segment, d'une figure par rapport à une droite.",
+    "Reconnaître les axes de symétrie d'une figure usuelle."
+   ],
+   "prerequisites": [
+    "6e-maths-triangles-quadrilateres",
+    "6e-maths-cercle"
+   ],
+   "exercises": [
+    "6e-maths-symetrie-axiale-01",
+    "6e-maths-symetrie-axiale-02",
+    "6e-maths-symetrie-axiale-03",
+    "6e-maths-symetrie-axiale-04",
+    "6e-maths-symetrie-axiale-05",
+    "6e-maths-symetrie-axiale-06"
+   ],
+   "selfCheck": [
+    "6e-maths-symetrie-axiale-q1",
+    "6e-maths-symetrie-axiale-q2",
+    "6e-maths-symetrie-axiale-q3",
+    "6e-maths-symetrie-axiale-q4",
+    "6e-maths-symetrie-axiale-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Symétrique d'un point",
+     "md": "Le symétrique de A par rapport à la droite (d) est le point A' tel que (d) coupe [AA'] en son milieu et à angle droit. Si A est sur (d), A' = A."
+    },
+    {
+     "type": "illustration",
+     "caption": "Le triangle A'B'C' est le symétrique de ABC par rapport à (d).",
+     "alt": "Deux triangles de part et d'autre d'une droite verticale en pointillés, symétriques l'un de l'autre.",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 200,
+      "items": [
+       {
+        "t": "line",
+        "x1": 220,
+        "y1": 10,
+        "x2": 220,
+        "y2": 190,
+        "color": "red",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "text",
+        "x": 238,
+        "y": 22,
+        "text": "(d)",
+        "size": 16,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         100,
+         50,
+         180,
+         80,
+         120,
+         150
+        ],
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "poly",
+        "pts": [
+         340,
+         50,
+         260,
+         80,
+         320,
+         150
+        ],
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 45,
+        "text": "A",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 195,
+        "y": 70,
+        "text": "B",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 168,
+        "text": "C",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 355,
+        "y": 45,
+        "text": "A'",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 245,
+        "y": 70,
+        "text": "B'",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 168,
+        "text": "C'",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Ce que conserve la symétrie",
+     "md": "La symétrie axiale **conserve** les longueurs, les mesures d'angles, le parallélisme et l'alignement. Le symétrique d'un segment est un segment de même longueur ; le symétrique d'un cercle est un cercle de même rayon."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : distances",
+     "statement": "A' est le symétrique de A par rapport à (d) et A est à 3 cm de (d). Quelle est la longueur AA' ?",
+     "steps": [
+      {
+       "md": "(d) coupe [AA'] en son milieu : la distance de A à (d) est la moitié de AA'."
+      },
+      {
+       "md": "AA' = 2 × 3 = 6 cm."
+      }
+     ],
+     "answer": "**AA' = 6 cm**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : axes de symétrie",
+     "statement": "Combien d'axes de symétrie a un rectangle qui n'est pas un carré ?",
+     "steps": [
+      {
+       "md": "Un axe passe par les milieux des deux grands côtés."
+      },
+      {
+       "md": "Un autre passe par les milieux des deux petits côtés. Les diagonales ne sont pas des axes."
+      }
+     ],
+     "answer": "**2 axes de symétrie**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Construire A' « du même côté » ou en décalant sans l'équerre : A' doit se trouver sur la perpendiculaire à (d) passant par A.\n- Croire que les diagonales d'un rectangle sont des axes de symétrie : c'est faux (vrai pour le carré).\n- Oublier que le symétrique d'un point de l'axe est ce point lui-même."
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier la formulation exacte de la définition (médiatrice du segment [AA']) dans le programme ; ici on parle de « perpendiculaire à l'axe et à égale distance »."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quelle figure est limitée par deux points A et B ?",
+   "choices": [
+    "La droite (AB)",
+    "La demi-droite [AB)",
+    "Le segment [AB]",
+    "La demi-droite [BA)"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Seul le segment [AB] s'arrête en A et en B.",
+   "id": "6e-maths-droites-segments-01",
+   "tier": "application",
+   "lesson": "6e-maths-droites-segments",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "I est le milieu de [CD] et CD = 14 cm. Combien mesure CI (cm) ?",
+   "answer": 7,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "CI = 14 ÷ 2 = 7 cm.",
+   "id": "6e-maths-droites-segments-02",
+   "tier": "application",
+   "lesson": "6e-maths-droites-segments",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : deux droites perpendiculaires forment un angle droit.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est la définition de la perpendicularité.",
+   "id": "6e-maths-droites-segments-03",
+   "tier": "application",
+   "lesson": "6e-maths-droites-segments",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Sur une droite, A, B, C sont alignés dans cet ordre avec AB = 3,5 cm et BC = 4,8 cm. Combien mesure AC (cm) ?",
+   "answer": 8.3,
+   "tolerance": 0.001,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "B est entre A et C : AC = AB + BC = 3,5 + 4,8 = 8,3 cm.",
+   "id": "6e-maths-droites-segments-04",
+   "tier": "approfondissement",
+   "lesson": "6e-maths-droites-segments",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Deux droites sont perpendiculaires à une même troisième droite. Elles sont",
+   "choices": [
+    "perpendiculaires entre elles",
+    "confondues dans tous les cas",
+    "parallèles entre elles",
+    "sécantes en un point"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Deux droites perpendiculaires à une même droite sont parallèles.",
+   "id": "6e-maths-droites-segments-05",
+   "tier": "approfondissement",
+   "lesson": "6e-maths-droites-segments",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Sur la route de Bafoussam, Mballa note : le village A est à 12 km du village B ; le village C est le milieu de [AB].",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle distance sépare A de C (km) ?",
+     "answer": 6,
+     "unit": "km",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "AC = 12 ÷ 2 = 6 km.",
+     "id": "6e-maths-droites-segments-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle distance sépare B de C (km) ?",
+     "answer": 6,
+     "unit": "km",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "C est le milieu : CB = AC = 6 km.",
+     "id": "6e-maths-droites-segments-06-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quelle notation désigne la route entre A et B, avec ses extrémités ?",
+     "choices": [
+      "[AB]",
+      "(AB)",
+      "[AB)",
+      "AB)"
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Un segment se note [AB].",
+     "id": "6e-maths-droites-segments-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "6e-maths-droites-segments-06",
+   "tier": "examen",
+   "lesson": "6e-maths-droites-segments",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment note-t-on la droite passant par M et N ?",
+   "choices": [
+    "[MN]",
+    "[MN)",
+    "(MN)",
+    "MN]"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Une droite se note avec des parenthèses : (MN).",
+   "id": "6e-maths-droites-segments-q1",
+   "tier": "autoeval",
+   "lesson": "6e-maths-droites-segments",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que signifie $(d) \\perp (d')$ ?",
+   "choices": [
+    "Les droites sont parallèles",
+    "Les droites sont confondues",
+    "Les droites mesurent 90 cm",
+    "Les droites forment un angle droit"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le symbole ⟂ signifie « perpendiculaire à ».",
+   "id": "6e-maths-droites-segments-q2",
+   "tier": "autoeval",
+   "lesson": "6e-maths-droites-segments",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Si I est le milieu de [EF] et EI = 2,5 cm, alors EF vaut",
+   "choices": [
+    "2,5 cm",
+    "1,25 cm",
+    "5 cm",
+    "7,5 cm"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "EF = 2 × EI = 5 cm.",
+   "id": "6e-maths-droites-segments-q3",
+   "tier": "autoeval",
+   "lesson": "6e-maths-droites-segments",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une demi-droite a combien d'extrémités ?",
+   "choices": [
+    "Deux",
+    "Zéro",
+    "Trois",
+    "Une"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle a une origine et se prolonge indéfiniment de l'autre côté.",
+   "id": "6e-maths-droites-segments-q4",
+   "tier": "autoeval",
+   "lesson": "6e-maths-droites-segments",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Deux droites parallèles",
+   "choices": [
+    "ne se coupent jamais",
+    "se coupent en un point",
+    "sont toujours verticales",
+    "forment un angle droit"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Parallèles : aucun point commun (sauf si elles sont confondues).",
+   "id": "6e-maths-droites-segments-q5",
+   "tier": "autoeval",
+   "lesson": "6e-maths-droites-segments",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un angle de 72° est",
+   "choices": [
+    "droit",
+    "aigu",
+    "obtus",
+    "plat"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "72° est strictement entre 0° et 90°.",
+   "id": "6e-maths-angles-01",
+   "tier": "application",
+   "lesson": "6e-maths-angles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un angle de 150° est",
+   "choices": [
+    "aigu",
+    "droit",
+    "obtus",
+    "plat"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "90° < 150° < 180°.",
+   "id": "6e-maths-angles-02",
+   "tier": "application",
+   "lesson": "6e-maths-angles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Quelle est la mesure (en degrés) d'un angle plat ?",
+   "answer": 180,
+   "unit": "°",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un angle plat mesure 180°.",
+   "id": "6e-maths-angles-03",
+   "tier": "application",
+   "lesson": "6e-maths-angles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Deux angles sont complémentaires s'ils forment ensemble un angle droit. Quelle est la mesure du complément de 35° (°) ?",
+   "answer": 55,
+   "unit": "°",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "90 − 35 = 55.",
+   "id": "6e-maths-angles-04",
+   "tier": "approfondissement",
+   "lesson": "6e-maths-angles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Deux angles adjacents forment un angle plat. L'un mesure 125°. Quelle est la mesure de l'autre (°) ?",
+   "answer": 55,
+   "unit": "°",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "180 − 125 = 55.",
+   "id": "6e-maths-angles-05",
+   "tier": "approfondissement",
+   "lesson": "6e-maths-angles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "L'angle $\\widehat{AOB}$ mesure 84°. [OM) est sa bissectrice.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la mesure de $\\widehat{AOM}$ (°) ?",
+     "answer": 42,
+     "unit": "°",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "84 ÷ 2 = 42.",
+     "id": "6e-maths-angles-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quelle est la nature de $\\widehat{AOB}$ ?",
+     "choices": [
+      "Aigu",
+      "Droit",
+      "Obtus",
+      "Plat"
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "84° < 90°.",
+     "id": "6e-maths-angles-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la mesure de l'angle qui complète $\\widehat{AOB}$ pour former un angle plat (°) ?",
+     "answer": 96,
+     "unit": "°",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "180 − 84 = 96.",
+     "id": "6e-maths-angles-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "6e-maths-angles-06",
+   "tier": "examen",
+   "lesson": "6e-maths-angles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle mesure correspond à un angle obtus ?",
+   "choices": [
+    "110°",
+    "45°",
+    "90°",
+    "180°"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "110° est compris entre 90° et 180°.",
+   "id": "6e-maths-angles-q1",
+   "tier": "autoeval",
+   "lesson": "6e-maths-angles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Avec quel instrument mesure-t-on un angle ?",
+   "choices": [
+    "La règle graduée",
+    "Le rapporteur",
+    "Le compas",
+    "L'équerre uniquement"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le rapporteur donne la mesure en degrés.",
+   "id": "6e-maths-angles-q2",
+   "tier": "autoeval",
+   "lesson": "6e-maths-angles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment se note l'angle de sommet B formé avec A et C ?",
+   "choices": [
+    "$\\widehat{BAC}$",
+    "$\\widehat{ABC}$",
+    "$\\widehat{BCA}$",
+    "$\\widehat{CAB}$"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La lettre du sommet est au milieu : A B C.",
+   "id": "6e-maths-angles-q3",
+   "tier": "autoeval",
+   "lesson": "6e-maths-angles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La bissectrice d'un angle de 120° forme deux angles de",
+   "choices": [
+    "30°",
+    "240°",
+    "90°",
+    "60°"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "120 ÷ 2 = 60.",
+   "id": "6e-maths-angles-q4",
+   "tier": "autoeval",
+   "lesson": "6e-maths-angles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un angle droit mesure",
+   "choices": [
+    "45°",
+    "180°",
+    "90°",
+    "100°"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Par définition, 90°.",
+   "id": "6e-maths-angles-q5",
+   "tier": "autoeval",
+   "lesson": "6e-maths-angles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un triangle qui a trois côtés égaux est",
+   "choices": [
+    "isocèle seulement",
+    "rectangle",
+    "équilatéral",
+    "quelconque"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Trois côtés égaux : équilatéral.",
+   "id": "6e-maths-triangles-quadrilateres-01",
+   "tier": "application",
+   "lesson": "6e-maths-triangles-quadrilateres",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Combien un carré a-t-il d'angles droits ?",
+   "answer": 4,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un carré a 4 angles droits.",
+   "id": "6e-maths-triangles-quadrilateres-02",
+   "tier": "application",
+   "lesson": "6e-maths-triangles-quadrilateres",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque quadrilatère à une propriété.",
+   "pairs": [
+    [
+     "Carré",
+     "4 côtés égaux et 4 angles droits"
+    ],
+    [
+     "Rectangle",
+     "4 angles droits"
+    ],
+    [
+     "Losange",
+     "4 côtés égaux"
+    ],
+    [
+     "Trapèze",
+     "au moins une paire de côtés parallèles"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 1,
+   "explanation": "Chaque figure se reconnaît à sa propriété caractéristique.",
+   "id": "6e-maths-triangles-quadrilateres-03",
+   "tier": "application",
+   "lesson": "6e-maths-triangles-quadrilateres",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un rectangle dont les quatre côtés sont égaux est",
+   "choices": [
+    "un carré",
+    "un trapèze non parallélogramme",
+    "un triangle",
+    "un losange sans angle droit"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Rectangle (4 angles droits) + 4 côtés égaux = carré.",
+   "id": "6e-maths-triangles-quadrilateres-04",
+   "tier": "approfondissement",
+   "lesson": "6e-maths-triangles-quadrilateres",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Le périmètre d'un losange est 28 cm. Quelle est la longueur d'un côté (cm) ?",
+   "answer": 7,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "28 ÷ 4 = 7 cm.",
+   "id": "6e-maths-triangles-quadrilateres-05",
+   "tier": "approfondissement",
+   "lesson": "6e-maths-triangles-quadrilateres",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Boris trace un triangle EFG avec EF = 6 cm, EG = 6 cm et FG = 6 cm.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quelle est la nature de EFG ?",
+     "choices": [
+      "Rectangle",
+      "Équilatéral",
+      "Isocèle non équilatéral",
+      "Quelconque"
+     ],
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Les trois côtés sont égaux.",
+     "id": "6e-maths-triangles-quadrilateres-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quel est son périmètre (cm) ?",
+     "answer": 18,
+     "unit": "cm",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "3 × 6 = 18 cm.",
+     "id": "6e-maths-triangles-quadrilateres-06-b"
+    },
+    {
+     "kind": "truefalse",
+     "prompt": "Le triangle EFG est aussi isocèle.",
+     "answer": true,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Il a au moins deux côtés égaux.",
+     "id": "6e-maths-triangles-quadrilateres-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "6e-maths-triangles-quadrilateres-06",
+   "tier": "examen",
+   "lesson": "6e-maths-triangles-quadrilateres",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un triangle ayant un angle droit s'appelle",
+   "choices": [
+    "un triangle isocèle",
+    "un triangle équilatéral",
+    "un triangle rectangle",
+    "un triangle obtus"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un angle droit : triangle rectangle.",
+   "id": "6e-maths-triangles-quadrilateres-q1",
+   "tier": "autoeval",
+   "lesson": "6e-maths-triangles-quadrilateres",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle figure a toujours quatre côtés égaux ?",
+   "choices": [
+    "Le rectangle",
+    "Le trapèze",
+    "Le parallélogramme",
+    "Le losange"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le losange (le carré en est un cas particulier).",
+   "id": "6e-maths-triangles-quadrilateres-q2",
+   "tier": "autoeval",
+   "lesson": "6e-maths-triangles-quadrilateres",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien de côtés a un quadrilatère ?",
+   "choices": [
+    "3",
+    "5",
+    "4",
+    "6"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Quadri = quatre.",
+   "id": "6e-maths-triangles-quadrilateres-q3",
+   "tier": "autoeval",
+   "lesson": "6e-maths-triangles-quadrilateres",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans un rectangle de longueur 8 cm et de largeur 3 cm, le côté opposé à la longueur mesure",
+   "choices": [
+    "3 cm",
+    "11 cm",
+    "5 cm",
+    "8 cm"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les côtés opposés d'un rectangle sont égaux.",
+   "id": "6e-maths-triangles-quadrilateres-q4",
+   "tier": "autoeval",
+   "lesson": "6e-maths-triangles-quadrilateres",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel quadrilatère a seulement une paire de côtés parallèles imposée ?",
+   "choices": [
+    "Le carré",
+    "Le trapèze",
+    "Le rectangle",
+    "Le losange"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le trapèze est défini par une paire de côtés parallèles.",
+   "id": "6e-maths-triangles-quadrilateres-q5",
+   "tier": "autoeval",
+   "lesson": "6e-maths-triangles-quadrilateres",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Le rayon d'un cercle est 7 cm. Quel est son diamètre (cm) ?",
+   "answer": 14,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "d = 2 × 7 = 14 cm.",
+   "id": "6e-maths-cercle-01",
+   "tier": "application",
+   "lesson": "6e-maths-cercle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un segment qui relie deux points du cercle en passant par le centre est",
+   "choices": [
+    "un diamètre",
+    "un rayon",
+    "un arc",
+    "une tangente"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il passe par le centre : c'est un diamètre.",
+   "id": "6e-maths-cercle-02",
+   "tier": "application",
+   "lesson": "6e-maths-cercle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Le diamètre d'un disque est 12 cm. Quel est son rayon (cm) ?",
+   "answer": 6,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "12 ÷ 2 = 6.",
+   "id": "6e-maths-cercle-03",
+   "tier": "application",
+   "lesson": "6e-maths-cercle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un cercle de centre O a un rayon de 4 cm. Un point P est à 3 cm de O. P est",
+   "choices": [
+    "sur le cercle",
+    "à l'extérieur du cercle",
+    "à l'intérieur du disque",
+    "au centre"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "3 < 4 : P est à l'intérieur.",
+   "id": "6e-maths-cercle-04",
+   "tier": "approfondissement",
+   "lesson": "6e-maths-cercle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Deux cercles de même centre O ont pour rayons 3 cm et 8 cm. Quelle est la distance entre un point de chaque cercle sur la même demi-droite issue de O (cm) ?",
+   "answer": 5,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "8 − 3 = 5 cm.",
+   "id": "6e-maths-cercle-05",
+   "tier": "approfondissement",
+   "lesson": "6e-maths-cercle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Amina trace un cercle de centre O et de rayon 5 cm. A et B sont deux points du cercle avec [AB] diamètre.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la longueur AB (cm) ?",
+     "answer": 10,
+     "unit": "cm",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "AB = 2 × 5 = 10 cm.",
+     "id": "6e-maths-cercle-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la longueur OA (cm) ?",
+     "answer": 5,
+     "unit": "cm",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "OA est un rayon : 5 cm.",
+     "id": "6e-maths-cercle-06-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quelle est la nature du triangle OAC si C est un point du cercle (C différent de A et B) ?",
+     "choices": [
+      "Isocèle en O",
+      "Équilatéral toujours",
+      "Rectangle en O toujours",
+      "Quelconque"
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "OA = OC = 5 cm (rayons) : isocèle en O.",
+     "id": "6e-maths-cercle-06-c"
+    }
+   ],
+   "difficulty": 3,
+   "id": "6e-maths-cercle-06",
+   "tier": "examen",
+   "lesson": "6e-maths-cercle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le plus grand segment que l'on peut tracer entre deux points d'un cercle est",
+   "choices": [
+    "le rayon",
+    "la corde la plus courte",
+    "le diamètre",
+    "l'arc"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le diamètre est la plus longue corde.",
+   "id": "6e-maths-cercle-q1",
+   "tier": "autoeval",
+   "lesson": "6e-maths-cercle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel instrument sert à tracer un cercle ?",
+   "choices": [
+    "Le rapporteur",
+    "Le compas",
+    "L'équerre",
+    "La règle seule"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On écarte le compas du rayon voulu.",
+   "id": "6e-maths-cercle-q2",
+   "tier": "autoeval",
+   "lesson": "6e-maths-cercle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Si le diamètre mesure 20 cm, le rayon mesure",
+   "choices": [
+    "40 cm",
+    "10 cm",
+    "20 cm",
+    "5 cm"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "20 ÷ 2 = 10.",
+   "id": "6e-maths-cercle-q3",
+   "tier": "autoeval",
+   "lesson": "6e-maths-cercle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Tous les points d'un cercle sont",
+   "choices": [
+    "alignés",
+    "à la même distance du centre",
+    "sur une même droite",
+    "à des distances différentes du centre"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est la définition du cercle.",
+   "id": "6e-maths-cercle-q4",
+   "tier": "autoeval",
+   "lesson": "6e-maths-cercle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une corde est un segment qui",
+   "choices": [
+    "relie le centre à un point",
+    "est toujours un diamètre",
+    "relie deux points du cercle",
+    "est à l'extérieur"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Corde : deux extrémités sur le cercle.",
+   "id": "6e-maths-cercle-q5",
+   "tier": "autoeval",
+   "lesson": "6e-maths-cercle",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Combien un carré a-t-il d'axes de symétrie ?",
+   "answer": 4,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Deux médianes et deux diagonales.",
+   "id": "6e-maths-symetrie-axiale-01",
+   "tier": "application",
+   "lesson": "6e-maths-symetrie-axiale",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Combien un triangle équilatéral a-t-il d'axes de symétrie ?",
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un par sommet (hauteur issue de chaque sommet).",
+   "id": "6e-maths-symetrie-axiale-02",
+   "tier": "application",
+   "lesson": "6e-maths-symetrie-axiale",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un point M est à 4,5 cm de l'axe (d). À quelle distance de (d) est son symétrique M' (cm) ?",
+   "answer": 4.5,
+   "tolerance": 0.001,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La symétrie conserve la distance à l'axe.",
+   "id": "6e-maths-symetrie-axiale-03",
+   "tier": "application",
+   "lesson": "6e-maths-symetrie-axiale",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un segment [AB] de 7 cm a pour symétrique [A'B']. Que vaut A'B' ?",
+   "choices": [
+    "7 cm",
+    "3,5 cm",
+    "14 cm",
+    "On ne peut pas savoir"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "La symétrie conserve les longueurs.",
+   "id": "6e-maths-symetrie-axiale-04",
+   "tier": "approfondissement",
+   "lesson": "6e-maths-symetrie-axiale",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un angle de 38° a pour symétrique un angle de",
+   "choices": [
+    "52°",
+    "142°",
+    "76°",
+    "38°"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "La symétrie axiale conserve les mesures d'angles.",
+   "id": "6e-maths-symetrie-axiale-05",
+   "tier": "approfondissement",
+   "lesson": "6e-maths-symetrie-axiale",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Nkeng dessine un triangle ABC avec AB = 5 cm, BC = 6 cm, $\\widehat{ABC}$ = 70°. Il construit son symétrique A'B'C' par rapport à une droite (d).",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Que vaut A'B' (cm) ?",
+     "answer": 5,
+     "unit": "cm",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Conservation des longueurs.",
+     "id": "6e-maths-symetrie-axiale-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Que vaut la mesure de $\\widehat{A'B'C'}$ (°) ?",
+     "answer": 70,
+     "unit": "°",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Conservation des angles.",
+     "id": "6e-maths-symetrie-axiale-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quel est le périmètre de A'B'C' sachant que AC = 7 cm (cm) ?",
+     "answer": 18,
+     "unit": "cm",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Même périmètre : 5 + 6 + 7 = 18 cm.",
+     "id": "6e-maths-symetrie-axiale-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "6e-maths-symetrie-axiale-06",
+   "tier": "examen",
+   "lesson": "6e-maths-symetrie-axiale",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien un cercle a-t-il d'axes de symétrie ?",
+   "choices": [
+    "Aucun",
+    "Une infinité (tous les diamètres)",
+    "Un seul",
+    "Deux"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Toute droite passant par le centre est un axe de symétrie.",
+   "id": "6e-maths-symetrie-axiale-q1",
+   "tier": "autoeval",
+   "lesson": "6e-maths-symetrie-axiale",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le symétrique d'un point appartenant à l'axe est",
+   "choices": [
+    "un point différent sur l'axe",
+    "ce point lui-même",
+    "le centre du cercle",
+    "inexistant"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Sa distance à l'axe est 0 : il ne bouge pas.",
+   "id": "6e-maths-symetrie-axiale-q2",
+   "tier": "autoeval",
+   "lesson": "6e-maths-symetrie-axiale",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La symétrie axiale conserve",
+   "choices": [
+    "seulement les longueurs",
+    "seulement les angles",
+    "les longueurs et les angles",
+    "ni les longueurs ni les angles"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Une symétrie axiale ne déforme pas la figure.",
+   "id": "6e-maths-symetrie-axiale-q3",
+   "tier": "autoeval",
+   "lesson": "6e-maths-symetrie-axiale",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien un rectangle non carré a-t-il d'axes de symétrie ?",
+   "choices": [
+    "4",
+    "1",
+    "0",
+    "2"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les deux médianes.",
+   "id": "6e-maths-symetrie-axiale-q4",
+   "tier": "autoeval",
+   "lesson": "6e-maths-symetrie-axiale",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans la symétrie de A en A' par rapport à (d), la droite (d) est",
+   "choices": [
+    "perpendiculaire à (AA') en son milieu",
+    "parallèle à (AA')",
+    "confondue avec (AA')",
+    "sans lien avec A et A'"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est la définition de la symétrie axiale.",
+   "id": "6e-maths-symetrie-axiale-q5",
+   "tier": "autoeval",
+   "lesson": "6e-maths-symetrie-axiale",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

@@ -1,0 +1,751 @@
+{
+ "chapter": "5e-maths-litteral",
+ "lessons": [
+  {
+   "id": "5e-maths-expressions-litterales",
+   "title": "Expressions littérales : écrire, calculer, réduire",
+   "minutes": 25,
+   "programRef": "5e — Initiation au calcul littéral : expression, valeur numérique, réduction, distributivité (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Écrire une expression littérale et en calculer la valeur pour une valeur donnée.",
+    "Réduire une somme simple (3x + 2x) et utiliser la distributivité sur des cas simples."
+   ],
+   "prerequisites": [
+    "5e-maths-relatifs-addition"
+   ],
+   "exercises": [
+    "5e-maths-expressions-litterales-01",
+    "5e-maths-expressions-litterales-02",
+    "5e-maths-expressions-litterales-03",
+    "5e-maths-expressions-litterales-04",
+    "5e-maths-expressions-litterales-05",
+    "5e-maths-expressions-litterales-06"
+   ],
+   "selfCheck": [
+    "5e-maths-expressions-litterales-q1",
+    "5e-maths-expressions-litterales-q2",
+    "5e-maths-expressions-litterales-q3",
+    "5e-maths-expressions-litterales-q4",
+    "5e-maths-expressions-litterales-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Expression littérale",
+     "md": "Une **expression littérale** contient des lettres qui représentent des nombres. On remplace la lettre par un nombre pour obtenir la **valeur numérique**. On omet le signe × devant une lettre : $3x$ signifie $3 \\times x$."
+    },
+    {
+     "type": "illustration",
+     "caption": "Le périmètre d'un carré de côté x est P = 4x.",
+     "alt": "Un carré de côté x et la formule P égale quatre x.",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 30,
+        "w": 150,
+        "h": 70,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 135,
+        "y": 72,
+        "text": "x",
+        "size": 24,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 135,
+        "y": 125,
+        "text": "côté x",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 50,
+        "text": "Périmètre",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 80,
+        "text": "P = 4x",
+        "size": 20,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 115,
+        "text": "x = 5 : P = 20",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Réduire et distribuer",
+     "md": "- **Réduire** : $3x + 2x = 5x$ (on additionne les coefficients) ; on ne mélange pas $x$ et un nombre : $3x + 2$ ne se réduit pas.\n- **Distributivité** : $k \\times (a + b) = k \\times a + k \\times b$. Exemple : $2(x + 5) = 2x + 10$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : valeur numérique",
+     "statement": "Calcule $A = 3x + 5$ pour $x = 4$ puis pour $x = 0$.",
+     "steps": [
+      {
+       "md": "x = 4 : A = 3 × 4 + 5 = 12 + 5 = 17."
+      },
+      {
+       "md": "x = 0 : A = 3 × 0 + 5 = 5."
+      }
+     ],
+     "answer": "**17 puis 5**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : réduire et développer",
+     "statement": "Réduis $B = 5x + 2 + 3x - 1$ puis développe $C = 4(x + 3)$.",
+     "steps": [
+      {
+       "md": "On regroupe : 5x + 3x = 8x et 2 − 1 = 1, donc B = 8x + 1."
+      },
+      {
+       "md": "On distribue : C = 4 × x + 4 × 3 = 4x + 12."
+      }
+     ],
+     "answer": "**B = 8x + 1 ; C = 4x + 12**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Réduire $3x + 2$ en $5x$ : on ne peut additionner que des termes de même nature.\n- Oublier de distribuer à TOUS les termes : $2(x + 5)$ n'est pas $2x + 5$.\n- Confondre $3x$ (3 fois x) avec 3 + x ou « 3x » comme nombre à deux chiffres."
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier jusqu'où va le développement en 5e (k(a + b) seulement avec des nombres positifs ici)."
+   ]
+  },
+  {
+   "id": "5e-maths-equations-simples",
+   "title": "Équations simples et mise en équation",
+   "minutes": 30,
+   "programRef": "5e — Équations du premier degré simples (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Résoudre une équation du type x + a = b, ax = b ou ax + b = c.",
+    "Traduire un problème simple par une équation."
+   ],
+   "prerequisites": [
+    "5e-maths-expressions-litterales"
+   ],
+   "exercises": [
+    "5e-maths-equations-simples-01",
+    "5e-maths-equations-simples-02",
+    "5e-maths-equations-simples-03",
+    "5e-maths-equations-simples-04",
+    "5e-maths-equations-simples-05",
+    "5e-maths-equations-simples-06"
+   ],
+   "selfCheck": [
+    "5e-maths-equations-simples-q1",
+    "5e-maths-equations-simples-q2",
+    "5e-maths-equations-simples-q3",
+    "5e-maths-equations-simples-q4",
+    "5e-maths-equations-simples-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Équation",
+     "md": "Une **équation** est une égalité contenant une inconnue, souvent x. **Résoudre** l'équation, c'est trouver la valeur de x qui la rend vraie (la solution). On vérifie en remplaçant x dans l'équation."
+    },
+    {
+     "type": "illustration",
+     "caption": "Une balance en équilibre : ce qu'on fait d'un côté, on le fait de l'autre.",
+     "alt": "Une balance avec x d'un côté et deux masses de l'autre.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 140,
+      "items": [
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 100,
+        "x2": 310,
+        "y2": 100,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 100,
+        "x2": 210,
+        "y2": 55,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 60,
+        "w": 60,
+        "h": 35,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 83,
+        "text": "x",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 60,
+        "w": 40,
+        "h": 35,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 83,
+        "text": "5",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 272,
+        "y": 60,
+        "w": 36,
+        "h": 35,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 83,
+        "text": "7",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 128,
+        "text": "x = 5 + 7 = 12",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Règle de la balance",
+     "md": "On peut **ajouter ou soustraire** le même nombre aux deux membres, ou les **multiplier ou diviser** par un même nombre non nul. Exemple : $x + 5 = 12$ donne $x = 12 - 5 = 7$ ; $3x = 15$ donne $x = 15 \\div 3 = 5$."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : deux étapes",
+     "statement": "Résous $2x + 3 = 11$.",
+     "steps": [
+      {
+       "md": "On retire 3 des deux côtés : 2x = 11 − 3 = 8."
+      },
+      {
+       "md": "On divise par 2 :",
+       "tex": "x = 8 \\div 2 = 4"
+      }
+     ],
+     "answer": "**x = 4** (vérif. : 2 × 4 + 3 = 11)"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : problème",
+     "statement": "Boris a x billes. Après en avoir gagné 8, il en a 20. Combien en avait-il ?",
+     "steps": [
+      {
+       "md": "On écrit l'équation : x + 8 = 20."
+      },
+      {
+       "md": "On retire 8 des deux côtés : x = 20 − 8 = 12."
+      }
+     ],
+     "answer": "**Boris avait 12 billes.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Changer un seul membre : x + 5 = 12 → x = 12 + 5 (faux). Pour supprimer + 5, on retire 5.\n- Oublier de vérifier la solution dans l'énoncé.\n- Résoudre sans écrire l'inconnue : toujours définir « soit x le nombre de … »."
+    }
+   ],
+   "reviewNotes": [
+    "À vérifier : en 5e, certains programmes se limitent à x + a = b et ax = b ; ax + b = c peut relever de la 4e."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Calcule 2x + 7 pour x = 5.",
+   "answer": 17,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "2 × 5 + 7 = 17.",
+   "id": "5e-maths-expressions-litterales-01",
+   "tier": "application",
+   "lesson": "5e-maths-expressions-litterales",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Réduis 4x + 3x.",
+   "choices": [
+    "7x",
+    "7x²",
+    "12x",
+    "7"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "4x + 3x = (4 + 3)x = 7x.",
+   "id": "5e-maths-expressions-litterales-02",
+   "tier": "application",
+   "lesson": "5e-maths-expressions-litterales",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Développe 3(x + 2).",
+   "choices": [
+    "3x + 2",
+    "x + 6",
+    "3x + 5",
+    "3x + 6"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "3 × x + 3 × 2.",
+   "id": "5e-maths-expressions-litterales-03",
+   "tier": "application",
+   "lesson": "5e-maths-expressions-litterales",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un rectangle a pour longueur x + 3 et pour largeur 2 (cm). Quel est son périmètre pour x = 5 (cm) ?",
+   "answer": 20,
+   "unit": "cm",
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "P = 2 × (x + 3 + 2) = 2 × (5 + 5) = 20.",
+   "id": "5e-maths-expressions-litterales-04",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-expressions-litterales",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Réduis 6x + 4 − 2x + 1.",
+   "choices": [
+    "8x + 5",
+    "4x + 3",
+    "4x + 5",
+    "10x"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "6x − 2x = 4x ; 4 + 1 = 5.",
+   "id": "5e-maths-expressions-litterales-05",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-expressions-litterales",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Un marchand vend des cahiers à 400 FCFA pièce et un sac à 3 500 FCFA. Amina achète x cahiers et un sac.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quelle expression donne le prix total (FCFA) ?",
+     "choices": [
+      "400 + 3 500x",
+      "400x + 3 500",
+      "3 900x",
+      "400x × 3 500"
+     ],
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Les x cahiers coûtent 400 × x, auquel on ajoute le sac.",
+     "id": "5e-maths-expressions-litterales-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quel est le prix pour x = 6 cahiers (FCFA) ?",
+     "answer": 5900,
+     "unit": "FCFA",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "400 × 6 + 3 500 = 2 400 + 3 500 = 5 900.",
+     "id": "5e-maths-expressions-litterales-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quel est le nombre de cahiers achetés si le prix total est 4 700 FCFA ?",
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "4 700 − 3 500 = 1 200 ; 1 200 ÷ 400 = 3.",
+     "id": "5e-maths-expressions-litterales-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-maths-expressions-litterales-06",
+   "tier": "examen",
+   "lesson": "5e-maths-expressions-litterales",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que signifie 5a ?",
+   "choices": [
+    "5 + a",
+    "5 − a",
+    "5 ÷ a",
+    "5 × a"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le signe × est omis entre un nombre et une lettre.",
+   "id": "5e-maths-expressions-litterales-q1",
+   "tier": "autoeval",
+   "lesson": "5e-maths-expressions-litterales",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la valeur de 3x − 4 pour x = 2 ?",
+   "choices": [
+    "−2",
+    "10",
+    "2",
+    "6"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "3 × 2 − 4 = 2.",
+   "id": "5e-maths-expressions-litterales-q2",
+   "tier": "autoeval",
+   "lesson": "5e-maths-expressions-litterales",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle expression est égale à 2x + 2x ?",
+   "choices": [
+    "4x²",
+    "4x",
+    "2x²",
+    "x⁴"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "2x + 2x = 4x.",
+   "id": "5e-maths-expressions-litterales-q3",
+   "tier": "autoeval",
+   "lesson": "5e-maths-expressions-litterales",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel développement est correct ?",
+   "choices": [
+    "5(a + 1) = 5a + 5",
+    "5(a + 1) = 5a + 1",
+    "5(a + 1) = 6a",
+    "5(a + 1) = a + 5"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On multiplie chaque terme par 5.",
+   "id": "5e-maths-expressions-litterales-q4",
+   "tier": "autoeval",
+   "lesson": "5e-maths-expressions-litterales",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le périmètre d'un triangle équilatéral de côté a s'écrit",
+   "choices": [
+    "a + 3",
+    "3a",
+    "a³",
+    "a ÷ 3"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Trois côtés égaux : 3 × a.",
+   "id": "5e-maths-expressions-litterales-q5",
+   "tier": "autoeval",
+   "lesson": "5e-maths-expressions-litterales",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Résous x + 9 = 15.",
+   "answer": 6,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "x = 15 − 9 = 6.",
+   "id": "5e-maths-equations-simples-01",
+   "tier": "application",
+   "lesson": "5e-maths-equations-simples",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Résous 4x = 28.",
+   "answer": 7,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "x = 28 ÷ 4 = 7.",
+   "id": "5e-maths-equations-simples-02",
+   "tier": "application",
+   "lesson": "5e-maths-equations-simples",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Résous x − 6 = 10.",
+   "answer": 16,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On ajoute 6 : x = 10 + 6 = 16.",
+   "id": "5e-maths-equations-simples-03",
+   "tier": "application",
+   "lesson": "5e-maths-equations-simples",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Résous 3x + 5 = 20.",
+   "answer": 5,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "3x = 15 ; x = 5.",
+   "id": "5e-maths-equations-simples-04",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-equations-simples",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Résous 5x − 4 = 21.",
+   "answer": 5,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "5x = 25 ; x = 5.",
+   "id": "5e-maths-equations-simples-05",
+   "tier": "approfondissement",
+   "lesson": "5e-maths-equations-simples",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Nkeng achète 3 cahiers identiques et un stylo à 300 FCFA. Il paie 1 500 FCFA au total. Soit x le prix d'un cahier.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quelle équation traduit le problème ?",
+     "choices": [
+      "3x = 1 500 + 300",
+      "x + 300 = 1 500",
+      "3 + x = 1 500",
+      "3x + 300 = 1 500"
+     ],
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "3 cahiers : 3x ; plus le stylo : + 300.",
+     "id": "5e-maths-equations-simples-06-a"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quel est le prix d'un cahier (FCFA) ?",
+     "answer": 400,
+     "unit": "FCFA",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "3x = 1 200 ; x = 400.",
+     "id": "5e-maths-equations-simples-06-b"
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Vérifie : combien paie-t-il pour 5 cahiers et le stylo (FCFA) ?",
+     "answer": 2300,
+     "unit": "FCFA",
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "5 × 400 + 300 = 2 300.",
+     "id": "5e-maths-equations-simples-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-maths-equations-simples-06",
+   "tier": "examen",
+   "lesson": "5e-maths-equations-simples",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la solution de x + 12 = 20 ?",
+   "choices": [
+    "32",
+    "8",
+    "−8",
+    "12"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "x = 20 − 12 = 8.",
+   "id": "5e-maths-equations-simples-q1",
+   "tier": "autoeval",
+   "lesson": "5e-maths-equations-simples",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La solution de 6x = 54 est",
+   "choices": [
+    "9",
+    "48",
+    "324",
+    "8"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "54 ÷ 6 = 9.",
+   "id": "5e-maths-equations-simples-q2",
+   "tier": "autoeval",
+   "lesson": "5e-maths-equations-simples",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour résoudre 2x + 1 = 9, la première étape est de",
+   "choices": [
+    "diviser seulement 9 par 2",
+    "retirer 1 aux deux membres",
+    "ajouter 1 seulement à gauche",
+    "multiplier par 9"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "2x = 8 puis x = 4.",
+   "id": "5e-maths-equations-simples-q3",
+   "tier": "autoeval",
+   "lesson": "5e-maths-equations-simples",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "x = 3 est solution de",
+   "choices": [
+    "x + 5 = 9",
+    "4x = 20",
+    "2x + 1 = 7",
+    "2x − 3 = 6"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "2 × 3 + 1 = 7.",
+   "id": "5e-maths-equations-simples-q4",
+   "tier": "autoeval",
+   "lesson": "5e-maths-equations-simples",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une équation est",
+   "choices": [
+    "une égalité contenant une inconnue",
+    "une expression sans égalité",
+    "toujours fausse",
+    "un nombre"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est la définition d'une équation.",
+   "id": "5e-maths-equations-simples-q5",
+   "tier": "autoeval",
+   "lesson": "5e-maths-equations-simples",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}
