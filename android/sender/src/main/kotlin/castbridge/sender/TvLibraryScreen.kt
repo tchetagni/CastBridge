@@ -44,6 +44,8 @@ data class TvLibItem(
     override val name: String, override val title: String, val size: Long, override val mtime: Long, val volume: String, val volumeLabel: String,
     val volumeKind: String, val durationMs: Long, override val resumeMs: Long, override val watched: Boolean, override val playedAtMs: Long,
     val hasThumb: Boolean, val playing: Boolean,
+    /** Virtual folder on the TV ("" = the root). */
+    override val folder: String = "",
 ) : LibraryEntry {
     override val type: MediaType get() = MediaType.of(name)
 }
@@ -55,7 +57,7 @@ object TvLibraryParser {
             val o = a.getJSONObject(i)
             TvLibItem(o.getString("name"), o.optString("title", o.getString("name")), o.optLong("size"), o.optLong("mtime"), o.optString("volume"),
                 o.optString("volumeLabel"), o.optString("kind"), o.optLong("durationMs"), o.optLong("resumeMs"), o.optBoolean("watched"),
-                o.optLong("playedAt"), o.optBoolean("hasThumb"), o.optBoolean("playing"))
+                o.optLong("playedAt"), o.optBoolean("hasThumb"), o.optBoolean("playing"), o.optString("folder"))
         }
     }
 }

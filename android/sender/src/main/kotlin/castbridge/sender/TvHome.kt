@@ -249,6 +249,56 @@ fun TvHome(onAdvanced: () -> Unit) {
             }
         }
 
+        // Series in « Titre / Saison » folders (virtual: nothing moves), automatic after each send, or on demand with a confirmation and an undo
+        var autoClass by remember { mutableStateOf(SeriesClassifying.auto(ctx)) }
+        var confirmPlan by remember { mutableStateOf<List<castbridge.core.library.agent.SeriesClassifier.Move>?>(null) }
+        var undoable by remember { mutableStateOf(SeriesClassifying.last.isNotEmpty()) }
+        val toClassify = remember(items) { SeriesClassifying.preview(items.map { it.name to it.folder }) }
+        if (client != null && items.isNotEmpty()) ElevatedCard(Modifier.fillMaxWidth()) {
+            Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Column(Modifier.weight(1f)) {
+                        Text("Classer les séries par titre et saison", style = MaterialTheme.typography.titleSmall)
+                        Text("Ex. Prison Break › Saison 01. Aucun fichier n'est déplacé ni copié.", style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
+                    }
+                    Switch(autoClass, { autoClass = it; SeriesClassifying.setAuto(ctx, it) })
+                }
+                Text(if (autoClass) "Automatique à la fin de chaque envoi." else "Automatique : désactivé.", style = MaterialTheme.typography.bodySmall)
+                if (toClassify.isNotEmpty()) {
+                    val folders = toClassify.map { it.folder }.toSet()
+                    Text("${toClassify.size} épisode(s) en vrac à ranger dans ${folders.size} dossier(s).", style = MaterialTheme.typography.bodyMedium)
+                    Button(onClick = { confirmPlan = toClassify }) { Text("Classer maintenant") }
+                }
+                if (undoable) TextButton(onClick = {
+                    scope.launch {
+                        val n = withContext(Dispatchers.IO) { SeriesClassifying.undoLast(client) }
+                        undoable = false; msg = "$n fichier(s) remis à la racine."
+                        withContext(Dispatchers.IO) { runCatching { items = TvLibraryParser.parse(client.library()) } }
+                    }
+                }) { Text("Annuler le dernier classement") }
+            }
+        }
+        confirmPlan?.let { plan ->
+            AlertDialog(
+                onDismissRequest = { confirmPlan = null },
+                title = { Text("Classer ${plan.size} épisode(s) ?") },
+                text = { Column {
+                    plan.groupBy { it.folder }.entries.take(8).forEach { (f, l) -> Text("• $f : ${l.size}", style = MaterialTheme.typography.bodyMedium) }
+                    Text("Seuls les fichiers à la racine sont classés ; vos dossiers existants ne sont pas touchés. Annulable.", style = MaterialTheme.typography.bodySmall)
+                } },
+                confirmButton = { TextButton(onClick = {
+                    confirmPlan = null
+                    scope.launch {
+                        val (ok, ko) = withContext(Dispatchers.IO) { SeriesClassifying.apply(client!!, plan) }
+                        undoable = ok > 0
+                        msg = if (ko == 0) "$ok épisode(s) classé(s)." else "$ok classé(s), $ko échec(s) : réessayez."
+                        withContext(Dispatchers.IO) { runCatching { items = TvLibraryParser.parse(client!!.library()) } }
+                    }
+                }) { Text("Classer") } },
+                dismissButton = { TextButton(onClick = { confirmPlan = null }) { Text("Annuler") } },
+            )
+        }
+
         // Now playing
         val now = info?.takeIf { it.playing != null && it.state != "idle" }
         AnimatedVisibility(now != null) {

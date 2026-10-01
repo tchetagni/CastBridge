@@ -181,6 +181,8 @@ object NameParser {
     private val RX_SITE_BRACKET = ur("[\\[({]\\s*(?:$SITE_ALT)[^\\])}]*[\\])}]")
     /** Something that looks like an episode number after a release group: "S01E04", "1x04", "- 045", "Episode 4". */
     private val EPISODE_SHAPE = ur("\\bs\\d{1,2}\\s?e\\d|\\b\\d{1,2}x\\d{2}\\b|\\s-\\s\\d{2,4}(?:v\\d)?(?=[\\s(\\[.]|$)|\\b(?:ep|episode)[ .]*\\d")
+    /** A bracket whose WHOLE content is an episode marker (S01-E08, S1E4, 1x04): kept, never dropped as a tag. */
+    private val RX_BRACKETED_EPISODE = ur("s\\d{1,2}\\s*[-x–.]?\\s*e\\d{1,3}(?:\\s?[-–&]?\\s?e?\\d{1,3})*|\\d{1,2}x\\d{2,3}")
     private val RX_EMPTY_BRACKET = Regex("[\\[({]\\s*[\\])}]")
 
     private val JUNK_PHRASE = ur(
@@ -219,6 +221,7 @@ object NameParser {
                 c.isEmpty() -> { junk = true; " " }
                 JUNK_PHRASE.matches(c) || CREDIT_TAIL.matches(c) -> { junk = true; " " }
                 c.matches(Regex("(19|20)\\d\\d")) -> " $c "
+                RX_BRACKETED_EPISODE.matches(c) -> " $c "      // « Prison Break [S01-E08] »: the marker is the episode, not a release tag
                 isTagSequence(c) -> { junk = true; " " }
                 open == '[' && m.range.first == 0 && c.length <= 24 && c.none { it == ' ' } && s.length - m.range.last > 3 -> { junk = true; " " }
                 open == '[' && m.range.first == 0 && c.length <= 30 && c.split(' ').size <= 3 && EPISODE_SHAPE.containsMatchIn(s.substring(m.range.last + 1)) -> { junk = true; " " }

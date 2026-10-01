@@ -92,7 +92,13 @@ object TransferQueue {
         val outcome = watch(viaBt)
         when {
             cancelRunning -> model.finishCancelled(item.id)
-            outcome == null -> model.finish(item.id, true)
+            outcome == null -> {
+                model.finish(item.id, true)
+                // the name the TV holds (the assistant may have renamed it on the way), then « Titre / Saison » for a series
+                val held = (UploadService.state.value as? UploadService.State.Done)?.job?.fileName ?: item.name
+                val tvBase = session.base
+                if (tvBase != null) runCatching { SeriesClassifying.afterSend(app, castbridge.core.tv.TvClient(tvBase, session.credential), held) }
+            }
             else -> model.finish(item.id, false, outcome)
         }
         publish()
