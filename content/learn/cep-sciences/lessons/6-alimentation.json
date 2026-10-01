@@ -1,0 +1,564 @@
+{
+ "chapter": "cep-sciences-alimentation",
+ "lessons": [
+  {
+   "id": "cep-sciences-alimentation",
+   "title": "L'alimentation : les groupes d'aliments et le repas équilibré",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM2 — Éducation à la santé : alimentation — reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; synthèse de révision orientée examen ; à faire relire par un enseignant",
+   "objectives": [
+    "Classer les aliments selon leur rôle.",
+    "Composer un repas équilibré.",
+    "Expliquer pourquoi il faut varier les aliments."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cep-sciences-alimentation-01",
+    "cep-sciences-alimentation-02",
+    "cep-sciences-alimentation-03",
+    "cep-sciences-alimentation-04",
+    "cep-sciences-alimentation-05",
+    "cep-sciences-alimentation-06"
+   ],
+   "selfCheck": [
+    "cep-sciences-alimentation-q1",
+    "cep-sciences-alimentation-q2",
+    "cep-sciences-alimentation-q3",
+    "cep-sciences-alimentation-q4",
+    "cep-sciences-alimentation-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier la terminologie (bâtisseurs / énergétiques / protecteurs) retenue dans les manuels camerounais.",
+    "Les aliments cités sont courants au Cameroun ; vérifier le classement (haricot = bâtisseur ; arachide = bâtisseur et gras)."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le rôle des aliments",
+     "md": "Les aliments ont trois rôles principaux :\n\n- **Bâtisseurs** : ils aident à construire et réparer le corps (viande, poisson, œufs, haricots, arachide).\n- **Énergétiques** : ils donnent la force pour bouger et travailler (manioc, riz, plantain, mil, huile).\n- **Protecteurs** : ils protègent de la maladie (fruits et légumes).\n\nL'**eau** est aussi indispensable."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 500,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 15,
+        "w": 150,
+        "h": 40,
+        "stroke": "blue",
+        "fill": "lightblue",
+        "radius": 8
+       },
+       {
+        "t": "rect",
+        "x": 175,
+        "y": 15,
+        "w": 150,
+        "h": 40,
+        "stroke": "orange",
+        "fill": "lightorange",
+        "radius": 8
+       },
+       {
+        "t": "rect",
+        "x": 340,
+        "y": 15,
+        "w": 150,
+        "h": 40,
+        "stroke": "green",
+        "fill": "lightgreen",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 41,
+        "text": "Bâtisseurs",
+        "size": 16,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 41,
+        "text": "Énergétiques",
+        "size": 16,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 415,
+        "y": 41,
+        "text": "Protecteurs",
+        "size": 16,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 80,
+        "text": "poisson",
+        "size": 15,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 102,
+        "text": "œufs",
+        "size": 15,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 124,
+        "text": "haricots",
+        "size": 15,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 146,
+        "text": "arachide",
+        "size": 15,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 80,
+        "text": "manioc",
+        "size": 15,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 102,
+        "text": "riz",
+        "size": 15,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 124,
+        "text": "plantain",
+        "size": 15,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 146,
+        "text": "huile",
+        "size": 15,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 415,
+        "y": 80,
+        "text": "mangue",
+        "size": 15,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 415,
+        "y": 102,
+        "text": "ananas",
+        "size": 15,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 415,
+        "y": 124,
+        "text": "tomate",
+        "size": 15,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 415,
+        "y": 146,
+        "text": "feuilles vertes",
+        "size": 15,
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 85,
+        "y": 180,
+        "text": "construire le corps",
+        "size": 13,
+        "color": "blue"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 180,
+        "text": "donner de l'énergie",
+        "size": 13,
+        "color": "orange"
+       },
+       {
+        "t": "text",
+        "x": 415,
+        "y": 180,
+        "text": "protéger de la maladie",
+        "size": 13,
+        "color": "green"
+       }
+      ]
+     },
+     "caption": "Trois groupes d'aliments.",
+     "alt": "Trois colonnes colorées : bâtisseurs (poisson, œufs, haricots, arachide), énergétiques (manioc, riz, plantain, huile) et protecteurs (mangue, ananas, tomate, feuilles vertes)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Un repas équilibré",
+     "md": "Un repas équilibré contient **un aliment de chaque groupe** : par exemple du manioc (énergie), du poisson (bâtisseur) et des légumes ou un fruit (protecteurs), avec de l'eau propre.\n\nOn varie les aliments chaque jour : aucun aliment ne contient tout."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : classer",
+     "statement": "Classe : plantain, haricots, mangue, huile de palme.",
+     "steps": [
+      {
+       "md": "Le plantain donne de l'énergie : **énergétique**."
+      },
+      {
+       "md": "Les haricots aident à construire le corps : **bâtisseur**."
+      },
+      {
+       "md": "La mangue apporte des vitamines : **protecteur**."
+      },
+      {
+       "md": "L'huile de palme donne de l'énergie : **énergétique**."
+      }
+     ],
+     "answer": "Plantain et huile : énergétiques ; haricots : bâtisseur ; mangue : protecteur."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : un repas équilibré",
+     "statement": "Un enfant mange du riz avec une sauce à base de tomates. Que manque-t-il pour un repas équilibré ?",
+     "steps": [
+      {
+       "md": "Le riz est énergétique ; la tomate est protectrice."
+      },
+      {
+       "md": "Il manque un aliment **bâtisseur** : poisson, œuf, haricots ou viande."
+      }
+     ],
+     "answer": "Il faut ajouter un aliment **bâtisseur** (par exemple du poisson) et boire de l'eau propre."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Manger toujours la même chose, même si c'est abondant.\n- Croire que seuls les aliments chers sont bons : les haricots et l'arachide sont de bons bâtisseurs.\n- Oublier de laver les fruits et les légumes.\n- Ne boire que des boissons sucrées et pas d'eau propre.\n- Sauter le petit-déjeuner : le corps a besoin d'énergie le matin."
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-sciences-alimentation-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-sciences-alimentation-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-sciences-alimentation-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-sciences-alimentation-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-sciences-alimentation-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-sciences-alimentation-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quel aliment est surtout énergétique ?",
+   "choices": [
+    "le poisson",
+    "l'orange",
+    "le haricot",
+    "le manioc"
+   ],
+   "answer": 3,
+   "explanation": "Le manioc contient beaucoup d'amidon, source d'énergie.",
+   "id": "cep-sciences-alimentation-01",
+   "chapter": "cep-sciences-alimentation",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-sciences-alimentation",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Les fruits et les légumes aident à protéger le corps contre les maladies.",
+   "answer": true,
+   "explanation": "Ils apportent des vitamines et des sels minéraux.",
+   "id": "cep-sciences-alimentation-02",
+   "chapter": "cep-sciences-alimentation",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-sciences-alimentation",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque aliment à son rôle principal.",
+   "pairs": [
+    [
+     "poisson",
+     "bâtisseur"
+    ],
+    [
+     "riz",
+     "énergétique"
+    ],
+    [
+     "mangue",
+     "protecteur"
+    ]
+   ],
+   "explanation": "Le riz apporte de l'énergie ; le poisson construit ; la mangue protège.",
+   "points": 2,
+   "id": "cep-sciences-alimentation-03",
+   "chapter": "cep-sciences-alimentation",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-sciences-alimentation",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel repas est le plus équilibré ?",
+   "choices": [
+    "manioc seul",
+    "beignets seuls",
+    "manioc, poisson et feuilles vertes",
+    "riz seul"
+   ],
+   "answer": 2,
+   "explanation": "Il réunit un aliment énergétique, un bâtisseur et un protecteur.",
+   "id": "cep-sciences-alimentation-04",
+   "chapter": "cep-sciences-alimentation",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cep-sciences-alimentation",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "open",
+   "prompt": "Compose un petit-déjeuner équilibré avec des aliments de chez nous. Nomme le rôle de chaque aliment.",
+   "model": "Une bouillie de mil (énergie), un œuf (bâtisseur) et une banane (protecteur), avec de l'eau propre.",
+   "rubric": [
+    "Un aliment énergétique.",
+    "Un aliment bâtisseur.",
+    "Un aliment protecteur.",
+    "Rôles correctement nommés."
+   ],
+   "explanation": "Un repas équilibré réunit les trois groupes.",
+   "points": 2,
+   "id": "cep-sciences-alimentation-05",
+   "chapter": "cep-sciences-alimentation",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cep-sciences-alimentation",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Le repas de midi d'une famille de Bafoussam : plantain, haricots, tomates et un peu d'huile.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quel aliment est bâtisseur ?",
+     "choices": [
+      "le plantain",
+      "les haricots",
+      "la tomate",
+      "l'huile"
+     ],
+     "answer": 1,
+     "explanation": "Les haricots contiennent des protéines.",
+     "id": "cep-sciences-alimentation-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quel aliment apporte surtout des vitamines ?",
+     "choices": [
+      "la tomate",
+      "le plantain",
+      "l'huile",
+      "le sel"
+     ],
+     "answer": 0,
+     "explanation": "Légumes et fruits : vitamines.",
+     "id": "cep-sciences-alimentation-06-b",
+     "points": 1
+    },
+    {
+     "kind": "truefalse",
+     "prompt": "Le repas contient un aliment de chaque groupe.",
+     "answer": true,
+     "explanation": "Plantain (énergie), haricots (bâtisseur), tomate (protecteur).",
+     "id": "cep-sciences-alimentation-06-c",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Que peut-on ajouter pour compléter ?",
+     "choices": [
+      "un deuxième plat de plantain seulement",
+      "une boisson sucrée seulement",
+      "rien du tout",
+      "un fruit et de l'eau propre"
+     ],
+     "answer": 3,
+     "explanation": "Un fruit et de l'eau propre complètent le repas.",
+     "id": "cep-sciences-alimentation-06-d",
+     "points": 1
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "method": "Cherche les trois groupes dans le repas.",
+   "id": "cep-sciences-alimentation-06",
+   "chapter": "cep-sciences-alimentation",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cep-sciences-alimentation",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les aliments bâtisseurs servent à...",
+   "choices": [
+    "donner du goût",
+    "faire de l'ombre",
+    "construire et réparer le corps",
+    "nettoyer la peau"
+   ],
+   "answer": 2,
+   "explanation": "Bâtisseurs : construire et réparer.",
+   "id": "cep-sciences-alimentation-q1",
+   "chapter": "cep-sciences-alimentation",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-sciences-alimentation",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel aliment est protecteur ?",
+   "choices": [
+    "le riz",
+    "l'ananas",
+    "l'huile",
+    "le sucre"
+   ],
+   "answer": 1,
+   "explanation": "Les fruits protègent par leurs vitamines.",
+   "id": "cep-sciences-alimentation-q2",
+   "chapter": "cep-sciences-alimentation",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-sciences-alimentation",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pourquoi faut-il varier les aliments ?",
+   "choices": [
+    "Aucun aliment ne contient tout",
+    "Pour manger plus vite",
+    "Pour dépenser moins",
+    "Pour avoir plus soif"
+   ],
+   "answer": 0,
+   "explanation": "Chaque aliment apporte des éléments différents.",
+   "id": "cep-sciences-alimentation-q3",
+   "chapter": "cep-sciences-alimentation",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-sciences-alimentation",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une alimentation sans protecteurs expose à...",
+   "choices": [
+    "une meilleure croissance",
+    "plus de force",
+    "rien de particulier",
+    "des maladies et de la fatigue"
+   ],
+   "answer": 3,
+   "explanation": "Les vitamines manquent : le corps se défend moins bien.",
+   "id": "cep-sciences-alimentation-q4",
+   "chapter": "cep-sciences-alimentation",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-sciences-alimentation",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le mil est un aliment...",
+   "choices": [
+    "bâtisseur",
+    "protecteur",
+    "énergétique",
+    "non comestible"
+   ],
+   "answer": 2,
+   "explanation": "Céréale riche en amidon : énergétique.",
+   "id": "cep-sciences-alimentation-q5",
+   "chapter": "cep-sciences-alimentation",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-sciences-alimentation",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  }
+ ]
+}

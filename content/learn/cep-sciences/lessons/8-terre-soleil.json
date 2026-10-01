@@ -1,0 +1,466 @@
+{
+ "chapter": "cep-sciences-terre",
+ "lessons": [
+  {
+   "id": "cep-sciences-terre-soleil",
+   "title": "La Terre, le Soleil et la Lune",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CM2 — Astronomie simple — reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; synthèse de révision orientée examen ; à faire relire par un enseignant",
+   "objectives": [
+    "Expliquer l'alternance du jour et de la nuit.",
+    "Distinguer étoile, planète et satellite.",
+    "Expliquer l'évolution de l'ombre d'un objet dans la journée."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cep-sciences-terre-soleil-01",
+    "cep-sciences-terre-soleil-02",
+    "cep-sciences-terre-soleil-03",
+    "cep-sciences-terre-soleil-04",
+    "cep-sciences-terre-soleil-05",
+    "cep-sciences-terre-soleil-06"
+   ],
+   "selfCheck": [
+    "cep-sciences-terre-soleil-q1",
+    "cep-sciences-terre-soleil-q2",
+    "cep-sciences-terre-soleil-q3",
+    "cep-sciences-terre-soleil-q4",
+    "cep-sciences-terre-soleil-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier la durée « environ un mois » pour la révolution de la Lune au niveau CM2.",
+    "Vérifier l'ordre de difficulté : la rotation et la révolution sont-elles distinguées au CM2 ?"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Soleil, Terre et Lune",
+     "md": "- Le **Soleil** est une **étoile** : il produit lumière et chaleur.\n- La **Terre** est une **planète** : elle tourne autour du Soleil en un an.\n- La **Lune** est le **satellite** naturel de la Terre : elle tourne autour de la Terre en environ un mois.\n\nLa Lune ne produit pas de lumière : elle renvoie celle du Soleil."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 200,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 60,
+        "cy": 100,
+        "r": 40,
+        "stroke": "orange",
+        "fill": "yellow"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 105,
+        "text": "Soleil",
+        "size": 14,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 70,
+        "x2": 250,
+        "y2": 70,
+        "color": "orange",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 100,
+        "x2": 250,
+        "y2": 100,
+        "color": "orange",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 130,
+        "x2": 250,
+        "y2": 130,
+        "color": "orange",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "circle",
+        "cx": 320,
+        "cy": 100,
+        "r": 60,
+        "stroke": "ink",
+        "fill": "lightgrey"
+       },
+       {
+        "t": "path",
+        "d": "M320 40 A60 60 0 0 0 320 160 Z",
+        "fill": "grey",
+        "stroke": "ink"
+       },
+       {
+        "t": "text",
+        "x": 285,
+        "y": 60,
+        "text": "jour",
+        "size": 14,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 60,
+        "text": "nuit",
+        "size": 14,
+        "color": "white",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 320,
+        "y": 185,
+        "text": "la Terre tourne sur elle-même en 24 h",
+        "size": 13,
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Le jour et la nuit.",
+     "alt": "Le Soleil à gauche envoie ses rayons vers la Terre. La moitié de la Terre tournée vers le Soleil est éclairée (jour), l'autre moitié est dans l'ombre (nuit)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Jour et nuit",
+     "md": "La Terre **tourne sur elle-même** en 24 heures. À chaque instant, la moitié tournée vers le Soleil est éclairée : c'est le **jour** ; l'autre moitié est dans l'ombre : c'est la **nuit**.\n\nVu de la Terre, le Soleil semble se lever à l'**est** et se coucher à l'**ouest**, mais c'est la Terre qui tourne."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : le Soleil bouge-t-il ?",
+     "statement": "Pourquoi voit-on le Soleil « se déplacer » dans le ciel ?",
+     "steps": [
+      {
+       "md": "Le Soleil ne bouge pas autour de nous."
+      },
+      {
+       "md": "La Terre tourne sur elle-même : le Soleil paraît monter le matin puis descendre le soir."
+      }
+     ],
+     "answer": "C'est un mouvement **apparent** dû à la rotation de la Terre."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "L'ombre et le Soleil",
+     "md": "Un objet éclairé par le Soleil a une **ombre** de l'autre côté. Dans la journée :\n- le matin et le soir, le Soleil est bas : l'ombre est **longue** ;\n- à midi, le Soleil est haut : l'ombre est **courte**.\n\nOn peut s'en servir pour lire l'heure (cadran solaire)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : l'ombre d'un bâton",
+     "statement": "On plante un bâton dans la cour. À 8 h, son ombre mesure 80 cm ; à midi, 15 cm ; à 16 h, 70 cm. À quel moment le Soleil est-il le plus haut ?",
+     "steps": [
+      {
+       "md": "L'ombre la plus courte est à midi (15 cm)."
+      },
+      {
+       "md": "Quand l'ombre est courte, le Soleil est haut."
+      }
+     ],
+     "answer": "Le Soleil est le plus haut **à midi**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que le Soleil tourne autour de la Terre.\n- Croire que la Lune est une étoile ou qu'elle produit sa lumière.\n- Penser que la nuit vient quand le Soleil « se cache » derrière la Lune.\n- Confondre rotation (tour sur soi-même, 24 h) et révolution (tour autour du Soleil, un an)."
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-sciences-terre-soleil-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-sciences-terre-soleil-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-sciences-terre-soleil-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-sciences-terre-soleil-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-sciences-terre-soleil-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-sciences-terre-soleil-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Le Soleil est...",
+   "choices": [
+    "une planète",
+    "un satellite",
+    "un nuage",
+    "une étoile"
+   ],
+   "answer": 3,
+   "explanation": "Le Soleil produit lui-même la lumière : c'est une étoile.",
+   "id": "cep-sciences-terre-soleil-01",
+   "chapter": "cep-sciences-terre",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-sciences-terre-soleil",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "La Lune produit sa propre lumière.",
+   "answer": false,
+   "explanation": "Elle renvoie la lumière du Soleil.",
+   "id": "cep-sciences-terre-soleil-02",
+   "chapter": "cep-sciences-terre",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-sciences-terre-soleil",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien de temps met la Terre pour tourner sur elle-même ?",
+   "choices": [
+    "une semaine",
+    "un mois",
+    "24 heures",
+    "un an"
+   ],
+   "answer": 2,
+   "explanation": "Un tour sur elle-même = un jour et une nuit.",
+   "id": "cep-sciences-terre-soleil-03",
+   "chapter": "cep-sciences-terre",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-sciences-terre-soleil",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quand l'ombre d'un arbre est-elle la plus courte ?",
+   "choices": [
+    "le matin",
+    "à midi",
+    "le soir",
+    "la nuit"
+   ],
+   "answer": 1,
+   "explanation": "Le Soleil est le plus haut à midi.",
+   "id": "cep-sciences-terre-soleil-04",
+   "chapter": "cep-sciences-terre",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cep-sciences-terre-soleil",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "open",
+   "prompt": "Explique pourquoi il fait nuit en Afrique quand il fait jour de l'autre côté de la Terre.",
+   "model": "La Terre est une sphère qui tourne : seule la moitié tournée vers le Soleil est éclairée. L'autre moitié est dans l'ombre.",
+   "rubric": [
+    "La Terre est ronde.",
+    "Une moitié seulement est éclairée.",
+    "Elle tourne sur elle-même."
+   ],
+   "explanation": "La rotation de la Terre alterne jour et nuit.",
+   "points": 2,
+   "id": "cep-sciences-terre-soleil-05",
+   "chapter": "cep-sciences-terre",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cep-sciences-terre-soleil",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Observation du Soleil dans la cour de l'école.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Le matin, le Soleil se lève du côté...",
+     "choices": [
+      "est",
+      "ouest",
+      "nord",
+      "sud"
+     ],
+     "answer": 0,
+     "explanation": "Le Soleil se lève à l'est.",
+     "id": "cep-sciences-terre-soleil-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "À midi, l'ombre d'un poteau est...",
+     "choices": [
+      "longue",
+      "absente toujours",
+      "plus longue que le matin",
+      "courte"
+     ],
+     "answer": 3,
+     "explanation": "Le Soleil est haut : l'ombre est courte.",
+     "id": "cep-sciences-terre-soleil-06-b",
+     "points": 1
+    },
+    {
+     "kind": "truefalse",
+     "prompt": "Le Soleil tourne autour de la Terre.",
+     "answer": false,
+     "explanation": "C'est la Terre qui tourne autour du Soleil et sur elle-même.",
+     "id": "cep-sciences-terre-soleil-06-c",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "La Terre tourne autour du Soleil en...",
+     "choices": [
+      "un jour",
+      "un mois",
+      "un an",
+      "une semaine"
+     ],
+     "answer": 2,
+     "explanation": "Une révolution dure environ 365 jours.",
+     "id": "cep-sciences-terre-soleil-06-d",
+     "points": 1
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "method": "Rotation = 24 h ; révolution = un an.",
+   "id": "cep-sciences-terre-soleil-06",
+   "chapter": "cep-sciences-terre",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cep-sciences-terre-soleil",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La Lune tourne autour...",
+   "choices": [
+    "du Soleil seulement",
+    "de la Terre",
+    "de Mars",
+    "de rien"
+   ],
+   "answer": 1,
+   "explanation": "La Lune est le satellite de la Terre.",
+   "id": "cep-sciences-terre-soleil-q1",
+   "chapter": "cep-sciences-terre",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-sciences-terre-soleil",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une planète est...",
+   "choices": [
+    "un astre qui tourne autour d'une étoile",
+    "une étoile",
+    "un satellite de la Terre",
+    "un nuage de gaz"
+   ],
+   "answer": 0,
+   "explanation": "La Terre tourne autour du Soleil.",
+   "id": "cep-sciences-terre-soleil-q2",
+   "chapter": "cep-sciences-terre",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-sciences-terre-soleil",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quand fait-il nuit ?",
+   "choices": [
+    "Quand la Lune cache le Soleil",
+    "Quand le Soleil s'éteint",
+    "Quand il pleut",
+    "Quand la face de la Terre est à l'ombre"
+   ],
+   "answer": 3,
+   "explanation": "La nuit est due à la rotation de la Terre.",
+   "id": "cep-sciences-terre-soleil-q3",
+   "chapter": "cep-sciences-terre",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-sciences-terre-soleil",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le matin, l'ombre d'un arbre est...",
+   "choices": [
+    "très courte",
+    "absente",
+    "longue",
+    "toujours égale"
+   ],
+   "answer": 2,
+   "explanation": "Le Soleil est bas : ombre longue.",
+   "id": "cep-sciences-terre-soleil-q4",
+   "chapter": "cep-sciences-terre",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-sciences-terre-soleil",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La Terre est de forme...",
+   "choices": [
+    "plate",
+    "à peu près sphérique",
+    "cubique",
+    "conique"
+   ],
+   "answer": 1,
+   "explanation": "La Terre est presque une sphère.",
+   "id": "cep-sciences-terre-soleil-q5",
+   "chapter": "cep-sciences-terre",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-sciences-terre-soleil",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  }
+ ]
+}

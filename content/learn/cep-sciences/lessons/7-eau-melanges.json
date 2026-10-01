@@ -1,0 +1,530 @@
+{
+ "chapter": "cep-sciences-eau",
+ "lessons": [
+  {
+   "id": "cep-sciences-eau-melanges",
+   "title": "Le cycle de l'eau et les mélanges",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM2 — Matière : eau et mélanges — reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; synthèse de révision orientée examen ; à faire relire par un enseignant",
+   "objectives": [
+    "Décrire le cycle de l'eau.",
+    "Distinguer un mélange hétérogène d'une solution.",
+    "Choisir la bonne technique de séparation."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cep-sciences-eau-melanges-01",
+    "cep-sciences-eau-melanges-02",
+    "cep-sciences-eau-melanges-03",
+    "cep-sciences-eau-melanges-04",
+    "cep-sciences-eau-melanges-05",
+    "cep-sciences-eau-melanges-06"
+   ],
+   "selfCheck": [
+    "cep-sciences-eau-melanges-q1",
+    "cep-sciences-eau-melanges-q2",
+    "cep-sciences-eau-melanges-q3",
+    "cep-sciences-eau-melanges-q4",
+    "cep-sciences-eau-melanges-q5"
+   ],
+   "reviewNotes": [
+    "La fiche existante « matière et énergie » traite des états de l'eau : vérifier la cohérence des termes (évaporation, condensation).",
+    "Vérifier que décantation et filtration sont au programme du CM2."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le cycle de l'eau",
+     "md": "- Le soleil chauffe l'eau de la mer, des fleuves : elle s'**évapore** (elle devient de la vapeur d'eau).\n- En montant, la vapeur se refroidit et forme des gouttelettes : c'est la **condensation** (les nuages).\n- Les gouttes tombent : ce sont les **précipitations** (pluie).\n- L'eau **ruisselle** et s'**infiltre** dans le sol, puis retourne aux fleuves et à la mer."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 500,
+      "h": 230,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 60,
+        "cy": 40,
+        "r": 24,
+        "stroke": "orange",
+        "fill": "yellow"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 45,
+        "text": "Soleil",
+        "size": 12,
+        "color": "ink"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         20,
+         215,
+         480,
+         215,
+         480,
+         185,
+         20,
+         185
+        ],
+        "stroke": "blue",
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 205,
+        "text": "mer, fleuve",
+        "size": 13,
+        "color": "ink"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         330,
+         185,
+         400,
+         120,
+         440,
+         185
+        ],
+        "stroke": "green",
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 400,
+        "y": 165,
+        "text": "terre",
+        "size": 13,
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 250,
+        "cy": 50,
+        "r": 24,
+        "stroke": "grey",
+        "fill": "lightgrey"
+       },
+       {
+        "t": "circle",
+        "cx": 278,
+        "cy": 52,
+        "r": 20,
+        "stroke": "grey",
+        "fill": "lightgrey"
+       },
+       {
+        "t": "circle",
+        "cx": 222,
+        "cy": 54,
+        "r": 18,
+        "stroke": "grey",
+        "fill": "lightgrey"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 92,
+        "text": "nuage",
+        "size": 13,
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 178,
+        "x2": 200,
+        "y2": 80,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 130,
+        "text": "évaporation",
+        "size": 13,
+        "color": "red",
+        "anchor": "end"
+       },
+       {
+        "t": "line",
+        "x1": 290,
+        "y1": 86,
+        "x2": 340,
+        "y2": 130,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end",
+        "dash": true
+       },
+       {
+        "t": "text",
+        "x": 345,
+        "y": 110,
+        "text": "précipitations",
+        "size": 13,
+        "color": "blue",
+        "anchor": "start"
+       },
+       {
+        "t": "line",
+        "x1": 380,
+        "y1": 175,
+        "x2": 330,
+        "y2": 200,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 165,
+        "text": "ruissellement",
+        "size": 13,
+        "color": "blue",
+        "anchor": "end"
+       }
+      ]
+     },
+     "caption": "Le cycle de l'eau.",
+     "alt": "Schéma : le soleil chauffe la mer, l'eau s'évapore et monte vers un nuage. Du nuage tombent les précipitations sur la terre, puis l'eau ruisselle vers la mer."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les mélanges",
+     "md": "- **Eau + sable** : on voit le sable, c'est un mélange **hétérogène**.\n- **Eau + sel** ou **eau + sucre** : on ne voit plus le sel, il est **dissous** : c'est un mélange **homogène** (une solution).\n\nTechniques de séparation :\n- **Décantation** : on laisse reposer ; le sable tombe au fond.\n- **Filtration** : un filtre ou un tissu retient les grains.\n- **Évaporation** : l'eau s'en va, le sel reste."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : séparer l'eau et le sable",
+     "statement": "Comment séparer l'eau boueuse contenant du sable ?",
+     "steps": [
+      {
+       "md": "On laisse reposer : le sable se dépose (**décantation**)."
+      },
+      {
+       "md": "On verse doucement l'eau à travers un tissu propre : c'est la **filtration**."
+      }
+     ],
+     "answer": "Par **décantation** puis **filtration**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : retrouver le sel",
+     "statement": "Comment obtenir à nouveau le sel d'une eau salée ?",
+     "steps": [
+      {
+       "md": "Le sel est dissous : on ne peut pas le retenir avec un filtre."
+      },
+      {
+       "md": "On chauffe pour faire **évaporer** l'eau : le sel reste dans le récipient."
+      }
+     ],
+     "answer": "Par **évaporation** de l'eau."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Dire que le sel « disparaît » : il est seulement dissous (on peut le retrouver).\n- Penser qu'un filtre sépare l'eau salée : il ne retient pas le sel dissous.\n- Croire que la pluie vient de la mer sans passer par l'évaporation.\n- Boire l'eau filtrée sans la traiter : une eau claire n'est pas forcément potable."
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-sciences-eau-melanges-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-sciences-eau-melanges-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-sciences-eau-melanges-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-sciences-eau-melanges-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-sciences-eau-melanges-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-sciences-eau-melanges-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot désigne le passage de l'eau liquide à la vapeur ?",
+   "choices": [
+    "condensation",
+    "évaporation",
+    "filtration",
+    "décantation"
+   ],
+   "answer": 1,
+   "explanation": "Chauffée, l'eau s'évapore.",
+   "id": "cep-sciences-eau-melanges-01",
+   "chapter": "cep-sciences-eau",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-sciences-eau-melanges",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Quand on mélange du sel dans l'eau, le sel disparaît définitivement.",
+   "answer": false,
+   "explanation": "Il est dissous ; on le retrouve en faisant évaporer l'eau.",
+   "id": "cep-sciences-eau-melanges-02",
+   "chapter": "cep-sciences-eau",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-sciences-eau-melanges",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque mélange à la bonne technique.",
+   "pairs": [
+    [
+     "eau et sable",
+     "décantation"
+    ],
+    [
+     "eau et gros grains de riz",
+     "filtration"
+    ],
+    [
+     "eau et sel",
+     "évaporation"
+    ]
+   ],
+   "explanation": "Sable : décantation ; grains : filtre ; sel dissous : évaporation.",
+   "points": 2,
+   "id": "cep-sciences-eau-melanges-03",
+   "chapter": "cep-sciences-eau",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-sciences-eau-melanges",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les nuages se forment par...",
+   "choices": [
+    "condensation",
+    "évaporation",
+    "ruissellement",
+    "filtration"
+   ],
+   "answer": 0,
+   "explanation": "La vapeur refroidie forme des gouttelettes : condensation.",
+   "id": "cep-sciences-eau-melanges-04",
+   "chapter": "cep-sciences-eau",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cep-sciences-eau-melanges",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "open",
+   "prompt": "Décris en 3 phrases le trajet d'une goutte d'eau de la mer à la pluie.",
+   "model": "Le soleil chauffe la mer et la goutte s'évapore. La vapeur monte, refroidit et forme un nuage. La goutte retombe en pluie.",
+   "rubric": [
+    "Évaporation.",
+    "Condensation ou nuage.",
+    "Précipitations."
+   ],
+   "explanation": "Évaporation, condensation, précipitations.",
+   "points": 2,
+   "id": "cep-sciences-eau-melanges-05",
+   "chapter": "cep-sciences-eau",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cep-sciences-eau-melanges",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Une expérience en classe : on mélange du sable et du sel dans de l'eau.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Comment retirer d'abord le sable ?",
+     "choices": [
+      "Par évaporation",
+      "Par ébullition",
+      "On ne peut pas",
+      "Par décantation et filtration"
+     ],
+     "answer": 3,
+     "explanation": "Le sable n'est pas dissous : on le retient.",
+     "id": "cep-sciences-eau-melanges-06-a",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Que reste-t-il après filtration ?",
+     "choices": [
+      "de l'eau pure",
+      "du sable propre",
+      "de l'eau salée limpide",
+      "de la vapeur"
+     ],
+     "answer": 2,
+     "explanation": "Le sel dissous passe à travers le filtre.",
+     "id": "cep-sciences-eau-melanges-06-b",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Comment retrouver le sel ?",
+     "choices": [
+      "Par filtration",
+      "Par évaporation",
+      "Par décantation",
+      "On ne peut pas"
+     ],
+     "answer": 1,
+     "explanation": "L'eau part en vapeur, le sel reste.",
+     "id": "cep-sciences-eau-melanges-06-c",
+     "points": 1
+    },
+    {
+     "kind": "truefalse",
+     "prompt": "Le mélange eau-sel est un mélange homogène.",
+     "answer": true,
+     "explanation": "On ne voit plus le sel : le mélange est homogène.",
+     "id": "cep-sciences-eau-melanges-06-d",
+     "points": 1
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "method": "Identifier ce qui est dissous et ce qui ne l'est pas.",
+   "id": "cep-sciences-eau-melanges-06",
+   "chapter": "cep-sciences-eau",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cep-sciences-eau-melanges",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les précipitations sont...",
+   "choices": [
+    "la pluie, la grêle ou la neige",
+    "la vapeur d'eau",
+    "le sel",
+    "le sable"
+   ],
+   "answer": 0,
+   "explanation": "L'eau retombe vers le sol.",
+   "id": "cep-sciences-eau-melanges-q1",
+   "chapter": "cep-sciences-eau",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-sciences-eau-melanges",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une solution est un mélange où...",
+   "choices": [
+    "on voit des grains",
+    "il y a du sable",
+    "il y a deux liquides sans mélange",
+    "la substance est dissoute"
+   ],
+   "answer": 3,
+   "explanation": "Dans une solution, on ne voit plus la substance dissoute.",
+   "id": "cep-sciences-eau-melanges-q2",
+   "chapter": "cep-sciences-eau",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-sciences-eau-melanges",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour retenir des grains dans l'eau, on utilise...",
+   "choices": [
+    "la chaleur",
+    "un aimant",
+    "un filtre",
+    "du sel"
+   ],
+   "answer": 2,
+   "explanation": "Un filtre retient les grains.",
+   "id": "cep-sciences-eau-melanges-q3",
+   "chapter": "cep-sciences-eau",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-sciences-eau-melanges",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qu'est-ce que le ruissellement ?",
+   "choices": [
+    "L'eau qui monte en vapeur",
+    "L'eau qui coule sur le sol",
+    "La formation des nuages",
+    "L'eau de mer salée"
+   ],
+   "answer": 1,
+   "explanation": "L'eau s'écoule vers les cours d'eau.",
+   "id": "cep-sciences-eau-melanges-q4",
+   "chapter": "cep-sciences-eau",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-sciences-eau-melanges",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quand l'eau passe de vapeur à liquide, c'est...",
+   "choices": [
+    "la condensation",
+    "la fusion",
+    "l'évaporation",
+    "la filtration"
+   ],
+   "answer": 0,
+   "explanation": "La vapeur refroidie devient liquide.",
+   "id": "cep-sciences-eau-melanges-q5",
+   "chapter": "cep-sciences-eau",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-sciences-eau-melanges",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  }
+ ]
+}
