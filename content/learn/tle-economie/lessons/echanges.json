@@ -1,0 +1,436 @@
+{
+ "chapter": "tle-economie-ch-echanges",
+ "lessons": [
+  {
+   "id": "tle-economie-commerce-international",
+   "title": "Commerce international, balance des paiements, taux de change et mondialisation",
+   "minutes": 40,
+   "programRef": "Tle — Économie : commerce international, balance des paiements, taux de change, mondialisation (à vérifier sur le texte officiel ; présence de la matière selon les séries incertaine)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Calculer solde commercial, taux de couverture, termes de l'échange.",
+    "Expliquer avantage comparatif, libre-échange, protectionnisme.",
+    "Présenter balance des paiements et taux de change.",
+    "Décrire la mondialisation des échanges."
+   ],
+   "prerequisites": [
+    "tle-economie-monnaie-credit-inflation"
+   ],
+   "exercises": [
+    "tle-economie-ci-01",
+    "tle-economie-ci-02",
+    "tle-economie-ci-03",
+    "tle-economie-ci-04",
+    "tle-economie-ci-05",
+    "tle-economie-ci-06"
+   ],
+   "selfCheck": [
+    "tle-economie-ci-q1",
+    "tle-economie-ci-q2",
+    "tle-economie-ci-q3",
+    "tle-economie-ci-q4",
+    "tle-economie-ci-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Objectifs",
+     "md": "- Calculer solde commercial, taux de couverture et termes de l'échange.\n- Expliquer l'avantage comparatif, le libre-échange et le protectionnisme.\n- Présenter la balance des paiements et le taux de change.\n- Décrire la mondialisation des échanges."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les échanges extérieurs",
+     "md": "- **Exportations (X)** : ventes de biens et services à l'étranger ; **importations (M)** : achats à l'étranger.\n- **Solde commercial** = X − M : **excédent** s'il est positif, **déficit** s'il est négatif.\n- **Taux de couverture** = X ÷ M × 100.\n- **Termes de l'échange** = (indice des prix des exportations ÷ indice des prix des importations) × 100."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : solde et taux de couverture",
+     "statement": "Un pays fictif exporte pour 2 400 milliards de FCFA et importe pour 3 000 milliards. Calcule le solde commercial et le taux de couverture.",
+     "steps": [
+      {
+       "md": "**Solde** :",
+       "tex": "2\\,400 - 3\\,000 = -600"
+      },
+      {
+       "md": "**Taux de couverture** :",
+       "tex": "\\dfrac{2\\,400}{3\\,000} \\times 100 = 80"
+      },
+      {
+       "md": "**Lecture** : déficit de 600 milliards ; les exportations couvrent 80 % des importations."
+      }
+     ],
+     "answer": "**Solde = −600 milliards (déficit) ; taux de couverture = 80 %** (données fictives).",
+     "figure": {
+      "kind": "bars",
+      "unit": "milliards de FCFA (fictifs)",
+      "w": 420,
+      "h": 240,
+      "bars": [
+       {
+        "label": "Exportations",
+        "value": 2400,
+        "color": "green"
+       },
+       {
+        "label": "Importations",
+        "value": 3000,
+        "color": "red"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Pourquoi échanger ? L'avantage comparatif",
+     "md": "Selon **Ricardo**, un pays gagne à se **spécialiser** dans la production où son **coût d'opportunité** est le plus faible, même s'il produit tout moins bien qu'un autre ; les pays échangent ensuite et gagnent tous (gains à l'échange)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : l'avantage comparatif",
+     "statement": "Heures de travail par unité (fictif) : pays A : cacao 2 h, tissu 4 h ; pays B : cacao 3 h, tissu 3 h. Qui doit se spécialiser dans quoi ?",
+     "steps": [
+      {
+       "md": "**Coût d'opportunité du cacao** : A renonce à 2 ÷ 4 = 0,5 unité de tissu ; B renonce à 3 ÷ 3 = 1 unité de tissu."
+      },
+      {
+       "md": "Le coût est **plus faible pour A** : A a l'avantage comparatif dans le cacao."
+      },
+      {
+       "md": "Pour le tissu : A renonce à 2 unités de cacao, B à 1 : B a l'avantage comparatif dans le tissu."
+      }
+     ],
+     "answer": "**A se spécialise dans le cacao, B dans le tissu**, puis ils échangent (données fictives)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Libre-échange et protectionnisme",
+     "md": "- **Libre-échange** : peu d'obstacles aux échanges ; concurrence, choix, prix plus bas.\n- **Protectionnisme** : droits de douane, quotas, subventions pour protéger les producteurs nationaux (industries naissantes, emplois).\n- **Risques** : le protectionnisme peut renchérir les produits et provoquer des représailles ; le libre-échange peut fragiliser certains secteurs."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La balance des paiements",
+     "md": "La **balance des paiements** enregistre, sur une période, toutes les opérations entre les **résidents** d'un pays et le reste du monde :\n- **compte des transactions courantes** : biens, services, revenus, transferts ;\n- **compte de capital** et **compte financier** : mouvements de capitaux (investissements, prêts).\n\nElle est comptablement équilibrée ; ce sont ses **soldes** qui renseignent."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le taux de change",
+     "md": "Le **taux de change** est le prix d'une monnaie exprimé dans une autre.\n- **Appréciation** : la monnaie vaut plus ; **dépréciation** : elle vaut moins.\n- **Change flottant** : fixé par l'offre et la demande ; **change fixe** : parité fixée.\n- Une monnaie plus faible rend les exportations moins chères et les importations plus chères."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "FCFA et euro",
+     "md": "Le FCFA est lié à l'euro par une **parité fixe** : **1 euro = 655,957 FCFA**. Pour convertir : FCFA ÷ 655,957 = euros ; euros × 655,957 = FCFA.\n\nAvantage : stabilité des prix relatifs ; limite : le taux de change ne peut pas s'ajuster pour corriger un déséquilibre extérieur.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "La mondialisation des échanges",
+     "md": "- Les **firmes multinationales** organisent la production à l'échelle mondiale.\n- L'**OMC** (1995) encadre les règles du commerce.\n- Les **blocs régionaux** (CEMAC, UE…) facilitent les échanges entre voisins.\n- Les **pays en développement** exportent souvent des matières premières et importent des biens transformés."
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-economie-ci-03"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre **balance commerciale** (biens) et balance des paiements (toutes les opérations).\n- Calculer le taux de couverture avec M ÷ X.\n- Inverser la conversion FCFA ↔ euro.\n- Dire qu'une dépréciation est toujours « mauvaise » : elle aide les exportations."
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-economie-ci-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "La parité 655,957 est un repère très connu, mais à faire valider par l'enseignant.",
+      "Données chiffrées : toutes fictives."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Parité fixe FCFA/euro (1 euro = 655,957 FCFA) : valeur très connue mais à faire re-vérifier ; les mécanismes de garantie ne sont pas décrits.",
+    "Présence de l'économie au programme de Terminale et séries concernées : non vérifiées.",
+    "Structure de la balance des paiements (comptes) : simplifiée, à adapter au manuel.",
+    "Données chiffrées toutes fictives."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "tle-economie-ci-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-economie-commerce-international",
+   "prompt": "Un pays fictif exporte 1 800 milliards de FCFA et importe 2 100 milliards. Quel est son solde commercial (milliards de FCFA) ?",
+   "answer": -300,
+   "tolerance": 0,
+   "unit": "milliards FCFA",
+   "explanation": "Solde = X − M = 1 800 − 2 100 = −300 (déficit).",
+   "method": "X − M.",
+   "mistakes": [
+    "Inverser le sens de la soustraction."
+   ],
+   "source": "Exercice original, style Bac",
+   "chapter": "tle-economie-ch-echanges"
+  },
+  {
+   "id": "tle-economie-ci-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-economie-commerce-international",
+   "prompt": "Un pays fictif exporte 900 et importe 1 200 (même unité). Quel est le taux de couverture, en % ?",
+   "answer": 75,
+   "tolerance": 0,
+   "unit": "%",
+   "explanation": "900 ÷ 1 200 × 100 = 75 %.",
+   "method": "Taux de couverture = X ÷ M × 100.",
+   "mistakes": [
+    "Diviser M par X : 133 %."
+   ],
+   "source": "Exercice original, style Bac",
+   "chapter": "tle-economie-ch-echanges"
+  },
+  {
+   "id": "tle-economie-ci-03",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "lesson": "tle-economie-commerce-international",
+   "prompt": "Associe chaque notion à sa définition.",
+   "pairs": [
+    [
+     "Solde commercial",
+     "Exportations moins importations"
+    ],
+    [
+     "Protectionnisme",
+     "Obstacles aux importations pour protéger la production nationale"
+    ],
+    [
+     "Dépréciation",
+     "Perte de valeur d'une monnaie par rapport à une autre"
+    ],
+    [
+     "Avantage comparatif",
+     "Spécialisation selon le plus faible coût d'opportunité"
+    ],
+    [
+     "Balance des paiements",
+     "Opérations d'un pays avec le reste du monde"
+    ]
+   ],
+   "explanation": "Ce sont les notions de base du commerce international.",
+   "source": "Exercice original, style Bac",
+   "chapter": "tle-economie-ch-echanges"
+  },
+  {
+   "id": "tle-economie-ci-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "tle-economie-commerce-international",
+   "prompt": "Avec la parité 1 euro = 655,957 FCFA, convertis 100 000 FCFA en euros (arrondi au centime).",
+   "answer": 152.45,
+   "tolerance": 0.01,
+   "unit": "euros",
+   "explanation": "100 000 ÷ 655,957 ≈ 152,45 euros.",
+   "method": "FCFA ÷ 655,957.",
+   "mistakes": [
+    "Multiplier au lieu de diviser."
+   ],
+   "source": "Exercice original, style Bac",
+   "review": true,
+   "reviewNote": "Parité 655,957 à re-vérifier.",
+   "chapter": "tle-economie-ch-echanges"
+  },
+  {
+   "id": "tle-economie-ci-05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "tle-economie-commerce-international",
+   "prompt": "Pays A : cacao 2 h, tissu 4 h par unité ; pays B : cacao 3 h, tissu 3 h par unité (fictif). Quelle spécialisation est avantageuse ?",
+   "choices": [
+    "A produit du cacao et B du tissu",
+    "A produit du tissu et B du cacao",
+    "A produit les deux et B rien",
+    "Aucune : l'échange est impossible"
+   ],
+   "answer": 0,
+   "explanation": "Coût d'opportunité du cacao : 0,5 tissu pour A, 1 tissu pour B. A a l'avantage comparatif dans le cacao ; B dans le tissu.",
+   "source": "Exercice original, style Bac",
+   "chapter": "tle-economie-ch-echanges"
+  },
+  {
+   "id": "tle-economie-ci-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "tle-economie-commerce-international",
+   "prompt": "Un pays fictif exporte 3 200 milliards de FCFA de biens et en importe 4 000 milliards. L'indice des prix de ses exportations est 120 et celui de ses importations 100.",
+   "method": "Solde, taux de couverture, termes de l'échange.",
+   "mistakes": [
+    "Confondre solde et taux de couverture."
+   ],
+   "source": "Exercice original, style Bac",
+   "parts": [
+    {
+     "id": "tle-economie-ci-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le solde commercial (milliards de FCFA).",
+     "explanation": "3 200 − 4 000 = −800.",
+     "answer": -800,
+     "tolerance": 0
+    },
+    {
+     "id": "tle-economie-ci-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le taux de couverture (%).",
+     "explanation": "3 200 ÷ 4 000 × 100 = 80 %.",
+     "answer": 80,
+     "tolerance": 0,
+     "unit": "%"
+    },
+    {
+     "id": "tle-economie-ci-06-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule les termes de l'échange.",
+     "explanation": "120 ÷ 100 × 100 = 120 : les termes de l'échange s'améliorent.",
+     "answer": 120,
+     "tolerance": 0
+    },
+    {
+     "id": "tle-economie-ci-06-d",
+     "kind": "open",
+     "points": 2,
+     "prompt": "Propose deux moyens de réduire le déficit commercial.",
+     "explanation": "Voir le modèle.",
+     "model": "1) **Augmenter les exportations** : diversifier la production, transformer localement les matières premières, conquérir de nouveaux marchés. 2) **Réduire les importations** : produire localement des biens importés (substitution), encourager la consommation de produits locaux, tout en évitant les mesures qui provoquent des représailles.",
+     "rubric": [
+      "Deux moyens distincts.",
+      "Un lien clair avec le solde commercial.",
+      "Argumentation nuancée."
+     ]
+    }
+   ],
+   "chapter": "tle-economie-ch-echanges"
+  },
+  {
+   "id": "tle-economie-ci-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-economie-commerce-international",
+   "prompt": "Un solde commercial négatif signifie que :",
+   "choices": [
+    "Les exportations dépassent les importations",
+    "Les importations dépassent les exportations",
+    "Le pays n'échange pas",
+    "Le pays n'importe rien"
+   ],
+   "answer": 1,
+   "explanation": "X − M < 0 = déficit.",
+   "source": "Exercice original",
+   "chapter": "tle-economie-ch-echanges"
+  },
+  {
+   "id": "tle-economie-ci-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-economie-commerce-international",
+   "prompt": "Le taux de couverture se calcule :",
+   "choices": [
+    "M ÷ X × 100",
+    "X − M",
+    "X ÷ M × 100",
+    "X + M"
+   ],
+   "answer": 2,
+   "explanation": "Il compare exportations et importations.",
+   "source": "Exercice original",
+   "chapter": "tle-economie-ch-echanges"
+  },
+  {
+   "id": "tle-economie-ci-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-economie-commerce-international",
+   "prompt": "Le protectionnisme consiste à :",
+   "choices": [
+    "Supprimer tous les droits de douane",
+    "Interdire les exportations",
+    "Fixer le prix du pétrole",
+    "Limiter les importations pour protéger la production nationale"
+   ],
+   "answer": 3,
+   "explanation": "Droits de douane, quotas, subventions.",
+   "source": "Exercice original",
+   "chapter": "tle-economie-ch-echanges"
+  },
+  {
+   "id": "tle-economie-ci-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-economie-commerce-international",
+   "prompt": "Une dépréciation de la monnaie nationale rend en général :",
+   "choices": [
+    "Les exportations moins chères pour l'étranger",
+    "Les exportations plus chères",
+    "Les importations moins chères",
+    "Le commerce impossible"
+   ],
+   "answer": 0,
+   "explanation": "La monnaie vaut moins : les produits nationaux sont moins chers à l'étranger.",
+   "source": "Exercice original",
+   "chapter": "tle-economie-ch-echanges"
+  },
+  {
+   "id": "tle-economie-ci-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-economie-commerce-international",
+   "prompt": "Le taux de change est :",
+   "choices": [
+    "Le prix d'un produit",
+    "Le prix d'une monnaie exprimé dans une autre",
+    "Un impôt",
+    "Un taux d'intérêt"
+   ],
+   "answer": 1,
+   "explanation": "Exemple : combien de FCFA pour un euro.",
+   "source": "Exercice original",
+   "chapter": "tle-economie-ch-echanges"
+  }
+ ]
+}

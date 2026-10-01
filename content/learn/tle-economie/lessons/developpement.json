@@ -1,0 +1,697 @@
+{
+ "chapter": "tle-economie-ch-developpement",
+ "lessons": [
+  {
+   "id": "tle-economie-developpement-finances-emploi",
+   "title": "Développement, sous-développement, finances publiques et marché de l'emploi",
+   "minutes": 40,
+   "programRef": "Tle — Économie : développement, finances publiques, emploi (à vérifier sur le texte officiel ; présence de la matière selon les séries incertaine)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer croissance et développement ; connaître l'IDH.",
+    "Décrire le sous-développement et des stratégies.",
+    "Expliquer le budget de l'État.",
+    "Calculer taux d'activité et de chômage."
+   ],
+   "prerequisites": [
+    "tle-economie-comptabilite-nationale"
+   ],
+   "exercises": [
+    "tle-economie-dv-01",
+    "tle-economie-dv-02",
+    "tle-economie-dv-03",
+    "tle-economie-dv-04",
+    "tle-economie-dv-05",
+    "tle-economie-dv-06"
+   ],
+   "selfCheck": [
+    "tle-economie-dv-q1",
+    "tle-economie-dv-q2",
+    "tle-economie-dv-q3",
+    "tle-economie-dv-q4",
+    "tle-economie-dv-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Objectifs",
+     "md": "- Distinguer croissance et développement ; connaître l'IDH.\n- Décrire le sous-développement et les stratégies de développement.\n- Expliquer le budget de l'État et calculer solde et ratio dette/PIB.\n- Calculer taux d'activité et taux de chômage."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Croissance et développement",
+     "md": "- **Croissance** : augmentation durable de la production (PIB).\n- **Développement** : amélioration des conditions de vie (santé, éducation, revenu, réduction de la pauvreté) et transformation des structures de l'économie.\n\nLa croissance est **nécessaire mais non suffisante** : elle doit aussi profiter à la population."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "L'indice de développement humain (IDH)",
+     "md": "L'**IDH** combine trois dimensions :\n- **santé** (espérance de vie) ;\n- **éducation** (durée de scolarisation) ;\n- **niveau de vie** (revenu par habitant).\n\nIl complète le PIB par habitant, mais ne mesure ni les inégalités ni l'environnement."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Sous-développement : traits et stratégies",
+     "md": "- **Traits** : faible revenu, forte part de l'agriculture et du secteur informel, dépendance aux matières premières, dette, faible accès à la santé, à l'éducation, à l'énergie.\n- **Stratégies** : diversifier l'économie, **transformer localement** les matières premières, investir dans le **capital humain**, améliorer les infrastructures, renforcer la **gouvernance** et l'intégration régionale."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les finances publiques",
+     "md": "Le **budget de l'État** (loi de finances) prévoit chaque année :\n- les **recettes** : impôts directs (sur les revenus) et indirects (TVA), droits de douane, recettes des ressources naturelles, emprunts ;\n- les **dépenses** : fonctionnement (salaires, entretien), **investissement** (routes, écoles), **service de la dette**.\n\n**Solde budgétaire** = recettes − dépenses."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : budget et dette",
+     "statement": "Un État fictif a des recettes de 3 000 et des dépenses de 3 400 (milliards de FCFA). Sa dette est de 4 500 et son PIB de 9 000. Calcule le solde et le ratio dette/PIB.",
+     "steps": [
+      {
+       "md": "**Solde** :",
+       "tex": "3\\,000 - 3\\,400 = -400"
+      },
+      {
+       "md": "**Lecture** : déficit de 400 milliards, financé par l'emprunt : la dette augmente."
+      },
+      {
+       "md": "**Ratio dette/PIB** :",
+       "tex": "\\dfrac{4\\,500}{9\\,000} \\times 100 = 50"
+      }
+     ],
+     "answer": "**Déficit de 400 milliards ; dette = 50 % du PIB** (données fictives)."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le marché de l'emploi",
+     "md": "- **Population active** = actifs occupés + **chômeurs** (sans emploi, disponibles, qui en cherchent).\n- **Taux d'activité** = population active ÷ population en âge de travailler × 100.\n- **Taux de chômage** = chômeurs ÷ population active × 100.\n- **Sous-emploi** : emploi trop court ou peu rémunéré ; **secteur informel** : activités non déclarées, très répandues."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 230,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 90,
+        "w": 120,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 120,
+        "text": "Pop. totale",
+        "size": 14
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 115,
+        "x2": 160,
+        "y2": 115,
+        "color": "grey",
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 90,
+        "w": 120,
+        "h": 50,
+        "fill": "lightgreen",
+        "stroke": "green",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 112,
+        "text": "En âge",
+        "size": 14
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 130,
+        "text": "de travailler",
+        "size": 14
+       },
+       {
+        "t": "line",
+        "x1": 280,
+        "y1": 105,
+        "x2": 310,
+        "y2": 55,
+        "color": "grey",
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 280,
+        "y1": 125,
+        "x2": 310,
+        "y2": 175,
+        "color": "grey",
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 310,
+        "y": 20,
+        "w": 120,
+        "h": 50,
+        "fill": "lightyellow",
+        "stroke": "orange",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 370,
+        "y": 50,
+        "text": "Actifs",
+        "size": 14
+       },
+       {
+        "t": "rect",
+        "x": 310,
+        "y": 160,
+        "w": 120,
+        "h": 50,
+        "fill": "lightgrey",
+        "stroke": "grey",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 370,
+        "y": 190,
+        "text": "Inactifs",
+        "size": 14
+       }
+      ]
+     },
+     "caption": "Les catégories de la population (schéma) : la population active comprend les actifs occupés et les chômeurs.",
+     "alt": "Schéma : « Population totale » mène à « En âge de travailler », qui se divise en « Actifs » et « Inactifs »."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : taux d'activité et de chômage",
+     "statement": "Une région fictive compte 12 000 personnes en âge de travailler, dont 8 000 actives parmi lesquelles 600 chômeurs. Calcule le taux d'activité et le taux de chômage.",
+     "steps": [
+      {
+       "md": "**Taux d'activité** :",
+       "tex": "\\dfrac{8\\,000}{12\\,000} \\times 100 \\approx 66{,}7"
+      },
+      {
+       "md": "**Taux de chômage** :",
+       "tex": "\\dfrac{600}{8\\,000} \\times 100 = 7{,}5"
+      },
+      {
+       "md": "**Attention** : le chômage se calcule sur la **population active**, pas sur la population totale."
+      }
+     ],
+     "answer": "**Taux d'activité ≈ 66,7 % ; taux de chômage = 7,5 %** (données fictives)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Chômage, informel et politiques de l'emploi",
+     "md": "- **Causes** : croissance trop lente par rapport à la population jeune, formation inadaptée, faible investissement.\n- **Conséquences** : pauvreté, inégalités, tensions sociales.\n- **Actions** : formation, appui à l'entrepreneuriat, investissements créateurs d'emplois, passage progressif de l'informel vers le formel."
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-economie-dv-03"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Calculer le taux de chômage sur la population **totale**.\n- Confondre **déficit** (un an) et **dette** (accumulation).\n- Dire que le PIB par habitant mesure à lui seul le développement.\n- Croire que tous les inactifs sont des chômeurs (étudiants, retraités, personnes au foyer ne le sont pas)."
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-economie-dv-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Toutes les valeurs sont fictives ; l'économie informelle est difficile à chiffrer : prudence.",
+      "Entraîne-toi à rédiger : définition, calcul, interprétation."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Présence de l'économie au programme de Terminale et séries concernées : non vérifiées.",
+    "Causes du sous-développement et stratégies : présentées de façon générale, plusieurs interprétations existent ; à nuancer par un enseignant.",
+    "Mode de calcul (IDH, chômage au sens BIT ou national) à vérifier.",
+    "Données chiffrées toutes fictives."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "tle-economie-dv-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-economie-developpement-finances-emploi",
+   "prompt": "Dans une région fictive, la population active compte 5 000 personnes dont 400 chômeurs. Quel est le taux de chômage, en % ?",
+   "answer": 8,
+   "tolerance": 0,
+   "unit": "%",
+   "explanation": "400 ÷ 5 000 × 100 = 8 %.",
+   "method": "Chômeurs ÷ population active × 100.",
+   "mistakes": [
+    "Diviser par la population totale."
+   ],
+   "source": "Exercice original, style Bac",
+   "chapter": "tle-economie-ch-developpement"
+  },
+  {
+   "id": "tle-economie-dv-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-economie-developpement-finances-emploi",
+   "prompt": "Un État fictif prévoit 2 500 de recettes et 2 900 de dépenses (milliards de FCFA). Quel est son solde budgétaire ?",
+   "answer": -400,
+   "tolerance": 0,
+   "unit": "milliards FCFA",
+   "explanation": "Solde = recettes − dépenses = 2 500 − 2 900 = −400 (déficit).",
+   "method": "Recettes − dépenses.",
+   "mistakes": [
+    "Inverser la soustraction."
+   ],
+   "source": "Exercice original, style Bac",
+   "chapter": "tle-economie-ch-developpement"
+  },
+  {
+   "id": "tle-economie-dv-03",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "lesson": "tle-economie-developpement-finances-emploi",
+   "prompt": "Associe chaque notion à sa définition.",
+   "pairs": [
+    [
+     "IDH",
+     "Indice combinant santé, éducation et niveau de vie"
+    ],
+    [
+     "Solde budgétaire",
+     "Recettes moins dépenses de l'État"
+    ],
+    [
+     "Chômeur",
+     "Personne sans emploi, disponible et en recherche d'emploi"
+    ],
+    [
+     "Dette publique",
+     "Ensemble des emprunts de l'État non remboursés"
+    ],
+    [
+     "Secteur informel",
+     "Activités non déclarées"
+    ]
+   ],
+   "explanation": "Ces notions sont à distinguer soigneusement.",
+   "source": "Exercice original, style Bac",
+   "chapter": "tle-economie-ch-developpement"
+  },
+  {
+   "id": "tle-economie-dv-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "tle-economie-developpement-finances-emploi",
+   "prompt": "Parmi 20 000 personnes en âge de travailler, 12 000 sont actives. Quel est le taux d'activité, en % ?",
+   "answer": 60,
+   "tolerance": 0,
+   "unit": "%",
+   "explanation": "12 000 ÷ 20 000 × 100 = 60 %.",
+   "method": "Population active ÷ population en âge de travailler.",
+   "mistakes": [
+    "Diviser par la population totale."
+   ],
+   "source": "Exercice original, style Bac",
+   "chapter": "tle-economie-ch-developpement"
+  },
+  {
+   "id": "tle-economie-dv-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "tle-economie-developpement-finances-emploi",
+   "prompt": "Une dette publique fictive de 6 000 milliards de FCFA pour un PIB de 15 000 milliards. Quel est le ratio dette/PIB, en % ?",
+   "answer": 40,
+   "tolerance": 0,
+   "unit": "%",
+   "explanation": "6 000 ÷ 15 000 × 100 = 40 %.",
+   "method": "Dette ÷ PIB × 100.",
+   "mistakes": [
+    "Diviser le PIB par la dette."
+   ],
+   "source": "Exercice original, style Bac",
+   "chapter": "tle-economie-ch-developpement"
+  },
+  {
+   "id": "tle-economie-dv-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "tle-economie-developpement-finances-emploi",
+   "prompt": "Un pays fictif présente : recettes de l'État 5 000, dépenses 5 600 (milliards de FCFA) ; population en âge de travailler : 20 000 ; actifs : 12 000, dont 900 chômeurs.",
+   "method": "Appliquer chaque formule puis interpréter.",
+   "mistakes": [
+    "Oublier que le chômage se calcule sur les actifs."
+   ],
+   "source": "Exercice original, style Bac",
+   "parts": [
+    {
+     "id": "tle-economie-dv-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le solde budgétaire (milliards de FCFA).",
+     "explanation": "5 000 − 5 600 = −600.",
+     "answer": -600,
+     "tolerance": 0
+    },
+    {
+     "id": "tle-economie-dv-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le taux d'activité (%).",
+     "explanation": "12 000 ÷ 20 000 × 100 = 60 %.",
+     "answer": 60,
+     "tolerance": 0,
+     "unit": "%"
+    },
+    {
+     "id": "tle-economie-dv-06-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le taux de chômage (%).",
+     "explanation": "900 ÷ 12 000 × 100 = 7,5 %.",
+     "answer": 7.5,
+     "tolerance": 0.05,
+     "unit": "%"
+    },
+    {
+     "id": "tle-economie-dv-06-d",
+     "kind": "open",
+     "points": 2,
+     "prompt": "Propose deux mesures pour réduire le chômage et le déficit.",
+     "explanation": "Voir le modèle.",
+     "model": "**Emploi** : développer la formation professionnelle et soutenir l'entrepreneuriat des jeunes. **Déficit** : élargir l'assiette fiscale (lutter contre la fraude, intégrer progressivement l'informel) et maîtriser les dépenses de fonctionnement tout en protégeant l'investissement.",
+     "rubric": [
+      "Une mesure pour l'emploi.",
+      "Une mesure pour le déficit.",
+      "Lien entre mesure et problème."
+     ]
+    }
+   ],
+   "chapter": "tle-economie-ch-developpement"
+  },
+  {
+   "id": "tle-economie-dv-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-economie-developpement-finances-emploi",
+   "prompt": "La croissance économique est :",
+   "choices": [
+    "Une augmentation durable de la production",
+    "Une baisse des prix",
+    "Une hausse du chômage",
+    "Une hausse des impôts uniquement"
+   ],
+   "answer": 0,
+   "explanation": "On la mesure par le PIB.",
+   "source": "Exercice original",
+   "chapter": "tle-economie-ch-developpement"
+  },
+  {
+   "id": "tle-economie-dv-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-economie-developpement-finances-emploi",
+   "prompt": "L'IDH combine :",
+   "choices": [
+    "Dette, déficit et inflation",
+    "Santé, éducation et niveau de vie",
+    "Exportations, importations et change",
+    "Impôts, taxes et droits de douane"
+   ],
+   "answer": 1,
+   "explanation": "Trois dimensions.",
+   "source": "Exercice original",
+   "chapter": "tle-economie-ch-developpement"
+  },
+  {
+   "id": "tle-economie-dv-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-economie-developpement-finances-emploi",
+   "prompt": "Un déficit budgétaire apparaît quand :",
+   "choices": [
+    "Les recettes dépassent les dépenses",
+    "Le PIB baisse",
+    "Les dépenses dépassent les recettes",
+    "Le chômage monte"
+   ],
+   "answer": 2,
+   "explanation": "Solde négatif.",
+   "source": "Exercice original",
+   "chapter": "tle-economie-ch-developpement"
+  },
+  {
+   "id": "tle-economie-dv-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-economie-developpement-finances-emploi",
+   "prompt": "Le taux de chômage se calcule :",
+   "choices": [
+    "Chômeurs ÷ population totale",
+    "Actifs ÷ chômeurs",
+    "Inactifs ÷ actifs",
+    "Chômeurs ÷ population active"
+   ],
+   "answer": 3,
+   "explanation": "On rapporte les chômeurs à la population active.",
+   "source": "Exercice original",
+   "chapter": "tle-economie-ch-developpement"
+  },
+  {
+   "id": "tle-economie-dv-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-economie-developpement-finances-emploi",
+   "prompt": "Une stratégie de développement possible est :",
+   "choices": [
+    "Transformer localement les matières premières",
+    "Exporter uniquement des matières brutes",
+    "Réduire l'éducation",
+    "Supprimer les infrastructures"
+   ],
+   "answer": 0,
+   "explanation": "Elle augmente la valeur ajoutée locale.",
+   "source": "Exercice original",
+   "chapter": "tle-economie-ch-developpement"
+  },
+  {
+   "id": "tle-economie-blanc-ex1",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "tle-economie-comptabilite-nationale",
+   "prompt": "Exercice 1 — Comptabilité nationale (données fictives, en milliards de FCFA) : C = 4 000, I = 1 200, G = 1 000, X = 900, M = 1 100 ; PIB de l'année précédente : 5 500.",
+   "source": "Épreuve blanche originale, style Bac",
+   "parts": [
+    {
+     "id": "tle-economie-blanc-ex1-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule la valeur ajoutée d'une entreprise dont la production est de 800 et les consommations intermédiaires de 500.",
+     "explanation": "VA = 800 − 500 = 300.",
+     "answer": 300,
+     "tolerance": 0
+    },
+    {
+     "id": "tle-economie-blanc-ex1-b",
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Calcule le PIB par les dépenses.",
+     "explanation": "PIB = 4 000 + 1 200 + 1 000 + 900 − 1 100 = 6 000.",
+     "answer": 6000,
+     "tolerance": 0
+    },
+    {
+     "id": "tle-economie-blanc-ex1-c",
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Calcule le taux de croissance du PIB, arrondi à 0,1 %.",
+     "explanation": "(6 000 − 5 500) ÷ 5 500 × 100 = 9,09… ≈ 9,1 %.",
+     "answer": 9.1,
+     "tolerance": 0.05,
+     "unit": "%"
+    },
+    {
+     "id": "tle-economie-blanc-ex1-d",
+     "kind": "open",
+     "points": 2,
+     "prompt": "Pourquoi ne peut-on pas affirmer que cette croissance améliore forcément le niveau de vie ?",
+     "explanation": "Voir le modèle.",
+     "model": "Il faut tenir compte de l'**inflation** (PIB réel), de la **croissance de la population** (PIB par habitant) et de la **répartition**. Le PIB ignore aussi l'économie informelle et l'environnement : **croissance ≠ développement**.",
+     "rubric": [
+      "Inflation ou PIB réel.",
+      "Population ou répartition.",
+      "Distinction croissance / développement."
+     ]
+    }
+   ],
+   "chapter": "tle-economie-ch-comptabilite"
+  },
+  {
+   "id": "tle-economie-blanc-ex2",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "tle-economie-monnaie-credit-inflation",
+   "prompt": "Exercice 2 — Monnaie et échanges extérieurs (données fictives) : l'indice des prix passe de 125 à 130 ; un capital de 100 000 FCFA est placé à 5 % pendant 2 ans en intérêts composés ; le pays exporte 1 500 et importe 2 000 (milliards de FCFA).",
+   "source": "Épreuve blanche originale, style Bac",
+   "parts": [
+    {
+     "id": "tle-economie-blanc-ex2-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le taux d'inflation (%).",
+     "explanation": "(130 − 125) ÷ 125 × 100 = 4 %.",
+     "answer": 4,
+     "tolerance": 0,
+     "unit": "%"
+    },
+    {
+     "id": "tle-economie-blanc-ex2-b",
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Calcule le capital final après 2 ans (FCFA).",
+     "explanation": "100 000 × 1,05² = 110 250.",
+     "answer": 110250,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "tle-economie-blanc-ex2-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le solde commercial (milliards de FCFA).",
+     "explanation": "1 500 − 2 000 = −500.",
+     "answer": -500,
+     "tolerance": 0
+    },
+    {
+     "id": "tle-economie-blanc-ex2-d",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le taux de couverture (%).",
+     "explanation": "1 500 ÷ 2 000 × 100 = 75 %.",
+     "answer": 75,
+     "tolerance": 0,
+     "unit": "%"
+    },
+    {
+     "id": "tle-economie-blanc-ex2-e",
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explique comment une hausse du taux directeur peut ralentir l'inflation.",
+     "explanation": "Voir le modèle.",
+     "model": "Une hausse du **taux directeur** renchérit le crédit : les ménages et les entreprises empruntent moins, la **demande** ralentit et la hausse des prix est freinée.",
+     "rubric": [
+      "Lien taux directeur → coût du crédit.",
+      "Lien crédit → demande → prix."
+     ]
+    }
+   ],
+   "chapter": "tle-economie-ch-monnaie"
+  },
+  {
+   "id": "tle-economie-blanc-ex3",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "tle-economie-developpement-finances-emploi",
+   "prompt": "Exercice 3 — Développement, finances publiques, emploi (données fictives) : 10 000 actifs dont 800 chômeurs ; recettes de l'État 4 000, dépenses 4 300 (milliards de FCFA).",
+   "source": "Épreuve blanche originale, style Bac",
+   "parts": [
+    {
+     "id": "tle-economie-blanc-ex3-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le taux de chômage (%).",
+     "explanation": "800 ÷ 10 000 × 100 = 8 %.",
+     "answer": 8,
+     "tolerance": 0,
+     "unit": "%"
+    },
+    {
+     "id": "tle-economie-blanc-ex3-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le solde budgétaire (milliards de FCFA).",
+     "explanation": "4 000 − 4 300 = −300.",
+     "answer": -300,
+     "tolerance": 0
+    },
+    {
+     "id": "tle-economie-blanc-ex3-c",
+     "kind": "open",
+     "points": 2,
+     "prompt": "Distingue croissance et développement et donne les trois composantes de l'IDH.",
+     "explanation": "Voir le modèle.",
+     "model": "La **croissance** est l'augmentation durable de la production (PIB) ; le **développement** est l'amélioration des conditions de vie et des structures. L'**IDH** combine **santé**, **éducation** et **niveau de vie**.",
+     "rubric": [
+      "Deux définitions distinctes.",
+      "Trois composantes exactes."
+     ]
+    },
+    {
+     "id": "tle-economie-blanc-ex3-d",
+     "kind": "open",
+     "points": 2,
+     "prompt": "Propose deux mesures pour favoriser l'emploi des jeunes.",
+     "explanation": "Voir le modèle.",
+     "model": "1) **Formation** adaptée aux besoins des entreprises. 2) **Appui à l'entrepreneuriat** (financement, accompagnement) et investissements créateurs d'emplois.",
+     "rubric": [
+      "Deux mesures distinctes.",
+      "Lien avec l'emploi."
+     ]
+    }
+   ],
+   "chapter": "tle-economie-ch-developpement"
+  }
+ ]
+}

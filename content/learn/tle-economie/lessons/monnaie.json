@@ -1,0 +1,446 @@
+{
+ "chapter": "tle-economie-ch-monnaie",
+ "lessons": [
+  {
+   "id": "tle-economie-monnaie-credit-inflation",
+   "title": "Monnaie, crédit, banques, politique monétaire et inflation",
+   "minutes": 40,
+   "programRef": "Tle — Économie : monnaie, crédit, banques, politique monétaire, inflation (à vérifier sur le texte officiel ; présence de la matière selon les séries incertaine)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Définir la monnaie et ses fonctions.",
+    "Distinguer banque centrale et banques commerciales.",
+    "Calculer intérêts et inflation.",
+    "Expliquer la politique monétaire et les effets de l'inflation."
+   ],
+   "prerequisites": [
+    "tle-economie-comptabilite-nationale"
+   ],
+   "exercises": [
+    "tle-economie-mo-01",
+    "tle-economie-mo-02",
+    "tle-economie-mo-03",
+    "tle-economie-mo-04",
+    "tle-economie-mo-05",
+    "tle-economie-mo-06"
+   ],
+   "selfCheck": [
+    "tle-economie-mo-q1",
+    "tle-economie-mo-q2",
+    "tle-economie-mo-q3",
+    "tle-economie-mo-q4",
+    "tle-economie-mo-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "objectifs",
+     "title": "Objectifs",
+     "md": "- Définir la monnaie, ses fonctions et ses formes.\n- Distinguer banque centrale et banques commerciales.\n- Calculer des intérêts et un taux d'inflation.\n- Expliquer la politique monétaire et les effets de l'inflation."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La monnaie et ses fonctions",
+     "md": "La **monnaie** est ce qui est accepté par tous pour payer.\n- **Intermédiaire des échanges** (on évite le troc).\n- **Unité de compte** : on exprime les prix dans une même unité (le FCFA).\n- **Réserve de valeur** : on garde du pouvoir d'achat pour plus tard.\n\nFormes : pièces et billets (**fiduciaire**), écritures bancaires (**scripturale**), monnaie mobile."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les institutions monétaires",
+     "md": "- **Banque centrale** : émet la monnaie, est la « banque des banques », conduit la **politique monétaire** (pour la zone CEMAC : la BEAC).\n- **Banques commerciales** : collectent les dépôts, accordent des **crédits**.\n- **Microfinance** : petits crédits et épargne près des ménages.\n- **Tontine** : épargne collective traditionnelle, hors système bancaire.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Intérêts simples et composés",
+     "md": "- **Intérêts simples** (le capital seul porte intérêt) : $I = C \\times t \\times n$.\n- **Intérêts composés** (les intérêts s'ajoutent au capital) : capital final $C_n = C_0 (1 + t)^n$, avec t taux par période et n nombre de périodes.\n\nUn **crédit** est une somme prêtée, à rembourser avec des intérêts."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : intérêts simples et composés",
+     "statement": "Un commerçant fictif place 200 000 FCFA à 6 % par an pendant 3 ans. Calcule le capital final en intérêts composés.",
+     "steps": [
+      {
+       "md": "**Formule** :",
+       "tex": "C_3 = 200\\,000 \\times (1 + 0{,}06)^3"
+      },
+      {
+       "md": "**Calcul** :",
+       "tex": "1{,}06^3 = 1{,}191016 \\quad \\text{donc} \\quad C_3 = 238\\,203{,}2"
+      },
+      {
+       "md": "**Lecture** : capital final ≈ **238 203 FCFA**, soit environ 38 203 FCFA d'intérêts. En intérêts simples, on aurait 36 000 FCFA d'intérêts (200 000 × 0,06 × 3)."
+      }
+     ],
+     "answer": "**≈ 238 203 FCFA** (données fictives)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "La politique monétaire",
+     "md": "La banque centrale agit sur la quantité de monnaie et le coût du crédit :\n- **taux directeur** : s'il monte, le crédit coûte plus cher, la demande de crédit et la hausse des prix ralentissent ;\n- **réserves obligatoires** : part des dépôts que les banques doivent conserver.\n\nObjectifs habituels : **stabilité des prix**, soutien à l'activité, stabilité financière."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "L'inflation",
+     "md": "**Inflation** : hausse **générale et durable** des prix (mesurée par l'**indice des prix à la consommation**, IPC).\n\n**Taux d'inflation** = (IPC_t − IPC_{t−1}) ÷ IPC_{t−1} × 100.\n\n**Déflation** : baisse générale et durable des prix.\n\nLe **pouvoir d'achat** diminue si les prix montent plus vite que les revenus."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "unit": "indice des prix (fictif)",
+      "w": 420,
+      "h": 240,
+      "bars": [
+       {
+        "label": "Année 1",
+        "value": 100,
+        "color": "blue"
+       },
+       {
+        "label": "Année 2",
+        "value": 104,
+        "color": "green"
+       },
+       {
+        "label": "Année 3",
+        "value": 108,
+        "color": "orange"
+       },
+       {
+        "label": "Année 4",
+        "value": 113.4,
+        "color": "red"
+       }
+      ]
+     },
+     "caption": "Indice des prix (données fictives) : les prix augmentent chaque année.",
+     "alt": "Diagramme à barres (données fictives) de l'indice des prix sur quatre années : 100, 104, 108 et 113,4."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : taux d'inflation",
+     "statement": "L'IPC (fictif) passe de 108 à 113,4. Calcule le taux d'inflation.",
+     "steps": [
+      {
+       "md": "**Variation** : 113,4 − 108 = 5,4."
+      },
+      {
+       "md": "**Taux** :",
+       "tex": "\\dfrac{5{,}4}{108} \\times 100 = 5"
+      },
+      {
+       "md": "**Lecture** : les prix augmentent de 5 % ; pour un salaire inchangé, le pouvoir d'achat baisse d'environ 5 %."
+      }
+     ],
+     "answer": "**Taux d'inflation = 5 %** (données fictives)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Causes et conséquences de l'inflation",
+     "md": "- **Causes** : demande trop forte (par rapport à l'offre), hausse des **coûts** (carburant, matières premières importées), excès de **monnaie**.\n- **Conséquences** : baisse du pouvoir d'achat, pénalise les épargnants (si le taux d'intérêt est inférieur à l'inflation), avantage les emprunteurs.\n- **Taux d'intérêt réel** ≈ taux nominal − inflation."
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-economie-mo-03"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre **inflation** (hausse **générale** et durable) et hausse du prix d'un seul produit.\n- Écrire $C_0(1 + t)^n$ pour des intérêts simples.\n- Oublier de **diviser par l'IPC de départ** dans le taux d'inflation.\n- Croire que la banque centrale prête aux particuliers : elle agit sur les banques."
+    },
+    {
+     "type": "exercise",
+     "ref": "tle-economie-mo-06"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Toutes les valeurs sont fictives.",
+      "Pour un exercice, écris toujours la formule avant de calculer."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Présence de l'économie au programme de Terminale et séries concernées : non vérifiées.",
+    "Rôle de la BEAC et de la politique monétaire de la zone : formulé en termes généraux, à vérifier.",
+    "Formules d'intérêts et d'inflation : niveau de détail à ajuster ; taux réel approximé (Fisher simplifié).",
+    "Données chiffrées toutes fictives."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "tle-economie-mo-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-economie-monnaie-credit-inflation",
+   "prompt": "Quelle fonction de la monnaie permet de comparer le prix d'un sac de riz et celui d'un téléphone ?",
+   "choices": [
+    "Unité de compte",
+    "Réserve de valeur",
+    "Intermédiaire des échanges seulement",
+    "Instrument de crédit"
+   ],
+   "answer": 0,
+   "explanation": "Exprimer tous les prix dans la même unité, c'est la fonction d'unité de compte.",
+   "source": "Exercice original, style Bac",
+   "chapter": "tle-economie-ch-monnaie"
+  },
+  {
+   "id": "tle-economie-mo-02",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "lesson": "tle-economie-monnaie-credit-inflation",
+   "prompt": "Associe chaque forme de monnaie à son exemple.",
+   "pairs": [
+    [
+     "Monnaie fiduciaire",
+     "Billets et pièces"
+    ],
+    [
+     "Monnaie scripturale",
+     "Virement bancaire"
+    ],
+    [
+     "Monnaie mobile",
+     "Paiement par téléphone"
+    ],
+    [
+     "Troc",
+     "Échange direct de biens"
+    ],
+    [
+     "Crédit",
+     "Somme prêtée à rembourser avec intérêts"
+    ]
+   ],
+   "explanation": "Chaque élément correspond à une forme ou à un mécanisme de paiement.",
+   "source": "Exercice original, style Bac",
+   "chapter": "tle-economie-ch-monnaie"
+  },
+  {
+   "id": "tle-economie-mo-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-economie-monnaie-credit-inflation",
+   "prompt": "L'indice des prix passe de 200 à 210. Quel est le taux d'inflation, en % ?",
+   "answer": 5,
+   "tolerance": 0,
+   "unit": "%",
+   "explanation": "(210 − 200) ÷ 200 × 100 = 5 %.",
+   "method": "Variation ÷ valeur de départ × 100.",
+   "mistakes": [
+    "Diviser par 210."
+   ],
+   "source": "Exercice original, style Bac",
+   "chapter": "tle-economie-ch-monnaie"
+  },
+  {
+   "id": "tle-economie-mo-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "tle-economie-monnaie-credit-inflation",
+   "prompt": "Un capital de 500 000 FCFA est placé à 8 % par an pendant 2 ans en intérêts simples. Quel est le montant total des intérêts, en FCFA ?",
+   "answer": 80000,
+   "tolerance": 0,
+   "unit": "FCFA",
+   "explanation": "I = 500 000 × 0,08 × 2 = 80 000 FCFA.",
+   "method": "I = C × t × n.",
+   "mistakes": [
+    "Utiliser la formule composée : 83 200 FCFA."
+   ],
+   "source": "Exercice original, style Bac",
+   "chapter": "tle-economie-ch-monnaie"
+  },
+  {
+   "id": "tle-economie-mo-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "tle-economie-monnaie-credit-inflation",
+   "prompt": "Un livret rapporte 6 % par an alors que l'inflation est de 2,5 %. Quel est le taux d'intérêt réel approximatif, en % ?",
+   "answer": 3.5,
+   "tolerance": 0.05,
+   "unit": "%",
+   "explanation": "Taux réel ≈ 6 − 2,5 = 3,5 %.",
+   "method": "Taux réel ≈ taux nominal − inflation.",
+   "mistakes": [
+    "Additionner les deux taux."
+   ],
+   "source": "Exercice original, style Bac",
+   "chapter": "tle-economie-ch-monnaie"
+  },
+  {
+   "id": "tle-economie-mo-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "tle-economie-monnaie-credit-inflation",
+   "prompt": "Un ménage fictif place 100 000 FCFA à 5 % par an en intérêts composés pendant 2 ans, alors que l'indice des prix passe de 100 à 103 sur la première année.",
+   "method": "Intérêts composés, inflation, taux réel.",
+   "mistakes": [
+    "Oublier d'élever 1,05 au carré."
+   ],
+   "source": "Exercice original, style Bac",
+   "parts": [
+    {
+     "id": "tle-economie-mo-06-a",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Calcule le capital final après 2 ans (FCFA).",
+     "explanation": "C₂ = 100 000 × 1,05² = 110 250 FCFA.",
+     "answer": 110250,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "tle-economie-mo-06-b",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quel est le taux d'inflation de la première année (%) ?",
+     "explanation": "(103 − 100) ÷ 100 × 100 = 3 %.",
+     "answer": 3,
+     "tolerance": 0,
+     "unit": "%"
+    },
+    {
+     "id": "tle-economie-mo-06-c",
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Quel est le taux d'intérêt réel approximatif la première année (%) ?",
+     "explanation": "5 − 3 = 2 %.",
+     "answer": 2,
+     "tolerance": 0.05,
+     "unit": "%"
+    },
+    {
+     "id": "tle-economie-mo-06-d",
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explique pourquoi l'inflation peut pénaliser l'épargnant et avantager l'emprunteur.",
+     "explanation": "Voir le modèle.",
+     "model": "Si les prix montent, l'argent épargné **perd du pouvoir d'achat** : l'épargnant est pénalisé si son taux est inférieur à l'inflation. L'emprunteur rembourse avec une monnaie qui **vaut moins** : le poids de sa dette diminue, ce qui l'avantage.",
+     "rubric": [
+      "Perte de pouvoir d'achat expliquée.",
+      "Effet sur l'emprunteur expliqué.",
+      "Conclusion claire."
+     ]
+    }
+   ],
+   "chapter": "tle-economie-ch-monnaie"
+  },
+  {
+   "id": "tle-economie-mo-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-economie-monnaie-credit-inflation",
+   "prompt": "L'inflation est :",
+   "choices": [
+    "La hausse du prix d'un produit",
+    "Une hausse générale et durable des prix",
+    "Une baisse générale des prix",
+    "Une hausse des salaires seulement"
+   ],
+   "answer": 1,
+   "explanation": "Générale et durable.",
+   "source": "Exercice original",
+   "chapter": "tle-economie-ch-monnaie"
+  },
+  {
+   "id": "tle-economie-mo-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-economie-monnaie-credit-inflation",
+   "prompt": "Les billets et les pièces constituent la monnaie :",
+   "choices": [
+    "Scripturale",
+    "Mobile",
+    "Fiduciaire",
+    "Marchandise"
+   ],
+   "answer": 2,
+   "explanation": "Billets et pièces = monnaie fiduciaire.",
+   "source": "Exercice original",
+   "chapter": "tle-economie-ch-monnaie"
+  },
+  {
+   "id": "tle-economie-mo-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-economie-monnaie-credit-inflation",
+   "prompt": "Si le taux directeur augmente, en général :",
+   "choices": [
+    "Le crédit devient gratuit",
+    "Les prix montent automatiquement",
+    "L'épargne disparaît",
+    "Le crédit devient plus cher"
+   ],
+   "answer": 3,
+   "explanation": "Un taux plus haut renchérit le crédit.",
+   "source": "Exercice original",
+   "chapter": "tle-economie-ch-monnaie"
+  },
+  {
+   "id": "tle-economie-mo-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-economie-monnaie-credit-inflation",
+   "prompt": "Des intérêts simples de 1 000 FCFA à 10 % pendant 1 an valent :",
+   "choices": [
+    "100 FCFA",
+    "10 FCFA",
+    "1 100 FCFA",
+    "10 000 FCFA"
+   ],
+   "answer": 0,
+   "explanation": "1 000 × 0,10 × 1 = 100.",
+   "source": "Exercice original",
+   "chapter": "tle-economie-ch-monnaie"
+  },
+  {
+   "id": "tle-economie-mo-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "tle-economie-monnaie-credit-inflation",
+   "prompt": "Si les prix montent de 4 % et le salaire de 1 %, le pouvoir d'achat :",
+   "choices": [
+    "Augmente",
+    "Diminue",
+    "Reste identique",
+    "Double"
+   ],
+   "answer": 1,
+   "explanation": "Les prix montent plus vite que le revenu.",
+   "source": "Exercice original",
+   "chapter": "tle-economie-ch-monnaie"
+  }
+ ]
+}
