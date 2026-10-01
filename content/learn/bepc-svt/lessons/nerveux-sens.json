@@ -1,0 +1,906 @@
+{
+ "chapter": "bepc-svt-nerveux-sens",
+ "lessons": [
+  {
+   "id": "bepc-svt-reflexes",
+   "title": "Système nerveux et réflexes",
+   "minutes": 30,
+   "programRef": "3e — Système nerveux : centres nerveux, nerfs, réflexes (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Nommer les centres nerveux, les nerfs et le neurone.",
+    "Décrire un arc réflexe.",
+    "Distinguer réflexe et mouvement volontaire."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "bepc-svt-reflexes-01",
+    "bepc-svt-reflexes-02",
+    "bepc-svt-reflexes-03",
+    "bepc-svt-reflexes-04",
+    "bepc-svt-reflexes-05",
+    "bepc-svt-reflexes-06"
+   ],
+   "selfCheck": [
+    "bepc-svt-reflexes-q1",
+    "bepc-svt-reflexes-q2",
+    "bepc-svt-reflexes-q3",
+    "bepc-svt-reflexes-q4",
+    "bepc-svt-reflexes-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Organisation du système nerveux",
+     "md": "Les **centres nerveux** sont l'**encéphale** (cerveau, cervelet, bulbe rachidien) et la **moelle épinière**. Les **nerfs** les relient aux organes : les nerfs **sensitifs** apportent les messages des récepteurs vers les centres, les nerfs **moteurs** apportent les ordres vers les muscles. Les cellules du système nerveux sont les **neurones**."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Le réflexe",
+     "md": "Un **réflexe** est une réponse rapide, involontaire et toujours la même, à une stimulation. Il suit l'**arc réflexe** : **récepteur** (peau) → nerf **sensitif** → **centre nerveux** (moelle épinière) → nerf **moteur** → **effecteur** (muscle). Un **mouvement volontaire** passe par le cerveau."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les cinq étapes d'un arc réflexe.",
+     "alt": "Récepteur, nerf sensitif, moelle, nerf moteur, muscle.",
+     "figure": {
+      "kind": "shapes",
+      "w": 430,
+      "h": 190,
+      "items": [
+       {
+        "t": "rect",
+        "x": 5,
+        "y": 70,
+        "w": 80,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 45.0,
+        "y": 95.0,
+        "text": "Récepteur",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 85,
+        "y1": 90,
+        "x2": 105,
+        "y2": 90,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 105,
+        "y": 70,
+        "w": 80,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 145.0,
+        "y": 95.0,
+        "text": "Nerf sens.",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 185,
+        "y1": 90,
+        "x2": 205,
+        "y2": 90,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 205,
+        "y": 70,
+        "w": 80,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 245.0,
+        "y": 95.0,
+        "text": "Moelle",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 285,
+        "y1": 90,
+        "x2": 305,
+        "y2": 90,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 305,
+        "y": 70,
+        "w": 55,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 332.5,
+        "y": 95.0,
+        "text": "Nerf m.",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 360,
+        "y1": 90,
+        "x2": 372,
+        "y2": 90,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 372,
+        "y": 70,
+        "w": 55,
+        "h": 40,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 399.5,
+        "y": 95.0,
+        "text": "Muscle",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 215,
+        "y": 30,
+        "text": "Arc réflexe",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 215,
+        "y": 160,
+        "text": "sens. = sensitif ; m. = moteur",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : main sur un objet brûlant",
+     "statement": "Boris touche un plat brûlant et retire la main avant de sentir la douleur. Décris l'arc réflexe.",
+     "steps": [
+      {
+       "md": "Récepteurs de la peau : chaleur détectée."
+      },
+      {
+       "md": "Nerf sensitif vers la moelle, puis nerf moteur vers les muscles du bras."
+      },
+      {
+       "md": "Le muscle se contracte : la main s'écarte."
+      }
+     ],
+     "answer": "**Réflexe : peau → nerf sensitif → moelle → nerf moteur → muscle.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : réflexe ou volontaire ?",
+     "statement": "Classe : cligner des yeux devant la poussière ; écrire son nom.",
+     "steps": [
+      {
+       "md": "Le clignement est rapide, involontaire : réflexe."
+      },
+      {
+       "md": "Écrire demande de décider et de coordonner : mouvement volontaire, qui passe par le cerveau."
+      }
+     ],
+     "answer": "**Clignement : réflexe ; écrire : volontaire.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que le cerveau décide d'un réflexe : il n'intervient pas dans la réponse (il reçoit ensuite l'information).\n- Confondre nerf sensitif et nerf moteur.\n- Croire que les neurones se « touchent » : ils sont en contact par des synapses.\n- Dire que la douleur précède le geste : le geste réflexe est souvent plus rapide que la sensation."
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier si le réflexe myotatique (rotulien) est au programme.",
+    "Rôle exact du cervelet, du bulbe : simplifié."
+   ]
+  },
+  {
+   "id": "bepc-svt-sens",
+   "title": "Les organes des sens",
+   "minutes": 30,
+   "programRef": "3e — Organes des sens : vue, ouïe, toucher, goût, odorat (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Légender l'œil et l'oreille.",
+    "Expliquer le trajet d'une information visuelle et sonore.",
+    "Citer des défauts de la vue et des mesures de protection."
+   ],
+   "prerequisites": [
+    "bepc-svt-reflexes"
+   ],
+   "exercises": [
+    "bepc-svt-sens-01",
+    "bepc-svt-sens-02",
+    "bepc-svt-sens-03",
+    "bepc-svt-sens-04",
+    "bepc-svt-sens-05",
+    "bepc-svt-sens-06"
+   ],
+   "selfCheck": [
+    "bepc-svt-sens-q1",
+    "bepc-svt-sens-q2",
+    "bepc-svt-sens-q3",
+    "bepc-svt-sens-q4",
+    "bepc-svt-sens-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les cinq sens",
+     "md": "Chaque **organe des sens** contient des **récepteurs** : l'œil (vue), l'oreille (ouïe et équilibre), la peau (toucher, chaleur, douleur), la langue (goût) et le nez (odorat). Le récepteur transforme la stimulation en message nerveux, envoyé par un nerf au cerveau, qui produit la sensation."
+    },
+    {
+     "type": "illustration",
+     "caption": "Œil humain, très simplifié.",
+     "alt": "Un cercle représentant l'œil avec cornée, pupille, cristallin, rétine et nerf optique.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 280,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 140,
+        "cy": 130,
+        "r": 95,
+        "fill": "white",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 60,
+        "cy": 130,
+        "r": 12,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 100,
+        "y": 90,
+        "w": 12,
+        "h": 80,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 210,
+        "cy": 130,
+        "r": 6,
+        "fill": "ink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 235,
+        "y1": 130,
+        "x2": 400,
+        "y2": 130,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 270,
+        "y": 105,
+        "text": "rétine",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 40,
+        "text": "cornée",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 30,
+        "y": 205,
+        "text": "pupille",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 175,
+        "y": 205,
+        "text": "cristallin",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 160,
+        "text": "nerf optique",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 260,
+        "text": "Œil (schéma très simplifié)",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "L'œil et l'oreille",
+     "md": "- **Œil** : la lumière traverse la cornée, la pupille et le cristallin, qui forme une image sur la **rétine** ; les cellules de la rétine envoient un message par le **nerf optique**.\n- **Oreille** : le pavillon capte les sons ; le **tympan** vibre ; les osselets transmettent les vibrations à la **cochlée** ; le **nerf auditif** envoie le message au cerveau."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : le chemin du son",
+     "statement": "Cite dans l'ordre les parties de l'oreille traversées par un son.",
+     "steps": [
+      {
+       "md": "Le son arrive au pavillon puis au conduit."
+      },
+      {
+       "md": "Le tympan vibre, puis les osselets, puis la cochlée."
+      },
+      {
+       "md": "Le nerf auditif envoie le message au cerveau."
+      }
+     ],
+     "answer": "**Pavillon → tympan → osselets → cochlée → nerf auditif → cerveau.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : la myopie",
+     "statement": "Un élève voit flou au tableau mais net de près. Que peut-il avoir ?",
+     "steps": [
+      {
+       "md": "Dans la myopie, l'image se forme avant la rétine."
+      },
+      {
+       "md": "Les objets lointains sont flous ; un examen par un spécialiste permet de choisir des verres adaptés."
+      }
+     ],
+     "answer": "**Probablement une myopie ; il faut consulter.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que l'œil « voit » : c'est le cerveau qui interprète.\n- Croire que les sons forts sont sans danger : une exposition répétée peut abîmer l'ouïe ; protéger ses oreilles.\n- Dire que la rétine reçoit une image à l'endroit : l'image sur la rétine est renversée, le cerveau la corrige."
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier le niveau de détail de l'œil (accommodation) et de l'oreille interne.",
+    "Santé : conseils à faire relire par un agent de santé (hygiène des yeux et des oreilles)."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le centre nerveux du réflexe de retrait de la main ?",
+   "choices": [
+    "Le cerveau",
+    "Le cœur",
+    "L'estomac",
+    "La moelle épinière"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Dans un réflexe, la moelle suffit.",
+   "id": "bepc-svt-reflexes-01",
+   "tier": "application",
+   "lesson": "bepc-svt-reflexes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un nerf moteur transporte l'information :",
+   "choices": [
+    "De la peau vers le centre",
+    "Du muscle vers la peau",
+    "Du cerveau vers le cœur",
+    "Du centre nerveux vers le muscle"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il envoie l'ordre.",
+   "id": "bepc-svt-reflexes-02",
+   "tier": "application",
+   "lesson": "bepc-svt-reflexes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : un réflexe est involontaire.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On ne décide pas de le faire.",
+   "id": "bepc-svt-reflexes-03",
+   "tier": "application",
+   "lesson": "bepc-svt-reflexes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Place chaque élément dans l'arc réflexe.",
+   "pairs": [
+    [
+     "Peau",
+     "Récepteur"
+    ],
+    [
+     "Moelle épinière",
+     "Centre nerveux"
+    ],
+    [
+     "Muscle",
+     "Effecteur"
+    ],
+    [
+     "Nerf sensitif",
+     "Voie d'entrée"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Chaque structure a un rôle.",
+   "id": "bepc-svt-reflexes-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-svt-reflexes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Explique l'intérêt d'un réflexe.",
+   "model": "Il est rapide : il protège l'organisme avant même qu'on ait le temps de réfléchir.",
+   "rubric": [
+    "Rapidité",
+    "Protection"
+   ],
+   "points": 3,
+   "difficulty": 2,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "bepc-svt-reflexes-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-svt-reflexes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Une section de la moelle épinière empêche un nerf de transmettre les messages sensitifs vers elle.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Que devient le réflexe correspondant ?",
+     "choices": [
+      "Il devient plus rapide",
+      "Il continue normalement",
+      "Il ne peut plus se produire",
+      "Il passe par le cœur"
+     ],
+     "answer": 2,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "L'arc est interrompu.",
+     "id": "bepc-svt-reflexes-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Explique pourquoi.",
+     "model": "L'arc réflexe est une chaîne : si un maillon est coupé, l'information n'arrive plus au centre ou à l'effecteur.",
+     "rubric": [
+      "Parle de l'arc",
+      "Maillon coupé"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "bepc-svt-reflexes-06-b"
+    }
+   ],
+   "difficulty": 3,
+   "id": "bepc-svt-reflexes-06",
+   "tier": "examen",
+   "lesson": "bepc-svt-reflexes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les centres nerveux sont :",
+   "choices": [
+    "Les nerfs seuls",
+    "L'encéphale et la moelle épinière",
+    "Les muscles",
+    "Les os"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ils analysent les messages.",
+   "id": "bepc-svt-reflexes-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-reflexes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un neurone est :",
+   "choices": [
+    "Un nerf entier",
+    "Un organe de sens",
+    "Une cellule nerveuse",
+    "Un os"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Brique du système nerveux.",
+   "id": "bepc-svt-reflexes-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-reflexes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un nerf sensitif transporte :",
+   "choices": [
+    "Les messages des récepteurs vers les centres",
+    "Les ordres vers les muscles",
+    "Le sang",
+    "L'air"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il va vers le centre.",
+   "id": "bepc-svt-reflexes-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-reflexes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est un exemple de réflexe ?",
+   "choices": [
+    "Jouer au football",
+    "Lire un texte",
+    "Danser",
+    "Le clignement de l'œil"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Rapide et involontaire.",
+   "id": "bepc-svt-reflexes-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-reflexes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le mouvement volontaire est commandé par :",
+   "choices": [
+    "La peau",
+    "Le cœur",
+    "Le foie",
+    "Le cerveau"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il décide et coordonne.",
+   "id": "bepc-svt-reflexes-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-reflexes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle partie de l'œil reçoit l'image ?",
+   "choices": [
+    "La cornée",
+    "Le tympan",
+    "La rétine",
+    "La pupille"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La rétine contient les cellules sensibles à la lumière.",
+   "id": "bepc-svt-sens-01",
+   "tier": "application",
+   "lesson": "bepc-svt-sens",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle partie vibre sous l'effet du son ?",
+   "choices": [
+    "La rétine",
+    "Le tympan",
+    "Le cristallin",
+    "Le nerf optique"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le tympan est une membrane.",
+   "id": "bepc-svt-sens-02",
+   "tier": "application",
+   "lesson": "bepc-svt-sens",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : la peau possède des récepteurs du toucher.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle perçoit pression, chaleur et douleur.",
+   "id": "bepc-svt-sens-03",
+   "tier": "application",
+   "lesson": "bepc-svt-sens",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque sens à son organe.",
+   "pairs": [
+    [
+     "Vue",
+     "Œil"
+    ],
+    [
+     "Ouïe",
+     "Oreille"
+    ],
+    [
+     "Goût",
+     "Langue"
+    ],
+    [
+     "Odorat",
+     "Nez"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Chaque sens a un organe principal.",
+   "id": "bepc-svt-sens-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-svt-sens",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Donne deux conseils pour protéger ses yeux et ses oreilles.",
+   "model": "Ne pas fixer le soleil, éviter les poussières et les objets dans l'œil ; éviter le volume très fort des écouteurs ; consulter en cas de gêne.",
+   "rubric": [
+    "Un conseil pour les yeux",
+    "Un conseil pour les oreilles"
+   ],
+   "points": 3,
+   "difficulty": 2,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "bepc-svt-sens-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-svt-sens",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Nkeng ne distingue pas les lettres au fond de la classe.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Qui peut l'aider à diagnostiquer un défaut de vue ?",
+     "choices": [
+      "Un agent de santé ou un ophtalmologue",
+      "Un camarade",
+      "Un vendeur de lunettes sans examen",
+      "Personne"
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Un examen est nécessaire.",
+     "id": "bepc-svt-sens-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Explique pourquoi une personne myope voit flou de loin.",
+     "model": "L'image se forme en avant de la rétine, donc elle est floue.",
+     "rubric": [
+      "Image avant la rétine",
+      "Lien avec le flou"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "bepc-svt-sens-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "bepc-svt-sens-06",
+   "tier": "examen",
+   "lesson": "bepc-svt-sens",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le nerf optique relie :",
+   "choices": [
+    "L'oreille au cerveau",
+    "Le nez au cœur",
+    "L'œil au cerveau",
+    "La langue aux muscles"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il transporte le message visuel.",
+   "id": "bepc-svt-sens-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-sens",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les cellules sensibles à la lumière sont dans :",
+   "choices": [
+    "Le cristallin",
+    "La cornée",
+    "La rétine",
+    "Le pavillon"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Récepteurs visuels.",
+   "id": "bepc-svt-sens-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-sens",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La cochlée est :",
+   "choices": [
+    "Un os du crâne",
+    "Une partie de l'œil",
+    "Un organe de l'oreille interne",
+    "Un nerf"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle transforme les vibrations en messages.",
+   "id": "bepc-svt-sens-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-sens",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un son très fort répété peut :",
+   "choices": [
+    "Abîmer l'ouïe",
+    "Améliorer la vue",
+    "Renforcer la peau",
+    "Guérir"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il faut protéger ses oreilles.",
+   "id": "bepc-svt-sens-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-sens",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qui interprète les messages des sens ?",
+   "choices": [
+    "Le cœur",
+    "L'estomac",
+    "La rate",
+    "Le cerveau"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il produit la sensation.",
+   "id": "bepc-svt-sens-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-sens",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

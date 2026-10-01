@@ -1,0 +1,504 @@
+{
+ "chapter": "bepc-svt-evolution-biodiversite",
+ "lessons": [
+  {
+   "id": "bepc-svt-biodiversite",
+   "title": "Biodiversité, classification et évolution (notions)",
+   "minutes": 30,
+   "programRef": "3e — Biodiversité, classification, évolution (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Définir biodiversité et espèce.",
+    "Classer des vertébrés par leurs caractères.",
+    "Expliquer adaptation, sélection naturelle et variation (notions)."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "bepc-svt-biodiversite-01",
+    "bepc-svt-biodiversite-02",
+    "bepc-svt-biodiversite-03",
+    "bepc-svt-biodiversite-04",
+    "bepc-svt-biodiversite-05",
+    "bepc-svt-biodiversite-06"
+   ],
+   "selfCheck": [
+    "bepc-svt-biodiversite-q1",
+    "bepc-svt-biodiversite-q2",
+    "bepc-svt-biodiversite-q3",
+    "bepc-svt-biodiversite-q4",
+    "bepc-svt-biodiversite-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Biodiversité",
+     "md": "La **biodiversité** est la variété des êtres vivants : diversité des **espèces**, diversité des **gènes** au sein d'une espèce et diversité des **milieux**. Une **espèce** regroupe des individus semblables qui peuvent se reproduire entre eux et donner des descendants féconds. Le Cameroun, par la variété de ses milieux, abrite une grande biodiversité."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Classer les vertébrés",
+     "md": "- **Poissons** : écailles, branchies, nageoires.\n- **Amphibiens** : peau nue et humide, vie aquatique puis terrestre (grenouille).\n- **Reptiles** : écailles sèches, œufs à coquille (lézard, serpent).\n- **Oiseaux** : plumes, ailes, bec, œufs à coquille.\n- **Mammifères** : poils, mamelles qui allaitent, souvent vivipares."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les cinq groupes de vertébrés.",
+     "alt": "Un schéma en arbre partant de vertébrés vers poissons, amphibiens, reptiles, oiseaux et mammifères.",
+     "figure": {
+      "kind": "shapes",
+      "w": 430,
+      "h": 210,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 20,
+        "w": 120,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 70.0,
+        "y": 42.0,
+        "text": "Vertébrés",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 70,
+        "y1": 54,
+        "x2": 40,
+        "y2": 90,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 70,
+        "y1": 54,
+        "x2": 110,
+        "y2": 90,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 70,
+        "y1": 54,
+        "x2": 180,
+        "y2": 90,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 70,
+        "y1": 54,
+        "x2": 250,
+        "y2": 90,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 70,
+        "y1": 54,
+        "x2": 330,
+        "y2": 90,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 0,
+        "y": 90,
+        "w": 70,
+        "h": 30,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 35.0,
+        "y": 110.0,
+        "text": "Poissons",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 75,
+        "y": 90,
+        "w": 70,
+        "h": 30,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 110.0,
+        "text": "Amphib.",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 90,
+        "w": 70,
+        "h": 30,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 185.0,
+        "y": 110.0,
+        "text": "Reptiles",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 225,
+        "y": 90,
+        "w": 70,
+        "h": 30,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 260.0,
+        "y": 110.0,
+        "text": "Oiseaux",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 300,
+        "y": 90,
+        "w": 80,
+        "h": 30,
+        "fill": "pink",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 340.0,
+        "y": 110.0,
+        "text": "Mammifères",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 215,
+        "y": 180,
+        "text": "Cinq grands groupes de vertébrés",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Adaptation et évolution (notions)",
+     "md": "Les individus d'une espèce présentent des **variations**. Si une variation héréditaire aide à survivre et à se reproduire dans un milieu donné, elle se retrouve plus souvent chez les descendants : c'est le principe de la **sélection naturelle** (idée développée par Darwin au XIXe siècle). Sur de très longues durées, les espèces changent : c'est l'**évolution**. Les fossiles en sont des témoins."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : classer un animal",
+     "statement": "Un animal a des plumes, un bec et pond des œufs à coquille. Dans quel groupe le classe-t-on ?",
+     "steps": [
+      {
+       "md": "Les plumes et le bec caractérisent les oiseaux."
+      },
+      {
+       "md": "Les œufs à coquille conviennent aussi."
+      }
+     ],
+     "answer": "**C'est un oiseau.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : adaptation",
+     "statement": "Dans une savane sèche, un arbuste à racines profondes survit mieux. Explique.",
+     "steps": [
+      {
+       "md": "Les racines profondes atteignent l'eau en profondeur."
+      },
+      {
+       "md": "Ces arbustes survivent et se reproduisent mieux : le caractère devient plus fréquent."
+      }
+     ],
+     "answer": "**Sélection naturelle d'un caractère avantageux.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que l'homme descend du singe actuel : ils ont des ancêtres communs lointains.\n- Croire que les individus « se transforment » volontairement : ce sont des variations héréditaires déjà présentes qui sont sélectionnées.\n- Croire que l'évolution est un progrès vers un but : elle dépend du milieu."
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier la place de l'évolution au programme de 3e (notions seulement).",
+    "Charles Darwin (1859) : fait classique ; autres noms omis.",
+    "Aires protégées camerounaises citées en exemple (Waza, Korup, Dja) : à confirmer par un enseignant."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quel groupe a des plumes ?",
+   "choices": [
+    "Les reptiles",
+    "Les oiseaux",
+    "Les poissons",
+    "Les amphibiens"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les plumes caractérisent les oiseaux.",
+   "id": "bepc-svt-biodiversite-01",
+   "tier": "application",
+   "lesson": "bepc-svt-biodiversite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un animal qui allaite ses petits est :",
+   "choices": [
+    "Un reptile",
+    "Un mammifère",
+    "Un poisson",
+    "Un oiseau"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il possède des mamelles.",
+   "id": "bepc-svt-biodiversite-02",
+   "tier": "application",
+   "lesson": "bepc-svt-biodiversite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : la biodiversité comprend la diversité des milieux.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Espèces, gènes et milieux.",
+   "id": "bepc-svt-biodiversite-03",
+   "tier": "application",
+   "lesson": "bepc-svt-biodiversite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque animal à son groupe.",
+   "pairs": [
+    [
+     "Grenouille",
+     "Amphibien"
+    ],
+    [
+     "Serpent",
+     "Reptile"
+    ],
+    [
+     "Poule",
+     "Oiseau"
+    ],
+    [
+     "Chèvre",
+     "Mammifère"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Caractères distinctifs différents.",
+   "id": "bepc-svt-biodiversite-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-svt-biodiversite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Explique pourquoi la diversité des gènes protège une espèce.",
+   "model": "Si le milieu change ou une maladie apparaît, certains individus peuvent mieux y résister et assurer la survie de l'espèce.",
+   "rubric": [
+    "Diversité des individus",
+    "Survie face au changement"
+   ],
+   "points": 3,
+   "difficulty": 2,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "bepc-svt-biodiversite-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-svt-biodiversite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Dans un champ, des insectes sensibles à un insecticide sont très nombreux. Après plusieurs traitements, la majorité des insectes survivants y résiste.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quel principe illustre cette observation ?",
+     "choices": [
+      "La sélection naturelle",
+      "La fécondation",
+      "La digestion",
+      "La pollinisation"
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Les résistants survivent et se reproduisent.",
+     "id": "bepc-svt-biodiversite-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Explique la situation en utilisant le mot variation.",
+     "model": "Quelques insectes étaient déjà un peu résistants ; ils ont survécu et transmis ce caractère, donc la proportion de résistants augmente.",
+     "rubric": [
+      "Variation préexistante",
+      "Transmission aux descendants"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "bepc-svt-biodiversite-06-b"
+    }
+   ],
+   "difficulty": 3,
+   "id": "bepc-svt-biodiversite-06",
+   "tier": "examen",
+   "lesson": "bepc-svt-biodiversite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une espèce regroupe des individus qui :",
+   "choices": [
+    "Peuvent se reproduire entre eux",
+    "Vivent au même endroit seulement",
+    "Ont la même taille",
+    "Sont de la même couleur"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Critère de reproduction.",
+   "id": "bepc-svt-biodiversite-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-biodiversite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quels animaux ont une peau nue et humide ?",
+   "choices": [
+    "Les oiseaux",
+    "Les amphibiens",
+    "Les reptiles",
+    "Les mammifères"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Exemple : la grenouille.",
+   "id": "bepc-svt-biodiversite-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-biodiversite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les fossiles sont des témoins de :",
+   "choices": [
+    "La digestion",
+    "Le réflexe",
+    "La puberté",
+    "L'évolution"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ils montrent des êtres anciens.",
+   "id": "bepc-svt-biodiversite-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-biodiversite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La sélection naturelle favorise :",
+   "choices": [
+    "Les variations utiles à la survie",
+    "Toutes les variations",
+    "Les plus grands seulement",
+    "Aucune"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Selon le milieu.",
+   "id": "bepc-svt-biodiversite-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-biodiversite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La biodiversité est menacée surtout par :",
+   "choices": [
+    "Les pluies",
+    "La nuit",
+    "Le vent",
+    "La destruction des milieux"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Habitats détruits.",
+   "id": "bepc-svt-biodiversite-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-svt-biodiversite",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

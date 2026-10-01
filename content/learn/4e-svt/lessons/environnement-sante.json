@@ -1,0 +1,802 @@
+{
+ "chapter": "4e-svt-environnement-sante",
+ "lessons": [
+  {
+   "id": "4e-svt-ecosysteme",
+   "title": "Écosystèmes et chaînes alimentaires",
+   "minutes": 30,
+   "programRef": "4e — Écosystèmes, relations alimentaires, milieux du Cameroun (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Définir biotope, biocénose, écosystème.",
+    "Construire une chaîne alimentaire.",
+    "Décrire les grands milieux du Cameroun."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "4e-svt-ecosysteme-01",
+    "4e-svt-ecosysteme-02",
+    "4e-svt-ecosysteme-03",
+    "4e-svt-ecosysteme-04",
+    "4e-svt-ecosysteme-05",
+    "4e-svt-ecosysteme-06"
+   ],
+   "selfCheck": [
+    "4e-svt-ecosysteme-q1",
+    "4e-svt-ecosysteme-q2",
+    "4e-svt-ecosysteme-q3",
+    "4e-svt-ecosysteme-q4",
+    "4e-svt-ecosysteme-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Écosystème",
+     "md": "Un **écosystème** est formé d'un milieu physique, le **biotope** (sol, eau, climat), et des êtres vivants qui y vivent, la **biocénose** (plantes, animaux, microbes). Ils sont liés entre eux par des relations, surtout alimentaires."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Chaîne alimentaire",
+     "md": "Dans une **chaîne alimentaire**, la flèche signifie « est mangé par ». Les **producteurs** (plantes vertes) fabriquent leur matière avec la lumière ; les **consommateurs** mangent d'autres êtres vivants (herbivores puis carnivores) ; les **décomposeurs** (champignons, bactéries) transforment les déchets et cadavres en matière minérale."
+    },
+    {
+     "type": "illustration",
+     "caption": "Une chaîne alimentaire simple.",
+     "alt": "Herbe vers criquet vers grenouille vers serpent.",
+     "figure": {
+      "kind": "shapes",
+      "w": 430,
+      "h": 190,
+      "items": [
+       {
+        "t": "rect",
+        "x": 5,
+        "y": 60,
+        "w": 85,
+        "h": 40,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 47.5,
+        "y": 85.0,
+        "text": "Herbe",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 90,
+        "y1": 80,
+        "x2": 112,
+        "y2": 80,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 112,
+        "y": 60,
+        "w": 90,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 157.0,
+        "y": 85.0,
+        "text": "Criquet",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 202,
+        "y1": 80,
+        "x2": 224,
+        "y2": 80,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 224,
+        "y": 60,
+        "w": 90,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 269.0,
+        "y": 85.0,
+        "text": "Grenouille",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 314,
+        "y1": 80,
+        "x2": 336,
+        "y2": 80,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 336,
+        "y": 60,
+        "w": 90,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 381.0,
+        "y": 85.0,
+        "text": "Serpent",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 47,
+        "y": 120,
+        "text": "producteur",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 20,
+        "text": "consommateurs",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 215,
+        "y": 170,
+        "text": "Les décomposeurs agissent à chaque étape",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Milieux du Cameroun (à grands traits)",
+     "md": "- **Forêt dense** (sud et est) : climat chaud et très humide, grande diversité.\n- **Savane** (centre, hauts plateaux, nord) : herbes, arbres espacés.\n- **Zone sahélienne** (Extrême-Nord) : climat sec, végétation clairsemée.\n- **Littoral et mangroves** (côte), **montagnes** (ouest et Adamaoua)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : construire une chaîne",
+     "statement": "Classe : feuille de manioc, chenille, oiseau. Écris la chaîne.",
+     "steps": [
+      {
+       "md": "La feuille est le producteur."
+      },
+      {
+       "md": "La chenille la mange, puis l'oiseau mange la chenille."
+      }
+     ],
+     "answer": "**Feuille de manioc → chenille → oiseau.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : un déséquilibre",
+     "statement": "Si l'on chasse tous les serpents de la chaîne ci-dessus, que peut-il arriver ?",
+     "steps": [
+      {
+       "md": "Les grenouilles ne sont plus mangées par les serpents."
+      },
+      {
+       "md": "Leur nombre peut augmenter, puis il y a moins de criquets."
+      }
+     ],
+     "answer": "**Les populations changent : l'équilibre est perturbé.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Inverser le sens des flèches : elles pointent vers le **mangeur**.\n- Oublier les décomposeurs.\n- Croire qu'un animal appartient à une seule chaîne : il appartient à plusieurs chaînes (un réseau)."
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier les zones écologiques du Cameroun attendues par le programme (forêt, savane, Sahel, littoral, montagnes).",
+    "Aucun chiffre de superficie ou de pluviométrie donné."
+   ]
+  },
+  {
+   "id": "4e-svt-hygiene-sante",
+   "title": "Éducation à la santé : hygiène, eau et maladies courantes",
+   "minutes": 30,
+   "programRef": "4e — Éducation à la santé (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Citer les règles d'hygiène corporelle et alimentaire.",
+    "Expliquer comment éviter les maladies liées à l'eau et aux moustiques.",
+    "Reconnaître des risques liés au tabac, à l'alcool et aux drogues."
+   ],
+   "prerequisites": [
+    "4e-svt-immunite-intro"
+   ],
+   "exercises": [
+    "4e-svt-hygiene-sante-01",
+    "4e-svt-hygiene-sante-02",
+    "4e-svt-hygiene-sante-03",
+    "4e-svt-hygiene-sante-04",
+    "4e-svt-hygiene-sante-05",
+    "4e-svt-hygiene-sante-06"
+   ],
+   "selfCheck": [
+    "4e-svt-hygiene-sante-q1",
+    "4e-svt-hygiene-sante-q2",
+    "4e-svt-hygiene-sante-q3",
+    "4e-svt-hygiene-sante-q4",
+    "4e-svt-hygiene-sante-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Hygiène",
+     "md": "- **Corporelle** : se laver, se laver les mains avant de manger et après les toilettes, soigner les dents.\n- **Alimentaire** : laver les fruits et légumes, bien cuire la viande et le poisson, conserver au frais.\n- **Du milieu** : éliminer les eaux stagnantes et les déchets, utiliser des latrines.\n- **De l'eau** : boire une eau potable (bouillie, filtrée ou traitée)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Gestes de prévention (importance indicative, schéma).",
+     "alt": "Barres : lavage des mains, eau potable, latrines, moustiquaire, vaccins.",
+     "figure": {
+      "kind": "bars",
+      "w": 420,
+      "h": 240,
+      "bars": [
+       {
+        "label": "Mains",
+        "value": 5,
+        "color": "blue"
+       },
+       {
+        "label": "Eau potable",
+        "value": 5,
+        "color": "cyan"
+       },
+       {
+        "label": "Latrines",
+        "value": 4,
+        "color": "green"
+       },
+       {
+        "label": "Moustiquaire",
+        "value": 4,
+        "color": "orange"
+       },
+       {
+        "label": "Vaccins",
+        "value": 5,
+        "color": "purple"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Maladies courantes",
+     "md": "- **Paludisme** : parasite transmis par le moustique. **Choléra, typhoïde** : transmis par de l'eau ou des aliments souillés. **Bilharziose** : parasite de l'eau douce.\n- Pour toute fièvre persistante ou diarrhée sévère, il faut consulter un agent de santé.\n- **Tabac, alcool, drogues** : dangereux pour la santé, surtout chez l'adolescent ; on évite d'en consommer."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : choisir la bonne mesure",
+     "statement": "Quel geste évite le choléra : dormir sous moustiquaire ou boire de l'eau traitée ?",
+     "steps": [
+      {
+       "md": "Le choléra se transmet par l'eau ou les aliments souillés."
+      },
+      {
+       "md": "La moustiquaire protège contre le paludisme."
+      }
+     ],
+     "answer": "**Boire de l'eau traitée.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : rôle des latrines",
+     "statement": "Pourquoi utiliser des latrines protège ?",
+     "steps": [
+      {
+       "md": "Les excréments contiennent des microbes."
+      },
+      {
+       "md": "S'ils polluent l'eau ou le sol, ils contaminent les gens."
+      }
+     ],
+     "answer": "**Elles empêchent la contamination de l'eau.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que toute fièvre est un paludisme : un test ou un avis médical est nécessaire.\n- Croire qu'une eau claire est forcément potable.\n- S'automédiquer : seuls les professionnels de santé prescrivent."
+    }
+   ],
+   "reviewNotes": [
+    "Contenu à faire relire par un agent de santé (IST, VIH/sida : à traiter selon le programme officiel et l'âge).",
+    "Formulation prudente : aucun conseil médical individuel."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Qu'est-ce que le biotope ?",
+   "choices": [
+    "L'ensemble des êtres vivants",
+    "Une chaîne alimentaire",
+    "Le milieu physique",
+    "Un sol uniquement"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le biotope est le milieu (eau, sol, climat).",
+   "id": "4e-svt-ecosysteme-01",
+   "tier": "application",
+   "lesson": "4e-svt-ecosysteme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un producteur est :",
+   "choices": [
+    "Une plante verte",
+    "Un carnivore",
+    "Un champignon",
+    "Un herbivore"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il fabrique sa matière avec la lumière.",
+   "id": "4e-svt-ecosysteme-02",
+   "tier": "application",
+   "lesson": "4e-svt-ecosysteme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : la flèche d'une chaîne alimentaire va du mangé vers le mangeur.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle signifie « est mangé par ».",
+   "id": "4e-svt-ecosysteme-03",
+   "tier": "application",
+   "lesson": "4e-svt-ecosysteme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque zone à une caractéristique.",
+   "pairs": [
+    [
+     "Forêt dense",
+     "Chaude et très humide"
+    ],
+    [
+     "Savane",
+     "Herbes et arbres espacés"
+    ],
+    [
+     "Zone sahélienne",
+     "Climat sec"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Chaque milieu a un climat et une végétation.",
+   "id": "4e-svt-ecosysteme-04",
+   "tier": "approfondissement",
+   "lesson": "4e-svt-ecosysteme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Explique le rôle des décomposeurs.",
+   "model": "Ils transforment les déchets et cadavres en matière minérale, qui nourrit les plantes.",
+   "rubric": [
+    "Transformation des déchets",
+    "Retour au sol"
+   ],
+   "points": 3,
+   "difficulty": 2,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "4e-svt-ecosysteme-05",
+   "tier": "approfondissement",
+   "lesson": "4e-svt-ecosysteme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Dans une plantation, des chenilles mangent les feuilles. Un cultivateur utilise un insecticide qui tue aussi les oiseaux insectivores.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quel risque cela peut-il créer ?",
+     "choices": [
+      "Plus de lumière",
+      "Un séisme",
+      "Une rupture de l'équilibre de la chaîne",
+      "Moins de pluie"
+     ],
+     "answer": 2,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Moins de prédateurs peut entraîner de nouvelles proliférations.",
+     "id": "4e-svt-ecosysteme-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Propose une pratique qui protège l'environnement.",
+     "model": "Utiliser des méthodes naturelles (pièges, rotation des cultures) et limiter l'usage de produits chimiques.",
+     "rubric": [
+      "Propose une pratique",
+      "Justifie"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "4e-svt-ecosysteme-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-svt-ecosysteme-06",
+   "tier": "examen",
+   "lesson": "4e-svt-ecosysteme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La biocénose désigne :",
+   "choices": [
+    "Le climat",
+    "Les êtres vivants du milieu",
+    "Le sol seul",
+    "La pluie"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Plantes, animaux, microbes.",
+   "id": "4e-svt-ecosysteme-q1",
+   "tier": "autoeval",
+   "lesson": "4e-svt-ecosysteme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un consommateur secondaire est :",
+   "choices": [
+    "Une plante",
+    "Un champignon",
+    "Du sol",
+    "Un carnivore qui mange un herbivore"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il est au 2e niveau consommateur.",
+   "id": "4e-svt-ecosysteme-q2",
+   "tier": "autoeval",
+   "lesson": "4e-svt-ecosysteme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel milieu est le plus sec ?",
+   "choices": [
+    "La forêt dense",
+    "La zone sahélienne",
+    "La mangrove",
+    "Le littoral"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Dans l'Extrême-Nord.",
+   "id": "4e-svt-ecosysteme-q3",
+   "tier": "autoeval",
+   "lesson": "4e-svt-ecosysteme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les décomposeurs sont :",
+   "choices": [
+    "Des champignons et des bactéries",
+    "Des herbivores",
+    "Des plantes",
+    "Des carnivores"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ils recyclent la matière.",
+   "id": "4e-svt-ecosysteme-q4",
+   "tier": "autoeval",
+   "lesson": "4e-svt-ecosysteme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un écosystème comprend :",
+   "choices": [
+    "Seulement des animaux",
+    "Seulement des plantes",
+    "Seulement un sol",
+    "Un biotope et une biocénose"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Milieu plus êtres vivants.",
+   "id": "4e-svt-ecosysteme-q5",
+   "tier": "autoeval",
+   "lesson": "4e-svt-ecosysteme",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour éviter le paludisme, il est utile de :",
+   "choices": [
+    "Boire de l'eau salée",
+    "Éviter de manger",
+    "Laver les mains seulement",
+    "Dormir sous une moustiquaire"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On évite les piqûres.",
+   "id": "4e-svt-hygiene-sante-01",
+   "tier": "application",
+   "lesson": "4e-svt-hygiene-sante",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : une eau claire est toujours potable.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle peut contenir des microbes invisibles.",
+   "id": "4e-svt-hygiene-sante-02",
+   "tier": "application",
+   "lesson": "4e-svt-hygiene-sante",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quand se laver les mains ?",
+   "choices": [
+    "Seulement le dimanche",
+    "Jamais avec du savon",
+    "Seulement après avoir mangé",
+    "Avant de manger et après les toilettes"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Pour éliminer les microbes.",
+   "id": "4e-svt-hygiene-sante-03",
+   "tier": "application",
+   "lesson": "4e-svt-hygiene-sante",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe maladie et mode de transmission.",
+   "pairs": [
+    [
+     "Paludisme",
+     "Moustique"
+    ],
+    [
+     "Choléra",
+     "Eau ou aliments souillés"
+    ],
+    [
+     "Bilharziose",
+     "Eau douce infestée"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Chaque maladie a un mode de transmission.",
+   "id": "4e-svt-hygiene-sante-04",
+   "tier": "approfondissement",
+   "lesson": "4e-svt-hygiene-sante",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Donne deux gestes pour garder une eau propre à la maison.",
+   "model": "Couvrir les récipients, utiliser un récipient propre et fermé, bouillir ou traiter l'eau.",
+   "rubric": [
+    "Premier geste",
+    "Second geste"
+   ],
+   "points": 3,
+   "difficulty": 2,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "4e-svt-hygiene-sante-05",
+   "tier": "approfondissement",
+   "lesson": "4e-svt-hygiene-sante",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Dans un quartier, plusieurs enfants ont de la diarrhée après une inondation.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quel type de maladie peut être en cause ?",
+     "choices": [
+      "Une maladie liée à l'eau",
+      "Un séisme",
+      "Une carence en vitamine A",
+      "Un excès de sucre"
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Inondation et eaux souillées.",
+     "id": "4e-svt-hygiene-sante-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Que doit faire la famille ?",
+     "model": "Consulter un agent de santé, boire de l'eau traitée, se laver les mains.",
+     "rubric": [
+      "Consulter",
+      "Eau propre",
+      "Hygiène"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "4e-svt-hygiene-sante-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-svt-hygiene-sante-06",
+   "tier": "examen",
+   "lesson": "4e-svt-hygiene-sante",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle maladie est transmise par l'eau ou des aliments souillés ?",
+   "choices": [
+    "Le paludisme",
+    "Le choléra",
+    "Le goitre",
+    "La carence en fer"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Maladie des mains sales et de l'eau.",
+   "id": "4e-svt-hygiene-sante-q1",
+   "tier": "autoeval",
+   "lesson": "4e-svt-hygiene-sante",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que faire avant de manger des légumes crus ?",
+   "choices": [
+    "Les laisser au soleil",
+    "Les laver à l'eau propre",
+    "Les frotter à sec",
+    "Rien"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Éliminer les microbes.",
+   "id": "4e-svt-hygiene-sante-q2",
+   "tier": "autoeval",
+   "lesson": "4e-svt-hygiene-sante",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les eaux stagnantes favorisent :",
+   "choices": [
+    "La reproduction des moustiques",
+    "Le sommeil",
+    "La digestion",
+    "Les séismes"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Larves aquatiques.",
+   "id": "4e-svt-hygiene-sante-q3",
+   "tier": "autoeval",
+   "lesson": "4e-svt-hygiene-sante",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qui peut prescrire un médicament ?",
+   "choices": [
+    "Un voisin",
+    "Un professionnel de santé",
+    "Un camarade",
+    "Le vendeur"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il connaît la dose et l'indication.",
+   "id": "4e-svt-hygiene-sante-q4",
+   "tier": "autoeval",
+   "lesson": "4e-svt-hygiene-sante",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le tabac est :",
+   "choices": [
+    "Dangereux pour la santé",
+    "Bon pour les poumons",
+    "Un aliment",
+    "Un vaccin"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il abîme les poumons.",
+   "id": "4e-svt-hygiene-sante-q5",
+   "tier": "autoeval",
+   "lesson": "4e-svt-hygiene-sante",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

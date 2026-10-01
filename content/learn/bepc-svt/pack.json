@@ -1,0 +1,103 @@
+{
+  "format": 1,
+  "id": "bepc-svt",
+  "version": 1,
+  "title": "SVT — préparation au BEPC",
+  "description": "SVT de 3e pour préparer le BEPC : reproduction, hérédité, système nerveux, hormones, immunité, évolution, environnement, géologie, avec une épreuve blanche. Bêta : contenu à vérifier par un enseignant.",
+  "lang": "fr",
+  "cursus": "secondaire",
+  "level": "3e",
+  "subject": "svt",
+  "exam": "BEPC",
+  "programRef": "Programme de Sciences de la Vie et de la Terre de la classe de 3e (MINESEC, premier cycle) et préparation du BEPC — à vérifier sur le texte officiel",
+  "authors": [
+    "CastBridge (brouillon IA, bêta)"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-10-01",
+  "chapters": [
+    {
+      "id": "bepc-svt-reproduction-heredite",
+      "title": "Reproduction humaine et hérédité",
+      "order": 1,
+      "programRef": "3e — Reproduction humaine ; hérédité : chromosomes, gènes, croisements (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "bepc-svt-nerveux-sens",
+      "title": "Système nerveux, réflexes et organes des sens",
+      "order": 2,
+      "programRef": "3e — Système nerveux, réflexes, organes des sens (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "bepc-svt-hormones-immunite",
+      "title": "Hormones, immunité et vaccination",
+      "order": 3,
+      "programRef": "3e — Communication hormonale (initiation) ; défense de l'organisme et vaccination (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "bepc-svt-evolution-biodiversite",
+      "title": "Évolution et biodiversité",
+      "order": 4,
+      "programRef": "3e — Biodiversité, classification, adaptation et évolution (notions) (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "bepc-svt-environnement",
+      "title": "Ressources et environnement",
+      "order": 5,
+      "programRef": "3e — Ressources naturelles, pollution, déforestation, gestion de l'environnement (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "bepc-svt-geologie-terre",
+      "title": "Histoire de la Terre et fossiles",
+      "order": 6,
+      "programRef": "3e — Histoire de la Terre, fossiles, datation, temps géologiques (à vérifier sur le texte officiel)"
+    },
+    {
+      "id": "bepc-svt-epreuve-blanche",
+      "title": "Épreuve blanche",
+      "order": 7,
+      "programRef": "3e — Épreuve blanche de SVT (format inspiré du BEPC ; barème sur 20)"
+    }
+  ],
+  "mockExams": [
+    {
+      "id": "bepc-svt-epreuve-blanche-1",
+      "title": "Épreuve blanche de SVT — BEPC",
+      "minutes": 90,
+      "instructions": "Durée : 1 h 30. Barème sur 20. Réponds sur ta feuille ; justifie tes réponses quand l'énoncé le demande. Les cinq parties sont indépendantes.",
+      "outOf": 20,
+      "sections": [
+        {
+          "title": "Partie 1 — Connaissances (4 pts)",
+          "exercises": [
+            "bepc-svt-epreuve-blanche-01"
+          ]
+        },
+        {
+          "title": "Partie 2 — Définitions (3 pts)",
+          "exercises": [
+            "bepc-svt-epreuve-blanche-02"
+          ]
+        },
+        {
+          "title": "Partie 3 — Génétique (5 pts)",
+          "exercises": [
+            "bepc-svt-epreuve-blanche-03"
+          ]
+        },
+        {
+          "title": "Partie 4 — Système nerveux (4 pts)",
+          "exercises": [
+            "bepc-svt-epreuve-blanche-04"
+          ]
+        },
+        {
+          "title": "Partie 5 — Environnement (4 pts)",
+          "exercises": [
+            "bepc-svt-epreuve-blanche-05"
+          ]
+        }
+      ]
+    }
+  ]
+}

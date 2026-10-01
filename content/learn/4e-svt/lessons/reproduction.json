@@ -1,0 +1,934 @@
+{
+ "chapter": "4e-svt-reproduction",
+ "lessons": [
+  {
+   "id": "4e-svt-fleur-fruit",
+   "title": "La fleur, la fécondation et la graine",
+   "minutes": 30,
+   "programRef": "4e — Reproduction sexuée des plantes à fleurs (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Légender une fleur complète.",
+    "Distinguer pollinisation et fécondation.",
+    "Expliquer la formation du fruit et de la graine, la germination et la dissémination."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "4e-svt-fleur-fruit-01",
+    "4e-svt-fleur-fruit-02",
+    "4e-svt-fleur-fruit-03",
+    "4e-svt-fleur-fruit-04",
+    "4e-svt-fleur-fruit-05",
+    "4e-svt-fleur-fruit-06"
+   ],
+   "selfCheck": [
+    "4e-svt-fleur-fruit-q1",
+    "4e-svt-fleur-fruit-q2",
+    "4e-svt-fleur-fruit-q3",
+    "4e-svt-fleur-fruit-q4",
+    "4e-svt-fleur-fruit-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les parties de la fleur",
+     "md": "Une fleur complète comprend : les **sépales** (ensemble : calice), les **pétales** (corolle), les **étamines** (organes mâles : anthère qui contient le pollen, portée par un filet) et le **pistil** (organe femelle : stigmate, style, ovaire contenant les ovules)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Schéma très simplifié d'une fleur.",
+     "alt": "Une fleur avec pétales roses, pistil vert au centre et deux étamines, avec les noms des parties.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 320,
+      "items": [
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 300,
+        "x2": 110,
+        "y2": 175,
+        "color": "green",
+        "width": 5
+       },
+       {
+        "t": "circle",
+        "cx": 70,
+        "cy": 140,
+        "r": 38,
+        "fill": "pink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 140,
+        "r": 38,
+        "fill": "pink",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 98,
+        "y": 100,
+        "w": 24,
+        "h": 70,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 110,
+        "cy": 95,
+        "r": 10,
+        "fill": "yellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 175,
+        "x2": 80,
+        "y2": 105,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 80,
+        "cy": 100,
+        "r": 8,
+        "fill": "orange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 140,
+        "y1": 175,
+        "x2": 140,
+        "y2": 105,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 140,
+        "cy": 100,
+        "r": 8,
+        "fill": "orange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 285,
+        "y": 40,
+        "text": "stigmate",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "line",
+        "x1": 270,
+        "y1": 36,
+        "x2": 122,
+        "y2": 93,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 285,
+        "y": 90,
+        "text": "anthère (pollen)",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "line",
+        "x1": 270,
+        "y1": 86,
+        "x2": 148,
+        "y2": 100,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 285,
+        "y": 140,
+        "text": "pétale",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "line",
+        "x1": 270,
+        "y1": 136,
+        "x2": 185,
+        "y2": 140,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 285,
+        "y": 190,
+        "text": "ovaire (ovules)",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "line",
+        "x1": 270,
+        "y1": 186,
+        "x2": 122,
+        "y2": 160,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 285,
+        "y": 250,
+        "text": "tige",
+        "size": 15,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "line",
+        "x1": 270,
+        "y1": 246,
+        "x2": 114,
+        "y2": 250,
+        "color": "grey",
+        "width": 1
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Pollinisation, fécondation, fruit",
+     "md": "1. **Pollinisation** : le pollen est transporté (par le vent, des insectes…) jusqu'au stigmate.\n2. **Fécondation** : une cellule du pollen s'unit à un ovule dans l'ovaire.\n3. L'**ovule** devient **graine**, l'**ovaire** devient **fruit**.\n4. La graine, une fois dans un sol favorable, **germe** : eau, dioxygène et chaleur suffisante sont nécessaires."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : le papayer",
+     "statement": "Une papaye contient des graines. Explique son origine.",
+     "steps": [
+      {
+       "md": "La fleur a été pollinisée puis fécondée."
+      },
+      {
+       "md": "L'ovaire s'est transformé en fruit, les ovules en graines."
+      }
+     ],
+     "answer": "**Fruit = ovaire transformé ; graines = ovules fécondés.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : germination",
+     "statement": "On met des graines de haricot sur du coton : A humide à 25 °C, B sec, C sous l'eau sans air. Lesquelles germent ?",
+     "steps": [
+      {
+       "md": "A a de l'eau, de l'air et une chaleur convenable : elle germe."
+      },
+      {
+       "md": "B manque d'eau, C manque de dioxygène."
+      }
+     ],
+     "answer": "**Seule A germe.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre pollinisation (transport) et fécondation (union des cellules).\n- Croire que la lumière est indispensable pour la germination : elle l'est pour la croissance, pas toujours pour la germination.\n- Croire que le fruit se forme sans fécondation (cas particuliers exclus)."
+    }
+   ],
+   "reviewNotes": [
+    "Vérifier les termes exacts (étamine/pistil, gamète/cellule reproductrice) attendus.",
+    "Conditions de germination : eau, dioxygène, température convenable."
+   ]
+  },
+  {
+   "id": "4e-svt-vegetative-animaux",
+   "title": "Multiplication végétative et reproduction des animaux",
+   "minutes": 30,
+   "programRef": "4e — Multiplication végétative ; reproduction des animaux (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Citer des modes de multiplication végétative.",
+    "Comparer animaux ovipares et vivipares.",
+    "Décrire un exemple de développement : poule, grenouille."
+   ],
+   "prerequisites": [
+    "4e-svt-fleur-fruit"
+   ],
+   "exercises": [
+    "4e-svt-vegetative-animaux-01",
+    "4e-svt-vegetative-animaux-02",
+    "4e-svt-vegetative-animaux-03",
+    "4e-svt-vegetative-animaux-04",
+    "4e-svt-vegetative-animaux-05",
+    "4e-svt-vegetative-animaux-06"
+   ],
+   "selfCheck": [
+    "4e-svt-vegetative-animaux-q1",
+    "4e-svt-vegetative-animaux-q2",
+    "4e-svt-vegetative-animaux-q3",
+    "4e-svt-vegetative-animaux-q4",
+    "4e-svt-vegetative-animaux-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Multiplication végétative",
+     "md": "Une plante peut donner de nouveaux individus **sans graine** : par **bouture** (manioc, canne à sucre), par **tubercule** (igname, pomme de terre), par **rejet** (bananier) ou par **marcotte**. Les nouvelles plantes sont identiques à la plante mère. L'agriculteur l'utilise pour obtenir vite des plants de même qualité."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Animaux ovipares et vivipares",
+     "md": "- **Ovipares** : la femelle pond des œufs (poule, tortue, grenouille, poisson) ; l'embryon se développe dans l'œuf, hors de la mère.\n- **Vivipares** : l'embryon se développe dans le corps de la mère (chèvre, vache, homme).\n- **Fécondation** : externe (grenouille, la plupart des poissons) ou interne (poule, mammifères)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Cycle de vie simplifié d'une grenouille.",
+     "alt": "Œufs, têtard, jeune grenouille, adulte, reliés par des flèches.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 190,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 70,
+        "w": 80,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 50.0,
+        "y": 95.0,
+        "text": "Œufs",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 90,
+        "y1": 90,
+        "x2": 120,
+        "y2": 90,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 70,
+        "w": 80,
+        "h": 40,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 95.0,
+        "text": "Têtard",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 90,
+        "x2": 230,
+        "y2": 90,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 70,
+        "w": 80,
+        "h": 40,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 270.0,
+        "y": 95.0,
+        "text": "Jeune",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 310,
+        "y1": 90,
+        "x2": 340,
+        "y2": 90,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 340,
+        "y": 70,
+        "w": 75,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 377.5,
+        "y": 95.0,
+        "text": "Adulte",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 30,
+        "text": "Cycle de la grenouille (métamorphose)",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 160,
+        "text": "Les œufs sont pondus dans l'eau",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : planter du manioc",
+     "statement": "Boris plante des morceaux de tige de manioc. Quel mode de multiplication est-ce ?",
+     "steps": [
+      {
+       "md": "Il n'utilise pas de graines."
+      },
+      {
+       "md": "Il utilise un morceau de tige : c'est le bouturage."
+      }
+     ],
+     "answer": "**Multiplication végétative par bouture.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : classer des animaux",
+     "statement": "Classe : chèvre, poule, tortue, vache.",
+     "steps": [
+      {
+       "md": "La poule et la tortue pondent des œufs : ovipares."
+      },
+      {
+       "md": "La chèvre et la vache portent le petit dans le ventre : vivipares."
+      }
+     ],
+     "answer": "**Ovipares : poule, tortue. Vivipares : chèvre, vache.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que tous les animaux qui vivent dans l'eau sont ovipares (les dauphins sont vivipares).\n- Croire que tous les œufs sont fécondés : un œuf de consommation peut ne pas l'être.\n- Croire que la multiplication végétative apporte de la variété génétique : les plantes sont identiques à la mère."
+    }
+   ],
+   "reviewNotes": [
+    "Durée d'incubation de l'œuf de poule : environ 21 jours (à confirmer).",
+    "Vérifier si la métamorphose de la grenouille est au programme de 4e."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quelle partie de la fleur contient le pollen ?",
+   "choices": [
+    "L'ovaire",
+    "Le stigmate",
+    "L'anthère",
+    "Le pétale"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'anthère est au bout de l'étamine.",
+   "id": "4e-svt-fleur-fruit-01",
+   "tier": "application",
+   "lesson": "4e-svt-fleur-fruit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que devient l'ovaire après la fécondation ?",
+   "choices": [
+    "La graine",
+    "Le pollen",
+    "La racine",
+    "Le fruit"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'ovaire grossit pour donner le fruit.",
+   "id": "4e-svt-fleur-fruit-02",
+   "tier": "application",
+   "lesson": "4e-svt-fleur-fruit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : les abeilles peuvent transporter le pollen.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les insectes sont des agents de pollinisation.",
+   "id": "4e-svt-fleur-fruit-03",
+   "tier": "application",
+   "lesson": "4e-svt-fleur-fruit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque mode de dissémination à un exemple.",
+   "pairs": [
+    [
+     "Vent",
+     "Graine légère à aigrette"
+    ],
+    [
+     "Animaux",
+     "Fruit mangé puis graines rejetées"
+    ],
+    [
+     "Eau",
+     "Noix de coco flottante"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Chaque graine est adaptée à son mode de dispersion.",
+   "id": "4e-svt-fleur-fruit-04",
+   "tier": "approfondissement",
+   "lesson": "4e-svt-fleur-fruit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Décris une expérience simple pour montrer qu'une graine a besoin d'eau pour germer.",
+   "model": "Mettre des graines identiques dans deux pots, l'un arrosé, l'autre sec, avec les mêmes autres conditions ; seules les graines arrosées germent.",
+   "rubric": [
+    "Deux lots identiques",
+    "Une seule condition change",
+    "Conclusion"
+   ],
+   "points": 3,
+   "difficulty": 2,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "4e-svt-fleur-fruit-05",
+   "tier": "approfondissement",
+   "lesson": "4e-svt-fleur-fruit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Un cultivateur remarque que ses courges produisent moins de fruits quand il y a peu d'insectes.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quel phénomène est gêné ?",
+     "choices": [
+      "La digestion",
+      "L'excrétion",
+      "La pollinisation",
+      "La germination du fruit"
+     ],
+     "answer": 2,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Sans insectes, le pollen arrive moins au stigmate.",
+     "id": "4e-svt-fleur-fruit-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Pourquoi faut-il protéger les insectes pollinisateurs ?",
+     "model": "Ils assurent le transport du pollen, donc la formation des fruits et des graines.",
+     "rubric": [
+      "Rôle de la pollinisation",
+      "Conséquence sur les récoltes"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "4e-svt-fleur-fruit-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-svt-fleur-fruit-06",
+   "tier": "examen",
+   "lesson": "4e-svt-fleur-fruit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les étamines sont :",
+   "choices": [
+    "Les organes femelles",
+    "Les organes mâles de la fleur",
+    "Des feuilles",
+    "Des racines"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elles portent le pollen.",
+   "id": "4e-svt-fleur-fruit-q1",
+   "tier": "autoeval",
+   "lesson": "4e-svt-fleur-fruit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Où se trouvent les ovules ?",
+   "choices": [
+    "Dans l'anthère",
+    "Dans le pétale",
+    "Dans l'ovaire",
+    "Dans la racine"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'ovaire est dans le pistil.",
+   "id": "4e-svt-fleur-fruit-q2",
+   "tier": "autoeval",
+   "lesson": "4e-svt-fleur-fruit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La pollinisation est :",
+   "choices": [
+    "Le transport du pollen vers le stigmate",
+    "La formation du fruit",
+    "La chute des pétales",
+    "L'union de deux fruits"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est avant la fécondation.",
+   "id": "4e-svt-fleur-fruit-q3",
+   "tier": "autoeval",
+   "lesson": "4e-svt-fleur-fruit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que devient l'ovule fécondé ?",
+   "choices": [
+    "Un fruit",
+    "Un pétale",
+    "Une graine",
+    "Du pollen"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'ovule fécondé donne la graine.",
+   "id": "4e-svt-fleur-fruit-q4",
+   "tier": "autoeval",
+   "lesson": "4e-svt-fleur-fruit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle condition n'est pas indispensable à la germination ?",
+   "choices": [
+    "L'eau",
+    "Un sol très riche",
+    "Le dioxygène",
+    "Une température convenable"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les réserves de la graine suffisent au début.",
+   "id": "4e-svt-fleur-fruit-q5",
+   "tier": "autoeval",
+   "lesson": "4e-svt-fleur-fruit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel mode de multiplication utilise-t-on pour la canne à sucre ?",
+   "choices": [
+    "La fécondation externe",
+    "La digestion",
+    "Le bouturage",
+    "La pollinisation"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On plante des morceaux de tige.",
+   "id": "4e-svt-vegetative-animaux-01",
+   "tier": "application",
+   "lesson": "4e-svt-vegetative-animaux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel animal est vivipare ?",
+   "choices": [
+    "La poule",
+    "La tortue",
+    "La grenouille",
+    "La vache"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle porte le petit dans son corps.",
+   "id": "4e-svt-vegetative-animaux-02",
+   "tier": "application",
+   "lesson": "4e-svt-vegetative-animaux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : la grenouille est ovipare.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle pond des œufs dans l'eau.",
+   "id": "4e-svt-vegetative-animaux-03",
+   "tier": "application",
+   "lesson": "4e-svt-vegetative-animaux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe plante et mode de multiplication.",
+   "pairs": [
+    [
+     "Igname",
+     "Tubercule"
+    ],
+    [
+     "Manioc",
+     "Bouture"
+    ],
+    [
+     "Bananier",
+     "Rejet"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Chaque plante a une méthode courante.",
+   "id": "4e-svt-vegetative-animaux-04",
+   "tier": "approfondissement",
+   "lesson": "4e-svt-vegetative-animaux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Donne un avantage et une limite de la multiplication végétative.",
+   "model": "Avantage : on obtient vite des plantes identiques de bonne qualité. Limite : pas de variété, elles ont les mêmes faiblesses face à une maladie.",
+   "rubric": [
+    "Un avantage",
+    "Une limite"
+   ],
+   "points": 3,
+   "difficulty": 2,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "4e-svt-vegetative-animaux-05",
+   "tier": "approfondissement",
+   "lesson": "4e-svt-vegetative-animaux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Une éleveuse veut obtenir des poussins avec une poule qui couve des œufs.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "La poule est un animal :",
+     "choices": [
+      "Vivipare",
+      "Ovipare",
+      "À fécondation externe",
+      "Sans reproduction sexuée"
+     ],
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Elle pond des œufs.",
+     "id": "4e-svt-vegetative-animaux-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Pourquoi doit-on garder les œufs au chaud pendant la couvaison ?",
+     "model": "La chaleur permet le développement de l'embryon dans l'œuf (environ trois semaines).",
+     "rubric": [
+      "Chaleur",
+      "Développement de l'embryon"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "4e-svt-vegetative-animaux-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-svt-vegetative-animaux-06",
+   "tier": "examen",
+   "lesson": "4e-svt-vegetative-animaux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans la multiplication végétative, la nouvelle plante est :",
+   "choices": [
+    "Toujours différente",
+    "Identique à la plante mère",
+    "Née d'une graine",
+    "Née d'un œuf"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Pas de fécondation.",
+   "id": "4e-svt-vegetative-animaux-q1",
+   "tier": "autoeval",
+   "lesson": "4e-svt-vegetative-animaux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un animal ovipare :",
+   "choices": [
+    "Accouche d'un petit",
+    "Pond des œufs",
+    "Ne se reproduit pas",
+    "Ne pond jamais"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Œufs pondus.",
+   "id": "4e-svt-vegetative-animaux-q2",
+   "tier": "autoeval",
+   "lesson": "4e-svt-vegetative-animaux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le têtard devient :",
+   "choices": [
+    "Une grenouille",
+    "Un poisson adulte",
+    "Un oiseau",
+    "Un reptile"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est la métamorphose.",
+   "id": "4e-svt-vegetative-animaux-q3",
+   "tier": "autoeval",
+   "lesson": "4e-svt-vegetative-animaux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel exemple est un tubercule ?",
+   "choices": [
+    "La banane",
+    "La pomme de terre",
+    "La papaye",
+    "La canne"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le tubercule est une tige ou racine renflée.",
+   "id": "4e-svt-vegetative-animaux-q4",
+   "tier": "autoeval",
+   "lesson": "4e-svt-vegetative-animaux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La fécondation interne a lieu chez :",
+   "choices": [
+    "La grenouille",
+    "La poule",
+    "La plupart des poissons",
+    "Le têtard"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle se produit dans le corps de la femelle.",
+   "id": "4e-svt-vegetative-animaux-q5",
+   "tier": "autoeval",
+   "lesson": "4e-svt-vegetative-animaux",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}
