@@ -51,6 +51,8 @@ class TvSshServer(
     private val requireLan: Boolean = true,
     /** Identity of tunnelled (Bluetooth) clients, which all arrive from 127.0.0.1: failures are counted per device. */
     val peers: PeerRegistry = PeerRegistry(),
+    /** In-process commands (`ssh host 'cbdev …'`): given the command line, writes its output and returns the exit code, or null when the line is not one of them (the shell runs it). */
+    private val builtin: ((String, java.io.OutputStream) -> Int?)? = null,
 ) {
     private var sshd: SshServer? = null
     private val stopping = AtomicBoolean(false)
@@ -119,7 +121,8 @@ class TvSshServer(
         // No pty on Android: PtyShell emulates echo/line editing when the client asks for a terminal.
         s.shellFactory = ShellFactory { PtyShell(listOf(shell, "-i"), sftpRoot) }
         s.commandFactory = ScpCommandFactory.Builder().withDelegate(CommandFactory { ch, cmd ->
-            ProcessShellFactory(cmd, shell, "-c", cmd).createShell(ch)
+            if (builtin != null && (cmd == "cbdev" || cmd.startsWith("cbdev "))) BuiltinCommand(cmd, builtin)
+            else ProcessShellFactory(cmd, shell, "-c", cmd).createShell(ch)
         }).build()
         s.subsystemFactories = listOf(SftpSubsystemFactory.Builder().build())
         s.fileSystemFactory = VirtualFileSystemFactory(sftpRoot.also { it.mkdirs() }.toPath())
@@ -163,4 +166,24 @@ class TvSshServer(
         const val DEFAULT_PORT = 2222
         init { SecurityUtils.isEDDSACurveSupported() }   // touch security registration early
     }
+}
+
+/** One in-process command of [TvSshServer.builtin]: runs on its own thread, answers on the channel, reports its exit code. */
+private class BuiltinCommand(private val line: String, private val handler: (String, java.io.OutputStream) -> Int?) : org.apache.sshd.server.command.Command {
+    private var out: java.io.OutputStream? = null
+    private var err: java.io.OutputStream? = null
+    private var exit: org.apache.sshd.server.ExitCallback? = null
+    override fun setInputStream(`in`: java.io.InputStream?) {}
+    override fun setOutputStream(out: java.io.OutputStream?) { this.out = out }
+    override fun setErrorStream(err: java.io.OutputStream?) { this.err = err }
+    override fun setExitCallback(callback: org.apache.sshd.server.ExitCallback?) { exit = callback }
+    override fun start(channel: org.apache.sshd.server.channel.ChannelSession?, env: org.apache.sshd.server.Environment?) {
+        Thread({
+            val o = out ?: return@Thread
+            val code = try { handler(line, o) ?: 127 } catch (e: Throwable) { runCatching { o.write("erreur : ${e.message}\n".toByteArray()) }; 1 }
+            runCatching { o.flush() }
+            exit?.onExit(code)
+        }, "ssh-builtin").apply { isDaemon = true; start() }
+    }
+    override fun destroy(channel: org.apache.sshd.server.channel.ChannelSession?) {}
 }
