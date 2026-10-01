@@ -67,6 +67,7 @@ Toutes dans `.env` (modèle : [`.env.example`](.env.example), jamais commité, `
 | `CASTBRIDGE_GEOIP_DIR`, `CASTBRIDGE_GEOIP_DB` | non | base locale MaxMind GeoLite2 (`.mmdb`, pays + ville) : dossier monté sur `/geoip`, chemin `/geoip/GeoLite2-City.mmdb` |
 | `CASTBRIDGE_RATE_LIMIT_PER_MINUTE`, `CASTBRIDGE_RATE_LIMIT_BURST` | non | limite par IP des routes publiques (défaut 120/min, rafale 60) |
 | `CASTBRIDGE_QUIZ_SEED` | non | importe la banque embarquée de la TV si la base est vide (défaut `true`) |
+| `CASTBRIDGE_QUIZ_PACKS_DIR` | non | dossier des packs de questions (`catalog.json` + `*.quiz.zip` copiés de `content/quiz/dist`), défaut `{CASTBRIDGE_STORAGE_DIR}/quiz-packs` ; signés avec la clé des mises à jour |
 | `CASTBRIDGE_BACKUP_DIR`, `CASTBRIDGE_BACKUP_RETENTION_DAYS` | non | pour `backup.sh` (défaut `/var/backups/castbridge`, 14 jours) |
 | `DEPLOY_REF` | non | révision déployée par défaut par `deploy.sh` (défaut `origin/main`) |
 

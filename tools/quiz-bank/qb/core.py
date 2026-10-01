@@ -170,6 +170,8 @@ class Gen:
 
 
 GENS = []
+# Courses that need more questions per template to reach 4 500 (maths / physics / economics have room: numbers vary freely)
+CAP_SCALE = {"tle": 1.5, "l1-maths": 1.6, "l1-eco": 1.6, "3e": 1.0}
 
 
 def gen(course, tpl, cap=250, diffs=(1, 2, 3, 4, 5), cat="Mathématiques", region=None, source="Généré par calcul (tools/quiz-bank)"):
@@ -188,7 +190,8 @@ def run_generators(only=None, strict=True):
             continue
         rng = random.Random(sha(g.course + "/" + g.tpl))
         seen, n, tries = set(), 0, 0
-        while n < g.cap and tries < g.cap * 12:
+        cap = int(g.cap * CAP_SCALE.get(g.course, 1.0))
+        while n < cap and tries < cap * 12:
             diff = g.diffs[tries % len(g.diffs)]
             tries += 1
             try:
