@@ -18,6 +18,22 @@ class AgentSettings(private val kv: KeyValueStore, private val now: () -> Long =
     fun grantAi() = kv.put(K_AI, AiConsent.VERSION)
     fun revokeAi() = kv.put(K_AI, null)
 
+    /**
+     * « Suggestions proactives » as a NOTIFICATION (at most one a week, silent, tap = open the assistant): OFF by default. The discreet line
+     * inside the library screen does not need it and is always there (it can be snoozed).
+     */
+    var proactiveNotify: Boolean
+        get() = kv.get(K_PROACTIVE) == "1"
+        set(v) = kv.put(K_PROACTIVE, if (v) "1" else null)
+    val lastNotifiedAt: Long get() = kv.get(K_NOTIFIED)?.substringBefore('|')?.toLongOrNull() ?: 0
+    val lastNotifiedSignature: String? get() = kv.get(K_NOTIFIED)?.substringAfter('|', "")?.takeIf { it.isNotEmpty() }
+    fun markNotified(at: Long, signature: String) = kv.put(K_NOTIFIED, "$at|$signature")
+
+    /** The summary of the last analysis ("il y a 2 h : 1 240 fichiers, 37 à ranger"), shown on the home screen of the assistant. */
+    var lastAnalysis: LastAnalysis?
+        get() = LastAnalysis.parse(kv.get(K_LAST))
+        set(v) = kv.put(K_LAST, v?.encode())
+
     /** Also read the phone's own folders (picked with the system picker), not only the TV library. */
     var phoneTreeUri: String?
         get() = kv.get(K_TREE)
@@ -36,13 +52,16 @@ class AgentSettings(private val kv: KeyValueStore, private val now: () -> Long =
     }
 
     /** "Effacer": everything the assistant remembers, except the journal (which has its own button). */
-    fun clearAll() { listOf(K_AUTO, K_AI, K_TREE, K_HIDE, LearnedRules.KEY).forEach { kv.put(it, null) } }
+    fun clearAll() { listOf(K_AUTO, K_AI, K_TREE, K_HIDE, K_PROACTIVE, K_NOTIFIED, K_LAST, LearnedRules.KEY).forEach { kv.put(it, null) } }
 
     companion object {
         const val K_AUTO = "agent.auto"
         const val K_AI = "agent.ai.consent"
         const val K_TREE = "agent.tree"
         const val K_HIDE = "agent.hide"
+        const val K_PROACTIVE = "agent.proactive"
+        const val K_NOTIFIED = "agent.notified"
+        const val K_LAST = "agent.last"
     }
 }
 
