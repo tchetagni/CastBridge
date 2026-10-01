@@ -186,6 +186,9 @@ class FigureView(ctx: Context, private val scene: Scene) : View(ctx) {
     }
 
     companion object {
+        /** One reusable Path (UI thread only): animations redraw their figure 30 times a second, no allocation per drawn path. */
+        private val scratch = Path()
+
         fun draw(c: Canvas, scene: Scene, s: Float, fill: Paint, stroke: Paint, txt: Paint) {
             fun f(v: Double) = (v * s).toFloat()
             for (op in scene.ops) when (op) {
@@ -198,7 +201,7 @@ class FigureView(ctx: Context, private val scene: Scene) : View(ctx) {
                     op.fill?.let { fill.color = it; c.drawRoundRect(r, f(op.radius), f(op.radius), fill) }
                     op.stroke?.let { stroke.color = it; stroke.strokeWidth = f(op.width).coerceAtLeast(1f); c.drawRoundRect(r, f(op.radius), f(op.radius), stroke) } }
                 is Op.Path -> {
-                    val p = Path()
+                    val p = scratch; p.rewind()
                     for (cmd in op.cmds) when (cmd) {
                         is PathCmd.M -> p.moveTo(f(cmd.x), f(cmd.y)); is PathCmd.L -> p.lineTo(f(cmd.x), f(cmd.y))
                         is PathCmd.C -> p.cubicTo(f(cmd.x1), f(cmd.y1), f(cmd.x2), f(cmd.y2), f(cmd.x), f(cmd.y))
@@ -212,7 +215,7 @@ class FigureView(ctx: Context, private val scene: Scene) : View(ctx) {
                 is Op.Text -> { txt.color = op.color; txt.textSize = f(op.size); txt.typeface = if (op.bold) TvFonts.bold else TvFonts.body
                     txt.textAlign = when (op.anchor) { "start" -> Paint.Align.LEFT; "end" -> Paint.Align.RIGHT; else -> Paint.Align.CENTER }
                     // a thin paper-coloured halo first: a label stays readable where a curve or a line crosses it
-                    txt.style = Paint.Style.STROKE; txt.strokeWidth = f(op.size) * 0.22f; val col = txt.color; txt.color = LearnStyle.PAPER
+                    txt.style = Paint.Style.STROKE; txt.strokeWidth = f(op.size) * 0.22f; val col = txt.color; txt.color = (LearnStyle.PAPER and 0xFFFFFF) or (col and 0xFF000000.toInt())
                     c.drawText(op.text, f(op.x), f(op.y), txt)
                     txt.style = Paint.Style.FILL; txt.color = col
                     c.drawText(op.text, f(op.x), f(op.y), txt) }

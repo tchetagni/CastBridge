@@ -79,7 +79,8 @@ sealed class Block {
     data class Formula(val tex: String, val caption: String? = null, override val review: Boolean = false) : Block()
     /** Worked example: statement, then steps revealed one by one (OK), then the answer. */
     data class Example(val title: String, val statement: String, val steps: List<Step>, val answer: String?, val figure: Figure? = null, override val review: Boolean = false) : Block()
-    data class Illustration(val figure: Figure, val caption: String?, val alt: String, override val review: Boolean = false) : Block()
+    /** [figure] is the static picture (the only thing older readers know, and the reduced-motion fallback); [animation] is optional. */
+    data class Illustration(val figure: Figure, val caption: String?, val alt: String, override val review: Boolean = false, val animation: AnimatedFigure? = null) : Block()
     /**
      * Video: a file of the TV library / USB drive ("library:<name>") or a URL set by an administrator; null = not provided
      * yet (the block is skipped). Never a download from a platform without the rights.

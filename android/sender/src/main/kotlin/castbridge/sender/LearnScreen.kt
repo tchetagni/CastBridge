@@ -236,7 +236,7 @@ private fun PhoneBlock(b: Block, revealed: Int) {
             b.steps.take(revealed).forEachIndexed { i, s -> Card { Column(Modifier.padding(10.dp)) { Text(md("**Étape ${i + 1}.** " + s.md)); s.tex?.let { PhoneFormula(it) } } } }
             if (revealed > b.steps.size) b.answer?.let { Text(md("➜ $it"), color = MaterialTheme.colorScheme.primary) }
         }
-        is Block.Illustration -> { PhoneFigure(b.figure); b.caption?.let { Text(md(it), style = MaterialTheme.typography.bodySmall) } }
+        is Block.Illustration -> { b.animation?.let { PhoneAnimation(b, it) } ?: PhoneFigure(b.figure); b.caption?.let { Text(md(it), style = MaterialTheme.typography.bodySmall) } }
         is Block.Audio -> Text("🔊 " + b.text)
         is Block.More -> { Text("Pour aller plus loin", fontWeight = FontWeight.Bold); b.items.forEach { Text(md("- $it")) } }
         is Block.Video -> Text("▶ ${b.title} (vidéo lue sur la TV)")
@@ -264,10 +264,12 @@ private fun PhoneFormula(tex: String) {
     }
 }
 
-private object SceneDraw {
+internal object SceneDraw {
     private val fill = Paint(Paint.ANTI_ALIAS_FLAG).apply { style = Paint.Style.FILL }
     private val stroke = Paint(Paint.ANTI_ALIAS_FLAG).apply { style = Paint.Style.STROKE; strokeCap = Paint.Cap.ROUND; strokeJoin = Paint.Join.ROUND }
     private val txt = Paint(Paint.ANTI_ALIAS_FLAG)
+    /** One reusable Path (UI thread only): no allocation per drawn path, frames of animations are drawn 30 times a second. */
+    private val scratch = Path()
 
     fun draw(c: android.graphics.Canvas, scene: Scene, s: Float) {
         fun f(v: Double) = (v * s).toFloat()
@@ -277,13 +279,13 @@ private object SceneDraw {
             is Op.Circle -> { op.fill?.let { fill.color = it; c.drawCircle(f(op.cx), f(op.cy), f(op.r), fill) }; op.stroke?.let { stroke.color = it; stroke.strokeWidth = f(op.width).coerceAtLeast(1f); c.drawCircle(f(op.cx), f(op.cy), f(op.r), stroke) } }
             is Op.Rect -> { val r = RectF(f(op.x), f(op.y), f(op.x + op.w), f(op.y + op.h)); op.fill?.let { fill.color = it; c.drawRoundRect(r, f(op.radius), f(op.radius), fill) }
                 op.stroke?.let { stroke.color = it; stroke.strokeWidth = f(op.width).coerceAtLeast(1f); c.drawRoundRect(r, f(op.radius), f(op.radius), stroke) } }
-            is Op.Path -> { val p = Path()
+            is Op.Path -> { val p = scratch.also { it.rewind() }
                 for (cmd in op.cmds) when (cmd) { is PathCmd.M -> p.moveTo(f(cmd.x), f(cmd.y)); is PathCmd.L -> p.lineTo(f(cmd.x), f(cmd.y))
                     is PathCmd.C -> p.cubicTo(f(cmd.x1), f(cmd.y1), f(cmd.x2), f(cmd.y2), f(cmd.x), f(cmd.y)); is PathCmd.Q -> p.quadTo(f(cmd.x1), f(cmd.y1), f(cmd.x), f(cmd.y)); PathCmd.Z -> p.close() }
                 op.fill?.let { fill.color = it; c.drawPath(p, fill) }; op.stroke?.let { stroke.color = it; stroke.strokeWidth = f(op.width).coerceAtLeast(1f); c.drawPath(p, stroke) } }
             is Op.Text -> { txt.color = op.color; txt.textSize = f(op.size); txt.typeface = if (op.bold) Typeface.DEFAULT_BOLD else Typeface.DEFAULT
                 txt.textAlign = when (op.anchor) { "start" -> Paint.Align.LEFT; "end" -> Paint.Align.RIGHT; else -> Paint.Align.CENTER }
-                txt.style = Paint.Style.STROKE; txt.strokeWidth = f(op.size) * 0.22f; txt.color = 0xFFFDFCF7.toInt(); c.drawText(op.text, f(op.x), f(op.y), txt)
+                txt.style = Paint.Style.STROKE; txt.strokeWidth = f(op.size) * 0.22f; txt.color = (0xFDFCF7 or (op.color and 0xFF000000.toInt())); c.drawText(op.text, f(op.x), f(op.y), txt)
                 txt.style = Paint.Style.FILL; txt.color = op.color; c.drawText(op.text, f(op.x), f(op.y), txt) }
             is Op.Clip -> { c.save(); c.clipRect(f(op.x), f(op.y), f(op.x + op.w), f(op.y + op.h)) }
             Op.Unclip -> c.restore()

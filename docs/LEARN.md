@@ -179,7 +179,91 @@ valeur finie, tolérance ≥ 0 ; appariement 2-6 paires sans doublon ; réponse 
 questions ; corrigé obligatoire ; figures dessinables, couleurs connues, textes dans le cadre ; épreuve blanche : total
 des points = 20, aucun exercice `review` ; **fiche type** des packs d'examen (objectifs, « l'essentiel », 2 exemples
 résolus, 3/2/1 exercices, 5 auto-évaluations). Tests du contenu : chaque bonne réponse est notée juste par le moteur de
-notation, chaque mauvaise fausse ; pas d'étiquettes superposées ; aucune vidéo embarquée.
+notation, chaque mauvaise fausse ; pas d'étiquettes superposées ; aucune vidéo embarquée ; animations : budget, durées,
+flashs, `alt`, légendes (voir § Animations).
+
+### Animations (illustrations animées, vectorielles, quelques Ko)
+
+Une illustration peut porter une **animation** : même bloc `illustration`, avec un champ `animation` en plus. La `figure`
+statique reste **obligatoire** : c'est le repli (mouvement réduit, erreur) et la seule chose que les anciennes versions
+de l'app connaissent (elles ignorent `animation` et affichent la figure). Pas de vidéo, pas de GIF, pas de bibliothèque :
+des **images clés vectorielles** décrites en JSON, dessinées par les mêmes primitives `Scene` (Canvas Android sur la TV,
+Canvas Compose sur le téléphone). Code : `core/.../learn/Animation.kt` (modèle, `frameAt`), `AnimationJson.kt`
+(lecture), `AnimationRules.kt` (règles + lint), `AnimPlayer.kt` (lecture, étapes, 30 i/s) ; TV : `LearnAnimView.kt` ;
+téléphone : `LearnAnim.kt`.
+
+```json
+{"type":"illustration","alt":"Un point bleu avance puis devient rouge.","caption":"Légende",
+ "figure":{"kind":"shapes","w":400,"h":240,"items":[ …image finale… ]},
+ "animation":{
+   "mode":"steps",                 // "steps" (pause à chaque étape, OK = étape suivante) | "auto" (lecture libre)
+   "loop":false,                   // boucle (mode auto seulement)
+   "groups":{"G":{"pivot":[150,100]}},            // facultatif : centre de rotation / d'échelle d'un groupe
+   "items":[                       // les éléments : les formes de « shapes » (clé "t") + id, g, état initial
+     {"id":"dot","t":"circle","cx":50,"cy":120,"r":20,"fill":"blue"},
+     {"id":"lbl","t":"text","x":20,"y":30,"text":"Valeur : {v}","anchor":"start","dec":1,"v":0},
+     {"id":"ln","t":"line","x1":50,"y1":200,"x2":350,"y2":200,"draw":0}],
+   "do":[                          // la ligne du temps
+     {"at":0,"d":2,"op":"move","on":"dot","dx":300,"ease":"linear"},
+     {"at":0,"d":2,"op":"count","on":"lbl","v":10},
+     {"at":2,"d":1,"op":"draw","on":"ln"}],
+   "steps":[{"at":2,"say":"Le point avance."},{"at":3,"say":"La ligne apparaît."}]}}
+```
+
+- **Éléments** : toutes les formes de `shapes` (`line circle rect poly text angle path`) ; `id` (sinon `_0`, `_1`…),
+  `g` = nom de groupe, `pivot":[x,y]` ; état initial : `alpha` (0 = caché), `draw` (0 = trait non tracé), `typed`
+  (0 = texte non écrit), `wipe` + `dir` (`right left up down`), `v` + `dec` (compteur : le texte contient `{v}`).
+- **Opérations** (`op`, sur un élément ou un groupe `on`, début `at` et durée `d` en secondes, `ease`) :
+  `move` (`dx`,`dy` : décalage **absolu** par rapport à la position de base), `scale` (`s`, uniforme, autour du pivot),
+  `rotate` (`deg`, sens horaire à l'écran, autour du pivot), `fade` (`a` 0..1), `color` (`fill` et/ou `stroke`, noms de
+  la palette ou `#RRGGBB`), `draw` (le trait se trace progressivement : lignes, chemins, cercles, rectangles ; le
+  remplissage apparaît à la fin), `type` (machine à écrire ; texte en `anchor":"start"`), `wipe` (révélation par un
+  rideau : barres qui grandissent, aires coloriées, niveau d'eau), `count` (valeur d'un compteur `{v}`, arrondie à `dec`
+  décimales). Une propriété d'un élément ne peut pas avoir deux actions qui se chevauchent. Easings : `linear`, `in`,
+  `out`, `inout` (défaut), `cubic` (tous monotones). Les étapes du groupe sont appliquées à chaque membre.
+- **Étapes** (`steps`) : `at` = instant de la pause, `say` = légende de ce qui s'y passe (≤ 160 caractères). En mode
+  `steps`, la lecture s'arrête à chaque pause ; la dernière tombe à la fin. En mode `auto`, les étapes sont facultatives
+  (légendes + sauts).
+- **Fonctions pures** (`AnimatedFigure`) : `frameAt(t)` → `Scene` (t borné, ou replié si `loop`), `nextStopAfter(t)`,
+  `prevStopBefore(t)`, `captionAt(t)`, `captions`. Mêmes entrées → mêmes images (testé).
+- **Budgets** (erreurs de validation) : animation ≤ **40 Ko** (JSON compact ; avertissement > 24 Ko), ≤ 120 éléments,
+  ≤ 400 actions, ≤ 40 étapes, durée totale 0,2 à 30 s, chaque action 0 (instantané) ou 0,2 à 30 s, dimensions
+  identiques à la figure de repli, `alt` ≥ 12 caractères (décrire ce qui se passe), légendes non vides, pas de boucle en
+  mode `steps`. Exemples livrés : 1 à 10 Ko, moyenne ≈ 2,8 Ko.
+- **Clignotements** : au plus **3 flashs par seconde** (un changement brusque d'opacité ≥ 0,5 ou de luminance ≥ 0,5 d'un
+  élément couvrant ≥ 10 % de la figure en < 0,34 s compte pour une moitié de flash ; les boucles sont comptées deux
+  fois). Pas de lumière stroboscopique, même pour un effet « éclair ».
+- **Lint** (`AnimationLint`, avertissements) : en mode `steps` on regarde l'image de chaque pause, sinon une vingtaine
+  d'instants : étiquettes qui se chevauchent ou qui sortent du cadre.
+- **Lecture sur la TV** : OK = lecture/pause (mode `auto`) ou étape suivante (mode `steps`, OK pendant le mouvement saute à
+  la pause) ; ▶ / ◀ = étape suivante / précédente, et passent à la page suivante / précédente avant la première et après
+  la dernière étape ; touche **JAUNE** = « Réduire les animations ». Légende de l'étape sous la figure. Pilotage depuis le
+  téléphone : `/api/learn/cmd` action `anim` (`play next prev replay reduce`).
+- **Lecture sur le téléphone** : Lecture/Pause ou Étape suivante, ◀ étape précédente, ↺ rejouer, curseur de position, légende.
+- **Performances** : horloge de l'écran (vsync), images limitées à **30 par seconde** (`AnimPlayer.advance` ignore les
+  ticks plus rapprochés et plafonne un saut à 0,1 s : on perd des images au lieu de ralentir) ; on ne redessine que si
+  une image est due ; `Paint`/`Path` réutilisés au dessin (`FigureView.draw`). `frameAt` crée quelques petits objets par
+  image (une liste d'`Op`) : pas d'allocation dans le dessin lui-même ; à mesurer sur la vraie TV 32 bits.
+- **Pause automatique** : TV = fenêtre masquée ou vue détachée ou page quittée ; téléphone = `ON_PAUSE`, sortie de
+  composition, figure hors de l'écran.
+- **« Réduire les animations »** : suit le réglage Android « supprimer les animations » (échelle d'animation 0) **et** un
+  réglage de l'app (téléphone : bouton sous l'animation ; TV : touche jaune). Alors : aucune interpolation, on saute d'une
+  image de pause à la suivante (OK / ▶ / ◀) ou on affiche la figure de repli, et **la liste des étapes est affichée en
+  texte**.
+- **Accessibilité** : `alt` lu par TalkBack (description du contenu, étape courante ajoutée), légende de chaque étape,
+  boutons nommés ; la lecture à voix haute de la page ajoute les légendes.
+- **Modèles** (`tools/anim`, Python sans dépendance) : `animlib.py` (constructeur `Anim` : `add`, `with a.step("…") as s:
+  s.draw/show/move/…`, calcule la figure de repli = dernière image) et `templates.py` : **23 modèles** — droite
+  graduée (sauts), fraction (aire), multiplication (carreaux), construction d'angle, triangle et somme des angles, courbe
+  de fonction tracée, addition de vecteurs, conversion d'unités, chaîne alimentaire, cycle de l'eau, photosynthèse,
+  circuit avec charges (boucle), états de la matière (boucle), frise chronologique, carte (régions mises en valeur),
+  carte (extension dans le temps), organigramme pas à pas, analyse de phrase, tableau de conjugaison, diagramme en
+  barres qui grandit, tri à bulles, équilibrage d'équation, Pythagore. `python3 tools/anim/build.py` écrit
+  `tools/anim/examples/*.json` (un bloc `illustration` complet par modèle, à copier dans une fiche).
+  `python3 -m unittest discover tools/anim` teste le générateur. `LearnAnimationExamplesTest` valide chaque exemple
+  (budget, durées, flashs, alt, repli = dernière image, lint, déterminisme) et dessine une **planche de contact PNG**
+  par modèle (Java2D, sans appareil) dans `android/core/build/anim-sheets/` (`tools/anim/render-sheets.sh` les copie
+  dans `docs/img/anim-sheets/`).
 
 ## 4. Packs de contenu et stockage
 
@@ -401,7 +485,7 @@ ouvrir une fiche précise), **Parents** (tableau de bord, contenus de la TV).
   (lecteur, séries, épreuve blanche, correction), `LearnExercise`, `LearnViews` (`LearnStyle`, `FigureView`,
   `FormulaView`), `LearnHub` (sources, progression, API) ; accroches : tuile de l'accueil, entrée du manifest,
   extension d'API dans `TvService`. Vues Android classiques, aucune image ni bibliothèque ajoutée.
-- `:sender` : `LearnScreen` (Compose) + un onglet dans `MainActivity`.
+- `:sender` : `LearnScreen` (Compose) + un onglet dans `MainActivity` ; `LearnAnim.kt` (lecteur d'animations).
 - Tests : `LearnLogicTest` (formules, Markdown, expressions, frises sans chevauchement, graphiques, SVG, packs :
   aller-retour, altération, signature, bibliothèque et versions, installateur et place libre, notation, pages,
   épreuve blanche, profils, étoiles, révisions, séries, tableau de bord, persistance, télémétrie, API) et
