@@ -6,7 +6,11 @@
   "textLotMaxBytes": 3145728,
   "mediaLotMaxBytes": 104857600,
   "maxShareOfFull": 0.35,
-  "categoryFillShare": {"learn": 0.40, "quiz": 0.25, "langues": 0.35},
+  "categoryFillShare": {
+    "learn": 0.4,
+    "quiz": 0.25,
+    "langues": 0.35
+  },
   "floors": {
     "learnExercises": 3,
     "quizPerDifficulty": 3,
@@ -15,14 +19,65 @@
     "videoMaxMs": 30000,
     "videoMaxBytes": 1572864
   },
-  "examScopes": ["cm2", "3e", "1ere", "tle-cd", "tle-commun", "class6", "form1"],
-  "examScopePrefixes": ["tle"],
+  "examScopes": [
+    "cm2",
+    "3e",
+    "1ere",
+    "tle-cd",
+    "tle-commun",
+    "class6",
+    "form1"
+  ],
+  "examScopePrefixes": [
+    "tle"
+  ],
   "levels": {
-    "difficultyLabels": {"1": "N0", "2": "N1", "3": "N2", "4": "N3", "5": "N4"},
-    "languageLevels": ["A0", "A1", "A2", "B1", "B2", "C1", "C2", "NATIF"]
+    "difficultyLabels": {
+      "1": "N0",
+      "2": "N1",
+      "3": "N2",
+      "4": "N3",
+      "5": "N4"
+    },
+    "languageLevels": [
+      "A0",
+      "A1",
+      "A2",
+      "B1",
+      "B2",
+      "C1",
+      "C2",
+      "NATIF"
+    ]
   },
-  "expectedLanguages": ["zh", "ja", "en", "de", "es", "it", "fr"],
-  "allowedLicenses": ["CASTBRIDGE-ORIGINAL", "CC0", "CC-BY", "CC-BY-SA", "PUBLIC-DOMAIN"],
+  "expectedLanguages": [
+    "zh",
+    "ja",
+    "en",
+    "de",
+    "es",
+    "it",
+    "fr"
+  ],
+  "allowedLicenses": [
+    "CASTBRIDGE-ORIGINAL",
+    "CC0",
+    "CC-BY",
+    "CC-BY-SA",
+    "PUBLIC-DOMAIN"
+  ],
   "trialSuffix": "-trial",
-  "lotFeatures": {"learn": "learn", "quiz": "quiz", "langues": "langues", "langmedia": "langmedia"}
+  "lotFeatures": {
+    "learn": "learn",
+    "quiz": "quiz",
+    "langues": "langues",
+    "langmedia": "langmedia"
+  },
+  "bundleQuizAliases": {
+    "class6": "class-6",
+    "form1": "form-1",
+    "form2": "form-2",
+    "form3": "form-3",
+    "tle-cd": "tle"
+  }
 }

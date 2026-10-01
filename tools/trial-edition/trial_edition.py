@@ -551,7 +551,7 @@ def fsize(v):
 
 # ------------------------------------------------------------------------------------------------ manifeste
 
-def bundles(inv):
+def bundles(inv, aliases=None):
     """Bouquets payants (docs/TRIAL-EDITION.md § Bouquets), calculés depuis le registre : aucun prix."""
     full = {}
     for i in inv.items.values():
@@ -559,7 +559,7 @@ def bundles(inv):
     key = lambda l: "%s:%s" % l
     out = []
     for scope in sorted(inv.scopes):
-        lots = [l for l in (("learn", scope), ("quiz", scope)) if l in full]
+        lots = [l for l in (("learn", scope), ("quiz", scope), ("quiz", (aliases or {}).get(scope, ""))) if l in full]
         out.append({"id": "classe-" + scope, "type": "classe", "title": inv.scopes[scope], "lots": [key(l) for l in lots], "rawBytes": sum(full[l] for l in lots)})
     for l in sorted(l for l in full if l[0] == "quiz"):
         out.append({"id": "quiz-" + l[1], "type": "quiz", "title": inv.lots[l]["title"], "lots": [key(l)], "rawBytes": full[l]})
@@ -578,7 +578,7 @@ def build_manifest(inv, sel, cfg, files):
     for i in inv.items.values():
         if i.uid in sel.chosen:
             by_lot.setdefault(i.lot, []).append(i)
-    bund = bundles(inv)
+    bund = bundles(inv, cfg.get("bundleQuizAliases"))
     for lot in sorted(by_lot):
         f = files[lot]
         b = sum(fsize(v) for v in f.values())
