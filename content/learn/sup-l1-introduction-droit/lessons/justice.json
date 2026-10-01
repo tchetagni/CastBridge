@@ -1,0 +1,453 @@
+{
+ "chapter": "sup-l1-introduction-droit-justice",
+ "lessons": [
+  {
+   "id": "sup-l1-introduction-droit-justice-pluralisme",
+   "title": "L'organisation de la justice et le pluralisme juridique",
+   "minutes": 40,
+   "programRef": "Programme de L1 de droit (introduction générale au droit) — à vérifier sur les maquettes de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Expliquer l'idée d'ordres de juridiction et de degrés.",
+    "Distinguer ordre judiciaire et ordre administratif.",
+    "Décrire en termes généraux la coexistence droit écrit / droit coutumier et le bijuridisme au Cameroun."
+   ],
+   "prerequisites": [
+    "sup-l1-introduction-droit-sources"
+   ],
+   "exercises": [
+    "sup-l1-introduction-droit-justice-pluralisme-01",
+    "sup-l1-introduction-droit-justice-pluralisme-02",
+    "sup-l1-introduction-droit-justice-pluralisme-03",
+    "sup-l1-introduction-droit-justice-pluralisme-04",
+    "sup-l1-introduction-droit-justice-pluralisme-05",
+    "sup-l1-introduction-droit-justice-pluralisme-06"
+   ],
+   "selfCheck": [
+    "sup-l1-introduction-droit-justice-pluralisme-q1",
+    "sup-l1-introduction-droit-justice-pluralisme-q2",
+    "sup-l1-introduction-droit-justice-pluralisme-q3",
+    "sup-l1-introduction-droit-justice-pluralisme-q4",
+    "sup-l1-introduction-droit-justice-pluralisme-q5"
+   ],
+   "reviewNotes": [
+    "POINT SENSIBLE : organisation judiciaire exacte (juridictions, compétences, appels, cassation) à faire relire par un juriste camerounais.",
+    "Le bijuridisme (common law / droit civil) et la place des juridictions coutumières sont décrits très généralement : à vérifier sur les textes en vigueur.",
+    "Contenu juridique général : à relire par un juriste camerounais (enseignant de droit) avant diffusion."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Ordres de juridiction et degrés",
+     "md": "Un **ordre de juridiction** regroupe des tribunaux qui jugent un type de litiges : l'**ordre judiciaire** (litiges entre particuliers, infractions) et l'**ordre administratif** (litiges mettant en cause l'administration). Les **degrés de juridiction** désignent les niveaux successifs d'examen d'une affaire : premier degré, appel, juridiction suprême.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Voies de recours (principes)",
+     "md": "- L'**appel** permet de faire rejuger l'affaire, en fait et en droit, par une juridiction supérieure.\n- Le **pourvoi** devant la juridiction suprême ne rejuge pas les faits : il contrôle l'application du droit.\n- Le justiciable doit respecter les **délais** et formes prévus par la loi.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Pluralisme juridique au Cameroun (en termes généraux)",
+     "md": "Le Cameroun connaît le **bijuridisme** : deux traditions, le **droit civil** d'inspiration française et la **common law** d'inspiration anglaise, héritées de l'histoire. S'y ajoute le **droit coutumier**, qui coexiste avec le droit écrit dans certains domaines, sous réserve de sa conformité aux normes supérieures et à l'ordre public.",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 250,
+      "items": [
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 8,
+        "w": 180,
+        "h": 36,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 31.25,
+        "text": "Juridiction suprême",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 80,
+        "x2": 210,
+        "y2": 44,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 80,
+        "w": 180,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 103.25,
+        "text": "Cour d'appel",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 152,
+        "x2": 210,
+        "y2": 116,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 152,
+        "w": 180,
+        "h": 36,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 175.25,
+        "text": "Premier degré",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 222,
+        "text": "Schéma général de recours (à adapter au cours)",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Les degrés de juridiction.",
+     "alt": "Trois rectangles empilés : premier degré, cour d'appel, juridiction suprême, reliés par des flèches montantes.",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Quel juge ?",
+     "statement": "Fictif : M. Fouda veut contester une décision de la mairie qui lui refuse une autorisation. Devant quel ordre ?",
+     "steps": [
+      {
+       "md": "Le litige oppose un particulier à une collectivité publique."
+      },
+      {
+       "md": "Il relève en principe de l'**ordre administratif**, non de l'ordre judiciaire."
+      }
+     ],
+     "answer": "**Ordre administratif, en principe.**",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Plusieurs droits ?",
+     "statement": "Fictif : dans une famille vivant à Bamenda, deux sources sont invoquées : un texte écrit et une pratique coutumière. Que dire ?",
+     "steps": [
+      {
+       "md": "Le Cameroun reconnaît un **pluralisme** : droit écrit, common law, coutumes."
+      },
+      {
+       "md": "La coutume s'applique seulement si elle est conforme à l'ordre public et aux normes supérieures."
+      }
+     ],
+     "answer": "**Coexistence, mais sous contrôle des normes supérieures.**",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Penser que **l'appel** rejuge seulement le droit : il rejuge aussi les faits.\n- Confondre **ordre** et **degré** de juridiction.\n- Croire que la **coutume** peut contredire la loi.\n- Mélanger bijuridisme (deux traditions écrites) et droit **coutumier**."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Trouve le nom de la juridiction de ta ville pour un litige civil, puis pour un litige avec l'administration.",
+      "Compare la façon dont un jugement est motivé dans les deux traditions juridiques."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-introduction-droit-justice-pluralisme-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sup-l1-introduction-droit-justice-pluralisme-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-introduction-droit-justice-pluralisme",
+   "prompt": "L'ordre administratif juge en principe…",
+   "explanation": "Il contrôle l'administration.",
+   "source": "Exercice original",
+   "review": true,
+   "choices": [
+    "les litiges impliquant l'administration",
+    "tous les litiges familiaux",
+    "les crimes",
+    "les différends entre voisins"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "sup-l1-introduction-droit-justice-pluralisme-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-introduction-droit-justice-pluralisme",
+   "prompt": "L'appel permet un nouvel examen de l'affaire.",
+   "explanation": "Oui, en fait et en droit.",
+   "source": "Exercice original",
+   "review": true,
+   "answer": true
+  },
+  {
+   "id": "sup-l1-introduction-droit-justice-pluralisme-03",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-introduction-droit-justice-pluralisme",
+   "prompt": "Associe.",
+   "explanation": "Termes de base.",
+   "source": "Exercice original",
+   "review": true,
+   "pairs": [
+    [
+     "Premier degré",
+     "Première juridiction saisie"
+    ],
+    [
+     "Appel",
+     "Nouvel examen"
+    ],
+    [
+     "Pourvoi",
+     "Contrôle du droit"
+    ],
+    [
+     "Bijuridisme",
+     "Deux traditions juridiques"
+    ]
+   ]
+  },
+  {
+   "id": "sup-l1-introduction-droit-justice-pluralisme-04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-introduction-droit-justice-pluralisme",
+   "prompt": "Le bijuridisme désigne…",
+   "explanation": "Droit civil et common law.",
+   "source": "Exercice original",
+   "review": true,
+   "choices": [
+    "deux Constitutions",
+    "la coexistence de deux traditions juridiques",
+    "deux langues",
+    "deux monnaies"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "sup-l1-introduction-droit-justice-pluralisme-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "sup-l1-introduction-droit-justice-pluralisme",
+   "prompt": "Explique en 4 à 6 lignes pourquoi le pluralisme juridique pose des défis.",
+   "explanation": "Le pluralisme enrichit mais complexifie.",
+   "source": "Exercice original",
+   "review": true,
+   "model": "Plusieurs sources et traditions coexistent, ce qui complique l'accès à la règle applicable, la formation des juristes et la cohérence des solutions. La coutume doit rester conforme à l'ordre public.",
+   "rubric": [
+    "Pluralité des sources",
+    "Difficulté d'accès",
+    "Limite de l'ordre public"
+   ]
+  },
+  {
+   "id": "sup-l1-introduction-droit-justice-pluralisme-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "sup-l1-introduction-droit-justice-pluralisme",
+   "prompt": "Fictif : un litige de succession oppose deux frères dans une famille de l'Ouest.",
+   "method": "Qualifier le litige, puis chercher la juridiction.",
+   "mistakes": [
+    "Saisir une juridiction incompétente."
+   ],
+   "source": "Exercice original",
+   "review": true,
+   "parts": [
+    {
+     "id": "sup-l1-introduction-droit-justice-pluralisme-06-a",
+     "points": 1,
+     "prompt": "La coutume invoquée peut s'appliquer si…",
+     "explanation": "Elle ne doit pas heurter l'ordre public.",
+     "kind": "mcq",
+     "choices": [
+      "elle est ancienne seulement",
+      "elle respecte les normes supérieures",
+      "un voisin l'a dit",
+      "elle est secrète"
+     ],
+     "answer": 1
+    },
+    {
+     "id": "sup-l1-introduction-droit-justice-pluralisme-06-b",
+     "points": 1,
+     "prompt": "Un jugement de premier degré peut parfois être contesté par appel.",
+     "explanation": "Vrai en principe.",
+     "kind": "truefalse",
+     "answer": true,
+     "review": true
+    },
+    {
+     "id": "sup-l1-introduction-droit-justice-pluralisme-06-c",
+     "points": 2,
+     "prompt": "Quelles questions poser avant de choisir la juridiction ?",
+     "explanation": "Quelle nature de litige ? Quelle juridiction compétente ? Quels délais ?",
+     "kind": "open",
+     "model": "Nature du litige, juridiction compétente, délais de recours.",
+     "rubric": [
+      "Nature",
+      "Compétence",
+      "Délais"
+     ],
+     "review": true
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-introduction-droit-justice-pluralisme-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-introduction-droit-justice-pluralisme",
+   "prompt": "Un degré de juridiction est…",
+   "choices": [
+    "un niveau d'examen de l'affaire",
+    "un diplôme",
+    "un traité",
+    "une loi"
+   ],
+   "answer": 0,
+   "explanation": "Premier degré, appel…",
+   "review": true
+  },
+  {
+   "id": "sup-l1-introduction-droit-justice-pluralisme-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-introduction-droit-justice-pluralisme",
+   "prompt": "Le pourvoi contrôle principalement…",
+   "choices": [
+    "les faits",
+    "l'application du droit",
+    "la coutume",
+    "les témoins"
+   ],
+   "answer": 1,
+   "explanation": "Contrôle de droit.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-introduction-droit-justice-pluralisme-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-introduction-droit-justice-pluralisme",
+   "prompt": "L'ordre administratif traite…",
+   "choices": [
+    "les crimes",
+    "les mariages",
+    "les litiges avec l'administration",
+    "les successions"
+   ],
+   "answer": 2,
+   "explanation": "Compétence.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-introduction-droit-justice-pluralisme-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-introduction-droit-justice-pluralisme",
+   "prompt": "Le droit coutumier est limité par…",
+   "choices": [
+    "l'avis d'un voisin",
+    "rien",
+    "un simple usage",
+    "l'ordre public et les normes supérieures"
+   ],
+   "answer": 3,
+   "explanation": "Limite générale.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-introduction-droit-justice-pluralisme-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-introduction-droit-justice-pluralisme",
+   "prompt": "Bijuridisme signifie…",
+   "choices": [
+    "coexistence de deux traditions juridiques",
+    "deux lois seulement",
+    "deux tribunaux seulement",
+    "deux Constitutions"
+   ],
+   "answer": 0,
+   "explanation": "Common law et droit civil.",
+   "review": true
+  }
+ ]
+}

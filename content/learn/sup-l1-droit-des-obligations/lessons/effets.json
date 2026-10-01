@@ -1,0 +1,864 @@
+{
+ "chapter": "sup-l1-droit-des-obligations-effets",
+ "lessons": [
+  {
+   "id": "sup-l1-droit-des-obligations-effets-inexecution",
+   "title": "Effets du contrat et inexécution",
+   "minutes": 45,
+   "programRef": "Programme de droit des obligations (L1/L2) — théorie générale — à vérifier sur les maquettes de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Expliquer la force obligatoire du contrat et l'effet relatif.",
+    "Décrire l'inexécution et la responsabilité contractuelle.",
+    "Distinguer exécution forcée, résolution et dommages-intérêts."
+   ],
+   "prerequisites": [
+    "sup-l1-droit-des-obligations-formation-contrat"
+   ],
+   "exercises": [
+    "sup-l1-droit-des-obligations-effets-inexecution-01",
+    "sup-l1-droit-des-obligations-effets-inexecution-02",
+    "sup-l1-droit-des-obligations-effets-inexecution-03",
+    "sup-l1-droit-des-obligations-effets-inexecution-04",
+    "sup-l1-droit-des-obligations-effets-inexecution-05",
+    "sup-l1-droit-des-obligations-effets-inexecution-06"
+   ],
+   "selfCheck": [
+    "sup-l1-droit-des-obligations-effets-inexecution-q1",
+    "sup-l1-droit-des-obligations-effets-inexecution-q2",
+    "sup-l1-droit-des-obligations-effets-inexecution-q3",
+    "sup-l1-droit-des-obligations-effets-inexecution-q4",
+    "sup-l1-droit-des-obligations-effets-inexecution-q5"
+   ],
+   "reviewNotes": [
+    "Le droit camerounais positif (code civil applicable, textes récents, spécificités selon les régions et traditions juridiques) doit être vérifié par un juriste ; cette fiche expose seulement des principes généraux de la théorie générale.",
+    "Les sanctions de l'inexécution et la mise en demeure varient selon les textes en vigueur : à vérifier.",
+    "La clause pénale est présentée en principe ; les montants de l'exemple sont fictifs."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Effets du contrat",
+     "md": "- **Force obligatoire** : le contrat valablement formé tient lieu de loi à ceux qui l'ont fait ; on ne peut le modifier unilatéralement.\n- **Effet relatif** : en principe il lie les seules parties, pas les tiers.\nL'exécution se fait **de bonne foi**.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Inexécution et responsabilité contractuelle",
+     "md": "Il y a **inexécution** quand le débiteur n'exécute pas, exécute mal ou exécute en retard. Le créancier peut alors rechercher la **responsabilité contractuelle** : réparer le préjudice causé par ce manquement. En principe, trois éléments : une **inexécution**, un **préjudice**, un **lien de causalité**.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Sanctions principales",
+     "md": "- **Exécution forcée** : obtenir l'exécution de la prestation.\n- **Résolution** : mettre fin au contrat et se libérer de ses propres obligations.\n- **Dommages-intérêts** : somme destinée à réparer le préjudice.\nLes parties peuvent prévoir à l'avance une **clause pénale** (somme forfaitaire due en cas de retard). Une **force majeure** peut exonérer le débiteur.",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "bars": [
+       {
+        "label": "Jours de retard",
+        "value": 12,
+        "color": [
+         "orange"
+        ]
+       },
+       {
+        "label": "Clause (milliers FCFA/jour)",
+        "value": 5,
+        "color": [
+         "blue"
+        ]
+       }
+      ]
+     },
+     "caption": "Données de l'exemple de clause pénale.",
+     "alt": "Deux barres : 12 jours de retard (orange) et 5 milliers de FCFA par jour de pénalité (bleu).",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Clause pénale",
+     "statement": "Fictif : un entrepreneur de Garoua devait livrer une clôture avant une date. Le contrat prévoit 5 000 FCFA de pénalité par jour de retard. Il livre avec 12 jours de retard. Quelle pénalité ?",
+     "steps": [
+      {
+       "md": "Le montant est prévu par le contrat : on multiplie la pénalité journalière par le nombre de jours.",
+       "tex": "5000 × 12"
+      },
+      {
+       "md": "Calcul : 5 000 × 12 = 60 000.",
+       "tex": "5000 × 12 = 60000"
+      }
+     ],
+     "answer": "**Pénalité : 60 000 FCFA (si la clause est valable).**",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Quelle sanction ?",
+     "statement": "Fictif : le vendeur n'a pas livré la chose payée malgré plusieurs relances. L'acheteur veut être libéré et récupérer son argent. Quelle voie ?",
+     "steps": [
+      {
+       "md": "L'acheteur ne veut plus exécuter le contrat."
+      },
+      {
+       "md": "La voie est la **résolution**, avec restitution du prix et éventuellement des dommages-intérêts."
+      }
+     ],
+     "answer": "**Résolution du contrat.**",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que **tout retard** autorise l'annulation immédiate.\n- Oublier la **mise en demeure** quand elle est exigée.\n- Confondre **résolution** et **nullité** : l'une sanctionne l'inexécution, l'autre un vice de formation.\n- Penser que les **tiers** sont automatiquement liés."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Cherche des exemples de force majeure dans ta région et ce qui la distingue d'une simple difficulté.",
+      "Distingue exécution forcée en nature et par équivalent."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-droit-des-obligations-effets-inexecution-01"
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-droit-des-obligations-delictuelle-extinction",
+   "title": "Responsabilité délictuelle et extinction des obligations",
+   "minutes": 45,
+   "programRef": "Programme de droit des obligations (L1/L2) — théorie générale — à vérifier sur les maquettes de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Énoncer les trois conditions classiques de la responsabilité délictuelle.",
+    "Distinguer responsabilité délictuelle et contractuelle.",
+    "Citer les principaux modes d'extinction : paiement, compensation, remise, prescription."
+   ],
+   "prerequisites": [
+    "sup-l1-droit-des-obligations-effets-inexecution"
+   ],
+   "exercises": [
+    "sup-l1-droit-des-obligations-delictuelle-extinction-01",
+    "sup-l1-droit-des-obligations-delictuelle-extinction-02",
+    "sup-l1-droit-des-obligations-delictuelle-extinction-03",
+    "sup-l1-droit-des-obligations-delictuelle-extinction-04",
+    "sup-l1-droit-des-obligations-delictuelle-extinction-05",
+    "sup-l1-droit-des-obligations-delictuelle-extinction-06"
+   ],
+   "selfCheck": [
+    "sup-l1-droit-des-obligations-delictuelle-extinction-q1",
+    "sup-l1-droit-des-obligations-delictuelle-extinction-q2",
+    "sup-l1-droit-des-obligations-delictuelle-extinction-q3",
+    "sup-l1-droit-des-obligations-delictuelle-extinction-q4",
+    "sup-l1-droit-des-obligations-delictuelle-extinction-q5"
+   ],
+   "reviewNotes": [
+    "Le droit camerounais positif (code civil applicable, textes récents, spécificités selon les régions et traditions juridiques) doit être vérifié par un juriste ; cette fiche expose seulement des principes généraux de la théorie générale.",
+    "Les régimes spéciaux (responsabilité du fait des choses, d'autrui) et les délais de prescription sont volontairement non traités : à compléter avec les textes.",
+    "Le paiement partiel est un exercice de calcul fictif."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Responsabilité délictuelle",
+     "md": "La **responsabilité délictuelle** oblige celui qui cause un dommage à autrui, **hors contrat**, à le réparer. En principe, trois conditions : une **faute**, un **dommage**, un **lien de causalité** entre les deux. Elle se distingue de la responsabilité contractuelle, qui suppose un contrat.",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 55,
+        "w": 100,
+        "h": 45,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 82.75,
+        "text": "Faute",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 82,
+        "text": "+",
+        "size": 22,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 145,
+        "y": 55,
+        "w": 120,
+        "h": 45,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 205.0,
+        "y": 82.75,
+        "text": "Dommage",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 82,
+        "text": "+",
+        "size": 22,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 300,
+        "y": 55,
+        "w": 110,
+        "h": 45,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 355.0,
+        "y": 82.75,
+        "text": "Lien",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 105,
+        "x2": 210,
+        "y2": 138,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 140,
+        "w": 200,
+        "h": 40,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 165.25,
+        "text": "Réparation",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Conditions de la responsabilité.",
+     "alt": "Trois rectangles faute, dommage et lien séparés par des signes plus, puis une flèche vers Réparation.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Éléments",
+     "md": "- **Faute** : comportement contraire à ce qu'aurait fait une personne raisonnable ; imprudence, négligence ou acte volontaire.\n- **Dommage** : atteinte à une personne ou à ses biens (matérielle ou morale), certaine et directe.\n- **Lien de causalité** : le dommage résulte bien de la faute.\nL'**exonération** est possible : force majeure, faute de la victime…",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Extinction des obligations (principaux modes)",
+     "md": "- **Paiement** : exécution de la prestation due.\n- **Compensation** : deux dettes réciproques s'éteignent à concurrence du plus petit montant.\n- **Remise de dette** : le créancier renonce à sa créance.\n- **Prescription** : écoulement du temps qui éteint le droit d'agir (délais fixés par la loi).\n- **Impossibilité d'exécuter** non fautive, etc.",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Paiement partiel",
+     "statement": "Fictif : M. Nana doit 500 000 FCFA à Mme Eyenga. Il verse 150 000 FCFA puis 120 000 FCFA. Que reste-t-il à payer ?",
+     "steps": [
+      {
+       "md": "On additionne les paiements : ",
+       "tex": "150000 + 120000 = 270000"
+      },
+      {
+       "md": "On retranche de la dette : ",
+       "tex": "500000 - 270000 = 230000"
+      }
+     ],
+     "answer": "**Reste dû : 230 000 FCFA.**",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Compensation",
+     "statement": "Fictif : Mme Eyenga doit 60 000 FCFA à M. Nana pour des tissus, et M. Nana lui doit 90 000 FCFA. Que se passe-t-il par compensation ?",
+     "steps": [
+      {
+       "md": "Les deux dettes s'éteignent à concurrence du plus petit montant.",
+       "tex": "min(60000,90000) = 60000"
+      },
+      {
+       "md": "Il reste la différence due par M. Nana :",
+       "tex": "90000 - 60000 = 30000"
+      }
+     ],
+     "answer": "**M. Nana doit encore 30 000 FCFA.**",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Chercher un **contrat** là où il n'y en a pas.\n- Oublier le **lien de causalité** (le dommage vient d'une autre cause).\n- Confondre **compensation** (dettes réciproques) et **remise** (renonciation).\n- Croire que **prescription** signifie que la dette n'a jamais existé."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Compare un accident de la route et un retard de livraison : lequel relève du contrat ?",
+      "Pourquoi la victime a-t-elle intérêt à garder ses preuves ?"
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-droit-des-obligations-delictuelle-extinction-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sup-l1-droit-des-obligations-effets-inexecution-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-droit-des-obligations-effets-inexecution",
+   "prompt": "La force obligatoire signifie que le contrat…",
+   "explanation": "Principe.",
+   "source": "Exercice original",
+   "review": true,
+   "choices": [
+    "lie les parties comme une loi",
+    "peut être ignoré",
+    "lie tout le monde",
+    "n'existe qu'à l'écrit"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "sup-l1-droit-des-obligations-effets-inexecution-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-droit-des-obligations-effets-inexecution",
+   "prompt": "Un tiers est en principe lié par un contrat auquel il n'a pas participé.",
+   "explanation": "C'est l'effet relatif.",
+   "source": "Exercice original",
+   "review": true,
+   "answer": false
+  },
+  {
+   "id": "sup-l1-droit-des-obligations-effets-inexecution-03",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-droit-des-obligations-effets-inexecution",
+   "prompt": "Associe sanction et sens.",
+   "explanation": "Sanctions classiques.",
+   "source": "Exercice original",
+   "review": true,
+   "pairs": [
+    [
+     "Exécution forcée",
+     "Obtenir la prestation due"
+    ],
+    [
+     "Résolution",
+     "Mettre fin au contrat"
+    ],
+    [
+     "Dommages-intérêts",
+     "Réparer le préjudice"
+    ],
+    [
+     "Clause pénale",
+     "Somme convenue à l'avance"
+    ]
+   ]
+  },
+  {
+   "id": "sup-l1-droit-des-obligations-effets-inexecution-04",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-droit-des-obligations-effets-inexecution",
+   "prompt": "Une clause prévoit 2 000 FCFA par jour de retard. Pour 15 jours ?",
+   "explanation": "2 000 × 15 = 30 000.",
+   "source": "Exercice original",
+   "review": true,
+   "reviewNote": "Montants fictifs.",
+   "answer": 30000,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l1-droit-des-obligations-effets-inexecution-05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-droit-des-obligations-effets-inexecution",
+   "prompt": "Une inondation imprévisible et irrésistible empêche la livraison. Le débiteur invoque…",
+   "explanation": "Elle peut exonérer.",
+   "source": "Exercice original",
+   "review": true,
+   "choices": [
+    "la clause pénale",
+    "la force majeure",
+    "le dol",
+    "la prescription"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "sup-l1-droit-des-obligations-effets-inexecution-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sup-l1-droit-des-obligations-effets-inexecution",
+   "prompt": "Fictif : une couturière de Bertoua devait remettre 20 uniformes scolaires à une école pour 150 000 FCFA, payés d'avance. Elle livre en retard et 3 uniformes sont défectueux.",
+   "method": "Calculer, qualifier, proposer des démarches.",
+   "mistakes": [
+    "Exiger la résolution alors qu'une exécution partielle est possible."
+   ],
+   "source": "Exercice original",
+   "review": true,
+   "parts": [
+    {
+     "id": "sup-l1-droit-des-obligations-effets-inexecution-06-a",
+     "points": 1,
+     "prompt": "Prix moyen par uniforme ?",
+     "explanation": "150000 ÷ 20 = 7500.",
+     "kind": "numeric",
+     "answer": 7500,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "sup-l1-droit-des-obligations-effets-inexecution-06-b",
+     "points": 1,
+     "prompt": "Valeur des 3 uniformes défectueux au prix moyen ?",
+     "explanation": "7500 × 3 = 22500.",
+     "kind": "numeric",
+     "answer": 22500,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "sup-l1-droit-des-obligations-effets-inexecution-06-c",
+     "points": 1,
+     "prompt": "Cela relève de…",
+     "explanation": "Mauvaise exécution : responsabilité contractuelle.",
+     "kind": "mcq",
+     "choices": [
+      "la nullité",
+      "la prescription",
+      "la tutelle",
+      "la responsabilité contractuelle"
+     ],
+     "answer": 3
+    },
+    {
+     "id": "sup-l1-droit-des-obligations-effets-inexecution-06-d",
+     "points": 2,
+     "prompt": "Quelles démarches l'école peut-elle envisager ?",
+     "explanation": "Mise en demeure, demande de remplacement, réduction du prix, dommages-intérêts.",
+     "kind": "open",
+     "model": "Mettre en demeure, demander remplacement ou réduction du prix, puis éventuellement dommages-intérêts.",
+     "rubric": [
+      "Mise en demeure",
+      "Remplacement ou réduction",
+      "Dommages-intérêts"
+     ],
+     "review": true
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-droit-des-obligations-effets-inexecution-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-droit-des-obligations-effets-inexecution",
+   "prompt": "Effet relatif signifie…",
+   "choices": [
+    "qu'il est facultatif",
+    "qu'il lie le juge",
+    "que le contrat lie les parties seulement",
+    "qu'il est annulable"
+   ],
+   "answer": 2,
+   "explanation": "Principe.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-droit-des-obligations-effets-inexecution-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-droit-des-obligations-effets-inexecution",
+   "prompt": "La résolution sanctionne…",
+   "choices": [
+    "un vice du consentement",
+    "la majorité",
+    "la prescription",
+    "l'inexécution"
+   ],
+   "answer": 3,
+   "explanation": "Mettre fin au contrat.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-droit-des-obligations-effets-inexecution-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-droit-des-obligations-effets-inexecution",
+   "prompt": "Les dommages-intérêts servent à…",
+   "choices": [
+    "réparer un préjudice",
+    "punir l'État",
+    "créer un contrat",
+    "payer l'impôt"
+   ],
+   "answer": 0,
+   "explanation": "Réparation.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-droit-des-obligations-effets-inexecution-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-droit-des-obligations-effets-inexecution",
+   "prompt": "La clause pénale est…",
+   "choices": [
+    "une peine de prison",
+    "une somme fixée à l'avance",
+    "un vice",
+    "une loi"
+   ],
+   "answer": 1,
+   "explanation": "Forfait convenu.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-droit-des-obligations-effets-inexecution-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-droit-des-obligations-effets-inexecution",
+   "prompt": "La bonne foi concerne…",
+   "choices": [
+    "la nullité seule",
+    "la preuve seule",
+    "l'exécution du contrat",
+    "le juge"
+   ],
+   "answer": 2,
+   "explanation": "Principe.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-droit-des-obligations-delictuelle-extinction-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-droit-des-obligations-delictuelle-extinction",
+   "prompt": "Les trois conditions de la responsabilité délictuelle sont…",
+   "explanation": "Conditions classiques.",
+   "source": "Exercice original",
+   "review": true,
+   "choices": [
+    "faute, dommage, lien de causalité",
+    "contrat, objet, cause",
+    "offre, acceptation, prix",
+    "vice, nullité, preuve"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "sup-l1-droit-des-obligations-delictuelle-extinction-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-droit-des-obligations-delictuelle-extinction",
+   "prompt": "La responsabilité délictuelle suppose un contrat.",
+   "explanation": "Elle intervient hors contrat.",
+   "source": "Exercice original",
+   "review": true,
+   "answer": false
+  },
+  {
+   "id": "sup-l1-droit-des-obligations-delictuelle-extinction-03",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-droit-des-obligations-delictuelle-extinction",
+   "prompt": "Dette de 80 000 FCFA, déjà payés : 30 000 FCFA. Reste ?",
+   "explanation": "80 000 − 30 000 = 50 000.",
+   "source": "Exercice original",
+   "review": true,
+   "answer": 50000,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l1-droit-des-obligations-delictuelle-extinction-04",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-droit-des-obligations-delictuelle-extinction",
+   "prompt": "Associe mode d'extinction et définition.",
+   "explanation": "Quatre modes d'extinction.",
+   "source": "Exercice original",
+   "review": true,
+   "pairs": [
+    [
+     "Paiement",
+     "Exécution de la prestation due"
+    ],
+    [
+     "Compensation",
+     "Extinction de dettes réciproques"
+    ],
+    [
+     "Remise de dette",
+     "Renonciation du créancier"
+    ],
+    [
+     "Prescription",
+     "Écoulement du temps"
+    ]
+   ]
+  },
+  {
+   "id": "sup-l1-droit-des-obligations-delictuelle-extinction-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "sup-l1-droit-des-obligations-delictuelle-extinction",
+   "prompt": "Pourquoi exige-t-on un lien de causalité ? 4 à 6 lignes.",
+   "explanation": "Le lien relie faute et dommage.",
+   "source": "Exercice original",
+   "review": true,
+   "model": "Parce qu'on ne peut tenir quelqu'un pour responsable d'un dommage qu'il n'a pas causé. Le lien assure que la réparation pèse sur l'auteur réel.",
+   "rubric": [
+    "Idée de cause",
+    "Éviter une responsabilité injuste",
+    "Exemple"
+   ]
+  },
+  {
+   "id": "sup-l1-droit-des-obligations-delictuelle-extinction-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sup-l1-droit-des-obligations-delictuelle-extinction",
+   "prompt": "Fictif : à Limbé, un camion de M. Ngwa heurte et abîme le comptoir de Mme Sone ; le comptoir, évalué à 120 000 FCFA, est détruit. M. Ngwa avait déjà versé 50 000 FCFA à titre d'acompte sur la réparation.",
+   "method": "Qualifier, calculer, justifier.",
+   "mistakes": [
+    "Oublier d'imputer l'acompte."
+   ],
+   "source": "Exercice original",
+   "review": true,
+   "parts": [
+    {
+     "id": "sup-l1-droit-des-obligations-delictuelle-extinction-06-a",
+     "points": 1,
+     "prompt": "La responsabilité est…",
+     "explanation": "Pas de contrat entre eux : délictuelle.",
+     "kind": "mcq",
+     "choices": [
+      "contractuelle",
+      "délictuelle",
+      "fiscale",
+      "naturelle"
+     ],
+     "answer": 1
+    },
+    {
+     "id": "sup-l1-droit-des-obligations-delictuelle-extinction-06-b",
+     "points": 1,
+     "prompt": "Reste à réparer ?",
+     "explanation": "120 000 − 50 000 = 70000.",
+     "kind": "numeric",
+     "answer": 70000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "sup-l1-droit-des-obligations-delictuelle-extinction-06-c",
+     "points": 1,
+     "prompt": "Si le comptoir avait été détruit par un cyclone indépendant du camion, M. Ngwa serait quand même responsable.",
+     "explanation": "Faux : le lien de causalité manquerait.",
+     "kind": "truefalse",
+     "answer": false,
+     "review": true
+    },
+    {
+     "id": "sup-l1-droit-des-obligations-delictuelle-extinction-06-d",
+     "points": 2,
+     "prompt": "Quelles conditions la victime doit-elle prouver ?",
+     "explanation": "Faute, dommage, lien de causalité.",
+     "kind": "open",
+     "model": "Elle doit établir la faute, le dommage et le lien entre eux.",
+     "rubric": [
+      "Faute",
+      "Dommage",
+      "Lien"
+     ],
+     "review": true
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-droit-des-obligations-delictuelle-extinction-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-droit-des-obligations-delictuelle-extinction",
+   "prompt": "Le paiement est…",
+   "choices": [
+    "une sanction",
+    "un contrat",
+    "un vice",
+    "l'exécution de la prestation due"
+   ],
+   "answer": 3,
+   "explanation": "Mode d'extinction.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-droit-des-obligations-delictuelle-extinction-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-droit-des-obligations-delictuelle-extinction",
+   "prompt": "La compensation éteint…",
+   "choices": [
+    "deux dettes réciproques jusqu'au plus petit montant",
+    "une dette unique",
+    "tous les contrats",
+    "les impôts"
+   ],
+   "answer": 0,
+   "explanation": "Principe.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-droit-des-obligations-delictuelle-extinction-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-droit-des-obligations-delictuelle-extinction",
+   "prompt": "La faute est…",
+   "choices": [
+    "un dommage",
+    "un comportement fautif",
+    "un contrat",
+    "une preuve"
+   ],
+   "answer": 1,
+   "explanation": "Première condition.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-droit-des-obligations-delictuelle-extinction-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-droit-des-obligations-delictuelle-extinction",
+   "prompt": "Le lien de causalité relie…",
+   "choices": [
+    "le contrat au prix",
+    "le juge au tribunal",
+    "la faute au dommage",
+    "le débiteur au créancier"
+   ],
+   "answer": 2,
+   "explanation": "Condition.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-droit-des-obligations-delictuelle-extinction-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-droit-des-obligations-delictuelle-extinction",
+   "prompt": "La prescription éteint…",
+   "choices": [
+    "la naissance du contrat",
+    "le dommage",
+    "la preuve",
+    "le droit d'agir après un certain temps"
+   ],
+   "answer": 3,
+   "explanation": "Délais fixés par la loi.",
+   "review": true
+  }
+ ]
+}

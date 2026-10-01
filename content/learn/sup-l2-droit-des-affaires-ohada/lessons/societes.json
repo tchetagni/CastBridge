@@ -1,0 +1,1109 @@
+{
+ "chapter": "sup-l2-droit-des-affaires-ohada-societes",
+ "lessons": [
+  {
+   "id": "sup-l2-droit-des-affaires-ohada-societes",
+   "title": "Les sociétés commerciales : SNC, SARL, SA",
+   "minutes": 45,
+   "programRef": "Programme de droit des affaires / droit OHADA — introduction (L2) — à vérifier sur les maquettes de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Définir la société commerciale et ses éléments.",
+    "Comparer SNC, SARL et SA en termes généraux.",
+    "Expliquer en principe la responsabilité des associés."
+   ],
+   "prerequisites": [
+    "sup-l2-droit-des-affaires-ohada-commercant-fonds"
+   ],
+   "exercises": [
+    "sup-l2-droit-des-affaires-ohada-societes-01",
+    "sup-l2-droit-des-affaires-ohada-societes-02",
+    "sup-l2-droit-des-affaires-ohada-societes-03",
+    "sup-l2-droit-des-affaires-ohada-societes-04",
+    "sup-l2-droit-des-affaires-ohada-societes-05",
+    "sup-l2-droit-des-affaires-ohada-societes-06"
+   ],
+   "selfCheck": [
+    "sup-l2-droit-des-affaires-ohada-societes-q1",
+    "sup-l2-droit-des-affaires-ohada-societes-q2",
+    "sup-l2-droit-des-affaires-ohada-societes-q3",
+    "sup-l2-droit-des-affaires-ohada-societes-q4",
+    "sup-l2-droit-des-affaires-ohada-societes-q5"
+   ],
+   "reviewNotes": [
+    "Contenu normatif en termes généraux : à relire par un juriste (enseignant de droit des affaires) en confrontant aux Actes uniformes OHADA en vigueur ; aucun article, seuil ni délai n'est cité.",
+    "AUCUN capital minimum ni nombre d'associés n'est donné dans le texte pour l'élève : à vérifier (si l'enseignant souhaite les ajouter) sur l'Acte uniforme relatif au droit des sociétés commerciales et du GIE.",
+    "Les apports et le partage du résultat des exemples sont fournis par l'énoncé (fictifs)."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Société",
+     "md": "Une **société** est un contrat par lequel plusieurs personnes mettent en commun des **apports** pour exercer une activité et en partager les **bénéfices** ou en supporter les **pertes**. Elle a en principe la **personnalité juridique** et un patrimoine propre. Les associés partagent la volonté de collaborer (*affectio societatis*).",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Trois formes classiques",
+     "md": "- **SNC (société en nom collectif)** : société de personnes ; chaque associé est en principe **indéfiniment et solidairement** responsable des dettes sociales ; ses associés sont commerçants.\n- **SARL** : société à **responsabilité limitée** ; les associés ne risquent en principe que leurs apports ; titres non librement négociables.\n- **SA (société anonyme)** : société de capitaux ; actionnaires, en principe **responsables dans la limite de leurs apports**, titres négociables.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Responsabilité et organes (principe)",
+     "md": "La **responsabilité** des associés est le critère de choix majeur : illimitée dans la SNC, limitée aux apports dans la SARL et la SA. Chaque forme a ses organes (gérant, conseil, assemblées) et des règles de fonctionnement et de contrôle propres, fixées par la loi.",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 240,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 8,
+        "w": 120,
+        "h": 34,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 70.0,
+        "y": 29.55,
+        "text": "Forme",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 140,
+        "y": 8,
+        "w": 130,
+        "h": 34,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 205.0,
+        "y": 29.55,
+        "text": "Responsabilité",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 8,
+        "w": 130,
+        "h": 34,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 345.0,
+        "y": 29.55,
+        "text": "Nature",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 55,
+        "w": 120,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 70.0,
+        "y": 80.25,
+        "text": "SNC",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 140,
+        "y": 55,
+        "w": 130,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 205.0,
+        "y": 80.25,
+        "text": "Illimitée",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 55,
+        "w": 130,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 345.0,
+        "y": 80.25,
+        "text": "Personnes",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 110,
+        "w": 120,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 70.0,
+        "y": 135.25,
+        "text": "SARL",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 140,
+        "y": 110,
+        "w": 130,
+        "h": 40,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 205.0,
+        "y": 135.25,
+        "text": "Limitée",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 110,
+        "w": 130,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 345.0,
+        "y": 135.25,
+        "text": "Mixte",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 165,
+        "w": 120,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 70.0,
+        "y": 190.25,
+        "text": "SA",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 140,
+        "y": 165,
+        "w": 130,
+        "h": 40,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 205.0,
+        "y": 190.25,
+        "text": "Limitée",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 165,
+        "w": 130,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 345.0,
+        "y": 190.25,
+        "text": "Capitaux",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 232,
+        "text": "Tableau simplifié (à adapter au cours)",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Comparatif des formes de société.",
+     "alt": "Tableau en trois lignes : SNC avec responsabilité illimitée et nature personnes ; SARL limitée et mixte ; SA limitée et capitaux.",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Répartition proportionnelle",
+     "statement": "Fictif : trois associés apportent Mme Abessolo 4 000 000, M. Bella 3 000 000, Mme Cissé 3 000 000 FCFA. La société réalise un bénéfice de 2 000 000 FCFA à partager proportionnellement aux apports. Part de Mme Abessolo ?",
+     "steps": [
+      {
+       "md": "Total des apports : ",
+       "tex": "4000000 + 3000000 + 3000000 = 10000000"
+      },
+      {
+       "md": "Sa quote-part : ",
+       "tex": "4000000/10000000 = 0.4"
+      },
+      {
+       "md": "Son bénéfice : ",
+       "tex": "2000000 × 0.4 = 800000"
+      }
+     ],
+     "answer": "**Part de Mme Abessolo : 800 000 FCFA.**",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Responsabilité des associés",
+     "statement": "Fictif : une société a une dette de 5 000 000 FCFA que ses biens ne couvrent pas. Un associé a apporté 2 000 000 FCFA. Que risque-t-il dans une SARL ? et dans une SNC ?",
+     "steps": [
+      {
+       "md": "Dans une **SARL**, il ne risque en principe que son apport : au plus 2 000 000 FCFA."
+      },
+      {
+       "md": "Dans une **SNC**, il répond en principe indéfiniment et solidairement : tout le passif peut lui être réclamé sur ses biens personnels."
+      }
+     ],
+     "answer": "**SARL : limité à l'apport ; SNC : responsabilité illimitée.**",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire qu'**une société n'a pas de patrimoine** distinct de celui des associés.\n- Penser que la SARL ne **peut jamais** engager la responsabilité de son dirigeant.\n- Oublier que, dans la SNC, la **solidarité** peut jouer pour tout le passif.\n- Citer des **seuils de capital** sans vérifier les textes."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Compare deux entreprises de ta ville : forme choisie et raisons possibles.",
+      "Pourquoi une SNC repose-t-elle sur la confiance entre associés ?"
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l2-droit-des-affaires-ohada-societes-01"
+    }
+   ]
+  },
+  {
+   "id": "sup-l2-droit-des-affaires-ohada-collectives-arbitrage",
+   "title": "Procédures collectives et arbitrage",
+   "minutes": 40,
+   "programRef": "Programme de droit des affaires / droit OHADA — introduction (L2) — à vérifier sur les maquettes de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Expliquer le but des procédures collectives.",
+    "Distinguer en principe prévention, redressement et liquidation.",
+    "Définir l'arbitrage et sa convention."
+   ],
+   "prerequisites": [
+    "sup-l2-droit-des-affaires-ohada-societes"
+   ],
+   "exercises": [
+    "sup-l2-droit-des-affaires-ohada-collectives-arbitrage-01",
+    "sup-l2-droit-des-affaires-ohada-collectives-arbitrage-02",
+    "sup-l2-droit-des-affaires-ohada-collectives-arbitrage-03",
+    "sup-l2-droit-des-affaires-ohada-collectives-arbitrage-04",
+    "sup-l2-droit-des-affaires-ohada-collectives-arbitrage-05",
+    "sup-l2-droit-des-affaires-ohada-collectives-arbitrage-06"
+   ],
+   "selfCheck": [
+    "sup-l2-droit-des-affaires-ohada-collectives-arbitrage-q1",
+    "sup-l2-droit-des-affaires-ohada-collectives-arbitrage-q2",
+    "sup-l2-droit-des-affaires-ohada-collectives-arbitrage-q3",
+    "sup-l2-droit-des-affaires-ohada-collectives-arbitrage-q4",
+    "sup-l2-droit-des-affaires-ohada-collectives-arbitrage-q5"
+   ],
+   "reviewNotes": [
+    "Contenu normatif en termes généraux : à relire par un juriste (enseignant de droit des affaires) en confrontant aux Actes uniformes OHADA en vigueur ; aucun article, seuil ni délai n'est cité.",
+    "Conditions d'ouverture (cessation des paiements), délais et organes des procédures collectives à vérifier sur l'Acte uniforme correspondant (non cité ici).",
+    "Procédure d'arbitrage (convention, sentence, recours) : notions seulement ; relire."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Procédures collectives",
+     "md": "Les **procédures collectives** traitent la situation d'une entreprise en **difficulté** vis-à-vis de ses **créanciers** collectivement. Leurs objectifs : **sauvegarder** l'entreprise quand c'est possible, **protéger les emplois**, et organiser un **paiement équitable** des créanciers. Elles sont encadrées par la loi et suivies par un juge.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Grandes étapes (principe)",
+     "md": "- **Prévention** : mesures amiables ou judiciaires pour éviter la cessation des paiements.\n- **Redressement** : l'entreprise continue son activité sous contrôle, selon un plan, pour retrouver l'équilibre.\n- **Liquidation** : lorsque le redressement est impossible, les biens sont vendus pour payer les créanciers.\nL'entreprise en grande difficulté est en **cessation des paiements** : elle ne peut plus payer ses dettes exigibles avec son actif disponible.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Arbitrage",
+     "md": "L'**arbitrage** est un mode de règlement des litiges par lequel les parties confient la décision à un ou plusieurs **arbitres** privés, par une **convention d'arbitrage** (clause dans le contrat ou accord après le litige). La **sentence arbitrale** s'impose aux parties et peut être exécutée sous contrôle du juge. Ses atouts : rapidité, confidentialité, choix des arbitres.",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 250,
+      "items": [
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 8,
+        "w": 200,
+        "h": 36,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 31.25,
+        "text": "Entreprise en difficulté",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 44,
+        "x2": 210,
+        "y2": 66,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 66,
+        "w": 200,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 89.25,
+        "text": "Prévention",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 102,
+        "x2": 210,
+        "y2": 124,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 124,
+        "w": 200,
+        "h": 36,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 147.25,
+        "text": "Redressement",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 160,
+        "x2": 210,
+        "y2": 182,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 182,
+        "w": 200,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 205.25,
+        "text": "Liquidation",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 242,
+        "text": "Parcours simplifié, selon la gravité et les chances",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Parcours d'une entreprise en difficulté.",
+     "alt": "Quatre rectangles reliés par des flèches : entreprise en difficulté, prévention, redressement, liquidation.",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Situation d'une entreprise",
+     "statement": "Fictif : l'actif d'une entreprise est de 8 000 000 FCFA et ses dettes de 14 000 000 FCFA. Quelle est l'insuffisance et quelle procédure envisager ?",
+     "steps": [
+      {
+       "md": "On compare passif et actif : ",
+       "tex": "14000000 - 8000000 = 6000000"
+      },
+      {
+       "md": "L'actif ne couvre pas les dettes : des mesures sont nécessaires (prévention, redressement ou liquidation selon la gravité)."
+      }
+     ],
+     "answer": "**Insuffisance de 6 000 000 FCFA ; une procédure collective est à examiner avec un juriste.**",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Arbitrage ou tribunal ?",
+     "statement": "Fictif : le contrat entre deux sociétés contient une clause renvoyant tout litige à un arbitre. Un différend naît. Où aller ?",
+     "steps": [
+      {
+       "md": "La **clause compromissoire** valide oblige les parties à saisir l'arbitre."
+      },
+      {
+       "md": "Le tribunal étatique n'intervient qu'en appui ou pour l'exécution de la sentence."
+      }
+     ],
+     "answer": "**Arbitrage, en principe.**",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Penser qu'une procédure collective sert seulement à **fermer** l'entreprise.\n- Confondre **redressement** et **liquidation**.\n- Croire que l'arbitrage est **toujours moins cher**.\n- Oublier qu'une sentence a **besoin du juge** pour être exécutée de force."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Cherche pourquoi l'alerte précoce aide à éviter la liquidation.",
+      "Compare, dans un tableau, tribunal et arbitrage (durée, confidentialité, coût)."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l2-droit-des-affaires-ohada-collectives-arbitrage-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sup-l2-droit-des-affaires-ohada-societes-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-droit-des-affaires-ohada-societes",
+   "prompt": "La responsabilité des associés d'une SNC est en principe…",
+   "explanation": "Caractéristique de la SNC.",
+   "source": "Exercice original",
+   "review": true,
+   "choices": [
+    "indéfinie et solidaire",
+    "limitée à 100 FCFA",
+    "inexistante",
+    "réservée au juge"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "sup-l2-droit-des-affaires-ohada-societes-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-droit-des-affaires-ohada-societes",
+   "prompt": "Dans une SA, l'actionnaire risque en principe uniquement son apport.",
+   "explanation": "Responsabilité limitée.",
+   "source": "Exercice original",
+   "review": true,
+   "answer": true
+  },
+  {
+   "id": "sup-l2-droit-des-affaires-ohada-societes-03",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-droit-des-affaires-ohada-societes",
+   "prompt": "Associe forme et trait.",
+   "explanation": "Traits généraux.",
+   "source": "Exercice original",
+   "review": true,
+   "pairs": [
+    [
+     "SNC",
+     "Responsabilité illimitée des associés"
+    ],
+    [
+     "SARL",
+     "Responsabilité limitée aux apports"
+    ],
+    [
+     "SA",
+     "Société de capitaux à actions"
+    ],
+    [
+     "Apport",
+     "Mise en commun de biens ou d'industrie"
+    ]
+   ]
+  },
+  {
+   "id": "sup-l2-droit-des-affaires-ohada-societes-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l2-droit-des-affaires-ohada-societes",
+   "prompt": "Fictif : deux associés apportent 6 000 000 et 4 000 000 FCFA ; bénéfice 1 000 000 FCFA réparti au prorata. Part du second ?",
+   "explanation": "1 000 000 × 4 000 000 ÷ 10 000 000 = 400 000.",
+   "source": "Exercice original",
+   "review": true,
+   "answer": 400000,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l2-droit-des-affaires-ohada-societes-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "sup-l2-droit-des-affaires-ohada-societes",
+   "prompt": "Pourquoi choisir une SARL plutôt qu'une SNC ? 4 à 6 lignes.",
+   "explanation": "Le risque personnel guide le choix.",
+   "source": "Exercice original",
+   "review": true,
+   "model": "La SARL limite la responsabilité des associés à leurs apports et protège leur patrimoine personnel, tandis que la SNC les expose à une responsabilité indéfinie et solidaire.",
+   "rubric": [
+    "Responsabilité limitée",
+    "Protection du patrimoine",
+    "Comparaison"
+   ]
+  },
+  {
+   "id": "sup-l2-droit-des-affaires-ohada-societes-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sup-l2-droit-des-affaires-ohada-societes",
+   "prompt": "Fictif : trois amis de Yaoundé créent une SARL fictive « Savane Bois », apports de 5 000 000, 3 000 000 et 2 000 000 FCFA. Les dettes atteignent 12 000 000 FCFA, l'actif étant de 6 000 000 FCFA.",
+   "method": "Calculer, puis qualifier la responsabilité.",
+   "mistakes": [
+    "Confondre insuffisance d'actif et capital."
+   ],
+   "source": "Exercice original",
+   "review": true,
+   "parts": [
+    {
+     "id": "sup-l2-droit-des-affaires-ohada-societes-06-a",
+     "points": 1,
+     "prompt": "Total des apports ?",
+     "explanation": "5 000 000 + 3 000 000 + 2 000 000 = 10 000 000.",
+     "kind": "numeric",
+     "answer": 10000000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "sup-l2-droit-des-affaires-ohada-societes-06-b",
+     "points": 1,
+     "prompt": "Insuffisance d'actif (dettes − actif) ?",
+     "explanation": "12 000 000 − 6 000 000 = 6 000 000.",
+     "kind": "numeric",
+     "answer": 6000000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "sup-l2-droit-des-affaires-ohada-societes-06-c",
+     "points": 1,
+     "prompt": "Dans une SARL, en principe, les associés risquent…",
+     "explanation": "Leurs apports.",
+     "kind": "mcq",
+     "choices": [
+      "tous leurs biens personnels",
+      "rien du tout",
+      "la prison systématique",
+      "leurs apports"
+     ],
+     "answer": 3
+    },
+    {
+     "id": "sup-l2-droit-des-affaires-ohada-societes-06-d",
+     "points": 2,
+     "prompt": "Quelles précautions de gestion éviter une telle situation ?",
+     "explanation": "Plan de trésorerie, suivi des dettes, comptabilité régulière, alerte précoce.",
+     "kind": "open",
+     "model": "Plan de trésorerie, comptabilité à jour et alerte précoce.",
+     "rubric": [
+      "Suivi financier",
+      "Comptabilité",
+      "Anticipation"
+     ],
+     "review": true
+    }
+   ]
+  },
+  {
+   "id": "sup-l2-droit-des-affaires-ohada-societes-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-droit-des-affaires-ohada-societes",
+   "prompt": "Une société est…",
+   "choices": [
+    "un jugement",
+    "une coutume",
+    "un contrat de mise en commun d'apports",
+    "un impôt"
+   ],
+   "answer": 2,
+   "explanation": "Définition.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-droit-des-affaires-ohada-societes-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-droit-des-affaires-ohada-societes",
+   "prompt": "Dans la SNC, les associés sont en principe…",
+   "choices": [
+    "irresponsables",
+    "protégés par l'État",
+    "étrangers",
+    "indéfiniment et solidairement responsables"
+   ],
+   "answer": 3,
+   "explanation": "Principe.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-droit-des-affaires-ohada-societes-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-droit-des-affaires-ohada-societes",
+   "prompt": "La SARL est une société…",
+   "choices": [
+    "à responsabilité limitée",
+    "à responsabilité nulle",
+    "publique",
+    "religieuse"
+   ],
+   "answer": 0,
+   "explanation": "Définition.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-droit-des-affaires-ohada-societes-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-droit-des-affaires-ohada-societes",
+   "prompt": "Un actionnaire détient…",
+   "choices": [
+    "un loyer",
+    "des titres négociables",
+    "une dette fiscale",
+    "un jugement"
+   ],
+   "answer": 1,
+   "explanation": "SA.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-droit-des-affaires-ohada-societes-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-droit-des-affaires-ohada-societes",
+   "prompt": "L'apport est…",
+   "choices": [
+    "un salaire",
+    "un impôt",
+    "ce que l'associé met dans la société",
+    "un jugement"
+   ],
+   "answer": 2,
+   "explanation": "Mise en commun.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-droit-des-affaires-ohada-collectives-arbitrage-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-droit-des-affaires-ohada-collectives-arbitrage",
+   "prompt": "Le redressement vise à…",
+   "explanation": "On cherche à sauver l'entreprise.",
+   "source": "Exercice original",
+   "review": true,
+   "choices": [
+    "permettre à l'entreprise de continuer son activité",
+    "vendre aussitôt tous les biens",
+    "supprimer les dettes",
+    "fermer l'entreprise"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "sup-l2-droit-des-affaires-ohada-collectives-arbitrage-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-droit-des-affaires-ohada-collectives-arbitrage",
+   "prompt": "La liquidation est envisagée lorsque le redressement est impossible.",
+   "explanation": "Elle organise la vente des biens.",
+   "source": "Exercice original",
+   "review": true,
+   "answer": true
+  },
+  {
+   "id": "sup-l2-droit-des-affaires-ohada-collectives-arbitrage-03",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-droit-des-affaires-ohada-collectives-arbitrage",
+   "prompt": "Associe.",
+   "explanation": "Notions de base.",
+   "source": "Exercice original",
+   "review": true,
+   "pairs": [
+    [
+     "Prévention",
+     "Éviter la cessation des paiements"
+    ],
+    [
+     "Redressement",
+     "Poursuivre l'activité sous plan"
+    ],
+    [
+     "Liquidation",
+     "Vendre les biens pour payer"
+    ],
+    [
+     "Arbitrage",
+     "Décision par des arbitres privés"
+    ]
+   ]
+  },
+  {
+   "id": "sup-l2-droit-des-affaires-ohada-collectives-arbitrage-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l2-droit-des-affaires-ohada-collectives-arbitrage",
+   "prompt": "Fictif : actif 3 000 000, dettes 5 500 000 FCFA. Insuffisance ?",
+   "explanation": "5 500 000 − 3 000 000 = 2 500 000.",
+   "source": "Exercice original",
+   "review": true,
+   "answer": 2500000,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l2-droit-des-affaires-ohada-collectives-arbitrage-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "sup-l2-droit-des-affaires-ohada-collectives-arbitrage",
+   "prompt": "Cite en 4 à 6 lignes deux avantages de l'arbitrage et une limite.",
+   "explanation": "Penser à la liberté des parties.",
+   "source": "Exercice original",
+   "review": true,
+   "model": "Avantages : rapidité et confidentialité, choix d'arbitres compétents. Limite : coût parfois élevé et nécessité d'une convention d'arbitrage.",
+   "rubric": [
+    "Avantage 1",
+    "Avantage 2",
+    "Limite"
+   ]
+  },
+  {
+   "id": "sup-l2-droit-des-affaires-ohada-collectives-arbitrage-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sup-l2-droit-des-affaires-ohada-collectives-arbitrage",
+   "prompt": "Fictif : la société « Equateur Froid » (actif de 9 000 000 FCFA, dettes de 15 000 000 FCFA) et son fournisseur ont un contrat avec clause d'arbitrage.",
+   "method": "Calculer, qualifier, conseiller.",
+   "mistakes": [
+    "Ignorer la clause d'arbitrage."
+   ],
+   "source": "Exercice original",
+   "review": true,
+   "parts": [
+    {
+     "id": "sup-l2-droit-des-affaires-ohada-collectives-arbitrage-06-a",
+     "points": 1,
+     "prompt": "Insuffisance d'actif ?",
+     "explanation": "15 000 000 − 9 000 000 = 6 000 000.",
+     "kind": "numeric",
+     "answer": 6000000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "sup-l2-droit-des-affaires-ohada-collectives-arbitrage-06-b",
+     "points": 1,
+     "prompt": "Pour un litige sur le contrat, la voie normale est…",
+     "explanation": "La clause d'arbitrage s'impose en principe.",
+     "kind": "mcq",
+     "choices": [
+      "l'arbitrage",
+      "le vote d'une assemblée",
+      "la prescription",
+      "la coutume"
+     ],
+     "answer": 0
+    },
+    {
+     "id": "sup-l2-droit-des-affaires-ohada-collectives-arbitrage-06-c",
+     "points": 1,
+     "prompt": "Une procédure collective vise uniquement à punir le dirigeant.",
+     "explanation": "Faux : elle vise surtout le traitement des difficultés et le paiement des créanciers.",
+     "kind": "truefalse",
+     "answer": false,
+     "review": true
+    },
+    {
+     "id": "sup-l2-droit-des-affaires-ohada-collectives-arbitrage-06-d",
+     "points": 2,
+     "prompt": "Quels conseils donnerais-tu au dirigeant ?",
+     "explanation": "Consulter un juriste ou un expert, anticiper, tenir une comptabilité à jour.",
+     "kind": "open",
+     "model": "Consulter un juriste ou comptable, agir tôt et tenir une comptabilité fiable.",
+     "rubric": [
+      "Conseil juridique",
+      "Anticipation",
+      "Comptabilité"
+     ],
+     "review": true
+    }
+   ]
+  },
+  {
+   "id": "sup-l2-droit-des-affaires-ohada-collectives-arbitrage-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-droit-des-affaires-ohada-collectives-arbitrage",
+   "prompt": "Le but d'une procédure collective est notamment…",
+   "choices": [
+    "la création d'un parti",
+    "la baisse des impôts",
+    "l'augmentation des loyers",
+    "le traitement collectif des difficultés"
+   ],
+   "answer": 3,
+   "explanation": "But général.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-droit-des-affaires-ohada-collectives-arbitrage-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-droit-des-affaires-ohada-collectives-arbitrage",
+   "prompt": "La liquidation intervient lorsque…",
+   "choices": [
+    "le redressement est impossible",
+    "l'entreprise est prospère",
+    "le contrat est signé",
+    "un associé démissionne"
+   ],
+   "answer": 0,
+   "explanation": "Principe.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-droit-des-affaires-ohada-collectives-arbitrage-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-droit-des-affaires-ohada-collectives-arbitrage",
+   "prompt": "Une convention d'arbitrage est…",
+   "choices": [
+    "un jugement",
+    "un accord confiant le litige à des arbitres",
+    "un impôt",
+    "une loi"
+   ],
+   "answer": 1,
+   "explanation": "Définition.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-droit-des-affaires-ohada-collectives-arbitrage-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-droit-des-affaires-ohada-collectives-arbitrage",
+   "prompt": "Une sentence arbitrale…",
+   "choices": [
+    "est facultative",
+    "est une loi",
+    "s'impose aux parties",
+    "n'a aucun effet"
+   ],
+   "answer": 2,
+   "explanation": "Valeur.",
+   "review": true
+  },
+  {
+   "id": "sup-l2-droit-des-affaires-ohada-collectives-arbitrage-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-droit-des-affaires-ohada-collectives-arbitrage",
+   "prompt": "La cessation des paiements est…",
+   "choices": [
+    "un bénéfice",
+    "une perte de contrat",
+    "un impôt",
+    "l'impossibilité de payer les dettes exigibles avec l'actif disponible"
+   ],
+   "answer": 3,
+   "explanation": "Notion générale.",
+   "review": true
+  }
+ ]
+}

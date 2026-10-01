@@ -1,0 +1,1030 @@
+{
+ "chapter": "sup-l1-introduction-droit-regle",
+ "lessons": [
+  {
+   "id": "sup-l1-introduction-droit-regle-droit",
+   "title": "La règle de droit",
+   "minutes": 40,
+   "programRef": "Programme de L1 de droit (introduction générale au droit) — à vérifier sur les maquettes de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Définir la règle de droit et la distinguer des autres règles sociales.",
+    "Citer et expliquer les caractères de la règle de droit.",
+    "Appliquer le raisonnement en trois temps (règle, application, conclusion) à un cas fictif."
+   ],
+   "exercises": [
+    "sup-l1-introduction-droit-regle-droit-01",
+    "sup-l1-introduction-droit-regle-droit-02",
+    "sup-l1-introduction-droit-regle-droit-03",
+    "sup-l1-introduction-droit-regle-droit-04",
+    "sup-l1-introduction-droit-regle-droit-05",
+    "sup-l1-introduction-droit-regle-droit-06"
+   ],
+   "selfCheck": [
+    "sup-l1-introduction-droit-regle-droit-q1",
+    "sup-l1-introduction-droit-regle-droit-q2",
+    "sup-l1-introduction-droit-regle-droit-q3",
+    "sup-l1-introduction-droit-regle-droit-q4",
+    "sup-l1-introduction-droit-regle-droit-q5"
+   ],
+   "reviewNotes": [
+    "Contenu juridique général : à relire par un juriste camerounais (enseignant de droit) avant diffusion.",
+    "Vérifier que la présentation des caractères (générale, obligatoire, sanctionnée) correspond au cours de l'enseignant.",
+    "Le principe de réparation du dommage fautif est cité en termes généraux, sans article : à confronter au droit positif camerounais."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Règle de droit",
+     "md": "Une **règle de droit** est une règle de conduite, édictée ou reconnue par l'autorité publique, qui s'impose à tous dans une société et dont le respect est assuré, au besoin, par la contrainte de l'État. Elle organise la vie en société : elle dit ce qui est permis, interdit ou obligatoire."
+    },
+    {
+     "type": "text",
+     "md": "La vie en société est gouvernée par plusieurs séries de règles : la **politesse** (saluer un aîné), la **morale** (ne pas mentir), la **religion** (pratiques et interdits d'une foi) et le **droit**. Elles se recoupent parfois : ne pas voler est à la fois une règle morale et une règle de droit. Mais seule la règle de droit est assortie d'une **sanction organisée par l'État** (amende, réparation, prison, nullité d'un acte…)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 250,
+      "items": [
+       {
+        "t": "rect",
+        "x": 135,
+        "y": 8,
+        "w": 150,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 32.25,
+        "text": "Règles sociales",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 46,
+        "x2": 210,
+        "y2": 70,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 70,
+        "x2": 360,
+        "y2": 70,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 55,
+        "y1": 70,
+        "x2": 55,
+        "y2": 88,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 88,
+        "w": 90,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 55.0,
+        "y": 112.25,
+        "text": "Politesse",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 160,
+        "y1": 70,
+        "x2": 160,
+        "y2": 88,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 115,
+        "y": 88,
+        "w": 90,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 112.25,
+        "text": "Morale",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 265,
+        "y1": 70,
+        "x2": 265,
+        "y2": 88,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 220,
+        "y": 88,
+        "w": 90,
+        "h": 38,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 265.0,
+        "y": 112.25,
+        "text": "Religion",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 365,
+        "y1": 70,
+        "x2": 365,
+        "y2": 88,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 320,
+        "y": 88,
+        "w": 90,
+        "h": 38,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 365.0,
+        "y": 112.25,
+        "text": "Droit",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 148,
+        "text": "Sanction :",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 55,
+        "y": 170,
+        "text": "désapprobation",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 160,
+        "y": 190,
+        "text": "conscience",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 265,
+        "y": 170,
+        "text": "religieuse",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 365,
+        "y": 190,
+        "text": "étatique",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 232,
+        "text": "Seul le droit est sanctionné par la contrainte publique",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Le droit parmi les règles sociales.",
+     "alt": "Un rectangle Règles sociales se divise en quatre : politesse, morale, religion et droit. Sous chacun figure son type de sanction ; seule la sanction du droit est étatique."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Caractères de la règle de droit",
+     "md": "- **Générale et impersonnelle** : elle vise une catégorie de personnes ou de situations, pas un individu précis.\n- **Obligatoire** : on ne peut pas s'y soustraire parce qu'on n'est pas d'accord.\n- **Sanctionnée** : la contrainte publique peut être mise en œuvre contre celui qui la viole.\n- **Permanente** : elle dure jusqu'à son abrogation ou sa modification.\n- Elle poursuit l'**ordre social** et la **justice**."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Raisonner sur un cas pratique",
+     "md": "On procède en trois temps :\n1. **Les faits** utiles et la **question de droit** posée.\n2. **La règle** applicable, énoncée en termes généraux.\n3. **L'application** aux faits, puis la **conclusion** claire.\nC'est le *syllogisme juridique* : règle (majeure) + faits (mineure) = conclusion."
+    },
+    {
+     "type": "example",
+     "title": "Classer des règles",
+     "statement": "Pour chaque règle, dis si c'est une règle de droit : (a) « Il faut dire bonjour en entrant dans une salle » ; (b) « Celui qui cause un dommage à autrui par sa faute doit le réparer » ; (c) « On doit soutenir un ami en difficulté ».",
+     "steps": [
+      {
+       "md": "Pour (a) : c'est de la **politesse**. Aucune sanction publique n'est organisée si on oublie de saluer."
+      },
+      {
+       "md": "Pour (b) : c'est un principe général de **responsabilité** ; un juge peut condamner à réparer : **règle de droit**."
+      },
+      {
+       "md": "Pour (c) : c'est un devoir **moral** ; nul tribunal ne contraint à soutenir un ami."
+      }
+     ],
+     "answer": "**Seule la règle (b) est une règle de droit.**"
+    },
+    {
+     "type": "example",
+     "title": "Un syllogisme juridique",
+     "statement": "Fictif : M. Nkoulou, par imprudence, casse la vitrine de la boutique de Mme Fotso. Peut-elle obtenir réparation ?",
+     "steps": [
+      {
+       "md": "**Question** : celui qui cause un dommage par sa faute doit-il le réparer ?"
+      },
+      {
+       "md": "**Règle** : en principe, celui qui cause un dommage à autrui par sa faute doit le réparer."
+      },
+      {
+       "md": "**Application** : l'imprudence est une faute, la vitrine cassée est un dommage, et la faute a causé le dommage."
+      },
+      {
+       "md": "**Conclusion** : Mme Fotso peut demander réparation à M. Nkoulou."
+      }
+     ],
+     "answer": "**Oui, en principe, la réparation est due.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que **toute règle morale est juridique** : la morale n'est sanctionnée que par la conscience ou l'opinion.\n- Confondre **générale** et **universelle** : une règle générale vaut pour une catégorie, dans une société donnée.\n- Répondre à un cas pratique **sans énoncer la règle** : « il a tort » n'est pas un raisonnement juridique.\n- Penser qu'une règle **non appliquée** n'existe plus : seule son abrogation la supprime."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Cherche dans ton quotidien une règle qui est à la fois morale et juridique, et une qui n'est que morale.",
+      "Distingue l'idée de **droit** comme ensemble de règles (droit objectif) de celle de **droit** comme prérogative d'une personne (droit subjectif) : on y revient en fiche 3."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-introduction-droit-regle-droit-01"
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-introduction-droit-sources",
+   "title": "Les sources du droit et leur hiérarchie",
+   "minutes": 40,
+   "programRef": "Programme de L1 de droit (introduction générale au droit) — à vérifier sur les maquettes de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer sources formelles : loi, coutume, jurisprudence, doctrine, traités.",
+    "Expliquer le principe de hiérarchie des normes.",
+    "Résoudre un conflit de normes simple."
+   ],
+   "prerequisites": [
+    "sup-l1-introduction-droit-regle-droit"
+   ],
+   "exercises": [
+    "sup-l1-introduction-droit-sources-01",
+    "sup-l1-introduction-droit-sources-02",
+    "sup-l1-introduction-droit-sources-03",
+    "sup-l1-introduction-droit-sources-04",
+    "sup-l1-introduction-droit-sources-05",
+    "sup-l1-introduction-droit-sources-06"
+   ],
+   "selfCheck": [
+    "sup-l1-introduction-droit-sources-q1",
+    "sup-l1-introduction-droit-sources-q2",
+    "sup-l1-introduction-droit-sources-q3",
+    "sup-l1-introduction-droit-sources-q4",
+    "sup-l1-introduction-droit-sources-q5"
+   ],
+   "reviewNotes": [
+    "Contenu juridique général : à relire par un juriste camerounais (enseignant de droit) avant diffusion.",
+    "La place exacte des traités internationaux et la hiérarchie interne au Cameroun doivent être vérifiées sur la Constitution en vigueur (aucun article cité ici).",
+    "Le rôle de la jurisprudence comme source est présenté de façon nuancée : vérifier avec le cours."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Source du droit",
+     "md": "On appelle **source du droit** l'origine d'où provient une règle juridique, c'est-à-dire la manière dont elle est créée ou révélée. On parle de sources *formelles* : **loi** (au sens large), **coutume**, **jurisprudence**, **doctrine** (source d'interprétation), et **traités** internationaux.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Les principales sources",
+     "md": "- **La loi** : règle écrite, générale, élaborée par les autorités compétentes (Constitution, lois du Parlement, textes du pouvoir réglementaire).\n- **La coutume** : pratique ancienne, constante, ressentie comme obligatoire.\n- **La jurisprudence** : solutions rendues par les juridictions ; elle interprète la loi et comble ses lacunes.\n- **La doctrine** : travaux des juristes, qui commentent et critiquent, sans valeur obligatoire propre.\n- **Les traités** : accords entre États.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Hiérarchie des normes (principe général)",
+     "md": "Les normes ne sont pas toutes au même niveau : une norme inférieure doit respecter une norme supérieure. En principe : **Constitution** → **traités et accords internationaux régulièrement introduits** → **lois** → **règlements** (décrets, arrêtés) → actes individuels. Une norme contraire à une norme supérieure peut être contestée devant l'autorité compétente.",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 250,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         210,
+         15,
+         130,
+         70,
+         290,
+         70
+        ],
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "closed": true
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 62,
+        "text": "Constitution",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "poly",
+        "pts": [
+         130,
+         70,
+         290,
+         70,
+         340,
+         125,
+         80,
+         125
+        ],
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "closed": true
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 103,
+        "text": "Traités (en principe)",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         80,
+         125,
+         340,
+         125,
+         385,
+         180,
+         35,
+         180
+        ],
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "closed": true
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 158,
+        "text": "Lois",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         35,
+         180,
+         385,
+         180,
+         405,
+         235,
+         15,
+         235
+        ],
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "closed": true
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 213,
+        "text": "Règlements : décrets, arrêtés",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Pyramide simplifiée des normes.",
+     "alt": "Une pyramide à quatre étages : Constitution au sommet, puis traités, lois, et règlements à la base.",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Conflit de normes",
+     "statement": "Fictif : un arrêté d'un maire (commune imaginaire de Mbalmayo-Est) interdit toute vente au marché après 18 h, alors qu'une loi nationale (supposée) garantit la liberté du commerce. Que faire ?",
+     "steps": [
+      {
+       "md": "On identifie les deux normes : un **arrêté** (règlement local) et une **loi**."
+      },
+      {
+       "md": "On applique la hiérarchie : la loi est **supérieure** à l'arrêté."
+      },
+      {
+       "md": "Si l'arrêté la contredit, il peut être contesté devant le juge compétent."
+      }
+     ],
+     "answer": "**La loi l'emporte ; l'arrêté contraire est contestable.**",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Quelle source ?",
+     "statement": "Fictif : dans le village de Ndoumbé, depuis des générations, les terres du bord de rivière sont réservées aux pêcheurs et nul ne la remet en cause. Quelle source du droit est évoquée, et quelle limite ?",
+     "steps": [
+      {
+       "md": "La pratique ancienne, constante et ressentie comme obligatoire correspond à la **coutume**."
+      },
+      {
+       "md": "Mais une coutume ne peut pas contredire une loi d'ordre public ou un principe fondamental."
+      }
+     ],
+     "answer": "**Coutume, sous réserve de sa conformité aux normes supérieures.**",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Dire que « **loi** » = seulement les textes du Parlement : au sens large, elle inclut aussi les règlements.\n- Croire que la **doctrine** oblige le juge : elle l'éclaire seulement.\n- Placer le **décret au-dessus de la loi**.\n- Penser qu'une **coutume** est toujours écrite."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Compare, à partir d'un exemple de ton choix, ce qu'un juge fait quand la loi est claire et quand elle est obscure.",
+      "Cherche dans la Constitution de ton pays (sans te soucier des numéros) les grands principes qui protègent les droits fondamentaux."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-introduction-droit-sources-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sup-l1-introduction-droit-regle-droit-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-introduction-droit-regle-droit",
+   "prompt": "Quel caractère signifie que la règle de droit ne vise pas une personne en particulier ?",
+   "explanation": "Une règle est dite générale et impersonnelle quand elle s'applique à une catégorie de personnes ou de situations.",
+   "method": "Cherche le mot lié à la catégorie, pas à l'individu.",
+   "source": "Exercice original",
+   "choices": [
+    "Générale et impersonnelle",
+    "Obligatoire",
+    "Permanente",
+    "Morale"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "sup-l1-introduction-droit-regle-droit-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-introduction-droit-regle-droit",
+   "prompt": "Une règle de politesse est sanctionnée par la contrainte de l'État.",
+   "explanation": "La politesse n'est sanctionnée que par la désapprobation sociale. Seul le droit s'appuie sur la contrainte publique.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "sup-l1-introduction-droit-regle-droit-03",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-introduction-droit-regle-droit",
+   "prompt": "Associe chaque règle à sa nature dominante.",
+   "explanation": "Chaque règle relève d'un ordre différent ; seule la réparation du dommage est imposée par le droit.",
+   "source": "Exercice original",
+   "pairs": [
+    [
+     "Se lever quand un aîné entre",
+     "Politesse"
+    ],
+    [
+     "Respecter un jeûne religieux",
+     "Religion"
+    ],
+    [
+     "Réparer le dommage causé par sa faute",
+     "Droit"
+    ],
+    [
+     "Dire la vérité à un ami",
+     "Morale"
+    ]
+   ]
+  },
+  {
+   "id": "sup-l1-introduction-droit-regle-droit-04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-introduction-droit-regle-droit",
+   "prompt": "Une loi qui ne s'appliquerait qu'à une seule personne nommément désignée perdrait surtout le caractère…",
+   "explanation": "Une règle visant un seul individu n'est plus générale ni impersonnelle ; c'est une mesure individuelle.",
+   "method": "Cherche ce qui change quand le destinataire est unique.",
+   "source": "Exercice original",
+   "choices": [
+    "Obligatoire",
+    "Sanctionné",
+    "Général et impersonnel",
+    "Écrit"
+   ],
+   "answer": 2
+  },
+  {
+   "id": "sup-l1-introduction-droit-regle-droit-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "sup-l1-introduction-droit-regle-droit",
+   "prompt": "Explique en 4 à 6 lignes la différence entre une règle morale et une règle de droit, avec un exemple.",
+   "explanation": "On attend une comparaison nette : source, finalité et sanction.",
+   "source": "Exercice original",
+   "model": "La règle morale relève de la conscience et n'est sanctionnée que par le remords ou l'opinion ; la règle de droit est édictée ou reconnue par l'autorité publique et sanctionnée par la contrainte de l'État. Exemple : mentir à un ami est un manquement moral, alors que voler est interdit par le droit et puni.",
+   "rubric": [
+    "Définit la règle morale et sa sanction",
+    "Définit la règle de droit et la sanction étatique",
+    "Donne un exemple pertinent"
+   ]
+  },
+  {
+   "id": "sup-l1-introduction-droit-regle-droit-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "sup-l1-introduction-droit-regle-droit",
+   "prompt": "Fictif : à Bafoussam, Mme Tagne prête sa moto à son voisin M. Kamdem, qui l'abîme par imprudence. Elle réclame une réparation.",
+   "method": "Faits, question, règle, application, conclusion.",
+   "mistakes": [
+    "Conclure sans appliquer la règle aux faits."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-introduction-droit-regle-droit-06-a",
+     "points": 1,
+     "prompt": "Quelle est la question de droit posée ?",
+     "explanation": "On cherche si l'auteur d'un dommage causé par sa faute doit le réparer.",
+     "kind": "mcq",
+     "choices": [
+      "M. Kamdem est-il un bon voisin ?",
+      "Celui qui cause un dommage par sa faute doit-il le réparer ?",
+      "La moto est-elle de bonne marque ?",
+      "Mme Tagne est-elle généreuse ?"
+     ],
+     "answer": 1
+    },
+    {
+     "id": "sup-l1-introduction-droit-regle-droit-06-b",
+     "points": 1,
+     "prompt": "Le devoir moral d'être reconnaissant suffit à lui seul à obliger juridiquement M. Kamdem à réparer.",
+     "explanation": "Faux : l'obligation de réparer vient de la règle de droit, pas d'un simple devoir moral.",
+     "kind": "truefalse",
+     "answer": false
+    },
+    {
+     "id": "sup-l1-introduction-droit-regle-droit-06-c",
+     "points": 2,
+     "prompt": "Rédige la conclusion du raisonnement en une phrase.",
+     "explanation": "Corrigé modèle : si la faute (imprudence), le dommage (moto abîmée) et le lien entre eux sont établis, M. Kamdem doit en principe réparer.",
+     "kind": "open",
+     "model": "Si la faute, le dommage et le lien sont établis, M. Kamdem doit en principe réparer le préjudice de Mme Tagne.",
+     "rubric": [
+      "Conclusion claire",
+      "Mentionne faute, dommage ou lien",
+      "Reste nuancée (« en principe »)"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-introduction-droit-regle-droit-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-introduction-droit-regle-droit",
+   "prompt": "La règle de droit se distingue des autres règles sociales par…",
+   "choices": [
+    "la sanction organisée par l'État",
+    "son caractère facultatif",
+    "son origine religieuse",
+    "son absence de contrainte"
+   ],
+   "answer": 0,
+   "explanation": "La contrainte publique est la marque distinctive."
+  },
+  {
+   "id": "sup-l1-introduction-droit-regle-droit-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-introduction-droit-regle-droit",
+   "prompt": "Une règle générale et impersonnelle…",
+   "choices": [
+    "vise un seul individu nommé",
+    "vise une catégorie de personnes ou de situations",
+    "n'est jamais écrite",
+    "n'oblige que ceux qui l'acceptent"
+   ],
+   "answer": 1,
+   "explanation": "Généralité = catégorie, non un individu."
+  },
+  {
+   "id": "sup-l1-introduction-droit-regle-droit-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-introduction-droit-regle-droit",
+   "prompt": "Dans un syllogisme juridique, la majeure est…",
+   "choices": [
+    "les faits de l'espèce",
+    "la conclusion",
+    "la règle de droit",
+    "l'avis du juge"
+   ],
+   "answer": 2,
+   "explanation": "Majeure = règle ; mineure = faits ; conclusion."
+  },
+  {
+   "id": "sup-l1-introduction-droit-regle-droit-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-introduction-droit-regle-droit",
+   "prompt": "Une règle morale peut aussi être une règle de droit.",
+   "choices": [
+    "Non, jamais",
+    "Oui, toutes le sont",
+    "Seulement si elles sont religieuses",
+    "Oui, certaines règles morales sont reprises par le droit"
+   ],
+   "answer": 3,
+   "explanation": "Ne pas voler est à la fois moral et juridique."
+  },
+  {
+   "id": "sup-l1-introduction-droit-regle-droit-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-introduction-droit-regle-droit",
+   "prompt": "Un cas pratique commence par…",
+   "choices": [
+    "les faits utiles et la question de droit",
+    "la conclusion",
+    "une opinion personnelle",
+    "une citation sans lien"
+   ],
+   "answer": 0,
+   "explanation": "On pose d'abord les faits et le problème."
+  },
+  {
+   "id": "sup-l1-introduction-droit-sources-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-introduction-droit-sources",
+   "prompt": "Laquelle est une source écrite du droit ?",
+   "explanation": "La loi est une source écrite ; la coutume est une pratique.",
+   "source": "Exercice original",
+   "choices": [
+    "La loi",
+    "La coutume non écrite",
+    "La rumeur",
+    "L'usage poli"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "sup-l1-introduction-droit-sources-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-introduction-droit-sources",
+   "prompt": "En principe, un règlement doit respecter la loi.",
+   "explanation": "Oui : c'est la hiérarchie des normes.",
+   "source": "Exercice original",
+   "review": true,
+   "reviewNote": "Principe général à relire.",
+   "answer": true
+  },
+  {
+   "id": "sup-l1-introduction-droit-sources-03",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-introduction-droit-sources",
+   "prompt": "Associe chaque source à sa définition.",
+   "explanation": "Chaque source a une origine distincte.",
+   "source": "Exercice original",
+   "pairs": [
+    [
+     "Loi",
+     "Règle écrite élaborée par les autorités"
+    ],
+    [
+     "Coutume",
+     "Pratique ancienne ressentie comme obligatoire"
+    ],
+    [
+     "Jurisprudence",
+     "Solutions rendues par les tribunaux"
+    ],
+    [
+     "Doctrine",
+     "Opinions et analyses des juristes"
+    ]
+   ]
+  },
+  {
+   "id": "sup-l1-introduction-droit-sources-04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-introduction-droit-sources",
+   "prompt": "Le juge hésite entre un décret et une loi contradictoires. En principe, il privilégie…",
+   "explanation": "La hiérarchie commande : la norme supérieure l'emporte.",
+   "source": "Exercice original",
+   "review": true,
+   "reviewNote": "Principe général à relire.",
+   "choices": [
+    "le décret, plus récent",
+    "la loi, supérieure au décret",
+    "le décret, plus précis",
+    "aucun des deux"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "sup-l1-introduction-droit-sources-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "sup-l1-introduction-droit-sources",
+   "prompt": "Pourquoi la jurisprudence est-elle utile même quand la loi existe ? Réponds en 4 à 6 lignes.",
+   "explanation": "Le juge applique la règle générale à des faits particuliers, ce qui la précise.",
+   "source": "Exercice original",
+   "review": true,
+   "reviewNote": "Rôle de la jurisprudence à nuancer selon le cours.",
+   "model": "La loi est générale et ne peut tout prévoir. Les juges l'interprètent, précisent son sens et comblent ses silences en tranchant des cas concrets. Ces solutions éclairent les justiciables et orientent les décisions futures.",
+   "rubric": [
+    "Rappelle la généralité de la loi",
+    "Explique l'interprétation par le juge",
+    "Mentionne l'utilité pour la prévisibilité"
+   ]
+  },
+  {
+   "id": "sup-l1-introduction-droit-sources-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "sup-l1-introduction-droit-sources",
+   "prompt": "Fictif : un arrêté préfectoral interdit un marché hebdomadaire de Douala que la loi autorise. Un commerçant, M. Etoga, conteste.",
+   "method": "Identifier les normes, comparer leur rang, conclure.",
+   "mistakes": [
+    "Oublier d'identifier la nature de chaque norme."
+   ],
+   "source": "Exercice original",
+   "review": true,
+   "reviewNote": "Application de la hiérarchie à relire.",
+   "parts": [
+    {
+     "id": "sup-l1-introduction-droit-sources-06-a",
+     "points": 1,
+     "prompt": "Quelle norme est supérieure ?",
+     "explanation": "La loi est supérieure à l'arrêté.",
+     "kind": "mcq",
+     "choices": [
+      "L'arrêté préfectoral",
+      "Aucune",
+      "La loi",
+      "Cela dépend du préfet"
+     ],
+     "answer": 2
+    },
+    {
+     "id": "sup-l1-introduction-droit-sources-06-b",
+     "points": 1,
+     "prompt": "L'arrêté, contraire à la loi, est en principe contestable.",
+     "explanation": "Vrai : une norme inférieure contraire à une norme supérieure peut être attaquée.",
+     "kind": "truefalse",
+     "answer": true,
+     "review": true
+    },
+    {
+     "id": "sup-l1-introduction-droit-sources-06-c",
+     "points": 2,
+     "prompt": "Rédige en 3 lignes l'argument de M. Etoga.",
+     "explanation": "Argument : l'arrêté est un règlement, inférieur à la loi ; contredisant la loi qui autorise le marché, il est irrégulier.",
+     "kind": "open",
+     "model": "L'arrêté est inférieur à la loi ; il ne peut l'écarter. Il est donc irrégulier et doit être écarté.",
+     "rubric": [
+      "Cite la hiérarchie",
+      "Applique aux faits",
+      "Conclut"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-introduction-droit-sources-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-introduction-droit-sources",
+   "prompt": "La doctrine est…",
+   "choices": [
+    "une loi écrite",
+    "l'ensemble des travaux des juristes",
+    "un jugement",
+    "un traité"
+   ],
+   "answer": 1,
+   "explanation": "Elle commente et critique.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-introduction-droit-sources-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-introduction-droit-sources",
+   "prompt": "Une coutume suppose…",
+   "choices": [
+    "un vote du Parlement",
+    "un jugement unique",
+    "une pratique ancienne ressentie comme obligatoire",
+    "un accord récent"
+   ],
+   "answer": 2,
+   "explanation": "Élément matériel et conviction d'obligation.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-introduction-droit-sources-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-introduction-droit-sources",
+   "prompt": "Au sommet de la hiérarchie interne se trouve en principe…",
+   "choices": [
+    "le règlement",
+    "l'arrêté",
+    "la circulaire",
+    "la Constitution"
+   ],
+   "answer": 3,
+   "explanation": "Elle fonde l'ordre juridique.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-introduction-droit-sources-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-introduction-droit-sources",
+   "prompt": "Un traité est…",
+   "choices": [
+    "un accord entre États",
+    "un jugement du tribunal",
+    "une coutume locale",
+    "un contrat entre voisins"
+   ],
+   "answer": 0,
+   "explanation": "Source internationale.",
+   "review": true
+  },
+  {
+   "id": "sup-l1-introduction-droit-sources-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-introduction-droit-sources",
+   "prompt": "La jurisprudence désigne…",
+   "choices": [
+    "le texte d'une loi",
+    "les décisions rendues par les juridictions",
+    "un cours de droit",
+    "un règlement intérieur"
+   ],
+   "answer": 1,
+   "explanation": "Elle interprète et précise.",
+   "review": true
+  }
+ ]
+}
