@@ -73,6 +73,7 @@ object LearnCatalog {
         Subject("chemistry", "Chimie", "Chemistry", 0xFF00897B.toInt()),
         Subject("histoire-geo", "Histoire-Géographie-ECM", "History-Geography-Citizenship", 0xFFF4511E.toInt()),
         Subject("philosophie", "Philosophie", "Philosophy", 0xFF5D4037.toInt()),
+        Subject("informatique", "Informatique", "ICT / Computer Science", 0xFF3949AB.toInt()),
         Subject("decouverte", "Découverte du monde", "Discovering the world", 0xFFFFB300.toInt()),
         Subject("droit", "Droit", "Law", 0xFF546E7A.toInt()),
         Subject("economie", "Économie", "Economics", 0xFF00ACC1.toInt()),
