@@ -1,8 +1,10 @@
 package castbridge.sender.agent
 
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -20,7 +22,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
@@ -47,8 +52,8 @@ fun LibraryAssistantDialog(client: TvClient?, onDismiss: () -> Unit) {
     val ctx = LocalContext.current
     LaunchedEffect(Unit) { AgentStore.init(ctx) }
     AgentStore.init(ctx)
-    val scope = rememberCoroutineScope()
-    val m = remember { AssistantModel(ctx, client, scope).also { if (client == null) it.source = Origin.PHONE } }
+    // the work lives in AssistantHost (process scope): closing the dialog or turning the phone does not stop an analysis
+    val m = remember { AssistantHost.modelFor(ctx, client) }
     val picker = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocumentTree()) { uri ->
         if (uri != null) {
             runCatching { ctx.contentResolver.takePersistableUriPermission(uri, android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION or android.content.Intent.FLAG_GRANT_WRITE_URI_PERMISSION) }
@@ -59,7 +64,8 @@ fun LibraryAssistantDialog(client: TvClient?, onDismiss: () -> Unit) {
     val title = when (m.step) {
         Step.TRASH -> "Corbeille CastBridge"; Step.HISTORY -> "Historique"; Step.SETTINGS -> "Réglages de l'assistant"; else -> "Ranger ma bibliothèque"
     }
-    Dialog(onDismissRequest = onDismiss, properties = DialogProperties(usePlatformDefaultWidth = false, decorFitsSystemWindows = true)) {
+    Dialog(onDismissRequest = onDismiss, properties = DialogProperties(usePlatformDefaultWidth = false, decorFitsSystemWindows = true, dismissOnBackPress = false, dismissOnClickOutside = false)) {
+        BackHandler { back(m, onDismiss) }
         // A full-screen Dialog is laid out for the whole display but its window starts below the status bar: the bottom would be
         // cut by that height (the bottom buttons of the plan disappeared). Keep that height free at the bottom.
         val statusBar = remember { ctx.resources.getIdentifier("status_bar_height", "dimen", "android").let { id -> if (id > 0) ctx.resources.getDimensionPixelSize(id) / ctx.resources.displayMetrics.density else 24f } }
@@ -68,7 +74,7 @@ fun LibraryAssistantDialog(client: TvClient?, onDismiss: () -> Unit) {
                 TopAppBar(
                     title = { Text(title) },
                     navigationIcon = {
-                        IconButton({ when (m.step) { Step.INTRO -> onDismiss(); Step.ANALYZING -> { m.cancelWork() }; Step.RUNNING -> m.cancelWork(); else -> m.step = Step.INTRO } }) {
+                        IconButton({ back(m, onDismiss) }) {
                             Icon(Icons.AutoMirrored.Filled.ArrowBack, "Retour")
                         }
                     },
@@ -79,11 +85,13 @@ fun LibraryAssistantDialog(client: TvClient?, onDismiss: () -> Unit) {
                         }
                     },
                     colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.surface))
+                if (m.step.wizard > 0) WizardSteps(m.step.wizard)
                 Box(Modifier.weight(1f).fillMaxWidth()) {
                 when (m.step) {
                     Step.INTRO -> Intro(m, client != null) { picker.launch(null) }
-                    Step.ANALYZING -> Working("Analyse en cours", m.progress.message.ifEmpty { phaseText(m.progress) }, m.progress.fraction, "Annuler") { m.cancelWork() }
-                    Step.PLAN -> PlanView(m)
+                    Step.ANALYZING -> Analyzing(m)
+                    Step.PLAN -> PlanScreen(m)
+                    Step.RECAP -> RecapView(m)
                     Step.RUNNING -> Working("Rangement en cours", m.running.name.ifEmpty { "Préparation…" }, if (m.running.total > 0) m.running.index.toFloat() / m.running.total else 0f, "Arrêter après ce fichier") { m.cancelWork() }
                     Step.DONE -> DoneView(m, onDismiss)
                     Step.TRASH -> BinView(m)
@@ -138,6 +146,11 @@ private fun Intro(m: AssistantModel, tvAvailable: Boolean, pickFolder: () -> Uni
                 }
             }
         }
+        m.last?.let { l ->
+            val now = remember { System.currentTimeMillis() }
+            Text("Dernière analyse (${if (l.origin == Origin.TV) "TV" else "téléphone"}) : ${l.ago(now)} · ${l.files} fichiers, ${l.toRename} à ranger" +
+                (if (l.duplicates > 0) ", ${l.duplicates} doublon(s)" else "") + ". Une nouvelle analyse ne relit que ce qui est nouveau.", style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
+        }
         m.message?.let { Text(it, color = cs.error) }
         Button({ m.analyze() }, Modifier.fillMaxWidth().heightIn(min = 56.dp), enabled = if (m.source == Origin.TV) tvAvailable else m.phoneTree != null) {
             Icon(Icons.Filled.Search, null); Spacer(Modifier.width(8.dp)); Text("Analyser", style = MaterialTheme.typography.titleMedium)
@@ -172,137 +185,111 @@ private fun Working(title: String, detail: String, fraction: Float, cancelLabel:
     }
 }
 
-// ---------------------------------------------------------------------------------------------------------------
+/** Back arrow / back key: one step back in the guided path, never a surprise (a running job is stopped only on purpose). */
+private fun back(m: AssistantModel, onDismiss: () -> Unit) {
+    when (m.step) {
+        Step.INTRO -> onDismiss()
+        Step.ANALYZING, Step.RUNNING -> m.cancelWork()
+        Step.RECAP -> m.step = Step.PLAN
+        Step.DONE -> { m.step = Step.INTRO; m.analysis = null }
+        else -> m.step = Step.INTRO
+    }
+}
 
+/** « 1 Analyser — 2 Vérifier — 3 Appliquer » : where the user is, and that nothing is changed before step 3. */
 @Composable
-private fun PlanView(m: AssistantModel) {
+private fun WizardSteps(current: Int) {
     val cs = MaterialTheme.colorScheme
-    val a = m.analysis ?: return
-    val plan = m.plan
+    val names = listOf("Analyser", "Vérifier", "Appliquer")
+    Row(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp).semantics(mergeDescendants = true) { contentDescription = "Étape $current sur 3 : ${names[current - 1]}" },
+        verticalAlignment = Alignment.CenterVertically) {
+        names.forEachIndexed { i, n ->
+            val k = i + 1
+            val done = k < current; val now = k == current
+            Surface(shape = androidx.compose.foundation.shape.CircleShape, color = if (now) cs.primary else if (done) cs.secondary else cs.surfaceVariant, modifier = Modifier.size(28.dp)) {
+                Box(contentAlignment = Alignment.Center) {
+                    if (done) Icon(Icons.Filled.Check, null, Modifier.size(16.dp), tint = cs.onSecondary)
+                    else Text("$k", style = MaterialTheme.typography.labelLarge, color = if (now) cs.onPrimary else cs.onSurfaceVariant)
+                }
+            }
+            Spacer(Modifier.width(6.dp))
+            Text(n, style = MaterialTheme.typography.labelLarge, fontWeight = if (now) FontWeight.Bold else FontWeight.Normal, color = if (now) cs.onSurface else cs.onSurfaceVariant)
+            if (k < 3) HorizontalDivider(Modifier.weight(1f).padding(horizontal = 8.dp), color = if (done) cs.secondary else cs.outlineVariant)
+        }
+    }
+}
+
+/** Step 1 while reading: progress, what is already found ("au fil de l'eau"), cancel. */
+@Composable
+private fun Analyzing(m: AssistantModel) {
+    val cs = MaterialTheme.colorScheme
+    val p = m.progress
+    val l = m.live
+    Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(24.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        Text("Lecture en cours", style = MaterialTheme.typography.titleLarge, modifier = Modifier.semantics { heading(); liveRegion = LiveRegionMode.Polite })
+        if (p.fraction > 0f) LinearProgressIndicator({ p.fraction.coerceIn(0f, 1f) }, Modifier.fillMaxWidth().semantics { contentDescription = "Avancement ${(p.fraction * 100).toInt()} pour cent" })
+        else LinearProgressIndicator(Modifier.fillMaxWidth())
+        Text(p.message.ifEmpty { phaseText(p) }, style = MaterialTheme.typography.bodyMedium, maxLines = 2, overflow = TextOverflow.Ellipsis)
+        if (l.files > 0 || l.toRename > 0) ElevatedCard(Modifier.fillMaxWidth()) {
+            Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                Text("Déjà trouvé", style = MaterialTheme.typography.titleSmall)
+                Text("${l.files} fichiers dans ${l.folders} dossier(s)" + if (l.toRename > 0) " · ${l.toRename} nom(s) à améliorer" else "", style = MaterialTheme.typography.bodyMedium)
+                l.examples.forEach { (from, to) ->
+                    Text(from, style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                    Text("→ $to", style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                }
+            }
+        }
+        Text("Vous pouvez fermer cet écran : la lecture continue. Rien n'est modifié.", style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
+        OutlinedButton({ m.cancelWork() }, Modifier.heightIn(min = 48.dp)) { Text("Annuler") }
+    }
+}
+
+/** Step 3, before anything happens: exactly what will be done, and the explicit confirmation of every trash. */
+@Composable
+private fun RecapView(m: AssistantModel) {
+    val cs = MaterialTheme.colorScheme
+    val eff = m.effective
+    val chosen = m.plan.changes.filter { it.id in eff }
+    val ren = chosen.filter { it.type == ChangeType.RENAME }
+    val mov = chosen.filter { it.type == ChangeType.MOVE }
+    val tr = chosen.filter { it.type == ChangeType.TRASH }
     var confirmTrash by remember { mutableStateOf(false) }
-    var editing by remember { mutableStateOf<Change?>(null) }
-    var showSent by remember { mutableStateOf(false) }
-    val nSel = m.selected.size
-    val trashSel = m.selectedTrash
-
-    Box(Modifier.fillMaxSize()) {
-        LazyColumn(Modifier.fillMaxSize(), contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 190.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-            item {
-                Card(Modifier.fillMaxWidth(), colors = CardDefaults.cardColors(containerColor = cs.secondaryContainer)) {
-                    Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                        Text(if (plan.changes.isEmpty()) "Rien à ranger" else "${plan.changes.size} changement(s) proposé(s)", style = MaterialTheme.typography.titleMedium)
-                        Text("${a.stats.files} fichiers lus · ${a.stats.wellNamed.coerceAtLeast(0)} déjà bien rangés" +
-                            (if (a.stats.duplicateGroups > 0) " · ${a.stats.duplicateGroups} doublon(s) = ${size(a.stats.duplicateBytes)}" else ""), style = MaterialTheme.typography.bodyMedium)
-                        a.insights.forEach { Text("• ${it.text}", style = MaterialTheme.typography.bodySmall) }
-                        plan.notes.forEach { Text(it, style = MaterialTheme.typography.bodySmall) }
-                        if (a.stats.aiUsed > 0) {
-                            Text("${a.stats.aiUsed} nom(s) ont été proposés avec l'aide de l'IA (jamais cochés d'avance).", style = MaterialTheme.typography.bodySmall)
-                            m.sentPreview?.let { TextButton({ showSent = true }, contentPadding = PaddingValues(0.dp)) { Text("Voir ce qui a été envoyé au serveur") } }
-                        }
-                    }
-                }
+    val ok = tr.isEmpty() || confirmTrash
+    Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        Text("Prêt à appliquer", style = MaterialTheme.typography.headlineSmall, modifier = Modifier.semantics { heading() })
+        Text("Voici exactement ce qui va se passer. Rien n'a encore été modifié.", style = MaterialTheme.typography.bodyLarge)
+        ElevatedCard(Modifier.fillMaxWidth()) {
+            Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                if (ren.isNotEmpty()) RecapLine(Icons.Filled.DriveFileRenameOutline, "${ren.size} fichier(s) renommé(s)" + (ren.count { it.toFolder != null }.takeIf { it > 0 }?.let { ", dont $it rangé(s) dans un dossier" } ?: ""))
+                if (mov.isNotEmpty()) RecapLine(Icons.Filled.Usb, "${mov.size} fichier(s) déplacé(s) vers la clé USB (${size(mov.sumOf { it.bytes })})")
+                if (tr.isNotEmpty()) RecapLine(Icons.Filled.Delete, "${tr.size} fichier(s) mis à la corbeille (${size(tr.sumOf { it.bytes })})", cs.error)
+                RecapLine(Icons.Filled.Undo, "Tout reste annulable : « Annuler un rangement » remet les noms et les places d'avant.")
             }
-            if (plan.changes.isNotEmpty()) item {
-                Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                    TextButton({ m.selectAllSafe() }) { Text("Tout accepter") }
-                    TextButton({ m.selectNone() }) { Text("Tout décocher") }
-                    TextButton({ m.selectDefault() }) { Text("Conseillés") }
-                }
-                Text("« Tout accepter » ne coche jamais les mises à la corbeille : elles se cochent une par une.", style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
-            }
-            section("Renommer et classer", plan.renames, m, onEdit = { editing = it })
-            section("Déplacer vers la clé USB", plan.moves, m, onEdit = {})
-            section("Doublons à mettre dans la corbeille", plan.trash.filter { it.why != TrashWhy.WATCHED_OLD }, m, onEdit = {})
-            section("Libérer de l'espace (déjà vus depuis longtemps)", plan.trash.filter { it.why == TrashWhy.WATCHED_OLD }, m, onEdit = {})
-            if (plan.skipped.isNotEmpty()) item {
-                var open by remember { mutableStateOf(false) }
-                Column {
-                    TextButton({ open = !open }, contentPadding = PaddingValues(0.dp)) { Text("${plan.skipped.size} fichier(s) laissés de côté ${if (open) "▲" else "▼"}") }
-                    if (open) plan.skipped.take(50).forEach { Text("• ${it.file.name} : ${it.reason}", style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant) }
+        }
+        if (tr.isNotEmpty()) ElevatedCard(Modifier.fillMaxWidth(), colors = CardDefaults.elevatedCardColors(containerColor = cs.surfaceVariant)) {
+            Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                Text("Mises à la corbeille", style = MaterialTheme.typography.titleSmall)
+                tr.take(6).forEach { Text("• ${it.file.name}", style = MaterialTheme.typography.bodySmall, maxLines = 1, overflow = TextOverflow.Ellipsis) }
+                if (tr.size > 6) Text("… et ${tr.size - 6} autre(s)", style = MaterialTheme.typography.bodySmall)
+                Text("Ils quittent la bibliothèque mais restent récupérables 30 jours dans la « Corbeille CastBridge ». Rien n'est effacé définitivement.", style = MaterialTheme.typography.bodySmall)
+                Row(Modifier.fillMaxWidth().heightIn(min = 56.dp).clickable(role = Role.Switch) { confirmTrash = !confirmTrash }, verticalAlignment = Alignment.CenterVertically) {
+                    Text("Je confirme la mise à la corbeille de ces ${tr.size} fichier(s)", Modifier.weight(1f), style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.SemiBold)
+                    Spacer(Modifier.width(12.dp)); Switch(confirmTrash, null)
                 }
             }
         }
-        Surface(Modifier.align(Alignment.BottomCenter).fillMaxWidth(), tonalElevation = 3.dp) {
-            Column(Modifier.fillMaxWidth().navigationBarsPadding().padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                // circumstantial: a long copy to the USB key while the TV is usually being watched
-                val hour = remember { java.time.LocalTime.now().hour }
-                if (plan.moves.any { it.id in m.selected } && a.habits.isBusy(hour))
-                    Text("La TV est souvent utilisée à cette heure : les déplacements vers la clé peuvent être longs. Vous pouvez les lancer plus tard.", style = MaterialTheme.typography.bodySmall, color = cs.primary)
-                if (trashSel.isNotEmpty()) Text("${trashSel.size} fichier(s) iront dans la corbeille (${size(trashSel.sumOf { it.bytes })}). Vous devrez confirmer.", style = MaterialTheme.typography.bodySmall)
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    OutlinedButton({ m.step = Step.INTRO }, Modifier.heightIn(min = 52.dp)) { Text("Fermer") }
-                    Button({ if (trashSel.isNotEmpty()) confirmTrash = true else m.apply(false) }, Modifier.weight(1f).heightIn(min = 52.dp), enabled = nSel > 0) {
-                        Text(if (nSel == 0) "Rien de coché" else "Appliquer $nSel changement(s)")
-                    }
-                }
-            }
+        m.message?.let { Text(it, color = cs.error) }
+        Button({ m.apply(tr.isNotEmpty() && confirmTrash) }, Modifier.fillMaxWidth().heightIn(min = 56.dp), enabled = ok && chosen.isNotEmpty()) {
+            Icon(Icons.Filled.PlayArrow, null); Spacer(Modifier.width(8.dp)); Text(if (ok) "Appliquer maintenant" else "Confirmez la corbeille pour continuer", style = MaterialTheme.typography.titleMedium)
         }
-    }
-
-    if (confirmTrash) AlertDialog(
-        onDismissRequest = { confirmTrash = false },
-        icon = { Icon(Icons.Filled.DeleteSweep, null) },
-        title = { Text("Mettre ${trashSel.size} fichier(s) dans la corbeille ?") },
-        text = { Text("Ils quittent la bibliothèque (${size(trashSel.sumOf { it.bytes })}) mais restent dans la « Corbeille CastBridge » pendant 30 jours : vous pouvez les récupérer à tout moment avec « Corbeille » ou « Annuler un rangement ». Rien n'est effacé définitivement.") },
-        confirmButton = { TextButton({ confirmTrash = false; m.apply(true) }) { Text("Mettre à la corbeille") } },
-        dismissButton = { TextButton({ confirmTrash = false }) { Text("Annuler") } })
-    editing?.let { c -> EditDialog(c, onDismiss = { editing = null }) { name -> m.edit(c.id, name).also { err -> if (err == null) editing = null } } }
-    if (showSent) AlertDialog(onDismissRequest = { showSent = false }, title = { Text("Envoyé au serveur CastBridge") },
-        text = { Column(Modifier.verticalScroll(rememberScrollState())) { Text("Uniquement ces noms nettoyés (aucun contenu, dossier, taille ni identifiant) :", style = MaterialTheme.typography.bodySmall); Spacer(Modifier.height(8.dp)); Text(m.sentPreview.orEmpty()) } },
-        confirmButton = { TextButton({ showSent = false }) { Text("Fermer") } })
-}
-
-private fun androidx.compose.foundation.lazy.LazyListScope.section(title: String, list: List<Change>, m: AssistantModel, onEdit: (Change) -> Unit) {
-    if (list.isEmpty()) return
-    item(key = "h:$title") { Text("$title · ${list.size}", Modifier.padding(top = 12.dp), style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.primary) }
-    items(list, key = { it.id }) { c -> ChangeRow(c, c.id in m.selected, { m.toggle(c.id, it) }, onEdit, { m.ignore(c) }) }
-}
-
-@Composable
-private fun ChangeRow(c: Change, checked: Boolean, onChecked: (Boolean) -> Unit, onEdit: (Change) -> Unit, onIgnore: () -> Unit) {
-    val cs = MaterialTheme.colorScheme
-    var menu by remember { mutableStateOf(false) }
-    val before = if (c.file.folder.isNotEmpty()) c.file.folder + "/" + c.file.name else c.file.name
-    Card(Modifier.fillMaxWidth(), shape = RoundedCornerShape(12.dp), colors = CardDefaults.cardColors(containerColor = cs.surface)) {
-        Row(Modifier.fillMaxWidth().clickable(role = Role.Checkbox) { onChecked(!checked) }.padding(vertical = 6.dp, horizontal = 4.dp), verticalAlignment = Alignment.Top) {
-            Checkbox(checked, null, Modifier.padding(12.dp).semantics { contentDescription = "Appliquer : ${c.file.name}" })
-            Column(Modifier.weight(1f).padding(vertical = 6.dp), verticalArrangement = Arrangement.spacedBy(2.dp)) {
-                Text(before, style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant, maxLines = 2, overflow = TextOverflow.Ellipsis,
-                    textDecoration = if (c.type == ChangeType.TRASH) null else TextDecoration.LineThrough)
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(if (c.type == ChangeType.TRASH) Icons.Filled.Delete else Icons.AutoMirrored.Filled.ArrowForward, null, Modifier.size(16.dp), tint = if (c.type == ChangeType.TRASH) cs.error else cs.primary)
-                    Spacer(Modifier.width(4.dp))
-                    Text(when (c.type) { ChangeType.MOVE -> "Clé USB (${size(c.bytes)})"; ChangeType.TRASH -> "Corbeille CastBridge (${size(c.bytes)})"; else -> c.after },
-                        style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.SemiBold, maxLines = 3, overflow = TextOverflow.Ellipsis)
-                }
-                Text(c.reason, style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
-                if (c.source == Source.AI) AssistChip({}, label = { Text("Proposé par l'IA : à vérifier") }, modifier = Modifier.heightIn(min = 32.dp))
-                else if (c.source == Source.LEARNED) Text("D'après vos corrections précédentes", style = MaterialTheme.typography.labelSmall, color = cs.primary)
-            }
-            Box {
-                IconButton({ menu = true }) { Icon(Icons.Filled.MoreVert, "Plus d'actions pour ${c.file.name}") }
-                DropdownMenu(menu, { menu = false }) {
-                    if (c.type == ChangeType.RENAME) DropdownMenuItem({ Text("Modifier le nom") }, { menu = false; onEdit(c) }, leadingIcon = { Icon(Icons.Filled.Edit, null) })
-                    DropdownMenuItem({ Text("Ne plus toucher à ce fichier") }, { menu = false; onIgnore() }, leadingIcon = { Icon(Icons.Filled.Block, null) })
-                }
-            }
-        }
+        OutlinedButton({ m.step = Step.PLAN }, Modifier.fillMaxWidth().heightIn(min = 52.dp)) { Text("Retour à la vérification") }
     }
 }
 
 @Composable
-private fun EditDialog(c: Change, onDismiss: () -> Unit, onSave: (String) -> String?) {
-    var text by remember { mutableStateOf(c.toName ?: c.file.name) }
-    var err by remember { mutableStateOf<String?>(null) }
-    AlertDialog(onDismissRequest = onDismiss, title = { Text("Modifier le nom") },
-        text = {
-            Column {
-                OutlinedTextField(text, { text = it; err = null }, Modifier.fillMaxWidth(), isError = err != null, supportingText = { Text(err ?: "L'assistant retiendra votre choix pour les fichiers du même titre.") },
-                    label = { Text("Nom du fichier") }, keyboardOptions = KeyboardOptions.Default)
-            }
-        },
-        confirmButton = { TextButton({ err = onSave(text) }) { Text("Enregistrer") } },
-        dismissButton = { TextButton(onDismiss) { Text("Annuler") } })
+private fun RecapLine(icon: androidx.compose.ui.graphics.vector.ImageVector, text: String, tint: androidx.compose.ui.graphics.Color = MaterialTheme.colorScheme.primary) {
+    Row(verticalAlignment = Alignment.Top) { Icon(icon, null, tint = tint, modifier = Modifier.size(22.dp)); Spacer(Modifier.width(10.dp)); Text(text, style = MaterialTheme.typography.bodyMedium) }
 }
 
 // ---------------------------------------------------------------------------------------------------------------
@@ -401,24 +388,51 @@ private fun HistoryView(m: AssistantModel) {
 
 @Composable
 private fun SettingsView(m: AssistantModel) {
+    val ctx = LocalContext.current
     val s = AgentStore.settings
     var auto by remember { mutableStateOf(s.autoRename) }
     var ai by remember { mutableStateOf(s.aiEnabled) }
     var askAi by remember { mutableStateOf(false) }
+    var proactive by remember { mutableStateOf(s.proactiveNotify) }
+    var noPerm by remember { mutableStateOf(false) }
     var learned by remember { mutableStateOf(AgentStore.learned.size()) }
     var cleared by remember { mutableStateOf(false) }
+    var cacheCleared by remember { mutableStateOf(false) }
+    var sample by remember { mutableStateOf("Prison.Break.S01E04.720p.HDTV.x264-RARBG.mkv") }
     val cs = MaterialTheme.colorScheme
+    val notifPerm = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+        if (granted) { proactive = true; s.proactiveNotify = true; AgentProactive.sync(ctx); noPerm = false } else { proactive = false; noPerm = true }
+    }
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        SettingSwitch("Ranger automatiquement les nouveaux envois", "Quand vous envoyez un fichier à la TV, il est renommé seulement si les règles sont sûres (séries, films, vidéos WhatsApp). Jamais de dossier, jamais de suppression. Chaque renommage est noté et annulable.", auto) { auto = it; s.autoRename = it }
+        SettingSwitch("Ranger automatiquement les nouveaux envois", "Désactivé par défaut. Quand vous envoyez un fichier à la TV, il est renommé seulement si les règles sont sûres (séries, films, vidéos WhatsApp). Jamais de dossier, jamais de suppression. Chaque renommage est noté et annulable.", auto) { auto = it; s.autoRename = it }
+        // what the option would do, without sending anything: a field to try a name
+        OutlinedTextField(sample, { sample = it }, Modifier.fillMaxWidth(), label = { Text("Essayer un nom de fichier") }, singleLine = true,
+            supportingText = {
+                val r = remember(sample) { AutoRename.nameFor(sample, learned = AgentStore.learned) }
+                Text(if (r != null) "Serait envoyé sous : $r" else "Laissé tel quel (les règles ne sont pas assez sûres)")
+            })
+        val autoCount = remember(auto) { AgentStore.journal.entries().count { it.runId.startsWith("tv-auto") && it.state == OpState.DONE } }
+        if (autoCount > 0) Text("$autoCount envoi(s) déjà renommé(s) à l'envoi : voir « Annuler un rangement ».", style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
+        HorizontalDivider()
+        SettingSwitch("Suggestions par notification", "Désactivé par défaut. Une notification silencieuse au plus par semaine (« 37 fichiers à ranger »), calculée sur ce téléphone pour le dossier que vous avez choisi. Elle ouvre l'assistant, elle ne change rien. Le conseil discret dans la bibliothèque de la TV reste là dans tous les cas.", proactive) { on ->
+            if (!on) { proactive = false; s.proactiveNotify = false; AgentProactive.sync(ctx) }
+            else if (AgentProactive.canNotify(ctx)) { proactive = true; s.proactiveNotify = true; AgentProactive.sync(ctx) }
+            else notifPerm.launch(android.Manifest.permission.POST_NOTIFICATIONS)
+        }
+        if (noPerm) Text("Android a refusé les notifications pour CastBridge : l'option reste désactivée.", style = MaterialTheme.typography.bodySmall, color = cs.error)
+        if (proactive && m.phoneTree == null) Text("Choisissez d'abord un dossier du téléphone (écran d'accueil de l'assistant) : c'est lui que la notification surveille.", style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
         HorizontalDivider()
         SettingSwitch(AiConsent.TITLE, "Désactivée par défaut. Activée, elle n'envoie que des noms nettoyés pour les cas que les règles ne comprennent pas.", ai) { if (it) askAi = true else { ai = false; s.revokeAi() } }
         Text("Ce qui serait envoyé : un nom nettoyé comme « prison break s01e04 », son extension, sa durée arrondie, la langue de l'application. Jamais le contenu, les dossiers, les tailles, vos vidéos personnelles, ni un identifiant de l'appareil.", style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
         HorizontalDivider()
         Text("Ce que l'assistant a appris de vos corrections : $learned règle(s), stockées sur ce téléphone uniquement.", style = MaterialTheme.typography.bodyMedium)
-        OutlinedButton({ AgentStore.learned.clear(); learned = 0 }, enabled = learned > 0) { Text("Effacer ce qu'il a appris") }
-        OutlinedButton({ AgentStore.journal.clear(); m.history = emptyList(); cleared = true }) { Text("Effacer l'historique des rangements") }
+        OutlinedButton({ AgentStore.learned.clear(); learned = 0 }, Modifier.heightIn(min = 48.dp), enabled = learned > 0) { Text("Effacer ce qu'il a appris") }
+        OutlinedButton({ AgentStore.journal.clear(); m.history = emptyList(); cleared = true }, Modifier.heightIn(min = 48.dp)) { Text("Effacer l'historique des rangements") }
         if (cleared) Text("Historique effacé (les annulations ne sont plus possibles).", style = MaterialTheme.typography.bodySmall)
-        OutlinedButton({ s.phoneTreeUri = null; m.phoneTree = null }, enabled = m.phoneTree != null) { Text("Oublier le dossier du téléphone") }
+        Text("Pour aller plus vite, l'assistant garde la durée des vidéos et une empreinte des fichiers déjà lus (${AgentStore.cache.size()} entrée(s)), sur ce téléphone uniquement.", style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
+        OutlinedButton({ AgentStore.cache.clear(); cacheCleared = true }, Modifier.heightIn(min = 48.dp)) { Text("Effacer cette mémoire d'analyse") }
+        if (cacheCleared) Text("Effacée : la prochaine analyse relira tout.", style = MaterialTheme.typography.bodySmall)
+        OutlinedButton({ s.phoneTreeUri = null; m.phoneTree = null }, Modifier.heightIn(min = 48.dp), enabled = m.phoneTree != null) { Text("Oublier le dossier du téléphone") }
     }
     if (askAi) AlertDialog({ askAi = false }, icon = { Icon(Icons.Filled.CloudQueue, null) }, title = { Text(AiConsent.TITLE) },
         text = { Column(Modifier.verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(10.dp)) { AiConsent.paragraphs.forEach { Text(it, style = MaterialTheme.typography.bodyMedium) } } },
@@ -428,7 +442,7 @@ private fun SettingsView(m: AssistantModel) {
 
 @Composable
 private fun SettingSwitch(title: String, sub: String, on: Boolean, onChange: (Boolean) -> Unit) {
-    Row(Modifier.fillMaxWidth().heightIn(min = 56.dp).clickable(role = Role.Switch) { onChange(!on) }, verticalAlignment = Alignment.CenterVertically) {
+    Row(Modifier.fillMaxWidth().heightIn(min = 56.dp).toggleable(value = on, role = Role.Switch, onValueChange = onChange), verticalAlignment = Alignment.CenterVertically) {
         Column(Modifier.weight(1f)) { Text(title, style = MaterialTheme.typography.titleSmall); Text(sub, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant) }
         Spacer(Modifier.width(12.dp))
         Switch(on, null)

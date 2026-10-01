@@ -91,12 +91,14 @@ class UploadService : Service() {
         return START_NOT_STICKY
     }
 
-    private fun runJob(uri: Uri, job: Job, disc: TvDiscovery?) {
+    private fun runJob(uri: Uri, job0: Job, disc: TvDiscovery?) {
         val total = runCatching { contentResolver.openFileDescriptor(uri, "r")!!.use { it.statSize } }.getOrDefault(-1)
-        if (total <= 0) { finish(State.Failed(job, "Fichier illisible")); return }
+        if (total <= 0) { finish(State.Failed(job0, "Fichier illisible")); return }
         val resolve: () -> String? = {
-            job.manualHost?.let { h -> if (':' in h) "http://$h" else "http://$h:8765" } ?: disc?.find(job.tvName)?.base
+            job0.manualHost?.let { h -> if (':' in h) "http://$h" else "http://$h:8765" } ?: disc?.find(job0.tvName)?.base
         }
+        // « Rangement automatique » : the clean name is only kept if the TV is reachable and has no file of that name (never resume into another file)
+        val job = castbridge.sender.agent.AgentAuto.settle(job0, resolve)
         progressiveNow = job.progressive
         started = false
         val castMode = if (job.move) "move" else "copy"
@@ -150,6 +152,7 @@ class UploadService : Service() {
             PhoneConnect.castEnd("wifi", castMode, if (ok) total else maxOf(0L, prevSent), ms, ok, err)
             if (!ok && !cancelled) PhoneConnect.error("send", "upload", (result as? ResumableUpload.State.Failed)?.reason)
         }
+        if (result == ResumableUpload.State.Done) castbridge.sender.agent.AgentAuto.completed(this, job.fileName)
         if (result == ResumableUpload.State.Done) moveUri?.let { u -> checkMoved(job, u, resolve()) }
         if (result == ResumableUpload.State.Done) {
             if (started || !job.autoPlay) { finish(State.Done(job)); return }      // already playing (or the caller starts it)
@@ -302,7 +305,7 @@ class UploadService : Service() {
         fun start(ctx: Context, uri: Uri, fileName: String, tvName: String, manualHost: String?, pin: String? = null,
                   progressive: Boolean = false, autoPlay: Boolean = true, target: String? = null, move: Boolean = false) {
             // library assistant, option « Rangement automatique des nouveaux envois » (off by default, docs/LIBRARY-AGENT.md)
-            val fileName = castbridge.sender.agent.AgentAuto.nameFor(ctx, fileName)
+            val fileName = castbridge.sender.agent.AgentAuto.nameFor(ctx, fileName)       // a CANDIDATE: confirmed in the service once the TV has been asked
             val i = Intent(ctx, UploadService::class.java).setData(uri)
                 .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 .putExtra(EXTRA_TV, tvName).putExtra(EXTRA_NAME, fileName).putExtra(EXTRA_HOST, manualHost).putExtra(EXTRA_PIN, pin?.takeIf { it.isNotEmpty() })
