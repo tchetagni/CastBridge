@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/layout :: head('Audit')}"></head>
+<body>
+<header th:replace="~{admin/layout :: nav}"></header>
+<main>
+    <div th:replace="~{admin/layout :: flash}"></div>
+    <h1>Journal d'audit</h1>
+    <nav th:replace="~{admin/lic-nav :: sub}"></nav>
+    <section class="card">
+        <p>Journal chaîné par empreintes : toute modification ou suppression d'une ligne se détecte. Empreinte de tête (à noter ailleurs pour l'ancrer) :
+            <span class="mono small wrap" th:text="${head}"></span></p>
+        <form th:action="@{/admin/licenses/audit/verify}" method="post"><button type="submit">Vérifier l'intégrité</button></form>
+    </section>
+    <form method="get" th:action="@{/admin/licenses/audit}" class="stack">
+        <div class="row">
+            <label>Qui <input type="text" name="actor" th:value="${fa.actor}" maxlength="64"></label>
+            <label>Action <input type="text" name="action" th:value="${fa.action}" maxlength="40" placeholder="LICENSE_REVOKE"></label>
+            <label>Cible <select name="targetType"><option value="">Toutes</option>
+                <option th:each="t : ${targetTypes}" th:value="${t}" th:text="${t}" th:selected="${fa.targetType == t}"></option></select></label>
+            <label>Identifiant <input type="text" name="targetId" th:value="${fa.targetId}" maxlength="64"></label>
+            <label>Du <input type="date" name="from" th:value="${fa.from}"></label>
+            <label>Au <input type="date" name="to" th:value="${fa.to}"></label>
+        </div>
+        <div class="row"><button type="submit">Filtrer</button><a class="button ghost" th:href="@{/admin/licenses/audit}">Effacer</a></div>
+    </form>
+    <div class="scroll"><table class="list">
+        <thead><tr><th>N°</th><th>Date</th><th>Qui</th><th>Action</th><th>Cible</th><th>Motif</th><th>Détails</th></tr></thead>
+        <tbody>
+        <tr th:each="h : ${page.items}"><td th:text="${h.id}"></td><td th:text="${@fmt.date(h.at)}"></td><td th:text="|${h.actor} (${h.role}, ${h.channel})|"></td><td th:text="${h.action}"></td>
+            <td class="mono" th:text="|${h.targetType} ${h.targetId}|"></td><td th:text="${h.reason}"></td><td class="wrap small" th:text="${h.details}"></td></tr>
+        <tr th:if="${page.items.isEmpty()}"><td colspan="7">Aucune ligne.</td></tr>
+        </tbody>
+    </table></div>
+    <p><a th:if="${page.hasPrevious()}" th:href="@{/admin/licenses/audit(actor=${fa.actor},action=${fa.action},targetType=${fa.targetType},targetId=${fa.targetId},from=${fa.from},to=${fa.to},page=${page.page - 1})}">← Plus récent</a>
+        <span th:text="|page ${page.page + 1} / ${page.pages}|"></span>
+        <a th:if="${page.hasNext()}" th:href="@{/admin/licenses/audit(actor=${fa.actor},action=${fa.action},targetType=${fa.targetType},targetId=${fa.targetId},from=${fa.from},to=${fa.to},page=${page.page + 1})}">Plus ancien →</a></p>
+</main>
+</body>
+</html>

@@ -41,7 +41,7 @@ public class RateLimitFilter extends OncePerRequestFilter {
     protected boolean shouldNotFilter(HttpServletRequest req) {
         String p = req.getRequestURI().substring(Math.min(req.getRequestURI().length(), req.getContextPath().length()));
         return !(p.startsWith("/api/") || p.startsWith("/dl/") || p.startsWith("/v3/")
-                || ("POST".equals(req.getMethod()) && p.equals("/admin/login")));
+                || ("POST".equals(req.getMethod()) && (p.equals("/admin/login") || p.startsWith("/admin/licenses"))));
     }
 
     @Override

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/layout :: head('Clients')}"></head>
+<body>
+<header th:replace="~{admin/layout :: nav}"></header>
+<main>
+    <div th:replace="~{admin/layout :: flash}"></div>
+    <h1>Clients</h1>
+    <nav th:replace="~{admin/lic-nav :: sub}"></nav>
+    <form method="get" th:action="@{/admin/licenses/clients}" class="inline"><input type="search" name="q" th:value="${q}" placeholder="nom ou contact" maxlength="80"><button type="submit">Chercher</button></form>
+    <div class="cols">
+        <section class="card">
+            <div class="scroll"><table class="list">
+                <thead><tr><th>Nom</th><th>Contact</th><th>Licences</th></tr></thead>
+                <tbody>
+                <tr th:each="c : ${page.items}"><td><a th:href="@{/admin/licenses/clients/{id}(id=${c.id})}" th:text="${c.name}"></a></td><td th:text="${c.contact}"></td><td th:text="${c.licenses}"></td></tr>
+                <tr th:if="${page.items.isEmpty()}"><td colspan="3">Aucun client.</td></tr>
+                </tbody>
+            </table></div>
+            <p><a th:if="${page.hasPrevious()}" th:href="@{/admin/licenses/clients(q=${q},page=${page.page - 1})}">← Précédent</a>
+                <a th:if="${page.hasNext()}" th:href="@{/admin/licenses/clients(q=${q},page=${page.page + 1})}">Suivant →</a></p>
+        </section>
+        <section class="card" th:if="${canWrite}">
+            <h2>Nouveau client</h2>
+            <p><small>Minimum de données personnelles : un nom et, si utile, un moyen de contact. Pas d'adresse ni de pièce d'identité.</small></p>
+            <form th:action="@{/admin/licenses/clients}" method="post" class="stack">
+                <label>Nom <input type="text" name="name" required maxlength="120"></label>
+                <label>Contact <input type="text" name="contact" maxlength="160"></label>
+                <label>Notes <textarea name="notes" maxlength="1000" rows="3"></textarea></label>
+                <button type="submit">Créer</button>
+            </form>
+        </section>
+    </div>
+</main>
+</body>
+</html>

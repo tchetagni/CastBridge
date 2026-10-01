@@ -1,0 +1,35 @@
+# Surcouche FACULTATIVE du module « licences » (docs/LICENSE-ADMIN.md). Le module est ÉTEINT par défaut : sans ce fichier, rien ne change.
+#
+#   docker compose -f docker-compose.yml -f docker-compose.licenses.yml up -d
+#
+# À faire AVANT (voir « Déploiement sûr » dans docs/LICENSE-ADMIN.md) : sauvegarde (./backup.sh), essai en préproduction,
+# puis dépôt des fichiers secrets listés ci-dessous (ils ne sont JAMAIS dans le dépôt ni dans l'image). Un secret manquant
+# fait échouer « up » : c'est voulu, on ne démarre pas à moitié configuré.
+services:
+  castbridge-api:
+    environment:
+      CASTBRIDGE_LICENSES_ENABLED: ${CASTBRIDGE_LICENSES_ENABLED:-true}
+      CASTBRIDGE_LICENSES_PUBLIC_ROUTES: ${CASTBRIDGE_LICENSES_PUBLIC_ROUTES:-false}
+      CASTBRIDGE_LICENSES_TRIAL_ISSUANCE: ${CASTBRIDGE_LICENSES_TRIAL_ISSUANCE:-manual}
+      CASTBRIDGE_LICENSES_SECRETS_DIR: /run/secrets
+      CASTBRIDGE_LICENSES_REQUIRE_TOTP: ${CASTBRIDGE_LICENSES_REQUIRE_TOTP:-true}
+      CASTBRIDGE_LICENSES_TRUSTED_KEYS: ${CASTBRIDGE_LICENSES_TRUSTED_KEYS:-}
+      CASTBRIDGE_LICENSES_WINDOW_DAYS: ${CASTBRIDGE_LICENSES_WINDOW_DAYS:-30}
+    secrets:
+      - source: license_signing_key
+        target: license-signing.key
+      - source: license_totp_key
+        target: license-totp.key
+      - source: license_audit_key
+        target: license-audit.key
+
+secrets:
+  # clé Ed25519 DU SERVEUR pour les licences (portée limitée : essai, achats à la carte, abonnements, ré-activations)
+  license_signing_key:
+    file: ${CASTBRIDGE_LICENSES_SIGNING_KEY_PATH:-./secrets/license-signing.key}
+  # clé AES-256 (base64, 32 octets) qui protège les secrets TOTP au repos : openssl rand -base64 32
+  license_totp_key:
+    file: ${CASTBRIDGE_LICENSES_TOTP_KEY_PATH:-./secrets/license-totp.key}
+  # clé HMAC du journal d'audit (aléatoire) : openssl rand -base64 32. À choisir AVANT la première écriture et à ne plus changer.
+  license_audit_key:
+    file: ${CASTBRIDGE_LICENSES_AUDIT_KEY_PATH:-./secrets/license-audit.key}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/layout :: head('Code appareil')}"></head>
+<body>
+<header th:replace="~{admin/layout :: nav}"></header>
+<main>
+    <div th:replace="~{admin/layout :: flash}"></div>
+    <h1>Recherche par code d'appareil</h1>
+    <nav th:replace="~{admin/lic-nav :: sub}"></nav>
+    <p class="flash err" th:if="${error}" th:text="${error}"></p>
+    <form method="get" th:action="@{/admin/licenses/device}" class="inline">
+        <input type="text" name="code" th:value="${code}" placeholder="XXXX-XXXX-XXXX-XXXX" maxlength="30" required autocomplete="off" autocapitalize="characters">
+        <button type="submit">Chercher</button>
+    </form>
+    <section class="card" th:if="${found != null}">
+        <p th:if="${found.isEmpty()}">Ce code n'a aucun poste : il ne figure dans aucune licence.</p>
+        <div class="scroll" th:unless="${found.isEmpty()}"><table class="list">
+            <thead><tr><th>Licence</th><th>Client</th><th>État licence</th><th>Poste</th><th>État poste</th><th>Première vue</th><th>Dernière vue</th></tr></thead>
+            <tbody><tr th:each="r : ${found}">
+                <td><a class="mono" th:href="@{/admin/licenses/{id}(id=${r.licenseId})}" th:text="${r.licenseId}"></a></td>
+                <td th:text="${r.client}"></td><td th:text="${r.licenseState}"></td><td class="mono" th:text="${r.seatId}"></td><td th:text="${r.seatState}"></td>
+                <td th:text="${@fmt.date(r.firstSeen)}"></td><td th:text="${@fmt.date(r.lastSeen)}"></td></tr></tbody>
+        </table></div>
+    </section>
+</main>
+</body>
+</html>

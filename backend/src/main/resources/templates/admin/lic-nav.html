@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<body>
+<nav th:fragment="sub" class="subnav">
+    <a th:href="@{/admin/licenses}" th:classappend="${sub == 'dashboard'} ? 'on'">Tableau de bord</a>
+    <a th:href="@{/admin/licenses/list}" th:classappend="${sub == 'list'} ? 'on'">Licences</a>
+    <a th:href="@{/admin/licenses/issue}" th:classappend="${sub == 'issue'} ? 'on'">Émettre</a>
+    <a th:href="@{/admin/licenses/device}" th:classappend="${sub == 'device'} ? 'on'">Code d'appareil</a>
+    <a th:href="@{/admin/licenses/clients}" th:classappend="${sub == 'clients'} ? 'on'">Clients</a>
+    <a th:href="@{/admin/licenses/products}" th:classappend="${sub == 'products'} ? 'on'">Bouquets</a>
+    <a th:href="@{/admin/licenses/registry}" th:classappend="${sub == 'registry'} ? 'on'">Registre</a>
+    <a th:if="${canAudit}" th:href="@{/admin/licenses/audit}" th:classappend="${sub == 'audit'} ? 'on'">Audit</a>
+    <a th:href="@{/admin/licenses/security}" th:classappend="${sub == 'security'} ? 'on'">Sécurité</a>
+</nav>
+</body>
+</html>

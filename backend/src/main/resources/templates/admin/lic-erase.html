@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/layout :: head('Effacement')}"></head>
+<body>
+<header th:replace="~{admin/layout :: nav}"></header>
+<main>
+    <div th:replace="~{admin/layout :: flash}"></div>
+    <h1>Droit à l'effacement</h1>
+    <nav th:replace="~{admin/lic-nav :: sub}"></nav>
+    <section class="card">
+        <p>Client : <b th:text="${c.name}"></b></p>
+        <p class="danger">Le nom, le contact et les notes sont effacés définitivement. Les postes ne sont pas supprimés : ils sont anonymisés (le code d'appareil devient un identifiant opaque), pour que le décompte des postes et l'historique des licences restent exacts. Un appareil anonymisé qui reviendrait compterait comme un nouvel appareil.</p>
+        <form th:action="@{/admin/licenses/clients/{id}/erase(id=${c.id})}" method="post" class="stack">
+            <label>Motif (par exemple : demande du client du …) <textarea name="reason" required minlength="3" maxlength="500" rows="3"></textarea></label>
+            <label class="check"><input type="checkbox" name="confirm" required> Je confirme l'effacement</label>
+            <div class="row"><button type="submit">Effacer</button><a class="button ghost" th:href="@{/admin/licenses/clients/{id}(id=${c.id})}">Annuler</a></div>
+        </form>
+    </section>
+</main>
+</body>
+</html>

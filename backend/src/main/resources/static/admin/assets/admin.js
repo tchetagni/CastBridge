@@ -41,3 +41,14 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 });
+
+// Licences: "copy" buttons (data-copy = id of the element whose text is copied).
+document.addEventListener('click', function (e) {
+  var b = e.target.closest && e.target.closest('[data-copy]');
+  if (!b) return;
+  var el = document.getElementById(b.getAttribute('data-copy'));
+  if (!el) return;
+  var text = el.value !== undefined ? el.value : el.textContent;
+  if (navigator.clipboard) navigator.clipboard.writeText(text).then(function () { b.textContent = 'Copié'; });
+  else { el.select && el.select(); document.execCommand('copy'); b.textContent = 'Copié'; }
+});

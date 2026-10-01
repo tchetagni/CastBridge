@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/layout :: head('Émettre')}"></head>
+<body>
+<header th:replace="~{admin/layout :: nav}"></header>
+<main>
+    <div th:replace="~{admin/layout :: flash}"></div>
+    <h1>Émettre une activation</h1>
+    <nav th:replace="~{admin/lic-nav :: sub}"></nav>
+    <p class="flash err" th:if="${error}" th:text="${error}"></p>
+    <p class="flash err" th:unless="${keyLoaded}">Aucune clé de signature serveur n'est installée : l'émission est impossible (voir docs/LICENSE-ADMIN.md).</p>
+    <section class="card">
+        <p>Format : <small th:text="${format}"></small></p>
+        <p><small>Collez la <b>demande d'appareil</b> (texte « code=… k=… factor=… » affiché par l'appareil ou transmis par Bluetooth) : le code seul ne suffit pas à construire l'activation.
+            Elle est vérifiée en entier (le code doit dériver des facteurs). Le même matériel garde son poste ; un nouveau matériel en prend un.</small></p>
+        <form th:action="@{/admin/licenses/issue}" method="post" class="stack">
+            <div class="row">
+                <label>Licence <input type="text" name="licenseId" th:value="${licenseId}" required maxlength="64" pattern="[A-Za-z0-9][A-Za-z0-9-]{2,63}" autocapitalize="none"></label>
+                <label>Appareil <select name="subject"><option value="tv" th:selected="${subject != 'phone'}">TV</option><option value="phone" th:selected="${subject == 'phone'}">Téléphone</option></select></label>
+                <label>Fenêtre d'installation (jours) <input type="number" name="windowDays" min="1" max="366" th:placeholder="${defaultWindow}"></label>
+            </div>
+            <label>Demande d'appareil <textarea name="deviceRequest" class="act" rows="8" required maxlength="2000" th:text="${deviceRequest}" placeholder="code=XXXX-XXXX-XXXX-XXXX&#10;k=4&#10;factor=FLASH|…"></textarea></label>
+            <label class="check"><input type="checkbox" name="reissue"> Réémission : le poste existe déjà (ne consomme pas de poste)</label>
+            <button type="submit">Émettre</button>
+        </form>
+    </section>
+    <section class="card" th:if="${act != null}">
+        <h2 th:text="${act.reused} ? 'Activation (réémise à l\'identique)' : 'Activation émise'"></h2>
+        <p>Sorte <b th:text="${act.kind}"></b> · poste <b class="mono" th:text="${act.seatId}"></b> <span th:if="${act.newSeat}">(nouveau)</span> · installable jusqu'au <b th:text="${@fmt.date(act.notAfter)}"></b> · empreinte <span class="mono" th:text="${#strings.substring(act.fingerprint, 0, 12)}"></span></p>
+        <textarea id="act-text" class="act" readonly rows="6" th:text="${act.text}"></textarea>
+        <p>
+            <button type="button" data-copy="act-text">Copier</button>
+            <a class="button ghost" th:href="@{/admin/licenses/{id}/seats/{d}/activation(id=${act.licenseId},d=${act.seatId})}">Télécharger (fichier « activation » pour la clé USB)</a>
+        </p>
+        <img class="qr" th:if="${qr != null}" th:src="${qr}" alt="QR code de l'activation">
+        <p th:if="${qr == null}"><small>Activation trop longue pour un QR code : utilisez la copie ou le fichier.</small></p>
+        <p><small>Ce texte n'est enregistré nulle part (seule son empreinte l'est) : redemandez-le avec « Réémission » si besoin.</small></p>
+    </section>
+</main>
+</body>
+</html>

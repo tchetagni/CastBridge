@@ -147,3 +147,15 @@ td.trend.down { color: var(--bad); }
 }
 
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* Licences */
+.subnav { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; }
+.subnav a { padding: 4px 12px; border: 1px solid var(--line); border-radius: 99px; color: var(--muted); font-size: .85rem; }
+.subnav a.on { color: var(--text); border-color: var(--accent); }
+.mono, pre.act { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+pre.act, textarea.act { width: 100%; box-sizing: border-box; background: var(--panel2); border: 1px solid var(--line); border-radius: 8px; padding: 10px; white-space: pre-wrap; word-break: break-all; font-size: .85rem; color: var(--text); }
+img.qr { width: 220px; max-width: 100%; height: auto; background: #fff; padding: 6px; border-radius: 8px; }
+form.inline { display: inline-flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.alert-list { list-style: none; margin: 0; padding: 0; }
+.alert-list li { padding: 6px 0; border-bottom: 1px solid var(--line); }
+.danger { color: var(--bad); }

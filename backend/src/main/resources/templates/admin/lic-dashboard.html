@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/layout :: head('Licences')}"></head>
+<body>
+<header th:replace="~{admin/layout :: nav}"></header>
+<main>
+    <div th:replace="~{admin/layout :: flash}"></div>
+    <h1>Licences</h1>
+    <nav th:replace="~{admin/lic-nav :: sub}"></nav>
+    <p class="flash err" th:if="${me.role() != null and me.role().name() == 'OWNER' and !canWrite}">
+        Votre compte propriétaire n'a pas encore la double authentification : vous pouvez lire, mais rien ne se modifie tant qu'elle n'est pas activée.
+        <a th:href="@{/admin/licenses/security}">Activer maintenant</a></p>
+    <div class="tiles">
+        <a class="tile good" th:href="@{/admin/licenses/list(state='ACTIVE')}"><b th:text="${d.activeLicenses}">0</b><span>licences actives</span></a>
+        <a class="tile warn" th:href="@{/admin/licenses/list(expiringDays=30)}"><b th:text="${d.expiring30}">0</b><span>expirent sous 30 jours</span></a>
+        <div class="tile"><b th:text="|${d.seatsUsed} / ${d.seatsAllowed}|">0</b><span>postes utilisés / autorisés</span></div>
+        <div class="tile"><b th:text="${d.trialsIssued}">0</b><span>essais délivrés</span></div>
+        <div class="tile" th:classappend="${d.suspectDuplicates > 0} ? 'warn'"><b th:text="${d.suspectDuplicates}">0</b><span>doublons suspects</span></div>
+        <a class="tile" th:classappend="${d.openConflicts > 0} ? 'warn'" th:href="@{/admin/licenses/registry}"><b th:text="${d.openConflicts}">0</b><span>conflits de registre</span></a>
+        <a class="tile" th:href="@{/admin/licenses/list(state='SUSPENDED')}"><b th:text="${d.suspended}">0</b><span>suspendues</span></a>
+        <a class="tile" th:href="@{/admin/licenses/list(state='REVOKED')}"><b th:text="${d.revoked}">0</b><span>révoquées</span></a>
+    </div>
+    <section class="card">
+        <h2>Alertes d'abus</h2>
+        <p th:if="${d.alerts.isEmpty()}">Aucune alerte. Les alertes préviennent, elles ne bloquent rien : la décision reste la vôtre.</p>
+        <ul class="alert-list" th:unless="${d.alerts.isEmpty()}">
+            <li th:each="a : ${d.alerts}"><span class="badge" th:classappend="${a.severity() == 'bad'} ? 'bad' : 'warn'" th:text="${a.type()}"></span>
+                <b class="mono" th:text="${a.subject()}"></b> — <span th:text="${a.detail()}"></span></li>
+        </ul>
+    </section>
+</main>
+</body>
+</html>

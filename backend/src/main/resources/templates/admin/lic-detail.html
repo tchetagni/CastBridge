@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/layout :: head('Licence')}"></head>
+<body>
+<header th:replace="~{admin/layout :: nav}"></header>
+<main>
+    <div th:replace="~{admin/layout :: flash}"></div>
+    <p><a th:href="@{/admin/licenses/list}">← Licences</a></p>
+    <h1><span class="mono" th:text="${x.license.licenseId}"></span>
+        <span class="badge" th:classappend="${x.license.effectiveState == 'ACTIVE'} ? 'good' : (${x.license.effectiveState == 'GRACE' or x.license.effectiveState == 'SUSPENDED'} ? 'warn' : 'bad')" th:text="${x.license.effectiveState}"></span></h1>
+    <nav th:replace="~{admin/lic-nav :: sub}"></nav>
+    <div class="cols">
+        <section class="card">
+            <h2>Droits</h2>
+            <dl class="facts">
+                <dt>Client</dt><dd><a th:href="@{/admin/licenses/clients/{id}(id=${x.license.clientId})}" th:text="${x.license.clientName}"></a></dd>
+                <dt>Type</dt><dd th:text="${x.license.kind == 'TRIAL'} ? 'Essai' : 'Payante'"></dd>
+                <dt>Début</dt><dd th:text="${@fmt.date(x.license.startAt)}"></dd>
+                <dt>Fin</dt><dd th:text="${x.license.endAt == null} ? 'sans fin' : ${@fmt.date(x.license.endAt)}"></dd>
+                <dt>Grâce</dt><dd th:text="|${x.license.graceDays} jours|"></dd>
+                <dt>Postes</dt><dd th:text="|${x.license.seatsUsed} utilisés sur ${x.license.seatsAllowed}|"></dd>
+                <dt>Transferts</dt><dd th:text="|${x.transfersLastYear} sur 12 mois (plafond ${x.license.transferCap})|"></dd>
+                <dt th:if="${x.license.stateReason != null}">Motif d'état</dt><dd th:if="${x.license.stateReason != null}" th:text="${x.license.stateReason}"></dd>
+            </dl>
+            <h3>Bouquets</h3>
+            <ul>
+                <li th:each="p : ${x.products}"><span th:text="${p.title}"></span> <small class="mono" th:text="${p.productId}"></small>
+                    <small th:text="${p.endsAt == null} ? '' : ('jusqu\'au ' + ${@fmt.date(p.endsAt)})"></small></li>
+                <li th:if="${x.products.isEmpty()}">Aucun bouquet.</li>
+            </ul>
+            <form th:if="${canWrite}" th:action="@{/admin/licenses/{id}/products(id=${x.license.licenseId})}" method="post" class="inline">
+                <select name="productId" required><option value="">Ajouter un bouquet…</option>
+                    <option th:each="p : ${products}" th:if="${p.active}" th:value="${p.productId}" th:text="${p.title}"></option></select>
+                <input type="date" name="endsAt" title="Fin du bouquet (facultatif)">
+                <button type="submit">Ajouter</button>
+            </form>
+        </section>
+        <section class="card" th:if="${canWrite}">
+            <h2>Actions</h2>
+            <form th:action="@{/admin/licenses/{id}/extend(id=${x.license.licenseId})}" method="post" class="stack">
+                <div class="row"><label>Nouvelle fin <input type="date" name="endAt"></label>
+                    <label>Motif (obligatoire si on raccourcit) <input type="text" name="reason" maxlength="500"></label></div>
+                <button type="submit">Prolonger / changer la fin</button>
+            </form>
+            <form th:action="@{/admin/licenses/{id}/seats(id=${x.license.licenseId})}" method="post" class="stack">
+                <div class="row"><label>Nombre de postes <input type="number" name="seats" min="1" max="1000" th:value="${x.license.seatsAllowed}" required></label>
+                    <label>Motif (obligatoire si on réduit) <input type="text" name="reason" maxlength="500"></label></div>
+                <button type="submit">Changer le nombre de postes</button>
+            </form>
+            <form th:action="@{/admin/licenses/{id}/settings(id=${x.license.licenseId})}" method="post" class="stack">
+                <div class="row"><label>Grâce (jours) <input type="number" name="graceDays" min="0" max="365" th:value="${x.license.graceDays}"></label>
+                    <label>Transferts par an <input type="number" name="transferCap" min="0" max="100" th:value="${x.license.transferCap}"></label></div>
+                <button type="submit">Enregistrer</button>
+            </form>
+            <p>
+                <a class="button" th:if="${x.license.state == 'ACTIVE'}" th:href="@{/admin/licenses/{id}/confirm/suspend(id=${x.license.licenseId})}">Suspendre…</a>
+                <a class="button" th:if="${x.license.state == 'SUSPENDED'}" th:href="@{/admin/licenses/{id}/confirm/resume(id=${x.license.licenseId})}">Réactiver…</a>
+                <a class="button danger" th:if="${x.license.state != 'REVOKED'}" th:href="@{/admin/licenses/{id}/confirm/revoke(id=${x.license.licenseId})}">Révoquer…</a>
+                <a class="button ghost" th:href="@{/admin/licenses/issue(licenseId=${x.license.licenseId})}">Émettre une activation</a>
+            </p>
+        </section>
+    </div>
+    <section class="card">
+        <h2>Postes</h2>
+        <p><small>Un poste = cette licence sur ce matériel : il garde son identifiant si un module est remplacé (au moins k facteurs sur n identiques).</small></p>
+        <div class="scroll"><table class="list">
+            <thead><tr><th>Poste</th><th>Appareil</th><th>État</th><th>Première vue</th><th>Dernière vue</th><th>Facteurs</th><th></th></tr></thead>
+            <tbody>
+            <tr th:each="s : ${x.seats}">
+                <td class="mono" th:text="${s.seatId}"></td>
+                <td><span class="mono" th:text="${s.deviceCode}"></span> <small th:text="${s.subject == 'phone'} ? 'téléphone' : 'TV'"></small></td>
+                <td><span class="badge" th:classappend="${s.state == 'ACTIVE'} ? 'good' : 'warn'" th:text="${s.state}"></span><small th:if="${s.anonymized}"> anonymisé</small></td>
+                <td th:text="${@fmt.date(s.firstSeen)}"></td>
+                <td th:text="${@fmt.date(s.lastSeen)}"></td>
+                <td th:text="|${s.factors} (k=${s.k})|"></td>
+                <td>
+                    <span th:if="${s.state == 'ACTIVE' and !s.anonymized}">
+                        <a th:if="${canReissue}" th:href="@{/admin/licenses/{id}/seats/{d}/activation(id=${x.license.licenseId},d=${s.seatId})}">Télécharger l'activation</a>
+                        <a th:if="${canWrite}" th:href="@{/admin/licenses/{id}/confirm/release(id=${x.license.licenseId},seat=${s.seatId})}">Libérer…</a>
+                    </span>
+                </td>
+            </tr>
+            <tr th:if="${x.seats.isEmpty()}"><td colspan="7">Aucun poste.</td></tr>
+            </tbody>
+        </table></div>
+    </section>
+    <section class="card">
+        <h2>Émissions</h2>
+        <div class="scroll"><table class="list">
+            <thead><tr><th>Date</th><th>Poste</th><th>Sorte</th><th>Installable jusqu'au</th><th>Émetteur</th><th>Canal</th><th>kid</th><th>Empreinte</th></tr></thead>
+            <tbody>
+            <tr th:each="i : ${x.issuances}">
+                <td th:text="${@fmt.date(i.issuedAt)}"></td><td class="mono" th:text="${i.seatId}"></td><td th:text="${i.kind}"></td><td th:text="${@fmt.date(i.notAfter)}"></td><td th:text="${i.issuer}"></td>
+                <td th:text="${i.channel}"></td><td class="mono" th:text="${i.kid}"></td><td class="mono" th:text="${#strings.substring(i.fingerprint, 0, 12)}"></td>
+            </tr>
+            <tr th:if="${x.issuances.isEmpty()}"><td colspan="8">Aucune émission.</td></tr>
+            </tbody>
+        </table></div>
+        <h3 th:unless="${x.transfers.isEmpty()}">Transferts</h3>
+        <ul th:unless="${x.transfers.isEmpty()}"><li th:each="t : ${x.transfers}">poste <span class="mono" th:text="${t.seatId}"></span> : <span class="mono" th:text="${t.fromDevice}"></span> → <span class="mono" th:text="${t.toDevice}"></span>
+            · <span th:text="${@fmt.date(t.at)}"></span> · signé par la clé <b class="mono" th:text="${t.signedBy}"></b> <span class="badge bad" th:unless="${t.accepted}">refusé</span></li></ul>
+    </section>
+    <section class="card" th:if="${canAudit}">
+        <h2>Historique complet</h2>
+        <div class="scroll"><table class="list">
+            <thead><tr><th>Date</th><th>Qui</th><th>Action</th><th>Motif</th><th>Détails</th></tr></thead>
+            <tbody>
+            <tr th:each="h : ${x.history}"><td th:text="${@fmt.date(h.at)}"></td><td th:text="|${h.actor} (${h.role})|"></td><td th:text="${h.action}"></td><td th:text="${h.reason}"></td><td class="wrap small" th:text="${h.details}"></td></tr>
+            <tr th:if="${x.history.isEmpty()}"><td colspan="5">Rien.</td></tr>
+            </tbody>
+        </table></div>
+    </section>
+</main>
+</body>
+</html>

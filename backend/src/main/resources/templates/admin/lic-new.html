@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/layout :: head('Nouvelle licence')}"></head>
+<body>
+<header th:replace="~{admin/layout :: nav}"></header>
+<main>
+    <div th:replace="~{admin/layout :: flash}"></div>
+    <h1>Nouvelle licence</h1>
+    <nav th:replace="~{admin/lic-nav :: sub}"></nav>
+    <section class="card">
+        <form th:action="@{/admin/licenses}" method="post" class="stack">
+            <div class="row">
+                <label>Client
+                    <select name="clientId" required><option value="">— choisir —</option>
+                        <option th:each="c : ${clientList}" th:value="${c.id}" th:text="${c.name}"></option></select></label>
+                <label>Type <select name="kind"><option value="PAID">Payante</option><option value="TRIAL">Essai (délivré sous votre contrôle)</option></select></label>
+                <label>Postes <input type="number" name="seats" min="1" max="1000" value="1" required></label>
+            </div>
+            <div class="row">
+                <label>Début <input type="date" name="startAt"></label>
+                <label>Fin (vide = sans fin) <input type="date" name="endAt"></label>
+                <label>Grâce (jours) <input type="number" name="graceDays" min="0" max="365" th:value="${defaults.defaultGraceDays}"></label>
+                <label>Transferts par an <input type="number" name="transferCap" min="0" max="100" th:value="${defaults.defaultTransferCap}"></label>
+            </div>
+            <label>Identifiant (laisser vide pour en générer un) <input type="text" name="licenseId" maxlength="40" pattern="[A-Za-z0-9][A-Za-z0-9-]{5,38}[A-Za-z0-9]"></label>
+            <fieldset>
+                <legend>Bouquets inclus</legend>
+                <label class="check" th:each="p : ${products}" th:if="${p.active}"><input type="checkbox" name="productIds" th:value="${p.productId}">
+                    <span th:text="|${p.title} (${p.kind == 'ABONNEMENT' ? 'abonnement' : 'à la carte'})|"></span></label>
+                <p th:if="${products.isEmpty()}">Aucun bouquet : créez-en dans « Bouquets ».</p>
+            </fieldset>
+            <button type="submit">Créer la licence</button>
+        </form>
+    </section>
+</main>
+</body>
+</html>

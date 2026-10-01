@@ -44,6 +44,13 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder(12);
     }
 
+    /** The single AuthenticationProvider: password + optional TOTP (see AdminAuthenticationProvider). */
+    @Bean
+    org.springframework.security.authentication.AuthenticationProvider adminAuthenticationProvider(
+            castbridge.server.admin.AdminAccounts accounts, PasswordEncoder encoder, castbridge.server.licenses.LicenseAccounts licenseAccounts) {
+        return new castbridge.server.admin.AdminAuthenticationProvider(accounts, encoder, licenseAccounts);
+    }
+
     @Bean
     @Order(1)
     SecurityFilterChain apiChain(HttpSecurity http, AdminToken token, ObjectMapper json) throws Exception {
@@ -87,6 +94,7 @@ public class SecurityConfig {
                 .formLogin(f -> f
                         .loginPage("/admin/login")
                         .loginProcessingUrl("/admin/login")
+                        .authenticationDetailsSource(castbridge.server.admin.AdminAuthenticationProvider.TotpDetails::new)
                         .defaultSuccessUrl("/admin", true)
                         .failureUrl("/admin/login?erreur"))
                 .logout(l -> l.logoutUrl("/admin/logout").logoutSuccessUrl("/admin/login?deconnexion").deleteCookies("CBSESSION"))

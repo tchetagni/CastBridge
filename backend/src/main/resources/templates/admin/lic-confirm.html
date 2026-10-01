@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/layout :: head('Confirmer')}"></head>
+<body>
+<header th:replace="~{admin/layout :: nav}"></header>
+<main>
+    <div th:replace="~{admin/layout :: flash}"></div>
+    <h1>Confirmer l'action</h1>
+    <nav th:replace="~{admin/lic-nav :: sub}"></nav>
+    <section class="card">
+        <p>Licence <b class="mono" th:text="${license.licenseId}"></b> — <span th:text="${license.clientName}"></span></p>
+        <p th:class="${action == 'revoke' or action == 'release'} ? 'danger'" th:text="${text}"></p>
+        <form th:action="@{/admin/licenses/{id}/do/{a}(id=${license.licenseId},a=${action})}" method="post" class="stack">
+            <input type="hidden" name="seat" th:value="${seat}">
+            <label>Motif (obligatoire, 3 caractères au moins)
+                <textarea name="reason" required minlength="3" maxlength="500" rows="3"></textarea></label>
+            <label class="check"><input type="checkbox" name="confirm" required> Je confirme cette action</label>
+            <div class="row">
+                <button type="submit">Confirmer</button>
+                <a class="button ghost" th:href="@{/admin/licenses/{id}(id=${license.licenseId})}">Annuler</a>
+            </div>
+        </form>
+    </section>
+</main>
+</body>
+</html>
