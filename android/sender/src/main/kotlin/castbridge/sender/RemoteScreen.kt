@@ -49,6 +49,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import castbridge.core.remote.RemotePlan
 import castbridge.core.remote.KeyAction
 import castbridge.core.remote.RemoteGlobal
 import castbridge.core.remote.RemoteKey
@@ -104,6 +105,9 @@ private fun Modifier.remoteKey(k: RemoteKey, pressed: MutableState<Boolean>? = n
 
 @Composable
 private fun RemoteKeyButton(k: RemoteKey, icon: ImageVector?, modifier: Modifier = Modifier, text: String? = null, size: Int = 56, accent: Boolean = false) {
+    // Over Bluetooth, a key no route can carry right now is hidden (the space stays, so the layout does not jump).
+    val avail = availableKeys.value
+    if (avail != null && k !in avail) { Spacer(modifier.size(size.dp)); return }
     val pressed = remember { mutableStateOf(false) }
     val cs = MaterialTheme.colorScheme
     Box(
@@ -231,6 +235,9 @@ private fun DigitPad() {
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
+/** Keys worth showing right now; null = all (Wi-Fi: the TV explains refusals itself). */
+private val availableKeys = mutableStateOf<Set<RemoteKey>?>(null)
+
 @Composable
 fun RemoteScreen(onClose: () -> Unit) {
     val ctx = LocalContext.current
@@ -277,6 +284,11 @@ fun RemoteScreen(onClose: () -> Unit) {
     LaunchedEffect(tvName, tvs) { if (tvName == null && tvs.size == 1) { tvName = tvs[0].name; prefs.tvName = tvName } }
     LaunchedEffect(Unit) { if (tvName == null && tvs.isEmpty()) { delay(4000); if (tvName == null) chooser = true } }
 
+    var routes by rememberSaveable { mutableStateOf(false) }
+    val viaBluetooth = status.via == "Bluetooth" || prefs.btOnly
+    val keysNow = st?.let { t -> if (viaBluetooth) RemotePlan.availableKeys(t.castbridgeFront, t.systemConnected && wholeTv, t.vendorAvailable && wholeTv) else null }
+    SideEffect { availableKeys.value = keysNow }
+    if (routes) { BtRoutesScreen { routes = false }; return }
     val cs = MaterialTheme.colorScheme
     Scaffold(
         containerColor = cs.background,
@@ -302,6 +314,7 @@ fun RemoteScreen(onClose: () -> Unit) {
                         }, trailingIcon = { Checkbox(background, null) })
                         DropdownMenuItem(text = { Text("Vibrer à chaque touche") }, onClick = { haptics = !haptics; prefs.haptics = haptics },
                             trailingIcon = { Checkbox(haptics, null) })
+                        DropdownMenuItem(text = { Text("Ma TV · voies Bluetooth…") }, onClick = { menu = false; routes = true })
                         DropdownMenuItem(text = { Text("Aide « toute la TV » sur la TV") }, onClick = { menu = false; RemoteController.setup() })
                     }
                 },
@@ -326,6 +339,7 @@ fun RemoteScreen(onClose: () -> Unit) {
                     Text(m, Modifier.padding(10.dp), style = MaterialTheme.typography.bodySmall, color = cs.onSurface)
                 }
             }
+            RemoteController.statusLine(status, prefs.btOnly)?.let { Text(it, style = MaterialTheme.typography.labelMedium, color = cs.onSurfaceVariant) }
             WholeTvRow(wholeTv, st) { on -> wholeTv = on; prefs.wholeTv = on; RemoteController.setWholeTv(on) }
 
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
@@ -431,13 +445,14 @@ private fun WholeTvRow(on: Boolean, st: RemoteTvState?, onChange: (Boolean) -> U
                     Text("Piloter toute la TV", style = MaterialTheme.typography.titleSmall)
                     Text(when {
                         st == null -> "État inconnu (TV non connectée)"
-                        !st.systemAvailable && !st.systemConnected -> "Indisponible sur cette TV. " + (st.systemReason ?: "") + " La télécommande pilote CastBridge, le volume et le muet."
+                        !st.systemAvailable && !st.systemConnected && !st.vendorAvailable -> "Indisponible sur cette TV. " + (st.systemReason ?: "") + " La télécommande pilote CastBridge, le volume et le muet."
+                        st.vendorAvailable -> "Toute la TV (service du fabricant) : prêt. Flèches, OK, Retour, Accueil et volume dans les autres applications, même sans Wi-Fi."
                         st.systemConnected -> "Actif sur la TV (accessibilité) : Retour, Accueil, flèches et OK aussi hors de CastBridge"
                         st.systemEnabled -> "Activé sur la TV, démarrage…"
                         else -> "Inactif : la télécommande pilote CastBridge seulement. À activer une fois sur la TV."
                     }, style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
                 }
-                Switch(on && (st?.systemAvailable != false || st.systemConnected), onChange, enabled = st == null || st.systemAvailable || st.systemConnected)
+                Switch(on && (st?.systemAvailable != false || st.systemConnected || st.vendorAvailable), onChange, enabled = st == null || st.systemAvailable || st.systemConnected || st.vendorAvailable)
             }
             if (st != null && st.systemAvailable && !st.systemConnected && on)
                 TextButton(onClick = { RemoteController.setup() }) { Text("Afficher la marche à suivre sur la TV") }

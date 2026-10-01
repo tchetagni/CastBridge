@@ -12,7 +12,7 @@ enum class Route { APP, ACCESSIBILITY, VENDOR, AUDIO, MEDIA_SESSION }
 object KeyRouting {
     /**
      * The ordered routes for [k] (docs/REMOTE.md). [vendorReady]: the loopback relay is connected. Rules:
-     *  - volume: AudioManager, and the relay only if the TV refuses (fixed volume);
+     *  - volume: AudioManager, and the relay only if the TV refuses (fixed volume) — or first when the phone asks for the whole TV;
      *  - HOME stays CastBridge's home, except when the phone asks for the whole TV ([RemoteTarget.SYSTEM]) and the relay is ready;
      *  - a CastBridge screen in front gets the key first; the relay only when the screen did not consume it and the phone
      *    did not restrict the key to CastBridge ([RemoteTarget.APP]);
@@ -21,7 +21,7 @@ object KeyRouting {
      */
     fun plan(k: RemoteKey, target: RemoteTarget, castbridgeFront: Boolean, accessibility: Boolean, vendorReady: Boolean): List<Route> {
         val vendor = if (vendorReady && target != RemoteTarget.APP) listOf(Route.VENDOR) else emptyList()
-        if (k.kind == RemoteKey.Kind.VOLUME) return listOf(Route.AUDIO) + vendor
+        if (k.kind == RemoteKey.Kind.VOLUME) return if (target == RemoteTarget.SYSTEM && vendorReady) listOf(Route.VENDOR, Route.AUDIO) else listOf(Route.AUDIO) + vendor
         if (k == RemoteKey.HOME) return if (target == RemoteTarget.SYSTEM && vendorReady) listOf(Route.VENDOR) else listOf(Route.APP)
         if (castbridgeFront) return if (target == RemoteTarget.SYSTEM && vendorReady) listOf(Route.VENDOR) else listOf(Route.APP) + vendor
         if (target == RemoteTarget.APP) return emptyList()

@@ -217,6 +217,7 @@ class KeyRoutingTest {
         assertEquals(listOf(Route.AUDIO, Route.VENDOR), plan(RemoteKey.VOLUME_UP, front = true, v = true))
         assertEquals(listOf(Route.AUDIO), plan(RemoteKey.VOLUME_UP, front = true, v = false))
         assertEquals(listOf(Route.AUDIO), plan(RemoteKey.VOLUME_UP, RemoteTarget.APP, front = false, v = true))
+        assertEquals(listOf(Route.VENDOR, Route.AUDIO), plan(RemoteKey.VOLUME_UP, RemoteTarget.SYSTEM, front = true, v = true))
     }
     @Test fun frontScreenFirstThenVendorOnlyIfNotConsumed() {
         assertEquals(listOf(Route.APP, Route.VENDOR), plan(RemoteKey.DPAD_UP, front = true, v = true))
