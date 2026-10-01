@@ -202,9 +202,8 @@ force brute) ; une vérification qui échoue est un bogue du générateur, jamai
 **Règle d'honnêteté sur le statut `review`** : une question **calculée** a sa réponse prouvée par le calcul mais sa
 formulation n'a pas été lue par un enseignant ; une question **factuelle** repose sur des connaissances de l'assistant, à
 confronter à sa fiche source. L'appli applique donc : `approved` → jouable ; `review` + `verif: computed` → jouable
-(`QuizBank.parse(..., computedPlayable = true)`, pour les lots seulement) ; `review` + `fact` / `import` → **exclue des parties**
-tant qu'un humain ne l'a pas approuvée. Pour tout exclure jusqu'à relecture complète, mettre `computedPlayable = false`
-dans `QuizPackFormat.read`.
+(`QuizBank.parse(..., computedPlayable = true)`, pour les packs et lots seulement ; décision centralisée dans `QuizPlay.isPlayable`, § 6 quinquies) ; `review` + `fact` / `import` → **exclue des parties**
+tant qu'un humain ne l'a pas approuvée. Pour tout exclure jusqu'à relecture complète (ou pour le canal stable), changer `QuizPlay.isPlayable`.
 
 **Ajouter du contenu** :
 1. un modèle calculé : une fonction `@gen("tle", "tle-mon-modele", cap=200, cat="Analyse")` dans `qb/gen/…` qui renvoie un
@@ -265,6 +264,96 @@ fraîches** (`QUIZ_PACK_THRESHOLD_GAMES`) sur un parcours joué.
   `.quiz.zip` copiés de `content/quiz/dist` ; le serveur n'annonce que les lots dont le fichier correspond à la taille et à
   l'empreinte, et signe le catalogue à la demande. `GET /api/v1/quiz/packs/{fichier}` accepte les plages (206/416) ;
   `GET /api/v1/admin/quiz/coverage` et la page `/admin/quiz` (« Parties sans répétition ») donnent la couverture.
+
+## 6 quinquies. Lots : les banques rangées par thème (mode hors ligne différé)
+
+**Règles du propriétaire.** La TV n'embarque qu'environ **10 Mo au maximum** de données Apprendre + Quiz. Le téléphone gère ces données (plus de place,
+Internet plus fiable, synchronisation avec notre serveur) et en charge jusqu'à **100 Mo** après la première synchronisation. Les mises à jour se font par
+**lots** homogènes (tout le contenu d'une classe ou d'un niveau). **C'est le mode hors ligne différé, et il est prioritaire** : la plupart du temps la TV n'a
+**pas d'Internet**. Conséquence pour le Quiz : **tous les modes de jeu (solo, famille, duel, salle par téléphone / Wi-Fi local / Bluetooth) marchent
+entièrement avec les lots que la TV détient, sans aucun appel Internet et sans roue d'attente réseau** ; le téléphone télécharge dès qu'il a Internet, le
+cadre commun des lots (`LotStore`, `LotSync`, `LotPlanner`, `TvLotStore`, `LotPush`, `DeliveryQueue`, écrit par une autre branche) livre ensuite à la TV.
+Le Quiz ne fournit que son adaptateur, l'organisation de ses banques, ses écrans et ses tests (contrat : `core/.../lots/LotApi.kt`).
+
+### Table des lots (build `v1`)
+
+Un lot = un thème = **un seul pack signé** `quiz-<thème>-p1-v<version>.quiz.zip` (le format des packs de § 6 quater : `manifest.json` + `questions.json`, plus
+`index.json`). Le parcours « Culture générale » est coupé par région pour livrer d'abord le Cameroun (70 % du tirage). Les noms de thèmes suivent une règle
+(`QuizLotScopes.scopeFor`) : niveau scolaire en minuscules (`3e`, `class-1`, `lower-sixth`), supérieur « `<filière>-<niveau>` » (`eco-l1`, `maths-l1`).
+
+| Thème (`scope`) | Titre | Parcours (région) | Questions | Octets | Version |
+|---|---|---|---:|---:|---|
+| `culture-cm` | Culture générale · Cameroun | general (CM) | 1639 | 111101 | v1 |
+| `culture-afrique` | Culture générale · Afrique | general (AF) | 591 | 36967 | v1 |
+| `culture-monde` | Culture générale · Monde | general (WORLD) | 975 | 60014 | v1 |
+| `cm2` | Primaire · CM2 | cm2 | 6523 | 432226 | v1 |
+| `3e` | Secondaire · 3e | 3e | 5361 | 356782 | v1 |
+| `tle` | Secondaire · Terminale | tle | 5701 | 365406 | v1 |
+| `droit-l1` | Supérieur · L1 Droit | l1-droit | 106 | 12685 | v1 |
+| `eco-l1` | Supérieur · L1 Économie | l1-eco | 4889 | 328665 | v1 |
+| `maths-l1` | Supérieur · L1 Mathématiques | l1-maths | 5236 | 313365 | v1 |
+| **Total** | | | **31021** | **2017211** (2.02 Mo) | |
+
+Thèmes prévus, même règle, pas encore de questions : `6e`, `5e`, `4e`, `2nde`, `1re`, `bepc`, `probatoire`, `bac`, `gce-ol`, `gce-al`, `culture-*` anglophone,
+`phys-l1`, etc. Ajouter un thème = ajouter ses questions avec le bon `track` / `level` / `field` dans le pipeline et l'inscrire dans `qb/lots.py` (`SCOPES`) et
+`QuizLotScopes.specs` (un test vérifie que les deux tables sont d'accord). Aucun lot ne dépasse 0,45 Mo : **les 9 lots tiennent ensemble à 2.02 Mo, sous les 10 Mo de la TV**
+(la TV n'en reçoit qu'une partie, dans l'ordre de priorité ci-dessous).
+
+### Index et versions
+`index.json` : `{"v":1,"scope","version","count","contentHash","q":{<id de question>:<empreinte de 8 caractères>}}`. L'empreinte d'une question = SHA-256 de ses champs
+(id, parcours, niveau, filière, région, catégorie, difficulté, texte, choix, bonne réponse, explication, source, statut, vérification, langue ; `qb/lots.py` et
+`QuizLotIndex.questionHash` calculent la même chose, vérifié par un test sur les vrais lots). **La version d'un lot ne change que si son contenu change**
+(`content/quiz/lots/lots-state.json` garde la dernière empreinte du contenu ; un `build` identique donne les mêmes octets). Une question modifiée **garde son `id`** : sa place
+dans l'historique « 300 parties » est conservée, et `QuizLotIndex.diff` dit ce qui a été ajouté / modifié / retiré.
+
+### Fabriquer et publier
+```sh
+python3 tools/quiz-bank/quizbank.py lots      # (Python ≥ 3.12) écrit content/quiz/lots : les lots, catalog-lots.json, lots-state.json ; code 2 si un lot dépasse 3 Mo
+```
+Il affiche la taille de chaque lot et le total. `catalog-lots.json` = une entrée par lot au format `LotMeta` (`feature = "quiz"`, `scope`, `version`, `bytes`, `sha256`,
+`title`, `minAppVersion`) plus `file`, `questions`, `contentHash` et les champs de pack (`id` = thème, `course`, `part = 1`, `parts = 1`) : prêt pour le point de
+publication des lots du serveur. **Signature** : le serveur signe (Ed25519, même clé que les mises à jour) la charge `QuizPackInfo.canonicalPayload()` de l'entrée
+(`id` = thème), exactement comme pour les packs ; le fichier du lot ne contient pas sa signature.
+
+### Côté appareil : `QuizLotConsumer` (`core/.../quiz/QuizLots.kt`)
+Implémente `LotConsumer` (`feature = "quiz"`). `install` refuse (rien n'est modifié) : mauvais type ou nom de thème, app trop ancienne (`minAppVersion`), taille ou SHA-256
+différents, **signature absente ou invalide**, structure du pack, index ou questions incohérents, question hors du thème, version plus ancienne que celle installée, même
+version avec un autre contenu, budget (`maxBytes`) dépassé : jamais de lot retiré dans le dos de l'utilisateur. **Installation atomique** : fichier mis en place par
+renommages, l'ancienne version est gardée (`prev`) et **revient seule** si une étape échoue ; au redémarrage, `recover()` termine ou annule une installation
+interrompue (coupure de courant). `rollback(id)` revient à la version précédente. `bank()` = toutes les questions des lots installés (sans doublon d'`id`) ;
+`PackedQuestionSource(..., lots = consumer)` les ajoute à la banque de jeu (un lot remplace une question de même `id`), sans redémarrage. Les packs d'avant (relais
+par le téléphone, § 6 quater) **continuent de fonctionner** tels quels jusqu'à ce que le cadre commun livre les lots (couche de compatibilité du côté de l'autre branche).
+
+### Priorité de remplissage : `QuizLotScopes.quizPriority(track, level, field, played)`
+Fonction pure pour le `LotPlanner` : 1) les lots du parcours du profil, 2) la culture générale (Cameroun, Afrique, Monde), 3) les parcours déjà joués ici (`played`, plus
+récents d'abord), 4) les niveaux voisins du même parcours (les plus proches d'abord), 5) tout le reste. Sans profil : culture générale puis le reste. `QuizHub.lotPriority`
+(CastBridge-TV) la nourrit avec l'historique de la TV.
+
+### Budget de la TV
+Le Quiz embarque dans l'APK un **jeu de départ** minuscule : les banques d'origine (`questions.json` + `questions-school.json`, **≈ 138 Ko**, ~320 questions : culture générale
+et CM2 / 3e / Tle / L1 droit / économie / mathématiques), contre un maximum de **2 Mo**. Avec le jeu de départ d'Apprendre (au plus 3 Mo, autre branche), le départ combiné reste
+**sous 5 Mo** et il reste **au moins 5 Mo** pour les lots poussés. Un test (`QuizLotsTest.theStarterIsWithinBudgetAndAFullGameWorksOnItAlone`) vérifie la taille et joue **des parties
+complètes (Millionnaire sur les 7 parcours, Duel avec un téléphone) sur le seul jeu de départ, sans aucun accès réseau** (un `ProxySelector` espion le prouve).
+
+### « Mes thèmes » (onglet Quiz de CastBridge, téléphone)
+Une carte par thème : version, taille, **fraîcheur** (« mis à jour il y a 3 jours »), mise à jour disponible, **présence sur la TV** (« Sur la TV », « mise à jour à envoyer »,
+« sera envoyé quand la TV est à portée »), et pour un thème non téléchargé la taille à télécharger avec un bouton (« Télécharger », fourni par le cadre commun via
+`QuizLotHooks.download`) et le lien vers l'écran « Données » (`QuizLotHooks.openData`). Tout se lit en local (`QuizThemes.build` + dernier catalogue gardé par
+`QuizThemes.CatalogCache`) : l'écran est complet sans Internet. La TV signale ses lots dans `GET /api/quiz/packs/status` (clé `lots`).
+
+### Fusion des données quand les appareils se rencontrent (`QuizMerge`)
+Historique, scores et jetons restent **locaux à chaque appareil** et se fusionnent à la rencontre (TV ↔ téléphone) avec des règles commutatives et idempotentes (testées) :
+- **meilleurs scores** : union des deux tableaux (une entrée identique compte une fois), puis le meilleur (`HighScores` garde 10 par tableau, un tableau = une façon de jouer et un parcours) : **meilleur score par profil et par jeu** ;
+- **historique des questions** (300 parties) : par parcours, une question compte comme posée au plus récent de ses deux moments (mesurés en « parties écoulées » sur chaque appareil), compteur de parties = le plus grand ; dans le doute elle reste « récente » ;
+- **jetons virtuels** : dernière écriture par joueur (horodatée) ; égalité = le plus grand solde (déterministe).
+
+### Politique de jeu : un seul endroit, `QuizPlay.isPlayable(question, channel)`
+Le propriétaire validera la qualité **3 mois après la distribution aux bêta-testeurs** : les questions marquées `review` doivent être **jouables dans le canal bêta**, avec la
+mention visible « bêta : non validé » et une action « Signaler une erreur », et rester **bloquées dans un futur canal stable** tant qu'elles ne sont pas validées. L'outil de
+validation (autre agent) ne change que `QuizPlay.isPlayable` ; le comportement actuel est le défaut, inchangé : jouable si pas `review`, **ou** si la réponse est calculée et testée
+(`Question.computedOk`, posé pour les packs et lots seulement : ancien `computedPlayable`). `Question.review` garde l'indicateur brut. **Lacune connue** : les questions factuelles
+(`verif: fact`) sont `review` : le thème `droit-l1` (106 questions) n'a **aucune** question jouable et la culture générale n'en a que 1 260 sur 3 205 (Cameroun 490 / 1 639, Afrique 200 / 591, Monde 570 / 975) : tant
+qu'un humain ne les a pas approuvées ou que la politique bêta n'est pas en place, ces thèmes ne s'ajoutent presque pas au jeu de départ (qui, lui, est entièrement jouable).
 
 ## 7. Format d'échange avec le futur serveur de questions
 

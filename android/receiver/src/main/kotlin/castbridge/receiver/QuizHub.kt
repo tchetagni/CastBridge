@@ -4,9 +4,13 @@ import android.app.Activity
 import android.content.Intent
 import android.content.Context
 import castbridge.core.connect.QuizPackHook
+import castbridge.core.lots.LotBudget
+import castbridge.core.lots.LotMeta
 import castbridge.core.quiz.CachedQuestionSource
 import castbridge.core.quiz.PackedQuestionSource
 import castbridge.core.quiz.QuestionFilter
+import castbridge.core.quiz.QuizLotConsumer
+import castbridge.core.quiz.QuizLotScopes
 import castbridge.core.quiz.QuizPackApi
 import castbridge.core.quiz.QuizPackManager
 import castbridge.core.quiz.QuizPackStore
@@ -75,9 +79,23 @@ object QuizHub {
     @Synchronized fun questionSource(ctx: Context): PackedQuestionSource {
         val store = packStore(ctx)
         packed?.takeIf { packedFor === store }?.let { return it }
-        return PackedQuestionSource(cachedSource(ctx), store, ::driveDirs).also { packed = it; packedFor = store }
+        return PackedQuestionSource(cachedSource(ctx), store, ::driveDirs, lotConsumer(ctx)).also { packed = it; packedFor = store }
     }
     private var packedFor: QuizPackStore? = null
+
+    // ------------------------------------------------------------------ lots (docs/QUIZ.md, « Lots »): offline first, delivered later by the phone
+    @Volatile private var lots: QuizLotConsumer? = null
+    /** Signature (Ed25519, base64) of a lot's catalog entry, supplied by the lots framework with the lot it delivers; null = unsigned = refused. */
+    @Volatile var lotSignatureOf: (LotMeta) -> String? = { null }
+
+    /** The quiz lots held by this TV (files/lots/quiz). Installing one refreshes the question bank by itself: no restart, no network. */
+    @Synchronized fun lotConsumer(ctx: Context): QuizLotConsumer = lots ?: QuizLotConsumer(
+        File(ctx.applicationContext.filesDir, "lots/quiz"), publicKeys = castbridge.core.update.UpdateKeys.PUBLIC_KEYS + extraKeys,
+        signatureOf = { lotSignatureOf(it) }, maxBytes = LotBudget.TV_MAX_BYTES, onChanged = { packed?.refresh() },
+    ).also { lots = it }
+
+    /** The order in which the framework's planner should fill this TV with quiz lots: the courses played here first, then general knowledge, then the rest. */
+    fun lotPriority(ctx: Context): List<String> = QuizLotScopes.quizPriority(played = historyBook(ctx).host.courses().toList())
 
     @Synchronized fun packManager(ctx: Context): QuizPackManager {
         val store = packStore(ctx)
@@ -89,7 +107,7 @@ object QuizHub {
         (listOf(QuestionFilter.GENERAL) + historyBook(ctx).host.courses().mapNotNull { filterOfCourse(it) }).distinctBy { it.courseKey }
 
     /** PIN routes the phone uses to push packs (docs/QUIZ.md § relais par le téléphone). */
-    fun packApi(ctx: Context): QuizPackApi = QuizPackApi(packStore(ctx), packManager(ctx)) { watched(ctx) }
+    fun packApi(ctx: Context): QuizPackApi = QuizPackApi(packStore(ctx), packManager(ctx)) { watched(ctx) }.also { it.lots = lotConsumer(ctx) }
 
     /** Called by the server link: refills the courses that are running low on fresh games, from the server (direct or through the phone). */
     fun packHook(ctx: Context, keys: List<String>): QuizPackHook {
