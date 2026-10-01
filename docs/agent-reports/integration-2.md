@@ -5,3 +5,4 @@ ORDRES-TRAITES: 3
 - 2026-10-01 14:23 | usb-data fusionné (HANDOFF : deux versions gardées) ; :core:test 1302/0 échec ; registre des lots à régénérer avec LC_ALL=C.UTF-8 | commit 320845b
 - 2026-10-01 14:27 | net-architect fusionné (champs additifs LessonModel/QuizBank : état + graphe gardés ensemble) ; :core:test 1317/0 | commit 1aec19e
 - 2026-10-01 14:49 | quiz culture/lycée/supérieur fusionnés, dist reconstruit (217 494 questions, 158 ids retirés listés dans content/quiz/retired-ids.json), 58 lots de plus ; :core:test 1317/0 | commit 68b4cb2
+- 2026-10-01 14:53 | smart-remote (4 commits) fusionné ; conflits RemoteController/RemoteScreen résolus à la main (les deux voies gardées) ; :sender NON compilé ; :core:test 1378/0 | commit 0de0293
