@@ -1,0 +1,37 @@
+name: activation-desktop
+
+# Installateurs natifs de l'outil d'activation de bureau (docs/ACTIVATION-TOOLS.md § 6).
+# Déclenchement MANUEL seulement ; aucun secret ; les installateurs ne sont pas signés (avertissement du système à l'installation).
+on:
+  workflow_dispatch:
+
+jobs:
+  package:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { os: macos-latest, type: dmg }
+          - { os: windows-latest, type: msi }
+          - { os: ubuntu-latest, type: deb }
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: '17' }
+      - uses: gradle/actions/setup-gradle@v4
+        with: { gradle-version: '8.14.3' }
+      - name: Tests de l'outil (vecteurs communs)
+        working-directory: android
+        run: gradle :activation-desktop:test :activation-desktop:fatJar
+      - name: Installateur natif (jpackage)
+        shell: bash
+        run: |
+          mkdir -p dist
+          jpackage --type "${{ matrix.type }}" --name "CastBridge Activations" --app-version 1.0.0 \
+            --input tools/activation-desktop/build/libs --main-jar castbridge-activation-desktop.jar \
+            --main-class castbridge.desktop.MainKt --dest dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: castbridge-activations-${{ matrix.type }}
+          path: dist/*

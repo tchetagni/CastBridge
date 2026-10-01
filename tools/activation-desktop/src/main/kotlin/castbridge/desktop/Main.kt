@@ -6,5 +6,5 @@ import kotlin.system.exitProcess
 fun main(args: Array<String>) {
     if (args.isEmpty() && !java.awt.GraphicsEnvironment.isHeadless()) { Gui.launch(null); return }
     val code = try { Cli(Env()).run(args.toList()) } catch (e: Exception) { System.err.println("Erreur : ${e.message}"); 1 }
-    exitProcess(code)
+    if (code != Cli.GUI_RUNNING) exitProcess(code)
 }

@@ -4,6 +4,9 @@ import castbridge.core.lots.LotId
 import castbridge.core.lots.Right
 import castbridge.core.net.JsonLite
 import castbridge.core.owner.Activation
+import castbridge.core.owner.DeviceRequest
+import castbridge.core.owner.IssueSpec
+import castbridge.core.owner.RightsSyntax
 import castbridge.core.owner.ActivationKind
 import castbridge.core.owner.ActivationResult
 import castbridge.core.owner.ActivationVerifier
@@ -22,7 +25,7 @@ import java.util.TimeZone
 
 /** Environment of one CLI run: injectable for the tests (streams, home folder, clock, passphrase source). */
 class Env(
-    val out: PrintStream = System.out, val err: PrintStream = System.err, val stdin: InputStream = System.`in`,
+    val out: PrintStream = PrintStream(System.out, true, "UTF-8"), val err: PrintStream = PrintStream(System.err, true, "UTF-8"), val stdin: InputStream = System.`in`,
     val getenv: (String) -> String? = System::getenv, val console: () -> CharArray? = { System.console()?.readPassword("Code de déverrouillage : ") },
     val clock: () -> Long = System::currentTimeMillis, val kdf: castbridge.core.owner.Kdf = ScryptKdf(),
 )
@@ -86,7 +89,7 @@ class Cli(private val env: Env) {
         "journal" -> journal(a)
         "registre", "registry" -> registry(a)
         "autotest", "selftest" -> selftest(a)
-        "gui", "interface" -> { Gui.launch(home(a)); 0 }
+        "gui", "interface" -> { Gui.launch(home(a)); GUI_RUNNING }
         else -> throw UsageException("Commande inconnue : $cmd")
     }
 
@@ -156,17 +159,9 @@ class Cli(private val env: Env) {
         return 0
     }
 
-    private fun rights(a: Args, now: Long): List<Right> {
-        val list = ArrayList<Right>()
-        for (r in a.all("achat")) { val (p, b) = r.split('=', limit = 2).let { it[0] to (it.getOrNull(1) ?: throw UsageException("--achat produit=bouquet1,bouquet2")) }; list += Right.Purchase(p, b.split(',').sorted(), now) }
-        for (r in a.all("abonnement")) {
-            val f = r.split(':'); val pb = f[0].split('=', limit = 2); if (pb.size != 2 || f.size < 2) throw UsageException("--abonnement produit=bouquets:jours[:tolérance_jours[:auto]]")
-            list += Right.Subscription(pb[0], pb[1].split(',').sorted(), now, now + f[1].toLong() * Desk.DAY_MS, (f.getOrNull(2)?.toLong() ?: 7L) * Desk.DAY_MS, f.getOrNull(3) == "auto")
-        }
-        for (r in a.all("tout-ouvert")) { val f = r.split(':'); if (f.size != 2) throw UsageException("--tout-ouvert produit:jours"); list += Right.OpenAll(f[0], now, now + f[1].toLong() * Desk.DAY_MS) }
-        for (r in a.all("droit")) list += Activation.parseRight(r)
-        return list
-    }
+    private fun rights(a: Args, now: Long): List<Right> =
+        a.all("achat").map { RightsSyntax.purchase(it, now) } + a.all("abonnement").map { RightsSyntax.subscription(it, now) } +
+            a.all("tout-ouvert").map { RightsSyntax.openAll(it, now) } + a.all("droit").map { Activation.parseRight(it) }
 
     private fun issue(a: Args): Int {
         val device = DeviceRequest.parse(readSource(a.need("appareil")))
@@ -248,6 +243,8 @@ class Cli(private val env: Env) {
     }
 
     companion object {
+        /** Returned by « gui »: the window keeps the process alive (the caller must not exit). */
+        const val GUI_RUNNING = -1
         val HELP = """CastBridge — outil d'activation de bureau (Mac, Windows, Linux ; Java 17+)
 
 Commandes (français ; alias anglais : keygen key trust device license issue compact command verify registry selftest) :
