@@ -69,6 +69,7 @@ Les noms de fichiers sont sans `/`, `\`, ni `.part` final, 200 caractères max. 
 | `GET /api/background` | service d'arrière-plan : démarrage avec la TV, autorisations utiles à la lecture à distance | `{"autostart","overlay","fullScreenIntent","notifications","screenVisible","sdk"}` |
 | `POST /api/autostart?enabled=1\|0` | « Démarrer avec la TV » | comme `background` |
 | `POST /api/overlay-permission` | ouvre sur la TV le réglage « Afficher par-dessus les autres apps » (seulement si l'écran CastBridge est affiché) | `{"opened","message"}` |
+| `GET /api/net` | **Internet de la TV** (même état que le badge en haut à droite de l'écran) : par quel chemin la TV atteint réellement Internet, d'après le test 204 (jamais « un lien est actif ») | `{"state":"checking\|wifi\|ethernet\|phone\|none","label","working","link":"wifi\|ethernet\|other\|none","direct":{"ok","ms"},"gateway":{"connected","ok","ms","alsoAvailable"},"checkedAt"}` |
 | `GET /api/usb` | état de l'import USB et volumes détectés | `{"running","message","volumes":[chemins]}` |
 | `POST /api/usb/import` | copie les vidéos des clés détectées (dossier de l'app sur la clé) | comme `usb` |
 
@@ -210,6 +211,17 @@ la position atteignable en avance rapide est bornée à ce qui a été reçu.
 Codes : `400` paramètre invalide, `401` PIN faux ou IP verrouillée, `404`, `405` (utiliser POST), `409` mauvais
 offset (le corps donne `length`), `413` fichier trop gros pour le volume, `503` volume retiré/indisponible, `501` non supporté sur cet appareil, `507` espace insuffisant (moins de **1 Go** libre
 après l'envoi, voir « Échange de fichiers » ; le corps donne `message`).
+
+### Badge « Internet » de la TV (toujours visible)
+
+En haut à droite de l'écran de CastBridge-TV (sous l'horloge, au-dessus du badge SSH ; aussi sur l'accueil et par-dessus une vidéo), un badge dit **par où** la TV a vraiment Internet :
+« Internet : Wi-Fi », « Internet : Ethernet », « Internet : via le téléphone » (passerelle Bluetooth, voir ci-dessous) ou, en rouge, « Pas d'Internet ». Au démarrage : « vérification… ».
+- Le badge se fonde sur le test 204 existant (`connectivitycheck.gstatic.com`), pas sur l'état du lien : un Wi-Fi « connecté » sans Internet n'est jamais affiché comme connecté.
+- Règle : réseau de la TV d'abord s'il répond, sinon passerelle du téléphone si elle répond, sinon « Pas d'Internet ». Quand les deux répondent, le badge montre le réseau de la TV ; la passerelle disponible reste visible dans « Internet » (réglages) et dans `/api/net` (`gateway.alsoAvailable`).
+- Anti-clignotement (Wi-Fi instable) : 1 succès = en ligne tout de suite, 2 échecs de suite = hors ligne ; un changement de chemin attend 8 s d'affichage minimum (sauf la sortie de « Pas d'Internet »).
+- Cadence : 60 s tant qu'Internet marche ; 10 s, puis 15 s, puis 30 s (plafond) tant qu'il n'y en a pas ; nouveau test aussitôt (1,5 s) après une perte/retour de réseau Android ou la connexion/déconnexion du téléphone-passerelle. Aucune télémétrie nouvelle : l'évènement `connectivity_check` est inchangé.
+- Logique pure : `core/.../net/NetState.kt` (testée par `NetStateTest`).
+- Le badge n'est affiché que dans l'écran principal de CastBridge-TV (accueil, bibliothèque, lecteur, réglages), pas dans les écrans de jeux/quiz/apprendre.
 
 ## 4. Envoyer un fichier, reprise incluse
 

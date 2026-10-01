@@ -40,6 +40,25 @@
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         android:visibility="gone" />
+    <!-- Internet de la TV (toujours visible) : colonne en haut à droite sous l'horloge, puis le badge SSH dessous -->
+    <TextView
+        android:id="@+id/netStateBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="84dp"
+        android:background="@drawable/badge_bg"
+        android:drawablePadding="10dp"
+        android:gravity="center_vertical"
+        android:paddingStart="14dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="18dp"
+        android:paddingBottom="8dp"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:visibility="gone" />
     <TextView
         android:id="@+id/sshBadge"
         android:layout_width="wrap_content"
@@ -47,7 +66,7 @@
         android:layout_gravity="top|end"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="132dp"
         android:background="@drawable/badge_bg"
         android:gravity="center_vertical"
         android:paddingStart="14dp"
