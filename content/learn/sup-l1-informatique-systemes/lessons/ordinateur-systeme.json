@@ -1,0 +1,773 @@
+{
+ "chapter": "sup-l1-informatique-systemes-ordinateur-systeme",
+ "lessons": [
+  {
+   "id": "sup-l1-informatique-systemes-architecture-os",
+   "title": "Architecture d'un ordinateur et système d'exploitation",
+   "minutes": 50,
+   "programRef": "Initiation à l'informatique de première année de Licence — à comparer au programme de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Décrire les composants d'un ordinateur : processeur, mémoire, entrées-sorties, bus.",
+    "Distinguer mémoire vive, stockage et leurs caractéristiques.",
+    "Expliquer le rôle d'un système d'exploitation.",
+    "Comprendre notions de fichier, chemin et processus."
+   ],
+   "exercises": [
+    "sup-l1-informatique-systemes-architecture-os-01",
+    "sup-l1-informatique-systemes-architecture-os-02",
+    "sup-l1-informatique-systemes-architecture-os-03",
+    "sup-l1-informatique-systemes-architecture-os-04",
+    "sup-l1-informatique-systemes-architecture-os-05",
+    "sup-l1-informatique-systemes-architecture-os-06"
+   ],
+   "selfCheck": [
+    "sup-l1-informatique-systemes-architecture-os-q1",
+    "sup-l1-informatique-systemes-architecture-os-q2",
+    "sup-l1-informatique-systemes-architecture-os-q3",
+    "sup-l1-informatique-systemes-architecture-os-q4",
+    "sup-l1-informatique-systemes-architecture-os-q5"
+   ],
+   "reviewNotes": [
+    "Conventions d'unités : on utilise ici 1 Go = 1 000 Mo (préfixes décimaux) ; le cours peut utiliser 1 024. À harmoniser.",
+    "Ordonnancement à tourniquet : simplification pédagogique (temps de commutation ignoré)."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Architecture de base",
+     "md": "Un ordinateur comprend : un **processeur** (CPU), formé d'une **unité de commande** (qui séquence les instructions), d'une **unité arithmétique et logique** (UAL, qui calcule) et de **registres** (petites mémoires internes très rapides) ; une **mémoire** ; des **périphériques d'entrée-sortie** (clavier, écran, disque, réseau). Ces éléments communiquent par des **bus** (fils transportant adresses, données et signaux de commande)."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Cycle d'exécution et fréquence",
+     "md": "Le processeur exécute les instructions d'un programme par un cycle répété : **chercher** l'instruction en mémoire, la **décoder**, l'**exécuter**, puis passer à la suivante. Sa **fréquence** (en GHz : $1\\text{ GHz}=10^{9}$ cycles par seconde) indique le nombre de cycles par seconde ; un **cœur** est une unité d'exécution complète, et un processeur peut en avoir plusieurs."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Types de mémoire",
+     "md": "- **Mémoire vive (RAM)** : mémoire de travail, rapide, **volatile** (son contenu disparaît à l'arrêt).\n- **Mémoire morte / flash** : conserve son contenu sans alimentation.\n- **Stockage de masse** (disque dur HDD, disque SSD, clé USB, carte mémoire) : grande capacité, **non volatile**, plus lent que la RAM.\nPlus la mémoire est rapide, plus elle est coûteuse et de faible capacité : registres, cache, RAM, puis stockage."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Unités de capacité",
+     "md": "L'**octet** (8 bits) est l'unité de base. Multiples décimaux : 1 ko = 1 000 octets ; 1 Mo = 1 000 ko ; 1 Go = 1 000 Mo ; 1 To = 1 000 Go. Les multiples binaires (kio, Mio, Gio) valent des puissances de 1 024 ; les deux conventions coexistent, d'où des écarts apparents. Dans cette fiche, **on utilise les multiples décimaux**."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Système d'exploitation (OS)",
+     "md": "Le **système d'exploitation** est le logiciel de base qui **gère les ressources** (processeur, mémoire, fichiers, périphériques) et offre une **interface** aux utilisateurs et aux applications. Ses rôles : gestion des **processus** (programmes en cours d'exécution), de la **mémoire**, des **fichiers**, des **périphériques**, et de la **sécurité** (comptes, droits d'accès)."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Fichiers et processus",
+     "md": "Les fichiers sont rangés dans une **arborescence** de dossiers. Un **chemin** est absolu s'il part de la racine (ex. /home/amina/notes.txt) ou relatif s'il part du dossier courant (ex. cours/notes.txt). Un **programme** est un fichier exécutable ; un **processus** est un programme **en cours d'exécution**. L'OS donne à tour de rôle le processeur aux processus (**ordonnancement**) ; un processus est dans l'état *prêt*, *en exécution* ou *en attente* (d'une ressource)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 290,
+      "items": [
+       {
+        "t": "rect",
+        "x": 130,
+        "y": 15,
+        "w": 160,
+        "h": 60,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 50.6,
+        "text": "Processeur",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 62,
+        "text": "UC + UAL + registres",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 125,
+        "w": 120,
+        "h": 44,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 70.0,
+        "y": 151.9,
+        "text": "Mémoire (RAM)",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 125,
+        "w": 120,
+        "h": 44,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 151.9,
+        "text": "Stockage",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 125,
+        "w": 120,
+        "h": 44,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 350.0,
+        "y": 151.9,
+        "text": "Entrées-sorties",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 105,
+        "x2": 400,
+        "y2": 105,
+        "color": "ink",
+        "width": 4
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 97,
+        "text": "Bus (adresses, données, commandes)",
+        "size": 12,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 75,
+        "x2": 210,
+        "y2": 105,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 70,
+        "y1": 105,
+        "x2": 70,
+        "y2": 125,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 105,
+        "x2": 210,
+        "y2": 125,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 350,
+        "y1": 105,
+        "x2": 350,
+        "y2": 125,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 200,
+        "text": "Clavier, écran, réseau, imprimante …",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 350,
+        "y1": 169,
+        "x2": 350,
+        "y2": 185,
+        "color": "ink",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 260,
+        "text": "Le processeur dialogue avec tous les composants par le bus.",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Schéma simplifié d'un ordinateur : processeur, mémoire, stockage et entrées-sorties reliés par un bus.",
+     "alt": "Un rectangle Processeur en haut relié à un bus horizontal ; sous le bus, trois rectangles : mémoire RAM, stockage et entrées-sorties."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — fréquence et durée d'un cycle",
+     "statement": "Un processeur fictif tourne à 3 GHz. Combien de cycles par seconde ? Quelle est la durée d'un cycle ?",
+     "steps": [
+      {
+       "md": "$3\\text{ GHz}=3×10^{9}$ cycles par seconde.",
+       "tex": "3×10^{9}"
+      },
+      {
+       "md": "Durée d'un cycle : $\\frac{1}{3×10^{9}}\\text{ s}≈0{,}33\\text{ ns}$ (1 ns $=10^{-9}$ s).",
+       "tex": "\\frac{1}{3×10^{9}}≈0{,}33×10^{-9}"
+      }
+     ],
+     "answer": "**3 milliards de cycles par seconde ; environ 0,33 ns par cycle.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — capacité de stockage",
+     "statement": "Une carte mémoire fictive de 32 Go sert à ranger des vidéos de 1,5 Go chacune (on convient que 1 Go = 1 000 Mo). Combien de vidéos entières ?",
+     "steps": [
+      {
+       "md": "Capacité : $32\\text{ Go}=32\\,000\\text{ Mo}$ ; une vidéo : $1\\,500\\text{ Mo}$."
+      },
+      {
+       "md": "$\\frac{32\\,000}{1\\,500}≈21{,}3$ : on ne garde que les vidéos **entières**."
+      }
+     ],
+     "answer": "**21 vidéos.**"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 130,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 30,
+        "w": 57.142857142857146,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 38.57142857142857,
+        "y": 54,
+        "text": "P1",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 67.14285714285714,
+        "y": 30,
+        "w": 57.142857142857146,
+        "h": 36,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 95.71428571428572,
+        "y": 54,
+        "text": "P2",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 124.28571428571429,
+        "y": 30,
+        "w": 57.142857142857146,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 152.85714285714286,
+        "y": 54,
+        "text": "P3",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 181.42857142857144,
+        "y": 30,
+        "w": 57.142857142857146,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 54,
+        "text": "P1",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 238.57142857142858,
+        "y": 30,
+        "w": 28.571428571428573,
+        "h": 36,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 252.85714285714286,
+        "y": 54,
+        "text": "P2",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 267.14285714285717,
+        "y": 30,
+        "w": 57.142857142857146,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 295.7142857142857,
+        "y": 54,
+        "text": "P3",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 324.2857142857143,
+        "y": 30,
+        "w": 28.571428571428573,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 338.57142857142856,
+        "y": 54,
+        "text": "P1",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 352.8571428571429,
+        "y": 30,
+        "w": 57.142857142857146,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 381.42857142857144,
+        "y": 54,
+        "text": "P3",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 10,
+        "y": 90,
+        "text": "0",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 181.42857142857144,
+        "y": 90,
+        "text": "30",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 352.8571428571429,
+        "y": 90,
+        "text": "60",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 404.0,
+        "y": 90,
+        "text": "70 ms",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Chronologie à tourniquet (quantum 10 ms) : P1, P2, P3 se partagent le processeur.",
+     "alt": "Une bande horizontale de 0 à 70 ms découpée en segments successifs P1, P2, P3, P1, P2, P3, P1, P3."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — ordonnancement à tourniquet",
+     "statement": "Trois processus fictifs ont besoin de 25 ms (P1), 15 ms (P2) et 30 ms (P3) de processeur. L'OS leur donne le processeur à tour de rôle par tranches (quantum) de 10 ms, dans l'ordre P1, P2, P3. Quand chaque processus se termine-t-il ?",
+     "steps": [
+      {
+       "md": "Tour 1 : P1 de 0 à 10 (reste 15), P2 de 10 à 20 (reste 5), P3 de 20 à 30 (reste 20)."
+      },
+      {
+       "md": "Tour 2 : P1 de 30 à 40 (reste 5), P2 de 40 à 45 (**terminé à 45 ms**), P3 de 45 à 55 (reste 10)."
+      },
+      {
+       "md": "Tour 3 : P1 de 55 à 60 (**terminé à 60 ms**), P3 de 60 à 70 (**terminé à 70 ms**)."
+      }
+     ],
+     "answer": "**P2 : 45 ms ; P1 : 60 ms ; P3 : 70 ms.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 4 — chemins",
+     "statement": "Le dossier courant est /home/amina. Donner le chemin relatif du fichier /home/amina/cours/algo/tp1.txt et le chemin absolu du fichier relatif ../paul/photo.png.",
+     "steps": [
+      {
+       "md": "Chemin relatif : on retire le préfixe /home/amina/ : cours/algo/tp1.txt."
+      },
+      {
+       "md": "« .. » désigne le dossier parent /home. Donc ../paul/photo.png = /home/paul/photo.png."
+      }
+     ],
+     "answer": "**cours/algo/tp1.txt et /home/paul/photo.png.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre **mémoire vive** (volatile, de travail) et **stockage** (durable).\n- Croire qu'une fréquence plus élevée suffit à rendre un ordinateur plus rapide : le nombre de cœurs, la RAM et le stockage comptent aussi.\n- Confondre **programme** (fichier) et **processus** (exécution).\n- Oublier la convention d'unités (1 000 ou 1 024) quand on compare des capacités."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le **cache** est une petite mémoire très rapide placée près du processeur pour éviter d'attendre la RAM.",
+      "Les systèmes les plus courants (Android, Windows, Linux, macOS…) assurent tous ces rôles avec des interfaces différentes."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-informatique-systemes-architecture-os-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sup-l1-informatique-systemes-architecture-os-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-informatique-systemes-architecture-os",
+   "prompt": "Un processeur fonctionne à 2 GHz. Combien de milliards de cycles par seconde ?",
+   "explanation": "$2\\text{ GHz}=2×10^{9}$ cycles/s : 2 milliards.",
+   "source": "Exercice original",
+   "answer": 2,
+   "tolerance": 0,
+   "unit": "milliards"
+  },
+  {
+   "id": "sup-l1-informatique-systemes-architecture-os-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-informatique-systemes-architecture-os",
+   "prompt": "Quelle mémoire perd son contenu quand l'ordinateur est éteint ?",
+   "explanation": "La mémoire vive est volatile.",
+   "source": "Exercice original",
+   "choices": [
+    "la RAM",
+    "le SSD",
+    "la clé USB",
+    "le disque dur"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "sup-l1-informatique-systemes-architecture-os-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-informatique-systemes-architecture-os",
+   "prompt": "Le système d'exploitation gère les ressources de l'ordinateur et offre une interface aux utilisateurs.",
+   "explanation": "C'est son rôle central.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "sup-l1-informatique-systemes-architecture-os-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-informatique-systemes-architecture-os",
+   "prompt": "Une clé de 16 Go contient des photos de 4 Mo (1 Go = 1 000 Mo). Combien de photos au maximum ?",
+   "explanation": "$\\frac{16\\,000}{4}=4\\,000$.",
+   "source": "Exercice original",
+   "answer": 4000,
+   "tolerance": 0,
+   "unit": "photos"
+  },
+  {
+   "id": "sup-l1-informatique-systemes-architecture-os-05",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-informatique-systemes-architecture-os",
+   "prompt": "Associe chaque composant à son rôle.",
+   "explanation": "Rôles usuels des composants.",
+   "source": "Exercice original",
+   "pairs": [
+    [
+     "UAL",
+     "effectue les calculs et les comparaisons"
+    ],
+    [
+     "Unité de commande",
+     "séquence les instructions du programme"
+    ],
+    [
+     "RAM",
+     "mémoire de travail volatile"
+    ],
+    [
+     "SSD",
+     "stockage durable sans pièce mobile"
+    ]
+   ]
+  },
+  {
+   "id": "sup-l1-informatique-systemes-architecture-os-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "sup-l1-informatique-systemes-architecture-os",
+   "prompt": "Deux processus fictifs, P1 (20 ms de calcul) et P2 (10 ms), se partagent le processeur par tranches de 5 ms, dans l'ordre P1 puis P2, à tour de rôle.",
+   "method": "Dérouler la chronologie tranche par tranche.",
+   "mistakes": [
+    "Oublier que P1 continue seul quand P2 est terminé."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-informatique-systemes-architecture-os-06-a",
+     "points": 1,
+     "prompt": "À quel instant (en ms) P2 se termine-t-il ?",
+     "explanation": "P1 : 0-5 ; P2 : 5-10 ; P1 : 10-15 ; P2 : 15-20 (P2 a reçu 10 ms) : terminé à 20 ms.",
+     "kind": "numeric",
+     "answer": 20,
+     "tolerance": 0,
+     "unit": "ms"
+    },
+    {
+     "id": "sup-l1-informatique-systemes-architecture-os-06-b",
+     "points": 1,
+     "prompt": "À quel instant P1 se termine-t-il ?",
+     "explanation": "Après 20 ms, P1 continue seul : 20-25 puis 25-30 ; il a reçu 5+5+5+5=20 ms : terminé à 30 ms.",
+     "kind": "numeric",
+     "answer": 30,
+     "tolerance": 0,
+     "unit": "ms"
+    },
+    {
+     "id": "sup-l1-informatique-systemes-architecture-os-06-c",
+     "points": 1,
+     "prompt": "Combien de tranches de 5 ms P1 a-t-il reçues au total ?",
+     "explanation": "$\\frac{20}{5}=4$ tranches.",
+     "kind": "numeric",
+     "answer": 4,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-informatique-systemes-architecture-os-06-d",
+     "points": 1,
+     "prompt": "Pourquoi le système d'exploitation utilise-t-il un tel partage ?",
+     "explanation": "C'est le principe du temps partagé.",
+     "kind": "mcq",
+     "choices": [
+      "pour augmenter la fréquence du processeur",
+      "pour effacer la RAM",
+      "pour réduire la capacité du disque",
+      "pour donner l'impression que plusieurs programmes s'exécutent en même temps"
+     ],
+     "answer": 3
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-informatique-systemes-architecture-os-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-systemes-architecture-os",
+   "prompt": "L'UAL du processeur :",
+   "choices": [
+    "stocke les fichiers",
+    "effectue les opérations arithmétiques et logiques",
+    "affiche l'image",
+    "gère le réseau"
+   ],
+   "answer": 1,
+   "explanation": "Unité arithmétique et logique."
+  },
+  {
+   "id": "sup-l1-informatique-systemes-architecture-os-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-systemes-architecture-os",
+   "prompt": "Un processus est :",
+   "choices": [
+    "un fichier sur le disque",
+    "un programme en cours d'exécution",
+    "un composant matériel",
+    "un type de mémoire"
+   ],
+   "answer": 1,
+   "explanation": "À distinguer du programme (fichier exécutable)."
+  },
+  {
+   "id": "sup-l1-informatique-systemes-architecture-os-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-systemes-architecture-os",
+   "prompt": "Un chemin absolu commence :",
+   "choices": [
+    "dans le dossier courant",
+    "par deux points",
+    "par le nom du fichier",
+    "à la racine du système de fichiers"
+   ],
+   "answer": 3,
+   "explanation": "Ex. /home/amina/notes.txt."
+  },
+  {
+   "id": "sup-l1-informatique-systemes-architecture-os-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-systemes-architecture-os",
+   "prompt": "L'ordre de la hiérarchie du plus rapide au plus lent est :",
+   "choices": [
+    "registres, cache, RAM, stockage",
+    "stockage, RAM, cache, registres",
+    "RAM, registres, stockage, cache",
+    "cache, stockage, RAM, registres"
+   ],
+   "answer": 0,
+   "explanation": "Rapidité et coût au Mo décroissent le long de cette liste."
+  },
+  {
+   "id": "sup-l1-informatique-systemes-architecture-os-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-systemes-architecture-os",
+   "prompt": "Un octet contient :",
+   "choices": [
+    "4 bits",
+    "16 bits",
+    "8 bits",
+    "1 000 bits"
+   ],
+   "answer": 2,
+   "explanation": "Définition."
+  }
+ ]
+}

@@ -1,0 +1,818 @@
+{
+ "chapter": "sup-l2-mathematiques-financieres-annuites",
+ "lessons": [
+  {
+   "id": "sup-l2-mathematiques-financieres-annuites",
+   "title": "Annuités constantes : placement et emprunt",
+   "minutes": 60,
+   "programRef": "L2 — Annuités constantes, emprunts, tableau d'amortissement (à vérifier sur la maquette)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Calculer la valeur acquise et la valeur actuelle d'une suite d'annuités constantes de fin de période.",
+    "Calculer l'annuité constante d'un emprunt.",
+    "Construire un tableau d'amortissement (intérêts, amortissement, capital restant dû).",
+    "Vérifier un tableau à l'aide de ses propriétés."
+   ],
+   "prerequisites": [
+    "sup-l2-mathematiques-financieres-composes"
+   ],
+   "exercises": [
+    "sup-l2-mathematiques-financieres-annuites-01",
+    "sup-l2-mathematiques-financieres-annuites-02",
+    "sup-l2-mathematiques-financieres-annuites-03",
+    "sup-l2-mathematiques-financieres-annuites-04",
+    "sup-l2-mathematiques-financieres-annuites-05",
+    "sup-l2-mathematiques-financieres-annuites-06",
+    "sup-l2-mathematiques-financieres-annuites-07"
+   ],
+   "selfCheck": [
+    "sup-l2-mathematiques-financieres-annuites-q1",
+    "sup-l2-mathematiques-financieres-annuites-q2",
+    "sup-l2-mathematiques-financieres-annuites-q3",
+    "sup-l2-mathematiques-financieres-annuites-q4",
+    "sup-l2-mathematiques-financieres-annuites-q5"
+   ],
+   "reviewNotes": [
+    "Annuités de fin de période (« postnumerando ») seulement ; les annuités de début de période ne sont pas traitées.",
+    "Arrondis au franc dans les tableaux, avec ajustement de la dernière annuité (convention à confirmer dans le cours).",
+    "Calculs vérifiés par programme."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Annuités constantes",
+     "md": "Une suite d'**annuités constantes de fin de période** est une suite de $n$ versements égaux $a$, effectués à la **fin** de chaque période, pour un taux $i$ par période. On distingue :\n- la **valeur acquise** (placement) : somme des versements capitalisée à la date du dernier versement ;\n- la **valeur actuelle** (emprunt) : somme des versements actualisée à la date zéro."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Valeur acquise d'un placement",
+     "md": "En sommant la suite géométrique des versements capitalisés :",
+     "tex": "V_n = a \\times \\frac{(1 + i)^n - 1}{i}"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Valeur actuelle et annuité d'emprunt",
+     "md": "Un emprunt $V_0$ remboursé par $n$ annuités constantes de fin de période au taux $i$ vérifie :",
+     "tex": "V_0 = a \\times \\frac{1 - (1 + i)^{-n}}{i} \\quad \\Rightarrow \\quad a = V_0 \\times \\frac{i}{1 - (1 + i)^{-n}}"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — placement par versements",
+     "statement": "Chaque fin d'année pendant 5 ans, un artisan verse 400 000 FCFA sur un compte à 6 % l'an. Quelle somme possède-t-il juste après le dernier versement ?",
+     "steps": [
+      {
+       "md": "Facteur : (1,06^5 − 1)/0,06 = 5,637093."
+      },
+      {
+       "md": "V5 = 400 000 × 5,637093 ≈ 2 254 837.",
+       "tex": "V_{5} = 400\\,000 \\times \\frac{1{,}06^{5} - 1}{0{,}06}"
+      },
+      {
+       "md": "Total versé = 5 × 400 000 = 2 000 000 ; intérêts gagnés ≈ 254 837."
+      }
+     ],
+     "answer": "**Valeur acquise ≈ 2 254 837 FCFA.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — annuité d'emprunt",
+     "statement": "Une PME emprunte 3 000 000 FCFA remboursables par 4 annuités constantes de fin d'année, au taux de 9 % l'an. Calcule l'annuité.",
+     "steps": [
+      {
+       "md": "Facteur : (1 − 1,09^−4)/0,09 = 3,239720."
+      },
+      {
+       "md": "a = 3 000 000 / 3,239720 = 926 006.",
+       "tex": "a = 3\\,000\\,000 \\times \\frac{0{,}09}{1 - 1{,}09^{-4}}"
+      },
+      {
+       "md": "Total remboursé = 4 × 926 006 ≈ 3 704 024 ; coût du crédit ≈ 704 024."
+      }
+     ],
+     "answer": "**Annuité ≈ 926 006 FCFA.**"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Tableau d'amortissement",
+     "md": "Pour chaque période $k$ : **intérêt** = capital restant dû en début de période × $i$ ; **amortissement** = annuité − intérêt ; **capital restant dû** en fin de période = début − amortissement. Propriétés : les **amortissements croissent** en suite géométrique de raison $(1+i)$ ; la somme des amortissements égale l'emprunt ; le dernier capital restant dû est nul."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 440,
+      "h": 250,
+      "unit": "milliers de FCFA",
+      "bars": [
+       {
+        "label": "Début an 1",
+        "value": 3000,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "Début an 2",
+        "value": 2343,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "Début an 3",
+        "value": 1628,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "Début an 4",
+        "value": 849,
+        "color": [
+         "blue"
+        ]
+       }
+      ]
+     },
+     "caption": "Capital restant dû en début d'année (exemple 3, en milliers de FCFA).",
+     "alt": "Quatre barres décroissantes : 3 000 au début de l'année 1, puis environ 2 344, 1 629 et 850 milliers de FCFA."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — tableau d'amortissement",
+     "statement": "Reprends l'emprunt de 3 000 000 FCFA à 9 % sur 4 ans (annuité arrondie à 926 006). Construis le tableau.",
+     "steps": [
+      {
+       "md": "Années 1 et 2 — an 1 : début 3 000 000, intérêt 270 000, amort. 656 006, annuité 926 006, fin 2 343 994 ; an 2 : début 2 343 994, intérêt 210 959, amort. 715 047, annuité 926 006, fin 1 628 947."
+      },
+      {
+       "md": "Années 3 et 4 — an 3 : début 1 628 947, intérêt 146 605, amort. 779 401, annuité 926 006, fin 849 546 ; an 4 : début 849 546, intérêt 76 459, amort. 849 546, annuité 926 005, fin 0."
+      },
+      {
+       "md": "Vérifications : somme des amortissements = 3 000 000 = emprunt ; amortissement 2 / amortissement 1 = 1,090 ≈ 1,09 ; dernier capital restant dû = 0. (La dernière annuité est ajustée de quelques francs.)"
+      }
+     ],
+     "answer": "**Intérêts totaux : 704 023 FCFA ; capital restant dû final nul.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre **valeur acquise** (à la date du dernier versement) et **valeur actuelle** (à la date zéro).\n- Calculer l'intérêt de chaque année sur le **capital initial** au lieu du capital **restant dû**.\n- Oublier que l'**amortissement** (part de capital) augmente d'année en année alors que l'annuité est constante.\n- Utiliser un taux annuel avec des versements mensuels sans passer au **taux périodique équivalent**."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Autre type d'emprunt : **amortissements constants** (annuité décroissante) ; la structure du tableau est différente.",
+      "Le **différé** et le remboursement **in fine** modifient le calendrier mais pas la logique d'actualisation.",
+      "On peut aussi calculer le **capital restant dû** après $k$ versements par actualisation des annuités restantes."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l2-mathematiques-financieres-annuites-01"
+    }
+   ]
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-investissement",
+   "title": "Choix d'investissement : VAN et TRI",
+   "minutes": 55,
+   "programRef": "L2 — Choix d'investissement : VAN, TRI (introduction) (à vérifier sur la maquette)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Définir la valeur actuelle nette (VAN) d'un projet et la calculer.",
+    "Interpréter la VAN et appliquer la règle de décision.",
+    "Définir le taux de rentabilité interne (TRI) et l'estimer par encadrement.",
+    "Comparer deux projets avec la VAN et le TRI."
+   ],
+   "prerequisites": [
+    "sup-l2-mathematiques-financieres-annuites"
+   ],
+   "exercises": [
+    "sup-l2-mathematiques-financieres-investissement-01",
+    "sup-l2-mathematiques-financieres-investissement-02",
+    "sup-l2-mathematiques-financieres-investissement-03",
+    "sup-l2-mathematiques-financieres-investissement-04",
+    "sup-l2-mathematiques-financieres-investissement-05",
+    "sup-l2-mathematiques-financieres-investissement-06",
+    "sup-l2-mathematiques-financieres-investissement-07"
+   ],
+   "selfCheck": [
+    "sup-l2-mathematiques-financieres-investissement-q1",
+    "sup-l2-mathematiques-financieres-investissement-q2",
+    "sup-l2-mathematiques-financieres-investissement-q3",
+    "sup-l2-mathematiques-financieres-investissement-q4",
+    "sup-l2-mathematiques-financieres-investissement-q5"
+   ],
+   "reviewNotes": [
+    "Introduction : flux de fin de période, taux d'actualisation donné, pas d'impôt ni de valeur résiduelle sauf mention.",
+    "Le TRI est estimé par interpolation linéaire ou par encadrement ; les valeurs sont calculées par programme.",
+    "Aucune donnée d'entreprise réelle : les projets sont fictifs."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Valeur actuelle nette",
+     "md": "Pour un projet qui coûte $I_0$ à la date 0 et rapporte les flux nets $F_1, F_2, \\dots, F_n$ aux fins de période, la **valeur actuelle nette** (VAN) au taux d'actualisation $i$ (coût du capital ou rendement exigé) est la somme des flux actualisés moins l'investissement :",
+     "tex": "VAN = -I_0 + \\sum_{k=1}^{n} \\frac{F_k}{(1+i)^k}"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Règle de décision",
+     "md": "- Si $VAN > 0$ : le projet **crée de la valeur** au taux exigé : il est acceptable ;\n- si $VAN < 0$ : il en détruit : on le rejette ;\n- entre deux projets exclusifs, on retient celui dont la VAN est **la plus élevée** (à durée et mise comparables)."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Taux de rentabilité interne",
+     "md": "Le **TRI** est le taux d'actualisation qui annule la VAN. Un projet est acceptable si son TRI dépasse le taux exigé $i$ :",
+     "tex": "-I_0 + \\sum_{k=1}^{n} \\frac{F_k}{(1+\\mathrm{TRI})^k} = 0"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "w": 440,
+      "h": 280,
+      "xmin": 0,
+      "xmax": 0.4,
+      "ymin": -1500,
+      "ymax": 4500,
+      "grid": 0.1,
+      "xlabel": "taux d'actualisation",
+      "ylabel": "VAN (milliers de FCFA)",
+      "curves": [
+       {
+        "expr": "-5000+1800/(1+x)+2000/(1+x)^2+2200/(1+x)^3+1500/(1+x)^4",
+        "color": "blue",
+        "label": "VAN (milliers de FCFA)"
+       }
+      ],
+      "points": [
+       {
+        "x": 0.1,
+        "y": 967,
+        "label": "VAN à 10 %",
+        "color": "green"
+       },
+       {
+        "x": 0.188,
+        "y": 0,
+        "label": "TRI ≈ 18.8 %",
+        "color": "red"
+       }
+      ]
+     },
+     "caption": "VAN du projet de l'exemple 1 selon le taux d'actualisation.",
+     "alt": "Courbe décroissante de la VAN en fonction du taux : elle vaut environ 967 milliers de FCFA à 10 % (point vert) et s'annule vers 18,8 % (point rouge, le TRI)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — VAN d'un projet",
+     "statement": "Un projet fictif coûte 5 000 000 FCFA et rapporte 1 800 000, 2 000 000, 2 200 000, 1 500 000 FCFA à la fin des années 1 à 4. Taux d'actualisation : 10 %. Calcule la VAN.",
+     "steps": [
+      {
+       "md": "Flux actualisés : année 1 : 1 800 000/1,10^1 = 1 636 364 ; année 2 : 2 000 000/1,10^2 = 1 652 893 ; année 3 : 2 200 000/1,10^3 = 1 652 893 ; année 4 : 1 500 000/1,10^4 = 1 024 520."
+      },
+      {
+       "md": "Somme des flux actualisés = 5 966 669."
+      },
+      {
+       "md": "VAN = −5 000 000 + 5 966 669 = 966 669.",
+       "tex": "VAN = -5000000 + 5966669 = 966669"
+      }
+     ],
+     "answer": "**VAN ≈ 966 669 FCFA > 0 : le projet est acceptable à 10 %.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — encadrer le TRI",
+     "statement": "Pour le même projet, calcule la VAN à 15 % et à 20 %, puis estime le TRI.",
+     "steps": [
+      {
+       "md": "VAN(15 %) = 381 670 (positive) ; VAN(20 %) = −114 583 (négative)."
+      },
+      {
+       "md": "Le signe change entre 15 % et 20 % : le TRI est dans cet intervalle. Interpolation linéaire : 15 + 5 × 381670/(381670 − (−114583)) ≈ 18,8 %."
+      },
+      {
+       "md": "Résolution plus fine (programme) : TRI ≈ 18,77 %. Comme TRI > 10 %, la décision est cohérente avec la VAN."
+      }
+     ],
+     "answer": "**TRI ≈ 18,8 %.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — comparer deux projets",
+     "statement": "Projet B : même mise 5 000 000 FCFA, flux 3 500 000, 2 000 000, 800 000, 400 000 FCFA. Compare avec le projet A de l'exemple 1 (VAN et TRI, taux 10 %).",
+     "steps": [
+      {
+       "md": "VAN(A) = 966 669 ; TRI(A) ≈ 18,8 %."
+      },
+      {
+       "md": "VAN(B) = 708 968 ; TRI(B) ≈ 19,4 %."
+      },
+      {
+       "md": "B a un TRI plus élevé (flux plus précoces) mais A a la VAN la plus forte (le projet A dégage davantage de valeur au total) : les deux critères peuvent diverger ; entre deux projets exclusifs, on privilégie la VAN (valeur créée en FCFA)."
+      }
+     ],
+     "answer": "**VAN(A) = 966 669 > VAN(B) = 708 968 ; TRI(B) ≈ 19,4 % > TRI(A) ≈ 18,8 %.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier de soustraire l'**investissement initial** $I_0$ (non actualisé, car à la date 0).\n- Actualiser le premier flux avec $(1+i)^0$ au lieu de $(1+i)^1$.\n- Choisir un projet uniquement sur son **TRI** sans regarder l'ordre de grandeur de la VAN.\n- Confondre **taux d'actualisation** (exigence de l'investisseur) et **TRI** (propriété du projet).\n- Additionner des flux non actualisés pour calculer la VAN."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le **délai de récupération** (cumul des flux jusqu'à rembourser la mise) est un critère simple mais ignore les flux après la récupération et l'actualisation.",
+      "L'**indice de profitabilité** = (VAN + I0)/I0 permet de comparer des projets de tailles différentes.",
+      "Dans la pratique, les flux dépendent d'hypothèses incertaines : on teste leur **sensibilité**."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l2-mathematiques-financieres-investissement-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sup-l2-mathematiques-financieres-annuites-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-mathematiques-financieres-annuites",
+   "prompt": "On verse 100 000 FCFA à la fin de chacune des 4 prochaines années, à 5 % l'an. Calcule la valeur acquise juste après le dernier versement (arrondie à l'unité).",
+   "explanation": "100 000 × (1,05⁴ − 1)/0,05 = 100 000 × 4,310125 = 431 013 FCFA.",
+   "source": "Exercice original",
+   "answer": 431013.0,
+   "tolerance": 1,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-annuites-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-mathematiques-financieres-annuites",
+   "prompt": "Emprunt de 1 000 000 FCFA à 10 % remboursable par 3 annuités constantes. Calcule le premier intérêt (début année 1).",
+   "explanation": "Intérêt année 1 = 1 000 000 × 0,10 = 100 000 FCFA.",
+   "source": "Exercice original",
+   "answer": 100000.0,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-annuites-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-mathematiques-financieres-annuites",
+   "prompt": "Dans un tableau d'amortissement à annuités constantes, l'amortissement (part de capital) :",
+   "explanation": "L'intérêt baisse (capital restant dû plus faible), donc la part d'amortissement augmente.",
+   "source": "Exercice original",
+   "choices": [
+    "Reste constant",
+    "Est toujours nul",
+    "Augmente chaque année",
+    "Diminue chaque année"
+   ],
+   "answer": 2
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-annuites-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l2-mathematiques-financieres-annuites",
+   "prompt": "Calcule l'annuité constante d'un emprunt de 1 000 000 FCFA à 10 % sur 3 ans (arrondie à l'unité).",
+   "explanation": "a = 1 000 000 × 0,10/(1 − 1,10⁻³) = 402 115 FCFA.",
+   "method": "a = V0 × i/(1 − (1 + i)^−n).",
+   "source": "Exercice original",
+   "answer": 402115.0,
+   "tolerance": 1,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-annuites-05",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sup-l2-mathematiques-financieres-annuites",
+   "prompt": "À la fin du dernier remboursement, le capital restant dû est nul.",
+   "explanation": "C'est la condition qui définit l'annuité : les annuités amortissent exactement l'emprunt.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-annuites-06",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "sup-l2-mathematiques-financieres-annuites",
+   "prompt": "Explique pourquoi, avec une annuité constante, la part d'intérêts diminue et la part d'amortissement augmente.",
+   "explanation": "La somme intérêts + amortissement est constante.",
+   "method": "Raisonner sur le capital restant dû.",
+   "source": "Exercice original",
+   "model": "L'intérêt est calculé sur le capital restant dû, qui diminue à chaque remboursement ; la part d'intérêts baisse donc. L'annuité étant constante, le reste de l'annuité (annuité moins intérêt) augmente et sert à amortir le capital : la part d'amortissement croît.",
+   "rubric": [
+    "Intérêt sur le capital restant dû",
+    "Capital restant dû en baisse",
+    "Annuité constante, donc amortissement en hausse"
+   ]
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-annuites-07",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sup-l2-mathematiques-financieres-annuites",
+   "prompt": "Une entreprise fictive de Douala emprunte 2 000 000 FCFA à 12 % l'an, remboursables par 3 annuités constantes de fin d'année.",
+   "method": "Annuité, puis boucle : intérêt, amortissement, capital restant dû.",
+   "mistakes": [
+    "Calculer l'intérêt de l'année 2 sur le capital initial."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l2-mathematiques-financieres-annuites-07-a",
+     "points": 1,
+     "prompt": "Annuité constante (arrondie à l'unité) ?",
+     "explanation": "a = 2 000 000 × 0,12/(1 − 1,12^−3) = 832 698 ≈ 832 698.",
+     "kind": "numeric",
+     "answer": 832698.0,
+     "tolerance": 1
+    },
+    {
+     "id": "sup-l2-mathematiques-financieres-annuites-07-b",
+     "points": 1,
+     "prompt": "Intérêt de la 1re année ?",
+     "explanation": "2 000 000 × 0,12 = 240 000.",
+     "kind": "numeric",
+     "answer": 240000.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l2-mathematiques-financieres-annuites-07-c",
+     "points": 1,
+     "prompt": "Amortissement de la 1re année (arrondi à l'unité) ?",
+     "explanation": "832 698 − 240 000 = 592 698.",
+     "kind": "numeric",
+     "answer": 592698.0,
+     "tolerance": 1
+    },
+    {
+     "id": "sup-l2-mathematiques-financieres-annuites-07-d",
+     "points": 1,
+     "prompt": "Capital restant dû après le 1er remboursement (arrondi à l'unité) ?",
+     "explanation": "2 000 000 − 592 698 = 1 407 302.",
+     "kind": "numeric",
+     "answer": 1407302.0,
+     "tolerance": 1
+    },
+    {
+     "id": "sup-l2-mathematiques-financieres-annuites-07-e",
+     "points": 1,
+     "prompt": "Intérêt de la 2e année (arrondi à l'unité) ?",
+     "explanation": "1 407 302 × 0,12 = 168 876.",
+     "kind": "numeric",
+     "answer": 168876.0,
+     "tolerance": 1
+    }
+   ]
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-annuites-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-mathematiques-financieres-annuites",
+   "prompt": "Pour un emprunt à annuités constantes de fin de période, l'annuité est :",
+   "choices": [
+    "V0 (1 + i)^n",
+    "V0 × i × n",
+    "V0/n",
+    "V0 × i/(1 − (1 + i)^−n)"
+   ],
+   "answer": 3,
+   "explanation": "Formule de l'annuité constante."
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-annuites-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-mathematiques-financieres-annuites",
+   "prompt": "L'intérêt d'une période se calcule sur :",
+   "choices": [
+    "Le capital restant dû en début de période",
+    "L'annuité",
+    "Le capital emprunté initialement",
+    "Le capital remboursé"
+   ],
+   "answer": 0,
+   "explanation": "Capital restant dû."
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-annuites-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-mathematiques-financieres-annuites",
+   "prompt": "La valeur acquise de versements de fin de période est calculée :",
+   "choices": [
+    "À la date zéro",
+    "À la date du dernier versement",
+    "À la date du premier versement",
+    "À une date quelconque"
+   ],
+   "answer": 1,
+   "explanation": "Capitalisation à la fin."
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-annuites-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-mathematiques-financieres-annuites",
+   "prompt": "Dans un tableau d'amortissement, la somme des amortissements égale :",
+   "choices": [
+    "L'annuité",
+    "L'emprunt initial",
+    "Zéro",
+    "La somme des intérêts"
+   ],
+   "answer": 1,
+   "explanation": "Tout le capital est remboursé."
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-annuites-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-mathematiques-financieres-annuites",
+   "prompt": "Les amortissements successifs forment une suite géométrique de raison :",
+   "choices": [
+    "i",
+    "1/i",
+    "1 + i",
+    "1 − i"
+   ],
+   "answer": 2,
+   "explanation": "m_{k+1} = m_k (1 + i)."
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-investissement-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-mathematiques-financieres-investissement",
+   "prompt": "Un projet coûte 1 000 000 FCFA et rapporte 1 210 000 FCFA dans 2 ans (flux unique). Taux 10 %. Calcule la VAN.",
+   "explanation": "1 210 000/1,1² = 1 000 000 ; VAN = 0 : au seuil de rentabilité (TRI = 10 %).",
+   "source": "Exercice original",
+   "answer": 0.0,
+   "tolerance": 1,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-investissement-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-mathematiques-financieres-investissement",
+   "prompt": "Un projet coûte 2 000 000 FCFA et rapporte 1 200 000 en fin d'année 1 et 1 200 000 en fin d'année 2. Taux d'actualisation 8 %. Calcule la VAN (arrondie à l'unité).",
+   "explanation": "Flux actualisés : 1 111 111 + 1 028 807 = 2 139 918 ; VAN = 139 918.",
+   "source": "Exercice original",
+   "answer": 139918.0,
+   "tolerance": 1,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-investissement-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-mathematiques-financieres-investissement",
+   "prompt": "Un projet de VAN négative au taux exigé doit être accepté.",
+   "explanation": "VAN < 0 : le projet rapporte moins que le rendement exigé.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-investissement-04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l2-mathematiques-financieres-investissement",
+   "prompt": "Le TRI d'un projet est :",
+   "explanation": "Définition du TRI.",
+   "source": "Exercice original",
+   "choices": [
+    "Le taux d'inflation",
+    "Le taux qui annule la VAN",
+    "La somme des flux",
+    "Le taux de l'emprunt"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-investissement-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l2-mathematiques-financieres-investissement",
+   "prompt": "Projet : mise 100 ; flux 60 en fin d'année 1 et 60 en fin d'année 2 (milliers de FCFA). Calcule la VAN à 15 % (arrondie à 0,1).",
+   "explanation": "60/1,15 + 60/1,15² = 52,17 + 45,37 = 97,54 ; VAN = −2,5.",
+   "source": "Exercice original",
+   "answer": -2.5,
+   "tolerance": 0.1,
+   "unit": "milliers de FCFA"
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-investissement-06",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "sup-l2-mathematiques-financieres-investissement",
+   "prompt": "Deux projets ont des VAN positives mais le projet B a un TRI plus élevé et le projet A une VAN plus grande. Lequel recommander à un investisseur dont le capital n'est pas limité ? Justifie.",
+   "explanation": "Pour des projets exclusifs, on maximise la VAN.",
+   "method": "Distinguer valeur absolue et rentabilité relative.",
+   "source": "Exercice original",
+   "model": "On recommande A : la VAN mesure la richesse créée en valeur absolue, au taux exigé, et c'est le critère à retenir pour des projets exclusifs. Le TRI plus élevé de B reflète une rentabilité relative (flux précoces) qui ne se traduit pas par une plus grande création de valeur.",
+   "rubric": [
+    "Choix du projet A",
+    "VAN = richesse créée en valeur",
+    "TRI = rentabilité relative",
+    "Limite du TRI pour comparer"
+   ]
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-investissement-07",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sup-l2-mathematiques-financieres-investissement",
+   "prompt": "Un projet d'équipement fictif coûte 3 000 000 FCFA et rapporte 1 000 000, 1 400 000, 1 600 000 FCFA à la fin des années 1, 2 et 3. Le taux d'actualisation exigé est de 12 %.",
+   "method": "Actualiser chaque flux, sommer, retrancher l'investissement ; relier signe de la VAN et position du TRI.",
+   "mistakes": [
+    "Oublier l'investissement initial."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l2-mathematiques-financieres-investissement-07-a",
+     "points": 1,
+     "prompt": "Valeur actuelle du flux de l'année 2 (arrondie à l'unité) ?",
+     "explanation": "1 400 000/1,12² = 1 116 071.",
+     "kind": "numeric",
+     "answer": 1116071.0,
+     "tolerance": 1
+    },
+    {
+     "id": "sup-l2-mathematiques-financieres-investissement-07-b",
+     "points": 2,
+     "prompt": "VAN du projet (arrondie à l'unité) ?",
+     "explanation": "Flux actualisés : 892 857 + 1 116 071 + 1 138 848 = 3 147 777 ; VAN = 147 777.",
+     "kind": "numeric",
+     "answer": 147777.0,
+     "tolerance": 1
+    },
+    {
+     "id": "sup-l2-mathematiques-financieres-investissement-07-c",
+     "points": 1,
+     "prompt": "Que conclure ?",
+     "explanation": "VAN = 147 777 > 0 : accepter.",
+     "kind": "mcq",
+     "choices": [
+      "Le TRI est inférieur à 12 %",
+      "Le projet est à rejeter (VAN < 0)",
+      "On ne peut pas décider",
+      "Le projet est acceptable (VAN > 0)"
+     ],
+     "answer": 3
+    },
+    {
+     "id": "sup-l2-mathematiques-financieres-investissement-07-d",
+     "points": 1,
+     "prompt": "Le TRI de ce projet est :",
+     "explanation": "VAN(12 %) > 0 ⇒ TRI > 12 % (TRI ≈ 14,63 %).",
+     "kind": "mcq",
+     "choices": [
+      "Nul",
+      "Égal à 12 %",
+      "Supérieur à 12 %",
+      "Inférieur à 12 %"
+     ],
+     "answer": 2
+    }
+   ]
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-investissement-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-mathematiques-financieres-investissement",
+   "prompt": "La VAN est la somme :",
+   "choices": [
+    "De l'investissement et des flux",
+    "Des flux actualisés moins l'investissement initial",
+    "Des intérêts simples",
+    "Des flux non actualisés"
+   ],
+   "answer": 1,
+   "explanation": "Définition."
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-investissement-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-mathematiques-financieres-investissement",
+   "prompt": "Si la VAN d'un projet est positive, le projet :",
+   "choices": [
+    "Est neutre",
+    "A un TRI nul",
+    "Détruit de la valeur",
+    "Crée de la valeur au taux exigé"
+   ],
+   "answer": 3,
+   "explanation": "Règle de décision."
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-investissement-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-mathematiques-financieres-investissement",
+   "prompt": "Le TRI est le taux d'actualisation pour lequel :",
+   "choices": [
+    "Taux = inflation",
+    "VAN = I0",
+    "Flux = 0",
+    "VAN = 0"
+   ],
+   "answer": 3,
+   "explanation": "Il annule la VAN."
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-investissement-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-mathematiques-financieres-investissement",
+   "prompt": "Si le TRI est supérieur au taux exigé, alors :",
+   "choices": [
+    "VAN > 0",
+    "VAN < 0",
+    "VAN = 0",
+    "On ne peut rien dire"
+   ],
+   "answer": 0,
+   "explanation": "Pour un projet à flux conventionnels."
+  },
+  {
+   "id": "sup-l2-mathematiques-financieres-investissement-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-mathematiques-financieres-investissement",
+   "prompt": "Quand le taux d'actualisation augmente, la VAN d'un projet à flux positifs :",
+   "choices": [
+    "Reste constante",
+    "Augmente",
+    "Devient infinie",
+    "Diminue"
+   ],
+   "answer": 3,
+   "explanation": "Les flux futurs sont plus fortement actualisés."
+  }
+ ]
+}

@@ -1,0 +1,935 @@
+{
+ "chapter": "sup-l1-informatique-systemes-donnees-securite",
+ "lessons": [
+  {
+   "id": "sup-l1-informatique-systemes-bases-de-donnees",
+   "title": "Bases de données : tables, clés et requêtes SELECT",
+   "minutes": 50,
+   "programRef": "Initiation à l'informatique de première année de Licence — à comparer au programme de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Décrire une base de données relationnelle : tables, lignes, colonnes.",
+    "Distinguer clé primaire et clé étrangère.",
+    "Lire et prévoir le résultat d'une requête SELECT simple.",
+    "Comprendre COUNT, SUM, AVG et une jointure (idée)."
+   ],
+   "prerequisites": [
+    "sup-l1-informatique-systemes-reseaux-ip"
+   ],
+   "exercises": [
+    "sup-l1-informatique-systemes-bases-de-donnees-01",
+    "sup-l1-informatique-systemes-bases-de-donnees-02",
+    "sup-l1-informatique-systemes-bases-de-donnees-03",
+    "sup-l1-informatique-systemes-bases-de-donnees-04",
+    "sup-l1-informatique-systemes-bases-de-donnees-05",
+    "sup-l1-informatique-systemes-bases-de-donnees-06"
+   ],
+   "selfCheck": [
+    "sup-l1-informatique-systemes-bases-de-donnees-q1",
+    "sup-l1-informatique-systemes-bases-de-donnees-q2",
+    "sup-l1-informatique-systemes-bases-de-donnees-q3",
+    "sup-l1-informatique-systemes-bases-de-donnees-q4",
+    "sup-l1-informatique-systemes-bases-de-donnees-q5"
+   ],
+   "reviewNotes": [
+    "SQL présenté de façon conceptuelle (SELECT seulement) ; vérifier le dialecte attendu (guillemets simples).",
+    "Résultats des requêtes calculés avec SQLite en Python ; données entièrement fictives."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Base de données relationnelle",
+     "md": "Une **base de données** organise des données durables et partagées. Dans le modèle **relationnel**, elles sont rangées dans des **tables** : chaque **ligne** (enregistrement) décrit un objet (un client, une commande) et chaque **colonne** (attribut) une caractéristique (nom, ville…). Un **SGBD** (système de gestion de bases de données) stocke, protège et interroge ces tables."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Clés",
+     "md": "La **clé primaire** d'une table est une colonne (ou un groupe) dont la valeur **identifie de façon unique** chaque ligne et n'est jamais vide (ex. identifiant client). Une **clé étrangère** est une colonne d'une table qui contient la clé primaire d'une **autre** table : elle crée un **lien** (ex. la commande contient l'identifiant du client qui l'a passée). Un client peut avoir plusieurs commandes : relation « un à plusieurs »."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "La requête SELECT",
+     "md": "La forme de base : SELECT *colonnes* FROM *table* WHERE *condition* ORDER BY *colonne*. **FROM** désigne la table, **WHERE** filtre les lignes, **ORDER BY** trie. Fonctions d'agrégation : COUNT (nombre de lignes), SUM (somme), AVG (moyenne), MIN, MAX. Une **jointure** (JOIN) combine deux tables en associant clé étrangère et clé primaire. Textes entre apostrophes : ville = 'Douala'. Le symbole étoile (noté ici ∗) signifie « toutes les colonnes » ou « toutes les lignes »."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 250,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 20,
+        "w": 190,
+        "h": 100,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 42,
+        "text": "CLIENT",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 66,
+        "text": "id (clé primaire)",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 88,
+        "text": "nom",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 105,
+        "y": 108,
+        "text": "ville",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 220,
+        "y": 20,
+        "w": 190,
+        "h": 120,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 315,
+        "y": 42,
+        "text": "COMMANDE",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 315,
+        "y": 66,
+        "text": "num (clé primaire)",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 315,
+        "y": 88,
+        "text": "id_client (clé étrangère)",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 315,
+        "y": 110,
+        "text": "montant",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 220,
+        "y1": 88,
+        "x2": 200,
+        "y2": 66,
+        "color": "red",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 185,
+        "text": "Un client peut avoir plusieurs commandes",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 215,
+        "text": "La clé étrangère id_client renvoie à id.",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Deux tables liées par une clé étrangère.",
+     "alt": "Deux rectangles : CLIENT avec id (clé primaire), nom, ville ; COMMANDE avec num (clé primaire), id_client (clé étrangère), montant ; une flèche rouge relie id_client à id."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — lire les tables",
+     "statement": "CLIENT : (1, Aïcha, Douala), (2, Brice, Yaoundé), (3, Carine, Douala). COMMANDE (num, id_client, montant) : (101, 1, 15 000), (102, 1, 8 000), (103, 3, 22 000), (104, 2, 5 000). Quel client a passé la commande 103 ?",
+     "steps": [
+      {
+       "md": "La commande 103 a id_client = 3."
+      },
+      {
+       "md": "On cherche la ligne de CLIENT dont la clé primaire id vaut 3 : Carine."
+      }
+     ],
+     "answer": "**La commande 103 a été passée par Carine.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — résultat de requêtes",
+     "statement": "Avec ces tables, donner le résultat de (a) SELECT nom FROM CLIENT WHERE ville = 'Douala' ORDER BY nom ; (b) SELECT SUM(montant) FROM COMMANDE WHERE id_client = 1 ; (c) SELECT COUNT(∗) FROM COMMANDE.",
+     "steps": [
+      {
+       "md": "(a) Les clients de Douala sont Aïcha et Carine, triés par nom : Aïcha, Carine."
+      },
+      {
+       "md": "(b) Les commandes du client 1 sont 15 000 et 8 000 : la somme vaut 23 000."
+      },
+      {
+       "md": "(c) La table COMMANDE a 4 lignes : COUNT(∗) renvoie 4."
+      }
+     ],
+     "answer": "**(a) Aïcha, Carine ; (b) 23 000 ; (c) 4.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — jointure et moyenne",
+     "statement": "Quel est le résultat de SELECT nom, montant FROM CLIENT JOIN COMMANDE ON CLIENT.id = COMMANDE.id_client ORDER BY montant DESC, et celui de SELECT AVG(montant) FROM COMMANDE ?",
+     "steps": [
+      {
+       "md": "La jointure associe chaque commande à son client : (Carine, 22 000), (Aïcha, 15 000), (Aïcha, 8 000), (Brice, 5 000), triées par montant décroissant."
+      },
+      {
+       "md": "Moyenne : $\\frac{15\\,000+8\\,000+22\\,000+5\\,000}{4}=\\frac{50\\,000}{4}=12\\,500$.",
+       "tex": "\\frac{50\\,000}{4}=12\\,500"
+      }
+     ],
+     "answer": "**4 lignes jointes ; moyenne 12 500 FCFA.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier les apostrophes autour d'un texte (ville = Douala au lieu de 'Douala').\n- Confondre **WHERE** (filtre avant le regroupement) et le résultat d'un agrégat.\n- Choisir comme clé primaire une colonne **non unique** (nom, ville).\n- Oublier que COUNT(∗) compte les **lignes**, pas les valeurs distinctes."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Les instructions INSERT, UPDATE et DELETE ajoutent, modifient et suppriment des lignes ; CREATE TABLE définit la structure.",
+      "Une bonne conception évite de répéter la même information dans plusieurs tables (normalisation)."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-informatique-systemes-bases-de-donnees-01"
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-informatique-systemes-securite",
+   "title": "Sécurité informatique : principes et bonnes pratiques",
+   "minutes": 45,
+   "programRef": "Initiation à l'informatique de première année de Licence — à comparer au programme de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Énoncer les trois objectifs : confidentialité, intégrité, disponibilité.",
+    "Reconnaître les menaces courantes (hameçonnage, logiciels malveillants, force brute).",
+    "Estimer la robustesse d'un mot de passe par dénombrement.",
+    "Citer des mesures de protection et le principe du chiffrement."
+   ],
+   "prerequisites": [
+    "sup-l1-informatique-systemes-bases-de-donnees"
+   ],
+   "exercises": [
+    "sup-l1-informatique-systemes-securite-01",
+    "sup-l1-informatique-systemes-securite-02",
+    "sup-l1-informatique-systemes-securite-03",
+    "sup-l1-informatique-systemes-securite-04",
+    "sup-l1-informatique-systemes-securite-05",
+    "sup-l1-informatique-systemes-securite-06"
+   ],
+   "selfCheck": [
+    "sup-l1-informatique-systemes-securite-q1",
+    "sup-l1-informatique-systemes-securite-q2",
+    "sup-l1-informatique-systemes-securite-q3",
+    "sup-l1-informatique-systemes-securite-q4",
+    "sup-l1-informatique-systemes-securite-q5"
+   ],
+   "reviewNotes": [
+    "Recommandations générales (mots de passe longs, authentification à plusieurs facteurs, sauvegardes, mises à jour) : à confirmer avec le cours.",
+    "Calculs de force brute avec des hypothèses de vitesse fournies par l'énoncé, purement illustratifs."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les trois objectifs",
+     "md": "- **Confidentialité** : seules les personnes autorisées accèdent à l'information.\n- **Intégrité** : l'information n'est pas modifiée de façon non autorisée ou accidentelle.\n- **Disponibilité** : l'information et les services sont accessibles quand on en a besoin.\nS'y ajoutent l'**authentification** (prouver son identité) et la **traçabilité**."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Menaces courantes",
+     "md": "- **Hameçonnage** (phishing) : message trompeur qui imite un organisme pour obtenir mot de passe, code ou paiement.\n- **Logiciel malveillant** (virus, cheval de Troie, rançongiciel…) : programme nuisible, souvent installé à l'insu de l'utilisateur.\n- **Ingénierie sociale** : manipulation de la personne plutôt que de la machine.\n- **Force brute** : essai systématique de mots de passe ; **déni de service** : saturation d'un serveur."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Bonnes pratiques",
+     "md": "- Mots de passe **longs et uniques** pour chaque service, éventuellement rangés dans un gestionnaire.\n- **Authentification à plusieurs facteurs** (mot de passe + code reçu ou application).\n- Mises à jour régulières du système et des applications.\n- **Sauvegardes** régulières, conservées en plusieurs exemplaires dont un hors de l'appareil.\n- Principe du **moindre privilège** : donner seulement les droits nécessaires.\n- Se méfier des pièces jointes et liens non sollicités ; vérifier le cadenas **HTTPS**.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Chiffrement et empreinte",
+     "md": "Le **chiffrement** transforme un message clair en message illisible à l'aide d'une **clé** ; seul le détenteur de la clé de déchiffrement le lit. En **chiffrement symétrique**, la même clé sert aux deux opérations ; en **asymétrique**, une clé **publique** chiffre et une clé **privée** déchiffre. Une **fonction de hachage** produit une **empreinte** de taille fixe d'un message, utile pour vérifier son **intégrité** ou stocker des mots de passe sans les conserver en clair."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 160,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 30,
+        "w": 125,
+        "h": 60,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 72.5,
+        "y": 64.9,
+        "text": "Confidentialité",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 30,
+        "w": 125,
+        "h": 60,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 212.5,
+        "y": 65.25,
+        "text": "Intégrité",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 30,
+        "w": 120,
+        "h": 60,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 350.0,
+        "y": 64.9,
+        "text": "Disponibilité",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 125,
+        "text": "Les trois objectifs de la sécurité de l'information",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Les trois objectifs de la sécurité : confidentialité, intégrité, disponibilité.",
+     "alt": "Trois rectangles côte à côte nommés Confidentialité, Intégrité et Disponibilité."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "unit": "nombre de chiffres de 62^n",
+      "bars": [
+       {
+        "label": "6 car.",
+        "value": 11,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "8 car.",
+        "value": 15,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "10 car.",
+        "value": 18,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "12 car.",
+        "value": 22,
+        "color": [
+         "blue"
+        ]
+       }
+      ]
+     },
+     "caption": "Nombre de chiffres du nombre de mots de passe possibles (62 symboles) selon la longueur.",
+     "alt": "Quatre barres croissantes : environ 11 chiffres pour 6 caractères, 15 pour 8, 18 pour 10 et 22 pour 12."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — force brute",
+     "statement": "Un mot de passe de 8 caractères choisis parmi 62 symboles (26 minuscules, 26 majuscules, 10 chiffres). Un attaquant fictif teste 1 milliard de mots de passe par seconde (hypothèse d'exercice). Combien de mots de passe possibles ? Combien de temps pour tous les essayer ?",
+     "steps": [
+      {
+       "md": "Principe multiplicatif : $62^{8}=218\\,340\\,105\\,584\\,896$ possibilités (environ $2{,}2×10^{14}$).",
+       "tex": "62^{8}≈2{,}18×10^{14}"
+      },
+      {
+       "md": "Temps : $\\frac{2{,}18×10^{14}}{10^{9}}≈218\\,340$ s, soit environ 2,5 jours ($218\\,340/86\\,400≈2{,}5$).",
+       "tex": "\\frac{2{,}18×10^{14}}{10^{9}}≈2{,}18×10^{5}\\text{ s}"
+      },
+      {
+       "md": "Chaque caractère ajouté multiplie le nombre de possibilités par 62 : la **longueur** compte plus que la complexité apparente."
+      }
+     ],
+     "answer": "**218 340 105 584 896 possibilités ; environ 2,5 jours dans cette hypothèse.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — idée du chiffrement (César)",
+     "statement": "Chiffre de César fictif de clé 3 : chaque lettre est décalée de 3 rangs dans l'alphabet (A → D, B → E…). Chiffrer BONJOUR puis déchiffrer le résultat.",
+     "steps": [
+      {
+       "md": "B → E ; O → R ; N → Q ; J → M ; O → R ; U → X ; R → U : message chiffré ERQMRXU."
+      },
+      {
+       "md": "Déchiffrement : décalage de −3 : E → B, R → O, Q → N, M → J… on retrouve BONJOUR."
+      },
+      {
+       "md": "Ce chiffre est **trop faible** pour protéger quoi que ce soit (26 clés possibles) ; il illustre seulement les notions de clé et de déchiffrement."
+      }
+     ],
+     "answer": "**BONJOUR → ERQMRXU ; clé = décalage 3.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — repérer un hameçonnage",
+     "statement": "Vous recevez un SMS : « Votre compte sera bloqué dans 1 h. Envoyez votre code secret à ce numéro pour le conserver. » Que faire ?",
+     "steps": [
+      {
+       "md": "Signaux d'alarme : **urgence**, **menace**, demande d'un **code secret** (qu'aucun service légitime ne demande par SMS)."
+      },
+      {
+       "md": "Conduite : ne pas répondre, ne pas cliquer, contacter le service par un canal officiel déjà connu, signaler le message."
+      }
+     ],
+     "answer": "**Ignorer et signaler ; ne jamais communiquer un code secret.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Utiliser le **même** mot de passe partout.\n- Croire qu'un cadenas HTTPS garantit que le site est **honnête** (il protège la communication, pas les intentions du site).\n- Cliquer sur un lien reçu par message sans vérifier l'expéditeur.\n- Ne jamais mettre à jour, ou ne faire aucune sauvegarde."
+    },
+    {
+     "type": "more",
+     "items": [
+      "La sécurité est un **équilibre** entre protection et facilité d'usage : trop de contraintes poussent à contourner les règles.",
+      "La protection des **données personnelles** est encadrée par des textes de loi ; consulter la réglementation applicable (hors de cette fiche)."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-informatique-systemes-securite-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sup-l1-informatique-systemes-bases-de-donnees-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-informatique-systemes-bases-de-donnees",
+   "prompt": "Quelle valeur renvoie SELECT COUNT(∗) FROM COMMANDE sur la table ci-dessus ?",
+   "explanation": "La table contient 4 commandes.",
+   "source": "Exercice original",
+   "answer": 4,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-informatique-systemes-bases-de-donnees-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-informatique-systemes-bases-de-donnees",
+   "prompt": "Une clé primaire doit être :",
+   "explanation": "Elle identifie chaque ligne.",
+   "source": "Exercice original",
+   "choices": [
+    "identique pour toutes les lignes",
+    "unique et non vide pour chaque ligne",
+    "toujours un texte",
+    "une colonne facultative"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "sup-l1-informatique-systemes-bases-de-donnees-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-informatique-systemes-bases-de-donnees",
+   "prompt": "Une clé étrangère contient la valeur de la clé primaire d'une autre table.",
+   "explanation": "C'est ce qui permet de lier les tables.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "sup-l1-informatique-systemes-bases-de-donnees-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-informatique-systemes-bases-de-donnees",
+   "prompt": "Quelle valeur renvoie SELECT AVG(montant) FROM COMMANDE ?",
+   "explanation": "$\\frac{50\\,000}{4}=12\\,500$.",
+   "source": "Exercice original",
+   "answer": 12500,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l1-informatique-systemes-bases-de-donnees-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-informatique-systemes-bases-de-donnees",
+   "prompt": "Combien de lignes renvoie SELECT ∗ FROM COMMANDE WHERE montant > 10000 ?",
+   "explanation": "Les montants supérieurs à 10 000 sont 15 000 et 22 000.",
+   "source": "Exercice original",
+   "answer": 2,
+   "tolerance": 0,
+   "unit": "lignes"
+  },
+  {
+   "id": "sup-l1-informatique-systemes-bases-de-donnees-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "sup-l1-informatique-systemes-bases-de-donnees",
+   "prompt": "Table PRODUIT d'une boutique fictive (code, nom, prix en FCFA, stock) : (P1, Savon, 500, 40), (P2, Huile, 1500, 12), (P3, Riz, 800, 0), (P4, Sucre, 700, 25).",
+   "method": "Appliquer la condition ligne par ligne puis l'agrégat.",
+   "mistakes": [
+    "Compter la ligne du riz (stock 0) dans la première question."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-informatique-systemes-bases-de-donnees-06-a",
+     "points": 1,
+     "prompt": "Combien de lignes renvoie SELECT ∗ FROM PRODUIT WHERE stock > 0 ?",
+     "explanation": "Savon, Huile et Sucre ont un stock positif.",
+     "kind": "numeric",
+     "answer": 3,
+     "tolerance": 0,
+     "unit": "lignes"
+    },
+    {
+     "id": "sup-l1-informatique-systemes-bases-de-donnees-06-b",
+     "points": 1,
+     "prompt": "Que renvoie SELECT SUM(stock) FROM PRODUIT ?",
+     "explanation": "$40+12+0+25=77$.",
+     "kind": "numeric",
+     "answer": 77,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-informatique-systemes-bases-de-donnees-06-c",
+     "points": 1,
+     "prompt": "Que renvoie SELECT MAX(prix) FROM PRODUIT ?",
+     "explanation": "Le prix maximal est celui de l'huile.",
+     "kind": "numeric",
+     "answer": 1500,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "sup-l1-informatique-systemes-bases-de-donnees-06-d",
+     "points": 1,
+     "prompt": "Que renvoie SELECT SUM(prix ∗ stock) FROM PRODUIT (valeur du stock) ?",
+     "explanation": "$500×40+1500×12+800×0+700×25=20\\,000+18\\,000+0+17\\,500=55\\,500$.",
+     "kind": "numeric",
+     "answer": 55500,
+     "tolerance": 0,
+     "unit": "FCFA"
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-informatique-systemes-bases-de-donnees-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-systemes-bases-de-donnees",
+   "prompt": "L'instruction qui lit des données est :",
+   "choices": [
+    "INSERT",
+    "SELECT",
+    "DELETE",
+    "DROP"
+   ],
+   "answer": 1,
+   "explanation": "SELECT interroge ; les autres modifient."
+  },
+  {
+   "id": "sup-l1-informatique-systemes-bases-de-donnees-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-systemes-bases-de-donnees",
+   "prompt": "WHERE sert à :",
+   "choices": [
+    "trier les lignes",
+    "nommer la table",
+    "supprimer une table",
+    "filtrer les lignes"
+   ],
+   "answer": 3,
+   "explanation": "ORDER BY trie."
+  },
+  {
+   "id": "sup-l1-informatique-systemes-bases-de-donnees-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-systemes-bases-de-donnees",
+   "prompt": "COUNT(∗) renvoie :",
+   "choices": [
+    "le nombre de lignes",
+    "la somme des valeurs",
+    "le plus grand élément",
+    "le nom des colonnes"
+   ],
+   "answer": 0,
+   "explanation": "Agrégat de comptage."
+  },
+  {
+   "id": "sup-l1-informatique-systemes-bases-de-donnees-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-systemes-bases-de-donnees",
+   "prompt": "Dans une relation un-à-plusieurs, la clé étrangère se trouve :",
+   "choices": [
+    "dans la table « un »",
+    "dans aucune table",
+    "dans la table « plusieurs »",
+    "dans les deux tables à la fois"
+   ],
+   "answer": 2,
+   "explanation": "La commande contient l'identifiant du client."
+  },
+  {
+   "id": "sup-l1-informatique-systemes-bases-de-donnees-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-systemes-bases-de-donnees",
+   "prompt": "Une colonne adaptée pour une clé primaire est :",
+   "choices": [
+    "le prénom",
+    "la ville",
+    "le montant",
+    "un identifiant unique"
+   ],
+   "answer": 3,
+   "explanation": "Il faut une valeur unique par ligne."
+  },
+  {
+   "id": "sup-l1-informatique-systemes-securite-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-informatique-systemes-securite",
+   "prompt": "Combien de codes PIN à 4 chiffres (0 à 9) existe-t-il ?",
+   "explanation": "$10^{4}=10\\,000$.",
+   "source": "Exercice original",
+   "answer": 10000,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-informatique-systemes-securite-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-informatique-systemes-securite",
+   "prompt": "L'intégrité d'une donnée signifie :",
+   "explanation": "Définition de l'intégrité.",
+   "source": "Exercice original",
+   "choices": [
+    "qu'elle est cachée à tous",
+    "qu'elle n'a pas été modifiée sans autorisation",
+    "qu'elle est toujours disponible",
+    "qu'elle est stockée sur le cloud"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "sup-l1-informatique-systemes-securite-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-informatique-systemes-securite",
+   "prompt": "Un message qui menace de bloquer votre compte et demande votre code secret est probablement légitime s'il porte le logo d'une entreprise.",
+   "explanation": "Un logo se copie facilement ; une demande de code secret est un signe d'hameçonnage.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "sup-l1-informatique-systemes-securite-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-informatique-systemes-securite",
+   "prompt": "On teste 1 000 codes par seconde (hypothèse d'exercice) sur un code à 6 chiffres. Combien de secondes pour tout essayer au maximum ?",
+   "explanation": "$10^{6}$ codes ÷ 1 000 par seconde $=1\\,000$ s, soit environ 17 minutes.",
+   "source": "Exercice original",
+   "answer": 1000.0,
+   "tolerance": 0,
+   "unit": "s"
+  },
+  {
+   "id": "sup-l1-informatique-systemes-securite-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "sup-l1-informatique-systemes-securite",
+   "prompt": "Expliquez pourquoi un mot de passe long est généralement plus sûr qu'un mot de passe court rempli de symboles spéciaux.",
+   "explanation": "La longueur augmente exponentiellement le nombre d'essais nécessaires à une force brute.",
+   "source": "Exercice original",
+   "model": "Chaque caractère supplémentaire multiplie le nombre de combinaisons possibles par la taille de l'alphabet, donc la longueur fait croître le nombre de possibilités de façon exponentielle. Un mot de passe court, même avec des symboles, reste dans un espace de recherche bien plus petit ; en outre, des substitutions prévisibles (a→@) sont connues des attaquants.",
+   "rubric": [
+    "Idée de multiplication des possibilités à chaque caractère.",
+    "Comparaison de l'espace de recherche court/long.",
+    "Mention d'une mesure complémentaire (unicité, gestionnaire, authentification à plusieurs facteurs)."
+   ]
+  },
+  {
+   "id": "sup-l1-informatique-systemes-securite-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "sup-l1-informatique-systemes-securite",
+   "prompt": "Un site fictif impose des mots de passe de 8 caractères parmi 36 symboles (26 lettres minuscules et 10 chiffres). On suppose qu'un attaquant teste 1 milliard de mots de passe par seconde (hypothèse d'exercice).",
+   "method": "Principe multiplicatif, puis division par la vitesse d'essai.",
+   "mistakes": [
+    "Calculer $36×8$ au lieu de $36^{8}$."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l1-informatique-systemes-securite-06-a",
+     "points": 1,
+     "prompt": "Combien de mots de passe sont possibles ? ($36^{8}$)",
+     "explanation": "$36^{8}=2\\,821\\,109\\,907\\,456$.",
+     "kind": "numeric",
+     "answer": 2821109907456,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-informatique-systemes-securite-06-b",
+     "points": 1,
+     "prompt": "Combien de secondes pour tous les tester (arrondi à la seconde) ?",
+     "explanation": "$\\frac{2{,}82×10^{12}}{10^{9}}≈2\\,821$ s.",
+     "kind": "numeric",
+     "answer": 2821,
+     "tolerance": 1,
+     "unit": "s"
+    },
+    {
+     "id": "sup-l1-informatique-systemes-securite-06-c",
+     "points": 1,
+     "prompt": "Cela représente environ :",
+     "explanation": "$2\\,821/60≈47$ minutes.",
+     "kind": "mcq",
+     "choices": [
+      "47 secondes",
+      "47 heures",
+      "47 minutes",
+      "47 jours"
+     ],
+     "answer": 2
+    },
+    {
+     "id": "sup-l1-informatique-systemes-securite-06-d",
+     "points": 1,
+     "prompt": "Quelle mesure améliore le plus la robustesse ?",
+     "explanation": "Chaque caractère multiplie le travail de l'attaquant ; un second facteur bloque l'accès même si le mot de passe est découvert.",
+     "kind": "mcq",
+     "choices": [
+      "allonger le mot de passe et activer l'authentification à plusieurs facteurs",
+      "utiliser le même mot de passe partout",
+      "remplacer des lettres par des chiffres ressemblants",
+      "le noter sur le téléphone en clair"
+     ],
+     "answer": 0
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-informatique-systemes-securite-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-systemes-securite",
+   "prompt": "L'hameçonnage cherche à :",
+   "choices": [
+    "améliorer la vitesse du réseau",
+    "sauvegarder des fichiers",
+    "obtenir des informations en trompant l'utilisateur",
+    "chiffrer le disque"
+   ],
+   "answer": 2,
+   "explanation": "Message trompeur imitant un organisme."
+  },
+  {
+   "id": "sup-l1-informatique-systemes-securite-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-systemes-securite",
+   "prompt": "Le chiffrement asymétrique utilise :",
+   "choices": [
+    "une clé publique et une clé privée",
+    "une seule clé secrète partagée",
+    "aucune clé",
+    "un mot de passe seulement"
+   ],
+   "answer": 0,
+   "explanation": "La clé publique chiffre, la privée déchiffre."
+  },
+  {
+   "id": "sup-l1-informatique-systemes-securite-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-systemes-securite",
+   "prompt": "L'authentification à plusieurs facteurs combine :",
+   "choices": [
+    "plusieurs mots de passe identiques",
+    "un mot de passe et un identifiant",
+    "une sauvegarde et un antivirus",
+    "plusieurs preuves d'identité de natures différentes"
+   ],
+   "answer": 3,
+   "explanation": "Par exemple mot de passe + code reçu."
+  },
+  {
+   "id": "sup-l1-informatique-systemes-securite-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-systemes-securite",
+   "prompt": "Le principe du moindre privilège consiste à :",
+   "choices": [
+    "donner tous les droits à chacun",
+    "donner seulement les droits nécessaires",
+    "supprimer les comptes",
+    "interdire les mises à jour"
+   ],
+   "answer": 1,
+   "explanation": "Limite les dégâts en cas de compromission."
+  },
+  {
+   "id": "sup-l1-informatique-systemes-securite-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-systemes-securite",
+   "prompt": "Une empreinte (hachage) sert notamment à :",
+   "choices": [
+    "déchiffrer un message",
+    "vérifier l'intégrité d'un message",
+    "accélérer le réseau",
+    "augmenter le stockage"
+   ],
+   "answer": 1,
+   "explanation": "Toute modification change l'empreinte."
+  }
+ ]
+}

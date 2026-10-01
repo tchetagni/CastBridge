@@ -104,10 +104,10 @@
        "md": "Pour Y = 1 000 : C = 200 + 0,8×1 000 = 1000. S = 1 000 − 1000 = 0. PMC = 1."
       },
       {
-       "md": "Pour Y = 1 500 : C = 200 + 0,8×1 500 = 1400, S = 1 500 − 1400 = 100, PMC = 0,933,"
+       "md": "Pour Y = 1 500 : C = 200 + 0,8×1 500 = 1400. S = 1 500 − 1400 = 100. PMC = 0,933."
       },
       {
-       "md": "Vérification de c : ΔC/ΔY = (1400 − 1000)/(1 500 − 1 000) = 0.8."
+       "md": "Vérification de c : ΔC/ΔY = (1400 − 1000)/(1 500 − 1 000) = 0,8."
       }
      ],
      "answer": "**Y = 1 000 : C = 1 000, S = 0 ; Y = 1 500 : C = 1 400, S = 100 ; c = 0,8.**"
@@ -118,16 +118,16 @@
      "statement": "Le revenu d'un ménage passe de 150 000 à 180 000 FCFA par mois ; sa consommation passe de 130 000 à 154 000. Calcule la propension marginale à consommer et à épargner, et la PMC dans chaque situation.",
      "steps": [
       {
-       "md": "ΔY = 30 000 ; ΔC = 24 000 ⇒ c = 24 000/30 000 = 0.8."
+       "md": "ΔY = 30 000 ; ΔC = 24 000 ⇒ c = 24 000/30 000 = 0,8."
       },
       {
        "md": "s = 1 − c = 0,2 (vérification : ΔS = 6 000, ΔS/ΔY = 0,2)."
       },
       {
-       "md": "PMC avant = 130 000/150 000 ≈ 0,867 ; après = 154 000/180 000 ≈ 0,856 : la part consommée baisse quand le revenu augmente,"
+       "md": "PMC avant = 130 000/150 000 ≈ 0,867 ; après = 154 000/180 000 ≈ 0,856 : la part consommée baisse quand le revenu augmente."
       }
      ],
-     "answer": "**c = 0,8 ; s = 0.2.**"
+     "answer": "**c = 0,8 ; s = 0,2.**"
     },
     {
      "type": "key",
@@ -231,25 +231,25 @@
        "md": "Coût du panier année 1 : 20×540 + 5×1 650 + 30×250 = 10 800 + 8 250 + 7 500 = 26 550."
       },
       {
-       "md": "Indice année 1 = 26 550 / 23 500 × 100 ≈ 113,0, Inflation entre 0 et 1 ≈ 13,0 %,",
-       "tex": "\\frac{26550}{23500}\\times 100 \\approx 113.0"
+       "md": "Indice année 1 = 26 550 / 23 500 × 100 ≈ 113,0. Inflation entre 0 et 1 ≈ 13,0 %.",
+       "tex": "\\frac{26550}{23500}\\times 100 \\approx 113{,}0"
       }
      ],
-     "answer": "**Indice ≈ 113,0 ; inflation ≈ 13,0 %,**"
+     "answer": "**Indice ≈ 113,0 ; inflation ≈ 13,0 %.**"
     },
     {
      "type": "example",
      "title": "Exemple 2 — salaire nominal et réel",
-     "statement": "Le salaire nominal d'un employé passe de 150 000 à 162 000 FCFA ; l'indice des prix passe de 112,5 à 118.0. Calcule l'inflation, le salaire réel de chaque année (en pouvoir d'achat base 100) et conclus.",
+     "statement": "Le salaire nominal d'un employé passe de 150 000 à 162 000 FCFA ; l'indice des prix passe de 112,5 à 118,0. Calcule l'inflation, le salaire réel de chaque année (en pouvoir d'achat base 100) et conclus.",
      "steps": [
       {
-       "md": "Inflation = (118,0 − 112,5)/112,5 ≈ 4,89 %,"
+       "md": "Inflation = (118,0 − 112,5)/112,5 ≈ 4,89 %."
       },
       {
        "md": "Salaire réel = nominal / indice × 100 : avant 150 000/112,5×100 ≈ 133 333,33 ; après 162 000/118,0×100 ≈ 137 288,14."
       },
       {
-       "md": "Le salaire nominal progresse de 8 %, le salaire réel de 2,97 % : le pouvoir d'achat augmente moins vite que le salaire affiché,"
+       "md": "Le salaire nominal progresse de 8 %, le salaire réel de 2,97 % : le pouvoir d'achat augmente moins vite que le salaire affiché."
       }
      ],
      "answer": "**Salaire réel : ≈ 133 333,33 → ≈ 137 288,14.**"
@@ -444,7 +444,7 @@
      "id": "sup-l1-macroeconomie-conso-epargne-07-c",
      "points": 1,
      "prompt": "Calcule la propension moyenne à consommer (arrondi à 0,01).",
-     "explanation": "PMC = 1620/2 000 = 0,810 ≈ 0.81.",
+     "explanation": "PMC = 1620/2 000 = 0,810 ≈ 0,81.",
      "kind": "numeric",
      "answer": 0.81,
      "tolerance": 0.005

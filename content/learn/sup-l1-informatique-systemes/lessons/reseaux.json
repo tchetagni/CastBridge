@@ -1,0 +1,613 @@
+{
+ "chapter": "sup-l1-informatique-systemes-reseaux",
+ "lessons": [
+  {
+   "id": "sup-l1-informatique-systemes-reseaux-ip",
+   "title": "Réseaux : modèle en couches, adresses IP, DNS et HTTP",
+   "minutes": 55,
+   "programRef": "Initiation à l'informatique de première année de Licence — à comparer au programme de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Décrire un modèle en 4 couches et le principe d'encapsulation.",
+    "Lire une adresse IPv4 et un masque de sous-réseau.",
+    "Calculer adresse réseau, diffusion et nombre d'hôtes.",
+    "Expliquer le rôle du DNS et le principe de HTTP."
+   ],
+   "prerequisites": [
+    "sup-l1-informatique-systemes-architecture-os"
+   ],
+   "exercises": [
+    "sup-l1-informatique-systemes-reseaux-ip-01",
+    "sup-l1-informatique-systemes-reseaux-ip-02",
+    "sup-l1-informatique-systemes-reseaux-ip-03",
+    "sup-l1-informatique-systemes-reseaux-ip-04",
+    "sup-l1-informatique-systemes-reseaux-ip-05",
+    "sup-l1-informatique-systemes-reseaux-ip-06"
+   ],
+   "selfCheck": [
+    "sup-l1-informatique-systemes-reseaux-ip-q1",
+    "sup-l1-informatique-systemes-reseaux-ip-q2",
+    "sup-l1-informatique-systemes-reseaux-ip-q3",
+    "sup-l1-informatique-systemes-reseaux-ip-q4",
+    "sup-l1-informatique-systemes-reseaux-ip-q5"
+   ],
+   "reviewNotes": [
+    "Faits de référence (IPv4 sur 32 bits, plages d'adresses privées, ports 80/443, codes HTTP 200/404/500, domaine .cm) : à confirmer avec l'enseignant.",
+    "Les adresses des exemples sont des adresses privées d'exercice, sans lien avec un réseau réel."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Modèle en couches (simplifié)",
+     "md": "Pour simplifier la communication, on la découpe en couches : **Application** (protocoles HTTP, DNS, courriel…), **Transport** (acheminement fiable ou rapide entre programmes, repérés par des **ports**), **Réseau** (adressage IP et **routage** entre réseaux), **Accès réseau** (Ethernet, Wi-Fi : transport sur le support physique). À l'émission, chaque couche **encapsule** les données en ajoutant son en-tête ; à la réception, elles sont retirées."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Adresse IPv4 et masque",
+     "md": "Une adresse **IPv4** est un nombre de **32 bits** écrit en **notation décimale à points** : quatre octets (0 à 255) séparés par des points, ex. 192.168.10.77. Le **masque** indique quelle partie désigne le **réseau** : les bits à 1 (à gauche) pour le réseau, les bits à 0 pour l'hôte. Notation décimale (255.255.255.0) ou **préfixe** /24 (nombre de bits à 1)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Calculs de sous-réseau",
+     "md": "**Adresse du réseau** = adresse IP ET masque (bit à bit). **Adresse de diffusion** (broadcast) = réseau avec tous les bits d'hôte à 1. Si le préfixe est /$p$, le réseau contient $2^{32-p}$ adresses dont $2^{32-p}-2$ utilisables par des machines (on retire l'adresse du réseau et celle de diffusion). Dans le dernier octet significatif, la **taille d'un bloc** est $256-\\text{valeur du masque}$.",
+     "tex": "\\text{hôtes} = 2^{32-p}-2"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "DNS et HTTP",
+     "md": "Le **DNS** (système de noms de domaine) traduit un **nom** (ex. www.exemple.cm) en **adresse IP** ; il est organisé en hiérarchie (racine, domaines de premier niveau comme .com ou .cm, domaines, sous-domaines) et utilise des caches. **HTTP** est le protocole de la **requête–réponse** entre un navigateur (client) et un serveur : la requête contient une **méthode** (GET pour lire, POST pour envoyer), une **URL** et des en-têtes ; la réponse contient un **code** (200 : succès, 404 : ressource introuvable, 500 : erreur du serveur) et le contenu. **HTTPS** ajoute le chiffrement ; les ports par défaut sont 80 (HTTP) et 443 (HTTPS).",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 290,
+      "items": [
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 15,
+        "w": 300,
+        "h": 54,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 37,
+        "text": "Application",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 58,
+        "text": "HTTP, DNS",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 81,
+        "w": 300,
+        "h": 54,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 103,
+        "text": "Transport",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 124,
+        "text": "ports, TCP/UDP",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 147,
+        "w": 300,
+        "h": 54,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 169,
+        "text": "Réseau",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 190,
+        "text": "adresses IP, routage",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 213,
+        "w": 300,
+        "h": 54,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 235,
+        "text": "Accès réseau",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 256,
+        "text": "Ethernet, Wi-Fi",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 30,
+        "x2": 30,
+        "y2": 260,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 18,
+        "y": 150,
+        "text": "↓",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Les quatre couches du modèle simplifié, de l'application à l'accès réseau.",
+     "alt": "Quatre rectangles empilés : Application (HTTP, DNS), Transport (ports), Réseau (adresses IP, routage), Accès réseau (Ethernet, Wi-Fi)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — adresse réseau et diffusion",
+     "statement": "Une machine fictive a l'adresse 192.168.10.77 et le masque 255.255.255.192 (/26). Calculer l'adresse du réseau, l'adresse de diffusion et le nombre d'hôtes.",
+     "steps": [
+      {
+       "md": "Seul le dernier octet change : $77$ ET $192$. En binaire : $01001101$ ET $11000000$ $=01000000=64$.",
+       "tex": "77 = 01001101 \\quad 192 = 11000000 ⇒ 64"
+      },
+      {
+       "md": "Adresse du réseau : 192.168.10.64."
+      },
+      {
+       "md": "Taille d'un bloc : $256-192=64$ adresses (64 à 127). Diffusion : 192.168.10.127."
+      },
+      {
+       "md": "Hôtes utilisables : $64-2=62$ (de 192.168.10.65 à 192.168.10.126)."
+      }
+     ],
+     "answer": "**Réseau 192.168.10.64 ; diffusion 192.168.10.127 ; 62 hôtes.**"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 130,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 25,
+        "w": 96,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 58.0,
+        "y": 49.55,
+        "text": ".0 à .63",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 25,
+        "w": 96,
+        "h": 40,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 158.0,
+        "y": 49.55,
+        "text": ".64 à .127",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 210,
+        "y": 25,
+        "w": 96,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 258.0,
+        "y": 49.55,
+        "text": ".128 à .191",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 310,
+        "y": 25,
+        "w": 96,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 358.0,
+        "y": 49.55,
+        "text": ".192 à .255",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 100,
+        "text": "192.168.1.0/24 découpé en 4 sous-réseaux /26",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Découpage de 192.168.1.0/24 en quatre sous-réseaux /26 de 64 adresses.",
+     "alt": "Quatre blocs consécutifs : de .0 à .63, de .64 à .127, de .128 à .191 et de .192 à .255."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — découper un réseau",
+     "statement": "On veut découper 192.168.1.0/24 en 4 sous-réseaux de même taille. Donner le préfixe, le masque et les adresses de début de chaque sous-réseau.",
+     "steps": [
+      {
+       "md": "4 sous-réseaux $=2^{2}$ : on emprunte 2 bits à la partie hôte : /24 → /26."
+      },
+      {
+       "md": "Masque : 255.255.255.192 ; taille d'un bloc : $256-192=64$ ; hôtes par sous-réseau : $62$."
+      },
+      {
+       "md": "Débuts : 192.168.1.0, 192.168.1.64, 192.168.1.128, 192.168.1.192."
+      }
+     ],
+     "answer": "**/26 ; 4 sous-réseaux de 62 hôtes.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — deux machines dans le même réseau ?",
+     "statement": "Avec le masque /26, les machines 192.168.1.20 et 192.168.1.70 sont-elles dans le même sous-réseau ?",
+     "steps": [
+      {
+       "md": "192.168.1.20 est dans le bloc 0–63 (réseau 192.168.1.0)."
+      },
+      {
+       "md": "192.168.1.70 est dans le bloc 64–127 (réseau 192.168.1.64)."
+      },
+      {
+       "md": "Blocs différents : pour communiquer, elles doivent passer par un **routeur** (passerelle)."
+      }
+     ],
+     "answer": "**Non : sous-réseaux différents.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 4 — lire une URL et un code HTTP",
+     "statement": "Décomposer l'URL https://www.exemple.cm:443/cours/reseaux.html et dire ce que signifie un code 404.",
+     "steps": [
+      {
+       "md": "Protocole : https ; nom de domaine : www.exemple.cm (résolu par le DNS en adresse IP) ; port : 443 ; chemin : /cours/reseaux.html."
+      },
+      {
+       "md": "Code 404 : le serveur est joignable mais ne trouve pas la ressource demandée (page absente ou lien erroné)."
+      }
+     ],
+     "answer": "**Un 404 est une erreur côté ressource, pas une panne du réseau.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Penser qu'une adresse 192.168.1.256 existe : chaque octet est compris entre 0 et 255.\n- Oublier de retirer **2** adresses (réseau et diffusion) dans le nombre d'hôtes.\n- Confondre le **DNS** (nom → adresse) et **HTTP** (transfert de pages).\n- Croire qu'on peut communiquer directement entre deux sous-réseaux sans routeur."
+    },
+    {
+     "type": "more",
+     "items": [
+      "IPv6 utilise des adresses de 128 bits pour répondre au manque d'adresses IPv4.",
+      "Les adresses privées (par exemple le bloc 192.168.0.0/16) ne sont pas routées sur Internet : un routeur effectue une traduction d'adresses (NAT)."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l1-informatique-systemes-reseaux-ip-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sup-l1-informatique-systemes-reseaux-ip-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-informatique-systemes-reseaux-ip",
+   "prompt": "Combien de machines peut-on adresser dans un réseau /24 (adresse du réseau et de diffusion exclues) ?",
+   "explanation": "$2^{8}-2=254$.",
+   "source": "Exercice original",
+   "answer": 254,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-informatique-systemes-reseaux-ip-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-informatique-systemes-reseaux-ip",
+   "prompt": "Quelle couche s'occupe de l'adressage IP et du routage ?",
+   "explanation": "IP appartient à la couche Réseau.",
+   "source": "Exercice original",
+   "choices": [
+    "la couche Application",
+    "la couche Transport",
+    "la couche Accès réseau",
+    "la couche Réseau"
+   ],
+   "answer": 3
+  },
+  {
+   "id": "sup-l1-informatique-systemes-reseaux-ip-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l1-informatique-systemes-reseaux-ip",
+   "prompt": "Le DNS permet de traduire un nom de domaine en adresse IP.",
+   "explanation": "C'est son rôle principal.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "sup-l1-informatique-systemes-reseaux-ip-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-informatique-systemes-reseaux-ip",
+   "prompt": "Un masque 255.255.255.240 correspond à /28. Combien d'hôtes utilisables par sous-réseau ?",
+   "explanation": "$2^{4}-2=14$.",
+   "source": "Exercice original",
+   "answer": 14,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-informatique-systemes-reseaux-ip-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l1-informatique-systemes-reseaux-ip",
+   "prompt": "La machine 10.0.5.200 a pour masque 255.255.255.128 (/25). Quel est le dernier octet de l'adresse de son réseau ?",
+   "explanation": "$200$ ET $128$ : $11001000$ ET $10000000=10000000=128$ ; réseau 10.0.5.128.",
+   "source": "Exercice original",
+   "answer": 128,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l1-informatique-systemes-reseaux-ip-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sup-l1-informatique-systemes-reseaux-ip",
+   "prompt": "On découpe le réseau 192.168.20.0/24 en 8 sous-réseaux de même taille (adresses d'exercice).",
+   "method": "Taille de bloc = 256 − valeur du masque ; repérer le bloc de l'adresse.",
+   "mistakes": [
+    "Oublier de retirer l'adresse du réseau et celle de diffusion."
+   ],
+   "source": "Exercice original",
+   "review": true,
+   "reviewNote": "Calculs vérifiés avec Python ; chiffres d'adresses privées d'exercice.",
+   "parts": [
+    {
+     "id": "sup-l1-informatique-systemes-reseaux-ip-06-a",
+     "points": 1,
+     "prompt": "Quel est le masque de chaque sous-réseau ?",
+     "explanation": "8 sous-réseaux $=2^{3}$ : /24 devient /27, masque 255.255.255.224.",
+     "kind": "mcq",
+     "choices": [
+      "255.255.255.240 (/28)",
+      "255.255.255.224 (/27)",
+      "255.255.255.192 (/26)",
+      "255.255.255.248 (/29)"
+     ],
+     "answer": 1
+    },
+    {
+     "id": "sup-l1-informatique-systemes-reseaux-ip-06-b",
+     "points": 1,
+     "prompt": "Combien d'hôtes utilisables par sous-réseau ?",
+     "explanation": "$2^{5}-2=30$.",
+     "kind": "numeric",
+     "answer": 30,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-informatique-systemes-reseaux-ip-06-c",
+     "points": 1,
+     "prompt": "La machine 192.168.20.100 appartient à un sous-réseau. Quel est le dernier octet de son adresse réseau ?",
+     "explanation": "Blocs de 32 : 0, 32, 64, 96, 128… ; 100 est dans le bloc 96–127.",
+     "kind": "numeric",
+     "answer": 96,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l1-informatique-systemes-reseaux-ip-06-d",
+     "points": 1,
+     "prompt": "Quel est le dernier octet de l'adresse de diffusion de ce sous-réseau ?",
+     "explanation": "Fin du bloc 96–127.",
+     "kind": "numeric",
+     "answer": 127,
+     "tolerance": 0
+    }
+   ]
+  },
+  {
+   "id": "sup-l1-informatique-systemes-reseaux-ip-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-systemes-reseaux-ip",
+   "prompt": "Une adresse IPv4 est composée de :",
+   "choices": [
+    "2 octets",
+    "6 octets",
+    "4 octets",
+    "8 octets"
+   ],
+   "answer": 2,
+   "explanation": "32 bits, soit quatre nombres de 0 à 255."
+  },
+  {
+   "id": "sup-l1-informatique-systemes-reseaux-ip-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-systemes-reseaux-ip",
+   "prompt": "L'adresse du réseau s'obtient par :",
+   "choices": [
+    "adresse IP ET masque",
+    "adresse IP OU masque",
+    "adresse IP + masque",
+    "masque seul"
+   ],
+   "answer": 0,
+   "explanation": "Opération bit à bit."
+  },
+  {
+   "id": "sup-l1-informatique-systemes-reseaux-ip-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-systemes-reseaux-ip",
+   "prompt": "Un code HTTP 200 signifie :",
+   "choices": [
+    "la ressource est introuvable",
+    "erreur interne du serveur",
+    "la requête a réussi",
+    "accès interdit"
+   ],
+   "answer": 2,
+   "explanation": "Succès."
+  },
+  {
+   "id": "sup-l1-informatique-systemes-reseaux-ip-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-systemes-reseaux-ip",
+   "prompt": "L'encapsulation consiste à :",
+   "choices": [
+    "ajouter un en-tête à chaque couche",
+    "compresser les fichiers",
+    "supprimer les données inutiles",
+    "chiffrer l'adresse IP"
+   ],
+   "answer": 0,
+   "explanation": "Chaque couche ajoute ses propres informations."
+  },
+  {
+   "id": "sup-l1-informatique-systemes-reseaux-ip-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l1-informatique-systemes-reseaux-ip",
+   "prompt": "Le port par défaut de HTTPS est :",
+   "choices": [
+    "80",
+    "21",
+    "25",
+    "443"
+   ],
+   "answer": 3,
+   "explanation": "Le port 80 est celui de HTTP."
+  }
+ ]
+}
